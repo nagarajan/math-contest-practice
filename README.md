@@ -14,6 +14,16 @@ history, settings) is stored in the browser on this device; nothing is sent anyw
 To use it on an iPad on the same Wi-Fi, run `cd app && npx vite --host --port 5175` and open
 the printed "Network" address on the iPad (history is then stored in the iPad's browser).
 
+## Publish to motleytech.net/math
+
+Published the same way as driftboard: `npm run build` (at the repo root) rebuilds the banks
+and writes the production app to `dist/` with base path `/math/`; `dist/` is committed.
+`commitAndPublishMath "message"` (in `~/.zshrc`) builds, commits, pushes `master`, then runs
+`publish.sh` on the server, which pulls and copies `dist/` to `/var/www/motleytech/html/apps/math`.
+nginx serves that folder at `/math/` (a `location ^~ /math/` block in
+`/etc/nginx/sites-available/motleytech`). History stays in each browser, separate from any
+local copy. `sources/pdfs/` is not in git.
+
 ## Layout
 
 | Path | What |

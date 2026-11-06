@@ -38,6 +38,21 @@ def norm(s):
     return re.sub(r"[^a-z0-9]+", " ", s.lower()).strip()
 
 
+def same_problem(a, b):
+    """Unmarked duplicates that are safe to merge: same text, answer and choices, no picture."""
+    if a["type"] != b["type"] or str(a["answer"]).strip() != str(b["answer"]).strip():
+        return False
+    if a.get("image") or b.get("image"):
+        return False
+    if difflib.SequenceMatcher(None, norm(a["prompt"]), norm(b["prompt"])).ratio() < 0.97:
+        return False
+    if a["type"] == "mc":
+        ca = [norm(c.get("text") or "") for c in a["choices"] or []]
+        cb = [norm(c.get("text") or "") for c in b["choices"] or []]
+        return ca == cb and all(ca)
+    return True
+
+
 def main():
     strict = "--strict" in sys.argv
     os.makedirs(OUT, exist_ok=True)
@@ -106,8 +121,25 @@ def main():
             for idb, b in normed[i + 1:i + 40]:
                 if ida.rsplit("-", 1)[0] == idb.rsplit("-", 1)[0]:
                     continue
-                if len(a) > 40 and difflib.SequenceMatcher(None, a, b).ratio() > 0.9:
+                if len(a) <= 40 or len(b) > len(a) * 1.25:
+                    continue
+                sm = difflib.SequenceMatcher(None, a, b)
+                if sm.real_quick_ratio() > 0.9 and sm.quick_ratio() > 0.9 and sm.ratio() > 0.9:
                     suspects.append((ida, idb))
+        merged = set()
+        for ida, idb in list(suspects):
+            qa, qb = seen.get(ida), seen.get(idb)
+            if not qa or not qb or ida in merged or idb in merged or not same_problem(qa, qb):
+                continue
+            keep, drop = sorted((qa, qb), key=lambda q: (min(q["grades"] or [99]), q["id"]))
+            keep["grades"] = sorted(set(keep["grades"]) | set(drop["grades"]))
+            merged.add(drop["id"])
+            suspects.remove((ida, idb))
+        if merged:
+            for qid in merged:
+                del seen[qid]
+            qs = [q for q in qs if q["id"] not in merged]
+            stats[bank]["auto_merged"] = len(merged)
 
         src = {}
         for q in qs:
@@ -134,12 +166,13 @@ def main():
         grade_str = ", ".join(f"{g}:{counts[g]}" for g in sorted(counts))
         print(
             f"{bank}: {len(qs)} questions from {files_per_bank[bank]} files "
-            f"(dropped: {st['dup_marked']} marked duplicates, {st['dup_id']} repeated ids, {st['invalid']} invalid) "
+            f"(dropped: {st['dup_marked']} marked duplicates, {st['dup_id']} repeated ids, {st['invalid']} invalid, {st['auto_merged']} auto-merged) "
             f"types={dict(types)} reviewNotes={flagged} grades={{{grade_str}}}"
         )
         for a, b in suspects:
             print(f"   possible duplicate: {a} ~ {b}")
 
+    questions = list(seen.values())
     grade_counts = {}
     for g in GRADES:
         gq = [q for q in questions if g in q["grades"]]

@@ -60,7 +60,7 @@ scoring rules, real paper length/time). `tools/build_banks.py` writes one questi
   (UK Year N = US grade N−1; Kangaroo Pre-Ecolier 1-2, Ecolier 3-4, Benjamin 5-6, Cadet 7-8,
   Junior 9-10, Student 11-12). You may also give `grades` explicitly.
   Examples: MOEMS Division E `"4-6"`, Division M `"6-8"`; AMC 8 `"6-8"`; AMC 10 `"9-10"`;
-  AMC 12 / AIME `"11-12"`; Putnam `"undergrad"`.
+  AMC 12 `"11-12"`; AIME `"9-12"`; Putnam `"undergrad"`.
 - `points`: points for a correct answer in that contest, when questions are worth different
   amounts (Kangaroo 3/4/5 as printed; CEMC Pascal/Cayley/Fermat Part A/B/C 5/6/8; UKMT JMC 5/6).
   `null` means 1 point. Same-value contests (AMC: 6 each) set it on every question so the exam

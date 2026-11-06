@@ -1,0 +1,541 @@
+[
+  {
+    "id": "aime-2016-i-01",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "2016 AIME I",
+      "year": 2016,
+      "number": 1,
+      "url": "https://artofproblemsolving.com/wiki/index.php/2016_AIME_I_Problems"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "For $-1<r<1$, let $S(r)$ denote the sum of the geometric series $$12+12r+12r^2+12r^3+\\cdots .$$ Let $a$ between $-1$ and $1$ satisfy $S(a)S(-a)=2016$. Find $S(a)+S(-a)$.",
+    "image": null,
+    "choices": null,
+    "answer": "336",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Sum the series",
+        "body": "$S(r)=\\dfrac{12}{1-r}$, so\n$$S(a)S(-a)=\\frac{144}{(1-a)(1+a)}=\\frac{144}{1-a^2}=2016\\implies \\frac{1}{1-a^2}=14.$$\nThen\n$$S(a)+S(-a)=\\frac{12}{1-a}+\\frac{12}{1+a}=\\frac{24}{1-a^2}=24\\cdot 14=336.$$\n\n**Answer: 336**"
+      },
+      {
+        "title": "Compare sum and product",
+        "body": "From the formulas above, $S(a)+S(-a)=\\dfrac{24}{1-a^2}$ and $S(a)S(-a)=\\dfrac{144}{1-a^2}$, so the sum is always $\\dfrac{24}{144}=\\dfrac16$ of the product: $\\dfrac{2016}{6}=336$.\n\n**Answer: 336**"
+      }
+    ],
+    "topics": [
+      "algebra",
+      "sequences-series"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-2016-i-02",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "2016 AIME I",
+      "year": 2016,
+      "number": 2,
+      "url": "https://artofproblemsolving.com/wiki/index.php/2016_AIME_I_Problems"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Two dice appear to be normal dice with their faces numbered from $1$ to $6$, but each dice is weighted so that the probability of rolling the number $k$ is directly proportional to $k$. The probability of rolling a $7$ with this pair of dice is $\\frac{m}{n}$, where $m$ and $n$ are relatively prime positive integers. Find $m+n$.",
+    "image": null,
+    "choices": null,
+    "answer": "71",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Add up the pairs",
+        "body": "The weights $1,2,\\dots,6$ sum to $21$, so $P(k)=\\frac{k}{21}$ on each die. A sum of $7$ comes from $(k,7-k)$ for $k=1,\\dots,6$:\n$$\\sum_{k=1}^{6}\\frac{k(7-k)}{441}=\\frac{6+10+12+12+10+6}{441}=\\frac{56}{441}=\\frac{8}{63}.$$\nSo $m+n=8+63=71$.\n\n**Answer: 71**"
+      },
+      {
+        "title": "Use symmetry",
+        "body": "The products $k(7-k)$ are symmetric: $(1,6),(6,1)$ give $6$ each, $(2,5),(5,2)$ give $10$ each, $(3,4),(4,3)$ give $12$ each. Total $2(6+10+12)=56$ out of $21^2=441$, i.e. $\\frac{8}{63}$, and $8+63=71$.\n\n**Answer: 71**"
+      }
+    ],
+    "topics": [
+      "probability"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-2016-i-03",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "2016 AIME I",
+      "year": 2016,
+      "number": 3,
+      "url": "https://artofproblemsolving.com/wiki/index.php/2016_AIME_I_Problems"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "A regular icosahedron is a $20$-faced solid where each face is an equilateral triangle and five triangles meet at every vertex. The regular icosahedron shown below has one vertex at the top, one vertex at the bottom, an upper pentagon of five vertices all adjacent to the top vertex and all in the same horizontal plane, and a lower pentagon of five vertices all adjacent to the bottom vertex and all in another horizontal plane. Find the number of paths from the top vertex to the bottom vertex such that each part of a path goes downward or horizontally along an edge of the icosahedron, and no vertex is repeated.",
+    "image": "qimages/aime/2016-i/q03.webp",
+    "choices": null,
+    "answer": "810",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Count stage by stage",
+        "body": "A path has to go: top $\\to$ upper pentagon, then some horizontal moves in the upper pentagon, then down to the lower pentagon, then horizontal moves there, then down to the bottom (once it goes down it can never come back up).\n\n- Top to the upper pentagon: $5$ choices.\n- Moving along the upper pentagon without repeating a vertex: stay put, or walk $1,2,3$ or $4$ steps clockwise or counterclockwise. That is $1+4+4=9$ ways.\n- Down to the lower pentagon: each upper vertex is joined to $2$ lower vertices, so $2$ choices.\n- Along the lower pentagon: again $9$ ways.\n- Down to the bottom: $1$ way.\n\nTotal: $5\\cdot 9\\cdot 2\\cdot 9=810$.\n\n**Answer: 810**"
+      },
+      {
+        "title": "Count the ending point first",
+        "body": "Inside a pentagon, a path that starts at a given vertex and never repeats a vertex is determined by its direction and length. To end at the starting vertex: $1$ way; to end at any of the other $4$ vertices: $2$ ways each (clockwise or counterclockwise). So $1+4\\cdot 2=9$ ways per pentagon. Combined with $5$ entry points, $2$ ways down between the pentagons: $5\\cdot 9\\cdot 2\\cdot 9=810$.\n\n**Answer: 810**"
+      }
+    ],
+    "topics": [
+      "counting",
+      "spatial"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-2016-i-04",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "2016 AIME I",
+      "year": 2016,
+      "number": 4,
+      "url": "https://artofproblemsolving.com/wiki/index.php/2016_AIME_I_Problems"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "A right prism with height $h$ has bases that are regular hexagons with sides of length $12$. A vertex $A$ of the prism and its three adjacent vertices are the vertices of a triangular pyramid. The dihedral angle (the angle between the two planes) formed by the face of the pyramid that lies in a base of the prism and the face of the pyramid that does not contain $A$ measures $60^\\circ$. Find $h^2$.",
+    "image": null,
+    "choices": null,
+    "answer": "108",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Find the right triangle",
+        "body": "Let $A$ be in the bottom base, with neighbours $B,C$ in the same hexagon and $D$ directly above $A$ (so $AD=h$). The face in the base is $ABC$, and the face not containing $A$ is $BCD$.\n\nIn the regular hexagon $\\angle BAC=120^\\circ$ and $AB=AC=12$, so the distance from $A$ to line $BC$ is $AM=12\\cos 60^\\circ=6$, where $M$ is the midpoint of $BC$.\n\nSince $DA\\perp$ the base and $AM\\perp BC$, also $DM\\perp BC$, so the dihedral angle along $BC$ is $\\angle DMA$. Then\n$$\\tan 60^\\circ=\\frac{h}{6}\\implies h=6\\sqrt3,\\qquad h^2=108.$$\n\n**Answer: 108**"
+      },
+      {
+        "title": "Coordinates",
+        "body": "Put $A=(0,0,0)$, $B=(12,0,0)$, $C=(-6,6\\sqrt3,0)$ (an angle of $120^\\circ$ at $A$), $D=(0,0,h)$. The plane $BCD$ is $\\frac{x}{12}+\\frac{y}{4\\sqrt3}+\\frac{z}{h}=1$; the distance from $A$ to it is\n$$\\frac{1}{\\sqrt{\\frac1{144}+\\frac1{48}+\\frac1{h^2}}}.$$\nThe normal of the base is the $z$-axis, and $\\cos 60^\\circ=\\dfrac{1/h}{\\sqrt{\\frac{1}{36}+\\frac{1}{h^2}}}$. So $\\frac{1}{h^2}=\\frac14\\left(\\frac1{36}+\\frac1{h^2}\\right)$, giving $\\frac{3}{h^2}=\\frac1{36}$ and $h^2=108$.\n\n**Answer: 108**"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "spatial",
+      "trigonometry"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-2016-i-05",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "2016 AIME I",
+      "year": 2016,
+      "number": 5,
+      "url": "https://artofproblemsolving.com/wiki/index.php/2016_AIME_I_Problems"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Anh read a book. On the first day she read $n$ pages in $t$ minutes, where $n$ and $t$ are positive integers. On the second day Anh read $n + 1$ pages in $t + 1$ minutes. Each day thereafter Anh read one more page than she read on the previous day, and it took her one more minute than on the previous day until she completely read the $374$ page book. It took her a total of $319$ minutes to read the book. Find $n + t$.",
+    "image": null,
+    "choices": null,
+    "answer": "53",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Two arithmetic series",
+        "body": "Say she read for $k$ days. Then\n$$kn+\\frac{k(k-1)}{2}=374,\\qquad kt+\\frac{k(k-1)}{2}=319.$$\nSubtracting: $k(n-t)=55$. Adding: $k(n+t+k-1)=693=3^2\\cdot7\\cdot11$.\n\nSo $k$ divides $\\gcd(55,693)=11$. She read on at least two days, so $k=11$, and then $n+t+10=63$, i.e. $n+t=53$. (Check: $11n+55=374$ gives $n=29$, and $11t+55=319$ gives $t=24$.)\n\n**Answer: 53**"
+      },
+      {
+        "title": "Use the difference first",
+        "body": "Every day she reads $n-t$ more pages than minutes, so $k(n-t)=374-319=55$ and $k\\in\\{5,11,55\\}$ (at least two days).\n- $k=5$: $5n+10=374$ gives $n=72.8$, not an integer.\n- $k=55$: already $\\frac{55\\cdot54}{2}=1485>374$.\n- $k=11$: $11n+55=374$ gives $n=29$, and $11t+55=319$ gives $t=24$.\n\nSo $n+t=53$.\n\n**Answer: 53**"
+      }
+    ],
+    "topics": [
+      "algebra",
+      "sequences-series"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-2016-i-06",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "2016 AIME I",
+      "year": 2016,
+      "number": 6,
+      "url": "https://artofproblemsolving.com/wiki/index.php/2016_AIME_I_Problems"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "In $\\triangle ABC$ let $I$ be the center of the inscribed circle, and let the bisector of $\\angle ACB$ intersect $\\overline{AB}$ at $L$. The line through $C$ and $L$ intersects the circumscribed circle of $\\triangle ABC$ at the two points $C$ and $D$. If $LI=2$ and $LD=3$, then $IC= \\frac{p}{q}$, where $p$ and $q$ are relatively prime positive integers. Find $p+q$.",
+    "image": null,
+    "choices": null,
+    "answer": "13",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Incenter–excenter lemma",
+        "body": "$D$ is the midpoint of arc $AB$ not containing $C$. A classical fact (the incenter–excenter lemma) says $DA=DB=DI$. The points lie on the line in the order $C,I,L,D$, so\n$$DA=DI=DL+LI=3+2=5.$$\nTriangles $DAL$ and $DCA$ are similar ($\\angle D$ is shared and $\\angle DAL=\\angle DAB=\\angle DCB=\\angle DCA$), so\n$$DA^2=DL\\cdot DC\\implies 25=3\\cdot DC\\implies DC=\\tfrac{25}{3}.$$\nHence $IC=DC-DI=\\frac{25}{3}-5=\\frac{10}{3}$ and $p+q=13$.\n\n(Proof of $DA=DI$: $\\angle DAI=\\angle DAB+\\angle BAI=\\frac{C}{2}+\\frac{A}{2}$ and $\\angle DIA$, an exterior angle of triangle $AIC$, is also $\\frac{A}{2}+\\frac{C}{2}$.)\n\n**Answer: 13**"
+      },
+      {
+        "title": "Power of a point at L",
+        "body": "With $DI=5$ as above, put $IC=x$. Power of $L$: $LA\\cdot LB=LC\\cdot LD=3(x+2)$. Also $DA=5$ and triangle $DAL\\sim DCA$ give $DA^2=DL\\cdot DC$: $25=3(3+2+x)$, so $x=\\frac{25}{3}-5=\\frac{10}{3}$. Thus $IC=\\frac{10}{3}$ and $p+q=13$.\n\n**Answer: 13**"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-2016-i-07",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "2016 AIME I",
+      "year": 2016,
+      "number": 7,
+      "url": "https://artofproblemsolving.com/wiki/index.php/2016_AIME_I_Problems"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "For integers $a$ and $b$ consider the complex number $$\\frac{\\sqrt{ab+2016}}{ab+100}-\\left(\\frac{\\sqrt{|a+b|}}{ab+100}\\right)i.$$ Find the number of ordered pairs of integers $(a,b)$ such that this complex number is a real number.",
+    "image": null,
+    "choices": null,
+    "answer": "103",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Two cases",
+        "body": "Use $\\sqrt{-t}=i\\sqrt t$ for $t>0$.\n\n**Case 1: $ab+2016\\ge 0$.** The real part is real, so we need $\\sqrt{|a+b|}=0$, i.e. $b=-a$. Then $ab=-a^2$, and we need $a^2\\le 2016$ ($|a|\\le 44$, since $44^2=1936$, $45^2=2025$) and $ab+100\\ne0$ ($a\\ne\\pm10$). That gives $89-2=87$ pairs.\n\n**Case 2: $ab+2016<0$.** Then the number is $\\dfrac{i\\left(\\sqrt{-(ab+2016)}-\\sqrt{|a+b|}\\right)}{ab+100}$, which is real only if it is $0$: $|a+b|=-ab-2016$.\n\n- If $a+b\\ge0$: $ab+a+b+1=-2015$, i.e. $(a+1)(b+1)=-2015$.\n- If $a+b<0$: $(a-1)(b-1)=-2015$.\n\n$2015=5\\cdot13\\cdot31$ has divisors $1,5,13,31,65,155,403,2015$. For $(a+1)(b+1)=-2015$ write $a+1=u$, $b+1=-2015/u$; then $a+b=u-\\frac{2015}{u}-2\\ge 0$ holds for $u\\in\\{65,155,403,2015\\}$ and for $u\\in\\{-1,-5,-13,-31\\}$: $8$ pairs. (Here $a+b\\neq 0$, so $ab+2016=-|a+b|<0$ as needed.) The case $a+b<0$ is the mirror image $(a,b)\\to(-a,-b)$: another $8$.\n\nTotal: $87+16=103$.\n\n**Answer: 103**"
+      }
+    ],
+    "topics": [
+      "complex-numbers",
+      "number-theory",
+      "counting"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-2016-i-08",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "2016 AIME I",
+      "year": 2016,
+      "number": 8,
+      "url": "https://artofproblemsolving.com/wiki/index.php/2016_AIME_I_Problems"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "For a permutation $p = (a_1,a_2,\\ldots,a_9)$ of the digits $1,2,\\ldots,9$, let $s(p)$ denote the sum of the three $3$-digit numbers $a_1a_2a_3$, $a_4a_5a_6$, and $a_7a_8a_9$. Let $m$ be the minimum value of $s(p)$ subject to the condition that the units digit of $s(p)$ is $0$. Let $n$ denote the number of permutations $p$ with $s(p) = m$. Find $|m - n|$.",
+    "image": null,
+    "choices": null,
+    "answer": "162",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Hundreds, tens and units",
+        "body": "Let $H,T,U$ be the sums of the hundreds, tens and units digits. Then $H+T+U=45$ and $s=100H+10T+U$.\n\nThe units digit of $s$ is that of $U$, so $U\\in\\{10,20\\}$ ($U\\le 7+8+9=24$). Write $s=100H+10(45-H-U)+U=90H-9U+450$. To minimise, take $H$ as small as possible, $H=1+2+3=6$, and $U=20$: $s=540-180+450=810$. (With $U=10$ and $H=6$ we get $900$; $H\\ge7$ gives at least $630-180+450=900$.) So $m=810$.\n\nCount: hundreds digits $\\{1,2,3\\}$; the units digits are three of $4,\\dots,9$ with sum $20$: $\\{4,7,9\\},\\{5,6,9\\},\\{5,7,8\\}$. The other three are the tens digits. Each group of three digits can be ordered among the three numbers in $3!$ ways, so $n=3\\cdot 6^3=648$.\n\n$|m-n|=810-648=162$.\n\n**Answer: 162**"
+      }
+    ],
+    "topics": [
+      "counting",
+      "number-theory"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-2016-i-09",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "2016 AIME I",
+      "year": 2016,
+      "number": 9,
+      "url": "https://artofproblemsolving.com/wiki/index.php/2016_AIME_I_Problems"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Triangle $ABC$ has $AB=40,AC=31,$ and $\\sin{A}=\\frac{1}{5}$. This triangle is inscribed in rectangle $AQRS$ with $B$ on $\\overline{QR}$ and $C$ on $\\overline{RS}$. Find the maximum possible area of $AQRS$.",
+    "image": null,
+    "choices": null,
+    "answer": "744",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Parametrise by an angle",
+        "body": "Let $\\theta=\\angle BAQ$. Then $AQ=40\\cos\\theta$, and since $\\angle CAS=90^\\circ-\\theta-A$, $AS=31\\cos(90^\\circ-\\theta-A)=31\\sin(\\theta+A)$. The area is\n$$40\\cdot31\\cos\\theta\\sin(\\theta+A)=620\\left[\\sin(2\\theta+A)+\\sin A\\right]\\le 620\\left(1+\\tfrac15\\right)=744.$$\nEquality needs $2\\theta+A=90^\\circ$; since $A$ can be taken acute ($\\sin A=\\frac15$, $\\cos A=\\frac{2\\sqrt6}{5}$), $\\theta=45^\\circ-\\frac A2$ is a valid position.\n\n**Answer: 744**"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "trigonometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-2016-i-10",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "2016 AIME I",
+      "year": 2016,
+      "number": 10,
+      "url": "https://artofproblemsolving.com/wiki/index.php/2016_AIME_I_Problems"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "A strictly increasing sequence of positive integers $a_1$, $a_2$, $a_3$, $\\cdots$ has the property that for every positive integer $k$, the subsequence $a_{2k-1}$, $a_{2k}$, $a_{2k+1}$ is geometric and the subsequence $a_{2k}$, $a_{2k+1}$, $a_{2k+2}$ is arithmetic. Suppose that $a_{13} = 2016$. Find $a_1$.",
+    "image": null,
+    "choices": null,
+    "answer": "504",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Parametrise the sequence",
+        "body": "Since $a_1,a_2,a_3$ is geometric, write the ratio as $\\frac qp$ in lowest terms. Then $a_3=a_1\\frac{q^2}{p^2}$ is an integer, so $p^2\\mid a_1$: $a_1=mp^2$, $a_2=mpq$, $a_3=mq^2$. Next\n$$a_4=2a_3-a_2=mq(2q-p),\\qquad a_5=\\frac{a_4^2}{a_3}=m(2q-p)^2.$$\nWith $d=q-p$, the odd terms are $m\\,p^2,\\ m(p+d)^2,\\ m(p+2d)^2,\\dots$, i.e. $a_{2k-1}=m\\,(p+(k-1)d)^2$ (and $a_{2k}=m(p+(k-1)d)(p+kd)$). Increasing means $d\\ge1$.\n\nSo $a_{13}=m(p+6d)^2=2016=2^5\\cdot3^2\\cdot7$ with $p+6d\\ge7$. The square divisors of $2016$ are $1,4,9,16,36,144$, so $p+6d=12$, $m=14$, and $p\\ge1,d\\ge1$ force $d=1$, $p=6$. Thus $a_1=14\\cdot36=504$.\n\nCheck: $504, 588, 686, 784, 896, 1008, 1134,\\dots, a_{13}=14\\cdot144=2016$.\n\n**Answer: 504**"
+      }
+    ],
+    "topics": [
+      "sequences-series",
+      "number-theory"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-2016-i-11",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "2016 AIME I",
+      "year": 2016,
+      "number": 11,
+      "url": "https://artofproblemsolving.com/wiki/index.php/2016_AIME_I_Problems"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Let $P(x)$ be a nonzero polynomial such that $(x-1)P(x+1)=(x+2)P(x)$ for every real $x$, and $\\left(P(2)\\right)^2 = P(3)$. Then $P(\\tfrac72)=\\tfrac{m}{n}$, where $m$ and $n$ are relatively prime positive integers. Find $m + n$.",
+    "image": null,
+    "choices": null,
+    "answer": "109",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Find the roots",
+        "body": "Plug in special values:\n- $x=1$: $0=3P(1)$, so $P(1)=0$.\n- $x=-2$: $-3P(-1)=0$, so $P(-1)=0$.\n- $x=0$: $-P(1)=2P(0)$, so $P(0)=0$.\n\nSo $P(x)=x(x-1)(x+1)R(x)$. Substituting:\n$$(x-1)(x+1)x(x+2)R(x+1)=(x+2)x(x-1)(x+1)R(x),$$\nso $R(x+1)=R(x)$ for all but finitely many $x$, hence $R$ is a constant $c$. Then $P(2)=6c$, $P(3)=24c$, and $36c^2=24c$ gives $c=\\frac23$. Finally\n$$P\\left(\\tfrac72\\right)=\\tfrac23\\cdot\\tfrac72\\cdot\\tfrac52\\cdot\\tfrac92=\\tfrac{105}{4},\\qquad m+n=109.$$\n\n**Answer: 109**"
+      },
+      {
+        "title": "Use the ratio",
+        "body": "For $x\\ne1$: $\\dfrac{P(x+1)}{P(x)}=\\dfrac{x+2}{x-1}$. The function $x(x-1)(x+1)$ has exactly this ratio: $\\frac{(x+1)x(x+2)}{x(x-1)(x+1)}=\\frac{x+2}{x-1}$. A polynomial ratio of $P(x)$ to $x^3-x$ is periodic, hence constant: $P=c(x^3-x)$. Then $(6c)^2=24c$, $c=\\frac23$, and $P(\\frac72)=\\frac23\\left(\\frac{343}{8}-\\frac{7}{2}\\right)=\\frac23\\cdot\\frac{315}{8}=\\frac{105}{4}$.\n\n**Answer: 109**"
+      }
+    ],
+    "topics": [
+      "polynomials"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-2016-i-12",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "2016 AIME I",
+      "year": 2016,
+      "number": 12,
+      "url": "https://artofproblemsolving.com/wiki/index.php/2016_AIME_I_Problems"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Find the least positive integer $m$ such that $m^2 - m + 11$ is a product of at least four not necessarily distinct primes.",
+    "image": null,
+    "choices": null,
+    "answer": "132",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Small primes never divide it",
+        "body": "$f(m)=m^2-m+11=m(m-1)+11$ is odd. Checking residues:\n- mod $3$: $m^2-m+2$ takes values $2,2,1$;\n- mod $5$: $m^2-m+1$ takes values $1,1,3,2,3$;\n- mod $7$: $m^2-m+4$ takes values $4,4,6,3,2,3,6$.\n\nSo every prime factor is at least $11$, and a product of four primes is at least $11^4=14641$. The products of four primes $\\ge 11$ in increasing order start $11^4=14641$, $11^3\\cdot13=17303,\\dots$\n\n- $f(m)=14641$: $m^2-m-14630=0$ has discriminant $58521$, not a square ($241^2=58081$, $242^2=58564$).\n- $f(m)=17303$: discriminant $1+4\\cdot17292=69169=263^2$, so $m=\\frac{1+263}{2}=132$.\n\nAny $m<132$ gives $f(m)<17303$, so $f(m)$ could only be $14641$, which is impossible. Hence $m=132$ ($f(132)=17303=11^3\\cdot13$).\n\n**Answer: 132**"
+      }
+    ],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-2016-i-13",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "2016 AIME I",
+      "year": 2016,
+      "number": 13,
+      "url": "https://artofproblemsolving.com/wiki/index.php/2016_AIME_I_Problems"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Freddy the frog is jumping around the coordinate plane searching for a river, which lies on the horizontal line $y = 24$. A fence is located at the horizontal line $y = 0$. On each jump Freddy randomly chooses a direction parallel to one of the coordinate axes and moves one unit in that direction. When he is at a point where $y=0$, with equal likelihoods he chooses one of three directions where he either jumps parallel to the fence or jumps away from the fence, but he never chooses the direction that would have him cross over the fence to where $y < 0$. Freddy starts his search at the point $(0, 21)$ and will stop once he reaches a point on the river. Find the expected number of jumps it will take Freddy to reach the river.",
+    "image": null,
+    "choices": null,
+    "answer": "273",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Expected values by height",
+        "body": "Let $E(y)$ be the expected number of jumps from height $y$; $E(24)=0$, and the $x$-coordinate doesn't matter.\n\nFor $0<y<24$: $E(y)=1+\\frac14E(y+1)+\\frac14E(y-1)+\\frac12E(y)$, i.e.\n$$E(y)-E(y+1)=\\big(E(y-1)-E(y)\\big)+4.$$\nAt $y=0$: $E(0)=1+\\frac23E(0)+\\frac13E(1)$, so $E(0)-E(1)=3$.\n\nSo the drops $D_y=E(y)-E(y+1)$ satisfy $D_0=3$, $D_y=D_{y-1}+4$, i.e. $D_y=4y+3$. Then\n$$E(21)=D_{21}+D_{22}+D_{23}=87+91+95=273.$$\n\n**Answer: 273**"
+      },
+      {
+        "title": "Guess a quadratic",
+        "body": "The recurrence says the second difference $E(y+1)-2E(y)+E(y-1)$ is $-4$, so $E$ is quadratic with leading term $-2y^2$: try $E(y)=c-2y^2+by$. The fence condition $E(0)-E(1)=3$ gives $2-b=3$, $b=-1$; and $E(24)=0$ gives $c=2\\cdot576+24=1176$. So $E(y)=1176-2y^2-y$ and $E(21)=1176-882-21=273$.\n\n**Answer: 273**"
+      }
+    ],
+    "topics": [
+      "probability",
+      "sequences-series"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-2016-i-14",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "2016 AIME I",
+      "year": 2016,
+      "number": 14,
+      "url": "https://artofproblemsolving.com/wiki/index.php/2016_AIME_I_Problems"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Centered at each lattice point in the coordinate plane are a circle radius $\\frac{1}{10}$ and a square with sides of length $\\frac{1}{5}$ whose sides are parallel to the coordinate axes. The line segment from $(0,0)$ to $(1001, 429)$ intersects $m$ of the squares and $n$ of the circles. Find $m + n$.",
+    "image": null,
+    "choices": null,
+    "answer": "574",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Distance to the line",
+        "body": "The segment lies on $3x-7y=0$ (since $1001=7\\cdot143$, $429=3\\cdot143$). The distance from a lattice point $(a,b)$ to this line is $\\frac{|3a-7b|}{\\sqrt{58}}$.\n\n**Circles.** If $3a-7b\\ne0$ the distance is at least $\\frac1{\\sqrt{58}}>\\frac1{10}$, so only lattice points on the line count: $(7k,3k)$ for $k=0,\\dots,143$. So $n=144$.\n\n**Squares.** The square at $(a,b)$ has corners $(a\\pm0.1,b\\pm0.1)$, where $3x-7y$ takes values from $3a-7b-1$ to $3a-7b+1$. So the line meets the square iff $|3a-7b|\\le1$. Points with $3a-7b=0$ give the $144$ above. In each block from $(7k,3k)$ to $(7k+7,3k+3)$ ($k=0,\\dots,142$) there is exactly one point with $3a-7b=1$, namely $(7k+5,3k+2)$, and one with $3a-7b=-1$, namely $(7k+2,3k+1)$. So $m=144+2\\cdot143=430$.\n\n$m+n=430+144=574$.\n\n**Answer: 574**"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "number-theory"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-2016-i-15",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "2016 AIME I",
+      "year": 2016,
+      "number": 15,
+      "url": "https://artofproblemsolving.com/wiki/index.php/2016_AIME_I_Problems"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Circles $\\omega_1$ and $\\omega_2$ intersect at points $X$ and $Y$. Line $\\ell$ is tangent to $\\omega_1$ and $\\omega_2$ at $A$ and $B$, respectively, with line $AB$ closer to point $X$ than to $Y$. Circle $\\omega$ passes through $A$ and $B$ intersecting $\\omega_1$ again at $D \\neq A$ and intersecting $\\omega_2$ again at $C \\neq B$. The three points $C$, $Y$, $D$ are collinear, $XC = 67$, $XY = 47$, and $XD = 37$. Find $AB^2$.",
+    "image": null,
+    "choices": null,
+    "answer": "270",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Parallelogram and similar triangles",
+        "body": "**Radical axes.** The radical axes of $\\omega,\\omega_1$ (line $AD$), of $\\omega,\\omega_2$ (line $BC$) and of $\\omega_1,\\omega_2$ (line $XY$) meet at one point $E$. Also line $XY$ meets $AB$ at its midpoint $M$, since $MA^2=MX\\cdot MY=MB^2$.\n\n**$EAYB$ is a parallelogram.** Using $C,Y,D$ collinear: in $\\omega_1$, the angle between $DA$ and $DY$ equals $\\angle ADC$; in $\\omega$, $\\angle ADC=\\angle ABC$; and by the tangent–chord angle in $\\omega_2$, $\\angle ABC$ equals $\\angle BYC$. So $DA$ and $YB$ make equal angles with line $CD$: $AD\\parallel YB$. Similarly $BC\\parallel YA$. Hence $EAYB$ is a parallelogram, and its diagonals $EY$ and $AB$ bisect each other at $M$.\n\n**Similar triangles.** Because $EA\\parallel YB$: $\\angle XED=\\angle XYB=\\angle XCB=\\angle XCE$ (inscribed angles in $\\omega_2$). Because $EB\\parallel YA$: $\\angle XEC=\\angle XYA=\\angle XDA=\\angle XDE$ (inscribed angles in $\\omega_1$). So $\\triangle XED\\sim\\triangle XCE$, and\n$$XE^2=XC\\cdot XD=67\\cdot37=2479.$$\n\n**Finish.** Let $MX=t$, so $MY=t+47$, $EM=MY=t+47$ and $XE=2t+47$. Power of $M$ in $\\omega_1$: $MA^2=t(t+47)$, so\n$$AB^2=4t(t+47)=(2t+47)^2-47^2=2479-2209=270.$$\n\n**Answer: 270**"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

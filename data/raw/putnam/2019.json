@@ -1,0 +1,446 @@
+[
+  {
+    "id": "putnam-2019-a1",
+    "bank": "putnam",
+    "source": {
+      "contest": "Putnam",
+      "paper": "80th William Lowell Putnam Mathematical Competition (December 7, 2019)",
+      "year": 2019,
+      "number": "A1",
+      "url": "https://kskedlaya.org/putnam-archive/"
+    },
+    "grade": "undergrad",
+    "points": 10,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Determine all possible values of the expression\n$$A^3+B^3+C^3-3ABC$$\nwhere $A, B$, and $C$ are nonnegative integers.",
+    "image": null,
+    "choices": null,
+    "answer": "All nonnegative integers that are **not** congruent to $3$ or $6 \\pmod 9$ (use $X = (A+B+C)(A^2+B^2+C^2-AB-BC-CA)$).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Factor and work mod 3",
+        "body": "Let $X = A^3+B^3+C^3-3ABC$. The classical factorization is\n$$X = (A+B+C)(A^2+B^2+C^2-AB-BC-CA),\\qquad A^2+B^2+C^2-AB-BC-CA = \\tfrac12\\big[(A-B)^2+(B-C)^2+(C-A)^2\\big].$$\nWrite $B = A+b$, $C = A+c$ ($b,c$ integers). Then the second factor is $\\frac12[b^2 + (b-c)^2 + c^2] = b^2-bc+c^2$, so\n$$X = (b^2-bc+c^2)(3A+b+c).$$\n\n**$X\\ge 0$.** Both factors in the symmetric form are $\\ge 0$ ($A,B,C\\ge0$, and the second is half a sum of squares).\n\n**If $3\\mid X$ then $9 \\mid X$.** Modulo $3$: $3A+b+c\\equiv b+c$ and $b^2-bc+c^2 = (b+c)^2 - 3bc \\equiv (b+c)^2$. So if $3\\mid X$, then $3 \\mid b+c$, and then *both* factors are divisible by $3$, so $9\\mid X$. Hence $X \\not\\equiv 3,6 \\pmod 9$.\n\n**Every other value occurs.** Take $A\\ge0$ arbitrary:\n- $(b,c) = (0,1)$, i.e. $(A,A,A+1)$: $X = 1\\cdot(3A+1) = 3A+1$;\n- $(b,c) = (1,1)$, i.e. $(A,A+1,A+1)$: $X = 1\\cdot(3A+2) = 3A+2$;\n- $(b,c) = (1,2)$, i.e. $(A,A+1,A+2)$: $X = 3\\cdot(3A+3) = 9(A+1)$;\n- $(0,0,0)$: $X = 0$.\n\nThese give every nonnegative integer not divisible by $3$, every positive multiple of $9$, and $0$.\n\n**Answer:** exactly the nonnegative integers not congruent to $3$ or $6$ modulo $9$."
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "algebra"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "putnam-2019-a2",
+    "bank": "putnam",
+    "source": {
+      "contest": "Putnam",
+      "paper": "80th William Lowell Putnam Mathematical Competition (December 7, 2019)",
+      "year": 2019,
+      "number": "A2",
+      "url": "https://kskedlaya.org/putnam-archive/"
+    },
+    "grade": "undergrad",
+    "points": 10,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "In the triangle $\\triangle ABC$, let $G$ be the centroid, and let $I$ be the center of the inscribed circle. Let $\\alpha$ and $\\beta$ be the angles at the vertices $A$ and $B$, respectively. Suppose that the segment $IG$ is parallel to $AB$ and that $\\beta = 2 \\tan^{-1} (1/3)$. Find $\\alpha$.",
+    "image": null,
+    "choices": null,
+    "answer": "pi/2",
+    "acceptedAnswers": [
+      "90"
+    ],
+    "answerUnit": null,
+    "answerDisplay": "$\\alpha = \\frac{\\pi}{2}$ (that is, $90^\\circ$)",
+    "solutions": [
+      {
+        "title": "Synthetic: the altitude is tangent to the incircle",
+        "body": "Let $r$ be the inradius, $D$ the foot of the altitude from $C$, and $E$ the point where the incircle touches $AB$.\n\n**Height of $C$.** $G$ lies on the median from $C$ at one third of the way from $AB$, so $\\operatorname{dist}(G,AB) = \\frac13 CD$. Since $IG\\parallel AB$, $\\operatorname{dist}(G,AB) = \\operatorname{dist}(I,AB) = r$. Hence $CD = 3r$.\n\n**Where $D$ is.** $\\tan\\frac\\beta2 = \\frac13$ gives $\\tan\\beta = \\frac{2/3}{1-1/9} = \\frac34$, so $\\beta$ is acute, $D$ lies on ray $BA$, and $DB = CD/\\tan\\beta = 4r$.\n\n**Where $E$ is.** $BI$ bisects angle $B$, so $EB = r/\\tan\\frac\\beta2 = 3r$.\n\nThus $E$ and $D$ are on ray $BA$ at distances $3r$ and $4r$ from $B$, so $ED = r$. The line $CD$ is perpendicular to $AB$ at distance $ED = r$ from $I$ (as $IE\\perp AB$), so **line $CD$ is tangent to the incircle**. The only tangent lines to the incircle through $C$ are $CA$ and $CB$, and $CD\\ne CB$ (since $\\beta \\ne 90^\\circ$). Therefore line $CD$ is line $CA$, so $A = D$ and $\\alpha = 90^\\circ$.\n\n**Answer:** $\\alpha = \\dfrac{\\pi}{2}$."
+      },
+      {
+        "title": "Areas and Heron's formula",
+        "body": "Let $a,b,c$ be the sides opposite $A,B,C$, $s$ the semiperimeter, $K$ the area and $r$ the inradius, so $K = rs$.\n\n$IG\\parallel AB$ means $I$ and $G$ are at the same distance from $AB$, so triangles $ABI$ and $ABG$ have equal areas:\n$$\\tfrac12 rc = [ABI] = [ABG] = \\tfrac13K = \\tfrac13 rs.$$\nHence $3c = 2s = a+b+c$, so $c = \\frac{a+b}2$, $s = \\frac{3c}{2}$ and $s-c = \\frac c2$.\n\nHeron: $r^2s^2 = K^2 = s(s-a)(s-b)(s-c)$, so $r^2\\cdot\\frac{3c}2 = (s-a)(s-b)\\frac c2$, i.e.\n$$3r^2 = (s-a)(s-b).$$\nThe tangent lengths are $s-a = r/\\tan\\frac\\alpha2$ and $s-b = r/\\tan\\frac\\beta2$. Substituting,\n$$\\tan\\frac\\alpha2\\,\\tan\\frac\\beta2 = \\frac13 \\quad\\Longrightarrow\\quad \\tan\\frac\\alpha2 = 1 \\quad\\Longrightarrow\\quad \\alpha = \\frac\\pi2 .$$\n(Check: the $3$-$4$-$5$ right triangle $A=(0,0)$, $B=(4,0)$, $C=(0,3)$ has $G = (\\frac43,1)$, $I = (1,1)$ and $\\tan\\frac\\beta2 = \\frac{1}{3}$.)\n\n**Answer:** $\\alpha = \\dfrac{\\pi}{2}$."
+      }
+    ],
+    "topics": [
+      "geometry",
+      "trigonometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "putnam-2019-a3",
+    "bank": "putnam",
+    "source": {
+      "contest": "Putnam",
+      "paper": "80th William Lowell Putnam Mathematical Competition (December 7, 2019)",
+      "year": 2019,
+      "number": "A3",
+      "url": "https://kskedlaya.org/putnam-archive/"
+    },
+    "grade": "undergrad",
+    "points": 10,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Given real numbers $b_0, b_1, \\dots, b_{2019}$ with $b_{2019} \\neq 0$, let $z_1,z_2,\\dots,z_{2019}$ be the roots in the complex plane of the polynomial\n$$P(z) = \\sum_{k=0}^{2019} b_k z^k.$$\nLet $\\mu = (|z_1| + \\cdots + |z_{2019}|)/2019$ be the average of the distances from $z_1,z_2,\\dots,z_{2019}$ to the origin. Determine the largest constant $M$ such that $\\mu \\geq M$ for all choices of $b_0,b_1,\\dots, b_{2019}$ that satisfy\n$$1 \\leq b_0 < b_1 < b_2 < \\cdots < b_{2019} \\leq 2019.$$",
+    "image": null,
+    "choices": null,
+    "answer": "2019^(-1/2019)",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "answerDisplay": "$M = 2019^{-1/2019}$",
+    "solutions": [
+      {
+        "title": "AM–GM and Vieta, with an equality case",
+        "body": "**Lower bound.** By AM–GM and Vieta's formula for the product of the roots,\n$$\\mu = \\frac{|z_1|+\\cdots+|z_{2019}|}{2019} \\ge |z_1z_2\\cdots z_{2019}|^{1/2019} = \\left|\\frac{b_0}{b_{2019}}\\right|^{1/2019} \\ge \\left(\\frac{1}{2019}\\right)^{1/2019},$$\nusing $b_0\\ge 1$ and $b_{2019}\\le2019$.\n\n**The bound is attained.** Let $c = 2019^{1/2019}$ and $b_k = c^k$ for $k = 0,\\dots,2019$. Then $b_0 = 1$, $b_{2019} = 2019$, and the $b_k$ are strictly increasing, so the constraints hold. Now\n$$P(z) = \\sum_{k=0}^{2019} (cz)^k = \\frac{(cz)^{2020}-1}{cz-1},$$\nwhose roots satisfy $cz = \\omega$ for the $2020$-th roots of unity $\\omega\\ne1$. So every root has $|z| = 1/c$ and $\\mu = 2019^{-1/2019}$.\n\nHence the largest such constant is\n$$M = 2019^{-1/2019}.$$"
+      }
+    ],
+    "topics": [
+      "polynomials",
+      "complex-numbers",
+      "inequalities"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "putnam-2019-a4",
+    "bank": "putnam",
+    "source": {
+      "contest": "Putnam",
+      "paper": "80th William Lowell Putnam Mathematical Competition (December 7, 2019)",
+      "year": 2019,
+      "number": "A4",
+      "url": "https://kskedlaya.org/putnam-archive/"
+    },
+    "grade": "undergrad",
+    "points": 10,
+    "timeMinutes": null,
+    "type": "text",
+    "prompt": "Let $f$ be a continuous real-valued function on $\\mathbb{R}^3$. Suppose that for every sphere $S$ of radius 1, the integral of $f(x,y,z)$ over the surface of $S$ equals 0. Must $f(x,y,z)$ be identically 0?",
+    "image": null,
+    "choices": null,
+    "answer": "No",
+    "acceptedAnswers": [
+      "no",
+      "No, not necessarily"
+    ],
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "A periodic counterexample (Archimedes' hat-box theorem)",
+        "body": "**No.** Take $f(x,y,z) = \\sin(\\pi z)$, which is continuous and not identically $0$.\n\nLet $S$ be the unit sphere centred at $(x_0,y_0,z_0)$, parametrized by\n$$(x_0,y_0,z_0) + (\\sin\\phi\\cos\\theta,\\ \\sin\\phi\\sin\\theta,\\ \\cos\\phi),\\qquad \\phi\\in[0,\\pi],\\ \\theta\\in[0,2\\pi],$$\nwith surface element $dS = \\sin\\phi\\,d\\phi\\,d\\theta$. Then, substituting $t = \\cos\\phi$,\n$$\\iint_S f\\,dS = \\int_0^{\\pi}\\!\\!\\int_0^{2\\pi} \\sin\\big(\\pi(z_0+\\cos\\phi)\\big)\\sin\\phi\\,d\\theta\\,d\\phi = 2\\pi\\int_{-1}^{1}\\sin\\big(\\pi(z_0+t)\\big)\\,dt .$$\n(This is Archimedes' observation: the area of the slice of a unit sphere between heights $t$ and $t+dt$ is $2\\pi\\,dt$, independent of $t$.) The last integral is over an interval of length $2$, a full period of $\\sin(\\pi z)$:\n$$2\\pi\\left[-\\frac{\\cos(\\pi(z_0+t))}{\\pi}\\right]_{t=-1}^{t=1} = -2\\big(\\cos(\\pi z_0+\\pi) - \\cos(\\pi z_0-\\pi)\\big) = 0 .$$\nSo the integral over every unit sphere vanishes, yet $f\\not\\equiv0$.\n\nMore generally $f(x,y,z) = g(z)$ works for any continuous $g$ of period $2$ with $\\int_0^2 g = 0$.\n\n**Answer: No.**"
+      }
+    ],
+    "topics": [
+      "calculus",
+      "analysis"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "putnam-2019-a5",
+    "bank": "putnam",
+    "source": {
+      "contest": "Putnam",
+      "paper": "80th William Lowell Putnam Mathematical Competition (December 7, 2019)",
+      "year": 2019,
+      "number": "A5",
+      "url": "https://kskedlaya.org/putnam-archive/"
+    },
+    "grade": "undergrad",
+    "points": 10,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $p$ be an odd prime number, and let $\\mathbb{F}_p$ denote the field of integers modulo $p$. Let $\\mathbb{F}_p[x]$ be the ring of polynomials over $\\mathbb{F}_p$, and let $q(x) \\in \\mathbb{F}_p[x]$ be given by\n$$q(x) = \\sum_{k=1}^{p-1} a_k x^k,$$\nwhere\n$$a_k = k^{(p-1)/2} \\bmod p.$$\nFind the greatest nonnegative integer $n$ such that $(x-1)^n$ divides $q(x)$ in $\\mathbb{F}_p[x]$.",
+    "image": null,
+    "choices": null,
+    "answer": "$n = \\dfrac{p-1}{2}$. (With $D = x\\frac{d}{dx}$: $q = D^{(p-1)/2}\\big((x-1)^{p-1}\\big)$, and each application of $D$ lowers the multiplicity of the root $1$ by exactly one.)",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "The operator x d/dx",
+        "body": "Let $D = x\\dfrac{d}{dx}$ act on $\\mathbb F_p[x]$ (formal derivative). Note $D(x^k) = kx^k$.\n\n**Starting polynomial.** Let $s(x) = 1 + x + \\cdots + x^{p-1}$. In $\\mathbb F_p[x]$ we have $(x-1)^p = x^p - 1$ (binomial coefficients $\\binom pi$ vanish mod $p$ for $0<i<p$), so\n$$s(x) = \\frac{x^p-1}{x-1} = (x-1)^{p-1}.$$\nApplying $D$ $m\\ge1$ times gives $D^m s = \\sum_{k=1}^{p-1} k^m x^k$; with $m = \\frac{p-1}2$ this is exactly $q$.\n\n**Lemma.** If $f = (x-1)^n r$ with $r(1)\\ne0$ and $1\\le n\\le p-1$, then $Df = (x-1)^{n-1}r_1$ with $r_1(1) \\ne 0$.\n*Proof.* $Df = x\\big(n(x-1)^{n-1}r + (x-1)^nr'\\big) = (x-1)^{n-1}\\big(nxr + x(x-1)r'\\big)$, and $r_1 = nxr + x(x-1)r'$ has $r_1(1) = n\\,r(1)\\ne0$ because $n\\not\\equiv0\\pmod p$. ∎\n\n**Conclusion.** $s$ has the root $1$ with multiplicity exactly $p-1$. Applying the lemma $\\frac{p-1}2$ times (the multiplicities along the way are $p-1, p-2,\\dots,\\frac{p+1}2$, all between $1$ and $p-1$), $q = D^{(p-1)/2}s$ has the root $1$ with multiplicity exactly\n$$(p-1) - \\frac{p-1}2 = \\frac{p-1}2 .$$\n\n**Answer:** $n = \\dfrac{p-1}{2}$."
+      },
+      {
+        "title": "Expand around x = 1 and use power sums",
+        "body": "**Power sums.** For an integer $m\\ge0$ let $S_m = \\sum_{k=1}^{p-1}k^m$. Then $S_m\\equiv -1\\pmod p$ if $(p-1)\\mid m$, and $S_m\\equiv0$ otherwise. Indeed, if $(p-1)\\mid m$, every term is $1$ by Fermat, so $S_m = p-1\\equiv-1$. Otherwise let $g$ be a primitive root; $k\\mapsto gk$ permutes the nonzero residues, so $g^mS_m\\equiv S_m$, and $g^m\\not\\equiv1$ forces $S_m\\equiv0$.\n\n**Taylor coefficients at $1$.** Put $x = 1+t$:\n$$q(1+t) = \\sum_{k=1}^{p-1}k^{(p-1)/2}(1+t)^k = \\sum_{j\\ge0} c_j t^j,\\qquad c_j = \\sum_{k=1}^{p-1}k^{(p-1)/2}\\binom kj .$$\n$(x-1)^n\\mid q$ iff $c_0 = \\cdots = c_{n-1} = 0$. For $0\\le j\\le p-1$, $\\binom kj \\equiv \\frac{k(k-1)\\cdots(k-j+1)}{j!}$ is a polynomial in $k$ of degree $j$ with leading coefficient $\\frac1{j!}$ (invertible mod $p$) and, for $j\\ge1$, no constant term. So\n$$c_j = \\sum_{i} \\lambda_{i}\\,S_{(p-1)/2 + i},$$\nsumming over $0\\le i\\le j$ (with $i\\ge1$ if $j\\ge1$), where $\\lambda_j = \\frac1{j!}$.\n\n- If $j<\\frac{p-1}2$, every exponent $\\frac{p-1}2+i$ lies in $\\left[\\frac{p-1}2, p-2\\right]$, not divisible by $p-1$, so $c_j = 0$.\n- If $j = \\frac{p-1}2$, all exponents lie in $\\left[\\frac{p-1}2, p-1\\right]$, and only the top one, $p-1$, gives a nonzero power sum: $c_j = \\frac{1}{j!}S_{p-1} = -\\frac1{j!}\\ne0$.\n\nHence the multiplicity of $1$ as a root of $q$ is exactly $\\frac{p-1}2$.\n\n**Answer:** $n = \\dfrac{p-1}{2}$."
+      }
+    ],
+    "topics": [
+      "abstract-algebra",
+      "polynomials",
+      "number-theory"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "putnam-2019-a6",
+    "bank": "putnam",
+    "source": {
+      "contest": "Putnam",
+      "paper": "80th William Lowell Putnam Mathematical Competition (December 7, 2019)",
+      "year": 2019,
+      "number": "A6",
+      "url": "https://kskedlaya.org/putnam-archive/"
+    },
+    "grade": "undergrad",
+    "points": 10,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $g$ be a real-valued function that is continuous on the closed interval $[0,1]$ and twice differentiable on the open interval $(0,1)$. Suppose that for some real number $r>1$,\n$$\\lim_{x \\to 0^+} \\frac{g(x)}{x^r} = 0.$$\nProve that either\n$$\\lim_{x \\to 0^+} g'(x) = 0 \\qquad \\text{or} \\qquad \\limsup_{x \\to 0^+} x^r |g''(x)| = \\infty.$$",
+    "image": null,
+    "choices": null,
+    "answer": "Proof by contradiction: if $|g''(x)|\\le Mx^{-r}$ near $0$ and $|g'(x_n)|\\ge\\varepsilon_0$ along $x_n\\to0$, then on $[x_n, x_n + \\varepsilon_0x_n^r/(2M)]$ we have $|g'|\\ge\\varepsilon_0/2$, so $g$ changes by $\\gtrsim x_n^r$, contradicting $g(x) = o(x^r)$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Short intervals where g' stays large",
+        "body": "Suppose both conclusions fail; we derive a contradiction.\n\nSince $\\limsup_{x\\to0^+}x^r|g''(x)| < \\infty$, there are $M>0$ and $\\delta_1\\in(0,1)$ with\n$$|g''(x)| \\le Mx^{-r}\\qquad (0<x<\\delta_1).$$\nSince $g'(x)\\not\\to0$, there are $\\varepsilon_0>0$ and a sequence $x_n\\to0^+$ with $|g'(x_n)|\\ge\\varepsilon_0$.\n\n**$g'$ stays large on a short interval.** Let $h_n = \\dfrac{\\varepsilon_0x_n^r}{2M}$. Because $r>1$, $h_n/x_n = \\frac{\\varepsilon_0}{2M}x_n^{r-1}\\to0$, so for large $n$ we have $h_n\\le x_n$ and $2x_n<\\delta_1$. For $x\\in[x_n,x_n+h_n]$, $|g''|\\le Mx^{-r}\\le Mx_n^{-r}$ there, so by the mean value theorem applied to $g'$,\n$$|g'(x)-g'(x_n)| \\le Mx_n^{-r}h_n = \\frac{\\varepsilon_0}2, \\qquad\\text{hence}\\qquad |g'(x)|\\ge\\frac{\\varepsilon_0}2 .$$\n\n**$g$ changes a lot.** By the mean value theorem for $g$, for some $\\xi\\in(x_n,x_n+h_n)$,\n$$|g(x_n+h_n) - g(x_n)| = |g'(\\xi)|\\,h_n \\ge \\frac{\\varepsilon_0}{2}\\cdot\\frac{\\varepsilon_0x_n^r}{2M} = \\frac{\\varepsilon_0^2}{4M}\\,x_n^r .$$\n\n**But $g$ is small.** Let $\\varepsilon>0$. There is $\\delta>0$ with $|g(x)|\\le\\varepsilon x^r$ for $0<x<\\delta$. For $n$ large enough that also $2x_n<\\delta$,\n$$|g(x_n+h_n)-g(x_n)| \\le \\varepsilon(x_n+h_n)^r + \\varepsilon x_n^r \\le \\varepsilon(2^r+1)x_n^r .$$\n\nComparing, $\\dfrac{\\varepsilon_0^2}{4M}\\le\\varepsilon(2^r+1)$ for every $\\varepsilon>0$, which is false for small $\\varepsilon$. This contradiction proves that $\\lim_{x\\to0^+}g'(x) = 0$ or $\\limsup_{x\\to0^+}x^r|g''(x)| = \\infty$. ∎\n\n*Remark.* Both can happen at once, e.g. $g(x) = x^5\\sin(x^{-3})$ with $r=2$."
+      }
+    ],
+    "topics": [
+      "real-analysis",
+      "calculus"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "putnam-2019-b1",
+    "bank": "putnam",
+    "source": {
+      "contest": "Putnam",
+      "paper": "80th William Lowell Putnam Mathematical Competition (December 7, 2019)",
+      "year": 2019,
+      "number": "B1",
+      "url": "https://kskedlaya.org/putnam-archive/"
+    },
+    "grade": "undergrad",
+    "points": 10,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Denote by $\\mathbb{Z}^2$ the set of all points $(x,y)$ in the plane with integer coordinates. For each integer $n \\geq 0$, let $P_n$ be the subset of $\\mathbb{Z}^2$ consisting of the point $(0,0)$ together with all points $(x,y)$ such that $x^2 + y^2 = 2^k$ for some integer $k \\leq n$. Determine, as a function of $n$, the number of four-point subsets of $P_n$ whose elements are the vertices of a square.",
+    "image": null,
+    "choices": null,
+    "answer": "$5n+1$ squares. ($P_n$ is the origin plus nested squares (\"rings\") of norms $1,2,4,\\dots,2^n$; each new ring adds exactly $5$ squares.)",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Describe P_n, then count the new squares at each step",
+        "body": "**The points of norm $2^k$.** Call $C_k = \\{(x,y)\\in\\mathbb Z^2 : x^2+y^2 = 2^k\\}$ (only $k\\ge0$ is possible). We have $C_0 = \\{(\\pm1,0),(0,\\pm1)\\}$ and $C_1 = \\{(\\pm1,\\pm1)\\}$. For $k\\ge2$, $x^2+y^2\\equiv0\\pmod4$ forces $x,y$ both even (squares are $0$ or $1$ mod $4$), and $(x,y)\\mapsto(x/2,y/2)$ is a bijection $C_k\\to C_{k-2}$. Hence\n$$C_{2j} = \\{(\\pm2^j,0),(0,\\pm2^j)\\},\\qquad C_{2j+1} = \\{(\\pm2^j,\\pm2^j)\\}.$$\nEach $C_k$ consists of the four vertices of a square centred at the origin, and $P_n = \\{(0,0)\\}\\cup C_0\\cup\\cdots\\cup C_n$.\n\n**$n = 0$.** $P_0$ is the origin and $C_0$. The only square is $C_0$ itself (a square using the origin would need a vertex like $(1,1)\\notin P_0$). So there is $1$ square.\n\n**Step $n-1\\to n$ ($n\\ge1$).** Squares in $P_n$ that avoid $C_n$ are exactly the squares in $P_{n-1}$. We show that exactly $5$ squares use a point of $C_n$.\n\nLet $S$ be the square with vertex set $C_n$. Then $P_n\\subset S$:\n- if $n = 2j+1$, $S = [-2^j,2^j]^2$, and every point of $P_n$ has coordinates of absolute value $\\le 2^j$;\n- if $n = 2j$, $S = \\{|x|+|y|\\le2^j\\}$, and points of $C_{2i}$ have $|x|+|y| = 2^i$ and points of $C_{2i+1}$ have $|x|+|y| = 2^{i+1}$, all $\\le 2^j$ for the relevant $i$.\n\nLet $v\\in C_n$ be a vertex of $S$ and let $T$ be a square with vertex $v$ and all vertices in $P_n\\subset S$. By convexity $T\\subset S$, so both edges of $T$ at $v$ point into the $90^\\circ$ corner of $S$ at $v$; since they make a $90^\\circ$ angle with each other, they lie **along the two edges of $S$ at $v$**. So $T$ is determined by its side length, and its two neighbours of $v$ are points of $P_n$ on the edges of $S$.\n- $n = 2j+1$, $v = (2^j,2^j)$: the points of $P_n$ on the edge $x = 2^j$ are $(2^j,2^j)$, $(2^j,0)$, $(2^j,-2^j)$ (other rings have $|x|<2^j$ or only reach $x=2^j$ at $(2^j,0)$). Side $2^j$ gives the square $v,(2^j,0),(0,2^j),(0,0)$; side $2^{j+1}$ gives $S$.\n- $n = 2j$ ($j\\ge1$), $v = (2^j,0)$: on the edge $x+y = 2^j$, $x,y\\ge0$, the points of $P_n$ are $(2^j,0)$, $(2^{j-1},2^{j-1})$, $(0,2^j)$. Half side gives the square $v,(2^{j-1},\\pm2^{j-1}),(0,0)$; full side gives $S$.\n\nBy symmetry the same holds at each of the four vertices of $S$. So the squares using $C_n$ are $S$ and the four squares with diagonal from $(0,0)$ to a point of $C_n$ (all of whose vertices are indeed in $P_n$): $5$ squares.\n\n**Total.** The count is $1$ for $n=0$ and increases by $5$ at each step, so it equals $5n+1$. (Check $n=1$: $C_0$, $C_1$ and the four unit squares at the origin: $6$.)\n\n**Answer:** $5n+1$."
+      }
+    ],
+    "topics": [
+      "geometry",
+      "counting",
+      "number-theory"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "putnam-2019-b2",
+    "bank": "putnam",
+    "source": {
+      "contest": "Putnam",
+      "paper": "80th William Lowell Putnam Mathematical Competition (December 7, 2019)",
+      "year": 2019,
+      "number": "B2",
+      "url": "https://kskedlaya.org/putnam-archive/"
+    },
+    "grade": "undergrad",
+    "points": 10,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "For all $n \\geq 1$, let\n$$a_n = \\sum_{k=1}^{n-1} \\frac{\\sin \\left( \\frac{(2k-1)\\pi}{2n} \\right)}{\\cos^2 \\left( \\frac{(k-1)\\pi}{2n} \\right) \\cos^2 \\left( \\frac{k\\pi}{2n} \\right)}.$$\nDetermine\n$$\\lim_{n \\to \\infty} \\frac{a_n}{n^3}.$$",
+    "image": null,
+    "choices": null,
+    "answer": "8/pi^3",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "answerDisplay": "$\\frac{8}{\\pi^3}$",
+    "solutions": [
+      {
+        "title": "Telescoping",
+        "body": "Let $\\theta = \\frac{\\pi}{2n}$, $A = (k-1)\\theta$, $B = k\\theta$. Using $\\cos^2u = \\frac{1+\\cos2u}2$ and $\\cos2A - \\cos2B = -2\\sin(A+B)\\sin(A-B)$,\n$$\\cos^2A - \\cos^2B = \\sin(A+B)\\sin(B-A) = \\sin\\big((2k-1)\\theta\\big)\\sin\\theta .$$\nSo the $k$-th summand is\n$$\\frac{\\sin((2k-1)\\theta)}{\\cos^2A\\cos^2B} = \\frac{\\cos^2A-\\cos^2B}{\\sin\\theta\\,\\cos^2A\\cos^2B} = \\frac1{\\sin\\theta}\\left(\\frac{1}{\\cos^2(k\\theta)} - \\frac1{\\cos^2((k-1)\\theta)}\\right).$$\nSumming over $k = 1,\\dots,n-1$ telescopes:\n$$a_n = \\frac{1}{\\sin\\theta}\\left(\\frac{1}{\\cos^2((n-1)\\theta)} - 1\\right) = \\frac{1}{\\sin\\theta}\\left(\\frac1{\\sin^2\\theta}-1\\right) = \\frac1{\\sin^3\\frac{\\pi}{2n}} - \\frac1{\\sin\\frac\\pi{2n}},$$\nusing $\\cos\\left(\\frac\\pi2-\\theta\\right) = \\sin\\theta$.\n\nSince $n\\sin\\frac{\\pi}{2n}\\to\\frac\\pi2$,\n$$\\frac{a_n}{n^3} = \\frac{1}{\\left(n\\sin\\frac\\pi{2n}\\right)^3} - \\frac{1}{n^2\\cdot n\\sin\\frac{\\pi}{2n}} \\longrightarrow \\left(\\frac2\\pi\\right)^3 - 0 = \\frac8{\\pi^3}.$$\n\n**Answer:** $\\dfrac{8}{\\pi^3}$."
+      },
+      {
+        "title": "Small-angle approximation",
+        "body": "Substitute $k\\mapsto n-k$ and use $\\cos\\left(\\frac\\pi2-u\\right) = \\sin u$, $\\sin\\left(\\pi - u\\right) = \\sin u$:\n$$a_n = \\sum_{k=1}^{n-1}\\frac{\\sin\\left(\\frac{(2k+1)\\pi}{2n}\\right)}{\\sin^2\\left(\\frac{(k+1)\\pi}{2n}\\right)\\sin^2\\left(\\frac{k\\pi}{2n}\\right)} .$$\nFor $0< u\\le\\pi$, $\\sin u = u\\,(1+O(u^2))$, and the factors $\\sin u/u$ are bounded below by $2/\\pi$ on $(0,\\pi/2]$; so each summand equals\n$$\\frac{\\frac{(2k+1)\\pi}{2n}}{\\left(\\frac{(k+1)\\pi}{2n}\\right)^2\\left(\\frac{k\\pi}{2n}\\right)^2}\\left(1+O\\!\\left(\\frac{k^2}{n^2}\\right)\\right) = \\frac{8n^3}{\\pi^3}\\cdot\\frac{2k+1}{k^2(k+1)^2} + O\\!\\left(\\frac nk\\right).$$\nDividing by $n^3$ and summing, the error terms total $O\\!\\left(\\frac{\\log n}{n^2}\\right)\\to0$, while\n$$\\sum_{k=1}^{n-1}\\frac{2k+1}{k^2(k+1)^2} = \\sum_{k=1}^{n-1}\\left(\\frac1{k^2}-\\frac1{(k+1)^2}\\right) = 1-\\frac1{n^2}\\to1 .$$\nSo $\\dfrac{a_n}{n^3}\\to\\dfrac{8}{\\pi^3}$.\n\n**Answer:** $\\dfrac{8}{\\pi^3}$."
+      }
+    ],
+    "topics": [
+      "trigonometry",
+      "sequences-series",
+      "calculus"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "putnam-2019-b3",
+    "bank": "putnam",
+    "source": {
+      "contest": "Putnam",
+      "paper": "80th William Lowell Putnam Mathematical Competition (December 7, 2019)",
+      "year": 2019,
+      "number": "B3",
+      "url": "https://kskedlaya.org/putnam-archive/"
+    },
+    "grade": "undergrad",
+    "points": 10,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $Q$ be an $n$-by-$n$ real orthogonal matrix, and let $u \\in \\mathbb{R}^n$ be a unit column vector (that is, $u^T u = 1$). Let $P = I - 2uu^T$, where $I$ is the $n$-by-$n$ identity matrix. Show that if $1$ is not an eigenvalue of $Q$, then $1$ is an eigenvalue of $PQ$.",
+    "image": null,
+    "choices": null,
+    "answer": "Proof. An orthogonal matrix without eigenvalue $1$ has determinant $(-1)^n$; since $\\det P = -1$, $Q$ and $PQ$ cannot both lack the eigenvalue $1$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Determinants of orthogonal matrices",
+        "body": "**$P$ is a reflection.** $Pu = u - 2u(u^Tu) = -u$, and $Pv = v$ for $v\\perp u$. So $P$ is orthogonal with eigenvalues $-1$ (once) and $1$ ($n-1$ times), and $\\det P = -1$.\n\n**Lemma.** If $R$ is a real orthogonal $n\\times n$ matrix without eigenvalue $1$, then $\\det R = (-1)^n$.\n*Proof.* If $Rv = \\lambda v$ with $v\\in\\mathbb C^n\\setminus\\{0\\}$, then $|\\lambda|^2\\,\\bar v^Tv = \\overline{(Rv)}^T(Rv) = \\bar v^TR^TRv = \\bar v^Tv$, so $|\\lambda| = 1$. The characteristic polynomial has real coefficients, so its non-real roots come in conjugate pairs $\\lambda,\\bar\\lambda$ with $\\lambda\\bar\\lambda = |\\lambda|^2 = 1$. Its real roots are $\\pm1$, and by hypothesis only $-1$ occurs, say with multiplicity $k$. Then $n = k + 2(\\text{number of pairs})$, so $k\\equiv n\\pmod2$ and $\\det R = (\\text{product of roots}) = (-1)^k = (-1)^n$. ∎\n\n**Conclusion.** $PQ$ is orthogonal. If $1$ were an eigenvalue of neither $Q$ nor $PQ$, the lemma would give $\\det Q = \\det(PQ) = (-1)^n$, but $\\det(PQ) = \\det P\\det Q = -\\det Q$, a contradiction. Since $1$ is not an eigenvalue of $Q$, it must be an eigenvalue of $PQ$. ∎"
+      },
+      {
+        "title": "Matrix determinant lemma",
+        "body": "Since $1$ is not an eigenvalue of $Q$, $Q - I$ is invertible. We show $\\det(PQ-I) = 0$.\n\n**Matrix determinant lemma.** For invertible $A$ and column vectors $v,w$: $\\det(A+vw^T) = \\det A\\,(1+w^TA^{-1}v)$. (Factor $A + vw^T = A(I + A^{-1}vw^T)$; the rank-one matrix $A^{-1}vw^T$ has eigenvalues $w^TA^{-1}v$ and $0$ (repeated), so $\\det(I + A^{-1}vw^T) = 1 + w^TA^{-1}v$.)\n\nWrite $PQ - I = (Q-I) + (-2u)(Q^Tu)^T$. By the lemma,\n$$\\det(PQ-I) = \\det(Q-I)\\left(1 - 2u^TQ(Q-I)^{-1}u\\right).$$\nSince $Q(Q-I)^{-1} = I + (Q-I)^{-1}$, we have $u^TQ(Q-I)^{-1}u = 1 + u^Ty$ where $y = (Q-I)^{-1}u$, i.e. $u = Qy - y$.\n\n**Compute $u^Ty$.** Using $|Qy| = |y|$:\n$$1 = |u|^2 = |Qy|^2 - 2(Qy)^Ty + |y|^2 = 2|y|^2 - 2(Qy)^Ty,$$\nso $(Qy)^Ty = |y|^2 - \\frac12$, and $u^Ty = (Qy)^Ty - |y|^2 = -\\frac12$.\n\nTherefore $1 - 2u^TQ(Q-I)^{-1}u = 1 - 2\\left(1-\\frac12\\right) = 0$, so $\\det(PQ - I) = 0$ and $1$ is an eigenvalue of $PQ$. ∎"
+      }
+    ],
+    "topics": [
+      "linear-algebra"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "putnam-2019-b4",
+    "bank": "putnam",
+    "source": {
+      "contest": "Putnam",
+      "paper": "80th William Lowell Putnam Mathematical Competition (December 7, 2019)",
+      "year": 2019,
+      "number": "B4",
+      "url": "https://kskedlaya.org/putnam-archive/"
+    },
+    "grade": "undergrad",
+    "points": 10,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Let $\\mathcal{F}$ be the set of functions $f(x,y)$ that are twice continuously differentiable for $x \\geq 1$, $y \\geq 1$ and that satisfy the following two equations (where subscripts denote partial derivatives):\n$$xf_x + yf_y = xy \\ln(xy),$$\n$$x^2 f_{xx} + y^2 f_{yy} = xy.$$\nFor each $f \\in \\mathcal{F}$, let\n$$m(f) = \\min_{s \\geq 1} \\left(f(s+1,s+1) - f(s+1,s) - f(s,s+1) + f(s,s) \\right).$$\nDetermine $m(f)$, and show that it is independent of the choice of $f$.",
+    "image": null,
+    "choices": null,
+    "answer": "2*ln(2)-1/2",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "answerDisplay": "$m(f) = 2\\ln 2 - \\frac{1}{2}$",
+    "solutions": [
+      {
+        "title": "Find f_xy and integrate over a unit square",
+        "body": "Label the equations (1) $xf_x + yf_y = xy\\ln(xy)$ and (2) $x^2f_{xx} + y^2f_{yy} = xy$.\n\n**Compute $f_{xy}$.** Differentiate (1) with respect to $x$ and multiply by $x$; then with respect to $y$ and multiply by $y$ (using $f_{xy} = f_{yx}$, valid since $f$ is $C^2$):\n$$xf_x + x^2f_{xx} + xyf_{xy} = xy\\ln(xy) + xy,\\qquad yf_y + y^2f_{yy} + xyf_{xy} = xy\\ln(xy)+xy.$$\nAdd these and subtract (1) and (2):\n$$2xyf_{xy} = xy\\ln(xy) + xy,\\qquad\\text{so}\\qquad f_{xy} = \\tfrac12(\\ln x + \\ln y + 1).$$\n\n**The second difference.** By the fundamental theorem of calculus, twice,\n$$\\Delta(s) := f(s+1,s+1)-f(s+1,s)-f(s,s+1)+f(s,s) = \\int_s^{s+1}\\!\\!\\int_s^{s+1}f_{xy}\\,dy\\,dx = \\tfrac12\\left(2L(s) + 1\\right) = L(s)+\\tfrac12,$$\nwhere $L(s) = \\int_s^{s+1}\\ln t\\,dt$. This depends only on $s$, not on $f$.\n\n**Minimize.** $L'(s) = \\ln(s+1)-\\ln s>0$, so $L$ is increasing and the minimum over $s\\ge1$ is at $s=1$:\n$$m(f) = \\tfrac12 + \\int_1^2\\ln t\\,dt = \\tfrac12 + \\big[t\\ln t - t\\big]_1^2 = \\tfrac12 + 2\\ln2 - 1 = 2\\ln2-\\tfrac12 .$$\n\n**$\\mathcal F$ is nonempty.** $f(x,y) = \\frac12(xy\\ln(xy) - xy)$ works: $f_x = \\frac y2\\ln(xy)$, so $xf_x = yf_y = \\frac12xy\\ln(xy)$; $f_{xx} = \\frac{y}{2x}$, so $x^2f_{xx} = y^2f_{yy} = \\frac{xy}2$.\n\n**Answer:** $m(f) = 2\\ln 2 - \\dfrac12$ for every $f\\in\\mathcal F$."
+      },
+      {
+        "title": "Describe all of F",
+        "body": "**A particular solution.** Guess $f = h(xy)$; then $xf_x + yf_y = 2xyh'(xy)$, so we need $h'(t) = \\frac12\\ln t$, i.e. $h(t) = \\frac12(t\\ln t - t)$. One checks that $f_0(x,y) = \\frac12(xy\\ln(xy) - xy)$ also satisfies (2): $x^2f_{xx} + y^2f_{yy} = \\frac{xy}2+\\frac{xy}2 = xy$.\n\n**All solutions.** If $f\\in\\mathcal F$, then $g = f - f_0$ satisfies the homogeneous equations $xg_x + yg_y = 0$ and $x^2g_{xx}+y^2g_{yy} = 0$. The same manipulation as in the first solution gives $2xyg_{xy} = 0$, so $g_{xy} = 0$ and $g(x,y) = u(x) + v(y)$. Then $xu'(x) = -yv'(y)$ for all $x,y$, so both sides equal a constant $a$, giving $g = a\\ln(x/y) + b$.\n\n**The second difference.** For $g = a\\ln x - a\\ln y + b$ the expression $g(s+1,s+1)-g(s+1,s)-g(s,s+1)+g(s,s)$ is $0$ (each function of $x$ alone or $y$ alone cancels). So $m(f) = m(f_0)$.\n\nFor $f_0$, with $\\phi(t) = \\frac12(t\\ln t - t)$:\n$$\\Delta(s) = \\phi((s+1)^2) - 2\\phi(s(s+1)) + \\phi(s^2),$$\nand differentiating gives $\\Delta'(s) = \\ln(s+1)-\\ln s > 0$. So the minimum is at $s=1$:\n$$\\Delta(1) = \\phi(4) - 2\\phi(2) + \\phi(1) = (4\\ln2 - 2) - (2\\ln2 - 2) - \\tfrac12 = 2\\ln2 - \\tfrac12 .$$\n\n**Answer:** $2\\ln2-\\dfrac12$."
+      }
+    ],
+    "topics": [
+      "differential-equations",
+      "calculus"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "putnam-2019-b5",
+    "bank": "putnam",
+    "source": {
+      "contest": "Putnam",
+      "paper": "80th William Lowell Putnam Mathematical Competition (December 7, 2019)",
+      "year": 2019,
+      "number": "B5",
+      "url": "https://kskedlaya.org/putnam-archive/"
+    },
+    "grade": "undergrad",
+    "points": 10,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $F_m$ be the $m$th Fibonacci number, defined by $F_1 = F_2 = 1$ and $F_m = F_{m-1} + F_{m-2}$ for all $m \\geq 3$. Let $p(x)$ be the polynomial of degree $1008$ such that $p(2n+1) = F_{2n+1}$ for $n=0,1,2,\\dots,1008$. Find integers $j$ and $k$ such that $p(2019) = F_j - F_k$.",
+    "image": null,
+    "choices": null,
+    "answer": "$j = 2019$, $k = 1010$: $p(2019) = F_{2019} - F_{1010}$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Finite differences and Binet's formula",
+        "body": "Let $N = 1008$, so $p$ has degree $N$ and $p(2i+1) = F_{2i+1}$ for $0\\le i\\le N$; we want $p(2N+3)$.\n\n**Finite differences.** Let $(Ep)(x) = p(x+2)$. The operator $E - I$ lowers the degree of a nonconstant polynomial by one and kills constants, so $(E-I)^{N+1}p = 0$. Evaluating at $x = 1$:\n$$\\sum_{i=0}^{N+1}(-1)^{N+1-i}\\binom{N+1}{i}\\,p(2i+1) = 0 .$$\nHence\n$$p(2N+3) = -\\sum_{i=0}^{N}(-1)^{N+1-i}\\binom{N+1}{i}F_{2i+1}. \\tag{$*$}$$\n\n**Evaluate the sum with Binet.** $F_m = \\frac{\\alpha^m-\\beta^m}{\\sqrt5}$ with $\\alpha,\\beta = \\frac{1\\pm\\sqrt5}2$, the roots of $\\gamma^2 = \\gamma+1$. For $\\gamma\\in\\{\\alpha,\\beta\\}$, by the binomial theorem,\n$$\\sum_{i=0}^{N+1}(-1)^{N+1-i}\\binom{N+1}i\\gamma^{2i+1} = \\gamma(\\gamma^2-1)^{N+1} = \\gamma\\cdot\\gamma^{N+1} = \\gamma^{N+2}.$$\nRemoving the $i = N+1$ term ($\\gamma^{2N+3}$):\n$$\\sum_{i=0}^{N}(-1)^{N+1-i}\\binom{N+1}i\\gamma^{2i+1} = \\gamma^{N+2}-\\gamma^{2N+3}.$$\nSubtracting the $\\beta$ version from the $\\alpha$ version and dividing by $\\sqrt5$, the sum in $(*)$ equals $F_{N+2}-F_{2N+3}$. Therefore\n$$p(2N+3) = F_{2N+3} - F_{N+2}.$$\n(Checks: $N=0$: $p\\equiv1$, $p(3) = 1 = F_3 - F_2$. $N=1$: the line through $(1,1),(3,2)$ gives $p(5) = 3 = F_5 - F_3$.)\n\nWith $N = 1008$: $p(2019) = F_{2019} - F_{1010}$.\n\n**Answer:** $j = 2019$, $k = 1010$."
+      },
+      {
+        "title": "Iterated differences of the data",
+        "body": "Let $N = 1008$. Define $p_0 = p$ and $p_k(x) = p_{k-1}(x+2)-p_{k-1}(x)$ for $k\\ge1$; we will use the Fibonacci rule $F_{m+2}-F_m = F_{m+1}$.\n\n**Claim 1.** $p_k(2n+1) = F_{2n+1+k}$ for $0\\le n\\le N-k$, and $\\deg p_k\\le N-k$.\nBy induction: $p_k(2n+1) = p_{k-1}(2n+3)-p_{k-1}(2n+1) = F_{2n+2+k}-F_{2n+k} = F_{2n+1+k}$ (valid for $n+1\\le N-k+1$), and each difference lowers the degree. In particular $p_N$ is the constant $p_N(1) = F_{N+1}$.\n\n**Claim 2.** For $0\\le k\\le N$: $p_{N-k}(2k+3) = \\sum_{i=0}^{k}F_{N+1+i}$.\nFor $k=0$: $p_N(3) = F_{N+1}$. For the step, $p_{N-k}(2k+3) = p_{N-k}(2k+1) + p_{N-k+1}(2k+1) = F_{N+1+k} + \\sum_{i=0}^{k-1}F_{N+1+i}$, using Claim 1 for the first term ($n = k$) and the induction hypothesis for the second.\n\nTaking $k = N$: $p(2N+3) = \\sum_{i=0}^NF_{N+1+i} = \\sum_{m=1}^{2N+1}F_m - \\sum_{m=1}^{N}F_m$. With the standard identity $\\sum_{m=1}^{M}F_m = F_{M+2}-1$ (induction on $M$), this is\n$$(F_{2N+3}-1)-(F_{N+2}-1) = F_{2N+3}-F_{N+2}.$$\nFor $N=1008$: $p(2019) = F_{2019}-F_{1010}$.\n\n**Answer:** $j=2019$, $k=1010$."
+      }
+    ],
+    "topics": [
+      "polynomials",
+      "sequences-series"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "putnam-2019-b6",
+    "bank": "putnam",
+    "source": {
+      "contest": "Putnam",
+      "paper": "80th William Lowell Putnam Mathematical Competition (December 7, 2019)",
+      "year": 2019,
+      "number": "B6",
+      "url": "https://kskedlaya.org/putnam-archive/"
+    },
+    "grade": "undergrad",
+    "points": 10,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $\\mathbb{Z}^n$ be the integer lattice in $\\mathbb{R}^n$. Two points in $\\mathbb{Z}^n$ are called *neighbors* if they differ by exactly $1$ in one coordinate and are equal in all other coordinates. For which integers $n \\geq 1$ does there exist a set of points $S \\subset \\mathbb{Z}^n$ satisfying the following two conditions?\n\n1. If $p$ is in $S$, then none of the neighbors of $p$ is in $S$.\n2. If $p \\in \\mathbb{Z}^n$ is not in $S$, then exactly one of the neighbors of $p$ is in $S$.",
+    "image": null,
+    "choices": null,
+    "answer": "For **every** $n\\ge1$: take $S = \\{x : x_1 + 2x_2 + \\cdots + nx_n \\equiv 0 \\pmod{2n+1}\\}$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "A linear code modulo 2n + 1",
+        "body": "**Such a set exists for every $n\\ge1$.** Define\n$$f(x_1,\\dots,x_n) = x_1 + 2x_2 + \\cdots + nx_n \\bmod (2n+1),\\qquad S = \\{p\\in\\mathbb Z^n : f(p) = 0\\}.$$\nThe neighbours of $p$ are $p\\pm e_i$ ($i = 1,\\dots,n$), and $f(p\\pm e_i) = f(p)\\pm i$.\n\nThe key fact: the $2n$ numbers $\\pm1,\\pm2,\\dots,\\pm n$ are distinct modulo $2n+1$ and are exactly the nonzero residues.\n\n**Condition 1.** If $p\\in S$, then $f(p\\pm e_i) \\equiv \\pm i\\not\\equiv0$, so no neighbour of $p$ lies in $S$.\n\n**Condition 2.** If $p\\notin S$, then $c = f(p)\\not\\equiv0$. The neighbour $p+\\varepsilon e_i$ ($\\varepsilon = \\pm1$) is in $S$ iff $\\varepsilon i\\equiv -c$. Since $-c$ is a nonzero residue, it equals $\\varepsilon i$ for exactly one pair $(i,\\varepsilon)$. So $p$ has exactly one neighbour in $S$.\n\n**Answer:** for all $n\\ge1$. ∎\n\n*Remark.* Each point together with its $2n$ neighbours forms a \"ball\" of $2n+1$ points; the conditions say these balls around points of $S$ tile $\\mathbb Z^n$ (a perfect code), which is why the modulus $2n+1$ appears."
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "counting"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

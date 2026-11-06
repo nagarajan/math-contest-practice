@@ -1,0 +1,210 @@
+[
+  {
+    "id": "usamo-usajmo-2020-01",
+    "bank": "usamo",
+    "source": {
+      "contest": "USAJMO",
+      "paper": "USAJMO 2020",
+      "year": 2020,
+      "number": 1,
+      "url": "https://web.evanchen.cc/exams/JMO-2020-notes.pdf"
+    },
+    "grade": "7-10",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $n \\ge 2$ be an integer. Carl has $n$ books arranged on a bookshelf. Each book has a height and a width. No two books have the same height, and no two books have the same width.\n\nInitially, the books are arranged in increasing order of height from left to right. In a move, Carl picks any two adjacent books where the left book is wider and shorter than the right book, and swaps their locations. Carl does this repeatedly until no further moves are possible.\n\nProve that regardless of how Carl makes his moves, he must stop after a finite number of moves, and when he does stop, the books are sorted in increasing order of width from left to right.",
+    "image": null,
+    "choices": null,
+    "answer": "Each move removes exactly one \"width-inversion\", so the process stops; at the end an adjacent pair out of width order would be a pair whose shorter book is narrower, and such a pair can never have been swapped — contradiction with the initial height order.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Count width-inversions",
+        "body": "Call a pair of books $(X, Y)$ with $X$ to the left of $Y$ a **width-inversion** if $X$ is wider than $Y$.\n\n**Termination.** A move swaps two *adjacent* books $X, Y$ where $X$ (on the left) is wider than $Y$. Swapping two adjacent books changes the relative order of only that one pair, so the pair $(X,Y)$ stops being a width-inversion and every other pair keeps its status. Hence each move decreases the number of width-inversions by exactly $1$. This number starts at most $\\binom n2$ and is never negative, so Carl makes at most $\\binom n2$ moves.\n\n**The final order.** Suppose no move is possible but the books are not sorted by width. Then some two *adjacent* books $A$ (left) and $B$ (right) satisfy: $A$ is wider than $B$. Since no move is possible on this pair, $A$ is not shorter than $B$; heights are distinct, so $A$ is **taller** than $B$.\n\nSo $B$ is shorter and narrower than $A$. Now look at the history of this particular pair. The relative order of $A$ and $B$ can only change when they are swapped with each other. A swap of the pair $\\{A,B\\}$ requires the book on the left to be wider **and** shorter than the book on the right, i.e. it requires the shorter of the two books to be the wider one. But here the shorter book $B$ is the narrower one. So $A$ and $B$ were **never** swapped, and their relative order now is the same as at the start.\n\nAt the start the books were in increasing order of height, so the shorter book $B$ was to the left of $A$. Now $A$ is to the left of $B$ — a contradiction.\n\nTherefore, when Carl stops, the books are in increasing order of width. ∎"
+      }
+    ],
+    "topics": [
+      "logic",
+      "counting"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamo-usajmo-2020-02",
+    "bank": "usamo",
+    "source": {
+      "contest": "USAJMO",
+      "paper": "USAJMO 2020",
+      "year": 2020,
+      "number": 2,
+      "url": "https://web.evanchen.cc/exams/JMO-2020-notes.pdf"
+    },
+    "grade": "7-10",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $\\omega$ be the incircle of a fixed equilateral triangle $ABC$. Let $\\ell$ be a variable line that is tangent to $\\omega$ and meets the interior of segments $BC$ and $CA$ at points $P$ and $Q$, respectively. A point $R$ is chosen such that $PR = PA$ and $QR = QB$. Find all possible locations of the point $R$, over all choices of $\\ell$.",
+    "image": null,
+    "choices": null,
+    "answer": "With $I$ the center and $r$ the radius of $\\omega$: $R$ lies on the open $120^\\circ$ arc $AB$ (not containing $C$) of the circumcircle of $ABC$ (radius $2r$), or on the open $120^\\circ$ arc of the circle centered at $I$ with radius $4r$ obtained from arc $DE$ of $\\omega$ by the homothety at $I$ with ratio $4$ ($D, E$ the tangency points on $BC, CA$).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Homothety at the incenter",
+        "body": "Let $I$ and $r$ be the center and radius of $\\omega$, and let $\\omega$ touch $BC$ at $D$ and $CA$ at $E$. Since $ABC$ is equilateral, $D$ and $E$ are midpoints, $A, I, D$ are collinear with $IA = 2r$, and $B, I, E$ are collinear with $IB = 2r$; also the circumcircle of $ABC$ is the circle centered at $I$ with radius $2r$. The line $\\ell$ meets the interiors of $BC$ and $CA$ exactly when its tangency point $T$ lies on the open minor arc $DE$ of $\\omega$ (the arc facing $C$, of measure $180^\\circ-60^\\circ = 120^\\circ$).\n\nLet $h$ be the homothety centered at $I$ with ratio $-2$. It sends $D \\mapsto A$ and $E \\mapsto B$. Put $S = h(T)$, i.e. $S$ is the point on ray $TI$ beyond $I$ with $IS = 2r$.\n\n**Claim 1.** $PS = PA$ and $QS = QB$.\n\n*Proof.* $P$ is the intersection of the tangents to $\\omega$ at $T$ and $D$, so $PT = PD$ and $IT = ID$; hence line $PI$ is the perpendicular bisector of segment $TD$. The homothety $h$ maps segment $TD$ to segment $SA$, which is therefore parallel to $TD$; and the perpendicular bisector of $TD$ (a line through the center $I$, perpendicular to $TD$) is mapped to the perpendicular bisector of $SA$, which is the line through $I$ perpendicular to $SA \\parallel TD$ — the same line $PI$. So $P$ lies on the perpendicular bisector of $SA$, i.e. $PS = PA$. The same argument with $Q$, $E$, $B$ gives $QS = QB$. $\\square$\n\n**The two choices of $R$.** The circles centered at $P$ with radius $PA$ and centered at $Q$ with radius $QB$ have distinct centers, so they meet in at most two points, symmetric about the line of centers $PQ = \\ell$. By Claim 1, $S$ is one intersection point. Since $S$ lies on line $TI \\perp \\ell$ at distance $TS = TI + IS = 3r$ from $\\ell$, $S \\notin \\ell$, so its mirror image $S'$ in $\\ell$ is a second, different intersection point. Thus $R \\in \\{S, S'\\}$, and both choices are valid.\n\n$S'$ lies on line $TI$ on the other side of $\\ell$, with $TS' = 3r$; hence $IS' = 4r$ and $S'$ is on ray $IT$. In other words $S' = h'(T)$ where $h'$ is the homothety at $I$ with ratio $4$.\n\n**The locus.** As $T$ runs over the open $120^\\circ$ arc $DE$ of $\\omega$:\n\n- $S = h(T)$ runs over the image of that arc under $h$: the open arc from $h(D) = A$ to $h(E) = B$ of the circle centered at $I$ with radius $2r$ — that is, the open arc $AB$ of the circumcircle of $ABC$ not containing $C$.\n- $S' = h'(T)$ runs over the open $120^\\circ$ arc from $h'(D)$ to $h'(E)$ of the circle centered at $I$ with radius $4r$, where $h'(D)$ and $h'(E)$ are the points at distance $4r$ from $I$ on rays $ID$ and $IE$.\n\nSo the set of possible $R$ is the union of these two open arcs. ∎"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamo-usajmo-2020-03",
+    "bank": "usamo",
+    "source": {
+      "contest": "USAJMO",
+      "paper": "USAJMO 2020",
+      "year": 2020,
+      "number": 3,
+      "url": "https://web.evanchen.cc/exams/JMO-2020-notes.pdf"
+    },
+    "grade": "7-10",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "An empty $2020 \\times 2020 \\times 2020$ cube is given, and a $2020 \\times 2020$ grid of square unit cells is drawn on each of its six faces. A *beam* is a $1 \\times 1 \\times 2020$ rectangular prism. Several beams are placed inside the cube subject to the following conditions:\n\n- The two $1 \\times 1$ faces of each beam coincide with unit cells lying on opposite faces of the cube. (Hence, there are $3 \\cdot 2020^2$ possible positions for a beam.)\n- No two beams have intersecting interiors.\n- The interiors of each of the four $1 \\times 2020$ faces of each beam touch either a face of the cube or the interior of the face of another beam.\n\nWhat is the smallest positive number of beams that can be placed to satisfy these conditions?",
+    "image": null,
+    "choices": null,
+    "answer": "3030",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Layers argument and an explicit construction",
+        "body": "Write $n = 2020$ and place the cube as $[0,n]^3$. Call a beam an $x$-, $y$- or $z$-beam according to the direction of its long edges, and let $N_x, N_y, N_z$ be their numbers. The answer is $\\frac{3n}{2} = 3030$.\n\n**Key observation (layers).** For $k = 0, \\dots, n-1$ let the *$z$-layer* $k$ be the slab $k \\le z \\le k+1$. Every $x$-beam and every $y$-beam lies in exactly one $z$-layer. Take an $x$- or $y$-beam in $z$-layer $k$ with $k < n-1$. Its top face lies in the plane $z = k+1$, inside the cube, so it must touch the interior of a face of another beam. A $z$-beam has no face in that plane except its ends (which are at $z = 0, n$), and a beam in the same layer has its top face beside ours, not overlapping it. So the touching beam is an $x$- or $y$-beam in layer $k+1$. Likewise (bottom face) layer $k-1$ contains an $x$- or $y$-beam if $k > 0$. By induction: **if some $x$- or $y$-beam exists, then every one of the $n$ $z$-layers contains an $x$- or $y$-beam**, so $N_x + N_y \\ge n$.\n\nThe same holds for the other two directions: if $N_y + N_z > 0$ then $N_y + N_z \\ge n$, and if $N_z + N_x > 0$ then $N_z + N_x \\ge n$.\n\n**Case 1: all three types occur.** Then all three inequalities hold, and adding them gives $2(N_x+N_y+N_z) \\ge 3n$, i.e. at least $3n/2 = 3030$ beams.\n\n**Case 2: some type is missing**, say $N_z = 0$. There is at least one beam, so by the observation every $z$-layer contains a beam. Within one layer, an $x$-beam and a $y$-beam would cross (their interiors share a unit cube), so all beams of the layer are parallel, say $x$-beams. An $x$-beam occupying the strip $j \\le y \\le j+1$ of the layer has its side face in the plane $y = j+1$; if $j+1 < n$, the only beam whose face can overlap it is an $x$-beam in the same layer in the strip $j+1 \\le y \\le j+2$ (there are no $z$-beams, $y$-beams have no such face, and beams of other layers are at other heights). Similarly for $y = j$. Hence the layer is completely filled with $n$ beams, and the total is at least $n \\cdot n = n^2 > 3030$.\n\nSo at least $3030$ beams are always needed.\n\n**Construction with $3n/2$ beams ($n$ even).** For $t = 0, 1, \\dots, \\frac n2 - 1$ take\n\n- the $z$-beam $[2t, 2t+1] \\times [2t, 2t+1] \\times [0, n]$,\n- the $y$-beam $[2t+1, 2t+2] \\times [0, n] \\times [2t, 2t+1]$,\n- the $x$-beam $[0, n] \\times [2t+1, 2t+2] \\times [2t+1, 2t+2]$.\n\n*No overlaps:* a $z$-beam and a $y$-beam have $x$-ranges $[2t,2t+1]$ and $[2s+1,2s+2]$, which never overlap in an interval; a $z$-beam and an $x$-beam have $y$-ranges $[2t,2t+1]$ and $[2u+1,2u+2]$; an $x$-beam and a $y$-beam have $z$-ranges $[2u+1,2u+2]$ and $[2s,2s+1]$. Beams of the same type are clearly disjoint.\n\n*Every long face is touched:*\n\n- $z$-beam $t$: its face $x = 2t+1$ is touched by $y$-beam $t$; its face $x = 2t$ by $y$-beam $t-1$ (or the cube if $t = 0$); its face $y = 2t+1$ by $x$-beam $t$; its face $y = 2t$ by $x$-beam $t-1$ (or the cube).\n- $y$-beam $s$: face $x = 2s+1$ by $z$-beam $s$; face $x = 2s+2$ by $z$-beam $s+1$ (or the cube if $2s+2 = n$); face $z = 2s$ by $x$-beam $s-1$ (or the cube); face $z = 2s+1$ by $x$-beam $s$.\n- $x$-beam $u$: face $y = 2u+1$ by $z$-beam $u$; face $y = 2u+2$ by $z$-beam $u+1$ (or the cube); face $z = 2u+1$ by $y$-beam $u$; face $z = 2u+2$ by $y$-beam $u+1$ (or the cube).\n\nIn each case the two faces overlap in a unit square, as one checks from the coordinates. This uses $3 \\cdot \\frac n2 = 3030$ beams.\n\n**Answer: 3030**"
+      }
+    ],
+    "topics": [
+      "spatial",
+      "counting",
+      "logic"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamo-usajmo-2020-04",
+    "bank": "usamo",
+    "source": {
+      "contest": "USAJMO",
+      "paper": "USAJMO 2020",
+      "year": 2020,
+      "number": 4,
+      "url": "https://web.evanchen.cc/exams/JMO-2020-notes.pdf"
+    },
+    "grade": "7-10",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $ABCD$ be a convex quadrilateral inscribed in a circle and satisfying $DA < AB = BC < CD$. Points $E$ and $F$ are chosen on sides $CD$ and $AB$ such that $BE \\perp AC$ and $EF \\parallel BC$. Prove that $FB = FD$.",
+    "image": null,
+    "choices": null,
+    "answer": "$BE$ bisects $\\angle ABC$, so $\\angle FEB = \\angle EBC = \\angle FBE$ and $FE = FB$; then the inscribed-angle theorem shows $D$ lies on the circle centered at $F$ through $B$ and $E$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "F is the circumcenter of BED",
+        "body": "Since $BA = BC$, the line through $B$ perpendicular to $AC$ is the axis of symmetry of the isosceles triangle $ABC$; it bisects $\\angle ABC$ and passes through the midpoint of $AC$. Thus $E$ lies on this bisector. Let $\\theta = \\angle EBC = \\angle EBA$, so $\\angle ABC = 2\\theta$ and $\\angle BAC = \\angle BCA = 90^\\circ - \\theta$.\n\n**Step 1: $FE = FB$.** Since $EF \\parallel BC$, alternate angles give $\\angle FEB = \\angle EBC = \\theta = \\angle EBF$. So triangle $FBE$ is isosceles with $FE = FB$, and its apex angle is $\\angle BFE = 180^\\circ - 2\\theta$.\n\n**Step 2: $D$ lies on the circle $\\Gamma$ centered at $F$ through $B$ and $E$.** Inscribed angles on the circle $ABCD$ give $\\angle BDE = \\angle BDC = \\angle BAC = 90^\\circ - \\theta = \\frac12 \\angle BFE$.\n\nNow check sides. The line $BE$ is the perpendicular bisector of $AC$; it meets the circumcircle again at the midpoint $B'$ of arc $ADC$. Since $DA < DC$, the point $D$ is on the arc $AB'$, i.e. on the same side of line $BE$ as $A$. The point $F$ is on segment $AB$, also on $A$'s side. In the circle $\\Gamma$, the points $X$ on the same side of chord $BE$ as the center $F$ that see $BE$ under the angle $\\frac12\\angle BFE$ are exactly the points of the major arc. Since $D$ is on that side and $\\angle BDE = \\frac12\\angle BFE$, $D$ lies on $\\Gamma$.\n\nHence $FD = FB$ (both are radii of $\\Gamma$). ∎"
+      },
+      {
+        "title": "Angle chase with Reim's theorem",
+        "body": "We use directed angles $\\measuredangle$ modulo $180^\\circ$. Since $A, B, C, D$ are concyclic and $FE \\parallel BC$ with $F \\in AB$ and $E \\in CD$, Reim's theorem gives that $A, F, E, D$ are concyclic. Also $E$ lies on the perpendicular bisector of $AC$, so $EA = EC$. Then\n$$\\measuredangle FDB = \\measuredangle FDC - \\measuredangle BDC = \\measuredangle FAE - \\measuredangle FAC = \\measuredangle CAE = \\measuredangle ECA = \\measuredangle DCA = \\measuredangle DBA = \\measuredangle DBF.$$\n(Here we used: $AFED$ cyclic; $B, D, C, A$ concyclic; $EA = EC$; $E \\in CD$; and again $ABCD$ cyclic.) So $\\measuredangle FDB = \\measuredangle DBF$, the triangle $FBD$ is isosceles, and $FB = FD$. ∎"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamo-usajmo-2020-05",
+    "bank": "usamo",
+    "source": {
+      "contest": "USAJMO",
+      "paper": "USAJMO 2020",
+      "year": 2020,
+      "number": 5,
+      "url": "https://web.evanchen.cc/exams/JMO-2020-notes.pdf"
+    },
+    "grade": "7-10",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Suppose that $(a_1, b_1), (a_2, b_2), \\dots, (a_{100}, b_{100})$ are distinct ordered pairs of nonnegative integers. Let $N$ denote the number of pairs of integers $(i, j)$ satisfying $1 \\le i < j \\le 100$ and $|a_i b_j - a_j b_i| = 1$. Determine the largest possible value of $N$ over all possible choices of the 100 ordered pairs.",
+    "image": null,
+    "choices": null,
+    "answer": "197",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Induction on the farthest point",
+        "body": "Think of $P_i = (a_i, b_i)$ as lattice points in the closed first quadrant and $O$ the origin; $|a_ib_j - a_jb_i| = 1$ means triangle $OP_iP_j$ has area $\\frac12$. Call such a pair **good**. We show that with $n$ points there are at most $2n - 3$ good pairs, and that $2n-3$ is attained; for $n = 100$ this is $197$.\n\n**Construction.** Take $(1, 0)$ and $(k, 1)$ for $k = 1, \\dots, 99$ (100 distinct points).\n- $(1,0)$ with $(k,1)$: $|1 \\cdot 1 - k \\cdot 0| = 1$, giving $99$ good pairs.\n- $(k,1)$ with $(k+1,1)$: $|k - (k+1)| = 1$, giving $98$ good pairs.\n\nTotal $197$.\n\n**Bound, by induction on $n$.** For $n = 2$ there is only one pair. Let $n \\ge 3$ and let $P = (a, b)$ be a point of the set at maximal distance $\\rho = OP > 0$ from $O$.\n\n*Claim: $P$ is in at most two good pairs.* If $d = \\gcd(a,b) > 1$, then $d$ divides $ay - bx$ for every lattice point $(x,y)$, so $P$ is in no good pair. If $\\gcd(a, b) = 1$, the points $X = (x,y)$ forming a good pair with $P$ satisfy $ay - bx = \\pm 1$, so they lie on two lines parallel to $OP$. Suppose two distinct points $X, Y$ of our set lie on the same one of these lines. The lattice points on such a line differ by integer multiples of $(a, b)$ (as $\\gcd(a,b) = 1$), so, naming them suitably, $Y = X + t(a,b)$ with $t \\ge 1$. Then, since all coordinates are nonnegative,\n$$OY^2 = OX^2 + 2t\\,(ax + by) + t^2\\rho^2 \\ge \\rho^2,$$\nwith equality only if $X = O$; but $O$ is not on the line ($|a\\cdot 0 - b \\cdot 0| = 0$). So $OY > \\rho$, contradicting the maximality of $\\rho$. Hence each line contains at most one point of the set, and $P$ is in at most two good pairs.\n\nDeleting $P$ and using the induction hypothesis for the other $n-1$ points gives at most $(2(n-1) - 3) + 2 = 2n - 3$ good pairs.\n\n**Answer: 197**"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "geometry",
+      "counting"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamo-usajmo-2020-06",
+    "bank": "usamo",
+    "source": {
+      "contest": "USAJMO",
+      "paper": "USAJMO 2020",
+      "year": 2020,
+      "number": 6,
+      "url": "https://web.evanchen.cc/exams/JMO-2020-notes.pdf"
+    },
+    "grade": "7-10",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $n \\ge 2$ be an integer. Let $P(x_1, x_2, \\dots, x_n)$ be a nonconstant $n$-variable polynomial with real coefficients. Assuming that $P$ vanishes whenever two of its arguments are equal, prove that $P$ has at least $n!$ terms.",
+    "image": null,
+    "choices": null,
+    "answer": "No monomial of $P$ misses two variables; after dividing out monomial factors, setting each $x_i = 0$ gives a smaller polynomial of the same kind, so induction gives $n \\cdot (n-1)! = n!$ terms (equality for the Vandermonde product).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Induction by setting one variable to zero",
+        "body": "\"Terms\" means monomials with nonzero coefficient.\n\n**Claim.** For $i \\ne j$, no term of $P$ omits both $x_i$ and $x_j$.\n\n*Proof.* Substitute $x_i = x_j = 0$. The result is a polynomial in the other $n-2$ variables which vanishes for all real values of them (because two arguments of $P$ are equal), so it is the zero polynomial (a polynomial vanishing on all of $\\mathbb R^{m}$ is zero, as $\\mathbb R$ is infinite). Its coefficients are exactly the coefficients of the terms of $P$ omitting both $x_i$ and $x_j$, so there are no such terms. (For $n = 2$ this says $P(0,0) = 0$, i.e. no constant term.) $\\square$\n\n**Reduction.** Write $P = m \\cdot P_0$ with $m$ a monomial and $P_0$ divisible by no $x_i$. Then $P$ and $P_0$ have the same number of terms. $P_0$ vanishes whenever two arguments are equal: on the set where two given arguments are equal, $P_0 = P/m$ vanishes wherever all $x_k \\neq 0$, which is dense in that set, so by continuity it vanishes everywhere there. And $P_0$ is not constant: otherwise $P = c\\, m$ with $c \\ne 0$, which is nonzero at $x_1 = \\dots = x_n = 1$, although two arguments are equal there. So we may assume no $x_i$ divides $P$.\n\n**Induction on $n$.** For $n = 2$: by the claim $P$ has no constant term; if $P$ were a single term $c\\,x_1^a x_2^b$ with $a + b \\ge 1$, then $P(1,1) = c \\ne 0$, contradiction. So $P$ has at least $2 = 2!$ terms.\n\nLet $n \\ge 3$, with no $x_i$ dividing $P$. For each $i$, let $P_i$ be $P$ with $x_i = 0$, a polynomial in the remaining $n - 1$ variables.\n- $P_i \\ne 0$, because $x_i \\nmid P$.\n- $P_i$ vanishes whenever two of its arguments are equal (since $P$ does).\n- $P_i$ is not a nonzero constant: it vanishes when two of its (at least two) arguments are equal.\n\nBy the induction hypothesis $P_i$ has at least $(n-1)!$ terms. Each term of $P_i$ is a term of $P$ that does not contain $x_i$. By the claim, a term of $P$ cannot omit two different variables, so the terms counted for different $i$ are different terms of $P$. Therefore $P$ has at least $n \\cdot (n-1)! = n!$ terms. ∎\n\n*Remark.* The Vandermonde polynomial $\\prod_{i<j}(x_i - x_j)$ has exactly $n!$ terms, so the bound is sharp."
+      }
+    ],
+    "topics": [
+      "polynomials",
+      "algebra"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

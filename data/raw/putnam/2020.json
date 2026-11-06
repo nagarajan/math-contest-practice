@@ -1,0 +1,436 @@
+[
+  {
+    "id": "putnam-2020-a1",
+    "bank": "putnam",
+    "source": {
+      "contest": "Putnam",
+      "paper": "81st William Lowell Putnam Mathematical Competition (held February 20, 2021)",
+      "year": 2020,
+      "number": "A1",
+      "url": "https://kskedlaya.org/putnam-archive/"
+    },
+    "grade": "undergrad",
+    "points": 10,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "How many positive integers $N$ satisfy all of the following three conditions?\n\n- (i) $N$ is divisible by 2020.\n- (ii) $N$ has at most 2020 decimal digits.\n- (iii) The decimal digits of $N$ are a string of consecutive ones followed by a string of consecutive zeros.",
+    "image": null,
+    "choices": null,
+    "answer": "508536",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Repunits and the order of 10 mod 101",
+        "body": "**Form of $N$.** Conditions (ii)–(iii) say $N = R_L\\cdot10^b$, where $R_L = \\underbrace{11\\cdots1}_{L} = \\frac{10^L-1}{9}$ with $L\\ge1$ ones, $b\\ge0$ zeros, and $L + b\\le2020$.\n\n**Divisibility by $2020 = 2^2\\cdot5\\cdot101$.**\n- $R_L$ is odd and ends in $1$, so it is coprime to $10$; hence $2^2\\cdot5\\mid N$ iff $2^2\\cdot5\\mid10^b$ iff $b\\ge2$.\n- $\\gcd(101,10)=\\gcd(101,9) = 1$, so $101\\mid N$ iff $101\\mid10^L-1$. Since $10^2 = 100\\equiv-1\\pmod{101}$, the powers $10^1,10^2,10^3,10^4$ are $\\equiv 10,-1,-10,1$: the order of $10$ is $4$. So $101\\mid10^L-1$ iff $4\\mid L$.\n\n**Count.** We need pairs $(b,L)$ with $b\\ge2$, $L\\ge4$, $4\\mid L$, $b+L\\le2020$. For fixed $b$ there are $\\left\\lfloor\\frac{2020-b}4\\right\\rfloor$ choices of $L$. With $t = 2020-b$ running over $4,5,\\dots,2018$:\n$$\\sum_{t=4}^{2018}\\left\\lfloor\\frac t4\\right\\rfloor = 4(1+2+\\cdots+503) + 3\\cdot504 = 2\\cdot503\\cdot504 + 1512 = 508536 .$$\n\n**Answer:** $508536$."
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "counting"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "putnam-2020-a2",
+    "bank": "putnam",
+    "source": {
+      "contest": "Putnam",
+      "paper": "81st William Lowell Putnam Mathematical Competition (held February 20, 2021)",
+      "year": 2020,
+      "number": "A2",
+      "url": "https://kskedlaya.org/putnam-archive/"
+    },
+    "grade": "undergrad",
+    "points": 10,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $k$ be a nonnegative integer. Evaluate\n$$\\sum_{j=0}^k 2^{k-j} \\binom{k+j}{j}.$$",
+    "image": null,
+    "choices": null,
+    "answer": "$4^k$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Coin flips",
+        "body": "Flip a fair coin repeatedly and let $X$ be the index of the flip on which the $(k+1)$-st head appears. $X = k+j+1$ means exactly $k$ heads among the first $k+j$ flips and a head on flip $k+j+1$, so\n$$P[X = k+j+1] = \\binom{k+j}{k}2^{-(k+j+1)} = \\binom{k+j}{j}2^{-(k+j+1)}.$$\nSince $2^{k-j} = 2^{2k+1}\\cdot2^{-(k+j+1)}$,\n$$\\sum_{j=0}^k2^{k-j}\\binom{k+j}j = 2^{2k+1}\\,P[X\\le2k+1].$$\nNow $X\\le2k+1$ iff at least $k+1$ of the first $2k+1$ flips are heads. Among $2k+1$ flips exactly one of \"at least $k+1$ heads\" and \"at least $k+1$ tails\" happens, and by symmetry they are equally likely, so $P[X\\le2k+1] = \\frac12$.\n\n**Answer:** $2^{2k+1}\\cdot\\frac12 = 4^k$."
+      },
+      {
+        "title": "A recurrence via Pascal's rule",
+        "body": "Let $S_k$ be the sum; $S_0 = 1$. For $k\\ge1$, apply Pascal's rule $\\binom{k+j}{j} = \\binom{k-1+j}{j} + \\binom{k-1+j}{j-1}$:\n$$S_k = \\underbrace{\\sum_{j=0}^k2^{k-j}\\binom{k-1+j}j}_{(I)} + \\underbrace{\\sum_{j=1}^k2^{k-j}\\binom{k-1+j}{j-1}}_{(II)} .$$\n- $(I)$: the terms $j\\le k-1$ give $2S_{k-1}$, and $j=k$ gives $\\binom{2k-1}k$. So $(I) = 2S_{k-1} + \\binom{2k-1}{k}$.\n- $(II)$: with $i = j-1$, $(II) = \\sum_{i=0}^{k-1}2^{k-1-i}\\binom{k+i}{i} = \\frac12\\left(S_k - \\binom{2k}k\\right)$.\n\nSince $\\binom{2k}{k} = 2\\binom{2k-1}{k}$, the binomial terms cancel:\n$$S_k = 2S_{k-1} + \\tfrac12S_k\\quad\\Longrightarrow\\quad S_k = 4S_{k-1}.$$\nWith $S_0 = 1$ this gives $S_k = 4^k$. (Check: $k=1$: $2+2 = 4$; $k=2$: $4+6+6 = 16$.)\n\n**Answer:** $4^k$."
+      }
+    ],
+    "topics": [
+      "counting",
+      "probability",
+      "sequences-series"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "putnam-2020-a3",
+    "bank": "putnam",
+    "source": {
+      "contest": "Putnam",
+      "paper": "81st William Lowell Putnam Mathematical Competition (held February 20, 2021)",
+      "year": 2020,
+      "number": "A3",
+      "url": "https://kskedlaya.org/putnam-archive/"
+    },
+    "grade": "undergrad",
+    "points": 10,
+    "timeMinutes": null,
+    "type": "text",
+    "prompt": "Let $a_0 = \\pi/2$, and let $a_n = \\sin(a_{n-1})$ for $n \\geq 1$. Determine whether\n$$\\sum_{n=1}^\\infty a_n^2$$\nconverges.",
+    "image": null,
+    "choices": null,
+    "answer": "Diverges",
+    "acceptedAnswers": [
+      "diverge",
+      "divergent",
+      "it diverges",
+      "does not converge",
+      "no"
+    ],
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Compare with the harmonic series",
+        "body": "**The series diverges.** Since $0<\\sin x<x$ for $x>0$, the sequence is positive and decreasing, with $a_1 = \\sin\\frac\\pi2 = 1$, so $a_n\\in(0,1]$ for $n\\ge1$.\n\n**A lower bound for $\\sin$.** By Taylor's theorem, $\\sin x = x - \\frac{x^3}6 + \\frac{\\sin c}{24}x^4$ for some $c$ between $0$ and $x$; for $x\\in[0,1]$, $\\sin c\\ge0$, so $\\sin x\\ge x - \\frac{x^3}6$.\n\n**Claim: $a_n\\ge\\frac1{\\sqrt n}$ for all $n\\ge1$.** True for $n=1$. If $a_n\\ge\\frac1{\\sqrt n}$, then since $\\sin$ is increasing on $[0,1]$, with $x = \\frac1{\\sqrt n}$,\n$$a_{n+1} = \\sin a_n \\ge \\sin x\\ge x - \\frac{x^3}6 = \\frac{6n-1}{6n\\sqrt n}.$$\nIt suffices that $\\frac{(6n-1)^2}{36n^3}\\ge\\frac1{n+1}$, i.e. $(n+1)(6n-1)^2\\ge36n^3$. Expanding, $(n+1)(6n-1)^2 = 36n^3 + 24n^2 - 11n + 1$, and $24n^2-11n+1 = (3n-1)(8n-1) > 0$. This completes the induction.\n\nHence $a_n^2\\ge\\frac1n$ and $\\sum a_n^2$ diverges by comparison with the harmonic series.\n\n**Answer:** the series **diverges**. (In fact $a_n\\sim\\sqrt{3/n}$.)"
+      }
+    ],
+    "topics": [
+      "sequences-series",
+      "real-analysis"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "putnam-2020-a4",
+    "bank": "putnam",
+    "source": {
+      "contest": "Putnam",
+      "paper": "81st William Lowell Putnam Mathematical Competition (held February 20, 2021)",
+      "year": 2020,
+      "number": "A4",
+      "url": "https://kskedlaya.org/putnam-archive/"
+    },
+    "grade": "undergrad",
+    "points": 10,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Consider a horizontal strip of $N+2$ squares in which the first and the last square are black and the remaining $N$ squares are all white. Choose a white square uniformly at random, choose one of its two neighbors with equal probability, and color this neighboring square black if it is not already black. Repeat this process until all the remaining white squares have only black neighbors. Let $w(N)$ be the expected number of white squares remaining. Find\n$$\\lim_{N \\to \\infty} \\frac{w(N)}{N}.$$",
+    "image": null,
+    "choices": null,
+    "answer": "1/e",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "answerDisplay": "$\\frac{1}{e}$",
+    "solutions": [
+      {
+        "title": "Condition on the first square colored",
+        "body": "Number the squares $1,\\dots,N+2$. Clearly $w(0) = 0$ and $w(1) = 1$ (the process stops at once).\n\n**The first change.** Let $N\\ge2$. A step changes something only if the chosen neighbour is white. Among the $2N$ equally likely (square, direction) choices, exactly $2(N-1)$ do this, so the first square to turn black is distributed as follows: square $i$ with $3\\le i\\le N$ can be reached in $2$ ways (from $i-1$ or $i+1$), squares $2$ and $N+1$ in $1$ way each. So\n$$P(\\text{first new black square is } i) = \\begin{cases}\\frac1{2(N-1)} & i = 2 \\text{ or } i = N+1,\\\\[2pt] \\frac1{N-1} & 3\\le i\\le N.\\end{cases}$$\n\n**Splitting.** Once square $i$ is black, the strip splits into two independent strips of the same kind: squares $1..i$ with $i-2$ white squares and squares $i..N+2$ with $N+1-i$ white squares. (Restricting the process to the steps that pick a square in one part gives exactly the process for that part, since the white square is chosen uniformly.) So, conditioned on $i$, the expected final number of white squares is $w(i-2) + w(N+1-i)$.\n\n**Recurrence.** Using $w(0) = 0$ and $\\sum_{i=3}^{N}\\big(w(i-2)+w(N+1-i)\\big) = 2\\sum_{m=1}^{N-2}w(m)$:\n$$w(N) = \\frac{2\\,w(N-1)}{2(N-1)} + \\frac{2}{N-1}\\sum_{m=1}^{N-2}w(m),\\qquad\\text{i.e.}\\qquad (N-1)w(N) = w(N-1) + 2\\sum_{m=1}^{N-2}w(m).$$\nSubtracting the same identity for $N-1$ (valid for $N\\ge3$): $(N-1)w(N) - (N-2)w(N-1) = w(N-1) + w(N-2)$, so\n$$w(N) = w(N-1) + \\frac{w(N-2)}{N-1}\\qquad(N\\ge2)$$\n(for $N=2$ check directly: $w(2) = 1$).\n\n**Closed form.** Let $E_m = \\sum_{k=0}^{m}\\frac{(-1)^k}{k!}$. We claim $w(N) = (N+1)E_{N+1}$. It holds for $N = 0, 1$ ($E_1 = 0$, $2E_2 = 1$). If it holds for $N-1, N-2$, then\n$$w(N) = NE_N + E_{N-1} = (N+1)E_{N-1} + \\frac{N(-1)^N}{N!},$$\nand $(N+1)\\left(\\frac{(-1)^N}{N!} + \\frac{(-1)^{N+1}}{(N+1)!}\\right) = \\frac{(N+1)(-1)^N - (-1)^N}{N!} = \\frac{N(-1)^N}{N!}$, so $w(N) = (N+1)E_{N+1}$.\n\n**Limit.** $\\dfrac{w(N)}{N} = \\dfrac{N+1}{N}E_{N+1}\\to\\sum_{k\\ge0}\\dfrac{(-1)^k}{k!} = e^{-1}$.\n\n**Answer:** $\\dfrac1e$."
+      }
+    ],
+    "topics": [
+      "probability",
+      "sequences-series"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "putnam-2020-a5",
+    "bank": "putnam",
+    "source": {
+      "contest": "Putnam",
+      "paper": "81st William Lowell Putnam Mathematical Competition (held February 20, 2021)",
+      "year": 2020,
+      "number": "A5",
+      "url": "https://kskedlaya.org/putnam-archive/"
+    },
+    "grade": "undergrad",
+    "points": 10,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $a_n$ be the number of sets $S$ of positive integers for which\n$$\\sum_{k \\in S} F_k = n,$$\nwhere the Fibonacci sequence $(F_k)_{k \\geq 1}$ satisfies $F_{k+2} = F_{k+1} + F_k$ and begins $F_1 = 1, F_2 = 1, F_3 = 2, F_4 = 3$. Find the largest integer $n$ such that $a_n = 2020$.",
+    "image": null,
+    "choices": null,
+    "answer": "$n = F_{4040} - 1$. (Recursion $a_n = a_{n-F_m} + a_{F_{m+1}-1-n}$ for $F_m\\le n<F_{m+1}$; then $a_{F_m} = a_{F_{m+1}-1} = \\lfloor\\frac{m+2}2\\rfloor$ is the minimum of $a_n$ on $[F_m, F_{m+1})$.)",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "A recursion and the minimum on each Fibonacci block",
+        "body": "Note that $F_1 = F_2 = 1$ are different indices, so e.g. $1 = F_1 = F_2$ gives $a_1 = 2$. Set $a_0 = 1$ (empty set). Direct enumeration gives $a_1 = a_2 = 2$ (sets $\\{1\\},\\{2\\}$; $\\{3\\},\\{1,2\\}$) and $a_3 = a_4 = 3$ ($\\{4\\},\\{1,3\\},\\{2,3\\}$; $\\{1,4\\},\\{2,4\\},\\{1,2,3\\}$). We use $F_1 + \\cdots + F_{m-1} = F_{m+1}-1$ (induction).\n\n**Lemma 1.** For $m\\ge2$ and $F_m\\le n<F_{m+1}$:\n$$a_n = a_{n-F_m} + a_{F_{m+1}-1-n}.$$\n*Proof.* Any $S$ with sum $n$ lies in $\\{1,\\dots,m\\}$ since $F_k\\ge F_{m+1}>n$ for $k>m$.\n- If $m\\in S$: $S\\setminus\\{m\\}$ represents $n-F_m$. Conversely any representation of $n - F_m< F_{m+1}-F_m = F_{m-1}$ uses only indices $\\le m-2$, so adding $m$ is valid. This gives $a_{n-F_m}$ sets.\n- If $m\\notin S$: $S\\subseteq\\{1,\\dots,m-1\\}$, whose total is $F_{m+1}-1$, so the complement $T = \\{1,\\dots,m-1\\}\\setminus S$ represents $F_{m+1}-1-n$. Conversely, any representation of $F_{m+1}-1-n\\le F_{m-1}-1$ uses only indices $\\le m-2$, hence lies in $\\{1,\\dots,m-1\\}$, and its complement there represents $n$. This gives $a_{F_{m+1}-1-n}$ sets. ∎\n\n**Lemma 2.** For $m\\ge2$: $a_{F_m} = a_{F_{m+1}-1} = \\left\\lfloor\\frac{m+2}2\\right\\rfloor$.\n*Proof.* For $m = 2,3,4$ this is $a_1 = 2$, $a_2 = 2$, $a_3 = a_4 = 3$. For $m\\ge5$, Lemma 1 with $n = F_m$ and with $n = F_{m+1}-1$ gives\n$$a_{F_m} = a_0 + a_{F_{m-1}-1},\\qquad a_{F_{m+1}-1} = a_{F_{m-1}-1} + a_0,$$\nand by induction ($m-2$ in place of $m$) $a_{F_{m-1}-1} = \\left\\lfloor\\frac m2\\right\\rfloor$, so both equal $1+\\left\\lfloor\\frac m2\\right\\rfloor = \\left\\lfloor\\frac{m+2}2\\right\\rfloor$. ∎\n\nIn particular ($m = 4039$): $a_{F_{4040}-1} = \\left\\lfloor\\frac{4041}{2}\\right\\rfloor = 2020$.\n\n**Lemma 3.** For $m\\ge2$ and $F_m\\le n<F_{m+1}$: $a_n\\ge\\left\\lfloor\\frac{m+2}2\\right\\rfloor$.\n*Proof.* Strong induction on $m$. For $m\\le4$ it follows from the values above. Let $m\\ge5$; by Lemma 2 we may assume $n\\ne F_m, F_{m+1}-1$. Put $u = n - F_m$ and $v = F_{m+1}-1-n$; then $u,v\\ge1$, $u+v = F_{m-1}-1$, and $a_n = a_u + a_v$ by Lemma 1. By induction, every $t\\ge1$ has $a_t\\ge2$, and $t\\ge F_k$ ($k\\ge2$, $k<m$) implies $a_t\\ge\\left\\lfloor\\frac{k+2}2\\right\\rfloor$ (as $t$ lies in a block $[F_{k'},F_{k'+1})$ with $k'\\ge k$).\n- If $\\max(u,v)\\ge F_{m-2}$: $a_n\\ge\\left\\lfloor\\frac{m}2\\right\\rfloor + 2>\\left\\lfloor\\frac{m+2}2\\right\\rfloor$.\n- Otherwise both $u,v\\ge(F_{m-1}-1) - (F_{m-2}-1) = F_{m-3}$, so $a_n\\ge2\\left\\lfloor\\frac{m-1}2\\right\\rfloor\\ge m-2\\ge\\left\\lfloor\\frac{m+2}2\\right\\rfloor$ (the last step uses $m\\ge5$). ∎\n\n**Conclusion.** If $n\\ge F_{4040}$, then $n\\in[F_m,F_{m+1})$ with $m\\ge4040$, so $a_n\\ge\\left\\lfloor\\frac{4042}2\\right\\rfloor = 2021$. Combined with $a_{F_{4040}-1} = 2020$:\n\n**Answer:** $n = F_{4040}-1$."
+      }
+    ],
+    "topics": [
+      "counting",
+      "sequences-series",
+      "number-theory"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "putnam-2020-a6",
+    "bank": "putnam",
+    "source": {
+      "contest": "Putnam",
+      "paper": "81st William Lowell Putnam Mathematical Competition (held February 20, 2021)",
+      "year": 2020,
+      "number": "A6",
+      "url": "https://kskedlaya.org/putnam-archive/"
+    },
+    "grade": "undergrad",
+    "points": 10,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "For a positive integer $N$, let $f_N$ be the function defined by\n$$f_N(x) = \\sum_{n=0}^N \\frac{N+1/2-n}{(N+1)(2n+1)} \\sin((2n+1)x).$$\nDetermine the smallest constant $M$ such that $f_N(x) \\leq M$ for all $N$ and all real $x$.",
+    "image": null,
+    "choices": null,
+    "answer": "pi/4",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "answerDisplay": "$M = \\frac{\\pi}{4}$",
+    "solutions": [
+      {
+        "title": "Locate the maximum with the derivative",
+        "body": "**Derivative.** $f_N'(x) = \\dfrac{1}{N+1}\\displaystyle\\sum_{n=0}^N\\left(N+\\tfrac12-n\\right)\\cos((2n+1)x)$. Two telescoping sums (multiply by $2\\sin x$):\n$$\\sum_{n=0}^{m-1}\\cos((2n+1)x) = \\frac{\\sin(2mx)}{2\\sin x},\\qquad \\sum_{m=1}^{K}\\sin(2mx) = \\frac{\\sin(Kx)\\sin((K+1)x)}{\\sin x}.$$\nWrite $N+\\frac12-n = (N+1-n) - \\frac12$ and note $\\sum_{n=0}^{N}(N+1-n)\\cos((2n+1)x) = \\sum_{m=1}^{N+1}\\sum_{n=0}^{m-1}\\cos((2n+1)x)$. Hence, for $\\sin x\\ne0$,\n$$(N+1)f_N'(x) = \\frac{\\sin((N+1)x)\\sin((N+2)x)}{2\\sin^2x} - \\frac{\\sin((2N+2)x)}{4\\sin x} = \\frac{\\sin((N+1)x)}{2\\sin^2x}\\Big(\\sin((N+2)x) - \\cos((N+1)x)\\sin x\\Big).$$\nSince $\\sin((N+2)x) = \\sin((N+1)x)\\cos x + \\cos((N+1)x)\\sin x$,\n$$f_N'(x) = \\frac{\\cos x\\,\\sin^2((N+1)x)}{2(N+1)\\sin^2x}.$$\n\n**Where the maximum is.** $f_N'\\ge0$ on $(0,\\frac\\pi2]$ and $\\le0$ on $[\\frac\\pi2,\\pi)$. Also $f_N$ is odd, $2\\pi$-periodic, $f_N(0) = 0$, and $f_N(\\pi - x) = f_N(x)$. So $f_N\\ge0$ on $[0,\\pi]$, $f_N\\le0$ on $[-\\pi,0]$, and\n$$\\max_{x\\in\\mathbb R}f_N(x) = f_N\\!\\left(\\tfrac\\pi2\\right) = \\sum_{n=0}^N\\frac{(-1)^n}{2n+1} - \\frac{1}{2(N+1)}\\sum_{n=0}^N(-1)^n,$$\nusing $\\frac{N+1/2-n}{N+1} = 1 - \\frac{2n+1}{2(N+1)}$.\n\n**Compare with $\\pi/4$.** Let $L_N = \\sum_{n=0}^N\\frac{(-1)^n}{2n+1}$. By the Leibniz series $\\frac\\pi4 = 1-\\frac13+\\frac15-\\cdots$ (alternating, terms decreasing), $\\frac\\pi4$ lies strictly between $L_N$ and $L_{N+1}$.\n- $N$ odd: $f_N(\\frac\\pi2) = L_N<\\frac\\pi4$.\n- $N$ even: $f_N(\\frac\\pi2) = L_N - \\frac{1}{2N+2}<L_N - \\frac1{2N+3} = L_{N+1}<\\frac\\pi4$.\n\nSo $f_N(x)<\\frac\\pi4$ for all $N$ and $x$, while $f_N(\\frac\\pi2)\\to\\frac\\pi4$ as $N\\to\\infty$ (since $L_N\\to\\frac\\pi4$ and $\\frac1{2N+2}\\to0$). Hence no smaller constant works.\n\n**Answer:** $M = \\dfrac\\pi4$."
+      },
+      {
+        "title": "Monotonicity in N and the square wave",
+        "body": "Rewrite\n$$f_N(x) = \\sum_{n=0}^N\\frac12\\left(\\frac2{2n+1} - \\frac1{N+1}\\right)\\sin((2n+1)x) = \\sum_{n=0}^N\\frac{\\sin((2n+1)x)}{2n+1} - \\frac{1-\\cos((2N+2)x)}{4(N+1)\\sin x},$$\nusing $\\sum_{n=0}^N\\sin((2n+1)x) = \\frac{1-\\cos((2N+2)x)}{2\\sin x}$, which is $\\ge0$ when $\\sin x>0$.\n\n**$f_N(x)$ increases with $N$ for $x\\in(0,\\pi)$.** Compare $f_{N+1}$ and $f_N$ term by term: the coefficients of $\\sin((2n+1)x)$ for $n\\le N$ increase by $\\frac12\\left(\\frac1{N+1}-\\frac1{N+2}\\right)$, and $f_{N+1}$ has an extra term with coefficient $\\frac12\\left(\\frac{2}{2N+3}-\\frac1{N+2}\\right) = \\frac{1}{2(N+2)(2N+3)}$. If $\\sin((2N+3)x)\\ge0$, drop the extra term; otherwise note that it is at least $\\frac12\\left(\\frac1{N+1}-\\frac1{N+2}\\right)\\sin((2N+3)x)$. Either way\n$$f_{N+1}(x)-f_N(x)\\ge\\frac12\\left(\\frac1{N+1}-\\frac1{N+2}\\right)\\sum_{n=0}^{N\\text{ or }N+1}\\sin((2n+1)x)\\ge0 .$$\n\n**The limit.** The correction term tends to $0$, so $\\lim_N f_N(x) = \\sum_{n\\ge0}\\frac{\\sin((2n+1)x)}{2n+1}$, the Fourier series of the square wave equal to $\\frac\\pi4$ on $(0,\\pi)$; it converges to $\\frac\\pi4$ there (the function is smooth on $(0,\\pi)$).\n\nSo for $x\\in(0,\\pi)$, $0\\le f_1(x)\\le f_2(x)\\le\\cdots\\to\\frac\\pi4$, hence $f_N(x)\\le\\frac\\pi4$, with values arbitrarily close to $\\frac\\pi4$. By oddness and periodicity, $f_N\\le0$ on $(-\\pi,0)$ and $f_N(0) = f_N(\\pi) = 0$.\n\n**Answer:** $M = \\dfrac\\pi4$."
+      }
+    ],
+    "topics": [
+      "trigonometry",
+      "real-analysis",
+      "sequences-series"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "putnam-2020-b1",
+    "bank": "putnam",
+    "source": {
+      "contest": "Putnam",
+      "paper": "81st William Lowell Putnam Mathematical Competition (held February 20, 2021)",
+      "year": 2020,
+      "number": "B1",
+      "url": "https://kskedlaya.org/putnam-archive/"
+    },
+    "grade": "undergrad",
+    "points": 10,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "For a positive integer $n$, define $d(n)$ to be the sum of the digits of $n$ when written in binary (for example, $d(13) = 1+1+0+1=3$). Let\n$$S = \\sum_{k=1}^{2020} (-1)^{d(k)} k^3.$$\nDetermine $S$ modulo 2020.",
+    "image": null,
+    "choices": null,
+    "answer": "1990",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Thue–Morse signs kill low-degree polynomials",
+        "body": "**Lemma.** If $P$ is a polynomial of degree $<m$, then $\\displaystyle\\sum_{k=0}^{2^m-1}(-1)^{d(k)}P(k) = 0$.\n*Proof.* Induction on $m$; for $m=0$, $P = 0$. Splitting $k<2^m$ as $k = k'$ or $k = k' + 2^{m-1}$ with $k'<2^{m-1}$, and using $d(k'+2^{m-1}) = d(k')+1$,\n$$\\sum_{k=0}^{2^m-1}(-1)^{d(k)}P(k) = \\sum_{k'=0}^{2^{m-1}-1}(-1)^{d(k')}\\big(P(k') - P(k'+2^{m-1})\\big),$$\nand $P(x) - P(x+2^{m-1})$ has degree $<m-1$. ∎\n\n**Apply it twice.**\n- With $m = 11$ and $P = x^3$: $\\sum_{k=0}^{2047}(-1)^{d(k)}k^3 = 0$.\n- $2016 = 11111100000_2$ has $d(2016) = 6$ and its last five binary digits are $0$, so $d(2016+j) = 6 + d(j)$ for $0\\le j<32$. With $m=5$ and $P(x) = (2016+x)^3$: $\\sum_{k=2016}^{2047}(-1)^{d(k)}k^3 = \\sum_{j=0}^{31}(-1)^{d(j)}(2016+j)^3 = 0$.\n\nSubtracting, $\\sum_{k=1}^{2015}(-1)^{d(k)}k^3 = 0$. Hence\n$$S = \\sum_{j=0}^{4}(-1)^{6+d(j)}(2016+j)^3 \\equiv \\sum_{j=0}^4(-1)^{d(j)}(j-4)^3 \\pmod{2020}.$$\nWith $d(0),\\dots,d(4) = 0,1,1,2,1$:\n$$(-4)^3 - (-3)^3 - (-2)^3 + (-1)^3 - 0 = -64 + 27 + 8 - 1 = -30 \\equiv 1990 \\pmod{2020}.$$\n\n**Answer:** $1990$."
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "polynomials"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "putnam-2020-b2",
+    "bank": "putnam",
+    "source": {
+      "contest": "Putnam",
+      "paper": "81st William Lowell Putnam Mathematical Competition (held February 20, 2021)",
+      "year": 2020,
+      "number": "B2",
+      "url": "https://kskedlaya.org/putnam-archive/"
+    },
+    "grade": "undergrad",
+    "points": 10,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $k$ and $n$ be integers with $1 \\leq k < n$. Alice and Bob play a game with $k$ pegs in a line of $n$ holes. At the beginning of the game, the pegs occupy the $k$ leftmost holes. A legal move consists of moving a single peg to any vacant hole that is further to the right. The players alternate moves, with Alice playing first. The game ends when the pegs are in the $k$ rightmost holes, so whoever is next to play cannot move and therefore loses. For what values of $n$ and $k$ does Alice have a winning strategy?",
+    "image": null,
+    "choices": null,
+    "answer": "Alice wins exactly when **at least one of $n$ and $k$ is odd**; if both are even, Bob wins (pairing strategy).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Pairing strategy and reductions",
+        "body": "Call the game with $n$ holes and $k$ pegs (pegs starting in the leftmost holes) the $(n,k)$-game; allow $0\\le k\\le n$ (for $k = 0$ or $k = n$ the first player cannot move and loses). The game always ends, since each move increases the sum of the peg positions.\n\n**Both even: the second player wins.** Group the holes into pairs $\\{1,2\\},\\{3,4\\},\\dots,\\{n-1,n\\}$. Call a position *good* if each pair is either full or empty; the start is good. From a good position, the mover must move a peg out of some full pair into a vacant hole further right, which lies in an empty pair to the right. The second player answers by moving the other peg of the source pair into the other hole of that destination pair (a vacant hole further right), restoring a good position. So the second player always has a reply and never loses; since the game is finite, the first player eventually cannot move.\n\n**At least one odd: Alice wins** by moving into a both-even game with Bob to move:\n- *$n$, $k$ both odd:* move the rightmost peg (hole $k$) to hole $n$. That peg and hole $n$ never matter again; what remains is the $(n-1,k-1)$-game, both even, with Bob to move.\n- *$n$ odd, $k$ even:* move the peg in hole $1$ to hole $k+1$. Hole $1$ can never be used again (pegs only move right), leaving the $(n-1,k)$-game on holes $2,\\dots,n$, both even.\n- *$n$ even, $k$ odd:* move the peg in hole $1$ to hole $n$. Holes $1$ and $n$ (with its peg) drop out, leaving the $(n-2,k-1)$-game on holes $2,\\dots,n-1$, both even.\n\nIn each case Bob moves first in a both-even game and loses.\n\n**Answer:** Alice has a winning strategy iff $n$ or $k$ is odd. ∎"
+      }
+    ],
+    "topics": [
+      "games",
+      "logic"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "putnam-2020-b3",
+    "bank": "putnam",
+    "source": {
+      "contest": "Putnam",
+      "paper": "81st William Lowell Putnam Mathematical Competition (held February 20, 2021)",
+      "year": 2020,
+      "number": "B3",
+      "url": "https://kskedlaya.org/putnam-archive/"
+    },
+    "grade": "undergrad",
+    "points": 10,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $x_0 = 1$, and let $\\delta$ be some constant satisfying $0 < \\delta < 1$. Iteratively, for $n=0,1,2,\\dots$, a point $x_{n+1}$ is chosen uniformly from the interval $[0, x_n]$. Let $Z$ be the smallest value of $n$ for which $x_n < \\delta$. Find the expected value of $Z$, as a function of $\\delta$.",
+    "image": null,
+    "choices": null,
+    "answer": "$E[Z] = 1 - \\ln\\delta$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Logarithms turn the process into a Poisson process",
+        "body": "Write $x_n = U_1U_2\\cdots U_n$ with $U_i$ independent and uniform on $[0,1]$ (choosing $x_{n+1}$ uniformly in $[0,x_n]$ is the same as $x_{n+1} = x_nU_{n+1}$). Then $E_i = -\\ln U_i$ are independent exponential random variables with mean $1$ (since $P(E_i>t) = P(U_i<e^{-t}) = e^{-t}$). Let $L = -\\ln\\delta>0$ and $T_n = E_1+\\cdots+E_n$, so $x_n\\ge\\delta\\iff T_n\\le L$.\n\nSince $x_n$ is decreasing, $Z>n\\iff x_n\\ge\\delta\\iff T_n\\le L$. Hence\n$$E[Z] = \\sum_{n\\ge0}P(Z>n) = \\sum_{n\\ge0}P(T_n\\le L).$$\n$T_n$ has the Gamma$(n,1)$ distribution, and $P(T_n\\le L) = e^{-L}\\sum_{j\\ge n}\\frac{L^j}{j!}$ (equivalently, the points $T_1<T_2<\\cdots$ form a rate-$1$ Poisson process, and $T_n\\le L$ iff at least $n$ points lie in $[0,L]$). Therefore\n$$E[Z] = e^{-L}\\sum_{n\\ge0}\\sum_{j\\ge n}\\frac{L^j}{j!} = e^{-L}\\sum_{j\\ge0}(j+1)\\frac{L^j}{j!} = e^{-L}(Le^L + e^L) = 1 + L.$$\n\n**Answer:** $E[Z] = 1 - \\ln\\delta$."
+      },
+      {
+        "title": "An integral equation",
+        "body": "Let $f(\\delta) = E[Z]$ for $0<\\delta\\le1$ (so $f(1) = 1$: $x_1<1$ almost surely). Condition on $x_1 = c$, uniform on $[0,1]$. If $c<\\delta$, then $Z = 1$. If $c\\ge\\delta$, the rest of the process is the original process scaled by $c$, with threshold $\\delta/c$ on the rescaled interval, so the expected remaining time is $f(\\delta/c)$. Thus\n$$f(\\delta) = \\delta + \\int_\\delta^1\\big(1+f(\\delta/c)\\big)\\,dc = 1 + \\int_\\delta^1 f(\\delta/c)\\,dc.$$\nPut $h(x) = f(1/x)$ for $x\\ge1$. Substituting $c = t/x$, i.e. $\\delta = 1/x$ and $\\delta/c = 1/t$,\n$$h(x) = 1 + \\int_{1/x}^1 h(cx)\\,dc = 1 + \\frac1x\\int_1^x h(t)\\,dt.$$\nSo $xh(x) - x = \\int_1^xh(t)\\,dt$; the right side is differentiable, hence so is $h$, and differentiating gives $h(x) + xh'(x) - 1 = h(x)$, i.e. $h'(x) = \\frac1x$. With $h(1) = 1$, $h(x) = 1+\\ln x$, so $f(\\delta) = 1-\\ln\\delta$.\n\n(This assumes $E[Z]$ is finite, which follows, e.g., from the first solution.)\n\n**Answer:** $1 - \\ln\\delta$."
+      }
+    ],
+    "topics": [
+      "probability",
+      "calculus"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "putnam-2020-b4",
+    "bank": "putnam",
+    "source": {
+      "contest": "Putnam",
+      "paper": "81st William Lowell Putnam Mathematical Competition (held February 20, 2021)",
+      "year": 2020,
+      "number": "B4",
+      "url": "https://kskedlaya.org/putnam-archive/"
+    },
+    "grade": "undergrad",
+    "points": 10,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Let $n$ be a positive integer, and let $V_n$ be the set of integer $(2n+1)$-tuples $\\mathbf{v} = (s_0, s_1, \\cdots, s_{2n-1}, s_{2n})$ for which $s_0 = s_{2n} = 0$ and $|s_j - s_{j-1}| = 1$ for $j=1,2,\\cdots,2n$. Define\n$$q(\\mathbf{v}) = 1 + \\sum_{j=1}^{2n-1} 3^{s_j},$$\nand let $M(n)$ be the average of $\\frac{1}{q(\\mathbf{v})}$ over all $\\mathbf{v} \\in V_n$. Evaluate $M(2020)$.",
+    "image": null,
+    "choices": null,
+    "answer": "1/4040",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "answerDisplay": "$\\frac{1}{4040}$",
+    "solutions": [
+      {
+        "title": "Cyclic shifts of the steps",
+        "body": "We show $M(n) = \\frac1{2n}$ for every $n$ (and any base in place of $3$), so $M(2020) = \\frac1{4040}$.\n\n**Steps.** $\\mathbf v\\in V_n$ corresponds to its step sequence $\\mathbf w = (w_1,\\dots,w_{2n})$, $w_j = s_j - s_{j-1}\\in\\{\\pm1\\}$, with exactly $n$ entries $+1$; let $W_n$ be the set of such sequences. Since $s_{2n} = 0$ and $3^0 = 1$,\n$$q(\\mathbf v) = \\sum_{j=1}^{2n}3^{s_j}.$$\n\n**Shifting.** Extend indices mod $2n$; because $\\sum w_i = 0$, the partial sums satisfy $s_{j+2n} = s_j$. Let $\\sigma_k\\mathbf w = (w_{k+1},w_{k+2},\\dots,w_{k+2n})$ be the cyclic shift by $k$. Its partial sums are $s_{j+k} - s_k$, so\n$$q(\\sigma_k\\mathbf w) = \\sum_{j=1}^{2n}3^{s_{j+k}-s_k} = 3^{-s_k}\\,q(\\mathbf w).$$\nTherefore, for every $\\mathbf w$,\n$$\\sum_{k=1}^{2n}\\frac{1}{q(\\sigma_k\\mathbf w)} = \\frac{\\sum_{k=1}^{2n}3^{s_k}}{q(\\mathbf w)} = 1 .$$\n\n**Average.** Each $\\sigma_k$ is a bijection of $W_n$, so $\\sum_{\\mathbf w}\\frac1{q(\\sigma_k\\mathbf w)} = \\sum_{\\mathbf w}\\frac1{q(\\mathbf w)}$ for each $k$. Averaging over $k$,\n$$\\sum_{\\mathbf w\\in W_n}\\frac1{q(\\mathbf w)} = \\frac1{2n}\\sum_{\\mathbf w}\\sum_{k=1}^{2n}\\frac1{q(\\sigma_k\\mathbf w)} = \\frac{|W_n|}{2n}.$$\nSo $M(n) = \\frac1{2n}$. (Check $n=1$: $V_1 = \\{(0,1,0),(0,-1,0)\\}$, and $\\frac12\\left(\\frac14 + \\frac34\\right) = \\frac12$.)\n\n**Answer:** $M(2020) = \\dfrac{1}{4040}$."
+      }
+    ],
+    "topics": [
+      "counting",
+      "probability",
+      "sequences-series"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "putnam-2020-b5",
+    "bank": "putnam",
+    "source": {
+      "contest": "Putnam",
+      "paper": "81st William Lowell Putnam Mathematical Competition (held February 20, 2021)",
+      "year": 2020,
+      "number": "B5",
+      "url": "https://kskedlaya.org/putnam-archive/"
+    },
+    "grade": "undergrad",
+    "points": 10,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "For $j \\in \\{1, 2, 3, 4\\}$, let $z_j$ be a complex number with $|z_j| = 1$ and $z_j \\neq 1$. Prove that\n$$3 - z_1 - z_2 - z_3 - z_4 + z_1 z_2 z_3 z_4 \\neq 0.$$",
+    "image": null,
+    "choices": null,
+    "answer": "Proof. If the expression were $0$, then $|3 - z_1 - z_2 - z_3| = |1 - z_1z_2z_3|$. Show $f = |3 - z_1 - z_2 - z_3|^2 - |1 - z_1z_2z_3|^2\\ge0$ on the torus with equality only if some $z_j = 1$: at critical points $\\sum\\partial f = 24\\prod\\sin\\frac{\\theta_i+\\theta_j}2 = 0$, so some $z_iz_j = 1$, where $f\\ge0$ is checked directly.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Minimize a function on the torus",
+        "body": "**Reduction.** Suppose the expression vanishes. Then $z_4(z_1z_2z_3 - 1) = z_1+z_2+z_3 - 3$, and taking absolute values ($|z_4| = 1$),\n$$|3 - z_1 - z_2 - z_3| = |1 - z_1z_2z_3|.$$\nSo it suffices to prove: **for $|z_1| = |z_2| = |z_3| = 1$, $|3-z_1-z_2-z_3|\\ge|1-z_1z_2z_3|$, with equality only if some $z_j = 1$** (contradicting the hypothesis).\n\n**The function.** Write $z_1 = e^{i\\alpha}$, $z_2 = e^{i\\beta}$, $z_3 = e^{i\\gamma}$ and expand $|3 - \\sum z_j|^2 = 9 - 6\\operatorname{Re}\\sum z_j + |\\sum z_j|^2$ and $|1 - z_1z_2z_3|^2 = 2 - 2\\cos(\\alpha+\\beta+\\gamma)$:\n$$f(\\alpha,\\beta,\\gamma) = |3-z_1-z_2-z_3|^2 - |1-z_1z_2z_3|^2 = 10 - 6(\\cos\\alpha+\\cos\\beta+\\cos\\gamma) + 2\\big(\\cos(\\alpha-\\beta)+\\cos(\\beta-\\gamma)+\\cos(\\gamma-\\alpha)\\big) + 2\\cos(\\alpha+\\beta+\\gamma).$$\n$f$ is smooth and $2\\pi$-periodic in each variable, so it attains a global minimum, at a point where $\\nabla f = 0$.\n\n**Critical points.** Differentiating, the $\\cos(\\text{difference})$ terms cancel in the sum of the partials:\n$$\\frac{\\partial f}{\\partial\\alpha}+\\frac{\\partial f}{\\partial\\beta}+\\frac{\\partial f}{\\partial\\gamma} = 6\\big(\\sin\\alpha+\\sin\\beta+\\sin\\gamma - \\sin(\\alpha+\\beta+\\gamma)\\big) = 24\\sin\\frac{\\alpha+\\beta}2\\,\\sin\\frac{\\beta+\\gamma}2\\,\\sin\\frac{\\gamma+\\alpha}2 .$$\n(Indeed $\\sin\\alpha+\\sin\\beta = 2\\sin\\frac{\\alpha+\\beta}2\\cos\\frac{\\alpha-\\beta}2$ and $\\sin\\gamma - \\sin(\\alpha+\\beta+\\gamma) = -2\\sin\\frac{\\alpha+\\beta}2\\cos\\frac{\\alpha+\\beta+2\\gamma}2$, and $\\cos\\frac{\\alpha-\\beta}2 - \\cos\\frac{\\alpha+\\beta+2\\gamma}2 = 2\\sin\\frac{\\alpha+\\gamma}2\\sin\\frac{\\beta+\\gamma}2$.)\nSo at a critical point one of $\\alpha+\\beta$, $\\beta+\\gamma$, $\\gamma+\\alpha$ is a multiple of $2\\pi$, i.e. $z_1z_2 = 1$, $z_2z_3 = 1$ or $z_3z_1 = 1$.\n\n**Value at such points.** By symmetry take $z_2 = \\bar z_1$. Let $c = 3 - 2\\operatorname{Re}z_1\\ge1$. Then $z_1z_2z_3 = z_3$ and\n$$f = |c - z_3|^2 - |1-z_3|^2 = (c^2 - 1) - 2(c-1)\\operatorname{Re}z_3 = (c-1)(c+1-2\\operatorname{Re}z_3)\\ge(c-1)^2\\ge0,$$\nusing $\\operatorname{Re}z_3\\le1$. Equality forces $c = 1$, i.e. $\\operatorname{Re}z_1 = 1$, i.e. $z_1 = 1$.\n\n**Conclusion.** The minimum of $f$ is attained at a critical point, where $f\\ge0$; so $f\\ge0$ everywhere. If $f = 0$ at some point, that point is a global minimum, hence a critical point, and the previous paragraph (with the appropriate pair) shows that one of $z_1,z_2,z_3$ equals $1$. This contradicts $z_j\\ne1$, so the original expression is never $0$. ∎"
+      }
+    ],
+    "topics": [
+      "complex-numbers",
+      "trigonometry",
+      "calculus"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "putnam-2020-b6",
+    "bank": "putnam",
+    "source": {
+      "contest": "Putnam",
+      "paper": "81st William Lowell Putnam Mathematical Competition (held February 20, 2021)",
+      "year": 2020,
+      "number": "B6",
+      "url": "https://kskedlaya.org/putnam-archive/"
+    },
+    "grade": "undergrad",
+    "points": 10,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $n$ be a positive integer. Prove that\n$$\\sum_{k=1}^n (-1)^{\\lfloor k(\\sqrt{2}-1) \\rfloor} \\geq 0.$$\n(As usual, $\\lfloor x \\rfloor$ denotes the greatest integer less than or equal to $x$.)",
+    "image": null,
+    "choices": null,
+    "answer": "Proof by self-similarity: group the signs into runs of constant sign; the run lengths are $2$ or $3$, with a $3$ exactly at the indices $\\lfloor j(\\sqrt2+1)\\rfloor$. This shows that the partial sum at the end of each negative run equals an earlier partial sum $g(\\lfloor (m+1)(\\sqrt2-1)\\rfloor)$, and strong induction finishes.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Runs of equal signs and a self-similarity",
+        "body": "Let $\\theta = \\sqrt2-1$, so $\\frac1\\theta = \\sqrt2+1 = 2+\\theta$. Let $a_k = \\lfloor k\\theta\\rfloor$ ($k\\ge0$) and\n$$g(n) = \\sum_{k=0}^n(-1)^{a_k}.$$\nSince the $k=0$ term is $1$, we must show $g(n)\\ge1$ for all $n\\ge0$.\n\n**Runs.** For $i\\ge0$ let *run $i$* be the set of $k\\ge0$ with $a_k = i$; its terms all equal $(-1)^i$, and the runs appear in order $i = 0,1,2,\\dots$. Let $c_i$ be its length. Since $a_k\\le i\\iff k\\theta<i+1\\iff k<(i+1)(2+\\theta)$, and $(i+1)(2+\\theta)$ is irrational,\n$$c_0+\\cdots+c_i = \\lfloor(i+1)(2+\\theta)\\rfloor + 1 = 2i+3 + a_{i+1}.$$\nThus $c_0 = 3$ and $c_i = 2 + (a_{i+1}-a_i)$ for $i\\ge1$. Now $a_{i+1}-a_i\\in\\{0,1\\}$, and it equals $1$ iff some integer $j\\ge1$ satisfies $i\\theta<j<(i+1)\\theta$, i.e. $i<j(2+\\theta)<i+1$, i.e. $i = \\lfloor j(2+\\theta)\\rfloor$. Including $i = 0 = \\lfloor 0\\cdot(2+\\theta)\\rfloor$:\n$$c_i - 2 = \\begin{cases}1 & \\text{if } i = \\lfloor j(2+\\theta)\\rfloor \\text{ for some integer } j\\ge0,\\\\ 0 & \\text{otherwise.}\\end{cases}$$\nNote $\\lfloor j(2+\\theta)\\rfloor = 2j + a_j$, so its parity is that of $a_j$.\n\n**Partial sums at the end of runs.** Let $T_m = \\sum_{i=0}^m(-1)^ic_i$ be the value of $g$ at the last index of run $m$. For **odd** $m$, $\\sum_{i=0}^m(-1)^i\\cdot2 = 0$, so\n$$T_m = \\sum_{i=0}^m(-1)^i(c_i-2) = \\sum_{j\\ge0:\\ \\lfloor j(2+\\theta)\\rfloor\\le m}(-1)^{a_j}.$$\nThe condition $\\lfloor j(2+\\theta)\\rfloor\\le m$ means $j(2+\\theta)<m+1$, i.e. $j<(m+1)\\theta$, i.e. $j\\le a_{m+1}$. Hence\n$$T_m = g(a_{m+1})\\qquad(m \\text{ odd}).$$\n\n**Induction.** We prove $g(n)\\ge1$ by strong induction on $n$; $g(0) = 1$. Let $n\\ge1$ and $m = a_n$ (so $n$ is in run $m$, and $m\\le n\\theta$).\n- If $m = 0$: all terms up to $n$ are $+1$, so $g(n) = n+1\\ge1$.\n- If $m$ is odd: $g$ decreases along run $m$, so $g(n)\\ge T_m$.\n- If $m\\ge2$ is even: $g$ increases along run $m$, so $g(n)>T_{m-1}$.\n\nIn the last two cases it suffices that $T_{m'}\\ge1$ for an odd $m'\\le m$. But $T_{m'} = g(a_{m'+1})$ and\n$$a_{m'+1}\\le(m'+1)\\theta\\le(n\\theta+1)\\theta = n\\theta^2+\\theta<n$$\n(since $\\theta^2<0.18$ and $\\theta<0.42$, this holds for all $n\\ge1$). By the induction hypothesis $g(a_{m'+1})\\ge1$. Hence $g(n)\\ge1$.\n\nTherefore $\\sum_{k=1}^n(-1)^{\\lfloor k(\\sqrt2-1)\\rfloor} = g(n) - 1\\ge0$ for every $n\\ge1$. ∎\n\n(The first terms of $(-1)^{a_k}$, $k\\ge0$, are $+,+,+,-,-,+,+,+,-,-,+,+,+,-,-,+,+,-,-,-,\\dots$, with run lengths $3,2,3,2,3,2,2,3,\\dots$.)"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "sequences-series"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

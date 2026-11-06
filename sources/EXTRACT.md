@@ -45,6 +45,9 @@ quality bar. This brief only adds the workflow.
   "24 dollars"). The per-problem pages (`"2015 AMC 8 Problems/Problem 2"`) contain community
   solutions you may use as a reference, but write your own solutions.
 - `tools/validate.py <file>` — must report no errors.
+- The app renders math with KaTeX: convert what it can't render — `tabular` → `array`,
+  `eqnarray` → `aligned`, `\[...\]` → `$$...$$`, `\overarc` → `\overgroup` or `\stackrel\frown{AB}`,
+  `\$` for money inside math; no `\begin{center}`, `\hfill`, `\vspace`, `\textsc`.
 
 ## IDs, slugs and duplicates
 

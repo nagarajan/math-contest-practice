@@ -1,0 +1,357 @@
+[
+  {
+    "id": "imc-2019-01",
+    "bank": "imc",
+    "source": {
+      "contest": "IMC",
+      "paper": "Day 1",
+      "year": 2019,
+      "number": 1,
+      "url": "https://www.imc-math.org.uk/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Evaluate the product\n$$\\prod_{n=3}^{\\infty}\\frac{(n^3+3n)^2}{n^6-64}.$$",
+    "image": null,
+    "choices": null,
+    "answer": "72/7",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "answerDisplay": "$\\frac{72}{7}$",
+    "solutions": [
+      {
+        "title": "Factor and telescope",
+        "body": "Let $a_n=\\dfrac{(n^3+3n)^2}{n^6-64}$. Factor numerator and denominator:\n$$n^3+3n=n(n^2+3),\\qquad n^6-64=(n^3-8)(n^3+8)=(n-2)(n^2+2n+4)(n+2)(n^2-2n+4),$$\nand note $n^2+2n+4=(n+1)^2+3$, $n^2-2n+4=(n-1)^2+3$. Hence\n$$a_n=\\frac{n}{n-2}\\cdot\\frac{n}{n+2}\\cdot\\frac{n^2+3}{(n-1)^2+3}\\cdot\\frac{n^2+3}{(n+1)^2+3}.$$\nEach factor telescopes. For $N\\ge3$:\n$$\\prod_{n=3}^N\\frac{n}{n-2}=\\frac{N(N-1)}{1\\cdot2},\\quad\\prod_{n=3}^N\\frac{n}{n+2}=\\frac{3\\cdot4}{(N+1)(N+2)},$$\n$$\\prod_{n=3}^N\\frac{n^2+3}{(n-1)^2+3}=\\frac{N^2+3}{2^2+3},\\quad\\prod_{n=3}^N\\frac{n^2+3}{(n+1)^2+3}=\\frac{3^2+3}{(N+1)^2+3}.$$\nMultiplying,\n$$\\prod_{n=3}^N a_n=\\frac{72}{7}\\cdot\\frac{N(N-1)(N^2+3)}{(N+1)(N+2)\\big((N+1)^2+3\\big)}.$$\nThe last fraction is a ratio of two monic polynomials of degree 4 in $N$, so it tends to $1$ as $N\\to\\infty$. Therefore the product equals\n$$\\boxed{\\dfrac{72}{7}}.$$"
+      },
+      {
+        "title": "Guess the partial product and verify by induction",
+        "body": "Let $G(N)=\\dfrac{N(N-1)(N^2+3)}{(N+1)(N+2)(N^2+2N+4)}$ (note $(N+1)^2+3=N^2+2N+4$). Claim: $\\prod_{n=3}^N a_n=\\frac{72}{7}G(N)$.\n\n* $N=3$: $a_3=\\frac{36^2}{729-64}=\\frac{1296}{665}$ and $\\frac{72}{7}G(3)=\\frac{72}{7}\\cdot\\frac{3\\cdot2\\cdot12}{4\\cdot5\\cdot19}=\\frac{72}{7}\\cdot\\frac{18}{95}=\\frac{1296}{665}$. ✓\n* Step ($N\\ge4$): shifting $N\\to N-1$ turns $N+1,\\ N+2,\\ N^2+2N+4,\\ N^2+3$ into $N,\\ N+1,\\ N^2+3,\\ N^2-2N+4$, so\n$$G(N-1)=\\frac{(N-1)(N-2)(N^2-2N+4)}{N(N+1)(N^2+3)}$$\nand\n$$\\frac{G(N)}{G(N-1)}=\\frac{N(N-1)(N^2+3)\\cdot N(N+1)(N^2+3)}{(N+1)(N+2)(N^2+2N+4)\\cdot(N-1)(N-2)(N^2-2N+4)}=\\frac{N^2(N^2+3)^2}{(N^2-4)(N^2+2N+4)(N^2-2N+4)}=a_N,$$\nbecause $(N^2+2N+4)(N^2-2N+4)(N^2-4)=(N^3+8)(N^3-8)=N^6-64$. ✓\n\nSo the claim holds for all $N\\ge3$, and since $G(N)\\to1$ the infinite product is $\\frac{72}{7}$. (Numerically, $\\prod_{n=3}^{3000}a_n\\approx10.265$, approaching $72/7\\approx10.286$.)\n\n**Answer: $\\dfrac{72}{7}$.**"
+      }
+    ],
+    "topics": [
+      "sequences-series",
+      "algebra"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imc-2019-02",
+    "bank": "imc",
+    "source": {
+      "contest": "IMC",
+      "paper": "Day 1",
+      "year": 2019,
+      "number": 2,
+      "url": "https://www.imc-math.org.uk/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "A four-digit number $\\overline{YEAR}$ is called *very good* if the system\n$$\\begin{aligned} Yx+Ey+Az+Rw&=Y\\\\ Rx+Yy+Ez+Aw&=E\\\\ Ax+Ry+Yz+Ew&=A\\\\ Ex+Ay+Rz+Yw&=R\\end{aligned}$$\nof linear equations in the variables $x,y,z$ and $w$ has at least two solutions. Find all very good YEARs in the 21st century.\n\n(The 21st century starts in 2001 and ends in 2100.)",
+    "image": null,
+    "choices": null,
+    "answer": "2002, 2013, 2020, 2024, 2035, 2046, 2057, 2068, 2079 (very good $\\iff$ $Y+A=E+R$, or $Y=A$ and $E=R$).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Determinant and a normality argument",
+        "body": "**Answer:** 2002, 2013, 2020, 2024, 2035, 2046, 2057, 2068, 2079.\n\nLet $M$ be the coefficient matrix and $b=(Y,E,A,R)^T$ the right-hand side. The system has at least two solutions iff it is solvable and $\\det M=0$.\n\n**The system is always solvable.** Let $S$ be the cyclic shift matrix ($Se_k=e_{k+1}$, indices mod 4). Then $M=YI+ES^{-1}+AS^{-2}+RS^{-3}$ and $M^T=YI+ES+AS^2+RS^3$ are both polynomials in $S$, so they commute: $M$ is normal. Hence $\\|Mx\\|^2=x^TM^TMx=x^TMM^Tx=\\|M^Tx\\|^2$, so $\\ker M=\\ker M^T$ and\n$$\\operatorname{col}(M)=(\\ker M^T)^\\perp=(\\ker M)^\\perp=\\operatorname{col}(M^T).$$\nBut $b$ is the first row of $M$, i.e. $b=M^Te_1\\in\\operatorname{col}(M^T)=\\operatorname{col}(M)$. So a solution always exists.\n\n**The determinant.** Add rows 2–4 to row 1 and factor out $Y+E+A+R$; then subtract $R,A,E$ times the new row 1 from rows 2, 3, 4; finally add row 2 to row 4. With $s=Y+A-E-R$:\n$$\\det M=(Y+E+A+R)\\det\\begin{pmatrix}1&1&1&1\\\\0&Y-R&E-R&A-R\\\\0&R-A&Y-A&E-A\\\\0&s&0&s\\end{pmatrix}.$$\nExpanding the $3\\times3$ minor along its last row $(s,0,s)$:\n$$s\\big[(E-R)(E-A)-(A-R)(Y-A)\\big]+s\\big[(Y-R)(Y-A)-(E-R)(R-A)\\big]=s\\big[(E-R)^2+(Y-A)^2\\big].$$\nSo\n$$\\det M=(Y+E+A+R)\\,(Y+A-E-R)\\,\\big[(Y-A)^2+(E-R)^2\\big].$$\nThe first factor is positive ($Y\\ge1$). Hence $\\overline{YEAR}$ is very good iff $Y+A=E+R$, or ($Y=A$ and $E=R$).\n\n**21st century.** For 2001–2099 we have $Y=2$, $E=0$: either $R=A+2$ with $A\\in\\{0,\\dots,7\\}$, giving 2002, 2013, 2024, 2035, 2046, 2057, 2068, 2079; or $A=2$, $R=0$, giving 2020. For 2100 ($Y=2,E=1,A=0,R=0$): $2\\ne1$ and $Y\\ne A$, so it is not very good."
+      },
+      {
+        "title": "Circulant matrix eigenvalues",
+        "body": "The coefficient matrix is **circulant**: row $j$ is the first row $c=(c_0,c_1,c_2,c_3)=(Y,E,A,R)$ shifted $j$ places to the right, i.e. $M_{jk}=c_{k-j\\bmod 4}$.\n\n**Eigen-decomposition.** For $\\omega\\in\\{1,i,-1,-i\\}$ let $u_\\omega=(1,\\omega,\\omega^2,\\omega^3)^T$. Then\n$$(Mu_\\omega)_j=\\sum_k c_{k-j}\\omega^k=\\omega^j\\sum_m c_m\\omega^m=\\lambda_\\omega\\,\\omega^j,\\qquad \\lambda_\\omega=Y+E\\omega+A\\omega^2+R\\omega^3 .$$\nThe four vectors $u_\\omega$ are orthogonal in $\\mathbb C^4$, so $M$ is diagonalisable with eigenvalues\n$$\\lambda_1=Y+E+A+R,\\quad\\lambda_{-1}=Y-E+A-R,\\quad\\lambda_{\\pm i}=(Y-A)\\pm i(E-R).$$\n\n**Solvability.** Write the right-hand side $b=(Y,E,A,R)^T$ in the basis $u_\\omega$: its coefficient on $u_\\omega$ is $\\frac14\\langle b,u_\\omega\\rangle=\\frac14\\left(Y+E\\bar\\omega+A\\bar\\omega^2+R\\bar\\omega^3\\right)=\\frac14\\overline{\\lambda_\\omega}$ (the digits are real). So $b$ has no component along eigenvectors with eigenvalue $0$, i.e. $b$ lies in the span of eigenvectors with nonzero eigenvalues, which is the column space of $M$. A complex solution exists, and then its real part is a real solution. Hence there are at least two (real) solutions iff $\\ker M\\ne0$ iff some $\\lambda_\\omega=0$.\n\n**Conditions.** $\\lambda_1>0$ since $Y\\ge1$. $\\lambda_{-1}=0\\iff Y+A=E+R$. $\\lambda_{\\pm i}=0\\iff Y=A$ and $E=R$.\n\n**21st century.** For 2001–2099, $Y=2$, $E=0$: $R=A+2$ gives 2002, 2013, 2024, 2035, 2046, 2057, 2068, 2079, and $A=2,R=0$ gives 2020. The year 2100 satisfies neither condition.\n\n**Answer:** 2002, 2013, 2020, 2024, 2035, 2046, 2057, 2068, 2079."
+      }
+    ],
+    "topics": [
+      "linear-algebra"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imc-2019-03",
+    "bank": "imc",
+    "source": {
+      "contest": "IMC",
+      "paper": "Day 1",
+      "year": 2019,
+      "number": 3,
+      "url": "https://www.imc-math.org.uk/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $f:(-1,1)\\to\\mathbb R$ be a twice differentiable function such that\n$$2f'(x)+xf''(x)\\ge1\\qquad\\text{for } x\\in(-1,1).$$\nProve that\n$$\\int_{-1}^{1}xf(x)\\,dx\\ \\ge\\ \\frac13 .$$",
+    "image": null,
+    "choices": null,
+    "answer": "$g(x)=xf(x)-\\frac{x^2}2$ has $g''=2f'+xf''-1\\ge0$, so $g$ is convex and $g(x)\\ge g'(0)x$; integrate.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "A convex auxiliary function",
+        "body": "Let $g(x)=xf(x)-\\dfrac{x^2}{2}$. Then $g'(x)=f(x)+xf'(x)-x$ and\n$$g''(x)=2f'(x)+xf''(x)-1\\ge0,$$\nso $g$ is convex on $(-1,1)$. A convex differentiable function lies above its tangent lines; at $0$ (where $g(0)=0$) with $a=g'(0)$:\n$$g(x)\\ge ax\\qquad\\text{for all }x\\in(-1,1).$$\nHence $xf(x)=g(x)+\\frac{x^2}2\\ge ax+\\frac{x^2}{2}$, and\n$$\\int_{-1}^1xf(x)\\,dx\\ \\ge\\ \\int_{-1}^1\\left(ax+\\frac{x^2}{2}\\right)dx=0+\\frac13=\\frac13 .$$\n(If the integral is improper at $\\pm1$, the pointwise lower bound shows it can only diverge to $+\\infty$, and the inequality still holds.) ∎"
+      },
+      {
+        "title": "Symmetrise",
+        "body": "Write $\\int_{-1}^1xf(x)\\,dx=\\int_0^1x\\big(f(x)-f(-x)\\big)\\,dx=\\int_0^1k(x)\\,dx$ with $h(x)=f(x)-f(-x)$, $k(x)=xh(x)$.\n\nThen $h'(x)=f'(x)+f'(-x)$, $h''(x)=f''(x)-f''(-x)$, and\n$$k''(x)=2h'(x)+xh''(x)=\\big[2f'(x)+xf''(x)\\big]+\\big[2f'(-x)+(-x)f''(-x)\\big]\\ge1+1=2,$$\napplying the hypothesis at $x$ and at $-x$. Also $k(0)=0$ and $k'(0)=h(0)=0$. Integrating $k''\\ge2$ twice from $0$: $k'(x)\\ge2x$ and $k(x)\\ge x^2$ for $x\\in[0,1)$. Therefore\n$$\\int_{-1}^1xf(x)\\,dx=\\int_0^1k(x)\\,dx\\ge\\int_0^1x^2\\,dx=\\frac13 .\\qquad ∎$$"
+      }
+    ],
+    "topics": [
+      "calculus",
+      "inequalities"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imc-2019-04",
+    "bank": "imc",
+    "source": {
+      "contest": "IMC",
+      "paper": "Day 1",
+      "year": 2019,
+      "number": 4,
+      "url": "https://www.imc-math.org.uk/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Define the sequence $a_0,a_1,\\ldots$ of numbers by the following recurrence:\n$$a_0=1,\\qquad a_1=2,\\qquad (n+3)a_{n+2}=(6n+9)a_{n+1}-na_n\\quad\\text{for } n\\ge0.$$\nProve that all terms of this sequence are integers.",
+    "image": null,
+    "choices": null,
+    "answer": "The generating function satisfies $xF^2-(1-x)F+1=0$, which gives the integer recurrence $a_{n+1}=a_n+\\sum_{k=0}^na_ka_{n-k}$ (the $a_n$ are the large Schröder numbers).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Generating function (formal power series)",
+        "body": "**Idea.** Find a recurrence with integer coefficients and leading coefficient $1$ producing the same numbers. The candidate comes from the generating function $F(x)=\\frac{1-x-\\sqrt{1-6x+x^2}}{2x}$ of the sequence, which satisfies $xF^2-(1-x)F+1=0$. We run the argument backwards, using only formal power series, so no convergence questions arise.\n\n**An integer sequence.** Define $b_0=1$ and\n$$b_{n+1}=b_n+\\sum_{k=0}^nb_kb_{n-k}\\qquad(n\\ge0).$$\nClearly all $b_n$ are integers, and $b_1=2$. We show $b_n$ satisfies the given recurrence; since that recurrence determines $a_{n+2}$ from $a_{n+1},a_n$ uniquely ($n+3\\ne0$), it follows that $a_n=b_n\\in\\mathbb Z$ for all $n$.\n\n**The quadratic equation.** Let $B(x)=\\sum_{n\\ge0}b_nx^n\\in\\mathbb Z[[x]]$. The recurrence says $\\frac{B-1}{x}=B+B^2$, i.e.\n$$xB^2-(1-x)B+1=0 .$$\nPut $W=2xB-(1-x)$. Then $W^2=4x^2B^2-4x(1-x)B+(1-x)^2=-4x+(1-x)^2=D$, where $D=1-6x+x^2$.\n\n**A first-order ODE.** Differentiating $W^2=D$ formally gives $2WW'=D'=2x-6$, so $WW'=x-3$; multiplying by $W$: $DW'=(x-3)W$. Now substitute $W=2xB-1+x$, $W'=2B+2xB'+1$:\n$$D(2xB'+2B+1)=(x-3)(2xB-1+x).$$\nCollecting terms, $2xDB'+\\big(2D-2x(x-3)\\big)B+D-(x-3)(x-1)=0$. Since $2D-2x^2+6x=2-6x$ and $D-(x^2-4x+3)=-2-2x$, dividing by 2:\n$$x(1-6x+x^2)B'+(1-3x)B-1-x=0 .$$\n\n**Back to coefficients.** Take the coefficient of $x^{n+2}$ ($n\\ge0$). From $(x-6x^2+x^3)\\sum_m mb_mx^{m-1}$ we get $(n+2)b_{n+2}-6(n+1)b_{n+1}+nb_n$; from $(1-3x)B$ we get $b_{n+2}-3b_{n+1}$; the term $-1-x$ contributes nothing. Hence\n$$(n+3)b_{n+2}=(6n+9)b_{n+1}-nb_n,$$\nwhich is the given recurrence, with the same initial values $b_0=1,b_1=2$. Therefore $a_n=b_n$ is an integer for every $n$. ∎\n\n*Remark.* The numbers $1,2,6,22,90,394,\\dots$ are the large Schröder numbers."
+      }
+    ],
+    "topics": [
+      "sequences-series",
+      "number-theory"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imc-2019-05",
+    "bank": "imc",
+    "source": {
+      "contest": "IMC",
+      "paper": "Day 1",
+      "year": 2019,
+      "number": 5,
+      "url": "https://www.imc-math.org.uk/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Determine whether there exist an odd positive integer $n$ and $n\\times n$ matrices $A$ and $B$ with integer entries, that satisfy the following conditions:\n\n1. $\\det(B)=1$;\n2. $AB=BA$;\n3. $A^4+4A^2B^2+16B^4=2019I$.\n\n(Here $I$ denotes the $n\\times n$ identity matrix.)",
+    "image": null,
+    "choices": null,
+    "answer": "**No.** Reduce mod 4: $A^4\\equiv2019I$, so $(\\det A)^4\\equiv2019^n\\equiv3\\pmod 4$, impossible since fourth powers are $0$ or $1$ mod 4.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Determinants modulo 4",
+        "body": "**Answer: no.**\n\nThe determinant is a polynomial with integer coefficients in the entries, so matrices with integer entries that are congruent entrywise mod 4 have congruent determinants.\n\nCondition 3 gives, entrywise modulo 4,\n$$A^4\\equiv A^4+4A^2B^2+16B^4=2019I\\pmod 4 .$$\nTaking determinants,\n$$(\\det A)^4=\\det(A^4)\\equiv\\det(2019I)=2019^n\\equiv(-1)^n=-1\\equiv3\\pmod4,$$\nsince $n$ is odd. But a fourth power of an integer is $\\equiv0$ or $1\\pmod4$. Contradiction, so no such $n,A,B$ exist. ∎"
+      },
+      {
+        "title": "Factor and compare the factors",
+        "body": "**Answer: no.**\n\nSince $A$ and $B$ commute,\n$$A^4+4A^2B^2+16B^4=(A^2+4B^2)^2-(2AB)^2=(A^2+2AB+4B^2)(A^2-2AB+4B^2)=CD .$$\n$C$ and $D$ have integer entries, so $\\det C,\\det D\\in\\mathbb Z$ and\n$$\\det C\\cdot\\det D=\\det(2019I)=2019^n .$$\nMoreover $C-D=4AB$, so $C\\equiv D\\pmod 4$ entrywise and hence $\\det C\\equiv\\det D\\pmod4$. Then\n$$2019^n=\\det C\\det D\\equiv(\\det C)^2\\pmod4 .$$\nBut $2019^n\\equiv3\\pmod 4$ for odd $n$, while squares are $0$ or $1$ mod 4. Contradiction. ∎"
+      }
+    ],
+    "topics": [
+      "linear-algebra",
+      "number-theory"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imc-2019-06",
+    "bank": "imc",
+    "source": {
+      "contest": "IMC",
+      "paper": "Day 2",
+      "year": 2019,
+      "number": 6,
+      "url": "https://www.imc-math.org.uk/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $f,g:\\mathbb R\\to\\mathbb R$ be continuous functions such that $g$ is differentiable. Assume that $\\big(f(0)-g'(0)\\big)\\big(g'(1)-f(1)\\big)>0$. Show that there exists a point $c\\in(0,1)$ such that $f(c)=g'(c)$.",
+    "image": null,
+    "choices": null,
+    "answer": "Let $h(x)=\\int_0^xf-g(x)$; then $h'=f-g'$ changes sign on $[0,1]$, and by Darboux's theorem $h'(c)=0$ for some $c\\in(0,1)$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Darboux property of derivatives",
+        "body": "Let $F(x)=\\int_0^xf(t)\\,dt$. Since $f$ is continuous, $F'=f$. Put $h=F-g$, which is differentiable with $h'=f-g'$. The hypothesis reads $h'(0)\\cdot\\big(-h'(1)\\big)>0$: $h'(0)$ and $h'(1)$ are nonzero and of opposite signs. Replacing $h$ by $-h$ if necessary, assume $h'(0)>0>h'(1)$.\n\n**Darboux argument.** $h$ is continuous on $[0,1]$, so it attains its maximum at some $c\\in[0,1]$. Since $h'(0)=\\lim_{x\\to0^+}\\frac{h(x)-h(0)}{x}>0$, there are points $x>0$ near $0$ with $h(x)>h(0)$; so $c\\ne0$. Since $h'(1)<0$, there are points $x<1$ near $1$ with $h(x)>h(1)$; so $c\\ne1$. Thus $c\\in(0,1)$ is an interior maximum of a differentiable function, and by Fermat's theorem $h'(c)=0$, i.e.\n$$f(c)=g'(c). \\qquad ∎$$"
+      }
+    ],
+    "topics": [
+      "real-analysis",
+      "calculus"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imc-2019-07",
+    "bank": "imc",
+    "source": {
+      "contest": "IMC",
+      "paper": "Day 2",
+      "year": 2019,
+      "number": 7,
+      "url": "https://www.imc-math.org.uk/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $C=\\{4,6,8,9,10,\\ldots\\}$ be the set of composite positive integers. For each $n\\in C$ let $a_n$ be the smallest positive integer $k$ such that $k!$ is divisible by $n$. Determine whether the following series converges:\n$$\\sum_{n\\in C}\\left(\\frac{a_n}{n}\\right)^n.$$",
+    "image": null,
+    "choices": null,
+    "answer": "**It converges:** $a_n/n\\le\\frac23$ for every composite $n>4$, so the series is dominated by $\\sum(2/3)^n$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Bound $a_n/n$ by cases",
+        "body": "**Answer: the series converges.** We show $\\dfrac{a_n}{n}\\le\\dfrac23$ for every composite $n>4$; then the terms are at most $(2/3)^n$ and the series converges by comparison with a geometric series (the single term $n=4$ does not matter).\n\n**Case 1: $n$ has two distinct prime factors.** Then $n=qr$ with coprime $q,r\\ge2$, say $q>r$. Since $q$ and $r$ are distinct numbers $\\le q$, $qr\\mid q!$. So $a_n\\le q$ and $\\dfrac{a_n}{n}\\le\\dfrac qn=\\dfrac1r\\le\\dfrac12$.\n\n**Case 2: $n=p^2$, $p\\ge3$ prime.** The factors $p$ and $2p$ of $(2p)!$ give $p^2\\mid(2p)!$, so $a_n\\le2p$ and $\\dfrac{a_n}{n}\\le\\dfrac{2p}{p^2}=\\dfrac2p\\le\\dfrac23$.\n\n**Case 3: $n=p^k$, $k\\ge3$.** The numbers $p,p^2,\\dots,p^{k-1}$ are distinct and $\\le p^{k-1}$, so their product $p^{k(k-1)/2}$ divides $(p^{k-1})!$; since $k(k-1)/2\\ge k$ for $k\\ge3$, $p^k\\mid(p^{k-1})!$. Thus $a_n\\le p^{k-1}$ and $\\dfrac{a_n}n\\le\\dfrac1p\\le\\dfrac12$.\n\nEvery composite $n>4$ falls into one of these cases ($n=4=2^2$ is the only one excluded). Hence\n$$\\sum_{n\\in C}\\left(\\frac{a_n}n\\right)^n\\le1+\\sum_{n\\ge5}\\left(\\frac23\\right)^n<\\infty . \\qquad ∎$$"
+      }
+    ],
+    "topics": [
+      "sequences-series",
+      "number-theory"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imc-2019-08",
+    "bank": "imc",
+    "source": {
+      "contest": "IMC",
+      "paper": "Day 2",
+      "year": 2019,
+      "number": 8,
+      "url": "https://www.imc-math.org.uk/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $x_1,\\ldots,x_n$ be real numbers. For any set $I\\subset\\{1,2,\\ldots,n\\}$ let $s(I)=\\sum_{i\\in I}x_i$. Assume that the function $I\\mapsto s(I)$ takes on at least $1.8^n$ values where $I$ runs over all $2^n$ subsets of $\\{1,2,\\ldots,n\\}$. Prove that the number of sets $I\\subset\\{1,2,\\ldots,n\\}$ for which $s(I)=2019$ does not exceed $1.7^n$.",
+    "image": null,
+    "choices": null,
+    "answer": "Pigeonhole on the $AB>3^n$ difference vectors $I_a-J_b\\in\\{-1,0,1\\}^n$ (one $I_a$ per sum value, $J_b$ the sets with sum 2019): they are all distinct.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Difference vectors and pigeonhole",
+        "body": "Identify each subset $I$ with its indicator vector in $\\{0,1\\}^n$; then $s(I)=\\langle I,X\\rangle$ with $X=(x_1,\\dots,x_n)$.\n\nChoose sets $I_1,\\dots,I_A$ with pairwise different sums $s(I_a)$, where $A\\ge1.8^n$ (one set for each value). Let $J_1,\\dots,J_B$ be all sets with $s(J_b)=2019$, and suppose, for contradiction, that $B>1.7^n$.\n\nConsider the $AB$ vectors $I_a-J_b\\in\\{-1,0,1\\}^n$. Since $AB>1.8^n\\cdot1.7^n=3.06^n\\ge3^n$, and there are only $3^n$ vectors in $\\{-1,0,1\\}^n$, two different pairs $(a,b)\\ne(c,d)$ give the same vector:\n$$I_a-J_b=I_c-J_d .$$\nTaking the inner product with $X$: $s(I_a)-2019=s(I_c)-2019$, so $s(I_a)=s(I_c)$ and hence $a=c$. Then $J_b=J_d$, i.e. $b=d$. So the pairs coincide — contradiction. Therefore $B\\le1.7^n$. ∎"
+      }
+    ],
+    "topics": [
+      "counting",
+      "linear-algebra"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imc-2019-09",
+    "bank": "imc",
+    "source": {
+      "contest": "IMC",
+      "paper": "Day 2",
+      "year": 2019,
+      "number": 9,
+      "url": "https://www.imc-math.org.uk/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Determine all positive integers $n$ for which there exist $n\\times n$ real invertible matrices $A$ and $B$ that satisfy $AB-BA=B^2A$.",
+    "image": null,
+    "choices": null,
+    "answer": "Exactly the **even** $n$. For odd $n$, $B\\sim B^2+B$ and iterating $\\lambda\\mapsto\\lambda^2+\\lambda$ on a real eigenvalue forces eigenvalue $0$; for even $n$ use blocks $A_2=\\begin{pmatrix}0&1\\\\1&0\\end{pmatrix}$, $B_2=\\begin{pmatrix}-1&1\\\\-1&-1\\end{pmatrix}$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Similarity and a real eigenvalue",
+        "body": "**Answer: exactly the even $n$.**\n\n**Odd $n$ is impossible.** Suppose $A,B$ are invertible and $AB-BA=B^2A$. Then $AB=(B^2+B)A$, so\n$$B=A^{-1}(B^2+B)A :$$\n$B$ and $B^2+B$ are similar and have the same eigenvalues. The eigenvalues of $B^2+B$ are $\\lambda^2+\\lambda$ for the eigenvalues $\\lambda$ of $B$. Since $n$ is odd, the real characteristic polynomial of $B$ has a real root $\\lambda_1$. Then $\\lambda_2=\\lambda_1^2+\\lambda_1$ is an eigenvalue of $B^2+B$, hence of $B$; then $\\lambda_3=\\lambda_2^2+\\lambda_2$ is an eigenvalue of $B$, and so on. All $\\lambda_j$ are real eigenvalues of $B$, of which there are finitely many, so there are $k\\le l$ with $\\lambda_{l+1}=\\lambda_k$. Summing $\\lambda_{j+1}-\\lambda_j=\\lambda_j^2$ for $j=k,\\dots,l$:\n$$\\lambda_k^2+\\lambda_{k+1}^2+\\dots+\\lambda_l^2=\\lambda_{l+1}-\\lambda_k=0 .$$\nAll $\\lambda_j$ are real, so $\\lambda_k=0$ is an eigenvalue of $B$, contradicting invertibility.\n\n**Even $n$ works.** Let\n$$A_2=\\begin{pmatrix}0&1\\\\1&0\\end{pmatrix},\\qquad B_2=\\begin{pmatrix}-1&1\\\\-1&-1\\end{pmatrix}.$$\nBoth are invertible ($\\det A_2=-1$, $\\det B_2=2$). Multiplying by $A_2$ on the left swaps rows, on the right swaps columns:\n$$A_2B_2-B_2A_2=\\begin{pmatrix}-1&-1\\\\-1&1\\end{pmatrix}-\\begin{pmatrix}1&-1\\\\-1&-1\\end{pmatrix}=\\begin{pmatrix}-2&0\\\\0&2\\end{pmatrix},$$\n$$B_2^2=\\begin{pmatrix}0&-2\\\\2&0\\end{pmatrix},\\qquad B_2^2A_2=\\begin{pmatrix}-2&0\\\\0&2\\end{pmatrix}. \\ ✓$$\nFor $n=2m$ take the block-diagonal matrices $A=\\operatorname{diag}(A_2,\\dots,A_2)$, $B=\\operatorname{diag}(B_2,\\dots,B_2)$; the identity holds blockwise and both are invertible. ∎"
+      }
+    ],
+    "topics": [
+      "linear-algebra"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imc-2019-10",
+    "bank": "imc",
+    "source": {
+      "contest": "IMC",
+      "paper": "Day 2",
+      "year": 2019,
+      "number": 10,
+      "url": "https://www.imc-math.org.uk/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "2019 points are chosen at random, independently, and distributed uniformly in the unit disc $\\{(x,y)\\in\\mathbb R^2: x^2+y^2\\le1\\}$. Let $C$ be the convex hull of the chosen points. Which probability is larger: that $C$ is a polygon with three vertices, or a polygon with four vertices?",
+    "image": null,
+    "choices": null,
+    "answer": "**Four vertices** is more likely. It suffices to show $\\operatorname{area}(T)\\le500\\operatorname{area}(\\Omega)$ for every triangle $T=X_1X_2X_3$, where $\\Omega$ is the set of points $Y$ in the disc making $X_1X_2X_3Y$ a convex quadrilateral; otherwise the disc would have area $<\\frac{3\\sqrt3}4+$ tiny $<\\pi$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Compare conditional probabilities, then an area argument",
+        "body": "**Answer: the quadrilateral is more likely.**\n\nLet $D$ be the unit disc ($|D|=\\pi$, $|\\cdot|$ = area) and $X_1,\\dots,X_{2019}$ the points. Let\n$p=P(C\\text{ is the triangle }X_1X_2X_3)$ and $q=P(C\\text{ is a convex quadrilateral with vertices }X_1,\\dots,X_4)$. By symmetry $P(C\\text{ triangle})=\\binom{2019}3p$ and $P(C\\text{ quadrilateral})=\\binom{2019}4q$, and $\\binom{2019}4/\\binom{2019}3=\\frac{2016}{4}=504$. So we must show $p<504q$.\n\n**Reduction.** Condition on $X_1,X_2,X_3$ (almost surely not collinear), let $T$ be their triangle and\n$$\\Omega=\\{Y\\in D:\\ X_1,X_2,X_3,Y\\text{ are the vertices of a convex quadrilateral}\\}.$$\n$C=T$ iff $X_4,\\dots,X_{2019}\\in T$, so $p=\\mathbb E\\big[(|T|/\\pi)\\,(|T|/\\pi)^{2015}\\big]$. If $X_4\\in\\Omega$ and $X_5,\\dots,X_{2019}\\in T$, then $C$ is the quadrilateral $X_1\\dots X_4$ (it contains $T$). Hence $q\\ge\\mathbb E\\big[(|\\Omega|/\\pi)(|T|/\\pi)^{2015}\\big]$. Therefore it suffices to prove\n$$|T|\\le500\\,|\\Omega|\\quad\\text{for every non-degenerate triangle }T\\subset D, \\tag{$*$}$$\nfor then $p\\le500\\,\\mathbb E[(|\\Omega|/\\pi)(|T|/\\pi)^{2015}]\\le500q<504q$ (note $q>0$).\n\n**Geometry of the regions.** The three side lines of $T$ cut $D$ into seven regions: $D_0=T$; three *edge regions*, each across one side and between the extensions of the other two sides; and three *vertex regions* $D_1,D_2,D_3$ (the vertical angle at each vertex, intersected with $D$). A point $Y\\notin T$ forms a convex quadrilateral with the vertices exactly when it lies in an edge region, so $\\Omega$ is the union of the three edge regions.\n\n**Assume ($*$) fails**: $|\\Omega|<|T|/500<\\pi/500$.\n\n*Short overhangs.* Let the line $X_2X_3$ meet the circle at $B$ beyond $X_3$. The triangle $X_1X_3B$ lies in the edge region across $X_1X_3$, so $X_1X_3B\\subset\\Omega$. It shares the apex $X_1$ with $T$ and its base $X_3B$ lies on the line of the base $X_2X_3$, so\n$$\\frac{X_3B}{X_2X_3}=\\frac{|X_1X_3B|}{|T|}<\\frac1{500}.$$\nThe same holds for all six \"overhangs\" from a vertex to the circle along a side line: each is less than $\\frac1{500}$ of the corresponding side, hence less than $\\frac{2}{500}=\\frac1{250}$.\n\n*Small vertex regions.* Look at $X_1$. Let the line $X_1X_2$ meet the circle at $P$ (beyond $X_1$) and $Q$ (beyond $X_2$), and the line $X_1X_3$ at $P'$ (beyond $X_1$) and $Q'$ (beyond $X_3$). The chords $PQ$ and $P'Q'$ cross at $X_1$, so on the circle the points alternate $P,P',Q,Q'$. The vertex region $D_1$ is bounded by $X_1P$, $X_1P'$ and the arc $\\widehat{PP'}$ not containing $Q,Q'$; it is convex (intersection of two circular segments). We have $|PP'|\\le X_1P+X_1P'<\\frac{X_1X_2+X_1X_3}{500}$.\n\nWe claim this arc is the minor one. Otherwise $Q$ and $Q'$ lie on the minor arc between $P'$ and $P$ (in the order $P',Q,Q',P$), which is at most a semicircle; on such an arc chord length increases with arc length, so $|PQ|\\le|PP'|$ and $|P'Q'|\\le|PP'|$. But $|PQ|\\ge X_1X_2$ and $|P'Q'|\\ge X_1X_3$, giving $X_1X_2+X_1X_3\\le2|PP'|<\\frac{2}{500}(X_1X_2+X_1X_3)$, absurd.\n\nSo the arc is minor; every point of it is within $|PP'|<\\frac1{125}$ of $P$, hence within $\\frac1{250}+\\frac1{125}=\\frac3{250}$ of $X_1$. Since $D_1$ is convex, it lies in the disc of radius $\\frac3{250}$ about $X_1$. The same holds at $X_2,X_3$, so\n$$|D_1|+|D_2|+|D_3|<3\\pi\\left(\\frac{3}{250}\\right)^2 .$$\n\n*Contradiction.* A triangle in the unit disc has area at most $\\frac{3\\sqrt3}4$ (the inscribed equilateral triangle is extremal). Therefore\n$$\\pi=|D|=|T|+|\\Omega|+\\sum_{i=1}^3|D_i|<\\frac{3\\sqrt3}{4}+\\frac{\\pi}{500}+\\frac{27\\pi}{62500}\\approx1.299+0.0063+0.0014<\\pi,$$\na contradiction. Hence ($*$) holds, and $P(C\\text{ is a quadrilateral})>P(C\\text{ is a triangle})$. ∎"
+      }
+    ],
+    "topics": [
+      "probability",
+      "geometry"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

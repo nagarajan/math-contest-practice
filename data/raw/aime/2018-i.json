@@ -1,0 +1,525 @@
+[
+  {
+    "id": "aime-2018-i-01",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "2018 AIME I",
+      "year": 2018,
+      "number": 1,
+      "url": "https://artofproblemsolving.com/wiki/index.php/2018_AIME_I_Problems"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Let $S$ be the number of ordered pairs of integers $(a,b)$ with $1 \\leq a \\leq 100$ and $b \\geq 0$ such that the polynomial $x^2+ax+b$ can be factored into the product of two (not necessarily distinct) linear factors with integer coefficients. Find the remainder when $S$ is divided by $1000$.",
+    "image": null,
+    "choices": null,
+    "answer": "600",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Count the factorisations",
+        "body": "Write $x^2+ax+b=(x+r)(x+s)$ with integers $r,s$. Then $r+s=a>0$ and $rs=b\\ge0$, so $r,s\\ge0$. For a fixed $a$, the unordered pairs $\\{r,s\\}$ with $r+s=a$ are $r=0,1,\\dots,\\lfloor a/2\\rfloor$, and they give different values $b=r(a-r)$. So\n$$S=\\sum_{a=1}^{100}\\left(\\left\\lfloor\\tfrac a2\\right\\rfloor+1\\right)=100+(0+1+1+2+2+\\dots+49+49+50)=100+2500=2600.$$\nRemainder $600$.\n\n**Answer: 600**"
+      }
+    ],
+    "topics": [
+      "polynomials",
+      "counting"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-2018-i-02",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "2018 AIME I",
+      "year": 2018,
+      "number": 2,
+      "url": "https://artofproblemsolving.com/wiki/index.php/2018_AIME_I_Problems"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "The number $n$ can be written in base $14$ as $\\underline{a}\\text{ }\\underline{b}\\text{ }\\underline{c}$, can be written in base $15$ as $\\underline{a}\\text{ }\\underline{c}\\text{ }\\underline{b}$, and can be written in base $6$ as $\\underline{a}\\text{ }\\underline{c}\\text{ }\\underline{a}\\text{ }\\underline{c}\\text{ }$, where $a > 0$. Find the base- $10$ representation of $n$.",
+    "image": null,
+    "choices": null,
+    "answer": "925",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Set up equations",
+        "body": "$$n=196a+14b+c=225a+15c+b=216a+36c+6a+c=222a+37c.$$\nFrom the first two: $13b=29a+14c$. From the first and last: $14b=26a+36c$, i.e. $7b=13a+18c$. Eliminating $b$: $7(29a+14c)=13(13a+18c)$, so $34a=136c$, $a=4c$.\n\nBase-$6$ digits are at most $5$ and $a>0$, so $c=1$, $a=4$, and $b=\\frac{52+18}{7}=10$ (a valid base-$14$ digit). Then $n=222\\cdot4+37=925$.\n\n**Answer: 925**"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "algebra"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-2018-i-03",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "2018 AIME I",
+      "year": 2018,
+      "number": 3,
+      "url": "https://artofproblemsolving.com/wiki/index.php/2018_AIME_I_Problems"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Kathy has $5$ red cards and $5$ green cards. She shuffles the $10$ cards and lays out $5$ of the cards in a row in a random order. She will be happy if and only if all the red cards laid out are adjacent and all the green cards laid out are adjacent. For example, card orders $RRGGG$, $GGGGR$, or $RRRRR$ will make Kathy happy, but $RRRGR$ will not. The probability that Kathy will be happy is $\\frac{m}{n}$, where $m$ and $n$ are relatively prime positive integers. Find $m + n$.",
+    "image": null,
+    "choices": null,
+    "answer": "157",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Count happy sequences",
+        "body": "There are $10\\cdot9\\cdot8\\cdot7\\cdot6=30240$ ordered layouts. A happy layout with $k$ red cards is $R^kG^{5-k}$ or $G^{5-k}R^k$ (only one pattern if $k=0$ or $5$), and each pattern can be filled in $P(5,k)\\cdot P(5,5-k)$ ways:\n- $k=0,5$: $120$ each, total $240$;\n- $k=1,4$: $2\\cdot5\\cdot120=1200$ each;\n- $k=2,3$: $2\\cdot20\\cdot60=2400$ each.\n\nTotal $240+2400+4800=7440$, and $\\frac{7440}{30240}=\\frac{31}{126}$. So $m+n=157$.\n\n**Answer: 157**"
+      },
+      {
+        "title": "Colour patterns only",
+        "body": "Only the colour pattern matters. The probability of a particular pattern with $k$ reds is $\\frac{P(5,k)P(5,5-k)}{30240}$. Happy patterns: $RRRRR,GGGGG$ (probability $\\frac{120}{30240}$ each), and $8$ two-block patterns, each with probability $\\frac{600}{30240}$ ($k=1,4$) or $\\frac{1200}{30240}$ ($k=2,3$). Sum: $\\frac{240+4\\cdot600+4\\cdot1200}{30240}=\\frac{7440}{30240}=\\frac{31}{126}$.\n\n**Answer: 157**"
+      }
+    ],
+    "topics": [
+      "probability",
+      "counting"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-2018-i-04",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "2018 AIME I",
+      "year": 2018,
+      "number": 4,
+      "url": "https://artofproblemsolving.com/wiki/index.php/2018_AIME_I_Problems"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "In $\\triangle ABC, AB = AC = 10$ and $BC = 12$. Point $D$ lies strictly between $A$ and $B$ on $\\overline{AB}$ and point $E$ lies strictly between $A$ and $C$ on $\\overline{AC}$ so that $AD = DE = EC$. Then $AD$ can be expressed in the form $\\dfrac{p}{q}$, where $p$ and $q$ are relatively prime positive integers. Find $p+q$.",
+    "image": null,
+    "choices": null,
+    "answer": "289",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Law of cosines",
+        "body": "In $\\triangle ABC$: $144=100+100-200\\cos A$, so $\\cos A=\\frac{7}{25}$.\n\nLet $AD=DE=EC=x$, so $AE=10-x$. In $\\triangle ADE$:\n$$x^2=x^2+(10-x)^2-2x(10-x)\\cdot\\tfrac{7}{25}\\implies 10-x=\\tfrac{14}{25}x\\implies x=\\tfrac{250}{39}.$$\n$p+q=289$.\n\n**Answer: 289**"
+      },
+      {
+        "title": "Isosceles triangle ADE",
+        "body": "Triangle $ADE$ is isosceles with $DA=DE$, so the foot of the perpendicular from $D$ to $AE$ is the midpoint of $AE$: $\\frac{10-x}{2}=x\\cos A=\\frac{7x}{25}$, giving $250-25x=14x$, $x=\\frac{250}{39}$.\n\n**Answer: 289**"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "trigonometry"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-2018-i-05",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "2018 AIME I",
+      "year": 2018,
+      "number": 5,
+      "url": "https://artofproblemsolving.com/wiki/index.php/2018_AIME_I_Problems"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "For each ordered pair of real numbers $(x,y)$ satisfying\n\n$$\\log_2(2x+y) = \\log_4(x^2+xy+7y^2)$$ there is a real number $K$ such that\n\n$$\\log_3(3x+y) = \\log_9(3x^2+4xy+Ky^2).$$ Find the product of all possible values of $K$.",
+    "image": null,
+    "choices": null,
+    "answer": "189",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Factor the first condition",
+        "body": "The first equation (with $2x+y>0$) means $(2x+y)^2=x^2+xy+7y^2$, i.e. $3x^2+3xy-6y^2=0$, $(x+2y)(x-y)=0$.\n\nThe second means $(3x+y)^2=3x^2+4xy+Ky^2$, i.e. $Ky^2=6x^2+2xy+y^2$.\n- $x=y$ (with $y>0$): $K=6+2+1=9$; here $3x+y=4y>0$.\n- $x=-2y$ (with $y<0$): $K=24-4+1=21$; here $3x+y=-5y>0$.\n\nProduct: $9\\cdot21=189$.\n\n**Answer: 189**"
+      }
+    ],
+    "topics": [
+      "algebra"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-2018-i-06",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "2018 AIME I",
+      "year": 2018,
+      "number": 6,
+      "url": "https://artofproblemsolving.com/wiki/index.php/2018_AIME_I_Problems"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Let $N$ be the number of complex numbers $z$ with the properties that $|z|=1$ and $z^{6!}-z^{5!}$ is a real number. Find the remainder when $N$ is divided by $1000$.",
+    "image": null,
+    "choices": null,
+    "answer": "440",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Equal sines",
+        "body": "Let $z=e^{i\\theta}$. The imaginary part of $z^{720}-z^{120}$ vanishes iff $\\sin720\\theta=\\sin120\\theta$, i.e.\n- $720\\theta=120\\theta+2\\pi k$: $\\theta=\\frac{\\pi k}{300}$, giving $600$ values in $[0,2\\pi)$; or\n- $720\\theta=\\pi-120\\theta+2\\pi k$: $\\theta=\\frac{(2k+1)\\pi}{840}$, giving $840$ values.\n\nA common value would need $14k=5(2k'+1)$, even $=$ odd — impossible. So $N=1440$, remainder $440$.\n\n**Answer: 440**"
+      }
+    ],
+    "topics": [
+      "complex-numbers",
+      "trigonometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-2018-i-07",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "2018 AIME I",
+      "year": 2018,
+      "number": 7,
+      "url": "https://artofproblemsolving.com/wiki/index.php/2018_AIME_I_Problems"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "A right hexagonal prism has height $2$. The bases are regular hexagons with side length $1$. Any $3$ of the $12$ vertices determine a triangle. Find the number of these triangles that are isosceles (including equilateral triangles).",
+    "image": null,
+    "choices": null,
+    "answer": "52",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Casework on the bases",
+        "body": "Distances: within a base, $1,\\sqrt3,2$; between a top and a bottom vertex at horizontal distance $h$: $\\sqrt{h^2+4}\\in\\{2,\\sqrt5,\\sqrt7,\\sqrt8\\}$.\n\n**All three in one base.** In a regular hexagon each vertex is the apex of $2$ isosceles triangles ($12$ counts), and the $2$ equilateral triangles are counted $3$ times each: $12-4=8$. Two bases: $16$.\n\n**Two vertices $P,Q$ in one base, $R'$ in the other** ($R'$ below $R$).\n- $PR'=QR'$ needs $R$ equidistant from $P$ and $Q$. If $PQ=\\sqrt3$, two vertices (the one between them and the opposite one) work; if $PQ=1$ or $2$, none. $6$ pairs $\\times2=12$.\n- $PQ=PR'$ needs $PQ^2=PR^2+4$, so $PQ=2$ and $R=P$ (a right isosceles triangle with legs $2$): $3$ pairs $\\times2=6$.\n\nThat is $18$, and doubling for which base holds two vertices gives $36$.\n\nTotal $16+36=52$.\n\n**Answer: 52**"
+      }
+    ],
+    "topics": [
+      "counting",
+      "geometry",
+      "spatial"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-2018-i-08",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "2018 AIME I",
+      "year": 2018,
+      "number": 8,
+      "url": "https://artofproblemsolving.com/wiki/index.php/2018_AIME_I_Problems"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Let $ABCDEF$ be an equiangular hexagon such that $AB=6, BC=8, CD=10$, and $DE=12$. Denote $d$ the diameter of the largest circle that fits inside the hexagon. Find $d^2$.",
+    "image": null,
+    "choices": null,
+    "answer": "147",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Widths between parallel sides",
+        "body": "All angles are $120^\\circ$, so opposite sides are parallel, and walking around the hexagon gives $AB-DE=EF-BC=CD-FA$: $6-12=EF-8=10-FA$, so $EF=2$, $FA=16$.\n\nThe distance between two opposite parallel sides is $\\frac{\\sqrt3}{2}$ times the sum of the two sides between them (each makes $60^\\circ$ with the parallel lines):\n- $AB\\parallel DE$: $\\frac{\\sqrt3}{2}(8+10)=9\\sqrt3$;\n- $BC\\parallel EF$: $\\frac{\\sqrt3}{2}(10+12)=11\\sqrt3$;\n- $CD\\parallel FA$: $\\frac{\\sqrt3}{2}(12+2)=7\\sqrt3$.\n\nA circle inside fits between $CD$ and $FA$, so $d\\le7\\sqrt3$; and because the other two widths are larger, a circle tangent to both $CD$ and $FA$ can be slid along them to a position where it stays inside the hexagon. So $d=7\\sqrt3$ and $d^2=147$.\n\n**Answer: 147**"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-2018-i-09",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "2018 AIME I",
+      "year": 2018,
+      "number": 9,
+      "url": "https://artofproblemsolving.com/wiki/index.php/2018_AIME_I_Problems"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Find the number of four-element subsets of $\\{1,2,3,4,\\dots, 20\\}$ with the property that two distinct elements of a subset have a sum of $16$, and two distinct elements of a subset have a sum of $24$. For example, $\\{3,5,13,19\\}$ and $\\{6,10,20,18\\}$ are two such subsets.",
+    "image": null,
+    "choices": null,
+    "answer": "210",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Shared vs. disjoint pairs",
+        "body": "Pairs with sum $16$: $\\{a,16-a\\}$, $a=1,\\dots,7$. Pairs with sum $24$: $\\{b,24-b\\}$, $b=4,\\dots,11$.\n\n**The two pairs are disjoint.** There are $7\\cdot8=56$ (16-pair, 24-pair) combinations; they share an element when that element $a$ is in both, i.e. $a\\in\\{4,\\dots,15\\}\\setminus\\{8,12\\}$: $10$ cases. So $46$ disjoint combinations, each giving its own $4$-set.\n\n**The pairs share an element.** The set contains a triple $\\{a,16-a,24-a\\}$ for one of those $10$ values of $a$, plus any of $17$ other numbers: $170$ choices. Six sets are counted twice, because they contain two such triples: $\\{5,11,13,19\\}$, $\\{6,10,14,18\\}$, $\\{7,9,15,17\\}$, $\\{1,7,9,15\\}$, $\\{2,6,10,14\\}$, $\\{3,5,11,13\\}$. That leaves $164$ sets.\n\nThe two cases don't overlap: in a set $\\{a,16-a,b,24-b\\}$ made of two disjoint good pairs, any further pair with sum $16$ or $24$ would force two of the four numbers to be equal, so such a set has no shared element.\n\nTotal $46+164=210$.\n\n**Answer: 210**"
+      }
+    ],
+    "topics": [
+      "counting"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-2018-i-10",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "2018 AIME I",
+      "year": 2018,
+      "number": 10,
+      "url": "https://artofproblemsolving.com/wiki/index.php/2018_AIME_I_Problems"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "The wheel shown below consists of two circles and five spokes, with a label at each point where a spoke meets a circle. A bug walks along the wheel, starting at point $A$. At every step of the process, the bug walks from one labeled point to an adjacent labeled point. Along the inner circle the bug only walks in a counterclockwise direction, and along the outer circle the bug only walks in a clockwise direction. For example, the bug could travel along the path $AJABCHCHIJA$, which has $10$ steps. Let $n$ be the number of paths with $15$ steps that begin and end at point $A.$ Find the remainder when $n$ is divided by $1000$.",
+    "image": "qimages/aime/2018-i/q10.webp",
+    "choices": null,
+    "answer": "4",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Count by number of spoke moves",
+        "body": "Number the spokes $0,\\dots,4$ ($A$ is $0$). Inner moves add $1$, outer moves subtract $1$ (mod $5$), spoke moves switch circles. A path from $A$ back to $A$ uses $2t$ spoke moves, $p$ inner moves and $q$ outer moves with $p+q+2t=15$ and $p-q\\equiv0\\pmod5$.\n\nThe path is: inner run, spoke, outer run, spoke, …, inner run — $t+1$ inner runs and $t$ outer runs, each of which may be empty. Distributing: $\\binom{p+t}{t}$ ways for inner moves and $\\binom{q+t-1}{t-1}$ for outer moves.\n\n| $t$ | $(p,q)$ | ways |\n|---|---|---|\n| 0 | $(15,0)$ | $1$ |\n| 1 | $(4,9),(9,4)$ | $5+10$ |\n| 2 | $(3,8),(8,3)$ | $90+180$ |\n| 3 | $(2,7),(7,2)$ | $360+720$ |\n| 4 | $(1,6),(6,1)$ | $420+840$ |\n| 5 | $(0,5),(5,0)$ | $126+252$ |\n\nSum: $3004$, remainder $4$.\n\n**Answer: 4**"
+      },
+      {
+        "title": "Dynamic programming",
+        "body": "Let $I_k(j)$ and $O_k(j)$ be the number of $k$-step walks from $A$ ending at inner/outer point of spoke $j$. Then $I_{k+1}(j)=I_k(j-1)+O_k(j)$ and $O_{k+1}(j)=O_k(j+1)+I_k(j)$. Starting from $I_0=(1,0,0,0,0)$, $O_0=0$, iterating $15$ times gives $I_{15}(0)=3004$, so the remainder is $4$.\n\n**Answer: 4**"
+      }
+    ],
+    "topics": [
+      "counting"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-2018-i-11",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "2018 AIME I",
+      "year": 2018,
+      "number": 11,
+      "url": "https://artofproblemsolving.com/wiki/index.php/2018_AIME_I_Problems"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Find the least positive integer $n$ such that when $3^n$ is written in base $143$, its two right-most digits in base $143$ are $01$.",
+    "image": null,
+    "choices": null,
+    "answer": "195",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Orders modulo 121 and 169",
+        "body": "We need $3^n\\equiv1\\pmod{143^2}$, i.e. modulo $121$ and modulo $169$.\n- $3^5=243=2\\cdot121+1$, so $3^5\\equiv1\\pmod{121}$; and $3^1\\not\\equiv1$, so the order mod $121$ is $5$.\n- Mod $13$, $3^3=27\\equiv1$, so the order mod $169$ is $3$ or $39$. $3^3=27\\not\\equiv1\\pmod{169}$, so it is $39$.\n\nThe least $n$ is $\\operatorname{lcm}(5,39)=195$.\n\n**Answer: 195**"
+      }
+    ],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-2018-i-12",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "2018 AIME I",
+      "year": 2018,
+      "number": 12,
+      "url": "https://artofproblemsolving.com/wiki/index.php/2018_AIME_I_Problems"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "For every subset $T$ of $U = \\{ 1,2,3,\\ldots,18 \\}$, let $s(T)$ be the sum of the elements of $T$, with $s(\\emptyset)$ defined to be $0$. If $T$ is chosen at random among all subsets of $U$, the probability that $s(T)$ is divisible by $3$ is $\\frac{m}{n}$, where $m$ and $n$ are relatively prime positive integers. Find $m$.",
+    "image": null,
+    "choices": null,
+    "answer": "683",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Roots of unity filter",
+        "body": "Let $\\omega=e^{2\\pi i/3}$ and $F(x)=\\prod_{k=1}^{18}(1+x^k)$. The number of subsets with sum divisible by $3$ is $\\frac{F(1)+F(\\omega)+F(\\omega^2)}{3}$.\n\n$F(1)=2^{18}$. Each residue class mod $3$ has $6$ elements, so\n$$F(\\omega)=2^6(1+\\omega)^6(1+\\omega^2)^6=2^6\\left(1+\\omega+\\omega^2+\\omega^3\\right)^6=2^6,$$\nand likewise $F(\\omega^2)=2^6$. The count is $\\frac{2^{18}+2^7}{3}=2^7\\cdot\\frac{2^{11}+1}{3}=2^7\\cdot683$, and the probability is $\\frac{683}{2^{11}}$. So $m=683$.\n\n**Answer: 683**"
+      },
+      {
+        "title": "Recurrence on residues",
+        "body": "Process the numbers in blocks $\\{3j+1,3j+2,3j+3\\}$. Let $(u,v,w)$ be the probabilities that the sum is $0,1,2$ mod $3$. A block adds a residue from the subsets of $\\{1,2,0\\}$: residues $0,1,2,0,0,1,2,0$ — i.e. residue $0$ with probability $\\frac12$ and $1,2$ with $\\frac14$ each. If $d=u-\\frac13$ etc., each block multiplies the deviation by $\\frac12-\\frac14=\\frac14$. Starting at $(1,0,0)$ (deviation $\\frac23$), after $6$ blocks $u=\\frac13+\\frac23\\cdot4^{-6}=\\frac{2^{11}+1}{3\\cdot2^{11}}=\\frac{683}{2048}$.\n\n**Answer: 683**"
+      }
+    ],
+    "topics": [
+      "counting",
+      "number-theory",
+      "complex-numbers"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-2018-i-13",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "2018 AIME I",
+      "year": 2018,
+      "number": 13,
+      "url": "https://artofproblemsolving.com/wiki/index.php/2018_AIME_I_Problems"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Let $\\triangle ABC$ have side lengths $AB=30$, $BC=32$, and $AC=34$. Point $X$ lies in the interior of $\\overline{BC}$, and points $I_1$ and $I_2$ are the incenters of $\\triangle ABX$ and $\\triangle ACX$, respectively. Find the minimum possible area of $\\triangle AI_1I_2$ as $X$ varies along $\\overline{BC}$.",
+    "image": null,
+    "choices": null,
+    "answer": "126",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Express the area through the angle at X",
+        "body": "Let $\\theta=\\angle AXB$. In $\\triangle ABX$, $\\angle AI_1B=90^\\circ+\\frac\\theta2$, so by the law of sines $AI_1=\\dfrac{AB\\sin\\frac B2}{\\cos\\frac\\theta2}$. Similarly, in $\\triangle ACX$ the angle at $X$ is $180^\\circ-\\theta$, so $AI_2=\\dfrac{AC\\sin\\frac C2}{\\sin\\frac\\theta2}$. Also $\\angle I_1AI_2=\\frac12\\angle BAX+\\frac12\\angle XAC=\\frac A2$. Hence\n$$[AI_1I_2]=\\tfrac12AI_1\\cdot AI_2\\sin\\tfrac A2=\\frac{AB\\cdot AC\\sin\\frac A2\\sin\\frac B2\\sin\\frac C2}{\\sin\\theta},$$\nminimised when $\\theta=90^\\circ$ (possible since the triangle is acute: $34^2<30^2+32^2$).\n\nWith $a=32,b=34,c=30$, $s=48$: $\\sin\\frac A2\\sin\\frac B2\\sin\\frac C2=\\frac{(s-a)(s-b)(s-c)}{abc}$, so the minimum is\n$$\\frac{(s-a)(s-b)(s-c)}{a}=\\frac{16\\cdot14\\cdot18}{32}=126.$$\n\n**Answer: 126**"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "trigonometry"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-2018-i-14",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "2018 AIME I",
+      "year": 2018,
+      "number": 14,
+      "url": "https://artofproblemsolving.com/wiki/index.php/2018_AIME_I_Problems"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Let $SP_1P_2P_3EP_4P_5$ be a heptagon. A frog starts jumping at vertex $S$. From any vertex of the heptagon except $E$, the frog may jump to either of the two adjacent vertices. When it reaches vertex $E$, the frog stops and stays there. Find the number of distinct sequences of jumps of no more than $12$ jumps that end at $E$.",
+    "image": null,
+    "choices": null,
+    "answer": "351",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Walks on a path",
+        "body": "Before its last jump the frog never visits $E$, so it walks on the path $P_4-P_5-S-P_1-P_2-P_3$ (number these positions $1$–$6$; $S$ is position $3$). The last jump goes to $E$ from an end, $P_4$ (position $1$) or $P_3$ (position $6$). So the answer is $\\sum_{k=0}^{11}\\big(w_k(1)+w_k(6)\\big)$, where $w_k(i)$ is the number of $k$-jump walks on the path from position $3$ to position $i$.\n\nEach $w_{k+1}(i)$ is the sum of the neighbouring entries of $w_k$:\n\n| $k$ | $w_k(1),\\dots,w_k(6)$ | $w_k(1)+w_k(6)$ |\n|---|---|---|\n| 0 | 0,0,1,0,0,0 | 0 |\n| 1 | 0,1,0,1,0,0 | 0 |\n| 2 | 1,0,2,0,1,0 | 1 |\n| 3 | 0,3,0,3,0,1 | 1 |\n| 4 | 3,0,6,0,4,0 | 3 |\n| 5 | 0,9,0,10,0,4 | 4 |\n| 6 | 9,0,19,0,14,0 | 9 |\n| 7 | 0,28,0,33,0,14 | 14 |\n| 8 | 28,0,61,0,47,0 | 28 |\n| 9 | 0,89,0,108,0,47 | 47 |\n| 10 | 89,0,197,0,155,0 | 89 |\n| 11 | 0,286,0,352,0,155 | 155 |\n\nTotal: $1+1+3+4+9+14+28+47+89+155=351$.\n\n**Answer: 351**"
+      }
+    ],
+    "topics": [
+      "counting",
+      "graph-theory"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-2018-i-15",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "2018 AIME I",
+      "year": 2018,
+      "number": 15,
+      "url": "https://artofproblemsolving.com/wiki/index.php/2018_AIME_I_Problems"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "David found four sticks of different lengths that can be used to form three non-congruent convex cyclic quadrilaterals, $A,\\text{ }B,\\text{ }C$, which can each be inscribed in a circle with radius $1$. Let $\\varphi_A$ denote the measure of the acute angle made by the diagonals of quadrilateral $A$, and define $\\varphi_B$ and $\\varphi_C$ similarly. Suppose that $\\sin\\varphi_A=\\frac{2}{3}$, $\\sin\\varphi_B=\\frac{3}{5}$, and $\\sin\\varphi_C=\\frac{6}{7}$. All three quadrilaterals have the same area $K$, which can be written in the form $\\dfrac{m}{n}$, where $m$ and $n$ are relatively prime positive integers. Find $m+n$.",
+    "image": null,
+    "choices": null,
+    "answer": "59",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Ptolemy and the area formula",
+        "body": "Let the sticks be $a,b,c,d$ and put $x=ab+cd$, $y=ac+bd$, $z=ad+bc$. The three quadrilaterals correspond to the three ways of choosing which sticks are opposite.\n\nFor a cyclic quadrilateral with sides $a,b,c,d$ in order and diagonals $p$ (splitting it into triangles $a,b,p$ and $c,d,p$) and $q$:\n- Area via triangles ($[\\triangle]=\\frac{\\text{product of sides}}{4R}$, $R=1$): $K=\\frac{p(ab+cd)}{4}=\\frac{q(bc+da)}{4}$.\n- Ptolemy: $pq=ac+bd$.\n\nMultiplying, $K^2=\\frac{pq\\,xz}{16}=\\frac{xyz}{16}$ — the same for all three quadrilaterals. Also $K=\\frac12pq\\sin\\varphi$, so the three values $\\frac{2K}{\\sin\\varphi}$ are $x,y,z$ in some order:\n$$xyz=\\frac{8K^3}{\\frac23\\cdot\\frac35\\cdot\\frac67}=\\frac{70K^3}{3}.$$\nThen $16K^2=\\frac{70K^3}{3}$ gives $K=\\frac{48}{70}=\\frac{24}{35}$, and $m+n=59$.\n\n**Answer: 59**"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "trigonometry"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

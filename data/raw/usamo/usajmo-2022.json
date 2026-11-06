@@ -1,0 +1,213 @@
+[
+  {
+    "id": "usamo-usajmo-2022-01",
+    "bank": "usamo",
+    "source": {
+      "contest": "USAJMO",
+      "paper": "USAJMO 2022",
+      "year": 2022,
+      "number": 1,
+      "url": "https://web.evanchen.cc/exams/JMO-2022-notes.pdf"
+    },
+    "grade": "7-10",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "For which positive integers $m$ does there exist an infinite sequence in $\\mathbb Z/m\\mathbb Z$ which is both an arithmetic progression and a geometric progression, but is nonconstant?",
+    "image": null,
+    "choices": null,
+    "answer": "Exactly the $m$ that are **not squarefree** (divisible by $p^2$ for some prime $p$). Three consecutive terms $s-d, s, s+d$ of a geometric progression satisfy $s^2 = (s-d)(s+d)$, so $d^2 \\equiv 0$; for $p^2 \\mid m$ the progression $1 + k\\frac mp$ has ratio $1 + \\frac mp$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Look at three consecutive terms",
+        "body": "Let $(x_k)_{k\\ge0}$ be an arithmetic progression with difference $d$, $x_k = s + kd$, which is also geometric: $x_{k+1} = r\\,x_k$ for some $r$ and all $k$. Then $x_{k+1}^2 = r^2x_k^2 = x_k x_{k+2}$, i.e. for three consecutive terms $s - d, s, s+d$:\n$$s^2 \\equiv (s-d)(s+d) = s^2 - d^2 \\pmod m, \\quad\\text{so}\\quad d^2 \\equiv 0 \\pmod m.$$\n\n**If $m$ is squarefree:** every prime $p \\mid m$ divides $d^2$, hence $d$; so $m \\mid d$ and the progression is constant. No nonconstant example exists (this includes $m = 1$).\n\n**If $p^2 \\mid m$ for a prime $p$:** let $d = m/p$, so $0 < d < m$ and $d^2 = m \\cdot \\frac{m}{p^2} \\equiv 0 \\pmod m$. Take $x_k = 1 + kd$ and $r = 1 + d$. Then\n$$r x_k = (1+d)(1+kd) = 1 + (k+1)d + kd^2 \\equiv 1 + (k+1)d = x_{k+1} \\pmod m,$$\nso the sequence is geometric, arithmetic, and nonconstant ($x_1 - x_0 = d \\not\\equiv 0$).\n\n**Answer:** exactly the positive integers $m$ that are not squarefree. ∎"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "sequences-series"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamo-usajmo-2022-02",
+    "bank": "usamo",
+    "source": {
+      "contest": "USAJMO",
+      "paper": "USAJMO 2022",
+      "year": 2022,
+      "number": 2,
+      "url": "https://web.evanchen.cc/exams/JMO-2022-notes.pdf"
+    },
+    "grade": "7-10",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $a$ and $b$ be positive integers. Every cell of an $(a+b+1) \\times (a+b+1)$ grid is colored either amber or bronze such that there are at least $a^2 + ab - b$ amber cells and at least $b^2 + ab - a$ bronze cells. Prove that it is possible to choose $a$ amber cells and $b$ bronze cells such that no two of the $a+b$ chosen cells lie in the same row or column.",
+    "image": null,
+    "choices": null,
+    "answer": "Averaging over all transversals gives one with at least $a$ amber cells and one with at most $a+1$ amber cells; moving from one to the other by swaps changes the count by at most $2$ per step, so some transversal has exactly $a$ or $a+1$ amber cells.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Averaging plus a discrete intermediate value argument",
+        "body": "Let $N = a + b + 1$. A **transversal** is a set of $N$ cells, one in each row and each column (it corresponds to a permutation $\\sigma$ of the columns: cells $(i, \\sigma(i))$).\n\n**Step 1.** For a uniformly random transversal, each cell is included with probability $\\frac1N$. So the expected number of amber cells is at least\n$$\\frac{a^2 + ab - b}{a + b + 1} = (a - 1) + \\frac{1}{a+b+1} > a - 1,$$\nsince $(a-1)(a+b+1) = a^2 + ab - b - 1$. Hence some transversal $T_1$ has at least $a$ amber cells. By the same computation for bronze, some transversal $T_2$ has at least $b$ bronze cells, i.e. at most $N - b = a + 1$ amber cells.\n\n**Step 2.** Every permutation is a product of transpositions, so we can go from $T_1$ to $T_2$ by a sequence of transversals in which consecutive ones differ by swapping the columns of two rows: cells $(i, \\sigma(i)), (j, \\sigma(j))$ are replaced by $(i, \\sigma(j)), (j, \\sigma(i))$. Each such step changes the number of amber cells by at most $2$.\n\nThe amber count starts at a value $\\ge a$ and ends at a value $\\le a+1$. If it starts at $a$ or $a+1$ we are done. Otherwise it starts $\\ge a+2$; consider the first transversal in the sequence with count $\\le a+1$. The previous one has count $\\ge a+2$, and they differ by at most $2$, so this one has count $\\ge a$, i.e. count $a$ or $a+1$.\n\n**Step 3.** A transversal with exactly $a$ amber cells has $b+1$ bronze cells; one with $a+1$ amber cells has $b$ bronze cells. In either case choose $a$ amber and $b$ bronze cells from it; they lie in distinct rows and columns. ∎"
+      }
+    ],
+    "topics": [
+      "counting",
+      "probability",
+      "logic"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamo-usajmo-2022-03",
+    "bank": "usamo",
+    "source": {
+      "contest": "USAJMO",
+      "paper": "USAJMO 2022",
+      "year": 2022,
+      "number": 3,
+      "url": "https://web.evanchen.cc/exams/JMO-2022-notes.pdf"
+    },
+    "grade": "7-10",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $b \\ge 2$ and $w \\ge 2$ be fixed integers, and $n = b + w$. Given are $2b$ identical black rods and $2w$ identical white rods, each of side length $1$.\n\nWe assemble a regular $2n$-gon using these rods so that parallel sides are the same color. Then, a convex $2b$-gon $B$ is formed by translating the black rods, and a convex $2w$-gon $W$ is formed by translating the white rods. An example of one way of doing the assembly when $b = 3$ and $w = 2$ is shown in the figure, as well as the resulting polygons $B$ and $W$.\n\nProve that the difference of the areas of $B$ and $W$ depends only on the numbers $b$ and $w$, and not on how the $2n$-gon was assembled.",
+    "image": "qimages/usamo/usajmo-2022/q03.webp",
+    "choices": null,
+    "answer": "Swapping the colors of two adjacent side directions does not change $[B] - [W]$, because the change reduces to $(\\vec u - \\vec v)\\times(\\vec x + \\vec y) = 0$, and both vectors are perpendicular to $\\vec u + \\vec v$ (Thales). In fact $[B] - [W] = \\frac{b-w}{2}\\cot\\frac{\\pi}{2n}$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Swap two adjacent colors",
+        "body": "Let the sides of the $2n$-gon, traversed counterclockwise, be the unit vectors $e_0, e_1, \\dots, e_{2n-1}$, where $e_k$ makes angle $\\frac{k\\pi}{n}$ with $e_0$; so $e_{k+n} = -e_k$ and sides $k$ and $k+n$ are parallel. A coloring is a choice of color for each direction class $k \\bmod n$. The polygon $B$ is the convex polygon whose sides are the black vectors in increasing angular order, and similarly for $W$. Write $p \\times q$ for the cross product $p_xq_y - p_yq_x$.\n\nAny two colorings with $b$ black classes can be transformed into each other by repeatedly swapping the colors of two **adjacent** classes $k$ and $k+1$ of different colors. So it suffices to show such a swap does not change $[B] - [W]$.\n\nSuppose class $k$ is black and class $k+1$ is white; let $u = e_k$, $v = e_{k+1}$. Let $x$ be the sum of the black vectors $e_j$ with $k+2 \\le j \\le k+n-1$, and $y$ the sum of the white ones in the same range. Before the swap, the sides of $B$ in order are: $u$, then the black vectors summing to $x$, then $-u$, then their negatives summing to $-x$. Draw the parallelogram with sides $u$ and $x$ inside $B$: it splits $B$ into this parallelogram and two congruent (centrally symmetric) pieces bounded by the chain summing to $x$ and its chord. If $q_B$ is the area of one piece, then\n$$[B_{\\text{before}}] = u \\times x + 2q_B, \\qquad [B_{\\text{after}}] = v\\times x + 2q_B,$$\nsince after the swap $B$ has the same chain with $u$ replaced by $v$ (and $-u$ by $-v$). Here all cross products are positive because the vectors in $x$ have angles strictly between those of $v$ and $v + \\pi$ (hence also of $u$ and $u+\\pi$). Similarly, with $q_W$ the area of the piece of $W$ cut off by the chain summing to $y$,\n$$[W_{\\text{before}}] = v \\times y + 2q_W, \\qquad [W_{\\text{after}}] = u \\times y + 2q_W .$$\nSo the difference $[B] - [W]$ is unchanged iff\n$$u\\times x - v \\times y = v \\times x - u \\times y \\iff (u - v)\\times(x + y) = 0,$$\ni.e. iff $u - v$ and $x + y$ are parallel.\n\n**Claim.** Both $u - v$ and $x + y$ are perpendicular to $u + v$.\n\n*Proof.* $(u - v)\\cdot(u + v) = |u|^2 - |v|^2 = 0$. For the other: $u + v + x + y = e_k + e_{k+1} + \\dots + e_{k+n-1}$ is the sum of $n$ consecutive sides, i.e. the vector from a vertex $P$ of the $2n$-gon to the diametrically opposite vertex $P'$. The point $Q = P + u + v$ is also a vertex, hence on the circle with diameter $PP'$, so by Thales $\\angle PQP' = 90^\\circ$: $(u + v) \\perp (x + y)$. $\\square$\n\nIn the plane, two vectors perpendicular to the same nonzero vector are parallel. Hence the swap preserves $[B] - [W]$, which therefore depends only on $b$ and $w$. ∎"
+      },
+      {
+        "title": "Compute the difference exactly",
+        "body": "With the notation $e_k$ as above, the area of a convex polygon with consecutive side vectors $v_1, \\dots, v_m$ (counterclockwise) is $\\frac12\\sum_{i<j} v_i \\times v_j$. Let $\\varepsilon_k = +1$ if class $k \\bmod n$ is black and $-1$ if white, and $s_{ij} = e_i\\times e_j = \\sin\\frac{(j-i)\\pi}n$. Using $\\mathbf 1_{\\text{black}} = \\frac{1+\\varepsilon}2$, $\\mathbf 1_{\\text{white}} = \\frac{1-\\varepsilon}2$,\n$$[B] - [W] = \\frac12\\sum_{0\\le i<j\\le 2n-1}\\left(\\tfrac{(1+\\varepsilon_i)(1+\\varepsilon_j)}{4} - \\tfrac{(1-\\varepsilon_i)(1-\\varepsilon_j)}4\\right)s_{ij} = \\frac14\\sum_{i<j}(\\varepsilon_i + \\varepsilon_j)s_{ij},$$\nwhich is *linear* in the $\\varepsilon$'s: $[B]-[W] = \\frac14\\sum_i \\varepsilon_i c_i$ with $c_i = \\sum_{j \\ne i}\\sin\\frac{|j-i|\\pi}{n}$. Using $\\sum_{d=1}^{2n-1}\\sin\\frac{d\\pi}{n} = 0$ one finds $c_i = 2\\sum_{d=1}^{i}\\sin\\frac{d\\pi}n$, and then, with $\\omega = e^{i\\pi/n}$, $c_i + c_{i+n} = 2\\operatorname{Im}\\frac{2\\omega}{1-\\omega} = 2\\cot\\frac{\\pi}{2n}$ for every $i$. Since $\\varepsilon_{i+n} = \\varepsilon_i$,\n$$[B] - [W] = \\frac14\\sum_{i=0}^{n-1}\\varepsilon_i\\,(c_i + c_{i+n}) = \\frac{b - w}{2}\\cot\\frac{\\pi}{2n},$$\nwhich depends only on $b$ and $w$. (Check: with $w = 0$ this is the area $\\frac n2\\cot\\frac{\\pi}{2n}$ of the regular $2n$-gon of side $1$.) ∎"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamo-usajmo-2022-04",
+    "bank": "usamo",
+    "source": {
+      "contest": "USAJMO",
+      "paper": "USAJMO 2022",
+      "year": 2022,
+      "number": 4,
+      "url": "https://web.evanchen.cc/exams/JMO-2022-notes.pdf"
+    },
+    "grade": "7-10",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $ABCD$ be a rhombus, and let $K$ and $L$ be points such that $K$ lies inside the rhombus, $L$ lies outside the rhombus, and $KA = KB = LC = LD$. Prove that there exist points $X$ and $Y$ on lines $AC$ and $BD$ such that $KXLY$ is also a rhombus.",
+    "image": null,
+    "choices": null,
+    "answer": "$L$ is the translate of $K$ by $\\vec{AD}$; with $X, Y$ chosen so that the midpoint of $XY$ is the midpoint of $KL$, the condition $XY \\perp KL$ is exactly the condition $KA = KB$ (coordinates with the diagonals as axes).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Translation, then coordinates",
+        "body": "**Step 1: $L = K + \\vec{AD}$.** Let $t = \\vec{AD} = \\vec{BC}$ and $K' = K + t$. The translation by $t$ maps $A \\mapsto D$, $B \\mapsto C$, so $K'D = KA$ and $K'C = KB$. Thus $K'$ and $L$ are both points on the perpendicular bisector of $CD$ at distance $r = KA$ from $C$ and $D$; there are exactly two such points, mirror images in line $CD$.\n\nThe rhombus lies between the parallel lines $AB$ and $DC$, and $t$ moves line $AB$ onto line $DC$. Since $K$ is strictly between these lines, $K'$ lies strictly on the far side of $DC$ (outside the rhombus), at distance $h = \\operatorname{dist}(K, AB)$ from $DC$. The other candidate is the point on the perpendicular bisector of $CD$ at distance $h$ from $CD$ on the rhombus side, which is the reflection $K^*$ of $K$ through the center $O$ of the rhombus (the half-turn about $O$ swaps $AB$ and $CD$). $K^*$ is inside the rhombus, while $L$ is outside; so $L = K'$.\n\n**Step 2: coordinates.** Put $O$ at the origin with the diagonals on the axes: $A = (-p, 0)$, $B = (0, -q)$, $C = (p, 0)$, $D = (0, q)$, so $t = D - A = (p, q)$, and write $K = (k_1, k_2)$, $L = (k_1 + p, k_2 + q)$. The condition $KA = KB$ reads\n$$(k_1 + p)^2 + k_2^2 = k_1^2 + (k_2 + q)^2 \\iff q k_2 - p k_1 = \\tfrac{p^2 - q^2}{2}. \\tag{$*$}$$\n\nLet $G = \\frac{K + L}2 = \\left(k_1 + \\frac p2,\\ k_2 + \\frac q2\\right)$ and choose\n$$X = (2G_x, 0) \\in AC, \\qquad Y = (0, 2G_y) \\in BD.$$\nThen $XY$ and $KL$ have the same midpoint $G$, so $KXLY$ is a parallelogram. It is a rhombus iff its diagonals are perpendicular: $\\vec{XY} = (-2G_x, 2G_y)$ and $\\vec{KL} = (p, q)$, so we need $-pG_x + qG_y = 0$, i.e.\n$$q\\left(k_2 + \\tfrac q2\\right) = p\\left(k_1 + \\tfrac p2\\right) \\iff qk_2 - pk_1 = \\tfrac{p^2 - q^2}2,$$\nwhich is exactly $(*)$.\n\nFinally it is non-degenerate: $K \\ne L$, and $X = Y$ would force $G = O$, i.e. $K = -\\frac t2$, the midpoint of $AB$, which is not inside the rhombus. ∎"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamo-usajmo-2022-05",
+    "bank": "usamo",
+    "source": {
+      "contest": "USAJMO",
+      "paper": "USAJMO 2022",
+      "year": 2022,
+      "number": 5,
+      "url": "https://web.evanchen.cc/exams/JMO-2022-notes.pdf"
+    },
+    "grade": "7-10",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Find all pairs of primes $(p, q)$ for which $p - q$ and $pq - q$ are both perfect squares.",
+    "image": null,
+    "choices": null,
+    "answer": "Only $(p, q) = (3, 2)$. With $a^2 = p - q$, $b^2 = pq - q$: $(b-a)(b+a) = p(q-1)$ with $0 < b - a < p$ and $b + a < 2p$ forces $b + a = p$, $b - a = q - 1$; parity gives $q = 2$, then $p = 3$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Difference of squares",
+        "body": "$(3, 2)$ works: $3 - 2 = 1$ and $6 - 2 = 4$. We show it is the only pair.\n\nIf $p = q$, then $pq - q = q(q-1)$ is a product of two coprime consecutive positive integers, so both would be squares; but the prime $q$ is not a square. If $p < q$ then $p - q < 0$. So $p > q$. Write\n$$a^2 = p - q, \\qquad b^2 = pq - q = q(p-1),$$\nwith $a, b$ positive integers.\n\n- $a^2 = p - q < p$, so $a < p$.\n- $b^2 = q(p-1) \\le (p-1)^2 < p^2$, so $b < p$.\n- $b^2 - a^2 = pq - p = p(q - 1) > 0$, so $b > a$.\n\nHence $(b - a)(b + a) = p(q-1)$ with $0 < b - a < p$, so the prime $p$ does not divide $b - a$ and must divide $b + a$. As $0 < b + a < 2p$, we get $b + a = p$ and therefore $b - a = q - 1$.\n\nAdding, $2b = p + q - 1$, so $p + q$ is odd and one of $p, q$ equals $2$; since $q < p$, $q = 2$. Then $b - a = 1$ and $b + a = p$ give $a = \\frac{p-1}2$, and $a^2 = p - 2$ becomes\n$$(p-1)^2 = 4(p - 2) \\iff p^2 - 6p + 9 = 0 \\iff p = 3.$$\n\n**Answer:** $(p, q) = (3, 2)$. ∎"
+      },
+      {
+        "title": "Divisibility",
+        "body": "As above $p > q$. Since $q(p-1)$ is a square and $q$ is prime, $q \\mid p - 1$ and $\\frac{p-1}{q}$ is a square. Then\n$$s^2 := (p - q)\\cdot\\frac{p-1}{q}$$\nis a square, and solving for $q$ gives $q = \\dfrac{p^2 - p}{s^2 + p - 1}$. So $s^2 + p - 1$ divides $p(p-1)$, and in particular $s < p$.\n\n- If $p \\nmid s^2 + p - 1$, then $s^2 + p - 1 \\mid p - 1$, forcing $s = 0$, i.e. $p = q$, already excluded.\n- If $p \\mid s^2 + p - 1$, then $s^2 \\equiv 1 \\pmod p$, so $s = 1$ or $s = p - 1$. If $s = p-1$ then $q = \\frac{p(p-1)}{p(p-1)} = 1$, not prime. If $s = 1$ then $q = p - 1$, so $q = 2$, $p = 3$. ∎"
+      }
+    ],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamo-usajmo-2022-06",
+    "bank": "usamo",
+    "source": {
+      "contest": "USAJMO",
+      "paper": "USAJMO 2022",
+      "year": 2022,
+      "number": 6,
+      "url": "https://web.evanchen.cc/exams/JMO-2022-notes.pdf"
+    },
+    "grade": "7-10",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $a_0, b_0, c_0$ be complex numbers, and define\n$$a_{n+1} = a_n^2 + 2b_nc_n, \\qquad b_{n+1} = b_n^2 + 2c_na_n, \\qquad c_{n+1} = c_n^2 + 2a_nb_n$$\nfor all nonnegative integers $n$. Suppose that $\\max\\{|a_n|, |b_n|, |c_n|\\} \\le 2022$ for all $n \\ge 0$. Prove that\n$$|a_0|^2 + |b_0|^2 + |c_0|^2 \\le 1.$$",
+    "image": null,
+    "choices": null,
+    "answer": "With $s_n = |a_n|^2 + |b_n|^2 + |c_n|^2$ one has the identity $s_{n+1} - s_n^2 = 2\\,|a_n\\bar b_n + b_n\\bar c_n + c_n\\bar a_n|^2 \\ge 0$, so $s_n \\ge s_0^{2^n}$, which is unbounded if $s_0 > 1$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "A miraculous identity",
+        "body": "Let $s_n = |a_n|^2 + |b_n|^2 + |c_n|^2$ and drop the index $n$ for the moment, writing $a, b, c$.\n\n**Claim.** $s_{n+1} - s_n^2 = 2\\left|a\\bar b + b\\bar c + c\\bar a\\right|^2$.\n\n*Proof.* Using $|z|^2 = z\\bar z$,\n$$|a^2 + 2bc|^2 = |a|^4 + 2a^2\\bar b\\bar c + 2\\bar a^2bc + 4|b|^2|c|^2,$$\nand summing cyclically,\n$$s_{n+1} = \\sum|a|^4 + 4\\sum|b|^2|c|^2 + 4\\operatorname{Re}\\left(\\bar a^2bc + \\bar b^2ca + \\bar c^2ab\\right).$$\nSince $s_n^2 = \\sum |a|^4 + 2\\sum|b|^2|c|^2$,\n$$s_{n+1} - s_n^2 = 2\\sum|b|^2|c|^2 + 4\\operatorname{Re}\\left(\\bar a^2bc + \\bar b^2ca + \\bar c^2ab\\right).$$\nOn the other hand, for $X = a\\bar b$, $Y = b\\bar c$, $Z = c\\bar a$,\n$$|X + Y + Z|^2 = |X|^2 + |Y|^2 + |Z|^2 + 2\\operatorname{Re}(X\\bar Y + Y\\bar Z + Z\\bar X),$$\nwhere $|X|^2 + |Y|^2 + |Z|^2 = \\sum|a|^2|b|^2$ and $X\\bar Y = a\\bar b\\,\\bar b c = \\bar b^2 ca$, $Y\\bar Z = \\bar c^2 ab$, $Z\\bar X = \\bar a^2 bc$. Doubling gives exactly the expression above. $\\square$\n\nHence $s_{n+1} \\ge s_n^2$ for all $n$ (and all $s_n \\ge 0$), so by induction\n$$s_n \\ge s_0^{2^n}.$$\nIf $s_0 > 1$, the right side tends to infinity, so $s_n$ is unbounded. But the hypothesis gives $s_n \\le 3 \\cdot 2022^2$ for all $n$. Therefore $s_0 \\le 1$, i.e. $|a_0|^2 + |b_0|^2 + |c_0|^2 \\le 1$. ∎\n\n*Remark.* Another route: swap the names of $b_n, c_n$ in alternate steps so that $z_n = a_n + \\omega b_n + \\omega^2c_n$ ($\\omega^3 = 1$) satisfies $z_{n+1} = z_n^2$."
+      }
+    ],
+    "topics": [
+      "complex-numbers",
+      "sequences-series",
+      "inequalities"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

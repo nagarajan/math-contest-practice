@@ -1,0 +1,301 @@
+[
+  {
+    "id": "imc-2020-01",
+    "bank": "imc",
+    "source": {
+      "contest": "IMC",
+      "paper": "Day 1",
+      "year": 2020,
+      "number": 1,
+      "url": "https://www.imc-math.org.uk/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $n$ be a positive integer. Compute the number of words $w$ (finite sequences of letters) that satisfy all the following three properties:\n\n1. $w$ consists of $n$ letters, all of them are from the alphabet $\\{a,b,c,d\\}$;\n2. $w$ contains an even number of letters $a$;\n3. $w$ contains an even number of letters $b$.\n\n(For example, for $n=2$ there are 6 such words: $aa$, $bb$, $cc$, $dd$, $cd$ and $dc$.)",
+    "image": null,
+    "choices": null,
+    "answer": "$4^{n-1}+2^{n-1}$",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Roots-of-unity filter",
+        "body": "**Answer: $4^{n-1}+2^{n-1}$.**\n\nExpand $(a+b+c+d)^n$ as a sum over all words $x_1x_2\\cdots x_n$ (one letter chosen from each factor). A word with $A$ letters $a$ and $B$ letters $b$ contributes to\n$$\\frac{(a+b+c+d)^n+(-a-b+c+d)^n+(-a+b+c+d)^n+(a-b+c+d)^n}{4}$$\nits monomial with coefficient\n$$\\frac{1+(-1)^{A+B}+(-1)^A+(-1)^B}{4}=\\frac{(1+(-1)^A)(1+(-1)^B)}{4}=\\begin{cases}1&A,B\\text{ even},\\\\0&\\text{otherwise.}\\end{cases}$$\nSo substituting $a=b=c=d=1$ counts exactly the required words:\n$$\\frac{4^n+0^n+2^n+2^n}{4}=\\frac{4^n+2^{n+1}}{4}=4^{n-1}+2^{n-1}\\qquad(n\\ge1).$$\nCheck $n=2$: $4+2=6$. ✓"
+      },
+      {
+        "title": "Choose the positions of $a$ and $b$ first",
+        "body": "Let $N=\\{1,\\dots,n\\}$ and let $S$ be the set of positions holding $a$ or $b$. Then $|S|$ must be even (sum of two even numbers). An $n$-element set ($n\\ge1$) has $2^{n-1}$ even-size subsets.\n\n* $S=\\varnothing$: every position is $c$ or $d$, giving $2^n$ words.\n* $|S|=k>0$ even: choose which positions of $S$ hold $a$ — an even-size subset of $S$, $2^{k-1}$ ways (then the number of $b$'s, $k-$even, is even automatically) — and fill $N\\setminus S$ with $c$/$d$ in $2^{n-k}$ ways: $2^{n-1}$ words for each such $S$.\n\nThere are $2^{n-1}-1$ nonempty even $S$, so the total is\n$$2^n+(2^{n-1}-1)2^{n-1}=4^{n-1}+2^{n-1}.$$\n**Answer: $4^{n-1}+2^{n-1}$.**"
+      }
+    ],
+    "topics": [
+      "counting"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imc-2020-02",
+    "bank": "imc",
+    "source": {
+      "contest": "IMC",
+      "paper": "Day 1",
+      "year": 2020,
+      "number": 2,
+      "url": "https://www.imc-math.org.uk/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $A$ and $B$ be $n\\times n$ real matrices such that\n$$\\operatorname{rk}(AB-BA+I)=1,$$\nwhere $I$ is the $n\\times n$ identity matrix. Prove that\n$$\\operatorname{trace}(ABAB)-\\operatorname{trace}(A^2B^2)=\\tfrac12 n(n-1).$$\n($\\operatorname{rk}(M)$ denotes the rank of $M$; $\\operatorname{trace}(M)$ is the sum of the diagonal entries of $M$.)",
+    "image": null,
+    "choices": null,
+    "answer": "With $X=AB-BA$: $\\operatorname{tr}X^2=2\\operatorname{tr}(ABAB)-2\\operatorname{tr}(A^2B^2)$, and $X+I=vw^T$ with $w^Tv=\\operatorname{tr}(X+I)=n$ gives $\\operatorname{tr}X^2=n(n-1)$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Write $X+I$ as $vw^T$",
+        "body": "Let $X=AB-BA$. Using $\\operatorname{tr}(PQ)=\\operatorname{tr}(QP)$:\n$$\\operatorname{tr}(X^2)=\\operatorname{tr}(ABAB)-\\operatorname{tr}(ABBA)-\\operatorname{tr}(BAAB)+\\operatorname{tr}(BABA)=2\\operatorname{tr}(ABAB)-2\\operatorname{tr}(A^2B^2),$$\nsince $\\operatorname{tr}(ABBA)=\\operatorname{tr}(A^2B^2)=\\operatorname{tr}(BAAB)$ and $\\operatorname{tr}(BABA)=\\operatorname{tr}(ABAB)$. So we must show $\\operatorname{tr}(X^2)=n(n-1)$.\n\nA rank-one matrix is $X+I=vw^T$ for column vectors $v,w$. Then\n$$X^2=(vw^T-I)^2=v(w^Tv)w^T-2vw^T+I=(w^Tv-2)\\,vw^T+I .$$\nAlso $\\operatorname{tr}X=\\operatorname{tr}(AB)-\\operatorname{tr}(BA)=0$, so $w^Tv=\\operatorname{tr}(vw^T)=\\operatorname{tr}(X+I)=n$. Hence\n$$\\operatorname{tr}(X^2)=(n-2)\\operatorname{tr}(vw^T)+n=(n-2)n+n=n(n-1),$$\nand $\\operatorname{tr}(ABAB)-\\operatorname{tr}(A^2B^2)=\\frac12n(n-1)$. ∎"
+      },
+      {
+        "title": "Eigenvalues",
+        "body": "As in the first solution it suffices to show $\\operatorname{tr}(X^2)=n(n-1)$ for $X=AB-BA$, where $\\operatorname{tr}X=0$.\n\n$X+I$ has rank $1$, so its kernel has dimension $n-1$: the eigenvalue $0$ of $X+I$ has geometric, hence algebraic, multiplicity at least $n-1$. The remaining eigenvalue $\\mu$ (counted with multiplicity, over $\\mathbb C$) satisfies $\\mu+0=\\operatorname{tr}(X+I)=n$. So the eigenvalues of $X$ are $-1$ ($n-1$ times) and $n-1$. The eigenvalues of $X^2$ are their squares, so\n$$\\operatorname{tr}(X^2)=(n-1)\\cdot1+(n-1)^2=n(n-1). \\qquad ∎$$"
+      }
+    ],
+    "topics": [
+      "linear-algebra"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imc-2020-03",
+    "bank": "imc",
+    "source": {
+      "contest": "IMC",
+      "paper": "Day 1",
+      "year": 2020,
+      "number": 3,
+      "url": "https://www.imc-math.org.uk/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $d\\ge2$ be an integer. Prove that there exists a constant $C(d)$ such that the following holds: For any convex polytope $K\\subset\\mathbb R^d$, which is symmetric about the origin, and any $\\varepsilon\\in(0,1)$, there exists a convex polytope $L\\subset\\mathbb R^d$ with at most $C(d)\\,\\varepsilon^{1-d}$ vertices such that\n$$(1-\\varepsilon)K\\subseteq L\\subseteq K.$$\n(For a real $\\alpha$, a set $T\\subset\\mathbb R^d$ with nonempty interior is a convex polytope with at most $\\alpha$ vertices if $T$ is the convex hull of a set $X\\subset\\mathbb R^d$ of at most $\\alpha$ points, i.e., $T=\\{\\sum_{x\\in X}t_xx\\mid t_x\\ge0,\\ \\sum_{x\\in X}t_x=1\\}$. For a real $\\lambda$, put $\\lambda K=\\{\\lambda x\\mid x\\in K\\}$. A set $T\\subset\\mathbb R^d$ is symmetric about the origin if $(-1)T=T$.)",
+    "image": null,
+    "choices": null,
+    "answer": "Take a maximal family of boundary points $p_i$ with $p_i+\\frac\\varepsilon2K$ having disjoint interiors and $L=\\operatorname{conv}\\{p_i\\}$; volume counting gives $m\\le3^d\\varepsilon^{1-d}$, and a separating functional shows $(1-\\varepsilon)K\\subseteq L$. So $C(d)=3^d$ works.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "A maximal packing of small copies",
+        "body": "We show $C(d)=3^d$ works. $K$ is convex, compact, symmetric, with nonempty interior. Two facts: $aK+bK=(a+b)K$ for $a,b\\ge0$ (convexity), and for a linear functional $\\ell\\ne0$, $h=\\max_K\\ell>0$ and $|\\ell(y)|\\le h$ for $y\\in K$ (symmetry).\n\n**Construction.** Call a finite set $\\{p_1,\\dots,p_m\\}\\subset\\partial K$ *admissible* if the sets $K_i=p_i+\\frac\\varepsilon2K$ have pairwise disjoint interiors.\n\n*Size bound.* Let $\\{p_i\\}$ be admissible. Clearly $K_i\\subset K+\\frac\\varepsilon2K=(1+\\frac\\varepsilon2)K$. Also $K_i$ does not meet the interior of $(1-\\frac\\varepsilon2)K$: if $z=p_i+\\frac\\varepsilon2k\\in K_i$ and $z=ak'$ with $k,k'\\in K$, $a\\ge0$, then $p_i=ak'-\\frac\\varepsilon2k\\in aK+\\frac\\varepsilon2K=(a+\\frac\\varepsilon2)K$ (using $-k\\in K$), and since $p_i\\in\\partial K$ this forces $a+\\frac\\varepsilon2\\ge1$. So the $K_i$ are $m$ sets with disjoint interiors, each of volume $(\\frac\\varepsilon2)^d\\operatorname{vol}K$, inside $(1+\\frac\\varepsilon2)K\\setminus\\operatorname{int}(1-\\frac\\varepsilon2)K$:\n$$m\\left(\\frac\\varepsilon2\\right)^d\\le\\left(1+\\frac\\varepsilon2\\right)^d-\\left(1-\\frac\\varepsilon2\\right)^d .$$\nThe right side is a polynomial in $\\varepsilon$ with nonnegative coefficients and no constant term, whose coefficients sum to $(\\frac32)^d-(\\frac12)^d$; as $\\varepsilon<1$ it is at most $(\\frac32)^d\\varepsilon$. Hence\n$$m\\le\\left(\\tfrac32\\right)^d\\varepsilon\\cdot\\left(\\tfrac2\\varepsilon\\right)^d=3^d\\varepsilon^{1-d}.$$\nIn particular admissible sets have bounded size, so there is an admissible set $\\{p_1,\\dots,p_m\\}$ that is **maximal** (no boundary point can be added). Let $L=\\operatorname{conv}\\{p_1,\\dots,p_m\\}$; it has at most $3^d\\varepsilon^{1-d}$ vertices.\n\n**$L\\subseteq K$** by convexity of $K$.\n\n**$(1-\\varepsilon)K\\subseteq L$.** Suppose $p\\in(1-\\varepsilon)K\\setminus L$. Since $L$ is compact and convex, a hyperplane separates $p$ from $L$: there is a linear functional $\\ell$ with $\\ell(p)>\\max_L\\ell=\\max_i\\ell(p_i)$. Let $h=\\max_K\\ell>0$, attained at $x\\in\\partial K$. By maximality, $\\{p_1,\\dots,p_m,x\\}$ is not admissible (if $x=p_i$ this is also true trivially), so $x+\\frac\\varepsilon2K$ and some $K_i$ have a common interior point $z$. Writing $z=x+\\frac\\varepsilon2k_1=p_i+\\frac\\varepsilon2k_2$ with $k_1,k_2\\in K$:\n$$\\ell(p_i)+\\frac\\varepsilon2h\\ \\ge\\ \\ell(z)\\ \\ge\\ h-\\frac\\varepsilon2h,$$\nso $\\ell(p_i)\\ge(1-\\varepsilon)h$. But $p\\in(1-\\varepsilon)K$ gives $\\ell(p)\\le(1-\\varepsilon)h\\le\\ell(p_i)$, contradicting the choice of $\\ell$. Hence $(1-\\varepsilon)K\\subseteq L$; in particular $L$ has nonempty interior. ∎\n\n*Remark (normed-space language).* $K$ is the unit ball of a norm $\\|\\cdot\\|$; the construction is a maximal $\\varepsilon$-separated subset of the unit sphere, and the separation step is the Hahn–Banach theorem."
+      }
+    ],
+    "topics": [
+      "geometry",
+      "analysis"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imc-2020-04",
+    "bank": "imc",
+    "source": {
+      "contest": "IMC",
+      "paper": "Day 1",
+      "year": 2020,
+      "number": 4,
+      "url": "https://www.imc-math.org.uk/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "A polynomial $p$ with real coefficients satisfies the equation $p(x+1)-p(x)=x^{100}$ for all $x\\in\\mathbb R$. Prove that $p(1-t)\\ge p(t)$ for $0\\le t\\le 1/2$.",
+    "image": null,
+    "choices": null,
+    "answer": "Normalise $p(0)=0$; then $p(1-x)=-p(x)$, and $p''=100\\cdot99\\,P_{98}$ relates it to the analogous polynomials of lower even degree, whose signs on $(0,\\frac12)$ alternate; for $x^{100}$ the polynomial is negative there, so $p(1-t)-p(t)=-2p(t)\\ge0$. (Equivalently: $p=\\frac{B_{101}}{101}+c$ with Bernoulli polynomial $B_{101}$.)",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Symmetry and convexity of the polynomials $P_n$",
+        "body": "Let $\\Delta q(x)=q(x+1)-q(x)$. On polynomials, $\\Delta$ lowers the degree by exactly one (for $\\deg q=m\\ge1$, the leading term of $\\Delta q$ is $m c_m x^{m-1}$), its kernel is the constants, and it maps polynomials of degree $\\le m+1$ onto those of degree $\\le m$ (dimension count). Hence for each $n\\ge1$ there is a unique polynomial $P_n$ with\n$$\\Delta P_n=x^n,\\qquad P_n(0)=0,$$\nand then $P_n(1)=P_n(0)+0^n=0$. Our $p$ equals $P_{100}+\\text{const}$, so we must show $P_{100}(1-t)\\ge P_{100}(t)$ on $[0,\\frac12]$.\n\n**Symmetry: $P_n(1-x)=(-1)^{n+1}P_n(x)$.** Let $S(x)=P_n(1-x)$. Then $\\Delta S(x)=P_n(-x)-P_n(1-x)=-\\Delta P_n(-x)=-(-x)^n=(-1)^{n+1}x^n$. So $S-(-1)^{n+1}P_n\\in\\ker\\Delta$ is constant, and its value at $0$ is $P_n(1)-(-1)^{n+1}P_n(0)=0$. ✓\n\nSo $P_{100}(1-t)-P_{100}(t)=-2P_{100}(t)$, and it suffices to prove $P_{100}\\le0$ on $[0,\\frac12]$. Note also $P_{2k}(\\frac12)=-P_{2k}(\\frac12)$, so $P_{2k}(\\frac12)=0$.\n\n**Derivatives.** $\\Delta(P_n')=(\\Delta P_n)'=nx^{n-1}=\\Delta(nP_{n-1})$, so $P_n'=nP_{n-1}+c_n$ for a constant $c_n$ ($n\\ge2$). For odd $n=2k+1$, differentiating the symmetry $P_{2k+1}(1-x)=P_{2k+1}(x)$ gives $P_{2k+1}'(\\frac12)=0$; with $P_{2k}(\\frac12)=0$ this yields $c_{2k+1}=0$. Hence for $k\\ge2$\n$$P_{2k}''=2k\\,P_{2k-1}'=2k(2k-1)P_{2k-2}.$$\nDirectly, $P_1=\\frac{x^2-x}2$ (check: $\\Delta P_1=\\frac{2x+1-1}{2}=x$), so $P_2''=2P_1'=2x-1<0$ on $[0,\\frac12)$.\n\n**Signs.** $P_2$ is strictly concave on $[0,\\frac12]$ and vanishes at both endpoints, so $P_2>0$ on $(0,\\frac12)$. Then $P_4''=12P_2>0$: $P_4$ is strictly convex on $[0,\\frac12]$ with zero endpoint values, so $P_4<0$ on $(0,\\frac12)$. Inductively, $P_{2k}$ has sign $(-1)^{k+1}$ on $(0,\\frac12)$. For $k=50$: $P_{100}<0$ on $(0,\\frac12)$, and $P_{100}=0$ at $0,\\frac12$.\n\nTherefore $p(1-t)-p(t)=-2P_{100}(t)\\ge0$ for $0\\le t\\le\\frac12$. ∎"
+      },
+      {
+        "title": "Maximum principle for a harmonic function",
+        "body": "Let $h(z)=p(1-\\bar z)-p(z)$ for $z\\in\\mathbb C$. Since $p$ has real coefficients, $\\overline{p(1-\\bar z)}=p(1-z)$, so $\\operatorname{Re}h(z)=\\operatorname{Re}\\big(p(1-z)-p(z)\\big)$ is the real part of a polynomial, hence harmonic. On the real axis $h(t)=p(1-t)-p(t)$ is real, so we must show $\\operatorname{Re}h\\ge0$ on $[0,\\frac12]$.\n\n**Boundary values on the strip $0\\le\\operatorname{Re}z\\le\\frac12$.**\n* $z=it$: $1-\\bar z=1+it$, so $h(it)=p(1+it)-p(it)=(it)^{100}=t^{100}\\ge0$.\n* $z=\\frac12+it$: $1-\\bar z=z$, so $h=0$.\n* Large $|t|$: as in the first solution, $\\deg p=101$ with leading coefficient $\\frac1{101}$. For fixed real $a$, $h(a+it)=p(1-a+it)-p(a+it)$ is a polynomial in $t$ and $a$ which vanishes identically at $a=\\frac12$, so $h(a+it)=(1-2a)\\big(t^{100}+Q(t,a)\\big)$ where (comparing the top terms, $\\frac{(1-a+it)^{101}-(a+it)^{101}}{101}=(1-2a)(it)^{100}+\\dots$) $Q$ has degree $\\le99$ in $t$ with coefficients polynomial in $a$. Hence $\\operatorname{Re}h(a+it)\\ge0$ for $a\\in[0,\\frac12]$ and $|t|\\ge N$, $N$ large.\n\nSo $\\operatorname{Re}h\\ge0$ on the boundary of the rectangle $[0,\\frac12]\\times[-N,N]$. By the minimum principle for harmonic functions, $\\operatorname{Re}h\\ge0$ on the whole rectangle, in particular on $[0,\\frac12]$: $p(1-t)\\ge p(t)$. ∎"
+      }
+    ],
+    "topics": [
+      "polynomials",
+      "calculus"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imc-2020-05",
+    "bank": "imc",
+    "source": {
+      "contest": "IMC",
+      "paper": "Day 2",
+      "year": 2020,
+      "number": 5,
+      "url": "https://www.imc-math.org.uk/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Find all twice continuously differentiable functions $f:\\mathbb R\\to(0,+\\infty)$ satisfying\n$$f''(x)f(x)\\ge2\\big(f'(x)\\big)^2\\qquad\\text{for all } x\\in\\mathbb R.$$",
+    "image": null,
+    "choices": null,
+    "answer": "Only the positive constants. $g=1/f$ satisfies $g''=\\frac{2f'^2-ff''}{f^3}\\le0$, and a positive concave function on $\\mathbb R$ is constant.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "$1/f$ is a positive concave function",
+        "body": "**Answer: exactly the positive constant functions.** Constants clearly work ($0\\ge0$).\n\nLet $g=1/f>0$. Then $g'=-f'/f^2$ and\n$$g''=\\frac{-f''f^2+2f(f')^2}{f^4}=\\frac{2(f')^2-f''f}{f^3}\\le0,$$\nso $g$ is concave on $\\mathbb R$.\n\n**A positive concave function on $\\mathbb R$ is constant.** Let $a<b$. For $u<a$ and $v>b$, concavity gives decreasing slopes:\n$$\\frac{g(a)-g(u)}{a-u}\\ \\ge\\ \\frac{g(b)-g(a)}{b-a}\\ \\ge\\ \\frac{g(v)-g(b)}{v-b}.$$\nSince $g(u),g(v)>0$, the left side is $<\\frac{g(a)}{a-u}$ and the right side is $>-\\frac{g(b)}{v-b}$. Letting $u\\to-\\infty$ and $v\\to+\\infty$:\n$$0\\ \\ge\\ \\frac{g(b)-g(a)}{b-a}\\ \\ge\\ 0,$$\nso $g(a)=g(b)$. Thus $g$, and hence $f=1/g$, is constant. ∎"
+      },
+      {
+        "title": "$\\arctan f$ is a bounded convex function",
+        "body": "Let $\\phi=\\arctan f$, which takes values in $(0,\\frac\\pi2)$. Then $\\phi'=\\frac{f'}{1+f^2}$ and\n$$\\phi''=\\frac{f''(1+f^2)-2f(f')^2}{(1+f^2)^2}.$$\nFrom the hypothesis, $f''\\ge\\frac{2(f')^2}{f}$, so $f''(1+f^2)\\ge2(f')^2\\left(\\frac1f+f\\right)\\ge2f(f')^2$. Hence $\\phi''\\ge0$: $\\phi$ is convex and bounded on $\\mathbb R$.\n\nA bounded convex function on $\\mathbb R$ is constant: if $\\phi'(x_0)\\ne0$ for some $x_0$, say $\\phi'(x_0)>0$, then $\\phi(x)\\ge\\phi(x_0)+\\phi'(x_0)(x-x_0)\\to\\infty$ as $x\\to\\infty$ (tangent line bound), contradicting boundedness; similarly if $\\phi'(x_0)<0$. So $\\phi'\\equiv0$ and $f=\\tan\\phi$ is constant.\n\n**Answer: $f\\equiv c$ for any constant $c>0$.** ∎"
+      }
+    ],
+    "topics": [
+      "calculus",
+      "real-analysis",
+      "differential-equations"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imc-2020-06",
+    "bank": "imc",
+    "source": {
+      "contest": "IMC",
+      "paper": "Day 2",
+      "year": 2020,
+      "number": 6,
+      "url": "https://www.imc-math.org.uk/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Find all prime numbers $p$ for which there exists a unique $a\\in\\{1,2,\\ldots,p\\}$ such that $a^3-3a+1$ is divisible by $p$.",
+    "image": null,
+    "choices": null,
+    "answer": "Only $p=3$. If $a$ is a root of $f(x)=x^3-3x+1$ mod $p$, so are $a^2-2$ and $-a^2-a+2$; uniqueness forces $a^2-2=a$, i.e. $a\\in\\{-1,2\\}$, and $f(-1)=f(2)=3$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "The map $x\\mapsto x^2-2$ permutes the roots",
+        "body": "**Answer: $p=3$.**\n\nLet $f(x)=x^3-3x+1$; we work in $\\mathbb F_p$, where $\\{1,\\dots,p\\}$ is a complete set of residues. (Over $\\mathbb R$ the roots are $2\\cos\\frac{2\\pi}9,2\\cos\\frac{4\\pi}9,2\\cos\\frac{8\\pi}9$, and $2\\cos2t=(2\\cos t)^2-2$ shows that $x\\mapsto x^2-2$ permutes them; this motivates the following.)\n\nSuppose $f(a)=0$ in $\\mathbb F_p$. Then\n$$g(x)=\\frac{f(x)-f(a)}{x-a}=x^2+ax+(a^2-3)$$\nand $f(x)=(x-a)g(x)$. Let $b=a^2-2$. A direct expansion gives\n$$g(b)=(a^2-2)^2+a(a^2-2)+a^2-3=a^4+a^3-3a^2-2a+1=(a+1)f(a)=0 .$$\nSo $b$ is a root of $g$, and by Vieta the other root is $c=-a-b=-a^2-a+2$. Hence $a,b,c\\in\\mathbb F_p$ are all roots of $f$.\n\nIf $a$ is the **unique** root, then $b=a$: $a^2-a-2=(a-2)(a+1)=0$, so $a=2$ or $a=-1$. But $f(2)=3$ and $f(-1)=3$, so $0=f(a)=3$ in $\\mathbb F_p$, i.e. $p=3$.\n\nConversely, for $p=3$: $f(1)=-1$, $f(2)=3$, $f(3)=19$; only $a=2$ gives a multiple of $3$. So $p=3$ is the only such prime. ∎"
+      },
+      {
+        "title": "The discriminant is a square",
+        "body": "For $p=2$: $f(1)=-1$ and $f(2)=3$ are odd, so there is no root — not unique. For $p=3$: only $f(2)=3$ is divisible by 3 (as $f(1)=-1$, $f(3)=19$) — works.\n\nLet $p>3$ and suppose $a\\in\\mathbb F_p$ is a root of $f$; let $b,c$ be the other two roots in a splitting field (at most $\\mathbb F_{p^2}$, since $f=(x-a)g$ with $g$ quadratic over $\\mathbb F_p$). The discriminant of $x^3+Px+Q$ is $-4P^3-27Q^2$; here $-4(-3)^3-27=81$, so\n$$\\big((a-b)(a-c)(b-c)\\big)^2=81\\ne0\\quad(p>3),$$\nand the roots are distinct. Now $(a-b)(a-c)=g(a)=f'(a)=3a^2-3\\in\\mathbb F_p^*$, so $(b-c)^2=\\big(9/g(a)\\big)^2$ and $b-c=\\pm9/g(a)\\in\\mathbb F_p$. Also $b+c=-a\\in\\mathbb F_p$. As $p$ is odd, $b=\\frac{(b+c)+(b-c)}2$ and $c$ lie in $\\mathbb F_p$. So $f$ has three distinct roots in $\\mathbb F_p$ whenever it has one — never exactly one.\n\n**Answer: $p=3$.** ∎"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "polynomials"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imc-2020-07",
+    "bank": "imc",
+    "source": {
+      "contest": "IMC",
+      "paper": "Day 2",
+      "year": 2020,
+      "number": 7,
+      "url": "https://www.imc-math.org.uk/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $G$ be a group and $n\\ge2$ be an integer. Let $H_1$ and $H_2$ be two subgroups of $G$ that satisfy\n$$[G:H_1]=[G:H_2]=n\\qquad\\text{and}\\qquad[G:(H_1\\cap H_2)]=n(n-1).$$\nProve that $H_1$ and $H_2$ are conjugate in $G$.\n\n(Here $[G:H]$ denotes the index of the subgroup $H$, i.e. the number of distinct left cosets $xH$ of $H$ in $G$. The subgroups $H_1$ and $H_2$ are conjugate if there exists an element $g\\in G$ such that $g^{-1}H_1g=H_2$.)",
+    "image": null,
+    "choices": null,
+    "answer": "$H_1H_2$ is a union of $n-1$ left cosets of $H_2$ and of $n-1$ right cosets of $H_1$; so the complement $L=G\\setminus H_1H_2$ is simultaneously a left coset $gH_2$ and a right coset $H_1g$, giving $g^{-1}H_1g=H_2$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "The complement of $H_1H_2$",
+        "body": "Let $K=H_1\\cap H_2$. From $n(n-1)=[G:K]=[G:H_1][H_1:K]=n[H_1:K]$ we get $[H_1:K]=n-1$, and likewise $[H_2:K]=n-1$.\n\n**$H_1H_2$ is a union of $n-1$ left cosets of $H_2$.** Write $H_1=\\bigsqcup_{i=1}^{n-1}h_iK$. Since $K\\subseteq H_2$, $KH_2=H_2$, so\n$$H_1H_2=\\bigcup_{i=1}^{n-1}h_iKH_2=\\bigcup_{i=1}^{n-1}h_iH_2 .$$\nThese cosets are distinct: $h_iH_2=h_jH_2\\iff h_i^{-1}h_j\\in H_2$; since also $h_i^{-1}h_j\\in H_1$, this means $h_i^{-1}h_j\\in K$, i.e. $i=j$. So $H_1H_2$ consists of exactly $n-1$ of the $n$ left cosets of $H_2$, and its complement $L=G\\setminus H_1H_2$ is a single left coset: $L=gH_2$ for any $g\\in L$.\n\n**Symmetrically**, writing $H_2=\\bigsqcup_{j=1}^{n-1}Kk_j$ (right cosets), $H_1H_2=\\bigsqcup_jH_1k_j$ is a union of $n-1$ distinct right cosets of $H_1$. There are $n$ right cosets of $H_1$ (as many as left cosets, via $x\\mapsto x^{-1}$), so $L$ is a single right coset: $L=H_1g$ for $g\\in L$.\n\nHence for $g\\in L$: $gH_2=L=H_1g$, i.e. $H_2=g^{-1}H_1g$. ∎"
+      },
+      {
+        "title": "Group actions on coset spaces",
+        "body": "Let $X=G/H_1$ and $Y=G/H_2$ (left cosets), $|X|=|Y|=n$, with $G$ acting by left multiplication; let $x_0=H_1$, $y_0=H_2$. $G$ acts on $X\\times Y$ coordinatewise. The stabiliser of $(x_0,y_0)$ is $H_1\\cap H_2$, so by the orbit–stabiliser theorem its orbit $Z$ has $n(n-1)$ elements, and $W=(X\\times Y)\\setminus Z$ has $n$ elements. Both $Z$ and $W$ are $G$-invariant.\n\nFor $x\\in X$ let $Z_x=\\{y:(x,y)\\in Z\\}$. An element $g$ maps $Z_x$ bijectively onto $Z_{gx}$, and $G$ is transitive on $X$, so all $|Z_x|$ are equal, hence equal to $n(n-1)/n=n-1$. Similarly every \"column\" $\\{x:(x,y)\\in Z\\}$ has $n-1$ elements. So $W$ meets every row and every column in exactly one point: $W$ is the graph of a bijection $\\varphi:X\\to Y$. Since $W$ is $G$-invariant, $(gx,g\\varphi(x))\\in W$, i.e. $\\varphi(gx)=g\\varphi(x)$.\n\nThus $\\varphi$ is a $G$-equivariant bijection, so stabilisers correspond: $\\operatorname{Stab}(x_0)=\\operatorname{Stab}(\\varphi(x_0))$. Writing $\\varphi(x_0)=gH_2$, this reads $H_1=gH_2g^{-1}$, i.e. $g^{-1}H_1g=H_2$. ∎\n\n*Remark.* The situation occurs for every $n\\ge2$: $G=S_n$ and $H_1,H_2$ the stabilisers of two different points."
+      }
+    ],
+    "topics": [
+      "abstract-algebra"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imc-2020-08",
+    "bank": "imc",
+    "source": {
+      "contest": "IMC",
+      "paper": "Day 2",
+      "year": 2020,
+      "number": 8,
+      "url": "https://www.imc-math.org.uk/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Compute\n$$\\lim_{n\\to\\infty}\\frac{1}{\\log\\log n}\\sum_{k=1}^{n}(-1)^k\\binom nk\\log k .$$\n(Here $\\log$ denotes the natural logarithm.)",
+    "image": null,
+    "choices": null,
+    "answer": "1",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Frullani integral",
+        "body": "**Answer: $1$.**\n\n**Integral representation.** For $k\\ge1$, Frullani's integral gives $\\log k=\\int_0^\\infty\\frac{e^{-x}-e^{-kx}}{x}\\,dx$. Since $\\sum_{k=1}^n(-1)^k\\binom nk=-1$ and $\\sum_{k=1}^n(-1)^k\\binom nke^{-kx}=(1-e^{-x})^n-1$,\n$$A_n:=\\sum_{k=1}^n(-1)^k\\binom nk\\log k=\\int_0^\\infty\\frac{1-e^{-x}-(1-e^{-x})^n}{x}\\,dx .$$\nWith $y=1-e^{-x}\\in[0,1)$ the numerator is $y-y^n\\ge0$.\n\n**Tail.** By Bernoulli, $(1-e^{-x})^n\\ge1-ne^{-x}$, so the numerator is $\\le ne^{-x}$. Choose $M$ with $Me^M=n$ ($M\\to\\infty$). Then\n$$0\\le\\int_M^\\infty\\frac{1-e^{-x}-(1-e^{-x})^n}{x}dx\\le\\frac nM\\int_M^\\infty e^{-x}dx=\\frac{ne^{-M}}M=1 .$$\n\n**Main part.** For $0\\le x\\le M$, $e^{-x}\\ge e^{-M}=M/n$, so\n$$(1-e^{-x})^{n-1}\\le e^{-(n-1)e^{-x}}\\le e^{-(n-1)M/n}=:\\delta_n\\to0 .$$\nWriting the numerator as $(1-e^{-x})\\big(1-(1-e^{-x})^{n-1}\\big)$, we get\n$$(1-\\delta_n)I(M)\\le\\int_0^M\\frac{1-e^{-x}-(1-e^{-x})^n}{x}dx\\le I(M),\\qquad I(M)=\\int_0^M\\frac{1-e^{-x}}x\\,dx .$$\nAnd $I(M)=\\int_0^1\\frac{1-e^{-x}}xdx+\\int_1^M\\frac{dx}x-\\int_1^M\\frac{e^{-x}}xdx=\\log M+O(1)$.\n\n**Size of $M$.** $M+\\log M=\\log n$, so $\\log n-\\log\\log n\\le M\\le\\log n$ for large $n$, and $\\log M=\\log\\log n+o(1)$.\n\nAltogether $A_n=(1+o(1))\\log\\log n+O(1)$, so\n$$\\lim_{n\\to\\infty}\\frac{A_n}{\\log\\log n}=1 .$$"
+      },
+      {
+        "title": "Finite differences of $1/x$",
+        "body": "**Two identities.** Partial fractions give\n$$\\sum_{j=0}^m(-1)^j\\binom mj\\frac1{x+j}=\\frac{m!}{x(x+1)\\cdots(x+m)},\\tag{1}$$\n(the residue at $x=-j$ of the right side is $\\frac{m!}{\\prod_{i\\ne j}(i-j)}=(-1)^j\\binom mj$). And by Pascal's rule (telescoping),\n$$\\sum_{k=j+1}^n(-1)^k\\binom nk=(-1)^{j+1}\\binom{n-1}j .\\tag{2}$$\n\n**Rewrite the sum.** $\\log k=\\sum_{j=1}^{k-1}I_j$ with $I_j=\\int_0^1\\frac{dx}{x+j}=\\log\\frac{j+1}j$. Exchanging sums and using (2), then (1) with $m=n-1$:\n$$S_n:=\\sum_{k=1}^n(-1)^k\\binom nk\\log k=\\sum_{j=1}^{n-1}(-1)^{j+1}\\binom{n-1}jI_j=\\int_0^1\\left(\\frac1x-\\frac{(n-1)!}{x(x+1)\\cdots(x+n-1)}\\right)dx$$\n$$=\\int_0^1\\frac{1}{x}\\left(1-\\prod_{j=1}^{n-1}\\Big(1+\\frac xj\\Big)^{-1}\\right)dx .$$\n\n**Estimate the product.** For $0<y\\le1$: $e^{-y}\\le\\frac1{1+y}\\le e^{y^2-y}$ (the right inequality from $e^{y^2-y}\\ge1+y^2-y=\\frac{1+y^3}{1+y}$). With $y=x/j$, $H=\\sum_{j=1}^{n-1}\\frac1j$ and $x^2\\sum\\frac1{j^2}\\le2x$ for $x\\in[0,1]$:\n$$e^{-Hx}\\le\\prod_{j=1}^{n-1}\\Big(1+\\frac xj\\Big)^{-1}\\le e^{-(H-2)x}.$$\nHence\n$$\\int_0^1\\frac{1-e^{-(H-2)x}}{x}dx\\le S_n\\le\\int_0^1\\frac{1-e^{-Hx}}xdx .$$\nFor $c\\to\\infty$, $\\int_0^1\\frac{1-e^{-cx}}xdx=\\int_0^c\\frac{1-e^{-t}}tdt=\\log c+O(1)$. Since $H=\\log n+O(1)$, both bounds are $\\log\\log n+O(1)$, so $S_n=\\log\\log n+O(1)$ and the limit is\n$$1 .$$"
+      }
+    ],
+    "topics": [
+      "analysis",
+      "sequences-series",
+      "calculus"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

@@ -28,9 +28,15 @@ UA = {"User-Agent": "Mozilla/5.0 (math-contest-practice; personal study app)"}
 def _get(url, tries=6):
     delay = 3
     for i in range(tries):
+        time.sleep(1.5)
         try:
             with urllib.request.urlopen(urllib.request.Request(url, headers=UA), timeout=60) as r:
-                return r.read()
+                data = r.read()
+            if data[:2] == b"\x1f\x8b":
+                import gzip
+
+                data = gzip.decompress(data)
+            return data
         except Exception as ex:
             code = getattr(ex, "code", None)
             if code == 404:
@@ -54,7 +60,10 @@ def fetch_page(title):
     slug = title.replace(" ", "_")
     path = os.path.join(CACHE, re.sub(r"[^A-Za-z0-9_.-]", "~", slug) + ".html")
     if os.path.exists(path):
-        return open(path, encoding="utf-8").read()
+        cached = open(path, encoding="utf-8", errors="replace").read()
+        if "<html" in cached[:3000].lower() or "<!doctype" in cached[:200].lower():
+            return cached
+        os.remove(path)
     url = "https://artofproblemsolving.com/wiki/index.php/" + urllib.parse.quote(slug, safe="/")
     snap = _snapshot(url) or _snapshot(url.replace("https://", "http://"))
     if not snap:
@@ -83,19 +92,20 @@ def to_text(s):
             src = "https:" + src
         alt = html.unescape(alt.group(1)) if alt else ""
         if cls and cls.group(1) in ("latex", "latexcenter") and not alt.startswith("[asy]"):
-            return f" $${alt.strip('$')}$$ " if cls.group(1) == "latexcenter" and alt.startswith("$$") else f" {alt} "
+            out = f" $${alt.strip('$')}$$ " if cls.group(1) == "latexcenter" and alt.startswith("$$") else f" {alt} "
+            return out.replace("<", "\x00")
         figs.append(src)
         extra = f"\n    asy source: {alt}" if alt.startswith("[asy]") else (f" (alt: {alt})" if alt else "")
-        return f"\n[FIGURE {len(figs)}: {src}]{extra}\n"
+        return f"\n[FIGURE {len(figs)}: {src}]{extra}\n".replace("<", "\x00")
 
-    s = re.sub(r"<img[^>]*>", img, s)
+    s = re.sub(r'<img(?:[^>"]|"[^"]*")*>', img, s)
     s = re.sub(r'<h(\d)[^>]*>(.*?)</h\1>', lambda m: "\n\n" + "#" * int(m.group(1)) + " " + re.sub(r"<[^>]+>", "", m.group(2)) + "\n", s, flags=re.S)
     s = re.sub(r"<li[^>]*>", "\n- ", s)
     s = re.sub(r"<br\s*/?>|</p>|</div>|</tr>", "\n", s)
     s = re.sub(r"</t[dh]>", " | ", s)
     s = re.sub(r"<pre[^>]*>(.*?)</pre>", lambda m: "\n```\n" + m.group(1) + "\n```\n", s, flags=re.S)
     s = re.sub(r"<[^>]+>", "", s)
-    s = html.unescape(s)
+    s = html.unescape(s).replace("\x00", "<")
     s = re.sub(r"\[edit\]", "", s)
     s = re.sub(r"[ \t]+\n", "\n", s)
     s = re.sub(r"\n{3,}", "\n\n", s)

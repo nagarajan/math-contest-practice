@@ -1,0 +1,202 @@
+[
+  {
+    "id": "imo-2015-01",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO",
+      "paper": "Day 1",
+      "year": 2015,
+      "number": 1,
+      "url": "https://www.imo-official.org/assets/documents/problems/2015/2015_eng.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "We say that a finite set $\\mathcal{S}$ of points in the plane is *balanced* if, for any two different points $A$ and $B$ in $\\mathcal{S}$, there is a point $C$ in $\\mathcal{S}$ such that $AC = BC$. We say that $\\mathcal{S}$ is *centre-free* if for any three different points $A$, $B$ and $C$ in $\\mathcal{S}$, there is no point $P$ in $\\mathcal{S}$ such that $PA = PB = PC$.\n\n(a) Show that for all integers $n \\ge 3$, there exists a balanced set consisting of $n$ points.\n\n(b) Determine all integers $n \\ge 3$ for which there exists a balanced centre-free set consisting of $n$ points.",
+    "image": null,
+    "choices": null,
+    "answer": "(a) Regular $n$-gon for odd $n$; for even $n$ a centre $O$ plus $n-1$ points on a circle around $O$ arranged in $60^\\circ$ pairs/triples. (b) Exactly the **odd** $n\\ge 3$ (regular $n$-gon; for even $n$ double counting gives a point equidistant from 3 others).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Constructions and double counting",
+        "body": "**(a)** *Odd $n$.* Take the vertices of a regular $n$-gon. For two vertices $A,B$, the perpendicular bisector of $AB$ passes through the centre and is an axis of symmetry of the polygon. For odd $n$ every axis of symmetry passes through a vertex $C$ (and $C\\ne A,B$ since $C$ is on the bisector). So $CA=CB$ and the set is balanced.\n\n*Even $n\\ge 4$.* Let $O$ be the centre of a circle $\\omega$ and describe points of $\\omega$ by their angle in degrees. Take\n$$\\mathcal S=\\{O\\}\\cup\\{0^\\circ,60^\\circ,120^\\circ\\}\\cup\\{\\theta_j,\\ \\theta_j+60^\\circ : j=1,\\dots,\\tfrac{n-4}{2}\\},$$\nwhere $\\theta_1,\\dots,\\theta_{(n-4)/2}$ are distinct angles in $(0^\\circ,60^\\circ)$. These $1+3+(n-4)=n$ points are distinct (the $\\theta_j+60^\\circ$ lie in $(60^\\circ,120^\\circ)$).\n- If $A,B\\in\\omega$, then $C=O$ works.\n- If $A=O$ and $B\\in\\omega$: every point $X$ of $\\mathcal S\\cap\\omega$ has a *partner* $Y\\in\\mathcal S\\cap\\omega$ with $\\angle XOY=60^\\circ$ ($0^\\circ\\leftrightarrow 60^\\circ$, $120^\\circ\\to 60^\\circ$, $\\theta_j\\leftrightarrow\\theta_j+60^\\circ$). Then $OXY$ is equilateral, so $C=Y$ satisfies $CO=CB$.\n\nSo $\\mathcal S$ is balanced.\n\n**(b)** *Odd $n$ works:* the regular $n$-gon is balanced by (a), and it is centre-free: a point equidistant from three vertices is the centre of the circle through them, i.e. the centre of the polygon, which is not a vertex.\n\n*Even $n$ fails.* Suppose $\\mathcal S$ is balanced and centre-free with $|\\mathcal S|=n$. For every one of the $\\binom n2$ pairs $\\{A,B\\}$ choose a point $C$ with $CA=CB$; then some point $C$ is chosen for at least $\\frac1n\\binom n2=\\frac{n-1}{2}$ pairs, and since $n$ is even and the count is an integer, for at least $\\frac n2$ pairs.\n\nNow fix that $C$ and group the other $n-1$ points by their distance from $C$. Because $\\mathcal S$ is centre-free, no group has $3$ or more points, so each group has at most one pair. Pairs $\\{A,B\\}$ with $CA=CB$ lie inside one group, hence there are at most $\\left\\lfloor\\frac{n-1}{2}\\right\\rfloor=\\frac{n-2}{2}<\\frac n2$ of them — a contradiction.\n\n**Answer:** (b) exactly the odd integers $n\\ge 3$. ∎"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "counting"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-2015-02",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO",
+      "paper": "Day 1",
+      "year": 2015,
+      "number": 2,
+      "url": "https://www.imo-official.org/assets/documents/problems/2015/2015_eng.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Determine all triples $(a, b, c)$ of positive integers such that each of the numbers\n$$ab - c,\\qquad bc - a,\\qquad ca - b$$\nis a power of $2$.\n\n(A power of $2$ is an integer of the form $2^n$, where $n$ is a non-negative integer.)",
+    "image": null,
+    "choices": null,
+    "answer": "$(2,2,2)$, the permutations of $(2,2,3)$, and the permutations of $(2,6,11)$ and of $(3,5,7)$ — sixteen triples in all.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Case analysis (official solution, reworded)",
+        "body": "All sixteen triples work: $(2,2,2)$ gives $2,2,2$; $(2,2,3)$ gives $1,4,4$; $(2,6,11)$ gives $12-11=1$, $66-2=64$, $22-6=16$; $(3,5,7)$ gives $15-7=8$, $35-3=32$, $21-5=16$. We show there are no others.\n\n**$a,b,c\\ge 2$.** If $a=1$, then $b-c$ and $c-b$ would both be powers of $2$ (positive), impossible as they sum to $0$. By symmetry no variable equals $1$.\n\n**Case 1: two numbers are equal**, say $a=b$. Then $a(c-1)$ is a power of $2$, so $a=2^\\alpha$ ($\\alpha\\ge1$) and $c-1=2^\\gamma$. Now $a^2-c=2^{2\\alpha}-2^\\gamma-1$ is a power of $2$. If $\\gamma\\ge2$ this number is $\\equiv 3\\pmod 4$, impossible. So $c\\in\\{2,3\\}$. Then $4^\\alpha-2=2(2^{2\\alpha-1}-1)$ or the odd number $4^\\alpha-3$ must be a power of $2$; both force $\\alpha=1$. This gives $(2,2,2)$ and $(2,2,3)$.\n\n**Case 2: distinct numbers**, WLOG $2\\le a<b<c$. Write $bc-a=2^\\alpha$, $ca-b=2^\\beta$, $ab-c=2^\\gamma$. Since $(bc-a)-(ca-b)=(b-a)(c+1)>0$ and $(ca-b)-(ab-c)=(c-b)(a+1)>0$, we have $\\alpha>\\beta>\\gamma$.\n\n*Case 2.1: $a=2$.* If $\\gamma>0$ then $2b-c$ is even, so $c$ is even; also $\\beta>0$, so $2c-b$ is even and $b$ is even. Then $4\\mid bc$ and $bc-2\\equiv 2\\pmod 4$ is a power of $2$, so $bc-2=2$, contradicting $2<b<c$. Hence $\\gamma=0$, i.e. $c=2b-1$. Then $2^\\beta=ca-b=3b-2\\ge 7$. If $\\beta=3$, $b=\\frac{10}{3}$ is not an integer; if $\\beta=4$, $b=6$, $c=11$ — a solution. Suppose $\\beta\\ge5$. Using $6b+1=2(3b-2)+5=2^{\\beta+1}+5$,\n$$9\\cdot 2^\\alpha = 9\\big(b(2b-1)-2\\big)=(3b-2)(6b+1)-16 = 2^\\beta\\big(2^{\\beta+1}+5\\big)-16 .$$\nThe first term is divisible by $32$, so the right side is $\\equiv 16\\pmod{32}$, which forces $\\alpha=4<\\beta$, a contradiction.\n\n*Case 2.2: $a\\ge 3$.* Choose $\\vartheta\\in\\{1,-1\\}$ such that $4\\nmid c-\\vartheta$ (one of $c\\pm1$ works since they differ by $2$). Then\n$$2^\\alpha+\\vartheta\\, 2^\\beta=(bc-a)+\\vartheta(ca-b)=(b+a\\vartheta)(c-\\vartheta).$$\nThe left side is divisible by $2^\\beta$ and $c-\\vartheta$ contains at most one factor $2$, so $2^{\\beta-1}\\mid b+a\\vartheta$. On the other hand $2^\\beta=ac-b>(a-1)c\\ge 2c$, so $a<b<c<2^{\\beta-1}$. If $\\vartheta=-1$, then $0<b-a<2^{\\beta-1}$ cannot be a multiple of $2^{\\beta-1}$. So $\\vartheta=1$ and $0<a+b<2c<2^{\\beta}$ is a multiple of $2^{\\beta-1}$, i.e. $a+b=2^{\\beta-1}$. Hence\n$$ac-b=2(a+b)\\quad\\Longrightarrow\\quad a(c-1)=a+3b<4b.$$\nAs $c-1\\ge b$, we get $ab<4b$, so $a=3$, and then $3c=6+3b$, i.e. $c=b+2$. Finally $bc-a=b^2+2b-3=(b-1)(b+3)$ is a power of $2$, so $b-1=2^u$, $b+3=2^v$ with $2^v-2^u=4$, giving $2^u=4$, $b=5$, $c=7$.\n\n**Answer:** $(2,2,2)$, $(2,2,3)$, $(2,6,11)$, $(3,5,7)$ and their permutations. ∎"
+      }
+    ],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-2015-03",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO",
+      "paper": "Day 1",
+      "year": 2015,
+      "number": 3,
+      "url": "https://www.imo-official.org/assets/documents/problems/2015/2015_eng.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $ABC$ be an acute triangle with $AB > AC$. Let $\\Gamma$ be its circumcircle, $H$ its orthocentre, and $F$ the foot of the altitude from $A$. Let $M$ be the midpoint of $BC$. Let $Q$ be the point on $\\Gamma$ such that $\\angle HQA = 90^\\circ$, and let $K$ be the point on $\\Gamma$ such that $\\angle HKQ = 90^\\circ$. Assume that the points $A$, $B$, $C$, $K$ and $Q$ are all different, and lie on $\\Gamma$ in this order.\n\nProve that the circumcircles of triangles $KQH$ and $FKM$ are tangent to each other.",
+    "image": null,
+    "choices": null,
+    "answer": "Proof: with $A'$ the antipode of $A$ and $E$ the reflection of $H$ in $BC$, the radical centre $R$ of $\\Gamma,(KQH),(EA'H)$ gives a point $S$ (midpoint of $HR$) on $BC$ with $SK$ tangent to both circles.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Radical centre (official solution 2, reworded)",
+        "body": "**Setup.** Let $A'$ be the point of $\\Gamma$ diametrically opposite $A$, and let $E$ be the second intersection of line $AH$ with $\\Gamma$. Two standard facts:\n- $BHCA'$ is a parallelogram ($BH\\perp AC\\perp CA'$ and $CH\\perp AB\\perp BA'$), so $M$ is the midpoint of $HA'$.\n- $E$ is the reflection of $H$ in $BC$, so $F$ is the midpoint of $HE$ and $BC$ is the perpendicular bisector of $HE$.\n\nSince $\\angle AQA'=90^\\circ$ ($AA'$ is a diameter) and $\\angle AQH=90^\\circ$, the points $Q,H,A'$ are collinear; together with $M$ they all lie on one line $m$.\n\n**Three circles tangent to one line at $H$.**\n- $\\angle HKQ=90^\\circ$, so $\\omega_1=(KQH)$ has diameter $HQ$.\n- $\\angle HEA'=\\angle AEA'=90^\\circ$, so $\\omega_2=(EA'H)$ has diameter $HA'$.\n- $\\angle HFM=90^\\circ$ ($HF\\perp BC$, and $F\\ne M$ because $AB\\neq AC$), so $\\omega_3=(HFM)$ has diameter $HM$.\n\nAll three diameters lie on $m$, so all three circles are tangent at $H$ to the line $t$ through $H$ perpendicular to $m$.\n\n**The radical centre.** The radical axes of the pairs $(\\Gamma,\\omega_1)$, $(\\Gamma,\\omega_2)$, $(\\omega_1,\\omega_2)$ are the lines $QK$, $A'E$ and $t$. Their centres are not collinear: the centres of $\\omega_1,\\omega_2$ lie on $m$, and if the centre $O$ of $\\Gamma$ were on $m$, then $m$ would be the diameter through $A'$ and $Q$ would be $A$, impossible. Hence the three axes meet at a point $R$.\n\nSince $R$ lies on line $QK$ and $\\angle HKQ=90^\\circ$, we get $\\angle HKR=90^\\circ$; since $R$ lies on line $A'E$ and $\\angle HEA'=90^\\circ$, we get $\\angle HER=90^\\circ$. So $K$ and $E$ lie on the circle with diameter $HR$. Let $S$ be its centre, the midpoint of $HR$. Then:\n- $SH=SE$, so $S$ lies on the perpendicular bisector of $HE$, which is line $BC$;\n- $S$ lies on $t$ (both $H$ and $R$ do);\n- $SK=SH$.\n\n**Finish.** The power of $S$ with respect to $\\omega_1$ is $SH^2$ (as $SH$ is tangent to $\\omega_1$), which equals $SK^2$; since $K\\in\\omega_1$, the line $SK$ is tangent to $\\omega_1$ at $K$.\n\nThe line $SH$ is also tangent to $\\omega_3$, and $S$ lies on line $MF$ ($=BC$), so $SM\\cdot SF=SH^2=SK^2$. The circle $(FKM)$ passes through $M,F$, so the power of $S$ with respect to it is $SM\\cdot SF=SK^2$; as $K$ lies on it, $SK$ is tangent to $(FKM)$ at $K$ as well.\n\nThus both circles $(KQH)$ and $(FKM)$ are tangent to the line $SK$ at the same point $K$, so they are tangent to each other. ∎"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-2015-04",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO",
+      "paper": "Day 2",
+      "year": 2015,
+      "number": 4,
+      "url": "https://www.imo-official.org/assets/documents/problems/2015/2015_eng.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Triangle $ABC$ has circumcircle $\\Omega$ and circumcentre $O$. A circle $\\Gamma$ with centre $A$ intersects the segment $BC$ at points $D$ and $E$, such that $B$, $D$, $E$ and $C$ are all different and lie on line $BC$ in this order. Let $F$ and $G$ be the points of intersection of $\\Gamma$ and $\\Omega$, such that $A$, $F$, $B$, $C$ and $G$ lie on $\\Omega$ in this order. Let $K$ be the second point of intersection of the circumcircle of triangle $BDF$ and the segment $AB$. Let $L$ be the second point of intersection of the circumcircle of triangle $CGE$ and the segment $CA$.\n\nSuppose that the lines $FK$ and $GL$ are different and intersect at the point $X$. Prove that $X$ lies on the line $AO$.",
+    "image": null,
+    "choices": null,
+    "answer": "Proof: $AF=AG$ makes $F,G$ symmetric about $AO$, so it suffices to show $\\angle KFA=\\angle AGL$, which follows from an angle chase through $\\Gamma$, $\\Omega$ and the circles $(BDF)$, $(CGE)$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Reduce to an angle equality (official solution 1, reworded)",
+        "body": "**Reduction.** $AF=AG$ (radii of $\\Gamma$), and $OF=OG$, so line $AO$ is the perpendicular bisector of $FG$: the reflection in $AO$ swaps $F$ and $G$ and maps line $AF$ to line $AG$. Therefore if\n$$\\angle KFA=\\angle AGL,\\qquad (1)$$\nthen lines $FK$ and $GL$ are mirror images of each other in $AO$ (they make equal angles with the mirror-image lines $FA$ and $GA$, on corresponding sides), so their intersection $X$ is fixed by the reflection, i.e. $X$ lies on $AO$. It remains to prove (1).\n\nDenote $\\omega_B=(BDFK)$ and $\\omega_C=(CGEL)$.\n\n**Angle chase.** Since $K$ lies on segment $AB$ and the angle at $F$ splits as\n$$\\angle KFA=\\angle DFG+\\angle GFA-\\angle DFK ,$$\nwe evaluate each term:\n- $D,E,F,G$ lie on $\\Gamma$, so $\\angle DFG=180^\\circ-\\angle DEG=\\angle CEG$ (as $D,E,C$ are collinear in this order);\n- $A,F,B,G$ lie on $\\Omega$, so $\\angle GFA=\\angle GBA$;\n- $B,D,F,K$ lie on $\\omega_B$, so $\\angle DFK=\\angle DBK=\\angle CBA$.\n\nHence $\\angle KFA=\\angle CEG+\\angle GBA-\\angle CBA=\\angle CEG-\\angle CBG$.\n\nNow use $\\omega_C$ and $\\Omega$: $\\angle CEG=\\angle CLG$ (both subtend $CG$ in $\\omega_C$) and $\\angle CBG=\\angle CAG$ (both subtend $CG$ in $\\Omega$). So\n$$\\angle KFA=\\angle CLG-\\angle CAG=\\angle CLG-\\angle LAG=\\angle AGL,$$\nthe last step because $\\angle CLG$ is the exterior angle of triangle $ALG$ at $L$. This is (1), and the proof is complete. ∎"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-2015-05",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO",
+      "paper": "Day 2",
+      "year": 2015,
+      "number": 5,
+      "url": "https://www.imo-official.org/assets/documents/problems/2015/2015_eng.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $\\mathbb{R}$ be the set of real numbers. Determine all functions $f:\\mathbb{R}\\to\\mathbb{R}$ satisfying the equation\n$$f\\big(x+f(x+y)\\big)+f(xy)=x+f(x+y)+yf(x)$$\nfor all real numbers $x$ and $y$.",
+    "image": null,
+    "choices": null,
+    "answer": "$f(x)=x$ and $f(x)=2-x$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Collect fixed points",
+        "body": "Both functions work: for $f(x)=x$ both sides equal $2x+y+xy$; for $f(x)=2-x$ we get $f(x+f(x+y))=2-x-(2-x-y)=y$, so the left side is $y+2-xy$ and the right side is $x+2-x-y+y(2-x)=2+y-xy$.\n\nLet $P(x,y)$ denote the equation and call $t$ a *fixed point* if $f(t)=t$.\n\n- $P(0,0)$: $f(f(0))+f(0)=f(0)$, so $f(f(0))=0$.\n- $P(0,f(0))$: $f(f(f(0)))+f(0)=f(f(0))+f(0)^2$, i.e. $2f(0)=f(0)^2$, so $f(0)\\in\\{0,2\\}$.\n- $P(x,1)$: $f(x+f(x+1))=x+f(x+1)$, so **$x+f(x+1)$ is a fixed point for every $x$.**\n\n**Case $f(0)=2$.** If $t$ is a fixed point, $P(0,t)$ gives $f(f(t))+2=f(t)+2t$, i.e. $t+2=3t$, so $t=1$. Hence $x+f(x+1)=1$ for all $x$, i.e. $f(z)=2-z$.\n\n**Case $f(0)=0$.** Then $P(0,y)$ gives $f(f(y))=f(y)$.\n- $P(-1,1)$: $f(-1)+f(-1)=-1+f(-1)$, so $f(-1)=-1$. $P(1,-1)$: $f(1)+f(-1)=1-f(1)$, so $f(1)=1$.\n- $P(x,0)$: $f(x+f(x))=x+f(x)$, so $x+f(x)$ is a fixed point.\n- Replacing $x$ by $x-1$ in the $P(x,1)$ fact: $x-1+f(x)$ is a fixed point.\n- Let $s=x+f(x)$. Then $s$ and $s-1$ are fixed points, and $P(1,s-1)$ reads $f(1+f(s))+f(s-1)=1+f(s)+(s-1)f(1)$, i.e. $f(s+1)+s-1=2s$. So $s+1=x+1+f(x)$ is a fixed point too.\n\nNow $P(x,-1)$: $f(x+f(x-1))+f(-x)=x+f(x-1)-f(x)$. By the last fact applied to $x-1$, the number $x+f(x-1)$ is a fixed point, so this becomes $f(-x)=-f(x)$: **$f$ is odd.**\n\nFinally compare\n$$P(x,-x):\\ f(x)+f(-x^2)=x-xf(x),\\qquad P(-x,x):\\ f(-x)+f(-x^2)=-x+xf(-x)=-x-xf(x).$$\nSubtracting, $f(x)-f(-x)=2x$, i.e. $2f(x)=2x$. So $f(x)=x$.\n\n**Answer:** $f(x)=x$ for all $x$, or $f(x)=2-x$ for all $x$. ∎"
+      }
+    ],
+    "topics": [
+      "functional-equations"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-2015-06",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO",
+      "paper": "Day 2",
+      "year": 2015,
+      "number": 6,
+      "url": "https://www.imo-official.org/assets/documents/problems/2015/2015_eng.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "The sequence $a_1, a_2, \\dots$ of integers satisfies the following conditions:\n\n(i) $1 \\le a_j \\le 2015$ for all $j \\ge 1$;\n\n(ii) $k + a_k \\ne \\ell + a_\\ell$ for all $1 \\le k < \\ell$.\n\nProve that there exist two positive integers $b$ and $N$ such that\n$$\\left|\\sum_{j=m+1}^{n}(a_j-b)\\right|\\le 1007^2$$\nfor all integers $m$ and $n$ satisfying $n > m \\ge N$.",
+    "image": null,
+    "choices": null,
+    "answer": "Proof: think of $j\\mapsto j+a_j$ as juggling throws; $b$ = number of balls (chains), and the total height $S_n$ of the balls in the air satisfies $S_{n}-S_m=\\sum_{m<j\\le n}(a_j-b)$ with $|S_n-S_m|\\le (b-1)(2015-b)\\le 1007^2$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Balls in the air (juggling)",
+        "body": "Let $f(k)=k+a_k$. By (ii) $f$ is injective, and $k<f(k)\\le k+2015$. Call $s$ a *starting point* if $s$ is not a value of $f$.\n\n**Balls in the air.** For $n\\ge 1$ let $T_n=\\{k\\le n: f(k)>n\\}$ (balls thrown at times $\\le n$ that have not landed yet). The values $f(k)$, $k\\in T_n$, are distinct and lie in $\\{n+1,\\dots,n+2015\\}$, so $|T_n|\\le 2015$. Also $\\{k\\le n: f(k)\\le n\\}$ is in bijection (via $f$) with the non-starting points in $\\{1,\\dots,n\\}$, because $f(k)\\le n$ forces $k<n$. Hence\n$$|T_n| = n-\\#\\{\\text{non-starting points}\\le n\\}=\\#\\{\\text{starting points}\\le n\\}.$$\nSo there are at most $2015$ starting points in total (and at least one, namely $1$). Let $b$ be their number and $N$ the largest one. Then $|T_n|=b$ for all $n\\ge N$.\n\n**The key quantity.** For $n\\ge N$ put $S_n=\\sum_{k\\in T_n}\\big(f(k)-n\\big)$ (the total height of the balls). Since $n+1>N$ is not a starting point, there is exactly one $k_0$ with $f(k_0)=n+1$, and $k_0\\in T_n$. Hence $T_{n+1}=(T_n\\setminus\\{k_0\\})\\cup\\{n+1\\}$ and\n$$S_{n+1}=\\sum_{k\\in T_n,\\,k\\ne k_0}\\big(f(k)-n-1\\big)+\\big(f(n+1)-n-1\\big)=(S_n-1)-(b-1)+a_{n+1},$$\ni.e. $S_{n+1}-S_n=a_{n+1}-b$. Summing, for $n>m\\ge N$:\n$$\\sum_{j=m+1}^{n}(a_j-b)=S_n-S_m .$$\n\n**Bounds.** For $n\\ge N$ the $b$ numbers $f(k)-n$ ($k\\in T_n$) are distinct elements of $\\{1,\\dots,2015\\}$, and one of them is $1$ (namely $k_0$). Hence\n$$1+2+\\dots+b\\ \\le\\ S_n\\ \\le\\ 1+\\big(2015+2014+\\dots+(2017-b)\\big).$$\nThe difference of these bounds is, pairing $2015$ with $2$, $2014$ with $3$, …,\n$$\\sum_{i=0}^{b-2}\\big((2015-i)-(2+i)\\big)=(b-1)(2015-b)\\le\\Big(\\frac{2014}{2}\\Big)^2=1007^2$$\nby AM–GM. Therefore $|S_n-S_m|\\le 1007^2$ for all $n>m\\ge N$, as required. ∎"
+      }
+    ],
+    "topics": [
+      "sequences-series",
+      "counting"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

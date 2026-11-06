@@ -131,11 +131,15 @@ for g in groups(range(2004, 2027), 3):
       f"Purple Comet! Math Meet middle school and high school papers, {', '.join(map(str, g))}: `{PC}/ms/` and `{PC}/hs/` "
       "(`<Y>_ms_paper.pdf`, `<Y>_hs_paper.pdf`, answers in `*_answers.*` files or at the end of the paper; download missing "
       "answer pages from purplecomet.org). All answers are integers (numeric). MS and HS share problems: extract in MS, `duplicateOf` in HS. "
-      "Slugs `ms-<Y>`, `hs-<Y>`; grades \"6-8\" and \"9-12\"; points as printed (they vary by problem).")
+      "Slugs `ms-<Y>`, `hs-<Y>`; grades \"6-8\" and \"9-12\"; `points: 1` (official results are 'N out of 20/30'). "
+      "MS answers may be in `sources/pdfs/purplecomet/ms/answers_ms_2005-2026.json`. Integers too long for a JS number (>15 digits): type text.")
 U("mathcounts-2026", 1, "mathcounts", 200,
   "MATHCOUNTS 2026 Competition Series: `sources/pdfs/mathcounts/competitions/` (chapter and state Sprint, Target, Team and Countdown rounds, "
   "with answers and solutions). Slugs `2026-chapter-sprint`, `2026-state-target`, etc.; grade \"6-8\"; points null; contest \"MATHCOUNTS\". "
   "Countdown questions are short: still include them.")
+U("mathcounts-samples", 1, "mathcounts", 60,
+  "MATHCOUNTS sample School Competition papers: `sources/pdfs/mathcounts/competitions/sample_school_*` (with their answers/solutions). "
+  "Slugs from the file names (e.g. `sample-school-sprint`); grade \"6-8\"; points null; contest \"MATHCOUNTS\". Skip anything already in `data/raw/mathcounts/`.")
 U("mathcounts-potw", 1, "mathcounts", 190,
   "MATHCOUNTS Problems of the Week: `sources/pdfs/mathcounts/potw/` (each file has several related problems and solutions). "
   "Slugs `potw-<YYYY-MM-DD>`; grade \"6-8\".")
@@ -216,6 +220,13 @@ for g in groups([y for y in range(1979, 2023) if y not in (2020, 2021)], 6):
     U(f"vtrmc-{yr(g)}", 1, "vtrmc", 7 * len(g),
       f"Virginia Tech Regional Mathematics Contest {', '.join(map(str, g))}: `sources/pdfs/vtrmc/` (papers; solutions where present — "
       "otherwise solve them yourself carefully and set `reviewNote` only when unsure). " + UNI + "Bank `vtrmc`, slug `<Y>`.")
+
+U("dedupe-review-1", 1, "kangaroo", 0,
+  "Duplicate review (run after the other phase 1 units). Run `.venv/bin/python tools/build_banks.py` and look at every "
+  "'possible duplicate: A ~ B' line. Open both questions (and their figures). If they are the same problem (same question, "
+  "same numbers/figure, same answer), edit the file of the HIGHER-grade one: set `duplicateOf` to the lower-grade id, "
+  "`solutions: []`, `image: null` (keep `image` if its choices are pictures). If they differ, leave them. Report what you merged. "
+  "This is the only unit allowed to edit files written by other units, and only the `duplicateOf`/`solutions`/`image` fields.")
 
 
 def main():

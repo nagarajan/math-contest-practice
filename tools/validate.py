@@ -113,7 +113,7 @@ def check(path):
                 keys = [c.get("key") for c in ch]
                 if ans not in keys:
                     e(f"answer {ans} not among choice keys {keys}")
-                if all(not c.get("text") for c in ch) and not q.get("image"):
+                if all(not c.get("text") for c in ch) and not q.get("image") and not q.get("duplicateOf"):
                     e("picture choices but no image")
         else:
             if q.get("choices"):

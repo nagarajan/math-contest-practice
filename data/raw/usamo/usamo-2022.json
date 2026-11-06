@@ -1,0 +1,190 @@
+[
+  {
+    "id": "usamo-usamo-2022-01",
+    "bank": "usamo",
+    "source": {
+      "contest": "USAMO",
+      "paper": "USAMO 2022",
+      "year": 2022,
+      "number": 1,
+      "url": "https://web.evanchen.cc/exams/USAMO-2022-notes.pdf"
+    },
+    "grade": "10-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $a$ and $b$ be positive integers. Every cell of an $(a+b+1) \\times (a+b+1)$ grid is colored either amber or bronze such that there are at least $a^2 + ab - b$ amber cells and at least $b^2 + ab - a$ bronze cells. Prove that it is possible to choose $a$ amber cells and $b$ bronze cells such that no two of the $a+b$ chosen cells lie in the same row or column.",
+    "image": null,
+    "choices": null,
+    "answer": "Averaging over all transversals gives one with at least $a$ amber cells and one with at most $a+1$ amber cells; moving from one to the other by swaps changes the count by at most $2$ per step, so some transversal has exactly $a$ or $a+1$ amber cells.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [],
+    "topics": [
+      "counting",
+      "probability",
+      "logic"
+    ],
+    "difficulty": 2,
+    "duplicateOf": "usamo-usajmo-2022-02",
+    "reviewNote": null
+  },
+  {
+    "id": "usamo-usamo-2022-02",
+    "bank": "usamo",
+    "source": {
+      "contest": "USAMO",
+      "paper": "USAMO 2022",
+      "year": 2022,
+      "number": 2,
+      "url": "https://web.evanchen.cc/exams/USAMO-2022-notes.pdf"
+    },
+    "grade": "10-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $b \\ge 2$ and $w \\ge 2$ be fixed integers, and $n = b + w$. Given are $2b$ identical black rods and $2w$ identical white rods, each of side length $1$.\n\nWe assemble a regular $2n$-gon using these rods so that parallel sides are the same color. Then, a convex $2b$-gon $B$ is formed by translating the black rods, and a convex $2w$-gon $W$ is formed by translating the white rods. An example of one way of doing the assembly when $b = 3$ and $w = 2$ is shown in the figure, as well as the resulting polygons $B$ and $W$.\n\nProve that the difference of the areas of $B$ and $W$ depends only on the numbers $b$ and $w$, and not on how the $2n$-gon was assembled.",
+    "image": null,
+    "choices": null,
+    "answer": "Swapping the colors of two adjacent side directions does not change $[B] - [W]$, because the change reduces to $(\\vec u - \\vec v)\\times(\\vec x + \\vec y) = 0$, and both vectors are perpendicular to $\\vec u + \\vec v$ (Thales). In fact $[B] - [W] = \\frac{b-w}{2}\\cot\\frac{\\pi}{2n}$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 3,
+    "duplicateOf": "usamo-usajmo-2022-03",
+    "reviewNote": null
+  },
+  {
+    "id": "usamo-usamo-2022-03",
+    "bank": "usamo",
+    "source": {
+      "contest": "USAMO",
+      "paper": "USAMO 2022",
+      "year": 2022,
+      "number": 3,
+      "url": "https://web.evanchen.cc/exams/USAMO-2022-notes.pdf"
+    },
+    "grade": "10-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Solve over positive real numbers the functional equation\n$$f(x) = f(f(f(x)) + y) + f(xf(y))\\,f(x+y).$$",
+    "image": null,
+    "choices": null,
+    "answer": "$f(x) = \\dfrac cx$ for any constant $c > 0$. Key steps: \"$f(a) \\ge f(b) \\Rightarrow f(f(b)) \\ge a$\", then $f^2 = f^4$, injectivity, hence $f(f(x)) = x$, and finally $P(1, y)$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "An order lemma, an involution, and substitution",
+        "body": "**Check.** If $f(x) = c/x$ then $f(f(x)) = x$ and the right side is $\\frac{c}{x+y} + \\frac{c}{xc/y}\\cdot\\frac c{x+y} = \\frac{c}{x+y}\\left(1 + \\frac yx\\right) = \\frac cx$. ✓\n\nNow let $f$ be any solution, $P(x,y)$ the equation, and $f^k$ the $k$-th iterate.\n\n**Lemma Q.** If $f(a) \\ge f(b)$, then $f^2(b) \\ge a$.\n\n*Proof.* Otherwise $a > f^2(b)$; put $y = a - f^2(b) > 0$. Then $P(b, y)$ gives\n$$f(b) = f(f^2(b) + y) + f(bf(y))f(b+y) = f(a) + (\\text{positive}) > f(a),$$\ncontradicting $f(a) \\ge f(b)$. $\\square$\n\n**Step 1: $f^4 = f^2$.** $Q(t,t)$ gives $f^2(t) \\ge t$ for all $t$. With $t = f^2(x)$: $f^4(x) \\ge f^2(x)$. With $t = f(x)$ and $t = f^3(x)$: $f^3(x) \\ge f(x)$ and $f^5(x) \\ge f^3(x)$, so $f(f^4(x)) = f^5(x) \\ge f(x)$. Now Lemma Q with $a = f^4(x)$, $b = x$ gives $f^2(x) \\ge f^4(x)$. Hence $f^4(x) = f^2(x)$.\n\n**Step 2: $f$ is injective.** Suppose $f(u) = f(v)$ with $u > v$. For $z = f^2(x)$ we have $f^2(z) = f^4(x) = f^2(x) = z$, so $P(z, y)$ reads\n$$f(z) = f(z + y) + f(zf(y))f(z+y) = \\big(1 + f(zf(y))\\big)f(z+y).$$\nUsing $y = u$ and $y = v$ (where $f(zf(u)) = f(zf(v))$), we get $f(z + u) = f(z + v)$, i.e. $f(f^2(x) + u) = f(f^2(x) + v)$ for all $x$. Now compare $P(x, u)$ and $P(x, v)$: their first terms are equal, and $f(xf(u)) = f(xf(v)) > 0$, so $f(x + u) = f(x + v)$ for all $x > 0$. With $T = u - v > 0$ this says $f(w + T) = f(w)$ for all $w > v$. Fix $w_0 > v$; then $f(w_0 + kT) = f(w_0)$ for all $k \\in \\mathbb N$, and Lemma Q gives $f^2(w_0) \\ge w_0 + kT$ for every $k$ — impossible.\n\n**Step 3: $f$ is an involution.** From $f(f^3(x)) = f(f(x))$ and injectivity, $f^3(x) = f(x)$, i.e. $f(f^2(x)) = f(x)$, and again $f^2(x) = x$. So $P(x,y)$ becomes\n$$f(x) = f(x+y)\\big(1 + f(xf(y))\\big).$$\n\n**Step 4: the formula.** Let $c = f(1)$. $P(1, y)$: $c = f(1+y)(1 + f(f(y))) = f(1+y)(1+y)$, so $f(t) = c/t$ for all $t \\ge 1$. For $a, b > 1$, $P(a, b)$ gives\n$$\\frac ca = \\frac{c}{a+b}\\left(1 + f\\!\\left(\\frac{ac}b\\right)\\right) \\implies f\\!\\left(\\frac{ac}{b}\\right) = \\frac ba = \\frac{c}{ac/b}.$$\nEvery $t > 0$ has the form $ac/b$ with $a, b > 1$ (take $b > \\max(1, c/t)$ and $a = tb/c > 1$), so $f(t) = c/t$ for all $t$.\n\n**Answer:** $f(x) = \\dfrac cx$ with $c > 0$ arbitrary. ∎"
+      }
+    ],
+    "topics": [
+      "functional-equations"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamo-usamo-2022-04",
+    "bank": "usamo",
+    "source": {
+      "contest": "USAMO",
+      "paper": "USAMO 2022",
+      "year": 2022,
+      "number": 4,
+      "url": "https://web.evanchen.cc/exams/USAMO-2022-notes.pdf"
+    },
+    "grade": "10-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Find all pairs of primes $(p, q)$ for which $p - q$ and $pq - q$ are both perfect squares.",
+    "image": null,
+    "choices": null,
+    "answer": "Only $(p, q) = (3, 2)$. With $a^2 = p - q$, $b^2 = pq - q$: $(b-a)(b+a) = p(q-1)$ with $0 < b - a < p$ and $b + a < 2p$ forces $b + a = p$, $b - a = q - 1$; parity gives $q = 2$, then $p = 3$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 2,
+    "duplicateOf": "usamo-usajmo-2022-05",
+    "reviewNote": null
+  },
+  {
+    "id": "usamo-usamo-2022-05",
+    "bank": "usamo",
+    "source": {
+      "contest": "USAMO",
+      "paper": "USAMO 2022",
+      "year": 2022,
+      "number": 5,
+      "url": "https://web.evanchen.cc/exams/USAMO-2022-notes.pdf"
+    },
+    "grade": "10-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "A function $f : \\mathbb R \\to \\mathbb R$ is *essentially increasing* if $f(s) \\le f(t)$ holds whenever $s \\le t$ are real numbers such that $f(s) \\ne 0$ and $f(t) \\ne 0$.\n\nFind the smallest integer $k$ such that for any $2022$ real numbers $x_1, x_2, \\dots, x_{2022}$, there exist $k$ essentially increasing functions $f_1, \\dots, f_k$ such that\n$$f_1(n) + f_2(n) + \\dots + f_k(n) = x_n \\quad\\text{for every } n = 1, 2, \\dots, 2022.$$",
+    "image": null,
+    "choices": null,
+    "answer": "11",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Pigeonhole on supports; recursive construction",
+        "body": "We show: $k$ functions suffice for all choices of $x_1,\\dots,x_N$ iff $2^k - 1 \\ge N$. For $N = 2022$ this gives $k = 11$ ($2^{10} - 1 = 1023 < 2022 \\le 2047 = 2^{11} - 1$).\n\n**Lower bound.** Suppose $2^k - 1 < N$ and take $x_n = -n$. For each $n$ let $S(n) = \\{i : f_i(n) \\ne 0\\}$; it is nonempty because $x_n \\ne 0$. There are only $2^k - 1$ nonempty subsets of $\\{1,\\dots,k\\}$, so $S(n) = S(n')$ for some $n < n'$. For each $i$ in this common set, $f_i(n)$ and $f_i(n')$ are nonzero, so $f_i(n) \\le f_i(n')$; for the other $i$ both values are $0$. Adding up, $x_n \\le x_{n'}$, i.e. $-n \\le -n'$ — a contradiction.\n\n**Construction for $N = 2^k - 1$** (for $N = 2022$ use $k = 11$, put $x_n = 0$ for $2022 < n \\le 2047$ and only look at $n \\le 2022$). All functions will be $0$ outside $\\{1, \\dots, N\\}$, so only the values at $1, \\dots, N$ matter. We build $f_1, \\dots, f_k$ by induction on $k$. For $k = 1$, $N = 1$: $f_1(1) = x_1$.\n\nFor $k \\ge 2$, let $m = 2^{k-1}$ and split the positions into the **left block** $1, \\dots, m-1$ (of size $2^{k-1}-1$) and the **right block** $m, m+1, \\dots, 2^k - 1$ (of size $2^{k-1}$).\n\n- On the left block, use the construction for $k - 1$ to get $f_1, \\dots, f_{k-1}$ with the right sums there, and set $f_k = 0$ there.\n- Choose a number $B$ larger than every $|f_i(n)|$ on the left block and larger than $\\max x - \\min x$. For $j = 0, 1, \\dots, 2^{k-1}-1$ write $2^{k-1} - 1 - j$ in binary; for $i \\le k-1$ let $f_i(m + j) = 2^{i-1}B$ if binary digit number $i-1$ is $1$, and $0$ otherwise. Then $\\sum_{i<k} f_i(m+j) = B\\,(2^{k-1} - 1 - j)$. Finally set\n$$f_k(m + j) = x_{m+j} - B\\,(2^{k-1}-1-j).$$\n\n*Sums:* correct on both blocks by construction.\n\n*Each $f_i$ is essentially increasing:*\n- $f_k$ is $0$ on the left block, and on the right block $f_k(m+j+1) - f_k(m+j) = x_{m+j+1} - x_{m+j} + B > 0$, so its values increase.\n- For $i < k$: on the right block the nonzero values of $f_i$ all equal $2^{i-1}B$; on the left block $f_i$ is essentially increasing by induction, and all its values are $< B \\le 2^{i-1}B$. So any nonzero value at a smaller position is $\\le$ any nonzero value at a larger position.\n\nHence $11$ functions always suffice and $10$ do not.\n\n**Answer: 11**"
+      }
+    ],
+    "topics": [
+      "functional-equations",
+      "counting",
+      "logic"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamo-usamo-2022-06",
+    "bank": "usamo",
+    "source": {
+      "contest": "USAMO",
+      "paper": "USAMO 2022",
+      "year": 2022,
+      "number": 6,
+      "url": "https://web.evanchen.cc/exams/USAMO-2022-notes.pdf"
+    },
+    "grade": "10-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "There are $2022$ users on a social network called Mathbook, and some of them are Mathbook-friends. (On Mathbook, friendship is always mutual and permanent.)\n\nStarting now, Mathbook will only allow a new friendship to be formed between two users if they have at least two friends in common. What is the minimum number of friendships that must already exist so that every user could eventually become friends with every other user?",
+    "image": null,
+    "choices": null,
+    "answer": "3031",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Construction, and a clique-merging invariant",
+        "body": "In graph language: we may add an edge $uv$ whenever $u$ and $v$ have two common neighbors (equivalently, whenever $u, w, v, x$ is a $4$-cycle). We show that the minimum number of edges for a graph on $n$ vertices to become complete is $\\lceil\\frac{3n}2\\rceil - 2$; for $n = 2022$ this is $3031$.\n\n**Construction ($n = 2022$).** Take vertices $a, b$ and pairs $c_j, d_j$ for $j = 1, \\dots, 1010$, with edges $ab$ and $ac_j, c_jd_j, d_jb$ for all $j$: $1 + 3\\cdot 1010 = 3031$ edges. In each $4$-cycle $a\\,c_j\\,d_j\\,b$, the vertices $a, d_j$ have common neighbors $c_j, b$, and $c_j, b$ have common neighbors $a, d_j$; so add $ad_j$ and $bc_j$. Now every $c_j, d_j$ is adjacent to both $a$ and $b$, so any two of them have the common neighbors $a, b$ and can be joined. The graph becomes complete.\n\n**The closure is well defined.** If $G \\subseteq H$ and $H$ is *closed* (no edge can be added), then every graph reachable from $G$ is contained in $H$: an edge added during the process had two common neighbors in a subgraph of $H$, hence in $H$, so it is already in $H$. Consequently, if some way of adding edges from $G$ ends in a closed graph $G^*$, then $G$ can be completed iff $G^* = K_n$.\n\n**An algorithm.** We run a specific process that keeps a list $\\mathcal C$ of cliques of the current graph and a label $L(e) \\in \\mathcal C$ for every current edge $e$, with $L(e)$ a clique containing $e$. For a clique $K \\in \\mathcal C$ let $\\theta(K)$ be the number of **original** edges labeled $K$.\n\n- Start: $\\mathcal C$ consists of one $K_2$ per original edge, each edge labeled by its own $K_2$.\n- Step: pick a $4$-cycle $abcd$ in the current graph whose four edges do not all have the same label. Let $K_1, \\dots, K_r$ ($2 \\le r \\le 4$) be the distinct labels among them and $V = K_1 \\cup \\dots \\cup K_r$ (as vertex sets). Make $V$ a clique: add $ac$ and $bd$ (legal: $4$-cycle); now any $v \\in V\\setminus\\{a,b,c,d\\}$ lies in some $K_i$, which contains one of the cycle edges, say $ab$, so $v$ is adjacent to $a, b$, which are adjacent to $c$ and $d$; thus $v$ and $c$ have common neighbors $a, b$ and $vc$ may be added, and similarly $vd$; finally any two vertices of $V$ have the common neighbors $a, b$. Replace $K_1, \\dots, K_r$ in $\\mathcal C$ by the clique $V$, relabel by $V$ every edge that was labeled by some $K_i$, and label all newly added edges by $V$. (Other edges keep their labels.)\n- Stop when every $4$-cycle has all four edges with the same label.\n\nEach step reduces $|\\mathcal C|$, so the process stops. At the end the graph $G^*$ is closed: if $u, v$ had common neighbors $w, x$, the $4$-cycle $uwvx$ would have a single label $K$, a clique containing $u$ and $v$, so $uv$ would already be an edge. Also $\\theta$ of the new clique $V$ equals $\\sum\\theta(K_i)$, and the total of all $\\theta$'s is always the number of original edges.\n\n**Invariant:** every $K \\in \\mathcal C$ satisfies $\\theta(K) \\ge \\frac32|K| - 2$.\n\nInitially $\\theta = 1 = \\frac32\\cdot 2 - 2$. In a step, for a vertex $v$ of the cycle let $m_v$ be the number of $K_i$ containing $v$; $m_v$ is at least the number of distinct labels on the two cycle edges at $v$. Then\n$$\\sum_i |K_i| - |V| \\ge \\sum_{v \\in \\{a,b,c,d\\}} (m_v - 1) \\ge \\#\\{\\text{label changes around the cycle}\\}.$$\nGoing around the $4$-cycle, $r$ distinct labels produce at least $2$ changes if $r = 2$, at least $3$ if $r = 3$, and $4$ if $r = 4$; in all cases at least $\\frac43(r-1)$. Therefore\n$$\\theta(V) = \\sum_i\\theta(K_i) \\ge \\frac32\\sum_i|K_i| - 2r \\ge \\frac32\\left(|V| + \\tfrac43(r-1)\\right) - 2r = \\frac32|V| - 2.$$\n\n**Conclusion.** Suppose the original graph $G$ (with $n = 2022 \\ge 4$ vertices) can be completed. Then the algorithm ends with $G^* = K_n$. Any two edges of $K_n$ lie on a common $4$-cycle (edges $ab, ac$ lie on $a\\,b\\,d\\,c$ for any other vertex $d$; disjoint edges $ab, cd$ lie on $a\\,b\\,c\\,d$), so at the end all edges carry the same label $K$, whose vertex set is everything. Then every original edge is labeled $K$ and\n$$|E(G)| = \\theta(K) \\ge \\tfrac32 n - 2 = 3031.$$\n\n**Answer: 3031**"
+      }
+    ],
+    "topics": [
+      "graph-theory",
+      "counting"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

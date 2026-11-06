@@ -1,8 +1,8 @@
 # Question bank format
 
 Each source paper is extracted into one JSON file: `data/raw/<bank>/<paperSlug>.json`.
-The file is a JSON **array of question objects**. Figures are saved as PNGs under
-`app/public/qimages/<bank>/<paperSlug>/`.
+The file is a JSON **array of question objects**. Figures are saved as **WebP** under
+`app/public/qimages/<bank>/<paperSlug>/` (older banks still have PNGs).
 
 `<bank>` is a bank id from `data/banks.json` (one bank per competition family: `kangaroo`, `noetic`,
 `moems`, `amc8`, `putnam`, ...). A new competition needs an entry there first (name, colour,
@@ -65,7 +65,9 @@ scoring rules, real paper length/time). `tools/build_banks.py` writes one questi
   amounts (Kangaroo 3/4/5 as printed; CEMC Pascal/Cayley/Fermat Part A/B/C 5/6/8; UKMT JMC 5/6).
   `null` means 1 point. Same-value contests (AMC: 6 each) set it on every question so the exam
   total matches the real one. Blank/wrong-answer rules (e.g. AMC 1.5 points for a blank) live in
-  `data/banks.json`.
+  `data/banks.json`; when a paper's rules differ from the bank's, set `blankPoints` /
+  `wrongPoints` on its questions (e.g. old AHSME: `points` 5, `blankPoints` 2 or 1 as printed;
+  old UKMT JMC Q16-25: `wrongPoints` -1).
 - `timeMinutes`: MOEMS only — the suggested time printed with the problem (e.g. 4). Else `null`.
 - `type`:
   - `"mc"` — multiple choice. `choices` must list every option in order with `key` A–E.
@@ -100,8 +102,10 @@ scoring rules, real paper length/time). `tools/build_banks.py` writes one questi
 - `image`: path relative to `app/public` (starts with `qimages/`), or `null` when the question
   has no figure. Crop **only the figure (and picture-choices row if the choices are pictures)**,
   not the whole question text, unless the text is embedded in the figure and inseparable.
-  Use `tools/pdf.py crop` at `--dpi 200`. Leave a few points of margin. Check every crop by
-  viewing it — no cut-off parts, no neighbouring question bleeding in.
+  Use `tools/pdf.py crop ... out.webp` at `--dpi 200` (use `--dpi 150` for very large
+  figures); figures from web pages: download, then `tools/pdf.py img in.png out.webp --trim`.
+  Leave a few points of margin. Check every crop by viewing it — no cut-off parts, no
+  neighbouring question bleeding in.
   If a question needs two separate figures, crop one region covering both.
 - `solutions`: **1–3 solution approaches, aim for 2 genuinely different approaches** when
   natural (e.g. "Work backwards" vs "Draw a model", "Count systematically" vs "Use symmetry").

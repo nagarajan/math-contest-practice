@@ -27,6 +27,8 @@ export interface BankMeta {
   examLength?: number
   /** Official time for one paper, shown as a hint. */
   examMinutes?: number
+  /** Per-grade overrides where papers differ by level, e.g. {"3": {"examLength": 24}}. */
+  byGrade?: Record<string, { examLength?: number; examMinutes?: number }>
   scoringNote: string
   count: number
   countsByGrade: Record<string, number>
@@ -65,6 +67,10 @@ export interface Question {
   grade: string
   grades: Grade[]
   points: number | null
+  /** Overrides the bank's blank-answer points for papers with different rules (e.g. old AHSME). */
+  blankPoints?: number | null
+  /** Overrides the bank's wrong-answer points (e.g. UKMT JMC's -1 on questions 16-25). */
+  wrongPoints?: number | null
   timeMinutes: number | null
   type: QuestionType
   prompt: string

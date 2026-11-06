@@ -23,7 +23,8 @@ export function ExamSetupPage({ kind }: { kind: ExamKind }) {
   const examBanks = banks.banks.filter((b) => (b.examCountsByGrade[g] ?? 0) > 0)
   const practiceOnly = banks.banks.filter((b) => !(b.examCountsByGrade[g] ?? 0))
   const [bank, setBank] = useState<BankId | null>(examBanks[0]?.id ?? null)
-  const meta = examBanks.find((b) => b.id === bank)
+  const bankAll = examBanks.find((b) => b.id === bank)
+  const meta = bankAll && { ...bankAll, ...bankAll.byGrade?.[g] }
 
   const available = kind === 'mixed' ? examBanks.reduce((a, b) => a + b.examCountsByGrade[g], 0) : (meta?.examCountsByGrade[g] ?? 0)
   const wanted = kind === 'focused' && meta?.examLength ? meta.examLength : settings.examQuestionCount

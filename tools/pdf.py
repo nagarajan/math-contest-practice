@@ -7,8 +7,12 @@ Usage (run with ../.venv/bin/python or the project venv):
   pdf.py render <pdf> <page> [--dpi 110] [--grid] [--out PATH]
                                              # render a page to PNG (default /tmp/mcp_render/...);
                                              # --grid overlays a labeled coordinate grid (PDF points)
-  pdf.py crop   <pdf> <page> <x0> <y0> <x1> <y1> <out.png> [--dpi 200]
-                                             # crop a region (PDF points) to PNG
+  pdf.py crop   <pdf> <page> <x0> <y0> <x1> <y1> <out.webp> [--dpi 200]
+                                             # crop a region (PDF points); .webp (preferred,
+                                             # ~4x smaller) or .png by extension
+  pdf.py img    <in.png|jpg|gif|svg> <out.webp> [--max-width 900] [--trim]
+                                             # convert a downloaded figure (e.g. from a web page)
+                                             # to WebP; --trim removes white borders
 
 Pages are 0-based. Coordinates are PDF points with origin at top-left, as reported by `text`
 and drawn by `render --grid`.
@@ -103,8 +107,49 @@ def cmd_crop(a):
     clip = pymupdf.Rect(a.x0, a.y0, a.x1, a.y1) & p.rect
     pix = p.get_pixmap(dpi=a.dpi, clip=clip)
     os.makedirs(os.path.dirname(os.path.abspath(a.out)), exist_ok=True)
-    pix.save(a.out)
-    print(f"{a.out} {pix.width}x{pix.height}px")
+    if a.out.lower().endswith(".webp"):
+        from PIL import Image
+
+        im = Image.frombytes("RGB" if pix.n < 4 else "RGBA", (pix.width, pix.height), pix.samples)
+        _save_webp(im, a.out)
+    else:
+        pix.save(a.out)
+    print(f"{a.out} {pix.width}x{pix.height}px {os.path.getsize(a.out) // 1024} KB")
+
+
+def _save_webp(im, out):
+    if im.mode not in ("RGB", "L"):
+        bg = __import__("PIL.Image", fromlist=["Image"]).new("RGB", im.size, "white")
+        bg.paste(im, mask=im.convert("RGBA").split()[-1])
+        im = bg
+    im.save(out, "WEBP", quality=80, method=6)
+
+
+def cmd_img(a):
+    from PIL import Image, ImageChops
+
+    src = a.src
+    if src.lower().endswith(".svg"):
+        doc = pymupdf.open(src)
+        pix = doc[0].get_pixmap(dpi=150)
+        im = Image.frombytes("RGB" if pix.n < 4 else "RGBA", (pix.width, pix.height), pix.samples)
+    else:
+        im = Image.open(src)
+        im.seek(0)
+    im = im.convert("RGBA")
+    flat = Image.new("RGB", im.size, "white")
+    flat.paste(im, mask=im.split()[-1])
+    if a.trim:
+        diff = ImageChops.difference(flat, Image.new("RGB", flat.size, "white"))
+        box = diff.getbbox()
+        if box:
+            pad = 6
+            flat = flat.crop((max(0, box[0] - pad), max(0, box[1] - pad), min(flat.width, box[2] + pad), min(flat.height, box[3] + pad)))
+    if flat.width > a.max_width:
+        flat = flat.resize((a.max_width, round(flat.height * a.max_width / flat.width)), Image.LANCZOS)
+    os.makedirs(os.path.dirname(os.path.abspath(a.out)), exist_ok=True)
+    _save_webp(flat, a.out)
+    print(f"{a.out} {flat.width}x{flat.height}px {os.path.getsize(a.out) // 1024} KB")
 
 
 def main():
@@ -119,6 +164,9 @@ def main():
     for k in ("x0", "y0", "x1", "y1"):
         s.add_argument(k, type=float)
     s.add_argument("out"); s.add_argument("--dpi", type=int, default=200); s.set_defaults(f=cmd_crop)
+    s = sp.add_parser("img"); s.add_argument("src"); s.add_argument("out")
+    s.add_argument("--max-width", type=int, default=900); s.add_argument("--trim", action="store_true")
+    s.set_defaults(f=cmd_img)
     a = ap.parse_args()
     a.f(a)
 

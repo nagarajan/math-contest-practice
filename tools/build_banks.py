@@ -29,7 +29,7 @@ RAW = os.path.join(ROOT, "data", "raw")
 OUT = os.path.join(ROOT, "app", "public", "banks")
 GRADES = range(1, 15)
 KEEP = [
-    "id", "bank", "source", "grade", "grades", "points", "timeMinutes", "type", "prompt", "image", "choices",
+    "id", "bank", "source", "grade", "grades", "points", "blankPoints", "wrongPoints", "timeMinutes", "type", "prompt", "image", "choices",
     "answer", "answerDisplay", "acceptedAnswers", "answerUnit", "solutions", "topics", "difficulty", "reviewNote",
 ]
 

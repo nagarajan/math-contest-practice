@@ -86,7 +86,7 @@ export function buildExam(
   if (bank === 'kangaroo') {
     const per = Math.floor(count / 3)
     const tiers = [3, 4, 5].map((p) => pool.filter((q) => q.points === p))
-    if (tiers.every((t) => t.length >= per)) {
+    if (tiers.every((t) => t.length >= per) && pool.length >= count) {
       chosen = tiers.flatMap((t, i) => sample(t, i === 2 ? count - 2 * per : per))
     } else {
       chosen = sample(pool, count)

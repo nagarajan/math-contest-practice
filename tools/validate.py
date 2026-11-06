@@ -87,6 +87,11 @@ def check(path):
         ids.add(q.get("id"))
         if q.get("bank") not in BANKS:
             e(f"bad bank {q.get('bank')} (add it to data/banks.json)")
+        elif not str(q.get("id", "")).startswith(q["bank"] + "-"):
+            e(f"id must start with '{q['bank']}-'")
+        for k in ("blankPoints", "wrongPoints"):
+            if q.get(k) is not None and not isinstance(q[k], (int, float)):
+                e(f"{k} must be a number or null")
         if q.get("type") not in TYPES:
             e(f"bad type {q.get('type')}")
         grades = parse_grades(q)

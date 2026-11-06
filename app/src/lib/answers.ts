@@ -100,7 +100,7 @@ export function questionPoints(q: Question): number {
 
 /** Points earned in an exam, following the bank's official rules for blank and wrong answers. */
 export function scoreAnswer(q: Question, given: string, bank: BankMeta | undefined): { correct: boolean; points: number } {
-  if (!given.trim()) return { correct: false, points: bank?.blankPoints ?? 0 }
+  if (!given.trim()) return { correct: false, points: q.blankPoints ?? bank?.blankPoints ?? 0 }
   const correct = isCorrect(q, given)
-  return { correct, points: correct ? questionPoints(q) : (bank?.wrongPoints ?? 0) }
+  return { correct, points: correct ? questionPoints(q) : (q.wrongPoints ?? bank?.wrongPoints ?? 0) }
 }

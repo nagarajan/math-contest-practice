@@ -15,6 +15,8 @@ quality bar. This brief only adds the workflow.
   `app/public/qimages/<bank>/<slug>/`. Do not edit any other file, do not run
   `tools/build_banks.py`, do not use git. Other agents are working in parallel.
 - Use the Python venv: `.venv/bin/python`.
+- Scratch files (renders, helper scripts) go in `/tmp/<your unit id>/` only — other agents use
+  `/tmp` at the same time. Pass `--out /tmp/<unit id>/...` to `pdf.py render`.
 - Sources: the official PDFs already in `sources/pdfs/<bank>/...` (see the unit). If a paper or
   answer key you need is missing, download it from the official site / URL pattern given in
   `sources/catalog/*.json` (or the Wayback Machine copy of the official site) into the same

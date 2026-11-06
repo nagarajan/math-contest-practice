@@ -49,8 +49,10 @@ for level, code, grade, gs in kang_levels:
 
 # ---------------------------------------------------------------- phase 1: CEMC
 CE = "sources/pdfs/cemc"
-CEMC_NOTE = ("Official papers and solutions are in `{d}` (`<Y>_<contest>_paper.pdf`, `<Y>_<contest>_solutions.pdf`). "
-             "Use the official solutions as the first approach. Contest name in `source.contest`, e.g. \"Gauss Contest (CEMC)\".")
+CEMC_NOTE = ("Official papers and solutions are in `{d}` (list the directories to confirm file names). "
+             "Use the official solutions as the first approach. `source.contest` is e.g. \"Gauss Contest (CEMC)\", "
+             "\"Pascal Contest (CEMC)\", \"Euclid Contest (CEMC)\". See `data/raw/cemc/gauss7-2016.json` for the finished format. "
+             "Other agents work on other CEMC slugs at the same time; touch only your own.")
 for g in groups(range(1998, 2027), 3):
     U(f"cemc-gauss-{yr(g)}", 1, "cemc", 45 * len(g),
       f"CEMC Gauss Contest, grade 7 and grade 8 papers ({', '.join(map(str, g))}). " + CEMC_NOTE.format(d=f"{CE}/gauss/")

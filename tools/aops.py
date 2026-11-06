@@ -115,6 +115,8 @@ def to_text(s):
 def fetch_fig(url, out):
     if url.startswith("//"):
         url = "https:" + url
+    scheme, rest = url.split("://", 1)
+    url = f"{scheme}://{re.sub('/{2,}', '/', rest)}"
     tmp = os.path.join(CACHE, "figs", re.sub(r"[^A-Za-z0-9_.-]", "_", url.split("://", 1)[-1]))
     os.makedirs(os.path.dirname(tmp), exist_ok=True)
     if not os.path.exists(tmp):

@@ -78,26 +78,33 @@ def _drawing_clusters(page):
 def cmd_render(a):
     d = pymupdf.open(a.pdf)
     p = d[a.page]
-    if a.grid:
-        shape = p.new_shape()
-        w, h = p.rect.width, p.rect.height
-        step = 50
-        for x in range(0, int(w) + 1, step):
-            shape.draw_line((x, 0), (x, h))
-        for y in range(0, int(h) + 1, step):
-            shape.draw_line((0, y), (w, y))
-        shape.finish(color=(1, 0, 0), width=0.3, stroke_opacity=0.5)
-        shape.commit()
-        for x in range(0, int(w) + 1, step):
-            for y in range(0, int(h) + 1, 100):
-                p.insert_text((x + 1, y + 7), f"{x},{y}", fontsize=5, color=(1, 0, 0))
     pix = p.get_pixmap(dpi=a.dpi)
     out = a.out or os.path.join(
         "/tmp/mcp_render",
         f"{os.path.splitext(os.path.basename(a.pdf))[0]}_p{a.page}{'_grid' if a.grid else ''}.png",
     )
     os.makedirs(os.path.dirname(out), exist_ok=True)
-    pix.save(out)
+    if not a.grid:
+        pix.save(out)
+        print(out)
+        return
+    # Grid is drawn on the raster (not into the PDF) so page transforms/rotation cannot skew it;
+    # pixel = (point - page origin) * dpi/72, matching the coordinates printed by `text` and used by `crop`.
+    from PIL import Image, ImageDraw
+
+    im = Image.frombytes("RGB" if pix.n < 4 else "RGBA", (pix.width, pix.height), pix.samples).convert("RGB")
+    dr = ImageDraw.Draw(im)
+    s = a.dpi / 72
+    r = p.rect
+    step = 50
+    for x in range(0, int(r.width) + 1, step):
+        dr.line([(x * s, 0), (x * s, im.height)], fill=(255, 120, 120), width=1)
+    for y in range(0, int(r.height) + 1, step):
+        dr.line([(0, y * s), (im.width, y * s)], fill=(255, 120, 120), width=1)
+    for x in range(0, int(r.width) + 1, step):
+        for y in range(0, int(r.height) + 1, 100):
+            dr.text((x * s + 2, y * s + 1), f"{x + int(r.x0)},{y + int(r.y0)}", fill=(220, 0, 0))
+    im.save(out)
     print(out)
 
 

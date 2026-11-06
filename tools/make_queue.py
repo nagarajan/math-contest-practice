@@ -73,19 +73,29 @@ for g in groups(range(2003, 2027), 4):
     U(f"cemc-fgh-{yr(g)}", 1, "cemc", 36 * len(g),
       f"CEMC Fryer (grade 9), Galois (grade 10) and Hypatia (grade 11) contests, {', '.join(map(str, g))}. "
       + CEMC_NOTE.format(d=f"{CE}/fryer/, {CE}/galois/, {CE}/hypatia/")
-      + " Full-solution contests with parts: one question per part (number like `02c`); short-answer parts numeric/text, explanations/proofs `self`. "
-      "Slugs `fryer-<Y>`, `galois-<Y>`, `hypatia-<Y>`. Points as printed.")
+      + " Full-solution contests with parts: one question per part (ids like `cemc-fryer-2012-02c`); short-answer parts with a single value "
+      "numeric/text, explanations/proofs and parts asking for several values `self`. Match the conventions of existing "
+      "`data/raw/cemc/fryer-*.json` files (else `euclid-2018.json`). Grades \"9\" Fryer, \"10\" Galois, \"11\" Hypatia. "
+      "If the three papers of a year share a problem, extract it in the lowest grade and mark the others `duplicateOf`. "
+      "Slugs `fryer-<Y>`, `galois-<Y>`, `hypatia-<Y>`. Points as printed (split a problem's 10 marks sensibly if parts are unmarked).")
 for g in groups(range(2011, 2026), 5):
     U(f"cemc-cimc-csmc-{yr(g)}", 1, "cemc", 30 * len(g),
       f"CEMC Canadian Intermediate (CIMC, grades 9-10) and Senior (CSMC, grades 11-12) Mathematics Contests, {', '.join(map(str, g))}. "
       + CEMC_NOTE.format(d=f"{CE}/cimc/, {CE}/csmc/")
-      + " Part A short answers (numeric), Part B full solutions (one question per part; `self` where an explanation/proof is required). "
+      + " `source.contest` \"Canadian Intermediate Mathematics Contest (CEMC)\" / \"Canadian Senior Mathematics Contest (CEMC)\". "
+      "Part A short answers (numeric/text, ids like `cemc-cimc-2013-a3`), Part B full solutions (one question per part, ids like "
+      "`cemc-cimc-2013-b2c`; `self` where an explanation/proof is required or several values are asked). Match existing "
+      "`data/raw/cemc/cimc-*.json` files. Grades \"9-10\" CIMC, \"11-12\" CSMC. "
       "They share problems: extract in CIMC, `duplicateOf` in CSMC. Slugs `cimc-<Y>`, `csmc-<Y>`. Points as printed.")
 
 # ---------------------------------------------------------------- phase 1: AMC / AIME (AoPS wiki via tools/aops.py)
 AMC_NOTE = ("Source: AoPS wiki via `tools/aops.py page \"<title>\"` (problems page, answer key page, and per-problem pages for reference). "
             "Set `source.url` to the official AoPS wiki page URL (https://artofproblemsolving.com/wiki/index.php/<Title_with_underscores>). "
-            "Transcribe the problem text and choices from the LaTeX; download figures with `tools/aops.py fig`. ")
+            "Transcribe the problem text and choices from the LaTeX; download figures with `tools/aops.py fig`. "
+            "If a problems page is missing problems, use the per-problem pages. Archived pages are occasionally vandalized: "
+            "if a statement looks wrong or disagrees with the answer key, cross-check the per-problem page. Finished-format examples: `data/raw/amc8/2015.json`, "
+            "`data/raw/amc10/2015-10a.json`, `data/raw/amc12/2015-12a.json`, `data/raw/aime/2016-i.json`. "
+            "Other agents work on other years of the same bank at the same time; touch only your own files. ")
 for g in [list(range(1999, 2004)), list(range(2004, 2009)), list(range(2009, 2014)), list(range(2014, 2019)), [2019, 2020, 2022, 2023, 2024, 2025]]:
     U(f"amc8-{yr(g)}", 1, "amc8", 25 * len(g),
       f"AMC 8 for {', '.join(map(str, g))} (titles like \"2015 AMC 8 Problems\", \"2015 AMC 8 Answer Key\"). " + AMC_NOTE

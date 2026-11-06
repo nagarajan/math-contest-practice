@@ -1,14 +1,16 @@
 import { describe, expect, it } from 'vitest'
-import { isCorrect, parseNumber } from './answers'
+import { isCorrect, parseNumber, scoreAnswer } from './answers'
+import { evalExpr } from './expr'
 import { buildExam, pickPracticeQuestion, questionWeight, RETRY_AFTER_MS, WEIGHT_CORRECT, WEIGHT_UNSEEN, WEIGHT_WRONG } from './selection'
 import { emptyData, recordAttempt } from './storage'
-import type { Question } from '../types'
+import type { BankMeta, Question } from '../types'
 
 const q = (over: Partial<Question>): Question => ({
   id: 'x',
   bank: 'moems',
   source: { contest: 'c', paper: 'p', year: 2020, number: 1, url: '' },
   grade: '5',
+  grades: [5],
   points: null,
   timeMinutes: null,
   type: 'numeric',
@@ -58,6 +60,47 @@ describe('isCorrect', () => {
     expect(isCorrect(m, 'c')).toBe(true)
     expect(isCorrect(m, 'A')).toBe(false)
     expect(isCorrect({ ...m, acceptedAnswers: ['A'] }, 'A')).toBe(true)
+  })
+})
+
+describe('expression answers', () => {
+  it.each([
+    ['3sqrt(2)/4', (3 * Math.SQRT2) / 4],
+    ['3√2/4', (3 * Math.SQRT2) / 4],
+    ['\\frac{3\\sqrt{2}}{4}', (3 * Math.SQRT2) / 4],
+    ['2^10-1', 1023],
+    ['2^{10}', 1024],
+    ['pi/6', Math.PI / 6],
+    ['2pi', 2 * Math.PI],
+    ['-2^2', -4],
+    ['5!', 120],
+    ['(1+sqrt5)/2', (1 + Math.sqrt(5)) / 2],
+  ])('%s', (s, v) => expect(evalExpr(s)).toBeCloseTo(v, 12))
+  it.each(['', '12 3', '2+', 'foo', '(1'])('%s is rejected', (s) => expect(evalExpr(s)).toBeNull())
+  it('numeric questions accept equivalent expressions', () => {
+    const n = q({ answer: 'sqrt(3)/2' })
+    expect(isCorrect(n, '√3/2')).toBe(true)
+    expect(isCorrect(n, '0.866')).toBe(false)
+    expect(isCorrect(q({ answer: '36' }), '12 3')).toBe(false)
+    expect(isCorrect(q({ answer: '2.5' }), '2 1/2')).toBe(true)
+  })
+  it('self-graded questions are never auto-marked', () => {
+    expect(isCorrect(q({ type: 'self', answer: 'anything' }), 'anything')).toBe(false)
+  })
+})
+
+describe('exam scoring', () => {
+  const amc = { blankPoints: 1.5, wrongPoints: 0 } as unknown as BankMeta
+  const m = q({ type: 'mc', answer: 'B', points: 6, choices: [{ key: 'A', text: '1' }, { key: 'B', text: '2' }] })
+  it('follows the bank rules for blank and wrong answers', () => {
+    expect(scoreAnswer(m, 'B', amc)).toEqual({ correct: true, points: 6 })
+    expect(scoreAnswer(m, '', amc)).toEqual({ correct: false, points: 1.5 })
+    expect(scoreAnswer(m, 'A', amc)).toEqual({ correct: false, points: 0 })
+    expect(scoreAnswer(q({}), '', undefined)).toEqual({ correct: false, points: 0 })
+  })
+  it('never puts self-graded questions in exams', () => {
+    const pool = [q({ id: 'a', type: 'self' }), q({ id: 'b' })]
+    expect(buildExam(pool, emptyData(), null, 5).map((x) => x.id)).toEqual(['b'])
   })
 })
 

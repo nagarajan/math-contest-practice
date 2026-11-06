@@ -1,33 +1,37 @@
 import { useMemo, useState } from 'react'
 import { useApp } from '../state'
 import { navigate } from '../router'
-import { BANK_IDS, BANK_NAMES, type BankId } from '../types'
 import { formatDuration } from '../components/Timer'
 import { QuestionImage, SourceTag } from '../components/QuestionView'
 import { Markdown } from '../components/Markdown'
 import { Solutions } from '../components/Solutions'
 import { formatAnswer, plainPreview } from '../lib/answers'
+import { useLookup } from '../lib/useLookup'
+import { examTitle } from './Exam'
 
 export function HistoryPage() {
-  const { data, banks } = useApp()
+  const { data, index } = useApp()
   const [tab, setTab] = useState<'exams' | 'practice' | 'topics'>('exams')
   const [open, setOpen] = useState<number | null>(null)
+  const lookup = useLookup(data.attempts.map((a) => a.grade))
 
   const practice = useMemo(() => data.attempts.map((a, i) => ({ a, i })).filter((x) => x.a.mode === 'practice').reverse(), [data])
 
   const byBank = useMemo(() => {
-    const r: Record<BankId, { n: number; ok: number }> = { kangaroo: { n: 0, ok: 0 }, noetic: { n: 0, ok: 0 }, moems: { n: 0, ok: 0 } }
+    const r = new Map<string, { n: number; ok: number }>()
     for (const a of data.attempts) {
-      r[a.bank].n++
-      if (a.correct) r[a.bank].ok++
+      const e = r.get(a.bank) ?? { n: 0, ok: 0 }
+      e.n++
+      if (a.correct) e.ok++
+      r.set(a.bank, e)
     }
-    return r
-  }, [data])
+    return index.banks.filter((b) => r.has(b.id)).map((b) => ({ id: b.id, name: b.name, ...r.get(b.id)! }))
+  }, [data, index])
 
   const byTopic = useMemo(() => {
     const r = new Map<string, { n: number; ok: number }>()
     for (const a of data.attempts) {
-      const q = banks.byId.get(a.qid)
+      const q = lookup.get(a.qid)
       for (const t of q?.topics ?? []) {
         const e = r.get(t) ?? { n: 0, ok: 0 }
         e.n++
@@ -36,17 +40,18 @@ export function HistoryPage() {
       }
     }
     return [...r.entries()].sort((x, y) => x[1].ok / x[1].n - y[1].ok / y[1].n)
-  }, [data, banks])
+  }, [data, lookup])
 
   return (
     <div className="page">
       <h1 className="title">History</h1>
       <div className="stat-grid">
-        {BANK_IDS.map((b) => (
-          <div className="stat" key={b}>
-            <div className="stat-value">{byBank[b].n ? Math.round((100 * byBank[b].ok) / byBank[b].n) : 0}%</div>
+        {!byBank.length && <div className="muted">No answers yet.</div>}
+        {byBank.map((s) => (
+          <div className="stat" key={s.id}>
+            <div className="stat-value">{s.n ? Math.round((100 * s.ok) / s.n) : 0}%</div>
             <div className="stat-label">
-              {BANK_NAMES[b]} · {byBank[b].ok}/{byBank[b].n} correct
+              {s.name} · {s.ok}/{s.n} correct
             </div>
           </div>
         ))}
@@ -69,7 +74,7 @@ export function HistoryPage() {
           {[...data.exams].reverse().map((e) => (
             <button key={e.id} className="list-row" onClick={() => navigate(`/exam/result/${e.id}`)}>
               <span>{new Date(e.finishedAt).toLocaleString()}</span>
-              <span>{e.kind === 'mixed' ? 'Mixed' : BANK_NAMES[e.bank!]}</span>
+              <span>{examTitle(index, e)}</span>
               <span>
                 <strong>
                   {e.score}/{e.maxScore}
@@ -86,7 +91,7 @@ export function HistoryPage() {
         <div className="list">
           {!practice.length && <div className="card muted">No practice questions yet.</div>}
           {practice.slice(0, 300).map(({ a, i }) => {
-            const q = banks.byId.get(a.qid)
+            const q = lookup.get(a.qid)
             if (!q) return null
             return (
               <div key={i} className={`review-item ${a.correct ? 'right' : 'wrong'}`}>
@@ -101,7 +106,11 @@ export function HistoryPage() {
                     <Markdown text={q.prompt} />
                     {q.image && <QuestionImage src={q.image} />}
                     <p>
-                      Your answer: <strong>{a.answer}</strong> · Correct answer: <strong>{formatAnswer(q)}</strong>
+                      Your answer: <strong>{a.selfGraded ? (a.correct ? 'solved (self-checked)' : 'not yet (self-checked)') : a.answer}</strong> ·
+                      Correct answer:{' '}
+                      <strong>
+                        <Markdown text={formatAnswer(q)} inline />
+                      </strong>
                     </p>
                     <Solutions q={q} />
                   </div>

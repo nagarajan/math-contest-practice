@@ -5,19 +5,65 @@ Usage: validate.py <file.json> [<file.json> ...]
 Exit code is non-zero if any errors are found. Warnings do not fail.
 """
 import json
+import math
 import os
 import re
 import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PUBLIC = os.path.join(ROOT, "app", "public")
-BANKS = {"kangaroo", "noetic", "moems"}
-TYPES = {"mc", "numeric", "text"}
+BANKS = {b["id"] for b in json.load(open(os.path.join(ROOT, "data", "banks.json"), encoding="utf-8"))}
+TYPES = {"mc", "numeric", "text", "self"}
 TOPICS = {
+    # elementary / middle school
     "arithmetic", "number-theory", "fractions-decimals", "algebra", "patterns", "geometry",
     "measurement", "counting", "probability", "logic", "spatial", "time-calendar", "money", "rates",
+    # high school and beyond
+    "polynomials", "inequalities", "functional-equations", "sequences-series", "trigonometry",
+    "complex-numbers", "statistics", "graph-theory", "games", "calculus", "analysis",
+    "linear-algebra", "abstract-algebra", "real-analysis", "complex-analysis", "topology",
+    "differential-equations",
 }
 NUMERIC_RE = re.compile(r"^-?(\d+(\.\d+)?|\d+/\d+|\d+ \d+/\d+|\.\d+)$")
+EXPR_NAMES = {"sqrt", "cbrt", "pi", "e", "abs", "ln", "log", "sin", "cos", "tan"}
+EXPR_ENV = {
+    "sqrt": math.sqrt, "cbrt": lambda x: math.copysign(abs(x) ** (1 / 3), x), "pi": math.pi, "e": math.e,
+    "abs": abs, "ln": math.log, "log": math.log10, "sin": math.sin, "cos": math.cos, "tan": math.tan,
+    "factorial": math.factorial,
+}
+
+
+def expr_value(s):
+    """Value of an explicit expression answer like '3*sqrt(2)/4', '2^10-1', '5!'. None if invalid."""
+    s = s.strip()
+    if not re.fullmatch(r"[0-9a-z+\-*/^().! ]+", s):
+        return None
+    if set(re.findall(r"[a-z]+", s)) - EXPR_NAMES:
+        return None
+    py = re.sub(r"(\d+|\))!", r"factorial(\1)", s).replace("^", "**")
+    try:
+        v = eval(py, {"__builtins__": {}}, EXPR_ENV)  # noqa: S307 - restricted names/chars above
+        v = float(v)
+    except Exception:
+        return None
+    return v if math.isfinite(v) else None
+
+
+def parse_grades(q):
+    """US grades a question is for: explicit `grades`, else derived from the `grade` label."""
+    if isinstance(q.get("grades"), list) and q["grades"]:
+        return q["grades"]
+    g = str(q.get("grade", "")).strip().lower()
+    if g in ("undergrad", "undergraduate", "13"):
+        return [13]
+    if g in ("grad", "graduate", "14"):
+        return [14]
+    m = re.fullmatch(r"(\d+)\s*[-–]\s*(\d+)", g)
+    if m:
+        return list(range(int(m.group(1)), int(m.group(2)) + 1))
+    if g.isdigit():
+        return [int(g)]
+    return None
 
 
 def check(path):
@@ -40,9 +86,12 @@ def check(path):
             e("duplicate id in file")
         ids.add(q.get("id"))
         if q.get("bank") not in BANKS:
-            e(f"bad bank {q.get('bank')}")
+            e(f"bad bank {q.get('bank')} (add it to data/banks.json)")
         if q.get("type") not in TYPES:
             e(f"bad type {q.get('type')}")
+        grades = parse_grades(q)
+        if not grades or any(not isinstance(g, int) or not 1 <= g <= 14 for g in grades):
+            e(f"cannot work out grades from grade={q.get('grade')!r} grades={q.get('grades')!r}")
         src = q.get("source") or {}
         for k in ("contest", "paper", "year", "url"):
             if k not in src:
@@ -64,10 +113,15 @@ def check(path):
         else:
             if q.get("choices"):
                 e("non-mc question has choices")
-            if t == "numeric" and not NUMERIC_RE.match(str(ans).strip()):
-                e(f"numeric answer not a plain number: {ans!r}")
-        if q.get("bank") == "kangaroo" and q.get("points") not in (3, 4, 5):
+            if t == "numeric" and not NUMERIC_RE.match(str(ans).strip()) and expr_value(str(ans)) is None:
+                e(f"numeric answer is neither a plain number nor an explicit expression like 3*sqrt(2)/4: {ans!r}")
+            if t == "self" and not str(ans or "").strip():
+                e("self-graded question needs an answer summary (Markdown)")
+        pts = q.get("points")
+        if q.get("bank") == "kangaroo" and pts not in (3, 4, 5):
             e("kangaroo question needs points 3/4/5")
+        elif pts is not None and (not isinstance(pts, (int, float)) or pts <= 0):
+            e("points must be a positive number or null")
         img = q.get("image")
         if img:
             if not img.startswith("qimages/"):

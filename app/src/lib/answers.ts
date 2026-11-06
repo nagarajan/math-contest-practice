@@ -1,4 +1,5 @@
-import type { Question } from '../types'
+import type { BankMeta, Question } from '../types'
+import { evalExpr, sameValue } from './expr'
 
 /**
  * Parse a typed answer as a number. Accepts integers, decimals, fractions ("3/4"),
@@ -33,6 +34,15 @@ export function parseNumber(raw: string): number | null {
   return neg ? -value : value
 }
 
+/** Value of a typed numeric answer: plain number (with units) first, then a math expression. */
+export function answerValue(raw: string, unit?: string | null): number | null {
+  const n = parseNumber(raw)
+  if (n !== null) return n
+  let s = raw.trim()
+  if (unit && s.toLowerCase().endsWith(unit.toLowerCase())) s = s.slice(0, -unit.length)
+  return evalExpr(s)
+}
+
 function normText(s: string): string {
   return s
     .toLowerCase()
@@ -44,15 +54,15 @@ function normText(s: string): string {
 
 export function isCorrect(q: Question, given: string): boolean {
   const g = given.trim()
-  if (!g) return false
+  if (!g || q.type === 'self') return false
   const accepted = [q.answer, ...(q.acceptedAnswers ?? [])]
   if (q.type === 'mc') return accepted.some((a) => a.toUpperCase() === g.toUpperCase())
   if (q.type === 'numeric') {
-    const gv = parseNumber(g)
+    const gv = answerValue(g, q.answerUnit)
     if (gv !== null) {
       for (const a of accepted) {
-        const av = parseNumber(a)
-        if (av !== null && Math.abs(av - gv) < 1e-9) return true
+        const av = answerValue(a)
+        if (av !== null && sameValue(av, gv)) return true
       }
     }
   }
@@ -60,12 +70,14 @@ export function isCorrect(q: Question, given: string): boolean {
   return accepted.some((a) => normText(a) === gn)
 }
 
+/** Markdown for the correct answer. */
 export function formatAnswer(q: Question): string {
   if (q.type === 'mc') {
     const c = q.choices?.find((x) => x.key === q.answer)
     return c?.text ? `(${q.answer}) ${c.text}` : `(${q.answer})`
   }
-  return q.answerUnit ? `${q.answer} ${q.answerUnit}` : q.answer
+  const a = q.answerDisplay || q.answer
+  return q.answerUnit ? `${a} ${q.answerUnit}` : a
 }
 
 /** One-line plain-text preview of a Markdown/KaTeX prompt for lists. */
@@ -81,8 +93,14 @@ export function plainPreview(md: string, max = 110): string {
   return s.length > max ? s.slice(0, max - 1) + '…' : s
 }
 
-/** Points awarded for a question in an exam, following each contest's official scoring. */
+/** Maximum points for a question in an exam (per-question points, e.g. Kangaroo 3/4/5, AMC 6). */
 export function questionPoints(q: Question): number {
-  if (q.bank === 'kangaroo') return q.points ?? 3
-  return 1
+  return q.points ?? 1
+}
+
+/** Points earned in an exam, following the bank's official rules for blank and wrong answers. */
+export function scoreAnswer(q: Question, given: string, bank: BankMeta | undefined): { correct: boolean; points: number } {
+  if (!given.trim()) return { correct: false, points: bank?.blankPoints ?? 0 }
+  const correct = isCorrect(q, given)
+  return { correct, points: correct ? questionPoints(q) : (bank?.wrongPoints ?? 0) }
 }

@@ -1,36 +1,36 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { useApp } from '../state'
 import { navigate } from '../router'
-import { BANK_IDS, BANK_NAMES, type Attempt, type BankId, type ExamKind, type ExamRecord, type Question } from '../types'
+import { gradeName, type Attempt, type BankId, type ExamKind, type ExamRecord, type Question } from '../types'
 import { buildExam } from '../lib/selection'
-import { formatAnswer, isCorrect, plainPreview, questionPoints } from '../lib/answers'
+import { formatAnswer, plainPreview, questionPoints, scoreAnswer } from '../lib/answers'
+import { bankMeta, bankName } from '../lib/banks'
+import { useLookup } from '../lib/useLookup'
 import { newId, recordExam } from '../lib/storage'
-import { QuestionView, SourceTag, QuestionImage } from '../components/QuestionView'
+import { BankPill, QuestionView, SourceTag, QuestionImage } from '../components/QuestionView'
 import { Solutions } from '../components/Solutions'
 import { Clock, formatDuration, useNow } from '../components/Timer'
 import { Markdown } from '../components/Markdown'
 import { Scratchpad, discardScratch } from '../components/Scratchpad'
 
-const SCORING_NOTE: Record<BankId, string> = {
-  kangaroo: 'Kangaroo questions are worth 3, 4 or 5 points (no penalty for wrong answers).',
-  noetic: 'Noetic questions are worth 1 point each.',
-  moems: 'Math Olympiad (MOEMS) questions are worth 1 point each.',
+export function examTitle(index: Parameters<typeof bankName>[0], e: { kind: ExamKind; bank: BankId | null }) {
+  return e.kind === 'mixed' ? 'Mixed exam' : `Focused exam · ${bankName(index, e.bank)}`
 }
 
 export function ExamSetupPage({ kind }: { kind: ExamKind }) {
-  const { banks, data, updateData, settings } = useApp()
-  const [bank, setBank] = useState<BankId>('kangaroo')
-  const counts = useMemo(() => {
-    const c: Record<BankId, number> = { kangaroo: 0, noetic: 0, moems: 0 }
-    for (const q of banks.all) c[q.bank]++
-    return c
-  }, [banks])
+  const { banks, data, updateData, settings, grade } = useApp()
+  const g = String(grade)
+  const examBanks = banks.banks.filter((b) => (b.examCountsByGrade[g] ?? 0) > 0)
+  const practiceOnly = banks.banks.filter((b) => !(b.examCountsByGrade[g] ?? 0))
+  const [bank, setBank] = useState<BankId | null>(examBanks[0]?.id ?? null)
+  const meta = examBanks.find((b) => b.id === bank)
 
-  const available = kind === 'mixed' ? banks.all.length : counts[bank]
-  const n = Math.min(settings.examQuestionCount, available)
+  const available = kind === 'mixed' ? examBanks.reduce((a, b) => a + b.examCountsByGrade[g], 0) : (meta?.examCountsByGrade[g] ?? 0)
+  const wanted = kind === 'focused' && meta?.examLength ? meta.examLength : settings.examQuestionCount
+  const n = Math.min(wanted, available)
 
   const start = () => {
-    const qs = buildExam(banks.all, data, kind === 'focused' ? bank : null, settings.examQuestionCount)
+    const qs = buildExam(banks.all, data, kind === 'focused' ? bank : null, wanted)
     const now = Date.now()
     updateData((d) => ({
       ...d,
@@ -38,6 +38,7 @@ export function ExamSetupPage({ kind }: { kind: ExamKind }) {
         id: newId(),
         kind,
         bank: kind === 'focused' ? bank : null,
+        grade,
         qids: qs.map((q) => q.id),
         answers: {},
         flagged: [],
@@ -64,6 +65,8 @@ export function ExamSetupPage({ kind }: { kind: ExamKind }) {
     )
   }
 
+  const notes = kind === 'mixed' ? examBanks : meta ? [meta] : []
+
   return (
     <div className="page narrow">
       <h1 className="title">{kind === 'mixed' ? 'Mixed exam' : 'Focused exam'}</h1>
@@ -72,33 +75,44 @@ export function ExamSetupPage({ kind }: { kind: ExamKind }) {
           <>
             <h2>Choose a competition</h2>
             <div className="bank-choices">
-              {BANK_IDS.map((b) => (
-                <button
-                  key={b}
-                  className={b === bank ? 'bank-choice selected' : 'bank-choice'}
-                  onClick={() => setBank(b)}
-                  disabled={!counts[b]}
-                >
-                  <span className={`bank-pill bank-${b}`}>{BANK_NAMES[b]}</span>
-                  <span className="muted">{counts[b]} questions</span>
+              {examBanks.map((b) => (
+                <button key={b.id} className={b.id === bank ? 'bank-choice selected' : 'bank-choice'} onClick={() => setBank(b.id)}>
+                  <BankPill bank={b.id} />
+                  <span className="muted">{b.examCountsByGrade[g]} questions</span>
                 </button>
               ))}
             </div>
           </>
         )}
-        <ul className="exam-facts">
-          <li>
-            <strong>{n} questions</strong>
-            {n < settings.examQuestionCount ? ` (only ${available} available in this bank)` : ''}, ordered from easier to harder.
-          </li>
-          <li>
-            {settings.examTimeLimitMin
-              ? `Time limit: ${settings.examTimeLimitMin} minutes. The exam is submitted automatically when time runs out.`
-              : 'No time limit — the clock shows how long you take.'}
-          </li>
-          <li>You can move between questions and change answers until you submit.</li>
-          <li>{kind === 'mixed' ? BANK_IDS.map((b) => SCORING_NOTE[b]).join(' ') : SCORING_NOTE[bank]}</li>
-        </ul>
+        {!examBanks.length ? (
+          <p>
+            There are no exam-style (auto-checked) questions for {gradeName(grade)} yet. The problems at this level are proofs, which
+            you can work through in General practice.
+          </p>
+        ) : (
+          <ul className="exam-facts">
+            <li>
+              <strong>{n} questions</strong>
+              {kind === 'focused' && meta?.examLength ? ' (the length of a real paper)' : ''}
+              {n < wanted ? ` (only ${available} available)` : ''}, ordered from easier to harder, for {gradeName(grade)}.
+            </li>
+            <li>
+              {settings.examTimeLimitMin
+                ? `Time limit: ${settings.examTimeLimitMin} minutes. The exam is submitted automatically when time runs out.`
+                : 'No time limit — the clock shows how long you take.'}
+              {kind === 'focused' && meta?.examMinutes ? ` The real contest allows ${meta.examMinutes} minutes.` : ''}
+            </li>
+            <li>You can move between questions and change answers until you submit.</li>
+            {notes.map((b) => (
+              <li key={b.id}>
+                <strong>{b.name}:</strong> {b.scoringNote}
+              </li>
+            ))}
+            {kind === 'mixed' && practiceOnly.length > 0 && (
+              <li className="muted">Proof problems ({practiceOnly.map((b) => b.name).join(', ')}) are practice-only.</li>
+            )}
+          </ul>
+        )}
         <button className="btn primary big" onClick={start} disabled={!n}>
           Start exam
         </button>
@@ -108,15 +122,16 @@ export function ExamSetupPage({ kind }: { kind: ExamKind }) {
 }
 
 export function ExamRunPage() {
-  const { banks, data, updateData } = useApp()
+  const { data, updateData, index } = useApp()
   const exam = data.examInProgress
+  const lookup = useLookup([exam?.grade])
   const now = useNow(500)
   const [confirming, setConfirming] = useState(false)
   const finishing = useRef(false)
 
   const questions = useMemo(
-    () => (exam ? exam.qids.map((id) => banks.byId.get(id)).filter((q): q is Question => !!q) : []),
-    [exam, banks],
+    () => (exam ? exam.qids.map((id) => lookup.get(id)).filter((q): q is Question => !!q) : []),
+    [exam, lookup],
   )
 
   // The clock only runs while the exam is on screen: elapsed time is banked when leaving
@@ -179,20 +194,14 @@ export function ExamRunPage() {
     const elapsedMs = exam.elapsedBeforeMs + (finishedAt - exam.resumedAt)
     const results = questions.map((q) => {
       const answer = exam.answers[q.id] ?? ''
-      const correct = isCorrect(q, answer)
-      const maxPoints = questionPoints(q)
-      return {
-        qid: q.id,
-        answer,
-        correct,
-        points: correct ? maxPoints : 0,
-        maxPoints,
-      }
+      const { correct, points } = scoreAnswer(q, answer, bankMeta(index, q.bank))
+      return { qid: q.id, answer, correct, points, maxPoints: questionPoints(q) }
     })
     const record: ExamRecord = {
       id: exam.id,
       kind: exam.kind,
       bank: exam.bank,
+      grade: exam.grade,
       startedAt: exam.startedAt,
       finishedAt,
       elapsedMs: exam.timeLimitMin ? Math.min(elapsedMs, exam.timeLimitMin * 60000) : elapsedMs,
@@ -205,13 +214,14 @@ export function ExamRunPage() {
     }
     const attempts: Attempt[] = results.map((r) => ({
       qid: r.qid,
-      bank: banks.byId.get(r.qid)!.bank,
+      bank: lookup.get(r.qid)!.bank,
       answer: r.answer,
       correct: r.correct,
       at: finishedAt,
       ms: 0,
       mode: 'exam',
       examId: exam.id,
+      grade: exam.grade,
     }))
     updateData((d) => recordExam(d, record, attempts))
     navigate(`/exam/result/${exam.id}`)
@@ -234,6 +244,7 @@ export function ExamRunPage() {
       </div>
     )
   }
+  if (!questions.length) return <div className="loading">Loading exam…</div>
 
   const idx = Math.min(exam.current, questions.length - 1)
   const q = questions[idx]
@@ -267,7 +278,7 @@ export function ExamRunPage() {
         <div className="work-main">
           <div className="exam-header">
             <div>
-              <strong>{exam.kind === 'mixed' ? 'Mixed exam' : `Focused exam · ${BANK_NAMES[exam.bank!]}`}</strong>
+              <strong>{examTitle(index, exam)}</strong>
               <div className="muted">
                 Question {idx + 1} of {questions.length} · {answeredCount} answered
               </div>
@@ -349,7 +360,7 @@ export function ExamRunPage() {
 }
 
 export function ExamReview({ exam }: { exam: ExamRecord }) {
-  const { banks } = useApp()
+  const lookup = useLookup([exam.grade])
   const [open, setOpen] = useState<string | null>(null)
   const [filter, setFilter] = useState<'all' | 'wrong'>('all')
   const rows = exam.results.filter((r) => filter === 'all' || !r.correct)
@@ -364,7 +375,7 @@ export function ExamReview({ exam }: { exam: ExamRecord }) {
         </button>
       </div>
       {rows.map((r) => {
-        const q = banks.byId.get(r.qid)
+        const q = lookup.get(r.qid)
         const i = exam.results.indexOf(r)
         if (!q) return null
         const isOpen = open === r.qid
@@ -397,7 +408,10 @@ export function ExamReview({ exam }: { exam: ExamRecord }) {
                   </div>
                 )}
                 <p>
-                  Your answer: <strong>{r.answer || '(skipped)'}</strong> · Correct answer: <strong>{formatAnswer(q)}</strong>
+                  Your answer: <strong>{r.answer || '(skipped)'}</strong> · Correct answer:{' '}
+                  <strong>
+                    <Markdown text={formatAnswer(q)} inline />
+                  </strong>
                 </p>
                 <Solutions q={q} />
               </div>
@@ -410,7 +424,7 @@ export function ExamReview({ exam }: { exam: ExamRecord }) {
 }
 
 export function ExamResultPage({ id }: { id: string }) {
-  const { data } = useApp()
+  const { data, index } = useApp()
   const exam = data.exams.find((e) => e.id === id)
   if (!exam) {
     return (
@@ -438,8 +452,7 @@ export function ExamResultPage({ id }: { id: string }) {
             {exam.timedOut ? ' · time ran out' : ''}
           </div>
           <div className="muted">
-            {exam.kind === 'mixed' ? 'Mixed exam' : `Focused exam · ${BANK_NAMES[exam.bank!]}`} ·{' '}
-            {new Date(exam.finishedAt).toLocaleString()}
+            {examTitle(index, exam)} · {gradeName(exam.grade ?? 5)} · {new Date(exam.finishedAt).toLocaleString()}
           </div>
         </div>
         <div className="row">

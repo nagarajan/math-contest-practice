@@ -1,14 +1,24 @@
 import { useState } from 'react'
-import type { Question } from '../types'
-import { BANK_NAMES } from '../types'
-import { assetUrl } from '../lib/banks'
+import type { BankId, Question } from '../types'
+import { assetUrl, bankMeta } from '../lib/banks'
+import { useApp } from '../state'
 import { Markdown } from './Markdown'
 
+export function BankPill({ bank }: { bank: BankId }) {
+  const { index } = useApp()
+  const meta = bankMeta(index, bank)
+  return (
+    <span className="bank-pill" style={{ background: meta?.color ?? '#64748b' }}>
+      {meta?.name ?? bank}
+    </span>
+  )
+}
+
 export function SourceTag({ q }: { q: Question }) {
-  const num = q.source.number != null ? ` · Q${q.source.number}` : ''
+  const num = q.source.number != null ? ` · ${/^\d+$/.test(String(q.source.number)) ? 'Q' : ''}${q.source.number}` : ''
   return (
     <div className="source-tag">
-      <span className={`bank-pill bank-${q.bank}`}>{BANK_NAMES[q.bank]}</span>
+      <BankPill bank={q.bank} />
       <span className="muted">
         {q.source.contest} · {q.source.paper}
         {!q.source.year || q.source.paper.includes(String(q.source.year)) ? '' : ` · ${q.source.year}`}
@@ -74,12 +84,20 @@ export function QuestionView({ q, value, onChange, onSubmit, reveal, disabled }:
             )
           })}
         </div>
+      ) : q.type === 'self' ? (
+        <p className="self-note muted">Work it out on the scratch paper, then check your answer against the solution.</p>
       ) : (
         <div className="answer-row">
           <input
             className="answer-input"
             inputMode={q.type === 'numeric' ? 'decimal' : 'text'}
-            placeholder={q.type === 'numeric' ? 'Your answer (e.g. 42, 3/4, 2.5)' : 'Your answer'}
+            placeholder={
+              q.type !== 'numeric'
+                ? 'Your answer'
+                : q.grades.every((g) => g <= 6)
+                  ? 'Your answer (e.g. 42, 3/4, 2.5)'
+                  : 'Your answer (e.g. 42, 3/4, 2sqrt(3), pi/6, 2^10)'
+            }
             value={value}
             disabled={disabled}
             onChange={(e) => onChange(e.target.value)}

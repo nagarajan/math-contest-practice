@@ -57,9 +57,9 @@ export function pickPracticeQuestion(
 }
 
 /**
- * Build an exam: questions never used in an earlier exam are preferred, then the set is
- * ordered easy -> hard like a real contest. A focused Kangaroo exam keeps the official
- * 3/4/5-point structure (one third of each) when enough questions are available.
+ * Build an exam from auto-graded questions: ones never used in an earlier exam are preferred,
+ * then the set is ordered easy -> hard like a real contest. A focused Kangaroo exam keeps the
+ * official 3/4/5-point structure (one third of each) when enough questions are available.
  */
 export function buildExam(
   questions: Question[],
@@ -68,7 +68,7 @@ export function buildExam(
   count: number,
   rand: () => number = Math.random,
 ): Question[] {
-  const pool = questions.filter((q) => !bank || q.bank === bank)
+  const pool = questions.filter((q) => q.type !== 'self' && (!bank || q.bank === bank))
   const usedInExams = new Set(data.exams.flatMap((e) => e.results.map((r) => r.qid)))
   const weightOf = (q: Question) => (usedInExams.has(q.id) ? 0.25 : 1)
 

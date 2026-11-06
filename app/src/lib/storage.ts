@@ -9,8 +9,9 @@ const dataKey = (pid: string) => `${PREFIX}data:${pid}`
 export const DEFAULT_SETTINGS: Settings = {
   theme: 'system',
   examTimeLimitMin: null,
-  practiceBanks: ['kangaroo', 'noetic', 'moems'],
+  practiceExcluded: [],
   examQuestionCount: 30,
+  practiceSelfGraded: true,
 }
 
 export function emptyData(): ProfileData {
@@ -39,7 +40,11 @@ export function saveProfiles(p: Profile[]) {
 }
 
 export function loadSettings(): Settings {
-  return { ...DEFAULT_SETTINGS, ...read<Partial<Settings>>(KEY_SETTINGS, {}) }
+  const { practiceBanks, ...saved } = read<Partial<Settings> & { practiceBanks?: string[] }>(KEY_SETTINGS, {})
+  const s = { ...DEFAULT_SETTINGS, ...saved }
+  // v1 stored the banks to include; carry over any of the original three that were turned off.
+  if (practiceBanks && !saved.practiceExcluded) s.practiceExcluded = ['kangaroo', 'noetic', 'moems'].filter((b) => !practiceBanks.includes(b))
+  return s
 }
 
 export function saveSettings(s: Settings) {

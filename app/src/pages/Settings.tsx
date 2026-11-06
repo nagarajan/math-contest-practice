@@ -1,11 +1,14 @@
 import { useState } from 'react'
 import { useApp } from '../state'
 import { navigate } from '../router'
-import { BANK_IDS, BANK_NAMES, type ThemePref } from '../types'
+import { gradeName, profileGrade, type ThemePref } from '../types'
 import { ProfileForm } from './Profiles'
 
 export function SettingsPage() {
-  const { settings, setSettings, profile, profiles, clearHistory, removeProfile, renameProfile, resetApp, selectProfile, banks } = useApp()
+  const { settings, setSettings, profile, profiles, clearHistory, removeProfile, updateProfile, resetApp, selectProfile, banks, grade, data } =
+    useApp()
+  const g = String(grade)
+  const hasSelf = banks.all.some((q) => q.type === 'self')
   const [confirm, setConfirm] = useState<null | 'history' | 'profile' | 'all'>(null)
   const [editing, setEditing] = useState(false)
   const [limitText, setLimitText] = useState(settings.examTimeLimitMin ? String(settings.examTimeLimitMin) : '75')
@@ -65,11 +68,11 @@ export function SettingsPage() {
                 if (n >= 1) setSettings({ ...settings, examTimeLimitMin: Math.round(n) })
               }}
             />
-            <span className="muted">(Math Kangaroo gives 75 minutes for 30 questions)</span>
+            <span className="muted">(e.g. Math Kangaroo: 75 min for 30 questions; AMC 10/12: 75 min for 25)</span>
           </label>
         )}
         <label className="inline-field">
-          Questions per exam:
+          Questions per mixed exam:
           <input
             className="text-input small"
             type="number"
@@ -86,20 +89,30 @@ export function SettingsPage() {
 
       <section className="card">
         <h2>Practice</h2>
-        <p className="muted">Which question banks general practice draws from:</p>
-        {BANK_IDS.map((b) => (
-          <label key={b} className="check">
+        <p className="muted">Which question banks general practice draws from ({gradeName(grade)}):</p>
+        {banks.banks.map((b) => (
+          <label key={b.id} className="check">
             <input
               type="checkbox"
-              checked={settings.practiceBanks.includes(b)}
+              checked={!settings.practiceExcluded.includes(b.id)}
               onChange={(e) => {
-                const next = e.target.checked ? [...settings.practiceBanks, b] : settings.practiceBanks.filter((x) => x !== b)
-                if (next.length) setSettings({ ...settings, practiceBanks: next })
+                const excluded = e.target.checked ? settings.practiceExcluded.filter((x) => x !== b.id) : [...settings.practiceExcluded, b.id]
+                if (banks.banks.some((x) => !excluded.includes(x.id))) setSettings({ ...settings, practiceExcluded: excluded })
               }}
             />
-            {BANK_NAMES[b]} <span className="muted">({banks.all.filter((q) => q.bank === b).length} questions)</span>
+            {b.name} <span className="muted">({b.countsByGrade[g]} questions)</span>
           </label>
         ))}
+        {hasSelf && (
+          <label className="check">
+            <input
+              type="checkbox"
+              checked={settings.practiceSelfGraded}
+              onChange={(e) => setSettings({ ...settings, practiceSelfGraded: e.target.checked })}
+            />
+            Include proof problems (you check your own work against the solution)
+          </label>
+        )}
       </section>
 
       <section className="card">
@@ -108,6 +121,7 @@ export function SettingsPage() {
           <div className="row">
             <span className="profile-avatar">{profile.avatar}</span>
             <strong>{profile.name}</strong>
+            <span className="muted">{gradeName(profileGrade(profile))}</span>
             <button className="btn" onClick={() => setEditing(true)}>
               Edit
             </button>
@@ -128,9 +142,10 @@ export function SettingsPage() {
           <ProfileForm
             initialName={profile.name}
             initialAvatar={profile.avatar}
+            initialGrade={profileGrade(profile)}
             submitLabel="Save"
-            onSubmit={(n, a) => {
-              renameProfile(profile.id, n, a)
+            onSubmit={(n, a, gr) => {
+              updateProfile(profile.id, { name: n, avatar: a, ...(data.examInProgress ? {} : { grade: gr }) })
               setEditing(false)
             }}
             onCancel={() => setEditing(false)}

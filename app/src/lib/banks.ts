@@ -1,28 +1,61 @@
-import { BANK_IDS, type BankId, type Question } from '../types'
+import type { BankId, BankMeta, Grade, Question } from '../types'
 
-export interface BankIndexEntry {
-  id: BankId
-  count: number
-  sources: { contest: string; paper: string; year: number | null; count: number; url: string }[]
+export interface BankIndex {
+  banks: BankMeta[]
+  /** Questions available per grade (all banks). */
+  gradeCounts: Record<string, number>
 }
 
 export interface LoadedBanks {
+  grade: Grade
   all: Question[]
   byId: Map<string, Question>
-  index: BankIndexEntry[]
+  /** Banks that have questions for this grade, in display order. */
+  banks: BankMeta[]
 }
 
 export const assetUrl = (p: string) => `${import.meta.env.BASE_URL}${p.replace(/^\//, '')}`
 
-export async function loadBanks(): Promise<LoadedBanks> {
-  const index: BankIndexEntry[] = await fetch(assetUrl('banks/index.json')).then((r) => r.json())
-  const lists = await Promise.all(
-    BANK_IDS.map((b) =>
-      fetch(assetUrl(`banks/${b}.json`))
-        .then((r) => (r.ok ? r.json() : []))
-        .catch(() => []),
-    ),
-  )
-  const all = (lists as Question[][]).flat()
-  return { all, byId: new Map(all.map((q) => [q.id, q])), index }
+export async function loadIndex(): Promise<BankIndex> {
+  const r = await fetch(assetUrl('banks/index.json'))
+  if (!r.ok) throw new Error(`index.json: HTTP ${r.status}`)
+  return r.json()
 }
+
+const gradeCache = new Map<Grade, Promise<Question[]>>()
+
+export function loadGradeQuestions(g: Grade): Promise<Question[]> {
+  let p = gradeCache.get(g)
+  if (!p) {
+    p = fetch(assetUrl(`banks/grade-${g}.json`)).then((r) => (r.ok ? r.json() : []))
+    p.catch(() => gradeCache.delete(g))
+    gradeCache.set(g, p)
+  }
+  return p
+}
+
+export async function loadGrade(index: BankIndex, g: Grade): Promise<LoadedBanks> {
+  const all = await loadGradeQuestions(g)
+  return {
+    grade: g,
+    all,
+    byId: new Map(all.map((q) => [q.id, q])),
+    banks: index.banks.filter((b) => (b.countsByGrade[String(g)] ?? 0) > 0),
+  }
+}
+
+/** Look up questions from several grades (history can span grade changes). */
+export async function loadLookup(grades: Grade[]): Promise<Map<string, Question>> {
+  const lists = await Promise.all([...new Set(grades)].map(loadGradeQuestions))
+  const m = new Map<string, Question>()
+  for (const l of lists) for (const q of l) m.set(q.id, q)
+  return m
+}
+
+export function bankMeta(index: BankIndex, id: BankId | null | undefined): BankMeta | undefined {
+  return index.banks.find((b) => b.id === id)
+}
+
+export const bankName = (index: BankIndex, id: BankId | null | undefined) => bankMeta(index, id)?.name ?? String(id ?? '')
+
+export const isAutoGraded = (q: Question) => q.type !== 'self'

@@ -1,35 +1,44 @@
-import { useMemo } from 'react'
 import { useApp } from '../state'
 import { navigate } from '../router'
-import { BANK_IDS, BANK_NAMES } from '../types'
 import { formatDuration } from '../components/Timer'
+import { examTitle } from './Exam'
+import { GradeSelect } from './Profiles'
 
 export function HomePage() {
-  const { profile, data, banks, settings } = useApp()
+  const { profile, data, banks, settings, grade, updateProfile, index } = useApp()
+  const g = String(grade)
 
-  const counts = useMemo(() => {
-    const c = { kangaroo: 0, noetic: 0, moems: 0 }
-    for (const q of banks.all) c[q.bank]++
-    return c
-  }, [banks])
-
-  const practiced = data.attempts.filter((a) => a.mode === 'practice')
+  const inGrade = new Set(banks.all.map((q) => q.id))
+  const practiced = data.attempts.filter((a) => a.mode === 'practice' && inGrade.has(a.qid))
   const correct = practiced.filter((a) => a.correct).length
-  const seenIds = Object.keys(data.stats).length
-  const toRevisit = Object.values(data.stats).filter((s) => !s.lastCorrect).length
+  const seenIds = Object.keys(data.stats).filter((id) => inGrade.has(id)).length
+  const toRevisit = Object.entries(data.stats).filter(([id, s]) => inGrade.has(id) && !s.lastCorrect).length
   const lastExam = data.exams[data.exams.length - 1]
+  const examBanks = banks.banks.filter((b) => b.examCountsByGrade[g])
 
   return (
     <div className="page">
-      <h1 className="title">Hi {profile?.name}! {profile?.avatar}</h1>
+      <div className="home-head">
+        <h1 className="title">
+          Hi {profile?.name}! {profile?.avatar}
+        </h1>
+        <label className="grade-chip">
+          <span className="muted">Practising at</span>
+          <GradeSelect
+            value={grade}
+            counts={index.gradeCounts}
+            disabled={!!data.examInProgress}
+            onChange={(v) => profile && updateProfile(profile.id, { grade: v })}
+          />
+        </label>
+      </div>
 
       {data.examInProgress && (
         <div className="card resume">
           <div>
             <strong>You have an exam in progress.</strong>
             <div className="muted">
-              {data.examInProgress.kind === 'mixed' ? 'Mixed exam' : `Focused exam: ${BANK_NAMES[data.examInProgress.bank!]}`} ·{' '}
-              {Object.keys(data.examInProgress.answers).length}/{data.examInProgress.qids.length} answered
+              {examTitle(index, data.examInProgress)} · {Object.keys(data.examInProgress.answers).length}/{data.examInProgress.qids.length} answered
             </div>
           </div>
           <button className="btn primary" onClick={() => navigate('/exam/run')}>
@@ -44,18 +53,18 @@ export function HomePage() {
           <span className="mode-name">General practice</span>
           <span className="mode-desc">One question at a time from all banks, with solutions. Missed questions come back later.</span>
         </button>
-        <button className="mode-card mixed" onClick={() => navigate('/exam/new/mixed')} disabled={!!data.examInProgress}>
+        <button className="mode-card mixed" onClick={() => navigate('/exam/new/mixed')} disabled={!!data.examInProgress || !examBanks.length}>
           <span className="mode-icon">🧩</span>
           <span className="mode-name">Mixed exam</span>
           <span className="mode-desc">
-            {settings.examQuestionCount} questions split evenly across all three banks, timed
+            {settings.examQuestionCount} questions split evenly across {examBanks.length > 1 ? `all ${examBanks.length} competitions` : 'the competitions'}, timed
             {settings.examTimeLimitMin ? ` (${settings.examTimeLimitMin} min limit)` : ''}.
           </span>
         </button>
-        <button className="mode-card focused" onClick={() => navigate('/exam/new/focused')} disabled={!!data.examInProgress}>
+        <button className="mode-card focused" onClick={() => navigate('/exam/new/focused')} disabled={!!data.examInProgress || !examBanks.length}>
           <span className="mode-icon">🏆</span>
           <span className="mode-name">Focused exam</span>
-          <span className="mode-desc">{settings.examQuestionCount} questions from one competition of your choice, timed.</span>
+          <span className="mode-desc">A full paper from one competition of your choice, timed.</span>
         </button>
       </div>
 
@@ -93,8 +102,7 @@ export function HomePage() {
       </div>
 
       <div className="bank-summary muted">
-        Question banks:{' '}
-        {BANK_IDS.map((b) => `${BANK_NAMES[b]} ${counts[b]}`).join(' · ')}
+        Question banks for this grade: {banks.banks.map((b) => `${b.name} ${b.countsByGrade[g]}`).join(' · ')}
       </div>
     </div>
   )

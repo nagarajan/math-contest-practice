@@ -34,13 +34,15 @@ export function parseNumber(raw: string): number | null {
   return neg ? -value : value
 }
 
-/** Value of a typed numeric answer: plain number (with units) first, then a math expression. */
+/**
+ * Value of a typed numeric answer: a math expression first, then a plain number with
+ * thousands separators or trailing unit words. The expression must win, or "2*sqrt(3)"
+ * would read as 2 with the unit "*sqrt(3)".
+ */
 export function answerValue(raw: string, unit?: string | null): number | null {
-  const n = parseNumber(raw)
-  if (n !== null) return n
   let s = raw.trim()
   if (unit && s.toLowerCase().endsWith(unit.toLowerCase())) s = s.slice(0, -unit.length)
-  return evalExpr(s)
+  return evalExpr(s) ?? parseNumber(raw)
 }
 
 function normText(s: string): string {
@@ -51,6 +53,7 @@ function normText(s: string): string {
     .replace(/[\u2212\u2013]/g, '-')
     .replace(/\{\s*\}/g, '∅')
     .replace(/\s*([=+*/^:<>])\s*/g, '$1')
+    .replace(/\s+-\s+/g, '-')
     .replace(/[\s,;()[\]{}]+/g, ',')
     .replace(/[^a-z0-9:/.^*+\-,<>∅]+/g, '')
     .replace(/^,+|,+$/g, '')
@@ -67,7 +70,8 @@ export function isCorrect(q: Question, given: string): boolean {
     if (gv !== null) {
       for (const a of accepted) {
         const av = answerValue(a)
-        if (av !== null && sameValue(av, gv)) return true
+        // Beyond 2^53 doubles cannot tell neighbouring integers apart; require a textual match instead.
+        if (av !== null && Math.abs(av) < 1e15 && sameValue(av, gv)) return true
       }
     }
   }

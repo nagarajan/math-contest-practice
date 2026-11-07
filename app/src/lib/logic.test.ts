@@ -60,6 +60,19 @@ describe('isCorrect', () => {
     expect(isCorrect(t, '2 * 3^658')).toBe(true)
     expect(isCorrect(t, '23658')).toBe(false)
   })
+  it('numeric expression answers are not cut at the first operator', () => {
+    const n = q({ type: 'numeric', answer: '2*sqrt(3)' })
+    expect(isCorrect(n, '2')).toBe(false)
+    expect(isCorrect(n, '2√3')).toBe(true)
+    expect(isCorrect(n, 'sqrt(12)')).toBe(true)
+    const p = q({ type: 'numeric', answer: '3pi' })
+    expect(isCorrect(p, '3')).toBe(false)
+  })
+  it('huge numeric answers need an exact form', () => {
+    const n = q({ type: 'numeric', answer: '2^101-1' })
+    expect(isCorrect(n, '2^101 - 1')).toBe(true)
+    expect(isCorrect(n, '2^101')).toBe(false)
+  })
   it('text answers keep signs and list separators', () => {
     const t = q({ type: 'text', answer: '4, -1' })
     expect(isCorrect(t, '4,-1')).toBe(true)

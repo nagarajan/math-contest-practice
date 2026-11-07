@@ -21,7 +21,7 @@ quality bar. This brief only adds the workflow.
   answer key you need is missing, download it from the official site / URL pattern given in
   `sources/catalog/*.json` (or the Wayback Machine copy of the official site) into the same
   folder. Never use document-sharing / piracy sites (scribd, pdfcoffee, studocu, coursehero,
-  dokumen, etc.) and never invent problems.
+  dokumen, etc.), not even to look up scoring rules or other facts, and never invent problems.
 - Answers must match the official answer key/solutions. Solve every problem yourself; if you
   disagree with the key, re-read; keep the key's answer unless it is clearly a misprint and set
   `reviewNote`.

@@ -25,7 +25,7 @@ CACHE = os.path.join(ROOT, "sources", "aops")
 UA = {"User-Agent": "Mozilla/5.0 (math-contest-practice; personal study app)"}
 
 
-def _get(url, tries=6):
+def _get(url, tries=8):
     delay = 3
     for i in range(tries):
         time.sleep(1.5)
@@ -43,16 +43,14 @@ def _get(url, tries=6):
                 raise
             if i == tries - 1:
                 raise
-            time.sleep(delay)
+            time.sleep(max(delay, 30) if code == 429 else delay)
             delay *= 2
 
 
-def _snapshot(page_url):
+def _snapshots(page_url):
     q = urllib.parse.urlencode({"url": page_url, "output": "json", "filter": "statuscode:200", "fl": "timestamp,original"})
     rows = json.loads(_get(f"https://web.archive.org/cdx/search/cdx?{q}") or b"[]")
-    if len(rows) < 2:
-        return None
-    return rows[-1]
+    return rows[1:][::-1]
 
 
 def fetch_page(title):
@@ -65,20 +63,39 @@ def fetch_page(title):
             return cached
         os.remove(path)
     url = "https://artofproblemsolving.com/wiki/index.php/" + urllib.parse.quote(slug, safe="/")
-    snap = _snapshot(url) or _snapshot(url.replace("https://", "http://"))
-    if not snap:
+    snaps = _snapshots(url) or _snapshots(url.replace("https://", "http://"))
+    if not snaps:
         sys.exit(f"no Wayback snapshot of {url} (try the title with different spelling/case, or the browser)")
-    ts, orig = snap
-    body = _get(f"https://web.archive.org/web/{ts}id_/{orig}").decode("utf-8", "replace")
-    open(path, "w", encoding="utf-8").write(body)
-    return body
+    for ts, orig in snaps[:5]:
+        try:
+            body = _get(f"https://web.archive.org/web/{ts}id_/{orig}").decode("utf-8", "replace")
+        except Exception:
+            continue
+        if "mw-parser-output" not in body and "mw-content-text" not in body:
+            continue
+        open(path, "w", encoding="utf-8").write(body)
+        return body
+    sys.exit(f"no usable Wayback snapshot of {url} among the latest 5")
+
+
+def _strip_div(s, start):
+    """Remove the div opening with `start` up to its matching </div> (nesting-aware)."""
+    i = s.find(start)
+    if i < 0:
+        return s
+    depth = 0
+    for m in re.finditer(r"<div\b|</div>", s[i:]):
+        depth += 1 if m.group(0) != "</div>" else -1
+        if depth == 0:
+            return s[:i] + s[i + m.end():]
+    return s
 
 
 def to_text(s):
     m = re.search(r'<div[^>]+class="mw-parser-output"[^>]*>(.*)', s, re.S) or re.search(r'<div id="mw-content-text"[^>]*>(.*)', s, re.S)
     s = m.group(1) if m else s
     s = re.split(r'<div class="printfooter"|<div id="catlinks"|<!--\s*NewPP', s)[0]
-    s = re.sub(r'<div id="toc".*?</div>\s*</div>', "", s, flags=re.S)
+    s = _strip_div(s, '<div id="toc"')
     s = re.sub(r'<table[^>]*class="[^"]*toc[^"]*".*?</table>', "", s, flags=re.S)
     figs = []
 

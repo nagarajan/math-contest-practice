@@ -1,0 +1,184 @@
+[
+  {
+    "id": "usamts-1999-r1-01",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 11 Round 1 (1999-2000)",
+      "year": 1999,
+      "number": 1,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "text",
+    "prompt": "The digits of the three-digit integers $a$, $b$, and $c$ are the nine nonzero digits $1, 2, 3, \\dots, 9$, each of them appearing exactly once. Given that the ratio $a:b:c$ is $1:3:5$, determine $a$, $b$, and $c$.",
+    "image": null,
+    "choices": null,
+    "answer": "129, 387, 645",
+    "acceptedAnswers": [
+      "129,387,645",
+      "129 387 645",
+      "a=129, b=387, c=645",
+      "129:387:645"
+    ],
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Narrow down the digits of a",
+        "body": "We have $b = 3a$ and $c = 5a$, all three-digit numbers.\n\n* **Hundreds digit of $a$.** $c = 5a < 1000$ forces $a < 200$, so $a$ starts with 1.\n* **Units digit of $a$.** If it is even, $c = 5a$ ends in 0 — not allowed. If it is 5, then $b$ and $c$ also end in 5 — a repeat. If it is 1, it repeats the leading 1; if it is 7, then $b = 3a$ ends in 1 — a repeat. So $a$ ends in 3 or 9, and $c$ ends in 5.\n* **Ends in 3:** $a = 1x3$. Since $5 \\cdot 3 = 15$, the tens digit of $c$ is the last digit of $5x + 1$, which is 1 (a repeat) when $x$ is even. So $x$ is odd: $x \\ne 1, 3$ (repeats), $x \\ne 9$ ($b = 3a$ ends in 9), $x \\ne 5$ ($b = 459$ repeats 5). That leaves $x = 7$: $a = 173$, $b = 519$ — repeats 1. No solution.\n* **Ends in 9:** $a = 1x9$, $c = 5a$ ends in 5 and $c < 1000$ needs $a \\le 199$. Trying $x = 2, 3, \\dots, 8$ (with $x \\ne 1, 5, 9$):\n  * $129 \\to 387, 645$: digits $1,2,9,3,8,7,6,4,5$ — all different ✓\n  * $139 \\to 417$ (repeat 1), $149 \\to 447$ (repeat 4), $159$ (repeats 5 in $c = 795$), $169 \\to 507$ (contains 0), $179 \\to 537, 895$ (repeat 9), $189 \\to 945$ (repeat 9).\n\nSo the unique answer is $a = 129$, $b = 387$, $c = 645$.\n\n**Answer: $a = 129$, $b = 387$, $c = 645$**"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "logic"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-1999-r1-02",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 11 Round 1 (1999-2000)",
+      "year": 1999,
+      "number": 2,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $N = 111\\ldots1222\\ldots2$, where there are 1999 digits of 1 followed by 1999 digits of 2. Express $N$ as the product of four integers, each of them greater than 1.",
+    "image": null,
+    "choices": null,
+    "answer": "$N = 2 \\cdot 3 \\cdot \\underbrace{11\\ldots1}_{1999} \\cdot 1\\underbrace{66\\ldots6}_{1997}7$, since $N = \\frac{10^{1999}-1}{9}\\,(10^{1999} + 2)$ and $10^{1999} + 2 = 6\\cdot\\frac{5\\cdot 10^{1998} + 1}{3}$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Repunits",
+        "body": "Let $R = \\underbrace{11\\ldots1}_{1999} = \\frac{10^{1999} - 1}{9}$. The digits of $N$ are $R$ shifted left by 1999 places plus $2R$:\n$$N = R\\cdot 10^{1999} + 2R = R\\,(10^{1999} + 2).$$\n(Small case: $111222 = 111\\cdot 1002$.)\n\nNext, $10^{1999} + 2 = 2\\,(5\\cdot 10^{1998} + 1)$. The number $5\\cdot10^{1998} + 1 = 500\\ldots01$ has digit sum 6, so it is divisible by 3, and\n$$\\frac{5\\cdot 10^{1998} + 1}{3} = 1\\underbrace{66\\ldots6}_{1997}7$$\n(compare $51 = 3\\cdot 17$, $501 = 3\\cdot 167$, $5001 = 3\\cdot 1667$). In general $3 \\cdot 1\\underbrace{6\\ldots6}_{k-1}7 = 5\\underbrace{0\\ldots0}_{k-1}1$, by long multiplication: $3\\cdot 7 = 21$ (write 1, carry 2), each $3 \\cdot 6 + 2 = 20$ (write 0, carry 2), and finally $3\\cdot 1 + 2 = 5$.\n\nTherefore\n$$N = 2 \\cdot 3 \\cdot \\underbrace{11\\ldots1}_{1999} \\cdot 1\\underbrace{66\\ldots6}_{1997}7,$$\na product of four integers greater than 1.\n\n*(Other factorizations exist; e.g. one can check with Fermat's little theorem that 23 also divides $5\\cdot 10^{1998} + 1$.)*"
+      }
+    ],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-1999-r1-03",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 11 Round 1 (1999-2000)",
+      "year": 1999,
+      "number": 3,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Triangle $ABC$ has angle $A$ measuring $30^\\circ$, angle $B$ measuring $60^\\circ$, and angle $C$ measuring $90^\\circ$. Show four different ways to divide triangle $ABC$ into four triangles, each similar to triangle $ABC$, but with one quarter of the area. Prove that the angles and sizes of the smaller triangles are correct.",
+    "image": null,
+    "choices": null,
+    "answer": "Let $D, E, F$ be the midpoints of $AB, BC, CA$. Cut off $DBE$ and $ADF$; the rest is rectangle $DECF$, cut by either diagonal (2 ways). Alternatively $DBC$ is equilateral and $ADC$ is isosceles: cut $ADC$ by $DF$ and $DBC$ by its altitude from $B$ or from $C$ (2 more ways). Every piece is a $30$-$60$-$90$ triangle with hypotenuse $\\frac12 AB$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Midpoints and an equilateral triangle",
+        "body": "Take $BC = 1$, $AC = \\sqrt3$, $AB = 2$. A triangle is similar to $ABC$ with one quarter of the area exactly when it is a $30^\\circ$-$60^\\circ$-$90^\\circ$ triangle with hypotenuse $1$ (ratio $\\frac12$, area ratio $\\frac14$), i.e. with sides $\\frac12, \\frac{\\sqrt3}2, 1$.\n\nLet $D$, $E$, $F$ be the midpoints of $AB$, $BC$, $CA$. By the midline theorem $DE \\parallel AC$ and $DF \\parallel BC$, so $DE \\perp BC$, $DF \\perp AC$, and $DECF$ is a rectangle with $DE = FC = \\frac{\\sqrt3}2$, $DF = EC = \\frac12$. Also $DA = DB = DC = 1$ (the midpoint of the hypotenuse is the circumcenter), so triangle $DBC$ is equilateral with side 1 and triangle $DAC$ is isosceles with $\\angle DAC = \\angle DCA = 30^\\circ$.\n\n**Way 1.** Pieces $DBE$, $ADF$, $DEC$, $DFC$ (rectangle $DECF$ cut along diagonal $DC$).\n* $DBE$: right angle at $E$, $\\angle B = 60^\\circ$, hypotenuse $DB = 1$. ✓\n* $ADF$: right angle at $F$, $\\angle A = 30^\\circ$, hypotenuse $AD = 1$. ✓\n* $DEC$ and $DFC$: right angles at $E$ and $F$, legs $\\frac{\\sqrt3}2$ and $\\frac12$, hypotenuse $DC = 1$. ✓\n\n**Way 2.** Pieces $DBE$, $ADF$, $EDF$, $ECF$ (rectangle cut along the other diagonal $EF$). The two rectangle halves have right angles at $D$ and $C$ and legs $\\frac{\\sqrt3}2$, $\\frac12$, so they are again $30$-$60$-$90$ triangles with hypotenuse 1. ✓\n\n**Ways 3 and 4.** Keep $ADF$ and $CDF$ (the isosceles triangle $ADC$ cut by its axis $DF$ — two $30$-$60$-$90$ triangles with hypotenuses $DA = DC = 1$). Cut the equilateral triangle $DBC$ by its altitude **from $B$** (to the midpoint of $DC$) in Way 3, or by its altitude **from $C$** (to the midpoint $G$ of $DB$) in Way 4. An altitude of an equilateral triangle of side 1 splits it into two $30$-$60$-$90$ triangles with hypotenuse 1. ✓ (The altitude from $D$ is $DE$, which gives Way 1 again.)\n\nIn each way the four pieces cover $ABC$ without overlap, and each is similar to $ABC$ with ratio $\\frac12$, hence area $\\frac14$ of $ABC$. ∎"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "spatial"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-1999-r1-04",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 11 Round 1 (1999-2000)",
+      "year": 1999,
+      "number": 4,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "There are 8436 steel balls, each with radius 1 centimeter, stacked in a tetrahedral pile, with one ball on top, 3 balls in the second layer, 6 in the third layer, 10 in the fourth, and so on. Determine the height of the pile in centimeters.",
+    "image": null,
+    "choices": null,
+    "answer": "2+70*sqrt(6)/3",
+    "acceptedAnswers": null,
+    "answerUnit": "cm",
+    "answerDisplay": "$2 + \\frac{70\\sqrt6}{3}$",
+    "solutions": [
+      {
+        "title": "Count layers, then use a regular tetrahedron",
+        "body": "**Number of layers.** Layer $i$ has the triangular number $\\frac{i(i+1)}2$ of balls, and\n$$\\sum_{i=1}^{n}\\frac{i(i+1)}{2} = \\frac{n(n+1)(n+2)}{6} = \\binom{n+2}{3}.$$\nWe need $n(n+1)(n+2) = 6\\cdot 8436 = 50616 = 36\\cdot 37\\cdot 38$, so $n = 36$ layers.\n\n**Height of the centers.** The centers of the four corner balls form a regular tetrahedron. Along an edge there are 36 balls whose centers are 2 cm apart, so the edge is $35\\cdot 2 = 70$ cm.\n\nThe height of a regular tetrahedron with edge $s$: the foot of the altitude is the center of the base triangle, at distance $\\frac{s}{\\sqrt3}$ from each base vertex, so the height is\n$$\\sqrt{s^2 - \\frac{s^2}{3}} = s\\sqrt{\\tfrac23} = \\frac{s\\sqrt6}{3}.$$\nWith $s = 70$: $\\frac{70\\sqrt6}{3}$.\n\n**Height of the pile.** Add the radius above the top center and below the bottom centers: $1 + 1 = 2$ cm. So the height is\n$$2 + \\frac{70\\sqrt6}{3} \\approx 59.15 \\text{ cm}.$$\n\n**Answer: $2 + \\frac{70\\sqrt6}{3}$ cm**"
+      },
+      {
+        "title": "Layer by layer",
+        "body": "Four mutually touching balls have centers forming a regular tetrahedron of edge 2, whose height is $\\frac{2\\sqrt6}{3}$. Each layer's centers sit exactly this much higher than the layer below (each ball rests in a pocket formed by three balls under it). With 36 layers (since $\\binom{38}{3} = 8436$), the top center is $35\\cdot\\frac{2\\sqrt6}3 = \\frac{70\\sqrt6}3$ above the bottom centers, and adding the two radii gives $2 + \\frac{70\\sqrt6}{3}$ cm."
+      }
+    ],
+    "topics": [
+      "geometry",
+      "counting"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-1999-r1-05",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 11 Round 1 (1999-2000)",
+      "year": 1999,
+      "number": 5,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "In a convex pentagon $ABCDE$ the sides have lengths 1, 2, 3, 4, and 5, though not necessarily in that order. Let $F$, $G$, $H$, and $I$ be the midpoints of the sides $AB$, $BC$, $CD$, and $DE$, respectively. Let $X$ be the midpoint of segment $FH$, and $Y$ be the midpoint of segment $GI$. The length of segment $XY$ is an integer. Find all possible values for the length of side $AE$.",
+    "image": null,
+    "choices": null,
+    "answer": "4",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Vectors",
+        "body": "Use position vectors. Then $F = \\frac{A + B}2$, $H = \\frac{C + D}2$, so\n$$X = \\frac{F + H}2 = \\frac{A + B + C + D}{4},\\qquad Y = \\frac{G + I}{2} = \\frac{B + C + D + E}{4}.$$\nHence $Y - X = \\frac{E - A}{4}$, i.e.\n$$XY = \\frac{AE}{4}.$$\n$AE$ is one of $1, 2, 3, 4, 5$, and $XY = AE/4$ is an integer only for $AE = 4$ (giving $XY = 1$). This value really occurs: a convex pentagon with sides $1, 2, 3, 5, 4$ in order (so $EA = 4$) exists, since each length is less than the sum of the others.\n\n**Answer: $AE = 4$**"
+      },
+      {
+        "title": "Midlines",
+        "body": "Let $Z$ be the midpoint of $BE$. In triangle $BCD$, $GH$ is a midline: $GH \\parallel BD$, $GH = \\frac{BD}2$. In triangle $BED$, $ZI$ is a midline: $ZI \\parallel BD$, $ZI = \\frac{BD}2$. So $GHIZ$ is a parallelogram, and its diagonals $GI$ and $HZ$ bisect each other: $Y$ is the midpoint of $HZ$.\n\nNow in triangle $HFZ$, $X$ and $Y$ are midpoints of $HF$ and $HZ$, so $XY = \\frac{FZ}2$. In triangle $BAE$, $F$ and $Z$ are midpoints of $BA$ and $BE$, so $FZ = \\frac{AE}{2}$. Therefore $XY = \\frac{AE}4$, and as before $AE = 4$.\n\n**Answer: 4**"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

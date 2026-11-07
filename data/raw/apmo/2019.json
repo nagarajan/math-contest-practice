@@ -1,0 +1,174 @@
+[
+  {
+    "id": "apmo-2019-01",
+    "bank": "apmo",
+    "source": {
+      "contest": "APMO",
+      "paper": "APMO",
+      "year": 2019,
+      "number": 1,
+      "url": "https://www.apmo-official.org/static/problems/apmo2019_prb.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $\\mathbb{Z}^+$ be the set of positive integers. Determine all functions $f : \\mathbb{Z}^+ \\to \\mathbb{Z}^+$ such that $a^2 + f(a)f(b)$ is divisible by $f(a) + b$ for all positive integers $a$ and $b$.",
+    "image": null,
+    "choices": null,
+    "answer": "$f(n)=n$ for all $n$ (get $f(1)=1$, $b\\le f(b)$ and $f(a)+1\\mid a^2-1$; then $f(p)=p$ for primes $p$, and $a=p$ large forces $f(b)=b$).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Primes first, then let $p\\to\\infty$",
+        "body": "Write $P(a,b)$ for the statement $f(a)+b \\mid a^2+f(a)f(b)$. The identity $f(n)=n$ works: $a+b\\mid a^2+ab=a(a+b)$. We show it is the only solution.\n\n1. $P(1,1)$: $f(1)+1\\mid f(1)^2+1=(f(1)+1)(f(1)-1)+2$, so $f(1)+1\\mid 2$, i.e. $f(1)=1$.\n2. $P(1,b)$: $b+1\\mid 1+f(b)$. In particular $f(b)\\ge b$ for all $b$.\n3. $P(a,1)$: $f(a)+1\\mid a^2+f(a)$, and subtracting $f(a)+1$ gives $f(a)+1\\mid a^2-1$. For $a\\ge2$ the number $a^2-1$ is positive, so $f(a)\\le a^2-2$.\n\n**Primes.** Let $p$ be a prime. $P(p,f(p))$ gives $2f(p)\\mid p^2+f(p)f(f(p))$, hence $f(p)\\mid p^2$, so $f(p)\\in\\{1,p,p^2\\}$. By 2 and 3, $p\\le f(p)\\le p^2-2$, so $f(p)=p$.\n\n**All $b$.** Fix $b$ and let $p$ be any prime. $P(p,b)$ says $p+b\\mid p^2+pf(b)$. Since\n$$(b+p)\\bigl(f(b)+p-b\\bigr)=p^2+pf(b)-b^2+bf(b),$$\nwe get $p+b\\mid p^2+pf(b)-(b+p)(f(b)+p-b)=b^2-bf(b)$, i.e. $p+b\\mid b\\,(f(b)-b)$. The right side is a fixed non-negative integer (by 2), while $p+b$ can be made arbitrarily large. Hence $b(f(b)-b)=0$ and $f(b)=b$.\n\n**Answer:** $f(n)=n$ for all positive integers $n$. ∎"
+      },
+      {
+        "title": "Induction",
+        "body": "As in the first solution, $f(1)=1$. Suppose $f(n-1)=n-1$ for some $n\\ge2$.\n\n* $P(n,n-1)$: $f(n)+n-1\\mid n^2+(n-1)f(n)$. Since $f(n)+n-1\\mid (n-1)(f(n)+n-1)=(n-1)f(n)+(n-1)^2$, subtracting gives $f(n)+n-1\\mid n^2-(n-1)^2=2n-1$.\n* $P(n-1,n)$: $2n-1\\mid (n-1)^2+(n-1)f(n)=(n-1)(f(n)+n-1)$. As $\\gcd(2n-1,n-1)=\\gcd(1,n-1)=1$, we get $2n-1\\mid f(n)+n-1$.\n\nBoth numbers are positive, so $f(n)+n-1=2n-1$, i.e. $f(n)=n$. By induction $f(n)=n$ for all $n$, and this function works. ∎"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "functional-equations"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "apmo-2019-02",
+    "bank": "apmo",
+    "source": {
+      "contest": "APMO",
+      "paper": "APMO",
+      "year": 2019,
+      "number": 2,
+      "url": "https://www.apmo-official.org/static/problems/apmo2019_prb.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $m$ be a fixed positive integer. The infinite sequence $\\{a_n\\}_{n\\ge1}$ is defined in the following way: $a_1$ is a positive integer, and for every integer $n\\ge1$ we have\n$$a_{n+1}=\\begin{cases} a_n^2+2^m & \\text{if } a_n<2^m\\\\[2pt] a_n/2 & \\text{if } a_n\\ge 2^m.\\end{cases}$$\nFor each $m$, determine all possible values of $a_1$ such that every term in the sequence is an integer.",
+    "image": null,
+    "choices": null,
+    "answer": "Only $m=2$ admits valid starting values, and then exactly $a_1=2^\\ell$ with $\\ell\\ge1$; for every $m\\ne2$ there is no such $a_1$ (the odd parts are non-decreasing and bounded, which forces all terms to be powers of $2$).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Odd parts",
+        "body": "Suppose all terms are integers. Write $a_i=b_i2^{c_i}$ with $b_i$ odd and $c_i\\ge0$.\n\n**Lemma 1. $b_i<2^m$ for all $i$.** Otherwise pick an index $i$ with $b_i>2^m$ and $c_i$ minimal. Then $a_i\\ge b_i>2^m$, so $a_{i+1}=a_i/2$; as $a_{i+1}$ is an integer, $c_i\\ge1$, and $b_{i+1}=b_i$, $c_{i+1}=c_i-1$, contradicting minimality. ($b_i=2^m$ is impossible since $b_i$ is odd and $m\\ge1$.)\n\n**Lemma 2. $b_{i+1}\\ge b_i$, with equality for a term $a_i<2^m$ only if $b_i=1$ and $2c_i=m$.** If $a_i\\ge2^m$ then $b_{i+1}=b_i$. If $a_i<2^m$ then $a_{i+1}=b_i^2 2^{2c_i}+2^m$ and:\n* if $2c_i>m$: $a_{i+1}=2^m\\bigl(b_i^2 2^{2c_i-m}+1\\bigr)$, odd part $b_i^22^{2c_i-m}+1>b_i$;\n* if $2c_i<m$: $a_{i+1}=2^{2c_i}\\bigl(b_i^2+2^{m-2c_i}\\bigr)$, odd part $b_i^2+2^{m-2c_i}>b_i$;\n* if $2c_i=m$: $a_{i+1}=2^{m+1}\\cdot\\frac{b_i^2+1}2$, and $\\frac{b_i^2+1}{2}$ is odd (as $b_i^2+1\\equiv2\\pmod 4$), so $b_{i+1}=\\frac{b_i^2+1}2\\ge b_i$, with equality iff $b_i=1$.\n\n**Consequences.** By the lemmas, $(b_i)$ is a non-decreasing bounded sequence of integers, so it is constant from some index $j$ on. A term $\\ge2^m$ is halved, so there are infinitely many terms $<2^m$; take one, $a_i$ with $i\\ge j$. Since $b_{i+1}=b_i$, Lemma 2 gives $b_i=1$ and $2c_i=m$. As $(b_n)$ is non-decreasing, odd and positive and eventually $1$, we have $b_n=1$ for all $n$: **every term is a power of $2$**, and $m$ is even.\n\nNow follow the sequence from $a_i=2^{m/2}<2^m$:\n$$2^{m/2}\\to 2^m+2^m=2^{m+1}\\to2^m\\to2^{m-1}\\to 2^{2m-2}+2^m .$$\nThe last term must be a power of $2$, which happens only if $2m-2=m$, i.e. $m=2$. (For $m=2$ the step $2^{m-1}=2\\to 2^2+2^2=8$ is consistent.)\n\n**The case $m=2$.** All terms must be powers of $2$, so $a_1=2^\\ell$. If $\\ell=0$: $1\\to1+4=5\\to\\frac52$, not an integer. If $\\ell\\ge1$: the powers $2^\\ell\\ge4$ are halved down to $2$, and then $2\\to8\\to4\\to2\\to\\cdots$ cycles, so all terms are integers.\n\n**Answer:** for $m=2$, exactly $a_1=2^\\ell$ with $\\ell\\ge1$; for every other $m$, no value of $a_1$ works. ∎"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "sequences-series"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "apmo-2019-03",
+    "bank": "apmo",
+    "source": {
+      "contest": "APMO",
+      "paper": "APMO",
+      "year": 2019,
+      "number": 3,
+      "url": "https://www.apmo-official.org/static/problems/apmo2019_prb.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $ABC$ be a scalene triangle with circumcircle $\\Gamma$. Let $M$ be the midpoint of $BC$. A variable point $P$ is selected in the line segment $AM$. The circumcircles of triangles $BPM$ and $CPM$ intersect $\\Gamma$ again at points $D$ and $E$, respectively. The lines $DP$ and $EP$ intersect (a second time) the circumcircles to triangles $CPM$ and $BPM$ at $X$ and $Y$, respectively. Prove that as $P$ varies, the circumcircle of $\\triangle AXY$ passes through a fixed point $T$ distinct from $A$.",
+    "image": null,
+    "choices": null,
+    "answer": "Proof: $BY\\parallel CE$ and $CX\\parallel BD$ make $BCXY$ cyclic and $XY\\parallel DE$; with $Q,R\\in\\Gamma$ such that $CQ\\parallel BR\\parallel AM$, the lines $DP$, $EP$ pass through $Q$, $R$ and $QRXY$ is cyclic, so $XY$ passes through the fixed point $S=BC\\cap QR$ and $T$ is the second intersection of $AS$ with $\\Gamma$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Radical axes and a fixed radical centre",
+        "body": "All angles are directed angles between lines, modulo $180^\\circ$. Let $\\omega_B=(BPM)$ and $\\omega_C=(CPM)$.\n\n**Step 1: $BY\\parallel CE$ and $CX\\parallel BD$.** Using the circles $\\omega_C$ ($C,E,M,P$) and $\\omega_B$ ($B,Y,M,P$), and that $P,E,Y$ are collinear:\n$$\\angle(CM,CE)=\\angle(PM,PE)=\\angle(PM,PY)=\\angle(BM,BY).$$\nSince $CM$ and $BM$ are the same line $BC$, $CE\\parallel BY$. In the same way $BD\\parallel CX$.\n\n**Step 2: $B,C,X,Y$ are concyclic.** The radical axes of $\\Gamma,\\omega_B,\\omega_C$ taken in pairs are $BD$, $CE$, $PM$, so they meet at a point $N$ (the radical centre) on line $AM$. Let $L=BY\\cap CX$. By Step 1, $BL\\parallel CN$ and $CL\\parallel BN$, so $BNCL$ is a parallelogram; its diagonals bisect each other, so $M$ is the midpoint of $NL$ and $L$ lies on line $NM=AM$. Taking powers of $L$ (signed lengths) with respect to $\\omega_B$ and $\\omega_C$:\n$$LY\\cdot LB=LP\\cdot LM=LX\\cdot LC,$$\nso $B,Y,X,C$ are concyclic.\n\n**Step 3: $XY\\parallel DE$.** Using the circle $BCXY$, then $BL\\parallel CN$ (so line $BY$ has the direction of line $CE$), then $\\Gamma$:\n$$\\angle(XC,XY)=\\angle(BC,BY)=\\angle(CB,CE)=\\angle(DB,DE).$$\nSince $XC\\parallel DB$ (Step 1), the lines $XY$ and $DE$ make the same angle with parallel lines, hence $XY\\parallel DE$.\n\n**Step 4: two fixed points $Q,R$.** Let $Q,R$ be the second intersections with $\\Gamma$ of the lines through $C$ and through $B$ parallel to $AM$. These do not depend on $P$. Using $\\Gamma$, $CQ\\parallel MA$, and $\\omega_B$:\n$$\\angle(DQ,DB)=\\angle(CQ,CB)=\\angle(MA,MB)=\\angle(MP,MB)=\\angle(DP,DB).$$\nSo $D,P,Q$ are collinear; i.e. $X$ and $Q$ both lie on line $DP$. Similarly $E,P,R,Y$ are collinear.\n\n**Step 5: $Q,R,X,Y$ are concyclic.** Using that $R,E,Y$ lie on one line, $\\Gamma$, and $XY\\parallel DE$ with $X,Q$ on line $DP$:\n$$\\angle(RQ,RY)=\\angle(RQ,RE)=\\angle(DQ,DE)=\\angle(XQ,XY).$$\n\n**Step 6: the fixed point.** $BRQC$ is a trapezoid inscribed in $\\Gamma$ with $BR\\parallel CQ$, hence isosceles. If $QR\\parallel BC$ it would be a rectangle, so $BC\\perp AM$, i.e. $AB=AC$, which is excluded. So $S=BC\\cap QR$ is a well-defined point, independent of $P$. It has equal power with respect to $\\Gamma$ and circle $BCXY$ (it lies on $BC$), and with respect to $\\Gamma$ and circle $QRXY$ (it lies on $QR$); hence equal power with respect to circles $BCXY$ and $QRXY$, so $S$ lies on their radical axis $XY$. Let $T$ be the second intersection of line $AS$ with $\\Gamma$ (fixed). Then\n$$SX\\cdot SY=SB\\cdot SC=ST\\cdot SA,$$\nso $A,T,X,Y$ are concyclic: the circle $AXY$ passes through the fixed point $T$.\n\n**$T\\ne A$.** Take coordinates $M=(0,0)$, $B=(-1,0)$, $C=(1,0)$, $A=(p,q)$ with $p\\ne0$ (the triangle is scalene) and $q\\ne0$. The circumcentre is $O=(0,k)$ with $2qk=p^2+q^2-1$. The axis of symmetry of the isosceles trapezoid $BRQC$ passes through $O$ and is perpendicular to $AM$, and both $BC$ and $QR$ meet on it; so $S=(s,0)$ with $(s,-k)\\cdot(p,q)=0$, i.e. $sp=kq$. The power of $S$ is $SB\\cdot SC=s^2-1$, while\n$$SA^2=(s-p)^2+q^2=s^2-2sp+p^2+q^2=s^2-2kq+p^2+q^2=s^2+1 .$$\nSince $SA^2\\ne SB\\cdot SC$, line $SA$ is not tangent to $\\Gamma$, so $T\\ne A$. ∎"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "apmo-2019-04",
+    "bank": "apmo",
+    "source": {
+      "contest": "APMO",
+      "paper": "APMO",
+      "year": 2019,
+      "number": 4,
+      "url": "https://www.apmo-official.org/static/problems/apmo2019_prb.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Consider a $2018\\times 2019$ board with integers in each unit square. Two unit squares are said to be neighbours if they share a common edge. In each turn, you choose some unit squares. Then for each chosen unit square the average of all its neighbours is calculated. Finally, after these calculations are done, the number in each chosen unit square is replaced by the corresponding average. Is it always possible to make the numbers in all squares become the same after finitely many turns?",
+    "image": null,
+    "choices": null,
+    "answer": "No. Work modulo $5$ (divisions by $2,3,4$ make sense mod $5$): reflecting the $2\\times3$ block $\\begin{smallmatrix}3&1&3\\\\0&2&0\\end{smallmatrix}$ over the whole board gives a board in which every cell is already the average of its neighbours mod $5$, so it never changes mod $5$ and never becomes constant.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "An invariant board modulo 5",
+        "body": "**Answer: no.**\n\n**Working modulo 5.** Every number that ever appears is a rational number whose denominator is a product of $2$s and $3$s (averages divide by $2$, $3$ or $4$). Such numbers can be reduced modulo $5$ ($2,3,4$ are invertible mod $5$), and this reduction respects sums and products. So we may run the process modulo $5$, replacing \"divide by $d$\" by \"multiply by $d^{-1}\\bmod 5$\". If the real process ever made all numbers equal, then all residues mod $5$ would be equal too.\n\nCall a board **stable** if every cell $c$ with value $v_c$ and $\\deg c$ neighbours satisfies\n$$\\deg(c)\\,v_c\\equiv\\sum_{c'\\text{ neighbour of }c}v_{c'}\\pmod 5 .$$\nSince $\\deg c\\in\\{2,3,4\\}$ is invertible mod $5$, this says each value is already congruent to the average of its neighbours; so in a stable board, no turn changes any residue mod $5$ (all replacements in a turn are computed from the same old values).\n\n**A stable $2\\times3$ block.**\n$$\\begin{array}{|c|c|c|}\\hline 3&1&3\\\\\\hline 0&2&0\\\\\\hline\\end{array}$$\nCheck: corner $3$: $2\\cdot3=6\\equiv1+0$; top middle $1$: $3\\cdot1=3\\equiv3+3+2=8$; corner $0$: $2\\cdot0=0\\equiv3+2=5$; bottom middle $2$: $3\\cdot2=6\\equiv1+0+0$. All hold mod $5$.\n\n**Extending by reflections.** Fill the $2018\\times2019$ board as follows: the cell in row $i$, column $j$ gets the value of the block cell in row $\\varphi(i)$, column $\\psi(j)$, where\n$$\\varphi(i)=\\begin{cases}1& i\\equiv0,1\\pmod4\\\\2& i\\equiv2,3\\pmod4\\end{cases}\\qquad \\psi(j)=\\begin{cases}1& j\\equiv0,1\\pmod6\\\\2& j\\equiv2,5\\pmod6\\\\3& j\\equiv3,4\\pmod6\\end{cases}$$\n(the block reflected repeatedly across its edges; rows read $3\\,1\\,3\\,3\\,1\\,3\\cdots$ or $0\\,2\\,0\\,0\\,2\\,0\\cdots$ in the order $R_1,R_2,R_2,R_1,R_1,\\dots$). Consecutive rows $i,i+1$ map to $(\\varphi(i),\\varphi(i+1))=(1,1),(1,2),(2,2),(2,1)$ for $i\\equiv0,1,2,3\\pmod 4$, and consecutive columns map to $(1,1),(1,2),(2,3),(3,3),(3,2),(2,1)$ for $j\\equiv0,\\dots,5\\pmod 6$. Reading these lists off: for a cell of the big board, among the images of its (up to two) vertical neighbours the other block row appears exactly once and every other image is the cell's own block row; among the images of its horizontal neighbours, each horizontal block neighbour of $\\psi(j)$ appears exactly once and every other image is $\\psi(j)$ itself (at the edges: row $1$ and column $1$ map to block row/column $1$, row $2018\\equiv2$ to block row $2$, column $2019\\equiv3$ to block column $3$, and the missing neighbour is never needed). So the neighbours of a big-board cell carry exactly the values of the neighbours of the corresponding block cell, plus possibly some copies of the cell's own value. Hence for each big-board cell with value $a$, its neighbours carry the values of its block neighbours (sum $\\Sigma$, number $k$) plus $j\\ge0$ extra copies of $a$, and\n$$(k+j)a\\equiv\\Sigma+ja\\pmod 5$$\nfollows from $ka\\equiv\\Sigma$. So the big board is stable. It contains integers, and not all residues are equal (it contains $3$ and $0$).\n\nStarting from this board, the residues mod $5$ never change, so the numbers can never all become equal. ∎"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "logic"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "apmo-2019-05",
+    "bank": "apmo",
+    "source": {
+      "contest": "APMO",
+      "paper": "APMO",
+      "year": 2019,
+      "number": 5,
+      "url": "https://www.apmo-official.org/static/problems/apmo2019_prb.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Determine all the functions $f : \\mathbb{R}\\to\\mathbb{R}$ such that\n$$f(x^2+f(y))=f(f(x))+f(y^2)+2f(xy)$$\nfor all real numbers $x$ and $y$.",
+    "image": null,
+    "choices": null,
+    "answer": "$f(x)=0$ for all $x$, and $f(x)=x^2$ for all $x$ (show $f$ is even, $f(a)=f(b)\\Rightarrow f(ax)=f(bx)$, then $f>0$ off $0$ and $f(1)=1$).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Positivity, then a scaling lemma",
+        "body": "Both $f\\equiv0$ and $f(x)=x^2$ work: $(x^2+y^2)^2=x^4+y^4+2x^2y^2$. Let $P(x,y)$ denote the equation.\n\n**Basic facts.** $P(0,0)$: $f(f(0))=f(f(0))+3f(0)$, so $f(0)=0$. $P(x,0)$: $f(x^2)=f(f(x))$. Then $P(x,1)$ reads $f(x^2+f(1))=f(x^2)+f(1)+2f(x)$, so\n$$2f(x)=f(x^2+f(1))-f(x^2)-f(1),$$\nwhich is even in $x$: **$f$ is even.** Replacing $f(f(x))$ by $f(x^2)$, the equation becomes\n$$f(x^2+f(y))=f(x^2)+f(y^2)+2f(xy).\\tag{$*$}$$\nThe right side is symmetric, so $f(x^2+f(y))=f(y^2+f(x))$. $\\quad(2)$\n\n**Lemma (1).** If $f(a)=f(b)$ then $f(ax)=f(bx)$ for all $x$. Indeed $f(a^2)=f(f(a))=f(f(b))=f(b^2)$, and comparing $(*)$ for $y=a$ and $y=b$ (same left side) gives $2f(xa)=2f(xb)$.\n\n**Trivial case.** If $f(a)=0=f(0)$ for some $a\\ne0$, then by (1) $f(x)=f(a\\cdot\\frac xa)=f(0\\cdot\\frac xa)=0$ for all $x$: $f\\equiv0$. From now on assume $f(a)\\ne0$ for $a\\ne0$.\n\n**$f(x)>0$ for $x\\ne0$.** Suppose $f(s)=-t^2<0$ with $s,t\\ne0$. By (2) with $(x,y)=(s,t)$: $f(s^2+f(t))=f(t^2+f(s))=f(0)=0$, so $s^2+f(t)=0$, i.e. $f(t)=-s^2$. Let $r=\\sqrt{s^2+t^2}$. $(*)$ with $(x,y)=(r,s)$: the left side is $f(r^2-t^2)=f(s^2)$, so $f(r^2)+2f(rs)=0$. Similarly $(x,y)=(r,t)$ gives $f(r^2)+2f(rt)=0$. Hence $f(rs)=f(rt)$, and (1) with factor $\\frac1r$ gives $f(s)=f(t)$, so $f(s)=-s^2$. Now $(*)$ with $x=y=s$: $f(s^2+f(s))=f(0)=0$ equals $4f(s^2)$, so $f(s^2)=0$ with $s^2\\ne0$ — contradiction. As $f(x)\\ne0$ for $x\\ne0$, we get $f(x)>0$.\n\n**Claim (3): if $k>0$ and $f(k)=1$, then $k=1$.** We have $f(k^2)=f(f(k))=f(1)$, and (1) with factor $\\frac1k$ gives $f(k)=f(\\frac1k)$, so also $f(1/k)=1$; replacing $k$ by $1/k$ if needed, assume $k\\ge1$. $(*)$ with $x=\\sqrt{k^2-1}$, $y=k$: the left side is $f(k^2-1+1)=f(k^2)$, so\n$$0=f(k^2-1)+2f\\bigl(k\\sqrt{k^2-1}\\bigr)\\ge f(k^2-1)\\ge0 .$$\nThus $f(k^2-1)=0$, so $k^2=1$, $k=1$.\n\n**$f(1)=1$.** Let $m=f(1)>0$. If $m\\le1$, $(*)$ with $x=\\sqrt{1-m}$, $y=1$ has left side $f(1)$, giving $0=f(1-m)+2f(\\sqrt{1-m})$, so $1-m=0$. If $m\\ge1$: $f(m)=f(f(1))=f(1)=m$, and $(*)$ with $x=\\sqrt{m^2-m}$, $y=m$ has left side $f(m^2-m+m)=f(m^2)$, giving $0=f(m^2-m)+2f(m\\sqrt{m^2-m})$, so $m^2=m$, $m=1$.\n\n**Finish.** Let $x>0$ and $m=f(x)>0$. Then $f(m)=f(f(x))=f(x^2)$, and (1) with factor $\\frac1{x^2}$ gives $f\\!\\left(\\frac m{x^2}\\right)=f(1)=1$. By (3), $m=x^2$. Since $f$ is even and $f(0)=0$, $f(x)=x^2$ for all $x$.\n\n**Answer:** $f\\equiv0$ and $f(x)=x^2$. ∎"
+      }
+    ],
+    "topics": [
+      "functional-equations"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

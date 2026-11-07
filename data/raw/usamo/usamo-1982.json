@@ -1,0 +1,172 @@
+[
+  {
+    "id": "usamo-usamo-1982-01",
+    "bank": "usamo",
+    "source": {
+      "contest": "USAMO",
+      "paper": "USAMO 1982",
+      "year": 1982,
+      "number": 1,
+      "url": "https://artofproblemsolving.com/wiki/index.php/1982_USAMO_Problems/Problem_1"
+    },
+    "grade": "10-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "In a party with $1982$ persons, among any group of four there is at least one person who knows each of the other three. What is the minimum number of people in the party who know everyone else?",
+    "image": null,
+    "choices": null,
+    "answer": "1979",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "The graph of strangers",
+        "body": "Let $H$ be the graph whose vertices are the guests, with an edge between two people who do **not** know each other. A person knows everyone else iff he is an isolated vertex of $H$. The condition says: every $4$ people contain one with no $H$-edge to the other three.\n\n**$H$ has no two disjoint edges.** If $xy$ and $zw$ were disjoint edges, then in the group $\\{x,y,z,w\\}$ everybody has a stranger in the group — contradiction.\n\n**Structure.** If $H$ has an edge, it is a star (all edges through one vertex) or a triangle. Indeed, take an edge $xy$; every edge meets $\\{x,y\\}$. If not all edges contain $x$, some edge $yw$ ($w \\ne x$) exists; if not all edges contain $y$, some edge $xz$ ($z\\ne y$) exists; $xz$ and $yw$ must meet, so $z = w$, giving the triangle $xyz$. Any further edge would have to meet all three of $xy, yz, zx$, which is impossible for an edge with an endpoint outside $\\{x,y,z\\}$; so $H$ is just the triangle.\n\n**At most three non-isolated vertices.** A star with $t\\ge3$ leaves $\\ell_1,\\ell_2,\\ell_3$ and center $c$ is impossible: in $\\{c,\\ell_1,\\ell_2,\\ell_3\\}$ everyone has a stranger. So $H$ is a triangle or a star with at most $2$ leaves (or empty); in every case at most $3$ people are not isolated. Hence at least $1982 - 3 = 1979$ people know everyone.\n\n**Sharpness.** Let three people $x,y,z$ be mutual strangers and every other pair be acquainted. Any group of four contains someone outside $\\{x,y,z\\}$, who knows everybody. Exactly $1979$ people know everyone else.\n\n**Answer:** $1979$."
+      }
+    ],
+    "topics": [
+      "graph-theory",
+      "logic"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamo-usamo-1982-02",
+    "bank": "usamo",
+    "source": {
+      "contest": "USAMO",
+      "paper": "USAMO 1982",
+      "year": 1982,
+      "number": 2,
+      "url": "https://artofproblemsolving.com/wiki/index.php/1982_USAMO_Problems/Problem_2"
+    },
+    "grade": "10-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $S_r=x^r+y^r+z^r$ with $x,y,z$ real. It is known that if $S_1=0$,\n$$(*)\\qquad \\frac{S_{m+n}}{m+n}=\\frac{S_m}{m}\\cdot\\frac{S_n}{n}$$\nfor $(m,n)=(2,3),(3,2),(2,5)$, or $(5,2)$. Determine all other pairs of integers $(m,n)$ if any, so that $(*)$ holds for all real numbers $x,y,z$ such that $S_1=0$.",
+    "image": null,
+    "choices": null,
+    "answer": "There are no other pairs: testing $(1,-1,0)$ forces exactly one of $m,n$ odd, expanding at $(1,t,-1-t)$ for small $t$ forces the even one to be $2$, and $(1,1,-2)$ then leaves only $n\\in\\{3,5\\}$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Test well-chosen triples",
+        "body": "We look for positive integers $m,n$ (for $m$ or $n\\le 0$ the expression is undefined). The relation is symmetric in $m,n$.\n\n**$m,n\\ge 2$.** If $m = 1$, the right side is $0$ (as $S_1 = 0$), so $S_{n+1}\\equiv 0$; but at $(1,-1,0)$, $S_r = 2$ for even $r$, and at $(1,1,-2)$, $S_r = 2 - 2^r \\neq 0$ for odd $r\\ge3$. So $m,n\\ge2$.\n\n**Exactly one of $m,n$ is odd.** At $(1,-1,0)$, $S_r = 1 + (-1)^r$.\n- If $m,n$ are both odd, $m+n$ is even: the left side is $\\frac2{m+n}\\ne0$ but the right side is $0$.\n- If both are even: $\\frac{2}{m+n} = \\frac{4}{mn}$, i.e. $(m-2)(n-2) = 4$, whose only even solution is $m = n = 4$. But at $(1,1,-2)$: $S_4 = 18$, $S_8 = 258$, and $\\frac{258}8\\ne\\left(\\frac{18}4\\right)^2$.\n\nSo say $m$ is even and $n\\ge3$ is odd.\n\n**The even one is $2$.** Take $(x,y,z) = (1, t, -1-t)$ and let $t\\to0$. Then $S_r = 1 + t^r + (-1)^r(1+t)^r$, so\n$$S_m = 2 + mt + O(t^2),\\qquad S_n = -nt + O(t^2),\\qquad S_{m+n} = -(m+n)t + O(t^2)$$\n($m$ even, $n$ and $m+n$ odd, all exponents $\\ge2$). Then $(*)$ reads $-t + O(t^2) = \\frac{2}{m}\\cdot(-t) + O(t^2)$; comparing the coefficients of $t$ gives $m = 2$.\n\n**The odd one.** With $m = 2$ at $(1,1,-2)$: $S_2 = 6$, $S_n = 2-2^n$, $S_{n+2} = 2 - 2^{n+2}$, so\n$$\\frac{2^{n+2}-2}{n+2} = 3\\cdot\\frac{2^n-2}{n}\\iff n\\,2^{n+2} - 2n = 3(n+2)2^n - 6n - 12 \\iff 2^n(6-n) = 4(n+3).$$\nFor odd $n\\ge7$ the left side is negative. Checking $n = 3$: $8\\cdot3 = 24 = 4\\cdot6$ ✓; $n = 5$: $32 = 32$ ✓. So $n\\in\\{3,5\\}$: exactly the known pairs.\n\n(The known pairs do hold: with $p = xy+yz+zx$, $q = xyz$ and $x+y+z = 0$, Newton's identities give $S_2 = -2p$, $S_3 = 3q$, $S_5 = -5pq$, $S_7 = 7p^2q$, and $\\frac{S_5}5 = -pq = \\frac{S_2}{2}\\frac{S_3}{3}$, $\\frac{S_7}{7} = p^2q = \\frac{S_2}{2}\\frac{S_5}{5}$.)\n\n**Answer:** there are no other pairs."
+      }
+    ],
+    "topics": [
+      "algebra",
+      "polynomials"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamo-usamo-1982-03",
+    "bank": "usamo",
+    "source": {
+      "contest": "USAMO",
+      "paper": "USAMO 1982",
+      "year": 1982,
+      "number": 3,
+      "url": "https://artofproblemsolving.com/wiki/index.php/1982_USAMO_Problems/Problem_3"
+    },
+    "grade": "10-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "If a point $A_1$ is in the interior of an equilateral triangle $ABC$ and point $A_2$ is in the interior of $\\triangle A_1BC$, prove that\n$$\\mathrm{I.Q.}(A_1BC) > \\mathrm{I.Q.}(A_2BC),$$\nwhere the isoperimetric quotient of a figure $F$ is defined by\n$$\\mathrm{I.Q.}(F) = \\frac{\\text{Area}(F)}{[\\text{Perimeter}(F)]^2}.$$",
+    "image": null,
+    "choices": null,
+    "answer": "For a triangle, $\\mathrm{I.Q.} = \\frac14\\tan\\frac A2\\tan\\frac B2\\tan\\frac C2$; with half-angles $y,z<30^\\circ$ at $B,C$ this is $\\frac14\\tan y\\tan z\\tan(90^\\circ-y-z)$, which increases in $y$ and in $z$, and moving from $A_1$ to $A_2$ decreases both.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Half-angle tangents",
+        "body": "**I.Q. of a triangle.** With inradius $r$, semiperimeter $s$ and area $rs = \\sqrt{s(s-a)(s-b)(s-c)}$:\n$$\\mathrm{I.Q.} = \\frac{rs}{4s^2} = \\frac{r}{4s},\\qquad \\tan\\tfrac A2\\tan\\tfrac B2\\tan\\tfrac C2 = \\frac{r^3}{(s-a)(s-b)(s-c)} = \\frac{r^3s}{(rs)^2} = \\frac rs.$$\nSo $\\mathrm{I.Q.} = \\frac14\\tan\\frac A2\\tan\\frac B2\\tan\\frac C2$. For a triangle on base $BC$ with half-angles $y$ at $B$ and $z$ at $C$, the third half-angle is $90^\\circ - y - z$, so\n$$\\mathrm{I.Q.} = \\tfrac14 f(y,z),\\qquad f(y,z) = \\tan y\\,\\tan z\\,\\tan(90^\\circ-y-z).$$\n\n**Lemma.** For $0<\\theta<90^\\circ$, $h(x) = \\tan x\\tan(\\theta - x)$ is increasing on $0<x<\\frac\\theta2$.\n*Proof.* From $\\tan u\\tan v = \\frac{\\cos(u-v)-\\cos(u+v)}{\\cos(u-v)+\\cos(u+v)}$,\n$$h(x) = \\frac{\\cos(\\theta-2x) - \\cos\\theta}{\\cos(\\theta-2x)+\\cos\\theta} = 1 - \\frac{2\\cos\\theta}{\\cos(\\theta-2x)+\\cos\\theta}.$$\nAs $x$ increases on $(0,\\frac\\theta2)$, $\\theta - 2x$ decreases in $(0,\\theta)$, so $\\cos(\\theta-2x)$ increases; since $\\cos\\theta>0$, $h$ increases. $\\square$\n\n**Monotonicity of $f$ for $0<y,z<30^\\circ$.** Fix $z$ and let $\\theta = 90^\\circ - z\\in(60^\\circ,90^\\circ)$. Then $f = \\tan z\\cdot h(y)$ with $y < 30^\\circ < \\frac\\theta2$, so $f$ increases with $y$. By symmetry $f$ increases with $z$ for fixed $y$.\n\n**Apply it.** Let $y_i, z_i$ be the half-angles at $B$ and $C$ of triangle $A_iBC$. Since $A_1$ is inside the equilateral triangle, $\\angle A_1BC<60^\\circ$ and $\\angle A_1CB<60^\\circ$; since $A_2$ is inside triangle $A_1BC$, $\\angle A_2BC<\\angle A_1BC$ and $\\angle A_2CB<\\angle A_1CB$. So $30^\\circ>y_1>y_2>0$ and $30^\\circ>z_1>z_2>0$, and\n$$f(y_1,z_1) > f(y_2, z_1) > f(y_2,z_2).$$\nHence $\\mathrm{I.Q.}(A_1BC) > \\mathrm{I.Q.}(A_2BC)$. ∎"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "trigonometry",
+      "inequalities"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamo-usamo-1982-04",
+    "bank": "usamo",
+    "source": {
+      "contest": "USAMO",
+      "paper": "USAMO 1982",
+      "year": 1982,
+      "number": 4,
+      "url": "https://artofproblemsolving.com/wiki/index.php/1982_USAMO_Problems/Problem_4"
+    },
+    "grade": "10-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Prove that there exists a positive integer $k$ such that $k\\cdot2^n+1$ is composite for every positive integer $n$.",
+    "image": null,
+    "choices": null,
+    "answer": "Cover all $n$ by the classes $n\\equiv 2^j \\pmod{2^{j+1}}$ ($j=0,\\dots,5$) and $n\\equiv0\\pmod{64}$, using the primes $3,5,17,257,65537,6700417$ and $641$ (factors of Fermat numbers); by CRT pick $k$ with $k\\equiv1$ modulo the first six and $k\\equiv-1\\pmod{641}$, e.g. $k = 2935363331541925531$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "A covering system from Fermat numbers",
+        "body": "**Primes and orders.** For the Fermat numbers $F_j = 2^{2^j}+1$: $F_0 = 3$, $F_1 = 5$, $F_2 = 17$, $F_3 = 257$, $F_4 = 65537$ are prime, and $F_5 = 2^{32}+1 = 641\\cdot6700417$. For a prime $p\\mid F_j$ we have $2^{2^j}\\equiv -1\\pmod p$, and hence $2^{2^{j+1}}\\equiv 1$.\n\n**Covering.** Every positive integer $n$ satisfies exactly one of\n$$n\\equiv 1\\ (\\mathrm{mod}\\ 2),\\ n\\equiv 2\\ (\\mathrm{mod}\\ 4),\\ n\\equiv4\\ (\\mathrm{mod}\\ 8),\\ n\\equiv 8\\ (\\mathrm{mod}\\ 16),\\ n\\equiv 16\\ (\\mathrm{mod}\\ 32),\\ n\\equiv 32\\ (\\mathrm{mod}\\ 64),\\ n\\equiv 0\\ (\\mathrm{mod}\\ 64),$$\naccording to the exponent of $2$ in $n$ ($0,1,\\dots,5$, or $\\ge6$).\n\nIf $n\\equiv 2^j\\pmod{2^{j+1}}$ ($0\\le j\\le 5$), write $n = 2^j(2i+1)$; then for $p \\mid F_j$, $2^n = (2^{2^j})^{2i+1}\\equiv(-1)^{2i+1} = -1\\pmod p$. If $64\\mid n$, then $2^n\\equiv1\\pmod{641}$.\n\n**Choice of $k$.** By the Chinese remainder theorem choose $k$ with\n$$k\\equiv1 \\pmod{3\\cdot5\\cdot17\\cdot257\\cdot65537\\cdot6700417},\\qquad k\\equiv -1\\pmod{641},$$\nand $k > 6700417$. (For example $k = 2935363331541925531$ satisfies all these congruences.) Then:\n- $n\\equiv 2^j\\pmod{2^{j+1}}$, $j = 0,\\dots,4$: with $p = F_j$, $k2^n+1\\equiv 1\\cdot(-1)+1 = 0\\pmod p$;\n- $n\\equiv32\\pmod{64}$: with $p = 6700417$, $k2^n+1\\equiv -1+1 = 0$;\n- $64\\mid n$: with $p = 641$, $k2^n + 1 \\equiv -1\\cdot 1 + 1 = 0$.\n\nSo for every $n\\ge1$, $k\\cdot 2^n+1$ is divisible by one of these seven primes $p$, and since $k\\cdot2^n + 1 > k > p$, it is composite. ∎"
+      }
+    ],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamo-usamo-1982-05",
+    "bank": "usamo",
+    "source": {
+      "contest": "USAMO",
+      "paper": "USAMO 1982",
+      "year": 1982,
+      "number": 5,
+      "url": "https://artofproblemsolving.com/wiki/index.php/1982_USAMO_Problems/Problem_5"
+    },
+    "grade": "10-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "$A$, $B$, and $C$ are three interior points of a sphere $S$ such that $AB$ and $AC$ are perpendicular to the diameter of $S$ through $A$, and so that two spheres can be constructed through $A$, $B$, and $C$ which are both tangent to $S$. Prove that the sum of their radii is equal to the radius of $S$.",
+    "image": null,
+    "choices": null,
+    "answer": "Put the plane $ABC$ at $z=0$ with $O=(0,0,d)$; a sphere through $A,B,C$ has center $(u,v,t)$ and $r^2=\\rho^2+t^2$, and internal tangency gives the linear relation $r = \\frac{R^2-d^2+2dt}{2R}$; the two values of $t$ are the roots of a quadratic, and Vieta gives $r_1+r_2=R$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Coordinates and Vieta",
+        "body": "Let $S$ have center $O$ and radius $R$. Since $AB$ and $AC$ are perpendicular to line $OA$ (and $A,B,C$ are not collinear, as two spheres pass through them), the plane $\\Pi = ABC$ is perpendicular to $OA$ at $A$. (We assume $A\\ne O$; if $A = O$ the \"diameter through $A$\" is not determined.)\n\n**Coordinates.** Take $\\Pi$ as $z = 0$, $A$ as the origin and $O = (0,0,d)$ with $0<|d|<R$. Let the circle through $A,B,C$ in $\\Pi$ have center $K = (u,v,0)$ and radius $\\rho$; then $u^2+v^2 = \\rho^2$ since $A$ is on it. Every sphere through $A, B, C$ has its center on the line through $K$ perpendicular to $\\Pi$: center $(u,v,t)$, radius $r$ with\n$$r^2 = \\rho^2 + t^2. \\tag{1}$$\n\n**Tangency is internal.** A sphere through the interior point $A$ of $S$ that is tangent to $S$ cannot be externally tangent (it would lie outside $S$) and cannot contain $S$ (its surface would then lie outside the interior of $S$), so it lies inside $S$ and $|O - (u,v,t)| = R - r$:\n$$u^2+v^2+(t-d)^2 = (R-r)^2.$$\nUsing $u^2+v^2 = \\rho^2 = r^2 - t^2$ this becomes $r^2 - 2td + d^2 = R^2 - 2Rr + r^2$, i.e.\n$$r = \\alpha + \\beta t,\\qquad \\alpha = \\frac{R^2-d^2}{2R},\\ \\ \\beta = \\frac dR. \\tag{2}$$\n\n**The quadratic.** Substituting (2) into (1): $(\\beta^2-1)t^2 + 2\\alpha\\beta t + (\\alpha^2 - \\rho^2) = 0$, a genuine quadratic since $|\\beta|<1$. The two tangent spheres have different centers, so their parameters $t_1\\ne t_2$ are the two roots, and by Vieta $t_1 + t_2 = \\dfrac{2\\alpha\\beta}{1-\\beta^2}$. Hence, by (2),\n$$r_1 + r_2 = 2\\alpha + \\beta(t_1+t_2) = 2\\alpha\\Big(1 + \\frac{\\beta^2}{1-\\beta^2}\\Big) = \\frac{2\\alpha}{1-\\beta^2} = \\frac{R^2-d^2}{R}\\cdot\\frac{R^2}{R^2-d^2} = R.$$\n∎"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "algebra"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

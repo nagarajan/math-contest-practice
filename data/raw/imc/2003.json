@@ -1,0 +1,444 @@
+[
+  {
+    "id": "imc-2003-01",
+    "bank": "imc",
+    "source": {
+      "contest": "IMC",
+      "paper": "Day 1",
+      "year": 2003,
+      "number": 1,
+      "url": "https://www.imc-math.org.uk/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "(a) Let $a_1,a_2,\\dots$ be a sequence of real numbers such that $a_1=1$ and $a_{n+1}>\\frac32a_n$ for all $n$. Prove that the sequence\n$$\\frac{a_n}{\\left(\\frac32\\right)^{n-1}}$$\nhas a finite limit or tends to infinity.\n\n(b) Prove that for every $\\alpha>1$ there exists a sequence $a_1,a_2,\\dots$ with the same properties such that\n$$\\lim_{n\\to\\infty}\\frac{a_n}{\\left(\\frac32\\right)^{n-1}}=\\alpha.$$",
+    "image": null,
+    "choices": null,
+    "answer": "Put $b_n=a_n/(3/2)^{n-1}$: the condition is exactly $b_{n+1}>b_n$ with $b_1=1$, so (a) is monotone convergence; for (b) take any increasing $b_n\\to\\alpha$ with $b_1=1$ and set $a_n=(3/2)^{n-1}b_n$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Normalise the sequence",
+        "body": "Let $b_n=\\dfrac{a_n}{(3/2)^{n-1}}$, so $a_n=\\left(\\tfrac32\\right)^{n-1}b_n$ and $b_1=a_1=1$.\n\n**(a)** The condition $a_{n+1}>\\frac32a_n$ reads\n$$\\left(\\tfrac32\\right)^{n}b_{n+1}>\\tfrac32\\left(\\tfrac32\\right)^{n-1}b_n=\\left(\\tfrac32\\right)^{n}b_n\\iff b_{n+1}>b_n .$$\nSo $(b_n)$ is strictly increasing. An increasing real sequence either is bounded above, and then converges to its supremum (a finite limit), or is unbounded above, and then tends to $+\\infty$.\n\n**(b)** Let $\\alpha>1$. Choose any strictly increasing sequence with $b_1=1$ and $b_n\\to\\alpha$, for example\n$$b_n=\\alpha-(\\alpha-1)\\,2^{1-n}\\qquad(n\\ge1).$$\nDefine $a_n=\\left(\\tfrac32\\right)^{n-1}b_n$. Then $a_1=b_1=1$, and by the equivalence above $a_{n+1}>\\frac32a_n$ because $b_{n+1}>b_n$. Finally $\\dfrac{a_n}{(3/2)^{n-1}}=b_n\\to\\alpha$. ∎"
+      }
+    ],
+    "topics": [
+      "real-analysis",
+      "sequences-series"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imc-2003-02",
+    "bank": "imc",
+    "source": {
+      "contest": "IMC",
+      "paper": "Day 1",
+      "year": 2003,
+      "number": 2,
+      "url": "https://www.imc-math.org.uk/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "text",
+    "prompt": "Let $a_1,a_2,\\dots,a_{51}$ be non-zero elements of a field. We simultaneously replace each element with the sum of the 50 remaining ones. In this way we get a sequence $b_1,\\dots,b_{51}$. If this new sequence is a permutation of the original one, what can the characteristic of the field be?\n\n(The characteristic of a field is $p$ if $p$ is the smallest positive integer such that $\\underbrace{x+x+\\dots+x}_{p}=0$ for every element $x$ of the field. If there is no such $p$, the characteristic is $0$.)",
+    "image": null,
+    "choices": null,
+    "answer": "2 or 7",
+    "acceptedAnswers": [
+      "7 or 2",
+      "2, 7",
+      "7, 2",
+      "2 and 7",
+      "7 and 2",
+      "{2, 7}",
+      "{2,7}",
+      "2,7"
+    ],
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Sum the two sequences",
+        "body": "Let $S=a_1+\\dots+a_{51}$, so $b_i=S-a_i$ and\n$$b_1+\\dots+b_{51}=51S-S=50S .$$\nSince the $b_i$ are a permutation of the $a_i$, the two sums agree: $50S=S$, i.e. $49S=0$.\n\n**Only 2 and 7 are possible.** Suppose the characteristic is not $7$. Then $49=7^2\\neq0$ in the field (if the characteristic is a prime $p\\ne7$ or $0$, then $7$ and hence $49$ is non-zero), so $S=0$ and $b_i=-a_i$ for every $i$.\n\nHence the map $x\\mapsto -x$ carries the multiset $\\{a_1,\\dots,a_{51}\\}$ onto itself, i.e. every value $c$ occurs among the $a_i$ exactly as often as $-c$. If moreover the characteristic is not $2$, then $c\\ne-c$ for every $c\\ne0$, so the $51$ non-zero entries split into pairs $\\{c,-c\\}$ of equal multiplicities, and $51$ would be even, a contradiction. Therefore the characteristic is $7$ or $2$.\n\n**Both occur.**\n- Characteristic $7$: in $\\mathbb F_7$ take $a_1=\\dots=a_{51}=1$. Then $S=51=2$ and $b_i=S-1=1=a_i$.\n- Characteristic $2$: we need $S=0$, because then $b_i=-a_i=a_i$. In the field $\\mathbb F_4=\\{0,1,\\omega,\\omega^2\\}$, where $1+\\omega+\\omega^2=0$, take $a_1=\\dots=a_{49}=1$, $a_{50}=\\omega$, $a_{51}=\\omega^2$: then $S=49\\cdot1+\\omega+\\omega^2=1+\\omega+\\omega^2=0$. (In $\\mathbb F_2$ itself this is impossible, since $51$ ones sum to $1$.)\n\n**Answer: the characteristic is $2$ or $7$.** ∎"
+      }
+    ],
+    "topics": [
+      "abstract-algebra"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imc-2003-03",
+    "bank": "imc",
+    "source": {
+      "contest": "IMC",
+      "paper": "Day 1",
+      "year": 2003,
+      "number": 3,
+      "url": "https://www.imc-math.org.uk/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $A$ be an $n\\times n$ real matrix such that $3A^3=A^2+A+I$ ($I$ is the identity matrix). Show that the sequence $A^k$ converges to an idempotent matrix. (A matrix $B$ is called idempotent if $B^2=B$.)",
+    "image": null,
+    "choices": null,
+    "answer": "$3x^3-x^2-x-1=(x-1)(3x^2+2x+1)$ has three distinct roots $1,\\ \\frac{-1\\pm i\\sqrt2}{3}$ (the last two of modulus $1/\\sqrt3$), so $A$ is diagonalizable and $A^k\\to C^{-1}MC$ with $M$ a diagonal $0/1$ matrix.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Diagonalize",
+        "body": "Let $p(x)=3x^3-x^2-x-1=(x-1)(3x^2+2x+1)$. The roots of $3x^2+2x+1$ are $\\lambda_\\pm=\\dfrac{-1\\pm i\\sqrt2}{3}$, with $|\\lambda_\\pm|^2=\\dfrac{1+2}{9}=\\dfrac13$. So $p$ has three distinct roots $1,\\lambda_+,\\lambda_-$.\n\nSince $p(A)=0$, the minimal polynomial of $A$ divides $p$, hence has only simple roots. Therefore $A$ is diagonalizable over $\\mathbb C$: $A=C^{-1}DC$ with $D=\\operatorname{diag}(d_1,\\dots,d_n)$ and every $d_i\\in\\{1,\\lambda_+,\\lambda_-\\}$ (each eigenvalue is a root of the minimal polynomial).\n\nThen $A^k=C^{-1}D^kC$ and $D^k=\\operatorname{diag}(d_1^k,\\dots,d_n^k)$. If $d_i=1$ then $d_i^k=1$; otherwise $|d_i^k|=3^{-k/2}\\to0$. Hence $D^k\\to M$, where $M$ is diagonal with entries $0$ and $1$; clearly $M^2=M$. Matrix multiplication is continuous, so\n$$A^k=C^{-1}D^kC\\longrightarrow C^{-1}MC=:E ,$$\nand $E^2=C^{-1}M^2C=C^{-1}MC=E$. (The limit is real since every $A^k$ is real.) ∎"
+      },
+      {
+        "title": "An explicit limit",
+        "body": "With $p(x)=(x-1)(3x^2+2x+1)$ as before, put\n$$E=\\tfrac16\\,(3A^2+2A+I),\\qquad F=I-E .$$\nSince $(A-I)(3A^2+2A+I)=p(A)=0$ we get $AE=E$, so $A^kE=E$ for all $k$.\n\nNext, $6F=-(3A^2+2A-5I)=-(A-I)(3A+5I)$, so $(3A^2+2A+I)F=0$, i.e. $3A^2F=-(2A+I)F$. Also $E^2=E$: indeed $E\\cdot6E=E(3A^2+2A+I)=(3+2+1)E=6E$ because $AE=E$. So $E,F$ are complementary idempotents commuting with $A$, $\\mathbb C^n=\\operatorname{im}E\\oplus\\operatorname{im}F$, and on $W=\\operatorname{im}F$ the matrix $A$ satisfies $3A^2+2A+I=0$. Hence every eigenvalue of $A|_W$ is $\\lambda_\\pm$, of modulus $1/\\sqrt3<1$, so the spectral radius of $A|_W$ is less than $1$ and $(A|_W)^k\\to0$ (Gelfand's formula, or Jordan form). Therefore\n$$A^k=A^kE+A^kF=E+A^kF\\longrightarrow E=\\tfrac16(3A^2+2A+I),$$\nwhich is idempotent. ∎"
+      }
+    ],
+    "topics": [
+      "linear-algebra",
+      "polynomials"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imc-2003-04",
+    "bank": "imc",
+    "source": {
+      "contest": "IMC",
+      "paper": "Day 1",
+      "year": 2003,
+      "number": 4,
+      "url": "https://www.imc-math.org.uk/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Determine the set of all pairs $(a,b)$ of positive integers for which the set of positive integers can be decomposed into two sets $A$ and $B$ such that $a\\cdot A=b\\cdot B$.\n\n(Here $c\\cdot X=\\{cx: x\\in X\\}$.)",
+    "image": null,
+    "choices": null,
+    "answer": "Exactly the pairs with $a\\ne b$ and one of $a,b$ dividing the other, i.e. $(d,dn)$ and $(dn,d)$ with $d\\ge1$, $n\\ge2$. Reduce to $\\gcd(a,b)=1$; the set containing $1$ forces one number to be $1$; for $(1,n)$ split by the parity of the exponent of $n$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Reduce to coprime pairs",
+        "body": "Here $A,B$ are disjoint with $A\\cup B=\\mathbb Z_{>0}$ (both non-empty or not, it does not matter).\n\n**$a\\ne b$.** If $a=b$ then $aA=aB$ gives $A=B$; as $A\\cap B=\\emptyset$ this forces $A=B=\\emptyset$, impossible.\n\n**Reduction.** Let $d=\\gcd(a,b)$, $a=da_1$, $b=db_1$ with $\\gcd(a_1,b_1)=1$. Dividing every element by $d$ shows $aA=bB\\iff a_1A=b_1B$. So $(a,b)$ is a solution iff $(a_1,b_1)$ is.\n\n**Necessity.** Let $\\gcd(a,b)=1$ and $aA=bB$. The number $1$ lies in $A$ or in $B$.\n- If $1\\in A$, then $a=a\\cdot1\\in aA=bB$, so $a=bx$ for some $x\\in B$; thus $b\\mid a$ and, being coprime, $b=1$.\n- If $1\\in B$, symmetrically $a\\mid b$, so $a=1$.\n\nSo one of $a,b$ is $1$, and the other is some $n\\ge2$ (as $a\\ne b$). Going back to general pairs: one of $a,b$ divides the other and $a\\ne b$.\n\n**Sufficiency.** By symmetry (swap the names of $A$ and $B$) and by the reduction it suffices to treat $(a,b)=(1,n)$ with $n\\ge2$, i.e. to find a partition with $A=nB$. For $k\\ge1$ let $f(k)$ be the largest integer $f\\ge0$ with $n^f\\mid k$, and put\n$$A=\\{k: f(k)\\text{ odd}\\},\\qquad B=\\{k: f(k)\\text{ even}\\}.$$\nThese partition $\\mathbb Z_{>0}$. If $k\\in B$ then $f(nk)=f(k)+1$ is odd, so $nk\\in A$; thus $nB\\subseteq A$. If $k\\in A$ then $f(k)\\ge1$, so $k=nk'$ with $f(k')=f(k)-1$ even, i.e. $k'\\in B$ and $k\\in nB$. Hence $A=nB$, i.e. $1\\cdot A=n\\cdot B$.\n\n**Answer:** all pairs $(a,b)$ with $a\\ne b$ such that $a\\mid b$ or $b\\mid a$. ∎"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "logic"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imc-2003-05",
+    "bank": "imc",
+    "source": {
+      "contest": "IMC",
+      "paper": "Day 1",
+      "year": 2003,
+      "number": 5,
+      "url": "https://www.imc-math.org.uk/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "text",
+    "prompt": "Let $g:[0,1]\\to\\mathbb R$ be a continuous function and let $f_n:[0,1]\\to\\mathbb R$ be a sequence of functions defined by $f_0(x)=g(x)$ and\n$$f_{n+1}(x)=\\frac1x\\int_0^x f_n(t)\\,dt\\qquad(x\\in(0,1],\\ n=0,1,2,\\dots).$$\nDetermine $\\displaystyle\\lim_{n\\to\\infty}f_n(x)$ for every $x\\in(0,1]$.",
+    "image": null,
+    "choices": null,
+    "answer": "g(0)",
+    "acceptedAnswers": [
+      "g (0)",
+      "f_0(0)",
+      "f0(0)"
+    ],
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "An explicit kernel",
+        "body": "Let $M=\\max_{[0,1]}|g|$. By induction every $f_n$ is continuous on $(0,1]$ with $|f_n|\\le M$, so all the integrals exist.\n\n**Claim.** For $n\\ge0$ and $x\\in(0,1]$,\n$$f_{n+1}(x)=\\int_0^x g(t)\\,K_n(x,t)\\,dt,\\qquad K_n(x,t)=\\frac{1}{x}\\cdot\\frac{(\\ln(x/t))^n}{n!}\\ (0<t\\le x).$$\nFor $n=0$ this is the definition. If it holds for $n-1$, then by Fubini (the integrand is absolutely integrable: with $|g|\\le M$ in place of $g$, Tonelli and the same computation give the finite value $Mx$)\n$$f_{n+1}(x)=\\frac1x\\int_0^x\\!\\!\\int_0^s g(t)\\frac{(\\ln(s/t))^{n-1}}{s\\,(n-1)!}\\,dt\\,ds=\\frac1x\\int_0^x g(t)\\left(\\int_t^x\\frac{(\\ln(s/t))^{n-1}}{(n-1)!}\\frac{ds}{s}\\right)dt,$$\nand the inner integral equals $\\dfrac{(\\ln(x/t))^n}{n!}$. This proves the claim.\n\n**The kernel has total mass $1$:** substituting $t=xe^{-u}$,\n$$\\int_0^xK_n(x,t)\\,dt=\\int_0^\\infty\\frac{u^n}{n!}e^{-u}\\,du=1 .$$\n(Equivalently: for $g\\equiv c$ the recursion clearly gives $f_n\\equiv c$.)\n\n**Limit.** Fix $x\\in(0,1]$ and $\\varepsilon>0$. By continuity choose $0<\\delta<x$ with $|g(t)-g(0)|<\\varepsilon$ on $[0,\\delta]$. Then\n$$|f_{n+1}(x)-g(0)|=\\left|\\int_0^x(g(t)-g(0))K_n(x,t)\\,dt\\right|\\le\\varepsilon\\int_0^\\delta K_n\\,dt+2M\\int_\\delta^xK_n\\,dt .$$\nThe first term is at most $\\varepsilon$. For $\\delta\\le t\\le x$ we have $K_n(x,t)\\le\\frac1x\\frac{(\\ln(x/\\delta))^n}{n!}$, so the second term is at most $2M\\frac{(\\ln(x/\\delta))^n}{n!}\\to0$ (as $c^n/n!\\to0$ for fixed $c$). Hence $\\limsup_n|f_n(x)-g(0)|\\le\\varepsilon$ for every $\\varepsilon>0$.\n\n**Answer:** $\\lim_{n\\to\\infty}f_n(x)=g(0)$ for every $x\\in(0,1]$. ∎"
+      },
+      {
+        "title": "Products of uniform variables",
+        "body": "Substituting $t=xu$ gives $f_{n+1}(x)=\\int_0^1 f_n(xu)\\,du$. By induction,\n$$f_n(x)=\\int_{[0,1]^n}g(x\\,u_1u_2\\cdots u_n)\\,du_1\\cdots du_n=\\mathbb E\\big[g(xU_1U_2\\cdots U_n)\\big],$$\nwhere $U_1,U_2,\\dots$ are independent random variables, uniform on $[0,1]$ (the inductive step is $f_{n+1}(x)=\\int_0^1\\mathbb E[g(xuU_1\\cdots U_n)]\\,du$, and renaming $u$ as $U_{n+1}$).\n\nLet $P_n=U_1\\cdots U_n\\in[0,1]$. The sequence $P_n$ is non-increasing, so it has a limit $P_\\infty\\ge0$, and $\\mathbb E[P_\\infty]\\le\\mathbb E[P_n]=2^{-n}$ for all $n$, so $\\mathbb E[P_\\infty]=0$ and $P_\\infty=0$ almost surely. By continuity of $g$, $g(xP_n)\\to g(0)$ almost surely, and $|g(xP_n)|\\le M$. By the dominated convergence theorem,\n$$f_n(x)=\\mathbb E[g(xP_n)]\\longrightarrow g(0).$$\n**Answer:** $g(0)$. ∎"
+      }
+    ],
+    "topics": [
+      "real-analysis",
+      "calculus"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imc-2003-06",
+    "bank": "imc",
+    "source": {
+      "contest": "IMC",
+      "paper": "Day 1",
+      "year": 2003,
+      "number": 6,
+      "url": "https://www.imc-math.org.uk/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $f(z)=a_nz^n+a_{n-1}z^{n-1}+\\dots+a_1z+a_0$ be a polynomial with real coefficients. Prove that if all roots of $f$ lie in the left half-plane $\\{z\\in\\mathbb C:\\operatorname{Re}z<0\\}$, then\n$$a_ka_{k+3}<a_{k+1}a_{k+2}$$\nholds for every $k=0,1,\\dots,n-3$.",
+    "image": null,
+    "choices": null,
+    "answer": "Make all coefficients positive, extend by zeros, and prove $a_{k+1}a_{k+2}>a_ka_{k+3}$ for $-1\\le k\\le n-2$ by induction on $n$, splitting off a factor $z^2+pz+q$ ($p,q>0$) and expanding $a_{k+1}a_{k+2}-a_ka_{k+3}$ into six non-negative terms, one of which is strictly positive.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Induction on the degree",
+        "body": "**Positivity.** Over $\\mathbb R$, $f$ factors into linear factors $z+\\alpha$ (real root $-\\alpha$, $\\alpha>0$) and quadratic factors $z^2+2\\beta z+(\\beta^2+\\gamma^2)$ (roots $-\\beta\\pm i\\gamma$, $\\beta>0$), times $a_n$. All these factors have positive coefficients. Multiplying $f$ by $-1$ if necessary (this changes neither the roots nor the inequalities), $a_n>0$ and then **all $a_i>0$**.\n\nExtend the coefficients by $a_j=0$ for $j<0$ and $j>n$. We prove the stronger statement\n$$(\\ast)\\qquad a_{k+1}a_{k+2}>a_ka_{k+3}\\quad\\text{for all }-1\\le k\\le n-2,$$\nfor every polynomial of degree $n$ with all roots in the open left half-plane and $a_n>0$. Note that **for $k=-1$ and $k=n-2$, $(\\ast)$ is automatic**: $a_0a_1>0=a_{-1}a_2$ and $a_{n-1}a_n>0=a_{n-2}a_{n+1}$. Also, for every integer $k$ outside $[-1,n-2]$ one of $a_k,a_{k+3}$ is $0$, so the weak inequality $a_{k+1}a_{k+2}\\ge a_ka_{k+3}$ holds for **all** integers $k$ once $(\\ast)$ holds.\n\n**Base $n\\le2$:** the range $-1\\le k\\le n-2$ contains only the automatic cases.\n\n**Step.** Let $n\\ge3$ and assume $(\\ast)$ for smaller degrees. Since $n\\ge2$, $f$ has a factor $z^2+pz+q$ with $p,q>0$: either a quadratic factor as above, or the product $(z+\\alpha)(z+\\alpha')=z^2+(\\alpha+\\alpha')z+\\alpha\\alpha'$ of two linear ones. Write $f(z)=(z^2+pz+q)\\,g(z)$ with $g(z)=\\sum_j b_jz^j$ of degree $n-2$, $b_{n-2}=a_n>0$, roots in the left half-plane; extend $b_j=0$ outside $[0,n-2]$. By the induction hypothesis\n$$(1)\\quad b_{j+1}b_{j+2}\\ge b_jb_{j+3}\\ \\text{for all }j,\\qquad\\text{with strict inequality for }-1\\le j\\le n-4 .$$\nComparing coefficients, $a_k=qb_k+pb_{k-1}+b_{k-2}$ for all $k$. Fix $0\\le k\\le n-3$ (the remaining cases are automatic). A direct expansion gives\n$$\\begin{aligned}a_{k+1}a_{k+2}-a_ka_{k+3}={}&(b_{k-1}b_k-b_{k-2}b_{k+1})+p\\,(b_k^2-b_{k-2}b_{k+2})+q\\,(b_{k-1}b_{k+2}-b_{k-2}b_{k+3})\\\\&+p^2(b_kb_{k+1}-b_{k-1}b_{k+2})+q^2(b_{k+1}b_{k+2}-b_kb_{k+3})+pq\\,(b_{k+1}^2-b_{k-1}b_{k+3}).\\end{aligned}$$\nWe show all six brackets are $\\ge0$ and the $p^2$-bracket is $>0$.\n\n- The 1st, 4th and 5th brackets are of the form $b_{j+1}b_{j+2}-b_jb_{j+3}$ (with $j=k-2,\\,k-1,\\,k$), so they are $\\ge0$ by (1). The 4th one has $j=k-1\\in[-1,n-4]$, so it is **strictly positive**, and $p^2>0$.\n- **2nd bracket.** One checks the identity\n$$b_{k-1}(b_k^2-b_{k-2}b_{k+2})=b_{k-2}(b_kb_{k+1}-b_{k-1}b_{k+2})+b_k(b_{k-1}b_k-b_{k-2}b_{k+1}),$$\nwhose right side is $\\ge0$ by (1) and $b_j\\ge0$. If $b_{k-1}>0$, divide. If $b_{k-1}=0$ then $k-1<0$ (so $b_{k-2}=0$ and the bracket is $b_k^2\\ge0$) or $k-1>n-2$ (so $b_k=b_{k+2}=0$ and the bracket is $0$).\n- **3rd bracket.** Similarly\n$$b_{k+1}(b_{k-1}b_{k+2}-b_{k-2}b_{k+3})=b_{k-1}(b_{k+1}b_{k+2}-b_kb_{k+3})+b_{k+3}(b_{k-1}b_k-b_{k-2}b_{k+1})\\ge0 .$$\nIf $b_{k+1}=0$ then either $k+1<0$ (then $b_{k-1}=b_{k-2}=0$) or $k+1>n-2$ (then $b_{k+2}=b_{k+3}=0$); in both cases the bracket is $0$.\n- **6th bracket.** Apply the 2nd-bracket argument with $k+1$ in place of $k$: $b_{k+1}^2-b_{k-1}b_{k+3}\\ge0$.\n\nHence $a_{k+1}a_{k+2}-a_ka_{k+3}\\ge p^2(b_kb_{k+1}-b_{k-1}b_{k+2})>0$, completing the induction. In particular $a_ka_{k+3}<a_{k+1}a_{k+2}$ for $k=0,\\dots,n-3$. ∎"
+      }
+    ],
+    "topics": [
+      "polynomials",
+      "inequalities",
+      "complex-numbers"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imc-2003-07",
+    "bank": "imc",
+    "source": {
+      "contest": "IMC",
+      "paper": "Day 2",
+      "year": 2003,
+      "number": 7,
+      "url": "https://www.imc-math.org.uk/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $A$ and $B$ be $n\\times n$ real matrices such that $AB+A+B=0$. Prove that $AB=BA$.",
+    "image": null,
+    "choices": null,
+    "answer": "$(A+I)(B+I)=AB+A+B+I=I$, so $A+I$ and $B+I$ are inverse to each other, hence also $(B+I)(A+I)=I$, which gives $BA=-A-B=AB$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Complete the product",
+        "body": "We have\n$$(A+I)(B+I)=AB+A+B+I=I .$$\nFor square matrices a one-sided inverse is a two-sided inverse (if $XY=I$ then $\\det X\\ne0$, so $X$ is invertible and $Y=X^{-1}$). Hence also\n$$(B+I)(A+I)=I,\\quad\\text{i.e.}\\quad BA+A+B=0 .$$\nSubtracting this from $AB+A+B=0$ gives $AB=BA$. ∎"
+      }
+    ],
+    "topics": [
+      "linear-algebra"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imc-2003-08",
+    "bank": "imc",
+    "source": {
+      "contest": "IMC",
+      "paper": "Day 2",
+      "year": 2003,
+      "number": 8,
+      "url": "https://www.imc-math.org.uk/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Evaluate the limit\n$$\\lim_{x\\to0^+}\\int_x^{2x}\\frac{\\sin^mt}{t^n}\\,dt\\qquad(m,n\\in\\mathbb N).$$",
+    "image": null,
+    "choices": null,
+    "answer": "$0$ if $m\\ge n$; $\\ln2$ if $n=m+1$; $+\\infty$ if $n\\ge m+2$ (squeeze $\\sin t/t$ between $\\frac{\\sin2x}{2x}$ and $1$, leaving $\\int_x^{2x}t^{m-n}dt=x^{m-n+1}\\int_1^2u^{m-n}du$).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Squeeze",
+        "body": "The function $\\dfrac{\\sin t}{t}$ is decreasing on $(0,\\pi)$ and tends to $1$ as $t\\to0^+$. Hence for $0<x<\\frac\\pi2$ and $t\\in[x,2x]$,\n$$0<\\frac{\\sin2x}{2x}\\le\\frac{\\sin t}{t}<1 ,$$\nso\n$$\\left(\\frac{\\sin2x}{2x}\\right)^m\\int_x^{2x}t^{m-n}\\,dt\\le\\int_x^{2x}\\frac{\\sin^mt}{t^n}\\,dt\\le\\int_x^{2x}t^{m-n}\\,dt .$$\nSubstituting $t=xu$,\n$$\\int_x^{2x}t^{m-n}\\,dt=x^{m-n+1}\\int_1^2u^{m-n}\\,du=c\\,x^{m-n+1},\\qquad c=\\int_1^2u^{m-n}du>0 .$$\nSince $\\left(\\frac{\\sin2x}{2x}\\right)^m\\to1$, the limit equals $\\lim_{x\\to0^+}c\\,x^{m-n+1}$:\n- if $m-n+1>0$, i.e. $m\\ge n$: the limit is $0$;\n- if $m-n+1=0$, i.e. $n=m+1$: $c=\\int_1^2\\frac{du}{u}=\\ln2$, and the limit is $\\ln2$;\n- if $m-n+1<0$, i.e. $n\\ge m+2$: $x^{m-n+1}\\to+\\infty$ and the limit is $+\\infty$.\n\n**Answer:**\n$$\\lim_{x\\to0^+}\\int_x^{2x}\\frac{\\sin^mt}{t^n}\\,dt=\\begin{cases}0,&m\\ge n,\\\\ \\ln2,&n-m=1,\\\\ +\\infty,&n-m>1.\\end{cases}$$"
+      }
+    ],
+    "topics": [
+      "calculus",
+      "real-analysis"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imc-2003-09",
+    "bank": "imc",
+    "source": {
+      "contest": "IMC",
+      "paper": "Day 2",
+      "year": 2003,
+      "number": 9,
+      "url": "https://www.imc-math.org.uk/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $A$ be a closed subset of $\\mathbb R^n$ and let $B$ be the set of all those points $b\\in\\mathbb R^n$ for which there exists exactly one point $a_0\\in A$ such that\n$$|a_0-b|=\\inf_{a\\in A}|a-b| .$$\nProve that $B$ is dense in $\\mathbb R^n$; that is, the closure of $B$ is $\\mathbb R^n$.",
+    "image": null,
+    "choices": null,
+    "answer": "For $b_0\\notin A$ take a nearest point $a_0\\in A$ (exists by compactness); every point of the open segment $(a_0,b_0)$ has $a_0$ as its *unique* nearest point (equality case of the triangle inequality), so $b_0$ is a limit of points of $B$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Points on the segment to a nearest point",
+        "body": "(We assume $A\\ne\\emptyset$; otherwise the statement is void.) Let $b_0\\in\\mathbb R^n$. If $b_0\\in A$ then $b_0$ itself is its unique nearest point in $A$ (at distance $0$), so $b_0\\in B$.\n\nLet $b_0\\notin A$ and $\\rho=\\inf_{a\\in A}|a-b_0|$. Since $A$ is closed, $\\rho>0$. The set $A\\cap\\{x:|x-b_0|\\le\\rho+1\\}$ is compact and non-empty, and $x\\mapsto|x-b_0|$ attains its minimum on it, so there is $a_0\\in A$ with $|a_0-b_0|=\\rho$.\n\n**Claim:** every point $c$ of the open segment between $a_0$ and $b_0$ lies in $B$, with unique nearest point $a_0$. Write $r=|c-a_0|$, so $|c-b_0|=\\rho-r$ and $0<r<\\rho$. For any $a\\in A$,\n$$|a-c|\\ge|a-b_0|-|b_0-c|\\ge\\rho-(\\rho-r)=r=|a_0-c| .$$\nSo $a_0$ is a nearest point to $c$. If $a\\in A$ is another one, $|a-c|=r$, then both inequalities are equalities: $|a-b_0|=\\rho$ and $|a-b_0|=|a-c|+|c-b_0|$. Equality in the triangle inequality means $c$ lies on the segment $[a,b_0]$, so $a$ lies on the ray from $b_0$ through $c$, at distance $\\rho$ from $b_0$. The only such point is $a_0$. Hence $a=a_0$ and $c\\in B$.\n\nLetting $c\\to b_0$ along the segment shows that $b_0$ is a limit of points of $B$. Thus every point of $\\mathbb R^n$ is in the closure of $B$. ∎"
+      }
+    ],
+    "topics": [
+      "topology",
+      "geometry",
+      "real-analysis"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imc-2003-10",
+    "bank": "imc",
+    "source": {
+      "contest": "IMC",
+      "paper": "Day 2",
+      "year": 2003,
+      "number": 10,
+      "url": "https://www.imc-math.org.uk/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "text",
+    "prompt": "Find all positive integers $n$ for which there exists a family $\\mathcal F$ of three-element subsets of $S=\\{1,2,\\dots,n\\}$ satisfying the following two conditions:\n\n(i) for any two different elements $a,b\\in S$, there exists exactly one $A\\in\\mathcal F$ containing both $a$ and $b$;\n\n(ii) if $a,b,c,x,y,z$ are elements of $S$ such that $\\{a,b,x\\},\\{a,c,y\\},\\{b,c,z\\}\\in\\mathcal F$, then $\\{x,y,z\\}\\in\\mathcal F$.",
+    "image": null,
+    "choices": null,
+    "answer": "n = 2^m - 1",
+    "acceptedAnswers": [
+      "2^m-1",
+      "2^m - 1",
+      "n=2^m-1",
+      "2^k-1",
+      "2^k - 1",
+      "n = 2^k - 1",
+      "n=2^k-1"
+    ],
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Turn the family into a group",
+        "body": "**Necessity.** By (i), for $a\\ne b$ there is a unique $c$ with $\\{a,b,c\\}\\in\\mathcal F$; write $a*b=c$. Then for distinct $a,b$:\n(a) $a*b\\ne a$, $a*b\\ne b$; (b) $a*b=b*a$; (c) $a*(a*b)=b$ (the triple containing $a$ and $a*b$ is $\\{a,b,a*b\\}$).\n\nAdd a new element $0$ and put $G=S\\cup\\{0\\}$, $a*a=0$, $a*0=0*a=a$. Then $*$ is commutative, $0$ is an identity and every element is its own inverse. We check **associativity** $(x*y)*z=x*(y*z)$. If one of $x,y,z$ is $0$ it is trivial. If $x=y$: the left side is $z$, and the right side is $x*(x*z)$, which is $z$ by (c) when $z\\ne x$, and $x*0=x=z$ when $z=x$. The case $y=z$ is symmetric, and if $x=z\\ne y$ both sides equal $x*(x*y)=y$ by commutativity and (c). Now let $x,y,z\\in S$ be distinct.\n- If $z=x*y$: the left side is $z*z=0$; and $y*z=y*(y*x)=x$, so the right side is $x*x=0$.\n- If $z\\ne x*y$: put $v=x*y$, $u=y*z$, $w=v*z$ (note $v\\ne z$, so $\\{y,v,x\\},\\{y,z,u\\},\\{v,z,w\\}\\in\\mathcal F$). Condition (ii) with $(a,b,c)=(y,v,z)$ gives $\\{x,u,w\\}\\in\\mathcal F$, hence $x*u=w$, i.e. $x*(y*z)=(x*y)*z$.\n\nSo $(G,*)$ is a finite abelian group in which every element satisfies $g*g=0$. Such a group is a vector space over $\\mathbb F_2$ (scalar multiplication $0\\cdot g=0$, $1\\cdot g=g$), so $|G|=2^m$ for some $m\\ge1$, i.e. $n=2^m-1$.\n\n**Sufficiency.** Let $n=2^m-1$ and identify $S$ with the non-zero vectors of $\\mathbb F_2^m$ (binary expansions), $\\oplus$ the addition. Let $\\mathcal F=\\{\\{a,b,a\\oplus b\\}: a\\ne b\\in S\\}$; note $a\\oplus b\\ne0,a,b$, so these are 3-element sets, and every member $\\{u,v,w\\}$ of $\\mathcal F$ satisfies $u\\oplus v\\oplus w=0$.\n(i) $a,b$ lie in $\\{a,b,a\\oplus b\\}$, and any member $\\{a,b,c\\}$ of $\\mathcal F$ has $c=a\\oplus b$.\n(ii) If $\\{a,b,x\\},\\{a,c,y\\},\\{b,c,z\\}\\in\\mathcal F$ then $x=a\\oplus b$, $y=a\\oplus c$, $z=b\\oplus c$, so $x\\oplus y=z$; here $x\\ne y$ because $b\\ne c$, so $\\{x,y,z\\}=\\{x,y,x\\oplus y\\}\\in\\mathcal F$.\n(For $n=1$ the empty family works trivially.)\n\n**Answer:** exactly the numbers $n=2^m-1$, $m=1,2,3,\\dots$ ∎"
+      }
+    ],
+    "topics": [
+      "counting",
+      "abstract-algebra"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imc-2003-11",
+    "bank": "imc",
+    "source": {
+      "contest": "IMC",
+      "paper": "Day 2",
+      "year": 2003,
+      "number": 11,
+      "url": "https://www.imc-math.org.uk/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "(a) Show that for each function $f:\\mathbb Q\\times\\mathbb Q\\to\\mathbb R$ there exists a function $g:\\mathbb Q\\to\\mathbb R$ such that $f(x,y)\\le g(x)+g(y)$ for all $x,y\\in\\mathbb Q$.\n\n(b) Find a function $f:\\mathbb R\\times\\mathbb R\\to\\mathbb R$ for which there is no function $g:\\mathbb R\\to\\mathbb R$ such that $f(x,y)\\le g(x)+g(y)$ for all $x,y\\in\\mathbb R$.",
+    "image": null,
+    "choices": null,
+    "answer": "(a) Enumerate $\\mathbb Q$ and let $g(x)$ be the max of $|f(s,t)|$ over the finitely many $s,t$ listed no later than $x$. (b) E.g. $f(x,y)=\\frac1{|x-y|}$ for $x\\ne y$, $f(x,x)=0$: any $g$ would tend to $\\infty$ at every point, impossible on $[0,1]$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Enumeration and a local blow-up",
+        "body": "**(a)** Let $\\varphi:\\mathbb Q\\to\\mathbb N$ be a bijection. Define\n$$g(x)=\\max\\{|f(s,t)|:\\ s,t\\in\\mathbb Q,\\ \\varphi(s)\\le\\varphi(x),\\ \\varphi(t)\\le\\varphi(x)\\},$$\na maximum over finitely many pairs. Then $g\\ge0$, and for any $x,y$, if say $\\varphi(y)\\le\\varphi(x)$ then the pair $(x,y)$ occurs in the definition of $g(x)$, so\n$$f(x,y)\\le|f(x,y)|\\le\\max(g(x),g(y))\\le g(x)+g(y).$$\n\n**(b)** Let $f(x,y)=\\dfrac1{|x-y|}$ for $x\\ne y$ and $f(x,x)=0$. Suppose $g$ satisfies $f\\le g(x)+g(y)$. Fix $x$; for $y\\ne x$,\n$$g(y)\\ge\\frac1{|x-y|}-g(x)\\xrightarrow[y\\to x]{}+\\infty,$$\nso $\\lim_{y\\to x}g(y)=+\\infty$ **for every $x\\in\\mathbb R$**.\n\nThis is impossible. Let $A_k=\\{x\\in[0,1]:|g(x)|\\le k\\}$; then $[0,1]=\\bigcup_{k\\ge1}A_k$. As $[0,1]$ is uncountable, some $A_k$ is infinite. Pick distinct points $x_1,x_2,\\dots\\in A_k$; by Bolzano–Weierstrass a subsequence converges to some $x\\in[0,1]$, and (dropping at most one term) we may assume all its terms differ from $x$. Then $g(x_j)\\to+\\infty$ along it, contradicting $|g(x_j)|\\le k$. ∎"
+      },
+      {
+        "title": "A cardinality construction for (b)",
+        "body": "Another function for (b). The set $\\mathcal S$ of all real sequences has cardinality $|\\mathbb R|^{\\aleph_0}=2^{\\aleph_0\\cdot\\aleph_0}=2^{\\aleph_0}=|\\mathbb R|$, so there is a bijection $h:\\mathbb R\\to\\mathcal S$. Define $f(x,n)$ = the $n$-th term of the sequence $h(x)$ when $n$ is a positive integer, and $f(x,y)=0$ when $y$ is not a positive integer.\n\nLet $g:\\mathbb R\\to\\mathbb R$ be arbitrary. The sequence $(n+g(n))_{n\\ge1}$ is in $\\mathcal S$, so it equals $h(x)$ for some real $x$. Then $f(x,n)=n+g(n)$ for all $n\\ge1$. Choosing an integer $n>g(x)$ gives\n$$f(x,n)=n+g(n)>g(x)+g(n),$$\nso $g$ fails. Hence no $g$ works for this $f$. ∎"
+      }
+    ],
+    "topics": [
+      "real-analysis",
+      "logic"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imc-2003-12",
+    "bank": "imc",
+    "source": {
+      "contest": "IMC",
+      "paper": "Day 2",
+      "year": 2003,
+      "number": 12,
+      "url": "https://www.imc-math.org.uk/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Let $(a_n)_{n\\in\\mathbb N}$ be the sequence defined by\n$$a_0=1,\\qquad a_{n+1}=\\frac1{n+1}\\sum_{k=0}^n\\frac{a_k}{n-k+2}.$$\nFind the limit\n$$\\lim_{n\\to\\infty}\\sum_{k=0}^n\\frac{a_k}{2^k},$$\nif it exists.",
+    "image": null,
+    "choices": null,
+    "answer": "e/2",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Generating function",
+        "body": "**Bounds.** By induction $0<a_n\\le1$: if $0<a_k\\le1$ for $k\\le n$, then\n$$0<a_{n+1}\\le\\frac1{n+1}\\sum_{k=0}^n\\frac1{n-k+2}\\le\\frac1{n+1}\\cdot\\frac{n+1}{2}<1 .$$\nSo $f(x)=\\sum_{n\\ge0}a_nx^n$ converges absolutely for $|x|<1$, $f(0)=1$, and $f>0$ on $[0,1)$. The required limit is $f(\\tfrac12)$, which exists.\n\n**Differential equation.** For $|x|<1$, using the recursion and the Cauchy product of absolutely convergent series,\n$$f'(x)=\\sum_{n\\ge0}(n+1)a_{n+1}x^n=\\sum_{n\\ge0}\\sum_{k=0}^n\\frac{a_kx^k\\,x^{n-k}}{n-k+2}=f(x)\\sum_{m\\ge0}\\frac{x^m}{m+2}.$$\n**Integrate.** For $0<x<1$,\n$$\\ln f(x)=\\int_0^x\\frac{f'}{f}=\\sum_{m\\ge0}\\frac{x^{m+1}}{(m+1)(m+2)}=\\sum_{m\\ge0}\\frac{x^{m+1}}{m+1}-\\frac1x\\sum_{m\\ge0}\\frac{x^{m+2}}{m+2}.$$\nWith $\\sum_{j\\ge1}\\frac{x^j}{j}=-\\ln(1-x)$,\n$$\\ln f(x)=-\\ln(1-x)-\\frac1x\\big(-\\ln(1-x)-x\\big)=1+\\left(\\frac1x-1\\right)\\ln(1-x).$$\nAt $x=\\frac12$: $\\ln f(\\tfrac12)=1+\\ln\\tfrac12=1-\\ln2$, so $f(\\tfrac12)=\\dfrac e2$.\n\n**Answer:** $\\displaystyle\\lim_{n\\to\\infty}\\sum_{k=0}^n\\frac{a_k}{2^k}=\\frac e2\\approx1.3591$."
+      }
+    ],
+    "topics": [
+      "sequences-series",
+      "calculus"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null,
+    "answerDisplay": "$\\frac{e}{2}$"
+  }
+]

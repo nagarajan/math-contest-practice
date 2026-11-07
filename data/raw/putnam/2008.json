@@ -1,0 +1,439 @@
+[
+  {
+    "id": "putnam-2008-a1",
+    "bank": "putnam",
+    "source": {
+      "contest": "Putnam",
+      "paper": "69th William Lowell Putnam Mathematical Competition (December 6, 2008)",
+      "year": 2008,
+      "number": "A1",
+      "url": "https://kskedlaya.org/putnam-archive/"
+    },
+    "grade": "undergrad",
+    "points": 10,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $f: \\mathbb{R}^2 \\to \\mathbb{R}$ be a function such that $f(x,y) + f(y,z) + f(z,x) = 0$ for all real numbers $x$, $y$, and $z$. Prove that there exists a function $g: \\mathbb{R} \\to \\mathbb{R}$ such that $f(x,y) = g(x) - g(y)$ for all real numbers $x$ and $y$.",
+    "image": null,
+    "choices": null,
+    "answer": "Proof. $g(x) = f(x,0)$ works: substituting $(0,0,0)$, $(x,0,0)$ and $(x,y,0)$ gives $f(0,0) = 0$, $f(0,x) = -f(x,0)$ and $f(x,y) = f(x,0) - f(y,0)$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Three substitutions",
+        "body": "Let $g(x) = f(x,0)$.\n- $(x,y,z) = (0,0,0)$: $3f(0,0) = 0$, so $f(0,0) = 0$.\n- $(x,y,z) = (x,0,0)$: $f(x,0) + f(0,0) + f(0,x) = 0$, so $f(0,x) = -f(x,0) = -g(x)$.\n- $(x,y,z) = (x,y,0)$: $f(x,y) + f(y,0) + f(0,x) = 0$, so\n$$f(x,y) = -f(y,0) - f(0,x) = -g(y) + g(x).$$\n\nHence $f(x,y) = g(x) - g(y)$ for all real $x,y$. ∎\n\n*Remark.* The possible $g$ are exactly $f(x,0) + c$ for a constant $c$."
+      }
+    ],
+    "topics": [
+      "functional-equations"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "putnam-2008-a2",
+    "bank": "putnam",
+    "source": {
+      "contest": "Putnam",
+      "paper": "69th William Lowell Putnam Mathematical Competition (December 6, 2008)",
+      "year": 2008,
+      "number": "A2",
+      "url": "https://kskedlaya.org/putnam-archive/"
+    },
+    "grade": "undergrad",
+    "points": 10,
+    "timeMinutes": null,
+    "type": "text",
+    "prompt": "Alan and Barbara play a game in which they take turns filling entries of an initially empty $2008 \\times 2008$ array. Alan plays first. At each turn, a player chooses a real number and places it in a vacant entry. The game ends when all the entries are filled. Alan wins if the determinant of the resulting matrix is nonzero; Barbara wins if it is zero. Which player has a winning strategy?",
+    "image": null,
+    "choices": null,
+    "answer": "Barbara",
+    "acceptedAnswers": [
+      "Barbara wins",
+      "Barbara has a winning strategy",
+      "B",
+      "the second player"
+    ],
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Copy into a paired row",
+        "body": "**Barbara wins.** Pair each entry $(1,j)$ of the first row with the entry $(2,j)$ directly below it. Barbara's strategy:\n- if Alan writes a number in rows $1$–$2$, Barbara writes the same number in the paired entry;\n- if Alan writes outside rows $1$–$2$, Barbara writes any number in another vacant entry outside rows $1$–$2$.\n\n**The strategy can always be carried out.** After each of Barbara's moves, every pair is either completely filled or completely empty, and an even number of the $2006\\cdot2008$ entries outside rows $1$–$2$ is filled (they are filled two at a time). So when Alan writes in a pair, its partner is still empty; and when Alan writes outside rows $1$–$2$, an odd (hence positive) number of entries remain vacant there.\n\n**Result.** The total number of entries is even, so Barbara makes the last move and the strategy runs to the end. Then rows $1$ and $2$ are identical, so the determinant is $0$.\n\n**Answer:** Barbara."
+      },
+      {
+        "title": "Make every row sum to zero",
+        "body": "Barbara's strategy: whenever Alan writes $x$ in some row, she writes $-x$ in another vacant entry **of the same row**. Each row has $2008$ entries (an even number); after each of Barbara's moves every row has an even number of filled entries, so after Alan writes in a row it has an odd number $<2008$ of filled entries and a vacant entry remains there.\n\nAt the end, the entries of each row come in pairs $x,-x$, so every row sums to $0$. Thus the all-ones vector $\\mathbf 1$ satisfies $M\\mathbf 1 = 0$, so $M$ is singular and $\\det M = 0$.\n\n**Answer:** Barbara."
+      }
+    ],
+    "topics": [
+      "games",
+      "linear-algebra"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "putnam-2008-a3",
+    "bank": "putnam",
+    "source": {
+      "contest": "Putnam",
+      "paper": "69th William Lowell Putnam Mathematical Competition (December 6, 2008)",
+      "year": 2008,
+      "number": "A3",
+      "url": "https://kskedlaya.org/putnam-archive/"
+    },
+    "grade": "undergrad",
+    "points": 10,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Start with a finite sequence $a_1, a_2, \\dots, a_n$ of positive integers. If possible, choose two indices $j < k$ such that $a_j$ does not divide $a_k$, and replace $a_j$ and $a_k$ by $\\gcd(a_j, a_k)$ and $\\operatorname{lcm}(a_j, a_k)$, respectively. Prove that if this process is repeated, it must eventually stop and the final sequence does not depend on the choices made.",
+    "image": null,
+    "choices": null,
+    "answer": "Proof. For each prime $p$, a move sorts the $p$-exponents at positions $j<k$ (replaces them by min, max). So the multiset of $p$-exponents is invariant, the total number of inversions over all primes strictly decreases (termination), and at the end every exponent sequence is sorted, hence uniquely determined.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Sorting the prime exponents",
+        "body": "For a prime $p$ write $e_i = v_p(a_i)$ for the exponent of $p$ in $a_i$. Since $v_p(\\gcd(a,b)) = \\min(v_p(a), v_p(b))$ and $v_p(\\operatorname{lcm}(a,b)) = \\max(v_p(a),v_p(b))$, a move at positions $j<k$ replaces $(e_j,e_k)$ by $(\\min,\\max)$ — **for every prime simultaneously**. In other words, for each prime the move either does nothing (if $e_j\\le e_k$) or swaps the two entries (if $e_j>e_k$). Moreover $a_j\\nmid a_k$ means that $e_j>e_k$ for at least one prime.\n\nOnly the finitely many primes dividing $a_1a_2\\cdots a_n$ matter, and for each of them the **multiset** of exponents never changes (it is only permuted).\n\n**Termination.** For a sequence $(e_1,\\dots,e_n)$ let $\\operatorname{inv}$ be the number of pairs $i<l$ with $e_i>e_l$. Swapping an inverted pair $x = e_j > y = e_k$ ($j<k$) decreases $\\operatorname{inv}$ by at least $1$: the pair $(j,k)$ itself stops being inverted; pairs formed with a position outside $[j,k]$ are just exchanged among themselves; and for $j<i<k$ with value $z$, the number of inversions among $(j,i),(i,k)$ is $[x>z]+[z>y]$ before and $[y>z]+[z>x]$ after, and one checks that this never increases (if $z\\ge x$: $1\\to\\le1$; if $y<z<x$: $2\\to0$; if $z\\le y$: $1\\to\\le1$). Hence\n$$\\Phi = \\sum_{p\\mid a_1\\cdots a_n}\\operatorname{inv}\\big(v_p(a_1),\\dots,v_p(a_n)\\big)$$\nis a nonnegative integer that strictly decreases with every move (some prime has its inversion count lowered, none increases). So the process stops.\n\n**Uniqueness.** The process stops exactly when $a_j\\mid a_k$ for all $j<k$, i.e. when for every prime $p$ the sequence $v_p(a_1),\\dots,v_p(a_n)$ is nondecreasing. Since the multiset of $p$-exponents is the same as at the start, the final $p$-exponent sequence must be the original multiset of $p$-exponents sorted in nondecreasing order. This determines the exponent of every prime in every final term, so the final sequence is independent of the choices made. ∎\n\n*Remark.* The final sequence is that of the invariant factors of the abelian group $\\mathbb Z/a_1\\times\\cdots\\times\\mathbb Z/a_n$."
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "logic"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "putnam-2008-a4",
+    "bank": "putnam",
+    "source": {
+      "contest": "Putnam",
+      "paper": "69th William Lowell Putnam Mathematical Competition (December 6, 2008)",
+      "year": 2008,
+      "number": "A4",
+      "url": "https://kskedlaya.org/putnam-archive/"
+    },
+    "grade": "undergrad",
+    "points": 10,
+    "timeMinutes": null,
+    "type": "text",
+    "prompt": "Define $f: \\mathbb{R} \\to \\mathbb{R}$ by\n$$f(x) = \\begin{cases} x & \\text{if } x \\leq e, \\\\ x f(\\ln x) & \\text{if } x > e. \\end{cases}$$\nDoes $\\sum_{n=1}^\\infty \\frac{1}{f(n)}$ converge?",
+    "image": null,
+    "choices": null,
+    "answer": "No",
+    "acceptedAnswers": [
+      "no",
+      "diverges",
+      "It diverges",
+      "No, it diverges",
+      "divergent",
+      "does not converge"
+    ],
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Integral test with iterated logarithms",
+        "body": "**Answer: No, the series diverges.**\n\n**Description of $f$.** Let $E_0 = 1$, $E_{k+1} = e^{E_k}$ (so $E_1 = e$, $E_2 = e^e$, …) and write $\\ln^{(j)}$ for the $j$-fold iterated logarithm. If $x\\in(E_k,E_{k+1}]$ with $k\\ge1$ then $\\ln x\\in(E_{k-1},E_k]$, and by induction on $k$,\n$$f(x) = x\\,\\ln x\\,\\ln^{(2)}x\\cdots\\ln^{(k)}x\\qquad\\text{for } x\\in[E_k,E_{k+1}],$$\nand $f(x) = x$ on $[1,e]$. On $[E_k,E_{k+1}]$ all factors are $\\ge1$ and increasing, and at $x=E_{k+1}$ the next factor $\\ln^{(k+1)}x$ equals $1$, so the formulas agree at the junctions. Hence $f$ is positive, continuous and increasing on $[1,\\infty)$, and $1/f$ is positive and decreasing there.\n\n**The integral diverges.** On $[E_k,E_{k+1}]$, the function $y = \\ln^{(k+1)}x$ has derivative\n$$\\frac{dy}{dx} = \\frac{1}{x\\ln x\\cdots\\ln^{(k)}x} = \\frac1{f(x)},$$\nso\n$$\\int_{E_k}^{E_{k+1}}\\frac{dx}{f(x)} = \\ln^{(k+1)}E_{k+1} - \\ln^{(k+1)}E_k = 1 - 0 = 1$$\nfor every $k\\ge0$ (for $k=0$ this is $\\int_1^e dx/x = 1$). Therefore $\\int_1^{\\infty}dx/f(x) = \\infty$.\n\n**Comparison.** Since $1/f$ is decreasing on $[1,\\infty)$, $\\frac1{f(n)}\\ge\\int_n^{n+1}\\frac{dx}{f(x)}$, so\n$$\\sum_{n=1}^N\\frac1{f(n)}\\ge\\int_1^{N+1}\\frac{dx}{f(x)}\\to\\infty .$$\nThe series diverges. ∎"
+      }
+    ],
+    "topics": [
+      "real-analysis",
+      "sequences-series",
+      "calculus"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "putnam-2008-a5",
+    "bank": "putnam",
+    "source": {
+      "contest": "Putnam",
+      "paper": "69th William Lowell Putnam Mathematical Competition (December 6, 2008)",
+      "year": 2008,
+      "number": "A5",
+      "url": "https://kskedlaya.org/putnam-archive/"
+    },
+    "grade": "undergrad",
+    "points": 10,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $n \\geq 3$ be an integer. Let $f(x)$ and $g(x)$ be polynomials with real coefficients such that the points $(f(1), g(1)), (f(2), g(2)), \\dots, (f(n), g(n))$ in $\\mathbb{R}^2$ are the vertices of a regular $n$-gon in counterclockwise order. Prove that at least one of $f(x)$ and $g(x)$ has degree greater than or equal to $n-1$.",
+    "image": null,
+    "choices": null,
+    "answer": "Proof. $P = f+ig$ satisfies $P(k) = A + B\\zeta^k$ ($\\zeta = e^{2\\pi i/n}$, $B\\ne0$). For $Q = (P-A)/B$ of degree $d$, $R(z) = Q(z+1)-\\zeta Q(z)$ has degree exactly $d$ (leading coefficient multiplied by $1-\\zeta\\ne0$) and the $n-1$ roots $1,\\dots,n-1$, so $d\\ge n-1$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "A complex polynomial and a shifted difference",
+        "body": "Identify $\\mathbb R^2$ with $\\mathbb C$ and let $P(z) = f(z) + i\\,g(z)$; then $\\deg P\\le\\max(\\deg f,\\deg g)$, so it suffices to show $\\deg P\\ge n-1$.\n\n**The vertices.** Let $\\zeta = e^{2\\pi i/n}$ and let $c$ be the centre of the polygon. Going counterclockwise from one vertex to the next is a rotation by $2\\pi/n$ about $c$, so $P(k+1) - c = \\zeta\\,(P(k)-c)$, hence $P(k) = c + B\\zeta^k$ for $k=1,\\dots,n$, with $B = \\zeta^{-1}(P(1)-c)\\neq0$.\n\n**Normalize.** $Q(z) = (P(z)-c)/B$ is a polynomial of the same degree $d$ as $P$ with $Q(k) = \\zeta^k$ for $k = 1,\\dots,n$. It is not the zero polynomial ($Q(1) = \\zeta\\ne0$); let $a\\ne0$ be its leading coefficient.\n\n**Shifted difference.** Let $R(z) = Q(z+1) - \\zeta\\,Q(z)$. Its coefficient of $z^d$ is $a - \\zeta a = (1-\\zeta)a\\ne0$ (as $\\zeta\\neq1$), so $R$ is a nonzero polynomial of degree exactly $d$. But for $k = 1,\\dots,n-1$,\n$$R(k) = \\zeta^{k+1} - \\zeta\\cdot\\zeta^k = 0,$$\nso $R$ has at least $n-1$ distinct roots. Therefore $d\\ge n-1$.\n\nHence $\\max(\\deg f,\\deg g)\\ge\\deg P\\ge n-1$. ∎"
+      },
+      {
+        "title": "Finite differences",
+        "body": "With $Q$ as in the first solution ($Q(k) = t^k$ for $k = 1,\\dots,n$, where $t = \\zeta\\ne 0,1$), suppose $\\deg Q\\le n-2$. The $(n-1)$-st forward difference of a polynomial of degree $\\le n-2$ vanishes identically, so\n$$0 = \\sum_{j=0}^{n-1}(-1)^{j}\\binom{n-1}{j}Q(n-j) = \\sum_{j=0}^{n-1}(-1)^{j}\\binom{n-1}{j}t^{n-j} = t\\,(t-1)^{n-1}$$\nby the binomial theorem. This is nonzero since $t\\neq0,1$ — a contradiction. So $\\deg Q\\ge n-1$, and as before one of $f,g$ has degree $\\ge n-1$. ∎"
+      }
+    ],
+    "topics": [
+      "polynomials",
+      "complex-numbers",
+      "geometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "putnam-2008-a6",
+    "bank": "putnam",
+    "source": {
+      "contest": "Putnam",
+      "paper": "69th William Lowell Putnam Mathematical Competition (December 6, 2008)",
+      "year": 2008,
+      "number": "A6",
+      "url": "https://kskedlaya.org/putnam-archive/"
+    },
+    "grade": "undergrad",
+    "points": 10,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Prove that there exists a constant $c>0$ such that in every nontrivial finite group $G$ there exists a sequence of length at most $c \\log |G|$ with the property that each element of $G$ equals the product of some subsequence. (The elements of $G$ in the sequence are not required to be distinct. A *subsequence* of a sequence is obtained by selecting some of the terms, not necessarily consecutive, without reordering them; for example, $4, 4, 2$ is a subsequence of $2, 4, 6, 4, 2$, but $2, 2, 4$ is not.)",
+    "image": null,
+    "choices": null,
+    "answer": "Proof with $c = 2/\\ln 2$. Greedily build $a_1,\\dots,a_k$ so that the set $H$ of subsequence products doubles at each step (append $g\\notin H^{-1}H$, so $Hg\\cap H=\\emptyset$); this stops after $k\\le\\log_2|G|$ steps with $H^{-1}H = G$, and then $a_k^{-1},\\dots,a_1^{-1},a_1,\\dots,a_k$ works.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Doubling the set of subsequence products",
+        "body": "Let $N = |G|\\ge2$. For a finite sequence $S$ let $H(S)$ be the set of products of subsequences of $S$, **including the empty subsequence** (product $e$).\n\n**Doubling step.** If $S = (a_1,\\dots,a_k)$ and $g\\in G$, then $H(S,g) = H\\cup Hg$ where $H = H(S)$ (a subsequence of $(S,g)$ either omits or ends with $g$). If $g\\notin H^{-1}H = \\{h_1^{-1}h_2: h_1,h_2\\in H\\}$, then $H\\cap Hg = \\emptyset$: an equation $h_1g = h_2$ would give $g = h_1^{-1}h_2$. So in that case $|H(S,g)| = 2|H(S)|$.\n\n**Greedy construction.** Start with the empty sequence ($H = \\{e\\}$). As long as $H^{-1}H\\ne G$, append some $g\\notin H^{-1}H$. After $k$ appends $|H| = 2^k\\le N$, so the process stops after some $k\\le\\log_2 N$ steps with a sequence $a_1,\\dots,a_k$ satisfying $H^{-1}H = G$. Since $\\{e\\}^{-1}\\{e\\}\\ne G$, $k\\ge1$.\n\n**The final sequence.** Consider\n$$T = (a_k^{-1}, a_{k-1}^{-1},\\dots,a_1^{-1},\\ a_1,a_2,\\dots,a_k),$$\nof length $2k$. Let $x\\in G$; write $x = h_1^{-1}h_2$ with $h_1 = a_{i_1}\\cdots a_{i_r}$ and $h_2 = a_{j_1}\\cdots a_{j_s}$ ($i_1<\\dots<i_r$, $j_1<\\dots<j_s$). Then\n$$x = a_{i_r}^{-1}\\cdots a_{i_1}^{-1}\\cdot a_{j_1}\\cdots a_{j_s},$$\nand the factors appear in $T$ in this order (inverses with decreasing indices in the first half, then increasing indices in the second half), so $x$ is the product of a subsequence of $T$. If this subsequence is empty (i.e. $x = e$ with $r = s = 0$), use instead $e = a_1^{-1}a_1$, a nonempty subsequence. So every element of $G$ is the product of a nonempty subsequence of $T$.\n\n**Length.** $2k\\le2\\log_2 N = \\frac{2}{\\ln2}\\ln N$. So $c = 2/\\ln 2$ works (with $\\log$ the natural logarithm; any other base changes $c$ by a constant factor). ∎\n\n*Remark.* At least $\\log_2 N$ terms are always needed, since a sequence of length $L$ has only $2^L$ subsequences."
+      }
+    ],
+    "topics": [
+      "abstract-algebra",
+      "counting"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "putnam-2008-b1",
+    "bank": "putnam",
+    "source": {
+      "contest": "Putnam",
+      "paper": "69th William Lowell Putnam Mathematical Competition (December 6, 2008)",
+      "year": 2008,
+      "number": "B1",
+      "url": "https://kskedlaya.org/putnam-archive/"
+    },
+    "grade": "undergrad",
+    "points": 10,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "What is the maximum number of rational points that can lie on a circle in $\\mathbb{R}^2$ whose center is not a rational point? (A *rational point* is a point both of whose coordinates are rational numbers.)",
+    "image": null,
+    "choices": null,
+    "answer": "2",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Perpendicular bisectors are rational lines",
+        "body": "**Two is possible.** The points $(0,0)$ and $(1,0)$ lie on the circle with centre $(\\tfrac12,\\sqrt2)$, which is not a rational point.\n\n**Three is impossible.** Suppose distinct rational points $P,Q,R$ lie on a circle with centre $X = (x,y)$. Then $|X-P|^2 = |X-Q|^2$, which expands to the linear equation\n$$2(Q-P)\\cdot X = |Q|^2 - |P|^2,$$\nwith rational coefficients; similarly $2(R-Q)\\cdot X = |R|^2-|Q|^2$. Three distinct points of a circle are not collinear, so the vectors $Q-P$ and $R-Q$ are linearly independent and this $2\\times2$ linear system has a unique solution. By Cramer's rule the solution is a quotient of determinants of rational numbers, hence rational. So the centre $X$ would be a rational point.\n\nTherefore a circle with irrational centre contains at most $2$ rational points, and $2$ is attained.\n\n**Answer:** $2$."
+      }
+    ],
+    "topics": [
+      "geometry",
+      "number-theory"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "putnam-2008-b2",
+    "bank": "putnam",
+    "source": {
+      "contest": "Putnam",
+      "paper": "69th William Lowell Putnam Mathematical Competition (December 6, 2008)",
+      "year": 2008,
+      "number": "B2",
+      "url": "https://kskedlaya.org/putnam-archive/"
+    },
+    "grade": "undergrad",
+    "points": 10,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Let $F_0(x) = \\ln x$. For $n \\geq 0$ and $x > 0$, let $F_{n+1}(x) = \\int_0^x F_n(t)\\,dt$. Evaluate\n$$\\lim_{n \\to \\infty} \\frac{n! F_n(1)}{\\ln n}.$$",
+    "image": null,
+    "choices": null,
+    "answer": "-1",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "A closed form for F_n",
+        "body": "Let $H_n = 1 + \\frac12 + \\cdots + \\frac1n$ ($H_0 = 0$).\n\n**Claim.** $F_n(x) = \\dfrac{x^n(\\ln x - H_n)}{n!}$ for $n\\ge0$, $x>0$.\n\nFor $n = 0$ this is $\\ln x$. Suppose it holds for $n$, and let $G(x) = \\frac{x^{n+1}(\\ln x - H_{n+1})}{(n+1)!}$. Then\n$$G'(x) = \\frac{(n+1)x^n(\\ln x - H_{n+1}) + x^n}{(n+1)!} = \\frac{x^n\\big(\\ln x - H_{n+1} + \\frac1{n+1}\\big)}{n!} = \\frac{x^n(\\ln x - H_n)}{n!} = F_n(x),$$\nand $G(x)\\to0$ as $x\\to0^+$ (because $x^{n+1}\\ln x\\to0$). So the (improper) integral is $F_{n+1}(x) = \\int_0^x F_n(t)\\,dt = G(x) - \\lim_{s\\to0^+}G(s) = G(x)$, proving the claim.\n\n**The limit.** Hence $n!\\,F_n(1) = -H_n$. Since $1/t$ is decreasing,\n$$\\ln(n+1) = \\int_1^{n+1}\\frac{dt}{t}\\le H_n\\le 1 + \\int_1^n\\frac{dt}{t} = 1 + \\ln n,$$\nso $H_n/\\ln n\\to1$ and\n$$\\lim_{n\\to\\infty}\\frac{n!\\,F_n(1)}{\\ln n} = -\\lim_{n\\to\\infty}\\frac{H_n}{\\ln n} = -1 .$$\n\n**Answer:** $-1$."
+      },
+      {
+        "title": "Cauchy's formula for repeated integration",
+        "body": "By induction (or Cauchy's formula for repeated integrals), for $n\\ge1$\n$$F_n(x) = \\frac{1}{(n-1)!}\\int_0^x (x-t)^{n-1}\\ln t\\,dt,$$\nwhich converges because $\\ln t$ is integrable at $0$. So\n$$n!\\,F_n(1) = n\\int_0^1(1-t)^{n-1}\\ln t\\,dt .$$\nSubstitute $u = 1-t$ and expand $\\ln(1-u) = -\\sum_{m\\ge1}u^m/m$ (all terms of one sign, so termwise integration is justified by monotone convergence):\n$$n\\int_0^1 u^{n-1}\\ln(1-u)\\,du = -n\\sum_{m\\ge1}\\frac{1}{m(m+n)} = -\\sum_{m\\ge1}\\left(\\frac1m - \\frac1{m+n}\\right) = -H_n .$$\nAs in the first solution $H_n\\sim\\ln n$, so the limit is $-1$.\n\n**Answer:** $-1$."
+      }
+    ],
+    "topics": [
+      "calculus",
+      "real-analysis",
+      "sequences-series"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "putnam-2008-b3",
+    "bank": "putnam",
+    "source": {
+      "contest": "Putnam",
+      "paper": "69th William Lowell Putnam Mathematical Competition (December 6, 2008)",
+      "year": 2008,
+      "number": "B3",
+      "url": "https://kskedlaya.org/putnam-archive/"
+    },
+    "grade": "undergrad",
+    "points": 10,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "What is the largest possible radius of a circle contained in a 4-dimensional hypercube of side length 1?",
+    "image": null,
+    "choices": null,
+    "answer": "sqrt(2)/2",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "answerDisplay": "$\\frac{\\sqrt{2}}{2}$",
+    "solutions": [
+      {
+        "title": "Center the circle, then sum over coordinates",
+        "body": "Scale by $2$: we show that the largest radius of a circle in $K = [-1,1]^4$ is $\\sqrt2$; the answer for side length $1$ is then $\\frac{\\sqrt2}{2}$.\n\n**We may centre the circle at the origin.** Let $C$ be a circle in $K$ with centre $P$. For $X\\in C$, the point $2P - X$ is also on $C$, hence in $K$. Since $K$ is convex and symmetric ($-K = K$), the midpoint of $X$ and $-(2P-X)$, which is $X-P$, lies in $K$. So the translated circle $C - P$ (centre $O$, same radius) lies in $K$.\n\n**Condition for a centred circle.** A circle of radius $r$ centred at $O$ is $\\{\\mathbf a\\cos\\theta + \\mathbf b\\sin\\theta\\}$ with $\\mathbf a\\perp\\mathbf b$, $|\\mathbf a| = |\\mathbf b| = r$. It lies in $K$ iff for each coordinate $i$,\n$$|a_i\\cos\\theta + b_i\\sin\\theta|\\le1\\ \\text{ for all }\\theta \\iff a_i^2+b_i^2\\le1,$$\nsince $\\max_\\theta (a_i\\cos\\theta + b_i\\sin\\theta) = \\sqrt{a_i^2+b_i^2}$.\n\n**Bound.** Summing over $i = 1,\\dots,4$:\n$$2r^2 = |\\mathbf a|^2+|\\mathbf b|^2 = \\sum_{i=1}^4(a_i^2+b_i^2)\\le4,$$\nso $r\\le\\sqrt2$.\n\n**Attained.** $\\mathbf a = (1,1,0,0)$, $\\mathbf b = (0,0,1,1)$ are orthogonal of length $\\sqrt2$, and $a_i^2+b_i^2 = 1$ for every $i$. So the circle through $(1,1,0,0)$ and $(0,0,1,1)$ centred at $O$ fits in $K$.\n\nScaling back, the maximum radius in the unit hypercube is $\\frac{\\sqrt2}{2}$ (e.g. the circle centred at $(\\frac12,\\frac12,\\frac12,\\frac12)$ through $(1,1,\\frac12,\\frac12)$ and $(\\frac12,\\frac12,1,1)$).\n\n**Answer:** $\\dfrac{\\sqrt2}{2}$."
+      }
+    ],
+    "topics": [
+      "geometry",
+      "linear-algebra",
+      "inequalities"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "putnam-2008-b4",
+    "bank": "putnam",
+    "source": {
+      "contest": "Putnam",
+      "paper": "69th William Lowell Putnam Mathematical Competition (December 6, 2008)",
+      "year": 2008,
+      "number": "B4",
+      "url": "https://kskedlaya.org/putnam-archive/"
+    },
+    "grade": "undergrad",
+    "points": 10,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $p$ be a prime number. Let $h(x)$ be a polynomial with integer coefficients such that $h(0), h(1), \\dots, h(p^2-1)$ are distinct modulo $p^2$. Show that $h(0), h(1), \\dots, h(p^3-1)$ are distinct modulo $p^3$.",
+    "image": null,
+    "choices": null,
+    "answer": "Proof. $h(x+y)\\equiv h(x)+yh'(x)\\pmod{y^2}$. With $y=p$ the hypothesis gives $p\\nmid h'(x)$ for all $x$; then with $y = tp^2$, $h(x+tp^2)\\equiv h(x)+tp^2h'(x)\\pmod{p^3}$ takes $p$ distinct values for $t = 0,\\dots,p-1$, all $\\equiv h(x)\\pmod{p^2}$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "First-order Taylor expansion (Hensel-type argument)",
+        "body": "**Taylor expansion with integer coefficients.** For $h(x) = \\sum_m c_mx^m$, the binomial theorem gives\n$$h(x+y) = \\sum_{i\\ge0}h_i(x)\\,y^i,\\qquad h_i(x) = \\sum_m c_m\\binom mi x^{m-i},$$\nwhere each $h_i$ has integer coefficients, $h_0 = h$ and $h_1 = h'$. Hence for integers $x, y$:\n$$h(x+y)\\equiv h(x) + y\\,h'(x)\\pmod{y^2}. \\qquad(\\ast)$$\n\n**Step 1: $p\\nmid h'(x)$ for every integer $x$.** For $x\\in\\{0,\\dots,p-1\\}$, both $x$ and $x+p$ lie in $\\{0,\\dots,p^2-1\\}$, so $h(x)\\not\\equiv h(x+p)\\pmod{p^2}$. By $(\\ast)$ with $y = p$, $h(x+p)\\equiv h(x)+p\\,h'(x)\\pmod{p^2}$, so $p\\,h'(x)\\not\\equiv0\\pmod{p^2}$, i.e. $p\\nmid h'(x)$. Since $h'$ has integer coefficients, $h'(x)\\bmod p$ depends only on $x\\bmod p$, so $p\\nmid h'(x)$ for all integers $x$.\n\n**Step 2.** Every integer in $\\{0,\\dots,p^3-1\\}$ is uniquely $x+tp^2$ with $x\\in\\{0,\\dots,p^2-1\\}$, $t\\in\\{0,\\dots,p-1\\}$. By $(\\ast)$ with $y = tp^2$ (note $p^3\\mid y^2$),\n$$h(x+tp^2)\\equiv h(x) + tp^2\\,h'(x)\\pmod{p^3}.$$\nSuppose $h(x+tp^2)\\equiv h(x'+t'p^2)\\pmod{p^3}$. Reducing mod $p^2$ gives $h(x)\\equiv h(x')\\pmod{p^2}$, so $x = x'$ by hypothesis. Then $tp^2h'(x)\\equiv t'p^2h'(x)\\pmod{p^3}$, i.e. $p\\mid(t-t')h'(x)$; as $p\\nmid h'(x)$, $p\\mid t-t'$, so $t=t'$.\n\nHence $h(0),\\dots,h(p^3-1)$ are distinct modulo $p^3$. ∎"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "polynomials"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "putnam-2008-b5",
+    "bank": "putnam",
+    "source": {
+      "contest": "Putnam",
+      "paper": "69th William Lowell Putnam Mathematical Competition (December 6, 2008)",
+      "year": 2008,
+      "number": "B5",
+      "url": "https://kskedlaya.org/putnam-archive/"
+    },
+    "grade": "undergrad",
+    "points": 10,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Find all continuously differentiable functions $f: \\mathbb{R} \\to \\mathbb{R}$ such that for every rational number $q$, the number $f(q)$ is rational and has the same denominator as $q$. (The denominator of a rational number $q$ is the unique positive integer $b$ such that $q = a/b$ for some integer $a$ with $\\gcd(a,b) = 1$.)",
+    "image": null,
+    "choices": null,
+    "answer": "$f(x) = x + n$ or $f(x) = -x+n$ with $n\\in\\mathbb Z$. Difference quotients at rational points along suitable sequences are integers, so $f'(q)\\in\\mathbb Z$; coprimality forces $f'(q) = \\pm1$; continuity of $f'$ makes it a constant $\\pm1$, and $f(0)\\in\\mathbb Z$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Integer difference quotients",
+        "body": "**These work.** If $q = a/b$ in lowest terms, then $\\pm q + n = \\frac{\\pm a + nb}{b}$ and $\\gcd(\\pm a+nb, b) = \\gcd(a,b) = 1$, so the denominator is again $b$.\n\n**They are the only ones.** Note: if $r$ has denominator $D$, then $D\\,f(r)$ is an integer coprime to $D$.\n\nFix $q = a/b$ in lowest terms ($b>0$), and let $m = b\\,f(q)$, an integer coprime to $b$. For integers $N\\ge1$ put\n$$r_N = q + \\frac{1}{b^2N} = \\frac{abN+1}{b^2N}.$$\nThis fraction is in lowest terms: a prime dividing $b^2N$ divides $bN$, hence does not divide $abN+1$. So $D_N = b^2N$ is the denominator of $r_N$, and $D_Nf(r_N)$ is an integer coprime to $D_N$. Also $D_Nf(q) = bN\\,m$ is an integer. Hence the difference quotient\n$$\\frac{f(r_N)-f(q)}{r_N-q} = D_Nf(r_N) - bNm$$\nis an integer for every $N$. As $N\\to\\infty$ it tends to $f'(q)$; a convergent sequence of integers is eventually constant, so $c := f'(q)$ is an integer and, for all large $N$,\n$$D_N f(r_N) = bNm + c .$$\n- If $c = 0$: for large $N\\ge2$, $N$ divides both $bNm$ and $D_N$, contradicting coprimality.\n- If $|c|\\ge2$: take $N$ a large multiple of $|c|$; then $|c|$ divides $bNm + c$ and $D_N = b^2N$, again a contradiction.\n\nSo $f'(q) = \\pm1$ for every rational $q$.\n\n**Conclusion.** $f'$ is continuous and takes values in the closed set $\\{-1,1\\}$ on the dense set $\\mathbb Q$, hence everywhere; by the intermediate value theorem it cannot jump between $-1$ and $1$, so $f'\\equiv1$ or $f'\\equiv-1$. Thus $f(x) = \\pm x + f(0)$, and $f(0)$ has denominator $1$, i.e. $f(0) = n\\in\\mathbb Z$.\n\n**Answer:** $f(x) = x+n$ or $f(x) = -x+n$ for an integer $n$. ∎"
+      }
+    ],
+    "topics": [
+      "real-analysis",
+      "number-theory",
+      "functional-equations"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "putnam-2008-b6",
+    "bank": "putnam",
+    "source": {
+      "contest": "Putnam",
+      "paper": "69th William Lowell Putnam Mathematical Competition (December 6, 2008)",
+      "year": 2008,
+      "number": "B6",
+      "url": "https://kskedlaya.org/putnam-archive/"
+    },
+    "grade": "undergrad",
+    "points": 10,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $n$ and $k$ be positive integers. Say that a permutation $\\sigma$ of $\\{1,2,\\dots,n\\}$ is *$k$-limited* if $|\\sigma(i) - i| \\leq k$ for all $i$. Prove that the number of $k$-limited permutations of $\\{1,2,\\dots,n\\}$ is odd if and only if $n \\equiv 0$ or $1 \\pmod{2k+1}$.",
+    "image": null,
+    "choices": null,
+    "answer": "Proof. The count is $\\equiv\\det M\\pmod 2$ for the band matrix $M_{ij} = [\\,|i-j|\\le k\\,]$. Over $\\mathbb F_2$, a kernel vector of $M^T$ extended by zeros is $(2k+1)$-periodic on $[1-k, n+k]$; this forces only the zero vector exactly when the two blocks of $k$ forced zeros occupy disjoint residues mod $2k+1$, i.e. when $n\\equiv0,1$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Determinant mod 2 of a band matrix",
+        "body": "Let $F$ be the number of $k$-limited permutations and $M$ the $n\\times n$ matrix with $M_{ij} = 1$ if $|i-j|\\le k$ and $0$ otherwise.\n\n**$F\\equiv\\det M\\pmod 2$.** In $\\det M = \\sum_\\sigma\\operatorname{sgn}(\\sigma)\\prod_iM_{i\\sigma(i)}$, the term of $\\sigma$ is $\\pm1$ if $\\sigma$ is $k$-limited and $0$ otherwise. So $\\det M\\equiv F\\pmod2$, and $F$ is odd iff $M$ is invertible over the field $\\mathbb F_2$.\n\n**Dependencies among the rows.** Let $r_i$ be the $i$-th row and suppose $\\sum_i a_ir_i = 0$ with $a_i\\in\\mathbb F_2$. Extend by $a_i = 0$ for $i\\in[1-k,0]\\cup[n+1,n+k]$. The $m$-th coordinate of $\\sum a_ir_i$ is\n$$a_{m-k} + a_{m-k+1} + \\cdots + a_{m+k} = 0\\qquad(1\\le m\\le n), \\qquad (1)$$\na window of $2k+1$ consecutive terms, all with indices in $[1-k,n+k]$. Subtracting the equations for $m$ and $m+1$ gives $a_{m-k} = a_{m+k+1}$ for $1\\le m\\le n-1$. These say exactly that $(a_i)$ is periodic with period $N = 2k+1$ on the whole index range $[1-k,n+k]$ (every pair $i, i+N$ inside this range is of the form $m-k, m+k+1$ with $1 \\le m \\le n-1$). Conversely, a sequence on $[1-k,n+k]$ that is $N$-periodic, vanishes on $[1-k,0]\\cup[n+1,n+k]$ and has window sum $0$ satisfies all of (1).\n\nSince the range $[1-k, n+k]$ has length $n+2k\\ge N$, such a sequence is the same as a function $a: \\mathbb Z/N\\to\\mathbb F_2$ which\n- vanishes on $A = \\{1-k,\\dots,0\\}\\bmod N$ and on $B = \\{n+1,\\dots,n+k\\}\\bmod N$ (two sets of $k$ consecutive residues each), and\n- has total sum $\\sum_{\\rho\\in\\mathbb Z/N}a(\\rho) = 0$.\n\nIt is nonzero on $[1,n]$ iff it is a nonzero function (every residue outside $A\\cup B$ occurs in $[1,n]$, because the range $[1-k,n+k]$ contains every residue). Let $R = \\mathbb Z/N\\setminus(A\\cup B)$; $|R|\\ge N - 2k = 1$. If $|R| = 1$, the sum condition forces $a = 0$; if $|R|\\ge2$, putting $a = 1$ on two elements of $R$ gives a nonzero solution. So\n$$M \\text{ is invertible over } \\mathbb F_2\\iff |R| = 1\\iff A\\cap B = \\emptyset .$$\n\n**When are $A$ and $B$ disjoint?** $A = \\{k+2,\\dots,2k,0\\}$, whose complement is the block $\\{1,2,\\dots,k+1\\}$ of $k+1$ consecutive residues. The block $B$ of $k$ consecutive residues starting at $n+1$ fits inside it iff $n+1\\equiv1$ or $n+1\\equiv2\\pmod N$, i.e. iff $n\\equiv0$ or $1\\pmod{2k+1}$.\n\nTherefore $F$ is odd iff $n\\equiv0$ or $1\\pmod{2k+1}$. ∎\n\n(Check $k=1$: $n=2$ gives the $2$ permutations of $\\{1,2\\}$ (even); $n=3$ gives $123, 213, 132$ (odd).)"
+      }
+    ],
+    "topics": [
+      "counting",
+      "linear-algebra"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

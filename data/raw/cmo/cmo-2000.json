@@ -1,0 +1,181 @@
+[
+  {
+    "id": "cmo-cmo-2000-01",
+    "bank": "cmo",
+    "source": {
+      "contest": "CMO",
+      "paper": "CMO 2000",
+      "year": 2000,
+      "number": 1,
+      "url": "https://cms.math.ca/competitions/cmo/"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "At 12:00 noon, Anne, Beth and Carmen begin running laps around a circular track of length three hundred meters, all starting from the same point on the track. Each jogger maintains a constant speed in one of the two possible directions for an indefinite period of time. Show that if Anne's speed is different from the other two speeds, then at some later time Anne will be at least one hundred meters from each of the other runners. (Here, distance is measured along the shorter of the two arcs separating two runners.)",
+    "image": null,
+    "choices": null,
+    "answer": "Work in Anne's frame. If Beth (the faster relative runner) is at most twice as fast as Carmen, look at the moment Carmen has gone $100$ m; otherwise Beth covers more than $200$ m while Carmen is between $100$ and $200$ m, and some moment of that stretch works.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Watch from Anne's point of view",
+        "body": "Measure positions as arc length (mod $300$) from the starting point, and use a frame of reference that rotates with Anne: subtract Anne's (signed) velocity from everybody's. Distances between runners do not change, Anne now stands still at position $0$, and Beth and Carmen move with constant relative velocities. These are non-zero: Anne's speed differs from theirs, so her velocity differs from theirs.\n\nThe distance from Anne of a runner who has travelled a total arc $s \\ge 0$ (in either direction) depends only on $s \\bmod 300$, and it is $\\ge 100$ exactly when $s \\bmod 300 \\in [100, 200]$. So only the relative *speeds* matter; call them $b \\ge c > 0$ (naming the faster one Beth). At time $t$ Beth has travelled $bt$ and Carmen $ct$.\n\n**Case $b \\le 2c$.** At $t_0 = \\frac{100}{c}$, Carmen has travelled $100$ and Beth $bt_0 = \\frac{100b}{c} \\in [100, 200]$. Both are at distance $\\ge 100$ from Anne.\n\n**Case $b > 2c$.** During the time interval $\\left[\\frac{100}c, \\frac{200}c\\right]$ Carmen's travelled arc runs through $[100, 200]$, so she is at distance $\\ge 100$ throughout. In the same interval Beth's travelled arc runs continuously through $\\left[\\frac{100b}{c}, \\frac{200b}{c}\\right]$, an interval of length $\\frac{100b}{c} > 200$. The arcs $s$ with $s \\bmod 300 \\notin [100, 200]$ form the open intervals $(300k - 100, 300k + 100)$, each of length $200$; an interval of length more than $200$ cannot fit inside one of them, so at some moment of this time interval Beth's arc satisfies $s \\bmod 300 \\in [100, 200]$. At that moment both are at distance $\\ge 100$ from Anne.\n\nIn both cases there is a later time at which Anne is at least $100$ meters from each of the others. ∎"
+      },
+      {
+        "title": "Doubling times",
+        "body": "In Anne's frame (as in the first approach) let $b \\ge c > 0$ be the relative speeds of Beth and Carmen, and let $t$ be the time Beth needs to travel $200$ m. At the times $t, 2t, 4t, 8t, \\ldots$ Beth has travelled $200 \\cdot 2^j \\equiv 200, 100, 200, 100, \\ldots \\pmod{300}$ (doubling $200$ gives $400 \\equiv 100$, doubling $100$ gives $200$), so she is exactly $100$ m from Anne at each of them.\n\nAt time $t$ Carmen has travelled $d = ct \\le bt = 200$, $d > 0$. Let $k \\ge 0$ be the least integer with $2^kd \\ge 100$; then $2^kd < 200$ if $k \\ge 1$ (as $2^{k-1}d < 100$), and $2^kd = d \\le 200$ if $k = 0$. So at time $2^kt$ Carmen has travelled an arc in $[100, 200]$ and is at least $100$ m from Anne, as is Beth. ∎"
+      }
+    ],
+    "topics": [
+      "logic",
+      "rates"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "cmo-cmo-2000-02",
+    "bank": "cmo",
+    "source": {
+      "contest": "CMO",
+      "paper": "CMO 2000",
+      "year": 2000,
+      "number": 2,
+      "url": "https://cms.math.ca/competitions/cmo/"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "A *permutation* of the integers $1901, 1902, \\ldots, 2000$ is a sequence $a_1, a_2, \\ldots, a_{100}$ in which each of those integers appears exactly once. Given such a permutation, we form the sequence of partial sums\n$$s_1 = a_1,\\quad s_2 = a_1 + a_2,\\quad s_3 = a_1 + a_2 + a_3,\\quad \\ldots,\\quad s_{100} = a_1 + a_2 + \\cdots + a_{100}.$$\nHow many of these permutations will have no terms of the sequence $s_1, \\ldots, s_{100}$ divisible by three?",
+    "image": null,
+    "choices": null,
+    "answer": "99!*33!*34!/66!",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "answerDisplay": "$\\dfrac{99!\\cdot 33!\\cdot 34!}{66!}$",
+    "solutions": [
+      {
+        "title": "Work with residues mod 3",
+        "body": "Sort the numbers by their remainder mod $3$. Since $1901 \\equiv 2$, the numbers $\\equiv 2$ are $1901, 1904, \\ldots, 1999$ ($34$ of them), the numbers $\\equiv 0$ are $1902, \\ldots, 1998$ ($33$), and the numbers $\\equiv 1$ are $1903, \\ldots, 2000$ ($33$).\n\nWhether a partial sum is divisible by $3$ depends only on the **residue pattern** $r_1, \\ldots, r_{100}$ ($r_i = a_i \\bmod 3$). Each permutation is determined by its residue pattern together with the order in which the $33$ zeros, $33$ ones and $34$ twos are used, so each good pattern corresponds to $33!\\cdot 33!\\cdot 34!$ permutations.\n\n**Good patterns.** A term $r_i = 0$ does not change the partial sum mod $3$, so it is allowed anywhere except at the start ($s_1 = a_1$ must not be $\\equiv 0$). Now look at the $67$ non-zero residues in order, with running sum $\\sigma$ mod $3$, which must never be $0$:\n- if $\\sigma = 1$, the next non-zero residue must be $1$ (as $1 + 2 \\equiv 0$), making $\\sigma = 2$;\n- if $\\sigma = 2$, the next one must be $2$, making $\\sigma = 1$.\n\nSo the non-zero residues are $1, 1, 2, 1, 2, \\ldots$ (starting with $1$) or $2, 2, 1, 2, 1, \\ldots$ (starting with $2$). With $67$ terms the first pattern has $34$ ones and $33$ twos, the second has $34$ twos and $33$ ones. We have $34$ twos, so the second pattern is forced.\n\nThe $33$ zeros occupy any $33$ of the positions $2, 3, \\ldots, 100$: $\\binom{99}{33}$ choices, and then the non-zero pattern fills the remaining positions in its forced order. Hence the number of permutations is\n$$\\binom{99}{33}\\cdot 33!\\cdot 33!\\cdot 34! = \\frac{99!\\cdot 33!\\cdot 34!}{66!} \\approx 4.4\\times 10^{138}.$$\n\n**Answer: $\\dfrac{99!\\cdot 33!\\cdot 34!}{66!}$**"
+      }
+    ],
+    "topics": [
+      "counting",
+      "number-theory"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "cmo-cmo-2000-03",
+    "bank": "cmo",
+    "source": {
+      "contest": "CMO",
+      "paper": "CMO 2000",
+      "year": 2000,
+      "number": 3,
+      "url": "https://cms.math.ca/competitions/cmo/"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $A = (a_1, a_2, \\ldots, a_{2000})$ be a sequence of integers each lying in the interval $[-1000, 1000]$. Suppose that the entries in $A$ sum to $1$. Show that some nonempty subsequence of $A$ sums to zero.",
+    "image": null,
+    "choices": null,
+    "answer": "Reorder the entries so that each new entry has sign opposite to the current partial sum; all $2000$ partial sums then lie among the $1999$ non-zero integers in $[-999, 1000]$, so two are equal and the block between them sums to $0$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Keep the partial sums small, then pigeonhole",
+        "body": "If some entry is $0$, it alone is a zero-sum subsequence. So assume all entries are non-zero. We rearrange the entries as $b_1, b_2, \\ldots, b_{2000}$ (each entry used once) with partial sums $s_i = b_1 + \\cdots + b_i$, as follows; if at some point a zero sum turns up we stop, since we are done.\n\n- $b_1$: a positive entry (one exists, since the total is $1 > 0$).\n- For $i \\ge 2$: if $s_{i-1} = 0$ we are done ($b_1, \\ldots, b_{i-1}$ sum to $0$). Otherwise choose $b_i$ among the unused entries with sign opposite to $s_{i-1}$. This is possible: the unused entries sum to $1 - s_{i-1}$. If $s_{i-1} < 0$ this is $\\ge 2 > 0$, so a positive unused entry exists. If $s_{i-1} > 0$ this is $\\le 0$; if it is $0$, the (nonempty) set of unused entries sums to zero and we are done; otherwise it is negative and a negative unused entry exists.\n\n**The partial sums stay in $[-999, 1000]$.** $s_1 = b_1 \\in [1, 1000]$. If $s_{i-1} \\in [1, 1000]$ then $b_i \\in [-1000, -1]$ and $s_i \\in [-999, 999]$; if $s_{i-1} \\in [-999, -1]$ then $b_i \\in [1, 1000]$ and $s_i \\in [-998, 999]$. By induction all $s_i \\in [-999, 1000]$, and (unless we have already stopped) all are non-zero.\n\n**Pigeonhole.** So $s_1, \\ldots, s_{2000}$ are $2000$ values among the $1999$ non-zero integers of $[-999, 1000]$. Two are equal: $s_j = s_k$ with $j < k$. Then\n$$b_{j+1} + b_{j+2} + \\cdots + b_k = s_k - s_j = 0,$$\nand these $k - j \\ge 1$ entries form a nonempty subsequence of $A$ with sum zero. ∎"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "logic",
+      "counting"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "cmo-cmo-2000-04",
+    "bank": "cmo",
+    "source": {
+      "contest": "CMO",
+      "paper": "CMO 2000",
+      "year": 2000,
+      "number": 4,
+      "url": "https://cms.math.ca/competitions/cmo/"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $ABCD$ be a convex quadrilateral with\n$$\\angle CBD = 2\\angle ADB, \\qquad \\angle ABD = 2\\angle CDB \\qquad\\text{and}\\qquad AB = CB.$$\nProve that $AD = CD$.",
+    "image": null,
+    "choices": null,
+    "answer": "Take $P$ on ray $DB$ beyond $B$ with $BP = BA = BC$; then $\\angle BPC = \\angle ADB$ and $\\angle BPA = \\angle CDB$, so $APCD$ is a parallelogram, $BD$ passes through the midpoint of $AC$ and is perpendicular to it, and $D$ is on the perpendicular bisector of $AC$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "A point on the circle about B",
+        "body": "Let $P$ be the point on ray $DB$ beyond $B$ with $BP = BA = BC$. Since $ABCD$ is convex, $A$ and $C$ lie on opposite sides of the diagonal line $BD$, which is also line $PD$.\n\n**Angles at $P$.** Triangle $BPC$ is isosceles ($BP = BC$), and $\\angle CBD$ is its exterior angle at $B$ (as $D$ is on the extension of $PB$ beyond $B$). So $\\angle CBD = \\angle BPC + \\angle BCP = 2\\angle BPC$, hence\n$$\\angle CPD = \\angle BPC = \\tfrac12\\angle CBD = \\angle ADB.$$\nIn the same way, from the isosceles triangle $BPA$: $\\angle APD = \\tfrac12\\angle ABD = \\angle CDB$.\n\n**A parallelogram.** The angle between ray $PC$ and ray $PD$ equals the angle between ray $DA$ and ray $DP$, and $C$, $A$ are on opposite sides of line $PD$: these are equal alternate angles, so $PC \\parallel DA$. Likewise $\\angle APD = \\angle CDP$ gives $PA \\parallel DC$. So $APCD$ is a parallelogram (with $A$, $C$ off the line $PD$).\n\n**Conclusion.** The diagonals of a parallelogram bisect each other, so line $PD$ — which is line $BD$ — passes through the midpoint $M$ of $AC$. In the isosceles triangle $ABC$ ($BA = BC$) the line through $B$ and the midpoint $M$ of the base is perpendicular to $AC$ ($B \\ne M$, since $B$ is not on segment $AC$ in a convex quadrilateral). Thus line $BD$ is the perpendicular bisector of $AC$, and $D$, lying on it, satisfies $AD = CD$. ∎"
+      },
+      {
+        "title": "Two angle bisectors",
+        "body": "Let the bisector of $\\angle ABD$ meet $AD$ at $E$, and the bisector of $\\angle CBD$ meet $CD$ at $F$. Then\n$$\\angle EBD = \\tfrac12\\angle ABD = \\angle CDB = \\angle FDB, \\qquad \\angle FBD = \\tfrac12\\angle CBD = \\angle ADB = \\angle EDB.$$\n$E$ and $F$ are on opposite sides of $BD$, so these are alternate angles: $BE \\parallel DF$ and $BF \\parallel DE$. So $BEDF$ is a parallelogram and $BD$ passes through the midpoint of $EF$.\n\nBy the angle bisector theorem, $\\frac{AE}{ED} = \\frac{AB}{BD}$ and $\\frac{CF}{FD} = \\frac{CB}{BD}$. As $AB = CB$, $\\frac{AE}{ED} = \\frac{CF}{FD}$, so $EF \\parallel AC$ and triangle $DEF$ is a scaled copy of triangle $DAC$ from centre $D$. The line $DB$ through the midpoint of $EF$ therefore also passes through the midpoint $N$ of $AC$. As $BA = BC$, $BN \\perp AC$, so $DN$ is the perpendicular bisector of $AC$ and $AD = CD$. ∎"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "cmo-cmo-2000-05",
+    "bank": "cmo",
+    "source": {
+      "contest": "CMO",
+      "paper": "CMO 2000",
+      "year": 2000,
+      "number": 5,
+      "url": "https://cms.math.ca/competitions/cmo/"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Suppose that the real numbers $a_1, a_2, \\ldots, a_{100}$ satisfy\n$$a_1 \\ge a_2 \\ge \\cdots \\ge a_{100} \\ge 0,$$\n$$a_1 + a_2 \\le 100$$\nand\n$$a_3 + a_4 + \\cdots + a_{100} \\le 100.$$\nDetermine the maximum possible value of $a_1^2 + a_2^2 + \\cdots + a_{100}^2$, and find all possible sequences $a_1, a_2, \\ldots, a_{100}$ which achieve this maximum.",
+    "image": null,
+    "choices": null,
+    "answer": "Maximum $10000$, attained only by $100, 0, 0, \\ldots, 0$ and by $50, 50, 50, 50, 0, \\ldots, 0$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "One chain of inequalities",
+        "body": "Write $\\Sigma = a_1 + \\cdots + a_{100} \\le 200$. Since $0 \\le a_1 \\le 100 - a_2$ and $0 \\le a_2$:\n$$\\begin{aligned}\n\\sum_{i=1}^{100} a_i^2 &\\le (100 - a_2)^2 + a_2^2 + a_3^2 + \\cdots + a_{100}^2\\\\\n&= 100^2 - 200a_2 + 2a_2^2 + a_3^2 + \\cdots + a_{100}^2\\\\\n&\\le 100^2 - \\Sigma\\, a_2 + 2a_2^2 + a_3^2 + \\cdots + a_{100}^2\\\\\n&= 100^2 + (a_2 - a_1)a_2 + (a_3 - a_2)a_3 + (a_4 - a_2)a_4 + \\cdots + (a_{100} - a_2)a_{100}.\n\\end{aligned}$$\n(For the last line expand $\\Sigma a_2 = a_1a_2 + a_2^2 + a_3a_2 + \\cdots + a_{100}a_2$.) Since the sequence is non-increasing and non-negative, $a_2 - a_1 \\le 0$ and $a_i - a_2 \\le 0$ for $i \\ge 3$, so every product $(a_i - a_j)a_i$ is $\\le 0$. Hence\n$$a_1^2 + \\cdots + a_{100}^2 \\le 10000.$$\n\n**Equality** requires $a_1 = 100 - a_2$, $\\Sigma = 200$ (or $a_2 = 0$), and every product to vanish: $(a_2 - a_1)a_2 = 0$ and $(a_i - a_2)a_i = 0$ for $i \\ge 3$, i.e. each $a_i$ ($i \\ge 3$) is $0$ or $a_2$, and $a_2 = 0$ or $a_2 = a_1$.\n- If $a_2 = 0$: all $a_i = 0$ for $i \\ge 2$ and $a_1 = 100$: the sequence $100, 0, 0, \\ldots, 0$.\n- If $a_2 = a_1$: then $a_1 = a_2 = 50$, the sequence is $50, \\ldots, 50$ ($i$ terms) followed by zeros, and $\\Sigma = 50i = 200$ gives $i = 4$: the sequence $50, 50, 50, 50, 0, \\ldots, 0$.\n\nBoth satisfy the constraints and give $10000$.\n\n**Answer:** the maximum is $10000$, achieved exactly by $(100, 0, \\ldots, 0)$ and $(50, 50, 50, 50, 0, \\ldots, 0)$. ∎"
+      }
+    ],
+    "topics": [
+      "inequalities",
+      "algebra"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

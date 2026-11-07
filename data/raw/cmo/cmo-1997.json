@@ -1,0 +1,181 @@
+[
+  {
+    "id": "cmo-cmo-1997-01",
+    "bank": "cmo",
+    "source": {
+      "contest": "CMO",
+      "paper": "CMO 1997",
+      "year": 1997,
+      "number": 1,
+      "url": "https://cms.math.ca/competitions/cmo/"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "How many pairs of positive integers $x, y$ are there, with $x \\le y$, and such that $\\gcd(x, y) = 5!$ and $\\operatorname{lcd}(x, y) = 50!$?\n\nNote: $\\gcd(x, y)$ denotes the greatest common divisor of $x$ and $y$, $\\operatorname{lcd}(x, y)$ denotes the least common multiple of $x$ and $y$, and $n! = n \\times (n-1) \\times \\cdots \\times 2 \\times 1$.",
+    "image": null,
+    "choices": null,
+    "answer": "2^14",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "answerDisplay": "$2^{14} = 16384$",
+    "solutions": [
+      {
+        "title": "Choose the exponent of each prime",
+        "body": "Write $v_p(m)$ for the exponent of the prime $p$ in $m$. The conditions say that for every prime $p$\n$$\\min(v_p(x), v_p(y)) = v_p(5!), \\qquad \\max(v_p(x), v_p(y)) = v_p(50!).$$\nIn particular $x$ and $y$ divide $50!$, so only the primes $p \\le 47$ occur. There are $15$ such primes: $2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47$.\n\nFor **every** one of them $v_p(5!) < v_p(50!)$: indeed $5! = 2^3\\cdot 3\\cdot 5$, while $50!$ is divisible by $2^4$, $3^2$, $5^2$ and by each prime $7, \\ldots, 47$ (which do not divide $5!$).\n\nSo for each of the $15$ primes, one of $x, y$ gets the exponent $v_p(5!)$ and the other gets $v_p(50!)$ — exactly $2$ choices per prime, made independently, and every choice gives a pair with the required gcd and lcm. This gives $2^{15}$ ordered pairs $(x, y)$.\n\nIn each of them $x \\ne y$ (their exponents of $2$ differ), and swapping $x$ and $y$ gives another such pair. So exactly half of the ordered pairs have $x < y$:\n$$\\frac{2^{15}}{2} = 2^{14} = 16384.$$\n\n**Answer: $2^{14} = 16384$**"
+      },
+      {
+        "title": "Divide out the gcd",
+        "body": "Write $x = 5!\\,a$, $y = 5!\\,b$. Then $\\gcd(x, y) = 5!$ means $\\gcd(a, b) = 1$, and then $\\operatorname{lcd}(x, y) = 5!\\,ab$. So we need coprime $a \\le b$ with\n$$ab = N = \\frac{50!}{5!}.$$\nEvery prime $p \\le 47$ divides $N$ (it appears in $50!$ more often than in $5!$), so $N$ has exactly $15$ distinct prime factors. A coprime factorization $N = ab$ is the same as deciding, for each prime, whether its whole prime power goes into $a$ or into $b$: $2^{15}$ ordered factorizations. Coprime $a = b$ would force $a = b = 1$ and $N = 1$, which is false; so $a \\ne b$ always, and half of them have $a < b$: $2^{14} = 16384$.\n\n**Answer: $16384$**"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "counting"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "cmo-cmo-1997-02",
+    "bank": "cmo",
+    "source": {
+      "contest": "CMO",
+      "paper": "CMO 1997",
+      "year": 1997,
+      "number": 2,
+      "url": "https://cms.math.ca/competitions/cmo/"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "The closed interval $A = [0, 50]$ is the union of a finite number of closed intervals, each of length $1$. Prove that some of the intervals can be removed so that those remaining are mutually disjoint and have total length $\\ge 25$.\n\nNote: For $a \\le b$, the closed interval $[a, b] := \\{x \\in \\mathbb{R} : a \\le x \\le b\\}$ has length $b - a$; disjoint intervals have *empty* intersection.",
+    "image": null,
+    "choices": null,
+    "answer": "Pick the $25$ points $b_k = \\frac{50k}{24}$ ($k = 0, \\ldots, 24$), spaced more than $2$ apart; the intervals covering them are pairwise disjoint.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Points more than 2 apart",
+        "body": "Consider the $25$ points\n$$b_k = \\frac{50k}{24}, \\qquad k = 0, 1, \\ldots, 24.$$\nThey lie in $[0, 50]$ ($b_0 = 0$, $b_{24} = 50$), and consecutive ones are $\\frac{50}{24} > 2$ apart, so $b_k - b_j > 2$ whenever $j < k$.\n\nSince $A$ is the union of the given intervals, each $b_k$ lies in some given interval; choose one and call it $I_k$.\n\n**Claim:** $I_j \\cap I_k = \\emptyset$ for $j < k$. Take any $u \\in I_j$ and $v \\in I_k$. Two points of an interval of length $1$ are at most $1$ apart, so $|u - b_j| \\le 1$ and $|v - b_k| \\le 1$. Hence\n$$v - u \\ge (b_k - b_j) - |v - b_k| - |u - b_j| > 2 - 1 - 1 = 0,$$\nso $u \\ne v$. Thus $I_j$ and $I_k$ have no common point.\n\nIn particular $I_0, \\ldots, I_{24}$ are $25$ different intervals. Remove all the other given intervals. The remaining $25$ intervals are mutually disjoint and have total length $25 \\ge 25$. ∎"
+      }
+    ],
+    "topics": [
+      "logic",
+      "measurement"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "cmo-cmo-1997-03",
+    "bank": "cmo",
+    "source": {
+      "contest": "CMO",
+      "paper": "CMO 1997",
+      "year": 1997,
+      "number": 3,
+      "url": "https://cms.math.ca/competitions/cmo/"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Prove that\n$$\\frac{1}{1999} < \\frac{1}{2}\\cdot\\frac{3}{4}\\cdot\\frac{5}{6}\\cdots\\frac{1997}{1998} < \\frac{1}{44}.$$",
+    "image": null,
+    "choices": null,
+    "answer": "With $P$ the product and $Q = \\frac23\\cdot\\frac45\\cdots\\frac{1998}{1999}$: compare factors to get $P > \\frac13\\cdot\\frac35\\cdots\\frac{1997}{1999} = \\frac1{1999}$ and $P < Q$, $PQ = \\frac{1}{1999}$, so $P^2 < \\frac{1}{1999} < \\frac{1}{44^2}$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Compare with telescoping products",
+        "body": "Let $P = \\frac12\\cdot\\frac34\\cdots\\frac{1997}{1998} = \\prod_{k=1}^{999}\\frac{2k-1}{2k}$.\n\n**Lower bound.** For each $k$, $\\frac{2k-1}{2k} > \\frac{2k-1}{2k+1}$ (same numerator, smaller denominator). Multiplying these $999$ inequalities between positive numbers,\n$$P > \\frac13\\cdot\\frac35\\cdot\\frac57\\cdots\\frac{1997}{1999} = \\frac{1}{1999},$$\nsince the product telescopes.\n\n**Upper bound.** For each $k$, $\\frac{2k-1}{2k} < \\frac{2k}{2k+1}$, because $(2k-1)(2k+1) = 4k^2 - 1 < 4k^2$. Hence $P < Q$ where\n$$Q = \\frac23\\cdot\\frac45\\cdots\\frac{1998}{1999} = \\prod_{k=1}^{999}\\frac{2k}{2k+1}.$$\nBut\n$$PQ = \\frac12\\cdot\\frac23\\cdot\\frac34\\cdot\\frac45\\cdots\\frac{1997}{1998}\\cdot\\frac{1998}{1999} = \\frac{1}{1999}.$$\nSo $P^2 < PQ = \\frac{1}{1999} < \\frac{1}{1936} = \\frac{1}{44^2}$, and since $P > 0$, $P < \\frac1{44}$.\n\nTogether: $\\frac{1}{1999} < P < \\frac{1}{44}$. ∎"
+      }
+    ],
+    "topics": [
+      "inequalities",
+      "sequences-series"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "cmo-cmo-1997-04",
+    "bank": "cmo",
+    "source": {
+      "contest": "CMO",
+      "paper": "CMO 1997",
+      "year": 1997,
+      "number": 4,
+      "url": "https://cms.math.ca/competitions/cmo/"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "The point $O$ is situated inside the parallelogram $ABCD$ so that\n$$\\angle AOB + \\angle COD = 180^\\circ.$$\nProve that $\\angle OBC = \\angle ODC$.",
+    "image": null,
+    "choices": null,
+    "answer": "Translate triangle $DOC$ by $\\overrightarrow{DA}$ to $AO'B$; then $\\angle AO'B + \\angle AOB = 180^\\circ$, so $AOBO'$ is cyclic, and $\\angle ODC = \\angle O'AB = \\angle O'OB = \\angle OBC$ (as $OO' \\parallel BC$).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Translate triangle DOC",
+        "body": "Let $\\tau$ be the translation by the vector $\\overrightarrow{DA}$. Since $ABCD$ is a parallelogram, $\\overrightarrow{DA} = \\overrightarrow{CB}$, so $\\tau(D) = A$ and $\\tau(C) = B$. Let $O' = \\tau(O)$. A translation preserves angles, so triangle $DOC$ is mapped to triangle $AO'B$ and\n$$\\angle AO'B = \\angle DOC = 180^\\circ - \\angle AOB, \\qquad \\angle O'AB = \\angle ODC. \\tag{1}$$\n\n**$AOBO'$ is a convex quadrilateral.** Let $h$ be the distance between the parallel lines $AB$ and $DC$, and $d$ ($0 < d < h$) the distance from $O$ to $AB$. The translation moves every point a distance $h$ perpendicular to $AB$, in the direction from line $DC$ towards line $AB$; so $O'$ lies on the other side of $AB$, at distance $h - d > 0$. Moreover the segment $OO'$ is parallel to $AD$; since $O$ lies strictly between the lines $AD$ and $BC$, the segment $OO'$ crosses line $AB$ at a point strictly between $A$ and $B$. So the diagonals $AB$ and $OO'$ of $AOBO'$ cross, and $AOBO'$ is convex.\n\n**It is cyclic.** By (1), its opposite angles at $O$ and $O'$ add up to $180^\\circ$, so $A, O, B, O'$ lie on a circle, in this order.\n\n**Finish.** In this circle, $A$ and $O$ lie on the same arc cut off by the chord $O'B$, so the inscribed angles on that chord are equal: $\\angle O'AB = \\angle O'OB$.\n\nFinally $\\overrightarrow{OO'} = \\overrightarrow{DA} = \\overrightarrow{CB}$, so the ray $OO'$ points in the direction opposite to the ray $BC$. The half-turn about the midpoint of $OB$ swaps $O$ and $B$, maps the ray $OO'$ to the ray from $B$ in the opposite direction, i.e. the ray $BC$, and maps the ray $OB$ to the ray $BO$. Half-turns preserve angles, so $\\angle O'OB = \\angle CBO$ (alternate angles).\n\nPutting everything together, using (1):\n$$\\angle ODC = \\angle O'AB = \\angle O'OB = \\angle OBC.$$\n∎"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "cmo-cmo-1997-05",
+    "bank": "cmo",
+    "source": {
+      "contest": "CMO",
+      "paper": "CMO 1997",
+      "year": 1997,
+      "number": 5,
+      "url": "https://cms.math.ca/competitions/cmo/"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Write the sum\n$$\\sum_{k=0}^{n} \\frac{(-1)^k\\binom{n}{k}}{k^3 + 9k^2 + 26k + 24}$$\nin the form $\\frac{p(n)}{q(n)}$, where $p$ and $q$ are polynomials with integer coefficients.",
+    "image": null,
+    "choices": null,
+    "answer": "$\\dfrac{1}{2(n+3)(n+4)}$, i.e. $p(n) = 1$, $q(n) = 2n^2 + 14n + 24$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Absorb the denominator into a binomial coefficient",
+        "body": "First factor: $k^3 + 9k^2 + 26k + 24 = (k+2)(k+3)(k+4)$ (check: $k = -2$ is a root, and the quotient is $k^2 + 7k + 12$).\n\n**Rewrite each term.** Since\n$$\\frac{\\binom{n}{k}}{(k+2)(k+3)(k+4)} = \\frac{n!\\,(k+1)}{(k+4)!\\,(n-k)!} = \\frac{(k+1)\\binom{n+4}{k+4}}{(n+1)(n+2)(n+3)(n+4)},$$\nthe sum is $S(n) = \\dfrac{T}{(n+1)(n+2)(n+3)(n+4)}$ with\n$$T = \\sum_{k=0}^{n}(-1)^k (k+1)\\binom{n+4}{k+4}.$$\n\n**Evaluate $T$.** Put $N = n + 4 \\ge 4$ and $j = k + 4$; then $(-1)^k = (-1)^j$ and $k + 1 = j - 3$:\n$$T = \\sum_{j=4}^{N}(-1)^j (j-3)\\binom{N}{j}.$$\nWe use two standard facts, valid for $N \\ge 2$:\n- $\\sum_{j=0}^{N}(-1)^j\\binom{N}{j} = (1-1)^N = 0$;\n- $\\sum_{j=0}^{N}(-1)^j j\\binom{N}{j} = \\sum_{j=1}^{N}(-1)^j N\\binom{N-1}{j-1} = -N(1-1)^{N-1} = 0$ (using $j\\binom{N}{j} = N\\binom{N-1}{j-1}$).\n\nHence $\\sum_{j=0}^{N}(-1)^j(j-3)\\binom{N}{j} = 0$, and $T$ is minus the sum of the terms $j = 0, 1, 2, 3$:\n$$T = -\\Big[(-3) + 2N - \\tbinom{N}{2} + 0\\Big] = 3 - 2N + \\frac{N(N-1)}{2} = \\frac{(N-2)(N-3)}{2} = \\frac{(n+1)(n+2)}{2}.$$\n\nTherefore\n$$S(n) = \\frac{(n+1)(n+2)}{2(n+1)(n+2)(n+3)(n+4)} = \\frac{1}{2(n+3)(n+4)}.$$\n(Check $n = 0$: the sum is $\\frac{1}{24} = \\frac{1}{2\\cdot 3\\cdot 4}$.)\n\n**Answer: $\\dfrac{1}{2(n+3)(n+4)} = \\dfrac{1}{2n^2 + 14n + 24}$**"
+      },
+      {
+        "title": "Write the term as an integral",
+        "body": "For $k \\ge 0$,\n$$\\int_0^1 x^{k+1}(1-x)^2\\,dx = \\frac{1}{k+2} - \\frac{2}{k+3} + \\frac{1}{k+4} = \\frac{2}{(k+2)(k+3)(k+4)}$$\n(expand $(1-x)^2$; the numerator is $(k+3)(k+4) - 2(k+2)(k+4) + (k+2)(k+3) = 2$). Since $k^3 + 9k^2 + 26k + 24 = (k+2)(k+3)(k+4)$, the sum equals\n$$\\frac12\\int_0^1 x(1-x)^2\\sum_{k=0}^{n}\\binom{n}{k}(-x)^k\\,dx = \\frac12\\int_0^1 x(1-x)^{n+2}\\,dx.$$\nSubstituting $u = 1 - x$:\n$$\\frac12\\int_0^1 (1-u)u^{n+2}\\,du = \\frac12\\left(\\frac{1}{n+3} - \\frac{1}{n+4}\\right) = \\frac{1}{2(n+3)(n+4)}.$$\n\n**Answer: $\\dfrac{1}{2(n+3)(n+4)}$**"
+      }
+    ],
+    "topics": [
+      "algebra",
+      "sequences-series",
+      "counting"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

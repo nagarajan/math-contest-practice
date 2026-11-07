@@ -1,0 +1,151 @@
+[
+  {
+    "id": "vjimc-2004-cat2-01",
+    "bank": "vjimc",
+    "source": {
+      "contest": "VJIMC",
+      "paper": "VJIMC 2004 Category II",
+      "year": 2004,
+      "number": 1,
+      "url": "https://vjimc.osu.cz/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "text",
+    "prompt": "Are the groups $(\\mathbb Q,+)$ and $(\\mathbb Q^+,\\cdot)$ isomorphic? (The symbol $\\mathbb Q^+$ denotes the set of all positive rational numbers.)",
+    "image": null,
+    "choices": null,
+    "answer": "No",
+    "acceptedAnswers": [
+      "no",
+      "No, they are not isomorphic",
+      "not isomorphic",
+      "n",
+      "false"
+    ],
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Halving versus square roots",
+        "body": "**No.** Suppose $\\varphi\\colon(\\mathbb Q,+)\\to(\\mathbb Q^+,\\cdot)$ is an isomorphism. Since $\\varphi$ is surjective, there is $a\\in\\mathbb Q$ with $\\varphi(a)=2$. Let $b=\\varphi(a/2)\\in\\mathbb Q^+$. Then\n$$2=\\varphi(a)=\\varphi\\Big(\\frac a2+\\frac a2\\Big)=\\varphi\\Big(\\frac a2\\Big)^2=b^2,$$\nso $b=\\sqrt2$ is rational — a contradiction. ∎\n\n**Answer: No.**"
+      },
+      {
+        "title": "Divisibility properties",
+        "body": "In $(\\mathbb Q,+)$ every element is divisible by $2$: for every $q$ there is $r$ with $r+r=q$. An isomorphism transports this property, so in $(\\mathbb Q^+,\\cdot)$ every element would be a square: for every $s\\in\\mathbb Q^+$ there would be $t\\in\\mathbb Q^+$ with $t^2=s$. This fails for $s=2$ (or $s=3$, …), since $\\sqrt2\\notin\\mathbb Q$. (Equivalently: $(\\mathbb Q^+,\\cdot)$ is a free abelian group on the primes, $\\cong\\bigoplus_{p}\\mathbb Z$, which is not divisible.) ∎\n\n**Answer: No.**"
+      }
+    ],
+    "topics": [
+      "abstract-algebra"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "vjimc-2004-cat2-02",
+    "bank": "vjimc",
+    "source": {
+      "contest": "VJIMC",
+      "paper": "VJIMC 2004 Category II",
+      "year": 2004,
+      "number": 2,
+      "url": "https://vjimc.osu.cz/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Find all functions $f\\colon\\mathbb R_0^+\\times\\mathbb R_0^+\\to\\mathbb R_0^+$ such that\n\n1. $f(x,0)=f(0,x)=x$ for all $x\\in\\mathbb R_0^+$,\n2. $f(f(x,y),z)=f(x,f(y,z))$ for all $x,y,z\\in\\mathbb R_0^+$ and\n3. there exists a real $k$ such that $f(x+y,x+z)=kx+f(y,z)$ for all $x,y,z\\in\\mathbb R_0^+$.\n\n(The symbol $\\mathbb R_0^+$ denotes the set of all non-negative real numbers.)",
+    "image": null,
+    "choices": null,
+    "answer": "$f(x,y)=x+y$ and $f(x,y)=\\max\\{x,y\\}$. (Conditions 1 and 3 force $f(x,y)=(k-1)\\min\\{x,y\\}+\\max\\{x,y\\}$, and associativity forces $k\\in\\{1,2\\}$.)",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Determine $f$ from condition 3, then use associativity",
+        "body": "**Step 1: the shape of $f$.** Let $0\\le x\\le y$. By conditions 3 and 1,\n$$f(x,y)=f\\big(x+0,\\;x+(y-x)\\big)=kx+f(0,y-x)=kx+y-x=(k-1)x+y,$$\nand likewise $f(y,x)=f\\big(x+(y-x),\\,x+0\\big)=kx+f(y-x,0)=(k-1)x+y$. Hence\n$$f(x,y)=(k-1)\\min\\{x,y\\}+\\max\\{x,y\\}\\qquad\\text{for all }x,y\\ge0 .$$\nSince $f(1,1)=k$ must be non-negative, $k\\ge0$.\n\n**Step 2: associativity pins down $k$.** Take $x=y=1$ and $z$ large, say $z\\ge k+2$. Then $f(1,1)=k\\le z$, so\n$$f(f(1,1),z)=f(k,z)=(k-1)k+z .$$\nAlso $f(1,z)=(k-1)+z\\ge 1$, so\n$$f(1,f(1,z))=(k-1)\\cdot1+(k-1)+z=2(k-1)+z .$$\nCondition 2 gives $(k-1)k=2(k-1)$, i.e. $(k-1)(k-2)=0$, so $k=1$ or $k=2$.\n\n**Step 3: both work.**\n\n* $k=2$: $f(x,y)=\\min+\\max=x+y$. Clearly $f(x,0)=f(0,x)=x$, addition is associative, and $(x+y)+(x+z)=2x+(y+z)$.\n* $k=1$: $f(x,y)=\\max\\{x,y\\}$. Then $\\max\\{x,0\\}=x$ for $x\\ge0$, $\\max$ is associative, and $\\max\\{x+y,x+z\\}=x+\\max\\{y,z\\}$.\n\n**Answer:** $f(x,y)=x+y$ and $f(x,y)=\\max\\{x,y\\}$. ∎"
+      },
+      {
+        "title": "Checking the candidate $k=0$",
+        "body": "Step 1 of the first solution shows that every solution has the form $f_k(x,y)=(k-1)\\min\\{x,y\\}+\\max\\{x,y\\}$ with $k\\ge0$. One can also find the admissible $k$ by comparing $f_k(f_k(1,1),k)$ with $f_k(1,f_k(1,k))$:\n\n* the left side is $f_k(k,k)=k^2$;\n* for $k\\ge1$: $f_k(1,k)=2k-1\\ge1$, so the right side is $(k-1)+(2k-1)$, and $k^2=3k-2$ gives $k\\in\\{1,2\\}$;\n* for $0\\le k\\le1$: $f_k(1,k)=k^2-k+1\\le 1$, so the right side is $(k-1)(k^2-k+1)+1$, and $k^2=(k-1)(k^2-k+1)+1$ becomes $k(k-1)(k-2)=0$, so $k\\in\\{0,1\\}$.\n\nThe extra candidate $k=0$ gives $f_0(x,y)=|x-y|$, which is not associative: $f_0(f_0(1,2),3)=f_0(1,3)=2$ but $f_0(1,f_0(2,3))=f_0(1,1)=0$. So again only $k=1$ ($\\max$) and $k=2$ (sum) remain, and both satisfy all three conditions. ∎"
+      }
+    ],
+    "topics": [
+      "functional-equations"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "vjimc-2004-cat2-03",
+    "bank": "vjimc",
+    "source": {
+      "contest": "VJIMC",
+      "paper": "VJIMC 2004 Category II",
+      "year": 2004,
+      "number": 3,
+      "url": "https://vjimc.osu.cz/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $\\sum_{n=1}^\\infty a_n$ be a divergent series with positive non-increasing terms. Prove that the series\n$$\\sum_{n=1}^\\infty\\frac{a_n}{1+na_n}$$\ndiverges.",
+    "image": null,
+    "choices": null,
+    "answer": "If $na_n<1$ from some point on, the terms are $\\ge a_n/2$; otherwise $na_n\\ge1$ for infinitely many $n$, and for each such $n$ monotonicity gives $\\sum_{n/2<k\\le n}\\frac{a_k}{1+ka_k}\\ge\\frac14$, so the Cauchy criterion fails.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Two cases and a block estimate",
+        "body": "Write $b_n=\\dfrac{a_n}{1+na_n}=\\dfrac{1}{n+1/a_n}>0$ and let $S=\\{n: na_n\\ge1\\}$.\n\n**Case 1: $S$ is finite.** Then there is $N$ with $na_n<1$ for $n\\ge N$, so $b_n\\ge\\frac{a_n}{2}$ for $n\\ge N$. Since $\\sum a_n$ diverges, so does $\\sum b_n$ by comparison.\n\n**Case 2: $S$ is infinite.** Let $n\\in S$, i.e. $\\frac1{a_n}\\le n$. For every $k$ with $\\frac n2<k\\le n$ we have $a_k\\ge a_n$ (the terms are non-increasing), hence $\\frac1{a_k}\\le\\frac1{a_n}\\le n$ and\n$$b_k=\\frac1{k+1/a_k}\\ge\\frac{1}{n+n}=\\frac1{2n}.$$\nThere are at least $\\frac n2$ integers $k$ in $(\\frac n2,n]$, so\n$$\\sum_{n/2<k\\le n}b_k\\ge\\frac n2\\cdot\\frac1{2n}=\\frac14 .$$\nBecause $S$ is infinite, such blocks $(\\frac n2,n]$ occur with $n$ (and hence $\\frac n2$) arbitrarily large. Thus the Cauchy criterion fails: for every $M$ there is a block of consecutive terms beyond $M$ with sum at least $\\frac14$. So $\\sum b_n$ diverges.\n\nIn both cases $\\sum_{n\\ge1}\\dfrac{a_n}{1+na_n}$ diverges. ∎\n\n*Remark.* Monotonicity is essential: e.g. with $a_n=1$ for $n$ a perfect square and $a_n=1/n^2$ otherwise, $\\sum a_n$ diverges but $\\sum\\frac{a_n}{1+na_n}\\le\\sum_{m}\\frac1{m^2}+\\sum\\frac1{n^2}<\\infty$."
+      }
+    ],
+    "topics": [
+      "sequences-series",
+      "real-analysis"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "vjimc-2004-cat2-04",
+    "bank": "vjimc",
+    "source": {
+      "contest": "VJIMC",
+      "paper": "VJIMC 2004 Category II",
+      "year": 2004,
+      "number": 4,
+      "url": "https://vjimc.osu.cz/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $f\\colon\\mathbb R\\to\\mathbb R$ be an infinitely differentiable function. Assume that for every $x\\in\\mathbb R$ there is an $n\\in\\mathbb N$ (depending on $x$) such that\n$$f^{(n)}(x)=0 .$$\nProve that $f$ is a polynomial.",
+    "image": null,
+    "choices": null,
+    "answer": "Baire category: the closed sets $E_n=\\{f^{(n)}=0\\}$ cover $\\mathbb R$, so $f$ is a polynomial on a dense union of maximal open intervals; the closed complement $H$ has no isolated points, and a second application of Baire on $H$ shows that $H\\ne\\emptyset$ is impossible.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Baire category theorem, twice",
+        "body": "Let $E_n=\\{x: f^{(n)}(x)=0\\}$. Each $E_n$ is closed (as $f^{(n)}$ is continuous) and $\\bigcup_n E_n=\\mathbb R$ by hypothesis. We use the **Baire category theorem**: if a non-empty complete metric space is a countable union of closed sets, one of them has non-empty interior.\n\n**Preliminaries.** Say $f$ is *polynomial on* an open interval $I$ if $f|_I$ coincides with a polynomial; equivalently $f^{(n)}\\equiv0$ on $I$ for some $n$. If $f$ is polynomial on two overlapping open intervals, the two polynomials agree on the overlap, hence are equal, so $f$ is polynomial on the union. Consequently every open interval on which $f$ is polynomial is contained in a unique *maximal* such interval, and distinct maximal intervals are disjoint. Let $\\{I_\\lambda\\}$ be the family of maximal intervals and $H=\\mathbb R\\setminus\\bigcup_\\lambda I_\\lambda$, a closed set.\n\n**Step 1: $\\bigcup I_\\lambda$ is dense.** Let $J$ be any open interval. Applying Baire to a closed subinterval $\\overline{J'}\\subset J$ (which is complete and covered by the closed sets $E_n\\cap\\overline{J'}$), some $E_n$ contains an open interval $K\\subset J$. Then $f^{(n)}\\equiv0$ on $K$, so $f$ is polynomial on $K$ and $K$ lies in some $I_\\lambda$. Thus every open interval meets $\\bigcup I_\\lambda$, i.e. $H$ has empty interior.\n\n**Step 2: $H$ has no isolated points.** Suppose $x\\in H$ is isolated: $(x-\\delta,x+\\delta)\\cap H=\\{x\\}$. Then $(x-\\delta,x)$ and $(x,x+\\delta)$ are connected subsets of $\\bigcup I_\\lambda$, so each lies in a single maximal interval; these are of the form $(a,x)$ and $(x,b)$. Choose $n$ with $f^{(n)}\\equiv0$ on both. By continuity $f^{(n)}(x)=0$ too, so $f^{(n)}\\equiv0$ on $(a,b)$ and $f$ is polynomial on $(a,b)$, contradicting maximality of $(a,x)$.\n\n**Step 3: $H=\\emptyset$.** Suppose $H\\ne\\emptyset$. $H$ is a closed subset of $\\mathbb R$, hence complete, and $H=\\bigcup_n(E_n\\cap H)$ with closed sets $E_n\\cap H$. By Baire there are $n$ and an open interval $J$ with\n$$\\emptyset\\ne J\\cap H\\subset E_n,\\quad\\text{i.e. } f^{(n)}=0 \\text{ on } J\\cap H .$$\n\n*(a) All higher derivatives vanish on $J\\cap H$.* Let $x\\in J\\cap H$. By Step 2, $x$ is a limit of points $x_j\\in H\\setminus\\{x\\}$, and since $J$ is open, $x_j\\in J\\cap H$ for large $j$. Then\n$$f^{(n+1)}(x)=\\lim_{j\\to\\infty}\\frac{f^{(n)}(x_j)-f^{(n)}(x)}{x_j-x}=0 .$$\nRepeating, $f^{(m)}=0$ on $J\\cap H$ for every $m\\ge n$.\n\n*(b) $f^{(n)}=0$ on every $I_\\lambda$ meeting $J$.* Let $I_\\lambda\\cap J\\ne\\emptyset$. Since $J$ is connected and also contains a point of $H$ (outside $I_\\lambda$), $J$ contains an endpoint $e$ of $I_\\lambda$; and $e\\in H\\cap J$, because $e\\notin I_\\lambda$ and an open interval $I_\\mu\\ni e$ would overlap $I_\\lambda$. On $I_\\lambda$ we have $f^{(m)}\\equiv0$ for some $m$; we may assume $m>n$. Then $f^{(m-1)}$ is constant on $I_\\lambda$, and by continuity this constant equals $f^{(m-1)}(e)=0$ (by (a), as $m-1\\ge n$). Repeating this argument with $m-1,m-2,\\dots$ we get $f^{(n)}\\equiv0$ on $I_\\lambda$.\n\n*(c) Contradiction.* Every point of $J$ lies in $H$ or in some $I_\\lambda$ meeting $J$, so by (a) and (b) $f^{(n)}\\equiv0$ on $J$. Then $f$ is polynomial on $J$, so $J$ is contained in some maximal interval $I_\\lambda$ and $J\\cap H=\\emptyset$ — contradicting the choice of $J$.\n\n**Conclusion.** $H=\\emptyset$, so $\\mathbb R$ is the disjoint union of the open intervals $I_\\lambda$; by connectedness of $\\mathbb R$ there is only one, $I_\\lambda=\\mathbb R$. Hence $f$ is a polynomial on $\\mathbb R$. ∎"
+      }
+    ],
+    "topics": [
+      "real-analysis",
+      "topology",
+      "calculus"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

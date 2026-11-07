@@ -20,3 +20,12 @@
 - ISL files: points should be null (Shortlist isn't a scored paper); re-check isl-2016..2025 after they finish.
 - isl-2022 G8: proof follows the official sketch and assumes the figure's configuration (sides/bisectors) without proof; tighten later if time permits.
 - Putnam 1985-1994: no Kedlaya solutions locally (archive starts 1995); answers are agents' own (computer-checked where possible). Cross-check against a published answer source if one turns up (e.g. MAA/AMM write-ups) — REPORT TO USER.
+- USAMO 1984 P3 (wiki solution wrong; extremes need checking) and 1987 P4 (ambiguous statement; read with line varying) carry reviewNotes. Many 1984-88 wiki pages lacked solutions; proofs are agents' own.
+- USAMO 2026 P1 and P3: Evan Chen notes had no solutions yet; proofs are the agent's own (brute-force / sympy checked) — human glance worthwhile.
+- USAMO 1981 P4: wiki statement is a garbled Kalva paraphrase; agent used reconstructed original wording (reviewNote) — confirm against an official source.
+- tools/pdf.py: crop box may not line up with 'render --grid' labels on some pages (seen on putnam 2016 problems PDF); investigate.
+- CMO 1969-1993: no solutions in local PDFs (CMS problem sheets only); proofs are agents' own — REPORT TO USER (CMS book 'The Canadian Mathematical Olympiad 1969-1993' has official solutions).
+- cmo-1987 P3: agent found 5 angles (180/7, 36, 45, 72, 540/7 deg) by case analysis, no official solution to compare; cmo-1988 P5 assumes positive integers (statement under-determined).
+- cmo-1978 #5 and cmo-1980 #5: agent's own answers (4-4 tie possible; regular octahedron), no official solution to compare.
+- vjimc 1993: prompts edited to fix false statements (cat1 P2 '3x3', cat2 P3 '(real) roots', cat2 P1 'prime' dropped); cat2 P1-P2 proofs are agent's own (no official solution).
+- cmo-2001 P2 (answer 35, 31 accepted: official admits flaw) and P5(b) (agent gives t=sqrt2 only; official lists 2sin15,2sin45,2sin75 but x=y=0 for two of them) -- REVIEW.

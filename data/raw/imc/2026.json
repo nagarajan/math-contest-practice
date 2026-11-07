@@ -1,0 +1,378 @@
+[
+  {
+    "id": "imc-2026-01",
+    "bank": "imc",
+    "source": {
+      "contest": "IMC",
+      "paper": "Day 1",
+      "year": 2026,
+      "number": 1,
+      "url": "https://www.imc-math.org.uk/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Show that the equation $\\cos(\\cos x)=\\sin(\\sin x)$ has no real solutions.",
+    "image": null,
+    "choices": null,
+    "answer": "Rewrite as $\\sin\\left(\\frac\\pi2-\\cos x\\right)=\\sin(\\sin x)$; the size bounds force $\\sin x\\pm\\cos x=\\frac\\pi2$, impossible since $|\\sin x\\pm\\cos x|\\le\\sqrt2<\\frac\\pi2$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Solve $\\sin A=\\sin B$",
+        "body": "Suppose $\\cos(\\cos x)=\\sin(\\sin x)$. Since $\\cos t=\\sin\\left(\\frac\\pi2-t\\right)$, this is $\\sin A=\\sin B$ with\n$$A=\\frac\\pi2-\\cos x\\in\\left[\\frac\\pi2-1,\\frac\\pi2+1\\right],\\qquad B=\\sin x\\in[-1,1].$$\n$\\sin A=\\sin B$ holds iff $A-B=2k\\pi$ or $A+B=(2k+1)\\pi$ for some $k\\in\\mathbb Z$. Both $A-B$ and $A+B$ lie in $\\left[\\frac\\pi2-2,\\frac\\pi2+2\\right]\\subset(-\\pi,2\\pi)$ (as $2<\\frac{3\\pi}2$ and $\\frac\\pi2-2>-\\pi$). The only multiple of $2\\pi$ there is $0$, and the only odd multiple of $\\pi$ is $\\pi$. Hence\n$$\\frac\\pi2-\\cos x=\\sin x\\qquad\\text{or}\\qquad\\frac\\pi2-\\cos x=\\pi-\\sin x,$$\ni.e. $\\sin x+\\cos x=\\frac\\pi2$ or $\\sin x-\\cos x=\\frac\\pi2$. But $\\sin x\\pm\\cos x=\\sqrt2\\sin\\left(x\\pm\\frac\\pi4\\right)\\le\\sqrt2<\\frac\\pi2$ (as $\\pi>2\\sqrt2$). Contradiction, so there are no real solutions. ∎"
+      },
+      {
+        "title": "A strict inequality",
+        "body": "We show $\\cos(\\cos x)>\\sin(\\sin x)$ for all $x$. Let $s=|\\sin x|$, $c=|\\cos x|$, both in $[0,1]$. As $\\cos$ is even, $\\cos(\\cos x)=\\cos c=\\sin\\left(\\frac\\pi2-c\\right)$, with $\\frac\\pi2-c\\in\\left[\\frac\\pi2-1,\\frac\\pi2\\right]\\subset\\left[0,\\frac\\pi2\\right]$. Also $\\sin(\\sin x)\\le\\sin s$ (it equals $\\pm\\sin s$, and $\\sin s\\ge0$).\n\nNow $s+c\\le\\sqrt{2(s^2+c^2)}=\\sqrt2<\\frac\\pi2$, so $0\\le s<\\frac\\pi2-c\\le\\frac\\pi2$. Since $\\sin$ is strictly increasing on $\\left[0,\\frac\\pi2\\right]$,\n$$\\sin(\\sin x)\\le\\sin s<\\sin\\left(\\frac\\pi2-c\\right)=\\cos(\\cos x).$$\nSo the equation has no real solutions. ∎"
+      }
+    ],
+    "topics": [
+      "trigonometry"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imc-2026-02",
+    "bank": "imc",
+    "source": {
+      "contest": "IMC",
+      "paper": "Day 1",
+      "year": 2026,
+      "number": 2,
+      "url": "https://www.imc-math.org.uk/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "text",
+    "prompt": "Let $n$ be a positive integer. Suppose that $A$ and $B$ are $n\\times n$ matrices with real entries such that\n$$A^\\top A+BB^\\top=AB+BA,$$\nwhere $X^\\top$ denotes the transpose of matrix $X$. Does this imply that $AB=BA$?",
+    "image": null,
+    "choices": null,
+    "answer": "Yes",
+    "acceptedAnswers": [
+      "yes",
+      "Yes, AB = BA",
+      "yes it does",
+      "true",
+      "it does"
+    ],
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Take the trace",
+        "body": "**Answer: yes.**\n\nWrite $A=(a_{ij})$, $B=(b_{ij})$. Taking traces, and using $\\operatorname{tr}(A^\\top A)=\\sum a_{ij}^2$, $\\operatorname{tr}(BB^\\top)=\\sum b_{ij}^2=\\sum b_{ji}^2$ and $\\operatorname{tr}(AB)=\\operatorname{tr}(BA)=\\sum_{i,j}a_{ij}b_{ji}$:\n$$0=\\operatorname{tr}(A^\\top A+BB^\\top-AB-BA)=\\sum_{i,j}\\big(a_{ij}^2+b_{ji}^2-2a_{ij}b_{ji}\\big)=\\sum_{i,j}(a_{ij}-b_{ji})^2 .$$\nHence $a_{ij}=b_{ji}$ for all $i,j$, i.e. $B=A^\\top$. Then $BB^\\top=A^\\top A=BA$, and the hypothesis becomes $2BA=AB+BA$, i.e. $AB=BA$. ∎\n\n(Conversely, such pairs exist: $B=A^\\top$ with $A$ normal.)"
+      },
+      {
+        "title": "A positive semidefinite matrix with trace zero",
+        "body": "Expanding, $(A-B^\\top)^\\top(A-B^\\top)=A^\\top A-A^\\top B^\\top-BA+BB^\\top$, so the hypothesis says\n$$M:=(A-B^\\top)^\\top(A-B^\\top)=AB-A^\\top B^\\top=AB-(BA)^\\top .$$\n$M$ is symmetric positive semidefinite, and $\\operatorname{tr}M=\\operatorname{tr}(AB)-\\operatorname{tr}(BA)=0$. A positive semidefinite matrix with zero trace has all eigenvalues $0$ and, being diagonalisable, is $0$. So $\\|(A-B^\\top)v\\|^2=v^\\top Mv=0$ for all $v$, i.e. $B=A^\\top$, and we finish as in the first solution: $AB=BA$. **Answer: yes.** ∎"
+      }
+    ],
+    "topics": [
+      "linear-algebra"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imc-2026-03",
+    "bank": "imc",
+    "source": {
+      "contest": "IMC",
+      "paper": "Day 1",
+      "year": 2026,
+      "number": 3,
+      "url": "https://www.imc-math.org.uk/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Consider a deck of $n\\ge2$ cards labeled $1,2,\\ldots,n$. An *alternating shuffle* of the deck is performed as follows. We split the deck into two non-empty stacks. We then sort the first stack in increasing order, and the second stack in decreasing order. Finally, we alternately take cards from the first and second stacks (starting with the first). If one of the stacks runs out, the remaining cards from the other stack are placed at the end. How many different final orders of the deck can be obtained in this way?\n\n*Example:* Suppose $n=6$, the first stack is $A=(1,3)$, and the second stack is $B=(6,5,4,2)$. Then the order resulting from the alternating shuffle is $(1,6,3,5,4,2)$.",
+    "image": null,
+    "choices": null,
+    "answer": "$2^n-F_{n+1}$ (Fibonacci numbers, $F_1=F_2=1$)",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "answerDisplay": null,
+    "solutions": [
+      {
+        "title": "Count (order, stack size) pairs and subtract coincidences",
+        "body": "**Answer: $2^n-F_{n+1}$**, where $F_1=F_2=1$, $F_{k+1}=F_k+F_{k-1}$ are the Fibonacci numbers (e.g. $n=2,3,4,5$: $2,5,11,24$).\n\n**Patterns.** If the first stack has $a$ cards ($b=n-a$), the positions receiving cards of the first stack are fixed; call the resulting word $\\pi_a\\in\\{\\mathsf A,\\mathsf B\\}^n$. Explicitly:\n* if $a\\le n/2$: $\\pi_a=(\\mathsf{AB})^a\\mathsf B^{n-2a}$ — **all even positions are $\\mathsf B$**, and an odd position $p$ is $\\mathsf A$ iff $p\\le2a-1$;\n* if $a\\ge n/2$: $\\pi_a=(\\mathsf{AB})^{b}\\mathsf A^{a-b}$ — **all odd positions are $\\mathsf A$**, and an even position $p$ is $\\mathsf B$ iff $p\\le2b$.\n\nSay an order $s=(s_1,\\dots,s_n)$ *fits* $\\pi_a$ if its entries at the $\\mathsf A$-positions increase and those at the $\\mathsf B$-positions decrease. The orders produced with first stack of size $a$ are exactly the orders fitting $\\pi_a$, and different first stacks give different orders (the stack is the set of entries at the $\\mathsf A$-positions). We also allow $a=0$ and $a=n$ (they give the decreasing and the increasing order; at the end we check that these also arise with two non-empty stacks). Then\n$$\\#\\text{orders}=\\sum_{a=0}^n\\binom na-\\sum_s\\big(m(s)-1\\big)=2^n-\\sum_s\\big(m(s)-1\\big),$$\nwhere $m(s)$ is the number of $a$ that $s$ fits.\n\n**Step 1: $s$ cannot fit $\\pi_a$ and $\\pi_{a'}$ with $a'\\ge a+2$.** Two positions that are both $\\mathsf B$ in one pattern and both $\\mathsf A$ in the other force opposite inequalities between the two entries. We exhibit such positions.\n* $a'\\le n/2$: odd positions $2a+1<2a+3\\le2a'-1$ are $\\mathsf B$ in $\\pi_a$ and $\\mathsf A$ in $\\pi_{a'}$.\n* $a\\ge n/2$: with $b=n-a$, $b'=n-a'\\le b-2$, even positions $2b'+2<2b'+4\\le2b$ are $\\mathsf B$ in $\\pi_a$ and $\\mathsf A$ in $\\pi_{a'}$.\n* $a<n/2<a'$: in $\\pi_a$, positions $n-1,n$ are both $\\mathsf B$ (position $n>2a$; position $n-1$ is even, or odd and $>2a-1$). In $\\pi_{a'}$ both are $\\mathsf A$ (position $n>2b'$; position $n-1$ is odd, or even and $>2b'$) unless $n$ is odd and $a'=\\frac{n+1}2$. In that exceptional case $a\\le\\frac{n-3}2$, so odd positions $2a+1<2a+3\\le n$ are $\\mathsf B$ in $\\pi_a$ and $\\mathsf A$ in $\\pi_{a'}$ (all odd positions are $\\mathsf A$ there).\n\nHence $m(s)\\le2$, and if $m(s)=2$ the two values are consecutive. So $\\sum_s(m(s)-1)=\\sum_{a=0}^{n-1}c_a$, where $c_a$ is the number of orders fitting both $\\pi_a$ and $\\pi_{a+1}$.\n\n**Step 2: $c_a$ for $2a+1\\le n$.** Here $\\pi_{a+1}$ differs from $\\pi_a$ only at position $2a+1$. Fitting both means\n$$s_1<s_3<\\dots<s_{2a-1}<s_{2a+1},\\qquad s_2>s_4>\\dots>s_{2a}>s_{2a+1}>s_{2a+2}>\\dots>s_n .$$\nThe entry $x=s_{2a+1}$ exceeds the $a$ entries $s_1,\\dots,s_{2a-1}$ and the $n-2a-1$ entries $s_{2a+2},\\dots,s_n$, and is below the $a$ entries $s_2,\\dots,s_{2a}$; so $x=n-a$, the entries $s_2,\\dots,s_{2a}$ are $n,n-1,\\dots,n-a+1$, and $\\{1,\\dots,n-a-1\\}$ is split into an $a$-element set (placed increasingly at $s_1,\\dots,s_{2a-1}$) and the rest (placed decreasingly at the end). Thus $c_a=\\binom{n-a-1}{a}$.\n\n**Step 3: $c_a$ for $2a\\ge n$** ($b=n-a\\ge1$). Now the patterns differ only at position $2b$, and fitting both means\n$$s_1<s_3<\\dots<s_{2b-1}<s_{2b}<s_{2b+1}<\\dots<s_n,\\qquad s_2>s_4>\\dots>s_{2b} .$$\nSo $s_{2b}$ exceeds exactly the $b$ entries $s_1,\\dots,s_{2b-1}$ (odd positions), hence $s_{2b}=b+1$ and those entries are $1,\\dots,b$ in order, while $\\{b+2,\\dots,n\\}$ is split into a $(b-1)$-set (decreasing at $s_2,\\dots,s_{2b-2}$) and the rest (increasing at the end). Thus $c_a=\\binom{n-b-1}{b-1}$.\n\n**Step 4: summing.** Using the identity $\\sum_{j\\ge0}\\binom{m-j}{j}=F_{m+1}$,\n$$\\sum_{a=0}^{n-1}c_a=\\sum_{a\\ge0}\\binom{n-1-a}{a}+\\sum_{b\\ge1}\\binom{n-2-(b-1)}{b-1}=F_n+F_{n-1}=F_{n+1}.$$\n(The two ranges $2a+1\\le n$ and $2a\\ge n$ cover $0\\le a\\le n-1$, and the binomials vanish outside them.)\n\n**Non-empty stacks.** $c_0=1$: the decreasing order fits $\\pi_0$ and $\\pi_1$; $c_{n-1}=1$: the increasing order fits $\\pi_{n-1}$ and $\\pi_n$. So the orders from $a=0$ and $a=n$ also arise with both stacks non-empty, and the number of different orders is\n$$2^n-F_{n+1}.$$ ∎"
+      }
+    ],
+    "topics": [
+      "counting",
+      "sequences-series"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imc-2026-04",
+    "bank": "imc",
+    "source": {
+      "contest": "IMC",
+      "paper": "Day 1",
+      "year": 2026,
+      "number": 4,
+      "url": "https://www.imc-math.org.uk/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Let $x_1>0$. Define the sequence $\\{x_n\\}$ by the recurrence\n$$x_{n+1}=\\arctan\\left(\\frac{x_1+x_2+\\cdots+x_n}{n}\\right)\\qquad\\text{for all } n\\ge1.$$\nFind $\\displaystyle\\lim_{n\\to\\infty}x_n\\sqrt{\\ln n}$, where $\\ln x$ denotes the natural logarithm of $x$.",
+    "image": null,
+    "choices": null,
+    "answer": "sqrt(6)/2",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "answerDisplay": "$\\frac{\\sqrt{6}}{2}$",
+    "solutions": [
+      {
+        "title": "Averages, then Stolz–Cesàro on $1/y_n^2$",
+        "body": "**Answer: $\\sqrt{3/2}=\\dfrac{\\sqrt6}2$.**\n\nLet $y_n=\\frac{x_1+\\dots+x_n}n$, so $x_{n+1}=\\arctan y_n$ and\n$$y_{n+1}=\\frac{ny_n+x_{n+1}}{n+1},\\qquad y_n-y_{n+1}=\\frac{y_n-\\arctan y_n}{n+1}.\\tag{1}$$\nBy induction all $x_n,y_n>0$. Since $\\arctan t<t$ for $t>0$, (1) shows $y_n$ is strictly decreasing, so $y_n\\to y\\ge0$. Then $x_{n+1}=\\arctan y_n\\to\\arctan y$, and the averages $y_n$ of the $x_k$ tend to the same limit (Cesàro): $y=\\arctan y$, which forces $y=0$. Hence $y_n\\to0$ and $x_{n+1}/y_n=\\arctan(y_n)/y_n\\to1$.\n\n**Stolz–Cesàro.** Let $u_n=1/y_n^2$ (increasing to $\\infty$) and $v_n=\\ln n$. By (1),\n$$u_{n+1}-u_n=\\frac{(y_n-y_{n+1})(y_n+y_{n+1})}{y_n^2y_{n+1}^2},\\qquad y_n-y_{n+1}=\\frac{y_n-\\arctan y_n}{n+1}.$$\nSince $t-\\arctan t\\sim t^3/3$ as $t\\to0$, we get $y_n-y_{n+1}\\sim\\frac{y_n^3}{3n}$; in particular $y_{n+1}/y_n\\to1$. Therefore\n$$u_{n+1}-u_n\\sim\\frac{2y_n\\cdot y_n^3/(3n)}{y_n^4}=\\frac2{3n},\\qquad v_{n+1}-v_n=\\ln\\left(1+\\frac1n\\right)\\sim\\frac1n,$$\nso $\\frac{u_{n+1}-u_n}{v_{n+1}-v_n}\\to\\frac23$ and by Stolz–Cesàro $\\frac{1}{y_n^2\\ln n}\\to\\frac23$, i.e. $y_n\\sqrt{\\ln n}\\to\\sqrt{3/2}$.\n\n**Back to $x_n$.** $x_{n+1}\\sqrt{\\ln(n+1)}=\\frac{x_{n+1}}{y_n}\\cdot y_n\\sqrt{\\ln n}\\cdot\\sqrt{\\frac{\\ln(n+1)}{\\ln n}}\\to1\\cdot\\sqrt{\\tfrac32}\\cdot1$.\n\n**Answer: $\\displaystyle\\lim_{n\\to\\infty}x_n\\sqrt{\\ln n}=\\frac{\\sqrt6}2$.** ∎"
+      }
+    ],
+    "topics": [
+      "sequences-series",
+      "real-analysis",
+      "calculus"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imc-2026-05",
+    "bank": "imc",
+    "source": {
+      "contest": "IMC",
+      "paper": "Day 1",
+      "year": 2026,
+      "number": 5,
+      "url": "https://www.imc-math.org.uk/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Prove that there exists a constant $C>0$ such that for every pair $A,B$ of positive integers, there is a real polynomial $p(x)$ with\n$$p(0)^2>\\sum_{i=1}^Ap(-i)^2+\\sum_{i=1}^Bp(i)^2\\qquad\\text{and}\\qquad\\deg p<C\\sqrt{AB}.$$",
+    "image": null,
+    "choices": null,
+    "answer": "Take $p(x)=T_k\\!\\left(u_0+\\frac{1+u_0}Ax\\right)/x$, where $T_k$ is the Chebyshev polynomial of odd degree $k\\approx7\\sqrt{AB}$ and $u_0$ a suitable root of $T_k$: then $|p(x)|\\le1/|x|$ on $[-A,B]$ while $|p(0)|=\\frac{1+u_0}A|T_k'(u_0)|>2$; $C=9$ works.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "A rescaled Chebyshev polynomial",
+        "body": "We show $C=9$ works. By symmetry ($p(x)\\mapsto p(-x)$) assume $A\\ge B$. Let $T_k$ be the Chebyshev polynomial, $T_k(\\cos t)=\\cos kt$; recall $|T_k|\\le1$ on $[-1,1]$, the roots of $T_k$ are $\\cos\\frac{(2j-1)\\pi}{2k}$, and differentiating $T_k(\\cos t)=\\cos kt$ gives $T_k'(\\cos t)=\\frac{k\\sin kt}{\\sin t}$.\n\n**Choices.** Let $k$ be an odd integer with $7\\sqrt{AB}\\le k\\le7\\sqrt{AB}+2$. Let $\\omega=\\arccos\\frac{A-B}{A+B}\\in\\left(0,\\frac\\pi2\\right]$, and let $\\omega_0$ be the smallest number of the form $\\frac{(2j-1)\\pi}{2k}$ with $\\omega_0\\ge\\omega$; put $u_0=\\cos\\omega_0$, a root of $T_k$. Since $k$ is odd, $\\frac\\pi2$ is of this form, so $\\omega\\le\\omega_0\\le\\frac\\pi2$ and $u_0\\ge0$; and since consecutive such numbers differ by $\\frac\\pi k$, $\\omega_0<\\omega+\\frac\\pi k$. Also $u_0\\le\\frac{A-B}{A+B}$.\n\n**The polynomial.** Let $L(x)=u_0+\\frac{1+u_0}Ax$ and $p(x)=\\dfrac{T_k(L(x))}{x}$. As $T_k(L(0))=T_k(u_0)=0$, $p$ is a polynomial of degree $k-1\\le7\\sqrt{AB}+1<9\\sqrt{AB}$.\n\n**Small values at $-A,\\dots,-1,1,\\dots,B$.** $L$ is increasing, $L(-A)=-1$, and using $1+u_0\\le\\frac{2A}{A+B}$,\n$$L(B)\\le\\frac{A-B}{A+B}+\\frac{2B}{A+B}=1 .$$\nSo $|T_k(L(x))|\\le1$ on $[-A,B]$, hence $|p(x)|\\le\\frac1{|x|}$ there and\n$$\\sum_{i=1}^Ap(-i)^2+\\sum_{i=1}^Bp(i)^2\\le2\\sum_{i\\ge1}\\frac1{i^2}=\\frac{\\pi^2}3<4 .$$\n\n**Large value at $0$.** $p(0)=\\frac{1+u_0}A\\,T_k'(u_0)$, so $|p(0)|\\ge\\frac1A|T_k'(u_0)|=\\frac{k\\,|\\sin k\\omega_0|}{A\\sin\\omega_0}=\\frac{k}{A\\sin\\omega_0}$, because $k\\omega_0$ is an odd multiple of $\\frac\\pi2$. Now, as $\\sin$ is $1$-Lipschitz,\n$$\\sin\\omega_0\\le\\sin\\omega+\\frac\\pi k\\le\\sqrt{1-\\left(\\tfrac{A-B}{A+B}\\right)^2}+\\frac{\\pi}{7\\sqrt{AB}}=\\frac{2\\sqrt{AB}}{A+B}+\\frac{\\pi}{7\\sqrt{AB}}<2\\sqrt{\\frac BA}+\\sqrt{\\frac BA}=3\\sqrt{\\frac BA},$$\nusing $\\frac{2\\sqrt{AB}}{A+B}\\le\\frac{2\\sqrt{AB}}A$ and $\\frac{\\pi}{7\\sqrt{AB}}<\\frac1{\\sqrt{AB}}\\le\\frac{\\sqrt B}{\\sqrt A}$ (as $B\\ge1$). Therefore\n$$|p(0)|>\\frac{7\\sqrt{AB}}{A\\cdot3\\sqrt{B/A}}=\\frac73>2,$$\nand $p(0)^2>4>\\sum_{i=1}^Ap(-i)^2+\\sum_{i=1}^Bp(i)^2$. ∎"
+      }
+    ],
+    "topics": [
+      "polynomials",
+      "analysis",
+      "inequalities"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imc-2026-06",
+    "bank": "imc",
+    "source": {
+      "contest": "IMC",
+      "paper": "Day 2",
+      "year": 2026,
+      "number": 6,
+      "url": "https://www.imc-math.org.uk/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "text",
+    "prompt": "(a) Is there a differentiable function $f:\\mathbb R\\to\\mathbb R$ such that\n$$f'(f(x))=x$$\nfor every $x\\in\\mathbb R$?\n\n(b) Is there a differentiable function $f:\\mathbb R\\to\\mathbb R$ such that\n$$f'(f(x))=|x|$$\nfor every $x\\in\\mathbb R$?",
+    "image": null,
+    "choices": null,
+    "answer": "a) No; b) Yes",
+    "acceptedAnswers": [
+      "no, yes",
+      "No; Yes",
+      "no yes",
+      "no; yes",
+      "a) no, b) yes",
+      "a no b yes",
+      "(a) No (b) Yes",
+      "a) No b) Yes",
+      "a: no, b: yes"
+    ],
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Monotonicity, and a power-function example",
+        "body": "**Answer: (a) No; (b) Yes.**\n\n**(a)** Suppose such $f$ exists. If $f(x)=f(y)$ then $x=f'(f(x))=f'(f(y))=y$, so $f$ is injective. A continuous injective function on $\\mathbb R$ is strictly monotone. If $f$ is increasing, then $f'\\ge0$ everywhere, so $-1=f'(f(-1))\\ge0$, a contradiction; if $f$ is decreasing, $f'\\le0$ and $1=f'(f(1))\\le0$, a contradiction. So no such function exists.\n\n**(b)** Try $f(x)=k|x|^a$ with $k>0$, $a>1$. It is differentiable on $\\mathbb R$ with $f'(x)=ka\\operatorname{sign}(x)|x|^{a-1}$ (and $f'(0)=0$, since $a>1$). As $f(x)\\ge0$,\n$$f'(f(x))=ka\\,(k|x|^a)^{a-1}=a\\,k^a\\,|x|^{a^2-a}.$$\nChoose $a=\\frac{1+\\sqrt5}2>1$, so that $a^2-a=1$, and $k=a^{-1/a}$, so that $ak^a=1$. Then $f'(f(x))=|x|$ for all $x$. So\n$$f(x)=a^{-1/a}|x|^{a},\\qquad a=\\tfrac{1+\\sqrt5}2,$$\nis an example. ∎"
+      }
+    ],
+    "topics": [
+      "calculus",
+      "functional-equations",
+      "real-analysis"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imc-2026-07",
+    "bank": "imc",
+    "source": {
+      "contest": "IMC",
+      "paper": "Day 2",
+      "year": 2026,
+      "number": 7,
+      "url": "https://www.imc-math.org.uk/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "For a continuous function $f:[0,1]\\to\\mathbb R$, let $S(f)$ be the union of all straight segments in the plane joining points $(x,0)$ and $(f(x),1)$, where $x\\in[0,1]$. Let $A(f)$ be the area of $S(f)$. Find the infimum of $A(f)$ over all continuous $f$.",
+    "image": null,
+    "choices": null,
+    "answer": "sqrt(2)-1",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "answerDisplay": "$\\sqrt{2}-1$",
+    "solutions": [
+      {
+        "title": "Horizontal sections",
+        "body": "**Answer: $\\sqrt2-1$** (and it is attained).\n\n**Lower bound.** For $s\\in[0,1]$ let $f_s(x)=x+s(f(x)-x)$. The point $(f_s(x),s)$ lies on the segment from $(x,0)$ to $(f(x),1)$, so it is in $S(f)$. As $f_s$ is continuous on $[0,1]$, by the intermediate value theorem it takes every value between $f_s(0)$ and $f_s(1)$; so the horizontal section of $S(f)$ at height $s$ contains a segment of length\n$$|f_s(1)-f_s(0)|=|1-cs|,\\qquad c=f(0)-f(1)+1 .$$\n$S(f)$ is compact (the image of $[0,1]^2$ under $(x,s)\\mapsto(f_s(x),s)$), and by Fubini\n$$A(f)\\ge\\int_0^1|1-cs|\\,ds=\\begin{cases}1-\\dfrac c2\\ \\ge\\dfrac12,& c\\le1,\\\\[2mm] \\dfrac c2+\\dfrac1c-1,& c>1.\\end{cases}$$\nFor $c>1$, by AM–GM $\\frac c2+\\frac1c\\ge2\\sqrt{\\frac12}=\\sqrt2$, with equality at $c=\\sqrt2$. Since $\\sqrt2-1<\\frac12$, in all cases $A(f)\\ge\\sqrt2-1$.\n\n**Attained.** Take $f(x)=(1-\\sqrt2)x$, so $c=\\sqrt2$. Then $f_s(x)=(1-\\sqrt2s)x$ is linear in $x$, so the section of $S(f)$ at height $s$ is exactly the segment between $0$ and $1-\\sqrt2s$, of length $|1-\\sqrt2s|$. Hence\n$$A(f)=\\int_0^1|1-\\sqrt2s|\\,ds=\\frac{\\sqrt2}2+\\frac1{\\sqrt2}-1=\\sqrt2-1 .$$\n**Answer: $\\sqrt2-1$.** ∎"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "calculus",
+      "real-analysis"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imc-2026-08",
+    "bank": "imc",
+    "source": {
+      "contest": "IMC",
+      "paper": "Day 2",
+      "year": 2026,
+      "number": 8,
+      "url": "https://www.imc-math.org.uk/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $n\\ge5$, and suppose that $A=(a_{ij})$ is a real symmetric $n\\times n$ matrix such that\n$$a_{ii}=0\\qquad\\text{and}\\qquad a_{ij}\\in\\{-1,1\\}\\ \\text{ for } i\\ne j.$$\nAssume that the scalar products of any two distinct rows of $A$ have the same value. Let $\\lambda_1,\\ldots,\\lambda_n$ be the eigenvalues of $A$. Prove that\n$$\\sum_{i=1}^n|\\lambda_i|\\ge2n-2$$\nand determine all matrices for which equality holds.",
+    "image": null,
+    "choices": null,
+    "answer": "Equality exactly for $A=J-I$ and $A=I-J$ ($J$ = all-ones matrix). With $c$ the common scalar product, $A^2=(n-1-c)I+cJ$, so $\\sum|\\lambda_i|=\\sqrt{(n-1)(c+1)}+(n-1)\\sqrt{n-1-c}$, concave in $c\\in[-1,n-2]$, minimal $2n-2$ only at $c=n-2$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Compute $A^2$",
+        "body": "Let $c$ be the common scalar product of distinct rows and $J$ the all-ones matrix. Each row has squared length $n-1$, and $A$ is symmetric, so $(A^2)_{ij}=\\langle\\text{row }i,\\text{row }j\\rangle$ and\n$$A^2=(n-1-c)I+cJ.\\tag{1}$$\n$J$ has eigenvalue $n$ on $\\mathbf 1=(1,\\dots,1)^\\top$ and $0$ on $\\mathbf 1^\\perp$, so $A^2$ has eigenvalues $(n-1)(c+1)$ (once) and $n-1-c$ (with multiplicity $n-1$).\n\n**Range of $c$.** $A^2$ is positive semidefinite, so $c\\ge-1$. For $i\\ne j$, $c=\\sum_{k\\ne i,j}a_{ik}a_{jk}\\le n-2$.\n\n**The sum.** $A$ is real symmetric, so the eigenvalues of $A^2$, with multiplicity, are $\\lambda_1^2,\\dots,\\lambda_n^2$. Hence\n$$\\sum_{i=1}^n|\\lambda_i|=g(c):=\\sqrt{(n-1)(c+1)}+(n-1)\\sqrt{n-1-c}.$$\n$g$ is concave on $[-1,n-2]$, with $g(-1)=(n-1)\\sqrt n$ and $g(n-2)=(n-1)+(n-1)=2n-2$. Since $n\\ge5$, $\\sqrt n>2$, so $g(-1)>g(n-2)$. By concavity, for $c=t(-1)+(1-t)(n-2)$, $g(c)\\ge tg(-1)+(1-t)g(n-2)\\ge2n-2$, with equality only if $t=0$, i.e. $c=n-2$. This proves $\\sum|\\lambda_i|\\ge2n-2$.\n\n**Equality.** Then $c=n-2$ and $A^2=I+(n-2)J$. $A$ commutes with $A^2$, hence with $J$ (as $n-2\\ne0$). $AJ=JA$ means all row sums and column sums are equal: $A\\mathbf 1=r\\mathbf 1$. Applying (1): $r^2\\mathbf 1=A^2\\mathbf 1=(1+(n-2)n)\\mathbf 1=(n-1)^2\\mathbf 1$, so $r=\\pm(n-1)$. A row has $n-1$ off-diagonal entries $\\pm1$, so its sum is $\\pm(n-1)$ only if they are all equal. All rows have the same sum $r$, hence $A=J-I$ (if $r=n-1$) or $A=I-J$ (if $r=-(n-1)$).\n\nConversely, both matrices satisfy the hypotheses (scalar products $n-2$), with spectra $\\{n-1,-1,\\dots,-1\\}$ and $\\{-(n-1),1,\\dots,1\\}$, so $\\sum|\\lambda_i|=2n-2$.\n\n**Equality holds exactly for $A=J-I$ and $A=I-J$.** ∎"
+      }
+    ],
+    "topics": [
+      "linear-algebra",
+      "inequalities"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imc-2026-09",
+    "bank": "imc",
+    "source": {
+      "contest": "IMC",
+      "paper": "Day 2",
+      "year": 2026,
+      "number": 9,
+      "url": "https://www.imc-math.org.uk/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $a_1,a_2,\\ldots$ be an infinite sequence of positive real numbers satisfying\n$$a_1+a_2+\\cdots+a_{2n-1}=a_n^2$$\nfor all positive integers $n$. Prove that $a_n\\ge2n-1$ for all positive integers $n$.",
+    "image": null,
+    "choices": null,
+    "answer": "First $\\liminf\\frac{a_n}{2n-1}\\ge1$. Then with $b_n=a_n-(2n-1)$: $b_n(b_n+2(2n-1))=b_1+\\dots+b_{2n-1}$; if $B=\\inf\\frac{b_n}{2n-1}<0$ it is attained at some $k$, giving $B\\le-1$, contradicting $a_k>0$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Asymptotics, then an extremal index",
+        "body": "For $n=1$: $a_1=a_1^2$, so $a_1=1$. Also $a_{n+1}^2-a_n^2=a_{2n}+a_{2n+1}>0$, so $(a_n)$ is increasing.\n\n**Lemma.** $L:=\\liminf_{n\\to\\infty}\\dfrac{a_n}{2n-1}\\ge1$.\n\n*Proof.* Since $a_n\\le a_{n+1}\\le\\dots\\le a_{2n-1}$, $a_n^2\\ge na_n$, so $a_n\\ge n$ and $L\\ge\\frac12$. If $L=\\infty$ we are done. Otherwise let $0<\\varepsilon<L$; there is $i_0$ with $a_i\\ge(L-\\varepsilon)(2i-1)$ for $i\\ge i_0$. For large $n$, using $\\sum_{i=1}^{m}(2i-1)=m^2$,\n$$a_n^2\\ge(L-\\varepsilon)\\sum_{i=i_0}^{2n-1}(2i-1)=(L-\\varepsilon)\\big((2n-1)^2-(i_0-1)^2\\big).$$\nDividing by $(2n-1)^2$ and taking $\\liminf$: $L^2\\ge L-\\varepsilon$. Letting $\\varepsilon\\to0$, $L^2\\ge L$, so $L\\ge1$. $\\square$\n\n**Main argument.** Let $b_n=a_n-(2n-1)$. Since $a_n^2=b_n^2+2(2n-1)b_n+(2n-1)^2$ and $\\sum_{i=1}^{2n-1}(2i-1)=(2n-1)^2$, the condition becomes\n$$b_n\\big(b_n+2(2n-1)\\big)=b_1+b_2+\\dots+b_{2n-1}.\\tag{1}$$\nLet $B=\\inf_n\\frac{b_n}{2n-1}$; we must show $B\\ge0$. Suppose $B<0$. By the Lemma, $\\liminf\\frac{b_n}{2n-1}=L-1\\ge0$, so only finitely many $n$ have $\\frac{b_n}{2n-1}<\\frac B2$; hence the infimum is a minimum, attained at some $k$: $b_k=B(2k-1)$, and $b_i\\ge B(2i-1)$ for all $i$. Applying (1) with $n=k$:\n$$B(B+2)(2k-1)^2=b_k\\big(b_k+2(2k-1)\\big)=\\sum_{i=1}^{2k-1}b_i\\ge B\\sum_{i=1}^{2k-1}(2i-1)=B(2k-1)^2.$$\nSo $B(B+2)\\ge B$, and dividing by $B<0$: $B+2\\le1$, i.e. $B\\le-1$. But $a_k>0$ means $b_k>-(2k-1)$, i.e. $B=\\frac{b_k}{2k-1}>-1$. Contradiction.\n\nHence $B\\ge0$, i.e. $a_n\\ge2n-1$ for all $n$. ∎"
+      }
+    ],
+    "topics": [
+      "sequences-series",
+      "inequalities",
+      "real-analysis"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imc-2026-10",
+    "bank": "imc",
+    "source": {
+      "contest": "IMC",
+      "paper": "Day 2",
+      "year": 2026,
+      "number": 10,
+      "url": "https://www.imc-math.org.uk/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "text",
+    "prompt": "An *infinite chessboard of size $d>0$* is obtained by colouring the interiors of the squares of an infinite square grid of side length $d$ alternately white and black following the usual chessboard pattern. The points belonging to the grid lines have neither colour and the grid may be translated and rotated arbitrarily in the plane.\n\nIs it true that for any finite set of points $p_1,\\ldots,p_n$ in the plane, there exist $d\\in(0,1)$ and an infinite chessboard of size $d$ such that all the points $p_i$ lie in white squares?",
+    "image": null,
+    "choices": null,
+    "answer": "Yes",
+    "acceptedAnswers": [
+      "yes",
+      "true",
+      "Yes, it is true",
+      "it is true",
+      "yes it is"
+    ],
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Simultaneous Dirichlet approximation",
+        "body": "**Answer: yes.**\n\n**Lemma (simultaneous Dirichlet approximation).** For reals $\\alpha_1,\\dots,\\alpha_m$ and a positive integer $Q$ there are an integer $1\\le K\\le Q^m$ and integers $p_1,\\dots,p_m$ with $|K\\alpha_j-p_j|<\\frac1Q$ for all $j$.\n\n*Proof.* Consider the $Q^m+1$ points $(\\{k\\alpha_1\\},\\dots,\\{k\\alpha_m\\})\\in[0,1)^m$, $k=0,1,\\dots,Q^m$ ($\\{\\cdot\\}$ = fractional part). Divide $[0,1)^m$ into $Q^m$ half-open cubes of side $\\frac1Q$. Two points, for $k<\\ell$, lie in the same cube. With $K=\\ell-k$ and $p_j=\\lfloor\\ell\\alpha_j\\rfloor-\\lfloor k\\alpha_j\\rfloor$ we get $K\\alpha_j-p_j=\\{\\ell\\alpha_j\\}-\\{k\\alpha_j\\}\\in\\left(-\\frac1Q,\\frac1Q\\right)$. $\\square$\n\n**Construction.** Let $p_i=(x_i,y_i)$, $i=1,\\dots,n$. Apply the Lemma to the $2n$ numbers $x_1,\\dots,x_n,y_1,\\dots,y_n$ with $Q=5$: there are an integer $K\\ge1$ and integers $u_i,v_i$ with\n$$Kx_i=u_i+\\delta_i,\\quad Ky_i=v_i+\\eta_i,\\qquad|\\delta_i|,|\\eta_i|<\\tfrac15 .$$\nTake the axis-parallel grid of side $d=\\frac1{2K}\\in(0,1)$ whose lines are $x=d\\left(m-\\frac12\\right)$ and $y=d\\left(m-\\frac12\\right)$, $m\\in\\mathbb Z$. A point $(x,y)$ off the lines lies in the square with indices $\\left(\\left\\lfloor\\frac xd+\\frac12\\right\\rfloor,\\left\\lfloor\\frac yd+\\frac12\\right\\rfloor\\right)$; colour a square white iff the sum of its indices is even (a valid chessboard colouring).\n\nNow $\\frac{x_i}d+\\frac12=2Kx_i+\\frac12=2u_i+\\left(2\\delta_i+\\frac12\\right)$, and $2\\delta_i+\\frac12\\in\\left(\\frac1{10},\\frac9{10}\\right)\\subset(0,1)$. So $p_i$ is not on a vertical grid line and its first index is $2u_i$; likewise its second index is $2v_i$. The sum $2u_i+2v_i$ is even, so every $p_i$ lies in a white square. ∎"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "geometry"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

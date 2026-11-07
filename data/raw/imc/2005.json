@@ -1,0 +1,449 @@
+[
+  {
+    "id": "imc-2005-01",
+    "bank": "imc",
+    "source": {
+      "contest": "IMC",
+      "paper": "Day 1",
+      "year": 2005,
+      "number": 1,
+      "url": "https://www.imc-math.org.uk/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $A$ be the $n\\times n$ matrix whose $(i,j)$-th entry is $i+j$ for all $i,j=1,2,\\dots,n$. What is the rank of $A$?",
+    "image": null,
+    "choices": null,
+    "answer": "$\\operatorname{rank}A=1$ for $n=1$ and $\\operatorname{rank}A=2$ for $n\\ge2$ ($A=u\\mathbf 1^T+\\mathbf 1u^T$ with $u=(1,\\dots,n)^T$, and the top-left $2\\times2$ minor is $-1$).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Sum of two rank-one matrices",
+        "body": "For $n=1$, $A=(2)$ has rank $1$.\n\nLet $n\\ge2$, $u=(1,2,\\dots,n)^T$ and $\\mathbf 1=(1,\\dots,1)^T$. Then $A=u\\mathbf 1^T+\\mathbf 1u^T$, a sum of two matrices of rank $1$, so $\\operatorname{rank}A\\le2$. The top-left $2\\times2$ minor is\n$$\\det\\begin{pmatrix}2&3\\\\3&4\\end{pmatrix}=8-9=-1\\ne0,$$\nso $\\operatorname{rank}A\\ge2$.\n\n**Answer:** $\\operatorname{rank}A=1$ if $n=1$ and $\\operatorname{rank}A=2$ if $n\\ge2$."
+      },
+      {
+        "title": "Row reduction",
+        "body": "Let $n\\ge2$ and let $R_i=(i+1,i+2,\\dots,i+n)$ be the $i$-th row. Then $R_{i}-R_{i-1}=(1,1,\\dots,1)$ for $i=2,\\dots,n$, so every row is $R_1+(i-1)(1,\\dots,1)$: all rows lie in the span of $R_1=(2,\\dots,n+1)$ and $(1,\\dots,1)$. These two vectors are not proportional (for $n\\ge2$), so the row space has dimension exactly $2$. For $n=1$ the rank is $1$.\n\n**Answer:** $1$ for $n=1$, and $2$ for $n\\ge2$."
+      }
+    ],
+    "topics": [
+      "linear-algebra"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imc-2005-02",
+    "bank": "imc",
+    "source": {
+      "contest": "IMC",
+      "paper": "Day 1",
+      "year": 2005,
+      "number": 2,
+      "url": "https://www.imc-math.org.uk/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "For an integer $n\\ge3$ consider the sets\n$$S_n=\\{(x_1,x_2,\\dots,x_n):\\ \\forall i\\ x_i\\in\\{0,1,2\\}\\},$$\n$$A_n=\\{(x_1,x_2,\\dots,x_n)\\in S_n:\\ \\forall i\\le n-2\\ \\ |\\{x_i,x_{i+1},x_{i+2}\\}|\\ne1\\}$$\nand\n$$B_n=\\{(x_1,x_2,\\dots,x_n)\\in S_n:\\ \\forall i\\le n-1\\ \\ (x_i=x_{i+1}\\Rightarrow x_i\\ne0)\\}.$$\nProve that $|A_{n+1}|=3\\cdot|B_n|$. ($|A|$ denotes the number of elements of the set $A$.)",
+    "image": null,
+    "choices": null,
+    "answer": "Work in $\\mathbb Z_3$: adding a constant to all entries preserves $A_{n+1}$, so one third of $A_{n+1}$ starts with $0$; the difference map $(0,x_2,\\dots,x_{n+1})\\mapsto(x_2-x_1,\\dots,x_{n+1}-x_n)$ is a bijection from these onto $B_n$ (three equal consecutive entries $\\leftrightarrow$ two consecutive zero differences).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Differences modulo 3",
+        "body": "Regard the entries as elements of $\\mathbb Z_3$. In words: $A_{n+1}$ consists of the words of length $n+1$ with no three consecutive equal letters, and $B_n$ of the words of length $n$ with no two consecutive zeros.\n\n**Shifting.** If $x\\in A_{n+1}$ and $c\\in\\mathbb Z_3$, then $(x_1+c,\\dots,x_{n+1}+c)\\in A_{n+1}$, since equality of entries is preserved. This gives a bijection between the elements of $A_{n+1}$ with $x_1=0$ and those with $x_1=c$. Hence exactly a third of $A_{n+1}$ has $x_1=0$:\n$$|A_{n+1}|=3\\,|\\{x\\in A_{n+1}:x_1=0\\}| .$$\n**Differences.** Define\n$$\\Delta(0,x_2,\\dots,x_{n+1})=(y_1,\\dots,y_n),\\qquad y_i=x_{i+1}-x_i .$$\n$\\Delta$ is a bijection from $\\{x\\in\\mathbb Z_3^{n+1}:x_1=0\\}$ onto $\\mathbb Z_3^n$, with inverse $x_1=0$, $x_{i+1}=y_1+\\dots+y_i$. For $1\\le i\\le n-1$,\n$$x_i=x_{i+1}=x_{i+2}\\iff y_i=y_{i+1}=0 .$$\nSo $x$ has three consecutive equal entries iff $y$ has two consecutive zeros, i.e. $x\\in A_{n+1}\\iff\\Delta(x)\\in B_n$. Therefore $|\\{x\\in A_{n+1}:x_1=0\\}|=|B_n|$, and $|A_{n+1}|=3|B_n|$. ∎"
+      },
+      {
+        "title": "Recurrences",
+        "body": "Define $A_n,B_n$ also for $n=1,2$ by the same rules, and let $a_n=|A_n|$, $b_n=|B_n|$.\n\nSplit $A_n$ into $A_n'$ (words ending in two equal letters, $x_{n-1}=x_n$) and $A_n''$ (the rest), with sizes $a_n',a_n''$. A word of $A_{n+1}$ is a word of $A_n$ plus a letter: if the word ends with two equal letters, the new letter must differ ($2$ choices, landing in $A''_{n+1}$); otherwise the new letter may repeat the last one ($1$ choice, landing in $A_{n+1}'$) or not ($2$ choices). So\n$$a_{n+1}'=a_n'',\\qquad a_{n+1}''=2a_n'+2a_n'' ,$$\nhence $a_{n+1}=a_n''+2a_n=2a_n+2a_{n-1}$ (as $a_n''=2a_{n-1}$).\n\nFor $B_n$ split by whether the last letter is $0$ ($b_n'$) or not ($b_n''$): after a $0$ the next letter must be non-zero ($2$ choices), after a non-zero letter anything goes. So $b_{n+1}'=b_n''$, $b_{n+1}''=2b_n'+2b_n''$, and likewise $b_{n+1}=2b_n+2b_{n-1}$.\n\nInitial values: $a_1=3$, $a_2=9$, $a_3=27-3=24$; $b_1=3$, $b_2=9-1=8$. Thus $a_2=3b_1$, $a_3=3b_2$, and since both sequences satisfy the same linear recurrence, $a_{n+1}=3b_n$ for all $n\\ge1$ by induction. ∎"
+      }
+    ],
+    "topics": [
+      "counting"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imc-2005-03",
+    "bank": "imc",
+    "source": {
+      "contest": "IMC",
+      "paper": "Day 1",
+      "year": 2005,
+      "number": 3,
+      "url": "https://www.imc-math.org.uk/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $f:\\mathbb R\\to[0,\\infty)$ be a continuously differentiable function. Prove that\n$$\\left|\\int_0^1f^3(x)\\,dx-f^2(0)\\int_0^1f(x)\\,dx\\right|\\le\\max_{0\\le x\\le1}|f'(x)|\\left(\\int_0^1f(x)\\,dx\\right)^2 .$$",
+    "image": null,
+    "choices": null,
+    "answer": "With $M=\\max|f'|$: $-Mf\\le ff'\\le Mf$; integrate from $0$ to $x$, multiply by $f(x)\\ge0$ and integrate again, using $\\int_0^1f(x)\\int_0^xf\\,dx=\\frac12(\\int_0^1f)^2$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Integrate a pointwise bound twice",
+        "body": "Let $M=\\max_{[0,1]}|f'|$. Since $f\\ge0$ and $-M\\le f'\\le M$,\n$$-Mf(t)\\le f(t)f'(t)\\le Mf(t)\\qquad(t\\in[0,1]).$$\nIntegrating over $[0,x]$:\n$$-M\\int_0^xf\\le\\frac12f^2(x)-\\frac12f^2(0)\\le M\\int_0^xf .$$\nMultiplying by $f(x)\\ge0$:\n$$-Mf(x)\\int_0^xf\\le\\frac12f^3(x)-\\frac12f^2(0)f(x)\\le Mf(x)\\int_0^xf .$$\nWith $F(x)=\\int_0^xf$ we have $\\int_0^1f(x)F(x)\\,dx=\\frac12F(1)^2=\\frac12\\left(\\int_0^1f\\right)^2$. Integrating over $[0,1]$ and multiplying by $2$,\n$$-M\\left(\\int_0^1f\\right)^2\\le\\int_0^1f^3-f^2(0)\\int_0^1f\\le M\\left(\\int_0^1f\\right)^2,$$\nwhich is the claim. ∎"
+      },
+      {
+        "title": "Integration by parts",
+        "body": "Let $M=\\max_{[0,1]}|f'|$ and $F(x)=-\\int_x^1f$, so $F'=f$, $F(1)=0$, $F(0)=-\\int_0^1f$, and $F\\le0$. Integrating by parts,\n$$\\int_0^1f^3=\\int_0^1f^2F'=\\big[f^2F\\big]_0^1-\\int_0^12ff'F=f^2(0)\\int_0^1f-\\int_0^12Fff' .$$\nHence, using $|F|=-F$ and $f\\ge0$,\n$$\\left|\\int_0^1f^3-f^2(0)\\int_0^1f\\right|\\le\\int_0^12|F|f|f'|\\le M\\int_0^12(-F)F'=M\\big[-F^2\\big]_0^1=M\\,F(0)^2=M\\left(\\int_0^1f\\right)^2 .$$\n∎"
+      }
+    ],
+    "topics": [
+      "calculus",
+      "inequalities"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imc-2005-04",
+    "bank": "imc",
+    "source": {
+      "contest": "IMC",
+      "paper": "Day 1",
+      "year": 2005,
+      "number": 4,
+      "url": "https://www.imc-math.org.uk/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Find all polynomials $P(x)=a_nx^n+a_{n-1}x^{n-1}+\\dots+a_1x+a_0$ ($a_n\\ne0$) satisfying the following two conditions:\n\n(i) $(a_0,a_1,\\dots,a_n)$ is a permutation of the numbers $(0,1,\\dots,n)$, and\n\n(ii) all roots of $P(x)$ are rational numbers.",
+    "image": null,
+    "choices": null,
+    "answer": "Exactly five: $x$, $x^2+2x$, $2x^2+x$, $x^3+3x^2+2x$, $2x^3+3x^2+x$. By Gauss's lemma $P=x\\prod_{k=1}^{n-1}(b_kx+c_k)$ with integers $b_k,c_k\\ge1$, so $\\frac{n(n+1)}2=P(1)\\ge2^{n-1}$, giving $n\\le4$; then check $P(1)$ factorizations.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Factor over the integers",
+        "body": "Since the coefficients are $0,1,\\dots,n$ in some order with $a_n\\ne0$, we have $n\\ge1$, $a_n>0$, all coefficients are $\\ge0$ and $P$ is primitive (its coefficients include $1$).\n\n**Factorization.** All roots are rational, so $P(x)=a_n\\prod_{k=1}^n(x-r_k)$ with $r_k\\in\\mathbb Q$. Write $-r_k=c_k/b_k$ in lowest terms with $b_k\\ge1$. By Gauss's lemma $\\prod_k(b_kx+c_k)$ is primitive, and $P$ is a rational multiple of it; both are primitive with positive leading coefficients, so\n$$P(x)=\\prod_{k=1}^n(b_kx+c_k),\\qquad b_k\\ge1,\\ c_k\\in\\mathbb Z .$$\n**Signs.** For $x>0$, $P(x)\\ge a_nx^n>0$, so $P$ has no positive root: $r_k\\le0$, i.e. $c_k\\ge0$. If all $c_k\\ge1$, every coefficient of the product would be positive, but $0$ must be a coefficient. If two $c_k$ were $0$, then $x^2\\mid P$ and $a_0=a_1=0$, impossible. So exactly one $c_k$ is $0$, and\n$$P(x)=x\\prod_{k=1}^{n-1}(b_kx+c_k),\\qquad b_k,c_k\\ge1 .$$\n**Size.** Evaluating at $1$:\n$$\\frac{n(n+1)}2=0+1+\\dots+n=P(1)=\\prod_{k=1}^{n-1}(b_k+c_k)\\ge2^{n-1}.$$\nFor $n=5$: $15<16$, and $2^{n-1}$ grows faster than $\\frac{n(n+1)}2$ afterwards (the ratio $\\frac{2^{n-1}}{n(n+1)/2}$ increases for $n\\ge3$), so $n\\le4$.\n\n**Cases.**\n- $n=1$: $P=b_1x$ with coefficients $\\{0,1\\}$: $P=x$.\n- $n=2$: $3=b_1+c_1$, so $P=x(x+2)=x^2+2x$ or $x(2x+1)=2x^2+x$; both have coefficients $\\{0,1,2\\}$.\n- $n=3$: $6=(b_1+c_1)(b_2+c_2)$ with both factors $\\ge2$, so the factors are $2$ and $3$: one linear factor is $x+1$ and the other is $x+2$ or $2x+1$. This gives $x(x+1)(x+2)=x^3+3x^2+2x$ and $x(x+1)(2x+1)=2x^3+3x^2+x$, both valid.\n- $n=4$: $10$ would be a product of three integers $\\ge2$; but $2\\cdot2\\cdot2=8$, $2\\cdot2\\cdot3=12$, and $10=2\\cdot5$ has no such factorization. No solution.\n\n**Answer:** $P(x)=x,\\ x^2+2x,\\ 2x^2+x,\\ x^3+3x^2+2x,\\ 2x^3+3x^2+x$. ∎"
+      },
+      {
+        "title": "Vieta and AM–HM",
+        "body": "(Bound on the degree, following the official first solution.) As above $P$ has no positive roots and $P(x)>0$ for $x>0$, so the roots are $-\\alpha_1,\\dots,-\\alpha_n$ with $\\alpha_i\\ge0$. If $a_0\\ne0$ then all $\\alpha_i>0$ and by Vieta every coefficient $a_k=a_n e_{n-k}(\\alpha)$ is positive, contradicting that $0$ is a coefficient. So $a_0=0$, and since $a_1\\ne0$ exactly one root is $0$; say $\\alpha_n=0$ and $\\alpha_1,\\dots,\\alpha_{n-1}>0$ are the roots of $Q(x)=P(x)/x=a_nx^{n-1}+\\dots+a_1$.\n\nFor $n\\ge3$, Vieta for $Q$ gives\n$$\\alpha_1\\cdots\\alpha_{n-1}=\\frac{a_1}{a_n},\\qquad\\sum_i\\frac1{\\alpha_i}=\\frac{a_2}{a_1},\\qquad\\sum_i\\alpha_i=\\frac{a_{n-1}}{a_n}.$$\nBy AM–HM, $\\frac{\\sum\\alpha_i}{n-1}\\ge\\frac{n-1}{\\sum1/\\alpha_i}$, i.e. $\\frac{a_{n-1}a_2}{a_na_1}\\ge(n-1)^2$.\n\nIf $n\\ge4$, the indices $1,2,n-1,n$ are distinct, so $a_1,a_2,a_{n-1},a_n$ are four distinct numbers from $\\{1,\\dots,n\\}$: the numerator $a_{n-1}a_2$ is at most $n(n-1)$ and the denominator $a_na_1$ at least $1\\cdot2$. Then $\\frac{n(n-1)}2\\ge(n-1)^2$, i.e. $n\\le2$, a contradiction. Hence $n\\le3$, and checking degrees $1,2,3$ as in the first solution gives the same five polynomials. ∎"
+      }
+    ],
+    "topics": [
+      "polynomials",
+      "number-theory"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imc-2005-05",
+    "bank": "imc",
+    "source": {
+      "contest": "IMC",
+      "paper": "Day 1",
+      "year": 2005,
+      "number": 5,
+      "url": "https://www.imc-math.org.uk/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $f:(0,\\infty)\\to\\mathbb R$ be a twice continuously differentiable function such that\n$$|f''(x)+2xf'(x)+(x^2+1)f(x)|\\le1$$\nfor all $x$. Prove that $\\displaystyle\\lim_{x\\to\\infty}f(x)=0$.",
+    "image": null,
+    "choices": null,
+    "answer": "With $g=f'+xf$ one has $f''+2xf'+(x^2+1)f=g'+xg$. Lemma: if $h$ is $C^1$ and $h'+xh$ is bounded on $[1,\\infty)$ then $h\\to0$ (multiply by $e^{x^2/2}$ and use L'Hôpital on $\\int_1^xe^{t^2/2}dt/e^{x^2/2}$). Apply it to $h=g$, then to $h=f$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "A first-order lemma applied twice",
+        "body": "**Lemma.** Let $h:[1,\\infty)\\to\\mathbb R$ be continuously differentiable with $|h'(x)+xh(x)|\\le M$ for all $x\\ge1$. Then $h(x)\\to0$ as $x\\to\\infty$.\n\n*Proof.* Let $p(x)=h(x)e^{x^2/2}$. Then $p'(x)=(h'(x)+xh(x))e^{x^2/2}$, so $|p'(x)|\\le Me^{x^2/2}$ and\n$$|h(x)|=\\frac{|p(1)+\\int_1^xp'(t)\\,dt|}{e^{x^2/2}}\\le\\frac{|p(1)|}{e^{x^2/2}}+M\\,\\frac{\\int_1^xe^{t^2/2}dt}{e^{x^2/2}} .$$\nThe first term tends to $0$. In the second, numerator and denominator tend to $\\infty$, and by L'Hôpital's rule the ratio has the same limit as $\\frac{e^{x^2/2}}{xe^{x^2/2}}=\\frac1x\\to0$. Hence $h(x)\\to0$. $\\square$\n\n**Application.** Let $g=f'+xf$, which is continuously differentiable since $f\\in C^2$. Then\n$$g'+xg=f''+f+xf'+xf'+x^2f=f''+2xf'+(x^2+1)f,$$\nso $|g'+xg|\\le1$ on $(0,\\infty)$. By the lemma, $g(x)\\to0$; in particular $g$ is bounded on $[1,\\infty)$ (it is continuous there and has a finite limit). Now $f'+xf=g$ is bounded on $[1,\\infty)$, so the lemma applied to $h=f$ gives $f(x)\\to0$. ∎"
+      },
+      {
+        "title": "L'Hôpital twice",
+        "body": "We use the version of L'Hôpital's rule that only requires the **denominator** to tend to $\\infty$: if $\\psi(x)\\to\\infty$, $\\psi'\\ne0$ eventually, and $\\varphi'/\\psi'\\to L$, then $\\varphi/\\psi\\to L$ (no assumption on $\\varphi$).\n\nWrite $f=\\dfrac{f(x)e^{x^2/2}}{e^{x^2/2}}$. Applying the rule twice,\n$$\\lim_{x\\to\\infty}f(x)=\\lim\\frac{(f'+xf)e^{x^2/2}}{xe^{x^2/2}}=\\lim\\frac{\\big(f''+2xf'+(x^2+1)f\\big)e^{x^2/2}}{(x^2+1)e^{x^2/2}}=\\lim\\frac{f''+2xf'+(x^2+1)f}{x^2+1}=0,$$\nwhere the last limit is $0$ because the numerator is bounded by $1$. Reading from right to left: the last ratio tends to $0$, so the middle one does (its denominator $xe^{x^2/2}\\to\\infty$ has derivative $(x^2+1)e^{x^2/2}\\ne0$), and therefore $f\\to0$ (denominator $e^{x^2/2}\\to\\infty$ with derivative $xe^{x^2/2}\\ne0$). ∎"
+      }
+    ],
+    "topics": [
+      "real-analysis",
+      "differential-equations",
+      "calculus"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imc-2005-06",
+    "bank": "imc",
+    "source": {
+      "contest": "IMC",
+      "paper": "Day 1",
+      "year": 2005,
+      "number": 6,
+      "url": "https://www.imc-math.org.uk/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Given a group $G$, denote by $G(m)$ the subgroup generated by the $m$-th powers of elements of $G$. If $G(m)$ and $G(n)$ are commutative, prove that $G(\\gcd(m,n))$ is also commutative. ($\\gcd(m,n)$ denotes the greatest common divisor of $m$ and $n$.)",
+    "image": null,
+    "choices": null,
+    "answer": "$G(d)$ is generated by $G(m)\\cup G(n)$ ($x^d=(x^m)^u(x^n)^v$), so it suffices that $a^m$ and $b^n$ commute. Their commutator $z$ lies in $G(m)\\cap G(n)$, hence commutes with $a^m,b^n$; then $a^{ml}b^{nl}=b^{nl}a^{ml}z^{l^2}$, and $l=m/d$, $l=n/d$ give $z^{(m/d)^2}=z^{(n/d)^2}=e$, so $z=e$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "The commutator of an $m$-th and an $n$-th power",
+        "body": "Let $d=\\gcd(m,n)$ and write $d=um+vn$ with integers $u,v$ (Bézout).\n\n**$G(d)=\\langle G(m),G(n)\\rangle$.** Every $m$-th power $x^m=(x^{m/d})^d$ is a $d$-th power, so $G(m)\\subseteq G(d)$, and likewise $G(n)\\subseteq G(d)$. Conversely $x^d=(x^m)^u(x^n)^v\\in\\langle G(m),G(n)\\rangle$. So $G(d)$ is generated by the $m$-th and $n$-th powers. Since $G(m)$ and $G(n)$ are commutative, it suffices to show that $a^m$ and $b^n$ commute for all $a,b\\in G$.\n\n**The commutator.** Fix $a,b$, put $x=a^m$, $y=b^n$ and $z=x^{-1}y^{-1}xy$. Then\n$$z=(a^{-m}b^{-1}a^m)^n\\,b^n=\\big((a^{-m}ba^m)^{-1}\\big)^nb^n\\in G(n),\\qquad z=a^{-m}\\,(b^{-n}ab^n)^m\\in G(m).$$\nAs $G(m)$ is commutative and $x,z\\in G(m)$, $z$ commutes with $x$; as $G(n)$ is commutative and $y,z\\in G(n)$, $z$ commutes with $y$.\n\n**Powers.** From $xy=yxz$ and the fact that $z$ commutes with $x$ and $y$: first $xy^l=y^lxz^l$ (induction on $l$: $xy^{l+1}=y^lxz^ly=y^lxyz^l=y^{l+1}xz^{l+1}$), and then $x^ky^l=y^lx^kz^{kl}$ (induction on $k$). In particular\n$$a^{ml}b^{nl}=b^{nl}a^{ml}z^{l^2}\\qquad(l\\ge1).$$\n- Take $l=n/d$: $a^{mn/d}=(a^{m/d})^n\\in G(n)$ and $b^{n^2/d}=(b^{n/d})^n\\in G(n)$ commute, so $z^{(n/d)^2}=e$.\n- Take $l=m/d$: $a^{m^2/d}=(a^{m/d})^m$ and $b^{nm/d}=(b^{n/d})^m$ lie in $G(m)$ and commute, so $z^{(m/d)^2}=e$.\n\nSince $\\gcd\\big((m/d)^2,(n/d)^2\\big)=1$, write $1=\\alpha(m/d)^2+\\beta(n/d)^2$; then $z=z^{\\alpha(m/d)^2}z^{\\beta(n/d)^2}=e$. So $a^m b^n=b^na^m$, and $G(d)$ is commutative. ∎"
+      }
+    ],
+    "topics": [
+      "abstract-algebra",
+      "number-theory"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imc-2005-07",
+    "bank": "imc",
+    "source": {
+      "contest": "IMC",
+      "paper": "Day 2",
+      "year": 2005,
+      "number": 7,
+      "url": "https://www.imc-math.org.uk/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $f(x)=x^2+bx+c$, where $b$ and $c$ are real numbers, and let\n$$M=\\{x\\in\\mathbb R:\\ |f(x)|<1\\}.$$\nClearly the set $M$ is either empty or consists of disjoint open intervals. Denote the sum of their lengths by $|M|$. Prove that\n$$|M|\\le2\\sqrt2 .$$",
+    "image": null,
+    "choices": null,
+    "answer": "Complete the square, $f=(x+\\frac b2)^2+d$. If $d\\ge1$, $M=\\emptyset$; if $-1<d<1$, $|M|=2\\sqrt{1-d}<2\\sqrt2$; if $d\\le-1$, $|M|=2(\\sqrt{|d|+1}-\\sqrt{|d|-1})=\\frac{4}{\\sqrt{|d|+1}+\\sqrt{|d|-1}}\\le2\\sqrt2$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Complete the square",
+        "body": "Write $f(x)=\\left(x+\\frac b2\\right)^2+d$ with $d=c-\\frac{b^2}4$, and put $y=x+\\frac b2$ (a translation, which does not change lengths). So $M$ corresponds to $\\{y:-1-d<y^2<1-d\\}$.\n\n- **$d\\ge1$:** $y^2<1-d\\le0$ is impossible, so $M=\\emptyset$ and $|M|=0$.\n- **$-1<d<1$:** the lower bound $y^2>-1-d$ is automatic, so $M$ corresponds to $|y|<\\sqrt{1-d}$, an interval of length $|M|=2\\sqrt{1-d}<2\\sqrt2$.\n- **$d\\le-1$:** the condition is $\\sqrt{|d|-1}<|y|<\\sqrt{|d|+1}$, two intervals of total length\n$$|M|=2\\left(\\sqrt{|d|+1}-\\sqrt{|d|-1}\\right)=\\frac{2\\big((|d|+1)-(|d|-1)\\big)}{\\sqrt{|d|+1}+\\sqrt{|d|-1}}=\\frac4{\\sqrt{|d|+1}+\\sqrt{|d|-1}}\\le\\frac4{\\sqrt2+0}=2\\sqrt2,$$\nsince $|d|\\ge1$.\n\nIn all cases $|M|\\le2\\sqrt2$ (with equality exactly when $d=-1$). ∎"
+      }
+    ],
+    "topics": [
+      "algebra",
+      "inequalities"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imc-2005-08",
+    "bank": "imc",
+    "source": {
+      "contest": "IMC",
+      "paper": "Day 2",
+      "year": 2005,
+      "number": 8,
+      "url": "https://www.imc-math.org.uk/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "text",
+    "prompt": "Let $f:\\mathbb R\\to\\mathbb R$ be a function such that $(f(x))^n$ is a polynomial for every $n=2,3,\\dots$. Does it follow that $f$ is a polynomial?",
+    "image": null,
+    "choices": null,
+    "answer": "Yes",
+    "acceptedAnswers": [
+      "yes, f is a polynomial",
+      "yes it does"
+    ],
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Reduce the rational function $f^3/f^2$",
+        "body": "**Yes** — it even suffices that $p=f^2$ and $q=f^3$ are polynomials.\n\nIf $f\\equiv0$ we are done, so assume $f\\not\\equiv0$; then $p=f^2$ is a non-zero polynomial and $f$ has only finitely many zeros.\n\nConsider the rational function $R=q/p$. Wherever $f(x)\\ne0$ we have $R(x)=f^3(x)/f^2(x)=f(x)$. Write $R=r/s$ in lowest terms with polynomials $r,s$. Then $R^2=r^2/s^2$, and wherever $f\\ne0$, $R^2=f^2=p$. So $r^2=p\\,s^2$ at infinitely many points, hence as polynomials. Since $\\gcd(r,s)=1$ we have $\\gcd(r^2,s^2)=1$, and $s^2\\mid r^2$ forces $s$ to be constant. Thus $R$ is a polynomial $r$ (after absorbing the constant).\n\nFinally $f=r$ wherever $f\\ne0$, and at a zero $x_0$ of $f$: $r(x_0)^2=p(x_0)=f(x_0)^2=0$, so $r(x_0)=0=f(x_0)$. Hence $f=r$ is a polynomial. ∎"
+      },
+      {
+        "title": "Unique factorization",
+        "body": "**Yes.** Assume $f\\not\\equiv0$ and write $p=f^2=a\\,p_1^{\\alpha_1}\\cdots p_k^{\\alpha_k}$ and $q=f^3=b\\,q_1^{\\beta_1}\\cdots q_l^{\\beta_l}$ with distinct monic irreducible real polynomials $p_i$, $q_j$ and positive integers $\\alpha_i,\\beta_j$. Since $p^3=f^6=q^2$, unique factorization gives $a^3=b^2$, $k=l$ and, after renumbering, $p_i=q_i$ and $3\\alpha_i=2\\beta_i$. Hence every $\\beta_i$ is divisible by $3$. Put\n$$r=b^{1/3}\\,q_1^{\\beta_1/3}\\cdots q_k^{\\beta_k/3},$$\na polynomial (real cube root). Then $r^3=q=f^3$, and since $t\\mapsto t^3$ is injective on $\\mathbb R$, $f=r$. ∎"
+      }
+    ],
+    "topics": [
+      "polynomials",
+      "algebra"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imc-2005-09",
+    "bank": "imc",
+    "source": {
+      "contest": "IMC",
+      "paper": "Day 2",
+      "year": 2005,
+      "number": 9,
+      "url": "https://www.imc-math.org.uk/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "text",
+    "prompt": "In the linear space of all real $n\\times n$ matrices, find the maximum possible dimension of a linear subspace $V$ such that\n$$\\forall X,Y\\in V\\qquad\\operatorname{trace}(XY)=0 .$$\n(The trace of a matrix is the sum of the diagonal entries.)",
+    "image": null,
+    "choices": null,
+    "answer": "n(n-1)/2",
+    "acceptedAnswers": [
+      "n*(n-1)/2",
+      "(n^2-n)/2",
+      "n(n - 1)/2",
+      "(n(n-1))/2",
+      "n choose 2",
+      "C(n,2)",
+      "binom(n,2)"
+    ],
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Avoid the symmetric matrices",
+        "body": "**Upper bound.** If $A\\ne0$ is symmetric, then $\\operatorname{trace}(A^2)=\\operatorname{trace}(A^TA)=\\sum_{i,j}a_{ij}^2>0$. Since $\\operatorname{trace}(X^2)=0$ for every $X\\in V$, $V$ contains no non-zero symmetric matrix: $V\\cap S=\\{0\\}$, where $S$ is the space of symmetric matrices, $\\dim S=\\frac{n(n+1)}2$. Hence\n$$\\dim V+\\dim S=\\dim(V+S)\\le n^2,\\qquad\\dim V\\le n^2-\\frac{n(n+1)}2=\\frac{n(n-1)}2 .$$\n**Example.** Let $V$ be the space of strictly upper triangular matrices, $\\dim V=\\frac{n(n-1)}2$. The product of two strictly upper triangular matrices is strictly upper triangular, so its trace is $0$.\n\n**Answer:** $\\dfrac{n(n-1)}2$."
+      }
+    ],
+    "topics": [
+      "linear-algebra"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imc-2005-10",
+    "bank": "imc",
+    "source": {
+      "contest": "IMC",
+      "paper": "Day 2",
+      "year": 2005,
+      "number": 10,
+      "url": "https://www.imc-math.org.uk/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Prove that if $f:\\mathbb R\\to\\mathbb R$ is three times differentiable, then there exists a real number $\\xi\\in(-1,1)$ such that\n$$\\frac{f'''(\\xi)}6=\\frac{f(1)-f(-1)}2-f'(0).$$",
+    "image": null,
+    "choices": null,
+    "answer": "Subtract the cubic $g$ with $g(\\pm1)=f(\\pm1)$, $g(0)=f(0)$, $g'(0)=f'(0)$; its third derivative is $6\\big(\\frac{f(1)-f(-1)}2-f'(0)\\big)$. Rolle's theorem applied three times to $f-g$ gives $\\xi$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Hermite interpolation and Rolle",
+        "body": "Let\n$$g(x)=-\\frac{f(-1)}2x^2(x-1)-f(0)(x^2-1)+\\frac{f(1)}2x^2(x+1)-f'(0)\\,x(x-1)(x+1).$$\nOne checks $g(-1)=f(-1)$, $g(0)=f(0)$, $g(1)=f(1)$ and $g'(0)=f'(0)$ (the derivatives at $0$ of $x^2(x-1)$, $x^2-1$, $x^2(x+1)$ vanish, and that of $x^3-x$ is $-1$). Since $g$ is a cubic with leading coefficient $-\\frac{f(-1)}2+\\frac{f(1)}2-f'(0)$,\n$$g'''\\equiv6\\left(\\frac{f(1)-f(-1)}2-f'(0)\\right).$$\nLet $h=f-g$, three times differentiable, with $h(-1)=h(0)=h(1)=0$ and $h'(0)=0$.\n- Rolle on $[-1,0]$ and $[0,1]$: $h'(\\eta)=h'(\\vartheta)=0$ for some $\\eta\\in(-1,0)$, $\\vartheta\\in(0,1)$.\n- Now $h'$ vanishes at $\\eta<0<\\vartheta$. Rolle on $[\\eta,0]$ and $[0,\\vartheta]$: $h''(\\rho)=h''(\\sigma)=0$ with $\\eta<\\rho<0<\\sigma<\\vartheta$.\n- Rolle on $[\\rho,\\sigma]$: $h'''(\\xi)=0$ for some $\\xi\\in(\\rho,\\sigma)\\subset(-1,1)$.\n\nThen $f'''(\\xi)=g'''(\\xi)$, i.e. $\\dfrac{f'''(\\xi)}6=\\dfrac{f(1)-f(-1)}2-f'(0)$. ∎"
+      },
+      {
+        "title": "Odd part and the mean value theorem",
+        "body": "Let $K=f(1)-f(-1)-2f'(0)$ and\n$$\\varphi(t)=f(t)-f(-t)-2tf'(0)-Kt^3\\qquad(t\\in[0,1]).$$\nThen $\\varphi(0)=0$, $\\varphi(1)=0$, and $\\varphi'(t)=f'(t)+f'(-t)-2f'(0)-3Kt^2$, so $\\varphi'(0)=0$.\n\nBy Rolle, $\\varphi'(\\tau)=0$ for some $\\tau\\in(0,1)$; by Rolle again (on $[0,\\tau]$), $\\varphi''(\\tau')=0$ for some $\\tau'\\in(0,\\tau)$. Since $\\varphi''(t)=f''(t)-f''(-t)-6Kt$, we get\n$$f''(\\tau')-f''(-\\tau')=6K\\tau' .$$\nBy the mean value theorem for $f''$ on $[-\\tau',\\tau']$ there is $\\xi\\in(-\\tau',\\tau')\\subset(-1,1)$ with $f''(\\tau')-f''(-\\tau')=2\\tau'f'''(\\xi)$. Hence $f'''(\\xi)=3K$, i.e.\n$$\\frac{f'''(\\xi)}6=\\frac K2=\\frac{f(1)-f(-1)}2-f'(0).$$\n∎"
+      }
+    ],
+    "topics": [
+      "calculus",
+      "real-analysis"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imc-2005-11",
+    "bank": "imc",
+    "source": {
+      "contest": "IMC",
+      "paper": "Day 2",
+      "year": 2005,
+      "number": 11,
+      "url": "https://www.imc-math.org.uk/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Find all $r>0$ such that whenever $f:\\mathbb R^2\\to\\mathbb R$ is a differentiable function such that $|\\operatorname{grad}f(0,0)|=1$ and $|\\operatorname{grad}f(u)-\\operatorname{grad}f(v)|\\le|u-v|$ for all $u,v\\in\\mathbb R^2$, then the maximum of $f$ on the disk $\\{u\\in\\mathbb R^2:|u|\\le r\\}$ is attained at exactly one point.\n\n($\\operatorname{grad}f(u)=(\\partial_1f(u),\\partial_2f(u))$ is the gradient vector of $f$ at the point $u$. For a vector $u=(a,b)$, $|u|=\\sqrt{a^2+b^2}$.)",
+    "image": null,
+    "choices": null,
+    "answer": "Exactly $0<r\\le\\frac12$. For $r>\\frac12$, $f(x,y)=x-\\frac{x^2}2+\\frac{y^2}2$ has two maximum points $(\\frac12,\\pm\\sqrt{r^2-\\frac14})$. For $r\\le\\frac12$ the gradient never vanishes on the disk, so maxima lie on the circle with $\\operatorname{grad}f(u)=au$, $a\\ge1$; two such points would violate the Lipschitz condition.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Counterexample, then a boundary argument",
+        "body": "Let $D_r=\\{u:|u|\\le r\\}$.\n\n**$r>\\frac12$ fails.** Let $f(x,y)=x-\\frac{x^2}2+\\frac{y^2}2$. Then $\\operatorname{grad}f(x,y)=(1-x,\\,y)$, so $\\operatorname{grad}f(0,0)=(1,0)$ and $|\\operatorname{grad}f(u)-\\operatorname{grad}f(v)|=|u-v|$. On $D_r$,\n$$f(x,y)=\\frac{x^2+y^2}2-\\left(x-\\frac12\\right)^2+\\frac14\\le\\frac{r^2}2+\\frac14,$$\nwith equality iff $x^2+y^2=r^2$ and $x=\\frac12$. For $r>\\frac12$ this happens at the two points $\\left(\\frac12,\\pm\\sqrt{r^2-\\frac14}\\right)$.\n\n**$r\\le\\frac12$ works.** Let $f$ satisfy the hypotheses and write $g_0=\\operatorname{grad}f(0)$, $|g_0|=1$. The maximum of $f$ on the compact disk $D_r$ exists. For $u\\in D_r$, $|\\operatorname{grad}f(u)-g_0|\\le|u|\\le r$, so $|\\operatorname{grad}f(u)|\\ge1-r\\ge r>0$. Hence there is no interior maximum (the gradient would vanish), and every maximum point $u$ has $|u|=r$.\n\nAt such a $u$, the derivative of $f$ along the circle is $0$, so $\\operatorname{grad}f(u)$ is parallel to $u$; and $t\\mapsto f(tu)$ on $[0,1]$ is maximal at $t=1$, so $\\operatorname{grad}f(u)\\cdot u\\ge0$. Thus $\\operatorname{grad}f(u)=a\\,u$ with $a\\ge0$, and $ar=|\\operatorname{grad}f(u)|\\ge1-r\\ge r$ gives $a\\ge1$.\n\nSuppose $u\\ne v$ are two maximum points, $\\operatorname{grad}f(u)=au$, $\\operatorname{grad}f(v)=bv$, $a,b\\ge1$, $|u|=|v|=r$. Then $u\\cdot v<r^2$ and\n$$|au-bv|^2-|u-v|^2=(a^2+b^2-2)r^2-2(ab-1)\\,u\\cdot v\\ge(a^2+b^2-2)r^2-2(ab-1)r^2=(a-b)^2r^2\\ge0,$$\nusing $ab-1\\ge0$. By the Lipschitz condition the left side is $\\le0$, so all inequalities are equalities: $a=b$ and $(ab-1)u\\cdot v=(ab-1)r^2$, which forces $ab=1$, i.e. $a=b=1$. Then $\\operatorname{grad}f(u)=u$, and $|u-g_0|\\le r$ together with $|u|=r$, $|g_0|=1$ gives $1=|g_0|\\le|u|+|g_0-u|\\le2r\\le1$; equality in the triangle inequality forces $u=r\\,g_0$ (and $r=\\frac12$). The same holds for $v$, so $u=v$, a contradiction. Hence the maximum is attained at exactly one point.\n\n**Answer:** all $r$ with $0<r\\le\\frac12$. ∎"
+      }
+    ],
+    "topics": [
+      "real-analysis",
+      "calculus",
+      "geometry"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imc-2005-12",
+    "bank": "imc",
+    "source": {
+      "contest": "IMC",
+      "paper": "Day 2",
+      "year": 2005,
+      "number": 12,
+      "url": "https://www.imc-math.org.uk/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Prove that if $p$ and $q$ are rational numbers and $r=p+q\\sqrt7$, then there exists a matrix $\\begin{pmatrix}a&b\\\\c&d\\end{pmatrix}\\ne\\pm\\begin{pmatrix}1&0\\\\0&1\\end{pmatrix}$ with integer entries and with $ad-bc=1$ such that\n$$\\frac{ar+b}{cr+d}=r .$$",
+    "image": null,
+    "choices": null,
+    "answer": "For rational $r$ take $\\begin{pmatrix}1+rt&-r^2t\\\\t&1-rt\\end{pmatrix}$ with $r^2t\\in\\mathbb Z$. Otherwise let $ux^2+vx+w$ be the primitive integer minimal polynomial of $r$ (discriminant $7\\Delta^2$, $\\Delta=2uq\\in\\mathbb Z$); take $c=ut$, $b=-wt$, $a+d=s$, $d-a=vt$ where $s^2-7\\Delta^2t^2=4$, obtained from a Pell solution $k^2-7l^2=1$ with $\\Delta\\mid l$ (a power of $8+3\\sqrt7$).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Reduce to a Pell equation",
+        "body": "**Case $q=0$** ($r$ rational). Choose a positive integer $t$ with $r t\\in\\mathbb Z$ and $r^2t\\in\\mathbb Z$ (e.g. $t$ = the square of the denominator of $r$), and let\n$$\\begin{pmatrix}a&b\\\\c&d\\end{pmatrix}=\\begin{pmatrix}1+rt&-r^2t\\\\t&1-rt\\end{pmatrix}.$$\nIts determinant is $1-r^2t^2+r^2t^2=1$, it is not $\\pm I$ since $c=t\\ne0$, and\n$$\\frac{(1+rt)r-r^2t}{tr+1-rt}=\\frac r1=r .$$\n**Case $q\\ne0$.** Then $r$ is irrational, a root of a quadratic $ux^2+vx+w$ with integer coefficients, $u>0$, $\\gcd(u,v,w)=1$; its other root is $\\bar r=p-q\\sqrt7$. By Vieta $v=-u(r+\\bar r)=-2up$ and $w=ur\\bar r=u(p^2-7q^2)$, so\n$$v^2-4uw=u^2\\big((r+\\bar r)^2-4r\\bar r\\big)=u^2(r-\\bar r)^2=7(2uq)^2 .$$\nPut $\\Delta=2uq\\in\\mathbb Q$. Since $7\\Delta^2$ is an integer, writing $\\Delta=\\alpha/\\beta$ in lowest terms gives $\\beta^2\\mid7$, so $\\beta=1$: **$\\Delta$ is a non-zero integer**.\n\n**Ansatz.** For integers $s,t$ with $t\\ne0$ and $s\\equiv vt\\pmod2$, set\n$$c=ut,\\quad b=-wt,\\quad a=\\frac{s-vt}2,\\quad d=\\frac{s+vt}2 .$$\nThen $cr^2+(d-a)r-b=t(ur^2+vr+w)=0$, which (as $cr+d\\ne0$, $r$ being irrational and $c\\ne0$) is equivalent to $\\frac{ar+b}{cr+d}=r$. Also $c\\ne0$, so the matrix is not $\\pm I$. The determinant is\n$$ad-bc=\\frac{s^2-v^2t^2}4+uwt^2=\\frac{s^2-(v^2-4uw)t^2}4=\\frac{s^2-7\\Delta^2t^2}4 .$$\nSo we need integers with\n$$s^2-7\\Delta^2t^2=4,\\qquad t\\ne0,\\qquad s\\equiv vt\\pmod 2 .$$\n**Pell.** $8^2-7\\cdot3^2=1$. Write $(8+3\\sqrt7)^N=k_N+l_N\\sqrt7$ with integers $k_N,l_N$; taking norms, $k_N^2-7l_N^2=1$, and $l_N>0$ for $N\\ge1$ (all terms of the binomial expansion are positive). The element $\\varepsilon=8+3\\sqrt7$ is a unit of the ring $\\mathbb Z[\\sqrt7]$ (inverse $8-3\\sqrt7$), hence its image is a unit of the **finite** ring $\\mathbb Z[\\sqrt7]/\\Delta\\mathbb Z[\\sqrt7]$, and so has some finite order $N\\ge1$: $\\varepsilon^N\\equiv1$, i.e. $k_N\\equiv1$ and $l_N\\equiv0\\pmod\\Delta$.\n\nNow set $s=2k_N$ and $t=2l_N/\\Delta$, a non-zero even integer. Then $s^2-7\\Delta^2t^2=4k_N^2-28l_N^2=4$, and $s$, $vt$ are both even, so $a,b,c,d$ are integers with $ad-bc=1$. This gives the required matrix. ∎"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "linear-algebra",
+      "abstract-algebra"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

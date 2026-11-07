@@ -1,0 +1,423 @@
+[
+ {
+  "id": "imc-1997-01",
+  "bank": "imc",
+  "source": {
+   "contest": "IMC",
+   "paper": "Day 1",
+   "year": 1997,
+   "number": 1,
+   "url": "https://www.imc-math.org.uk/"
+  },
+  "grade": "undergrad",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Let $\\{\\varepsilon_n\\}_{n=1}^\\infty$ be a sequence of positive real numbers such that $\\lim\\limits_{n\\to\\infty}\\varepsilon_n=0$. Find\n$$\\lim_{n\\to\\infty}\\frac1n\\sum_{k=1}^n\\ln\\left(\\frac kn+\\varepsilon_n\\right),$$\nwhere $\\ln$ denotes the natural logarithm.",
+  "image": null,
+  "choices": null,
+  "answer": "-1",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Squeeze between Riemann sums of $\\ln$",
+    "body": "Write $L_n=\\frac1n\\sum_{k=1}^n\\ln\\left(\\frac kn+\\varepsilon_n\\right)$.\n\n**A Riemann-sum estimate.** Let $\\delta\\ge0$ and $h(x)=\\ln(x+\\delta)$, an increasing function on $(-\\delta,\\infty)$. For $1\\le k\\le n$, monotonicity gives\n$$\\int_{(k-1)/n}^{k/n}h(x)\\,dx\\ \\le\\ \\frac1n\\,h\\!\\left(\\frac kn\\right)\\ \\le\\ \\int_{k/n}^{(k+1)/n}h(x)\\,dx$$\n(the left integral is an improper but convergent integral when $\\delta=0$, $k=1$). Summing over $k$,\n$$\\int_0^1\\ln(x+\\delta)\\,dx\\ \\le\\ \\frac1n\\sum_{k=1}^n\\ln\\left(\\frac kn+\\delta\\right)\\ \\le\\ \\int_{1/n}^{1+1/n}\\ln(x+\\delta)\\,dx. \\tag{$*$}$$\n\n**Lower bound.** Since $\\varepsilon_n>0$ and $\\ln$ is increasing, $L_n\\ge\\frac1n\\sum_{k=1}^n\\ln\\frac kn\\ge\\int_0^1\\ln x\\,dx=-1$ by $(*)$ with $\\delta=0$.\n\n**Upper bound.** Fix $\\varepsilon\\in(0,1)$. For $n$ large, $\\varepsilon_n\\le\\varepsilon$, so by $(*)$ with $\\delta=\\varepsilon$,\n$$L_n\\le\\frac1n\\sum_{k=1}^n\\ln\\left(\\frac kn+\\varepsilon\\right)\\le\\int_{1/n+\\varepsilon}^{1+1/n+\\varepsilon}\\ln t\\,dt\\ \\xrightarrow[n\\to\\infty]{}\\ \\int_{\\varepsilon}^{1+\\varepsilon}\\ln t\\,dt .$$\nWith $\\int\\ln t\\,dt=t\\ln t-t$,\n$$\\int_\\varepsilon^{1+\\varepsilon}\\ln t\\,dt=(1+\\varepsilon)\\ln(1+\\varepsilon)-\\varepsilon\\ln\\varepsilon-1=:\\,u(\\varepsilon),$$\nso $\\limsup_n L_n\\le u(\\varepsilon)$ for every $\\varepsilon\\in(0,1)$. Since $\\varepsilon\\ln\\varepsilon\\to0$ and $(1+\\varepsilon)\\ln(1+\\varepsilon)\\to0$ as $\\varepsilon\\to0^+$, $u(\\varepsilon)\\to-1$, hence $\\limsup L_n\\le-1$.\n\nTogether with $L_n\\ge-1$ we get $\\lim L_n=-1$.\n\n**Answer: $-1$**"
+   },
+   {
+    "title": "Lower bound via Stirling",
+    "body": "The lower bound can also be seen without integrals: $L_n\\ge\\frac1n\\sum_{k=1}^n\\ln\\frac kn=\\frac{\\ln n!}{n}-\\ln n$, and by Stirling's formula $\\ln n!=n\\ln n-n+O(\\ln n)$, so this tends to $-1$.\n\nFor the upper bound, fix $\\varepsilon>0$; for large $n$, $L_n\\le\\frac1n\\sum_{k=1}^n\\ln\\left(\\frac kn+\\varepsilon\\right)$, and the right-hand side is a Riemann sum of the continuous function $\\ln(x+\\varepsilon)$ on $[0,1]$, so it tends to $\\int_0^1\\ln(x+\\varepsilon)\\,dx$, which tends to $\\int_0^1\\ln x\\,dx=-1$ as $\\varepsilon\\to0^+$ (monotone convergence). Hence $\\limsup L_n\\le-1\\le\\liminf L_n$.\n\n**Answer: $-1$**"
+   }
+  ],
+  "topics": [
+   "real-analysis",
+   "calculus",
+   "sequences-series"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "imc-1997-02",
+  "bank": "imc",
+  "source": {
+   "contest": "IMC",
+   "paper": "Day 1",
+   "year": 1997,
+   "number": 2,
+   "url": "https://www.imc-math.org.uk/"
+  },
+  "grade": "undergrad",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Suppose $\\sum_{n=1}^\\infty a_n$ converges. Do the following sums have to converge as well?\n\na) $a_1+a_2+a_4+a_3+a_8+a_7+a_6+a_5+a_{16}+a_{15}+\\dots+a_9+a_{32}+\\dots$\n\nb) $a_1+a_2+a_3+a_4+a_5+a_7+a_6+a_8+a_9+a_{11}+a_{13}+a_{15}+a_{10}+a_{12}+a_{14}+a_{16}+a_{17}+a_{19}+\\dots$\n\nJustify your answers.",
+  "image": null,
+  "choices": null,
+  "answer": "a) **Yes** — every partial sum is $S_{2^{m-1}}+S_{2^m}-S_{2^m-k}$ with all indices $\\ge 2^{m-1}$. b) **No** — for $a_n=\\frac{(-1)^{n+1}}{\\sqrt n}$ the odd terms of each dyadic block, taken first, add up to $\\ge 2^{(m-3)/2}\\to\\infty$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Express the partial sums through those of the original series",
+    "body": "Let $S_N=a_1+\\dots+a_N$ and $S=\\lim S_N$.\n\n**a) Yes.** After $a_1$, the rearranged series runs through the blocks $B_m=(a_{2^m},a_{2^m-1},\\dots,a_{2^{m-1}+1})$, $m=1,2,\\dots$ (each block contains the indices $2^{m-1}+1,\\dots,2^m$ in decreasing order). Hence a partial sum that ends after the first $k$ terms of block $B_m$ ($1\\le k\\le 2^{m-1}$) equals\n$$S_{2^{m-1}}+\\bigl(a_{2^m}+a_{2^m-1}+\\dots+a_{2^m-k+1}\\bigr)=S_{2^{m-1}}+S_{2^m}-S_{2^m-k}.$$\nAll three indices $2^{m-1},\\,2^m,\\,2^m-k$ are $\\ge 2^{m-1}$. Given $\\varepsilon>0$ choose $N_0$ with $|S_N-S|<\\varepsilon$ for $N\\ge N_0$; if $2^{m-1}\\ge N_0$, the partial sum above differs from $S+S-S=S$ by less than $3\\varepsilon$. So all partial sums of the rearranged series far enough out are within $3\\varepsilon$ of $S$: the series converges (to $S$).\n\n**b) No.** Here, after $a_1,a_2$, the series runs through the blocks of indices $2^m+1,\\dots,2^{m+1}$ ($m\\ge1$), each block listing first its odd indices and then its even indices (e.g. $5,7,6,8$ and $9,11,13,15,10,12,14,16$).\n\nTake $a_n=\\frac{(-1)^{n+1}}{\\sqrt n}$; $\\sum a_n$ converges by the Leibniz test, and the odd-indexed terms are positive. The partial sum of the rearranged series that ends after the odd terms of block $m$ equals\n$$S_{2^m}+\\sum_{\\substack{2^m<j<2^{m+1}\\\\ j\\text{ odd}}}\\frac1{\\sqrt j}\\ \\ge\\ S_{2^m}+2^{m-1}\\cdot\\frac1{\\sqrt{2^{m+1}}}=S_{2^m}+2^{(m-3)/2},$$\nbecause the block contains $2^{m-1}$ odd indices, each $<2^{m+1}$. Since $S_{2^m}\\to S$ and $2^{(m-3)/2}\\to\\infty$, these partial sums tend to $+\\infty$, so the rearranged series diverges. ∎"
+   }
+  ],
+  "topics": [
+   "real-analysis",
+   "sequences-series"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "imc-1997-03",
+  "bank": "imc",
+  "source": {
+   "contest": "IMC",
+   "paper": "Day 1",
+   "year": 1997,
+   "number": 3,
+   "url": "https://www.imc-math.org.uk/"
+  },
+  "grade": "undergrad",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Let $A$ and $B$ be real $n\\times n$ matrices such that $A^2+B^2=AB$. Prove that if $BA-AB$ is an invertible matrix then $n$ is divisible by $3$.",
+  "image": null,
+  "choices": null,
+  "answer": "With $\\omega=e^{2\\pi i/3}$ and $S=A+\\omega B$: $S\\overline S=\\omega(BA-AB)$, so $\\omega^n\\det(BA-AB)=|\\det S|^2$ is real and nonzero, forcing $\\omega^n=1$, i.e. $3\\mid n$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Factor with a cube root of unity",
+    "body": "Let $\\omega=-\\frac12+\\frac{\\sqrt3}2i$, so $\\omega^3=1$, $|\\omega|=1$, $\\overline\\omega=\\omega^2$ and $1+\\omega+\\overline\\omega=0$, i.e. $1+\\overline\\omega=-\\omega$.\n\nPut $S=A+\\omega B$; since $A,B$ are real, $\\overline S=A+\\overline\\omega B$. Then\n$$S\\overline S=(A+\\omega B)(A+\\overline\\omega B)=A^2+\\overline\\omega AB+\\omega BA+\\omega\\overline\\omega B^2=(A^2+B^2)+\\overline\\omega AB+\\omega BA.$$\nUsing $A^2+B^2=AB$,\n$$S\\overline S=(1+\\overline\\omega)AB+\\omega BA=-\\omega AB+\\omega BA=\\omega\\,(BA-AB).$$\nTake determinants. On the left, $\\det(S\\overline S)=\\det S\\cdot\\det\\overline S=\\det S\\cdot\\overline{\\det S}=|\\det S|^2$, a real number. On the right, $\\det\\bigl(\\omega(BA-AB)\\bigr)=\\omega^n\\det(BA-AB)$, where $d=\\det(BA-AB)$ is real and, by assumption, nonzero. Therefore $\\omega^n=|\\det S|^2/d$ is real.\n\nBut $\\omega^n\\in\\{1,\\omega,\\omega^2\\}$ and $\\omega,\\omega^2$ are not real; hence $\\omega^n=1$, which happens exactly when $3\\mid n$. ∎"
+   }
+  ],
+  "topics": [
+   "linear-algebra",
+   "complex-numbers"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "imc-1997-04",
+  "bank": "imc",
+  "source": {
+   "contest": "IMC",
+   "paper": "Day 1",
+   "year": 1997,
+   "number": 4,
+   "url": "https://www.imc-math.org.uk/"
+  },
+  "grade": "undergrad",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Let $\\alpha$ be a real number, $1<\\alpha<2$.\n\na) Show that $\\alpha$ has a unique representation as an infinite product\n$$\\alpha=\\left(1+\\frac1{n_1}\\right)\\left(1+\\frac1{n_2}\\right)\\cdots$$\nwhere each $n_i$ is a positive integer satisfying $n_i^2\\le n_{i+1}$.\n\nb) Show that $\\alpha$ is rational if and only if its infinite product has the following property: for some $m$ and all $k\\ge m$, $n_{k+1}=n_k^2$.",
+  "image": null,
+  "choices": null,
+  "answer": "Key identity: $\\prod_{j\\ge0}\\bigl(1+M^{-2^j}\\bigr)=\\frac{M}{M-1}$, so every admissible tail starting with $n_k$ lies in $\\bigl(1+\\frac1{n_k},\\,1+\\frac1{n_k-1}\\bigr]$; this forces the greedy choice (existence and uniqueness). For b), if $\\alpha=p/q$ and the tails never square, the positive integers $p_k-q_k$ (tails $p_k/q_k$) strictly decrease — impossible.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Greedy construction and tail bounds",
+    "body": "Call a sequence of positive integers with $n_{i+1}\\ge n_i^2$ *admissible*.\n\n**Lemma (tail bounds).** For an integer $M\\ge2$, $\\prod_{j\\ge0}\\bigl(1+M^{-2^j}\\bigr)=\\sum_{s\\ge0}M^{-s}=\\frac M{M-1}$, because expanding the product gives every power $M^{-s}$ exactly once (binary expansion of $s$). If $(n_k,n_{k+1},\\dots)$ is admissible with $n_k=M\\ge2$, then $n_{k+i}\\ge M^{2^i}$ by induction, so the tail $T_k=\\prod_{j\\ge k}(1+\\frac1{n_j})$ satisfies\n$$1+\\frac1{n_k}<T_k\\le\\frac{n_k}{n_k-1}=1+\\frac1{n_k-1},$$\nwith equality on the right **iff** $n_{j+1}=n_j^2$ for all $j\\ge k$. (The left inequality is strict since the later factors are $>1$. Also, an admissible product whose value is $<2$ cannot have $n_1=1$, since then the first factor alone is $2$; and $n_1\\ge2$ gives $n_k\\ge2$ for all $k$.)\n\n**a) Uniqueness.** The intervals $J_n=\\bigl(1+\\frac1n,\\,1+\\frac1{n-1}\\bigr]$, $n\\ge2$, are pairwise disjoint. By the lemma, $T_k\\in J_{n_k}$, so $n_k$ is determined by $T_k$. Now $T_1=\\alpha$ determines $n_1$, then $T_2=\\alpha/(1+\\frac1{n_1})$ determines $n_2$, and so on: the representation is unique.\n\n**a) Existence (greedy).** Put $\\theta_0=\\alpha\\in(1,2)$. Given $\\theta_{k-1}\\in(1,2)$, let $n_k\\ge2$ be the integer with $\\theta_{k-1}\\in J_{n_k}$ (the $J_n$ cover $(1,2]$), and set $\\theta_k=\\theta_{k-1}/(1+\\frac1{n_k})$. Then $\\theta_k>1$ and\n$$\\theta_k\\le\\frac{1+\\frac1{n_k-1}}{1+\\frac1{n_k}}=\\frac{n_k}{n_k-1}\\cdot\\frac{n_k}{n_k+1}=1+\\frac1{n_k^2-1}\\ (<2).$$\nHence $1+\\frac1{n_{k+1}}<\\theta_k\\le1+\\frac1{n_k^2-1}$ gives $n_{k+1}>n_k^2-1$, i.e. $n_{k+1}\\ge n_k^2$: the sequence is admissible. As $n_k\\ge2^{2^{k-1}}\\to\\infty$, $\\theta_k\\to1$, and since $\\alpha=\\theta_k\\prod_{i=1}^k(1+\\frac1{n_i})$, the infinite product converges to $\\alpha$.\n\n**b)** If $n_{k+1}=n_k^2$ for all $k\\ge m$, the lemma gives $T_m=\\frac{n_m}{n_m-1}$, so $\\alpha=\\prod_{i<m}(1+\\frac1{n_i})\\cdot T_m$ is rational.\n\nConversely let $\\alpha=p/q$ with positive integers $p>q$, and suppose that the squaring property fails from every index on. By the equality case of the lemma, $T_k<\\frac{n_k}{n_k-1}$ for **every** $k$. Define $p_1=p$, $q_1=q$ and $p_{k+1}=p_kn_k$, $q_{k+1}=q_k(n_k+1)$; since $T_{k+1}=T_k\\cdot\\frac{n_k}{n_k+1}$, induction gives $T_k=p_k/q_k$. As $T_k>1$, $d_k=p_k-q_k$ is a positive integer. But\n$$d_{k+1}-d_k=p_kn_k-q_kn_k-q_k-p_k+q_k=(n_k-1)p_k-n_kq_k<0,$$\nbecause $\\frac{p_k}{q_k}=T_k<\\frac{n_k}{n_k-1}$. So $(d_k)$ is a strictly decreasing sequence of positive integers — a contradiction. Hence $n_{k+1}=n_k^2$ for all $k$ from some $m$ on. ∎"
+   }
+  ],
+  "topics": [
+   "number-theory",
+   "sequences-series",
+   "real-analysis"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "imc-1997-05",
+  "bank": "imc",
+  "source": {
+   "contest": "IMC",
+   "paper": "Day 1",
+   "year": 1997,
+   "number": 5,
+   "url": "https://www.imc-math.org.uk/"
+  },
+  "grade": "undergrad",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "For a natural number $n$ consider the hyperplane\n$$\\mathbb R^n_0=\\Bigl\\{x=(x_1,x_2,\\dots,x_n)\\in\\mathbb R^n:\\ \\sum_{i=1}^nx_i=0\\Bigr\\}$$\nand the lattice $\\mathbb Z^n_0=\\{y\\in\\mathbb R^n_0:\\ \\text{all } y_i \\text{ are integers}\\}$. Define the (quasi-)norm in $\\mathbb R^n$ by $\\|x\\|_p=\\left(\\sum_{i=1}^n|x_i|^p\\right)^{1/p}$ if $0<p<\\infty$, and $\\|x\\|_\\infty=\\max_i|x_i|$.\n\na) Let $x\\in\\mathbb R^n_0$ be such that $\\max_i x_i-\\min_i x_i\\le1$. For every $p\\in[1,\\infty]$ and for every $y\\in\\mathbb Z^n_0$ prove that $\\|x\\|_p\\le\\|x+y\\|_p$.\n\nb) For every $p\\in(0,1)$, show that there is an $n$ and an $x\\in\\mathbb R^n_0$ with $\\max_ix_i-\\min_ix_i\\le1$ and a $y\\in\\mathbb Z^n_0$ such that $\\|x\\|_p>\\|x+y\\|_p$.",
+  "image": null,
+  "choices": null,
+  "answer": "a) For convex $\\varphi(t)=|t|^p$: $\\varphi(x_i+y_i)-\\varphi(x_i)\\ge y_i[\\varphi(x_i+1)-\\varphi(x_i)]$ for $y_i\\ge1$ (similarly for $y_i\\le-1$), and $\\varphi(x_i+1)+\\varphi(x_j-1)\\ge\\varphi(x_i)+\\varphi(x_j)$ because $|x_i-x_j|\\le1$; pair the $+1$ and $-1$ steps. $p=\\infty$ by letting $p\\to\\infty$. b) $x=(\\tfrac23,\\dots,\\tfrac23,-\\tfrac13,\\dots,-\\tfrac13)$ ($m$ and $2m$ entries), $y=(-1,\\dots,-1,m,0,\\dots,0)$, $m$ large.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Convexity and pairing of unit steps",
+    "body": "**a)** Let $1\\le p<\\infty$ and $\\varphi(t)=|t|^p$, a convex function; put $F(z)=\\sum_i\\varphi(z_i)=\\|z\\|_p^p$. We use two elementary facts about a convex $\\varphi$.\n\n*Fact 1.* For real $s$ and an integer $y\\ge1$: $\\varphi(s+y)-\\varphi(s)\\ge y\\,[\\varphi(s+1)-\\varphi(s)]$; for an integer $y\\le-1$: $\\varphi(s+y)-\\varphi(s)\\ge|y|\\,[\\varphi(s-1)-\\varphi(s)]$. Indeed, $\\varphi(s+y)-\\varphi(s)=\\sum_{t=0}^{y-1}[\\varphi(s+t+1)-\\varphi(s+t)]$ and, by convexity, the slopes of consecutive unit chords are nondecreasing, so each term is at least the first one. The case $y\\le-1$ is symmetric.\n\n*Fact 2.* If $u\\le s\\le t\\le v$ and $s+t=u+v$, then $\\varphi(s)+\\varphi(t)\\le\\varphi(u)+\\varphi(v)$. (If $u<v$, write $s=\\lambda u+(1-\\lambda)v$, $t=(1-\\lambda)u+\\lambda v$ with $\\lambda\\in[0,1]$, apply convexity to each and add.)\n\nNow let $x$ be as in a) (in fact we only need $\\max x_i-\\min x_i\\le1$) and $y\\in\\mathbb Z^n_0$, $y\\ne0$. Let $P=\\{i:y_i>0\\}$, $N=\\{j:y_j<0\\}$; since $\\sum y_i=0$, both are nonempty and $\\sum_{i\\in P}y_i=\\sum_{j\\in N}|y_j|=:K$. Set $D^+_i=\\varphi(x_i+1)-\\varphi(x_i)$ and $D^-_j=\\varphi(x_j-1)-\\varphi(x_j)$. By Fact 1,\n$$F(x+y)-F(x)\\ \\ge\\ \\sum_{i\\in P}y_iD^+_i+\\sum_{j\\in N}|y_j|D^-_j\\ \\ge\\ K\\Bigl(\\min_{i}D^+_i+\\min_{j}D^-_j\\Bigr).$$\nIt remains to show $D^+_i+D^-_j\\ge0$ for all indices $i,j$, i.e. $\\varphi(x_i+1)+\\varphi(x_j-1)\\ge\\varphi(x_i)+\\varphi(x_j)$. Put $a=x_i$, $b=x_j$. Since $|a-b|\\le\\max x-\\min x\\le1$, we have $b-1\\le a$ and $b-1\\le b$, while $a+1\\ge b$ and $a+1\\ge a$. So $b-1\\le\\min(a,b)\\le\\max(a,b)\\le a+1$ and $(b-1)+(a+1)=a+b$; Fact 2 gives the claim.\n\nHence $F(x+y)\\ge F(x)$, i.e. $\\|x+y\\|_p\\ge\\|x\\|_p$ for all $p\\in[1,\\infty)$. For $p=\\infty$ let $p\\to\\infty$: in $\\mathbb R^n$, $\\|z\\|_p\\to\\|z\\|_\\infty$, and the inequality passes to the limit.\n\n**b)** Fix $p\\in(0,1)$ and an integer $m\\ge1$; let $n=3m$,\n$$x=(\\underbrace{\\tfrac23,\\dots,\\tfrac23}_{m},\\underbrace{-\\tfrac13,\\dots,-\\tfrac13}_{2m}),\\qquad y=(\\underbrace{-1,\\dots,-1}_{m},m,\\underbrace{0,\\dots,0}_{2m-1}).$$\nThen $\\sum x_i=\\frac{2m}3-\\frac{2m}3=0$, $\\max x_i-\\min x_i=1$, $y\\in\\mathbb Z^n_0$, and\n$$x+y=(\\underbrace{-\\tfrac13,\\dots,-\\tfrac13}_{m},m-\\tfrac13,\\underbrace{-\\tfrac13,\\dots,-\\tfrac13}_{2m-1}).$$\nThus\n$$\\|x\\|_p^p-\\|x+y\\|_p^p=m\\Bigl(\\bigl(\\tfrac23\\bigr)^p-\\bigl(\\tfrac13\\bigr)^p\\Bigr)+\\bigl(\\tfrac13\\bigr)^p-\\bigl(m-\\tfrac13\\bigr)^p>mc-m^p,$$\nwhere $c=(\\frac23)^p-(\\frac13)^p>0$. Because $p<1$, $mc-m^p=m^p(cm^{1-p}-1)>0$ as soon as $m^{1-p}>1/c$. For such $m$, $\\|x\\|_p>\\|x+y\\|_p$. ∎"
+   }
+  ],
+  "topics": [
+   "inequalities",
+   "real-analysis",
+   "linear-algebra"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "imc-1997-06",
+  "bank": "imc",
+  "source": {
+   "contest": "IMC",
+   "paper": "Day 1",
+   "year": 1997,
+   "number": 6,
+   "url": "https://www.imc-math.org.uk/"
+  },
+  "grade": "undergrad",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Suppose that $\\mathcal F$ is a family of finite subsets of $\\mathbb N$ and for any two sets $A,B\\in\\mathcal F$ we have $A\\cap B\\ne\\varnothing$.\n\na) Is it true that there is a finite subset $Y$ of $\\mathbb N$ such that for any $A,B\\in\\mathcal F$ we have $A\\cap B\\cap Y\\ne\\varnothing$?\n\nb) Is the statement a) true if we suppose in addition that all of the members of $\\mathcal F$ have the same size?\n\nJustify your answers.",
+  "image": null,
+  "choices": null,
+  "answer": "a) **No**: $A_n=\\{1,3,\\dots,2n-1,2n\\}$, $B_n=\\{2,4,\\dots,2n,2n+1\\}$ pairwise intersect but $A_n\\cap B_n=\\{2n\\}$. b) **Yes**: prove for two cross-intersecting uniform families by induction on the sizes, splitting by the trace on $A_0\\cup B_0$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Counterexample, then induction on the sizes",
+    "body": "**a) No.** For $n\\ge1$ let $A_n=\\{1,3,5,\\dots,2n-1,2n\\}$ and $B_n=\\{2,4,\\dots,2n,2n+1\\}$, and $\\mathcal F=\\{A_n,B_n:n\\ge1\\}$.\n- Any two $A$'s contain $1$; any two $B$'s contain $2$.\n- $A_n\\cap B_m$: if $n\\le m$, the even number $2n\\le 2m$ lies in both; if $n>m$, the odd number $2m+1\\le2n-1$ lies in both.\n\nSo $\\mathcal F$ is pairwise intersecting. But $A_n\\cap B_n=\\{2n\\}$ (the only even element of $A_n$ is $2n$, the only odd element of $B_n$ is $2n+1>2n-1$). For a finite $Y$ pick $n$ with $2n>\\max Y$; then $A_n\\cap B_n\\cap Y=\\varnothing$.\n\n**b) Yes.** We prove a stronger statement.\n\n*Claim.* Let $\\mathcal F,\\mathcal G$ be families of finite subsets of $\\mathbb N$ such that every $A\\in\\mathcal F$ has exactly $r$ elements, every $B\\in\\mathcal G$ has exactly $s$ elements, and $A\\cap B\\ne\\varnothing$ for all $A\\in\\mathcal F$, $B\\in\\mathcal G$. Then there is a finite $Y$ with $A\\cap B\\cap Y\\ne\\varnothing$ for all $A\\in\\mathcal F,B\\in\\mathcal G$.\n\nTaking $\\mathcal G=\\mathcal F$ gives b) (including the case $A=B$).\n\n*Proof* by strong induction on $r+s$. If $\\mathcal F$ or $\\mathcal G$ is empty, take $Y=\\varnothing$. Otherwise fix $A_0\\in\\mathcal F$, $B_0\\in\\mathcal G$ and let $U=A_0\\cup B_0$ (finite). Every $A\\in\\mathcal F$ meets $B_0$, so $C=A\\cap U$ is a nonempty subset of $U$; similarly every $B\\in\\mathcal G$ has nonempty trace $D=B\\cap U$. Let $\\mathcal F(C)=\\{A\\in\\mathcal F:A\\cap U=C\\}$ and $\\mathcal G(D)=\\{B\\in\\mathcal G:B\\cap U=D\\}$. There are finitely many pairs $(C,D)$; it suffices to find a finite $Y_{C,D}$ that works for $\\mathcal F(C)$ and $\\mathcal G(D)$ (both nonempty), and then take $Y=\\bigcup_{C,D}Y_{C,D}$.\n- If $C\\cap D\\ne\\varnothing$: every $A\\in\\mathcal F(C)$, $B\\in\\mathcal G(D)$ satisfy $A\\cap B\\cap U=C\\cap D\\ne\\varnothing$, so $Y_{C,D}=U$ works.\n- If $C\\cap D=\\varnothing$: then for $A\\in\\mathcal F(C)$, $B\\in\\mathcal G(D)$ the (nonempty) set $A\\cap B$ lies outside $U$, so $A\\cap B=(A\\setminus C)\\cap(B\\setminus D)$. The families $\\{A\\setminus C\\}$ and $\\{B\\setminus D\\}$ are cross-intersecting and uniform of sizes $r-|C|<r$ and $s-|D|<s$. By the induction hypothesis there is a finite $Y_{C,D}$ with $(A\\setminus C)\\cap(B\\setminus D)\\cap Y_{C,D}\\ne\\varnothing$, hence $A\\cap B\\cap Y_{C,D}\\ne\\varnothing$.\n\n(When $r+s$ is minimal the second case cannot occur, since then $A\\setminus C$ would be empty yet must meet $B\\setminus D$; so no separate base case is needed.) This proves the claim. ∎"
+   }
+  ],
+  "topics": [
+   "counting",
+   "logic"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "imc-1997-07",
+  "bank": "imc",
+  "source": {
+   "contest": "IMC",
+   "paper": "Day 2",
+   "year": 1997,
+   "number": 7,
+   "url": "https://www.imc-math.org.uk/"
+  },
+  "grade": "undergrad",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Let $f$ be a $C^3(\\mathbb R)$ non-negative function with $f(0)=f'(0)=0$ and $0<f''(0)$. Let\n$$g(x)=\\left(\\frac{\\sqrt{f(x)}}{f'(x)}\\right)'$$\nfor $x\\ne0$ and $g(0)=0$. Show that $g$ is bounded in some neighbourhood of $0$. Does the theorem hold for $f\\in C^2(\\mathbb R)$?",
+  "image": null,
+  "choices": null,
+  "answer": "Bounded: $g=\\frac{f'^2-2ff''}{2f'^2\\sqrt f}$, numerator $O(|x|^3)$ by Taylor (needs $C^3$), denominator $\\asymp|x|^3$. **No** for $C^2$: $f(x)=(x+|x|^{3/2})^2$ gives $g(x)=-\\frac{3}{8\\sqrt x\\,(1+\\frac32\\sqrt x)^2}\\to-\\infty$ as $x\\to0^+$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Taylor expansion, then a $C^2$ counterexample",
+    "body": "Let $c=\\frac12f''(0)>0$. Because $f\\in C^3$, Taylor's theorem with bounded $f'''$ near $0$ gives, for $|x|\\le\\delta$,\n$$f(x)=cx^2+O(|x|^3),\\qquad f'(x)=2cx+O(x^2),\\qquad f''(x)=2c+O(|x|).$$\nIn particular, for small $x\\ne0$, $f(x)>0$ and $f'(x)\\ne0$, so $g$ is defined there, and by the quotient rule\n$$g=\\frac{f'\\cdot\\frac{f'}{2\\sqrt f}-\\sqrt f\\,f''}{f'^2}=\\frac{f'^2-2ff''}{2f'^2\\sqrt f}.$$\n**Numerator:** $f'^2=4c^2x^2+O(|x|^3)$ and $2ff''=2(cx^2+O(|x|^3))(2c+O(|x|))=4c^2x^2+O(|x|^3)$, so $f'^2-2ff''=O(|x|^3)$.\n\n**Denominator:** $f'(x)^2=x^2(2c+O(|x|))^2\\ge c^2x^2$ and $f(x)=x^2(c+O(|x|))\\ge\\frac c2x^2$ for small $|x|$, so $2f'^2\\sqrt f\\ge2c^2\\sqrt{c/2}\\,|x|^3$.\n\nHence $|g(x)|\\le K|x|^3/(\\kappa|x|^3)=K/\\kappa$ near $0$: $g$ is bounded in a neighbourhood of $0$.\n\n**For $C^2$ the statement fails.** Let $f(x)=(x+|x|^{3/2})^2=x^2+2x|x|^{3/2}+|x|^3$. The terms $x^2$, $|x|^3$ and $2x|x|^{3/2}=2\\operatorname{sgn}(x)|x|^{5/2}$ are $C^2$ (the last has second derivative $\\frac{15}2\\operatorname{sgn}(x)|x|^{1/2}$, continuous and $0$ at $0$). So $f\\in C^2$, $f\\ge0$, $f(0)=f'(0)=0$, $f''(0)=2>0$. For $x>0$: $\\sqrt{f(x)}=x+x^{3/2}$ and $f'(x)=2(x+x^{3/2})(1+\\frac32\\sqrt x)$, so\n$$\\frac{\\sqrt f}{f'}=\\frac1{2\\left(1+\\frac32\\sqrt x\\right)},\\qquad g(x)=-\\frac12\\cdot\\frac{\\frac34x^{-1/2}}{\\left(1+\\frac32\\sqrt x\\right)^2}\\xrightarrow[x\\to0^+]{}-\\infty .$$\nSo $g$ is unbounded near $0$. **Answer: bounded for $C^3$; not necessarily for $C^2$.** ∎"
+   }
+  ],
+  "topics": [
+   "real-analysis",
+   "calculus"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "imc-1997-08",
+  "bank": "imc",
+  "source": {
+   "contest": "IMC",
+   "paper": "Day 2",
+   "year": 1997,
+   "number": 8,
+   "url": "https://www.imc-math.org.uk/"
+  },
+  "grade": "undergrad",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Let $M$ be an invertible matrix of dimension $2n\\times2n$, represented in block form as\n$$M=\\begin{bmatrix}A&B\\\\C&D\\end{bmatrix}\\quad\\text{and}\\quad M^{-1}=\\begin{bmatrix}E&F\\\\G&H\\end{bmatrix}.$$\nShow that $\\det M\\cdot\\det H=\\det A$.",
+  "image": null,
+  "choices": null,
+  "answer": "$M\\begin{bmatrix}I&F\\\\0&H\\end{bmatrix}=\\begin{bmatrix}A&0\\\\C&I\\end{bmatrix}$ (from $MM^{-1}=I$); take determinants of these block-triangular matrices.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Multiply by a block-triangular matrix",
+    "body": "Let $I$ be the $n\\times n$ identity. From $MM^{-1}=I_{2n}$, the right block column gives $AF+BH=0$ and $CF+DH=I$. Therefore\n$$\\begin{bmatrix}A&B\\\\C&D\\end{bmatrix}\\begin{bmatrix}I&F\\\\0&H\\end{bmatrix}=\\begin{bmatrix}A&AF+BH\\\\C&CF+DH\\end{bmatrix}=\\begin{bmatrix}A&0\\\\C&I\\end{bmatrix}.$$\nBoth $\\begin{bmatrix}I&F\\\\0&H\\end{bmatrix}$ and $\\begin{bmatrix}A&0\\\\C&I\\end{bmatrix}$ are block triangular, so their determinants are $\\det I\\cdot\\det H=\\det H$ and $\\det A\\cdot\\det I=\\det A$. Taking determinants of the identity above gives $\\det M\\cdot\\det H=\\det A$. ∎"
+   },
+   {
+    "title": "Schur complement and continuity",
+    "body": "If $A$ is invertible, block elimination gives $M=\\begin{bmatrix}I&0\\\\CA^{-1}&I\\end{bmatrix}\\begin{bmatrix}A&B\\\\0&D-CA^{-1}B\\end{bmatrix}$, so $\\det M=\\det A\\cdot\\det S$ with $S=D-CA^{-1}B$, and the standard block-inverse formula gives $H=S^{-1}$. Hence $\\det M\\det H=\\det A$.\n\nIf $A$ is singular, replace $A$ by $A+tI$ for small $t\\ne0$: then $A+tI$ is invertible and (for $|t|$ small) $M_t$ is still invertible; the lower-right block $H_t$ of $M_t^{-1}$ depends continuously on $t$. The identity $\\det M_t\\det H_t=\\det(A+tI)$ for all small $t\\ne0$ passes to the limit $t\\to0$. ∎"
+   }
+  ],
+  "topics": [
+   "linear-algebra"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "imc-1997-09",
+  "bank": "imc",
+  "source": {
+   "contest": "IMC",
+   "paper": "Day 2",
+   "year": 1997,
+   "number": 9,
+   "url": "https://www.imc-math.org.uk/"
+  },
+  "grade": "undergrad",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Show that\n$$\\sum_{n=1}^\\infty\\frac{(-1)^{n-1}\\sin(\\log n)}{n^\\alpha}$$\nconverges if and only if $\\alpha>0$.",
+  "image": null,
+  "choices": null,
+  "answer": "For $\\alpha>0$, $f(t)=\\sin(\\log t)/t^\\alpha$ has $|f'(t)|\\le(1+\\alpha)t^{-\\alpha-1}$, so the paired terms $f(2k-1)-f(2k)$ are absolutely summable and $f(n)\\to0$. For $\\alpha\\le0$ the terms do not tend to $0$: each interval $[e^{2\\pi k+\\pi/4},e^{2\\pi k+3\\pi/4}]$ has length $>1$ and contains an $n$ with $\\sin(\\log n)\\ge\\frac{\\sqrt2}2$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Pair the terms; the terms do not vanish for $\\alpha\\le0$",
+    "body": "Let $f(t)=\\dfrac{\\sin(\\log t)}{t^\\alpha}$ for $t\\ge1$.\n\n**$\\alpha>0$: convergence.** We have\n$$f'(t)=\\frac{\\cos(\\log t)-\\alpha\\sin(\\log t)}{t^{\\alpha+1}},\\qquad |f'(t)|\\le\\frac{1+\\alpha}{t^{\\alpha+1}}.$$\nBy the mean value theorem, $|f(2k-1)-f(2k)|\\le\\sup_{[2k-1,2k]}|f'|\\le\\frac{1+\\alpha}{(2k-1)^{\\alpha+1}}$, and $\\sum_k(2k-1)^{-\\alpha-1}<\\infty$ because $\\alpha+1>1$. So the partial sums\n$$S_{2N}=\\sum_{k=1}^N\\bigl(f(2k-1)-f(2k)\\bigr)$$\nconverge. Moreover $|f(n)|\\le n^{-\\alpha}\\to0$, so $S_{2N+1}=S_{2N}+f(2N+1)$ has the same limit. Hence the series converges.\n\n**$\\alpha\\le0$: divergence.** Then $|f(n)|\\ge|\\sin(\\log n)|$ for $n\\ge1$, so it suffices to show that $\\sin(\\log n)\\not\\to0$. For each integer $k\\ge0$ consider\n$$I_k=\\bigl[e^{2\\pi k+\\pi/4},\\ e^{2\\pi k+3\\pi/4}\\bigr].$$\nIts length is $e^{2\\pi k+\\pi/4}(e^{\\pi/2}-1)>1$, so it contains an integer $n_k$, and $\\log n_k\\in[2\\pi k+\\frac\\pi4,2\\pi k+\\frac{3\\pi}4]$ gives $\\sin(\\log n_k)\\ge\\frac{\\sqrt2}2$. Thus infinitely many terms have absolute value $\\ge\\frac{\\sqrt2}2$; the terms do not tend to $0$ and the series diverges. ∎"
+   }
+  ],
+  "topics": [
+   "real-analysis",
+   "sequences-series"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "imc-1997-10",
+  "bank": "imc",
+  "source": {
+   "contest": "IMC",
+   "paper": "Day 2",
+   "year": 1997,
+   "number": 10,
+   "url": "https://www.imc-math.org.uk/"
+  },
+  "grade": "undergrad",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "a) Let the mapping $f:M_n\\to\\mathbb R$ from the space $M_n=\\mathbb R^{n^2}$ of $n\\times n$ matrices with real entries to the reals be linear, i.e.\n$$f(A+B)=f(A)+f(B),\\qquad f(cA)=cf(A)\\tag{1}$$\nfor any $A,B\\in M_n$, $c\\in\\mathbb R$. Prove that there exists a unique matrix $C\\in M_n$ such that $f(A)=\\operatorname{tr}(AC)$ for any $A\\in M_n$. (If $A=(a_{ij})_{i,j=1}^n$ then $\\operatorname{tr}(A)=\\sum_{i=1}^na_{ii}$.)\n\nb) Suppose in addition to (1) that\n$$f(AB)=f(BA)\\tag{2}$$\nfor any $A,B\\in M_n$. Prove that there exists $\\lambda\\in\\mathbb R$ such that $f(A)=\\lambda\\operatorname{tr}(A)$.",
+  "image": null,
+  "choices": null,
+  "answer": "a) $c_{ji}=f(E_{ij})$, since $\\operatorname{tr}(AC)=\\sum_{i,j}a_{ij}c_{ji}$; uniqueness from $\\operatorname{tr}(E_{ij}C)=c_{ji}$. b) $f(E_{ij})=f(E_{ii}E_{ij})=f(E_{ij}E_{ii})=0$ for $i\\ne j$ and $f(E_{ii})=f(E_{ij}E_{ji})=f(E_{ji}E_{ij})=f(E_{jj})$, so $f=\\lambda\\operatorname{tr}$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Evaluate on matrix units",
+    "body": "Let $E_{ij}$ be the matrix with $1$ in position $(i,j)$ and $0$ elsewhere; they form a basis of $M_n$, and $E_{ij}E_{kl}=\\delta_{jk}E_{il}$.\n\n**a)** For any $C=(c_{ij})$, $\\operatorname{tr}(AC)=\\sum_{i}\\sum_j a_{ij}c_{ji}$. Define $C$ by $c_{ji}=f(E_{ij})$. Then by linearity\n$$f(A)=f\\Bigl(\\sum_{i,j}a_{ij}E_{ij}\\Bigr)=\\sum_{i,j}a_{ij}f(E_{ij})=\\sum_{i,j}a_{ij}c_{ji}=\\operatorname{tr}(AC).$$\nUniqueness: if $\\operatorname{tr}(AC)=\\operatorname{tr}(AC')$ for all $A$, then with $D=C-C'$ and $A=E_{ij}$ we get $0=\\operatorname{tr}(E_{ij}D)=d_{ji}$ for all $i,j$, so $C=C'$.\n\n**b)** For $i\\ne j$: $E_{ij}=E_{ii}E_{ij}$ while $E_{ij}E_{ii}=0$, so by (2) $f(E_{ij})=f(E_{ii}E_{ij})=f(E_{ij}E_{ii})=f(0)=0$. For any $i,j$: $E_{ij}E_{ji}=E_{ii}$ and $E_{ji}E_{ij}=E_{jj}$, so $f(E_{ii})=f(E_{jj})$; call this common value $\\lambda$. Then\n$$f(A)=\\sum_{i,j}a_{ij}f(E_{ij})=\\lambda\\sum_ia_{ii}=\\lambda\\operatorname{tr}(A).\\ \\blacksquare$$"
+   },
+   {
+    "title": "Use the matrix $C$ from part a)",
+    "body": "For b), write $f(X)=\\operatorname{tr}(XC)$. Then (2) says $\\operatorname{tr}(ABC)=\\operatorname{tr}(BAC)=\\operatorname{tr}(ACB)$ (cyclicity), i.e. $\\operatorname{tr}\\bigl(A(BC-CB)\\bigr)=0$ for all $A$. By the uniqueness in a), $BC-CB=0$ for every $B$: $C$ commutes with all matrices. Taking $B=E_{ij}$: $E_{ij}C=CE_{ij}$; comparing entries, $(E_{ij}C)_{il}=c_{jl}$ and $(CE_{ij})_{il}=c_{ii}\\delta_{jl}$, so $c_{jl}=0$ for $l\\ne j$ and $c_{jj}=c_{ii}$. Thus $C=\\lambda I$ and $f(A)=\\operatorname{tr}(\\lambda A)=\\lambda\\operatorname{tr}A$. ∎"
+   }
+  ],
+  "topics": [
+   "linear-algebra"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "imc-1997-11",
+  "bank": "imc",
+  "source": {
+   "contest": "IMC",
+   "paper": "Day 2",
+   "year": 1997,
+   "number": 11,
+   "url": "https://www.imc-math.org.uk/"
+  },
+  "grade": "undergrad",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Let $X$ be an arbitrary set, and let $f$ be a one-to-one function mapping $X$ onto itself. Prove that there exist mappings $g_1,g_2:X\\to X$ such that $f=g_1\\circ g_2$ and $g_1\\circ g_1=\\mathrm{id}=g_2\\circ g_2$, where $\\mathrm{id}$ denotes the identity mapping on $X$.",
+  "image": null,
+  "choices": null,
+  "answer": "Split $X$ into orbits of $f$; on an orbit $\\{f^k(x_0)\\}$ (indexed by $\\mathbb Z$ or $\\mathbb Z/m$) set $g_2(f^k(x_0))=f^{-k}(x_0)$ and $g_1(f^k(x_0))=f^{1-k}(x_0)$ — two \"reflections\" whose composition is the shift.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Reflections on each orbit",
+    "body": "Write $f^k$ for the $k$-th iterate ($k\\in\\mathbb Z$; $f^0=\\mathrm{id}$, $f^{-k}=(f^{-1})^k$), which makes sense because $f$ is a bijection. For $x\\in X$ let $T(x)=\\{f^k(x):k\\in\\mathbb Z\\}$ be its orbit. Two orbits are equal or disjoint, so $X$ is a disjoint union of orbits, each mapped onto itself by $f$. It is enough to define $g_1,g_2$ on each orbit separately.\n\nChoose (axiom of choice) a base point $x_0$ in each orbit $T$. Every element of $T$ is $f^k(x_0)$ for some $k\\in\\mathbb Z$. If $T$ is infinite, $k$ is unique; if $T$ is finite with $m$ elements, then $f^k(x_0)=f^l(x_0)$ iff $k\\equiv l\\pmod m$. Define on $T$\n$$g_2\\bigl(f^k(x_0)\\bigr)=f^{-k}(x_0),\\qquad g_1\\bigl(f^k(x_0)\\bigr)=f^{1-k}(x_0).$$\nThese are well defined: if $k\\equiv l\\pmod m$ then $-k\\equiv-l$ and $1-k\\equiv1-l\\pmod m$. Now\n- $g_2(g_2(f^k(x_0)))=f^{k}(x_0)$ and $g_1(g_1(f^k(x_0)))=f^{1-(1-k)}(x_0)=f^k(x_0)$, so $g_1\\circ g_1=g_2\\circ g_2=\\mathrm{id}$;\n- $g_1(g_2(f^k(x_0)))=g_1(f^{-k}(x_0))=f^{1+k}(x_0)=f\\bigl(f^k(x_0)\\bigr)$, so $g_1\\circ g_2=f$.\n\n(Geometrically: on a finite orbit $f$ is a rotation of a regular $m$-gon and on an infinite orbit it is the shift $k\\mapsto k+1$ of $\\mathbb Z$; both are compositions of two reflections, $k\\mapsto-k$ followed by $k\\mapsto1-k$.) ∎"
+   }
+  ],
+  "topics": [
+   "abstract-algebra",
+   "logic"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "imc-1997-12",
+  "bank": "imc",
+  "source": {
+   "contest": "IMC",
+   "paper": "Day 2",
+   "year": 1997,
+   "number": 12,
+   "url": "https://www.imc-math.org.uk/"
+  },
+  "grade": "undergrad",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Let $f:[0,1]\\to\\mathbb R$ be a continuous function. Say that $f$ \"crosses the axis\" at $x$ if $f(x)=0$ but in any neighbourhood of $x$ there are $y,z$ with $f(y)<0$ and $f(z)>0$.\n\na) Give an example of a continuous function that \"crosses the axis\" infinitely often.\n\nb) Can a continuous function \"cross the axis\" uncountably often? Justify your answer.",
+  "image": null,
+  "choices": null,
+  "answer": "a) $f(x)=x\\sin\\frac1x$, $f(0)=0$ (crosses at every $\\frac1{k\\pi}$). b) **Yes**: on the Cantor set $C$, let $f=0$ on $C$ and $f=(-1)^k\\operatorname{dist}(x,C)$ on the intervals removed at stage $k$; $f$ is continuous and crosses the axis at every point of the uncountable set $C$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Signed distance to the Cantor set",
+    "body": "**a)** Let $f(x)=x\\sin\\frac1x$ for $x\\in(0,1]$ and $f(0)=0$; $f$ is continuous since $|f(x)|\\le x$. Its zeros in $(0,1]$ are $x_k=\\frac1{k\\pi}$, $k\\ge1$, and near each $x_k$ the factor $\\sin\\frac1x$ changes sign while $x>0$, so $f$ takes both signs in every neighbourhood of $x_k$. Thus $f$ crosses the axis at infinitely many points (also at $0$).\n\n**b) Yes.** Let $C\\subset[0,1]$ be the Cantor set: $C_0=[0,1]$, and $C_k$ is obtained from $C_{k-1}$ (a union of $2^{k-1}$ closed intervals of length $3^{-(k-1)}$) by removing the open middle third of each interval; $C=\\bigcap_kC_k$. Call the $2^{k-1}$ removed open intervals the intervals *of stage $k$*; $[0,1]\\setminus C$ is the disjoint union of all of them. $C$ is closed and uncountable: $C$ consists of the numbers $\\sum_{j\\ge1}b_j3^{-j}$ with $b_j\\in\\{0,2\\}$, and $(b_j)\\mapsto\\sum b_j3^{-j}$ is injective on such digit sequences, so $C$ is in bijection with the set of all $0$–$1$ sequences.\n\nDefine\n$$f(x)=\\begin{cases}0,&x\\in C,\\\\(-1)^k\\operatorname{dist}(x,C),&x\\text{ in an interval of stage }k.\\end{cases}$$\n*Continuity.* $x\\mapsto\\operatorname{dist}(x,C)$ is continuous (1-Lipschitz). On each removed open interval $f=\\pm\\operatorname{dist}(\\cdot,C)$ with a fixed sign, hence continuous there. At $c\\in C$: $|f(x)-f(c)|=|f(x)|\\le\\operatorname{dist}(x,C)\\le|x-c|$. So $f$ is continuous on $[0,1]$.\n\n*Crossing.* Let $c\\in C$ and $\\delta>0$. Choose $K$ with $3^{-K}<\\delta$. The point $c$ lies in one of the closed intervals $J$ of $C_K$, which has length $3^{-K}$, so $J\\subset(c-\\delta,c+\\delta)$. The middle third of $J$ is an interval of stage $K+1$, and the middle third of the left third of $J$ is an interval of stage $K+2$; both lie in $J$. On them $\\operatorname{dist}(\\cdot,C)>0$ and $f$ has the signs $(-1)^{K+1}$ and $(-1)^{K+2}$, i.e. both signs occur in $(c-\\delta,c+\\delta)$. Since $f(c)=0$, $f$ crosses the axis at every point of $C$ — uncountably many points. ∎"
+   }
+  ],
+  "topics": [
+   "real-analysis",
+   "topology"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ }
+]

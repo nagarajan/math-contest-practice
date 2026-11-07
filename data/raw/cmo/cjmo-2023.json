@@ -1,0 +1,183 @@
+[
+  {
+    "id": "cmo-cjmo-2023-01",
+    "bank": "cmo",
+    "source": {
+      "contest": "CJMO",
+      "paper": "CJMO 2023",
+      "year": 2023,
+      "number": 1,
+      "url": "https://cms.math.ca/competitions/cjmo/"
+    },
+    "grade": "7-10",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $a$ and $b$ be non-negative integers. Consider a sequence $s_1, s_2, s_3, \\dots$ such that $s_1 = a$, $s_2 = b$, and $s_{i+1} = |s_i - s_{i-1}|$ for $i \\ge 2$. Prove that there is some $i$ for which $s_i = 0$.",
+    "image": null,
+    "choices": null,
+    "answer": "$M_i = \\max(s_i, s_{i+1})$ never increases, so it is eventually a constant $C$; if no term were $0$, a term $0 < s < C$ next to $C$ would make the following maximum smaller than $C$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "A non-increasing maximum",
+        "body": "All terms are non-negative integers. For non-negative integers $x, y$ we have $|x - y| \\le \\max(x, y)$. Let $M_i = \\max(s_i, s_{i+1})$. Then\n$$M_{i+1} = \\max\\bigl(s_{i+1}, |s_{i+1} - s_i|\\bigr) \\le \\max(s_i, s_{i+1}) = M_i,$$\nso $(M_i)$ is a non-increasing sequence of non-negative integers and is therefore eventually constant: there are $C$ and $N$ with $M_i = C$ for all $i \\ge N$. If $C = 0$, then $s_N = 0$ and we are done. Assume $C > 0$.\n\nOne of $s_N, s_{N+1}$ equals $C$; replacing $N$ by $N + 1$ if necessary, we may assume $s_N = C$ (if $s_{N+1} = C$, then $s_{N+1} = C$ and $M_{N+1} = C$ still). Now $0 \\le s_{N+1} \\le C$:\n- if $s_{N+1} = 0$, we are done;\n- if $s_{N+1} = C$, then $s_{N+2} = |C - C| = 0$, done;\n- if $0 < s_{N+1} < C$, then $s_{N+2} = C - s_{N+1} < C$, so $M_{N+1} = \\max(s_{N+1}, s_{N+2}) < C$, contradicting $M_{N+1} = C$.\n\nHence some term of the sequence is $0$. ∎"
+      }
+    ],
+    "topics": [
+      "sequences-series",
+      "number-theory"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "cmo-cjmo-2023-02",
+    "bank": "cmo",
+    "source": {
+      "contest": "CJMO",
+      "paper": "CJMO 2023",
+      "year": 2023,
+      "number": 2,
+      "url": "https://cms.math.ca/competitions/cjmo/"
+    },
+    "grade": "7-10",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $ABC$ be a right-angled triangle with $\\angle ACB = 90^\\circ$. Let $CD$ be the altitude from $C$ to $AB$, and let $E$ be the intersection of the angle bisector of $\\angle ACD$ with $AD$. Let $EF$ be the altitude from $E$ to $BC$. Prove that the circumcircle of $BEF$ passes through the midpoint of $CE$.",
+    "image": null,
+    "choices": null,
+    "answer": "Angle chasing gives $\\angle BCE = \\angle BEC = 90^\\circ - \\frac12\\angle B$, so $BC = BE$; then the median $BM$ of the isosceles triangle $BCE$ is perpendicular to $CE$, and $\\angle BME = \\angle BFE = 90^\\circ$ puts $M$ and $F$ on the circle with diameter $BE$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Triangle $BCE$ is isosceles",
+        "body": "Let $x = \\angle CBA$. In the right triangle $ACD$ (right angle at $D$), $\\angle ACD = 90^\\circ - \\angle CAD = 90^\\circ - \\angle CAB = x$. Since $CE$ bisects $\\angle ACD$, $\\angle ACE = \\frac x2$, so\n$$\\angle BCE = 90^\\circ - \\frac x2.$$\n$E$ lies on segment $AD \\subset AB$, so $\\angle CBE = x$, and in triangle $BCE$,\n$$\\angle CEB = 180^\\circ - \\left(90^\\circ - \\frac x2\\right) - x = 90^\\circ - \\frac x2 = \\angle BCE.$$\nHence triangle $BCE$ is isosceles with $BC = BE$.\n\nLet $M$ be the midpoint of $CE$. In the isosceles triangle $BCE$ the median $BM$ is also an altitude, so $\\angle BME = 90^\\circ$. Also $\\angle BFE = 90^\\circ$ since $EF \\perp BC$. Thus $M$ and $F$ both lie on the circle with diameter $BE$. This circle passes through $B$, $E$, $F$ (which are not collinear, since $E \\notin BC$), so it is the circumcircle of $BEF$, and it passes through $M$. ∎"
+      },
+      {
+        "title": "Lengths",
+        "body": "Let $a = BC$, $b = CA$, $c = AB$. From the similar right triangles $CBD \\sim ABC$, $BD = \\frac{a^2}{c}$, $CD = \\frac{ab}{c}$, and $AD = c - BD = \\frac{b^2}{c}$. By the angle bisector theorem in triangle $ACD$, $\\frac{DE}{EA} = \\frac{CD}{CA} = \\frac{a}{c}$, so\n$$DE = \\frac{a}{a + c}\\cdot AD = \\frac{ab^2}{c(a+c)} = \\frac{a(c^2 - a^2)}{c(a+c)} = \\frac{a(c - a)}{c}.$$\nThen $BE = BD + DE = \\frac{a^2 + ac - a^2}{c} = a = BC$, and we finish as in the first solution. ∎"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "cmo-cjmo-2023-03",
+    "bank": "cmo",
+    "source": {
+      "contest": "CJMO",
+      "paper": "CJMO 2023",
+      "year": 2023,
+      "number": 3,
+      "url": "https://cms.math.ca/competitions/cjmo/"
+    },
+    "grade": "7-10",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "William is thinking of an integer between $1$ and $50$, inclusive. Victor can choose a positive integer $m$ and ask William: \"does $m$ divide your number?\", to which William must answer truthfully. Victor continues asking these questions until he determines William's number. What is the minimum number of questions that Victor needs to guarantee this?",
+    "image": null,
+    "choices": null,
+    "answer": "15",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Primes force 15; a strategy with 15",
+        "body": "**Fewer than $15$ questions are not enough.** Suppose William answers \"no\" to every question except $m = 1$. Against these answers Victor asks some fixed list of at most $14$ numbers. These answers are consistent with the number $1$. There are $15$ primes below $50$ ($2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47$), so some prime $p$ was never asked; since the only divisors of $p$ are $1$ and $p$, all the answers are also consistent with $p$. So Victor cannot distinguish $1$ from $p$.\n\n**A useful remark.** If Victor knows that the number $N$ belongs to a candidate list $L$, he can ask \"does $c$ divide $N$?\" for every $c \\in L$: the candidates answered \"yes\" all divide $N$, hence are at most $N$, and $N$ itself is among them; so $N$ is the largest \"yes\" candidate. (Asking about all but the smallest candidate also suffices.)\n\n**$15$ questions suffice.** Victor first asks $m = 2, 3, 5, 7$.\n- *All \"no\".* Then every prime factor of $N$ is at least $11$, and $N$ cannot have two of them ($11^2 > 50$), so $N$ is $1$ or one of the $11$ primes $11, 13, \\dots, 47$. Asking these $11$ primes identifies $N$. Total $15$.\n- *\"Yes\" only to $2$.* Then $N \\in \\{2, 4, 8, 16, 32, 22, 44, 26, 34, 38, 46\\}$ ($11$ candidates); by the remark, $11$ more questions suffice. Total $15$.\n- *\"Yes\" only to $3$.* Then $N \\in \\{3, 9, 27, 33, 39\\}$; $5$ more questions suffice.\n- *Otherwise* (a \"yes\" to $5$ or $7$, or at least two \"yes\"): $N$ is divisible by the product $k \\ge 5$ of the primes answered \"yes\", so $N$ is one of at most $\\lfloor 50/5 \\rfloor = 10$ multiples of $k$; at most $10$ more questions suffice.\n\n**Answer: $15$.**"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "logic"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "cmo-cjmo-2023-04",
+    "bank": "cmo",
+    "source": {
+      "contest": "CJMO",
+      "paper": "CJMO 2023",
+      "year": 2023,
+      "number": 4,
+      "url": "https://cms.math.ca/competitions/cjmo/"
+    },
+    "grade": "7-10",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "text",
+    "prompt": "There are $20$ students in a high school class, and each student has exactly three close friends in the class. Five of the students have bought tickets to an upcoming concert. If any student sees that two or more of their three close friends have bought tickets, then they will buy a ticket too.\n\nIs it possible that the entire class buys tickets to the concert?\n\n(Assume that friendship is mutual; if student $A$ is close friends with student $B$, then $B$ is close friends with $A$.)",
+    "image": null,
+    "choices": null,
+    "answer": "No",
+    "acceptedAnswers": [
+      "no, it is not possible",
+      "not possible",
+      "impossible"
+    ],
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Count friendships",
+        "body": "**No.** There are $\\frac{20 \\cdot 3}{2} = 30$ friendships (pairs of close friends).\n\nList the $15$ later buyers in the order in which they buy (if several buy at the same moment, order them arbitrarily; each of them already saw at least two friends with tickets). When a later buyer $s$ buys, call each friendship between $s$ and a friend who already has a ticket *used*. A friendship is used at most once — only at the moment the second of its two students buys.\n\nEach later buyer uses at least $2$ friendships. If everyone bought tickets, then when the last student buys, all three of their friends already have tickets, so the last buyer uses $3$ friendships. In total at least $14 \\cdot 2 + 3 = 31$ different friendships would be used, more than the $30$ that exist. Contradiction.\n\nSo the entire class cannot end up buying tickets. **Answer: No.**"
+      },
+      {
+        "title": "Enticements",
+        "body": "Call an ordered pair of friends $(A, B)$ an *enticement* if $A$ has a ticket and $B$ does not. Initially there are at most $5 \\cdot 3 = 15$ enticements. When a student $B$ buys a ticket, at least $2$ enticements $(\\cdot, B)$ disappear, and at most $1$ new one appears (from $B$ to their remaining friend). So each purchase lowers the number of enticements by at least $1$. After $14$ later purchases at most $15 - 14 = 1$ enticement is left, but the $20$th student needs at least $2$ enticements to buy. So not everyone buys. **Answer: No.**"
+      }
+    ],
+    "topics": [
+      "graph-theory",
+      "logic"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "cmo-cjmo-2023-05",
+    "bank": "cmo",
+    "source": {
+      "contest": "CJMO",
+      "paper": "CJMO 2023",
+      "year": 2023,
+      "number": 5,
+      "url": "https://cms.math.ca/competitions/cjmo/"
+    },
+    "grade": "7-10",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $ABC$ be an acute triangle with altitudes $AD$, $BE$, and $CF$ meeting at $H$. The circle passing through points $D$, $E$, and $F$ meets $AD$, $BE$, and $CF$ again at $X$, $Y$, and $Z$ respectively. Prove the following inequality:\n$$\\frac{AH}{DX} + \\frac{BH}{EY} + \\frac{CH}{FZ} \\ge 3.$$",
+    "image": null,
+    "choices": null,
+    "answer": "With $I, J, K$ the second intersections of the altitudes with the circumcircle (reflections of $H$), $DX = \\frac12 AI$, and Ptolemy in $AKIJ$ with $AK = AJ = AH$ gives $\\frac{AH}{AI} = \\frac{a}{b+c}$ where $a = JK$, $b = KI$, $c = IJ$. The inequality becomes Nesbitt's inequality.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Reflections of the orthocenter, Ptolemy and Nesbitt",
+        "body": "Let the lines $AD$, $BE$, $CF$ meet the circumcircle $\\Gamma$ of $ABC$ again at $I$, $J$, $K$. As the triangle is acute, $H$ is inside it, $D$ lies between $H$ and $I$, and $I$ is on the arc $BC$ not containing $A$ (similarly for $J$, $K$).\n\n**Lemma.** $I$ is the reflection of $H$ in $BC$ (so $D$ is the midpoint of $HI$), and similarly for $J$, $K$. Moreover $X$, $Y$, $Z$ are the midpoints of $HA$, $HB$, $HC$.\n*Proof.* In quadrilateral $AFHE$ the angles at $E$ and $F$ are right, so $\\angle FHE = 180^\\circ - \\angle A$, and $\\angle BHC = \\angle FHE$ (vertical angles). Let $H'$ be the reflection of $H$ in $BC$; it lies on line $AD$, beyond $BC$, and $\\angle BH'C = \\angle BHC = 180^\\circ - \\angle A$. So $ABH'C$ is cyclic, i.e. $H' \\in \\Gamma$, and therefore $H' = I$. The homothety with center $H$ and ratio $\\frac12$ maps $\\Gamma$ to a circle through the midpoints of $HI, HJ, HK$ — namely $D, E, F$ — so this image is the circle $DEF$. It also contains the midpoint of $HA$, which lies on line $AD$ and differs from $D$; hence it is $X$. Similarly for $Y$, $Z$. ∎\n\nConsequently $DX = DH + HX = \\frac{HI}{2} + \\frac{HA}{2} = \\frac{AI}{2}$, and similarly $EY = \\frac{BJ}{2}$, $FZ = \\frac{CK}{2}$. The inequality becomes\n$$\\frac{AH}{AI} + \\frac{BH}{BJ} + \\frac{CH}{CK} \\ge \\frac32. \\qquad (*)$$\n\n**Ptolemy.** Let $a = JK$, $b = KI$, $c = IJ$ (all positive). By the lemma, $AJ = AH$ (reflection in line $CA$, which contains $A$) and $AK = AH$. The points lie on $\\Gamma$ in the order $A, K, B, I, C, J$, so $AKIJ$ is a cyclic quadrilateral in this order, and Ptolemy's theorem gives\n$$AK \\cdot IJ + KI \\cdot JA = AI \\cdot KJ \\;\\Longrightarrow\\; AH(c + b) = AI \\cdot a \\;\\Longrightarrow\\; \\frac{AH}{AI} = \\frac{a}{b+c}.$$\nLikewise (quadrilaterals $BIJK$ and $CJKI$), $\\frac{BH}{BJ} = \\frac{b}{c+a}$ and $\\frac{CH}{CK} = \\frac{c}{a+b}$.\n\n**Nesbitt.** So $(*)$ is $\\frac{a}{b+c} + \\frac{b}{c+a} + \\frac{c}{a+b} \\ge \\frac32$. Adding $1$ to each term, this is equivalent to\n$$(a + b + c)\\left(\\frac{1}{b+c} + \\frac{1}{c+a} + \\frac{1}{a+b}\\right) \\ge \\frac92,$$\ni.e. $\\bigl((b+c) + (c+a) + (a+b)\\bigr)\\left(\\frac1{b+c} + \\frac1{c+a} + \\frac1{a+b}\\right) \\ge 9$, which is the AM–HM (or Cauchy–Schwarz) inequality. Hence $\\frac{AH}{DX} + \\frac{BH}{EY} + \\frac{CH}{FZ} \\ge 3$. ∎"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "inequalities"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

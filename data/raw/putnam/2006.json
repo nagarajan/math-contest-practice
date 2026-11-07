@@ -1,0 +1,464 @@
+[
+  {
+    "id": "putnam-2006-a1",
+    "bank": "putnam",
+    "source": {
+      "contest": "Putnam",
+      "paper": "67th William Lowell Putnam Mathematical Competition (December 2, 2006)",
+      "year": 2006,
+      "number": "A1",
+      "url": "https://kskedlaya.org/putnam-archive/"
+    },
+    "grade": "undergrad",
+    "points": 10,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Find the volume of the region of points $(x,y,z)$ such that\n$$(x^2 + y^2 + z^2 + 8)^2 \\leq 36(x^2 + y^2).$$",
+    "image": null,
+    "choices": null,
+    "answer": "6*pi^2",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "answerDisplay": "$6\\pi^2$",
+    "solutions": [
+      {
+        "title": "Recognize a solid torus (Pappus)",
+        "body": "Put $r = \\sqrt{x^2+y^2}\\ge 0$. Both $x^2+y^2+z^2+8$ and $6r$ are nonnegative, so taking square roots the inequality is equivalent to\n$$r^2 + z^2 + 8 \\le 6r \\iff (r-3)^2 + z^2 \\le 1 .$$\nSo the region is the solid of revolution obtained by rotating the disc $(x-3)^2 + z^2 \\le 1$ of the $xz$-half-plane $x \\ge 0$ about the $z$-axis: a solid torus.\n\nBy **Pappus's centroid theorem**, the volume equals the area of the disc, $\\pi$, times the distance travelled by its centre $(3,0)$, namely $2\\pi\\cdot 3$:\n$$V = \\pi\\cdot 6\\pi = 6\\pi^2 .$$\n\n**Answer:** $6\\pi^2$."
+      },
+      {
+        "title": "Washers",
+        "body": "As in the first solution the region is $(r-3)^2+z^2\\le 1$ with $r = \\sqrt{x^2+y^2}$. For fixed $z \\in[-1,1]$ the cross-section is the annulus\n$$3 - \\sqrt{1-z^2} \\le r \\le 3 + \\sqrt{1-z^2},$$\nof area $\\pi\\big[(3+\\sqrt{1-z^2})^2 - (3-\\sqrt{1-z^2})^2\\big] = 12\\pi\\sqrt{1-z^2}$. Hence\n$$V = \\int_{-1}^{1} 12\\pi \\sqrt{1-z^2}\\,dz = 12\\pi\\cdot\\frac{\\pi}{2} = 6\\pi^2,$$\nsince $\\int_{-1}^1\\sqrt{1-z^2}\\,dz$ is the area of a half unit disc.\n\n**Answer:** $6\\pi^2$."
+      }
+    ],
+    "topics": [
+      "calculus",
+      "geometry"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "putnam-2006-a2",
+    "bank": "putnam",
+    "source": {
+      "contest": "Putnam",
+      "paper": "67th William Lowell Putnam Mathematical Competition (December 2, 2006)",
+      "year": 2006,
+      "number": "A2",
+      "url": "https://kskedlaya.org/putnam-archive/"
+    },
+    "grade": "undergrad",
+    "points": 10,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Alice and Bob play a game in which they take turns removing stones from a heap that initially has $n$ stones. The number of stones removed at each turn must be one less than a prime number. The winner is the player who takes the last stone. Alice plays first. Prove that there are infinitely many $n$ such that Bob has a winning strategy. (For example, if $n=17$, then Alice might take 6 leaving 11; then Bob might take 1 leaving 10; then Alice can take the remaining stones to win.)",
+    "image": null,
+    "choices": null,
+    "answer": "Proof. If the set $B$ of losing positions (for the player to move) were finite, every $n\\notin B$ would be $b+p-1$ with $b\\in B$, $p$ prime; choosing $n = (t+1)!+t$ with $t>\\max B$ makes every $n-b+1$ composite, so $n\\in B$, a contradiction.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Losing positions and a run of composites",
+        "body": "Call a heap size $n\\ge 0$ a **losing position** if the player about to move from a heap of $n$ stones loses against best play (so Bob wins with $n$ stones exactly when $n$ is losing). Since every move removes at least $1$ stone, the game is finite and the usual backward induction applies:\n- $n = 0$ is losing (the previous player took the last stone and won);\n- $n\\ge 1$ is losing if and only if **every** legal move leads to a winning position, i.e. for no prime $p$ with $p - 1 \\le n$ is $n-(p-1)$ losing.\n\nLet $B$ be the set of losing positions; $0\\in B$. Suppose, for contradiction, that $B$ is finite, and let $t$ be an integer larger than every element of $B$ (so every $b\\in B$ satisfies $0 \\le b \\le t-1$).\n\nLet $N = (t+1)!$ and $n = N + t$. Then $n > t$, so $n\\notin B$, so $n$ is winning: there is a prime $p$ with $n - (p-1) = b\\in B$, i.e. $p = n - b + 1$.\n\nBut for $b \\in\\{0,1,\\dots,t-1\\}$, $n - b + 1 = N + j$ with $j = t - b + 1\\in\\{2,\\dots,t+1\\}$. Since $j$ divides $(t+1)! = N$, it divides $N+j$, and $2\\le j < N+j$, so $N+j$ is composite. Hence $p$ cannot be prime, a contradiction.\n\nTherefore $B$ is infinite: there are infinitely many $n$ for which the second player, Bob, has a winning strategy. ∎"
+      },
+      {
+        "title": "Variant: Chinese remainder theorem",
+        "body": "Keep the notation of the first solution and suppose $B = \\{b_1,\\dots,b_m\\}$ is finite. Any $n > \\max B$ is then a winning position, so it can be written as $n = b + (p-1)$ with $b\\in B$ and $p = n-b+1$ prime. It therefore suffices to find $n>\\max B$ such that $n - b_i + 1$ is not prime for every $i$.\n\nChoose distinct primes $q_1,\\dots,q_m$. By the Chinese remainder theorem (the moduli $q_i^2$ are pairwise coprime) there are infinitely many $n$ with\n$$n \\equiv b_i - 1 \\pmod{q_i^2}\\qquad(i = 1,\\dots,m);$$\ntake one with $n>\\max B$. Then $q_i^2$ divides $n - b_i + 1\\ge 2$, and a prime is never divisible by the square of a prime, so $n - b_i+1$ is not prime for every $i$. Thus $n$ is a losing position larger than $\\max B$, a contradiction. ∎"
+      }
+    ],
+    "topics": [
+      "games",
+      "number-theory"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "putnam-2006-a3",
+    "bank": "putnam",
+    "source": {
+      "contest": "Putnam",
+      "paper": "67th William Lowell Putnam Mathematical Competition (December 2, 2006)",
+      "year": 2006,
+      "number": "A3",
+      "url": "https://kskedlaya.org/putnam-archive/"
+    },
+    "grade": "undergrad",
+    "points": 10,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $1, 2, 3, \\dots, 2005, 2006, 2007, 2009, 2012, 2016, \\dots$ be a sequence defined by $x_k = k$ for $k=1, 2, \\dots, 2006$ and $x_{k+1} = x_k + x_{k-2005}$ for $k \\geq 2006$. Show that the sequence has 2005 consecutive terms each divisible by 2006.",
+    "image": null,
+    "choices": null,
+    "answer": "Proof. Run the recursion backwards ($x_{k-2005} = x_{k+1}-x_k$): $x_{-2004} = \\dots = x_0 = 1$ and $x_{-4009} = \\dots = x_{-2005} = 0$. The two-sided sequence is purely periodic mod $2006$, so this block of $2005$ zeros reappears at positive indices.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Extend backwards, then use periodicity",
+        "body": "**Extending the sequence.** Write the recursion as $x_{k-2005} = x_{k+1} - x_k$. Using this for $k = 2005, 2004, 2003,\\dots$ we define $x_j$ for all integers $j\\le 0$; by construction the relation\n$$x_{k+1} = x_k + x_{k-2005}\\qquad(\\ast)$$\nthen holds for **every** integer $k$ (for $k\\ge 2006$ it is the given rule, for $k\\le 2005$ it is our definition).\n\n**Computing some values.** For $k = 2005, 2004,\\dots,1$ we get $x_{k-2005} = x_{k+1} - x_k = (k+1) - k = 1$, so\n$$x_0 = x_{-1} = \\cdots = x_{-2004} = 1 .$$\nTogether with $x_1 = 1$ we have $x_{-2004} = \\dots = x_1 = 1$. Next for $k = 0,-1,\\dots,-2004$: $x_{k-2005} = x_{k+1} - x_k = 1 - 1 = 0$, so\n$$x_{-2005} = x_{-2006} = \\cdots = x_{-4009} = 0,$$\na block of $2005$ consecutive zeros.\n\n**Periodicity mod 2006.** Let $s_k$ be the vector $(x_{k-2005},\\dots,x_k)$ of $2006$ consecutive terms reduced mod $2006$. By $(\\ast)$, $s_k$ determines $s_{k+1}$ (the new last entry is $x_k + x_{k-2005}$) and also $s_{k-1}$ (the new first entry is $x_{k-2006} = x_{k} - x_{k-1}$). There are only $2006^{2006}$ possible vectors, so $s_i = s_j$ for some $i<j$. Applying the forward and backward rules repeatedly gives $s_{k+L} = s_k$ for all integers $k$, where $L = j-i \\ge 1$; hence $x_{k+L}\\equiv x_k \\pmod{2006}$ for every integer $k$.\n\n**Conclusion.** Choose an integer $m$ with $mL \\ge 4010$. Then the terms $x_{-4009+mL},\\dots,x_{-2005+mL}$ have positive indices, so they are terms of the original sequence, and each is $\\equiv 0 \\pmod{2006}$. These are $2005$ consecutive terms divisible by $2006$. ∎\n\n*Remark.* Nothing special about $2006$ was used: for any modulus $N$ the sequence has $2005$ consecutive terms divisible by $N$."
+      }
+    ],
+    "topics": [
+      "sequences-series",
+      "number-theory"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "putnam-2006-a4",
+    "bank": "putnam",
+    "source": {
+      "contest": "Putnam",
+      "paper": "67th William Lowell Putnam Mathematical Competition (December 2, 2006)",
+      "year": 2006,
+      "number": "A4",
+      "url": "https://kskedlaya.org/putnam-archive/"
+    },
+    "grade": "undergrad",
+    "points": 10,
+    "timeMinutes": null,
+    "type": "text",
+    "prompt": "Let $S = \\{1, 2, \\dots, n\\}$ for some integer $n > 1$. Say a permutation $\\pi$ of $S$ has a *local maximum* at $k \\in S$ if\n\n- (i) $\\pi(k) > \\pi(k+1)$ for $k=1$;\n- (ii) $\\pi(k-1) < \\pi(k)$ and $\\pi(k) > \\pi(k+1)$ for $1 < k < n$;\n- (iii) $\\pi(k-1) < \\pi(k)$ for $k=n$.\n\n(For example, if $n=5$ and $\\pi$ takes values at $1, 2, 3, 4, 5$ of $2, 1, 4, 5, 3$, then $\\pi$ has a local maximum of 2 at $k=1$, and a local maximum of 5 at $k=4$.) What is the average number of local maxima of a permutation of $S$, averaging over all permutations of $S$?",
+    "image": null,
+    "choices": null,
+    "answer": "(n+1)/3",
+    "acceptedAnswers": [
+      "(n+1)/3",
+      "(1+n)/3",
+      "n/3+1/3",
+      "1/3+n/3",
+      "(n + 1)/3",
+      "\\frac{n+1}{3}"
+    ],
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Linearity of expectation over positions",
+        "body": "Choose $\\pi$ uniformly at random and let $X_k$ be the indicator that $\\pi$ has a local maximum at $k$. The average number of local maxima is $E\\left[\\sum_k X_k\\right] = \\sum_{k=1}^n P(X_k = 1)$.\n\n- $k = 1$: we need $\\pi(1) > \\pi(2)$. By the symmetry swapping the values $\\pi(1),\\pi(2)$, this has probability $\\frac12$. Likewise $k=n$ has probability $\\frac12$.\n- $1<k<n$: we need $\\pi(k)$ to be the largest of $\\pi(k-1),\\pi(k),\\pi(k+1)$. By symmetry each of the three is equally likely to be the largest, so the probability is $\\frac13$.\n\nHence the average is\n$$2\\cdot\\frac12 + (n-2)\\cdot\\frac13 = \\frac{n+1}{3}.$$\n(Check $n=2$: the permutations $12$ and $21$ each have exactly one local maximum; $\\frac{2+1}{3} = 1$.)\n\n**Answer:** $\\dfrac{n+1}{3}$."
+      },
+      {
+        "title": "Linearity of expectation over values",
+        "body": "Write the permutation as the word $\\pi(1)\\pi(2)\\cdots\\pi(n)$ and append a symbol $*$ at the end, then join the ends into a circle: the $n+1$ symbols $1,\\dots,n,*$ sit around a circle, and as $\\pi$ ranges over all permutations, the circular arrangements (read from $*$) range over all arrangements equally often. The value $i$ is a local maximum exactly when both circular neighbours of $i$ are in $\\{*,1,\\dots,i-1\\}$ (the symbol $*$ plays the role of a smaller value beyond either end).\n\nThe ordered pair of neighbours of $i$ is a uniformly random ordered pair of distinct symbols from the other $n$ symbols, so\n$$P(i \\text{ is a local maximum}) = \\frac{i(i-1)}{n(n-1)} .$$\nSumming,\n$$\\sum_{i=1}^n \\frac{i(i-1)}{n(n-1)} = \\frac{2}{n(n-1)}\\sum_{i=1}^n\\binom i2 = \\frac{2}{n(n-1)}\\binom{n+1}{3} = \\frac{n+1}{3}.$$\n\n**Answer:** $\\dfrac{n+1}{3}$."
+      }
+    ],
+    "topics": [
+      "counting",
+      "probability"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "putnam-2006-a5",
+    "bank": "putnam",
+    "source": {
+      "contest": "Putnam",
+      "paper": "67th William Lowell Putnam Mathematical Competition (December 2, 2006)",
+      "year": 2006,
+      "number": "A5",
+      "url": "https://kskedlaya.org/putnam-archive/"
+    },
+    "grade": "undergrad",
+    "points": 10,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $n$ be a positive odd integer and let $\\theta$ be a real number such that $\\theta/\\pi$ is irrational. Set $a_k = \\tan (\\theta + k \\pi/n)$, $k=1,2,\\dots,n$. Prove that\n$$\\frac{a_1 + a_2 + \\cdots + a_n}{a_1 a_2 \\cdots a_n}$$\nis an integer, and determine its value.",
+    "image": null,
+    "choices": null,
+    "answer": "The value is $(-1)^{(n-1)/2}\\,n$, i.e. $n$ if $n\\equiv1\\pmod 4$ and $-n$ if $n\\equiv 3\\pmod 4$. The $a_k$ are the roots of $(1+ix)^n - e^{2in\\theta}(1-ix)^n$; read off the ratio from Vieta's formulas.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "A polynomial with roots a_k (Vieta)",
+        "body": "**Well-definedness.** If $\\theta + k\\pi/n$ were an odd multiple of $\\pi/2$, then $\\theta/\\pi$ would be rational; so every $a_k$ is a real number. Also the angles $\\theta+k\\pi/n$ ($1\\le k\\le n$) are pairwise incongruent mod $\\pi$ and $\\tan$ is injective on each interval of length $\\pi$ between its poles, so $a_1,\\dots,a_n$ are distinct.\n\n**A polynomial.** For real $t$ with $\\cos\\varphi\\ne0$ and $t = \\tan\\varphi$,\n$$1 + it = \\frac{\\cos\\varphi + i\\sin\\varphi}{\\cos\\varphi} = \\frac{e^{i\\varphi}}{\\cos\\varphi},\\qquad 1 - it = \\frac{e^{-i\\varphi}}{\\cos\\varphi},$$\nso $1 + it = e^{2i\\varphi}(1-it)$. With $\\varphi = \\theta + k\\pi/n$ and raising to the $n$-th power, $(1+ia_k)^n = e^{2in\\theta + 2\\pi i k}(1-ia_k)^n = \\omega(1-ia_k)^n$ where $\\omega = e^{2in\\theta}$. Hence every $a_k$ is a root of\n$$Q(x) = (1+ix)^n - \\omega (1-ix)^n = c_nx^n + c_{n-1}x^{n-1} + \\cdots + c_0 .$$\n\n**Coefficients.** Using that $n$ is odd:\n$$c_n = i^n - \\omega(-i)^n = i^n(1+\\omega),\\qquad c_{n-1} = n i^{n-1} - \\omega\\, n(-i)^{n-1} = n i^{n-1}(1-\\omega),\\qquad c_0 = 1-\\omega .$$\nSince $\\theta/\\pi$ is irrational, $2n\\theta$ is not a multiple of $\\pi$, so $\\omega \\neq \\pm1$. Thus $c_n\\ne0$: $Q$ has degree exactly $n$, and its $n$ roots are exactly the distinct numbers $a_1,\\dots,a_n$. Also $c_0\\ne 0$, so no $a_k$ is $0$.\n\n**Vieta.** $a_1 + \\cdots + a_n = -c_{n-1}/c_n$ and $a_1\\cdots a_n = (-1)^n c_0/c_n = -c_0/c_n$. Therefore\n$$\\frac{a_1+\\cdots+a_n}{a_1\\cdots a_n} = \\frac{c_{n-1}}{c_0} = n\\,i^{n-1} = n\\,(-1)^{(n-1)/2},$$\nan integer. (Check $n=1$: $a_1/a_1 = 1$. For $n = 3$ the classical identities $\\tan x+\\tan(x+\\frac\\pi3)+\\tan(x+\\frac{2\\pi}3) = 3\\tan 3x$ and $\\tan x\\tan(x+\\frac\\pi3)\\tan(x+\\frac{2\\pi}3) = -\\tan3x$ give $-3$.)\n\n**Answer:** $n$ if $n\\equiv 1 \\pmod 4$, and $-n$ if $n\\equiv 3\\pmod 4$. ∎"
+      }
+    ],
+    "topics": [
+      "trigonometry",
+      "complex-numbers",
+      "polynomials"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "putnam-2006-a6",
+    "bank": "putnam",
+    "source": {
+      "contest": "Putnam",
+      "paper": "67th William Lowell Putnam Mathematical Competition (December 2, 2006)",
+      "year": 2006,
+      "number": "A6",
+      "url": "https://kskedlaya.org/putnam-archive/"
+    },
+    "grade": "undergrad",
+    "points": 10,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Four points are chosen uniformly and independently at random in the interior of a given circle. Find the probability that they are the vertices of a convex quadrilateral.",
+    "image": null,
+    "choices": null,
+    "answer": "1-35/(12*pi^2)",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "answerDisplay": "$1-\\frac{35}{12\\pi^2}$",
+    "solutions": [
+      {
+        "title": "Reduce to the mean area of a random triangle",
+        "body": "Take the circle to have radius $1$ (area $\\pi$); write $[XYZ]$ for the area of triangle $XYZ$.\n\n**Reduction.** With probability $1$ no three of the four points $P,Q,R,S$ are collinear. Then the four points fail to be the vertices of a convex quadrilateral exactly when one of them lies inside the triangle formed by the other three, and these four events are mutually exclusive (if $S$ is inside $PQR$, then $S$ is not a vertex of the convex hull, while $P,Q,R$ are). By symmetry,\n$$P(\\text{not convex}) = 4\\,P(S\\in\\triangle PQR) = 4\\,\\frac{E[PQR]}{\\pi},$$\nbecause, given $P,Q,R$, the chance that the independent uniform point $S$ falls in the triangle is $[PQR]/\\pi$. So we need $E[PQR]$ for three independent uniform points of the unit disc.\n\n**Scaling by the farthest point.** Let $O$ be the centre and $c = \\max(OP,OQ,OR)$. Since $P(OP\\le r) = r^2$, we get $P(c\\le r) = r^6$, so $c$ has density $6c^5$ on $[0,1]$ and $E[c^2] = \\int_0^1 6c^7\\,dc = \\frac34$. Condition on $c$ and on which point is farthest (say $R$). By rotational symmetry $R$ is uniform on the circle of radius $c$, and $P,Q$ are independent and uniform in the disc of radius $c$. Scaling by $1/c$,\n$$E\\big([PQR]\\,\\big|\\,c\\big) = c^2 X,$$\nwhere $X$ is the expected area of a triangle with one vertex at a **fixed point of the unit circle** and two vertices independent and uniform in the unit disc. Hence $E[PQR] = \\frac34 X$.\n\n**Computing $X$.** Put the fixed vertex at the origin with the disc above it: the disc is $\\{(r,\\varphi): 0\\le\\varphi\\le\\pi,\\ 0\\le r\\le 2\\sin\\varphi\\}$ in polar coordinates, and a uniform point has density $\\frac1\\pi\\,r\\,dr\\,d\\varphi$. For points $(r,\\varphi)$ and $(r',\\varphi')$ the triangle has area $\\frac12 rr'\\sin|\\varphi-\\varphi'|$. Integrating out $r,r'$ with $\\int_0^{2\\sin\\varphi} r^2\\,dr = \\frac83\\sin^3\\varphi$,\n$$X = \\frac{1}{\\pi^2}\\cdot\\frac12\\cdot\\frac{64}{9}\\int_0^\\pi\\!\\!\\int_0^\\pi \\sin^3\\varphi\\,\\sin^3\\varphi'\\,\\sin|\\varphi - \\varphi'|\\,d\\varphi'\\,d\\varphi = \\frac{64}{9\\pi^2}\\, I,$$\n$$I = \\int_0^\\pi\\!\\!\\int_0^\\varphi \\sin^3\\varphi\\,\\sin^3\\psi\\,\\sin(\\varphi-\\psi)\\,d\\psi\\,d\\varphi$$\n(using symmetry in the two points). Expand $\\sin(\\varphi - \\psi) = \\sin\\varphi\\cos\\psi - \\cos\\varphi\\sin\\psi$ and let $G(\\varphi) = \\int_0^\\varphi\\sin^4\\psi\\,d\\psi$. Since $\\int_0^\\varphi \\sin^3\\psi\\cos\\psi\\,d\\psi = \\frac14\\sin^4\\varphi$,\n$$I = \\int_0^\\pi \\frac{\\sin^8\\varphi}{4}\\,d\\varphi - \\int_0^\\pi \\sin^3\\varphi\\cos\\varphi\\, G(\\varphi)\\,d\\varphi .$$\nIntegrate the second integral by parts with $d\\big(\\tfrac14\\sin^4\\varphi\\big) = \\sin^3\\varphi\\cos\\varphi\\,d\\varphi$; the boundary term vanishes because $\\sin 0 = \\sin\\pi = 0$, and $G' = \\sin^4$:\n$$\\int_0^\\pi \\sin^3\\varphi\\cos\\varphi\\,G(\\varphi)\\,d\\varphi = -\\int_0^\\pi\\frac{\\sin^8\\varphi}{4}\\,d\\varphi .$$\nWith the Wallis value $\\int_0^\\pi\\sin^8\\varphi\\,d\\varphi = \\frac{7\\cdot5\\cdot3\\cdot1}{8\\cdot6\\cdot4\\cdot2}\\pi = \\frac{35\\pi}{128}$,\n$$I = 2\\cdot\\frac14\\cdot\\frac{35\\pi}{128} = \\frac{35\\pi}{256},\\qquad X = \\frac{64}{9\\pi^2}\\cdot\\frac{35\\pi}{256} = \\frac{35}{36\\pi},\\qquad E[PQR] = \\frac34X = \\frac{35}{48\\pi}.$$\n\n**Conclusion.**\n$$P(\\text{convex}) = 1 - \\frac{4}{\\pi}\\cdot\\frac{35}{48\\pi} = 1 - \\frac{35}{12\\pi^2}\\approx 0.7045 .$$\n\n**Answer:** $1 - \\dfrac{35}{12\\pi^2}$."
+      }
+    ],
+    "topics": [
+      "probability",
+      "geometry",
+      "calculus"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "putnam-2006-b1",
+    "bank": "putnam",
+    "source": {
+      "contest": "Putnam",
+      "paper": "67th William Lowell Putnam Mathematical Competition (December 2, 2006)",
+      "year": 2006,
+      "number": "B1",
+      "url": "https://kskedlaya.org/putnam-archive/"
+    },
+    "grade": "undergrad",
+    "points": 10,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Show that the curve $x^3 + 3xy + y^3 = 1$ contains only one set of three distinct points, $A$, $B$, and $C$, which are vertices of an equilateral triangle, and find its area.",
+    "image": null,
+    "choices": null,
+    "answer": "3*sqrt(3)/2",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "answerDisplay": "$\\frac{3\\sqrt{3}}{2}$",
+    "solutions": [
+      {
+        "title": "Factor the cubic",
+        "body": "**The curve is a line plus a point.** One checks by expanding that\n$$x^3 + 3xy + y^3 - 1 = (x+y-1)(x^2 - xy + y^2 + x + y + 1),$$\nand\n$$x^2 - xy + y^2 + x + y + 1 = \\tfrac12\\left[(x+1)^2 + (y+1)^2 + (x-y)^2\\right],$$\nwhich vanishes only when $x = y = -1$. So the curve is the line $\\ell: x+y=1$ together with the single point $P=(-1,-1)$ (which is not on $\\ell$).\n\n**The triangle.** Three distinct points of the line $\\ell$ are collinear, so an equilateral triangle with vertices on the curve must have $P$ as a vertex and its other two vertices $B, C$ on $\\ell$. In an equilateral triangle the foot of the altitude from $P$ is the midpoint of $BC$; it must be the foot $M=(\\tfrac12,\\tfrac12)$ of the perpendicular from $P$ to $\\ell$. The altitude has length\n$$h = PM = \\sqrt{\\left(\\tfrac32\\right)^2+\\left(\\tfrac32\\right)^2} = \\frac{3}{\\sqrt2},$$\nand $B,C$ must be the two points of $\\ell$ at distance $h/\\sqrt3$ from $M$. Conversely these two points with $P$ form an equilateral triangle. So there is exactly one such set $\\{A,B,C\\}$.\n\n**Area.** An equilateral triangle with altitude $h$ has side $2h/\\sqrt3$ and area $\\frac12\\cdot\\frac{2h}{\\sqrt3}\\cdot h = \\frac{h^2}{\\sqrt3} = \\frac{9/2}{\\sqrt3} = \\frac{3\\sqrt3}{2}$.\n\n**Answer:** $\\dfrac{3\\sqrt3}{2}$."
+      }
+    ],
+    "topics": [
+      "polynomials",
+      "geometry"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "putnam-2006-b2",
+    "bank": "putnam",
+    "source": {
+      "contest": "Putnam",
+      "paper": "67th William Lowell Putnam Mathematical Competition (December 2, 2006)",
+      "year": 2006,
+      "number": "B2",
+      "url": "https://kskedlaya.org/putnam-archive/"
+    },
+    "grade": "undergrad",
+    "points": 10,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Prove that, for every set $X = \\{x_1, x_2, \\dots, x_n\\}$ of $n$ real numbers, there exists a non-empty subset $S$ of $X$ and an integer $m$ such that\n$$\\left| m + \\sum_{s \\in S} s \\right| \\leq \\frac{1}{n+1}.$$",
+    "image": null,
+    "choices": null,
+    "answer": "Proof. Apply the pigeonhole principle to the fractional parts of the $n+1$ partial sums $s_0=0, s_1=x_1,\\dots, s_n = x_1+\\cdots+x_n$ placed on a circle of circumference $1$: two are within $\\frac1{n+1}$, and the corresponding block $x_{i+1},\\dots,x_j$ works.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Pigeonhole on fractional parts of partial sums",
+        "body": "Let $\\{y\\} = y - \\lfloor y\\rfloor\\in[0,1)$. Put $s_0 = 0$ and $s_j = x_1+\\cdots+x_j$ for $1\\le j\\le n$. Sort the $n+1$ numbers $\\{s_0\\},\\dots,\\{s_n\\}$ as $0 = t_0\\le t_1\\le\\cdots\\le t_n<1$ (the smallest is $0 = \\{s_0\\}$). The $n+1$ numbers\n$$t_1 - t_0,\\ t_2 - t_1,\\ \\dots,\\ t_n - t_{n-1},\\ 1 - t_n$$\nare nonnegative and sum to $1$, so one of them is at most $\\frac1{n+1}$.\n\n**Case 1: $t_{r} - t_{r-1}\\le \\frac1{n+1}$ for some $r$.** Then $t_{r-1} = \\{s_a\\}$, $t_r=\\{s_b\\}$ for two different indices $a\\ne b$; let $i<j$ be these two indices in increasing order. Then $|\\{s_j\\} - \\{s_i\\}|\\le\\frac1{n+1}$. Take $S = \\{x_{i+1},\\dots,x_j\\}$ (nonempty) and $m = \\lfloor s_i\\rfloor - \\lfloor s_j\\rfloor$. Then\n$$m + \\sum_{s\\in S}s = m + s_j - s_i = \\{s_j\\}-\\{s_i\\},$$\nwhose absolute value is at most $\\frac1{n+1}$.\n\n**Case 2: $1 - t_n \\le \\frac1{n+1}$.** Since $n\\ge1$, $1 - t_n<1$, so $t_n>0$ and $t_n = \\{s_j\\}$ for some $j\\ge1$. Take $S = \\{x_1,\\dots,x_j\\}$ and $m = -\\lfloor s_j\\rfloor - 1$. Then $m + s_j = \\{s_j\\} - 1 = t_n - 1$, of absolute value $1 - t_n\\le\\frac1{n+1}$.\n\nIn either case we have found the required $S$ and $m$. ∎"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "inequalities"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "putnam-2006-b3",
+    "bank": "putnam",
+    "source": {
+      "contest": "Putnam",
+      "paper": "67th William Lowell Putnam Mathematical Competition (December 2, 2006)",
+      "year": 2006,
+      "number": "B3",
+      "url": "https://kskedlaya.org/putnam-archive/"
+    },
+    "grade": "undergrad",
+    "points": 10,
+    "timeMinutes": null,
+    "type": "text",
+    "prompt": "Let $S$ be a finite set of points in the plane. A linear partition of $S$ is an unordered pair $\\{A,B\\}$ of subsets of $S$ such that $A \\cup B = S$, $A \\cap B = \\emptyset$, and $A$ and $B$ lie on opposite sides of some straight line disjoint from $S$ ($A$ or $B$ may be empty). Let $L_S$ be the number of linear partitions of $S$. For each positive integer $n$, find the maximum of $L_S$ over all sets $S$ of $n$ points.",
+    "image": null,
+    "choices": null,
+    "answer": "n(n-1)/2+1",
+    "acceptedAnswers": [
+      "n(n-1)/2 + 1",
+      "1+n(n-1)/2",
+      "(n^2-n+2)/2",
+      "(n^2-n)/2+1",
+      "binom(n,2)+1",
+      "C(n,2)+1",
+      "\\binom{n}{2}+1",
+      "nC2+1",
+      "(n^2 - n + 2)/2"
+    ],
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Induction by deleting a point; convex polygon for equality",
+        "body": "The answer is $\\binom n2 + 1$.\n\n**Lower bound.** Put the $n$ points on a circle. The trivial partition $\\{S,\\emptyset\\}$ is linear. For $n \\ge 2$, the $n$ points cut the circle into $n$ open arcs (\"gaps\"). Choosing two distinct gaps and a point $U,V$ in each, the line $UV$ meets the circle only at $U,V$, so it misses $S$ and separates the points on the two arcs of the circle between $U$ and $V$. This gives a partition into two nonempty sets of cyclically consecutive points, and different pairs of gaps give different partitions. Hence $L_S \\ge \\binom n2 + 1$.\n\n**Upper bound, by induction on $n$.** For $n=1$, the only partition is $\\{S,\\emptyset\\}$, so $L_S = 1 = \\binom12+1$. Let $n\\ge2$, pick any $P\\in S$ and let $S' = S\\setminus\\{P\\}$.\n\nA linear partition $\\{A,B\\}$ of $S$ restricts to the linear partition $\\{A\\setminus\\{P\\}, B\\setminus\\{P\\}\\}$ of $S'$ (same line). A partition $\\{A',B'\\}$ of $S'$ has at most two extensions, $\\{A'\\cup\\{P\\},B'\\}$ and $\\{A',B'\\cup\\{P\\}\\}$.\n\n*Claim: if both extensions are linear, then $\\{A',B'\\}$ is induced by a line through $P$ that misses $S'$.* Take affine functions $f_1, f_2$ (of the form $\\alpha x+\\beta y+\\gamma$, not constant) with $f_1>0$ on $A'\\cup\\{P\\}$, $f_1<0$ on $B'$, and $f_2 > 0$ on $A'$, $f_2<0$ on $B'\\cup\\{P\\}$. Let $g = -f_2(P)\\,f_1 + f_1(P)\\,f_2$; both coefficients are positive, so $g>0$ on $A'$, $g<0$ on $B'$, and $g(P) = 0$. As $S'\\neq\\emptyset$, $g$ is not identically zero, and it is not a nonzero constant (it vanishes at $P$), so $\\{g=0\\}$ is a line through $P$ missing $S'$ and inducing $\\{A',B'\\}$.\n\n*Lines through $P$ induce at most $n-1$ partitions of $S'$.* Parametrize lines through $P$ by their direction, a point of a circle (directions mod $180^\\circ$). The at most $n-1$ directions pointing at points of $S'$ cut this circle into at most $n-1$ open arcs. As a line rotates about $P$ within one arc, no point of $S'$ crosses it, so the induced partition of $S'$ is constant on each arc.\n\nHence $L_S \\le L_{S'} + (n-1)\\le \\binom{n-1}2 + 1 + (n-1) = \\binom n2+1$.\n\nCombining both bounds, the maximum is\n$$\\binom n2 + 1 = \\frac{n(n-1)}{2}+1 .$$\n∎"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "counting"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "putnam-2006-b4",
+    "bank": "putnam",
+    "source": {
+      "contest": "Putnam",
+      "paper": "67th William Lowell Putnam Mathematical Competition (December 2, 2006)",
+      "year": 2006,
+      "number": "B4",
+      "url": "https://kskedlaya.org/putnam-archive/"
+    },
+    "grade": "undergrad",
+    "points": 10,
+    "timeMinutes": null,
+    "type": "text",
+    "prompt": "Let $Z$ denote the set of points in $\\mathbb{R}^n$ whose coordinates are 0 or 1. (Thus $Z$ has $2^n$ elements, which are the vertices of a unit hypercube in $\\mathbb{R}^n$.) Given a vector subspace $V$ of $\\mathbb{R}^n$, let $Z(V)$ denote the number of members of $Z$ that lie in $V$. Let $k$ be given, $0 \\leq k \\leq n$. Find the maximum, over all vector subspaces $V \\subseteq \\mathbb{R}^n$ of dimension $k$, of $Z(V)$.",
+    "image": null,
+    "choices": null,
+    "answer": "2^k",
+    "acceptedAnswers": [
+      "2^k",
+      "2**k",
+      "2^{k}"
+    ],
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Row rank equals column rank",
+        "body": "**Attained.** The coordinate subspace $V = \\{x: x_{k+1} = \\cdots = x_n = 0\\}$ has dimension $k$ and contains the $2^k$ points of $Z$ whose last $n-k$ coordinates are $0$.\n\n**Upper bound.** Let $V$ have dimension $k$ and let $N = Z(V)$ ($N\\ge1$ since $0\\in V$). Form the $N\\times n$ matrix $M$ whose rows are the points of $V\\cap Z$. Its rows lie in $V$, so its rank $r$ satisfies $r\\le k$. Column rank equals row rank, so we can choose $r$ columns $j_1,\\dots,j_r$ that span the column space; every column $j$ is then a fixed linear combination $\\sum_t \\lambda_{j,t}\\,(\\text{column } j_t)$. Reading this row by row: for every point $z\\in V\\cap Z$,\n$$z_j = \\sum_{t=1}^r\\lambda_{j,t}\\,z_{j_t}\\quad\\text{for all } j,$$\nso $z$ is determined by its coordinates $(z_{j_1},\\dots,z_{j_r})\\in\\{0,1\\}^r$. Therefore\n$$N\\le 2^r\\le 2^k .$$\n\n**Answer:** the maximum is $2^k$. ∎"
+      },
+      {
+        "title": "Induction on n (affine version)",
+        "body": "We prove more generally: an affine subspace $W\\subseteq\\mathbb R^n$ of dimension $k$ contains at most $2^k$ points of $Z$. Induct on $n$; for $n=0$ there is one point. Let $n \\ge 1$ and $H_0 = \\{x_n = 0\\}$, $H_1 = \\{x_n = 1\\}$, so $Z\\subset H_0\\cup H_1$.\n\n- If $W\\subseteq H_0$ or $W\\subseteq H_1$: drop the last coordinate; $W$ becomes a $k$-dimensional affine subspace of $\\mathbb R^{n-1}$, and $W\\cap Z$ becomes its intersection with the cube of $\\mathbb R^{n-1}$, so there are at most $2^k$ points (by induction).\n- Otherwise each $W\\cap H_c$ is empty or an affine subspace of dimension at most $k-1$ (a $k$-dimensional $W$ meeting a hyperplane without lying in it). Dropping the last coordinate and using induction, each contains at most $2^{k-1}$ points of $Z$, so $W$ contains at most $2^k$.\n\nThe example $\\{x_{k+1}=\\cdots=x_n=0\\}$ shows $2^k$ is attained. **Answer:** $2^k$. ∎"
+      }
+    ],
+    "topics": [
+      "linear-algebra",
+      "counting"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "putnam-2006-b5",
+    "bank": "putnam",
+    "source": {
+      "contest": "Putnam",
+      "paper": "67th William Lowell Putnam Mathematical Competition (December 2, 2006)",
+      "year": 2006,
+      "number": "B5",
+      "url": "https://kskedlaya.org/putnam-archive/"
+    },
+    "grade": "undergrad",
+    "points": 10,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "For each continuous function $f: [0,1] \\to \\mathbb{R}$, let $I(f) = \\int_0^1 x^2 f(x)\\,dx$ and $J(f) = \\int_0^1 x \\left(f(x)\\right)^2\\,dx$. Find the maximum value of $I(f) - J(f)$ over all such functions $f$.",
+    "image": null,
+    "choices": null,
+    "answer": "1/16",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "answerDisplay": "$\\frac{1}{16}$",
+    "solutions": [
+      {
+        "title": "Complete the square inside the integral",
+        "body": "For each $x\\in[0,1]$,\n$$x^2f(x) - x f(x)^2 = x\\big(x f(x) - f(x)^2\\big) = x\\left(\\frac{x^2}{4} - \\Big(f(x) - \\frac x2\\Big)^2\\right) = \\frac{x^3}{4} - x\\Big(f(x)-\\frac x2\\Big)^2 .$$\nSince $x \\ge 0$ on $[0,1]$, the last term is $\\le 0$, so\n$$I(f) - J(f) = \\int_0^1 \\frac{x^3}{4}\\,dx - \\int_0^1 x\\Big(f(x)-\\frac x2\\Big)^2dx \\le \\frac1{16},$$\nwith equality for the continuous function $f(x) = \\frac x2$ (check: $I = \\frac18$, $J = \\frac1{16}$).\n\n**Answer:** $\\dfrac1{16}$."
+      },
+      {
+        "title": "Maximize pointwise",
+        "body": "For fixed $x\\in(0,1]$, the quadratic $y\\mapsto x^2y - xy^2$ is maximized at $y = x/2$ (vertex of a downward parabola), with maximum value $\\frac{x^3}{2} - \\frac{x^3}{4} = \\frac{x^3}{4}$. Hence for every $f$ the integrand of $I(f)-J(f)$ is at most $\\frac{x^3}{4}$, so $I(f)-J(f)\\le \\int_0^1\\frac{x^3}{4}dx = \\frac1{16}$; and $f(x) = x/2$ achieves the pointwise maximum at every $x$, hence equality.\n\n**Answer:** $\\dfrac1{16}$."
+      }
+    ],
+    "topics": [
+      "calculus",
+      "inequalities"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "putnam-2006-b6",
+    "bank": "putnam",
+    "source": {
+      "contest": "Putnam",
+      "paper": "67th William Lowell Putnam Mathematical Competition (December 2, 2006)",
+      "year": 2006,
+      "number": "B6",
+      "url": "https://kskedlaya.org/putnam-archive/"
+    },
+    "grade": "undergrad",
+    "points": 10,
+    "timeMinutes": null,
+    "type": "text",
+    "prompt": "Let $k$ be an integer greater than 1. Suppose $a_0 > 0$, and define\n$$a_{n+1} = a_n + \\frac{1}{\\sqrt[k]{a_n}}$$\nfor $n \\geq 0$. Evaluate\n$$\\lim_{n \\to \\infty} \\frac{a_n^{k+1}}{n^k}.$$",
+    "image": null,
+    "choices": null,
+    "answer": "((k+1)/k)^k",
+    "acceptedAnswers": [
+      "((k+1)/k)^k",
+      "(1+1/k)^k",
+      "((k + 1)/k)^k",
+      "(1 + 1/k)^k",
+      "(k+1)^k/k^k",
+      "\\left(\\frac{k+1}{k}\\right)^k"
+    ],
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Study b_n = a_n^{(k+1)/k} and use Cesàro",
+        "body": "**$a_n\\to\\infty$.** By induction all $a_n>0$, and $a_{n+1}>a_n$. If $(a_n)$ were bounded it would converge to some $L>0$, but then $a_{n+1} - a_n = a_n^{-1/k}\\ge L^{-1/k}>0$ for all $n$ would force $a_n\\to\\infty$. So $a_n\\to\\infty$.\n\n**Increments of $b_n = a_n^{(k+1)/k}$.** Let $m = \\frac{k+1}{k}$ and $x_n = a_n^{-(k+1)/k} = 1/b_n$, so $x_n > 0$ and $x_n \\to 0$. Since $a_{n+1} = a_n\\big(1 + a_n^{-(k+1)/k}\\big) = a_n(1+x_n)$,\n$$b_{n+1} - b_n = b_n\\big((1+x_n)^m - 1\\big) = \\frac{(1+x_n)^m - 1}{x_n}\\ \\longrightarrow\\ \\frac{d}{dx}(1+x)^m\\Big|_{x=0} = m .$$\n\n**Cesàro.** If $d_n\\to m$, then $\\frac1n\\sum_{i=0}^{n-1}d_i\\to m$: given $\\varepsilon>0$ pick $N$ with $|d_i - m|<\\varepsilon$ for $i\\ge N$; then\n$$\\left|\\frac1n\\sum_{i=0}^{n-1}d_i - m\\right|\\le\\frac1n\\sum_{i<N}|d_i - m| + \\varepsilon<2\\varepsilon$$\nfor $n$ large. Applying this to $d_i = b_{i+1} - b_i$:\n$$\\frac{b_n}{n} = \\frac{b_0}{n} + \\frac1n\\sum_{i=0}^{n-1}(b_{i+1} - b_i)\\ \\longrightarrow\\ m .$$\n\n**Conclusion.** $a_n^{k+1} = b_n^{\\,k}$, so\n$$\\frac{a_n^{k+1}}{n^k} = \\left(\\frac{b_n}{n}\\right)^k\\ \\longrightarrow\\ m^k = \\left(\\frac{k+1}{k}\\right)^k .$$\n\n**Answer:** $\\left(\\dfrac{k+1}{k}\\right)^k$.\n\n*Heuristic check.* The recursion resembles $y' = y^{-1/k}$, i.e. $\\frac{d}{dt}y^{(k+1)/k} = \\frac{k+1}{k}$, so $y^{(k+1)/k}\\approx\\frac{k+1}{k}t$ — exactly what the proof makes rigorous."
+      }
+    ],
+    "topics": [
+      "sequences-series",
+      "real-analysis"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

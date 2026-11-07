@@ -1,0 +1,430 @@
+[
+  {
+    "id": "putnam-1992-a1",
+    "bank": "putnam",
+    "source": {
+      "contest": "Putnam",
+      "paper": "53rd William Lowell Putnam Mathematical Competition (December 5, 1992)",
+      "year": 1992,
+      "number": "A1",
+      "url": "https://kskedlaya.org/putnam-archive/"
+    },
+    "grade": "undergrad",
+    "points": 10,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Prove that $f(n) = 1-n$ is the only integer-valued function defined on the integers that satisfies the following conditions.\n- (i) $f(f(n)) = n$, for all integers $n$;\n- (ii) $f(f(n+2)+2) = n$ for all integers $n$;\n- (iii) $f(0) = 1$.",
+    "image": null,
+    "choices": null,
+    "answer": "Proof. Applying $f$ to (ii) and using (i) gives $f(n+2)+2 = f(n)$, so $f$ is determined by $f(0)=1$ and $f(1)=f(f(0))=0$; this forces $f(n)=1-n$, which indeed satisfies (i)–(iii).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Derive a step-2 recursion",
+        "body": "**$f(n) = 1-n$ works.** $f(f(n)) = 1-(1-n) = n$; $f(f(n+2)+2) = f(1-(n+2)+2) = f(1-n) = n$; $f(0) = 1$.\n\n**Uniqueness.** Let $f$ satisfy (i)–(iii). Apply $f$ to both sides of (ii) and use (i) on the left:\n$$f(n+2) + 2 = f\\big(f(f(n+2)+2)\\big) = f(n) \\qquad\\text{for all integers } n.$$\nSo $f(n+2) = f(n) - 2$, equivalently $f(n-2) = f(n)+2$. By induction in both directions, for every integer $k$,\n$$f(2k) = f(0) - 2k,\\qquad f(2k+1) = f(1) - 2k.$$\nNow $f(0) = 1$ by (iii), and $f(1) = f(f(0)) = 0$ by (i). Hence $f(2k) = 1-2k$ and $f(2k+1) = -2k = 1-(2k+1)$, i.e. $f(n) = 1-n$ for all $n$. ∎"
+      }
+    ],
+    "topics": [
+      "functional-equations"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "putnam-1992-a2",
+    "bank": "putnam",
+    "source": {
+      "contest": "Putnam",
+      "paper": "53rd William Lowell Putnam Mathematical Competition (December 5, 1992)",
+      "year": 1992,
+      "number": "A2",
+      "url": "https://kskedlaya.org/putnam-archive/"
+    },
+    "grade": "undergrad",
+    "points": 10,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Define $C(\\alpha)$ to be the coefficient of $x^{1992}$ in the power series about $x=0$ of $(1 + x)^\\alpha$. Evaluate\n$$\\int_0^1 \\left( C(-y-1) \\sum_{k=1}^{1992} \\frac{1}{y+k} \\right)dy.$$",
+    "image": null,
+    "choices": null,
+    "answer": "1992",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Recognise a logarithmic derivative",
+        "body": "By the binomial series, the coefficient of $x^{N}$ in $(1+x)^\\alpha$ is $\\binom{\\alpha}{N} = \\frac{\\alpha(\\alpha-1)\\cdots(\\alpha-N+1)}{N!}$. With $N = 1992$ and $\\alpha = -y-1$:\n$$C(-y-1) = \\frac{(-y-1)(-y-2)\\cdots(-y-1992)}{1992!} = \\frac{(y+1)(y+2)\\cdots(y+1992)}{1992!},$$\nsince there are an even number ($1992$) of minus signs.\n\nLet $P(y) = \\prod_{k=1}^{1992}(y+k)$. By the product rule, $P'(y) = P(y)\\sum_{k=1}^{1992}\\frac{1}{y+k}$. So the integrand is exactly $\\frac{P'(y)}{1992!}$, and\n$$\\int_0^1 \\frac{P'(y)}{1992!}\\,dy = \\frac{P(1)-P(0)}{1992!} = \\frac{1993! - 1992!}{1992!} = 1993 - 1 = 1992.$$\n\n**Answer:** $1992$."
+      }
+    ],
+    "topics": [
+      "calculus",
+      "sequences-series"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "putnam-1992-a3",
+    "bank": "putnam",
+    "source": {
+      "contest": "Putnam",
+      "paper": "53rd William Lowell Putnam Mathematical Competition (December 5, 1992)",
+      "year": 1992,
+      "number": "A3",
+      "url": "https://kskedlaya.org/putnam-archive/"
+    },
+    "grade": "undergrad",
+    "points": 10,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "For a given positive integer $m$, find all triples $(n, x, y)$ of positive integers, with $n$ relatively prime to $m$, which satisfy\n$$(x^2 + y^2)^m = (xy)^n.$$",
+    "image": null,
+    "choices": null,
+    "answer": "If $m$ is odd there are none; if $m$ is even the only solution is $(n,x,y) = \\left(m+1,\\ 2^{m/2},\\ 2^{m/2}\\right)$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Divide out the gcd",
+        "body": "Let $d = \\gcd(x,y)$, $x = da$, $y = db$ with $\\gcd(a,b) = 1$.\n\n**$n>m$.** We have $x^2+y^2 \\ge 2xy > xy \\ge 1$, so $(xy)^n = (x^2+y^2)^m > (xy)^m$; this forces $xy>1$ and then $n>m$.\n\n**Reduce.** Substituting, $d^{2m}(a^2+b^2)^m = d^{2n}(ab)^n$, i.e.\n$$(a^2+b^2)^m = d^{2(n-m)}\\,(ab)^n .$$\nAny prime dividing both $ab$ and $a^2+b^2$ divides $a$ (say) and then $b^2 = (a^2+b^2) - a^2$, hence $b$ — impossible. So $\\gcd(ab, a^2+b^2) = 1$; since $(ab)^n$ divides $(a^2+b^2)^m$, we get $ab = 1$, i.e. $a = b = 1$ and $x = y = d$.\n\n**Solve for $d$ and $n$.** Now $2^m = d^{2(n-m)}$, so $d$ is a power of $2$, $d = 2^e$ with $e \\ge 1$ (as $d=1$ would give $2^m = 1$), and\n$$m = 2e(n-m).$$\nLet $k = n - m\\ge 1$. Then $k\\mid m$, and $\\gcd(n,m) = \\gcd(m+k, m) = \\gcd(k,m) = k$. Since $\\gcd(n,m) = 1$, $k = 1$, so $n = m+1$ and $m = 2e$. Thus $m$ must be even, $e = m/2$, and $x = y = 2^{m/2}$.\n\n**Check.** For even $m$: $(x^2+y^2)^m = (2\\cdot 2^{m})^m = 2^{m(m+1)}$ and $(xy)^{m+1} = (2^m)^{m+1} = 2^{m(m+1)}$; and $\\gcd(m+1,m) = 1$.\n\n**Answer:** for odd $m$ there is no solution; for even $m$ the unique solution is $(n,x,y) = (m+1, 2^{m/2}, 2^{m/2})$. ∎"
+      }
+    ],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "putnam-1992-a4",
+    "bank": "putnam",
+    "source": {
+      "contest": "Putnam",
+      "paper": "53rd William Lowell Putnam Mathematical Competition (December 5, 1992)",
+      "year": 1992,
+      "number": "A4",
+      "url": "https://kskedlaya.org/putnam-archive/"
+    },
+    "grade": "undergrad",
+    "points": 10,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $f$ be an infinitely differentiable real-valued function defined on the real numbers. If\n$$f\\left( \\frac{1}{n} \\right) = \\frac{n^2}{n^2 + 1}, \\qquad n = 1, 2, 3, \\dots,$$\ncompute the values of the derivatives $f^{(k)}(0)$, $k = 1, 2, 3, \\dots$.",
+    "image": null,
+    "choices": null,
+    "answer": "$f^{(k)}(0) = 0$ for odd $k$ and $f^{(k)}(0) = (-1)^{k/2}\\,k!$ for even $k$ — the same as for $\\frac{1}{1+x^2}$, since $f - \\frac{1}{1+x^2}$ vanishes at all $\\frac1n$ and so (Rolle) has all derivatives $0$ at $0$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Compare with 1/(1+x²) and use Rolle's theorem",
+        "body": "Note $\\frac{n^2}{n^2+1} = \\frac{1}{1+(1/n)^2}$. Let $g(x) = \\frac{1}{1+x^2}$ (smooth on $\\mathbb R$) and $h = f - g$, which is infinitely differentiable with\n$$h\\left(\\tfrac1n\\right) = 0\\qquad (n = 1,2,3,\\dots).$$\n\n**Lemma.** If $h$ is $C^\\infty$ and has zeros $z_1 > z_2 > \\cdots > 0$ with $z_j \\to 0$, then $h^{(k)}(0) = 0$ for all $k\\ge0$.\n\n*Proof.* By continuity $h(0) = \\lim h(z_j) = 0$. By Rolle's theorem, $h'$ has a zero in each interval $(z_{j+1}, z_j)$; these zeros form a decreasing sequence of positive numbers tending to $0$. Repeating, for each $k$ the derivative $h^{(k)}$ has positive zeros tending to $0$, and by continuity of $h^{(k)}$, $h^{(k)}(0) = 0$. ∎\n\nSo $f^{(k)}(0) = g^{(k)}(0)$ for all $k$.\n\n**Derivatives of $g$.** For $|x|<1$, $g(x) = \\sum_{j\\ge0}(-1)^jx^{2j}$, a power series; its coefficients are the Taylor coefficients $g^{(k)}(0)/k!$. Hence $g^{(k)}(0) = 0$ for odd $k$, and $g^{(2j)}(0) = (-1)^j (2j)!$.\n\n**Answer:** $f^{(k)}(0) = 0$ if $k$ is odd, and $f^{(k)}(0) = (-1)^{k/2}\\,k!$ if $k$ is even (e.g. $f''(0) = -2$, $f^{(4)}(0) = 24$). ∎"
+      }
+    ],
+    "topics": [
+      "real-analysis",
+      "calculus"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "putnam-1992-a5",
+    "bank": "putnam",
+    "source": {
+      "contest": "Putnam",
+      "paper": "53rd William Lowell Putnam Mathematical Competition (December 5, 1992)",
+      "year": 1992,
+      "number": "A5",
+      "url": "https://kskedlaya.org/putnam-archive/"
+    },
+    "grade": "undergrad",
+    "points": 10,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "For each positive integer $n$, let $a_n = 0$ (or $1$) if the number of 1's in the binary representation of $n$ is even (or odd), respectively. Show that there do not exist positive integers $k$ and $m$ such that\n$$a_{k+j} = a_{k+m+j} = a_{k+2m+j},$$\nfor $0 \\leq j \\leq m-1$.",
+    "image": null,
+    "choices": null,
+    "answer": "Proof by minimal counterexample, using $a_{2i}=a_i$, $a_{2i+1}=1-a_i$: odd $m$ forces three equal consecutive terms (impossible, since $a_{2i}\\ne a_{2i+1}$), and even $m$ halves to a counterexample with $m/2$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Minimal counterexample",
+        "body": "Extend the definition to $a_0 = 0$. Appending a binary digit gives\n$$a_{2i} = a_i,\\qquad a_{2i+1} = 1-a_i\\qquad(i\\ge0).$$\nIn particular $a_{2i}\\ne a_{2i+1}$ for every $i\\ge 0$.\n\nCall $(k,m)$ with $k\\ge0$, $m\\ge1$ *bad* if $a_{k+j} = a_{k+m+j} = a_{k+2m+j}$ for $0\\le j\\le m-1$, i.e. if\n$$a_i = a_{i+m}\\quad\\text{for all } i \\text{ with } k\\le i\\le k+2m-1. \\tag{$*$}$$\nWe show there is no bad pair (even allowing $k = 0$). Suppose otherwise and take a bad pair with $m$ minimal.\n\n**Fact: no three consecutive equal terms.** Among $i, i+1, i+2$ there is an even number $2l$ with $2l+1$ also among them, and $a_{2l}\\ne a_{2l+1}$. In particular $m = 1$ is not bad.\n\n**Case $m$ odd, $m\\ge3$.** Let $b_i = |a_i - a_{i+1}|$, so $b_{2l} = 1$ for all $l$, and $b_{2l+1} = |1 - a_l - a_{l+1}|$, which equals $1 - b_l$. From $(*)$, $b_i = b_{i+m}$ for $k\\le i\\le k+2m-2$. For each even $e$ in $[k,k+2m-2]$ we get $b_{e+m} = b_e = 1$, and $e+m$ is odd. The numbers $e+m$ obtained this way are all the odd numbers in $[k+m, k+3m-2]$, an interval of $2m-1\\ge 5$ consecutive integers, so it contains two consecutive odd numbers $2l+1$ and $2l+3$. Then $b_{2l+1} = b_{2l+3} = 1$, i.e. $b_l = b_{l+1} = 0$, i.e. $a_l = a_{l+1} = a_{l+2}$ — contradicting the Fact.\n\n**Case $m$ even, $m = 2m'$.** For each even number $2i$ in $[k, k+m-1]$, the indices $2i$, $2i+m$, $2i+2m$ are even, so\n$$a_i = a_{2i} = a_{2i+m} = a_{2i+2m} = a_{2(i+m')} = a_{i+m'} \\quad\\text{and similarly}\\quad a_i = a_{i+2m'} .$$\nThe interval $[k,k+m-1]$ contains exactly $m'$ even numbers, which are consecutive even numbers $2k', 2k'+2,\\dots,2k'+2m'-2$ (with $k' = \\lceil k/2\\rceil$). So $a_{k'+j} = a_{k'+m'+j} = a_{k'+2m'+j}$ for $0\\le j\\le m'-1$: the pair $(k',m')$ is bad with $m'<m$, contradicting minimality.\n\nBoth cases are impossible, so there is no bad pair, and in particular none with $k, m$ positive. ∎\n\n*Remark.* $(a_n)$ is the Thue–Morse sequence; the statement says it contains no cube $XXX$."
+      }
+    ],
+    "topics": [
+      "sequences-series",
+      "number-theory",
+      "logic"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "putnam-1992-a6",
+    "bank": "putnam",
+    "source": {
+      "contest": "Putnam",
+      "paper": "53rd William Lowell Putnam Mathematical Competition (December 5, 1992)",
+      "year": 1992,
+      "number": "A6",
+      "url": "https://kskedlaya.org/putnam-archive/"
+    },
+    "grade": "undergrad",
+    "points": 10,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Four points are chosen at random on the surface of a sphere. What is the probability that the center of the sphere lies inside the tetrahedron whose vertices are at the four points? (It is understood that each point is independently chosen relative to a uniform distribution on the sphere.)",
+    "image": null,
+    "choices": null,
+    "answer": "1/8",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "answerDisplay": "$\\frac{1}{8}$",
+    "solutions": [
+      {
+        "title": "Flip signs of three of the points",
+        "body": "Put the centre at the origin and let $P_1,P_2,P_3,P_4$ be the random points (unit vectors). Almost surely $P_1,P_2,P_3$ are linearly independent and $P_4$ lies in none of the planes spanned by two of $P_1,P_2,P_3$ (each exceptional event requires a point to lie on a fixed great circle, which has probability $0$). Assume this.\n\n**Exactly one of eight sign patterns works.** Write uniquely $-P_4 = c_1P_1+c_2P_2+c_3P_3$; all $c_i\\ne0$ by the assumption. For signs $\\varepsilon\\in\\{\\pm1\\}^3$ let $T_\\varepsilon$ be the tetrahedron with vertices $\\varepsilon_1P_1,\\varepsilon_2P_2,\\varepsilon_3P_3,P_4$.\n\nThe origin is in $T_\\varepsilon$ iff $\\lambda_1\\varepsilon_1P_1+\\lambda_2\\varepsilon_2P_2+\\lambda_3\\varepsilon_3P_3 + \\lambda_4P_4 = 0$ for some $\\lambda_i\\ge0$ with $\\sum\\lambda_i = 1$. Here $\\lambda_4>0$ (otherwise independence of $P_1,P_2,P_3$ forces $\\lambda_1=\\lambda_2=\\lambda_3 = 0$ too). Dividing by $\\lambda_4$ and comparing with the unique expansion of $-P_4$ gives $\\lambda_i\\varepsilon_i/\\lambda_4 = c_i$, which is possible only if $\\varepsilon_i = \\operatorname{sign}(c_i)$ for $i=1,2,3$. Conversely, for $\\varepsilon_i = \\operatorname{sign}c_i$ the choice $\\lambda_i \\propto |c_i|$, $\\lambda_4\\propto 1$ works. So exactly one of the eight tetrahedra $T_\\varepsilon$ contains the origin. (It is then in the interior, since all $\\lambda_i>0$.)\n\n**Symmetry.** The map $P\\mapsto -P$ preserves the uniform distribution, and the points are independent, so $(\\varepsilon_1P_1,\\varepsilon_2P_2,\\varepsilon_3P_3,P_4)$ has the same distribution as $(P_1,P_2,P_3,P_4)$ for each $\\varepsilon$. Hence each event \"$0\\in T_\\varepsilon$\" has the same probability $p$. These eight events are (almost surely) disjoint and one of them always occurs, so $8p = 1$.\n\n**Answer:** $p = \\dfrac18$.\n\n*Remark.* The same argument gives $\\frac14$ for a triangle on a circle and, in general, $2^{-d}$ for a simplex with $d+1$ random points on the sphere in $\\mathbb R^d$."
+      }
+    ],
+    "topics": [
+      "probability",
+      "geometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "putnam-1992-b1",
+    "bank": "putnam",
+    "source": {
+      "contest": "Putnam",
+      "paper": "53rd William Lowell Putnam Mathematical Competition (December 5, 1992)",
+      "year": 1992,
+      "number": "B1",
+      "url": "https://kskedlaya.org/putnam-archive/"
+    },
+    "grade": "undergrad",
+    "points": 10,
+    "timeMinutes": null,
+    "type": "text",
+    "prompt": "Let $S$ be a set of $n$ distinct real numbers. Let $A_S$ be the set of numbers that occur as averages of two distinct elements of $S$. For a given $n \\geq 2$, what is the smallest possible number of elements in $A_S$?",
+    "image": null,
+    "choices": null,
+    "answer": "2n-3",
+    "acceptedAnswers": [
+      "2n - 3",
+      "2*n-3",
+      "2*n - 3",
+      "-3+2n"
+    ],
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Two increasing chains of averages",
+        "body": "Let $s_1<s_2<\\cdots<s_n$ be the elements of $S$.\n\n**Lower bound.** The averages\n$$\\frac{s_1+s_2}{2} < \\frac{s_1+s_3}{2} < \\cdots < \\frac{s_1+s_n}{2} < \\frac{s_2+s_n}{2} < \\frac{s_3+s_n}{2} < \\cdots < \\frac{s_{n-1}+s_n}{2}$$\nare strictly increasing (each step increases one summand), so they are $(n-1) + (n-2) = 2n-3$ distinct elements of $A_S$. Hence $|A_S|\\ge 2n-3$.\n\n**The bound is attained.** For $S = \\{1,2,\\dots,n\\}$, every average $\\frac{i+j}{2}$ with $1\\le i<j\\le n$ is of the form $\\frac{t}{2}$ with $3\\le t\\le 2n-1$, so $|A_S|\\le 2n-3$ (and hence $= 2n-3$). Any arithmetic progression works the same way.\n\n**Answer:** $2n-3$."
+      }
+    ],
+    "topics": [
+      "counting",
+      "inequalities"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "putnam-1992-b2",
+    "bank": "putnam",
+    "source": {
+      "contest": "Putnam",
+      "paper": "53rd William Lowell Putnam Mathematical Competition (December 5, 1992)",
+      "year": 1992,
+      "number": "B2",
+      "url": "https://kskedlaya.org/putnam-archive/"
+    },
+    "grade": "undergrad",
+    "points": 10,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "For nonnegative integers $n$ and $k$, define $Q(n, k)$ to be the coefficient of $x^k$ in the expansion of $(1 + x + x^2 + x^3)^n$. Prove that\n$$Q(n, k) = \\sum_{j=0}^k \\binom{n}{j} \\binom{n}{k-2j},$$\nwhere $\\binom{a}{b}$ is the standard binomial coefficient. (Reminder: For integers $a$ and $b$ with $a \\geq 0$, $\\binom{a}{b} = \\frac{a!}{b!(a-b)!}$ for $0 \\leq b \\leq a$, with $\\binom{a}{b} = 0$ otherwise.)",
+    "image": null,
+    "choices": null,
+    "answer": "Proof. $1+x+x^2+x^3 = (1+x)(1+x^2)$, so $(1+x+x^2+x^3)^n = (1+x)^n(1+x^2)^n$; the coefficient of $x^k$ in this product is $\\sum_j\\binom nj\\binom n{k-2j}$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Factor the polynomial",
+        "body": "Since $1 + x + x^2 + x^3 = (1+x) + x^2(1+x) = (1+x)(1+x^2)$,\n$$(1+x+x^2+x^3)^n = (1+x)^n(1+x^2)^n = \\left(\\sum_{i} \\binom ni x^i\\right)\\left(\\sum_{j}\\binom nj x^{2j}\\right),$$\nwhere the sums may be taken over all integers $i,j\\ge0$ (terms with $i>n$ or $j>n$ vanish). The coefficient of $x^k$ comes from the pairs with $i + 2j = k$, i.e. $i = k-2j$ with $0\\le j$; for $j>k/2$ we have $k-2j<0$ and $\\binom n{k-2j} = 0$. Hence\n$$Q(n,k) = \\sum_{j=0}^{k}\\binom nj\\binom n{k-2j}. \\qquad ∎$$"
+      },
+      {
+        "title": "Counting choices directly",
+        "body": "$Q(n,k)$ counts the ways to choose an exponent $e_t\\in\\{0,1,2,3\\}$ from each of the $n$ factors with $e_1+\\dots+e_n = k$. Each $e\\in\\{0,1,2,3\\}$ is uniquely $e = u + 2v$ with $u,v\\in\\{0,1\\}$. So such a choice is the same as choosing a set $V$ of factors (those with $v_t = 1$) and a set $U$ of factors (those with $u_t = 1$), independently, with $|U| + 2|V| = k$. If $|V| = j$, there are $\\binom nj$ choices for $V$ and $\\binom n{k-2j}$ for $U$. Summing over $j$ gives the formula. ∎"
+      }
+    ],
+    "topics": [
+      "polynomials",
+      "counting"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "putnam-1992-b3",
+    "bank": "putnam",
+    "source": {
+      "contest": "Putnam",
+      "paper": "53rd William Lowell Putnam Mathematical Competition (December 5, 1992)",
+      "year": 1992,
+      "number": "B3",
+      "url": "https://kskedlaya.org/putnam-archive/"
+    },
+    "grade": "undergrad",
+    "points": 10,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "For any pair $(x, y)$ of real numbers, a sequence $(a_n(x,y))_{n\\geq 0}$ is defined as follows:\n$$\\begin{aligned} a_0(x, y) &= x, \\\\ a_{n+1}(x, y) &= \\frac{(a_n(x, y))^2 + y^2}{2}, \\qquad \\text{for } n \\geq 0. \\end{aligned}$$\nFind the area of the region\n$$\\{ (x, y) \\mid (a_n(x, y))_{n \\geq 0} \\text{ converges}\\}.$$",
+    "image": null,
+    "choices": null,
+    "answer": "4+pi",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "answerDisplay": "$4+\\pi$",
+    "solutions": [
+      {
+        "title": "Analyse the fixed points of the iteration",
+        "body": "Fix $y$ and let $\\varphi(t) = \\frac{t^2+y^2}{2}$, so $a_{n+1} = \\varphi(a_n)$. Note\n$$\\varphi(t) - t = \\frac{(t-1)^2 + y^2 - 1}{2}.$$\n\n**$|y|>1$: divergence.** Then $\\varphi(t) - t \\ge \\frac{y^2-1}{2} > 0$ for all $t$, so $a_n\\ge a_0 + n\\frac{y^2-1}{2}\\to\\infty$.\n\n**$|y|\\le 1$.** Let $s = 1-\\sqrt{1-y^2}$ and $r = 1+\\sqrt{1-y^2}$, the roots of $\\varphi(t) = t$; $0\\le s\\le r$ and $\\varphi(t) - t = \\frac{(t-s)(t-r)}{2}$. Also $\\varphi$ is even and increasing on $[0,\\infty)$, and $a_1 = \\varphi(|x|)$.\n\n- *If $|x| > r$:* $a_1 = \\varphi(|x|) > \\varphi(r) = r$. For $t>r$ we have $\\varphi(t)>t$ and $\\varphi(t) > r$, so $(a_n)_{n\\ge1}$ is increasing and stays $>r$; then $a_{n+1}-a_n = \\frac{(a_n-s)(a_n-r)}{2}\\ge\\frac{(a_1-s)(a_1-r)}{2}>0$, so $a_n\\to\\infty$.\n- *If $|x|\\le r$:* $a_1\\in[\\varphi(0),\\varphi(r)]\\subseteq[0,r]$. If $a_1\\in[s,r]$, then for $t\\in[s,r]$, $s = \\varphi(s)\\le\\varphi(t)\\le t$, so the sequence is non-increasing and bounded below by $s$: it converges. If $a_1\\in[0,s)$, then for $t\\in[0,s)$, $t<\\varphi(t)<\\varphi(s) = s$, so the sequence is increasing and bounded above by $s$: it converges.\n\nSo the sequence converges exactly when $|y|\\le1$ and $|x|\\le 1+\\sqrt{1-y^2}$.\n\n**Area.** This region is a $2\\times 2$ square $[-1,1]^2$ with two half-discs of radius $1$ attached on its left and right sides ($|x|-1\\le\\sqrt{1-y^2}$). Its area is\n$$\\int_{-1}^{1} 2\\left(1+\\sqrt{1-y^2}\\right)dy = 4 + 2\\cdot\\frac{\\pi}{2} = 4+\\pi .$$\n\n**Answer:** $4+\\pi$."
+      }
+    ],
+    "topics": [
+      "sequences-series",
+      "real-analysis",
+      "geometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "putnam-1992-b4",
+    "bank": "putnam",
+    "source": {
+      "contest": "Putnam",
+      "paper": "53rd William Lowell Putnam Mathematical Competition (December 5, 1992)",
+      "year": 1992,
+      "number": "B4",
+      "url": "https://kskedlaya.org/putnam-archive/"
+    },
+    "grade": "undergrad",
+    "points": 10,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Let $p(x)$ be a nonzero polynomial of degree less than 1992 having no nonconstant factor in common with $x^3 - x$. Let\n$$\\frac{d^{1992}}{dx^{1992}} \\left( \\frac{p(x)}{x^3 - x} \\right) = \\frac{f(x)}{g(x)}$$\nfor polynomials $f(x)$ and $g(x)$. Find the smallest possible degree of $f(x)$.",
+    "image": null,
+    "choices": null,
+    "answer": "3984",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Partial fractions",
+        "body": "Let $N = 1992$. Divide: $p(x) = q(x)(x^3-x) + \\rho(x)$ with $\\deg\\rho\\le2$, so $\\deg q \\le N-4$ and the $N$-th derivative of $q$ vanishes. Partial fractions give\n$$\\frac{p(x)}{x^3-x} = q(x) + \\frac{A}{x} + \\frac{B}{x-1} + \\frac{C}{x+1},\\qquad A = -p(0),\\ B = \\tfrac{p(1)}{2},\\ C = \\tfrac{p(-1)}{2}.$$\nSince $p$ has no common factor with $x^3-x = x(x-1)(x+1)$, the numbers $A,B,C$ are all nonzero. Conversely, any nonzero $A,B,C$ arise, e.g. from $p(x) = A(x^2-1) + Bx(x+1) + Cx(x-1)$ (degree $\\le 2$; $p(0) = -A$, $p(\\pm1) = 2B, 2C$ are nonzero).\n\n**The derivative.** Using $\\frac{d^N}{dx^N}\\frac{1}{x-a} = \\frac{(-1)^NN!}{(x-a)^{N+1}} = \\frac{N!}{(x-a)^{N+1}}$ ($N$ even), with $M = N+1 = 1993$:\n$$\\frac{d^N}{dx^N}\\frac{p(x)}{x^3-x} = N!\\,\\frac{A(x^2-1)^M + B(x^2+x)^M + C(x^2-x)^M}{(x^3-x)^M} = \\frac{N!\\,R(x)}{(x^3-x)^M}.$$\n\n**Lowest terms.** $R(0) = -A$, $R(1) = 2^MB$, $R(-1) = 2^MC$ are nonzero, so $R$ and $(x^3-x)^M$ are coprime. If $f/g$ equals this fraction then $f(x)(x^3-x)^M = N!R(x)g(x)$, so $R \\mid f$ and $\\deg f\\ge\\deg R$; equality is attained by $f = N!R$. So we must minimise $\\deg R$.\n\n**Top coefficients of $R$.** $(x^2-1)^M$ has only even powers; $(x^2\\pm x)^M = x^{2M} \\pm Mx^{2M-1} + \\binom M2 x^{2M-2}\\pm\\cdots$, and $(x^2-1)^M = x^{2M} - Mx^{2M-2}+\\cdots$. So\n- $[x^{2M}]R = A+B+C$,\n- $[x^{2M-1}]R = M(B-C)$,\n- $[x^{2M-2}]R = -MA + \\binom M2 (B+C)$.\n\nFor $\\deg R<2M-2$ all three would vanish: $B = C$, $A = -2B$, and then $2MB + M(M-1)B = M(M+1)B = 0$, so $B = 0$ — impossible. Hence $\\deg R\\ge 2M-2 = 3984$, with equality for $B = C = 1$, $A = -2$, i.e. $p(x) = -2(x^2-1) + x(x+1) + x(x-1) = 2$.\n\n**Answer:** $3984$."
+      }
+    ],
+    "topics": [
+      "polynomials",
+      "calculus"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "putnam-1992-b5",
+    "bank": "putnam",
+    "source": {
+      "contest": "Putnam",
+      "paper": "53rd William Lowell Putnam Mathematical Competition (December 5, 1992)",
+      "year": 1992,
+      "number": "B5",
+      "url": "https://kskedlaya.org/putnam-archive/"
+    },
+    "grade": "undergrad",
+    "points": 10,
+    "timeMinutes": null,
+    "type": "text",
+    "prompt": "Let $D_n$ denote the value of the $(n-1) \\times (n-1)$ determinant\n$$\\left[ \\begin{array}{cccccc} 3 & 1 & 1 & 1 & \\cdots & 1 \\\\ 1 & 4 & 1 & 1 & \\cdots & 1 \\\\ 1 & 1 & 5 & 1 & \\cdots & 1 \\\\ 1 & 1 & 1 & 6 & \\cdots & 1 \\\\ \\vdots & \\vdots & \\vdots & \\vdots & \\ddots & \\vdots \\\\ 1 & 1 & 1 & 1 & \\cdots & n+1 \\end{array} \\right].$$\nIs the set $\\left\\{ \\frac{D_n}{n!} \\right\\}_{n \\geq 2}$ bounded?",
+    "image": null,
+    "choices": null,
+    "answer": "No",
+    "acceptedAnswers": [
+      "no",
+      "No, it is unbounded",
+      "unbounded",
+      "not bounded"
+    ],
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Linearity in the last column",
+        "body": "The matrix has entries $1$ off the diagonal and $1 + c_i$ on the diagonal, where $c_i = i+1$ ($i = 1,\\dots,n-1$). For a general size $k$ and positive $c_1,\\dots,c_k$, let $E_k$ be the determinant of the $k\\times k$ matrix with off-diagonal entries $1$ and diagonal entries $1+c_1,\\dots,1+c_k$, and $P_k = c_1c_2\\cdots c_k$.\n\n**Recursion.** The last column is $(1,\\dots,1)^T + c_k e_k$. By linearity of the determinant in that column, $E_k = E'_k + c_k E_{k-1}$, where $E'_k$ is the determinant with last column all ones. In $E'_k$, subtract the last column from each other column: column $j<k$ becomes $c_je_j$. The resulting matrix is upper triangular with diagonal $c_1,\\dots,c_{k-1},1$, so $E_k' = P_{k-1}$. Thus\n$$E_k = P_{k-1} + c_kE_{k-1}\\quad\\Longrightarrow\\quad \\frac{E_k}{P_k} = \\frac{1}{c_k} + \\frac{E_{k-1}}{P_{k-1}} .$$\nWith $E_1/P_1 = (1+c_1)/c_1 = 1 + 1/c_1$, induction gives $E_k = P_k\\left(1+\\sum_{i=1}^k \\frac{1}{c_i}\\right)$.\n\n**Apply.** With $k=n-1$, $c_i = i+1$: $P_{n-1} = 2\\cdot3\\cdots n = n!$, so\n$$D_n = n!\\left(1 + \\frac12+\\frac13+\\cdots+\\frac1n\\right),\\qquad \\frac{D_n}{n!} = H_n = \\sum_{i=1}^n\\frac1i .$$\n(Check: $D_2 = 3 = 2!\\cdot\\frac32$, $D_3 = 11 = 3!\\cdot\\frac{11}{6}$.)\n\n**Unbounded.** $H_{2^k} \\ge 1 + \\frac k2$, since each block $\\frac{1}{2^{j-1}+1}+\\cdots+\\frac{1}{2^j}$ has $2^{j-1}$ terms each $\\ge 2^{-j}$. So $D_n/n!\\to\\infty$.\n\n**Answer: No**, the set is unbounded. ∎"
+      },
+      {
+        "title": "Matrix determinant lemma",
+        "body": "Write the matrix as $D + \\mathbf 1\\mathbf 1^T$ with $D = \\operatorname{diag}(2,3,\\dots,n)$ and $\\mathbf 1$ the all-ones vector. For invertible $D$, $\\det(D + uv^T) = \\det D\\,(1 + v^TD^{-1}u)$: indeed $D+uv^T = D(I + wv^T)$ with $w = D^{-1}u$, and $I + wv^T$ acts as the identity on the hyperplane $v^\\perp$ and maps $w$ to $(1+v^Tw)w$, so its determinant is $1+v^Tw$ (if $w\\notin v^\\perp$; otherwise it is unipotent with determinant $1 = 1 + v^Tw$).\n\nHence $D_n = n!\\left(1 + \\sum_{i=2}^n\\frac1i\\right) = n!\\,H_n$, and $D_n/n! = H_n\\ge\\ln(n+1)\\to\\infty$ (compare with $\\int_1^{n+1}\\frac{dx}{x}$).\n\n**Answer: No.**"
+      }
+    ],
+    "topics": [
+      "linear-algebra",
+      "sequences-series"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "putnam-1992-b6",
+    "bank": "putnam",
+    "source": {
+      "contest": "Putnam",
+      "paper": "53rd William Lowell Putnam Mathematical Competition (December 5, 1992)",
+      "year": 1992,
+      "number": "B6",
+      "url": "https://kskedlaya.org/putnam-archive/"
+    },
+    "grade": "undergrad",
+    "points": 10,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $\\mathcal{M}$ be a set of real $n \\times n$ matrices such that\n- (i) $I \\in \\mathcal{M}$, where $I$ is the $n \\times n$ identity matrix;\n- (ii) if $A \\in \\mathcal{M}$ and $B \\in \\mathcal{M}$, then either $AB \\in \\mathcal{M}$ or $-AB \\in \\mathcal{M}$, but not both;\n- (iii) if $A \\in \\mathcal{M}$ and $B \\in \\mathcal{M}$, then either $AB = BA$ or $AB = -BA$;\n- (iv) if $A \\in \\mathcal{M}$ and $A \\neq I$, there is at least one $B \\in \\mathcal{M}$ such that $AB = - BA$.\n\nProve that $\\mathcal{M}$ contains at most $n^2$ matrices.",
+    "image": null,
+    "choices": null,
+    "answer": "Proof. Show every $A\\in\\mathcal M$ has $A^2=\\pm I$ (the element $\\pm A^2$ of $\\mathcal M$ commutes with everything, so by (iv) it is $I$), then show $\\mathcal M$ is linearly independent: shorten a minimal relation by left-multiplying to put $I$ in it and averaging with an element that anticommutes with another term.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Elements square to ±I, then linear independence",
+        "body": "**Step 0: basic facts.** For $A,B\\in\\mathcal M$, $AB\\neq 0$: otherwise $AB = -AB$, so $AB\\in\\mathcal M$ iff $-AB\\in\\mathcal M$, contradicting (ii). Taking $B = I$ in (ii): $A\\in\\mathcal M$ implies $-A\\notin\\mathcal M$. For $A,B\\in\\mathcal M$, exactly one of $AB = BA$, $AB = -BA$ holds (both would give $AB = 0$); write $AB = \\varepsilon(A,B)BA$ with $\\varepsilon = \\pm1$.\n\n**Step 1: $A^2 = \\pm I$ for every $A\\in\\mathcal M$.** By (ii), $C = \\sigma A^2\\in\\mathcal M$ for a sign $\\sigma$. For every $B\\in\\mathcal M$, with $\\varepsilon = \\varepsilon(A,B)$, $A^2B = A(AB) = \\varepsilon\\,ABA = \\varepsilon^2BA^2 = BA^2$. So $C$ commutes with every $B\\in\\mathcal M$. If $C\\ne I$, (iv) gives $B\\in\\mathcal M$ with $CB = -BC = -CB$, so $CB = 0$, contradicting Step 0. Hence $\\sigma A^2 = I$, i.e. $A^2 = \\pm I$. In particular every $A\\in\\mathcal M$ is invertible with $A^{-1} = \\pm A$.\n\n**Step 2: left multiplication permutes $\\mathcal M$ up to sign.** For $A\\in\\mathcal M$ and distinct $X,Y\\in\\mathcal M$, let $AX = \\pm X'$, $AY = \\pm Y'$ with $X',Y'\\in\\mathcal M$. If $X' = Y'$ then $AX = \\pm AY$, so $X = \\pm Y$; $X = -Y$ is impossible (Step 0), so $X = Y$. Hence $X'\\ne Y'$. Also, if $AA = \\pm X'$ then $X' = I$, since $A^2 = \\pm I$ and of $\\pm I$ only $I$ lies in $\\mathcal M$.\n\n**Step 3: $\\mathcal M$ is linearly independent.** Suppose not, and take a nontrivial relation $\\sum_{i=1}^k\\lambda_iA_i = 0$ among distinct $A_i\\in\\mathcal M$ with all $\\lambda_i\\ne0$ and $k$ as small as possible. Since each $A_i\\neq0$, $k\\ge2$.\n\n*Make $I$ appear.* Multiply on the left by $A_1$: $A_1A_i = \\pm C_i$ with $C_i\\in\\mathcal M$ distinct (Step 2) and $C_1 = I$. This gives a relation $\\sum_{i=1}^k\\mu_iC_i = 0$ with all $\\mu_i\\ne0$, again with $k$ terms.\n\n*Shorten it.* Since $C_2\\ne C_1 = I$, (iv) gives $B\\in\\mathcal M$ with $C_2B = -BC_2$. Let $\\varepsilon_i = \\varepsilon(C_i,B)$, so $C_iB = \\varepsilon_iBC_i$; then $\\varepsilon_1 = 1$, $\\varepsilon_2 = -1$. Now\n$$0 = \\Big(\\sum_i\\mu_iC_i\\Big)B + B\\Big(\\sum_i\\mu_iC_i\\Big) = \\sum_i\\mu_i(1+\\varepsilon_i)\\,BC_i = 2\\sum_{i:\\ \\varepsilon_i = 1}\\mu_i\\,BC_i .$$\nWrite $BC_i = \\pm D_i$ with $D_i\\in\\mathcal M$ distinct (Step 2). This is a linear relation among the distinct matrices $D_i$ for $i$ with $\\varepsilon_i = 1$; it is nontrivial (the coefficient of $D_1$ is $\\pm2\\mu_1\\ne0$) and has at most $k-1$ terms (index $2$ is missing). This contradicts the minimality of $k$.\n\n**Conclusion.** Every finite subset of $\\mathcal M$ is linearly independent in the $n^2$-dimensional real vector space of $n\\times n$ matrices, so $\\mathcal M$ has at most $n^2$ elements. ∎\n\n*Remark.* The bound is sharp, e.g. for $n = 2$: $\\mathcal M = \\{I, \\sigma_x, \\sigma_z, \\sigma_x\\sigma_z\\}$ with $\\sigma_x = \\begin{pmatrix}0&1\\\\1&0\\end{pmatrix}$, $\\sigma_z = \\begin{pmatrix}1&0\\\\0&-1\\end{pmatrix}$."
+      }
+    ],
+    "topics": [
+      "linear-algebra",
+      "abstract-algebra"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

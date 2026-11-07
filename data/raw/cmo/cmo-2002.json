@@ -1,0 +1,179 @@
+[
+  {
+    "id": "cmo-cmo-2002-01",
+    "bank": "cmo",
+    "source": {
+      "contest": "CMO",
+      "paper": "CMO 2002",
+      "year": 2002,
+      "number": 1,
+      "url": "https://cms.math.ca/competitions/cmo/"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Let $S$ be a subset of $\\{1, 2, \\ldots, 9\\}$, such that the sums formed by adding each unordered pair of distinct numbers from $S$ are all different. For example, the subset $\\{1, 2, 3, 5\\}$ has this property, but $\\{1, 2, 3, 4, 5\\}$ does not, since the pairs $\\{1, 4\\}$ and $\\{2, 3\\}$ have the same sum, namely $5$.\n\nWhat is the maximum number of elements that $S$ can contain?",
+    "image": null,
+    "choices": null,
+    "answer": "5",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Count the possible sums",
+        "body": "**Five is possible:** for $S = \\{1, 2, 3, 5, 8\\}$ the pair sums are $3, 4, 6, 9, 5, 7, 10, 8, 11, 13$ — all different.\n\n**Six is impossible.** Suppose $|S| = 6$ with all pair sums different. There are $\\binom62 = 15$ pairs, and every pair sum lies between $1 + 2 = 3$ and $8 + 9 = 17$ — only $15$ possible values. So every value $3, 4, \\ldots, 17$ occurs exactly once. The only pair from $\\{1, \\ldots, 9\\}$ with sum $3$ is $\\{1, 2\\}$, and the only pair with sum $17$ is $\\{8, 9\\}$; so $1, 2, 8, 9 \\in S$. But then $1 + 9 = 2 + 8$, a contradiction. (A larger $S$ contains a $6$-element subset with the same property, so it is impossible too.)\n\n**Answer: $5$**"
+      },
+      {
+        "title": "Gaps between consecutive elements",
+        "body": "Suppose $a_1 < a_2 < \\cdots < a_6$ are in $S$ with all pair sums different. From $a_1 + a_6 \\ne a_2 + a_5$ we get $a_6 - a_5 \\ne a_2 - a_1$; similarly $a_6 - a_5 \\ne a_4 - a_3$ (from $a_3 + a_6 \\ne a_4 + a_5$) and $a_4 - a_3 \\ne a_2 - a_1$ (from $a_1 + a_4 \\ne a_2 + a_3$). Three different positive integers sum to at least $1 + 2 + 3 = 6$:\n$$(a_2 - a_1) + (a_4 - a_3) + (a_6 - a_5) \\ge 6.$$\nAlso $a_3 - a_2 \\ne a_5 - a_4$ (from $a_2 + a_5 \\ne a_3 + a_4$), so $(a_3 - a_2) + (a_5 - a_4) \\ge 1 + 2 = 3$. Adding, $a_6 - a_1 \\ge 9$, impossible inside $\\{1, \\ldots, 9\\}$. With the example $\\{1, 2, 3, 5, 8\\}$, the maximum is $5$.\n\n**Answer: $5$**"
+      }
+    ],
+    "topics": [
+      "counting",
+      "number-theory"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "cmo-cmo-2002-02",
+    "bank": "cmo",
+    "source": {
+      "contest": "CMO",
+      "paper": "CMO 2002",
+      "year": 2002,
+      "number": 2,
+      "url": "https://cms.math.ca/competitions/cmo/"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Call a positive integer $n$ **practical** if every positive integer less than or equal to $n$ can be written as the sum of distinct divisors of $n$.\n\nFor example, the divisors of $6$ are $\\mathbf{1}$, $\\mathbf{2}$, $\\mathbf{3}$, and $\\mathbf{6}$. Since\n$$1 = \\mathbf{1},\\quad 2 = \\mathbf{2},\\quad 3 = \\mathbf{3},\\quad 4 = \\mathbf{1} + \\mathbf{3},\\quad 5 = \\mathbf{2} + \\mathbf{3},\\quad 6 = \\mathbf{6},$$\nwe see that $6$ is practical.\n\nProve that the product of two practical numbers is also practical.",
+    "image": null,
+    "choices": null,
+    "answer": "For $k \\le pq$ write $k = aq + b$ with $0 \\le a \\le p$, $0 \\le b < q$; write $a$ as a sum of distinct divisors $c_i$ of $p$ and $b$ as a sum of distinct divisors $d_j$ of $q$; then $k = \\sum c_iq + \\sum d_j$ with all $c_iq$, $d_j$ distinct divisors of $pq$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Write k in base q",
+        "body": "Let $p$ and $q$ be practical, and let $1 \\le k \\le pq$. Divide by $q$: $k = aq + b$ with $0 \\le b < q$ and $0 \\le a \\le p$ (as $a = \\lfloor k/q \\rfloor \\le p$).\n\nSince $p$ is practical, $a$ is a sum of distinct divisors of $p$: $a = c_1 + \\cdots + c_s$ (the empty sum if $a = 0$). Since $q$ is practical, $b = d_1 + \\cdots + d_u$ with distinct divisors $d_j$ of $q$ (empty if $b = 0$). Then\n$$k = c_1q + c_2q + \\cdots + c_sq + d_1 + \\cdots + d_u.$$\nEach $c_iq$ divides $pq$ (as $c_i \\mid p$) and each $d_j$ divides $pq$ (as $d_j \\mid q$). The $c_iq$ are distinct because the $c_i$ are; the $d_j$ are distinct; and no $d_j$ equals any $c_iq$, since $d_j \\le b < q \\le c_iq$. So $k$ is a sum of distinct divisors of $pq$. As $k$ was arbitrary, $pq$ is practical. ∎"
+      }
+    ],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "cmo-cmo-2002-03",
+    "bank": "cmo",
+    "source": {
+      "contest": "CMO",
+      "paper": "CMO 2002",
+      "year": 2002,
+      "number": 3,
+      "url": "https://cms.math.ca/competitions/cmo/"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Prove that for all positive real numbers $a$, $b$, and $c$,\n$$\\frac{a^3}{bc} + \\frac{b^3}{ca} + \\frac{c^3}{ab} \\ge a + b + c,$$\nand determine when equality occurs.",
+    "image": null,
+    "choices": null,
+    "answer": "Equivalent to $a^4 + b^4 + c^4 \\ge abc(a + b + c)$, which follows from AM–GM twice; equality iff $a = b = c$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Clear denominators and use AM–GM twice",
+        "body": "Multiplying by $abc > 0$, the inequality is equivalent to\n$$a^4 + b^4 + c^4 \\ge a^2bc + b^2ca + c^2ab.$$\nBy AM–GM, $\\frac{a^4 + b^4}{2} \\ge a^2b^2$, etc., so\n$$a^4 + b^4 + c^4 = \\frac{a^4 + b^4}{2} + \\frac{b^4 + c^4}{2} + \\frac{c^4 + a^4}{2} \\ge a^2b^2 + b^2c^2 + c^2a^2.$$\nAgain by AM–GM, $\\frac{a^2b^2 + c^2a^2}{2} \\ge a^2bc$, etc., so\n$$a^2b^2 + b^2c^2 + c^2a^2 = \\frac{a^2(b^2 + c^2)}{2} + \\frac{b^2(c^2 + a^2)}{2} + \\frac{c^2(a^2 + b^2)}{2} \\ge a^2bc + b^2ca + c^2ab.$$\nCombining gives the claim.\n\n**Equality.** The first step is an equality only if $a^4 = b^4 = c^4$, i.e. $a = b = c$ (positive numbers), and $a = b = c$ clearly gives equality. So equality holds **if and only if $a = b = c$**. ∎"
+      },
+      {
+        "title": "AM–GM on each term",
+        "body": "For positive numbers, AM–GM on three terms gives\n$$\\frac{a^3}{bc} + b + c \\ge 3\\sqrt[3]{\\frac{a^3}{bc}\\cdot b\\cdot c} = 3a,$$\nand similarly $\\frac{b^3}{ca} + c + a \\ge 3b$, $\\frac{c^3}{ab} + a + b \\ge 3c$. Adding,\n$$\\frac{a^3}{bc} + \\frac{b^3}{ca} + \\frac{c^3}{ab} + 2(a + b + c) \\ge 3(a + b + c),$$\nwhich is the inequality. Equality needs $\\frac{a^3}{bc} = b = c$ in the first AM–GM, so $b = c$ and $a^3 = b^3$, i.e. $a = b = c$; conversely $a = b = c$ gives equality. ∎"
+      }
+    ],
+    "topics": [
+      "inequalities",
+      "algebra"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "cmo-cmo-2002-04",
+    "bank": "cmo",
+    "source": {
+      "contest": "CMO",
+      "paper": "CMO 2002",
+      "year": 2002,
+      "number": 4,
+      "url": "https://cms.math.ca/competitions/cmo/"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $\\Gamma$ be a circle with radius $r$. Let $A$ and $B$ be distinct points on $\\Gamma$ such that $AB < \\sqrt3\\,r$. Let the circle with centre $B$ and radius $AB$ meet $\\Gamma$ again at $C$. Let $P$ be the point inside $\\Gamma$ such that triangle $ABP$ is equilateral. Finally, let the line $CP$ meet $\\Gamma$ again at $Q$. Prove that $PQ = r$.",
+    "image": null,
+    "choices": null,
+    "answer": "In fact $Q$ is the image of the centre $O$ under the $60^\\circ$ rotation about $A$ taking $B$ to $P$, so $\\triangle AQP \\cong \\triangle AOB$ and $PQ = OB = r$; a complex-number computation confirms $P$ lies on chord $CQ$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Complex numbers",
+        "body": "Scale so that $r = 1$, and use complex coordinates with $\\Gamma$ the unit circle centred at $O = 0$. Let $\\angle AOB = 2\\beta$; then $AB = 2\\sin\\beta < \\sqrt3$, so $0^\\circ < \\beta < 60^\\circ$. After a rotation (and a reflection if necessary),\n$$B = 1, \\qquad A = e^{2i\\beta}, \\qquad C = e^{-2i\\beta},$$\nbecause the points of $\\Gamma$ at distance $AB$ from $B$ are exactly $e^{\\pm 2i\\beta}$, and $C \\ne A$.\n\n**The point $P$.** The third vertex of an equilateral triangle on $AB$ lies on the perpendicular bisector of $AB$ — the line through $O$ in direction $e^{i\\beta}$ — at distance $\\frac{\\sqrt3}{2}AB = \\sqrt3\\sin\\beta$ from the midpoint $\\cos\\beta\\, e^{i\\beta}$ of $AB$. The two candidates are $(\\cos\\beta \\pm \\sqrt3\\sin\\beta)e^{i\\beta} = 2\\cos(\\beta \\mp 60^\\circ)e^{i\\beta}$. Since $|\\beta - 60^\\circ| < 60^\\circ$, $2\\cos(\\beta - 60^\\circ) > 1$ (outside $\\Gamma$); since $60^\\circ < \\beta + 60^\\circ < 120^\\circ$, $|2\\cos(\\beta + 60^\\circ)| < 1$ (inside). So, with $\\gamma = \\beta + 60^\\circ$,\n$$P = 2\\cos\\gamma\\; e^{i\\beta}.$$\n\n**The point $Q$.** Let $Q' = e^{i(2\\beta + 60^\\circ)}$, a point of $\\Gamma$ different from $C$ (as $4\\beta + 60^\\circ$ is not a multiple of $360^\\circ$). For distinct $u, v$ on the unit circle, $z$ lies on line $uv$ iff $z + uv\\,\\bar z = u + v$. With $u = C$, $v = Q'$: $uv = e^{i60^\\circ}$ and $u + v = 2\\cos(2\\beta + 30^\\circ)e^{i30^\\circ}$, while\n$$P + e^{i60^\\circ}\\bar P = 2\\cos\\gamma\\left(e^{i\\beta} + e^{i(60^\\circ - \\beta)}\\right) = 4\\cos(\\beta + 60^\\circ)\\cos(\\beta - 30^\\circ)\\,e^{i30^\\circ} = 2\\cos(2\\beta + 30^\\circ)\\,e^{i30^\\circ},$$\nusing $2\\cos X\\cos Y = \\cos(X + Y) + \\cos(X - Y)$ and $\\cos 90^\\circ = 0$. So $P$ lies on the chord $CQ'$. A line meets $\\Gamma$ in at most two points, so the second intersection of line $CP$ with $\\Gamma$ is $Q = Q'$.\n\n**The distance.** Multiplying by $e^{-i\\beta}$ (which has modulus $1$),\n$$PQ = \\left|e^{i(2\\beta + 60^\\circ)} - 2\\cos\\gamma\\,e^{i\\beta}\\right| = \\left|e^{i\\gamma} - 2\\cos\\gamma\\right| = \\left|e^{i\\gamma} - (e^{i\\gamma} + e^{-i\\gamma})\\right| = |e^{-i\\gamma}| = 1.$$\nSo $PQ = 1 = r$ (in general, $PQ = r$ by scaling). ∎\n\n*Geometric meaning:* $Q = e^{i(2\\beta + 60^\\circ)}$ is $A$ rotated by $60^\\circ$ about $O$, so $OAQ$ is equilateral and $AQ = r$; the computation shows triangle $AQP$ is congruent to triangle $AOB$."
+      }
+    ],
+    "topics": [
+      "geometry",
+      "complex-numbers"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "cmo-cmo-2002-05",
+    "bank": "cmo",
+    "source": {
+      "contest": "CMO",
+      "paper": "CMO 2002",
+      "year": 2002,
+      "number": 5,
+      "url": "https://cms.math.ca/competitions/cmo/"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $N = \\{0, 1, 2, \\ldots\\}$. Determine all functions $f : N \\to N$ such that\n$$xf(y) + yf(x) = (x + y)f(x^2 + y^2)$$\nfor all $x$ and $y$ in $N$.",
+    "image": null,
+    "choices": null,
+    "answer": "Exactly the constant functions $f(x) = c$, $c \\in N$ (a minimal-difference argument: $f(x^2 + y^2)$ is a weighted average of $f(x)$, $f(y)$).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "A weighted average and a minimal difference",
+        "body": "**Constants work:** if $f \\equiv c$ then both sides equal $(x + y)c$.\n\n**Only constants.** Suppose $f$ is not constant. The values of $f$ are non-negative integers, so among all pairs $u, v$ with $f(u) \\ne f(v)$ there is one with the smallest difference $d = |f(u) - f(v)| \\ge 1$.\n\n*Observation 1.* If $x, y > 0$ and $f(x) < f(y)$, then\n$$f(x^2 + y^2) = \\frac{x}{x + y}f(y) + \\frac{y}{x + y}f(x)$$\nis a weighted average of $f(x)$ and $f(y)$ with both weights positive, so $f(x) < f(x^2 + y^2) < f(y)$. Then the pair $x$, $x^2 + y^2$ has $0 < f(x^2 + y^2) - f(x) < f(y) - f(x)$.\n\n*Observation 2.* Putting $y = 0$: $xf(0) = xf(x^2)$, so $f(x^2) = f(0)$ for all $x > 0$.\n\nNow take a pair with difference $d$.\n- If both members are positive, Observation 1 gives a pair with a smaller positive difference — a contradiction.\n- If one member is $0$: the pair is $0, y$ with $y > 0$ and $|f(y) - f(0)| = d$. By Observation 2, $f(1) = f(0)$, so $y \\ge 2$; and $f(y^2) = f(0)$, so the pair $y, y^2$ (two different positive numbers) also has difference $|f(y) - f(y^2)| = d$, which is again impossible by the first case.\n\nSo $f$ is constant, $f \\equiv c$, and $c = f(0) \\in N$.\n\n**Answer: $f(x) = c$ for all $x$, where $c$ is any non-negative integer.** ∎"
+      }
+    ],
+    "topics": [
+      "functional-equations",
+      "number-theory"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

@@ -1,0 +1,203 @@
+[
+  {
+    "id": "egmo-2019-01",
+    "bank": "egmo",
+    "source": {
+      "contest": "EGMO",
+      "paper": "Day 1",
+      "year": 2019,
+      "number": 1,
+      "url": "https://www.egmo.org/egmos/egmo8/paper-day1-English.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Find all triples $(a,b,c)$ of real numbers such that $ab+bc+ca=1$ and\n$$a^2b+c=b^2c+a=c^2a+b.$$",
+    "image": null,
+    "choices": null,
+    "answer": "$\\left(\\tfrac1{\\sqrt3},\\tfrac1{\\sqrt3},\\tfrac1{\\sqrt3}\\right)$, $\\left(-\\tfrac1{\\sqrt3},-\\tfrac1{\\sqrt3},-\\tfrac1{\\sqrt3}\\right)$, and the permutations of $(1,1,0)$ and of $(-1,-1,0)$ — eight triples. Homogenise with $ab+bc+ca=1$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Homogenise",
+        "body": "Replace $c$ by $c(ab+bc+ca)$ and $a$ by $a(ab+bc+ca)$ in the first equation:\n$$a^2b+c(ab+bc+ca)=b^2c+a(ab+bc+ca)\\iff bc^2+c^2a-b^2c-ca^2=0\\iff c\\,(a^2+b^2-ca-cb)=0 .$$\nSo the first equation (given $ab+bc+ca=1$) is equivalent to $c=0$ or $a^2+b^2=c(a+b)$. In the same way, $b^2c+a=c^2a+b$ is equivalent to $a=0$ or $b^2+c^2=a(b+c)$. These two equations imply the third one.\n\n**Case 1: some variable is $0$.** At most one is, since $ab+bc+ca=1$. Say $c=0$; then $ab=1$, so $a\\ne0$, and the second condition gives $b^2=ab$, so $b=a$ and $a^2=1$. This gives $(1,1,0)$ and $(-1,-1,0)$. Check: $a^2b+c=a$, $b^2c+a=a$, $c^2a+b=b=a$. By the cyclic symmetry, also $(0,1,1),(1,0,1)$ and their negatives.\n\n**Case 2: $abc\\ne0$.** Then $a^2+b^2=c(a+b)$, $b^2+c^2=a(b+c)$, and (by the same computation for the remaining pair) $c^2+a^2=b(c+a)$. Adding them:\n$$2(a^2+b^2+c^2)=2(ab+bc+ca)\\iff(a-b)^2+(b-c)^2+(c-a)^2=0,$$\nso $a=b=c$, and $3a^2=1$ gives $a=\\pm\\frac1{\\sqrt3}$. These work, since all three expressions equal $a^3+a$.\n\n**Answer:** $\\left(\\pm\\frac1{\\sqrt3},\\pm\\frac1{\\sqrt3},\\pm\\frac1{\\sqrt3}\\right)$ (all signs equal) and all permutations of $(1,1,0)$ and $(-1,-1,0)$."
+      }
+    ],
+    "topics": [
+      "algebra"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "egmo-2019-02",
+    "bank": "egmo",
+    "source": {
+      "contest": "EGMO",
+      "paper": "Day 1",
+      "year": 2019,
+      "number": 2,
+      "url": "https://www.egmo.org/egmos/egmo8/paper-day1-English.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $n$ be a positive integer. Dominoes are placed on a $2n\\times2n$ board in such a way that every cell of the board is adjacent to exactly one cell covered by a domino. For each $n$, determine the largest number of dominoes that can be placed in this way.\n\n(A domino is a tile of size $2\\times1$ or $1\\times2$. Dominoes are placed on the board in such a way that each domino covers exactly two cells of the board, and dominoes do not overlap. Two cells are said to be adjacent if they are different and share a common side.)",
+    "image": null,
+    "choices": null,
+    "answer": "$\\frac{n(n+1)}2$. The \"auras\" (cells adjacent to a domino) partition the board; auras cut by the edge contain many edge cells, giving $8D\\le4n^2+4n+2$. A ring-by-ring construction attains the bound.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Auras and boundary cells",
+        "body": "**Answer: $\\dfrac{n(n+1)}{2}$.**\n\n**Auras.** For a domino $d$, its *aura* is the set of cells adjacent to a cell of $d$. It contains both cells of $d$ (each is adjacent to the other) and at most $6$ more cells, so it has at most $8$ cells. The condition says every cell lies in exactly one aura. (A cell cannot be adjacent to both cells of one domino, since the grid graph has no triangles.) So **the auras partition the board**. Conversely, if the auras of some non-overlapping dominoes partition the board, the condition holds.\n\nFor $n=1$, every aura on the $2\\times2$ board is the whole board, so the maximum is $1=\\frac{1\\cdot2}2$. From now on let $n\\ge2$.\n\n**Upper bound.** Call the $4(2n-1)=8n-4$ cells touching the edge of the board *edge cells*. Take a horizontal domino in row $r$ (the vertical case is symmetric). Its aura loses the two cells above it if $r$ is the top row, the two below if $r$ is the bottom row, and one end cell for each side of the board it touches. Since $2n\\ge4$, at most one of each pair can happen. So aura sizes are:\n- $8$: nothing lost;\n- $7$: the domino touches a left/right edge but not the top/bottom rows. Its aura contains the domino's edge cell and the two edge cells above and below it, so **at least $3$ edge cells**;\n- $6$: the domino lies in the top (or bottom) row, away from the corners. The aura contains $4$ cells of that row, so **at least $4$ edge cells**;\n- $5$: the domino is at a corner. Its aura contains $4$ edge cells and **a corner cell**.\n\nLet $a,b,c,k$ be the numbers of auras of sizes $5,6,7,8$, and $D=a+b+c+k$. Auras are disjoint, so $a\\le4$ (four corners) and $4a+4b+3c\\le8n-4$. Also $5a+6b+7c+8k=4n^2$. Hence\n$$8D=4n^2+3a+2b+c=4n^2+\\tfrac12(4a+4b+3c)+a-\\tfrac c2\\le4n^2+(4n-2)+4,$$\nso $D\\le\\frac{n(n+1)}2+\\frac14$, i.e. $D\\le\\frac{n(n+1)}{2}$.\n\n**Construction.** Number rows and columns $0,\\dots,2n-1$. For $j\\ge0$ with $s=2n-4j\\ge2$, let $Q_j$ be the $s\\times s$ square $[2j,\\,2n-1-2j]^2$. We place dominoes on the boundary ring of each $Q_j$. In local coordinates $(\\text{row},\\text{col})\\in\\{0,\\dots,s-1\\}^2$ of the square, $H(r,c)$ covers $(r,c),(r,c+1)$ and $V(r,c)$ covers $(r,c),(r+1,c)$. All $s$ have the parity class of $2n$ modulo $4$.\n- *$s=4m+2$:* $H(0,4i)$ for $0\\le i\\le m$; $H(s-1,4i+2)$, $V(4i+3,0)$ and $V(4i+3,s-1)$ for $0\\le i\\le m-1$.\n- *$s=4m$:* $H(0,4i)$, $H(s-1,4i)$, $V(4i+1,s-1)$ for $0\\le i\\le m-1$; $V(4i+3,0)$ for $0\\le i\\le m-2$.\n\nEach square gets $s-1$ dominoes. Here are $n=4$ and $n=5$ (letters are dominoes):\n```\nA A . . B B . .\n. . . . . . . E\n. . H H . . . E\nG . . . . J . .\nG . . . . J . .\n. . I I . . . F\n. . . . . . . F\nC C . . D D . .\n```\n```\nA A . . B B . . C C\n. . . . . . . . . .\n. . J J . . K K . .\nF . . . . . . . . H\nF . . . O O . . . H\n. . M . . . . N . .\n. . M . . . . N . .\nG . . . L L . . . I\nG . . . . . . . . I\n. . D D . . E E . .\n```\n*Why it works.* Each domino's aura lies in its ring and the two neighbouring rings. Call the ring of $Q_j$ *ring $j$* and the ring between $Q_j$ and $Q_{j+1}$ *gap $j$*. It is enough to check two things:\n\n1. *The auras of square $Q_j$'s dominoes cover ring $j$ exactly once.* For $s=4m+2$: in the top row, $H(0,4i)$ covers columns $4i-1,\\dots,4i+2$, giving $0,\\dots,4m+1$. In the right column, $H(0,4m)$ covers rows $0,1$ and $V(4i+3,s-1)$ covers rows $4i+2,\\dots,4i+5$. The left column is the same, using $H(0,0)$. In the bottom row, $H(s-1,4i+2)$ covers columns $4i+1,\\dots,4i+4$, and the corners are covered by the side $V$'s. The case $s=4m$ is checked the same way: the top and bottom rows by the $H$'s, except the right corners, which come from $V(1,s-1)$ and $V(4m-3,s-1)$; the right column by the $V(4i+1,s-1)$ (rows $4i,\\dots,4i+3$); the left column by $H(0,0)$ (rows $0,1$), the $V(4i+3,0)$ (rows $4i+2,\\dots,4i+5$) and $H(s-1,0)$ (rows $s-2,s-1$).\n2. *Gap $j$ is covered exactly once, by the inward parts of $Q_j$'s auras and the outward parts of $Q_{j+1}$'s auras.* (The innermost square, $2\\times2$ or $4\\times4$, has no gap inside it; for $4\\times4$ the inward parts of its three auras are exactly the central $2\\times2$.) For example, for $s=4m+2$, in local coordinates of $Q_j$, the top side of the gap is row $1$, columns $1,\\dots,4m$. The inward parts of $H(0,4i)$ give columns $1;\\ 4,5;\\ 8,9;\\dots;4m-4,4m-3;\\ 4m$. The outward parts of the top dominoes of $Q_{j+1}$ give $2,3;\\ 6,7;\\dots;4m-2,4m-1$. Together these are all columns, each once. The other three sides of the gap, and the case $s=4m$, alternate in the same way between pairs from the two squares. (The pattern has also been checked by computer for all $n\\le40$.)\n\nSo the auras partition the board. The number of dominoes is $\\sum_j(2n-4j-1)$. For $n=2J+1$ this is $\\sum_{j=0}^{J}(2n-1-4j)=(J+1)(2n-1-2J)=\\frac{n+1}2\\cdot n$. For $n=2J$ it is $\\sum_{j=0}^{J-1}(2n-1-4j)=J(2n+1-2J)=\\frac n2(n+1)$. Either way $\\frac{n(n+1)}2$ dominoes are placed, matching the bound.\n\n**Answer: $\\dfrac{n(n+1)}{2}$.**"
+      }
+    ],
+    "topics": [
+      "counting"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "egmo-2019-03",
+    "bank": "egmo",
+    "source": {
+      "contest": "EGMO",
+      "paper": "Day 1",
+      "year": 2019,
+      "number": 3,
+      "url": "https://www.egmo.org/egmos/egmo8/paper-day1-English.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $ABC$ be a triangle such that $\\angle CAB>\\angle ABC$, and let $I$ be its incentre. Let $D$ be the point on segment $BC$ such that $\\angle CAD=\\angle ABC$. Let $\\omega$ be the circle tangent to $AC$ at $A$ and passing through $I$. Let $X$ be the second point of intersection of $\\omega$ and the circumcircle of $ABC$. Prove that the angle bisectors of $\\angle DAB$ and $\\angle CXB$ intersect at a point on line $BC$.",
+    "image": null,
+    "choices": null,
+    "answer": "Proof: the bisector of $\\angle DAB$ meets $BC$ at $T$ with $CT=CA$ (the reflection of $A$ in $CI$). With $M$ the midpoint of arc $BC$, the second intersection $X'$ of $MT$ with the circumcircle satisfies $MI^2=MT\\cdot MX'$, and an angle chase shows $X'\\in\\omega$; so $X=X'$ and $XT$ bisects $\\angle BXC$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "The point $T$ with $CT=CA$",
+        "body": "Let $\\alpha,\\beta,\\gamma$ be the angles of $ABC$, $\\Gamma$ its circumcircle, and $M$ the midpoint of the arc $BC$ of $\\Gamma$ not containing $A$ (so $M\\in AI$).\n\n**Step 1: the bisector of $\\angle DAB$.** Since $\\alpha>\\beta$ we have $CA<CB$. Let $T$ be the point of segment $BC$ with $CT=CA$. Then $\\angle CAT=\\angle CTA=\\frac{180^\\circ-\\gamma}2=\\frac{\\alpha+\\beta}2$. As $\\beta<\\frac{\\alpha+\\beta}2<\\alpha$, ray $AT$ lies between rays $AD$ and $AB$, and\n$$\\angle DAT=\\tfrac{\\alpha+\\beta}2-\\beta=\\tfrac{\\alpha-\\beta}2=\\alpha-\\tfrac{\\alpha+\\beta}2=\\angle TAB .$$\nSo $AT$ is the bisector of $\\angle DAB$, and it meets $BC$ at $T$. Also, $CI$ bisects $\\angle ACT$ and $CA=CT$, so **$T$ is the reflection of $A$ in line $CI$**.\n\n**Step 2: a point of $\\Gamma$ on line $MT$.** Let $X'$ be the second intersection of line $MT$ with $\\Gamma$. As $T$ is inside segment $BC$, $X'$ lies on the arc $BC$ containing $A$, and $T$ is between $M$ and $X'$. Since $\\angle MBT=\\angle MBC=\\angle MCB=\\angle MX'B$, triangles $MBT$ and $MX'B$ are similar, so $MT\\cdot MX'=MB^2$. By the incentre–excentre lemma $MB=MI$, hence\n$$MI^2=MT\\cdot MX'.$$\nSo triangles $MIT$ and $MX'I$ are similar (common angle at $M$), with opposite orientation.\n\n**Step 3: $X'\\in\\omega$.** We use directed angles $\\measuredangle$ modulo $180^\\circ$. Line $AC$ is tangent at $A$ to the circle through $A,I,X'$ iff $\\measuredangle(AC,AI)=\\measuredangle(X'A,X'I)$ (tangent–chord). Now:\n- from the similarity in Step 2, $\\measuredangle(IM,IT)=\\measuredangle(X'I,X'M)$, i.e. $\\measuredangle(X'M,X'I)=-\\measuredangle(AI,IT)$;\n- by inscribed angles, $\\measuredangle(X'A,X'M)=\\measuredangle(CA,CM)$.\n\nSo $\\measuredangle(X'A,X'I)=\\measuredangle(CA,CM)-\\measuredangle(AI,IT)$. Reflection in $CI$ swaps lines $IA$ and $IT$, so $\\measuredangle(AI,IT)=2\\measuredangle(AI,CI)$.\n\nNow orient $ABC$ counterclockwise and measure directions from line $AB$. Then $AC$ has direction $\\alpha$, $AI$ has $\\frac\\alpha2$, $CI$ has $\\alpha+\\frac\\gamma2$, and $CM$ has $\\alpha+\\gamma+\\frac\\alpha2$ (ray $CM$ is ray $CB$ turned further by $\\angle BCM=\\frac\\alpha2$). Hence\n$$\\measuredangle(CA,CM)-2\\measuredangle(AI,CI)=\\Big(\\gamma+\\tfrac\\alpha2\\Big)-(\\alpha+\\gamma)=-\\tfrac\\alpha2=\\measuredangle(AC,AI).$$\nSo the circle $AIX'$ is tangent to $AC$ at $A$, i.e. it is $\\omega$. (Note $X'\\ne A$: otherwise $T$ would lie on $AI$, but $\\angle TAC=\\frac{\\alpha+\\beta}2\\ne\\frac\\alpha2$.)\n\n**Step 4: conclusion.** $X'\\in\\omega\\cap\\Gamma=\\{A,X\\}$ and $X'\\ne A$, so $X'=X$. Thus $X$, $T$, $M$ are collinear. Since $X$ is on the arc $BAC$ and $M$ is the midpoint of the opposite arc $BC$, the line $XM$ is the bisector of $\\angle CXB$. It meets $BC$ at $T$, which by Step 1 lies on the bisector of $\\angle DAB$. ∎"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "egmo-2019-04",
+    "bank": "egmo",
+    "source": {
+      "contest": "EGMO",
+      "paper": "Day 2",
+      "year": 2019,
+      "number": 4,
+      "url": "https://www.egmo.org/egmos/egmo8/paper-day2-English.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $ABC$ be a triangle with incentre $I$. The circle through $B$ tangent to $AI$ at $I$ meets side $AB$ again at $P$. The circle through $C$ tangent to $AI$ at $I$ meets side $AC$ again at $Q$. Prove that $PQ$ is tangent to the incircle of $ABC$.",
+    "image": null,
+    "choices": null,
+    "answer": "Proof: $AI^2=AP\\cdot AB$ gives $\\angle AIP=\\frac B2$, so $\\angle PIF=\\frac C2$ and $\\angle QIE=\\frac B2$ ($E,F$ the touch points on $AC,AB$). The second tangents from $P$ and $Q$ touch the incircle at the same point, since $\\angle FIE=B+C$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Second tangents meet",
+        "body": "Let the incircle touch $AB$ at $F$ and $AC$ at $E$, and let $A,B,C$ also denote the angles.\n\n**The angle at $P$.** $AI$ is tangent at $I$ to the circle through $B,I,P$, so by the power of $A$, $AP\\cdot AB=AI^2$, with $P$ on ray $AB$. Thus $\\frac{AP}{AI}=\\frac{AI}{AB}$, and with the common angle $\\frac A2$ at $A$, triangles $API$ and $AIB$ are similar. Hence $\\angle AIP=\\angle ABI=\\frac B2$. Since $\\angle AIF=90^\\circ-\\frac A2>\\frac B2$, ray $IP$ lies inside angle $AIF$, so $P$ lies between $A$ and $F$ and\n$$\\angle PIF=\\Big(90^\\circ-\\frac A2\\Big)-\\frac B2=\\frac C2 .$$\nSimilarly $Q$ lies between $A$ and $E$, and $\\angle QIE=\\frac B2$.\n\n**The second tangents.** From $P$ (outside the incircle) draw the second tangent to the incircle, touching it at $T_P$. Then $T_P$ is the reflection of $F$ in line $IP$, so $\\angle FIT_P=2\\angle FIP=C$, with $T_P$ on the side of $IF$ towards $A$. Similarly the second tangent from $Q$ touches at $T_Q$ with $\\angle EIT_Q=B$, on the side of $IE$ towards $A$.\n\nSince $\\angle FIE=180^\\circ-A=B+C$ and $T_P,T_Q$ both lie inside this angle, with $\\angle FIT_P=C$ and $\\angle T_QIE=B$, the rays $IT_P$ and $IT_Q$ coincide, so $T_P=T_Q=:T$. Then $PT$ and $QT$ are both the tangent line to the incircle at $T$, so $P,Q,T$ are collinear and $PQ$ is tangent to the incircle at $T$. ∎"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "egmo-2019-05",
+    "bank": "egmo",
+    "source": {
+      "contest": "EGMO",
+      "paper": "Day 2",
+      "year": 2019,
+      "number": 5,
+      "url": "https://www.egmo.org/egmos/egmo8/paper-day2-English.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $n\\ge2$ be an integer, and let $a_1,a_2,\\ldots,a_n$ be positive integers. Show that there exist positive integers $b_1,b_2,\\ldots,b_n$ satisfying the following three conditions:\n\n(A) $a_i\\le b_i$ for $i=1,2,\\ldots,n$;\n\n(B) the remainders of $b_1,b_2,\\ldots,b_n$ on division by $n$ are pairwise different; and\n\n(C) $b_1+\\cdots+b_n\\le n\\left(\\dfrac{n-1}{2}+\\left\\lfloor\\dfrac{a_1+\\cdots+a_n}{n}\\right\\rfloor\\right)$.\n\n(Here, $\\lfloor x\\rfloor$ denotes the integer part of real number $x$, that is, the largest integer that does not exceed $x$.)",
+    "image": null,
+    "choices": null,
+    "answer": "Proof: reduce to $1\\le a_i\\le n$; for a permutation $\\sigma$ put $b_i=\\sigma(i)$ if $\\sigma(i)\\ge a_i$, else $\\sigma(i)+n$. The average over all $\\sigma$ of the number of \"lifted\" indices is $\\frac{\\sum(a_i-1)}n$, so some $\\sigma$ lifts at most $\\left\\lfloor\\frac{\\sum(a_i-1)}n\\right\\rfloor$ indices, which is exactly (C).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Average over permutations",
+        "body": "**Reduction.** Write $a_i=a_i'+nq_i$ with $1\\le a_i'\\le n$ and $q_i\\ge0$, and let $Q=\\sum q_i$. If $b_i'$ work for the $a_i'$, then $b_i=b_i'+nq_i$ work for the $a_i$. Indeed (A) and (B) are clearly preserved, and\n$$\\sum b_i\\le n\\Big(\\tfrac{n-1}2+\\Big\\lfloor\\tfrac{\\sum a_i'}{n}\\Big\\rfloor\\Big)+nQ=n\\Big(\\tfrac{n-1}2+\\Big\\lfloor\\tfrac{\\sum a_i'+nQ}{n}\\Big\\rfloor\\Big)=n\\Big(\\tfrac{n-1}2+\\Big\\lfloor\\tfrac{\\sum a_i}{n}\\Big\\rfloor\\Big).$$\nSo assume $1\\le a_i\\le n$ for all $i$.\n\n**Construction from a permutation.** For a permutation $\\sigma$ of $\\{1,\\dots,n\\}$, let\n$$b_i=\\begin{cases}\\sigma(i)&\\text{if }\\sigma(i)\\ge a_i,\\\\ \\sigma(i)+n&\\text{if }\\sigma(i)<a_i.\\end{cases}$$\n- (A) holds: in the second case $b_i>n\\ge a_i$.\n- (B) holds: $b_i\\equiv\\sigma(i)\\pmod n$, and the $\\sigma(i)$ are distinct numbers in $\\{1,\\dots,n\\}$.\n- Let $p(\\sigma)=\\#\\{i:\\sigma(i)<a_i\\}$. Then $\\sum b_i=\\frac{n(n+1)}2+n\\,p(\\sigma)=n\\big(\\frac{n-1}2+1+p(\\sigma)\\big)$.\n\nSo (C) holds as soon as $1+p(\\sigma)\\le\\left\\lfloor\\frac{\\sum a_i}n\\right\\rfloor$, i.e. $p(\\sigma)\\le\\left\\lfloor\\frac{\\sum(a_i-1)}{n}\\right\\rfloor$.\n\n**Averaging.** For fixed $i$, exactly $(a_i-1)\\cdot(n-1)!$ permutations have $\\sigma(i)<a_i$ (choose $\\sigma(i)\\in\\{1,\\dots,a_i-1\\}$, then the rest). So\n$$\\sum_\\sigma p(\\sigma)=(n-1)!\\sum_i(a_i-1),\\qquad\\text{i.e. the average of }p\\text{ is }\\frac{\\sum_i(a_i-1)}{n}.$$\nSome $\\sigma$ has $p(\\sigma)$ at most the average. As $p(\\sigma)$ is an integer, $p(\\sigma)\\le\\left\\lfloor\\frac{\\sum(a_i-1)}n\\right\\rfloor$. The corresponding $b_i$ satisfy (A), (B), (C). ∎"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "counting",
+      "inequalities"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "egmo-2019-06",
+    "bank": "egmo",
+    "source": {
+      "contest": "EGMO",
+      "paper": "Day 2",
+      "year": 2019,
+      "number": 6,
+      "url": "https://www.egmo.org/egmos/egmo8/paper-day2-English.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "On a circle, Alina draws $2019$ chords, the endpoints of which are all different. A point is considered *marked* if it is either\n\n(i) one of the $4038$ endpoints of a chord; or\n\n(ii) an intersection point of at least two chords.\n\nAlina labels each marked point. Of the $4038$ points meeting criterion (i), Alina labels $2019$ points with a $0$ and the other $2019$ points with a $1$. She labels each point meeting criterion (ii) with an arbitrary integer (not necessarily positive).\n\nAlong each chord, Alina considers the segments connecting two consecutive marked points. (A chord with $k$ marked points has $k-1$ such segments.) She labels each such segment in yellow with the sum of the labels of its two endpoints and in blue with the absolute value of their difference.\n\nAlina finds that the $N+1$ yellow labels take each value $0,1,\\ldots,N$ exactly once. Show that at least one blue label is a multiple of $3$.\n\n(A *chord* is a line segment joining two different points on a circle.)",
+    "image": null,
+    "choices": null,
+    "answer": "Proof: work modulo $3$ and suppose no segment joins two points with congruent labels. Degree parity (endpoints have degree $1$, crossings even degree) gives $e_{01}+e_{02}$ and $e_{01}+e_{12}$ odd and $e_{02}+e_{12}$ even. But yellow sums of $01$, $02$, $12$ segments are $\\equiv1,2,0$, and the residues of $0,\\dots,N$ are as balanced as possible, which contradicts these parities.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Parity of degrees modulo 3",
+        "body": "Consider the graph whose vertices are the marked points and whose edges are the segments.\n- An endpoint of a chord lies on only that chord (endpoints are all different) and is an end of it, so it has **degree $1$**.\n- An intersection point lies on $k\\ge2$ chords, strictly inside each, so it has **degree $2k$, which is even**.\n\nSuppose no blue label is divisible by $3$: every segment joins two points whose labels are different modulo $3$. Let $e_{01},e_{02},e_{12}$ be the numbers of segments joining residue classes $\\{0,1\\}$, $\\{0,2\\}$, $\\{1,2\\}$ (mod $3$). No other segments exist.\n\n**Parities.** Summing the degrees of the vertices with label $\\equiv0$ counts each $01$- and $02$-segment once: $\\sum\\deg=e_{01}+e_{02}$. Modulo $2$ this sum is the number of odd-degree vertices in that class, i.e. the $2019$ endpoints labelled $0$. Similarly for classes $1$ and $2$ (no endpoint has label $\\equiv2$):\n$$e_{01}+e_{02}\\equiv1,\\qquad e_{01}+e_{12}\\equiv1,\\qquad e_{02}+e_{12}\\equiv0\\pmod 2.$$\n\n**Yellow labels.** A $01$-segment has yellow label $\\equiv1$, a $02$-segment $\\equiv2$, and a $12$-segment $\\equiv0\\pmod3$. The yellow labels are exactly $0,1,\\dots,N$. Writing $N+1=3q+r$ with $r\\in\\{0,1,2\\}$, the numbers of values $\\equiv0,1,2$ among them are\n- $(q,q,q)$ if $r=0$,\n- $(q+1,q,q)$ if $r=1$,\n- $(q+1,q+1,q)$ if $r=2$.\n\nThese are $(e_{12},e_{01},e_{02})$. Then:\n- $r=0$: $e_{01}+e_{02}=2q$ is even, a contradiction;\n- $r=1$: $e_{01}+e_{02}=2q$ is even, a contradiction;\n- $r=2$: $e_{01}+e_{12}=2q+2$ is even, a contradiction.\n\nSo some segment joins two labels congruent modulo $3$, and its blue label is a multiple of $3$. ∎"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "graph-theory"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

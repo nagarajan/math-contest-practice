@@ -1,0 +1,149 @@
+[
+  {
+    "id": "vjimc-2005-cat2-01",
+    "bank": "vjimc",
+    "source": {
+      "contest": "VJIMC",
+      "paper": "VJIMC 2005 Category II",
+      "year": 2005,
+      "number": 1,
+      "url": "https://vjimc.osu.cz/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "For an arbitrary square matrix $M$, define\n$$\\exp(M)=I+\\frac{M}{1!}+\\frac{M^2}{2!}+\\frac{M^3}{3!}+\\cdots .$$\nConstruct $2\\times2$ matrices $A$ and $B$ such that $\\exp(A+B)\\ne\\exp(A)\\exp(B)$.",
+    "image": null,
+    "choices": null,
+    "answer": "E.g. $A=\\begin{pmatrix}0&1\\\\0&0\\end{pmatrix}$, $B=\\begin{pmatrix}0&0\\\\1&0\\end{pmatrix}$: $\\exp(A)\\exp(B)=\\begin{pmatrix}2&1\\\\1&1\\end{pmatrix}$ but $\\exp(A+B)=\\begin{pmatrix}\\cosh1&\\sinh1\\\\\\sinh1&\\cosh1\\end{pmatrix}$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Two nilpotent matrices",
+        "body": "If $A$ and $B$ commute, the usual Cauchy-product argument gives $\\exp(A+B)=\\exp(A)\\exp(B)$, so we need non-commuting matrices. Take\n$$A=\\begin{pmatrix}0&1\\\\0&0\\end{pmatrix},\\qquad B=\\begin{pmatrix}0&0\\\\1&0\\end{pmatrix}.$$\nThen $A^2=B^2=0$, so\n$$\\exp(A)=I+A=\\begin{pmatrix}1&1\\\\0&1\\end{pmatrix},\\quad\\exp(B)=I+B=\\begin{pmatrix}1&0\\\\1&1\\end{pmatrix},\\quad \\exp(A)\\exp(B)=\\begin{pmatrix}2&1\\\\1&1\\end{pmatrix}.$$\nOn the other hand $A+B=\\begin{pmatrix}0&1\\\\1&0\\end{pmatrix}$ satisfies $(A+B)^2=I$, so $(A+B)^k=I$ for even $k$ and $=A+B$ for odd $k$. Hence\n$$\\exp(A+B)=\\Big(\\sum_{k\\ge0}\\frac1{(2k)!}\\Big)I+\\Big(\\sum_{k\\ge0}\\frac1{(2k+1)!}\\Big)(A+B)=\\begin{pmatrix}\\cosh1&\\sinh1\\\\\\sinh1&\\cosh1\\end{pmatrix}.$$\nSince $\\cosh 1\\approx1.543\\ne2$, $\\exp(A+B)\\ne\\exp(A)\\exp(B)$. ∎"
+      },
+      {
+        "title": "A projection and a nilpotent",
+        "body": "Take $A=\\begin{pmatrix}1&0\\\\0&0\\end{pmatrix}$ and $B=\\begin{pmatrix}0&1\\\\0&0\\end{pmatrix}$. Then $A^k=A$ for $k\\ge1$ and $B^2=0$, so\n$$\\exp(A)=I+(e-1)A=\\begin{pmatrix}e&0\\\\0&1\\end{pmatrix},\\quad \\exp(B)=\\begin{pmatrix}1&1\\\\0&1\\end{pmatrix},\\quad\\exp(A)\\exp(B)=\\begin{pmatrix}e&e\\\\0&1\\end{pmatrix}.$$\nNow $C=A+B=\\begin{pmatrix}1&1\\\\0&0\\end{pmatrix}$ satisfies $C^2=C$, hence $\\exp(C)=I+(e-1)C=\\begin{pmatrix}e&e-1\\\\0&1\\end{pmatrix}$, which differs from $\\exp(A)\\exp(B)$ in the top-right entry. ∎"
+      }
+    ],
+    "topics": [
+      "linear-algebra"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "vjimc-2005-cat2-02",
+    "bank": "vjimc",
+    "source": {
+      "contest": "VJIMC",
+      "paper": "VJIMC 2005 Category II",
+      "year": 2005,
+      "number": 2,
+      "url": "https://vjimc.osu.cz/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $(a_{i,j})_{i,j=1}^n$ be a real matrix such that $a_{i,i}=0$ for $i=1,2,\\dots,n$. Prove that there exists a set $\\mathcal J\\subset\\{1,2,\\dots,n\\}$ of indices such that\n$$\\sum_{\\substack{i\\in\\mathcal J\\\\ j\\notin\\mathcal J}}a_{i,j}+\\sum_{\\substack{i\\notin\\mathcal J\\\\ j\\in\\mathcal J}}a_{i,j}\\ge\\frac12\\sum_{i,j=1}^na_{i,j}.$$",
+    "image": null,
+    "choices": null,
+    "answer": "Take $\\mathcal J$ maximising the left side $F(\\mathcal J)$; comparing with $\\mathcal J\\setminus\\{k\\}$ and $\\mathcal J\\cup\\{k\\}$ shows each diagonal block sums to at most $\\frac12F(\\mathcal J)$. (Alternatively: a random $\\mathcal J$ has expected value exactly $\\frac12\\sum a_{i,j}$.)",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Take a maximising set",
+        "body": "For $I\\subset\\{1,\\dots,n\\}$ let $F(I)=\\sum_{i\\in I,j\\notin I}a_{i,j}+\\sum_{i\\notin I,j\\in I}a_{i,j}$ (the \"cut\" entries). Choose $\\mathcal J$ with $F(\\mathcal J)$ maximal.\n\nFor $k\\in\\mathcal J$, moving $k$ out of $\\mathcal J$ does not increase $F$. Only entries in row $k$ or column $k$ change status ($a_{k,k}=0$ plays no role):\n$$0\\le F(\\mathcal J)-F(\\mathcal J\\setminus\\{k\\})=\\sum_{j\\notin\\mathcal J}a_{k,j}+\\sum_{i\\notin\\mathcal J}a_{i,k}-\\sum_{j\\in\\mathcal J}a_{k,j}-\\sum_{i\\in\\mathcal J}a_{i,k}.$$\nSumming over $k\\in\\mathcal J$, the positive part gives exactly $F(\\mathcal J)$ and the negative part gives $2\\sum_{i,j\\in\\mathcal J}a_{i,j}$. Hence\n$$\\sum_{i,j\\in\\mathcal J}a_{i,j}\\le\\tfrac12F(\\mathcal J).$$\nSimilarly, for $k\\notin\\mathcal J$ comparing with $\\mathcal J\\cup\\{k\\}$ and summing over $k\\notin\\mathcal J$ gives\n$$\\sum_{i,j\\notin\\mathcal J}a_{i,j}\\le\\tfrac12F(\\mathcal J).$$\nEvery entry is either in one of the two diagonal blocks or is cut, so\n$$\\frac12\\sum_{i,j=1}^na_{i,j}=\\frac12\\Big(\\sum_{i,j\\in\\mathcal J}a_{i,j}+\\sum_{i,j\\notin\\mathcal J}a_{i,j}+F(\\mathcal J)\\Big)\\le\\frac12\\Big(\\tfrac12F(\\mathcal J)+\\tfrac12F(\\mathcal J)+F(\\mathcal J)\\Big)=F(\\mathcal J). \\qquad ∎$$"
+      },
+      {
+        "title": "Averaging over random sets",
+        "body": "Choose $\\mathcal J$ at random: each index is put in $\\mathcal J$ independently with probability $\\frac12$. For $i\\ne j$ the entry $a_{i,j}$ is counted in $F(\\mathcal J)$ exactly when one of $i,j$ is in $\\mathcal J$ and the other is not, which has probability $\\frac12$. The diagonal entries are $0$. By linearity of expectation,\n$$\\mathbb E\\,F(\\mathcal J)=\\sum_{i\\ne j}\\tfrac12a_{i,j}=\\tfrac12\\sum_{i,j=1}^na_{i,j}.$$\nA random variable cannot always be smaller than its mean, so some $\\mathcal J$ satisfies $F(\\mathcal J)\\ge\\frac12\\sum_{i,j}a_{i,j}$. (Without probability: the average of $F(I)$ over all $2^n$ subsets $I$ equals $\\frac12\\sum a_{i,j}$, so the maximum is at least that.) ∎"
+      }
+    ],
+    "topics": [
+      "linear-algebra",
+      "inequalities",
+      "counting"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "vjimc-2005-cat2-03",
+    "bank": "vjimc",
+    "source": {
+      "contest": "VJIMC",
+      "paper": "VJIMC 2005 Category II",
+      "year": 2005,
+      "number": 3,
+      "url": "https://vjimc.osu.cz/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $f\\colon[0,1]\\times[0,1]\\to\\mathbb R$ be a continuous function. Find the limit\n$$\\lim_{n\\to\\infty}\\left(\\frac{(2n+1)!}{(n!)^2}\\right)^2\\int_0^1\\int_0^1\\big(xy(1-x)(1-y)\\big)^nf(x,y)\\,dx\\,dy .$$",
+    "image": null,
+    "choices": null,
+    "answer": "$f\\left(\\tfrac12,\\tfrac12\\right)$ — the weights $\\big(\\frac{(2n+1)!}{(n!)^2}\\big)^2(xy(1-x)(1-y))^n$ are probability densities concentrating at $(\\frac12,\\frac12)$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Polynomials first, then Weierstrass approximation",
+        "body": "Put $Q=[0,1]^2$ and $L_n(f)=\\Big(\\frac{(2n+1)!}{(n!)^2}\\Big)^2\\iint_Q\\big(xy(1-x)(1-y)\\big)^nf(x,y)\\,dx\\,dy$. $L_n$ is linear and positive ($f\\ge0\\Rightarrow L_n(f)\\ge0$).\n\n**Step 1: monomials.** The Beta integral (repeated integration by parts) gives $\\int_0^1x^{p}(1-x)^{n}dx=\\frac{p!\\,n!}{(p+n+1)!}$. Hence\n$$L_n(x^ky^l)=\\frac{(2n+1)!}{(n!)^2}\\cdot\\frac{(n+k)!\\,n!}{(2n+k+1)!}\\cdot\\frac{(2n+1)!}{(n!)^2}\\cdot\\frac{(n+l)!\\,n!}{(2n+l+1)!}=\\prod_{i=1}^k\\frac{n+i}{2n+1+i}\\cdot\\prod_{i=1}^l\\frac{n+i}{2n+1+i}\\xrightarrow[n\\to\\infty]{}\\frac1{2^k}\\cdot\\frac1{2^l}.$$\nIn particular $L_n(1)=1$, and $L_n(x^ky^l)\\to\\big(\\frac12\\big)^k\\big(\\frac12\\big)^l$.\n\n**Step 2: polynomials.** By linearity, $L_n(P)\\to P(\\frac12,\\frac12)$ for every polynomial $P(x,y)$.\n\n**Step 3: continuous $f$.** Let $\\varepsilon>0$. By the Weierstrass (Stone–Weierstrass) approximation theorem there is a polynomial $P$ with $|f-P|<\\varepsilon$ on $Q$. By positivity and $L_n(1)=1$, $|L_n(f)-L_n(P)|\\le L_n(|f-P|)\\le\\varepsilon$. By Step 2 there is $n_0$ with $|L_n(P)-P(\\frac12,\\frac12)|<\\varepsilon$ for $n\\ge n_0$. Then for $n\\ge n_0$\n$$\\Big|L_n(f)-f\\big(\\tfrac12,\\tfrac12\\big)\\Big|\\le|L_n(f)-L_n(P)|+\\Big|L_n(P)-P\\big(\\tfrac12,\\tfrac12\\big)\\Big|+\\Big|P\\big(\\tfrac12,\\tfrac12\\big)-f\\big(\\tfrac12,\\tfrac12\\big)\\Big|<3\\varepsilon .$$\n**Answer:** the limit is $f\\big(\\frac12,\\frac12\\big)$. ∎"
+      },
+      {
+        "title": "Concentration of the kernel",
+        "body": "Let $p_n(x)=\\frac{(2n+1)!}{(n!)^2}\\big(x(1-x)\\big)^n$. By the Beta integral $\\int_0^1p_n=1$, and the integral in question is $\\iint_Q p_n(x)p_n(y)f(x,y)\\,dx\\,dy$, where $K_n(x,y)=p_n(x)p_n(y)\\ge0$ has total integral $1$.\n\n**$p_n$ is small away from $\\frac12$.** Since $\\binom{2n}{n}\\le4^n$, we have $\\frac{(2n+1)!}{(n!)^2}=(2n+1)\\binom{2n}n\\le(2n+1)4^n$. If $|x-\\frac12|\\ge\\delta$ then $x(1-x)=\\frac14-(x-\\frac12)^2\\le\\frac14-\\delta^2$, so\n$$p_n(x)\\le(2n+1)(1-4\\delta^2)^n\\to0\\quad\\text{uniformly on }\\{|x-\\tfrac12|\\ge\\delta\\}.$$\nHence the mass of $K_n$ outside the square $U_\\delta=\\{|x-\\frac12|<\\delta,|y-\\frac12|<\\delta\\}$ is at most $\\int_{|x-1/2|\\ge\\delta}p_n+\\int_{|y-1/2|\\ge\\delta}p_n\\le 2(2n+1)(1-4\\delta^2)^n\\to0$.\n\n**Conclusion.** Let $\\varepsilon>0$, $M=\\max|f|$, and by continuity choose $\\delta$ with $|f(x,y)-f(\\frac12,\\frac12)|<\\varepsilon$ on $U_\\delta$. Then\n$$\\Big|\\iint_QK_nf-f\\big(\\tfrac12,\\tfrac12\\big)\\Big|=\\Big|\\iint_QK_n\\big(f-f(\\tfrac12,\\tfrac12)\\big)\\Big|\\le\\varepsilon\\iint_{U_\\delta}K_n+2M\\iint_{Q\\setminus U_\\delta}K_n\\le\\varepsilon+4M(2n+1)(1-4\\delta^2)^n,$$\nwhich is $<2\\varepsilon$ for large $n$. So the limit is $f(\\frac12,\\frac12)$. ∎"
+      }
+    ],
+    "topics": [
+      "real-analysis",
+      "calculus"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "vjimc-2005-cat2-04",
+    "bank": "vjimc",
+    "source": {
+      "contest": "VJIMC",
+      "paper": "VJIMC 2005 Category II",
+      "year": 2005,
+      "number": 4,
+      "url": "https://vjimc.osu.cz/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $R$ be a finite ring with the following property: for any $a,b\\in R$ there exists an element $c\\in R$ (depending on $a$ and $b$) such that $a^2+b^2=c^2$. Prove that for any $a,b,c\\in R$ there exists $d\\in R$ such that $2abc=d^2$.\n\n(Here $2abc$ denotes $abc+abc$. The ring $R$ is assumed to be associative, but not necessarily commutative and not necessarily containing a unit.)",
+    "image": null,
+    "choices": null,
+    "answer": "The set $S$ of squares is closed under addition, hence (by finiteness) an additive subgroup; $xy+yx=(x+y)^2-x^2-y^2\\in S$, and $2abc=(abc+bca)+(cab+abc)-(cab+bca)\\in S$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Squares form an additive subgroup",
+        "body": "Let $S=\\{x^2:x\\in R\\}$. The hypothesis says $S+S\\subseteq S$.\n\n**$S$ is an additive subgroup.** $0=0^2\\in S$. Fix $y\\in S$. The map $S\\to S$, $x\\mapsto x+y$, is injective, and $S$ is finite, so it is surjective. Thus for every $s\\in S$ there is $x\\in S$ with $x+y=s$, i.e. $s-y\\in S$. So $S$ is closed under subtraction.\n\n**Anticommutators are in $S$.** For any $x,y\\in R$,\n$$xy+yx=(x+y)^2-x^2-y^2\\in S .$$\n\n**Conclusion.** For arbitrary $a,b,c\\in R$, apply this (using associativity) with\n$$x=a,\\ y=bc:\\quad abc+bca\\in S;\\qquad x=c,\\ y=ab:\\quad cab+abc\\in S;\\qquad x=ca,\\ y=b:\\quad cab+bca\\in S .$$\nAdding the first two and subtracting the third gives $2abc\\in S$, i.e. $2abc=d^2$ for some $d\\in R$. ∎"
+      }
+    ],
+    "topics": [
+      "abstract-algebra"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

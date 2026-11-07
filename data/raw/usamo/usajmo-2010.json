@@ -1,0 +1,209 @@
+[
+  {
+    "id": "usamo-usajmo-2010-01",
+    "bank": "usamo",
+    "source": {
+      "contest": "USAJMO",
+      "paper": "USAJMO 2010",
+      "year": 2010,
+      "number": 1,
+      "url": "https://web.evanchen.cc/exams/JMO-2010-notes.pdf"
+    },
+    "grade": "7-10",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Let $P(n)$ be the number of permutations $(a_1, \\dots, a_n)$ of the numbers $(1, 2, \\dots, n)$ for which $ka_k$ is a perfect square for all $1 \\le k \\le n$. Find with proof the smallest $n$ such that $P(n)$ is a multiple of $2010$.",
+    "image": null,
+    "choices": null,
+    "answer": "4489",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Split the numbers by squarefree part",
+        "body": "**Squarefree parts.** Every positive integer can be written uniquely as $c\\,m^2$ with $c$ squarefree (take $c$ = product of the primes appearing to an odd power). Call $c$ the *squarefree part*.\n\n**Claim.** For positive integers $k, a$, the product $ka$ is a perfect square if and only if $k$ and $a$ have the same squarefree part.\n\n*Proof.* Write $k = c m^2$, $a = c' m'^2$. Then $ka = cc'(mm')^2$ is a square iff $cc'$ is a square. If $c = c'$ this holds. Conversely, if $c \\ne c'$, some prime $p$ divides exactly one of them, say $p \\mid c$, $p \\nmid c'$; as $c$ is squarefree, $p$ appears in $cc'$ to the first power, so $cc'$ is not a square. $\\square$\n\n**Counting.** For each squarefree $c$ let $S_c = \\{c\\cdot 1^2, c\\cdot 2^2, c\\cdot 3^2, \\dots\\} \\cap \\{1, \\dots, n\\}$. These sets partition $\\{1, \\dots, n\\}$ and $|S_c| = \\left\\lfloor \\sqrt{n/c} \\right\\rfloor$. By the claim, a permutation is counted exactly when it maps every $S_c$ to itself, and on each $S_c$ it may be an arbitrary permutation. Hence\n$$P(n) = \\prod_{c \\text{ squarefree}} \\left\\lfloor \\sqrt{n/c}\\right\\rfloor ! .$$\n\n**Minimum.** $2010 = 2 \\cdot 3 \\cdot 5 \\cdot 67$.\n\n- If $n < 67^2 = 4489$, then every $|S_c| \\le \\lfloor\\sqrt{n}\\rfloor \\le 66$, so no factor $|S_c|!$ is divisible by the prime $67$, and neither is $P(n)$.\n- If $n = 4489$, then $|S_1| = 67$, so $67!$ divides $P(n)$, and $67!$ is divisible by $2\\cdot 3\\cdot 5\\cdot 67 = 2010$.\n\n**Answer: $n = 4489$.**"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "counting"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamo-usajmo-2010-02",
+    "bank": "usamo",
+    "source": {
+      "contest": "USAJMO",
+      "paper": "USAJMO 2010",
+      "year": 2010,
+      "number": 2,
+      "url": "https://web.evanchen.cc/exams/JMO-2010-notes.pdf"
+    },
+    "grade": "7-10",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $n > 1$ be an integer. Find, with proof, all sequences $x_1, x_2, \\dots, x_{n-1}$ of positive integers with the following three properties:\n\n(a) $x_1 < x_2 < \\dots < x_{n-1}$;\n\n(b) $x_i + x_{n-i} = 2n$ for all $i = 1, 2, \\dots, n-1$;\n\n(c) given any two indices $i$ and $j$ (not necessarily distinct) for which $x_i + x_j < 2n$, there is an index $k$ such that $x_i + x_j = x_k$.",
+    "image": null,
+    "choices": null,
+    "answer": "Only $x_k = 2k$ for $k = 1, \\dots, n-1$ (the sums $x_1 + x_j$, $j \\le n-2$, must be exactly $x_2, \\dots, x_{n-1}$, so $x_k = kx_1$, and (b) forces $x_1 = 2$).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Add the smallest term to everything",
+        "body": "**The sequence $x_k = 2k$ works.** (a) is clear; (b): $2i + 2(n-i) = 2n$; (c): if $2i + 2j < 2n$ then $i + j \\le n-1$, so $k = i + j$ is a valid index with $x_k = x_i + x_j$.\n\n**It is the only one.** Let $x_1, \\dots, x_{n-1}$ satisfy (a)–(c). By (b) with $i = 1$, $x_1 + x_{n-1} = 2n$. Consider the $n-2$ numbers\n$$x_1 + x_1 < x_1 + x_2 < \\dots < x_1 + x_{n-2}.$$\nEach is less than $x_1 + x_{n-1} = 2n$, so by (c) each of them equals some term of the sequence. Each is also greater than $x_1$, so it is one of $x_2, \\dots, x_{n-1}$. These are $n-2$ distinct values lying in a set of exactly $n-2$ values, so the two increasing lists coincide term by term:\n$$x_2 = x_1 + x_1,\\quad x_3 = x_1 + x_2,\\quad \\dots,\\quad x_{n-1} = x_1 + x_{n-2}.$$\nBy induction $x_k = k x_1$ for all $k$ (for $n = 2$ this is trivial). Now (b) with $i = 1$ gives $x_1 + (n-1)x_1 = n x_1 = 2n$, so $x_1 = 2$ and $x_k = 2k$.\n\n**Answer:** the only sequence is $x_k = 2k$ $(1 \\le k \\le n-1)$. ∎"
+      }
+    ],
+    "topics": [
+      "sequences-series",
+      "number-theory"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamo-usajmo-2010-03",
+    "bank": "usamo",
+    "source": {
+      "contest": "USAJMO",
+      "paper": "USAJMO 2010",
+      "year": 2010,
+      "number": 3,
+      "url": "https://web.evanchen.cc/exams/JMO-2010-notes.pdf"
+    },
+    "grade": "7-10",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $AXYZB$ be a convex pentagon inscribed in a semicircle of diameter $AB$. Denote by $P, Q, R, S$ the feet of the perpendiculars from $Y$ onto lines $AX, BX, AZ, BZ$, respectively. Prove that the acute angle formed by lines $PQ$ and $RS$ is half the size of $\\angle XOZ$, where $O$ is the midpoint of segment $AB$.",
+    "image": null,
+    "choices": null,
+    "answer": "Both lines pass through the foot $T$ of the perpendicular from $Y$ to $AB$ (Simson lines of $Y$ in triangles $XAB$ and $ZAB$); cyclic quadrilaterals on diameters $AY$ and $BY$ give $\\angle(RS, PQ) = \\angle ZBX = \\tfrac12\\angle XOZ$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Simson lines through the foot on AB",
+        "body": "Let $\\omega$ be the circle with diameter $AB$ (center $O$); the five points lie on it. We use directed angles $\\measuredangle(\\ell, m)$ between lines, taken modulo $180^\\circ$.\n\n**Simson line theorem.** If a point $Y$ lies on the circumcircle of a triangle, then the feet of the perpendiculars from $Y$ to the three side lines are collinear.\n\nLet $T$ be the foot of the perpendicular from $Y$ to line $AB$.\n\n- $Y$ lies on the circumcircle $\\omega$ of triangle $XAB$; the feet from $Y$ to $AX$, $BX$, $AB$ are $P$, $Q$, $T$. So $P, Q, T$ are collinear.\n- Likewise $Y$ lies on the circumcircle of triangle $ZAB$, so $R, S, T$ are collinear.\n\nHence both lines $PQ$ and $RS$ pass through $T$.\n\n**Two circles.** Since $\\angle APY = \\angle ARY = \\angle ATY = 90^\\circ$, the points $A, P, R, T, Y$ lie on the circle with diameter $AY$. Since $\\angle BQY = \\angle BSY = \\angle BTY = 90^\\circ$, the points $B, Q, S, T, Y$ lie on the circle with diameter $BY$.\n\n**Angle chase.** On the first circle (inscribed angles on chord $RY$),\n$$\\measuredangle(TR, TY) = \\measuredangle(AR, AY) = \\measuredangle(AZ, AY),$$\nbecause $R$ lies on line $AZ$. On the second circle (chord $YQ$),\n$$\\measuredangle(TY, TQ) = \\measuredangle(BY, BQ) = \\measuredangle(BY, BX).$$\nIn $\\omega$, the inscribed angles on chord $ZY$ give $\\measuredangle(AZ, AY) = \\measuredangle(BZ, BY)$. Adding,\n$$\\measuredangle(RS, PQ) = \\measuredangle(TR, TQ) = \\measuredangle(BZ, BY) + \\measuredangle(BY, BX) = \\measuredangle(BZ, BX).$$\n\nSo lines $RS$ and $PQ$ meet at the same angle as lines $BZ$ and $BX$. The ordinary angle $\\angle XBZ$ is an inscribed angle of $\\omega$ on arc $XZ$ (the arc containing $Y$, which does not contain $B$), so $\\angle XBZ = \\tfrac12 \\angle XOZ$. Since $X, Z$ lie on a semicircle, $\\angle XOZ < 180^\\circ$, so this angle is acute and nonzero. Therefore the two lines are distinct and their acute angle is $\\tfrac12\\angle XOZ$. ∎"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamo-usajmo-2010-04",
+    "bank": "usamo",
+    "source": {
+      "contest": "USAJMO",
+      "paper": "USAJMO 2010",
+      "year": 2010,
+      "number": 4,
+      "url": "https://web.evanchen.cc/exams/JMO-2010-notes.pdf"
+    },
+    "grade": "7-10",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "A triangle is called a *parabolic triangle* if its vertices lie on a parabola $y = x^2$. Prove that for every nonnegative integer $n$, there is an odd number $m$ and a parabolic triangle with vertices at three distinct points with integer coordinates with area $(2^n m)^2$.",
+    "image": null,
+    "choices": null,
+    "answer": "Use vertices $(a, a^2), (-a, a^2), (b, b^2)$, whose area is $a(b^2 - a^2)$; for $n \\ge 1$ take $a = 2^{2n}$, $b = 2^{4n-2}+1$, $m = 2^{4n-2}-1$, and for $n = 0$ take $a = 1$, $b = 0$, $m = 1$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Symmetric pair plus one point",
+        "body": "For integers $a > 0$ and $b$ with $|b| \\ne a$, consider the triangle with vertices $(a, a^2)$, $(-a, a^2)$, $(b, b^2)$, all on $y = x^2$, with integer coordinates and distinct. The first two vertices form a horizontal side of length $2a$ on the line $y = a^2$, and the third vertex is at height $|b^2 - a^2|$ from this line. So the area is\n$$\\tfrac12 \\cdot 2a \\cdot |b^2 - a^2| = a\\,|b^2 - a^2|.$$\n\n**Case $n = 0$.** Take $a = 1$, $b = 0$: area $1 \\cdot 1 = 1 = (2^0 \\cdot 1)^2$ with $m = 1$ odd.\n\n**Case $n \\ge 1$.** We want $a(b^2 - a^2) = 2^{2n} m^2$. Take $a = 2^{2n}$; then we need $b^2 - 2^{4n} = m^2$, i.e. $b^2 - m^2 = 2^{4n}$. Choose\n$$b = 2^{4n-2} + 1, \\qquad m = 2^{4n-2} - 1.$$\nThen $b^2 - m^2 = (b-m)(b+m) = 2 \\cdot 2^{4n-1} = 2^{4n}$, and $m$ is odd because $4n - 2 \\ge 2$. Also $b = 2^{4n-2}+1 > 2^{2n} = a$ since $4n-2 \\ge 2n$, so $b^2 > a^2$, the points are distinct, and the area is\n$$a(b^2 - a^2) = 2^{2n} m^2 = (2^n m)^2.$$ ∎"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "number-theory"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamo-usajmo-2010-05",
+    "bank": "usamo",
+    "source": {
+      "contest": "USAJMO",
+      "paper": "USAJMO 2010",
+      "year": 2010,
+      "number": 5,
+      "url": "https://web.evanchen.cc/exams/JMO-2010-notes.pdf"
+    },
+    "grade": "7-10",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Two permutations $a_1, a_2, \\dots, a_{2010}$ and $b_1, b_2, \\dots, b_{2010}$ of the numbers $1, 2, \\dots, 2010$ are said to *intersect* if $a_k = b_k$ for some value of $k$ in the range $1 \\le k \\le 2010$. Show that there exist $1006$ permutations of the numbers $1, 2, \\dots, 2010$ such that any other such permutation is guaranteed to intersect at least one of these $1006$ permutations.",
+    "image": null,
+    "choices": null,
+    "answer": "Take the $1006$ cyclic shifts of $(1, 2, \\dots, 1006)$ in the first $1006$ positions (anything in the rest). Any permutation puts some number $\\le 1006$ in one of the first $1006$ positions, and exactly one shift agrees with it there.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Cyclic shifts of the first half",
+        "body": "For $j = 0, 1, \\dots, 1005$ define the permutation $\\pi_j$ by\n$$\\pi_j(k) = \\big((k + j - 1) \\bmod 1006\\big) + 1 \\quad (1 \\le k \\le 1006), \\qquad \\pi_j(k) = k \\quad (1007 \\le k \\le 2010).$$\nSo $\\pi_0 = (1, 2, \\dots, 1006, 1007, \\dots, 2010)$, $\\pi_1 = (2, 3, \\dots, 1006, 1, 1007, \\dots, 2010)$, and so on: the first $1006$ entries are cyclic shifts of $1, \\dots, 1006$. Each $\\pi_j$ is a permutation.\n\n**Key property.** For a fixed position $k \\le 1006$, the values $\\pi_0(k), \\pi_1(k), \\dots, \\pi_{1005}(k)$ are all of $1, 2, \\dots, 1006$, each exactly once (as $j$ runs over all residues mod $1006$, so does $k + j - 1$).\n\n**Every permutation intersects one of them.** Let $b$ be any permutation of $1, \\dots, 2010$. The first $1006$ positions hold $1006$ distinct numbers, but only $2010 - 1006 = 1004$ numbers exceed $1006$. So some position $k \\le 1006$ has $b_k = v \\le 1006$. By the key property there is a $j$ with $\\pi_j(k) = v = b_k$, so $b$ intersects $\\pi_j$. ∎\n\n*Remark.* One can show (with Hall's marriage theorem) that $1005$ permutations do not suffice."
+      }
+    ],
+    "topics": [
+      "counting",
+      "logic"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamo-usajmo-2010-06",
+    "bank": "usamo",
+    "source": {
+      "contest": "USAJMO",
+      "paper": "USAJMO 2010",
+      "year": 2010,
+      "number": 6,
+      "url": "https://web.evanchen.cc/exams/JMO-2010-notes.pdf"
+    },
+    "grade": "7-10",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "text",
+    "prompt": "Let $ABC$ be a triangle with $\\angle A = 90^\\circ$. Points $D$ and $E$ lie on sides $AC$ and $AB$, respectively, such that $\\angle ABD = \\angle DBC$ and $\\angle ACE = \\angle ECB$. Segments $BD$ and $CE$ meet at $I$. Determine whether or not it is possible for segments $AB$, $AC$, $BI$, $ID$, $CI$, $IE$ to all have integer lengths.",
+    "image": null,
+    "choices": null,
+    "answer": "No",
+    "acceptedAnswers": [
+      "not possible",
+      "impossible",
+      "no it is not possible"
+    ],
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Law of cosines with a 135° angle",
+        "body": "**Answer: no.** We show that already $AB$, $AC$, $BI$, $CI$ cannot all be integers.\n\n$BD$ and $CE$ are the angle bisectors from $B$ and $C$, so $I$ is the incenter and\n$$\\angle IBC + \\angle ICB = \\tfrac12(\\angle B + \\angle C) = \\tfrac12 \\cdot 90^\\circ = 45^\\circ, \\qquad\\text{so}\\qquad \\angle BIC = 135^\\circ.$$\n\nSuppose $AB, AC, BI, CI$ are integers. By Pythagoras, $BC^2 = AB^2 + AC^2$ is an integer. By the law of cosines in triangle $BIC$, with $\\cos 135^\\circ = -\\tfrac{\\sqrt2}{2}$,\n$$BC^2 = BI^2 + CI^2 - 2\\,BI\\cdot CI\\cos 135^\\circ = BI^2 + CI^2 + \\sqrt2\\, BI\\cdot CI.$$\nSince $BI \\cdot CI$ is a positive integer, this gives\n$$\\sqrt2 = \\frac{BC^2 - BI^2 - CI^2}{BI\\cdot CI} \\in \\mathbb{Q},$$\na contradiction because $\\sqrt 2$ is irrational. So the six lengths can never all be integers.\n\n**Answer: No.**"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "number-theory"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

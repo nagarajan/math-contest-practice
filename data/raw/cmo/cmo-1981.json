@@ -1,0 +1,181 @@
+[
+  {
+    "id": "cmo-cmo-1981-01",
+    "bank": "cmo",
+    "source": {
+      "contest": "CMO",
+      "paper": "CMO 1981",
+      "year": 1981,
+      "number": 1,
+      "url": "https://cms.math.ca/competitions/cmo/"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "For any real number $t$, denote by $[t]$ the greatest integer which is less than or equal to $t$. For example: $[8] = 8$, $[\\pi] = 3$ and $[-5/2] = -3$. Show that the equation\n$$[x] + [2x] + [4x] + [8x] + [16x] + [32x] = 12345$$\nhas no real solution.",
+    "image": null,
+    "choices": null,
+    "answer": "The left side $f(x)$ is non-decreasing; for $x < 196$ each $[kx] \\le 196k - 1$, so $f(x) \\le 12348 - 6 = 12342$, while for $x \\ge 196$, $f(x) \\ge 63\\cdot 196 = 12348$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "A jump at x = 196",
+        "body": "Let $f(x) = [x] + [2x] + [4x] + [8x] + [16x] + [32x]$; note $1 + 2 + 4 + 8 + 16 + 32 = 63$ and $63\\cdot 196 = 12348$.\n\n* If $x \\ge 196$, then $kx \\ge 196k$ and so $[kx] \\ge 196k$ for each $k \\in \\{1,2,4,8,16,32\\}$. Hence $f(x) \\ge 63\\cdot 196 = 12348$.\n* If $x < 196$, then $kx < 196k$; since $196k$ is an integer, $[kx] \\le 196k - 1$. Hence $f(x) \\le 12348 - 6 = 12342$.\n\nSo $f(x)$ never takes any of the values $12343, \\dots, 12347$; in particular $f(x) \\ne 12345$ for every real $x$. ∎"
+      },
+      {
+        "title": "Fractional parts",
+        "body": "Since $[t] > t - 1$ and $[t] \\le t$, we have $63x - 6 < f(x) \\le 63x$. If $f(x) = 12345$, then $12345 \\le 63x < 12351$, so $195.95\\ldots \\le x < 196.05\\ldots$. Write $x = 196 + \\theta$ with $-\\frac{3}{63} \\le \\theta < \\frac{3}{63}$; then\n$$f(x) = 12348 + \\sum_k [k\\theta].$$\nIf $\\theta \\ge 0$ every $[k\\theta] \\ge 0$, so $f(x) \\ge 12348$. If $\\theta < 0$ every $[k\\theta] \\le -1$, so $f(x) \\le 12342$. Either way $f(x) \\ne 12345$. ∎"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "algebra"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "cmo-cmo-1981-02",
+    "bank": "cmo",
+    "source": {
+      "contest": "CMO",
+      "paper": "CMO 1981",
+      "year": 1981,
+      "number": 2,
+      "url": "https://cms.math.ca/competitions/cmo/"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Given a circle of radius $r$ and a tangent line $\\ell$ to the circle through a given point $P$ on the circle. From a variable point $R$ on the circle, a perpendicular $RQ$ is drawn to $\\ell$ with $Q$ on $\\ell$. Determine the maximum of the area of triangle $PQR$.",
+    "image": null,
+    "choices": null,
+    "answer": "$\\dfrac{3\\sqrt3}{8}r^2$, attained when $\\angle PCR = 120^\\circ$ ($C$ the centre).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Coordinates and calculus",
+        "body": "Put $P = (0,0)$, $\\ell$ the $x$-axis and the centre at $C = (0, r)$. A point of the circle is $R = (r\\sin\\theta,\\ r - r\\cos\\theta)$, where $\\theta = \\angle PCR$, and then $Q = (r\\sin\\theta, 0)$. Triangle $PQR$ has a right angle at $Q$, so (by symmetry take $0 < \\theta < \\pi$)\n$$[PQR] = \\tfrac12\\,PQ\\cdot QR = \\tfrac12 r^2 \\sin\\theta\\,(1 - \\cos\\theta) =: \\tfrac12 r^2 g(\\theta).$$\nNow\n$$g'(\\theta) = \\cos\\theta(1 - \\cos\\theta) + \\sin^2\\theta = -2\\cos^2\\theta + \\cos\\theta + 1 = (1 - \\cos\\theta)(1 + 2\\cos\\theta).$$\nOn $(0,\\pi)$, $1 - \\cos\\theta > 0$, so $g' > 0$ for $\\cos\\theta > -\\frac12$ and $g' < 0$ for $\\cos\\theta < -\\frac12$: $g$ is maximal at $\\theta = \\frac{2\\pi}3$, where $g = \\frac{\\sqrt3}{2}\\cdot\\frac32 = \\frac{3\\sqrt3}4$. (At $\\theta = 0, \\pi$ the triangle degenerates.)\n\n**Answer: the maximum area is $\\dfrac{3\\sqrt3}{8}\\,r^2$.**"
+      },
+      {
+        "title": "AM–GM",
+        "body": "With $c = \\cos\\theta$ as above, $g^2 = (1 - c^2)(1-c)^2 = (1+c)(1-c)^3$. By AM–GM on the four non-negative numbers $3(1+c), 1-c, 1-c, 1-c$ (whose sum is $6$):\n$$3(1+c)(1-c)^3 \\le \\left(\\frac{6}{4}\\right)^4 = \\frac{81}{16} \\quad\\Longrightarrow\\quad g^2 \\le \\frac{27}{16},\\ g \\le \\frac{3\\sqrt3}{4},$$\nwith equality iff $3(1+c) = 1 - c$, i.e. $c = -\\frac12$. So the maximal area is $\\frac12 r^2\\cdot\\frac{3\\sqrt3}4 = \\dfrac{3\\sqrt3}{8}r^2$."
+      }
+    ],
+    "topics": [
+      "geometry",
+      "trigonometry",
+      "calculus"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "cmo-cmo-1981-03",
+    "bank": "cmo",
+    "source": {
+      "contest": "CMO",
+      "paper": "CMO 1981",
+      "year": 1981,
+      "number": 3,
+      "url": "https://cms.math.ca/competitions/cmo/"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Given a finite collection of lines in a plane $P$, show that it is possible to draw an arbitrarily large circle in $P$ which does not meet any of them. On the other hand, show that it is possible to arrange an infinite sequence of lines (first line, second line, third line, *etc.*) in $P$ so that every circle in $P$ meets at least one of the lines. (A point is not considered to be a circle.)",
+    "image": null,
+    "choices": null,
+    "answer": "Finite case: move the centre far out along a direction not parallel to any of the lines; its distance to every line tends to infinity. Infinite case: the lines $x = q$ for all rationals $q$ (an enumerable sequence) meet every circle.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Distances to lines; rational lines",
+        "body": "**Finitely many lines.** Let the lines be $L_1, \\dots, L_k$, with $L_i = \\{X : \\mathbf n_i\\cdot X = c_i\\}$ for unit vectors $\\mathbf n_i$. Choose a unit vector $\\mathbf u$ not parallel to any $L_i$ (only finitely many directions are excluded), so $\\mathbf n_i\\cdot\\mathbf u \\ne 0$ for all $i$. The distance from the point $t\\mathbf u$ to $L_i$ is\n$$|t\\,(\\mathbf n_i\\cdot\\mathbf u) - c_i| \\xrightarrow[t\\to\\infty]{} \\infty.$$\nGiven any radius $\\rho$, choose $t$ so large that all $k$ distances exceed $\\rho$. Every point of the circle with centre $t\\mathbf u$ and radius $\\rho$ is within distance $\\rho$ of the centre, while each line is at distance more than $\\rho$ from the centre; so no point of the circle lies on any $L_i$.\n\n**Infinitely many lines.** Use coordinates. The rational numbers can be listed as a sequence $q_1, q_2, q_3, \\dots$ (they are countable: list the fractions $\\pm a/b$ in order of $|a| + b$). Take the lines $x = q_1$, $x = q_2$, $\\dots$. A circle with centre $(a,b)$ and radius $\\rho > 0$ consists of points with $x$-coordinates filling the whole interval $[a - \\rho, a + \\rho]$, and this interval contains a rational number $q_n$ in its interior. The vertical line $x = q_n$ is then at distance $|q_n - a| < \\rho$ from the centre, so it meets the circle (in two points). ∎"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "analysis"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "cmo-cmo-1981-04",
+    "bank": "cmo",
+    "source": {
+      "contest": "CMO",
+      "paper": "CMO 1981",
+      "year": 1981,
+      "number": 4,
+      "url": "https://cms.math.ca/competitions/cmo/"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "$P(x)$ and $Q(x)$ are two polynomials that satisfy the identity $P(Q(x)) \\equiv Q(P(x))$ for real numbers $x$. If the equation $P(x) = Q(x)$ has no real solution, show that the equation $P(P(x)) = Q(Q(x))$ also has no real solution.",
+    "image": null,
+    "choices": null,
+    "answer": "$P - Q$ has no real zero, hence (by continuity) constant sign, say $P > Q$ everywhere; then $P(P(x)) > Q(P(x)) = P(Q(x)) > Q(Q(x))$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Constant sign",
+        "body": "The polynomial $D(x) = P(x) - Q(x)$ is continuous and has no real zero, so by the intermediate value theorem it has constant sign on $\\mathbb R$. By symmetry of the roles of $P$ and $Q$ we may assume $P(t) > Q(t)$ for every real $t$.\n\nFor any real $x$, apply this at $t = P(x)$ and at $t = Q(x)$:\n$$P(P(x)) > Q(P(x)) = P(Q(x)) > Q(Q(x)),$$\nwhere the middle equality is the hypothesis $P\\circ Q = Q\\circ P$. Hence $P(P(x)) \\ne Q(Q(x))$ for every real $x$. ∎"
+      }
+    ],
+    "topics": [
+      "polynomials",
+      "functional-equations"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "cmo-cmo-1981-05",
+    "bank": "cmo",
+    "source": {
+      "contest": "CMO",
+      "paper": "CMO 1981",
+      "year": 1981,
+      "number": 5,
+      "url": "https://cms.math.ca/competitions/cmo/"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Eleven theatrical groups participated in a festival. Each day, some of the groups were scheduled to perform while the remaining groups joined the general audience. At the conclusion of the festival, each group had seen, during its days off, at least one performance of every other group. At least how many days did the festival last?",
+    "image": null,
+    "choices": null,
+    "answer": "6",
+    "acceptedAnswers": null,
+    "answerUnit": "days",
+    "solutions": [
+      {
+        "title": "Sperner's theorem",
+        "body": "Let the festival last $n$ days and let $S_i \\subseteq \\{1, \\dots, n\\}$ be the set of days on which group $i$ performs. Group $i$ sees group $j$ perform iff there is a day on which $j$ performs and $i$ does not, i.e. iff $S_j \\not\\subseteq S_i$. So the condition is: **no $S_j$ is contained in a different $S_i$** — the $11$ sets form an *antichain* (in particular they are distinct).\n\n**Lemma (Sperner).** An antichain of subsets of an $n$-element set has at most $\\binom{n}{\\lfloor n/2\\rfloor}$ members.\n\n*Proof (LYM).* Consider the $n!$ orderings of the $n$ elements; each ordering $a_1, a_2, \\dots, a_n$ gives a chain $\\emptyset \\subset \\{a_1\\} \\subset \\{a_1,a_2\\} \\subset \\cdots$. A set of size $k$ occurs in exactly $k!(n-k)!$ of these chains, and a chain contains at most one member of an antichain. Hence $\\sum_{A} |A|!\\,(n-|A|)! \\le n!$, i.e. $\\sum_A \\binom{n}{|A|}^{-1} \\le 1$. Since $\\binom{n}{k} \\le \\binom{n}{\\lfloor n/2\\rfloor}$ for all $k$, the number of sets is at most $\\binom{n}{\\lfloor n/2 \\rfloor}$. $\\square$\n\nFor $n = 5$ the bound is $\\binom52 = 10 < 11$ (and smaller $n$ give even smaller bounds), so $5$ days are not enough.\n\nFor $n = 6$ there are $\\binom63 = 20 \\ge 11$ three-element subsets of $\\{1,\\dots,6\\}$; give $11$ different ones to the $11$ groups. Two different $3$-element sets are never contained in one another, so every group sees every other group.\n\n**Answer: $6$ days.**"
+      }
+    ],
+    "topics": [
+      "counting",
+      "logic"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

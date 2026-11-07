@@ -1,0 +1,173 @@
+[
+  {
+    "id": "apmo-2006-01",
+    "bank": "apmo",
+    "source": {
+      "contest": "APMO",
+      "paper": "APMO",
+      "year": 2006,
+      "number": 1,
+      "url": "https://www.apmo-official.org/static/problems/apmo2006_prb.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $n$ be a positive integer. Find the largest nonnegative real number $f(n)$ (depending on $n$) with the following property: whenever $a_1, a_2, \\dots, a_n$ are real numbers such that $a_1 + a_2 + \\cdots + a_n$ is an integer, there exists some $i$ such that $\\left| a_i - \\frac{1}{2} \\right| \\ge f(n)$.",
+    "image": null,
+    "choices": null,
+    "answer": "$f(n)=0$ for even $n$ and $f(n)=\\dfrac1{2n}$ for odd $n$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Triangle inequality and extremal examples",
+        "body": "**$n$ even.** Take all $a_i=\\frac12$: the sum $\\frac n2$ is an integer and every $|a_i-\\frac12|=0$. So no positive value works, and $f(n)=0$ (which trivially has the property).\n\n**$n$ odd.** *The value $\\frac1{2n}$ works.* Suppose $|a_i-\\frac12|<\\frac1{2n}$ for all $i$. Since $\\sum a_i$ is an integer and $\\frac n2$ is a half-integer, $\\left|\\sum a_i-\\frac n2\\right|\\ge\\frac12$. But\n$$\\left|\\sum_{i=1}^n a_i-\\frac n2\\right|\\le\\sum_{i=1}^n\\left|a_i-\\frac12\\right|<n\\cdot\\frac1{2n}=\\frac12,$$\na contradiction.\n\n*Nothing larger works.* Let $n=2m+1$ and $a_i=\\frac{m}{2m+1}$ for all $i$. Then $\\sum a_i=m$ is an integer and\n$$\\left|a_i-\\frac12\\right|=\\frac12-\\frac m{2m+1}=\\frac1{2(2m+1)}=\\frac1{2n}$$\nfor every $i$, so no $i$ has $|a_i-\\frac12|\\ge f$ for any $f>\\frac1{2n}$.\n\n**Answer:** $f(n)=0$ if $n$ is even, $f(n)=\\dfrac1{2n}$ if $n$ is odd."
+      }
+    ],
+    "topics": [
+      "inequalities",
+      "algebra"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "apmo-2006-02",
+    "bank": "apmo",
+    "source": {
+      "contest": "APMO",
+      "paper": "APMO",
+      "year": 2006,
+      "number": 2,
+      "url": "https://www.apmo-official.org/static/problems/apmo2006_prb.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Prove that every positive integer can be written as a finite sum of distinct integral powers of the golden mean $\\tau = \\frac{1 + \\sqrt{5}}{2}$. Here, an integral power of $\\tau$ is of the form $\\tau^i$, where $i$ is an integer (not necessarily positive).",
+    "image": null,
+    "choices": null,
+    "answer": "Proof by induction, using $\\tau^{k}=\\tau^{k-1}+\\tau^{k-2}$: merge consecutive exponents until none are adjacent, then rewrite $\\tau^0=\\tau^{-1}+\\tau^{-3}+\\dots+\\tau^{-2j-1}+\\tau^{-2j-2}$ to free the exponent $0$, and add $\\tau^0=1$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Induction with the Fibonacci identity",
+        "body": "We use $\\tau^2=\\tau+1$, i.e. $\\tau^{k}=\\tau^{k-1}+\\tau^{k-2}$ for every integer $k$. A *representation* of $N$ is a finite set $E$ of integers with $N=\\sum_{e\\in E}\\tau^e$.\n\n$1=\\tau^0$. Assume $N$ has a representation $E$; we construct one of $N+1$.\n\n**Step 1: no two consecutive exponents.** If $E$ contains two consecutive integers, let $k$ be the largest integer with $k,k+1\\in E$. Then $k+2\\notin E$ (otherwise $k+1,k+2\\in E$ contradicts maximality), so we may replace $\\tau^k+\\tau^{k+1}$ by $\\tau^{k+2}$. This keeps the exponents distinct and reduces their number by one, so after finitely many steps $E$ has no two consecutive elements.\n\n**Step 2: free the exponent $0$.** If $0\\notin E$, then $E\\cup\\{0\\}$ represents $N+1$. If $0\\in E$, let $j\\ge0$ be largest with $0,-2,-4,\\dots,-2j\\in E$; so $-2j-2\\notin E$, and since $E$ has no consecutive elements, $-1,-3,\\dots,-2j-1\\notin E$. Applying $\\tau^{-2i}=\\tau^{-2i-1}+\\tau^{-2i-2}$ repeatedly,\n$$\\tau^0=\\tau^{-1}+\\tau^{-2}=\\tau^{-1}+\\tau^{-3}+\\tau^{-4}=\\dots=\\tau^{-1}+\\tau^{-3}+\\dots+\\tau^{-2j-1}+\\tau^{-2j-2}.$$\nSo\n$$E'=(E\\setminus\\{0\\})\\cup\\{-1,-3,\\dots,-2j-1,-2j-2\\}$$\nis again a set of distinct exponents (the new ones are not in $E$) representing $N$, and $0\\notin E'$. Then $E'\\cup\\{0\\}$ represents $N+1$.\n\nBy induction every positive integer is a finite sum of distinct integral powers of $\\tau$. (For example $2=\\tau+\\tau^{-2}$, $3=\\tau^2+\\tau^{-2}$.) ∎"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "algebra"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "apmo-2006-03",
+    "bank": "apmo",
+    "source": {
+      "contest": "APMO",
+      "paper": "APMO",
+      "year": 2006,
+      "number": 3,
+      "url": "https://www.apmo-official.org/static/problems/apmo2006_prb.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $p \\ge 5$ be a prime and let $r$ be the number of ways of placing $p$ checkers on a $p \\times p$ checkerboard so that not all checkers are in the same row (but they may all be in the same column). Show that $r$ is divisible by $p^5$. Here, we assume that all the checkers are identical.",
+    "image": null,
+    "choices": null,
+    "answer": "Proof: $r=\\binom{p^2}{p}-p=p\\left(\\binom{p^2-1}{p-1}-1\\right)$, and $\\binom{p^2-1}{p-1}\\equiv1\\pmod{p^4}$ because the coefficient $s_1$ of $x$ in $(x-1)\\cdots(x-(p-1))$ is divisible by $p^2$ (Wolstenholme).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "A polynomial modulo $p$",
+        "body": "There are $\\binom{p^2}{p}$ placements, and exactly $p$ of them have all checkers in one row, so\n$$r=\\binom{p^2}{p}-p=p\\left[\\binom{p^2-1}{p-1}-1\\right],\\qquad\\text{using }\\binom{p^2}{p}=\\frac{p^2}{p}\\binom{p^2-1}{p-1}.$$\nSo we must show $\\binom{p^2-1}{p-1}\\equiv1\\pmod{p^4}$. Let\n$$f(x)=(x-1)(x-2)\\cdots(x-(p-1))=x^{p-1}+s_{p-2}x^{p-2}+\\dots+s_1x+s_0 .$$\nThen $s_0=(-1)^{p-1}(p-1)!=(p-1)!$ and\n$$\\binom{p^2-1}{p-1}=\\frac{(p^2-1)(p^2-2)\\cdots(p^2-(p-1))}{(p-1)!}=\\frac{f(p^2)}{(p-1)!}.$$\nSince $p\\nmid(p-1)!$, it suffices to prove $f(p^2)\\equiv s_0\\pmod{p^4}$. As $f(p^2)-s_0=s_1p^2+s_2p^4+\\dots$, it suffices to show $p^2\\mid s_1$.\n\n**$p\\mid s_i$ for $1\\le i\\le p-2$.** By Fermat, $1,2,\\dots,p-1$ are $p-1$ distinct roots of $x^{p-1}-1$ over $\\mathbb F_p$, so $f(x)\\equiv x^{p-1}-1$ coefficientwise modulo $p$.\n\n**$p^2\\mid s_1$.** Substituting $x=p$: $f(p)=(p-1)(p-2)\\cdots1=(p-1)!=s_0$, so\n$$0=f(p)-s_0=p^{p-1}+s_{p-2}p^{p-2}+\\dots+s_2p^2+s_1p .$$\nEvery term except $s_1p$ is divisible by $p^3$: $p^{p-1}$ because $p-1\\ge4$, and $s_ip^i$ ($2\\le i\\le p-2$) because $p\\mid s_i$. Hence $p^3\\mid s_1p$, i.e. $p^2\\mid s_1$.\n\nTherefore $\\binom{p^2-1}{p-1}\\equiv1\\pmod{p^4}$ and $p^5\\mid r$. ∎"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "counting",
+      "polynomials"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "apmo-2006-04",
+    "bank": "apmo",
+    "source": {
+      "contest": "APMO",
+      "paper": "APMO",
+      "year": 2006,
+      "number": 4,
+      "url": "https://www.apmo-official.org/static/problems/apmo2006_prb.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $A$, $B$ be two distinct points on a given circle $O$ and let $P$ be the midpoint of the line segment $AB$. Let $O_1$ be the circle tangent to the line $AB$ at $P$ and tangent to the circle $O$. Let $\\ell$ be the tangent line, different from the line $AB$, to $O_1$ passing through $A$. Let $C$ be the intersection point, different from $A$, of $\\ell$ and $O$. Let $Q$ be the midpoint of the line segment $BC$ and $O_2$ be the circle tangent to the line $BC$ at $Q$ and tangent to the line segment $AC$. Prove that the circle $O_2$ is tangent to the circle $O$.",
+    "image": null,
+    "choices": null,
+    "answer": "Proof: a circle inside angle $A$ of triangle $ABC$, touching both sides at distance $d$ from $A$, is tangent to the circumcircle iff $d\\cos\\frac A2=4R\\sin\\frac B2\\sin\\frac C2$ (power of a point). For $O_1$ ($d=\\frac c2$) this becomes $\\cos\\frac A2\\cos\\frac C2=2\\sin\\frac B2$, which is also exactly the condition for $O_2$ at vertex $C$ ($d=\\frac a2$).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Tangent length of circles tangent to the circumcircle",
+        "body": "Let $R$ be the radius of circle $O$ (also writing $O$ for its centre), and let $A,B,C$ also denote the angles of triangle $ABC$, with $a=BC$, $c=AB$.\n\n**Lemma.** Let $V$ be a vertex of triangle $ABC$ and let $\\omega$ be a circle inside angle $V$ touching both sides at distance $d$ from $V$, with centre $Z$ on the bisector, $VZ=z=\\frac{d}{\\cos(V/2)}$ and radius $\\rho=z\\sin\\frac V2$. Then $OZ=|R-\\rho|$ (i.e. $\\omega$ is tangent to circle $O$) if and only if $z\\cos^2\\frac V2=4R\\sin\\frac{V'}2\\sin\\frac{V''}2$, where $V',V''$ are the other two angles.\n\n*Proof.* The bisector from $V$ meets circle $O$ again at the midpoint $W$ of the arc opposite $V$. For $V=A$, the inscribed angle at $B$ gives $\\angle ABW=B+\\frac A2=90^\\circ+\\frac{B-C}2$, so $L=AW=2R\\sin\\angle ABW=2R\\cos\\frac{B-C}2$; similarly for any vertex. The power of $Z$ (on line $VW$, at signed distances $-z$ and $L-z$ from $V$ and $W$) is\n$$OZ^2-R^2=z(z-L).$$\nSince $\\sin\\frac V2=\\cos\\frac{V'+V''}2$, we have $L-2R\\sin\\frac V2=2R\\left(\\cos\\frac{V'-V''}2-\\cos\\frac{V'+V''}2\\right)=4R\\sin\\frac{V'}2\\sin\\frac{V''}2$. Then\n$$OZ^2-(R-\\rho)^2=z^2-zL+2Rz\\sin\\tfrac V2-z^2\\sin^2\\tfrac V2=z\\left(z\\cos^2\\tfrac V2-4R\\sin\\tfrac{V'}2\\sin\\tfrac{V''}2\\right),$$\nwhich proves the lemma.\n\n**$O_1$.** $P$ lies inside circle $O$ and on $O_1$, so $O_1$ is internally tangent to $O$ and lies inside it. Let $X$ be the point where $\\ell$ touches $O_1$; then $AX=AP=\\frac c2$ and $X$ is inside circle $O$ (it cannot be the tangency point of $O_1$ and $O$, since a line through $A$ cannot be tangent to circle $O$ at another point). So the second intersection $C$ of line $AX$ with circle $O$ lies on ray $AX$ beyond $X$. Hence $O_1$ lies inside angle $BAC$ and touches its sides at distance $d=\\frac c2$ from $A$. By the lemma, with $z\\cos\\frac A2=d$:\n$$\\frac c2\\cos\\frac A2=4R\\sin\\frac B2\\sin\\frac C2 .$$\nWith $c=2R\\sin C=4R\\sin\\frac C2\\cos\\frac C2$ this gives\n$$\\cos\\frac A2\\cos\\frac C2=2\\sin\\frac B2 .\\tag{1}$$\n\n**$O_2$.** $O_2$ touches line $BC$ at $Q$ and touches segment $AC$, so it lies on $A$'s side of $BC$, inside angle $ACB$, and (equal tangents from $C$) touches both sides at distance $d=CQ=\\frac a2$ from $C$. By the lemma at vertex $C$, $O_2$ is tangent to circle $O$ iff\n$$\\frac a2\\cos\\frac C2=4R\\sin\\frac A2\\sin\\frac B2 .$$\nWith $a=4R\\sin\\frac A2\\cos\\frac A2$ this is $\\cos\\frac A2\\cos\\frac C2=2\\sin\\frac B2$, which is (1). So $OO_2=|R-\\rho_2|$, and since $O_2$ is not circle $O$ itself ($O_2$ is tangent to line $BC$, circle $O$ is not), the two circles are tangent. ∎"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "trigonometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "apmo-2006-05",
+    "bank": "apmo",
+    "source": {
+      "contest": "APMO",
+      "paper": "APMO",
+      "year": 2006,
+      "number": 5,
+      "url": "https://www.apmo-official.org/static/problems/apmo2006_prb.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "In a circus, there are $n$ clowns who dress and paint themselves up using a selection of $12$ distinct colours. Each clown is required to use at least five different colours. One day, the ringmaster of the circus orders that no two clowns have exactly the same set of colours and no more than $20$ clowns may use any one particular colour. Find the largest number $n$ of clowns so as to make the ringmaster's order possible.",
+    "image": null,
+    "choices": null,
+    "answer": "48",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Double counting and a construction",
+        "body": "**Upper bound.** Count pairs (clown, colour used by the clown). Each clown uses at least $5$ colours, and each of the $12$ colours is used by at most $20$ clowns, so\n$$5n\\le\\#\\text{pairs}\\le12\\cdot20=240,\\qquad n\\le48 .$$\n\n**Construction with $48$ clowns.** Group the colours into six pairs $P_1=\\{1,2\\}$, $P_2=\\{3,4\\}$, $P_3=\\{5,6\\}$, $P_4=\\{7,8\\}$, $P_5=\\{9,10\\}$, $P_6=\\{11,12\\}$ and form eight $6$-sets as unions of three pairs:\n$$P_1P_2P_3,\\ P_2P_3P_4,\\ P_3P_4P_5,\\ P_4P_5P_6,\\ P_5P_6P_1,\\ P_6P_1P_2,\\ P_1P_3P_5,\\ P_2P_4P_6 .$$\nEach pair $P_k$ occurs in exactly four of these $6$-sets. Give the clowns all $5$-element subsets of these $6$-sets: $8\\cdot6=48$ clowns, each using $5$ colours.\n- They are distinct: two different $6$-sets share at most two pairs, i.e. at most $4$ colours, so they have no common $5$-subset.\n- A colour lying in a $6$-set belongs to $5$ of its six $5$-subsets, and each colour lies in exactly four $6$-sets, so each colour is used by $4\\cdot5=20$ clowns.\n\n**Answer:** $n=48$."
+      }
+    ],
+    "topics": [
+      "counting",
+      "logic"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

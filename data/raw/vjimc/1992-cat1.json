@@ -1,0 +1,149 @@
+[
+  {
+    "id": "vjimc-1992-cat1-01",
+    "bank": "vjimc",
+    "source": {
+      "contest": "VJIMC",
+      "paper": "VJIMC 1992 Category I",
+      "year": 1992,
+      "number": 1,
+      "url": "https://vjimc.osu.cz/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Find the $n$th derivative of the function\n$$f(x)=\\frac{x}{x^2-1}.$$",
+    "image": null,
+    "choices": null,
+    "answer": "$f^{(n)}(x)=\\dfrac{(-1)^n n!}{2}\\left(\\dfrac{1}{(x+1)^{n+1}}+\\dfrac{1}{(x-1)^{n+1}}\\right)$ for $x\\ne\\pm1$ (partial fractions).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Partial fractions",
+        "body": "For $x\\ne\\pm1$,\n$$\\frac{x}{x^2-1}=\\frac12\\left(\\frac{1}{x+1}+\\frac{1}{x-1}\\right),$$\nsince $\\frac{1}{x+1}+\\frac{1}{x-1}=\\frac{(x-1)+(x+1)}{x^2-1}=\\frac{2x}{x^2-1}$.\n\nFor any constant $c$, induction on $n$ gives\n$$\\frac{d^n}{dx^n}\\,(x-c)^{-1}=(-1)(-2)\\cdots(-n)\\,(x-c)^{-1-n}=\\frac{(-1)^n\\,n!}{(x-c)^{n+1}} .$$\nApplying this with $c=-1$ and $c=1$:\n$$f^{(n)}(x)=\\frac{(-1)^n\\,n!}{2}\\left(\\frac{1}{(x+1)^{n+1}}+\\frac{1}{(x-1)^{n+1}}\\right),\\qquad x\\ne\\pm1 .$$\n\n**Check ($n=1$):** the formula gives $-\\frac12\\left(\\frac1{(x+1)^2}+\\frac1{(x-1)^2}\\right)=-\\frac{x^2+1}{(x^2-1)^2}$, and indeed by the quotient rule $f'(x)=\\frac{(x^2-1)-2x^2}{(x^2-1)^2}=-\\frac{x^2+1}{(x^2-1)^2}$. ∎"
+      },
+      {
+        "title": "Leibniz rule on $(x^2-1)f(x)=x$",
+        "body": "Differentiate the identity $(x^2-1)f(x)=x$ $n$ times with the Leibniz rule (for $n\\ge2$ the right side gives $0$):\n$$(x^2-1)f^{(n)}+2nx\\,f^{(n-1)}+n(n-1)f^{(n-2)}=0 .$$\nThis recursion, with $f$ and $f'$ known, determines all derivatives. One checks that\n$g_n(x)=\\frac{(-1)^n n!}{2}\\left((x+1)^{-n-1}+(x-1)^{-n-1}\\right)$ satisfies it: writing $g_n=\\frac{(-1)^nn!}2(A^{n+1}+B^{n+1})$ with $A=\\frac1{x+1}$, $B=\\frac1{x-1}$, the terms in $A$ give\n$$\\tfrac{(-1)^{n}}{2}A^{n+1}\\Big[n!(x^2-1)-2n\\cdot(n-1)!\\,x(x+1)+n(n-1)(n-2)!\\,(x+1)^2\\Big]=\\tfrac{(-1)^{n}n!}{2}A^{n+1}(x+1)\\Big[(x-1)-2x+(x+1)\\Big]=0,$$\nand the terms in $B$ vanish the same way. Since $g_0=f$ and $g_1=f'$, induction gives $f^{(n)}=g_n$ for all $n$, the same formula as before. ∎"
+      }
+    ],
+    "topics": [
+      "calculus"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "vjimc-1992-cat1-02",
+    "bank": "vjimc",
+    "source": {
+      "contest": "VJIMC",
+      "paper": "VJIMC 1992 Category I",
+      "year": 1992,
+      "number": 2,
+      "url": "https://vjimc.osu.cz/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Prove that there exist two real convex functions $f,g$ such that\n$$f(x)-g(x)=\\sin x$$\nfor all $x\\in\\mathbb R$.",
+    "image": null,
+    "choices": null,
+    "answer": "Take $f(x)=x^2+\\sin x$ and $g(x)=x^2$: $f''=2-\\sin x>0$ and $g''=2>0$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Add a strongly convex function",
+        "body": "Let\n$$f(x)=x^2+\\sin x,\\qquad g(x)=x^2 .$$\nClearly $f(x)-g(x)=\\sin x$ for every real $x$. Both functions are twice differentiable on $\\mathbb R$ with\n$$f''(x)=2-\\sin x\\ge 1>0,\\qquad g''(x)=2>0,$$\nand a twice differentiable function with nonnegative second derivative on an interval is convex there. Hence $f$ and $g$ are convex. ∎"
+      },
+      {
+        "title": "A general principle",
+        "body": "More generally, if $h$ is twice differentiable with $|h''|\\le K$, then $h=\\big(h+\\tfrac K2x^2\\big)-\\tfrac K2x^2$ is a difference of two convex functions, since $\\big(h+\\tfrac K2x^2\\big)''=h''+K\\ge0$. For $h=\\sin x$ we have $|h''|=|\\sin x|\\le1$, so even\n$$f(x)=\\sin x+\\tfrac12x^2,\\qquad g(x)=\\tfrac12x^2$$\nworks ($f''=1-\\sin x\\ge0$). ∎"
+      }
+    ],
+    "topics": [
+      "calculus",
+      "real-analysis"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "vjimc-1992-cat1-03",
+    "bank": "vjimc",
+    "source": {
+      "contest": "VJIMC",
+      "paper": "VJIMC 1992 Category I",
+      "year": 1992,
+      "number": 3,
+      "url": "https://vjimc.osu.cz/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Prove that for all integers $n>1$,\n$$(n-1)\\mid\\left(n^n-n^2+n-1\\right).$$",
+    "image": null,
+    "choices": null,
+    "answer": "Modulo $n-1$ we have $n\\equiv1$, so $n^n-n^2+n-1\\equiv1-1+1-1=0$ (equivalently: $x=1$ is a root of $x^n-x^2+x-1$).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Factor theorem",
+        "body": "Fix an integer $n>1$ and consider the polynomial with integer coefficients\n$$P(x)=x^n-x^2+x-1 .$$\n$P(1)=1-1+1-1=0$, so by the factor theorem $P(x)=(x-1)Q(x)$, and since $x-1$ is monic, $Q$ has integer coefficients (polynomial long division by a monic polynomial never creates fractions). Substituting $x=n$:\n$$n^n-n^2+n-1=(n-1)\\,Q(n),\\qquad Q(n)\\in\\mathbb Z,$$\nso $(n-1)\\mid n^n-n^2+n-1$. ∎"
+      },
+      {
+        "title": "Congruences",
+        "body": "Let $m=n-1\\ge1$. Then $n\\equiv 1\\pmod m$, hence $n^k\\equiv1\\pmod m$ for every $k\\ge0$ (products of congruences). Therefore\n$$n^n-n^2+n-1\\equiv 1-1+1-1=0\\pmod m ,$$\ni.e. $n-1$ divides $n^n-n^2+n-1$. (For $n=2$, $m=1$ divides everything, and indeed $4-4+2-1=1$.) ∎"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "polynomials"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "vjimc-1992-cat1-04",
+    "bank": "vjimc",
+    "source": {
+      "contest": "VJIMC",
+      "paper": "VJIMC 1992 Category I",
+      "year": 1992,
+      "number": 4,
+      "url": "https://vjimc.osu.cz/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $X$ be a finite set and $f\\colon X\\to X$ be a map. Prove that $f$ is an injective map if and only if $f$ is a surjective map.",
+    "image": null,
+    "choices": null,
+    "answer": "With $|X|=n$: injective $\\Rightarrow$ $|f(X)|=n$ $\\Rightarrow$ $f(X)=X$; surjective $\\Rightarrow$ the $n$ fibres $f^{-1}(y)$ are nonempty, disjoint and cover $n$ elements, so each has exactly one element.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Counting",
+        "body": "Let $|X|=n$ (if $X=\\emptyset$ there is nothing to prove). For $y\\in X$ let $f^{-1}(y)=\\{x\\in X: f(x)=y\\}$ be the fibre over $y$. The fibres are pairwise disjoint and their union is $X$, so\n$$\\sum_{y\\in X}\\big|f^{-1}(y)\\big|=n.\\tag{$*$}$$\n\n**Injective $\\Rightarrow$ surjective.** If $f$ is injective, distinct elements have distinct images, so the image $f(X)$ has exactly $n$ elements. It is a subset of the $n$-element set $X$, hence $f(X)=X$: $f$ is surjective.\n\n**Surjective $\\Rightarrow$ injective.** If $f$ is surjective, each of the $n$ fibres is nonempty, i.e. $|f^{-1}(y)|\\ge1$. By $(*)$ the $n$ numbers $|f^{-1}(y)|\\ge1$ add up to $n$, so each equals $1$. Thus every $y$ has exactly one preimage, which means $f$ is injective. ∎\n\n(Finiteness is essential: on $\\mathbb N$, $n\\mapsto n+1$ is injective but not surjective, and $n\\mapsto\\lfloor n/2\\rfloor$ is surjective but not injective.)"
+      }
+    ],
+    "topics": [
+      "logic",
+      "counting"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

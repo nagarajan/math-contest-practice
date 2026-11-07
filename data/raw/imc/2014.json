@@ -1,0 +1,354 @@
+[
+  {
+    "id": "imc-2014-01",
+    "bank": "imc",
+    "source": {
+      "contest": "IMC",
+      "paper": "Day 1",
+      "year": 2014,
+      "number": 1,
+      "url": "https://www.imc-math.org.uk/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Determine all pairs $(a,b)$ of real numbers for which there exists a unique symmetric $2\\times2$ matrix $M$ with real entries satisfying $\\operatorname{trace}(M)=a$ and $\\det(M)=b$.",
+    "image": null,
+    "choices": null,
+    "answer": "Exactly the pairs with $a^2=4b$ (then $M=\\frac a2I$ is the only such matrix).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Parametrize the matrix",
+        "body": "Let $M=\\begin{pmatrix}x&z\\\\z&y\\end{pmatrix}$. The conditions are $x+y=a$ and $xy-z^2=b$. Then\n$$(x-y)^2+4z^2=(x+y)^2-4xy+4z^2=a^2-4b .$$\nConversely, if $x+y=a$ and $(x-y)^2+4z^2=a^2-4b$, then $xy-z^2=\\frac{(x+y)^2-(x-y)^2}{4}-z^2=b$. So the symmetric matrices with trace $a$ and determinant $b$ correspond bijectively to the points $(x-y,\\,2z)$ of the circle $\\{(s,t):s^2+t^2=a^2-4b\\}$ (with $x=\\frac{a+s}2$, $y=\\frac{a-s}2$, $z=\\frac t2$).\n\n- If $a^2-4b<0$ there is no such matrix.\n- If $a^2-4b>0$ the circle has infinitely many points, so there are infinitely many matrices.\n- If $a^2-4b=0$ the only point is $(0,0)$: $x=y=\\frac a2$, $z=0$, i.e. $M=\\frac a2I$ is the unique matrix.\n\n**Answer:** all pairs $(a,b)$ with $a^2=4b$. ∎"
+      },
+      {
+        "title": "Eigenvalues",
+        "body": "$\\operatorname{trace}M=a$ and $\\det M=b$ hold iff the eigenvalues $\\lambda_1,\\lambda_2$ of $M$ are the roots of $t^2-at+b$. A real symmetric matrix has real eigenvalues, so we need $a^2\\ge4b$.\n\nIf $\\lambda_1\\ne\\lambda_2$, both $\\operatorname{diag}(\\lambda_1,\\lambda_2)$ and $\\operatorname{diag}(\\lambda_2,\\lambda_1)$ work, so $M$ is not unique. Hence uniqueness forces $\\lambda_1=\\lambda_2=\\lambda=\\frac a2$, i.e. $a^2=4b$.\n\nConversely, if $a^2=4b$, any such $M$ is symmetric, hence orthogonally diagonalizable, with both eigenvalues $\\lambda$: $M=Q^T(\\lambda I)Q=\\lambda I$. So $M=\\frac a2 I$ is unique.\n\n**Answer:** $a^2=4b$. ∎"
+      }
+    ],
+    "topics": [
+      "linear-algebra"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imc-2014-02",
+    "bank": "imc",
+    "source": {
+      "contest": "IMC",
+      "paper": "Day 1",
+      "year": 2014,
+      "number": 2,
+      "url": "https://www.imc-math.org.uk/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Consider the following sequence\n$$(a_n)_{n=1}^\\infty=(1,1,2,1,2,3,1,2,3,4,1,2,3,4,5,1,\\dots).$$\nFind all pairs $(\\alpha,\\beta)$ of positive real numbers such that $\\displaystyle\\lim_{n\\to\\infty}\\frac{\\sum_{k=1}^na_k}{n^\\alpha}=\\beta$.",
+    "image": null,
+    "choices": null,
+    "answer": "Only $(\\alpha,\\beta)=\\left(\\frac32,\\ \\frac{\\sqrt2}3\\right)$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Look at the ends of the blocks, then squeeze",
+        "body": "The sequence consists of blocks $1,2,\\dots,m$ for $m=1,2,3,\\dots$; block $m$ ends at position $T_m=\\frac{m(m+1)}2$. Let $S(N)=\\sum_{k=1}^Na_k$. Then\n$$S(T_m)=\\sum_{j=1}^m\\frac{j(j+1)}2=\\frac{m(m+1)(m+2)}6 .$$\n\n**Necessity.** Along the subsequence $N=T_m$,\n$$\\frac{S(T_m)}{T_m^{\\alpha}}=\\frac{m(m+1)(m+2)/6}{\\big(m(m+1)/2\\big)^{\\alpha}}=\\frac{2^\\alpha}{6}\\,m^{3-2\\alpha}\\cdot\\frac{(1+\\frac1m)(1+\\frac2m)}{(1+\\frac1m)^{\\alpha}} .$$\nThis tends to $0$ if $\\alpha>\\frac32$, to $\\infty$ if $\\alpha<\\frac32$, and to $\\frac{2^{3/2}}6=\\frac{\\sqrt2}3$ if $\\alpha=\\frac32$. Since $\\beta$ must be positive and finite, necessarily $\\alpha=\\frac32$ and $\\beta=\\frac{\\sqrt2}3$.\n\n**Sufficiency.** Let $\\alpha=\\frac32$. For $T_m<N\\le T_{m+1}$, monotonicity of $S$ (all $a_k>0$) gives\n$$\\frac{S(T_m)}{T_{m+1}^{3/2}}\\le\\frac{S(N)}{N^{3/2}}\\le\\frac{S(T_{m+1})}{T_m^{3/2}} .$$\nThe left side equals $\\frac{S(T_m)}{T_m^{3/2}}\\left(\\frac{T_m}{T_{m+1}}\\right)^{3/2}$ and the right side $\\frac{S(T_{m+1})}{T_{m+1}^{3/2}}\\left(\\frac{T_{m+1}}{T_m}\\right)^{3/2}$; since $T_{m+1}/T_m=\\frac{m+2}{m}\\to1$, both tend to $\\frac{\\sqrt2}3$. Hence $S(N)/N^{3/2}\\to\\frac{\\sqrt2}3$.\n\n**Answer:** $(\\alpha,\\beta)=\\left(\\frac32,\\frac{\\sqrt2}3\\right)$. ∎"
+      }
+    ],
+    "topics": [
+      "sequences-series",
+      "real-analysis"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imc-2014-03",
+    "bank": "imc",
+    "source": {
+      "contest": "IMC",
+      "paper": "Day 1",
+      "year": 2014,
+      "number": 3,
+      "url": "https://www.imc-math.org.uk/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $n$ be a positive integer. Show that there are positive real numbers $a_0,a_1,\\dots,a_n$ such that for each choice of signs the polynomial\n$$\\pm a_nx^n\\pm a_{n-1}x^{n-1}\\pm\\dots\\pm a_1x\\pm a_0$$\nhas $n$ distinct real roots.",
+    "image": null,
+    "choices": null,
+    "answer": "Induction: multiply all the degree-$n$ polynomials by $x$ (adding the root $0$) and add $\\pm\\varepsilon$ with $\\varepsilon$ smaller than every $|$value at a critical point$|$; the sign pattern at the critical points is preserved, so $n+1$ real roots survive.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Induction by a small perturbation",
+        "body": "We induct on $n$. For $n=1$ take $a_1=a_0=1$: each $\\pm x\\pm1$ has one real root.\n\nSuppose $a_0,\\dots,a_n>0$ work for $n$. For a sign vector $\\sigma$ let $P_\\sigma(x)=\\sum_{i=0}^n\\sigma_ia_ix^i$; it has $n$ distinct real roots, all nonzero because $P_\\sigma(0)=\\pm a_0\\ne0$. Hence\n$$\\tilde P_\\sigma(x)=xP_\\sigma(x)=\\sigma_na_nx^{n+1}+\\dots+\\sigma_0a_0x$$\nhas $n+1$ distinct real roots $r_0<r_1<\\dots<r_n$, all simple. By Rolle's theorem $\\tilde P_\\sigma'$ has a root in each interval $(r_{i-1},r_i)$; since $\\deg\\tilde P_\\sigma'=n$, these are all its roots: $s_1<\\dots<s_n$ with $r_{i-1}<s_i<r_i$. In particular $\\tilde P_\\sigma(s_i)\\ne0$, and since $\\tilde P_\\sigma$ changes sign exactly at the simple roots $r_i$, the values $\\tilde P_\\sigma(s_1),\\dots,\\tilde P_\\sigma(s_n)$ alternate in sign; moreover the sign of $\\tilde P_\\sigma$ near $-\\infty$ is opposite to that at $s_1$ (one root $r_0$ in between), and the sign near $+\\infty$ is opposite to that at $s_n$.\n\nChoose $\\varepsilon>0$ smaller than $|\\tilde P_\\sigma(s_i)|$ for all $2^{n+1}$ sign vectors $\\sigma$ and all $i$. Every polynomial\n$$R(x)=\\pm a_nx^{n+1}\\pm\\dots\\pm a_0x\\pm\\varepsilon$$\nequals $\\tilde P_\\sigma(x)\\pm\\varepsilon$ for some $\\sigma$. Then $R(s_i)$ has the same sign as $\\tilde P_\\sigma(s_i)$, and $R$ has the same sign as $\\tilde P_\\sigma$ near $\\pm\\infty$ (same leading term). So $R$ changes sign on each of the $n+1$ disjoint intervals $(-\\infty,s_1),(s_1,s_2),\\dots,(s_{n-1},s_n),(s_n,\\infty)$, and by the intermediate value theorem has a root in each. As $\\deg R=n+1$, it has exactly $n+1$ distinct real roots.\n\nThus $a'_{n+1}=a_n,\\ a'_n=a_{n-1},\\dots,a'_1=a_0,\\ a'_0=\\varepsilon$ work for $n+1$. ∎"
+      }
+    ],
+    "topics": [
+      "polynomials",
+      "real-analysis"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imc-2014-04",
+    "bank": "imc",
+    "source": {
+      "contest": "IMC",
+      "paper": "Day 1",
+      "year": 2014,
+      "number": 4,
+      "url": "https://www.imc-math.org.uk/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $n>6$ be a perfect number, and let $n=p_1^{e_1}\\cdots p_k^{e_k}$ be its prime factorisation with $1<p_1<\\dots<p_k$. Prove that $e_1$ is an even number.\n\nA number $n$ is *perfect* if $s(n)=2n$, where $s(n)$ is the sum of the divisors of $n$.",
+    "image": null,
+    "choices": null,
+    "answer": "If $e_1$ were odd, $p_1+1\\mid1+p_1+\\dots+p_1^{e_1}\\mid 2n$ forces a prime $p_j=p_1+1$, so $p_1=2,p_2=3$, $6\\mid n$, and then $s(n)\\ge n+\\frac n2+\\frac n3+\\frac n6+1>2n$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "A divisor of $1+p_1+\\dots+p_1^{e_1}$",
+        "body": "Suppose $e_1$ is odd. By multiplicativity,\n$$s(n)=\\prod_{i=1}^k\\left(1+p_i+\\dots+p_i^{e_i}\\right)=2n=2p_1^{e_1}\\cdots p_k^{e_k}.$$\nThe first factor has an even number $e_1+1$ of terms, so it equals $(1+p_1)(1+p_1^2+p_1^4+\\dots+p_1^{e_1-1})$; hence $p_1+1\\mid 2n$.\n\nSince $p_1+1\\ge3$ does not divide $2$, $\\gcd(p_1+1,n)>1$, so some $p_j$ divides $p_1+1$. It is not $p_1$ (which does not divide $p_1+1$), so $p_j>p_1$, and $p_j\\le p_1+1$; thus $p_j=p_1+1$. Two primes differing by $1$ must be $2$ and $3$: $p_1=2$, $p_j=3$, so $6\\mid n$.\n\nAs $n>6$, the numbers $n,\\frac n2,\\frac n3,\\frac n6,1$ are distinct divisors of $n$, so\n$$s(n)\\ge n+\\frac n2+\\frac n3+\\frac n6+1=2n+1>2n,$$\na contradiction. Hence $e_1$ is even. ∎\n\n*Remark.* For even $n$ this also follows from Euler's theorem that even perfect numbers are $2^{p-1}(2^p-1)$ with $2^p-1$ prime: here $e_1=p-1$, which is even because $n>6$ forces $p>2$."
+      }
+    ],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imc-2014-05",
+    "bank": "imc",
+    "source": {
+      "contest": "IMC",
+      "paper": "Day 1",
+      "year": 2014,
+      "number": 5,
+      "url": "https://www.imc-math.org.uk/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $A_1A_2\\dots A_{3n}$ be a closed broken line consisting of $3n$ line segments in the Euclidean plane. Suppose that no three of its vertices are collinear, and for each index $i=1,2,\\dots,3n$, the triangle $A_iA_{i+1}A_{i+2}$ has counterclockwise orientation and $\\angle A_iA_{i+1}A_{i+2}=60^\\circ$, using the notation $A_{3n+1}=A_1$ and $A_{3n+2}=A_2$. Prove that the number of self-intersections of the broken line is at most $\\frac32n^2-2n+1$.\n\nThe picture shows an example with $n=2$.",
+    "image": "qimages/imc/2014/q05.webp",
+    "choices": null,
+    "answer": "Segments come in three parallel classes; every crossing is between the \"corners\" $A_iA_{i+1}A_{i+2}$ and $A_jA_{j+1}A_{j+2}$ with $i\\equiv j\\pmod 3$, at most one per pair, and only if their two \"heights\" are in opposite order. Counting pairs and showing at least $\\lfloor\\frac{n-1}2\\rfloor$ pairs are in the same order gives $3\\binom n2-\\lfloor\\frac{n-1}2\\rfloor\\le\\frac32n^2-2n+1$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Corners, heights and a cyclic sign argument",
+        "body": "Indices are taken modulo $3n$. Let $s_i$ denote the segment $A_iA_{i+1}$.\n\n**Directions.** At each vertex the line turns left by $180^\\circ-60^\\circ=120^\\circ$. Hence $s_i$ has direction $e_{i\\bmod3}$, where $e_0,e_1,e_2$ are unit vectors with $e_{c+1}$ obtained from $e_c$ by a $120^\\circ$ counterclockwise rotation. Let $\\nu_c$ be $e_c$ rotated by $90^\\circ$ counterclockwise, and put\n$$y_i=\\nu_{i\\bmod3}\\cdot A_i\\;\\big(=\\nu_{i\\bmod 3}\\cdot A_{i+1}\\big),$$\nthe \"height\" of the line through $s_i$. If $i\\ne j$, $i\\equiv j\\pmod3$, then $s_i,s_j$ are parallel, distinct, and not collinear (four vertices, no three collinear), so $y_i\\ne y_j$; in particular parallel segments never meet.\n\n**Corners.** Let $V_i=s_i\\cup s_{i+1}$ (the corner at $A_{i+1}$), and let $c=i\\bmod 3$. In the affine coordinates $f=\\nu_c\\cdot P$, $g=\\nu_{c+1}\\cdot P$ one computes $\\nu_{c+1}\\cdot e_c=\\cos210^\\circ<0$, $\\nu_c\\cdot e_{c+1}=\\cos30^\\circ>0$, $\\nu_{c+1}\\cdot e_{c+1}=\\nu_c\\cdot e_c=0$. So $A_{i+1}=(y_i,y_{i+1})$, the segment $s_i$ lies on the ray $\\{f=y_i,\\ g\\ge y_{i+1}\\}$ and $s_{i+1}$ on the ray $\\{g=y_{i+1},\\ f\\ge y_i\\}$: $V_i$ is part of the boundary of the quadrant $\\{f\\ge y_i,\\ g\\ge y_{i+1}\\}$.\n\nTake $j\\ne i$ with $j\\equiv i\\pmod 3$ (same coordinates $f,g$). Since parallel segments do not meet, $V_i\\cap V_j=(s_i\\cap s_{j+1})\\cup(s_j\\cap s_{i+1})$. Now $s_i\\cap s_{j+1}\\neq\\emptyset$ requires the point $(y_i,y_{j+1})$ to be on both rays: $y_i\\ge y_j$ and $y_{j+1}\\ge y_{i+1}$, i.e. (by distinctness) $y_i>y_j$ and $y_{i+1}<y_{j+1}$. Symmetrically $s_j\\cap s_{i+1}\\ne\\emptyset$ requires $y_j>y_i$ and $y_{j+1}<y_{i+1}$. Consequently:\n- at most one of the two intersections is nonempty;\n- if one is nonempty, the pair is **discordant**: $(y_i-y_j)(y_{i+1}-y_{j+1})<0$.\n\n**Every self-intersection is charged to a discordant pair.** Two non-adjacent segments that meet are non-parallel, so they are $s_a$ and $s_b$ with $b\\equiv a+1\\pmod 3$ (after possibly swapping names), and they meet in one point. Charge this crossing to the pair $\\{a,b-1\\}$; note $a\\equiv b-1$, and $a\\ne b-1$ since $s_a,s_{a+1}$ are adjacent. The crossing is $s_a\\cap s_{(b-1)+1}$, so by the above each pair $\\{i,j\\}$ receives at most one crossing, and only if it is discordant. Hence\n$$\\#\\text{self-intersections}\\le\\#\\{\\text{discordant pairs}\\}=3\\binom n2-\\#\\{\\text{concordant pairs}\\},$$\nwhere the pairs are the $3\\binom n2$ unordered pairs $\\{i,j\\}$, $i\\ne j$, $i\\equiv j\\pmod 3$, and concordant means $(y_i-y_j)(y_{i+1}-y_{j+1})>0$.\n\n**Reduction to one class.** Let $a_u=y_{3u}$ for $u\\in\\mathbb Z/n$ (distinct numbers). For $u\\ne v$ consider the four signs\n$$\\sigma_c=\\operatorname{sign}\\big(y_{c+3u}-y_{c+3v}\\big)\\quad(c=0,1,2,3),$$\nwhere $\\sigma_3=\\operatorname{sign}(a_{u+1}-a_{v+1})$. The pair $\\{c+3u,c+3v\\}$ ($c=0,1,2$) is concordant iff $\\sigma_c=\\sigma_{c+1}$. If $\\sigma_0=\\sigma_3$, the three steps cannot all be sign changes, so at least one of the three pairs is concordant. Hence\n$$\\#\\{\\text{concordant pairs}\\}\\ge\\#\\big\\{\\{u,v\\}:(a_u-a_v)(a_{u+1}-a_{v+1})>0\\big\\}.$$\n\n**Lemma.** For distinct reals $a_u$ ($u\\in\\mathbb Z/n$), the number of pairs $\\{u,v\\}$ with $(a_u-a_v)(a_{u+1}-a_{v+1})>0$ (\"good\" pairs) is at least $\\lfloor\\frac{n-1}2\\rfloor$.\n\n*Proof.* For $1\\le m\\le\\frac n2$ let $\\tau_u=\\operatorname{sign}(a_{u+m}-a_u)$, $u\\in\\mathbb Z/n$. The pair $\\{u,u+m\\}$ is good iff $\\tau_u=\\tau_{u+1}$. Going once around the cycle the sign changes an even number of times.\n- If $m<\\frac n2$, each pair at cyclic distance $m$ is $\\{u,u+m\\}$ for exactly one $u$, so the number of good pairs at distance $m$ is $n-(\\text{even})\\equiv n\\pmod 2$.\n  - If $n$ is odd, this is at least $1$ for each $m=1,\\dots,\\frac{n-1}2$: in total $\\ge\\frac{n-1}2$.\n  - If $n$ is even and $m$ is even: rotate indices so that $a_0$ is the minimum. If no pair at distance $m$ were good, then $\\tau_u=(-1)^u\\tau_0$; but $\\tau_0=\\operatorname{sign}(a_m-a_0)=+1$ and $\\tau_{n-m}=\\operatorname{sign}(a_0-a_{n-m})=-1$, while $n-m$ is even — contradiction. So there is a good pair, and by parity at least $2$.\n- If $n=2r$ and $m=r$: the pairs are $\\{u,u+r\\}$, $u=0,\\dots,r-1$, and $\\tau_{u+r}=-\\tau_u$. Among the $r$ steps $\\tau_0\\to\\tau_1\\to\\dots\\to\\tau_r=-\\tau_0$ the number of sign changes is odd, so if $r$ is even at least one step is not a change: at least $1$ good pair.\n\nFor $n=2r$: the even $m$ with $2\\le m<r$ number $\\lfloor\\frac{r-1}2\\rfloor$ and give $\\ge2$ each, and $m=r$ gives $\\ge1$ when $r$ is even. If $r$ is odd this is $2\\cdot\\frac{r-1}2=r-1$; if $r$ is even it is $2\\left(\\frac r2-1\\right)+1=r-1$. In all cases we get $\\ge\\lfloor\\frac{n-1}2\\rfloor$. $\\square$\n\n**Conclusion.**\n$$\\#\\text{self-intersections}\\le3\\binom n2-\\left\\lfloor\\frac{n-1}2\\right\\rfloor=\\begin{cases}\\frac32n^2-2n+\\frac12,&n\\text{ odd},\\\\[2pt]\\frac32n^2-2n+1,&n\\text{ even},\\end{cases}$$\nwhich is at most $\\frac32n^2-2n+1$. ∎"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "counting",
+      "logic"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imc-2014-06",
+    "bank": "imc",
+    "source": {
+      "contest": "IMC",
+      "paper": "Day 2",
+      "year": 2014,
+      "number": 6,
+      "url": "https://www.imc-math.org.uk/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "For a positive integer $x$, denote its $n$-th decimal digit by $d_n(x)$, i.e. $d_n(x)\\in\\{0,1,\\dots,9\\}$ and $x=\\sum_{n=1}^\\infty d_n(x)10^{n-1}$. Suppose that for some sequence $(a_n)_{n=1}^\\infty$, there are only finitely many zeros in the sequence $\\big(d_n(a_n)\\big)_{n=1}^\\infty$. Prove that there are infinitely many positive integers that do not occur in the sequence $(a_n)_{n=1}^\\infty$.",
+    "image": null,
+    "choices": null,
+    "answer": "For $n\\ge n_0$, $d_n(a_n)\\ne0$ forces $a_n\\ge10^{n-1}$; so at most $N$ terms are below $10^N$, and at least $10^N-1-N$ numbers below $10^N$ are missed.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Counting small terms",
+        "body": "Choose $n_0$ such that $d_n(a_n)\\ne0$ for all $n\\ge n_0$. For such $n$, $a_n$ has a nonzero digit in the $10^{n-1}$ place, so $a_n\\ge10^{n-1}$.\n\nLet $N\\ge n_0$. If $m>N$, then $a_m\\ge10^{m-1}\\ge10^N$. So among all terms of the sequence, only $a_1,\\dots,a_N$ can lie in $\\{1,2,\\dots,10^N-1\\}$. Hence at least $10^N-1-N$ of these numbers do not occur in the sequence. Since $10^N-1-N\\to\\infty$, infinitely many positive integers do not occur. ∎"
+      },
+      {
+        "title": "Cantor's diagonal argument",
+        "body": "Let $n_0$ be such that $d_n(a_n)\\ne0$ for $n\\ge n_0$. Define digits $g_n=2$ if $d_n(a_n)=1$ and $g_n=1$ otherwise; so $g_n\\ne d_n(a_n)$ and $g_n\\ne0$. Let\n$$x_k=\\sum_{n=1}^kg_n10^{n-1}\\qquad(k\\ge1).$$\nThese are strictly increasing ($x_{k+1}\\ge10^k>x_k$), hence distinct. We claim $x_k\\ne a_n$ for all $k\\ge n_0$ and all $n$:\n- if $n\\le k$, then $d_n(x_k)=g_n\\ne d_n(a_n)$;\n- if $n>k\\ge n_0$, then $d_n(x_k)=0\\ne d_n(a_n)$.\n\nSo $x_{n_0},x_{n_0+1},\\dots$ are infinitely many positive integers missing from the sequence. ∎"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "logic"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imc-2014-07",
+    "bank": "imc",
+    "source": {
+      "contest": "IMC",
+      "paper": "Day 2",
+      "year": 2014,
+      "number": 7,
+      "url": "https://www.imc-math.org.uk/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $A=(a_{ij})_{i,j=1}^n$ be a symmetric $n\\times n$ matrix with real entries, and let $\\lambda_1,\\lambda_2,\\dots,\\lambda_n$ denote its eigenvalues. Show that\n$$\\sum_{1\\le i<j\\le n}a_{ii}a_{jj}\\ge\\sum_{1\\le i<j\\le n}\\lambda_i\\lambda_j,$$\nand determine all matrices for which equality holds.",
+    "image": null,
+    "choices": null,
+    "answer": "Using $\\sum a_{ii}=\\sum\\lambda_i$, the inequality is $\\sum a_{ii}^2\\le\\sum\\lambda_i^2=\\operatorname{tr}(A^2)=\\sum_{i,j}a_{ij}^2$; equality iff $A$ is diagonal.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Trace of $A^2$",
+        "body": "The eigenvalues of a real symmetric matrix are real, so both sides are real. Since $\\operatorname{tr}A=\\sum a_{ii}=\\sum\\lambda_i$,\n$$\\sum_ia_{ii}^2+2\\sum_{i<j}a_{ii}a_{jj}=\\Big(\\sum_ia_{ii}\\Big)^2=\\Big(\\sum_i\\lambda_i\\Big)^2=\\sum_i\\lambda_i^2+2\\sum_{i<j}\\lambda_i\\lambda_j .$$\nHence the inequality is equivalent to\n$$\\sum_ia_{ii}^2\\le\\sum_i\\lambda_i^2 .$$\nThe matrix $A^2$ has eigenvalues $\\lambda_i^2$, and since $A$ is symmetric,\n$$\\sum_i\\lambda_i^2=\\operatorname{tr}(A^2)=\\operatorname{tr}(A^TA)=\\sum_{i,j}a_{ij}^2=\\sum_ia_{ii}^2+\\sum_{i\\ne j}a_{ij}^2\\ \\ge\\ \\sum_ia_{ii}^2 .$$\nThis proves the inequality, with equality iff $\\sum_{i\\ne j}a_{ij}^2=0$, i.e. iff all off-diagonal entries vanish.\n\n**Answer:** equality holds exactly for diagonal matrices. ∎"
+      }
+    ],
+    "topics": [
+      "linear-algebra",
+      "inequalities"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imc-2014-08",
+    "bank": "imc",
+    "source": {
+      "contest": "IMC",
+      "paper": "Day 2",
+      "year": 2014,
+      "number": 8,
+      "url": "https://www.imc-math.org.uk/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $f(x)=\\dfrac{\\sin x}{x}$, for $x>0$, and let $n$ be a positive integer. Prove that $\\left|f^{(n)}(x)\\right|<\\dfrac1{n+1}$, where $f^{(n)}$ denotes the $n$-th derivative of $f$.",
+    "image": null,
+    "choices": null,
+    "answer": "$f(x)=\\int_0^1\\cos(xt)\\,dt$, so $f^{(n)}(x)=\\int_0^1t^n\\cos\\!\\big(xt+\\frac{n\\pi}2\\big)dt$, whose absolute value is $<\\int_0^1t^n\\,dt=\\frac1{n+1}$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "An integral representation",
+        "body": "For $x>0$,\n$$f(x)=\\frac{\\sin x}x=\\int_0^1\\cos(xt)\\,dt .$$\nThe integrand is smooth in $(x,t)$ and $t$ ranges over a compact interval, so we may differentiate under the integral sign:\n$$f^{(n)}(x)=\\int_0^1t^n\\cos\\!\\Big(xt+\\frac{n\\pi}2\\Big)\\,dt,$$\nusing $\\frac{d^n}{dx^n}\\cos(xt)=t^n\\cos(xt+\\frac{n\\pi}2)$. Hence\n$$\\left|f^{(n)}(x)\\right|\\le\\int_0^1t^n\\left|\\cos\\!\\Big(xt+\\frac{n\\pi}2\\Big)\\right|dt\\le\\int_0^1t^n\\,dt=\\frac1{n+1}.$$\nThe second inequality is strict: the function $t^n\\big(1-|\\cos(xt+\\frac{n\\pi}2)|\\big)$ is continuous, nonnegative, and positive except at finitely many $t\\in[0,1]$ (where $xt+\\frac{n\\pi}2\\in\\pi\\mathbb Z$, or $t=0$), so its integral is positive. Therefore $|f^{(n)}(x)|<\\frac1{n+1}$. ∎"
+      },
+      {
+        "title": "A monotone auxiliary function",
+        "body": "Extend $f$ by $f(0)=1$; then $f(x)=\\sum_{k\\ge0}\\frac{(-1)^kx^{2k}}{(2k+1)!}$ is smooth on $\\mathbb R$. By Leibniz's rule applied to $xf(x)=\\sin x$,\n$$(n+1)f^{(n)}(x)+xf^{(n+1)}(x)=\\sin^{(n+1)}(x).$$\nLet $g_\\pm(x)=x^{n+1}\\Big(f^{(n)}(x)\\mp\\frac1{n+1}\\Big)$. Then $g_\\pm(0)=0$ and\n$$g_\\pm'(x)=x^n\\Big((n+1)f^{(n)}(x)+xf^{(n+1)}(x)\\mp1\\Big)=x^n\\Big(\\sin^{(n+1)}(x)\\mp1\\Big).$$\nSince $\\sin^{(n+1)}=\\pm\\sin$ or $\\pm\\cos$ has absolute value $\\le1$, with equality only at isolated points, $g_+'\\le0$ and $g_-'\\ge0$ on $(0,\\infty)$, and neither vanishes identically on any interval. Hence for $x>0$: $g_+(x)=\\int_0^xg_+'<0$ and $g_-(x)>0$, i.e.\n$$-\\frac1{n+1}<f^{(n)}(x)<\\frac1{n+1}.$$\n∎"
+      }
+    ],
+    "topics": [
+      "calculus",
+      "real-analysis",
+      "inequalities"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imc-2014-09",
+    "bank": "imc",
+    "source": {
+      "contest": "IMC",
+      "paper": "Day 2",
+      "year": 2014,
+      "number": 9,
+      "url": "https://www.imc-math.org.uk/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "We say that a subset of $\\mathbb R^n$ is $k$-almost contained by a hyperplane if there are less than $k$ points in that set which do not belong to the hyperplane. We call a finite set of points $k$-generic if there is no hyperplane that $k$-almost contains the set. For each pair of positive integers $k$ and $n$, find the minimal number $d(k,n)$ such that every finite $k$-generic set in $\\mathbb R^n$ contains a $k$-generic subset with at most $d(k,n)$ elements.",
+    "image": null,
+    "choices": null,
+    "answer": "$d(k,n)=kn$ if $k,n>1$, and $d(k,n)=k+n$ if $k=1$ or $n=1$. (Extremal example: $k$ nonzero points on each coordinate axis.)",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Tight hyperplanes in a minimal set",
+        "body": "A hyperplane *misses* a point if the point is not on it. $S$ is $k$-generic iff every hyperplane misses at least $k$ points of $S$.\n\n**$n=1$.** Hyperplanes are points. $S\\subset\\mathbb R$ is $k$-generic iff $|S\\setminus\\{p\\}|\\ge k$ for every $p$, i.e. iff $|S|\\ge k+1$. So any $k+1$ points of a $k$-generic set form a $k$-generic subset, and smaller sets are never $k$-generic: $d(k,1)=k+1$.\n\n**$k=1$.** $S$ is $1$-generic iff it lies in no hyperplane, i.e. it affinely spans $\\mathbb R^n$. Such a set contains $n+1$ affinely independent points, which again span; and at most $n$ points always lie in a hyperplane. So $d(1,n)=n+1$.\n\nFrom now on $k,n\\ge2$; we show $d(k,n)=kn$.\n\n**The example.** Let $E$ consist of $k$ distinct nonzero points on each coordinate axis ($kn$ points). Let $H$ be a hyperplane.\n- If $0\\in H$, then $H$ is a linear hyperplane and misses some basis vector $e_j$; then it misses all $k$ chosen points of axis $j$.\n- If $0\\notin H$, each axis meets $H$ in at most one point, so $H$ contains at most $n$ points of $E$ and misses at least $n(k-1)\\ge k$ of them, since $(n-1)(k-1)\\ge1$.\n\nSo $E$ is $k$-generic. If a point of axis $j$ is removed, the hyperplane $x_j=0$ misses only $k-1$ of the remaining points. So no proper subset of $E$ is $k$-generic, and $d(k,n)\\ge kn$. The same argument works in any affine coordinate system.\n\n**Upper bound.** Let $S$ be $k$-generic and let $S'\\subseteq S$ be a $k$-generic subset that is minimal under inclusion. We show $|S'|\\le kn$.\n\nCall a hyperplane *tight* if it misses exactly $k$ points of $S'$. For $p\\in S'$, $S'\\setminus\\{p\\}$ is not $k$-generic, so some hyperplane $H$ misses at most $k-1$ points of $S'\\setminus\\{p\\}$; since $H$ misses at least $k$ points of $S'$, $H$ misses $p$ and is tight. **Every point of $S'$ is missed by a tight hyperplane.**\n\nSuppose $|S'|\\ge kn+1$. Build tight hyperplanes $H_1,\\dots,H_n$: let $L_0=\\mathbb R^n$ and $U_0=S'$. At step $t$ ($1\\le t\\le n$), $U_{t-1}=S'\\cap L_{t-1}$ is nonempty (see below); pick $p\\in U_{t-1}$ and a tight $H_t$ missing $p$, and set $L_t=L_{t-1}\\cap H_t$, $U_t=S'\\cap L_t$. Since $p\\in L_{t-1}\\setminus H_t$, the flat $L_{t-1}$ is not contained in $H_t$, so $L_t$ is empty or has dimension one less. Each step removes at most $k$ points ($H_t$ is tight), so $|U_t|\\ge|S'|-kt\\ge1$ for $t\\le n$; thus $L_t\\ne\\emptyset$ and $\\dim L_t=n-t$. In the end $L_n=H_1\\cap\\dots\\cap H_n=\\{O\\}$ with $O\\in S'$, and the normals of $H_1,\\dots,H_n$ are linearly independent. Choose affine coordinates with origin $O$ in which $H_i=\\{x_i=0\\}$.\n\nEvery point of $S'$ other than $O$ is missed by some $H_i$, so\n$$|S'|\\le1+\\sum_{i=1}^n|S'\\setminus H_i|=1+kn .$$\nHence $|S'|=kn+1$ and the sets $S'\\setminus H_i$ are pairwise disjoint: each $P\\in S'\\setminus\\{O\\}$ lies outside exactly one $H_i$ and on all the others, i.e. on the $x_i$-axis. So $S'\\setminus\\{O\\}$ consists of exactly $k$ nonzero points on each coordinate axis — the example $E$ — which is $k$-generic. This contradicts the minimality of $S'$. Therefore $|S'|\\le kn$.\n\n**Answer:** $d(k,n)=kn$ for $k,n>1$, and $d(k,n)=k+n$ if $k=1$ or $n=1$. ∎"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "linear-algebra",
+      "counting"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imc-2014-10",
+    "bank": "imc",
+    "source": {
+      "contest": "IMC",
+      "paper": "Day 2",
+      "year": 2014,
+      "number": 10,
+      "url": "https://www.imc-math.org.uk/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "For every positive integer $n$, denote by $D_n$ the number of permutations $(x_1,\\dots,x_n)$ of $(1,2,\\dots,n)$ such that $x_j\\ne j$ for every $1\\le j\\le n$. For $1\\le k\\le\\frac n2$, denote by $\\Delta(n,k)$ the number of permutations $(x_1,\\dots,x_n)$ of $(1,2,\\dots,n)$ such that $x_i=k+i$ for every $1\\le i\\le k$ and $x_j\\ne j$ for every $1\\le j\\le n$. Prove that\n$$\\Delta(n,k)=\\sum_{i=0}^{k-1}\\binom{k-1}{i}\\frac{D_{(n+1)-(k+i)}}{n-(k+i)} .$$",
+    "image": null,
+    "choices": null,
+    "answer": "Relabel to see $\\Delta(n,k)$ counts permutations of an $(n-k)$-set whose fixed points lie in a given $k$-subset: $\\Delta(n,k)=\\sum_{j=0}^k\\binom kjD_{n-k-j}$. Then $\\frac{D_{m+1}}m=D_m+D_{m-1}$ and Pascal's rule give the formula.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Relabel, count fixed points, use the derangement recursion",
+        "body": "Put $D_0=1$. Recall $D_{m+1}=m(D_m+D_{m-1})$ for $m\\ge1$. Indeed, let $\\pi$ be a derangement of $\\{1,\\dots,m+1\\}$ and $i=\\pi(m+1)\\le m$ ($m$ choices). If $\\pi(i)=m+1$, deleting $i$ and $m+1$ leaves a derangement of $m-1$ elements ($D_{m-1}$ ways). Otherwise let $j=\\pi^{-1}(m+1)\\ne i$ and define $\\pi'$ on $\\{1,\\dots,m\\}$ by $\\pi'(j)=i$ and $\\pi'(x)=\\pi(x)$ for $x\\ne j$; this is a derangement of $\\{1,\\dots,m\\}$ (as $j\\ne i$), and conversely every derangement $\\pi'$ of $\\{1,\\dots,m\\}$ arises exactly once (put $j=\\pi'^{-1}(i)$, $\\pi(j)=m+1$, $\\pi(m+1)=i$). So this case gives $D_m$ ways, and\n$$\\frac{D_{m+1}}{m}=D_m+D_{m-1}\\qquad(m\\ge1).$$\n\n**Step 1: $\\Delta(n,k)=\\sum_{j=0}^k\\binom kjD_{n-k-j}$.** In a permutation counted by $\\Delta(n,k)$, positions $1,\\dots,k$ carry the values $k+1,\\dots,2k$ (allowed since $k+i\\ne i$ and $2k\\le n$). The remaining positions $P=\\{k+1,\\dots,n\\}$ carry the values $V=\\{1,\\dots,k\\}\\cup\\{2k+1,\\dots,n\\}$ bijectively, subject to $x_j\\ne j$ for $j\\in P$. Identify $V$ with $P$ via $\\varphi(v)=v+k$ for $v\\le k$ and $\\varphi(v)=v$ for $v\\ge2k+1$, and let $y_j=\\varphi(x_j)$; then $y$ is a permutation of $P$, and $x\\leftrightarrow y$ is a bijection. The conditions become:\n- for $j\\in\\{2k+1,\\dots,n\\}$: $x_j\\ne j\\iff y_j\\ne j$ ($\\varphi$ fixes these values);\n- for $j\\in\\{k+1,\\dots,2k\\}$: $x_j\\ne j$ holds automatically ($j\\notin V$), and $y_j=j$ is allowed.\n\nSo $\\Delta(n,k)$ is the number of permutations of the $(n-k)$-element set $P$ whose fixed points all lie in the $k$-element subset $\\{k+1,\\dots,2k\\}$. Sorting by the set of fixed points (choose $j$ of the $k$ special elements to be fixed, derange the other $n-k-j$):\n$$\\Delta(n,k)=\\sum_{j=0}^k\\binom kjD_{n-k-j}.$$\n\n**Step 2: the formula.** For $0\\le i\\le k-1$, $m=n-k-i\\ge n-2k+1\\ge1$, so $\\frac{D_{(n+1)-(k+i)}}{n-(k+i)}=D_{n-k-i}+D_{n-k-i-1}$. Hence\n$$\\sum_{i=0}^{k-1}\\binom{k-1}i\\frac{D_{n+1-k-i}}{n-k-i}=\\sum_{i=0}^{k-1}\\binom{k-1}{i}D_{n-k-i}+\\sum_{i=1}^{k}\\binom{k-1}{i-1}D_{n-k-i}=\\sum_{j=0}^{k}\\binom kjD_{n-k-j}$$\nby Pascal's rule $\\binom{k-1}j+\\binom{k-1}{j-1}=\\binom kj$. By Step 1 this equals $\\Delta(n,k)$. ∎"
+      }
+    ],
+    "topics": [
+      "counting"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

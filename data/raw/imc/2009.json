@@ -1,0 +1,354 @@
+[
+  {
+    "id": "imc-2009-01",
+    "bank": "imc",
+    "source": {
+      "contest": "IMC",
+      "paper": "Day 1",
+      "year": 2009,
+      "number": 1,
+      "url": "https://www.imc-math.org.uk/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Suppose that $f$ and $g$ are real-valued functions on the real line and $f(r)\\le g(r)$ for every rational $r$. Does this imply that $f(x)\\le g(x)$ for every real $x$ if\n\na) $f$ and $g$ are non-decreasing?\n\nb) $f$ and $g$ are continuous?",
+    "image": null,
+    "choices": null,
+    "answer": "(a) **No** — e.g. $f=\\mathbf 1_{[\\sqrt3,\\infty)}$, $g=\\mathbf 1_{(\\sqrt3,\\infty)}$. (b) **Yes** — $g-f$ is continuous and $\\ge0$ on the dense set $\\mathbb Q$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Counterexample and density",
+        "body": "**(a) No.** Let $f$ be the indicator function of $[\\sqrt3,\\infty)$ and $g$ the indicator function of $(\\sqrt3,\\infty)$:\n$$f(x)=\\begin{cases}1,&x\\ge\\sqrt3\\\\0,&x<\\sqrt3\\end{cases}\\qquad g(x)=\\begin{cases}1,&x>\\sqrt3\\\\0,&x\\le\\sqrt3.\\end{cases}$$\nBoth are non-decreasing. They differ only at the irrational point $\\sqrt3$, so $f(r)=g(r)$ for every rational $r$; but $f(\\sqrt3)=1>0=g(\\sqrt3)$.\n\n**(b) Yes.** Let $h=g-f$; it is continuous and $h(r)\\ge0$ for all rational $r$. Take any real $x$ and a sequence of rationals $r_k\\to x$ (rationals are dense). By continuity $h(x)=\\lim_k h(r_k)\\ge0$, because a limit of non-negative numbers is non-negative. Hence $f(x)\\le g(x)$.\n\nEquivalently: if $h(x)<0$ for some $x$, continuity gives an interval around $x$ on which $h<0$; this interval contains a rational $r$ with $h(r)<0$, a contradiction.\n\n**Answer: (a) no; (b) yes.** ∎"
+      }
+    ],
+    "topics": [
+      "real-analysis"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imc-2009-02",
+    "bank": "imc",
+    "source": {
+      "contest": "IMC",
+      "paper": "Day 1",
+      "year": 2009,
+      "number": 2,
+      "url": "https://www.imc-math.org.uk/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $A$, $B$ and $C$ be real square matrices of the same size, and suppose that $A$ is invertible. Prove that if $(A-B)C=BA^{-1}$, then $C(A-B)=A^{-1}B$.",
+    "image": null,
+    "choices": null,
+    "answer": "The hypothesis is equivalent to $(A-B)(C+A^{-1})=I$; a one-sided inverse of a square matrix is two-sided, so $(C+A^{-1})(A-B)=I$, which expands to the claim.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Find an inverse of $A-B$",
+        "body": "Let $I$ be the identity matrix. Since $(A-B)A^{-1}=I-BA^{-1}$,\n$$(A-B)(C+A^{-1})=(A-B)C+I-BA^{-1}.$$\nBy hypothesis $(A-B)C=BA^{-1}$, so the right-hand side equals $I$:\n$$(A-B)(C+A^{-1})=I.$$\nFor square matrices, $XY=I$ implies $YX=I$ (indeed $\\det X\\det Y=1$, so $X$ is invertible and $Y=X^{-1}$). Hence also\n$$(C+A^{-1})(A-B)=I,\\qquad\\text{i.e.}\\qquad CA-CB+I-A^{-1}B=I .$$\nCancelling $I$ gives $C(A-B)=CA-CB=A^{-1}B$. ∎"
+      }
+    ],
+    "topics": [
+      "linear-algebra"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imc-2009-03",
+    "bank": "imc",
+    "source": {
+      "contest": "IMC",
+      "paper": "Day 1",
+      "year": 2009,
+      "number": 3,
+      "url": "https://www.imc-math.org.uk/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "In a town every two residents who are not friends have a friend in common, and no one is a friend of everyone else. Let us number the residents from $1$ to $n$ and let $a_i$ be the number of friends of the $i$-th resident. Suppose that\n$$\\sum_{i=1}^n a_i^2=n^2-n.$$\nLet $k$ be the smallest number of residents (at least three) who can be seated at a round table in such a way that any two neighbors are friends. Determine all possible values of $k$.",
+    "image": null,
+    "choices": null,
+    "answer": "5",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Count walks of length 2",
+        "body": "Let $G$ be the friendship graph: vertices are residents, edges are friendships. Then $a_i=\\deg v_i$, any two non-adjacent vertices have a common neighbour, no vertex has degree $n-1$, and $k$ is the length of the shortest cycle of $G$ (its *girth*).\n\n**Walks of length 2.** A walk of length 2 is an ordered triple $(u,w,v)$ with $uw$ and $wv$ edges ($u=v$ allowed). For a fixed middle vertex $w$ there are $\\deg(w)^2$ of them, so there are $\\sum a_i^2=n^2-n$ such walks in total.\n\n**An injection.** For each ordered pair $(u,v)$ of distinct vertices define a walk $\\Phi(u,v)$: if $uv$ is an edge, $\\Phi(u,v)=(u,v,u)$; otherwise choose a common neighbour $w$ and put $\\Phi(u,v)=(u,w,v)$. A walk with distinct ends $(u,w,v)$ can only be $\\Phi(u,v)$, and a walk $(u,v,u)$ can only be $\\Phi(u,v)$; so $\\Phi$ is injective. There are $n^2-n$ ordered pairs, so $\\sum a_i^2\\ge n^2-n$, and in our case **equality holds, so $\\Phi$ is a bijection**. Consequences:\n\n* *No triangles.* If $u,w,v$ formed a triangle, the walk $(u,w,v)$ would have to be $\\Phi(u,v)$; but $uv$ is an edge, so $\\Phi(u,v)=(u,v,u)\\neq(u,w,v)$. Contradiction.\n* *No 4-cycles.* If $u\\,w\\,v\\,w'$ were a 4-cycle, then $u,v$ are non-adjacent (no triangles), and both $(u,w,v)$ and $(u,w',v)$ would have to equal $\\Phi(u,v)$. Contradiction.\n\nSo every cycle of $G$ has length at least $5$.\n\n**$G$ has a cycle.** Otherwise $G$ is a forest; it is connected because any two vertices are at distance at most $2$, so it is a tree. ($n\\ge3$: for $n\\le2$ some vertex would be adjacent to all others.) Take a leaf $\\ell$ and its neighbour $c$. For any vertex $x\\neq \\ell,c$ the unique path from $\\ell$ to $x$ passes through $c$ and has length $\\le2$, so $x$ is adjacent to $c$. Then $\\deg c=n-1$, which is forbidden.\n\n**The shortest cycle has length exactly 5.** We use:\n\n*Lemma.* If two different paths join the same vertices $x$ and $y$, their union contains a cycle of length at most the sum of their lengths.\n*Proof.* Walk along the first path from $x$; let $a$ be the last vertex before the paths first separate, and let $b$ be the first vertex after $a$ on the first path that lies on the second path (it exists since $y$ is on both). The piece of the first path from $a$ to $b$ and the piece of the second path between $a$ and $b$ have only $a,b$ in common, so together they form a cycle, of length at most the total length. $\\square$\n\nLet $C$ be a shortest cycle, of length $k\\ge5$, and suppose $k\\ge6$. Pick vertices $x,y$ on $C$ at distance $3$ along $C$; the two arcs of $C$ between them have lengths $3$ and $k-3\\ge3$. Since $d_G(x,y)\\le2$, there is a path $P$ from $x$ to $y$ of length $\\le2$; it differs from the arc of length $3$. By the lemma their union contains a cycle of length at most $2+3=5<k$, a contradiction. Hence $k=5$.\n\n**$k=5$ occurs.** The 5-cycle $C_5$: each vertex has 2 friends (not everyone), two non-adjacent vertices have a common neighbour, and $\\sum a_i^2=5\\cdot4=20=5^2-5$. Its girth is $5$.\n\n**Answer: $k=5$ is the only possible value.** ∎"
+      }
+    ],
+    "topics": [
+      "graph-theory",
+      "counting"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imc-2009-04",
+    "bank": "imc",
+    "source": {
+      "contest": "IMC",
+      "paper": "Day 1",
+      "year": 2009,
+      "number": 4,
+      "url": "https://www.imc-math.org.uk/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $p(z)=a_0+a_1z+a_2z^2+\\dots+a_nz^n$ be a complex polynomial. Suppose that $1=c_0\\ge c_1\\ge\\dots\\ge c_n\\ge0$ is a sequence of real numbers which is convex (i.e. $2c_k\\le c_{k-1}+c_{k+1}$ for every $k=1,2,\\dots,n-1$), and consider the polynomial\n$$q(z)=c_0a_0+c_1a_1z+c_2a_2z^2+\\dots+c_na_nz^n.$$\nProve that\n$$\\max_{|z|\\le1}|q(z)|\\le\\max_{|z|\\le1}|p(z)|.$$",
+    "image": null,
+    "choices": null,
+    "answer": "Write $q(w)=\\frac1{2\\pi}\\int_0^{2\\pi}K(we^{-i\\theta})\\,p(e^{i\\theta})\\,d\\theta$ with $K(u)=\\sum_{|j|\\le n}c_{|j|}u^j$; convexity makes $K$ a non-negative combination of Fejér kernels $|1+u+\\dots+u^{k-1}|^2$, and $\\frac1{2\\pi}\\int K=1$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "A non-negative convolution kernel",
+        "body": "By the maximum modulus principle, the maximum of $|p|$ and of $|q|$ over the closed unit disc is attained on the circle $|z|=1$. Write $M_f=\\max_{|z|=1}|f(z)|$; we must show $M_q\\le M_p$. If $n=0$ then $q=p$; assume $n\\ge1$.\n\n**Step 1: we may assume $c_n=0$.** If $c_n=1$ all $c_j=1$ and $q=p$. Otherwise put $c'_j=\\frac{c_j-c_n}{1-c_n}$. This sequence again satisfies $1=c'_0\\ge\\dots\\ge c'_n=0$ and is convex (it is a positive multiple of $c_j$ minus a constant). Let $r(z)=\\sum_j c'_ja_jz^j$. Then $c_n a_j+(1-c_n)c'_ja_j=c_ja_j$, i.e. $q=c_np+(1-c_n)r$. If the claim holds for sequences ending in $0$, then $M_r\\le M_p$ and\n$$M_q\\le c_nM_p+(1-c_n)M_r\\le M_p .$$\n\n**Step 2: an integral formula.** For integers $j$,\n$$\\frac1{2\\pi}\\int_0^{2\\pi}p(e^{i\\theta})e^{-ij\\theta}\\,d\\theta=\\begin{cases}a_j,&0\\le j\\le n,\\\\0,&\\text{otherwise,}\\end{cases}$$\nsince $\\int_0^{2\\pi}e^{i(m-j)\\theta}d\\theta=2\\pi[m=j]$. Hence for $|w|=1$,\n$$q(w)=\\sum_{j=-n}^{n}c_{|j|}w^j\\cdot\\frac1{2\\pi}\\int_0^{2\\pi}p(e^{i\\theta})e^{-ij\\theta}d\\theta=\\frac1{2\\pi}\\int_0^{2\\pi}K\\!\\left(we^{-i\\theta}\\right)p(e^{i\\theta})\\,d\\theta,$$\nwhere $K(u)=\\sum_{j=-n}^nc_{|j|}u^j$ (the terms with $j<0$ contribute $0$). For $|u|=1$, $K(u)=c_0+2\\sum_{j\\ge1}c_j\\,\\mathrm{Re}(u^j)$ is real, and $\\frac1{2\\pi}\\int_0^{2\\pi}K(e^{it})\\,dt=c_0=1$.\n\n**Step 3: $K\\ge0$ on the unit circle.** With $c_n=0$ set $c_{n+1}=0$ and $d_k=c_{k-1}-2c_k+c_{k+1}$ for $1\\le k\\le n$. For $k\\le n-1$, $d_k\\ge0$ by convexity, and $d_n=c_{n-1}\\ge0$. Let $\\Delta_k=c_{k-1}-c_k$, so $d_k=\\Delta_k-\\Delta_{k+1}$ and $\\Delta_{n+1}=0$. Summation by parts gives, for $0\\le j\\le n$,\n$$\\sum_{k=j+1}^{n}(k-j)d_k=\\sum_{k=j+1}^{n}\\Delta_k=c_j-c_n=c_j .$$\nTherefore\n$$K(u)=\\sum_{|j|\\le n}\\ \\sum_{k>|j|}(k-|j|)d_k\\,u^j=\\sum_{k=1}^nd_kF_k(u),\\qquad F_k(u)=\\sum_{|j|\\le k-1}(k-|j|)u^j .$$\nFor $|u|=1$ we have $\\bar u=u^{-1}$, and since the number of pairs $(a,b)\\in\\{0,\\dots,k-1\\}^2$ with $a-b=j$ is $k-|j|$,\n$$F_k(u)=\\Big(\\sum_{a=0}^{k-1}u^a\\Big)\\Big(\\sum_{b=0}^{k-1}u^{-b}\\Big)=\\Big|1+u+\\dots+u^{k-1}\\Big|^2\\ge0 .$$\nSo $K(u)\\ge0$ on the circle.\n\n**Step 4: conclusion.** For $|w|=1$,\n$$|q(w)|\\le\\frac1{2\\pi}\\int_0^{2\\pi}K(we^{-i\\theta})\\,|p(e^{i\\theta})|\\,d\\theta\\le M_p\\cdot\\frac1{2\\pi}\\int_0^{2\\pi}K(we^{-i\\theta})\\,d\\theta=M_p,$$\nusing $K\\ge0$ and the rotation invariance of the integral. Hence $M_q\\le M_p$. ∎"
+      }
+    ],
+    "topics": [
+      "complex-analysis",
+      "polynomials",
+      "inequalities"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imc-2009-05",
+    "bank": "imc",
+    "source": {
+      "contest": "IMC",
+      "paper": "Day 1",
+      "year": 2009,
+      "number": 5,
+      "url": "https://www.imc-math.org.uk/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $n$ be a positive integer. An $n$-simplex in $\\mathbb R^n$ is given by $n+1$ points $P_0,P_1,\\dots,P_n$, called its vertices, which do not all belong to the same hyperplane. For every $n$-simplex $S$ we denote by $v(S)$ the volume of $S$, and we write $C(S)$ for the center of the unique sphere containing all the vertices of $S$.\n\nSuppose that $P$ is a point inside an $n$-simplex $S$. Let $S_i$ be the $n$-simplex obtained from $S$ by replacing its $i$-th vertex by $P$. Prove that\n$$v(S_0)C(S_0)+v(S_1)C(S_1)+\\dots+v(S_n)C(S_n)=v(S)C(S).$$",
+    "image": null,
+    "choices": null,
+    "answer": "With $\\lambda_i=v(S_i)/v(S)$ the barycentric coordinates of $P$ and $C(S)$ at the origin, one shows $\\langle\\sum\\lambda_iC(S_i),P_j\\rangle$ is the same for all $j$, which forces $\\sum\\lambda_iC(S_i)=0$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Barycentric coordinates and inner products",
+        "body": "**Volumes.** Write $P=\\sum_{i}\\lambda_iP_i$ with $\\sum_i\\lambda_i=1$ (barycentric coordinates); since $P$ is inside $S$, all $\\lambda_i>0$. The volume of a simplex with vertices $Q_0,\\dots,Q_n$ is $\\frac1{n!}\\left|\\det M\\right|$, where $M$ is the $(n+1)\\times(n+1)$ matrix with columns $\\binom{1}{Q_j}$. Replacing the column of $P_i$ by $\\binom1P=\\sum_k\\lambda_k\\binom1{P_k}$ and using multilinearity (the terms with $k\\ne i$ have a repeated column) multiplies the determinant by $\\lambda_i$. Hence $v(S_i)=\\lambda_iv(S)>0$; in particular each $S_i$ is a genuine simplex, and $\\sum_iv(S_i)=v(S)$.\n\nBecause $\\sum_iv(S_i)=v(S)$, the identity to be proved is unchanged if we translate all points by the same vector. So place the origin at $O=C(S)$, and let $R$ be the circumradius: $|P_j|=R$ for all $j$. It suffices to show\n$$X:=\\sum_{i=0}^n\\lambda_iO_i=0,\\qquad O_i:=C(S_i).$$\n\n**Equations for $O_i$.** Let $\\rho_i$ be the circumradius of $S_i$. For $j\\ne i$, $|O_i-P_j|^2=\\rho_i^2$ gives $\\langle O_i,P_j\\rangle=s_i$, where $s_i=\\tfrac12\\left(|O_i|^2+R^2-\\rho_i^2\\right)$ does not depend on $j$. Also $|O_i-P|^2=\\rho_i^2$ gives\n$$\\langle O_i,P\\rangle=\\tfrac12\\left(|O_i|^2+|P|^2-\\rho_i^2\\right)=s_i-\\tfrac h2,\\qquad h:=R^2-|P|^2 .$$\nOn the other hand, from $P=\\sum_k\\lambda_kP_k$,\n$$\\langle O_i,P\\rangle=\\sum_{k\\ne i}\\lambda_ks_i+\\lambda_i\\langle O_i,P_i\\rangle=(1-\\lambda_i)s_i+\\lambda_i\\langle O_i,P_i\\rangle .$$\nComparing, $\\lambda_i\\langle O_i,P_i\\rangle=\\lambda_is_i-\\tfrac h2$.\n\n**Computing $\\langle X,P_j\\rangle$.** For each $j$,\n$$\\langle X,P_j\\rangle=\\sum_{i\\ne j}\\lambda_i\\langle O_i,P_j\\rangle+\\lambda_j\\langle O_j,P_j\\rangle=\\sum_{i\\ne j}\\lambda_is_i+\\lambda_js_j-\\tfrac h2=\\sum_{i=0}^n\\lambda_is_i-\\tfrac h2,$$\nwhich does not depend on $j$. Therefore $\\langle X,P_j-P_0\\rangle=0$ for $j=1,\\dots,n$. The vectors $P_j-P_0$ span $\\mathbb R^n$ (the vertices are not in a common hyperplane), so $X$ is orthogonal to all of $\\mathbb R^n$, i.e. $X=0=C(S)$.\n\nMultiplying $\\sum_i\\lambda_iC(S_i)=C(S)$ by $v(S)$ gives\n$$\\sum_{i=0}^nv(S_i)C(S_i)=v(S)C(S). \\qquad ∎$$"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "linear-algebra"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imc-2009-06",
+    "bank": "imc",
+    "source": {
+      "contest": "IMC",
+      "paper": "Day 2",
+      "year": 2009,
+      "number": 6,
+      "url": "https://www.imc-math.org.uk/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $\\ell$ be a line and $P$ a point in $\\mathbb R^3$. Let $S$ be the set of points $X$ such that the distance from $X$ to $\\ell$ is greater than or equal to two times the distance between $X$ and $P$. If the distance from $P$ to $\\ell$ is $d>0$, find the volume of $S$.",
+    "image": null,
+    "choices": null,
+    "answer": "$\\dfrac{16\\pi d^3}{27\\sqrt3}$",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "answerDisplay": null,
+    "solutions": [
+      {
+        "title": "Recognise an ellipsoid",
+        "body": "Choose coordinates with $\\ell$ the $z$-axis and $P=(d,0,0)$. For $X=(x,y,z)$ the distance to $\\ell$ is $\\sqrt{x^2+y^2}$ and $|XP|=\\sqrt{(x-d)^2+y^2+z^2}$. Both are non-negative, so the condition is equivalent to the squared one:\n$$x^2+y^2\\ge4\\left((x-d)^2+y^2+z^2\\right)\\iff 3x^2-8dx+4d^2+3y^2+4z^2\\le0 .$$\nCompleting the square, $3x^2-8dx=3\\left(x-\\tfrac43d\\right)^2-\\tfrac{16}3d^2$, so with $x_1=x-\\tfrac43d$:\n$$3x_1^2+3y^2+4z^2\\le\\tfrac43d^2\\iff\\left(\\frac{x_1}{2d/3}\\right)^2+\\left(\\frac{y}{2d/3}\\right)^2+\\left(\\frac{z}{d/\\sqrt3}\\right)^2\\le1 .$$\nThis is a solid ellipsoid with semi-axes $\\tfrac{2d}3,\\tfrac{2d}3,\\tfrac d{\\sqrt3}$, whose volume is\n$$\\frac43\\pi\\cdot\\frac{2d}3\\cdot\\frac{2d}3\\cdot\\frac d{\\sqrt3}=\\frac{16\\pi d^3}{27\\sqrt3}=\\frac{16\\sqrt3\\,\\pi d^3}{81}.$$\n**Answer: $\\dfrac{16\\pi d^3}{27\\sqrt3}$.**"
+      },
+      {
+        "title": "Integrate the cross-sections",
+        "body": "From $3x_1^2+3y^2+4z^2\\le\\frac43d^2$ (derived as in the first solution), the slice at height $z$ is the disc $x_1^2+y^2\\le\\frac49d^2-\\frac43z^2$, non-empty for $|z|\\le d/\\sqrt3$, with area $\\pi\\left(\\frac49d^2-\\frac43z^2\\right)$. Hence, with $h=d/\\sqrt3$,\n$$V=\\pi\\int_{-h}^{h}\\left(\\frac49d^2-\\frac43z^2\\right)dz=\\pi\\left(\\frac89d^2h-\\frac89h^3\\right)=\\frac{8\\pi h}{9}\\left(d^2-\\frac{d^2}3\\right)=\\frac{16\\pi d^3}{27\\sqrt3}.$$\n**Answer: $\\dfrac{16\\pi d^3}{27\\sqrt3}$.**"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "calculus"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imc-2009-07",
+    "bank": "imc",
+    "source": {
+      "contest": "IMC",
+      "paper": "Day 2",
+      "year": 2009,
+      "number": 7,
+      "url": "https://www.imc-math.org.uk/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Suppose $f:\\mathbb R\\to\\mathbb R$ is a two times differentiable function satisfying $f(0)=1$, $f'(0)=0$, and for all $x\\in[0,\\infty)$,\n$$f''(x)-5f'(x)+6f(x)\\ge0.$$\nProve that for all $x\\in[0,\\infty)$,\n$$f(x)\\ge3e^{2x}-2e^{3x}.$$",
+    "image": null,
+    "choices": null,
+    "answer": "Factor the operator as $(D-3)(D-2)$: with $g=f'-2f$ one gets $(ge^{-3x})'\\ge0$, so $f'-2f\\ge-2e^{3x}$, then $(fe^{-2x}+2e^x)'\\ge0$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Factor the differential operator",
+        "body": "Rewrite the hypothesis as $\\left(f''-2f'\\right)-3\\left(f'-2f\\right)\\ge0$. Put $g=f'-2f$; then $g$ is differentiable, $g(0)=f'(0)-2f(0)=-2$, and\n$$g'(x)-3g(x)\\ge0\\qquad(x\\ge0).$$\nHence $\\left(g(x)e^{-3x}\\right)'=\\left(g'(x)-3g(x)\\right)e^{-3x}\\ge0$, so $g(x)e^{-3x}$ is non-decreasing on $[0,\\infty)$ and\n$$g(x)e^{-3x}\\ge g(0)=-2,\\qquad\\text{i.e.}\\qquad f'(x)-2f(x)\\ge-2e^{3x}\\quad(x\\ge0).$$\nMultiply by $e^{-2x}>0$:\n$$\\left(f(x)e^{-2x}\\right)'=\\left(f'(x)-2f(x)\\right)e^{-2x}\\ge-2e^{x},\\qquad\\text{so}\\qquad\\left(f(x)e^{-2x}+2e^{x}\\right)'\\ge0 .$$\nThus $f(x)e^{-2x}+2e^x$ is non-decreasing on $[0,\\infty)$ and\n$$f(x)e^{-2x}+2e^x\\ge f(0)+2=3 .$$\nMultiplying by $e^{2x}$ gives $f(x)\\ge3e^{2x}-2e^{3x}$ for all $x\\ge0$. ∎\n\n(Note that $3e^{2x}-2e^{3x}$ is exactly the solution of $y''-5y'+6y=0$ with $y(0)=1$, $y'(0)=0$, so the bound is sharp.)"
+      }
+    ],
+    "topics": [
+      "differential-equations",
+      "inequalities",
+      "calculus"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imc-2009-08",
+    "bank": "imc",
+    "source": {
+      "contest": "IMC",
+      "paper": "Day 2",
+      "year": 2009,
+      "number": 8,
+      "url": "https://www.imc-math.org.uk/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $A,B\\in M_n(\\mathbb C)$ be two $n\\times n$ matrices such that\n$$A^2B+BA^2=2ABA.$$\nProve that there exists a positive integer $k$ such that $(AB-BA)^k=0$.",
+    "image": null,
+    "choices": null,
+    "answer": "$X=AB-BA$ commutes with $A$, so $X^{m+1}=AX^mB-X^mBA$ has trace $0$ for all $m\\ge0$; all power traces vanishing forces all eigenvalues to be $0$, so $X^n=0$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Traces of powers",
+        "body": "Let $X=AB-BA$. **$X$ commutes with $A$:**\n$$AX-XA=(A^2B-ABA)-(ABA-BA^2)=A^2B+BA^2-2ABA=0 .$$\nHence for every $m\\ge0$, $X^mA=AX^m$ and\n$$X^{m+1}=X^m(AB-BA)=AX^mB-X^mBA=A(X^mB)-(X^mB)A .$$\nSince $\\operatorname{tr}(UV)=\\operatorname{tr}(VU)$, we get $\\operatorname{tr}X^{m+1}=0$ for all $m\\ge0$.\n\nLet $\\mu_1,\\dots,\\mu_n$ be the eigenvalues of $X$ (with multiplicity). Then the power sums $p_k=\\sum_i\\mu_i^k=\\operatorname{tr}X^k$ vanish for $k=1,\\dots,n$. By Newton's identities $ke_k=\\sum_{i=1}^k(-1)^{i-1}e_{k-i}p_i$, all elementary symmetric polynomials $e_1,\\dots,e_n$ of the $\\mu_i$ vanish, so the characteristic polynomial of $X$ is $t^n$. By the Cayley–Hamilton theorem $X^n=0$, so $k=n$ works. ∎"
+      },
+      {
+        "title": "The commutator as a derivation",
+        "body": "Fix $A$ and define the linear map $\\Delta(Y)=AY-YA$ on $M_n(\\mathbb C)$. It satisfies the Leibniz rule $\\Delta(YZ)=\\Delta(Y)Z+Y\\Delta(Z)$, and the hypothesis says exactly\n$$\\Delta^2(B)=A(AB-BA)-(AB-BA)A=A^2B-2ABA+BA^2=0 .$$\nLet $X=\\Delta(B)=AB-BA$; so $\\Delta(X)=0$.\n\nIterating the Leibniz rule, $\\Delta^k(Y_1Y_2\\cdots Y_j)$ is the sum, over all ways of distributing the $k$ applications of $\\Delta$ among the $j$ factors, of the corresponding products (with multinomial multiplicities). Apply this to $B^j=B\\cdots B$:\n\n* if $j<k$, every distribution gives some factor $\\Delta^{\\ge2}(B)=0$, so $\\Delta^k(B^j)=0$; also $\\Delta^k(I)=0$;\n* if $j=k$, the only surviving terms give each factor exactly one $\\Delta$; there are $k!$ such orderings, each equal to $X^k$. So $\\Delta^k(B^k)=k!\\,X^k$.\n\nBy Cayley–Hamilton, $B^n=\\alpha_0I+\\alpha_1B+\\dots+\\alpha_{n-1}B^{n-1}$ for some scalars $\\alpha_i$. Applying $\\Delta^n$ and using the first bullet, $\\Delta^n(B^n)=0$. By the second bullet, $n!\\,X^n=0$, so $(AB-BA)^n=0$. ∎"
+      }
+    ],
+    "topics": [
+      "linear-algebra"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imc-2009-09",
+    "bank": "imc",
+    "source": {
+      "contest": "IMC",
+      "paper": "Day 2",
+      "year": 2009,
+      "number": 9,
+      "url": "https://www.imc-math.org.uk/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "text",
+    "prompt": "Let $p$ be a prime number and $\\mathbb F_p$ be the field of residues modulo $p$. Let $W$ be the smallest set of polynomials with coefficients in $\\mathbb F_p$ such that\n\n* the polynomials $x+1$ and $x^{p-2}+x^{p-3}+\\dots+x^2+2x+1$ are in $W$, and\n* for any polynomials $h_1(x)$ and $h_2(x)$ in $W$ the polynomial $r(x)$, which is the remainder of $h_1(h_2(x))$ modulo $x^p-x$, is also in $W$.\n\nHow many polynomials are there in $W$?",
+    "image": null,
+    "choices": null,
+    "answer": "p!",
+    "acceptedAnswers": [
+      "p factorial",
+      "factorial p",
+      "(p)!"
+    ],
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Polynomials as permutations of $\\mathbb F_p$",
+        "body": "**Polynomials of degree $<p$ are functions.** Let $R$ be the set of polynomials over $\\mathbb F_p$ of degree $<p$. Every function $\\mathbb F_p\\to\\mathbb F_p$ is given by exactly one element of $R$ (Lagrange interpolation gives existence; two such polynomials agreeing at $p$ points have a difference of degree $<p$ with $p$ roots, so they are equal). Since $a^p=a$ for $a\\in\\mathbb F_p$, reducing modulo $x^p-x$ does not change the function a polynomial defines. So the operation in the definition of $W$ corresponds exactly to composing functions: $r$ is the element of $R$ representing $h_1\\circ h_2$.\n\n**The two generators are permutations.** $f_1(x)=x+1$ is the cyclic permutation $\\sigma:0\\to1\\to\\dots\\to p-1\\to0$. For $f_2(x)=\\sum_{j=0}^{p-2}x^j+x$: if $a\\ne0,1$, then $\\sum_{j=0}^{p-2}a^j=\\frac{a^{p-1}-1}{a-1}=0$ by Fermat, so $f_2(a)=a$; $f_2(1)=(p-1)+1=0$; $f_2(0)=1$. So $f_2$ is the transposition $\\tau=(0\\ 1)$. (For $p=2$ it equals $x+1$.) Both lie in $R$.\n\n**$W$ consists of permutation polynomials.** Let $W'$ be the set of all elements of $R$ that define permutations of $\\mathbb F_p$. It contains $f_1,f_2$ and is closed under the operation (a composition of permutations is a permutation). By minimality, $W\\subseteq W'$.\n\n**Every permutation occurs.** The functions defined by elements of $W$ form a set closed under composition containing $\\sigma$ and $\\tau$. Now $\\sigma^k\\tau\\sigma^{-k}=(k\\ \\ k+1)$, and adjacent transpositions generate the symmetric group $S_p$ (any arrangement can be sorted by adjacent swaps). In a finite group, inverses are positive powers ($g^{-1}=g^{\\operatorname{ord}g-1}$), so every element of $S_p$ is a composition of copies of $\\sigma$ and $\\tau$. Hence every permutation is defined by some element of $W$, i.e. $W'\\subseteq W$.\n\nSo $W=W'$, which is in bijection with $S_p$: **$|W|=p!$**. ∎"
+      }
+    ],
+    "topics": [
+      "abstract-algebra",
+      "polynomials",
+      "number-theory"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imc-2009-10",
+    "bank": "imc",
+    "source": {
+      "contest": "IMC",
+      "paper": "Day 2",
+      "year": 2009,
+      "number": 10,
+      "url": "https://www.imc-math.org.uk/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $\\mathbb M$ be the vector space of $m\\times p$ real matrices. For a vector subspace $S\\subseteq\\mathbb M$, denote by $\\delta(S)$ the dimension of the vector space generated by all columns of all matrices in $S$.\n\nSay that a vector subspace $T\\subseteq\\mathbb M$ is a *covering matrix space* if\n$$\\bigcup_{A\\in T,\\ A\\ne0}\\ker A=\\mathbb R^p .$$\nSuch a $T$ is *minimal* if it does not contain a proper vector subspace $S\\subset T$ which is also a covering matrix space.\n\n(a) Let $T$ be a minimal covering matrix space and let $n=\\dim T$. Prove that\n$$\\delta(T)\\le\\binom n2 .$$\n(b) Prove that for every positive integer $n$ we can find $m$ and $p$, and a minimal covering matrix space $T$ as above such that $\\dim T=n$ and $\\delta(T)=\\binom n2$.",
+    "image": null,
+    "choices": null,
+    "answer": "(a) Points $x$ with a one-dimensional \"annihilator\" $\\{A\\in T:Ax=0\\}$ give a basis $\\tau_1,\\dots,\\tau_n$ of $T$ with $\\tau_i(x_i)=0$, and a perturbation argument shows every $\\tau_i(x)$ is a combination of the $\\tau_k(x_i)$, leaving at most $\\binom n2$ spanning vectors. (b) $A(u)v=(u_iv_j-u_jv_i)_{i<j}$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Evaluation maps and a perturbation lemma",
+        "body": "Write $X=\\mathbb R^p$, $Y=\\mathbb R^m$ and regard elements of $T$ as linear maps $X\\to Y$. For $x\\in X$ let $\\mu_x:T\\to Y$, $\\mu_x(\\tau)=\\tau(x)$. \"Covering\" means $\\ker\\mu_x\\ne0$ for every $x$. The column space of $T$ is $\\operatorname{span}\\{\\tau(x):\\tau\\in T,\\ x\\in X\\}$.\n\n### (a)\n\nLet $T$ be minimal covering, $n=\\dim T$, and $U=\\{x\\in X:\\dim\\ker\\mu_x=1\\}$.\n\n**Claim 1. The lines $\\ker\\mu_x$ ($x\\in U$) span $T$.** If not, they lie in a subspace $T'\\subset T$ of dimension $n-1$. Then $T'$ is covering: for $x\\in U$, $\\ker\\mu_x\\subseteq T'$ is non-zero; for $x\\notin U$, $\\dim\\ker\\mu_x\\ge2$, so $\\dim(\\ker\\mu_x\\cap T')\\ge2+(n-1)-n=1$. This contradicts minimality.\n\n**Claim 2 (Lemma).** If $x_0\\in U$, $\\ker\\mu_{x_0}=\\mathbb R\\tau_0$, and $x\\in X$, then $\\tau_0(x)=\\tau(x_0)$ for some $\\tau\\in T$; i.e. $\\tau_0(x)\\in V:=\\operatorname{Im}\\mu_{x_0}$.\n\n*Proof.* $\\dim V=n-1$. Choose a complement $T=\\mathbb R\\tau_0\\oplus T_1$; then $\\mu_{x_0}$ maps $T_1$ isomorphically onto $V$. Suppose $w:=\\tau_0(x)\\notin V$. Define, for $\\varepsilon\\in\\mathbb R$, the linear map\n$$\\Phi_\\varepsilon:\\mathbb R\\times T_1\\to Y,\\qquad (a,\\sigma)\\mapsto aw+\\sigma(x_0)+\\varepsilon\\,\\sigma(x).$$\n$\\Phi_0$ is injective ($aw+\\sigma(x_0)=0$ with $w\\notin V$ forces $a=0$, then $\\sigma=0$). Injectivity means some $n\\times n$ minor of the matrix of $\\Phi_\\varepsilon$ is non-zero; minors depend continuously on $\\varepsilon$, so $\\Phi_\\varepsilon$ is injective for all small $|\\varepsilon|$. For such $\\varepsilon\\neq0$ and $\\tau=a\\tau_0+\\sigma$:\n$$\\tau(x_0+\\varepsilon x)=\\varepsilon a\\,w+\\sigma(x_0)+\\varepsilon\\sigma(x)=\\Phi_\\varepsilon(\\varepsilon a,\\sigma),$$\nusing $\\tau_0(x_0)=0$. So $\\tau(x_0+\\varepsilon x)=0$ forces $\\varepsilon a=0$, $\\sigma=0$, i.e. $\\tau=0$: no non-zero element of $T$ kills $x_0+\\varepsilon x$, contradicting the covering property. $\\square$\n\n**Counting.** By Claim 1 pick $x_1,\\dots,x_n\\in U$ and $\\tau_1,\\dots,\\tau_n$ with $\\ker\\mu_{x_i}=\\mathbb R\\tau_i$ and $\\tau_1,\\dots,\\tau_n$ a basis of $T$. Extend to a spanning family $x_1,\\dots,x_d$ of $X$. Put $y_{ij}=\\tau_i(x_j)$; these span the column space of $T$, and $y_{ii}=0$. By the lemma (with $x_0=x_i$, $\\tau_0=\\tau_i$, $x=x_j$), for all $i,j$,\n$$y_{ij}=\\tau(x_i)\\ \\text{ for some }\\tau=\\textstyle\\sum_kc_k\\tau_k,\\qquad\\text{so}\\qquad y_{ij}\\in\\operatorname{span}\\{y_{ki}:k=1,\\dots,n\\}. \\tag{$*$}$$\nLet $Z=\\operatorname{span}\\{y_{ab}:1\\le b<a\\le n\\}$, of dimension $\\le\\binom n2$. We show by induction on $i$ that $y_{ij}\\in Z$ for all $j$. For $i=1$: by $(*)$, $y_{1j}$ is a combination of $y_{k1}$, $k\\ge2$ (as $y_{11}=0$), which lie in $Z$. For general $i$: by $(*)$, $y_{ij}$ is a combination of the $y_{ki}$; those with $k>i$ are in $Z$, $y_{ii}=0$, and those with $k<i$ are in $Z$ by the induction hypothesis. Hence the column space equals $Z$ and $\\delta(T)\\le\\binom n2$.\n\n### (b)\n\n(For $n=1$ there is nothing to construct in a meaningful sense: a one-dimensional $T=\\mathbb RA$ is covering only if $\\ker A=\\mathbb R^p$, i.e. $A=0$; so take $n\\ge2$.) Let $p=n$, $m=\\binom n2$, rows indexed by pairs $(i,j)$, $1\\le i<j\\le n$. For $u\\in\\mathbb R^n$ let $A(u)$ be the matrix with\n$$A(u)_{(i,j),j}=u_i,\\qquad A(u)_{(i,j),i}=-u_j,\\qquad\\text{other entries }0,$$\nso $(A(u)v)_{(i,j)}=u_iv_j-u_jv_i$. For $u\\ne0$, $A(u)v=0$ iff all $2\\times2$ minors of $(u\\ v)$ vanish iff $v\\in\\mathbb Ru$; thus $\\ker A(u)=\\mathbb Ru$. Let $T=\\{A(u):u\\in\\mathbb R^n\\}$; $u\\mapsto A(u)$ is linear and injective, so $\\dim T=n$.\n\n* *Covering:* every $v\\ne0$ lies in $\\ker A(v)$, and $0$ lies in every kernel.\n* *Minimal:* a proper subspace of $T$ is $\\{A(u):u\\in U'\\}$ for a proper subspace $U'\\subset\\mathbb R^n$, and the union of its kernels is $\\bigcup_{u\\in U'\\setminus0}\\mathbb Ru=U'\\ne\\mathbb R^n$.\n* *$\\delta(T)=\\binom n2$:* for $i<j$, column $j$ of $A(e_i)$ has entry $1$ in row $(i,j)$ and $0$ elsewhere, so all $\\binom n2$ standard basis vectors of $\\mathbb R^m$ are columns. ∎"
+      }
+    ],
+    "topics": [
+      "linear-algebra"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

@@ -1,0 +1,148 @@
+[
+  {
+    "id": "vjimc-2000-cat2-01",
+    "bank": "vjimc",
+    "source": {
+      "contest": "VJIMC",
+      "paper": "VJIMC 2000 Category II",
+      "year": 2000,
+      "number": 1,
+      "url": "https://vjimc.osu.cz/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $p$ be a prime of the form $p=4n-1$ where $n$ is a positive integer. Prove that\n$$\\prod_{k=1}^p(k^2+1)\\equiv4\\pmod p.$$",
+    "image": null,
+    "choices": null,
+    "answer": "The squares $k^2$ run over $0$ (once) and every quadratic residue $r$ (twice), and $\\prod_r(x-r)\\equiv x^{(p-1)/2}-1$; at $x=-1$ this gives $\\prod_r(r+1)\\equiv2$, so the product is $\\equiv 2^2=4$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Quadratic residues as roots of $x^{(p-1)/2}-1$",
+        "body": "All congruences are modulo $p$. As $k$ runs over $1,\\dots,p$ (a complete residue system), $k^2$ takes the value $0$ once ($k=p$) and each of the $\\frac{p-1}2$ nonzero quadratic residues exactly twice ($\\pm k$). Let $Q$ be the set of nonzero quadratic residues. Then\n$$\\prod_{k=1}^p(k^2+1)\\equiv1\\cdot\\prod_{r\\in Q}(r+1)^2 .$$\n\n**Claim:** $\\prod_{r\\in Q}(x-r)\\equiv x^{(p-1)/2}-1$ as polynomials over $\\mathbb Z_p$. Indeed every $r=s^2\\in Q$ satisfies $r^{(p-1)/2}=s^{p-1}\\equiv1$ (Fermat), so the $\\frac{p-1}2$ distinct elements of $Q$ are roots of the monic polynomial $x^{(p-1)/2}-1$ of the same degree over the field $\\mathbb Z_p$, hence it factors as $\\prod_{r\\in Q}(x-r)$.\n\nPut $x=-1$. Since $\\frac{p-1}2=2n-1$ is odd,\n$$\\prod_{r\\in Q}(-1-r)\\equiv(-1)^{2n-1}-1=-2,$$\nand $\\prod_{r\\in Q}(-1-r)=(-1)^{|Q|}\\prod_{r\\in Q}(1+r)=-\\prod_{r\\in Q}(r+1)$. Therefore $\\prod_{r\\in Q}(r+1)\\equiv2$ and\n$$\\prod_{k=1}^p(k^2+1)\\equiv2^2=4\\pmod p.\\ ∎$$"
+      },
+      {
+        "title": "Factor $k^2+1$ over $\\mathbb F_{p^2}$ (official idea)",
+        "body": "Since $p\\equiv3\\pmod4$, $-1$ is not a square mod $p$, so adjoin $i$ with $i^2=-1$ to get the field $\\mathbb F_{p^2}=\\mathbb F_p(i)$. Over any field containing $\\mathbb F_p$ we have the polynomial identity\n$$\\prod_{k\\in\\mathbb F_p}(x-k)=x^p-x ,$$\nbecause the $p$ elements of $\\mathbb F_p$ are roots of $x^p-x$ (Fermat).\n\nNow $k^2+1=(k-i)(k+i)=(i-k)(-i-k)$, so\n$$\\prod_{k=1}^p(k^2+1)=\\prod_{k\\in\\mathbb F_p}(i-k)\\cdot\\prod_{k\\in\\mathbb F_p}(-i-k)=(i^p-i)\\big((-i)^p+i\\big).$$\nAs $p=4n-1$, $i^p=i^{4n}i^{-1}=-i$ and $(-i)^p=-i^p=i$. Hence the product is $(-2i)(2i)=-4i^2=4$. ∎"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "polynomials"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "vjimc-2000-cat2-02",
+    "bank": "vjimc",
+    "source": {
+      "contest": "VJIMC",
+      "paper": "VJIMC 2000 Category II",
+      "year": 2000,
+      "number": 2,
+      "url": "https://vjimc.osu.cz/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "text",
+    "prompt": "If we write the sequence AAABABBB along the perimeter of a circle, then every word of the length $3$ consisting of letters A and B (i.e. AAA, AAB, ABA, BAB, ABB, BBB, BBA, BAA) occurs exactly once on the perimeter. Decide whether it is possible to write a sequence of letters from a $k$-element alphabet along the perimeter of a circle in such a way that every word of the length $l$ (i.e. an ordered $l$-tuple of letters) occurs exactly once on the perimeter.",
+    "image": null,
+    "choices": null,
+    "answer": "Yes",
+    "acceptedAnswers": [
+      "Yes",
+      "y",
+      "yes it is",
+      "true"
+    ],
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Eulerian circuit in the de Bruijn graph",
+        "body": "**Yes, always** (such a circular sequence is a *de Bruijn sequence*). If $l=1$, write each letter once. If $k=1$, a circle with the single letter works trivially. Let $k\\ge2$, $l\\ge2$, and let $P$ be the alphabet.\n\n**The graph.** Let $G$ be the directed graph whose vertices are the $k^{l-1}$ words of length $l-1$, with an arc from $a_1a_2\\dots a_{l-1}$ to $a_2\\dots a_{l-1}c$ for every letter $c$. Arcs correspond bijectively to words of length $l$: the arc above corresponds to $a_1a_2\\dots a_{l-1}c$. (Loops such as $AA\\dots A\\to AA\\dots A$ are allowed.)\n\n- Every vertex has out-degree $k$ (choice of $c$) and in-degree $k$ (arcs come from $c\\,a_1\\dots a_{l-2}$).\n- $G$ is strongly connected: from $a_1\\dots a_{l-1}$ we reach any $b_1\\dots b_{l-1}$ in $l-1$ steps by appending $b_1,b_2,\\dots,b_{l-1}$ one at a time.\n\nBy Euler's theorem for directed graphs, $G$ has an Eulerian circuit: a closed walk $v_0\\to v_1\\to\\dots\\to v_N=v_0$ using every arc exactly once, $N=k^l$.\n\n**The circular word.** Let $c_j$ be the last letter of $v_j$ and write $c_1c_2\\dots c_N$ around the circle (indices mod $N$). Each step shifts the word left by one and appends $c_j$, so (walking around the circuit repeatedly) $v_j=c_{j-l+2}\\dots c_j$ for every $j$. Hence the $l$ consecutive letters ending at position $j$ are $c_{j-l+1}c_{j-l+2}\\dots c_j=v_{j-1}c_j$, which is exactly the word of the $j$-th arc. The $N$ windows of length $l$ on the circle are therefore precisely the $N=k^l$ arcs, each used once, i.e. every word of length $l$ occurs exactly once.\n\n**Answer: Yes.** ∎"
+      }
+    ],
+    "topics": [
+      "graph-theory",
+      "counting"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "vjimc-2000-cat2-03",
+    "bank": "vjimc",
+    "source": {
+      "contest": "VJIMC",
+      "paper": "VJIMC 2000 Category II",
+      "year": 2000,
+      "number": 3,
+      "url": "https://vjimc.osu.cz/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $m,n$ be positive integers and let $x\\in[0,1]$. Prove that\n$$(1-x^n)^m+\\big(1-(1-x)^m\\big)^n\\ge1.$$",
+    "image": null,
+    "choices": null,
+    "answer": "Colour each cell of an $m\\times n$ board black with probability $x$ independently: \\\"some row is all black\\\" and \\\"some column is all white\\\" are disjoint events with probabilities $1-(1-x^n)^m$ and $1-(1-(1-x)^m)^n$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "A random colouring of a board",
+        "body": "Consider a board with $m$ rows and $n$ columns. Colour every cell black with probability $x$ and white with probability $1-x$, independently.\n\n- A fixed row ($n$ cells) is all black with probability $x^n$; so the probability that **no** row is all black is $(1-x^n)^m$, and the event $R$ = \"some row is all black\" has $P(R)=1-(1-x^n)^m$.\n- A fixed column ($m$ cells) is all white with probability $(1-x)^m$; it contains a black cell with probability $1-(1-x)^m$; all columns contain a black cell with probability $(1-(1-x)^m)^n$. So the event $C$ = \"some column is all white\" has $P(C)=1-(1-(1-x)^m)^n$.\n\n$R$ and $C$ cannot happen together: an all-black row and an all-white column would share a cell that is both black and white. Hence\n$$P(R)+P(C)=P(R\\cup C)\\le1,$$\ni.e. $1-(1-x^n)^m+1-(1-(1-x)^m)^n\\le1$, which is the claim. ∎"
+      }
+    ],
+    "topics": [
+      "probability",
+      "inequalities",
+      "algebra"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "vjimc-2000-cat2-04",
+    "bank": "vjimc",
+    "source": {
+      "contest": "VJIMC",
+      "paper": "VJIMC 2000 Category II",
+      "year": 2000,
+      "number": 4,
+      "url": "https://vjimc.osu.cz/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $\\mathcal B$ be a family of open balls in $\\mathbb R^n$ and $c<\\lambda\\big(\\bigcup\\mathcal B\\big)$ where $\\lambda$ is the $n$-dimensional Lebesgue measure. Show that there exists a finite family of pairwise disjoint balls $\\{U_i\\}_{i=1}^k\\subseteq\\mathcal B$ such that\n$$\\sum_{j=1}^k\\lambda(U_j)>\\frac{c}{3^n}.$$",
+    "image": null,
+    "choices": null,
+    "answer": "Vitali covering argument: take a compact $K\\subseteq\\bigcup\\mathcal B$ with $\\lambda(K)>c$, cover it by finitely many balls, and greedily pick disjoint balls by decreasing radius; the tripled chosen balls cover $K$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Compactness and the greedy Vitali selection",
+        "body": "If $c<0$ the empty family works (its sum is $0>c/3^n$). Assume $c\\ge0$; then $\\lambda(G)>0$ for the open set $G=\\bigcup\\mathcal B$.\n\n**Step 1: a compact set of measure $>c$.** For $m\\ge1$ let $K_m=\\{x\\in G:|x|\\le m,\\ \\operatorname{dist}(x,\\mathbb R^n\\setminus G)\\ge\\frac1m\\}$ (with $\\operatorname{dist}(x,\\emptyset)=\\infty$). Each $K_m$ is closed and bounded, hence compact; $K_1\\subseteq K_2\\subseteq\\dots$ and $\\bigcup_mK_m=G$ because $G$ is open. By continuity of measure from below, $\\lambda(K_m)\\to\\lambda(G)>c$ (also if $\\lambda(G)=\\infty$), so some $K=K_m$ has $\\lambda(K)>c$.\n\n**Step 2: finitely many balls.** The open balls of $\\mathcal B$ cover the compact set $K$, so finitely many of them, $B_1,\\dots,B_N$, already cover $K$.\n\n**Step 3: greedy selection.** Choose $U_1$ to be a ball of largest radius among $B_1,\\dots,B_N$; discard all $B_i$ that intersect $U_1$ (including $U_1$). From the remaining balls choose $U_2$ of largest radius, discard all balls meeting $U_2$, and so on until no balls remain. The chosen balls $U_1,\\dots,U_k$ are pairwise disjoint.\n\nEvery $B_i$ was discarded at some step $j$, so it meets $U_j$ and its radius $r$ is at most the radius $R$ of $U_j$ (it was still available when $U_j$ was chosen). If $U_j$ has centre $z$ and $y\\in B_i\\cap U_j$, then every point $x$ of $B_i$ satisfies $|x-z|\\le|x-y|+|y-z|<2r+R\\le3R$. Hence $B_i\\subseteq3U_j$, the ball with centre $z$ and radius $3R$.\n\n**Step 4: conclusion.**\n$$c<\\lambda(K)\\le\\lambda\\Big(\\bigcup_{i}B_i\\Big)\\le\\lambda\\Big(\\bigcup_{j=1}^k3U_j\\Big)\\le\\sum_{j=1}^k3^n\\lambda(U_j),$$\nso $\\sum_j\\lambda(U_j)>c/3^n$. ∎"
+      }
+    ],
+    "topics": [
+      "real-analysis",
+      "geometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

@@ -1,0 +1,448 @@
+[
+  {
+    "id": "putnam-2011-a1",
+    "bank": "putnam",
+    "source": {
+      "contest": "Putnam",
+      "paper": "72nd William Lowell Putnam Mathematical Competition (December 3, 2011)",
+      "year": 2011,
+      "number": "A1",
+      "url": "https://kskedlaya.org/putnam-archive/"
+    },
+    "grade": "undergrad",
+    "points": 10,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Define a *growing spiral* in the plane to be a sequence of points with integer coordinates $P_0 = (0,0), P_1, \\dots, P_n$ such that $n \\geq 2$ and:\n\n- the directed line segments $P_0 P_1, P_1 P_2, \\dots, P_{n-1} P_n$ are in the successive coordinate directions east (for $P_0 P_1$), north, west, south, east, etc.;\n- the lengths of these line segments are positive and strictly increasing.\n\nHow many of the points $(x,y)$ with integer coordinates $0\\leq x\\leq 2011,\\ 0\\leq y\\leq 2011$ *cannot* be the last point, $P_n$, of any growing spiral?",
+    "image": null,
+    "choices": null,
+    "answer": "10053",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Classify the reachable points",
+        "body": "Let the segment lengths be $x_1<y_1<x_2<y_2<x_3<\\cdots$ (horizontal lengths $x_i$, vertical lengths $y_i$), so\n$$P_1=(x_1,0),\\ P_2=(x_1,y_1),\\ P_3=(x_1-x_2,y_1),\\ P_4=(x_1-x_2,y_1-y_2),\\ \\dots$$\n\n**Reachable points.**\n- Every $(x,y)$ with $0<x<y$ is $P_2$ of the spiral with lengths $x,y$.\n- Every $(x,y)$ with $x\\ge y\\ge4$ is $P_6$ of the spiral with lengths $1,2,3,x+1,x+2,x+y-1$: the points are $(1,0),(1,2),(-2,2),(-2,1-x),(x,1-x),(x,y)$, and the lengths increase because $x+1>3$ and $x+y-1>x+2$ (as $y\\ge4$).\n\n**Unreachable points.**\n- *$x$-coordinate $0$:* every $P_k$ with $k\\ge1$ has $x$-coordinate $x_1-x_2+\\cdots\\pm x_j$ for some $j\\ge1$. For odd $j$ this is $x_1+(x_3-x_2)+\\cdots+(x_j-x_{j-1})>0$; for even $j$ it is $(x_1-x_2)+\\cdots+(x_{j-1}-x_j)<0$. So $x=0$ never occurs.\n- *Small $y$ beyond $P_3$:* every $P_k$ with $k\\ge4$ has $y$-coordinate $y_1-y_2+\\cdots\\pm y_j$ with $j\\ge2$. For even $j$ it is negative (as above). For odd $j\\ge3$ it is $y_1+(y_3-y_2)+\\cdots\\ge y_1+2\\ge4$, since $y_3\\ge y_2+2$ (there is $x_3$ strictly between) and $y_1\\ge2$. So points with $0\\le y\\le3$ can only be $P_2$ or $P_3$ (not $P_1$, since $n\\ge2$). $P_3$ has negative $x$-coordinate, and $P_2=(x_1,y_1)$ has $x<y$.\n\nSo the points of the square that **cannot** be reached are exactly: $(0,y)$ for $0\\le y\\le2011$, and the points with $1\\le x$, $y\\in\\{0,1,2,3\\}$, $x\\ge y$:\n$$2012 + \\underbrace{2011}_{y=0} + \\underbrace{2011}_{y=1} + \\underbrace{2010}_{y=2} + \\underbrace{2009}_{y=3} = 10053 .$$\n(All other points have $x\\ge1$ and either $x<y$ or $x\\ge y\\ge4$, and are reachable.)\n\n**Answer: 10053.**"
+      }
+    ],
+    "topics": [
+      "counting",
+      "geometry"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "putnam-2011-a2",
+    "bank": "putnam",
+    "source": {
+      "contest": "Putnam",
+      "paper": "72nd William Lowell Putnam Mathematical Competition (December 3, 2011)",
+      "year": 2011,
+      "number": "A2",
+      "url": "https://kskedlaya.org/putnam-archive/"
+    },
+    "grade": "undergrad",
+    "points": 10,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Let $a_1,a_2,\\dots$ and $b_1,b_2,\\dots$ be sequences of positive real numbers such that $a_1 = b_1 = 1$ and $b_n = b_{n-1} a_n - 2$ for $n=2,3,\\dots$. Assume that the sequence $(b_j)$ is bounded. Prove that\n$$S = \\sum_{n=1}^\\infty \\frac{1}{a_1\\cdots a_n}$$\nconverges, and evaluate $S$.",
+    "image": null,
+    "choices": null,
+    "answer": "3/2",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "answerDisplay": "$\\frac{3}{2}$",
+    "solutions": [
+      {
+        "title": "Telescoping with $c_n=b_n/(a_1\\cdots a_n)$",
+        "body": "Let $\\pi_n = a_1a_2\\cdots a_n$ and $c_n = b_n/\\pi_n>0$. Dividing $b_n = b_{n-1}a_n-2$ by $\\pi_n$:\n$$c_n = c_{n-1} - \\frac{2}{\\pi_n}\\qquad(n\\ge2),$$\nso $\\frac{1}{\\pi_n} = \\frac{c_{n-1}-c_n}{2}$ and, since $c_1 = 1$,\n$$\\sum_{n=1}^N\\frac1{\\pi_n} = 1 + \\frac{c_1-c_N}{2} = \\frac32-\\frac{c_N}{2}.$$\n\n**$c_N\\to0$.** Let $b_j\\le B$ for all $j$. From $a_n = \\frac{b_n+2}{b_{n-1}}$,\n$$\\pi_N = \\prod_{n=2}^N\\frac{b_n+2}{b_{n-1}} = \\frac{b_N+2}{b_1}\\prod_{n=2}^{N-1}\\frac{b_n+2}{b_n} \\ \\ge\\ \\left(1+\\frac2B\\right)^{N-2}\\to\\infty,$$\nso $0<c_N\\le B/\\pi_N\\to0$.\n\nHence the partial sums increase to $\\frac32$: the series converges and $S=\\frac32$.\n\n**Answer:** $S=\\dfrac32$."
+      },
+      {
+        "title": "Closed form for the partial sums (Kedlaya–Ng)",
+        "body": "Put\n$$S_m = \\frac32\\left(1-\\prod_{j=1}^m\\frac{b_j}{b_j+2}\\right).$$\nThen $S_1 = \\frac32\\cdot\\frac23 = 1 = \\frac1{a_1}$, and for $m\\ge2$\n$$S_m - S_{m-1} = \\frac32\\prod_{j=1}^{m-1}\\frac{b_j}{b_j+2}\\cdot\\frac{2}{b_m+2} = \\frac{b_1\\cdots b_{m-1}}{(b_2+2)\\cdots(b_m+2)},$$\nusing $b_1+2=3$. Since $a_j = (b_j+2)/b_{j-1}$ for $j\\ge2$ and $a_1=1$, this equals $\\frac{1}{a_1\\cdots a_m}$. So $S_m=\\sum_{n=1}^m\\frac1{a_1\\cdots a_n}$.\n\nIf $b_j\\le B$, then $\\frac{b_j}{b_j+2}\\le\\frac{B}{B+2}<1$, so the product is at most $\\left(\\frac{B}{B+2}\\right)^m\\to0$, and $S_m\\to\\frac32$.\n\n**Answer:** $\\dfrac32$."
+      }
+    ],
+    "topics": [
+      "sequences-series",
+      "real-analysis"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "putnam-2011-a3",
+    "bank": "putnam",
+    "source": {
+      "contest": "Putnam",
+      "paper": "72nd William Lowell Putnam Mathematical Competition (December 3, 2011)",
+      "year": 2011,
+      "number": "A3",
+      "url": "https://kskedlaya.org/putnam-archive/"
+    },
+    "grade": "undergrad",
+    "points": 10,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Find a real number $c$ and a positive number $L$ for which\n$$\\lim_{r\\to\\infty} \\frac{r^c \\int_0^{\\pi/2} x^r \\sin x \\,dx}{\\int_0^{\\pi/2} x^r \\cos x \\,dx} = L.$$",
+    "image": null,
+    "choices": null,
+    "answer": "$c=-1$, $L=\\dfrac{2}{\\pi}$ (integrate by parts: $\\int_0^{\\pi/2}x^r\\cos x\\,dx=\\frac{1}{r+1}\\int_0^{\\pi/2}x^{r+1}\\sin x\\,dx$).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Integration by parts and squeezing",
+        "body": "Let $f(r) = \\int_0^{\\pi/2}x^r\\sin x\\,dx$.\n\n**The denominator.** Integrating by parts (the boundary terms vanish because $\\cos\\frac\\pi2=0$ and $x^{r+1}=0$ at $0$):\n$$\\int_0^{\\pi/2}x^r\\cos x\\,dx = \\Big[\\frac{x^{r+1}}{r+1}\\cos x\\Big]_0^{\\pi/2} + \\frac1{r+1}\\int_0^{\\pi/2}x^{r+1}\\sin x\\,dx = \\frac{f(r+1)}{r+1}.$$\nSo the expression equals $r^c(r+1)\\dfrac{f(r)}{f(r+1)}$.\n\n**Bounds for $f$.** On $(0,\\frac\\pi2)$ we have $\\frac{2x}{\\pi}<\\sin x<1$ (concavity of $\\sin$). Hence\n$$\\frac{(\\pi/2)^{r+1}}{r+2} = \\int_0^{\\pi/2}\\frac{2x^{r+1}}{\\pi}\\,dx < f(r) < \\int_0^{\\pi/2}x^r\\,dx = \\frac{(\\pi/2)^{r+1}}{r+1}.$$\nUsing the lower bound for $f(r)$ and the upper bound for $f(r+1)$, and vice versa,\n$$\\frac2\\pi\\cdot\\frac{r+2}{r+2}\\ <\\ \\frac{f(r)}{f(r+1)}\\ <\\ \\frac{2}{\\pi}\\cdot\\frac{r+3}{r+1},$$\nso $\\dfrac{f(r)}{f(r+1)}\\to\\dfrac2\\pi$.\n\n**Conclusion.** The expression is $r^{c}(r+1)\\frac{f(r)}{f(r+1)}\\sim\\frac2\\pi r^{c+1}$. This has a finite positive limit exactly when $c=-1$, and then the limit is $L=\\frac2\\pi$.\n\n**Answer:** $c=-1$, $L=\\dfrac2\\pi$."
+      }
+    ],
+    "topics": [
+      "calculus",
+      "real-analysis"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "putnam-2011-a4",
+    "bank": "putnam",
+    "source": {
+      "contest": "Putnam",
+      "paper": "72nd William Lowell Putnam Mathematical Competition (December 3, 2011)",
+      "year": 2011,
+      "number": "A4",
+      "url": "https://kskedlaya.org/putnam-archive/"
+    },
+    "grade": "undergrad",
+    "points": 10,
+    "timeMinutes": null,
+    "type": "text",
+    "prompt": "For which positive integers $n$ is there an $n \\times n$ matrix with integer entries such that every dot product of a row with itself is even, while every dot product of two different rows is odd?",
+    "image": null,
+    "choices": null,
+    "answer": "n odd",
+    "acceptedAnswers": [
+      "odd",
+      "all odd n",
+      "odd n",
+      "n is odd",
+      "n odd",
+      "odd numbers",
+      "n = 1, 3, 5, ..."
+    ],
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Work modulo 2",
+        "body": "**Answer: exactly the odd $n$.**\n\nLet $J$ be the $n\\times n$ all-ones matrix and $I$ the identity.\n\n**Odd $n$.** Take $M=J-I$. The dot product of a row with itself is $n-1$ (even), and of two distinct rows is $n-2$ (odd).\n\n**Even $n$ is impossible.** Suppose $M$ works and reduce everything modulo $2$.\n- The conditions say $MM^{T}\\equiv J-I\\pmod 2$.\n- Since $t^2\\equiv t\\pmod2$, the dot product of a row with itself is congruent to the sum of the row's entries; so every row sum is even, i.e. $M\\mathbf 1\\equiv\\mathbf0$ for the all-ones vector $\\mathbf 1$. Hence $M$ is singular over $\\mathbb{F}_2$: $\\det M\\equiv0\\pmod2$.\n- But $(J-I)^2 = J^2-2J+I = nJ-2J+I\\equiv I\\pmod2$ for even $n$, so $\\det(J-I)^2\\equiv1$ and $\\det(J-I)\\equiv1\\pmod 2$. Then $(\\det M)^2 = \\det(MM^T)\\equiv\\det(J-I)\\equiv1\\pmod2$, a contradiction.\n\n**Answer:** $n$ odd."
+      }
+    ],
+    "topics": [
+      "linear-algebra",
+      "number-theory"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "putnam-2011-a5",
+    "bank": "putnam",
+    "source": {
+      "contest": "Putnam",
+      "paper": "72nd William Lowell Putnam Mathematical Competition (December 3, 2011)",
+      "year": 2011,
+      "number": "A5",
+      "url": "https://kskedlaya.org/putnam-archive/"
+    },
+    "grade": "undergrad",
+    "points": 10,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $F : \\mathbb{R}^2 \\to \\mathbb{R}$ and $g : \\mathbb{R} \\to \\mathbb{R}$ be twice continuously differentiable functions with the following properties:\n\n- $F(u,u) = 0$ for every $u \\in \\mathbb{R}$;\n- for every $x \\in \\mathbb{R}$, $g(x) > 0$ and $x^2 g(x) \\leq 1$;\n- for every $(u,v) \\in \\mathbb{R}^2$, the vector $\\nabla F(u,v)$ is either $\\mathbf{0}$ or parallel to the vector $\\langle g(u), -g(v) \\rangle$.\n\nProve that there exists a constant $C$ such that for every $n\\geq 2$ and any $x_1,\\dots,x_{n+1} \\in \\mathbb{R}$, we have\n$$\\min_{i \\neq j} |F(x_i,x_j)| \\leq \\frac{C}{n}.$$",
+    "image": null,
+    "choices": null,
+    "answer": "Proof. With $G(x)=\\int_0^xg$ (increasing, bounded, image $(A,B)$), $F(x,y)=h(G(x)-G(y))$ for a $C^1$ function $h$ with $h(0)=0$; by pigeonhole two of the $G(x_i)$ are within $(B-A)/n$, and the mean value theorem gives $C=(B-A)\\max|h'|$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Change variables so $F$ depends on a difference (A. Kumar)",
+        "body": "**Step 1: the substitution.** Let $G(x)=\\int_0^xg(t)\\,dt$. Since $g>0$, $G$ is strictly increasing, and $G'=g$ is $C^2$. It is bounded: for $x>1$, $0<G(x)-G(1)\\le\\int_1^x\\frac{dt}{t^2}<1$, and similarly $-1<G(x)-G(-1)<0$ for $x<-1$. Hence the image of $G$ is a bounded open interval $(A,B)$, and $G^{-1}:(A,B)\\to\\mathbb{R}$ is $C^1$ (indeed $C^3$) with $(G^{-1})'(s)=1/g(G^{-1}(s))$.\n\n**Step 2: $H$ is constant along the diagonal direction.** Define $H(s,t) = F(G^{-1}(s),G^{-1}(t))$ on the square $(A,B)^2$; it is $C^2$. With $u=G^{-1}(s)$, $v=G^{-1}(t)$, the chain rule gives\n$$\\frac{\\partial H}{\\partial s}+\\frac{\\partial H}{\\partial t} = \\frac{F_u(u,v)}{g(u)}+\\frac{F_v(u,v)}{g(v)} .$$\nBy hypothesis $\\nabla F(u,v) = \\lambda\\,(g(u),-g(v))$ for some real $\\lambda$ (possibly $0$), so this equals $\\lambda-\\lambda=0$. Thus $H$ has zero derivative along the direction $(1,1)$. Each line $s-t=w$ meets the convex square in a segment, so $H$ is constant on it: $H(s,t)$ depends only on $s-t$. Writing\n$$h(w) = H\\Big(\\tfrac{A+B+w}{2},\\tfrac{A+B-w}{2}\\Big)\\qquad(|w|<B-A),$$\nwe get $H(s,t)=h(s-t)$ and hence $F(x,y) = h\\big(G(x)-G(y)\\big)$. The function $h$ is $C^2$, and $h(0)=F(u,u)=0$.\n\n**Step 3: pigeonhole.** Let $K=[-\\frac{B-A}2,\\frac{B-A}2]$, a compact subset of the domain of $h$, and $M=\\max_K|h'|$. Given $x_1,\\dots,x_{n+1}$, the $n+1$ numbers $G(x_i)$ lie in $(A,B)$. Sorting them, the $n$ consecutive gaps add up to less than $B-A$, so some two of them, $G(x_i),G(x_j)$ with $i\\ne j$, satisfy\n$$|G(x_i)-G(x_j)| < \\frac{B-A}{n}\\le\\frac{B-A}{2}\\qquad(n\\ge2).$$\nBy the mean value theorem on $K$,\n$$|F(x_i,x_j)| = |h(G(x_i)-G(x_j)) - h(0)| \\le M\\,|G(x_i)-G(x_j)| \\le \\frac{M(B-A)}{n}.$$\nSo $C=M(B-A)$ works (it does not depend on $n$ or the $x_i$). ∎"
+      }
+    ],
+    "topics": [
+      "real-analysis",
+      "calculus",
+      "differential-equations"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "putnam-2011-a6",
+    "bank": "putnam",
+    "source": {
+      "contest": "Putnam",
+      "paper": "72nd William Lowell Putnam Mathematical Competition (December 3, 2011)",
+      "year": 2011,
+      "number": "A6",
+      "url": "https://kskedlaya.org/putnam-archive/"
+    },
+    "grade": "undergrad",
+    "points": 10,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $G$ be an abelian group with $n$ elements, and let\n$$\\{g_1=e,g_2,\\dots,g_k\\} \\subsetneq G$$\nbe a (not necessarily minimal) set of distinct generators of $G$. A special die, which randomly selects one of the elements $g_1,g_2,\\dots,g_k$ with equal probability, is rolled $m$ times and the selected elements are multiplied to produce an element $g \\in G$. Prove that there exists a real number $b \\in (0,1)$ such that\n$$\\lim_{m\\to\\infty} \\frac{1}{b^{2m}} \\sum_{x\\in G} \\left(\\mathrm{Prob}(g=x) - \\frac{1}{n}\\right)^2$$\nis positive and finite.",
+    "image": null,
+    "choices": null,
+    "answer": "Proof with characters: by Plancherel the sum equals $\\frac1n\\sum_{\\chi\\ne1}|\\lambda_\\chi|^{2m}$ with $\\lambda_\\chi=\\frac1k\\sum_i\\overline{\\chi(g_i)}$; take $b=\\max_{\\chi\\ne1}|\\lambda_\\chi|$, which is $<1$ because the $g_i$ generate and $g_1=e$, and $>0$ because $k<n$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Fourier analysis on $G$ (Kedlaya–Ng)",
+        "body": "Write $G$ multiplicatively. Since $\\{g_1,\\dots,g_k\\}\\subsetneq G$ contains $e$, we have $n\\ge2$.\n\n**Characters.** Let $\\widehat G$ be the set of characters (homomorphisms $\\chi:G\\to\\mathbb{C}^\\times$, whose values are roots of unity). We use the standard facts: $|\\widehat G| = n$, and\n$$\\sum_{\\chi\\in\\widehat G}\\chi(z) = \\begin{cases} n & z=e,\\\\ 0 & z\\ne e.\\end{cases}\\tag{1}$$\nFor $\\varphi:G\\to\\mathbb{C}$ define $\\widehat\\varphi(\\chi)=\\sum_{x}\\varphi(x)\\overline{\\chi(x)}$. Then:\n- *Convolution:* for $(\\varphi*\\psi)(x)=\\sum_y\\varphi(y)\\psi(y^{-1}x)$ we have $\\widehat{\\varphi*\\psi}=\\widehat\\varphi\\,\\widehat\\psi$ (substitute $x=yz$ and use $\\chi(yz)=\\chi(y)\\chi(z)$).\n- *Plancherel:* $\\sum_\\chi|\\widehat\\varphi(\\chi)|^2 = \\sum_{x,y}\\varphi(x)\\overline{\\varphi(y)}\\sum_\\chi\\chi(x^{-1}y) = n\\sum_x|\\varphi(x)|^2$ by (1).\n\n**The distribution.** Let $\\mu$ be the uniform distribution on $\\{g_1,\\dots,g_k\\}$ and $p_m$ the distribution of $g$ after $m$ rolls; $p_m=\\mu*\\cdots*\\mu$ ($m$ times), so $\\widehat{p_m}(\\chi) = \\lambda_\\chi^m$ with\n$$\\lambda_\\chi = \\widehat\\mu(\\chi) = \\frac1k\\sum_{i=1}^k\\overline{\\chi(g_i)} .$$\nFor the trivial character $\\chi_0$, $\\lambda_{\\chi_0}=1$. The uniform distribution $u\\equiv\\frac1n$ has $\\widehat u(\\chi_0)=1$ and $\\widehat u(\\chi)=0$ for $\\chi\\ne\\chi_0$ (if $\\chi(y)\\ne1$, then $\\chi(y)\\sum_x\\chi(x)=\\sum_x\\chi(yx)=\\sum_x\\chi(x)$ forces $\\sum_x\\chi(x)=0$). By Plancherel applied to $p_m-u$:\n$$\\sum_{x\\in G}\\Big(p_m(x)-\\frac1n\\Big)^2 = \\frac1n\\sum_{\\chi\\ne\\chi_0}|\\lambda_\\chi|^{2m}. \\tag{2}$$\n\n**Choice of $b$.** Let $b=\\max_{\\chi\\ne\\chi_0}|\\lambda_\\chi|$ (there are $n-1\\ge1$ nontrivial characters).\n- *$b<1$:* $|\\lambda_\\chi|\\le1$, with equality only if the unit complex numbers $\\chi(g_1),\\dots,\\chi(g_k)$ are all equal, i.e. all equal $\\chi(g_1)=\\chi(e)=1$. Then $\\chi$ is trivial on a generating set, so $\\chi=\\chi_0$. Hence $|\\lambda_\\chi|<1$ for $\\chi\\ne\\chi_0$.\n- *$b>0$:* if all $\\lambda_\\chi=0$ for $\\chi\\ne\\chi_0$, then $\\sum_\\chi\\lambda_\\chi=1$. But by (1), $\\sum_\\chi\\lambda_\\chi=\\frac1k\\sum_i\\sum_\\chi\\overline{\\chi(g_i)} = \\frac nk$, since only $g_1=e$ contributes (the $g_i$ are distinct). So $k=n$, contradicting $\\{g_i\\}\\ne G$.\n\n**The limit.** By (2),\n$$\\frac{1}{b^{2m}}\\sum_{x}\\Big(p_m(x)-\\frac1n\\Big)^2 = \\frac1n\\sum_{\\chi\\ne\\chi_0}\\Big(\\frac{|\\lambda_\\chi|}{b}\\Big)^{2m}\\ \\longrightarrow\\ \\frac1n\\,\\#\\{\\chi\\ne\\chi_0: |\\lambda_\\chi|=b\\},$$\nsince terms with $|\\lambda_\\chi|<b$ tend to $0$ and the others equal $1$. This limit is at least $\\frac1n>0$ and at most $\\frac{n-1}{n}$. ∎\n\n*Remark.* The hypothesis $g_1=e$ matters: for $G=\\mathbb{Z}/2$ and the single generator $1$, the product alternates and $\\lambda=-1$, so $b$ would have to be $1$."
+      }
+    ],
+    "topics": [
+      "abstract-algebra",
+      "probability",
+      "linear-algebra"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "putnam-2011-b1",
+    "bank": "putnam",
+    "source": {
+      "contest": "Putnam",
+      "paper": "72nd William Lowell Putnam Mathematical Competition (December 3, 2011)",
+      "year": 2011,
+      "number": "B1",
+      "url": "https://kskedlaya.org/putnam-archive/"
+    },
+    "grade": "undergrad",
+    "points": 10,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $h$ and $k$ be positive integers. Prove that for every $\\epsilon > 0$, there are positive integers $m$ and $n$ such that\n$$\\epsilon < |h \\sqrt{m} - k \\sqrt{n}| < 2\\epsilon.$$",
+    "image": null,
+    "choices": null,
+    "answer": "Proof. Take $m=k^2(t^2+s)$, $n=h^2t^2$, so $h\\sqrt m-k\\sqrt n = hk(\\sqrt{t^2+s}-t)$; as $s=1,2,\\dots$ these values increase to $\\infty$ in steps smaller than $hk/(2t)<\\epsilon$, so one lands in $(\\epsilon,2\\epsilon)$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Small steps (discrete intermediate value)",
+        "body": "Fix a positive integer $t$ with $\\frac{hk}{2t}<\\epsilon$. For integers $s\\ge0$ let\n$$\\delta_s = hk\\left(\\sqrt{t^2+s}-t\\right),$$\nwhich is $h\\sqrt{m}-k\\sqrt{n}$ for $m=k^2(t^2+s)$ and $n=h^2t^2$ (both positive integers when $s\\ge1$). Then $\\delta_0=0$, $\\delta_s$ is strictly increasing in $s$, $\\delta_s\\to\\infty$, and\n$$\\delta_{s+1}-\\delta_s = hk\\left(\\sqrt{t^2+s+1}-\\sqrt{t^2+s}\\right) = \\frac{hk}{\\sqrt{t^2+s+1}+\\sqrt{t^2+s}} < \\frac{hk}{2t} < \\epsilon .$$\nLet $s\\ge1$ be the least index with $\\delta_s>\\epsilon$ (it exists since $\\delta_s\\to\\infty$, and $s\\ge1$ since $\\delta_0=0$). Then $\\delta_{s-1}\\le\\epsilon$, so\n$$\\epsilon<\\delta_s<\\delta_{s-1}+\\epsilon\\le2\\epsilon .$$\nWith $m=k^2(t^2+s)$, $n=h^2t^2$ we get $\\epsilon<|h\\sqrt m-k\\sqrt n|<2\\epsilon$. ∎"
+      },
+      {
+        "title": "Choosing a good rational first (Kedlaya–Ng)",
+        "body": "By density of the rationals choose positive integers $a,b$ with\n$$\\frac{3\\epsilon}{hk}<\\frac ba<\\frac{4\\epsilon}{hk};$$\nmultiplying both by a large integer $N$ (which keeps $b/a$ and replaces $3a^2>b$ by $3N^2a^2>Nb$) we may also assume $b<3a^2$. Then $\\sqrt{a^2+b}<2a$, and\n$$\\sqrt{a^2+b}-a = \\frac{b}{\\sqrt{a^2+b}+a}\\in\\left(\\frac{b}{3a},\\ \\frac{b}{2a}\\right)\\subseteq\\left(\\frac{\\epsilon}{hk},\\ \\frac{2\\epsilon}{hk}\\right).$$\nTake $m=k^2(a^2+b)$ and $n=h^2a^2$: then $h\\sqrt m-k\\sqrt n = hk\\big(\\sqrt{a^2+b}-a\\big)\\in(\\epsilon,2\\epsilon)$. ∎"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "real-analysis"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "putnam-2011-b2",
+    "bank": "putnam",
+    "source": {
+      "contest": "Putnam",
+      "paper": "72nd William Lowell Putnam Mathematical Competition (December 3, 2011)",
+      "year": 2011,
+      "number": "B2",
+      "url": "https://kskedlaya.org/putnam-archive/"
+    },
+    "grade": "undergrad",
+    "points": 10,
+    "timeMinutes": null,
+    "type": "text",
+    "prompt": "Let $S$ be the set of all ordered triples $(p,q,r)$ of prime numbers for which at least one rational number $x$ satisfies $px^2 + qx + r =0$. Which primes appear in seven or more elements of $S$?",
+    "image": null,
+    "choices": null,
+    "answer": "2 and 5",
+    "acceptedAnswers": [
+      "2, 5",
+      "2,5",
+      "{2,5}",
+      "{2, 5}",
+      "5 and 2",
+      "2 5",
+      "2 and 5 only",
+      "only 2 and 5"
+    ],
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Discriminant analysis",
+        "body": "**Answer: only $2$ and $5$.**\n\n$(p,q,r)\\in S$ iff the discriminant is a perfect square: $q^2-4pr=a^2$ for an integer $a\\ge0$.\n\n**Examples.** $(2,5,2)$, $(2,5,3)$, $(2,7,5)$, $(2,11,5)$ have discriminants $9,1,9,81$, so they and their reversals $(3,5,2)$, $(5,7,2)$, $(5,11,2)$ lie in $S$. These are $7$ distinct triples, each containing both $2$ and $5$. So $2$ and $5$ each appear in at least seven elements of $S$.\n\n**Structure of $S$.** Since $q^2\\ge4pr\\ge16$, $q\\ge5$ is odd, so $a$ is odd and $q^2\\equiv a^2\\equiv1\\pmod 8$. Then $8\\mid4pr$, so $pr$ is even: **$p=2$ or $r=2$**. If $r=2$: $8p=(q-a)(q+a)$, where both factors are even and positive (their sum $2q$ is positive and their product is positive). Writing $q-a=2u$, $q+a=2v$ with $uv=2p$ and $u<v$ ($a\\neq0$ as $a$ is odd), we get $(u,v)\\in\\{(1,2p),(2,p)\\}$, so\n$$q\\in\\{2p+1,\\ p+2\\}.$$\nSimilarly, if $p=2$ then $q\\in\\{2r+1,\\ r+2\\}$.\n\n**Counting for an odd prime $\\ell\\ne5$.** Every triple containing $\\ell$ has the form $(2,q,r)$ or $(p,q,2)$ with $\\ell$ in one of the two other positions. For $(2,q,\\ell)$: $q\\in\\{2\\ell+1,\\ell+2\\}$; for $(2,\\ell,r)$: $r\\in\\{\\frac{\\ell-1}2,\\ell-2\\}$; and the same for the reversed forms. So $\\ell$ appears in at most twice as many triples as there are primes among\n$$2\\ell+1,\\quad \\ell+2,\\quad \\tfrac{\\ell-1}{2},\\quad \\ell-2 .$$\n- $\\ell=3$: the list is $7,5,1,1$ — two primes, at most $4$ triples.\n- $\\ell\\ge7$: one of $\\ell-2,\\ell,\\ell+2$ is a multiple of $3$ exceeding $3$; it is not $\\ell$, so $\\ell-2$ and $\\ell+2$ are not both prime. At most $3$ primes in the list, so at most $6$ triples.\n\nHence no prime other than $2$ and $5$ appears seven or more times.\n\n*Remark.* The argument shows $5$ appears in exactly the seven triples listed, while $2$ appears in many more (e.g. $(2,q,r)$ whenever $q=r+2$ are twin primes)."
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "polynomials"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "putnam-2011-b3",
+    "bank": "putnam",
+    "source": {
+      "contest": "Putnam",
+      "paper": "72nd William Lowell Putnam Mathematical Competition (December 3, 2011)",
+      "year": 2011,
+      "number": "B3",
+      "url": "https://kskedlaya.org/putnam-archive/"
+    },
+    "grade": "undergrad",
+    "points": 10,
+    "timeMinutes": null,
+    "type": "text",
+    "prompt": "Let $f$ and $g$ be (real-valued) functions defined on an open interval containing $0$, with $g$ nonzero and continuous at $0$. If $fg$ and $f/g$ are differentiable at $0$, must $f$ be differentiable at 0?",
+    "image": null,
+    "choices": null,
+    "answer": "Yes",
+    "acceptedAnswers": [
+      "yes",
+      "Yes, f must be differentiable",
+      "must be differentiable"
+    ],
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Square root or direct limit",
+        "body": "**Yes.** First, $f = (f/g)\\cdot g$ is continuous at $0$, being a product of functions continuous at $0$ ($f/g$ is differentiable there). Also $g(x)\\neq0$ near $0$ by continuity.\n\n**Case $f(0)\\ne0$.** By continuity $f$ has a constant sign $\\sigma\\in\\{\\pm1\\}$ on a neighbourhood of $0$, and there\n$$f = \\sigma\\sqrt{f^2} = \\sigma\\sqrt{(fg)\\cdot(f/g)} .$$\nThe product $(fg)(f/g)$ is differentiable at $0$ with value $f(0)^2>0$, and $\\sqrt{\\cdot}$ is differentiable at $f(0)^2$, so by the chain rule $f$ is differentiable at $0$.\n\n**Case $f(0)=0$.** Then $(f/g)(0)=0$ and\n$$(f/g)'(0) = \\lim_{x\\to0}\\frac{f(x)}{x\\,g(x)} .$$\nMultiplying by $g(x)\\to g(0)$ gives $\\lim_{x\\to0}\\frac{f(x)}{x} = (f/g)'(0)\\,g(0)$, i.e. $f'(0)$ exists.\n\n**Answer: Yes.** ∎"
+      },
+      {
+        "title": "An algebraic identity",
+        "body": "On a punctured neighbourhood of $0$ where $g\\ne0$ and $g(x)+g(0)\\neq0$ (possible since $g(x)\\to g(0)\\neq0$), put\n$$h_1=\\frac{f(x)g(x)-f(0)g(0)}{x},\\quad h_2=\\frac{f(x)g(0)-f(0)g(x)}{x\\,g(0)g(x)},\\quad h_3=g(0)g(x),\\quad h_4=\\frac1{g(x)+g(0)} .$$\nAs $x\\to0$: $h_1\\to(fg)'(0)$; $h_2 = \\frac{(f/g)(x)-(f/g)(0)}{x}\\to(f/g)'(0)$; $h_3\\to g(0)^2$; $h_4\\to\\frac1{2g(0)}$. And\n$$(h_1+h_2h_3)h_4 = \\frac{f(x)g(x)-f(0)g(0)+f(x)g(0)-f(0)g(x)}{x\\,(g(x)+g(0))} = \\frac{\\big(f(x)-f(0)\\big)\\big(g(x)+g(0)\\big)}{x\\,(g(x)+g(0))} = \\frac{f(x)-f(0)}{x}.$$\nSo the difference quotient of $f$ has a limit, namely $f'(0) = \\frac{(fg)'(0)+g(0)^2(f/g)'(0)}{2g(0)}$.\n\n**Answer: Yes.** ∎"
+      }
+    ],
+    "topics": [
+      "real-analysis",
+      "calculus"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "putnam-2011-b4",
+    "bank": "putnam",
+    "source": {
+      "contest": "Putnam",
+      "paper": "72nd William Lowell Putnam Mathematical Competition (December 3, 2011)",
+      "year": 2011,
+      "number": "B4",
+      "url": "https://kskedlaya.org/putnam-archive/"
+    },
+    "grade": "undergrad",
+    "points": 10,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "In a tournament, 2011 players meet 2011 times to play a multiplayer game. Every game is played by all 2011 players together and ends with each of the players either winning or losing. The standings are kept in two $2011 \\times 2011$ matrices, $T = (T_{hk})$ and $W = (W_{hk})$. Initially, $T=W=0$. After every game, for every $(h,k)$ (including for $h=k$), if players $h$ and $k$ tied (that is, both won or both lost), the entry $T_{hk}$ is increased by 1, while if player $h$ won and player $k$ lost, the entry $W_{hk}$ is increased by 1 and $W_{kh}$ is decreased by 1.\n\nProve that at the end of the tournament, $\\det(T+iW)$ is a non-negative integer divisible by $2^{2010}$.",
+    "image": null,
+    "choices": null,
+    "answer": "Proof. With $A_{jk}=1$ if player $k$ wins game $j$ and $i$ if they lose, $T+iW=\\overline{A}^{T}A$, so $\\det(T+iW)=|\\det A|^2$; subtracting the first row from the others shows $\\det A=(1-i)^{2010}(a+bi)$ with $a,b\\in\\mathbb Z$, giving $2^{2010}(a^2+b^2)$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Factor $T+iW$ as $A^*A$ (Kedlaya–Ng)",
+        "body": "Number the games $1,\\dots,2011$ and define the $2011\\times2011$ matrix $A$ by\n$$a_{jk} = \\begin{cases}1 & \\text{if player } k \\text{ wins game } j,\\\\ i & \\text{if player } k \\text{ loses game } j.\\end{cases}$$\n\n**$T+iW = \\overline{A}^{T}A$.** The $(h,k)$ entry of $\\overline{A}^TA$ is $\\sum_j\\overline{a_{jh}}\\,a_{jk}$. In game $j$ the summand is\n- $1\\cdot1=1$ if both win, $\\ (-i)\\cdot i=1$ if both lose (a tie);\n- $1\\cdot i = i$ if $h$ wins and $k$ loses;\n- $(-i)\\cdot1=-i$ if $h$ loses and $k$ wins.\n\nBy the rules, $T_{hk}$ counts ties and $W_{hk}$ equals (games $h$ won and $k$ lost) minus (games $h$ lost and $k$ won). So the sum is exactly $T_{hk}+iW_{hk}$.\n\n**The determinant.** Hence\n$$\\det(T+iW) = \\det(\\overline{A}^T)\\det A = \\overline{\\det A}\\,\\det A = |\\det A|^2 \\ge 0 .$$\nSubtract the first row of $A$ from each other row; this keeps the determinant. Each entry of the new rows $2,\\dots,2011$ is a difference of two elements of $\\{1,i\\}$, i.e. one of $0,\\ 1-i,\\ i-1$, which is $(1-i)$ times an integer. Factoring $(1-i)$ out of these $2010$ rows, and noting the remaining matrix has entries in $\\mathbb{Z}[i]$,\n$$\\det A = (1-i)^{2010}(a+bi),\\qquad a,b\\in\\mathbb{Z}.$$\nSince $|1-i|^2=2$,\n$$\\det(T+iW) = |1-i|^{4020}\\,|a+bi|^2 = 2^{2010}(a^2+b^2),$$\na non-negative integer divisible by $2^{2010}$. ∎"
+      }
+    ],
+    "topics": [
+      "linear-algebra",
+      "complex-numbers"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "putnam-2011-b5",
+    "bank": "putnam",
+    "source": {
+      "contest": "Putnam",
+      "paper": "72nd William Lowell Putnam Mathematical Competition (December 3, 2011)",
+      "year": 2011,
+      "number": "B5",
+      "url": "https://kskedlaya.org/putnam-archive/"
+    },
+    "grade": "undergrad",
+    "points": 10,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $a_1, a_2, \\dots$ be real numbers. Suppose that there is a constant $A$ such that for all $n$,\n$$\\int_{-\\infty}^\\infty \\left( \\sum_{i=1}^n \\frac{1}{1 + (x-a_i)^2} \\right)^2\\,dx \\leq An.$$\nProve there is a constant $B>0$ such that for all $n$,\n$$\\sum_{i,j=1}^n (1 + (a_i - a_j)^2) \\geq Bn^3.$$",
+    "image": null,
+    "choices": null,
+    "answer": "Proof. Expanding, the integral is $\\sum_{i,j}\\phi(a_i-a_j)$ with $\\phi(y)=\\int\\frac{dx}{(1+x^2)(1+(x+y)^2)}\\ge\\frac{1}{4(1+y^2)}$, so $\\sum_{i,j}\\frac{1}{1+(a_i-a_j)^2}\\le4An$; Cauchy–Schwarz then gives $\\sum(1+(a_i-a_j)^2)\\ge n^4/(4An)$, i.e. $B=\\frac{1}{4A}$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Lower bound for the kernel, then Cauchy–Schwarz",
+        "body": "**Expand the square.** For each $n$,\n$$\\int_{-\\infty}^\\infty\\Big(\\sum_{i=1}^n\\frac{1}{1+(x-a_i)^2}\\Big)^2dx = \\sum_{i,j=1}^n\\int_{-\\infty}^\\infty\\frac{dx}{(1+(x-a_i)^2)(1+(x-a_j)^2)} = \\sum_{i,j=1}^n\\phi(a_j-a_i),$$\nwhere (substituting $x\\mapsto x+a_j$)\n$$\\phi(y) = \\int_{-\\infty}^\\infty\\frac{dx}{(1+x^2)(1+(x+y)^2)} .$$\nThe substitution $x\\mapsto-x$ shows $\\phi(-y)=\\phi(y)$.\n\n**Lower bound for $\\phi$.** Let $y\\ge0$ and restrict to $x\\in[-1,0]$. Then $1+x^2\\le2$ and $x+y\\in[y-1,y]$, so $(x+y)^2\\le\\max\\big((1-y)^2,y^2\\big)\\le1+y^2$. Hence $(1+x^2)(1+(x+y)^2)\\le2(2+y^2)\\le4(1+y^2)$ and\n$$\\phi(y)\\ge\\int_{-1}^0\\frac{dx}{4(1+y^2)} = \\frac1{4(1+y^2)},$$\nwhich by symmetry holds for all real $y$.\n\n**Conclude.** The hypothesis now gives\n$$\\sum_{i,j=1}^n\\frac{1}{1+(a_i-a_j)^2}\\le 4\\sum_{i,j}\\phi(a_i-a_j)\\le4An .$$\n(In particular $A>0$.) By Cauchy–Schwarz over the $n^2$ pairs $(i,j)$, with $d_{ij}=a_i-a_j$,\n$$n^4 = \\Big(\\sum_{i,j}1\\Big)^2\\le\\Big(\\sum_{i,j}\\frac1{1+d_{ij}^2}\\Big)\\Big(\\sum_{i,j}(1+d_{ij}^2)\\Big)\\le4An\\sum_{i,j}(1+d_{ij}^2).$$\nTherefore $\\sum_{i,j}(1+(a_i-a_j)^2)\\ge\\frac{n^3}{4A}$, and $B=\\frac1{4A}$ works. ∎\n\n*Remark.* In fact $\\phi(y)=\\frac{2\\pi}{4+y^2}$ exactly (convolution of two Cauchy densities), which gives a slightly better constant."
+      }
+    ],
+    "topics": [
+      "inequalities",
+      "real-analysis",
+      "calculus"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "putnam-2011-b6",
+    "bank": "putnam",
+    "source": {
+      "contest": "Putnam",
+      "paper": "72nd William Lowell Putnam Mathematical Competition (December 3, 2011)",
+      "year": 2011,
+      "number": "B6",
+      "url": "https://kskedlaya.org/putnam-archive/"
+    },
+    "grade": "undergrad",
+    "points": 10,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $p$ be an odd prime. Show that for at least $(p+1)/2$ values of $n$ in $\\{0,1,2,\\dots,p-1\\}$,\n$$\\sum_{k=0}^{p-1} k!\\, n^k \\qquad \\text{is not divisible by } p.$$",
+    "image": null,
+    "choices": null,
+    "answer": "Proof (with $0^0=1$). By Wilson, $k!\\equiv(-1)^{k+1}/(p-1-k)!$, so for $n\\ne0$ the sum is $\\equiv -g(-1/n)$ with $g(y)=\\sum_{j<p}y^j/j!$; every root $z$ of $g$ in $\\mathbb F_p$ is a double root of $h(y)=y^p-y+g(y)$ (degree $p$), so $g$ has at most $(p-1)/2$ roots.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Wilson's theorem and double roots (Kedlaya–Ng)",
+        "body": "We use the convention $0^0=1$ (so $n=0$ gives the sum $0!=1$, not divisible by $p$). Work in $\\mathbb{F}_p$ and let $f(x)=\\sum_{k=0}^{p-1}k!\\,x^k$. We must show $f$ has at most $\\frac{p-1}{2}$ roots in $\\mathbb{F}_p$.\n\n**Wilson's theorem rewrites $f$.** For $0\\le k\\le p-1$,\n$$-1\\equiv(p-1)! = k!\\cdot(k+1)(k+2)\\cdots(p-1)\\equiv k!\\cdot(-1)^{p-1-k}(p-1-k)!\\pmod p,$$\nbecause $p-i\\equiv-i$. As $p$ is odd, $(-1)^{p-1-k}=(-1)^k$, so $k!\\equiv\\dfrac{(-1)^{k+1}}{(p-1-k)!}$. With $j=p-1-k$:\n$$f(x) = \\sum_{j=0}^{p-1}\\frac{(-1)^{p-j}x^{p-1-j}}{j!} = -\\sum_{j=0}^{p-1}\\frac{(-1)^jx^{p-1-j}}{j!} .$$\nFor $x\\in\\mathbb{F}_p^\\times$ we have $x^{p-1}=1$, so\n$$f(x) = -x^{p-1}\\sum_{j=0}^{p-1}\\frac{(-1/x)^j}{j!} = -\\,g(-1/x),\\qquad g(y) = \\sum_{j=0}^{p-1}\\frac{y^j}{j!}.$$\nSince $f(0)=1$, $g(0)=1$ and $x\\mapsto-1/x$ is a bijection of $\\mathbb{F}_p^\\times$, the number of roots of $f$ in $\\mathbb{F}_p$ equals the number of roots of $g$ in $\\mathbb{F}_p$.\n\n**Roots of $g$ are double roots of a degree-$p$ polynomial.** Let $h(y) = y^p-y+g(y)$, a monic polynomial of degree $p$. Its derivative is\n$$h'(y) = -1+\\sum_{j=1}^{p-1}\\frac{y^{j-1}}{(j-1)!} = -1+g(y)-\\frac{y^{p-1}}{(p-1)!} = -1+g(y)+y^{p-1},$$\nusing $(p-1)!\\equiv-1$. If $z\\in\\mathbb{F}_p$ with $g(z)=0$, then $z\\ne0$, so $z^p=z$ and $z^{p-1}=1$; hence $h(z)=0$ and $h'(z)=-1+0+1=0$, so $(y-z)^2$ divides $h$. Distinct roots $z$ give coprime factors $(y-z)^2$, so if $g$ has $r$ roots then $2r\\le\\deg h=p$, i.e. $r\\le\\frac{p-1}{2}$.\n\nTherefore $f(n)\\not\\equiv0\\pmod p$ for at least $p-\\frac{p-1}{2}=\\frac{p+1}{2}$ values $n\\in\\{0,\\dots,p-1\\}$. ∎\n\n*Remark.* With the convention $0^0=0$ the statement would fail for $p=3$."
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "polynomials",
+      "abstract-algebra"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

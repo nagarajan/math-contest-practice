@@ -1,0 +1,181 @@
+[
+  {
+    "id": "cmo-cmo-2001-01",
+    "bank": "cmo",
+    "source": {
+      "contest": "CMO",
+      "paper": "CMO 2001",
+      "year": 2001,
+      "number": 1,
+      "url": "https://cms.math.ca/competitions/cmo/"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "**Randy:** \"Hi Rachel, that's an interesting quadratic equation you have written down. What are its roots?\"\n\n**Rachel:** \"The roots are two positive integers. One of the roots is my age, and the other root is the age of my younger brother, Jimmy.\"\n\n**Randy:** \"That is very neat! Let me see if I can figure out how old you and Jimmy are. That shouldn't be too difficult since all of your coefficients are integers. By the way, I notice that the sum of the three coefficients is a prime number.\"\n\n**Rachel:** \"Interesting. Now figure out how old I am.\"\n\n**Randy:** \"Instead, I will guess your age and substitute it for $x$ in your quadratic equation ... darn, that gives me $-55$, and not $0$.\"\n\n**Rachel:** \"Oh, leave me alone!\"\n\n(a) Prove that Jimmy is two years old.\n\n(b) Determine Rachel's age.",
+    "image": null,
+    "choices": null,
+    "answer": "(a) The sum of the coefficients is $a(R-1)(J-1)$, which can only be prime if $a = 1$ and $J = 2$. (b) Rachel is $18$ (from $(x - R)(x - 2) = -55$ with $R - 1$ prime).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Evaluate the quadratic at x = 1",
+        "body": "Let $R$ be Rachel's age and $J$ Jimmy's, positive integers with $R > J$. The quadratic is $a(x - R)(x - J) = ax^2 - a(R + J)x + aRJ$, and its leading coefficient $a \\ne 0$ is an integer.\n\n**(a)** The sum of the three coefficients is the value at $x = 1$:\n$$a - a(R + J) + aRJ = a(R - 1)(J - 1).$$\nThis is a prime $p > 0$. If $J = 1$ the sum would be $0$, so $J \\ge 2$ and $R \\ge 3$. Then $R - 1 \\ge 2$ and $J - 1 \\ge 1$ are positive, so $a > 0$ too, and $p = a(R-1)(J-1)$ is a product of three positive integers with $R - 1 \\ge 2$. A prime has no such factorization other than $R - 1 = p$, $a = 1$, $J - 1 = 1$. Hence **$J = 2$**, $a = 1$, and $R - 1$ is prime. ∎\n\n**(b)** The quadratic is $(x - R)(x - 2)$, and Randy's guess $g$ (a whole number of years, $g \\ne R$) gives $(g - R)(g - 2) = -55$. The two integer factors differ by $(g - 2) - (g - R) = R - 2 > 0$, so $g - 2 > 0 > g - R$. With $-55 = -5\\cdot 11$, the possibilities are:\n\n| $g - 2$ | $g - R$ | $g$ | $R$ | $R - 1$ |\n|---|---|---|---|---|\n| $1$ | $-55$ | $3$ | $58$ | $57 = 3\\cdot 19$ |\n| $5$ | $-11$ | $7$ | $18$ | $17$ |\n| $11$ | $-5$ | $13$ | $18$ | $17$ |\n| $55$ | $-1$ | $57$ | $58$ | $57$ |\n\nOnly $R = 18$ makes $R - 1$ prime. (The quadratic is $x^2 - 20x + 36$; its coefficients sum to $17$, and Randy guessed $7$ or $13$.)\n\n**Answer: (a) Jimmy is $2$; (b) Rachel is $18$.**"
+      }
+    ],
+    "topics": [
+      "algebra",
+      "number-theory",
+      "polynomials"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "cmo-cmo-2001-02",
+    "bank": "cmo",
+    "source": {
+      "contest": "CMO",
+      "paper": "CMO 2001",
+      "year": 2001,
+      "number": 2,
+      "url": "https://cms.math.ca/competitions/cmo/"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "There is a board numbered $-10$ to $10$ as shown. Each square is coloured either red or white, and the sum of the numbers on the red squares is $n$. Maureen starts with a token on the square labeled $0$. She then tosses a fair coin ten times. Every time she flips heads, she moves the token one square to the right. Every time she flips tails, she moves the token one square to the left. At the end of the ten flips, the probability that the token finishes on a red square is a rational number of the form $\\frac ab$. Given that $a + b = 2001$, determine the largest possible value for $n$.",
+    "image": "qimages/cmo/cmo-2001/q02.webp",
+    "choices": null,
+    "answer": "35",
+    "acceptedAnswers": [
+      "31"
+    ],
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "List the possible probabilities, then the colourings",
+        "body": "**Probabilities.** With $k$ heads the token ends on square $2k - 10$, so it can only end on an even square, and square $2k - 10$ is reached with probability $\\binom{10}{k}/1024$. The weights are\n$$\\binom{10}{0}, \\ldots, \\binom{10}{10} = 1, 10, 45, 120, 210, 252, 210, 120, 45, 10, 1$$\nfor the squares $-10, -8, \\ldots, 8, 10$. So $P(\\text{red}) = \\frac{c}{1024}$, where $c$ is the sum of the weights of the red even squares.\n\nFor each $s \\in \\{10, 8, 6, 4, 2\\}$ let $m_s \\in \\{0, 1, 2\\}$ be the number of red squares among $\\pm s$, and $m_0 \\in \\{0, 1\\}$ for square $0$. Then\n$$c = m_{10} + 10m_8 + 45m_6 + 120m_4 + 210m_2 + 252m_0.$$\nOdd squares do not affect $c$, so to make $n$ large colour the positive odd squares red and the negative odd ones white ($+25$); if $m_s = 2$ the pair $\\pm s$ contributes $0$; if $m_s = 1$ colour $+s$ red. So for given $m$'s the largest $n$ is\n$$n = 25 + \\sum_{s:\\ m_s = 1} s.$$\n\n**Which $c$ are allowed.** We need integers $a \\ge 0$, $b > 0$ with $a + b = 2001$ and $\\frac ab = \\frac c{1024}$. Then $b = \\frac{2001\\cdot 1024}{1024 + c}$, so $D = 1024 + c$ is a divisor of $2^{10}\\cdot 3\\cdot 23\\cdot 29$ in $[1024, 2048]$ (as $0 \\le c \\le 1024$). Writing $D = 2^e d$ with $d \\mid 2001$, $e \\le 10$, the only such divisors are\n$$1024,\\ 1104 = 16\\cdot 69,\\ 1334 = 2\\cdot 667,\\ 1392 = 16\\cdot 87,\\ 1472 = 64\\cdot 23,\\ 1536 = 512\\cdot 3,\\ 1856 = 64\\cdot 29,\\ 2001,$$\nso $c \\in \\{0, 80, 310, 368, 448, 512, 832, 977\\}$.\n\n**Which $c$ can be formed.** Mod $10$: $c \\equiv m_{10} + 5m_6 + 2m_0$. Running through the $18$ choices of $(m_{10}, m_6, m_0)$ gives these options for $B = m_{10} + 45m_6 + 252m_0$:\n- $c \\equiv 0$: $B = 0$ or $90$; $\\;c \\equiv 2$: $B = 2, 92, 252, 342$; $\\;c \\equiv 7$: $B = 47, 297$; $\\;c \\equiv 8$: $B = 298$.\n\nThen $\\frac{c - B}{10} = m_8 + 12m_4 + 21m_2$ must lie in the set $\\{0,1,2,12,13,14,24,25,26,\\ 21,22,23,33,34,35,45,46,47,\\ 42,43,44,54,55,56,66,67,68\\}$ (all values different, so the representation is unique). Checking each $c$:\n- $c = 0$: only all $m = 0$; $n = 25$.\n- $c = 80$: $\\frac{80}{10} = 8$ — not in the set; impossible.\n- $c = 310$: $B = 0$ gives $31$ (no); $B = 90$ gives $22 = 1 + 21$: $m_6 = 2$, $m_8 = 1$, $m_2 = 1$; $n = 25 + 8 + 2 = 35$.\n- $c = 368, 448$: $B = 298$ gives $7$, $15$ — impossible.\n- $c = 512$: $B = 92$ gives $42$ ($m_{10} = m_6 = m_2 = 2$) and $B = 252$ gives $26$ ($m_0 = 1$, $m_8 = m_4 = 2$); $B = 2, 342$ give $51, 17$ (no). Either way $n = 25$.\n- $c = 832$: $83, 74, 58, 49$ — impossible.\n- $c = 977$: $B = 47$ gives $93$ (no); $B = 297$ gives $68$: $m_6 = m_0 = 1$, $m_8 = m_4 = m_2 = 2$; $n = 25 + 6 = 31$.\n\nSo the largest value is $n = 35$: red squares $1, 3, 5, 7, 9, -6, 6, 2, 8$, probability $\\frac{45 + 45 + 210 + 10}{1024} = \\frac{310}{1024} = \\frac{465}{1536}$, and $465 + 1536 = 2001$.\n\n**Caveat.** The proposers intended $\\frac ab$ to be in lowest terms (this was lost from the final wording). Under that reading $b$ must be a power of $2$ with $1001 \\le b \\le 2001$, so $b = 1024$, $c = 977$ and the answer is $n = 31$ (red squares $1, 3, 5, 7, 9, 0, 6, \\pm 8, \\pm 4, \\pm 2$). As literally stated, the answer is $35$.\n\n**Answer: $35$** ($31$ if $\\frac ab$ must be in lowest terms)"
+      }
+    ],
+    "topics": [
+      "probability",
+      "counting",
+      "number-theory"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "cmo-cmo-2001-03",
+    "bank": "cmo",
+    "source": {
+      "contest": "CMO",
+      "paper": "CMO 2001",
+      "year": 2001,
+      "number": 3,
+      "url": "https://cms.math.ca/competitions/cmo/"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Let $ABC$ be a triangle with $AC > AB$. Let $P$ be the intersection point of the perpendicular bisector of $BC$ and the internal angle bisector of $\\angle A$. Construct points $X$ on $AB$ (extended) and $Y$ on $AC$ such that $PX$ is perpendicular to $AB$ and $PY$ is perpendicular to $AC$. Let $Z$ be the intersection point of $XY$ and $BC$. Determine the value of $BZ/ZC$.",
+    "image": "qimages/cmo/cmo-2001/q03.webp",
+    "choices": null,
+    "answer": "1",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Equal tangent-like lengths and Menelaus",
+        "body": "(The figure is deliberately not to scale.)\n\n**Equal lengths.** $P$ is on the bisector of angle $A$, so it is equidistant from the lines $AB$ and $AC$: $PX = PY$. $P$ is on the perpendicular bisector of $BC$: $PB = PC$. By Pythagoras in the right triangles $PXA$, $PYA$, $PXB$, $PYC$:\n$$AX^2 = AP^2 - PX^2 = AP^2 - PY^2 = AY^2, \\qquad BX^2 = PB^2 - PX^2 = PC^2 - PY^2 = CY^2.$$\nSo $AX = AY$ and $BX = CY$.\n\n**Non-degeneracy.** $X \\ne A$, since line $AP$ makes the acute angle $\\frac A2$ with $AB$, not $90^\\circ$; so $AX = AY > 0$ and $Y \\ne A$. Also $X \\ne B$: otherwise $BX = 0 = CY$, $Y = C$, and line $XY$ would be $BC$ itself. Hence $Y \\ne C$, and $Z \\ne B, C$ (if line $XY$ passed through $B$ it would be line $AB$, forcing $Y = A$). So line $XYZ$ passes through no vertex.\n\n**Menelaus.** For the transversal $XYZ$ of triangle $ABC$ (unsigned lengths),\n$$\\frac{AX}{XB}\\cdot\\frac{BZ}{ZC}\\cdot\\frac{CY}{YA} = 1 \\quad\\Longrightarrow\\quad \\frac{BZ}{ZC} = \\frac{XB}{CY}\\cdot\\frac{YA}{AX} = 1.$$\nSo $Z$ is the midpoint $M$ of $BC$ — even though the figure suggests otherwise.\n\n**Answer: $BZ/ZC = 1$**"
+      },
+      {
+        "title": "Simson line",
+        "body": "Let the internal bisector from $A$ meet the circumcircle of $ABC$ again at $R$. The inscribed angles $\\angle BAR = \\angle CAR$ are equal, so the chords $BR = CR$ are equal, and $R$ lies on the perpendicular bisector of $BC$. The bisector of $\\angle A$ and the perpendicular bisector of $BC$ are different lines (they coincide only when $AB = AC$), so they meet in just one point: $P = R$ lies on the circumcircle.\n\nThe feet of the perpendiculars from $P$ to the three side lines are $X$ (on $AB$), $Y$ (on $CA$) and the midpoint $M$ of $BC$ (since $PM \\perp BC$ along the perpendicular bisector). By Simson's theorem, the feet of the perpendiculars from a point of the circumcircle to the sides are collinear. So $M$ lies on line $XY$, i.e. $Z = M$ and $BZ/ZC = 1$.\n\n**Answer: $1$**"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "cmo-cmo-2001-04",
+    "bank": "cmo",
+    "source": {
+      "contest": "CMO",
+      "paper": "CMO 2001",
+      "year": 2001,
+      "number": 4,
+      "url": "https://cms.math.ca/competitions/cmo/"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Let $n$ be a positive integer. Nancy is given a rectangular table in which each entry is a positive integer. She is permitted to make either of the following two moves:\n\n(a) select a row and multiply each entry in this row by $n$.\n\n(b) select a column and subtract $n$ from each entry in this column.\n\nFind all possible values of $n$ for which the following statement is true:\n\n> Given any rectangular table, it is possible for Nancy to perform a finite sequence of moves to create a table in which each entry is $0$.",
+    "image": null,
+    "choices": null,
+    "answer": "2",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "An invariant mod n − 1, and an algorithm for n = 2",
+        "body": "The answer is $n = 2$ only.\n\n**$n = 1$ fails.** Take the $2\\times 1$ table with entries $1, 2$. Multiplying a row by $1$ changes nothing and subtracting $1$ from the column keeps the difference of the two entries equal to $1$, so they never both become $0$.\n\n**$n \\ge 3$ fails.** Take the $2 \\times 1$ table with entries $a = 1$ (top), $b = n - 1$ (bottom), and consider $b - a \\pmod{n-1}$. Subtracting $n$ from the column does not change $b - a$. Multiplying the top row by $n$ changes $a$ to $na = a + (n-1)a$, which changes $b - a$ by a multiple of $n - 1$; similarly for the bottom row. So $b - a \\bmod (n-1)$ is invariant. Initially $b - a = n - 2 \\not\\equiv 0 \\pmod{n-1}$ (as $0 < n - 2 < n - 1$), while the all-zero table has $b - a = 0$. So it is unreachable.\n\n**$n = 2$ works.** We clear the columns one at a time. Note that doubling a row keeps all-zero columns zero and keeps the entries of the not-yet-treated columns positive integers, so it suffices to turn one column of positive integers into zeros. Repeat the following round while the column has an entry $\\ge 3$:\n1. double every row whose entry in this column is $1$ (it becomes $2$);\n2. double every row whose entry in this column is now $2$ (it becomes $4$);\n3. subtract $2$ from the column.\n\nAfter a round, entries that were $1$ or $2$ are $4 - 2 = 2$, and an entry $e \\ge 3$ becomes $e - 2 \\ge 1$. So all entries stay positive, and the sum of the entries that are $\\ge 3$ strictly decreases (each such entry drops by $2$, and no new entry $\\ge 3$ appears). Hence after finitely many rounds every entry is $1$ or $2$. Then double the rows with a $1$ (all entries become $2$) and subtract $2$: the column is zero.\n\nDoing this for each column in turn gives the zero table.\n\n**Answer: $n = 2$**"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "logic",
+      "games"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "cmo-cmo-2001-05",
+    "bank": "cmo",
+    "source": {
+      "contest": "CMO",
+      "paper": "CMO 2001",
+      "year": 2001,
+      "number": 5,
+      "url": "https://cms.math.ca/competitions/cmo/"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $P_0$, $P_1$, $P_2$ be three points on the circumference of a circle with radius $1$, where $P_1P_2 = t < 2$. For each $i \\ge 3$, define $P_i$ to be the centre of the circumcircle of $\\triangle P_{i-1}P_{i-2}P_{i-3}$.\n\n(a) Prove that the points $P_1, P_5, P_9, P_{13}, \\ldots$ are collinear.\n\n(b) Let $x$ be the distance from $P_1$ to $P_{1001}$, and let $y$ be the distance from $P_{1001}$ to $P_{2001}$. Determine all values of $t$ for which $\\sqrt[500]{x/y}$ is an integer.",
+    "image": null,
+    "choices": null,
+    "answer": "(a) A spiral similarity $S$ (angle $90^\\circ$, ratio $r = \\frac{1}{2\\sin 2\\alpha}$, where $t = 2\\sin\\alpha$) maps each $P_k$ to $P_{k+2}$, so $S^2$ is a homothety with ratio $-r^2$ and $P_1, P_5, P_9, \\ldots$ lie on a line through its centre. (b) $\\sqrt[500]{x/y} = 1/r = t\\sqrt{4 - t^2}$; it is an integer only for $t = \\sqrt2$ (value $2$). (The official solution also lists $t = 2\\sin 15^\\circ, 2\\sin 75^\\circ$, but for these $x = y = 0$.)",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "A spiral similarity shifts the sequence by two",
+        "body": "**Set-up.** $P_3$ is the circumcentre of $P_2P_1P_0$, i.e. the centre of the given circle. Let $2\\alpha = \\angle P_1P_3P_2$; since $0 < t < 2$, $0^\\circ < \\alpha < 90^\\circ$ and $t = 2\\sin\\alpha$. Isometries (including reflections) map circumcentres to circumcentres and preserve distances, so we may use complex coordinates with\n$$P_3 = 0, \\qquad P_1 = e^{-i\\alpha}, \\qquad P_2 = e^{i\\alpha}.$$\n\n**$P_4$ and $P_5$.** $P_4$ is equidistant from $0$, $e^{\\pm i\\alpha}$; by symmetry it is real, $P_4 = R$ with $R^2 = (R - \\cos\\alpha)^2 + \\sin^2\\alpha$, so $P_4 = \\frac{1}{2\\cos\\alpha}$. $P_5 = u + iv$ is equidistant from $0$, $P_4$, $P_2$: so $u = \\frac{1}{4\\cos\\alpha}$, and $u\\cos\\alpha + v\\sin\\alpha = \\frac12$ gives $v = \\frac{1}{4\\sin\\alpha}$. With $r = \\frac{1}{2\\sin 2\\alpha} = \\frac{1}{4\\sin\\alpha\\cos\\alpha}$ this is\n$$P_5 = r(\\sin\\alpha + i\\cos\\alpha) = ir\\,e^{-i\\alpha}.$$\n\n**The similarity.** Let $S(z) = P_5 - irz$, a rotation by $-90^\\circ$ combined with scaling by $r$. Then\n$$S(P_3) = P_5, \\qquad S(P_1) = P_5 - ire^{-i\\alpha} = 0 = P_3, \\qquad S(P_2) = ir\\left(e^{-i\\alpha} - e^{i\\alpha}\\right) = 2r\\sin\\alpha = \\frac{1}{2\\cos\\alpha} = P_4.$$\n\n**Claim: $S(P_k) = P_{k+2}$ for all $k \\ge 1$** (and every triangle used is non-degenerate). True for $k = 1, 2, 3$; the triangles $P_1P_2P_3$ and $P_2P_3P_4$ are non-degenerate ($P_1P_2$ is not a diameter; $P_2 \\notin \\mathbb R$ while $P_3, P_4 \\in \\mathbb R$). If it holds for $k, k+1, k+2$, then, since a similarity maps a non-degenerate triangle to a non-degenerate one and its circumcentre to the circumcentre of the image,\n$$S(P_{k+3}) = S\\big(\\text{circumcentre of } P_{k+2}P_{k+1}P_k\\big) = \\text{circumcentre of } P_{k+4}P_{k+3}P_{k+2} = P_{k+5}.$$\n\n**(a)** Compute $S^2(z) = P_5 - ir(P_5 - irz) = (1 - ir)P_5 - r^2z$. With $c = \\frac{(1 - ir)P_5}{1 + r^2}$ this reads\n$$S^2(z) - c = -r^2(z - c),$$\na homothety with centre $c$ and ratio $-r^2$. Since $S^2(P_k) = P_{k+4}$,\n$$P_{4j+1} - c = (-r^2)^j(P_1 - c) \\qquad (j \\ge 0),$$\nso all of $P_1, P_5, P_9, \\ldots$ lie on the line through $c$ and $P_1$. (Here $P_1 \\ne c$: $c = \\frac{(r^2 + ir)e^{-i\\alpha}}{1 + r^2}$ equals $e^{-i\\alpha}$ only if $ir = 1$, impossible.) ∎\n\n**(b)** From the formula with $j = 250$ and $j = 500$:\n$$P_{1001} - c = r^{500}(P_1 - c), \\qquad P_{2001} - c = r^{1000}(P_1 - c).$$\nHence $x = |r^{500} - 1|\\cdot|P_1 - c|$ and $y = r^{500}|r^{500} - 1|\\cdot|P_1 - c| = r^{500}x$.\n- If $r = 1$, then $P_{1001} = P_1$ and $P_{2001} = P_{1001}$: $x = y = 0$ and $x/y$ is undefined.\n- If $r \\ne 1$, then $x > 0$ and\n$$\\sqrt[500]{x/y} = \\frac1r = 2\\sin 2\\alpha = 4\\sin\\alpha\\cos\\alpha = t\\sqrt{4 - t^2}.$$\nSince $0^\\circ < 2\\alpha < 180^\\circ$, this lies in $(0, 2]$, so it is an integer only if it equals $1$ or $2$. The value $1$ means $r = 1$, excluded. The value $2$ means $\\sin 2\\alpha = 1$, $\\alpha = 45^\\circ$, $t = 2\\sin 45^\\circ = \\sqrt2$; then $r = \\frac12$, $x/y = 2^{500}$, and the root is $2$.\n\n**Answer:** (a) proved above; (b) $t = \\sqrt2$.\n\n*Remark.* The official solution gives $t \\in \\{2\\sin 15^\\circ, 2\\sin 45^\\circ, 2\\sin 75^\\circ\\}$, from $2\\sin 2\\alpha \\in \\{1, 2\\}$. But for $t = 2\\sin 15^\\circ = \\frac{\\sqrt6 - \\sqrt2}{2}$ and $t = 2\\sin 75^\\circ = \\frac{\\sqrt6 + \\sqrt2}{2}$ we have $r = 1$: the points $P_1, P_5, P_9, \\ldots$ alternate between two positions, $P_{1001} = P_1$, and $x = y = 0$. These values count only under the convention $\\sqrt[500]{0/0} = 1$."
+      }
+    ],
+    "topics": [
+      "geometry",
+      "complex-numbers",
+      "sequences-series"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

@@ -1,0 +1,173 @@
+[
+  {
+    "id": "cmo-cmo-2019-01",
+    "bank": "cmo",
+    "source": {
+      "contest": "CMO",
+      "paper": "CMO 2019",
+      "year": 2019,
+      "number": 1,
+      "url": "https://cms.math.ca/competitions/cmo/"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Amy has drawn three points in a plane, $A$, $B$, and $C$, such that $AB = BC = CA = 6$. Amy is allowed to draw a new point if it is the circumcenter of a triangle whose vertices she has already drawn. For example, she can draw the circumcenter $O$ of triangle $ABC$, and then afterwards she can draw the circumcenter of triangle $ABO$.\n\n(a) Prove that Amy can eventually draw a point whose distance from a previously drawn point is greater than $7$.\n\n(b) Prove that Amy can eventually draw a point whose distance from a previously drawn point is greater than $2019$.\n\n(Recall that the circumcenter of a triangle is the center of the circle that passes through its three vertices.)",
+    "image": null,
+    "choices": null,
+    "answer": "Draw $O$ (center of $ABC$), $A_1$ (center of $BOC$), $A_2$ (center of $OBA_1$), $A_3$ (center of $BA_2A_1$); then $AA_3 = \\sqrt{52} > 7$ and $OA_3 = 4 > 2\\sqrt3 = OA$. Repeating the construction rotated by $\\pm120^\\circ$ gives an equilateral triangle centered at $O$ scaled by $\\frac{2}{\\sqrt3}$; iterate.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Coordinates and a self-similar construction",
+        "body": "**(a)** Place $B = (0,0)$, $C = (6,0)$, $A = (3, 3\\sqrt3)$, so $AB = BC = CA = 6$. Amy draws, in order:\n\n- $O = (3, \\sqrt3)$: $OA = OB = OC = 2\\sqrt3$ (e.g. $OB^2 = 9 + 3 = 12$, $OA = 3\\sqrt3 - \\sqrt3$), so $O$ is the circumcenter of $\\triangle ABC$.\n- $A_1 = (3, -\\sqrt3)$: $A_1B^2 = A_1C^2 = 9 + 3 = 12$ and $A_1O = 2\\sqrt3$, so $A_1$ is the circumcenter of $\\triangle BOC$.\n- $A_2 = (2, 0)$: $A_2B = 2$, $A_2O^2 = 1 + 3 = 4$, $A_2A_1^2 = 1 + 3 = 4$, so $A_2$ is the circumcenter of $\\triangle OBA_1$ (a genuine triangle, as $O$, $B$, $A_1$ are not collinear).\n- $A_3 = (1, -\\sqrt3)$: $A_3B^2 = 1 + 3 = 4$, $A_3A_2^2 = 1 + 3 = 4$, $A_3A_1 = 2$, so $A_3$ is the circumcenter of $\\triangle BA_2A_1$ (not collinear either).\n\nThen $AA_3^2 = (3-1)^2 + (3\\sqrt3 + \\sqrt3)^2 = 4 + 48 = 52 > 49$, so the new point $A_3$ is at distance $\\sqrt{52} > 7$ from the previously drawn point $A$.\n\n**(b)** In the construction above, $OA_3^2 = (3-1)^2 + (\\sqrt3+\\sqrt3)^2 = 4 + 12 = 16$, so $OA_3 = 4$, while $OA = 2\\sqrt3$.\n\nThe rotation $\\rho$ by $120^\\circ$ about $O$ maps $A \\mapsto B \\mapsto C \\mapsto A$, and it maps circumcenters to circumcenters. Hence, performing the same construction on the rotated triangles (starting from $C, A$ instead of $B, C$, and so on), Amy can draw $B_3 = \\rho(A_3)$ and $C_3 = \\rho^2(A_3)$. The triangle $A_3B_3C_3$ is equilateral with center $O$ and circumradius $4 = \\lambda \\cdot 2\\sqrt3$, where $\\lambda = \\frac{2}{\\sqrt3} > 1$; it is the image of $ABC$ under a rotation-and-scaling about $O$ by factor $\\lambda$, and $O$ is also its circumcenter (already drawn).\n\nBecause the whole construction only uses $A$, $B$, $C$ and the circumcenter $O$, Amy can repeat it starting from $A_3B_3C_3$ (whose circumcenter $O$ she already has), obtaining an equilateral triangle centered at $O$ with circumradius $2\\sqrt3\\,\\lambda^2$, and so on. After $j$ rounds she has drawn a vertex $X$ with $OX = 2\\sqrt3\\,\\lambda^j$, and since $\\lambda > 1$ this exceeds $2019$ for large $j$. The last vertex drawn is then at distance more than $2019$ from the previously drawn point $O$. ∎"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "cmo-cmo-2019-02",
+    "bank": "cmo",
+    "source": {
+      "contest": "CMO",
+      "paper": "CMO 2019",
+      "year": 2019,
+      "number": 2,
+      "url": "https://cms.math.ca/competitions/cmo/"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $a$ and $b$ be positive integers such that $a + b^3$ is divisible by $a^2 + 3ab + 3b^2 - 1$. Prove that $a^2 + 3ab + 3b^2 - 1$ is divisible by the cube of an integer greater than $1$.",
+    "image": null,
+    "choices": null,
+    "answer": "With $Z = a^2+3ab+3b^2-1$: $(a+b)^3 = a(Z+1) + b^3 = aZ + (a + b^3)$, so $Z \\mid (a+b)^3$. If $Z$ were cube-free it would divide $(a+b)^2 < Z$, impossible.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Compare with $(a+b)^3$",
+        "body": "Let $Z = a^2 + 3ab + 3b^2 - 1$, a positive integer ($Z \\ge 6$). Since\n$$(a+b)^3 = a^3 + 3a^2b + 3ab^2 + b^3 = a(a^2 + 3ab + 3b^2) + b^3 = a(Z+1) + b^3 = aZ + (a + b^3),$$\nand $Z \\mid a + b^3$ by hypothesis, we get $Z \\mid (a+b)^3$.\n\nSuppose, for contradiction, that $Z$ is not divisible by the cube of any integer greater than $1$; then every prime appears in $Z$ with exponent at most $2$. Let $p$ be a prime with $p^f \\parallel Z$, $f \\ge 1$, and $p^e \\parallel a + b$. From $Z \\mid (a+b)^3$ we get $f \\le 3e$, so $e \\ge 1$ and therefore $f \\le 2 \\le 2e$. This holds for every prime factor of $Z$, so $Z \\mid (a+b)^2$, and in particular $Z \\le (a+b)^2$.\n\nBut\n$$Z - (a+b)^2 = ab + 2b^2 - 1 \\ge 1 + 2 - 1 > 0,$$\nso $Z > (a+b)^2$ — a contradiction. Hence $Z$ is divisible by the cube of an integer greater than $1$. ∎\n\n(Such pairs exist: e.g. $(a,b) = (3,5)$ gives $Z = 128 = 2^7$ and $a + b^3 = 128$.)"
+      }
+    ],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "cmo-cmo-2019-03",
+    "bank": "cmo",
+    "source": {
+      "contest": "CMO",
+      "paper": "CMO 2019",
+      "year": 2019,
+      "number": 3,
+      "url": "https://cms.math.ca/competitions/cmo/"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $m$ and $n$ be positive integers. A $2m \\times 2n$ grid of squares is coloured in the usual chessboard fashion. Find the number of ways of placing $mn$ counters on the white squares, at most one counter per square, so that no two counters are on white squares that are diagonally adjacent. An example of a way to place the counters when $m = 2$ and $n = 3$ is shown below.",
+    "image": "qimages/cmo/cmo-2019/q03.webp",
+    "choices": null,
+    "answer": "$\\dbinom{m+n}{m}$",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Split into $2\times 2$ blocks",
+        "body": "Orient the board so that its top-left square is white (as in the picture; the colouring is symmetric under a $180^\\circ$ rotation, so this is no loss). Number rows $0, \\dots, 2m-1$ from the top and columns $0, \\dots, 2n-1$ from the left; square $(r, c)$ is white iff $r + c$ is even.\n\n**One counter per block.** Cut the board into $mn$ blocks $\\{2i, 2i+1\\} \\times \\{2j, 2j+1\\}$ ($0 \\le i < m$, $0 \\le j < n$). Each block has exactly two white squares, its upper-left $(2i, 2j)$ and lower-right $(2i+1, 2j+1)$, and they are diagonally adjacent, so a block holds at most one counter. With $mn$ counters, every block holds exactly one. Call block $(i,j)$ *U* if its counter is upper-left and *L* if lower-right.\n\n**When are two counters diagonally adjacent?** Two U-counters lie in even rows and two L-counters in odd rows, so neither pair can be in adjacent rows. A U-counter $(2i', 2j')$ and an L-counter $(2i+1, 2j+1)$ are diagonally adjacent iff $|2i' - (2i+1)| = 1$ and $|2j' - (2j+1)| = 1$, i.e. iff $i' \\in \\{i, i+1\\}$ and $j' \\in \\{j, j+1\\}$; since one block holds only one counter, $(i', j') \\ne (i, j)$. So the U-block must be directly below, directly right of, or diagonally below-right of the L-block. Hence a placement is valid if and only if\n\n> no L-block is directly above, directly left of, or diagonally up-left of a U-block.\n\nEquivalently: if block $(i,j)$ is U, then so are $(i-1, j)$ and $(i, j-1)$ (when they exist) — the diagonal condition then follows by applying these twice.\n\n**Counting.** So the U-blocks in each block row $i$ form an initial segment of that row, of length $\\lambda_i \\in \\{0, 1, \\dots, n\\}$, and the condition \"the block above a U-block is U\" says $\\lambda_0 \\ge \\lambda_1 \\ge \\dots \\ge \\lambda_{m-1}$. Conversely, every such sequence gives a valid placement. Non-increasing sequences of length $m$ with values in $\\{0, \\dots, n\\}$ correspond bijectively to lattice paths with $m$ vertical and $n$ horizontal unit steps (the staircase boundary between the U-region and the L-region), so their number is $\\binom{m+n}{m}$.\n\n**Answer: $\\dbinom{m+n}{m}$.** (Check: $m = n = 1$ gives $2$ — the counter on either white square.) ∎"
+      }
+    ],
+    "topics": [
+      "counting"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "cmo-cmo-2019-04",
+    "bank": "cmo",
+    "source": {
+      "contest": "CMO",
+      "paper": "CMO 2019",
+      "year": 2019,
+      "number": 4,
+      "url": "https://cms.math.ca/competitions/cmo/"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $n$ be an integer greater than $1$, and let $a_0, a_1, \\dots, a_n$ be real numbers with $a_1 = a_{n-1} = 0$. Prove that for any real number $k$,\n$$|a_0| - |a_n| \\le \\sum_{i=0}^{n-2} \\left|a_i - k a_{i+1} - a_{i+2}\\right|.$$",
+    "image": null,
+    "choices": null,
+    "answer": "Let $z$ be the root of $z^2 - kz - 1 = 0$ with $|z| \\le 1$. Then $\\sum_{i=0}^{n-2} (a_i - ka_{i+1} - a_{i+2})z^{i+2} = a_0z^2 - a_nz^n$; apply the triangle inequality and divide by $|z|^2$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "A generating-function identity",
+        "body": "Write $c_i = a_i - k a_{i+1} - a_{i+2}$ for $0 \\le i \\le n-2$. The quadratic $x^2 - kx - 1$ has discriminant $k^2 + 4 > 0$, so it has two real roots whose product is $-1$; let $z$ be one with $|z| \\le 1$. Note $z \\ne 0$ and $z(z - k) = 1$.\n\nLet $A(x) = \\sum_{j=0}^n a_j x^j$. Using $a_1 = a_{n-1} = 0$,\n$$\\sum_{i=0}^{n-2} a_i z^{i+2} = z^2\\bigl(A(z) - a_n z^n\\bigr), \\quad \\sum_{i=0}^{n-2} a_{i+1} z^{i+2} = z\\bigl(A(z) - a_0 - a_n z^n\\bigr), \\quad \\sum_{i=0}^{n-2} a_{i+2} z^{i+2} = A(z) - a_0.$$\n(For the first, the terms $j = n-1, n$ are missing and $a_{n-1} = 0$; for the second the terms $j = 0$ and $j = n$ are missing; for the third $j = 0, 1$ are missing and $a_1 = 0$.) Therefore\n$$\\sum_{i=0}^{n-2} c_i z^{i+2} = A(z)\\,(z^2 - kz - 1) + a_0(kz + 1) - a_n z^{n+1}(z - k).$$\nNow $z^2 - kz - 1 = 0$, $kz + 1 = z^2$ and $z^{n+1}(z-k) = z^n \\cdot z(z-k) = z^n$, so\n$$a_0 z^2 = a_n z^n + \\sum_{i=0}^{n-2} c_i z^{i+2}.$$\nBy the triangle inequality and $|z| \\le 1$ (with $n \\ge 2$ and $i + 2 \\ge 2$, so $|z|^n \\le |z|^2$ and $|z|^{i+2} \\le |z|^2$):\n$$|a_0|\\,|z|^2 \\le |a_n|\\,|z|^n + \\sum_{i=0}^{n-2} |c_i|\\,|z|^{i+2} \\le |z|^2 \\Bigl(|a_n| + \\sum_{i=0}^{n-2} |c_i|\\Bigr).$$\nDividing by $|z|^2 > 0$ gives $|a_0| - |a_n| \\le \\sum_{i=0}^{n-2} |a_i - k a_{i+1} - a_{i+2}|$. ∎"
+      },
+      {
+        "title": "Factor the recurrence",
+        "body": "Choose real $b, c$ with $b - c = -k$ and $bc = 1$ and $|c| \\le 1$: they are the roots of $x^2 + Rx + 1$ where $R = \\pm\\sqrt{k^2+4}$ (sign chosen equal to the sign of $k$, any sign if $k = 0$), namely $b, c = \\frac{-R \\mp k}{2}$; $bc = 1$ and $|c| \\le |b|$ give $|c| \\le 1$.\n\nPut $d_i = a_i + b\\,a_{i+1}$ for $0 \\le i \\le n-1$. Then $d_i - c\\,d_{i+1} = a_i + (b - c)a_{i+1} - bc\\,a_{i+2} = a_i - k a_{i+1} - a_{i+2}$. Hence\n$$\\sum_{i=0}^{n-2} |a_i - k a_{i+1} - a_{i+2}| = \\sum_{i=0}^{n-2} |d_i - c\\,d_{i+1}| \\ge \\sum_{i=0}^{n-2} \\bigl(|d_i| - |c|\\,|d_{i+1}|\\bigr) = |d_0| + (1 - |c|)\\sum_{i=1}^{n-2}|d_i| - |c|\\,|d_{n-1}|.$$\nThe middle sum is $\\ge 0$, and $d_0 = a_0 + b a_1 = a_0$, $d_{n-1} = a_{n-1} + b a_n = b a_n$, so the right side is at least $|a_0| - |c|\\,|b|\\,|a_n| = |a_0| - |a_n|$. ∎"
+      }
+    ],
+    "topics": [
+      "inequalities",
+      "algebra"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "cmo-cmo-2019-05",
+    "bank": "cmo",
+    "source": {
+      "contest": "CMO",
+      "paper": "CMO 2019",
+      "year": 2019,
+      "number": 5,
+      "url": "https://cms.math.ca/competitions/cmo/"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "David and Jacob are playing a game of connecting $n \\ge 3$ points drawn in a plane. No three of the points are collinear. On each player's turn, he chooses two points to connect by a new line segment. The first player to complete a cycle consisting of an odd number of line segments loses the game. (Both endpoints of each line segment in the cycle must be among the $n$ given points, not points which arise later as intersections of segments.) Assuming David goes first, determine all $n$ for which he has a winning strategy.",
+    "image": null,
+    "choices": null,
+    "answer": "Exactly when $n \\equiv 2 \\pmod 4$. (A stuck player faces a complete bipartite graph $K_{a,b}$; parity of $ab$ versus the number of moves made decides. For even $n$ a player can force a perfect matching, which forces $a = b = n/2$.)",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Parity of complete bipartite graphs",
+        "body": "Think of the points as vertices of a graph and the segments as edges. Call a move *legal* if it does not create an odd cycle. A player who makes an illegal move loses at once, so we only consider players who move legally while they can; a player loses exactly when he has no legal move.\n\n**Stuck positions.** Suppose the current graph $G$ has no odd cycle (so it is bipartite) and every unused pair is illegal. If $G$ were disconnected, an edge between two components would create no cycle at all, so $G$ is connected and has a unique bipartition $X \\cup Y$. An edge between $X$ and $Y$ keeps $G$ bipartite, so all such edges are present: $G = K_{a,b}$ with $a + b = n$, and $G$ has $ab$ edges. Also, since $K_n$ ($n \\ge 3$) contains a triangle, the game cannot run out of moves before somebody gets stuck; as there are at most $\\binom n2$ moves, the game always ends. Finally, when it is David's turn an even number of edges has been drawn; when it is Jacob's turn, an odd number.\n\n**$n$ odd: Jacob wins.** Let Jacob always make a legal move if possible. If he were ever stuck, the graph would be $K_{a,b}$ with $a + b = n$ odd, so one of $a, b$ is even and $ab$ is even — but it is Jacob's turn, so the number of edges is odd. Contradiction; so Jacob never loses, and since the game ends, David loses.\n\n**A matching strategy for even $n$.** Call a graph *good* if it has a matching covering all non-isolated vertices. *Claim:* if after a player's own move (or at the very start) the graph is good with non-isolated set $A \\ne$ all vertices, then whatever legal move the opponent makes, the player has a legal reply after which the graph is good and its non-isolated set has grown by $2$ (and contains the old one). Let $B$ be the set of isolated vertices; $|A|$ is even (it is matched) and $n$ is even, so $|B| \\ge 2$ is even. Let $M$ be the matching.\n- Opponent joins two vertices of $A$: reply with an edge between two vertices of $B$; add it to $M$.\n- Opponent joins $u, v \\in B$: if $A \\ne \\emptyset$ reply with an edge from $u$ to a vertex of $A$, and add $uv$ to $M$; if $A = \\emptyset$, then $|B| = n \\ge 4$ and we reply with an edge between two other vertices of $B$, adding both edges to $M$.\n- Opponent joins $a \\in A$ to $u \\in B$: since $|B|$ is even there is $w \\in B$, $w \\ne u$; reply with $uw$ and add it to $M$.\n\nIn each case the reply joins two different components (one endpoint was isolated or lies in the component $\\{u, v\\}$ just created), so it creates no cycle and is legal. This proves the claim. Repeating it, a player eventually makes the graph contain a perfect matching (all $n$ vertices covered), after which edges are only added, so the perfect matching stays. If that player then always moves legally and is ever stuck, the graph is $K_{a,b}$ containing a perfect matching; every matching edge joins $X$ to $Y$, so $a = b = n/2$, and the number of edges is $n^2/4$.\n\n**$n \\equiv 2 \\pmod 4$: David wins.** David draws any edge first (the graph is then good) and then follows the claim, and afterwards moves legally. If he were ever stuck, there would be $n^2/4 = (n/2)^2$ edges, which is odd as $n/2$ is odd — but on David's turn the number of edges is even. So David never loses, and he wins.\n\n**$n \\equiv 0 \\pmod 4$: Jacob wins.** Jacob applies the claim from the start (the empty graph is good) and afterwards moves legally. If he were stuck, there would be $n^2/4$ edges, an even number since $n/2$ is even — but on Jacob's turn the number is odd. So Jacob never loses.\n\n**Answer:** David has a winning strategy exactly when $n \\equiv 2 \\pmod 4$. ∎"
+      }
+    ],
+    "topics": [
+      "games",
+      "graph-theory"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

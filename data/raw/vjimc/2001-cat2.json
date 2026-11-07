@@ -1,0 +1,141 @@
+[
+  {
+    "id": "vjimc-2001-cat2-01",
+    "bank": "vjimc",
+    "source": {
+      "contest": "VJIMC",
+      "paper": "VJIMC 2001 Category II",
+      "year": 2001,
+      "number": 1,
+      "url": "https://vjimc.osu.cz/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $n\\ge2$ be an integer and let $x_1,x_2,\\dots,x_n$ be real numbers. Consider $N=\\binom n2$ sums $x_i+x_j$, $1\\le i<j\\le n$, and denote them by $y_1,y_2,\\dots,y_N$ (in an arbitrary order). For which $n$ are the numbers $x_1,x_2,\\dots,x_n$ uniquely determined by the numbers $y_1,y_2,\\dots,y_N$?",
+    "image": null,
+    "choices": null,
+    "answer": "Exactly when $n$ is **not a power of $2$**. (Power sums of the $x_i$ can be recovered from those of the $y_j$ via $(2n-2^k)s_k=2t_k-\\sum_{r=1}^{k-1}\\binom kr s_rs_{k-r}$; for $n=2^m$ there are counterexamples built from $\\{0,3\\},\\{1,2\\}$.)",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Power sums and a doubling construction",
+        "body": "\"Uniquely determined\" means: as a multiset (the order of the $x_i$ can obviously not be recovered).\n\n**Notation.** $s_k=\\sum_{i=1}^nx_i^k$ (so $s_0=n$) and $t_k=\\sum_{l=1}^Ny_l^k=\\sum_{i<j}(x_i+x_j)^k$. The $t_k$ depend only on the multiset of the $y$'s.\n\n**Key identity.** Summing over all ordered pairs $(i,j)$, including $i=j$,\n$$2t_k+2^ks_k=\\sum_{i=1}^n\\sum_{j=1}^n(x_i+x_j)^k=\\sum_{r=0}^k\\binom kr s_rs_{k-r}=2ns_k+\\sum_{r=1}^{k-1}\\binom kr s_rs_{k-r},$$\nso\n$$(2n-2^k)\\,s_k=2t_k-\\sum_{r=1}^{k-1}\\binom kr s_rs_{k-r}.\\tag{$*$}$$\n\n**$n$ not a power of $2$: uniqueness.** Then $2n\\ne2^k$ for every $k$, so $(*)$ determines $s_1,s_2,\\dots,s_n$ recursively from $t_1,\\dots,t_n$. By Newton's identities\n$$k\\,e_k=\\sum_{i=1}^k(-1)^{i-1}e_{k-i}s_i\\qquad(e_0=1),$$\nthe power sums determine the elementary symmetric polynomials $e_1,\\dots,e_n$ of $x_1,\\dots,x_n$, hence the polynomial $\\prod_i(X-x_i)=\\sum_k(-1)^ke_kX^{n-k}$, hence the multiset $\\{x_1,\\dots,x_n\\}$ of its roots.\n\n**$n=2^m$: non-uniqueness.** We construct two different multisets $A_n,B_n$ of size $n$ with the same multiset of pairwise sums.\n- $n=2$: $A_2=\\{0,3\\}$, $B_2=\\{1,2\\}$; both have the single sum $3$.\n- From $A_n,B_n$ to size $2n$: choose $c$ larger than $2\\max|A_n\\cup B_n|$ and set\n$$A_{2n}=A_n\\cup(B_n+c),\\qquad B_{2n}=B_n\\cup(A_n+c).$$\nThe pairwise sums of $A_{2n}$ are: sums within $A_n$; sums within $B_n$ shifted by $2c$; and all $a+b+c$ ($a\\in A_n,b\\in B_n$). For $B_{2n}$ they are: sums within $B_n$; sums within $A_n$ shifted by $2c$; and all $b+a+c$. By the induction hypothesis the sums within $A_n$ and within $B_n$ coincide as multisets, so $A_{2n}$ and $B_{2n}$ have the same pairwise sums. They are different: the $n$ smallest elements of $A_{2n}$ form $A_n$, those of $B_{2n}$ form $B_n$, and $A_n\\ne B_n$.\n\n(For example, for $n=4$ the sets $\\{0,3,c+1,c+2\\}$ and $\\{1,2,c,c+3\\}$ both have the pairwise sums $3,\\ c+1,\\ c+2,\\ c+4,\\ c+5,\\ 2c+3$.)\n\n**Answer: exactly for $n$ that are not powers of $2$.** ∎"
+      }
+    ],
+    "topics": [
+      "algebra",
+      "polynomials"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "vjimc-2001-cat2-02",
+    "bank": "vjimc",
+    "source": {
+      "contest": "VJIMC",
+      "paper": "VJIMC 2001 Category II",
+      "year": 2001,
+      "number": 2,
+      "url": "https://vjimc.osu.cz/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $f\\colon[0,1]\\to\\mathbb R$ be a continuous function. Define a sequence of functions $f_n\\colon[0,1]\\to\\mathbb R$ in the following way:\n$$f_0(x)=f(x),\\qquad f_{n+1}(x)=\\int_0^xf_n(t)\\,dt,\\qquad n=0,1,2,\\dots.$$\nProve that if $f_n(1)=0$ for all $n$, then $f(x)\\equiv0$.",
+    "image": null,
+    "choices": null,
+    "answer": "Integration by parts gives $\\int_0^1(1-t)^kf(t)\\,dt=k!\\,f_k(1)=0$, so $f$ is orthogonal to all polynomials; by Weierstrass $\\int_0^1f^2=0$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Moments vanish, then Weierstrass",
+        "body": "Each $f_n$ is continuous, $f_{n+1}'=f_n$ and $f_{n+1}(0)=0$.\n\n**Claim.** For all integers $n,k\\ge0$: $\\displaystyle\\int_0^1(1-t)^kf_n(t)\\,dt=k!\\,f_{n+k+1}(1)$.\n\n*Proof by induction on $k$.* For $k=0$ it is the definition $f_{n+1}(1)=\\int_0^1f_n$. For $k\\ge1$, integrate by parts:\n$$\\int_0^1(1-t)^kf_n(t)\\,dt=\\Big[(1-t)^kf_{n+1}(t)\\Big]_0^1+k\\int_0^1(1-t)^{k-1}f_{n+1}(t)\\,dt .$$\nThe boundary term vanishes (at $t=1$ because $(1-t)^k=0$, at $t=0$ because $f_{n+1}(0)=0$), and by the induction hypothesis the integral equals $(k-1)!\\,f_{n+k+1}(1)$. $\\square$\n\nWith $n=0$ and the assumption, $\\int_0^1(1-t)^kf(t)\\,dt=0$ for all $k\\ge0$. The polynomials $(1-t)^k$ span all polynomials, so $\\int_0^1p\\,f=0$ for every polynomial $p$.\n\nBy the Weierstrass approximation theorem, for every $\\varepsilon>0$ there is a polynomial $p_\\varepsilon$ with $|f-p_\\varepsilon|<\\varepsilon$ on $[0,1]$. Then\n$$\\int_0^1f^2=\\int_0^1f^2-\\int_0^1p_\\varepsilon f=\\int_0^1(f-p_\\varepsilon)f\\le\\varepsilon\\int_0^1|f| .$$\nLetting $\\varepsilon\\to0$ gives $\\int_0^1f^2=0$, and since $f^2$ is continuous and nonnegative, $f\\equiv0$. ∎"
+      }
+    ],
+    "topics": [
+      "real-analysis",
+      "calculus"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "vjimc-2001-cat2-03",
+    "bank": "vjimc",
+    "source": {
+      "contest": "VJIMC",
+      "paper": "VJIMC 2001 Category II",
+      "year": 2001,
+      "number": 3,
+      "url": "https://vjimc.osu.cz/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $f\\colon(0,+\\infty)\\to(0,+\\infty)$ be a decreasing function which satisfies $\\int_0^\\infty f(x)\\,dx<+\\infty$. Prove that $\\lim_{x\\to+\\infty}xf(x)=0$.",
+    "image": null,
+    "choices": null,
+    "answer": "Since $f$ is decreasing, $\\frac x2f(x)\\le\\int_{x/2}^xf(t)\\,dt$, and the right side tends to $0$ because the integral converges.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Compare with the integral over $[x/2,x]$",
+        "body": "Since $f$ is monotone it is integrable on bounded intervals, and $\\int_0^\\infty f<\\infty$ means $T(u)=\\int_u^\\infty f(t)\\,dt\\to0$ as $u\\to\\infty$.\n\nFor $x>0$ and $t\\in[x/2,x]$ we have $f(t)\\ge f(x)$ (decreasing), so\n$$0<\\frac x2f(x)\\le\\int_{x/2}^xf(t)\\,dt\\le T(x/2).$$\nHence $0<xf(x)\\le2T(x/2)\\to0$ as $x\\to\\infty$, i.e. $\\lim_{x\\to\\infty}xf(x)=0$. ∎"
+      },
+      {
+        "title": "Contradiction with a doubling sequence (official second solution)",
+        "body": "Suppose $xf(x)\\not\\to0$. Then there are $\\varepsilon>0$ and points $x_i\\to\\infty$ with $x_if(x_i)>\\varepsilon$. Passing to a subsequence we may assume $y_1<y_2<\\dots$ with $y_{i+1}\\ge2y_i$ and $y_if(y_i)>\\varepsilon$. Then $y_i-y_{i-1}\\ge\\frac{y_i}2$, and since $f\\ge f(y_i)$ on $(y_{i-1},y_i]$,\n$$\\int_0^\\infty f\\ge\\sum_{i\\ge2}\\int_{y_{i-1}}^{y_i}f\\ge\\sum_{i\\ge2}(y_i-y_{i-1})f(y_i)\\ge\\frac12\\sum_{i\\ge2}y_if(y_i)\\ge\\sum_{i\\ge2}\\frac\\varepsilon2=\\infty,$$\na contradiction. ∎"
+      }
+    ],
+    "topics": [
+      "real-analysis",
+      "calculus"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "vjimc-2001-cat2-04",
+    "bank": "vjimc",
+    "source": {
+      "contest": "VJIMC",
+      "paper": "VJIMC 2001 Category II",
+      "year": 2001,
+      "number": 4,
+      "url": "https://vjimc.osu.cz/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $R$ be an associative non-commutative ring and let $n>2$ be a fixed natural number. Assume that $x^n=x$ for all $x\\in R$. Prove that $xy^{n-1}=y^{n-1}x$ holds for all $x,y\\in R$.",
+    "image": null,
+    "choices": null,
+    "answer": "$e=y^{n-1}$ is idempotent; $R$ has no nonzero nilpotents ($r^2=0\\Rightarrow r=r^{n-2}r^2=0$); and $(ex-exe)^2=0=(xe-exe)^2$, so $ex=exe=xe$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Idempotents are central",
+        "body": "($R$ need not have a unit; all exponents below are $\\ge1$ because $n\\ge3$.)\n\n**Step 1: $e=y^{n-1}$ is idempotent.** $e^2=y^{2n-2}=y^n\\,y^{n-2}=y\\,y^{n-2}=y^{n-1}=e$.\n\n**Step 2: no nonzero element squares to $0$.** If $r^2=0$ then $r=r^n=r^{n-2}r^2=0$.\n\n**Step 3: every idempotent $e$ commutes with every $x$.** Using $e^2=e$:\n$$(ex-exe)^2=exex-exexe-exeex+exeexe=exex-exexe-exex+exexe=0,$$\n$$(xe-exe)^2=xexe-xeexe-exexe+exeexe=xexe-xexe-exexe+exexe=0 .$$\nBy Step 2, $ex=exe$ and $xe=exe$, hence $ex=xe$.\n\nApplying Step 3 to $e=y^{n-1}$ gives $xy^{n-1}=y^{n-1}x$ for all $x,y\\in R$. ∎"
+      }
+    ],
+    "topics": [
+      "abstract-algebra"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

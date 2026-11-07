@@ -1,0 +1,185 @@
+[
+  {
+    "id": "vjimc-1997-cat1-01",
+    "bank": "vjimc",
+    "source": {
+      "contest": "VJIMC",
+      "paper": "VJIMC 1997 Category I",
+      "year": 1997,
+      "number": 1,
+      "url": "https://vjimc.osu.cz/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $a$ be an odd positive integer. Prove that if $d$ divides $a^2+2$, then $d\\equiv1\\pmod 8$ or $d\\equiv3\\pmod 8$.",
+    "image": null,
+    "choices": null,
+    "answer": "Every prime $p\\mid a^2+2$ is odd with $\\left(\\frac{-2}{p}\\right)=1$, which forces $p\\equiv1,3\\pmod 8$; the set $\\{1,3\\}$ of residues mod 8 is closed under multiplication.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Legendre symbol of $-2$",
+        "body": "Let $d$ be a positive divisor of $a^2+2$. Since $a$ is odd, $a^2+2$ is odd, so $d$ and all its prime factors are odd.\n\n**Primes.** Let $p$ be a prime with $p\\mid a^2+2$. Then $p$ is odd and $a^2\\equiv-2\\pmod p$. Also $p\\nmid a$, since otherwise $p\\mid2$. So $-2$ is a quadratic residue mod $p$, i.e. $\\left(\\frac{-2}{p}\\right)=1$. By the supplementary laws of quadratic reciprocity,\n$$\\left(\\frac{-1}{p}\\right)=(-1)^{\\frac{p-1}2},\\qquad\\left(\\frac{2}{p}\\right)=(-1)^{\\frac{p^2-1}8}.$$\nCheck the odd residues mod 8:\n\n| $p\\bmod 8$ | $\\left(\\frac{-1}p\\right)$ | $\\left(\\frac2p\\right)$ | $\\left(\\frac{-2}p\\right)$ |\n|---|---|---|---|\n| 1 | $+1$ | $+1$ | $+1$ |\n| 3 | $-1$ | $-1$ | $+1$ |\n| 5 | $+1$ | $-1$ | $-1$ |\n| 7 | $-1$ | $+1$ | $-1$ |\n\nHence $p\\equiv1$ or $3\\pmod 8$.\n\n**General $d$.** $d$ is a product of primes dividing $a^2+2$, each $\\equiv1$ or $3\\pmod8$ ($d=1$ is the empty product, $\\equiv1$). The set $\\{1,3\\}\\subset\\mathbb Z/8$ is closed under multiplication: $1\\cdot1=1$, $1\\cdot3=3$, $3\\cdot3=9\\equiv1$. By induction on the number of prime factors, $d\\equiv1$ or $3\\pmod 8$. ∎"
+      }
+    ],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "vjimc-1997-cat1-02",
+    "bank": "vjimc",
+    "source": {
+      "contest": "VJIMC",
+      "paper": "VJIMC 1997 Category I",
+      "year": 1997,
+      "number": 2,
+      "url": "https://vjimc.osu.cz/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $\\alpha\\in(0,1]$ be a given real number and let a real sequence $\\{a_n\\}_{n=1}^\\infty$ satisfy the inequality\n$$a_{n+1}\\le\\alpha a_n+(1-\\alpha)a_{n-1}\\qquad\\text{for } n=2,3,\\dots$$\nProve that if $\\{a_n\\}$ is bounded, then it must be convergent.",
+    "image": null,
+    "choices": null,
+    "answer": "$w_n=a_n+(1-\\alpha)a_{n-1}$ is non-increasing and bounded, so $w_n\\to W$; then $e_n=a_n-\\frac{W}{2-\\alpha}$ satisfies $e_n=-(1-\\alpha)e_{n-1}+o(1)$ with $0\\le1-\\alpha<1$, so $a_n\\to\\frac W{2-\\alpha}$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "A monotone combination, then a contraction",
+        "body": "Put $\\beta=1-\\alpha\\in[0,1)$ and, for $n\\ge2$,\n$$w_n=a_n+\\beta a_{n-1}.$$\n\n**$w_n$ is non-increasing.** By the hypothesis,\n$$w_{n+1}=a_{n+1}+\\beta a_n\\le(\\alpha a_n+\\beta a_{n-1})+\\beta a_n=a_n+\\beta a_{n-1}=w_n,$$\nusing $\\alpha+\\beta=1$. Since $(a_n)$ is bounded, so is $(w_n)$. Hence $w_n\\to W$ for some $W\\in\\mathbb R$.\n\n**$a_n$ converges.** Let $c=\\frac{W}{1+\\beta}$ and $e_n=a_n-c$. Then $a_n=w_n-\\beta a_{n-1}$ gives\n$$e_n=w_n-\\beta a_{n-1}-c=(w_n-W)-\\beta(a_{n-1}-c)=\\delta_n-\\beta e_{n-1},$$\nwhere $\\delta_n=w_n-W\\to0$ (we used $W-\\beta c-c=W-(1+\\beta)c=0$). Let $E=\\limsup_{n\\to\\infty}|e_n|$, which is finite because $(a_n)$ is bounded. From $|e_n|\\le|\\delta_n|+\\beta|e_{n-1}|$ we get, taking $\\limsup$,\n$$E\\le0+\\beta E,$$\nso $(1-\\beta)E\\le0$. Since $1-\\beta=\\alpha>0$, this gives $E=0$. Hence $e_n\\to0$, i.e.\n$$\\lim_{n\\to\\infty}a_n=\\frac{W}{1+\\beta}=\\frac{W}{2-\\alpha}.$$\n∎"
+      },
+      {
+        "title": "Using $\\limsup$ and $\\liminf$",
+        "body": "Let $L=\\limsup a_n$ and $l=\\liminf a_n$ (finite by boundedness). Suppose $l<L$.\n\nFirst, $a_{n+1}\\le\\max(a_n,a_{n-1})$, since the right side of the hypothesis is a convex combination. So $b_n=\\max(a_n,a_{n-1})$ is non-increasing, and it converges to $L$.\n\nFix $\\varepsilon>0$ with $\\alpha(L-l)>3\\varepsilon$, and choose $n_0$ with $a_n<L+\\varepsilon$ for $n\\ge n_0$. Since $a_m$ comes within $\\varepsilon$ of $l$ for infinitely many $m$, pick $m\\ge n_0+1$ with $a_m<l+\\varepsilon$. Then\n$$a_{m+1}\\le\\alpha a_m+(1-\\alpha)a_{m-1}<\\alpha(l+\\varepsilon)+(1-\\alpha)(L+\\varepsilon)=L+\\varepsilon-\\alpha(L-l)<L-2\\varepsilon .$$\nHence $b_{m+1}=\\max(a_{m+1},a_m)<\\max(L-2\\varepsilon,\\ l+\\varepsilon)$. Since $l+\\varepsilon<L-2\\varepsilon$ (because $L-l>3\\varepsilon/\\alpha\\ge3\\varepsilon$), we get $b_{m+1}<L-2\\varepsilon$. As $(b_n)$ is non-increasing, $b_n<L-2\\varepsilon$ for all $n\\ge m+1$, contradicting $b_n\\to L$.\n\nTherefore $l=L$, and the bounded sequence converges. ∎"
+      }
+    ],
+    "topics": [
+      "real-analysis",
+      "sequences-series"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "vjimc-1997-cat1-03",
+    "bank": "vjimc",
+    "source": {
+      "contest": "VJIMC",
+      "paper": "VJIMC 1997 Category I",
+      "year": 1997,
+      "number": 3,
+      "url": "https://vjimc.osu.cz/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $c_1,c_2,\\dots,c_n$ be real numbers such that\n$$c_1^k+c_2^k+\\dots+c_n^k>0\\qquad\\text{for all }k=1,2,\\dots$$\nLet us put\n$$f(x)=\\frac{1}{(1-c_1x)(1-c_2x)\\cdots(1-c_nx)}.$$\nShow that $f^{(k)}(0)>0$ for all $k=1,2,\\dots$",
+    "image": null,
+    "choices": null,
+    "answer": "For $g=\\ln f=-\\sum_j\\ln(1-c_jx)$ we get $g^{(m)}(0)=(m-1)!\\,p_m>0$ with $p_m=\\sum_j c_j^m$; then $f'=fg'$ and Leibniz's rule give $f^{(k+1)}(0)=\\sum_{i=0}^k\\binom ki f^{(i)}(0)g^{(k+1-i)}(0)>0$ by induction.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Logarithmic derivative and Leibniz's rule",
+        "body": "Write $p_m=c_1^m+\\dots+c_n^m>0$ ($m\\ge1$). Near $x=0$ all factors $1-c_jx$ are positive, so $f>0$ there and $f$ is smooth ($C^\\infty$) near $0$. Let\n$$g(x)=\\ln f(x)=-\\sum_{j=1}^n\\ln(1-c_jx).$$\n\n**Derivatives of $g$.** Differentiating, $g'(x)=\\sum_j\\frac{c_j}{1-c_jx}$, and by induction\n$$g^{(m)}(x)=\\sum_{j=1}^n\\frac{(m-1)!\\,c_j^m}{(1-c_jx)^m}\\qquad(m\\ge1).$$\nHence $g^{(m)}(0)=(m-1)!\\,p_m>0$ for every $m\\ge1$.\n\n**Derivatives of $f$.** Since $f=e^{g}$, we have $f'=f\\,g'$. Differentiating $k$ times with Leibniz's rule,\n$$f^{(k+1)}=\\sum_{i=0}^{k}\\binom ki f^{(i)}\\,g^{(k+1-i)} .$$\nNow induct on $k$. We have $f(0)=1>0$, and $f'(0)=f(0)g'(0)=p_1>0$. If $f(0),f'(0),\\dots,f^{(k)}(0)$ are all positive, then at $x=0$ every term on the right is a product of positive numbers, so $f^{(k+1)}(0)>0$.\n\nHence $f^{(k)}(0)>0$ for all $k\\ge1$. ∎"
+      },
+      {
+        "title": "Power series with positive coefficients",
+        "body": "Let $R=1/\\max_j|c_j|$ (or $R=\\infty$ if all $c_j=0$; that case is excluded since $p_1>0$). For $|x|<R$,\n$$g(x)=-\\sum_j\\ln(1-c_jx)=\\sum_j\\sum_{m\\ge1}\\frac{(c_jx)^m}{m}=\\sum_{m\\ge1}\\frac{p_m}{m}x^m ,$$\nwhere all series converge absolutely. So $g$ is a power series with strictly positive coefficients and $g(0)=0$.\n\nThen $f=e^g=\\sum_{r\\ge0}\\frac{g^r}{r!}$. Expanding each power $g^r$ gives a power series with non-negative coefficients. Everything converges absolutely for $|x|$ small (the majorant $e^{\\tilde g(|x|)}$ with $\\tilde g(t)=\\sum_m\\frac{|p_m|}{m}t^m$ is finite), so we may collect terms. The coefficient of $x^k$ in $f$ is therefore at least its coefficient in the $r=1$ term $g$, namely $\\frac{p_k}{k}>0$.\n\nBy uniqueness of Taylor coefficients, $f^{(k)}(0)=k!\\,[x^k]f\\ge k!\\,\\frac{p_k}{k}>0$. ∎"
+      }
+    ],
+    "topics": [
+      "real-analysis",
+      "calculus",
+      "sequences-series"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "vjimc-1997-cat1-04m",
+    "bank": "vjimc",
+    "source": {
+      "contest": "VJIMC",
+      "paper": "VJIMC 1997 Category I",
+      "year": 1997,
+      "number": 4,
+      "url": "https://vjimc.osu.cz/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "*(Problem 4-M.)* Find all real numbers $a>0$ for which the series\n$$\\sum_{n=1}^{\\infty}\\frac{a^{f(n)}}{n^2}$$\nis convergent; $f(n)$ denotes the number of $0$'s in the decimal expansion of $n$.",
+    "image": null,
+    "choices": null,
+    "answer": "Exactly for $0<a<91$. The $m$-digit numbers contribute $9(9+a)^{m-1}$ to $\\sum a^{f(n)}$, so the block sums are comparable to $\\left(\\frac{9+a}{100}\\right)^{m}$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Group by number of digits",
+        "body": "Group the terms by the number of digits. Let $B_m=\\sum_{10^{m-1}\\le n<10^m}\\frac{a^{f(n)}}{n^2}$ for $m\\ge1$.\n\n**Counting.** An $m$-digit number has a nonzero leading digit (9 choices), followed by $m-1$ digits. The number of $m$-digit $n$ with exactly $j$ zeros is $9\\binom{m-1}{j}9^{m-1-j}$: choose the $j$ zero positions among the last $m-1$ digits, then fill the other $m-1-j$ positions with nonzero digits. Hence, by the binomial theorem,\n$$\\sum_{10^{m-1}\\le n<10^m}a^{f(n)}=9\\sum_{j=0}^{m-1}\\binom{m-1}{j}a^j9^{m-1-j}=9(9+a)^{m-1}.$$\n\n**Bounds.** For these $n$, $10^{2(m-1)}\\le n^2<10^{2m}$, so\n$$\\frac{9(9+a)^{m-1}}{100^{m}}\\le B_m\\le\\frac{9(9+a)^{m-1}}{100^{m-1}} ,\\quad\\text{i.e.}\\quad \\frac{9}{100}q^{m-1}\\le B_m\\le9q^{m-1},\\qquad q=\\frac{9+a}{100}.$$\n\n**Conclusion.** The series has positive terms, so it converges iff $\\sum_mB_m$ converges. By the comparison test with the geometric series $\\sum q^{m-1}$, this happens iff $q<1$, i.e. $a<91$. For $a\\ge91$ the lower bound gives $B_m\\ge\\frac9{100}$ for all $m$, so the series diverges.\n\n**Answer:** the series converges exactly for $0<a<91$. ∎"
+      }
+    ],
+    "topics": [
+      "sequences-series",
+      "real-analysis",
+      "counting"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "vjimc-1997-cat1-04i",
+    "bank": "vjimc",
+    "source": {
+      "contest": "VJIMC",
+      "paper": "VJIMC 1997 Category I",
+      "year": 1997,
+      "number": 4,
+      "url": "https://vjimc.osu.cz/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "*(Problem 4-I.)* Let us declare\n\n```pascal\nconst N_MAX = 255;\ntype tR = array [1..N_MAX] of real;\n     tN = array [1..N_MAX] of integer;\n```\n\nand let `random` be a function with no arguments which returns real random values distributed uniformly in $[0,1)$.\n\nYou are to choose $K$ unique random integer numbers ($1\\le K\\le N\\le N_{MAX}$) from $1$ to $N$ so that the probability of the choice of a number $i$ is equal to a given $P_i$ (if the number has not been chosen yet; the choice is to be repeated otherwise), $\\sum_{i=1}^N P_i=1$.\n\nWrite a procedure in Pascal that returns such $K$ integer numbers in the first $K$ elements of the vector of the type `tN`. The input arguments of the procedure are $K$, $N$ and the vector of $P_i$'s.",
+    "image": null,
+    "choices": null,
+    "answer": "Repeatedly draw $i$ by inverse-CDF sampling (smallest $i$ with $r<P_1+\\dots+P_i$ for $r=$ `random`) and keep it only if it has not been chosen yet, until $K$ distinct numbers are collected.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Inverse-CDF sampling with rejection of repeats",
+        "body": "**Drawing one number with probabilities $P_i$.** Let $r$ be uniform in $[0,1)$ and $S_i=P_1+\\dots+P_i$ ($S_0=0$, $S_N=1$). Return the smallest $i$ with $r<S_i$. Then $i$ is returned exactly when $S_{i-1}\\le r<S_i$, which has probability $S_i-S_{i-1}=P_i$.\n\n**Choosing $K$ distinct numbers.** As the statement prescribes, we repeat the draw. A number that is already chosen is discarded and we draw again; a new number is recorded. We stop when $K$ numbers are recorded. (This terminates with probability 1 provided at least $K$ of the $P_i$ are positive, which is necessary for the task to make sense.)\n\n```pascal\nprocedure Choose(K, N: integer; P: tR; var X: tN);\nvar\n  used: array [1..N_MAX] of boolean;\n  i, m: integer;\n  r, s: real;\nbegin\n  for i := 1 to N do used[i] := false;\n  m := 0;                          { numbers chosen so far }\n  while m < K do\n  begin\n    r := random;                   { uniform in [0,1) }\n    s := 0; i := 0;\n    repeat                         { smallest i with r < P[1]+...+P[i] }\n      i := i + 1;\n      s := s + P[i]\n    until (r < s) or (i = N);      { i = N guards against rounding }\n    if not used[i] then\n    begin\n      used[i] := true;\n      m := m + 1;\n      X[m] := i\n    end\n  end\nend;\n```\n\nThe guard `i = N` only matters if the floating-point sum of all $P_i$ comes out slightly below $1$. Each accepted number $i$ was drawn with probability $P_i$ among all draws, and draws of already-chosen numbers are simply repeated, exactly as required. The result is in `X[1..K]`."
+      },
+      {
+        "title": "Equivalent version without wasted draws",
+        "body": "Rejecting repeats is the same as drawing from the not-yet-chosen numbers with probabilities proportional to $P_i$. If $C$ is the set of chosen numbers, each unchosen $i$ is picked with probability $P_i/(1-\\sum_{j\\in C}P_j)$. So we can scale $r$ by the remaining mass and skip used indices:\n\n```pascal\nprocedure Choose2(K, N: integer; P: tR; var X: tN);\nvar\n  used: array [1..N_MAX] of boolean;\n  i, m, last: integer;\n  r, s, rest: real;\nbegin\n  for i := 1 to N do used[i] := false;\n  rest := 1;                       { total probability of unchosen numbers }\n  for m := 1 to K do\n  begin\n    r := random * rest;\n    s := 0; i := 0; last := 0;\n    repeat\n      i := i + 1;\n      if not used[i] then\n      begin\n        s := s + P[i];\n        if P[i] > 0 then last := i\n      end\n    until (r < s) or (i = N);\n    if r >= s then i := last;      { rounding guard }\n    used[i] := true;\n    rest := rest - P[i];\n    X[m] := i\n  end\nend;\n```\n\nEach step does at most $N$ iterations, so the running time is $O(KN)$ regardless of the probabilities."
+      }
+    ],
+    "topics": [
+      "probability",
+      "logic"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

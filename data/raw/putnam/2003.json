@@ -1,0 +1,448 @@
+[
+  {
+    "id": "putnam-2003-a1",
+    "bank": "putnam",
+    "source": {
+      "contest": "Putnam",
+      "paper": "64th William Lowell Putnam Mathematical Competition (December 6, 2003)",
+      "year": 2003,
+      "number": "A1",
+      "url": "https://kskedlaya.org/putnam-archive/"
+    },
+    "grade": "undergrad",
+    "points": 10,
+    "timeMinutes": null,
+    "type": "text",
+    "prompt": "Let $n$ be a fixed positive integer. How many ways are there to write $n$ as a sum of positive integers,\n$$n = a_1 + a_2 + \\cdots + a_k,$$\nwith $k$ an arbitrary positive integer and $a_1 \\le a_2 \\le \\cdots \\le a_k \\le a_1 + 1$? For example, with $n=4$ there are four ways: $4$, $2+2$, $1+1+2$, $1+1+1+1$.",
+    "image": null,
+    "choices": null,
+    "answer": "n",
+    "acceptedAnswers": [
+      "n ways"
+    ],
+    "answerUnit": null,
+    "answerDisplay": "$n$",
+    "solutions": [
+      {
+        "title": "Exactly one sum for each number of terms",
+        "body": "Fix the number of terms $k$. In an admissible sum every term equals $q = a_1$ or $q+1$; say the first $i$ terms equal $q$ ($1 \\le i \\le k$) and the remaining $k-i$ terms equal $q+1$. Then\n$$n = kq + (k-i), \\qquad 0 \\le k-i \\le k-1 .$$\nSo $q$ and $r = k-i$ are the quotient and remainder of $n$ on division by $k$: $q = \\lfloor n/k \\rfloor$, $r = n - k\\lfloor n/k\\rfloor$. Hence for each $k$ there is **at most one** admissible sum with $k$ terms.\n\n**Existence.** Since all terms are $\\ge 1$, we need $k \\le n$. Conversely, for each $k \\in \\{1,\\dots,n\\}$ we have $q = \\lfloor n/k\\rfloor \\ge 1$, and the sum consisting of $k-r$ copies of $q$ followed by $r$ copies of $q+1$ is admissible and adds up to $kq + r = n$.\n\nSo there is exactly one admissible sum for each $k = 1, 2, \\dots, n$ and none for $k > n$. (For $n = 4$: $k=1,2,3,4$ give $4$, $2+2$, $1+1+2$, $1+1+1+1$.)\n\n**Answer: $n$ ways.**"
+      },
+      {
+        "title": "Build the sums inductively",
+        "body": "Call an admissible sum *balanced*; with $k$ terms it consists of $i$ copies of some $q$ followed by $k-i$ copies of $q+1$, $1\\le i\\le k$.\n\nFrom a balanced sum of $n-1$ with $k$ terms, add $1$ to the **last** copy of $q$: we get $i-1$ copies of $q$ followed by $k-i+1$ copies of $q+1$, a balanced sum of $n$ with $k$ terms. Conversely, from a balanced sum of $n$ with $k$ terms, subtract $1$ from the **first** copy of its largest value; this gives a balanced sum of $n-1$ with $k$ terms unless it creates a $0$, which happens only for the sum of $n$ ones ($k=n$). The two operations are inverse to each other.\n\nSo if $b(n)$ is the number of balanced sums of $n$, then $b(n) = b(n-1) + 1$ (the extra one is $1+1+\\cdots+1$), and $b(1) = 1$. Hence $b(n) = n$.\n\n**Answer: $n$.**"
+      }
+    ],
+    "topics": [
+      "counting",
+      "number-theory"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "putnam-2003-a2",
+    "bank": "putnam",
+    "source": {
+      "contest": "Putnam",
+      "paper": "64th William Lowell Putnam Mathematical Competition (December 6, 2003)",
+      "year": 2003,
+      "number": "A2",
+      "url": "https://kskedlaya.org/putnam-archive/"
+    },
+    "grade": "undergrad",
+    "points": 10,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $a_1, a_2, \\dots, a_n$ and $b_1, b_2, \\dots, b_n$ be nonnegative real numbers. Show that\n$$(a_1 a_2 \\cdots a_n)^{1/n} + (b_1 b_2 \\cdots b_n)^{1/n} \\le \\left[(a_1+b_1)(a_2+b_2)\\cdots(a_n+b_n)\\right]^{1/n}.$$",
+    "image": null,
+    "choices": null,
+    "answer": "Proof. Divide by the right side and apply AM-GM to the numbers $\\frac{a_i}{a_i+b_i}$ and to $\\frac{b_i}{a_i+b_i}$; the two arithmetic means add up to $1$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "AM-GM on the ratios",
+        "body": "If $a_i + b_i = 0$ for some $i$, then $a_i = b_i = 0$ and both sides are $0$. So assume $a_i + b_i > 0$ for all $i$, and put\n$$\\alpha_i = \\frac{a_i}{a_i+b_i}, \\qquad \\beta_i = \\frac{b_i}{a_i+b_i}, \\qquad \\alpha_i + \\beta_i = 1,\\quad \\alpha_i,\\beta_i \\ge 0.$$\nDividing the desired inequality by $\\left[\\prod (a_i+b_i)\\right]^{1/n} > 0$, it becomes\n$$(\\alpha_1\\cdots\\alpha_n)^{1/n} + (\\beta_1\\cdots\\beta_n)^{1/n} \\le 1 .$$\nBy the AM-GM inequality (valid for nonnegative numbers),\n$$(\\alpha_1\\cdots\\alpha_n)^{1/n} \\le \\frac{\\alpha_1+\\cdots+\\alpha_n}{n}, \\qquad (\\beta_1\\cdots\\beta_n)^{1/n} \\le \\frac{\\beta_1+\\cdots+\\beta_n}{n}.$$\nAdding, the right sides sum to $\\frac1n\\sum_i(\\alpha_i+\\beta_i) = 1$. ∎\n\n*Remark.* This is the special case of Hölder's inequality; equality holds iff some $a_i = b_i = 0$ or the vectors $(a_i)$ and $(b_i)$ are proportional."
+      },
+      {
+        "title": "Expand and compare term by term",
+        "body": "Let $G_a = (a_1\\cdots a_n)^{1/n}$ and $G_b = (b_1\\cdots b_n)^{1/n}$. We show $\\prod_{i=1}^n (a_i+b_i) \\ge (G_a+G_b)^n$ and then take $n$-th roots.\n\nExpanding,\n$$\\prod_{i=1}^n (a_i+b_i) = \\sum_{S \\subseteq \\{1,\\dots,n\\}} \\ \\prod_{i\\in S} a_i \\prod_{i\\notin S} b_i .$$\nGroup the $2^n$ terms by $k = |S|$. The $\\binom nk$ terms with $|S| = k$ are nonnegative, and each index $i$ lies in $S$ for exactly $\\binom{n-1}{k-1}$ of these sets $S$, so their product is\n$$(a_1\\cdots a_n)^{\\binom{n-1}{k-1}}\\,(b_1\\cdots b_n)^{\\binom{n-1}{k}} .$$\nSince $\\binom{n-1}{k-1}/\\binom nk = \\frac kn$ and $\\binom{n-1}{k}/\\binom nk = \\frac{n-k}{n}$, their geometric mean is $G_a^{k}G_b^{n-k}$. By AM-GM, the sum of these $\\binom nk$ terms is at least $\\binom nk G_a^kG_b^{n-k}$. Summing over $k=0,\\dots,n$:\n$$\\prod_{i=1}^n (a_i+b_i) \\ge \\sum_{k=0}^n \\binom nk G_a^k G_b^{n-k} = (G_a+G_b)^n .$$\nTaking $n$-th roots gives the claim. ∎"
+      }
+    ],
+    "topics": [
+      "inequalities",
+      "algebra"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "putnam-2003-a3",
+    "bank": "putnam",
+    "source": {
+      "contest": "Putnam",
+      "paper": "64th William Lowell Putnam Mathematical Competition (December 6, 2003)",
+      "year": 2003,
+      "number": "A3",
+      "url": "https://kskedlaya.org/putnam-archive/"
+    },
+    "grade": "undergrad",
+    "points": 10,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Find the minimum value of\n$$|\\sin x + \\cos x + \\tan x + \\cot x + \\sec x + \\csc x|$$\nfor real numbers $x$.",
+    "image": null,
+    "choices": null,
+    "answer": "2*sqrt(2)-1",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "answerDisplay": "$2\\sqrt{2}-1$",
+    "solutions": [
+      {
+        "title": "Reduce to one variable c = sin x + cos x",
+        "body": "The expression is defined exactly when $\\sin x \\cos x \\ne 0$. Put $c = \\sin x + \\cos x$; then $c^2 = 1 + 2\\sin x\\cos x$, so $\\sin x \\cos x = \\frac{c^2-1}{2}$. Hence\n$$f = \\sin x + \\cos x + \\frac{\\sin^2 x + \\cos^2 x}{\\sin x\\cos x} + \\frac{\\sin x + \\cos x}{\\sin x \\cos x} = c + \\frac{1+c}{(c^2-1)/2} = c + \\frac{2}{c-1}.$$\nSince $c = \\sqrt2\\cos(x - \\pi/4)$, $c$ takes every value in $[-\\sqrt2,\\sqrt2]$, and $\\sin x\\cos x = 0$ exactly when $c = \\pm 1$. So we must minimize $|g(c)|$, $g(c) = c + \\frac{2}{c-1}$, over $c \\in [-\\sqrt2,\\sqrt2]\\setminus\\{\\pm1\\}$.\n\nPut $t = c - 1 \\ne 0$, so $g = 1 + t + \\frac2t$.\n- If $t > 0$: by AM-GM $t + \\frac 2t \\ge 2\\sqrt2$, so $g \\ge 1 + 2\\sqrt2$.\n- If $t < 0$: with $u = -t > 0$, $g = 1 - \\left(u + \\frac2u\\right) \\le 1 - 2\\sqrt2 < 0$, so $|g| \\ge 2\\sqrt2 - 1$, with equality iff $u = \\sqrt2$, i.e. $c = 1 - \\sqrt2$.\n\nThe value $c = 1-\\sqrt2 \\approx -0.414$ lies in $[-\\sqrt2,\\sqrt2]$ and is not $\\pm1$, so it is attained (for $\\cos(x-\\pi/4) = \\frac{1-\\sqrt2}{\\sqrt2}$). Since $1+2\\sqrt2 > 2\\sqrt2-1$, the minimum of $|f|$ is $2\\sqrt2 - 1$.\n\n**Answer:** $2\\sqrt2 - 1 \\approx 1.83$."
+      },
+      {
+        "title": "Calculus on g(c)",
+        "body": "As in the first solution, $f = g(c) = c + \\frac{2}{c-1}$ with $c\\in[-\\sqrt2,\\sqrt2]\\setminus\\{\\pm1\\}$.\n\n$g(c) = 0$ would mean $c^2 - c + 2 = 0$, which has no real roots, so $g$ has constant sign on each interval of continuity. For $c > 1$, $g > 0$; on $[-\\sqrt2, 1)$, $g<0$ (e.g. $g(0) = -2$). $g'(c) = 1 - \\frac{2}{(c-1)^2}$ vanishes at $c = 1\\pm\\sqrt2$.\n\n- On $(1,\\sqrt2]$: $(c-1)^2 < 2$, so $g' < 0$ and $g$ decreases to $g(\\sqrt2) = \\sqrt2 + \\frac{2}{\\sqrt2-1} = 2+3\\sqrt2$; so $|g| \\ge 2 + 3\\sqrt2$ there.\n- On $[-\\sqrt2,1)$ (the excluded point $c=-1$ does not affect the argument): $g$ is negative, increases on $[-\\sqrt2, 1-\\sqrt2]$ and decreases on $[1-\\sqrt2, 1)$, so its maximum (smallest $|g|$) is $g(1-\\sqrt2) = 1-\\sqrt2 - \\sqrt2 = 1 - 2\\sqrt2$.\n\nSo the minimum of $|f|$ is $2\\sqrt2 - 1$."
+      }
+    ],
+    "topics": [
+      "trigonometry",
+      "inequalities"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "putnam-2003-a4",
+    "bank": "putnam",
+    "source": {
+      "contest": "Putnam",
+      "paper": "64th William Lowell Putnam Mathematical Competition (December 6, 2003)",
+      "year": 2003,
+      "number": "A4",
+      "url": "https://kskedlaya.org/putnam-archive/"
+    },
+    "grade": "undergrad",
+    "points": 10,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Suppose that $a,b,c,A,B,C$ are real numbers, $a\\ne 0$ and $A \\ne 0$, such that\n$$|ax^2 + bx + c| \\le |Ax^2 + Bx + C|$$\nfor all real numbers $x$. Show that\n$$|b^2 - 4ac| \\le |B^2 - 4AC|.$$",
+    "image": null,
+    "choices": null,
+    "answer": "Proof by cases on the signs of $D = b^2-4ac$ and $E = B^2-4AC$: if $E>0$ the small quadratic shares both roots; if both are $\\le 0$ compare after shifting to $B=0$; if $E \\le 0 < D$ use that $(Ax^2+Bx+C) \\pm (ax^2+bx+c) \\ge 0$ and add the discriminant conditions.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Three cases",
+        "body": "Write $p(x) = ax^2+bx+c$, $P(x) = Ax^2+Bx+C$, $D = b^2-4ac$, $E = B^2-4AC$. Dividing the hypothesis by $x^2$ and letting $x\\to\\infty$ gives $|a| \\le |A|$. Replacing $p$ by $-p$ or $P$ by $-P$ changes neither the hypothesis nor $D, E$, and neither does a substitution $x \\mapsto x + s$.\n\n**Case 1: $E > 0$.** Then $P$ has distinct real roots $r_1, r_2$ and $P(x) = A(x-r_1)(x-r_2)$, $E = A^2(r_1-r_2)^2$. The hypothesis gives $|p(r_j)| \\le 0$, so $p$ also vanishes at $r_1,r_2$, i.e. $p(x) = a(x-r_1)(x-r_2)$ and $D = a^2(r_1-r_2)^2 > 0$. Hence $|D| = a^2(r_1-r_2)^2 \\le A^2(r_1-r_2)^2 = |E|$.\n\n**Case 2: $E \\le 0$ and $D \\le 0$.** Then $P$ and $p$ do not change sign; after sign changes assume $A > 0$, $a > 0$, so $P \\ge 0$, $p \\ge 0$ everywhere and $a \\le A$. Shift $x$ so that $B = 0$. Now $C = P(0) \\ge 0$, $c = p(0) \\ge 0$, and the hypothesis at $x=0$ gives $c \\le C$. Therefore\n$$|D| = 4ac - b^2 \\le 4ac \\le 4AC = |E| .$$\n\n**Case 3: $E \\le 0 < D$.** Then $P$ does not change sign; assume $P \\ge 0$. The hypothesis says $-P(x) \\le p(x) \\le P(x)$, so both quadratics (or lower-degree polynomials)\n$$P + p = (A+a)x^2 + (B+b)x + (C+c), \\qquad P - p = (A-a)x^2 + (B-b)x + (C-c)$$\nare $\\ge 0$ for all $x$. A polynomial $\\alpha x^2 + \\beta x + \\gamma \\ge 0$ on $\\mathbb R$ satisfies $\\beta^2 - 4\\alpha\\gamma \\le 0$: if $\\alpha \\ne 0$ it must be positive with no two distinct real roots; if $\\alpha = 0$ it is a nonnegative linear function, so $\\beta = 0$. Hence\n$$(B+b)^2 - 4(A+a)(C+c) \\le 0, \\qquad (B-b)^2 - 4(A-a)(C-c) \\le 0 .$$\nAdding these: $2B^2 + 2b^2 - 8AC - 8ac \\le 0$, i.e. $D + E \\le 0$. So $|D| = D \\le -E = |E|$.\n\nIn all cases $|b^2-4ac| \\le |B^2-4AC|$. ∎"
+      }
+    ],
+    "topics": [
+      "polynomials",
+      "inequalities"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "putnam-2003-a5",
+    "bank": "putnam",
+    "source": {
+      "contest": "Putnam",
+      "paper": "64th William Lowell Putnam Mathematical Competition (December 6, 2003)",
+      "year": 2003,
+      "number": "A5",
+      "url": "https://kskedlaya.org/putnam-archive/"
+    },
+    "grade": "undergrad",
+    "points": 10,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "A Dyck $n$-path is a lattice path of $n$ upsteps $(1,1)$ and $n$ downsteps $(1,-1)$ that starts at the origin $O$ and never dips below the $x$-axis. A return is a maximal sequence of contiguous downsteps that terminates on the $x$-axis. For example, the Dyck 5-path illustrated has two returns, of length 3 and 1 respectively.\n\nShow that there is a one-to-one correspondence between the Dyck $n$-paths with no return of even length and the Dyck $(n-1)$-paths.",
+    "image": "qimages/putnam/2003/a5.webp",
+    "choices": null,
+    "answer": "Proof. Map a Dyck $(n-1)$-path $P$ to $UDP$ if $P$ has no even return; otherwise wrap the part of $P$ up to its last even return in an extra $U\\ldots D$. The inverse deletes the first step and the step that first brings the path back to the axis.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Explicit bijection via the first component",
+        "body": "Write $U$ for an upstep and $D$ for a downstep, and let $n\\ge1$.\n\n**Decomposition.** A nonempty Dyck path touches the $x$-axis at its start, at its end and possibly in between; cutting at these points writes it uniquely as a concatenation of *components* $UAD$, where $A$ is a Dyck path (possibly empty), lifted by one unit. The returns of the whole path are exactly the final downstep runs of the components (inside a component, $A$ is lifted, so no run of $A$ ends on the axis). The final run of $UAD$ consists of the last $D$ together with the final downstep run of $A$; if $A$ is nonempty that final run of $A$ ends on $A$'s baseline, i.e. it is the *last return* of $A$. So\n$$\\text{(return length of } UAD) = \\begin{cases} 1 & A \\text{ empty},\\\\ 1 + (\\text{length of the last return of } A) & A \\text{ nonempty}.\\end{cases}$$\n\n**The map.** Let $P$ be a Dyck $(n-1)$-path.\n- If $P$ has no return of even length, let $f(P) = UD\\,P$. Its first component $UD$ has a return of length $1$ and the other returns are those of $P$, so $f(P)$ has no even return.\n- Otherwise, let the rightmost even return of $P$ end at step $j$, write $P = P_1P_2$ with $P_1$ the first $j$ steps (a Dyck path whose last return is even) and set $f(P) = U P_1 D\\, P_2$. The first component $UP_1D$ has return length $1 + \\text{even}$, which is odd; the returns of $P_2$ are odd by the choice of $j$. So $f(P)$ has no even return.\n\nIn both cases $f(P)$ is a Dyck $n$-path.\n\n**The inverse.** Let $Q$ be a Dyck $n$-path with no even return, and let $UAD$ be its first component, $Q = UAD\\,R$. Define $g(Q) = A R$ (delete the first step and the step closing the first component). If $A$ is empty, $g(Q) = R$, which has no even return (its returns are returns of $Q$), and $f(g(Q)) = UDR = Q$. If $A$ is nonempty, the first component has odd return length, so by the formula the last return of $A$ is even, while all returns of $R$ are odd; hence the rightmost even return of $AR$ is the last return of $A$, and $f(g(Q)) = UADR = Q$. Conversely $g(f(P)) = P$ directly from the definitions.\n\nSo $f$ is a bijection from Dyck $(n-1)$-paths to Dyck $n$-paths with no even return. ∎"
+      },
+      {
+        "title": "Counting with recursions",
+        "body": "It suffices to show both sets have the same (finite) size. Let $C_n$ be the number of Dyck $n$-paths ($C_0 = 1$), $O_n$ the number whose last return has odd length ($O_0 = 0$), and $X_n$ the number with no even return ($X_0 = 1$). We use the decomposition into components $UAD$ and the fact (see the first solution) that the return of $UAD$ is odd iff $A$ is empty or the last return of $A$ is even. For $A$ of semilength $m$ there are $C_m - O_m$ such $A$.\n\nSplitting off the **last** component $UAD$ ($A$ of semilength $n-1-k$) from a path whose remaining part has semilength $k$:\n$$O_n = \\sum_{k=0}^{n-1} C_k\\,(C_{n-1-k} - O_{n-1-k}), \\qquad X_n = \\sum_{k=0}^{n-1} X_k\\,(C_{n-1-k} - O_{n-1-k}) \\qquad (n\\ge1),$$\nsince a path has no even return iff its last component has an odd return and the rest has no even return.\n\n**Claim:** $X_n = C_{n-1}$ for $n \\ge 1$. For $n=1$: $X_1 = X_0(C_0 - O_0) = 1 = C_0$. For $n \\ge 2$, by strong induction ($X_k = C_{k-1}$ for $1\\le k<n$),\n$$X_n = (C_{n-1} - O_{n-1}) + \\sum_{k=1}^{n-1} C_{k-1}(C_{n-1-k} - O_{n-1-k}) = C_{n-1} - O_{n-1} + \\sum_{j=0}^{n-2} C_j (C_{n-2-j} - O_{n-2-j}) = C_{n-1} - O_{n-1} + O_{n-1},$$\nusing the recursion for $O_{n-1}$. So $X_n = C_{n-1}$, and two finite sets of equal size are in one-to-one correspondence. ∎"
+      }
+    ],
+    "topics": [
+      "counting"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "putnam-2003-a6",
+    "bank": "putnam",
+    "source": {
+      "contest": "Putnam",
+      "paper": "64th William Lowell Putnam Mathematical Competition (December 6, 2003)",
+      "year": 2003,
+      "number": "A6",
+      "url": "https://kskedlaya.org/putnam-archive/"
+    },
+    "grade": "undergrad",
+    "points": 10,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "For a set $S$ of nonnegative integers, let $r_S(n)$ denote the number of ordered pairs $(s_1, s_2)$ such that $s_1 \\in S$, $s_2 \\in S$, $s_1 \\ne s_2$, and $s_1 + s_2 = n$. Is it possible to partition the nonnegative integers into two sets $A$ and $B$ in such a way that $r_A(n) = r_B(n)$ for all $n$?",
+    "image": null,
+    "choices": null,
+    "answer": "Yes: put $n$ in $A$ if its binary expansion has an even number of 1s and in $B$ otherwise (Thue–Morse partition). Flipping both numbers at the lowest binary digit where they differ maps $A$-pairs to $B$-pairs bijectively.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Thue–Morse partition and a bit-flip bijection",
+        "body": "**Yes.** Let $A$ be the set of nonnegative integers with an even number of $1$s in base $2$, and $B$ those with an odd number.\n\nFix $n$. Given an ordered pair $(a_1,a_2)$ of distinct elements of $A$ with $a_1 + a_2 = n$, let $i$ be the lowest binary position in which $a_1$ and $a_2$ differ (it exists since $a_1 \\ne a_2$). In position $i$ one of them has digit $1$ and the other digit $0$. Flip that digit in **both** numbers, obtaining $b_1, b_2$. Then:\n- one number increased by $2^i$ and the other decreased by $2^i$, so $b_1 + b_2 = n$ (and both are still nonnegative integers);\n- each number had exactly one digit changed, so the parity of its number of $1$s changed: $b_1, b_2 \\in B$;\n- $b_1$ and $b_2$ still differ in position $i$ and agree below it, so $b_1 \\ne b_2$ and their lowest differing position is again $i$.\n\nThe same operation sends $B$-pairs to $A$-pairs, and by the last point applying it twice gives back the original pair. So it is a bijection between the pairs counted by $r_A(n)$ and those counted by $r_B(n)$, hence $r_A(n) = r_B(n)$ for every $n$. ∎"
+      },
+      {
+        "title": "Generating functions",
+        "body": "With the same $A, B$, let $f(x) = \\sum_{n\\in A} x^n$, $g(x) = \\sum_{n\\in B} x^n$ (formal power series). The coefficient of $x^n$ in $f(x)^2$ counts ordered pairs in $A$ with sum $n$, including the pair $(n/2,n/2)$ when $n/2 \\in A$, which is counted by $f(x^2)$. So\n$$\\sum_n r_A(n)x^n = f(x)^2 - f(x^2), \\qquad \\sum_n r_B(n)x^n = g(x)^2 - g(x^2),$$\nand we need $f(x)^2 - g(x)^2 = f(x^2) - g(x^2)$.\n\nLet $t(x) = f(x) - g(x) = \\sum_{n\\ge0} (-1)^{s(n)}x^n$, where $s(n)$ is the number of binary $1$s of $n$. Expanding the product $\\prod_{k\\ge0}(1 - x^{2^k})$, each $x^n$ arises exactly once (choose the factors $-x^{2^k}$ for the binary digits of $n$) with sign $(-1)^{s(n)}$, so $t(x) = \\prod_{k\\ge0}(1-x^{2^k})$. Also $f + g = \\frac{1}{1-x}$. Therefore\n$$f(x)^2 - g(x)^2 = \\frac{t(x)}{1-x} = \\prod_{k\\ge1}(1 - x^{2^k}) = t(x^2) = f(x^2) - g(x^2). \\qquad ∎$$\n\n*Remark.* The partition is unique up to swapping $A$ and $B$: the condition $r_A(m) = r_B(m)$ determines where $m$ goes once $0,\\dots,m-1$ are placed."
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "counting"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "putnam-2003-b1",
+    "bank": "putnam",
+    "source": {
+      "contest": "Putnam",
+      "paper": "64th William Lowell Putnam Mathematical Competition (December 6, 2003)",
+      "year": 2003,
+      "number": "B1",
+      "url": "https://kskedlaya.org/putnam-archive/"
+    },
+    "grade": "undergrad",
+    "points": 10,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Do there exist polynomials $a(x), b(x), c(y), d(y)$ such that\n$$1 + xy + x^2y^2 = a(x)c(y) + b(x)d(y)$$\nholds identically?",
+    "image": null,
+    "choices": null,
+    "answer": "No. Setting $y = -1, 0, 1$ would put the three linearly independent polynomials $1-x+x^2$, $1$, $1+x+x^2$ in the span of $a(x)$ and $b(x)$, which has dimension at most $2$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Substitute three values of y",
+        "body": "**No.** Suppose such polynomials exist. Setting $y = -1$, $y=0$, $y=1$ gives\n$$1 - x + x^2 = c(-1)a(x) + d(-1)b(x),\\quad 1 = c(0)a(x) + d(0)b(x),\\quad 1 + x + x^2 = c(1)a(x) + d(1)b(x).$$\nSo the three polynomials $1-x+x^2$, $1$, $1+x+x^2$ lie in the vector space spanned by $a(x)$ and $b(x)$, which has dimension at most $2$. But they are linearly independent: their span contains $1$, $\\frac12[(1+x+x^2) - (1-x+x^2)] = x$ and then $x^2$, so it is the $3$-dimensional space of polynomials of degree $\\le 2$. Contradiction. ∎"
+      },
+      {
+        "title": "Rank of the coefficient matrix",
+        "body": "**No.** Let $N$ exceed all degrees involved and write $a(x) = \\sum_i \\alpha_i x^i$, $b(x) = \\sum_i\\beta_ix^i$, $c(y) = \\sum_j \\gamma_j y^j$, $d(y) = \\sum_j\\delta_jy^j$ ($0 \\le i,j\\le N$). The coefficient of $x^iy^j$ in $a(x)c(y) + b(x)d(y)$ is the $(i,j)$ entry of the matrix\n$$M = \\alpha\\gamma^T + \\beta\\delta^T,$$\na sum of two matrices of rank $\\le 1$, so $\\operatorname{rank} M \\le 2$. The coefficient matrix of $1 + xy + x^2y^2$ has $1$ in positions $(0,0),(1,1),(2,2)$ and $0$ elsewhere, so it has rank $3$. Hence they cannot be equal. ∎"
+      }
+    ],
+    "topics": [
+      "polynomials",
+      "linear-algebra"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "putnam-2003-b2",
+    "bank": "putnam",
+    "source": {
+      "contest": "Putnam",
+      "paper": "64th William Lowell Putnam Mathematical Competition (December 6, 2003)",
+      "year": 2003,
+      "number": "B2",
+      "url": "https://kskedlaya.org/putnam-archive/"
+    },
+    "grade": "undergrad",
+    "points": 10,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $n$ be a positive integer. Starting with the sequence $1, \\frac{1}{2}, \\frac{1}{3}, \\dots, \\frac{1}{n}$, form a new sequence of $n-1$ entries $\\frac{3}{4}, \\frac{5}{12}, \\dots, \\frac{2n-1}{2n(n-1)}$ by taking the averages of two consecutive entries in the first sequence. Repeat the averaging of neighbors on the second sequence to obtain a third sequence of $n-2$ entries, and continue until the final sequence produced consists of a single number $x_n$. Show that $x_n < 2/n$.",
+    "image": null,
+    "choices": null,
+    "answer": "Proof. By induction the $j$-th entry of the $k$-th sequence is $2^{1-k}\\sum_{i=0}^{k-1}\\binom{k-1}{i}\\frac{1}{j+i}$, so $x_n = \\frac{1}{2^{n-1}}\\sum_{i=1}^{n}\\binom{n-1}{i-1}\\frac1i = \\frac{2^n-1}{n2^{n-1}} < \\frac2n$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Closed form by induction",
+        "body": "Number the sequences $k = 1, 2, \\dots, n$ (the original is $k=1$); sequence $k$ has entries $j = 1,\\dots,n-k+1$. **Claim:** the $j$-th entry of sequence $k$ is\n$$e_{k,j} = \\frac{1}{2^{k-1}}\\sum_{i=0}^{k-1}\\binom{k-1}{i}\\frac{1}{j+i}.$$\nFor $k=1$ this is $1/j$. If it holds for $k$, then\n$$e_{k+1,j} = \\frac{e_{k,j} + e_{k,j+1}}{2} = \\frac{1}{2^k}\\left[\\sum_{i}\\binom{k-1}{i}\\frac{1}{j+i} + \\sum_i \\binom{k-1}{i}\\frac{1}{j+1+i}\\right] = \\frac{1}{2^k}\\sum_{m=0}^{k}\\left[\\binom{k-1}{m} + \\binom{k-1}{m-1}\\right]\\frac{1}{j+m},$$\nand Pascal's rule gives the claim for $k+1$.\n\nSo $x_n = e_{n,1} = \\dfrac{1}{2^{n-1}}\\displaystyle\\sum_{i=0}^{n-1}\\binom{n-1}{i}\\frac{1}{i+1}$. Since $\\frac{1}{i+1}\\binom{n-1}{i} = \\frac1n\\binom{n}{i+1}$,\n$$x_n = \\frac{1}{n\\,2^{n-1}}\\sum_{i=0}^{n-1}\\binom{n}{i+1} = \\frac{2^n - 1}{n\\,2^{n-1}} = \\frac2n - \\frac{1}{n\\,2^{n-1}} < \\frac2n. \\qquad ∎$$\n(Check: $n=2$ gives $x_2 = \\frac34 = \\frac{2^2-1}{2\\cdot 2}$.)"
+      },
+      {
+        "title": "Write the entries as integrals",
+        "body": "Write $\\frac1j = \\int_0^1 t^{j-1}\\,dt$. Averaging neighbours is linear, and averaging $\\int_0^1 t^{j-1}h(t)\\,dt$ with $\\int_0^1 t^{j}h(t)\\,dt$ gives $\\int_0^1 t^{j-1}\\frac{1+t}{2}h(t)\\,dt$. By induction on $k$, the $j$-th entry of the $k$-th sequence is\n$$\\int_0^1 t^{j-1}\\left(\\frac{1+t}{2}\\right)^{k-1}dt .$$\nHence, with $u = \\frac{1+t}{2}$, $dt = 2\\,du$,\n$$x_n = \\int_0^1\\left(\\frac{1+t}{2}\\right)^{n-1}dt = 2\\int_{1/2}^1 u^{n-1}\\,du = \\frac2n\\left(1 - \\frac{1}{2^n}\\right) < \\frac2n. \\qquad ∎$$"
+      }
+    ],
+    "topics": [
+      "sequences-series",
+      "counting"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "putnam-2003-b3",
+    "bank": "putnam",
+    "source": {
+      "contest": "Putnam",
+      "paper": "64th William Lowell Putnam Mathematical Competition (December 6, 2003)",
+      "year": 2003,
+      "number": "B3",
+      "url": "https://kskedlaya.org/putnam-archive/"
+    },
+    "grade": "undergrad",
+    "points": 10,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Show that for each positive integer $n$,\n$$n! = \\prod_{i=1}^n \\mathrm{lcm}\\{1, 2, \\dots, \\lfloor n/i\\rfloor\\}.$$\n(Here $\\mathrm{lcm}$ denotes the least common multiple, and $\\lfloor x \\rfloor$ denotes the greatest integer $\\le x$.)",
+    "image": null,
+    "choices": null,
+    "answer": "Proof. For each prime $p$, both sides have $p$-adic valuation equal to the number of pairs $(i,j)$ of positive integers with $i\\,p^j \\le n$ (count by $j$: Legendre's formula; count by $i$: $v_p(\\mathrm{lcm}(1,\\dots,m)) = \\#\\{j\\ge1 : p^j \\le m\\}$).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Compare prime exponents by double counting",
+        "body": "Fix a prime $p$ and write $v_p$ for the exponent of $p$.\n\n**Left side (Legendre).** Among $1,\\dots,n$ there are $\\lfloor n/p^j\\rfloor$ multiples of $p^j$, and a number exactly divisible by $p^e$ is counted once for each $j = 1,\\dots,e$. So\n$$v_p(n!) = \\sum_{j\\ge1}\\left\\lfloor\\frac{n}{p^j}\\right\\rfloor = \\#\\{(i,j) : i,j \\ge 1,\\ i\\,p^j \\le n\\}.$$\n\n**Right side.** $v_p(\\mathrm{lcm}\\{1,\\dots,m\\})$ is the largest $e$ with $p^e \\le m$ (the lcm contains $p^e$ for $p^e\\le m$ and no higher power of $p$ divides any of $1,\\dots,m$), i.e. $\\#\\{j\\ge1 : p^j \\le m\\}$; for $m=0$ or $1$ this is $0$. For integers $i,j\\ge1$, $p^j \\le \\lfloor n/i\\rfloor \\iff p^j \\le n/i \\iff i\\,p^j \\le n$ (as $p^j$ is an integer). Therefore\n$$v_p\\left(\\prod_{i=1}^n \\mathrm{lcm}\\{1,\\dots,\\lfloor n/i\\rfloor\\}\\right) = \\sum_{i=1}^n \\#\\{j \\ge 1: i\\,p^j\\le n\\} = \\#\\{(i,j): i,j\\ge1,\\ i\\,p^j\\le n\\},$$\nwhere restricting to $i\\le n$ loses nothing.\n\nBoth sides have the same exponent of every prime, and both are positive integers, so they are equal. ∎"
+      },
+      {
+        "title": "Induction on n",
+        "body": "Let $L(m) = \\mathrm{lcm}\\{1,\\dots,m\\}$ with $L(0) = 1$, and $F(n) = \\prod_{i=1}^{n}L(\\lfloor n/i\\rfloor)$; adding the factor $i = n$ (equal to $L(0) = 1$) we may write $F(n-1) = \\prod_{i=1}^{n}L(\\lfloor (n-1)/i\\rfloor)$. Since $F(1) = 1 = 1!$, it suffices to show $F(n)/F(n-1) = n$ for $n\\ge2$.\n\nFor each $i$: if $i\\nmid n$ then $\\lfloor n/i\\rfloor = \\lfloor (n-1)/i\\rfloor$ and the factor ratio is $1$. If $i \\mid n$, put $d = n/i$; then $\\lfloor (n-1)/i\\rfloor = d-1$ and the ratio is $L(d)/L(d-1)$. This ratio equals $p$ if $d = p^e$ is a power of a prime ($e\\ge1$), because $p^e$ is the first number raising the power of $p$ in the lcm; and it equals $1$ otherwise ($d = 1$, or $d$ has two distinct prime factors and then every prime power dividing $d$ is $<d$ and already divides $L(d-1)$).\n\nAs $i$ runs over the divisors of $n$, so does $d$. Hence\n$$\\frac{F(n)}{F(n-1)} = \\prod_{\\substack{p^e \\mid n\\\\ e\\ge1}} p = \\prod_{p} p^{v_p(n)} = n . \\qquad ∎$$"
+      }
+    ],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "putnam-2003-b4",
+    "bank": "putnam",
+    "source": {
+      "contest": "Putnam",
+      "paper": "64th William Lowell Putnam Mathematical Competition (December 6, 2003)",
+      "year": 2003,
+      "number": "B4",
+      "url": "https://kskedlaya.org/putnam-archive/"
+    },
+    "grade": "undergrad",
+    "points": 10,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $f(z) = az^4 + bz^3 + cz^2 + dz + e = a(z-r_1)(z-r_2)(z-r_3)(z-r_4)$ where $a,b,c,d,e$ are integers, $a \\ne 0$. Show that if $r_1 + r_2$ is a rational number and $r_1 + r_2 \\ne r_3 + r_4$, then $r_1 r_2$ is a rational number.",
+    "image": null,
+    "choices": null,
+    "answer": "Proof. With $g = r_1+r_2$, $h = r_3+r_4$, $u = r_1r_2$, $v = r_3r_4$, Vieta gives $g+h$, $gh+u+v$, $gv+hu$ rational; then $g(u+v) - (gv+hu) = (g-h)u$ is rational and $g\\ne h$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Vieta's formulas",
+        "body": "Put $g = r_1+r_2$, $h = r_3+r_4$, $u = r_1r_2$, $v = r_3r_4$. Then\n$$\\frac{f(z)}{a} = (z^2 - gz + u)(z^2 - hz + v) = z^4 - (g+h)z^3 + (gh + u + v)z^2 - (gv + hu)z + uv .$$\nComparing coefficients, the numbers\n$$g + h = -\\frac ba,\\qquad gh + u + v = \\frac ca,\\qquad gv + hu = -\\frac da$$\nare rational. Since $g$ is rational, $h$ is rational; then $u + v = \\frac ca - gh$ is rational; then\n$$g(u+v) - (gv + hu) = (g-h)\\,u$$\nis rational. As $g - h$ is a nonzero rational number, $u = r_1r_2$ is rational. ∎\n\n*Remark.* The hypothesis $r_1+r_2 \\ne r_3+r_4$ is needed: for $z^4 - 2 = (z^2-\\sqrt2)(z^2+\\sqrt2)$, take $r_1,r_2$ to be the roots of $z^2 - \\sqrt2$; then $r_1 + r_2 = 0 = r_3 + r_4$ but $r_1r_2 = -\\sqrt2$ is irrational."
+      }
+    ],
+    "topics": [
+      "polynomials",
+      "algebra"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "putnam-2003-b5",
+    "bank": "putnam",
+    "source": {
+      "contest": "Putnam",
+      "paper": "64th William Lowell Putnam Mathematical Competition (December 6, 2003)",
+      "year": 2003,
+      "number": "B5",
+      "url": "https://kskedlaya.org/putnam-archive/"
+    },
+    "grade": "undergrad",
+    "points": 10,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $A,B$, and $C$ be equidistant points on the circumference of a circle of unit radius centered at $O$, and let $P$ be any point in the circle's interior. Let $a, b, c$ be the distance from $P$ to $A, B, C$, respectively. Show that there is a triangle with side lengths $a, b, c$, and that the area of this triangle depends only on the distance from $P$ to $O$.",
+    "image": null,
+    "choices": null,
+    "answer": "Proof. With $A,B,C = 1,\\omega,\\omega^2$ and $P = z$, the vectors $z-1$, $\\omega(z-\\omega)$, $\\omega^2(z-\\omega^2)$ have lengths $a,b,c$ and sum to $0$, so they form a triangle; its area is $\\frac{\\sqrt3}{4}(1-|z|^2) > 0$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Complex numbers",
+        "body": "Place the circle in the complex plane with $O = 0$, $A = 1$, $B = \\omega$, $C = \\omega^2$, where $\\omega = e^{2\\pi i/3}$ (so $1 + \\omega + \\omega^2 = 0$, $|\\omega| = 1$), and let $P = z$ with $|z| < 1$. Consider\n$$u = z - 1,\\qquad v = \\omega(z - \\omega),\\qquad w = \\omega^2(z-\\omega^2).$$\nThen $|u| = a$, $|v| = b$, $|w| = c$, and\n$$u + v + w = z(1+\\omega+\\omega^2) - (1 + \\omega^2 + \\omega^4) = 0 - (1+\\omega^2+\\omega) = 0 .$$\nSo placing $u, v, w$ head to tail gives a closed path $0 \\to u \\to u+v \\to 0$: a triangle with side lengths $a,b,c$, provided it is not degenerate. We compute its area.\n\nThe triangle with vertices $0$, $u$, $u+v$ has area $\\frac12|\\operatorname{Im}(\\bar u\\,(u+v))| = \\frac12|\\operatorname{Im}(\\bar u v)|$. Now\n$$\\bar u v = (\\bar z - 1)(\\omega z - \\omega^2) = \\omega|z|^2 - (\\omega z + \\omega^2\\bar z) + \\omega^2 .$$\nSince $\\omega^2\\bar z = \\overline{\\omega z}$, the middle term is real. With $\\operatorname{Im}\\omega = \\frac{\\sqrt3}{2}$ and $\\operatorname{Im}\\omega^2 = -\\frac{\\sqrt3}{2}$,\n$$\\operatorname{Im}(\\bar u v) = \\frac{\\sqrt3}{2}\\left(|z|^2 - 1\\right).$$\nHence the area is\n$$\\frac{\\sqrt3}{4}\\left(1 - |z|^2\\right) = \\frac{\\sqrt3}{4}\\left(1 - OP^2\\right),$$\nwhich is **positive** because $P$ is inside the circle (so the triangle is non-degenerate, i.e. $a,b,c$ satisfy the strict triangle inequalities), and depends only on $OP$. ∎"
+      },
+      {
+        "title": "Power sums and Heron's formula",
+        "body": "Use coordinates $O = 0$, $P = z$, $d = |z| < 1$, and $A,B,C = \\zeta \\in \\{1,\\omega,\\omega^2\\}$ as in the first solution. Then $|z-\\zeta|^2 = d^2 + 1 - 2s_\\zeta$ with $s_\\zeta = \\operatorname{Re}(z\\bar\\zeta)$. Writing $z = de^{i\\varphi}$, $s_\\zeta = d\\cos(\\varphi - \\theta_\\zeta)$ for the three angles $\\theta_\\zeta = 0, \\frac{2\\pi}3, \\frac{4\\pi}3$, so\n$$\\sum_\\zeta s_\\zeta = 0, \\qquad \\sum_\\zeta s_\\zeta^2 = d^2\\sum_\\zeta\\cos^2(\\varphi-\\theta_\\zeta) = \\tfrac32 d^2 .$$\nTherefore\n$$a^2+b^2+c^2 = 3(1+d^2),\\qquad a^4+b^4+c^4 = \\sum_\\zeta\\left[(1+d^2)^2 - 4(1+d^2)s_\\zeta + 4s_\\zeta^2\\right] = 3(1+d^2)^2 + 6d^2 .$$\nLet $H = (a+b+c)(-a+b+c)(a-b+c)(a+b-c) = (a^2+b^2+c^2)^2 - 2(a^4+b^4+c^4)$ (a standard expansion). Then\n$$H = 9(1+d^2)^2 - 6(1+d^2)^2 - 12d^2 = 3(1+d^2)^2 - 12 d^2 = 3(1-d^2)^2 > 0 .$$\n**Existence.** Any two of the factors $-a+b+c$, $a-b+c$, $a+b-c$ have a positive sum ($2c$, $2b$, $2a$), so at most one is negative. Since $H>0$ and $a+b+c>0$, none is negative or zero: $a, b, c$ satisfy the strict triangle inequalities, so a triangle with these sides exists.\n\n**Area.** By Heron's formula, $16\\,\\mathrm{Area}^2 = H = 3(1-d^2)^2$, so\n$$\\mathrm{Area} = \\frac{\\sqrt3}{4}\\left(1 - d^2\\right),$$\nwhich depends only on $d = OP$. ∎"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "complex-numbers"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "putnam-2003-b6",
+    "bank": "putnam",
+    "source": {
+      "contest": "Putnam",
+      "paper": "64th William Lowell Putnam Mathematical Competition (December 6, 2003)",
+      "year": 2003,
+      "number": "B6",
+      "url": "https://kskedlaya.org/putnam-archive/"
+    },
+    "grade": "undergrad",
+    "points": 10,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $f(x)$ be a continuous real-valued function defined on the interval $[0,1]$. Show that\n$$\\int_0^1\\int_0^1 |f(x) + f(y)|\\,dx\\,dy \\ge \\int_0^1 |f(x)|\\,dx.$$",
+    "image": null,
+    "choices": null,
+    "answer": "Proof. Split $[0,1]$ into $E_+ = \\{f\\ge0\\}$ and $E_- = \\{f<0\\}$ with measures $p,q$ and $X = \\int_{E_+}|f|$, $Y = \\int_{E_-}|f|$. The same-sign blocks give exactly $2pX + 2qY$, the mixed blocks at least $2|qX - pY|$, and $2pX+2qY+2|qX-pY| - (p+q)(X+Y) \\ge 0$ by a short case check.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Split by the sign of f",
+        "body": "Let $E_+ = \\{x\\in[0,1] : f(x)\\ge0\\}$ (closed) and $E_- = \\{x : f(x) < 0\\}$ (open), with lengths (Lebesgue measures) $p$ and $q$, $p + q = 1$, and put\n$$X = \\int_{E_+}|f| = \\int_{E_+} f, \\qquad Y = \\int_{E_-}|f| = -\\int_{E_-}f,$$\nso the right side is $X + Y = (p+q)(X+Y)$. Split the square $[0,1]^2$ into four blocks.\n\n- On $E_+\\times E_+$: $|f(x)+f(y)| = f(x) + f(y)$, so the integral is $\\iint_{E_+\\times E_+}(f(x)+f(y))\\,dx\\,dy = pX + pX = 2pX$.\n- On $E_-\\times E_-$: similarly the integral is $2qY$.\n- On $E_+\\times E_-$: $\\iint |f(x)+f(y)| \\ge \\left|\\iint (f(x)+f(y))\\right| = |qX - pY|$, and the same bound holds on $E_-\\times E_+$.\n\nHence\n$$\\iint_{[0,1]^2}|f(x)+f(y)| - \\int_0^1|f| \\ \\ge\\ 2pX + 2qY + 2|qX - pY| - (p+q)(X+Y) = (p-q)(X-Y) + 2|qX-pY| .$$\nIt remains to show $(p-q)(X-Y) + 2|qX-pY| \\ge 0$ (all of $p,q,X,Y$ are $\\ge0$).\n- If $(p-q)(X-Y) \\ge 0$, this is clear.\n- If $p > q$ and $X < Y$: then $2|qX - pY| \\ge 2(pY - qX)$ and\n$$2(pY - qX) + (p-q)(X-Y) = p(X+Y) + q(Y - 3X) \\ge q(X+Y) + q(Y-3X) = 2q(Y-X) \\ge 0 .$$\n- If $p < q$ and $X > Y$: symmetrically, $2(qX - pY) + (p-q)(X-Y) = q(X+Y) + p(X-3Y) \\ge 2p(X-Y) \\ge 0$.\n\nIn every case the difference is $\\ge 0$, which proves the inequality. ∎\n\n*Remark.* Equality holds e.g. for $f \\equiv 0$; the constant $1$ is sharp, as functions close to $\\pm1$ on two halves of $[0,1]$ show ($p = q = \\frac12$, $X = Y$)."
+      }
+    ],
+    "topics": [
+      "real-analysis",
+      "inequalities"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

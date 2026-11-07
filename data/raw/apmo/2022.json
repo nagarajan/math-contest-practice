@@ -1,0 +1,174 @@
+[
+  {
+    "id": "apmo-2022-01",
+    "bank": "apmo",
+    "source": {
+      "contest": "APMO",
+      "paper": "APMO",
+      "year": 2022,
+      "number": 1,
+      "url": "https://www.apmo-official.org/static/problems/apmo2022_prb.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Find all pairs $(a,b)$ of positive integers such that $a^3$ is a multiple of $b^2$ and $b-1$ is a multiple of $a-1$.\n\nNote: An integer $n$ is said to be a multiple of an integer $m$ if there is an integer $k$ such that $n=km$.",
+    "image": null,
+    "choices": null,
+    "answer": "Exactly the pairs $(n,n)$ and $(n,1)$, $n\\ge1$ (write $a^3=b^2c$; reducing mod $a-1$ gives $c\\equiv1$, then compare sizes).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Write $a^3=b^2c$ and reduce mod $a-1$",
+        "body": "**These pairs work.** If $a=b$: $a^2\\mid a^3$ and $a-1\\mid a-1$. If $b=1$: $1\\mid a^3$ and $b-1=0=0\\cdot(a-1)$.\n\n**No others.** If $a=1$, then $b-1$ is a multiple of $0$, so $b=1$. Let $a\\ge2$.\n\n* *$b<a$.* Then $0\\le b-1<a-1$ and $a-1\\mid b-1$, so $b=1$.\n* *$b\\ge a$.* Write $a^3=b^2c$ with $c$ a positive integer. Modulo $a-1$ we have $a\\equiv1$ and $b\\equiv1$ (as $a-1\\mid b-1$), so $1\\equiv a^3=b^2c\\equiv c\\pmod{a-1}$.\n  * If $c\\ge a$: $a^3=b^2c\\ge b^2a\\ge a^3$, so equality holds throughout and $b=a$.\n  * If $c<a$: $1\\le c\\le a-1$ and $c\\equiv1\\pmod{a-1}$ force $c=1$. Then $a^3=b^2$, so $a$ is a perfect square: $a=d^2$, $b=d^3$ with $d\\ge2$. Now $d^2-1\\mid d^3-1=d(d^2-1)+(d-1)$ gives $d^2-1\\mid d-1$, impossible since $0<d-1<d^2-1$.\n\n**Answer:** $(a,b)=(n,n)$ or $(n,1)$ for any positive integer $n$. ∎"
+      }
+    ],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "apmo-2022-02",
+    "bank": "apmo",
+    "source": {
+      "contest": "APMO",
+      "paper": "APMO",
+      "year": 2022,
+      "number": 2,
+      "url": "https://www.apmo-official.org/static/problems/apmo2022_prb.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $ABC$ be a right triangle with $\\angle B=90^\\circ$. Point $D$ lies on the line $CB$ such that $B$ is between $D$ and $C$. Let $E$ be the midpoint of $AD$ and let $F$ be the second intersection point of the circumcircle of $\\triangle ACD$ and the circumcircle of $\\triangle BDE$. Prove that as $D$ varies, the line $EF$ passes through a fixed point.",
+    "image": null,
+    "choices": null,
+    "answer": "Proof: the fixed point is the reflection $P$ of $C$ in $B$. If $EF$ meets circle $ACD$ again at $G$, then $AG\\parallel DC$ (since $EB=ED$), and the half-turn about $E$ maps $G$ to the point $P$ on line $DC$ with $DP=AG$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Isosceles trapezoid",
+        "body": "Use directed angles mod $180^\\circ$. Let $\\omega$ be the circle $ACD$.\n\n**$EB=ED$.** Triangle $ABD$ has a right angle at $B$ and $E$ is the midpoint of its hypotenuse $AD$, so $EB=ED=EA$. Hence $\\angle(BD,BE)=\\angle(DE,DB)$.\n\n**The point $G$.** $E$ is inside $\\omega$ (midpoint of the chord $AD$), so line $EF$ meets $\\omega$ again at a point $G$. Note $G\\ne A$: otherwise line $EF$ would be line $AD$, and $F$ would be $A$ or $D$; $F\\ne D$ by definition, and $F\\ne A$ because the circle $BDE$ meets line $AD$ only at $D$ and $E$. Now, using $\\omega$, then that $G,E,F$ are collinear, then circle $BDEF$, then $EB=ED$:\n$$\\angle(AD,AG)=\\angle(FD,FG)=\\angle(FD,FE)=\\angle(BD,BE)=\\angle(DE,DB)=\\angle(AD,DB).$$\nHence $AG\\parallel DB$: the chord $AG$ of $\\omega$ is parallel to the chord $DC$.\n\n**Coordinates.** Put $B=(0,0)$, $C=(c,0)$, $A=(0,a)$, $D=(-d,0)$ with $a,c,d>0$. The centre of $\\omega$ lies on the perpendicular bisector $x=\\frac{c-d}2$ of $DC$, and $G$ is the reflection of $A$ in that line: $G=(c-d,\\,a)$. The half-turn about $E=\\left(-\\frac d2,\\frac a2\\right)$ maps $G$ to\n$$P=(-d-(c-d),\\ a-a)=(-c,0),$$\nwhich lies on line $GE$, i.e. on line $EF$.\n\nSo $EF$ always passes through $P=(-c,0)$, the reflection of $C$ in $B$, which does not depend on $D$. (When $D=P$ itself the two circles are tangent at $D$ and $F$ is not defined.) ∎"
+      },
+      {
+        "title": "Pure coordinates",
+        "body": "With $A=(0,a)$, $B=(0,0)$, $C=(c,0)$, $D=(-d,0)$, $E=\\left(-\\frac d2,\\frac a2\\right)$, one checks by substitution that\n$$\\omega_1:\\ x^2+y^2+(d-c)x+\\left(\\tfrac{cd}{a}-a\\right)y-cd=0,\\qquad \\omega_2:\\ x^2+y^2+dx+\\tfrac{d^2-a^2}{2a}\\,y=0$$\nare the circles $ACD$ and $BDE$. Subtracting, their radical axis $DF$ is $cx+\\frac{a^2+d^2-2cd}{2a}y+cd=0$; intersecting with $\\omega_2$ gives, besides $D$,\n$$F=\\left(\\frac{c(d^2-a^2-2cd)}{a^2+(d-2c)^2},\\ \\frac{2ac(c-d)}{a^2+(d-2c)^2}\\right).$$\nThe line $ax+(d-2c)y+ac=0$ passes through $E$ (indeed $-\\frac{ad}2+\\frac{(d-2c)a}2+ac=0$) and through $F$ (direct substitution), so it is line $EF$. It contains $(-c,0)$ for every $d$. ∎"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "apmo-2022-03",
+    "bank": "apmo",
+    "source": {
+      "contest": "APMO",
+      "paper": "APMO",
+      "year": 2022,
+      "number": 3,
+      "url": "https://www.apmo-official.org/static/problems/apmo2022_prb.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Find all positive integers $k<202$ for which there exists a positive integer $n$ such that\n$$\\left\\{\\frac{n}{202}\\right\\}+\\left\\{\\frac{2n}{202}\\right\\}+\\cdots+\\left\\{\\frac{kn}{202}\\right\\}=\\frac k2,$$\nwhere $\\{x\\}$ denote the fractional part of $x$.\n\nNote: $\\{x\\}$ denotes the real number $k$ with $0\\le k<1$ such that $x-k$ is an integer.",
+    "image": null,
+    "choices": null,
+    "answer": "$k\\in\\{1,100,101,201\\}$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Average remainder $101$",
+        "body": "Multiplying by $202$, the condition says that the remainders $r_i$ of $in$ modulo $202$ ($1\\le i\\le k$) satisfy $\\sum r_i=101k$. Only $n\\bmod 202$ matters.\n\n* $n\\equiv0$: all $r_i=0$ — never.\n* $n\\equiv101$: $r_i=101$ for odd $i$ and $0$ for even $i$, so $\\sum r_i=101\\lceil k/2\\rceil$, which equals $101k$ only for $k=1$. So $k=1$ works (with $n=101$).\n* $101\\nmid n$: write $in=202q_i+r_i$ and $z=\\sum q_i$. Then\n$$n\\cdot\\frac{k(k+1)}2-202z=101k\\ \\Longrightarrow\\ nk(k+1)=202(2z+k).$$\nSo the prime $101$ divides $nk(k+1)$, hence $k(k+1)$; with $k<202$ this means $k\\in\\{100,101,201\\}$.\n\n**All three work.**\n* $k=201$, $n=1$: the remainders are $1,2,\\dots,201$, with sum $\\frac{201\\cdot202}2=101\\cdot201$.\n* $k=100$, $n=2$: the remainders are $2,4,\\dots,200$, with sum $2\\cdot5050=101\\cdot100$.\n* $k=101$, $n=51$: for $i=4j+t$ ($0\\le j\\le24$, $1\\le t\\le4$), $51i=204j+51t\\equiv 2j+51t\\pmod{202}$, so the remainders are $2j+51,\\ 2j+102,\\ 2j+153,\\ 2j+2$ (all less than $202$), with sum $8j+308$. Over $j=0,\\dots,24$ this gives $8\\cdot300+25\\cdot308=10100$, and $i=101$ adds $51\\cdot101=5151\\equiv101$. Total $10201=101\\cdot101$.\n\n**Answer:** $k=1,\\ 100,\\ 101,\\ 201$. ∎"
+      }
+    ],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "apmo-2022-04",
+    "bank": "apmo",
+    "source": {
+      "contest": "APMO",
+      "paper": "APMO",
+      "year": 2022,
+      "number": 4,
+      "url": "https://www.apmo-official.org/static/problems/apmo2022_prb.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $n$ and $k$ be positive integers. Cathy is playing the following game. There are $n$ marbles and $k$ boxes, with the marbles labelled $1$ to $n$. Initially, all marbles are placed inside one box. Each turn, Cathy chooses a box and then moves the marble with the smallest label, say $i$, to either any empty box or the box containing marble $i+1$. Cathy wins if at any point there is a box containing only marble $n$.\n\nDetermine all pairs of integers $(n,k)$ such that Cathy can win this game.",
+    "image": null,
+    "choices": null,
+    "answer": "Cathy can win exactly when $n\\le 2^{k-1}$ (build the win for $2^k$ marbles from two copies of the win for $2^{k-1}$; for $2^{k-1}+1$ marbles, induct on $k$ using the last time marble $2^{k-2}+1$ leaves the starting box).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Reversible moves and induction on $k$",
+        "body": "**Basic facts.**\n1. Every non-empty box always contains a set of consecutive labels: moves only remove the smallest marble $i$ of a box, and add it either to an empty box or to the box whose smallest marble is $i+1$.\n2. Moves are reversible: moving $i$ back from its new box (where it is the smallest) to its old box is again a legal move (that box is empty or contains $i+1$).\n3. Marble $n$ never moves before Cathy wins (it is the smallest in its box only when it is alone).\n4. *Deleting marbles.* Take a legal sequence of moves, delete all marbles below some label, or all marbles above some label, and skip the moves of deleted marbles. The rest is still legal: a moved marble is still the smallest in its box; a box that was empty is still empty; a box containing $i+1$ still does, or — if $i+1$ was deleted — it now holds only deleted marbles and is empty. Deleting the marbles below $n-n'+1$ and relabelling shows: **if Cathy can win with $n$ marbles and $k$ boxes, she can win with any $n'\\le n$ marbles and $k$ boxes.**\n\nSo it suffices to show: (A) $2^{k-1}$ marbles can be won with $k$ boxes, and (B) $2^{k-1}+1$ marbles cannot.\n\n**(A) by induction on $k$.** For $k=1$ the single marble is already alone. Suppose a winning sequence $\\sigma$ exists for $2^{m-1}$ marbles and $m$ boxes; consider $2^m$ marbles and $m+1$ boxes, with starting box $S$ and a spare box $B$.\n* Play $\\sigma$ on marbles $1,\\dots,2^{m-1}$ using $S$ and $m-1$ other boxes, never using $B$. The marbles above $2^{m-1}$ sit in $S$ above marble $2^{m-1}$, which never moves (fact 3), so this is legal. Now $S$ contains exactly $2^{m-1},\\dots,2^m$, and $B$ is empty.\n* Move marble $2^{m-1}$ into $B$.\n* Play $\\sigma$ backwards (fact 2) with $B$ in the role of the starting box. This collects $1,\\dots,2^{m-1}$ in $B$ and empties the $m-1$ other boxes; $S$ holds $2^{m-1}+1,\\dots,2^m$.\n* Play $\\sigma$ on the marbles of $S$ using $S$ and the $m-1$ empty boxes. It ends with marble $2^m$ alone.\n\n**(B) by induction on $k$.** For $k=1$, $n=2$: no move changes anything. Suppose $2^{m-1}+1$ marbles cannot be won with $m$ boxes, and suppose for contradiction that $N=2^m+1$ marbles can be won with $m+1$ boxes. Let $h=2^{m-1}+1$, call marbles $\\ge h$ *big*, and let $S$ be the starting box.\n\nMarble $h$ must leave $S$ (otherwise $S\\supseteq\\{h,\\dots,N\\}$ forever). Let $X$ be the last move in which it leaves $S$. Just before $X$, $S=\\{h,\\dots,N\\}$; in $X$, $h$ goes to an empty box $W$ (the box of $h+1$ is $S$). Afterwards $h$ never returns to $S$ (it would then stay there forever), and no marble $<h$ can enter $S$ (its smallest marble exceeds $h$ and it is never empty, since it contains $N$). So after $X$, $S$ holds only marbles $>h$.\n\n*Claim: after $X$, marbles $1,\\dots,h$ are never all in one box.* Suppose they are, in a box $Z$, at some time $\\tau$. Reverse the moves from $\\tau$ back to just after $X$ and delete all marbles $>h$ (fact 4). This is a legal game for the $h$ marbles: it starts with all of them in $Z$ and ends with $h$ alone in $W$, and it never uses $S$ (which contains no marble $\\le h$ and is never empty). That is a win for $2^{m-1}+1$ marbles with $m$ boxes — contradiction.\n\nBy fact 1, the claim means that after $X$ **marble $1$ never shares a box with a big marble.** Now ignore marbles $2,\\dots,h-1$ and follow the big marbles from just before $X$. At that moment they all lie in $S$. At every later time, the box containing marble $1$ contains no big marble. When marble $1$ moves from box $P$ to box $Q$, neither $P$ nor $Q$ contains a big marble ($Q$ is empty or its contents start at $2$, and they cannot reach $h$). So we may treat \"the $m$ boxes other than the box of marble $1$\" as $m$ fixed virtual boxes, swapping the names of $P$ and $Q$ whenever marble $1$ moves; this does not change the position of the big marbles. Every move of a big marble goes to a box not containing marble $1$, i.e. to a virtual box, and by fact 4 (deleting the marbles below $h$) these moves are legal. So the big marbles — $N-h+1=2^{m-1}+1$ of them, starting in one box — are won using $m$ boxes. This contradicts the induction hypothesis.\n\n**Answer:** Cathy can win if and only if $n\\le2^{k-1}$. ∎"
+      }
+    ],
+    "topics": [
+      "games",
+      "logic",
+      "counting"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "apmo-2022-05",
+    "bank": "apmo",
+    "source": {
+      "contest": "APMO",
+      "paper": "APMO",
+      "year": 2022,
+      "number": 5,
+      "url": "https://www.apmo-official.org/static/problems/apmo2022_prb.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $a, b, c, d$ be real numbers such that $a^2+b^2+c^2+d^2=1$. Determine the minimum value of $(a-b)(b-c)(c-d)(d-a)$ and determine all values of $(a,b,c,d)$ such that the minimum value is achieved.",
+    "image": null,
+    "choices": null,
+    "answer": "The minimum is $-\\frac18$, attained exactly at the $8$ quadruples obtained from $\\left(\\frac{1+\\sqrt3}4,\\,-\\frac{1+\\sqrt3}4,\\,\\frac{1-\\sqrt3}4,\\,-\\frac{1-\\sqrt3}4\\right)$ by cyclic shifts and by changing all signs.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Pair products $x,y,z$",
+        "body": "Let $S(a,b,c,d)=(a-b)(b-c)(c-d)(d-a)$, $u=\\frac{1+\\sqrt3}4$, $v=\\frac{1-\\sqrt3}4$; note $u+v=\\frac12$, $uv=-\\frac18$, $u^2+v^2=\\frac12$. For $(u,-u,v,-v)$: $S=(2u)(-u-v)(2v)(-v-u)=4uv(u+v)^2=-\\frac18$. So the minimum $\\mu$ (which exists, as $S$ is continuous on the compact sphere) is at most $-\\frac18<0$.\n\n**At a minimum point, $a+b+c+d=0$.** Let $\\delta=\\frac{a+b+c+d}4\\ne0$. Subtracting $\\delta$ from all four variables does not change $S$ and strictly decreases the sum of squares to $\\rho^2=1-4\\delta^2<1$; and $\\rho>0$, since otherwise $a=b=c=d$ and $S=0$. Rescaling by $\\frac1\\rho>1$ restores the constraint and multiplies $S$ by $\\frac1{\\rho^4}>1$; since $S<0$ at a minimum point, this gives a smaller value — contradiction.\n\n**Substitution.** Let $x=ac+bd$, $y=ab+cd$, $z=ad+bc$. Then\n$$x-y=(a-d)(c-b),\\qquad x-z=(a-b)(c-d),\\qquad\\text{so}\\qquad S=(x-y)(x-z).$$\nMoreover $2x+1=(a+c)^2+(b+d)^2$, $2y+1=(a+b)^2+(c+d)^2$, $2z+1=(a+d)^2+(b+c)^2$, so $x,y,z\\ge-\\frac12$; and when $a+b+c+d=0$, $0=(a+b+c+d)^2=1+2(x+y+z)$, so $x+y+z=-\\frac12$.\n\n**The bound.** With $x=-\\frac12-y-z$,\n$$(x-y)(x-z)+\\frac18=\\Bigl(2y+z+\\tfrac12\\Bigr)\\Bigl(y+2z+\\tfrac12\\Bigr)+\\frac18=\\frac18(4y+4z+1)^2+\\Bigl(y+\\tfrac12\\Bigr)\\Bigl(z+\\tfrac12\\Bigr)\\ge0 .$$\nSo $\\mu=-\\frac18$, and at a minimum point $4y+4z+1=0$ and $y=-\\frac12$ or $z=-\\frac12$.\n\n**Equality cases.** (Every minimum point has $a+b+c+d=0$, so the above applies.)\n* $y=-\\frac12$, $z=\\frac14$: then $a+b=c+d=0$, so $(a,b,c,d)=(p,-p,q,-q)$ with $x=2pq=-\\frac14$ and $2p^2+2q^2=1$. So $pq=-\\frac18$, $(p+q)^2=\\frac14$, $(p-q)^2=\\frac34$: $(p,q)\\in\\{(u,v),(v,u),(-u,-v),(-v,-u)\\}$.\n* $z=-\\frac12$, $y=\\frac14$: then $a+d=b+c=0$, $(a,b,c,d)=(p,q,-q,-p)$ with $pq=\\frac18$, $p^2+q^2=\\frac12$: $(p,q)\\in\\{(u,-v),(-v,u),(-u,v),(v,-u)\\}$.\n\nAll eight give $S=-\\frac18$ (each is a cyclic shift and/or negation of $(u,-u,v,-v)$, which do not change $S$). They are exactly the cyclic shifts of $\\pm(u,-u,v,-v)$.\n\n**Answer:** minimum $-\\frac18$, attained at the cyclic shifts of $\\pm\\left(\\frac{1+\\sqrt3}4,-\\frac{1+\\sqrt3}4,\\frac{1-\\sqrt3}4,\\frac{-1+\\sqrt3}4\\right)$. ∎"
+      }
+    ],
+    "topics": [
+      "inequalities",
+      "algebra"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

@@ -1,0 +1,203 @@
+[
+  {
+    "id": "egmo-2018-01",
+    "bank": "egmo",
+    "source": {
+      "contest": "EGMO",
+      "paper": "Day 1",
+      "year": 2018,
+      "number": 1,
+      "url": "https://www.egmo.org/egmos/egmo7/paper-day1-English.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $ABC$ be a triangle with $CA=CB$ and $\\angle ACB=120^\\circ$, and let $M$ be the midpoint of $AB$. Let $P$ be a variable point on the circumcircle of $ABC$, and let $Q$ be the point on the segment $CP$ such that $QP=2QC$. It is given that the line through $P$ and perpendicular to $AB$ intersects the line $MQ$ at a unique point $N$.\n\nProve that there exists a fixed circle such that $N$ lies on this circle for all possible positions of $P$.",
+    "image": null,
+    "choices": null,
+    "answer": "Proof: $M$ is the midpoint of $CO$, and the homothety at $Q$ with ratio $-2$ sends $C\\mapsto P$, $M\\mapsto P+\\vec{OC}$, so $N=P+\\vec{OC}$ lies on the circle with centre $C$ and radius $CA$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "A homothety at $Q$",
+        "body": "Let $O$ be the circumcentre and $R$ the circumradius. Since $CA=CB$, $O$ lies on the perpendicular bisector $CM$ of $AB$, and $\\angle ACO=\\tfrac12\\angle ACB=60^\\circ$. Triangle $OAC$ has $OA=OC$ and an angle of $60^\\circ$ at $C$, so it is equilateral and $CA=R$. Then $CM=CA\\cos60^\\circ=\\tfrac R2$, and $M$ is the midpoint of $CO$. Note that the line $CM=CO$ is perpendicular to $AB$.\n\nWe work with vectors. Since $Q$ is on segment $CP$ with $QP=2QC$, $Q=\\tfrac{2C+P}{3}$. The homothety $h$ with centre $Q$ and ratio $-2$ sends $C$ to $Q-2(C-Q)=3Q-2C=P$. It sends $M$ to\n$$N'=3Q-2M=P+2(C-M)=P+(C-O),$$\nbecause $C-M=\\tfrac12(C-O)$.\n\n- $N'$ lies on line $MQ$, since $h$ moves points along lines through $Q$.\n- $N'-P=C-O$ is parallel to $CO$, which is perpendicular to $AB$. So $N'$ lies on the line through $P$ perpendicular to $AB$.\n\nThese two lines meet in the unique point $N$, so $N=N'=P+\\vec{OC}$. Thus $N$ is the image of $P$ under the translation by $\\vec{OC}$. As $P$ runs over the circle with centre $O$ and radius $R$, the point $N$ lies on the circle with centre $C$ and radius $R=CA$. This circle does not depend on $P$. ∎"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "egmo-2018-02",
+    "bank": "egmo",
+    "source": {
+      "contest": "EGMO",
+      "paper": "Day 1",
+      "year": 2018,
+      "number": 2,
+      "url": "https://www.egmo.org/egmos/egmo7/paper-day1-English.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Consider the set\n$$A=\\left\\{1+\\frac1k : k=1,2,3,\\ldots\\right\\}.$$\n(a) Prove that every integer $x\\ge2$ can be written as the product of one or more elements of $A$, which are not necessarily different.\n\n(b) For every integer $x\\ge2$, let $f(x)$ denote the minimum integer such that $x$ can be written as the product of $f(x)$ elements of $A$, which are not necessarily different.\n\nProve that there exist infinitely many pairs $(x,y)$ of integers with $x\\ge2$, $y\\ge2$, and\n$$f(xy)<f(x)+f(y).$$\n(Pairs $(x_1,y_1)$ and $(x_2,y_2)$ are different if $x_1\\ne x_2$ or $y_1\\ne y_2$.)",
+    "image": null,
+    "choices": null,
+    "answer": "Proof: (a) telescoping $x=\\prod_{j=1}^{x-1}\\frac{j+1}{j}$. (b) $f(n)\\ge\\lceil\\log_2n\\rceil$; the pairs $x=5$, $y=\\frac{2^{4k+2}+1}{5}$ work: $f(xy)\\le4k+3$, $f(5)=3$, and $f(y)\\ge4k+1$ because $y$ is odd, so a product of $4k$ elements would be at most $2^{4k-1}\\cdot\\frac32<y$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Powers of two plus one",
+        "body": "**(a)** For $x\\ge2$,\n$$x=\\Big(1+\\frac1{x-1}\\Big)\\Big(1+\\frac1{x-2}\\Big)\\cdots\\Big(1+\\frac12\\Big)\\Big(1+\\frac11\\Big),$$\nsince the product telescopes: $\\frac{x}{x-1}\\cdot\\frac{x-1}{x-2}\\cdots\\frac32\\cdot\\frac21=x$. So $f(x)$ is well defined.\n\n**(b) Two easy bounds.**\n- Every element of $A$ is at most $2$, so a product of $j$ elements is at most $2^j$. Hence $f(n)\\ge\\log_2 n$.\n- For $j\\ge1$: $2^j+1=\\big(1+\\frac1{2^j}\\big)\\cdot2^j$, a product of $j+1$ elements of $A$ (with $j$ factors equal to $2$). So $f(2^j+1)\\le j+1$.\n\n**The pairs.** For $k\\ge1$ let $x=5$ and $y=\\dfrac{2^{4k+2}+1}{5}$. This is an integer since $2^{4k+2}=4\\cdot16^k\\equiv4\\pmod5$. Distinct $k$ give distinct pairs, and $y\\ge\\frac{65}5=13$.\n- $f(5)=3$: $f(5)\\le3$ from $5=2^2+1$, and $f(5)\\ge\\log_25>2$.\n- $f(xy)=f(2^{4k+2}+1)\\le4k+3$.\n- $f(y)\\ge4k+1$. First, $y>\\frac{2^{4k+2}}{8}=2^{4k-1}$, so no product of at most $4k-1$ elements of $A$ equals $y$. Suppose $y=a_1a_2\\cdots a_{4k}$ with all $a_i\\in A$. Not all $a_i$ equal $2$, because $y$ is odd and $y>1$. Every element of $A$ other than $2$ is at most $\\frac32$. So\n$$y\\le2^{4k-1}\\cdot\\frac32=\\frac{15\\cdot2^{4k-2}}{5}<\\frac{16\\cdot2^{4k-2}}5=\\frac{2^{4k+2}}5<y,$$\na contradiction. Hence $f(y)\\ge4k+1$.\n\nTherefore $f(x)+f(y)\\ge3+4k+1=4k+4>4k+3\\ge f(xy)$ for every $k\\ge1$, which gives infinitely many pairs. ∎"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "inequalities"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "egmo-2018-03",
+    "bank": "egmo",
+    "source": {
+      "contest": "EGMO",
+      "paper": "Day 1",
+      "year": 2018,
+      "number": 3,
+      "url": "https://www.egmo.org/egmos/egmo7/paper-day1-English.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "The $n$ contestants of an EGMO are named $C_1,\\ldots,C_n$. After the competition they queue in front of the restaurant according to the following rules.\n\n- The Jury chooses the initial order of the contestants in the queue.\n- Every minute, the Jury chooses an integer $i$ with $1\\le i\\le n$.\n  - If contestant $C_i$ has at least $i$ other contestants in front of her, she pays one euro to the Jury and moves forward in the queue by exactly $i$ positions.\n  - If contestant $C_i$ has fewer than $i$ other contestants in front of her, the restaurant opens and the process ends.\n\n(a) Prove that the process cannot continue indefinitely, regardless of the Jury's choices.\n\n(b) Determine for every $n$ the maximum number of euros that the Jury can collect by cunningly choosing the initial order and the sequence of moves.",
+    "image": null,
+    "choices": null,
+    "answer": "(b) $2^n-n-1$. Every move of $C_i$ passes some $C_j$ with $j>i$, so the weight $\\sum 2^{i-1}$ over pairs $i<j$ with $C_j$ ahead of $C_i$ drops by at least $1$ per move (this also proves (a)); the bound is reached recursively with $M_{n+1}=2M_n+n$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "A weight that always drops",
+        "body": "\"In front\" means closer to the restaurant. Call a paid move a *jump*.\n\n**Key observation.** When $C_i$ jumps, she passes exactly $i$ contestants. Only $i-1$ contestants have a smaller index than her, so she passes at least one $C_j$ with $j>i$.\n\n**Upper bound (this also proves (a)).** Call a pair $(i,j)$ with $i<j$ *inverted* if $C_j$ is in front of $C_i$, and define the weight\n$$W=\\sum_{(i,j)\\text{ inverted}}2^{i-1}.$$\nConsider a jump of $C_i$. Pairs not involving $C_i$ do not change.\n- She passes some $C_j$ with $j>i$, so that pair $(i,j)$ stops being inverted: $W$ loses $2^{i-1}$. Pairs $(i,j)$ with $j>i$ can only stop being inverted, since $C_i$ moves forward.\n- New inverted pairs can only be of the form $(l,i)$ with $l<i$. Together they add at most $2^0+2^1+\\dots+2^{i-2}=2^{i-1}-1$.\n\nSo each jump decreases $W$ by at least $1$. Since $W$ is a non-negative integer, the number of jumps is at most the largest possible value of $W$, which occurs when all pairs are inverted:\n$$\\sum_{i=1}^{n-1}(n-i)\\,2^{i-1}=\\sum_{j=1}^{n-1}\\sum_{i=1}^{j}2^{i-1}=\\sum_{j=1}^{n-1}(2^j-1)=2^n-n-1.$$\nSo there are at most $2^n-n-1$ jumps, after which the next minute must end the process. In particular the process is finite, proving (a).\n\n**Construction.** Claim: if the queue (from the front) is $C_n,C_{n-1},\\dots,C_1$, the Jury can make $M_n=2^n-n-1$ jumps that turn it into $C_1,C_2,\\dots,C_n$. Then choosing $i=n$ (no one has $n$ others in front) ends the process, and the Jury has collected $2^n-n-1$ euros.\n\nFor $n=1$ there is nothing to do ($M_1=0$). Assume the claim for $n$ and start with $C_{n+1},C_n,\\dots,C_1$.\n1. Leave $C_{n+1}$ at the front and apply the claim to the $n$ contestants behind her. A move that is legal in that sub-queue is legal in the full queue and keeps $C_{n+1}$ in front. This gives $M_n$ jumps and the queue $C_{n+1},C_1,C_2,\\dots,C_n$.\n2. Now let $C_1,C_2,\\dots,C_n$ jump in this order. When it is $C_i$'s turn, the queue is $C_{i-1},\\dots,C_1,C_{n+1},C_i,\\dots$, so $C_i$ has exactly $i$ people in front and jumps to the front. After these $n$ jumps the queue is $C_n,C_{n-1},\\dots,C_1,C_{n+1}$.\n3. Apply the claim to the first $n$ contestants ($C_{n+1}$ at the back does not affect their moves): another $M_n$ jumps, ending with $C_1,\\dots,C_n,C_{n+1}$.\n\nThis uses $2M_n+n=2(2^n-n-1)+n=2^{n+1}-(n+1)-1=M_{n+1}$ jumps, completing the induction.\n\n**Answer to (b):** $2^n-n-1$ euros."
+      }
+    ],
+    "topics": [
+      "counting",
+      "logic"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "egmo-2018-04",
+    "bank": "egmo",
+    "source": {
+      "contest": "EGMO",
+      "paper": "Day 2",
+      "year": 2018,
+      "number": 4,
+      "url": "https://www.egmo.org/egmos/egmo7/paper-day2-English.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "A domino is a $1\\times2$ or $2\\times1$ tile.\n\nLet $n\\ge3$ be an integer. Dominoes are placed on an $n\\times n$ board in such a way that each domino covers exactly two cells of the board, and dominoes do not overlap.\n\nThe *value* of a row or column is the number of dominoes that cover at least one cell of this row or column. The configuration is called *balanced* if there exists some $k\\ge1$ such that each row and each column has a value of $k$.\n\nProve that a balanced configuration exists for every $n\\ge3$, and find the minimum number of dominoes needed in such a configuration.",
+    "image": null,
+    "choices": null,
+    "answer": "$\\frac{2n}3$ if $3\\mid n$, and $2n$ otherwise. Double counting (row or column, domino meeting it) gives $2nk=3D$; constructions use diagonal blocks of sizes $3$ (with $k=1$) and $4,5,7$ (with $k=3$).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Double counting and block constructions",
+        "body": "**Answer:** $\\frac{2n}{3}$ dominoes if $3\\mid n$, and $2n$ dominoes otherwise.\n\n**Lower bound.** Take a balanced configuration with value $k$ and $D$ dominoes. Count the pairs (line, domino) where the line is a row or column and the domino covers a cell of it.\n- Each of the $2n$ lines meets $k$ dominoes: $2nk$ pairs.\n- Each domino meets exactly $3$ lines (one row and two columns, or two rows and one column): $3D$ pairs.\n\nSo $2nk=3D$. If $3\\mid n$, then $k\\ge1$ gives $D\\ge\\frac{2n}3$. If $3\\nmid n$, then $3\\mid 2nk$ forces $3\\mid k$, so $k\\ge3$ and $D\\ge2n$.\n\n**Constructions.** Placing balanced square blocks with the same value $k$ along the main diagonal gives a balanced configuration of the whole board with value $k$: every row and column meets only its own block. The number of dominoes adds up.\n\n*$3\\mid n$, value $1$:* use $\\frac n3$ copies of this $3\\times3$ block with $2$ dominoes (letters mark dominoes, dots are empty cells):\n```\nA A .\n. . B\n. . B\n```\nEach row and each column meets exactly one domino. This gives $\\frac{2n}{3}$ dominoes.\n\n*$3\\nmid n$, value $3$:* here are balanced blocks of sizes $4$, $5$, $7$ with value $3$ and $2\\cdot4$, $2\\cdot5$, $2\\cdot7$ dominoes (check each row and column: exactly three letters appear).\n\n$4\\times4$, $8$ dominoes:\n```\nH F D D\nH F B B\nA A G E\nC C G E\n```\n$5\\times5$, $10$ dominoes:\n```\nA A D I I\n. . D J F\n. . E J F\nB B E . G\nH H C C G\n```\n$7\\times7$, $14$ dominoes:\n```\nA . . F H H .\nA . . F . D .\nG G . . . D M\n. C C L L . M\nE E B B . N N\n. . K . I . J\n. . K . I . J\n```\nEvery $n\\ge4$ with $3\\nmid n$ is a sum of block sizes from $\\{4,5,7\\}$: $4,5,7$ directly, $8=4+4$, $10=5+5$, $11=4+7$, and every $n\\ge12$ is a sum of $4$'s and $5$'s ($12=4+4+4$, $13=4+4+5$, $14=4+5+5$, $15=5+5+5$, then add $4$'s). For $n=3$ we use the $3\\times3$ block. Since a block of size $s$ uses $2s$ dominoes, this gives $2n$ dominoes in total.\n\nSo a balanced configuration exists for every $n\\ge3$, and the minimum is $\\frac{2n}3$ if $3\\mid n$ and $2n$ otherwise."
+      }
+    ],
+    "topics": [
+      "counting"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "egmo-2018-05",
+    "bank": "egmo",
+    "source": {
+      "contest": "EGMO",
+      "paper": "Day 2",
+      "year": 2018,
+      "number": 5,
+      "url": "https://www.egmo.org/egmos/egmo7/paper-day2-English.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $\\Gamma$ be the circumcircle of triangle $ABC$. A circle $\\Omega$ is tangent to the line segment $AB$ and is tangent to $\\Gamma$ at a point lying on the same side of the line $AB$ as $C$. The angle bisector of $\\angle BCA$ intersects $\\Omega$ at two different points $P$ and $Q$.\n\nProve that $\\angle ABP=\\angle QBC$.",
+    "image": null,
+    "choices": null,
+    "answer": "Proof: with $M$ the midpoint of arc $AB$ not containing $C$, the tangency points $V$ (with $\\Gamma$) and $U$ (with $AB$) are collinear with $M$ and $MU\\cdot MV=MB^2$; so $MP\\cdot MQ=MB^2$, triangles $MPB$ and $MBQ$ are similar, and an angle chase gives the result.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Power of the arc midpoint",
+        "body": "Let $M$ be the midpoint of the arc $AB$ of $\\Gamma$ not containing $C$; the bisector of $\\angle BCA$ is the line $CM$. Let $\\Omega$ touch $AB$ at $U$ and $\\Gamma$ at $V$.\n\n**Position of $\\Omega$.** The point $U$ lies inside the disc of $\\Gamma$ ($U\\ne A,B$, otherwise $\\Omega$ and $\\Gamma$ would share two points). So $\\Omega$ is internally tangent to $\\Gamma$ and lies inside $\\Gamma$, on the same side of $AB$ as $C$. Thus $P,Q$ lie on the part of chord $CM$ on $C$'s side of $AB$, i.e. on segment $CD$ with $D=CM\\cap AB$, inside triangle $ABC$.\n\n**Step 1: $M,U,V$ are collinear and $MU\\cdot MV=MB^2$.** The homothety with centre $V$ and positive ratio taking $\\Omega$ to $\\Gamma$ takes the tangent line $AB$ to a parallel tangent line of $\\Gamma$. $\\Omega$ lies on $C$'s side of $AB$, so the image tangent has $\\Gamma$ on that same side. It is therefore the tangent at $M$, and $U\\mapsto M$. So $V,U,M$ are collinear with $U$ between $V$ and $M$.\n\nNow compare triangles $MVA$ and $MAU$. They share the angle at $M$. Also $\\angle MVA=\\angle MBA$, because $V$ and $B$ both lie on the arc of $\\Gamma$ cut off by chord $MA$ that contains $C$. And $\\angle MBA=\\angle MAB=\\angle MAU$ since $MA=MB$. So the triangles are similar, and $\\frac{MV}{MA}=\\frac{MA}{MU}$, i.e. $MU\\cdot MV=MA^2=MB^2$.\n\n**Step 2: $MP\\cdot MQ=MB^2$.** $M$ is outside $\\Omega$ (it is on the other side of $AB$). The power of $M$ with respect to $\\Omega$, computed along line $MUV$ and along line $MPQ$, gives $MP\\cdot MQ=MU\\cdot MV=MB^2$.\n\n**Step 3: angle chase.** From $\\frac{MP}{MB}=\\frac{MB}{MQ}$ and the common angle $\\angle PMB=\\angle BMQ$ ($P,Q$ lie on the same ray from $M$), triangles $MPB$ and $MBQ$ are similar. So $\\angle MBP=\\angle MQB$. Both $P$ and $Q$ lie between $M$ and $C$. Then:\n- In triangle $BQC$, $\\angle MQB$ is the exterior angle at $Q$, so $\\angle QBC=\\angle MQB-\\angle QCB=\\angle MQB-\\angle MCB$.\n- $M$ and $P$ are on opposite sides of $AB$, and $\\angle MBA+\\angle ABP<\\frac{\\angle C}2+\\angle B<180^\\circ$, so ray $BA$ lies inside angle $MBP$ and $\\angle ABP=\\angle MBP-\\angle MBA$.\n- $\\angle MBA=\\angle MCA=\\angle MCB$ (inscribed angles on chord $MA$; $CM$ bisects $\\angle C$).\n\nTherefore $\\angle ABP=\\angle MBP-\\angle MBA=\\angle MQB-\\angle MCB=\\angle QBC$. ∎"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "egmo-2018-06",
+    "bank": "egmo",
+    "source": {
+      "contest": "EGMO",
+      "paper": "Day 2",
+      "year": 2018,
+      "number": 6,
+      "url": "https://www.egmo.org/egmos/egmo7/paper-day2-English.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "(a) Prove that for every real number $t$ such that $0<t<\\frac12$ there exists a positive integer $n$ with the following property: for every set $S$ of $n$ positive integers there exist two different elements $x$ and $y$ of $S$, and a non-negative integer $m$ (i.e. $m\\ge0$), such that\n$$|x-my|\\le ty.$$\n(b) Determine whether for every real number $t$ such that $0<t<\\frac12$ there exists an infinite set $S$ of positive integers such that\n$$|x-my|>ty$$\nfor every pair of different elements $x$ and $y$ of $S$ and every positive integer $m$ (i.e. $m>0$).",
+    "image": null,
+    "choices": null,
+    "answer": "(a) Take $n$ with $(1+t)^{n-1}\\ge\\frac1t$: either two consecutive elements satisfy $s_{i+1}\\le(1+t)s_i$ (use $m=1$) or $s_1<ts_n$ (use $m=0$). (b) Yes: $s_{j+1}=\\frac{(s_1\\cdots s_j)^2+1}{2}$ with $s_1$ odd and large, so every ratio $s_j/s_i$ ($j>i$) is $\\frac12+\\frac1{2s_i}$ more than an integer.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Growth, and a half-integer construction",
+        "body": "**(a)** Choose $n$ with $(1+t)^{n-1}\\ge\\frac1t$ (possible since $1+t>1$). Let $S=\\{s_1<s_2<\\dots<s_n\\}$.\n- If $s_{i+1}\\le(1+t)s_i$ for some $i$, take $x=s_{i+1}$, $y=s_i$, $m=1$: $|x-y|=s_{i+1}-s_i\\le ts_i=ty$.\n- Otherwise $s_{i+1}>(1+t)s_i$ for all $i$, so $s_n>(1+t)^{n-1}s_1\\ge\\frac{s_1}{t}$. Take $x=s_1$, $y=s_n$, $m=0$: $|x-0|=s_1<ts_n=ty$.\n\n**(b) Yes, such a set exists for every $t$.** Dividing by $y$, the condition says: for distinct $x,y\\in S$, the number $\\frac xy$ is at distance more than $t$ from every positive integer.\n\nFix $t$ and pick an odd integer $s_1>4$ with $\\frac12-\\frac1{2s_1}>t$. Define recursively\n$$s_{j+1}=\\frac{(s_1s_2\\cdots s_j)^2+1}{2}.$$\n- *All $s_j$ are odd integers.* If $s_1,\\dots,s_j$ are odd, the product $P$ is odd, $P^2\\equiv1\\pmod8$, so $\\frac{P^2+1}{2}\\equiv1\\pmod4$ is an odd integer.\n- *Fast growth.* For $i\\le j$: $s_{j+1}>\\frac{s_i^2}{2}>2s_i$, as $s_i\\ge s_1>4$. In particular the sequence is strictly increasing, so $S=\\{s_1,s_2,\\dots\\}$ is infinite.\n\nNow let $x\\ne y$ be in $S$ and $m\\ge1$.\n- *$x<y$:* then $x=s_i$, $y=s_j$ with $i<j$, so $\\frac xy<\\frac12$ and $\\left|\\frac xy-m\\right|\\ge1-\\frac xy>\\frac12>t$.\n- *$x>y$:* then $x=s_j$, $y=s_i$ with $i<j$. Write $P=s_1\\cdots s_{j-1}$; it is divisible by $s_i$, and $\\frac{P^2}{s_i}=s_i\\left(\\frac P{s_i}\\right)^2$ is odd. So\n$$\\frac{x}{y}=\\frac{P^2+1}{2s_i}=\\frac{P^2/s_i-1}{2}+\\frac12+\\frac1{2s_i},$$\nwhere the first term is an integer. Since $0<\\frac1{2s_i}<\\frac12$, the distance from $\\frac xy$ to the nearest integer is $\\frac12-\\frac1{2s_i}\\ge\\frac12-\\frac1{2s_1}>t$.\n\nIn both cases $|x-my|>ty$. So the answer to (b) is **yes**. ∎"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "inequalities"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

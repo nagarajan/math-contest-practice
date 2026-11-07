@@ -1,0 +1,302 @@
+[
+  {
+    "id": "imc-2021-01",
+    "bank": "imc",
+    "source": {
+      "contest": "IMC",
+      "paper": "Day 1",
+      "year": 2021,
+      "number": 1,
+      "url": "https://www.imc-math.org.uk/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $A$ be a real $n\\times n$ matrix such that $A^3=0$.\n\n(a) Prove that there is a unique real $n\\times n$ matrix $X$ that satisfies the equation\n$$X+AX+XA^2=A.$$\n(b) Express $X$ in terms of $A$.",
+    "image": null,
+    "choices": null,
+    "answer": "$X=A-A^2$ (multiplying the equation by powers of $A$ on the left and right forces $XA^2=0$, $A^2X=0$, $AX=A^2$; then check $A-A^2$ works).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Multiply by powers of $A$",
+        "body": "Write $(E)$ for the equation $X+AX+XA^2=A$ and use $A^3=A^4=\\dots=0$ throughout.\n\n**Uniqueness.** Suppose $X$ satisfies $(E)$.\n\n* Multiply $(E)$ by $A^2$ on both sides: $A^2XA^2+A^3XA^2+A^2XA^4=A^5$, i.e. $A^2XA^2=0$.\n* Multiply $(E)$ by $A$ on the left and $A^2$ on the right: $AXA^2+A^2XA^2+AXA^4=A^4$, i.e. $AXA^2+A^2XA^2=0$, so $AXA^2=0$.\n* Multiply $(E)$ by $A^2$ on the right: $XA^2+AXA^2+XA^4=A^3$, i.e. $XA^2+AXA^2=0$, so $XA^2=0$.\n\nHence $(E)$ reduces to $X+AX=A$. Multiplying this on the left by $A^2$ gives $A^2X+A^3X=A^3$, so $A^2X=0$; multiplying it on the left by $A$ gives $AX+A^2X=A^2$, so $AX=A^2$. Therefore\n$$X=A-AX=A-A^2 .$$\nSo no matrix other than $A-A^2$ can satisfy $(E)$.\n\n**Existence.** The steps above cannot simply be reversed, so we check directly: for $X=A-A^2$,\n$$X+AX+XA^2=(A-A^2)+(A^2-A^3)+(A^3-A^4)=A-A^4=A .$$\n\nHence the equation has the unique solution\n$$X=A-A^2 .$$\n∎"
+      },
+      {
+        "title": "A nilpotent linear operator",
+        "body": "**Existence and uniqueness at once.** Consider the linear map $L$ on the space $M_n(\\mathbb R)$ of real $n\\times n$ matrices given by\n$$L(X)=X+AX+XA^2=(\\mathrm{Id}+N)(X),\\qquad N(X)=AX+XA^2 .$$\nWrite $N=\\ell+r$ with $\\ell(X)=AX$ and $r(X)=XA^2$. These two maps commute ($\\ell r(X)=AXA^2=r\\ell(X)$), and both are nilpotent: $\\ell^3(X)=A^3X=0$, $r^2(X)=XA^4=0$. By the binomial theorem for commuting maps,\n$$N^4=\\sum_{j=0}^{4}\\binom4j\\ell^{j}r^{4-j}=0,$$\nsince each term has $j\\ge3$ or $4-j\\ge2$. So $N$ is nilpotent and $L=\\mathrm{Id}+N$ is invertible, with inverse $\\mathrm{Id}-N+N^2-N^3$. Hence $L(X)=A$ has exactly one solution.\n\n**Finding it.** Since $I+A$ is invertible with inverse $B=I-A+A^2$ (indeed $(I+A)(I-A+A^2)=I+A^3=I$), the equation $(I+A)X+XA^2=A$ is equivalent to\n$$X+BXA^2=BA .$$\nMultiplying on the right by $A^2$ gives $XA^2+BXA^4=BA^3$, i.e. $XA^2=0$, so $X=BA=A-A^2+A^3=A-A^2$. (Conversely $X=BA$ satisfies $XA^2=BA^3=0$ and therefore the equation.)\n\n**Answer:** the unique solution is $X=A-A^2$. ∎"
+      }
+    ],
+    "topics": [
+      "linear-algebra"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imc-2021-02",
+    "bank": "imc",
+    "source": {
+      "contest": "IMC",
+      "paper": "Day 1",
+      "year": 2021,
+      "number": 2,
+      "url": "https://www.imc-math.org.uk/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $n$ and $k$ be fixed positive integers, and let $a$ be an arbitrary non-negative integer. Choose a random $k$-element subset $X$ of $\\{1,2,\\dots,k+a\\}$ uniformly (i.e., all $k$-element subsets are chosen with the same probability) and, independently of $X$, choose a random $n$-element subset $Y$ of $\\{1,\\dots,k+n+a\\}$ uniformly.\n\nProve that the probability\n$$P\\big(\\min(Y)>\\max(X)\\big)$$\ndoes not depend on $a$.",
+    "image": null,
+    "choices": null,
+    "answer": "The probability equals $1\\big/\\binom{n+k}{k}$: the favourable pairs $(X,Y)$ correspond bijectively to the $(n+k)$-subsets $X\\cup Y$ of $\\{1,\\dots,n+k+a\\}$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Count the favourable pairs",
+        "body": "Let $N=n+k+a$. All $\\binom{k+a}{k}\\binom{N}{n}$ pairs $(X,Y)$ are equally likely.\n\n**Favourable pairs $\\leftrightarrow$ $(n+k)$-subsets.** If $\\min Y>\\max X$, then $U=X\\cup Y$ is an $(n+k)$-element subset of $\\{1,\\dots,N\\}$, and $X$ consists of the $k$ smallest elements of $U$, $Y$ of the $n$ largest. Conversely, let $U\\subseteq\\{1,\\dots,N\\}$ be any set of $n+k$ elements, let $X$ be its $k$ smallest and $Y$ its $n$ largest elements. Then $\\min Y>\\max X$, $|Y|=n$, and $X\\subseteq\\{1,\\dots,k+a\\}$: indeed the largest element of $X$ has the $n$ elements of $Y$ above it, all at most $N$, so it is at most $N-n=k+a$. So $(X,Y)$ is an admissible favourable pair, and the two maps are inverse to each other. Hence there are exactly $\\binom{N}{n+k}$ favourable pairs.\n\n**The probability.**\n$$P=\\frac{\\binom{N}{n+k}}{\\binom{k+a}{k}\\binom{N}{n}}\n=\\frac{N!}{(n+k)!\\,a!}\\cdot\\frac{k!\\,a!}{(k+a)!}\\cdot\\frac{n!\\,(k+a)!}{N!}\n=\\frac{n!\\,k!}{(n+k)!}=\\frac{1}{\\binom{n+k}{k}} ,$$\nwhich does not depend on $a$. ∎"
+      },
+      {
+        "title": "Relabel and condition",
+        "body": "Let $N=n+k+a$. Given $Y$, let $f$ be the increasing bijection from $\\{1,\\dots,k+a\\}$ onto the complement $\\{1,\\dots,N\\}\\setminus Y$ (which has $k+a$ elements).\n\n**Claim:** $\\min Y>\\max X\\iff \\min Y>\\max f(X)$. Let $y_0=\\min Y$. The numbers $1,\\dots,y_0-1$ all lie in the complement of $Y$ and are its smallest elements, so $f(x)=x$ for $x\\le y_0-1$, while $f(x)>y_0$ for $x\\ge y_0$ (as $f(x)\\ge x$ and $f(x)\\notin Y$). Hence $X\\subseteq\\{1,\\dots,y_0-1\\}$ iff $f(X)\\subseteq\\{1,\\dots,y_0-1\\}$.\n\nNow put $Z_n=Y$, $Z_k=f(X)$ and $Z_a=f(\\{1,\\dots,k+a\\}\\setminus X)$. Since $Y$ is uniform and, given $Y$, $X$ is uniform and independent of $Y$, the set $f(X)$ is a uniform $k$-subset of the complement of $Y$. Hence $(Z_n,Z_k,Z_a)$ is a uniformly random ordered partition of $\\{1,\\dots,N\\}$ into blocks of sizes $n,k,a$.\n\nCondition on $Z_a$. Then $Z_n\\cup Z_k$ is a fixed set of $n+k$ elements, and $Z_k$ is a uniformly random $k$-subset of it. The event $\\min Z_n>\\max Z_k$ means that $Z_k$ is exactly the set of the $k$ smallest of these $n+k$ elements, which has conditional probability $1/\\binom{n+k}{k}$, whatever $Z_a$ is. Averaging over $Z_a$,\n$$P\\big(\\min Y>\\max X\\big)=\\frac{1}{\\binom{n+k}{k}},$$\nindependent of $a$. ∎"
+      }
+    ],
+    "topics": [
+      "probability",
+      "counting"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imc-2021-03",
+    "bank": "imc",
+    "source": {
+      "contest": "IMC",
+      "paper": "Day 1",
+      "year": 2021,
+      "number": 3,
+      "url": "https://www.imc-math.org.uk/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "We say that a positive real number $d$ is *good* if there exists an infinite sequence $a_1,a_2,a_3,\\ldots\\in(0,d)$ such that for each $n$, the points $a_1,\\dots,a_n$ partition the interval $[0,d]$ into segments of length at most $1/n$ each. Find\n$$\\sup\\{d\\mid d\\text{ is good}\\}.$$",
+    "image": null,
+    "choices": null,
+    "answer": "ln(2)",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "answerDisplay": "$\\ln 2$",
+    "solutions": [
+      {
+        "title": "Intact segments give the bound; halving integrals give the construction",
+        "body": "**Answer: $\\ln 2$.**\n\n**Upper bound.** Let $d$ be good with witness sequence $(a_i)$, and fix $n$. The points $a_1,\\dots,a_n$ cut $[0,d]$ into $n+1$ segments; let their lengths be $\\ell_1\\le\\ell_2\\le\\dots\\le\\ell_{n+1}$.\n\nFix $k\\in\\{0,1,\\dots,n\\}$. After adding the $k$ further points $a_{n+1},\\dots,a_{n+k}$, at most $k$ of these $n+1$ segments have been cut, so at least $n+1-k$ of them are still segments of the partition by $a_1,\\dots,a_{n+k}$, hence have length at most $\\frac1{n+k}$. Thus at least $n+1-k$ of the numbers $\\ell_j$ are $\\le\\frac1{n+k}$, i.e. $\\ell_{n+1-k}\\le\\frac1{n+k}$. Summing over $k=0,\\dots,n$:\n$$d=\\ell_1+\\dots+\\ell_{n+1}\\le \\frac1n+\\frac1{n+1}+\\dots+\\frac1{2n}.$$\nSince $\\frac1j\\le\\int_{j-1}^{j}\\frac{dx}{x}$, the right side is at most $\\frac1n+\\int_n^{2n}\\frac{dx}x=\\frac1n+\\ln2$. Letting $n\\to\\infty$ gives $d\\le\\ln 2$.\n\n**$\\ln 2$ is good.** Put $I_m=\\ln\\frac{m+1}{m}=\\int_m^{m+1}\\frac{dx}{x}$ for $m\\ge1$. Note\n$$I_m<\\frac1m\\qquad\\text{and}\\qquad I_{2m}+I_{2m+1}=\\ln\\frac{2m+1}{2m}+\\ln\\frac{2m+2}{2m+1}=\\ln\\frac{m+1}{m}=I_m .$$\nWe build the points so that **after $n-1$ points the $n$ segments have lengths $I_n,I_{n+1},\\dots,I_{2n-1}$** (in some order). For $n=1$ there are no points and the single segment $[0,\\ln2]$ has length $\\ln 2=I_1$. Given the statement for $n$, place $a_n$ inside the segment of length $I_n$, splitting it into pieces of lengths $I_{2n}$ and $I_{2n+1}$. The new lengths are $I_{n+1},\\dots,I_{2n-1},I_{2n},I_{2n+1}$, as required for $n+1$. Each new point lies strictly inside a segment, so all $a_n\\in(0,\\ln 2)$.\n\nCheck the condition: after $n$ points the segments have lengths $I_{n+1},\\dots,I_{2n+1}$, the largest being $I_{n+1}<\\frac1{n+1}<\\frac1n$. So $\\ln2$ is good. (The first points are $a_1=\\ln\\frac32$, then $\\ln\\frac54$, and so on.)\n\nHence\n$$\\sup\\{d\\mid d\\text{ is good}\\}=\\ln 2 .$$\n∎"
+      }
+    ],
+    "topics": [
+      "real-analysis",
+      "sequences-series"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imc-2021-04",
+    "bank": "imc",
+    "source": {
+      "contest": "IMC",
+      "paper": "Day 1",
+      "year": 2021,
+      "number": 4,
+      "url": "https://www.imc-math.org.uk/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $f:\\mathbb R\\to\\mathbb R$ be a function. Suppose that for every $\\varepsilon>0$, there exists a function $g:\\mathbb R\\to(0,\\infty)$ such that for every pair $(x,y)$ of real numbers,\n$$\\text{if}\\quad |x-y|<\\min\\{g(x),g(y)\\},\\quad\\text{then}\\quad |f(x)-f(y)|<\\varepsilon .$$\nProve that $f$ is the pointwise limit of a sequence of continuous $\\mathbb R\\to\\mathbb R$ functions, i.e., there is a sequence $h_1,h_2,\\dots$ of continuous $\\mathbb R\\to\\mathbb R$ functions such that $\\lim_{n\\to\\infty}h_n(x)=f(x)$ for every $x\\in\\mathbb R$.",
+    "image": null,
+    "choices": null,
+    "answer": "For each $n$ cover $\\mathbb R$ by the intervals of radius $\\delta_n(x)=\\min\\{\\frac1n,g_1(x),\\dots,g_n(x)\\}$ around the points $x$, take a locally finite subcover and a subordinate partition of unity, and let $h_n=\\sum_U\\varphi_U\\,f(c_U)$. Then $h_n(x)$ is an average of values $f(c)$ with $|x-c|<\\min\\{g_m(x),g_m(c)\\}$ once $n$ is large.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Partition of unity on a locally finite cover",
+        "body": "For $m=1,2,\\dots$ let $g_m$ be a function given by the hypothesis for $\\varepsilon=\\frac1m$. For $n\\ge1$ and $x\\in\\mathbb R$ put\n$$\\delta_n(x)=\\min\\Big\\{\\tfrac1n,\\,g_1(x),\\,g_2(x),\\dots,g_n(x)\\Big\\}>0 .$$\nThen for $m\\le n$: if $|x-y|<\\min\\{\\delta_n(x),\\delta_n(y)\\}$, then $|x-y|<\\min\\{g_m(x),g_m(y)\\}$ and so $|f(x)-f(y)|<\\frac1m$.\n\n**Step 1: a locally finite cover.** Fix $n$. For $c\\in\\mathbb R$ let $U_c=(c-\\delta_n(c),\\,c+\\delta_n(c))$. For every integer $j$ the compact interval $[j,j+1]$ is covered by the open intervals $U_c$, so finitely many of them, say the family $\\mathcal F_j$, cover it. Let $\\mathcal F=\\bigcup_{j\\in\\mathbb Z}\\mathcal F_j$. It covers $\\mathbb R$, and it is locally finite: every interval of $\\mathcal F_j$ meets $[j,j+1]$ and has length $\\le\\frac2n\\le2$, so a bounded set meets intervals from only finitely many $\\mathcal F_j$, each of which is finite. For each $U\\in\\mathcal F$ fix its centre $c_U$ and radius $r_U=\\delta_n(c_U)$.\n\n**Step 2: a partition of unity.** For $U\\in\\mathcal F$ let $\\psi_U(x)=\\max\\{0,\\,r_U-|x-c_U|\\}$; it is continuous, positive exactly on $U$ and zero outside $U$. By local finiteness, near any point only finitely many $\\psi_U$ are nonzero, so $\\Psi=\\sum_{U\\in\\mathcal F}\\psi_U$ is continuous, and $\\Psi>0$ everywhere because $\\mathcal F$ covers $\\mathbb R$. Define\n$$h_n(x)=\\sum_{U\\in\\mathcal F}\\frac{\\psi_U(x)}{\\Psi(x)}\\,f(c_U).$$\nAgain the sum is locally finite, so $h_n$ is continuous. For each $x$, $h_n(x)$ is a convex combination of the values $f(c_U)$ over those $U\\in\\mathcal F$ with $x\\in U$, i.e. with $|x-c_U|<\\delta_n(c_U)$.\n\n**Step 3: pointwise convergence.** Fix $x\\in\\mathbb R$ and $m\\ge1$, and let $n$ be any integer with $n\\ge m$ and $\\frac1n<\\delta_m(x)$. Take $U\\in\\mathcal F$ (built for this $n$) containing $x$, with centre $c=c_U$. Then\n$$|x-c|<\\delta_n(c)\\le g_m(c)\\quad(\\text{since }n\\ge m),\\qquad |x-c|<\\delta_n(c)\\le\\tfrac1n<\\delta_m(x)\\le g_m(x).$$\nSo $|x-c|<\\min\\{g_m(x),g_m(c)\\}$ and therefore $|f(x)-f(c)|<\\frac1m$. As $h_n(x)$ is a convex combination of such values $f(c)$,\n$$|h_n(x)-f(x)|<\\frac1m .$$\nThis holds for all sufficiently large $n$, for every $m$; hence $h_n(x)\\to f(x)$. Since $x$ was arbitrary, $f$ is the pointwise limit of the continuous functions $h_n$. ∎\n\n*Remark.* Equivalently one can show that all sets $\\{f\\ge c\\}$ and $\\{f\\le c\\}$ are $G_\\delta$ and invoke Lebesgue's characterisation of Baire class 1 functions; the construction above avoids that theorem."
+      }
+    ],
+    "topics": [
+      "real-analysis",
+      "topology"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imc-2021-05",
+    "bank": "imc",
+    "source": {
+      "contest": "IMC",
+      "paper": "Day 2",
+      "year": 2021,
+      "number": 5,
+      "url": "https://www.imc-math.org.uk/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $A$ be a real $n\\times n$ matrix and suppose that for every positive integer $m$ there exists a real symmetric matrix $B$ such that\n$$2021B=A^m+B^2 .$$\nProve that $|\\det A|\\le1$.",
+    "image": null,
+    "choices": null,
+    "answer": "$m=1$ shows $A=2021B-B^2$ is symmetric, so its eigenvalues are real; for even $m$, $\\frac{2021^2}{4}I-A^m=(B-\\frac{2021}2I)^2$ is positive semidefinite, so $\\lambda^m\\le\\frac{2021^2}4$ for every eigenvalue $\\lambda$, forcing $|\\lambda|\\le1$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Eigenvalues of a quadratic in a symmetric matrix",
+        "body": "Let $B_m$ be a real symmetric matrix with $2021B_m=A^m+B_m^2$, and put $h(t)=2021t-t^2$, so $A^m=h(B_m)$.\n\n**$A$ is symmetric.** For $m=1$, $A=2021B_1-B_1^2$ is a polynomial in a symmetric matrix, hence symmetric. So $A$ is orthogonally diagonalisable with real eigenvalues $\\lambda_1,\\dots,\\lambda_n$, and $\\det A=\\lambda_1\\cdots\\lambda_n$.\n\n**Each $|\\lambda_i|\\le1$.** Fix $m$. Since $B_m$ is real symmetric, $B_m=QDQ^T$ with $Q$ orthogonal and $D$ diagonal with real entries $\\mu_1,\\dots,\\mu_n$; then $A^m=h(B_m)=Q\\,h(D)\\,Q^T$, so the eigenvalues of $A^m$ are the real numbers $h(\\mu_j)$. On the other hand the eigenvalues of $A^m$ are $\\lambda_i^m$. Hence for each $i$ there is a real $\\mu$ with\n$$\\lambda_i^m=2021\\mu-\\mu^2=\\frac{2021^2}{4}-\\Big(\\mu-\\frac{2021}{2}\\Big)^2\\le\\frac{2021^2}4 .$$\nTake $m$ even: $|\\lambda_i|^m\\le\\frac{2021^2}4$ for all even $m$. If $|\\lambda_i|>1$, then $|\\lambda_i|^m\\to\\infty$ along even $m$, a contradiction. So $|\\lambda_i|\\le1$ for all $i$, and\n$$|\\det A|=|\\lambda_1|\\cdots|\\lambda_n|\\le1 .$$\n∎"
+      },
+      {
+        "title": "Complete the square",
+        "body": "As in the first solution, $m=1$ gives that $A=2021B_1-B_1^2$ is real symmetric, so it has an orthonormal basis of real eigenvectors.\n\nFor any $m$, completing the square,\n$$\\frac{2021^2}{4}I-A^m=\\Big(B_m-\\frac{2021}{2}I\\Big)^2=C^2,\\qquad C=B_m-\\frac{2021}{2}I=C^T .$$\nLet $v$ be a unit eigenvector of $A$ with eigenvalue $\\lambda$. Then\n$$\\frac{2021^2}{4}-\\lambda^m=v^T\\Big(\\frac{2021^2}{4}I-A^m\\Big)v=v^TC^TCv=\\|Cv\\|^2\\ge0 .$$\nSo $\\lambda^{m}\\le\\frac{2021^2}4$ for every $m$; using even $m=2j$ gives $|\\lambda|\\le\\left(\\frac{2021^2}{4}\\right)^{1/(2j)}\\to1$ as $j\\to\\infty$, i.e. $|\\lambda|\\le 1$. Since $|\\det A|$ is the product of the $|\\lambda|$ over the eigenvalues, $|\\det A|\\le1$. ∎"
+      }
+    ],
+    "topics": [
+      "linear-algebra"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imc-2021-06",
+    "bank": "imc",
+    "source": {
+      "contest": "IMC",
+      "paper": "Day 2",
+      "year": 2021,
+      "number": 6,
+      "url": "https://www.imc-math.org.uk/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "For a prime number $p$, let $GL_2(\\mathbb Z/p\\mathbb Z)$ be the group of invertible $2\\times2$ matrices of residues modulo $p$, and let $S_p$ be the symmetric group (the group of all permutations) on $p$ elements. Show that there is no injective group homomorphism $\\phi:GL_2(\\mathbb Z/p\\mathbb Z)\\to S_p$.",
+    "image": null,
+    "choices": null,
+    "answer": "For odd $p$, $\\begin{pmatrix}1&1\\\\0&1\\end{pmatrix}\\cdot(-I)$ has order $2p$, but $S_p$ has no element of order $2p$ (an element of order divisible by $p$ is a $p$-cycle, of order $p$). For $p=2$ compare orders: $6>2$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "An element of order $2p$",
+        "body": "An injective homomorphism maps every element to an element of the same order (if $\\phi(g)^k=1$ then $\\phi(g^k)=1$, so $g^k=1$, and conversely). We show $GL_2(\\mathbb Z/p\\mathbb Z)$ has an element whose order does not occur in $S_p$.\n\n**$p=2$.** $|GL_2(\\mathbb Z/2\\mathbb Z)|=(4-1)(4-2)=6>2=|S_2|$, so no injective map exists at all.\n\n**$p$ odd.** Let\n$$A=\\begin{pmatrix}1&1\\\\0&1\\end{pmatrix},\\qquad B=\\begin{pmatrix}-1&0\\\\0&-1\\end{pmatrix}.$$\nSince $A^j=\\begin{pmatrix}1&j\\\\0&1\\end{pmatrix}$, $A$ has order $p$; $B=-I\\ne I$ (as $p\\ne2$) has order $2$, and $B$ commutes with $A$. Hence $(AB)^j=A^jB^j$, and $(AB)^j=I$ means $A^j=B^{-j}\\in\\langle A\\rangle\\cap\\langle B\\rangle=\\{I\\}$ (a subgroup of order dividing both $p$ and $2$), i.e. $p\\mid j$ and $2\\mid j$. So $AB$ has order $2p$.\n\n**No element of $S_p$ has order $2p$.** The order of a permutation is the lcm of its cycle lengths, all of which are at most $p$. If $p$ divides the order, then (as $p$ is prime) some cycle length is divisible by $p$, so it equals $p$: the permutation is a single $p$-cycle using all $p$ points, and its order is exactly $p\\ne2p$.\n\nTherefore $\\phi(AB)$ would be an element of order $2p$ in $S_p$, which does not exist. So no injective homomorphism exists. ∎"
+      },
+      {
+        "title": "Centralisers",
+        "body": "($p=2$ is handled by counting: $|GL_2(\\mathbb Z/2\\mathbb Z)|=6>2$.) Let $p$ be odd and suppose $\\phi$ is injective.\n\nLet $A=\\begin{pmatrix}1&1\\\\0&1\\end{pmatrix}$, of order $p$. Then $\\sigma=\\phi(A)\\in S_p$ has order $p$, so, as in the first solution, $\\sigma$ is a $p$-cycle, say $\\sigma=(1\\,2\\,\\dots\\,p)$ after renaming points.\n\n**The centraliser of a $p$-cycle is $\\langle\\sigma\\rangle$.** If $\\tau\\sigma=\\sigma\\tau$, then $\\tau(\\sigma^i(1))=\\sigma^i(\\tau(1))$ for all $i$; writing $\\tau(1)=\\sigma^r(1)$ gives $\\tau=\\sigma^r$. So the centraliser has exactly $p$ elements.\n\n**The centraliser of $A$ is bigger.** The scalar matrices $cI$ ($c\\ne0$) and the powers of $A$ commute with $A$; the products $cA^j$ ($c\\in(\\mathbb Z/p\\mathbb Z)^*$, $0\\le j<p$) are $p(p-1)$ distinct matrices, all commuting with $A$. Since $p-1\\ge2$, this is more than $p$.\n\nBecause $\\phi$ is injective, it maps the centraliser of $A$ injectively into the centraliser of $\\sigma$ (if $XA=AX$ then $\\phi(X)\\sigma=\\sigma\\phi(X)$). This would give $p(p-1)\\le p$, a contradiction. ∎"
+      }
+    ],
+    "topics": [
+      "abstract-algebra"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imc-2021-07",
+    "bank": "imc",
+    "source": {
+      "contest": "IMC",
+      "paper": "Day 2",
+      "year": 2021,
+      "number": 7,
+      "url": "https://www.imc-math.org.uk/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $D\\subseteq\\mathbb C$ be an open set containing the closed unit disk $\\{z:|z|\\le1\\}$. Let $f:D\\to\\mathbb C$ be a holomorphic function, and let $p(z)$ be a monic polynomial. Prove that\n$$|f(0)|\\le\\max_{|z|=1}|f(z)p(z)| .$$",
+    "image": null,
+    "choices": null,
+    "answer": "Let $q(z)=z^n\\,\\overline{p(1/\\bar z)}=1+\\overline{a_{n-1}}z+\\dots+\\overline{a_0}z^n$. Then $q(0)=1$ and $|q|=|p|$ on $|z|=1$, so the maximum principle for $fq$ gives $|f(0)|=|f(0)q(0)|\\le\\max_{|z|=1}|fq|=\\max_{|z|=1}|fp|$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Reverse the polynomial",
+        "body": "Write $p(z)=z^n+a_{n-1}z^{n-1}+\\dots+a_1z+a_0$ with complex $a_j$, and define the \"reversed conjugate\" polynomial\n$$q(z)=1+\\overline{a_{n-1}}\\,z+\\overline{a_{n-2}}\\,z^2+\\dots+\\overline{a_0}\\,z^n .$$\nThen $q(0)=1$. For $|z|=1$ we have $\\bar z=1/z$, hence\n$$z^n\\,\\overline{p(z)}=z^n\\big(\\bar z^{\\,n}+\\overline{a_{n-1}}\\,\\bar z^{\\,n-1}+\\dots+\\overline{a_0}\\big)=1+\\overline{a_{n-1}}z+\\dots+\\overline{a_0}z^n=q(z),$$\nso $|q(z)|=|z|^n|p(z)|=|p(z)|$ on the unit circle.\n\nThe function $F=f\\cdot q$ is holomorphic on $D$, which contains the closed unit disk. By the maximum modulus principle (or by Cauchy's formula $F(0)=\\frac1{2\\pi}\\int_0^{2\\pi}F(e^{i\\theta})\\,d\\theta$),\n$$|f(0)|=|F(0)|\\le\\max_{|z|=1}|F(z)|=\\max_{|z|=1}|f(z)|\\,|q(z)|=\\max_{|z|=1}|f(z)p(z)| .$$\n∎"
+      },
+      {
+        "title": "Factor into roots",
+        "body": "Factor $p(z)=\\prod_{j=1}^n(z-z_j)$. For $|z|=1$,\n$$|z-z_j|=|\\bar z|\\,|z-z_j|=|\\bar zz-z_j\\bar z|=|1-z_j\\bar z|=\\big|\\overline{1-z_j\\bar z}\\big|=|1-\\overline{z_j}\\,z| .$$ Hence $Q(z)=\\prod_{j=1}^n(1-\\overline{z_j}z)$ is a polynomial with $Q(0)=1$ and $|Q(z)|=|p(z)|$ for $|z|=1$.\n\nApply the Cauchy integral formula to the holomorphic function $fQ$ on the unit circle:\n$$f(0)=f(0)Q(0)=\\frac1{2\\pi}\\int_0^{2\\pi}f(e^{i\\theta})Q(e^{i\\theta})\\,d\\theta ,$$\nso\n$$|f(0)|\\le\\frac1{2\\pi}\\int_0^{2\\pi}|f(e^{i\\theta})|\\,|p(e^{i\\theta})|\\,d\\theta\\le\\max_{|z|=1}|f(z)p(z)| .$$\n∎"
+      }
+    ],
+    "topics": [
+      "complex-analysis",
+      "polynomials"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imc-2021-08",
+    "bank": "imc",
+    "source": {
+      "contest": "IMC",
+      "paper": "Day 2",
+      "year": 2021,
+      "number": 8,
+      "url": "https://www.imc-math.org.uk/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "text",
+    "prompt": "Let $n$ be a positive integer. At most how many distinct unit vectors can be selected in $\\mathbb R^n$ such that from any three of them, at least two are orthogonal?",
+    "image": null,
+    "choices": null,
+    "answer": "2n",
+    "acceptedAnswers": [
+      "2*n",
+      "2 n",
+      "2·n",
+      "n*2"
+    ],
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Traces of sums of projections",
+        "body": "**Answer: $2n$.**\n\n**Example.** Take $\\pm e_1,\\dots,\\pm e_n$ (a basis and its negatives): $2n$ distinct unit vectors. Among any three of them two have different indices (each index occurs only twice), and those two are orthogonal.\n\n**Upper bound.** Let $v_1,\\dots,v_N$ be unit vectors with the property, and let $P_i=v_iv_i^T$ be the orthogonal projection onto $\\mathbb Rv_i$. Then $P_i^2=P_i$, $\\operatorname{tr}P_i=1$, and for $i\\ne j$, $\\operatorname{tr}(P_iP_j)=(v_i\\cdot v_j)^2=:c_{ij}$. For distinct $i,j,k$,\n$$\\operatorname{tr}(P_iP_jP_k)=(v_i\\cdot v_j)(v_j\\cdot v_k)(v_k\\cdot v_i)=0,$$\nsince one of the three dot products vanishes.\n\nLet $Q=\\sum_iP_i$. It is symmetric positive semidefinite with eigenvalues $t_1,\\dots,t_n\\ge0$, and $\\sum t_r=\\operatorname{tr}Q=N$. Expanding,\n$$\\operatorname{tr}Q^2=\\sum_i\\operatorname{tr}P_i^2+\\sum_{i\\ne j}\\operatorname{tr}P_iP_j=N+2\\sum_{i<j}c_{ij}.$$\nIn $\\operatorname{tr}Q^3=\\sum_{i,j,k}\\operatorname{tr}(P_iP_jP_k)$, triples with three distinct indices contribute $0$; triples $(i,i,i)$ contribute $\\operatorname{tr}P_i=1$ each; and for each pair $i<j$ the six triples using exactly the indices $i,j$ each contribute $\\operatorname{tr}(P_iP_j)=c_{ij}$ (by $P^2=P$ and cyclicity of the trace). Hence\n$$\\operatorname{tr}Q^3=N+6\\sum_{i<j}c_{ij}=N+3(\\operatorname{tr}Q^2-N)=3\\operatorname{tr}Q^2-2N .$$\nIn terms of eigenvalues: $\\sum_r(t_r^3-3t_r^2)=-2N$. But for $t\\ge0$,\n$$t^3-3t^2+4=(t-2)^2(t+1)\\ge0,$$\nso $\\sum_r(t_r^3-3t_r^2)\\ge-4n$. Therefore $-2N\\ge-4n$, i.e. $N\\le2n$.\n\n**Answer: $2n$.** ∎"
+      },
+      {
+        "title": "Gram matrix and Hölder",
+        "body": "The example $\\pm e_1,\\dots,\\pm e_n$ shows $2n$ is possible. Suppose there were $N=2n+1$ such vectors $v_1,\\dots,v_N$.\n\nLet $G=(v_i\\cdot v_j)$ be their Gram matrix and $B=G-I$ (same off-diagonal entries, zero diagonal). $G$ is positive semidefinite of rank at most $n$, so $B$ has real eigenvalues $\\ge-1$, and $-1$ is an eigenvalue of multiplicity at least $N-n=n+1$. The positive eigenvalues $x_1,\\dots,x_m$ of $B$ correspond to eigenvalues $>1$ of $G$, so $m\\le n$. Let $y_1,\\dots,y_s\\in[-1,0)$ be the negative eigenvalues; at least $n+1$ of them equal $-1$.\n\n* $\\operatorname{tr}B=0$: $\\sum x_i=\\sum|y_j|$.\n* $\\operatorname{tr}B^3=\\sum_{i,j,k}b_{ij}b_{jk}b_{ki}$; only terms with $i\\ne j\\ne k\\ne i$ survive (zero diagonal), and each is $(v_i\\cdot v_j)(v_j\\cdot v_k)(v_k\\cdot v_i)=0$. So $\\sum x_i^3=\\sum|y_j|^3$.\n\nSince $|y_j|\\le1$, $\\sum|y_j|^3\\le\\sum|y_j|$, hence $\\sum x_i^3\\le\\sum x_i$. Also $\\sum x_i^3=\\sum|y_j|^3\\ge n+1$. By Hölder (power-mean) inequality, $\\sum x_i^3\\ge\\frac{(\\sum x_i)^3}{m^2}$. Combining,\n$$\\sum x_i\\ \\ge\\ \\sum x_i^3\\ \\ge\\ \\frac{(\\sum x_i)^3}{m^2}\\quad\\Longrightarrow\\quad \\sum x_i\\le m\\le n,$$\nwhile $\\sum x_i\\ge\\sum x_i^3\\ge n+1$. Contradiction. So at most $2n$ vectors can be chosen.\n\n**Answer: $2n$.** ∎"
+      }
+    ],
+    "topics": [
+      "linear-algebra",
+      "geometry",
+      "inequalities"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

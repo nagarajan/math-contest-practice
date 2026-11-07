@@ -1,0 +1,190 @@
+[
+  {
+    "id": "cmo-cmo-2013-01",
+    "bank": "cmo",
+    "source": {
+      "contest": "CMO",
+      "paper": "CMO 2013",
+      "year": 2013,
+      "number": 1,
+      "url": "https://cms.math.ca/competitions/cmo/"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Determine all polynomials $P(x)$ with real coefficients such that\n$$(x + 1)P(x - 1) - (x - 1)P(x)$$\nis a constant polynomial.",
+    "image": null,
+    "choices": null,
+    "answer": "$P(x) = kx^2 + kx + c$ for arbitrary real $k, c$ (this includes all constants, $k = 0$).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Factor out the forced roots",
+        "body": "Let $\\Lambda(x) = (x + 1)P(x - 1) - (x - 1)P(x)$ and suppose it is a constant.\n\nPutting $x = -1$ gives $\\Lambda = 2P(-1)$, and putting $x = 1$ gives $\\Lambda = 2P(0)$. Hence $P(-1) = P(0) =: c$, and $Q(x) = P(x) - c$ has the roots $0$ and $-1$: $P(x) = x(x + 1)R(x) + c$ for some polynomial $R$. Substituting,\n$$\\Lambda(x) = (x+1)\\big[(x-1)x\\,R(x-1) + c\\big] - (x-1)\\big[x(x+1)R(x) + c\\big] = x(x-1)(x+1)\\big(R(x-1) - R(x)\\big) + 2c.$$\nFor this to be constant, $x(x-1)(x+1)\\big(R(x-1) - R(x)\\big)$ must be constant; a nonzero polynomial multiple of $x(x-1)(x+1)$ has degree $\\ge 3$, so $R(x - 1) = R(x)$ identically. Then $R(-m) = R(0)$ for all integers $m \\ge 0$, so $R(x) - R(0)$ has infinitely many roots and $R \\equiv k$ is constant. Thus $P(x) = kx(x+1) + c$.\n\n**Check.** For $P(x) = kx(x+1) + c$:\n$$(x+1)\\big(k(x-1)x + c\\big) - (x-1)\\big(kx(x+1) + c\\big) = c(x+1) - c(x-1) = 2c,$$\na constant.\n\n**Answer:** $P(x) = kx^2 + kx + c$ with $k, c \\in \\mathbb{R}$ (for $k = 0$ these are the constant polynomials). ∎"
+      },
+      {
+        "title": "Compare the top coefficient",
+        "body": "Constants clearly work. Let $P$ have degree $n \\ge 1$, $P(x) = \\sum_{i=0}^n a_ix^i$ with $a_n \\neq 0$. Write\n$$\\Lambda(x) = x\\,P(x-1) + P(x-1) - x\\,P(x) + P(x).$$\nThe coefficient of $x^n$ in each piece: in $xP(x-1)$ it is the coefficient of $x^{n-1}$ in $P(x-1)$, namely $a_{n-1} - na_n$ (binomial theorem); in $P(x-1)$ it is $a_n$; in $-xP(x)$ it is $-a_{n-1}$; in $P(x)$ it is $a_n$. The total is $(2 - n)a_n$, which must be $0$ since $\\Lambda$ is constant and $n \\ge 1$. So $n = 2$.\n\nLet $P(x) = ax^2 + bx + c$. A direct expansion gives\n$$\\Lambda(x) = (x+1)\\big(a(x-1)^2 + b(x-1) + c\\big) - (x-1)(ax^2 + bx + c) = (b - a)x + 2c,$$\nwhich is constant iff $b = a$. So $P(x) = ax^2 + ax + c$, matching the first solution. ∎"
+      }
+    ],
+    "topics": [
+      "polynomials",
+      "algebra"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "cmo-cmo-2013-02",
+    "bank": "cmo",
+    "source": {
+      "contest": "CMO",
+      "paper": "CMO 2013",
+      "year": 2013,
+      "number": 2,
+      "url": "https://cms.math.ca/competitions/cmo/"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "text",
+    "prompt": "The sequence $a_1, a_2, \\ldots, a_n$ consists of the numbers $1, 2, \\ldots, n$ in some order. For which positive integers $n$ is it possible that the $n + 1$ numbers $0,\\ a_1,\\ a_1 + a_2,\\ a_1 + a_2 + a_3,\\ \\ldots,\\ a_1 + a_2 + \\cdots + a_n$ all have different remainders when divided by $n + 1$?",
+    "image": null,
+    "choices": null,
+    "answer": "n odd",
+    "acceptedAnswers": [
+      "odd",
+      "n is odd",
+      "odd n",
+      "all odd n",
+      "all odd numbers",
+      "odd numbers",
+      "n odd only",
+      "all odd positive integers",
+      "odd positive integers"
+    ],
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Parity obstruction and a construction",
+        "body": "**$n$ even is impossible.** Then $a_1 + \\cdots + a_n = 1 + 2 + \\cdots + n = \\frac n2(n+1) \\equiv 0 \\pmod{n+1}$, the same remainder as the first number $0$.\n\n**$n$ odd works.** Let $n = 2k + 1$ and define\n$$a_i = \\begin{cases} i, & i \\text{ odd},\\\\ 2k + 2 - i, & i \\text{ even},\\end{cases}\\qquad\\text{i.e.}\\quad 1,\\ 2k,\\ 3,\\ 2k-2,\\ 5,\\ \\ldots,\\ 2,\\ 2k+1.$$\nThis is a permutation of $1, \\ldots, 2k+1$: the odd numbers appear at their own positions, and each even $m$ appears at the even position $2k + 2 - m$.\n\nLet $b_m = a_1 + \\cdots + a_m$ and work modulo $2k + 2$.\n- $a_1 = 1$ and $a_{2j} + a_{2j+1} = (2k + 2 - 2j) + (2j + 1) = 2k + 3 \\equiv 1$. So $b_{2j+1} \\equiv 1 + j$ for $j = 0, \\ldots, k$: the residues $1, 2, \\ldots, k+1$.\n- $a_{2j-1} + a_{2j} = (2j - 1) + (2k + 2 - 2j) = 2k + 1 \\equiv -1$. So $b_{2j} \\equiv -j$ for $j = 1, \\ldots, k$: the residues $2k+1, 2k, \\ldots, k+2$.\n\nTogether with $b_0 = 0$ these are all $2k + 2$ residues $0, 1, \\ldots, 2k+1$, each once. (For example $n = 5$: $1, 4, 3, 2, 5$ has partial sums $0, 1, 5, 8, 10, 15 \\equiv 0, 1, 5, 2, 4, 3 \\pmod 6$.)\n\n**Answer: exactly the odd $n$.**"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "counting"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "cmo-cmo-2013-03",
+    "bank": "cmo",
+    "source": {
+      "contest": "CMO",
+      "paper": "CMO 2013",
+      "year": 2013,
+      "number": 3,
+      "url": "https://cms.math.ca/competitions/cmo/"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $G$ be the centroid of a right-angled triangle $ABC$ with $\\angle BCA = 90^\\circ$. Let $P$ be the point on ray $AG$ such that $\\angle CPA = \\angle CAB$, and let $Q$ be the point on ray $BG$ such that $\\angle CQB = \\angle ABC$. Prove that the circumcircles of triangles $AQG$ and $BPG$ meet at a point on side $AB$.",
+    "image": null,
+    "choices": null,
+    "answer": "Let $D$ be the foot of the altitude from $C$. Triangles $ACG \\sim APC$ give $AG \\cdot AP = AC^2 = AD \\cdot AB$, so $D$ lies on circle $BPG$; symmetrically $BG\\cdot BQ = BC^2 = BD \\cdot BA$ puts $D$ on circle $AQG$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Power of the point A",
+        "body": "Let $M$ be the midpoint of $AB$ and $D$ the foot of the perpendicular from $C$ to $AB$. Since $\\angle C = 90^\\circ$ and the other two angles are acute, $D$ lies strictly inside side $AB$.\n\n**$AC^2 = AG \\cdot AP$.** Because $\\angle ACB = 90^\\circ$, $C$ lies on the circle with diameter $AB$, so $MA = MC$ and $\\angle ACM = \\angle MAC = \\angle CAB$. The centroid $G$ lies on the median $CM$, between $C$ and $M$, so $\\angle ACG = \\angle ACM = \\angle CAB = \\angle CPA$. Triangles $ACG$ and $APC$ share the angle at $A$ (as $G$ and $P$ are on the same ray from $A$) and have $\\angle ACG = \\angle APC$; hence they are similar, and\n$$\\frac{AC}{AP} = \\frac{AG}{AC} \\quad\\Longrightarrow\\quad AC^2 = AG \\cdot AP.$$\n\n**$AC^2 = AD \\cdot AB$.** The right triangles $ADC$ and $ACB$ share the angle at $A$, so they are similar and $\\frac{AD}{AC} = \\frac{AC}{AB}$.\n\n**Concyclic.** Hence $AG \\cdot AP = AD \\cdot AB$. The points $D, B, P$ are not collinear ($P \\notin AB$), so let $\\omega$ be the circle through them. The power of $A$ with respect to $\\omega$ is $AD \\cdot AB > 0$ (as $D, B$ are on the same side of $A$), so $A$ is outside $\\omega$ and line $AP$ meets $\\omega$ at $P$ and at a second point $G'$ (possibly $G' = P$ if the line is tangent) on the same ray from $A$ with $AG' \\cdot AP = AD \\cdot AB = AG\\cdot AP$. Thus $AG' = AG$, so $G' = G$: the points $D, G, P, B$ are concyclic, i.e. $D$ lies on the circumcircle of $BPG$.\n\n**By symmetry** (exchange the roles of $A$ and $B$): $\\angle BCG = \\angle CBA = \\angle CQB$ gives $BC^2 = BG \\cdot BQ$, and $BC^2 = BD \\cdot BA$; so $D, G, Q, A$ are concyclic and $D$ lies on the circumcircle of $AQG$.\n\nThus both circumcircles pass through the point $D$ of side $AB$ (they also both pass through $G$, which is not on $AB$, so $D$ is their second common point). ∎"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "cmo-cmo-2013-04",
+    "bank": "cmo",
+    "source": {
+      "contest": "CMO",
+      "paper": "CMO 2013",
+      "year": 2013,
+      "number": 4,
+      "url": "https://cms.math.ca/competitions/cmo/"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $n$ be a positive integer. For any positive integer $j$ and positive real number $r$, define $f_j(r)$ and $g_j(r)$ by\n$$f_j(r) = \\min(jr, n) + \\min\\left(\\frac{j}{r}, n\\right), \\qquad g_j(r) = \\min(\\lceil jr \\rceil, n) + \\min\\left(\\left\\lceil \\frac{j}{r} \\right\\rceil, n\\right),$$\nwhere $\\lceil x \\rceil$ denotes the smallest integer greater than or equal to $x$. Prove that\n$$\\sum_{j=1}^n f_j(r) \\le n^2 + n \\le \\sum_{j=1}^n g_j(r)$$\nfor all positive real numbers $r$.",
+    "image": null,
+    "choices": null,
+    "answer": "Both sums are symmetric under $r \\leftrightarrow 1/r$. Left: for $r \\ge 1$ compute the sum exactly and reduce to $b(2r - b - 1) + mr(r - 1) \\ge 0$ with $n = mr + b$. Right: count pairs $(i, j) \\in [1, n]^2$ with $i - 1 < jr$ or $(j - 1)r < i$; every pair satisfies at least one, and at least $n$ pairs satisfy both.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Algebra for the left, double counting for the right",
+        "body": "Write $F(r) = \\sum_j f_j(r)$, $G(r) = \\sum_j g_j(r)$. Replacing $r$ by $1/r$ swaps the two terms of every $f_j$ and $g_j$, so $F(r) = F(1/r)$ and $G(r) = G(1/r)$. We may assume $r \\ge 1$.\n\n**Left inequality.** For $r \\ge 1$ and $1 \\le j \\le n$ we have $j/r \\le n$, so $\\sum_j \\min(j/r, n) = \\frac{n(n+1)}{2r}$. Let $m = \\lfloor n/r \\rfloor$ ($0 \\le m \\le n$); then $jr \\le n$ exactly for $j \\le m$, so\n$$F(r) = r\\,\\frac{m(m+1)}{2} + n(n - m) + \\frac{n(n+1)}{2r}.$$\nThus $F(r) \\le n^2 + n$ is equivalent to $r\\frac{m(m+1)}{2} + \\frac{n(n+1)}{2r} \\le n(m+1)$, i.e. (multiplying by $2r > 0$)\n$$m(m+1)r^2 + n(n+1) \\le 2rn(m+1).$$\nWrite $n = mr + b$ with $0 \\le b < r$ (possible since $m = \\lfloor n/r\\rfloor$). Expanding both sides:\n$$\\text{LHS} = 2m^2r^2 + mr^2 + 2mbr + mr + b^2 + b, \\qquad \\text{RHS} = 2m^2r^2 + 2mr^2 + 2mbr + 2br,$$\nso RHS $-$ LHS $= mr(r - 1) + b(2r - b - 1)$. Here $mr(r-1) \\ge 0$ since $r \\ge 1$, and $b(2r - b - 1) = b\\big((r - b) + (r - 1)\\big) \\ge 0$ since $b \\ge 0$, $r > b$, $r \\ge 1$. This proves $F(r) \\le n^2 + n$.\n\n**Right inequality.** For $x > 0$, the positive integers $i$ with $i - 1 < x$ are exactly $1, 2, \\ldots, \\lceil x \\rceil$, so\n$$\\min(\\lceil x \\rceil, n) = \\#\\{\\, i \\in \\{1, \\ldots, n\\} : i - 1 < x \\,\\}.$$\nHence, with $[n] = \\{1, \\ldots, n\\}$,\n$$\\sum_{j=1}^n \\min(\\lceil jr \\rceil, n) = \\#\\{(i, j) \\in [n]^2 : i - 1 < jr\\}, \\qquad \\sum_{i=1}^n \\min\\left(\\left\\lceil \\tfrac{i}{r} \\right\\rceil, n\\right) = \\#\\{(i, j) \\in [n]^2 : j - 1 < \\tfrac{i}{r}\\} .$$\n(In the second sum we renamed the summation index to $i$ and counted $j$.) The second condition is $(j - 1)r < i$. Call the sets $X$ and $Y$; then $G(r) = |X| + |Y| = |X \\cup Y| + |X \\cap Y|$.\n\n- **$X \\cup Y = [n]^2$.** If a pair satisfied neither condition, then $i - 1 \\ge jr$ and $(j-1)r \\ge i$, so $i - 1 \\ge jr = (j-1)r + r \\ge i + r > i$, a contradiction.\n- **$|X \\cap Y| \\ge n$.** For each $i \\in [n]$ let $j = \\lceil i/r \\rceil$. Since $r \\ge 1$, $1 \\le j \\le \\lceil i \\rceil = i \\le n$. By definition of the ceiling, $(j - 1) < i/r \\le j$, i.e. $(j-1)r < i \\le jr$, so both $i - 1 < jr$ and $(j-1)r < i$ hold. These $n$ pairs have different $i$, so they are distinct.\n\nTherefore $G(r) \\ge n^2 + n$. ∎"
+      }
+    ],
+    "topics": [
+      "inequalities",
+      "algebra",
+      "counting"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "cmo-cmo-2013-05",
+    "bank": "cmo",
+    "source": {
+      "contest": "CMO",
+      "paper": "CMO 2013",
+      "year": 2013,
+      "number": 5,
+      "url": "https://cms.math.ca/competitions/cmo/"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $O$ denote the circumcentre of an acute-angled triangle $ABC$. Let point $P$ on side $AB$ be such that $\\angle BOP = \\angle ABC$, and let point $Q$ on side $AC$ be such that $\\angle COQ = \\angle ACB$. Prove that the reflection of $BC$ in the line $PQ$ is tangent to the circumcircle of triangle $APQ$.",
+    "image": null,
+    "choices": null,
+    "answer": "$BP = \\rho\\sin B/\\cos(B - C)$ and $CQ = \\rho\\sin C/\\cos(B-C)$; the point $R$ of $BC$ with $PR = PB$ equals the one with $QR = QC$, then $\\angle PRQ = A$ puts $R$ on the reflection of circle $APQ$, and the law of sines gives $\\angle QPR = C = \\angle QRC$, so $BC$ is tangent to that reflected circle at $R$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Find the tangency point by lengths",
+        "body": "Write $A, B, C$ also for the angles and $\\rho$ for the circumradius, so $BC = 2\\rho\\sin A$. (The problem assumes such $P$ and $Q$ exist, which needs $B \\le 2C$ and $C \\le 2B$; we also assume $P, Q \\ne A$, since otherwise triangle $APQ$ is degenerate.)\n\n**Step 1: $BP$ and $CQ$.** Since the triangle is acute, $O$ is inside it and triangle $OAB$ is isosceles with apex angle $\\angle AOB = 2C$, so $\\angle OBP = \\angle OBA = 90^\\circ - C$. In triangle $OBP$ the angle at $O$ is $B$, hence the angle at $P$ is $180^\\circ - B - (90^\\circ - C) = 90^\\circ - (B - C)$. By the law of sines ($OB = \\rho$):\n$$BP = \\frac{\\rho \\sin B}{\\sin(90^\\circ - (B - C))} = \\frac{\\rho\\sin B}{\\cos(B - C)}, \\qquad\\text{and likewise}\\qquad CQ = \\frac{\\rho\\sin C}{\\cos(B - C)}.$$\n($\\cos(B - C) > 0$ because $|B - C| < 90^\\circ$.)\n\n**Step 2: one point $R$ on $BC$.** Put\n$$x = 2\\,BP\\cos B = \\frac{\\rho\\sin 2B}{\\cos(B-C)}, \\qquad y = 2\\,CQ\\cos C = \\frac{\\rho\\sin 2C}{\\cos(B-C)} .$$\nBoth are positive and\n$$x + y = \\frac{\\rho(\\sin 2B + \\sin 2C)}{\\cos(B - C)} = \\frac{2\\rho\\sin(B + C)\\cos(B - C)}{\\cos(B - C)} = 2\\rho\\sin A = BC.$$\nSo there is a point $R$ strictly inside segment $BC$ with $BR = x$ and $CR = y$. As $\\angle B$ is acute, the foot of the perpendicular from $P$ to $BC$ lies on ray $BC$ at distance $BP\\cos B = x/2$ from $B$, i.e. it is the midpoint of $BR$; hence $PR = PB$. In the same way $QR = QC$.\n\n**Step 3: angles at $R$.** Triangles $PBR$ and $QCR$ are isosceles, so $\\angle PRB = B$ and $\\angle QRC = C$. As $P$ and $Q$ lie on the same side of $BC$ and $B + C < 180^\\circ$, the rays $RB, RP, RQ, RC$ occur in this order, and\n$$\\angle PRQ = 180^\\circ - B - C = A .$$\n\n**Step 4: $R$ lies on the reflection $\\Gamma'$ of $\\Gamma = (APQ)$ in $PQ$.** Since $P, Q$ are interior points of sides $AB, AC$, the line $PQ$ separates $A$ from $B$, $C$ and hence from $R$. Let $R^*$ be the reflection of $R$ in $PQ$; it lies on $A$'s side and $\\angle PR^*Q = \\angle PRQ = A = \\angle PAQ$, so $R^*$ is on $\\Gamma$ (inscribed angle converse). Hence $R \\in \\Gamma'$, and $\\Gamma'$ is the circumcircle of $PQR$.\n\n**Step 5: $BC$ is tangent to $\\Gamma'$ at $R$.** In triangle $PQR$, let $\\varphi = \\angle QPR$; then $\\angle PQR = 180^\\circ - A - \\varphi = (B + C) - \\varphi$. By the law of sines and Step 1,\n$$\\frac{\\sin\\big((B + C) - \\varphi\\big)}{\\sin\\varphi} = \\frac{PR}{QR} = \\frac{PB}{QC} = \\frac{\\sin B}{\\sin C}.$$\nThe left side equals $\\sin(B+C)\\cot\\varphi - \\cos(B+C)$, a strictly decreasing function of $\\varphi \\in (0, B + C)$ (as $\\sin(B + C) > 0$). It takes the value $\\frac{\\sin B}{\\sin C}$ at $\\varphi = C$, hence only there: $\\angle QPR = C$.\nSo the angle between the chord $RQ$ and the line $RC$ equals $\\angle QRC = C = \\angle QPR$, the inscribed angle on chord $RQ$ from the opposite side ($P$ and $C$ lie on opposite sides of line $RQ$). By the converse of the tangent–chord theorem, $BC$ is tangent to $\\Gamma'$ at $R$.\n\n**Conclusion.** Reflect everything in $PQ$: $\\Gamma'$ goes to $\\Gamma$ and $BC$ goes to its reflection, which is therefore tangent to $\\Gamma$ (at $R^*$). ∎"
+      },
+      {
+        "title": "Sketch of the official angle chase",
+        "body": "Here is the official approach, assuming the standard configuration (all points where the figure shows them). Let the circle $OBP$ meet $BC$ again at $R$.\n\n- Since $\\angle BOC = 2A$, the angles around $O$ give $\\angle POQ = 360^\\circ - B - C - 2A = 180^\\circ - A$, so $APOQ$ is cyclic: $O$ lies on $\\Gamma = (APQ)$.\n- From $BPOR$ cyclic, $\\angle POR = 180^\\circ - B$, so $\\angle QOR = 360^\\circ - (180^\\circ - A) - (180^\\circ - B) = 180^\\circ - C$ and $CQOR$ is cyclic.\n- Then $\\angle QPR = \\angle QPO + \\angle OPR = \\angle OAQ + \\angle OBR = (90^\\circ - B) + (90^\\circ - A) = C$, and $\\angle QRC = \\angle COQ = C$; so the circle $PQR$ is tangent to $BC$ at $R$.\n- Finally $\\angle PRB = \\angle BOP = B$, so $\\angle PRQ = 180^\\circ - B - C = A = \\angle PAQ$, and the circle $PQR$ is the reflection of $\\Gamma$ in $PQ$.\n\nReflecting in $PQ$ gives the claim. (The first solution proves the same facts without relying on the picture.) ∎"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "trigonometry"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

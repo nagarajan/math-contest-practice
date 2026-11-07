@@ -1,0 +1,440 @@
+[
+  {
+    "id": "imc-2006-01",
+    "bank": "imc",
+    "source": {
+      "contest": "IMC",
+      "paper": "Day 1",
+      "year": 2006,
+      "number": 1,
+      "url": "https://www.imc-math.org.uk/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $f:\\mathbb R\\to\\mathbb R$ be a real function. Prove or disprove each of the following statements.\n\n(a) If $f$ is continuous and $\\operatorname{range}(f)=\\mathbb R$, then $f$ is monotonic.\n\n(b) If $f$ is monotonic and $\\operatorname{range}(f)=\\mathbb R$, then $f$ is continuous.\n\n(c) If $f$ is monotonic and $f$ is continuous, then $\\operatorname{range}(f)=\\mathbb R$.",
+    "image": null,
+    "choices": null,
+    "answer": "(a) false (e.g. $x^3-x$); (b) true (a jump of a monotonic function leaves a gap in the range); (c) false (e.g. $\\arctan x$).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Counterexamples and the jump argument",
+        "body": "**(a) False.** Take $f(x)=x^3-x$. It is continuous, and its range is $\\mathbb R$ because $f(x)\\to\\pm\\infty$ as $x\\to\\pm\\infty$ and $f$ has the intermediate value property. But $f(0)=0$, $f(\\tfrac12)=-\\tfrac38$, $f(1)=0$, so $f(0)>f(\\tfrac12)<f(1)$ and $f$ is not monotonic.\n\n**(b) True.** Replacing $f$ by $-f$ if necessary (this keeps both hypotheses), we may assume $f$ is non-decreasing. Fix $a\\in\\mathbb R$. Because $f$ is monotonic the one-sided limits exist:\n$$L=\\lim_{x\\to a^-}f(x)=\\sup_{x<a}f(x),\\qquad R=\\lim_{x\\to a^+}f(x)=\\inf_{x>a}f(x),$$\nand $L\\le f(a)\\le R$. If $L=R$, then $L=f(a)=R$ and $f$ is continuous at $a$. Suppose $L<R$. Then $f(x)\\le L$ for $x<a$ and $f(x)\\ge R$ for $x>a$, so\n$$\\operatorname{range}(f)\\subseteq(-\\infty,L]\\cup\\{f(a)\\}\\cup[R,\\infty).$$\nThe open interval $(L,R)$ is non-empty and contains at most one point of the range (namely $f(a)$), so it contains values that $f$ never takes, contradicting $\\operatorname{range}(f)=\\mathbb R$. Hence $f$ is continuous at every point.\n\n**(c) False.** $g(x)=\\arctan x$ is increasing and continuous, but $\\operatorname{range}(g)=(-\\tfrac\\pi2,\\tfrac\\pi2)\\ne\\mathbb R$. ∎"
+      }
+    ],
+    "topics": [
+      "real-analysis",
+      "analysis"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imc-2006-02",
+    "bank": "imc",
+    "source": {
+      "contest": "IMC",
+      "paper": "Day 1",
+      "year": 2006,
+      "number": 2,
+      "url": "https://www.imc-math.org.uk/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Find the number of positive integers $x$ satisfying the following two conditions:\n\n1. $x<10^{2006}$;\n2. $x^2-x$ is divisible by $10^{2006}$.",
+    "image": null,
+    "choices": null,
+    "answer": "3",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Chinese remainder theorem",
+        "body": "Write $N=10^{2006}=2^{2006}\\cdot5^{2006}$. Since $x^2-x=x(x-1)$ and $\\gcd(x,x-1)=1$, the power $2^{2006}$ must divide one of the two factors entirely, and the same holds for $5^{2006}$. So $N\\mid x^2-x$ if and only if\n$$x\\equiv0\\text{ or }1\\pmod{2^{2006}}\\qquad\\text{and}\\qquad x\\equiv0\\text{ or }1\\pmod{5^{2006}}.$$\nThese give $4$ combinations, and by the Chinese remainder theorem each combination has exactly one solution in $\\{0,1,\\dots,N-1\\}$. The four solutions are different (any two of them differ modulo $2^{2006}$ or modulo $5^{2006}$). One of them is $x=0$, which is not positive; the other three ($x=1$ and two more) are positive and less than $N$.\n\n**Answer: 3**"
+      },
+      {
+        "title": "Lift digit by digit",
+        "body": "For $k\\ge1$ let $S_k$ be the set of residues $y\\in\\{0,\\dots,10^k-1\\}$ with $10^k\\mid y^2-y$; then $S_1=\\{0,1,5,6\\}$ (check the ten digits: $y^2-y$ ends in $0$ only for $y=0,1,5,6$).\n\nEvery $x\\in S_{k+1}$ reduces to some $y=x\\bmod 10^k\\in S_k$. Conversely fix $y\\in S_k$, write $y^2-y=10^kz$ and try $x=y+a10^k$ with a digit $a$:\n$$x^2-x=(y^2-y)+a10^k(2y-1)+a^210^{2k}=10^k\\bigl(z+a(2y-1)\\bigr)+a^210^{2k}.$$\nSince $2k\\ge k+1$, $10^{k+1}\\mid x^2-x$ iff $z+a(2y-1)\\equiv0\\pmod{10}$. Now $y\\in\\{0,1,5,6\\}\\pmod{10}$, so $2y-1\\equiv 9,1,9,1\\pmod{10}$ is invertible mod $10$, and exactly one digit $a$ works. Hence $|S_{k+1}|=|S_k|$ for all $k$, so $|S_{2006}|=|S_1|=4$. Removing $x=0$ leaves $3$ positive solutions.\n\n**Answer: 3**"
+      }
+    ],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imc-2006-03",
+    "bank": "imc",
+    "source": {
+      "contest": "IMC",
+      "paper": "Day 1",
+      "year": 2006,
+      "number": 3,
+      "url": "https://www.imc-math.org.uk/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $A$ be an $n\\times n$ matrix with integer entries and let $b_1,\\dots,b_k$ be integers satisfying $\\det A=b_1\\cdot\\ldots\\cdot b_k$. Prove that there exist $n\\times n$ matrices $B_1,\\dots,B_k$ with integer entries such that $A=B_1\\cdot\\ldots\\cdot B_k$ and $\\det B_i=b_i$ for all $i=1,\\dots,k$.",
+    "image": null,
+    "choices": null,
+    "answer": "Reduce to $k=2$; bring $A$ to Smith normal form $A=UDV$ with $U,V\\in SL_n(\\mathbb Z)$, $D$ diagonal, and split the diagonal entries $d_i=\\beta_i\\gamma_i$ with $\\prod\\beta_i=b$, $\\prod\\gamma_i=c$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Smith normal form and splitting the diagonal",
+        "body": "**Reduction to $k=2$.** We use induction on $k$; $k=1$ is trivial ($B_1=A$). If the statement holds for two factors, write $\\det A=b_1\\cdot(b_2\\cdots b_k)$ and get $A=B_1A'$ with $\\det B_1=b_1$, $\\det A'=b_2\\cdots b_k$; the induction hypothesis applied to $A'$ finishes. So it suffices to prove: *if $\\det A=bc$ then $A=BC$ with integral $B,C$, $\\det B=b$, $\\det C=c$.*\n\n**Smith normal form.** Every integer matrix can be written $A=UDV$ with $U,V\\in GL_n(\\mathbb Z)$ (integer matrices with determinant $\\pm1$) and $D=\\operatorname{diag}(d_1,\\dots,d_n)$ diagonal with integer entries, where the zero entries (if any) come last. If $\\det U=-1$, replace $U$ by $UE$ and $D$ by $ED$ with $E=\\operatorname{diag}(-1,1,\\dots,1)$ (note $E^2=I$ and $ED$ is still diagonal); similarly for $V$ (replace $V$ by $EV$, $D$ by $DE$). So we may assume $\\det U=\\det V=1$, hence $d_1d_2\\cdots d_n=\\det D=\\det A=bc$.\n\nIf we find integer diagonal matrices $B_0,C_0$ with $B_0C_0=D$, $\\det B_0=b$, $\\det C_0=c$, then $B=UB_0$, $C=C_0V$ work: $BC=UDV=A$, $\\det B=b$, $\\det C=c$.\n\n**Case $bc=0$.** Then $d_n=0$. If $b=0$ take $C_0=\\operatorname{diag}(1,\\dots,1,c)$ and $B_0=\\operatorname{diag}(d_1,\\dots,d_{n-1},0)$; then $B_0C_0=D$, $\\det B_0=0=b$, $\\det C_0=c$. If $c=0$ take $B_0=\\operatorname{diag}(1,\\dots,1,b)$ and $C_0=\\operatorname{diag}(d_1,\\dots,d_{n-1},0)$.\n\n**Case $bc\\ne0$.** Then all $d_i\\neq0$. Define greedily $\\beta_1=\\gcd(d_1,b)$ and, for $i\\ge2$,\n$$\\beta_i=\\gcd\\Bigl(d_i,\\ \\frac{b}{\\beta_1\\cdots\\beta_{i-1}}\\Bigr)$$\n(positive gcds); by construction $\\beta_1\\cdots\\beta_i$ divides $b$, so the fractions are integers, and $\\beta_i\\mid d_i$. For a prime $p$ let $e=v_p(b)$. The greedy rule takes $\\min(v_p(d_i),\\ e-\\text{(exponent already used)})$ at step $i$, so in total it uses $\\min\\bigl(e,\\sum_i v_p(d_i)\\bigr)=e$ copies of $p$, because $\\sum_iv_p(d_i)=v_p(bc)\\ge e$. Thus $\\beta_1\\cdots\\beta_n=|b|$. Replace $\\beta_1$ by $-\\beta_1$ if $b<0$, so that $\\prod\\beta_i=b$. Put $\\gamma_i=d_i/\\beta_i\\in\\mathbb Z$. Then $\\prod\\gamma_i=\\frac{bc}{b}=c$, and $B_0=\\operatorname{diag}(\\beta_i)$, $C_0=\\operatorname{diag}(\\gamma_i)$ satisfy $B_0C_0=D$. ∎\n\n*Remark.* The official solution avoids the Smith normal form: it reduces $A$ to upper triangular form (Hermite normal form) and builds upper triangular factors $B,C$ column by column, choosing $B_{nn}=\\gcd(b,A_{nn})$ and solving the linear Diophantine equations for the off-diagonal entries using that $B_{ii}$ and $C_{nn}$ are coprime."
+      }
+    ],
+    "topics": [
+      "linear-algebra",
+      "number-theory"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imc-2006-04",
+    "bank": "imc",
+    "source": {
+      "contest": "IMC",
+      "paper": "Day 1",
+      "year": 2006,
+      "number": 4,
+      "url": "https://www.imc-math.org.uk/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $f$ be a rational function (i.e. the quotient of two real polynomials) and suppose that $f(n)$ is an integer for infinitely many integers $n$. Prove that $f$ is a polynomial.",
+    "image": null,
+    "choices": null,
+    "answer": "First show $f$ has rational coefficients (a rational linear system with a real solution has a rational one); then $f=s+r/q$ with $\\deg r<\\deg q$, and $N(f-s)$ is an integer tending to $0$ on $S$, so $r=0$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Rational coefficients, then division with remainder",
+        "body": "Let $f=p/q$ with real polynomials, $q\\ne0$, $\\deg p\\le k$, $\\deg q\\le m$, and let $S$ be an infinite set of integers that are not roots of $q$ and at which $f$ takes integer values (only finitely many integers are roots of $q$).\n\n**Step 1: $f$ is a quotient of polynomials with rational coefficients.** Consider unknown polynomials $P(x)=\\sum_{i\\le k}u_ix^i$, $Q(x)=\\sum_{j\\le m}w_jx^j$ and the homogeneous linear system\n$$P(x)-f(x)Q(x)=0\\qquad(x\\in S)$$\nin the $k+m+2$ unknowns $u_i,w_j$. Its coefficients $x^i$ and $f(x)x^j$ are integers. A finite subfamily of these equations has the same rank as the whole system, so the solution space of the whole system equals that of a finite integer system. For a matrix with rational entries the rank over $\\mathbb Q$ and over $\\mathbb R$ coincide (rank is the size of the largest nonzero minor), so the solution spaces over $\\mathbb Q$ and $\\mathbb R$ have the same dimension. The real solution $(P,Q)=(p,q)$ is nonzero, hence there is a nonzero rational solution $(P',Q')$.\n\nIf $Q'=0$, then $P'(x)=0$ for all $x\\in S$, so $P'=0$ — impossible. Hence $Q'\\neq0$. For $x\\in S$ we have $P'(x)=f(x)Q'(x)$ and $p(x)=f(x)q(x)$, so\n$$P'(x)q(x)=f(x)q(x)Q'(x)=p(x)Q'(x).$$\nThe polynomials $P'q$ and $pQ'$ agree at infinitely many points, so they are equal, i.e. $f=p/q=P'/Q'$. Multiplying numerator and denominator by a common denominator we get $f=P/Q$ with $P,Q\\in\\mathbb Z[x]$.\n\n**Step 2: $f$ is a polynomial.** Divide with remainder in $\\mathbb Q[x]$: $P=Qs+r$ with $s,r\\in\\mathbb Q[x]$, $\\deg r<\\deg Q$. Choose a positive integer $N$ with $Ns\\in\\mathbb Z[x]$. For $x\\in S$ with $Q(x)\\neq0$ (all but finitely many),\n$$N f(x)-Ns(x)=\\frac{N r(x)}{Q(x)}$$\nis an integer. As $\\deg r<\\deg Q$, $Nr(x)/Q(x)\\to0$ when $|x|\\to\\infty$, and $S$ contains integers of arbitrarily large absolute value. Hence $|Nr(x)/Q(x)|<1$, and therefore $r(x)=0$, for all but finitely many $x\\in S$. So $r$ has infinitely many roots, $r=0$, and $f=s$ is a polynomial. ∎"
+      }
+    ],
+    "topics": [
+      "polynomials",
+      "number-theory",
+      "linear-algebra"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imc-2006-05",
+    "bank": "imc",
+    "source": {
+      "contest": "IMC",
+      "paper": "Day 1",
+      "year": 2006,
+      "number": 5,
+      "url": "https://www.imc-math.org.uk/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "text",
+    "prompt": "Let $a,b,c,d,e>0$ be real numbers such that $a^2+b^2+c^2=d^2+e^2$ and $a^4+b^4+c^4=d^4+e^4$. Compare the numbers $a^3+b^3+c^3$ and $d^3+e^3$.",
+    "image": null,
+    "choices": null,
+    "answer": "a^3+b^3+c^3 < d^3+e^3",
+    "acceptedAnswers": [
+      "<",
+      "a^3+b^3+c^3<d^3+e^3",
+      "d^3+e^3 > a^3+b^3+c^3",
+      "d^3+e^3>a^3+b^3+c^3",
+      "d^3+e^3 is larger",
+      "d^3+e^3 is bigger",
+      "less",
+      "smaller",
+      "a^3+b^3+c^3 is smaller"
+    ],
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Order the numbers, then use an interpolating function",
+        "body": "**Answer:** $a^3+b^3+c^3<d^3+e^3$ always.\n\n**Step 1: the ordering $a>d\\ge e>b\\ge c$.** By symmetry assume $a\\ge b\\ge c$ and $d\\ge e$. Write $c^2=e^2+\\Delta$. The first equation gives $d^2=a^2+b^2+\\Delta$; substituting into the second,\n$$a^4+b^4+(e^2+\\Delta)^2=(a^2+b^2+\\Delta)^2+e^4\\iff \\Delta\\,(e^2-a^2-b^2)=a^2b^2 .$$\nPut $T=a^2+b^2+c^2=d^2+e^2$. As $c$ is the smallest of $a,b,c$ we have $a^2+b^2\\ge\\frac23T$, and as $e\\le d$ we have $e^2\\le\\frac12T$; so $a^2+b^2-e^2\\ge\\frac16T>0$ and\n$$\\Delta=-\\frac{a^2b^2}{a^2+b^2-e^2},\\qquad c^2=e^2+\\Delta=\\frac{(a^2-e^2)(e^2-b^2)}{a^2+b^2-e^2}.$$\nSince $c^2>0$, the factors $a^2-e^2$, $e^2-b^2$ have the same sign; as $a\\ge b$ they cannot both be negative, so $a>e>b$. Finally\n$$d^2=a^2+b^2+\\Delta=a^2+\\frac{b^2(b^2-e^2)}{a^2+b^2-e^2}<a^2 .$$\nThus $a>d\\ge e>b\\ge c$.\n\n**Step 2: an identity.** For any constants $\\alpha,\\beta$, the two hypotheses give\n$$\\sum_{t\\in\\{a,b,c\\}}(t^3-\\alpha t^2-\\beta t^4)-\\sum_{t\\in\\{d,e\\}}(t^3-\\alpha t^2-\\beta t^4)=(a^3+b^3+c^3)-(d^3+e^3).$$\nChoose $\\beta=\\frac1{d+e}$, $\\alpha=\\frac{de}{d+e}$. Then\n$$t^3-\\alpha t^2-\\beta t^4=t^2(t-\\alpha-\\beta t^2)=-\\frac{t^2(t-d)(t-e)}{d+e},$$\nwhich vanishes for $t=d$ and $t=e$. Hence\n$$(a^3+b^3+c^3)-(d^3+e^3)=-\\frac{1}{d+e}\\Bigl[a^2(a-d)(a-e)+b^2(b-d)(b-e)+c^2(c-d)(c-e)\\Bigr].$$\n\n**Step 3: signs.** By Step 1, $a-d>0$, $a-e>0$, while $b-d,b-e,c-d,c-e<0$. So all three products in the bracket are positive, the bracket is positive, and $a^3+b^3+c^3<d^3+e^3$. ∎"
+      },
+      {
+        "title": "Counting sign changes (official idea)",
+        "body": "Keep the ordering $a>d\\ge e>b\\ge c$ from the first solution and scale so that $a=1$ (all conditions are homogeneous). Let $F(x)=a^x+b^x+c^x-d^x-e^x$. Then $F(2)=F(4)=0$ and $F(0)=3-2=1>0$.\n\n**Claim: $F'$ has at most one zero.** Here $F'(x)=-L(x)+R(x)$ with\n$$L(x)=(-\\ln b)b^x+(-\\ln c)c^x,\\qquad R(x)=(-\\ln d)d^x+(-\\ln e)e^x,$$\nand all four coefficients $-\\ln b,-\\ln c,-\\ln d,-\\ln e$ are positive since $b,c,d,e<1$. Suppose $F'(x_1)=F'(x_2)=0$ with $x_1<x_2$, and let $\\delta=x_2-x_1>0$. Since $c\\le b$ and $e\\le d$,\n$$L(x_2)=(-\\ln b)b^{x_1}b^\\delta+(-\\ln c)c^{x_1}c^\\delta\\le b^\\delta L(x_1),\\qquad R(x_2)\\ge e^\\delta R(x_1).$$\nFrom $L(x_i)=R(x_i)>0$ we get $\\frac{L(x_2)}{L(x_1)}=\\frac{R(x_2)}{R(x_1)}$, but the left side is $\\le b^\\delta$ and the right side is $\\ge e^\\delta>b^\\delta$ (as $b<e$) — a contradiction.\n\n**Conclusion.** If $F$ had a zero other than $2,4$, Rolle's theorem would give two zeros of $F'$. If $F$ did not change sign at $2$ (say), then $2$ would be a local extremum, so $F'(2)=0$, and Rolle on $[2,4]$ gives another zero of $F'$. Both are impossible, so $F$ vanishes only at $2$ and $4$ and changes sign at each. As $F(0)>0$, we get $F<0$ on $(2,4)$; in particular $F(3)=a^3+b^3+c^3-d^3-e^3<0$. ∎"
+      }
+    ],
+    "topics": [
+      "inequalities",
+      "algebra"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imc-2006-06",
+    "bank": "imc",
+    "source": {
+      "contest": "IMC",
+      "paper": "Day 1",
+      "year": 2006,
+      "number": 6,
+      "url": "https://www.imc-math.org.uk/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Find all sequences $a_0,a_1,\\dots,a_n$ of real numbers, where $n\\ge1$ and $a_n\\ne0$, for which the following statement is true:\n\nIf $f:\\mathbb R\\to\\mathbb R$ is an $n$ times differentiable function and $x_0<x_1<\\dots<x_n$ are real numbers such that $f(x_0)=f(x_1)=\\dots=f(x_n)=0$, then there exists an $h\\in(x_0,x_n)$ for which\n$$a_0f(h)+a_1f'(h)+\\dots+a_nf^{(n)}(h)=0.$$",
+    "image": null,
+    "choices": null,
+    "answer": "Exactly the sequences for which the polynomial $A(x)=a_0+a_1x+\\dots+a_nx^n$ has only real roots (factor $A(D)$ into $D-c$'s and apply Rolle to $e^{-cx}f$; for a nonreal root $u+iv$ use $e^{ux}\\sin vx+\\varepsilon x^k$).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Factor the differential operator",
+        "body": "Let $A(x)=a_0+a_1x+\\dots+a_nx^n$ and let $D$ denote differentiation, so the expression in question is $(A(D)f)(h)$. We prove: **the statement holds if and only if all roots of $A$ are real.**\n\n**Lemma.** If $g$ is differentiable, $c\\in\\mathbb R$ and $g(y_0)=g(y_1)=0$ with $y_0<y_1$, then $g'(\\xi)-cg(\\xi)=0$ for some $\\xi\\in(y_0,y_1)$.\n\n*Proof.* $G(x)=e^{-cx}g(x)$ vanishes at $y_0,y_1$; by Rolle $0=G'(\\xi)=e^{-c\\xi}(g'(\\xi)-cg(\\xi))$. $\\square$\n\n**All roots real ⇒ the statement holds.** Write $A(x)=a_n(x-c_1)\\cdots(x-c_n)$ with real $c_i$; since constant-coefficient operators commute, $A(D)=a_n(D-c_1)\\cdots(D-c_n)$. We prove by induction on $m\\ge1$: *for real $c_1,\\dots,c_m$, every $m$ times differentiable $f$ with zeros $x_0<\\dots<x_m$ satisfies $\\bigl((D-c_1)\\cdots(D-c_m)f\\bigr)(\\xi)=0$ for some $\\xi\\in(x_0,x_m)$.* For $m=1$ this is the lemma. For $m\\ge2$, let $g=(D-c_m)f=f'-c_mf$; it is $m-1$ times differentiable, and by the lemma it has zeros $y_j\\in(x_j,x_{j+1})$, $j=0,\\dots,m-1$, so $y_0<\\dots<y_{m-1}$. By the induction hypothesis there is $\\xi\\in(y_0,y_{m-1})\\subset(x_0,x_m)$ with $\\bigl((D-c_1)\\cdots(D-c_{m-1})g\\bigr)(\\xi)=0$, which is what we want. Applying this with $m=n$ and multiplying by $a_n$ gives $(A(D)f)(h)=0$ for some $h\\in(x_0,x_n)$.\n\n**A nonreal root ⇒ the statement fails.** Let $u+iv$ ($v>0$) be a root of $A$; since $A$ is real, $u-iv$ is a root too. For $g_1(x)=e^{ux}\\sin vx=\\operatorname{Im}e^{(u+iv)x}$ we get $A(D)e^{(u+iv)x}=A(u+iv)e^{(u+iv)x}=0$, and taking imaginary parts (the operator $A(D)$ is real) $A(D)g_1=0$. Let $k$ be the smallest index with $a_k\\ne0$ and put $f(x)=g_1(x)+\\varepsilon x^k$ with $\\varepsilon>0$ to be chosen. Since $D^jx^k=0$ for $j>k$ and $a_j=0$ for $j<k$,\n$$A(D)f=\\varepsilon\\,a_k\\,k!\\neq0\\quad\\text{everywhere}.$$\nIt remains to give $f$ at least $n+1$ zeros. At $t_j=\\frac{(j+1/2)\\pi}{v}$, $j=0,1,\\dots,n+1$, we have $g_1(t_j)=\\pm e^{ut_j}$ with alternating signs; let $\\mu=\\min_j e^{ut_j}>0$ and $M=\\max_{[t_0,t_{n+1}]}|x^k|$. If $\\varepsilon M<\\mu$, then $f(t_j)$ has the sign of $g_1(t_j)$, so by the intermediate value theorem $f$ has a zero in each interval $(t_j,t_{j+1})$, $j=0,\\dots,n$: these are $n+1$ zeros $x_0<\\dots<x_n$, $f$ is smooth, and yet no $h$ exists. ∎\n\n**Answer:** exactly those sequences for which all roots of $a_0+a_1x+\\dots+a_nx^n$ are real."
+      }
+    ],
+    "topics": [
+      "real-analysis",
+      "polynomials",
+      "differential-equations"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imc-2006-07",
+    "bank": "imc",
+    "source": {
+      "contest": "IMC",
+      "paper": "Day 2",
+      "year": 2006,
+      "number": 7,
+      "url": "https://www.imc-math.org.uk/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $V$ be a convex polygon with $n$ vertices.\n\n(a) Prove that if $n$ is divisible by $3$, then $V$ can be triangulated (i.e. dissected into non-overlapping triangles whose vertices are vertices of $V$) so that each vertex of $V$ is the vertex of an odd number of triangles.\n\n(b) Prove that if $n$ is not divisible by $3$, then $V$ can be triangulated so that there are exactly two vertices that are the vertices of an even number of the triangles.",
+    "image": null,
+    "choices": null,
+    "answer": "Induction from $n$ to $n+3$: triangulate $P_1\\dots P_k$, then add $P_1P_kP_{k+2}$, $P_kP_{k+1}P_{k+2}$, $P_1P_{k+2}P_{k+3}$ — $P_1,P_k$ gain two triangles, the three new vertices get $1,3,1$. Base cases $n=3,4,5$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Induction in steps of three",
+        "body": "Label the vertices $P_1,\\dots,P_n$ in order, and call a vertex *odd/even* according to the number of triangles containing it. We prove both statements together by induction, going from $k$ to $k+3$.\n\n**Base cases.**\n- $n=3$: the single triangle; all three vertices are odd.\n- $n=4$: draw the diagonal $P_1P_3$. Then $P_1,P_3$ lie in $2$ triangles and $P_2,P_4$ in $1$: exactly two even vertices.\n- $n=5$: draw $P_1P_3$ and $P_1P_4$, giving $P_1P_2P_3$, $P_1P_3P_4$, $P_1P_4P_5$. The counts are $P_1:3$, $P_2:1$, $P_3:2$, $P_4:2$, $P_5:1$: exactly two even vertices.\n\n**Step $k\\to k+3$** ($k\\ge3$). Let $V=P_1P_2\\dots P_{k+3}$. Triangulate the convex polygon $P_1\\dots P_k$ as given by the induction hypothesis. The rest of $V$ is the convex pentagon $P_1P_kP_{k+1}P_{k+2}P_{k+3}$; triangulate it by the diagonals $P_kP_{k+2}$ and $P_1P_{k+2}$ into\n$$P_1P_kP_{k+2},\\qquad P_kP_{k+1}P_{k+2},\\qquad P_1P_{k+2}P_{k+3}.$$\nTogether this is a triangulation of $V$. Counting the new triangles:\n- $P_1$ and $P_k$ each gain exactly $2$ triangles, so their parity is unchanged;\n- $P_2,\\dots,P_{k-1}$ are unchanged;\n- $P_{k+1}$, $P_{k+2}$, $P_{k+3}$ lie in $1$, $3$, $1$ triangles: all odd.\n\nSo the number of even vertices is the same as for $P_1\\dots P_k$. Since $k+3\\equiv k\\pmod 3$, the induction gives: no even vertices when $3\\mid n$, and exactly two even vertices when $3\\nmid n$. ∎"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "counting"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imc-2006-08",
+    "bank": "imc",
+    "source": {
+      "contest": "IMC",
+      "paper": "Day 2",
+      "year": 2006,
+      "number": 8,
+      "url": "https://www.imc-math.org.uk/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Find all functions $f:\\mathbb R\\to\\mathbb R$ such that for any real numbers $a<b$, the image $f([a,b])$ is a closed interval of length $b-a$.",
+    "image": null,
+    "choices": null,
+    "answer": "$f(x)=x+c$ and $f(x)=-x+c$ ($c$ constant).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Lipschitz, then extreme values at the endpoints",
+        "body": "The functions $f(x)=x+c$ and $f(x)=-x+c$ work: they map $[a,b]$ onto $[a+c,b+c]$, resp. $[-b+c,-a+c]$, both of length $b-a$. We show there are no others.\n\nLet $f$ have the property. For $x<y$, both $f(x)$ and $f(y)$ lie in $f([x,y])$, an interval of length $y-x$, so $|f(x)-f(y)|\\le|x-y|$. In particular $f$ is continuous.\n\nFix $x<y$. Since $f([x,y])$ is a closed interval $[m,M]$ with $M-m=y-x$, there are $a,b\\in[x,y]$ with $f(a)=M$, $f(b)=m$. Then\n$$y-x=f(a)-f(b)\\le|a-b|\\le y-x,$$\nso $|a-b|=y-x$, i.e. $\\{a,b\\}=\\{x,y\\}$. Consequently $|f(y)-f(x)|=M-m=y-x$ for **all** $x<y$. In particular $f$ is injective; a continuous injective function on $\\mathbb R$ is strictly monotonic.\n\nIf $f$ is increasing, then $f(y)-f(x)=y-x$ for all $x<y$, so $f(x)-x$ is constant: $f(x)=x+c$. If $f$ is decreasing, $f(y)-f(x)=-(y-x)$, so $f(x)+x$ is constant: $f(x)=-x+c$. ∎"
+      }
+    ],
+    "topics": [
+      "functional-equations",
+      "real-analysis"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imc-2006-09",
+    "bank": "imc",
+    "source": {
+      "contest": "IMC",
+      "paper": "Day 2",
+      "year": 2006,
+      "number": 9,
+      "url": "https://www.imc-math.org.uk/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "text",
+    "prompt": "Compare $\\tan(\\sin x)$ and $\\sin(\\tan x)$ for all $x\\in\\left(0,\\frac\\pi2\\right)$.",
+    "image": null,
+    "choices": null,
+    "answer": "tan(sin x) > sin(tan x)",
+    "acceptedAnswers": [
+      "tan(sin(x)) > sin(tan(x))",
+      "tan(sin x)>sin(tan x)",
+      "tan sin x > sin tan x",
+      ">",
+      "tan(sin x) is larger",
+      "tan(sin x) is bigger",
+      "tan(sin x) is greater",
+      "sin(tan x) < tan(sin x)"
+    ],
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Derivative on a first interval, crude bound on the rest",
+        "body": "**Answer:** $\\tan(\\sin x)>\\sin(\\tan x)$ for every $x\\in(0,\\frac\\pi2)$.\n\nLet $f(x)=\\tan(\\sin x)-\\sin(\\tan x)$; then $f(0)=0$ and\n$$f'(x)=\\frac{\\cos x}{\\cos^2(\\sin x)}-\\frac{\\cos(\\tan x)}{\\cos^2x}=\\frac{\\cos^3x-\\cos(\\tan x)\\cos^2(\\sin x)}{\\cos^2x\\cos^2(\\sin x)}.$$\n\n**On $(0,x_0)$, where $x_0=\\arctan\\frac\\pi2$.** Here $0<\\tan x<\\frac\\pi2$ and $0<\\sin x<1<\\frac\\pi2$, so $\\cos(\\tan x)>0$ and $\\cos(\\sin x)>0$. By AM–GM and then concavity of $\\cos$ on $[0,\\frac\\pi2]$ (Jensen),\n$$\\sqrt[3]{\\cos(\\tan x)\\cos^2(\\sin x)}\\le\\frac{\\cos(\\tan x)+2\\cos(\\sin x)}{3}\\le\\cos\\frac{\\tan x+2\\sin x}{3}.$$\nLet $k(x)=\\tan x+2\\sin x-3x$. Then $k(0)=0$ and, by AM–GM,\n$$k'(x)=\\frac1{\\cos^2x}+\\cos x+\\cos x-3\\ge3\\sqrt[3]{\\frac{\\cos^2x}{\\cos^2x}}-3=0,$$\nwith equality only if $\\frac1{\\cos^2x}=\\cos x$, i.e. $x=0$. So $k$ is strictly increasing and $\\frac{\\tan x+2\\sin x}3>x$. Both numbers lie in $(0,\\frac\\pi2)$, where $\\cos$ is decreasing, hence $\\cos\\frac{\\tan x+2\\sin x}{3}<\\cos x$. Altogether $\\cos(\\tan x)\\cos^2(\\sin x)<\\cos^3x$, so $f'>0$ on $(0,x_0)$ and $f(x)>f(0)=0$ for $0<x\\le x_0$.\n\n**On $[x_0,\\frac\\pi2)$.** Here\n$$\\sin x\\ge\\sin x_0=\\frac{\\pi/2}{\\sqrt{1+\\pi^2/4}}=\\frac{\\pi}{\\sqrt{4+\\pi^2}}>\\frac\\pi4,$$\nbecause $4+\\pi^2<16$. As $\\frac\\pi4<\\sin x<1<\\frac\\pi2$, we get $\\tan(\\sin x)>\\tan\\frac\\pi4=1\\ge\\sin(\\tan x)$.\n\nHence $\\tan(\\sin x)>\\sin(\\tan x)$ on the whole interval. ∎"
+      }
+    ],
+    "topics": [
+      "trigonometry",
+      "calculus",
+      "inequalities"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imc-2006-10",
+    "bank": "imc",
+    "source": {
+      "contest": "IMC",
+      "paper": "Day 2",
+      "year": 2006,
+      "number": 10,
+      "url": "https://www.imc-math.org.uk/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $v_0$ be the zero vector in $\\mathbb R^n$ and let $v_1,v_2,\\dots,v_{n+1}\\in\\mathbb R^n$ be such that the Euclidean norm $|v_i-v_j|$ is rational for every $0\\le i,j\\le n+1$. Prove that $v_1,\\dots,v_{n+1}$ are linearly dependent over the rationals.",
+    "image": null,
+    "choices": null,
+    "answer": "All inner products $\\langle v_i,v_j\\rangle=\\frac12(|v_i|^2+|v_j|^2-|v_i-v_j|^2)$ are rational; express a vector outside a maximal real-independent subset via the (rational, invertible) Gram matrix — the coefficients are rational.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Rational Gram matrix",
+        "body": "**Inner products are rational.** Since $|v_i|=|v_i-v_0|\\in\\mathbb Q$,\n$$\\langle v_i,v_j\\rangle=\\tfrac12\\left(|v_i|^2+|v_j|^2-|v_i-v_j|^2\\right)\\in\\mathbb Q\\qquad(1\\le i,j\\le n+1).$$\n\n**A rational relation.** If all $v_i$ are $0$, then $1\\cdot v_1=0$ is a rational relation. Otherwise choose a maximal subset of $\\{v_1,\\dots,v_{n+1}\\}$ that is linearly independent over $\\mathbb R$; after relabelling it is $v_1,\\dots,v_r$ with $1\\le r\\le n<n+1$, so some vector $w=v_s$ with $s>r$ is not in the subset. By maximality, $w=\\sum_{j=1}^r\\lambda_jv_j$ for some real $\\lambda_j$. Taking inner products with $v_i$:\n$$\\langle v_i,w\\rangle=\\sum_{j=1}^r\\lambda_j\\langle v_i,v_j\\rangle\\qquad(i=1,\\dots,r),$$\ni.e. $G\\lambda=b$ where $G=(\\langle v_i,v_j\\rangle)_{i,j\\le r}$ and $b=(\\langle v_i,w\\rangle)_i$. Both $G$ and $b$ have rational entries. $G$ is the Gram matrix of linearly independent vectors, hence positive definite and invertible, and $G^{-1}$ has rational entries (e.g. by the adjugate formula). Therefore $\\lambda=G^{-1}b\\in\\mathbb Q^r$, and\n$$v_s-\\sum_{j=1}^r\\lambda_jv_j=0$$\nis a nontrivial linear relation with rational coefficients (the coefficient of $v_s$ is $1$). ∎"
+      }
+    ],
+    "topics": [
+      "linear-algebra",
+      "geometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imc-2006-11",
+    "bank": "imc",
+    "source": {
+      "contest": "IMC",
+      "paper": "Day 2",
+      "year": 2006,
+      "number": 11,
+      "url": "https://www.imc-math.org.uk/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Prove that there exist infinitely many relatively prime pairs $(m,n)$ of positive integers such that the equation\n$$(x+m)^3=nx$$\nhas three distinct integer roots.",
+    "image": null,
+    "choices": null,
+    "answer": "For coprime $p,q$ take $m=pq(p+q)$, $n=(p^2+pq+q^2)^3$; the roots are $p^3$, $q^3$, $-(p+q)^3$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Shift and use Vieta",
+        "body": "**Finding the family.** Put $y=x+m$; the equation becomes $y^3-ny+mn=0$. If its roots are $u,v,w$, Vieta gives $u+v+w=0$, so $w=-(u+v)$, and\n$$uv+uw+vw=-(u^2+uv+v^2)=-n,\\qquad uvw=-uv(u+v)=-mn .$$\nSo we need $n=u^2+uv+v^2$ and $m=\\frac{uv(u+v)}{u^2+uv+v^2}$ to be an integer. Try $u=kp$, $v=kq$ with $k=p^2+pq+q^2$: then $n=k^3$ and $m=pq(p+q)$.\n\n**The construction.** Let $p,q$ be coprime positive integers with $p\\ne q$, and set\n$$m=pq(p+q),\\qquad n=(p^2+pq+q^2)^3 .$$\n*Roots:* for $x=p^3$ we get $x+m=p(p^2+pq+q^2)$, so $(x+m)^3=p^3(p^2+pq+q^2)^3=nx$; by symmetry $x=q^3$ is a root; and for $x=-(p+q)^3$, $x+m=-(p+q)\\bigl((p+q)^2-pq\\bigr)=-(p+q)(p^2+pq+q^2)$, so $(x+m)^3=-(p+q)^3(p^2+pq+q^2)^3=nx$. The three roots $p^3,q^3,-(p+q)^3$ are distinct ($p\\ne q$, and the last is negative).\n\n*Coprimality:* it suffices that $\\gcd(pq(p+q),\\,p^2+pq+q^2)=1$. Let a prime $r$ divide both. If $r\\mid p$, then $r\\mid q^2$, so $r\\mid q$, contradicting $\\gcd(p,q)=1$; similarly $r\\nmid q$. If $r\\mid p+q$, then $r\\mid (p+q)^2-(p^2+pq+q^2)=pq$, so $r\\mid p$ or $r\\mid q$ — again impossible.\n\n*Infinitely many:* take $p=1$ and $q=2,3,4,\\dots$; the values $m=q(q+1)$ are all different. (For example $q=2$: $m=6$, $n=343$, roots $1,8,-27$.) ∎"
+      }
+    ],
+    "topics": [
+      "polynomials",
+      "number-theory",
+      "algebra"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imc-2006-12",
+    "bank": "imc",
+    "source": {
+      "contest": "IMC",
+      "paper": "Day 2",
+      "year": 2006,
+      "number": 12,
+      "url": "https://www.imc-math.org.uk/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $A_i,B_i,S_i$ ($i=1,2,3$) be invertible real $2\\times2$ matrices such that\n\n1. not all $A_i$ have a common real eigenvector;\n2. $A_i=S_i^{-1}B_iS_i$ for all $i=1,2,3$;\n3. $A_1A_2A_3=B_1B_2B_3=\\begin{pmatrix}1&0\\\\0&1\\end{pmatrix}$.\n\nProve that there is an invertible real $2\\times2$ matrix $S$ such that $A_i=S^{-1}B_iS$ for all $i=1,2,3$.",
+    "image": null,
+    "choices": null,
+    "answer": "With $X=A_1,Y=A_2$: the data $\\operatorname{tr},\\det$ of $X,Y$ and $\\operatorname{tr}XY=\\operatorname{tr}A_3^{-1}$ agree for the $A$'s and $B$'s. If $I,X,Y,XY$ is a basis of $M_2(\\mathbb R)$, the map $I,X,Y,XY\\mapsto I,X',Y',X'Y'$ is an algebra automorphism, hence inner; otherwise (1) forces $X,Y$ to commute with nonreal eigenvalues, and a normal-form computation finishes.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Trace invariants and the algebra generated by $A_1,A_2$",
+        "body": "Write $X=A_1$, $Y=A_2$, $X'=B_1$, $Y'=B_2$. By (3), $A_3=(XY)^{-1}$ and $B_3=(X'Y')^{-1}$, so it suffices to find a real invertible $S$ with $X=S^{-1}X'S$ and $Y=S^{-1}Y'S$. By (2), similar matrices have equal traces and determinants, so\n$$\\operatorname{tr}X=\\operatorname{tr}X',\\ \\det X=\\det X',\\ \\operatorname{tr}Y=\\operatorname{tr}Y',\\ \\det Y=\\det Y',\\ \\operatorname{tr}XY=\\operatorname{tr}A_3^{-1}=\\operatorname{tr}B_3^{-1}=\\operatorname{tr}X'Y'.$$\nAlso, a common real eigenvector of $X$ and $Y$ would be one of $A_3=(XY)^{-1}$ too, so by (1) **$X$ and $Y$ have no common real eigenvector.**\n\n**Identities for $2\\times2$ matrices.** Cayley–Hamilton: $M^2=(\\operatorname{tr}M)M-(\\det M)I$. Applying it to $X$, $Y$, $X+Y$ and subtracting, and using $\\det(X+Y)-\\det X-\\det Y=\\operatorname{tr}X\\operatorname{tr}Y-\\operatorname{tr}XY$ (from $\\det M=\\frac12((\\operatorname{tr}M)^2-\\operatorname{tr}M^2)$):\n$$YX=-XY+(\\operatorname{tr}X)Y+(\\operatorname{tr}Y)X+(\\operatorname{tr}XY-\\operatorname{tr}X\\operatorname{tr}Y)I.\\tag{$*$}$$\nUsing Cayley–Hamilton to rewrite $X^2$ and $Y^2$, and $(*)$ to rewrite $YX$, every product of the four matrices $I,X,Y,XY$ is reduced to a linear combination of $I,X,Y,XY$ whose coefficients are polynomials in the five invariants above. The same rules, with the same coefficients, hold for $X',Y'$. Hence, writing $b_1,\\dots,b_4=I,X,Y,XY$ and $b'_1,\\dots,b'_4=I,X',Y',X'Y'$, there are structure constants $c_{ij}^k$ with\n$$b_ib_j=\\sum_kc_{ij}^kb_k\\quad\\text{and}\\quad b'_ib'_j=\\sum_kc_{ij}^kb'_k .\\tag{$**$}$$\n\n**Case 1: $I,X,Y,XY$ are linearly independent** (so they form a basis of $M_2(\\mathbb R)$). The trace form $\\langle M,N\\rangle=\\operatorname{tr}(MN)$ is nondegenerate on $M_2(\\mathbb R)$, so the Gram matrix $G=(\\operatorname{tr}b_ib_j)$ is invertible. By $(**)$, $\\operatorname{tr}b_ib_j=\\sum_kc_{ij}^k\\operatorname{tr}b_k$, and $\\operatorname{tr}b_k=\\operatorname{tr}b'_k$ for all $k$; so the Gram matrix of the $b'_k$ is also $G$. If $\\sum\\lambda_kb'_k=0$, taking traces against each $b'_i$ gives $G\\lambda=0$, so $\\lambda=0$: the $b'_k$ are a basis too. The linear map $\\varphi:M_2(\\mathbb R)\\to M_2(\\mathbb R)$ with $\\varphi(b_k)=b'_k$ is therefore bijective, and by $(**)$ it is multiplicative, i.e. an automorphism of the algebra $M_2(\\mathbb R)$.\n\n*Every such automorphism is inner.* Let $F_{ij}=\\varphi(E_{ij})$ (matrix units); then $F_{ij}F_{kl}=\\delta_{jk}F_{il}$ and $F_{11}+F_{22}=I$. Since $F_{11}\\ne0$, pick $u\\neq0$ with $F_{11}u=u$ and set $w=F_{21}u$. One checks $F_{11}w=F_{11}F_{21}u=0$, $F_{12}u=F_{12}F_{11}u=0$, $F_{12}w=F_{11}u=u$, $F_{21}w=0$, $F_{22}u=0$, $F_{22}w=w$. If $w=\\lambda u$, then $0=F_{11}w=\\lambda u$ forces $w=0$, and then $u=F_{12}w=0$, impossible; so $T=[u\\ w]$ is invertible and $F_{ij}T=TE_{ij}$ for all $i,j$. By linearity $\\varphi(M)=TMT^{-1}$ for all $M$.\n\nThus $X'=TXT^{-1}$, $Y'=TYT^{-1}$, and $S=T$ works.\n\n**Case 2: $I,X,Y,XY$ are linearly dependent.** If $X=\\lambda I$ is scalar then $X'=S_1XS_1^{-1}=\\lambda I$, and $S=S_2$ works ($S_2^{-1}X'S_2=X$, $S_2^{-1}Y'S_2=Y$). Likewise if $Y$ is scalar ($S=S_1$). So let $X,Y$ be non-scalar and take a nontrivial relation $\\alpha I+\\beta X+\\gamma Y+\\delta XY=0$.\n\n- If $\\delta=0$, then $\\gamma\\ne0$ (as $I,X$ are independent), so $Y\\in\\operatorname{span}(I,X)$.\n- If $\\delta\\ne0$, normalise $\\delta=1$; then $(X+\\gamma I)(Y+\\beta I)=\\kappa I$ with $\\kappa=\\beta\\gamma-\\alpha$. If $\\kappa\\ne0$, then $Y+\\beta I=\\kappa(X+\\gamma I)^{-1}$, and the inverse of a $2\\times2$ matrix is a polynomial in it, so again $Y\\in\\operatorname{span}(I,X)$. If $\\kappa=0$, both factors are nonzero (non-scalar $X,Y$) and singular, hence of rank $1$; the image of $Y+\\beta I$ is a line $\\mathbb Ru$ contained in $\\ker(X+\\gamma I)$, which is also a line, so $\\ker(X+\\gamma I)=\\mathbb Ru$. Then $Xu=-\\gamma u$ and $Yu\\in\\mathbb Ru$ — a common real eigenvector, excluded.\n\nSo $Y=sI+tX$ with $t\\ne0$. If $X$ had a real eigenvector, it would be one of $Y$ as well; hence $X$ has nonreal eigenvalues $p\\pm qi$, $q\\ne0$. By the real canonical form, $X=T(pI+qJ)T^{-1}$ with $J=\\begin{pmatrix}0&-1\\\\1&0\\end{pmatrix}$, and then $T^{-1}YT=s_0I+t_0J$ for some reals $s_0,t_0$. $X'$ has the same trace and determinant, hence the same eigenvalues, so $X'=T'(pI+qJ)T'^{-1}$. Write $Z=T'^{-1}Y'T'=sI+tJ+K$, where $K=\\begin{pmatrix}a&b\\\\b&-a\\end{pmatrix}$ (every real $2\\times2$ matrix decomposes uniquely this way). Note $\\operatorname{tr}K=\\operatorname{tr}JK=0$ and $\\det Z=s^2+t^2-a^2-b^2$. Comparing invariants:\n$$2s=\\operatorname{tr}Y'=\\operatorname{tr}Y=2s_0,\\qquad 2ps-2qt=\\operatorname{tr}X'Y'=\\operatorname{tr}XY=2ps_0-2qt_0,$$\nso $s=s_0$, $t=t_0$ (as $q\\neq0$), and $s^2+t^2-a^2-b^2=\\det Y'=\\det Y=s_0^2+t_0^2$ gives $a=b=0$. Hence $T'^{-1}Y'T'=T^{-1}YT$ and $T'^{-1}X'T'=T^{-1}XT$, so $S=T'T^{-1}$ satisfies $S^{-1}X'S=X$, $S^{-1}Y'S=Y$.\n\nIn all cases $A_1=S^{-1}B_1S$, $A_2=S^{-1}B_2S$, and then $A_3=(A_1A_2)^{-1}=S^{-1}(B_1B_2)^{-1}S=S^{-1}B_3S$. ∎"
+      }
+    ],
+    "topics": [
+      "linear-algebra",
+      "abstract-algebra"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

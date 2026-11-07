@@ -1,0 +1,187 @@
+[
+  {
+    "id": "usamts-1998-r1-01",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 10 Round 1 (1998-1999)",
+      "year": 1998,
+      "number": 1,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "text",
+    "prompt": "Several pairs of positive integers $(m, n)$ satisfy the condition $19m + 90 + 8n = 1998$. Of these, $(100, 1)$ is the pair with the smallest value for $n$. Find the pair with the smallest value for $m$.",
+    "image": null,
+    "choices": null,
+    "answer": "(4, 229)",
+    "acceptedAnswers": [
+      "(4,229)",
+      "4, 229",
+      "4,229",
+      "m=4, n=229",
+      "m = 4, n = 229"
+    ],
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Work modulo 8",
+        "body": "Subtract 90: $19m + 8n = 1908$.\n\nSince $8n$ is a multiple of 8, $19m$ must leave the same remainder as $1908$ when divided by 8. Now $1908 = 8\\cdot 238 + 4$, so $19m \\equiv 4 \\pmod 8$. As $19 \\equiv 3 \\pmod 8$, this says $3m \\equiv 4 \\pmod 8$. Multiplying by 3 (and $3\\cdot 3 = 9 \\equiv 1$) gives $m \\equiv 12 \\equiv 4 \\pmod 8$.\n\nSo the possible values of $m$ are $4, 12, 20, \\dots$ (as long as $n$ stays positive). The smallest is $m = 4$, and then\n$$8n = 1908 - 76 = 1832,\\qquad n = 229 > 0.$$\n\nCheck: $19\\cdot 4 + 90 + 8\\cdot 229 = 76 + 90 + 1832 = 1998$. ✓\n\n**Answer: $(m, n) = (4, 229)$**"
+      },
+      {
+        "title": "General solution",
+        "body": "From $19m + 8n = 1908$ and the known solution $(100, 1)$ (indeed $1900 + 8 = 1908$), every integer solution is\n$$(m, n) = (100 - 8t,\\ 1 + 19t)$$\nfor an integer $t$: if $19m + 8n = 19\\cdot 100 + 8\\cdot 1$ then $19(100 - m) = 8(n - 1)$, and since $\\gcd(19, 8) = 1$, $8 \\mid 100 - m$.\n\nTo make $m$ as small as possible while positive, take the largest $t$ with $100 - 8t > 0$, namely $t = 12$: $m = 100 - 96 = 4$, $n = 1 + 228 = 229$.\n\n**Answer: $(4, 229)$**"
+      }
+    ],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-1998-r1-02",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 10 Round 1 (1998-1999)",
+      "year": 1998,
+      "number": 2,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Determine the smallest rational number $\\frac{r}{s}$ such that $\\frac{1}{k} + \\frac{1}{m} + \\frac{1}{n} \\le \\frac{r}{s}$ whenever $k$, $m$, and $n$ are positive integers that satisfy the inequality $\\frac{1}{k} + \\frac{1}{m} + \\frac{1}{n} < 1$.",
+    "image": null,
+    "choices": null,
+    "answer": "41/42",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "answerDisplay": "$\\frac{41}{42}$",
+    "solutions": [
+      {
+        "title": "Case analysis on the smallest denominator",
+        "body": "We need the largest possible value of $S = \\frac1k + \\frac1m + \\frac1n$ subject to $S < 1$; the answer $\\frac rs$ is this maximum (it exists because we will check finitely many cases). By symmetry assume $k \\le m \\le n$.\n\n* $k = 1$ is impossible, since then $S > 1$.\n* **$k \\ge 4$:** then $S \\le \\frac14 + \\frac14 + \\frac14 = \\frac34$.\n* **$k = 3$:** then $m \\ge 3$.\n  * If $m = 3$, we need $\\frac1n < \\frac13$, so $n \\ge 4$ and $S \\le \\frac13 + \\frac13 + \\frac14 = \\frac{11}{12}$.\n  * If $m \\ge 4$, then $n \\ge 4$ and $S \\le \\frac13 + \\frac14 + \\frac14 = \\frac56$.\n* **$k = 2$:** then $m \\ge 3$ (if $m = 2$ then $S > 1$).\n  * If $m = 3$, we need $\\frac1n < 1 - \\frac12 - \\frac13 = \\frac16$, so $n \\ge 7$ and $S \\le \\frac12 + \\frac13 + \\frac17 = \\frac{41}{42}$.\n  * If $m = 4$, we need $\\frac1n < \\frac14$, so $n \\ge 5$ and $S \\le \\frac12 + \\frac14 + \\frac15 = \\frac{19}{20}$.\n  * If $m \\ge 5$, then $n \\ge 5$ and $S \\le \\frac12 + \\frac15 + \\frac15 = \\frac{9}{10}$.\n\nCompare the bounds: $\\frac{41}{42} \\approx 0.976$ is larger than $\\frac{19}{20} = 0.95$, $\\frac{11}{12} \\approx 0.917$, $\\frac{9}{10}$, $\\frac56$ and $\\frac34$. Hence always $S \\le \\frac{41}{42}$, with equality for $(k, m, n) = (2, 3, 7)$. Any smaller number would fail for $(2, 3, 7)$, so the smallest valid $\\frac rs$ is $\\frac{41}{42}$.\n\n**Answer: $\\frac{41}{42}$**"
+      }
+    ],
+    "topics": [
+      "inequalities",
+      "number-theory"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-1998-r1-03",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 10 Round 1 (1998-1999)",
+      "year": 1998,
+      "number": 3,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "It is possible to arrange eight of the nine numbers\n$$2,\\ 3,\\ 4,\\ 7,\\ 10,\\ 11,\\ 12,\\ 13,\\ 15$$\nin the vacant squares of the 3 by 4 array shown below so that the arithmetic average of the numbers in each row and in each column is the same integer. Exhibit such an arrangement, and specify which one of the nine numbers must be left out when completing the array.\n\n$$\\begin{array}{|c|c|c|c|}\\hline 1 & \\phantom{00} & \\phantom{00} & \\phantom{00}\\\\\\hline & 9 & & 5\\\\\\hline & & 14 & \\\\\\hline\\end{array}$$",
+    "image": null,
+    "choices": null,
+    "answer": "Leave out $10$; the array is\n$$\\begin{array}{|c|c|c|c|}\\hline 1 & 13 & 3 & 15\\\\\\hline 11 & 9 & 7 & 5\\\\\\hline 12 & 2 & 14 & 4\\\\\\hline\\end{array}$$\n(every row and column has average 8).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Divisibility, then fill in",
+        "body": "**Which number is left out.** Let the common average be the integer $a$. Each of the 3 rows has 4 numbers, so the total $T$ of all 12 entries is $3 \\cdot 4a = 12a$. Thus $T$ is a multiple of 12.\n\nThe four given entries sum to $1 + 9 + 5 + 14 = 29$ and the nine candidates sum to $77$, so if $x$ is left out, $T = 106 - x$. We need $106 - x \\equiv 0 \\pmod{12}$, i.e. $x \\equiv 106 \\equiv 10 \\pmod{12}$. Among the candidates only $x = 10$ works. So **10 must be left out**, $T = 96$, $a = 8$, every row sums to $32$ and every column sums to $24$.\n\n**Filling the array.** Label the empty cells:\n$$\\begin{array}{|c|c|c|c|}\\hline 1 & A & B & C\\\\\\hline D & 9 & E & 5\\\\\\hline F & G & 14 & H\\\\\\hline\\end{array}$$\nThe available numbers are $2, 3, 4, 7, 11, 12, 13, 15$.\n\n* Row 2: $D + E = 32 - 14 = 18$, so $\\{D, E\\} = \\{3, 15\\}$ or $\\{7, 11\\}$.\n* Column 1: $D + F = 24 - 1 = 23$, so $\\{D, F\\} = \\{11, 12\\}$ (no other pair of available numbers sums to 23).\n* Together: $D = 11$, $E = 7$, $F = 12$.\n* Column 3: $B = 24 - 7 - 14 = 3$.\n* Row 3: $G + H = 32 - 12 - 14 = 6$, so $\\{G, H\\} = \\{2, 4\\}$.\n* Column 2: $A + G = 24 - 9 = 15$; with the numbers left ($2, 4, 13, 15$) this forces $\\{A, G\\} = \\{2, 13\\}$, so $G = 2$, $A = 13$, $H = 4$.\n* Finally $C = 15$; check row 1: $1 + 13 + 3 + 15 = 32$ and column 4: $15 + 5 + 4 = 24$. ✓\n\n$$\\begin{array}{|c|c|c|c|}\\hline 1 & 13 & 3 & 15\\\\\\hline 11 & 9 & 7 & 5\\\\\\hline 12 & 2 & 14 & 4\\\\\\hline\\end{array}$$\n\nAll row sums are 32 (average 8) and all column sums are 24 (average 8). The argument also shows this arrangement is the only one.\n\n**Answer: 10 is left out; the array is shown above.**"
+      }
+    ],
+    "topics": [
+      "logic",
+      "arithmetic",
+      "number-theory"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-1998-r1-04",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 10 Round 1 (1998-1999)",
+      "year": 1998,
+      "number": 4,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Show that it is possible to arrange seven distinct points in the plane so that among any three of these seven points, two of the points are a unit distance apart. (Your solution should include a carefully prepared sketch of the seven points, along with all segments that are of unit length.)",
+    "image": null,
+    "choices": null,
+    "answer": "Use the *Moser spindle*: two rhombi, each made of two unit equilateral triangles, sharing one vertex and rotated so their far tips are 1 apart. Its 7 points split into the shared vertex plus two triangles, so no 3 points are pairwise non-adjacent.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Two hinged rhombi (Moser spindle)",
+        "body": "**Construction.** Let $A$ be a point. Build a rhombus $ABDC$ of side 1 made of two equilateral triangles $ABC$ and $BCD$, so that $AD = \\sqrt3$ (the long diagonal). Build a second rhombus $AEGF$ the same way (triangles $AEF$ and $EFG$, $AG = \\sqrt3$), and rotate it about $A$ until $DG = 1$. This is possible: as the angle $\\varphi = \\angle DAG$ grows from $0$, the distance $DG = 2\\sqrt3\\sin\\frac\\varphi2$ grows continuously from $0$, and it equals 1 when $\\sin\\frac\\varphi2 = \\frac{1}{2\\sqrt3}$ ($\\varphi \\approx 33.6^\\circ$).\n\nConcretely, with $A = (0,0)$: $B, C = \\left(\\frac{\\sqrt3}{2}, \\pm\\frac12\\right)$, $D = (\\sqrt3, 0)$, and $E, F, G$ the images of $B, C, D$ under rotation by $\\varphi$ about $A$. The seven points are distinct (for example $E, F$ lie on the unit circle around $A$ at angles $\\varphi \\pm 30^\\circ$, while $B, C$ are at $\\pm 30^\\circ$).\n\nThe unit segments are the 11 segments\n$$AB, AC, BC, BD, CD,\\quad AE, AF, EF, EG, FG,\\quad DG.$$\n(Sketch: two thin diamonds hinged at $A$, opening at a small angle, with their tips $D$ and $G$ joined by a unit segment.)\n\n**Verification.** Suppose three of the points had no two at unit distance.\n\n* If $A$ is one of them, the other two cannot be $B, C, E, F$ (all at distance 1 from $A$), so they must be $D$ and $G$ — but $DG = 1$. Contradiction.\n* If $A$ is not among them, the three points come from $\\{B, C, D\\}$ and $\\{E, F, G\\}$. Each of these is an equilateral unit triangle, so at most one point can come from each, giving at most 2 points. Contradiction.\n\nHence among any three of the seven points, two are a unit distance apart. ∎"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "graph-theory"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-1998-r1-05",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 10 Round 1 (1998-1999)",
+      "year": 1998,
+      "number": 5,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "The figure shows the ellipse\n$$\\frac{(x-19)^2}{19} + \\frac{(y-98)^2}{98} = 1998.$$\nLet $R_1$, $R_2$, $R_3$, and $R_4$ denote those areas within the ellipse that are in the first, second, third, and fourth quadrants, respectively. Determine the value of $R_1 - R_2 + R_3 - R_4$.",
+    "image": "qimages/usamts/1998-r1/q05.webp",
+    "choices": null,
+    "answer": "7448",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Cut along the lines of symmetry",
+        "body": "The ellipse is centred at $(19, 98)$ and is symmetric in the vertical line $x = 19$ and the horizontal line $y = 98$. Its semi-axes are $\\sqrt{19\\cdot 1998} \\approx 195 > 19$ and $\\sqrt{98\\cdot1998} \\approx 442 > 98$, so it crosses all four half-axes, and the corner $(0,0)$ is inside (as $19 + 98 < 1998$).\n\nThe two symmetry lines cut the ellipse into four congruent quarters (upper-left, upper-right, lower-left, lower-right), each of area $S/4$, where $S$ is the total area. Inside the ellipse define the regions\n* $C$: $0 < x < 19$, $0 < y < 98$ — the full rectangle, area $19\\cdot 98 = 1862$;\n* $A$: $0 < x < 19$, $y > 98$;\n* $D$: $x > 19$, $0 < y < 98$;\n* $B$: $x < 0$, $0 < y < 98$;\n* $E$: $0 < x < 19$, $y < 0$.\n\nReading off quarter by quarter:\n* $R_1$ = upper-right quarter $+ A + C + D = \\tfrac S4 + A + C + D$;\n* $R_2$ = (upper-left quarter minus $A$) $+ B = \\tfrac S4 - A + B$;\n* $R_3$ = lower-left quarter minus $B$, $C$, $E$ $= \\tfrac S4 - B - C - E$;\n* $R_4$ = (lower-right quarter minus $D$) $+ E = \\tfrac S4 - D + E$.\n\nSo $R_1 - R_2 + R_3 - R_4 = 2A - 2B + 2D - 2E$.\n\nNow use the reflections. Split $A$ at $y = 196$: the part $98 < y < 196$ reflects in $y = 98$ onto $C$, and the part $y > 196$ reflects onto $E$. So $A = C + E$. Likewise split $D$ at $x = 38$: the part $19 < x < 38$ reflects in $x = 19$ onto $C$, and the part $x > 38$ onto $B$. So $D = C + B$. Therefore\n$$2A - 2B + 2D - 2E = 2(C + E) - 2B + 2(B + C) - 2E = 4C = 4\\cdot 1862 = 7448.$$\n\n**Answer: 7448**"
+      },
+      {
+        "title": "Average over the symmetries",
+        "body": "Write $R_1 - R_2 + R_3 - R_4 = \\iint_{\\text{ellipse}} \\operatorname{sgn}(x)\\operatorname{sgn}(y)\\,dA$, since the sign is $+1$ in quadrants I and III and $-1$ in II and IV.\n\nThe ellipse is unchanged by $x \\mapsto 38 - x$ and by $y \\mapsto 196 - y$ (reflections in $x = 19$ and $y = 98$). So we may replace the integrand by its average over the four images of each point:\n$$\\tfrac14\\big(\\operatorname{sgn}x + \\operatorname{sgn}(38-x)\\big)\\big(\\operatorname{sgn}y + \\operatorname{sgn}(196-y)\\big).$$\nNow $\\operatorname{sgn}x + \\operatorname{sgn}(38 - x)$ equals $2$ if $0 < x < 38$ and $0$ otherwise (except on lines of zero area); similarly for $y$ with $0 < y < 196$. So the averaged integrand is $1$ on the rectangle $(0, 38)\\times(0, 196)$ and $0$ elsewhere.\n\nThat rectangle lies inside the ellipse (its corners, e.g. $(0,0)$, give $19 + 98 = 117 < 1998$, and the ellipse is convex). Hence\n$$R_1 - R_2 + R_3 - R_4 = 38 \\cdot 196 = 7448.$$\n\n**Answer: 7448**"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "measurement"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

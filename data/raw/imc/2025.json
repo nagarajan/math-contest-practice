@@ -1,0 +1,367 @@
+[
+  {
+    "id": "imc-2025-01",
+    "bank": "imc",
+    "source": {
+      "contest": "IMC",
+      "paper": "Day 1",
+      "year": 2025,
+      "number": 1,
+      "url": "https://www.imc-math.org.uk/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $P\\in\\mathbb R[x]$ be a polynomial with real coefficients, and suppose $\\deg(P)\\ge2$. For every $x\\in\\mathbb R$, let $\\ell_x\\subset\\mathbb R^2$ denote the line tangent to the graph of $P$ at the point $(x,P(x))$.\n\n(a) Suppose that the degree of $P$ is odd. Show that $\\displaystyle\\bigcup_{x\\in\\mathbb R}\\ell_x=\\mathbb R^2$.\n\n(b) Does there exist a polynomial of even degree for which the above equality still holds?",
+    "image": null,
+    "choices": null,
+    "answer": "(a) $(a,b)\\in\\ell_r\\iff P(r)+(a-r)P'(r)-b=0$, a polynomial in $r$ of the same (odd) degree as $P$, so it has a real root. (b) **No**: for even degree that polynomial has even degree and is bounded on one side.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Tangent lines through a given point",
+        "body": "Let $n=\\deg P\\ge2$ with leading coefficient $c\\ne0$. The tangent line at $(r,P(r))$ is\n$$\\ell_r=\\{(x,y):\\ y=P(r)+P'(r)(x-r)\\}.$$\nSo a point $(a,b)$ lies on $\\ell_r$ if and only if $Q_{a}(r)=b$, where\n$$Q_a(r)=P(r)+(a-r)P'(r).$$\nThe term of degree $n$ in $Q_a$ is $cr^n-r\\cdot ncr^{n-1}=(1-n)cr^n$, and $(1-n)c\\ne0$ since $n\\ge2$. So $\\deg Q_a=n$, with leading coefficient $(1-n)c$ independent of $a$.\n\n**(a)** If $n$ is odd, then $Q_a(r)-b$ is a real polynomial of odd degree in $r$, hence has a real root $r$ (intermediate value theorem). Then $(a,b)\\in\\ell_r$. As $(a,b)$ was arbitrary, $\\bigcup_r\\ell_r=\\mathbb R^2$. ∎\n\n**(b) No.** If $n$ is even, fix any $a$. Then $Q_a$ is a polynomial of even degree with leading coefficient $(1-n)c\\neq0$, so it is bounded above (if $(1-n)c<0$) or below (if $(1-n)c>0$) on $\\mathbb R$. Say it is bounded above by $M$; then for $b>M$ the equation $Q_a(r)=b$ has no real solution, so $(a,b)$ lies on no tangent line (similarly in the other case with $b$ small). Hence the union is never all of $\\mathbb R^2$.\n\n**Answer to (b): No.** ∎"
+      }
+    ],
+    "topics": [
+      "calculus",
+      "polynomials"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imc-2025-02",
+    "bank": "imc",
+    "source": {
+      "contest": "IMC",
+      "paper": "Day 1",
+      "year": 2025,
+      "number": 2,
+      "url": "https://www.imc-math.org.uk/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $f:\\mathbb R\\to\\mathbb R$ be a twice continuously differentiable function, and suppose that $\\displaystyle\\int_{-1}^1f(x)\\,dx=0$ and $f(1)=f(-1)=1$. Prove that\n$$\\int_{-1}^1\\big(f''(x)\\big)^2\\,dx\\ge15,$$\nand find all such functions for which equality holds.",
+    "image": null,
+    "choices": null,
+    "answer": "Equality iff $f(x)=\\dfrac{-5x^4+30x^2-9}{16}$ on $[-1,1]$ (any $C^2$ extension outside). Use Cauchy–Schwarz with $g(x)=1-x^2$: integrating by parts twice, $\\int_{-1}^1f''g=4$ and $\\int g^2=\\frac{16}{15}$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Cauchy–Schwarz with the weight $1-x^2$",
+        "body": "Let $g(x)=1-x^2$. Then $g(\\pm1)=0$, $g'(1)=-2$, $g'(-1)=2$, $g''\\equiv-2$. Integrating by parts twice,\n$$\\int_{-1}^1f''g\\,dx=\\Big[f'g\\Big]_{-1}^1-\\int_{-1}^1f'g'\\,dx=0-\\Big[fg'\\Big]_{-1}^1+\\int_{-1}^1fg''\\,dx .$$\nHere $[fg']_{-1}^1=f(1)g'(1)-f(-1)g'(-1)=-2-2=-4$ and $\\int fg''=-2\\int_{-1}^1f=0$. Hence $\\int_{-1}^1f''g=4$.\n\nAlso $\\int_{-1}^1g^2=\\int_{-1}^1(1-2x^2+x^4)\\,dx=2-\\frac43+\\frac25=\\frac{16}{15}$. By the Cauchy–Schwarz inequality,\n$$16=\\left(\\int_{-1}^1f''g\\right)^2\\le\\int_{-1}^1(f'')^2\\cdot\\int_{-1}^1g^2=\\frac{16}{15}\\int_{-1}^1(f'')^2,$$\nso $\\int_{-1}^1(f'')^2\\ge15$.\n\n**Equality.** Equality in Cauchy–Schwarz for continuous functions holds iff $f''=\\lambda g$ on $[-1,1]$ for a constant $\\lambda$. Then on $[-1,1]$\n$$f(x)=\\lambda\\left(\\frac{x^2}2-\\frac{x^4}{12}\\right)+\\alpha x+\\beta .$$\n$\\int_{-1}^1f=0$ gives $\\lambda\\left(\\frac13-\\frac1{30}\\right)+2\\beta=0$, i.e. $\\beta=-\\frac{3\\lambda}{20}$. $f(1)=f(-1)$ gives $\\alpha=0$, and $f(1)=1$ gives $\\lambda\\left(\\frac12-\\frac1{12}-\\frac3{20}\\right)=\\frac{4\\lambda}{15}=1$, so $\\lambda=\\frac{15}4$. Thus\n$$f(x)=\\frac{15}4\\left(\\frac{x^2}2-\\frac{x^4}{12}\\right)-\\frac9{16}=\\frac{-5x^4+30x^2-9}{16}\\qquad(-1\\le x\\le1).$$\nConversely this function satisfies all conditions and $f''=\\frac{15}4(1-x^2)$ gives $\\int(f'')^2=\\frac{225}{16}\\cdot\\frac{16}{15}=15$.\n\n**Answer:** the minimum $15$ is attained exactly by the functions with $f(x)=\\frac{-5x^4+30x^2-9}{16}$ on $[-1,1]$ (outside $[-1,1]$, $f$ can be any $C^2$ continuation). ∎"
+      },
+      {
+        "title": "Orthogonal decomposition",
+        "body": "Let $p(x)=\\frac{-5x^4+30x^2-9}{16}$; one checks $p(\\pm1)=1$, $\\int_{-1}^1p=\\frac{-2+20-18}{16}=0$ and $p''=\\frac{15}4(1-x^2)$, $p'''=-\\frac{15}2x$, $p''''\\equiv-\\frac{15}2$.\n\nPut $h=f-p$ on $[-1,1]$. Then $h(\\pm1)=0$ and $\\int_{-1}^1h=0$. Integrating by parts twice (using $p''(\\pm1)=0$ and $h(\\pm1)=0$),\n$$\\int_{-1}^1p''h''=\\Big[p''h'\\Big]_{-1}^1-\\int_{-1}^1p'''h'=0-\\Big[p'''h\\Big]_{-1}^1+\\int_{-1}^1p''''h=-\\frac{15}2\\int_{-1}^1h=0.$$\nTherefore\n$$\\int_{-1}^1(f'')^2=\\int_{-1}^1(p'')^2+2\\int_{-1}^1p''h''+\\int_{-1}^1(h'')^2=15+\\int_{-1}^1(h'')^2\\ge15,$$\nusing $\\int(p'')^2=\\frac{225}{16}\\cdot\\frac{16}{15}=15$. Equality holds iff $h''\\equiv0$ on $[-1,1]$, i.e. $h$ is linear; with $h(\\pm1)=0$ this means $h\\equiv0$, i.e. $f=p$ on $[-1,1]$. ∎"
+      }
+    ],
+    "topics": [
+      "calculus",
+      "inequalities",
+      "real-analysis"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imc-2025-03",
+    "bank": "imc",
+    "source": {
+      "contest": "IMC",
+      "paper": "Day 1",
+      "year": 2025,
+      "number": 3,
+      "url": "https://www.imc-math.org.uk/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "text",
+    "prompt": "Denote by $\\mathcal S$ the set of all real symmetric $2025\\times2025$ matrices of rank $1$ whose entries take values $-1$ or $+1$. Let $A,B\\in\\mathcal S$ be matrices chosen independently uniformly at random. Find the probability that $A$ and $B$ commute, i.e. $AB=BA$.",
+    "image": null,
+    "choices": null,
+    "answer": "1/2^2024",
+    "acceptedAnswers": [
+      "2^(-2024)",
+      "2^-2024",
+      "1/(2^2024)",
+      "1/2^(2024)",
+      "(1/2)^2024",
+      "0.5^2024",
+      "2/2^2025",
+      "1/2^{2024}"
+    ],
+    "answerUnit": null,
+    "answerDisplay": "$\\frac{1}{2^{2024}}$",
+    "solutions": [
+      {
+        "title": "Describe $\\mathcal S$, then compare $AB$ and $BA$",
+        "body": "**Answer: $\\dfrac1{2^{2024}}$.** Let $n=2025$.\n\n**The set $\\mathcal S$.** Let $A=(a_{ij})\\in\\mathcal S$. Rank $1$ means all $2\\times2$ minors vanish, so $a_{11}a_{ij}=a_{i1}a_{1j}=a_{i1}a_{j1}$ (symmetry), i.e. $a_{ij}=a_{11}a_{i1}a_{j1}$ as $a_{11}^2=1$. Put $u_i=a_{11}a_{i1}$; then $u_1=1$, $u_i\\in\\{\\pm1\\}$ and $u_iu_j=a_{i1}a_{j1}$, so $A=a_{11}\\,uu^{\\top}$. Conversely every $\\pm uu^\\top$ with $u\\in\\{\\pm1\\}^n$, $u_1=1$, is symmetric of rank $1$ with $\\pm1$ entries, and the sign and $u$ are recovered from $A$ (as $a_{11}$ and $a_{11}$ times the first column). Hence $|\\mathcal S|=2\\cdot2^{n-1}=2^n$.\n\n**Commuting.** Let $A=\\sigma uu^\\top$, $B=\\tau vv^\\top$ with $\\sigma,\\tau=\\pm1$. Then\n$$AB=\\sigma\\tau\\,u(u^\\top v)v^\\top=\\sigma\\tau\\langle u,v\\rangle\\,uv^\\top,\\qquad BA=\\sigma\\tau\\langle u,v\\rangle\\,vu^\\top.$$\n$\\langle u,v\\rangle$ is a sum of $n=2025$ terms $\\pm1$, an odd number, so it is nonzero. Thus $AB=BA\\iff uv^\\top=vu^\\top$. The first column of $uv^\\top$ is $v_1u=u$ and that of $vu^\\top$ is $u_1v=v$; so $AB=BA$ forces $u=v$, and conversely $u=v$ gives equality. So $A,B$ commute iff $B=\\pm A$.\n\nFor each $A$ there are exactly $2$ such $B$, so the probability is\n$$\\frac{2}{|\\mathcal S|}=\\frac2{2^{2025}}=\\frac1{2^{2024}}.$$ ∎"
+      }
+    ],
+    "topics": [
+      "linear-algebra",
+      "probability"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imc-2025-04",
+    "bank": "imc",
+    "source": {
+      "contest": "IMC",
+      "paper": "Day 1",
+      "year": 2025,
+      "number": 4,
+      "url": "https://www.imc-math.org.uk/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $a$ be an even positive integer. Find all real numbers $x$ such that\n$$\\left\\lfloor\\sqrt[a]{b^a+x}\\cdot b^{a-1}\\right\\rfloor=b^a+\\lfloor x/a\\rfloor\\tag{1}$$\nholds for every positive integer $b$.\n\n(Here $\\lfloor x\\rfloor$ denotes the largest integer that is no greater than $x$.)",
+    "image": null,
+    "choices": null,
+    "answer": "For $a=2$: $x\\in[-1,2)\\cup[3,4)$. For even $a\\ge4$: $x\\in[-1,a)$. (Use $b=1$ to restrict $m=\\lfloor x/a\\rfloor$, then Bernoulli's inequality for all $b$.)",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Use $b=1$, then Bernoulli's inequality",
+        "body": "**Answer:** if $a=2$, then $x\\in[-1,2)\\cup[3,4)$; if $a\\ge4$, then $x\\in[-1,a)$.\n\nLet $m=\\lfloor x/a\\rfloor$, so $am\\le x<a(m+1)$. Since $a$ is even, the root requires $b^a+x\\ge0$; for $b=1$ this gives $x\\ge-1$, hence $m\\ge-1$.\n\n**Necessity ($b=1$).** (1) reads $\\lfloor\\sqrt[a]{1+x}\\rfloor=1+m$, i.e. $(1+m)^a\\le1+x<(2+m)^a$ (note $1+m\\ge0$). Together with $am\\le x<a(m+1)$, with $t=m+1\\ge0$:\n$$x\\in\\big[\\max(a(t-1),\\,t^a-1),\\ \\min(at,\\,(t+1)^a-1)\\big).\\tag{2}$$\nIn particular $t^a-1<at$.\n* For $t\\ge2$ and $a\\ge4$: $t^a-at-1=t(t^{a-1}-a)-1\\ge2(2^{a-1}-a)-1>0$ because $2^{a-1}\\ge a+1$ for $a\\ge3$. Impossible.\n* For $a=2$: $t^2-2t-1<0\\iff t<1+\\sqrt2$, so $t\\le2$.\n\nSo $t\\in\\{0,1\\}$, and also $t=2$ when $a=2$. By (2):\n* $t=0$ ($m=-1$): $x\\in[\\max(-a,0-1),\\min(0,0))=[-1,0)$;\n* $t=1$ ($m=0$): $x\\in[0,\\min(a,2^a-1))=[0,a)$;\n* $t=2$, $a=2$ ($m=1$): $x\\in[\\max(2,3),\\min(4,8))=[3,4)$.\n\nHence $x\\in[-1,a)$ for $a\\ge4$, and $x\\in[-1,2)\\cup[3,4)$ for $a=2$.\n\n**Sufficiency (all $b$).** Fix $b\\ge1$ and put $u=b^{-a}\\in(0,1]$. The left side of (1) is $y=b^{a-1}(b^a+x)^{1/a}=b^a(1+xu)^{1/a}\\ge0$, and $N=b^a+m\\ge0$. So (1) is equivalent to $N\\le y<N+1$, i.e. (raising to the power $a$ and dividing by $b^{a^2}$)\n$$(1+mu)^a\\le1+xu<\\big(1+(m+1)u\\big)^a .$$\n*Right inequality:* by Bernoulli, $(1+(m+1)u)^a\\ge1+a(m+1)u>1+xu$, since $x<a(m+1)$ and $(m+1)u\\ge0$.\n\n*Left inequality:*\n* $m=-1$ ($-1\\le x<0$): $0\\le1-u\\le1$, so $(1-u)^a\\le1-u\\le1+xu$.\n* $m=0$ ($0\\le x<a$): $1\\le1+xu$.\n* $m=1$, $a=2$ ($3\\le x<4$): $(1+u)^2=1+2u+u^2\\le1+3u\\le1+xu$ since $u\\le1$.\n\nSo every $x$ in the stated sets satisfies (1) for all $b$. ∎"
+      }
+    ],
+    "topics": [
+      "algebra",
+      "inequalities",
+      "number-theory"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imc-2025-05",
+    "bank": "imc",
+    "source": {
+      "contest": "IMC",
+      "paper": "Day 1",
+      "year": 2025,
+      "number": 5,
+      "url": "https://www.imc-math.org.uk/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "For a positive integer $n$, let $[n]=\\{1,2,\\ldots,n\\}$. Denote by $S_n$ the set of all bijections from $[n]$ to $[n]$, and let $T_n$ be the set of all maps from $[n]$ to $[n]$. Define the *order* $\\operatorname{ord}(\\tau)$ of a map $\\tau\\in T_n$ as the number of distinct maps in the set $\\{\\tau,\\tau\\circ\\tau,\\tau\\circ\\tau\\circ\\tau,\\ldots\\}$ where $\\circ$ denotes composition. Finally, let\n$$f(n)=\\max_{\\tau\\in S_n}\\operatorname{ord}(\\tau)\\qquad\\text{and}\\qquad g(n)=\\max_{\\tau\\in T_n}\\operatorname{ord}(\\tau).$$\nProve that $g(n)<f(n)+n^{0.501}$ for sufficiently large $n$.",
+    "image": null,
+    "choices": null,
+    "answer": "$\\operatorname{ord}(\\tau)\\le N+R$ ($N$ = order of $\\tau$ on its cyclic part, $R$ = longest tail). If $R\\ge n^{0.501}$, some prime $p\\le n^{0.501}$ divides no cycle length (else the primes $\\le n^{0.501}$ would sum to more than $n$), so adding a $p$-cycle on the tail shows $pN\\le f(n)$, whence $\\operatorname{ord}\\tau\\le f(n)/2+n<f(n)$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Cyclic part plus tails",
+        "body": "Fix $\\tau\\in T_n$. Let $C\\subseteq[n]$ be the set of *cyclic* points ($\\tau^k(x)=x$ for some $k\\ge1$). $C$ is nonempty and $\\tau$-invariant, and $\\tau_c=\\tau|_C$ is a permutation of $C$; let $N$ be its order (the lcm of its cycle lengths). Extending $\\tau_c$ by the identity outside $C$ gives an element of $S_n$ of order $N$, so $N\\le f(n)$.\n\nFor $x\\notin C$ let $h(x)\\ge1$ be the least $h$ with $\\tau^h(x)\\in C$; the points $x,\\tau(x),\\dots,\\tau^{h(x)-1}(x)$ are distinct and outside $C$ (a repetition would make one of them cyclic). Let $R=\\max_{x\\notin C}h(x)$ ($R=0$ if $C=[n]$). For $k\\ge R$ every $\\tau^k(x)$ lies in $C$, hence $\\tau^{k+N}=\\tau^k$. So all powers of $\\tau$ are among $\\tau,\\dots,\\tau^{R+N}$ and\n$$\\operatorname{ord}(\\tau)\\le R+N .$$\n\n**Case $R<n^{0.501}$.** Then $\\operatorname{ord}(\\tau)<f(n)+n^{0.501}$.\n\n**Case $R\\ge n^{0.501}$.** Then there are at least $R\\ge n^{0.501}$ points outside $C$, so $|C|\\le n-n^{0.501}$.\n\n*Claim: some prime $p\\le n^{0.501}$ divides none of the cycle lengths of $\\tau_c$* (for $n$ large). Every integer $L\\ge1$ is at least the sum of its distinct prime divisors (because $L\\ge$ the product of these primes, and $xy\\ge x+y$ for $x,y\\ge2$). If every prime $p\\le y:=n^{0.501}$ divided some cycle length, then\n$$n\\ge|C|=\\sum_{\\text{cycles}}L\\ge\\sum_{p\\le y}p\\ge1+2+\\dots+\\pi(y)\\ge\\frac{\\pi(y)^2}2 .$$\nBy Chebyshev's estimate $\\pi(y)\\ge c\\,y/\\log y$ (for an absolute $c>0$), the right side is at least $\\frac{c^2n^{1.002}}{2\\,(0.501\\log n)^2}$, which exceeds $n$ for large $n$ — contradiction.\n\nTake such a $p$. As $p\\le n^{0.501}\\le n-|C|$, we can define $\\tau_0\\in S_n$ acting as $\\tau_c$ on $C$, as a $p$-cycle on $p$ points outside $C$, and as the identity elsewhere. Since $p$ is prime and divides no cycle length, $p\\nmid N$, so $\\operatorname{ord}(\\tau_0)=\\operatorname{lcm}(N,p)=pN$. Hence $pN\\le f(n)$ and $N\\le f(n)/2$, so\n$$\\operatorname{ord}(\\tau)\\le N+R\\le\\frac{f(n)}2+n .$$\nFinally $f(n)>2n$ for large $n$: with $k=\\lfloor (n-1)/2\\rfloor$, a permutation with disjoint cycles of the coprime lengths $k$ and $k+1$ has order $k(k+1)>2n$ once $n\\ge12$. Hence $\\frac{f(n)}2+n<f(n)$.\n\nIn both cases $\\operatorname{ord}(\\tau)<f(n)+n^{0.501}$ for all $\\tau\\in T_n$ when $n$ is large, i.e. $g(n)<f(n)+n^{0.501}$. ∎"
+      }
+    ],
+    "topics": [
+      "counting",
+      "number-theory",
+      "abstract-algebra"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imc-2025-06",
+    "bank": "imc",
+    "source": {
+      "contest": "IMC",
+      "paper": "Day 2",
+      "year": 2025,
+      "number": 6,
+      "url": "https://www.imc-math.org.uk/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $f:(0,\\infty)\\to\\mathbb R$ be a continuously differentiable function, and let $b>a>0$ be real numbers such that $f(a)=f(b)=k$. Prove that there exists a point $\\xi\\in(a,b)$ such that\n$$f(\\xi)-\\xi f'(\\xi)=k.$$",
+    "image": null,
+    "choices": null,
+    "answer": "Apply Rolle's theorem to $\\varphi(x)=\\dfrac{f(x)-k}{x}$ (or Cauchy's mean value theorem to $f(x)/x$ and $1/x$).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Rolle's theorem for $(f(x)-k)/x$",
+        "body": "Define $\\varphi(x)=\\dfrac{f(x)-k}{x}$ on $[a,b]$. It is continuous on $[a,b]$, differentiable on $(a,b)$, and $\\varphi(a)=\\varphi(b)=0$. By Rolle's theorem there is $\\xi\\in(a,b)$ with\n$$0=\\varphi'(\\xi)=\\frac{\\xi f'(\\xi)-(f(\\xi)-k)}{\\xi^2}.$$\nSince $\\xi>0$, this gives $f(\\xi)-\\xi f'(\\xi)=k$. ∎"
+      },
+      {
+        "title": "Cauchy's mean value theorem",
+        "body": "Let $g(x)=f(x)/x$ and $h(x)=1/x$ on $[a,b]$. Both are continuous on $[a,b]$ and differentiable on $(a,b)$, and $h'(x)=-1/x^2\\ne0$. By Cauchy's mean value theorem there is $\\xi\\in(a,b)$ with\n$$\\frac{g(a)-g(b)}{h(a)-h(b)}=\\frac{g'(\\xi)}{h'(\\xi)}.$$\nThe left side is $\\dfrac{k/a-k/b}{1/a-1/b}=k$. Since $g'(\\xi)=\\dfrac{\\xi f'(\\xi)-f(\\xi)}{\\xi^2}$ and $h'(\\xi)=-\\dfrac1{\\xi^2}$, the right side is $f(\\xi)-\\xi f'(\\xi)$. Hence $f(\\xi)-\\xi f'(\\xi)=k$. ∎"
+      }
+    ],
+    "topics": [
+      "calculus",
+      "real-analysis"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imc-2025-07",
+    "bank": "imc",
+    "source": {
+      "contest": "IMC",
+      "paper": "Day 2",
+      "year": 2025,
+      "number": 7,
+      "url": "https://www.imc-math.org.uk/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $\\mathbb Z_{>0}$ be the set of positive integers. Find all nonempty subsets $M\\subseteq\\mathbb Z_{>0}$ satisfying both of the following properties:\n\n(a) if $x\\in M$, then $2x\\in M$,\n\n(b) if $x,y\\in M$ and $x+y$ is even, then $\\dfrac{x+y}2\\in M$.",
+    "image": null,
+    "choices": null,
+    "answer": "Exactly the sets $M=\\{kd:\\ k\\ge m\\}$ with $d$ an odd positive integer and $m$ a positive integer (all multiples of an odd $d$ from some point on).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Closure under addition, gcd, and gaps",
+        "body": "**Answer:** $M=\\{md,(m+1)d,(m+2)d,\\dots\\}$ for some odd $d\\ge1$ and some $m\\ge1$.\n\n**These work.** If $x=kd$ with $k\\ge m$, then $2x=(2k)d\\in M$. If $x=kd$, $y=ld$ ($k,l\\ge m$) and $x+y=(k+l)d$ is even, then since $d$ is odd $k+l$ is even and $\\frac{x+y}2=\\frac{k+l}2d$ with $\\frac{k+l}2\\ge m$.\n\n**Necessity.** Let $M$ satisfy (a), (b).\n\n*1. $M$ is closed under addition:* for $x,y\\in M$, $2x,2y\\in M$ and $x+y=\\frac{2x+2y}2\\in M$.\n\n*2. $M$ contains an odd number:* if $x\\in M$ is even, then $x+2x=3x$ is even, so $\\frac{3x}2\\in M$ has a smaller power of $2$; repeat.\n\n*3.* Let $d=\\gcd(M)$; by step 2, $d$ is odd, and $M\\subseteq d\\mathbb Z_{>0}$. The gcd of $M$ is the gcd of finitely many elements $m_1,\\dots,m_r$, so $d=\\sum c_im_i$ with integers $c_i$. Let $P=\\sum_{c_i>0}c_im_i$, $Q=\\sum_{c_i<0}|c_i|m_i$. If $Q=0$ then $d\\in M$ and $d,2d\\in M$; otherwise $P,Q\\in M$ by step 1 and $P-Q=d$. Either way **$M$ contains two elements differing by $d$.**\n\nLet $c=\\min M$. Recall that consecutive elements of $M$ differ by at least $d$.\n\n*Claim A: if $a,a+d\\in M$ and $a>c$, then $a-d\\in M$.* Let $x$ be the largest element of $M$ below $a$. If $x+a$ were even, $\\frac{x+a}2\\in M$ would lie strictly between $x$ and $a$, impossible. So $x+a$ is odd and $x+a+d$ is even, so $z=\\frac{x+a+d}2\\in M$ with $x<z<a+d$. The only element of $M$ in $(x,a+d)$ is $a$, hence $z=a$, i.e. $x=a-d$.\n\n*Claim B: if $a-d,a\\in M$, then $a+d\\in M$.* Let $x$ be the smallest element of $M$ above $a$ (it exists, as $2a\\in M$). If $x+a$ were even, $\\frac{x+a}2\\in M$ would lie strictly between $a$ and $x$. So $x+a-d$ is even and $z=\\frac{x+a-d}2\\in M$ with $a-d<z<x$; the only element of $M$ there is $a$, so $x=a+d$.\n\nStarting from a pair $a,a+d\\in M$ and applying Claim A repeatedly we reach the pair $c,c+d\\in M$ (the descent stops exactly at $c$, since $c$ is the minimum and all elements are $\\equiv c\\pmod d$). Then Claim B gives $c+kd\\in M$ for all $k\\ge0$. Conversely every element of $M$ is a multiple of $d$ and at least $c$, and $d\\mid c$. Writing $c=md$: $M=\\{kd:k\\ge m\\}$. ∎"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "sequences-series"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imc-2025-08",
+    "bank": "imc",
+    "source": {
+      "contest": "IMC",
+      "paper": "Day 2",
+      "year": 2025,
+      "number": 8,
+      "url": "https://www.imc-math.org.uk/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "For an $n\\times n$ real matrix $A\\in M_n(\\mathbb R)$, denote by $A^{\\mathsf R}$ its counter-clockwise $90^\\circ$ rotation. For example,\n$$\\begin{bmatrix}1&2&3\\\\4&5&6\\\\7&8&9\\end{bmatrix}^{\\mathsf R}=\\begin{bmatrix}3&6&9\\\\2&5&8\\\\1&4&7\\end{bmatrix}.$$\nProve that if $A=A^{\\mathsf R}$ then for any eigenvalue $\\lambda$ of $A$, we have $\\operatorname{Re}\\lambda=0$ or $\\operatorname{Im}\\lambda=0$.",
+    "image": null,
+    "choices": null,
+    "answer": "$A^{\\mathsf R}=JA^{\\top}$ with $J$ the reversal permutation matrix, so $A=A^{\\mathsf R}$ gives $A^\\top=JA$; for an eigenvector $x$, $|\\lambda|^2\\|x\\|^2=x^*A^\\top Ax=\\lambda^2x^*Jx$ with $x^*Jx$ real, so $\\lambda^2\\in\\mathbb R$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Write the rotation as $JA^\\top$",
+        "body": "**The rotation algebraically.** Rotating counter-clockwise moves the entry at $(i,j)$ to position $(n+1-j,i)$, i.e. $(A^{\\mathsf R})_{ij}=A_{j,\\,n+1-i}$ (check: $(A^{\\mathsf R})_{12}=A_{2,3}=6$ in the example). Let $J$ be the reversal matrix, $J_{ik}=1$ if $k=n+1-i$ and $0$ otherwise. Then $(JA^\\top)_{ij}=(A^\\top)_{n+1-i,\\,j}=A_{j,\\,n+1-i}$, so\n$$A^{\\mathsf R}=JA^\\top .$$\n$J$ is real, symmetric and $J^2=I$.\n\n**Consequence.** If $A=A^{\\mathsf R}=JA^\\top$, multiplying by $J$ gives $A^\\top=JA$.\n\n**Eigenvalues.** Let $Ax=\\lambda x$, $x\\in\\mathbb C^n\\setminus\\{0\\}$. If $\\lambda=0$ there is nothing to prove. Since $A$ is real, $A^*=A^\\top$, and\n$$|\\lambda|^2\\|x\\|^2=\\|Ax\\|^2=x^*A^\\top Ax=x^*JA(Ax)=\\lambda\\,x^*JAx=\\lambda^2\\,x^*Jx .$$\nAs $J$ is real symmetric (Hermitian), $x^*Jx$ is real. The left side is a positive real number, so $x^*Jx\\ne0$ and $\\lambda^2=\\dfrac{|\\lambda|^2\\|x\\|^2}{x^*Jx}$ is real. If $\\lambda^2>0$ then $\\lambda$ is real ($\\operatorname{Im}\\lambda=0$); if $\\lambda^2<0$ then $\\lambda$ is purely imaginary ($\\operatorname{Re}\\lambda=0$). ∎"
+      }
+    ],
+    "topics": [
+      "linear-algebra",
+      "complex-numbers"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imc-2025-09",
+    "bank": "imc",
+    "source": {
+      "contest": "IMC",
+      "paper": "Day 2",
+      "year": 2025,
+      "number": 9,
+      "url": "https://www.imc-math.org.uk/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $n$ be a positive integer. Consider the following random process which produces a sequence of $n$ distinct positive integers $X_1,X_2,\\ldots,X_n$.\n\nFirst, $X_1$ is chosen randomly with $\\mathbb P(X_1=i)=2^{-i}$ for every positive integer $i$. For $1\\le j\\le n-1$, having chosen $X_1,\\ldots,X_j$, arrange the remaining positive integers in increasing order as $n_1<n_2<\\cdots$, and choose $X_{j+1}$ randomly with $\\mathbb P(X_{j+1}=n_i)=2^{-i}$ for every positive integer $i$.\n\nLet $Y_n=\\max\\{X_1,\\ldots,X_n\\}$. Show that\n$$\\mathbb E[Y_n]=\\sum_{i=1}^n\\frac{2^i}{2^i-1}$$\nwhere $\\mathbb E[Y_n]$ is the expected value of $Y_n$.",
+    "image": null,
+    "choices": null,
+    "answer": "Show $\\mathbb E[Y_{j+1}-Y_j]=\\frac{2^{j+1}}{2^{j+1}-1}$: the overshoot above the current maximum, when it happens, is geometric with mean $2$, and by a weight argument $\\mathbb P(X_{j+1}>Y_j)=\\frac{2^j}{2^{j+1}-1}$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Increments of the running maximum",
+        "body": "Let $Y_j=\\max\\{X_1,\\dots,X_j\\}$. Since $\\mathbb E[Y_1]=\\sum_ii2^{-i}=2=\\frac{2}{2-1}$, it suffices to show $\\mathbb E[Y_{j+1}-Y_j]=\\frac{2^{j+1}}{2^{j+1}-1}$ for $1\\le j\\le n-1$.\n\n**The probability of a sequence.** For distinct $c_1,\\dots,c_{j+1}$, at step $t$ the rank of $c_t$ among the remaining integers is $c_t-\\#\\{s<t:c_s<c_t\\}$. Hence\n$$\\mathbb P\\big[(X_1,\\dots,X_{j+1})=(c_1,\\dots,c_{j+1})\\big]=2^{-\\sum c_t}\\cdot2^{\\#\\{s<t:\\ c_s<c_t\\}}.$$\nGroup the outcomes by the set of values and the relative order of all values except the largest one. Inside a group only the position $i\\in\\{1,\\dots,j+1\\}$ of the largest value varies, and it contributes exactly $i-1$ pairs $s<t$ with $c_s<c_t$ (all elements before it), and none after. So inside each group the probabilities are proportional to $2^{i-1}$, and the largest value comes last with probability $\\frac{2^j}{1+2+\\dots+2^j}$. Therefore\n$$\\mathbb P[X_{j+1}>Y_j]=\\frac{2^j}{2^{j+1}-1}.$$\n\n**The overshoot.** Condition on $X_1,\\dots,X_j$, with maximum $Y_j$. Exactly $r=Y_j-j$ remaining integers are below $Y_j$, so $Y_j+t$ has rank $r+t$ among the remaining ones ($t\\ge1$). Hence\n$$\\mathbb E\\big[(X_{j+1}-Y_j)\\mathbf 1_{X_{j+1}>Y_j}\\,\\big|\\,X_1,\\dots,X_j\\big]=\\sum_{t\\ge1}t\\,2^{-r-t}=2\\cdot2^{-r}=2\\,\\mathbb P\\big[X_{j+1}>Y_j\\,\\big|\\,X_1,\\dots,X_j\\big].$$\nSince $Y_{j+1}-Y_j=(X_{j+1}-Y_j)\\mathbf 1_{X_{j+1}>Y_j}$, taking expectations gives\n$$\\mathbb E[Y_{j+1}-Y_j]=2\\,\\mathbb P[X_{j+1}>Y_j]=\\frac{2^{j+1}}{2^{j+1}-1}.$$\nSumming, $\\mathbb E[Y_n]=\\sum_{i=1}^n\\frac{2^i}{2^i-1}$. ∎"
+      },
+      {
+        "title": "Tail sums and telescoping",
+        "body": "For an integer $k\\ge1$, given that $X_1,\\dots,X_{i-1}$ are all $<k$, exactly $k-i$ integers below $k$ remain and they have ranks $1,\\dots,k-i$; so $\\mathbb P[X_i<k\\mid X_1,\\dots,X_{i-1}<k]=1-2^{-(k-i)}$ (which is $0$ if $k\\le i$, correctly). Hence with\n$$P_n(k)=\\prod_{i=1}^n\\left(1-2^{i-k}\\right),\\qquad \\mathbb E[Y_n]=\\sum_{k\\ge1}\\mathbb P[Y_n\\ge k]=\\sum_{k\\ge1}\\big(1-P_n(k)\\big).$$\nWe show by induction that this equals $\\sum_{i=1}^n\\frac{2^i}{2^i-1}$. For $n=1$: $\\sum_k2^{1-k}=2$. For $n\\ge2$ it suffices that\n$$\\sum_{k\\ge1}\\big(P_{n-1}(k)-P_n(k)\\big)=\\sum_{k\\ge1}2^{n-k}P_{n-1}(k)=\\frac{1}{1-2^{-n}} .$$\nNow $P_n(k+1)=(1-2^{-k})P_{n-1}(k)$ and $P_n(k)=(1-2^{n-k})P_{n-1}(k)$, so\n$$(1-2^{-n})\\,2^{n-k}P_{n-1}(k)=(2^{n-k}-2^{-k})P_{n-1}(k)=P_n(k+1)-P_n(k).$$\nSumming over $1\\le k\\le K$ telescopes to $P_n(K+1)-P_n(1)=P_n(K+1)\\to1$ as $K\\to\\infty$ (note $P_n(1)=0$). This proves the identity and hence the formula. ∎"
+      }
+    ],
+    "topics": [
+      "probability",
+      "sequences-series"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imc-2025-10",
+    "bank": "imc",
+    "source": {
+      "contest": "IMC",
+      "paper": "Day 2",
+      "year": 2025,
+      "number": 10,
+      "url": "https://www.imc-math.org.uk/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "For any positive integer $N$, let $S_N$ be the number of pairs of integers $1\\le a,b\\le N$ such that the number $(a^2+a)(b^2+b)$ is a perfect square. Prove that the limit\n$$\\lim_{N\\to\\infty}\\frac{S_N}{N}$$\nexists and find its value.",
+    "image": null,
+    "choices": null,
+    "answer": "1",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Group by square-free part; non-fundamental Pell solutions are rare",
+        "body": "**Answer: the limit is $1$** (essentially only the trivial pairs $a=b$ count).\n\n**Reformulation.** For $a\\ge1$ write $a(a+1)=d_az^2$ with $d_a$ square-free. A product of two positive integers is a square iff they have the same square-free part, so $(a^2+a)(b^2+b)$ is a square iff $d_a=d_b$. With $c_d=\\#\\{a\\le N:d_a=d\\}$ we get $\\sum_dc_d=N$ and\n$$S_N=\\sum_dc_d^2=N+\\sum_dc_d(c_d-1).$$\nIt remains to show $E_N:=\\sum_dc_d(c_d-1)=o(N)$.\n\n**Pell equations.** Since $a^2<a^2+a<(a+1)^2$, $a(a+1)$ is not a square, so $d=d_a\\ge2$ is not a square. Multiplying by $4$: $(2a+1)^2-d(2z)^2=1$. So every $a$ with $d_a=d$ gives a positive solution $(x,y)=(2a+1,2z)$ of $x^2-dy^2=1$ with $x\\le2N+1$, and different $a$ give different solutions. By the theory of Pell's equation, the positive solutions are $x_k+y_k\\sqrt d=\\varepsilon^k$ ($k\\ge1$), where $\\varepsilon=x_1+y_1\\sqrt d>2$ is the fundamental solution, and $x_k=\\frac{\\varepsilon^k+\\varepsilon^{-k}}2\\ge\\frac{\\varepsilon^k}2$. Let $K_d$ be the number of $k$ with $x_k\\le2N+1$ and $T_d=\\max(K_d-1,0)$ the number of such $k\\ge2$. Then $c_d\\le K_d\\le\\log_2(4N+2)=:L$ and\n$$c_d(c_d-1)\\le K_d(K_d-1)\\le L\\,T_d,\\qquad\\text{so}\\qquad E_N\\le L\\sum_dT_d .$$\n\n**Counting non-fundamental solutions.** If $k\\ge2$, pick a prime $p\\mid k$ and let $u+v\\sqrt d=\\varepsilon^{k/p}$ (a positive solution, so $u\\ge2$). Then\n$$x_k=\\frac{(u+v\\sqrt d)^p+(u-v\\sqrt d)^p}2=\\sum_{j\\text{ even}}\\binom pj u^{p-j}(v\\sqrt d)^j\\ \\ge u^p ,$$\nand $x_k$ is determined by $(u,p)$. Also each value $x$ determines $d$ (the square-free part of $x^2-1$) and then $k$. Hence $\\sum_dT_d$ is at most the number of pairs $(u,p)$ with $u\\ge2$, $p$ prime, $u^p\\le X:=2N+1$. For each $p$ there are at most $X^{1/p}$ values of $u$, and $p\\le\\log_2X$, so\n$$\\sum_dT_d\\le X^{1/2}+X^{1/3}\\log_2X=O(\\sqrt N).$$\nTherefore $E_N=O(\\sqrt N\\log N)=o(N)$, and\n$$\\frac{S_N}N=1+\\frac{E_N}N\\longrightarrow1.$$ ∎\n\n*Remark.* Non-trivial pairs do exist, e.g. $a=4b(b+1)$: then $a(a+1)=4b(b+1)(2b+1)^2$, which has the same square-free part as $b(b+1)$. They are only about $\\sqrt N$ in number, consistent with the bound above."
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "analysis"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

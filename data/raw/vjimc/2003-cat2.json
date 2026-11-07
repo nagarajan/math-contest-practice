@@ -1,0 +1,145 @@
+[
+  {
+    "id": "vjimc-2003-cat2-01",
+    "bank": "vjimc",
+    "source": {
+      "contest": "VJIMC",
+      "paper": "VJIMC 2003 Category II",
+      "year": 2003,
+      "number": 1,
+      "url": "https://vjimc.osu.cz/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Two real square matrices $A$ and $B$ satisfy the conditions $A^{2002}=B^{2003}=I$ and $AB=BA$. Prove that $A+B+I$ is invertible. (The symbol $I$ denotes the identity matrix.)",
+    "image": null,
+    "choices": null,
+    "answer": "If $(A+B+I)x=0$ then $p(B)x=q(B)x=0$ for the coprime polynomials $p(t)=(t+1)^{2002}-1$ and $q(t)=t^{2003}-1$ (a common root would have $|t|=|t+1|=1$, i.e. $t=e^{\\pm2\\pi i/3}$, but then $t^{2003}=t^2\\ne1$), so $x=0$ by Bézout.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Coprime polynomials (Bézout)",
+        "body": "Let $x$ be a vector with $(A+B+I)x=0$, i.e. $(B+I)x=-Ax$. We show $x=0$.\n\n**Step 1.** By induction, $(B+I)^k x=(-1)^kA^kx$ for all $k\\ge 0$: if it holds for $k$, then, since $A$ and $B$ commute,\n$$(B+I)^{k+1}x=(B+I)(-1)^kA^kx=(-1)^kA^k(B+I)x=(-1)^{k+1}A^{k+1}x .$$\nWith $k=2002$ we get $(B+I)^{2002}x=A^{2002}x=x$. Also $B^{2003}x=x$. So with\n$$p(t)=(t+1)^{2002}-1,\\qquad q(t)=t^{2003}-1$$\nwe have $p(B)x=0$ and $q(B)x=0$.\n\n**Step 2: $p$ and $q$ are coprime.** Over $\\mathbb C$ two polynomials are coprime iff they have no common root. A root of $q$ satisfies $|t|=1$; a root of $p$ satisfies $|t+1|=1$. The circles $|t|=1$ and $|t+1|=1$ meet only at $t=-\\tfrac12\\pm\\tfrac{\\sqrt3}{2}i=e^{\\pm 2\\pi i/3}$. For these $t^3=1$, so $t^{2003}=t^{3\\cdot 667+2}=t^2\\ne 1$. Hence there is no common root.\n\n**Step 3.** By Bézout's identity (Euclid's algorithm in $\\mathbb R[t]$) there are real polynomials $r,s$ with $r(t)p(t)+s(t)q(t)=1$. Substituting $B$:\n$$x=r(B)p(B)x+s(B)q(B)x=0 .$$\nSo $\\ker(A+B+I)=\\{0\\}$ and the square matrix $A+B+I$ is invertible. ∎"
+      },
+      {
+        "title": "Simultaneous triangularisation",
+        "body": "Regard $A,B$ as complex matrices. Commuting complex matrices can be brought simultaneously to upper triangular form: there is an invertible $S$ with $S^{-1}AS$ and $S^{-1}BS$ both upper triangular (a common eigenvector exists because $B$ maps each eigenspace of $A$ into itself; then induct on the size). If their diagonals are $(a_1,\\dots,a_n)$ and $(b_1,\\dots,b_n)$, then the $a_i$ are the eigenvalues of $A$, the $b_i$ those of $B$, and $S^{-1}(A+B+I)S$ is upper triangular with diagonal entries $a_i+b_i+1$. So it suffices to show $a_i+b_i+1\\ne 0$.\n\nFrom $A^{2002}=I$ and $B^{2003}=I$ we get $a_i^{2002}=1$ and $b_i^{2003}=1$, so $|a_i|=|b_i|=1$. If $a_i+b_i+1=0$, then $|b_i+1|=|a_i|=1$ and $|b_i|=1$, which forces $b_i=e^{\\pm2\\pi i/3}$ (the intersection of the two unit circles centred at $0$ and $-1$). But then $b_i^3=1$, and together with $b_i^{2003}=1$ and $\\gcd(3,2003)=1$ we get $b_i=1$, a contradiction.\n\nHence all diagonal entries are non-zero, $\\det(A+B+I)=\\prod(a_i+b_i+1)\\ne 0$, and $A+B+I$ is invertible. ∎"
+      }
+    ],
+    "topics": [
+      "linear-algebra",
+      "polynomials",
+      "complex-numbers"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "vjimc-2003-cat2-02",
+    "bank": "vjimc",
+    "source": {
+      "contest": "VJIMC",
+      "paper": "VJIMC 2003 Category II",
+      "year": 2003,
+      "number": 2,
+      "url": "https://vjimc.osu.cz/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $\\{D_1,D_2,\\dots,D_n\\}$ be a set of disks in the Euclidean plane. (A disk is a set of points whose distance from the given centre is less than or equal to the given radius.) Let $a_{ij}=S(D_i\\cap D_j)$ be the area of $D_i\\cap D_j$. Prove that the inequality\n$$\\sum_{i=1}^n\\sum_{j=1}^n a_{ij}x_ix_j\\ge 0$$\nholds for any real numbers $x_1,x_2,\\dots,x_n$.",
+    "image": null,
+    "choices": null,
+    "answer": "With indicator functions $\\chi_i$ of the disks, $a_{ij}=\\int\\chi_i\\chi_j$, so the quadratic form equals $\\int_{\\mathbb R^2}\\big(\\sum_i x_i\\chi_i\\big)^2\\,dx\\,dy\\ge 0$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Write the areas as integrals",
+        "body": "Let $\\chi_i:\\mathbb R^2\\to\\{0,1\\}$ be the indicator function of $D_i$ ($\\chi_i=1$ on $D_i$ and $0$ outside). Since $\\chi_{D_i\\cap D_j}=\\chi_i\\chi_j$,\n$$a_{ij}=S(D_i\\cap D_j)=\\iint_{\\mathbb R^2}\\chi_i(x,y)\\,\\chi_j(x,y)\\,dx\\,dy .$$\n(All these functions are bounded, vanish outside a bounded set and are continuous except on finitely many circles, so the integrals exist.) By linearity of the integral,\n$$\\sum_{i=1}^n\\sum_{j=1}^n a_{ij}x_ix_j=\\iint_{\\mathbb R^2}\\sum_{i,j}x_i\\chi_i\\,x_j\\chi_j\\,dx\\,dy=\\iint_{\\mathbb R^2}\\Big(\\sum_{i=1}^n x_i\\chi_i(x,y)\\Big)^2dx\\,dy\\ \\ge 0,$$\nbecause the integrand is a square. ∎\n\n*Remark.* The argument shows more generally that the matrix $\\big(\\mu(E_i\\cap E_j)\\big)$ is positive semidefinite for any measurable sets $E_i$ of finite measure: it is the Gram matrix of the vectors $\\chi_{E_i}$ in $L^2$."
+      }
+    ],
+    "topics": [
+      "linear-algebra",
+      "geometry",
+      "inequalities"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "vjimc-2003-cat2-03",
+    "bank": "vjimc",
+    "source": {
+      "contest": "VJIMC",
+      "paper": "VJIMC 2003 Category II",
+      "year": 2003,
+      "number": 3,
+      "url": "https://vjimc.osu.cz/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $\\{a_n\\}_{n=0}^\\infty$ be the sequence of real numbers satisfying $a_0=0$, $a_1=1$ and\n$$a_{n+2}=a_{n+1}+\\frac{a_n}{2^n}$$\nfor every $n\\ge 0$. Prove that\n$$\\lim_{n\\to\\infty}a_n=1+\\sum_{n=1}^\\infty\\frac{1}{2^{n(n-1)/2}\\prod_{k=1}^n(2^k-1)}.$$",
+    "image": null,
+    "choices": null,
+    "answer": "$(a_n)$ is increasing and bounded, and $\\lim a_n=1+f(\\tfrac12)$ for the generating function $f(z)=\\sum a_nz^n$, which satisfies $(1-z)f(z)=z^2f(z/2)+z$; iterating this at $z=2^{-1},2^{-2},\\dots$ produces exactly the given series.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Generating function and iteration",
+        "body": "**Step 1: convergence and a formula for the limit.** By induction $a_n\\ge 0$, and $a_{n+2}-a_{n+1}=a_n/2^n\\ge 0$; together with $a_0=0\\le a_1=1$ this shows $(a_n)$ is non-decreasing. Hence $a_n\\le a_{n+1}$ and\n$$a_{n+2}\\le a_{n+1}\\Big(1+\\frac1{2^n}\\Big)\\ \\Longrightarrow\\ a_{n+2}\\le a_1\\prod_{k=0}^{n}\\Big(1+\\frac1{2^k}\\Big)\\le \\exp\\Big(\\sum_{k\\ge0}2^{-k}\\Big)=e^2 .$$\nSo $(a_n)$ is bounded and monotone, hence convergent. Summing $a_{k+2}-a_{k+1}=a_k/2^k$ for $k=0,\\dots,n$ gives $a_{n+2}=1+\\sum_{k=0}^n a_k2^{-k}$, so\n$$L:=\\lim_{n\\to\\infty}a_n=1+\\sum_{k=0}^\\infty \\frac{a_k}{2^k}=1+f\\big(\\tfrac12\\big),\\qquad f(z):=\\sum_{k=0}^\\infty a_kz^k .$$\nSince $0\\le a_k\\le e^2$, the series $f(z)$ converges for $0\\le z<1$, and $0\\le f(z)\\le e^2/(1-z)\\le 2e^2$ for $0\\le z\\le\\frac12$.\n\n**Step 2: a functional equation.** Multiply the recurrence by $z^{n+2}$ and sum over $n\\ge 0$ (all series converge absolutely for $0\\le z<1$):\n$$\\sum_{n\\ge0}a_{n+2}z^{n+2}=z\\sum_{n\\ge0}a_{n+1}z^{n+1}+z^2\\sum_{n\\ge0}a_n\\Big(\\frac z2\\Big)^n,$$\ni.e. $f(z)-z=z f(z)+z^2f(z/2)$, or\n$$f(z)=\\frac{z}{1-z}+\\frac{z^2}{1-z}f\\Big(\\frac z2\\Big).$$\nFor $z=2^{-n}$ this reads\n$$f(2^{-n})=\\frac{1}{2^n-1}+\\frac{1}{2^n(2^n-1)}\\,f(2^{-n-1}).\\tag{$*$}$$\n\n**Step 3: iterate.** Put $P_n=\\prod_{k=1}^n(2^k-1)$, $t_n=\\dfrac{1}{2^{n(n-1)/2}P_n}$ and $r_n=\\dfrac{1}{2^{n(n+1)/2}P_n}$. We claim that for every $N\\ge1$\n$$f\\big(\\tfrac12\\big)=\\sum_{n=1}^N t_n+r_N\\,f\\big(2^{-N-1}\\big).$$\nFor $N=1$ this is $(*)$ with $n=1$: $f(\\frac12)=1+\\frac12f(\\frac14)$, and $t_1=1$, $r_1=\\frac12$. If it holds for $N$, insert $(*)$ with $n=N+1$:\n$$r_N f(2^{-N-1})=\\frac{r_N}{2^{N+1}-1}+\\frac{r_N}{2^{N+1}(2^{N+1}-1)}f(2^{-N-2})=t_{N+1}+r_{N+1}f(2^{-N-2}),$$\nbecause $\\frac{r_N}{2^{N+1}-1}=\\frac{1}{2^{N(N+1)/2}P_{N+1}}=t_{N+1}$ and $\\frac{N(N+1)}2+N+1=\\frac{(N+1)(N+2)}2$.\n\n**Step 4: pass to the limit.** Since $0\\le f(2^{-N-1})\\le 2e^2$ and $r_N\\le 2^{-N(N+1)/2}\\to0$, the remainder tends to $0$, so $f(\\frac12)=\\sum_{n=1}^\\infty t_n$ and\n$$\\lim_{n\\to\\infty}a_n=1+\\sum_{n=1}^\\infty\\frac{1}{2^{n(n-1)/2}\\prod_{k=1}^n(2^k-1)} .$$\n(Numerically both sides equal $2.17266875\\ldots$) ∎"
+      }
+    ],
+    "topics": [
+      "sequences-series",
+      "real-analysis"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "vjimc-2003-cat2-04",
+    "bank": "vjimc",
+    "source": {
+      "contest": "VJIMC",
+      "paper": "VJIMC 2003 Category II",
+      "year": 2003,
+      "number": 4,
+      "url": "https://vjimc.osu.cz/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $f,g\\colon[0,1]\\to(0,+\\infty)$ be two continuous functions such that $f$ and $\\frac gf$ are increasing. Prove that\n$$\\int_0^1\\frac{\\int_0^x f(t)\\,dt}{\\int_0^x g(t)\\,dt}\\,dx\\le 2\\int_0^1\\frac{f(t)}{g(t)}\\,dt .$$",
+    "image": null,
+    "choices": null,
+    "answer": "Chebyshev's integral inequality gives $\\frac{\\int_0^xf}{\\int_0^xg}\\le\\frac{x}{\\int_0^x g/f}$, Cauchy–Schwarz gives $\\frac{1}{\\int_0^x g/f}\\le\\frac{4}{x^4}\\int_0^x t^2\\frac fg$, and integrating in $x$ (Fubini) yields $2\\int_0^1\\frac fg(1-t^2)\\,dt\\le2\\int_0^1\\frac fg$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Chebyshev, Cauchy–Schwarz, then Fubini",
+        "body": "The integrand on the left is continuous on $(0,1]$ and bounded by $\\max f/\\min g$, so the left side exists.\n\n**Chebyshev's inequality for integrals.** If $u,v$ are both increasing (or integrable and similarly ordered) on $[0,x]$, then\n$$\\frac1x\\int_0^x u\\cdot\\frac1x\\int_0^x v\\le\\frac1x\\int_0^x uv .$$\n*Proof:* $(u(s)-u(t))(v(s)-v(t))\\ge0$ for all $s,t$; integrating over $[0,x]^2$ gives $2x\\int_0^x uv-2\\int_0^xu\\int_0^xv\\ge 0$.\n\n**Step 1.** Apply it to $u=f$ and $v=g/f$ on $[0,x]$, $0<x\\le1$: $\\frac1{x^2}\\int_0^x f\\int_0^x\\frac gf\\le\\frac1x\\int_0^x g$, i.e.\n$$\\frac{\\int_0^x f}{\\int_0^x g}\\le \\frac{x}{\\int_0^x \\frac{g}{f}} .\\tag{1}$$\n\n**Step 2.** By the Cauchy–Schwarz inequality,\n$$\\frac{x^4}{4}=\\Big(\\int_0^x t\\,dt\\Big)^2=\\Big(\\int_0^x\\sqrt{\\tfrac gf}\\cdot t\\sqrt{\\tfrac fg}\\,dt\\Big)^2\\le\\int_0^x\\frac gf\\,dt\\cdot\\int_0^x t^2\\frac fg\\,dt,$$\nso $\\dfrac{1}{\\int_0^x g/f}\\le\\dfrac4{x^4}\\displaystyle\\int_0^x t^2\\frac{f(t)}{g(t)}dt$. With (1):\n$$\\frac{\\int_0^x f}{\\int_0^x g}\\le\\frac4{x^3}\\int_0^x t^2\\frac{f(t)}{g(t)}\\,dt .\\tag{2}$$\n\n**Step 3.** Integrate (2) over $x\\in(0,1]$ and swap the order of integration (the integrand is non-negative on $\\{0\\le t\\le x\\le 1\\}$, so Tonelli's theorem allows it):\n$$\\int_0^1\\frac{\\int_0^x f}{\\int_0^x g}\\,dx\\le\\int_0^1 4t^2\\frac{f(t)}{g(t)}\\Big(\\int_t^1\\frac{dx}{x^3}\\Big)dt=\\int_0^1 4t^2\\frac{f(t)}{g(t)}\\cdot\\frac{1}{2}\\Big(\\frac1{t^2}-1\\Big)dt=2\\int_0^1\\frac{f(t)}{g(t)}(1-t^2)\\,dt .$$\nSince $f/g>0$, the last integral is at most $2\\int_0^1 \\frac{f(t)}{g(t)}dt$. ∎\n\n*Remark.* The constant $2$ is optimal: for $f\\equiv1$, $g(t)=t+\\varepsilon$ ($\\varepsilon>0$) the left side equals $\\int_0^1\\frac{2\\,dx}{x+2\\varepsilon}=2\\ln\\frac{1+2\\varepsilon}{2\\varepsilon}$, while $\\int_0^1\\frac fg=\\ln\\frac{1+\\varepsilon}{\\varepsilon}$; as $\\varepsilon\\to0^+$ both behave like multiples of $\\ln\\frac1\\varepsilon$ and their ratio tends to $2$."
+      }
+    ],
+    "topics": [
+      "inequalities",
+      "real-analysis",
+      "calculus"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

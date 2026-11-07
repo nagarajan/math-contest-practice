@@ -1,0 +1,174 @@
+[
+  {
+    "id": "apmo-2023-01",
+    "bank": "apmo",
+    "source": {
+      "contest": "APMO",
+      "paper": "APMO",
+      "year": 2023,
+      "number": 1,
+      "url": "https://www.apmo-official.org/static/problems/apmo2023_prb.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $n\\ge5$ be an integer. Consider $n$ squares with side lengths $1,2,\\ldots,n$, respectively. The squares are arranged in the plane with their sides parallel to the $x$ and $y$ axes. Suppose that no two squares touch, except possibly at their vertices.\n\nShow that it is possible to arrange these squares in a way such that every square touches exactly two other squares.",
+    "image": null,
+    "choices": null,
+    "answer": "Construction: split $1,\\dots,n-4$ into sets $A$, $B$ with $\\sum A-\\sum B\\in\\{1,2\\}$; chain each set corner-to-corner along two parallel diagonal lines and close the cycle with the squares $n-3,n$ at one end and $n-2,n-1$ at the other.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Two diagonal chains closed into a cycle",
+        "body": "**Coordinates.** Use $u=x+y$, $v=y-x$. An axis-parallel square of side $s$ and centre $(U,V)$ is $\\{|u-U|+|v-V|\\le s\\}$ (since $\\max(|\\Delta x|,|\\Delta y|)=\\frac{|\\Delta u|+|\\Delta v|}2$). Two such squares of sides $s,s'$ with centres differing by $(\\Delta U,\\Delta V)$:\n* have disjoint interiors and do not touch if $|\\Delta U|+|\\Delta V|>s+s'$;\n* touch in exactly one point, a vertex of both, if $\\Delta V=0$ and $|\\Delta U|=s+s'$, or $\\Delta U=0$ and $|\\Delta V|=s+s'$.\n\n**Splitting $1,\\dots,n-4$.** We need sets $A$, $B$ partitioning $\\{1,\\dots,n-4\\}$ with $\\sum A-\\sum B\\in\\{1,2\\}$. Starting from the top, cut off blocks $\\{t,t+1,t+2,t+3\\}$, putting $t,t+3$ into $A$ and $t+1,t+2$ into $B$ (equal sums), until the remaining set $R=\\{1,\\dots,r\\}$ has $1\\le r\\le4$. Then put: $r=1$: $1\\in A$ (difference $1$); $r=2$: $2\\in A$, $1\\in B$ (difference $1$); $r=3$: $1,3\\in A$, $2\\in B$ (difference $2$); $r=4$: $2,4\\in A$, $1,3\\in B$ (difference $2$).\n\n**The arrangement.** Let $a_1,\\dots,a_p$ be the elements of $A$ and $b_1,\\dots,b_q$ those of $B$ (any order), and let $(e_A,e_B)=(n-2,n-1)$ if $\\sum A-\\sum B=2$ and $(e_A,e_B)=(n-1,n-2)$ if the difference is $1$. Place, as $(u,v)$-centres:\n* the **bottom chain** on $v=0$: square $n$ at $u=0$, then $b_1,\\dots,b_q$, then $e_B$, each touching the previous one corner to corner (centres at distance equal to the sum of the two sides);\n* the **top chain** on $v=2n-3$: square $n-3$ at $u=0$, then $a_1,\\dots,a_p$, then $e_A$, in the same way.\n\nThe last centres are at $u=n+2\\sum B+e_B$ and $u=(n-3)+2\\sum A+e_A$. In both cases these are equal: for difference $2$, $n+2\\sum B+n-1=n-3+2\\sum B+4+n-2$; for difference $1$, $n+2\\sum B+n-2=n-3+2\\sum B+2+n-1$. So $e_A$ lies exactly above $e_B$.\n\n**Touching pairs.** Consecutive squares in a chain touch at a vertex. Square $n-3$ is directly above $n$ with $\\Delta V=2n-3=(n-3)+n$, and $e_A$ directly above $e_B$ with $\\Delta V=2n-3=e_A+e_B$: two more vertex contacts. These $n$ contacts form a single cycle through all $n$ squares, so each square touches exactly two others — provided there are no further contacts:\n* Non-consecutive squares in one chain: $|\\Delta U|$ exceeds the sum of their sides by twice the sides between them.\n* Squares in different chains have $|\\Delta V|=2n-3$. If their sides sum to less than $2n-3$, they are apart. The only pairs with sum at least $2n-3$ are $(n-3,n)$ and $(e_A,e_B)$ (the contacts above) and $(e_A,n)$, since all $a_i,b_j\\le n-4$ and $n-3+e_B\\le 2n-4$. For $(e_A,n)$: $|\\Delta U|+|\\Delta V|\\ge(2n-5)+(2n-3)>2n-1\\ge e_A+n$, as $n\\ge5$.\n\nSo this arrangement has the required property. ∎"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "spatial"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "apmo-2023-02",
+    "bank": "apmo",
+    "source": {
+      "contest": "APMO",
+      "paper": "APMO",
+      "year": 2023,
+      "number": 2,
+      "url": "https://www.apmo-official.org/static/problems/apmo2023_prb.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Find all integers $n$ satisfying $n\\ge2$ and $\\dfrac{\\sigma(n)}{p(n)-1}=n$, in which $\\sigma(n)$ denotes the sum of all positive divisors of $n$, and $p(n)$ denotes the largest prime divisor of n.",
+    "image": null,
+    "choices": null,
+    "answer": "6",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Bound $\\sigma(n)/n$",
+        "body": "Let $n=p_1^{\\alpha_1}\\cdots p_k^{\\alpha_k}$ with $p_1<\\dots<p_k$, so $p(n)=p_k$ and the condition is $\\frac{\\sigma(n)}n=p_k-1$. Since $p_i\\ge i+1$,\n$$p_k-1=\\frac{\\sigma(n)}{n}=\\prod_{i=1}^k\\Bigl(1+\\frac1{p_i}+\\dots+\\frac1{p_i^{\\alpha_i}}\\Bigr)<\\prod_{i=1}^k\\frac{1}{1-\\frac1{p_i}}=\\prod_{i=1}^k\\Bigl(1+\\frac1{p_i-1}\\Bigr)\\le\\prod_{i=1}^k\\Bigl(1+\\frac1i\\Bigr)=k+1 .$$\nFor $k\\ge3$, $p_k\\ge 2k-1$ (all primes after $2,3$ are odd), so $p_k-1\\ge2k-2\\ge k+1$ — impossible. So $k\\le2$ and $p_k<k+2\\le4$, i.e. $p_k\\le3$.\n\n* $k=1$: $n=p^\\alpha$ and $\\sigma(n)=1+p+\\dots+p^\\alpha\\equiv1\\pmod p$ is not divisible by $n$, but it should equal $n(p-1)$.\n* $k=2$: $n=2^\\alpha3^\\beta$ and we need $\\frac{\\sigma(n)}n=2$. For $\\alpha=\\beta=1$, $\\frac{\\sigma(6)}6=\\frac{12}6=2$. If $\\alpha\\ge2$ or $\\beta\\ge2$, the product has more terms than $\\bigl(1+\\frac12\\bigr)\\bigl(1+\\frac13\\bigr)=2$, so it exceeds $2$.\n\nCheck: $\\sigma(6)=12$, $p(6)=3$, $\\frac{12}{3-1}=6$.\n\n**Answer:** $n=6$."
+      },
+      {
+        "title": "Factor the equation for $2^\\alpha3^\\beta$",
+        "body": "After reducing to $n=2^\\alpha3^\\beta$ ($\\alpha,\\beta\\ge1$) as in the first solution, the condition $\\sigma(n)=2n$ reads\n$$(2^{\\alpha+1}-1)\\cdot\\frac{3^{\\beta+1}-1}{2}=2^{\\alpha+1}3^\\beta,\\quad\\text{i.e.}\\quad (2^{\\alpha+1}-1)(3^{\\beta+1}-1)=2^{\\alpha+2}3^\\beta .$$\n$2^{\\alpha+1}-1$ is odd and $3^{\\beta+1}-1$ is prime to $3$, so $2^{\\alpha+1}-1=3^\\beta$ and $3^{\\beta+1}-1=2^{\\alpha+2}$. Substituting $3^\\beta$ from the first: $3(2^{\\alpha+1}-1)-1=2\\cdot2^{\\alpha+1}$, so $2^{\\alpha+1}=4$, $\\alpha=1$, $3^\\beta=3$, $\\beta=1$. Hence $n=6$."
+      }
+    ],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "apmo-2023-03",
+    "bank": "apmo",
+    "source": {
+      "contest": "APMO",
+      "paper": "APMO",
+      "year": 2023,
+      "number": 3,
+      "url": "https://www.apmo-official.org/static/problems/apmo2023_prb.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $ABCD$ be a parallelogram. Let $W$, $X$, $Y$, and $Z$ be points on sides $AB$, $BC$, $CD$, and $DA$, respectively, such that the incenters of triangles $AWZ$, $BXW$, $CYX$ and $DZY$ form a parallelogram. Prove that $WXYZ$ is a parallelogram.",
+    "image": null,
+    "choices": null,
+    "answer": "Proof: signed distances to the sides give $r_1+r_4=r_2+r_3$ and $r_1+r_2=r_3+r_4$, so opposite corner triangles have equal inradii; since in a triangle with fixed apex angle and inradius one leg grows exactly when the other shrinks, $AZ>CX$ leads around the parallelogram to $CX>AZ$; so $AZ=CX$, $AW=CY$ and $WXYZ$ is symmetric about the centre.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Equal inradii, then a monotonicity chain",
+        "body": "Let $I_1,I_2,I_3,I_4$ be the incenters of $AWZ$, $BXW$, $CYX$, $DZY$ with inradii $r_1,r_2,r_3,r_4$; the parallelogram is $I_1I_2I_3I_4$, so $\\vec{I_1I_2}=\\vec{I_4I_3}$ and $\\vec{I_2I_3}=\\vec{I_1I_4}$.\n\n**Step 1: $r_1=r_3$, $r_2=r_4$.** Let $\\delta(P)$ be the signed distance of $P$ from line $AB$, positive towards $CD$, and let $H$ be the distance between $AB$ and $CD$. The incircles of $AWZ$ and $BXW$ touch $AB$, and those of $CYX$, $DZY$ touch $CD$, all from inside the parallelogram, so\n$$\\delta(I_1)=r_1,\\quad\\delta(I_2)=r_2,\\quad\\delta(I_3)=H-r_3,\\quad\\delta(I_4)=H-r_4 .$$\nSince $\\delta$ is affine and $\\vec{I_1I_2}=\\vec{I_4I_3}$: $r_2-r_1=(H-r_3)-(H-r_4)$, i.e. $r_1+r_4=r_2+r_3$. Doing the same with line $BC$ (touched by the incircles at $I_2$, $I_3$) and line $DA$ (touched at $I_1$, $I_4$), using $\\vec{I_2I_3}=\\vec{I_1I_4}$: $r_3-r_2=r_1-r_4$, i.e. $r_1+r_2=r_3+r_4$. Subtracting the two relations gives $r_1-r_3=r_3-r_1$, so $r_1=r_3$ and then $r_2=r_4$.\n\n**Step 2: a lemma.** *Let two triangles have the same angle $\\varphi$ at a vertex and the same inradius $r$, and let their sides at that vertex be $p,q$ and $p',q'$. If $q>q'$ then $p<p'$; if $q=q'$ then $p=p'$.* Indeed, if $\\beta,\\gamma$ are the angles at the far ends of the sides $p$ and $q$, the tangent lengths give $p=r\\cot\\frac\\varphi2+r\\cot\\frac\\beta2$ and $q=r\\cot\\frac\\varphi2+r\\cot\\frac\\gamma2$, with $\\beta+\\gamma=180^\\circ-\\varphi$. As $\\cot$ decreases on $(0^\\circ,90^\\circ)$: $q>q'\\iff\\gamma<\\gamma'\\iff\\beta>\\beta'\\iff p<p'$.\n\n**Step 3.** $\\angle A=\\angle C$ and $\\angle B=\\angle D$. The sides at $A$ of triangle $AWZ$ are $AW$ (on $AB$) and $AZ$ (on $AD$); those at $C$ of $CYX$ are $CY$ (on $CD$) and $CX$ (on $CB$). Suppose $AZ>CX$. Then, using the lemma with $r_1=r_3$, then $AB=CD$, then the lemma at $B$, $D$ with $r_2=r_4$, then $BC=DA$:\n$$AZ>CX\\ \\Rightarrow\\ AW<CY\\ \\Rightarrow\\ BW>DY\\ \\Rightarrow\\ BX<DZ\\ \\Rightarrow\\ CX>AZ,$$\na contradiction. By symmetry $AZ<CX$ is impossible too. So $AZ=CX$, and by the lemma $AW=CY$.\n\n**Conclusion.** The half-turn about the centre $O$ of $ABCD$ maps $A\\mapsto C$, ray $AB\\mapsto$ ray $CD$, ray $AD\\mapsto$ ray $CB$; so it maps $W\\mapsto Y$ (as $AW=CY$) and $Z\\mapsto X$ (as $AZ=CX$). Hence the diagonals $WY$ and $XZ$ of $WXYZ$ bisect each other at $O$, and $WXYZ$ is a parallelogram. ∎"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "apmo-2023-04",
+    "bank": "apmo",
+    "source": {
+      "contest": "APMO",
+      "paper": "APMO",
+      "year": 2023,
+      "number": 4,
+      "url": "https://www.apmo-official.org/static/problems/apmo2023_prb.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $c>0$ be a given positive real and $\\mathbb{R}_{>0}$ be the set of all positive reals. Find all functions $f:\\mathbb{R}_{>0}\\to\\mathbb{R}_{>0}$ such that\n$$f((c+1)x+f(y))=f(x+2y)+2cx\\quad\\text{for all } x,y\\in\\mathbb{R}_{>0}.$$",
+    "image": null,
+    "choices": null,
+    "answer": "$f(x)=2x$ only (first $f(y)\\ge2y$ by making the two arguments equal; then $g=f-2x\\ge0$ satisfies $g(z)\\ge2m\\,g(y)$ for $z>2y$ and all $m$).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Lower bound, then amplification",
+        "body": "$f(x)=2x$ works: both sides equal $2(c+1)x+4y$.\n\n**$f(y)\\ge2y$.** If $f(y)<2y$ for some $y$, take $x=\\frac{2y-f(y)}c>0$. Then $(c+1)x+f(y)=x+2y$, so the equation gives $2cx=0$ — impossible.\n\n**$f(y)=2y$.** Let $g(t)=f(t)-2t\\ge0$. Substituting $f=g+2\\,\\mathrm{id}$ and cancelling,\n$$g\\bigl((c+1)x+2y+g(y)\\bigr)+2g(y)=g(x+2y)\\qquad(x,y>0).\\tag{1}$$\nIn particular $g(z)\\ge 2g(y)$ whenever $z>2y$ (write $z=x+2y$).\n\n*Claim: $g(z)\\ge2m\\,g(y)$ for all $z>2y$ and all positive integers $m$.* True for $m=1$. If it holds for $m$, let $z>2y$ and $x=z-2y>0$. The argument $(c+1)x+2y+g(y)$ also exceeds $2y$, so by (1) and the hypothesis\n$$g(z)=g\\bigl((c+1)x+2y+g(y)\\bigr)+2g(y)\\ge 2m\\,g(y)+2g(y)=2(m+1)g(y).$$\n\nIf $g(y)>0$ for some $y$, fix any $z>2y$ and take $m>\\frac{g(z)}{2g(y)}$: contradiction. So $g\\equiv0$.\n\n**Answer:** $f(x)=2x$. ∎"
+      }
+    ],
+    "topics": [
+      "functional-equations"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "apmo-2023-05",
+    "bank": "apmo",
+    "source": {
+      "contest": "APMO",
+      "paper": "APMO",
+      "year": 2023,
+      "number": 5,
+      "url": "https://www.apmo-official.org/static/problems/apmo2023_prb.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "There are $n$ line segments on the plane, no three intersecting at a point, and each pair intersecting once in their respective interiors. Tony and his $2n-1$ friends each stand at a distinct endpoint of a line segment. Tony wishes to send Christmas presents to each of his friends as follows:\n\nFirst, he chooses an endpoint of each segment as a \"sink\". Then he places the present at the endpoint of the segment he is at. The present moves as follows:\n\n* If it is on a line segment, it moves towards the sink.\n* When it reaches an intersection of two segments, it changes the line segment it travels on and starts moving towards the new sink.\n\nIf the present reaches an endpoint, the friend on that endpoint can receive their present. Prove Tony can send presents to exactly $n$ of his $2n-1$ friends.",
+    "image": null,
+    "choices": null,
+    "answer": "Proof: number the endpoints $1,\\dots,2n$ around a circle starting from Tony; then the chords join $k$ and $k+n$. Present paths are non-crossing and match sources to sinks, so Tony's present always lands on an even-numbered endpoint; with sinks $k+1,\\dots,k+n$ it lands on $2k$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Non-crossing paths on a circle",
+        "body": "**Reduction to chords.** Two lines meet at most once, and every pair of segments already meets, so extending all segments to chords of a large circle creates no new intersections. Moving each person to the end of the extension of their segment changes nothing. Number the $2n$ endpoints $1,2,\\dots,2n$ counterclockwise, Tony at $1$ (indices mod $2n$). Every chord crosses all the others, so it separates the two endpoints of each other chord: it has $n-1$ endpoints on each side and joins $k$ to $k+n$.\n\n**The flow of presents.** Fix the sinks; call the other endpoints *sources*. Cut the chords at the crossings into edges and orient each edge towards its chord's sink. At a crossing of chords $a$ and $b$ a present coming in on $a$ leaves on $b$ and vice versa. So every edge has at most one successor and at most one predecessor (edges leaving a source have no predecessor, edges entering a sink have no successor). Start a present at every source.\n* *No loops.* Let a walk start on an edge $e_0$ with no predecessor and let $e_i=e_j$ ($i<j$) be its first repetition. If $i>0$, then $e_{i-1}=e_{j-1}$ (unique predecessor), an earlier repetition; if $i=0$, $e_0$ has the predecessor $e_{j-1}$. Both are impossible, so the walk ends at a sink.\n* *A bijection.* Walks from different sources share no edge (unique predecessors), and each sink has a single incoming edge, so the $n$ sources are matched with the $n$ sinks.\n* *No crossings.* Around a crossing $v$ of $a$ and $b$ the four half-edges alternate between $a$ and $b$, so \"in on $a$\" is adjacent to both $b$-half-edges. The two passages through $v$ pair (in on $a$, out on $b$) and (in on $b$, out on $a$), which are two adjacent pairs of half-edges. So we can replace the X at $v$ by two disjoint small arcs realising these pairs. After doing this at every crossing, the $n$ present paths become $n$ pairwise disjoint simple arcs in the disc (plus possibly some closed curves), joining the $2n$ boundary points in pairs.\n\n**Tony's present lands on an even point.** If Tony's endpoint is the sink of his chord, nothing is delivered. Otherwise his present follows the arc from $1$ to some point $P$. This arc cuts the disc into two regions; every other arc avoids it, so it joins two boundary points on the same side. Hence the number of endpoints strictly between $1$ and $P$ (counterclockwise), namely $P-2$, is even, so $P$ is even. So at most the $n$ friends at $2,4,\\dots,2n$ can receive a present.\n\n**Every even point is reachable.** Fix $k\\in\\{1,\\dots,n\\}$. For the chord $\\{i,i+n\\}$ ($1\\le i\\le n$) let the sink be $i+n$ if $i\\le k$ and $i$ if $i>k$. The sinks are then exactly $k+1,k+2,\\dots,k+n$, and the sources are $k+n+1,\\dots,2n,1,\\dots,k$; Tony's point $1$ is a source. The paths form a non-crossing matching of sources to sinks. Consider the partner $k+1+m$ of source $k$: the points $k+1,\\dots,k+m$ between them all lie on one side of that path, so they are matched among themselves; but they are all sinks, which are matched only with sources, so $m=0$ and $k\\leftrightarrow k+1$. Removing this pair, $k-1$ and $k+2$ become neighbours and the same argument gives $k-1\\leftrightarrow k+2$, and so on: $k-j\\leftrightarrow k+1+j$. For $j=k-1$: Tony's present goes to $2k$.\n\nSo the friends who can receive Tony's present are exactly the $n$ friends at the even-numbered endpoints. ∎"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "graph-theory",
+      "logic"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

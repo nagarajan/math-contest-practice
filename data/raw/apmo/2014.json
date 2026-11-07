@@ -1,0 +1,181 @@
+[
+  {
+    "id": "apmo-2014-01",
+    "bank": "apmo",
+    "source": {
+      "contest": "APMO",
+      "paper": "APMO",
+      "year": 2014,
+      "number": 1,
+      "url": "https://www.apmo-official.org/static/problems/apmo2014_prb.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "For a positive integer $m$ denote by $S(m)$ and $P(m)$ the sum and product, respectively, of the digits of $m$. Show that for each positive integer $n$, there exist positive integers $a_1, a_2, \\dots, a_n$ satisfying the following conditions:\n$$S(a_1)<S(a_2)<\\cdots<S(a_n)\\quad\\text{and}\\quad S(a_i)=P(a_{i+1})\\quad(i=1,2,\\dots,n).$$\n(We let $a_{n+1}=a_1$.)",
+    "image": null,
+    "choices": null,
+    "answer": "Construction: for large $k$ take $a_i$ ($2\\le i\\le n$) with $k+i-2$ digits $2$ and $2^{k+i-1}-2(k+i-2)$ digits $1$, and $a_1$ with $k+n-1$ digits $2$ and $2^k-2(k+n-1)$ digits $1$; then $S(a_i)=2^{k+i-1}$ and the products match.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Digits $1$ and $2$ only",
+        "body": "A number whose digits are $x$ twos and $y$ ones (and nothing else) has digit sum $2x+y$ and digit product $2^x$. We aim for\n$$S(a_i)=2^{k+i-1}\\quad(i=1,\\dots,n),$$\nwhich is strictly increasing. The conditions $S(a_i)=P(a_{i+1})$ then require $P(a_i)=2^{k+i-2}$ for $2\\le i\\le n$ and $P(a_1)=S(a_n)=2^{k+n-1}$.\n\nChoose an integer $k$ so large that $2^k\\ge 2(k+n-1)$ (possible since $2^k$ grows faster than $2k$).\n\n* For $2\\le i\\le n$ let $a_i$ consist of $k+i-2$ digits $2$ and $2^{k+i-1}-2(k+i-2)$ digits $1$. This count is non-negative because $2^{k+i-1}\\ge 2^k\\ge 2(k+n-1)\\ge 2(k+i-2)$. Then $S(a_i)=2^{k+i-1}$ and $P(a_i)=2^{k+i-2}$.\n* Let $a_1$ consist of $k+n-1$ digits $2$ and $2^k-2(k+n-1)\\ge0$ digits $1$. Then $S(a_1)=2^k$ and $P(a_1)=2^{k+n-1}$.\n\nNow $S(a_1)<S(a_2)<\\dots<S(a_n)$, $S(a_i)=2^{k+i-1}=P(a_{i+1})$ for $1\\le i\\le n-1$, and $S(a_n)=2^{k+n-1}=P(a_1)$. (For $n=1$ the single number $a_1$ has $S(a_1)=2^k=P(a_1)$.) ∎"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "arithmetic"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "apmo-2014-02",
+    "bank": "apmo",
+    "source": {
+      "contest": "APMO",
+      "paper": "APMO",
+      "year": 2014,
+      "number": 2,
+      "url": "https://www.apmo-official.org/static/problems/apmo2014_prb.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "text",
+    "prompt": "Let $S=\\{1,2,\\dots,2014\\}$. For each non-empty subset $T\\subseteq S$, one of its members is chosen as its representative. Find the number of ways to assign representatives to all non-empty subsets of $S$ so that if a subset $D\\subseteq S$ is a disjoint union of non-empty subsets $A, B, C\\subseteq S$, then the representative of $D$ is also the representative of at least one of $A$, $B$, $C$.",
+    "image": null,
+    "choices": null,
+    "answer": "108·2014!",
+    "acceptedAnswers": [
+      "108*2014!",
+      "108 * 2014!",
+      "108 2014!",
+      "108(2014!)",
+      "108×2014!",
+      "108x2014!",
+      "108 · 2014!",
+      "2014!*108",
+      "2014!·108"
+    ],
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Peel off one element at a time",
+        "body": "Write $r(X)$ for the representative of $X$, and call an assignment on the subsets of a finite set $T$ *good* if it satisfies the condition for all $D\\subseteq T$. Let $N(t)$ be the number of good assignments on a $t$-element set.\n\n**Key fact.** If $|T|\\ge5$ and $x=r(T)$, then $r(X)=x$ for every $X\\subseteq T$ containing $x$.\n\n*Proof.* If $|X|\\le|T|-2$, split $T\\setminus X$ into two non-empty sets $Y,Z$. Then $T=X\\sqcup Y\\sqcup Z$, so $x\\in\\{r(X),r(Y),r(Z)\\}$; since $x\\notin Y\\cup Z$, $r(X)=x$. If $X=T$ there is nothing to prove. If $|X|=|T|-1\\ge4$, take any $y\\in X$, $y\\ne x$, and split $X\\setminus\\{x,y\\}$ (at least $2$ elements) into non-empty $Y,Z$. Then $X=\\{x,y\\}\\sqcup Y\\sqcup Z$; by the first case $r(\\{x,y\\})=x$, and $r(Y),r(Z)\\in Y\\cup Z$, so $r(X)\\in\\{x\\}\\cup Y\\cup Z$, i.e. $r(X)\\ne y$. As $y$ was arbitrary, $r(X)=x$. $\\square$\n\n**Recursion.** Let $|T|=t\\ge5$. Choose $x=r(T)$ ($t$ ways); by the key fact all subsets containing $x$ get representative $x$. Conversely, with this choice every condition for a set $D\\ni x$ holds automatically ($r(D)=x$ and the part containing $x$ also has representative $x$), and conditions for $D\\not\\ni x$ only involve subsets of $T\\setminus\\{x\\}$. So the remaining choices are exactly the good assignments on $T\\setminus\\{x\\}$, and $N(t)=t\\,N(t-1)$ for $t\\ge5$. Hence\n$$N(2014)=2014\\cdot2013\\cdots5\\cdot N(4)=\\frac{2014!}{24}\\,N(4).$$\n\n**Four elements.** Let $T=\\{y_1,y_2,y_3,y_4\\}$. Singletons are forced. A $3$-element set is only a union of three singletons, so its condition holds automatically. The only $4$-element set is $T$, and its decompositions into three parts are a pair plus two singletons. If $r(T)=y$, the condition fails exactly for a decomposition $\\{y,z\\}\\sqcup\\{u\\}\\sqcup\\{w\\}$ with $r(\\{y,z\\})\\ne y$. So the condition is: $r(\\{y,z\\})=y$ for the three pairs containing $y$. Everything else is free: $4$ three-element sets ($3$ choices each) and the $3$ pairs not containing $y$ ($2$ choices each). Thus\n$$N(4)=4\\cdot3^4\\cdot2^3=2592 .$$\n\n**Answer.** $N(2014)=\\dfrac{2014!}{24}\\cdot2592=108\\cdot2014!$. ∎"
+      }
+    ],
+    "topics": [
+      "counting",
+      "logic"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "apmo-2014-03",
+    "bank": "apmo",
+    "source": {
+      "contest": "APMO",
+      "paper": "APMO",
+      "year": 2014,
+      "number": 3,
+      "url": "https://www.apmo-official.org/static/problems/apmo2014_prb.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Find all positive integers $n$ such that for any integer $k$ there exists an integer $a$ for which $a^3+a-k$ is divisible by $n$.",
+    "image": null,
+    "choices": null,
+    "answer": "$n=3^b$ ($b\\ge0$): $a\\mapsto a^3+a$ is injective mod $3^b$ because $a^2+ab+b^2+1\\not\\equiv0\\pmod 3$; it is not surjective mod $2$ or mod any prime $p>3$, hence not mod any multiple of these.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Bijectivity modulo $n$",
+        "body": "The condition says that $f(a)=a^3+a$ takes every residue modulo $n$. Since $f(a)\\bmod n$ depends only on $a\\bmod n$, this means $f$ is a bijection of $\\mathbb Z/n\\mathbb Z$, i.e. it is injective there.\n\n**Powers of $3$ work.** ($n=1$ is trivial.) Suppose $a^3+a\\equiv b^3+b\\pmod{3^j}$. Then $(a-b)(a^2+ab+b^2+1)\\equiv0\\pmod{3^j}$. If $a\\equiv b\\pmod 3$ then $a^2+ab+b^2+1\\equiv3a^2+1\\equiv1$; otherwise $a^2+ab+b^2=(a-b)^2+3ab\\equiv1$, so $a^2+ab+b^2+1\\equiv2\\pmod 3$. Either way the second factor is prime to $3$, so $3^j\\mid a-b$. Thus $f$ is injective mod $3^j$.\n\n**Reduction.** If some residue $k$ is missed modulo $m$, it is also missed modulo every multiple $n$ of $m$ (if $n\\mid a^3+a-k$ then $m\\mid a^3+a-k$). So it suffices to show that $f$ fails for $m=2$ and for every prime $p>3$; then the only possible $n$ are powers of $3$.\n\n* $m=2$: $a^3+a=a(a^2+1)$ is always even, so $k=1$ is missed.\n* $p\\equiv1\\pmod 4$: there is $b$ with $b^2\\equiv-1$, so $f(b)=b(b^2+1)\\equiv0=f(0)$ with $b\\not\\equiv0$.\n* $p\\equiv3\\pmod 4$, $p>3$. It suffices to find $a\\not\\equiv b$ with $a^2+ab+b^2\\equiv-1$, since then $f(a)-f(b)=(a-b)(a^2+ab+b^2+1)\\equiv0$.\n\n  *Step 1: $x^2+x+1$ takes some non-residue value.* We have $x^2+x+1\\equiv y^2+y+1$ iff $p\\mid(x-y)(x+y+1)$, so as $x$ runs over $\\mathbb Z/p$ the polynomial takes exactly $\\frac{p+1}{2}$ values. Let $C$ be the set consisting of $0$ and the quadratic residues; $|C|=\\frac{p+1}2$. If all values were in $C$, the values would be all of $C$. Then for $y=z^2\\in C$, writing $z=2w+1$, we get $y+3=4(w^2+w+1)\\in 4C=C$. So $C+3\\subseteq C$; starting from $0$ this gives all multiples of $3$, i.e. all of $\\mathbb Z/p$ (as $p\\ne3$), contradicting $|C|<p$.\n\n  *Step 2.* Take $x$ with $x^2+x+1=N$ a non-residue. Since $p\\equiv3\\pmod4$, $-1$ is a non-residue, so $-N$ is a non-zero quadratic residue, i.e. $N\\equiv-c^2$ for some $c\\not\\equiv0$. Put $b\\equiv c^{-1}$ and $a\\equiv xb$. Then $a^2+ab+b^2=b^2(x^2+x+1)\\equiv c^{-2}\\cdot(-c^2)=-1$.\n\n  *Step 3.* If it happens that $a\\equiv b$, then $3a^2\\equiv-1$, and the pair $(2a,-a)$ works instead: $(2a)^2+(2a)(-a)+a^2=3a^2\\equiv-1$ and $2a\\not\\equiv-a$ because $3a\\not\\equiv0$.\n\nSo for every prime $p>3$ the map is not injective, hence not surjective. The answer is: all $n=3^b$ with $b\\ge0$. ∎"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "polynomials"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "apmo-2014-04",
+    "bank": "apmo",
+    "source": {
+      "contest": "APMO",
+      "paper": "APMO",
+      "year": 2014,
+      "number": 4,
+      "url": "https://www.apmo-official.org/static/problems/apmo2014_prb.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $n$ and $b$ be positive integers. We say $n$ is *$b$-discerning* if there exists a set consisting of $n$ different positive integers less than $b$ that has no two different subsets $U$ and $V$ such that the sum of all elements in $U$ equals the sum of all elements in $V$.\n\n(a) Prove that $8$ is $100$-discerning.\n\n(b) Prove that $9$ is not $100$-discerning.",
+    "image": null,
+    "choices": null,
+    "answer": "(a) $\\{3,6,12,24,48,95,96,97\\}$ works (look at sums mod $3$). (b) Pigeonhole on the subsets of size $3$–$6$ and on the subsets with $2$–$4$ of the six largest elements gives $s_6+s_7+s_8+s_9\\ge409>96+97+98+99$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Explicit set; double pigeonhole",
+        "body": "**(a)** Take $S=\\{3,6,12,24,48,96\\}\\cup\\{95,97\\}$. A subset $U$ has sum $3t+95\\varepsilon_1+97\\varepsilon_2$, where $3t$ is the sum of $U\\cap\\{3,\\dots,96\\}$ and $\\varepsilon_1,\\varepsilon_2\\in\\{0,1\\}$ record whether $95,97\\in U$. By binary representation, $t\\in\\{0,\\dots,63\\}$ determines $U\\cap\\{3,6,\\dots,96\\}$ uniquely. Modulo $3$ the sum is $0,2,1,0$ for $(\\varepsilon_1,\\varepsilon_2)=(0,0),(1,0),(0,1),(1,1)$. Suppose two subsets have equal sums. If the common residue is $1$ or $2$, the pair $(\\varepsilon_1,\\varepsilon_2)$ is the same for both. If it is $0$, note that sums with $(0,0)$ are at most $3\\cdot63=189$, while sums with $(1,1)$ are at least $192$; so again the pairs agree. Then the values of $t$ agree, so the subsets are equal. Hence all subset sums are distinct and $8$ is $100$-discerning.\n\n**(b)** Suppose $s_1<s_2<\\dots<s_9<100$ are positive integers with all subset sums distinct.\n\n*First count.* There are $\\binom93+\\binom94+\\binom95+\\binom96=84+126+126+84=420$ subsets with $3$ to $6$ elements. Each has sum at least $s_1+s_2+s_3$ and at most $s_4+\\dots+s_9$. These $420$ distinct integers lie in an interval containing $(s_4+\\dots+s_9)-(s_1+s_2+s_3)+1$ integers, so\n$$(s_4+\\dots+s_9)-(s_1+s_2+s_3)\\ge419. \\tag{1}$$\n\n*Second count.* Consider the subsets containing exactly $2$, $3$ or $4$ of the six elements $s_4,\\dots,s_9$ (and any subset of $\\{s_1,s_2,s_3\\}$). There are $8\\left(\\binom62+\\binom63+\\binom64\\right)=8\\cdot50=400$ of them. Each has sum at least $s_4+s_5$ and at most $s_1+s_2+s_3+s_6+s_7+s_8+s_9$. As before,\n$$(s_1+s_2+s_3+s_6+s_7+s_8+s_9)-(s_4+s_5)\\ge399. \\tag{2}$$\n\nAdding (1) and (2) gives $2(s_6+s_7+s_8+s_9)\\ge818$, so $s_6+s_7+s_8+s_9\\ge409$. But these are distinct integers below $100$, so their sum is at most $96+97+98+99=390$. Contradiction; $9$ is not $100$-discerning. ∎"
+      }
+    ],
+    "topics": [
+      "counting",
+      "number-theory"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "apmo-2014-05",
+    "bank": "apmo",
+    "source": {
+      "contest": "APMO",
+      "paper": "APMO",
+      "year": 2014,
+      "number": 5,
+      "url": "https://www.apmo-official.org/static/problems/apmo2014_prb.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Circles $\\omega$ and $\\Omega$ meet at points $A$ and $B$. Let $M$ be the midpoint of the arc $AB$ of circle $\\omega$ ($M$ lies inside $\\Omega$). A chord $MP$ of circle $\\omega$ intersects $\\Omega$ at $Q$ ($Q$ lies inside $\\omega$). Let $\\ell_P$ be the tangent line to $\\omega$ at $P$, and let $\\ell_Q$ be the tangent line to $\\Omega$ at $Q$. Prove that the circumcircle of the triangle formed by the lines $\\ell_P$, $\\ell_Q$, and $AB$ is tangent to $\\Omega$.",
+    "image": null,
+    "choices": null,
+    "answer": "Proof: with $R$ the second point of $PQ$ on $\\Omega$, $S,T\\in\\Omega$ with $RS\\parallel AB$, $RT\\parallel\\ell_P$, triangle $RST$ (inscribed in $\\Omega$) has sides parallel to those of $XYZ$; the homothety between them has its centre $D=XR\\cap\\Omega$ on $\\Omega$, so the two circumcircles are tangent at $D$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "A homothety centred on $\\Omega$",
+        "body": "We use directed angles between lines, $\\angle(\\ell,m)$, taken modulo $180^\\circ$. Let $X=AB\\cap\\ell_P$, $Y=AB\\cap\\ell_Q$, $Z=\\ell_P\\cap\\ell_Q$ (the triangle is assumed non-degenerate) and $F=MP\\cap AB$.\n\n**Step 1: $\\angle(AB,MP)=\\angle(MP,\\ell_P)$, so $XF=XP$.** The tangent $\\ell_M$ to $\\omega$ at $M$ is parallel to $AB$, since $M$ is the midpoint of arc $AB$. The tangents at the two ends of the chord $MP$ are symmetric in the perpendicular bisector of $MP$, so $\\angle(\\ell_M,MP)=\\angle(MP,\\ell_P)$, which gives the claim. In triangle $XFP$ this says $\\angle(FX,FP)=\\angle(PF,PX)$, i.e. equal base angles, so $XF=XP$.\n\n**Step 2: a triangle in $\\Omega$ with sides parallel to $XYZ$.** Let $R$ be the second intersection of line $MP$ with $\\Omega$, and let $S,T$ be the points of $\\Omega$ with $RS\\parallel AB$ and $RT\\parallel\\ell_P$. Then, by Step 1,\n$$\\angle(RS,RQ)=\\angle(AB,MP)=\\angle(MP,\\ell_P)=\\angle(RQ,RT).$$\nThese are inscribed angles of $\\Omega$ on the chords $SQ$ and $QT$, so $QS=QT$. Hence $Q$ lies on the perpendicular bisector of $ST$, which passes through the centre of $\\Omega$, and therefore the tangent $\\ell_Q$ at $Q$ is parallel to $ST$. So $RS\\parallel XY$, $RT\\parallel XZ$, $ST\\parallel YZ$, and there is a homothety $h$ with $h(R)=X$, $h(S)=Y$, $h(T)=Z$. It maps $\\Omega$, the circumcircle of $RST$, to the circumcircle of $XYZ$.\n\n**Step 3: the centre of $h$ is on $\\Omega$.** Let $D$ be the second intersection of line $XR$ with $\\Omega$. By Step 1 and the power of $X$ with respect to $\\omega$ and $\\Omega$,\n$$XF^2=XP^2=XA\\cdot XB=XD\\cdot XR .$$\nSo $XF/XD=XR/XF$, and triangles $XDF$ and $XFR$ (common angle at $X$) are similar with opposite orientation. Hence\n$$\\angle(FX,FD)=\\angle(RF,RX)=\\angle(RQ,RD)=\\angle(QY,QD),$$\nthe last step being the tangent–chord angle in $\\Omega$ ($QY=\\ell_Q$). As $FX$ is the line $AB$, which passes through $Y$, this reads $\\angle(FY,FD)=\\angle(QY,QD)$, so $F,Q,Y,D$ are concyclic. Then\n$$\\angle(DY,DQ)=\\angle(FY,FQ)=\\angle(AB,MP)=\\angle(RS,RQ)=\\angle(DS,DQ),$$\nusing the circle $FQYD$, then $RS\\parallel AB$, then the circle $\\Omega$. Hence the lines $DY$ and $DS$ coincide: $D$ lies on $SY$ as well as on $RX$.\n\nThe centre of $h$ lies on every line joining a point to its image, so it is $XR\\cap YS=D$, a point of $\\Omega$. The homothety fixes $D$, so $D$ is on both $\\Omega$ and $h(\\Omega)$, and their centres $O$ and $h(O)$ are collinear with $D$. Two circles through a common point $D$ whose centres are collinear with $D$ are tangent at $D$. Therefore the circumcircle of $XYZ$ is tangent to $\\Omega$. ∎"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

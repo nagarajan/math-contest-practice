@@ -1,0 +1,180 @@
+[
+  {
+    "id": "usamts-1999-r2-01",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 11 Round 2 (1999-2000)",
+      "year": 1999,
+      "number": 1,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "The number $N$ consists of 1999 digits such that if each pair of consecutive digits in $N$ were viewed as a two-digit number, then that number would either be a multiple of 17 or a multiple of 23. The sum of the digits of $N$ is 9599. Determine the rightmost ten digits of $N$.",
+    "image": null,
+    "choices": null,
+    "answer": "3469234685",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Follow the forced successors",
+        "body": "The two-digit multiples of 17 and 23 are\n$$17, 34, 51, 68, 85 \\quad\\text{and}\\quad 23, 46, 69, 92.$$\nReading these as \"digit $\\to$ next digit\": $1\\to7$, $2\\to3$, $3\\to4$, $4\\to6$, $5\\to1$, $6\\to8$ or $6\\to9$, $8\\to5$, $9\\to2$, and $7 \\to$ nothing (no listed number starts with 7, and none starts with 0).\n\nSo the digits of $N$ go around the cycle $2\\to3\\to4\\to6\\to9\\to2\\to\\cdots$ (digit sum $2+3+4+6+9 = 24$ per lap of 5 digits), and the only way to leave the cycle is $6\\to8\\to5\\to1\\to7$, after which $N$ must end (7 has no successor). Also nothing leads *into* $8, 5, 1, 7$ except along this tail, so these digits can only appear in the tail at the end.\n\nSo $N$ consists of a block of $L$ digits running around the cycle, followed by a tail of the first $k$ digits of $8, 5, 1, 7$ ($0 \\le k \\le 4$), where $L = 1999 - k$; if $k \\ge 1$ the block must end in 6. Five consecutive cycle digits always sum to 24, so a block of $L = 5\\cdot 399 + r$ digits has sum $9576 + (\\text{sum of } r \\text{ consecutive cycle digits})$. We need the total to be $9599 = 9576 + 23$.\n\n* $k = 0$: $r = 4$, and 4 consecutive cycle digits sum to $24$ minus the missing digit: $22, 21, 20, 18, 15$ — never 23.\n* $k \\ge 1$: the block ends in 6, so reading it backwards it goes $6, 4, 3, 2, 9, 6, 4, \\dots$; the $r$ extra digits at its start are the next ones in this backward list after 399 laps, i.e. the first $r$ of $6, 4, 3, \\dots$\n  * $k = 1$ (tail $8$): $r = 3$, extra digits $6, 4, 3$: total $9576 + 13 + 8 = 9597$. ✗\n  * $k = 2$ (tail $8, 5$): $r = 2$, extra digits $6, 4$: total $9576 + 10 + 13 = 9599$. ✓\n  * $k = 3$ (tail $8, 5, 1$): $r = 1$, extra digit $6$: total $9576 + 6 + 14 = 9596$. ✗\n  * $k = 4$ (tail $8, 5, 1, 7$): $r = 0$: total $9576 + 21 = 9597$. ✗\n\nSo $N$ is forced:\n$$N = 46\\,\\underbrace{92346\\,92346\\cdots92346}_{399\\text{ laps}}\\,85,$$\nwhich has $2 + 1995 + 2 = 1999$ digits and digit sum $10 + 9576 + 13 = 9599$. Its last ten digits are $\\ldots 3\\,4\\,6\\,9\\,2\\,3\\,4\\,6\\,8\\,5$.\n\n**Answer: 3469234685**"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "logic"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-1999-r2-02",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 11 Round 2 (1999-2000)",
+      "year": 1999,
+      "number": 2,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $C$ be the set of non-negative integers which can be expressed as $1999s + 2000t$, where $s$ and $t$ are also non-negative integers.\n\n(a) Show that $3{,}994{,}001$ is not in $C$.\n\n(b) Show that if $0 \\le n \\le 3{,}994{,}001$ and $n$ is an integer not in $C$, then $3{,}994{,}001 - n$ is in C.",
+    "image": null,
+    "choices": null,
+    "answer": "Write $n = 1999a + b$ with $0 \\le b \\le 1998$; then $n \\in C \\iff a \\ge b$ (since any representation has $t \\equiv b \\pmod{1999}$). Also $3994001 = 1999\\cdot 2000 - 1999 - 2000$, so $3994001 - n = 2000(1998 - b) + 1999(b - a - 1)$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Reduce modulo 1999",
+        "body": "**A criterion.** If $n = 1999s + 2000t$, then $n \\equiv 2000t \\equiv t \\pmod{1999}$. Write $n = 1999a + b$ with $0 \\le b \\le 1998$ (division with remainder). Then $t \\equiv b \\pmod{1999}$ and $t \\ge 0$, so $t \\ge b$. Conversely $n = 1999(a - b) + 2000b$. Hence\n$$n \\in C \\iff a \\ge b.$$\n(If $a \\ge b$ we have a representation; if $a < b$, any representation has $t \\ge b$ and then $1999s = n - 2000t \\le 1999a + b - 2000b = 1999(a - b) < 0$, impossible.)\n\n**(a)** $3994001 = 1999\\cdot 1998 - 1 = 1999\\cdot 1997 + 1998$, so $a = 1997 < b = 1998$, and $3994001 \\notin C$. (Directly: we would need $t \\ge 1998$, but $2000\\cdot 1998 = 3996000 > 3994001$.)\n\n**(b)** Note $3994001 = 1999\\cdot 2000 - 1999 - 2000$. Let $n = 1999a + b \\notin C$ with $0 \\le b \\le 1998$; by the criterion $a \\le b - 1$. Then\n$$3994001 - n = 1999\\cdot 2000 - 1999 - 2000 - 1999a - b = 2000(1998 - b) + 1999(b - a - 1).$$\nBoth coefficients are non-negative: $1998 - b \\ge 0$ and $b - a - 1 \\ge 0$. So $3994001 - n \\in C$. ∎"
+      }
+    ],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-1999-r2-03",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 11 Round 2 (1999-2000)",
+      "year": 1999,
+      "number": 3,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "The figure shows the map of Squareville, where each city block is of the same length. Two friends, Alexandra and Brianna, live at the corners marked by A and B, respectively. They start walking toward each other's house, leaving at the same time, walking with the same speed, and independently choosing a path to the other's house with uniform distribution out of all possible minimum-distance paths [that is, all minimum-distance paths are equally likely]. What is the probability they will meet?",
+    "image": "qimages/usamts/1999-r2/q03.webp",
+    "choices": null,
+    "answer": "245/841",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "answerDisplay": "$\\frac{245}{841}$",
+    "solutions": [
+      {
+        "title": "Count paths through the middle blocks",
+        "body": "Put $A$ at $(0, 0)$ with one block as unit; then $B = (5, 6)$ and every shortest path has $11$ blocks (going only right and up for Alexandra). The streets are the edges of the squares $0 \\le x \\le 3,\\ 0 \\le y \\le 4$ and $3 \\le x \\le 5,\\ 3 \\le y \\le 6$.\n\n**Total paths.** Write at each corner the number of shortest paths from $A$ (each number is the sum of the numbers just below and just left). This gives $290$ paths from $A$ to $B$, and by symmetry 290 from $B$ to $A$.\n\n**Where they can meet.** After time $t$ each has walked $t$ blocks, so they meet when $t + t = 11$, i.e. at $t = 5\\frac12$, in the middle of a block that is the 6th block of Alexandra's path (and the 6th of Brianna's). Such a block joins a corner with $x + y = 5$ to one with $x + y = 6$. The usable ones are\n* $(1,4)$–$(2,4)$: $5$ paths from $A$ to $(1,4)$ times $6$ paths from $(2,4)$ to $B$: $30$ paths;\n* $(2,3)$–$(2,4)$: $10 \\cdot 6 = 60$;\n* $(2,3)$–$(3,3)$: $10 \\cdot 10 = 100$;\n* $(3,2)$–$(3,3)$: $10 \\cdot 10 = 100$.\n\n(Check: $30 + 60 + 100 + 100 = 290$, so every path uses exactly one of them.)\n\n**Probability.** They meet exactly when both use the same middle block (Brianna traverses it in the opposite direction at the same moment). Brianna's path reversed is a uniform random path from $A$ to $B$, independent of Alexandra's. So\n$$P = \\frac{30^2 + 60^2 + 100^2 + 100^2}{290^2} = \\frac{24500}{84100} = \\frac{245}{841}.$$\n\n**Answer: $\\frac{245}{841}$**"
+      }
+    ],
+    "topics": [
+      "probability",
+      "counting"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-1999-r2-04",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 11 Round 2 (1999-2000)",
+      "year": 1999,
+      "number": 4,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "In $\\triangle PQR$, $PQ = 8$, $QR = 13$, and $RP = 15$. Prove that there is a point $S$ on line segment $\\overline{PR}$, but not at its endpoints, such that $PS$ and $QS$ are also integers.",
+    "image": null,
+    "choices": null,
+    "answer": "$\\angle P = 60^\\circ$ (law of cosines), so the point $S$ on $PR$ with $PS = 8$ makes $PQS$ equilateral: $QS = 8$. (Also $PS = 3$ or $5$ give $QS = 7$.)",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Angle P is 60°",
+        "body": "By the law of cosines in $\\triangle PQR$,\n$$\\cos\\angle P = \\frac{PQ^2 + PR^2 - QR^2}{2\\cdot PQ\\cdot PR} = \\frac{64 + 225 - 169}{240} = \\frac{120}{240} = \\frac12,$$\nso $\\angle P = 60^\\circ$.\n\nLet $S$ be the point on segment $PR$ with $PS = 8$; it is strictly between $P$ and $R$ since $0 < 8 < 15$. In triangle $PQS$, $PQ = PS = 8$ and the included angle is $60^\\circ$, so the triangle is isosceles with base angles $\\frac{180^\\circ - 60^\\circ}{2} = 60^\\circ$, i.e. equilateral. Hence $QS = 8$, and $PS = 8$, $QS = 8$ are integers. ∎"
+      },
+      {
+        "title": "All solutions via the law of cosines",
+        "body": "With $\\angle P = 60^\\circ$ (as above) and $PS = x$, $0 < x < 15$, the law of cosines in triangle $PQS$ gives\n$$QS^2 = x^2 + 64 - 2\\cdot 8x\\cdot\\tfrac12 = x^2 - 8x + 64 = (x - 4)^2 + 48.$$\nFor an integer $x$ we need $(x-4)^2 + 48 = y^2$, i.e. $(y - (x-4))(y + (x-4)) = 48$ with both factors of the same parity. The factor pairs $2\\cdot 24$, $4 \\cdot 12$, $6\\cdot 8$ give $y = 13, 8, 7$ and $|x - 4| = 11, 4, 1$. With $0 < x < 15$: $x = 3$ or $5$ ($QS = 7$), $x = 8$ ($QS = 8$), and $x = 15$ ($QS = 13$) is the endpoint $R$, excluded. So for instance $PS = 3$, $QS = 7$ works. ∎"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "number-theory"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-1999-r2-05",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 11 Round 2 (1999-2000)",
+      "year": 1999,
+      "number": 5,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "In $\\triangle ABC$, $AC > BC$, $CM$ is the median, and $CH$ is the altitude emanating from $C$, as shown in the figure. Determine the measure of $\\angle MCH$ if $\\angle ACM$ and $\\angle BCH$ each have measure $17^\\circ$.",
+    "image": "qimages/usamts/1999-r2/q05.webp",
+    "choices": null,
+    "answer": "56",
+    "acceptedAnswers": null,
+    "answerUnit": "degrees",
+    "solutions": [
+      {
+        "title": "Tangents along the base",
+        "body": "Let $\\alpha = 17^\\circ$ and $\\theta = \\angle MCH$, and let $h = CH$. As in the figure, the order along $AB$ is $A, M, H, B$, and $\\angle ACH = \\alpha + \\theta$. In the right triangles with the common leg $CH$:\n$$AH = h\\tan(\\alpha + \\theta),\\qquad MH = h\\tan\\theta,\\qquad BH = h\\tan\\alpha.$$\nSince $M$ is the midpoint, $AM = MB$:\n$$h\\tan(\\alpha+\\theta) - h\\tan\\theta = h\\tan\\theta + h\\tan\\alpha \\implies \\tan(\\alpha + \\theta) = \\tan\\alpha + 2\\tan\\theta.$$\nPut $a = \\tan\\alpha$, $t = \\tan\\theta$. Then $\\frac{a + t}{1 - at} = a + 2t$, so\n$$a + t = a + 2t - a^2t - 2at^2 \\implies t\\,(1 - a^2 - 2at) = 0.$$\nAs $t > 0$, $t = \\frac{1 - a^2}{2a} = \\cot 2\\alpha = \\tan(90^\\circ - 2\\alpha)$. Hence $\\theta = 90^\\circ - 2\\alpha = 90^\\circ - 34^\\circ = 56^\\circ$.\n\n**Answer: $56^\\circ$**"
+      },
+      {
+        "title": "The circumcenter lies on the median",
+        "body": "Let $O$ be the circumcenter. From triangle $BCH$, $\\angle B = 90^\\circ - 17^\\circ = 73^\\circ$, which is acute. The central angle $\\angle AOC = 2\\angle B$, and triangle $AOC$ is isosceles, so $\\angle OCA = 90^\\circ - \\angle B = 17^\\circ$, with $O$ on the same side of line $CA$ as $B$. So the ray $CO$ makes the angle $17^\\circ$ with $CA$ — it is the ray $CM$. Thus $O$ lies on line $CM$.\n\nBut $O$ also lies on the perpendicular bisector of $AB$, which passes through $M$. If $O \\ne M$, then line $CM = $ line $OM$ would be perpendicular to $AB$, so the median would be the altitude and $AC = BC$ — contradicting $AC > BC$. Hence $O = M$: $AB$ is a diameter and $\\angle ACB = 90^\\circ$. Therefore\n$$\\angle MCH = 90^\\circ - \\angle ACM - \\angle BCH = 90^\\circ - 17^\\circ - 17^\\circ = 56^\\circ.$$\n\n**Answer: $56^\\circ$**"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "trigonometry"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

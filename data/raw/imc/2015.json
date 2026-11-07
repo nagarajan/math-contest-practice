@@ -1,0 +1,394 @@
+[
+ {
+  "id": "imc-2015-01",
+  "bank": "imc",
+  "source": {
+   "contest": "IMC",
+   "paper": "Day 1",
+   "year": 2015,
+   "number": 1,
+   "url": "https://www.imc-math.org.uk/"
+  },
+  "grade": "undergrad",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "For any integer $n\\ge2$ and two $n\\times n$ matrices with real entries $A,B$ that satisfy the equation\n$$A^{-1}+B^{-1}=(A+B)^{-1}$$\nprove that $\\det(A)=\\det(B)$.\n\nDoes the same conclusion follow for matrices with complex entries?",
+  "image": null,
+  "choices": null,
+  "answer": "With $X=AB^{-1}$ the equation becomes $X^2+X+I=0$, so $X^3=I$ and, $X$ being real, $\\det X=1$, i.e. $\\det A=\\det B$. **No** for complex matrices: e.g. $A=I$, $B=\\operatorname{diag}(\\omega,\\dots,\\omega,\\omega^2)$ with $\\omega=e^{2\\pi i/3}$ (or $B=\\omega I$ when $3\\nmid n$).",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Reduce to $X^3=I$",
+    "body": "**Real case.** Multiply $A^{-1}+B^{-1}=(A+B)^{-1}$ on the left by $A+B$:\n$$I=(A+B)(A^{-1}+B^{-1})=I+AB^{-1}+BA^{-1}+I,\\qquad\\text{so}\\qquad AB^{-1}+BA^{-1}+I=0 .$$\nPut $X=AB^{-1}$. Then $X^{-1}=BA^{-1}$, so $X+X^{-1}+I=0$, and multiplying by $X$ gives $X^2+X+I=0$. Multiplying by $X-I$:\n$$0=(X-I)(X^2+X+I)=X^3-I .$$\nHence $(\\det X)^3=\\det(X^3)=1$. Since $X$ has real entries, $\\det X$ is a real number whose cube is $1$, so $\\det X=1$. As $A=XB$,\n$$\\det A=\\det X\\cdot\\det B=\\det B .$$\n\n**Complex case: the statement fails.** Let $\\omega=e^{2\\pi i/3}=\\frac{-1+i\\sqrt3}{2}$, so $\\omega^3=1$, $1+\\omega+\\omega^2=0$ and $\\omega^{-1}=\\omega^2$. Let $A=I$ and let $B$ be diagonal with every diagonal entry equal to $\\omega$ or $\\omega^2$. For a diagonal entry $\\beta\\in\\{\\omega,\\omega^2\\}$ we have $1+\\beta+\\beta^{-1}=1+\\omega+\\omega^2=0$, so\n$$A^{-1}+B^{-1}=I+B^{-1}=-B,\\qquad (A+B)^{-1}=(I+B)^{-1}=(-B^{-1})^{-1}=-B,$$\nand the equation holds. Choose the entries so that $\\det B\\ne1$: if $3\\nmid n$ take $B=\\omega I$ ($\\det B=\\omega^n\\ne1$); if $3\\mid n$ take $B=\\operatorname{diag}(\\omega,\\dots,\\omega,\\omega^2)$, so $\\det B=\\omega^{n+1}=\\omega\\ne1$. Then $\\det A=1\\ne\\det B$.\n\n**Answer:** $\\det A=\\det B$ for real matrices; **no**, the conclusion does not hold for complex matrices. ∎"
+   },
+   {
+    "title": "Eigenvalues of $X$",
+    "body": "As in the first solution, $X=AB^{-1}$ satisfies $X^2+X+I=0$. So every eigenvalue $\\lambda$ of $X$ (over $\\mathbb C$) satisfies $\\lambda^2+\\lambda+1=0$, i.e. $\\lambda\\in\\{\\omega,\\bar\\omega\\}$ with $\\omega=e^{2\\pi i/3}$.\n\nThe characteristic polynomial of the real matrix $X$ has real coefficients, so its non-real roots come in conjugate pairs with equal multiplicities. Hence $\\omega$ and $\\bar\\omega$ both have multiplicity $n/2$ (in particular $n$ must be even), and\n$$\\det X=\\omega^{n/2}\\bar\\omega^{\\,n/2}=|\\omega|^{n}=1 ,$$\nso $\\det A=\\det X\\det B=\\det B$.\n\nOver $\\mathbb C$ nothing forces the multiplicities of $\\omega$ and $\\bar\\omega$ to be equal, and this is exactly what the counterexample $A=I$, $B=\\operatorname{diag}(\\omega,\\dots)$ of the first solution exploits. **Answer: no** for complex matrices. ∎"
+   }
+  ],
+  "topics": [
+   "linear-algebra",
+   "complex-numbers"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "imc-2015-02",
+  "bank": "imc",
+  "source": {
+   "contest": "IMC",
+   "paper": "Day 1",
+   "year": 2015,
+   "number": 2,
+   "url": "https://www.imc-math.org.uk/"
+  },
+  "grade": "undergrad",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "For a positive integer $n$, let $f(n)$ be the number obtained by writing $n$ in binary and replacing every 0 with 1 and vice versa. For example, $n=23$ is 10111 in binary, so $f(n)$ is 1000 in binary, therefore $f(23)=8$. Prove that\n$$\\sum_{k=1}^n f(k)\\le\\frac{n^2}{4}.$$\nWhen does equality hold?",
+  "image": null,
+  "choices": null,
+  "answer": "If $2^{s-1}\\le n<2^s$ then $\\frac{n^2}4-\\sum_{k\\le n}f(k)=\\frac34\\Big(n-\\frac{2^{s+1}-2}{3}\\Big)\\Big(n-\\frac{2^{s+1}-4}{3}\\Big)\\ge0$. Equality iff $n=2\\lfloor 2^s/3\\rfloor$ for some $s\\ge2$, i.e. $n=2,4,10,20,42,84,\\dots$ (binary $1010\\ldots10$ or $1010\\ldots100$).",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Exact formula for the sum",
+    "body": "If $2^{r-1}\\le k<2^r$, then $k$ has $r$ binary digits and $k+f(k)=\\underbrace{11\\ldots1}_{r}{}_{(2)}=2^r-1$.\n\nFix $n$ and let $s$ be its number of binary digits, $2^{s-1}\\le n\\le 2^s-1$. Grouping $k$ by number of digits,\n$$\\sum_{k=1}^n\\big(k+f(k)\\big)=\\sum_{r=1}^{s-1}2^{r-1}(2^r-1)+(n-2^{s-1}+1)(2^s-1).$$\nUsing $\\sum_{r=1}^{s-1}2^{2r-1}=\\frac23(4^{s-1}-1)$ and $\\sum_{r=1}^{s-1}2^{r-1}=2^{s-1}-1$, this simplifies to\n$$\\sum_{k=1}^n\\big(k+f(k)\\big)=(2^s-1)n-\\frac{4^s}{3}+2^s-\\frac23 .$$\nSubtracting $\\sum_{k=1}^n k=\\frac{n(n+1)}2$,\n$$\\frac{n^2}{4}-\\sum_{k=1}^n f(k)=\\frac34n^2-\\Big(2^s-\\frac32\\Big)n+\\frac{4^s}3-2^s+\\frac23=\\frac34\\,(n-\\alpha)(n-\\beta),$$\nwhere\n$$\\alpha=\\frac{2^{s+1}-2}{3},\\qquad \\beta=\\frac{2^{s+1}-4}{3}$$\n(check: $\\alpha+\\beta=\\frac43(2^s-\\frac32)$ and $\\alpha\\beta=\\frac43(\\frac{4^s}{3}-2^s+\\frac23)$).\n\nNow $\\alpha-\\beta=\\frac23$, and exactly one of $\\alpha,\\beta$ is an integer: $2^{s+1}\\equiv 2\\pmod 3$ when $s$ is even (then $\\alpha\\in\\mathbb Z$) and $2^{s+1}\\equiv1\\pmod3$ when $s$ is odd (then $\\beta\\in\\mathbb Z$). The open interval $(\\beta,\\alpha)$ has length $\\frac23<1$ and one integer endpoint, so it contains no integer. Hence for the integer $n$ the two factors $n-\\alpha,\\,n-\\beta$ are never of opposite signs, so $(n-\\alpha)(n-\\beta)\\ge0$, which proves\n$$\\sum_{k=1}^nf(k)\\le\\frac{n^2}4 .$$\n\n**Equality** holds iff $n$ equals the integer one of $\\alpha,\\beta$, and this value must have exactly $s$ binary digits:\n* $s$ even: $n=\\alpha=\\frac{2^{s+1}-2}{3}$; this lies in $[2^{s-1},2^s-1]$ for all even $s\\ge2$.\n* $s$ odd: $n=\\beta=\\frac{2^{s+1}-4}{3}$; this is $\\ge 2^{s-1}$ iff $2^{s-1}\\ge4$, i.e. $s\\ge3$ (for $s=1$ it would be $0$).\n\nIn both cases $n=2\\left\\lfloor\\frac{2^s}{3}\\right\\rfloor$, $s\\ge2$: $n=2,4,10,20,42,84,170,\\dots$, i.e. $n$ is $1010\\ldots10_{(2)}$ or $1010\\ldots100_{(2)}$ in binary. ∎"
+   },
+   {
+    "title": "Induction via $f(2k)$ and $f(2k+1)$",
+    "body": "This argument proves the inequality (the equality cases are found in the first solution). Write $S(n)=\\sum_{k=1}^nf(k)$, $S(0)=0$.\n\nAppending a digit: the binary form of $2k$ is that of $k$ followed by $0$, and of $2k+1$ is that of $k$ followed by $1$. Hence for $k\\ge1$\n$$f(2k)=2f(k)+1,\\qquad f(2k+1)=2f(k),$$\nand $f(1)=0$. Therefore, for $m\\ge0$,\n$$S(2m+1)=f(1)+\\sum_{k=1}^m\\big(f(2k)+f(2k+1)\\big)=4S(m)+m .$$\nWe prove $S(n)\\le n^2/4$ by strong induction ($S(0)=0$, $S(1)=0$ are fine).\n\n*Odd $n=2m+1$:* $S(2m+1)\\le 4\\cdot\\frac{m^2}4+m=m^2+m<\\frac{(2m+1)^2}4$.\n\n*Even $n=2m$, $m\\ge1$:* we have two expressions,\n$$S(2m)=S(2m+1)-f(2m+1)=4S(m)+m-2f(m)\\le m^2+x,$$\n$$S(2m)=S(2m-1)+f(2m)=4S(m-1)+(m-1)+2f(m)+1\\le m^2+1-x,$$\nwhere $x=m-2f(m)$ is an integer and we used $S(m)\\le\\frac{m^2}4$, $S(m-1)\\le\\frac{(m-1)^2}4$. Since $x$ is an integer, $x\\le0$ or $1-x\\le0$, so in either case $S(2m)\\le m^2=\\frac{(2m)^2}4$.\n\nThis completes the induction. ∎"
+   }
+  ],
+  "topics": [
+   "number-theory",
+   "inequalities",
+   "sequences-series"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "imc-2015-03",
+  "bank": "imc",
+  "source": {
+   "contest": "IMC",
+   "paper": "Day 1",
+   "year": 2015,
+   "number": 3,
+   "url": "https://www.imc-math.org.uk/"
+  },
+  "grade": "undergrad",
+  "points": null,
+  "timeMinutes": null,
+  "type": "text",
+  "prompt": "Let $F(0)=0$, $F(1)=\\frac32$, and $F(n)=\\frac52F(n-1)-F(n-2)$ for $n\\ge2$.\n\nDetermine whether or not $\\displaystyle\\sum_{n=0}^\\infty\\frac{1}{F(2^n)}$ is a rational number.",
+  "image": null,
+  "choices": null,
+  "answer": "Yes",
+  "acceptedAnswers": [
+   "yes",
+   "Yes, it is rational",
+   "rational",
+   "Yes, the sum is 1",
+   "1"
+  ],
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Closed form and telescoping",
+    "body": "The characteristic equation $x^2-\\frac52x+1=0$ has roots $2$ and $\\frac12$, so $F(n)=a\\,2^n+b\\,2^{-n}$. From $F(0)=0$ and $F(1)=\\frac32$: $a+b=0$, $2a+\\frac b2=\\frac32$, so $a=1$, $b=-1$:\n$$F(n)=2^n-2^{-n}.$$\nPut $x_n=2^{2^n}$, so $x_{n+1}=x_n^2$ and $F(2^n)=x_n-\\frac1{x_n}$. Then\n$$\\frac1{F(2^n)}=\\frac{x_n}{x_n^2-1}=\\frac1{x_n-1}-\\frac1{x_n^2-1}=\\frac1{x_n-1}-\\frac1{x_{n+1}-1}$$\n(indeed $\\frac1{x-1}-\\frac1{x^2-1}=\\frac{(x+1)-1}{x^2-1}$). The series telescopes; since $x_n\\to\\infty$,\n$$\\sum_{n=0}^\\infty\\frac1{F(2^n)}=\\frac1{x_0-1}=\\frac1{2-1}=1 .$$\nSo the sum equals $1$, which is rational.\n\n**Answer: Yes** (the sum is $1$). ∎"
+   },
+   {
+    "title": "Expand into a geometric double series",
+    "body": "With $F(n)=2^n-2^{-n}$ (first solution) and $q=\\frac12$,\n$$\\frac1{F(2^n)}=\\frac{q^{2^n}}{1-q^{2^{n+1}}}=\\sum_{k=0}^\\infty q^{2^n}\\,q^{2^{n+1}k}=\\sum_{k=0}^\\infty q^{2^n(2k+1)} .$$\nAll terms are positive, so we may sum in any order:\n$$\\sum_{n=0}^\\infty\\frac1{F(2^n)}=\\sum_{n\\ge0}\\sum_{k\\ge0}q^{2^n(2k+1)}=\\sum_{m=1}^\\infty q^m=1,$$\nbecause every positive integer $m$ has exactly one representation $m=2^n(2k+1)$ with $n,k\\ge0$.\n\n**Answer: Yes** (the sum is $1$). ∎"
+   }
+  ],
+  "topics": [
+   "sequences-series",
+   "algebra"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "imc-2015-04",
+  "bank": "imc",
+  "source": {
+   "contest": "IMC",
+   "paper": "Day 1",
+   "year": 2015,
+   "number": 4,
+   "url": "https://www.imc-math.org.uk/"
+  },
+  "grade": "undergrad",
+  "points": null,
+  "timeMinutes": null,
+  "type": "text",
+  "prompt": "Determine whether or not there exist 15 integers $m_1,\\dots,m_{15}$ such that\n$$\\sum_{k=1}^{15}m_k\\cdot\\arctan(k)=\\arctan(16).$$",
+  "image": null,
+  "choices": null,
+  "answer": "No",
+  "acceptedAnswers": [
+   "no",
+   "No, they do not exist",
+   "they do not exist",
+   "impossible"
+  ],
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Arguments of Gaussian integers and the prime 257",
+    "body": "**No such integers exist.** Suppose the equation holds. Since $\\arctan k=\\arg(1+ki)$, it says that\n$$\\sum_{k=1}^{15}m_k\\arg(1+ki)=\\arg(1+16i).$$\nSplit the indices: let $P=\\prod_{m_k>0}(1+ki)^{m_k}$ and $Q=\\prod_{m_k<0}(1+ki)^{-m_k}$; these are Gaussian integers (empty products are $1$). Then $\\arg P-\\arg Q\\equiv\\arg(1+16i)\\pmod{2\\pi}$, so $\\arg P=\\arg\\big((1+16i)Q\\big)\\pmod{2\\pi}$ and\n$$P=R\\,(1+16i)\\,Q\\qquad\\text{for some real }R>0 .$$\nHere $R=P/\\big((1+16i)Q\\big)$ lies in $\\mathbb Q(i)$ and is real, so $R\\in\\mathbb Q$. Taking squared absolute values,\n$$\\prod_{m_k>0}(1+k^2)^{m_k}=|P|^2=R^2\\cdot 257\\cdot|Q|^2=R^2\\cdot257\\cdot\\prod_{m_k<0}(1+k^2)^{-m_k}.$$\nNow $257=1+16^2$ is prime, and every factor $1+k^2$ with $k\\le15$ is at most $226<257$, so $257$ does not divide $|P|^2$ or $|Q|^2$. Comparing the exponent of the prime $257$ on both sides (for the rational number $R$ it is $2v_{257}(R)$, an even integer):\n$$0=2v_{257}(R)+1+0,$$\nwhich is impossible since the right side is odd.\n\n**Answer: No.** ∎"
+   },
+   {
+    "title": "Unique factorisation in $\\mathbb Z[i]$",
+    "body": "As in the first solution, a solution would give Gaussian integers $P,Q$ (products of factors $1+ki$, $1\\le k\\le15$) and coprime positive integers $u,v$ with\n$$v\\,P=u\\,(1+16i)\\,Q .$$\nThe element $\\pi=1+16i$ has prime norm $257$, so it is a Gaussian prime, and so is $\\bar\\pi=1-16i$; they are not associates (the associates of $\\pi$ are $\\pm\\pi,\\pm i\\pi=\\pm(i-16)$), and $257=\\pi\\bar\\pi$. No factor $1+ki$ with $k\\le15$ is divisible by $\\pi$ or $\\bar\\pi$, since its norm $1+k^2<257$ is not divisible by $257$. So $\\pi,\\bar\\pi\\nmid P,Q$.\n\nFor an ordinary integer $t$, the exponent of $\\pi$ in $t$ equals the exponent of $\\bar\\pi$ in $t$, both equal to $v_{257}(t)$. Compare exponents in $vP=u\\pi Q$:\n* exponent of $\\pi$: $v_{257}(v)=v_{257}(u)+1$;\n* exponent of $\\bar\\pi$: $v_{257}(v)=v_{257}(u)$.\n\nThese contradict each other. **Answer: No.** ∎"
+   }
+  ],
+  "topics": [
+   "number-theory",
+   "complex-numbers",
+   "trigonometry"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "imc-2015-05",
+  "bank": "imc",
+  "source": {
+   "contest": "IMC",
+   "paper": "Day 1",
+   "year": 2015,
+   "number": 5,
+   "url": "https://www.imc-math.org.uk/"
+  },
+  "grade": "undergrad",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Let $n\\ge2$, let $A_1,A_2,\\dots,A_{n+1}$ be $n+1$ points in the $n$-dimensional Euclidean space, not lying on the same hyperplane, and let $B$ be a point strictly inside the convex hull of $A_1,A_2,\\dots,A_{n+1}$. Prove that $\\angle A_iBA_j>90^\\circ$ holds for at least $n$ pairs $(i,j)$ with $1\\le i<j\\le n+1$.",
+  "image": null,
+  "choices": null,
+  "answer": "With $v_i=\\overrightarrow{BA_i}$ and $\\sum w_iv_i=0$ ($w_i>0$), the graph joining $i,j$ when $v_i\\cdot v_j<0$ is connected: otherwise splitting $\\sum w_iv_i$ into two non-zero parts with non-negative mutual dot product gives $0=|a+b|^2>0$. A connected graph on $n+1$ vertices has $\\ge n$ edges.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "A connected obtuse-angle graph",
+    "body": "Let $v_i=\\overrightarrow{BA_i}$ ($v_i\\ne0$ because $B$ is interior). Then $\\angle A_iBA_j>90^\\circ\\iff v_i\\cdot v_j<0$.\n\n**Facts about the $v_i$.** Since $B$ is strictly inside the simplex, its barycentric coordinates are positive: $B=\\sum w_iA_i$ with all $w_i>0$, $\\sum w_i=1$, i.e.\n$$\\sum_{i=1}^{n+1}w_iv_i=0 .$$\nThe points are not on a hyperplane, so the vectors $A_i-A_{n+1}=v_i-v_{n+1}$ ($i\\le n$) span $\\mathbb R^n$; hence $v_1,\\dots,v_{n+1}$ span $\\mathbb R^n$ and the space of linear relations $\\{c:\\sum c_iv_i=0\\}$ has dimension $(n+1)-n=1$. So every linear relation is a multiple of $(w_1,\\dots,w_{n+1})$, all of whose entries are non-zero. Consequently, for every non-empty proper subset $V\\subset\\{1,\\dots,n+1\\}$,\n$$\\sum_{i\\in V}w_iv_i\\ne0$$\n(otherwise this would be a non-zero relation with zero coefficients outside $V$).\n\n**The graph.** Build a graph $G$ on vertices $1,\\dots,n+1$, joining $i$ and $j$ when $v_i\\cdot v_j<0$. We claim $G$ is connected. If not, split the vertices into non-empty sets $V,W$ with no edges between them, i.e. $v_i\\cdot v_j\\ge0$ for $i\\in V$, $j\\in W$. Let $a=\\sum_{i\\in V}w_iv_i$, $b=\\sum_{j\\in W}w_jv_j$; both are non-zero by the fact above, and $a+b=0$. But\n$$0=|a+b|^2=|a|^2+|b|^2+2\\sum_{i\\in V}\\sum_{j\\in W}w_iw_j\\,(v_i\\cdot v_j)\\ge|a|^2+|b|^2>0,$$\na contradiction. So $G$ is connected.\n\nA connected graph on $n+1$ vertices has at least $n$ edges (e.g. it contains a spanning tree). Each edge is a pair $i<j$ with $\\angle A_iBA_j>90^\\circ$, which proves the claim.\n\n*Remark.* The bound is sharp: $v_{n+1}=(1,\\dots,1)$ and $v_i=-e_i$ ($i\\le n$) give obtuse angles only for the $n$ pairs containing $n+1$. ∎"
+   }
+  ],
+  "topics": [
+   "geometry",
+   "linear-algebra",
+   "graph-theory"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "imc-2015-06",
+  "bank": "imc",
+  "source": {
+   "contest": "IMC",
+   "paper": "Day 2",
+   "year": 2015,
+   "number": 6,
+   "url": "https://www.imc-math.org.uk/"
+  },
+  "grade": "undergrad",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Prove that\n$$\\sum_{n=1}^\\infty\\frac{1}{\\sqrt n\\,(n+1)}<2.$$",
+  "image": null,
+  "choices": null,
+  "answer": "Telescoping: $\\dfrac1{\\sqrt n(n+1)}<\\dfrac2{\\sqrt n}-\\dfrac2{\\sqrt{n+1}}$ (equivalent to $2\\sqrt{n(n+1)}<2n+1$, AM-GM), and the right side sums to $2$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Telescoping bound",
+    "body": "We claim that for every $n\\ge1$\n$$\\frac1{\\sqrt n\\,(n+1)}<\\frac2{\\sqrt n}-\\frac2{\\sqrt{n+1}} .\\tag{1}$$\nMultiplying by $\\sqrt n\\,(n+1)>0$, (1) is equivalent to\n$$1<2(n+1)-2\\sqrt{n(n+1)}\\iff 2\\sqrt{n(n+1)}<n+(n+1),$$\nwhich is the strict AM-GM inequality for the distinct numbers $n$ and $n+1$.\n\nSumming (1) over $n=1,\\dots,N$, the right side telescopes:\n$$\\sum_{n=1}^N\\frac1{\\sqrt n\\,(n+1)}<2-\\frac2{\\sqrt{N+1}}<2 .$$\nMoreover the first term already satisfies (1) with a fixed gap $\\delta=2-\\frac2{\\sqrt2}-\\frac12>0$, so letting $N\\to\\infty$ the infinite sum is at most $2-\\delta<2$. ∎"
+   },
+   {
+    "title": "Compare with an integral",
+    "body": "Let $g(x)=\\dfrac1{\\sqrt x\\,(x+1)}$, which is strictly decreasing on $(0,\\infty)$. For $n\\ge3$, $g(n)<\\int_{n-1}^n g(x)\\,dx$, so\n$$\\sum_{n=3}^\\infty g(n)<\\int_2^\\infty\\frac{dx}{\\sqrt x(x+1)}=\\Big[2\\arctan\\sqrt x\\Big]_2^\\infty=\\pi-2\\arctan\\sqrt2=2\\arctan\\frac1{\\sqrt2}.$$\nFor $0\\le t\\le1$ the alternating series $\\arctan t=t-\\frac{t^3}3+\\frac{t^5}5-\\dots$ has decreasing terms, so $\\arctan t\\le t-\\frac{t^3}{3}+\\frac{t^5}{5}$. With $t=\\frac1{\\sqrt2}\\approx0.70711$: $\\arctan\\frac1{\\sqrt2}<0.70711-0.11785+0.03536=0.62462$. Hence\n$$\\sum_{n=1}^\\infty g(n)<\\frac12+\\frac1{3\\sqrt2}+2(0.62462)<0.5+0.2358+1.2493=1.9851<2 .$$ ∎"
+   }
+  ],
+  "topics": [
+   "sequences-series",
+   "inequalities",
+   "real-analysis"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "imc-2015-07",
+  "bank": "imc",
+  "source": {
+   "contest": "IMC",
+   "paper": "Day 2",
+   "year": 2015,
+   "number": 7,
+   "url": "https://www.imc-math.org.uk/"
+  },
+  "grade": "undergrad",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Compute\n$$\\lim_{A\\to+\\infty}\\frac1A\\int_1^A A^{\\frac1x}\\,dx .$$",
+  "image": null,
+  "choices": null,
+  "answer": "1",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Squeeze by splitting the interval",
+    "body": "**Lower bound.** For $A>1$ and $x\\in[1,A]$ we have $A^{1/x}>1$, so $\\frac1A\\int_1^AA^{1/x}dx>\\frac{A-1}{A}\\to1$.\n\n**Upper bound.** Fix $\\delta>0$ and $K>0$. For $A$ large enough we have $1+\\delta<K\\ln A<A$. The integrand is decreasing in $x$, so on each piece we bound it by its value at the left end:\n$$\\frac1A\\int_1^AA^{1/x}dx\\le\\frac1A\\Big(\\delta\\cdot A+K\\ln A\\cdot A^{\\frac1{1+\\delta}}+A\\cdot A^{\\frac1{K\\ln A}}\\Big)=\\delta+K\\ln A\\cdot A^{-\\frac{\\delta}{1+\\delta}}+e^{1/K}.$$\nThe middle term tends to $0$ as $A\\to\\infty$. Hence\n$$1\\le\\liminf_{A\\to\\infty}\\frac1A\\int_1^AA^{1/x}dx\\le\\limsup_{A\\to\\infty}\\frac1A\\int_1^AA^{1/x}dx\\le\\delta+e^{1/K}.$$\nLetting $\\delta\\to0^+$ and $K\\to\\infty$, the $\\limsup$ is at most $1$, so the limit exists and equals $1$.\n\n**Answer: $1$.** ∎"
+   },
+   {
+    "title": "Substitute $y=\\ln A/x$",
+    "body": "Let $L=\\ln A$ and assume $A>e^2$ (so $L>2$). Substituting $x=L/y$, $dx=-L\\,y^{-2}dy$:\n$$\\frac1A\\int_1^AA^{1/x}dx=\\frac1A\\int_1^Ae^{L/x}dx=\\frac LA\\int_{L/A}^{L}\\frac{e^y}{y^2}\\,dy .$$\nWrite $e^y=1+(e^y-1)$.\n* $\\displaystyle\\int_{L/A}^L\\frac{dy}{y^2}=\\frac AL-\\frac1L$, contributing $\\frac LA\\left(\\frac AL-\\frac1L\\right)=1-\\frac1A$.\n* On $[0,1]$, by convexity $e^y-1\\le(e-1)y$, so $\\displaystyle\\int_{L/A}^1\\frac{e^y-1}{y^2}dy\\le(e-1)\\ln\\frac AL$.\n* $\\displaystyle\\int_1^L\\frac{e^y-1}{y^2}dy\\le\\int_1^{L/2}e^ydy+\\frac4{L^2}\\int_{L/2}^Le^ydy\\le e^{L/2}+\\frac{4e^L}{L^2}=\\sqrt A+\\frac{4A}{L^2}.$\n\nAll contributions are non-negative, so\n$$1-\\frac1A\\le\\frac1A\\int_1^AA^{1/x}dx\\le1-\\frac1A+\\frac{(e-1)L\\ln(A/L)}{A}+\\frac{L}{\\sqrt A}+\\frac4L .$$\nAs $A\\to\\infty$ (so $L=\\ln A\\to\\infty$) every extra term tends to $0$, and the limit is $1$.\n\n**Answer: $1$.** ∎"
+   }
+  ],
+  "topics": [
+   "calculus",
+   "real-analysis"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "imc-2015-08",
+  "bank": "imc",
+  "source": {
+   "contest": "IMC",
+   "paper": "Day 2",
+   "year": 2015,
+   "number": 8,
+   "url": "https://www.imc-math.org.uk/"
+  },
+  "grade": "undergrad",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Consider all $26^{26}$ words of length 26 in the Latin alphabet. Define the *weight* of a word as $1/(k+1)$, where $k$ is the number of letters not used in this word. Prove that the sum of the weights of all words is $3^{75}$.",
+  "image": null,
+  "choices": null,
+  "answer": "With $n=26$, $3^{75}=27^{25}=(n+1)^{n-1}$. Add a 27th letter: each of the $27^{26}$ words over 27 letters has $m\\ge1$ unused letters; giving each unused letter weight $1/m$ and using symmetry, the words avoiding the new letter carry total $27^{26}/27$, and for them $m=k+1$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Add a 27th letter (symmetry)",
+    "body": "Let $n=26$; note $3^{75}=27^{25}=(n+1)^{n-1}$.\n\nConsider the alphabet $\\Sigma'$ of $n+1=27$ letters (the 26 Latin letters plus a new letter $\\star$) and all $(n+1)^n$ words $u$ of length $n$ over $\\Sigma'$. Such a word uses at most $n$ letters, so the number $m(u)$ of letters of $\\Sigma'$ not used in $u$ is at least $1$. Hence\n$$\\sum_{u}\\ \\sum_{c\\in\\Sigma'\\text{ unused in }u}\\frac1{m(u)}=\\sum_u 1=(n+1)^n .$$\nExchanging the sums, the left side is $\\sum_{c\\in\\Sigma'}T(c)$ with\n$$T(c)=\\sum_{u:\\ c\\text{ unused in }u}\\frac1{m(u)} .$$\nA permutation of $\\Sigma'$ taking $c$ to $c'$ acts bijectively on words and preserves $m(u)$, so $T(c)$ does not depend on $c$. Therefore $T(\\star)=\\frac{(n+1)^n}{n+1}=(n+1)^{n-1}$.\n\nThe words not using $\\star$ are exactly the $26^{26}$ Latin words, and for such a word with $k$ unused Latin letters, $m(u)=k+1$. So $T(\\star)$ is exactly the sum of the weights:\n$$\\sum_{\\text{words}}\\frac1{k+1}=(n+1)^{n-1}=27^{25}=3^{75}.$$ ∎"
+   },
+   {
+    "title": "Inclusion–exclusion and finite differences",
+    "body": "Let $n=26$. For a word $W$ let $U(W)$ be its set of unused letters, $|U(W)|=k$.\n\n**Step 1: a weight formula.** For every $k\\ge0$,\n$$\\sum_{j=0}^k\\binom kj\\frac{(-1)^j}{j+1}=\\int_0^1(1-t)^k\\,dt=\\frac1{k+1}.$$\nSo the weight of $W$ is $\\sum_{J\\subseteq U(W)}\\frac{(-1)^{|J|}}{|J|+1}$. Summing over $W$ and swapping sums (for a fixed $j$-set $J$ of letters there are $(n-j)^n$ words avoiding $J$):\n$$\\sum_W\\frac1{k+1}=\\sum_{j=0}^n\\binom nj\\frac{(-1)^j}{j+1}(n-j)^n .\\tag{1}$$\n\n**Step 2: evaluate (1).** For a polynomial $g$ of degree $<N$, the $N$-th finite difference vanishes: $\\sum_{i=0}^N(-1)^i\\binom Ni g(i)=0$ (the difference operator $\\Delta g(x)=g(x+1)-g(x)$ lowers the degree by one, and $\\sum(-1)^i\\binom Nig(i)=(-1)^N(\\Delta^Ng)(0)$). Apply this with $N=n+1$ and $g(i)=(n+1-i)^n$:\n$$(n+1)^n=\\sum_{i=1}^{n+1}(-1)^{i-1}\\binom{n+1}{i}(n+1-i)^n=\\sum_{j=0}^{n}(-1)^j\\binom{n+1}{j+1}(n-j)^n .$$\nSince $\\binom{n+1}{j+1}=\\frac{n+1}{j+1}\\binom nj$, dividing by $n+1$ shows that the right side of (1) equals $(n+1)^{n-1}=27^{25}=3^{75}$. ∎"
+   }
+  ],
+  "topics": [
+   "counting",
+   "algebra"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "imc-2015-09",
+  "bank": "imc",
+  "source": {
+   "contest": "IMC",
+   "paper": "Day 2",
+   "year": 2015,
+   "number": 9,
+   "url": "https://www.imc-math.org.uk/"
+  },
+  "grade": "undergrad",
+  "points": null,
+  "timeMinutes": null,
+  "type": "text",
+  "prompt": "An $n\\times n$ complex matrix $A$ is called *t-normal* if $AA^t=A^tA$ where $A^t$ is the transpose of $A$. For each $n$, determine the maximum dimension of a linear space of complex $n\\times n$ matrices consisting of t-normal matrices.",
+  "image": null,
+  "choices": null,
+  "answer": "n(n+1)/2",
+  "acceptedAnswers": [
+   "n*(n+1)/2",
+   "(n^2+n)/2",
+   "n(n+1)/2",
+   "binom(n+1,2)",
+   "C(n+1,2)",
+   "(n+1)n/2",
+   "n^2/2+n/2"
+  ],
+  "answerUnit": null,
+  "answerDisplay": "$\\frac{n(n+1)}{2}$",
+  "solutions": [
+   {
+    "title": "Symmetric part vs. antisymmetric kernel",
+    "body": "**Answer: $\\frac{n(n+1)}2$.** The symmetric matrices form such a space ($AA^t=A^2=A^tA$) of dimension $\\frac{n(n+1)}2$. We show no space $V$ of t-normal matrices is larger.\n\nLet $S_n$ and $\\mathcal A_n$ be the spaces of symmetric and antisymmetric complex matrices, and $\\pi:V\\to S_n$, $\\pi(B)=B+B^t$. Then $\\dim V=\\dim\\ker\\pi+\\dim\\operatorname{im}\\pi$, and $\\ker\\pi\\subseteq\\mathcal A_n$.\n\n**Claim 1: $\\ker\\pi$ commutes with $\\operatorname{im}\\pi$.** Let $K\\in\\ker\\pi$ (so $K^t=-K$) and $B\\in V$. Since $K,B,K+B\\in V$ are t-normal, expanding $(K+B)(K+B)^t=(K+B)^t(K+B)$ and cancelling $KK^t=K^tK$, $BB^t=B^tB$ gives\n$$KB^t+BK^t=K^tB+B^tK\\iff KB^t-BK=-KB+B^tK\\iff K(B+B^t)=(B+B^t)K .$$\n\n**Claim 2 (Lemma).** If $X\\subseteq S_n$, $Y\\subseteq\\mathcal A_n$ are subspaces with $xy=yx$ for all $x\\in X,y\\in Y$, then $\\dim X+\\dim Y\\le\\dim S_n$.\n\n*Proof.* Let $d=\\operatorname{diag}(1,2,\\dots,n)$ and for $y\\in\\mathcal A_n$ define the linear functional $\\varphi_y(x)=\\operatorname{tr}\\big(d\\,[x,y]\\big)$ on $S_n$, where $[x,y]=xy-yx$. If $y\\in Y$ then $\\varphi_y$ vanishes on $X$. The map $y\\mapsto\\varphi_y$ is linear and **injective**: by $\\operatorname{tr}(dyx)=\\operatorname{tr}(xdy)$,\n$$\\varphi_y(x)=\\operatorname{tr}(dxy)-\\operatorname{tr}(xdy)=\\operatorname{tr}\\big([d,x]\\,y\\big).$$\nWith $E_{ij}$ the matrix unit, $[d,E_{ij}]=(i-j)E_{ij}$, so $[d,E_{ij}+E_{ji}]=(i-j)(E_{ij}-E_{ji})$; thus $\\{[d,x]:x\\in S_n\\}$ contains a basis of $\\mathcal A_n$, hence equals $\\mathcal A_n$. If $\\varphi_y=0$, then $\\operatorname{tr}(zy)=0$ for all $z\\in\\mathcal A_n$; take $z=\\bar y\\in\\mathcal A_n$ (entrywise conjugate): $0=\\operatorname{tr}(\\bar yy)=\\sum_{i,j}\\bar y_{ij}y_{ji}=-\\sum_{i,j}|y_{ij}|^2$, so $y=0$.\n\nSo $\\{\\varphi_y:y\\in Y\\}$ is a $\\dim Y$-dimensional space of functionals vanishing on $X$; the annihilator of $X$ in $S_n^*$ has dimension $\\dim S_n-\\dim X$, hence $\\dim Y\\le\\dim S_n-\\dim X$. $\\square$\n\nApplying the Lemma with $X=\\operatorname{im}\\pi$, $Y=\\ker\\pi$:\n$$\\dim V=\\dim\\ker\\pi+\\dim\\operatorname{im}\\pi\\le\\dim S_n=\\frac{n(n+1)}2 .$$\n**Answer: $\\dfrac{n(n+1)}{2}$.** ∎"
+   }
+  ],
+  "topics": [
+   "linear-algebra"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "imc-2015-10",
+  "bank": "imc",
+  "source": {
+   "contest": "IMC",
+   "paper": "Day 2",
+   "year": 2015,
+   "number": 10,
+   "url": "https://www.imc-math.org.uk/"
+  },
+  "grade": "undergrad",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Let $n$ be a positive integer, and let $p(x)$ be a polynomial of degree $n$ with integer coefficients. Prove that\n$$\\max_{0\\le x\\le1}\\big|p(x)\\big|>\\frac1{e^n}.$$",
+  "image": null,
+  "choices": null,
+  "answer": "$J_k=\\int_0^1p^{2k}$ is a positive rational with denominator dividing $\\operatorname{lcm}(1,\\dots,2kn+1)=e^{(1+o(1))(2kn+1)}$ (prime number theorem), so $M^{2k}\\ge J_k\\ge e^{-(1+o(1))(2kn+1)}$, giving $M\\ge e^{-n}$; equality is impossible since $M$ is algebraic and $e$ is transcendental.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Integrals of even powers and the prime number theorem",
+    "body": "Let $M=\\max_{0\\le x\\le1}|p(x)|$; $M>0$ since $p\\ne0$. For $k\\ge1$ let\n$$J_k=\\int_0^1p(x)^{2k}\\,dx .$$\nThe integrand is continuous, non-negative and not identically zero, so $0<J_k\\le M^{2k}$.\n\n**$J_k$ is not too small.** Write $p(x)^{2k}=\\sum_{i=0}^{2kn}a_ix^i$ with integers $a_i$. Then $J_k=\\sum_i\\frac{a_i}{i+1}$, so $L_N\\cdot J_k$ is an integer, where $N=2kn+1$ and $L_N=\\operatorname{lcm}(1,2,\\dots,N)$. Being a positive integer it is $\\ge1$:\n$$M^{2k}\\ge J_k\\ge\\frac1{L_N}.$$\n\n**Size of $L_N$.** $\\ln L_N=\\sum_{p^a\\le N}\\ln p=\\psi(N)$ (Chebyshev's function), and the prime number theorem is equivalent to $\\psi(N)\\sim N$. So for any $\\varepsilon>0$ and all large $N$, $L_N<e^{(1+\\varepsilon)N}$. Hence, for all large $k$,\n$$M^{2k}>e^{-(1+\\varepsilon)(2kn+1)},\\qquad M>e^{-(1+\\varepsilon)\\left(n+\\frac1{2k}\\right)} .$$\nLetting $k\\to\\infty$ and then $\\varepsilon\\to0^+$ gives $M\\ge e^{-n}$.\n\n**Strict inequality.** The maximum of $|p|$ on $[0,1]$ is attained at $0$, at $1$, or at an interior critical point, i.e. a root of $p'$. In every case it is attained at an algebraic number $x_0$, so $M=\\pm p(x_0)$ is algebraic. If $M=e^{-n}$, then $e^n=1/M$ would be algebraic, and then $e$ (a root of $x^n-e^n$) would be algebraic, contradicting Hermite's theorem that $e$ is transcendental. Therefore\n$$\\max_{0\\le x\\le1}|p(x)|>e^{-n}.$$\n\n*Remark.* The constant $1/e$ is not optimal; the best constant is known to lie between about $0.4213$ and $0.4232$. ∎"
+   }
+  ],
+  "topics": [
+   "polynomials",
+   "number-theory",
+   "real-analysis"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ }
+]

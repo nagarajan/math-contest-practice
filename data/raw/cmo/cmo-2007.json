@@ -1,0 +1,182 @@
+[
+  {
+    "id": "cmo-cmo-2007-01",
+    "bank": "cmo",
+    "source": {
+      "contest": "CMO",
+      "paper": "CMO 2007",
+      "year": 2007,
+      "number": 1,
+      "url": "https://cms.math.ca/competitions/cmo/"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "What is the maximum number of non-overlapping $2 \\times 1$ dominoes that can be placed on a $8 \\times 9$ checkerboard if six of them are placed as shown? Each domino must be placed horizontally or vertically so as to cover two adjacent squares of the board.",
+    "image": "qimages/cmo/cmo-2007/q01.webp",
+    "choices": null,
+    "answer": "34",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Two regions and a colouring",
+        "body": "Label squares by (row, column), rows $1$–$8$ from the top and columns $1$–$9$ from the left. The six dominoes occupy, in rows $r = 2, \\ldots, 7$, the squares $(r, 9-r)$ and $(r, 10-r)$: a staircase from the upper right to the lower left. It splits the remaining $60$ squares into\n- $B$: the upper-right corner $(1, 9)$, and $D$: the lower-left corner $(8, 1)$;\n- $A$: the $29$ squares above/left of the staircase (row $1$, columns $1$–$8$; and row $r$, columns $1$ to $8 - r$, for $r = 2, \\ldots, 7$);\n- $E$: the $29$ squares below/right of it (row $8$, columns $2$–$9$; and row $r$, columns $11 - r$ to $9$, for $r = 2, \\ldots, 7$).\n\nNo square of $A$ is adjacent to a square of $E$ (they are separated by the staircase and the corners), and $B$, $D$ are not adjacent to each other. So every additional domino lies inside $A \\cup B \\cup D$ or inside $E \\cup B \\cup D$.\n\nColour the board like a checkerboard, calling $(r, c)$ *dark* when $r + c$ is even. Then $A$ has $16$ dark and $13$ light squares, $E$ has $13$ dark and $16$ light, $B = (1,9)$ is dark and $D = (8,1)$ is light. A domino covers one dark and one light square, so:\n- dominoes inside $A\\cup B\\cup D$ (which has $17$ dark and $14$ light squares): at most $14$;\n- dominoes inside $E\\cup B\\cup D$ ($14$ dark, $17$ light): at most $14$.\n\nSo at most $14 + 14 = 28$ dominoes can be added, $34$ in total.\n\n**Construction.** In $A \\cup D$ place: vertical dominoes in column $1$ on rows $1$–$2$, $3$–$4$, $5$–$6$, $7$–$8$; in row $1$ horizontal dominoes on columns $2$–$3$, $4$–$5$, $7$–$8$ and a vertical domino on $(1,6)$–$(2,6)$; in row $2$ on columns $2$–$3$, $4$–$5$; in row $3$ on columns $2$–$3$, $4$–$5$; in row $4$ on columns $2$–$3$; in row $5$ on columns $2$–$3$. That is $4 + 4 + 2 + 2 + 1 + 1 = 14$ dominoes (only $(4,4)$ and $(6,2)$ stay empty). The figure is symmetric under a half-turn about the centre of the board, which swaps $A \\cup D$ with $E \\cup B$; rotating these $14$ dominoes gives $14$ more in $E\\cup B$.\n\n**Answer: $34$**"
+      },
+      {
+        "title": "Computer check: maximum matching",
+        "body": "The question is equivalent to finding a maximum matching in the grid graph of the $60$ free squares (two squares adjacent if they share an edge). A bipartite matching computation (dark squares versus light squares, augmenting paths) finds a maximum matching of size $28$, so the maximum is $6 + 28 = 34$, agreeing with the colouring bound above.\n\n**Answer: $34$**"
+      }
+    ],
+    "topics": [
+      "counting",
+      "logic"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "cmo-cmo-2007-02",
+    "bank": "cmo",
+    "source": {
+      "contest": "CMO",
+      "paper": "CMO 2007",
+      "year": 2007,
+      "number": 2,
+      "url": "https://cms.math.ca/competitions/cmo/"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "You are given a pair of triangles for which\n\n(a) two sides of one triangle are equal in length to two sides of the second triangle, and\n\n(b) the triangles are similar, but not necessarily congruent.\n\nProve that the ratio of the sides that correspond under the similarity is a number between $\\frac12(\\sqrt5 - 1)$ and $\\frac12(\\sqrt5 + 1)$.",
+    "image": null,
+    "choices": null,
+    "answer": "If the ratio is $k > 1$ and the sides are $x_1 \\le x_2 \\le x_3$ and $kx_1 \\le kx_2 \\le kx_3$, the shared lengths must be $x_2 = kx_1$, $x_3 = kx_2$, so the sides are $x, kx, k^2x$ and the triangle inequality gives $k^2 < k + 1$, i.e. $k < \\frac{1+\\sqrt5}{2}$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Sides in geometric progression",
+        "body": "(The printed statement says \"between $\\frac12(\\sqrt5-1)$ and $\\frac12(\\sqrt5-1)$\"; the second bound is a misprint for $\\frac12(\\sqrt5+1)$, which is what we prove.)\n\nLet the ratio of corresponding sides (second triangle to first) be $k$. If $k = 1$ there is nothing to prove, since $\\frac{\\sqrt5-1}{2} < 1 < \\frac{\\sqrt5+1}{2}$. Swapping the triangles replaces $k$ by $\\frac1k$, and the interval $\\left(\\frac{\\sqrt5-1}{2}, \\frac{\\sqrt5+1}{2}\\right)$ is closed under $k \\mapsto \\frac1k$ (as $\\frac{\\sqrt5-1}{2}\\cdot\\frac{\\sqrt5+1}{2} = 1$). So assume $k > 1$.\n\nLet the first triangle have sides $x_1 \\le x_2 \\le x_3$; the second then has sides $kx_1 \\le kx_2 \\le kx_3$. Two sides of the first are matched with two sides of the second of equal lengths.\n- A matched side of the first triangle has length equal to some $kx_j \\ge kx_1 > x_1$, so it is not a side of length $x_1$.\n- A matched side of the second triangle has length equal to some $x_i \\le x_3 < kx_3$, so it is not a side of length $kx_3$.\n\nHence the matched sides of the first triangle are those of lengths $x_2, x_3$ (and $x_2 > x_1$), and the matched sides of the second are those of lengths $kx_1, kx_2$. Equal multisets of two numbers, each listed in increasing order, are equal termwise:\n$$x_2 = kx_1, \\qquad x_3 = kx_2 = k^2x_1.$$\nThe triangle inequality $x_3 < x_1 + x_2$ gives $k^2 < 1 + k$, i.e. $k^2 - k - 1 < 0$, so (as $k > 0$) $k < \\frac{1+\\sqrt5}{2}$. Thus $1 < k < \\frac{1+\\sqrt5}{2}$, and in general the ratio lies strictly between $\\frac{\\sqrt5 - 1}{2}$ and $\\frac{\\sqrt5 + 1}{2}$. ∎\n\n(Conversely, every $k$ in this range occurs: the triangles with sides $1, k, k^2$ and $k, k^2, k^3$.)"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "inequalities"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "cmo-cmo-2007-03",
+    "bank": "cmo",
+    "source": {
+      "contest": "CMO",
+      "paper": "CMO 2007",
+      "year": 2007,
+      "number": 3,
+      "url": "https://cms.math.ca/competitions/cmo/"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Suppose that $f$ is a real-valued function for which\n$$f(xy) + f(y - x) \\ge f(y + x)$$\nfor all real numbers $x$ and $y$.\n\n(a) Give a nonconstant polynomial that satisfies the condition.\n\n(b) Prove that $f(x) \\ge 0$ for all real $x$.",
+    "image": null,
+    "choices": null,
+    "answer": "(a) $f(x) = x^2 + 4$ works, since the difference is $(xy - 2)^2 \\ge 0$. (b) Choose $x, y$ with $xy = x + y$, e.g. $x = 1 + \\frac1t$, $y = 1 + t$; then $f(t - \\frac1t) \\ge 0$, and $t - \\frac1t$ takes every real value.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Make xy equal to x + y",
+        "body": "**(a)** Take $f(x) = x^2 + 4$. Then\n$$f(xy) + f(y-x) - f(y+x) = x^2y^2 + 4 + (y-x)^2 + 4 - (y+x)^2 - 4 = x^2y^2 - 4xy + 4 = (xy - 2)^2 \\ge 0.$$\n(More generally $x^2 + c$ works for every $c \\ge 4$.)\n\n**(b)** If $xy = x + y$, the condition reads $f(x+y) + f(y-x) \\ge f(x+y)$, i.e. $f(y - x) \\ge 0$. The equation $xy = x + y$ is $(x-1)(y-1) = 1$, solved by $x = 1 + \\frac1t$, $y = 1 + t$ for any $t \\ne 0$; then $y - x = t - \\frac1t$. So\n$$f\\!\\left(t - \\tfrac1t\\right) \\ge 0 \\quad\\text{for all } t \\ne 0.$$\nGiven any real $u$, the equation $t - \\frac1t = u$, i.e. $t^2 - ut - 1 = 0$, has discriminant $u^2 + 4 > 0$ and its roots have product $-1$, so it has a real root $t \\ne 0$. Hence $f(u) \\ge 0$ for every real $u$. ∎"
+      },
+      {
+        "title": "Change of variables",
+        "body": "**(a)** As in the first solution, $f(x) = x^2 + 4$.\n\n**(b)** Substitute $u = y + x$, $v = y - x$, so $x = \\frac{u - v}{2}$, $y = \\frac{u+v}{2}$ and $xy = \\frac{u^2 - v^2}{4}$. The condition becomes\n$$f\\!\\left(\\frac{u^2 - v^2}{4}\\right) + f(v) \\ge f(u) \\qquad \\text{for all real } u, v.$$\nGiven $v$, choose $u$ with $\\frac{u^2 - v^2}{4} = u$, i.e. $u^2 - 4u - v^2 = 0$; for instance $u = 2 + \\sqrt{v^2 + 4}$. Then the inequality becomes $f(u) + f(v) \\ge f(u)$, so $f(v) \\ge 0$. Since $v$ was arbitrary, $f \\ge 0$ everywhere. ∎"
+      }
+    ],
+    "topics": [
+      "functional-equations",
+      "inequalities"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "cmo-cmo-2007-04",
+    "bank": "cmo",
+    "source": {
+      "contest": "CMO",
+      "paper": "CMO 2007",
+      "year": 2007,
+      "number": 4,
+      "url": "https://cms.math.ca/competitions/cmo/"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "For two real numbers $a$, $b$, with $ab \\ne 1$, define the $*$ operation by\n$$a * b = \\frac{a + b - 2ab}{1 - ab}.$$\nStart with a list of $n \\ge 2$ real numbers whose entries $x$ all satisfy $0 < x < 1$. Select any two numbers $a$ and $b$ in the list; remove them and put the number $a * b$ at the end of the list, thereby reducing its length by one. Repeat this procedure until a single number remains.\n\n(a) Prove that this single number is the same regardless of the choice of pair at each stage.\n\n(b) Suppose that the condition on the numbers $x$ in $S$ is weakened to $0 < x \\le 1$. What happens if $S$ contains exactly one $1$?",
+    "image": null,
+    "choices": null,
+    "answer": "(a) With $\\varphi(x) = \\frac{x}{1-x}$ one has $\\varphi(a*b) = \\varphi(a) + \\varphi(b)$, so the final number is $\\varphi^{-1}\\big(\\sum\\varphi(x_i)\\big)$, i.e. $\\frac{\\Sigma}{1+\\Sigma}$ with $\\Sigma = \\sum \\frac{x_i}{1-x_i}$. (b) The final number is always $1$, since $a * 1 = 1$ for $a \\ne 1$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "An additive invariant",
+        "body": "**(a)** *The operation stays inside $(0,1)$.* If $0 < a, b < 1$ then $ab < 1$ (so $a * b$ is defined), and\n$$a + b - 2ab = a(1-b) + b(1-a) > 0, \\qquad 1 - (a*b) = \\frac{1 - ab - a - b + 2ab}{1-ab} = \\frac{(1-a)(1-b)}{1-ab} > 0,$$\nso $0 < a * b < 1$. Hence every list that occurs has all entries in $(0, 1)$ and the procedure can always be carried out.\n\n*The invariant.* Let $\\varphi(x) = \\frac{x}{1 - x}$, a bijection from $(0, 1)$ onto $(0, \\infty)$ with inverse $\\varphi^{-1}(y) = \\frac{y}{1+y}$. For $a, b \\in (0,1)$, using the two formulas above,\n$$\\varphi(a * b) = \\frac{a * b}{1 - a*b} = \\frac{a + b - 2ab}{(1-a)(1-b)} = \\frac{a(1-b) + b(1-a)}{(1-a)(1-b)} = \\frac{a}{1-a} + \\frac{b}{1-b} = \\varphi(a) + \\varphi(b).$$\nSo each step replaces two entries by one without changing $\\sum_{x \\in \\text{list}}\\varphi(x)$. If the original list is $x_1, \\ldots, x_n$ and the final number is $z$, then $\\varphi(z) = \\sum_i \\varphi(x_i)$, hence\n$$z = \\varphi^{-1}\\Big(\\sum_{i=1}^n \\frac{x_i}{1-x_i}\\Big),$$\nwhich does not depend on the choices made. ∎\n\n**(b)** Now the list has exactly one entry equal to $1$ and the others in $(0, 1)$. For $a \\ne 1$,\n$$a * 1 = \\frac{a + 1 - 2a}{1 - a} = \\frac{1 - a}{1 - a} = 1.$$\nSo: combining the $1$ with some $a \\in (0,1)$ is allowed ($a \\cdot 1 \\ne 1$) and gives $1$; combining two numbers of $(0, 1)$ gives a number in $(0, 1)$ by part (a). Thus at every stage the list again contains exactly one $1$ and otherwise numbers in $(0,1)$, every step is defined, and the single number that remains is **$1$**, whatever choices are made. ∎"
+      },
+      {
+        "title": "Commutativity and associativity",
+        "body": "**(a)** As in the first solution, $(0, 1)$ is closed under $*$. The operation is clearly commutative. It is also associative: a direct computation gives, for $a, b, c \\in (0,1)$,\n$$(a * b) * c = a * (b * c) = \\frac{a + b + c - 2(ab + bc + ca) + 3abc}{1 - (ab + bc + ca) + 2abc},$$\nwhich is symmetric in $a, b, c$. (For example, $(a*b)*c$ has numerator $(a+b-2ab) + c(1-ab) - 2c(a+b-2ab)$ and denominator $(1-ab) - c(a+b-2ab)$ after multiplying through by $1 - ab$; expanding gives the displayed expression.)\n\nThe final number is obtained by combining all of $x_1, \\ldots, x_n$ with $*$ in some order and with some bracketing. For a commutative and associative operation, all such combinations give the same result (the general associative law), so the final number is independent of the choices. ∎\n\n**(b)** As in the first solution: $a * 1 = 1$ for every $a \\ne 1$, so the result is $1$."
+      }
+    ],
+    "topics": [
+      "algebra"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "cmo-cmo-2007-05",
+    "bank": "cmo",
+    "source": {
+      "contest": "CMO",
+      "paper": "CMO 2007",
+      "year": 2007,
+      "number": 5,
+      "url": "https://cms.math.ca/competitions/cmo/"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let the incircle of triangle $ABC$ touch sides $BC$, $CA$ and $AB$ at $D$, $E$ and $F$, respectively. Let $\\Gamma$, $\\Gamma_1$, $\\Gamma_2$ and $\\Gamma_3$ denote the circumcircles of triangles $ABC$, $AEF$, $BDF$ and $CDE$ respectively. Let $\\Gamma$ and $\\Gamma_1$ intersect at $A$ and $P$, $\\Gamma$ and $\\Gamma_2$ intersect at $B$ and $Q$, and $\\Gamma$ and $\\Gamma_3$ intersect at $C$ and $R$.\n\n(a) Prove that the circles $\\Gamma_1$, $\\Gamma_2$ and $\\Gamma_3$ intersect in a common point.\n\n(b) Show that $PD$, $QE$ and $RF$ are concurrent.",
+    "image": null,
+    "choices": null,
+    "answer": "(a) All three pass through the incentre $I$ (right angles at the tangency points). (b) $R$ is the centre of the spiral similarity $A \\mapsto B$, $E \\mapsto D$, so $RA : RB = AE : BD = AF : FB$ and $RF$ bisects $\\angle ARB$, passing through the midpoint $W$ of arc $AB$; similarly $PD$, $QE$ pass through the arc midpoints $U$, $V$; and $DU$, $EV$, $FW$ concur at the centre of the homothety taking the incircle to $\\Gamma$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Spiral similarity and a homothety",
+        "body": "Let $I$ be the incentre and $\\omega$ the incircle, with radius $r$; let $O$ and $R_0$ be the centre and radius of $\\Gamma$.\n\n**(a)** $\\angle AEI = \\angle AFI = 90^\\circ$ (radii to points of tangency), so $E$ and $F$ lie on the circle with diameter $AI$; that circle passes through $A, E, F$, so it is $\\Gamma_1$. Likewise $\\Gamma_2$ has diameter $BI$ and $\\Gamma_3$ has diameter $CI$. All three pass through $I$. ∎\n\n**(b)** We use directed angles between lines, $\\angle(\\ell, m)$, taken mod $180^\\circ$.\n\n*Step 1: triangles $RAE$ and $RBD$ are directly similar.* Note $R \\ne A$ (the circle $\\Gamma_3$ meets line $CA$ only at $C$ and $E$, and $A \\ne E$); similarly $R \\ne B$; and $R \\ne D, E$, since $D$, $E$ lie inside $\\Gamma$. Also $R$ is not on line $AC$ or $BC$ (those lines meet $\\Gamma$ only at $A, C$ and $B, C$). Using that $A, E, C$ are collinear, that $C, E, D, R$ lie on $\\Gamma_3$, and that $C, D, B$ are collinear:\n$$\\angle(EA, ER) = \\angle(EC, ER) = \\angle(DC, DR) = \\angle(DB, DR).$$\nUsing that $A, B, C, R$ lie on $\\Gamma$:\n$$\\angle(AE, AR) = \\angle(AC, AR) = \\angle(BC, BR) = \\angle(BD, BR).$$\nTwo pairs of equal directed angles mean triangles $AER$ and $BDR$ are directly similar, with $A \\leftrightarrow B$, $E \\leftrightarrow D$, $R \\leftrightarrow R$. Hence\n$$\\frac{RA}{RB} = \\frac{AE}{BD} = \\frac{AF}{BF},$$\nusing the equal tangent lengths $AE = AF$, $BD = BF$.\n\n*Step 2: $R$ lies on arc $ACB$ (the arc $AB$ containing $C$).* The circle $\\Gamma_3$ has diameter $CI$, and it meets $\\omega$ only at $D$ and $E$ (two distinct circles meet in at most two points). Its arc from $D$ to $E$ through $I$ contains the point $I$, which is inside $\\omega$, and does not meet $\\omega$ except at its ends, so this whole arc (minus $D, E$) lies inside $\\omega$, hence strictly inside triangle $ABC$, hence strictly inside $\\Gamma$. So $R$ (a point of $\\Gamma$ other than $C$) lies on one of the other two arcs $CD$ or $CE$ of $\\Gamma_3$. Line $BC$ meets $\\Gamma_3$ at $C$ and $D$, and the arc $CD$ not containing $I$ lies on the opposite side of line $BC$ from $A$; points of $\\Gamma$ there lie on arc $BC$ not containing $A$. Similarly the arc $CE$ leads to the arc $CA$ of $\\Gamma$ not containing $B$. Either way $R$ lies on the arc $AB$ of $\\Gamma$ that contains $C$.\n\n*Step 3: line $RF$ passes through the midpoint $W$ of arc $AB$ not containing $C$.* The point $F$ lies on segment $AB$ and divides it in the ratio $AF : FB = RA : RB$. By the angle bisector theorem, the internal bisector of $\\angle ARB$ meets segment $AB$ at the unique point with this ratio, namely $F$. The internal bisector of $\\angle ARB$ meets $\\Gamma$ again at the midpoint of the arc $AB$ not containing $R$, which by Step 2 is $W$. So $R$, $F$, $W$ are collinear, and since $F \\ne W$, line $RF$ is line $FW$.\n\nIn exactly the same way (with the vertex $A$ and circle $\\Gamma_1$, then $B$ and $\\Gamma_2$), line $PD$ is line $DU$ and line $QE$ is line $EV$, where $U$, $V$ are the midpoints of the arcs $BC$ and $CA$ not containing $A$ and $B$ respectively.\n\n*Step 4: $DU$, $EV$, $FW$ are concurrent.* Let $\\mathbf n$ be the unit vector perpendicular to $BC$ pointing from line $BC$ away from $A$. Then $\\overrightarrow{ID} = r\\,\\mathbf n$ ($I$ is on $A$'s side of $BC$ and $D$ is its foot on $BC$), and $\\overrightarrow{OU} = R_0\\,\\mathbf n$ ($U$ is the point of $\\Gamma$ farthest in direction $\\mathbf n$, i.e. the midpoint of the arc on the far side of $BC$ from $A$). Similarly $\\overrightarrow{OV} = \\frac{R_0}{r}\\overrightarrow{IE}$ and $\\overrightarrow{OW} = \\frac{R_0}{r}\\overrightarrow{IF}$. So the map\n$$h(X) = O + \\frac{R_0}{r}\\,(X - I)$$\nsends $D \\mapsto U$, $E \\mapsto V$, $F \\mapsto W$. Since $R_0 \\ge 2r > r$ (Euler), the ratio $\\frac{R_0}{r} \\ne 1$, so $h$ is a homothety with a centre $K$, and for every point $X \\ne K$ the points $X$, $h(X)$, $K$ are collinear. As $D \\ne U$, $E \\ne V$, $F \\ne W$, the lines $DU$, $EV$, $FW$ all pass through $K$.\n\nTherefore $PD$, $QE$ and $RF$ are concurrent (at $K$). ∎"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

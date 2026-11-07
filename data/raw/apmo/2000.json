@@ -1,0 +1,175 @@
+[
+  {
+    "id": "apmo-2000-01",
+    "bank": "apmo",
+    "source": {
+      "contest": "APMO",
+      "paper": "APMO",
+      "year": 2000,
+      "number": 1,
+      "url": "https://www.apmo-official.org/static/problems/apmo2000_prb.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Compute the sum\n$$S = \\sum_{i=0}^{101} \\frac{x_i^3}{1 - 3x_i + 3x_i^2} \\quad \\text{for} \\quad x_i = \\frac{i}{101}.$$",
+    "image": null,
+    "choices": null,
+    "answer": "51",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Pair $i$ with $101-i$",
+        "body": "Note $x_{101-i}=1-x_i$ and\n$$1-3x_i+3x_i^2=(1-3x_i+3x_i^2-x_i^3)+x_i^3=(1-x_i)^3+x_i^3=x_{101-i}^3+x_i^3 .$$\nSo the $i$-th term is $\\dfrac{x_i^3}{x_i^3+x_{101-i}^3}$ (the denominator is never $0$, since $x_i$ and $1-x_i$ are not both $0$). Replacing $i$ by $101-i$ in a second copy of the sum,\n$$2S=\\sum_{i=0}^{101}\\frac{x_i^3}{x_i^3+x_{101-i}^3}+\\sum_{i=0}^{101}\\frac{x_{101-i}^3}{x_{101-i}^3+x_i^3}=\\sum_{i=0}^{101}1=102 .$$\nHence $S=51$.\n\n**Answer: 51**"
+      }
+    ],
+    "topics": [
+      "algebra",
+      "sequences-series"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "apmo-2000-02",
+    "bank": "apmo",
+    "source": {
+      "contest": "APMO",
+      "paper": "APMO",
+      "year": 2000,
+      "number": 2,
+      "url": "https://www.apmo-official.org/static/problems/apmo2000_prb.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Given the following triangular arrangement of circles (as shown in the picture: three circles at the corners and two more circles on each side, nine in all):\n\nEach of the numbers $1, 2, \\dots, 9$ is to be written into one of these circles, so that each circle contains exactly one of these numbers and\n\n(i) the sums of the four numbers on each side of the triangle are equal;\n\n(ii) the sums of the squares of the four numbers on each side of the triangle are equal.\n\nFind all ways in which this can be done.",
+    "image": "qimages/apmo/2000/q02.webp",
+    "choices": null,
+    "answer": "Corners $2,5,8$; the side from $2$ to $5$ has middle numbers $4,9$, the side from $5$ to $8$ has $1,6$, the side from $8$ to $2$ has $3,7$ (side sums $20$, square sums $126$). Up to placing the corners and ordering the middle pairs this is the only solution: $3!\\cdot2^3=48$ fillings.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Corners modulo 3",
+        "body": "Let $a,b,c$ be the corner numbers, $s$ the common side sum and $t$ the common sum of squares. Adding the three sides counts the corners twice and every other number once:\n$$3s=a+b+c+45,\\qquad 3t=a^2+b^2+c^2+285,$$\nsince $1+\\dots+9=45$ and $1^2+\\dots+9^2=285$. So $3\\mid a+b+c$ and $3\\mid a^2+b^2+c^2$.\n\n**The corners are congruent mod 3.** A square is $\\equiv0$ or $1\\pmod3$, so $3\\mid a^2+b^2+c^2$ means that either all three or none of $a,b,c$ are multiples of $3$. In the second case each is $\\equiv1$ or $2$, and $3\\mid a+b+c$ forces all three residues equal ($1+1+2$ and $1+2+2$ are not multiples of $3$). Hence\n$$\\{a,b,c\\}=\\{3,6,9\\},\\ \\{1,4,7\\}\\ \\text{or}\\ \\{2,5,8\\}.$$\n\n**$\\{3,6,9\\}$:** $3t=126+285$, $t=137$. On the side with corners $3$ and $9$ the middle numbers satisfy $x^2+y^2=137-9-81=47\\equiv3\\pmod4$, impossible since squares are $0$ or $1\\pmod 4$.\n\n**$\\{1,4,7\\}$:** $3t=66+285$, $t=117$. On the side with corners $1$ and $7$: $x^2+y^2=117-1-49=67\\equiv3\\pmod4$, impossible.\n\n**$\\{2,5,8\\}$:** $3t=93+285$, $t=126$, and the middle numbers come from $\\{1,3,4,6,7,9\\}$.\n- Side $2$–$5$: $x^2+y^2=126-4-25=97$. Checking $97-1,97-9,97-16,97-36,97-49,97-81$ $=96,88,81,61,48,16$: only $\\{4,9\\}$ works.\n- Side $5$–$8$: $x^2+y^2=126-25-64=37$: only $\\{1,6\\}$ ($37-9=28$, $37-16=21$ are not squares).\n- Side $8$–$2$: the remaining $\\{3,7\\}$, and indeed $9+49=58=126-4-64$.\n\nThe side sums are $2+4+9+5=5+1+6+8=8+3+7+2=20$, so (i) holds as well.\n\n**Answer:** the corners are $2,5,8$ (in any of the $3!$ placements), the two middle circles between $2$ and $5$ hold $4$ and $9$, between $5$ and $8$ hold $1$ and $6$, and between $8$ and $2$ hold $3$ and $7$ (each pair in either order): $3!\\cdot2^3=48$ fillings, all the same up to symmetry. ∎"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "logic"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "apmo-2000-03",
+    "bank": "apmo",
+    "source": {
+      "contest": "APMO",
+      "paper": "APMO",
+      "year": 2000,
+      "number": 3,
+      "url": "https://www.apmo-official.org/static/problems/apmo2000_prb.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $ABC$ be a triangle. Let $M$ and $N$ be the points in which the median and the angle bisector, respectively, at $A$ meet the side $BC$. Let $Q$ and $P$ be the points in which the perpendicular at $N$ to $NA$ meets $MA$ and $BA$, respectively, and $O$ the point in which the perpendicular at $P$ to $BA$ meets $AN$ produced. Prove that $QO$ is perpendicular to $BC$.",
+    "image": null,
+    "choices": null,
+    "answer": "Proof: with $A$ at the origin and $AN$ as $x$-axis, $AB: y=mx$, $AC: y=-mx$, one finds $P=(n,mn)$, $Q=\\left(n,\\frac{m(b-c)n}{b+c}\\right)$, $O=(n(1+m^2),0)$, and $\\overrightarrow{OQ}\\cdot\\overrightarrow{BC}=0$. (Synthetic: homothety at $A$ taking $O$ to the arc midpoint $K$ takes $Q$ to $M$.)",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Coordinates",
+        "body": "Put $A=(0,0)$ with the bisector $AN$ along the positive $x$-axis. Then the lines $AB$, $AC$ are $y=mx$ and $y=-mx$ with $m=\\tan\\frac A2>0$, and\n$$B=(b,mb),\\qquad C=(c,-mc),\\qquad b,c>0,\\qquad N=(n,0),\\ n>0 .$$\n- The perpendicular to $AN$ at $N$ is the line $x=n$; it meets $AB$ at $P=(n,mn)$.\n- $M=\\left(\\frac{b+c}2,\\frac{m(b-c)}2\\right)$, so line $AM$ is $y=\\frac{m(b-c)}{b+c}x$, and $Q=\\left(n,\\frac{m(b-c)}{b+c}n\\right)$.\n- $O=(o,0)$ with $\\overrightarrow{PO}\\perp AB$, i.e. $(o-n,-mn)\\cdot(1,m)=0$, so $o=n(1+m^2)$.\n\nNow\n$$\\overrightarrow{OQ}=\\left(-m^2n,\\ \\frac{m(b-c)n}{b+c}\\right)=\\frac{mn}{b+c}\\bigl(-m(b+c),\\ b-c\\bigr),\\qquad \\overrightarrow{BC}=\\bigl(c-b,\\ -m(b+c)\\bigr),$$\nand\n$$\\bigl(-m(b+c)\\bigr)(c-b)+(b-c)\\bigl(-m(b+c)\\bigr)=-m(b+c)\\bigl[(c-b)+(b-c)\\bigr]=0 .$$\nSince $\\overrightarrow{OQ}\\ne0$, $QO\\perp BC$. ∎\n\n(The computation never used that $N$ is on $BC$: any point $N$ of the bisector gives a line $QO$ perpendicular to $BC$.)"
+      },
+      {
+        "title": "Homothety and the Simson line",
+        "body": "Let the bisector $AN$ meet the circumcircle again at $K$, the midpoint of arc $BC$ not containing $A$. Since $KB=KC$, the foot of the perpendicular from $K$ to $BC$ is the midpoint $M$. Let $R,S$ be the feet of the perpendiculars from $K$ to $AB$, $AC$. By the Simson line theorem $R,M,S$ are collinear. As $K$ is on the bisector of $\\angle A$, the figure $ARKS$ is symmetric about $AK$, so $RS\\perp AK$; hence $RS\\parallel PQ$ (both perpendicular to $AN$).\n\nThe homothety $h$ with centre $A$ sending $O$ to $K$ (both on ray $AN$) sends the line through $O$ perpendicular to $AB$ to the line through $K$ perpendicular to $AB$, so it sends $P$ (that line $\\cap\\,AB$) to $R$. It sends line $PQ$ to the parallel line through $R$, which is $RS$; so $Q=PQ\\cap AM$ goes to $RS\\cap AM=M$. Thus $h$ maps line $OQ$ to line $KM$, so $OQ\\parallel KM\\perp BC$. ∎"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "apmo-2000-04",
+    "bank": "apmo",
+    "source": {
+      "contest": "APMO",
+      "paper": "APMO",
+      "year": 2000,
+      "number": 4,
+      "url": "https://www.apmo-official.org/static/problems/apmo2000_prb.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $n, k$ be given positive integers with $n > k$. Prove that\n$$\\frac{1}{n+1} \\cdot \\frac{n^n}{k^k (n-k)^{n-k}} < \\frac{n!}{k!\\,(n-k)!} < \\frac{n^n}{k^k (n-k)^{n-k}} .$$",
+    "image": null,
+    "choices": null,
+    "answer": "Proof: in $n^n=\\bigl(k+(n-k)\\bigr)^n=\\sum_i T_{i+1}$, $T_{i+1}=\\binom ni k^i(n-k)^{n-i}$, the term $T_{k+1}=\\binom nk k^k(n-k)^{n-k}$ is the strictly largest of the $n+1$ positive terms, so $\\frac{n^n}{n+1}<T_{k+1}<n^n$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "The largest term of a binomial expansion",
+        "body": "Multiplying by $k^k(n-k)^{n-k}$, the claim is\n$$\\frac{n^n}{n+1}<\\binom nk k^k(n-k)^{n-k}<n^n .$$\nExpand\n$$n^n=\\bigl((n-k)+k\\bigr)^n=\\sum_{i=0}^nT_{i+1},\\qquad T_{i+1}=\\binom ni k^i(n-k)^{n-i}>0 .$$\nThe term $T_{k+1}$ is exactly $\\binom nk k^k(n-k)^{n-k}$, and the other $n\\ge1$ terms are positive, so $T_{k+1}<n^n$: this is the right inequality.\n\nFor $1\\le i\\le n$,\n$$\\frac{T_{i+1}}{T_i}=\\frac{\\binom ni k^i(n-k)^{n-i}}{\\binom n{i-1}k^{i-1}(n-k)^{n-i+1}}=\\frac{(n-i+1)k}{i(n-k)},$$\nand $\\frac{T_{i+1}}{T_i}>1\\iff (n-i+1)k>i(n-k)\\iff nk+k>in\\iff i<k+\\frac kn$. Since $0<\\frac kn<1$, this holds exactly for $i\\le k$ (and the ratio is never $1$). Thus\n$$T_1<T_2<\\dots<T_{k+1}>T_{k+2}>\\dots>T_{n+1},$$\nso $T_{k+1}$ is strictly larger than each of the other $n$ terms, and\n$$n^n=\\sum_{i=0}^{n}T_{i+1}<(n+1)T_{k+1},$$\nwhich is the left inequality. ∎"
+      }
+    ],
+    "topics": [
+      "inequalities",
+      "counting"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "apmo-2000-05",
+    "bank": "apmo",
+    "source": {
+      "contest": "APMO",
+      "paper": "APMO",
+      "year": 2000,
+      "number": 5,
+      "url": "https://www.apmo-official.org/static/problems/apmo2000_prb.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Given a permutation $(a_0, a_1, \\dots, a_n)$ of the sequence $0, 1, \\dots, n$. A transposition of $a_i$ with $a_j$ is called *legal* if $a_i = 0$ for $i > 0$, and $a_{i-1} + 1 = a_j$. The permutation $(a_0, a_1, \\dots, a_n)$ is called *regular* if after a number of legal transpositions it becomes $(1, 2, \\dots, n, 0)$. For which numbers $n$ is the permutation $(1, n, n-1, \\dots, 3, 2, 0)$ regular?",
+    "image": null,
+    "choices": null,
+    "answer": "Exactly for $n=2$ and $n=2^k-1$ ($k\\ge1$). The forced process doubles sorted blocks: from $n+1=2^aM$ ($M$ odd) it reaches blocks of size $2^a$, and then finishes iff $M=1$; for even $n\\ge4$ it gets stuck after one pass.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Follow the forced process",
+        "body": "**The process is forced.** A legal transposition swaps $0$ with $v+1$, where $v$ is the number just before $0$. So at any moment at most one legal transposition exists, and none if $0$ is in position $0$ or is preceded by $n$. Hence the permutation is regular iff the unique maximal chain of legal transpositions ends at $(1,2,\\dots,n,0)$; the target itself is terminal, and stopping anywhere else means \"not regular\".\n\n$n=1$: $(1,0)$ is already the target; $n=2$: $(1,2,0)$ is the target. So $n=1,2$ are regular. Let $n\\ge3$, $N=n+1$, number the positions $0,\\dots,n$ and read positions modulo $N$. Call the position of $0$ the *hole*.\n\n**First pass.** Initially $1$ is in position $0$, each $v\\in\\{2,\\dots,n\\}$ in position $N-v$, and the hole is at $N-1$. The number before the hole is $2$, so $0$ swaps with $3$ (at $N-3$); then the number before the hole (position $N-4$) is $4$, so $0$ swaps with $5$; and so on: $0$ swaps successively with $3,5,7,\\dots$, each odd $v$ moving from $N-v$ to $N-v+2$, while the even numbers stay.\n- If $n$ is even, the last swap is with $n-1$; the hole is then at position $2$, preceded by $n$ (position $1$). The process stops with the hole at $2\\ne n$: **not regular**.\n- If $n$ is odd, the last swap is with $n$ (at position $1$); the hole is at $1$, preceded by $1$. Call this state $P_1$.\n\n**The states $P_r$.** For $R=2^r$ dividing $N$ with $R\\ge2$, let $P_r$ be the state in which\n- the hole is at position $R-1$;\n- each $v$ with $1\\le v\\le R-1$ is at position $v-1$;\n- each $v=tR+s$ with $t\\ge1$, $0\\le s\\le R-1$, is at position $s-tR\\pmod N$.\n\n(So $P_r$ reads: $1,\\dots,R-1$, then $0$, then the blocks $[N-R,N-1]$, $[N-2R,N-R-1]$, …, $[R,2R-1]$, each in increasing order.) The state after the first pass is $P_1$: even $v=2t$ sits at $-2t=N-v$, odd $v=2t+1\\ge3$ at $1-2t\\equiv N-v+2$. Let $M=N/R$.\n\n**Claim A. If $M$ is even, the process leads from $P_r$ to $P_{r+1}$.** We show that it runs in rounds $u=0,1,\\dots,R-1$. In round $u$ the hole starts at $R-1+u$, preceded by $R-1+u$, and $0$ swaps successively with\n$$R+u,\\ 3R+u,\\ 5R+u,\\ \\dots,\\ (M-1)R+u,$$\nwhere $(2i+1)R+u$ moves from its original place $u-(2i+1)R$ to the hole's place, which is $R-1+u$ for $i=0$ and $u-(2i-1)R$ for $i\\ge1$.\n\nIndeed, after the swap with $(2i-1)R+u$ the hole is at $u-(2i-1)R$, and the number before it, at $u-1-(2i-1)R$, is $(2i+1)R+u-1$: for $u\\ge1$ it was put there in round $u-1$; for $u=0$ the position is $(R-1)-2iR$, which still holds its original number $2iR+R-1$ (only multiples of $R$ have moved so far, and $R\\ge2$). So the next swap is with $(2i+1)R+u$, which has not moved yet (numbers $\\equiv u\\pmod R$ with odd $t$ move only in round $u$). After the swap with $(M-1)R+u$ the hole is at $u-(M-1)R\\equiv u+R$ (as $MR=N$), preceded by $R+u$, which was placed at $R-1+u$ at the start of the round — so round $u+1$ starts exactly as described. After round $R-1$ the hole is at $2R-1$.\n\nNow compare with $P_{r+1}$ (block size $2R$, which divides $N$ as $M$ is even). Numbers $v<R$ have not moved: position $v-1$. $v=R+u$ is at $R-1+u=v-1$. For $v=tR+u$ with $t$ even, unchanged at $u-tR=u-\\frac t2(2R)$. For $t\\ge3$ odd, at $u-(t-2)R=(R+u)-\\frac{t-1}2(2R)$, and $v=\\frac{t-1}2(2R)+(R+u)$. Hole at $2R-1$. This is exactly $P_{r+1}$. $\\square$\n\n**Claim B. If $M\\ge3$ is odd, the process stops at a non-target state.** Round $0$ starts as above: $0$ swaps with $R,3R,\\dots,(M-2)R$ (the same verification applies). Then the hole is at $-(M-2)R\\equiv2R$, and the number before it, at $2R-1\\equiv(R-1)-(M-1)R$, is $(M-1)R+R-1=N-1=n$. The process stops with the hole at $2R$, while the target has the hole at $n=MR-1\\ge3R-1>2R$. $\\square$\n\n**Conclusion for odd $n\\ge3$.** Write $N=n+1=2^aM$ with $M$ odd, $a\\ge1$. From $P_1$, Claim A applies repeatedly while $N/2^r$ is even, leading to $P_a$.\n- If $M=1$ ($n=2^a-1$), $P_a$ has $R=N$: the numbers $1,\\dots,n$ are in positions $0,\\dots,n-1$ and the hole at $n$ — the target. **Regular.**\n- If $M\\ge3$, Claim B applies at $P_a$: **not regular**.\n\n**Answer:** the permutation is regular exactly for $n=2$ and for $n=2^k-1$ ($k=1,2,3,\\dots$). ∎"
+      }
+    ],
+    "topics": [
+      "counting",
+      "logic"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

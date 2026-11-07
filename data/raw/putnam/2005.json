@@ -1,0 +1,457 @@
+[
+  {
+    "id": "putnam-2005-a1",
+    "bank": "putnam",
+    "source": {
+      "contest": "Putnam",
+      "paper": "66th William Lowell Putnam Mathematical Competition (December 3, 2005)",
+      "year": 2005,
+      "number": "A1",
+      "url": "https://kskedlaya.org/putnam-archive/"
+    },
+    "grade": "undergrad",
+    "points": 10,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Show that every positive integer is a sum of one or more numbers of the form $2^r3^s$, where $r$ and $s$ are nonnegative integers and no summand divides another. (For example, $23 = 9 + 8 + 6$.)",
+    "image": null,
+    "choices": null,
+    "answer": "Proof by strong induction: for even $n$ double a representation of $n/2$; for odd $n$ take the largest power $3^k\\le n$ and add $3^k$ to twice a representation of $(n-3^k)/2$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Strong induction",
+        "body": "We use strong induction on $n$; $n = 1 = 2^03^0$ is a representation. Let $n\\ge2$ and assume every positive integer below $n$ has a representation (a sum of numbers $2^r3^s$, none dividing another — in particular all distinct).\n\n**$n$ even.** Take a representation $\\frac n2 = s_1 + \\cdots + s_k$ and double it: $n = 2s_1+\\cdots+2s_k$. Each $2s_i$ has the form $2^r3^s$, and $2s_i\\mid 2s_j \\iff s_i\\mid s_j$, so no summand divides another.\n\n**$n$ odd.** Let $3^k$ be the largest power of $3$ with $3^k\\le n$, so $3^k \\le n < 3^{k+1}$. If $n = 3^k$ we are done. Otherwise $n - 3^k$ is even and positive, and $\\frac{n-3^k}{2} < n$ has a representation $s_1+\\cdots+s_j$. Then\n$$n = 3^k + 2s_1 + \\cdots + 2s_j .$$\nCheck the conditions:\n- the $2s_i$ do not divide each other (as above);\n- $2s_i \\nmid 3^k$, since $2s_i$ is even and $3^k$ is odd;\n- $3^k\\nmid 2s_i$: we have $2s_i \\le n - 3^k < 3^{k+1} - 3^k = 2\\cdot3^k$, so $0 < s_i < 3^k$; if $3^k\\mid 2s_i$ then $3^k \\mid s_i$ (as $\\gcd(3^k,2)=1$), impossible.\n\nThis completes the induction. ∎ (E.g. $23 = 9 + 2\\cdot7$ and $7 = 3 + 2\\cdot 2$, $2 = 2\\cdot1$, giving $23 = 9 + 2(3 + 4) = 9 + 6 + 8$.)\n\n*Remark.* The representation need not be unique: $11 = 2 + 9 = 3 + 8$. The problem is due to Paul Erdős."
+      }
+    ],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "putnam-2005-a2",
+    "bank": "putnam",
+    "source": {
+      "contest": "Putnam",
+      "paper": "66th William Lowell Putnam Mathematical Competition (December 3, 2005)",
+      "year": 2005,
+      "number": "A2",
+      "url": "https://kskedlaya.org/putnam-archive/"
+    },
+    "grade": "undergrad",
+    "points": 10,
+    "timeMinutes": null,
+    "type": "text",
+    "prompt": "Let $\\mathbf{S} = \\{(a,b) \\mid a = 1, 2, \\dots, n,\\ b = 1,2,3\\}$. A *rook tour* of $\\mathbf{S}$ is a polygonal path made up of line segments connecting points $p_1, p_2, \\dots, p_{3n}$ in sequence such that\n\n- (i) $p_i \\in \\mathbf{S}$,\n- (ii) $p_i$ and $p_{i+1}$ are a unit distance apart, for $1 \\le i < 3n$,\n- (iii) for each $p \\in \\mathbf{S}$ there is a unique $i$ such that $p_i = p$.\n\nHow many rook tours are there that begin at $(1,1)$ and end at $(n,1)$?",
+    "image": null,
+    "choices": null,
+    "answer": "2^(n-2)",
+    "acceptedAnswers": [
+      "2^{n-2}",
+      "2^(n−2)",
+      "2^n/4",
+      "2**(n-2)",
+      "(2^n)/4"
+    ],
+    "answerUnit": null,
+    "answerDisplay": "$2^{n-2}$",
+    "solutions": [
+      {
+        "title": "Recursion by removing the last column",
+        "body": "For $n = 1$ there is no such tour (it would have to start and end at the same point), so assume $n\\ge2$. A rook tour is a path through all $3n$ points of the $n\\times3$ grid using unit steps. Let $A_n$ be the set of tours from $(1,1)$ to $(n,1)$ and $B_n$ the set of tours from $(1,1)$ to $(n,3)$. We show $|A_n| = |B_n| = |A_{n-1}| + |B_{n-1}|$ for $n\\ge2$.\n\n**Tours in $A_n$.** The point $(n,3)$ is not an endpoint and has only the neighbours $(n-1,3)$ and $(n,2)$, so the tour uses both segments $(n-1,3)$–$(n,3)$–$(n,2)$. The point $(n,2)$ uses exactly one more segment, to $(n,1)$ or to $(n-1,2)$.\n- If it goes to $(n,1)$, the tour ends with $(n-1,3),(n,3),(n,2),(n,1)$. Deleting the last three points gives a tour in $B_{n-1}$; conversely every tour in $B_{n-1}$ extends this way.\n- If it goes to $(n-1,2)$, the tour contains the consecutive stretch $(n-1,2),(n,2),(n,3),(n-1,3)$, and the endpoint $(n,1)$ is reached from $(n-1,1)$. Replace the stretch by the single segment $(n-1,2)$–$(n-1,3)$ and delete the final point $(n,1)$: this gives a tour in $A_{n-1}$. Conversely, in a tour of $A_{n-1}$ the point $(n-1,3)$ is not an endpoint and has only the neighbours $(n-2,3)$, $(n-1,2)$, so the segment $(n-1,2)$–$(n-1,3)$ is used and the construction can be reversed. (For $n = 2$ this case does not occur, matching $A_1 = \\emptyset$.)\n\nSo $|A_n| = |A_{n-1}| + |B_{n-1}|$.\n\n**Tours in $B_n$.** Symmetrically, $(n,1)$ is not an endpoint, so the tour uses $(n-1,1)$–$(n,1)$–$(n,2)$, and $(n,2)$ continues either to $(n,3)$ (the tour ends $(n-1,1),(n,1),(n,2),(n,3)$; delete three points to get a tour in $A_{n-1}$) or to $(n-1,2)$ (replace the stretch $(n-1,1),(n,1),(n,2),(n-1,2)$ by the segment $(n-1,1)$–$(n-1,2)$ and delete the final $(n,3)$, which was reached from $(n-1,3)$, to get a tour in $B_{n-1}$). The reverse step needs the segment $(n-1,1)$–$(n-1,2)$ in every tour of $B_{n-1}$: for $n-1\\ge2$ the point $(n-1,1)$ is not an endpoint and has only the neighbours $(n-2,1)$, $(n-1,2)$; for $n-1 = 1$ the only tour $(1,1),(1,2),(1,3)$ uses it. So $|B_n| = |A_{n-1}| + |B_{n-1}|$.\n\n**Conclusion.** $|A_1| = 0$, $|B_1| = 1$, hence $|A_2| = |B_2| = 1$, and then $|A_n| = |B_n| = 2|A_{n-1}|$ for $n \\ge 3$. Therefore $|A_n| = 2^{n-2}$ for $n\\ge2$.\n\nFor example, for $n=3$ the two tours are $(1,1),(1,2),(1,3),(2,3),(3,3),(3,2),(2,2),(2,1),(3,1)$ and $(1,1),(2,1),(2,2),(1,2),(1,3),(2,3),(3,3),(3,2),(3,1)$.\n\n**Answer:** $2^{n-2}$ (for $n\\ge2$; there are none for $n=1$)."
+      }
+    ],
+    "topics": [
+      "counting",
+      "graph-theory"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "putnam-2005-a3",
+    "bank": "putnam",
+    "source": {
+      "contest": "Putnam",
+      "paper": "66th William Lowell Putnam Mathematical Competition (December 3, 2005)",
+      "year": 2005,
+      "number": "A3",
+      "url": "https://kskedlaya.org/putnam-archive/"
+    },
+    "grade": "undergrad",
+    "points": 10,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $p(z)$ be a polynomial of degree $n$ all of whose zeros have absolute value 1 in the complex plane. Put $g(z) = p(z)/z^{n/2}$. Show that all zeros of $g'(z) = 0$ have absolute value 1.",
+    "image": null,
+    "choices": null,
+    "answer": "Proof. For $z\\ne0$ the zeros of $g'$ are the zeros of $2zp'(z) - np(z)$. Away from the roots $r_j$ of $p$ this means $\\sum_j\\frac{z+r_j}{z-r_j} = 0$, and $\\operatorname{Re}\\frac{z+r_j}{z-r_j} = \\frac{|z|^2-1}{|z-r_j|^2}$, so the real part of the sum vanishes only if $|z| = 1$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Real part of the logarithmic derivative",
+        "body": "(Implicitly $n\\ge1$, $z\\ne0$, and any branch of $z^{n/2}$ may be used on a region avoiding $0$.) Since $\\frac{d}{dz}z^{-n/2} = -\\frac n2 z^{-n/2-1}$ for any branch,\n$$g'(z) = z^{-n/2}\\left(p'(z) - \\frac{n}{2z}p(z)\\right) = \\frac{z^{-n/2}}{2z}\\Big(2zp'(z) - np(z)\\Big).$$\nSo the zeros of $g'$ are the nonzero zeros of $h(z) = 2zp'(z) - np(z)$, independent of the branch.\n\nWrite $p(z) = c\\prod_{j=1}^n(z - r_j)$ with $|r_j| = 1$. Let $h(z) = 0$, $z\\ne0$. If $p(z) = 0$, then $z$ is some $r_j$ and $|z| = 1$. Otherwise divide by $p(z)$: $\\frac{zp'(z)}{p(z)} = \\sum_j\\frac{z}{z-r_j}$, so\n$$0 = \\frac{h(z)}{p(z)} = \\sum_{j=1}^n\\left(\\frac{2z}{z-r_j} - 1\\right) = \\sum_{j=1}^n\\frac{z+r_j}{z-r_j}.$$\nFor each $j$,\n$$\\frac{z+r_j}{z-r_j} = \\frac{(z+r_j)(\\bar z - \\bar r_j)}{|z-r_j|^2} = \\frac{|z|^2 - |r_j|^2 + (r_j\\bar z - z\\bar r_j)}{|z-r_j|^2},$$\nand $r_j\\bar z - z\\bar r_j = w - \\bar w$ (with $w = r_j\\bar z$) is purely imaginary. Since $|r_j| = 1$,\n$$0 = \\operatorname{Re}\\sum_j\\frac{z+r_j}{z-r_j} = \\left(|z|^2 - 1\\right)\\sum_{j=1}^n\\frac{1}{|z-r_j|^2}.$$\nThe sum is positive, so $|z| = 1$. ∎"
+      },
+      {
+        "title": "Rolle's theorem on the circle",
+        "body": "As in the first solution, it suffices to show that all roots of the degree-$n$ polynomial $h(z) = 2zp'(z) - np(z)$ lie on the unit circle (its leading coefficient is $(2n - n)c = nc \\ne 0$, so it has exactly $n$ roots with multiplicity).\n\nWrite $r_j = e^{2i\\theta_j}$. For $z = e^{2i\\theta}$,\n$$z - r_j = e^{i(\\theta+\\theta_j)}\\left(e^{i(\\theta-\\theta_j)} - e^{-i(\\theta-\\theta_j)}\\right) = 2i\\,e^{i(\\theta+\\theta_j)}\\sin(\\theta-\\theta_j),$$\nso $g(e^{2i\\theta}) = p(e^{2i\\theta})e^{-in\\theta} = K\\,\\varphi(\\theta)$, with a nonzero constant $K$ (using the branch $z^{n/2} = e^{in\\theta}$) and the real function $\\varphi(\\theta) = \\prod_j\\sin(\\theta - \\theta_j)$. Differentiating, $2ie^{2i\\theta}g'(e^{2i\\theta}) = K\\varphi'(\\theta)$.\n\nOn $[0,\\pi)$, $\\varphi$ has zeros exactly at the points $\\theta_j \\bmod \\pi$, with total multiplicity $n$, and it is $\\pi$-periodic up to sign. By Rolle's theorem (applied between consecutive distinct zeros, cyclically on a circle of length $\\pi$, and counting a zero of multiplicity $k$ of $\\varphi$ as a zero of multiplicity $k-1$ of $\\varphi'$), $\\varphi'$ has at least $n$ zeros (with multiplicity) per period of length $\\pi$. These give at least $n$ zeros of $g'$, hence of $h$, on the unit circle, with multiplicity (distinct $\\theta\\in[0,\\pi)$ give distinct $z = e^{2i\\theta}$). Since $h$ has exactly $n$ roots, all of them lie on the unit circle. ∎"
+      }
+    ],
+    "topics": [
+      "complex-analysis",
+      "polynomials"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "putnam-2005-a4",
+    "bank": "putnam",
+    "source": {
+      "contest": "Putnam",
+      "paper": "66th William Lowell Putnam Mathematical Competition (December 3, 2005)",
+      "year": 2005,
+      "number": "A4",
+      "url": "https://kskedlaya.org/putnam-archive/"
+    },
+    "grade": "undergrad",
+    "points": 10,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $H$ be an $n \\times n$ matrix all of whose entries are $\\pm 1$ and whose rows are mutually orthogonal. Suppose $H$ has an $a \\times b$ submatrix whose entries are all $1$. Show that $ab \\le n$.",
+    "image": null,
+    "choices": null,
+    "answer": "Proof. If $r_1,\\dots,r_a$ are the rows through the all-ones block, then $|r_1+\\cdots+r_a|^2 = an$ by orthogonality, while the $b$ block coordinates of this vector all equal $a$, so $|r_1+\\cdots+r_a|^2 \\ge a^2b$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Length of a sum of rows",
+        "body": "Let $r_1,\\dots,r_a$ be the rows of $H$ containing the all-ones $a\\times b$ submatrix. Each row has squared length $r_i\\cdot r_i = n$ (entries $\\pm1$), and distinct rows are orthogonal. So for $v = r_1 + \\cdots + r_a$,\n$$|v|^2 = \\sum_{i,j=1}^a r_i\\cdot r_j = an .$$\nIn each of the $b$ columns of the submatrix, all $a$ rows have entry $1$, so $v$ has $b$ coordinates equal to $a$. Hence $|v|^2 \\ge a^2b$. Therefore $an \\ge a^2b$, i.e. $ab\\le n$. ∎"
+      },
+      {
+        "title": "A positive semidefinite matrix",
+        "body": "Permute rows and columns (this preserves orthogonality of rows) so that the all-ones block occupies the first $a$ rows and first $b$ columns. Let $M$ be the $a\\times(n-b)$ matrix formed by the first $a$ rows and the last $n-b$ columns. For $i,j\\le a$, the rows of $H$ are $(1,\\dots,1,m_i)$, so\n$$n\\,\\delta_{ij} = b + m_i\\cdot m_j,\\qquad\\text{i.e.}\\qquad MM^T = nI - bJ,$$\nwith $J$ the $a\\times a$ all-ones matrix. For the all-ones vector $\\mathbf 1\\in\\mathbb R^a$, $J\\mathbf 1 = a\\mathbf 1$, so\n$$0 \\le |M^T\\mathbf 1|^2 = \\mathbf 1^TMM^T\\mathbf 1 = \\mathbf 1^T(n - ab)\\mathbf 1 = a(n-ab).$$\nHence $ab\\le n$. ∎\n\n*Remark.* Such $H$ is a Hadamard matrix; more generally (Lindsey's lemma) the entries of any $a\\times b$ submatrix sum to at most $\\sqrt{abn}$."
+      }
+    ],
+    "topics": [
+      "linear-algebra"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "putnam-2005-a5",
+    "bank": "putnam",
+    "source": {
+      "contest": "Putnam",
+      "paper": "66th William Lowell Putnam Mathematical Competition (December 3, 2005)",
+      "year": 2005,
+      "number": "A5",
+      "url": "https://kskedlaya.org/putnam-archive/"
+    },
+    "grade": "undergrad",
+    "points": 10,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Evaluate $\\displaystyle\\int_0^1\\frac{\\ln(x+1)}{x^2+1}\\,dx$.",
+    "image": null,
+    "choices": null,
+    "answer": "pi*ln(2)/8",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "answerDisplay": "$\\frac{\\pi\\ln 2}{8}$",
+    "solutions": [
+      {
+        "title": "Substitute x = tan θ and use symmetry",
+        "body": "With $x = \\tan\\theta$, $dx = \\sec^2\\theta\\,d\\theta$ and $1 + x^2 = \\sec^2\\theta$:\n$$I = \\int_0^{\\pi/4}\\ln(1+\\tan\\theta)\\,d\\theta .$$\nSubstitute $\\theta\\mapsto\\frac\\pi4 - \\theta$ (which maps $[0,\\frac\\pi4]$ onto itself). Since\n$$1 + \\tan\\left(\\tfrac\\pi4 - \\theta\\right) = 1 + \\frac{1-\\tan\\theta}{1+\\tan\\theta} = \\frac{2}{1+\\tan\\theta},$$\nwe get\n$$I = \\int_0^{\\pi/4}\\left[\\ln2 - \\ln(1+\\tan\\theta)\\right]d\\theta = \\frac{\\pi}{4}\\ln2 - I .$$\nHence $I = \\dfrac{\\pi\\ln2}{8}$.\n\n**Answer:** $\\dfrac{\\pi\\ln 2}{8}\\approx 0.2722$."
+      },
+      {
+        "title": "Double integral and symmetry",
+        "body": "For $x\\in[0,1]$, $\\ln(1+x) = \\int_0^1\\frac{x}{1+xy}\\,dy$. So\n$$I = \\int_0^1\\!\\!\\int_0^1\\frac{x}{(1+xy)(1+x^2)}\\,dy\\,dx = \\int_0^1\\!\\!\\int_0^1\\frac{y}{(1+xy)(1+y^2)}\\,dy\\,dx,$$\nthe second form by renaming $x\\leftrightarrow y$ (the integrand is continuous, so Fubini applies). Adding the two forms and using $x(1+y^2) + y(1+x^2) = (x+y)(1+xy)$:\n$$2I = \\int_0^1\\!\\!\\int_0^1\\frac{x+y}{(1+x^2)(1+y^2)}\\,dy\\,dx = 2\\int_0^1\\frac{x\\,dx}{1+x^2}\\int_0^1\\frac{dy}{1+y^2} = 2\\cdot\\frac{\\ln2}{2}\\cdot\\frac\\pi4 .$$\nSo $I = \\dfrac{\\pi\\ln2}{8}$."
+      }
+    ],
+    "topics": [
+      "calculus"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "putnam-2005-a6",
+    "bank": "putnam",
+    "source": {
+      "contest": "Putnam",
+      "paper": "66th William Lowell Putnam Mathematical Competition (December 3, 2005)",
+      "year": 2005,
+      "number": "A6",
+      "url": "https://kskedlaya.org/putnam-archive/"
+    },
+    "grade": "undergrad",
+    "points": 10,
+    "timeMinutes": null,
+    "type": "text",
+    "prompt": "Let $n$ be given, $n \\ge 4$, and suppose that $P_1, P_2, \\dots, P_n$ are $n$ randomly, independently and uniformly, chosen points on a circle. Consider the convex $n$-gon whose vertices are the $P_i$. What is the probability that at least one of the vertex angles of this polygon is acute?",
+    "image": null,
+    "choices": null,
+    "answer": "n(n-2)/2^(n-1)",
+    "acceptedAnswers": [
+      "n(n-2)/2^{n-1}",
+      "n*(n-2)/2^(n-1)",
+      "(n^2-2n)/2^(n-1)",
+      "n(n-2)/2^(n−1)",
+      "2n(n-2)/2^n",
+      "n(n-2)2^(1-n)"
+    ],
+    "answerUnit": null,
+    "answerDisplay": "$\\frac{n(n-2)}{2^{n-1}}$",
+    "solutions": [
+      {
+        "title": "Locate the first acute vertex",
+        "body": "Measure arcs as fractions of the circumference. With probability $1$ the points are distinct and no two are antipodal, so we ignore those cases. Label the vertices $Q_1,\\dots,Q_n$ in counterclockwise order and let $g_i$ be the arc from $Q_i$ to $Q_{i+1}$ (indices mod $n$), so $\\sum g_i = 1$.\n\n**When is an angle acute?** The angle at $Q_i$ is an inscribed angle subtending the arc from $Q_{i+1}$ to $Q_{i-1}$ not containing $Q_i$, of length $1 - g_{i-1} - g_i$. So it equals $\\pi(1-g_{i-1}-g_i)$, and it is acute iff $g_{i-1} + g_i > \\frac12$.\n\n**Structure.** If the angles at $Q_i$ and $Q_j$ are acute and $Q_i,Q_j$ are not adjacent, the pairs $\\{g_{i-1},g_i\\}$ and $\\{g_{j-1},g_j\\}$ are disjoint (here $n\\ge4$ is used), so their total would exceed $1$: impossible. Hence the acute vertices are either none, one vertex, or two adjacent vertices (three would contain a non-adjacent pair). In particular, if some angle is acute, there is exactly one ordered pair of consecutive vertices $(Q, Q')$, $Q'$ following $Q$ counterclockwise, such that the angle at $Q'$ is acute and the angle at $Q$ is not.\n\n**Computation.** So $\\Pr(\\text{some acute angle}) = \\sum\\Pr(E_{s,t})$ over ordered pairs $s\\ne t$, where $E_{s,t}$ is the event \"$P_t$ immediately follows $P_s$ counterclockwise, the angle at $P_t$ is acute and the angle at $P_s$ is not\". By symmetry all $n(n-1)$ terms are equal to $\\Pr(E_{1,2})$.\n\nBy rotation invariance put $P_1$ at position $0$; let $P_2$ be at position $x\\in(0,1)$ (measured counterclockwise) and let the other $n-2$ points have smallest position $y_{\\min}$ and largest position $y_{\\max}$. Then $E_{1,2}$ says:\n- $P_2$ follows $P_1$: all other points lie in $(x,1)$;\n- angle at $P_2$ acute: $g(P_1\\to P_2) + g(P_2\\to\\text{next}) = x + (y_{\\min}-x) = y_{\\min} > \\frac12$;\n- angle at $P_1$ not acute: $g(\\text{previous}\\to P_1) + g(P_1\\to P_2) = (1 - y_{\\max}) + x \\le \\frac12$, i.e. $y_{\\max}\\ge x + \\frac12$.\n\nIf $x>\\frac12$ the last condition is impossible. If $x\\le\\frac12$, the conditions say: all $n-2$ other points lie in $(\\frac12,1)$, but not all in $(\\frac12, x+\\frac12)$. This has probability $2^{-(n-2)} - x^{n-2}$. Therefore\n$$\\Pr(E_{1,2}) = \\int_0^{1/2}\\left(2^{-(n-2)} - x^{n-2}\\right)dx = \\frac{1}{2^{n-1}} - \\frac{1}{(n-1)2^{n-1}} = \\frac{n-2}{(n-1)\\,2^{n-1}},$$\nand the answer is $n(n-1)\\cdot\\dfrac{n-2}{(n-1)2^{n-1}} = \\dfrac{n(n-2)}{2^{n-1}}$.\n\n*Check:* for $n=4$ this gives $1$; indeed opposite angles of a cyclic quadrilateral sum to $\\pi$, so (unless both are right, probability $0$) one of them is acute.\n\n**Answer:** $\\dfrac{n(n-2)}{2^{n-1}}$."
+      }
+    ],
+    "topics": [
+      "probability",
+      "geometry"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "putnam-2005-b1",
+    "bank": "putnam",
+    "source": {
+      "contest": "Putnam",
+      "paper": "66th William Lowell Putnam Mathematical Competition (December 3, 2005)",
+      "year": 2005,
+      "number": "B1",
+      "url": "https://kskedlaya.org/putnam-archive/"
+    },
+    "grade": "undergrad",
+    "points": 10,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Find a nonzero polynomial $P(x,y)$ such that $P(\\lfloor a\\rfloor, \\lfloor 2a\\rfloor) = 0$ for all real numbers $a$. (Note: $\\lfloor \\nu \\rfloor$ is the greatest integer less than or equal to $\\nu$.)",
+    "image": null,
+    "choices": null,
+    "answer": "For example $P(x,y) = (y-2x)(y-2x-1)$, because $\\lfloor 2a\\rfloor$ is always $2\\lfloor a\\rfloor$ or $2\\lfloor a\\rfloor + 1$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "floor(2a) is 2m or 2m+1",
+        "body": "Take\n$$P(x,y) = (y - 2x)(y - 2x - 1),$$\nwhich is a nonzero polynomial. Let $m = \\lfloor a\\rfloor$, so $m\\le a < m+1$ and $2m\\le 2a < 2m+2$.\n- $2m$ is an integer $\\le 2a$, so $2m\\le\\lfloor2a\\rfloor$;\n- $2m+2$ is an integer $>2a$, so $\\lfloor 2a\\rfloor \\le 2m+1$.\n\nHence $\\lfloor 2a\\rfloor \\in\\{2m, 2m+1\\}$, so one of the factors $y - 2x$, $y-2x-1$ vanishes at $(x,y) = (\\lfloor a\\rfloor,\\lfloor2a\\rfloor)$, and $P(\\lfloor a\\rfloor,\\lfloor 2a\\rfloor) = 0$ for every real $a$. ∎\n\n(More precisely, $\\lfloor 2a\\rfloor = 2m$ if $a - m < \\frac12$ and $2m+1$ otherwise. Any nonzero multiple of this $P$ also works.)"
+      }
+    ],
+    "topics": [
+      "algebra",
+      "polynomials"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "putnam-2005-b2",
+    "bank": "putnam",
+    "source": {
+      "contest": "Putnam",
+      "paper": "66th William Lowell Putnam Mathematical Competition (December 3, 2005)",
+      "year": 2005,
+      "number": "B2",
+      "url": "https://kskedlaya.org/putnam-archive/"
+    },
+    "grade": "undergrad",
+    "points": 10,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Find all positive integers $n, k_1, \\dots, k_n$ such that $k_1 + \\cdots + k_n = 5n - 4$ and\n$$\\frac{1}{k_1} + \\cdots + \\frac{1}{k_n} = 1.$$",
+    "image": null,
+    "choices": null,
+    "answer": "$n = 1$, $k_1 = 1$; $n = 3$, $(k_1,k_2,k_3)$ a permutation of $(2,3,6)$; $n = 4$, $k_1=k_2=k_3=k_4 = 4$. (Cauchy–Schwarz gives $n^2\\le 5n-4$, so $n\\le4$; then check cases.)",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Cauchy–Schwarz bound, then cases",
+        "body": "By the Cauchy–Schwarz (or AM-HM) inequality,\n$$(k_1+\\cdots+k_n)\\left(\\frac1{k_1}+\\cdots+\\frac1{k_n}\\right) \\ge n^2,$$\nso $5n - 4\\ge n^2$, i.e. $(n-1)(n-4)\\le0$, so $1\\le n\\le 4$. Order $k_1\\le\\cdots\\le k_n$. For $n\\ge2$ no $k_i$ equals $1$ (otherwise the reciprocals sum to more than $1$).\n- **$n=1$:** $k_1 = 1$, which works ($1 = 5-4$).\n- **$n=2$:** $k_1 + k_2 = 6$ with $2\\le k_1\\le k_2$: $(2,4)$ gives $\\frac34$, $(3,3)$ gives $\\frac23$. No solutions.\n- **$n=3$:** $k_1+k_2+k_3 = 11$, so $2\\le k_1\\le 3$. The candidates are $(2,2,7)$, $(2,3,6)$, $(2,4,5)$, $(3,3,5)$, $(3,4,4)$, with reciprocal sums $\\frac87$, $1$, $\\frac{19}{20}$, $\\frac{13}{15}$, $\\frac56$. Only $(2,3,6)$ works.\n- **$n=4$:** $5n-4 = 16 = n^2$, so equality holds in Cauchy–Schwarz, which forces $k_1 = k_2 = k_3 = k_4$; then each is $4$, and indeed $4\\cdot\\frac14 = 1$.\n\n**Answer:** $n=1,\\ k_1 = 1$; $n = 3$ with $(k_1,k_2,k_3)$ any permutation of $(2,3,6)$; $n = 4$ with $k_1=k_2=k_3=k_4=4$."
+      },
+      {
+        "title": "Enumerate unit-fraction decompositions",
+        "body": "After obtaining $n\\le4$ as in the first solution, list all solutions of $\\frac1{k_1}+\\cdots+\\frac1{k_n} = 1$ with $k_1\\le\\cdots\\le k_n$ and check the sum condition. For $n$ terms, $k_1\\le n$ (the largest reciprocal is at least the average $\\frac1n$).\n- $n = 1$: $(1)$; sum $1 = 5\\cdot1-4$. ✓\n- $n = 2$: $k_1 = 2$ forces $k_2 = 2$: $(2,2)$, sum $4\\ne6$.\n- $n = 3$: $k_1\\in\\{2,3\\}$. If $k_1 = 3$, then $(3,3,3)$. If $k_1 = 2$: $\\frac1{k_2}+\\frac1{k_3} = \\frac12$ with $k_2\\le 4$, $k_2 \\ge 3$: $(2,3,6)$, $(2,4,4)$. Sums $9, 11, 10$; only $(2,3,6)$ has sum $11$. ✓\n- $n = 4$: AM-HM equality forces $(4,4,4,4)$, sum $16$. ✓\n\nSame answer as above."
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "inequalities"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "putnam-2005-b3",
+    "bank": "putnam",
+    "source": {
+      "contest": "Putnam",
+      "paper": "66th William Lowell Putnam Mathematical Competition (December 3, 2005)",
+      "year": 2005,
+      "number": "B3",
+      "url": "https://kskedlaya.org/putnam-archive/"
+    },
+    "grade": "undergrad",
+    "points": 10,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Find all differentiable functions $f\\colon (0,\\infty) \\to (0,\\infty)$ for which there is a positive real number $a$ such that\n$$f'\\left(\\frac ax\\right) = \\frac{x}{f(x)}$$\nfor all $x > 0$.",
+    "image": null,
+    "choices": null,
+    "answer": "$f(x) = cx^d$ with $c,d>0$, where $c = 1$ if $d = 1$ (then $a = (dc^2)^{-1/(d-1)}$ for $d\\ne1$; any $a$ for $f(x) = x$). Derive the ODE $xff'' + ff' = xf'^2$, i.e. $\\left(\\frac{xf'}{f}\\right)' = 0$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Turn it into an ODE",
+        "body": "**Smoothness and sign.** Replacing $x$ by $a/x$, the condition reads\n$$f'(x) = \\frac{a}{x\\,f(a/x)}\\qquad(x>0). \\tag{1}$$\nThe right side is differentiable (and positive), so $f'$ is differentiable and $f'>0$.\n\n**Differentiate (1).** Since $\\frac{d}{dx}\\left[x f(a/x)\\right] = f(a/x) - \\frac ax f'(a/x)$,\n$$f''(x) = -\\frac{a\\left[f(a/x) - \\frac ax f'(a/x)\\right]}{x^2f(a/x)^2}.$$\nEliminate the values at $a/x$ using (1), $f(a/x) = \\frac{a}{xf'(x)}$, and the original equation, $\\frac ax f'(a/x) = \\frac{a}{f(x)}$:\n$$f''(x) = -\\frac{a\\left[\\frac{a}{xf'(x)} - \\frac{a}{f(x)}\\right]}{a^2/f'(x)^2} = -\\frac{f'(x)}{x} + \\frac{f'(x)^2}{f(x)} .$$\nMultiply by $xf(x)$: $\\;xf f'' + ff' - xf'^2 = 0$. Dividing by $f^2$,\n$$\\frac{d}{dx}\\left(\\frac{xf'(x)}{f(x)}\\right) = \\frac{f'}{f} + \\frac{xf''}{f} - \\frac{xf'^2}{f^2} = 0 .$$\nSo $\\frac{xf'(x)}{f(x)} = d$ is constant on the interval $(0,\\infty)$, i.e. $(\\ln f)' = \\frac dx$, and $f(x) = cx^d$ with $c>0$. Since $f'>0$, $d>0$.\n\n**Which of these work?** For $f = cx^d$: $f'(a/x) = cd\\,a^{d-1}x^{1-d}$ and $\\frac{x}{f(x)} = \\frac{x^{1-d}}{c}$. So the equation holds for all $x$ iff\n$$c^2d\\,a^{d-1} = 1 .$$\nIf $d\\ne1$, this is solved by $a = (c^2d)^{-1/(d-1)} > 0$, for every $c>0$. If $d = 1$ it says $c^2 = 1$, so $c = 1$ (and then any $a>0$ works).\n\n**Answer:** all $f(x) = cx^d$ with $c>0$, $d>0$, except that $c$ must be $1$ when $d = 1$."
+      },
+      {
+        "title": "Logarithmic change of variables",
+        "body": "We know $f'>0$ from (1) of the first solution. Put $b = \\ln a$, $x = e^{t}$ and $g(t) = \\ln f(e^t)$, so $g'(t) = \\frac{e^tf'(e^t)}{f(e^t)} > 0$, i.e. $f'(e^t) = e^{g(t) - t}g'(t)$. The equation $f'(a/x) = x/f(x)$ with $x = e^{b-s}$ (so $a/x = e^s$) becomes\n$$e^{g(s)-s}g'(s) = e^{\\,b - s - g(b-s)},\\qquad\\text{i.e.}\\qquad \\ln g'(s) = b - g(s) - g(b-s).$$\nThe right side is unchanged under $s\\mapsto b-s$, so $g'(s) = g'(b-s)$ for all $s$. Then $\\frac{d}{ds}\\left[g(s) + g(b-s)\\right] = g'(s) - g'(b-s) = 0$, so $g(s)+g(b-s)$ is constant, hence $\\ln g'(s)$ is constant: $g'(s) = d > 0$. So $g(t) = dt + \\ln c$ and $f(x) = cx^d$. The verification step is as in the first solution. ∎"
+      }
+    ],
+    "topics": [
+      "differential-equations",
+      "functional-equations",
+      "calculus"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "putnam-2005-b4",
+    "bank": "putnam",
+    "source": {
+      "contest": "Putnam",
+      "paper": "66th William Lowell Putnam Mathematical Competition (December 3, 2005)",
+      "year": 2005,
+      "number": "B4",
+      "url": "https://kskedlaya.org/putnam-archive/"
+    },
+    "grade": "undergrad",
+    "points": 10,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "For positive integers $m$ and $n$, let $f(m,n)$ denote the number of $n$-tuples $(x_1,x_2,\\dots,x_n)$ of integers such that $|x_1| + |x_2| + \\cdots + |x_n| \\le m$. Show that $f(m,n) = f(n,m)$.",
+    "image": null,
+    "choices": null,
+    "answer": "Proof. Counting tuples by the number $k$ of nonzero entries gives $f(m,n) = \\sum_k 2^k\\binom nk\\binom mk$, which is symmetric in $m,n$. (Alternatively, $f(m,n) = f(m-1,n) + f(m,n-1) + f(m-1,n-1)$ with $f(m,0) = f(0,n) = 1$.)",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Count by the number of nonzero entries",
+        "body": "Let $f(m,n,k)$ be the number of tuples counted by $f(m,n)$ with exactly $k$ nonzero entries ($0\\le k\\le n$). To build one:\n- choose the positions of the nonzero entries: $\\binom nk$ ways;\n- choose their signs: $2^k$ ways;\n- choose their absolute values, an ordered $k$-tuple of positive integers $(y_1,\\dots,y_k)$ with $y_1+\\cdots+y_k\\le m$. The partial sums $y_1 < y_1+y_2 < \\cdots < y_1+\\cdots+y_k$ form a $k$-element subset of $\\{1,\\dots,m\\}$, and every such subset arises from exactly one tuple; so there are $\\binom mk$ ways.\n\nHence $f(m,n,k) = 2^k\\binom nk\\binom mk$ and\n$$f(m,n) = \\sum_{k\\ge0}2^k\\binom nk\\binom mk,$$\nwhich is symmetric in $m$ and $n$ (terms with $k>\\min(m,n)$ vanish). So $f(m,n) = f(n,m)$. ∎"
+      },
+      {
+        "title": "A symmetric recurrence",
+        "body": "Extend the definition to $m,n\\ge0$: $f(m,0) = 1$ (only the empty tuple) and $f(0,n) = 1$ (only the zero tuple). Let $S_{m,n}$ be the set of tuples counted by $f(m,n)$, for $m,n\\ge1$. Split it into three classes:\n- $|x_1|+\\cdots+|x_n| < m$: these are exactly the elements of $S_{m-1,n}$;\n- sum $= m$ and $x_n\\ge0$: dropping $x_n$ gives an element of $S_{m,n-1}$, and conversely any element of $S_{m,n-1}$ extends uniquely by $x_n = m - (|x_1|+\\cdots+|x_{n-1}|)\\ge0$;\n- sum $= m$ and $x_n<0$: dropping $x_n$ gives an element of $S_{m-1,n-1}$ (the remaining sum is $m - |x_n|\\le m-1$), and conversely any element of $S_{m-1,n-1}$ extends uniquely by $x_n = -(m - \\text{sum}) < 0$.\n\nSo $f(m,n) = f(m-1,n) + f(m,n-1) + f(m-1,n-1)$ for $m,n\\ge1$. The recurrence and the boundary values are symmetric under $m\\leftrightarrow n$, so by induction on $m+n$, $f(m,n) = f(n,m)$. ∎\n\n(Equivalently, $\\sum_{m,n\\ge0}f(m,n)x^my^n = \\frac{1}{1-x-y-xy}$, which is symmetric.)"
+      }
+    ],
+    "topics": [
+      "counting"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "putnam-2005-b5",
+    "bank": "putnam",
+    "source": {
+      "contest": "Putnam",
+      "paper": "66th William Lowell Putnam Mathematical Competition (December 3, 2005)",
+      "year": 2005,
+      "number": "B5",
+      "url": "https://kskedlaya.org/putnam-archive/"
+    },
+    "grade": "undergrad",
+    "points": 10,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $P(x_1,\\dots,x_n)$ denote a polynomial with real coefficients in the variables $x_1,\\dots,x_n$, and suppose that\n$$\\left(\\frac{\\partial^2}{\\partial x_1^2} + \\cdots + \\frac{\\partial^2}{\\partial x_n^2}\\right)P(x_1,\\dots,x_n) = 0\\quad\\text{(identically)}$$\nand that\n$$x_1^2 + \\cdots + x_n^2 \\text{ divides } P(x_1,\\dots,x_n).$$\nShow that $P = 0$ identically.",
+    "image": null,
+    "choices": null,
+    "answer": "Proof. Reduce to $P$ homogeneous; write $P = Q^mR$ with $Q = \\sum x_i^2$, $m\\ge1$ maximal. A direct computation gives $\\Delta(Q^mR) = Q^{m-1}\\left[2m(n+2m-2+2e)R + Q\\,\\Delta R\\right]$ ($e = \\deg R$), so $Q\\mid R$, a contradiction. (Or: $P(\\partial)P = 0$ but its constant term is $\\sum c_\\alpha^2\\alpha!$.)",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Peel off powers of x₁² + ⋯ + xₙ²",
+        "body": "Write $\\Delta = \\sum_i\\partial^2/\\partial x_i^2$ and $Q = x_1^2+\\cdots+x_n^2$.\n\n**Reduction to homogeneous $P$.** $\\Delta$ maps homogeneous polynomials of degree $d$ to homogeneous polynomials of degree $d-2$, so $\\Delta P = 0$ iff $\\Delta P_d = 0$ for every homogeneous component $P_d$ of $P$. If $P = QS$, then $P_d = QS_{d-2}$ (compare components of degree $d$). So each $P_d$ satisfies both hypotheses, and it suffices to treat homogeneous $P$.\n\n**Homogeneous case.** Suppose $P\\ne0$ is homogeneous with $\\Delta P = 0$ and $Q\\mid P$. Write $P = Q^mR$ with $m\\ge1$ as large as possible; then $R\\ne0$ is homogeneous of some degree $e\\ge0$ and $Q\\nmid R$. We compute, using $\\nabla Q = 2x$ and $x\\cdot x = Q$:\n$$\\partial_i(Q^m) = 2mx_iQ^{m-1},\\qquad \\Delta(Q^m) = \\sum_i\\left(2mQ^{m-1} + 4m(m-1)x_i^2Q^{m-2}\\right) = 2m(n + 2m - 2)\\,Q^{m-1}.$$\nBy Euler's formula for the homogeneous $R$, $\\sum_ix_i\\,\\partial_iR = eR$, so\n$$\\Delta(Q^mR) = \\Delta(Q^m)R + 2\\sum_i\\partial_i(Q^m)\\,\\partial_iR + Q^m\\Delta R = Q^{m-1}\\Big[2m(n+2m-2)R + 4meR + Q\\,\\Delta R\\Big].$$\nSince $\\Delta P = 0$ and the polynomial ring has no zero divisors,\n$$2m(n + 2m - 2 + 2e)\\,R = -Q\\,\\Delta R .$$\nThe constant $2m(n+2m-2+2e)$ is positive ($m\\ge1$, $n\\ge1$), so $Q$ divides $R$ — contradicting the maximality of $m$. Hence $P = 0$. ∎"
+      },
+      {
+        "title": "Apply P to itself as a differential operator",
+        "body": "Write $P = \\sum_\\alpha c_\\alpha x^\\alpha$ (multi-indices $\\alpha$, $x^\\alpha = x_1^{\\alpha_1}\\cdots x_n^{\\alpha_n}$), and let $P(\\partial) = \\sum_\\alpha c_\\alpha\\partial^\\alpha$ be the differential operator obtained by substituting $\\partial_i = \\partial/\\partial x_i$ for $x_i$. Constant-coefficient operators commute and multiply like polynomials, so if $P = Q\\cdot S$ with $Q = \\sum x_i^2$, then $P(\\partial) = S(\\partial)\\,\\Delta$ and\n$$P(\\partial)P = S(\\partial)(\\Delta P) = 0 .$$\nNow evaluate $P(\\partial)P$ at $x = 0$. For multi-indices $\\beta,\\alpha$, $\\partial^\\beta x^\\alpha$ at $0$ equals $\\alpha!$ if $\\beta = \\alpha$ and $0$ otherwise (if $\\beta\\ne\\alpha$, either some $\\beta_i>\\alpha_i$ and the result is $0$, or the result is a nonconstant monomial). So\n$$0 = \\big(P(\\partial)P\\big)(0) = \\sum_\\alpha c_\\alpha^2\\,\\alpha!,$$\nand since the $c_\\alpha$ are real, all $c_\\alpha = 0$: $P = 0$. ∎\n\n*Remark.* The result fails in characteristic $p$: $Q^p = \\sum x_i^{2p}$ is harmonic there."
+      }
+    ],
+    "topics": [
+      "polynomials",
+      "calculus",
+      "abstract-algebra"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "putnam-2005-b6",
+    "bank": "putnam",
+    "source": {
+      "contest": "Putnam",
+      "paper": "66th William Lowell Putnam Mathematical Competition (December 3, 2005)",
+      "year": 2005,
+      "number": "B6",
+      "url": "https://kskedlaya.org/putnam-archive/"
+    },
+    "grade": "undergrad",
+    "points": 10,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $S_n$ denote the set of all permutations of the numbers $1,2,\\dots,n$. For $\\pi\\in S_n$, let $\\sigma(\\pi) = 1$ if $\\pi$ is an even permutation and $\\sigma(\\pi) = -1$ if $\\pi$ is an odd permutation. Also, let $\\nu(\\pi)$ denote the number of fixed points of $\\pi$. Show that\n$$\\sum_{\\pi\\in S_n}\\frac{\\sigma(\\pi)}{\\nu(\\pi)+1} = (-1)^{n+1}\\frac{n}{n+1}.$$",
+    "image": null,
+    "choices": null,
+    "answer": "Proof. $\\sum_\\pi\\sigma(\\pi)x^{\\nu(\\pi)} = \\det J_x$ where $J_x$ has $x$ on the diagonal and $1$ elsewhere, and $\\det J_x = (x+n-1)(x-1)^{n-1}$. Integrate from $0$ to $1$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "A determinant, integrated",
+        "body": "Let $J_x$ be the $n\\times n$ matrix with $x$ on the diagonal and $1$ elsewhere. By the Leibniz formula,\n$$\\det J_x = \\sum_{\\pi\\in S_n}\\sigma(\\pi)\\prod_{i=1}^n(J_x)_{i,\\pi(i)} = \\sum_{\\pi\\in S_n}\\sigma(\\pi)\\,x^{\\nu(\\pi)},$$\nsince the factor is $x$ exactly when $\\pi(i) = i$.\n\nOn the other hand $J_x = (x-1)I + J$ with $J$ the all-ones matrix. $J$ has rank $1$ and trace $n$, so its eigenvalues are $n$ (once) and $0$ ($n-1$ times); hence $J_x$ has eigenvalues $x+n-1$ and $x-1$ ($n-1$ times), and\n$$\\det J_x = (x+n-1)(x-1)^{n-1}.$$\nIntegrate both expressions over $[0,1]$, using $\\int_0^1x^\\nu\\,dx = \\frac{1}{\\nu+1}$, and substitute $y = 1-x$:\n$$\\sum_{\\pi}\\frac{\\sigma(\\pi)}{\\nu(\\pi)+1} = \\int_0^1(x+n-1)(x-1)^{n-1}dx = (-1)^{n-1}\\int_0^1(n-y)\\,y^{n-1}dy = (-1)^{n-1}\\left(1 - \\frac{1}{n+1}\\right) = (-1)^{n+1}\\frac{n}{n+1}. \\qquad ∎$$"
+      },
+      {
+        "title": "Inclusion–exclusion on fixed-point sets",
+        "body": "For $U\\subseteq[n] = \\{1,\\dots,n\\}$ let $f(U)$ be the sum of $\\sigma(\\pi)$ over permutations whose set of fixed points is exactly $U$, and for $T\\subseteq[n]$ let $g(T) = \\sum_{U\\supseteq T}f(U)$, the sum of $\\sigma(\\pi)$ over permutations fixing every point of $T$. Such permutations are the permutations of the remaining $n - |T|$ points, with the same sign; since a symmetric group on $\\ge2$ symbols has equally many even and odd permutations,\n$$g(T) = \\begin{cases}1 & |T|\\ge n-1,\\\\ 0 & \\text{otherwise.}\\end{cases}$$\nBy Möbius inversion on subsets, $f(U) = \\sum_{T\\supseteq U}(-1)^{|T|-|U|}g(T)$. With $|U| = i$: the term $T = [n]$ contributes $(-1)^{n-i}$, and the $n-i$ sets $T\\supseteq U$ of size $n-1$ contribute $(-1)^{n-1-i}$ each. So $f(U) = (-1)^{n-i}(1 - n + i)$.\n\nGrouping permutations by their fixed-point set,\n$$\\sum_\\pi\\frac{\\sigma(\\pi)}{\\nu(\\pi)+1} = \\sum_{i=0}^n\\binom ni(-1)^{n-i}\\frac{1-n+i}{i+1} = \\sum_{i=0}^n\\binom ni(-1)^{n-i} - \\sum_{i=0}^n\\binom ni(-1)^{n-i}\\frac{n}{i+1}.$$\nThe first sum is $(1-1)^n = 0$. In the second, $\\frac{1}{i+1}\\binom ni = \\frac{1}{n+1}\\binom{n+1}{i+1}$, so it equals\n$$\\frac{n}{n+1}\\sum_{j=1}^{n+1}\\binom{n+1}{j}(-1)^{n+1-j} = \\frac{n}{n+1}\\left[(1-1)^{n+1} - (-1)^{n+1}\\right] = -(-1)^{n+1}\\frac{n}{n+1}.$$\nHence the total is $(-1)^{n+1}\\frac{n}{n+1}$. ∎"
+      }
+    ],
+    "topics": [
+      "counting",
+      "linear-algebra",
+      "abstract-algebra"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

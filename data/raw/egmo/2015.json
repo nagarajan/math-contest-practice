@@ -1,0 +1,208 @@
+[
+  {
+    "id": "egmo-2015-01",
+    "bank": "egmo",
+    "source": {
+      "contest": "EGMO",
+      "paper": "Day 1",
+      "year": 2015,
+      "number": 1,
+      "url": "https://www.egmo.org/egmos/egmo4/paper-day1-English.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $\\triangle ABC$ be an acute-angled triangle, and let $D$ be the foot of the altitude from $C$. The angle bisector of $\\angle ABC$ intersects $CD$ at $E$ and meets the circumcircle $\\omega$ of triangle $\\triangle ADE$ again at $F$. If $\\angle ADF=45^\\circ$, show that $CF$ is tangent to $\\omega$.",
+    "image": null,
+    "choices": null,
+    "answer": "Proof: $DF$ is the external bisector at $D$ of triangle $BDC$, so $F$ is its excentre opposite $B$ and $CF$ bisects the exterior angle at $C$; then $\\angle CFE=45^\\circ=\\angle FDE$, which gives tangency.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "F is an excentre of BDC",
+        "body": "Let $\\angle ABC=2\\beta$.\n\n**Where $F$ is.** $B$ lies on line $AD$ outside segment $AD$, so $B$ is outside $\\omega$, and $E$, $F$ lie on the same ray from $B$. Hence $F$ is on the same side of $AB$ as $C$. As $\\angle ADC=90^\\circ$ and $\\angle ADF=45^\\circ$, ray $DF$ bisects the right angle $ADC$. So line $DF$ is the **external** bisector of $\\angle BDC$ in triangle $BDC$, while line $BF$ is the internal bisector of $\\angle DBC$. These two lines meet only at the excentre of triangle $BDC$ opposite $B$. So $F$ is that excentre, and therefore $CF$ is the external bisector of $\\angle BCD$.\n\n**Angles.** In triangle $BDC$: $\\angle DBC=2\\beta$, $\\angle BDC=90^\\circ$, $\\angle BCD=90^\\circ-2\\beta$. The exterior angle at $C$ is $90^\\circ+2\\beta$, so\n$$\\angle ECF=\\angle DCF=45^\\circ+\\beta .$$\n$E$ lies between $D$ and $C$ and between $B$ and $F$, so $\\angle CEF=\\angle DEB=90^\\circ-\\beta$ (vertical angles, in the right triangle $BDE$). Therefore, in triangle $CEF$,\n$$\\angle CFE=180^\\circ-(45^\\circ+\\beta)-(90^\\circ-\\beta)=45^\\circ .$$\n\n**Tangency.** $\\angle FDE=\\angle FDC=45^\\circ=\\angle CFE$, and $C$ and $D$ lie on opposite sides of line $EF$ (since $E$ lies between them). By the converse of the tangent–chord theorem, $CF$ is tangent to the circle through $D,E,F$, which is $\\omega$. ∎"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "egmo-2015-02",
+    "bank": "egmo",
+    "source": {
+      "contest": "EGMO",
+      "paper": "Day 1",
+      "year": 2015,
+      "number": 2,
+      "url": "https://www.egmo.org/egmos/egmo4/paper-day1-English.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "A *domino* is a $2\\times1$ or $1\\times2$ tile. Determine in how many ways exactly $n^2$ dominoes can be placed without overlapping on a $2n\\times2n$ chessboard so that every $2\\times2$ square contains at least two uncovered unit squares which lie in the same row or column.",
+    "image": null,
+    "choices": null,
+    "answer": "$\\binom{2n}{n}^2$ (each aligned $2\\times2$ block holds exactly one domino; the valid patterns correspond to pairs of monotone lattice paths).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "One domino per block, then two staircases",
+        "body": "Split the board into $n^2$ aligned $2\\times2$ **blocks**. A $2\\times2$ square is *good* if some whole row or column of it is uncovered, i.e. if its covered cells lie within one row or one column.\n\n**1. Each block holds exactly one domino.** A good square has at most $2$ covered cells. The $n^2$ dominoes cover $2n^2$ cells, so every block has exactly $2$ covered cells, lying in one row or one column.\n\nSuppose a horizontal domino $d$ straddles two blocks $X$ (left) and $Y$, covering $(r,2j)$ and $(r,2j+1)$ (row $r$, columns $2j$, $2j+1$). Let $r'$ be the other row of the block-row. The square on rows $r,r'$ and columns $2j,2j+1$ is good, so $(r',2j)$ and $(r',2j+1)$ are uncovered. In $X$, $(r,2j)$ is covered and $(r',2j)$ is not, so the second covered cell of $X$ is $(r,2j-1)$. It is covered by a domino $d_1\\ne d$, and we check the possibilities:\n- $d_1$ cannot be vertical inside $X$, as $X$ would have $3$ covered cells.\n- $d_1$ cannot be vertical crossing into the next block-row. Applying the same argument to $d_1$ would force the cells of column $2j$ in those two rows to be uncovered, but $(r,2j)\\in d$.\n\nSo $d_1$ is horizontal on columns $2j-2,2j-1$: another straddling domino, further left. Repeating this runs off the board, a contradiction. Vertical dominoes are handled the same way. So no domino straddles, and each block contains exactly one domino. Call the block **top**, **bottom**, **left** or **right** according to its position.\n\n**2. Two adjacent blocks.** Let $S_1=\\{\\text{right},\\text{bottom}\\}$ and $S_2=\\{\\text{left},\\text{bottom}\\}$.\n- *$X$ directly left of $Y$.* The middle square is $X$'s right column plus $Y$'s left column. Checking the $16$ cases, it is good exactly for the pairs (left, any), (top, top), (top, right), (bottom, bottom), (bottom, right), (right, right). These are exactly the pairs with ($X\\in S_1\\Rightarrow Y\\in S_1$) and ($Y\\in S_2\\Rightarrow X\\in S_2$).\n- *$X$ directly above $Y$.* The good pairs are (top, any), (left, left), (left, bottom), (right, right), (right, bottom), (bottom, bottom). These are exactly the pairs with ($X\\in S_1\\Rightarrow Y\\in S_1$) and ($X\\in S_2\\Rightarrow Y\\in S_2$).\n\nSo the set $\\mathcal S_1$ of blocks of type in $S_1$ is closed under moving **right and down**, and the set $\\mathcal S_2$ of blocks of type in $S_2$ is closed under moving **left and down**. The type of a block is determined by its membership in $\\mathcal S_1$ and $\\mathcal S_2$: right $=(1,0)$, bottom $=(1,1)$, left $=(0,1)$, top $=(0,0)$.\n\n**3. The remaining squares are automatically good.** A square meeting four blocks $X$ (top-left), $Y$, $Z$, $W$ (bottom-right) consists of:\n- $a$, the bottom-right cell of $X$, covered iff $X\\in\\mathcal S_1$;\n- $b$, the bottom-left cell of $Y$, covered iff $Y\\in\\mathcal S_2$;\n- $c$, the top-right cell of $Z$, covered iff $Z\\notin\\mathcal S_2$;\n- $d$, the top-left cell of $W$, covered iff $W\\notin\\mathcal S_1$.\n\nIf $X\\in\\mathcal S_1$ then $W\\in\\mathcal S_1$ by closure, so $a$ and $d$ are not both covered. Likewise, if $Y\\in\\mathcal S_2$ then $Z\\in\\mathcal S_2$, so $b$ and $c$ are not both covered. A set of covered cells containing neither diagonal pair lies in one row or column, so the square is good. Squares inside one block are good as well. So a placement is valid **iff** $\\mathcal S_1$ is right-down closed and $\\mathcal S_2$ is left-down closed, with any such pair allowed.\n\n**4. Counting.** A right-down closed set is determined by its row lengths $0\\le k_1\\le k_2\\le\\dots\\le k_n\\le n$ (each row contains a suffix, and the suffixes lengthen going down). There are $\\binom{2n}{n}$ such sequences (monotone lattice paths). The same holds for left-down closed sets.\n\n**Answer: $\\binom{2n}{n}^2$.**"
+      }
+    ],
+    "topics": [
+      "counting"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "egmo-2015-03",
+    "bank": "egmo",
+    "source": {
+      "contest": "EGMO",
+      "paper": "Day 1",
+      "year": 2015,
+      "number": 3,
+      "url": "https://www.egmo.org/egmos/egmo4/paper-day1-English.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $n$, $m$ be integers greater than $1$, and let $a_1, a_2, \\ldots, a_m$ be positive integers not greater than $n^m$. Prove that there exist positive integers $b_1, b_2, \\ldots, b_m$ not greater than $n$, such that\n$$\\gcd(a_1+b_1, a_2+b_2, \\ldots, a_m+b_m)<n,$$\nwhere $\\gcd(x_1, x_2, \\ldots, x_m)$ denotes the greatest common divisor of $x_1, x_2, \\ldots, x_m$.",
+    "image": null,
+    "choices": null,
+    "answer": "Proof: if all $n^m$ choices gave gcd $\\ge n$, pigeonhole on the at most $n^m-1$ possible values (all $\\le a_1+n$ with $a_1$ the minimum) gives two choices with the same gcd $d\\ge n$, but $d$ divides at most one $a_i+b_i$ with $1\\le b_i\\le n$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Pigeonhole on the gcd values",
+        "body": "Assume $a_1=\\min a_i$.\n\n**Easy case: $a_1\\ge n^m-1$.** Then every $a_i\\in\\{n^m-1,n^m\\}$.\n- If all $a_i$ are equal, take $b_1=1$, $b_2=2$ (others arbitrary). Then the gcd divides $\\gcd(a_1+1,a_1+2)=1$.\n- Otherwise $a_1=n^m-1$ and some $a_j=n^m$. Take $b_1=b_j=1$; the gcd divides $\\gcd(n^m,n^m+1)=1$.\n\nEither way the gcd is $1<n$.\n\n**Main case: $a_1\\le n^m-2$.** Suppose, for contradiction, that every choice of $(b_1,\\dots,b_m)\\in\\{1,\\dots,n\\}^m$ gives a gcd $\\ge n$. This gcd is at most $a_1+b_1\\le n^m+n-2$. So it takes one of at most $(n^m+n-2)-n+1=n^m-1$ values, while there are $n^m$ choices. By pigeonhole, two different tuples $(b_i)\\ne(b_i')$ give the same gcd $d\\ge n$.\n\nPick $i$ with $b_i\\ne b_i'$. Then $d\\mid a_i+b_i$ and $d\\mid a_i+b_i'$, so $d\\mid b_i-b_i'$. But $0<|b_i-b_i'|\\le n-1<d$. Contradiction.\n\nHence some choice gives $\\gcd<n$. ∎"
+      }
+    ],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "egmo-2015-04",
+    "bank": "egmo",
+    "source": {
+      "contest": "EGMO",
+      "paper": "Day 2",
+      "year": 2015,
+      "number": 4,
+      "url": "https://www.egmo.org/egmos/egmo4/paper-day2-English.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "text",
+    "prompt": "Determine whether there exists an infinite sequence $a_1, a_2, a_3, \\ldots$ of positive integers which satisfies the equality\n$$a_{n+2}=a_{n+1}+\\sqrt{a_{n+1}+a_n}$$\nfor every positive integer $n$.",
+    "image": null,
+    "choices": null,
+    "answer": "No",
+    "acceptedAnswers": [
+      "no",
+      "No such sequence exists",
+      "does not exist",
+      "no such sequence"
+    ],
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Consecutive differences",
+        "body": "Suppose such a sequence exists. For $n\\ge2$ let $b_n=a_{n+1}-a_n$. The recurrence (with index $n-1$) says $b_n=\\sqrt{a_n+a_{n-1}}$, so each $b_n$ ($n\\ge2$) is a positive integer. For $n\\ge2$,\n$$b_{n+1}^2-b_n^2=(a_{n+1}+a_n)-(a_n+a_{n-1})=a_{n+1}-a_{n-1}=b_n+b_{n-1} .$$\n\nFor $n\\ge3$ the right side is positive, so $b_{n+1}>b_n$. Thus $b_3<b_4<b_5<\\cdots$, and in particular $b_{n+1}-b_n\\ge1$ for $n\\ge 3$.\n\nTake $n=4$:\n$$b_4+b_3=(b_5-b_4)(b_5+b_4)\\ge b_5+b_4,$$\nso $b_3\\ge b_5$, contradicting $b_3<b_4<b_5$.\n\nSo no such sequence exists. (The argument uses only $a_1,\\dots,a_6$.) **Answer: No.**"
+      }
+    ],
+    "topics": [
+      "sequences-series",
+      "number-theory"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "egmo-2015-05",
+    "bank": "egmo",
+    "source": {
+      "contest": "EGMO",
+      "paper": "Day 2",
+      "year": 2015,
+      "number": 5,
+      "url": "https://www.egmo.org/egmos/egmo4/paper-day2-English.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $m$, $n$ be positive integers with $m>1$. Anastasia partitions the integers $1, 2, \\ldots, 2m$ into $m$ pairs. Boris then chooses one integer from each pair and finds the sum of these chosen integers. Prove that Anastasia can select the pairs so that Boris cannot make his sum equal to $n$.",
+    "image": null,
+    "choices": null,
+    "answer": "Proof: three partitions suffice: $\\{1,2\\},\\{3,4\\},\\dots$ handles $n\\notin[m^2,m^2+m]$; $\\{1,2m\\},\\{2,3\\},\\{4,5\\},\\dots$ handles $m^2<n<m^2+m$; $\\{1,2m-1\\},\\{2,2m\\},\\{3,4\\},\\dots$ handles $n=m^2$ and $n=m^2+m$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Three partitions",
+        "body": "We give three partitions; for each $n$ one of them works.\n\n**Partition 1: $\\{1,2\\},\\{3,4\\},\\dots,\\{2m-1,2m\\}$.** Boris's sum is $\\sum(2i-1)+k=m^2+k$, where $k\\in\\{0,\\dots,m\\}$ is the number of even numbers chosen. So the possible sums are exactly $m^2,\\dots,m^2+m$. This works for every $n\\notin[m^2,m^2+m]$.\n\n**Partition 2: $\\{1,2m\\},\\{2,3\\},\\{4,5\\},\\dots,\\{2m-2,2m-1\\}$.** The $m-1$ pairs $\\{2i,2i+1\\}$ contribute between $\\sum_{i=1}^{m-1}2i=m^2-m$ and $m^2-1$. So the total lies in $[m^2-m+1,\\,m^2]$ if Boris picks $1$, and in $[m^2+m,\\,m^2+2m-1]$ if he picks $2m$. Every $n$ with $m^2<n<m^2+m$ is impossible.\n\n**Partition 3: $\\{1,2m-1\\},\\{2,2m\\},\\{3,4\\},\\{5,6\\},\\dots,\\{2m-3,2m-2\\}$.** For $m=2$ there are no pairs after the first two. The $m-2$ pairs $\\{2i+1,2i+2\\}$ ($1\\le i\\le m-2$) contribute between $m^2-2m$ and $m^2-m-2$. The first two pairs contribute $3$, $2m+1$ or $4m-1$. So the total lies in\n$$[m^2-2m+3,\\,m^2-m+1]\\ \\cup\\ [m^2+1,\\,m^2+m-1]\\ \\cup\\ [m^2+2m-1,\\,m^2+3m-3].$$\nSince $m>1$, this misses both $m^2$ and $m^2+m$: we have $m^2-m+1<m^2$, $m^2+m-1<m^2+m<m^2+2m-1$, and $m^2+1>m^2$.\n\nEvery $n$ falls into one of the three cases, so Anastasia can always block $n$. ∎"
+      }
+    ],
+    "topics": [
+      "counting",
+      "number-theory"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "egmo-2015-06",
+    "bank": "egmo",
+    "source": {
+      "contest": "EGMO",
+      "paper": "Day 2",
+      "year": 2015,
+      "number": 6,
+      "url": "https://www.egmo.org/egmos/egmo4/paper-day2-English.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $H$ be the orthocentre and $G$ be the centroid of acute-angled triangle $\\triangle ABC$ with $AB\\ne AC$. The line $AG$ intersects the circumcircle of $\\triangle ABC$ at $A$ and $P$. Let $P'$ be the reflection of $P$ in the line $BC$. Prove that $\\angle CAB=60^\\circ$ if and only if $HG=GP'$.",
+    "image": null,
+    "choices": null,
+    "answer": "Proof: reflect in $BC$, so the condition becomes $H'G'=G'P$ with $H'$, $P$ on the circumcircle. In complex coordinates (unit circle, $BC$ horizontal, $d=b-\\bar b$) it reduces to $(a^2+1)(d^2+1)=0$, i.e. $d=\\pm i$, i.e. $\\cos A=\\tfrac12$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Complex numbers",
+        "body": "Reflect everything in $BC$. Let $H'$ and $G'$ be the reflections of $H$ and $G$. Then $HG=GP'\\iff H'G'=G'P$.\n\n**Coordinates.** Take the circumcircle as the unit circle, with $BC$ horizontal and symmetric about the imaginary axis: $c=-\\bar b$. Put $d=b-\\bar b=2i\\operatorname{Im}b$, so $\\bar d=-d$, and $|\\operatorname{Im} b|$ is the distance from $O$ to $BC$, which is $\\cos A$ (acute triangle, $R=1$). Reflection in the line $BC$ is $z\\mapsto\\bar z+d$. Then\n- $h=a+b+c=a+d$, so $h'=\\bar h+d=\\bar a=1/a$;\n- $g=\\frac{a+d}{3}$, $\\bar g=\\frac{1/a-d}{3}$, so $g'=\\bar g+d=\\frac{1/a+2d}{3}$ and $\\bar{g'}=\\frac{a-2d}{3}$.\n\n**The point $P$.** For points on the unit circle, the chord through $a$ and $p$ consists of the $z$ with $z+ap\\bar z=a+p$. Putting $z=g$:\n$$p=\\frac{g-a}{1-a\\bar g}=\\frac{d-2a}{2+ad},\\qquad \\bar p=\\frac1p=\\frac{2+ad}{d-2a}.$$\nThe denominators are nonzero since $g\\ne a$.\n\n**The condition.** For $u,v$ on the unit circle, $|z-u|^2-|z-v|^2=-2\\operatorname{Re}\\big(z(\\bar u-\\bar v)\\big)$. So $H'G'=G'P$ iff $g'(a-\\bar p)+\\bar{g'}(\\bar a-p)=0$. Now\n$$a-\\bar p=\\frac{-2(a^2+1)}{d-2a},\\qquad \\bar a-p=\\frac{2(a^2+1)}{a(2+ad)} .$$\nIf $a^2=-1$, then $A$ lies on the imaginary axis, the perpendicular bisector of $BC$, and $AB=AC$, which is excluded. So we may cancel $\\frac23(a^2+1)$. The condition becomes\n$$-\\frac{1+2ad}{a(d-2a)}+\\frac{a-2d}{a(2+ad)}=0\\iff (a-2d)(d-2a)=(1+2ad)(2+ad).$$\nExpanding, $5ad-2a^2-2d^2=2+5ad+2a^2d^2$, i.e.\n$$(a^2+1)(d^2+1)=0\\iff d^2=-1\\iff 4(\\operatorname{Im}b)^2=1\\iff\\cos A=\\tfrac12\\iff\\angle CAB=60^\\circ .$$\n∎"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "complex-numbers"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

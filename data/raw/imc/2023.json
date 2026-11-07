@@ -1,0 +1,368 @@
+[
+  {
+    "id": "imc-2023-01",
+    "bank": "imc",
+    "source": {
+      "contest": "IMC",
+      "paper": "Day 1",
+      "year": 2023,
+      "number": 1,
+      "url": "https://www.imc-math.org.uk/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Find all functions $f:\\mathbb R\\to\\mathbb R$ that have a continuous second derivative and for which the equality $f(7x+1)=49f(x)$ holds for all $x\\in\\mathbb R$.",
+    "image": null,
+    "choices": null,
+    "answer": "$f(x)=c(6x+1)^2$ for a real constant $c$ (differentiating twice gives $f''(7x+1)=f''(x)$, so $f''$ is constant by iterating towards the fixed point $-\\frac16$).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Differentiate twice and iterate",
+        "body": "**Answer: $f(x)=c(6x+1)^2$, $c\\in\\mathbb R$.** These work: $c(42x+7)^2=49c(6x+1)^2$.\n\nConversely, differentiating the identity twice gives $49f''(7x+1)=49f''(x)$, i.e.\n$$f''(x)=f''\\Big(\\frac{x-1}7\\Big)\\qquad\\text{for all }x .$$\nFix $x$ and define $x_0=x$, $x_{j+1}=\\frac{x_j-1}{7}$. Then $f''(x_j)=f''(x)$ for all $j$, and\n$$x_{j+1}+\\frac16=\\frac17\\Big(x_j+\\frac16\\Big),$$\nso $x_j\\to-\\frac16$. By continuity of $f''$, $f''(x)=f''(-\\frac16)$. Thus $f''$ is constant and $f(x)=ax^2+bx+c_0$.\n\nSubstituting: $a(7x+1)^2+b(7x+1)+c_0=49ax^2+(14a+7b)x+(a+b+c_0)$ must equal $49ax^2+49bx+49c_0$. So $14a=42b$ and $a+b=48c_0$, i.e. $a=3b$, $b=12c_0$, $a=36c_0$, and\n$$f(x)=c_0(36x^2+12x+1)=c_0(6x+1)^2 .$$\n∎"
+      },
+      {
+        "title": "Move the fixed point to the origin",
+        "body": "Put $F(y)=f\\big(y-\\frac16\\big)$. Since $7\\big(y-\\frac16\\big)+1=7y-\\frac16$, the equation becomes\n$$F(7y)=49F(y)\\qquad(y\\in\\mathbb R),$$\nand $F\\in C^2$. Setting $y=0$ gives $F(0)=0$; differentiating, $7F'(7y)=49F'(y)$, and $y=0$ gives $F'(0)=0$. By Taylor's theorem, $F(y)/y^2\\to\\frac{F''(0)}2=:c$ as $y\\to0$.\n\nFor $y\\ne0$ let $G(y)=F(y)/y^2$. Then $G(7y)=\\frac{49F(y)}{49y^2}=G(y)$, so $G(y)=G(y/7^j)$ for every $j$, and letting $j\\to\\infty$, $G(y)=c$. Hence $F(y)=cy^2$ for all $y$ (also at $0$), and\n$$f(x)=F\\Big(x+\\frac16\\Big)=c\\Big(x+\\frac16\\Big)^2=\\frac{c}{36}(6x+1)^2 .$$\nSo the solutions are exactly $f(x)=C(6x+1)^2$, $C\\in\\mathbb R$. ∎"
+      }
+    ],
+    "topics": [
+      "functional-equations",
+      "calculus"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imc-2023-02",
+    "bank": "imc",
+    "source": {
+      "contest": "IMC",
+      "paper": "Day 1",
+      "year": 2023,
+      "number": 2,
+      "url": "https://www.imc-math.org.uk/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $A$, $B$ and $C$ be $n\\times n$ matrices with complex entries satisfying\n$$A^2=B^2=C^2\\qquad\\text{and}\\qquad B^3=ABC+2I .$$\nProve that $A^6=I$.",
+    "image": null,
+    "choices": null,
+    "answer": "From $B^3=A^2B=BC^2$: $A(AB-BC)=2I=(BC-AB)C$, so $C=-A$ and $AB+BA$ is invertible; then $ABA=2I-B^3$ commutes with $B$, giving $(AB-BA)(AB+BA)=0$, so $AB=BA$, $B^3=I$ and $A^6=B^6=I$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Factor $B^3-ABC$ in two ways",
+        "body": "**Step 1: $C=-A$.** Since $B^3=B^2B=A^2B$, the second relation gives $A^2B-ABC=2I$, i.e.\n$$A(AB-BC)=2I .$$\nSince also $B^3=BB^2=BC^2$, we get $BC^2-ABC=2I$, i.e. $(BC-AB)C=2I$, or\n$$(AB-BC)(-C)=2I .$$\nSo $M=\\frac12(AB-BC)$ has left inverse $A$ and right inverse $-C$. Hence $M$ is invertible and $A=M^{-1}=-C$.\n\n**Step 2: $AB=BA$.** With $C=-A$: $M=\\frac12(AB+BA)$ is invertible, and $B^3=-ABA+2I$, so $ABA=2I-B^3$ commutes with $B$: $BABA=ABAB$, i.e. $(AB)^2=(BA)^2$. Now\n$$(AB-BA)(AB+BA)=(AB)^2+AB^2A-BA^2B-(BA)^2=AB^2A-BA^2B .$$\nUsing $A^2=B^2$: $AB^2A=A\\cdot A^2\\cdot A=A^4$ and $BA^2B=B\\cdot B^2\\cdot B=B^4=(B^2)^2=(A^2)^2=A^4$. So $(AB-BA)(AB+BA)=0$, and since $AB+BA=2M$ is invertible, $AB=BA$.\n\n**Step 3.** Now $ABA=A^2B=B^2B=B^3$, so $B^3=2I-B^3$, i.e. $B^3=I$. Finally\n$$A^6=(A^2)^3=(B^2)^3=(B^3)^2=I .$$\n∎"
+      }
+    ],
+    "topics": [
+      "linear-algebra",
+      "abstract-algebra"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imc-2023-03",
+    "bank": "imc",
+    "source": {
+      "contest": "IMC",
+      "paper": "Day 1",
+      "year": 2023,
+      "number": 3,
+      "url": "https://www.imc-math.org.uk/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Find all polynomials $P$ in two variables with real coefficients satisfying the identity\n$$P(x,y)P(z,t)=P(xz-yt,\\,xt+yz).$$",
+    "image": null,
+    "choices": null,
+    "answer": "$P\\equiv0$ and $P(x,y)=(x^2+y^2)^n$ for $n=0,1,2,\\dots$ (in the variables $u=x+iy$, $v=x-iy$ the identity says $P$ is multiplicative, forcing a single monomial $u^av^b$; real coefficients force $a=b$).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Split off the factors $x\\pm iy$",
+        "body": "**Answer:** $P\\equiv0$ and $P(x,y)=(x^2+y^2)^n$, $n\\ge0$. These work, since $(xz-yt)^2+(xt+yz)^2=(x^2+y^2)(z^2+t^2)$.\n\nNote that the identity says $P(w_1)P(w_2)=P(w_1w_2)$ when points $(x,y)$ are read as complex numbers $x+iy$. We first find all solutions with **complex** coefficients. A polynomial identity over $\\mathbb R$ in $x,y,z,t$ is also an identity of polynomials.\n\nLet $P\\not\\equiv0$ and write $P=(x+iy)^n(x-iy)^mQ$ with $n,m\\ge0$ and $Q$ divisible by neither $x+iy$ nor $x-iy$ (possible by unique factorisation in $\\mathbb C[x,y]$). The polynomial $(x+iy)^n(x-iy)^m$ satisfies the identity itself, because\n$$(x+iy)(z+it)=(xz-yt)+i(xt+yz),\\qquad (x-iy)(z-it)=(xz-yt)-i(xt+yz).$$\nCancelling these nonzero factors (in the integral domain $\\mathbb C[x,y,z,t]$) gives $Q(x,y)Q(z,t)=Q(xz-yt,xt+yz)$.\n\nPut $z=t=0$: $Q(x,y)Q(0,0)=Q(0,0)$. If $Q(0,0)\\ne0$, then $Q\\equiv1$. Suppose $Q(0,0)=0$. Substitute $x=iy$, $z=-it$: then $xz-yt=yt-yt=0$ and $xt+yz=iyt-iyt=0$, so\n$$Q(iy,y)\\,Q(-it,t)=Q(0,0)=0\\quad\\text{for all }y,t .$$\nBut $Q(iy,y)$ is not the zero polynomial in $y$: writing $Q$ as a polynomial in $w=x-iy$ and $y$, $Q(iy,y)$ is its part free of $w$, which vanishes only if $(x-iy)\\mid Q$. Likewise $Q(-it,t)\\not\\equiv0$ because $(x+iy)\\nmid Q$. A product of nonzero polynomials in the independent variables $y$ and $t$ is nonzero — a contradiction.\n\nSo the complex solutions are $0$ and $(x+iy)^n(x-iy)^m$. If $P=(x+iy)^n(x-iy)^m$ has real coefficients, then $P=\\overline P=(x-iy)^n(x+iy)^m$ as polynomials, and unique factorisation (the two linear factors are non-associate primes) gives $n=m$. Then $P=(x^2+y^2)^n$. ∎"
+      },
+      {
+        "title": "Change variables: $P$ becomes multiplicative",
+        "body": "Work over $\\mathbb C$. The substitution $u=x+iy$, $v=x-iy$ is an invertible linear change of variables, so $P(x,y)=\\tilde P(u,v)$ for a unique polynomial $\\tilde P(u,v)=\\sum c_{ab}u^av^b$. The identity holds for all real $x,y,z,t$, hence (being polynomial) for all complex ones. For $(x,y)\\leftrightarrow(u_1,v_1)$ and $(z,t)\\leftrightarrow(u_2,v_2)$ the point $(xz-yt,xt+yz)$ corresponds to $(u_1u_2,\\,v_1v_2)$ (multiply $x\\pm iy$ by $z\\pm it$). As $(x,y,z,t)$ ranges over $\\mathbb C^4$, $(u_1,v_1,u_2,v_2)$ ranges over $\\mathbb C^4$, so\n$$\\tilde P(u_1,v_1)\\,\\tilde P(u_2,v_2)=\\tilde P(u_1u_2,\\,v_1v_2)$$\nas polynomials. Compare coefficients of $u_1^av_1^bu_2^{a'}v_2^{b'}$: the left side gives $c_{ab}c_{a'b'}$; the right side $\\sum c_{ab}u_1^au_2^av_1^bv_2^b$ only has terms with $(a,b)=(a',b')$. So $c_{ab}c_{a'b'}=0$ whenever $(a,b)\\ne(a',b')$, and $c_{ab}^2=c_{ab}$. Hence at most one coefficient is nonzero, and it equals $1$: $\\tilde P=0$ or $\\tilde P=u^av^b$, i.e.\n$$P=0\\quad\\text{or}\\quad P=(x+iy)^a(x-iy)^b .$$\nIf $P$ has real coefficients, then for real $x,y$, $P(x,y)=\\overline{P(x,y)}$, so $u^av^b=\\bar u^{a}\\bar v^{b}=v^au^b$ as polynomials (for real $x,y$, $\\bar u=v$), forcing $a=b$. So $P=(uv)^a=(x^2+y^2)^a$.\n\n**Answer:** $P\\equiv0$ or $P(x,y)=(x^2+y^2)^n$ with $n\\ge0$. ∎"
+      }
+    ],
+    "topics": [
+      "polynomials",
+      "complex-numbers",
+      "functional-equations"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imc-2023-04",
+    "bank": "imc",
+    "source": {
+      "contest": "IMC",
+      "paper": "Day 1",
+      "year": 2023,
+      "number": 4,
+      "url": "https://www.imc-math.org.uk/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $p$ be a prime number and let $k$ be a positive integer. Suppose that the numbers $a_i=i^k+i$ for $i=0,1,\\dots,p-1$ form a complete residue system modulo $p$. What is the set of possible remainders of $a_2$ upon division by $p$?",
+    "image": null,
+    "choices": null,
+    "answer": "$a_2\\equiv4\\pmod p$ always: the set is $\\{4\\}$ for $p\\ge5$ and $\\{1\\}$ for $p=3$ ($p=2$ is impossible). Key step: $\\prod_{i=1}^{p-1}(i^{k-1}+1)\\equiv1$ forces $2^{k-1}\\equiv1$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Take the product of all residues",
+        "body": "**Answer:** $a_2\\equiv4\\pmod p$. So the set of remainders is $\\{4\\}$ when $p\\ge5$ and $\\{1\\}$ when $p=3$; $p=2$ never occurs.\n\n$p=2$ is impossible since $a_0=0$ and $a_1=2\\equiv0$. Let $p$ be odd. The value $k=1$ is admissible ($a_i=2i$ is a complete residue system), and gives $a_2=4$; so it suffices to prove $a_2\\equiv4$ in general.\n\n**The product.** Work in $\\mathbb F_p$. Since $a_0=0$, the numbers $a_1,\\dots,a_{p-1}$ are exactly the nonzero residues, so\n$$\\prod_{i=1}^{p-1}(i^k+i)=\\prod_{i=1}^{p-1}i\\quad\\Longrightarrow\\quad\\prod_{i=1}^{p-1}\\big(1+i^{\\,m}\\big)=1,\\qquad m=k-1 .$$\n\n**Evaluating it.** Let $g$ be a primitive root, $h=g^m$, $e$ the order of $h$ and $d=(p-1)/e=\\gcd(m,p-1)$ (for $m=0$: $h=1$, $e=1$, $d=p-1$). As $i=g^j$ runs over $j=0,\\dots,p-2$, the powers $h^j$ run $d$ times through the $e$ distinct $e$-th roots of unity $1,h,\\dots,h^{e-1}$, so\n$$\\prod_{i=1}^{p-1}(1+i^m)=\\Big(\\prod_{j=0}^{e-1}(1+h^j)\\Big)^{d}.$$\nFrom $\\prod_{j=0}^{e-1}(X-h^j)=X^e-1$ at $X=-1$: $(-1)^e\\prod_j(1+h^j)=(-1)^e-1$, so $\\prod_j(1+h^j)=1-(-1)^e$, which is $0$ if $e$ is even and $2$ if $e$ is odd. The product equals $1\\ne0$, so $e$ is odd and $2^d=1$ in $\\mathbb F_p$. Since $d\\mid m$, also $2^{m}=2^{k-1}\\equiv1\\pmod p$.\n\n**Conclusion.** $a_2=2^k+2=2\\cdot2^{k-1}+2\\equiv4\\pmod p$. The remainder is $4$ if $p\\ge5$ and $4-3=1$ if $p=3$. ∎"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "abstract-algebra"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imc-2023-05",
+    "bank": "imc",
+    "source": {
+      "contest": "IMC",
+      "paper": "Day 1",
+      "year": 2023,
+      "number": 5,
+      "url": "https://www.imc-math.org.uk/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Fix positive integers $n$ and $k$ such that $2\\le k\\le n$ and a set $M$ consisting of $n$ fruits. A *permutation* is a sequence $x=(x_1,x_2,\\dots,x_n)$ such that $\\{x_1,\\dots,x_n\\}=M$. Ivan prefers some (at least one) of these permutations. He realized that for every preferred permutation $x$, there exist $k$ indices $i_1<i_2<\\dots<i_k$ with the following property: for every $1\\le j<k$, if he swaps $x_{i_j}$ and $x_{i_{j+1}}$, he obtains another preferred permutation.\n\nProve that he prefers at least $k!$ permutations.",
+    "image": null,
+    "choices": null,
+    "answer": "For each permutation $z$ choose a preferred $x$ maximising $\\sum_{m\\in M}x^{-1}(m)z^{-1}(m)$. The allowed swaps show that then $x_{i_1},\\dots,x_{i_k}$ appear in this order in $z$, so each preferred $x$ is chosen by at most $n!/k!$ permutations $z$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Assign every permutation to a best preferred one",
+        "body": "Let $S$ be the set of all $n!$ permutations and $P\\ne\\varnothing$ the set of preferred ones. For $x\\in S$ and $m\\in M$ let $x^{-1}(m)$ be the position of $m$ in $x$. Define the \"score\"\n$$\\langle x,z\\rangle=\\sum_{m\\in M}x^{-1}(m)\\,z^{-1}(m).$$\nFor each $x\\in P$ let $A(x)$ be the set of $z\\in S$ for which $x$ maximises $\\langle\\cdot,z\\rangle$ over $P$. Every $z\\in S$ lies in some $A(x)$ (take a maximiser over the finite nonempty set $P$), so\n$$n!=|S|\\le\\sum_{x\\in P}|A(x)| .$$\nIt therefore suffices to show $|A(x)|\\le n!/k!$ for each $x\\in P$; then $|P|\\ge k!$.\n\nFix $x\\in P$, its indices $i_1<\\dots<i_k$ from the statement, and put $m_j=x_{i_j}$. Let $z\\in A(x)$ and $1\\le s<k$. Swapping $m_s$ and $m_{s+1}$ in $x$ gives a preferred $y$, which differs from $x$ only in the positions of $m_s,m_{s+1}$. Since $\\langle x,z\\rangle\\ge\\langle y,z\\rangle$,\n$$i_s\\,z^{-1}(m_s)+i_{s+1}\\,z^{-1}(m_{s+1})\\ \\ge\\ i_{s+1}\\,z^{-1}(m_s)+i_s\\,z^{-1}(m_{s+1}),$$\ni.e. $(i_{s+1}-i_s)\\big(z^{-1}(m_{s+1})-z^{-1}(m_s)\\big)\\ge0$. As $i_{s+1}>i_s$ and positions are distinct, $z^{-1}(m_{s+1})>z^{-1}(m_s)$.\n\nSo in every $z\\in A(x)$ the fruits $m_1,m_2,\\dots,m_k$ appear in this order. Among all $n!$ permutations, the $k$ given elements appear in each of the $k!$ possible relative orders equally often, so exactly $n!/k!$ permutations have them in the order $m_1,\\dots,m_k$. Hence $|A(x)|\\le n!/k!$, and Ivan prefers at least $k!$ permutations. ∎"
+      }
+    ],
+    "topics": [
+      "counting",
+      "logic"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imc-2023-06",
+    "bank": "imc",
+    "source": {
+      "contest": "IMC",
+      "paper": "Day 2",
+      "year": 2023,
+      "number": 6,
+      "url": "https://www.imc-math.org.uk/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "text",
+    "prompt": "Ivan writes the matrix $\\begin{pmatrix}2&3\\\\2&4\\end{pmatrix}$ on the board. Then he performs the following operation on the matrix several times:\n\n* he chooses a row or a column of the matrix, and\n* he multiplies or divides the chosen row or column entry-wise by the other row or column, respectively.\n\nCan Ivan end up with the matrix $\\begin{pmatrix}2&4\\\\2&3\\end{pmatrix}$ after finitely many steps?",
+    "image": null,
+    "choices": null,
+    "answer": "No",
+    "acceptedAnswers": [
+      "no he cannot",
+      "no, he cannot",
+      "impossible"
+    ],
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Take logarithms: the determinant is invariant",
+        "body": "**Answer: no.**\n\nAll entries stay positive (we only multiply and divide positive numbers). For a matrix $X=(x_{ij})$ with positive entries let $L(X)=(\\log_2x_{ij})$. Multiplying (dividing) a row entry-wise by the other row turns into adding (subtracting) that row to the other row of $L(X)$; the same holds for columns. These elementary operations do not change the determinant, so $\\det L(X)$ is invariant.\n\nFor the starting matrix,\n$$\\det L\\begin{pmatrix}2&3\\\\2&4\\end{pmatrix}=\\det\\begin{pmatrix}1&\\log_23\\\\1&2\\end{pmatrix}=2-\\log_23>0,$$\nwhile for the target\n$$\\det L\\begin{pmatrix}2&4\\\\2&3\\end{pmatrix}=\\det\\begin{pmatrix}1&2\\\\1&\\log_23\\end{pmatrix}=\\log_23-2<0 .$$\nThe values differ, so Ivan cannot reach the second matrix. ∎"
+      },
+      {
+        "title": "Track exponents of $2$ and $3$",
+        "body": "Every entry that ever appears is of the form $2^a3^b$ with integers $a,b$ (true initially and preserved by multiplication/division). Record a matrix by two integer matrices $E$ (exponents of $2$) and $F$ (exponents of $3$), and consider the polynomial\n$$\\Delta(t)=\\det(E+tF).$$\nAn operation adds or subtracts one row (column) of $E$ to the other and does the same to $F$, hence to $E+tF$; such operations preserve the determinant, so $\\Delta(t)$ is invariant.\n\nInitially $E=\\begin{pmatrix}1&0\\\\1&2\\end{pmatrix}$, $F=\\begin{pmatrix}0&1\\\\0&0\\end{pmatrix}$, so $\\Delta(t)=\\det\\begin{pmatrix}1&t\\\\1&2\\end{pmatrix}=2-t$. For the target, $E=\\begin{pmatrix}1&2\\\\1&0\\end{pmatrix}$, $F=\\begin{pmatrix}0&0\\\\0&1\\end{pmatrix}$, so $\\Delta(t)=\\det\\begin{pmatrix}1&2\\\\1&t\\end{pmatrix}=t-2$. Since $2-t\\ne t-2$, the target is unreachable.\n\n**Answer: no.** ∎"
+      }
+    ],
+    "topics": [
+      "linear-algebra",
+      "logic"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imc-2023-07",
+    "bank": "imc",
+    "source": {
+      "contest": "IMC",
+      "paper": "Day 2",
+      "year": 2023,
+      "number": 7,
+      "url": "https://www.imc-math.org.uk/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Let $V$ be the set of all continuous functions $f:[0,1]\\to\\mathbb R$, differentiable on $(0,1)$, with the property that $f(0)=0$ and $f(1)=1$. Determine all $\\alpha\\in\\mathbb R$ such that for every $f\\in V$, there exists some $\\xi\\in(0,1)$ such that\n$$f(\\xi)+\\alpha=f'(\\xi).$$",
+    "image": null,
+    "choices": null,
+    "answer": "1/(e-1)",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "answerDisplay": "$\\frac{1}{e-1}$",
+    "solutions": [
+      {
+        "title": "A special function and Rolle's theorem",
+        "body": "**Answer: $\\alpha=\\dfrac1{e-1}$ only.**\n\n**Necessity.** Let $h(x)=\\dfrac{e^x-1}{e-1}$. Then $h\\in V$ and $h'(x)-h(x)=\\dfrac{e^x-(e^x-1)}{e-1}=\\dfrac1{e-1}$ for every $x$. So for $f=h$ the equation $f(\\xi)+\\alpha=f'(\\xi)$ holds for some $\\xi$ only if $\\alpha=\\frac1{e-1}$.\n\n**Sufficiency.** Let $f\\in V$ and set $\\varphi(x)=e^{-x}\\big(f(x)-h(x)\\big)$. It is continuous on $[0,1]$, differentiable on $(0,1)$, and $\\varphi(0)=0$, $\\varphi(1)=e^{-1}(1-1)=0$. By Rolle's theorem there is $\\xi\\in(0,1)$ with\n$$0=\\varphi'(\\xi)=e^{-\\xi}\\Big(f'(\\xi)-f(\\xi)-\\big(h'(\\xi)-h(\\xi)\\big)\\Big)=e^{-\\xi}\\Big(f'(\\xi)-f(\\xi)-\\frac1{e-1}\\Big).$$\nHence $f(\\xi)+\\frac1{e-1}=f'(\\xi)$. ∎"
+      },
+      {
+        "title": "Cauchy's mean value theorem",
+        "body": "Let $f\\in V$, $F(x)=f(x)e^{-x}$ and $G(x)=-e^{-x}$. Then $F'(x)=(f'(x)-f(x))e^{-x}$ and $G'(x)=e^{-x}\\ne0$. By Cauchy's mean value theorem there is $\\xi\\in(0,1)$ with\n$$f'(\\xi)-f(\\xi)=\\frac{F'(\\xi)}{G'(\\xi)}=\\frac{F(1)-F(0)}{G(1)-G(0)}=\\frac{e^{-1}}{1-e^{-1}}=\\frac1{e-1}.$$\nSo $\\alpha=\\frac1{e-1}$ has the property.\n\nNo other $\\alpha$ does: for $f(x)=\\frac{e^x-1}{e-1}\\in V$ we have $f'-f\\equiv\\frac1{e-1}$, so $f(\\xi)+\\alpha=f'(\\xi)$ forces $\\alpha=\\frac1{e-1}$.\n\n**Answer: $\\alpha=\\frac1{e-1}$.** ∎"
+      }
+    ],
+    "topics": [
+      "calculus",
+      "real-analysis"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imc-2023-08",
+    "bank": "imc",
+    "source": {
+      "contest": "IMC",
+      "paper": "Day 2",
+      "year": 2023,
+      "number": 8,
+      "url": "https://www.imc-math.org.uk/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $T$ be a tree with $n$ vertices; that is, a connected simple graph on $n$ vertices that contains no cycle. For every pair $u,v$ of vertices, let $d(u,v)$ denote the distance between $u$ and $v$, that is, the number of edges in the shortest path in $T$ that connects $u$ with $v$.\n\nConsider the sums\n$$W(T)=\\sum_{\\substack{\\{u,v\\}\\subseteq V(T)\\\\u\\ne v}}d(u,v)\\qquad\\text{and}\\qquad H(T)=\\sum_{\\substack{\\{u,v\\}\\subseteq V(T)\\\\u\\ne v}}\\frac1{d(u,v)} .$$\nProve that\n$$W(T)\\cdot H(T)\\ge\\frac{(n-1)^3(n+2)}{4}.$$",
+    "image": null,
+    "choices": null,
+    "answer": "Exactly $n-1$ pairs have distance $1$, the other $N=\\binom{n-1}2$ distances $x_j$ are $\\ge2$. Expand $WH=(n-1)^2+(n-1)\\sum(x_j+\\frac1{x_j})+\\sum x_j\\sum\\frac1{x_j}$, and use $x+\\frac1x\\ge\\frac52$ for $x\\ge2$ and Cauchy–Schwarz. Equality for the star.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Separate the edges, then Cauchy–Schwarz",
+        "body": "A tree on $n$ vertices has exactly $n-1$ edges, so exactly $n-1$ pairs are at distance $1$, and the remaining\n$$N=\\binom n2-(n-1)=\\frac{(n-1)(n-2)}2$$\npairs have distances $x_1,\\dots,x_N\\ge2$. Put $X=\\sum x_j$ and $Y=\\sum\\frac1{x_j}$. Then $W=(n-1)+X$, $H=(n-1)+Y$ and\n$$W\\cdot H=(n-1)^2+(n-1)\\sum_{j=1}^N\\Big(x_j+\\frac1{x_j}\\Big)+XY .$$\n* The function $x\\mapsto x+\\frac1x$ is increasing for $x\\ge1$, so $x_j+\\frac1{x_j}\\ge2+\\frac12=\\frac52$.\n* By Cauchy–Schwarz, $XY=\\sum x_j\\sum\\frac1{x_j}\\ge N^2$.\n\nTherefore\n$$W\\cdot H\\ge(n-1)^2+\\frac52(n-1)N+N^2=(n-1)^2\\Big[1+\\frac{5(n-2)}4+\\frac{(n-2)^2}4\\Big]=(n-1)^2\\cdot\\frac{n^2+n-2}{4}=\\frac{(n-1)^3(n+2)}4,$$\nusing $n^2+n-2=(n-1)(n+2)$. ∎\n\n(Equality holds for the star $K_{1,n-1}$, where all non-adjacent pairs are at distance $2$.)"
+      }
+    ],
+    "topics": [
+      "graph-theory",
+      "inequalities"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imc-2023-09",
+    "bank": "imc",
+    "source": {
+      "contest": "IMC",
+      "paper": "Day 2",
+      "year": 2023,
+      "number": 9,
+      "url": "https://www.imc-math.org.uk/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "We say that a real number $V$ is *good* if there exist two closed convex subsets $X$, $Y$ of the unit cube in $\\mathbb R^3$, with volume $V$ each, such that for each of the three coordinate planes (that is, the planes spanned by any two of the three coordinate axes), the projections of $X$ and $Y$ onto that plane are disjoint.\n\nFind $\\sup\\{V\\mid V\\text{ is good}\\}$.",
+    "image": null,
+    "choices": null,
+    "answer": "1/4",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Sign-orbits of points and a symmetric replacement",
+        "body": "**Answer: $\\frac14$.**\n\nUse the cube $U=[-\\frac12,\\frac12]^3$; call a pair $(X,Y)$ of closed convex subsets of $U$ with pairwise disjoint projections *admissible*. Let $\\pi_{xy},\\pi_{xz},\\pi_{yz}$ be the three projections. Note that an admissible pair has $X\\cap Y=\\varnothing$.\n\n**Lower bound.** For small $\\varepsilon>0$ take the boxes $X=[-\\frac12,-\\varepsilon]^2\\times[-\\frac12,\\frac12]$ and $Y=[\\varepsilon,\\frac12]^2\\times[-\\frac12,\\frac12]$. Their $x$-ranges are disjoint and their $y$-ranges are disjoint, so all three projections are disjoint. Both have volume $(\\frac12-\\varepsilon)^2\\to\\frac14$, so the supremum is at least $\\frac14$.\n\n**Sign patterns.** Fix $P=(a,b,c)$ with $abc\\ne0$. For $s\\in\\{\\pm1\\}^3$ write $sP=(s_1a,s_2b,s_3c)$; these are $8$ distinct points of $U$. For a set $Z$ let $S_Z=\\{s: sP\\in Z\\}$. If $sP\\in X$ and $s'P\\in Y$, then $s,s'$ must differ in a coordinate of each of the pairs $\\{1,2\\},\\{1,3\\},\\{2,3\\}$ (otherwise the two points have the same projection to that plane). Hence\n$$\\text{Hamming distance }d(s,s')\\ge2\\quad\\text{for all }s\\in S_X,\\ s'\\in S_Y. \\tag{1}$$\n\n**Averaging.** The maps $P\\mapsto sP$ preserve $U$ and volume, so for any measurable $Z\\subseteq U$,\n$$\\operatorname{vol}Z=\\frac18\\int_U|S_Z(P)|\\,dP .$$\nSo if $|S_X|+|S_Y|\\le4$ for almost every $P$, then $\\operatorname{vol}X+\\operatorname{vol}Y\\le\\frac18\\cdot4=\\frac12$, i.e. $V\\le\\frac14$.\n\nCall a convex body *thick* if each of its three projections contains the origin.\n\n**Claim 1.** If $|S_X|+|S_Y|\\ge5$ for some $P$ with $abc\\ne0$, then $X$ or $Y$ is thick.\n*Proof.* The $8$ patterns form $4$ antipodal pairs $\\{s,-s\\}$, so some antipodal pair lies in $S_X\\cup S_Y$. If both lie in $S_X$, then $0=\\frac12(sP+(-s)P)\\in X$ by convexity, and $X$ is thick; similarly for $Y$. Otherwise, after flipping the signs of coordinates (a symmetry of the whole problem) and possibly swapping $X,Y$, we may assume $(+,+,+)\\in S_X$ and $(-,-,-)\\in S_Y$. By (1), the weight-two patterns $W_2=\\{(-,+,+),(+,-,+),(+,+,-)\\}$ (distance $1$ from $(+,+,+)$) are not in $S_Y$, and the weight-one patterns $W_1=-W_2$ are not in $S_X$. Each $w\\in W_2$ is at distance $1$ from the two elements of $W_1$ other than $-w$. So if some $w\\in S_X\\cap W_2$ then $S_Y\\cap W_1\\subseteq\\{-w\\}$, and if some $w'\\in S_Y\\cap W_1$ then $S_X\\cap W_2\\subseteq\\{-w'\\}$. Since $|S_X\\cap W_2|+|S_Y\\cap W_1|\\ge5-2=3$, one of these sets is empty and the other has $3$ elements; say $W_2\\subseteq S_X$ (the other case is symmetric). Then $X$ contains $(-a,b,c),(a,-b,c),(a,b,-c)$ with $a,b,c>0$, and the midpoints of suitable pairs of their projections are the origin: $\\frac12[(-a,b)+(a,-b)]=0$ in the $xy$-plane, $\\frac12[(-a,c)+(a,-c)]=0$ in the $xz$-plane, $\\frac12[(-b,c)+(b,-c)]=0$ in the $yz$-plane. Projections of convex sets are convex, so $X$ is thick. $\\square$\n\n**Claim 2.** If $X$ is thick, then $(Y,-Y)$ is admissible.\n*Proof.* Each projection of $X$ contains $0$, so no projection $\\pi(Y)$ contains $0$. If $q\\in\\pi(Y)\\cap\\pi(-Y)=\\pi(Y)\\cap(-\\pi(Y))$, then $q,-q\\in\\pi(Y)$ and $0\\in\\pi(Y)$ by convexity — impossible. Also $-Y\\subseteq U$ is closed, convex, with the same volume. $\\square$\n\n**Claim 3.** If $(Y,-Y)$ is admissible, then $|S_Y|+|S_{-Y}|\\le4$ for every $P$ with $abc\\ne0$.\n*Proof.* $S_{-Y}=-S_Y$. For $s,t\\in S_Y$, (1) applied to $s\\in S_Y$, $-t\\in S_{-Y}$ gives $d(s,-t)=3-d(s,t)\\ge2$, i.e. $d(s,t)\\le1$. A set of vertices of the cube $\\{\\pm1\\}^3$ with pairwise distances $\\le1$ has at most $2$ elements (the cube graph is bipartite, so it has no triangles). So $|S_Y|+|S_{-Y}|=2|S_Y|\\le4$. $\\square$\n\n**Conclusion.** Let $(X,Y)$ be admissible with volumes $V$. If $|S_X|+|S_Y|\\le4$ for all $P$ with $abc\\ne0$, averaging gives $2V\\le\\frac12$. Otherwise, by Claim 1 one body, say $X$, is thick; by Claims 2 and 3, $(Y,-Y)$ is admissible with counts $\\le4$, and averaging gives $2V=\\operatorname{vol}Y+\\operatorname{vol}(-Y)\\le\\frac12$. In all cases $V\\le\\frac14$. Together with the boxes,\n$$\\sup\\{V\\mid V\\text{ is good}\\}=\\frac14 .$$\n∎"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "counting"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imc-2023-10",
+    "bank": "imc",
+    "source": {
+      "contest": "IMC",
+      "paper": "Day 2",
+      "year": 2023,
+      "number": 10,
+      "url": "https://www.imc-math.org.uk/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "text",
+    "prompt": "For every positive integer $n$, let $f(n),g(n)$ be the minimal positive integers such that\n$$1+\\frac1{1!}+\\frac1{2!}+\\dots+\\frac1{n!}=\\frac{f(n)}{g(n)} .$$\nDetermine whether there exists a positive integer $n$ for which $g(n)>n^{0.999n}$.",
+    "image": null,
+    "choices": null,
+    "answer": "Yes",
+    "acceptedAnswers": [
+      "yes, there exists",
+      "yes it exists",
+      "exists"
+    ],
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Most $p$-adic valuations of $n!$ survive in $g(n)$",
+        "body": "**Answer: yes.**\n\nNotation: $e_k=\\sum_{j=0}^k\\frac1{j!}=\\frac{f(k)}{g(k)}$ in lowest terms, $S_k=k!\\,e_k=\\sum_{j=0}^k\\frac{k!}{j!}\\in\\mathbb Z$, $\\nu_p$ the $p$-adic valuation. Since $g(k)\\mid k!$, we have $\\nu_p(g(k))=\\max\\big(0,-\\nu_p(e_k)\\big)\\le\\nu_p(k!)$. Fix $\\varepsilon=10^{-4}$. Note $S_0=1$, and $S_{j+r}=\\frac{(j+r)!}{j!}S_j+Q_r(j)$ with\n$$Q_r(j)=\\sum_{i=j+1}^{j+r}\\frac{(j+r)!}{i!}=1+(j+r)+(j+r)(j+r-1)+\\dots+(j+r)\\cdots(j+2),$$\na **monic** polynomial in $j$ of degree $r-1$ with integer coefficients.\n\n**Step 1 (good residues).** Let $p$ be prime, $k=ap+j$ with $a\\ge1$, $0\\le j\\le p-1$, and suppose $p\\nmid S_j$. Then $\\nu_p(g(k))=\\nu_p(k!)$.\n*Proof.* Let $T=\\nu_p((ap)!)$; since $ap+1,\\dots,ap+j$ are prime to $p$, $\\nu_p((ap+i)!)=T$ for $0\\le i\\le j$. Write\n$$e_k=e_{ap-1}+\\sum_{i=0}^{j}\\frac1{(ap+i)!}=e_{ap-1}+\\frac{1}{(ap+j)!}\\sum_{i=0}^{j}\\frac{(ap+j)!}{(ap+i)!}.$$\nEach $\\frac{(ap+j)!}{(ap+i)!}=(ap+i+1)\\cdots(ap+j)\\equiv(i+1)\\cdots j=\\frac{j!}{i!}\\pmod p$, so the last sum is $\\equiv S_j\\not\\equiv0$, and the second term has valuation exactly $-T$. The first term has valuation $\\ge-\\nu_p((ap-1)!)=-(T-\\nu_p(ap))>-T$. Hence $\\nu_p(e_k)=-T$ and $\\nu_p(g(k))=T=\\nu_p(k!)$. $\\square$\n\nLet $B_p=\\{j\\in[1,p-1]: p\\mid S_j\\}$. Call $p$ **special** if $|B_p\\cap[1,L]|\\ge\\varepsilon L$ for some $L\\in[1,p-1]$.\n\n**Step 2. Only finitely many primes are special.** Let $R=\\lceil2/\\varepsilon\\rceil$ and $K=\\sum_{r=1}^R(r-1)$. If $j,j+r\\in B_p$ with $j+r\\le p-1$, then $p\\mid S_{j+r}-\\frac{(j+r)!}{j!}S_j=Q_r(j)$. For fixed $r$, $Q_r$ is monic, hence nonzero modulo $p$, so it has at most $r-1$ roots in $\\mathbb F_p$; as elements of $[1,p-1]$ are distinct mod $p$, at most $r-1$ elements $j\\in B_p$ have $j+r\\in B_p$.\n\nLet $p$ be special with witness $L$, and let $j_1<\\dots<j_s$ be the elements of $B_p\\cap[1,L]$, $s\\ge\\varepsilon L$ (so $s\\ge1$). The $s-1$ gaps $j_{t+1}-j_t$ sum to less than $L$, so fewer than $\\frac{L}{2/\\varepsilon}=\\frac{\\varepsilon L}2$ of them exceed $2/\\varepsilon$. Each other gap is some $r\\le R$ and is counted above, so there are at most $K$ of them. Hence $s-1<\\frac{\\varepsilon L}2+K$, and with $s\\ge\\varepsilon L$ this gives $L<\\frac{2(K+1)}{\\varepsilon}=:L_0$. So $p$ divides $S_{j_1}$ with $j_1\\le L<L_0$; as each $S_j\\ge1$, $p\\le\\max_{j<L_0}S_j$. Thus special primes are bounded. $\\square$\n\n**Step 3. For non-special $p$: $\\sum_{k\\le n}\\nu_p(g(k))\\ge(1-\\varepsilon)\\sum_{k\\le n}\\nu_p(k!)$.**\nFor $k<p$ both sides' terms vanish. Split $\\{p,\\dots,n\\}$ into blocks $\\{ap,\\dots,ap+L\\}$ ($a\\ge1$; $L=p-1$ except possibly for the last block). On a block $\\nu_p(k!)$ is constant, and by Step 1 it equals $\\nu_p(g(k))$ unless $k-ap\\in B_p$. The number of such \"bad\" $k$ in the block is $|B_p\\cap[1,L]|<\\varepsilon L\\le\\varepsilon(L+1)$ for $L\\ge1$ (and $0$ for $L=0$). So in each block the bad $k$ carry less than an $\\varepsilon$-fraction of $\\sum\\nu_p(k!)$; since $\\nu_p(g(k))\\ge0$, summing over blocks proves Step 3.\n\n**Step 4. Conclusion.** Let $C=\\sum_{p\\text{ special}}\\log p$ (finite). Using $\\nu_p(k!)\\le\\frac{k}{p-1}\\le k$, for every $n$:\n$$\\sum_{k\\le n}\\log g(k)\\ \\ge\\sum_{p\\ \\text{non-special}}\\log p\\sum_{k\\le n}\\nu_p(g(k))\\ \\ge\\ (1-\\varepsilon)\\Big(\\sum_{k\\le n}\\log k!-C\\sum_{k\\le n}k\\Big)\\ \\ge\\ (1-\\varepsilon)\\Big(\\sum_{k\\le n}\\log k!-Cn^2\\Big).$$\nSuppose, for contradiction, that $g(k)\\le k^{0.999k}$ for all $k$. With $\\log k!\\ge k\\log k-k$ (from $k!\\ge(k/e)^k$) and $\\sigma_n=\\sum_{k\\le n}k\\log k$:\n$$0.999\\,\\sigma_n\\ \\ge\\ (1-\\varepsilon)\\big(\\sigma_n-n^2-Cn^2\\big)\\quad\\Longrightarrow\\quad (0.001-\\varepsilon)\\,\\sigma_n\\le(1+C)\\,n^2 .$$\nBut $\\sigma_n\\ge\\sum_{n/2<k\\le n}k\\log\\frac n2\\ge\\frac{n^2}{4}\\log\\frac n2$ for $n\\ge2$, so the left side grows like $n^2\\log n$ — a contradiction for large $n$.\n\nHence there is an $n$ with $g(n)>n^{0.999n}$. ∎"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "analysis"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

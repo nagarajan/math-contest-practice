@@ -1,0 +1,183 @@
+[
+  {
+    "id": "cmo-cmo-1994-01",
+    "bank": "cmo",
+    "source": {
+      "contest": "CMO",
+      "paper": "CMO 1994",
+      "year": 1994,
+      "number": 1,
+      "url": "https://cms.math.ca/competitions/cmo/"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Evaluate the sum\n$$\\sum_{n=1}^{1994} (-1)^n\\, \\frac{n^2 + n + 1}{n!}.$$",
+    "image": null,
+    "choices": null,
+    "answer": "$-1 + \\dfrac{1995}{1994!}$",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Split and telescope",
+        "body": "For $n \\ge 1$, $\\frac{n^2 + n + 1}{n!} = \\frac{n^2}{n!} + \\frac{n+1}{n!} = \\frac{n}{(n-1)!} + \\frac{n+1}{n!}$. Hence, with $a_n = (-1)^n\\frac{n+1}{n!}$,\n$$(-1)^n\\frac{n^2+n+1}{n!} = (-1)^n\\frac{n}{(n-1)!} + (-1)^n\\frac{n+1}{n!} = -a_{n-1} + a_n .$$\nThe sum telescopes:\n$$\\sum_{n=1}^{1994}(a_n - a_{n-1}) = a_{1994} - a_0 = \\frac{1995}{1994!} - 1.$$\n\n**Answer: $-1 + \\dfrac{1995}{1994!}$** ∎"
+      },
+      {
+        "title": "Guess and prove by induction",
+        "body": "Let $S(k) = \\sum_{n=1}^{k}(-1)^n\\frac{n^2+n+1}{n!}$. The first values $S(1) = -3$, $S(2) = -3 + \\frac72 = \\frac12$ suggest\n$$S(k) = -1 + (-1)^k\\frac{k+1}{k!}.$$\nThis holds for $k = 1$: $-1 - 2 = -3$. If it holds for $k$, then, using $(k+1)^2 + (k+1) + 1 = (k+1)^2 + (k+2)$,\n$$S(k+1) = -1 + (-1)^k\\frac{k+1}{k!} + (-1)^{k+1}\\left(\\frac{(k+1)^2}{(k+1)!} + \\frac{k+2}{(k+1)!}\\right) = -1 + (-1)^k\\frac{k+1}{k!} - (-1)^k\\frac{k+1}{k!} + (-1)^{k+1}\\frac{k+2}{(k+1)!},$$\nwhich is $-1 + (-1)^{k+1}\\frac{k+2}{(k+1)!}$. With $k = 1994$ (even): $S = -1 + \\frac{1995}{1994!}$. ∎"
+      }
+    ],
+    "topics": [
+      "sequences-series",
+      "algebra"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "cmo-cmo-1994-02",
+    "bank": "cmo",
+    "source": {
+      "contest": "CMO",
+      "paper": "CMO 1994",
+      "year": 1994,
+      "number": 2,
+      "url": "https://cms.math.ca/competitions/cmo/"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Show that every positive integral power of $\\sqrt2 - 1$ is of the form $\\sqrt m - \\sqrt{m-1}$ for some positive integer $m$. (e.g. $(\\sqrt2 - 1)^2 = 3 - 2\\sqrt2 = \\sqrt9 - \\sqrt8$.)",
+    "image": null,
+    "choices": null,
+    "answer": "Take $m = \\frac14\\left((\\sqrt2+1)^n + (\\sqrt2-1)^n\\right)^2 = \\frac14\\left((\\sqrt2+1)^{2n} + 2 + (\\sqrt2-1)^{2n}\\right)$, an integer; since $(\\sqrt2+1)(\\sqrt2-1) = 1$, $\\sqrt m - \\sqrt{m-1} = (\\sqrt2-1)^n$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Use the conjugate $\\sqrt2 + 1$",
+        "body": "Fix $n \\ge 1$ and put $\\alpha = (\\sqrt2 + 1)^n$, $\\beta = (\\sqrt2 - 1)^n$. Then $\\alpha\\beta = \\big((\\sqrt2+1)(\\sqrt2-1)\\big)^n = 1$ and $\\alpha > \\beta > 0$. Define\n$$m = \\left(\\frac{\\alpha + \\beta}{2}\\right)^2 = \\frac{\\alpha^2 + 2 + \\beta^2}{4}.$$\n\n**$m$ is a positive integer.** Since $(\\sqrt2 \\pm 1)^2 = 3 \\pm 2\\sqrt2$,\n$$\\alpha^2 + \\beta^2 = (3 + 2\\sqrt2)^n + (3 - 2\\sqrt2)^n = 2\\sum_{i \\ge 0}\\binom{n}{2i}3^{n-2i}\\,8^{i},$$\nbecause the odd powers of $2\\sqrt2$ cancel and $(2\\sqrt2)^{2i} = 8^i$. The sum is an integer, and modulo $2$ only its $i = 0$ term $3^n$ (odd) survives, so the sum is odd. Thus $\\alpha^2 + \\beta^2 \\equiv 2 \\pmod 4$ and $\\alpha^2 + 2 + \\beta^2 \\equiv 0 \\pmod 4$: $m$ is a positive integer.\n\n**The identity.** $\\sqrt m = \\frac{\\alpha + \\beta}{2}$, and\n$$m - 1 = \\frac{(\\alpha + \\beta)^2 - 4\\alpha\\beta}{4} = \\left(\\frac{\\alpha - \\beta}{2}\\right)^2, \\qquad \\sqrt{m-1} = \\frac{\\alpha - \\beta}{2} \\ (\\ge 0).$$\nHence $\\sqrt m - \\sqrt{m-1} = \\beta = (\\sqrt2 - 1)^n$. ∎\n\n(For $n = 2$: $\\alpha^2 + \\beta^2 = (3+2\\sqrt2)^2 + (3-2\\sqrt2)^2 = 34$, so $m = 36/4 = 9$, matching the example.)"
+      },
+      {
+        "title": "Induction on the form $a\\sqrt2 - b$",
+        "body": "We show by induction:\n$$(\\sqrt2 - 1)^n = \\begin{cases} a\\sqrt2 - b, \\ \\ a, b \\in \\mathbb Z_{>0},\\ 2a^2 = b^2 + 1 & n \\text{ odd},\\\\ a - b\\sqrt2, \\ \\ a, b \\in \\mathbb Z_{>0},\\ a^2 = 2b^2 + 1 & n \\text{ even}.\\end{cases}$$\nThen $m = 2a^2$ (odd $n$: $a\\sqrt2 = \\sqrt{2a^2}$, $b = \\sqrt{2a^2 - 1}$) or $m = a^2$ (even $n$: $b\\sqrt2 = \\sqrt{a^2 - 1}$) does the job.\n\n$n = 1$: $1\\cdot\\sqrt2 - 1$ with $2 = 1 + 1$. If $n$ is odd with $(\\sqrt2-1)^n = a\\sqrt2 - b$, then\n$$(\\sqrt2-1)^{n+1} = (a\\sqrt2 - b)(\\sqrt2 - 1) = (2a + b) - (a + b)\\sqrt2 = A - B\\sqrt2,$$\nand $A^2 - 2B^2 = 4a^2 + 4ab + b^2 - 2a^2 - 4ab - 2b^2 = 2a^2 - b^2 = 1$. If $n$ is even with $(\\sqrt2-1)^n = a - b\\sqrt2$, then\n$$(\\sqrt2-1)^{n+1} = (a - b\\sqrt2)(\\sqrt2 - 1) = (a + b)\\sqrt2 - (a + 2b) = A\\sqrt2 - B,$$\nand $2A^2 - B^2 = 2a^2 + 4ab + 2b^2 - a^2 - 4ab - 4b^2 = a^2 - 2b^2 = 1$. ∎"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "algebra"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "cmo-cmo-1994-03",
+    "bank": "cmo",
+    "source": {
+      "contest": "CMO",
+      "paper": "CMO 1994",
+      "year": 1994,
+      "number": 3,
+      "url": "https://cms.math.ca/competitions/cmo/"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Twenty-five men sit around a circular table. Every hour there is a vote, and each must respond *yes* or *no*. Each man behaves as follows: on the $n^{\\text{th}}$ vote, if his response is the same as the response of at least one of the two people he sits between, then he will respond the same way on the $(n+1)^{\\text{th}}$ vote as on the $n^{\\text{th}}$ vote; but if his response is different from that of both his neighbours on the $n$-th vote, then his response on the $(n+1)$-th vote will be different from his response on the $n^{\\text{th}}$ vote. Prove that, however everybody responded on the first vote, there will be a time after which nobody's response will ever change.",
+    "image": null,
+    "choices": null,
+    "answer": "Let $A_n$ be the set of men agreeing with a neighbour at vote $n$. Agreeing neighbours never change, so $A_n \\subseteq A_{n+1}$; $A_1 \\neq \\varnothing$ as $25$ is odd; if $A_T = A_{T+1} \\neq$ everyone, a man next to $A_T$ would flip and join — contradiction.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "A growing set of satisfied men",
+        "body": "**Observation.** If two neighbours give the same answer at vote $n$, then each of them agrees with a neighbour, so both keep their answer at vote $n+1$, and they agree again. By induction they never change again.\n\nLet $A_n$ be the set of men who agree with at least one neighbour at vote $n$. By the observation, a man in $A_n$ keeps agreeing with that neighbour forever, so\n$$A_1 \\subseteq A_2 \\subseteq A_3 \\subseteq \\cdots,$$\nand no man in $A_n$ ever changes his answer after vote $n$.\n\n**$A_1 \\ne \\varnothing$.** If every man disagreed with both neighbours, the answers would alternate yes/no around the table, which is impossible for an odd number ($25$) of men.\n\n**The sets eventually contain everyone.** The sets $A_n$ form an increasing chain of subsets of a $25$-element set, so there is a $T$ with $A_T = A_{T+1}$. Suppose $A_T$ is not everyone. Since $A_T$ is non-empty, going around the table we find neighbours $x \\in A_T$ and $y \\notin A_T$. As $y \\notin A_T$, at vote $T$ $y$ disagrees with both neighbours, in particular with $x$; so at vote $T+1$ $y$ switches, while $x$ keeps his answer. Thus at vote $T+1$, $y$ agrees with $x$, i.e. $y \\in A_{T+1} = A_T$, a contradiction.\n\nHence $A_T$ consists of all $25$ men, and after vote $T$ nobody's response ever changes. ∎"
+      }
+    ],
+    "topics": [
+      "logic",
+      "games"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "cmo-cmo-1994-04",
+    "bank": "cmo",
+    "source": {
+      "contest": "CMO",
+      "paper": "CMO 1994",
+      "year": 1994,
+      "number": 4,
+      "url": "https://cms.math.ca/competitions/cmo/"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $AB$ be a diameter of a circle $\\Omega$ and $P$ be any point *not* on the line through $A$ and $B$. Suppose the line through $P$ and $A$ cuts $\\Omega$ again in $U$, and the line through $P$ and $B$ cuts $\\Omega$ again in $V$. (Note that in case of tangency $U$ may coincide with $A$ or $V$ may coincide with $B$. Also, if $P$ is on $\\Omega$ then $P = U = V$.) Suppose that $|PU| = s|PA|$ and $|PV| = t|PB|$ for some nonnegative real numbers $s$ and $t$. Determine the cosine of the angle $APB$ in terms of $s$ and $t$.",
+    "image": null,
+    "choices": null,
+    "answer": "$\\cos\\angle APB = \\sqrt{st}$ if $P$ is outside $\\Omega$ or on it, and $\\cos\\angle APB = -\\sqrt{st}$ if $P$ is inside $\\Omega$ (because $\\angle AUB = \\angle AVB = 90^\\circ$).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Right angles in the semicircle",
+        "body": "Since $AB$ is a diameter, $\\angle AUB = 90^\\circ$ whenever $U \\ne A, B$, and $\\angle AVB = 90^\\circ$ whenever $V \\ne A, B$. ($U \\ne B$ and $V \\ne A$, since otherwise $P$ would lie on line $AB$.) Let $\\theta = \\angle APB$.\n\n**Case 1: $P$ outside $\\Omega$.** Line $PA$ meets $\\Omega$ at $A$ and $U$, both on the same side of $P$ (on the ray $PA$). If $U \\ne A$, then triangle $PUB$ has a right angle at $U$ and its angle at $P$ is $\\theta$, so $\\cos\\theta = \\frac{PU}{PB}$. If $U = A$ (line $PA$ tangent at $A$), then $PA \\perp AB$ and $\\cos\\theta = \\frac{PA}{PB} = \\frac{PU}{PB}$ again. Similarly $\\cos\\theta = \\frac{PV}{PA}$. Hence $\\cos\\theta > 0$ and\n$$\\cos^2\\theta = \\frac{PU}{PB}\\cdot\\frac{PV}{PA} = \\frac{PU}{PA}\\cdot\\frac{PV}{PB} = st, \\qquad \\cos\\theta = \\sqrt{st}.$$\n\n**Case 2: $P$ on $\\Omega$.** Then $P = U = V$, so $s = t = 0$, and $\\theta = 90^\\circ$ (angle in a semicircle): $\\cos\\theta = 0 = \\sqrt{st}$.\n\n**Case 3: $P$ inside $\\Omega$.** Now $P$ lies between $A$ and $U$, and between $B$ and $V$. In triangle $PVA$ (right angle at $V$), $\\angle APV = 180^\\circ - \\theta$, so $\\cos(180^\\circ - \\theta) = \\frac{PV}{PA}$, i.e. $\\cos\\theta = -\\frac{PV}{PA}$. Likewise, from triangle $PUB$, $\\cos\\theta = -\\frac{PU}{PB}$. Multiplying, $\\cos^2\\theta = st$ with $\\cos\\theta < 0$, so $\\cos\\theta = -\\sqrt{st}$.\n\n**Answer:** $\\cos\\angle APB = \\sqrt{st}$ if $P$ is on or outside $\\Omega$, and $-\\sqrt{st}$ if $P$ is inside $\\Omega$. ∎"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "trigonometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "cmo-cmo-1994-05",
+    "bank": "cmo",
+    "source": {
+      "contest": "CMO",
+      "paper": "CMO 1994",
+      "year": 1994,
+      "number": 5,
+      "url": "https://cms.math.ca/competitions/cmo/"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $ABC$ be an acute angled triangle. Let $AD$ be the altitude on $BC$, and let $H$ be any interior point on $AD$. Lines $BH$ and $CH$, when extended, intersect $AC$ and $AB$ at $E$ and $F$, respectively. Prove that $\\angle EDH = \\angle FDH$.",
+    "image": null,
+    "choices": null,
+    "answer": "Draw the line through $A$ parallel to $BC$, meeting $DF$, $DE$ at $P$, $Q$. Similar triangles give $AP = \\frac{AF}{FB}BD$, $AQ = \\frac{AE}{EC}CD$, and Ceva gives $AP = AQ$; since $AD \\perp PQ$, $DA$ bisects $\\angle PDQ$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Parallel line and Ceva",
+        "body": "Let $\\ell$ be the line through $A$ parallel to $BC$. Since the triangle is acute, $D$ lies strictly between $B$ and $C$; $F$ lies on side $AB$ and $E$ on side $AC$. Extend $DF$ beyond $F$ to meet $\\ell$ at $P$, and $DE$ beyond $E$ to meet $\\ell$ at $Q$; $P$ is on the same side of line $AD$ as $B$, and $Q$ on the same side as $C$.\n\n**Similar triangles.** Since $AP \\parallel BD$, triangles $FAP$ and $FBD$ are similar, so $\\frac{AP}{BD} = \\frac{AF}{FB}$. Since $AQ \\parallel CD$, triangles $EAQ$ and $ECD$ are similar, so $\\frac{AQ}{CD} = \\frac{AE}{EC}$. Thus\n$$AP = \\frac{AF}{FB}\\cdot BD, \\qquad AQ = \\frac{AE}{EC}\\cdot CD.$$\n\n**Ceva.** The cevians $AD$, $BE$, $CF$ pass through $H$, so by Ceva's theorem\n$$\\frac{AF}{FB}\\cdot\\frac{BD}{DC}\\cdot\\frac{CE}{EA} = 1 \\quad\\Longrightarrow\\quad \\frac{AF}{FB}\\cdot BD = \\frac{AE}{EC}\\cdot CD.$$\nHence $AP = AQ$.\n\n**Conclusion.** $AD \\perp BC$ and $\\ell \\parallel BC$, so $AD \\perp PQ$; and $A$ is the midpoint of $PQ$. So right triangles $DAP$ and $DAQ$ are congruent (SAS), and $\\angle ADP = \\angle ADQ$. As $F$ lies on segment $DP$, $E$ on segment $DQ$, and $H$ on segment $DA$, this says $\\angle FDH = \\angle EDH$. ∎"
+      },
+      {
+        "title": "Coordinates",
+        "body": "Put $D = (0, 0)$, $A = (0, a)$, $B = (-b, 0)$, $C = (c, 0)$, $H = (0, h)$ with $a, b, c > 0$ and $0 < h < a$. Line $BH$: $\\frac{x}{-b} + \\frac{y}{h} = 1$; line $AC$: $\\frac xc + \\frac ya = 1$. Subtracting, their intersection $E = (u, v)$ satisfies $u\\left(\\frac1c + \\frac1b\\right) = v\\left(\\frac1h - \\frac1a\\right)$, so\n$$\\frac vu = \\frac{\\frac1b + \\frac1c}{\\frac1h - \\frac1a} = \\frac{ah(b+c)}{bc(a - h)} > 0.$$\nBy the symmetric computation (exchange the roles of $b$ and $c$, and reflect $x \\mapsto -x$), $F = (-r, s)$ with $\\frac sr = \\frac{ah(c + b)}{cb(a - h)}$, the same value. So the lines $DE$ and $DF$ make equal angles with the $x$-axis on opposite sides of the $y$-axis, i.e. they are symmetric with respect to the line $DA$, and $\\angle EDH = \\angle FDH$. ∎"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

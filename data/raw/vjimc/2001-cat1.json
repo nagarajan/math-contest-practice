@@ -1,0 +1,147 @@
+[
+  {
+    "id": "vjimc-2001-cat1-01",
+    "bank": "vjimc",
+    "source": {
+      "contest": "VJIMC",
+      "paper": "VJIMC 2001 Category I",
+      "year": 2001,
+      "number": 1,
+      "url": "https://vjimc.osu.cz/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $A$ be a set of positive integers such that for any $x,y\\in A$\n$$x>y\\implies x-y\\ge\\frac{xy}{25}.$$\nFind the maximal possible number of elements of the set $A$.",
+    "image": null,
+    "choices": null,
+    "answer": "9",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Reciprocals are $\\frac1{25}$ apart",
+        "body": "Dividing by $xy>0$, the condition reads\n$$\\frac1y-\\frac1x\\ge\\frac1{25}\\qquad\\text{for all }x>y\\text{ in }A .$$\nLet $A=\\{a_1<a_2<\\dots<a_n\\}$. It suffices to require the condition for consecutive elements (the differences of reciprocals then add up), i.e.\n$$\\frac1{a_{i+1}}\\le\\frac1{a_i}-\\frac1{25}=\\frac{25-a_i}{25a_i}\\qquad(1\\le i<n).$$\n\n**Upper bound.** If $a_i\\ge25$, the right-hand side is $\\le0$, so $a_i$ must be the largest element. If $a_i<25$, then\n$$a_{i+1}\\ge h(a_i),\\qquad h(a)=\\frac{25a}{25-a},$$\nand $h$ is increasing on $[1,25)$. Since the $a_i$ are distinct positive integers, $a_5\\ge5$. Then successively\n$$a_6\\ge h(5)=6.25\\Rightarrow a_6\\ge7,\\qquad a_7\\ge h(7)=\\tfrac{175}{18}\\approx9.7\\Rightarrow a_7\\ge10,$$\n$$a_8\\ge h(10)=\\tfrac{50}{3}\\approx16.7\\Rightarrow a_8\\ge17,\\qquad a_9\\ge h(17)=\\tfrac{425}8\\approx53.1\\Rightarrow a_9\\ge54 .$$\nAs $a_9\\ge25$, there is no $a_{10}$. Hence $n\\le9$.\n\n**Example with 9 elements.** $A=\\{1,2,3,4,5,7,10,17,54\\}$. The consecutive differences of reciprocals are\n$$\\tfrac12,\\ \\tfrac16,\\ \\tfrac1{12},\\ \\tfrac1{20},\\ \\tfrac2{35},\\ \\tfrac3{70},\\ \\tfrac7{170},\\ \\tfrac{37}{918},$$\nall $\\ge\\frac1{25}$ (e.g. $\\frac{37}{918}\\approx0.0403$, $\\frac7{170}\\approx0.0412$, $\\frac3{70}\\approx0.0429$). A computer search over all chains confirms that $9$ is the maximum.\n\n**Answer: $9$.** ∎"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "inequalities"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "vjimc-2001-cat1-02",
+    "bank": "vjimc",
+    "source": {
+      "contest": "VJIMC",
+      "paper": "VJIMC 2001 Category I",
+      "year": 2001,
+      "number": 2,
+      "url": "https://vjimc.osu.cz/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Prove that for any prime $p\\ge5$, the number\n$$\\sum_{0<k<\\frac{2p}{3}}\\binom pk$$\nis divisible by $p^2$.",
+    "image": null,
+    "choices": null,
+    "answer": "$\\frac1p\\binom pk\\equiv\\frac{(-1)^{k-1}}k\\pmod p$, so it suffices that $\\sum_{0<k<2p/3}\\frac{(-1)^{k-1}}k=\\sum_{p/3<k<2p/3}\\frac1k\\equiv0$, which follows from the symmetry $k\\mapsto p-k$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Reduce to harmonic sums modulo $p$",
+        "body": "All fractions below are elements of the field $\\mathbb Z_p$ (denominators are $<p$).\n\n**Step 1.** For $0<k<p$,\n$$\\binom pk=\\frac pk\\binom{p-1}{k-1},\\qquad \\binom{p-1}{k-1}=\\prod_{j=1}^{k-1}\\frac{p-j}{j}\\equiv\\prod_{j=1}^{k-1}\\frac{-j}{j}=(-1)^{k-1}\\pmod p .$$\nSince $k\\binom pk=p\\binom{p-1}{k-1}$, the integer $\\frac1p\\binom pk=\\frac1k\\binom{p-1}{k-1}$ satisfies $\\frac1p\\binom pk\\equiv\\frac{(-1)^{k-1}}{k}\\pmod p$. So the claim is equivalent to\n$$S=\\sum_{0<k<2p/3}\\frac{(-1)^{k-1}}{k}\\equiv0\\pmod p .$$\n\n**Step 2: rewrite $S$.** Let $m=\\lfloor2p/3\\rfloor$ and $H_r=\\sum_{k=1}^r\\frac1k$. Then\n$$S=\\sum_{k=1}^m\\frac1k-2\\sum_{2j\\le m}\\frac1{2j}=H_m-H_{\\lfloor m/2\\rfloor}.$$\nIf $p=3q+1$ then $m=2q$; if $p=3q+2$ then $m=2q+1$; in both cases $\\lfloor m/2\\rfloor=q=\\lfloor p/3\\rfloor$. Hence\n$$S=\\sum_{p/3<k<2p/3}\\frac1k .$$\n\n**Step 3: symmetry.** Since $p/3$ and $2p/3$ are not integers, $k\\mapsto p-k$ maps the integers of the interval $(p/3,2p/3)$ bijectively onto themselves. Using $\\frac1{p-k}\\equiv-\\frac1k$,\n$$S=\\sum_{p/3<k<2p/3}\\frac1{p-k}\\equiv-\\sum_{p/3<k<2p/3}\\frac1k=-S .$$\nSo $2S\\equiv0$, and as $p$ is odd, $S\\equiv0\\pmod p$. Therefore $p^2$ divides $\\sum_{0<k<2p/3}\\binom pk$. (Check: $p=5$: $\\binom51+\\binom52+\\binom53=5+10+10=25$.) ∎"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "counting"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "vjimc-2001-cat1-03",
+    "bank": "vjimc",
+    "source": {
+      "contest": "VJIMC",
+      "paper": "VJIMC 2001 Category I",
+      "year": 2001,
+      "number": 3,
+      "url": "https://vjimc.osu.cz/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $n\\ge2$ be a natural number. Prove that\n$$\\prod_{k=2}^n\\ln k<\\frac{\\sqrt{n!}}{n}.$$",
+    "image": null,
+    "choices": null,
+    "answer": "Use $\\ln x<\\frac{x-1}{\\sqrt x}$ for $x>1$ and multiply over $k=2,\\dots,n$: $\\prod\\sqrt k\\cdot\\prod\\frac{k-1}{k}=\\frac{\\sqrt{n!}}n$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "A termwise estimate",
+        "body": "**Lemma.** For $x>1$: $\\ln x<\\dfrac{x-1}{\\sqrt x}$.\n\n*Proof.* Put $x=t^2$, $t>1$; the claim becomes $2\\ln t<t-\\frac1t$. Let $g(t)=t-\\frac1t-2\\ln t$. Then $g(1)=0$ and\n$$g'(t)=1+\\frac1{t^2}-\\frac2t=\\Big(1-\\frac1t\\Big)^2>0\\quad(t>1),$$\nso $g(t)>0$ for $t>1$. $\\square$\n\nFor $k=2,\\dots,n$ we have $0<\\ln k<\\sqrt k\\cdot\\frac{k-1}{k}$. Multiplying these inequalities between positive numbers:\n$$\\prod_{k=2}^n\\ln k<\\prod_{k=2}^n\\sqrt k\\cdot\\prod_{k=2}^n\\frac{k-1}k=\\sqrt{n!}\\cdot\\frac1n .$$\n∎"
+      },
+      {
+        "title": "Compare derivatives directly (official second solution)",
+        "body": "Let $f(x)=\\ln x$ and $g(x)=\\sqrt x\\cdot\\frac{x-1}x=\\sqrt x-\\frac1{\\sqrt x}$. Then $f(1)=g(1)=0$ and\n$$g'(x)-f'(x)=\\frac1{2\\sqrt x}+\\frac1{2x\\sqrt x}-\\frac1x=\\frac{x+1-2\\sqrt x}{2x\\sqrt x}=\\frac{(\\sqrt x-1)^2}{2x\\sqrt x}>0\\quad(x>1).$$\nHence $g-f$ is strictly increasing on $[1,\\infty)$ and $g(x)>f(x)$ for $x>1$, i.e. $\\ln k<\\sqrt k\\frac{k-1}k$ for $k\\ge2$. Multiplying over $k=2,\\dots,n$ and telescoping $\\prod\\frac{k-1}k=\\frac1n$ gives the claim. ∎"
+      }
+    ],
+    "topics": [
+      "inequalities",
+      "calculus"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "vjimc-2001-cat1-04",
+    "bank": "vjimc",
+    "source": {
+      "contest": "VJIMC",
+      "paper": "VJIMC 2001 Category I",
+      "year": 2001,
+      "number": 4,
+      "url": "https://vjimc.osu.cz/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $A,B,C$ be nonempty sets in $\\mathbb R^n$. Suppose that $A$ is bounded, $C$ is closed and convex, and $A+B\\subseteq A+C$. Prove that $B\\subseteq C$.\n\nWe remind that $E+F=\\{e+f:e\\in E,\\ f\\in F\\}$ and $D\\subseteq\\mathbb R^n$ is convex iff $tx+(1-t)y\\in D$ for all $x,y\\in D$ and any $t\\in[0,1]$.",
+    "image": null,
+    "choices": null,
+    "answer": "Fix $b\\in B$, $a_0\\in A$ and iterate $a_{i-1}+b=a_i+c_i$; then $b-\\frac1i(c_1+\\dots+c_i)=\\frac{a_i-a_0}i\\to0$, the averages lie in $C$ by convexity, and $C$ is closed. (Alternatively, separate $b\\notin C$ from $C$ by a linear functional.)",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Averaging (official)",
+        "body": "Fix $b\\in B$ and $a_0\\in A$. Since $a_0+b\\in A+B\\subseteq A+C$, there are $a_1\\in A$, $c_1\\in C$ with $a_0+b=a_1+c_1$. Repeating with $a_1$ in place of $a_0$, and so on, we get $a_i\\in A$, $c_i\\in C$ with\n$$a_{i-1}+b=a_i+c_i\\qquad(i=1,2,\\dots).$$\nAdding the first $i$ equations: $a_0+ib=a_i+c_1+\\dots+c_i$, i.e.\n$$b-x_i=\\frac{a_i-a_0}{i},\\qquad x_i=\\frac{c_1+\\dots+c_i}{i}.$$\n\nA convex set contains all convex combinations of its points (induction on the number of points: $\\sum_{j=1}^{k+1}\\lambda_jc_j=(1-\\lambda_{k+1})\\sum_{j\\le k}\\frac{\\lambda_j}{1-\\lambda_{k+1}}c_j+\\lambda_{k+1}c_{k+1}$ when $\\lambda_{k+1}<1$). So $x_i\\in C$.\n\n$A$ is bounded, say $\\|a\\|\\le M$ on $A$, so $\\|b-x_i\\|\\le\\frac{2M}i\\to0$. Thus $x_i\\to b$, and since $C$ is closed, $b\\in C$. Hence $B\\subseteq C$. ∎"
+      },
+      {
+        "title": "Separating hyperplane",
+        "body": "Suppose some $b\\in B$ is not in $C$. Since $C$ is nonempty, closed and convex, there is a linear functional $\\varphi$ (e.g. $\\varphi(x)=\\langle b-c^*,x\\rangle$ with $c^*$ the point of $C$ nearest to $b$) and a real $\\delta>0$ with\n$$\\varphi(c)\\le\\varphi(b)-\\delta\\qquad\\text{for all }c\\in C .$$\n$A$ is bounded, so $s=\\sup_{a\\in A}\\varphi(a)$ is finite; pick $a_0\\in A$ with $\\varphi(a_0)>s-\\delta$. Then $a_0+b\\in A+B\\subseteq A+C$, so $a_0+b=a+c$ with $a\\in A$, $c\\in C$, and\n$$\\varphi(a_0)+\\varphi(b)=\\varphi(a)+\\varphi(c)\\le s+\\varphi(b)-\\delta<\\varphi(a_0)+\\varphi(b),$$\na contradiction. Hence $B\\subseteq C$. ∎"
+      }
+    ],
+    "topics": [
+      "real-analysis",
+      "geometry",
+      "linear-algebra"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

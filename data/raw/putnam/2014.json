@@ -1,0 +1,458 @@
+[
+  {
+    "id": "putnam-2014-a1",
+    "bank": "putnam",
+    "source": {
+      "contest": "Putnam",
+      "paper": "75th William Lowell Putnam Mathematical Competition (December 6, 2014)",
+      "year": 2014,
+      "number": "A1",
+      "url": "https://kskedlaya.org/putnam-archive/"
+    },
+    "grade": "undergrad",
+    "points": 10,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Prove that every nonzero coefficient of the Taylor series of\n$$(1 - x + x^2)e^x$$\nabout $x=0$ is a rational number whose numerator (in lowest terms) is either $1$ or a prime number.",
+    "image": null,
+    "choices": null,
+    "answer": "Proof. The coefficients are $1, 0$ and, for $n\\ge2$, $\\frac{(n-1)^2}{n!} = \\frac{n-1}{n\\,(n-2)!}$. With $m = n-1$ the reduced numerator is $m/\\gcd(m,(m-1)!)$, which is $1$ unless $m$ is prime (numerator $m$) or $m = 4$ (numerator $2$).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Compute the coefficients",
+        "body": "**The coefficients.** With $e^x = \\sum x^k/k!$, the coefficient of $x^n$ in $(1-x+x^2)e^x$ is $1$ for $n = 0$, $1 - 1 = 0$ for $n=1$, and for $n\\ge2$\n$$\\frac1{n!} - \\frac1{(n-1)!} + \\frac{1}{(n-2)!} = \\frac{1 - n + n(n-1)}{n!} = \\frac{(n-1)^2}{n!} = \\frac{n-1}{n\\,(n-2)!}.$$\nSo the nonzero coefficients are $1$ and these numbers for $n\\ge2$.\n\n**The reduced numerator.** Let $m = n-1\\ge1$. Since $\\gcd(m, n) = 1$, the numerator of $\\frac{m}{n\\,(m-1)!}$ in lowest terms is $\\dfrac{m}{\\gcd(m,(m-1)!)}$.\n- $m = 1$: numerator $1$.\n- $m$ prime: no factor of $(m-1)!$ is divisible by $m$, so $\\gcd = 1$ and the numerator is the prime $m$.\n- $m = ab$ with $1<a<b<m$: $a$ and $b$ are distinct factors of $(m-1)!$, so $m\\mid(m-1)!$ and the numerator is $1$.\n- $m = p^2$, $p$ prime, $p>2$: then $p < 2p < p^2 = m$, so $p\\cdot 2p \\mid (m-1)!$, hence $m\\mid(m-1)!$; numerator $1$.\n- $m = 4$: $\\gcd(4, 3!) = 2$, numerator $2$, a prime.\n\nEvery composite $m$ falls into the third or fourth/fifth case, so every nonzero coefficient has numerator $1$ or a prime. ∎"
+      }
+    ],
+    "topics": [
+      "calculus",
+      "number-theory",
+      "sequences-series"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "putnam-2014-a2",
+    "bank": "putnam",
+    "source": {
+      "contest": "Putnam",
+      "paper": "75th William Lowell Putnam Mathematical Competition (December 6, 2014)",
+      "year": 2014,
+      "number": "A2",
+      "url": "https://kskedlaya.org/putnam-archive/"
+    },
+    "grade": "undergrad",
+    "points": 10,
+    "timeMinutes": null,
+    "type": "text",
+    "prompt": "Let $A$ be the $n \\times n$ matrix whose entry in the $i$-th row and $j$-th column is\n$$\\frac{1}{\\min(i,j)}$$\nfor $1 \\leq i,j \\leq n$. Compute $\\det(A)$.",
+    "image": null,
+    "choices": null,
+    "answer": "(-1)^(n-1)/((n-1)!*n!)",
+    "acceptedAnswers": [
+      "(-1)^(n-1)/((n-1)!n!)",
+      "(-1)^(n-1)/(n!(n-1)!)",
+      "(-1)^(n-1)/(n!*(n-1)!)",
+      "(-1)^(n+1)/((n-1)!n!)",
+      "(-1)^(n+1)/(n!(n-1)!)",
+      "(-1)^(n+1)/((n-1)!*n!)",
+      "(-1)^(n+1)/(n!*(n-1)!)",
+      "(-1)^{n-1}/((n-1)!n!)",
+      "(-1)^{n-1}/(n!(n-1)!)"
+    ],
+    "answerUnit": null,
+    "answerDisplay": "$\\dfrac{(-1)^{n-1}}{(n-1)!\\,n!}$",
+    "solutions": [
+      {
+        "title": "Subtract consecutive rows",
+        "body": "Let $v_1,\\dots,v_n$ be the rows of $A$. For $k\\ge2$, rows $v_k$ and $v_{k-1}$ agree in the first $k-1$ entries (both equal $\\frac1j$ in column $j<k$), and in every column $j\\ge k$ they equal $\\frac1k$ and $\\frac1{k-1}$. So\n$$v_k - v_{k-1} = \\Big(0,\\dots,0,\\ \\underbrace{\\tfrac1k - \\tfrac1{k-1},\\ \\dots,\\ \\tfrac1k-\\tfrac1{k-1}}_{\\text{columns } k,\\dots,n}\\Big).$$\nReplace $v_n$ by $v_n - v_{n-1}$, then $v_{n-1}$ by $v_{n-1}-v_{n-2}$, …, then $v_2$ by $v_2 - v_1$ (each step uses a row not yet changed). These operations preserve the determinant, and the result is upper triangular with diagonal entries $1$ and $\\frac1k - \\frac1{k-1} = -\\frac{1}{k(k-1)}$ for $k = 2,\\dots,n$. Therefore\n$$\\det A = \\prod_{k=2}^n\\frac{-1}{k(k-1)} = \\frac{(-1)^{n-1}}{n!\\,(n-1)!}.$$\n\n**Answer:** $\\det A = \\dfrac{(-1)^{n-1}}{(n-1)!\\,n!}$. (E.g. $n=2$: $\\det\\begin{pmatrix}1&1\\\\1&\\frac12\\end{pmatrix} = -\\frac12$.)"
+      },
+      {
+        "title": "Factor A as L D L^T",
+        "body": "Put $c_1 = 1$ and $c_l = \\frac1l - \\frac1{l-1}$ for $l\\ge 2$, so that $\\sum_{l=1}^{t} c_l = \\frac1t$ (telescoping). Then\n$$A_{ij} = \\frac{1}{\\min(i,j)} = \\sum_{l\\le\\min(i,j)} c_l = \\sum_{l=1}^n [l\\le i]\\,c_l\\,[l\\le j] .$$\nThat is, $A = LDL^{T}$, where $L$ is the lower triangular matrix of ones ($L_{il} = 1$ for $l\\le i$) and $D = \\operatorname{diag}(c_1,\\dots,c_n)$. Since $\\det L = 1$,\n$$\\det A = \\prod_{l=1}^n c_l = \\prod_{l=2}^n\\Big(-\\frac{1}{l(l-1)}\\Big) = \\frac{(-1)^{n-1}}{n!\\,(n-1)!}.$$\n\n**Answer:** $\\dfrac{(-1)^{n-1}}{(n-1)!\\,n!}$."
+      }
+    ],
+    "topics": [
+      "linear-algebra"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "putnam-2014-a3",
+    "bank": "putnam",
+    "source": {
+      "contest": "Putnam",
+      "paper": "75th William Lowell Putnam Mathematical Competition (December 6, 2014)",
+      "year": 2014,
+      "number": "A3",
+      "url": "https://kskedlaya.org/putnam-archive/"
+    },
+    "grade": "undergrad",
+    "points": 10,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Let $a_0 = 5/2$ and $a_k = a_{k-1}^2 - 2$ for $k \\geq 1$. Compute\n$$\\prod_{k=0}^\\infty \\left(1 - \\frac{1}{a_k} \\right)$$\nin closed form.",
+    "image": null,
+    "choices": null,
+    "answer": "3/7",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "answerDisplay": "$\\frac{3}{7}$",
+    "solutions": [
+      {
+        "title": "Explicit formula and telescoping",
+        "body": "**Closed form for $a_k$.** Since $(x + x^{-1})^2 - 2 = x^2 + x^{-2}$ and $a_0 = 2 + 2^{-1}$, induction gives $a_k = x_k + x_k^{-1}$ with $x_k = 2^{2^k}$ (so $x_{k+1} = x_k^2$). In particular $a_k\\to\\infty$ rapidly and the product converges absolutely.\n\n**Two factorisations.** Let $Q(x) = x + 1 + x^{-1}$ and $D(x) = x - x^{-1}$. Then\n$$Q(x^2) = x^2 + 1 + x^{-2} = (x+1+x^{-1})(x - 1 + x^{-1}),\\qquad D(x^2) = x^2 - x^{-2} = (x - x^{-1})(x + x^{-1}).$$\nHence, with $x = x_k$,\n$$1 - \\frac{1}{a_k} = \\frac{x - 1 + x^{-1}}{x + x^{-1}} = \\frac{Q(x_{k+1})}{Q(x_k)}\\cdot\\frac{D(x_k)}{D(x_{k+1})}.$$\n\n**Telescoping.**\n$$\\prod_{k=0}^K\\Big(1 - \\frac1{a_k}\\Big) = \\frac{Q(x_{K+1})}{D(x_{K+1})}\\cdot\\frac{D(x_0)}{Q(x_0)} \\longrightarrow \\frac{D(2)}{Q(2)} = \\frac{2 - \\frac12}{2 + 1 + \\frac12} = \\frac{3/2}{7/2} = \\frac37,$$\nsince $Q(x)/D(x)\\to1$ as $x\\to\\infty$.\n\n**Answer:** $\\dfrac37$."
+      },
+      {
+        "title": "Telescoping with the recursion only",
+        "body": "From $a_{k+1} = a_k^2 - 2$ we get $a_{k+1} + 1 = (a_k-1)(a_k+1)$ and $a_{k+1}^2 - 4 = a_k^2(a_k^2-4)$. Thus\n$$1 - \\frac1{a_k} = \\frac{a_k - 1}{a_k} = \\frac{a_{k+1}+1}{a_k+1}\\cdot\\frac{1}{a_k}, \\qquad \\frac{1}{a_k} = \\frac{\\sqrt{a_k^2-4}}{\\sqrt{a_{k+1}^2-4}}$$\n(all $a_k > 2$). Multiplying for $k = 0,\\dots,K$, both products telescope:\n$$\\prod_{k=0}^K\\Big(1 - \\frac1{a_k}\\Big) = \\frac{a_{K+1}+1}{a_0+1}\\cdot\\frac{\\sqrt{a_0^2-4}}{\\sqrt{a_{K+1}^2-4}} = \\frac{2}{7}\\cdot\\frac32\\cdot\\frac{a_{K+1}+1}{\\sqrt{a_{K+1}^2-4}} .$$\nThe $a_k$ increase without bound (an increasing sequence with $a_k > 2$ cannot converge, since $L = L^2-2$ has no root $L>2$), so the last fraction tends to $1$ and the product equals $\\frac{3}{7}$.\n\n**Answer:** $\\dfrac37$."
+      }
+    ],
+    "topics": [
+      "sequences-series",
+      "algebra"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "putnam-2014-a4",
+    "bank": "putnam",
+    "source": {
+      "contest": "Putnam",
+      "paper": "75th William Lowell Putnam Mathematical Competition (December 6, 2014)",
+      "year": 2014,
+      "number": "A4",
+      "url": "https://kskedlaya.org/putnam-archive/"
+    },
+    "grade": "undergrad",
+    "points": 10,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Suppose $X$ is a random variable that takes on only nonnegative integer values, with $E\\left[ X \\right] = 1$, $E\\left[ X^2 \\right] = 2$, and $E \\left[ X^3 \\right] = 5$. (Here $E\\left[ Y \\right]$ denotes the expectation of the random variable $Y$.) Determine the smallest possible value of the probability of the event $X=0$.",
+    "image": null,
+    "choices": null,
+    "answer": "1/3",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "answerDisplay": "$\\frac{1}{3}$",
+    "solutions": [
+      {
+        "title": "A cubic that is at least 6 on the positive integers",
+        "body": "Let $p_k = P(X = k)$. Consider\n$$\\varphi(k) = k^3 - 6k^2 + 11k = (k-1)(k-2)(k-3) + 6 .$$\nThen $\\varphi(0) = 0$, and for integers $k\\ge1$, $(k-1)(k-2)(k-3)\\ge0$ (it is $0$ for $k = 1,2,3$ and positive for $k\\ge4$), so $\\varphi(k)\\ge 6$.\n\nBy linearity of expectation,\n$$E[\\varphi(X)] = E[X^3] - 6E[X^2] + 11E[X] = 5 - 12 + 11 = 4 .$$\nOn the other hand $E[\\varphi(X)] = \\sum_{k\\ge1}\\varphi(k)p_k \\ge 6\\sum_{k\\ge1}p_k = 6\\,(1 - p_0)$. Hence $1 - p_0\\le\\frac23$, i.e. $p_0\\ge\\frac13$.\n\n**Equality** needs all mass on $\\{0,1,2,3\\}$. Try $p_0 = \\frac13$, $p_1 = \\frac12$, $p_3 = \\frac16$:\n$$E[X] = \\tfrac12 + \\tfrac36 = 1,\\quad E[X^2] = \\tfrac12 + \\tfrac96 = 2,\\quad E[X^3] = \\tfrac12 + \\tfrac{27}6 = 5. \\checkmark$$\n\n**Answer:** $\\dfrac13$."
+      },
+      {
+        "title": "Find the extremal distribution, then certify it",
+        "body": "**Where the answer comes from.** Look for an extremal distribution supported on $\\{0,1,2,3\\}$, with probabilities $p_0,\\dots,p_3$. The moment conditions are\n$$p_1 + 2p_2 + 3p_3 = 1,\\qquad p_1 + 4p_2 + 9p_3 = 2,\\qquad p_1 + 8p_2 + 27p_3 = 5 .$$\nSubtracting: $2p_2 + 6p_3 = 1$ and $4p_2 + 18p_3 = 3$, so $6p_3 = 1$, $p_3 = \\frac16$, $p_2 = 0$, $p_1 = \\frac12$, and $p_0 = 1 - \\frac12 - \\frac16 = \\frac13$. So $\\frac13$ is achievable.\n\n**Certificate (linear-programming duality).** Seek $\\psi(k) = \\alpha k + \\beta k^2 + \\gamma k^3$ with $\\psi(k)\\ge1$ for all integers $k\\ge1$; then $1 - p_0 = \\sum_{k\\ge1}p_k\\le E[\\psi(X)] = \\alpha + 2\\beta + 5\\gamma$. Requiring $\\psi = 1$ at $k = 1,2,3$ gives $\\psi(k) = 1 + \\frac16(k-1)(k-2)(k-3) = \\frac16(k^3 - 6k^2 + 11k)$, which is indeed $\\ge1$ for all integers $k\\ge1$. Hence $1 - p_0\\le\\frac16(5 - 12 + 11) = \\frac23$, i.e. $p_0\\ge\\frac13$, and the distribution above shows this is attained.\n\n**Answer:** $\\dfrac13$."
+      }
+    ],
+    "topics": [
+      "probability",
+      "inequalities",
+      "polynomials"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "putnam-2014-a5",
+    "bank": "putnam",
+    "source": {
+      "contest": "Putnam",
+      "paper": "75th William Lowell Putnam Mathematical Competition (December 6, 2014)",
+      "year": 2014,
+      "number": "A5",
+      "url": "https://kskedlaya.org/putnam-archive/"
+    },
+    "grade": "undergrad",
+    "points": 10,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let\n$$P_n(x) = 1 + 2 x + 3 x^2 + \\cdots + n x^{n-1}.$$\nProve that the polynomials $P_j(x)$ and $P_k(x)$ are relatively prime for all positive integers $j$ and $k$ with $j \\neq k$.",
+    "image": null,
+    "choices": null,
+    "answer": "Proof. By the Eneström–Kakeya bound, roots of a polynomial with positive coefficients satisfy $\\min\\frac{a_l}{a_{l+1}}\\le|z|\\le\\max\\frac{a_l}{a_{l+1}}$. A common root of $P_i$, $P_j$ ($i<j$) would satisfy $|z|\\le\\frac{i-1}{i}$ (from $P_i$) and $|z|\\ge\\frac{i+1}{i+2}$ (from $(P_j-P_i)/x^i$), impossible.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Eneström–Kakeya bounds on the roots",
+        "body": "Two polynomials over $\\mathbb C$ are relatively prime iff they have no common complex root, so we show $P_i$ and $P_j$ ($i<j$) have no common root.\n\n**Lemma.** If $f(x) = a_0 + a_1x + \\cdots + a_mx^m$ with $0<a_0\\le a_1\\le\\cdots\\le a_m$, every root $z$ of $f$ satisfies $|z|\\le1$.\n*Proof.* $(z-1)f(z) = a_mz^{m+1} - \\sum_{l=1}^{m}(a_l - a_{l-1})z^l - a_0$. If $f(z) = 0$ and $|z|>1$, then\n$$a_m|z|^{m+1} \\le \\sum_{l=1}^m(a_l-a_{l-1})|z|^l + a_0 \\le \\Big(\\sum_{l=1}^m(a_l-a_{l-1}) + a_0\\Big)|z|^m = a_m|z|^m,$$\ncontradicting $|z|>1$. ∎\n\n**Corollary.** If all $a_l>0$ and $m\\ge1$, every root satisfies $r\\le|z|\\le R$ where $r = \\min_l\\frac{a_l}{a_{l+1}}$ and $R = \\max_l\\frac{a_l}{a_{l+1}}$.\n*Proof.* $f(Rx) = \\sum a_lR^lx^l$ has coefficient ratios $\\frac{a_l}{a_{l+1}R}\\le1$, so its coefficients are nondecreasing; by the lemma its roots have $|x|\\le1$, so the roots $z = Rx$ of $f$ have $|z|\\le R$. For the lower bound apply this upper bound to the reversed polynomial $x^mf(1/x) = \\sum_l a_{m-l}x^l$: its roots are the numbers $1/z$, and its coefficient ratios are the numbers $\\frac{a_{l+1}}{a_l}\\le\\frac1r$, so $|1/z|\\le\\frac1r$. ∎\n\n**Apply it.** $P_1 = 1$ has no roots, so assume $2\\le i<j$ (if $i = 1$ there is nothing to prove). The coefficients of $P_i$ are $1,2,\\dots,i$, with ratios $\\frac{l}{l+1}$ for $l = 1,\\dots,i-1$; so every root of $P_i$ has $|z|\\le\\frac{i-1}{i}$.\n\nSuppose $z$ is a common root. Then $z\\ne0$ (as $P_i(0) = 1$) and\n$$0 = P_j(z) - P_i(z) = z^i\\,R(z),\\qquad R(x) = (i+1) + (i+2)x + \\cdots + j\\,x^{j-1-i}.$$\nIf $j = i+1$, $R = i+1$ has no root — contradiction. Otherwise $R$ has positive coefficients with ratios $\\frac{l}{l+1}$ for $l = i+1,\\dots,j-1$, the smallest being $\\frac{i+1}{i+2}$, so $|z|\\ge\\frac{i+1}{i+2}$. But\n$$\\frac{i-1}{i} < \\frac{i+1}{i+2}\\qquad(\\text{as } (i-1)(i+2) = i^2 + i - 2 < i^2 + i),$$\na contradiction. Hence $P_j$ and $P_k$ are relatively prime for $j \\neq k$. ∎"
+      },
+      {
+        "title": "Rolle's theorem on an exponential",
+        "body": "Suppose $P_i(z) = P_j(z) = 0$ with $1\\le i<j$. Differentiating the geometric series gives\n$$(1-x)^2P_k(x) = 1 - (k+1)x^k + kx^{k+1}.$$\nHere $z\\ne0$ (as $P_k(0) = 1$) and $z\\ne1$ (as $P_k(1)>0$). Put $w = 1/z\\ne0,1$. Multiplying $1 - (k+1)z^k + kz^{k+1} = 0$ by $w^{k+1}$ gives $w^{k+1} = (k+1)w - k$; so with $t = k+1$,\n$$w^t = tw - (t-1)\\qquad\\text{for } t\\in\\{i+1,\\ j+1\\},$$\nand this identity also holds trivially for $t = 0$ and $t = 1$. Taking squared absolute values, the function\n$$\\varphi(t) = |w|^{2t} - t^2|w|^2 + 2t(t-1)\\operatorname{Re}(w) - (t-1)^2\\qquad(t\\in\\mathbb R)$$\nvanishes at the four distinct points $t = 0,1,i+1,j+1$.\n\n- If $|w|\\ne1$: the polynomial part of $\\varphi$ has degree $2$, so $\\varphi'''(t) = (2\\ln|w|)^3|w|^{2t}\\ne0$ for all $t$. But by Rolle's theorem four zeros of $\\varphi$ give three zeros of $\\varphi'$, two of $\\varphi''$ and one of $\\varphi'''$ — contradiction.\n- If $|w| = 1$: for $t = i+1\\ge2$, $1 = |w^t| = |tw - (t-1)| \\ge t|w| - (t-1) = 1$, and equality in the triangle inequality forces $tw$ to be a positive multiple of $t-1>0$, i.e. $w>0$, so $w = 1$ — contradiction.\n\nHence $P_i$ and $P_j$ have no common root, so they are relatively prime. ∎"
+      }
+    ],
+    "topics": [
+      "polynomials",
+      "complex-numbers"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "putnam-2014-a6",
+    "bank": "putnam",
+    "source": {
+      "contest": "Putnam",
+      "paper": "75th William Lowell Putnam Mathematical Competition (December 6, 2014)",
+      "year": 2014,
+      "number": "A6",
+      "url": "https://kskedlaya.org/putnam-archive/"
+    },
+    "grade": "undergrad",
+    "points": 10,
+    "timeMinutes": null,
+    "type": "text",
+    "prompt": "Let $n$ be a positive integer. What is the largest $k$ for which there exist $n \\times n$ matrices $M_1, \\dots, M_k$ and $N_1, \\dots, N_k$ with real entries such that for all $i$ and $j$, the matrix product $M_i N_j$ has a zero entry somewhere on its diagonal if and only if $i \\neq j$?",
+    "image": null,
+    "choices": null,
+    "answer": "n^n",
+    "acceptedAnswers": [
+      "n**n",
+      "n^(n)",
+      "n to the n",
+      "n^{n}"
+    ],
+    "answerUnit": null,
+    "answerDisplay": "$n^n$",
+    "solutions": [
+      {
+        "title": "Products of diagonal entries are bilinear",
+        "body": "**Answer: $k = n^n$.**\n\n**Construction.** For each function $c:\\{1,\\dots,n\\}\\to\\{1,\\dots,n\\}$ (there are $n^n$) let $M_c$ be the matrix whose $r$-th row is the standard basis vector $e_{c(r)}$, and $N_c = M_c^{T}$. The $r$-th diagonal entry of $M_cN_d$ is $e_{c(r)}\\cdot e_{d(r)}$, which is $1$ if $c(r) = d(r)$ and $0$ otherwise. So $M_cN_d$ has a zero on its diagonal iff $c(r)\\ne d(r)$ for some $r$, i.e. iff $c\\neq d$.\n\n**Upper bound.** For matrices $M,N$, expand the product of the diagonal entries of $MN$:\n$$\\prod_{r=1}^n (MN)_{rr} = \\prod_{r=1}^n\\sum_{c=1}^n M_{rc}N_{cr} = \\sum_{(c_1,\\dots,c_n)}\\ \\prod_{r} M_{r c_r}\\cdot\\prod_r N_{c_r r}.$$\nDefine vectors in $\\mathbb R^{n^n}$, indexed by tuples $\\mathbf c = (c_1,\\dots,c_n)$: $\\mu(M)_{\\mathbf c} = \\prod_r M_{rc_r}$ and $\\nu(N)_{\\mathbf c} = \\prod_r N_{c_rr}$. Then $\\mu(M)\\cdot\\nu(N) = \\prod_r(MN)_{rr}$, which is $0$ iff $MN$ has a zero on its diagonal.\n\nGiven families as in the problem, the $k\\times k$ matrix $G_{ij} = \\mu(M_i)\\cdot\\nu(N_j)$ is diagonal with nonzero diagonal entries, so it is invertible and has rank $k$. But $G = UV^{T}$ where $U$ ($k\\times n^n$) has rows $\\mu(M_i)$ and $V$ has rows $\\nu(N_j)$, so $\\operatorname{rank}G\\le n^n$. Hence $k\\le n^n$.\n\n(Equivalently: if $\\sum_i\\lambda_i\\mu(M_i) = 0$, dotting with $\\nu(N_j)$ gives $\\lambda_j = 0$, so the $\\mu(M_i)$ are linearly independent in an $n^n$-dimensional space.)\n\n**Answer: $n^n$.** ∎"
+      }
+    ],
+    "topics": [
+      "linear-algebra",
+      "counting"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "putnam-2014-b1",
+    "bank": "putnam",
+    "source": {
+      "contest": "Putnam",
+      "paper": "75th William Lowell Putnam Mathematical Competition (December 6, 2014)",
+      "year": 2014,
+      "number": "B1",
+      "url": "https://kskedlaya.org/putnam-archive/"
+    },
+    "grade": "undergrad",
+    "points": 10,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "A *base $10$ over-expansion* of a positive integer $N$ is an expression of the form\n$$N = d_k 10^k + d_{k-1} 10^{k-1} + \\cdots + d_0 10^0$$\nwith $d_k \\neq 0$ and $d_i \\in \\{0,1,2,\\dots,10\\}$ for all $i$. For instance, the integer $N = 10$ has two base 10 over-expansions: $10 = 10 \\cdot 10^0$ and the usual base 10 expansion $10 = 1 \\cdot 10^1 + 0 \\cdot 10^0$. Which positive integers have a unique base 10 over-expansion?",
+    "image": null,
+    "choices": null,
+    "answer": "Exactly the positive integers with no digit $0$ in their usual decimal expansion. (A $0$ digit after a nonzero digit can be traded: $d\\cdot10^{i+1} + 0\\cdot10^i = (d-1)10^{i+1} + 10\\cdot 10^i$; without zeros, the last digit is forced mod $10$ and induction gives uniqueness.)",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Borrowing and induction",
+        "body": "**Answer:** the positive integers whose ordinary decimal expansion contains no digit $0$.\n\n**A zero digit gives a second expansion.** Let $N = d_k10^k + \\cdots + d_0$ be the usual expansion ($d_k\\ne0$) and suppose some $d_i = 0$. Take the largest such $i$; then $i<k$ and $d_{i+1}\\ge1$. Replacing $d_{i+1}10^{i+1} + 0\\cdot10^i$ by $(d_{i+1}-1)10^{i+1} + 10\\cdot10^i$ gives another over-expansion (if this makes the leading digit $0$, i.e. $i+1 = k$ and $d_k = 1$, drop it; the new leading digit is $10\\ne0$). It differs from the usual one because it contains a digit $10$.\n\n**No zero digit gives uniqueness**, by induction on the number of digits of $N$. Let $N = c_l10^l + \\cdots + c_0$ be any over-expansion. Reducing mod $10$, $c_0\\equiv N\\pmod{10}$. Since $N$ has no zero digit, $N\\bmod10\\in\\{1,\\dots,9\\}$, and the only element of $\\{0,\\dots,10\\}$ in this residue class is $N\\bmod10$ itself (both $0$ and $10$ are $\\equiv0$). So $c_0$ is the last digit of $N$.\n- If $N\\le9$, then $c_0 = N$ and $c_l10^l + \\cdots + c_1 10 = 0$, so $l = 0$ (the leading digit is nonzero): the expansion is unique.\n- If $N\\ge10$, then $N' = (N - c_0)/10$ is the number formed by the other digits of $N$ (no zeros, fewer digits), and $N' = c_l10^{l-1} + \\cdots + c_1$ is an over-expansion of it (with $l \\ge 1$, since $N' > 0$). By induction it is the usual expansion of $N'$, so the original over-expansion is the usual expansion of $N$.\n∎"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "arithmetic"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "putnam-2014-b2",
+    "bank": "putnam",
+    "source": {
+      "contest": "Putnam",
+      "paper": "75th William Lowell Putnam Mathematical Competition (December 6, 2014)",
+      "year": 2014,
+      "number": "B2",
+      "url": "https://kskedlaya.org/putnam-archive/"
+    },
+    "grade": "undergrad",
+    "points": 10,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Suppose that $f$ is a function on the interval $[1,3]$ such that $-1 \\leq f(x) \\leq 1$ for all $x$ and $\\int_1^3 f(x)\\,dx = 0$. How large can $\\int_1^3 \\frac{f(x)}{x}\\,dx$ be?",
+    "image": null,
+    "choices": null,
+    "answer": "ln(4/3)",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "answerDisplay": "$\\ln\\frac{4}{3}$",
+    "solutions": [
+      {
+        "title": "Compare with the step function",
+        "body": "(We assume $f$ is integrable.) Let $g = 1$ on $[1,2]$ and $g = -1$ on $(2,3]$, and $h = g - f$. Then $\\int_1^3 h = 0 - 0 = 0$, $h\\ge0$ on $[1,2]$ (as $f\\le1$) and $h\\le0$ on $(2,3]$ (as $f\\ge-1$). Since $\\frac1x\\ge\\frac12$ on $[1,2]$ and $\\frac1x\\le\\frac12$ on $[2,3]$, in both ranges $\\frac{h(x)}{x}\\ge\\frac{h(x)}2$. So\n$$\\int_1^3\\frac{h(x)}{x}\\,dx \\ \\ge\\ \\frac12\\int_1^3 h(x)\\,dx = 0,$$\ni.e.\n$$\\int_1^3\\frac{f(x)}x\\,dx \\le \\int_1^3\\frac{g(x)}{x}\\,dx = \\ln 2 - (\\ln3 - \\ln2) = \\ln\\frac43 .$$\nThe bound is attained by $f = g$, which satisfies the conditions.\n\n**Answer:** $\\ln\\dfrac43$."
+      },
+      {
+        "title": "Integrate by parts",
+        "body": "Let $F(x) = \\int_1^x f(t)\\,dt$. Then $F(1) = F(3) = 0$, and from $|f|\\le1$: $F(x)\\le x-1$ and $F(x) = -\\int_x^3 f \\le 3 - x$. $F$ is Lipschitz, so integration by parts is valid:\n$$\\int_1^3\\frac{f(x)}{x}\\,dx = \\Big[\\frac{F(x)}{x}\\Big]_1^3 + \\int_1^3\\frac{F(x)}{x^2}\\,dx = \\int_1^3\\frac{F(x)}{x^2}\\,dx .$$\nUsing $F(x)\\le\\min(x-1,3-x)$:\n$$\\int_1^3\\frac{F(x)}{x^2}\\,dx\\le\\int_1^2\\frac{x-1}{x^2}\\,dx + \\int_2^3\\frac{3-x}{x^2}\\,dx = \\Big[\\ln x + \\frac1x\\Big]_1^2 + \\Big[-\\frac3x - \\ln x\\Big]_2^3 = \\Big(\\ln2 - \\frac12\\Big) + \\Big(\\frac12 - \\ln3 + \\ln 2\\Big) = \\ln\\frac43 .$$\nEquality holds when $F(x) = \\min(x-1,3-x)$, i.e. $f = 1$ on $[1,2]$ and $-1$ on $(2,3]$.\n\n**Answer:** $\\ln\\dfrac43$."
+      }
+    ],
+    "topics": [
+      "calculus",
+      "inequalities",
+      "real-analysis"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "putnam-2014-b3",
+    "bank": "putnam",
+    "source": {
+      "contest": "Putnam",
+      "paper": "75th William Lowell Putnam Mathematical Competition (December 6, 2014)",
+      "year": 2014,
+      "number": "B3",
+      "url": "https://kskedlaya.org/putnam-archive/"
+    },
+    "grade": "undergrad",
+    "points": 10,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $A$ be an $m \\times n$ matrix with rational entries. Suppose that there are at least $m+n$ distinct prime numbers among the absolute values of the entries of $A$. Show that the rank of $A$ is at least 2.",
+    "image": null,
+    "choices": null,
+    "answer": "Proof. If $\\operatorname{rank}A\\le1$, then $A_{ij} = a_ib_j$. The bipartite graph of rows and columns joined by $m+n$ entries with distinct prime absolute values has $m+n$ vertices and $m+n$ edges, hence a cycle; the product of the primes around the cycle is $\\big(\\prod|a_{r}||b_{c}|\\big)^2$, a rational square — impossible.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "A cycle in the bipartite graph",
+        "body": "Suppose $\\operatorname{rank}A\\le1$. Rank $0$ means $A = 0$, which has no prime entries, so $\\operatorname{rank}A = 1$. Some column $a\\in\\mathbb Q^m$ is nonzero, and every column is a multiple $b_ja$; since $a$ has a nonzero rational entry, $b_j\\in\\mathbb Q$. So $A_{ij} = a_ib_j$ with all $a_i,b_j$ rational.\n\n**Graph.** Choose $m+n$ entries of $A$ whose absolute values are pairwise distinct primes. Build a bipartite graph whose vertices are the $m$ rows and $n$ columns, with one edge between row $i$ and column $j$ for each chosen entry $(i,j)$. It has $m+n$ vertices and $m+n$ edges, and no multiple edges.\n\n**A forest with $V$ vertices has at most $V-1$ edges.** (Induction on $V$: an acyclic graph with an edge has a vertex of degree $1$ — the endpoint of a longest path — and deleting it removes one vertex and one edge; an acyclic graph without edges has $0\\le V-1$ edges.) Hence our graph contains a cycle. Being bipartite and simple, the cycle has the form\n$$\\text{row } r_1,\\ \\text{col } c_1,\\ \\text{row } r_2,\\ \\text{col } c_2,\\ \\dots,\\ \\text{row } r_t,\\ \\text{col } c_t,\\ \\text{back to row } r_1\\qquad(t\\ge2),$$\nwith distinct vertices.\n\n**Contradiction.** The $2t$ edges are the entries $(r_s,c_s)$ and $(r_{s+1},c_s)$ (indices mod $t$), whose absolute values are $2t$ distinct primes $p_1,\\dots,p_{2t}$. Each row $r_s$ and each column $c_s$ occurs in exactly two of these edges, so\n$$p_1p_2\\cdots p_{2t} = \\prod_{s=1}^t|a_{r_s}b_{c_s}|\\cdot|a_{r_{s+1}}b_{c_s}| = \\Big(\\prod_{s=1}^t|a_{r_s}|\\,|b_{c_s}|\\Big)^2 .$$\nThe right side is the square of a positive rational, in whose factorization every prime has an even exponent; on the left, $p_1$ has exponent $1$. This contradiction shows $\\operatorname{rank}A\\ge2$. ∎"
+      },
+      {
+        "title": "Exponent vectors and a dimension count",
+        "body": "Again suppose $A_{ij} = a_ib_j$; deleting rows and columns with $a_i = 0$ or $b_j = 0$ (they contain no primes) and reducing $m, n$ accordingly only strengthens the hypothesis, so assume all $a_i,b_j\\ne0$. For a nonzero rational $q = \\pm\\prod_p p^{e_p}$ let $\\varepsilon(q) = (e_p)_p$ be its exponent vector (finitely many nonzero entries).\n\nIf $|A_{ij}|$ is the prime $p$, then $\\varepsilon(a_i) + \\varepsilon(b_j) = \\mathbf e_p$, the unit vector of $p$. The given primes $p_1,\\dots,p_{m+n}$ give $m+n$ linearly independent vectors $\\mathbf e_{p_l}$, each of the form $\\varepsilon(a_i) + \\varepsilon(b_j)$. All of them lie in the space\n$$W = \\Big\\{\\sum_i x_i\\varepsilon(a_i) + \\sum_j y_j\\varepsilon(b_j)\\ :\\ \\sum_i x_i = \\sum_j y_j\\Big\\},$$\nwhich is the image of the subspace $\\{\\sum x_i = \\sum y_j\\}$ of $\\mathbb R^{m+n}$, of dimension $m+n-1$. So $\\dim W\\le m+n-1$ cannot contain $m+n$ independent vectors — a contradiction. Hence $\\operatorname{rank}A\\ge2$. ∎"
+      }
+    ],
+    "topics": [
+      "linear-algebra",
+      "number-theory",
+      "graph-theory"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "putnam-2014-b4",
+    "bank": "putnam",
+    "source": {
+      "contest": "Putnam",
+      "paper": "75th William Lowell Putnam Mathematical Competition (December 6, 2014)",
+      "year": 2014,
+      "number": "B4",
+      "url": "https://kskedlaya.org/putnam-archive/"
+    },
+    "grade": "undergrad",
+    "points": 10,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Show that for each positive integer $n$, all the roots of the polynomial\n$$\\sum_{k=0}^n 2^{k(n-k)} x^k$$\nare real numbers.",
+    "image": null,
+    "choices": null,
+    "answer": "Proof. At $x = -2^{2j-n}$ ($j = 0,\\dots,n$) the value is $(-1)^j2^{j^2}\\sum_{i=-j}^{n-j}(-1)^i2^{-i^2}$; the alternating sum is positive (for $n\\ge3$; $n\\le2$ is direct), so the values alternate in sign and the intermediate value theorem gives $n$ distinct real roots.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Sign changes at powers of 2",
+        "body": "Let $f_n(x) = \\sum_{k=0}^n2^{k(n-k)}x^k$, of degree $n$. For $n = 1, 2$: $f_1 = 1+x$ and $f_2 = 1 + 2x + x^2 = (1+x)^2$, so all roots are real. Let $n\\ge3$.\n\n**Evaluate at $x_j = -2^{2j-n}$, $j = 0,1,\\dots,n$.** The $k$-th term is\n$$2^{k(n-k)}(-1)^k2^{k(2j-n)} = (-1)^k2^{2jk-k^2} = (-1)^k2^{j^2 - (k-j)^2}.$$\nPutting $i = k-j$,\n$$f_n(x_j) = (-1)^j2^{j^2}\\,S_j,\\qquad S_j = \\sum_{i=-j}^{n-j}(-1)^i2^{-i^2} = 1 + T(j) + T(n-j),$$\nwhere $T(L) = \\sum_{i=1}^L(-1)^i2^{-i^2}$ (and $T(0) = 0$).\n\n**Estimating $T$.** For $L\\ge1$,\n$$T(L) + \\frac12 = \\Big(\\frac1{2^4} - \\frac1{2^9}\\Big) + \\Big(\\frac{1}{2^{16}} - \\frac{1}{2^{25}}\\Big) + \\cdots,$$\ngrouped in pairs (possibly ending with a single positive term); each pair is positive because $2^{-i^2}$ decreases. So $T(L)\\ge-\\frac12$, with equality only for $L = 1$.\n\n**$S_j>0$.** If $j = 0$ or $j = n$, $S_j = 1 + T(n) \\ge \\frac12$. Otherwise $j, n-j\\ge1$ and $S_j = 1 + T(j) + T(n-j)\\ge 0$, with equality only if $j = n-j = 1$, i.e. $n = 2$. Since $n\\ge3$, $S_j>0$ for all $j$.\n\n**Conclusion.** The values $f_n(x_0), f_n(x_1),\\dots,f_n(x_n)$ have signs $+,-,+,\\dots$ (sign $(-1)^j$). The points $x_0 > x_1 > \\cdots > x_n$ are distinct, so by the intermediate value theorem $f_n$ has a root in each of the $n$ open intervals $(x_{j+1}, x_j)$. These are $n$ distinct real roots of a polynomial of degree $n$, hence all of its roots. ∎"
+      }
+    ],
+    "topics": [
+      "polynomials",
+      "inequalities"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "putnam-2014-b5",
+    "bank": "putnam",
+    "source": {
+      "contest": "Putnam",
+      "paper": "75th William Lowell Putnam Mathematical Competition (December 6, 2014)",
+      "year": 2014,
+      "number": "B5",
+      "url": "https://kskedlaya.org/putnam-archive/"
+    },
+    "grade": "undergrad",
+    "points": 10,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "In the 75th annual Putnam Games, participants compete at mathematical games. Patniss and Keeta play a game in which they take turns choosing an element from the group of invertible $n \\times n$ matrices with entries in the field $\\mathbb{Z}/p \\mathbb{Z}$ of integers modulo $p$, where $n$ is a fixed positive integer and $p$ is a fixed prime number. The rules of the game are:\n\n1. A player cannot choose an element that has been chosen by either player on any previous turn.\n2. A player can only choose an element that commutes with all previously chosen elements.\n3. A player who cannot choose an element on his/her turn loses the game.\n\nPatniss takes the first turn. Which player has a winning strategy? (Your answer may depend on $n$ and $p$.)",
+    "image": null,
+    "choices": null,
+    "answer": "Patniss (the first player) wins if $p = 2$; Keeta wins if $p$ is odd (for every $n$). The game ends at a set $S$ equal to its own centralizer, a subgroup; Keeta forces $-I\\in S$ (even order) when $p>2$, and for $p=2$ Patniss opens with a companion matrix of an irreducible polynomial, whose centralizer has odd order $2^n-1$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Parity of the final centralizer",
+        "body": "**General finite group $G$.** Let $S$ be the set of chosen elements and $C(S)$ its centralizer (elements commuting with all of $S$), a subgroup. Chosen elements commute pairwise, so $S\\subseteq C(S)$, and the legal moves are exactly $C(S)\\setminus S$. The game ends when $C(S) = S$; then $S$ is a subgroup and exactly $|S|$ moves were made. Patniss makes the odd-numbered moves, so **Patniss wins iff the final $|S|$ is odd**.\n\nTwo observations:\n- $C(S)$ only shrinks: $C(S\\cup\\{x\\}) = C(S)\\cap C(x)$ is a subgroup of $C(S)$. So if $|C(S)|$ is odd at some moment, it stays odd (Lagrange), and the final $|S| = |C(S)|$ is odd.\n- If $S$ contains an element $x$ of order $2$, then $x$ lies in every later $C(S)$, so the final subgroup $S$ contains an element of order $2$ and has even order.\n\n**$p$ odd: Keeta wins.** The scalar $-I$ is invertible, has order $2$ (as $-1\\ne1$), and commutes with everything. If Patniss's first move $g$ is not $-I$, Keeta answers $-I$; if $g = -I$, Keeta answers $I$ (legal, since $I\\ne -I$). Either way $-I\\in S$ after two moves, so the final $|S|$ is even and Keeta makes the last move.\n\n**$p = 2$: Patniss wins.** It suffices for Patniss to open with some $g$ such that $|C(g)|$ is odd.\n\n*An irreducible polynomial.* There is a monic irreducible polynomial $P(x) = x^n + c_{n-1}x^{n-1}+\\cdots+c_0$ of degree $n$ over $\\mathbb F_2$ with $c_0\\neq0$: for $n=1$ take $x+1$; for $n\\ge2$ any irreducible one has $c_0\\ne0$, and one exists (standard; e.g. from $x^{2^n}-x = \\prod_{d\\mid n}\\prod_{\\deg P = d}P$ one gets $\\sum_{d\\mid n}dN_d = 2^n$, so $nN_n \\ge 2^n - \\sum_{d\\le n/2}2^d > 0$).\n\n*The companion matrix.* Let $g$ be the matrix with $ge_l = e_{l+1}$ for $l<n$ and $ge_n = -\\sum_l c_{l-1}e_l$. Then $e_1, ge_1,\\dots,g^{n-1}e_1$ is the standard basis, $P(g)e_1 = 0$, hence $P(g)g^le_1 = g^lP(g)e_1 = 0$ and $P(g) = 0$; $\\det g = \\pm c_0\\ne0$, so $g\\in G$.\n\n*Its centralizer.* If $Bg = gB$, write $Be_1 = q(g)e_1$ with $\\deg q<n$; then $Bg^le_1 = g^lBe_1 = q(g)g^le_1$, so $B = q(g)$. Distinct $q$ of degree $<n$ give distinct matrices (look at $q(g)e_1$). Since $P$ is irreducible, $\\mathbb F_2[x]/(P)$ is a field, so each nonzero $q(g)$ is invertible (if $qr\\equiv1 \\bmod P$ then $q(g)r(g) = I$). Therefore $C(g)$ consists of the $2^n - 1$ nonzero matrices $q(g)$ — an odd number.\n\nAfter Patniss opens with $g$, every later centralizer has odd order, so the final $|S|$ is odd and Patniss makes the last move.\n\n**Answer:** Patniss has a winning strategy if $p = 2$; Keeta has one if $p > 2$. ∎"
+      }
+    ],
+    "topics": [
+      "games",
+      "abstract-algebra",
+      "linear-algebra"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "putnam-2014-b6",
+    "bank": "putnam",
+    "source": {
+      "contest": "Putnam",
+      "paper": "75th William Lowell Putnam Mathematical Competition (December 6, 2014)",
+      "year": 2014,
+      "number": "B6",
+      "url": "https://kskedlaya.org/putnam-archive/"
+    },
+    "grade": "undergrad",
+    "points": 10,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $f: [0,1] \\to \\mathbb{R}$ be a function for which there exists a constant $K>0$ such that $\\left| f(x) - f(y) \\right| \\leq K \\left| x - y \\right|$ for all $x,y \\in [0,1]$. Suppose also that for each rational number $r \\in [0,1]$, there exist integers $a$ and $b$ such that $f(r) = a + br$. Prove that there exist finitely many intervals $I_1, \\dots, I_n$ such that $f$ is a linear function on each $I_i$ and $[0,1] = \\bigcup_{i=1}^n I_i$.",
+    "image": null,
+    "choices": null,
+    "answer": "Proof. Let $f_N$ interpolate $f$ linearly between consecutive points of the Farey sequence $F_N$. Each piece is $a+bx$ with $a,b\\in\\mathbb Z$, $|b|\\le K$. When $N>2K$ a new point $m/N$ between $r/s$, $r'/s'$ ($s+s' = N$) creates slopes $b_0+st$ and $b_0-s't$ with $|t\\cdot N|\\le2K$, so $t=0$ and $f_N = f_{N-1}$. Hence $f = f_N$ for $N>2K$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Farey sequences",
+        "body": "**Integrality.** If $r = u/v$ in lowest terms, $v f(r) = va + bu\\in\\mathbb Z$. We only use this.\n\n**Farey facts.** Let $F_N$ be the increasing list of fractions in $[0,1]$ with denominator $\\le N$ (lowest terms). *Claim:* consecutive $\\frac rs<\\frac{r'}{s'}$ in $F_N$ satisfy $r's - rs' = 1$ and $s + s'>N$; and passing from $F_{N-1}$ to $F_N$ inserts a point into the gap $(\\frac rs, \\frac{r'}{s'})$ iff $s+s' = N$, in which case the only new point is $\\frac{r+r'}{N}$.\n*Proof by induction.* $F_1 = (\\frac01,\\frac11)$ is fine. Let $\\frac rs<\\frac{r'}{s'}$ be consecutive in $F_{N-1}$. If $\\frac mt$ lies strictly between them, then $ms - rt\\ge1$ and $r't - ms'\\ge1$, and\n$$t = t(r's - rs') = s'(ms - rt) + s(r't - ms') \\ge s + s'.$$\nSince $s+s'\\ge N$ by induction, a point of $F_N$ in the gap must have $t = N = s+s'$ and $ms - rN = 1$, which determines $m$; $m = r+r'$ works. Every new element $\\frac mN$ of $F_N$ lies in some gap of $F_{N-1}$, and the new consecutive pairs $\\big(\\frac rs,\\frac{r+r'}{N}\\big)$, $\\big(\\frac{r+r'}{N},\\frac{r'}{s'}\\big)$ again satisfy both properties (e.g. $(r+r')s - rN = r's - rs' = 1$). ∎\nNote: consecutive points are at distance $\\frac{1}{ss'}\\le\\frac1N$ (since $ss'\\ge s+s'-1\\ge N$), and $\\gcd(s,s') = 1$.\n\n**The interpolants.** Let $f_N$ agree with $f$ on $F_N$ and be linear between consecutive points. On a gap $[\\frac rs,\\frac{r'}{s'}]$, $f_N = a + bx$ with\n$$b = \\frac{f(r'/s') - f(r/s)}{1/(ss')} = s\\cdot\\big(s'f(\\tfrac{r'}{s'})\\big) - s'\\cdot\\big(sf(\\tfrac rs)\\big)\\in\\mathbb Z,\\qquad |b|\\le K$$\n(Lipschitz). Also $as = sf(\\frac rs) - br\\in\\mathbb Z$ and $as'\\in\\mathbb Z$; as $\\gcd(s,s') = 1$, $a\\in\\mathbb Z$.\n\n**Stabilisation for $N>2K$.** Let $N>2K$ and let $\\frac mN$ be inserted between $\\frac rs,\\frac{r'}{s'}$ ($s+s'=N$), where $f_{N-1} = a_0 + b_0x$ with $a_0,b_0\\in\\mathbb Z$. Put $t = Nf(\\frac mN) - a_0N - b_0m\\in\\mathbb Z$, so $f(\\frac mN) = a_0 + b_0\\frac mN + \\frac tN$. Using $\\frac mN - \\frac rs = \\frac1{sN}$ and $\\frac{r'}{s'} - \\frac mN = \\frac{1}{Ns'}$, the slopes of $f_N$ on the two new pieces are\n$$\\frac{b_0/(sN) + t/N}{1/(sN)} = b_0 + st,\\qquad \\frac{b_0/(Ns') - t/N}{1/(Ns')} = b_0 - s't .$$\nBoth are chord slopes of $f$, so have absolute value $\\le K$. Their difference is $(s+s')t = Nt$, so $N|t|\\le 2K<N$, forcing $t = 0$. Thus $f(\\frac mN) = f_{N-1}(\\frac mN)$ for every new point, and $f_N = f_{N-1}$.\n\n**Conclusion.** Let $N_0 = \\lfloor 2K\\rfloor + 1$. Then $f_N = f_{N_0}$ for all $N\\ge N_0$. For any $x\\in[0,1]$ and any $N$, $x$ lies in a gap of $F_N$ of length $\\le\\frac1N$, and $f_N(x)$ is a weighted average of $f$ at the endpoints, each within $\\frac KN$ of $f(x)$; so $|f_N(x) - f(x)|\\le\\frac KN\\to0$. Hence $f = f_{N_0}$, which is linear on each of the finitely many intervals between consecutive points of $F_{N_0}$. These intervals cover $[0,1]$. ∎"
+      }
+    ],
+    "topics": [
+      "real-analysis",
+      "number-theory"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

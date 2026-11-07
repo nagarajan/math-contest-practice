@@ -1,0 +1,212 @@
+[
+  {
+    "id": "cmo-cmo-2009-01",
+    "bank": "cmo",
+    "source": {
+      "contest": "CMO",
+      "paper": "CMO 2009",
+      "year": 2009,
+      "number": 1,
+      "url": "https://cms.math.ca/competitions/cmo/"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "text",
+    "prompt": "Given an $m \\times n$ grid with squares coloured either black or white, we say that a black square in the grid is *stranded* if there is some square to its left in the same row that is white and there is some square above it in the same column that is white (see Figure 1).\n\n*Figure 1. A $4 \\times 5$ grid with no stranded black squares*\n\nFind a closed formula for the number of $2 \\times n$ grids with no stranded black squares.",
+    "image": "qimages/cmo/cmo-2009/q01.webp",
+    "choices": null,
+    "answer": "2*3^n - 2^n",
+    "acceptedAnswers": [
+      "2*3^n-2^n",
+      "2·3^n - 2^n",
+      "2·3^n-2^n",
+      "2(3^n)-2^n",
+      "2*3^n - 2^n",
+      "2 * 3^n - 2^n",
+      "2x3^n-2^n",
+      "2*3**n-2**n",
+      "2 3^n - 2^n"
+    ],
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Count by the leading black squares of the bottom row",
+        "body": "Squares of the top row have nothing above them, so they are never stranded. A square in the bottom row, column $j$, is stranded exactly when it is black, the square above it is white, and some bottom-row square to its left is white.\n\nLet $k$ be the number of black squares at the start of the bottom row (so the bottom row begins with $k$ black squares followed, if $k < n$, by a white square).\n\n- If $k = n$: the bottom row is all black, no bottom square has a white square to its left, so the top row is arbitrary: $2^n$ grids.\n- If $k < n$: columns $1, \\ldots, k$ (bottom black, nothing white to the left) and column $k+1$ (bottom white) are safe whatever the top is, giving $2^{k+1}$ choices for their top squares. Each of the columns $k+2, \\ldots, n$ has a white square to its left in the bottom row, so its (top, bottom) pair may be anything except (white, black): $3$ choices each. That gives $2^{k+1}3^{n-k-1}$ grids.\n\nTotal:\n$$\\sum_{k=0}^{n-1}2^{k+1}3^{n-k-1} + 2^n = 2\\cdot 3^{n-1}\\sum_{k=0}^{n-1}\\left(\\frac23\\right)^k + 2^n = 2\\cdot 3^{n-1}\\cdot\\frac{1 - (2/3)^n}{1/3} + 2^n = 2\\cdot3^n - 2^{n+1} + 2^n = 2\\cdot 3^n - 2^n.$$\nCheck: $n = 1$ gives $4$ (all four colourings are fine), $n = 2$ gives $14$ (only the two grids with bottom row white–black and top-right white are bad). A computer count gives $4, 14, 46, 146, 454$ for $n = 1, \\ldots, 5$.\n\n**Answer: $2\\cdot 3^n - 2^n$**"
+      },
+      {
+        "title": "Add one column at a time",
+        "body": "Build the grid from left to right. Appending a new column on the right does not change whether earlier squares are stranded, and the new bottom square is stranded exactly when it is black, the square above it is white, and some earlier bottom square is white.\n\nLet $a_n$ be the number of good $2 \\times n$ grids whose bottom row is all black, and $w_n$ the number of good grids with at least one white bottom square. Clearly $a_n = 2^n$ (the top row is arbitrary) and $w_1 = 2$.\n\n- From a grid counted by $w_n$, the new column may be anything except (top white, bottom black): $3$ choices, all giving grids counted by $w_{n+1}$.\n- From a grid counted by $a_n$, all $4$ new columns are allowed; the $2$ with a white bottom square give grids counted by $w_{n+1}$.\n\nSo $w_{n+1} = 3w_n + 2\\cdot 2^n$. The formula $w_n = 2\\cdot 3^n - 2^{n+1}$ satisfies $w_1 = 2$ and $3(2\\cdot 3^n - 2^{n+1}) + 2^{n+1} = 2\\cdot 3^{n+1} - 2^{n+2}$, so it holds for all $n$. The number of good grids is\n$$a_n + w_n = 2^n + 2\\cdot 3^n - 2^{n+1} = 2\\cdot 3^n - 2^n.$$\n\n**Answer: $2\\cdot 3^n - 2^n$**"
+      }
+    ],
+    "topics": [
+      "counting"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "cmo-cmo-2009-02",
+    "bank": "cmo",
+    "source": {
+      "contest": "CMO",
+      "paper": "CMO 2009",
+      "year": 2009,
+      "number": 2,
+      "url": "https://cms.math.ca/competitions/cmo/"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Two circles of different radii are cut out of cardboard. Each circle is subdivided into $200$ equal sectors. On each circle $100$ sectors are painted white and the other $100$ are painted black. The smaller circle is then placed on top of the larger circle, so that their centers coincide. Show that one can rotate the small circle so that the sectors on the two circles line up and at least $100$ sectors on the small circle lie over sectors of the same color on the big circle.",
+    "image": null,
+    "choices": null,
+    "answer": "Over all $200$ aligned positions, each small sector lies once over each big sector, so the total number of colour matches is $100\\cdot100 + 100\\cdot100 = 20000$; the average is $100$, so some position has at least $100$ matches.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Average over all rotations",
+        "body": "There are $200$ rotations of the small circle for which the sectors line up. Count pairs (rotation, small sector) for which the small sector lies over a big sector of the same colour.\n\nFix a small sector. As the rotation runs through all $200$ positions, this sector lies over each of the $200$ big sectors exactly once, so it matches in colour exactly $100$ times (there are $100$ big sectors of each colour). Summing over the $200$ small sectors, the total number of matches over all rotations is $200 \\cdot 100 = 20000$.\n\nSo the average number of matching sectors per rotation is $\\frac{20000}{200} = 100$, and some rotation has at least the average: at least $100$ sectors of the small circle lie over sectors of the same colour. ∎"
+      },
+      {
+        "title": "Plus/minus signs",
+        "body": "Number the sectors $0, \\ldots, 199$ counterclockwise on both circles. Let $x_i = +1$ if sector $i$ of the big circle is black and $-1$ if white, and define $y_i$ similarly for the small circle; indices are taken mod $200$. In the position where small sector $i + j$ lies over big sector $i$, the number of matches minus the number of mismatches is\n$$S_j = \\sum_{i=0}^{199} x_i\\,y_{i+j},$$\nso the number of matches is $\\frac{200 + S_j}{2}$, which is at least $100$ iff $S_j \\ge 0$. Now\n$$\\sum_{j=0}^{199} S_j = \\sum_{i=0}^{199} x_i\\sum_{j=0}^{199}y_{i+j} = \\sum_i x_i\\cdot 0 = 0,$$\nbecause the small circle has as many $+1$'s as $-1$'s. A sum of $200$ numbers equal to $0$ has a nonnegative term, so $S_j \\ge 0$ for some $j$. ∎"
+      }
+    ],
+    "topics": [
+      "counting",
+      "logic"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "cmo-cmo-2009-03",
+    "bank": "cmo",
+    "source": {
+      "contest": "CMO",
+      "paper": "CMO 2009",
+      "year": 2009,
+      "number": 3,
+      "url": "https://cms.math.ca/competitions/cmo/"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "text",
+    "prompt": "Define\n$$f(x, y, z) = \\frac{(xy + yz + zx)(x + y + z)}{(x + y)(x + z)(y + z)}.$$\nDetermine the set of real numbers $r$ for which there exists a triplet $(x, y, z)$ of positive real numbers satisfying $f(x, y, z) = r$.",
+    "image": null,
+    "choices": null,
+    "answer": "(1, 9/8]",
+    "acceptedAnswers": [
+      "(1,9/8]",
+      "1 < r <= 9/8",
+      "1<r<=9/8",
+      "1 < r ≤ 9/8",
+      "1<r≤9/8",
+      "(1, 1.125]",
+      "(1,1.125]",
+      "r in (1, 9/8]",
+      "r in (1,9/8]",
+      "1 < r ≤ 1.125"
+    ],
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Simplify and bound",
+        "body": "**Simplification.** Expanding, $(x+y)(y+z)(z+x) = (x+y+z)(xy+yz+zx) - xyz$. Hence\n$$f(x,y,z) = \\frac{(x+y)(y+z)(z+x) + xyz}{(x+y)(y+z)(z+x)} = 1 + \\frac{xyz}{(x+y)(x+z)(y+z)}.$$\n\n**Bounds.** For positive $x, y, z$ the fraction is positive, so $f > 1$. By AM-GM, $(x+y)(y+z)(z+x) \\ge 2\\sqrt{xy}\\cdot2\\sqrt{yz}\\cdot2\\sqrt{zx} = 8xyz$, so $f \\le 1 + \\frac18 = \\frac98$, with equality iff $x = y = z$.\n\n(Equivalently, $f \\le \\frac98$ becomes $x^2y + x^2z + y^2x + y^2z + z^2x + z^2y - 6xyz \\ge 0$, and the left side is $x(y-z)^2 + y(z-x)^2 + z(x-y)^2$.)\n\n**Every value in $(1, \\frac98]$ occurs.** Let $g(t) = f(t, 1, 1) = 1 + \\frac{t}{2(1+t)^2}$ for $t > 0$. It is continuous on $(0, 1]$, $g(1) = \\frac98$ and $g(t) \\to 1$ as $t \\to 0^+$, so by the intermediate value theorem $g$ takes every value in $(1, \\frac98]$. (Directly: $g(t) = r$ means $2(r-1)(1+t)^2 = t$, a quadratic with a positive root for $1 < r \\le \\frac98$.)\n\n**Answer:** the interval $1 < r \\le \\frac98$, i.e. $\\left(1, \\frac98\\right]$."
+      }
+    ],
+    "topics": [
+      "inequalities",
+      "algebra"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "cmo-cmo-2009-04",
+    "bank": "cmo",
+    "source": {
+      "contest": "CMO",
+      "paper": "CMO 2009",
+      "year": 2009,
+      "number": 4,
+      "url": "https://cms.math.ca/competitions/cmo/"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "text",
+    "prompt": "Find all ordered pairs $(a, b)$ such that $a$ and $b$ are integers and $3^a + 7^b$ is a perfect square.",
+    "image": null,
+    "choices": null,
+    "answer": "(1, 0), (2, 1)",
+    "acceptedAnswers": [
+      "(1,0),(2,1)",
+      "(1,0), (2,1)",
+      "(2, 1), (1, 0)",
+      "(2,1),(1,0)",
+      "(2,1), (1,0)",
+      "(1,0) and (2,1)",
+      "(1, 0) and (2, 1)",
+      "(2,1) and (1,0)",
+      "{(1,0),(2,1)}",
+      "{(1, 0), (2, 1)}",
+      "(1,0);(2,1)",
+      "(1, 0); (2, 1)"
+    ],
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Factor a difference of squares",
+        "body": "**Negative exponents.** If $a < 0$ or $b < 0$, then $3^a + 7^b$ is not an integer: if exactly one exponent is negative, it is an integer plus a proper fraction $\\frac{1}{3^{|a|}}$ or $\\frac{1}{7^{|b|}}$; if both are, it equals $\\frac{7^{|b|} + 3^{|a|}}{3^{|a|}7^{|b|}}$, whose numerator is divisible by neither $3$ nor $7$. So $a, b \\ge 0$. Write $3^a + 7^b = n^2$ with $n > 0$.\n\n**Parity.** Modulo $4$: $3 \\equiv 7 \\equiv -1$, so $n^2 \\equiv (-1)^a + (-1)^b \\in \\{2, 0, -2\\}$. Squares are $0$ or $1 \\bmod 4$, and $\\pm 2 \\not\\equiv 0, 1$, so $(-1)^a + (-1)^b = 0$: **$a$ and $b$ have opposite parity.**\n\n**Case 1: $a$ odd, $b = 2c$ even.** Then $3^a = (n - 7^c)(n + 7^c)$, both factors positive, so both are powers of $3$. Their difference $2\\cdot 7^c$ is not divisible by $3$, so they are not both multiples of $3$; the smaller one is $1$: $n = 7^c + 1$ and\n$$3^a = 2\\cdot 7^c + 1.$$\nIf $c = 0$: $3^a = 3$, $a = 1$, giving $(a, b) = (1, 0)$: $3 + 1 = 4$. If $c \\ge 1$: $3^a \\equiv 1 \\pmod 7$. The powers of $3$ mod $7$ are $3, 2, 6, 4, 5, 1$, so $3^a \\equiv 1 \\pmod 7$ forces $6 \\mid a$, contradicting $a$ odd.\n\n**Case 2: $a = 2c$ even, $b$ odd.** Then $7^b = (n - 3^c)(n + 3^c)$; the difference $2\\cdot 3^c$ is not divisible by $7$, so $n - 3^c = 1$ and\n$$7^b = 2\\cdot 3^c + 1.$$\n$c = 0$ gives $7^b = 3$, impossible. $c = 1$ gives $7^b = 7$, $b = 1$: $(a, b) = (2, 1)$, $9 + 7 = 16$. If $c \\ge 2$: $7^b \\equiv 1 \\pmod 9$. The powers of $7$ mod $9$ are $7, 4, 1$, so $3 \\mid b$; write $b = 3d$ and $y = 7^d \\ge 7$. Then\n$$2\\cdot 3^c = y^3 - 1 = (y - 1)(y^2 + y + 1).$$\nThe factor $y^2 + y + 1$ is odd and divides $2\\cdot 3^c$, so it is a power of $3$. But $y \\equiv 1 \\pmod 3$; writing $y = 1 + 3t$, $y^2 + y + 1 = 3 + 9t + 9t^2 \\equiv 3 \\pmod 9$, so this power of $3$ is $3$ itself: $y^2 + y + 1 = 3$, i.e. $y = 1$, contradicting $y \\ge 7$.\n\n**Answer:** $(a, b) = (1, 0)$ and $(2, 1)$. (A computer search over $0 \\le a < 60$, $0 \\le b < 40$ finds no others.)"
+      }
+    ],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "cmo-cmo-2009-05",
+    "bank": "cmo",
+    "source": {
+      "contest": "CMO",
+      "paper": "CMO 2009",
+      "year": 2009,
+      "number": 5,
+      "url": "https://cms.math.ca/competitions/cmo/"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "A set of points is marked on the plane, with the property that any three marked points can be covered with a disk of radius $1$. Prove that the set of all marked points can be covered with a disk of radius $1$.",
+    "image": null,
+    "choices": null,
+    "answer": "A unit disk centred at $c$ covers $p$ iff $c$ lies in the unit disk $D(p)$ centred at $p$; the hypothesis says any three disks $D(p)$ intersect, so by Helly's theorem (and compactness for infinitely many points) all of them have a common point, which is the required centre.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Helly's theorem",
+        "body": "(If there are only one or two marked points, read the hypothesis as applying to any three marked points, not necessarily distinct; with at least three points, any one or two of them are part of some triple, so they too can be covered. Either way, every set of at most three marked points can be covered by a unit disk.)\n\nFor a point $p$ let $D(p)$ be the closed disk of radius $1$ centred at $p$. A closed disk of radius $1$ centred at $c$ covers $p$ iff $|cp| \\le 1$ iff $c \\in D(p)$. So the hypothesis says: **any three (or fewer) of the disks $D(p)$, $p$ marked, have a common point**, and we must show that **all of them have a common point** $c$; the unit disk centred at $c$ then covers every marked point.\n\n**Helly's theorem in the plane.** *If $K_1, \\ldots, K_m$ ($m \\ge 3$) are convex sets in the plane and any three of them have a common point, then all of them have a common point.*\n\n*Radon's lemma.* Any $m \\ge 4$ points $x_1, \\ldots, x_m$ in the plane can be split into two groups whose convex hulls intersect. Indeed, the $m \\ge 4$ vectors $(x_i, 1) \\in \\mathbb R^3$ are linearly dependent: $\\sum\\lambda_i x_i = 0$ and $\\sum \\lambda_i = 0$ with not all $\\lambda_i = 0$. Let $I = \\{i : \\lambda_i > 0\\}$, $J$ the rest; $\\Lambda = \\sum_{i\\in I}\\lambda_i = -\\sum_{j \\in J}\\lambda_j > 0$. Then $x = \\sum_{i \\in I}\\frac{\\lambda_i}{\\Lambda}x_i = \\sum_{j \\in J}\\frac{-\\lambda_j}{\\Lambda}x_j$ lies in both convex hulls.\n\n*Proof of Helly, by induction on $m$.* For $m = 3$ it is the hypothesis. Let $m \\ge 4$ and assume the result for $m - 1$ sets. For each $i$, the $m - 1$ sets other than $K_i$ have a common point $x_i$. By Radon, split the indices into $I$, $J$ with a point $x$ in both $\\operatorname{conv}\\{x_i : i \\in I\\}$ and $\\operatorname{conv}\\{x_j : j \\in J\\}$. For $k \\in J$: every $x_i$ with $i \\in I$ lies in $K_k$ (since $i \\ne k$), so by convexity $x \\in K_k$. For $k \\in I$: every $x_j$ with $j \\in J$ lies in $K_k$, so $x \\in K_k$. Hence $x$ lies in all $m$ sets.\n\n**Finitely many marked points.** If there are at most $3$ marked points we are done by the hypothesis; otherwise Helly's theorem applied to the disks $D(p)$ gives a common point.\n\n**Infinitely many marked points.** The disks $D(p)$ are compact, and by the finite case every finite subfamily has a common point. A family of compact sets in which every finite subfamily has nonempty intersection has nonempty intersection (finite intersection property): otherwise the complements of the sets $D(p)$ would form an open cover of the compact set $D(p_0)$ (for a fixed marked $p_0$) with no finite subcover. So all the disks $D(p)$ have a common point $c$, and the unit disk centred at $c$ covers all marked points. ∎"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "analysis"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

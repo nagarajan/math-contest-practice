@@ -1,0 +1,171 @@
+[
+  {
+    "id": "cmo-cmo-2018-01",
+    "bank": "cmo",
+    "source": {
+      "contest": "CMO",
+      "paper": "CMO 2018",
+      "year": 2018,
+      "number": 1,
+      "url": "https://cms.math.ca/competitions/cmo/"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Consider an arrangement of tokens in the plane, not necessarily at distinct points. We are allowed to apply a sequence of moves of the following kind: select a pair of tokens at points $A$ and $B$ and move both of them to the midpoint of $A$ and $B$.\n\nWe say that an arrangement of $n$ tokens is *collapsible* if it is possible to end up with all $n$ tokens at the same point after a finite number of moves. Prove that every arrangement of $n$ tokens is collapsible if and only if $n$ is a power of $2$.",
+    "image": null,
+    "choices": null,
+    "answer": "For $n = 2^k$ collapse two halves recursively and then pair them up; otherwise put $n-1$ tokens at $0$ and one at $1$ on a line: coordinates stay dyadic rationals, but the centroid $\\frac1n$ (an invariant) is not dyadic.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Induction and a dyadic invariant",
+        "body": "**The centroid is invariant.** Fix an origin and view points as vectors. A move replaces two tokens at $A$ and $B$ by two tokens at $\\frac{A+B}{2}$, so the sum of the position vectors of all tokens is unchanged; hence so is the centroid $G$ (the sum divided by $n$). In particular, if all tokens ever coincide, they coincide at $G$.\n\n**Powers of $2$ are always collapsible.** We induct on $k$ for $n = 2^k$. For $k = 0$ there is one token and nothing to do. Suppose every arrangement of $2^k$ tokens is collapsible and take $2^{k+1}$ tokens. Split them into two groups of $2^k$ tokens. Moves inside one group do not affect the other group, so by the induction hypothesis we can bring the first group to a single point $G_1$ and then the second group to a single point $G_2$. Now pair each token at $G_1$ with a token at $G_2$ ($2^k$ disjoint pairs) and apply the move to each pair: after these $2^k$ moves all tokens are at the midpoint of $G_1G_2$.\n\n**Other $n$ are not.** Suppose $n$ is not a power of $2$ (so $n \\ge 3$). Choose a line, identify it with the real number line, and place $n-1$ tokens at $0$ and one token at $1$. All moves keep the tokens on this line; a move replaces the coordinates $x, y$ of two tokens by $\\frac{x+y}{2}$.\n\nCall a number *dyadic* if it equals $\\frac{m}{2^a}$ with $m \\in \\mathbb Z$, $a \\ge 0$. The average of two dyadic numbers is dyadic: $\\frac12\\left(\\frac{m_1}{2^{a_1}} + \\frac{m_2}{2^{a_2}}\\right) = \\frac{m_1 2^{a_2} + m_2 2^{a_1}}{2^{a_1 + a_2 + 1}}$. Initially all coordinates ($0$ and $1$) are dyadic, so by induction on the number of moves all coordinates stay dyadic forever.\n\nIf the tokens could be collapsed, they would all end at the centroid, whose coordinate is $\\frac{(n-1)\\cdot 0 + 1}{n} = \\frac1n$. But $\\frac1n$ is not dyadic: $\\frac1n = \\frac{m}{2^a}$ would give $mn = 2^a$, so $n$ would divide a power of $2$ and hence be a power of $2$. This contradiction shows this arrangement is not collapsible.\n\nTherefore every arrangement of $n$ tokens is collapsible if and only if $n$ is a power of $2$. ∎"
+      }
+    ],
+    "topics": [
+      "logic",
+      "geometry",
+      "number-theory"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "cmo-cmo-2018-02",
+    "bank": "cmo",
+    "source": {
+      "contest": "CMO",
+      "paper": "CMO 2018",
+      "year": 2018,
+      "number": 2,
+      "url": "https://cms.math.ca/competitions/cmo/"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let five points on a circle be labelled $A$, $B$, $C$, $D$, and $E$ in clockwise order. Assume $AE = DE$ and let $P$ be the intersection of $AC$ and $BD$. Let $Q$ be the point on the line through $A$ and $B$ such that $A$ is between $B$ and $Q$ and $AQ = DP$. Similarly, let $R$ be the point on the line through $C$ and $D$ such that $D$ is between $C$ and $R$ and $DR = AP$. Prove that $PE$ is perpendicular to $QR$.",
+    "image": null,
+    "choices": null,
+    "answer": "SAS congruences give $\\triangle AQP \\cong \\triangle DPR$ (so $PQ = PR$) and $\\triangle PAE \\cong \\triangle RDE$, $\\triangle QAE \\cong \\triangle PDE$ (so $EQ = EP = ER$); hence $P$ and $E$ both lie on the perpendicular bisector of $QR$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Two pairs of congruent triangles",
+        "body": "Since $A, B, C, D, E$ lie on the circle in this order, the chords $AC$ and $BD$ cross at a point $P$ inside the circle, with $P$ on the segments $AC$ and $BD$.\n\n**Step 1: $PQ = PR$.** Since $Q$ lies on ray $BA$ beyond $A$, and $P$ lies on segment $AC$,\n$$\\angle QAP = 180^\\circ - \\angle BAP = 180^\\circ - \\angle BAC.$$\nSimilarly, $R$ lies on ray $CD$ beyond $D$ and $P$ lies on segment $DB$, so $\\angle RDP = 180^\\circ - \\angle CDB$. The inscribed angles $\\angle BAC$ and $\\angle BDC$ subtend the same arc $BC$ (and $A$, $D$ are on the same side of $BC$), so they are equal; hence $\\angle QAP = \\angle PDR$. Together with $AQ = DP$ and $AP = DR$, the SAS criterion gives $\\triangle QAP \\cong \\triangle PDR$ (with $Q \\leftrightarrow P$, $A \\leftrightarrow D$, $P \\leftrightarrow R$). Hence $QP = PR$.\n\n**Step 2: $ER = EP$.** We have $\\angle PAE = \\angle CAE$ (as $P$ is on segment $AC$) and $\\angle RDE = 180^\\circ - \\angle CDE$ (as $R$ is on the extension of $CD$ beyond $D$). The quadrilateral $ACDE$ is inscribed with vertices in this cyclic order, so $\\angle CAE + \\angle CDE = 180^\\circ$, i.e. $\\angle PAE = \\angle RDE$. With $AP = DR$ and $AE = DE$, SAS gives $\\triangle PAE \\cong \\triangle RDE$, so $PE = RE$.\n\n**Step 3: $EQ = EP$.** Likewise $\\angle PDE = \\angle BDE$ and $\\angle QAE = 180^\\circ - \\angle BAE$. The quadrilateral $ABDE$ is inscribed in this cyclic order, so $\\angle BAE + \\angle BDE = 180^\\circ$, i.e. $\\angle QAE = \\angle PDE$. With $AQ = DP$ and $AE = DE$, SAS gives $\\triangle QAE \\cong \\triangle PDE$, so $QE = PE$.\n\n**Conclusion.** By Steps 2 and 3, $EQ = ER$; by Step 1, $PQ = PR$. So both $P$ and $E$ lie on the perpendicular bisector of segment $QR$. They are distinct points ($P$ is inside the circle, $E$ on it), so the line $PE$ is this perpendicular bisector, and therefore $PE \\perp QR$. ∎"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "cmo-cmo-2018-03",
+    "bank": "cmo",
+    "source": {
+      "contest": "CMO",
+      "paper": "CMO 2018",
+      "year": 2018,
+      "number": 3,
+      "url": "https://cms.math.ca/competitions/cmo/"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Two positive integers $a$ and $b$ are *prime-related* if $a = pb$ or $b = pa$ for some prime $p$. Find all positive integers $n$, such that $n$ has at least three divisors, and all the divisors can be arranged without repetition in a circle so that any two adjacent divisors are prime-related.\n\nNote that $1$ and $n$ are included as divisors.",
+    "image": null,
+    "choices": null,
+    "answer": "Exactly the $n$ that are neither a perfect square nor a power of a prime (i.e. $n$ has at least two distinct prime factors and some prime appears to an odd power).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Parity, then build the circle prime by prime",
+        "body": "Call $n$ *good* if it has the property.\n\n**Necessity.** Let $d_1, d_2, \\dots, d_k$ be the divisors of a good $n$ around the circle ($k \\ge 3$, indices mod $k$). Each step $d_i \\to d_{i+1}$ multiplies or divides by one prime, so it changes the exponent of exactly one prime by exactly $\\pm 1$. Going once around the circle every exponent returns to its starting value, so for each prime the number of steps changing its exponent is even; hence the total number of steps $k$ is even. The number of divisors of $n = \\prod p_i^{e_i}$ is $\\prod (e_i + 1)$, which is odd exactly when all $e_i$ are even. So $n$ is **not a perfect square**.\n\nAlso, $1$ has two different neighbours in the circle (as $k \\ge 3$), each of which must be a prime dividing $n$. So $n$ has at least two distinct prime factors: $n$ is **not a prime power**.\n\n**Sufficiency.** We use a \"snake\" through a grid: if a rectangular array has an even number of rows, we may traverse row 1 left to right, row 2 right to left, row 3 left to right, ..., and since the number of rows is even the last row is traversed right to left, ending in column 1.\n\n*Base case: $n = p^a q^b$ with $p \\ne q$ primes, $a$ odd, $b \\ge 1$.* Arrange the divisors $p^i q^j$ in a grid with rows $i = 0, \\dots, a$ and columns $j = 0, \\dots, b$; horizontally or vertically adjacent cells are prime-related. There are $a+1$ (even) rows and $b+1 \\ge 2$ columns. Walk: along row $0$ from $1$ to $q^b$; down the last column to $p^a q^b$; then snake through columns $0, \\dots, b-1$ of rows $a, a-1, \\dots, 1$, traversing row $a$ from right to left first. These are $a$ rows, an odd number, so the last one, row $1$, is also traversed right to left and the walk ends at $p$, which is prime-related to the starting cell $1$. Every cell is visited once, so this is a valid circle and $p^a q^b$ is good.\n\n*Extension: if $n$ is good and $r$ is a prime not dividing $n$, then $n r^e$ is good for all $e \\ge 1$.* Let $d_1, \\dots, d_k$ be a good circle for $n$; $k$ is even by the necessity part. The divisors of $nr^e$ not dividing $n$ are $d_i r^j$ ($1 \\le i \\le k$, $1 \\le j \\le e$). Put them in a grid whose rows, from top to bottom, correspond to $d_1, d_k, d_{k-1}, \\dots, d_2$ (consecutive around the circle, so consecutive rows are prime-related cell by cell) and whose columns are $j = 1, \\dots, e$. Snake through it starting at $d_1 r$: as there are $k$ rows (even), the snake ends in column $1$ of the last row, i.e. at $d_2 r$. Now insert this whole path into the circle between $d_1$ and $d_2$: $d_1 \\sim d_1 r$ and $d_2 r \\sim d_2$ are prime-related, and every divisor of $nr^e$ appears exactly once. So $nr^e$ is good.\n\n*General case.* Let $n = p_1^{e_1} \\cdots p_t^{e_t}$ be neither a square nor a prime power. Then $t \\ge 2$ and some exponent is odd, say $e_1$. By the base case $p_1^{e_1} p_2^{e_2}$ is good, and applying the extension step successively with $p_3, \\dots, p_t$ shows $n$ is good.\n\n**Answer:** exactly the positive integers that are neither perfect squares nor prime powers. ∎"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "graph-theory"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "cmo-cmo-2018-04",
+    "bank": "cmo",
+    "source": {
+      "contest": "CMO",
+      "paper": "CMO 2018",
+      "year": 2018,
+      "number": 4,
+      "url": "https://cms.math.ca/competitions/cmo/"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Find all polynomials $p(x)$ with real coefficients that have the following property: There exists a polynomial $q(x)$ with real coefficients such that\n$$p(1) + p(2) + p(3) + \\cdots + p(n) = p(n)q(n)$$\nfor all positive integers $n$.",
+    "image": null,
+    "choices": null,
+    "answer": "All constant polynomials, and $p(x) = c(x+r-1)(x+r-2)\\cdots(x+r-d)$ with $c \\ne 0$, $d \\ge 1$ and $r \\in \\{0, 1, \\dots, d\\}$ (i.e. $p$ is a constant times a product of $d$ factors with consecutive integer roots, the roots including $0$ or $1$); then $q(x) = \\frac{x+r}{d+1}$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Turn the sum into a functional equation",
+        "body": "**Constants work:** if $p \\equiv c$, take $q(x) = x$: both sides equal $cn$.\n\nNow let $p$ have degree $d \\ge 1$ and leading coefficient $c \\ne 0$, and suppose $q$ exists. Put $T(x) = p(x)q(x)$, so $T(n) = p(1) + \\dots + p(n)$ for all $n \\ge 1$.\n\n**Step 1: the shape of $q$.** For every integer $n \\ge 2$, $T(n) - T(n-1) = p(n)$. A polynomial identity holding at infinitely many points holds identically, so $T(x) - T(x-1) = p(x)$. This is not the zero polynomial, so $T$ is non-constant; if $T$ has degree $m$ and leading coefficient $a$, then $T(x) - T(x-1)$ has degree $m-1$ and leading coefficient $ma$. Hence $m = d+1$ and $a = \\frac{c}{d+1}$. Since $T = pq$, $q$ has degree $1$ and leading coefficient $\\frac{1}{d+1}$: $q(x) = \\frac{x+r}{d+1}$ for some real $r$.\n\n**Step 2: a functional equation.** From $T(x) - T(x-1) = p(x)$, i.e. $p(x)q(x) - p(x-1)q(x-1) = p(x)$, replacing $x$ by $x+1$ gives $p(x)q(x) = p(x+1)\\bigl(q(x+1) - 1\\bigr)$, and multiplying by $d+1$:\n$$(x+r)\\,p(x) = (x + r - d)\\,p(x+1). \\qquad (*)$$\n\n**Step 3: the roots of $p$.** We show by induction on $j = 0, 1, \\dots, d$ that $p(x) = (x+r-1)(x+r-2)\\cdots(x+r-j)\\,p_j(x)$ for a polynomial $p_j$. For $j = 0$ take $p_0 = p$. If it holds for some $j < d$, substitute into $(*)$:\n$$(x+r)(x+r-1)\\cdots(x+r-j)\\,p_j(x) = (x+r-d)(x+r)(x+r-1)\\cdots(x+r-j+1)\\,p_j(x+1).$$\nCancelling the nonzero polynomial $(x+r)(x+r-1)\\cdots(x+r-j+1)$ gives $(x+r-j)p_j(x) = (x+r-d)p_j(x+1)$. Setting $x = j - r$ gives $0 = (j-d)\\,p_j(j-r+1)$, and $j \\ne d$, so $j+1-r$ is a root of $p_j$, i.e. $p_j(x) = (x + r - (j+1))\\,p_{j+1}(x)$. This completes the induction. For $j = d$, $p_d$ has degree $0$, so\n$$p(x) = c\\,(x+r-1)(x+r-2)\\cdots(x+r-d).$$\n\n**Step 4: the case $n = 1$.** The hypothesis at $n=1$ says $p(1) = p(1)q(1)$, i.e. $p(1)\\cdot\\frac{1 + r - (d+1)}{d+1} = 0$, so $r = d$ or $p(1) = 0$. And $p(1) = 0$ means $1 + r - i = 0$ for some $1 \\le i \\le d$, i.e. $r \\in \\{0, \\dots, d-1\\}$. In all cases $r \\in \\{0, 1, \\dots, d\\}$.\n\n**Converse.** Let $p(x) = c\\prod_{i=1}^{d}(x+r-i)$ with $r \\in \\{0,\\dots,d\\}$ and $q(x) = \\frac{x+r}{d+1}$. Both sides of $(*)$ equal $c\\prod_{i=0}^{d}(x+r-i)$, so $(*)$ holds identically, i.e. $p(n)q(n) = p(n+1)\\bigl(q(n+1)-1\\bigr)$. For $n = 1$: if $r = d$ then $q(1) = 1$; otherwise $p(1) = 0$ (the factor with $i = r+1$ vanishes); either way $p(1) = p(1)q(1)$. If $p(1)+\\dots+p(n) = p(n)q(n)$, then\n$$p(1) + \\dots + p(n+1) = p(n)q(n) + p(n+1) = p(n+1)\\bigl(q(n+1) - 1\\bigr) + p(n+1) = p(n+1)q(n+1),$$\nso by induction the identity holds for all $n$. (Example: $p(x) = x(x+1)$, $r = 2$: $\\sum_{k=1}^n k(k+1) = \\frac{n(n+1)(n+2)}{3} = p(n)\\cdot\\frac{n+2}{3}$.)\n\n**Answer:** the constant polynomials and the polynomials $c(x+r-1)(x+r-2)\\cdots(x+r-d)$ with $d \\ge 1$, $c \\ne 0$, $r \\in \\{0, 1, \\dots, d\\}$. ∎"
+      }
+    ],
+    "topics": [
+      "polynomials",
+      "sequences-series"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "cmo-cmo-2018-05",
+    "bank": "cmo",
+    "source": {
+      "contest": "CMO",
+      "paper": "CMO 2018",
+      "year": 2018,
+      "number": 5,
+      "url": "https://cms.math.ca/competitions/cmo/"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $k$ be a given even positive integer. Sarah first picks a positive integer $N$ greater than $1$ and proceeds to alter it as follows: every minute, she chooses a prime divisor $p$ of the current value of $N$, and multiplies the current $N$ by $p^k - p^{-1}$ to produce the next value of $N$. Prove that there are infinitely many even positive integers $k$ such that, no matter what choices Sarah makes, her number $N$ will at some point be divisible by $2018$.",
+    "image": null,
+    "choices": null,
+    "answer": "Take $k = 1009^j - 1$ ($j \\ge 1$; $1009$ is prime). If $2018$ never divides $N$, the part $P$ of $N$ free of primes $\\equiv 1 \\pmod{1009}$ strictly decreases each minute, since every prime factor of $\\frac{p^{k+1}-1}{p-1}$ is $\\equiv 1 \\pmod{1009}$ — impossible forever.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "A decreasing quantity",
+        "body": "Note that $2018 = 2 \\cdot 1009$ and $1009$ is prime. We show that every $k = 1009^j - 1$ with $j \\ge 1$ works; these are infinitely many even positive integers.\n\n**The move.** If Sarah chooses the prime $p \\mid N$, the new value is\n$$N' = N\\left(p^k - \\frac1p\\right) = \\frac{N}{p}\\,(p^{k+1} - 1) = \\frac{N}{p}\\,(p-1)\\,S, \\qquad S = \\frac{p^{1009^j} - 1}{p - 1} = 1 + p + \\dots + p^{1009^j - 1}.$$\n$N'$ is an integer and $N' > N > 1$, so the process can always continue.\n\n**Prime factors of $S$.** Let $q$ be a prime dividing $S$. Then $q \\mid p^{1009^j} - 1$, so $q \\ne p$ and the multiplicative order of $p$ modulo $q$ divides $1009^j$; hence it is $1$ or a multiple of $1009$.\n- If the order is a multiple of $1009$, then since the order divides $q - 1$ (Fermat), $q \\equiv 1 \\pmod{1009}$.\n- If the order is $1$, then $p \\equiv 1 \\pmod q$, so $S \\equiv 1 + 1 + \\dots + 1 = 1009^j \\pmod q$, and $q \\mid S$ forces $q = 1009$; then $p \\equiv 1 \\pmod{1009}$.\n\n**The argument.** Suppose, for contradiction, that $N$ is never divisible by $2018$. For a positive integer $x$ let $P(x)$ be the largest divisor of $x$ having no prime factor $\\equiv 1 \\pmod{1009}$; clearly $P(xy) = P(x)P(y)$.\n\nConsider a minute in which Sarah picks $p$. If $p \\equiv 1 \\pmod{1009}$, then $p > 2$ is odd, so $p - 1$ is divisible by $2$ and by $1009$, i.e. $2018 \\mid p - 1 \\mid N'$ — a contradiction. So $p \\not\\equiv 1 \\pmod{1009}$, and then by the second bullet the order of $p$ mod each prime $q \\mid S$ is not $1$; by the first bullet every prime factor of $S$ is $\\equiv 1 \\pmod{1009}$, i.e. $P(S) = 1$. Since $p \\not\\equiv 1 \\pmod{1009}$, $P(N/p) = P(N)/p$. Hence\n$$P(N') = P(N/p)\\,P(p-1)\\,P(S) = \\frac{P(N)}{p}\\,P(p-1) \\le \\frac{p-1}{p}\\,P(N) < P(N).$$\nSo $P$ strictly decreases every minute. But $P$ is always a positive integer, so it cannot decrease forever — a contradiction. Therefore, for each $k = 1009^j - 1$, Sarah's number is divisible by $2018$ at some point, whatever she does. ∎"
+      }
+    ],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

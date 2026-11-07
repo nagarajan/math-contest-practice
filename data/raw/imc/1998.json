@@ -1,0 +1,428 @@
+[
+ {
+  "id": "imc-1998-01",
+  "bank": "imc",
+  "source": {
+   "contest": "IMC",
+   "paper": "Day 1",
+   "year": 1998,
+   "number": 1,
+   "url": "https://www.imc-math.org.uk/"
+  },
+  "grade": "undergrad",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Let $V$ be a $10$-dimensional real vector space and $U_1$ and $U_2$ two linear subspaces such that $U_1\\subseteq U_2$, $\\dim_{\\mathbb R}U_1=3$ and $\\dim_{\\mathbb R}U_2=6$. Let $\\mathcal E$ be the set of all linear maps $T:V\\to V$ which have $U_1$ and $U_2$ as invariant subspaces (i.e., $T(U_1)\\subseteq U_1$ and $T(U_2)\\subseteq U_2$). Calculate the dimension of $\\mathcal E$ as a real vector space.",
+  "image": null,
+  "choices": null,
+  "answer": "67",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Block upper-triangular matrices",
+    "body": "Choose a basis $v_1,v_2,v_3$ of $U_1$, extend it by $v_4,v_5,v_6$ to a basis of $U_2$, and by $v_7,\\dots,v_{10}$ to a basis of $V$. A linear map $T$ lies in $\\mathcal E$ iff\n- $Tv_1,Tv_2,Tv_3\\in U_1=\\operatorname{span}(v_1,v_2,v_3)$, and\n- $Tv_4,Tv_5,Tv_6\\in U_2=\\operatorname{span}(v_1,\\dots,v_6)$\n\n(invariance only needs to be checked on a basis of each subspace; then $T(U_1)\\subseteq U_1\\subseteq U_2$ handles $v_1,v_2,v_3$ for $U_2$ too). So in this basis the matrix of $T$ is block upper triangular with diagonal blocks of sizes $3,3,4$:\n$$\\begin{bmatrix}*_{3\\times3}&*_{3\\times3}&*_{3\\times4}\\\\0&*_{3\\times3}&*_{3\\times4}\\\\0&0&*_{4\\times4}\\end{bmatrix},$$\nand every such matrix occurs. $\\mathcal E$ is the subspace of matrices with these free entries: columns $1$–$3$ have $3$ free entries each, columns $4$–$6$ have $6$ each, columns $7$–$10$ have $10$ each:\n$$\\dim\\mathcal E=3\\cdot3+3\\cdot6+4\\cdot10=9+18+40=67.$$\n**Answer: $67$**"
+   },
+   {
+    "title": "Count the forced zeros",
+    "body": "Of the $100$ entries of a $10\\times10$ matrix (in the adapted basis above), the forced zeros are: in the $3$ columns of $v_1,v_2,v_3$ the $7$ rows $4$–$10$, i.e. $21$ zeros; in the $3$ columns of $v_4,v_5,v_6$ the $4$ rows $7$–$10$, i.e. $12$ zeros. All other entries are free, so $\\dim\\mathcal E=100-21-12=67$.\n\n**Answer: $67$**"
+   }
+  ],
+  "topics": [
+   "linear-algebra"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "imc-1998-02",
+  "bank": "imc",
+  "source": {
+   "contest": "IMC",
+   "paper": "Day 1",
+   "year": 1998,
+   "number": 2,
+   "url": "https://www.imc-math.org.uk/"
+  },
+  "grade": "undergrad",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Prove that the following proposition holds for $n=3$ (5 points) and $n=5$ (7 points), and does not hold for $n=4$ (8 points).\n\n\"For any permutation $\\pi_1$ of $\\{1,2,\\dots,n\\}$ different from the identity there is a permutation $\\pi_2$ such that any permutation $\\pi$ can be obtained from $\\pi_1$ and $\\pi_2$ using only compositions (for example, $\\pi=\\pi_1\\circ\\pi_1\\circ\\pi_2\\circ\\pi_1$).\"",
+  "image": null,
+  "choices": null,
+  "answer": "The proposition says $\\langle\\pi_1,\\pi_2\\rangle=S_n$. $n=3$: pair a transposition with a 3-cycle (Lagrange). $n=4$: fails for $\\pi_1=(12)(34)$, since $S_4/V_4$ has order $6$ but no element of $S_4$ has order divisible by $6$. $n=5$: explicit partners for one representative of each of the $6$ cycle types, e.g. $(12)$ & $(12345)$, $(123)$ & $(12)(345)$, $(12)(34)$ & $(135)(24)$, $(1234)$ & $(45)$, $(123)(45)$ & $(34)$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Reduce to generation, then check each cycle type",
+    "body": "**Reformulation.** In a finite group every element has finite order, so $g^{-1}=g^{k-1}$ where $k$ is the order of $g$. Hence the set of all compositions of $\\pi_1,\\pi_2$ is the subgroup $\\langle\\pi_1,\\pi_2\\rangle$, and the proposition says: for every $\\pi_1\\ne\\mathrm{id}$ there is $\\pi_2$ with $\\langle\\pi_1,\\pi_2\\rangle=S_n$.\n\nIt suffices to check one permutation of each cycle type: if $\\pi_1=\\sigma x\\sigma^{-1}$ and $\\langle x,y\\rangle=S_n$, then $\\langle\\pi_1,\\sigma y\\sigma^{-1}\\rangle=\\sigma\\langle x,y\\rangle\\sigma^{-1}=S_n$. We use the rule $\\sigma(a\\,b)\\sigma^{-1}=(\\sigma(a)\\,\\sigma(b))$ and the fact that the transpositions $(1\\,k)$, $k=2,\\dots,n$, generate $S_n$ (every permutation is a product of transpositions and $(a\\,b)=(1\\,a)(1\\,b)(1\\,a)$).\n\n**$n=3$.** If $\\pi_1$ is a transposition, take $\\pi_2=(1\\,2\\,3)$; if $\\pi_1$ is a $3$-cycle, take $\\pi_2=(1\\,2)$. In both cases $\\langle\\pi_1,\\pi_2\\rangle$ contains elements of orders $2$ and $3$, so by Lagrange its order is divisible by $6=|S_3|$.\n\n**$n=4$ fails.** Let $x=(1\\,2)(3\\,4)$ and $V=\\{\\mathrm{id},(12)(34),(13)(24),(14)(23)\\}$, a normal subgroup of $S_4$ with $|S_4/V|=6$. Suppose $\\langle x,y\\rangle=S_4$. Since $x\\in V$, the quotient $S_4/V$ is generated by $yV$, so $yV$ has order $6$. But the order of $yV$ divides the order of $y$, and elements of $S_4$ have orders $1,2,3,4$ — none divisible by $6$. Contradiction; so no $\\pi_2$ exists for $\\pi_1=(1\\,2)(3\\,4)$.\n\n**$n=5$.** The non-identity cycle types are $(12)$, $(123)$, $(12)(34)$, $(1234)$, $(123)(45)$, $(12345)$.\n1. $x=(1\\,2)$, $y=(1\\,2\\,3\\,4\\,5)$: conjugating $x$ by $y,y^2,y^3$ gives $(2\\,3),(3\\,4),(4\\,5)$; the adjacent transpositions generate $S_5$. Symmetrically, for $x=(1\\,2\\,3\\,4\\,5)$ take $y=(1\\,2)$.\n2. $x=(1\\,2\\,3)$, $y=(1\\,2)(3\\,4\\,5)$: $y^3=(1\\,2)$ and $y^4=(3\\,4\\,5)$. Conjugating $(1\\,2)$ by $x$ and $x^2$ gives $(2\\,3),(3\\,1)$. Conjugating $(1\\,3)$ by $(3\\,4\\,5)$ and its square gives $(1\\,4),(1\\,5)$. So all $(1\\,k)$ lie in the subgroup: it is $S_5$.\n3. $x=(1\\,2)(3\\,4)$, $y=(1\\,3\\,5)(2\\,4)$: $y^3=(2\\,4)$, $y^4=(1\\,3\\,5)$. Then $x(2\\,4)x^{-1}=(1\\,3)$; $(1\\,3\\,5)$ conjugates $(1\\,3)$ to $(3\\,5)$; $x$ conjugates $(3\\,5)$ to $(4\\,5)$. The transpositions $(1\\,3),(3\\,5),(5\\,4),(4\\,2)$ form a path through all five points, and they generate $S_5$ (e.g. $(1\\,5)=(1\\,3)(3\\,5)(1\\,3)$, and so on along the path).\n4. $x=(1\\,2\\,3\\,4)$, $y=(4\\,5)$: conjugating $(4\\,5)$ by $x,x^2,x^3$ gives $(1\\,5),(2\\,5),(3\\,5)$; the transpositions $(k\\,5)$ generate $S_5$.\n5. $x=(1\\,2\\,3)(4\\,5)$, $y=(3\\,4)$: $x^3=(4\\,5)$, $x^4=(1\\,2\\,3)$. Conjugating $(3\\,4)$ by $(1\\,2\\,3)$ and its square gives $(1\\,4),(2\\,4)$; together with $(3\\,4),(4\\,5)$ we have all $(k\\,4)$, which generate $S_5$.\n\nSo the proposition holds for $n=3$ and $n=5$ and fails for $n=4$. ∎"
+   }
+  ],
+  "topics": [
+   "abstract-algebra"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "imc-1998-03",
+  "bank": "imc",
+  "source": {
+   "contest": "IMC",
+   "paper": "Day 1",
+   "year": 1998,
+   "number": 3,
+   "url": "https://www.imc-math.org.uk/"
+  },
+  "grade": "undergrad",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Let $f(x)=2x(1-x)$, $x\\in\\mathbb R$. Define $f_n=\\underbrace{f\\circ\\dots\\circ f}_{n}$.\n\na) Find $\\lim\\limits_{n\\to\\infty}\\displaystyle\\int_0^1f_n(x)\\,dx$.\n\nb) Compute $\\displaystyle\\int_0^1f_n(x)\\,dx$ for $n=1,2,\\dots$.",
+  "image": null,
+  "choices": null,
+  "answer": "$f_n(x)=\\frac12-2^{2^n-1}\\left(x-\\frac12\\right)^{2^n}$, so $\\displaystyle\\int_0^1f_n=\\frac12-\\frac1{2(2^n+1)}$ and the limit is $\\frac12$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Closed form for the iterates",
+    "body": "**b)** Note $f(x)=\\frac12-2\\left(x-\\frac12\\right)^2$. We claim\n$$f_n(x)=\\frac12-2^{2^n-1}\\left(x-\\tfrac12\\right)^{2^n}\\qquad(n\\ge1).$$\nFor $n=1$ this is the identity above. If it holds for $n$, then\n$$f_{n+1}(x)=f_n(f(x))=\\frac12-2^{2^n-1}\\Bigl(-2\\bigl(x-\\tfrac12\\bigr)^2\\Bigr)^{2^n}=\\frac12-2^{2^n-1}\\,2^{2^n}\\bigl(x-\\tfrac12\\bigr)^{2^{n+1}}=\\frac12-2^{2^{n+1}-1}\\bigl(x-\\tfrac12\\bigr)^{2^{n+1}}.$$\nIntegrating,\n$$\\int_0^1f_n(x)\\,dx=\\frac12-2^{2^n-1}\\left[\\frac{(x-\\frac12)^{2^n+1}}{2^n+1}\\right]_0^1=\\frac12-2^{2^n-1}\\cdot\\frac{2\\cdot2^{-(2^n+1)}}{2^n+1}=\\frac12-\\frac1{2(2^n+1)}.$$\n(Check: $n=1$ gives $\\frac13=\\int_0^12x(1-x)\\,dx$.)\n\n**a)** Letting $n\\to\\infty$: $\\displaystyle\\lim_{n\\to\\infty}\\int_0^1f_n=\\frac12$.\n\n**Answer: a) $\\frac12$; b) $\\frac12-\\frac1{2(2^n+1)}$.**"
+   },
+   {
+    "title": "Monotone convergence for part a)",
+    "body": "Fix $x_0\\in(0,1)$ and let $x_n=f_n(x_0)$. Then $x_1=2x_0(1-x_0)\\in(0,\\frac12]$, and for $t\\in(0,\\frac12]$ we have $f(t)-t=t(1-2t)\\ge0$ and $f(t)\\le\\frac12$. So $(x_n)_{n\\ge1}$ is nondecreasing and bounded by $\\frac12$; its limit $l>0$ satisfies $l=2l(1-l)$, i.e. $l=\\frac12$. Thus $f_n\\to\\frac12$ pointwise on $(0,1)$, with $0\\le f_n\\le\\frac12$ on $[0,1]$, and by dominated convergence $\\int_0^1f_n\\to\\frac12$.\n\n**Answer to a): $\\frac12$.**"
+   }
+  ],
+  "topics": [
+   "calculus",
+   "sequences-series",
+   "polynomials"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "imc-1998-04",
+  "bank": "imc",
+  "source": {
+   "contest": "IMC",
+   "paper": "Day 1",
+   "year": 1998,
+   "number": 4,
+   "url": "https://www.imc-math.org.uk/"
+  },
+  "grade": "undergrad",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "The function $f:\\mathbb R\\to\\mathbb R$ is twice differentiable and satisfies $f(0)=2$, $f'(0)=-2$ and $f(1)=1$. Prove that there exists a real number $\\xi\\in(0,1)$ for which\n$$f(\\xi)\\cdot f'(\\xi)+f''(\\xi)=0.$$",
+  "image": null,
+  "choices": null,
+  "answer": "$g=\\frac12f^2+f'$ has $g'=ff'+f''$ and $g(0)=0$; find $\\eta\\in(0,1)$ with $g(\\eta)=0$ (Rolle for $h=\\frac x2-\\frac1f$ if $f$ has no zero, otherwise IVT between the first and last zero of $f$), then apply Rolle to $g$ on $[0,\\eta]$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "An auxiliary function $g=\\frac12f^2+f'$",
+    "body": "Let $g(x)=\\frac12f(x)^2+f'(x)$. It is differentiable with $g'=ff'+f''$, and $g(0)=\\frac12\\cdot4-2=0$. So it suffices to find $\\eta\\in(0,1)$ with $g(\\eta)=0$: Rolle's theorem on $[0,\\eta]$ then gives $\\xi\\in(0,\\eta)\\subset(0,1)$ with $g'(\\xi)=0$.\n\n**Case 1: $f$ has no zero in $[0,1]$.** Then $h(x)=\\frac x2-\\frac1{f(x)}$ is differentiable on $[0,1]$ and $h(0)=-\\frac12=\\frac12-1=h(1)$. By Rolle there is $\\eta\\in(0,1)$ with\n$$0=h'(\\eta)=\\frac12+\\frac{f'(\\eta)}{f(\\eta)^2}=\\frac{g(\\eta)}{f(\\eta)^2},$$\nso $g(\\eta)=0$.\n\n**Case 2: $f$ has a zero in $[0,1]$.** The zero set is closed and, as $f(0)=2$, $f(1)=1$, contained in $(0,1)$. Let $z_1$ and $z_2$ be the smallest and largest zeros. Since $f>0$ on $[0,z_1)$,\n$$f'(z_1)=\\lim_{x\\to z_1^-}\\frac{f(x)-0}{x-z_1}\\le0,$$\nand since $f>0$ on $(z_2,1]$, $f'(z_2)=\\lim_{x\\to z_2^+}\\frac{f(x)}{x-z_2}\\ge0$. So $g(z_1)=f'(z_1)\\le0\\le f'(z_2)=g(z_2)$. As $g$ is continuous ($f'$ is differentiable), the intermediate value theorem gives $\\eta\\in[z_1,z_2]\\subset(0,1)$ with $g(\\eta)=0$.\n\nIn both cases we are done. ∎\n\n*Remark.* $f(x)=\\frac2{x+1}$ satisfies the hypotheses and $ff'+f''\\equiv0$."
+   }
+  ],
+  "topics": [
+   "real-analysis",
+   "calculus"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "imc-1998-05",
+  "bank": "imc",
+  "source": {
+   "contest": "IMC",
+   "paper": "Day 1",
+   "year": 1998,
+   "number": 5,
+   "url": "https://www.imc-math.org.uk/"
+  },
+  "grade": "undergrad",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Let $P$ be an algebraic polynomial of degree $n$ having only real zeros and real coefficients.\n\na) Prove that for every real $x$ the following inequality holds:\n$$(n-1)\\bigl(P'(x)\\bigr)^2\\ge nP(x)P''(x).\\tag{2}$$\n\nb) Examine the cases of equality.",
+  "image": null,
+  "choices": null,
+  "answer": "With $a_i=\\frac1{x-x_i}$: $(n-1)\\frac{P'^2}{P^2}-n\\frac{P''}{P}=\\sum_{i<j}(a_i-a_j)^2\\ge0$. For $n\\ge2$, equality at $x$ holds iff $x$ is a multiple zero of $P$ or all zeros of $P$ coincide ($P=c(x-a)^n$, equality for every $x$); for $n=1$ both sides vanish identically.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Logarithmic derivative",
+    "body": "If $n=1$ then $P''\\equiv0$ and both sides of (2) are $0$, so equality always holds. Let $n\\ge2$ and $P(x)=c\\prod_{i=1}^n(x-x_i)$ with real $x_i$ (with multiplicity) and $c\\ne0$.\n\n**At a zero $x=x_i$:** the right side is $0$ and the left side is $(n-1)P'(x_i)^2\\ge0$, with equality iff $P'(x_i)=0$, i.e. iff $x_i$ is a multiple zero.\n\n**At $x$ with $P(x)\\ne0$:** put $a_i=\\frac1{x-x_i}$. Then\n$$\\frac{P'}{P}=\\sum_ia_i,\\qquad \\frac{P''}{P}=\\Bigl(\\frac{P'}{P}\\Bigr)'+\\Bigl(\\frac{P'}{P}\\Bigr)^2=-\\sum_ia_i^2+\\Bigl(\\sum_ia_i\\Bigr)^2=2\\sum_{i<j}a_ia_j.$$\nHence\n$$(n-1)\\Bigl(\\frac{P'}{P}\\Bigr)^2-n\\frac{P''}{P}=(n-1)\\sum_ia_i^2+2(n-1)\\sum_{i<j}a_ia_j-2n\\sum_{i<j}a_ia_j=(n-1)\\sum_ia_i^2-2\\sum_{i<j}a_ia_j=\\sum_{i<j}(a_i-a_j)^2\\ge0.$$\nMultiplying by $P(x)^2>0$ gives (2).\n\n**b) Equality** at such an $x$ holds iff all $a_i$ are equal, i.e. $x_1=\\dots=x_n$. So, for $n\\ge2$: equality holds at $x$ iff $x$ is a multiple zero of $P$, or all zeros of $P$ coincide. In the latter case $P=c(x-a)^n$, and indeed $(n-1)n^2c^2(x-a)^{2n-2}=n\\cdot c(x-a)^n\\cdot n(n-1)c(x-a)^{n-2}$ for all $x$: (2) is an identity exactly for these polynomials. ∎"
+   },
+   {
+    "title": "Cauchy–Schwarz",
+    "body": "For $P(x)\\ne0$ and $a_i=\\frac1{x-x_i}$ as above, $\\frac{P'}{P}=\\sum a_i$ and $\\Bigl(\\frac{P'}{P}\\Bigr)^2-\\frac{P''}{P}=-\\Bigl(\\frac{P'}{P}\\Bigr)'=\\sum a_i^2$. By Cauchy–Schwarz, $\\bigl(\\sum a_i\\bigr)^2\\le n\\sum a_i^2$, i.e.\n$$\\Bigl(\\frac{P'}{P}\\Bigr)^2\\le n\\Bigl(\\Bigl(\\frac{P'}{P}\\Bigr)^2-\\frac{P''}{P}\\Bigr)\\iff nP P''\\le(n-1)P'^2,$$\nwith equality iff all $a_i$ are equal, i.e. all zeros coincide. At zeros of $P$ argue as in the first solution. ∎"
+   }
+  ],
+  "topics": [
+   "polynomials",
+   "inequalities"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "imc-1998-06",
+  "bank": "imc",
+  "source": {
+   "contest": "IMC",
+   "paper": "Day 1",
+   "year": 1998,
+   "number": 6,
+   "url": "https://www.imc-math.org.uk/"
+  },
+  "grade": "undergrad",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Let $f:[0,1]\\to\\mathbb R$ be a continuous function with the property that for any $x$ and $y$ in the interval,\n$$xf(y)+yf(x)\\le1.$$\na) Show that $\\displaystyle\\int_0^1f(x)\\,dx\\le\\frac\\pi4$.\n\nb) Find a function, satisfying the condition, for which there is equality.",
+  "image": null,
+  "choices": null,
+  "answer": "a) Substituting $x=\\sin\\theta$ and $x=\\cos\\theta$: $2\\int_0^1f=\\int_0^{\\pi/2}\\bigl(\\cos\\theta f(\\sin\\theta)+\\sin\\theta f(\\cos\\theta)\\bigr)d\\theta\\le\\frac\\pi2$. b) $f(x)=\\sqrt{1-x^2}$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Two trigonometric substitutions",
+    "body": "**a)** Let $I=\\int_0^1f(x)\\,dx$. The substitutions $x=\\sin\\theta$ and $x=\\cos\\theta$ ($\\theta\\in[0,\\frac\\pi2]$) give\n$$I=\\int_0^{\\pi/2}f(\\sin\\theta)\\cos\\theta\\,d\\theta=\\int_0^{\\pi/2}f(\\cos\\theta)\\sin\\theta\\,d\\theta.$$\nAdding and applying the hypothesis with $x=\\sin\\theta$, $y=\\cos\\theta$ (both in $[0,1]$):\n$$2I=\\int_0^{\\pi/2}\\bigl(\\sin\\theta\\,f(\\cos\\theta)+\\cos\\theta\\,f(\\sin\\theta)\\bigr)d\\theta\\le\\int_0^{\\pi/2}1\\,d\\theta=\\frac\\pi2 .$$\nSo $I\\le\\frac\\pi4$.\n\n**b)** Let $f(x)=\\sqrt{1-x^2}$, continuous on $[0,1]$. For $x,y\\in[0,1]$ write $x=\\sin\\theta$, $y=\\sin\\varphi$ with $\\theta,\\varphi\\in[0,\\frac\\pi2]$; then $f(x)=\\cos\\theta$, $f(y)=\\cos\\varphi$ and\n$$xf(y)+yf(x)=\\sin\\theta\\cos\\varphi+\\cos\\theta\\sin\\varphi=\\sin(\\theta+\\varphi)\\le1 .$$\nIts integral is the area of a quarter of the unit disc, $\\int_0^1\\sqrt{1-x^2}\\,dx=\\frac\\pi4$, so equality holds. ∎"
+   }
+  ],
+  "topics": [
+   "calculus",
+   "inequalities",
+   "real-analysis"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "imc-1998-07",
+  "bank": "imc",
+  "source": {
+   "contest": "IMC",
+   "paper": "Day 2",
+   "year": 1998,
+   "number": 7,
+   "url": "https://www.imc-math.org.uk/"
+  },
+  "grade": "undergrad",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Let $V$ be a real vector space, and let $f,f_1,f_2,\\dots,f_k$ be linear maps from $V$ to $\\mathbb R$. Suppose that $f(x)=0$ whenever $f_1(x)=f_2(x)=\\dots=f_k(x)=0$. Prove that $f$ is a linear combination of $f_1,f_2,\\dots,f_k$.",
+  "image": null,
+  "choices": null,
+  "answer": "$\\Phi=(f_1,\\dots,f_k):V\\to\\mathbb R^k$ has $\\ker\\Phi\\subseteq\\ker f$, so $f=L\\circ\\Phi$ for a linear $L$ on $\\Phi(V)$; extend $L$ to $\\mathbb R^k$, $L(t)=\\sum c_it_i$, giving $f=\\sum c_if_i$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Factor through $\\mathbb R^k$",
+    "body": "Let $\\Phi:V\\to\\mathbb R^k$, $\\Phi(x)=(f_1(x),\\dots,f_k(x))$, a linear map. The hypothesis says $\\ker\\Phi\\subseteq\\ker f$.\n\nDefine $L:\\Phi(V)\\to\\mathbb R$ by $L(\\Phi(x))=f(x)$. This is well defined: if $\\Phi(x)=\\Phi(x')$ then $x-x'\\in\\ker\\Phi\\subseteq\\ker f$, so $f(x)=f(x')$. It is linear because $f$ and $\\Phi$ are. The image $W=\\Phi(V)$ is a subspace of $\\mathbb R^k$; extend a basis of $W$ to a basis of $\\mathbb R^k$ and define $L$ to be $0$ on the added vectors. This gives a linear functional on $\\mathbb R^k$, which has the form $L(t_1,\\dots,t_k)=c_1t_1+\\dots+c_kt_k$. Hence for all $x\\in V$\n$$f(x)=L(\\Phi(x))=c_1f_1(x)+\\dots+c_kf_k(x).\\ \\blacksquare$$"
+   },
+   {
+    "title": "Induction with a dual system of vectors",
+    "body": "Induction on $k$; the case $k=0$ (then $f\\equiv0$) is trivial. Discarding some $f_i$ that are linear combinations of the others does not change the common kernel, so we may assume $f_1,\\dots,f_k$ are linearly independent.\n\nFor each $j$ there is $a_j\\in V$ with $f_i(a_j)=0$ for $i\\ne j$ and $f_j(a_j)=1$: otherwise $f_j$ vanishes on $\\bigcap_{i\\ne j}\\ker f_i$, and by the induction hypothesis (with $k-1$ functionals) $f_j$ would be a combination of the others, contradicting independence; then normalize. Now for any $x\\in V$ the vector $z=x-\\sum_jf_j(x)a_j$ satisfies $f_i(z)=f_i(x)-f_i(x)=0$ for all $i$, so $f(z)=0$, i.e.\n$$f(x)=\\sum_{j=1}^kf(a_j)\\,f_j(x).\\ \\blacksquare$$"
+   }
+  ],
+  "topics": [
+   "linear-algebra"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "imc-1998-08",
+  "bank": "imc",
+  "source": {
+   "contest": "IMC",
+   "paper": "Day 2",
+   "year": 1998,
+   "number": 8,
+   "url": "https://www.imc-math.org.uk/"
+  },
+  "grade": "undergrad",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Let\n$$\\mathcal P=\\Bigl\\{f:\\ f(x)=\\sum_{k=0}^3a_kx^k,\\ a_k\\in\\mathbb R,\\ |f(\\pm1)|\\le1,\\ \\bigl|f(\\pm\\tfrac12)\\bigr|\\le1\\Bigr\\}.$$\nEvaluate\n$$\\sup_{f\\in\\mathcal P}\\ \\max_{-1\\le x\\le1}|f''(x)|$$\nand find all polynomials $f\\in\\mathcal P$ for which the above \"sup\" is attained.",
+  "image": null,
+  "choices": null,
+  "answer": "The supremum is $24$, attained exactly for $f=\\pm T_3=\\pm(4x^3-3x)$. Key formula: $f''(1)=\\frac{16}3f(1)-\\frac{28}3f(\\tfrac12)+\\frac{20}3f(-\\tfrac12)-\\frac83f(-1)$ (and symmetrically for $f''(-1)$).",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Express $f''(\\pm1)$ through the four values",
+    "body": "Write $A=f(-1)$, $B=f(-\\frac12)$, $C=f(\\frac12)$, $D=f(1)$ for $f=a_0+a_1x+a_2x^2+a_3x^3$. Then\n$$D+A=2a_0+2a_2,\\quad C+B=2a_0+\\tfrac12a_2\\ \\Rightarrow\\ a_2=\\tfrac23(A+D-B-C),$$\n$$D-A=2a_1+2a_3,\\quad C-B=a_1+\\tfrac14a_3\\ \\Rightarrow\\ a_3=\\tfrac23\\bigl(D-A-2C+2B\\bigr).$$\nSince $f''(x)=6a_3x+2a_2$ is linear, $\\max_{[-1,1]}|f''|=\\max(|f''(1)|,|f''(-1)|)$, and\n$$f''(1)=6a_3+2a_2=\\tfrac{16}3D-\\tfrac{28}3C+\\tfrac{20}3B-\\tfrac83A,$$\n$$f''(-1)=-6a_3+2a_2=\\tfrac{16}3A-\\tfrac{28}3B+\\tfrac{20}3C-\\tfrac83D.$$\nFor $f\\in\\mathcal P$, $|A|,|B|,|C|,|D|\\le1$, so by the triangle inequality\n$$|f''(\\pm1)|\\le\\tfrac{16+28+20+8}3=24 .$$\n**Equality.** $|f''(1)|=24$ forces $|A|=|B|=|C|=|D|=1$ with the signs of $D,C,B,A$ equal to $\\varepsilon\\cdot(+,-,+,-)$ for a common $\\varepsilon=\\pm1$, i.e. $(A,B,C,D)=\\varepsilon(-1,1,-1,1)$. A cubic is determined by its values at four points (Lagrange interpolation), and the Chebyshev polynomial $T_3(x)=4x^3-3x$ takes the values $T_3(-1)=-1$, $T_3(-\\frac12)=1$, $T_3(\\frac12)=-1$, $T_3(1)=1$. Hence $f=\\varepsilon T_3$. Likewise $|f''(-1)|=24$ forces $(A,B,C,D)=\\varepsilon(1,-1,1,-1)$, i.e. again $f=\\pm T_3$.\n\nConversely $\\pm T_3\\in\\mathcal P$ and $|T_3''(x)|=|24x|$ has maximum $24$ on $[-1,1]$.\n\n**Answer: the supremum is $24$, attained exactly for $f(x)=\\pm(4x^3-3x)$.** ∎"
+   }
+  ],
+  "topics": [
+   "polynomials",
+   "inequalities",
+   "analysis"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "imc-1998-09",
+  "bank": "imc",
+  "source": {
+   "contest": "IMC",
+   "paper": "Day 2",
+   "year": 1998,
+   "number": 9,
+   "url": "https://www.imc-math.org.uk/"
+  },
+  "grade": "undergrad",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Let $0<c<1$ and\n$$f(x)=\\begin{cases}\\dfrac xc,&x\\in[0,c],\\\\[2mm]\\dfrac{1-x}{1-c},&x\\in[c,1].\\end{cases}$$\nWe say that $p$ is an $n$-periodic point if\n$$\\underbrace{f(f(\\dots f}_{n}(p)))=p$$\nand $n$ is the smallest number with this property. Prove that for every $n\\ge1$ the set of $n$-periodic points is non-empty and finite.",
+  "image": null,
+  "choices": null,
+  "answer": "$f^n$ consists of $2^n$ affine pieces, each mapping its interval onto $[0,1]$, so $f^n$ has exactly $2^n$ fixed points. At most $2+4+\\dots+2^{n-1}=2^n-2$ of them have a smaller period, so at least $2$ (and finitely many) are $n$-periodic.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Count fixed points of the iterates",
+    "body": "Let $f^n$ denote the $n$-th iterate.\n\n**Claim.** $[0,1]$ is the union of $2^n$ closed intervals $J$ with disjoint interiors such that on each $J$ the map $f^n$ is affine and maps $J$ bijectively onto $[0,1]$.\n\nFor $n=1$ take $[0,c]$ and $[c,1]$. If the claim holds for $n$, take a piece $J$ for $f^n$; since $f^n|_J$ is an affine bijection onto $[0,1]$, the preimages of $[0,c]$ and $[c,1]$ split $J$ into two closed subintervals, and on each of them $f^{n+1}=f\\circ f^n$ is a composition of affine bijections onto $[0,1]$. This gives $2^{n+1}$ pieces.\n\n**Fixed points of $f^n$.** Let $J=[s,t]$ be a piece. Its length is $<1$ (there are $2^n\\ge2$ pieces), so $f^n|_J$ has slope $\\pm\\frac1{t-s}$ with absolute value $>1$; therefore $f^n(x)-x$ is strictly monotone on $J$. If $f^n$ increases on $J$, then $f^n(s)-s=-s\\le0$ and $f^n(t)-t=1-t\\ge0$; if it decreases, $f^n(s)-s=1-s\\ge0$ and $f^n(t)-t=-t\\le0$. Either way $f^n$ has exactly one fixed point in $J$. A fixed point cannot be a common endpoint of two pieces: such an endpoint $e$ lies in $(0,1)$ while $f^n(e)\\in\\{0,1\\}$. Hence $f^n$ has exactly $2^n$ fixed points.\n\n**Conclusion.** Every $n$-periodic point is a fixed point of $f^n$, so there are finitely many. A fixed point of $f^n$ that is not $n$-periodic is a fixed point of some $f^k$ with $1\\le k\\le n-1$; there are at most $2+2^2+\\dots+2^{n-1}=2^n-2$ such points. So at least $2^n-(2^n-2)=2$ fixed points of $f^n$ are $n$-periodic; in particular the set is non-empty. ∎"
+   }
+  ],
+  "topics": [
+   "real-analysis",
+   "sequences-series"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "imc-1998-10",
+  "bank": "imc",
+  "source": {
+   "contest": "IMC",
+   "paper": "Day 2",
+   "year": 1998,
+   "number": 10,
+   "url": "https://www.imc-math.org.uk/"
+  },
+  "grade": "undergrad",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Let $A_n=\\{1,2,\\dots,n\\}$, where $n\\ge3$. Let $\\mathcal F$ be the family of all non-constant functions $f:A_n\\to A_n$ satisfying the following conditions:\n\n(1) $f(k)\\le f(k+1)$ for $k=1,2,\\dots,n-1$,\n\n(2) $f(k)=f(f(k+1))$ for $k=1,2,\\dots,n-1$.\n\nFind the number of functions in $\\mathcal F$.",
+  "image": null,
+  "choices": null,
+  "answer": "$\\binom n3$. Every $f\\in\\mathcal F$ is $f(i)=k$ for $i\\le m$, $f(m+1)=l$, $f(i)=i-1$ for $i\\ge m+2$, with $1\\le k<l\\le m\\le n-1$; these correspond to the $3$-subsets $\\{k<l<m+1\\}$ of $A_n$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Structure of the functions",
+    "body": "**The functions.** For $1\\le k<l\\le m\\le n-1$ define\n$$f_{k,l,m}(i)=\\begin{cases}k,&i\\le m,\\\\ l,&i=m+1,\\\\ i-1,&i\\ge m+2.\\end{cases}$$\nIt is nondecreasing ($k<l$, and $l\\le m<m+1=f(m+2)$) and non-constant. Condition (2): for $i\\le m-1$, $f(f(i+1))=f(k)=k$ since $k\\le m$; for $i=m$, $f(f(m+1))=f(l)=k=f(m)$ since $l\\le m$; for $i=m+1$, $f(f(m+2))=f(m+1)$; for $i\\ge m+2$, $f(f(i+1))=f(i)$. So $f_{k,l,m}\\in\\mathcal F$.\n\n**Every $f\\in\\mathcal F$ is of this form.** Let $f\\in\\mathcal F$ and $k=f(1)$.\n1. *A value taken twice is a fixed point.* If $f(i)=f(i+1)=v$ then by (2) $f(v)=f(f(i+1))=f(i)=v$. Such a pair exists: otherwise $f$ is strictly increasing, hence the identity, but the identity violates (2) ($k\\ne k+1$).\n2. *If $f(v)=v$ then $f\\equiv v$ on $\\{1,\\dots,v\\}$.* Indeed if $f(j)=v$ for some $j\\ge2$, then $f(j-1)=f(f(j))=f(v)=v$; descend from $j=v$. In particular $v=f(1)=k$: **$k$ is the only fixed point**, $f\\equiv k$ on $\\{1,\\dots,k\\}$, and by 1 (a value taken twice by a nondecreasing function is taken at two consecutive places) every value other than $k$ is taken at most once.\n3. Let $m=\\max\\{i:f(i)=k\\}$. Then $k\\le m\\le n-1$ ($f$ is non-constant), $f\\equiv k$ on $\\{1,\\dots,m\\}$ by monotonicity, and $f$ is strictly increasing on $\\{m+1,\\dots,n\\}$ with values $>k$.\n4. *$f(i)<i$ for $i>m$.* $f(i)=i$ is impossible ($i>k$ would be a second fixed point). If $f(i)>i$ for some $i>m$, strict increase gives $f(n)\\ge f(i)+(n-i)>n$, impossible.\n5. *$f(i)=i-1$ for $i\\ge m+2$.* Here $f(i)>f(m+1)>k$. If $f(i)\\le m$ then $f(i-1)=f(f(i))=k$, contradicting $i-1\\ge m+1$. So $m+1\\le f(i)\\le i-1$, and $f(f(i))=f(i-1)$ with both $f(i)$ and $i-1$ in $\\{m+1,\\dots,n\\}$, where $f$ is injective; hence $f(i)=i-1$.\n6. Put $l=f(m+1)$; by 3 and 4, $k<l\\le m$.\n\nSo $f=f_{k,l,m}$, and different triples give different functions.\n\n**Counting.** $(k,l,m)\\mapsto\\{k,l,m+1\\}$ is a bijection from triples with $1\\le k<l\\le m\\le n-1$ onto the $3$-element subsets of $\\{1,\\dots,n\\}$ (since $k<l<m+1\\le n$). Hence\n$$|\\mathcal F|=\\binom n3 .$$\n(For example $n=3$: only $f=(1,1,2)$; $n=4$: four functions.) ∎"
+   }
+  ],
+  "topics": [
+   "counting",
+   "functional-equations",
+   "logic"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "imc-1998-11",
+  "bank": "imc",
+  "source": {
+   "contest": "IMC",
+   "paper": "Day 2",
+   "year": 1998,
+   "number": 11,
+   "url": "https://www.imc-math.org.uk/"
+  },
+  "grade": "undergrad",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Suppose that $\\mathcal S$ is a family of spheres (i.e., surfaces of balls of positive radius) in $\\mathbb R^n$, $n\\ge2$, such that the intersection of any two contains at most one point. Prove that the set $M$ of those points that belong to at least two different spheres from $\\mathcal S$ is countable.",
+  "image": null,
+  "choices": null,
+  "answer": "Each $x\\in M$ is a tangency point of two spheres $S,T$ of $\\mathcal S$. Code $x$ by a label (external/internal tangency) and two rational points: in $B(S),B(T)$ for external tangency, in the shell $B(S)\\setminus\\overline{B(T)}$ and in $B(T)$ for internal tangency ($T$ inside $S$). Since open balls of spheres in $\\mathcal S$ are disjoint or nested, the code determines $x$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Encode each point by rational points in balls",
+    "body": "For a sphere $S$ with centre $a$ and radius $r$ let $B(S)$ be the open ball and $\\overline B(S)$ the closed ball.\n\n**Fact.** Let $S\\ne S'$ be spheres (centres $a,a'$, radii $r,r'$, $d=|a-a'|$) meeting in at most one point. Then either $d\\ge r+r'$ — the open balls are disjoint and the closed balls meet in at most one point — or $d\\le|r-r'|$ — the balls are nested, e.g. $B(S')\\subseteq B(S)$ if $r'\\le r$. Indeed, if $|r-r'|<d<r+r'$, a triangle with sides $d,r,r'$ exists, and rotating it about the line $aa'$ (possible as $n\\ge2$) produces at least two common points. In particular, **any two open balls of (equal or distinct) spheres of $\\mathcal S$ are disjoint or nested.**\n\nFor each $x\\in M$ fix spheres $S\\ne T$ in $\\mathcal S$ through $x$; then $S\\cap T=\\{x\\}$, so by the Fact either\n- (E) $B(S)\\cap B(T)=\\varnothing$ and $\\overline B(S)\\cap\\overline B(T)=\\{x\\}$ (external tangency), or\n- (I) after renaming, $B(T)\\subsetneq B(S)$ and $S\\cap T=\\{x\\}$ (internal tangency).\n\nChoose points with rational coordinates: in case (E), $u\\in B(S)$, $v\\in B(T)$; in case (I), $u\\in B(S)\\setminus\\overline B(T)$ (a nonempty open shell) and $v\\in B(T)$. Map $x\\mapsto(\\text{label},u,v)$, a map into the countable set $\\{E,I\\}\\times\\mathbb Q^n\\times\\mathbb Q^n$. We show it is injective; then $M$ is countable.\n\n**Two points of type (E) with the same code.** Let $x,x'$ come from $(S,T)$ and $(S',T')$ with $u\\in B(S)\\cap B(S')$, $v\\in B(T)\\cap B(T')$. These pairs of balls intersect, so they are nested; by symmetry assume $B(S)\\subseteq B(S')$.\n- If $B(T)\\subseteq B(T')$: $\\{x\\}=\\overline B(S)\\cap\\overline B(T)\\subseteq\\overline B(S')\\cap\\overline B(T')=\\{x'\\}$, so $x=x'$.\n- If $B(T')\\subseteq B(T)$: compare $B(S')$ and $B(T)$. $B(S')\\subseteq B(T)$ is impossible ($u\\in B(S)\\subseteq B(S')$ but $B(S)\\cap B(T)=\\varnothing$), and so is $B(T)\\subseteq B(S')$ ($v\\in B(T')\\subseteq B(T)$ but $B(S')\\cap B(T')=\\varnothing$); in particular $S'\\ne T$. So $B(S')\\cap B(T)=\\varnothing$ and $\\overline B(S')\\cap\\overline B(T)$ has at most one point. Both $x\\in\\overline B(S)\\cap\\overline B(T)$ and $x'\\in\\overline B(S')\\cap\\overline B(T')$ lie in $\\overline B(S')\\cap\\overline B(T)$; hence $x=x'$.\n\n**Two points of type (I) with the same code.** Now $u\\in(B(S)\\setminus\\overline B(T))\\cap(B(S')\\setminus\\overline B(T'))$, $v\\in B(T)\\cap B(T')$. By symmetry $B(T)\\subseteq B(T')$. The balls $B(T')$ and $B(S)$ both contain $v$, so they are nested; $B(S)\\subseteq B(T')$ is impossible since $u\\in B(S)$, $u\\notin\\overline B(T')$. Hence $B(T')\\subsetneq B(S)$. Now $x\\in\\overline B(T)\\subseteq\\overline B(T')$ and $x\\in S$, so $x\\notin B(T')\\subseteq B(S)$; thus $x\\in T'$. The balls $B(S),B(S')$ share $u$, so they are nested:\n- If $B(S)\\subseteq B(S')$: $x'\\in T'\\subseteq\\overline B(T')\\subseteq\\overline B(S)$ and $x'\\in S'$, so $x'\\notin B(S)$; hence $x'\\in S$. So $x,x'\\in T'\\cap S$ with $T'\\ne S$, and $x=x'$.\n- If $B(S')\\subseteq B(S)$: $x\\in\\overline B(T')\\subseteq\\overline B(S')$ and $x\\in S$, so $x\\notin B(S')$, i.e. $x\\in S'$. So $x,x'\\in T'\\cap S'$ with $T'\\ne S'$, and $x=x'$.\n\nHence the coding is injective and $M$ is countable. ∎"
+   }
+  ],
+  "topics": [
+   "topology",
+   "geometry",
+   "real-analysis"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "imc-1998-12",
+  "bank": "imc",
+  "source": {
+   "contest": "IMC",
+   "paper": "Day 2",
+   "year": 1998,
+   "number": 12,
+   "url": "https://www.imc-math.org.uk/"
+  },
+  "grade": "undergrad",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Let $f:(0,1)\\to[0,\\infty)$ be a function that is zero except at the distinct points $a_1,a_2,\\dots$. Let $b_n=f(a_n)$.\n\n(a) Prove that if $\\sum_{n=1}^\\infty b_n<\\infty$, then $f$ is differentiable at at least one point $x\\in(0,1)$.\n\n(b) Prove that for any sequence of non-negative real numbers $(b_n)_{n=1}^\\infty$ with $\\sum_{n=1}^\\infty b_n=\\infty$, there exists a sequence $(a_n)_{n=1}^\\infty$ such that the function $f$ defined as above is nowhere differentiable.",
+  "image": null,
+  "choices": null,
+  "answer": "(a) Choose $c_n\\to\\infty$ with $\\sum c_nb_n<\\frac12$; the intervals $(a_n-c_nb_n,a_n+c_nb_n)$ have total length $<1$, and at any uncovered $x_0$ the difference quotients are $\\le1/c_n$, so $f'(x_0)=0$. (b) Choose $\\beta_n\\le b_n$, $\\beta_n\\to0$, with block sums $\\ge1$; place the $a_n$ so that each block's intervals of length $\\beta_n$ cover $(0,1)$; then every $x_0$ has $a_n$ within $\\beta_n$ with quotient $\\ge1$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Small covering intervals",
+    "body": "**Preliminary.** If $f$ is differentiable at $x_0$, then $f(x_0)=0$ and $f'(x_0)=0$. Indeed $f$ vanishes outside a countable set, so every interval contains points where $f=0$. If $f(x_0)>0$, then $f$ is not continuous at $x_0$. If $f(x_0)=0$, the difference quotient is $0$ along points $x\\to x_0$ with $f(x)=0$, so $f'(x_0)=0$.\n\n**(a)** If all $b_n=0$, $f\\equiv0$. Otherwise let $B=\\sum b_n>0$. Since the tails $\\sum_{n\\ge N}b_n\\to0$, choose $N_1<N_2<\\dots$ with $\\sum_{n\\ge N_k}b_n\\le4^{-k}$, and put $c_n=1$ for $n<N_1$ and $c_n=2^k$ for $N_k\\le n<N_{k+1}$. Then $c_n\\to\\infty$ and\n$$\\sum_nc_nb_n\\le B+\\sum_{k\\ge1}2^k\\sum_{n\\ge N_k}b_n\\le B+\\sum_k2^{-k}=B+1 .$$\nReplacing $c_n$ by $c_n/(4(B+1))$ we get $c_n\\to\\infty$ and $\\sum c_nb_n\\le\\frac14$.\n\nLet $I_n=(a_n-c_nb_n,\\,a_n+c_nb_n)$ (empty if $b_n=0$). Their total length is $\\le\\frac12<1$, so they do not cover $(0,1)$: otherwise, for small $\\delta>0$ the compact set $[\\delta,1-\\delta]$ would be covered by finitely many $I_n$, forcing $1-2\\delta\\le\\frac12$. Take $x_0\\in(0,1)$ in no $I_n$. Then $f(x_0)=0$ (if $x_0=a_n$, then $b_n=0$). For $x\\ne x_0$: if $f(x)=0$ the difference quotient is $0$; if $x=a_n$ with $b_n>0$, then $|a_n-x_0|\\ge c_nb_n$, so\n$$\\left|\\frac{f(a_n)-f(x_0)}{a_n-x_0}\\right|\\le\\frac{b_n}{c_nb_n}=\\frac1{c_n}.$$\nGiven $\\varepsilon>0$, only finitely many $n$ have $1/c_n\\ge\\varepsilon$, and the corresponding $a_n$ are at positive distance from $x_0$. So in a small neighbourhood of $x_0$ all difference quotients are $<\\varepsilon$: $f'(x_0)=0$.\n\n**(b)** Since $\\sum b_n=\\infty$, also $\\sum\\min(b_n,1)=\\infty$, hence $\\sum_{n\\ge s}\\min(b_n,\\frac1k)\\ge\\frac1k\\sum_{n\\ge s}\\min(b_n,1)=\\infty$ for every $s,k$. So we can split $\\mathbb N$ into consecutive finite blocks $J_1,J_2,\\dots$ with $\\sum_{n\\in J_k}\\beta_n\\ge1$, where $\\beta_n=\\min(b_n,\\frac1k)$ for $n\\in J_k$. Thus $0\\le\\beta_n\\le b_n$ and $\\beta_n\\le\\frac1k$ on $J_k$.\n\nChoose the $a_n$ block by block. In block $J_k$, list the $n$ with $\\beta_n>0$ in order and lay consecutive closed intervals $[L_n,R_n]$ of length $\\beta_n$ starting at $0$ ($L=0$, $R=\\beta_n$, the next one starts where the previous ends), stopping once some $R_n\\ge1$; as the lengths sum to $\\ge1$, these intervals cover $[0,1]$. For each such $n$ pick $a_n\\in(L_n,R_n)\\cap(0,1)$ different from all previously chosen points (possible: a nonempty open interval is infinite). For all remaining $n$ pick any new point $a_n\\in(0,1)$. The $a_n$ are distinct.\n\nLet $x_0\\in(0,1)$. If $f(x_0)>0$, $f$ is not differentiable at $x_0$ by the preliminary remark. If $f(x_0)=0$: for each $k$ some $n\\in J_k$ has $x_0\\in[L_n,R_n]$, so $|a_n-x_0|\\le\\beta_n\\le\\frac1k$, and $a_n\\ne x_0$ because $f(a_n)=b_n\\ge\\beta_n>0$. Then\n$$\\frac{|f(a_n)-f(x_0)|}{|a_n-x_0|}\\ge\\frac{b_n}{\\beta_n}\\ge1 .$$\nSo there are points arbitrarily close to $x_0$ with difference quotient $\\ge1$, contradicting $f'(x_0)=0$. Hence $f$ is nowhere differentiable. ∎"
+   }
+  ],
+  "topics": [
+   "real-analysis",
+   "sequences-series"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ }
+]

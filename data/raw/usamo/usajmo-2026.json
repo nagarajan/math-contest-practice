@@ -1,0 +1,219 @@
+[
+  {
+    "id": "usamo-usajmo-2026-01",
+    "bank": "usamo",
+    "source": {
+      "contest": "USAJMO",
+      "paper": "USAJMO 2026",
+      "year": 2026,
+      "number": 1,
+      "url": "https://web.evanchen.cc/exams/JMO-2026-notes.pdf"
+    },
+    "grade": "7-10",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $a, b, c$ be distinct positive integers such that $ab + c = c^2$. Prove that $(a - b)^2 \\ge 4c$.",
+    "image": null,
+    "choices": null,
+    "answer": "The claim is equivalent to $a + b \\ge 2c$. With $ab = c(c-1)$ and (WLOG) $a > c$, monotonicity of $x \\mapsto x + \\frac{c(c-1)}{x}$ gives $a + b > c + (c - 1)$, so $a + b \\ge 2c$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Reduce to $a + b \\ge 2c$",
+        "body": "We have $ab = c^2 - c = c(c-1)$; as $ab > 0$, $c \\ge 2$.\n\n**Reformulation.** $(a-b)^2 = (a+b)^2 - 4ab = (a+b)^2 - 4c^2 + 4c$, so\n$$(a-b)^2 \\ge 4c \\iff (a+b)^2 \\ge 4c^2 \\iff a + b \\ge 2c.$$\n\n**Proof of $a + b \\ge 2c$.** By symmetry assume $a > b$. If $a \\le c - 1$, then $ab < a^2 \\le (c-1)^2 < c(c-1)$, impossible; so $a \\ge c$, and $a \\ne c$ by distinctness, so $a > c$. Consider $g(x) = x + \\frac{c(c-1)}{x}$ for $x > 0$. For $x > y \\ge \\sqrt{c(c-1)}$,\n$$g(x) - g(y) = (x - y)\\left(1 - \\frac{c(c-1)}{xy}\\right) > 0,$$\nso $g$ is strictly increasing on $[\\sqrt{c(c-1)}, \\infty)$, which contains $c$ and $a$. Hence\n$$a + b = a + \\frac{c(c-1)}{a} = g(a) > g(c) = c + (c - 1) = 2c - 1.$$\nSince $a + b$ is an integer, $a + b \\ge 2c$, and therefore $(a-b)^2 \\ge 4c$. ∎"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "inequalities"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamo-usajmo-2026-02",
+    "bank": "usamo",
+    "source": {
+      "contest": "USAJMO",
+      "paper": "USAJMO 2026",
+      "year": 2026,
+      "number": 2,
+      "url": "https://web.evanchen.cc/exams/JMO-2026-notes.pdf"
+    },
+    "grade": "7-10",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "There are $m$ foxes and $n$ bunnies sitting in $m + n$ seats around a circular table, where all animals are distinguishable. If a fox and a bunny are sitting next to each other, they may swap positions with each other. For a fixed starting configuration, determine the number of configurations that can be reached by a sequence of swaps. (Rotations and reflections of a configuration are considered distinct.)",
+    "image": null,
+    "choices": null,
+    "answer": "$\\dbinom{m+n}{n}\\operatorname{lcm}(m, n)$ (for $m, n \\ge 1$; it is $1$ if $m = 0$ or $n = 0$). The seat pattern of foxes/bunnies can be anything, and for each pattern the cyclic rotations $[i, j]$ of the fox and bunny orders satisfy $i + j \\equiv \\text{const} \\pmod{\\gcd(m,n)}$, all such being reachable.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Color pattern times number pattern",
+        "body": "If $m = 0$ or $n = 0$ no swap is possible and the answer is $1$; assume $m, n \\ge 1$. Label the seats $1, 2, \\dots, m+n$ around the table, so that seat $m + n$ is next to seat $1$.\n\nA configuration is described by two pieces of data:\n- its **color pattern**: which seats hold foxes (a word in F, B of length $m + n$); there are $\\binom{m+n}{n}$ of them;\n- its **number pattern**: the list of foxes read in seat order $1, 2, \\dots$, and the list of bunnies read in seat order.\n\nColor pattern and number pattern together determine the configuration. Let $\\mathcal R$ be the set of configurations reachable from the start. Swaps are reversible, so from any configuration in $\\mathcal R$ exactly the configurations of $\\mathcal R$ are reachable.\n\n**Step 1: every color pattern has equally many configurations in $\\mathcal R$.** On color patterns, a swap exchanges two adjacent different letters. Any two words with $m$ F's and $n$ B's are connected by such exchanges using only the seat pairs $(s, s+1)$ with $1 \\le s < m + n$ (bubble sort). Fix, for patterns $\\mathcal P, \\mathcal Q$, such a sequence of seat pairs; applied to any configuration with color pattern $\\mathcal P$, each step swaps a fox and a bunny, and the result has pattern $\\mathcal Q$. This gives an injective map (swaps are invertible) from configurations of $\\mathcal R$ with pattern $\\mathcal P$ to those with pattern $\\mathcal Q$, and vice versa. So all $\\binom{m+n}{n}$ patterns occur in $\\mathcal R$ equally often, say $K$ times each, and $|\\mathcal R| = \\binom{m+n}{n}K$.\n\n**Step 2: $K \\le \\operatorname{lcm}(m, n)$.** Let $\\mathcal P_0 = \\text{F}\\cdots\\text{F}\\,\\text{B}\\cdots\\text{B}$ (foxes in seats $1, \\dots, m$). Some configuration of $\\mathcal R$ has pattern $\\mathcal P_0$; relabel the animals so that it is $F_1 F_2 \\cdots F_m B_1 \\cdots B_n$. A swap never changes the cyclic order of the foxes among themselves (a fox only passes a bunny), nor that of the bunnies. Hence the fox list is always a rotation $F_i F_{i+1}\\cdots F_{i-1}$ and the bunny list is a rotation $B_j\\cdots B_{j-1}$; write this number pattern as $[i, j]$, with $i \\bmod m$ and $j \\bmod n$, initially $[1, 1]$.\n\nA swap of seats $s, s+1$ with $s < m+n$ does not change the reading order, so it keeps $[i,j]$. A swap of seats $m+n$ and $1$ moves a fox from the end of the fox list to its front and a bunny from the front of the bunny list to its end (or the reverse), changing $[i, j]$ to $[i - 1, j + 1]$ (or to $[i+1, j-1]$). So with $g = \\gcd(m, n)$, the residue $i + j \\bmod g$ never changes. The number of pairs $(i \\bmod m, j \\bmod n)$ with $i + j \\equiv 2 \\pmod g$ is $\\frac{mn}g = \\operatorname{lcm}(m, n)$, so $K \\le \\operatorname{lcm}(m,n)$.\n\n**Step 3: $K \\ge \\operatorname{lcm}(m, n)$.** From $F_1F_2\\cdots F_m B_1\\cdots B_{n}$:\n1. swap seats $m+n$ and $1$: now $B_n$ is in seat $1$ and $F_1$ in seat $m+n$;\n2. move $B_n$ to the right past $F_2, \\dots, F_m$ (swaps of seats $(1,2), \\dots, (m-1, m)$);\n3. move $F_1$ to the left past $B_{n-1}, \\dots, B_1$ and then $B_n$ (swaps of seats $(m+n-1, m+n), \\dots, (m, m+1)$).\n\nThe result is $F_2\\cdots F_mF_1\\,B_nB_1\\cdots B_{n-1}$: the color pattern is again $\\mathcal P_0$ and $[1,1]$ became $[2, 0]$. The same seat swaps change any $[i, j]$ (with pattern $\\mathcal P_0$) into $[i + 1, j - 1]$. Repeating, we reach $[1 + t, 1 - t]$ for all $t \\ge 0$, and these are distinct for $t = 0, 1, \\dots, \\operatorname{lcm}(m,n) - 1$ (equality needs $m \\mid t$ and $n \\mid t$). So $K \\ge \\operatorname{lcm}(m, n)$.\n\n**Answer:** $\\dbinom{m+n}{n}\\operatorname{lcm}(m, n)$ configurations. ∎"
+      }
+    ],
+    "topics": [
+      "counting",
+      "number-theory"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamo-usajmo-2026-03",
+    "bank": "usamo",
+    "source": {
+      "contest": "USAJMO",
+      "paper": "USAJMO 2026",
+      "year": 2026,
+      "number": 3,
+      "url": "https://web.evanchen.cc/exams/JMO-2026-notes.pdf"
+    },
+    "grade": "7-10",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $ABC$ be an acute scalene triangle with no angle equal to $60^\\circ$. Let $\\omega$ be the circumcircle of $ABC$. Let $\\Delta_B$ be the equilateral triangle with three vertices on $\\omega$, one of which is $B$. Let $\\ell_B$ be the line through the two vertices of $\\Delta_B$ other than $B$. Let $\\Delta_C$ and $\\ell_C$ be defined analogously. Let $Y$ be the intersection of $AC$ and $\\ell_B$, and let $Z$ be the intersection of $AB$ and $\\ell_C$.\n\nSuppose that the circumcircle of $AYZ$ intersects $\\omega$ at $P \\ne A$, $BC$ intersects $YZ$ at $D$, and $PA$ intersects $YZ$ at $E$. Prove that $PE = PD$.",
+    "image": null,
+    "choices": null,
+    "answer": "$P$ is the Miquel point, so $DBZP$ is cyclic and $\\measuredangle PDE = \\measuredangle PBA$; it remains to show $\\measuredangle PBA = \\measuredangle(YZ, AP)$, which in complex numbers (unit circle, $p = \\frac{ab+bc+ca}{a+b+c}$) is the statement that $\\frac{p}{y - z}$ is purely imaginary.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Miquel point and complex numbers",
+        "body": "We use directed angles $\\measuredangle(\\ell, m)$ mod $180^\\circ$, with $\\measuredangle XYZ = \\measuredangle(YX, YZ)$.\n\n**Reduction.** The four lines $AB$, $AC$, $BC$, $YZ$ form a complete quadrilateral (with $Z \\in AB$, $Y \\in AC$, $D = BC \\cap YZ$). By Miquel's theorem the circles $(ABC)$, $(AZY)$, $(BZD)$, $(CYD)$ pass through a common point, which must be the second intersection $P$ of $(ABC)$ and $(AZY)$. In particular $P, D, B, Z$ are concyclic, so (as $E \\in DZ$ and $Z \\in BA$)\n$$\\measuredangle PDE = \\measuredangle PDZ = \\measuredangle PBZ = \\measuredangle PBA, \\qquad \\measuredangle DEP = \\measuredangle(YZ, AP).$$\nFor triangle $PDE$, $\\measuredangle PDE = \\measuredangle DEP$ means $\\measuredangle PDE = -\\measuredangle PED$, which says exactly that its ordinary angles at $D$ and $E$ are equal, i.e. $PD = PE$. So it suffices to prove\n$$\\measuredangle PBA = \\measuredangle(YZ, AP). \\tag{$\\star$}$$\nBy the tangent–chord theorem, $\\measuredangle PBA = \\measuredangle(t_P, PA)$, where $t_P$ is the tangent to $\\omega$ at $P$.\n\n**Coordinates.** Let $\\omega$ be the unit circle, use lowercase letters for complex coordinates, and put $\\sigma_1 = a + b + c$, $\\sigma_2 = ab + bc + ca$, $\\varepsilon = e^{2\\pi i/3}$. On the unit circle $\\bar a = 1/a$, etc., and $\\bar\\sigma_1 = \\sigma_2/(abc)$, $\\bar\\sigma_2 = \\sigma_1/(abc)$; in particular $|\\sigma_1| = |\\sigma_2|$.\n\n- $\\Delta_B$ has vertices $b, \\varepsilon b, \\varepsilon^2 b$, so $\\ell_B$ passes through $\\varepsilon b, \\varepsilon^2 b$, whose midpoint is $-b/2$: it is the line $z\\bar b + \\bar z b = -1$. Line $AC$ is $z + ac\\bar z = a + c$.\n- **$y = \\dfrac{b\\sigma_2}{b^2 - ac}$.** Its conjugate is $\\bar y = \\dfrac{\\sigma_1/(abc)\\cdot(1/b)}{(ac - b^2)/(ab^2c)} = -\\dfrac{\\sigma_1}{b^2 - ac}$. Then $y + ac\\bar y = \\dfrac{b\\sigma_2 - ac\\sigma_1}{b^2 - ac} = \\dfrac{(a+c)(b^2 - ac)}{b^2 - ac} = a + c$, and $y\\bar b + \\bar y b = \\dfrac{\\sigma_2 - b\\sigma_1}{b^2 - ac} = \\dfrac{ac - b^2}{b^2 - ac} = -1$. So $y$ is on both lines. Symmetrically $z = \\dfrac{c\\sigma_2}{c^2 - ab}$.\n- **$p = \\sigma_2/\\sigma_1$.** ($\\sigma_1 \\ne 0$ since the triangle is not equilateral.) Let $X = (b^2 - ac)(c^2 - ab)$ and $o = -\\dfrac{a(b^2 + bc + c^2)\\sigma_2}{X}$. Direct expansion gives\n$$o - a = -\\frac{abc\\,\\sigma_1^2}{X},\\quad o - y = -\\frac{c\\,\\sigma_2^2}{X},\\quad o - z = -\\frac{b\\,\\sigma_2^2}{X},\\quad o - \\frac{\\sigma_2}{\\sigma_1} = -\\frac{\\sigma_2^3}{\\sigma_1 X}$$\n(for instance $(b^2+bc+c^2)\\sigma_2 + X = bc\\,\\sigma_1^2$ and $a\\sigma_1(b^2+bc+c^2) + X = \\sigma_2^2$). All four have modulus $|\\sigma_1|^2/|X|$, so $o$ is the center of the circle $(AYZ)$ and $\\sigma_2/\\sigma_1$ lies on it. Also $|\\sigma_2/\\sigma_1| = 1$, so $\\sigma_2/\\sigma_1$ is on $\\omega$; and $\\sigma_2/\\sigma_1 \\ne a$, since that would mean $a^2 = bc$, i.e. $AB = AC$. Hence $p = \\sigma_2/\\sigma_1$.\n\n**Proof of $(\\star)$.** The tangent at $P$ has direction $ip$, line $PA$ direction $a - p$, line $YZ$ direction $y - z$. So $(\\star)$ says $\\frac{a - p}{ip}\\Big/\\frac{p - a}{y - z} = -\\frac{y - z}{ip}$ is real, i.e. that $\\dfrac{p}{y - z}$ is purely imaginary. Now\n$$y - z = \\sigma_2\\cdot\\frac{b(c^2 - ab) - c(b^2 - ac)}{X} = \\sigma_2\\cdot\\frac{(c - b)\\sigma_2}{X}, \\qquad\\text{so}\\qquad \\frac{p}{y - z} = \\frac{X}{\\sigma_1\\sigma_2(c - b)}.$$\nSince $\\bar X = \\dfrac{(ac - b^2)(ab - c^2)}{a^2b^3c^3} = \\dfrac{X}{a^2b^3c^3}$, $\\overline{\\sigma_1\\sigma_2} = \\dfrac{\\sigma_1\\sigma_2}{a^2b^2c^2}$ and $\\overline{c - b} = \\dfrac{b - c}{bc}$,\n$$\\overline{\\left(\\frac{p}{y-z}\\right)} = \\frac{X/(a^2b^3c^3)}{\\sigma_1\\sigma_2(b - c)/(a^2b^3c^3)} = \\frac{X}{\\sigma_1\\sigma_2(b - c)} = -\\frac{p}{y - z}.$$\nSo $\\frac{p}{y-z}$ is purely imaginary, $(\\star)$ holds, and $PE = PD$. ∎"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "complex-numbers"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamo-usajmo-2026-04",
+    "bank": "usamo",
+    "source": {
+      "contest": "USAJMO",
+      "paper": "USAJMO 2026",
+      "year": 2026,
+      "number": 4,
+      "url": "https://web.evanchen.cc/exams/JMO-2026-notes.pdf"
+    },
+    "grade": "7-10",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Triangle $ABC$ has circumcircle $\\omega$ and circumcenter $O$. Lines $AO$ and $BC$ meet at point $D$. Let $X$ be the $A$-excenter of $\\triangle ABD$ and let $Y$ be the $A$-excenter of $\\triangle ACD$. Prove that if $X$ lies on $\\omega$, then $Y$ also lies on $\\omega$.",
+    "image": null,
+    "choices": null,
+    "answer": "With $E$ the antipode of $A$: if $X \\in \\omega$, then $XB = XE$ (since $AX$ bisects $\\angle BAE$) and $XA = XC$ (since $BX$ bisects the angle between $BA$ and $BC$), giving $x^2 = be = ac$ and so $b = -c$, i.e. $\\angle A = 90^\\circ$. Then $D = O$ and the midpoint of arc $CE$ is the $A$-excenter of $ACD$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Show the condition forces a right angle at $A$",
+        "body": "Let $\\omega$ have radius $1$ and center $O$, and let $E$ be the point diametrically opposite $A$; line $AD$ is line $AE$. We assume the triangles $ABD$, $ACD$ are nondegenerate.\n\n**Fact (extended law of sines).** If $U, V, T$ are three distinct points of $\\omega$, then $UV = 2\\sin\\varphi$, where $\\varphi$ is the angle between the lines $TU$ and $TV$ (an inscribed angle or its supplement, which have the same sine).\n\n**Step 1: if $X \\in \\omega$, then $\\angle BAC = 90^\\circ$.**\n\n- $X$ lies on the internal bisector of $\\angle BAD$, which is a bisector of the angle between the distinct lines $AB$ and $AD = AE$. So line $AX$ differs from both (hence $X \\ne A, B, E$) and makes equal angles with them. By the Fact with $T = A$: $XB = 2\\sin\\angle(AX, AB) = 2\\sin\\angle(AX, AE) = XE$.\n- $X$ lies on the external bisector of $\\angle ABD$, which is a bisector of the angle between the distinct lines $BA$ and $BD = BC$. As before $X \\ne A, B, C$, and the Fact with $T = B$ gives $XA = XC$.\n\nUse complex numbers with $\\omega$ the unit circle. For $u \\ne v$ on the unit circle, a point $x$ of the unit circle with $|x - u| = |x - v|$ satisfies $x\\bar u + \\bar x u = x\\bar v + \\bar x v$, i.e. $\\frac xu + \\frac ux = \\frac xv + \\frac vx$, which rearranges to $\\frac{(v - u)(x^2 - uv)}{uvx} = 0$, so $x^2 = uv$. Hence $x^2 = be$ and $x^2 = ac$. With $e = -a$ this gives $-ab = ac$, so $c = -b$: $BC$ is a diameter and $\\angle BAC = 90^\\circ$.\n\n**Step 2: if $\\angle BAC = 90^\\circ$, then $Y \\in \\omega$.** Now $O$ is the midpoint of $BC$, so $D = O$, and $DA = DC$. The angle $\\angle ACE = 90^\\circ$ since $AE$ is a diameter. Let $Y'$ be the midpoint of the arc $CE$ of $\\omega$ not containing $A$.\n- $AY'$ bisects $\\angle CAE = \\angle CAD$ internally (equal arcs $CY'$, $Y'E$).\n- $OY'$ is perpendicular to the chord $CE$, and $CE \\perp AC$, so $DY' = OY' \\parallel AC$. In the isosceles triangle $ADC$ ($DA = DC$), the external bisector of the apex angle $\\angle ADC$ is parallel to the base $AC$; so $DY'$ is the external bisector of $\\angle ADC$.\n\nThe $A$-excenter of triangle $ACD$ is the intersection of the internal bisector at $A$ and the external bisector at $D$, so it is $Y'$. Thus $Y = Y' \\in \\omega$.\n\nCombining the two steps: if $X$ lies on $\\omega$ then $\\angle A = 90^\\circ$, and then $Y$ lies on $\\omega$. ∎"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "complex-numbers"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamo-usajmo-2026-05",
+    "bank": "usamo",
+    "source": {
+      "contest": "USAJMO",
+      "paper": "USAJMO 2026",
+      "year": 2026,
+      "number": 5,
+      "url": "https://web.evanchen.cc/exams/JMO-2026-notes.pdf"
+    },
+    "grade": "7-10",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "text",
+    "prompt": "A positive integer $n$ is called *solitary* if, for any non-negative integers $a$ and $b$ such that $a + b = n$, either $a$ or $b$ contains the digit \"1\". Determine, with proof, the number of solitary integers less than $10^{2026}$.",
+    "image": null,
+    "choices": null,
+    "answer": "2^2026-1",
+    "acceptedAnswers": [
+      "2^{2026}-1",
+      "2**2026-1",
+      "2^(2026)-1",
+      "2^2026 - 1",
+      "2^{2026} - 1",
+      "-1+2^2026"
+    ],
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Characterize solitary numbers by their digits",
+        "body": "**Claim.** $n$ is solitary if and only if its decimal representation has exactly one digit $1$, every digit to the left of the $1$ is $0$ or $2$, and every digit to the right of the $1$ is $9$. (Example: $202201999999$.)\n\nWrite $n_i$ for the digit of $n$ in position $i$ (units = position $0$), and similarly $a_i, b_i$. If $a_i = 1$ then $a \\ge 10^i$, so position $i$ is a genuine digit of $a$ and $a$ contains a $1$.\n\n**These numbers are solitary.** Let $n$ have its $1$ in position $s$, and suppose $a + b = n$ with no digit $1$ in $a$ or $b$. Add column by column from the right, with carries $c_i \\in \\{0, 1\\}$ into position $i$ ($c_0 = 0$), so $a_i + b_i + c_i = n_i + 10c_{i+1}$.\n- Positions $i < s$ have $n_i = 9$: if $c_i = 0$ then $a_i + b_i = 9$ or $19$, and $19 > 18$ is impossible; so $c_{i+1} = 0$. Thus $c_s = 0$.\n- Position $s$: $a_s + b_s = 1$ or $11$; the first needs a digit $1$, so $a_s + b_s = 11$ and $c_{s+1} = 1$.\n- Positions $i > s$ with $n_i = 0$: $a_i + b_i + 1 \\in \\{0, 10\\}$, so it is $10$ and the carry stays $1$. With $n_i = 2$: $a_i + b_i + 1 \\in \\{2, 12\\}$; the first needs a digit $1$, so it is $12$ and the carry stays $1$.\n\nSo a carry comes out of the leading position of $n$, which means $a + b \\ge 10^{(\\text{number of digits of } n)} > n$ — contradiction.\n\n**Every solitary number has this form.** We show that otherwise $n = a + b$ with no $1$ in $a$ or $b$. In each construction, at all positions not mentioned, $a_i = 0$ and $b_i = n_i$, with no carry in or out.\n1. *No digit $1$:* take $a = 0$, $b = n$.\n2. *At least two $1$'s.* **Pair** of consecutive $1$'s at positions $i > j$ (no $1$ in between): put $a_j = 3$, $b_j = 8$ (sum $11$, carry); for $j < l < i$, $a_l = 9$, $b_l = n_l$ (sum with carry $n_l + 10$, carry on); at $i$, $a_i = b_i = 0$ (sum with carry $1 = n_i$, no carry). **Triple** of consecutive $1$'s at $i > j > k$: the same, but at the middle $1$ use $a_j = 3$, $b_j = 7$ (with the incoming carry, $11$; carry on). Split the $1$'s, from the top, into consecutive pairs, plus one triple if their number is odd (at least $3$). All digits used are $0, 2, 3, 7, 8, 9$ or digits $n_l \\ne 1$.\n3. *Exactly one $1$ (at position $s$) and some $n_q \\ne 9$ with $q < s$:* at $q$, if $n_q \\ge 2$ put $a_q = 9$, $b_q = n_q + 1 \\le 9$, and if $n_q = 0$ put $a_q = 8$, $b_q = 2$ (sum $n_q + 10$, carry); for $q < l < s$, $a_l = 9$, $b_l = n_l$ (carry on); at $s$, $a_s = b_s = 0$ (sum $1$, no carry).\n4. *Exactly one $1$ (at $s$) and some $n_q \\notin \\{0, 2\\}$ with $q > s$, so $3 \\le n_q \\le 9$:* at $s$ put $a_s = 9$, $b_s = 2$ (sum $11$, carry); for $s < l < q$, $a_l = 9$, $b_l = n_l$ (carry on); at $q$, $a_q = 0$, $b_q = n_q - 1 \\in [2, 8]$ (sum $n_q$, no carry).\n\nSo non-solitary numbers are exactly those not of the stated form, proving the claim.\n\n**Counting.** Numbers below $10^{2026}$ have at most $2026$ digits; pad them with leading zeros to exactly $2026$ digits (padding zeros are allowed to the left of the $1$). If the $1$ is in the $i$-th place from the left ($1 \\le i \\le 2026$), the $i - 1$ places before it are each $0$ or $2$ and the places after it are all $9$: $2^{i-1}$ numbers. In total\n$$\\sum_{i=1}^{2026}2^{i-1} = 2^{2026} - 1.$$\n\n**Answer:** $2^{2026} - 1$. ∎"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "arithmetic"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null,
+    "answerDisplay": "$2^{2026}-1$"
+  },
+  {
+    "id": "usamo-usajmo-2026-06",
+    "bank": "usamo",
+    "source": {
+      "contest": "USAJMO",
+      "paper": "USAJMO 2026",
+      "year": 2026,
+      "number": 6,
+      "url": "https://web.evanchen.cc/exams/JMO-2026-notes.pdf"
+    },
+    "grade": "7-10",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "text",
+    "prompt": "Emily has a red sheet of paper. She draws $2026$ circles (not necessarily of equal size) on the piece of paper. She chooses a circle to color black, then cuts the paper around the circumference of all $2026$ circles. She then separates the pieces of paper, into at least $2$ black pieces and some number of red pieces. Is it possible that all black pieces are congruent?",
+    "image": null,
+    "choices": null,
+    "answer": "No",
+    "acceptedAnswers": [
+      "no",
+      "No, it is not possible",
+      "not possible",
+      "impossible"
+    ],
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "A deepest piece is convex, but some piece is not",
+        "body": "**No.** Let $\\Gamma$ be the black circle; the black pieces are the connected pieces of the open disk bounded by $\\Gamma$ after removing all drawn circles. (Repeated copies of the same circle change nothing, so assume the circles are distinct.) For a point $X$ that is not on any circle, let $c(X)$ be the number of the $2026$ open disks that contain $X$; $c$ is constant on each piece.\n\n**A convex black piece.** Choose a black point $X$ with $c(X)$ as large as possible and let $P$ be its piece. Let $\\mathcal I$ be the set of circles whose disk contains $P$ (it contains $\\Gamma$).\n\n*Every boundary arc of $P$ lies on a circle of $\\mathcal I$.* Otherwise some boundary arc of $P$ lies on a circle $k \\notin \\mathcal I$, so $P$ is outside $k$. Pick a point $x$ on this arc lying on no other circle; a small disk around $x$ meets only the circle $k$ and lies inside $\\Gamma$ (points of $\\overline P$ on $\\Gamma$ lie on $\\Gamma \\cap k$, which is finite, and we avoid them). Crossing $k$ at $x$ we enter a black piece $P'$ inside $k$ with $c(P') = c(P) + 1$, contradicting maximality.\n\nLet $K$ be the intersection of the open disks of the circles in $\\mathcal I$; it is convex, hence connected, and $P \\subseteq K$. The boundary of $P$ lies on circles of $\\mathcal I$, which are disjoint from $K$. So $P$ is both open and closed relative to $K$, hence $P = K$. **$P$ is convex.**\n\n**A non-convex black piece.** Since there are at least two black pieces, some circle $k \\ne \\Gamma$ passes through the open disk of $\\Gamma$. Choose a point $x \\in k$ inside $\\Gamma$ that lies on no other circle, and a small disk $U$ around $x$, inside $\\Gamma$, meeting no other circle. The part of $U$ outside $k$ lies in one black piece $Q$, and $Q$ lies entirely outside the closed disk of $k$ (it is connected and does not meet $k$). Take two points $q_1, q_2 \\in k \\cap U$ on either side of $x$, and move each a tiny distance $\\delta$ radially outward to $q_1', q_2' \\in Q$. The midpoint of the chord $q_1q_2$ lies strictly inside $k$, at positive depth, so for $\\delta$ small enough the midpoint of $q_1'q_2'$ is still strictly inside $k$, hence not in $\\overline Q$. So $Q$ (and its closure) is not convex.\n\nCongruent figures are both convex or both non-convex, so $P$ and $Q$ are two black pieces that are not congruent. Hence the black pieces can never all be congruent. ∎"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "logic"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

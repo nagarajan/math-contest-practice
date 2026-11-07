@@ -1,0 +1,142 @@
+[
+  {
+    "id": "vjimc-2003-cat1-01",
+    "bank": "vjimc",
+    "source": {
+      "contest": "VJIMC",
+      "paper": "VJIMC 2003 Category I",
+      "year": 2003,
+      "number": 1,
+      "url": "https://vjimc.osu.cz/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $d(k)$ denote the number of all natural divisors of a natural number $k$. Prove that for any natural number $n_0$ the sequence $\\left\\{d(n^2+1)\\right\\}_{n=n_0}^{\\infty}$ is not strictly monotone.",
+    "image": null,
+    "choices": null,
+    "answer": "For even $n$, the divisors of the odd non-square $n^2+1$ pair up as $\\{d,(n^2+1)/d\\}$ with $d<n$ odd, so $d(n^2+1)\\le n$; a strictly increasing sequence of even numbers grows by at least $2$ per step and would eventually exceed this bound, and a strictly decreasing sequence of positive integers is impossible.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Divisor pairing gives $d(n^2+1)\\le n$ for even $n$",
+        "body": "**Step 1: two facts about $d(n^2+1)$.** Let $n\\ge 1$.\n\n* $n^2<n^2+1<(n+1)^2$, so $n^2+1$ is not a perfect square. Hence its divisors split into pairs $\\{d,\\,(n^2+1)/d\\}$ with $d<\\sqrt{n^2+1}$, and in particular $d(n^2+1)$ is **even**.\n* If $n$ is even, then $n^2+1$ is odd, so the smaller divisor $d$ of each pair is odd and satisfies $d<\\sqrt{n^2+1}$, i.e. $d\\le n$. There are exactly $n/2$ odd numbers in $\\{1,\\dots,n\\}$, so there are at most $n/2$ pairs and\n$$d(n^2+1)\\le n\\qquad(n \\text{ even}).$$\n\n**Step 2: the sequence is not strictly decreasing.** A strictly decreasing sequence of positive integers $d(n_0^2+1)>d((n_0+1)^2+1)>\\dots$ cannot be infinite.\n\n**Step 3: the sequence is not strictly increasing.** Suppose $d(n^2+1)<d((n+1)^2+1)$ for all $n\\ge n_0$. Since all terms are even, each step increases the value by at least $2$, so for every $k\\ge 0$\n$$d\\big((n_0+k)^2+1\\big)\\ge d(n_0^2+1)+2k\\ge 2+2k .$$\nChoose $k\\ge n_0$ such that $N=n_0+k$ is even. Then\n$$d(N^2+1)\\ge 2k+2>k+n_0=N,$$\ncontradicting Step 1 ($d(N^2+1)\\le N$ for even $N$).\n\nHence the sequence is neither strictly increasing nor strictly decreasing from $n_0$ on, i.e. it is not strictly monotone. ∎"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "sequences-series"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "vjimc-2003-cat1-02",
+    "bank": "vjimc",
+    "source": {
+      "contest": "VJIMC",
+      "paper": "VJIMC 2003 Category I",
+      "year": 2003,
+      "number": 2,
+      "url": "https://vjimc.osu.cz/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $A=(a_{ij})$ be an $m\\times n$ real matrix with at least one non-zero element. For each $i\\in\\{1,\\dots,m\\}$, let $R_i=\\sum_{j=1}^n a_{ij}$ be the sum of the $i$-th row of the matrix $A$, and for each $j\\in\\{1,\\dots,n\\}$, let $C_j=\\sum_{i=1}^m a_{ij}$ be the sum of the $j$-th column of the matrix $A$. Prove that there exist indices $k\\in\\{1,\\dots,m\\}$ and $l\\in\\{1,\\dots,n\\}$ such that\n$$a_{kl}>0,\\quad R_k\\ge 0,\\quad C_l\\ge 0,$$\nor\n$$a_{kl}<0,\\quad R_k\\le 0,\\quad C_l\\le 0.$$",
+    "image": null,
+    "choices": null,
+    "answer": "Assume not and split rows into $R_i\\ge0$ / $R_i<0$ and columns into $C_j>0$ / $C_j\\le0$; computing the sum of the block (negative rows)×(positive columns) in two ways shows it is both $\\le0$ and $\\ge0$, which forces all $R_i=C_j=0$, and then any non-zero entry works — a contradiction.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Double counting one block",
+        "body": "Suppose, for contradiction, that no pair $(k,l)$ has either property. Define\n$$I^+=\\{i: R_i\\ge 0\\},\\quad I^-=\\{i:R_i<0\\},\\quad J^+=\\{j: C_j>0\\},\\quad J^-=\\{j: C_j\\le 0\\}.$$\n\n* If $i\\in I^+$, $j\\in J^+$ and $a_{ij}>0$, then $(i,j)$ satisfies the first property. Hence $a_{ij}\\le 0$ on $I^+\\times J^+$.\n* If $i\\in I^-$, $j\\in J^-$ and $a_{ij}<0$, then $(i,j)$ satisfies the second property. Hence $a_{ij}\\ge 0$ on $I^-\\times J^-$.\n\nLet $S=\\sum_{i\\in I^-,\\,j\\in J^+}a_{ij}$. Summing by rows,\n$$S=\\sum_{i\\in I^-}\\Big(R_i-\\sum_{j\\in J^-}a_{ij}\\Big)=\\sum_{i\\in I^-}R_i-\\sum_{I^-\\times J^-}a_{ij}\\le \\sum_{i\\in I^-}R_i\\le 0 ,$$\nand summing by columns,\n$$S=\\sum_{j\\in J^+}\\Big(C_j-\\sum_{i\\in I^+}a_{ij}\\Big)=\\sum_{j\\in J^+}C_j-\\sum_{I^+\\times J^+}a_{ij}\\ge \\sum_{j\\in J^+}C_j\\ge 0 .$$\nTherefore $S=0$ and all inequalities are equalities; in particular $\\sum_{i\\in I^-}R_i=0$ and $\\sum_{j\\in J^+}C_j=0$. Every $R_i$ with $i\\in I^-$ is negative and every $C_j$ with $j\\in J^+$ is positive, so $I^-=\\emptyset$ and $J^+=\\emptyset$. Thus $R_i\\ge 0$ for all $i$ and $C_j\\le 0$ for all $j$, and\n$$0\\le\\sum_{i=1}^m R_i=\\sum_{i,j}a_{ij}=\\sum_{j=1}^n C_j\\le 0 ,$$\nso all $R_i=0$ and all $C_j=0$.\n\nNow take any entry $a_{kl}\\ne 0$ (it exists by hypothesis). If $a_{kl}>0$, then $a_{kl}>0$, $R_k=0\\ge0$, $C_l=0\\ge 0$; if $a_{kl}<0$, then $a_{kl}<0$, $R_k\\le 0$, $C_l\\le 0$. Either way we contradict our assumption. ∎"
+      }
+    ],
+    "topics": [
+      "linear-algebra",
+      "inequalities"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "vjimc-2003-cat1-03",
+    "bank": "vjimc",
+    "source": {
+      "contest": "VJIMC",
+      "paper": "VJIMC 2003 Category I",
+      "year": 2003,
+      "number": 3,
+      "url": "https://vjimc.osu.cz/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Find the limit\n$$\\lim_{n\\to\\infty}\\sqrt{1+2\\sqrt{1+3\\sqrt{\\cdots+(n-1)\\sqrt{1+n}}}}\\,.$$",
+    "image": null,
+    "choices": null,
+    "answer": "3",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Contracting the error from the inside out",
+        "body": "For $2\\le m\\le n$ define the nested radicals from the inside: $u_{n,n}=\\sqrt{1+n}$ and\n$$u_{m,n}=\\sqrt{1+m\\,u_{m+1,n}}\\qquad(2\\le m\\le n-1),$$\nso the expression in the problem is $u_{2,n}$. The guess $3$ comes from Ramanujan's identity $m+1=\\sqrt{1+m(m+2)}$: if $u_{m+1,n}$ were exactly $m+2$, then $u_{m,n}$ would be exactly $m+1$.\n\n**Key estimate.** For $2\\le m\\le n-1$,\n$$u_{m,n}^2-(m+1)^2=1+m\\,u_{m+1,n}-m^2-2m-1=m\\big(u_{m+1,n}-(m+2)\\big).$$\nSince $u_{m,n}>0$, we have $u_{m,n}+(m+1)\\ge m+2$, hence\n$$|u_{m,n}-(m+1)|=\\frac{|u_{m,n}^2-(m+1)^2|}{u_{m,n}+m+1}\\le \\frac{m}{m+2}\\,|u_{m+1,n}-(m+2)|.$$\n\n**Chaining.** Applying this for $m=2,3,\\dots,n-1$:\n$$|u_{2,n}-3|\\le \\prod_{m=2}^{n-1}\\frac{m}{m+2}\\cdot|u_{n,n}-(n+1)|=\\frac{2\\cdot 3}{n(n+1)}\\,\\big(n+1-\\sqrt{n+1}\\big)\\le\\frac{6}{n}.$$\n(The product telescopes: $\\frac{2\\cdot3\\cdots(n-1)}{4\\cdot5\\cdots(n+1)}=\\frac{6}{n(n+1)}$.)\n\nHence $u_{2,n}\\to 3$.\n\n**Answer: $3$.**"
+      },
+      {
+        "title": "Monotone and bounded",
+        "body": "With $u_{m,n}$ as in the first solution, the identity $m+1=\\sqrt{1+m(m+2)}$ lets us write $3=\\sqrt{1+2\\sqrt{1+3\\sqrt{\\cdots+(n-1)\\sqrt{1+n(n+2)}}}}$ for every $n$ (unfold $m+2=\\sqrt{1+(m+1)(m+3)}$ repeatedly).\n\n* **Bounded:** this is the same nested expression as $u_{2,n}$ except that the innermost $1+n$ is replaced by the larger $1+n(n+2)$. Every operation $t\\mapsto\\sqrt{1+mt}$ is increasing, so $u_{2,n}<3$.\n* **Increasing:** $u_{2,n+1}$ is obtained from $u_{2,n}$ by replacing the innermost $\\sqrt{1+n}$ with $\\sqrt{1+n\\sqrt{1+(n+1)}}>\\sqrt{1+n}$; again by monotonicity $u_{2,n+1}>u_{2,n}$.\n\nSo the limit exists and is at most $3$. To see it equals $3$, one needs a quantitative estimate such as the one in the first solution ($|u_{2,n}-3|\\le 6/n$). Numerically $u_{2,10}\\approx 2.9899$ and $u_{2,100}\\approx 3.0000$.\n\n**Answer: $3$.**"
+      }
+    ],
+    "topics": [
+      "sequences-series",
+      "real-analysis"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "vjimc-2003-cat1-04",
+    "bank": "vjimc",
+    "source": {
+      "contest": "VJIMC",
+      "paper": "VJIMC 2003 Category I",
+      "year": 2003,
+      "number": 4,
+      "url": "https://vjimc.osu.cz/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $A$ and $B$ be complex Hermitian $2\\times 2$ matrices having the pairs of eigenvalues $(\\alpha_1,\\alpha_2)$ and $(\\beta_1,\\beta_2)$, respectively. Determine all possible pairs of eigenvalues $(\\gamma_1,\\gamma_2)$ of the matrix $C=A+B$. (We recall that a matrix $A=(a_{ij})$ is Hermitian if and only if $a_{ij}=\\overline{a_{ji}}$ for all $i$ and $j$.)",
+    "image": null,
+    "choices": null,
+    "answer": "Ordering $\\alpha_1\\ge\\alpha_2$, $\\beta_1\\ge\\beta_2$, $\\gamma_1\\ge\\gamma_2$: exactly the pairs with $\\gamma_1+\\gamma_2=\\alpha_1+\\alpha_2+\\beta_1+\\beta_2$ and $\\max(\\alpha_1+\\beta_2,\\ \\alpha_2+\\beta_1)\\le\\gamma_1\\le\\alpha_1+\\beta_1$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Rayleigh quotients and a rotation",
+        "body": "Hermitian matrices have real eigenvalues and an orthonormal basis of eigenvectors. Order them: $\\alpha_1\\ge\\alpha_2$, $\\beta_1\\ge\\beta_2$, $\\gamma_1\\ge\\gamma_2$. For a Hermitian $2\\times2$ matrix $M$ with eigenvalues $\\mu_1\\ge\\mu_2$ we use the Rayleigh characterisation\n$$\\mu_1=\\max_{\\|x\\|=1}\\langle Mx,x\\rangle,\\qquad \\mu_2=\\min_{\\|x\\|=1}\\langle Mx,x\\rangle$$\n(write $x$ in an orthonormal eigenbasis: $\\langle Mx,x\\rangle=\\mu_1|x_1|^2+\\mu_2|x_2|^2$ with $|x_1|^2+|x_2|^2=1$).\n\n**Necessary conditions.**\n\n1. *Trace:* $\\gamma_1+\\gamma_2=\\operatorname{tr}C=\\operatorname{tr}A+\\operatorname{tr}B=\\alpha_1+\\alpha_2+\\beta_1+\\beta_2$.\n2. *Upper bound:* $\\gamma_1=\\max_{\\|x\\|=1}\\big(\\langle Ax,x\\rangle+\\langle Bx,x\\rangle\\big)\\le \\max\\langle Ax,x\\rangle+\\max\\langle Bx,x\\rangle=\\alpha_1+\\beta_1$.\n3. *Lower bounds:* let $v$ be a unit eigenvector of $A$ for $\\alpha_1$. Then\n$$\\gamma_1\\ge\\langle Cv,v\\rangle=\\alpha_1+\\langle Bv,v\\rangle\\ge\\alpha_1+\\beta_2 .$$\nTaking instead a unit eigenvector $w$ of $B$ for $\\beta_1$ gives $\\gamma_1\\ge \\langle Aw,w\\rangle+\\beta_1\\ge\\alpha_2+\\beta_1$.\n\nSo $\\max(\\alpha_1+\\beta_2,\\alpha_2+\\beta_1)\\le\\gamma_1\\le\\alpha_1+\\beta_1$ and $\\gamma_2$ is determined by the trace. (Then automatically $\\gamma_1\\ge\\gamma_2$, since $\\gamma_1\\ge \\frac12(\\alpha_1+\\beta_2+\\alpha_2+\\beta_1)=\\frac12\\operatorname{tr}C$.)\n\n**Every such pair occurs.** Let $A=\\operatorname{diag}(\\alpha_1,\\alpha_2)$, $P(t)=\\begin{pmatrix}\\cos t&\\sin t\\\\-\\sin t&\\cos t\\end{pmatrix}$ and $B(t)=P(t)^{T}\\operatorname{diag}(\\beta_1,\\beta_2)P(t)$. Since $P(t)$ is real orthogonal, $B(t)$ is real symmetric (hence Hermitian) with eigenvalues $\\beta_1,\\beta_2$. Put $C(t)=A+B(t)$, a real symmetric matrix depending continuously on $t$. Its larger eigenvalue\n$$\\gamma_1(t)=\\frac{\\operatorname{tr}C(t)}{2}+\\sqrt{\\Big(\\frac{c_{11}(t)-c_{22}(t)}{2}\\Big)^2+c_{12}(t)^2}$$\nis a continuous function of $t$. At $t=0$, $C(0)=\\operatorname{diag}(\\alpha_1+\\beta_1,\\alpha_2+\\beta_2)$, so $\\gamma_1(0)=\\alpha_1+\\beta_1$. At $t=\\pi/2$, $C(\\pi/2)=\\operatorname{diag}(\\alpha_1+\\beta_2,\\alpha_2+\\beta_1)$, so $\\gamma_1(\\pi/2)=\\max(\\alpha_1+\\beta_2,\\alpha_2+\\beta_1)$. By the intermediate value theorem $\\gamma_1(t)$ takes every value in between, and $\\gamma_2(t)=\\operatorname{tr}C-\\gamma_1(t)$.\n\n**Answer.** With the eigenvalues ordered decreasingly, the possible pairs are exactly\n$$\\Big\\{(\\gamma_1,\\gamma_2):\\ \\gamma_1+\\gamma_2=\\alpha_1+\\alpha_2+\\beta_1+\\beta_2,\\ \\ \\max(\\alpha_1+\\beta_2,\\alpha_2+\\beta_1)\\le\\gamma_1\\le\\alpha_1+\\beta_1\\Big\\}$$\n(together with the same pairs listed in the other order). ∎"
+      }
+    ],
+    "topics": [
+      "linear-algebra",
+      "inequalities"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

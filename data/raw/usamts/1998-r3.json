@@ -1,0 +1,188 @@
+[
+  {
+    "id": "usamts-1998-r3-01",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 10 Round 3 (1998-1999)",
+      "year": 1998,
+      "number": 1,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Determine the leftmost three digits of the number\n$$1^1 + 2^2 + 3^3 + \\dots + 999^{999} + 1000^{1000}.$$",
+    "image": null,
+    "choices": null,
+    "answer": "100",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Squeeze between two numbers",
+        "body": "Let $X$ be the sum. Its last term is $1000^{1000} = 10^{3000}$, so $X > 10^{3000}$.\n\nFor $k \\le 999$ we have $k^k < 1000^k$, so\n$$X < 1000^1 + 1000^2 + \\dots + 1000^{999} + 1000^{1000},$$\nthe number whose digits are $1001001\\ldots001000$. More precisely, by the geometric series,\n$$1000 + 1000^2 + \\dots + 1000^{999} < \\frac{1000^{1000}}{999},\\quad\\text{so}\\quad X < 10^{3000}\\left(1 + \\tfrac{1}{999}\\right) = 10^{3000}\\cdot 1.001001\\ldots$$\n\nThus $10^{3000} < X < 1.002 \\times 10^{3000}$. Every number in this range has 3001 digits and starts with $100$.\n\n**Answer: 100**"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "inequalities"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-1998-r3-02",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 10 Round 3 (1998-1999)",
+      "year": 1998,
+      "number": 2,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "There are infinitely many ordered pairs $(m, n)$ of positive integers for which the sum\n$$m + (m+1) + (m+2) + \\dots + (n-1) + n$$\nis equal to the product $mn$. The four pairs with the smallest values of $m$ are $(1, 1)$, $(3, 6)$, $(15, 35)$, and $(85, 204)$. Find three more $(m, n)$ pairs.",
+    "image": null,
+    "choices": null,
+    "answer": "The next three are $(493, 1189)$, $(2871, 6930)$, $(16731, 40391)$; each is obtained from the previous by $(m, n) \\mapsto (m + 2n,\\ 2m + 5n - 1)$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "A transformation that preserves solutions",
+        "body": "The sum of the integers from $m$ to $n$ is $\\frac{(m+n)(n-m+1)}{2}$, so the condition is\n$(m + n)(n - m + 1) = 2mn$. Since $(m+n)(n-m+1) = n^2 - m^2 + m + n$, this is\n$$n^2 - m^2 + m + n - 2mn = 0. \\tag{$*$}$$\n\n**Claim.** If $(m, n)$ satisfies $(*)$, so does $(m', n') = (m + 2n,\\ 2m + 5n - 1)$.\n\n*Proof.* Compute $n' - m' = m + 3n - 1$ and $n' + m' = 3m + 7n - 1$, so\n$$n'^2 - m'^2 + m' + n' = (n' + m')(n' - m' + 1) = (3m + 7n - 1)(m + 3n),$$\n$$2m'n' = 2(m + 2n)(2m + 5n - 1).$$\nExpanding, the first is $3m^2 + 16mn + 21n^2 - m - 3n$ and the second is $4m^2 + 18mn + 20n^2 - 2m - 4n$. Their difference is\n$$-m^2 - 2mn + n^2 + m + n,$$\nwhich is exactly the left side of $(*)$, hence $0$. $\\square$\n\nCheck on the given data: $(1,1) \\mapsto (3, 6) \\mapsto (15, 35) \\mapsto (85, 204)$. Continuing:\n* $(85, 204) \\mapsto (85 + 408,\\ 170 + 1020 - 1) = (493, 1189)$,\n* $(493, 1189) \\mapsto (493 + 2378,\\ 986 + 5945 - 1) = (2871, 6930)$,\n* $(2871, 6930) \\mapsto (2871 + 13860,\\ 5742 + 34650 - 1) = (16731, 40391)$.\n\nDirect check of the first: $\\frac{(493 + 1189)(1189 - 493 + 1)}{2} = \\frac{1682 \\cdot 697}{2} = 841\\cdot 697 = 586\\,177 = 493 \\cdot 1189$. ✓\n\n**Answer:** $(493, 1189)$, $(2871, 6930)$, $(16731, 40391)$ (any three valid pairs are acceptable)."
+      },
+      {
+        "title": "Pell's equation",
+        "body": "Rewrite $(*)$ as $(m + n)^2 - (m + n) - 2n^2 = 0$. Multiply by 4 and add 1:\n$$(2m + 2n - 1)^2 - 8n^2 = 1.$$\nSo $t = 2m + 2n - 1$ and $n$ solve the Pell equation $t^2 - 8n^2 = 1$, whose solutions are given by $t + n\\sqrt8 = (3 + \\sqrt8)^k$, i.e. by the recursion $(t, n) \\mapsto (3t + 8n,\\ t + 3n)$:\n$$(3, 1), (17, 6), (99, 35), (577, 204), (3363, 1189), (19601, 6930), (114243, 40391), \\dots$$\nThen $m = \\frac{t + 1}{2} - n$ gives $m = 1, 3, 15, 85, 493, 2871, 16731$. The new pairs are $(493, 1189)$, $(2871, 6930)$, $(16731, 40391)$."
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "sequences-series"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-1998-r3-03",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 10 Round 3 (1998-1999)",
+      "year": 1998,
+      "number": 3,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "The integers from 1 to 9 can be arranged into a $3 \\times 3$ array\n$$\\begin{array}{|c|c|c|}\\hline A & B & C\\\\\\hline D & E & F\\\\\\hline G & H & I\\\\\\hline\\end{array}$$\nso that the sum of the numbers in every row, column, and diagonal is a multiple of 9.\n\n(a) Prove that the number in the center of the array must be a multiple of 3.\n\n(b) Give an example of such an array with 6 in the center.",
+    "image": null,
+    "choices": null,
+    "answer": "(a) Middle row + both diagonals $= 3E +$ (left column) $+$ (right column), so $3E$ is a multiple of 9. (b) e.g. rows $9,1,8 \\,/\\, 5,6,7 \\,/\\, 4,2,3$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Add three lines through the center",
+        "body": "**(a)** The middle row and the two diagonals all pass through $E$:\n$$(D + E + F) + (A + E + I) + (C + E + G) = 3E + (A + D + G) + (C + F + I).$$\nThe left side is a sum of three multiples of 9, and $A + D + G$ and $C + F + I$ (left and right columns) are multiples of 9. Hence $3E$ is a multiple of 9, so $E$ is a multiple of 3.\n\n**(b)** For example\n$$\\begin{array}{|c|c|c|}\\hline 9 & 1 & 8\\\\\\hline 5 & 6 & 7\\\\\\hline 4 & 2 & 3\\\\\\hline\\end{array}$$\nRows: $18, 18, 9$. Columns: $9+5+4 = 18$, $1+6+2 = 9$, $8+7+3 = 18$. Diagonals: $9+6+3 = 18$, $8+6+4 = 18$. All are multiples of 9. ∎"
+      },
+      {
+        "title": "Every line needs a multiple of 3",
+        "body": "**(a)** Three numbers have a sum divisible by 3 only if they are all congruent mod 3 or all different mod 3. From $1, \\dots, 9$ the only triples with all residues equal are $\\{1,4,7\\}$ (sum 12), $\\{2,5,8\\}$ (sum 15) and $\\{3,6,9\\}$ (sum 18). The first two sums are not multiples of 9. So every line whose sum is a multiple of 9 contains at least one of the multiples of 3, namely $3, 6, 9$.\n\nThe four lines through the center (middle row, middle column, both diagonals) have no cell in common except $E$. If $E$ were not a multiple of 3, these four lines would need multiples of 3 in four *different* cells — but there are only three multiples of 3. Hence $E$ is a multiple of 3. ∎"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "logic"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-1998-r3-04",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 10 Round 3 (1998-1999)",
+      "year": 1998,
+      "number": 4,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Prove that if $0 < x < \\pi/2$, then\n$$\\sec^6 x + \\csc^6 x + (\\sec^6 x)(\\csc^6 x) \\ge 80.$$",
+    "image": null,
+    "choices": null,
+    "answer": "$\\sin x\\cos x \\le \\frac12$ gives $\\sec^6x\\csc^6x \\ge 64$, and AM–GM gives $\\sec^6 x + \\csc^6 x \\ge 2\\sqrt{\\sec^6x\\csc^6x} \\ge 16$; equality at $x = \\pi/4$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "AM–GM twice",
+        "body": "By AM–GM, $\\sin x\\cos x \\le \\frac{\\sin^2 x + \\cos^2 x}{2} = \\frac12$ (both factors are positive for $0 < x < \\frac\\pi2$). Hence\n$$\\sec^6 x\\csc^6 x = \\frac{1}{(\\sin x\\cos x)^6} \\ge 2^6 = 64.$$\nBy AM–GM again,\n$$\\sec^6 x + \\csc^6 x \\ge 2\\sqrt{\\sec^6 x\\csc^6 x} \\ge 2\\sqrt{64} = 16.$$\nAdding the two inequalities: $\\sec^6 x + \\csc^6 x + \\sec^6 x\\csc^6 x \\ge 16 + 64 = 80$. Equality holds at $x = \\frac\\pi4$. ∎"
+      },
+      {
+        "title": "One variable",
+        "body": "Let $s = \\sin^2 x$, $c = \\cos^2 x$, so $s + c = 1$, and put $u = sc \\in (0, \\frac14]$ (as $sc \\le \\frac{(s+c)^2}{4}$). Then\n$$s^3 + c^3 = (s + c)^3 - 3sc(s + c) = 1 - 3u,$$\nand the expression equals\n$$\\frac{1}{c^3} + \\frac{1}{s^3} + \\frac{1}{s^3c^3} = \\frac{s^3 + c^3 + 1}{u^3} = \\frac{2 - 3u}{u^3} = \\frac{2}{u^3} - \\frac{3}{u^2}.$$\nLet $g(u) = 2u^{-3} - 3u^{-2}$. Then $g'(u) = -6u^{-4} + 6u^{-3} = \\frac{6(u - 1)}{u^4} < 0$ on $(0, \\frac14]$, so $g$ is decreasing and $g(u) \\ge g(\\frac14) = 2\\cdot 64 - 3 \\cdot 16 = 80$. ∎"
+      }
+    ],
+    "topics": [
+      "trigonometry",
+      "inequalities"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-1998-r3-05",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 10 Round 3 (1998-1999)",
+      "year": 1998,
+      "number": 5,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "In the figure, $O$ is the center of the circle, $OK$ and $OA$ are perpendicular to one another, $M$ is the midpoint of $OK$, $BN$ is parallel to $OK$, and $\\angle AMN = \\angle NMO$. Determine the measure of $\\angle ABN$ in degrees.",
+    "image": "qimages/usamts/1998-r3/q05.webp",
+    "choices": null,
+    "answer": "36",
+    "acceptedAnswers": null,
+    "answerUnit": "degrees",
+    "solutions": [
+      {
+        "title": "Angle bisector and sin 18°",
+        "body": "Take the radius to be 2 and coordinates $O = (0, 0)$, $A = (0, 2)$, $K = (-2, 0)$, so $M = (-1, 0)$ and $MA = \\sqrt{1 + 4} = \\sqrt5$.\n\n$MN$ bisects angle $AMO$, and $N$ lies on $OA$, so by the angle bisector theorem\n$$\\frac{NO}{NA} = \\frac{MO}{MA} = \\frac{1}{\\sqrt5}\\implies NO = \\frac{OA}{1 + \\sqrt5} = \\frac{2}{1 + \\sqrt5} = \\frac{\\sqrt5 - 1}{2}.$$\n\n$B$ is on the circle at the same height as $N$ (since $BN \\parallel OK$), on the left. If $\\theta = \\angle BOK$, then $\\sin\\theta = \\frac{NO}{OB} = \\frac{\\sqrt5 - 1}{4}$. This is the well-known value $\\sin 18^\\circ$, so $\\theta = 18^\\circ$.\n\nSo, measured from the positive $x$-axis, $A$ is at $90^\\circ$ and $B$ at $180^\\circ - 18^\\circ = 162^\\circ$, giving $\\angle AOB = 72^\\circ$. Triangle $AOB$ is isosceles with apex angle $72^\\circ$, so $\\angle OBA = \\angle OAB = 54^\\circ$. Since $BN \\parallel KO$, $\\angle NBO = \\angle BOK = 18^\\circ$ (alternate angles). Hence\n$$\\angle ABN = \\angle ABO - \\angle NBO = 54^\\circ - 18^\\circ = 36^\\circ.$$\n\n*(Why $\\sin 18^\\circ = \\frac{\\sqrt5 - 1}{4}$: with $\\alpha = 18^\\circ$, $\\sin 2\\alpha = \\cos 3\\alpha$; dividing $2\\sin\\alpha\\cos\\alpha = 4\\cos^3\\alpha - 3\\cos\\alpha$ by $\\cos\\alpha$ gives $2\\sin\\alpha = 1 - 4\\sin^2\\alpha$, whose positive root is $\\frac{\\sqrt5-1}{4}$.)*\n\n**Answer: $36^\\circ$**"
+      },
+      {
+        "title": "Coordinates and tangent",
+        "body": "With the same coordinates, $B = (-\\sqrt{4 - NO^2},\\ NO)$ where $NO = \\frac{\\sqrt5 - 1}{2} \\approx 0.618$, so $B \\approx (-1.902, 0.618)$. The angle $ABN$ is the angle between $BA$ and the horizontal direction $BN$:\n$$\\tan\\angle ABN = \\frac{2 - NO}{\\sqrt{4 - NO^2}} = \\frac{(5 - \\sqrt5)/2}{\\sqrt{(5 + \\sqrt5)/2}}.$$\nSquaring, $\\tan^2\\angle ABN = \\frac{(5 - \\sqrt5)^2}{2(5 + \\sqrt5)} = \\frac{(5-\\sqrt5)^3}{2\\cdot 20} = 5 - 2\\sqrt5$, and indeed $\\tan^2 36^\\circ = 5 - 2\\sqrt5$ (numerically $\\tan 36^\\circ \\approx 0.7265$, and $1.382/1.902 \\approx 0.7266$).\n\n**Answer: $36^\\circ$**"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "trigonometry"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

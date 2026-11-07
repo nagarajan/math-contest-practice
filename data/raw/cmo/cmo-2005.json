@@ -1,0 +1,191 @@
+[
+  {
+    "id": "cmo-cmo-2005-01",
+    "bank": "cmo",
+    "source": {
+      "contest": "CMO",
+      "paper": "CMO 2005",
+      "year": 2005,
+      "number": 1,
+      "url": "https://cms.math.ca/competitions/cmo/"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "text",
+    "prompt": "Consider an equilateral triangle of side length $n$, which is divided into unit triangles, as shown. Let $f(n)$ be the number of paths from the triangle in the top row to the middle triangle in the bottom row, such that adjacent triangles in our path share a common edge and the path never travels up (from a lower row to a higher row) or revisits a triangle. An example of one such path is illustrated below for $n = 5$. Determine the value of $f(2005)$.",
+    "image": "qimages/cmo/cmo-2005/q01.webp",
+    "choices": null,
+    "answer": "2004!",
+    "acceptedAnswers": [
+      "(2004)!",
+      "2004 factorial",
+      "f(2005)=2004!",
+      "f(2005) = 2004!"
+    ],
+    "answerUnit": null,
+    "answerDisplay": "$2004!$",
+    "solutions": [
+      {
+        "title": "Choose where to cross each horizontal line",
+        "body": "We show $f(n) = (n-1)!$.\n\nNumber the rows $1, \\ldots, n$ from the top. Row $k$ consists of $2k - 1$ unit triangles in a line: $k$ pointing up and $k - 1$ pointing down, alternating and starting and ending with an up-triangle. Two triangles in the same row share an edge exactly when they are neighbours in this line. Between rows $k$ and $k+1$ lies the horizontal line $l_k$, which is cut into $k$ unit segments; each is the bottom edge of one of the $k$ up-triangles of row $k$ (and the top edge of a down-triangle of row $k+1$). So the only way to move from row $k$ to row $k + 1$ is through one of these $k$ segments.\n\nTake a valid path. It never moves up, so once it leaves row $k$ it never returns; it starts in row $1$ and ends in row $n$, so it crosses each of $l_1, \\ldots, l_{n-1}$ exactly once. While in row $k$ it moves sideways along the line of triangles, and since it never revisits a triangle, it moves in one direction only, from the triangle where it entered the row to the up-triangle through whose bottom edge it leaves (or, in row $n$, to the middle triangle where it ends). So the path is completely determined by which of the $k$ segments of $l_k$ it crosses, for $k = 1, \\ldots, n-1$.\n\nConversely, any choice of one segment on each $l_k$ gives a valid path: in each row walk straight from the entry triangle to the chosen exit triangle (in row $n$, to the middle triangle), then go down. This never goes up and never revisits a triangle.\n\nHence $f(n) = 1\\cdot 2 \\cdots (n-1) = (n-1)!$, and $f(2005) = 2004!$.\n\n(Check: $f(2) = 1$, $f(3) = 2$; a computer count also gives $f(4) = 6$, $f(5) = 24$.)\n\n**Answer: $f(2005) = 2004!$**"
+      }
+    ],
+    "topics": [
+      "counting"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "cmo-cmo-2005-02",
+    "bank": "cmo",
+    "source": {
+      "contest": "CMO",
+      "paper": "CMO 2005",
+      "year": 2005,
+      "number": 2,
+      "url": "https://cms.math.ca/competitions/cmo/"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $(a, b, c)$ be a Pythagorean triple, i.e., a triplet of positive integers with $a^2 + b^2 = c^2$.\n\na) Prove that $(c/a + c/b)^2 > 8$.\n\nb) Prove that there does not exist any integer $n$ for which we can find a Pythagorean triple $(a, b, c)$ satisfying $(c/a + c/b)^2 = n$.",
+    "image": null,
+    "choices": null,
+    "answer": "(a) $(c/a + c/b)^2 = \\frac{(a^2+b^2)(a+b)^2}{a^2b^2} \\ge 8$ by AM-GM, with equality only if $a = b$, impossible as $\\sqrt2$ is irrational. (b) The square of a rational is an integer only if the rational is; $c(a+b) = mab$ with $\\gcd(a,b) = 1$ forces $a \\mid c$ and then $a \\mid b$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "AM-GM, then divisibility",
+        "body": "**(a)** Using $c^2 = a^2 + b^2$,\n$$\\left(\\frac ca + \\frac cb\\right)^2 = c^2\\left(\\frac{a+b}{ab}\\right)^2 = \\frac{(a^2+b^2)(a+b)^2}{a^2b^2}.$$\nBy AM-GM, $a^2 + b^2 \\ge 2ab$ and $(a+b)^2 \\ge 4ab$, so the expression is at least $\\frac{2ab\\cdot 4ab}{a^2b^2} = 8$, with equality only when $a = b$. But $a = b$ would give $c^2 = 2a^2$, i.e. $\\sqrt2 = c/a$ rational, which is false. So the inequality is strict: $(c/a + c/b)^2 > 8$.\n\n**(b)** Suppose $(c/a + c/b)^2 = n$ is an integer. The number $q = c/a + c/b$ is a positive rational whose square is an integer; then $q$ itself is an integer (if $q = u/v$ in lowest terms with $v > 1$, then $u^2/v^2$ is in lowest terms too, not an integer). Call it $m$.\n\nDividing $a, b, c$ by $\\gcd(a, b)$ (which also divides $c$, since $\\gcd(a,b)^2 \\mid c^2$) gives another Pythagorean triple with the same value of $c/a + c/b$; so we may assume $\\gcd(a, b) = 1$. Now\n$$c(a + b) = m\\,ab.$$\nSince $\\gcd(a, a+b) = \\gcd(a, b) = 1$ and $a \\mid c(a+b)$, we get $a \\mid c$; write $c = ak$. Then $b^2 = c^2 - a^2 = a^2(k^2 - 1)$, so $a^2 \\mid b^2$ and hence $a \\mid b$. With $\\gcd(a, b) = 1$ this means $a = 1$, and then $b^2 + 1 = c^2$ with $b, c \\ge 1$, i.e. $(c - b)(c + b) = 1$, impossible since $c + b \\ge 2$. So no such integer $n$ exists. ∎"
+      },
+      {
+        "title": "Trigonometry and parity",
+        "body": "**(a)** View $a, b$ as the legs and $c$ as the hypotenuse of a right triangle, and let $\\theta$ be the angle between the sides $a$ and $c$, so $a = c\\cos\\theta$, $b = c\\sin\\theta$, $0 < \\theta < 90^\\circ$. Then\n$$\\left(\\frac ca + \\frac cb\\right)^2 = \\left(\\frac{\\sin\\theta + \\cos\\theta}{\\sin\\theta\\cos\\theta}\\right)^2 = \\frac{1 + \\sin 2\\theta}{\\frac14\\sin^2 2\\theta} = \\frac{4}{\\sin^2 2\\theta} + \\frac{4}{\\sin 2\\theta}.$$\nSince $0 < \\sin 2\\theta \\le 1$, this is at least $8$, with equality only if $\\theta = 45^\\circ$, i.e. $a = b$, which is impossible as in the first solution. So it is $> 8$.\n\n**(b)** As before, if the square is an integer then $c/a + c/b = m$ is an integer, and we may assume $\\gcd(a, b) = 1$. Then $a, b$ are not both even; they are not both odd either, since then $c^2 = a^2 + b^2 \\equiv 2 \\pmod 4$, while squares are $0$ or $1 \\bmod 4$. So exactly one of $a, b$ is even, $a + b$ is odd and $c^2 = a^2 + b^2$ is odd, so $c$ is odd. But then $c(a + b) = mab$ has an odd left side and an even right side — contradiction. ∎"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "inequalities"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "cmo-cmo-2005-03",
+    "bank": "cmo",
+    "source": {
+      "contest": "CMO",
+      "paper": "CMO 2005",
+      "year": 2005,
+      "number": 3,
+      "url": "https://cms.math.ca/competitions/cmo/"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $S$ be a set of $n \\ge 3$ points in the interior of a circle.\n\na) Show that there are three distinct points $a, b, c \\in S$ and three distinct points $A, B, C$ on the circle such that $a$ is (strictly) closer to $A$ than any other point in $S$, $b$ is closer to $B$ than any other point in $S$ and $c$ is closer to $C$ than any other point in $S$.\n\nb) Show that for no value of $n$ can four such points in $S$ (and corresponding points on the circle) be guaranteed.",
+    "image": null,
+    "choices": null,
+    "answer": "(a) Take a triangle $abc$ of maximal area in $S$ and let $A$ be where the perpendicular from $a$ to $bc$, extended beyond $a$, meets the circle (collinear case: perpendiculars to the line). (b) Midpoints of the sides of an inscribed equilateral triangle plus points clustered at the centre.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Maximal-area triangle; an explicit counterexample",
+        "body": "**(a)** *Collinear case.* If all points of $S$ lie on a line $L$, take any three of them, $a, b, c$. Let $A$ be a point where the line through $a$ perpendicular to $L$ meets the circle. For any other $x \\in S$ we have $x \\in L$, $x \\ne a$, so by Pythagoras $|Ax|^2 = |Aa|^2 + |ax|^2 > |Aa|^2$. Define $B$, $C$ in the same way from $b$, $c$.\n\n*General case.* $S$ is finite and not collinear, so we can choose $a, b, c \\in S$ such that triangle $abc$ has the largest possible area; it has positive area. Let $h$ be the distance from $a$ to the line $bc$, and let $\\ell$ be the line through $a$ parallel to $bc$. For any $x \\in S$, the triangle $xbc$ has area at most that of $abc$, so the distance from $x$ to line $bc$ is at most $h$. Hence every point of $S$ lies in the closed half-plane $H$ bounded by $\\ell$ that contains $bc$.\n\nDraw the line through $a$ perpendicular to $bc$ and follow it from $a$ away from $bc$ until it meets the circle at $A$ (possible since $a$ is inside the circle; $A \\ne a$). Then $A$ lies outside $H$ and $Aa \\perp \\ell$, so $|Aa| = \\operatorname{dist}(A, \\ell)$. Every $x \\in H$ satisfies $|Ax| \\ge \\operatorname{dist}(A, \\ell) = |Aa|$, with equality only if $x$ is the foot of the perpendicular from $A$ to $\\ell$, which is $a$. So $A$ is strictly closer to $a$ than to any other point of $S$.\n\nConstruct $B$ from $b$ (perpendicular to $ca$) and $C$ from $c$ (perpendicular to $ab$) in the same way; the same argument applies because triangle $abc$ is also maximal when viewed from $b$ or $c$.\n\nFinally $A, B, C$ are distinct: the point of $S$ nearest to $A$ is $a$, nearest to $B$ is $b$, and nearest to $C$ is $c$, and these are different.\n\n**(b)** Let $r$ be the radius and $O$ the centre. Inscribe an equilateral triangle $PQR$ in the circle and let $a, b, c$ be the midpoints of $QR, RP, PQ$; they are at distance $r/2$ from $O$.\n\n*Every point $X$ of the circle is within $\\frac{\\sqrt3}{2}r$ of one of $a, b, c$.* The arcs $QR$, $RP$, $PQ$ (each $120^\\circ$) cover the circle. If $X$ is on arc $QR$, the angle $\\varphi$ between $OX$ and $Oa$ is at most $60^\\circ$, so\n$$|Xa|^2 = r^2 + \\tfrac{r^2}{4} - 2\\cdot r\\cdot\\tfrac r2\\cos\\varphi \\le \\tfrac54 r^2 - \\tfrac12 r^2 = \\tfrac34 r^2.$$\n\nNow let $S$ consist of $a, b, c$ together with $n - 3$ further points within distance $r/10$ of $O$. Each such extra point is at distance at least $r - \\frac{r}{10} = 0.9r$ from every point of the circle, while some point among $a, b, c$ is within $\\frac{\\sqrt3}2 r \\approx 0.866r < 0.9r$. So no extra point is the nearest point of $S$ to any point of the circle, and only $a, b, c$ can be chosen. Thus four such points cannot be guaranteed, for any $n$ (for $n = 3$ there are only three points anyway). ∎"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "logic"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "cmo-cmo-2005-04",
+    "bank": "cmo",
+    "source": {
+      "contest": "CMO",
+      "paper": "CMO 2005",
+      "year": 2005,
+      "number": 4,
+      "url": "https://cms.math.ca/competitions/cmo/"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Let $ABC$ be a triangle with circumradius $R$, perimeter $P$ and area $K$. Determine the maximum value of $KP/R^3$.",
+    "image": null,
+    "choices": null,
+    "answer": "27/4",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "answerDisplay": "$\\frac{27}{4}$",
+    "solutions": [
+      {
+        "title": "Law of sines, AM-GM and Jensen",
+        "body": "By the extended law of sines the sides are $2R\\sin A$, $2R\\sin B$, $2R\\sin C$. Hence\n$$P = 2R(\\sin A + \\sin B + \\sin C), \\qquad K = \\tfrac12 (2R\\sin A)(2R\\sin B)\\sin C = 2R^2\\sin A\\sin B\\sin C,$$\n$$\\frac{KP}{R^3} = 4\\sin A\\sin B\\sin C\\,(\\sin A + \\sin B + \\sin C).$$\nPut $s = \\sin A + \\sin B + \\sin C$; all three sines are positive. By AM-GM, $\\sin A\\sin B\\sin C \\le (s/3)^3$, so\n$$\\frac{KP}{R^3} \\le \\frac{4}{27}s^4.$$\nThe sine function is concave on $[0, \\pi]$, so by Jensen's inequality\n$$\\frac{s}{3} \\le \\sin\\frac{A + B + C}{3} = \\sin 60^\\circ = \\frac{\\sqrt3}{2}.$$\nTherefore\n$$\\frac{KP}{R^3} \\le \\frac{4}{27}\\left(\\frac{3\\sqrt3}{2}\\right)^4 = \\frac4{27}\\cdot\\frac{729}{16} = \\frac{27}{4}.$$\nEquality holds in both steps for $A = B = C = 60^\\circ$, so the maximum is attained by the equilateral triangle.\n\nCheck with side $a$: $P = 3a$, $K = \\frac{\\sqrt3}{4}a^2$, $R = \\frac{a}{\\sqrt3}$, so $\\frac{KP}{R^3} = \\frac{\\frac{3\\sqrt3}{4}a^3}{a^3/(3\\sqrt3)} = \\frac{27}{4}$.\n\n**Answer: $\\frac{27}{4}$**"
+      },
+      {
+        "title": "Smoothing to an isosceles triangle",
+        "body": "The expression $\\frac{KP}{R^3} = 4\\sin A\\sin B\\sin C(\\sin A + \\sin B + \\sin C)$ (derived as in the first solution) can be rewritten with the product-to-sum formulas:\n$$\\sin B\\sin C = \\frac{\\cos(B - C) - \\cos(B + C)}{2}, \\qquad \\sin B + \\sin C = 2\\sin\\frac{B+C}{2}\\cos\\frac{B-C}{2}.$$\nFix $A$; then $B + C = 180^\\circ - A$ is fixed, and both expressions are largest when $\\cos(B-C) = \\cos\\frac{B-C}{2} = 1$, i.e. $B = C$ (all factors are positive). So replacing $B, C$ by their average never decreases the value. Hence for a maximum we may assume $B = C = 90^\\circ - \\frac A2$, and the expression becomes a function of one variable,\n$$g(A) = 4\\sin A\\cos^2\\tfrac A2\\left(\\sin A + 2\\cos\\tfrac A2\\right).$$\nWith $t = \\frac A2 \\in (0^\\circ, 90^\\circ)$ and $\\sin A = 2\\sin t\\cos t$, this is $g = 16\\sin t\\cos^4 t\\,(1 + \\sin t)$. Put $u = \\sin t \\in (0, 1)$: $\\cos^4 t = (1-u^2)^2$, so\n$$g = 16\\,u(1-u)^2(1+u)^3.$$\nThe logarithmic derivative of $h(u) = u(1-u)^2(1+u)^3$ is\n$$\\frac1u - \\frac{2}{1-u} + \\frac{3}{1+u} = \\frac{(1 - u^2) - 2u(1+u) + 3u(1-u)}{u(1-u)(1+u)} = \\frac{1 + u - 6u^2}{u(1-u^2)} = \\frac{(1 - 2u)(1 + 3u)}{u(1-u^2)},$$\nwhich is positive for $u < \\frac12$ and negative for $u > \\frac12$. So $h$ is largest at $u = \\frac12$, i.e. $t = 30^\\circ$, $A = 60^\\circ$ (equilateral), where $g = 16\\cdot\\frac12\\cdot\\frac14\\cdot\\frac{27}{8} = \\frac{27}{4}$.\n\n**Answer: $\\frac{27}{4}$**"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "trigonometry",
+      "inequalities"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "cmo-cmo-2005-05",
+    "bank": "cmo",
+    "source": {
+      "contest": "CMO",
+      "paper": "CMO 2005",
+      "year": 2005,
+      "number": 5,
+      "url": "https://cms.math.ca/competitions/cmo/"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let's say that an ordered triple of positive integers $(a, b, c)$ is *$n$-powerful* if $a \\le b \\le c$, $\\gcd(a, b, c) = 1$, and $a^n + b^n + c^n$ is divisible by $a + b + c$. For example, $(1, 2, 2)$ is $5$-powerful.\n\na) Determine all ordered triples (if any) which are $n$-powerful for all $n \\ge 1$.\n\nb) Determine all ordered triples (if any) which are $2004$-powerful and $2005$-powerful, but not $2007$-powerful.\n\n[Note that $\\gcd(a, b, c)$ is the greatest common divisor of $a$, $b$ and $c$.]",
+    "image": null,
+    "choices": null,
+    "answer": "(a) Only $(1,1,1)$ and $(1,1,4)$. (b) None: $T_n = a^n + b^n + c^n$ satisfies $T_n = (a+b+c)T_{n-1} - (ab+bc+ca)T_{n-2} + abc\\,T_{n-3}$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Newton-type recurrence",
+        "body": "Let $s = a + b + c$, $e = ab + bc + ca$, $p = abc$ and $T_n = a^n + b^n + c^n$. Since $a, b, c$ are the roots of $x^3 - sx^2 + ex - p$, we have $a^3 = sa^2 - ea + p$; multiplying by $a^{n-3}$ and adding the analogous identities for $b, c$:\n$$T_n = s\\,T_{n-1} - e\\,T_{n-2} + p\\,T_{n-3} \\qquad (n \\ge 3).$$\nHence **if $s \\mid T_{n-2}$ and $s \\mid T_{n-3}$, then $s \\mid T_n$.**\n\n**(b)** If a triple is $2004$- and $2005$-powerful, then $s \\mid T_{2004}$ and $s \\mid T_{2005}$, so $s \\mid T_{2007}$ by the recurrence with $n = 2007$: it is $2007$-powerful. So **there are no such triples.**\n\n**(a)** Every triple is $1$-powerful. By the recurrence, a triple that is $2$- and $3$-powerful is $n$-powerful for all $n$ (induction: $T_1, T_2, T_3$ divisible by $s$ gives $T_4$ via $T_2, T_1$, $T_5$ via $T_3, T_2$, and so on). Now\n$$T_2 = s^2 - 2e, \\qquad T_3 = sT_2 - eT_1 + 3p = s(T_2 - e) + 3p,$$\nso $(a, b, c)$ is $2$-powerful iff $s \\mid 2e$, and $3$-powerful iff $s \\mid 3p$.\n\nSuppose both hold.\n- *A prime $q \\ge 5$ cannot divide $s$.* Otherwise $q \\mid 3abc$, so $q$ divides one of $a, b, c$, say $a$. If $q$ divided a second one, it would divide the third too (as $q \\mid s$), contradicting $\\gcd(a, b, c) = 1$. So $q \\mid a$, $q \\nmid bc$, and $2e = 2a(b+c) + 2bc \\equiv 2bc \\not\\equiv 0 \\pmod q$, contradicting $s \\mid 2e$.\n- *$9 \\nmid s$.* Otherwise $9 \\mid 3abc$, so $3 \\mid abc$, and as above $3$ divides exactly one of them, say $a$; then $2e \\equiv 2bc \\not\\equiv 0 \\pmod 3$, a contradiction.\n- *$4 \\nmid s$.* Otherwise $4 \\mid 3abc$, so $4 \\mid abc$. At most one of $a, b, c$ is even (if two were, the third would be too as $s$ is even, contradicting $\\gcd = 1$), so one of them, say $a$, is divisible by $4$ and $b, c$ are odd. Then $e = a(b + c) + bc$ is odd, and $4 \\nmid 2e$, a contradiction.\n\nSo $s$ divides $2\\cdot 3 = 6$, and $s \\ge 3$, hence $s = 3$ or $s = 6$. The triples with $a \\le b \\le c$ are $(1,1,1)$ for $s = 3$, and $(1,1,4)$, $(1,2,3)$, $(2,2,2)$ for $s = 6$. $(2,2,2)$ fails $\\gcd = 1$; $(1,2,3)$ has $2e = 22$, not divisible by $6$. $(1,1,1)$ works trivially ($T_n = 3$), and $(1,1,4)$ has $2e = 18$ and $3p = 12$, both divisible by $6$, so it is $n$-powerful for all $n$ (indeed $T_n = 2 + 4^n \\equiv 0 \\pmod 6$).\n\n**Answer:** (a) $(1,1,1)$ and $(1,1,4)$; (b) none. ∎"
+      },
+      {
+        "title": "Fermat's little theorem for part (a)",
+        "body": "Suppose $(a, b, c)$ is $n$-powerful for all $n$, and let $s = a + b + c$.\n\n*Only the primes $2$ and $3$ can divide $s$.* Let $q$ be a prime dividing $s$. By Fermat, $x^{q-1} \\equiv 1 \\pmod q$ if $q \\nmid x$ and $\\equiv 0$ if $q \\mid x$. Since $\\gcd(a,b,c) = 1$, not all three are divisible by $q$, so $a^{q-1} + b^{q-1} + c^{q-1} \\equiv 1, 2$ or $3 \\pmod q$. But $q \\mid s \\mid T_{q-1}$, so $q \\mid 1, 2$ or $3$, i.e. $q \\in \\{2, 3\\}$.\n\n*$4 \\nmid s$.* Squares are $0$ or $1 \\bmod 4$ (depending on parity), and $a, b, c$ are not all even, so $T_2 \\equiv 1, 2$ or $3 \\pmod 4$. Since $s \\mid T_2$, $4 \\nmid s$.\n\n*$9 \\nmid s$.* Cubes are $0, \\pm1 \\pmod 9$, so sixth powers are $0 \\pmod 9$ if $3 \\mid x$ and $1 \\pmod 9$ otherwise. As $a, b, c$ are not all divisible by $3$, $T_6 \\equiv 1, 2$ or $3 \\pmod 9$, so $9 \\nmid s$.\n\nHence $s \\mid 6$, $s \\in \\{3, 6\\}$, and checking the candidates as in the first solution leaves $(1,1,1)$ and $(1,1,4)$; both work since $T_n = 3$ and $T_n = 2 + 4^n$, which is even and $\\equiv 2 + 1 \\equiv 0 \\pmod 3$.\n\nPart (b) is settled by the recurrence of the first solution: no such triples. ∎"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "polynomials"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

@@ -1,0 +1,179 @@
+[
+  {
+    "id": "cmo-cmo-1991-01",
+    "bank": "cmo",
+    "source": {
+      "contest": "CMO",
+      "paper": "CMO 1991",
+      "year": 1991,
+      "number": 1,
+      "url": "https://cms.math.ca/competitions/cmo/"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Show that the equation $x^2 + y^5 = z^3$ has infinitely many solutions in integers $x$, $y$, $z$ for which $xyz \\ne 0$.",
+    "image": null,
+    "choices": null,
+    "answer": "From one solution, e.g. $3^2 + (-1)^5 = 2^3$ or $2^{20} + 2^{20} = 2^{21}$, get infinitely many by scaling $(x, y, z) \\mapsto (k^{15}x, k^6y, k^{10}z)$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Scale a small solution",
+        "body": "Note that $3^2 + (-1)^5 = 9 - 1 = 8 = 2^3$, so $(x, y, z) = (3, -1, 2)$ is a solution.\n\nIf $(x, y, z)$ is any solution and $k$ is a positive integer, then $(k^{15}x,\\ k^{6}y,\\ k^{10}z)$ is also a solution, because $2\\cdot 15 = 5\\cdot 6 = 3\\cdot 10 = 30$:\n$$(k^{15}x)^2 + (k^6y)^5 = k^{30}(x^2 + y^5) = k^{30}z^3 = (k^{10}z)^3.$$\nApplying this to $(3, -1, 2)$ gives the solutions $(3k^{15}, -k^6, 2k^{10})$, $k = 1, 2, 3, \\ldots$; they are pairwise different (e.g. their $z$-values $2k^{10}$ differ) and none has a zero coordinate. ∎"
+      },
+      {
+        "title": "Powers of two",
+        "body": "Look for $x = 2^a$, $y = 2^b$, $z = 2^c$ with $2^{2a} + 2^{5b} = 2^{3c}$. This holds if $2a = 5b$ and $2a + 1 = 3c$ (since $2^{2a} + 2^{2a} = 2^{2a+1}$). Take $a = 15s + 10$, $b = 6s + 4$, $c = 10s + 7$ for $s = 0, 1, 2, \\ldots$: then $2a = 30s + 20 = 5b$ and $2a + 1 = 30s + 21 = 3c$. For example $s = 0$ gives $2^{20} + (2^4)^5 = 2^{21} = (2^7)^3$. These are infinitely many solutions with $xyz \\ne 0$. ∎"
+      }
+    ],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "cmo-cmo-1991-02",
+    "bank": "cmo",
+    "source": {
+      "contest": "CMO",
+      "paper": "CMO 1991",
+      "year": 1991,
+      "number": 2,
+      "url": "https://cms.math.ca/competitions/cmo/"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $n$ be a fixed positive integer. Find the sum of all positive integers with the following property: In base $2$, it has exactly $2n$ digits consisting of $n$ $1$'s and $n$ $0$'s. (The first digit cannot be $0$.)",
+    "image": null,
+    "choices": null,
+    "answer": "$2^{2n-1}\\binom{2n-1}{n-1} + \\left(2^{2n-1} - 1\\right)\\binom{2n-2}{n-2}$ (for $n = 1$ the second term is $0$ and the sum is $2$).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Count how often each binary digit is 1",
+        "body": "Number the binary places $0, 1, \\ldots, 2n-1$ (place $j$ has value $2^j$). The numbers in question have a $1$ in place $2n - 1$, and exactly $n - 1$ further $1$'s among the $2n - 1$ places $0, \\ldots, 2n-2$.\n\n- The number of such integers is $\\binom{2n-1}{n-1}$, and each contributes $2^{2n-1}$ from its leading digit.\n- Fix a place $j \\le 2n - 2$. The integers having a $1$ in place $j$ are obtained by choosing the other $n - 2$ ones among the remaining $2n - 2$ low places: $\\binom{2n-2}{n-2}$ integers (this is $0$ when $n = 1$).\n\nAdding the contributions place by place,\n$$S = 2^{2n-1}\\binom{2n-1}{n-1} + \\binom{2n-2}{n-2}\\sum_{j=0}^{2n-2} 2^j = 2^{2n-1}\\binom{2n-1}{n-1} + \\left(2^{2n-1} - 1\\right)\\binom{2n-2}{n-2}.$$\n\nChecks: $n = 1$: only $10_2 = 2$, and the formula gives $2\\cdot 1 + 1\\cdot 0 = 2$. $n = 2$: $1001_2 + 1010_2 + 1100_2 = 9 + 10 + 12 = 31$, and the formula gives $8\\cdot 3 + 7 \\cdot 1 = 31$. (A computer check for $n \\le 6$ also agrees.)\n\n**Answer: $S = 2^{2n-1}\\binom{2n-1}{n-1} + (2^{2n-1} - 1)\\binom{2n-2}{n-2}$.** ∎"
+      }
+    ],
+    "topics": [
+      "counting",
+      "number-theory"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "cmo-cmo-1991-03",
+    "bank": "cmo",
+    "source": {
+      "contest": "CMO",
+      "paper": "CMO 1991",
+      "year": 1991,
+      "number": 3,
+      "url": "https://cms.math.ca/competitions/cmo/"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $C$ be a circle and $P$ a given point in the plane. Each line through $P$ which intersects $C$ determines a chord of $C$. Show that the midpoints of these chords lie on a circle.",
+    "image": null,
+    "choices": null,
+    "answer": "If $O$ is the centre, the midpoint $M$ of a chord satisfies $OM \\perp PM$, so $M$ lies on the circle with diameter $OP$ (degenerating to the point $O$ if $P = O$).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Right angle at the midpoint",
+        "body": "Let $O$ be the centre of $C$ and let $M$ be the midpoint of the chord cut out by a line $\\ell$ through $P$.\n\nIf $\\ell$ passes through $O$, the chord is a diameter and $M = O$. Otherwise $OM \\perp \\ell$ (the segment from the centre to the midpoint of a chord is perpendicular to it; for a tangent line through $P$ the \"chord\" degenerates to the point of tangency $T$, and again $OT \\perp \\ell$). Since $P$ lies on $\\ell$, either $M = P$ or $\\angle OMP = 90^\\circ$.\n\nAssume $P \\ne O$ and let $\\Gamma$ be the circle with diameter $OP$. By the converse of Thales' theorem every point $M$ with $\\angle OMP = 90^\\circ$ lies on $\\Gamma$, and the endpoints $O$ and $P$ of the diameter lie on $\\Gamma$ too. Hence every midpoint lies on $\\Gamma$.\n\n(If $P = O$, every line through $P$ gives a diameter, all midpoints coincide with $O$, and the \"circle\" degenerates to a single point, a circle of radius $0$. If $P$ is outside $C$, only an arc of $\\Gamma$ inside $C$ is actually covered, but all midpoints still lie on $\\Gamma$.) ∎"
+      },
+      {
+        "title": "Vectors",
+        "body": "Place $O$ at the origin and write $\\mathbf p$ for the position vector of $P$ and $\\mathbf m$ for that of the midpoint $M$. As above, either $M = O$, $M = P$, or $OM \\perp PM$; in all cases $\\mathbf m \\cdot (\\mathbf m - \\mathbf p) = 0$. Completing the square,\n$$\\left|\\mathbf m - \\tfrac12\\mathbf p\\right|^2 = \\mathbf m\\cdot\\mathbf m - \\mathbf m\\cdot\\mathbf p + \\tfrac14|\\mathbf p|^2 = \\tfrac14|\\mathbf p|^2,$$\nso $M$ lies on the circle with centre $\\frac12\\mathbf p$ (the midpoint of $OP$) and radius $\\frac12|OP|$. ∎"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "cmo-cmo-1991-04",
+    "bank": "cmo",
+    "source": {
+      "contest": "CMO",
+      "paper": "CMO 1991",
+      "year": 1991,
+      "number": 4,
+      "url": "https://cms.math.ca/competitions/cmo/"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Ten distinct numbers from the set $\\{0, 1, 2, \\ldots, 13, 14\\}$ are to be chosen to fill in the ten circles in the diagram. The absolute values of the differences of the two numbers joined by each segment must be different from the values for all other segments. Is it possible to do this? Justify your answer.",
+    "image": "qimages/cmo/cmo-1991/q04.webp",
+    "choices": null,
+    "answer": "No. The $14$ segments would need the differences $1, 2, \\ldots, 14$, whose sum $105$ is odd; but every circle lies on an even number of segments, so the sum of the differences is even.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Parity",
+        "body": "**Count the segments.** Each half of the diagram has a top circle and a bottom circle, each joined to the three middle circles ($6$ segments), and the two top circles and the two bottom circles are joined ($2$ segments). That is $2 \\cdot 6 + 2 = 14$ segments. Each top and bottom circle lies on $3 + 1 = 4$ segments, each middle circle on $2$.\n\n**The differences would be $1, \\ldots, 14$.** The numbers are distinct elements of $\\{0, \\ldots, 14\\}$, so each difference lies in $\\{1, \\ldots, 14\\}$. Fourteen different values from this set must be exactly $1, 2, \\ldots, 14$, whose sum is $\\frac{14\\cdot 15}{2} = 105$, an odd number.\n\n**But the sum is even.** Since $|a - b| \\equiv a + b \\pmod 2$,\n$$\\sum_{\\text{segments } ab} |a - b| \\equiv \\sum_{\\text{segments } ab} (a + b) = \\sum_{\\text{circles } v} \\deg(v)\\cdot x_v \\pmod 2,$$\nwhere $x_v$ is the number in circle $v$ and $\\deg(v)$ the number of segments at $v$. All degrees are $4$ or $2$, so the right-hand side is even. Contradiction.\n\n**Answer: No, it is not possible.** ∎"
+      }
+    ],
+    "topics": [
+      "graph-theory",
+      "number-theory",
+      "logic"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "cmo-cmo-1991-05",
+    "bank": "cmo",
+    "source": {
+      "contest": "CMO",
+      "paper": "CMO 1991",
+      "year": 1991,
+      "number": 5,
+      "url": "https://cms.math.ca/competitions/cmo/"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "In the figure, the side length of the large equilateral triangle is $3$ and $f(3)$, the number of parallelograms bounded by sides in the grid, is $15$. For the general analogous situation, find a formula for $f(n)$, the number of parallelograms, for a triangle of side length $n$.",
+    "image": "qimages/cmo/cmo-1991/q05.webp",
+    "choices": null,
+    "answer": "$f(n) = 3\\dbinom{n+2}{4} = \\dfrac{(n+2)(n+1)n(n-1)}{8}$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "A bijection with 4-element subsets",
+        "body": "**Coordinates.** Put the triangle with vertices $0$, $n\\mathbf e_1$, $n\\mathbf e_2$, where $\\mathbf e_1, \\mathbf e_2$ are unit vectors at $60^\\circ$. A point $i\\mathbf e_1 + j\\mathbf e_2$ lies in the triangle iff $i, j \\ge 0$ and $i + j \\le n$. The grid lines are the lines $i = c$, $j = c$, $i + j = c$ for integers $c$. A parallelogram bounded by grid segments has its two pairs of sides on two of these three families, so there are three kinds; the rotation of the triangle by $120^\\circ$ maps the grid to itself and permutes the three kinds cyclically, so each kind occurs equally often.\n\n**One kind.** The parallelograms with sides on lines $i = $ const and $j = $ const are\n$$\\{\\, a_1 \\le i \\le a_2,\\ b_1 \\le j \\le b_2 \\,\\}, \\qquad 0 \\le a_1 < a_2,\\quad 0 \\le b_1 < b_2,\\quad a_2 + b_2 \\le n$$\n(the last condition says the vertex farthest from $0$, which is $a_2\\mathbf e_1 + b_2\\mathbf e_2$, is inside the triangle; then the whole parallelogram is). Map such a quadruple to\n$$a_1 < a_2 < a_2 + b_1 + 1 < a_2 + b_2 + 1,$$\nfour distinct elements of $\\{0, 1, \\ldots, n+1\\}$. Conversely any $c_1 < c_2 < c_3 < c_4$ in $\\{0, \\ldots, n+1\\}$ comes from exactly one admissible quadruple, namely $a_1 = c_1$, $a_2 = c_2$, $b_1 = c_3 - c_2 - 1$, $b_2 = c_4 - c_2 - 1$ (these satisfy $b_1 \\ge 0$, $b_1 < b_2$ and $a_2 + b_2 = c_4 - 1 \\le n$). So there are $\\binom{n+2}{4}$ parallelograms of this kind.\n\n**Total.**\n$$f(n) = 3\\binom{n+2}{4} = \\frac{(n+2)(n+1)n(n-1)}{8}.$$\nCheck: $f(3) = 3\\binom54 = 15$ as stated, and $f(2) = 3$ (the three rhombi made of two small triangles). A computer count of the quadruples for $n \\le 6$ agrees.\n\n**Answer: $f(n) = 3\\binom{n+2}{4}$.** ∎"
+      }
+    ],
+    "topics": [
+      "counting",
+      "geometry"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

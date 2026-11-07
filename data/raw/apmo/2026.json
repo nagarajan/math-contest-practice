@@ -1,0 +1,170 @@
+[
+  {
+    "id": "apmo-2026-01",
+    "bank": "apmo",
+    "source": {
+      "contest": "APMO",
+      "paper": "APMO",
+      "year": 2026,
+      "number": 1,
+      "url": "https://www.apmo-official.org/static/problems/apmo2026_prb.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Find all quadruples of positive integers $(a, p, m, o)$ with $o \\ge 2$ such that\n$$a! + p! = m^o + 26.$$",
+    "image": null,
+    "choices": null,
+    "answer": "$(a,p,m,o)=(4,3,2,2),\\ (3,4,2,2),\\ (5,3,10,2),\\ (3,5,10,2)$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Assume $a\\ge p$ and work modulo small prime powers",
+        "body": "By symmetry assume $a\\ge p$. Recall that a perfect power $m^o$ with $o\\ge2$ is never $\\equiv2\\pmod4$ (if $m$ is even it is $\\equiv0$, if $m$ is odd it is odd).\n\n**$p\\ge4$ is impossible.** Then $4\\mid a!$ and $4\\mid p!$, so $m^o=a!+p!-26\\equiv-26\\equiv2\\pmod 4$, a contradiction.\n\n**Case $p=1$:** $a!=m^o+25\\ge26$, so $a\\ge5$. Then $a!$ is even and divisible by $5$, so $m^o=a!-25$ is odd and divisible by $5$: $m$ is odd and $5\\mid m$. If $o$ were even, $m^o$ would be an odd square, $\\equiv1\\pmod4$, giving $a!\\equiv26\\equiv2\\pmod 4$, impossible. So $o\\ge3$ and $125\\mid m^o$, hence $a!\\equiv25\\pmod{125}$. Then $v_5(a!)=2$ exactly, which means $10\\le a\\le14$. Write $a!=25u$ with $5\\nmid u$; we need $125\\mid 25(u-1)$, i.e. $u\\equiv1\\pmod5$. Modulo $5$: $10!/25=145152\\equiv2$, and multiplying successively by $11,12,13,14\\equiv1,2,3,4$ gives $u\\equiv2,4,2,3$ for $a=11,12,13,14$. None is $\\equiv1$, so there is no solution.\n\n**Case $p=2$:** $a!=m^o+24\\ge25$, so $a\\ge5$. If $a=5$, $m^o=96=2^5\\cdot3$, which is not a perfect power with exponent $\\ge2$ (the prime $3$ appears only once). If $a\\ge6$, then $9\\mid a!$, so $m^o\\equiv-24\\equiv3\\pmod 9$. Hence $3\\mid m$, but then $9\\mid m^o$, a contradiction.\n\n**Case $p=3$:** $a!=m^o+20\\ge21$, so $a\\ge4$.\n- $a=4$: $m^o=4=2^2$, so $(m,o)=(2,2)$.\n- $a=5$: $m^o=100=2^2\\cdot5^2$, so $o\\mid2$ and $(m,o)=(10,2)$.\n- $a\\ge6$: $16\\mid a!$, so $m^o\\equiv-20\\equiv12\\pmod{16}$. Thus $v_2(m^o)=o\\,v_2(m)=2$, forcing $o=2$ and $m=2k$ with $k$ odd. Then $m^2=4k^2\\equiv4\\pmod{32}$ (since $k^2\\equiv1\\pmod8$), so $m^2\\equiv4\\not\\equiv12\\pmod{16}$, a contradiction.\n\n**Check:** $4!+3!=30=2^2+26$ and $5!+3!=126=10^2+26$. Adding the symmetric solutions:\n\n**Answer:** $(a,p,m,o)\\in\\{(4,3,2,2),\\,(3,4,2,2),\\,(5,3,10,2),\\,(3,5,10,2)\\}$. ∎"
+      }
+    ],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "apmo-2026-02",
+    "bank": "apmo",
+    "source": {
+      "contest": "APMO",
+      "paper": "APMO",
+      "year": 2026,
+      "number": 2,
+      "url": "https://www.apmo-official.org/static/problems/apmo2026_prb.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $n \\ge 2$ be an integer. Let $A_1, A_2, \\dots, A_{2^n}$ be the $2^n$ subsets of an $n$-element set in some order. Prove that\n$$|A_1 \\cap A_2| + |A_2 \\cap A_3| + \\cdots + |A_{2^n-1} \\cap A_{2^n}| + |A_{2^n} \\cap A_1| \\ge 2^{n-2}.$$",
+    "image": null,
+    "choices": null,
+    "answer": "Proof: for each element $x$, the number of consecutive pairs both containing $x$ equals the number both missing $x$, so the sum equals $\\frac12\\sum_i\\bigl(|A_i\\cap A_{i+1}|+|\\overline{A_i\\cup A_{i+1}}|\\bigr)$; a term is $0$ only if $A_{i+1}=\\overline{A_i}$, and two consecutive terms cannot both be $0$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Count \"both in\" and \"both out\" for each element",
+        "body": "Let $X$ be the $n$-element set, take indices modulo $N=2^n$ (so $A_{N+1}=A_1$), and let $T=\\sum_{i=1}^{N}|A_i\\cap A_{i+1}|$ be the sum in question. Write $\\overline Y=X\\setminus Y$.\n\n**Step 1: \"both in\" equals \"both out\".** Fix $x\\in X$ and go once around the cycle $A_1,A_2,\\dots,A_N,A_1$. Let $n_{11},n_{10},n_{01},n_{00}$ be the numbers of indices $i$ for which ($x\\in A_i$?, $x\\in A_{i+1}$?) is (yes, yes), (yes, no), (no, yes), (no, no). Exactly half of all subsets contain $x$, so $2^{n-1}$ indices $i$ have $x\\in A_i$, and also $2^{n-1}$ indices have $x\\in A_{i+1}$:\n$$n_{11}+n_{10}=2^{n-1}=n_{11}+n_{01},\\qquad n_{00}+n_{01}=2^{n-1}.$$\nThe first gives $n_{10}=n_{01}$, and then $n_{00}=2^{n-1}-n_{01}=2^{n-1}-n_{10}=n_{11}$.\n\nSumming $n_{11}$ over all $x$ gives $T$, and summing $n_{00}$ gives $\\sum_i|\\overline{A_i}\\cap\\overline{A_{i+1}}|$. Therefore\n$$T=\\frac12\\sum_{i=1}^{N}t_i,\\qquad t_i=|A_i\\cap A_{i+1}|+|\\overline{A_i\\cup A_{i+1}}| .$$\n\n**Step 2: no two consecutive $t_i$ vanish.** $t_i=0$ means $A_i\\cap A_{i+1}=\\varnothing$ and $A_i\\cup A_{i+1}=X$, i.e. $A_{i+1}=\\overline{A_i}$. If $t_i=t_{i+1}=0$ then $A_{i+2}=\\overline{A_{i+1}}=A_i$; but $N\\ge4$, so $i+2\\not\\equiv i\\pmod N$, and the sets are distinct, a contradiction.\n\n**Step 3.** Since $N$ is even, group the terms into the $N/2$ pairs $(t_1,t_2),(t_3,t_4),\\dots,(t_{N-1},t_N)$. Each pair consists of non-negative integers that are not both $0$, so has sum $\\ge1$. Hence $\\sum t_i\\ge N/2=2^{n-1}$ and\n$$T\\ge\\frac{2^{n-1}}2=2^{n-2}.\\qquad ∎$$"
+      }
+    ],
+    "topics": [
+      "counting",
+      "inequalities"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "apmo-2026-03",
+    "bank": "apmo",
+    "source": {
+      "contest": "APMO",
+      "paper": "APMO",
+      "year": 2026,
+      "number": 3,
+      "url": "https://www.apmo-official.org/static/problems/apmo2026_prb.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $\\mathbb{R}_+$ denote the set of positive real numbers. Determine all the functions $f : \\mathbb{R}_+ \\to \\mathbb{R}$ such that for all $x, y, z \\in \\mathbb{R}_+$,\n$$|x - y| < |y - z| \\quad\\text{if and only if}\\quad |f(x) - f(y)| < |f(y) - f(z)|.$$",
+    "image": null,
+    "choices": null,
+    "answer": "$f(x)=ax+b$ with real constants $a\\ne0$ and $b$ ($f$ is injective and satisfies Jensen's midpoint equation, so it is linear on dyadic rationals; comparing distances then pins down every value).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Injectivity, midpoints, then dyadic density",
+        "body": "**These work.** If $f(x)=ax+b$ with $a\\ne0$, then $|f(u)-f(w)|=|a|\\,|u-w|$ for all $u,w$, so the two inequalities are equivalent.\n\n**No others.** Let $f$ satisfy the condition $(\\star)$.\n\n*Equal distances.* Exchanging $x$ and $z$ in $(\\star)$ gives: $|z-y|<|y-x|$ iff $|f(z)-f(y)|<|f(y)-f(x)|$. So if $|x-y|=|y-z|$, neither $f$-inequality is strict:\n$$|x-y|=|y-z|\\ \\Longrightarrow\\ |f(x)-f(y)|=|f(y)-f(z)|. \\tag{1}$$\n\n*Injectivity.* If $f(y)=f(z)$ with $y\\ne z$, take $x=y$: then $|x-y|=0<|y-z|$, so $(\\star)$ gives $0=|f(x)-f(y)|<|f(y)-f(z)|=0$, impossible.\n\n*Midpoints.* Let $x\\ne z$ and $y=\\frac{x+z}2$. By (1), $f(y)-f(x)=\\pm\\bigl(f(z)-f(y)\\bigr)$. The minus sign would give $f(x)=f(z)$, contradicting injectivity. Hence\n$$f\\Big(\\frac{x+z}2\\Big)=\\frac{f(x)+f(z)}2\\qquad\\text{for all }x,z>0. \\tag{2}$$\n\n*Normalise.* If $f$ satisfies $(\\star)$, so does $af+b$ for constants $a\\ne0$, $b$. Since $f(1)\\ne f(2)$, the function $g(x)=1+\\dfrac{f(x)-f(1)}{f(2)-f(1)}$ satisfies $(\\star)$ and (2), with $g(1)=1$, $g(2)=2$. We show $g(x)=x$ for all $x$; then $f$ is of the form $ax+b$.\n\n*Dyadic rationals.* By (2) with $x=k-1$, $z=k+1$: $g(k+1)=2g(k)-g(k-1)$ for $k\\ge2$, so by induction $g(k)=k$ for all positive integers $k$. Suppose $g(m/2^j)=m/2^j$ for all positive integers $m$ (true for $j=0$). For $j+1$: if $m$ is even this is the hypothesis; if $m\\ge3$ is odd, $\\frac m{2^{j+1}}$ is the midpoint of $\\frac{m-1}{2^{j+1}}$ and $\\frac{m+1}{2^{j+1}}$ (even numerators, positive), so (2) gives $g(\\frac m{2^{j+1}})=\\frac m{2^{j+1}}$; finally $\\frac2{2^{j+1}}$ is the midpoint of $\\frac1{2^{j+1}}$ and $\\frac3{2^{j+1}}$, so $g(\\frac1{2^{j+1}})=2\\cdot\\frac1{2^j}-\\frac3{2^{j+1}}=\\frac1{2^{j+1}}$. Thus $g(q)=q$ for every positive dyadic rational $q$.\n\n*All reals.* Fix $x>0$ and a positive dyadic $y$. For every positive dyadic $d$, put $z=y+d$ (also a positive dyadic). Then $g(y)=y$, $g(z)=z$, and $(\\star)$ says\n$$|x-y|<d\\iff|g(x)-y|<d .$$\nIf $|x-y|<|g(x)-y|$, a dyadic $d$ strictly between them violates this; similarly in the other case. Hence $|g(x)-y|=|x-y|$, i.e. $g(x)\\in\\{x,\\,2y-x\\}$, for **every** positive dyadic $y$. If $g(x)\\ne x$, then $g(x)=2y-x$ for two different dyadics $y$, which is impossible. So $g(x)=x$.\n\n**Answer:** $f(x)=ax+b$ for real constants $a\\ne0$ and $b$. ∎"
+      }
+    ],
+    "topics": [
+      "functional-equations"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "apmo-2026-04",
+    "bank": "apmo",
+    "source": {
+      "contest": "APMO",
+      "paper": "APMO",
+      "year": 2026,
+      "number": 4,
+      "url": "https://www.apmo-official.org/static/problems/apmo2026_prb.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $ABCD$ be a quadrilateral with an incircle $\\omega$ of centre $I$. The diagonals $AC$ and $BD$ intersect at $E$. Let $J$ be the incentre of triangle $ABD$. The extension of the ray $EJ$ intersects $\\omega$ at $P$. Prove that $PI \\perp BD$.",
+    "image": null,
+    "choices": null,
+    "answer": "Proof: the incircles of $ABD$ and $CBD$ touch $BD$ at the same point $S$; homotheties at $A$ and $C$ and the angles at $B$ give, in coordinates with origin $S$ and $BD$ as $x$-axis, that the endpoint of the diameter of $\\omega$ perpendicular to $BD$ on $A$'s side is $E+\\mu(J-E)$ with $\\mu=\\frac{2r}{r_1+r_2}>1$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Common tangency point, two homotheties, and coordinates",
+        "body": "Let $r$ be the radius of $\\omega$, let $r_1$ and $J$ be the inradius and incentre of triangle $ABD$, and $r_2$, $K$ those of triangle $CBD$. The quadrilateral is convex (it has an incircle), so $A$ and $C$ lie on opposite sides of $BD$ and $E$ lies on both diagonals.\n\n**Step 1: both incircles touch $BD$ at the same point $S$.** By tangent lengths, the incircle of $ABD$ touches $BD$ at the point $S$ with $BS=\\frac{AB+BD-AD}2$, and the incircle of $CBD$ touches it at $S'$ with $BS'=\\frac{CB+BD-CD}2$. Since $ABCD$ has an incircle, $AB+CD=BC+DA$, i.e. $AB-AD=CB-CD$, so $S=S'$.\n\n**Coordinates.** Take $S$ as origin and $BD$ as the $x$-axis, with $A$ in the upper half-plane. Then $J=(0,r_1)$ and $K=(0,-r_2)$. Let $I=(u,v)$, and let\n$$P'=(u,\\,v+r),\\qquad Q=(u,\\,v-r)$$\nbe the endpoints of the diameter of $\\omega$ perpendicular to $BD$ (the top and bottom points of $\\omega$). We will show that $P'$ lies on ray $EJ$ beyond $J$; since $P'I\\perp BD$, this is the required statement.\n\n**Step 2: $r>r_1$ and $r>r_2$, and the positions of $A$, $C$.** The circle $\\omega$ and the incircle of $ABD$ are both tangent to the two sides of angle $BAD$ (inside it), so the homothety $h$ with centre $A$ and ratio $k=r/r_1>0$ maps the incircle of $ABD$ onto $\\omega$. It preserves directions, so it maps the bottom point $S$ of the small circle to the bottom point $Q$ of $\\omega$: $Q-A=k(S-A)$, i.e. $Q=(1-k)A$. Now $\\omega$ touches side $BC$ at an interior point of that side, which lies strictly below $BD$; hence $Q$ is strictly below $BD$, and since $A$ is above, $1-k<0$, i.e. $r>r_1$. Thus\n$$A=-\\alpha Q,\\qquad \\alpha=\\frac{r_1}{r-r_1}>0 .$$\nIn the same way the homothety with centre $C$ and ratio $r/r_2$ maps the incircle of $CBD$ (top point $S$) onto $\\omega$ (top point $P'$), $r>r_2$, and\n$$C=-\\gamma P',\\qquad \\gamma=\\frac{r_2}{r-r_2}>0 .$$\n\n**Step 3: $(r+v):(r-v)=r_1:r_2$.** Let $\\angle ABD=2\\beta_1$ and $\\angle DBC=2\\beta_2$, and $t=BS>0$. Since $J$ is on the bisector of $\\angle ABD$ and $S$ is the foot of the perpendicular from $J$, $r_1=t\\tan\\beta_1$; similarly $r_2=t\\tan\\beta_2$ (same point $S$, by Step 1). The ray $BD$ lies inside angle $ABC=2\\beta_1+2\\beta_2$, and $I$ lies on its bisector at distance $\\rho=BI$ from $B$. Measuring angles from ray $BD$ towards $A$, ray $BA$ is at angle $2\\beta_1$, ray $BC$ at $-2\\beta_2$, so ray $BI$ is at angle $\\beta_1-\\beta_2$. Hence the signed height of $I$ and its distance to $BA$ are\n$$v=\\rho\\sin(\\beta_1-\\beta_2),\\qquad r=\\rho\\sin(\\beta_1+\\beta_2).$$\nTherefore $r+v=2\\rho\\sin\\beta_1\\cos\\beta_2$ and $r-v=2\\rho\\cos\\beta_1\\sin\\beta_2$, so\n$$\\frac{r+v}{r-v}=\\frac{\\tan\\beta_1}{\\tan\\beta_2}=\\frac{r_1}{r_2}.$$\nAs $(r+v)+(r-v)=2r$, this gives $r+v=\\mu r_1$ and $r-v=\\mu r_2$ with $\\mu=\\dfrac{2r}{r_1+r_2}>1$ (by Step 2). So\n$$P'=(u,\\mu r_1),\\quad Q=(u,-\\mu r_2),\\quad A=(-\\alpha u,\\ \\alpha\\mu r_2),\\quad C=(-\\gamma u,\\ -\\gamma\\mu r_1).$$\n\n**Step 4: compute $E$.** $A$ is above and $C$ below the $x$-axis, and the point of segment $AC$ on the $x$-axis is\n$$E=\\frac{y_A\\,C-y_C\\,A}{y_A-y_C},\\qquad x_E=\\frac{\\alpha\\mu r_2(-\\gamma u)-\\gamma\\mu r_1\\,\\alpha u}{\\alpha\\mu r_2+\\gamma\\mu r_1}=-\\frac{\\alpha\\gamma\\,(r_1+r_2)}{\\alpha r_2+\\gamma r_1}\\,u .$$\nNow $\\alpha r_2+\\gamma r_1=r_1r_2\\Big(\\dfrac1{r-r_1}+\\dfrac1{r-r_2}\\Big)=\\dfrac{r_1r_2\\,(2r-r_1-r_2)}{(r-r_1)(r-r_2)}$ and $\\alpha\\gamma=\\dfrac{r_1r_2}{(r-r_1)(r-r_2)}$, so\n$$x_E=-\\frac{(r_1+r_2)\\,u}{2r-r_1-r_2}=-\\frac{u}{\\mu-1},\\qquad E=\\Big(-\\frac{u}{\\mu-1},\\,0\\Big).$$\n\n**Step 5: conclusion.** The point $E+\\mu(J-E)$ has coordinates\n$$\\Big(x_E(1-\\mu),\\ \\mu r_1\\Big)=(u,\\ \\mu r_1)=P'.$$\nSince $\\mu>1$, $P'$ lies on ray $EJ$ beyond $J$. So the extension of ray $EJ$ meets $\\omega$ at $P=P'$, and $PI$ is the diameter of $\\omega$ perpendicular to $BD$. Hence $PI\\perp BD$. ∎"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "trigonometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "apmo-2026-05",
+    "bank": "apmo",
+    "source": {
+      "contest": "APMO",
+      "paper": "APMO",
+      "year": 2026,
+      "number": 5,
+      "url": "https://www.apmo-official.org/static/problems/apmo2026_prb.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $n$ be a positive integer. There exist $n(n+1)$ rooms arranged in an $(n+1) \\times n$ grid. For each two adjacent rooms, there is a door between them. Find the number of ways to choose a subset of doors and lock them such that there are two rooms $S$ and $G$ satisfying the following properties:\n\n1. $S$ is in the first row and $G$ is in the $(n+1)$-th row.\n2. One can reach $G$ from $S$ only through unlocked doors.",
+    "image": null,
+    "choices": null,
+    "answer": "$2^{2n^2-2}$ (the doors inside the first and last rows are irrelevant; for the other $2n^2-2n+1$ doors, planar duality shows that exactly half of the choices allow a crossing).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Doors inside the end rows are irrelevant; duality halves the rest",
+        "body": "Call a choice of locked doors *good* if some room of row $1$ is joined to some room of row $n+1$ through unlocked doors. Write room $(r,j)$ for row $r\\in\\{1,\\dots,n+1\\}$, column $j\\in\\{1,\\dots,n\\}$. There are $n\\cdot n$ doors between consecutive rows and $(n+1)(n-1)$ doors inside rows, $2n^2-1$ in total.\n\n**Step 1: doors inside row $1$ and row $n+1$ do not matter.** If a walk through unlocked doors goes from row $1$ to row $n+1$, take the part from its last visit to row $1$ before its first visit to row $n+1$, up to that first visit. This part uses no door inside row $1$ or row $n+1$. So goodness depends only on the other $M=n^2+(n-1)^2=2n^2-2n+1$ doors, the *relevant* ones, and the answer is $2^{2n-2}$ times the number of good configurations of the relevant doors. We show that exactly half of the $2^M$ configurations are good.\n\n**Step 2: the wall graph.** Draw the grid as the rectangle $[0,n]\\times[0,n+1]$, with room $(r,j)$ the unit square $[j-1,j]\\times[n+1-r,\\,n+2-r]$. Each door is the unit segment (wall) shared by its two rooms. The relevant walls are the horizontal segments on the lines $y=h$, $1\\le h\\le n$, and the vertical segments on the lines $x=1,\\dots,n-1$ between heights $1$ and $n$. Let $\\mathcal W$ be the graph whose vertices are the lattice points $(x,h)$ with $1\\le x\\le n-1$, $1\\le h\\le n$, together with a vertex $L$ (the left side $x=0$) and a vertex $R$ (the right side $x=n$). Its edges are the relevant walls, joining their endpoints, with an endpoint on $x=0$ read as $L$ and one on $x=n$ read as $R$. A wall is *closed* if its door is locked.\n\n**Key claim.** A configuration is good $\\iff$ there is **no** path from $L$ to $R$ in $\\mathcal W$ made of closed walls.\n\n*($\\Leftarrow$)* Suppose the configuration is not good. Let $U$ be the set of rooms reachable from row $1$ through unlocked relevant doors, together with all of row $1$; no room of row $n+1$ is in $U$. Let $\\mathcal B$ be the set of walls separating a room of $U$ from a room not in $U$. Every such door is locked (otherwise the outside room would be in $U$), so the walls in $\\mathcal B$ are closed. Also $\\mathcal B$ contains only relevant walls, because walls inside row $1$ or row $n+1$ separate two rooms on the same side. Consider the degrees in the graph $(\\mathcal W,\\mathcal B)$:\n- At an interior lattice point, the walls meeting there separate cyclically consecutive squares among the four squares around the point. Going once around, membership in $U$ changes an even number of times, so the degree is even.\n- The edges at $L$ are the walls between $(r,1)$ and $(r+1,1)$. Going down column $1$ from row $1$ (in $U$) to row $n+1$ (not in $U$), membership changes an odd number of times, so $\\deg L$ is odd. Likewise $\\deg R$ is odd.\n\nIn the connected component of $L$ the number of odd-degree vertices is even (handshake lemma), so $R$ is in this component. This gives a path of closed walls from $L$ to $R$.\n\n*($\\Rightarrow$)* Suppose there is a path from $L$ to $R$ of closed walls. Then there is also a simple one, $\\pi$. For a room $\\rho$ in column $j$, let $\\sigma(\\rho)$ be the parity of the number of horizontal walls of $\\pi$ in column $j$ lying below $\\rho$ (at heights $h\\le$ the bottom height of $\\rho$).\n- For vertically adjacent rooms, $\\sigma$ differs exactly when the wall between them belongs to $\\pi$.\n- For horizontally adjacent rooms $(r,j),(r,j+1)$ with $2\\le r\\le n$, let $h_0=n+1-r$ and add up the $\\pi$-degrees of the points $(j,1),\\dots,(j,h_0)$. Each is $0$ or $2$, because the ends of $\\pi$ are $L$ and $R$. The sum counts the horizontal $\\pi$-walls of columns $j$ and $j+1$ at heights $\\le h_0$, every vertical $\\pi$-wall between two of these points twice, and the wall from $(j,h_0)$ to $(j,h_0+1)$, which separates our two rooms, once. Hence $\\sigma(r,j)\\ne\\sigma(r,j+1)$ exactly when that wall is in $\\pi$. The same count with $h_0=n$ shows that all rooms of row $1$ have the same $\\sigma$, because $\\mathcal W$ has no vertical walls above height $n$.\n- Rooms of row $n+1$ have nothing below them: $\\sigma=0$. In column $1$ every horizontal wall ends at $L$, and the simple path $\\pi$ uses exactly one edge at $L$, so $\\sigma(1,1)=1$. Hence $\\sigma=1$ on all of row $1$.\n\nPassing through an unlocked door never changes $\\sigma$: the door's wall is not closed, so it is not in $\\pi$, and inside rows $1$ and $n+1$, $\\sigma$ is constant anyway. So no walk through unlocked doors leads from row $1$ ($\\sigma=1$) to row $n+1$ ($\\sigma=0$), and the configuration is not good.\n\n**Step 3: rotate.** Let $\\mathcal G$ be the graph of relevant doors: vertices are a vertex $A$ (row $1$), a vertex $B$ (row $n+1$) and the rooms of rows $2,\\dots,n$, and edges are the relevant doors. The map $(x,h)\\mapsto$ room $(x+1,h)$, $L\\mapsto A$, $R\\mapsto B$, is an isomorphism $\\varphi:\\mathcal W\\to\\mathcal G$. It sends the horizontal walls at height $h$ (a path $L,(1,h),\\dots,(n-1,h),R$) to the doors of column $h$ (the path $A,(2,h),\\dots,(n,h),B$), and the vertical wall $(x,h)$–$(x,h+1)$ to the door between $(x+1,h)$ and $(x+1,h+1)$. For a configuration $H$, define $H^*$ by declaring the door $\\varphi(w)$ **unlocked** in $H^*$ exactly when the wall $w$ is closed in $H$. This is a bijection on configurations (complement, then relabel). Moreover\n$$H^*\\text{ good}\\iff\\text{closed walls of }H\\text{ join }L\\text{ to }R\\iff H\\text{ not good},$$\nby the key claim. So $H\\mapsto H^*$ maps good configurations injectively into bad ones and bad ones injectively into good ones. Hence exactly half, $2^{M-1}=2^{2n^2-2n}$, of the configurations of relevant doors are good.\n\n**Answer:** $2^{2n^2-2n}\\cdot2^{2n-2}=2^{2n^2-2}$ (checked by brute force for $n=1,2,3$: $1,\\,64,\\,65536$). ∎"
+      }
+    ],
+    "topics": [
+      "counting",
+      "graph-theory"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

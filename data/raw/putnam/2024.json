@@ -1,0 +1,453 @@
+[
+ {
+  "id": "putnam-2024-a1",
+  "bank": "putnam",
+  "source": {
+   "contest": "Putnam",
+   "paper": "85th William Lowell Putnam Mathematical Competition (December 7, 2024)",
+   "year": 2024,
+   "number": "A1",
+   "url": "https://kskedlaya.org/putnam-archive/"
+  },
+  "grade": "undergrad",
+  "points": 10,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Determine all positive integers $n$ for which there exist positive integers $a$, $b$, and $c$ satisfying\n$$2a^n + 3b^n = 4c^n.$$",
+  "image": null,
+  "choices": null,
+  "answer": "1",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Small example, then descent mod 3 and mod 2",
+    "body": "**The answer is $n=1$ only.**\n\n**$n=1$ works:** $(a,b,c)=(1,2,2)$ gives $2+6=8=4\\cdot 2$.\n\nIn both remaining cases we use the same reduction: if $(a,b,c)$ is a solution then so is $(a/g,b/g,c/g)$ with $g=\\gcd(a,b,c)$ (the equation is homogeneous). So it suffices to show that every solution has $a,b,c$ sharing a common prime factor, which contradicts $\\gcd(a,b,c)=1$.\n\n**$n=2$.** Suppose $2a^2+3b^2=4c^2$ with $\\gcd(a,b,c)=1$. Reducing mod $3$: $2a^2\\equiv 4c^2\\equiv c^2$, i.e. $2a^2 - c^2 \\equiv 2a^2+2c^2 \\equiv 0$, so $a^2+c^2\\equiv 0 \\pmod 3$. Squares are $0$ or $1$ mod $3$, so $a^2\\equiv c^2\\equiv 0$, i.e. $3\\mid a$ and $3\\mid c$. Writing $a=3a'$, $c=3c'$ gives $18a'^2+3b^2=36c'^2$, i.e. $b^2 = 12c'^2-6a'^2$, which is divisible by $3$; hence $3\\mid b$. So $3$ divides $a,b,c$: contradiction.\n\n**$n\\ge 3$.** Suppose $2a^n+3b^n=4c^n$ with $\\gcd(a,b,c)=1$.\n- $3b^n = 4c^n-2a^n$ is even, so $b$ is even; write $b=2b'$. Dividing by $2$: $a^n + 3\\cdot 2^{n-1}b'^n = 2c^n$.\n- Since $n-1\\ge 1$, this shows $a^n$ is even, so $a=2a'$. Dividing by $2$ again: $2^{n-1}a'^n + 3\\cdot 2^{n-2}b'^n = c^n$.\n- Since $n\\ge 3$, both $n-1\\ge 1$ and $n-2\\ge 1$, so $c^n$ is even and $c$ is even.\n\nSo $2$ divides $a,b,c$: contradiction.\n\nHence the only such $n$ is $n=1$.\n\n**Answer: $n = 1$**"
+   }
+  ],
+  "topics": [
+   "number-theory"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "putnam-2024-a2",
+  "bank": "putnam",
+  "source": {
+   "contest": "Putnam",
+   "paper": "85th William Lowell Putnam Mathematical Competition (December 7, 2024)",
+   "year": 2024,
+   "number": "A2",
+   "url": "https://kskedlaya.org/putnam-archive/"
+  },
+  "grade": "undergrad",
+  "points": 10,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "For which real polynomials $p$ is there a real polynomial $q$ such that\n$$p(p(x)) - x = (p(x) - x)^2 q(x)$$\nfor all real $x$?",
+  "image": null,
+  "choices": null,
+  "answer": "Exactly $p(x)=x+c$ and $p(x)=-x+c$ ($c\\in\\mathbb R$ arbitrary). (With $r=p(x)-x$: $p(p(x)) = p(x+r)\\equiv p(x)+p'(x)r \\pmod{r^2}$, so $r^2\\mid r(1+p')$.)",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Expand $p(x+r)$ modulo $r^2$",
+    "body": "**Answer: $p(x) = x + c$ or $p(x) = -x + c$ for some real constant $c$.**\n\n**These work.** If $p(x)=x+c$: $p(p(x))-x = 2c$ and $(p(x)-x)^2 = c^2$; take $q=2/c$ if $c\\ne0$, and any $q$ (e.g. $q=0$) if $c=0$ (then both sides vanish). If $p(x) = -x+c$: $p(p(x)) = -(-x+c)+c = x$, so the left side is $0$ and $q=0$ works.\n\n**Nothing else works.** Let $r(x) = p(x)-x$ and suppose $r^2$ divides $p(p(x))-x$. If $r=0$ then $p(x)=x$, which is in our list; assume $r\\neq 0$.\n\nFor any polynomial $p$ and polynomials $x,h$, Taylor's formula for polynomials gives\n$$p(x+h) = p(x) + p'(x)h + h^2 s(x,h)$$\nfor a polynomial $s$. Taking $h = r(x)$ (so $x + h = p(x)$):\n$$p(p(x)) \\equiv p(x) + p'(x)\\,r(x) = x + r(x)\\bigl(1 + p'(x)\\bigr) \\pmod{r(x)^2}.$$\nSince $p(p(x)) \\equiv x \\pmod{r^2}$ by assumption, $r^2$ divides $r\\,(1+p')$, and cancelling $r\\ne0$: **$r$ divides $1+p'$.**\n\n- If $1+p' = 0$, then $p(x) = -x+c$.\n- If $\\deg p\\ge 2$, then $\\deg r = \\deg p > \\deg p - 1 = \\deg(1+p')$, so $r \\mid 1+p'$ forces $1+p'=0$, i.e. $p$ linear — a contradiction. \n- If $\\deg p \\le 1$, write $p(x)=\\alpha x+\\beta$. Then $1+p' = 1+\\alpha$ is a constant; if it is nonzero, $r = (\\alpha-1)x+\\beta$ divides a nonzero constant, so $r$ is constant: $\\alpha = 1$ and $p(x) = x+\\beta$.\n\nSo $p(x) = x+c$ or $p(x) = -x+c$. ∎"
+   },
+   {
+    "title": "Differentiate and look at the roots of $r$",
+    "body": "Again let $r = p(x) - x$; the case $r = 0$ ($p(x)=x$) is fine, so assume $r\\ne 0$, and suppose $p(p(x)) - x = r^2 q$.\n\n**Differentiate.** $\\frac{d}{dx}\\bigl(r^2q\\bigr) = r(2r'q + rq')$ is divisible by $r$, so\n$$p'(p(x))\\,p'(x) - 1 \\equiv 0 \\pmod{r}.$$\nBecause $p(x)\\equiv x \\pmod{r}$, any polynomial $h$ satisfies $h(p(x)) \\equiv h(x) \\pmod r$; with $h=p'$ we get $p'(x)^2 - 1 \\equiv 0$. Since $p' = r'+1$:\n$$r \\ \\big|\\ (p'-1)(p'+1) = r'\\,(r'+2).$$\n\n**If $r$ is constant** ($r = c$), then $p(x) = x+c$.\n\n**If $r$ is nonconstant,** let $\\alpha\\in\\mathbb C$ be a root of $r$ of multiplicity $m\\ge1$; it is a root of $r'$ of multiplicity exactly $m-1$. If $m\\ge 2$, then $r'(\\alpha)=0$, so $r'(\\alpha)+2 = 2\\ne0$ and $\\alpha$ is a root of $r'(r'+2)$ of multiplicity only $m-1<m$ — impossible as $(x-\\alpha)^m \\mid r \\mid r'(r'+2)$. So every root of $r$ is simple, $r'(\\alpha)\\neq 0$, and $(x-\\alpha)\\mid r'(r'+2)$ forces $r'(\\alpha)+2 = 0$. Thus every root of $r$ is a root of $r'+2$, and since the roots of $r$ are simple, $r \\mid r'+2$.\n\nBut $\\deg(r'+2) < \\deg r$, so $r'+2 = 0$: $r = -2x+c$, i.e. $p(x) = -x+c$.\n\nTogether with the check in the first solution, the answer is $p(x) = \\pm x + c$. ∎"
+   }
+  ],
+  "topics": [
+   "polynomials",
+   "algebra"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "putnam-2024-a3",
+  "bank": "putnam",
+  "source": {
+   "contest": "Putnam",
+   "paper": "85th William Lowell Putnam Mathematical Competition (December 7, 2024)",
+   "year": 2024,
+   "number": "A3",
+   "url": "https://kskedlaya.org/putnam-archive/"
+  },
+  "grade": "undergrad",
+  "points": 10,
+  "timeMinutes": null,
+  "type": "text",
+  "prompt": "Let $S$ be the set of bijections\n$$T \\colon \\{1,2,3\\} \\times \\{1,2,\\dots,2024\\} \\to \\{1,2,\\dots,6072\\}$$\nsuch that $T(1,j) < T(2,j) < T(3,j)$ for all $j \\in \\{1,2,\\dots,2024\\}$ and $T(i,j) < T(i,j+1)$ for all $i \\in \\{1,2,3\\}$ and $j \\in \\{1,2,\\dots,2023\\}$. Do there exist $a$ and $c$ in $\\{1,2,3\\}$ and $b$ and $d$ in $\\{1,2,\\dots,2024\\}$ such that the fraction of elements $T$ in $S$ for which $T(a,b) < T(c,d)$ is at least $1/3$ and at most $2/3$?",
+  "image": null,
+  "choices": null,
+  "answer": "Yes",
+  "acceptedAnswers": [
+   "yes",
+   "Yes, they exist",
+   "yes they exist",
+   "exist"
+  ],
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Compare $T(2,1)$ with $T(1,2)$ using the hook length formula",
+    "body": "**Yes:** take $(a,b) = (2,1)$ and $(c,d) = (1,2)$. Write $n = 2024$. We show that the fraction of $T\\in S$ with $T(2,1)<T(1,2)$ is exactly $\\dfrac{n+1}{3n-1}$.\n\n**Tableaux.** Picture $T$ as a $3\\times n$ array (row $i$, column $j$) containing $1,\\dots,3n$ once each, increasing down every column and to the right along every row: a *standard Young tableau* of rectangular shape $3\\times n$.\n\n**Reformulation.** The entry $1$ must sit at $(1,1)$, since every other cell has a smaller entry above it or to its left. The entry $2$ must sit in a cell whose upper and left neighbours (if any) contain only $1$, so $2$ is at $(1,2)$ or at $(2,1)$. Hence $T(2,1) < T(1,2)$ **if and only if** $T(2,1) = 2$.\n\n**Hook length formula** (Frame–Robinson–Thrall). For a Young diagram with $N$ cells, the number of standard Young tableaux equals $N!/\\prod_s h(s)$, where the hook $h(s)$ of a cell $s$ is $1+{}$(number of cells to its right in its row)${}+{}$(number of cells below it in its column).\n\n- **All of $S$.** In the $3\\times n$ rectangle the hooks in row 1 are $n+2, n+1,\\dots,3$, in row 2 they are $n+1,\\dots,2$, in row 3 they are $n,\\dots,1$. So\n$$|S| = \\frac{(3n)!}{\\frac{(n+2)!}{2}\\,(n+1)!\\,n!} = \\frac{2\\,(3n)!}{(n+2)!\\,(n+1)!\\,n!}.$$\n- **Those with $T(2,1)=2$.** Then $T(1,1)=1$, $T(2,1)=2$ and the entries $3,\\dots,3n$ fill the other cells. Rotate the array by $180^\\circ$ and replace each entry $e$ by $3n+1-e$. The rotation reverses the order of rows and columns, and $e\\mapsto 3n+1-e$ reverses all inequalities, so the result is again increasing along rows and columns; it fills the diagram with row lengths $n, n-1, n-1$ (the two removed cells become the last cells of rows 2 and 3) with $1,\\dots,3n-2$. This is a bijection. Hooks of the shape $(n,n-1,n-1)$: row 1 has $n+2, n+1,\\dots,4$ (cells $1,\\dots,n-1$) and $1$ (cell $n$); row 2 has $n, n-1,\\dots,2$; row 3 has $n-1,\\dots,1$. So the number is\n$$\\frac{(3n-2)!}{\\frac{(n+2)!}{6}\\,n!\\,(n-1)!} = \\frac{6\\,(3n-2)!}{(n+2)!\\,n!\\,(n-1)!}.$$\n\n**The fraction.** Dividing,\n$$\\frac{6\\,(3n-2)!\\,(n+1)!\\,n!}{2\\,(3n)!\\,n!\\,(n-1)!} = \\frac{3\\,(n+1)n}{3n(3n-1)} = \\frac{n+1}{3n-1} = \\frac13 + \\frac{4}{3(3n-1)}.$$\n(Check with $n=2$: there are $5$ tableaux, $3$ of which have $T(2,1)=2$, and $\\frac{3}{5} = \\frac{2+1}{6-1}$.)\n\nFor $n=2024$ the fraction is $\\frac{2025}{6071}$. It exceeds $\\frac13$ (since $3\\cdot2025 = 6075 > 6071$) and is less than $\\frac23$ (since $3\\cdot 2025 = 6075 < 2\\cdot 6071$).\n\n**Answer: Yes** (e.g. $(a,b)=(2,1)$, $(c,d)=(1,2)$, fraction $\\frac{2025}{6071}$)."
+   }
+  ],
+  "topics": [
+   "counting",
+   "probability"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "putnam-2024-a4",
+  "bank": "putnam",
+  "source": {
+   "contest": "Putnam",
+   "paper": "85th William Lowell Putnam Mathematical Competition (December 7, 2024)",
+   "year": 2024,
+   "number": "A4",
+   "url": "https://kskedlaya.org/putnam-archive/"
+  },
+  "grade": "undergrad",
+  "points": 10,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Find all primes $p > 5$ for which there exists an integer $a$ and an integer $r$ satisfying $1 \\leq r \\leq p-1$ with the following property: the sequence $1,a,a^2,\\dots,a^{p-5}$ can be rearranged to form a sequence $b_0,b_1,b_2,\\dots,b_{p-5}$ such that $b_n-b_{n-1}-r$ is divisible by $p$ for $1 \\leq n \\leq p-5$.",
+  "image": null,
+  "choices": null,
+  "answer": "7",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Primitive roots and the four missing residues",
+    "body": "**The only such prime is $p = 7$.**\n\n**$p=7$ works.** Take $a = 5$, $r = 3$. The sequence $1, a, a^2 = 1, 5, 25$ rearranged as $b_0,b_1,b_2 = 5, 1, 25$ has $1-5 = -4\\equiv 3$ and $25-1 = 24 \\equiv 3 \\pmod 7$.\n\n**No prime $p\\ge 11$ works.** Suppose $p\\ge 11$ and $a, r, (b_n)$ are as described. The condition says $b_n \\equiv b_0 + nr \\pmod p$ for $0\\le n\\le p-5$. Since $p\\nmid r$, these $p-4$ residues are distinct.\n\n*Step 1: $a$ is a primitive root.* The $b_n$ are a rearrangement of $1,a,\\dots,a^{p-5}$, so these $p-4$ powers are pairwise distinct mod $p$. In particular $p\\nmid a$ (otherwise $a\\equiv a^2\\equiv 0$), and $a^k\\not\\equiv 1$ for $1\\le k\\le p-5$. The order of $a$ divides $p-1$ and exceeds $p-5$; since $p - 5 \\ge \\frac{p-1}{2}$ for $p\\ge 9$, the only divisor of $p-1$ that large is $p-1$. So $a$ is a primitive root.\n\n*Step 2: the missing residues.* As $a$ is a primitive root, $1,a,\\dots,a^{p-2}$ are all the nonzero residues, so the residues **not** among $1,a,\\dots,a^{p-5}$ are $0, a^{p-4}, a^{p-3}, a^{p-2}$, i.e. $0, c^3, c^2, c$ with $c = a^{-1}$. On the other hand $b_0+nr$ for $n=-4,\\dots,p-5$ runs over all of $\\mathbb Z/p$, so the residues not among the $b_n$ are $b_0-4r, b_0-3r, b_0-2r, b_0-r$. Hence\n$$\\{0, c, c^2, c^3\\} = \\{x, x+r, x+2r, x+3r\\}\\quad (x = b_0-4r)$$\nis a 4-term arithmetic progression mod $p$. Note $c$ is also a primitive root, so its order $p-1\\ge 10$; in particular $c\\neq\\pm1$ and $c^2\\ne -1$.\n\n*Step 3: no such progression.* Divide by $c$: $0, 1, c, c^2$ can be arranged as a 4-term AP $y, y+d, y+2d, y+3d$ with $d\\neq0$.\n- $0$ is not an interior term: its two neighbours would be $-d$ and $d$, so two of $1,c,c^2$ would be negatives of each other, giving $c=-1$ or $c^2=-1$ — excluded.\n- So $0$ is an end term; reversing the AP if necessary (replace $d$ by $-d$), the AP is $0, d, 2d, 3d$, where $(d, 2d, 3d)$ is an ordering of $1, c, c^2$. Check all six orderings:\n  - $(1, c, c^2)$: $c = 2$, $c^2 = 3$, so $4\\equiv 3$ — impossible.\n  - $(c^2, c, 1)$: $c = 2c^2$ gives $c = \\frac12$, then $1 = 3c^2 = \\frac34$, so $4\\equiv3$ — impossible.\n  - $(1, c^2, c)$: $c = 3$, $c^2=2$, so $9\\equiv 2$, i.e. $p = 7$.\n  - $(c^2, 1, c)$: $1 = 2c^2$ and $c = 3c^2$, so $c=\\frac13$ and $1 = \\frac29$, i.e. $p=7$.\n  - $(c, 1, c^2)$: $1 = 2c$ and $c^2 = 3c$, so $c = 3 = \\frac12$, i.e. $6\\equiv1$, $p = 5$.\n  - $(c, c^2, 1)$: $c^2 = 2c$ and $1 = 3c$, so $c = 2 = \\frac13$, i.e. $p=5$.\n\nEvery case forces $p\\in\\{5,7\\}$, contradicting $p\\ge 11$. ∎\n\n**Answer: $p = 7$**"
+   }
+  ],
+  "topics": [
+   "number-theory",
+   "abstract-algebra"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "putnam-2024-a5",
+  "bank": "putnam",
+  "source": {
+   "contest": "Putnam",
+   "paper": "85th William Lowell Putnam Mathematical Competition (December 7, 2024)",
+   "year": 2024,
+   "number": "A5",
+   "url": "https://kskedlaya.org/putnam-archive/"
+  },
+  "grade": "undergrad",
+  "points": 10,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Consider a circle $\\Omega$ with radius 9 and center at the origin $(0,0)$, and a disc $\\Delta$ with radius 1 and center at $(r,0)$, where $0 \\leq r \\leq 8$. Two points $P$ and $Q$ are chosen independently and uniformly at random on $\\Omega$. Which value(s) of $r$ minimize the probability that the chord $\\overline{PQ}$ intersects $\\Delta$?",
+  "image": null,
+  "choices": null,
+  "answer": "0",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Condition on the direction of the chord",
+    "body": "**Answer: only $r = 0$.**\n\n**Parametrize the chord.** Write $P = 9(\\cos\\alpha,\\sin\\alpha)$, $Q = 9(\\cos\\beta,\\sin\\beta)$ with $\\alpha,\\beta$ independent and uniform in $[0,2\\pi)$. Put $2\\delta = \\beta-\\alpha \\bmod 2\\pi \\in[0,2\\pi)$ and $\\varphi = \\alpha+\\delta$. Then $2\\delta$ is uniform and independent of $\\alpha$; given $\\delta$, $\\varphi$ is uniform mod $2\\pi$. So **$\\varphi$ (uniform on $[0,2\\pi)$) and $\\delta$ (uniform on $[0,\\pi)$) are independent.** With $u = (\\cos\\varphi,\\sin\\varphi)$,\n$$P\\cdot u = 9\\cos(\\alpha-\\varphi) = 9\\cos\\delta,\\qquad Q\\cdot u = 9\\cos(\\beta-\\varphi) = 9\\cos\\delta,$$\nso (when $P\\ne Q$, which has probability 1) the chord lies on the line $\\{X: X\\cdot u = 9\\cos\\delta\\}$.\n\n**When does it hit $\\Delta$?** Since $r\\le 8$, $\\Delta$ lies inside the closed disc bounded by $\\Omega$, and the part of the line inside that disc is exactly the chord. So the chord meets $\\Delta$ iff the line does, iff the distance from the centre $C=(r,0)$ to the line is $\\le 1$:\n$$|9\\cos\\delta - h| \\le 1,\\qquad h = C\\cdot u = r\\cos\\varphi\\in[-8,8].$$\nFor fixed $h$, $9\\cos\\delta$ decreases on $[0,\\pi)$, so the set of good $\\delta$ is an interval of length\n$$L(h) = \\arccos\\frac{h-1}{9} - \\arccos\\frac{h+1}{9}$$\n(both arguments lie in $[-1,1]$). Hence\n$$\\Pr(r) = \\frac{1}{2\\pi}\\int_0^{2\\pi}\\frac{L(r\\cos\\varphi)}{\\pi}\\,d\\varphi.$$\n\n**$L$ is minimized only at $h=0$.** Using $\\arccos(-y) = \\pi-\\arccos y$ one gets $L(-h) = L(h)$. For $0 < h < 8$,\n$$L'(h) = \\frac{1}{\\sqrt{81-(h+1)^2}} - \\frac{1}{\\sqrt{81-(h-1)^2}} > 0,$$\nbecause $(h+1)^2 > (h-1)^2$. With continuity at $h=8$, $L$ is strictly increasing on $[0,8]$, so $L(h) > L(0)$ for $0<|h|\\le 8$.\n\n**Conclusion.** $\\Pr(r) \\ge \\frac{1}{2\\pi^2}\\int_0^{2\\pi} L(0)\\,d\\varphi = \\Pr(0)$. If $r>0$, then $L(r\\cos\\varphi) > L(0)$ for all $\\varphi$ with $\\cos\\varphi\\ne0$, and since $L$ is continuous the integral is strictly larger: $\\Pr(r) > \\Pr(0)$. So the probability is minimized exactly at $r = 0$.\n\n**Answer: $r = 0$**"
+   },
+   {
+    "title": "Arc between two parallel lines",
+    "body": "As in the first solution, fix the direction $u$ of the chord's normal; the chord meets $\\Delta$ iff it lies in the strip between the two lines $X\\cdot u = h\\pm1$ (with $h = r\\cos\\varphi$), and the conditional probability is proportional to the length of the arc of $\\Omega$ (on one side, $0\\le\\delta<\\pi$) cut out by this strip.\n\nThat arc runs from $A = 9(\\cos\\delta_1,\\sin\\delta_1)$ to $B = 9(\\cos\\delta_2,\\sin\\delta_2)$, where $9\\cos\\delta_1 = h-1$ and $9\\cos\\delta_2 = h+1$, measured in coordinates where $u = (1,0)$. Its angle $\\theta = \\delta_1-\\delta_2\\in(0,\\pi)$, and the chord $AB$ has length $18\\sin(\\theta/2)$, a strictly increasing function of $\\theta$. So the arc is shortest exactly when the chord $AB$ is shortest.\n\nNow $A$ and $B$ lie on the two parallel lines at distance $2$, so $|AB|\\ge 2$, with equality iff $AB$ is perpendicular to the lines, i.e. $\\sin\\delta_1 = \\sin\\delta_2$, i.e. $\\delta_1 = \\pi - \\delta_2$, i.e. $\\cos\\delta_1 = -\\cos\\delta_2$, i.e. $h = 0$.\n\nSo for every direction the conditional probability is at least its value at $h=0$, with equality iff $r\\cos\\varphi = 0$. Averaging over $\\varphi$ (and using continuity for strictness, as before), the total probability is minimized exactly when $r\\cos\\varphi = 0$ for all $\\varphi$, i.e. $r = 0$.\n\n**Answer: $r = 0$**"
+   }
+  ],
+  "topics": [
+   "probability",
+   "geometry",
+   "calculus"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "putnam-2024-a6",
+  "bank": "putnam",
+  "source": {
+   "contest": "Putnam",
+   "paper": "85th William Lowell Putnam Mathematical Competition (December 7, 2024)",
+   "year": 2024,
+   "number": "A6",
+   "url": "https://kskedlaya.org/putnam-archive/"
+  },
+  "grade": "undergrad",
+  "points": 10,
+  "timeMinutes": null,
+  "type": "text",
+  "prompt": "Let $c_0,c_1,c_2,\\dots$ be the sequence defined so that\n$$\\frac{1-3x-\\sqrt{1-14x+9x^2}}{4} = \\sum_{k=0}^\\infty c_k x^k$$\nfor sufficiently small $x$. For a positive integer $n$, let $A$ be the $n$-by-$n$ matrix with $i,j$-entry $c_{i+j-1}$ for $i$ and $j$ in $\\{1,\\dots,n\\}$. Find the determinant of $A$.",
+  "image": null,
+  "choices": null,
+  "answer": "10^(n(n-1)/2)",
+  "acceptedAnswers": [
+   "10^(n*(n-1)/2)",
+   "10^{n(n-1)/2}",
+   "10^((n^2-n)/2)",
+   "10^(n(n-1)/2).",
+   "10^(binom(n,2))",
+   "10^(n(n - 1)/2)",
+   "10^(n*(n - 1)/2)",
+   "10^{\\binom{n}{2}}",
+   "10^(C(n,2))",
+   "10^((n-1)n/2)",
+   "10^(n^2/2-n/2)"
+  ],
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "A Hankel-determinant reduction lemma",
+    "body": "**Answer: $\\det A = 10^{n(n-1)/2}$.**\n\n**Notation.** For a power series $\\alpha = \\sum_i a_ix^i$ let $h_m(\\alpha) = \\det\\bigl(a_{i+j-1}\\bigr)_{i,j=1}^m$ (a Hankel determinant; it ignores $a_0$), with $h_0(\\alpha) = 1$. We want $h_n(f)$ for $f = \\frac{1-3x-\\sqrt{1-14x+9x^2}}{4}$.\n\n**Lemma.** Let $\\alpha = \\sum_{i\\ge1}a_ix^i$ with $a_1 = 1$, and define the power series $\\beta = \\sum_{i\\ge0} b_ix^i$ by $\\dfrac1\\alpha = x^{-1} - \\beta$. Then $h_m(\\alpha) = h_{m-1}(\\beta)$ for all $m\\ge1$.\n\n*Proof.* From $1 = \\alpha(x^{-1}-\\beta)$, i.e. $x^{-1}\\alpha - \\alpha\\beta = 1$, comparing coefficients of $x^k$ for $k\\ge1$:\n$$a_{k+1} = \\sum_{s=1}^{k} a_s\\,b_{k-s}. \\tag{$*$}$$\nLet $H = (a_{i+j-1})_{i,j=1}^m$ and let $L$ be the lower unitriangular matrix with $L_{ik} = -b_{i-1-k}$ for $k<i$. For $i\\ge2$, applying $(*)$ with $k = i+j-2$ and splitting off the terms $s = k'+j-1$, $k'=1,\\dots,i-1$:\n$$(LH)_{ij} = a_{i+j-1} - \\sum_{k'=1}^{i-1} b_{i-1-k'}\\,a_{k'+j-1} = \\sum_{s=1}^{j-1} a_s\\, b_{i+j-2-s} = \\sum_{t=1}^{j-1} a_{j-t}\\, b_{i+t-2}.$$\nSo $M = LH$ has first row $(a_1,\\dots,a_m) = (1,a_2,\\dots)$ and first column $(1,0,\\dots,0)^T$. Its lower-right $(m-1)\\times(m-1)$ block is $NU$, where $N = (b_{i'+t-1})_{i',t=1}^{m-1}$ (here $i'=i-1$) and $U$ is upper triangular with $U_{t,j'} = a_{j'+1-t}$ for $t\\le j'$ ($j'=j-1$), diagonal entries $a_1 = 1$. Hence\n$$h_m(\\alpha) = \\det H = \\det M = \\det(NU) = \\det N = h_{m-1}(\\beta).\\ \\square$$\n\n**Apply it to $f$.** Put $s = \\sqrt{1-14x+9x^2}$. From $4f = 1-3x-s$ we get $(1-3x-4f)^2 = s^2$, which simplifies to\n$$2f^2 - (1-3x)f + x = 0.$$\nAlso $s = 1 - 7x + O(x^2)$, so $c_0 = 0$, $c_1 = 1$, and $f$ is as in the lemma. Dividing the quadratic by $xf$: $\\frac1f = x^{-1} - 3 - \\frac{2f}{x}$. So $\\beta = 3 + \\frac{2f}{x} = 5 + g$ with\n$$g := \\frac{2f}{x} - 2 = 2c_2x + 2c_3x^2+\\cdots .$$\nSubstituting $f = \\frac{x(g+2)}{2}$ into the quadratic and dividing by $\\frac x2$ gives $x(g+2)^2 - (1-3x)(g+2) + 2 = 0$, i.e. $xg^2 + 7xg + 10x - g = 0$, i.e.\n$$g\\,\\bigl(x^{-1} - 7 - g\\bigr) = 10.$$\nIn particular $g = 10x + O(x^2)$. Let $\\gamma = g/10$, so $\\gamma = x+\\cdots$ and $\\dfrac1\\gamma = x^{-1} - (7+g)$.\n\n**Compute.** The Hankel determinants ignore constant terms, so $h_k(5+g) = h_k(7+g) = h_k(g)$. Also $h_k(g) = 10^k h_k(\\gamma)$ (every entry scales by $10$). By the lemma,\n$$h_k(g) = 10^k h_k(\\gamma) = 10^k h_{k-1}(7+g) = 10^k h_{k-1}(g),$$\nso $h_k(g) = 10^{1+2+\\cdots+k} = 10^{k(k+1)/2}$. Finally\n$$\\det A = h_n(f) = h_{n-1}(5+g) = h_{n-1}(g) = 10^{(n-1)n/2}.$$\n(Check: $c_1,c_2,c_3 = 1,5,35$ and $\\det\\begin{pmatrix}1&5\\\\5&35\\end{pmatrix} = 10$.)\n\n**Answer: $\\det A = 10^{n(n-1)/2}$**"
+   }
+  ],
+  "topics": [
+   "linear-algebra",
+   "sequences-series",
+   "algebra"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null,
+  "answerDisplay": "$10^{n(n-1)/2}$"
+ },
+ {
+  "id": "putnam-2024-b1",
+  "bank": "putnam",
+  "source": {
+   "contest": "Putnam",
+   "paper": "85th William Lowell Putnam Mathematical Competition (December 7, 2024)",
+   "year": 2024,
+   "number": "B1",
+   "url": "https://kskedlaya.org/putnam-archive/"
+  },
+  "grade": "undergrad",
+  "points": 10,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Let $n$ and $k$ be positive integers. The square in the $i$th row and $j$th column of an $n$-by-$n$ grid contains the number $i+j-k$. For which $n$ and $k$ is it possible to select $n$ squares from the grid, no two in the same row or column, such that the numbers contained in the selected squares are exactly $1,2,\\dots,n$?",
+  "image": null,
+  "choices": null,
+  "answer": "Exactly when $n$ is odd and $k = \\frac{n+1}{2}$ (sum the selected numbers; for sufficiency use the squares $(i, i+\\frac{n-1}{2})$ and $(i, i-\\frac{n+1}{2})$).",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Sum the selected entries; then construct",
+    "body": "**Answer: exactly when $n$ is odd and $k = \\frac{n+1}{2}$.**\n\n**Necessity.** Let the selected squares be $(a_1,b_1),\\dots,(a_n,b_n)$. No two share a row or column, so $(a_i)$ and $(b_i)$ are both permutations of $1,\\dots,n$, each with sum $\\frac{n(n+1)}2$. If the selected numbers are $1,\\dots,n$, then\n$$\\frac{n(n+1)}{2} = \\sum_{i=1}^n (a_i+b_i-k) = \\frac{n(n+1)}2 + \\frac{n(n+1)}2 - nk,$$\nso $k = \\frac{n+1}2$; as $k$ is an integer, $n$ is odd.\n\n**Sufficiency.** Let $n$ be odd, $k = \\frac{n+1}2$, and select\n- $\\bigl(i,\\ i+\\tfrac{n-1}{2}\\bigr)$ for $i = 1,\\dots,\\tfrac{n+1}2$: columns $\\frac{n+1}2,\\dots,n$, numbers $2i + \\frac{n-1}2 - \\frac{n+1}2 = 2i-1$, i.e. $1,3,\\dots,n$;\n- $\\bigl(i,\\ i-\\tfrac{n+1}{2}\\bigr)$ for $i = \\tfrac{n+3}2,\\dots,n$: columns $1,\\dots,\\frac{n-1}2$, numbers $2i - (n+1)$, i.e. $2,4,\\dots,n-1$.\n\nEvery row is used once, the columns are $1,\\dots,n$ once each, and the numbers are exactly $1,\\dots,n$. For example, $n=5$, $k=3$ selects $(1,3),(2,4),(3,5),(4,1),(5,2)$ with numbers $1,3,5,2,4$. ∎"
+   }
+  ],
+  "topics": [
+   "counting",
+   "algebra"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "putnam-2024-b2",
+  "bank": "putnam",
+  "source": {
+   "contest": "Putnam",
+   "paper": "85th William Lowell Putnam Mathematical Competition (December 7, 2024)",
+   "year": 2024,
+   "number": "B2",
+   "url": "https://kskedlaya.org/putnam-archive/"
+  },
+  "grade": "undergrad",
+  "points": 10,
+  "timeMinutes": null,
+  "type": "text",
+  "prompt": "Two convex quadrilaterals are called *partners* if they have three vertices in common and they can be labeled $ABCD$ and $ABCE$ so that $E$ is the reflection of $D$ across the perpendicular bisector of the diagonal $\\overline{AC}$. Is there an infinite sequence of convex quadrilaterals such that each quadrilateral is a partner of its successor and no two elements of the sequence are congruent?",
+  "image": null,
+  "choices": null,
+  "answer": "No",
+  "acceptedAnswers": [
+   "no",
+   "No, there is not",
+   "no such sequence",
+   "does not exist",
+   "no it does not exist"
+  ],
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Invariants: side lengths and area",
+    "body": "**Answer: No.** Every such sequence contains only finitely many congruence classes.\n\n**Invariants of a partner move.** Let $\\sigma$ be the reflection in the perpendicular bisector of $AC$; it swaps $A$ and $C$ and maps $D$ to $E$. Hence $CE = AD$ and $EA = DC$, so $ABCE$ has the same side lengths as $ABCD$ (as a multiset). Also $\\sigma$ maps triangle $ACD$ to triangle $CAE$, so they have equal areas; since both quadrilaterals are convex, the diagonal $AC$ splits them into $ABC\\cup ACD$ and $ABC\\cup ACE$, so they have the **same area**. Therefore all quadrilaterals in the sequence have the same area $K$ and the same multiset $\\{a,b,c,d\\}$ of side lengths.\n\n**Lemma.** For given positive $a,b,c,d,K$ there are at most $4$ congruence classes of convex quadrilaterals $PQRS$ with $PQ=a$, $QR=b$, $RS=c$, $SP=d$ (in this cyclic order) and area $K$.\n\n*Proof.* Let $\\alpha = \\angle SPQ$, $\\gamma = \\angle QRS$ (both in $(0,\\pi)$). Diagonal $QS$ splits the convex quadrilateral into triangles $PQS$ and $RQS$, so by the law of cosines and the area formula\n$$ad\\cos\\alpha - bc\\cos\\gamma = \\tfrac12(a^2+d^2-b^2-c^2) =: M,\\qquad ad\\sin\\alpha + bc\\sin\\gamma = 2K.$$\nSquaring and adding: $a^2d^2 + b^2c^2 - 2abcd\\cos(\\alpha+\\gamma) = M^2 + 4K^2$, so $\\cos(\\alpha+\\gamma)$ is determined, and since $\\alpha+\\gamma\\in(0,2\\pi)$ there are at most two possible values $\\sigma_0$ of $\\alpha+\\gamma$. For each, the first equation becomes\n$$(ad - bc\\cos\\sigma_0)\\cos\\alpha - bc\\sin\\sigma_0\\,\\sin\\alpha = M,$$\na nontrivial equation of the form $X\\cos\\alpha+Y\\sin\\alpha = M$ (the coefficients cannot both vanish: $\\sin\\sigma_0=0$ means $\\sigma_0 = \\pi$, and then $ad - bc\\cos\\sigma_0 = ad+bc>0$), which has at most two solutions $\\alpha\\in(0,\\pi)$. So $\\alpha$ takes at most $4$ values. Finally $a$, $d$, $\\alpha$ determine triangle $SPQ$, and then $R$ is determined by $QR = b$, $RS = c$ and lying on the other side of $QS$ from $P$ (convexity). $\\square$\n\n**Conclusion.** Any quadrilateral in the sequence has its sides, in cyclic order starting from some vertex, equal to one of the at most $4! = 24$ orderings of the fixed multiset, and area $K$. By the lemma this allows at most $24\\cdot 4$ congruence classes. So an infinite sequence must contain two congruent quadrilaterals, and the answer is **no**. ∎"
+   }
+  ],
+  "topics": [
+   "geometry",
+   "trigonometry"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "putnam-2024-b3",
+  "bank": "putnam",
+  "source": {
+   "contest": "Putnam",
+   "paper": "85th William Lowell Putnam Mathematical Competition (December 7, 2024)",
+   "year": 2024,
+   "number": "B3",
+   "url": "https://kskedlaya.org/putnam-archive/"
+  },
+  "grade": "undergrad",
+  "points": 10,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Let $r_n$ be the $n$th smallest positive solution to $\\tan x = x$, where the argument of tangent is in radians. Prove that\n$$0 < r_{n+1} - r_n - \\pi < \\frac{1}{(n^2+n)\\pi}$$\nfor $n \\geq 1$.",
+  "image": null,
+  "choices": null,
+  "answer": "Proof. $r_n$ is the unique solution of $x - \\arctan x = n\\pi$; for the inverse function $x(t)$ of $t = x-\\arctan x$, $x(t)-t$ increases and $x(t)-t+\\frac1t$ decreases.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Invert $t = x - \u0007rctan x$",
+    "body": "**Locating the roots.** Let $\\arctan:\\mathbb R\\to(-\\frac\\pi2,\\frac\\pi2)$ be the principal branch and $t(x) = x - \\arctan x$. Then\n$$t'(x) = 1 - \\frac{1}{1+x^2} = \\frac{x^2}{1+x^2}\\ge 0,$$\nwith equality only at $x=0$, so $t$ is a strictly increasing bijection $\\mathbb R\\to\\mathbb R$ with $t(0)=0$.\n\nIf $\\tan x = x$, then $x - m\\pi\\in(-\\frac\\pi2,\\frac\\pi2)$ for some integer $m$ and $\\arctan x = \\arctan(\\tan x) = x-m\\pi$, i.e. $t(x) = m\\pi$; conversely $t(x) = m\\pi$ gives $\\tan x = \\tan(\\arctan x) = x$. For $x>0$ we have $t(x)>0$, so the positive solutions are exactly the solutions of $t(x) = m\\pi$, $m = 1,2,\\dots$, one for each $m$, increasing with $m$. Hence **$r_n$ is the unique solution of $t(x) = n\\pi$.**\n\n**The inverse function.** Let $x(t)$ be the inverse of $t(x)$; for $t>0$ we have $x>0$ and\n$$\\frac{dx}{dt} = \\frac{1+x^2}{x^2} = 1 + \\frac1{x^2}.$$\n- $\\dfrac{d}{dt}\\bigl(x(t) - t\\bigr) = \\dfrac1{x^2} > 0$, so $x(t)-t$ is strictly increasing on $(0,\\infty)$.\n- For $t>0$, $x - t = \\arctan x > 0$, so $x(t) > t$ and $\\dfrac{d}{dt}\\Bigl(x(t) - t + \\dfrac1t\\Bigr) = \\dfrac1{x^2} - \\dfrac1{t^2} < 0$: this function is strictly decreasing.\n\n**Evaluate at $t = n\\pi$ and $t = (n+1)\\pi$** (where $x = r_n$, $r_{n+1}$):\n$$r_{n+1} - (n+1)\\pi > r_n - n\\pi \\;\\Longrightarrow\\; r_{n+1}-r_n-\\pi > 0,$$\n$$r_{n+1} - (n+1)\\pi + \\frac1{(n+1)\\pi} < r_n - n\\pi + \\frac1{n\\pi}\\;\\Longrightarrow\\; r_{n+1}-r_n-\\pi < \\frac1{n\\pi}-\\frac1{(n+1)\\pi} = \\frac{1}{(n^2+n)\\pi}.$$ ∎"
+   },
+   {
+    "title": "Tangent subtraction formula",
+    "body": "From the first solution (or directly: on each interval $(m\\pi - \\frac\\pi2, m\\pi+\\frac\\pi2)$ the function $\\tan x - x$ has derivative $\\tan^2 x\\ge0$, is strictly increasing, and its sign analysis gives one positive root for each $m\\ge1$, none for $m=0$), we know $r_n\\in(n\\pi, n\\pi+\\frac\\pi2)$.\n\nLet $\\delta = r_{n+1} - r_n - \\pi$. From the intervals, $\\delta\\in(-\\frac\\pi2,\\frac\\pi2)$. Since $\\tan$ has period $\\pi$,\n$$\\tan\\delta = \\tan(r_{n+1} - r_n) = \\frac{\\tan r_{n+1} - \\tan r_n}{1+\\tan r_{n+1}\\tan r_n} = \\frac{r_{n+1}-r_n}{1+r_nr_{n+1}} = \\frac{\\pi+\\delta}{1+r_nr_{n+1}}.$$\nThe right side is positive ($r_{n+1}>r_n>0$), so $\\tan\\delta>0$ and $\\delta\\in(0,\\frac\\pi2)$: this is the **lower bound**.\n\nFor the upper bound use $\\delta < \\tan\\delta$ on $(0,\\frac\\pi2)$:\n$$\\delta < \\frac{\\pi+\\delta}{1+r_nr_{n+1}} \\;\\Longrightarrow\\; \\delta\\, r_nr_{n+1} < \\pi \\;\\Longrightarrow\\; \\delta < \\frac{\\pi}{r_nr_{n+1}} < \\frac{\\pi}{n\\pi\\cdot(n+1)\\pi} = \\frac1{(n^2+n)\\pi},$$\nusing $r_n > n\\pi$ and $r_{n+1} > (n+1)\\pi$. ∎"
+   }
+  ],
+  "topics": [
+   "real-analysis",
+   "trigonometry",
+   "calculus"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "putnam-2024-b4",
+  "bank": "putnam",
+  "source": {
+   "contest": "Putnam",
+   "paper": "85th William Lowell Putnam Mathematical Competition (December 7, 2024)",
+   "year": 2024,
+   "number": "B4",
+   "url": "https://kskedlaya.org/putnam-archive/"
+  },
+  "grade": "undergrad",
+  "points": 10,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Let $n$ be a positive integer. Set $a_{n,0} = 1$. For $k \\geq 0$, choose an integer $m_{n,k}$ uniformly at random from the set $\\{1,\\dots,n\\}$, and let\n$$a_{n,k+1} = \\begin{cases} a_{n,k} + 1, & \\text{if } m_{n,k} > a_{n,k}; \\\\ a_{n,k}, & \\text{if } m_{n,k} = a_{n,k}; \\\\ a_{n,k}-1, & \\text{if } m_{n,k} < a_{n,k}. \\end{cases}$$\nLet $E(n)$ be the expected value of $a_{n,n}$. Determine $\\lim_{n\\to \\infty} E(n)/n$.",
+  "image": null,
+  "choices": null,
+  "answer": "(1-e^(-2))/2",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "A linear recurrence for the expectation",
+    "body": "Fix $n\\ge 3$ and write $a_k = a_{n,k}$; note $1\\le a_k\\le n$ always. Given $a_k = a$, the next value is $a+1$ with probability $\\frac{n-a}{n}$, $a$ with probability $\\frac1n$, and $a-1$ with probability $\\frac{a-1}n$. So\n$$\\mathbb E[a_{k+1}\\mid a_k = a] = a + \\frac{(n-a) - (a-1)}{n} = \\Bigl(1-\\frac2n\\Bigr)a + \\frac{n+1}{n}.$$\nTaking expectations, $e_k = \\mathbb E[a_k]$ satisfies $e_{k+1} = (1-\\frac2n)e_k + \\frac{n+1}n$, $e_0=1$. The fixed point is $\\frac{n+1}2$, and $u_k = e_k - \\frac{n+1}2$ satisfies $u_{k+1} = (1-\\frac2n)u_k$, $u_0 = -\\frac{n-1}2$. Hence\n$$E(n) = e_n = \\frac{n+1}{2} - \\frac{n-1}{2}\\Bigl(1-\\frac2n\\Bigr)^n.$$\nSince $(1-\\frac2n)^n\\to e^{-2}$,\n$$\\frac{E(n)}{n} \\to \\frac12 - \\frac12e^{-2} = \\frac{1-e^{-2}}{2}.$$\n\n**Answer: $\\dfrac{1-e^{-2}}{2}$**"
+   },
+   {
+    "title": "Light bulbs",
+    "body": "Model the chain with one red bulb (always lit) and $n-1$ white bulbs, initially unlit. At each step pick one of the $n$ bulbs uniformly at random; if it is white, toggle it. If $a$ bulbs are lit (including the red one), the number goes up with probability $\\frac{n-a}{n}$ (an unlit white bulb), stays with probability $\\frac1n$ (the red bulb) and goes down with probability $\\frac{a-1}{n}$ — exactly the transition rule of $a_{n,k}$, which also starts at $1$. So $a_{n,n}$ has the distribution of the number of lit bulbs after $n$ steps.\n\nA given white bulb is chosen at each step independently with probability $p=\\frac1n$, and is lit at the end iff it was chosen an odd number of times. With $q = 1-p$,\n$$\\Pr(\\text{odd}) = \\frac{(q+p)^n - (q-p)^n}{2} = \\frac{1 - (1-\\frac2n)^n}{2}.$$\nBy linearity of expectation,\n$$E(n) = 1 + (n-1)\\cdot\\frac{1-(1-\\frac2n)^n}{2},$$\nso $E(n)/n\\to \\frac{1-e^{-2}}2$.\n\n**Answer: $\\dfrac{1-e^{-2}}{2}$**"
+   }
+  ],
+  "topics": [
+   "probability",
+   "sequences-series"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null,
+  "answerDisplay": "$\\frac{1-e^{-2}}{2}$"
+ },
+ {
+  "id": "putnam-2024-b5",
+  "bank": "putnam",
+  "source": {
+   "contest": "Putnam",
+   "paper": "85th William Lowell Putnam Mathematical Competition (December 7, 2024)",
+   "year": 2024,
+   "number": "B5",
+   "url": "https://kskedlaya.org/putnam-archive/"
+  },
+  "grade": "undergrad",
+  "points": 10,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Let $k$ and $m$ be positive integers. For a positive integer $n$, let $f(n)$ be the number of integer sequences $x_1,\\dots,x_k,y_1,\\dots,y_m,z$ satisfying $1 \\leq x_1 \\leq \\cdots \\leq x_k \\leq z \\leq n$ and $1 \\leq y_1 \\leq \\cdots \\leq y_m \\leq z \\leq n$. Show that $f(n)$ can be expressed as a polynomial in $n$ with nonnegative coefficients.",
+  "image": null,
+  "choices": null,
+  "answer": "Proof. $f(n) = \\sum_{z=1}^n \\binom{z+k-1}{k}\\binom{z+m-1}{m}$ is a polynomial $F$ vanishing at $0,-1,\\dots,-m$ (for $m\\ge k$); the other factor has $k$ roots, one in each $(-j-1,-j)$, so all roots are real and $\\le 0$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Show that all roots are real and nonpositive",
+    "body": "**Counting.** For fixed $z$, the number of nondecreasing sequences $1\\le x_1\\le\\dots\\le x_k\\le z$ is $\\binom{z+k-1}{k}$ (stars and bars). Let\n$$P_j(x) = \\binom{x+j-1}{j} = \\frac{x(x+1)\\cdots(x+j-1)}{j!},$$\na polynomial of degree $j$ with roots $0,-1,\\dots,-(j-1)$. Then $f(n) = \\sum_{z=1}^n P_k(z)P_m(z)$. Since $f$ is symmetric in $k,m$, assume $m\\ge k$.\n\n**$f$ is a polynomial.** Sums $\\sum_{z=1}^n z^j$ are polynomials in $n$ (Faulhaber), so there is a polynomial $F$ of degree $k+m+1$ with $F(n) = f(n)$ for $n\\ge1$, $F(0) = 0$ and\n$$F(x) - F(x-1) = P_k(x)P_m(x)\\quad\\text{as polynomials}$$\n(it holds for all positive integers $x$). Its leading coefficient is positive since $F(n)\\to+\\infty$.\n\n**Roots at $0,-1,\\dots,-m$.** From $F(-j) = F(-j+1) - P_k(-j+1)P_m(-j+1)$ and $P_m(0)=P_m(-1)=\\dots=P_m(-(m-1)) = 0$, induction gives $F(0)=F(-1)=\\dots=F(-m)=0$. So\n$$F(x) = x(x+1)\\cdots(x+m)\\,Q(x),\\qquad \\deg Q = k.$$\n\n**Roots of $Q$.** Substitute into the difference equation and cancel the common factor $x(x+1)\\cdots(x+m-1)$ (using $P_m(x) = \\frac{x(x+1)\\cdots(x+m-1)}{m!}$):\n$$(x+m)\\,Q(x) - (x-1)\\,Q(x-1) = \\frac{1}{m!}P_k(x).$$\nAt $x = -j$, $j = 0,\\dots,k-1$, the right side is $0$, so\n$$Q(-j) = -\\frac{j+1}{m-j}\\,Q(-j-1),$$\nwhere $m - j > 0$ as $m\\ge k > j$. If one of $Q(0),Q(-1),\\dots,Q(-k)$ vanished, all $k+1$ would vanish, impossible for the nonzero polynomial $Q$ of degree $k$. So they are nonzero with alternating signs, and by the intermediate value theorem $Q$ has a root $-\\rho_j$ in each interval $(-j-1,-j)$, $j=0,\\dots,k-1$: these are all $k$ roots of $Q$.\n\n**Conclusion.** With $C>0$ the leading coefficient,\n$$F(x) = C\\,x(x+1)\\cdots(x+m)\\prod_{j=0}^{k-1}(x+\\rho_j),\\qquad \\rho_j>0,$$\na product of polynomials with nonnegative coefficients. Hence $f(n) = F(n)$ is a polynomial in $n$ with nonnegative coefficients. (Example: $k=m=1$ gives $\\sum z^2 = \\frac{n(n+1)(2n+1)}{6}$.) ∎"
+   }
+  ],
+  "topics": [
+   "counting",
+   "polynomials"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "putnam-2024-b6",
+  "bank": "putnam",
+  "source": {
+   "contest": "Putnam",
+   "paper": "85th William Lowell Putnam Mathematical Competition (December 7, 2024)",
+   "year": 2024,
+   "number": "B6",
+   "url": "https://kskedlaya.org/putnam-archive/"
+  },
+  "grade": "undergrad",
+  "points": 10,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "For a real number $a$, let $F_a(x) = \\sum_{n \\geq 1} n^a e^{2n} x^{n^2}$ for $0 \\leq x < 1$. Find a real number $c$ such that\n$$\\lim_{x \\to 1^-} F_a(x) e^{-1/(1-x)} = 0 \\quad \\text{for all } a < c, \\text{ and}$$\n$$\\lim_{x \\to 1^-} F_a(x) e^{-1/(1-x)} = \\infty \\quad \\text{for all } a > c.$$",
+  "image": null,
+  "choices": null,
+  "answer": "-1/2",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Complete the square: a Gaussian of width $\\sqrt t$ centred at $n = t$",
+    "body": "**Answer: $c = -\\frac12$.**\n\n**Setup.** Put $t = \\frac1{1-x}$, so $x = 1-\\frac1t$ and $t\\to\\infty$ as $x\\to1^-$; take $t\\ge2$. For $0\\le u\\le\\frac12$,\n$$-u-u^2\\le\\ln(1-u)\\le -u$$\n(the right inequality is standard; for the left, $\\psi(u) = \\ln(1-u)+u+u^2$ has $\\psi(0)=0$ and $\\psi'(u) = \\frac{u(1-2u)}{1-u}\\ge0$). With $u = \\frac1t$, the $n$-th term of $F_a(x)e^{-t}$, namely $T_n = n^a\\exp\\bigl(2n - t + n^2\\ln x\\bigr)$, satisfies (using $2n - t - \\frac{n^2}{t} = -\\frac{(n-t)^2}{t}$)\n$$n^a\\exp\\Bigl(-\\frac{(n-t)^2}{t} - \\frac{n^2}{t^2}\\Bigr)\\ \\le\\ T_n\\ \\le\\ n^a\\exp\\Bigl(-\\frac{(n-t)^2}{t}\\Bigr).$$\n\n**Case $a > -\\frac12$.** Keep only the integers $n\\in[t,\\,t+\\sqrt t]$; there are at least $\\lfloor\\sqrt t\\rfloor\\ge\\frac{\\sqrt t}2$ of them. For these, $\\frac{(n-t)^2}{t}\\le1$, $n\\le 2t$ so $\\frac{n^2}{t^2}\\le4$, and $n^a\\ge 2^{-|a|}t^a$. All terms are positive, so\n$$F_a(x)e^{-t}\\ \\ge\\ \\frac{\\sqrt t}{2}\\cdot 2^{-|a|}t^a e^{-5} = \\text{const}\\cdot t^{a+1/2}\\to\\infty.$$\n\n**Case $a < -\\frac12$** (so $a<0$).\n- Terms with $n<\\frac t2$: $(n-t)^2 > \\frac{t^2}4$, so $T_n\\le n^ae^{-t/4}\\le e^{-t/4}$; there are fewer than $t$ of them, contributing at most $te^{-t/4}\\to0$.\n- Terms with $n\\ge\\frac t2$: $n^a\\le (t/2)^a$. The function $\\phi(y) = e^{-(y-t)^2/t}$ increases for $y\\le t$ and decreases for $y\\ge t$, with maximum $1$; comparing each integer $n\\le t-1$ with $\\int_n^{n+1}\\phi$ and each $n\\ge t+1$ with $\\int_{n-1}^n\\phi$, and bounding the at most two remaining terms by $1$,\n$$\\sum_{n\\in\\mathbb Z}\\phi(n)\\ \\le\\ 2 + \\int_{-\\infty}^{\\infty}\\phi(y)\\,dy = 2+\\sqrt{\\pi t}.$$\nSo these terms contribute at most $(t/2)^a(2+\\sqrt{\\pi t}) = O(t^{a+1/2})\\to0$.\n\nHence $F_a(x)e^{-1/(1-x)}\\to0$ for $a<-\\frac12$ and $\\to\\infty$ for $a>-\\frac12$.\n\n**Answer: $c = -\\dfrac12$**"
+   }
+  ],
+  "topics": [
+   "real-analysis",
+   "sequences-series"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ }
+]

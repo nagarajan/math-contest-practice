@@ -1,0 +1,171 @@
+[
+  {
+    "id": "usamo-usamo-1995-01",
+    "bank": "usamo",
+    "source": {
+      "contest": "USAMO",
+      "paper": "USAMO 1995",
+      "year": 1995,
+      "number": 1,
+      "url": "https://artofproblemsolving.com/wiki/index.php/1995_USAMO_Problems/Problem_1"
+    },
+    "grade": "10-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $p$ be an odd prime. The sequence $(a_n)_{n \\geq 0}$ is defined as follows: $a_0 = 0,$ $a_1 = 1, \\ldots, a_{p-2} = p-2$ and, for all $n \\geq p-1,$ $a_n$ is the least positive integer that does not form an arithmetic sequence of length $p$ with any of the preceding terms. Prove that, for all $n,$ $a_n$ is the number obtained by writing $n$ in base $p-1$ and reading the result in base $p$.",
+    "image": null,
+    "choices": null,
+    "answer": "Let $T$ be the numbers whose base-$p$ digits avoid $p-1$. $T$ contains no $p$-term progression (look at the lowest digit where the difference is non-zero mod $p$), while every $y \\notin T$ ends a $p$-term progression whose other terms are smaller elements of $T$; induction then shows $a_n$ is the $n$-th element of $T$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Base-$p$ digits avoiding $p-1$",
+        "body": "**Interpretation.** Terms of the sequence are distinct (a repeated value is not a new term) and progressions have non-zero difference. Then the sequence is automatically increasing: a number $y < a_{n-1}$ that is not a term was rejected at an earlier step because it completes a progression with terms that are still \"preceding\", so it stays rejected.\n\nLet $T$ be the set of non-negative integers whose base-$p$ digits all lie in $\\{0, 1, \\ldots, p-2\\}$, and let $\\varphi(n)$ be $n$ written in base $p-1$ and read in base $p$. Comparing digit strings shows that $\\varphi$ is an increasing bijection from $\\{0, 1, 2, \\ldots\\}$ onto $T$.\n\n**(A) $T$ contains no $p$-term arithmetic progression.** Suppose $x, x+d, \\ldots, x+(p-1)d \\in T$ with $d > 0$. Write $d = p^k d'$ with $p \\nmid d'$. All terms are congruent to $x$ mod $p^k$, so they share their last $k$ digits; the digit in position $k$ of $x + jd$ is then $(c + jd') \\bmod p$, where $c$ is that digit of $x$. As $j$ runs over $0, \\ldots, p-1$ and $p \\nmid d'$ ($p$ prime), $c + jd'$ runs over all residues mod $p$, so some term has digit $p - 1$, a contradiction.\n\n**(B) Every $y \\notin T$ is the last term of a $p$-term progression whose other terms lie in $T$ and are smaller than $y$.** Let $D$ be the set of positions where $y$ has the digit $p-1$ (non-empty), $d = \\sum_{i\\in D}p^i$, and $x = y - (p-1)d$ ($y$ with those digits replaced by $0$). For $0 \\le j \\le p-2$, $x + jd$ is $y$ with the digits in $D$ replaced by $j$, so it lies in $T$ and is less than $y$; and $x + (p-1)d = y$.\n\n**Induction: $a_n = \\varphi(n)$.** For $n \\le p-2$, $\\varphi(n) = n = a_n$. Let $n \\ge p-1$ and assume $a_k = \\varphi(k)$ for all $k < n$, so the preceding terms are exactly the elements of $T$ smaller than $t := \\varphi(n)$.\n- *$t$ is allowed:* it is not a preceding term, and any $p$-term progression among $t$ and the preceding terms would lie in $T$, impossible by (A).\n- *Nothing smaller is allowed:* let $0 < y < t$ be a candidate that is not a preceding term. Then $y \\notin T$ (the elements of $T$ below $t$ are all preceding terms), and by (B) $y$ completes a progression whose other terms are elements of $T$ smaller than $y < t$, i.e. preceding terms.\n\nHence $a_n = t = \\varphi(n)$, completing the induction. ∎"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "sequences-series"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamo-usamo-1995-02",
+    "bank": "usamo",
+    "source": {
+      "contest": "USAMO",
+      "paper": "USAMO 1995",
+      "year": 1995,
+      "number": 2,
+      "url": "https://artofproblemsolving.com/wiki/index.php/1995_USAMO_Problems/Problem_2"
+    },
+    "grade": "10-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "A calculator is broken so that the only keys that still work are the $\\sin,$ $\\cos,$ $\\tan,$ $\\sin^{-1},$ $\\cos^{-1},$ and $\\tan^{-1}$ buttons. The display initially shows 0. Given any positive rational number $q,$ show that pressing some finite sequence of buttons will yield $q$. Assume that the calculator does real number calculations with infinite precision. All functions are in terms of radians.",
+    "image": null,
+    "choices": null,
+    "answer": "Show every $\\sqrt{m/n}$ ($m \\ge 0$, $n > 0$ coprime) is reachable by strong induction on $m+n$, using $\\cos\\tan^{-1}\\sqrt{\\tfrac{n-m}{m}} = \\sqrt{\\tfrac mn}$ and $\\tan\\sin^{-1}\\cos\\tan^{-1}\\sqrt{\\tfrac nm} = \\sqrt{\\tfrac mn}$; then $q = \\sqrt{a^2/b^2}$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Reach all square roots of rationals",
+        "body": "Two identities (for $x \\ge 0$ and $0 \\le y < 1$):\n$$\\cos(\\tan^{-1}x) = \\frac{1}{\\sqrt{1 + x^2}}, \\qquad \\tan(\\sin^{-1}y) = \\frac{y}{\\sqrt{1-y^2}}.$$\n\n**Claim.** For coprime integers $m \\ge 0$, $n \\ge 1$, the number $\\sqrt{m/n}$ can be produced. We use strong induction on $m + n$.\n\n- $m = 0$ (so $n = 1$): $0$ is on the display.\n- $0 < m \\le n$: the integers $n - m \\ge 0$ and $m \\ge 1$ are coprime with sum $n < m + n$, so $\\sqrt{(n-m)/m}$ can be produced, and then\n$$\\cos\\tan^{-1}\\sqrt{\\frac{n-m}{m}} = \\frac{1}{\\sqrt{1 + \\frac{n-m}{m}}} = \\sqrt{\\frac mn}.$$\n- $m > n \\ge 1$: by the previous case (applied to the pair $(n, m)$, whose proof only used smaller sums), $\\sqrt{n/m}$ can be produced. Then $y = \\cos\\tan^{-1}\\sqrt{n/m} = \\sqrt{\\frac{m}{m+n}} < 1$ and\n$$\\tan\\sin^{-1} y = \\frac{\\sqrt{m/(m+n)}}{\\sqrt{n/(m+n)}} = \\sqrt{\\frac mn}.$$\n\n**Conclusion.** Write $q = \\frac ab$ in lowest terms. Then $a^2$ and $b^2$ are coprime and $q = \\sqrt{a^2/b^2}$, which can be produced by the claim. ∎"
+      }
+    ],
+    "topics": [
+      "trigonometry",
+      "number-theory"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamo-usamo-1995-03",
+    "bank": "usamo",
+    "source": {
+      "contest": "USAMO",
+      "paper": "USAMO 1995",
+      "year": 1995,
+      "number": 3,
+      "url": "https://artofproblemsolving.com/wiki/index.php/1995_USAMO_Problems/Problem_3"
+    },
+    "grade": "10-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Given a nonisosceles, nonright triangle $ABC,$ let $O$ denote its circumcenter, and let $A_1, B_1,$ and $C_1$ be the midpoints of sides $\\overline{BC}$, $\\overline{CA}$ and $\\overline{AB}$ respectively. Point $A_2$ is located on the ray $OA_1$ so that $\\triangle OAA_1$ is similar to $\\triangle OA_2A$. Points $B_2$ and $C_2$ on rays $OB_1$ and $OC_1,$ respectively, are defined similarly. Prove that lines $AA_2, BB_2,$ and $CC_2$ are concurrent.",
+    "image": null,
+    "choices": null,
+    "answer": "$AA_2$ is the reflection of the median $AA_1$ in the bisector of angle $A$ (the $A$-symmedian), because $AO$ and the altitude $AH$ are isogonal and $AH \\parallel OA_1$; the three symmedians concur by trigonometric Ceva.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Each line is a symmedian",
+        "body": "We use directed angles between lines, $\\measuredangle(\\ell, m)$, taken modulo $180^\\circ$. Let $H$ be the foot of the altitude from $A$.\n\n**Step 1: $AO$ and $AH$ are isogonal, i.e. $\\measuredangle(AB, AH) = \\measuredangle(AO, AC)$.** Let $A'$ be the point of the circumcircle diametrically opposite $A$, so line $AO = AA'$ and $A'B \\perp AB$. By inscribed angles, $\\measuredangle(AA', AC) = \\measuredangle(BA', BC) = \\measuredangle(BA', BA) + \\measuredangle(BA, BC) = 90^\\circ + \\measuredangle(AB, BC)$. Also $\\measuredangle(AB, AH) = \\measuredangle(AB, BC) + \\measuredangle(BC, AH) = \\measuredangle(AB, BC) + 90^\\circ$.\n\n**Step 2: the similarity is orientation-reversing.** As $AB \\ne AC$, $A$ is not on the perpendicular bisector $OA_1$ of $BC$; as the triangle is not right, $O \\ne A_1$. So triangle $OAA_1$ is non-degenerate. The similarity $O \\mapsto O$, $A \\mapsto A_2$, $A_1 \\mapsto A$ sends ray $OA$ to ray $OA_2 = OA_1$ and ray $OA_1$ to ray $OA$. A direct similarity fixing $O$ is a spiral similarity, turning every ray through $O$ by the same angle $\\theta$; here $\\theta$ would equal both $\\angle(OA \\to OA_1)$ and its negative, forcing $\\theta \\in \\{0^\\circ, 180^\\circ\\}$, i.e. $O, A, A_1$ collinear. So the similarity is opposite, and it reverses directed angles. Comparing the angle at $A_1$ in $OAA_1$ with the angle at $A$ in $OA_2A$:\n$$\\measuredangle(A_1O, A_1A) = -\\measuredangle(AO, AA_2) = \\measuredangle(AA_2, AO).$$\nSince $OA_1 \\perp BC$ and $AH \\perp BC$, line $A_1O \\parallel AH$, so $\\measuredangle(A_1O, A_1A) = \\measuredangle(AH, AA_1)$. Hence\n$$\\measuredangle(AH, AA_1) = \\measuredangle(AA_2, AO). \\tag{1}$$\n\n**Step 3: $AA_2$ is isogonal to the median $AA_1$.** Using (1) and Step 1,\n$$\\measuredangle(AB, AA_2) = \\measuredangle(AB, AO) - \\measuredangle(AA_2, AO) = \\measuredangle(AB, AO) - \\measuredangle(AH, AA_1),$$\n$$\\measuredangle(AA_1, AC) = \\measuredangle(AH, AC) - \\measuredangle(AH, AA_1),$$\nand $\\measuredangle(AB, AO) = \\measuredangle(AB, AH) + \\measuredangle(AH, AO) = \\measuredangle(AO, AC) + \\measuredangle(AH, AO) = \\measuredangle(AH, AC)$. So $\\measuredangle(AB, AA_2) = \\measuredangle(AA_1, AC)$: line $AA_2$ is the reflection of the median $AA_1$ in the bisector of angle $A$ (the $A$-symmedian). It lies inside angle $BAC$, like the median, and $\\angle BAA_2 = \\angle A_1AC$, $\\angle A_2AC = \\angle BAA_1$. The same holds at $B$ and $C$.\n\n**Step 4: concurrency.** The medians concur, so by the trigonometric form of Ceva's theorem\n$$\\frac{\\sin\\angle BAA_1}{\\sin\\angle A_1AC}\\cdot\\frac{\\sin\\angle CBB_1}{\\sin\\angle B_1BA}\\cdot\\frac{\\sin\\angle ACC_1}{\\sin\\angle C_1CB} = 1.$$\nFor the lines $AA_2, BB_2, CC_2$ each ratio is the reciprocal of the corresponding one (the two angles swap), so their product is also $1$, and by the converse of trigonometric Ceva (for cevians through the interior of the angles) the three lines are concurrent, at the symmedian (Lemoine) point. ∎"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamo-usamo-1995-04",
+    "bank": "usamo",
+    "source": {
+      "contest": "USAMO",
+      "paper": "USAMO 1995",
+      "year": 1995,
+      "number": 4,
+      "url": "https://artofproblemsolving.com/wiki/index.php/1995_USAMO_Problems/Problem_4"
+    },
+    "grade": "10-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Suppose $q_0, q_1, q_2, \\ldots$ is an infinite sequence of integers satisfying the following two conditions:\n\n(a) $m - n$ divides $q_m - q_n$ for $m>n \\geq 0$\n\n(b) There is a polynomial $P$ such that $|q_n|<P(n)$ for all $n$.\n\nProve that there is a polynomial $Q$ such that $q_n = Q(n)$ for each $n$.",
+    "image": null,
+    "choices": null,
+    "answer": "Take $Q$ interpolating $q_0, \\ldots, q_d$ ($d = \\deg P$). Then $\\operatorname{lcm}(x, x-1, \\ldots, x-d)$ divides $d!\\,(q_x - Q(x))$; this lcm grows like $x^{d+1}$ while $|q_x - Q(x)|$ grows like $x^d$, so $q_x = Q(x)$ for large $x$, and then for all $x$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Interpolate and use a large lcm",
+        "body": "Let $d = \\deg P$ and let $Q$ be the polynomial of degree at most $d$ with $Q(i) = q_i$ for $i = 0, 1, \\ldots, d$. By Lagrange's formula, $Q(x) = \\sum_i q_i\\prod_{j \\ne i}\\frac{x - j}{i - j}$, and $\\prod_{j\\ne i}|i - j| = i!\\,(d-i)!$ divides $d!$; so with $k = d!$ the polynomial $kQ$ has integer coefficients. Hence $u - v \\mid kQ(u) - kQ(v)$ for all integers $u \\ne v$.\n\n**Step 1: a divisibility.** Let $x > d$ be an integer and $0 \\le m \\le d$. By (a), $x - m \\mid q_x - q_m$, and $x - m \\mid kQ(x) - kQ(m)$ with $kQ(m) = kq_m$. So $x - m \\mid k(q_x - Q(x))$ for every $m$, and\n$$L(x) := \\operatorname{lcm}(x, x-1, \\ldots, x-d) \\ \\text{ divides }\\ k\\,(q_x - Q(x)).$$\n\n**Step 2: $L(x)$ is large.** For integers $N_0, \\ldots, N_d \\ge 1$ we have $\\operatorname{lcm}(N_0, \\ldots, N_d) \\ge \\dfrac{N_0\\cdots N_d}{\\prod_{i<j}\\gcd(N_i, N_j)}$. (Induction: $\\operatorname{lcm}(M, N) = \\frac{MN}{\\gcd(M,N)}$, and if $M$ is the lcm of $N_0, \\ldots, N_{j-1}$ then $\\gcd(M, N_j) \\le \\gcd(N_0\\cdots N_{j-1}, N_j) \\le \\prod_{i<j}\\gcd(N_i, N_j)$.) For $N_i = x - i$, $\\gcd(x-i, x-j)$ divides $j - i$, so\n$$L(x) \\ge \\frac{x(x-1)\\cdots(x-d)}{C}, \\qquad C = \\prod_{0\\le i<j\\le d}(j-i),$$\na polynomial of degree $d+1$ in $x$ with positive leading coefficient.\n\n**Step 3: $q_x = Q(x)$ for large $x$.** $|k(q_x - Q(x))| \\le k\\,(P(x) + |Q(x)|)$, a bound of degree at most $d$. So for all $x$ larger than some $X_0$, $|k(q_x - Q(x))| < L(x)$. A multiple of $L(x)$ smaller than $L(x)$ in absolute value is $0$, so $q_x = Q(x)$ for $x > X_0$.\n\n**Step 4: all $n$.** Fix $n \\ge 0$ and take any $x > \\max(X_0, n)$. Then $x - n \\mid k(q_x - q_n) = k(Q(x) - q_n)$ and $x - n \\mid kQ(x) - kQ(n)$; subtracting, $x - n \\mid k(Q(n) - q_n)$. This fixed integer is divisible by arbitrarily large numbers, so it is $0$: $q_n = Q(n)$. ∎"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "polynomials"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamo-usamo-1995-05",
+    "bank": "usamo",
+    "source": {
+      "contest": "USAMO",
+      "paper": "USAMO 1995",
+      "year": 1995,
+      "number": 5,
+      "url": "https://artofproblemsolving.com/wiki/index.php/1995_USAMO_Problems/Problem_5"
+    },
+    "grade": "10-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Suppose that in a certain society, each pair of persons can be classified as either amicable or hostile. We shall say that each member of an amicable pair is a friend of the other, and each member of a hostile pair is a foe of the other. Suppose that the society has $n$ persons and $q$ amicable pairs, and that for every set of three persons, at least one pair is hostile. Prove that there is at least one member of the society whose foes include $q(1 - 4q/n^2)$ or fewer amicable pairs.",
+    "image": null,
+    "choices": null,
+    "answer": "For a person $X$, the amicable pairs not among $X$'s foes are exactly those containing a friend of $X$ (friends of $X$ are never friends of each other), and there are $\\sum_{Y \\sim X}\\deg Y$ of them; summing over $X$ gives $\\sum \\deg^2 \\ge 4q^2/n$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Sum of squared degrees",
+        "body": "Make a graph on the $n$ people with an edge for each amicable pair, so there are $q$ edges and no triangles. For a person $X$, let $F(X)$ be the set of friends and $E(X)$ the set of foes, so the people other than $X$ split into $F(X)$ and $E(X)$; let $\\deg X = |F(X)|$.\n\n**Classify the edges for a fixed $X$.** An edge either contains $X$ (then its other end is in $F(X)$), or joins two people of $F(X)$ (impossible: with $X$ they would form a triangle), or joins $F(X)$ to $E(X)$, or lies inside $E(X)$. So the edges *not* inside $E(X)$ are exactly those with an endpoint in $F(X)$, and since no edge has both endpoints in $F(X)$ there are $\\sum_{Y \\in F(X)}\\deg Y$ of them. Hence the number of amicable pairs among $X$'s foes is\n$$e(X) = q - \\sum_{Y \\in F(X)} \\deg Y.$$\n\n**Sum over $X$.** In $\\sum_X\\sum_{Y\\in F(X)}\\deg Y$ each person $Y$ appears once for each of its $\\deg Y$ friends $X$, so the double sum is $\\sum_Y (\\deg Y)^2$. By Cauchy–Schwarz and $\\sum_Y\\deg Y = 2q$,\n$$\\sum_X \\sum_{Y\\in F(X)}\\deg Y = \\sum_Y(\\deg Y)^2 \\ge \\frac{(2q)^2}{n} = \\frac{4q^2}{n}.$$\nSo for some $X$, $\\sum_{Y\\in F(X)}\\deg Y \\ge \\frac{4q^2}{n^2}$, and for that person\n$$e(X) \\le q - \\frac{4q^2}{n^2} = q\\left(1 - \\frac{4q}{n^2}\\right). \\ ∎$$"
+      }
+    ],
+    "topics": [
+      "graph-theory",
+      "inequalities"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

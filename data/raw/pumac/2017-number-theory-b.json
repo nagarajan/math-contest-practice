@@ -1,0 +1,302 @@
+[
+  {
+    "id": "pumac-2017-number-theory-b-01",
+    "bank": "pumac",
+    "source": {
+      "contest": "PUMaC",
+      "paper": "2017 Number Theory B",
+      "year": 2017,
+      "number": 1,
+      "url": "https://jason-shi-f9dm.squarespace.com/s/PUMaC2017_NT_B.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Let $a_n$ be the least positive integer the sum of whose digits is $n$. Find $a_1+a_2+a_3+\\dots+a_{20}$.",
+    "image": null,
+    "choices": null,
+    "answer": "1074",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Fewest digits, smallest leading digit (official method)",
+        "body": "To be smallest, a number should have as few digits as possible, and then the smallest possible leading digit; so the digits after the first should be $9$s.\n\n- $1\\le n\\le9$: $a_n=n$, sum $45$.\n- $10\\le n\\le18$: two digits, $a_n=\\overline{(n-9)9}=10(n-9)+9=10n-81$: $19,29,\\dots,99$, sum $10\\cdot126-81\\cdot9=1260-729=531$.\n- $a_{19}=199$, $a_{20}=299$.\n\nTotal: $45+531+199+299=1074$.\n\n**Answer: 1074**"
+      },
+      {
+        "title": "List them",
+        "body": "$1,2,\\dots,9$ (sum $45$); $19,29,39,49,59,69,79,89,99$ (sum $9\\cdot59=531$); $199$; $299$. Each is smallest because with fewer digits the digit sum is at most $9\\times$(number of digits), and the leading digit is as small as allowed. Sum $=45+531+498=1074$.\n\n**Answer: 1074**"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "arithmetic"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "pumac-2017-number-theory-b-02",
+    "bank": "pumac",
+    "source": {
+      "contest": "PUMaC",
+      "paper": "2017 Number Theory B",
+      "year": 2017,
+      "number": 2,
+      "url": "https://jason-shi-f9dm.squarespace.com/s/PUMaC2017_NT_B.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Let $S=\\{1,22,333,\\dots,999999999\\}$. For how many pairs of integers $(a,b)$ where $a,b\\in S$ and $a<b$ is it the case that $a$ divides $b$?",
+    "image": null,
+    "choices": null,
+    "answer": "14",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Repunits (official method)",
+        "body": "Let $f(n)=\\underbrace{nn\\cdots n}_{n}=n\\cdot R_n$ where $R_n=\\underbrace{11\\cdots1}_{n}$. If $m\\mid n$, then $R_m\\mid R_n$ (split the $n$ ones into blocks of $m$) and $m\\mid n$, so $f(m)\\mid f(n)$.\n\nConversely, if $a\\nmid b$ then $f(a)\\nmid f(b)$. The key factors: $11\\mid R_n$ iff $n$ is even, $37\\mid R_n$ iff $3\\mid n$ (and $f(3)=333=9\\cdot37$), $101\\mid R_n$ iff $4\\mid n$ (and $f(4)=4\\cdot11\\cdot101$); for $a\\ge5$ the only multiple of $a$ in $\\{a+1,\\dots,9\\}$ is at most $2a$, and dividing the few remaining candidates (e.g. $55555\\nmid 666666$) confirms the rule. Also $f(2)=22$ needs $b$ even since $f(b)$ is even only for even $b$.\n\nSo we count pairs $a<b$ in $\\{1,\\dots,9\\}$ with $a\\mid b$:\n$b=2:1$; $b=3:1$; $b=4:2$; $b=5:1$; $b=6:3$; $b=7:1$; $b=8:3$; $b=9:2$. Total $14$.\n\n**Answer: 14**"
+      },
+      {
+        "title": "Direct check",
+        "body": "There are only $\\binom92=36$ pairs; dividing each $f(b)$ by each smaller $f(a)$ (e.g. by computer) shows exactly the pairs with $a\\mid b$ work: $(1,b)$ for $b=2..9$ ($8$ pairs), $(2,4),(2,6),(2,8)$, $(3,6),(3,9)$, $(4,8)$ — that is $8+3+2+1=14$. For instance $22\\nmid333$ (odd), $333\\nmid4444$, $4444\\mid88888888$ ($=2\\cdot4444\\cdot10001$).\n\n**Answer: 14**"
+      }
+    ],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "pumac-2017-number-theory-b-03",
+    "bank": "pumac",
+    "source": {
+      "contest": "PUMaC",
+      "paper": "2017 Number Theory B",
+      "year": 2017,
+      "number": 3,
+      "url": "https://jason-shi-f9dm.squarespace.com/s/PUMaC2017_NT_B.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Shaq sees the numbers $1$ through $2017$ written on a chalkboard. He repeatedly chooses three numbers, erases them, and writes one plus their median. (For instance, if he erased $-2,-1,0$ he would replace them with $0$.) If $M$ is the maximum possible final value remaining on the board, and if $m$ is the minimum, compute $M-m$.",
+    "image": null,
+    "choices": null,
+    "answer": "2014",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Bounds and constructions",
+        "body": "Each operation reduces the count by $2$, so after $1008$ operations one number remains. Think of each number on the board as coming from a set of original numbers (its \"leaves\"): an original number has itself as its only leaf, and a new number has as leaves the union of the leaves of the three numbers it replaced. Different numbers on the board have disjoint leaf sets.\n\n**Upper bound.** Claim: every number $v$ on the board is at most the largest of its leaves. True for originals. If $v=1+\\operatorname{median}(v_1,v_2,v_3)$ with $v_i\\le\\max L_i$, then the median is at most the second largest of $\\max L_1,\\max L_2,\\max L_3$. These are distinct integers (disjoint leaf sets), so the second largest is at most $\\max L-1$, giving $v\\le\\max L$. Hence the final number is at most $2017$.\n\n**Lower bound.** Similarly, a created number $v$ satisfies $v\\ge\\min L+2$: the median of the $v_i$ is at least the second smallest of the $v_i\\ge\\min L_i$, which is at least $\\min L+1$ (again distinct integers). So the final number is at least $1+2=3$.\n\n**Constructions.** For $m=3$: first do $1007$ operations using only numbers from $\\{3,\\dots,2017\\}$ (new numbers stay $\\ge3$), leaving $1$, $2$ and some $x\\ge3$; the last operation gives $1+2=3$. For $M=2017$: do $1007$ operations within $\\{1,\\dots,2015\\}$ (new numbers are $1+$median $\\le2015$), leaving some $y\\le2015$, $2016$ and $2017$; the last operation gives $1+2016=2017$.\n\nSo $M-m=2017-3=2014$. (The official solution argues the same bounds directly: $2$ would need two numbers $\\le1$, and a value above $2017$ would need a $2017$ and a larger number at the same time.)\n\n**Answer: 2014**"
+      },
+      {
+        "title": "Check small boards",
+        "body": "Run an exhaustive search for the boards $\\{1,\\dots,n\\}$ with small odd $n$ (trying every choice of triple at every step). For $n=5,7,9,11$ the largest possible final number is $n$ and the smallest is $3$, exactly the pattern $M=n$, $m=3$ proved above. For $n=2017$: $M-m=2017-3=2014$.\n\n**Answer: 2014**"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "logic"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "pumac-2017-number-theory-b-04",
+    "bank": "pumac",
+    "source": {
+      "contest": "PUMaC",
+      "paper": "2017 Number Theory B",
+      "year": 2017,
+      "number": 4,
+      "url": "https://jason-shi-f9dm.squarespace.com/s/PUMaC2017_NT_B.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "The sequence of positive integers $a_1,a_2,\\dots$ has the property that $\\gcd(a_m,a_n)>1$ if and only if $|m-n|=1$. Find the sum of the four smallest possible values of $a_2$.",
+    "image": null,
+    "choices": null,
+    "answer": "42",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Two distinct primes are needed and enough (official method)",
+        "body": "$a_2$ shares a prime $p$ with $a_1$ and a prime $q$ with $a_3$, while $\\gcd(a_1,a_3)=1$, so $p\\ne q$: $a_2$ has at least two distinct prime factors.\n\nConversely, any $a_2$ with two distinct prime factors $p,q$ works: take $a_1=p$, $a_3=q\\,r_3$, and then $a_n=r_{n-1}r_n$ for $n\\geq4$, using fresh primes $r_3,r_4,\\dots$ different from all prime factors of $a_2$ — then consecutive terms share exactly one prime and non-consecutive terms are coprime.\n\nThe smallest positive integers with at least two distinct prime factors are $6,10,12,14,15,\\dots$ So the answer is $6+10+12+14=42$.\n\n**Answer: 42**"
+      },
+      {
+        "title": "List candidates",
+        "body": "Check $2,3,\\dots$: prime powers ($2,3,4,5,7,8,9,11,13$) are impossible because then $a_1$ and $a_3$ would both share that single prime and so $\\gcd(a_1,a_3)>1$. The first non-prime-powers are $6=2\\cdot3$, $10=2\\cdot5$, $12=2^2\\cdot3$, $14=2\\cdot7$, each realisable as above. Sum: $42$.\n\n**Answer: 42**"
+      }
+    ],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "pumac-2017-number-theory-b-05",
+    "bank": "pumac",
+    "source": {
+      "contest": "PUMaC",
+      "paper": "2017 Number Theory B",
+      "year": 2017,
+      "number": 5,
+      "url": "https://jason-shi-f9dm.squarespace.com/s/PUMaC2017_NT_B.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Define the *bigness* of a rectangular prism to be the sum of its volume, its surface area, and the lengths of all of its edges. Find the least integer $N$ for which there exists a rectangular prism with integer side lengths and bigness $N$ and another one with integer side lengths and bigness $N+1$.",
+    "image": null,
+    "choices": null,
+    "answer": "55",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Factor the bigness (official method)",
+        "body": "For sides $a,b,c$: $abc+2(ab+bc+ca)+4(a+b+c)=(a+2)(b+2)(c+2)-8$. So $N$ is a bigness iff $N+8=xyz$ with integers $x,y,z\\ge3$.\n\nProducts of three integers $\\ge3$, in increasing order: $27,36,45,48,54,60,63,64,72,75,80,81,\\dots$ ($3\\cdot3\\cdot3$, $3\\cdot3\\cdot4$, $3\\cdot3\\cdot5$, $3\\cdot4\\cdot4$, $3\\cdot3\\cdot6$, $3\\cdot4\\cdot5$, $3\\cdot3\\cdot7$, $4\\cdot4\\cdot4$, ...). The first two consecutive values are $63=3\\cdot3\\cdot7$ and $64=4\\cdot4\\cdot4$. So $N+8=63$, $N=55$ (prisms $1\\times1\\times5$ and $2\\times2\\times2$).\n\nCheck: $1\\cdot1\\cdot5=5$, surface $2(1+5+5)=22$, edges $4\\cdot7=28$: total $55$. And $2\\times2\\times2$: $8+24+24=56$.\n\n**Answer: 55**"
+      },
+      {
+        "title": "Brute-force list",
+        "body": "Listing the bigness of all small integer prisms gives the values $19,28,37,40,46,52,55,56,64,\\dots$ The first pair of consecutive integers is $55,56$, so $N=55$.\n\n**Answer: 55**"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "geometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "pumac-2017-number-theory-b-06",
+    "bank": "pumac",
+    "source": {
+      "contest": "PUMaC",
+      "paper": "2017 Number Theory B",
+      "year": 2017,
+      "number": 6,
+      "url": "https://jason-shi-f9dm.squarespace.com/s/PUMaC2017_NT_B.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "For any integer $n\\ge2$, let $b_n$ be the least positive integer such that, for any integer $N$, $m$ divides $N$ whenever $m$ divides the digit sum of $N$ written in base $b_n$, for $2\\le m\\le n$. Find the integer nearest to $\\frac{b_{36}}{b_{25}}$.",
+    "image": null,
+    "choices": null,
+    "answer": "5394",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "$b_n-1$ must be a multiple of every $m\\le n$",
+        "body": "**Sufficient.** In base $b$, $N\\equiv s_b(N)\\pmod{b-1}$ (because $b\\equiv1$). So if every $m\\le n$ divides $b-1$, then $m\\mid s_b(N)$ implies $m\\mid N$.\n\n**Necessary.** Let $b\\ge2$ have the property. First, $b>n$: otherwise take $m=b$ and $N=2b-1$, written $\\overline{1\\,(b-1)}$ in base $b$, with digit sum $b$; but $b\\nmid2b-1$. Now for each $m\\le n$ (so $m-1<b$), $N=b+(m-1)$ is written $\\overline{1\\,(m-1)}$ with digit sum $m$, so $m\\mid b+m-1$, i.e. $m\\mid b-1$. Thus $\\operatorname{lcm}(1,\\dots,n)\\mid b-1$. (A computer search for small $n$ agrees: $b_2=3$, $b_3=7$, $b_4=13$, $b_5=b_6=61$, $b_7=421$.)\n\nSo $b_n=1+\\operatorname{lcm}(1,2,\\dots,n)$. Going from $25$ to $36$, the lcm gains the prime powers $27$ (an extra factor $3$), $29$, $31$ and $32$ (an extra factor $2$):\n$$\\frac{b_{36}}{b_{25}}=\\frac{1+\\operatorname{lcm}(1..36)}{1+\\operatorname{lcm}(1..25)}\\approx\\frac{\\operatorname{lcm}(1..36)}{\\operatorname{lcm}(1..25)}=3\\cdot29\\cdot31\\cdot2=5394,$$\nand the error is far less than $\\frac12$ (the true ratio is $5393.99999998\\ldots$).\n\n**Answer: 5394**"
+      },
+      {
+        "title": "Official formulation",
+        "body": "The official solution states $b_n=1+\\operatorname{lcm}(1,\\dots,n')$, where $n'$ is the largest prime power not exceeding $n$ (this lcm equals $\\operatorname{lcm}(1,\\dots,n)$). Here $36'=32$ and $25'=25$, and\n$$\\frac{\\operatorname{lcm}(1,\\dots,32)}{\\operatorname{lcm}(1,\\dots,25)}=\\frac{2^5\\cdot3^3\\cdot5^2\\cdots31}{2^4\\cdot3^2\\cdot5^2\\cdots23}=2\\cdot3\\cdot29\\cdot31=5394.$$\n\n**Answer: 5394**"
+      }
+    ],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "pumac-2017-number-theory-b-07",
+    "bank": "pumac",
+    "source": {
+      "contest": "PUMaC",
+      "paper": "2017 Number Theory B",
+      "year": 2017,
+      "number": 7,
+      "url": "https://jason-shi-f9dm.squarespace.com/s/PUMaC2017_NT_B.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Let $p(n)=n^4-6n^2-160$. If $a_n$ is the least odd prime dividing $q(n)=|p(n-30)\\cdot p(n+30)|$, find $\\displaystyle\\sum_{n=1}^{2017}a_n$. ($a_n=3$ if $q(n)=0$.)",
+    "image": null,
+    "choices": null,
+    "answer": "7933",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Work modulo 3, 5, 7 (official method)",
+        "body": "Note $p(x)=(x^2-16)(x^2+10)$. Write $x=n-30$, so $q=|p(x)p(x+60)|$; since $60$ is divisible by $3$ and $5$, $x\\equiv x+60$ modulo $3$ and $5$.\n\n- **Mod 3:** $p(x)\\equiv x^4-1$, which is $0$ iff $3\\nmid x$, i.e. $3\\nmid n$. So $a_n=3$ when $n\\not\\equiv0\\pmod 3$.\n- **Mod 5** (with $3\\mid x$): $p(x)\\equiv x^4-x^2=x^2(x^2-1)$, which is $0$ iff $x\\equiv0,\\pm1\\pmod5$. With $x=n-30\\equiv n$: $a_n=5$ when $3\\mid n$ and $n\\equiv0,\\pm1\\pmod5$.\n\n  (The official solution writes $x=3y$ and gets $y\\equiv0,\\pm2$, which is the same condition since $3y\\equiv0,\\pm1\\iff y\\equiv0,\\pm2\\pmod5$.)\n- **Mod 7:** $p(x)\\equiv(x^2-2)(x^2-4)$ and $x+60\\equiv x+4$. The squares mod $7$ are $0,1,2,4$. Running through $x=0,\\dots,6$, either $x^2$ or $(x+4)^2$ is always $2$ or $4$, so $7\\mid q$ always. Thus $a_n=7$ in the remaining cases.\n\nSo $a_n=3$ if $3\\nmid n$; $a_n=5$ if $3\\mid n$ and $n\\equiv0,\\pm1\\pmod5$; otherwise $a_n=7$. The exact count is done in the second approach: $1345$ threes, $403$ fives and $269$ sevens, for a total of $7933$.\n\n**Answer: 7933**"
+      },
+      {
+        "title": "Exact count",
+        "body": "From the first approach: $a_n=3$ if $3\\nmid n$; $a_n=5$ if $3\\mid n$ and $n\\equiv0,1,4\\pmod5$; otherwise $a_n=7$. (Also $q(n)=0$ only when $n-30$ or $n+30$ is $\\pm4$, i.e. $n\\in\\{26,34\\}$, both not multiples of $3$, so $a_n=3$ as the rule says.)\n\n- $3\\nmid n$: $2017-672=1345$ values.\n- $n=3k$ ($k=1..672$) with $3k\\equiv0,1,4\\pmod5\\iff k\\equiv0,2,3\\pmod5$: for $k=1..670$ there are $3\\cdot134=402$, and $k=671\\equiv1$, $672\\equiv2$ add one more: $403$.\n- The rest: $672-403=269$ values with $a_n=7$.\n\nSum: $3\\cdot1345+5\\cdot403+7\\cdot269=4035+2015+1883=7933$. A direct computer evaluation of all $2017$ terms also gives $7933$.\n\n**Answer: 7933**"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "polynomials"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "pumac-2017-number-theory-b-08",
+    "bank": "pumac",
+    "source": {
+      "contest": "PUMaC",
+      "paper": "2017 Number Theory B",
+      "year": 2017,
+      "number": 8,
+      "url": "https://jason-shi-f9dm.squarespace.com/s/PUMaC2017_NT_B.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Find the least positive integer $N$ such that the only values of $n$ for which $1+N\\cdot2^n$ is prime are multiples of $12$.",
+    "image": null,
+    "choices": null,
+    "answer": "556",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "A covering system (official method)",
+        "body": "Powers of $2$ are periodic modulo small primes: period $2$ mod $3$, $4$ mod $5$, $3$ mod $7$, $12$ mod $13$. If $p\\mid N\\cdot2^r+1$, then $p\\mid N\\cdot2^{n}+1$ for all $n\\equiv r$ modulo the period. So we want to choose $N$ modulo $3,5,7,13$ so that every residue $r\\not\\equiv0\\pmod{12}$ is \"covered\" by one of these primes, while $r\\equiv0$ need not be.\n\n- Mod $3$ (period $2$) must avoid $r=0$, so it covers the odd residues $1,3,5,7,9,11$.\n- Mod $5$ (period $4$), avoiding $0$ and not duplicating: covers $2,6,10$.\n- Remaining: $4,8$. Mod $7$ (period $3$) covers one of the classes $\\{1,4,7,10\\}$ or $\\{2,5,8,11\\}$, and mod $13$ covers the last one ($8$ or $4$).\n\nThe two systems are\n$$2N\\equiv-1\\ (3),\\ 4N\\equiv-1\\ (5),\\ 4N\\equiv-1\\ (7),\\ 2^8N\\equiv-1\\ (13)\\ \\Rightarrow\\ N\\equiv556\\pmod{1365},$$\n$$2N\\equiv-1\\ (3),\\ 4N\\equiv-1\\ (5),\\ 2N\\equiv-1\\ (7),\\ 2^4N\\equiv-1\\ (13)\\ \\Rightarrow\\ N\\equiv901\\pmod{1365}.$$\n(Check $N=556$: $1+556\\cdot2^n$ is divisible by $3$ for odd $n$, by $5$ for $n\\equiv2\\pmod4$, by $7$ for $n\\equiv1\\pmod3$ and by $13$ for $n\\equiv8\\pmod{12}$ — every $n\\not\\equiv0\\pmod{12}$ is covered, and the number is larger than the prime dividing it.)\n\nSo $N=556$ works, and the official answer is that it is the least such $N$.\n\n**Answer: 556**"
+      },
+      {
+        "title": "Ruling out smaller $N$ by computer",
+        "body": "For every $N<556$, search for some $n\\not\\equiv0\\pmod{12}$ with $1+N\\cdot2^n$ prime. Almost all $N$ have such an $n$ below $400$. The stubborn ones are $N=47,94,188,376$ (all $47\\cdot2^k$), $241$, $346$, $383$ and $451$, but primes exist for them too: $47\\cdot2^{583}+1$ (giving $n=583,582,581,580$ for $47,94,188,376$), $241\\cdot2^{5528}+1$, $173\\cdot2^{23313}+1$ (so $n=23312$ for $N=346$), $383\\cdot2^{6393}+1$ and $451\\cdot2^{6740}+1$ are (probable) primes, and none of these exponents is a multiple of $12$. Hence no $N<556$ works, and $N=556$ is the least.\n\n**Answer: 556**"
+      }
+    ],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

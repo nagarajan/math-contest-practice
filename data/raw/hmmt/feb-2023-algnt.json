@@ -1,0 +1,387 @@
+[
+  {
+    "id": "hmmt-feb-2023-algnt-01",
+    "bank": "hmmt",
+    "source": {
+      "contest": "HMMT February",
+      "paper": "2023 Algebra and Number Theory",
+      "year": 2023,
+      "number": 1,
+      "url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2023/feb/algnt/problems.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Suppose $P(x)$ is a cubic polynomial with integer coefficients such that $P(\\sqrt5)=5$ and $P(\\sqrt[3]5)=5\\sqrt[3]5$. Compute $P(5)$.",
+    "image": null,
+    "choices": null,
+    "answer": "-95",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Compare rational and irrational parts",
+        "body": "Write $P(x)=ax^3+bx^2+cx+d$ with integers $a,b,c,d$.\n\n- At $x=\\sqrt5$: $P(\\sqrt5)-5=(5a+c)\\sqrt5+(5b+d-5)=0$. Since $\\sqrt5$ is irrational, $5a+c=0$ and $5b+d=5$.\n- At $x=\\sqrt[3]5$: $P(\\sqrt[3]5)-5\\sqrt[3]5=(5a+d)+(c-5)\\sqrt[3]5+b\\sqrt[3]{25}=0$. Since $1,\\sqrt[3]5,\\sqrt[3]{25}$ are linearly independent over $\\mathbb Q$, $5a+d=0$, $c=5$, $b=0$.\n\nThen $d=5$, $a=-1$, so $P(x)=-x^3+5x+5$ and $P(5)=-125+25+5=-95$.\n\n**Answer: $-95$**"
+      },
+      {
+        "title": "Use the minimal polynomials",
+        "body": "$Q(x)=P(x)-5$ vanishes at $\\sqrt5$, so (integer coefficients) it vanishes at $-\\sqrt5$ too and is divisible by $x^2-5$: $Q(x)=(x^2-5)(ax+e)$.\n\n$R(x)=P(x)-5x$ vanishes at $\\sqrt[3]5$, whose minimal polynomial $x^3-5$ has degree $3$, so $R(x)=k(x^3-5)$. Then $P(x)=kx^3+5x-5k$. Comparing with $P(x)=5+(x^2-5)(ax+e)=ax^3+ex^2-5ax+5-5e$: $e=0$, $-5a=5$, so $a=k=-1$ and the constants agree ($5=5$).\n\nSo $P(x)=-x^3+5x+5$, $P(5)=-95$.\n\n**Answer: $-95$**"
+      }
+    ],
+    "topics": [
+      "polynomials",
+      "algebra"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "hmmt-feb-2023-algnt-02",
+    "bank": "hmmt",
+    "source": {
+      "contest": "HMMT February",
+      "paper": "2023 Algebra and Number Theory",
+      "year": 2023,
+      "number": 2,
+      "url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2023/feb/algnt/problems.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Compute the number of positive integers $n\\le1000$ such that $\\operatorname{lcm}(n,9)$ is a perfect square. (Recall that $\\operatorname{lcm}$ denotes the least common multiple.)",
+    "image": null,
+    "choices": null,
+    "answer": "43",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Split off the power of 3",
+        "body": "Write $n=3^a m$ with $3\\nmid m$. Then $\\operatorname{lcm}(n,9)=3^{\\max(a,2)}m$. This is a square exactly when $m$ is a square and $\\max(a,2)$ is even, i.e. $a$ is even or $a=1$.\n\n- $a$ even: $n$ itself is a perfect square: $1^2,\\dots,31^2$, that is $31$ numbers.\n- $a=1$: $n=3k^2$ with $3\\nmid k$ and $3k^2\\le1000$, i.e. $k\\le18$; excluding $k=3,6,9,12,15,18$ leaves $12$ numbers.\n\nTotal $31+12=43$.\n\n**Answer: 43**"
+      },
+      {
+        "title": "Brute-force check",
+        "body": "Running $n=1,\\dots,1000$ and testing whether $\\frac{9n}{\\gcd(n,9)}$ is a perfect square also gives exactly $43$ values: the $31$ squares plus $3,12,48,75,147,192,300,363,507,588,768,867$.\n\n**Answer: 43**"
+      }
+    ],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "hmmt-feb-2023-algnt-03",
+    "bank": "hmmt",
+    "source": {
+      "contest": "HMMT February",
+      "paper": "2023 Algebra and Number Theory",
+      "year": 2023,
+      "number": 3,
+      "url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2023/feb/algnt/problems.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Suppose $x$ is a real number such that $\\sin\\left(1+\\cos^2x+\\sin^4x\\right)=\\frac{13}{14}$. Compute $\\cos\\left(1+\\sin^2x+\\cos^4x\\right)$.",
+    "image": null,
+    "choices": null,
+    "answer": "-3*sqrt(3)/14",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "answerDisplay": "$-\\frac{3\\sqrt3}{14}$",
+    "solutions": [
+      {
+        "title": "The two arguments are equal",
+        "body": "Let $\\alpha=1+\\cos^2x+\\sin^4x$. Since $\\sin^4x-\\cos^4x=(\\sin^2x+\\cos^2x)(\\sin^2x-\\cos^2x)=\\sin^2x-\\cos^2x$, we get $\\cos^2x+\\sin^4x=\\sin^2x+\\cos^4x$, so the second argument is also $\\alpha$.\n\nFrom $\\sin\\alpha=\\frac{13}{14}$, $\\cos\\alpha=\\pm\\sqrt{1-\\frac{169}{196}}=\\pm\\frac{3\\sqrt3}{14}$.\n\nSign: with $t=\\sin^2x\\in[0,1]$, $\\alpha=1+(1-t)+t^2=t^2-t+2\\in\\left[\\frac74,2\\right]$. Since $\\frac\\pi2<\\frac74$ and $2<\\pi$, $\\alpha$ is in the second quadrant and $\\cos\\alpha<0$.\n\n**Answer: $-\\frac{3\\sqrt3}{14}$**"
+      },
+      {
+        "title": "Numerical check",
+        "body": "Solve $\\sin(t^2-t+2)=\\frac{13}{14}$ for $t\\in[0,1]$: $t^2-t+2=\\pi-\\arcsin\\frac{13}{14}\\approx1.9508$, so $t\\approx0.048$ (valid). Then $\\cos(1.9508)\\approx-0.3712$, and $-\\frac{3\\sqrt3}{14}\\approx-0.3712$. ✓\n\n**Answer: $-\\frac{3\\sqrt3}{14}$**"
+      }
+    ],
+    "topics": [
+      "trigonometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "hmmt-feb-2023-algnt-04",
+    "bank": "hmmt",
+    "source": {
+      "contest": "HMMT February",
+      "paper": "2023 Algebra and Number Theory",
+      "year": 2023,
+      "number": 4,
+      "url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2023/feb/algnt/problems.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Suppose $P(x)$ is a polynomial with real coefficients such that $P(t)=P(1)t^2+P(P(1))t+P(P(P(1)))$ for all real numbers $t$. Compute the largest possible value of $P(P(P(P(1))))$.",
+    "image": null,
+    "choices": null,
+    "answer": "1/9",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Solve for the coefficients",
+        "body": "Let $(a,b,c)=(P(1),P(P(1)),P(P(P(1))))$, so $P(t)=at^2+bt+c$ and we want $P(c)$. Then\n- $a=P(1)=a+b+c$, so $c=-b$;\n- $b=P(a)=a^3+ab+c$;\n- $c=P(b)=ab^2+b^2+c$, so $b^2(a+1)=0$.\n\nIf $b=0$: then $c=0$ and $a^3=0$, so $P\\equiv0$ and $P(c)=0$.\n\nIf $a=-1$: $b=-1-b+c=-1-2b$, so $b=-\\frac13$, $c=\\frac13$. Then $P(t)=-t^2-\\frac13t+\\frac13$ and $P(c)=-\\frac19-\\frac19+\\frac13=\\frac19$.\n\nThe largest value is $\\frac19$.\n\n**Answer: $\\frac19$**"
+      },
+      {
+        "title": "Verify the non-trivial polynomial",
+        "body": "Check $P(t)=-t^2-\\frac t3+\\frac13$: $P(1)=-1-\\frac13+\\frac13=-1$; $P(-1)=-1+\\frac13+\\frac13=-\\frac13$; $P(-\\frac13)=-\\frac19+\\frac19+\\frac13=\\frac13$. So the coefficients are indeed $P(1)$, $P(P(1))$, $P(P(P(1)))$, and $P(P(P(P(1))))=P(\\frac13)=-\\frac19-\\frac19+\\frac13=\\frac19$. Since only this polynomial and the zero polynomial work, the maximum is $\\frac19$.\n\n**Answer: $\\frac19$**"
+      }
+    ],
+    "topics": [
+      "polynomials",
+      "functional-equations"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "hmmt-feb-2023-algnt-05",
+    "bank": "hmmt",
+    "source": {
+      "contest": "HMMT February",
+      "paper": "2023 Algebra and Number Theory",
+      "year": 2023,
+      "number": 5,
+      "url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2023/feb/algnt/problems.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Suppose $E$, $I$, $L$, $V$ are (not necessarily distinct) nonzero digits in base ten for which\n- the four-digit number $\\underline{E}\\,\\underline{V}\\,\\underline{I}\\,\\underline{L}$ is divisible by $73$, and\n- the four-digit number $\\underline{V}\\,\\underline{I}\\,\\underline{L}\\,\\underline{E}$ is divisible by $74$.\n\nCompute the four-digit number $\\underline{L}\\,\\underline{I}\\,\\underline{V}\\,\\underline{E}$.",
+    "image": null,
+    "choices": null,
+    "answer": "9954",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Work modulo 73 and 37",
+        "body": "$\\underline{VILE}$ is even, so $E=2k$ with $k\\in\\{1,2,3,4\\}$. Let $n=\\underline{VIL}$ (a three-digit number). The conditions are $2000k+n\\equiv0\\pmod{73}$ and $10n+2k\\equiv0\\pmod{74}$, i.e. $5n+k\\equiv0\\pmod{37}$.\n\nSo $n\\equiv-2000k\\pmod{73}$ and $n\\equiv-k/5\\pmod{37}$; combining, $n\\equiv1650k\\pmod{2701}$.\n- $k=1$: $n\\equiv1650$, too big.\n- $k=2$: $n\\equiv599$: $E=4$, $\\underline{VIL}=599$.\n- $k=3$: $n\\equiv2249$, too big.\n- $k=4$: $n\\equiv1198$, too big.\n\nSo $(E,V,I,L)=(4,5,9,9)$: check $4599=73\\cdot63$ and $5994=74\\cdot81$. Then $\\underline{LIVE}=9954$.\n\n**Answer: 9954**"
+      },
+      {
+        "title": "Search multiples of 74",
+        "body": "$\\underline{VILE}$ is a multiple of $74$ with nonzero digits; for each such number $\\underline{VILE}$, test whether $\\underline{EVIL}$ is a multiple of $73$. A computer search over all $9^4$ digit choices finds the only solution $E=4,V=5,I=9,L=9$ ($4599=73\\cdot 63$, $5994=74\\cdot 81$), giving $\\underline{LIVE}=9954$.\n\n**Answer: 9954**"
+      }
+    ],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "hmmt-feb-2023-algnt-06",
+    "bank": "hmmt",
+    "source": {
+      "contest": "HMMT February",
+      "paper": "2023 Algebra and Number Theory",
+      "year": 2023,
+      "number": 6,
+      "url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2023/feb/algnt/problems.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Suppose $a_1,a_2,\\dots,a_{100}$ are positive real numbers such that $$a_k=\\frac{ka_{k-1}}{a_{k-1}-(k-1)}$$ for $k=2,3,\\dots,100$. Given that $a_{20}=a_{23}$, compute $a_{100}$.",
+    "image": null,
+    "choices": null,
+    "answer": "215",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Factor the recurrence",
+        "body": "Cross-multiplying: $a_ka_{k-1}=ka_{k-1}+(k-1)a_k$, which rearranges to $(a_k-k)(a_{k-1}-(k-1))=k(k-1)$.\n\nLet $b_k=a_k-k$; then $b_kb_{k-1}=k(k-1)$. With $b_1=t$, induction gives $b_k=kt$ for odd $k$ and $b_k=k/t$ for even $k$. So $a_k=k+kt$ ($k$ odd) and $a_k=k+k/t$ ($k$ even).\n\n$a_{20}=a_{23}$: $20+\\frac{20}{t}=23+23t$, i.e. $23t^2+3t-20=0$, $(t+1)(23t-20)=0$. $t=-1$ gives $a_1=0$, not positive, so $t=\\frac{20}{23}$ and\n$$a_{100}=100+\\frac{100}{t}=100+115=215.$$\n\n**Answer: 215**"
+      },
+      {
+        "title": "Check numerically",
+        "body": "Start with $a_1=1+t=\\frac{43}{23}$ and iterate $a_k=\\frac{ka_{k-1}}{a_{k-1}-(k-1)}$: one gets $a_2=2+\\frac{2\\cdot 23}{20}=4.3$, all terms stay positive, $a_{20}=43=a_{23}$, and $a_{100}=215$.\n\n**Answer: 215**"
+      }
+    ],
+    "topics": [
+      "sequences-series",
+      "algebra"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "hmmt-feb-2023-algnt-07",
+    "bank": "hmmt",
+    "source": {
+      "contest": "HMMT February",
+      "paper": "2023 Algebra and Number Theory",
+      "year": 2023,
+      "number": 7,
+      "url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2023/feb/algnt/problems.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "If $a$, $b$, $c$, and $d$ are pairwise distinct positive integers that satisfy $\\operatorname{lcm}(a,b,c,d)<1000$ and $a+b=c+d$, compute the largest possible value of $a+b$.",
+    "image": null,
+    "choices": null,
+    "answer": "581",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Pass to reciprocals of co-divisors",
+        "body": "Let $L=\\operatorname{lcm}(a,b,c,d)$ and $a'=L/a$, etc. These are pairwise distinct positive integers with\n$$\\frac1{a'}+\\frac1{b'}=\\frac1{c'}+\\frac1{d'}=:T,\\qquad a+b=TL.$$\nNo denominator can be $1$: that side would exceed $1$, while the other side is at most $\\frac12+\\frac13<1$. At most one of them is $2$, so one side has both denominators $\\ge3$, giving $T\\le\\frac13+\\frac14=\\frac7{12}$, which is achieved: $\\frac13+\\frac14=\\frac12+\\frac1{12}$. The next possible value is $T=\\frac13+\\frac15=\\frac12+\\frac1{30}=\\frac8{15}$.\n\nWith $T=\\frac7{12}$, $L$ must be a multiple of $12$ below $1000$: $L=996$ gives $(a,b,c,d)=(332,249,498,83)$ and $a+b=581$. Any smaller $T$ gives $a+b\\le\\frac8{15}\\cdot999<533<581$.\n\n**Answer: 581**"
+      },
+      {
+        "title": "Computer search",
+        "body": "For each $L<1000$, list the divisors of $L$ and look for two different pairs of distinct divisors with the same sum (then the lcm of the four numbers divides $L$, so is $<1000$). The largest such sum is $581=332+249=498+83$, with $L=996$.\n\n**Answer: 581**"
+      }
+    ],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "hmmt-feb-2023-algnt-08",
+    "bank": "hmmt",
+    "source": {
+      "contest": "HMMT February",
+      "paper": "2023 Algebra and Number Theory",
+      "year": 2023,
+      "number": 8,
+      "url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2023/feb/algnt/problems.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Let $S$ be the set of ordered pairs $(a,b)$ of positive integers such that $\\gcd(a,b)=1$. Compute $$\\sum_{(a,b)\\in S}\\left\\lfloor\\frac{300}{2a+3b}\\right\\rfloor.$$",
+    "image": null,
+    "choices": null,
+    "answer": "7400",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Count lattice points",
+        "body": "$\\left\\lfloor\\frac{300}{2a+3b}\\right\\rfloor$ counts positive integers $d$ with $d(2a+3b)\\le300$. So the sum counts triples $(a,b,d)$ with $\\gcd(a,b)=1$ and $d(2a+3b)\\le300$. Map $(a,b,d)\\mapsto(x,y)=(da,db)$; this is a bijection onto positive pairs with $2x+3y\\le300$ (inverse: $d=\\gcd(x,y)$). So we count positive solutions of $2x+3y\\le300$.\n\n- $y=2k$ ($1\\le k\\le49$): $x\\le150-3k$, so $150-3k$ choices: total $\\sum_{k=1}^{49}(150-3k)=7350-3675=3675$.\n- $y=2k-1$ ($1\\le k\\le50$): $x\\le151-3k$: total $\\sum_{k=1}^{50}(151-3k)=7550-3825=3725$.\n\nSum: $3675+3725=7400$.\n\n**Answer: 7400**"
+      },
+      {
+        "title": "Direct computation",
+        "body": "Summing $\\lfloor300/(2a+3b)\\rfloor$ by computer over all coprime $a\\le150$, $b\\le100$ gives $7400$, matching the lattice-point count above.\n\n**Answer: 7400**"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "counting"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "hmmt-feb-2023-algnt-09",
+    "bank": "hmmt",
+    "source": {
+      "contest": "HMMT February",
+      "paper": "2023 Algebra and Number Theory",
+      "year": 2023,
+      "number": 9,
+      "url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2023/feb/algnt/problems.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "For any positive integers $a$ and $b$ with $b>1$, let $s_b(a)$ be the sum of the digits of $a$ when it is written in base $b$. Suppose $n$ is a positive integer such that\n$$\\sum_{i=1}^{\\lfloor\\log_{23}n\\rfloor}s_{20}\\left(\\left\\lfloor\\frac{n}{23^i}\\right\\rfloor\\right)=103\\quad\\text{and}\\quad\\sum_{i=1}^{\\lfloor\\log_{20}n\\rfloor}s_{23}\\left(\\left\\lfloor\\frac{n}{20^i}\\right\\rfloor\\right)=115.$$\nCompute $s_{20}(n)-s_{23}(n)$.",
+    "image": null,
+    "choices": null,
+    "answer": "81",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Legendre-type digit-sum formula",
+        "body": "**Lemma.** $s_a(m)=m-(a-1)\\sum_{i\\ge1}\\left\\lfloor\\frac m{a^i}\\right\\rfloor$. Indeed, the digit $m_k$ in place $a^k$ contributes $m_ka^k$ to $m$ and $m_k(a^{k-1}+\\dots+1)$ to $\\sum_i\\lfloor m/a^i\\rfloor$; and $a^k-(a-1)(a^{k-1}+\\dots+1)=1$.\n\nUsing $\\lfloor\\lfloor n/p\\rfloor/q\\rfloor=\\lfloor n/(pq)\\rfloor$ and setting\n$A=\\sum_j\\lfloor n/20^j\\rfloor$, $B=\\sum_i\\lfloor n/23^i\\rfloor$, $X=\\sum_{i,j\\ge1}\\lfloor n/(20^j23^i)\\rfloor$ (terms beyond the limits are $0$):\n$$103=B-19X,\\qquad115=A-22X.$$\nThen\n$$s_{20}(n)-s_{23}(n)=(n-19A)-(n-22B)=22B-19A=22(103+19X)-19(115+22X)=2266-2185=81.$$\n\n**Answer: 81**"
+      },
+      {
+        "title": "Check with an explicit $n$",
+        "body": "The value $n=22399976$ satisfies both conditions (a computer computes the two sums as $103$ and $115$), and for it $s_{20}(n)-s_{23}(n)=81$, confirming the answer — which, by the argument above, is the same for every valid $n$.\n\n**Answer: 81**"
+      }
+    ],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "hmmt-feb-2023-algnt-10",
+    "bank": "hmmt",
+    "source": {
+      "contest": "HMMT February",
+      "paper": "2023 Algebra and Number Theory",
+      "year": 2023,
+      "number": 10,
+      "url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2023/feb/algnt/problems.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "text",
+    "prompt": "Let $\\zeta=e^{2\\pi i/99}$ and $\\omega=e^{2\\pi i/101}$. The polynomial\n$$x^{9999}+a_{9998}x^{9998}+\\cdots+a_1x+a_0$$\nhas roots $\\zeta^m+\\omega^n$ for all pairs of integers $(m,n)$ with $0\\le m<99$ and $0\\le n<101$. Compute $a_{9799}+a_{9800}+\\cdots+a_{9998}$.",
+    "image": null,
+    "choices": null,
+    "answer": "-4482151475477112417687506765335466111787977188932960173630491",
+    "acceptedAnswers": [
+      "14849-9999/200*C(200,99)",
+      "14849-(9999/200)*C(200,99)",
+      "14849-(9999/200)C(200,99)",
+      "14849-9999/200*binom(200,99)",
+      "14849-(9999/200)*binom(200,99)",
+      "14849-9999*C(200,99)/200",
+      "14849-9999*binom(200,99)/200"
+    ],
+    "answerUnit": null,
+    "answerDisplay": "$14849-\\frac{9999}{200}\\binom{200}{99}$",
+    "solutions": [
+      {
+        "title": "Newton's sums with a roots-of-unity filter",
+        "body": "Let $b_k=a_{9999-k}$; we want $b_1+\\dots+b_{200}$. Let $p_k=\\sum_{m,n}(\\zeta^m+\\omega^n)^k$. Newton's identities: $kb_k+\\sum_{j=1}^kp_jb_{k-j}=0$ (with $b_0=1$).\n\nBy the roots-of-unity filter, $\\frac1{9999}p_k$ equals the sum of the coefficients of the monomials $s^{99a}t^{101b}$ in $(s+t)^k$. For $k\\le200$ such a monomial $s^it^{k-i}$ needs $99\\mid i$ and $101\\mid k-i$:\n- $k\\notin\\{99,101,198,200\\}$: none, so $p_k=0$;\n- $k=99,101,198$: exactly one (coefficient $1$), so $p_k=9999$;\n- $k=200$: only $s^{99}t^{101}$, so $p_{200}=9999\\binom{200}{99}$.\n\nHence $b_k=0$ except:\n- $b_{99}=-p_{99}/99=-101$; $b_{101}=-p_{101}/101=-99$;\n- $b_{198}=\\frac1{198}(-p_{198}-p_{99}b_{99})=\\frac{9999(101-1)}{198}=5050$;\n- $b_{200}=\\frac1{200}\\left(-p_{200}-p_{101}b_{99}-p_{99}b_{101}\\right)=\\frac{1}{200}\\left(-9999\\tbinom{200}{99}+9999\\cdot200\\right)=9999-\\frac{9999}{200}\\binom{200}{99}$.\n\nSum: $-101-99+5050+9999-\\frac{9999}{200}\\binom{200}{99}=14849-\\frac{9999}{200}\\binom{200}{99}$.\n\nAs an integer this is $-4482151475477112417687506765335466111787977188932960173630491$.\n\n**Answer: $14849-\\frac{9999}{200}\\binom{200}{99}$**"
+      },
+      {
+        "title": "Exact computer check",
+        "body": "Running Newton's identities with exact rational arithmetic, using $p_k=9999\\sum\\binom{k}{99a}$ over $a$ with $101\\mid k-99a$, gives $b_1+\\dots+b_{200}=14849-\\frac{9999}{200}\\binom{200}{99}$ exactly. The same method, applied to the analogous problem with $3$rd and $5$th roots of unity, agrees with the coefficients of $\\prod(x-\\zeta^m-\\omega^n)$ computed numerically ($-88$ in both cases).\n\n**Answer: $14849-\\frac{9999}{200}\\binom{200}{99}$**"
+      }
+    ],
+    "topics": [
+      "polynomials",
+      "complex-numbers"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

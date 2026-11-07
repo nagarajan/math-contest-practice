@@ -57,7 +57,7 @@
 - Berkeley Fall 2022 5B: official solution sign error (residue -1/9); corrected answers used, reviewNote. Fall 2022 3B official counterexample not smooth; smooth one given.
 - NYCIML Fall 2024 Senior B Q19: inconsistent data, official 36 kept (reviewNote). Spring 2025 Senior B Q8/Q10: answer page swaps them; used worked solutions (2, 1), reviewNotes.
 - Math League 2012-13 HS file is Contest 2 (source file misnamed contest1).
-- SAMO Senior 2023 Round 2: official solutions NOT AVAILABLE (SAMF 404, no Wayback copy) — REPORT TO USER; all 25 answers agent-solved and script-checked.
+- SAMO Senior 2023 Round 2: official solutions found as s2s2023b.pdf (SAMF names some keys with a "b" suffix). All agent answers match except Q25, where the key line says 009 but its own solution concludes 7 (7 stored, 9 accepted, reviewNote).
 - IOQM 2022 Q9, Q12: officially 'marks to all' (statement errors); kept with preliminary-key answers, reviewNotes. 2022 points nulled (only scheme source was Scribd). IOQM 2020/2021 answer-key PDFs were mislabelled; swapped back.
 - Wisconsin Jan 1999 #1(iii): false for trivial A (reviewNote; corrected statement proved). Jan 1996 has no official key.
 - PMC November 2019: question paper not available (answers/notes only) — REPORT TO USER.
@@ -65,3 +65,14 @@
 - Math Prize for Girls 2026: official solutions 404 — answers agent-solved and computer-checked — REPORT TO USER.
 - ARML 2020: contest cancelled (none exists). 2019 Power 7: official E(n,k)=3 condition misses k=n/2 (reviewNote).
 - HMMT Feb 2025/2026: several typos in official solutions; answers all match keys.
+- BMO Round 1 2013-2019: no official solutions (reports are statistics only; no 2019 report); all proofs agent-written, numeric answers computer-checked. UKMT copies 2018/2019_bmo1_paper_ukmt.pdf are the 2019/2020 papers.
+- Wisconsin algebra Aug 2004, Jan 2005: no official solutions; agent-solved.
+- NYCIML 2023-24: Fall Senior B Q15 key 576 is x^2 (used 24); Spring Senior B Q16 key 27/65 wrong (used 48/65); Spring Senior A Q7-12 have no official solutions (agent-solved; Q12 ambiguous, 1280 stored, 640 accepted). Spring Senior B Q19-30 problem pages are placeholders; statements taken from solution pages.
+- Wisconsin algebra 2007-2012: no official keys; agent-solved.
+- IIT JAM 2022/2023: no official keys; 2022 Q15 has two false options (B stored, D accepted, reviewNote); several interpretive conventions stated in solutions (2023 Q54, Q31; 2022 Q38, Q40).
+- PRMO 2017 Q22, Q24 and 2019 Q20: officially discounted with no clear answer, omitted. PRMO 2017 Q17 discounted but kept (reviewNote). PRMO 2018 key found on HBCSE.
+- PUMaC 2017: official answers wrong for NT A7 (112 not 113), Team 16 (16 not 12), Geometry A8 (printed problem gives 16; official 33 from intended config) — corrected answers stored, official accepted, reviewNotes.
+- SAMO Senior 2020 R2: marks printed two ways (3/5/6 vs 3/4/5); used 3/5/6. Q24 also accepts -13.
+- BAMO 2015: PDF never labels problem E; '3' inferred as BAMO-8 E (reviewNote).
+- UKMT IMC 2013, 2014: not in downloaded sources (plan covers 2012, 2015-2017 only).
+- ARML 2013 Individual 8: official 1/54 wrong (halved diagonal); 2/27 stored (verified), 1/54 accepted. 2012 Power intro paragraph missing from book; setup restated from official solutions (reviewNote). 2014 Power 8b/9 and Super Relay 1 statement edge cases (reviewNotes).

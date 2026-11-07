@@ -1,0 +1,330 @@
+[
+  {
+    "id": "bamo-bamo8-2016-a",
+    "bank": "bamo",
+    "source": {
+      "contest": "BAMO",
+      "paper": "BAMO-8 2016",
+      "year": 2016,
+      "number": "A",
+      "url": "https://www.bamo.org/archives/problems_and_solutions/"
+    },
+    "grade": "6-8",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "The diagram shows an example of a rectangle tiled by squares. Each square has been labeled with its side length. The squares fill the rectangle without overlapping.\n\nIn a similar way, a rectangle can be tiled by nine squares whose side lengths are $2, 5, 7, 9, 16, 25, 28, 33$, and $36$. Sketch a possible arrangement of those squares. They must fill the rectangle without overlapping. Label each square in your sketch by its side length, as in the picture.",
+    "image": "qimages/bamo/bamo8-2016/qa.webp",
+    "choices": null,
+    "answer": "The rectangle is $69\\times61$: bottom row $36$ and $33$, top row $25$, $16$, $28$, and the gap filled by $9$, $7$, $2$, $5$ (coordinates in the solution).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Find the rectangle from the area, then fill it",
+        "body": "**The size of the rectangle.** The total area is\n$$2^2+5^2+7^2+9^2+16^2+25^2+28^2+33^2+36^2=4+25+49+81+256+625+784+1089+1296=4209=3\\cdot23\\cdot61.$$\nBoth sides must be at least $36$ (to fit the largest square), and the only factorization of $4209$ into two such factors is $61\\times69$. Note $36+33=69$ and $36+25=61=33+28$, which suggests putting $36$ and $33$ side by side along an edge of length $69$.\n\n**A tiling.** Put the rectangle with corners $(0,0)$ and $(69,61)$, with $y$ measured downward from the top edge. List each square by its top-left corner and side:\n\n| square | top-left corner | occupies $x$ | occupies $y$ |\n|---|---|---|---|\n| $25$ | $(0,0)$ | $0$–$25$ | $0$–$25$ |\n| $16$ | $(25,0)$ | $25$–$41$ | $0$–$16$ |\n| $28$ | $(41,0)$ | $41$–$69$ | $0$–$28$ |\n| $9$ | $(25,16)$ | $25$–$34$ | $16$–$25$ |\n| $7$ | $(34,16)$ | $34$–$41$ | $16$–$23$ |\n| $2$ | $(34,23)$ | $34$–$36$ | $23$–$25$ |\n| $5$ | $(36,23)$ | $36$–$41$ | $23$–$28$ |\n| $36$ | $(0,25)$ | $0$–$36$ | $25$–$61$ |\n| $33$ | $(36,28)$ | $36$–$69$ | $28$–$61$ |\n\nIn words: along the bottom edge, $36$ (left) and $33$ (right); along the top edge, $25$, $16$, $28$ from left to right. The pocket below $16$ is filled by $9$ and $7$ side by side ($9+7=16$), and under the $7$ sit $2$ (above the $36$) and $5$ (above the $33$).\n\n**Check.** Rows: $25+16+28=69$; $25+9+7+28=69$; $25+9+2+5+28=69$ (at height $23$–$25$); $36+5+28=69$; $36+33=69$. Columns: $25+36=61$; $16+9+36=61$; $16+7+2+36=61$; $16+7+5+33=61$; $28+33=61$. Every point of the rectangle is covered exactly once. (Rotating or reflecting this tiling gives three more.)"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "measurement"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "bamo-bamo8-2016-b",
+    "bank": "bamo",
+    "source": {
+      "contest": "BAMO",
+      "paper": "BAMO-8 2016",
+      "year": 2016,
+      "number": "B",
+      "url": "https://www.bamo.org/archives/problems_and_solutions/"
+    },
+    "grade": "6-8",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "A weird calculator has a numerical display and only two buttons, $D\\sharp$ and $D\\flat$. The first button doubles the displayed number and then adds $1$. The second button doubles the displayed number and then subtracts $1$. For example, if the display is showing $5$, then pressing the sequence $D\\sharp\\, D\\flat\\, D\\sharp\\, D\\sharp$ will result in a display of $87$.\n\n(a) Suppose the initial displayed number is $1$. Give a sequence of exactly eight button presses that will result in a display of $313$.\n\n(b) Suppose the initial displayed number is $1$, and we then perform exactly eight button presses. What are all the numbers that can possibly result? Prove your answer by showing that all of these numbers can be produced, and that no other numbers can be produced.",
+    "image": null,
+    "choices": null,
+    "answer": "(a) $D\\sharp\\,D\\flat\\,D\\flat\\,D\\sharp\\,D\\sharp\\,D\\sharp\\,D\\flat\\,D\\flat$ (through $3,5,9,19,39,79,157,313$). (b) Exactly the odd numbers $1,3,5,\\dots,511$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Work backwards; induction on the number of presses",
+        "body": "**(a)** Work backwards. Every display after a press is odd, and an odd number $m$ comes from $\\frac{m-1}{2}$ by $D\\sharp$ or from $\\frac{m+1}{2}$ by $D\\flat$; only one of these two consecutive integers is odd.\n$$313\\xleftarrow{\\ D\\flat\\ }157\\xleftarrow{\\ D\\flat\\ }79\\xleftarrow{\\ D\\sharp\\ }39\\xleftarrow{\\ D\\sharp\\ }19\\xleftarrow{\\ D\\sharp\\ }9\\xleftarrow{\\ D\\flat\\ }5\\xleftarrow{\\ D\\flat\\ }3\\xleftarrow{\\ D\\sharp\\ }1.$$\nSo the sequence $D\\sharp\\,D\\flat\\,D\\flat\\,D\\sharp\\,D\\sharp\\,D\\sharp\\,D\\flat\\,D\\flat$ works: $1\\to3\\to5\\to9\\to19\\to39\\to79\\to157\\to313$.\n\n**(b)** Claim: after exactly $k$ presses starting from $1$, the possible displays are exactly the odd numbers from $1$ to $2^{k+1}-1$. For $k=8$ this is the odd numbers $1,3,\\dots,511$.\n\n*Only these.* Each press produces $2s\\pm1$, which is odd. If $1\\le s\\le 2^{k+1}-1$, then $2s-1\\ge1$ and $2s+1\\le 2^{k+2}-1$. So by induction every display after $k$ presses is odd and lies between $1$ and $2^{k+1}-1$. (For $k=0$ the display is $1=2^1-1$.)\n\n*All of these.* By induction on $k$; for $k=0$ the only odd number in $[1,1]$ is $1$. Suppose every odd number in $[1,2^{k+1}-1]$ can be reached in $k$ presses, and let $m$ be odd with $1\\le m\\le 2^{k+2}-1$. One of the consecutive integers $\\frac{m-1}2,\\frac{m+1}2$ is odd; call it $s$.\n- If $s=\\frac{m+1}{2}$, then $1\\le s\\le 2^{k+1}$, and since $s$ is odd, $s\\le 2^{k+1}-1$. Reach $s$ in $k$ presses, then press $D\\flat$: $2s-1=m$.\n- If $s=\\frac{m-1}{2}$, then $s$ is odd, so $s\\ge1$, and $s\\le\\frac{2^{k+2}-2}{2}=2^{k+1}-1$. Reach $s$, then press $D\\sharp$: $2s+1=m$.\n\nSo every odd $m\\le 2^{k+2}-1$ is reachable in $k+1$ presses.\n\n**Answer: (a) $D\\sharp D\\flat D\\flat D\\sharp D\\sharp D\\sharp D\\flat D\\flat$; (b) all odd numbers from $1$ to $511$ (256 numbers).** ∎"
+      },
+      {
+        "title": "Binary view",
+        "body": "Write $+1$ for $D\\sharp$ and $-1$ for $D\\flat$, and let $\\varepsilon_1,\\dots,\\varepsilon_8$ be the presses in order. Starting from $1$, the final display is\n$$N=2^8+\\varepsilon_1 2^7+\\varepsilon_2 2^6+\\cdots+\\varepsilon_7\\cdot 2+\\varepsilon_8 .$$\nPut $\\varepsilon_i=2b_i-1$ with $b_i\\in\\{0,1\\}$. Then\n$$N=2^8+2\\sum_{i=1}^{8}b_i2^{8-i}-(2^8-1)=1+2\\sum_{i=1}^8 b_i2^{8-i}=1+2t,$$\nwhere $t=(b_1b_2\\dots b_8)_2$ runs over **every** integer from $0$ to $255$ exactly once as the $b_i$ vary. So the possible results are exactly $1+2t$ for $0\\le t\\le255$, the odd numbers $1,\\dots,511$, each produced by exactly one sequence. For $313$: $t=156=(10011100)_2$, i.e. $D\\sharp D\\flat D\\flat D\\sharp D\\sharp D\\sharp D\\flat D\\flat$. ∎"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "patterns"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "bamo-bamo8-2016-c",
+    "bank": "bamo",
+    "source": {
+      "contest": "BAMO",
+      "paper": "BAMO-8 2016",
+      "year": 2016,
+      "number": "C",
+      "url": "https://www.bamo.org/archives/problems_and_solutions/"
+    },
+    "grade": "6-8",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "The *distinct prime factors* of an integer are its prime factors listed without repetition. For example, the distinct prime factors of $40$ are $2$ and $5$.\n\nLet $A=2^k-2$ and $B=2^k\\cdot A$, where $k$ is an integer ($k>1$).\n\nShow that, for every choice of $k$,\n\n(a) $A$ and $B$ have the same set of distinct prime factors.\n\n(b) $A+1$ and $B+1$ have the same set of distinct prime factors.",
+    "image": null,
+    "choices": null,
+    "answer": "(a) $B=2^kA$ and $2\\mid A$, so the only possible extra prime $2$ already divides $A$. (b) $B+1=2^{2k}-2^{k+1}+1=(2^k-1)^2=(A+1)^2$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Factor and compare",
+        "body": "**(a)** Since $B$ is a multiple of $A$, every prime dividing $A$ divides $B$. Conversely, let $p$ be a prime dividing $B=2^k\\cdot A$. Then $p\\mid 2^k$ or $p\\mid A$. If $p\\mid 2^k$, then $p=2$, and $2$ divides $A$ anyway because $A=2\\left(2^{k-1}-1\\right)$. So every prime dividing $B$ divides $A$. Hence $A$ and $B$ have the same distinct prime factors.\n\n**(b)** We have $A+1=2^k-1$ and\n$$B+1=2^k\\left(2^k-2\\right)+1=2^{2k}-2\\cdot2^k+1=\\left(2^k-1\\right)^2=(A+1)^2.$$\nA prime divides $(A+1)^2$ if and only if it divides $A+1$. So $A+1$ and $B+1$ have the same distinct prime factors. ∎"
+      }
+    ],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "bamo-bamo8-2016-d",
+    "bank": "bamo",
+    "source": {
+      "contest": "BAMO",
+      "paper": "BAMO-8 2016",
+      "year": 2016,
+      "number": "D",
+      "url": "https://www.bamo.org/archives/problems_and_solutions/"
+    },
+    "grade": "6-8",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "In an acute triangle $ABC$ let $K$, $L$, and $M$ be the midpoints of sides $AB$, $BC$, and $CA$, respectively. From each of $K$, $L$, and $M$ drop two perpendiculars to the other two sides of the triangle; e.g., drop perpendiculars from $K$ to sides $BC$ and $CA$, etc. The resulting $6$ perpendiculars intersect at points $Q$, $S$, and $T$ as in the figure to form a hexagon $KQLSMT$ inside triangle $ABC$. Prove that the area of the hexagon $KQLSMT$ is half of the area of the original triangle $ABC$.",
+    "image": "qimages/bamo/bamo8-2016/qd.webp",
+    "choices": null,
+    "answer": "With $O$ the orthocenter of the medial triangle $KLM$, the quadrilaterals $KQLO$, $LSMO$, $MTKO$ are parallelograms, so the three outer triangles of the hexagon equal the three pieces of $KLM$; the hexagon is $2[KLM]=\\tfrac12[ABC]$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Parallelograms around the orthocenter of the medial triangle",
+        "body": "Draw the medial triangle $KLM$. Its sides are parallel to the sides of $ABC$ ($KL\\parallel AC$, $LM\\parallel AB$, $MK\\parallel BC$), and it cuts $ABC$ into four congruent triangles $AKM$, $KBL$, $MLC$, $LMK$, each similar to $ABC$ and hence acute, each with area $\\tfrac14[ABC]$.\n\n**Where $Q$ is.** In triangle $KBL$, the perpendicular from $K$ to $BC$ (the line $BL$) and the perpendicular from $L$ to $AB$ (the line $BK$) are two altitudes. So $Q$ is the orthocenter of triangle $KBL$. That triangle is acute, so $Q$ lies inside it, i.e. on the same side of $KL$ as $B$, outside triangle $KLM$. The same holds for $S$ (in triangle $LCM$) and $T$ (in triangle $MAK$). So the hexagon is the union of triangle $KLM$ and the three triangles $KQL$, $LSM$, $MTK$, which do not overlap.\n\n**Parallelograms.** Let $O$ be the orthocenter of the acute triangle $KLM$; it lies inside $KLM$.\n- $KQ\\perp BC$, and $LO\\perp KM$ with $KM\\parallel BC$; so $KQ\\parallel LO$.\n- $LQ\\perp AB$, and $KO\\perp LM$ with $LM\\parallel AB$; so $LQ\\parallel KO$.\n\nSo $KQLO$ is a parallelogram with diagonal $KL$, and triangles $KQL$ and $LOK$ are congruent. In the same way $LSMO$ and $MTKO$ are parallelograms, so $[LSM]=[MOL]$ and $[MTK]=[KOM]$.\n\n**Adding up.** Since $O$ is inside $KLM$, $[LOK]+[MOL]+[KOM]=[KLM]$. Therefore\n$$[KQLSMT]=[KLM]+[KQL]+[LSM]+[MTK]=[KLM]+[KLM]=2\\cdot\\tfrac14[ABC]=\\tfrac12[ABC].$$ ∎"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "bamo-bamo8-2016-e",
+    "bank": "bamo",
+    "source": {
+      "contest": "BAMO",
+      "paper": "BAMO-8 2016",
+      "year": 2016,
+      "number": "E",
+      "url": "https://www.bamo.org/archives/problems_and_solutions/"
+    },
+    "grade": "6-8",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "For $n>1$, consider an $n\\times n$ chessboard and place pieces at the centers of different squares.\n\n(a) With $2n$ chess pieces on the board, show that there are $4$ pieces among them that form the vertices of a parallelogram.\n\n(b) Show that there is a way to place $2n-1$ chess pieces so that no $4$ of them form the vertices of a parallelogram.",
+    "image": null,
+    "choices": null,
+    "answer": "(a) At least $n$ pieces are not leftmost in their row; their distances to the leftmost piece of their row take only $n-1$ values, so two rows contain equal gaps. (b) Fill the first row and the first column.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Pigeonhole on distances",
+        "body": "**(a)** Each row has at most one *leftmost* piece, so at most $n$ pieces are leftmost in their row, and at least $2n-n=n$ pieces are not. For each such piece, record its distance (number of columns) to the leftmost piece of its row; this is an integer from $1$ to $n-1$.\n\nWe have at least $n$ recorded distances and only $n-1$ possible values, so by the pigeonhole principle two of them are equal, say both equal $d$. In one row the distances to the leftmost piece are all different, so these two pieces are in different rows $r_1\\ne r_2$. Thus row $r_1$ has pieces in columns $a$ and $a+d$, and row $r_2$ has pieces in columns $b$ and $b+d$. The four points $(a,r_1)$, $(a+d,r_1)$, $(b+d,r_2)$, $(b,r_2)$ form a parallelogram: the two horizontal sides have the same length $d$ and are parallel, and they lie on different rows, so the four points are not collinear.\n\n**(b)** Place pieces on all squares of the first row and the first column: $n+n-1=2n-1$ pieces. Call the corner square $O$. Suppose four of the pieces formed a parallelogram. No three vertices of a parallelogram are collinear, so at most two of the four pieces lie in the first row and at most two in the first column.\n\n- If $O$ is one of the four, then the other three lie in the row or the column but not at $O$; then the row or the column contains $O$ and two more of them, i.e. three collinear vertices. Impossible.\n- If $O$ is not one of them, exactly two pieces $P_1,P_2$ lie in the row (not at $O$) and two pieces $R_1,R_2$ lie in the column (not at $O$). If $P_1P_2$ were a side of the parallelogram, the opposite side $R_1R_2$ would be parallel to it, but one is horizontal and the other vertical. So $P_1P_2$ and $R_1R_2$ are the diagonals, and they have the same midpoint. The midpoint of $P_1P_2$ is in the first row, and that of $R_1R_2$ is in the first column, so the common midpoint is $O$. But $P_1,P_2$ both lie strictly to one side of $O$, so their midpoint is not $O$. Contradiction.\n\nSo no four of these $2n-1$ pieces form a parallelogram. ∎"
+      }
+    ],
+    "topics": [
+      "counting",
+      "geometry",
+      "logic"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "bamo-bamo12-2016-1",
+    "bank": "bamo",
+    "source": {
+      "contest": "BAMO",
+      "paper": "BAMO-12 2016",
+      "year": 2016,
+      "number": 1,
+      "url": "https://www.bamo.org/archives/problems_and_solutions/"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "The *distinct prime factors* of an integer are its prime factors listed without repetition. For example, the distinct prime factors of $40$ are $2$ and $5$.\n\nLet $A=2^k-2$ and $B=2^k\\cdot A$, where $k$ is an integer ($k>1$).\n\nShow that, for every choice of $k$,\n\n(a) $A$ and $B$ have the same set of distinct prime factors.\n\n(b) $A+1$ and $B+1$ have the same set of distinct prime factors.",
+    "image": null,
+    "choices": null,
+    "answer": "(a) $B=2^kA$ and $2\\mid A$, so the only possible extra prime $2$ already divides $A$. (b) $B+1=2^{2k}-2^{k+1}+1=(2^k-1)^2=(A+1)^2$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 1,
+    "duplicateOf": "bamo-bamo8-2016-c",
+    "reviewNote": null
+  },
+  {
+    "id": "bamo-bamo12-2016-2",
+    "bank": "bamo",
+    "source": {
+      "contest": "BAMO",
+      "paper": "BAMO-12 2016",
+      "year": 2016,
+      "number": 2,
+      "url": "https://www.bamo.org/archives/problems_and_solutions/"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "In an acute triangle $ABC$ let $K$, $L$, and $M$ be the midpoints of sides $AB$, $BC$, and $CA$, respectively. From each of $K$, $L$, and $M$ drop two perpendiculars to the other two sides of the triangle; e.g., drop perpendiculars from $K$ to sides $BC$ and $CA$, etc. The resulting $6$ perpendiculars intersect at points $Q$, $S$, and $T$ as in the figure to form a hexagon $KQLSMT$ inside triangle $ABC$. Prove that the area of the hexagon $KQLSMT$ is half of the area of the original triangle $ABC$.",
+    "image": null,
+    "choices": null,
+    "answer": "With $O$ the orthocenter of the medial triangle $KLM$, the quadrilaterals $KQLO$, $LSMO$, $MTKO$ are parallelograms, so the three outer triangles of the hexagon equal the three pieces of $KLM$; the hexagon is $2[KLM]=\\tfrac12[ABC]$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": "bamo-bamo8-2016-d",
+    "reviewNote": null
+  },
+  {
+    "id": "bamo-bamo12-2016-3",
+    "bank": "bamo",
+    "source": {
+      "contest": "BAMO",
+      "paper": "BAMO-12 2016",
+      "year": 2016,
+      "number": 3,
+      "url": "https://www.bamo.org/archives/problems_and_solutions/"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "For $n>1$, consider an $n\\times n$ chessboard and place pieces at the centers of different squares.\n\n(a) With $2n$ chess pieces on the board, show that there are $4$ pieces among them that form the vertices of a parallelogram.\n\n(b) Show that there is a way to place $2n-1$ chess pieces so that no $4$ of them form the vertices of a parallelogram.",
+    "image": null,
+    "choices": null,
+    "answer": "(a) At least $n$ pieces are not leftmost in their row; their distances to the leftmost piece of their row take only $n-1$ values, so two rows contain equal gaps. (b) Fill the first row and the first column.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [],
+    "topics": [
+      "counting",
+      "geometry",
+      "logic"
+    ],
+    "difficulty": 2,
+    "duplicateOf": "bamo-bamo8-2016-e",
+    "reviewNote": null
+  },
+  {
+    "id": "bamo-bamo12-2016-4",
+    "bank": "bamo",
+    "source": {
+      "contest": "BAMO",
+      "paper": "BAMO-12 2016",
+      "year": 2016,
+      "number": 4,
+      "url": "https://www.bamo.org/archives/problems_and_solutions/"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Find a positive integer $N$ and $a_1,a_2,\\dots,a_N$, where $a_k=1$ or $a_k=-1$ for each $k=1,2,\\dots,N$, such that\n$$a_1\\cdot1^3+a_2\\cdot2^3+a_3\\cdot3^3+\\cdots+a_N\\cdot N^3=20162016,$$\nor show that this is impossible.",
+    "image": null,
+    "choices": null,
+    "answer": "Possible: for every $u$, $-u^3+(u+1)^3+(u+2)^3-(u+3)^3+(u+4)^3-(u+5)^3-(u+6)^3+(u+7)^3=48$, and $20162016=48\\cdot420042$; take $N=8\\cdot420042=3360336$ with signs $-,+,+,-,+,-,-,+$ repeated.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Eight consecutive cubes with signs give a constant",
+        "body": "**Key identity.** For every integer $u$,\n$$s_u=-u^3+(u+1)^3+(u+2)^3-(u+3)^3+(u+4)^3-(u+5)^3-(u+6)^3+(u+7)^3=48.$$\nExpand $(u+j)^3=u^3+3ju^2+3j^2u+j^3$ with signs $\\varepsilon_j=-,+,+,-,+,-,-,+$ for $j=0,\\dots,7$:\n- coefficient of $u^3$: $\\sum\\varepsilon_j=-1+1+1-1+1-1-1+1=0$;\n- coefficient of $3u^2$: $\\sum\\varepsilon_j j=0+1+2-3+4-5-6+7=0$;\n- coefficient of $3u$: $\\sum\\varepsilon_j j^2=0+1+4-9+16-25-36+49=0$;\n- constant: $\\sum\\varepsilon_j j^3=0+1+8-27+64-125-216+343=48$.\n\n(This sign pattern comes from taking differences three times: $(c_1-c_0)$, then $(c_3-c_2)-(c_1-c_0)$, then the difference of two such blocks, which kills the cubic, quadratic and linear parts.)\n\n**Construction.** Since $20162016=48\\cdot420042$, take $N=8\\cdot420042=3360336$ and split $1,2,\\dots,N$ into $420042$ blocks of $8$ consecutive numbers $8j+1,\\dots,8j+8$ ($j=0,\\dots,420041$). In every block use the signs $-,+,+,-,+,-,-,+$, i.e. $a_k$ depends only on $k\\bmod 8$:\n$$a_k=\\begin{cases}-1,& k\\equiv 1,4,6,7\\pmod 8,\\\\ +1,& k\\equiv 2,3,5,0\\pmod 8.\\end{cases}$$\nEach block contributes $s_{8j+1}=48$, so\n$$\\sum_{k=1}^{N}a_kk^3=420042\\cdot48=20162016,$$\nthat is, $-1^3+2^3+3^3-4^3+5^3-6^3-7^3+8^3-9^3+\\cdots+3360336^3=20162016$.\n\n**Answer: it is possible, e.g. with $N=3360336$ and the repeating sign pattern $-,+,+,-,+,-,-,+$.** ∎"
+      }
+    ],
+    "topics": [
+      "algebra",
+      "number-theory",
+      "sequences-series"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "bamo-bamo12-2016-5",
+    "bank": "bamo",
+    "source": {
+      "contest": "BAMO",
+      "paper": "BAMO-12 2016",
+      "year": 2016,
+      "number": 5,
+      "url": "https://www.bamo.org/archives/problems_and_solutions/"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "The corners of a fixed convex (but not necessarily regular) $n$-gon are labeled with distinct letters. If an observer stands at a point in the plane of the polygon, but outside the polygon, they see the letters in some order from left to right, and they spell a \"word\" (that is, a string of letters; it doesn't need to be a word in any language). For example, in the diagram (where $n=4$), an observer at point $X$ would read \"BAMO,\" while an observer at point $Y$ would read \"MOAB.\"\n\nDetermine, as a formula in terms of $n$, the maximum number of distinct $n$-letter words which may be read in this manner from a single $n$-gon. Do not count words in which some letter is missing because it is directly behind another letter from the viewer's position.",
+    "image": "qimages/bamo/bamo12-2016/q5.webp",
+    "choices": null,
+    "answer": "$2\\binom n2+2\\binom n4=\\dfrac{n(n-1)(n^2-5n+18)}{12}$ (count regions outside the polygon cut out by the $\\binom n2$ lines through pairs of vertices).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Count regions outside the polygon",
+        "body": "Let the vertices be $V_1,\\dots,V_n$ and draw the $\\binom n2$ lines $V_iV_j$.\n\n**Words = regions.** An observer $X$ outside the polygon sees the whole polygon inside an angle smaller than $180^\\circ$, and $V_i$ appears to the left of $V_j$ exactly when $X$ is on a particular side of the line $V_iV_j$. If $X$ is on the line $V_iV_j$ (outside the polygon, hence outside the segment), one of these letters hides the other, and the word does not count. So the readable words correspond to the regions into which the lines cut the outside of the polygon: points in the same region read the same word, and points in different regions are separated by some line $V_iV_j$, so they disagree about the order of $V_i$ and $V_j$. We count these regions.\n\n**Counting lemma.** Let $K$ be the plane or an open convex region, and draw finitely many lines meeting $K$, each line passing through the interior of $K$. For a point $P$ in $K$ where at least two lines meet, let $m_P$ be the number of lines through $P$. Then the number of regions in $K$ is\n$$1+(\\text{number of lines})+\\sum_P (m_P-1).$$\n*Proof.* Add the lines one at a time. When a new line is added, it meets the earlier lines inside $K$ in some number $c$ of distinct points, which cut its part in $K$ into $c+1$ pieces. Each piece splits one region into two, so the count grows by $c+1$. A point $P$ is counted in $c$ once for each line through $P$ except the first one drawn, i.e. $m_P-1$ times in total. $\\square$\n\n**Apply it twice.** *Whole plane:* the lines are the $\\binom n2$ lines. Each vertex $V_i$ lies on $n-1$ lines and adds $n-2$. Every other intersection point is either strictly inside or strictly outside the polygon, since a line through two vertices meets the boundary of the convex polygon only at those vertices, or along a side. So\n$$R_{\\text{plane}}=1+\\binom n2+n(n-2)+\\sum_{P\\text{ inside}}(m_P-1)+\\sum_{P\\text{ outside}}(m_P-1).$$\n*Inside the polygon:* only the $\\binom n2-n$ diagonals pass through the interior, so\n$$R_{\\text{inside}}=1+\\binom n2-n+\\sum_{P\\text{ inside}}(m_P-1).$$\nSubtracting, the number of regions outside is\n$$W=n+n(n-2)+\\sum_{P\\text{ outside}}(m_P-1)=n(n-1)+\\sum_{P\\text{ outside}}(m_P-1).$$\n\n**Upper bound.** Since $m_P-1\\le\\binom{m_P}{2}$, the last sum is at most the number of pairs of lines that meet at a point outside the polygon. Two lines through a common vertex meet at that vertex. Two lines with no common vertex use four vertices $V_a,V_b,V_c,V_d$, and these $4$ points in convex position can be split into two pairs in $3$ ways. One split gives the two diagonals of the quadrilateral, which cross inside. The other two splits give pairs of opposite sides, which meet outside or are parallel. So at most $2\\binom n4$ pairs meet outside, and\n$$W\\le n(n-1)+2\\binom n4=2\\binom n2+2\\binom n4.$$\nEquality holds exactly when no two lines are parallel and no three lines pass through a common point outside the polygon.\n\n**The bound is attained.** Place the vertices one by one on a circle; points on a circle are always in convex position. When adding a new vertex $V$, each bad event allows only finitely many positions for $V$: a new line $VV_i$ parallel to an old line, or a new line $VV_i$ through an intersection point of two old lines. For a fixed $i$, each of these conditions fixes the line $VV_i$, which meets the circle in at most one point besides $V_i$. Two new lines $VV_i$, $VV_j$ meet only at the vertex $V$, and $V$ lies on no old line (an old line meets the circle only at its two vertices). So we can always choose $V$ to avoid all bad positions, and then equality holds.\n\n**Simplify.** $2\\binom n2+2\\binom n4=n(n-1)+\\dfrac{n(n-1)(n-2)(n-3)}{12}=\\dfrac{n(n-1)\\left(n^2-5n+18\\right)}{12}$. For example $n=3$ gives $6$ (all orders of three letters) and $n=4$ gives $14$.\n\n**Answer: $\\displaystyle 2\\binom n2+2\\binom n4=\\frac{n(n-1)(n^2-5n+18)}{12}$.** ∎"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "counting"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

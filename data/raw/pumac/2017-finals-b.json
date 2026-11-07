@@ -1,0 +1,115 @@
+[
+  {
+    "id": "pumac-2017-finals-b-01",
+    "bank": "pumac",
+    "source": {
+      "contest": "PUMaC",
+      "paper": "2017 Individual Finals B",
+      "year": 2017,
+      "number": 1,
+      "url": "https://jason-shi-f9dm.squarespace.com/s/PUMaC2017_Finals_B.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "The Frontier Lands have $50$ towns, some pairs of which are directly connected by Morton's railroad tracks (which are bidirectional and may pass over each other), and it is possible to travel from any town to any other town via these tracks, possibly stopping at other towns on the way. Morton decides that he wants some tracks destroyed so that each town is directly connected to an odd number of other towns. (After Morton destroys the tracks, it might no longer be possible to travel from any town to any other town.) Prove that this is possible.",
+    "image": null,
+    "choices": null,
+    "answer": "Choose a spanning tree and repeatedly cut a suitable edge at an even-degree vertex (or: pair up the $50$ towns, join each pair by a path, and keep the edges used an odd number of times).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Spanning tree induction (official method)",
+        "body": "In graph language: $G$ is a connected graph with an even number of vertices, and we want a set $S$ of edges such that every vertex meets an odd number of edges of $S$ (then destroy every track not in $S$).\n\n**Claim.** Every tree $T$ with an even number of vertices has a set of edges in which every vertex has odd degree. We prove it by strong induction on the number of vertices.\n\nIf every vertex of $T$ already has odd degree, take all edges. Otherwise pick a vertex $v$ of even degree $2n\\ge2$ (a vertex of degree $0$ would be an isolated vertex, impossible in a tree with $\\ge2$ vertices). Removing $v$ splits $T$ into subtrees $T_1,\\dots,T_{2n}$, with $v$ joined to $T_k$ by the edge $e_k$. The sizes satisfy $1+|T_1|+\\dots+|T_{2n}|=|T|$, which is even, so the sum of the $2n$ sizes is odd. A sum of an even number ($2n$) of odd numbers would be even, so at least one $|T_k|$ is even. Delete the edge $e_k$: $T$ splits into the tree $T_k$ (even size) and the tree $T\\setminus T_k$ (size $|T|-|T_k|$, also even). Both are smaller trees with an even number of vertices; by induction each has a suitable edge set, and their union works for $T$.\n\nApply the claim to a spanning tree of $G$ (which exists since $G$ is connected and has $50$ vertices). ∎"
+      },
+      {
+        "title": "Pair up the towns and use paths",
+        "body": "Pair the $50$ towns into $25$ pairs $\\{u_j,w_j\\}$. Since the network is connected, choose a path $P_j$ of tracks from $u_j$ to $w_j$ for each $j$. Let $S$ be the set of tracks that are used by an **odd** number of the paths $P_1,\\dots,P_{25}$, and destroy all other tracks.\n\nFor a town $t$ and a path $P_j$, the number of edges of $P_j$ at $t$ is $1$ if $t$ is an endpoint of $P_j$ and even ($0$ or $2$ per visit) otherwise. Summing over $j$, the number of (path, edge-at-$t$) incidences is congruent mod $2$ to the number of paths ending at $t$, which is exactly $1$. On the other hand, mod $2$ this count equals the number of edges at $t$ that are used an odd number of times, i.e. the degree of $t$ in $S$. So every town has odd degree in $S$. ∎"
+      }
+    ],
+    "topics": [
+      "graph-theory"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "pumac-2017-finals-b-02",
+    "bank": "pumac",
+    "source": {
+      "contest": "PUMaC",
+      "paper": "2017 Individual Finals B",
+      "year": 2017,
+      "number": 2,
+      "url": "https://jason-shi-f9dm.squarespace.com/s/PUMaC2017_Finals_B.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $a_1(x)$, $a_2(x)$, and $a_3(x)$ be three polynomials with integer coefficients such that every polynomial with integer coefficients can be written in the form\n$$p_1(x)a_1(x)+p_2(x)a_2(x)+p_3(x)a_3(x)$$\nfor some polynomials $p_1(x),p_2(x),p_3(x)$ with integer coefficients. Show that every polynomial is of the form\n$$p_1(x)a_1(x)^2+p_2(x)a_2(x)^2+p_3(x)a_3(x)^2$$\nfor some polynomials $p_1(x),p_2(x),p_3(x)$ with integer coefficients.",
+    "image": null,
+    "choices": null,
+    "answer": "From $1=\\sum p_ia_i$, show $1\\in(a_1^2,a_2,a_3)$, then repeat for $a_2,a_3$ (or expand $(p_1a_1+p_2a_2+p_3a_3)^4$: every term contains some $a_i^2$).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Square one generator at a time (official method)",
+        "body": "For $b_1,\\dots,b_k\\in\\mathbb Z[x]$ write $(b_1,\\dots,b_k)$ for the set of all $\\sum p_ib_i$ with $p_i\\in\\mathbb Z[x]$. It suffices to show $1\\in(a_1^2,a_2^2,a_3^2)$: then any $c(x)$ equals $c\\cdot1$, which is again of the required form.\n\nBy hypothesis $1=p_1a_1+q$ with $q\\in(a_2,a_3)$. Then\n$$p_1^2a_1^2=(1-q)^2=1-2q+q^2,\\qquad\\text{so}\\qquad 1=p_1^2a_1^2+q(2-q).$$\nSince $q(2-q)\\in(a_2,a_3)$, we get $1\\in(a_1^2,a_2,a_3)$ (the official solution writes the same identity as $p_1^2a_1^2+(p_1a_1+1)q=1$). Hence $(a_1^2,a_2,a_3)=\\mathbb Z[x]$.\n\nNow apply the same argument to the triple $(a_2,a_1^2,a_3)$, which also generates everything: it gives $(a_2^2,a_1^2,a_3)=\\mathbb Z[x]$. Once more with $(a_3,a_1^2,a_2^2)$: $(a_3^2,a_1^2,a_2^2)=\\mathbb Z[x]$. ∎"
+      },
+      {
+        "title": "Raise to the fourth power",
+        "body": "Write $1=p_1a_1+p_2a_2+p_3a_3$ and raise to the $4$th power:\n$$1=\\sum_{e_1+e_2+e_3=4}\\binom{4}{e_1,e_2,e_3}(p_1a_1)^{e_1}(p_2a_2)^{e_2}(p_3a_3)^{e_3}.$$\nIn each term $e_1+e_2+e_3=4>3$, so some $e_i\\ge2$, and the term is an integer-coefficient multiple of $a_i^2$. Grouping the terms by such an $i$ gives $1=q_1a_1^2+q_2a_2^2+q_3a_3^2$ with $q_i\\in\\mathbb Z[x]$. Multiplying by an arbitrary $c(x)$ shows every polynomial with integer coefficients has the required form. ∎"
+      }
+    ],
+    "topics": [
+      "polynomials",
+      "abstract-algebra"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "pumac-2017-finals-b-03",
+    "bank": "pumac",
+    "source": {
+      "contest": "PUMaC",
+      "paper": "2017 Individual Finals B",
+      "year": 2017,
+      "number": 3,
+      "url": "https://jason-shi-f9dm.squarespace.com/s/PUMaC2017_Finals_B.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $X=\\{1,2,\\dots,2017\\}$. Let $k$ be a positive integer. Given any $r$ such that $1\\le r\\le k$, there exist $k$ subsets of $X$ such that the union of any $r$ of them is equal to $X$, but the union of any fewer than $r$ of them is not equal to $X$. Find, with proof, the greatest possible value for $k$.",
+    "image": null,
+    "choices": null,
+    "answer": "$k=13$: such subsets exist iff $2017\\ge\\binom{k}{r-1}$, and $\\binom{13}{6}=1716\\le2017<\\binom{14}{7}=3432$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Count the missing elements (official method)",
+        "body": "Call $k$ subsets $X_1,\\dots,X_k$ of $[n]=\\{1,\\dots,n\\}$ **$r$-valid** if any $r$ of them cover $[n]$ but no fewer than $r$ do. We show: $r$-valid $k$-tuples exist iff $n\\ge\\binom{k}{r-1}$.\n\n**Necessity.** For each set $I$ of $r-1$ indices, the union $\\bigcup_{i\\in I}X_i$ misses some element $x_I$. If $x_I=x_J$ for $I\\ne J$, then $x_I$ is missing from every $X_i$ with $i\\in I\\cup J$, and $|I\\cup J|\\ge r$, so $r$ of the sets fail to cover $[n]$ — a contradiction. So the $x_I$ are distinct and $n\\ge\\binom{k}{r-1}$.\n\n**Sufficiency.** Let $m=\\binom{k}{r-1}\\le n$. Label $m$ of the elements by the distinct $(r-1)$-subsets $I$ of $\\{1,\\dots,k\\}$, and put every element into $X_i$ except that the element labelled $I$ is left out of $X_i$ exactly when $i\\in I$. (Unlabelled elements go into every $X_i$.) For an index set $S$, the elements missing from $\\bigcup_{i\\in S}X_i$ are those labelled by some $I\\supseteq S$. If $|S|\\le r-1$ such an $I$ exists, so the union is not $[n]$; if $|S|\\ge r$ none exists, so the union is $[n]$. Hence the tuple is $r$-valid.\n\n**The answer.** We need $2017\\ge\\binom{k}{r-1}$ for every $r=1,\\dots,k$, i.e. $2017\\ge\\max_{0\\le j\\le k-1}\\binom kj=\\binom{k}{\\lfloor k/2\\rfloor}$ (for $k\\ge2$; the maximum is never at $j=k$). Since $\\binom{13}{6}=1716\\le2017$ and $\\binom{14}{7}=3432>2017$ (and the central binomial coefficients increase with $k$), the greatest value is $k=13$. ∎"
+      },
+      {
+        "title": "Sanity check on a small case",
+        "body": "Take $n=3$. The condition $n\\ge\\binom{k}{\\lfloor k/2\\rfloor}$ allows $k=3$ ($\\binom31=3$) but not $k=4$ ($\\binom42=6$). For $k=3$, $r=2$ the construction labels the elements $1,2,3$ by $\\{1\\},\\{2\\},\\{3\\}$ and sets $X_i=[3]\\setminus\\{i\\}$: any two cover $[3]$ but no single one does. For $r=1$: $X_i=[3]$; for $r=3$: elements labelled by pairs, $X_1=\\{\\{2,3\\}\\}$, $X_2=\\{\\{1,3\\}\\}$, $X_3=\\{\\{1,2\\}\\}$ — singletons, so only all three together cover. This matches the general argument, which for $n=2017$ gives $k=13$. ∎"
+      }
+    ],
+    "topics": [
+      "counting",
+      "logic"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

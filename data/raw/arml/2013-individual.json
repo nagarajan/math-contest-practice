@@ -1,0 +1,464 @@
+[
+  {
+    "id": "arml-2013-individual-01",
+    "bank": "arml",
+    "source": {
+      "contest": "ARML",
+      "paper": "2013 Individual Round",
+      "year": 2013,
+      "number": 1,
+      "url": "https://arml3.com/wp-content/uploads/2026/03/ARML-2009-2014.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Call a positive integer *fibbish* if each digit, after the leftmost two, is at least the sum of the previous two digits. Compute the greatest fibbish number.",
+    "image": null,
+    "choices": null,
+    "answer": "10112369",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Make it as long as possible",
+        "body": "More digits beats larger digits, so first maximise the length.\n\nIf the first two digits are $A_1A_2$ with $A_2\\ne0$, then $A_1\\,0\\,A_1A_2\\ldots$ is longer and still fibbish, so the best number starts with $A_1$ and then $0$. After $A_1\\,0$, the third digit is $\\ge A_1$.\n\n- If $A_1\\ge2$: the digits after $A_1\\,0$ are at least $2,2,4,6$ and then would need $\\ge10$, so at most 6 digits (e.g. $202246$).\n- If $A_1=1$: the number is $1\\,0\\,1\\,A_4\\ldots$ and from $1,1$ the smallest choices give $1,1,2,3,5,8$, so $10112358$ has 8 digits. A ninth digit would need $\\ge13$. Raising any digit early shortens the tail, except at the end: with $1,0,1,1,2,3$, the seventh digit can be raised from $5$ to $6$ and still allow $9\\ge3+6$ as the eighth.\n\nSo the greatest fibbish number is $10112369$.\n\n**Answer: 10112369**"
+      },
+      {
+        "title": "Computer search",
+        "body": "Generate every fibbish number by choosing any two leading digits and then extending with every digit at least the sum of the previous two. The largest one found is $10112369$.\n\n**Answer: 10112369**"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "counting"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "arml-2013-individual-02",
+    "bank": "arml",
+    "source": {
+      "contest": "ARML",
+      "paper": "2013 Individual Round",
+      "year": 2013,
+      "number": 2,
+      "url": "https://arml3.com/wp-content/uploads/2026/03/ARML-2009-2014.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "An ARMLbar is a $7 \\times 7$ grid of unit squares with the center unit square removed. A *portion* of an ARMLbar is a square section of the bar, cut along the gridlines of the original bar. Compute the number of different ways there are to cut a single portion from an ARMLbar.",
+    "image": null,
+    "choices": null,
+    "answer": "96",
+    "acceptedAnswers": [
+      "115"
+    ],
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Subtract portions that hit the hole",
+        "body": "In a full $7\\times7$ grid there are $(8-m)^2$ squares of side $m$. A square of side $m\\ge4$ always covers the centre, so only $m\\le3$ matter. A side-$m$ square containing the centre can have the centre in any of its $m^2$ cells (for $m\\le3$ it still fits in the grid). So the count is\n$$(7^2+6^2+5^2)-(1^2+2^2+3^2)=110-14=96.$$\n\n*(Note: ARML also accepted $115$, from the interpretation that a portion may contain the hole strictly in its interior; that adds $1+4+9+4+1=19$ squares of sides $3$ to $7$.)*\n\n**Answer: 96**"
+      },
+      {
+        "title": "Count all squares, subtract those over the hole",
+        "body": "All squares in the full grid: $1^2+2^2+\\cdots+7^2=140$. Squares of side $m$ that contain the centre cell: $1,4,9,16,9,4,1$ for $m=1,\\dots,7$ (for $m\\ge5$ the square can only shift a little), total $44$. So $140-44=96$.\n\n**Answer: 96**"
+      }
+    ],
+    "topics": [
+      "counting"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "arml-2013-individual-03",
+    "bank": "arml",
+    "source": {
+      "contest": "ARML",
+      "paper": "2013 Individual Round",
+      "year": 2013,
+      "number": 3,
+      "url": "https://arml3.com/wp-content/uploads/2026/03/ARML-2009-2014.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Regular hexagon $ABCDEF$ and regular hexagon $GHIJKL$ both have side length 24. The hexagons overlap, so that $G$ is on $\\overline{AB}$, $B$ is on $\\overline{GH}$, $K$ is on $\\overline{DE}$, and $D$ is on $\\overline{JK}$. If $[GBCDKL] = \\frac{1}{2}[ABCDEF]$, compute $LF$.",
+    "image": null,
+    "choices": null,
+    "answer": "18",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Two parallelograms",
+        "body": "Let $s=24$. The second hexagon is a translate of the first, so $GL\\parallel AF$ and $LK\\parallel FE$ with $AG=FL=EK$. Then $[GBCDKL]=[ABCDEF]-[AGLKEF]$, and the concave hexagon $AGLKEF$ splits along $\\overline{FL}$ into parallelograms $AGLF$ and $FLKE$.\n\nLine $FL$ is parallel to $\\overline{AB}$ through $F$, at distance $\\frac{s\\sqrt3}2$ (half of $AE=s\\sqrt3$), so $[AGLF]=LF\\cdot\\frac{s\\sqrt3}2$; likewise $[FLKE]=LF\\cdot\\frac{s\\sqrt3}2$. So $[AGLKEF]=LF\\cdot s\\sqrt3$.\n\nWe need $[AGLKEF]=\\frac12\\cdot\\frac{3\\sqrt3}{2}s^2$, so $LF\\cdot s\\sqrt3=\\frac{3\\sqrt3}4s^2$ and $LF=\\frac34s=18$.\n\n**Answer: 18**"
+      },
+      {
+        "title": "Trapezoids",
+        "body": "$GBCDKL$ consists of two congruent trapezoids $BCLG$ and $CDKL$ (split along $\\overline{CL}$). In $BCLG$, $BG=s-LF$, $CL=2s-LF$ and the height is $\\frac{s\\sqrt3}2$, so\n$$[GBCDKL]=2\\cdot\\frac12\\cdot\\frac{s\\sqrt3}2\\bigl((s-LF)+(2s-LF)\\bigr)=\\frac{s\\sqrt3(3s-2LF)}2.$$\nSetting this equal to $\\frac{3\\sqrt3}{4}s^2$ gives $3s-2LF=\\frac32s$, so $LF=\\frac34s=18$.\n\n**Answer: 18**"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "arml-2013-individual-04",
+    "bank": "arml",
+    "source": {
+      "contest": "ARML",
+      "paper": "2013 Individual Round",
+      "year": 2013,
+      "number": 4,
+      "url": "https://arml3.com/wp-content/uploads/2026/03/ARML-2009-2014.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Compute the largest base-10 integer $\\underline{A}\\,\\underline{B}\\,\\underline{C}\\,\\underline{D}$, with $A > 0$, such that $\\underline{A}\\,\\underline{B}\\,\\underline{C}\\,\\underline{D} = B! + C! + D!$.",
+    "image": null,
+    "choices": null,
+    "answer": "5762",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Bound and search",
+        "body": "Since $8!=40320$ has five digits, $B,C,D\\le7$, so $N\\le7!+6!+6!=6480<7000$; thus $A\\le6$, and to beat $5040$ one of $B,C,D$ must be $7$. The other two factorials then add to $N-5040\\le1440$.\n\nTo make $N$ as large as possible try $N=5040+720+Y!=5760+Y!$, which has digits $5,7,6,\\ldots$, so we need $B=7$, $C=6$ and $D=Y$ with $5760+Y!=5760+Y$: only $Y=1$ ($5761$) and $Y=2$ ($5762$) work. Any $N$ above $5762$ would need $N-5040>722$ from two factorials of at most $6!$, i.e. $6!+6!=1440$ ($N=6480$, which fails) or $6!+Y!$ with $Y\\ge3$ ($5766$, $5784$, $5880$), none of which match their digits.\n\nSo the largest is $5762=7!+6!+2!$.\n\n**Answer: 5762**"
+      },
+      {
+        "title": "Computer search",
+        "body": "Testing every four-digit $N$ for $N=B!+C!+D!$, the largest that works is $5762$.\n\n**Answer: 5762**"
+      }
+    ],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "arml-2013-individual-05",
+    "bank": "arml",
+    "source": {
+      "contest": "ARML",
+      "paper": "2013 Individual Round",
+      "year": 2013,
+      "number": 5,
+      "url": "https://arml3.com/wp-content/uploads/2026/03/ARML-2009-2014.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Let $X$ be the number of digits in the decimal expansion of $100^{1000^{10,000}}$, and let $Y$ be the number of digits in the decimal expansion of $1000^{10,000^{100,000}}$. Compute $\\lfloor \\log_X Y \\rfloor$.",
+    "image": null,
+    "choices": null,
+    "answer": "13",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Count digits exactly",
+        "body": "$100^{1000^{10000}}=10^{2\\cdot1000^{10000}}$, so $X=2\\cdot10^{30000}+1$. Likewise $1000^{10000^{100000}}=10^{3\\cdot10^{400000}}$, so $Y=3\\cdot10^{400000}+1$.\n\nThen $\\log_XY=\\frac{\\log Y}{\\log X}\\approx\\frac{400000+\\log3}{30000+\\log2}$, which is within a tiny amount of $\\frac{40}{3}=13.33\\ldots$, far from an integer. So $\\lfloor\\log_XY\\rfloor=13$.\n\n**Answer: 13**"
+      }
+    ],
+    "topics": [
+      "algebra"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "arml-2013-individual-06",
+    "bank": "arml",
+    "source": {
+      "contest": "ARML",
+      "paper": "2013 Individual Round",
+      "year": 2013,
+      "number": 6,
+      "url": "https://arml3.com/wp-content/uploads/2026/03/ARML-2009-2014.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Compute the smallest possible value of $n$ such that two diagonals of a regular $n$-gon intersect at an angle of 159 degrees.",
+    "image": null,
+    "choices": null,
+    "answer": "60",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Inscribed angles",
+        "body": "Put the $n$-gon on a circle, so adjacent vertices cut off arcs of $\\frac{360^\\circ}n$. Two chords that cross inside the circle make an angle equal to half the sum of the two arcs they intercept; if those arcs span $p$ and $q$ sides, the angle is $\\frac{180(p+q)}n$ degrees, and the supplementary angle is also formed.\n\nSo we need $\\frac{180m}{n}=159$ or $21$ for some positive integer $m$, i.e. $60m=53n$ or $60m=7n$. In both cases $60\\mid n$, so $n\\ge60$.\n\nFor $n=60$, diagonals $A_0A_3$ and $A_1A_{55}$ cross, intercepting arcs $A_0A_1$ ($1$ side) and $A_3A_{55}$ ($52$ sides), so they meet at $\\frac{180\\cdot53}{60}=159^\\circ$.\n\n**Answer: 60**"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "number-theory"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "arml-2013-individual-07",
+    "bank": "arml",
+    "source": {
+      "contest": "ARML",
+      "paper": "2013 Individual Round",
+      "year": 2013,
+      "number": 7,
+      "url": "https://arml3.com/wp-content/uploads/2026/03/ARML-2009-2014.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Compute the number of quadratic functions $f(x) = ax^2 + bx + c$ with integer roots and integer coefficients whose graphs pass through the points $(0, 0)$ and $(15, 225)$.",
+    "image": null,
+    "choices": null,
+    "answer": "8",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Factor",
+        "body": "$f(0)=0$ gives $c=0$, so $f(x)=ax(x+\\frac ba)$, with roots $0$ and $-\\frac ba$. From $f(15)=225$: $225a+15b=225$, so $b=15-15a$ and $-\\frac ba=15-\\frac{15}a$. This is an integer exactly when $a\\mid15$, i.e. $a\\in\\{\\pm1,\\pm3,\\pm5,\\pm15\\}$, each giving one function:\n\n| $a$ | $b$ | other root |\n|---|---|---|\n| 1 | 0 | 0 |\n| 3 | $-30$ | 10 |\n| 5 | $-60$ | 12 |\n| 15 | $-210$ | 14 |\n| $-1$ | 30 | 30 |\n| $-3$ | 60 | 20 |\n| $-5$ | 90 | 18 |\n| $-15$ | 240 | 16 |\n\n**Answer: 8**"
+      }
+    ],
+    "topics": [
+      "algebra",
+      "polynomials"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "arml-2013-individual-08",
+    "bank": "arml",
+    "source": {
+      "contest": "ARML",
+      "paper": "2013 Individual Round",
+      "year": 2013,
+      "number": 8,
+      "url": "https://arml3.com/wp-content/uploads/2026/03/ARML-2009-2014.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "A bubble in the shape of a hemisphere of radius 1 is on a tabletop. Inside the bubble are five congruent spherical marbles, four of which are sitting on the table and one which rests atop the others. All marbles are tangent to the bubble, and their centers can be connected to form a pyramid with volume $V$ and with a square base. Compute $V$.",
+    "image": null,
+    "choices": null,
+    "answer": "2/27",
+    "answerDisplay": "$\\frac{1}{54}$",
+    "acceptedAnswers": [
+      "1/54"
+    ],
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Cross-section through two opposite marbles",
+        "body": "Let $r$ be the marble radius and $B$ the centre of the hemisphere's base. Take the vertical cross-section through the centres $R$, $R'$ of two diagonally opposite bottom marbles and the centre $Q$ of the top marble. Reflecting in the table gives six congruent circles, each tangent to the big unit circle and to its two neighbours, so their centres form a regular hexagon around $B$ with side $2r$ and $BR=BQ=2r$. Tangency to the bubble gives $2r+r=1$, so $r=\\frac13$.\n\n$R$ sits at height $r$ and $Q$ at height $2r$, so the pyramid's height is $r$. The horizontal distance from the axis to $R$ is $\\sqrt{(2r)^2-r^2}=r\\sqrt3$, so the diagonal of the square base is $2r\\sqrt3$ and its area is $\\frac{(2r\\sqrt3)^2}2=6r^2$. Hence\n$$V=\\frac13\\cdot6r^2\\cdot r=2r^3=\\frac{2}{27}.$$\n\nThe official ARML answer is $\\frac1{54}$: the official solution takes the base diagonal to be $r\\sqrt3$ (one altitude of the equilateral triangle $BQR$) instead of $2r\\sqrt3$ (twice that altitude), giving base area $\\frac32r^2$ and $V=\\frac{r^3}2=\\frac1{54}$.\n\n**Answer: $\\frac{2}{27}$** (the official key says $\\frac{1}{54}$)"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "spatial"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": "Official key says 1/54, but the official solution halves the base diagonal. With marble radius r: d^2=1-2r (base tangency to bubble) and d^2+(1-2r)^2=4r^2 (top marble) give r=1/3, d=1/sqrt(3); base area 2d^2=2/3, height 1/3, so V=2/27 (stored). The official 1/54 is also accepted."
+  },
+  {
+    "id": "arml-2013-individual-09",
+    "bank": "arml",
+    "source": {
+      "contest": "ARML",
+      "paper": "2013 Individual Round",
+      "year": 2013,
+      "number": 9,
+      "url": "https://arml3.com/wp-content/uploads/2026/03/ARML-2009-2014.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Compute the smallest positive integer base $b$ for which $16_b$ is prime and $97_b$ is a perfect square.",
+    "image": null,
+    "choices": null,
+    "answer": "53",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Squares mod 9",
+        "body": "The digit 9 forces $b\\ge10$. We need $b+6$ prime and $9b+7$ a perfect square. Since $b+6$ is an odd prime, $b$ is odd, so $9b+7$ is even and its square root is even. Squares $\\equiv7\\pmod9$ come from numbers $\\equiv4$ or $5\\pmod9$.\n\nThe even numbers $\\equiv4,5\\pmod9$ in increasing order are $4, 14, 22,\\ldots$: $4^2=16$ gives $b=1$ (too small); $14^2=196=9\\cdot21+7$ gives $b=21$, but $27$ is not prime; $22^2=484=9\\cdot53+7$ gives $b=53$, and $59$ is prime.\n\n**Answer: 53**"
+      }
+    ],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "arml-2013-individual-10",
+    "bank": "arml",
+    "source": {
+      "contest": "ARML",
+      "paper": "2013 Individual Round",
+      "year": 2013,
+      "number": 10,
+      "url": "https://arml3.com/wp-content/uploads/2026/03/ARML-2009-2014.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "For a positive integer $n$, let $C(n)$ equal the number of pairs of consecutive 1's in the binary representation of $n$. For example, $C(183) = C(10110111_2) = 3$. Compute $C(1) + C(2) + C(3) + \\cdots + C(256)$.",
+    "image": null,
+    "choices": null,
+    "answer": "448",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Count by bit positions",
+        "body": "Consider all $k$-bit numbers ($2^{k-1}$ of them, leading bit 1). The first two bits are both 1 in $2^{k-2}$ of them; each of the other $k-2$ adjacent pairs is \"11\" in $2^{k-3}$ of them. So the total of $C$ over $k$-bit numbers is $2^{k-2}+(k-2)2^{k-3}=k\\cdot2^{k-3}$ for $k\\ge2$, and $0$ for $k=1$.\n\nThe numbers $1$ to $255$ have $1$ to $8$ bits, and $C(256)=0$, so the sum is\n$$\\sum_{k=2}^{8}k\\,2^{k-3}=1+3+8+20+48+112+256=448.$$\n\n**Answer: 448**"
+      },
+      {
+        "title": "Recurrence",
+        "body": "Let $c_k$ be the sum of $C$ over $k$-bit numbers. Appending a bit to each $k$-bit number gives each $(k+1)$-bit number once; each old pair is counted twice, and a new pair appears when a 1 is appended to a number ending in 1 ($2^{k-2}$ cases). So $c_{k+1}=2c_k+2^{k-2}$, with $c_2=1$: $c_3=3$, $c_4=8$, $c_5=20$, $c_6=48$, $c_7=112$, $c_8=256$. Summing gives $448$.\n\n**Answer: 448**"
+      }
+    ],
+    "topics": [
+      "counting",
+      "number-theory"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "arml-2013-individual-tb1",
+    "bank": "arml",
+    "source": {
+      "contest": "ARML",
+      "paper": "2013 Individual Round (Tiebreaker)",
+      "year": 2013,
+      "number": 1,
+      "url": "https://arml3.com/wp-content/uploads/2026/03/ARML-2009-2014.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Let $ARML$ be a trapezoid with bases $\\overline{AR}$ and $\\overline{ML}$, such that $MR = RA = AL$ and $LR = AM = ML$. Point $P$ lies inside the trapezoid such that $\\angle RMP = 12^\\circ$ and $\\angle RAP = 6^\\circ$. Diagonals $\\overline{AM}$ and $\\overline{RL}$ intersect at $D$. Compute the measure, in degrees, of angle $APD$.",
+    "image": null,
+    "choices": null,
+    "answer": "48",
+    "acceptedAnswers": null,
+    "answerUnit": "degrees",
+    "solutions": [
+      {
+        "title": "Equilateral triangle construction",
+        "body": "**Angles of the trapezoid.** Let $\\angle M=x$. $\\triangle LRM$ is isosceles ($LR=ML$), so $\\angle LRM=x$ and $\\angle RLM=180^\\circ-2x$. With $AR\\parallel LM$, $\\angle ARL=\\angle RLM=180^\\circ-2x$, and $\\triangle ARL$ is isosceles ($AR=AL$), so $\\angle ALR=180^\\circ-2x$ and $\\angle ALM=360^\\circ-4x$. By symmetry $\\angle ALM=\\angle RML=x$, so $x=72^\\circ$. Hence $\\angle L=\\angle M=72^\\circ$, $\\angle A=\\angle R=108^\\circ$, $\\angle AMR=36^\\circ$ and $\\angle RDM=180^\\circ-72^\\circ-36^\\circ=72^\\circ$, so $DM=RM$.\n\n**Locate $P$.** Build equilateral $\\triangle ROM$ outside the trapezoid. $RA=RM=RO$ and $\\angle ARO=108^\\circ+60^\\circ=168^\\circ$, so $\\angle RAO=6^\\circ$: $P$ lies on $\\overline{AO}$. In $\\triangle PMO$, $\\angle POM=60^\\circ-6^\\circ=54^\\circ$ and $\\angle PMO=60^\\circ+12^\\circ=72^\\circ$, so $\\angle MPO=54^\\circ$ and $PM=OM=RM=DM$.\n\n**Finish.** $\\triangle PDM$ is isosceles with apex angle $\\angle PMD=36^\\circ-12^\\circ=24^\\circ$, so $\\angle DPM=78^\\circ$. Therefore $\\angle APD=180^\\circ-54^\\circ-78^\\circ=48^\\circ$.\n\n(A coordinate computation confirms $48^\\circ$.)\n\n**Answer: 48**"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "arml-2013-individual-tb2",
+    "bank": "arml",
+    "source": {
+      "contest": "ARML",
+      "paper": "2013 Individual Round (Tiebreaker)",
+      "year": 2013,
+      "number": 2,
+      "url": "https://arml3.com/wp-content/uploads/2026/03/ARML-2009-2014.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "A regular hexagon has side length 1. Compute the average of the areas of the 20 triangles whose vertices are vertices of the hexagon.",
+    "image": null,
+    "choices": null,
+    "answer": "9*sqrt(3)/20",
+    "answerDisplay": "$\\frac{9\\sqrt{3}}{20}$",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Three kinds of triangle",
+        "body": "- $6$ triangles with sides $1,1,\\sqrt3$ (three consecutive vertices), area $\\frac{\\sqrt3}4$ each.\n- $2$ equilateral triangles with side $\\sqrt3$ (alternate vertices), area $\\frac{3\\sqrt3}4$ each.\n- $12$ right triangles with sides $1,\\sqrt3,2$ (containing a long diagonal), area $\\frac{\\sqrt3}2$ each.\n\nAverage:\n$$\\frac{6\\cdot\\frac{\\sqrt3}4+2\\cdot\\frac{3\\sqrt3}4+12\\cdot\\frac{\\sqrt3}2}{20}=\\frac{\\frac{36\\sqrt3}{4}}{20}=\\frac{9\\sqrt3}{20}.$$\n\n**Answer: $\\frac{9\\sqrt3}{20}$**"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "counting"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "arml-2013-individual-tb3",
+    "bank": "arml",
+    "source": {
+      "contest": "ARML",
+      "paper": "2013 Individual Round (Tiebreaker)",
+      "year": 2013,
+      "number": 3,
+      "url": "https://arml3.com/wp-content/uploads/2026/03/ARML-2009-2014.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Paul was planning to buy 20 items from the ARML shop. He wanted some mugs, which cost \\$10 each, and some shirts, which cost \\$6 each. After checking his wallet he decided to put 40% of the mugs back. Compute the number of dollars he spent on the remaining items.",
+    "image": null,
+    "choices": null,
+    "answer": "120",
+    "acceptedAnswers": null,
+    "answerUnit": "dollars",
+    "solutions": [
+      {
+        "title": "The mug count cancels",
+        "body": "If he planned $M$ mugs and $20-M$ shirts, he bought $0.6M$ mugs, spending $10(0.6M)+6(20-M)=6M+120-6M=120$ dollars, whatever $M$ is.\n\n**Answer: 120**"
+      }
+    ],
+    "topics": [
+      "algebra",
+      "money"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

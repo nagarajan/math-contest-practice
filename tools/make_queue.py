@@ -253,6 +253,8 @@ def main():
             if k in o:
                 u[k] = o[k]
         out.append(u)
+    ids = {u["id"] for u in units}
+    out += [o for o in old.values() if o["id"] not in ids]
     os.makedirs(os.path.dirname(QUEUE), exist_ok=True)
     json.dump(out, open(QUEUE, "w"), indent=1, ensure_ascii=False)
     from collections import Counter

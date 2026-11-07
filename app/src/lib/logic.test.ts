@@ -60,6 +60,15 @@ describe('isCorrect', () => {
     expect(isCorrect(t, '2 * 3^658')).toBe(true)
     expect(isCorrect(t, '23658')).toBe(false)
   })
+  it('text answers keep signs and list separators', () => {
+    const t = q({ type: 'text', answer: '4, -1' })
+    expect(isCorrect(t, '4,-1')).toBe(true)
+    expect(isCorrect(t, '(4, −1)')).toBe(true)
+    expect(isCorrect(t, '4 -1')).toBe(true)
+    expect(isCorrect(t, '4, 1')).toBe(false)
+    const l = q({ type: 'text', answer: '1, 23' })
+    expect(isCorrect(l, '12, 3')).toBe(false)
+  })
   it('multiple choice compares keys', () => {
     const m = q({ type: 'mc', answer: 'C', choices: [{ key: 'A', text: '1' }, { key: 'C', text: '3' }] })
     expect(isCorrect(m, 'c')).toBe(true)

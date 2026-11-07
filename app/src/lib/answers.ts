@@ -48,7 +48,12 @@ function normText(s: string): string {
     .toLowerCase()
     .normalize('NFKD')
     .replace(/[\u0300-\u036f]/g, '')
-    .replace(/[^a-z0-9:/.^*]+/g, '')
+    .replace(/[\u2212\u2013]/g, '-')
+    .replace(/\{\s*\}/g, '∅')
+    .replace(/\s*([=+*/^:<>])\s*/g, '$1')
+    .replace(/[\s,;()[\]{}]+/g, ',')
+    .replace(/[^a-z0-9:/.^*+\-,<>∅]+/g, '')
+    .replace(/^,+|,+$/g, '')
     .replace(/\.+$/, '')
 }
 
@@ -67,6 +72,7 @@ export function isCorrect(q: Question, given: string): boolean {
     }
   }
   const gn = normText(g)
+  if (!gn) return false
   return accepted.some((a) => normText(a) === gn)
 }
 

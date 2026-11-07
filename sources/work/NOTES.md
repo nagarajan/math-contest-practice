@@ -41,3 +41,8 @@
 - simonmarais 2020/2021/2022 B4(b): OPEN problems (reviewNote).
 - simonmarais 2023/2024/2025 B4(b): OPEN problems (reviewNote).
 - usamts 2010-11 (Year 22) Round 3: not published on usamts.org (404) -- REPORT TO USER as not publicly available.
+- SMO sample (smo-sample): no answer key in source; all 6 answers agent-solved and computer-verified.
+- SEAMO sample D Q2: official key (B) contradicts printed figure; we use (D) with reviewNote. HKIMO sample: answers-only key, solutions agent-written.
+- PRISM 2019: no question paper published. Dropped 8 questions whose wording/choices would have to be reconstructed from solutions (Q1,2,5,8,9,10,14,16) and Q11 (answer letter only). Kept Q3 (=2014 Senior Q14) and 6 reused 2016/2017 problems (duplicateOf). 2016/2017 have no key; mostly agent-solved (7 checked against answers quoted in 2019 solutions).
+- AMT AMC practice sets: points not printed, set to null.
+- SAMO Senior 2025 R2 Q6: official key 016 contradicts its own solution; stored 61 (16 accepted). 2025 R1 Q14: A and E both correct (E accepted). 2025 R2 Part B scored 5 per section headers (cover says 4).

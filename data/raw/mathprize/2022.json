@@ -1,0 +1,754 @@
+[
+  {
+    "id": "mathprize-2022-01",
+    "bank": "mathprize",
+    "source": {
+      "contest": "Math Prize for Girls",
+      "paper": "2022 Math Prize for Girls",
+      "year": 2022,
+      "number": 1,
+      "url": "https://mathprize.atfoundation.org/resources/past-tests/2022/mathprize2022problems.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Determine the real value of $t$ that minimizes the expression\n$$\\sqrt{t^2+(t^2-1)^2}+\\sqrt{(t-14)^2+(t^2-46)^2}.$$\nExpress your answer as a fraction in simplest form.",
+    "image": null,
+    "choices": null,
+    "answer": "7/2",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Distances in the plane",
+        "body": "The first square root is the distance from $(0,1)$ to the point $X=(t,t^2)$, and the second is the distance from $X$ to $(14,46)$. So the expression is the length of the broken path $(0,1)\\to X\\to(14,46)$, where $X$ lies on the parabola $y=x^2$.\n\nThe path is shortest when $X$ lies on the segment joining $(0,1)$ and $(14,46)$ — and this is possible, because $(0,1)$ is inside the parabola (above it) and $(14,46)$ is outside (below it, as $14^2=196>46$), so the segment crosses the parabola.\n\nEqual slopes give\n$$\\frac{t^2-1}{t}=\\frac{t^2-46}{t-14}\\;\\Longrightarrow\\;(t^2-1)(t-14)=t(t^2-46)\\;\\Longrightarrow\\;14t^2-45t-14=0,$$\nso $(2t-7)(7t+2)=0$ and $t=\\frac72$ or $t=-\\frac27$. Only $t=\\frac72$ lies between $0$ and $14$ (on the segment).\n\n**Answer: $\\frac{7}{2}$**"
+      },
+      {
+        "title": "Intersect the line with the parabola",
+        "body": "The line through $(0,1)$ and $(14,46)$ has slope $\\frac{45}{14}$, so it is $y=\\frac{45}{14}x+1$. Intersecting with $y=x^2$: $14x^2-45x-14=0$, i.e. $x=\\frac{45\\pm\\sqrt{2025+784}}{28}=\\frac{45\\pm 53}{28}$, giving $x=\\frac{7}{2}$ or $x=-\\frac{2}{7}$.\n\nBy the triangle inequality the sum of distances is at least the distance between $(0,1)$ and $(14,46)$, with equality exactly when $(t,t^2)$ is on the segment, i.e. $0\\le t\\le 14$. Hence $t=\\frac72$ (check: $(3.5,12.25)$ and $12.25=\\frac{45}{14}\\cdot 3.5+1$).\n\n**Answer: $\\frac{7}{2}$**"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "algebra"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "mathprize-2022-02",
+    "bank": "mathprize",
+    "source": {
+      "contest": "Math Prize for Girls",
+      "paper": "2022 Math Prize for Girls",
+      "year": 2022,
+      "number": 2,
+      "url": "https://mathprize.atfoundation.org/resources/past-tests/2022/mathprize2022problems.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Let $b$ and $c$ be random integers from the set $\\{1, 2, \\ldots, 100\\}$, chosen uniformly and independently. What is the probability that the roots of the quadratic $x^2+bx+c$ are real? Express your answer as a fraction in simplest form.",
+    "image": null,
+    "choices": null,
+    "answer": "1743/2000",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Count lattice points under $c\\le b^2/4$",
+        "body": "The roots are real exactly when the discriminant $b^2-4c\\ge 0$, i.e. $c\\le \\frac{b^2}{4}$. For each $b$ the number of good $c$ is $\\min\\left(100,\\lfloor b^2/4\\rfloor\\right)$.\n\n- For $b\\ge 20$: $b^2/4\\ge 100$, so all $100$ values work: $81\\cdot 100=8100$ pairs.\n- For $b=1$: $\\lfloor 1/4\\rfloor=0$.\n- For $2\\le b\\le 19$: $\\lfloor b^2/4\\rfloor$ equals $b^2/4$ for even $b$ and $b^2/4-\\frac14$ for odd $b$ (there are $9$ odd $b$ in this range). So the count is\n$$\\frac14\\sum_{b=2}^{19}b^2-\\frac94=\\frac14\\left(\\frac{19\\cdot 20\\cdot 39}{6}-1\\right)-\\frac94=\\frac{2469}{4}-\\frac{9}{4}=615.$$\n\nTotal $8100+615=8715$ out of $10000$ pairs, so the probability is $\\frac{8715}{10000}=\\frac{1743}{2000}$.\n\n**Answer: $\\frac{1743}{2000}$**"
+      },
+      {
+        "title": "Count the bad pairs instead",
+        "body": "Count pairs with $c>b^2/4$, i.e. $b^2<4c$. Only $b\\le 19$ can fail. For $b=2k$ the bad values are $c\\ge k^2+1$: $100-k^2$ of them; for $b=2k+1$ the bad values are $c\\ge k^2+k+1$: $100-k^2-k$ of them.\n\n- Even $b=2,4,\\dots,18$ ($k=1..9$): $\\sum(100-k^2)=900-285=615$.\n- Odd $b=1,3,\\dots,19$ ($k=0..9$): $\\sum(100-k^2-k)=1000-285-45=670$.\n\nBad pairs: $615+670=1285$, so good pairs $=10000-1285=8715$ and the probability is $\\frac{8715}{10000}=\\frac{1743}{2000}$.\n\n**Answer: $\\frac{1743}{2000}$**"
+      }
+    ],
+    "topics": [
+      "probability",
+      "counting"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "mathprize-2022-03",
+    "bank": "mathprize",
+    "source": {
+      "contest": "Math Prize for Girls",
+      "paper": "2022 Math Prize for Girls",
+      "year": 2022,
+      "number": 3,
+      "url": "https://mathprize.atfoundation.org/resources/past-tests/2022/mathprize2022problems.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Let $ABCD$ be the square face of a cube with edge length $2$. A plane $P$ that contains $A$ and the midpoint of $\\overline{BC}$ splits the cube into two pieces of the same volume. What is the square of the area of the intersection of $P$ and the cube?",
+    "image": null,
+    "choices": null,
+    "answer": "24",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Use the center of symmetry",
+        "body": "Let $M$ be the midpoint of $BC$, and let $A'$, $M'$ be the reflections of $A$, $M$ through the center $O$ of the cube.\n\nA plane cuts the cube into two equal volumes when it passes through $O$ (the cube is symmetric about $O$, so the two pieces are swapped by the point reflection). The lines $AA'$ and $MM'$ meet at $O$, so $A,M,A',M'$ lie in one plane, and that plane contains $A$ and $M$ and passes through $O$ — it is $P$. (One can check that a plane through $A$ and $M$ not through $O$ gives unequal pieces, since moving the plane parallel to itself changes the volume monotonically.)\n\nThe cross-section is the quadrilateral $AMA'M'$. Each side runs across a face from a vertex to the midpoint of a far edge, so all four sides have length $\\sqrt{2^2+1^2}=\\sqrt5$: it is a rhombus. Its diagonals are $AA'$ (a space diagonal, $\\sqrt{12}$) and $MM'$ (joining midpoints of opposite edges, $\\sqrt{8}$). Area $=\\frac12\\sqrt{12}\\sqrt8=\\sqrt{24}$, whose square is $24$.\n\n**Answer: 24**"
+      },
+      {
+        "title": "Coordinates",
+        "body": "Put the cube as $[0,2]^3$ with $A=(0,0,0)$, $B=(2,0,0)$, $C=(2,2,0)$, so $M=(2,1,0)$ and the center is $O=(1,1,1)$. The plane through $A$, $M$, $O$ has normal $\\vec{AM}\\times\\vec{AO}=(2,1,0)\\times(1,1,1)=(1,-2,1)$, i.e. $x-2y+z=0$.\n\nIt meets the cube in the quadrilateral with vertices $(0,0,0)$, $(2,1,0)$, $(2,2,2)$, $(0,1,2)$. The area of this planar quadrilateral is $\\frac12|\\vec{d_1}\\times\\vec{d_2}|$ for diagonals $\\vec{d_1}=(2,2,2)$, $\\vec{d_2}=(0,1,2)-(2,1,0)=(-2,0,2)$:\n$$\\vec{d_1}\\times\\vec{d_2}=(4,-8,4),\\quad |\\cdot|=\\sqrt{96},\\quad \\text{area}=\\tfrac12\\sqrt{96}=\\sqrt{24}.$$\nSo the square of the area is $24$.\n\n**Answer: 24**"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "spatial"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "mathprize-2022-04",
+    "bank": "mathprize",
+    "source": {
+      "contest": "Math Prize for Girls",
+      "paper": "2022 Math Prize for Girls",
+      "year": 2022,
+      "number": 4,
+      "url": "https://mathprize.atfoundation.org/resources/past-tests/2022/mathprize2022problems.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Determine the largest integer $n$ such that $n<103$ and $n^3-1$ is divisible by $103$.",
+    "image": null,
+    "choices": null,
+    "answer": "56",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Factor and use the quadratic formula mod 103",
+        "body": "$n^3-1=(n-1)(n^2+n+1)$, and $103$ is prime, so we need $n\\equiv1$ or $n^2+n+1\\equiv0 \\pmod{103}$.\n\nBy the quadratic formula, $n\\equiv\\frac{-1\\pm\\sqrt{-3}}{2}$. Conveniently $-3\\equiv100=10^2\\pmod{103}$, so $\\sqrt{-3}\\equiv\\pm10$ and\n$$n\\equiv\\frac{-1+10}{2}=\\frac92\\equiv\\frac{9+103}{2}=56,\\qquad n\\equiv\\frac{-11}{2}\\equiv\\frac{92}{2}=46.$$\nThe solutions in $0\\le n<103$ are $1,46,56$; the largest is $56$.\n\nCheck: $56^2+56+1=3193=31\\cdot103$. ✓\n\n**Answer: 56**"
+      },
+      {
+        "title": "Use the structure of cube roots of unity",
+        "body": "Since $103-1=102$ is divisible by $3$, there are exactly three cube roots of $1$ mod $103$: $1,\\omega,\\omega^2$, with $\\omega+\\omega^2\\equiv-1$ and $\\omega\\cdot\\omega^2\\equiv 1$.\n\nSo we want two numbers with sum $\\equiv -1\\equiv102$ and product $\\equiv1$. Trying $46+56=102$: $46\\cdot56=2576=25\\cdot103+1\\equiv1$. ✓ So the nontrivial cube roots are $46$ and $56$, and the largest $n<103$ is $56$.\n\n**Answer: 56**"
+      }
+    ],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "mathprize-2022-05",
+    "bank": "mathprize",
+    "source": {
+      "contest": "Math Prize for Girls",
+      "paper": "2022 Math Prize for Girls",
+      "year": 2022,
+      "number": 5,
+      "url": "https://mathprize.atfoundation.org/resources/past-tests/2022/mathprize2022problems.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Given a real number $a$, the *floor* of $a$, written $\\lfloor a\\rfloor$, is the greatest integer less than or equal to $a$. For how many real numbers $x$ such that $1\\le x\\le 20$ is\n$$x^2+\\lfloor 2x\\rfloor=\\lfloor x^2\\rfloor+2x\\,?$$",
+    "image": null,
+    "choices": null,
+    "answer": "362",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Equal fractional parts",
+        "body": "Rewrite the equation as $x^2-\\lfloor x^2\\rfloor=2x-\\lfloor 2x\\rfloor$: the fractional parts of $x^2$ and $2x$ are equal. That happens exactly when $x^2-2x$ is an integer.\n\nOn $[1,20]$ the function $g(x)=x^2-2x=(x-1)^2-1$ is continuous and strictly increasing from $g(1)=-1$ to $g(20)=360$. So it takes each integer value from $-1$ to $360$ exactly once, giving $360-(-1)+1=362$ solutions.\n\n**Answer: 362**"
+      },
+      {
+        "title": "Solve explicitly",
+        "body": "$x^2-2x=k$ with $k$ an integer means $x=1+\\sqrt{k+1}$ (taking the root with $x\\ge1$). The condition $1\\le x\\le 20$ becomes $0\\le\\sqrt{k+1}\\le 19$, i.e. $0\\le k+1\\le 361$, so $k\\in\\{-1,0,\\dots,360\\}$: $362$ values, each giving one distinct $x$.\n\n(For each such $x$ the fractional parts of $x^2$ and $2x$ agree because their difference is the integer $k$, so the original equation holds.)\n\n**Answer: 362**"
+      }
+    ],
+    "topics": [
+      "algebra"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "mathprize-2022-06",
+    "bank": "mathprize",
+    "source": {
+      "contest": "Math Prize for Girls",
+      "paper": "2022 Math Prize for Girls",
+      "year": 2022,
+      "number": 6,
+      "url": "https://mathprize.atfoundation.org/resources/past-tests/2022/mathprize2022problems.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "An L-shaped region is formed by attaching two $2$ by $5$ rectangles to adjacent sides of a $2$ by $2$ square as shown below.\n\nThe resulting shape has an area of $24$ square units. How many ways are there to tile this shape with $2$ by $1$ dominos (each of which may be placed horizontally or vertically)?",
+    "image": "qimages/mathprize/2022/q06.webp",
+    "choices": null,
+    "answer": "208",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Symmetry and a forced cut",
+        "body": "The bottom-left unit cell is covered either by a horizontal or by a vertical domino. Reflecting the L in its diagonal line of symmetry swaps these two cases, so the number of tilings is twice the number in which the bottom-left cell is covered by a **horizontal** domino.\n\nAssume this. Split the L along the vertical segment $XY$ two units from the left edge into the left $2\\times7$ column and the right $2\\times5$ arm. A domino crossing $XY$ would have to use a cell in the second row of the left column (the bottom row there is already taken by the horizontal domino), and then the right $2\\times5$ arm would have $9$ cells left to cover — an odd number, impossible. So no domino crosses $XY$.\n\nHence such tilings are pairs (tiling of the left column minus its bottom domino, a $2\\times 6$ rectangle; tiling of the $2\\times 5$ arm). The number of domino tilings of a $2\\times N$ rectangle is the Fibonacci number $F_N$ with $F_1=1,F_2=2$, $F_N=F_{N-1}+F_{N-2}$ (the left end is either one vertical domino or two stacked horizontal ones): $1,2,3,5,8,13$. So there are $F_5F_6=8\\cdot 13=104$ such tilings, and the total is $2\\cdot104=208$.\n\n**Answer: 208**"
+      },
+      {
+        "title": "Transfer by the corner square",
+        "body": "Split the L into the corner $2\\times 2$ square $S$, the vertical arm $V$ ($2\\times5$, above $S$) and the horizontal arm $H$ ($5\\times 2$, right of $S$). Classify tilings by how $S$ is covered.\n\nDominoes can cross from $S$ into $V$ (vertical dominoes crossing the top edge of $S$) or into $H$ (horizontal ones crossing the right edge). If $j$ dominoes cross the top edge, $V$ has $10-j$ cells left, so $j$ is even; likewise the number $k$ crossing the right edge is even. So $j,k\\in\\{0,2\\}$, and $j=k=2$ is impossible because the top-right cell of $S$ would be needed twice. Cases:\n\n- $j=k=0$: $S$ tiled by itself ($2$ ways), $V$ and $H$ independently ($F_5=8$ each): $2\\cdot 8\\cdot 8=128$.\n- $j=2,k=0$: the top row of $S$ goes up into $V$; the bottom row of $S$ is one horizontal domino. Then $V$ minus its bottom row is a $2\\times4$ ($F_4=5$) and $H$ is free ($8$): $40$.\n- $j=0,k=2$: symmetric: $40$.\n\nTotal $128+40+40=208$.\n\n**Answer: 208**"
+      }
+    ],
+    "topics": [
+      "counting"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "mathprize-2022-07",
+    "bank": "mathprize",
+    "source": {
+      "contest": "Math Prize for Girls",
+      "paper": "2022 Math Prize for Girls",
+      "year": 2022,
+      "number": 7,
+      "url": "https://mathprize.atfoundation.org/resources/past-tests/2022/mathprize2022problems.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "The quadrilateral $ABCD$ is an isosceles trapezoid with $AB=CD=1$, $BC=2$, and $DA=1+\\sqrt3$. What is the measure of $\\angle ACD$ in degrees?",
+    "image": null,
+    "choices": null,
+    "answer": "90",
+    "acceptedAnswers": null,
+    "answerUnit": "degrees",
+    "solutions": [
+      {
+        "title": "Law of cosines",
+        "body": "In triangles $ABC$ and $ADC$:\n$$AC^2=1^2+2^2-2\\cdot1\\cdot2\\cos B,\\qquad AC^2=1^2+(1+\\sqrt3)^2-2\\cdot1\\cdot(1+\\sqrt3)\\cos D.$$\nIn a trapezoid with $BC\\parallel AD$, angles $B$ and... in an isosceles trapezoid $ABCD$ is cyclic, so $B+D=180^\\circ$ and $\\cos B=-\\cos D$. Adding $(1+\\sqrt3)$ times the first equation to $2$ times the second eliminates the cosines:\n$$(3+\\sqrt3)AC^2=5(1+\\sqrt3)+2\\left(1+(1+\\sqrt3)^2\\right)=15+9\\sqrt3,$$\nso $AC^2=\\frac{15+9\\sqrt3}{3+\\sqrt3}=3+2\\sqrt3$.\n\nThen $AC^2+CD^2=4+2\\sqrt3=(1+\\sqrt3)^2=AD^2$, so by the converse of the Pythagorean theorem $\\angle ACD=90^\\circ$.\n\n**Answer: $90^\\circ$**"
+      },
+      {
+        "title": "Coordinates",
+        "body": "Place $A=(0,0)$, $D=(1+\\sqrt3,0)$. The top base $BC=2$ is centered, so each side overhang is $\\frac{(1+\\sqrt3)-2}{2}=\\frac{\\sqrt3-1}{2}$, and the height is $h=\\sqrt{1-\\left(\\frac{\\sqrt3-1}{2}\\right)^2}=\\sqrt{\\frac{\\sqrt3}{2}}$ (since $\\left(\\frac{\\sqrt3-1}{2}\\right)^2=\\frac{4-2\\sqrt3}{4}$).\n\nSo $C=\\left(\\frac{\\sqrt3+3}{2},h\\right)$. Then $\\vec{CA}=\\left(-\\tfrac{\\sqrt3+3}{2},-h\\right)$ and $\\vec{CD}=\\left(\\tfrac{\\sqrt3-1}{2},-h\\right)$, so\n$$\\vec{CA}\\cdot\\vec{CD}=-\\frac{(\\sqrt3+3)(\\sqrt3-1)}{4}+h^2=-\\frac{2\\sqrt3}{4}+\\frac{\\sqrt3}{2}=0.$$ The dot product is $0$, so $\\angle ACD=90^\\circ$.\n\n**Answer: $90^\\circ$**"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "trigonometry"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "mathprize-2022-08",
+    "bank": "mathprize",
+    "source": {
+      "contest": "Math Prize for Girls",
+      "paper": "2022 Math Prize for Girls",
+      "year": 2022,
+      "number": 8,
+      "url": "https://mathprize.atfoundation.org/resources/past-tests/2022/mathprize2022problems.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Let $S$ be the set of numbers of the form $n^5-5n^3+4n$, where $n$ is an integer that is not a multiple of $3$. What is the largest integer that is a divisor of every number in $S$?",
+    "image": null,
+    "choices": null,
+    "answer": "360",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Five consecutive integers",
+        "body": "Factor: $p(n)=n(n^2-1)(n^2-4)=(n-2)(n-1)n(n+1)(n+2)$, a product of five consecutive integers whose middle one is not a multiple of $3$.\n\n- Among five consecutive integers one is divisible by $5$.\n- The multiples of $3$ among $n-2,\\dots,n+2$: since $3\\nmid n$, both $n-1,n+2$ or both $n-2,n+1$ — two of them, so $9\\mid p(n)$.\n- There is a multiple of $4$ among them, and the number $2$ away from it (also even) is also among them, giving $8\\mid p(n)$.\n\nSo $8\\cdot9\\cdot5=360$ divides every element. And $\\gcd(p(4),p(5))=\\gcd(720,2520)=360$, so nothing larger works.\n\n**Answer: 360**"
+      },
+      {
+        "title": "Compute the first values",
+        "body": "Using $p(n)=(n-2)(n-1)n(n+1)(n+2)$: $p(1)=p(2)=0$, $p(4)=2\\cdot3\\cdot4\\cdot5\\cdot6=720$, $p(5)=3\\cdot4\\cdot5\\cdot6\\cdot7=2520$, $p(7)=5\\cdot6\\cdot7\\cdot8\\cdot9=15120$.\n\n$\\gcd(720,2520)=360$, and $15120=42\\cdot360$. So the answer divides $360$. Conversely, $360=8\\cdot9\\cdot5$ divides every value by the divisibility argument (a multiple of $5$; two multiples of $3$ because the middle term isn't one; a multiple of $4$ and another even number). Hence the answer is $360$.\n\n**Answer: 360**"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "polynomials"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "mathprize-2022-09",
+    "bank": "mathprize",
+    "source": {
+      "contest": "Math Prize for Girls",
+      "paper": "2022 Math Prize for Girls",
+      "year": 2022,
+      "number": 9,
+      "url": "https://mathprize.atfoundation.org/resources/past-tests/2022/mathprize2022problems.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Let $\\triangle PQO$ be the unique right isosceles triangle inscribed in the parabola $y=12x^2$ with $P$ in the first quadrant, right angle at $Q$ in the second quadrant, and $O$ at the vertex $(0,0)$. Let $\\triangle ABV$ be the unique right isosceles triangle inscribed in the parabola $y=x^2/5+1$ with $A$ in the first quadrant, right angle at $B$ in the second quadrant, and $V$ at the vertex $(0,1)$. The $y$-coordinate of $A$ can be uniquely written as $uq^2+vq+w$, where $q$ is the $x$-coordinate of $Q$ and $u$, $v$, and $w$ are integers. Determine $u+v+w$.",
+    "image": null,
+    "choices": null,
+    "answer": "661",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Similarity of parabolas",
+        "body": "Let $Q=(q,12q^2)$ with $q<0$. Rotating $\\vec{QO}=(-q,-12q^2)$ by $90^\\circ$ about $Q$ gives $P$: $P=(q+12q^2,\\;12q^2-q)$.\n\nAll parabolas are similar. The parabola $y=\\frac{x^2}{5}$ is the image of $y=12x^2$ under the scaling $(x,y)\\mapsto(60x,60y)$: if $y=12x^2$ then $60y=720x^2=\\frac{(60x)^2}{5}$. Translating up by $1$ gives $y=\\frac{x^2}{5}+1$, and the vertex goes to $V=(0,1)$. Scalings and translations preserve right isosceles triangles and the quadrant conditions, so by uniqueness $A$ is the image of $P$:\n$$A=\\left(60(q+12q^2),\\;60(12q^2-q)+1\\right).$$\nSo $y_A=720q^2-60q+1$ and $u+v+w=720-60+1=661$.\n\n**Answer: 661**"
+      },
+      {
+        "title": "Direct check",
+        "body": "Do the general computation for $y=kx^2$ with vertex at the origin: $Q=(q,kq^2)$, $P=(q+kq^2,kq^2-q)$. $P$ on the parabola means $kq^2-q=k(q+kq^2)^2$, i.e. (dividing by $q$) $kq-1=kq(1+kq)^2$. Setting $s=kq$: $s-1=s(1+s)^2$, an equation in $s$ alone. So $s=kq$ is the same number for every parabola $y=kx^2$.\n\nFor $y=12x^2$, $s=12q$. For $y=\\frac{x^2}{5}$ (shifting the second parabola down by 1), $s=\\frac{b}{5}$ where $b$ is the $x$-coordinate of $B$; so $b=60q$. Then $A$'s $y$-coordinate (after shifting back up) is $\\frac{b^2}{5}-b+1=\\frac{3600q^2}{5}-60q+1=720q^2-60q+1$.\n\nThus $u+v+w=661$.\n\n**Answer: 661**"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "algebra"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "mathprize-2022-10",
+    "bank": "mathprize",
+    "source": {
+      "contest": "Math Prize for Girls",
+      "paper": "2022 Math Prize for Girls",
+      "year": 2022,
+      "number": 10,
+      "url": "https://mathprize.atfoundation.org/resources/past-tests/2022/mathprize2022problems.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "An algal cell population is found to have $a_k$ cells on day $k$. Each day, the number of cells at least doubles. If $a_0\\ge 1$ and $a_3\\le 60$, how many quadruples of integers $(a_0,a_1,a_2,a_3)$ could represent the algal cell population size on the first 4 days?",
+    "image": null,
+    "choices": null,
+    "answer": "8344",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Nested sums",
+        "body": "We need $1\\le a_0$, $a_1\\ge 2a_0$, $a_2\\ge 2a_1$, $a_3\\ge 2a_2$, $a_3\\le60$. Then $a_2\\le30$, $a_1\\le15$, $a_0\\le7$. Sum from the inside out:\n\n- For fixed $a_2$: $a_3\\in[2a_2,60]$ gives $61-2a_2$ choices.\n- For fixed $a_1$: $\\sum_{a_2=2a_1}^{30}(61-2a_2)$ is a sum of consecutive odd numbers $1+3+\\dots+(61-4a_1)$, which equals $(31-2a_1)^2$.\n- For fixed $a_0$: $\\sum_{a_1=2a_0}^{15}(31-2a_1)^2=1^2+3^2+\\dots+(31-4a_0)^2$.\n\nSumming over $a_0=1,\\dots,7$: the odd square $(2k-1)^2$ is counted once for each $a_0$ with $31-4a_0\\ge 2k-1$. This gives\n$$7(1^2+3^2)+6(5^2+7^2)+5(9^2+11^2)+4(13^2+15^2)+3(17^2+19^2)+2(21^2+23^2)+(25^2+27^2)$$\n$$=70+444+1010+1576+1950+1940+1354=8344.$$\n\n**Answer: 8344**"
+      },
+      {
+        "title": "Count by $a_1$ directly",
+        "body": "For fixed $a_1=m$ the number of $(a_2,a_3)$ is $(31-2m)^2$ (as computed by summing odd numbers), and the number of $a_0$ is $\\lfloor m/2\\rfloor$ (since $1\\le a_0\\le m/2$). So the total is\n$$\\sum_{m=2}^{15}\\left\\lfloor \\tfrac m2\\right\\rfloor(31-2m)^2.$$\nTerms: $m=2,3$: $1\\cdot(729+625)=1354$; $m=4,5$: $2(529+441)=1940$; $m=6,7$: $3(361+289)=1950$; $m=8,9$: $4(225+169)=1576$; $m=10,11$: $5(121+81)=1010$; $m=12,13$: $6(49+25)=444$; $m=14,15$: $7(9+1)=70$.\n\nSum $=8344$ (a computer enumeration agrees).\n\n**Answer: 8344**"
+      }
+    ],
+    "topics": [
+      "counting",
+      "sequences-series"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "mathprize-2022-11",
+    "bank": "mathprize",
+    "source": {
+      "contest": "Math Prize for Girls",
+      "paper": "2022 Math Prize for Girls",
+      "year": 2022,
+      "number": 11,
+      "url": "https://mathprize.atfoundation.org/resources/past-tests/2022/mathprize2022problems.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Let $A$, $B$, $C$, $D$, $E$, and $F$ be $6$ points around a circle, listed in clockwise order. We have $AB=3\\sqrt2$, $BC=3\\sqrt3$, $CD=6\\sqrt6$, $DE=4\\sqrt2$, and $EF=5\\sqrt2$. Given that $\\overline{AD}$, $\\overline{BE}$, and $\\overline{CF}$ are concurrent, determine the square of $AF$.",
+    "image": null,
+    "choices": null,
+    "answer": "225",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Similar triangles at the concurrency point",
+        "body": "Let the three chords meet at $P$. Inscribed angles on equal arcs give the similar pairs\n$$\\triangle PAB\\sim\\triangle PED,\\qquad \\triangle PBC\\sim\\triangle PFE,\\qquad \\triangle PCD\\sim\\triangle PAF.$$\nHence $\\frac{AB}{DE}=\\frac{PA}{PE}$, $\\frac{CD}{FA}=\\frac{PC}{PA}$, $\\frac{EF}{BC}=\\frac{PE}{PC}$. Multiplying,\n$$\\frac{AB}{DE}\\cdot\\frac{CD}{FA}\\cdot\\frac{EF}{BC}=1,\\quad\\text{i.e.}\\quad AB\\cdot CD\\cdot EF=BC\\cdot DE\\cdot FA.$$\nSo $FA=\\frac{3\\sqrt2\\cdot6\\sqrt6\\cdot5\\sqrt2}{3\\sqrt3\\cdot4\\sqrt2}=\\frac{180\\sqrt6}{12\\sqrt6}=15$, and $AF^2=225$.\n\n**Answer: 225**"
+      },
+      {
+        "title": "Trig Ceva",
+        "body": "Apply the trigonometric form of Ceva's theorem to triangle $ACE$ with cevians $AD$, $CF$, $EB$. For a chord in a circle of radius $R$, a side equals $2R\\sin(\\text{inscribed angle})$. The cevian $AD$ splits $\\angle CAE$ into angles subtending arcs $CD$ and $DE$, so $\\frac{\\sin\\angle CAD}{\\sin\\angle DAE}=\\frac{CD}{DE}$, and similarly for the others. Concurrency gives\n$$\\frac{CD}{DE}\\cdot\\frac{EF}{FA}\\cdot\\frac{AB}{BC}=1,$$\nthe same relation $AB\\cdot CD\\cdot EF=BC\\cdot DE\\cdot FA$. Hence $FA=15$ and $AF^2=225$.\n\n**Answer: 225**"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "mathprize-2022-12",
+    "bank": "mathprize",
+    "source": {
+      "contest": "Math Prize for Girls",
+      "paper": "2022 Math Prize for Girls",
+      "year": 2022,
+      "number": 12,
+      "url": "https://mathprize.atfoundation.org/resources/past-tests/2022/mathprize2022problems.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Solve the equation\n$$\\sin 9^\\circ\\sin 21^\\circ\\sin(102^\\circ+x^\\circ)=\\sin 30^\\circ\\sin 42^\\circ\\sin x^\\circ$$\nfor $x$ where $0<x<90$.",
+    "image": null,
+    "choices": null,
+    "answer": "9",
+    "acceptedAnswers": null,
+    "answerUnit": "degrees",
+    "solutions": [
+      {
+        "title": "Simplify and spot the solution",
+        "body": "Since $\\sin30^\\circ=\\frac12$ and $\\sin42^\\circ=2\\sin21^\\circ\\cos21^\\circ$, the right side is $\\sin21^\\circ\\cos21^\\circ\\sin x^\\circ$. Dividing by $\\sin21^\\circ$:\n$$\\sin9^\\circ\\sin(102^\\circ+x^\\circ)=\\cos21^\\circ\\sin x^\\circ.$$\nWith $\\sin(90^\\circ+z)=\\cos z$ this is $\\sin9^\\circ\\cos(12^\\circ+x^\\circ)=\\cos21^\\circ\\sin x^\\circ$, and $x=9$ clearly works.\n\nTo see it is the only solution, use $\\sin A\\cos B=\\frac12(\\sin(A+B)+\\sin(A-B))$ on both sides:\n$$\\sin(21^\\circ+x^\\circ)+\\sin(-3^\\circ-x^\\circ)=\\sin(x^\\circ+21^\\circ)+\\sin(x^\\circ-21^\\circ),$$\nso $\\sin(x^\\circ+3^\\circ)+\\sin(x^\\circ-21^\\circ)=0$, i.e. $2\\sin(x^\\circ-9^\\circ)\\cos12^\\circ=0$. Thus $\\sin(x^\\circ-9^\\circ)=0$, and in $(0,90)$ the only solution is $x=9$.\n\n**Answer: 9**"
+      },
+      {
+        "title": "Solve for $\tan x$",
+        "body": "After the simplification above the equation reads $\\sin9^\\circ\\cos(x+12^\\circ)=\\cos21^\\circ\\sin x$. Expand $\\cos(x+12^\\circ)=\\cos x\\cos12^\\circ-\\sin x\\sin12^\\circ$:\n$$\\sin9^\\circ\\cos12^\\circ\\cos x=(\\cos21^\\circ+\\sin9^\\circ\\sin12^\\circ)\\sin x,$$\nso $\\tan x=\\dfrac{\\sin9^\\circ\\cos12^\\circ}{\\cos21^\\circ+\\sin9^\\circ\\sin12^\\circ}$, which has exactly one solution in $(0^\\circ,90^\\circ)$. Since $\\cos21^\\circ=\\cos9^\\circ\\cos12^\\circ-\\sin9^\\circ\\sin12^\\circ$, the denominator is $\\cos9^\\circ\\cos12^\\circ$, so $\\tan x=\\tan 9^\\circ$ and $x=9$.\n\n**Answer: 9**"
+      }
+    ],
+    "topics": [
+      "trigonometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "mathprize-2022-13",
+    "bank": "mathprize",
+    "source": {
+      "contest": "Math Prize for Girls",
+      "paper": "2022 Math Prize for Girls",
+      "year": 2022,
+      "number": 13,
+      "url": "https://mathprize.atfoundation.org/resources/past-tests/2022/mathprize2022problems.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "The roots of the polynomial $x^4-4ix^3+3x^2-14ix-44$ form the vertices of a parallelogram in the complex plane. What is the area of the parallelogram?",
+    "image": null,
+    "choices": null,
+    "answer": "12",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Shift to the center",
+        "body": "The diagonals of a parallelogram bisect each other, so the center is the average of the roots, which by Vieta is $\\frac{4i}{4}=i$. Substitute $x=y+i$; the new roots are symmetric under $y\\mapsto -y$, so the new polynomial is even:\n$$(y+i)^4-4i(y+i)^3+3(y+i)^2-14i(y+i)-44=y^4+9y^2-36.$$\n(Check the constant term: $1-4i\\cdot(-i)+3(-1)-14i\\cdot i-44=1-4-3+14-44=-36$.)\n\n$y^4+9y^2-36=(y^2+12)(y^2-3)$, so $y=\\pm\\sqrt3$ and $y=\\pm2\\sqrt3\\,i$. The parallelogram is a rhombus with perpendicular diagonals $2\\sqrt3$ and $4\\sqrt3$, area $\\frac12\\cdot2\\sqrt3\\cdot4\\sqrt3=12$.\n\n**Answer: 12**"
+      },
+      {
+        "title": "Factor directly",
+        "body": "Try to factor as $(x^2-2ix+a)(x^2-2ix+b)$ (both quadratics centered at $i$). Expanding: $x^4-4ix^3+(a+b-4)x^2-2i(a+b)x+ab$. Matching: $a+b-4=3$, $-2i(a+b)=-14i$, $ab=-44$, so $a+b=7$, $ab=-44$: $a=11,b=-4$.\n\n- $x^2-2ix+11=0$: $x=i\\pm\\sqrt{-1-11}=i\\pm2\\sqrt3\\,i$.\n- $x^2-2ix-4=0$: $x=i\\pm\\sqrt{-1+4}=i\\pm\\sqrt3$.\n\nVertices $(0,1\\pm2\\sqrt3)$ and $(\\pm\\sqrt3,1)$: a rhombus with diagonals $4\\sqrt3$ and $2\\sqrt3$, area $12$.\n\n**Answer: 12**"
+      }
+    ],
+    "topics": [
+      "complex-numbers",
+      "polynomials",
+      "geometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "mathprize-2022-14",
+    "bank": "mathprize",
+    "source": {
+      "contest": "Math Prize for Girls",
+      "paper": "2022 Math Prize for Girls",
+      "year": 2022,
+      "number": 14,
+      "url": "https://mathprize.atfoundation.org/resources/past-tests/2022/mathprize2022problems.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Across the face of a rectangular post-it note, you idly draw lines that are parallel to its edges. Each time you draw a line, there is a $50\\%$ chance it'll be each direction and you never draw over an existing line or the edge of the post-it note. After a few minutes, you notice that you've drawn $20$ lines. What is the expected number of rectangles that the post-it note will be partitioned into?",
+    "image": null,
+    "choices": null,
+    "answer": "116",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Linearity of expectation, line by line",
+        "body": "Each line crosses the whole note. If there are already $v$ vertical and $h$ horizontal lines, a new vertical line is cut by the $h$ horizontal lines into $h+1$ pieces and creates $h+1$ new rectangles; a new horizontal line creates $v+1$.\n\nWhen the $k$-th line is drawn, $v+h=k-1$, so the expected number of new rectangles is $\\frac12(h+1)+\\frac12(v+1)=\\frac{k+1}{2}$, whatever $v$ and $h$ are. By linearity of expectation the expected total is\n$$1+\\sum_{k=1}^{20}\\frac{k+1}{2}=1+\\frac{2+3+\\dots+21}{2}=1+\\frac{230}{2}=116.$$\n\n**Answer: 116**"
+      },
+      {
+        "title": "Use the formula $(V+1)(H+1)$",
+        "body": "With $V$ vertical and $H$ horizontal lines the number of rectangles is $(V+1)(H+1)=1+V+H+VH=21+VH$, since $V+H=20$.\n\n$V$ is binomial with $n=20$, $p=\\frac12$, so $E[V]=10$ and $\\operatorname{Var}V=5$, giving $E[V^2]=105$. Then $E[VH]=E[V(20-V)]=200-105=95$, and the expected count is $21+95=116$.\n\n**Answer: 116**"
+      }
+    ],
+    "topics": [
+      "probability",
+      "counting"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "mathprize-2022-15",
+    "bank": "mathprize",
+    "source": {
+      "contest": "Math Prize for Girls",
+      "paper": "2022 Math Prize for Girls",
+      "year": 2022,
+      "number": 15,
+      "url": "https://mathprize.atfoundation.org/resources/past-tests/2022/mathprize2022problems.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "What is the smallest positive integer $m$ such that $15!\\,m$ can be expressed in more than one way as a product of $16$ distinct positive integers, up to order?",
+    "image": null,
+    "choices": null,
+    "answer": "24",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Construction and bounding",
+        "body": "**$m=24$ works:** $15!\\cdot24=1\\cdot2\\cdots15\\cdot24$, and also, since $16\\cdot18=12\\cdot24$,\n$$15!\\cdot 24=1\\cdot2\\cdots11\\cdot13\\cdot14\\cdot15\\cdot16\\cdot18,$$\ntwo different products of $16$ distinct positive integers.\n\n**No $m<24$ works.** Suppose $15!\\,m=p_1p_2\\cdots p_{16}$ with $p_1<\\dots<p_{16}$, different from $1,2,\\dots,15,m$. The smallest product of $16$ distinct positive integers is $16!$, so $m\\ge 16$; also $m=16$ only allows $1,\\dots,16$, which is the trivial factorization. So $17\\le m\\le 23$.\n\nIf $p_k>k$ for some $k$, then $p_j\\ge j+1$ for all $j\\ge k$, and the product is at least $\\frac{17!}{k}$. Since $\\frac{17!}{k}>15!\\,m$ whenever $k<\\frac{17\\cdot16}{m}$, which holds for $k\\le 11$ (as $\\frac{272}{23}>11$), we get $p_k=k$ for $k\\le11$. So\n$$12\\cdot13\\cdot14\\cdot15\\cdot m=p_{12}p_{13}p_{14}p_{15}p_{16},\\qquad 12\\le p_{12}<\\dots<p_{16}.$$\nIf $p_{16}\\ge m$, then $p_{12}\\cdots p_{15}\\le 12\\cdot13\\cdot14\\cdot15$, which is the minimum, forcing the trivial factorization. So $p_{16}<m$.\n\n- $m=17,19,23$: the prime $m$ must divide some $p_i<m$ with $p_i\\ge12$ — impossible.\n- $m=22$: $11$ divides the left side but no $p_i\\in[12,21]$ is a multiple of $11$.\n- $m=18$: $p_{16}\\in\\{16,17\\}$; $p_{16}=17$ is impossible ($17\\nmid$ LHS) and $p_{16}=16$ forces $\\{p_{12},\\dots,p_{16}\\}=\\{12,\\dots,16\\}$ with product $12\\cdots16<12\\cdot13\\cdot14\\cdot15\\cdot18$.\n- $m=20$: LHS divisible by $25$, but among $12,\\dots,19$ only $15$ is a multiple of $5$.\n- $m=21$: LHS divisible by $49$, but among $12,\\dots,20$ only $14$ is a multiple of $7$.\n\nSo the answer is $24$.\n\n**Answer: 24**"
+      }
+    ],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "mathprize-2022-16",
+    "bank": "mathprize",
+    "source": {
+      "contest": "Math Prize for Girls",
+      "paper": "2022 Math Prize for Girls",
+      "year": 2022,
+      "number": 16,
+      "url": "https://mathprize.atfoundation.org/resources/past-tests/2022/mathprize2022problems.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "A snail begins a journey starting at the origin of a coordinate plane. The snail moves along line segments of length $\\sqrt{10}$ and in any direction such that the horizontal and vertical displacements are both integers. As the snail moves, it leaves a trail tracing out its entire journey. After a while, this trail can form various polygons. What is the smallest possible area of a polygon that could be created by the snail's trail? Express your answer as a fraction in simplest form.",
+    "image": null,
+    "choices": null,
+    "answer": "1/60",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Draw every possible leg",
+        "body": "The allowed steps are $(\\pm3,\\pm1)$ and $(\\pm1,\\pm3)$. Each changes $x+y$ by an even amount, so the snail only visits lattice points with $x+y$ even. Conversely it can reach all of them: $(2,0)=(1,3)+(1,-3)$ and $(1,1)=(3,1)+(-1,-3)+(-1,3)$, and these generate all points with $x+y$ even. So the trail can contain any segment of length $\\sqrt{10}$ joining two \"even\" lattice points, and the polygons are the regions cut out by such segments (the trail may cross itself, and a polygon is any region bounded by pieces of the trail). A finite path can include all the legs near a given unit square, so every region of that arrangement is achievable.\n\nAll unit lattice squares look the same up to symmetry (each has two opposite even corners). Take the square $[0,1]^2$ and draw every leg that passes through it. Among them are pieces of the lines $y=\\frac x3$ (through $(0,0)$ and $(3,1)$), $y=2-3x$ (through $(0,2)$ and $(1,-1)$) and $y=3x-2$ (through $(0,-2)$ and $(1,1)$). These three lines bound the triangle with vertices\n$$N=\\left(\\tfrac23,0\\right),\\quad P=\\left(\\tfrac35,\\tfrac15\\right),\\quad Q=\\left(\\tfrac34,\\tfrac14\\right),$$\nand no other leg cuts through it. Computing the areas of all the regions into which the legs cut the square (shoelace formula), the smallest is triangle $NPQ$:\n$$[NPQ]=\\frac12\\left|\\left(\\tfrac35-\\tfrac23\\right)\\left(\\tfrac14-0\\right)-\\left(\\tfrac34-\\tfrac23\\right)\\left(\\tfrac15-0\\right)\\right|=\\frac12\\left|-\\tfrac1{60}-\\tfrac1{60}\\right|=\\frac1{60}.$$\nRegions not contained in one unit square are larger than their part inside a square, so they cannot be smaller. Hence the minimum area is $\\frac1{60}$.\n\n(Note: \"polygon\" here includes regions bounded by crossing trail segments, not just polygons whose sides are whole legs.)\n\n**Answer: $\\frac{1}{60}$**"
+      },
+      {
+        "title": "Computer check of the arrangement",
+        "body": "Draw all segments from each lattice point $(x,y)$ with $x+y$ even and $|x|,|y|\\le6$ to $(x,y)+(3,1)$, $(1,3)$, $(3,-1)$, $(1,-3)$ (this covers all legs in both directions). Computing all bounded faces of this arrangement (e.g. with a polygonize routine) and their areas, the smallest face near the center has area $0.016666\\ldots=\\frac1{60}$ — the triangle bounded by $y=\\frac x3$, $y=2-3x$ and $y=3x-2$ and its symmetric copies.\n\n**Answer: $\\frac{1}{60}$**"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "mathprize-2022-17",
+    "bank": "mathprize",
+    "source": {
+      "contest": "Math Prize for Girls",
+      "paper": "2022 Math Prize for Girls",
+      "year": 2022,
+      "number": 17,
+      "url": "https://mathprize.atfoundation.org/resources/past-tests/2022/mathprize2022problems.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Let $O$ be the set of odd numbers between $0$ and $100$. Let $T$ be the set of subsets of $O$ of size $25$. For any finite subset of integers $S$, let $P(S)$ be the product of the elements of $S$. Define $n=\\sum_{S\\in T}P(S)$. If you divide $n$ by $17$, what is the remainder? (The remainder is an integer between $0$ and $16$, inclusive.)",
+    "image": null,
+    "choices": null,
+    "answer": "15",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Vieta and Fermat",
+        "body": "$n$ is the elementary symmetric sum $e_{25}$ of the $50$ odd numbers $1,3,\\dots,99$, so by Vieta $n=-[x^{25}]\\,p(x)$ where $p(x)=(x-1)(x-3)\\cdots(x-99)$.\n\nMod $17$: the numbers $1,3,\\dots,99$ cover the residues as follows: $1,3,\\dots,33$ give all $17$ residues once; $35,\\dots,67$ all residues again; $69,\\dots,99$ ($16$ numbers) all residues except $101\\equiv 16\\equiv -1$. By Fermat, $\\prod_{r}(x-r)\\equiv x^{17}-x$, so\n$$p(x)\\equiv\\frac{(x^{17}-x)^3}{x+1}=\\frac{x^{51}-3x^{35}+3x^{19}-x^3}{x+1}\\pmod{17}.$$\nThe division is exact. In the quotient of $x^a$ by $x+1$ the coefficient of $x^k$ ($k<a$) is $(-1)^{a-1-k}$, since $x^a=(x+1)(x^{a-1}-x^{a-2}+\\cdots)\\pm1$. The numerator is $\\sum c_a x^a$ with $c_{51}=1,c_{35}=-3,c_{19}=3,c_3=-1$, and dividing by $x+1$ gives coefficients $[x^{k}]=\\sum_{a>k}c_a(-1)^{a-1-k}$. For $k=25$ the terms with $a>25$ are $a=51,35$: $1\\cdot(-1)^{25}+(-3)(-1)^{9}=-1+3=2$.\n\nSo $[x^{25}]p\\equiv2$ and $n\\equiv-2\\equiv15\\pmod{17}$.\n\n**Answer: 15**"
+      },
+      {
+        "title": "Computer check",
+        "body": "Expanding $(x-1)(x-3)\\cdots(x-99)$ exactly (e.g. with a computer algebra system) and reducing the coefficient of $x^{25}$ modulo $17$ gives $2$, so $n=e_{25}=-[x^{25}]p\\equiv-2\\equiv 15\\pmod{17}$, confirming the hand computation.\n\n**Answer: 15**"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "polynomials"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "mathprize-2022-18",
+    "bank": "mathprize",
+    "source": {
+      "contest": "Math Prize for Girls",
+      "paper": "2022 Math Prize for Girls",
+      "year": 2022,
+      "number": 18,
+      "url": "https://mathprize.atfoundation.org/resources/past-tests/2022/mathprize2022problems.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Let $A$ be the locus of points $(\\alpha,\\beta,\\gamma)$ in the $\\alpha\\beta\\gamma$-coordinate space that satisfy the following properties:\n\n- I. We have $\\alpha,\\beta,\\gamma>0$.\n- II. We have $\\alpha+\\beta+\\gamma=\\pi$.\n- III. The intersection of the three cylinders in the $xyz$-coordinate space given by the equations\n$$y^2+z^2=\\sin^2\\alpha,\\qquad z^2+x^2=\\sin^2\\beta,\\qquad x^2+y^2=\\sin^2\\gamma$$\nis nonempty.\n\nDetermine the area of $A$. Express your answer in terms of $\\pi$.",
+    "image": null,
+    "choices": null,
+    "answer": "sqrt(3)/8*pi^2",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "answerDisplay": "$\\frac{\\sqrt{3}}{8}\\pi^2$",
+    "solutions": [
+      {
+        "title": "Non-obtuse triangles",
+        "body": "By I and II, $\\alpha,\\beta,\\gamma$ are the angles of a triangle, and by the law of sines $\\sin\\alpha,\\sin\\beta,\\sin\\gamma$ are the sides of a triangle with these angles (circumdiameter $1$).\n\nSolving the system for $x^2,y^2,z^2$ (subtract each equation from the sum of the other two):\n$$x^2=\\tfrac12(\\sin^2\\beta+\\sin^2\\gamma-\\sin^2\\alpha),\\ y^2=\\tfrac12(\\sin^2\\gamma+\\sin^2\\alpha-\\sin^2\\beta),\\ z^2=\\tfrac12(\\sin^2\\alpha+\\sin^2\\beta-\\sin^2\\gamma).$$\nA solution exists iff all three right sides are $\\ge0$, i.e. no side's square exceeds the sum of the other two: the triangle is not obtuse, i.e. $\\alpha,\\beta,\\gamma\\le\\frac\\pi2$.\n\nThe points satisfying I and II form the (open) equilateral triangle with vertices $(\\pi,0,0),(0,\\pi,0),(0,0,\\pi)$, of side $\\pi\\sqrt2$. The extra condition cuts out its medial triangle with vertices $(\\frac\\pi2,\\frac\\pi2,0)$ etc., of side $\\frac{\\pi\\sqrt2}{2}$ (the boundary points with a zero coordinate are excluded, which doesn't change the area). Its area is $\\frac{\\sqrt3}{4}\\cdot\\frac{2\\pi^2}{4}=\\frac{\\sqrt3}{8}\\pi^2$.\n\n**Answer: $\\frac{\\sqrt3}{8}\\pi^2$**"
+      },
+      {
+        "title": "Area as a fraction of the big triangle",
+        "body": "As above, condition III is equivalent to $\\max(\\alpha,\\beta,\\gamma)\\le\\frac\\pi2$. In the big triangle $\\alpha+\\beta+\\gamma=\\pi$, each condition $\\alpha>\\frac\\pi2$ cuts off a corner triangle similar with ratio $\\frac12$ (area $\\frac14$ of the whole), and the three corners are disjoint. So $A$ has $1-\\frac34=\\frac14$ of the area of the big triangle.\n\nThe big triangle has side $|(\\pi,0,0)-(0,\\pi,0)|=\\pi\\sqrt2$, area $\\frac{\\sqrt3}{4}\\cdot2\\pi^2=\\frac{\\sqrt3}{2}\\pi^2$. A quarter of that is $\\frac{\\sqrt3}{8}\\pi^2$.\n\n**Answer: $\\frac{\\sqrt3}{8}\\pi^2$**"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "trigonometry"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "mathprize-2022-19",
+    "bank": "mathprize",
+    "source": {
+      "contest": "Math Prize for Girls",
+      "paper": "2022 Math Prize for Girls",
+      "year": 2022,
+      "number": 19,
+      "url": "https://mathprize.atfoundation.org/resources/past-tests/2022/mathprize2022problems.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Let $S_-$ be the semicircular arc defined by\n$$(x+1)^2+\\left(y-\\frac32\\right)^2=\\frac14\\quad\\text{and}\\quad x\\le-1.$$\nLet $S_+$ be the semicircular arc defined by\n$$(x-1)^2+\\left(y-\\frac32\\right)^2=\\frac14\\quad\\text{and}\\quad x\\ge1.$$\nLet $R$ be the locus of points $P$ such that $P$ is the intersection of two lines, one of the form $Ax+By=1$ where $(A,B)\\in S_-$ and the other of the form $Cx+Dy=1$ where $(C,D)\\in S_+$. What is the area of $R$? Express your answer as a fraction in simplest form.",
+    "image": null,
+    "choices": null,
+    "answer": "1/6",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Duality: replace the arcs by segments",
+        "body": "If $(X,Y)$ is the intersection of $Ax+By=1$ and $Cx+Dy=1$, then $(A,B)$ and $(C,D)$ both lie on the line $\\ell_{X,Y}: Xu+Yv=1$ (in the $uv$-plane of coefficients). Conversely, any two distinct points on $\\ell_{X,Y}$ give two lines through $(X,Y)$. So $(X,Y)\\in R$ exactly when the line $\\ell_{X,Y}$ meets both $S_-$ and $S_+$.\n\nA line that meets both arcs also meets both vertical diameters $\\{-1\\}\\times[1,2]$ and $\\{1\\}\\times[1,2]$, and vice versa (the arcs bulge outward, away from each other). So we may replace the arcs by these segments and take $(A,B)=(-1,B)$, $(C,D)=(1,D)$ with $B,D\\in[1,2]$. Solving $-x+By=1$, $x+Dy=1$:\n$$(X,Y)=\\left(\\frac{B-D}{B+D},\\ \\frac{2}{B+D}\\right).$$\nWith $z=B-D$, $w=B+D$, the square $[1,2]^2$ becomes the square with vertices $(0,2),(1,3),(0,4),(-1,3)$, and $(X,Y)=(z/w,2/w)$. This map sends horizontal segments ($w$ fixed) to horizontal segments in order, so the boundary maps to the boundary. The four edges map to the segments joining $(0,1),(\\frac13,\\frac23),(0,\\frac12),(-\\frac13,\\frac23)$ (e.g. $w=2+z$ gives $(1-\\frac2w,\\frac2w)$, from $(0,1)$ to $(\\frac13,\\frac23)$).\n\n$R$ is this kite with diagonals $\\frac12$ (vertical) and $\\frac23$ (horizontal); area $\\frac12\\cdot\\frac12\\cdot\\frac23=\\frac16$.\n\n**Answer: $\\frac16$**"
+      },
+      {
+        "title": "Describe $R$ by inequalities",
+        "body": "From $X=\\frac{B-D}{B+D}$, $Y=\\frac{2}{B+D}$ we get $B=\\frac{1+X}{Y}$ and $D=\\frac{1-X}{Y}$ (with $Y>0$). The conditions $1\\le B\\le2$, $1\\le D\\le 2$ become\n$$Y\\le 1+X\\le 2Y,\\qquad Y\\le1-X\\le2Y.$$\nThese four half-planes bound the quadrilateral with vertices $(0,1)$ (where $Y=1+X=1-X$), $(0,\\frac12)$ (where $2Y=1\\pm X$), $(\\frac13,\\frac23)$ (where $1-X=Y$, $1+X=2Y$) and $(-\\frac13,\\frac23)$. It is a kite with diagonals $1-\\frac12=\\frac12$ and $\\frac23$, area $\\frac16$. (A Monte Carlo check with the original semicircles also gives area $\\approx0.1667$.)\n\n**Answer: $\\frac16$**"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "algebra"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "mathprize-2022-20",
+    "bank": "mathprize",
+    "source": {
+      "contest": "Math Prize for Girls",
+      "paper": "2022 Math Prize for Girls",
+      "year": 2022,
+      "number": 20,
+      "url": "https://mathprize.atfoundation.org/resources/past-tests/2022/mathprize2022problems.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Let $a_n=n(2n+1)$. Evaluate\n$$\\left|\\sum_{1\\le j<k\\le36}\\sin\\!\\left(\\frac{\\pi}{6}(a_k-a_j)\\right)\\right|.$$",
+    "image": null,
+    "choices": null,
+    "answer": "18",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Shoelace formula for a path of unit steps",
+        "body": "Let $v_k=\\left(\\cos\\frac{\\pi a_k}{6},\\sin\\frac{\\pi a_k}{6}\\right)$. Then $\\sin\\frac\\pi6(a_k-a_j)=\\det(v_j,v_k)$, so\n$$\\sum_{j<k}\\sin\\tfrac\\pi6(a_k-a_j)=\\sum_{k=2}^{36}\\det\\!\\left(v_1+\\dots+v_{k-1},\\,v_k\\right).$$\nThis is exactly the shoelace sum (twice the signed area) for the closed path starting at the origin with steps $v_1,v_2,\\dots,v_{36}$, counted with multiplicity of winding.\n\nNow $a_{n+3}=a_n+12n+21\\equiv a_n-3\\pmod{12}$, so each block of $3$ steps is the previous block rotated by $-90^\\circ$. With $a_1=3$, $a_2=10$, $a_3=21$ the first block has directions $90^\\circ$, $300^\\circ$ and $630^\\circ\\equiv270^\\circ$ (up, down-right, down): three sides of a rhombus with unit sides and angles $30^\\circ,150^\\circ$. Four rotated copies close up into a dodecagon made of a unit square with a rhombus (area $\\frac12$) attached to each side: area $1+4\\cdot\\frac12=3$. Twelve blocks (36 steps) go around $3$ times.\n\nSo the absolute value is $2\\cdot3\\cdot3=18$.\n\n**Answer: 18**"
+      },
+      {
+        "title": "Check the path explicitly",
+        "body": "Only $a_n\\bmod 12$ matters, and $a_n\\bmod12$ for $n=1,\\dots,12$ is $3,10,9,0,7,6,9,4,3,6,1,0$ (then it repeats, since $a_{n+12}-a_n=48n+312\\equiv0$). So the steps $v_n$ (unit vectors at angle $30^\\circ\\cdot a_n$) have directions\n$$90^\\circ,300^\\circ,270^\\circ,\\ 0^\\circ,210^\\circ,180^\\circ,\\ 270^\\circ,120^\\circ,90^\\circ,\\ 180^\\circ,30^\\circ,0^\\circ,$$\nand the partial sums trace a closed dodecagon after $12$ steps (the four blocks of three cancel). The shoelace sum over one loop is twice its area, $2\\cdot3=6$ in absolute value, and the $36$ steps run around the same loop $3$ times. (In $\\sum_k\\det(v_1+\\dots+v_{k-1},v_k)$ the partial sum $v_1+\\dots+v_{k-1}$ only depends on $k\\bmod 12$, because each full loop adds the zero vector; so the $36$-term sum is $3$ times the $12$-term sum, which equals $-6$.) Total $3\\cdot6=18$; a direct numerical evaluation of the $630$ sines confirms $\\pm18$.\n\n**Answer: 18**"
+      }
+    ],
+    "topics": [
+      "trigonometry",
+      "geometry",
+      "sequences-series"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

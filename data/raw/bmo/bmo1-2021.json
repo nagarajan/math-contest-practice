@@ -1,0 +1,256 @@
+[
+  {
+    "id": "bmo-bmo1-2021-01",
+    "bank": "bmo",
+    "source": {
+      "contest": "British Mathematical Olympiad Round 1",
+      "paper": "Round 1 (26 November 2020)",
+      "year": 2021,
+      "number": 1,
+      "url": "https://bmos.ukmt.org.uk/home/bmo1-2021.pdf"
+    },
+    "grade": "10-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Alice and Bob take it in turns to write numbers on a blackboard. Alice starts by writing an integer $a$ between $-100$ and $100$ inclusive on the board. On each of Bob's turns he writes twice the number Alice wrote last. On each of Alice's subsequent turns she writes the number $45$ less than the number Bob wrote last. At some point, the number $a$ is written on the board for a second time. Find the possible values of $a$.",
+    "image": null,
+    "choices": null,
+    "answer": "$a\\in\\{0,\\ 30,\\ 42,\\ 45\\}$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "General formula for the terms",
+        "body": "Write $s=45$ and call the numbers on the board $a_1=a, a_2, a_3,\\dots$, so $a_{2k}=2a_{2k-1}$ and $a_{2k+1}=a_{2k}-s$. The sequence starts $a,\\ 2a,\\ 2a-s,\\ 4a-2s,\\ 4a-3s,\\ 8a-6s,\\dots$, and by induction on $k\\ge1$\n$$a_{2k}=2^k a-(2^k-2)s,\\qquad a_{2k+1}=2^k a-(2^k-1)s .$$\n(Indeed $a_{2k+1}=a_{2k}-s$, and $a_{2k+2}=2a_{2k+1}=2^{k+1}a-(2^{k+1}-2)s$.)\n\n**Case 1: $a_{2k}=a$ for some $k\\ge1$.** Then $(2^k-1)a=(2^k-2)s$. Any common factor of $2^k-1$ and $2^k-2$ divides their difference $1$, so they are coprime and $2^k-1$ must divide $s=45$. The numbers of the form $2^k-1$ dividing $45$ are $1,3,15$ ($k=1,2,4$), giving\n$$a=\\frac{(2^k-2)\\cdot45}{2^k-1}=0,\\quad 30,\\quad 42 .$$\n\n**Case 2: $a_{2k+1}=a$ for some $k\\ge1$.** Then $(2^k-1)a=(2^k-1)s$, and as $2^k-1\\neq0$, $a=45$.\n\n**Check.**\n- $a=0$: $0,0$.\n- $a=30$: $30,60,15,30$.\n- $a=42$: $42,84,39,78,33,66,21,42$.\n- $a=45$: $45,90,45$.\n\nAll four lie in $[-100,100]$. **Answer:** $a=0,\\ 30,\\ 42,\\ 45$. ∎"
+      }
+    ],
+    "topics": [
+      "sequences-series",
+      "number-theory"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "bmo-bmo1-2021-02",
+    "bank": "bmo",
+    "source": {
+      "contest": "British Mathematical Olympiad Round 1",
+      "paper": "Round 1 (26 November 2020)",
+      "year": 2021,
+      "number": 2,
+      "url": "https://bmos.ukmt.org.uk/home/bmo1-2021.pdf"
+    },
+    "grade": "10-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "A triangle has side lengths $a$, $a$ and $b$. It has perimeter $P$ and area $A$. Given that $b$ and $P$ are integers, and that $P$ is numerically equal to $A^2$, find all possible pairs $(a,b)$.",
+    "image": null,
+    "choices": null,
+    "answer": "$(a,b)=\\left(\\tfrac{17}{2},1\\right),\\ (3,2),\\ \\left(\\tfrac52,4\\right)$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Reduce to $b^2(2a-b)=16$",
+        "body": "The height to the side $b$ is $\\sqrt{a^2-\\frac{b^2}{4}}$, so\n$$A=\\frac b2\\sqrt{a^2-\\frac{b^2}4},\\qquad A^2=\\frac{b^2}{16}\\,(4a^2-b^2),\\qquad P=2a+b .$$\nThe condition $P=A^2$ becomes\n$$16(2a+b)=b^2(2a-b)(2a+b).$$\nSince $2a+b>0$ we may divide: $b^2(2a-b)=16$.\n\nNow $b$ is a positive integer and $2a-b=P-2b$ is an integer, positive by the triangle inequality. So $b^2$ is a square divisor of $16$: $b\\in\\{1,2,4\\}$.\n- $b=1$: $2a-1=16$, $a=\\frac{17}{2}$, $P=18$.\n- $b=2$: $2a-2=4$, $a=3$, $P=8$.\n- $b=4$: $2a-4=1$, $a=\\frac52$, $P=9$.\n\nEach is a genuine triangle ($2a>b$) with integer $P$, and the equation $b^2(2a-b)=16$ is equivalent to $P=A^2$. For example, $(3,2)$: height $\\sqrt{9-1}=2\\sqrt2$, $A=2\\sqrt2$, $A^2=8=P$.\n\n**Answer:** $(a,b)=(\\tfrac{17}2,1),\\ (3,2),\\ (\\tfrac52,4)$. ∎"
+      },
+      {
+        "title": "Heron's formula",
+        "body": "With $s=\\frac{2a+b}{2}$, Heron gives $A^2=s(s-a)^2(s-b)=\\frac{2a+b}{2}\\cdot\\frac{b^2}{4}\\cdot\\frac{2a-b}{2}=\\frac{b^2(2a+b)(2a-b)}{16}$.\n\nSetting this equal to $P=2a+b$ again gives $b^2(2a-b)=16$ with $b$ and $2a-b$ positive integers, so $b\\in\\{1,2,4\\}$ and $a=\\frac{17}2,\\ 3,\\ \\frac52$ respectively. ∎"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "number-theory",
+      "algebra"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "bmo-bmo1-2021-03",
+    "bank": "bmo",
+    "source": {
+      "contest": "British Mathematical Olympiad Round 1",
+      "paper": "Round 1 (26 November 2020)",
+      "year": 2021,
+      "number": 3,
+      "url": "https://bmos.ukmt.org.uk/home/bmo1-2021.pdf"
+    },
+    "grade": "10-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "A square piece of paper is folded in half along a line of symmetry. The resulting shape is then folded in half along a line of symmetry of the new shape. This process is repeated until $n$ folds have been made, giving a sequence of $n+1$ shapes. If we do not distinguish between congruent shapes, find the number of possible sequences when:\n\n(a) $n=3$;\n\n(b) $n=6$;\n\n(c) $n=9$.\n\n(When $n=1$ there are two possible sequences.)",
+    "image": null,
+    "choices": null,
+    "answer": "(a) $5$; (b) $24$; (c) $149$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Which shape can follow which",
+        "body": "**Possible shapes.** Folding along a line of symmetry halves the shape. Starting from a square, only three kinds of shape occur:\n- the **square** $\\square$: its four lines of symmetry give either a $1{:}2$ rectangle (midlines) or an isosceles right triangle (diagonals);\n- an **isosceles right triangle** $\\triangle$: its only line of symmetry is the altitude to the hypotenuse, giving a smaller isosceles right triangle;\n- a **rectangle $1{:}2^k$** ($k\\ge1$): its two lines of symmetry give rectangles $1{:}2^{k-1}$ and $1{:}2^{k+1}$ (for $k=1$, $1{:}2^0$ is the square).\n\nSo a sequence of shapes is a walk: $\\square\\to\\{\\triangle,\\ 1{:}2\\}$, $\\triangle\\to\\triangle$, $1{:}2^k\\to\\{1{:}2^{k-1},\\ 1{:}2^{k+1}\\}$, and distinct walks are distinct sequences.\n\n**Counting.** Let the entry in row $n$ and a given column be the number of $n$-fold sequences ending with that shape. Then\n- $\\triangle$ entry $=$ ($\\triangle$ entry $+$ $\\square$ entry) of the row above;\n- $\\square$ entry $=$ $1{:}2$ entry of the row above;\n- $1{:}2^k$ entry $=$ sum of the $1{:}2^{k-1}$ and $1{:}2^{k+1}$ entries above (with $1{:}2^0$ meaning $\\square$).\n\n$$\\begin{array}{c|c|c|cccccccccc|c}\nn & \\triangle & \\square & 1{:}2 & 1{:}4 & 1{:}8 & 1{:}16 & 1{:}32 & 1{:}64 & 1{:}128 & 1{:}256 & 1{:}512 & \\Sigma\\\\\\hline\n0 & 0 & 1 & & & & & & & & & & 1\\\\\n1 & 1 & 0 & 1 & & & & & & & & & 2\\\\\n2 & 1 & 1 & 0 & 1 & & & & & & & & 3\\\\\n3 & 2 & 0 & 2 & 0 & 1 & & & & & & & 5\\\\\n4 & 2 & 2 & 0 & 3 & 0 & 1 & & & & & & 8\\\\\n5 & 4 & 0 & 5 & 0 & 4 & 0 & 1 & & & & & 14\\\\\n6 & 4 & 5 & 0 & 9 & 0 & 5 & 0 & 1 & & & & 24\\\\\n7 & 9 & 0 & 14 & 0 & 14 & 0 & 6 & 0 & 1 & & & 44\\\\\n8 & 9 & 14 & 0 & 28 & 0 & 20 & 0 & 7 & 0 & 1 & & 79\\\\\n9 & 23 & 0 & 42 & 0 & 48 & 0 & 27 & 0 & 8 & 0 & 1 & 149\n\\end{array}$$\n\nThe row sums give the answers: **(a) 5, (b) 24, (c) 149.**\n\n*Warning:* the totals start $1,2,3,5,8$ like the Fibonacci numbers, but the next is $14$, not $13$. ∎"
+      },
+      {
+        "title": "Shortcut: row sum doubles, minus triangles",
+        "body": "Every shape except the triangle can be folded in exactly two inequivalent ways, and the triangle in one way. Hence, if $\\Sigma_n$ is the number of $n$-fold sequences and $t_n$ the number ending in a triangle,\n$$\\Sigma_{n+1}=2\\Sigma_n-t_n .$$\nAlso $t_{n+1}=t_n+s_n$ where $s_n$ (sequences ending in the square) equals the number ending in $1{:}2$ one step earlier. Keeping only the columns $\\triangle,\\square,1{:}2,1{:}4,1{:}8$ (enough to get $t_n$ up to $n=9$):\n\n$$\\begin{array}{c|ccccc}\nn&0&1&2&3&4\\\\\\hline\nt_n&0&1&1&2&2\\\\ \\Sigma_n&1&2&3&5&8\n\\end{array}\\qquad\n\\begin{array}{c|ccccc}\nn&5&6&7&8&9\\\\\\hline\nt_n&4&4&9&9&23\\\\ \\Sigma_n&14&24&44&79&149\n\\end{array}$$\n\nFor example $\\Sigma_7=2\\cdot24-4=44$, $\\Sigma_8=2\\cdot44-9=79$, $\\Sigma_9=2\\cdot79-9=149$.\n\n**Answer:** (a) $5$, (b) $24$, (c) $149$. ∎"
+      }
+    ],
+    "topics": [
+      "counting",
+      "geometry",
+      "sequences-series"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "bmo-bmo1-2021-04",
+    "bank": "bmo",
+    "source": {
+      "contest": "British Mathematical Olympiad Round 1",
+      "paper": "Round 1 (26 November 2020)",
+      "year": 2021,
+      "number": 4,
+      "url": "https://bmos.ukmt.org.uk/home/bmo1-2021.pdf"
+    },
+    "grade": "10-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "In the equation\n$$\\mathrm{A}^{\\mathrm{AA}}+\\mathrm{AA}=\\mathrm{B{,}BBC{,}DED{,}BEE{,}BBB{,}BBE}$$\nthe letters A, B, C, D and E represent different base 10 digits (so the right hand side is a sixteen digit number and AA is a two digit number). Given that $\\mathrm C=9$, find A, B, D and E.",
+    "image": null,
+    "choices": null,
+    "answer": "$\\mathrm A=3,\\ \\mathrm B=5,\\ \\mathrm D=0,\\ \\mathrm E=6$ (indeed $3^{33}+33=5{,}559{,}060{,}566{,}555{,}556$).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Size, last two digits, digit sum",
+        "body": "**Find A.** The right side has $16$ digits, so it lies between $10^{15}$ and $10^{16}$.\n- $\\mathrm A\\le 2$ is far too small: $2^{22}+22<2^{22}\\cdot 2<10^7$ (and $1^{11}+11=12$).\n- $\\mathrm A\\ge4$ is too big: $4^{44}=2^{88}=(2^{10})^{8}\\cdot 2^8>(10^3)^8=10^{24}$, and larger A give even larger values.\n\nSo $\\mathrm A=3$ and the number is $3^{33}+33$.\n\n**Last two digits give B and E.** Working mod $100$ by repeated squaring: $3^2=9$, $3^4=81$, $3^8\\equiv 81^2\\equiv 61$, $3^{16}\\equiv61^2=3721\\equiv21$, $3^{32}\\equiv21^2=441\\equiv41$, so $3^{33}\\equiv123\\equiv23$ and $3^{33}+33\\equiv56 \\pmod{100}$. The number ends in $\\ldots\\mathrm{BE}$, so $\\mathrm B=5$, $\\mathrm E=6$.\n\n**Digit sum gives D.** $3^{33}+33$ is divisible by $3$, so its digit sum is too. The digits are nine B's, one C, two D's and four E's, with sum $9\\cdot5+9+2\\mathrm D+4\\cdot 6=78+2\\mathrm D$. Since $3\\mid 78$, we need $3\\mid 2\\mathrm D$, i.e. $\\mathrm D\\in\\{0,3,6,9\\}$. The digits $3,6,9$ are already used by A, E, C, so $\\mathrm D=0$.\n\n**Check:** $3^{33}=5{,}559{,}060{,}566{,}555{,}523$, and adding $33$ gives $5{,}559{,}060{,}566{,}555{,}556$, which has the required pattern.\n\n**Answer:** $\\mathrm A=3$, $\\mathrm B=5$, $\\mathrm D=0$, $\\mathrm E=6$. ∎"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "arithmetic"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "bmo-bmo1-2021-05",
+    "bank": "bmo",
+    "source": {
+      "contest": "British Mathematical Olympiad Round 1",
+      "paper": "Round 1 (26 November 2020)",
+      "year": 2021,
+      "number": 5,
+      "url": "https://bmos.ukmt.org.uk/home/bmo1-2021.pdf"
+    },
+    "grade": "10-12",
+    "points": 10,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let points $A$, $B$ and $C$ lie on a circle $\\Gamma$. Circle $\\Delta$ is tangent to $AC$ at $A$. It meets $\\Gamma$ again at $D$ and the line $AB$ again at $P$. The point $A$ lies between points $B$ and $P$. Prove that if $AD=DP$, then $BP=AC$.",
+    "image": null,
+    "choices": null,
+    "answer": "Triangles $DCA$ and $DBP$ are similar (alternate segment in $\\Delta$, same segment in $\\Gamma$); $DA=DP$ makes them congruent, so $BP=CA$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Two similar triangles become congruent",
+        "body": "We work in the configuration of the problem ($A$ between $B$ and $P$; $B$ and $C$ on the same arc $AD$ of $\\Gamma$, as in any accurate figure).\n\n1. **Alternate segment theorem in $\\Delta$.** $AC$ is tangent to $\\Delta$ at $A$ and $AD$ is a chord, so the tangent–chord angle equals the inscribed angle on the other arc:\n$$\\angle CAD=\\angle APD=\\angle BPD$$\n(the last because $B$ lies on ray $PA$).\n2. **Angles in the same segment of $\\Gamma$.** $B$ and $C$ both lie on $\\Gamma$ on the same side of chord $AD$, so\n$$\\angle DCA=\\angle DBA=\\angle DBP$$\n(again because $P$ lies on ray $BA$).\n3. Hence triangles $DCA$ and $DBP$ have two pairs of equal angles, $C\\leftrightarrow B$, $A\\leftrightarrow P$, so they are similar with $D\\leftrightarrow D$.\n4. The corresponding sides $DA$ and $DP$ are equal by hypothesis, so the similarity ratio is $1$ and the triangles are congruent (AAS).\n\nTherefore the corresponding sides $CA$ and $BP$ are equal: $BP=AC$. ∎"
+      },
+      {
+        "title": "Build a kite",
+        "body": "Choose $X$ on ray $AC$ with $AX=AP$.\n\n- By the alternate segment theorem, $\\angle DAX=\\angle DAC=\\angle DPA$, and since $DA=DP$, $\\angle DPA=\\angle DAP$. So $AD$ bisects angle $PAX$.\n- In the isosceles triangle $PAX$ the bisector $AD$ is the perpendicular bisector of $PX$, so $DX=DP=DA$ and $PAXD$ is a kite.\n- Then $\\angle DXC=180^\\circ-\\angle AXD=180^\\circ-\\angle APD=180^\\circ-\\angle PAD=\\angle DAB$ (kite symmetry, then the isosceles triangle $ADP$, then the straight line $PAB$).\n- Angles in the same segment of $\\Gamma$: $\\angle ABD=\\angle ACD$, i.e. $\\angle DBA=\\angle DCX$.\n\nSo triangles $DAB$ and $DXC$ have two equal angles and $DA=DX$, hence are congruent: $AB=XC$. Therefore $BP=BA+AP=XC+AX=AC$. ∎"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "bmo-bmo1-2021-06",
+    "bank": "bmo",
+    "source": {
+      "contest": "British Mathematical Olympiad Round 1",
+      "paper": "Round 1 (26 November 2020)",
+      "year": 2021,
+      "number": 6,
+      "url": "https://bmos.ukmt.org.uk/home/bmo1-2021.pdf"
+    },
+    "grade": "10-12",
+    "points": 10,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Given that an integer $n$ is the sum of two different powers of $2$ and also the sum of two different Mersenne primes, prove that $n$ is the sum of two different square numbers.\n\n(A Mersenne prime is a prime number which is one less than a power of two.)",
+    "image": null,
+    "choices": null,
+    "answer": "Parity/binary arguments force $n=2^a+2$ with $2^a-1$ prime, so $a=2k+1$ is odd and $n=(2^k+1)^2+(2^k-1)^2$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Pin down the exponents",
+        "body": "Write\n$$n=(2^a-1)+(2^b-1)=2^c+2^d,\\qquad a>b,\\ c>d\\ge0,$$\nwhere $2^a-1$ and $2^b-1$ are prime.\n\n**Step 1: $d=1$.** Since $2^b-1$ is prime, $b\\ge2$, so $2^a+2^b$ is divisible by $4$ and $n=2^a+2^b-2\\equiv2\\pmod4$. On the other side, if $d=0$ then $n=2^c+1$ is odd, and if $d\\ge2$ then $4\\mid n$. Hence $d=1$ (and $c\\ge2$).\n\n**Step 2: $b=2$ and $a=c$.** Now $2^a+2^b-2=2^c+2$, i.e. $2^{a-2}+2^{b-2}=2^{c-2}+1$. If $b\\ge3$, the left side is even and at least $2+4=6$; the right side is odd if $c\\ge3$ and equals $2$ if $c=2$ — a contradiction either way. So $b=2$, and then $2^{a-2}=2^{c-2}$, giving $a=c$. Thus\n$$n=2^a+2,\\qquad a>2,\\ 2^a-1\\text{ prime}.$$\n\n**Step 3: $a$ is odd.** If $a=2k$ with $k\\ge2$, then $2^a-1=(2^k-1)(2^k+1)$ with both factors at least $3$, so it is not prime. Hence $a=2k+1$ with $k\\ge1$.\n\n**Step 4: two squares.**\n$$(2^k+1)^2+(2^k-1)^2=2\\cdot4^k+2=2^{2k+1}+2=n .$$\nThe two squares are different (and positive) since $2^k+1\\ne2^k-1$ and $2^k-1\\ge1$. ∎\n\n*Example:* $n=3+31=34=32+2=5^2+3^2$."
+      },
+      {
+        "title": "Mod 3 for the odd exponent",
+        "body": "Proceed as in Steps 1–2 of the first solution to get $n=2^a+2$ with $2^a-1$ a Mersenne prime and $a>2$.\n\nFor the parity of $a$, use residues mod $3$: $2^{\\text{even}}\\equiv1$ and $2^{\\text{odd}}\\equiv2\\pmod3$. If $a$ were even, $3$ would divide $2^a-1$; being prime, $2^a-1=3$, so $a=2$, contradicting $a>2$. So $a=2k+1$ with $k\\ge1$, and $n=2^{2k+1}+2=(2^k+1)^2+(2^k-1)^2$ as before. ∎"
+      }
+    ],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "bmo-bmo1-2021-07",
+    "bank": "bmo",
+    "source": {
+      "contest": "British Mathematical Olympiad Round 1",
+      "paper": "Round 1 (26 November 2020)",
+      "year": 2021,
+      "number": 7,
+      "url": "https://bmos.ukmt.org.uk/home/bmo1-2021.pdf"
+    },
+    "grade": "10-12",
+    "points": 10,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Evie and Odette are playing a game. Three pebbles are placed on the number line; one at $-2020$, one at $2020$, and one at $n$, where $n$ is an integer between $-2020$ and $2020$. They take it in turns moving either the leftmost or the rightmost pebble to an integer between the other two pebbles. The game ends when the pebbles occupy three consecutive integers.\n\nOdette wins if their sum is odd; Evie wins if their sum is even. For how many values of $n$ can Evie guarantee victory if:\n\n(a) Odette goes first;\n\n(b) Evie goes first?",
+    "image": null,
+    "choices": null,
+    "answer": "(a) $0$; (b) $2020$ (exactly the odd $n$). The player who can keep both outer pebbles of \"their\" parity wins.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Control the parity of the outer pebbles",
+        "body": "**Reformulation.** Write the positions as $x<y<z$. A move takes $x$ or $z$ to a point strictly between the other two, so **the moved pebble becomes the middle one and the two unmoved pebbles become the outer ones.** The span $z-x$ strictly decreases, so the game ends. It ends exactly when the pebbles are $x,x+1,x+2$ (otherwise some gap is at least $2$ and a move exists), with sum $3x+3\\equiv x+1\\pmod2$. So **Odette wins iff the final outer pebbles are even; Evie wins iff they are odd.**\n\n**Lemma.** Let $\\pi$ be a parity. Suppose it is player $Q$'s turn and both outer pebbles have parity $\\pi$. Then $Q$ can force the game to end with outer pebbles of parity $\\pi$.\n\n*Proof.* We show $Q$ can always move so that either the game ends with outer parity $\\pi$, or after the opponent's reply it is again $Q$'s turn with both outer pebbles of parity $\\pi$. Since the game is finite, this proves the lemma.\n- *Middle also of parity $\\pi$.* Both gaps $y-x$, $z-y$ are even and positive. If both equal $2$, $Q$ moves $x$ to $y+1$, giving $y,y+1,y+2$: the game ends with outer pebbles $y,z$ of parity $\\pi$. Otherwise a gap is at least $4$ and contains an interior point of parity $\\pi$; $Q$ moves the far outer pebble there. Now all three pebbles have parity $\\pi$, so whatever the opponent does, the two unmoved pebbles (now outer) have parity $\\pi$.\n- *Middle of the other parity.* Both gaps are odd and not both $1$, say $z-y\\ge3$ (the other case is symmetric). $Q$ moves $x$ to $y+1$ (legal, as $y<y+1<z$). The position is $y,\\,y+1,\\,z$: the opponent cannot move $z$ (there is no integer strictly between $y$ and $y+1$), so must move $y$ into $(y+1,z)$. The new outer pebbles are $y+1$ and $z$, both of parity $\\pi$. □\n\n**(a) Odette first.** Initially the outer pebbles $\\pm2020$ are even and it is Odette's turn, so by the lemma (with $\\pi$ = even) Odette wins for every $n$. Evie can guarantee victory for **0** values.\n\n**(b) Evie first.**\n- If $n$ is even, all three pebbles are even, so after Evie's move the outer pebbles are even and it is Odette's turn: Odette wins by the lemma.\n- If $n$ is odd, Evie makes the forcing move from the lemma with $\\pi$ = odd: if $n<2019$ she moves $-2020$ to $2019$, obtaining $n,2019,2020$; Odette cannot move $n$, so must move $2020$ into $(n,2019)$, and the outer pebbles $n$, $2019$ are odd. (If $n=2019$, she moves $2020$ to $-2019$ instead, symmetrically.) Now it is Evie's turn with odd outer pebbles, and the lemma gives Evie the win.\n\nSo Evie can force a win exactly for odd $n$ with $-2020<n<2020$: there are **2020** such values.\n\n**Answer:** (a) $0$; (b) $2020$. ∎\n\n*(A computer search of the same game on $[-N,N]$ for small even $N$ confirms: Odette always wins moving first; Evie wins moving first exactly for odd $n$.)*"
+      }
+    ],
+    "topics": [
+      "games",
+      "logic"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

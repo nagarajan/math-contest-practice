@@ -1,0 +1,549 @@
+[
+  {
+    "id": "quals-berkeley-2024f-a01",
+    "bank": "quals",
+    "source": {
+      "contest": "Berkeley Preliminary Exam",
+      "paper": "Fall 2024",
+      "year": 2024,
+      "number": "1A",
+      "url": "https://math.berkeley.edu/graduate/phd-program/preliminary-exam"
+    },
+    "grade": "grad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $f:[a,b]\\to\\mathbb R$ be a continuous function which is continuously differentiable on $(a,b)$. Show that for all $c\\in[a,b]$ we have\n$$|f(c)|\\le \\frac{1}{b-a}\\int_a^b|f(x)|\\,dx+\\int_a^b|f'(x)|\\,dx .$$",
+    "image": null,
+    "choices": null,
+    "answer": "Let $d$ be a minimum point of $|f|$ (or of $f$ after replacing $f$ by $-f$): $|f(d)|$ is at most the average of $|f|$, and $|f(c)|-|f(d)|\\le\\int_a^b|f'|$ by the fundamental theorem of calculus.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Compare with the minimum of $|f|$",
+        "body": "If $\\int_a^b|f'|=\\infty$ there is nothing to prove, so assume it is finite.\n\nThe function $|f|$ is continuous on the compact interval $[a,b]$, so it attains its minimum at some $d\\in[a,b]$. Then\n$$|f(d)|=\\frac{1}{b-a}\\int_a^b|f(d)|\\,dx\\le\\frac{1}{b-a}\\int_a^b|f(x)|\\,dx .$$\n\nNext, for $a<s<t<b$ the fundamental theorem of calculus gives $f(t)-f(s)=\\int_s^t f'(x)\\,dx$, hence $|f(t)-f(s)|\\le\\int_a^b|f'|$. Letting $s,t$ tend to the endpoints and using continuity of $f$ on $[a,b]$, this holds for all $s,t\\in[a,b]$. In particular\n$$|f(c)|-|f(d)|\\le|f(c)-f(d)|\\le\\int_a^b|f'(x)|\\,dx .$$\n\nAdding the two inequalities gives\n$$|f(c)|\\le\\frac{1}{b-a}\\int_a^b|f(x)|\\,dx+\\int_a^b|f'(x)|\\,dx. \\quad\\blacksquare$$"
+      },
+      {
+        "title": "Average the pointwise estimate",
+        "body": "For every $x\\in[a,b]$, as in the first solution, $|f(c)|\\le|f(x)|+|f(c)-f(x)|\\le|f(x)|+\\int_a^b|f'|$. Integrating this inequality in $x$ over $[a,b]$ and dividing by $b-a$ gives exactly\n$$|f(c)|\\le\\frac{1}{b-a}\\int_a^b|f(x)|\\,dx+\\int_a^b|f'(x)|\\,dx. \\quad\\blacksquare$$"
+      }
+    ],
+    "topics": [
+      "real-analysis"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "quals-berkeley-2024f-a02",
+    "bank": "quals",
+    "source": {
+      "contest": "Berkeley Preliminary Exam",
+      "paper": "Fall 2024",
+      "year": 2024,
+      "number": "2A",
+      "url": "https://math.berkeley.edu/graduate/phd-program/preliminary-exam"
+    },
+    "grade": "grad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $\\lambda_1,\\lambda_2,\\dots,\\lambda_n,\\dots$ be real numbers. Show that the infinite series\n$$\\sum_{n=1}^\\infty\\frac{e^{i\\lambda_n x}}{n^2}$$\nconverges uniformly over $\\mathbb R$ to a continuous limit function $f:\\mathbb R\\to\\mathbb C$. Show, further, that the limit\n$$\\lim_{T\\to\\infty}\\frac{1}{2T}\\int_{-T}^{T}f(x)\\,dx$$\nexists.",
+    "image": null,
+    "choices": null,
+    "answer": "Uniform convergence by the Weierstrass M-test with $M_n=1/n^2$. Integrating term by term, $\\frac1{2T}\\int_{-T}^Tf=\\sum_n\\frac1{n^2}\\cdot\\frac{\\sin\\lambda_nT}{\\lambda_nT}$ (the factor is $1$ when $\\lambda_n=0$), which tends to $\\sum_{\\lambda_n=0}1/n^2$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "M-test, then term-by-term limits",
+        "body": "**Uniform convergence and continuity.** Each term satisfies $\\left|e^{i\\lambda_nx}/n^2\\right|=1/n^2$ and $\\sum 1/n^2<\\infty$, so by the Weierstrass M-test the series converges uniformly on $\\mathbb R$. The partial sums are continuous, so the uniform limit $f$ is continuous.\n\n**The mean value.** For real $\\lambda$ and $T>0$ put\n$$m_\\lambda(T)=\\frac1{2T}\\int_{-T}^Te^{i\\lambda x}\\,dx=\\begin{cases}1,&\\lambda=0,\\\\[2pt] \\dfrac{\\sin\\lambda T}{\\lambda T},&\\lambda\\neq 0,\\end{cases}$$\n(for $\\lambda\\neq0$ the imaginary part $\\sin\\lambda x$ is odd and integrates to $0$). Note $|m_\\lambda(T)|\\le1$ and, for $\\lambda\\neq 0$, $|m_\\lambda(T)|\\le\\frac{1}{|\\lambda|T}\\to0$.\n\nBecause the series converges uniformly on $[-T,T]$, we may integrate term by term:\n$$\\frac1{2T}\\int_{-T}^Tf(x)\\,dx=\\sum_{n=1}^\\infty\\frac{m_{\\lambda_n}(T)}{n^2}.$$\n\nLet $L=\\sum_{n:\\lambda_n=0}\\frac1{n^2}$. Given $\\varepsilon>0$ choose $N$ with $\\sum_{n>N}\\frac1{n^2}<\\varepsilon$. Then\n$$\\left|\\sum_{n=1}^\\infty\\frac{m_{\\lambda_n}(T)}{n^2}-L\\right|\\le\\sum_{n\\le N,\\ \\lambda_n\\neq 0}\\frac{1}{n^2|\\lambda_n|T}+2\\sum_{n>N}\\frac1{n^2}<\\frac{C_N}{T}+2\\varepsilon,$$\nwhere $C_N=\\sum_{n\\le N,\\lambda_n\\neq 0}\\frac1{n^2|\\lambda_n|}$ is a finite constant. For $T>C_N/\\varepsilon$ the difference is less than $3\\varepsilon$.\n\nHence the limit exists and\n$$\\lim_{T\\to\\infty}\\frac1{2T}\\int_{-T}^Tf(x)\\,dx=\\sum_{n:\\ \\lambda_n=0}\\frac1{n^2}$$\n(in particular it is $0$ if no $\\lambda_n$ vanishes). $\\blacksquare$"
+      }
+    ],
+    "topics": [
+      "real-analysis",
+      "sequences-series"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "quals-berkeley-2024f-a03",
+    "bank": "quals",
+    "source": {
+      "contest": "Berkeley Preliminary Exam",
+      "paper": "Fall 2024",
+      "year": 2024,
+      "number": "3A",
+      "url": "https://math.berkeley.edu/graduate/phd-program/preliminary-exam"
+    },
+    "grade": "grad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $U$ be a connected and simply connected open subset of the complex plane, and let $f$ be a holomorphic function on $U$. Suppose $a$ is a point of $U$ such that the Taylor series of $f$ at $a$ converges on an open disc $D$ that intersects the complement of $U$. Does it follow that $f$ extends to a holomorphic function on $U\\cup D$? Give a proof or a counterexample.",
+    "image": null,
+    "choices": null,
+    "answer": "No. Take $U=\\mathbb C\\setminus(-\\infty,0]$, $f=\\operatorname{Log}z$ (principal branch), $a=-1+\\tfrac i2$, $D=D(a,|a|)$: the Taylor series is a branch of $\\log$ on $D$ continuous across the negative axis, while $\\operatorname{Log}$ jumps by $2\\pi i$ there.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "A branch cut counterexample",
+        "body": "**No.** Let $U=\\mathbb C\\setminus(-\\infty,0]$ (a star-shaped, hence connected and simply connected, open set) and let $f(z)=\\operatorname{Log}z=\\ln|z|+i\\operatorname{Arg}z$ with $\\operatorname{Arg}z\\in(-\\pi,\\pi)$. Let $a=-1+\\frac i2$, so $|a|=\\frac{\\sqrt5}2$, and $D=\\{z:|z-a|<|a|\\}$.\n\n*The Taylor series converges on $D$.* The disc $D$ does not contain $0$ and is simply connected, so there is a holomorphic branch $S$ of $\\log z$ on $D$; choose it with $S(a)=f(a)$. Since $S$ is holomorphic on the disc $D$ centred at $a$, its Taylor series at $a$ converges to $S$ on $D$; and since $S=f$ near $a$, this is the Taylor series of $f$ at $a$.\n\n*$D$ meets the complement of $U$:* $|-1-a|=\\frac12<|a|$, so $-1\\in D\\setminus U$.\n\n*No holomorphic extension exists.* Suppose $F$ is holomorphic on $U\\cup D$ with $F=f$ on $U$. Both $F|_D$ and $S$ are holomorphic on the connected set $D$ and agree with $f$ near $a$, so $F=S$ on $D$ by the identity theorem. Now consider points $-1\\pm i\\varepsilon$ ($\\varepsilon>0$ small); they lie in $D\\cap U$. As $\\varepsilon\\to0^+$:\n- $f(-1+i\\varepsilon)\\to\\ln1+i\\pi=i\\pi$ and $f(-1-i\\varepsilon)\\to-i\\pi$;\n- but $f=F=S$ at these points and $S$ is continuous at $-1\\in D$, so both limits equal $S(-1)$.\n\nThis gives $i\\pi=-i\\pi$, a contradiction. So $f$ does not extend to $U\\cup D$.\n\n(The point is that $D\\cap U$ is disconnected: the identity theorem only forces agreement with the Taylor series on the component of $D\\cap U$ containing $a$.) $\\blacksquare$"
+      }
+    ],
+    "topics": [
+      "complex-analysis"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "quals-berkeley-2024f-a04",
+    "bank": "quals",
+    "source": {
+      "contest": "Berkeley Preliminary Exam",
+      "paper": "Fall 2024",
+      "year": 2024,
+      "number": "4A",
+      "url": "https://math.berkeley.edu/graduate/phd-program/preliminary-exam"
+    },
+    "grade": "grad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let the function $f$ be holomorphic in the strip $-1<\\operatorname{Im}z<1$, real on the real axis, and of positive imaginary part in the strip $0<\\operatorname{Im}z<1$.\n\n(a) Prove that $f$ has negative imaginary part in the strip $-1<\\operatorname{Im}z<0$.\n\n(b) Prove $f'(x)\\ge0$ for $x$ real.\n\n(c) Prove $f'(x)>0$ for $x$ real.",
+    "image": null,
+    "choices": null,
+    "answer": "(a) Reflection: $f(\\bar z)=\\overline{f(z)}$. (b) $f'(x)=\\lim_{h\\to0^+}\\frac{f(x+ih)-f(x)}{ih}$ is real and equals $\\lim\\frac{\\operatorname{Im}f(x+ih)}{h}\\ge0$. (c) If $f'(c)=0$ then $f(z)=f(c)+a_m(z-c)^m+\\dots$ with $m\\ge2$, $a_m\\in\\mathbb R\\setminus\\{0\\}$, and $\\operatorname{Im}f$ takes both signs on a small upper half-circle around $c$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Schwarz reflection and local behaviour",
+        "body": "Let $D=\\{z:-1<\\operatorname{Im}z<1\\}$; note $D$ is symmetric under $z\\mapsto\\bar z$.\n\n**(a)** Define $g(z)=\\overline{f(\\bar z)}$ on $D$. Near any $a\\in D$, $f(z)=\\sum c_n(z-\\bar a)^n$ near $\\bar a$, so $g(z)=\\sum\\bar c_n(z-a)^n$; thus $g$ is holomorphic on $D$. For real $x$, $g(x)=\\overline{f(x)}=f(x)$ since $f$ is real there. By the identity theorem ($D$ connected, $g=f$ on $\\mathbb R$) we get $g=f$, i.e. $f(\\bar z)=\\overline{f(z)}$.\n\nIf $-1<\\operatorname{Im}z<0$ then $0<\\operatorname{Im}\\bar z<1$, so\n$$\\operatorname{Im}f(z)=\\operatorname{Im}\\overline{f(\\bar z)}=-\\operatorname{Im}f(\\bar z)<0 .$$\n\n**(b)** Since $f$ is real on $\\mathbb R$, $f'(x)=\\lim_{t\\to0}\\frac{f(x+t)-f(x)}{t}$ ($t$ real) is real. Computing the same complex derivative along the vertical direction,\n$$f'(x)=\\lim_{h\\to0^+}\\frac{f(x+ih)-f(x)}{ih},\\qquad\\text{so}\\qquad f'(x)=\\operatorname{Re}f'(x)=\\lim_{h\\to0^+}\\frac{\\operatorname{Im}f(x+ih)}{h}\\ge0,$$\nbecause $f(x)$ is real and $\\operatorname{Im}f(x+ih)>0$ for $0<h<1$.\n\n**(c)** Suppose $f'(c)=0$ for some real $c$. $f-f(c)$ is not identically $0$ (it has positive imaginary part in the upper strip), so near $c$\n$$f(z)=f(c)+a_m(z-c)^m\\bigl(1+u(z)\\bigr),\\qquad m\\ge2,\\ a_m\\neq 0,\\ u(c)=0,\\ u \\text{ continuous},$$\nand all Taylor coefficients are real because $f^{(n)}(c)$ is a limit of real difference quotients along $\\mathbb R$. For $z=c+\\varepsilon e^{i\\theta}$ with $\\theta\\in(0,\\pi)$,\n$$\\operatorname{Im}f(z)=a_m\\varepsilon^m\\operatorname{Im}\\!\\bigl(e^{im\\theta}(1+u(z))\\bigr)=a_m\\varepsilon^m\\bigl(\\sin m\\theta+O(|u(z)|)\\bigr).$$\nSince $m\\ge2$, $m\\theta$ ranges over $(0,m\\pi)\\supseteq(0,2\\pi)$, so we can choose $\\theta_0\\in(0,\\pi)$ with $a_m\\sin m\\theta_0=-|a_m|$ ($m\\theta_0=\\pi/2$ or $3\\pi/2$). For $\\varepsilon$ small, $|u|<\\frac12$ on the circle $|z-c|=\\varepsilon$, so $\\operatorname{Im}f(c+\\varepsilon e^{i\\theta_0})\\le-\\tfrac12|a_m|\\varepsilon^m<0$ at a point of the upper strip. This contradicts the hypothesis. Hence $f'(c)\\neq 0$, and by (b) $f'(c)>0$. $\\blacksquare$"
+      }
+    ],
+    "topics": [
+      "complex-analysis"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "quals-berkeley-2024f-a05",
+    "bank": "quals",
+    "source": {
+      "contest": "Berkeley Preliminary Exam",
+      "paper": "Fall 2024",
+      "year": 2024,
+      "number": "5A",
+      "url": "https://math.berkeley.edu/graduate/phd-program/preliminary-exam"
+    },
+    "grade": "grad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Prove or disprove: For any $2\\times2$ matrix $A$ over $\\mathbb C$, there is a $2\\times2$ matrix $B$ such that $A=B^2$.",
+    "image": null,
+    "choices": null,
+    "answer": "False: $A=\\begin{pmatrix}0&1\\\\0&0\\end{pmatrix}$ has no square root, since $B^2=A$ forces $B$ nilpotent, hence $B^2=0\\neq A$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Nilpotency",
+        "body": "**The statement is false.** Let $A=\\begin{pmatrix}0&1\\\\0&0\\end{pmatrix}$, so $A\\neq 0$ and $A^2=0$. Suppose $B^2=A$. Then $B^4=A^2=0$, so $B$ is nilpotent, and its only eigenvalue is $0$. Its characteristic polynomial is therefore $x^2$, and by Cayley–Hamilton $B^2=0$. Thus $A=B^2=0$, a contradiction. So no such $B$ exists. $\\blacksquare$"
+      },
+      {
+        "title": "Jordan form",
+        "body": "If $\\lambda$ is an eigenvalue of $B$ with eigenvector $v$, then $Av=B^2v=\\lambda^2v$, so $\\lambda^2$ is an eigenvalue of $A$. The only eigenvalue of $A=\\begin{pmatrix}0&1\\\\0&0\\end{pmatrix}$ is $0$, hence the only eigenvalue of $B$ is $0$. By Jordan form, $B=P^{-1}\\begin{pmatrix}0&c\\\\0&0\\end{pmatrix}P$ with $c\\in\\{0,1\\}$, and then $B^2=P^{-1}\\begin{pmatrix}0&c\\\\0&0\\end{pmatrix}^2P=0\\neq  A$. So $A$ has no square root. $\\blacksquare$"
+      }
+    ],
+    "topics": [
+      "linear-algebra"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "quals-berkeley-2024f-a06",
+    "bank": "quals",
+    "source": {
+      "contest": "Berkeley Preliminary Exam",
+      "paper": "Fall 2024",
+      "year": 2024,
+      "number": "6A",
+      "url": "https://math.berkeley.edu/graduate/phd-program/preliminary-exam"
+    },
+    "grade": "grad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $V$ be a finite-dimensional real inner-product space, and let $T:V\\to V$ be a linear transformation. Assume that:\n\n1. $\\langle x,y\\rangle=0\\implies\\langle T(x),T(y)\\rangle=0$ for all $x,y\\in V$, and\n2. there is at least one nonzero $v\\in V$ for which $\\|T(v)\\|=\\|v\\|$.\n\nShow that $T$ is orthogonal (i.e., $\\langle T(x),T(y)\\rangle=\\langle x,y\\rangle$ for all $x,y\\in V$).",
+    "image": null,
+    "choices": null,
+    "answer": "Extend $u=v/\\|v\\|$ to an orthonormal basis $x_1=u,x_2,\\dots,x_n$. Since $x_1+x_i\\perp x_1-x_i$, also $T(x_1)+T(x_i)\\perp T(x_1)-T(x_i)$, i.e. $\\|T(x_i)\\|=\\|T(x_1)\\|=1$; so $T$ maps an orthonormal basis to an orthonormal basis.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Orthonormal basis through $v$",
+        "body": "Let $u=v/\\|v\\|$; by linearity $\\|T(u)\\|=\\|u\\|=1$. By Gram–Schmidt choose an orthonormal basis $x_1=u,x_2,\\dots,x_n$ of $V$. By (1), the vectors $T(x_1),\\dots,T(x_n)$ are pairwise orthogonal.\n\n**Claim:** $\\|T(x_i)\\|=1$ for all $i$. For $i=1$ this is given. For $i>1$, since $x_1\\perp x_i$ and $\\|x_1\\|=\\|x_i\\|=1$,\n$$\\langle x_1+x_i,\\ x_1-x_i\\rangle=\\|x_1\\|^2-\\|x_i\\|^2=0 .$$\nBy (1), $\\langle T(x_1)+T(x_i),\\,T(x_1)-T(x_i)\\rangle=0$. Expanding, and using $T(x_1)\\perp T(x_i)$,\n$$0=\\|T(x_1)\\|^2-\\|T(x_i)\\|^2=1-\\|T(x_i)\\|^2 ,$$\nso $\\|T(x_i)\\|=1$.\n\nHence $\\langle T(x_i),T(x_j)\\rangle=\\delta_{ij}=\\langle x_i,x_j\\rangle$ for all $i,j$. For $x=\\sum a_ix_i$, $y=\\sum b_jx_j$, bilinearity gives\n$$\\langle T(x),T(y)\\rangle=\\sum_{i,j}a_ib_j\\langle T(x_i),T(x_j)\\rangle=\\sum_{i,j}a_ib_j\\langle x_i,x_j\\rangle=\\langle x,y\\rangle .$$\nSo $T$ is orthogonal. $\\blacksquare$"
+      }
+    ],
+    "topics": [
+      "linear-algebra"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "quals-berkeley-2024f-a07",
+    "bank": "quals",
+    "source": {
+      "contest": "Berkeley Preliminary Exam",
+      "paper": "Fall 2024",
+      "year": 2024,
+      "number": "7A",
+      "url": "https://math.berkeley.edu/graduate/phd-program/preliminary-exam"
+    },
+    "grade": "grad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $k$ be a field, let $k[x]$ denote the polynomial ring in one variable over $k$ (as usual), and let $I$ be an ideal in $k[x]$. Show that if $k[x]/I$ is a field, then it is a finite extension of $k$.\n\nIn solving this problem, you may only use elementary properties of $k[x]$ (in other words, do not solve this problem by citing a more general theorem that implies this problem as a special case).",
+    "image": null,
+    "choices": null,
+    "answer": "$I\\neq 0$ because $k[x]$ is not a field ($x$ has no inverse); for $0\\neq  f\\in I$, division with remainder shows $k[x]/I$ is spanned over $k$ by $1,x,\\dots,x^{\\deg f-1}$. Also $k\\to k[x]/I$ is injective since $I\\neq k[x]$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Division with remainder",
+        "body": "**$I\\neq 0$.** If $I=0$ then $k[x]/I\\cong k[x]$, which is not a field: $x$ has no inverse, since $\\deg(xg)=1+\\deg g\\ge1$ for every nonzero $g$, so $xg\\neq 1$.\n\n**$k$ embeds.** A field has $1\\neq 0$, so $1\\notin I$. The composite $k\\to k[x]\\to k[x]/I$ is a ring homomorphism from a field; its kernel is an ideal of $k$ not containing $1$, hence $0$. So $k[x]/I$ is an extension field of $k$.\n\n**Finite dimension.** Pick $0\\neq  f\\in I$ of degree $d$ (note $d\\ge1$, since a nonzero constant in $I$ would give $1\\in I$). For any $g\\in k[x]$, division with remainder gives $g=qf+r$ with $r=0$ or $\\deg r<d$. Then $g\\equiv r\\pmod I$, so every class in $k[x]/I$ is a $k$-linear combination of the classes of $1,x,\\dots,x^{d-1}$. Hence $[k[x]/I:k]\\le d<\\infty$, i.e. $k[x]/I$ is a finite extension of $k$. $\\blacksquare$"
+      }
+    ],
+    "topics": [
+      "abstract-algebra"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "quals-berkeley-2024f-a08",
+    "bank": "quals",
+    "source": {
+      "contest": "Berkeley Preliminary Exam",
+      "paper": "Fall 2024",
+      "year": 2024,
+      "number": "8A",
+      "url": "https://math.berkeley.edu/graduate/phd-program/preliminary-exam"
+    },
+    "grade": "grad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $G$ be a group whose order is twice an odd number. For $g\\in G$, let $\\lambda_g$ denote the permutation of $G$ given by $\\lambda_g(x)=gx$ for $x\\in G$.\n\n(a) Let $g$ be in $G$. Prove that the permutation $\\lambda_g$ is even if and only if the order of $g$ is odd.\n\n(b) Let $N=\\{g\\in G:\\operatorname{order}(g)\\text{ is odd}\\}$. Prove that $N$ is a normal subgroup of $G$ of index 2.",
+    "image": null,
+    "choices": null,
+    "answer": "(a) $\\lambda_g$ is a product of $2n/m$ disjoint $m$-cycles ($|G|=2n$, $n$ odd, $m=\\operatorname{ord}g$), so its sign is $(-1)^{(m-1)2n/m}$, which is $-1$ iff $m$ is even. (b) $N$ is the kernel of $g\\mapsto\\operatorname{sgn}(\\lambda_g)$, which is onto $\\{\\pm1\\}$ by Cauchy's theorem.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Cycle structure of the regular representation",
+        "body": "Write $|G|=2n$ with $n$ odd.\n\n**(a)** Let $m$ be the order of $g$. The orbits of $\\langle\\lambda_g\\rangle$ on $G$ are the right cosets $\\langle g\\rangle x=\\{x,gx,\\dots,g^{m-1}x\\}$, each of size exactly $m$ (since $g^ix=g^jx\\iff g^i=g^j$). So $\\lambda_g$ is a product of $2n/m$ disjoint $m$-cycles. An $m$-cycle has sign $(-1)^{m-1}$, so\n$$\\operatorname{sgn}\\lambda_g=(-1)^{(m-1)\\cdot 2n/m}.$$\nIf $m$ is odd, $m-1$ is even and $\\lambda_g$ is even. If $m$ is even, then $m-1$ is odd, and $2n/m$ is odd because $m\\mid 2n$ with $m$ even means $m=2m'$ with $m'\\mid n$, so $2n/m=n/m'$ is odd; thus $\\lambda_g$ is odd.\n\n**(b)** The map $g\\mapsto\\lambda_g$ is a homomorphism $G\\to\\operatorname{Sym}(G)$, since $\\lambda_{gh}=\\lambda_g\\lambda_h$. Composing with the sign homomorphism gives a homomorphism\n$$\\varepsilon:G\\to\\{\\pm1\\},\\qquad \\varepsilon(g)=\\operatorname{sgn}\\lambda_g .$$\nBy (a), $\\ker\\varepsilon=\\{g:\\operatorname{ord}g\\text{ odd}\\}=N$. As a kernel, $N$ is a normal subgroup. Since $2\\mid|G|$, Cauchy's theorem gives an element $g$ of order $2$; by (a) $\\varepsilon(g)=-1$, so $\\varepsilon$ is surjective and $[G:N]=|\\{\\pm1\\}|=2$. $\\blacksquare$"
+      }
+    ],
+    "topics": [
+      "abstract-algebra"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "quals-berkeley-2024f-b01",
+    "bank": "quals",
+    "source": {
+      "contest": "Berkeley Preliminary Exam",
+      "paper": "Fall 2024",
+      "year": 2024,
+      "number": "1B",
+      "url": "https://math.berkeley.edu/graduate/phd-program/preliminary-exam"
+    },
+    "grade": "grad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $f:[0,\\infty)\\to\\mathbb R$ be a function, and assume that:\n\n- $f$ is continuous on $[0,\\infty)$;\n- $f$ is differentiable on $(0,\\infty)$;\n- $f'(x)\\le0$ for all $x>0$ such that $f(x)>1$; and\n- $f(0)=1$.\n\nProve that $f(x)\\le1$ for all $x\\ge0$.",
+    "image": null,
+    "choices": null,
+    "answer": "If $f(x_1)>1$, let $a=\\sup\\{x<x_1:f(x)\\le1\\}$; then $f(a)=1$ and $f>1$ on $(a,x_1]$, and the mean value theorem on $[a,x_1]$ gives $f(x_1)-1=f'(\\xi)(x_1-a)\\le0$, a contradiction.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Last time $f$ was at most 1",
+        "body": "Suppose, for contradiction, that $f(x_1)>1$ for some $x_1\\ge0$; then $x_1>0$ since $f(0)=1$. The set $\\{x\\in[0,x_1]:f(x)\\le1\\}$ contains $0$ and is closed (by continuity), so it has a largest element $a<x_1$. Then $f(a)\\le1$, and $f(x)>1$ for all $x\\in(a,x_1]$; by continuity $f(a)\\ge1$, so $f(a)=1$.\n\nBy the mean value theorem on $[a,x_1]$ (continuity on $[a,x_1]$, differentiability on $(a,x_1)\\subseteq(0,\\infty)$) there is $\\xi\\in(a,x_1)$ with\n$$f(x_1)-1=f(x_1)-f(a)=f'(\\xi)(x_1-a).$$\nSince $f(\\xi)>1$ and $\\xi>0$, the hypothesis gives $f'(\\xi)\\le0$, so $f(x_1)\\le1$, a contradiction. Hence $f(x)\\le1$ for all $x\\ge0$. $\\blacksquare$"
+      }
+    ],
+    "topics": [
+      "real-analysis"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "quals-berkeley-2024f-b02",
+    "bank": "quals",
+    "source": {
+      "contest": "Berkeley Preliminary Exam",
+      "paper": "Fall 2024",
+      "year": 2024,
+      "number": "2B",
+      "url": "https://math.berkeley.edu/graduate/phd-program/preliminary-exam"
+    },
+    "grade": "grad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $f:\\mathbb R^2\\to\\mathbb R$ be defined by\n$$f(x,y)=\\begin{cases}x^{4/3}\\sin(y/x)&\\text{if }x\\neq 0,\\\\ 0&\\text{if }x=0.\\end{cases}$$\nDetermine all points at which $f$ is differentiable.",
+    "image": null,
+    "choices": null,
+    "answer": "$f$ is differentiable at every point of $\\mathbb R^2$: away from $x=0$ it is a composition of smooth functions, and at $(0,y_0)$ we have $|f(h_1,y_0+h_2)|\\le|h_1|^{4/3}=o(\\|h\\|)$, so $Df(0,y_0)=0$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Smooth part and a direct estimate on the axis",
+        "body": "**Points with $x\\neq 0$.** On the open set $\\{x\\neq 0\\}$, $f$ is built from differentiable functions ($x\\mapsto x^{4/3}=(x^{1/3})^4$ is differentiable for $x\\neq 0$, and $(x,y)\\mapsto\\sin(y/x)$ is smooth there), so $f$ is differentiable at every such point.\n\n**Points $(0,y_0)$.** For all $(x,y)$ we have $|f(x,y)|\\le|x|^{4/3}$ (trivially if $x=0$). For $h=(h_1,h_2)\\neq 0$,\n$$\\frac{|f(0+h_1,y_0+h_2)-f(0,y_0)-0|}{\\|h\\|}=\\frac{|f(h_1,y_0+h_2)|}{\\|h\\|}\\le\\frac{|h_1|^{4/3}}{\\|h\\|}\\le|h_1|^{1/3}\\le\\|h\\|^{1/3}\\xrightarrow[h\\to0]{}0$$\n(when $h_1=0$ the quotient is $0$). Therefore $f$ is differentiable at $(0,y_0)$ with derivative the zero linear map.\n\n**Answer:** $f$ is differentiable at **every point of $\\mathbb R^2$**. $\\blacksquare$"
+      }
+    ],
+    "topics": [
+      "real-analysis"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "quals-berkeley-2024f-b03",
+    "bank": "quals",
+    "source": {
+      "contest": "Berkeley Preliminary Exam",
+      "paper": "Fall 2024",
+      "year": 2024,
+      "number": "3B",
+      "url": "https://math.berkeley.edu/graduate/phd-program/preliminary-exam"
+    },
+    "grade": "grad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $f$ be a meromorphic function on $\\mathbb C$ which is analytic in a neighborhood of $0$. Let its Maclaurin series be\n$$\\sum_{k=0}^\\infty a_kz^k$$\nwith all $a_k\\ge0$. Suppose there is a pole of modulus $r>0$ and that no pole has modulus $<r$. Prove that there is a pole at $z=r$.",
+    "image": null,
+    "choices": null,
+    "answer": "(Pringsheim.) The series converges for $|z|<r$. If $rw$ ($|w|=1$) is a pole then $|f((1-\\varepsilon)rw)|\\to\\infty$, but $|f((1-\\varepsilon)rw)|\\le\\sum a_k((1-\\varepsilon)r)^k=f((1-\\varepsilon)r)$, so $f$ is unbounded near $r$, so $r$ is a pole.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Compare with the positive real axis",
+        "body": "Since $f$ has no poles in $|z|<r$, it is holomorphic on the disc $|z|<r$, so its Maclaurin series converges to $f$ there.\n\nLet $rw$, $|w|=1$, be a pole of modulus $r$. Then $|f(z)|\\to\\infty$ as $z\\to rw$, in particular $|f((1-\\varepsilon)rw)|\\to\\infty$ as $\\varepsilon\\to0^+$. For $0<\\varepsilon<1$, using $a_k\\ge0$,\n$$|f((1-\\varepsilon)rw)|=\\Bigl|\\sum_k a_k(1-\\varepsilon)^kr^kw^k\\Bigr|\\le\\sum_k a_k(1-\\varepsilon)^kr^k=f((1-\\varepsilon)r).$$\nHence $f((1-\\varepsilon)r)\\to\\infty$ as $\\varepsilon\\to0^+$, so $f$ is not bounded near $z=r$ and cannot be analytic at $r$. Since $f$ is meromorphic on $\\mathbb C$, its only non-analytic points are poles, so $z=r$ is a pole. $\\blacksquare$"
+      }
+    ],
+    "topics": [
+      "complex-analysis"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "quals-berkeley-2024f-b04",
+    "bank": "quals",
+    "source": {
+      "contest": "Berkeley Preliminary Exam",
+      "paper": "Fall 2024",
+      "year": 2024,
+      "number": "4B",
+      "url": "https://math.berkeley.edu/graduate/phd-program/preliminary-exam"
+    },
+    "grade": "grad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Compute\n$$\\frac{1}{2\\pi i}\\int_C\\frac{dz}{\\sin\\frac1z},$$\nwhere $C$ is the circle $|z|=\\frac15$, positively oriented.",
+    "image": null,
+    "choices": null,
+    "answer": "1/6-2/pi^2",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "answerDisplay": "$\\frac16-\\frac{2}{\\pi^2}$",
+    "solutions": [
+      {
+        "title": "Substitute $w=1/z$",
+        "body": "The integrand has poles at $z=\\frac1{k\\pi}$ accumulating at $0$, which is not an isolated singularity, so we move to $w=1/z$. On $C$ there are no zeros of $\\sin(1/z)$ since $5\\neq k\\pi$.\n\nWith $z=1/w$, $dz=-dw/w^2$, and the positively oriented circle $|z|=\\frac15$ becomes the circle $|w|=5$ traversed **negatively**. The two sign changes cancel:\n$$\\frac1{2\\pi i}\\int_C\\frac{dz}{\\sin(1/z)}=\\frac1{2\\pi i}\\oint_{|w|=5}\\frac{dw}{w^2\\sin w}.$$\nInside $|w|<5$ the zeros of $w^2\\sin w$ are $w=0$ and $w=\\pm\\pi$ (since $2\\pi>5$).\n\n- At $w=\\pm\\pi$ (simple poles): residue $\\dfrac{1}{(w^2\\sin w)'}\\Big|_{\\pm\\pi}=\\dfrac{1}{2w\\sin w+w^2\\cos w}\\Big|_{\\pm\\pi}=\\dfrac1{\\pi^2\\cos(\\pm\\pi)}=-\\dfrac1{\\pi^2}$.\n- At $w=0$ (triple pole): $\\dfrac{1}{w^2\\sin w}=\\dfrac{1}{w^3}\\Bigl(1-\\dfrac{w^2}{6}+\\dots\\Bigr)^{-1}=\\dfrac1{w^3}+\\dfrac{1}{6w}+\\dots$, residue $\\frac16$.\n\nBy the residue theorem,\n$$\\frac1{2\\pi i}\\int_C\\frac{dz}{\\sin(1/z)}=\\frac16-\\frac{2}{\\pi^2}\\approx-0.03598 .$$\n(A numerical evaluation of the contour integral agrees.)\n\n**Answer:** $\\dfrac16-\\dfrac2{\\pi^2}$."
+      },
+      {
+        "title": "Residues outside $C$ and at infinity",
+        "body": "Inside $|z|<\\frac15$ the integrand $1/\\sin(1/z)$ has infinitely many poles $z_k=\\frac1{k\\pi}$, $|k|\\ge2$, accumulating at $0$; outside $C$ it has only the poles $\\pm\\frac1\\pi$ (since $\\frac1{2\\pi}<\\frac15<\\frac1\\pi$). So use the exterior form of the residue theorem: $\\frac{1}{2\\pi i}\\int_C=-\\bigl(\\sum_{|z|>1/5}\\operatorname{Res}+\\operatorname{Res}_{\\infty}\\bigr)$.\n\n- At $z_{\\pm1}=\\pm\\frac1\\pi$: $\\frac{d}{dz}\\sin(1/z)=-\\frac{\\cos(1/z)}{z^2}$, so the residue is $\\dfrac{1}{-\\pi^2\\cos(\\pm\\pi)}=\\dfrac1{\\pi^2}$ each.\n- At $\\infty$: for large $z$, $\\dfrac1{\\sin(1/z)}=z\\Bigl(1-\\dfrac1{6z^2}+\\dots\\Bigr)^{-1}=z+\\dfrac{1}{6z}+\\dots$, so $\\operatorname{Res}_\\infty=-\\frac16$.\n\nHence the integral equals $-\\bigl(\\frac2{\\pi^2}-\\frac16\\bigr)=\\frac16-\\frac2{\\pi^2}$, as before.\n\n**Answer:** $\\dfrac16-\\dfrac2{\\pi^2}$."
+      }
+    ],
+    "topics": [
+      "complex-analysis"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "quals-berkeley-2024f-b05",
+    "bank": "quals",
+    "source": {
+      "contest": "Berkeley Preliminary Exam",
+      "paper": "Fall 2024",
+      "year": 2024,
+      "number": "5B",
+      "url": "https://math.berkeley.edu/graduate/phd-program/preliminary-exam"
+    },
+    "grade": "grad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $V$ be a finite-dimensional vector space over a field $F$, and let $L:V\\to V$ be a linear transformation. Suppose that the characteristic polynomial $\\chi$ of $L$ is written as $\\chi=\\chi_1\\chi_2$ where $\\chi_1$ and $\\chi_2$ are two relatively prime polynomials with coefficients in $F$. Show that $V$ can be written as the direct sum of two subspaces $V_1$ and $V_2$ with the property that $\\chi_i(L)V_i=0$ for $i=1,2$.",
+    "image": null,
+    "choices": null,
+    "answer": "$V_i=\\ker\\chi_i(L)$. Write $p_1\\chi_1+p_2\\chi_2=1$; then $v=p_2(L)\\chi_2(L)v+p_1(L)\\chi_1(L)v$ splits $v$ into parts in $V_1$ and $V_2$ (by Cayley–Hamilton), and $V_1\\cap V_2=0$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Bézout identity and Cayley–Hamilton",
+        "body": "Let $V_i=\\ker\\chi_i(L)$ for $i=1,2$; then $\\chi_i(L)V_i=0$ by definition. Since $\\gcd(\\chi_1,\\chi_2)=1$ in the PID $F[t]$, there are $p_1,p_2\\in F[t]$ with\n$$p_1\\chi_1+p_2\\chi_2=1,\\qquad\\text{so}\\qquad p_1(L)\\chi_1(L)+p_2(L)\\chi_2(L)=I .$$\nRecall that polynomials in $L$ commute with each other.\n\n**$V_1\\cap V_2=0$.** If $v\\in V_1\\cap V_2$ then $v=p_1(L)\\chi_1(L)v+p_2(L)\\chi_2(L)v=0+0=0$.\n\n**$V_1+V_2=V$.** Given $v\\in V$, put $v_1=p_2(L)\\chi_2(L)v$ and $v_2=p_1(L)\\chi_1(L)v$. Then $v_1+v_2=v$, and by the Cayley–Hamilton theorem $\\chi(L)=0$, so\n$$\\chi_1(L)v_1=p_2(L)\\chi_1(L)\\chi_2(L)v=p_2(L)\\chi(L)v=0,$$\ni.e. $v_1\\in V_1$; similarly $v_2\\in V_2$.\n\nTherefore $V=V_1\\oplus V_2$ with $\\chi_i(L)V_i=0$. $\\blacksquare$"
+      }
+    ],
+    "topics": [
+      "linear-algebra"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "quals-berkeley-2024f-b06",
+    "bank": "quals",
+    "source": {
+      "contest": "Berkeley Preliminary Exam",
+      "paper": "Fall 2024",
+      "year": 2024,
+      "number": "6B",
+      "url": "https://math.berkeley.edu/graduate/phd-program/preliminary-exam"
+    },
+    "grade": "grad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Show that an $n\\times n$ matrix $A$ of complex numbers satisfying\n$$|a_{ii}|>\\sum_{j\\neq  i}|a_{ij}|$$\nfor all $1\\le i\\le n$ must be invertible.",
+    "image": null,
+    "choices": null,
+    "answer": "If $Ax=0$ with $x\\neq 0$, pick $i$ with $|x_i|$ maximal; the $i$th equation gives $|a_{ii}||x_i|\\le\\sum_{j\\neq  i}|a_{ij}||x_j|\\le|x_i|\\sum_{j\\neq  i}|a_{ij}|$, contradicting strict diagonal dominance.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Look at the largest coordinate of a kernel vector",
+        "body": "Suppose $A$ is singular, and let $x=(x_1,\\dots,x_n)^T\\neq 0$ with $Ax=0$. Choose $i$ with $|x_i|=\\max_j|x_j|>0$. The $i$th coordinate of $Ax=0$ gives $a_{ii}x_i=-\\sum_{j\\neq  i}a_{ij}x_j$, hence\n$$|a_{ii}|\\,|x_i|\\le\\sum_{j\\neq  i}|a_{ij}|\\,|x_j|\\le|x_i|\\sum_{j\\neq  i}|a_{ij}| .$$\nDividing by $|x_i|>0$ gives $|a_{ii}|\\le\\sum_{j\\neq  i}|a_{ij}|$, contradicting the hypothesis. So $A$ is invertible. $\\blacksquare$\n\n(Equivalently: by the Gershgorin circle theorem every eigenvalue lies in some disc $|z-a_{ii}|\\le\\sum_{j\\neq  i}|a_{ij}|<|a_{ii}|$, none of which contains $0$.)"
+      }
+    ],
+    "topics": [
+      "linear-algebra"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "quals-berkeley-2024f-b07",
+    "bank": "quals",
+    "source": {
+      "contest": "Berkeley Preliminary Exam",
+      "paper": "Fall 2024",
+      "year": 2024,
+      "number": "7B",
+      "url": "https://math.berkeley.edu/graduate/phd-program/preliminary-exam"
+    },
+    "grade": "grad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "How many roots does the polynomial $x^{100000}-1$ have in the finite field $\\mathbb F_{65537}$? ($65537=2^{16}+1$ is a prime.)",
+    "image": null,
+    "choices": null,
+    "answer": "32",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Cyclic group of order $2^{16}$",
+        "body": "The roots are the elements $x\\in\\mathbb F_{65537}^\\times$ with $x^{100000}=1$. The group $\\mathbb F_{65537}^\\times$ is cyclic of order $65536=2^{16}$. In a cyclic group of order $N$, the number of solutions of $x^m=1$ is $\\gcd(m,N)$. Here\n$$100000=2^5\\cdot5^5,\\qquad\\gcd(2^5\\cdot5^5,\\ 2^{16})=2^5=32 .$$\nSo there are $32$ roots. (They are simple: the derivative $100000x^{99999}$ vanishes only at $0$, which is not a root.)\n\n**Answer:** $32$."
+      },
+      {
+        "title": "Orders of elements",
+        "body": "Every element of $\\mathbb F_{65537}^\\times$ has order a power of $2$ dividing $2^{16}$. Such an order divides $100000=2^5\\cdot5^5$ exactly when it divides $2^5$. So the roots are exactly the solutions of $x^{32}=1$, and in a cyclic group of order $2^{16}$ there are exactly $32$ of them (the subgroup of order $32$). A direct computer count over all of $\\mathbb F_{65537}$ also gives $32$.\n\n**Answer:** $32$."
+      }
+    ],
+    "topics": [
+      "abstract-algebra",
+      "number-theory"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "quals-berkeley-2024f-b08",
+    "bank": "quals",
+    "source": {
+      "contest": "Berkeley Preliminary Exam",
+      "paper": "Fall 2024",
+      "year": 2024,
+      "number": "8B",
+      "url": "https://math.berkeley.edu/graduate/phd-program/preliminary-exam"
+    },
+    "grade": "grad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $G$ be a group generated by two elements $a$ and $b$, both of order 2. Prove that $G$ has a subgroup of index 2. (Hint: Show that the set of elements that can be written as the product of an even number of generators is not the whole of G.)",
+    "image": null,
+    "choices": null,
+    "answer": "Let $H$ be the set of products of an even number of letters $a,b$; it is a subgroup with $G=H\\cup aH$, so $[G:H]\\le2$. An odd-length word reduces to an alternating word of odd length, which is a palindrome $u\\,x\\,u^{-1}$ with $x\\in\\{a,b\\}$, hence $\\neq 1$; so $a\\notin H$ and $[G:H]=2$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Odd words are conjugates of generators",
+        "body": "Since $a^{-1}=a$ and $b^{-1}=b$, every element of $G$ is a finite product (word) of the letters $a,b$. Let $H$ be the set of elements expressible as a word of **even** length.\n\n**$H$ is a subgroup of index at most 2.** $1$ is the empty word; concatenating two even words gives an even word; and the inverse of $x_1x_2\\cdots x_{2k}$ is $x_{2k}\\cdots x_1$ (each letter is its own inverse), again even. Every word is either even or $a$ times an even word, so $G=H\\cup aH$ and $[G:H]\\le2$. (So $H$ is normal, though we don't need this.)\n\n**$a\\notin H$.** If $a\\in H$, then $a=w$ for an even word $w$, so $aw^{-1}=1$ with $aw^{-1}$ a word of odd length. We show no odd-length word equals $1$.\n\nTake an odd-length word and repeatedly delete adjacent pairs $aa$ or $bb$ (each equals $1$); this preserves the group element and the parity of the length, so we reach an odd-length word with no two equal adjacent letters, i.e. an **alternating** word $w=x_1x_2\\cdots x_{2k+1}$ (it is non-empty, since its length is odd). An alternating word of odd length begins and ends with the same letter and reads the same backwards, so with $u=x_1\\cdots x_k$,\n$$w=u\\,x_{k+1}\\,(x_k\\cdots x_1)=u\\,x_{k+1}\\,u^{-1}.$$\nThis is a conjugate of $x_{k+1}\\in\\{a,b\\}$, which has order $2$, so $w\\neq 1$.\n\nHence $a\\notin H$, so $H\\neq  G$ and $[G:H]=2$. $\\blacksquare$"
+      }
+    ],
+    "topics": [
+      "abstract-algebra"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

@@ -67,6 +67,35 @@ def parse_grades(q):
     return None
 
 
+N_COMMANDS = set(
+    "ne neq neg nu nabla not notin nearrow nwarrow nparallel nmid newline ni nless ngtr nleq ngeq "
+    "nsubseteq nsupseteq natural nolimits noindent nobreak nonumber normalsize ncong nsim nexists "
+    "nrightarrow nleftarrow nLeftarrow nRightarrow nleftrightarrow nprec nsucc nvdash".split()
+)
+
+
+def has_literal_newline(s):
+    """True if s contains backslash-n text that is neither part of a LaTeX \\\\ nor a \\n... command."""
+    for m in re.finditer(r"\\n([A-Za-z]*)", s):
+        k = m.start()
+        while k > 0 and s[k - 1] == "\\":
+            k -= 1
+        if (m.start() - k) % 2 == 0 and "n" + m.group(1) not in N_COMMANDS:
+            return True
+    return False
+
+
+def strings(o):
+    if isinstance(o, str):
+        yield o
+    elif isinstance(o, list):
+        for x in o:
+            yield from strings(x)
+    elif isinstance(o, dict):
+        for x in o.values():
+            yield from strings(x)
+
+
 def check(path):
     errors, warnings = [], []
     try:
@@ -86,6 +115,8 @@ def check(path):
         if q.get("id") in ids:
             e("duplicate id in file")
         ids.add(q.get("id"))
+        if any(has_literal_newline(s) for s in strings(q)):
+            e("literal '\\n' text in a string (write a real newline instead)")
         if q.get("bank") not in BANKS:
             e(f"bad bank {q.get('bank')} (add it to data/banks.json)")
         elif not str(q.get("id", "")).startswith(q["bank"] + "-"):

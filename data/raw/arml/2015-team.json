@@ -1,0 +1,366 @@
+[
+  {
+    "id": "arml-2015-team-01",
+    "bank": "arml",
+    "source": {
+      "contest": "ARML",
+      "paper": "2015 Team Round",
+      "year": 2015,
+      "number": 1,
+      "url": "https://arml3.com/wp-content/uploads/2026/03/ARML-2015-2020.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Compute the greatest integer $x$ such that $\\left\\lfloor \\sqrt{\\left\\lfloor \\sqrt{\\lfloor \\sqrt{x} \\rfloor} \\right\\rfloor} \\right\\rfloor = 2$.",
+    "image": null,
+    "choices": null,
+    "answer": "6560",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Work from the outside in",
+        "body": "The outer floor equals 2 exactly when $2\\le \\sqrt{\\lfloor\\sqrt{\\lfloor\\sqrt x\\rfloor}\\rfloor}<3$, i.e. when $\\lfloor\\sqrt{\\lfloor\\sqrt x\\rfloor}\\rfloor \\le 8$ (and $\\ge 4$).\n\n- $\\lfloor\\sqrt{\\lfloor\\sqrt x\\rfloor}\\rfloor\\le 8 \\iff \\sqrt{\\lfloor\\sqrt x\\rfloor}<9 \\iff \\lfloor\\sqrt x\\rfloor\\le 80$.\n- $\\lfloor \\sqrt x\\rfloor\\le 80 \\iff \\sqrt x<81 \\iff x<6561$.\n\nSo every $x$ with the property is less than $6561=((3^2)^2)^2$, and $x=6560$ works: $\\lfloor\\sqrt{6560}\\rfloor=80$, $\\lfloor\\sqrt{80}\\rfloor=8$, $\\lfloor\\sqrt 8\\rfloor=2$.\n\n**Answer: 6560**"
+      },
+      {
+        "title": "Ignore the floors first",
+        "body": "Without floors, $\\sqrt{\\sqrt{\\sqrt{x}}}=x^{1/8}$, and the value reaches $3$ exactly at $x=3^8=6561$. The floors only make values smaller, so at $x=6561$ the expression equals $3$, while for $x=6560$ each stage stays just below the next perfect square: $80<81$, $8<9$, $2<3$, giving $2$. Hence the largest $x$ is $6561-1$.\n\n**Answer: 6560**"
+      }
+    ],
+    "topics": [
+      "algebra",
+      "number-theory"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "arml-2015-team-02",
+    "bank": "arml",
+    "source": {
+      "contest": "ARML",
+      "paper": "2015 Team Round",
+      "year": 2015,
+      "number": 2,
+      "url": "https://arml3.com/wp-content/uploads/2026/03/ARML-2015-2020.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Compute the number of ordered pairs of integers $(x, y)$ such that $\\dfrac{1}{x} + \\dfrac{540}{xy} = 2$.",
+    "image": null,
+    "choices": null,
+    "answer": "15",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Factor",
+        "body": "Multiply by $xy$ (both are nonzero): $y+540=2xy$, i.e. $(2x-1)\\,y=540$.\n\nSo $2x-1$ must be an odd divisor of $540=2^2\\cdot 3^3\\cdot 5$, positive or negative. There are $(3+1)(1+1)=8$ positive odd divisors, hence $16$ odd divisors in all, each giving one integer $x=\\frac{d+1}{2}$ and $y=540/d$.\n\nBut $d=-1$ gives $x=0$, which is not allowed in the original equation. All other choices give $x\\ne 0$, $y\\ne0$. Hence there are $16-1=15$ pairs.\n\n**Answer: 15**"
+      },
+      {
+        "title": "List them",
+        "body": "From $(2x-1)y=540$ with $2x-1=d$ odd:\n\n- $d=1,3,5,9,15,27,45,135$ give $x=1,2,3,5,8,14,23,68$.\n- $d=-3,-5,-9,-15,-27,-45,-135$ give $x=-1,-2,-4,-7,-13,-22,-67$.\n- $d=-1$ gives $x=0$ — rejected.\n\nThat is $8+7=15$ pairs.\n\n**Answer: 15**"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "algebra"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "arml-2015-team-03",
+    "bank": "arml",
+    "source": {
+      "contest": "ARML",
+      "paper": "2015 Team Round",
+      "year": 2015,
+      "number": 3,
+      "url": "https://arml3.com/wp-content/uploads/2026/03/ARML-2015-2020.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "A positive integer has the *Kelly Property* if it contains a zero in its base-17 representation. Compute the number of positive integers less than 1000 (base 10) that have the Kelly Property.",
+    "image": null,
+    "choices": null,
+    "answer": "106",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Count by the leading base-17 digit",
+        "body": "$1000=3\\cdot17^2+7\\cdot17+14$, i.e. $1000=(3,7,14)_{17}$. Write numbers below 1000 as three base-17 digits $p\\,q\\,r$ (with leading zeros) and split by $p$:\n\n- $p=0$ (two-digit or one-digit numbers): the number $qr$ needs $r=0$ with $q\\ne0$: $16$ numbers.\n- $p=1$ or $p=2$: some of $q,r$ must be $0$: $17^2-16^2=33$ numbers each.\n- $p=3$: the number is less than $(3,7,14)_{17}$, so $q\\le7$. If $q=0$, all $17$ values of $r$ work; if $1\\le q\\le 7$ we need $r=0$: $7$ numbers. Total $24$.\n\nSum: $16+33+33+24=106$.\n\n**Answer: 106**"
+      },
+      {
+        "title": "Complementary count",
+        "body": "Count numbers $1\\le n\\le 999$ with **no** zero digit in base 17.\n\n- 1 digit: $16$; 2 digits: $16^2=256$.\n- 3 digits less than $(3,7,14)_{17}$ with no zeros: leading digit $1$ or $2$: $2\\cdot16^2=512$; leading digit $3$: second digit $1$–$6$ gives $6\\cdot16=96$, second digit $7$ gives last digit $1$–$13$: $13$. Total $621$.\n\nNo-zero numbers: $16+256+621=893$, so $999-893=106$ have the Kelly Property.\n\n**Answer: 106**"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "counting"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "arml-2015-team-04",
+    "bank": "arml",
+    "source": {
+      "contest": "ARML",
+      "paper": "2015 Team Round",
+      "year": 2015,
+      "number": 4,
+      "url": "https://arml3.com/wp-content/uploads/2026/03/ARML-2015-2020.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Compute the smallest positive integer $n$ such that $n+i$, $(n+i)^2$, and $(n+i)^3$ are the vertices of a triangle in the complex plane whose area is greater than 2015.",
+    "image": null,
+    "choices": null,
+    "answer": "9",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Shoelace formula",
+        "body": "$(n+i)^2=(n^2-1)+2ni$ and $(n+i)^3=(n^3-3n)+(3n^2-1)i$, so the vertices are $(n,1)$, $(n^2-1,2n)$, $(n^3-3n,3n^2-1)$.\n\nThe shoelace formula gives area\n$$\\tfrac12\\left(n^4-2n^3+3n^2-2n+2\\right)=\\tfrac12\\,(n^2+1)\\big((n-1)^2+1\\big).$$\nWe need $(n^2+1)((n-1)^2+1)>4030$.\n\n- $n=8$: $65\\cdot50=3250$ — too small.\n- $n=9$: $82\\cdot65=5330>4030$. ✓\n\n**Answer: 9**"
+      },
+      {
+        "title": "Areas of triangles from the origin",
+        "body": "Let $z=n+i$, $\\theta=\\arg z$, so $\\sin\\theta=\\frac1{\\sqrt{n^2+1}}$, $\\cos\\theta=\\frac{n}{\\sqrt{n^2+1}}$. Using $\\frac12ab\\sin C$:\n\n- triangle $0,z,z^2$: $K_1=\\frac12|z|^3\\sin\\theta=\\frac{n^2+1}{2}$;\n- triangle $0,z^2,z^3$: $K_2=\\frac12|z|^5\\sin\\theta=\\frac{(n^2+1)^2}{2}$;\n- triangle $0,z,z^3$: $K_3=\\frac12|z|^4\\sin2\\theta=n(n^2+1)$.\n\nThe required area is $K_1+K_2-K_3=\\frac12(n^2+1)\\big(n^2-2n+2\\big)$, the same as before. Testing $n=8$ (3250/2) and $n=9$ (5330/2) gives $n=9$.\n\n**Answer: 9**"
+      }
+    ],
+    "topics": [
+      "complex-numbers",
+      "geometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "arml-2015-team-05",
+    "bank": "arml",
+    "source": {
+      "contest": "ARML",
+      "paper": "2015 Team Round",
+      "year": 2015,
+      "number": 5,
+      "url": "https://arml3.com/wp-content/uploads/2026/03/ARML-2015-2020.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "A loop is made by connecting rods of lengths $1, 2, \\ldots, 90$ in that order. (The rod of length 90 is connected to the rods of lengths 89 and 1.) The loop is laid in the shape of an equilateral triangle of perimeter 4095. Rods cannot be bent or broken. Compute the sum of the lengths of the shortest rods on each side of the triangle. (For example, the loop with rods $1, 2, \\ldots, 9$ can be arranged into an equilateral triangle because $4+5+6 = 7+8 = 9+1+2+3$.)",
+    "image": null,
+    "choices": null,
+    "answer": "72",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Divisibility of the side sum",
+        "body": "Each side has length $S=4095/3=1365=3\\cdot5\\cdot7\\cdot13$. Walk around the loop starting at rod 1 (away from rod 90), and let the last rods of the three sides be $a<b<c$. The sides are $a+1,\\dots,b$; $b+1,\\dots,c$; and $c+1,\\dots,90,1,\\dots,a$.\n\nThe middle side has $m=c-b$ consecutive rods with average $\\frac{b+c+1}{2}$, so $S=m\\cdot\\frac{b+c+1}2$, and $m\\mid 2S=2730$. The average is at most $89.5$, so $m\\ge 16$; and the average is at least $\\frac{m+1}2$, so $m$ is not huge. Checking the divisors of $2730$:\n\n- $m=21$: average $65$, rods $55,\\dots,75$, so $b=54$, $c=75$. Then $a$ must satisfy $\\sum_{a+1}^{54}=1365$: $\\frac{54\\cdot55}{2}-\\frac{a(a+1)}2=1365\\Rightarrow a(a+1)=240\\Rightarrow a=15$. ✓ The third side is $76,\\dots,90,1,\\dots,15$ with sum $1245+120=1365$. ✓\n- $m=26$: average $52.5$, rods $40,\\dots,65$; then the next side contains $66,\\dots,90$ (sum $1950>S$) — impossible.\n- The other candidates ($m\\le51$ since $\\frac{m(m+1)}2\\le S$, and $2S/m$ odd when $m$ is even) are $m=30,35,39,42$; in each case the first side, which must end at rod $b$ and sum to $1365$, cannot be formed (equivalently $2b+1$ fails the square condition in the second solution).\n\nSo the sides are $16..54$, $55..75$, $76..90,1..15$, and the shortest rods are $16$, $55$, $1$.\n\n$16+55+1=72$.\n\n**Answer: 72**"
+      },
+      {
+        "title": "Prefix sums search",
+        "body": "Let $T_k=\\frac{k(k+1)}2$. Cutting the loop after rods $a<b<c$ (with the third side wrapping past rod 90) works iff $T_b-T_a=T_c-T_b=1365$.\n\nSo we need $T_b-1365$ and $T_b+1365$ both triangular. Equivalently, with $A=2a+1$, $B=2b+1$, $C=2c+1$: $8T_k+1=(2k+1)^2$, so $B^2-A^2=C^2-B^2=8\\cdot1365=10920$.\n\nFactor $B^2-A^2=(B-A)(B+A)=10920$ with $B-A$, $B+A$ both even: checking the possibilities with $B\\le 181$, the only $B$ for which both $B^2-10920$ and $B^2+10920$ are odd squares is $B=109$: $109^2-10920=961=31^2$ and $109^2+10920=22801=151^2$. Thus $a=15$, $b=54$, $c=75$.\n\nThe shortest rods are $a+1=16$, $b+1=55$ and rod $1$ on the wrapping side: $16+55+1=72$.\n\n**Answer: 72**"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "sequences-series"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "arml-2015-team-06",
+    "bank": "arml",
+    "source": {
+      "contest": "ARML",
+      "paper": "2015 Team Round",
+      "year": 2015,
+      "number": 6,
+      "url": "https://arml3.com/wp-content/uploads/2026/03/ARML-2015-2020.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Four spheres $S_1$, $S_2$, $S_3$, and $S_4$ are mutually externally tangent and are tangent to a plane, on the same side of the plane. Let $S_1$ and $S_2$ have radius $r$ and let $S_3$ and $S_4$ have radius $s$. Given that $r > s$, compute $r/s$.",
+    "image": null,
+    "choices": null,
+    "answer": "2+sqrt(3)",
+    "answerDisplay": "$2+\\sqrt{3}$",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Coordinates",
+        "body": "Let the plane be $y=0$ and put the centers of $S_1,S_2$ at $(\\pm r, r, 0)$ (distance $2r$ apart, as they are tangent). By symmetry the centers of $S_3,S_4$ lie in the plane $x=0$ at $(0,s,\\pm s)$ (distance $2s$ apart).\n\n$S_1$ and $S_4$ are tangent, so the squared distance between $(r,r,0)$ and $(0,s,s)$ is $(r+s)^2$:\n$$r^2+(r-s)^2+s^2=(r+s)^2 \\;\\Longrightarrow\\; r^2-4rs+s^2=0.$$\nSo $\\frac rs=2\\pm\\sqrt3$, and since $r>s$, $\\frac rs=2+\\sqrt3$.\n\n**Answer: $2+\\sqrt3$**"
+      },
+      {
+        "title": "Project onto the plane",
+        "body": "Project the centers $P_1,\\dots,P_4$ onto the plane. $P_1P_2$ and $P_3P_4$ are parallel to the plane with lengths $2r$ and $2s$; by symmetry their projections are perpendicular bisectors of each other, meeting at a point $M$.\n\nThe horizontal distance from (the projection of) $P_1$ to that of $P_3$ is $\\sqrt{r^2+s^2}$, and the vertical distance is $r-s$. Since $P_1P_3=r+s$:\n$$(r-s)^2+r^2+s^2=(r+s)^2\\Rightarrow r^2+s^2=4rs.$$\nWith $u=r/s$: $u^2-4u+1=0$, so $u=2+\\sqrt3$ (the larger root).\n\n**Answer: $2+\\sqrt3$**"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "arml-2015-team-07",
+    "bank": "arml",
+    "source": {
+      "contest": "ARML",
+      "paper": "2015 Team Round",
+      "year": 2015,
+      "number": 7,
+      "url": "https://arml3.com/wp-content/uploads/2026/03/ARML-2015-2020.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "In $\\triangle ABC$, point $D$ is on $\\overline{AB}$ and point $E$ is on $\\overline{AC}$. The measures of the nine angles in triangles $ADE$, $BCD$, and $CDE$ can be arranged to form an arithmetic sequence. Compute the greatest possible degree measure for $\\angle A$.",
+    "image": null,
+    "choices": null,
+    "answer": "84",
+    "acceptedAnswers": null,
+    "answerUnit": "degrees",
+    "solutions": [
+      {
+        "title": "Pin down the common difference",
+        "body": "The nine angles total $3\\cdot180^\\circ$, so their average is $60^\\circ$ and they are $60^\\circ\\pm kd$ for $k=0,1,\\dots,4$; since the smallest, $60^\\circ-4d$, is positive, $d<15^\\circ$.\n\nAt $E$, angles $\\angle AED$ and $\\angle DEC$ are supplementary: $(60+kd)+(60+\\ell d)=180$, so $(k+\\ell)d=60$ with $k+\\ell=m\\le 7$ (the two largest are $+4,+3$) and $d<15$ forces $m\\ge5$. So $d\\in\\{12^\\circ,10^\\circ,\\tfrac{60}{7}^\\circ\\}$.\n\n- $d=10^\\circ$: angles $20,30,\\dots,100$; the pair at $E$ must be $\\{80,100\\}$. One can check the maximum possible $\\angle A$ here is $70^\\circ$.\n- $d=12^\\circ$: angles $12,24,\\dots,108$; the pair at $E$ is $\\{72,108\\}$ or $\\{84,96\\}$. $\\angle A$ cannot be $108$ (it would be at $E$'s pair). Try $\\angle A=96$: then $\\angle AED=72$, $\\angle ADE=12$, and $\\angle CDE+\\angle BDC=168$ would need two unused angles summing to $168$, but the largest unused are $84$ and $60$ — impossible. $\\angle A=84^\\circ$ works:\n  - $\\triangle ADE$: $\\angle A=84^\\circ$, $\\angle ADE=24^\\circ$, $\\angle AED=72^\\circ$;\n  - $\\triangle CDE$: $\\angle DEC=108^\\circ$, $\\angle EDC=60^\\circ$, $\\angle ECD=12^\\circ$;\n  - $\\triangle BCD$: $\\angle CDB=96^\\circ$, $\\angle B=48^\\circ$, $\\angle BCD=36^\\circ$.\n\n  At $E$: $72+108=180$; at $D$: $24+60+96=180$; and $\\angle C=12+36=48$, so $84+48+48=180$. The nine angles are exactly $12,24,\\dots,108$.\n- $d=\\frac{60}{7}^\\circ$: the two largest angles $\\frac{660}{7},\\frac{600}{7}$ must sit at $E$; the next largest is $\\frac{540}{7}<84$.\n\nHence the maximum is $84^\\circ$.\n\n**Answer: 84**"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "sequences-series"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "arml-2015-team-08",
+    "bank": "arml",
+    "source": {
+      "contest": "ARML",
+      "paper": "2015 Team Round",
+      "year": 2015,
+      "number": 8,
+      "url": "https://arml3.com/wp-content/uploads/2026/03/ARML-2015-2020.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Let $a_1 = a_2 = a_3 = 1$. For $n > 3$, let $a_n$ be the number of real numbers $x$ such that\n$$x^4 - 2a_{n-1}x^2 + a_{n-2}a_{n-3} = 0.$$\nCompute the sum $a_1 + a_2 + a_3 + \\cdots + a_{1000}$.",
+    "image": null,
+    "choices": null,
+    "answer": "2329",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Count roots, find the period",
+        "body": "For $p,q\\ge 0$, $x^4-2px^2+q=0$ is $(x^2-p)^2=p^2-q$. Its number of real roots is:\n\n- $0$ if $p^2<q$;\n- $2$ if $p^2=q$, $p>0$; $1$ if $p=q=0$;\n- $4$ if $p^2>q>0$; $3$ if $p^2>q=0$.\n\nWith $p=a_{n-1}$, $q=a_{n-2}a_{n-3}$:\n\n| $n$ | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 |\n|---|---|---|---|---|---|---|---|---|---|---|---|---|---|\n| $a_n$ | 2 | 4 | 4 | 4 | 2 | 0 | 0 | 1 | 3 | 3 | 4 | 4 | 4 |\n\nThe triple $4,4,4$ appears at $a_5,a_6,a_7$ and again at $a_{14},a_{15},a_{16}$, so from $a_5$ on the sequence has period $9$: $4,4,4,2,0,0,1,3,3$ (sum $21$).\n\n$a_5,\\dots,a_{994}$ is $110$ full periods ($990$ terms), and $a_{995},\\dots,a_{1000}$ is $4,4,4,2,0,0$. So the sum is\n$$(1+1+1+2)+110\\cdot21+14=5+2310+14=2329.$$\n\n**Answer: 2329**"
+      }
+    ],
+    "topics": [
+      "sequences-series",
+      "polynomials"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "arml-2015-team-09",
+    "bank": "arml",
+    "source": {
+      "contest": "ARML",
+      "paper": "2015 Team Round",
+      "year": 2015,
+      "number": 9,
+      "url": "https://arml3.com/wp-content/uploads/2026/03/ARML-2015-2020.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "For any real number $k$, let region $R_k$ consist of all points $(x, y)$ such that $x \\ge 0$, $y \\ge 0$, and $\\lfloor x+y \\rfloor + \\{x\\} \\le k$, where $\\{u\\}$ denotes the fractional part of $u$. Compute the value of $k$ for which the area of $R_k$ is equal to 100.",
+    "image": null,
+    "choices": null,
+    "answer": "29-sqrt(221)",
+    "answerDisplay": "$29-\\sqrt{221}$",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Slice the strip",
+        "body": "Let $N=\\lfloor k\\rfloor$ and $r=\\{k\\}$. Points with $x+y<N$ are all in $R_k$ (since $\\lfloor x+y\\rfloor\\le N-1$ and $\\{x\\}<1$): area $\\frac{N^2}{2}$. Points with $x+y\\ge N+1$ are not. In the strip $N\\le x+y<N+1$, the condition is $\\{x\\}\\le r$.\n\nThe strip, cut by vertical lines $x=0,1,\\dots,N$, consists of $N$ parallelogram slices $j\\le x<j+1$ (each contributing a parallelogram of width $r$ and height $1$, area $r$) plus the triangular piece $N\\le x<N+1$, contributing a trapezoid of area $r-\\frac{r^2}{2}$.\n\nTotal area: $\\frac{N^2}{2}+Nr+r-\\frac{r^2}{2}=\\frac{N^2-r^2}{2}+(N+1)r$.\n\nSetting this to 100: $N^2/2\\approx100$ suggests $N=14$: $\\frac{196-r^2}{2}+15r=100\\Rightarrow r^2-30r+4=0\\Rightarrow r=15-\\sqrt{221}\\approx 0.134$, which is in $[0,1)$. ✓\n\nSo $k=14+15-\\sqrt{221}=29-\\sqrt{221}$.\n\n**Answer: $29-\\sqrt{221}$**"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "algebra"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "arml-2015-team-10",
+    "bank": "arml",
+    "source": {
+      "contest": "ARML",
+      "paper": "2015 Team Round",
+      "year": 2015,
+      "number": 10,
+      "url": "https://arml3.com/wp-content/uploads/2026/03/ARML-2015-2020.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $ABCD$ be a parallelogram with $m\\angle A > 90^\\circ$. Point $E$ lies on $\\overrightarrow{DA}$ so that $\\overline{BE} \\perp \\overline{AD}$. The circumcircles of $\\triangle ABC$ and $\\triangle CDE$ intersect at points $F$ and $C$. Given that $AD = 35$, $DC = 48$, and $CF = 50$, compute $AC$.",
+    "image": null,
+    "choices": null,
+    "answer": "$AC=5\\sqrt{23}$ or $AC=5\\sqrt{79}$ (both values are possible)",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Radical axis and Stewart's Theorem",
+        "body": "Let $N$ be on line $BC$ with $BEAN$ a rectangle (diagonal $BA$). Then $EN=AB=48$, and $ENCD$ is an isosceles trapezoid, hence cyclic: $N$ lies on the circumcircle of $\\triangle CDE$.\n\nLet $G$ be the midpoint of $AB$; it is also the midpoint of $EN$, so $GB=GA=GE=GN=24$. The power of $G$ with respect to circle $ABC$ is $GA\\cdot GB=576$, and with respect to circle $CDE$ it is $GE\\cdot GN=576$. Equal powers means $G$ lies on the radical axis $CF$.\n\nSo $GC\\cdot GF=576$ with $GC+GF=CF=50$ ($G$ is inside both circles, between $C$ and $F$). Hence $\\{GC,GF\\}=\\{18,32\\}$.\n\n$CG$ is the median from $C$ in $\\triangle ABC$ (with $BC=35$, $AB=48$). Stewart's Theorem (or the median formula):\n$$AC^2\\cdot24+35^2\\cdot24=CG^2\\cdot48+24\\cdot24\\cdot48\\;\\Rightarrow\\;AC^2=2CG^2-73.$$\n- $CG=18$: $AC^2=575$, $AC=5\\sqrt{23}$.\n- $CG=32$: $AC^2=1975$, $AC=5\\sqrt{79}$.\n\nBoth occur (a numerical check of the configuration confirms two parallelograms with $CF=50$).\n\n**Answer: $5\\sqrt{23}$ or $5\\sqrt{79}$**"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

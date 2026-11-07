@@ -1,0 +1,177 @@
+[
+  {
+    "id": "usamo-usamo-1989-01",
+    "bank": "usamo",
+    "source": {
+      "contest": "USAMO",
+      "paper": "USAMO 1989",
+      "year": 1989,
+      "number": 1,
+      "url": "https://artofproblemsolving.com/wiki/index.php/1989_USAMO_Problems/Problem_1"
+    },
+    "grade": "10-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "For each positive integer $n$, let\n$$\\begin{aligned} S_n &= 1 + \\frac 12 + \\frac 13 + \\cdots + \\frac 1n \\\\ T_n &= S_1 + S_2 + S_3 + \\cdots + S_n \\\\ U_n &= \\frac{T_1}{2} + \\frac{T_2}{3} + \\frac{T_3}{4} + \\cdots + \\frac{T_n}{n+1}. \\end{aligned}$$\nFind, with proof, integers $0 < a,\\ b,\\ c,\\ d < 1000000$ such that $T_{1988} = a S_{1989} - b$ and $U_{1988} = c S_{1989} - d$.",
+    "image": null,
+    "choices": null,
+    "answer": "$(a,b,c,d) = (1989,\\ 1989,\\ 1990,\\ 3978)$, from $T_{n-1} = nS_n - n$ and $U_{n-1} = (n+1)S_n - 2n$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Swap the order of summation",
+        "body": "**Claim 1: $T_{n-1} = nS_n - n$ for $n \\ge 2$.** In $T_{n-1} = S_1 + \\cdots + S_{n-1}$ the term $\\frac1i$ ($1 \\le i \\le n-1$) appears in $S_i, S_{i+1}, \\ldots, S_{n-1}$, i.e. $n - i$ times. So\n$$T_{n-1} = \\sum_{i=1}^{n-1}\\frac{n-i}{i} = n S_{n-1} - (n-1) = n\\left(S_n - \\tfrac1n\\right) - n + 1 = nS_n - n.$$\n(It also holds for $n = 1$ with $T_0 = 0$.)\n\n**Claim 2: $U_{n-1} = (n+1)S_n - 2n$.** By Claim 1, $\\frac{T_{j-1}}{j} = S_j - 1$, so\n$$U_{n-1} = \\sum_{j=2}^{n}\\frac{T_{j-1}}{j} = \\sum_{j=2}^{n}(S_j - 1) = (T_n - S_1) - (n-1) = T_n - n.$$\nBy Claim 1 with $n+1$: $T_n = (n+1)S_{n+1} - (n+1) = (n+1)S_n + 1 - (n+1) = (n+1)S_n - n$. Hence $U_{n-1} = (n+1)S_n - 2n$.\n\nWith $n = 1989$:\n$$T_{1988} = 1989\\,S_{1989} - 1989, \\qquad U_{1988} = 1990\\,S_{1989} - 3978.$$\n\n**Answer:** $a = 1989$, $b = 1989$, $c = 1990$, $d = 3978$. ∎"
+      }
+    ],
+    "topics": [
+      "sequences-series",
+      "algebra"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamo-usamo-1989-02",
+    "bank": "usamo",
+    "source": {
+      "contest": "USAMO",
+      "paper": "USAMO 1989",
+      "year": 1989,
+      "number": 2,
+      "url": "https://artofproblemsolving.com/wiki/index.php/1989_USAMO_Problems/Problem_2"
+    },
+    "grade": "10-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "The 20 members of a local tennis club have scheduled exactly 14 two-person games among themselves, with each member playing in at least one game. Prove that within this schedule there must be a set of 6 games with 12 distinct players.",
+    "image": null,
+    "choices": null,
+    "answer": "In graph terms (20 vertices, 14 edges, no isolated vertex) there is a matching of 6 edges: a maximum matching with $k \\le 5$ edges would force at least $k + (20 - 2k) \\ge 15$ edges.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Maximum matching",
+        "body": "Make a graph: members are vertices, games are edges; there are $20$ vertices, $14$ edges and no isolated vertex. A set of games with distinct players is a *matching*.\n\nTake a matching $E$ with the largest possible number $k$ of edges, and suppose $k \\le 5$. Its edges cover $2k$ vertices; the other $20 - 2k \\ge 10$ vertices form a set $W$.\n\n- No edge joins two vertices of $W$ (it could be added to $E$, contradicting maximality).\n- Each vertex of $W$ lies on some edge, which therefore joins it to a covered vertex. These edges are different for different vertices of $W$ (each has only one endpoint in $W$), and none of them is in $E$.\n\nSo the graph has at least $k + (20 - 2k) = 20 - k \\ge 15$ edges, contradicting $14$. Hence $k \\ge 6$: some 6 games involve 12 distinct players. ∎"
+      },
+      {
+        "title": "Minimal covering set of games",
+        "body": "Choose a set $F$ of games that still includes every member, with $|F|$ as small as possible (the whole schedule is such a set, so $|F| \\le 14$).\n\n$F$ contains no path of three games $x\\!-\\!y\\!-\\!z\\!-\\!w$ (the middle game $yz$ could be removed: $y$ and $z$ still play other games in $F$) and no cycle (removing any game of a cycle keeps everyone covered). So each connected component of $F$ is a tree without a path of length 3, i.e. a *star* (one centre joined to some leaves).\n\nA star with $j$ edges has $j+1$ vertices, so if $F$ has $s$ components, $20 = |F| + s \\le 14 + s$, giving $s \\ge 6$. Pick one game from each of six different stars: these six games have $12$ distinct players. ∎"
+      }
+    ],
+    "topics": [
+      "graph-theory",
+      "counting"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamo-usamo-1989-03",
+    "bank": "usamo",
+    "source": {
+      "contest": "USAMO",
+      "paper": "USAMO 1989",
+      "year": 1989,
+      "number": 3,
+      "url": "https://artofproblemsolving.com/wiki/index.php/1989_USAMO_Problems/Problem_3"
+    },
+    "grade": "10-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $P(z)= z^n + c_1 z^{n-1} + c_2 z^{n-2} + \\cdots + c_n$ be a polynomial in the complex variable $z$, with real coefficients $c_k$. Suppose that $|P(i)| < 1$. Prove that there exist real numbers $a$ and $b$ such that $P(a + bi) = 0$ and $(a^2 + b^2 + 1)^2 < 4 b^2 + 1$.",
+    "image": null,
+    "choices": null,
+    "answer": "Group the roots into real roots and conjugate pairs; real roots have $|i - r| \\ge 1$, so some pair $a \\pm bi$ has $|i - (a+bi)|\\,|i - (a-bi)| < 1$, and this product squared equals $(a^2+b^2+1)^2 - 4b^2$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Pair conjugate roots",
+        "body": "Since $|P(i)| < 1 \\ne |1|$, $P$ is not the constant $1$, so $n \\ge 1$. Write $P(z) = \\prod_{j=1}^n (z - z_j)$. Because the coefficients are real, non-real roots come in conjugate pairs $w, \\overline w$ of equal multiplicity. Split the roots into real roots $r$ and pairs $\\{w, \\overline{w}\\}$. Then\n$$1 > |P(i)| = \\prod_{\\text{real } r}|i - r| \\cdot \\prod_{\\text{pairs}}|i - w|\\,|i - \\overline w|.$$\nFor a real root, $|i - r| = \\sqrt{r^2 + 1} \\ge 1$. So the product over pairs is less than $1$ (in particular there is at least one pair), and some pair $w = a + bi$, $\\overline w = a - bi$ has $|i - w|\\,|i - \\overline w| < 1$.\n\nNow\n$$|i - w|^2\\,|i - \\overline w|^2 = \\left(a^2 + (b-1)^2\\right)\\left(a^2 + (b+1)^2\\right) = (a^2 + b^2 + 1 - 2b)(a^2+b^2+1+2b) = (a^2 + b^2 + 1)^2 - 4b^2.$$\nHence $(a^2 + b^2 + 1)^2 - 4b^2 < 1$, i.e. $(a^2+b^2+1)^2 < 4b^2 + 1$, and $P(a + bi) = P(w) = 0$. ∎"
+      }
+    ],
+    "topics": [
+      "complex-numbers",
+      "polynomials",
+      "inequalities"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamo-usamo-1989-04",
+    "bank": "usamo",
+    "source": {
+      "contest": "USAMO",
+      "paper": "USAMO 1989",
+      "year": 1989,
+      "number": 4,
+      "url": "https://artofproblemsolving.com/wiki/index.php/1989_USAMO_Problems/Problem_4"
+    },
+    "grade": "10-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $ABC$ be an acute-angled triangle whose side lengths satisfy the inequalities $AB < AC < BC$. If point $I$ is the center of the inscribed circle of triangle $ABC$ and point $O$ is the center of the circumscribed circle, prove that line $IO$ intersects segments $AB$ and $BC$.",
+    "image": null,
+    "choices": null,
+    "answer": "Comparing each angle bisector with the line to $O$ (using $\\angle OAB = 90^\\circ - C$ etc.) shows $I$ lies inside triangle $AOF$, where $F = CO \\cap AB$; then ray $OI$ hits $AF \\subset AB$ and the opposite ray hits $BC$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Locate $I$ among the six small triangles",
+        "body": "Let the angles be $A, B, C$. From $AB < AC < BC$ we get $C < B < A$. The triangle is acute, so $O$ is inside it; let $D, E, F$ be the points where lines $AO, BO, CO$ meet $BC, CA, AB$. The cevians $AD, BE, CF$ cut $ABC$ into six triangles around $O$.\n\n**Angles at the vertices.** Triangle $AOB$ is isosceles with $\\angle AOB = 2C$, so $\\angle OAB = \\angle OBA = 90^\\circ - C$. Likewise $\\angle OBC = \\angle OCB = 90^\\circ - A$ and $\\angle OCA = \\angle OAC = 90^\\circ - B$. The bisector from each vertex makes half the vertex angle with each side.\n\n- **At $A$:** $\\angle BAO = 90^\\circ - C$ and $\\angle CAO = 90^\\circ - B$, with $90^\\circ - C > 90^\\circ - B$. So $\\angle BAO > \\frac A2$: ray $AI$ lies strictly between $AB$ and $AO$, i.e. $I$ is strictly on $B$'s side of line $AD$.\n- **At $B$:** $\\angle CBO = 90^\\circ - A < 90^\\circ - C = \\angle ABO$, so $\\angle CBO < \\frac B2$: ray $BI$ lies strictly between $BO$ and $BA$, i.e. $I$ is strictly on $A$'s side of line $BE$.\n- **At $C$:** $\\angle BCO = 90^\\circ - A < 90^\\circ - B = \\angle ACO$, so $\\angle BCO < \\frac C2$: ray $CI$ lies strictly between $CO$ and $CA$, i.e. $I$ is strictly on $A$'s side of line $CF$.\n\nThe six small triangles on $B$'s side of $AD$ are $AOF, FOB, BOD$; on $A$'s side of $BE$ they are $EOA, AOF, FOB$; on $A$'s side of $CF$ they are $COE, EOA, AOF$. The only common one is $AOF$, so **$I$ lies inside triangle $AOF$** (and $I \\ne O$).\n\n**Conclusion.** The ray from vertex $O$ through the interior point $I$ of triangle $AOF$ leaves it through the opposite side $AF$, a part of segment $AB$. The opposite ray from $O$ lies inside the vertical angle of $\\angle AOF$, which is $\\angle DOC$ (since $A, O, D$ and $F, O, C$ are collinear), so it meets segment $DC$, a part of $BC$. Hence line $IO$ meets segments $AB$ and $BC$. ∎"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamo-usamo-1989-05",
+    "bank": "usamo",
+    "source": {
+      "contest": "USAMO",
+      "paper": "USAMO 1989",
+      "year": 1989,
+      "number": 5,
+      "url": "https://artofproblemsolving.com/wiki/index.php/1989_USAMO_Problems/Problem_5"
+    },
+    "grade": "10-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $u$ and $v$ be real numbers such that\n$$(u + u^2 + u^3 + \\cdots + u^8) + 10u^9 = (v + v^2 + v^3 + \\cdots + v^{10}) + 10v^{11} = 8.$$\nDetermine, with proof, which of the two numbers, $u$ or $v$, is larger.",
+    "image": null,
+    "choices": null,
+    "answer": "$v$ is larger: both lie in $(0, \\tfrac9{10})$, and there $V(x) - U(x) = x^9(10x-9)(x+1) < 0$, so $V(u) < U(u) = 8 = V(v)$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Compare the two functions on $(0, 0.9)$",
+        "body": "Let $U(x) = x + x^2 + \\cdots + x^8 + 10x^9$ and $V(x) = x + x^2 + \\cdots + x^{10} + 10x^{11}$, so $U(u) = V(v) = 8$. Both are strictly increasing on $[0, \\infty)$ (all coefficients positive).\n\n**Both roots are in $(0, 0.9)$.**\n- For $x \\le 0$: $x + \\cdots + x^9 = \\frac{x^{10} - x}{x - 1} \\le 0$ (numerator $\\ge 0$, denominator $< 0$), and $U(x) = (x + \\cdots + x^9) + 9x^9 \\le 0 < 8$. Similarly $V(x) = \\frac{x^{12}-x}{x-1} + 9x^{11} \\le 0$.\n- At $x = 0.9$: $U(0.9) = \\frac{0.9(1 - 0.9^9)}{0.1} + 9\\cdot 0.9^9 = 9$, and similarly $V(0.9) = 9(1 - 0.9^{11}) + 9\\cdot 0.9^{11} = 9$. As $U, V$ increase on $[0,\\infty)$, both exceed $8$ for $x \\ge 0.9$.\n\nSo $u, v \\in (0, 0.9)$.\n\n**Comparison.** For $x \\in (0, 0.9)$,\n$$V(x) - U(x) = x^{9} + x^{10} + 10x^{11} - 10x^9 = x^9(10x^2 + x - 9) = x^9(10x - 9)(x+1) < 0.$$\nHence $V(u) < U(u) = 8 = V(v)$, and since $V$ is increasing on $[0, \\infty)$, $u < v$.\n\n**Answer: $v$ is larger.** ∎"
+      }
+    ],
+    "topics": [
+      "algebra",
+      "inequalities",
+      "polynomials"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

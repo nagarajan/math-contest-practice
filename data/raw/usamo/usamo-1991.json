@@ -1,0 +1,177 @@
+[
+  {
+    "id": "usamo-usamo-1991-01",
+    "bank": "usamo",
+    "source": {
+      "contest": "USAMO",
+      "paper": "USAMO 1991",
+      "year": 1991,
+      "number": 1,
+      "url": "https://artofproblemsolving.com/wiki/index.php/1991_USAMO_Problems/Problem_1"
+    },
+    "grade": "10-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "In triangle $ABC$, angle $A$ is twice angle $B$, angle $C$ is obtuse, and the three side lengths $a, b, c$ are integers. Determine, with proof, the minimum possible perimeter.",
+    "image": null,
+    "choices": null,
+    "answer": "77",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Law of sines gives $a^2 = b(b+c)$",
+        "body": "Let $\\angle B = \\beta$, so $\\angle A = 2\\beta$ and $\\angle C = 180^\\circ - 3\\beta$. $C$ is obtuse iff $3\\beta < 90^\\circ$, i.e. $0 < \\beta < 30^\\circ$.\n\n**Side ratios.** By the law of sines, $b : a : c = \\sin\\beta : \\sin 2\\beta : \\sin 3\\beta = 1 : 2\\cos\\beta : 4\\cos^2\\beta - 1$ (using $\\sin 3\\beta = \\sin\\beta(4\\cos^2\\beta - 1)$). Hence $b + c = 4b\\cos^2\\beta = \\frac{a^2}{b}$, i.e.\n$$a^2 = b(b+c), \\qquad \\cos\\beta = \\frac{a}{2b}.$$\nConversely, positive numbers with these ratios for some $\\beta \\in (0^\\circ, 30^\\circ)$ form a valid triangle with the required angles.\n\n**Primitive solutions.** If $(a,b,c)$ is an integer solution and $d = \\gcd(a,b,c)$, then $(a/d, b/d, c/d)$ is a solution with perimeter at most as large, so it suffices to minimize over solutions with $\\gcd(a,b,c) = 1$. For such a solution, $\\gcd(b, b+c) = 1$: a prime dividing $b$ and $b + c$ divides $c$ and $a^2$, hence $a$. Two coprime positive integers with square product are both squares: $b = x^2$, $b + c = y^2$, $a = xy$ with positive integers $x, y$. Then $\\cos\\beta = \\frac{y}{2x}$ and the condition $\\frac{\\sqrt3}{2} < \\cos\\beta < 1$ becomes\n$$\\sqrt3\\,x < y < 2x.$$\nThe perimeter is $a + b + c = xy + y^2 = y(x+y)$.\n\n**Minimize.** For $x = 1, 2, 3$ the open intervals $(1.73, 2)$, $(3.46, 4)$, $(5.19, 6)$ contain no integer. For $x = 4$: $6.93 < y < 8$ gives $y = 7$, perimeter $7 \\cdot 11 = 77$. For $x \\ge 5$: $y > 5\\sqrt3 > 8$, so $y \\ge 9$ and the perimeter is at least $9 \\cdot 14 > 77$.\n\nThe minimum is attained by $(a, b, c) = (28, 16, 33)$: indeed $28^2 = 784 = 16 \\cdot 49$, and $33^2 = 1089 > 28^2 + 16^2 = 1040$, so $C$ is obtuse.\n\n**Answer: $77$**"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "number-theory",
+      "trigonometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamo-usamo-1991-02",
+    "bank": "usamo",
+    "source": {
+      "contest": "USAMO",
+      "paper": "USAMO 1991",
+      "year": 1991,
+      "number": 2,
+      "url": "https://artofproblemsolving.com/wiki/index.php/1991_USAMO_Problems/Problem_2"
+    },
+    "grade": "10-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "For any nonempty set $S$ of numbers, let $\\sigma(S)$ and $\\pi(S)$ denote the sum and product, respectively, of the elements of $S$. Prove that\n$$\\sum \\frac{\\sigma(S)}{\\pi(S)} = (n^2 + 2n) - \\left( 1 + \\frac{1}{2} + \\frac{1}{3} + \\cdots + \\frac{1}{n} \\right) (n+1),$$\nwhere \"$\\Sigma$\" denotes a sum involving all nonempty subsets $S$ of $\\{1,2,3, \\ldots,n\\}$.",
+    "image": null,
+    "choices": null,
+    "answer": "Write $\\frac{\\sigma(S)}{\\pi(S)} = \\sum_{k\\in S}\\frac{1}{\\pi(S - \\{k\\})}$; summing over $T = S - \\{k\\} \\not\\ni k$ gives $\\prod_{j \\ne k}(1 + \\frac1j) = \\frac{(n+1)k}{k+1}$, and $\\sum_k \\frac{(n+1)k}{k+1}$ is the right side.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Split off one element",
+        "body": "Let $N = \\{1, \\ldots, n\\}$, $H_m = 1 + \\frac12 + \\cdots + \\frac1m$, and $\\pi(\\varnothing) = 1$.\n\nFor a nonempty $S$, $\\frac{\\sigma(S)}{\\pi(S)} = \\sum_{k \\in S}\\frac{k}{\\pi(S)} = \\sum_{k\\in S}\\frac{1}{\\pi(S - \\{k\\})}$. The pairs $(S, k)$ with $k \\in S$ correspond exactly to pairs $(k, T)$ with $T \\subseteq N - \\{k\\}$ (via $T = S - \\{k\\}$). Hence\n$$\\sum_S \\frac{\\sigma(S)}{\\pi(S)} = \\sum_{k=1}^{n}\\ \\sum_{T \\subseteq N - \\{k\\}} \\frac1{\\pi(T)} = \\sum_{k=1}^n\\ \\prod_{j \\ne k}\\left(1 + \\frac1j\\right),$$\nbecause expanding the product $\\prod_{j\\ne k}(1 + \\frac1j)$ gives one term $\\frac1{\\pi(T)}$ for each subset $T$. Now $\\prod_{j=1}^n (1 + \\frac1j) = \\prod_{j=1}^{n}\\frac{j+1}{j} = n+1$, so\n$$\\prod_{j \\ne k}\\left(1 + \\frac1j\\right) = \\frac{n+1}{1 + \\frac1k} = (n+1)\\frac{k}{k+1} = (n+1)\\left(1 - \\frac1{k+1}\\right).$$\nSumming over $k$:\n$$\\sum_S \\frac{\\sigma(S)}{\\pi(S)} = (n+1)\\left(n - (H_{n+1} - 1)\\right) = (n+1)^2 - (n+1)H_{n+1} = (n+1)^2 - (n+1)H_n - 1,$$\nusing $(n+1)H_{n+1} = (n+1)H_n + 1$. This is $(n^2 + 2n) - (n+1)H_n$. ∎"
+      },
+      {
+        "title": "Induction on $n$",
+        "body": "Let $F(n) = \\sum_{S \\subseteq N(n)}\\frac{\\sigma(S)}{\\pi(S)}$ over all subsets of $N(n) = \\{1,\\ldots,n\\}$ (the empty set contributes $0$), and $G(n) = \\sum_{S\\subseteq N(n)} \\frac{1}{\\pi(S)} = \\prod_{k=1}^n(1 + \\frac1k) = n + 1$. We show $F(n) = (n+1)^2 - 1 - (n+1)H_n$; this is true for $n = 0$.\n\nSubsets of $N(n+1)$ either avoid $n+1$ or are $S \\cup \\{n+1\\}$ with $S \\subseteq N(n)$, so\n$$F(n+1) = F(n) + \\sum_{S}\\frac{\\sigma(S) + n + 1}{(n+1)\\pi(S)} = \\frac{n+2}{n+1}F(n) + G(n) = \\frac{n+2}{n+1}F(n) + n + 1.$$\nBy the induction hypothesis, and since $(n+2)H_{n+1} = (n+2)H_n + \\frac{n+2}{n+1}$,\n$$\\frac{n+2}{n+1}F(n) = (n+2)(n+1) - \\frac{n+2}{n+1} - (n+2)H_n = (n+2)(n+1) - (n+2)H_{n+1}.$$\nTherefore\n$$F(n+1) = (n+2)(n+1) - (n+2)H_{n+1} + (n+1) = (n+2)^2 - 1 - (n+2)H_{n+1},$$\nusing $(n+2)(n+1) + (n+1) = (n+2)^2 - 1$. This completes the induction. ∎"
+      }
+    ],
+    "topics": [
+      "counting",
+      "algebra",
+      "sequences-series"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamo-usamo-1991-03",
+    "bank": "usamo",
+    "source": {
+      "contest": "USAMO",
+      "paper": "USAMO 1991",
+      "year": 1991,
+      "number": 3,
+      "url": "https://artofproblemsolving.com/wiki/index.php/1991_USAMO_Problems/Problem_3"
+    },
+    "grade": "10-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Show that, for any fixed integer $n \\geq 1,$ the sequence\n$$2, \\; 2^2, \\; 2^{2^2}, \\; 2^{2^{2^2}}, \\ldots \\pmod{n}$$\nis eventually constant.\n\n[The tower of exponents is defined by $a_1 = 2, \\; a_{i+1} = 2^{a_i}$. Also $a_i \\pmod{n}$ means the remainder which results from dividing $a_i$ by $n$.]",
+    "image": null,
+    "choices": null,
+    "answer": "Strong induction on $n$: for odd $n$ use Euler's theorem, $2^x \\equiv 2^y \\pmod n$ when $x \\equiv y \\pmod{\\varphi(n)}$, with $\\varphi(n) < n$; for $n = 2^k s$ combine \"eventually $0 \\bmod 2^k$\" with the odd part via CRT.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Strong induction with Euler's theorem",
+        "body": "We prove by strong induction on $n$ that $(a_i \\bmod n)$ is eventually constant. For $n = 1$ every term is $0$.\n\nLet $n \\ge 2$ and assume the claim for all smaller moduli.\n\n**$n$ odd.** Then $\\gcd(2, n) = 1$ and Euler's theorem gives $2^{\\varphi(n)} \\equiv 1 \\pmod n$, so $2^x \\equiv 2^y \\pmod n$ whenever $x \\equiv y \\pmod{\\varphi(n)}$ ($x, y \\ge 0$). Since $\\varphi(n) < n$, by hypothesis there is $M$ with $a_i \\equiv a_{i+1} \\pmod{\\varphi(n)}$ for all $i \\ge M$. Then $a_{i+1} = 2^{a_i} \\equiv 2^{a_{i+1}} = a_{i+2} \\pmod n$ for all $i \\ge M$: the sequence is constant mod $n$ from $a_{M+1}$ on.\n\n**$n$ even.** Write $n = 2^k s$ with $k \\ge 1$ and $s$ odd, $s < n$. The terms grow without bound and $a_{i+1} = 2^{a_i}$, so for all large $i$ we have $a_i \\ge k$ and hence $a_{i+1} \\equiv 0 \\pmod{2^k}$: eventually constant mod $2^k$. By hypothesis it is also eventually constant mod $s$. As $\\gcd(2^k, s) = 1$, by the Chinese Remainder Theorem $a_i \\equiv a_{i+1} \\pmod{2^k}$ and $\\pmod s$ imply $a_i \\equiv a_{i+1} \\pmod n$, so the sequence is eventually constant mod $n$.\n\nThis completes the induction. ∎"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "sequences-series"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamo-usamo-1991-04",
+    "bank": "usamo",
+    "source": {
+      "contest": "USAMO",
+      "paper": "USAMO 1991",
+      "year": 1991,
+      "number": 4,
+      "url": "https://artofproblemsolving.com/wiki/index.php/1991_USAMO_Problems/Problem_4"
+    },
+    "grade": "10-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $a =\\frac{m^{m+1} + n^{n+1}}{m^m + n^n},$ where $m$ and $n$ are positive integers. Prove that $a^m + a^n \\geq m^m + n^n$.\n\n[You may wish to analyze the ratio $\\frac{a^N - N^N}{a-N},$ for real $a \\geq 0$ and integer $N \\ge 1$.]",
+    "image": null,
+    "choices": null,
+    "answer": "With $m \\ge n$: $n \\le a \\le m$, $m - a = \\frac{n^n(m-n)}{m^m+n^n}$, $a - n = \\frac{m^m(m-n)}{m^m+n^n}$, and factoring gives $m^m - a^m \\le (m-a)m^m = (a-n)n^n \\le a^n - n^n$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Factor $x^N - y^N$ and bound the second factor",
+        "body": "By symmetry assume $m \\ge n$. Let $D = m^m + n^n$. Direct computation:\n$$m - a = \\frac{m^{m+1} + mn^n - m^{m+1} - n^{n+1}}{D} = \\frac{n^n(m-n)}{D}, \\qquad a - n = \\frac{m^m(m-n)}{D}.$$\nBoth are $\\ge 0$, so $n \\le a \\le m$. Let $K = \\frac{m^m n^n (m-n)}{D} \\ge 0$.\n\nUsing $x^N - y^N = (x - y)\\sum_{i=0}^{N-1}x^iy^{N-1-i}$:\n\n- Since $0 \\le a \\le m$, each term $a^i m^{m-1-i} \\le m^{m-1}$, so\n$$m^m - a^m = (m - a)\\sum_{i=0}^{m-1} a^i m^{m-1-i} \\le (m-a)\\cdot m\\cdot m^{m-1} = (m-a)m^m = K.$$\n- Since $a \\ge n$, each term $a^i n^{n-1-i} \\ge n^{n-1}$, so\n$$a^n - n^n = (a - n)\\sum_{i=0}^{n-1} a^i n^{n-1-i} \\ge (a - n)\\cdot n\\cdot n^{n-1} = (a-n)n^n = K.$$\n\nHence $m^m - a^m \\le K \\le a^n - n^n$, i.e. $a^m + a^n \\ge m^m + n^n$. ∎"
+      }
+    ],
+    "topics": [
+      "inequalities",
+      "algebra"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamo-usamo-1991-05",
+    "bank": "usamo",
+    "source": {
+      "contest": "USAMO",
+      "paper": "USAMO 1991",
+      "year": 1991,
+      "number": 5,
+      "url": "https://artofproblemsolving.com/wiki/index.php/1991_USAMO_Problems/Problem_5"
+    },
+    "grade": "10-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $D$ be an arbitrary point on side $AB$ of a given triangle $ABC,$ and let $E$ be the interior point where $CD$ intersects the external common tangent to the incircles of triangles $ACD$ and $BCD$. As $D$ assumes all positions between $A$ and $B$, prove that the point $E$ traces the arc of a circle.",
+    "image": "qimages/usamo/usamo-1991/q05.webp",
+    "choices": null,
+    "answer": "$CE = \\frac{AC + BC - AB}{2}$ for every $D$ (from tangent lengths and the equality of the two external common tangent segments), so $E$ traces the arc of the circle with centre $C$ and that radius inside angle $ACB$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Tangent lengths",
+        "body": "Let $\\omega_a$, $\\omega_b$ be the incircles of $ACD$ and $BCD$. They touch $AB$ at $D_a \\in AD$, $D_b \\in DB$, touch $CD$ at $C_a$, $C_b$, and touch the other external common tangent at $T_a$, $T_b$. Standard tangent lengths give\n$$CC_a = \\frac{AC + CD - AD}{2},\\quad CC_b = \\frac{BC + CD - BD}{2},\\quad DD_a = DC_a = CD - CC_a,\\quad DD_b = DC_b = CD - CC_b.$$\n\n**Two equal sums.** The two external common tangents of two circles are mirror images in the line of centres, so $T_aT_b = D_aD_b$. Now $D$ lies between $D_a$ and $D_b$, so $D_aD_b = DD_a + DD_b$. Also $\\omega_a$ lies on $A$'s side of line $CD$ and $\\omega_b$ on $B$'s side, so $T_a, T_b$ are on opposite sides of $CD$ and $E$ lies between them: $T_aT_b = ET_a + ET_b = EC_a + EC_b$ (equal tangents from $E$). Hence\n$$EC_a + EC_b = DD_a + DD_b = 2\\,CD - CC_a - CC_b. \\tag{1}$$\n\n**Locating $E$.** Measure positions on segment $CD$ by the distance from $C$: $E$ at $e$, $C_a$ at $CC_a$, $C_b$ at $CC_b$, all less than $CD$ (the touch points and $E$ are interior points of $CD$). Write $u = \\min(CC_a, CC_b)$, $v = \\max(CC_a, CC_b)$.\n- If $e \\ge v$: (1) reads $2e - u - v = 2CD - u - v$, so $e = CD$, impossible.\n- If $u \\le e \\le v$: (1) reads $v - u = 2CD - u - v$, so $v = CD$, impossible.\n- So $e < u$, and (1) reads $u + v - 2e = 2CD - u - v$, i.e.\n$$CE = e = CC_a + CC_b - CD = \\frac{AC + BC - AB}{2} =: r.$$\n\n**The locus.** $r$ does not depend on $D$, so $E$ always lies on the circle with centre $C$ and radius $r$, on the ray $CD$, which is inside angle $ACB$. Conversely, for any point $X$ of this circle strictly inside angle $ACB$, let $D = CX \\cap AB$; the point $E$ for this $D$ is the point of ray $CD$ at distance $r$ from $C$, namely $X$. (Note $r < CD$ always: adding $CD > AC - AD$ and $CD > BC - BD$ gives $2CD > AC + BC - AB$.) So as $D$ runs over the side $AB$, $E$ traces the arc of this circle cut off by $CA$ and $CB$. ∎"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

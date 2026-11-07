@@ -1,0 +1,208 @@
+[
+  {
+    "id": "imo-1997-01",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO",
+      "paper": "Day 1",
+      "year": 1997,
+      "number": 1,
+      "url": "https://www.imo-official.org/assets/documents/problems/1997/1997_eng.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "In the plane the points with integer coordinates are the vertices of unit squares. The squares are coloured alternately black and white (as on a chessboard).\n\nFor any pair of positive integers $m$ and $n$, consider a right-angled triangle whose vertices have integer coordinates and whose legs, of lengths $m$ and $n$, lie along edges of the squares.\n\nLet $S_1$ be the total area of the black part of the triangle and $S_2$ be the total area of the white part. Let\n$$f(m, n) = |S_1 - S_2|.$$\n\n(a) Calculate $f(m, n)$ for all positive integers $m$ and $n$ which are either both even or both odd.\n\n(b) Prove that $f(m, n) \\le \\frac12\\max\\{m, n\\}$ for all $m$ and $n$.\n\n(c) Show that there is no constant $C$ such that $f(m, n) < C$ for all $m$ and $n$.",
+    "image": null,
+    "choices": null,
+    "answer": "(a) $f(m,n)=0$ if $m,n$ are both even and $f(m,n)=\\frac12$ if both are odd. (b) Cut off a thin triangle of area $\\le\\frac12\\max\\{m,n\\}$ to reduce to (a). (c) $f(2k,2k+1)=\\frac{2k-1}{6}$ is unbounded.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Rotate half the triangle; then compute a thin sliver",
+        "body": "For a region $R$ let its *discrepancy* $\\delta(R)$ be (black area) $-$ (white area). It is additive, $|\\delta(R)|\\le\\operatorname{area}(R)$, and $f(m,n)=|\\delta(T)|$ for the triangle $T$. Place the triangle at $C=(0,0)$, $B=(m,0)$, $A=(0,n)$; the unit square $[i,i+1]\\times[j,j+1]$ has a colour determined by the parity of $i+j$.\n\n**(a)** Let $M=\\left(\\frac m2,\\frac n2\\right)$ be the midpoint of $AB$, $P=\\left(0,\\frac n2\\right)$ and $Q=\\left(m,\\frac n2\\right)$. Then\n$$T=(\\text{trapezoid } CBMP)\\cup\\triangle APM,\\qquad \\text{rectangle } CBQP=(\\text{trapezoid } CBMP)\\cup\\triangle BQM .$$\nThe half-turn about $M$, $(x,y)\\mapsto(m-x,n-y)$, maps $\\triangle APM$ onto $\\triangle BQM$ and maps the square $[i,i+1]\\times[j,j+1]$ to $[m-i-1,m-i]\\times[n-j-1,n-j]$, whose index sum is $\\equiv m+n+i+j\\pmod2$. So when $m\\equiv n\\pmod 2$ it preserves colours, $\\delta(\\triangle APM)=\\delta(\\triangle BQM)$, and\n$$\\delta(T)=\\delta(\\text{rectangle }[0,m]\\times[0,\\tfrac n2]).$$\n- *Both even:* the rectangle has integer height $\\frac n2$ and even width $m$. Two neighbouring columns of width $1$ have opposite colourings, so they cancel: $\\delta=0$.\n- *Both odd:* the first $m-1$ columns cancel in pairs, leaving one column $[m-1,m]\\times[0,\\frac n2]$ of height $\\frac{n-1}2+\\frac12$. In it the cells alternate in colour; whether $\\frac{n-1}2$ is even or odd, what is left over has discrepancy $\\pm\\frac12$ (an unmatched half cell, or an unmatched full cell next to a half cell of the other colour).\n\nSo $f(m,n)=0$ if both are even and $f(m,n)=\\frac12$ if both are odd.\n\n**(b)** If $m\\equiv n\\pmod 2$, (a) gives $f\\le\\frac12\\le\\frac12\\max\\{m,n\\}$. Otherwise, by symmetry, let $m$ be even and $n$ odd. With $A'=(0,n-1)$, the triangle $T$ splits into $\\triangle A'CB$ (legs $m$ and $n-1$, both even, so $\\delta=0$ by (a)) and the thin triangle $AA'B$ with base $AA'=1$ and height $m$, of area $\\frac m2$. Hence $f(m,n)=|\\delta(AA'B)|\\le\\frac m2\\le\\frac12\\max\\{m,n\\}$. (If $m$ is odd and $n$ even, the same argument gives $f\\le\\frac n2$.)\n\n**(c)** Take $m=2k$, $n=2k+1$. As in (b), $f(2k,2k+1)=|\\delta(S)|$ for the sliver $S=AA'B$, $A=(0,2k+1)$, $A'=(0,2k)$, $B=(2k,0)$. Over $x\\in[0,2k]$ it lies between the lines\n$$y=2k-x\\quad\\text{and}\\quad y=2k-x+1-\\frac{x}{2k}.$$\nIn the column $x\\in[i,i+1]$ ($0\\le i\\le2k-1$) write $x=i+t$. The sliver meets only two cells there:\n- $c_1=[i,i+1]\\times[2k-i-1,2k-i]$, index sum $2k-1$ (odd), and\n- $c_2=[i,i+1]\\times[2k-i,2k-i+1]$, index sum $2k$ (even).\n\nThe upper line is above the top edge $y=2k-i$ of $c_1$ exactly when $1-t-\\frac{i+t}{2k}>0$, i.e. $t<t_0=\\frac{2k-i}{2k+1}$. So:\n- in $c_2$ the sliver is the triangle with legs $t_0$ and $1-\\frac{i}{2k}=\\frac{2k-i}{2k}$, of area $\\dfrac{(2k-i)^2}{4k(2k+1)}$;\n- in $c_1$ it is the upper half-triangle of $c_1$ (area $\\frac12$) minus a triangle with legs $1-t_0=\\frac{i+1}{2k+1}$ and $\\frac{i+1}{2k}$, i.e. area $\\dfrac12-\\dfrac{(i+1)^2}{4k(2k+1)}$.\n\nAll cells $c_1$ have one colour and all cells $c_2$ the other. With $\\Sigma=\\sum_{j=1}^{2k}j^2=\\frac{2k(2k+1)(4k+1)}6$ (both $\\sum(2k-i)^2$ and $\\sum(i+1)^2$ over $i=0,\\ldots,2k-1$ equal $\\Sigma$),\n$$|\\delta(S)|=\\left|2k\\cdot\\frac12-\\frac{\\Sigma}{4k(2k+1)}-\\frac{\\Sigma}{4k(2k+1)}\\right|=\\left|k-\\frac{4k+1}{6}\\right|=\\frac{2k-1}{6}.$$\nSo $f(2k,2k+1)=\\frac{2k-1}6$, which exceeds any constant $C$ for large $k$. ∎"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "measurement"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-1997-02",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO",
+      "paper": "Day 1",
+      "year": 1997,
+      "number": 2,
+      "url": "https://www.imo-official.org/assets/documents/problems/1997/1997_eng.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "The angle at $A$ is the smallest angle of triangle $ABC$. The points $B$ and $C$ divide the circumcircle of the triangle into two arcs. Let $U$ be an interior point of the arc between $B$ and $C$ which does not contain $A$. The perpendicular bisectors of $AB$ and $AC$ meet the line $AU$ at $V$ and $W$, respectively. The lines $BV$ and $CW$ meet at $T$. Show that\n$$AU = TB + TC.$$",
+    "image": null,
+    "choices": null,
+    "answer": "Proof: with $x=\\angle BAU$, $y=\\angle UAC$, triangle $TBC$ has angles $B-x$, $C-y$, $2A$; the law of sines gives $TB+TC=2R\\cos\\left(90^\\circ-B-y\\right)=2R\\sin(B+y)=AU$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Angles of triangle $TBC$ and the law of sines",
+        "body": "Let $R$ be the circumradius and write $A,B,C$ for the angles of the triangle. Let $x=\\angle BAU$ and $y=\\angle UAC$; since $U$ is inside the arc, $x,y>0$ and $x+y=A$, so $x,y<A\\le\\min(B,C)$ and $A\\le60^\\circ$.\n\n**Where $T$ is.** $V$ lies on the perpendicular bisector of $AB$ and on line $AU$; since $x<90^\\circ$, $V$ is on ray $AU$, and $VA=VB$ gives $\\angle ABV=\\angle BAV=x$. $V$ is on the same side of $AB$ as $C$ and $x<B$, so ray $BV$ lies inside angle $ABC$ and $\\angle VBC=B-x>0$. Similarly ray $CW$ lies inside angle $ACB$ with $\\angle WCB=C-y>0$. The two rays start on line $BC$, point into the same half-plane, and $(B-x)+(C-y)=B+C-A=180^\\circ-2A<180^\\circ$, so they meet at the point $T$, and triangle $TBC$ has angles\n$$\\angle TBC=B-x,\\qquad\\angle TCB=C-y,\\qquad\\angle BTC=2A .$$\n\n**Compute $TB+TC$.** By the law of sines in $TBC$ and $BC=2R\\sin A$,\n$$TB+TC=\\frac{BC\\,\\big(\\sin(C-y)+\\sin(B-x)\\big)}{\\sin2A}=\\frac{2R\\sin A\\cdot2\\sin\\frac{(C-y)+(B-x)}2\\cos\\frac{(C-y)-(B-x)}2}{2\\sin A\\cos A}.$$\nSince $(C-y)+(B-x)=180^\\circ-2A$, the sine factor is $\\sin(90^\\circ-A)=\\cos A$, and\n$$TB+TC=2R\\cos\\frac{(C-y)-(B-x)}{2}.$$\nUsing $x=A-y$: $\\frac{(C-y)-(B-x)}2=\\frac{C-B+A-2y}{2}=\\frac{180^\\circ-2B-2y}{2}=90^\\circ-B-y$. So $TB+TC=2R\\sin(B+y)$.\n\n**Compute $AU$.** The points lie on the circle in the order $A,B,U,C$, so ray $BC$ is inside angle $ABU$ and $\\angle ABU=\\angle ABC+\\angle CBU=B+\\angle CAU=B+y$ (inscribed angles on chord $CU$). By the law of sines in triangle $ABU$, $AU=2R\\sin\\angle ABU=2R\\sin(B+y)$.\n\nHence $AU=TB+TC$. ∎"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "trigonometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-1997-03",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO",
+      "paper": "Day 1",
+      "year": 1997,
+      "number": 3,
+      "url": "https://www.imo-official.org/assets/documents/problems/1997/1997_eng.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $x_1, x_2, \\ldots, x_n$ be real numbers satisfying the conditions\n$$|x_1 + x_2 + \\cdots + x_n| = 1$$\nand\n$$|x_i| \\le \\frac{n+1}{2}\\qquad i = 1, 2, \\ldots, n.$$\nShow that there exists a permutation $y_1, y_2, \\ldots, y_n$ of $x_1, x_2, \\ldots, x_n$ such that\n$$|y_1 + 2y_2 + \\cdots + ny_n| \\le \\frac{n+1}{2}.$$",
+    "image": null,
+    "choices": null,
+    "answer": "Proof: a permutation and its reverse have weighted sums adding to $(n+1)\\sum x_i=\\pm(n+1)$, so they lie on opposite sides of $\\pm\\frac{n+1}2$; pass from one to the other by adjacent swaps, each changing the sum by $|v-u|\\le n+1$, so some intermediate sum lands in $\\left[-\\frac{n+1}2,\\frac{n+1}2\\right]$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Walk from a permutation to its reverse",
+        "body": "Replacing every $x_i$ by $-x_i$ changes nothing, so assume $x_1+\\cdots+x_n=1$. For an arrangement $y=(y_1,\\ldots,y_n)$ put $S(y)=\\sum_i iy_i$ and let $I=\\left[-\\frac{n+1}2,\\frac{n+1}2\\right]$.\n\n**A permutation and its reverse.** For $y=(x_1,\\ldots,x_n)$ and its reverse $y'=(x_n,\\ldots,x_1)$,\n$$S(y)+S(y')=\\sum_i\\big(i+(n+1-i)\\big)x_i=(n+1)\\sum_ix_i=n+1 .$$\nSo one of them, call it $\\alpha$, has $S(\\alpha)\\ge\\frac{n+1}2$, and the other, $\\beta$, has $S(\\beta)\\le\\frac{n+1}2$.\n\n**Small steps.** Swapping the entries $u$ (in position $i$) and $v$ (in position $i+1$) changes $S$ by\n$$(iv+(i+1)u)-(iu+(i+1)v)=u-v,\\qquad |u-v|\\le|u|+|v|\\le n+1 .$$\nAny arrangement can be turned into any other by adjacent swaps (e.g. bubble sort), so there is a chain $\\alpha=\\gamma_0,\\gamma_1,\\ldots,\\gamma_N=\\beta$ of arrangements, each obtained from the previous by one adjacent swap.\n\n**Landing in $I$.** Let $t$ be the first index with $S(\\gamma_t)\\le\\frac{n+1}2$ (it exists, since $S(\\gamma_N)\\le\\frac{n+1}2$). If $t=0$ then $S(\\gamma_0)=S(\\alpha)\\ge\\frac{n+1}{2}$, so $S(\\gamma_0)=\\frac{n+1}2\\in I$. If $t\\ge1$, then $S(\\gamma_{t-1})>\\frac{n+1}2$ and\n$$S(\\gamma_t)\\ge S(\\gamma_{t-1})-(n+1)>-\\frac{n+1}2 .$$\nIn both cases $S(\\gamma_t)\\in I$, and $\\gamma_t$ is the required permutation. ∎"
+      }
+    ],
+    "topics": [
+      "inequalities",
+      "algebra",
+      "logic"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-1997-04",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO",
+      "paper": "Day 2",
+      "year": 1997,
+      "number": 4,
+      "url": "https://www.imo-official.org/assets/documents/problems/1997/1997_eng.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "An $n \\times n$ matrix whose entries come from the set $S = \\{1, 2, \\ldots, 2n-1\\}$ is called a *silver matrix* if, for each $i = 1, 2, \\ldots, n$, the $i$th row and the $i$th column together contain all elements of $S$. Show that\n\n(a) there is no silver matrix for $n = 1997$;\n\n(b) silver matrices exist for infinitely many values of $n$.",
+    "image": null,
+    "choices": null,
+    "answer": "Proof: (a) each value occupies each \"cross\" (row $i$ $\\cup$ column $i$) once; counting, it appears an odd number of times on the diagonal when $n$ is odd, but $2n-1>n$ values cannot all appear on the diagonal. (b) From a silver $A$ of size $n$ build $\\begin{pmatrix}A&A+2n\\\\C&A\\end{pmatrix}$ with $C=A+2n$ except diagonal entries $2n$; this gives all $n=2^e$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Counting on crosses; doubling construction",
+        "body": "Call the union of the $i$-th row and the $i$-th column the $i$-th *cross*; it has $2n-1$ cells.\n\n**(a)** In a silver matrix each cross contains all $2n-1$ elements of $S$ in its $2n-1$ cells, so each element **exactly once**. Fix $s\\in S$; let $d_s$ be the number of diagonal cells and $o_s$ the number of off-diagonal cells containing $s$. A diagonal cell $(i,i)$ lies in one cross (the $i$-th), an off-diagonal cell $(i,j)$ lies in two (the $i$-th and $j$-th). Counting pairs (cross, cell of that cross containing $s$) gives\n$$n=d_s+2o_s .$$\nFor $n=1997$ this forces $d_s$ to be odd, so $d_s\\ge1$ for every $s$. But then the diagonal contains at least $|S|=3993$ cells, while it has only $1997$. Contradiction.\n\n**(b)** We show: if $A$ is an $n\\times n$ silver matrix, then\n$$M=\\begin{pmatrix}A&B\\\\C&A\\end{pmatrix},\\qquad B=A+2n,\\qquad C=A+2n\\text{ with its diagonal entries replaced by }2n,$$\nis a $2n\\times2n$ silver matrix (entries from $\\{1,\\ldots,4n-1\\}$). Here $A+2n$ means adding $2n$ to every entry.\n\n*Cross $i\\le n$.* It consists of the $i$-th cross of the top-left $A$ (values $1,\\ldots,2n-1$), the $i$-th row of $B$, and the $i$-th column of $C$. The row of $B$ is (row $i$ of $A$)$+2n$; the column of $C$ is (column $i$ of $A$)$+2n$ except that its entry in position $i$, which would be $a_{ii}+2n$, is $2n$. Together these $2n$ cells carry the values of the $i$-th cross of $A$ shifted by $2n$ (that is, $2n+1,\\ldots,4n-1$) plus the value $2n$. So the whole cross contains $1,\\ldots,4n-1$.\n\n*Cross $n+i$.* It consists of the $i$-th cross of the bottom-right $A$, the $i$-th row of $C$ and the $i$-th column of $B$, and the same argument applies.\n\nStarting from the $1\\times1$ silver matrix $(1)$ we get silver matrices of every size $n=2^e$. For example\n$$\\begin{pmatrix}1&3\\\\2&1\\end{pmatrix},\\qquad\\begin{pmatrix}1&3&5&7\\\\2&1&6&5\\\\4&7&1&3\\\\6&4&2&1\\end{pmatrix}.$$\nSo silver matrices exist for infinitely many $n$. ∎"
+      }
+    ],
+    "topics": [
+      "counting",
+      "logic",
+      "linear-algebra"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-1997-05",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO",
+      "paper": "Day 2",
+      "year": 1997,
+      "number": 5,
+      "url": "https://www.imo-official.org/assets/documents/problems/1997/1997_eng.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Find all pairs $(a, b)$ of integers $a, b \\ge 1$ that satisfy the equation\n$$a^{b^2} = b^a.$$",
+    "image": null,
+    "choices": null,
+    "answer": "$(a,b)=(1,1),\\ (16,2),\\ (27,3)$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Compare sizes, then $a=b^k$",
+        "body": "If $a=1$ then $b^1=1$, so $b=1$; if $b=1$ then $a=1$. This gives $(1,1)$. From now on $a,b\\ge2$. Taking logarithms, the equation is\n$$b^2\\ln a=a\\ln b. \\tag{1}$$\n\n**Step 1: $a>b^2$.** If $a\\le b$, then $\\ln a\\le\\ln b$, and (1) gives $b^2\\ln a=a\\ln b\\le b\\ln b$, so $b\\ln a\\le\\ln b$, i.e. $a^b\\le b$. But $a^b\\ge2^b>b$. So $a>b$, hence $\\ln a>\\ln b>0$ and (1) gives $a=b^2\\frac{\\ln a}{\\ln b}>b^2$.\n\n**Step 2: $a=b^k$ with $k=a/b^2$.** Taking $b^2$-th roots in $a^{b^2}=b^a=\\left(b^{a/b^2}\\right)^{b^2}$ (positive reals) gives $a=b^{k}$ with $k=\\frac a{b^2}>1$ rational. Then\n$$k=\\frac a{b^2}=b^{k-2}.$$\n\n**Step 3: $k$ is an integer.** Write $k=\\frac pq$ in lowest terms, $p>q\\ge1$. Raising $k=b^{k-2}$ to the $q$-th power: $\\frac{p^q}{q^q}=b^{p-2q}$.\n- If $p\\ge2q$: $p^q=q^q b^{p-2q}$, so $q\\mid p^q$, hence $q=1$ (as $\\gcd(p,q)=1$).\n- If $p<2q$: $p^q b^{2q-p}=q^q$, so $p\\mid q^q$, hence $p=1$, contradicting $p>q\\ge1$.\n\nSo $k$ is an integer, $k\\ge2$, and $k=b^{k-2}$.\n\n**Step 4: solve $b^{k-2}=k$.** $k=2$ gives $1=2$, impossible. For $k\\ge3$, $k=b^{k-2}\\ge2^{k-2}$, which fails for $k\\ge5$ ($2^{3}=8>5$, and $2^{k-2}$ grows faster than $k$). So:\n- $k=3$: $b=3$, $a=b^3=27$;\n- $k=4$: $b^2=4$, $b=2$, $a=b^4=16$.\n\nCheck: $27^9=3^{27}$ and $16^4=2^{16}$. ✓\n\n**Answer:** $(1,1)$, $(16,2)$, $(27,3)$."
+      }
+    ],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-1997-06",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO",
+      "paper": "Day 2",
+      "year": 1997,
+      "number": 6,
+      "url": "https://www.imo-official.org/assets/documents/problems/1997/1997_eng.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "For each positive integer $n$, let $f(n)$ denote the number of ways of representing $n$ as a sum of powers of $2$ with nonnegative integer exponents. Representations which differ only in the ordering of their summands are considered to be the same. For instance, $f(4) = 4$, because the number $4$ can be represented in the following four ways:\n$$4;\\quad 2+2;\\quad 2+1+1;\\quad 1+1+1+1.$$\nProve that, for any integer $n \\ge 3$,\n$$2^{n^2/4} < f(2^n) < 2^{n^2/2}.$$",
+    "image": null,
+    "choices": null,
+    "answer": "Proof: $f(2k+1)=f(2k)$ and $f(2k)=f(0)+f(1)+\\cdots+f(k)$; then $f(2^n)\\le2^{n-1}f(2^{n-1})$ (upper bound) and, by a convexity pairing, $f(2^n)>2^{n-1}f(2^{n-2})$ (lower bound); iterate.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Recursion, then two inductive estimates",
+        "body": "Put $f(0)=1$.\n\n**Recursions.** A representation of $2k+1$ contains a $1$; removing it gives a bijection with representations of $2k$, so $f(2k+1)=f(2k)$. A representation of $2k$ either contains a $1$ (remove it: a representation of $2k-1$) or consists of even parts only (halve them: a representation of $k$). So $f(2k)=f(2k-1)+f(k)=f(2k-2)+f(k)$, and by induction\n$$f(2k)=f(0)+f(1)+\\cdots+f(k). \\tag{$\\star$}$$\n(Check: $f(4)=1+1+2=4$.) In particular $f$ is non-decreasing: $f(2k+1)=f(2k)$ and $f(2k+2)=f(2k)+f(k+1)>f(2k)$.\n\n**Upper bound.** Let $m=2^{n-1}$ with $n\\ge2$. By $(\\star)$, $f(2^n)=f(0)+f(1)+\\sum_{j=2}^{m}f(j)\\le2+(m-1)f(m)\\le m\\,f(m)$, as $f(m)\\ge2$. So $f(2^n)\\le2^{n-1}f(2^{n-1})$ for $n\\ge2$, and with $f(2)=2$,\n$$f(2^n)\\le2^{(n-1)+(n-2)+\\cdots+1}\\cdot2=2^{\\frac{n(n-1)}2+1}<2^{n^2/2}\\quad(n\\ge3),$$\nsince $\\frac{n(n-1)}2+1<\\frac{n^2}2\\iff n>2$.\n\n**Convexity on even arguments.** Let $g(k)=f(2k)$. Then $g(k+1)-g(k)=f(k+1)$ is non-decreasing in $k$. Hence for integers $u\\le c\\le w$ with $c-u=w-c=d$,\n$$g(w)-g(c)=\\sum_{i=1}^{d}f(c+i)\\ \\ge\\ \\sum_{i=1}^{d}f(u+i)=g(c)-g(u),$$\ni.e. $g(u)+g(w)\\ge2g(c)$.\n\n**Lower bound.** Let $n\\ge3$ and $m=2^{n-1}$. By $(\\star)$, $f(2^n)=f(0)+\\sum_{j=1}^{m}f(j)$. Pair the terms $j$ and $m+1-j$ ($j=1,\\ldots,\\frac m2$). In each pair one index is even, say $2u$, and the other is odd, $2w+1$ with $2u+2w=m$; since $f(2w+1)=f(2w)$, the pair contributes\n$$f(2u)+f(2w)=g(u)+g(w)\\ge2g\\!\\left(\\tfrac m4\\right)=2f\\!\\left(\\tfrac m2\\right),$$\nusing convexity with $c=\\frac{u+w}2=\\frac m4$ (an integer as $n\\ge3$). Summing the $\\frac m2$ pairs and adding $f(0)=1>0$:\n$$f(2^n)>m\\,f\\!\\left(\\tfrac m2\\right)=2^{n-1}f(2^{n-2})\\qquad(n\\ge3).$$\nIterate down to $f(2^2)=4$ or $f(2^1)=2$:\n- $n$ even: $f(2^n)>2^{(n-1)+(n-3)+\\cdots+3}\\cdot4=2^{\\frac{n^2}4-1}\\cdot2^2>2^{n^2/4}$;\n- $n$ odd: $f(2^n)>2^{(n-1)+(n-3)+\\cdots+2}\\cdot2=2^{\\frac{n^2-1}4+1}>2^{n^2/4}$.\n\n(Here $3+5+\\cdots+(n-1)=\\frac{n^2}4-1$ and $2+4+\\cdots+(n-1)=\\frac{n^2-1}4$.) This proves $2^{n^2/4}<f(2^n)<2^{n^2/2}$. ∎"
+      }
+    ],
+    "topics": [
+      "counting",
+      "sequences-series",
+      "inequalities"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

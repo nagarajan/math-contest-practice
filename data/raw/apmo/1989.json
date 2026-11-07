@@ -1,0 +1,179 @@
+[
+  {
+    "id": "apmo-1989-01",
+    "bank": "apmo",
+    "source": {
+      "contest": "APMO",
+      "paper": "APMO",
+      "year": 1989,
+      "number": 1,
+      "url": "https://www.apmo-official.org/static/problems/apmo1989_prb.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $x_1, x_2, \\dots, x_n$ be positive real numbers, and let\n$$S = x_1 + x_2 + \\cdots + x_n.$$\nProve that\n$$(1 + x_1)(1 + x_2)\\cdots(1 + x_n) \\le 1 + S + \\frac{S^2}{2!} + \\frac{S^3}{3!} + \\cdots + \\frac{S^n}{n!}.$$",
+    "image": null,
+    "choices": null,
+    "answer": "Proof: expand the product as $1+\\sigma_1+\\dots+\\sigma_n$ (elementary symmetric sums) and note $S^k\\ge k!\\,\\sigma_k$, since every product of $k$ distinct $x_i$ appears at least $k!$ times in the expansion of $S^k$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Compare symmetric sums term by term",
+        "body": "Let $\\sigma_k$ be the $k$-th elementary symmetric sum of $x_1,\\dots,x_n$, i.e. the sum of all products $x_{i_1}x_{i_2}\\cdots x_{i_k}$ with $i_1<i_2<\\dots<i_k$. Expanding the product gives\n$$(1+x_1)(1+x_2)\\cdots(1+x_n)=1+\\sigma_1+\\sigma_2+\\cdots+\\sigma_n .$$\nSo it suffices to show $\\sigma_k\\le \\dfrac{S^k}{k!}$ for each $k=1,\\dots,n$.\n\nWrite $S^k=(x_1+\\dots+x_n)(x_1+\\dots+x_n)\\cdots(x_1+\\dots+x_n)$ ($k$ factors) and expand: we get the sum of $x_{j_1}x_{j_2}\\cdots x_{j_k}$ over all $n^k$ sequences $(j_1,\\dots,j_k)$, every term positive. Fix a set $\\{i_1,\\dots,i_k\\}$ of $k$ distinct indices. Each of the $k!$ orderings of this set is a different sequence $(j_1,\\dots,j_k)$ and contributes the term $x_{i_1}\\cdots x_{i_k}$. Hence the expansion of $S^k$ contains every term of $\\sigma_k$ at least $k!$ times (and further positive terms), so\n$$S^k\\ge k!\\,\\sigma_k .$$\nSumming $\\sigma_k\\le S^k/k!$ over $k=1,\\dots,n$ and adding $1$ gives the inequality. ∎"
+      },
+      {
+        "title": "AM-GM and the binomial theorem",
+        "body": "By AM-GM applied to the $n$ positive numbers $1+x_i$,\n$$\\prod_{i=1}^n(1+x_i)\\le\\left(\\frac{(1+x_1)+\\dots+(1+x_n)}{n}\\right)^n=\\left(1+\\frac Sn\\right)^n .$$\nBy the binomial theorem,\n$$\\left(1+\\frac Sn\\right)^n=\\sum_{k=0}^n\\binom nk\\frac{S^k}{n^k}=\\sum_{k=0}^n\\frac{S^k}{k!}\\cdot\\frac{n(n-1)\\cdots(n-k+1)}{n^k}\\le\\sum_{k=0}^n\\frac{S^k}{k!},$$\nbecause $n(n-1)\\cdots(n-k+1)\\le n^k$. Combining the two inequalities proves the claim. ∎"
+      }
+    ],
+    "topics": [
+      "inequalities",
+      "algebra"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "apmo-1989-02",
+    "bank": "apmo",
+    "source": {
+      "contest": "APMO",
+      "paper": "APMO",
+      "year": 1989,
+      "number": 2,
+      "url": "https://www.apmo-official.org/static/problems/apmo1989_prb.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Prove that the equation\n$$6(6a^2 + 3b^2 + c^2) = 5n^2$$\nhas no solutions in integers except $a = b = c = n = 0$.",
+    "image": null,
+    "choices": null,
+    "answer": "Proof by infinite descent: working modulo $2$, $3$ and $8$ shows that in any solution $a,b,c,n$ are all even, so $(a/2,b/2,c/2,n/2)$ is a smaller solution.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Infinite descent",
+        "body": "Changing signs does not matter, so suppose there is a solution in non-negative integers other than $(0,0,0,0)$ and choose one with $a+b+c+n>0$ as small as possible. We show that $a,b,c,n$ are all even; then $(a/2,b/2,c/2,n/2)$ is again a solution (divide the equation by $4$), not all zero, with smaller sum — a contradiction.\n\n**Step 1.** $6\\mid 5n^2$, so $2\\mid n$ and $3\\mid n$; write $n=6n_0$. The equation becomes $6a^2+3b^2+c^2=30n_0^2$. Then $3\\mid c^2$, so $c=3c_0$, and dividing by $3$:\n$$2a^2+b^2+3c_0^2=10n_0^2. \\tag{1}$$\n\n**Step 2: $b$ and $c_0$ are even.** From (1), $b^2+3c_0^2$ is even, so $b\\equiv c_0\\pmod 2$. Squares are $0$ or $1$ mod $4$, so in either case $b^2+3c_0^2\\equiv 0\\pmod 4$. Then $2(5n_0^2-a^2)\\equiv0\\pmod 4$, so $5n_0^2-a^2$ is even and $a\\equiv n_0\\pmod 2$. Hence $n_0-a$ and $n_0+a$ are both even and $n_0^2-a^2\\equiv0\\pmod 4$. Reducing (1) modulo $8$ (using $10n_0^2\\equiv 2n_0^2$):\n$$b^2+3c_0^2\\equiv 2(n_0^2-a^2)\\equiv 0\\pmod 8.$$\nIf $b,c_0$ were both odd we would get $b^2+3c_0^2\\equiv1+3=4\\pmod 8$ (odd squares are $1$ mod $8$). So $b=2b_0$ and $c_0=2c_1$, and (1) becomes\n$$a^2+2b_0^2+6c_1^2=5n_0^2. \\tag{2}$$\n\n**Step 3: $a$ and $n_0$ are even.** The same argument applies to (2). Modulo $8$ it reads $a^2+3n_0^2\\equiv 2(c_1^2-b_0^2)\\pmod 8$. The left side is even, so $a\\equiv n_0\\pmod 2$, hence $a^2+3n_0^2\\equiv0\\pmod 4$; then $c_1^2-b_0^2$ is even, so $c_1\\equiv b_0\\pmod2$ and $c_1^2-b_0^2\\equiv0\\pmod4$. Therefore $a^2+3n_0^2\\equiv0\\pmod8$, which rules out $a,n_0$ both odd. So $a$ and $n_0$ are even.\n\n**Conclusion.** $a$ is even, $b=2b_0$ is even, $c=3c_0=6c_1$ is even and $n=6n_0$ is even, which gives the contradiction described above. Hence the only integer solution is $a=b=c=n=0$. ∎"
+      }
+    ],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "apmo-1989-03",
+    "bank": "apmo",
+    "source": {
+      "contest": "APMO",
+      "paper": "APMO",
+      "year": 1989,
+      "number": 3,
+      "url": "https://www.apmo-official.org/static/problems/apmo1989_prb.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Let $A_1, A_2, A_3$ be three points in the plane, and for convenience, let $A_4 = A_1$, $A_5 = A_2$. For $n = 1, 2$, and $3$, suppose that $B_n$ is the midpoint of $A_nA_{n+1}$, and suppose that $C_n$ is the midpoint of $A_nB_n$. Suppose that $A_nC_{n+1}$ and $B_nA_{n+2}$ meet at $D_n$, and that $A_nB_{n+1}$ and $C_nA_{n+2}$ meet at $E_n$. Calculate the ratio of the area of triangle $D_1D_2D_3$ to the area of triangle $E_1E_2E_3$.",
+    "image": null,
+    "choices": null,
+    "answer": "25/49",
+    "answerDisplay": "$\\frac{25}{49}$",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Vectors from the centroid",
+        "body": "Put the origin at the centroid $G$ of triangle $A_1A_2A_3$, so $A_1+A_2+A_3=0$ (indices mod $3$); any two of the vectors $A_1,A_2,A_3$ are linearly independent. Then\n$$B_n=\\frac{A_n+A_{n+1}}2=-\\frac{A_{n+2}}2,\\qquad C_n=\\frac{A_n+B_n}{2}=\\frac{A_n}{2}-\\frac{A_{n+2}}{4}.$$\n\n**The points $D_n$.** The line $B_nA_{n+2}$ is the median through $A_{n+2}$ (it passes through $0$), so $D_n=\\lambda A_{n+2}=-\\lambda A_n-\\lambda A_{n+1}$. Also $C_{n+1}=\\frac{A_{n+1}}2-\\frac{A_n}4$, and a point of line $A_nC_{n+1}$ is\n$$A_n+t(C_{n+1}-A_n)=\\Big(1-\\tfrac{5t}{4}\\Big)A_n+\\tfrac t2A_{n+1}.$$\nComparing coefficients: $\\frac t2=-\\lambda$ and $1-\\frac{5t}4=-\\lambda$, so $t=\\frac47$ and $\\lambda=-\\frac27$. Thus $D_n=-\\frac27A_{n+2}$: triangle $D_1D_2D_3$ is the image of $A_1A_2A_3$ under the homothety with centre $G$ and ratio $-\\frac27$.\n\n**The points $E_n$.** $B_{n+1}=-\\frac{A_n}2$, so the line $A_nB_{n+1}$ is the median through $A_n$ and $E_n=\\mu A_n$. A point of line $C_nA_{n+2}$ is\n$$A_{n+2}+s(C_n-A_{n+2})=\\tfrac s2A_n+\\Big(1-\\tfrac{5s}4\\Big)A_{n+2}.$$\nFor this to be a multiple of $A_n$ we need $s=\\frac45$, giving $\\mu=\\frac25$. So $E_n=\\frac25A_n$, and $E_1E_2E_3$ is the image of $A_1A_2A_3$ under the homothety with centre $G$ and ratio $\\frac25$.\n\n**Areas.** $[D_1D_2D_3]=\\frac4{49}[A_1A_2A_3]$ and $[E_1E_2E_3]=\\frac4{25}[A_1A_2A_3]$, so\n$$\\frac{[D_1D_2D_3]}{[E_1E_2E_3]}=\\frac{4/49}{4/25}=\\frac{25}{49}.$$\n**Answer: $\\dfrac{25}{49}$**"
+      },
+      {
+        "title": "Menelaus on the medians",
+        "body": "Let $G$ be the centroid; the medians are $A_1B_2$, $A_2B_3$, $A_3B_1$ ($B_2$ is the midpoint of $A_2A_3$, etc.).\n\n**$D_1$.** $D_1$ lies on the median $A_3B_1$. Apply Menelaus to triangle $B_1A_2A_3$ and the line through $A_1$, $D_1$, $C_2$ ($C_2$ on $A_2A_3$ with $A_2C_2=\\frac14A_2A_3$, $A_1$ on line $A_2B_1$ with $A_1B_1=B_1A_2$):\n$$\\frac{B_1A_1}{A_1A_2}\\cdot\\frac{A_2C_2}{C_2A_3}\\cdot\\frac{A_3D_1}{D_1B_1}=1\\ \\Longrightarrow\\ \\frac12\\cdot\\frac13\\cdot\\frac{A_3D_1}{D_1B_1}=1,$$\nso $A_3D_1:D_1B_1=6:1$. With $A_3B_1=21t$ we get $D_1B_1=3t$ and $A_3G=14t$, $GB_1=7t$, so $D_1$ is on segment $GB_1$ with $GD_1=4t=\\frac27GA_3$, on the opposite side of $G$ from $A_3$. By symmetry $D_n$ is the image of $A_{n+2}$ under the homothety with centre $G$, ratio $-\\frac27$.\n\n**$E_1$.** $E_1$ lies on the median $A_1B_2$. Menelaus in triangle $A_1A_2B_2$ with the line through $C_1$, $E_1$, $A_3$ ($C_1$ on $A_1A_2$ with $A_1C_1=\\frac14A_1A_2$; $A_3$ on line $A_2B_2$ with $B_2A_3=\\frac12A_2A_3$):\n$$\\frac{A_1C_1}{C_1A_2}\\cdot\\frac{A_2A_3}{A_3B_2}\\cdot\\frac{B_2E_1}{E_1A_1}=1\\ \\Longrightarrow\\ \\frac13\\cdot 2\\cdot\\frac{B_2E_1}{E_1A_1}=1,$$\nso $A_1E_1:E_1B_2=2:3$, i.e. $A_1E_1=\\frac25A_1B_2$. With $A_1B_2=15u$: $A_1G=10u$, $A_1E_1=6u$, $GE_1=4u=\\frac25GA_1$, on the same side as $A_1$. So $E_n$ is the image of $A_n$ under the homothety with centre $G$, ratio $\\frac25$.\n\nHence the ratio of areas is $\\left(\\frac{2/7}{2/5}\\right)^2=\\frac{25}{49}$.\n\n**Answer: $\\dfrac{25}{49}$**"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "apmo-1989-04",
+    "bank": "apmo",
+    "source": {
+      "contest": "APMO",
+      "paper": "APMO",
+      "year": 1989,
+      "number": 4,
+      "url": "https://www.apmo-official.org/static/problems/apmo1989_prb.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $S$ be a set consisting of $m$ pairs $(a, b)$ of positive integers with the property that $1 \\le a < b \\le n$. Show that there are at least\n$$\\frac{4m\\left(m - \\frac{n^2}{4}\\right)}{3n}$$\ntriples $(a, b, c)$ such that $(a, b)$, $(a, c)$, and $(b, c)$ belong to $S$.",
+    "image": null,
+    "choices": null,
+    "answer": "Proof (Goodman's bound): each pair $(i,j)\\in S$ lies in at least $d_i+d_j-n$ good triples, where $d_i$ is the number of pairs containing $i$; summing gives $3T\\ge\\sum d_i^2-mn\\ge\\frac{4m^2}{n}-mn$ by Cauchy–Schwarz.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Count common partners, then Cauchy–Schwarz",
+        "body": "Think of $S$ as a graph on the vertices $1,\\dots,n$: each pair $(a,b)\\in S$ is an edge. A triple $(a,b,c)$ with $(a,b),(a,c),(b,c)\\in S$ (so $a<b<c$) is a triangle of this graph; let $T$ be the number of such triples.\n\nFor each $i$ let $D_i$ be the set of numbers paired with $i$ in $S$ and $d_i=|D_i|$. Since each pair contains two numbers,\n$$\\sum_{i=1}^n d_i=2m.$$\n\n**Triangles on one edge.** Take a pair $\\{i,j\\}\\in S$. Any $k\\in D_i\\cap D_j$ is different from $i$ and $j$ (no number is paired with itself), and $\\{i,j,k\\}$ is a triangle. Since $D_i\\cup D_j\\subseteq\\{1,\\dots,n\\}$,\n$$|D_i\\cap D_j|=d_i+d_j-|D_i\\cup D_j|\\ge d_i+d_j-n .$$\nSo the edge $\\{i,j\\}$ lies in at least $d_i+d_j-n$ triangles.\n\n**Summing.** Each triangle has three edges, so summing over all $m$ edges counts every triangle exactly three times:\n$$3T=\\sum_{\\{i,j\\}\\in S}|D_i\\cap D_j|\\ge\\sum_{\\{i,j\\}\\in S}(d_i+d_j-n).$$\nIn $\\sum_{\\{i,j\\}\\in S}(d_i+d_j)$ the number $d_i$ appears once for every edge containing $i$, i.e. $d_i$ times, so this sum is $\\sum_i d_i^2$. Hence\n$$3T\\ge\\sum_{i=1}^n d_i^2-mn\\ge\\frac{\\left(\\sum_i d_i\\right)^2}{n}-mn=\\frac{4m^2}{n}-mn,$$\nusing the Cauchy–Schwarz (or QM-AM) inequality $\\sum d_i^2\\ge\\frac1n\\left(\\sum d_i\\right)^2$. Therefore\n$$T\\ge\\frac13\\left(\\frac{4m^2}{n}-mn\\right)=\\frac{4m\\left(m-\\frac{n^2}{4}\\right)}{3n}. \\qquad ∎$$"
+      }
+    ],
+    "topics": [
+      "counting",
+      "graph-theory",
+      "inequalities"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "apmo-1989-05",
+    "bank": "apmo",
+    "source": {
+      "contest": "APMO",
+      "paper": "APMO",
+      "year": 1989,
+      "number": 5,
+      "url": "https://www.apmo-official.org/static/problems/apmo1989_prb.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Determine all functions $f$ from the reals to the reals for which\n\n1. $f(x)$ is strictly increasing,\n2. $f(x) + g(x) = 2x$ for all real $x$,\n\nwhere $g(x)$ is the composition inverse function to $f(x)$. (Note: $f$ and $g$ are said to be composition inverses if $f(g(x)) = x$ and $g(f(x)) = x$ for all real $x$.)",
+    "image": null,
+    "choices": null,
+    "answer": "$f(x)=x+c$ for a real constant $c$ (iterating gives $f^n(x)=x+n(f(x)-x)$ and $g^n(x)=x-n(f(x)-x)$; monotonicity of these for all $n$ forces $f(x)-x$ to be constant).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Iterate and use monotonicity",
+        "body": "**These work.** If $f(x)=x+c$, then $f$ is strictly increasing, $g(x)=x-c$, and $f(x)+g(x)=2x$.\n\n**No others.** Let $f$ satisfy the conditions and write $f^n$ for the $n$-th iterate ($f^0(x)=x$).\n\n*Arithmetic progression.* Put $f^{n+1}(x)$ into condition 2. Since $g(f^{n+1}(x))=f^n(x)$,\n$$f^{n+2}(x)+f^n(x)=2f^{n+1}(x),\\quad\\text{i.e.}\\quad f^{n+2}(x)-f^{n+1}(x)=f^{n+1}(x)-f^n(x).$$\nSo the differences $f^{k+1}(x)-f^k(x)$ are all equal to $f(x)-x=:\\varphi(x)$, and summing,\n$$f^n(x)=x+n\\varphi(x)\\qquad(n\\ge0).$$\nCondition 2 is symmetric in $f$ and $g$ ($g$ is the inverse of $f$ and $f$ the inverse of $g$), so likewise $g^n(x)=x+n(g(x)-x)=x-n\\varphi(x)$, because $g(x)-x=x-f(x)$.\n\n*Monotonicity.* $g$ is strictly increasing: if $g(x)\\ge g(y)$ then $x=f(g(x))\\ge f(g(y))=y$. Compositions of strictly increasing functions are strictly increasing, so all $f^n$ and $g^n$ are.\n\nNow take $x>y$ and $n\\ge1$. From $f^n(x)>f^n(y)$ and $g^n(x)>g^n(y)$:\n$$x+n\\varphi(x)>y+n\\varphi(y)\\ \\Rightarrow\\ n(\\varphi(x)-\\varphi(y))>-(x-y),$$\n$$x-n\\varphi(x)>y-n\\varphi(y)\\ \\Rightarrow\\ n(\\varphi(x)-\\varphi(y))<x-y.$$\nSo $n\\,|\\varphi(x)-\\varphi(y)|<x-y$ for every positive integer $n$, which forces $\\varphi(x)=\\varphi(y)$. Thus $\\varphi$ is a constant $c$, i.e. $f(x)=x+c$.\n\n**Answer:** $f(x)=x+c$ for any real constant $c$. ∎"
+      }
+    ],
+    "topics": [
+      "functional-equations"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

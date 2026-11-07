@@ -1,0 +1,176 @@
+[
+  {
+    "id": "apmo-1990-01",
+    "bank": "apmo",
+    "source": {
+      "contest": "APMO",
+      "paper": "APMO",
+      "year": 1990,
+      "number": 1,
+      "url": "https://www.apmo-official.org/static/problems/apmo1990_prb.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Given triangle $ABC$, let $D, E, F$ be the midpoints of $BC$, $AC$, $AB$ respectively and let $G$ be the centroid of the triangle.\n\nFor each value of $\\angle BAC$, how many non-similar triangles are there in which $AEGF$ is a cyclic quadrilateral?",
+    "image": null,
+    "choices": null,
+    "answer": "If $\\angle BAC\\le 60^\\circ$ there is exactly one such triangle up to similarity (equilateral when $\\angle BAC=60^\\circ$); if $\\angle BAC>60^\\circ$ there is none. ($AEGF$ is cyclic iff $b^2+c^2=2a^2$, i.e. $\\cos A=\\frac14\\left(\\frac bc+\\frac cb\\right)$.)",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Power of the point $C$",
+        "body": "Use the usual notation $a=BC$, $b=CA$, $c=AB$, and let $m_c=CF$ be the median from $C$.\n\n**A condition for concyclicity.** The points $E$ and $A$ lie on the same ray from $C$, and so do $G$ and $F$ (on the median $CF$), and the two rays are different. By the power of a point and its converse, $A,E,G,F$ are concyclic if and only if\n$$CE\\cdot CA=CG\\cdot CF\\iff \\frac b2\\cdot b=\\frac23m_c\\cdot m_c\\iff m_c^2=\\frac34b^2 .$$\n(For the converse: if $CE\\cdot CA=CG\\cdot CF$ then $CE/CF=CG/CA$, so triangles $CEG$ and $CFA$ are similar with $\\angle CEG=\\angle CFA$, which makes $\\angle AEG+\\angle AFG=180^\\circ$.)\nBy the median formula $m_c^2=\\frac{2a^2+2b^2-c^2}{4}$, the condition becomes\n$$2a^2+2b^2-c^2=3b^2\\iff b^2+c^2=2a^2 .$$\n\n**In terms of the angle $A$.** By the law of cosines $a^2=b^2+c^2-2bc\\cos A$, so the condition is $b^2+c^2=2b^2+2c^2-4bc\\cos A$, i.e.\n$$\\frac bc+\\frac cb=4\\cos A .$$\n\n**Counting.** For a fixed angle $A$, a triangle is determined up to similarity by the ratio $t=b/c>0$, and $t$ and $1/t$ give mirror-image (hence similar) triangles. The equation $t+\\frac1t=4\\cos A$ has a positive solution only if $4\\cos A\\ge 2$ (AM-GM: $t+\\frac1t\\ge2$), i.e. $A\\le 60^\\circ$.\n- If $A>60^\\circ$: no triangle.\n- If $A=60^\\circ$: only $t=1$, the equilateral triangle.\n- If $A<60^\\circ$: two solutions $t$ and $1/t$, which give similar triangles, so exactly one triangle up to similarity.\n\n**Answer:** exactly one (up to similarity) when $\\angle BAC\\le60^\\circ$, none when $\\angle BAC>60^\\circ$."
+      }
+    ],
+    "topics": [
+      "geometry",
+      "trigonometry"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "apmo-1990-02",
+    "bank": "apmo",
+    "source": {
+      "contest": "APMO",
+      "paper": "APMO",
+      "year": 1990,
+      "number": 2,
+      "url": "https://www.apmo-official.org/static/problems/apmo1990_prb.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $a_1, a_2, \\dots, a_n$ be positive real numbers, and let $S_k$ be the sum of the products of $a_1, a_2, \\dots, a_n$ taken $k$ at a time. Show that\n$$S_kS_{n-k} \\ge \\binom{n}{k}^2 a_1a_2\\cdots a_n$$\nfor $k = 1, 2, \\dots, n-1$.",
+    "image": null,
+    "choices": null,
+    "answer": "Proof: by AM-GM on the $\\binom nk$ terms of $S_k$, each $a_i$ appearing in $\\binom{n-1}{k-1}$ of them, $S_k\\ge\\binom nk(a_1\\cdots a_n)^{k/n}$; multiply by the same bound for $S_{n-k}$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "AM-GM on each symmetric sum",
+        "body": "Let $P=a_1a_2\\cdots a_n$ and $N=\\binom nk$.\n\n$S_k$ is a sum of $N$ positive terms, one for each $k$-element subset of $\\{1,\\dots,n\\}$. In the product of all these terms, a fixed $a_i$ appears once for every subset containing $i$, i.e. $\\binom{n-1}{k-1}$ times. So the product of the $N$ terms equals $P^{\\binom{n-1}{k-1}}$, and AM-GM gives\n$$S_k\\ge N\\left(P^{\\binom{n-1}{k-1}}\\right)^{1/N}=N\\,P^{k/n},$$\nbecause $\\binom{n-1}{k-1}\\big/\\binom nk=\\frac kn$.\n\nThe same argument with $n-k$ in place of $k$ (note $\\binom n{n-k}=N$) gives $S_{n-k}\\ge N\\,P^{(n-k)/n}$. Multiplying,\n$$S_kS_{n-k}\\ge N^2P^{k/n+(n-k)/n}=\\binom nk^2a_1a_2\\cdots a_n. \\qquad ∎$$"
+      },
+      {
+        "title": "Pairing complementary terms",
+        "body": "Each term of $S_k$ is $\\prod_{i\\in I}a_i$ for a $k$-subset $I$; each term of $S_{n-k}$ is $\\prod_{j\\in J}a_j$ for an $(n-k)$-subset $J$, and $J\\mapsto$ its complement is a bijection onto $k$-subsets. So, writing $x_I=\\prod_{i\\in I}a_i$ and $I^c$ for the complement,\n$$S_kS_{n-k}=\\sum_{I}\\sum_{J}x_I\\,\\frac{P}{x_{J}}=P\\sum_{I,J}\\frac{x_I}{x_J},$$\nthe sums running over all ordered pairs of $k$-subsets $I,J$ (we wrote each term of $S_{n-k}$ as $x_{J^c}=P/x_J$). The $N$ terms with $I=J$ equal $1$. The remaining $N(N-1)$ terms group into $\\binom N2$ pairs $\\frac{x_I}{x_J}+\\frac{x_J}{x_I}\\ge2$. Hence\n$$\\sum_{I,J}\\frac{x_I}{x_J}\\ge N+2\\binom N2=N^2,$$\nand $S_kS_{n-k}\\ge\\binom nk^2P$. ∎"
+      }
+    ],
+    "topics": [
+      "inequalities",
+      "algebra"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "apmo-1990-03",
+    "bank": "apmo",
+    "source": {
+      "contest": "APMO",
+      "paper": "APMO",
+      "year": 1990,
+      "number": 3,
+      "url": "https://www.apmo-official.org/static/problems/apmo1990_prb.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Consider all the triangles $ABC$ which have a fixed base $AB$ and whose altitude from $C$ is a constant $h$. For which of these triangles is the product of its altitudes a maximum?",
+    "image": null,
+    "choices": null,
+    "answer": "The product of the altitudes is $\\dfrac{(AB\\cdot h)^3}{AB\\cdot AC\\cdot BC}$, largest when $\\sin C$ is largest: if $h\\le\\frac{AB}2$, the triangles with $\\angle ACB=90^\\circ$; if $h>\\frac{AB}2$, the isosceles triangle with $AC=BC$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Reduce to maximising $\\sin C$",
+        "body": "Let $K=\\frac12AB\\cdot h$ be the area, which is the same for all these triangles, and let $h_a,h_b$ be the altitudes from $A$ and $B$. Since $h_a=\\frac{2K}{BC}$, $h_b=\\frac{2K}{AC}$, $h=\\frac{2K}{AB}$,\n$$h\\,h_ah_b=\\frac{8K^3}{AB\\cdot AC\\cdot BC}.$$\n$K$ and $AB$ are fixed, so we must **minimise $AC\\cdot BC$**. But $K=\\frac12AC\\cdot BC\\sin C$, so $AC\\cdot BC=\\frac{2K}{\\sin C}$, and we must **maximise $\\sin C$**, where $C=\\angle ACB$.\n\nThe vertex $C$ runs over a line $\\ell$ parallel to $AB$ at distance $h$.\n\n**Case $h\\le\\frac{AB}2$.** The circle with diameter $AB$ has radius $\\frac{AB}2\\ge h$, so it meets $\\ell$; at such a point $\\angle ACB=90^\\circ$ (Thales) and $\\sin C=1$, the largest possible value. Conversely $\\sin C=1$ only when $C=90^\\circ$. So the maximum is attained exactly by the triangles with a right angle at $C$ (one or two of them, up to reflection).\n\n**Case $h>\\frac{AB}2$.** Now $\\ell$ lies entirely outside the circle with diameter $AB$, so every angle $\\angle ACB$ is acute and $\\sin C$ increases with $C$; we must maximise the angle itself. Let $M$ be the point of $\\ell$ on the perpendicular bisector of $AB$, and $\\omega$ the circle through $A,B,M$. Its centre is on the perpendicular bisector of $AB$ and $\\ell$ is perpendicular to that line at $M$, so $\\ell$ is tangent to $\\omega$ at $M$. Every other point $C$ of $\\ell$ is outside $\\omega$, so $\\angle ACB<\\angle AMB$ (an angle subtending $AB$ from outside the circle, on the same side, is smaller than the inscribed angle). Hence the maximum is at $C=M$.\n\n**Answer:** if $h\\le AB/2$, the triangles with $\\angle ACB=90^\\circ$; if $h>AB/2$, the isosceles triangle with $CA=CB$."
+      }
+    ],
+    "topics": [
+      "geometry",
+      "trigonometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "apmo-1990-04",
+    "bank": "apmo",
+    "source": {
+      "contest": "APMO",
+      "paper": "APMO",
+      "year": 1990,
+      "number": 4,
+      "url": "https://www.apmo-official.org/static/problems/apmo1990_prb.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "A set of $1990$ persons is divided into non-intersecting subsets in such a way that\n\n1. No one in a subset knows all the others in the subset,\n2. Among any three persons in a subset, there are always at least two who do not know each other, and\n3. For any two persons in a subset who do not know each other, there is exactly one person in the same subset knowing both of them.\n\n(a) Prove that within each subset, every person has the same number of acquaintances.\n\n(b) Determine the maximum possible number of subsets.\n\nNote: It is understood that if a person $A$ knows person $B$, then person $B$ will know person $A$; an acquaintance is someone who is known. Every person is assumed to know one's self.",
+    "image": null,
+    "choices": null,
+    "answer": "(a) Proof: for two strangers $u,v$ with common acquaintance $w$, sending each other acquaintance $x$ of $u$ to the common acquaintance of $x$ and $v$ is a bijection, so strangers have equal degrees; adjacent people are handled through strangers. (b) $398$ (a group with $d$ acquaintances each has $d^2+1\\ge5$ people; use $398$ five-cycles).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Graph of acquaintances",
+        "body": "In one subset, draw a graph: people are vertices and two **different** people are joined if they know each other. \"Knowing oneself\" just adds $1$ to everybody's count, so it does not affect (a). Conditions:\n- (1) every vertex has a non-neighbour;\n- (2) the graph has no triangle;\n- (3) two distinct non-adjacent vertices have exactly one common neighbour (the common person cannot be one of the two, since they do not know each other).\n\n**(a) Non-adjacent vertices have equal degree.** Let $u\\ne v$ be non-adjacent with unique common neighbour $w$. Take a neighbour $x\\ne w$ of $u$. Then $x\\ne v$, and $x$ is not adjacent to $v$ (otherwise $u,v$ would have two common neighbours $w,x$). So $x$ and $v$ have a unique common neighbour $\\varphi(x)$, a neighbour of $v$. We have $\\varphi(x)\\ne w$: otherwise $u,x,w$ would be a triangle. So $\\varphi$ maps $N(u)\\setminus\\{w\\}$ to $N(v)\\setminus\\{w\\}$.\n\n$\\varphi$ is injective: if $\\varphi(x)=\\varphi(x')=y$ with $x\\ne x'$, then $x,x'$ are non-adjacent (both are neighbours of $u$; no triangles), but they have the two common neighbours $u$ and $y$ ($y\\ne u$, as $y$ is adjacent to $v$ and $u$ is not) — contradicting (3). Hence $\\deg u\\le\\deg v$, and by symmetry $\\deg u=\\deg v$.\n\n**Adjacent vertices have equal degree.** Let $u,v$ be adjacent. If some vertex $z$ is adjacent to neither, then $\\deg u=\\deg z=\\deg v$. Otherwise every other vertex is adjacent to exactly one of $u,v$ (not both: no triangles). Let $A=N(u)\\setminus\\{v\\}$, $B=N(v)\\setminus\\{u\\}$. By (1), $v$ has a non-neighbour, which must lie in $A$, so $A\\ne\\varnothing$; similarly $B\\ne\\varnothing$. Each $a\\in A$ is non-adjacent to $v$, so $\\deg a=\\deg v$; each $b\\in B$ has $\\deg b=\\deg u$. If some $a\\in A$, $b\\in B$ are non-adjacent, then $\\deg u=\\deg b=\\deg a=\\deg v$. If every $a\\in A$ is adjacent to every $b\\in B$, then $|A|=1$ (two vertices of $A$ would be non-adjacent with the two common neighbours $u$ and any $b$), similarly $|B|=1$, so the group is a $4$-cycle $u,v,b,a$ and all degrees equal $2$.\n\nSo all people in a subset have the same number of acquaintances. ∎\n\n**(b) Size of a subset.** Let every vertex of a subset have degree $d$ and let the subset have $s$ people. Fix $u$. Each of its $d$ neighbours has $d-1$ further neighbours, none adjacent to $u$ (no triangles). Every non-neighbour $z\\ne u$ of $u$ has exactly one common neighbour with $u$, so it is counted exactly once this way. Hence\n$$s=1+d+d(d-1)=d^2+1.$$\nNow $d=0$ gives $s=1$, where the lone person (vacuously) knows all the others, and $d=1$ gives two people who know each other; both violate (1). So $d\\ge2$ and every subset has at least $5$ people, giving at most $\\lfloor1990/5\\rfloor=398$ subsets.\n\n**Construction.** Split the $1990$ people into $398$ groups of $5$, and in each group let the acquaintances form a $5$-cycle $P_1P_2P_3P_4P_5$. Each person knows only $2$ of the other $4$; a $5$-cycle has no triangle; and two non-adjacent people, e.g. $P_1,P_3$, have exactly one common neighbour ($P_2$). So all conditions hold.\n\n**Answer:** (b) $398$."
+      }
+    ],
+    "topics": [
+      "graph-theory",
+      "counting"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "apmo-1990-05",
+    "bank": "apmo",
+    "source": {
+      "contest": "APMO",
+      "paper": "APMO",
+      "year": 1990,
+      "number": 5,
+      "url": "https://www.apmo-official.org/static/problems/apmo1990_prb.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Show that for every integer $n \\ge 6$, there exists a convex hexagon which can be dissected into exactly $n$ congruent triangles.",
+    "image": null,
+    "choices": null,
+    "answer": "Proof by construction with the $30^\\circ$-$60^\\circ$-$90^\\circ$ triangle (legs $1,\\sqrt3$): a $2\\times k\\sqrt3$ rectangle holds $4k$ copies, and on each short side attach an end piece made of $1$, $2$ or $3$ copies; this gives a convex hexagon with $4k+2,\\dots,4k+6$ triangles, covering every $n\\ge6$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "A rectangle with two end caps",
+        "body": "Let $T$ be the right triangle with legs $1$ and $\\sqrt3$ and hypotenuse $2$ (angles $30^\\circ,60^\\circ,90^\\circ$). All triangles below are copies of $T$ (reflections allowed).\n\n**Middle.** For $k\\ge1$ let $R_k$ be the rectangle $[0,k\\sqrt3]\\times[0,2]$. Cut it into $2k$ rectangles $\\sqrt3\\times1$ (two rows of $k$) and each of these by a diagonal into two copies of $T$: $R_k$ consists of $4k$ copies of $T$.\n\n**End caps** glued to the left side $x=0,\\ 0\\le y\\le2$ (for the right side use the mirror images in the line $x=\\frac{k\\sqrt3}{2}$):\n- **Cap 1 (1 copy):** the triangle with vertices $(0,0)$, $(0,2)$, $\\left(-\\frac{\\sqrt3}2,\\frac12\\right)$. Its sides are $1$, $\\sqrt3$, $2$ and it has a right angle at $\\left(-\\frac{\\sqrt3}2,\\frac12\\right)$, so it is a copy of $T$, with angles $60^\\circ$ at $(0,0)$ and $30^\\circ$ at $(0,2)$.\n- **Cap 2 (2 copies):** the equilateral triangle $(0,0)$, $(0,2)$, $(-\\sqrt3,1)$, cut by the segment from $(-\\sqrt3,1)$ to $(0,1)$ into two copies of $T$. Angles $60^\\circ$ at $(0,0)$ and $(0,2)$.\n- **Cap 3 (3 copies):** the quadrilateral $(0,0)$, $(0,2)$, $(-\\sqrt3,2)$, $(-\\sqrt3,1)$, made of the rectangle $[-\\sqrt3,0]\\times[1,2]$ cut by a diagonal (2 copies) and the triangle $(0,0)$, $(0,1)$, $(-\\sqrt3,1)$ (1 copy). Its angles are $60^\\circ$ at $(0,0)$, $90^\\circ$ at $(0,2)$, $90^\\circ$ at $(-\\sqrt3,2)$ and $120^\\circ$ at $(-\\sqrt3,1)$.\n\n**The hexagon.** Glue a cap with $p$ copies on the left and the mirror image of a cap with $q$ copies on the right of $R_k$. The union is a simple polygon. On the left, its vertices and angles are:\n- Cap 1: $(0,0)$ with $90^\\circ+60^\\circ=150^\\circ$, the apex with $90^\\circ$, $(0,2)$ with $90^\\circ+30^\\circ=120^\\circ$;\n- Cap 2: $(0,0)$ and $(0,2)$ with $150^\\circ$ each, the apex with $60^\\circ$;\n- Cap 3: $(0,0)$ with $150^\\circ$, $(-\\sqrt3,1)$ with $120^\\circ$, $(-\\sqrt3,2)$ with $90^\\circ$; at $(0,2)$ the angle is $90^\\circ+90^\\circ=180^\\circ$, so it is not a vertex.\n\nIn every case the left end gives exactly $3$ vertices, all with angles below $180^\\circ$, and the same holds on the right. So the union is a convex hexagon dissected into $4k+p+q$ copies of $T$.\n\n**All $n\\ge6$.** With $k\\ge1$ and $p,q\\in\\{1,2,3\\}$, $p+q$ takes every value $2,3,4,5,6$. Given $n\\ge6$, let $k=\\left\\lfloor\\frac{n-2}{4}\\right\\rfloor\\ge1$; then $r=n-4k\\in\\{2,3,4,5\\}$, and choosing $(p,q)=(1,1),(1,2),(2,2),(2,3)$ for $r=2,3,4,5$ gives a convex hexagon made of exactly $n$ congruent triangles. ∎"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "spatial"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

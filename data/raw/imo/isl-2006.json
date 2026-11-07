@@ -1,0 +1,986 @@
+[
+  {
+    "id": "imo-isl-2006-a1",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Algebra",
+      "year": 2006,
+      "number": 1,
+      "url": "https://www.imo-official.org/assets/documents/problems/2006/IMO2006SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "A sequence of real numbers $a_0, a_1, a_2, \\dots$ is defined by the formula\n$$a_{i+1} = \\lfloor a_i \\rfloor \\cdot \\langle a_i \\rangle \\quad \\text{for } i \\ge 0;$$\nhere $a_0$ is an arbitrary real number, $\\lfloor a_i \\rfloor$ denotes the greatest integer not exceeding $a_i$, and $\\langle a_i \\rangle = a_i - \\lfloor a_i \\rfloor$. Prove that $a_i = a_{i+2}$ for $i$ sufficiently large.",
+    "image": null,
+    "choices": null,
+    "answer": "Eventually the sequence is constant or alternates between two values (track $\\lfloor a_i\\rfloor$, which becomes constant $c$, then study $a_{i+1}=c\\,a_i-c^2$).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Monotone integer parts, then a linear recurrence",
+        "body": "Write $\\lfloor a\\rfloor$ for the integer part and $\\langle a\\rangle\\in[0,1)$ for the fractional part.\n\n**Case $a_0 \\ge 0$.** Then all terms are $\\ge 0$ (a product of two nonnegative numbers). If $a_i \\ge 1$ then $\\lfloor a_i\\rfloor \\ge 1$ and $\\langle a_i\\rangle<1$, so\n$$\\lfloor a_{i+1}\\rfloor \\le a_{i+1} = \\lfloor a_i\\rfloor\\langle a_i\\rangle < \\lfloor a_i\\rfloor .$$\nSo the integers $\\lfloor a_i\\rfloor$ strictly decrease as long as $a_i\\ge 1$; hence some $a_i$ lies in $[0,1)$. Then $\\lfloor a_i\\rfloor=0$, so $a_{i+1}=0$ and all later terms are $0$. The sequence is eventually constant.\n\n**Case $a_0<0$.** If $a<0$ then $\\lfloor a\\rfloor\\le -1$ and $\\langle a\\rangle \\ge 0$, so the next term is $\\le 0$; thus all terms are $\\le 0$. If some term is $0$, all later terms are $0$ and we are done. So assume $a_i<0$ for all $i$, hence $\\lfloor a_i\\rfloor\\le -1$ for all $i$. Since $0\\le\\langle a_i\\rangle<1$ and $\\lfloor a_i\\rfloor<0$,\n$$a_{i+1}=\\lfloor a_i\\rfloor\\langle a_i\\rangle > \\lfloor a_i\\rfloor ,$$\nso $\\lfloor a_{i+1}\\rfloor\\ge\\lfloor a_i\\rfloor$. The integers $\\lfloor a_i\\rfloor$ are nondecreasing and bounded above by $-1$, so they are eventually constant: $\\lfloor a_i\\rfloor = c$ for all $i\\ge i_0$, where $c\\le -1$ is an integer.\n\nFor $i \\ge i_0$ the recursion reads $a_{i+1} = c(a_i - c) = c\\,a_i - c^2$. Its fixed point is $p=\\dfrac{c^2}{c-1}$; put $b_i = a_i - p$. Since $c^2 + p = \\dfrac{c^3}{c-1} = cp$,\n$$b_{i+1} = c\\,a_i - c^2 - p = c\\,a_i - cp = c\\,b_i ,\\qquad\\text{so}\\qquad b_i = c^{\\,i-i_0}\\,b_{i_0}\\ (i\\ge i_0).$$\nAll $a_i$ with $i\\ge i_0$ lie in $[c,c+1)$, so $(b_i)$ is bounded. If $|c|\\ge 2$ and $b_{i_0}\\ne 0$, then $|b_i|\\to\\infty$, impossible. Hence either\n\n- $b_{i_0}=0$: then $b_i=0$ and $a_i=p$ for all $i\\ge i_0$ (constant), or\n- $c=-1$: then $b_{i+1}=-b_i$, so $b_{i+2}=b_i$ and $a_{i+2}=a_i$ for all $i\\ge i_0$ (the sequence alternates between $a_{i_0}$ and $-1-a_{i_0}$).\n\nIn every case $a_{i+2}=a_i$ for all sufficiently large $i$. ∎"
+      }
+    ],
+    "topics": [
+      "sequences-series",
+      "algebra"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-isl-2006-a2",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Algebra",
+      "year": 2006,
+      "number": 2,
+      "url": "https://www.imo-official.org/assets/documents/problems/2006/IMO2006SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "The sequence of real numbers $a_0, a_1, a_2, \\dots$ is defined recursively by\n$$a_0 = -1, \\qquad \\sum_{k=0}^{n} \\frac{a_{n-k}}{k+1} = 0 \\quad \\text{for } n \\ge 1.$$\nShow that $a_n > 0$ for $n \\ge 1$.",
+    "image": null,
+    "choices": null,
+    "answer": "Subtracting suitable multiples of the relations for $n$ and $n+1$ gives $a_{n+1}=\\frac{1}{n+2}\\sum_{k=1}^{n}\\frac{k\\,a_k}{(n-k+1)(n-k+2)}$, so positivity follows by induction.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Eliminate $a_0$ and induct",
+        "body": "Re-indexing ($k\\to n-k$), the relation for $n\\ge1$ reads\n$$\\sum_{k=0}^{n}\\frac{a_k}{n-k+1}=0. \\tag{$R_n$}$$\nFor $n=1$: $a_1+\\tfrac{a_0}{2}=0$, so $a_1=\\tfrac12>0$.\n\nSuppose $n\\ge 1$ and $a_1,\\dots,a_n>0$. Multiply $(R_{n+1})$ by $n+2$ and $(R_n)$ by $n+1$ and subtract:\n$$0=(n+2)\\sum_{k=0}^{n+1}\\frac{a_k}{n-k+2}-(n+1)\\sum_{k=0}^{n}\\frac{a_k}{n-k+1}\n=(n+2)a_{n+1}+\\sum_{k=0}^{n}\\left(\\frac{n+2}{n-k+2}-\\frac{n+1}{n-k+1}\\right)a_k .$$\nThe bracket equals\n$$\\frac{(n+2)(n-k+1)-(n+1)(n-k+2)}{(n-k+1)(n-k+2)}=\\frac{-k}{(n-k+1)(n-k+2)} .$$\nIn particular the coefficient of $a_0$ is $0$ — this is the point of the combination, because $a_0$ is the only negative term. Therefore\n$$a_{n+1}=\\frac{1}{n+2}\\sum_{k=1}^{n}\\frac{k}{(n-k+1)(n-k+2)}\\,a_k .$$\nAll coefficients are positive and $a_1,\\dots,a_n>0$ by hypothesis, so $a_{n+1}>0$. By induction $a_n>0$ for all $n\\ge1$. ∎"
+      }
+    ],
+    "topics": [
+      "sequences-series",
+      "algebra"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-isl-2006-a3",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Algebra",
+      "year": 2006,
+      "number": 3,
+      "url": "https://www.imo-official.org/assets/documents/problems/2006/IMO2006SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "The sequence $c_0, c_1, \\dots, c_n, \\dots$ is defined by $c_0 = 1$, $c_1 = 0$ and $c_{n+2} = c_{n+1} + c_n$ for $n \\ge 0$. Consider the set $S$ of ordered pairs $(x, y)$ for which there is a finite set $J$ of positive integers such that $x = \\sum_{j \\in J} c_j$, $y = \\sum_{j \\in J} c_{j-1}$. Prove that there exist real numbers $\\alpha$, $\\beta$ and $m$, $M$ with the following property: An ordered pair of nonnegative integers $(x, y)$ satisfies the inequality\n$$m < \\alpha x + \\beta y < M$$\nif and only if $(x, y) \\in S$.\n\nN. B. A sum over the elements of the empty set is assumed to be $0$.",
+    "image": null,
+    "choices": null,
+    "answer": "Take $\\alpha=\\psi=\\frac{1-\\sqrt5}{2}$, $\\beta=1$, $m=-1$, $M=\\varphi=\\frac{1+\\sqrt5}{2}$: then $\\psi x+y=\\sum_{j\\in J}\\psi^{j-1}$, and every number in $(-1,\\varphi)$ of the form $\\psi x+y$ is a sum of distinct powers of $\\psi$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Use the conjugate golden ratio",
+        "body": "Let $\\varphi=\\frac{1+\\sqrt5}{2}$ and $\\psi=\\frac{1-\\sqrt5}{2}$, the roots of $t^2=t+1$. Then $-1<\\psi<0$, $\\psi$ is irrational, $1+\\psi=\\psi^2$, and $1-\\psi^2=-\\psi$. We show that $\\alpha=\\psi,\\ \\beta=1,\\ m=-1,\\ M=\\varphi$ work.\n\n**Key identity.** $\\psi c_n+c_{n-1}=\\psi^{n-1}$ for $n\\ge1$. Indeed $\\psi c_1+c_0=1$, $\\psi c_2+c_1=\\psi$, and if it holds for $n-1$ and $n$ then\n$$\\psi c_{n+1}+c_n=(\\psi c_n+c_{n-1})+(\\psi c_{n-1}+c_{n-2})=\\psi^{n-1}+\\psi^{n-2}=\\psi^{n-2}(1+\\psi)=\\psi^{n}.$$\nFor $J$ a finite set of positive integers let $a_J=\\sum_{j\\in J}c_j$, $b_J=\\sum_{j\\in J}c_{j-1}$. Summing the identity,\n$$\\psi a_J+b_J=\\sum_{j\\in J}\\psi^{\\,j-1}, \\tag{1}$$\na sum of **distinct** nonnegative powers of $\\psi$.\n\n**Pairs in $S$ satisfy the inequality.** Even powers of $\\psi$ are positive and odd powers negative. A finite sum of distinct powers is therefore strictly less than the sum of all even powers and strictly greater than the sum of all odd powers:\n$$-1=\\frac{\\psi}{1-\\psi^2}=\\sum_{i\\ge0}\\psi^{2i+1}<\\sum_{j\\in J}\\psi^{j-1}<\\sum_{i\\ge0}\\psi^{2i}=\\frac{1}{1-\\psi^2}=-\\frac1\\psi=\\varphi .$$\nSo $-1<\\psi x+y<\\varphi$ for every $(x,y)\\in S$. (Elements of $S$ are pairs of nonnegative integers, since all $c_n\\ge0$.)\n\n**The converse.** Let $x,y\\ge0$ be integers with $-1<\\psi x+y<\\varphi$. If $x=y=0$ take $J=\\emptyset$. Otherwise $\\psi x+y$ can be written as a sum $\\psi^{i_1}+\\dots+\\psi^{i_k}$ of nonnegative powers, repetitions allowed (e.g. $x$ copies of $\\psi^1$ and $y$ copies of $\\psi^0$). Among all such representations choose one of minimal length $k$, and among those the one whose sorted exponent list $j_1\\le j_2\\le\\dots\\le j_k$ is lexicographically smallest. We claim the $j_r$ are distinct.\n\n*(i) No two consecutive exponents occur.* Since $\\psi^{i}+\\psi^{i+1}=\\psi^{i}(1+\\psi)=\\psi^{i+2}$, a pair $i,i+1$ could be replaced by one term $i+2$, shortening the representation.\n\n*(ii) No exponent $j\\ge2$ repeats.* We have $2\\psi^2=2\\psi+2=1+\\psi^3$ (because $\\psi^3=\\psi^2+\\psi=2\\psi+1$). So $2\\psi^j=\\psi^{j-2}+\\psi^{j+1}$, and replacing two copies of $j$ by $j-2$ and $j+1$ keeps the length and gives a lexicographically smaller sorted list (the new list agrees with the old one on all entries below $j-2$ and then has one more entry equal to $j-2$). Contradiction.\n\n*(iii) $0$ does not repeat.* If $0$ appears at least twice, then by (i) exponent $1$ does not occur, and by (ii) the exponents $\\ge2$ are distinct. The negative terms are then distinct odd powers $\\psi^3,\\psi^5,\\dots$, so\n$$\\psi x+y\\ \\ge\\ 2+\\sum_{\\text{some odd } i\\ge3}\\psi^{i}\\ >\\ 2+\\sum_{i\\ge1}\\psi^{2i+1}=2+\\frac{\\psi^3}{1-\\psi^2}=2-\\psi^2=1-\\psi=\\varphi,$$\ncontradicting $\\psi x+y<\\varphi$.\n\n*(iv) $1$ does not repeat.* If $1$ appears at least twice, then $0$ and $2$ do not occur by (i), the exponents $\\ge 2$ are distinct by (ii), and the positive terms are distinct even powers $\\psi^4,\\psi^6,\\dots$. Hence\n$$\\psi x+y\\ \\le\\ 2\\psi+\\sum_{\\text{some even } i\\ge4}\\psi^{i}\\ <\\ 2\\psi+\\frac{\\psi^4}{1-\\psi^2}=2\\psi-\\psi^3=2\\psi-(2\\psi+1)=-1,$$\ncontradicting $\\psi x+y>-1$.\n\nSo the exponents $j_1<\\dots<j_k$ are distinct. Put $J=\\{j_1+1,\\dots,j_k+1\\}$, a finite set of positive integers. By (1), $\\psi x+y=\\psi a_J+b_J$, i.e. $\\psi(x-a_J)=b_J-y$. As $\\psi$ is irrational and the other quantities are integers, $x=a_J$ and $y=b_J$, so $(x,y)\\in S$.\n\nHence a pair of nonnegative integers satisfies $-1<\\psi x+y<\\varphi$ if and only if it lies in $S$. ∎"
+      }
+    ],
+    "topics": [
+      "sequences-series",
+      "number-theory"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-isl-2006-a4",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Algebra",
+      "year": 2006,
+      "number": 4,
+      "url": "https://www.imo-official.org/assets/documents/problems/2006/IMO2006SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Prove the inequality\n$$\\sum_{i<j} \\frac{a_i a_j}{a_i + a_j} \\le \\frac{n}{2(a_1 + a_2 + \\dots + a_n)} \\sum_{i<j} a_i a_j$$\nfor positive real numbers $a_1, a_2, \\dots, a_n$.",
+    "image": null,
+    "choices": null,
+    "answer": "With $S=\\sum a_i$, both sides equal $\\frac{n-1}{4}S$ minus a sum of $(a_i-a_j)^2$ terms, with denominators $a_i+a_j$ on the left and the larger $S$ on the right.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Write both sides as $\\frac{n-1}{4}S$ minus squares",
+        "body": "Let $S=a_1+\\dots+a_n$ and let $L$, $R$ be the left and right sides. All sums $\\sum_{i<j}$ run over the $\\binom n2$ pairs. Each $a_i$ occurs in $n-1$ pairs, so\n$$\\sum_{i<j}(a_i+a_j)=(n-1)S,\\qquad \\sum_{i<j}(a_i^2+a_j^2)=(n-1)\\sum_i a_i^2. \\tag{1}$$\n\n**Left side.** Since $4a_ia_j=(a_i+a_j)^2-(a_i-a_j)^2$,\n$$L=\\sum_{i<j}\\frac14\\left(a_i+a_j-\\frac{(a_i-a_j)^2}{a_i+a_j}\\right)=\\frac{n-1}{4}S-\\frac14\\sum_{i<j}\\frac{(a_i-a_j)^2}{a_i+a_j}. \\tag{2}$$\n\n**Right side.** Compute $U=\\sum_{i<j}a_ia_j$ in two ways:\n$$U=\\tfrac12\\Big(S^2-\\sum_i a_i^2\\Big),\\qquad U=\\tfrac12\\sum_{i<j}\\big(a_i^2+a_j^2-(a_i-a_j)^2\\big)=\\tfrac{n-1}{2}\\sum_i a_i^2-\\tfrac12\\sum_{i<j}(a_i-a_j)^2,$$\nusing (1) in the second. Multiplying the first by $n-1$ and adding the second eliminates $\\sum a_i^2$:\n$$nU=\\frac{n-1}{2}S^2-\\frac12\\sum_{i<j}(a_i-a_j)^2 .$$\nHence\n$$R=\\frac{n}{2S}U=\\frac{n-1}{4}S-\\frac14\\sum_{i<j}\\frac{(a_i-a_j)^2}{S}. \\tag{3}$$\n\n**Comparison.** For every pair, $0<a_i+a_j\\le S$, so $\\dfrac{(a_i-a_j)^2}{a_i+a_j}\\ge\\dfrac{(a_i-a_j)^2}{S}$. Comparing (2) and (3) gives $L\\le R$. ∎"
+      }
+    ],
+    "topics": [
+      "inequalities",
+      "algebra"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-isl-2006-a5",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Algebra",
+      "year": 2006,
+      "number": 5,
+      "url": "https://www.imo-official.org/assets/documents/problems/2006/IMO2006SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $a$, $b$, $c$ be the sides of a triangle. Prove that\n$$\\frac{\\sqrt{b+c-a}}{\\sqrt{b}+\\sqrt{c}-\\sqrt{a}} + \\frac{\\sqrt{c+a-b}}{\\sqrt{c}+\\sqrt{a}-\\sqrt{b}} + \\frac{\\sqrt{a+b-c}}{\\sqrt{a}+\\sqrt{b}-\\sqrt{c}} \\le 3.$$",
+    "image": null,
+    "choices": null,
+    "answer": "Substitute $x=\\sqrt b+\\sqrt c-\\sqrt a$ etc.; each term is $\\sqrt{1-\\frac{(x-y)(x-z)}{2x^2}}\\le1-\\frac{(x-y)(x-z)}{4x^2}$, and $\\sum\\frac{(x-y)(x-z)}{x^2}\\ge0$ is a Schur-type inequality.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Substitution and a Schur-type inequality",
+        "body": "**Positivity.** Since $a<b+c$, we get $\\sqrt a<\\sqrt{b+c}<\\sqrt b+\\sqrt c$; so all three denominators are positive. Put\n$$x=\\sqrt b+\\sqrt c-\\sqrt a,\\quad y=\\sqrt c+\\sqrt a-\\sqrt b,\\quad z=\\sqrt a+\\sqrt b-\\sqrt c,$$\nall positive, with $\\sqrt a=\\frac{y+z}2$, $\\sqrt b=\\frac{z+x}2$, $\\sqrt c=\\frac{x+y}2$.\n\n**Each term.**\n$$b+c-a=\\frac{(z+x)^2+(x+y)^2-(y+z)^2}{4}=\\frac{x^2+xy+xz-yz}{2}=x^2-\\frac{(x-y)(x-z)}{2}.$$\nSo the first term equals\n$$\\frac{\\sqrt{b+c-a}}{x}=\\sqrt{1+2u},\\qquad u=-\\frac{(x-y)(x-z)}{4x^2},$$\nwhere $1+2u=\\frac{b+c-a}{x^2}>0$. Since $(1+u)^2=1+2u+u^2\\ge 1+2u$, and $1+u>0$, we have $\\sqrt{1+2u}\\le 1+u$. Therefore\n$$\\frac{\\sqrt{b+c-a}}{\\sqrt b+\\sqrt c-\\sqrt a}\\le 1-\\frac{(x-y)(x-z)}{4x^2},$$\nand in the same way the second and third terms are at most $1-\\frac{(y-z)(y-x)}{4y^2}$ and $1-\\frac{(z-x)(z-y)}{4z^2}$.\n\n**It remains to show**\n$$\\frac{(x-y)(x-z)}{x^2}+\\frac{(y-z)(y-x)}{y^2}+\\frac{(z-x)(z-y)}{z^2}\\ge0. \\tag{1}$$\nThe left side is symmetric in $x,y,z$, so assume $x\\le y\\le z$. The third term is $\\ge0$. For the first two: $(x-y)(x-z)=(y-x)(z-x)$, and since $z-x\\ge z-y\\ge0$, $y-x\\ge0$ and $\\frac1{x^2}\\ge\\frac1{y^2}$,\n$$\\frac{(y-x)(z-x)}{x^2}\\ge\\frac{(y-x)(z-y)}{y^2}=-\\frac{(y-z)(y-x)}{y^2}.$$\nSo the first two terms have a nonnegative sum, and (1) follows. Adding the three bounds gives the inequality $\\le 3$. ∎"
+      }
+    ],
+    "topics": [
+      "inequalities",
+      "algebra"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-isl-2006-a6",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Algebra",
+      "year": 2006,
+      "number": 6,
+      "url": "https://www.imo-official.org/assets/documents/problems/2006/IMO2006SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Determine the smallest number $M$ such that the inequality\n$$\\left| ab(a^2 - b^2) + bc(b^2 - c^2) + ca(c^2 - a^2) \\right| \\le M \\left( a^2 + b^2 + c^2 \\right)^2$$\nholds for all real numbers $a$, $b$, $c$.",
+    "image": null,
+    "choices": null,
+    "answer": "9*sqrt(2)/32",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [],
+    "topics": [
+      "inequalities",
+      "polynomials"
+    ],
+    "difficulty": 3,
+    "duplicateOf": "imo-2006-03",
+    "reviewNote": null,
+    "answerDisplay": "$\\frac{9\\sqrt2}{32}$"
+  },
+  {
+    "id": "imo-isl-2006-c1",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Combinatorics",
+      "year": 2006,
+      "number": 1,
+      "url": "https://www.imo-official.org/assets/documents/problems/2006/IMO2006SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "We have $n \\ge 2$ lamps $L_1, \\dots, L_n$ in a row, each of them being either on or off. Every second we simultaneously modify the state of each lamp as follows:\n\n- if the lamp $L_i$ and its neighbours (only one neighbour for $i = 1$ or $i = n$, two neighbours for other $i$) are in the same state, then $L_i$ is switched off;\n- otherwise, $L_i$ is switched on.\n\nInitially all the lamps are off except the leftmost one which is on.\n\n(a) Prove that there are infinitely many integers $n$ for which all the lamps will eventually be off.\n\n(b) Prove that there are infinitely many integers $n$ for which the lamps will never be all off.",
+    "image": null,
+    "choices": null,
+    "answer": "(a) $n=2^k$ works: after $2^k-1$ seconds all lamps are on, so one second later all are off. (b) $n=2^k+1$ works: the evolution becomes periodic without ever reaching the all-off state.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Self-similarity for powers of two",
+        "body": "Write a state as a 0/1 row ($1$ = on); \"time $t$\" is the state after $t$ seconds. The rule is left–right symmetric: if a state is reflected, the next state is the reflection of the next state.\n\n**Fact 1.** For $t\\le n-1$, at time $t$ lamp $L_{t+1}$ is on and all lamps to its right are off. (Induction: if this holds at time $t$, then $L_{t+2}$ is off with an on neighbour, so it turns on; every lamp further right is off with off neighbours, so it stays off.)\n\n**Fact 2 (restriction).** Let $N<n$. For $t\\le N-2$ the lamps $L_N,L_{N+1}$ are off at time $t$ (Fact 1). Hence for those transitions the rule for $L_N$ in the long row (\"off iff $L_{N-1},L_N,L_{N+1}$ all equal\", i.e. off iff $L_{N-1}$ is off) is the same as the rule for the last lamp of a row of only $N$ lamps. Consequently, up to time $N-1$ the first $N$ lamps of the $n$-row behave exactly like an $N$-row, and lamps $L_{N+1},\\dots,L_n$ are off.\n\n**(a) Claim:** for $n=2^k$, at time $2^k-1$ all lamps are on. Then at the next second every lamp agrees with its neighbours and everything is switched off.\n\nInduction on $k$. For $k=1$: $[1,0]\\to[1,1]$. Suppose the claim holds for $N=2^k$ and let $n=2N$.\n\n- By Fact 2 and the hypothesis, at time $N-1$ the state is $N$ ones followed by $N$ zeros.\n- At time $N$: lamps $L_1,\\dots,L_{N-1}$ agree with their neighbours and go off; $L_N$ (neighbours on, off) and $L_{N+1}$ (off, left neighbour on) are on; the rest stay off. So the state is $0\\cdots0\\,11\\,0\\cdots0$ with the ones at positions $N,N+1$ — symmetric about the middle. By the symmetry of the rule, all later states are symmetric too: $L_{N+i}$ and $L_{N+1-i}$ have equal states.\n- Now look only at the right half $L_{N+1},\\dots,L_{2N}$ from time $N$ on. Its left neighbour $L_N$ always has the same state as $L_{N+1}$ (symmetry), so \"$L_{N+1}$ agrees with both neighbours\" is equivalent to \"$L_{N+1}$ agrees with $L_{N+2}$\", which is the rule for the leftmost lamp of an isolated row. Thus the right half evolves exactly like an isolated row of $N$ lamps that starts from $[1,0,\\dots,0]$ at time $N$.\n- By the induction hypothesis, $N-1$ seconds later (at time $2N-1$) the right half is all on, and by symmetry so is the left half.\n\nThis proves the claim, so every $n=2^k$ has the property in (a).\n\n**(b)** Let $n=2^k+1$ with $k\\ge1$ and $N=2^k$. By Fact 2 and part (a), at time $N-1$ the first $N$ lamps are on and $L_{N+1}$ is off. At time $N$ the state is $[0,\\dots,0,1,1]$: $L_1,\\dots,L_{N-1}$ go off, $L_N$ stays on (its right neighbour is off), $L_{N+1}$ turns on. This is the mirror image of the state at time $1$, which is $[1,1,0,\\dots,0]$. By the symmetry of the rule, the state at time $N+s$ is the mirror image of the state at time $1+s$ for all $s\\ge0$. Taking $s=N-1$, the state at time $2N-1$ is the mirror image of the state at time $N$, i.e. $[1,1,0,\\dots,0]$, the state at time $1$. So from time $1$ on the evolution is periodic with period $2N-2$.\n\nIn one period, times $1,\\dots,N-1$ are not all off by Fact 1, and times $N,\\dots,2N-2$ are mirror images of times $1,\\dots,N-1$, so they are not all off either. The initial state is not all off. Hence the lamps are never all off, for each of the infinitely many $n=2^k+1$. ∎"
+      }
+    ],
+    "topics": [
+      "patterns",
+      "logic"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-isl-2006-c2",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Combinatorics",
+      "year": 2006,
+      "number": 2,
+      "url": "https://www.imo-official.org/assets/documents/problems/2006/IMO2006SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "A diagonal of a regular 2006-gon is called *odd* if its endpoints divide the boundary into two parts, each composed of an odd number of sides. Sides are also regarded as odd diagonals.\n\nSuppose the 2006-gon has been dissected into triangles by 2003 nonintersecting diagonals. Find the maximum possible number of isosceles triangles with two odd sides.",
+    "image": null,
+    "choices": null,
+    "answer": "1003",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [],
+    "topics": [
+      "geometry",
+      "counting"
+    ],
+    "difficulty": 2,
+    "duplicateOf": "imo-2006-02",
+    "reviewNote": null
+  },
+  {
+    "id": "imo-isl-2006-c3",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Combinatorics",
+      "year": 2006,
+      "number": 3,
+      "url": "https://www.imo-official.org/assets/documents/problems/2006/IMO2006SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $S$ be a finite set of points in the plane such that no three of them are on a line. For each convex polygon $P$ whose vertices are in $S$, let $a(P)$ be the number of vertices of $P$, and let $b(P)$ be the number of points of $S$ which are outside $P$. Prove that for every real number $x$\n$$\\sum_P x^{a(P)} (1 - x)^{b(P)} = 1,$$\nwhere the sum is taken over all convex polygons with vertices in $S$.\n\nNB. A line segment, a point and the empty set are considered as convex polygons of $2$, $1$ and $0$ vertices, respectively.",
+    "image": null,
+    "choices": null,
+    "answer": "With $y=1-x$, multiply each term by $(x+y)^{c(P)}=1$ ($c(P)$ = points inside $P$); expanding counts pairs (polygon, chosen interior points), which correspond bijectively to subsets of $S$ via convex hulls, giving $(x+y)^n=1$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Count subsets through their convex hulls",
+        "body": "Let $n=|S|$ and, for a convex polygon $P$ with vertices in $S$, let $c(P)$ be the number of points of $S$ strictly inside $P$. Since no three points are collinear, no point of $S$ lies on the boundary of $P$ unless it is a vertex (for a segment, a third point on it would make three collinear points; a point or the empty set has no interior). So every point of $S$ is a vertex, inside, or outside: $a(P)+b(P)+c(P)=n$.\n\nTreat $x$ and $y$ as independent variables for now. Then\n$$\\sum_P x^{a(P)}y^{b(P)}(x+y)^{c(P)}=\\sum_P\\ \\sum_{T}x^{a(P)+|T|}\\,y^{\\,b(P)+c(P)-|T|},$$\nwhere $T$ runs over all subsets of the points of $S$ inside $P$. A term is indexed by a pair $(P,T)$ and equals $x^{|U|}y^{n-|U|}$, where $U=V(P)\\cup T$ and $V(P)$ is the vertex set of $P$.\n\n**The map $(P,T)\\mapsto U$ is a bijection onto the subsets of $S$.** Given any $U\\subseteq S$, its convex hull is a convex polygon (possibly a segment, point, or empty) whose vertices belong to $U$. The other points of $U$ lie inside the hull, and not on its boundary by the no-three-collinear assumption. So $U$ comes from $P=\\operatorname{conv}(U)$ and $T=U\\setminus V(P)$. Conversely, if $U=V(P)\\cup T$ with $T$ inside $P$, then $\\operatorname{conv}(U)=P$. So $P$, and hence $T$, is determined by $U$.\n\nTherefore\n$$\\sum_P x^{a(P)}y^{b(P)}(x+y)^{c(P)}=\\sum_{U\\subseteq S}x^{|U|}y^{n-|U|}=(x+y)^n$$\nas polynomials. Now substitute $y=1-x$: then $x+y=1$ and the identity becomes $\\sum_P x^{a(P)}(1-x)^{b(P)}=1$ for every real $x$. ∎"
+      },
+      {
+        "title": "Induction with inclusion–exclusion",
+        "body": "Write $y=1-x$ and induct on $n=|S|$; for $n=0$ the only polygon is the empty one and the sum is $1$. Let $n>0$, let $C$ be the set of vertices of the convex hull of $S$, and let $m=|C|\\ge1$.\n\nFor a nonempty $X\\subseteq C$, the convex polygons with vertices in $S\\setminus X$ are exactly the polygons of $S$ that avoid $X$. For such a $P$, all points of $X$ are outside $P$ (they are hull vertices of $S$ not used by $P$). So the number of points of $S\\setminus X$ outside $P$ is $b(P)-|X|$. By the induction hypothesis for $S\\setminus X$,\n$$\\sum_{P\\subseteq S\\setminus X}x^{a(P)}y^{b(P)-|X|}=1,\\qquad\\text{i.e.}\\qquad \\sum_{P\\subseteq S\\setminus X}x^{a(P)}y^{b(P)}=y^{|X|}.$$\nA polygon other than the hull $C$ itself misses at least one point of $C$ (a polygon with vertices in $S$ containing all of $C$ as vertices is $C$). By inclusion–exclusion over the set of missed hull vertices,\n$$\\sum_{P\\ne C}x^{a(P)}y^{b(P)}=\\sum_{k=1}^{m}(-1)^{k-1}\\sum_{|X|=k}y^{k}=\\sum_{k=1}^m(-1)^{k-1}\\binom mk y^k=1-(1-y)^m=1-x^m.$$\nThe hull contributes $x^m y^0=x^m$, so the total is $1$. ∎"
+      }
+    ],
+    "topics": [
+      "counting",
+      "geometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-isl-2006-c4",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Combinatorics",
+      "year": 2006,
+      "number": 4,
+      "url": "https://www.imo-official.org/assets/documents/problems/2006/IMO2006SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "A cake has the form of an $n \\times n$ square composed of $n^2$ unit squares. Strawberries lie on some of the unit squares so that each row or column contains exactly one strawberry; call this arrangement $\\mathcal{A}$.\n\nLet $\\mathcal{B}$ be another such arrangement. Suppose that every grid rectangle with one vertex at the top left corner of the cake contains no fewer strawberries of arrangement $\\mathcal{B}$ than of arrangement $\\mathcal{A}$. Prove that arrangement $\\mathcal{B}$ can be obtained from $\\mathcal{A}$ by performing a number of switches, defined as follows:\n\nA switch consists in selecting a grid rectangle with only two strawberries, situated at its top right corner and bottom left corner, and moving these two strawberries to the other two corners of that rectangle.",
+    "image": null,
+    "choices": null,
+    "answer": "Find a switch that keeps $a\\le b$ everywhere and strictly increases $\\sum_X a(X)$, where $a(X)$, $b(X)$ count the strawberries of $\\mathcal A$ and of $\\mathcal B$ in the rectangle from the corner to $X$. Use the first row where $\\mathcal A$ and $\\mathcal B$ differ.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "A monotone potential",
+        "body": "Number rows $1,\\dots,n$ from the top and columns $1,\\dots,n$ from the left; $(r,c)$ is the square in row $r$, column $c$. For a square $X=(r,c)$ let $a(X)$ (resp. $b(X)$) be the number of strawberries of $\\mathcal A$ (resp. of $\\mathcal B$; call these *plums*) in rows $1..r$, columns $1..c$. The hypothesis is $a(X)\\le b(X)$ for all $X$.\n\n**Effect of a switch.** A switch moves strawberries from $(r_1,c_2),(r_2,c_1)$ (with $r_1<r_2$, $c_1<c_2$) to $(r_1,c_1),(r_2,c_2)$. The result is again an arrangement with one strawberry per row and column. For $X=(r,c)$ the count changes by\n$$[r\\ge r_1][c\\ge c_1]+[r\\ge r_2][c\\ge c_2]-[r\\ge r_1][c\\ge c_2]-[r\\ge r_2][c\\ge c_1]=[r_1\\le r<r_2]\\,[c_1\\le c<c_2].$$\nSo $a$ increases by $1$ exactly on the block of rows $r_1..r_2-1$ and columns $c_1..c_2-1$, and is unchanged elsewhere.\n\n**Plan.** If $\\mathcal A\\ne\\mathcal B$, we find a switch producing $\\mathcal A'$ with $a\\le a'\\le b$ everywhere and $\\sum_X a'(X)>\\sum_X a(X)$. Repeating, the integer $\\sum_X a(X)$ strictly increases and is bounded by $\\sum_X b(X)$, so the process stops, and it can only stop when $\\mathcal A=\\mathcal B$. (The arrangement is determined by the function $a$, so $a=b$ forces equality; and $a\\le b$ with $\\sum a=\\sum b$ forces $a=b$.)\n\n**Finding the switch.** Let $r_1$ be the first row in which the strawberry and the plum are on different squares: plum at $(r_1,p)$, strawberry at $(r_1,s)$, $p\\ne s$. Rows above $r_1$ are identical in $\\mathcal A$ and $\\mathcal B$. If $s<p$, then at $X=(r_1,s)$ we would have $a(X)=b(X)+1$, contradicting the hypothesis. Hence $p<s$.\n\nColumn $p$ has its plum in row $r_1$. So it has no plum above row $r_1$, hence no strawberry there either; and its strawberry is not in row $r_1$. Therefore column $p$'s strawberry is below row $r_1$. Thus some strawberry lies in rows $>r_1$ and columns $p..s-1$. Let $V=(r_2,v)$ be the highest such strawberry ($r_2>r_1$, $p\\le v<s$).\n\nConsider the rectangle with rows $r_1..r_2$ and columns $v..s$. Its top-right corner $(r_1,s)$ and bottom-left corner $(r_2,v)$ carry strawberries. There is no other strawberry in it: rows $r_1$ and $r_2$ have only those; rows strictly between have none in columns $p..s-1$ by the choice of $V$; and column $s$'s strawberry is in row $r_1$. So the switch is legal. It increases $a$ by $1$ on the block of rows $r_1..r_2-1$ and columns $v..s-1$, so $\\sum a$ increases.\n\n**The switch keeps $a'\\le b$.** It suffices to show $a(X)<b(X)$ for $X=(r,c)$ with $r_1\\le r\\le r_2-1$, $p\\le c\\le s-1$ (this region contains the block). Split the rectangle of $X$ into three parts:\n- rows $1..r$, columns $1..p-1$: at most as many strawberries as plums (hypothesis at $(r,p-1)$; empty if $p=1$);\n- rows $1..r_1-1$, columns $p..c$: equal numbers (identical rows);\n- rows $r_1..r$, columns $p..c$: it contains the plum $(r_1,p)$ but no strawberry, since row $r_1$'s strawberry is in column $s>c$ and rows $r_1+1..r\\le r_2-1$ have no strawberry in columns $p..s-1$.\n\nAdding up, $a(X)\\le b(X)-1$. So after the switch $a'(X)\\le b(X)$ everywhere, as required. ∎"
+      }
+    ],
+    "topics": [
+      "counting",
+      "logic"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-isl-2006-c5",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Combinatorics",
+      "year": 2006,
+      "number": 5,
+      "url": "https://www.imo-official.org/assets/documents/problems/2006/IMO2006SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "An $(n, k)$-tournament is a contest with $n$ players held in $k$ rounds such that:\n\n(i) Each player plays in each round, and every two players meet at most once.\n\n(ii) If player $A$ meets player $B$ in round $i$, player $C$ meets player $D$ in round $i$, and player $A$ meets player $C$ in round $j$, then player $B$ meets player $D$ in round $j$.\n\nDetermine all pairs $(n, k)$ for which there exists an $(n, k)$-tournament.",
+    "image": null,
+    "choices": null,
+    "answer": "An $(n,k)$-tournament exists if and only if $2^{t}\\mid n$, where $t$ is the least integer with $2^{t}\\ge k+1$ (i.e. $2^{t-1}<k+1\\le 2^{t}$).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Binary vectors and doubling components",
+        "body": "Let $t=t_k$ be the least integer with $2^t\\ge k+1$.\n\n**Construction when $2^t\\mid n$.** First let $n=2^t$. Label the players by the $2^t$ binary vectors of length $t$, with addition mod 2 coordinatewise. For $i=1,\\dots,k$ let $\\omega(i)$ be the binary vector of $i$ (padded to length $t$; this is possible since $i\\le k\\le 2^t-1$). In round $i$, player $\\alpha$ plays $\\alpha+\\omega(i)$.\n- This is a valid pairing: $\\omega(i)\\ne0$, and $(\\alpha+\\omega(i))+\\omega(i)=\\alpha$, so each player has exactly one opponent per round. Opponents in different rounds differ because $\\omega(i)\\ne\\omega(j)$ for $i\\ne j$. So (i) holds.\n- (ii): if $B=A+\\omega(i)$, $D=C+\\omega(i)$, $C=A+\\omega(j)$, then $B+\\omega(j)=A+\\omega(i)+\\omega(j)=C+\\omega(i)=D$, so $B$ meets $D$ in round $j$.\n\nFor $n=2^ts$, split the players into $s$ groups of $2^t$ and run this tournament inside each group simultaneously. Matches never cross groups, so (i) and (ii) still hold (in (ii), $A,B,C,D$ all lie in one group).\n\n**Necessity.** Take any $(n,k)$-tournament. Let $G_i$ be the graph on the players whose edges are the matches of rounds $1,\\dots,i$, and call the connected components of $G_i$ *$i$-components*.\n\n*Claim.* Let $A$ meet $B$ in round $i+1$, and let $\\Gamma,\\Delta$ be the $i$-components of $A$ and $B$. Then round $i+1$ pairs every player of $\\Gamma$ with a player of $\\Delta$ and vice versa.\n\n*Proof.* Let $C\\in\\Gamma$ and let $D$ be $C$'s opponent in round $i+1$. Take a path $A=X_1,X_2,\\dots,X_m=C$ in $G_i$, and let $Y_j$ be the opponent of $X_j$ in round $i+1$ (so $Y_1=B$, $Y_m=D$). If $X_j$ and $X_{j+1}$ met in round $r\\le i$, condition (ii) applied to \"$X_j$ meets $Y_j$ and $X_{j+1}$ meets $Y_{j+1}$ in round $i+1$, $X_j$ meets $X_{j+1}$ in round $r$\" shows that $Y_j$ meets $Y_{j+1}$ in round $r$. So $B=Y_1,\\dots,Y_m=D$ is a path in $G_i$ and $D\\in\\Delta$. The same argument with the roles of $\\Gamma$ and $\\Delta$ swapped gives the converse. $\\square$\n\nSince round $i+1$ is a perfect matching, the claim gives a bijection between $\\Gamma$ and $\\Delta$, so $|\\Gamma|=|\\Delta|$. The edges of round $i+1$ leaving $\\Gamma\\cup\\Delta$ stay inside it, and $AB$ connects the two parts. So the $(i+1)$-component of $A$ is exactly $\\Gamma\\cup\\Delta$. Components either coincide or are disjoint, so this has size $|\\Gamma|$ or $2|\\Gamma|$.\n\nEvery $1$-component has size $2$, so by induction every $i$-component has size a power of $2$. A player meets $k$ distinct opponents, all in its $k$-component, so each $k$-component has size $2^u\\ge k+1$, i.e. $u\\ge t$. The $k$-components partition the players and each has size divisible by $2^t$, hence $2^t\\mid n$.\n\n**Answer:** exactly the pairs with $2^{t}\\mid n$, where $2^{t-1}<k+1\\le 2^{t}$. ∎"
+      }
+    ],
+    "topics": [
+      "graph-theory",
+      "counting"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-isl-2006-c6",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Combinatorics",
+      "year": 2006,
+      "number": 6,
+      "url": "https://www.imo-official.org/assets/documents/problems/2006/IMO2006SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "A *holey triangle* is an upward equilateral triangle of side length $n$ with $n$ upward unit triangular holes cut out. A *diamond* is a $60^\\circ$–$120^\\circ$ unit rhombus. Prove that a holey triangle $T$ can be tiled with diamonds if and only if the following condition holds: Every upward equilateral triangle of side length $k$ in $T$ contains at most $k$ holes, for $1 \\le k \\le n$.",
+    "image": null,
+    "choices": null,
+    "answer": "Necessity: each diamond covers one up- and one down-cell, and a size-$k$ triangle has $\\frac{k(k-1)}2$ down-cells all of whose diamonds stay inside. Sufficiency: induct on $n$ by tiling the bottom row and moving all but one of its holes up one row, choosing the new holes with a \"full triangle\" lemma.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Counting for necessity, induction on rows for sufficiency",
+        "body": "Cells are unit triangles; \"triangle\" means an upward equilateral triangle made of cells (size $0$ = a lattice point). A triangle of size $k$ has $\\frac{k(k+1)}2$ up-cells and $\\frac{k(k-1)}2$ down-cells. A diamond covers one up-cell and an adjacent down-cell.\n\n**Necessity.** Suppose $T$ is tiled and $T'$ is a triangle of size $k$ in $T$ with $h$ holes. Every down-cell of $T'$ has its three edge-neighbours (all up-cells) inside $T'$. So the diamond covering a down-cell of $T'$ also covers a non-hole up-cell of $T'$, and distinct down-cells give distinct up-cells. Hence $\\frac{k(k+1)}2-h\\ge\\frac{k(k-1)}2$, i.e. $h\\le k$.\n\n**Sufficiency.** Call a hole set *spread out* if every triangle of size $k$ contains at most $k$ holes. Call a triangle of size $k$ *full* if it contains exactly $k$ holes.\n\n*Lemma.* Let the hole set $H$ be spread out, and let $T_1,T_2$ be full triangles with a common point. Let $T_1+T_2$ be the smallest triangle containing both. Then $T_1+T_2$ is full.\n\n*Proof.* Let $u,v,w$ be the distances to the three sides of the big triangle, scaled so that $u+v+w=n$. Every triangle of the grid is $\\{u\\ge p,\\ v\\ge q,\\ w\\ge r\\}$ for nonnegative integers $p,q,r$, and its size is $n-p-q-r$. The intersection $T_1\\cap T_2$ takes the coordinatewise maxima of $(p,q,r)$ and $T_1+T_2$ the minima. It follows that $\\operatorname{size}(T_1\\cap T_2)+\\operatorname{size}(T_1+T_2)=\\operatorname{size}T_1+\\operatorname{size}T_2$; the intersection is a triangle of size $\\ge0$ because they share a point. Counting holes,\n$$\\operatorname{size}T_1+\\operatorname{size}T_2=h(T_1)+h(T_2)\\le h(T_1\\cap T_2)+h(T_1+T_2)\\le\\operatorname{size}(T_1\\cap T_2)+\\operatorname{size}(T_1+T_2).$$\nThe two ends are equal, so all inequalities are equalities, and $h(T_1+T_2)=\\operatorname{size}(T_1+T_2)$. $\\square$\n\nNow induct on $n$; $n=1$ is trivial (the single cell is a hole). Let $n\\ge2$, let $H$ be spread out, let $B$ be the bottom row and $T'$ the triangle of the top $n-1$ rows, and let $\\ell$ be the line between them. $T'$ has at most $n-1$ holes, so $B$ contains $m\\ge1$ holes $a_1,\\dots,a_m$ (left to right).\n\n*Tiling the bottom row.* Row $B$ is a path of cells $u_1,d_1,u_2,\\dots,d_{n-1},u_n$ (up- and down-cells alternating). We will choose up-cells $b_1,\\dots,b_{m-1}$ of the bottom row of $T'$ such that the down-cell $D_i$ directly below $b_i$ lies strictly between $a_i$ and $a_{i+1}$ in the path. Cover each $b_i$ together with $D_i$ by a diamond. Removing $a_1,D_1,a_2,\\dots,D_{m-1},a_m$ (in this path order) cuts the path into pieces. The piece before $a_1$ runs from $u_1$ to a down-cell; a piece between some $a_i$ and $D_i$ runs from a down-cell to an up-cell; a piece between $D_i$ and $a_{i+1}$ runs from an up-cell to a down-cell; the piece after $a_m$ runs from a down-cell to $u_n$. Each piece alternates between up- and down-cells and has even length (possibly $0$), so it is tiled by consecutive pairs, i.e. by diamonds. What remains is $T'$ with holes $(H\\cap T')\\cup\\{b_1,\\dots,b_{m-1}\\}$, which is $(n-m)+(m-1)=n-1$ holes. By induction it can be tiled provided this new hole set is spread out in $T'$. It suffices that $H_{m-1}=H\\setminus\\{a_1,\\dots,a_{m-1}\\}\\cup\\{b_1,\\dots,b_{m-1}\\}$ is spread out in $T$.\n\nWe choose the $b_i$ one at a time. So it suffices to prove the following. **If $H$ is spread out and $u,v$ are the two leftmost holes of $B$, there is a non-hole up-cell $w$ with base on $\\ell$, whose down-cell below lies between $u$ and $v$, such that $H'=H\\setminus\\{u\\}\\cup\\{w\\}$ is spread out.** (Then apply it to $a_1,a_2$, then to $a_2,a_3$ in the new set, and so on.)\n\n*Choice of $w$.* Let $\\Delta$ be a triangle of maximal size $r$ that is full, has its base on $\\ell$ (so it lies in $T'$), and contains the top vertex of $u$ (a size-$0$ triangle qualifies). Extending the slanted sides of $\\Delta$ one row down gives a triangle $\\Delta'$ of size $r+1$. It contains the $r$ holes of $\\Delta$ and also $u$, so it cannot contain $v$; hence the top vertex of $v$ lies to the right of the right end $R$ of the base of $\\Delta$. Let $w$ be the up-cell whose base is the unit segment of $\\ell$ starting at $R$ and going right. Then the down-cell below $w$ lies between $u$ (top vertex $\\le R$) and $v$ (top vertex $\\ge R+1$). Moreover $w$ is not a hole: otherwise the size-$(r+1)$ triangle on base $\\Delta\\cup w$ would contain at least $r+1$ holes, so it would be full, contradicting maximality.\n\n*$H'$ is spread out.* Only triangles $\\Gamma$ that contain $w$ but not $u$ gain a hole, so we must show that no such $\\Gamma$ is full for $H$. Suppose one is. Then $\\Gamma$ and $\\Delta$ are both full for $H\\setminus\\{u\\}$, which is spread out, and they share the point $R$. By the lemma, $\\Gamma+\\Delta$ is full for $H\\setminus\\{u\\}$, and it is larger than $\\Delta$ (it contains $w$).\n- If $\\Gamma$ lies above $\\ell$, then so does $\\Gamma+\\Delta$. It has its base on $\\ell$, contains the top vertex of $u$, and is full for $H$ (it does not contain $u$). This contradicts the maximality of $\\Delta$.\n- Otherwise $\\Gamma$ reaches the bottom row, so $\\Gamma+\\Delta$ reaches the bottom line of $T$. Since it contains the top vertex of $u$, it contains $u$. If its size is $s$, it then holds $s$ holes of $H\\setminus\\{u\\}$ plus $u$, i.e. $s+1$ holes of $H$, contradicting that $H$ is spread out.\n\nSo $H'$ is spread out, which completes the induction. ∎"
+      }
+    ],
+    "topics": [
+      "counting",
+      "geometry",
+      "spatial"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-isl-2006-c7",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Combinatorics",
+      "year": 2006,
+      "number": 7,
+      "url": "https://www.imo-official.org/assets/documents/problems/2006/IMO2006SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Consider a convex polyhedron without parallel edges and without an edge parallel to any face other than the two faces adjacent to it.\n\nCall a pair of points of the polyhedron *antipodal* if there exist two parallel planes passing through these points and such that the polyhedron is contained between these planes.\n\nLet $A$ be the number of antipodal pairs of vertices, and let $B$ be the number of antipodal pairs of midpoints of edges. Determine the difference $A - B$ in terms of the numbers of vertices, edges and faces.",
+    "image": null,
+    "choices": null,
+    "answer": "$A-B=V-1$, where $V$ is the number of vertices (equivalently $E-F+1$).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Normal fans on the sphere and Euler's formula",
+        "body": "Let the polyhedron $\\Gamma$ have $V$ vertices, $E$ edges, $F$ faces, so $V-E+F=2$. A *support plane* is a plane meeting $\\Gamma$ but not its interior. On the unit sphere $\\mathcal S$:\n- for a face $f$, let $f^+$ be its outward unit normal;\n- for an edge $e$, let $e^+$ be the set of outward normals of support planes containing $e$. It is a great-circle arc joining the normals of the two faces at $e$, lying in the great circle perpendicular to $e$;\n- for a vertex $p$, let $p^+$ be the set of outward normals of support planes through $p$. It is a convex spherical polygon (an intersection of hemispheres) bounded by the arcs of the edges at $p$.\n\nThese regions, arcs and points tile $\\mathcal S$ (every unit vector is the outward normal of exactly one support plane, which touches $\\Gamma$ in a vertex, an edge or a face). Let $X^-=-X^+$ be the antipodal images (inward normals); they form a second tiling.\n\nThe hypotheses translate as follows: (a) no two edges are parallel, so no two of the arcs $e_i^+$, $e_j^-$ lie on a common great circle; (b) an edge is parallel to no face other than its two neighbours, so the great circle of $e^\\pm$ contains no face normal $f^\\pm$ except the endpoints of $e^\\pm$; (c) there are no parallel faces (a pair of parallel faces would give an edge parallel to a non-adjacent face), so the $2F$ points $f^\\pm$ are distinct.\n\n**Lemma 1.** Vertices $p,q$ are antipodal iff the regions $p^-$ and $q^+$ have a common interior point.\nIf $u\\in p^-\\cap q^+$, the support plane through $p$ with inward normal $u$ and the one through $q$ with outward normal $u$ are parallel and enclose $\\Gamma$; conversely two such planes give a common vector $u$. By (a)–(c) two such regions cannot meet in just a point or along an arc, so a common point means overlapping interiors.\n\n**Lemma 2.** Midpoints of edges $e,e'$ are antipodal iff the arcs $e^-$ and $e'^+$ cross.\nIf $u\\in e^-\\cap e'^+$, the two support planes with normal $u$ contain $e$ and $e'$ and enclose $\\Gamma$. Conversely, a support plane through the midpoint of an edge must contain the whole edge, so antipodal midpoints give a common normal. By (a), (b) the arcs cannot meet at an endpoint or overlap, so they cross at a single interior point.\n\n**Counting.** Draw all $2E$ arcs $e^\\pm$ on $\\mathcal S$ simultaneously. This is a map on the sphere:\n- *Nodes:* the $2F$ points $f^\\pm$ (distinct by (c)), plus the crossing points. By Lemma 2 each antipodal pair of midpoints $\\{e,e'\\}$ gives two crossings ($e^-\\cap e'^+$ and $e'^-\\cap e^+$), so there are $2B$ crossings and $2F+2B$ nodes.\n- *Edges:* each crossing splits two arcs, adding $2$ pieces, so there are $2E+4B$ edges.\n- *Regions:* each region is a nonempty overlap $p^-\\cap q^+$, which is convex and hence connected. By Lemma 1 these correspond to ordered antipodal vertex pairs: each antipodal pair $\\{p,q\\}$ gives the two overlaps $p^-\\cap q^+$ and $q^-\\cap p^+$. So there are $2A$ regions.\n\nEuler's formula on the sphere gives $(2F+2B)-(2E+4B)+2A=2$, i.e.\n$$A-B=E-F+1=V-1.$$\n**Answer:** $A-B=V-1$, one less than the number of vertices. ∎"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "counting",
+      "spatial"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-isl-2006-g1",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Geometry",
+      "year": 2006,
+      "number": 1,
+      "url": "https://www.imo-official.org/assets/documents/problems/2006/IMO2006SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $ABC$ be a triangle with incentre $I$. A point $P$ in the interior of the triangle satisfies\n$$\\angle PBA + \\angle PCA = \\angle PBC + \\angle PCB.$$\nShow that $AP \\ge AI$ and that equality holds if and only if $P$ coincides with $I$.",
+    "image": null,
+    "choices": null,
+    "answer": "The condition gives $\\angle BPC=90^\\circ+\\frac{\\angle A}{2}=\\angle BIC$, so $P$ lies on the circle $BIC$, whose centre $M$ is on line $AI$; then $AP+PM\\ge AM=AI+IM$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": "imo-2006-01",
+    "reviewNote": null
+  },
+  {
+    "id": "imo-isl-2006-g2",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Geometry",
+      "year": 2006,
+      "number": 2,
+      "url": "https://www.imo-official.org/assets/documents/problems/2006/IMO2006SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $ABCD$ be a trapezoid with parallel sides $AB > CD$. Points $K$ and $L$ lie on the line segments $AB$ and $CD$, respectively, so that $AK/KB = DL/LC$. Suppose that there are points $P$ and $Q$ on the line segment $KL$ satisfying\n$$\\angle APB = \\angle BCD \\quad \\text{and} \\quad \\angle CQD = \\angle ABC.$$\nProve that the points $P$, $Q$, $B$ and $C$ are concyclic.",
+    "image": null,
+    "choices": null,
+    "answer": "Lines $AD$, $BC$, $KL$ meet at $S$. Line $BC$ is tangent to circles $ABP$ and $CDQ$, and the homothety at $S$ taking $B$ to $C$ maps one circle to the other. This gives $SP\\cdot SQ=SB\\cdot SC$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Tangent circles and a homothety",
+        "body": "Since $AB\\parallel CD$ and $AB>CD$, lines $AD$ and $BC$ meet at a point $S$ beyond $CD$. The homothety $h$ with centre $S$ and ratio $\\frac{SC}{SB}=\\frac{CD}{AB}$ maps $A\\mapsto D$, $B\\mapsto C$, and maps the point dividing $AB$ in ratio $AK:KB$ to the point dividing $DC$ in the same ratio, i.e. $K\\mapsto L$. Hence $S$, $L$, $K$ are collinear, and all of $P,Q$ lie on a ray from $S$.\n\n**$BC$ is tangent to circle $(ABP)$ at $B$.** Line $SK$ passes through $K$, an interior point of chord $AB$. So it meets circle $(ABP)$ at $P$ (on the same side of $AB$ as $C$) and at a second point $X$ on the other side of $AB$. In the cyclic quadrilateral $APBX$,\n$$\\angle AXB=180^\\circ-\\angle APB=180^\\circ-\\angle BCD=\\angle ABC,$$\nusing $AB\\parallel CD$. The angle between chord $BA$ and line $BC$ equals the inscribed angle on $BA$ from the opposite side ($X$ is on the other side of $AB$ from $C$). By the converse of the tangent–chord theorem, $BC$ is tangent at $B$.\n\n**$BC$ is tangent to circle $(CDQ)$ at $C$.** Similarly, line $SK$ meets $(CDQ)$ at $Q$ (between lines $AB$ and $CD$) and at a second point $Y$ on the same side of $CD$ as $S$, with $\\angle CYD=180^\\circ-\\angle CQD=180^\\circ-\\angle ABC=\\angle BCD$. This is the angle between chord $CD$ and ray $CB$, which lies on the side of $CD$ opposite to $Y$. So $BC$ is tangent at $C$.\n\n**Homothety.** The image under $h$ of circle $(ABP)$ passes through $D=h(A)$ and $C=h(B)$ and is tangent to $h(BC)=BC$ at $C$. There is only one such circle, so $h$ maps $(ABP)$ onto $(CDQ)$. Line $SK$ is fixed by $h$, so $h$ maps $\\{P,X\\}$ to $\\{Q,Y\\}$. Along the ray from $S$ we have $SP<SK<SX$ and $SY<SL<SQ$, and a homothety with positive ratio preserves order along the ray. Hence $h(P)=Y$ and $h(X)=Q$, so\n$$SQ=\\frac{SC}{SB}\\,SX .$$\n**Power of $S$.** Tangency gives $SB^2=SP\\cdot SX$. Therefore\n$$SP\\cdot SQ=SP\\cdot SX\\cdot\\frac{SC}{SB}=SB^2\\cdot\\frac{SC}{SB}=SB\\cdot SC .$$\n$P,Q$ lie on one ray from $S$ and $B,C$ on another (different) ray, so by the converse of the power of a point $P,Q,B,C$ are concyclic. (If $P=Q$ there is nothing to prove.) ∎"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-isl-2006-g3",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Geometry",
+      "year": 2006,
+      "number": 3,
+      "url": "https://www.imo-official.org/assets/documents/problems/2006/IMO2006SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $ABCDE$ be a convex pentagon such that\n$$\\angle BAC = \\angle CAD = \\angle DAE \\quad \\text{and} \\quad \\angle ABC = \\angle ACD = \\angle ADE.$$\nThe diagonals $BD$ and $CE$ meet at $P$. Prove that the line $AP$ bisects the side $CD$.",
+    "image": null,
+    "choices": null,
+    "answer": "Triangles $ABC\\sim ACD\\sim ADE$ and $ABD\\sim ACE$. Comparing the bisectors from $A$ gives $AQ/QC=AR/RD$ for $Q=AC\\cap BD$, $R=AD\\cap CE$; then Ceva in $ACD$ finishes.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Similar triangles and Ceva",
+        "body": "Let $Q=AC\\cap BD$, $R=AD\\cap CE$ (on the segments, by convexity), and let ray $AP$ meet $CD$ at $M$.\n\n**Similar triangles.** Triangles $ABC$, $ACD$, $ADE$ have equal angles at $A$ and equal angles at $B$, $C$, $D$ respectively, so they are similar and\n$$\\frac{AB}{AC}=\\frac{AC}{AD}=\\frac{AD}{AE}.$$\nNext, $\\angle BAD=\\angle BAC+\\angle CAD=\\angle CAD+\\angle DAE=\\angle CAE$, and $\\frac{AB}{AD}=\\frac{AC}{AE}$ (from $\\frac{AB}{AC}=\\frac{AD}{AE}$). So triangles $ABD$ and $ACE$ are similar (SAS), with $A\\to A$, $B\\to C$, $D\\to E$, in ratio $\\frac{AC}{AB}$.\n\n**Bisectors.** In triangle $ABD$, $AC$ bisects $\\angle BAD$ (as $\\angle BAC=\\angle CAD$), so $AQ$ is the bisector segment from $A$. Likewise $AR$ is the bisector segment from $A$ in triangle $ACE$. Corresponding segments of similar triangles are in the similarity ratio, so\n$$\\frac{AQ}{AR}=\\frac{AB}{AC}=\\frac{AC}{AD},\\qquad\\text{i.e.}\\qquad \\frac{AQ}{AC}=\\frac{AR}{AD}.$$\nHence $QR\\parallel CD$ and\n$$\\frac{AQ}{QC}=\\frac{AR}{RD}. \\tag{1}$$\n**Ceva.** In triangle $ACD$ the cevians $AM$, $DQ$ (line $DB$) and $CR$ (line $CE$) all pass through $P$. By Ceva's theorem,\n$$\\frac{AQ}{QC}\\cdot\\frac{CM}{MD}\\cdot\\frac{DR}{RA}=1 .$$\nBy (1) the first and third factors cancel, so $CM=MD$: line $AP$ bisects $CD$. ∎"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-isl-2006-g4",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Geometry",
+      "year": 2006,
+      "number": 4,
+      "url": "https://www.imo-official.org/assets/documents/problems/2006/IMO2006SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "A point $D$ is chosen on the side $AC$ of a triangle $ABC$ with $\\angle C < \\angle A < 90^\\circ$ in such a way that $BD = BA$. The incircle of $ABC$ is tangent to $AB$ and $AC$ at points $K$ and $L$, respectively. Let $J$ be the incentre of triangle $BCD$. Prove that the line $KL$ intersects the line segment $AJ$ at its midpoint.",
+    "image": null,
+    "choices": null,
+    "answer": "Reflect $D$ in the touch point $T$ of the incircle of $BCD$ on $DC$ to get $M$. Then $JM\\parallel KL$, and $AM=AB+AC-BC=2AL$, so $KL$ is a midline of triangle $AMJ$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Build a parallel through $J$",
+        "body": "Let $\\angle BAC=2\\alpha$. Since $BA=BD$, $\\angle BDA=2\\alpha$, so $\\angle BDC=180^\\circ-2\\alpha$. Since $AK=AL$, $\\angle ALK=90^\\circ-\\alpha$.\n\nLet the incircle of $BCD$ touch $DC$ at $T$, so $JT\\perp DC$ and\n$$DT=\\frac{DB+DC-BC}{2}.$$\nLet $M$ be the reflection of $D$ in $T$; it lies on line $AC$ beyond $D$ (on the side of $C$), with $DM=2DT=DB+DC-BC$. Since $JT$ is the perpendicular bisector of $DM$, triangle $JDM$ is isosceles. As $DJ$ bisects $\\angle BDC$,\n$$\\angle JMD=\\angle JDM=\\tfrac12\\angle BDC=90^\\circ-\\alpha .$$\n**$JM\\parallel KL$.** Both $L$ and $M$ lie on ray $AC$, and $K$, $J$ lie on the same side of $AC$ (the side of $B$). The rays $LK$ and $MJ$ make the same angle $90^\\circ-\\alpha$ with the direction pointing back towards $A$. Hence $JM\\parallel KL$.\n\n**$L$ is the midpoint of $AM$.** Using $BD=AB$ and $AD+DC=AC$:\n$$AM=AD+DM=AD+AB+DC-BC=AB+AC-BC=2AL,$$\nsince the tangent length from $A$ to the incircle of $ABC$ is $AL=\\frac{AB+AC-BC}2$.\n\nSo in triangle $AMJ$, the line $KL$ passes through the midpoint $L$ of $AM$ and is parallel to $MJ$. By the midline theorem it meets $AJ$ at its midpoint. ∎"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-isl-2006-g5",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Geometry",
+      "year": 2006,
+      "number": 5,
+      "url": "https://www.imo-official.org/assets/documents/problems/2006/IMO2006SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "In triangle $ABC$, let $J$ be the centre of the excircle tangent to side $BC$ at $A_1$ and to the extensions of sides $AC$ and $AB$ at $B_1$ and $C_1$, respectively. Suppose that the lines $A_1B_1$ and $AB$ are perpendicular and intersect at $D$. Let $E$ be the foot of the perpendicular from $C_1$ to line $DJ$. Determine the angles $\\angle BEA_1$ and $\\angle AEB_1$.",
+    "image": null,
+    "choices": null,
+    "answer": "$\\angle BEA_1=\\angle AEB_1=90^\\circ$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Three circles with a common power from $J$",
+        "body": "Let $\\omega_1,\\omega_2,\\omega_3$ be the circles with diameters $C_1D$, $A_1B$, $AB_1$.\n\n- $D$ lies on $\\omega_2$ and $\\omega_3$: $D$ is on lines $A_1B_1$ and $AB$, which are perpendicular, so $\\angle A_1DB=\\angle ADB_1=90^\\circ$.\n- $E$ lies on $\\omega_1$, because $\\angle C_1ED=90^\\circ$.\n- $JC_1$ is tangent to $\\omega_1$: the radius $JC_1$ of the excircle is perpendicular to $AB$, which contains the diameter $C_1D$, at its endpoint $C_1$. Likewise $JA_1\\perp BC$ (the line of diameter $A_1B$) and $JB_1\\perp AC$ (the line of diameter $AB_1$), so $JA_1$ is tangent to $\\omega_2$ and $JB_1$ to $\\omega_3$.\n\nLet $r=JA_1=JB_1=JC_1$ be the exradius. The line $JD$ meets $\\omega_1$ at $D$ and $E$, so the power of $J$ gives\n$$JD\\cdot JE=JC_1^2=r^2 .$$\nThe line $JD$ meets $\\omega_2$ at $D$ and at a second point $E_2$ with $JD\\cdot JE_2=JA_1^2=r^2$. The power is positive, so $E_2$ lies on ray $JD$, like $E$. Hence $JE_2=JE$ and $E_2=E$: $E$ lies on $\\omega_2$. In the same way $JD\\cdot JE=JB_1^2$ shows that $E$ lies on $\\omega_3$.\n\nSince $A_1B$ and $AB_1$ are diameters of $\\omega_2$ and $\\omega_3$, we get\n$$\\angle BEA_1=90^\\circ,\\qquad \\angle AEB_1=90^\\circ .$$\n**Answer:** both angles are $90^\\circ$."
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-isl-2006-g6",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Geometry",
+      "year": 2006,
+      "number": 6,
+      "url": "https://www.imo-official.org/assets/documents/problems/2006/IMO2006SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Circles $\\omega_1$ and $\\omega_2$ with centres $O_1$ and $O_2$ are externally tangent at point $D$ and internally tangent to a circle $\\omega$ at points $E$ and $F$, respectively. Line $t$ is the common tangent of $\\omega_1$ and $\\omega_2$ at $D$. Let $AB$ be the diameter of $\\omega$ perpendicular to $t$, so that $A$, $E$ and $O_1$ are on the same side of $t$. Prove that lines $AO_1$, $BO_2$, $EF$ and $t$ are concurrent.",
+    "image": null,
+    "choices": null,
+    "answer": "$E,D,B$ and $F,D,A$ are collinear, so $D$ is the orthocentre of $ABC$ with $C=AE\\cap BF\\in t$. Triangle $O_1O_2M$ ($M$ the midpoint of $CD$) has sides parallel to those of $ABC$, so a homothety gives the concurrence of $AO_1$, $BO_2$, $t$. Pappus then puts $EF$ through the same point.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Orthocentre, a homothety and Pappus",
+        "body": "Let $O$ be the centre and $R$ the radius of $\\omega$, and $r_1,r_2$ the radii of $\\omega_1,\\omega_2$. The centres $O_1,D,O_2$ are collinear on a line perpendicular to $t$, so $O_1O_2\\parallel AB$.\n\n**Step 1: $E,D,B$ are collinear, and so are $F,D,A$.** The homothety with centre $E$ and ratio $R/r_1$ maps $\\omega_1$ to $\\omega$ and $O_1$ to $O$. It maps $D$ to the point $D'$ of $\\omega$ with $\\overrightarrow{OD'}$ in the direction of $\\overrightarrow{O_1D}$. This vector is perpendicular to $t$ and points from the side of $A$ towards $t$, i.e. in the direction $\\overrightarrow{AB}$. So $D'=B$, and $E,D,B$ are collinear. Symmetrically $F,D,A$ are collinear. Also $E,O_1,O$ and $F,O_2,O$ are collinear (internal tangency).\n\n**Step 2: an orthocentre.** As $AB$ is a diameter, $\\angle AEB=\\angle AFB=90^\\circ$. Let $C=AE\\cap BF$. In triangle $ABC$, $BE\\perp AC$ and $AF\\perp BC$, so $BE$ and $AF$ are altitudes, and their intersection $D$ is the orthocentre. Thus $CD\\perp AB$, so $C$ lies on $t$.\n\n**Step 3: $AO_1$, $BO_2$, $t$ concur.** Since $\\angle CED=\\angle CFD=90^\\circ$, the points $C,E,D,F$ lie on the circle with diameter $CD$; let $M$ be its centre, the midpoint of $CD$ (so $M\\in t$). This circle and $\\omega_1$ both pass through $D$ and $E$, so the line of centres $MO_1$ is perpendicular to $DE$. Also $AC\\perp DE$ (as $\\angle CED=90^\\circ$). Hence $MO_1\\parallel AC$. Likewise $MO_2\\parallel BC$, and $O_1O_2\\parallel AB$.\n\nSo triangles $ABC$ and $O_1O_2M$ have corresponding sides parallel. They are not translates of each other. The diameters of $\\omega_1$ and $\\omega_2$ along line $O_1O_2$ form a segment of length $2r_1+2r_2$ inside the disc of $\\omega$, so $2(r_1+r_2)\\le 2R$ and $O_1O_2=r_1+r_2\\le R<2R=AB$. Hence there is a homothety mapping $ABC$ to $O_1O_2M$. Its centre $Q$ lies on $AO_1$, $BO_2$ and $CM=t$.\n\n**Step 4: $EF$ passes through $Q$.** Apply Pappus' theorem to the collinear triples $A,O,B$ (on line $AB$) and $O_2,D,O_1$ (on line $O_1O_2$). It says that the three points\n$$AD\\cap OO_2,\\qquad AO_1\\cap BO_2,\\qquad OO_1\\cap BD$$\nare collinear. By Step 1 these are $F$, $Q$ and $E$ respectively. So $Q\\in EF$, and the four lines $AO_1$, $BO_2$, $EF$, $t$ all pass through $Q$. ∎\n\n*(If $D$ were on $AB$, everything would lie on line $AB$ with $E=A$, $F=B$, and the statement is trivial.)*"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-isl-2006-g7",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Geometry",
+      "year": 2006,
+      "number": 7,
+      "url": "https://www.imo-official.org/assets/documents/problems/2006/IMO2006SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "In a triangle $ABC$, let $M_a$, $M_b$, $M_c$ be respectively the midpoints of the sides $BC$, $CA$, $AB$ and $T_a$, $T_b$, $T_c$ be the midpoints of the arcs $BC$, $CA$, $AB$ of the circumcircle of $ABC$, not containing the opposite vertices. For $i \\in \\{a, b, c\\}$, let $\\omega_i$ be the circle with $M_iT_i$ as diameter. Let $p_i$ be the common external tangent to $\\omega_j$, $\\omega_k$ ($\\{i, j, k\\} = \\{a, b, c\\}$) such that $\\omega_i$ lies on the opposite side of $p_i$ than $\\omega_j$, $\\omega_k$ do. Prove that the lines $p_a$, $p_b$, $p_c$ form a triangle similar to $ABC$ and find the ratio of similitude.",
+    "image": null,
+    "choices": null,
+    "answer": "$p_a$ is the line parallel to $BC$ midway between the incentre $I$ and $M_bM_c$, i.e. the image of $M_bM_c$ under the homothety with centre $I$ and ratio $\\tfrac12$. So the triangle is similar to $ABC$ with ratio $\\tfrac14$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Locate $p_a$ as a midline",
+        "body": "Let $\\Omega$ be the circumcircle and $I$ the incentre.\n\n**Two facts.** (1) $\\omega_b$ is tangent to $\\Omega$ at $T_b$ (its diameter $M_bT_b$ lies on the radius $OT_b$, because $OT_b\\perp AC$ through $M_b$), and $\\omega_b$ is tangent to $AC$ at $M_b$ (its diameter is perpendicular to $AC$ at $M_b$). Similarly for $\\omega_a,\\omega_c$. (2) $T_aB=T_aI$: indeed $\\angle T_aBI=\\angle T_aBC+\\angle CBI=\\frac A2+\\frac B2$ and $\\angle T_aIB=\\angle IAB+\\angle IBA=\\frac A2+\\frac B2$. Likewise $T_cB=T_cI$, so line $T_aT_c$ is the perpendicular bisector of $BI$; and $T_aT_b$ is the perpendicular bisector of $CI$.\n\n**Tangent points.** Line $T_aT_b$ meets $\\omega_b$ again at $U\\ne T_b$ (it is not tangent to $\\omega_b$, since it is not tangent to $\\Omega$). The homothety with centre $T_b$ taking $\\omega_b$ to $\\Omega$ maps $U$ to $T_a$. So it maps the tangent to $\\omega_b$ at $U$ to the tangent to $\\Omega$ at $T_a$, which is parallel to $BC$. Hence the tangent to $\\omega_b$ at $U$ is parallel to $BC$; let it meet $AC$ at $X$.\n\nLet $P=T_aT_b\\cap AC$. Since $M_bT_b$ is a diameter, $\\angle M_bUP=90^\\circ$. The tangents from $X$ to $\\omega_b$ give $XU=XM_b$ (recall $AC$ is tangent at $M_b$). In the right triangle $PUM_b$, the midpoint of the hypotenuse $PM_b$ is also equidistant from $U$ and $M_b$. Only one point of line $AC$ has this property, so $X$ is the midpoint of $PM_b$.\n\nSimilarly, line $T_aT_c$ meets $\\omega_c$ again at $V$, the tangent at $V$ is parallel to $BC$ and meets $AB$ at $Y$, the midpoint of $QM_c$, where $Q=T_aT_c\\cap AB$.\n\n**$P,I,Q$ lie on the parallel to $BC$ through $I$.** $Q$ lies on $AB$ and on the perpendicular bisector of $BI$, so $QB=QI$ and $Q$ is on ray $BA$. Then $\\angle QIB=\\angle QBI=\\angle IBC$, and $Q$, $C$ are on opposite sides of $BI$, so $QI\\parallel BC$. In the same way $PI\\parallel BC$.\n\n**The tangent line.** $PQ\\parallel BC\\parallel M_bM_c$, so $PM_bM_cQ$ is a trapezoid, and $XY$ joins the midpoints of its legs. Hence $XY\\parallel BC$, midway between line $PQ$ (through $I$) and line $M_bM_c$. The tangents at $U$ and $V$ are the parallels to $BC$ through $X$ and $Y$. So $U,X,Y,V$ lie on one line $\\ell_a$, which is a common tangent of $\\omega_b$ and $\\omega_c$.\n\n**$\\ell_a$ is $p_a$.** Let $h_a$ be the altitude from $A$ and $r$ the inradius. Since $rs=\\tfrac12 ah_a$ with $s>a$, $r<\\tfrac{h_a}2$. So $\\ell_a$, at distance $\\tfrac12(r+\\tfrac{h_a}2)$ from $BC$, lies strictly between $BC$ and $M_bM_c$ (on $A$'s side of $BC$). $\\omega_a$ touches $BC$ at $M_a$ and lies on the side of $BC$ away from $A$, so it is on one side of $\\ell_a$. $\\omega_b$ passes through $M_b$, which is on the far side of $\\ell_a$, and touches $\\ell_a$, so $\\omega_b$ lies on that far side; likewise $\\omega_c$. Thus $\\ell_a$ is the common external tangent of $\\omega_b,\\omega_c$ separating them from $\\omega_a$, i.e. $\\ell_a=p_a$.\n\n**Conclusion.** $p_a$ is the image of line $M_bM_c$ under the homothety $\\eta$ with centre $I$ and ratio $\\tfrac12$. Similarly $p_b=\\eta(M_cM_a)$ and $p_c=\\eta(M_aM_b)$. So $p_a,p_b,p_c$ form the triangle $\\eta(M_aM_bM_c)$, similar to the medial triangle in ratio $\\tfrac12$. The medial triangle is similar to $ABC$ in ratio $\\tfrac12$, so the triangle formed by $p_a,p_b,p_c$ is similar to $ABC$ with ratio $\\tfrac14$. ∎"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-isl-2006-g8",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Geometry",
+      "year": 2006,
+      "number": 8,
+      "url": "https://www.imo-official.org/assets/documents/problems/2006/IMO2006SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $ABCD$ be a convex quadrilateral. A circle passing through the points $A$ and $D$ and a circle passing through the points $B$ and $C$ are externally tangent at a point $P$ inside the quadrilateral. Suppose that\n$$\\angle PAB + \\angle PDC \\le 90^\\circ \\quad \\text{and} \\quad \\angle PBA + \\angle PCD \\le 90^\\circ.$$\nProve that $AB + CD \\ge BC + AD$.",
+    "image": null,
+    "choices": null,
+    "answer": "Move the tangency point to the second intersection $Q$ of circles $ABP$ and $CDP$. There $\\angle BQC,\\angle AQD\\le90^\\circ$, so the inward half-discs on $BC$ and $AD$ lie in two tangent circles and cannot overlap. This gives $MN\\ge\\frac{BC+AD}2$, while $MN\\le\\frac{AB+CD}2$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Second intersection point and two half-discs",
+        "body": "**Observation.** For a point $T$ inside $ABCD$: circles $(BCT)$ and $(DAT)$ are tangent at $T$ (lying on opposite sides of the common tangent) if and only if\n$$\\angle ADT+\\angle BCT=\\angle ATB. \\tag{1}$$\nIf they are tangent, the common tangent at $T$ meets segment $AB$ at some $Z$. By the tangent–chord theorem $\\angle ADT=\\angle ATZ$ and $\\angle BCT=\\angle BTZ$, and these add up to $\\angle ATB$. Conversely, if (1) holds, draw the ray $TZ$ ($Z\\in AB$) with $\\angle ATZ=\\angle ADT$. Then $\\angle BTZ=\\angle BCT$, and by the converse of the tangent–chord theorem $TZ$ is tangent to both circles at $T$.\n\n**The point $Q$.** Let $Q$ be the second intersection of circles $(ABP)$ and $(CDP)$ (the case where they are tangent at $P$ is treated at the end). The given circles $(ADP)$ and $(BCP)$ are externally tangent, so $A$ lies outside $(BCP)$. Line $BP$ separates $A$ from $C$ (it passes through a vertex and an interior point of the convex quadrilateral), so $\\angle BAP+\\angle BCP<180^\\circ$, which says that $C$ lies outside circle $(ABP)$. Similarly $D$ lies outside $(ABP)$, and $A,B$ lie outside $(CDP)$. Hence $P$ and $Q$ lie on the same arc $CD$ of $(CDP)$ and on the same arc $AB$ of $(ABP)$. Consequently $Q$ lies inside angle $BPC$ or inside angle $APD$; by symmetry assume the former.\n\n**Angles at $Q$.** Using the inscribed angles in $(ABP)$ and $(CDP)$,\n$$\\angle AQD=\\angle AQP+\\angle PQD=\\angle ABP+\\angle DCP\\le90^\\circ. \\tag{2}$$\nIn the cyclic quadrilaterals $APQB$ and $DPQC$ the angles at $A$ and $D$ are acute (each is at most $90^\\circ$ minus a positive angle), so the opposite angles $\\angle PQB$, $\\angle PQC$ are obtuse. Hence $Q$ lies inside triangle $BPC$, in particular inside $ABCD$, and\n$$\\angle BQC=360^\\circ-\\angle PQB-\\angle PQC=\\angle PAB+\\angle PDC\\le 90^\\circ. \\tag{3}$$\n**Circles $(BCQ)$ and $(DAQ)$ are tangent at $Q$.** Since $\\angle PCQ=\\angle PDQ$ (same chord $PQ$ of $(CDP)$),\n$$\\angle ADQ+\\angle BCQ=\\angle ADP+\\angle PDQ+\\angle BCP-\\angle PCQ=\\angle ADP+\\angle BCP=\\angle APB=\\angle AQB,$$\nusing (1) for $T=P$ and the circle $(ABPQ)$. By (1) for $T=Q$, the circles $(BCQ)$ and $(DAQ)$ are tangent at $Q$ and lie on opposite sides of their common tangent. So their interiors are disjoint.\n\n**Half-discs.** Let $M,N$ be the midpoints of $BC$ and $DA$. Consider the half-discs on diameters $BC$ and $DA$ drawn towards the inside of $ABCD$. By (3), $Q$ sees $BC$ at an angle $\\le90^\\circ$. So the arc of $(BCQ)$ on the inner side of $BC$ is at least a semicircle, and the inner half-disc on $BC$ lies inside circle $(BCQ)$. By (2) the same holds for $DA$ and $(DAQ)$. Hence the two half-discs have disjoint interiors.\n\nNow suppose $MN<\\tfrac12BC+\\tfrac12DA$. The segment $MN$ runs into the interior of the quadrilateral from both ends. Then the point of $MN$ at distance $s$ from $M$, for any $s$ with $MN-\\tfrac12 DA<s<\\tfrac12BC$, lies in the interior of both half-discs, a contradiction. Therefore\n$$MN\\ge\\tfrac12(BC+DA).$$\nOn the other hand $\\overrightarrow{MN}=\\tfrac12\\big(\\overrightarrow{BA}+\\overrightarrow{CD}\\big)$, so $MN\\le\\tfrac12(AB+CD)$. Combining, $AB+CD\\ge BC+DA$.\n\n*If $(ABP)$ and $(CDP)$ are tangent at $P$,* take $Q=P$. The common tangent at $P$ gives, by the tangent–chord theorem, $\\angle APD=\\angle PBA+\\angle PCD\\le90^\\circ$ and $\\angle BPC=\\angle PAB+\\angle PDC\\le90^\\circ$. The given circles are tangent at $P$, and the half-disc argument applies verbatim. ∎"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "inequalities"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-isl-2006-g9",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Geometry",
+      "year": 2006,
+      "number": 9,
+      "url": "https://www.imo-official.org/assets/documents/problems/2006/IMO2006SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Points $A_1$, $B_1$, $C_1$ are chosen on the sides $BC$, $CA$, $AB$ of a triangle $ABC$, respectively. The circumcircles of triangles $AB_1C_1$, $BC_1A_1$, $CA_1B_1$ intersect the circumcircle of triangle $ABC$ again at points $A_2$, $B_2$, $C_2$, respectively ($A_2 \\ne A$, $B_2 \\ne B$, $C_2 \\ne C$). Points $A_3$, $B_3$, $C_3$ are symmetric to $A_1$, $B_1$, $C_1$ with respect to the midpoints of the sides $BC$, $CA$, $AB$ respectively. Prove that the triangles $A_2B_2C_2$ and $A_3B_3C_3$ are similar.",
+    "image": null,
+    "choices": null,
+    "answer": "Let $P$ be the Miquel point and $A_4,B_4,C_4$ the second intersections of $A_2P,B_2P,C_2P$ with the circumcircle. A rotation about $O$ maps $A_4B_4C_4$ to $ABC$ and maps the points $PA_1\\cap B_4C_4$ etc. to $A_3,B_3,C_3$. An angle chase with oriented angles then shows that this triangle is similar to $A_2B_2C_2$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Oriented angles and a rotation",
+        "body": "We use oriented angles between lines modulo $180^\\circ$: $\\angle(\\ell,m)$ is the angle of a rotation taking $\\ell$ to a line parallel to $m$. Then $\\angle(\\ell,m)+\\angle(m,n)=\\angle(\\ell,n)$, and four points $K,L,M,N$ (no three collinear) are concyclic iff $\\angle(KM,LM)=\\angle(KN,LN)$. If $X,U,V$ lie on a circle with centre $O$, then $\\angle(XU,XV)=\\theta$ means that the rotation about $O$ by $2\\theta$ takes $U$ to $V$.\n\nLet $\\Omega$, with centre $O$, be the circumcircle of $ABC$.\n\n**Miquel point.** Let circles $(AB_1C_1)$ and $(BC_1A_1)$ meet again at $P$. Then\n$$\\angle(PA_1,BC)=\\angle(PC_1,AB)=\\angle(PB_1,CA)=:\\varphi,$$\nthe first equality from circle $(BC_1A_1)$ and the second from $(AB_1C_1)$. The equality of the outer terms shows that $P$ also lies on $(CA_1B_1)$.\n\n**A rotation.** Let lines $A_2P$, $B_2P$, $C_2P$ meet $\\Omega$ again at $A_4,B_4,C_4$. Since $A,C_1,P,A_2$ lie on $(AB_1C_1)$,\n$$\\angle(A_2A_4,A_2A)=\\angle(PA_2,AA_2)=\\angle(PC_1,AC_1)=\\varphi .$$\nSo the rotation $\\rho$ about $O$ by $2\\varphi$ takes $A_4$ to $A$. In the same way (using circles $(BC_1A_1)$ and $(CA_1B_1)$) $\\rho(B_4)=B$ and $\\rho(C_4)=C$. Hence\n$$\\angle(A_4B_4,AB)=\\angle(B_4C_4,BC)=\\angle(C_4A_4,CA)=2\\varphi. \\tag{1}$$\n**Locating $A_3,B_3,C_3$.** Since $\\rho(B_4)=B$, the inscribed angle gives $\\angle(AB_4,AB)=\\varphi$, so $\\angle(AB_4,PC_1)=\\varphi-\\varphi=0$: $AB_4\\parallel PC_1$. Likewise $BA_4\\parallel PC_1$. Let $C_5=PC_1\\cap A_4B_4$. By (1), $\\angle(A_4B_4,PC_1)=2\\varphi-\\varphi=\\varphi$, while $\\angle(PC_1,AB)=\\varphi$. In the trapezoid $AB_4C_5C_1$ (with $AB_4\\parallel C_1C_5$), the legs $AC_1$ and $B_4C_5$ make opposite angles with the parallel sides, so it is an isosceles trapezoid and $B_4C_5=AC_1$. Symmetrically, from the trapezoid $BA_4C_5C_1$, $A_4C_5=BC_1$. Since $AC_1+BC_1=AB=A_4B_4$, the point $C_5$ lies on segment $A_4B_4$ with\n$$A_4C_5=BC_1=AC_3,\\qquad B_4C_5=AC_1=BC_3 .$$\nSo $\\rho$, which maps segment $A_4B_4$ to $AB$, maps $C_5$ to $C_3$. Defining $A_5=PA_1\\cap B_4C_4$ and $B_5=PB_1\\cap C_4A_4$ in the same way, $\\rho(A_5)=A_3$ and $\\rho(B_5)=B_3$. Thus $A_3B_3C_3\\cong A_5B_5C_5$, and it remains to show $A_5B_5C_5\\sim A_2B_2C_2$.\n\n**Three more circles.** We have $\\angle(B_4C_5,PC_5)=\\angle(A_4B_4,PC_1)=\\varphi$. Similarly $\\angle(C_4A_5,PA_5)=\\varphi$, i.e. $\\angle(B_4A_5,PA_5)=\\varphi$ (as $B_4,C_4,A_5$ are collinear). Hence $P,B_4,C_5,A_5$ are concyclic. By the same argument $P,C_4,A_5,B_5$ and $P,A_4,B_5,C_5$ are concyclic.\n\n**Angle comparison.** Using the last two circles,\n$$\\angle(A_5B_5,C_5B_5)=\\angle(A_5B_5,PB_5)+\\angle(PB_5,C_5B_5)=\\angle(A_5C_4,PC_4)+\\angle(PA_4,C_5A_4).$$\nUsing $\\Omega$, which contains $A_2,B_2,C_2,A_4,B_4,C_4$,\n$$\\angle(A_2B_2,C_2B_2)=\\angle(A_2B_2,B_4B_2)+\\angle(B_4B_2,C_2B_2)=\\angle(A_2A_4,B_4A_4)+\\angle(B_4C_4,C_2C_4).$$\nBut $A_2A_4=PA_4$, $B_4A_4=C_5A_4$, $B_4C_4=A_5C_4$ and $C_2C_4=PC_4$ as lines. So the right-hand sides agree, and $\\angle(A_5B_5,C_5B_5)=\\angle(A_2B_2,C_2B_2)$. By cyclic symmetry the other two angles agree as well. So triangles $A_5B_5C_5$ and $A_2B_2C_2$ are similar, and hence so are $A_3B_3C_3$ and $A_2B_2C_2$. ∎"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-isl-2006-g10",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Geometry",
+      "year": 2006,
+      "number": 10,
+      "url": "https://www.imo-official.org/assets/documents/problems/2006/IMO2006SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "To each side $a$ of a convex polygon we assign the maximum area of a triangle contained in the polygon and having $a$ as one of its sides. Show that the sum of the areas assigned to all sides of the polygon is not less than twice the area of the polygon.",
+    "image": null,
+    "choices": null,
+    "answer": "Lemma: every convex $2n$-gon of area $S$ has a side and a vertex spanning a triangle of area $\\ge S/n$. Apply it to the polygon with each side cut into $k_i$ equal pieces, where $k_i/n$ are rationals slightly above $S_i/S$ summing to $2$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [],
+    "topics": [
+      "geometry",
+      "inequalities"
+    ],
+    "difficulty": 3,
+    "duplicateOf": "imo-2006-06",
+    "reviewNote": null
+  },
+  {
+    "id": "imo-isl-2006-n1",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Number Theory",
+      "year": 2006,
+      "number": 1,
+      "url": "https://www.imo-official.org/assets/documents/problems/2006/IMO2006SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Determine all pairs $(x, y)$ of integers satisfying the equation\n$$1 + 2^x + 2^{2x+1} = y^2.$$",
+    "image": null,
+    "choices": null,
+    "answer": "$(x,y)=(0,2),\\ (0,-2),\\ (4,23),\\ (4,-23)$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 2,
+    "duplicateOf": "imo-2006-04",
+    "reviewNote": null
+  },
+  {
+    "id": "imo-isl-2006-n2",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Number Theory",
+      "year": 2006,
+      "number": 2,
+      "url": "https://www.imo-official.org/assets/documents/problems/2006/IMO2006SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "For $x \\in (0, 1)$ let $y \\in (0, 1)$ be the number whose $n$th digit after the decimal point is the $(2^n)$th digit after the decimal point of $x$. Show that if $x$ is rational then so is $y$.",
+    "image": null,
+    "choices": null,
+    "answer": "If the digits of $x$ have period $d=2^uv$ ($v$ odd), choose $w$ with $2^w\\equiv1\\pmod v$. Then $2^{n+w}\\equiv2^n\\pmod d$ for $n\\ge u$, so the digits of $y$ are eventually periodic with period $w$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Powers of 2 modulo the period",
+        "body": "Write $x=0.x_1x_2x_3\\ldots$ and $y=0.y_1y_2\\ldots$ with $y_n=x_{2^n}$. Since $x$ is rational, its digits are eventually periodic: there are $N_0$ and $d\\ge1$ with $x_{i+d}=x_i$ for all $i\\ge N_0$. Hence $x_i=x_j$ whenever $i,j\\ge N_0$ and $i\\equiv j\\pmod d$.\n\nWrite $d=2^u v$ with $v$ odd. Since $\\gcd(2,v)=1$, there is $w\\ge1$ with $2^w\\equiv1\\pmod v$ (e.g. $w=\\varphi(v)$ by Euler's theorem; $w=1$ if $v=1$). For $n\\ge u$,\n$$2^{n+w}-2^n=2^n(2^w-1)$$\nis divisible by $2^u$ (as $n\\ge u$) and by $v$, hence by $d$ (they are coprime). So for all $n$ with $n\\ge u$ and $2^n\\ge N_0$,\n$$y_{n+w}=x_{2^{n+w}}=x_{2^n}=y_n .$$\nThus the digits of $y$ are eventually periodic (with period $w$), and $y$ is rational. ∎"
+      }
+    ],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-isl-2006-n3",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Number Theory",
+      "year": 2006,
+      "number": 3,
+      "url": "https://www.imo-official.org/assets/documents/problems/2006/IMO2006SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "The sequence $f(1), f(2), f(3), \\dots$ is defined by\n$$f(n) = \\frac{1}{n}\\left( \\left\\lfloor \\frac{n}{1} \\right\\rfloor + \\left\\lfloor \\frac{n}{2} \\right\\rfloor + \\dots + \\left\\lfloor \\frac{n}{n} \\right\\rfloor \\right),$$\nwhere $\\lfloor x \\rfloor$ denotes the integer part of $x$.\n\n(a) Prove that $f(n+1) > f(n)$ infinitely often.\n\n(b) Prove that $f(n+1) < f(n)$ infinitely often.",
+    "image": null,
+    "choices": null,
+    "answer": "$f(n)=\\frac{d(1)+\\dots+d(n)}{n}$ is the average of the divisor counts. So $f(n+1)>f(n)$ iff $d(n+1)>f(n)$; this happens at record values of $d$ for (a), and fails when $n+1$ is prime and $f(n)>2$ for (b).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "$f$ is an average of divisor counts",
+        "body": "Let $d(m)$ be the number of positive divisors of $m$. The sum $\\sum_{k=1}^n\\lfloor n/k\\rfloor$ counts pairs $(k,j)$ of positive integers with $kj\\le n$. Grouping by the product $m=kj$, it equals $d(1)+d(2)+\\dots+d(n)$. So\n$$f(n)=\\frac{d(1)+d(2)+\\dots+d(n)}{n},$$\nthe average of $d(1),\\dots,d(n)$. Consequently\n$$f(n+1)-f(n)=\\frac{n f(n)+d(n+1)}{n+1}-f(n)=\\frac{d(n+1)-f(n)}{n+1},$$\nso $f(n+1)>f(n)\\iff d(n+1)>f(n)$, and $f(n+1)<f(n)\\iff d(n+1)<f(n)$.\n\n**(b)** We have $d(1)=1$ and $d(m)\\ge2$ for $m\\ge2$, with equality iff $m$ is prime. Since $d(1)+\\dots+d(6)=1+2+2+3+2+4=14$, for $n\\ge6$\n$$f(n)\\ge\\frac{14+2(n-6)}{n}=\\frac{2n+2}{n}>2 .$$\nThere are infinitely many primes $p\\ge7$; for $n=p-1$ we get $d(n+1)=2<f(n)$, so $f(n+1)<f(n)$.\n\n**(a)** The sequence $d(m)$ is unbounded (e.g. $d(2^k)=k+1$). So there are infinitely many \"record\" indices $m=n+1$ with $d(n+1)>\\max\\{d(1),\\dots,d(n)\\}$. For each of them $d(n+1)>f(n)$, since an average does not exceed the maximum, and hence $f(n+1)>f(n)$. ∎"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "sequences-series"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-isl-2006-n4",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Number Theory",
+      "year": 2006,
+      "number": 4,
+      "url": "https://www.imo-official.org/assets/documents/problems/2006/IMO2006SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $P(x)$ be a polynomial of degree $n > 1$ with integer coefficients and let $k$ be any positive integer. Consider the polynomial $Q(x) = P(P(\\dots P(P(x)) \\dots))$, with $k$ pairs of parentheses. Prove that $Q$ has no more than $n$ integer fixed points, i.e. integers satisfying the equation $Q(x) = x$.",
+    "image": null,
+    "choices": null,
+    "answer": "Integer fixed points of $Q$ are fixed points of $P\\circ P$ (the differences $x_i-x_{i+1}$ along an orbit divide each other). If $P(a)=b\\ne a$, $P(b)=a$, then every such fixed point $\\alpha$ satisfies $\\alpha+P(\\alpha)=a+b$, an equation of degree $n$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [],
+    "topics": [
+      "polynomials",
+      "number-theory"
+    ],
+    "difficulty": 3,
+    "duplicateOf": "imo-2006-05",
+    "reviewNote": null
+  },
+  {
+    "id": "imo-isl-2006-n5",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Number Theory",
+      "year": 2006,
+      "number": 5,
+      "url": "https://www.imo-official.org/assets/documents/problems/2006/IMO2006SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Find all integer solutions of the equation\n$$\\frac{x^7 - 1}{x - 1} = y^5 - 1.$$",
+    "image": null,
+    "choices": null,
+    "answer": "There are no integer solutions: every prime divisor of $\\frac{x^7-1}{x-1}$ is $7$ or $\\equiv1\\pmod 7$, which forces $y\\equiv1,2\\pmod7$, and then $1+y+y^2+y^3+y^4\\equiv5$ or $3\\pmod7$ cannot divide the left side.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Prime divisors of a cyclotomic value",
+        "body": "**Lemma.** If $x$ is an integer and a prime $p$ divides $1+x+\\dots+x^6$, then $p=7$ or $p\\equiv1\\pmod7$.\n\n*Proof.* $p\\nmid x$ (otherwise the sum is $\\equiv1\\pmod p$). Then $p\\mid x^7-1$ and, by Fermat, $p\\mid x^{p-1}-1$. If $7\\nmid p-1$, then $\\gcd(7,p-1)=1$, so $7s+(p-1)t=1$ for some integers $s,t$. Hence $x\\equiv(x^7)^s(x^{p-1})^t\\equiv1\\pmod p$ (in the group of units mod $p$, negative exponents are fine). Then $1+x+\\dots+x^6\\equiv7\\pmod p$, so $p=7$. $\\square$\n\nHence every positive divisor of $1+x+\\dots+x^6$ is a product of primes each $\\equiv0$ or $1\\pmod7$, so it is itself $\\equiv0$ or $1\\pmod 7$.\n\nNow suppose $(x,y)$ is a solution ($x\\ne1$). For every real $x\\ne1$, $\\frac{x^7-1}{x-1}>0$ (numerator and denominator have the same sign), so $y^5>1$ and $y\\ge2$. The equation reads\n$$1+x+\\dots+x^6=y^5-1=(y-1)(1+y+y^2+y^3+y^4).$$\n- $y-1$ is a positive divisor, so $y-1\\equiv0$ or $1\\pmod7$, i.e. $y\\equiv1$ or $2\\pmod7$.\n- If $y\\equiv1$: $1+y+y^2+y^3+y^4\\equiv5\\pmod7$. If $y\\equiv2$: $1+2+4+8+16=31\\equiv3\\pmod7$.\n\nEither way the positive divisor $1+y+\\dots+y^4$ is $\\not\\equiv0,1\\pmod7$, a contradiction. So the equation has **no integer solutions**. ∎"
+      }
+    ],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-isl-2006-n6",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Number Theory",
+      "year": 2006,
+      "number": 6,
+      "url": "https://www.imo-official.org/assets/documents/problems/2006/IMO2006SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $a > b > 1$ be relatively prime positive integers. Define the *weight* of an integer $c$, denoted by $w(c)$, to be the minimal possible value of $|x| + |y|$ taken over all pairs of integers $x$ and $y$ such that\n$$ax + by = c.$$\nAn integer $c$ is called a *local champion* if $w(c) \\ge w(c \\pm a)$ and $w(c) \\ge w(c \\pm b)$.\n\nFind all local champions and determine their number.",
+    "image": null,
+    "choices": null,
+    "answer": "The local champions are the numbers $\\pm(ax-by)$ with $0<x<b$ and $x+y=\\left\\lfloor\\frac{a+b}2\\right\\rfloor$. There are $b-1$ of them if $a$ and $b$ are both odd, and $2(b-1)$ otherwise.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Characterise minimal representations",
+        "body": "A *representation* of $c$ is a pair $(x,y)$ with $ax+by=c$ and $|x|+|y|=w(c)$. All integer solutions of $au+bv=c$ are $(x-kb,\\ y+ka)$, $k\\in\\mathbb Z$. Note $w(-c)=w(c)$, so $c$ is a local champion iff $-c$ is. Let $h=\\left\\lfloor\\frac{a+b}2\\right\\rfloor$.\n\n**Lemma 1.** If $(x,y)$ is a representation of a local champion $c$, then $xy<0$.\n\n*Proof.* Suppose $x,y\\ge0$ (the case $x,y\\le0$ follows by passing to $-c$). Since $w(c+a)\\le w(c)$ and $c+a=a(x+1-kb)+b(y+ka)$, some $k$ satisfies\n$$(x+1-kb)+(y+ka)\\le|x+1-kb|+|y+ka|\\le x+y\\le|x-kb|+|y+ka|,$$\nwhere the last inequality is minimality for $c$. The first and third terms give $1+k(a-b)\\le0$, so $k<0$. Then $x-kb>0$, so $|x+1-kb|>|x-kb|$, contradicting the second and fourth terms. $\\square$\n\nSo, replacing $c$ by $-c$ if necessary, a local champion can be written $c=ax-by$ with $x,y>0$ and $x+y=w(c)$.\n\n**Lemma 2.** Let $c=ax-by$ with $x,y>0$ and $x+y=w(c)$. Then $c$ is a local champion iff $x<b$ and $x+y=h$.\n\n*Proof.* Always $w(c-a)\\le(x-1)+y<w(c)$ and $w(c+b)\\le x+(y-1)<w(c)$, so only $c+a$ and $c-b$ matter.\n\n($\\Rightarrow$) The representations of $c+a$ are $a(x+1-kb)-b(y-ka)$. Let $f(t)=|x+1-bt|+|y-at|-(x+y)$, a convex function with $f(0)=1$. Since $w(c+a)\\le w(c)$, some integer $k$ has $f(k)\\le0$. For $k\\le0$, $f(k)\\ge1$, so $k\\ge1$. By convexity $f(1)\\le(1-\\tfrac1k)f(0)+\\tfrac1kf(k)<1$, and $f(1)$ is an integer, so $f(1)\\le0$:\n$$|x+1-b|+|y-a|\\le x+y\\le|x-b|+|y-a|,$$\nwhere the second inequality is minimality for $c=a(x-b)-b(y-a)$. So $|x-b+1|\\le|x-b|$, which for integers means $x-b<0$, i.e. $x<b$. The same argument with $c-b=a(x-kb)-b(y+1-ka)$ gives $y<a$. Now $|x+1-b|=b-x-1$, $|x-b|=b-x$, $|y-a|=a-y$, and the display becomes\n$$a+b-1-(x+y)\\le x+y\\le a+b-(x+y),$$\ni.e. $\\frac{a+b-1}2\\le x+y\\le\\frac{a+b}2$, so $x+y=h$.\n\n($\\Leftarrow$) If $0<x<b$ and $x+y=h$, then $0<y<a$: indeed $y\\ge h-b+1\\ge\\frac{a-b+1}2>0$ and $y<h\\le\\frac{a+b}2<a$. Hence\n$$w(c+a)\\le|x+1-b|+|y-a|=a+b-1-h\\le h=w(c),\\qquad w(c-b)\\le|x-b|+|y+1-a|=a+b-1-h\\le h,$$\nbecause $2h\\ge a+b-1$. So $c$ is a local champion. $\\square$\n\n**Lemma 3.** If $0<x<b$, $0<y<a$ and $x+y=h$, then $w(ax-by)=x+y$.\n\n*Proof.* The weight is $\\min_k\\big(|x-kb|+|y-ka|\\big)$. For $k\\le0$ each term is at least $x+y$. For $k\\ge1$ it equals $k(a+b)-(x+y)\\ge(a+b)-h\\ge h$. $\\square$\n\n**All champions.** By Lemmas 1–3 (Lemma 3 guarantees the hypothesis $x+y=w(c)$ of Lemma 2), the local champions are exactly\n$$C=C^+\\cup C^-,\\qquad C^+=\\{ax-b(h-x):1\\le x\\le b-1\\},\\quad C^-=-C^+ .$$\n$C^+=\\{x(a+b)-bh\\}$ is an arithmetic progression of $b-1$ distinct terms with difference $a+b$.\n\n**Counting.**\n- If $a,b$ are both odd, $h=\\frac{a+b}2$, and the substitution $x\\mapsto b-x$ gives $a(b-x)-b(h-b+x)=-(ax-b(h-x))+b(a+b-2h)=-(ax-b(h-x))$. So $C^-=C^+$ and there are $b-1$ champions.\n- Otherwise $a+b$ is odd (both cannot be even). Elements of $C^+$ are $\\equiv-bh$ and those of $C^-$ are $\\equiv bh\\pmod{a+b}$. A common element would give $(a+b)\\mid 2bh$; but $\\gcd(2b,a+b)=1$ and $0<h<a+b$, impossible. So $C^+\\cap C^-=\\emptyset$ and there are $2(b-1)$ champions.\n\n**Answer:** $\\pm(ax-by)$ with $0<x<b$, $x+y=\\lfloor\\frac{a+b}2\\rfloor$; there are $b-1$ of them if $a,b$ are both odd and $2(b-1)$ otherwise. ∎"
+      }
+    ],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-isl-2006-n7",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Number Theory",
+      "year": 2006,
+      "number": 7,
+      "url": "https://www.imo-official.org/assets/documents/problems/2006/IMO2006SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Prove that, for every positive integer $n$, there exists an integer $m$ such that $2^m + m$ is divisible by $n$.",
+    "image": null,
+    "choices": null,
+    "answer": "Strong induction on $a$: for every $N$ there are $b_0,\\dots,b_{a-1}>N$ with $2^{b_i}+b_i\\equiv i\\pmod a$. Use the eventual period $k<a$ of $2^m \\bmod a$ and the statement for $d=\\gcd(a,k)$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Strong induction via the period of $2^m$",
+        "body": "We prove by strong induction on $a\\ge1$:\n\n> $(\\ast_a)$ For every $N$ there exist integers $b_0,\\dots,b_{a-1}>N$ with $2^{b_i}+b_i\\equiv i\\pmod a$ for each $i$.\n\nThen $(\\ast_n)$ with $i=0$ gives the required $m=b_0$.\n\nFor $a=1$ the statement is trivial. Let $a>1$ and assume $(\\ast_d)$ for all $d<a$.\n\n**Period of $2^m$ mod $a$.** The sequence $2^m\\bmod a$ is determined by its previous term, so it is eventually periodic: there are $M$ and a least $k\\ge1$ with $2^{m+k}\\equiv2^m\\pmod a$ for all $m\\ge M$. Then $2^{m+jk}\\equiv2^m$ for all $j\\ge0$, $m\\ge M$. The residues $2^M,\\dots,2^{M+k-1}$ are distinct (a repetition would give a shorter period). If $0$ is among them, all of them are $0$ (as $2\\cdot0=0$) and $k=1$; otherwise $0$ is missing. Either way $k<a$.\n\n**Induction step.** Let $d=\\gcd(a,k)$, $a'=a/d$, $k'=k/d$, so $1\\le d\\le k<a$ and $\\gcd(a',k')=1$. By $(\\ast_d)$ choose $b_0,\\dots,b_{d-1}>\\max(M,N)$ with $2^{b_i}+b_i\\equiv i\\pmod d$. Consider the $a=da'$ numbers\n$$m_{i,j}=b_i+jk,\\qquad 0\\le i<d,\\ 0\\le j<a'.$$\nThey all exceed $N$, and since $b_i\\ge M$,\n$$2^{m_{i,j}}+m_{i,j}\\equiv2^{b_i}+b_i+jk\\pmod a .$$\nThese values are pairwise incongruent mod $a$. Suppose $2^{b_i}+b_i+jk\\equiv2^{b_l}+b_l+j'k\\pmod a$. Reducing mod $d$ (which divides $a$ and $k$) gives $i\\equiv l\\pmod d$, so $i=l$. Then $jk\\equiv j'k\\pmod a$, i.e. $jk'\\equiv j'k'\\pmod{a'}$, and since $\\gcd(k',a')=1$, $j\\equiv j'\\pmod{a'}$, so $j=j'$.\n\nThus the $a$ numbers $2^{m_{i,j}}+m_{i,j}$ hit every residue class mod $a$ exactly once, with all $m_{i,j}>N$. This is $(\\ast_a)$, completing the induction. ∎"
+      }
+    ],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

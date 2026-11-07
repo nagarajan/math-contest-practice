@@ -1,0 +1,208 @@
+[
+  {
+    "id": "imo-1996-01",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO",
+      "paper": "Day 1",
+      "year": 1996,
+      "number": 1,
+      "url": "https://www.imo-official.org/assets/documents/problems/1996/1996_eng.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "We are given a positive integer $r$ and a rectangular board $ABCD$ with dimensions $|AB| = 20$, $|BC| = 12$. The rectangle is divided into a grid of $20 \\times 12$ unit squares. The following moves are permitted on the board: one can move from one square to another only if the distance between the centers of the two squares is $\\sqrt{r}$. The task is to find a sequence of moves leading from the square with $A$ as a vertex to the square with $B$ as a vertex.\n\n(a) Show that the task cannot be done if $r$ is divisible by $2$ or $3$.\n\n(b) Prove that the task is possible when $r = 73$.\n\n(c) Can the task be done when $r = 97$?",
+    "image": null,
+    "choices": null,
+    "answer": "(a) Invariants: $x+y \\bmod 2$ if $2\\mid r$, $x \\bmod 3$ if $3\\mid r$. (b) Moves $(\\pm3,\\pm8),(\\pm8,\\pm3)$; an explicit $11$-move path exists. (c) **No**: with rows $5$–$8$ \"inner\", the colour \"($x$ odd) xor (inner row)\" is invariant.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Coordinates and invariants",
+        "body": "Give each square the coordinates $(x,y)$ of its centre, $1\\le x\\le20$ (along $AB$), $1\\le y\\le12$. Start at $(1,1)$ (the square at $A$), target $(20,1)$ (the square at $B$). A move changes the position by $(u,v)$ with $u^2+v^2=r$, $u,v$ integers.\n\n**(a)** If $2\\mid r$: $u^2+v^2$ even forces $u\\equiv v\\pmod2$, so $u+v$ is even and the parity of $x+y$ never changes. It is $2$ at the start and $21$ at the target, so the target is unreachable.\n\nIf $3\\mid r$: squares are $0$ or $1$ mod $3$, so $u^2+v^2\\equiv0\\pmod 3$ forces $u\\equiv v\\equiv0\\pmod3$. Hence $x\\bmod3$ never changes; it is $1$ at the start and $20\\equiv2$ at the target. Impossible.\n\n**(b)** $73=3^2+8^2$ is the only way to write $73$ as a sum of two squares, so the moves are $(\\pm3,\\pm8)$ and $(\\pm8,\\pm3)$. The following path stays on the board and uses only such moves:\n$$\\begin{aligned}&(1,1)\\to(4,9)\\to(12,6)\\to(4,3)\\to(1,11)\\to(9,8)\\to(1,5)\\\\&\\to(9,2)\\to(12,10)\\to(4,7)\\to(12,4)\\to(20,1).\\end{aligned}$$\n(The steps are $(3,8),(8,-3),(-8,-3),(-3,8),(8,-3),(-8,-3),(8,-3),(3,8),(-8,-3),(8,-3),(8,-3)$.) So the task is possible.\n\n**(c)** $97=4^2+9^2$ is the only representation, so the moves are $(\\pm4,\\pm9)$ and $(\\pm9,\\pm4)$. Call rows $y=5,6,7,8$ *inner* and rows $1$–$4$, $9$–$12$ *outer*.\n- A move $(\\pm9,\\pm4)$: from an outer row $y\\le4$ we can only go to $y+4\\in\\{5,\\ldots,8\\}$; from $y\\ge9$ only to $y-4\\in\\{5,\\ldots,8\\}$; from an inner row we go to $y\\pm4$, which is outer. So such a move **always switches** inner/outer, and it changes the parity of $x$ (as $9$ is odd).\n- A move $(\\pm4,\\pm9)$ requires $y\\le3$ (to $y+9\\ge10$) or $y\\ge10$ (to $y-9\\le3$): it goes from outer to outer, and it keeps the parity of $x$.\n\nDefine the colour of a square to be $1$ if exactly one of \"$x$ is odd\", \"the row is inner\" holds, and $0$ otherwise. Each move either flips both properties or neither, so the colour is invariant. The start $(1,1)$ has $x$ odd and is outer: colour $1$. The target $(20,1)$ has $x$ even and is outer: colour $0$. So **the task cannot be done for $r=97$**. ∎"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "logic"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-1996-02",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO",
+      "paper": "Day 1",
+      "year": 1996,
+      "number": 2,
+      "url": "https://www.imo-official.org/assets/documents/problems/1996/1996_eng.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $P$ be a point inside triangle $ABC$ such that\n$$\\angle APB - \\angle ACB = \\angle APC - \\angle ABC.$$\nLet $D$, $E$ be the incenters of triangles $APB$, $APC$, respectively. Show that $AP$, $BD$, $CE$ meet at a point.",
+    "image": null,
+    "choices": null,
+    "answer": "Proof: with $Q$ the second intersection of ray $AP$ with the circumcircle, $\\angle PBQ=\\angle APB-\\angle ACB=\\angle APC-\\angle ABC=\\angle PCQ$; the law of sines in $PBQ$, $PCQ$ gives $\\frac{PB}{PC}=\\frac{\\sin C}{\\sin B}=\\frac{AB}{AC}$, so the bisectors $BD$, $CE$ cut $AP$ in the same ratio.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Extend $AP$ to the circumcircle",
+        "body": "**Reduction.** $BD$ is the bisector of angle $ABP$ in triangle $ABP$, so it meets segment $AP$ at the point $K$ with $\\frac{AK}{KP}=\\frac{AB}{BP}$ (angle bisector theorem). Likewise $CE$ meets $AP$ at $L$ with $\\frac{AL}{LP}=\\frac{AC}{CP}$. So it suffices to prove\n$$\\frac{AB}{BP}=\\frac{AC}{CP},\\qquad\\text{i.e.}\\qquad \\frac{PB}{PC}=\\frac{AB}{AC},$$\nbecause then $K=L$ lies on all three lines.\n\n**Translate the angle condition.** Let the ray $AP$ meet the circumcircle of $ABC$ again at $Q$. As $P$ is inside the triangle, $Q$ lies on the arc $BC$ not containing $A$ and $P$ lies between $A$ and $Q$. The point $Q$ is on the same arc cut off by chord $AB$ as $C$, so $\\angle PQB=\\angle AQB=\\angle ACB$. In triangle $PBQ$, $\\angle APB$ is the exterior angle at $P$, so\n$$\\angle PBQ=\\angle APB-\\angle PQB=\\angle APB-\\angle ACB .$$\nIn the same way $\\angle PCQ=\\angle APC-\\angle ABC$ (using $\\angle PQC=\\angle AQC=\\angle ABC$). The hypothesis says that these are equal; call the common value $\\theta$ ($0<\\theta<180^\\circ$).\n\n**Law of sines.** In triangle $PBQ$: $\\dfrac{PB}{\\sin\\angle PQB}=\\dfrac{PQ}{\\sin\\theta}$, so $PB=\\dfrac{PQ\\sin C}{\\sin\\theta}$. In triangle $PCQ$: $PC=\\dfrac{PQ\\sin B}{\\sin\\theta}$. Therefore\n$$\\frac{PB}{PC}=\\frac{\\sin C}{\\sin B}=\\frac{AB}{AC},$$\nby the law of sines in triangle $ABC$. By the reduction, $AP$, $BD$, $CE$ pass through one point. ∎"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "trigonometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-1996-03",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO",
+      "paper": "Day 1",
+      "year": 1996,
+      "number": 3,
+      "url": "https://www.imo-official.org/assets/documents/problems/1996/1996_eng.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $S$ denote the set of nonnegative integers. Find all functions $f$ from $S$ to itself such that\n$$f(m + f(n)) = f(f(m)) + f(n)\\qquad \\forall m, n \\in S.$$",
+    "image": null,
+    "choices": null,
+    "answer": "$f\\equiv0$, or: fix $k\\ge1$ and arbitrary $n_1,\\ldots,n_{k-1}\\in S$ (and $n_0=0$), and put $f(qk+r)=(q+n_r)k$ for $q\\ge0$, $0\\le r<k$. (For $k=1$ this is $f(n)=n$.)",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Fixed points form the multiples of $k$",
+        "body": "**First facts.** $m=n=0$: $f(f(0))=f(f(0))+f(0)$, so $f(0)=0$. Then $m=0$ gives $f(f(n))=f(n)$: every value of $f$ is a fixed point, and conversely every fixed point $a=f(a)$ is a value. So the equation becomes\n$$f(m+a)=f(m)+a\\qquad\\text{for all } m\\in S \\text{ and all fixed points } a. \\tag{1}$$\n\nIf $f\\equiv0$ we have a solution (both sides are $0$). Otherwise let $k$ be the smallest **positive** fixed point (a positive value of $f$ is a positive fixed point).\n\n**The fixed points are exactly the multiples of $k$.** Iterating (1) with $a=k$: $f(m+qk)=f(m)+qk$, so $f(qk)=qk$ for all $q\\ge0$. Conversely let $a$ be a fixed point and write $a=qk+r$, $0\\le r<k$. Then $a=f(a)=f(r)+qk$, so $f(r)=r$; by minimality of $k$, $r=0$. So $k\\mid a$.\n\n**The form of $f$.** Every value $f(r)$ is a fixed point, hence $f(r)=n_rk$ for some $n_r\\in S$, with $n_0=0$. Then $f(qk+r)=f(r)+qk=(q+n_r)k$.\n\n**These all work.** Let $f(qk+r)=(q+n_r)k$ with $n_0=0$ and arbitrary $n_1,\\ldots,n_{k-1}\\in S$. Every value is a multiple of $k$; for $m=qk+r$ and $jk$ we have $f(m+jk)=(q+j+n_r)k=f(m)+jk$, and $f(jk)=jk$. Hence $f(f(m))=f(m)$ and\n$$f(m+f(n))=f(m)+f(n)=f(f(m))+f(n).$$\n\n**Answer:** $f\\equiv0$, and the functions $f(qk+r)=(q+n_r)k$ ($k\\ge1$, $0\\le r<k$, $n_0=0$, $n_1,\\ldots,n_{k-1}\\ge0$ arbitrary)."
+      }
+    ],
+    "topics": [
+      "functional-equations",
+      "number-theory"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-1996-04",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO",
+      "paper": "Day 2",
+      "year": 1996,
+      "number": 4,
+      "url": "https://www.imo-official.org/assets/documents/problems/1996/1996_eng.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "The positive integers $a$ and $b$ are such that the numbers $15a + 16b$ and $16a - 15b$ are both squares of positive integers. What is the least possible value that can be taken on by the smaller of these two squares?",
+    "image": null,
+    "choices": null,
+    "answer": "231361",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Sum of fourth powers and $481=13\\cdot37$",
+        "body": "Let $15a+16b=r^2$ and $16a-15b=s^2$ with $r,s$ positive integers. Then\n$$r^4+s^4=(15a+16b)^2+(16a-15b)^2=(15^2+16^2)(a^2+b^2)=481(a^2+b^2),$$\nand $481=13\\cdot37$.\n\n**Lemma.** If $q$ is an odd prime with $8\\nmid q-1$ and $q\\mid r^4+s^4$, then $q\\mid r$ and $q\\mid s$.\n\n*Proof.* If $q\\mid r$, then $q\\mid s^4$, so $q\\mid s$; likewise if $q\\mid s$. Otherwise let $t\\equiv s\\cdot r^{-1}\\pmod q$. Then $t^4\\equiv-1$, so $t^8\\equiv1$ but $t^4\\equiv-1\\not\\equiv1$ (as $q$ is odd). Hence the order of $t$ modulo $q$ is exactly $8$, and it divides $q-1$ by Fermat's little theorem — contradicting $8\\nmid q-1$.\n\nSince $13-1=12$ and $37-1=36$ are not divisible by $8$, both $13$ and $37$ divide $r$ and $s$. So $481\\mid r$ and $481\\mid s$, and both squares are at least $481^2$.\n\n**Attained.** We need $15a+16b=16a-15b=481^2$. The second equality gives $a=31b$; then $15\\cdot31b+16b=481b=481^2$, so $b=481$, $a=31\\cdot481=14911$. Check: $16a-15b=481(16\\cdot31-15)=481^2$. ✓\n\n**Answer: $481^2=231361$.**"
+      }
+    ],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null,
+    "answerDisplay": "$481^2=231361$"
+  },
+  {
+    "id": "imo-1996-05",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO",
+      "paper": "Day 2",
+      "year": 1996,
+      "number": 5,
+      "url": "https://www.imo-official.org/assets/documents/problems/1996/1996_eng.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $ABCDEF$ be a convex hexagon such that $AB$ is parallel to $DE$, $BC$ is parallel to $EF$, and $CD$ is parallel to $FA$. Let $R_A$, $R_C$, $R_E$ denote the circumradii of triangles $FAB$, $BCD$, $DEF$, respectively, and let $P$ denote the perimeter of the hexagon. Prove that\n$$R_A + R_C + R_E \\ge \\frac{P}{2}.$$",
+    "image": null,
+    "choices": null,
+    "answer": "Proof: $2R_A=\\frac{BF}{\\sin A}$ and $BF$ is at least the width of the strip between lines $BC$, $EF$, which equals $a\\sin B+f\\sin C=c\\sin C+d\\sin B$; doing this for $BF,BD,DF$, adding, and using $\\frac xy+\\frac yx\\ge2$ gives $R_A+R_C+R_E\\ge\\frac P2$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Widths of three strips",
+        "body": "Write $a=AB$, $b=BC$, $c=CD$, $d=DE$, $e=EF$, $f=FA$ and let $A,B,\\ldots,F$ also denote the interior angles. Because opposite sides are parallel, the angle between lines $AB,BC$ equals the angle between lines $DE,EF$, so $\\sin B=\\sin E$; likewise $\\sin C=\\sin F$ and $\\sin A=\\sin D$. By the law of sines,\n$$2R_A=\\frac{BF}{\\sin A},\\qquad 2R_C=\\frac{BD}{\\sin C},\\qquad 2R_E=\\frac{DF}{\\sin E}=\\frac{DF}{\\sin B}.$$\n\n**The strip between $BC$ and $EF$.** The convex hexagon lies between the parallel lines $BC$ and $EF$. The vertex $A$ is at distance $a\\sin B$ from line $BC$ and at distance $f\\sin F=f\\sin C$ from line $EF$, and it lies between the lines, so the width of the strip is $a\\sin B+f\\sin C$. Using vertex $D$ instead, the width is also $c\\sin C+d\\sin E=c\\sin C+d\\sin B$. Since $B$ and $F$ lie on the two lines, $BF$ is at least the width, so\n$$BF\\ge\\tfrac12\\big[(a+d)\\sin B+(c+f)\\sin C\\big].$$\n\n**The other two strips.** In the same way, $B$ and $D$ lie on the parallel lines $AB$ and $DE$; going through $C$ the width is $b\\sin B+c\\sin D=b\\sin B+c\\sin A$, and going through $F$ it is $f\\sin A+e\\sin E=f\\sin A+e\\sin B$. So\n$$BD\\ge\\tfrac12\\big[(b+e)\\sin B+(c+f)\\sin A\\big].$$\n$D$ and $F$ lie on the parallel lines $CD$ and $FA$; through $E$ the width is $d\\sin D+e\\sin F=d\\sin A+e\\sin C$, through $B$ it is $b\\sin C+a\\sin A$. So\n$$DF\\ge\\tfrac12\\big[(a+d)\\sin A+(b+e)\\sin C\\big].$$\n\n**Add up.**\n$$\\begin{aligned}2(R_A+R_C+R_E)&=\\frac{BF}{\\sin A}+\\frac{BD}{\\sin C}+\\frac{DF}{\\sin B}\\\\\n&\\ge\\frac12\\Big[(a+d)\\Big(\\tfrac{\\sin B}{\\sin A}+\\tfrac{\\sin A}{\\sin B}\\Big)+(c+f)\\Big(\\tfrac{\\sin C}{\\sin A}+\\tfrac{\\sin A}{\\sin C}\\Big)+(b+e)\\Big(\\tfrac{\\sin B}{\\sin C}+\\tfrac{\\sin C}{\\sin B}\\Big)\\Big]\\\\\n&\\ge\\frac12\\cdot2\\,(a+b+c+d+e+f)=P,\\end{aligned}$$\nusing $\\frac xy+\\frac yx\\ge2$ for $x,y>0$. Hence $R_A+R_C+R_E\\ge\\frac P2$. ∎"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "inequalities",
+      "trigonometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-1996-06",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO",
+      "paper": "Day 2",
+      "year": 1996,
+      "number": 6,
+      "url": "https://www.imo-official.org/assets/documents/problems/1996/1996_eng.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $p, q, n$ be three positive integers with $p + q < n$. Let $(x_0, x_1, \\ldots, x_n)$ be an $(n+1)$-tuple of integers satisfying the following conditions:\n\n(a) $x_0 = x_n = 0$.\n\n(b) For each $i$ with $1 \\le i \\le n$, either $x_i - x_{i-1} = p$ or $x_i - x_{i-1} = -q$.\n\nShow that there exist indices $i < j$ with $(i, j) \\ne (0, n)$, such that $x_i = x_j$.",
+    "image": null,
+    "choices": null,
+    "answer": "Proof: reduce to $\\gcd(p,q)=1$, so $n=k(p+q)$ with $k\\ge2$; the differences $y_i=x_{i+p+q}-x_i$ are multiples of $p+q$ changing by at most $p+q$ per step and $y_0+y_{p+q}+\\cdots+y_{(k-1)(p+q)}=0$, so some $y_i=0$, giving $x_i=x_{i+p+q}$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Windows of length $p+q$",
+        "body": "**Reduction to coprime $p,q$.** Let $g=\\gcd(p,q)$. Every $x_i$ is a combination of $p$ and $-q$, hence divisible by $g$, and $(x_i/g)$ satisfies the same conditions with $p/g,q/g$ (and $p/g+q/g<n$). So we may assume $\\gcd(p,q)=1$.\n\n**Length of the tuple.** Let $u$ steps be $+p$ and $v$ steps be $-q$. From $x_n=x_0$, $up=vq$, so $q\\mid u$ and $p\\mid v$: $u=kq$, $v=kp$ and $n=u+v=k(p+q)$. As $n>p+q$, $k\\ge2$.\n\n**Windows.** For $0\\le i\\le n-(p+q)$ let $y_i=x_{i+p+q}-x_i$. If the window of steps $i+1,\\ldots,i+p+q$ contains $w$ steps $+p$, then\n$$y_i=wp-(p+q-w)q=(w-q)(p+q),$$\nso $z_i=y_i/(p+q)=w-q$ is an integer. Moving the window by one step removes one step and adds one, so $w$ (and $z_i$) changes by $0$ or $\\pm1$: $|z_{i+1}-z_i|\\le1$.\n\n**A zero.** The windows starting at $0,\\,p+q,\\,2(p+q),\\ldots,(k-1)(p+q)$ tile the whole tuple, so\n$$y_0+y_{p+q}+\\cdots+y_{(k-1)(p+q)}=x_n-x_0=0 .$$\nHence some $z_i\\le0$ and some $z_{i'}\\ge0$. Since $z$ moves in steps of size at most $1$ between them, $z_t=0$ for some $t$ with $0\\le t\\le n-(p+q)$ (a discrete intermediate value argument).\n\nThen $x_t=x_{t+p+q}$. With $i=t$, $j=t+p+q$ we have $i<j$ and $j-i=p+q<n$, so $(i,j)\\ne(0,n)$. ∎"
+      }
+    ],
+    "topics": [
+      "sequences-series",
+      "number-theory",
+      "counting"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

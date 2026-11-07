@@ -1,0 +1,567 @@
+[
+  {
+    "id": "aime-1993-01",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "1993 AIME",
+      "year": 1993,
+      "number": 1,
+      "url": "https://artofproblemsolving.com/wiki/index.php/1993_AIME_Problems/Problem_1"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "How many even integers between 4000 and 7000 have four different digits?",
+    "image": null,
+    "choices": null,
+    "answer": "728",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Case on the thousands digit",
+        "body": "The thousands digit is $4$, $5$ or $6$ ($7000$ has repeated digits).\n- Thousands digit $4$ or $6$ (even): the units digit is one of the other $4$ even digits; the middle two digits can be chosen in $8\\cdot7=56$ ways. That's $2\\cdot4\\cdot56=448$.\n- Thousands digit $5$: the units digit is any of the $5$ even digits; middle digits $56$ ways: $280$.\n\nTotal $448+280=728$.\n\n**Answer: 728**"
+      },
+      {
+        "title": "Units digit first",
+        "body": "Choose the units digit $u$ (even) and thousands digit $t\\in\\{4,5,6\\}$, $t\\ne u$: $u\\in\\{0,2,8\\}$ gives $3$ choices of $t$ each, $u\\in\\{4,6\\}$ gives $2$ each, so $3\\cdot3+2\\cdot2=13$ pairs. Each leaves $8\\cdot7=56$ choices for the middle digits: $13\\cdot56=728$.\n\n**Answer: 728**"
+      }
+    ],
+    "topics": [
+      "counting"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-1993-02",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "1993 AIME",
+      "year": 1993,
+      "number": 2,
+      "url": "https://artofproblemsolving.com/wiki/index.php/1993_AIME_Problems/Problem_2"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "During a recent campaign for office, a candidate made a tour of a country which we assume lies in a plane. On the first day of the tour he went east, on the second day he went north, on the third day west, on the fourth day south, on the fifth day east, etc. If the candidate went $\\frac{n^{2}}{2}$ miles on the $n^{\\text{th}}$ day of this tour, how many miles was he from his starting point at the end of the $40^{\\text{th}}$ day?",
+    "image": null,
+    "choices": null,
+    "answer": "580",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Net east and north",
+        "body": "East-west: days $4k+1$ (east) and $4k+3$ (west), $k=0,\\dots,9$:\n$$\\sum_{k=0}^{9}\\frac{(4k+1)^2-(4k+3)^2}{2}=\\sum_{k=0}^{9}-(8k+4)=-(360+40)=-400.$$\nNorth-south: days $4k+2$ (north) and $4k+4$ (south):\n$$\\sum_{k=0}^{9}\\frac{(4k+2)^2-(4k+4)^2}{2}=\\sum_{k=0}^{9}-(8k+6)=-(360+60)=-420.$$\nSo he ends $400$ miles west and $420$ miles south, at distance $\\sqrt{400^2+420^2}=20\\sqrt{20^2+21^2}=20\\cdot29=580$.\n\n**Answer: 580**"
+      },
+      {
+        "title": "Pair consecutive opposite days",
+        "body": "Each pair of opposite days $n$ and $n+2$ contributes $\\frac{n^2-(n+2)^2}{2}=-2(n+1)$. For east/west, $n=1,5,\\dots,37$: $-2(2+6+\\dots+38)=-2\\cdot200=-400$. For north/south, $n=2,6,\\dots,38$: $-2(3+7+\\dots+39)=-2\\cdot210=-420$. Distance $\\sqrt{400^2+420^2}=580$.\n\n**Answer: 580**"
+      }
+    ],
+    "topics": [
+      "algebra",
+      "sequences-series",
+      "geometry"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-1993-03",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "1993 AIME",
+      "year": 1993,
+      "number": 3,
+      "url": "https://artofproblemsolving.com/wiki/index.php/1993_AIME_Problems/Problem_3"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "The table below displays some of the results of last summer's Frostbite Falls Fishing Festival, showing how many contestants caught $n$ fish for various values of $n$.\n$$\\begin{array}{|c|c|c|c|c|c|c|c|c|} \\hline n & 0 & 1 & 2 & 3 & \\dots & 13 & 14 & 15 \\\\ \\hline \\text{number of contestants who caught} \\ n \\ \\text{fish} & 9 & 5 & 7 & 23 & \\dots & 5 & 2 & 1 \\\\ \\hline \\end{array}$$\nIn the newspaper story covering the event, it was reported that\n\n(a) the winner caught $15$ fish;\n\n(b) those who caught $3$ or more fish averaged $6$ fish each;\n\n(c) those who caught $12$ or fewer fish averaged $5$ fish each.\n\nWhat was the total number of fish caught during the festival?",
+    "image": null,
+    "choices": null,
+    "answer": "943",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Two equations",
+        "body": "Let $N$ be the number of contestants and $F$ the total number of fish.\n- Those with $0,1,2$ fish: $9+5+7=21$ people with $0+5+14=19$ fish. So (b) gives $F-19=6(N-21)$.\n- Those with $13,14,15$ fish: $5+2+1=8$ people with $65+28+15=108$ fish. So (c) gives $F-108=5(N-8)$.\n\nSubtracting: $89=N-86$, so $N=175$ and $F=6\\cdot154+19=943$.\n\n**Answer: 943**"
+      },
+      {
+        "title": "Compare the two groups",
+        "body": "From (b): $F=6N-107$. From (c): $F=5N+68$. Setting them equal, $N=175$, and $F=5\\cdot175+68=943$.\n\n**Answer: 943**"
+      }
+    ],
+    "topics": [
+      "statistics",
+      "algebra"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-1993-04",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "1993 AIME",
+      "year": 1993,
+      "number": 4,
+      "url": "https://artofproblemsolving.com/wiki/index.php/1993_AIME_Problems/Problem_4"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "How many ordered four-tuples of integers $(a,b,c,d)$ with $0 < a < b < c < d < 500$ satisfy $a + d = b + c$ and $bc - ad = 93$?",
+    "image": null,
+    "choices": null,
+    "answer": "870",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Factor",
+        "body": "Let $k=b-a=d-c>0$ (equal because $a+d=b+c$). Then $d=c+k$, $b=a+k$ and\n$$bc-ad=(a+k)c-a(c+k)=k(c-a)=93.$$\nSince $b<c$ we need $k<c-a$, so $(k,c-a)=(1,93)$ or $(3,31)$.\n- $(1,93)$: $(a,a+1,a+93,a+94)$ with $a+94<500$: $a=1,\\dots,405$, so $405$ tuples.\n- $(3,31)$: $(a,a+3,a+31,a+34)$ with $a+34<500$: $a=1,\\dots,465$, so $465$ tuples.\n\nTotal $405+465=870$.\n\n**Answer: 870**"
+      },
+      {
+        "title": "Difference of squares",
+        "body": "With $a+d=b+c=s$: $bc-ad=\\frac{s^2-(c-b)^2}{4}-\\frac{s^2-(d-a)^2}{4}=\\frac{(d-a)^2-(c-b)^2}{4}=93$. So $(d-a-c+b)(d-a+c-b)=372$ with both factors even: $\\frac{d-a-(c-b)}{2}\\cdot\\frac{d-a+c-b}{2}=93$, i.e. $(b-a)(c-a)=93$, the same two cases, giving $870$.\n\n**Answer: 870**"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "counting"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-1993-05",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "1993 AIME",
+      "year": 1993,
+      "number": 5,
+      "url": "https://artofproblemsolving.com/wiki/index.php/1993_AIME_Problems/Problem_5"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Let $P_0(x) = x^3 + 313x^2 - 77x - 8$. For integers $n \\ge 1$, define $P_n(x) = P_{n - 1}(x - n)$. What is the coefficient of $x$ in $P_{20}(x)$?",
+    "image": null,
+    "choices": null,
+    "answer": "763",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Total shift",
+        "body": "$P_n(x)=P_0(x-1-2-\\dots-n)$, so $P_{20}(x)=P_0(x-210)$. The coefficient of $x$ in $P_0(x-210)$ is $P_0'(-210)$:\n$$3\\cdot210^2-2\\cdot313\\cdot210-77=132300-131460-77=763.$$\n\n**Answer: 763**"
+      },
+      {
+        "title": "Expand directly",
+        "body": "In $(x-210)^3+313(x-210)^2-77(x-210)-8$, the $x$ terms are $3\\cdot210^2x$, $313\\cdot(-420)x$ and $-77x$: $132300-131460-77=763$.\n\n**Answer: 763**"
+      }
+    ],
+    "topics": [
+      "polynomials"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-1993-06",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "1993 AIME",
+      "year": 1993,
+      "number": 6,
+      "url": "https://artofproblemsolving.com/wiki/index.php/1993_AIME_Problems/Problem_6"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "What is the smallest positive integer that can be expressed as the sum of nine consecutive integers, the sum of ten consecutive integers, and the sum of eleven consecutive integers?",
+    "image": null,
+    "choices": null,
+    "answer": "495",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Divisibility conditions",
+        "body": "- Nine consecutive integers centered at $m$ sum to $9m$: a multiple of $9$.\n- Eleven consecutive integers sum to $11m$: a multiple of $11$.\n- Ten consecutive integers starting at $a$ sum to $10a+45$: $\\equiv5\\pmod{10}$.\n\nSo $N$ is a multiple of $99$ and an odd multiple of $5$: $N=99k$ with $k$ an odd multiple of $5$. The smallest is $495$ ($=51+\\dots+59=45+\\dots+54=40+\\dots+50$).\n\n**Answer: 495**"
+      },
+      {
+        "title": "Search multiples of 99",
+        "body": "Multiples of $99$: $99,198,297,396,495$. The first ending in $5$ is $495$, and $495=10\\cdot45+45$ is the sum of $45,\\dots,54$.\n\n**Answer: 495**"
+      }
+    ],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-1993-07",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "1993 AIME",
+      "year": 1993,
+      "number": 7,
+      "url": "https://artofproblemsolving.com/wiki/index.php/1993_AIME_Problems/Problem_7"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Three numbers, $a_1, a_2, a_3$, are drawn randomly and without replacement from the set $\\{1, 2, 3,\\ldots, 1000\\}$. Three other numbers, $b_1, b_2, b_3$, are then drawn randomly and without replacement from the remaining set of $997$ numbers. Let $p$ be the probability that, after suitable rotation, a brick of dimensions $a_1 \\times a_2 \\times a_3$ can be enclosed in a box of dimension $b_1 \\times b_2 \\times b_3$, with the sides of the brick parallel to the sides of the box. If $p$ is written as a fraction in lowest terms, what is the sum of the numerator and denominator?",
+    "image": null,
+    "choices": null,
+    "answer": "5",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Only the relative order matters",
+        "body": "Let the six numbers in increasing order be $x_1<\\dots<x_6$. Given the set, each of the $\\binom63=20$ ways to split it into the $a$'s and the $b$'s is equally likely. The brick fits iff, after sorting, each $a$ is less than the corresponding $b$.\n\nThe largest number $x_6$ must be a $b$, and $x_1$ must be an $a$. Listing the splits that work (positions of the $b$'s): $\\{6,5,4\\},\\{6,5,3\\},\\{6,4,3\\},\\{6,5,2\\},\\{6,4,2\\}$, i.e. $5$ splits. So $p=\\frac5{20}=\\frac14$ and the answer is $1+4=5$.\n\n**Answer: 5**"
+      },
+      {
+        "title": "Catalan numbers",
+        "body": "Read $x_1,\\dots,x_6$ in order, writing \"(\" for an $a$ and \")\" for a $b$. The brick fits exactly when this is a balanced string of parentheses. There are $C_3=5$ such strings among $\\binom63=20$, so $p=\\frac14$ and the answer is $5$.\n\n**Answer: 5**"
+      }
+    ],
+    "topics": [
+      "probability",
+      "counting"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-1993-08",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "1993 AIME",
+      "year": 1993,
+      "number": 8,
+      "url": "https://artofproblemsolving.com/wiki/index.php/1993_AIME_Problems/Problem_8"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Let $S$ be a set with six elements. In how many different ways can one select two not necessarily distinct subsets of $S$ so that the union of the two subsets is $S$? The order of selection does not matter; for example, the pair of subsets $\\{a, c\\},\\{b, c, d, e, f\\}$ represents the same selection as the pair $\\{b, c, d, e, f\\},\\{a, c\\}.$",
+    "image": null,
+    "choices": null,
+    "answer": "365",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Ordered pairs, then unorder",
+        "body": "For ordered pairs $(A,B)$ with $A\\cup B=S$, each element is in $A$ only, $B$ only, or both: $3^6=729$ pairs. The only pair with $A=B$ is $(S,S)$. The other $728$ come in swapped pairs, giving $364$ selections; add $1$ for $\\{S,S\\}$: $365$.\n\n**Answer: 365**"
+      },
+      {
+        "title": "Count by the smaller-labelled set",
+        "body": "Choose $A$ with $|A|=k$; then $B$ must contain $S\\setminus A$ and any subset of $A$: $2^k$ choices. Ordered total $\\sum\\binom6k2^k=3^6=729$. Unordered: $\\frac{729+1}{2}=365$ (the $+1$ accounts for the one symmetric pair).\n\n**Answer: 365**"
+      }
+    ],
+    "topics": [
+      "counting"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-1993-09",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "1993 AIME",
+      "year": 1993,
+      "number": 9,
+      "url": "https://artofproblemsolving.com/wiki/index.php/1993_AIME_Problems/Problem_9"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Two thousand points are given on a circle. Label one of the points 1. From this point, count 2 points in the clockwise direction and label this point 2. From the point labeled 2, count 3 points in the clockwise direction and label this point 3. (See figure.) Continue this process until the labels $1,2,3\\dots,1993$ are all used. Some of the points on the circle will have more than one label and some points will not have a label. What is the smallest integer that labels the same point as 1993?",
+    "image": "qimages/aime/1993/q09.webp",
+    "choices": null,
+    "answer": "118",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "A congruence",
+        "body": "Label $n$ is $2+3+\\dots+n=\\frac{n(n+1)}{2}-1$ steps from label $1$. So labels $n$ and $1993$ coincide iff\n$$\\frac{n(n+1)}2\\equiv\\frac{1993\\cdot1994}2\\pmod{2000}\\iff n(n+1)-1993\\cdot1994\\equiv0\\pmod{4000}.$$\nThe left side factors as $(n-1993)(n+1994)$. The two factors differ by $3987$, which is odd and not divisible by $5$, so $32$ divides one factor and $125$ divides one factor ($4000=32\\cdot125$).\n- $32\\mid n-1993$ and $125\\mid n-1993$: $n\\equiv1993\\pmod{4000}$.\n- $32\\mid n+1994$ and $125\\mid n+1994$: $n\\equiv2006$.\n- $32\\mid n-1993$, $125\\mid n+1994$: $n\\equiv9\\pmod{32}$, $n\\equiv6\\pmod{125}$, giving $n\\equiv3881$.\n- $32\\mid n+1994$, $125\\mid n-1993$: $n\\equiv22\\pmod{32}$, $n\\equiv118\\pmod{125}$, giving $n\\equiv118$.\n\nThe smallest positive value is $118$.\n\n**Answer: 118**"
+      },
+      {
+        "title": "Verify",
+        "body": "$\\frac{118\\cdot119}{2}=7021$ and $\\frac{1993\\cdot1994}{2}=1987021$. Their difference is $1980000=2000\\cdot990$, so labels $118$ and $1993$ are on the same point. The case analysis above shows no smaller $n$ works.\n\n**Answer: 118**"
+      }
+    ],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-1993-10",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "1993 AIME",
+      "year": 1993,
+      "number": 10,
+      "url": "https://artofproblemsolving.com/wiki/index.php/1993_AIME_Problems/Problem_10"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Euler's formula states that for a convex polyhedron with $V$ vertices, $E$ edges, and $F$ faces, $V-E+F=2$. A particular convex polyhedron has 32 faces, each of which is either a triangle or a pentagon. At each of its $V$ vertices, $T$ triangular faces and $P$ pentagonal faces meet. What is the value of $100P+10T+V$?",
+    "image": null,
+    "choices": null,
+    "answer": "250",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Solve the counting equations",
+        "body": "Let $t$ triangles and $p$ pentagons, $t+p=32$. Counting edges, $2E=3t+5p=96+2p$, so $p=E-48$ and $t=80-E$. Each vertex has degree $d=T+P$, so $2E=dV$, and Euler gives $V=E-30$. Then $2E=d(E-30)$, so $E=\\frac{30d}{d-2}$.\n- $d=3$: $E=90$, $p=42>32$. Impossible.\n- $d=4$: $E=60$, $V=30$, $p=12$, $t=20$.\n- $d=5$: $E=50$, $V=20$, $t=30$; then $VT=3t=90$ gives $T=4.5$. Impossible.\n- $d\\ge6$: $E\\le45<48$, so $p<0$. Impossible.\n\nSo $V=30$ and $VT=3t=60$, $VP=5p=60$: $T=2$, $P=2$. Answer: $100\\cdot2+10\\cdot2+30=250$.\n\n**Answer: 250**"
+      },
+      {
+        "title": "Recognize the solid",
+        "body": "The icosidodecahedron has $20$ triangles and $12$ pentagons ($32$ faces), $30$ vertices and $60$ edges ($30-60+32=2$), with two triangles and two pentagons at each vertex. That gives $200+20+30=250$, matching the unique solution of the counting equations.\n\n**Answer: 250**"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "spatial"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-1993-11",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "1993 AIME",
+      "year": 1993,
+      "number": 11,
+      "url": "https://artofproblemsolving.com/wiki/index.php/1993_AIME_Problems/Problem_11"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Alfred and Bonnie play a game in which they take turns tossing a fair coin. The winner of a game is the first person to obtain a head. Alfred and Bonnie play this game several times with the stipulation that the loser of a game goes first in the next game. Suppose that Alfred goes first in the first game, and that the probability that he wins the sixth game is $m/n$, where $m$ and $n$ are relatively prime positive integers. What are the last three digits of $m+n$?",
+    "image": null,
+    "choices": null,
+    "answer": "93",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Recursion on who starts",
+        "body": "The player who goes first wins with probability $\\frac12+\\frac18+\\dots=\\frac23$. Let $p_k$ be the probability that Alfred starts game $k$. He starts game $k+1$ iff he loses game $k$:\n$$p_{k+1}=p_k\\cdot\\tfrac13+(1-p_k)\\cdot\\tfrac23=\\tfrac23-\\tfrac{p_k}3.$$\n$p_1=1$, $p_2=\\frac13$, $p_3=\\frac59$, $p_4=\\frac{13}{27}$, $p_5=\\frac{41}{81}$, $p_6=\\frac{121}{243}$. Then\n$$P(\\text{Alfred wins game }6)=\\tfrac23p_6+\\tfrac13(1-p_6)=\\tfrac13+\\tfrac{p_6}{3}=\\tfrac13+\\tfrac{121}{729}=\\tfrac{364}{729}.$$\n$364$ and $729=3^6$ are coprime, $m+n=1093$, and the last three digits are $093$.\n\n**Answer: 93**"
+      },
+      {
+        "title": "Closed form",
+        "body": "The recursion has fixed point $\\frac12$, and $p_k-\\frac12=\\left(-\\frac13\\right)^{k-1}\\cdot\\frac12$. So $p_6=\\frac12-\\frac1{486}$, and the win probability is $\\frac13+\\frac{p_6}3=\\frac12-\\frac1{1458}=\\frac{728}{1458}=\\frac{364}{729}$. Again $m+n=1093$, ending in $093$.\n\n**Answer: 93**"
+      }
+    ],
+    "topics": [
+      "probability",
+      "sequences-series"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-1993-12",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "1993 AIME",
+      "year": 1993,
+      "number": 12,
+      "url": "https://artofproblemsolving.com/wiki/index.php/1993_AIME_Problems/Problem_12"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "The vertices of $\\triangle ABC$ are $A = (0,0)$, $B = (0,420)$, and $C = (560,0)$. The six faces of a die are labeled with two $A$'s, two $B$'s, and two $C$'s. Point $P_1 = (k,m)$ is chosen in the interior of $\\triangle ABC$, and points $P_2$, $P_3$, $P_4, \\dots$ are generated by rolling the die repeatedly and applying the rule: If the die shows label $L$, where $L \\in \\{A, B, C\\}$, and $P_n$ is the most recently obtained point, then $P_{n + 1}$ is the midpoint of $\\overline{P_n L}$. Given that $P_7 = (14,92)$, what is $k + m$?",
+    "image": null,
+    "choices": null,
+    "answer": "344",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Work backwards",
+        "body": "If $P_{n+1}$ is the midpoint of $P_nL$ then $P_n=2P_{n+1}-L$, and $P_n$ must lie inside the triangle ($x>0$, $y>0$, $3x+4y<1680$). Try each $L$:\n- $P_7=(14,92)$: $L=A$ gives $(28,184)$ ✓ ($B$ and $C$ give negative coordinates).\n- $P_6=(28,184)\\to P_5=(56,368)$ with $L=A$ ✓.\n- $P_5=(56,368)$: $L=A$ gives $(112,736)$, outside; $L=B$ gives $(112,316)$ ✓.\n- $P_4=(112,316)\\to P_3=(224,212)$ with $L=B$ ✓ ($L=A$ gives $(224,632)$, outside).\n- $P_3=(224,212)\\to P_2=(448,4)$ with $L=B$ ✓.\n- $P_2=(448,4)$: $L=A$ gives $(896,8)$, outside; $L=C$ gives $(336,8)$ ✓.\n\nSo $P_1=(336,8)$ and $k+m=344$.\n\n**Answer: 344**"
+      },
+      {
+        "title": "Unroll the averaging",
+        "body": "After six steps, $P_7=\\frac{P_1}{64}+\\sum_{j=1}^{6}\\frac{L_j}{2^{7-j}}$. In the $x$-coordinate only $C$'s contribute, a multiple of $\\frac{560}{64}=8.75$; since $0<\\frac{k}{64}<8.75$, from $14=\\frac k{64}+8.75j$ we get $j=1$ and $k=336$. In $y$ only $B$'s contribute, a multiple of $\\frac{420}{64}=6.5625$; from $92=\\frac m{64}+6.5625j'$ with $0<\\frac m{64}<6.5625$ we get $j'=14$ and $m=8$. So $k+m=344$.\n\n**Answer: 344**"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "algebra"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-1993-13",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "1993 AIME",
+      "year": 1993,
+      "number": 13,
+      "url": "https://artofproblemsolving.com/wiki/index.php/1993_AIME_Problems/Problem_13"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Jenny and Kenny are walking in the same direction, Kenny at 3 feet per second and Jenny at 1 foot per second, on parallel paths that are 200 feet apart. A tall circular building 100 feet in diameter is centered midway between the paths. At the instant when the building first blocks the line of sight between Jenny and Kenny, they are 200 feet apart. Let $t$ be the amount of time, in seconds, before Jenny and Kenny can see each other again. If $t$ is written as a fraction in lowest terms, what is the sum of the numerator and denominator?",
+    "image": null,
+    "choices": null,
+    "answer": "163",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Distance from the center to the line of sight",
+        "body": "Put the building's center at the origin (radius $50$), Jenny on $y=100$ and Kenny on $y=-100$, both walking in the $+x$ direction. When the line of sight first touches the building they are $200$ apart, i.e. directly across from each other, on the tangent line $x=-50$.\n\nAfter $t$ seconds: Jenny at $(-50+t,100)$, Kenny at $(-50+3t,-100)$. The segment between them passes through $M=(2t-50,0)$ with direction $(2t,-200)$. Its distance from the origin is\n$$\\frac{|(2t-50)(-200)|}{\\sqrt{4t^2+40000}}=\\frac{100|2t-50|}{\\sqrt{t^2+10000}}.$$\nThey see each other again when this equals $50$: $4(2t-50)^2=t^2+10000$, i.e. $15t^2-800t=0$, so $t=\\frac{160}{3}$. The answer is $160+3=163$.\n\n**Answer: 163**"
+      },
+      {
+        "title": "Check the geometry",
+        "body": "At $t=\\frac{160}{3}$: Jenny is at $\\left(\\frac{10}{3},100\\right)$ and Kenny at $(110,-100)$. The line through them has slope $-\\frac{200}{320/3}=-\\frac{15}{8}$ and passes through $\\left(\\frac{170}{3},0\\right)$; its distance from the origin is $\\frac{170}{3}\\cdot\\frac{15}{17}=50$, so it is tangent to the building, on the far side. ✓\n\n**Answer: 163**"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "rates"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-1993-14",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "1993 AIME",
+      "year": 1993,
+      "number": 14,
+      "url": "https://artofproblemsolving.com/wiki/index.php/1993_AIME_Problems/Problem_14"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "A rectangle that is inscribed in a larger rectangle (with one vertex on each side) is called unstuck if it is possible to rotate (however slightly) the smaller rectangle about its center within the confines of the larger. Of all the rectangles that can be inscribed unstuck in a 6 by 8 rectangle, the smallest perimeter has the form $\\sqrt{N}$, for a positive integer $N$. Find $N$.",
+    "image": null,
+    "choices": null,
+    "answer": "448",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Vertices on a circle",
+        "body": "Put the big rectangle as $|x|\\le4$, $|y|\\le3$. Opposite vertices of the inscribed rectangle lie on opposite sides, so its center (the midpoint of both diagonals) is the origin. All four vertices lie on a circle of radius $r$ (half the diagonal), and $r\\ge4$ because one vertex is on $x=4$.\n\nWrite the vertices as $V_1=(4,a)$, $V_2=(x_2,3)$, $-V_1$, $-V_2$, with $16+a^2=x_2^2+9=r^2$. Rotating about the origin moves each vertex along the circle. Inside the big rectangle the circle consists of four arcs near the corners, from $(4,\\sqrt{r^2-16})$ to $(\\sqrt{r^2-9},3)$ and their reflections. A vertex at an arc endpoint can move only into its arc. For a small rotation in one direction to work, every vertex must be at the end of an arc that points in that direction; this happens when (up to reflection) the vertices are\n$$(4,-a),\\ (b,3),\\ (-4,a),\\ (-b,-3),\\qquad a=\\sqrt{r^2-16},\\ b=\\sqrt{r^2-9},$$\n(with $a\\ge0$, $b>0$, and $r<5$ so the arcs have positive length). These rectangles are unstuck: rotating clockwise moves every vertex into the interior.\n\n**Perimeter.** With sides $s_1,s_2$: $s_1^2+s_2^2=(2r)^2$, and the area of the parallelogram with vertices $\\pm V_1,\\pm V_2$ is $2|\\det(V_1,V_2)|=2(12+ab)$. So\n$$(s_1+s_2)^2=4r^2+2\\cdot2(12+ab),\\qquad \\text{perimeter}^2=4(s_1+s_2)^2=16r^2+16(12+ab).$$\nThis increases with $r$, so it is smallest at $r=4$ ($a=0$, $b=\\sqrt7$): $256+192=448$. The rectangle with vertices $(\\pm4,0)$, $(\\pm\\sqrt7,\\pm3)$ is indeed unstuck (the vertices $(\\pm4,0)$ are where the circle of radius $4$ touches the sides, so they move inward under any rotation). Hence $N=448$.\n\n**Answer: 448**"
+      },
+      {
+        "title": "Direct check of the minimum",
+        "body": "For $r=4$ the vertices are $(4,0)$, $(\\sqrt7,3)$, $(-4,0)$, $(-\\sqrt7,-3)$. Side lengths: $\\sqrt{(4-\\sqrt7)^2+9}=\\sqrt{32-8\\sqrt7}$ and $\\sqrt{(4+\\sqrt7)^2+9}=\\sqrt{32+8\\sqrt7}$. Then\n$$\\left(\\sqrt{32-8\\sqrt7}+\\sqrt{32+8\\sqrt7}\\right)^2=64+2\\sqrt{1024-448}=64+48=112,$$\nso the perimeter is $2\\sqrt{112}=\\sqrt{448}$ and $N=448$.\n\n**Answer: 448**"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "inequalities"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-1993-15",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "1993 AIME",
+      "year": 1993,
+      "number": 15,
+      "url": "https://artofproblemsolving.com/wiki/index.php/1993_AIME_Problems/Problem_15"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Let $\\overline{CH}$ be an altitude of $\\triangle ABC$. Let $R$ and $S$ be the points where the circles inscribed in the triangles $ACH$ and $BCH$ are tangent to $\\overline{CH}$. If $AB = 1995$, $AC = 1994$, and $BC = 1993$, then $RS$ can be expressed as $m/n$, where $m$ and $n$ are relatively prime integers. Find $m + n$.",
+    "image": null,
+    "choices": null,
+    "answer": "997",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Tangent lengths",
+        "body": "In a triangle, the tangent length from a vertex is the semiperimeter minus the opposite side. So $CR=\\frac{AC+CH-AH}{2}$ and $CS=\\frac{BC+CH-BH}{2}$, giving\n$$RS=\\frac{|(AC-BC)-(AH-BH)|}{2}.$$\nFrom $AH^2-BH^2=AC^2-BC^2$ (both equal $AC^2-CH^2-(BC^2-CH^2)$) and $AH+BH=1995$:\n$$AH-BH=\\frac{1994^2-1993^2}{1995}=\\frac{3987}{1995}.$$\nSo $RS=\\frac12\\left|1-\\frac{3987}{1995}\\right|=\\frac{1992}{2\\cdot1995}=\\frac{996}{1995}=\\frac{332}{665}$, and $m+n=997$.\n\n**Answer: 997**"
+      },
+      {
+        "title": "Compute $AH$ and $BH$",
+        "body": "$AH=\\frac{1995^2+1994^2-1993^2}{2\\cdot1995}=\\frac{1995^2+3987}{3990}$ and $BH=1995-AH=\\frac{1995^2-3987}{3990}$. Then $AH-BH=\\frac{3987}{1995}$ and the formula $RS=\\frac12|AC-BC-(AH-BH)|$ gives $\\frac{996}{1995}=\\frac{332}{665}$ ($\\gcd=3$; $665=5\\cdot7\\cdot19$, $332=4\\cdot83$). Answer $997$.\n\n**Answer: 997**"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

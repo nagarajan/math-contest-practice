@@ -1,0 +1,204 @@
+[
+  {
+    "id": "imo-2003-01",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO",
+      "paper": "Day 1",
+      "year": 2003,
+      "number": 1,
+      "url": "https://www.imo-official.org/assets/documents/problems/2003/2003_eng.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $A$ be a $101$-element subset of $S=\\{1, 2, \\dots, 10^6\\}$. Prove that there exist numbers $t_1, t_2, \\dots, t_{100}$ in $S$ such that the sets\n$$A_j=\\{x+t_j\\mid x\\in A\\},\\qquad j=1, 2, \\dots, 100$$\nare pairwise disjoint.",
+    "image": null,
+    "choices": null,
+    "answer": "Proof (greedy): $A_i\\cap A_j\\neq\\varnothing$ iff $t_i-t_j$ is a difference of two elements of $A$; each chosen $t_i$ forbids at most $101\\cdot100+1$ values, and $99\\cdot10101<10^6$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Greedy choice",
+        "body": "Let $D=\\{a-b: a,b\\in A\\}$. It contains $0$ and at most $101\\cdot100=10100$ nonzero values, so $|D|\\le10101$.\n\nFor $t,t'\\in S$, the sets $A+t$ and $A+t'$ intersect iff $a+t=b+t'$ for some $a,b\\in A$, i.e. iff $t'-t\\in D$ (this includes $t=t'$, as $0\\in D$). So we need $t_1,\\dots,t_{100}\\in S$ with $t_i-t_j\\notin D$ for all $i\\ne j$.\n\nChoose them one at a time. Suppose $t_1,\\dots,t_k$ ($k\\le99$) have been chosen with this property. A value $t\\in S$ is forbidden for $t_{k+1}$ only if $t=t_i+\\delta$ for some $i\\le k$ and $\\delta\\in D$ (as $D=-D$, this covers both $t-t_i\\in D$ and $t_i-t\\in D$). There are at most\n$$k\\cdot|D|\\le99\\cdot10101=999\\,999<10^6$$\nforbidden values, so some $t\\in S$ is allowed; take it as $t_{k+1}$. After $100$ steps we have the required $t_1,\\dots,t_{100}$. ∎"
+      }
+    ],
+    "topics": [
+      "counting",
+      "number-theory"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-2003-02",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO",
+      "paper": "Day 1",
+      "year": 2003,
+      "number": 2,
+      "url": "https://www.imo-official.org/assets/documents/problems/2003/2003_eng.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Determine all pairs of positive integers $(a, b)$ such that\n$$\\frac{a^2}{2ab^2-b^3+1}$$\nis a positive integer.",
+    "image": null,
+    "choices": null,
+    "answer": "$(a,b)=(2l,1)$, $(l,2l)$ and $(8l^4-l,\\,2l)$ for any positive integer $l$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Vieta jumping",
+        "body": "Let $k=\\dfrac{a^2}{2ab^2-b^3+1}$ be a positive integer. Then the denominator is positive.\n\n**$b=1$.** The fraction is $\\frac{a^2}{2a}=\\frac a2$, a positive integer iff $a$ is even: $(a,b)=(2l,1)$.\n\n**$b\\ge2$.** The equation $a^2=k(2ab^2-b^3+1)$ says that $a$ is a root of\n$$X^2-2kb^2X+k(b^3-1)=0 .$$\nThe other root is $a'=2kb^2-a=\\dfrac{k(b^3-1)}a$: an integer by the first form, positive by the second (as $b\\ge2$). It satisfies the same equation, so $2a'b^2-b^3+1=a'^2/k>0$ and $(a',b)$ is also a solution with the same $k$.\n\n*Claim: in any solution, $b=2a$ or $a>b$.* Positivity of the denominator gives $2ab^2>b^3-1$, so $2ab^2\\ge b^3$ (integers), i.e. $2a\\ge b$. If $2a>b$, then $2a-b\\ge1$ and $a^2=k\\big(b^2(2a-b)+1\\big)\\ge b^2+1$, so $a>b$.\n\n*One of the two roots is $b/2$.* Otherwise both $a,a'>b$ by the claim. Say $a\\ge a'$; then $a\\ge\\frac{a+a'}2=kb^2$ and\n$$aa'>kb^2\\cdot b=kb^3>k(b^3-1)=aa',$$\na contradiction.\n\nSo $b=2l$ is even and one root is $l$. Then $k=\\dfrac{l^2}{2l\\cdot4l^2-8l^3+1}=l^2$, and the other root is $2kb^2-l=2l^2\\cdot4l^2-l=8l^4-l$. Thus $a\\in\\{l,\\;8l^4-l\\}$. Both are solutions: they are the two roots of $X^2-2kb^2X+k(b^3-1)$ with $k=l^2$, $b=2l$, and for each root the fraction equals $k=l^2$ (the denominator is $\\text{root}^2/k>0$). For example $(7,2)$: $\\frac{49}{56-8+1}=1$.\n\n**Answer:** $(2l,1)$, $(l,2l)$, $(8l^4-l,2l)$, $l=1,2,3,\\dots$"
+      }
+    ],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-2003-03",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO",
+      "paper": "Day 1",
+      "year": 2003,
+      "number": 3,
+      "url": "https://www.imo-official.org/assets/documents/problems/2003/2003_eng.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Each pair of opposite sides of a convex hexagon has the property that the distance between their midpoints is $\\dfrac{\\sqrt3}{2}$ times the sum of their lengths. Prove that the hexagon is equiangular.",
+    "image": null,
+    "choices": null,
+    "answer": "Proof (vectors): with $x,y,z$ the differences of opposite side vectors, the conditions give $|y-z|\\ge\\sqrt3|x|$ and cyclic versions; summing the squares forces $x+y+z=0$ and equality everywhere, so opposite sides are parallel and $x,y,z$ are at $120^\\circ$, which makes every angle $120^\\circ$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Vectors and the triangle inequality",
+        "body": "Let the hexagon be $ABCDEF$ and use the side vectors $\\mathbf a=\\vec{AB}$, $\\mathbf b=\\vec{BC}$, $\\mathbf c=\\vec{CD}$, $\\mathbf d=\\vec{DE}$, $\\mathbf e=\\vec{EF}$, $\\mathbf f=\\vec{FA}$, with $\\mathbf a+\\mathbf b+\\dots+\\mathbf f=\\mathbf 0$. Put\n$$\\mathbf x=\\mathbf a-\\mathbf d,\\qquad \\mathbf y=\\mathbf c-\\mathbf f,\\qquad \\mathbf z=\\mathbf e-\\mathbf b .$$\n\n**The midpoint vectors.** The vector from the midpoint of $AB$ to the midpoint of $DE$ is $\\frac12\\big((D-B)+(E-A)\\big)=\\frac12\\big(\\mathbf b+\\mathbf c-\\mathbf e-\\mathbf f\\big)=\\frac12(\\mathbf y-\\mathbf z)$. In the same way the midpoints of $BC,EF$ are $\\frac12|\\mathbf x-\\mathbf y|$ apart, and those of $CD,FA$ are $\\frac12|\\mathbf z-\\mathbf x|$ apart. By the hypothesis and the triangle inequality,\n$$\\tfrac12|\\mathbf y-\\mathbf z|=\\tfrac{\\sqrt3}2\\big(|\\mathbf a|+|\\mathbf d|\\big)\\ge\\tfrac{\\sqrt3}2|\\mathbf a-\\mathbf d|=\\tfrac{\\sqrt3}2|\\mathbf x| ,$$\nso $|\\mathbf y-\\mathbf z|\\ge\\sqrt3|\\mathbf x|$, and likewise $|\\mathbf z-\\mathbf x|\\ge\\sqrt3|\\mathbf y|$, $|\\mathbf x-\\mathbf y|\\ge\\sqrt3|\\mathbf z|$.\n\n**Summing squares.**\n$$|\\mathbf y-\\mathbf z|^2+|\\mathbf z-\\mathbf x|^2+|\\mathbf x-\\mathbf y|^2=2\\big(|\\mathbf x|^2+|\\mathbf y|^2+|\\mathbf z|^2\\big)-2(\\mathbf x\\cdot\\mathbf y+\\mathbf y\\cdot\\mathbf z+\\mathbf z\\cdot\\mathbf x)\\ge3\\big(|\\mathbf x|^2+|\\mathbf y|^2+|\\mathbf z|^2\\big),$$\nwhich rearranges to $0\\ge|\\mathbf x+\\mathbf y+\\mathbf z|^2$. Hence $\\mathbf x+\\mathbf y+\\mathbf z=\\mathbf 0$ and **all the inequalities above are equalities**.\n\n**Consequences.**\n1. $|\\mathbf a|+|\\mathbf d|=|\\mathbf a-\\mathbf d|$ means $\\mathbf a$ and $-\\mathbf d$ point in the same direction; so $\\mathbf a$ has the direction of $\\mathbf x$ and $\\mathbf d$ that of $-\\mathbf x$. Likewise $\\mathbf c,\\mathbf f$ have the directions of $\\mathbf y,-\\mathbf y$, and $\\mathbf e,\\mathbf b$ those of $\\mathbf z,-\\mathbf z$.\n2. With $\\mathbf z=-\\mathbf x-\\mathbf y$: $|\\mathbf y-\\mathbf z|^2=3|\\mathbf x|^2$ becomes $|\\mathbf x+2\\mathbf y|^2=3|\\mathbf x|^2$, i.e. $4|\\mathbf y|^2+4\\mathbf x\\cdot\\mathbf y=2|\\mathbf x|^2$; and $|\\mathbf z-\\mathbf x|^2=3|\\mathbf y|^2$ becomes $4|\\mathbf x|^2+4\\mathbf x\\cdot\\mathbf y=2|\\mathbf y|^2$. Subtracting, $6|\\mathbf y|^2=6|\\mathbf x|^2$. By symmetry $|\\mathbf x|=|\\mathbf y|=|\\mathbf z|$ (nonzero, since $|\\mathbf x|=|\\mathbf a|+|\\mathbf d|$).\n3. Three vectors of equal length with zero sum form an equilateral triangle, so $\\mathbf y=\\rho\\mathbf x$ and $\\mathbf z=\\rho^2\\mathbf x$, where $\\rho$ is a rotation by $120^\\circ$ (in one of the two senses).\n\nLet $\\sigma$ be the rotation by $60^\\circ$ in the same sense, so $\\rho=\\sigma^2$ and $-1=\\sigma^3$. If $\\mathbf u$ is the direction of $\\mathbf x$, the directions of $\\mathbf a,\\mathbf b,\\mathbf c,\\mathbf d,\\mathbf e,\\mathbf f$ are\n$$\\mathbf u,\\quad-\\rho^2\\mathbf u=\\sigma\\mathbf u,\\quad\\rho\\mathbf u=\\sigma^2\\mathbf u,\\quad-\\mathbf u=\\sigma^3\\mathbf u,\\quad\\rho^2\\mathbf u=\\sigma^4\\mathbf u,\\quad-\\rho\\mathbf u=\\sigma^5\\mathbf u .$$\nSo going around the hexagon, each side is obtained from the previous one by turning through $60^\\circ$ in the same sense: every exterior angle is $60^\\circ$ and every interior angle is $120^\\circ$. The hexagon is equiangular. ∎"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "inequalities"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-2003-04",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO",
+      "paper": "Day 2",
+      "year": 2003,
+      "number": 4,
+      "url": "https://www.imo-official.org/assets/documents/problems/2003/2003_eng.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $ABCD$ be a cyclic quadrilateral. Let $P$, $Q$ and $R$ be the feet of the perpendiculars from $D$ to the lines $BC$, $CA$ and $AB$, respectively. Show that $PQ=QR$ if and only if the bisectors of $\\angle ABC$ and $\\angle ADC$ meet on $AC$.",
+    "image": null,
+    "choices": null,
+    "answer": "Proof: $PQ=DC\\sin\\angle BCA$ and $QR=DA\\sin\\angle BAC$, so $PQ=QR\\iff\\frac{DA}{DC}=\\frac{BA}{BC}$, which by the angle bisector theorem says the two bisectors meet $AC$ at the same point.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Chords in two small circles",
+        "body": "**Computing $PQ$ and $QR$.** Since $\\angle DPC=\\angle DQC=90^\\circ$, the points $P,Q$ lie on the circle with diameter $DC$. In a circle of diameter $\\delta$, a chord equals $\\delta$ times the sine of any inscribed angle on it, so\n$$PQ=DC\\cdot\\sin\\angle PDQ .$$\nAs $DP\\perp BC$ and $DQ\\perp CA$, the angle $\\angle PDQ$ equals the angle between the lines $BC$ and $CA$ or its supplement, so $\\sin\\angle PDQ=\\sin\\angle BCA$. ($D$ is not on line $BC$ or $CA$, since a line meets the circle in at most two points.) Hence $PQ=DC\\sin\\angle BCA$. In the same way, $Q,R$ lie on the circle with diameter $DA$ and\n$$QR=DA\\sin\\angle BAC .$$\n\n**The equivalence.** By the law of sines in triangle $ABC$, $\\dfrac{\\sin\\angle BCA}{\\sin\\angle BAC}=\\dfrac{BA}{BC}$. Therefore\n$$PQ=QR\\iff DC\\sin\\angle BCA=DA\\sin\\angle BAC\\iff\\frac{DA}{DC}=\\frac{BA}{BC}.$$\n\n**The bisectors.** The bisector of $\\angle ABC$ meets segment $AC$ at the point $X$ with $\\frac{AX}{XC}=\\frac{BA}{BC}$, and the bisector of $\\angle ADC$ meets it at the point $Y$ with $\\frac{AY}{YC}=\\frac{DA}{DC}$ (angle bisector theorem). A point of segment $AC$ is determined by this ratio, so $X=Y$ iff $\\frac{BA}{BC}=\\frac{DA}{DC}$. If $X=Y$, the bisectors meet at this point of $AC$; if $X\\ne Y$, each bisector meets line $AC$ only at $X$, respectively $Y$, so they do not meet on $AC$.\n\nCombining, $PQ=QR$ iff the bisectors of $\\angle ABC$ and $\\angle ADC$ meet on $AC$. ∎"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "trigonometry"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-2003-05",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO",
+      "paper": "Day 2",
+      "year": 2003,
+      "number": 5,
+      "url": "https://www.imo-official.org/assets/documents/problems/2003/2003_eng.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $n$ be a positive integer and let $x_1\\le x_2\\le\\dots\\le x_n$ be real numbers. Prove that\n$$\\left(\\sum_{i=1}^n\\sum_{j=1}^n|x_i-x_j|\\right)^2\\le\\frac{2(n^2-1)}3\\sum_{i=1}^n\\sum_{j=1}^n(x_i-x_j)^2,$$\nwith equality if and only if $x_1, x_2, \\dots, x_n$ form an arithmetic sequence.",
+    "image": null,
+    "choices": null,
+    "answer": "Proof: shift so that $\\sum x_i=0$; then the left side is $4\\big(\\sum(2i-n-1)x_i\\big)^2$ and the right side is $\\frac{4n(n^2-1)}3\\sum x_i^2$, so it is Cauchy–Schwarz, with equality iff $x_i$ is proportional to $2i-n-1$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Cauchy–Schwarz after centering",
+        "body": "For $n=1$ both sides are $0$; let $n\\ge2$. Both sides are unchanged if the same number is added to every $x_i$, and so is the property of being an arithmetic sequence. So we may assume $\\sum_i x_i=0$.\n\n**Left side.** Since the $x_i$ are sorted, $\\sum_{i,j}|x_i-x_j|=2\\sum_{i<j}(x_j-x_i)$. The number $x_i$ appears with sign $+$ in the $i-1$ pairs where it is the larger and with sign $-$ in the $n-i$ pairs where it is the smaller, so\n$$\\sum_{i,j}|x_i-x_j|=2\\sum_{i=1}^n(2i-n-1)\\,x_i .$$\n\n**Right side.** $\\sum_{i,j}(x_i-x_j)^2=2n\\sum_ix_i^2-2\\big(\\sum_ix_i\\big)^2=2n\\sum_ix_i^2$.\n\n**A sum of squares.** $\\displaystyle\\sum_{i=1}^n(2i-n-1)^2=4\\sum i^2-4(n+1)\\sum i+n(n+1)^2=\\frac{n(n+1)(n-1)}3$.\n\n**Cauchy–Schwarz.**\n$$\\Big(\\sum_{i,j}|x_i-x_j|\\Big)^2=4\\Big(\\sum_i(2i-n-1)x_i\\Big)^2\\le4\\cdot\\frac{n(n^2-1)}3\\sum_ix_i^2=\\frac{2(n^2-1)}3\\cdot2n\\sum_ix_i^2,$$\nwhich is the claimed inequality.\n\n**Equality** holds iff $(x_i)$ is proportional to the nonzero vector $(2i-n-1)_i$, i.e. $x_i=\\lambda(2i-n-1)$: an arithmetic sequence. Conversely, an arithmetic sequence with sum $0$ is $x_i=\\delta\\big(i-\\frac{n+1}2\\big)=\\frac\\delta2(2i-n-1)$, so equality holds. ∎"
+      }
+    ],
+    "topics": [
+      "inequalities",
+      "algebra"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-2003-06",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO",
+      "paper": "Day 2",
+      "year": 2003,
+      "number": 6,
+      "url": "https://www.imo-official.org/assets/documents/problems/2003/2003_eng.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $p$ be a prime number. Prove that there exists a prime number $q$ such that for every integer $n$, the number $n^p-p$ is not divisible by $q$.",
+    "image": null,
+    "choices": null,
+    "answer": "Proof: take a prime $q\\mid\\frac{p^p-1}{p-1}$ with $q\\not\\equiv1\\pmod{p^2}$ (it exists because that number is $\\equiv1+p\\pmod{p^2}$); then $n^p\\equiv p\\pmod q$ would force $n^p\\equiv1$ and so $q\\mid p$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "A prime factor of $1+p+\\dots+p^{p-1}$",
+        "body": "Let $N=\\dfrac{p^p-1}{p-1}=1+p+p^2+\\dots+p^{p-1}$.\n\n**Choice of $q$.** $N\\equiv1+p\\pmod{p^2}$, so $N\\not\\equiv1\\pmod{p^2}$. If every prime factor of $N$ were $\\equiv1\\pmod{p^2}$, their product $N$ would be $\\equiv1$. So $N$ has a prime factor $q$ with $q\\not\\equiv1\\pmod{p^2}$. Also $q\\ne p$, since $N\\equiv1\\pmod p$.\n\n**$q$ works.** Note $q\\mid N\\mid p^p-1$, so $p^p\\equiv1\\pmod q$. Suppose $n^p\\equiv p\\pmod q$ for some integer $n$. Then $q\\nmid n$ (otherwise $q\\mid p$), and\n$$n^{p^2}=(n^p)^p\\equiv p^p\\equiv1\\pmod q,\\qquad n^{q-1}\\equiv1\\pmod q\\ \\text{(Fermat)} .$$\nSo the order of $n$ modulo $q$ divides $\\gcd(p^2,q-1)$. Since $p^2\\nmid q-1$, this gcd divides $p$, so $n^p\\equiv1\\pmod q$. Hence $p\\equiv n^p\\equiv1\\pmod q$. But then\n$$N=1+p+\\dots+p^{p-1}\\equiv1+1+\\dots+1=p\\pmod q,$$\nand $q\\mid N$ gives $q\\mid p$, i.e. $q=p$, a contradiction.\n\nSo $q\\nmid n^p-p$ for every integer $n$. ∎"
+      }
+    ],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

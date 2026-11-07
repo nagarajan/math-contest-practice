@@ -1,0 +1,205 @@
+[
+  {
+    "id": "usamo-usamo-2004-01",
+    "bank": "usamo",
+    "source": {
+      "contest": "USAMO",
+      "paper": "USAMO 2004",
+      "year": 2004,
+      "number": 1,
+      "url": "https://web.evanchen.cc/exams/USAMO-2004-notes.pdf"
+    },
+    "grade": "10-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $ABCD$ be a quadrilateral circumscribed about a circle, whose interior and exterior angles are at least $60$ degrees. Prove that\n$$\\frac13\\left|AB^3 - AD^3\\right| \\le \\left|BC^3 - CD^3\\right| \\le 3\\left|AB^3 - AD^3\\right|.$$\nWhen does equality hold?",
+    "image": null,
+    "choices": null,
+    "answer": "Since $AB - AD = BC - CD$ (Pitot), the claim reduces to $\\frac13(AB^2+AB\\cdot AD+AD^2) \\le BC^2+BC\\cdot CD+CD^2$, which follows by comparing both sides with $BD^2$ via the law of cosines. Equality holds exactly when $AB = AD$ and $CB = CD$ (a kite), when all three quantities are $0$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Factor, then compare both sides with the diagonal $BD$",
+        "body": "The angle condition says every interior angle lies in $[60^\\circ, 120^\\circ]$ (an exterior angle is $180^\\circ$ minus the interior one). A quadrilateral with an incircle is convex.\n\n**Reduction.** Tangent segments from a vertex to the incircle are equal, which gives Pitot's theorem $AB + CD = BC + AD$, i.e.\n$$x := AB - AD = BC - CD.$$\nFactor the differences of cubes:\n$$|AB^3 - AD^3| = |x|\\,(AB^2 + AB\\cdot AD + AD^2), \\qquad |BC^3 - CD^3| = |x|\\,(BC^2 + BC\\cdot CD + CD^2).$$\nIf $x = 0$, all three expressions in the chain are $0$ and both inequalities are equalities. If $x \\ne 0$, we may divide by $|x|$, and the left inequality becomes\n$$\\tfrac13\\left(AB^2 + AB\\cdot AD + AD^2\\right) \\le BC^2 + BC\\cdot CD + CD^2. \\qquad (1)$$\nThe right inequality is the left inequality for the relabelled quadrilateral $CBAD$ (swap $A$ and $C$), which satisfies the same hypotheses. So it suffices to prove $(1)$.\n\n**Proof of (1).** By the law of cosines in triangles $BCD$ and $BAD$,\n$$BD^2 = BC^2 + CD^2 - 2\\,BC\\cdot CD\\cos C = AB^2 + AD^2 - 2\\,AB\\cdot AD\\cos A.$$\nSince $C \\le 120^\\circ$ we have $\\cos C \\ge -\\tfrac12$, and since $A \\ge 60^\\circ$ we have $\\cos A \\le \\tfrac12$. Hence\n$$BC^2 + BC\\cdot CD + CD^2 \\;\\ge\\; BD^2 \\;\\ge\\; AB^2 + AD^2 - AB\\cdot AD.$$\nFinally\n$$AB^2 + AD^2 - AB\\cdot AD - \\tfrac13\\left(AB^2 + AB\\cdot AD + AD^2\\right) = \\tfrac23\\,(AB - AD)^2 \\ge 0,$$\nwhich proves $(1)$.\n\n**Equality.** When $x \\neq 0$ we have $AB \\ne AD$, so the last step is strict and $(1)$ is strict; the same holds for the right inequality. So equality (in either inequality) happens exactly when $x = 0$, i.e. $AB = AD$ and $CB = CD$: $ABCD$ is a kite, and then all three quantities equal $0$. ∎"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "inequalities"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamo-usamo-2004-02",
+    "bank": "usamo",
+    "source": {
+      "contest": "USAMO",
+      "paper": "USAMO 2004",
+      "year": 2004,
+      "number": 2,
+      "url": "https://web.evanchen.cc/exams/USAMO-2004-notes.pdf"
+    },
+    "grade": "10-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $a_1, a_2, \\dots, a_n$ be integers whose greatest common divisor is $1$. Let $S$ be a set of integers with the following properties:\n\n(a) $a_i \\in S$ for $i = 1, \\dots, n$.\n\n(b) $a_i - a_j \\in S$ for $i, j = 1, \\dots, n$, not necessarily distinct.\n\n(c) If $x, y \\in S$ and $x + y \\in S$, then $x - y \\in S$ too.\n\nProve that $S = \\mathbb{Z}$.",
+    "image": null,
+    "choices": null,
+    "answer": "Show that every integer combination $\\sum c_i a_i$ lies in $S$ (first for two terms by \"extending lines\", then by induction on the number of terms, removing an odd-parity obstruction), and finish with Bézout.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "All integer combinations lie in $S$",
+        "body": "**Basic facts.** Taking $i = j$ in (b) gives $0 \\in S$. If $s \\in S$, apply (c) to $x = 0$, $y = s$ (here $x + y = s \\in S$) to get $-s \\in S$. So $S = -S$; in particular $\\pm a_i \\in S$.\n\n**The extension trick.** Fix $u \\in S$ with $-u\\in S$. If $w \\in S$ and $w - u \\in S$, then (c) with $x = w$, $y = -u$ gives $w + u \\in S$. Likewise if $w, w + u \\in S$ then (c) with $x = w,\\ y = u$ gives $w - u \\in S$. Consequently: *if two consecutive terms $w,\\ w+u$ of the progression $\\{w + tu : t\\in\\mathbb Z\\}$ lie in $S$, then the whole progression lies in $S$.*\n\n**Lemma 1.** For all integers $c, d$ and indices $i, j$: $c a_i + d a_j \\in S$.\n\n*Proof.* Use the extension trick with $u = a_j$ and $u = a_i$ (both in $S$ with their negatives).\n- $0, a_i \\in S$ are consecutive in $\\{t a_i\\}$, so all multiples $c a_i$ are in $S$; similarly all $d a_j$.\n- $a_i - a_j$ and $a_i$ are in $S$ and are consecutive in $\\{a_i + t a_j\\}$, so $a_i + d a_j \\in S$ for every $d$.\n- For fixed $d$, the numbers $d a_j$ and $a_i + d a_j$ are in $S$ and consecutive in $\\{d a_j + t a_i\\}$, so $c a_i + d a_j \\in S$ for every $c$. $\\square$\n\n**Lemma 2.** For any distinct indices $i_1, \\dots, i_m$ and any integers $c_1, \\dots, c_m$, we have $\\sum_k c_k a_{i_k} \\in S$.\n\n*Proof.* Induction on $m$; the cases $m \\le 2$ are Lemma 1. Let $m \\ge 3$ and relabel so that the indices are $1, \\dots, m$. If some $c_k = 0$ or some $a_k = 0$, the sum has fewer than $m$ nonzero terms and we are done by induction. So assume all $c_k$ and $a_k$ are nonzero.\n\n*Case 1: some coefficient is even*, say (after relabelling) $c_1 = 2e$. Put\n$$x = e a_1 + \\sum_{k \\ge 3} c_k a_k, \\qquad y = -e a_1 - c_2 a_2.$$\nThen $x \\in S$ (induction, $m - 1$ terms), $y \\in S$ (Lemma 1), and $x + y = -c_2 a_2 + \\sum_{k\\ge 3} c_k a_k \\in S$ (induction). By (c), $x - y = 2e a_1 + c_2 a_2 + \\sum_{k \\ge 3} c_k a_k = \\sum_k c_k a_k \\in S$.\n\n*Case 2: all coefficients are odd.* Let $g = \\gcd(a_1, a_2)$, $u = a_1/g$, $v = a_2/g$; then $\\gcd(u, v) = 1$, so $u$ and $v$ are not both even. Since $v a_1 = u a_2$,\n$$c_1 a_1 + c_2 a_2 = (c_1 + v) a_1 + (c_2 - u) a_2.$$\nIf $v$ is odd, $c_1 + v$ is even; otherwise $u$ is odd and $c_2 - u$ is even. Either way the same number is written as a combination with an even coefficient, and Case 1 applies (if that coefficient is $0$, use the induction hypothesis instead). $\\square$\n\n**Conclusion.** Since $\\gcd(a_1, \\dots, a_n) = 1$, Bézout gives integers $c_i$ with $\\sum c_i a_i = 1$. For any integer $t$, $t = \\sum (t c_i) a_i \\in S$ by Lemma 2 (with $m = n$). Hence $S = \\mathbb Z$. ∎"
+      }
+    ],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamo-usamo-2004-03",
+    "bank": "usamo",
+    "source": {
+      "contest": "USAMO",
+      "paper": "USAMO 2004",
+      "year": 2004,
+      "number": 3,
+      "url": "https://web.evanchen.cc/exams/USAMO-2004-notes.pdf"
+    },
+    "grade": "10-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "For what real values of $k > 0$ is it possible to dissect a $1 \\times k$ rectangle into two similar but noncongruent polygons?",
+    "image": null,
+    "choices": null,
+    "answer": "For every $k > 0$ except $k = 1$: a \"double staircase\" works for every $k\\neq 1$, while for a square the two pieces would have equal longest sides (or different numbers of sides).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Staircase construction; longest-side argument for the square",
+        "body": "**Answer: all $k > 0$ except $k = 1$.**\n\nA $1\\times k$ rectangle is similar to a $1 \\times \\frac1k$ rectangle, so for the construction it suffices to treat $k > 1$.\n\n### Construction for $k > 1$\n\nFix an integer $n \\ge 1$ and a real $r > 1$. Put $W = 1 + r^2 + \\dots + r^{2n}$ and $H = r + r^3 + \\dots + r^{2n-1}$, and use coordinates with $x$ measured to the **left** from the right edge and $y$ measured **down** from the top edge of the rectangle $[0, W] \\times [0, H]$. For $j = 1, \\dots, n$ let\n$$W_j = 1 + r^2 + \\dots + r^{2j-2}, \\qquad H_j = r + r^3 + \\dots + r^{2j-1} \\quad(W_0 = 0,\\ H_0 = 0),$$\nand define the strips\n$$P_j = [0, W_j] \\times [H_{j-1}, H_j], \\qquad Q_j = [W_j, W_{j+1}] \\times [0, H_j]$$\n(with $W_{n+1} = W$). Let $P = \\bigcup_j P_j$ and $Q = \\bigcup_j Q_j$.\n\n- Building the figure in the order $P_1, Q_1, P_2, Q_2, \\dots$ (each new strip is glued below or to the left of the rectangle built so far) shows that after each step we have the rectangle $[0, W_{j+1}]\\times[0,H_j]$ or $[0,W_j]\\times[0,H_j]$; at the end $P$ and $Q$ tile $[0, W]\\times[0, H]$ without overlap. Each of $P$, $Q$ is a staircase-shaped polygon.\n- **$Q$ is similar to $P$.** Scale $P$ by $r$ and swap the roles of the two coordinates. The strip $P_j$ becomes $[r H_{j-1}, rH_j] \\times [0, rW_j]$, and $rH_j = W_{j+1} - 1$, $rW_j = H_j$. So the image is $[W_j - 1, W_{j+1} - 1] \\times [0, H_j] = Q_j$ shifted by $1$. Hence $Q$ is the image of $P$ under a similarity of ratio $r$.\n- Since $r > 1$, $P$ and $Q$ are not congruent.\n\nThe rectangle is similar to a $1 \\times f_n(r)$ rectangle where, because $rH = W - 1$,\n$$f_n(r) = \\frac{W}{H} = r + \\frac{1}{r + r^3 + \\dots + r^{2n-1}}.$$\n$f_n$ is continuous on $(1, \\infty)$, $f_n(r) \\to 1 + \\frac1n$ as $r \\to 1^+$ and $f_n(r)\\to\\infty$ as $r \\to \\infty$. By the intermediate value theorem $f_n$ takes every value in $(1 + \\frac1n, \\infty)$. Given $k > 1$, choose $n$ with $1 + \\frac1n < k$ and $r$ with $f_n(r) = k$; scaling gives the desired dissection of the $1\\times k$ rectangle.\n\n### Impossibility for the square ($k = 1$)\n\nSuppose the unit square is cut into polygons $P \\sim Q$, not congruent. Their common boundary is a polygonal path $\\Gamma$ whose endpoints $X \\ne Y$ lie on the boundary of the square and whose other points are inside. Let $\\Gamma$ consist of $m$ maximal straight segments. Each of them is a side of both $P$ and $Q$, and the end segments of $\\Gamma$ are not collinear with the square's sides (they go into the interior). The remaining sides of $P$ (and of $Q$) are pieces of the square's boundary.\n\n*Case 1: $X, Y$ lie on a common side.* One piece is bounded by $\\Gamma$ and the segment $XY$, so it has $m + 1$ sides; the other contains the three remaining full sides of the square, so it has at least $m + 3$ sides. Similar polygons have equally many sides — contradiction.\n\n*Case 2: $X, Y$ lie on two adjacent sides but not on a common side, and not on opposite sides.* Then both are interior points of their sides. One piece has $m + 2$ sides (two pieces of the square's boundary meeting at one corner), the other $m + 4$. Contradiction.\n\n*Case 3: $X$ and $Y$ lie on opposite sides* (say left and right). Then $P$'s boundary contains one full side of the square (the top, say) and $Q$'s contains the other (the bottom). Let $s$ be the longest segment of $\\Gamma$. Every side of $P$ is either a segment of $\\Gamma$ (length $\\le s$) or a piece of the square's boundary (length $\\le 1$), and one side has length exactly $1$; so the longest side of $P$ is $\\max(s, 1)$. The same holds for $Q$. Similar polygons with equal longest sides are congruent — contradiction.\n\nHence the square cannot be dissected, and the answer is every $k > 0$ with $k \\ne 1$. ∎"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamo-usamo-2004-04",
+    "bank": "usamo",
+    "source": {
+      "contest": "USAMO",
+      "paper": "USAMO 2004",
+      "year": 2004,
+      "number": 4,
+      "url": "https://web.evanchen.cc/exams/USAMO-2004-notes.pdf"
+    },
+    "grade": "10-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Alice and Bob play a game on a $6$ by $6$ grid. On his turn, a player chooses a rational number not yet appearing in the grid and writes it in an empty square of the grid. Alice goes first and then the players alternate. When all squares have numbers written in them, in each row, the square with the greatest number in that row is colored black. Alice wins if she can then draw a line from the top of the grid to the bottom of the grid that stays in black squares, and Bob wins if she can't. (If two squares share a vertex, Alice can draw a line from one to the other that stays in those two squares.) Find, with proof, a winning strategy for one of the players.",
+    "image": null,
+    "choices": null,
+    "answer": "Bob wins: pair the square in column $j$ of row 1 with the square in column $j+3 \\pmod 6$ of row 2, always answer in the paired square so that both rows have the same order pattern, and otherwise answer in rows 3–6. Then the black squares of rows 1 and 2 are 3 columns apart and do not touch.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Bob copies the order pattern in the first two rows",
+        "body": "**Bob has a winning strategy.**\n\nNumber the columns $1, \\dots, 6$. Pair each square of row 1 with a square of row 2 by\n$$(1, j) \\longleftrightarrow (2, j + 3), \\quad j = 1,2,3 \\qquad\\text{and}\\qquad (1, j) \\longleftrightarrow (2, j - 3), \\quad j = 4,5,6.$$\nPaired squares are always exactly $3$ columns apart.\n\n**Bob's strategy.** He keeps the following invariants after each of his moves: (i) in rows 1–2, two paired squares are either both empty or both filled; (ii) for any two filled pairs $(x, x')$ and $(y, y')$ (with $x, y$ in row 1), $x < y \\iff x' < y'$.\n\n- If Alice writes $q$ in a square of rows 1–2, its partner is empty by (i). Bob writes a number in the partner square so that it compares with the other filled squares of the partner's row exactly as $q$ compares with the corresponding squares of the other row. This is possible: by (ii) the filled numbers of the two rows are in the same order, so $q$ falls into a certain gap of its row (between two consecutive filled values, or beyond the smallest/largest), and Bob picks a rational in the corresponding open gap of the other row. Such a gap contains infinitely many rationals, and only finitely many numbers are already used, so he can choose a new one. Now (i) and (ii) hold again.\n- If Alice writes in rows 3–6, Bob writes any unused rational in an empty square of rows 3–6. Such a square exists: rows 3–6 have $24$ squares, and since Bob always answers in the same block as Alice, after each of Bob's moves an even number of squares of rows 3–6 is filled; when Alice has just played there, an odd number is filled, so one is still empty.\n\n**Why Bob wins.** At the end all $12$ squares of rows 1–2 are filled and (ii) holds for all pairs. So if the largest number in row 1 is in square $x$, then the largest number in row 2 is in the partner $x'$. These two black squares are $3$ columns apart, so they share neither a side nor a vertex. Any line from the top to the bottom of the grid staying in black squares would have to pass from the only black square of row 1 to the only black square of row 2, which is impossible. So Alice cannot draw her line and Bob wins. ∎"
+      }
+    ],
+    "topics": [
+      "games",
+      "logic"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamo-usamo-2004-05",
+    "bank": "usamo",
+    "source": {
+      "contest": "USAMO",
+      "paper": "USAMO 2004",
+      "year": 2004,
+      "number": 5,
+      "url": "https://web.evanchen.cc/exams/USAMO-2004-notes.pdf"
+    },
+    "grade": "10-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $a$, $b$, $c$ be positive reals. Prove that\n$$\\left(a^5 - a^2 + 3\\right)\\left(b^5 - b^2 + 3\\right)\\left(c^5 - c^2 + 3\\right) \\ge (a + b + c)^3.$$",
+    "image": null,
+    "choices": null,
+    "answer": "$a^5 - a^2 + 3 \\ge a^3 + 2$ because the difference is $(a^3-1)(a^2-1) \\ge 0$; then Hölder gives $(a^3+1+1)(1+b^3+1)(1+1+c^3) \\ge (a+b+c)^3$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Reduce to cubes, then Hölder",
+        "body": "**Step 1.** For $t > 0$,\n$$t^5 - t^2 + 3 - (t^3 + 2) = t^5 - t^3 - t^2 + 1 = (t^3 - 1)(t^2 - 1) = (t-1)^2 (t+1)(t^2+t+1) \\ge 0.$$\nSo $t^5 - t^2 + 3 \\ge t^3 + 2 > 0$, and since all factors are positive,\n$$\\prod_{\\text{cyc}} (a^5 - a^2 + 3) \\ge (a^3 + 2)(b^3 + 2)(c^3 + 2) = (a^3 + 1 + 1)(1 + b^3 + 1)(1 + 1 + c^3).$$\n\n**Step 2 (Hölder).** For positive reals $x_i, y_i, z_i$ ($i = 1,2,3$),\n$$\\Big(\\sum x_i^3\\Big)\\Big(\\sum y_i^3\\Big)\\Big(\\sum z_i^3\\Big) \\ge \\Big(\\sum x_i y_i z_i\\Big)^3.$$\n*Proof.* Let $X = \\sum x_i^3$, $Y = \\sum y_i^3$, $Z = \\sum z_i^3$. By AM-GM, for each $i$,\n$$\\frac{x_i y_i z_i}{\\sqrt[3]{XYZ}} = \\sqrt[3]{\\frac{x_i^3}{X}\\cdot\\frac{y_i^3}{Y}\\cdot\\frac{z_i^3}{Z}} \\le \\frac13\\left(\\frac{x_i^3}{X} + \\frac{y_i^3}{Y} + \\frac{z_i^3}{Z}\\right).$$\nSumming over $i$, the right side totals $\\frac13(1+1+1) = 1$, so $\\sum x_i y_i z_i \\le \\sqrt[3]{XYZ}$. $\\square$\n\nApply it with $(x_i) = (a, 1, 1)$, $(y_i) = (1, b, 1)$, $(z_i) = (1, 1, c)$: then $\\sum x_i y_i z_i = a + b + c$ and\n$$(a^3 + 1 + 1)(1 + b^3 + 1)(1 + 1 + c^3) \\ge (a + b + c)^3.$$\nCombining with Step 1 proves the inequality (equality iff $a = b = c = 1$). ∎"
+      }
+    ],
+    "topics": [
+      "inequalities",
+      "algebra"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamo-usamo-2004-06",
+    "bank": "usamo",
+    "source": {
+      "contest": "USAMO",
+      "paper": "USAMO 2004",
+      "year": 2004,
+      "number": 6,
+      "url": "https://web.evanchen.cc/exams/USAMO-2004-notes.pdf"
+    },
+    "grade": "10-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "A circle $\\omega$ is inscribed in a quadrilateral $ABCD$. Let $I$ be the center of $\\omega$. Suppose that\n$$(AI + DI)^2 + (BI + CI)^2 = (AB + CD)^2.$$\nProve that $ABCD$ is an isosceles trapezoid.",
+    "image": null,
+    "choices": null,
+    "answer": "With inradius $1$ and tangent lengths $a,b,c,d$, the condition becomes $\\sqrt{(a^2+1)(d^2+1)} + \\sqrt{(b^2+1)(c^2+1)} = S - 2$ ($S$ = sum of pairwise products). Using $a+b+c+d = abc+bcd+cda+dab$, one gets $(S-2)^2 - (\\text{LHS})^2 = (ab-1)^2+(ac-1)^2+(bd-1)^2+(cd-1)^2+(a-d)^2+(b-c)^2$, which forces $a = d = 1/b = 1/c$: an isosceles trapezoid with $AD \\parallel BC$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Tangent lengths and a sum of squares",
+        "body": "Scale so that $\\omega$ has radius $1$. Let $a, b, c, d > 0$ be the tangent lengths from $A, B, C, D$ to $\\omega$, and let $\\alpha, \\beta, \\gamma, \\delta$ be the half-angles of $ABCD$ at $A, B, C, D$. Then $a = \\cot\\alpha$, etc., and $\\alpha + \\beta + \\gamma + \\delta = \\pi$ (the angles of the quadrilateral sum to $2\\pi$). Also\n$$AB = a + b,\\quad CD = c + d,\\quad AI = \\sqrt{a^2 + 1},\\ \\dots$$\n(right triangle formed by $A$, $I$ and the point of tangency).\n\n**Two identities.** Note $a + i = \\frac{\\cos\\alpha + i\\sin\\alpha}{\\sin\\alpha}$ has argument $\\alpha$ and modulus $\\sqrt{a^2+1}$. So\n$$(a+i)(b+i)(c+i)(d+i)$$\nhas argument $\\alpha+\\beta+\\gamma+\\delta = \\pi$: it is a negative real number. Expanding with $e_1 = a+b+c+d$, $S = e_2 = \\sum ab$ (six terms), $e_3 = \\sum abc$, $e_4 = abcd$:\n$$(a+i)(b+i)(c+i)(d+i) = (e_4 - S + 1) + i(e_3 - e_1).$$\nHence\n$$e_1 = e_3 \\qquad (\\star)$$\nand, comparing moduli, $\\sqrt{(a^2+1)(b^2+1)(c^2+1)(d^2+1)} = S - e_4 - 1$.\n\nPut $X = \\sqrt{(a^2+1)(d^2+1)}$, $Y = \\sqrt{(b^2+1)(c^2+1)}$; so $XY = S - abcd - 1$.\n\n**Rewriting the hypothesis.** The left side equals $a^2+b^2+c^2+d^2 + 4 + 2X + 2Y$ and the right side is $(a+b+c+d)^2 = a^2+b^2+c^2+d^2 + 2S$. So the hypothesis says\n$$X + Y = S - 2.$$\n\n**Key identity.** We claim\n$$(S-2)^2 - (X+Y)^2 = (ab-1)^2 + (ac-1)^2 + (bd-1)^2 + (cd-1)^2 + (a-d)^2 + (b-c)^2. \\qquad (\\dagger)$$\nFirst, $(X+Y)^2 = X^2 + Y^2 + 2XY = (ad)^2 + (bc)^2 + \\sum a^2 + 2 + 2(S - abcd - 1)$, so\n$$(S-2)^2 - (X+Y)^2 = S^2 - 6S + 4 + 2abcd - (ad)^2 - (bc)^2 - \\textstyle\\sum a^2.$$\nNext expand $S^2$: the squares of the six products give $\\sum_{\\text{pairs}} (ab)^2$; products of two disjoint pairs give $3$ terms $abcd$, each twice; products of two pairs sharing one letter give the $12$ monomials of type $a^2bc$, each twice. So $S^2 = \\sum_{\\text{pairs}}(ab)^2 + 6abcd + 2T$, where $T$ is the sum of these $12$ monomials. On the other hand, by $(\\star)$,\n$$e_1^2 = e_1 e_3 = 4abcd + T$$\n(each $a\\cdot abc$-type product is one of the $12$ monomials, and each $a\\cdot bcd$-type product is $abcd$). As $e_1^2 = \\sum a^2 + 2S$, we get $T = \\sum a^2 + 2S - 4abcd$, hence\n$$S^2 + 2abcd = \\textstyle\\sum_{\\text{pairs}}(ab)^2 + 2\\sum a^2 + 4S.$$\nSubstituting,\n$$(S-2)^2 - (X+Y)^2 = (ab)^2 + (ac)^2 + (bd)^2 + (cd)^2 + \\textstyle\\sum a^2 - 2S + 4,$$\nand expanding the right side of $(\\dagger)$ gives exactly the same expression (the cross terms are $-2(ab+ac+bd+cd+ad+bc) = -2S$). This proves $(\\dagger)$.\n\n**Conclusion.** The hypothesis gives $X + Y = S - 2$, so the left side of $(\\dagger)$ is $0$, and every square on the right is $0$:\n$$ab = ac = bd = cd = 1,\\qquad a = d,\\qquad b = c.$$\nSo $a = d$ and $b = c = 1/a$.\n- $a = d$ means $\\alpha = \\delta$, i.e. $\\angle A = \\angle D$.\n- $ab = 1$ means $\\cot\\alpha\\cot\\beta = 1$, i.e. $\\alpha + \\beta = 90^\\circ$, so $\\angle A + \\angle B = 180^\\circ$ and $AD \\parallel BC$.\n\nThen also $\\angle B = 180^\\circ - \\angle A = 180^\\circ - \\angle D = \\angle C$. A quadrilateral with $AD \\parallel BC$ and equal base angles $\\angle A = \\angle D$ is an isosceles trapezoid (legs $AB = CD$; it may be a square). ∎\n\n*Remark.* $(\\dagger)$ shows that in fact $(AI+DI)^2 + (BI+CI)^2 \\le (AB+CD)^2$ holds for every tangential quadrilateral, with equality only for these trapezoids."
+      }
+    ],
+    "topics": [
+      "geometry",
+      "inequalities",
+      "algebra"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

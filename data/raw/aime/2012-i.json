@@ -1,0 +1,569 @@
+[
+  {
+    "id": "aime-2012-i-01",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "2012 AIME I",
+      "year": 2012,
+      "number": 1,
+      "url": "https://artofproblemsolving.com/wiki/index.php/2012_AIME_I_Problems/Problem_1"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Find the number of positive integers with three not necessarily distinct digits, $abc$, with $a \\neq 0$ and $c \\neq 0$ such that both $abc$ and $cba$ are multiples of $4$.",
+    "image": null,
+    "choices": null,
+    "answer": "40",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Last two digits",
+        "body": "A number is a multiple of $4$ exactly when its last two digits form a multiple of $4$. So we need both $\\overline{bc}$ and $\\overline{ba}$ to be multiples of $4$.\n\nFix the middle digit $b$.\n- If $b$ is even, $\\overline{b c}\\equiv 2b + c \\equiv c \\pmod 4$ (as $2b\\equiv 0$), so $c\\in\\{0,4,8\\}$; with $c\\ne 0$ that is $c\\in\\{4,8\\}$.\n- If $b$ is odd, $\\overline{bc}\\equiv 2+c \\pmod 4$, so $c\\in\\{2,6\\}$.\n\nEither way there are $2$ choices for $c$, and by the same argument $2$ choices for $a$. With $10$ choices of $b$: $10\\cdot 2\\cdot 2=40$.\n\n**Answer: 40**"
+      },
+      {
+        "title": "List the endings",
+        "body": "Two-digit endings $\\overline{bx}$ divisible by $4$ with $x\\neq 0$: for $b=0$: $04,08$; $b=1$: $12,16$; $b=2$: $24,28$; $b=3$: $32,36$; ... each tens digit has exactly two. For each $b$, both $a$ and $c$ must be one of the two allowed units digits, giving $2\\cdot 2=4$ numbers, and $10\\cdot 4=40$ in total.\n\n**Answer: 40**"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "counting"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-2012-i-02",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "2012 AIME I",
+      "year": 2012,
+      "number": 2,
+      "url": "https://artofproblemsolving.com/wiki/index.php/2012_AIME_I_Problems/Problem_2"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "The terms of an arithmetic sequence add to $715$. The first term of the sequence is increased by $1$, the second term is increased by $3$, the third term is increased by $5$, and in general, the $k$th term is increased by the $k$th odd positive integer. The terms of the new sequence add to $836$. Find the sum of the first, last, and middle term of the original sequence.",
+    "image": null,
+    "choices": null,
+    "answer": "195",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Sum of odd numbers",
+        "body": "If there are $n$ terms, the total increase is $1+3+\\cdots+(2n-1)=n^2=836-715=121$, so $n=11$.\n\nThe middle (6th) term of an arithmetic sequence equals the average: $\\frac{715}{11}=65$. Also first $+$ last $=2\\cdot$ middle $=130$. The requested sum is $130+65=195$.\n\n**Answer: 195**"
+      },
+      {
+        "title": "Use first term and difference",
+        "body": "With $n=11$ (as above), write the terms as $a, a+d,\\dots,a+10d$. Sum: $11a+55d=715$, so $a+5d=65$. First $+$ middle $+$ last $=a+(a+5d)+(a+10d)=3(a+5d)=195$.\n\n**Answer: 195**"
+      }
+    ],
+    "topics": [
+      "algebra",
+      "sequences-series"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-2012-i-03",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "2012 AIME I",
+      "year": 2012,
+      "number": 3,
+      "url": "https://artofproblemsolving.com/wiki/index.php/2012_AIME_I_Problems/Problem_3"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Nine people sit down for dinner where there are three choices of meals. Three people order the beef meal, three order the chicken meal, and three order the fish meal. The waiter serves the nine meals in random order. Find the number of ways in which the waiter could serve the meal types to the nine people so that exactly one person receives the type of meal ordered by that person.",
+    "image": null,
+    "choices": null,
+    "answer": "216",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Fix the lucky person, then count",
+        "body": "Choose the one person who gets the right meal: $9$ ways. By symmetry say it is a beef person. Now $2$ beef ($B$), $3$ chicken ($C$) and $3$ fish ($F$) people remain, with $2$ beef, $3$ chicken, $3$ fish meals, and nobody may get their own type.\n\nLet $b$ be the number of beef meals given to $C$ people; the other $2-b$ beef meals go to $F$ people. The $C$ people then get $3-b$ fish meals, and the $F$ people get $3-(2-b)=1+b$ chicken meals. Chicken meals left for the $B$ people: $3-(1+b)=2-b$, and fish meals for them: $b$.\n\nNumber of ways: choose which $C$ people get beef $\\binom{3}{b}$, which $F$ people get beef $\\binom{3}{2-b}$, which $B$ people get chicken $\\binom{2}{b}$:\n- $b=0$: $1\\cdot 3\\cdot 1=3$\n- $b=1$: $3\\cdot 3\\cdot 2=18$\n- $b=2$: $3\\cdot 1\\cdot 1=3$\n\nThat is $24$, so the answer is $9\\cdot 24=216$.\n\n**Answer: 216**"
+      },
+      {
+        "title": "Count by the two beef people",
+        "body": "Again fix the correct person ($9$ ways, say a beef person). The two remaining beef people get non-beef meals:\n- **Both get chicken.** Then $1$ chicken and $3$ fish and $2$ beef meals remain for $3$ chicken people and $3$ fish people. Fish people cannot get fish, so they need $3$ meals from the $2B+1C$ available: they take exactly those, and the chicken people get the $3$ fish meals. Ways: choose which fish person gets chicken: $3$.\n- **Both get fish:** symmetric, $3$ ways.\n- **One chicken, one fish** ($2$ ways to decide who gets which): then $2C, 2F, 2B$ remain. Fish people take from $\\{2B,2C\\}$, chicken people from $\\{2B,2F\\}$; the chicken people take the $2F$ and one $B$, fish people the $2C$ and one $B$. Choose which chicken person gets beef ($3$) and which fish person gets beef ($3$): $9$, times $2$ gives $18$.\n\nTotal $3+3+18=24$, and $9\\cdot 24=216$.\n\n**Answer: 216**"
+      }
+    ],
+    "topics": [
+      "counting"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-2012-i-04",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "2012 AIME I",
+      "year": 2012,
+      "number": 4,
+      "url": "https://artofproblemsolving.com/wiki/index.php/2012_AIME_I_Problems/Problem_4"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Butch and Sundance need to get out of Dodge. To travel as quickly as possible, each alternates walking and riding their only horse, Sparky, as follows. Butch begins by walking while Sundance rides. When Sundance reaches the first of the hitching posts that are conveniently located at one-mile intervals along their route, he ties Sparky to the post and begins walking. When Butch reaches Sparky, he rides until he passes Sundance, then leaves Sparky at the next hitching post and resumes walking, and they continue in this manner. Sparky, Butch, and Sundance walk at $6,$ $4,$ and $2.5$ miles per hour, respectively. The first time Butch and Sundance meet at a milepost, they are $n$ miles from Dodge, and they have been traveling for $t$ minutes. Find $n + t$.",
+    "image": null,
+    "choices": null,
+    "answer": "279",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Split each mile between the two riders",
+        "body": "Suppose they meet at milepost $n$ at the same time. Sparky only moves forward and always carries exactly one of them, and every mile is ridden by exactly one person (the horse is always handed over at a post). So if Butch walks $w_B$ miles and Sundance walks $w_S$ miles, then the ridden miles are $n-w_B$ and $n-w_S$ and\n$$(n-w_B)+(n-w_S)=n \\implies w_B+w_S=n.$$\nEqual times:\n$$\\frac{w_B}{4}+\\frac{n-w_B}{6}=\\frac{w_S}{2.5}+\\frac{n-w_S}{6}\\implies w_B\\Big(\\frac14-\\frac16\\Big)=w_S\\Big(\\frac25-\\frac16\\Big)\\implies \\frac{w_B}{12}=\\frac{7w_S}{30}.$$\nSo $5w_B=14w_S$. The miles walked are whole numbers, so the first meeting has $w_S=5$, $w_B=14$, $n=19$.\n\nTime: Butch walks $14$ miles ($3.5$ h) and rides $5$ miles ($\\frac56$ h), i.e. $\\frac{13}{3}$ h $=260$ minutes. So $n+t=19+260=279$.\n\n**Answer: 279**"
+      },
+      {
+        "title": "Check with Sundance's time",
+        "body": "With $n=19$, Sundance walks $5$ miles at $2.5$ mph ($2$ h) and rides $14$ miles at $6$ mph ($\\frac{7}{3}$ h): $\\frac{13}{3}$ h $=260$ min — the same as Butch, as it must be. Any smaller meeting would need $5w_B=14w_S$ with smaller positive integers, which is impossible since $\\gcd(5,14)=1$.\n\n$n+t=19+260=279$.\n\n**Answer: 279**"
+      }
+    ],
+    "topics": [
+      "rates",
+      "algebra"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-2012-i-05",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "2012 AIME I",
+      "year": 2012,
+      "number": 5,
+      "url": "https://artofproblemsolving.com/wiki/index.php/2012_AIME_I_Problems/Problem_5"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Let $B$ be the set of all binary integers that can be written using exactly $5$ zeros and $8$ ones where leading zeros are allowed. If all possible subtractions are performed in which one element of $B$ is subtracted from another, find the number of times the answer $1$ is obtained.",
+    "image": null,
+    "choices": null,
+    "answer": "330",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Look at how adding 1 changes the string",
+        "body": "We need pairs $x,y\\in B$ with $x=y+1$. Adding $1$ to $y$ turns its final block $01\\ldots1$ (a $0$ followed by $k$ ones) into $10\\ldots0$. The number of ones changes by $1-k$, so it is unchanged only when $k=1$: $y$ ends in $01$ and $x$ ends in $10$, with the same first $11$ digits.\n\nThose first $11$ digits contain $4$ zeros and $7$ ones: $\\binom{11}{4}=330$ ways.\n\n**Answer: 330**"
+      },
+      {
+        "title": "Count the swaps",
+        "body": "A difference of $1$ with the same digit counts means the two $13$-digit strings agree except that the last two digits are $10$ in one and $01$ in the other (if $y$ ended in $0$, $y+1$ would just gain a one; if it ended in $11$, a carry would remove ones). So we only choose the first $11$ digits, which must use the remaining $4$ zeros and $7$ ones: $\\binom{11}{7}=330$.\n\n**Answer: 330**"
+      }
+    ],
+    "topics": [
+      "counting",
+      "number-theory"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-2012-i-06",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "2012 AIME I",
+      "year": 2012,
+      "number": 6,
+      "url": "https://artofproblemsolving.com/wiki/index.php/2012_AIME_I_Problems/Problem_6"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "The complex numbers $z$ and $w$ satisfy $z^{13} = w,$ $w^{11} = z,$ and the imaginary part of $z$ is $\\sin{\\frac{m\\pi}{n}}$, for relatively prime positive integers $m$ and $n$ with $m<n.$ Find $n.$",
+    "image": null,
+    "choices": null,
+    "answer": "71",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Roots of unity",
+        "body": "Substituting, $z^{143}=z$. Since the imaginary part of $z$ is $\\sin\\frac{m\\pi}{n}>0$, $z\\ne 0$, so $z^{142}=1$. Hence $|z|=1$ and\n$$z=\\cos\\frac{2\\pi k}{142}+i\\sin\\frac{2\\pi k}{142}=\\cos\\frac{k\\pi}{71}+i\\sin\\frac{k\\pi}{71}.$$\nThe imaginary part is $\\sin\\frac{k\\pi}{71}$, and as it is nonzero, $71\\nmid k$. Because $71$ is prime, $\\frac{k}{71}$ is already in lowest terms (and we may take $0<k<71$), so $n=71$.\n\n**Answer: 71**"
+      },
+      {
+        "title": "Moduli and arguments",
+        "body": "From $|z|^{143}=|z|$ and $z\\neq0$, $|z|=1$; write $z=e^{i\\theta}$. Then $e^{143i\\theta}=e^{i\\theta}$ gives $142\\theta\\equiv 0\\pmod{2\\pi}$, so $\\theta=\\frac{\\pi k}{71}$. The imaginary part $\\sin\\theta=\\sin\\frac{m\\pi}{n}$ with $0<\\frac mn<1$ must be $\\sin\\frac{j\\pi}{71}$ for some $1\\le j\\le 70$; since $71$ is prime the fraction $\\frac{j}{71}$ is reduced, so $n=71$.\n\n**Answer: 71**"
+      }
+    ],
+    "topics": [
+      "complex-numbers",
+      "trigonometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-2012-i-07",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "2012 AIME I",
+      "year": 2012,
+      "number": 7,
+      "url": "https://artofproblemsolving.com/wiki/index.php/2012_AIME_I_Problems/Problem_7"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "At each of the sixteen circles in the network below stands a student. A total of $3360$ coins are distributed among the sixteen students. All at once, all students give away all their coins by passing an equal number of coins to each of their neighbors in the network. After the trade, all students have the same number of coins as they started with. Find the number of coins the student standing at the center circle had originally.",
+    "image": "qimages/aime/2012-i/q07.webp",
+    "choices": null,
+    "answer": "280",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Coins proportional to degree",
+        "body": "Count neighbours: the center has $5$; the $5$ circles next to it have $3$ each; the next ring of $5$ circles and the outer $5$ circles have $4$ each. The degrees add to $5+15+20+20=60$.\n\nIf every student holds $c\\cdot(\\text{number of neighbours})$ coins, each sends exactly $c$ coins along every edge, so each student receives $c$ per neighbour — the same amount they started with. The total is $60c=3360$, so $c=56$ and the center student has $5\\cdot 56=280$.\n\nThis is the only solution: in a connected network, let $f(v)=\\frac{\\text{coins}(v)}{\\deg v}$ be the amount sent along each edge. A student with the largest $f$ receives $\\sum_{u\\sim v} f(u)\\le \\deg(v)\\,f(v)$ with equality only if all neighbours have the same $f$; equality is required, so $f$ spreads to be constant everywhere.\n\n**Answer: 280**"
+      },
+      {
+        "title": "Set up the ring equations",
+        "body": "By symmetry let the center have $a$ coins, the inner ring $b$ each, the middle ring $c$ each, the outer ring $d$ each (degrees $5,3,4,4$). Each inner student receives $\\frac a5$ from the center and $\\frac c4$ from each of two middle neighbours: $b=\\frac a5+\\frac c2$. The center receives $5\\cdot\\frac b3=a$, so $b=\\frac{3a}{5}$, giving $c=\\frac{4a}{5}$. Similarly $d=\\frac{4a}{5}$ (an outer student receives from two middle and two outer neighbours: $\\frac c2+\\frac d2=d$). Total: $a+5\\cdot\\frac{3a}5+5\\cdot\\frac{4a}5+5\\cdot\\frac{4a}5=12a=3360$, so $a=280$.\n\n**Answer: 280**"
+      }
+    ],
+    "topics": [
+      "graph-theory",
+      "algebra"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-2012-i-08",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "2012 AIME I",
+      "year": 2012,
+      "number": 8,
+      "url": "https://artofproblemsolving.com/wiki/index.php/2012_AIME_I_Problems/Problem_8"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Cube $ABCDEFGH,$ labeled as shown below, has edge length $1$ and is cut by a plane passing through vertex $D$ and the midpoints $M$ and $N$ of $\\overline{AB}$ and $\\overline{CG}$ respectively. The plane divides the cube into two solids. The volume of the larger of the two solids can be written in the form $\\tfrac{p}{q},$ where $p$ and $q$ are relatively prime positive integers. Find $p+q.$",
+    "image": "qimages/aime/2012-i/q08.webp",
+    "choices": null,
+    "answer": "89",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Big tetrahedron minus a small one",
+        "body": "Use coordinates $A=(0,0,0)$, $B=(1,0,0)$, $C=(1,1,0)$, $D=(0,1,0)$, with $E,F,G,H$ above $A,B,C,D$. Then $M=(\\frac12,0,0)$, $N=(1,1,\\frac12)$, and the plane through $D,M,N$ is $2x+y-4z=1$.\n\nThe smaller piece is the part of the cube with $2x+y-4z\\ge 1$ (it contains $B$ and $C$). Line $DM$ meets line $BC$ at $P=(1,-1,0)$. The planes $z=0$, $x=1$, $y=1$ and the cutting plane bound the tetrahedron $CPDN$, right-angled at $C$ with legs $CP=2$, $CD=1$, $CN=\\frac12$: volume $\\frac{2\\cdot1\\cdot\\frac12}{6}=\\frac16$.\n\nThe part of it outside the cube ($y<0$) is the tetrahedron $BPMQ$ with $Q=(1,0,\\frac14)$ on edge $BF$, right-angled at $B$ with legs $1,\\frac12,\\frac14$: volume $\\frac{1}{48}$.\n\nSmall solid: $\\frac16-\\frac1{48}=\\frac{7}{48}$; large solid: $\\frac{41}{48}$, so $p+q=89$.\n\n**Answer: 89**"
+      },
+      {
+        "title": "Integrate the height",
+        "body": "With the same coordinates, the small piece is $0\\le z\\le \\frac{2x+y-1}{4}$ over the part of the base square where $2x+y\\ge 1$. Its volume is $\\frac14\\iint (2x+y-1)^+\\,dx\\,dy$.\n\n- For $x\\ge\\frac12$: $\\int_0^1(y+2x-1)\\,dy=2x-\\frac12$, and $\\int_{1/2}^1(2x-\\frac12)\\,dx=\\frac12$.\n- For $x<\\frac12$: $\\int_{1-2x}^1 (y-1+2x)\\,dy=2x^2$, and $\\int_0^{1/2}2x^2\\,dx=\\frac1{12}$.\n\nVolume $=\\frac14\\left(\\frac12+\\frac1{12}\\right)=\\frac{7}{48}$, so the larger piece is $\\frac{41}{48}$ and $p+q=89$.\n\n**Answer: 89**"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "spatial"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-2012-i-09",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "2012 AIME I",
+      "year": 2012,
+      "number": 9,
+      "url": "https://artofproblemsolving.com/wiki/index.php/2012_AIME_I_Problems/Problem_9"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Let $x,$ $y,$ and $z$ be positive real numbers that satisfy\n$$2\\log_{x}(2y) = 2\\log_{2x}(4z) = \\log_{2x^4}(8yz) \\ne 0.$$\nThe value of $xy^5z$ can be expressed in the form $\\frac{1}{2^{p/q}},$ where $p$ and $q$ are relatively prime positive integers. Find $p+q.$",
+    "image": null,
+    "choices": null,
+    "answer": "49",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Exponentiate",
+        "body": "Call the common value $k\\neq 0$. Then\n$$2y=x^{k/2},\\qquad 4z=(2x)^{k/2},\\qquad 8yz=(2x^4)^k.$$\nMultiplying the first two: $8yz=2^{k/2}x^{k}$. Comparing with the third: $2^{k/2}x^k=2^kx^{4k}$, so $x^{3k}=2^{-k/2}$ and (as $k\\ne0$) $x^3=2^{-1/2}$, $x=2^{-1/6}$.\n\nNow\n$$xy^5z=x\\cdot\\frac{x^{5k/2}}{32}\\cdot\\frac{2^{k/2}x^{k/2}}{4}=\\frac{x}{128}\\cdot x^{3k}2^{k/2}=\\frac{x}{128}=2^{-7-\\frac16}=\\frac{1}{2^{43/6}}.$$\nSo $p+q=43+6=49$.\n\n**Answer: 49**"
+      },
+      {
+        "title": "Work with base-2 logs",
+        "body": "Let $X=\\log_2 x$, $Y=\\log_2 y$, $Z=\\log_2 z$ and let $k$ be the common value. The equations become\n$$1+Y=\\tfrac k2 X,\\qquad 2+Z=\\tfrac k2(1+X),\\qquad 3+Y+Z=k(1+4X).$$\nAdding the first two: $3+Y+Z=\\frac k2(1+2X)$. So $\\frac k2(1+2X)=k(1+4X)$, i.e. $1+2X=2+8X$, $X=-\\frac16$.\n\nThen $\\log_2(xy^5z)=X+5Y+Z=X+5(\\tfrac k2X-1)+(\\tfrac k2(1+X)-2)=X-7+\\tfrac k2(6X+1)=-\\tfrac16-7+0=-\\tfrac{43}{6}$. Answer $43+6=49$.\n\n**Answer: 49**"
+      }
+    ],
+    "topics": [
+      "algebra"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-2012-i-10",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "2012 AIME I",
+      "year": 2012,
+      "number": 10,
+      "url": "https://artofproblemsolving.com/wiki/index.php/2012_AIME_I_Problems/Problem_10"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Let $\\mathcal{S}$ be the set of all perfect squares whose rightmost three digits in base $10$ are $256$. Let $\\mathcal{T}$ be the set of all numbers of the form $\\frac{x-256}{1000}$, where $x$ is in $\\mathcal{S}$. In other words, $\\mathcal{T}$ is the set of numbers that result when the last three digits of each number in $\\mathcal{S}$ are truncated. Find the remainder when the tenth smallest element of $\\mathcal{T}$ is divided by $1000$.",
+    "image": null,
+    "choices": null,
+    "answer": "170",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Solve the congruence",
+        "body": "We need $m^2\\equiv 256\\pmod{1000}$ ($m>0$).\n- Mod $8$: $m^2\\equiv0$, so $4\\mid m$.\n- Mod $125$: $m^2\\equiv 16^2$, and since $125$ is a prime power and $5\\nmid 16$, $m\\equiv\\pm16\\pmod{125}$.\n\nCombining with $4\\mid m$: $m\\equiv \\pm16\\pmod{500}$. So $m=16,484,516,984,1016,1484,1516,1984,2016,2484,\\dots$\n\nFor $m=500j\\pm16$: $\\frac{m^2-256}{1000}=250j^2\\pm16j$, which increases with $m$. The tenth smallest $m$ is $2484$ ($j=5$, minus sign), giving $250\\cdot25-80=6170$. Remainder: $170$.\n\n**Answer: 170**"
+      },
+      {
+        "title": "Direct check of the tenth value",
+        "body": "Once we know the squares are $m^2$ with $m\\equiv\\pm16\\pmod{500}$, the tenth is $m=2484$: $2484^2=6170256$. Truncating the last three digits gives $6170$, whose remainder mod $1000$ is $170$.\n\n(Check of the pattern: $484^2=234256$, $516^2=266256$ — both end in $256$.)\n\n**Answer: 170**"
+      }
+    ],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-2012-i-11",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "2012 AIME I",
+      "year": 2012,
+      "number": 11,
+      "url": "https://artofproblemsolving.com/wiki/index.php/2012_AIME_I_Problems/Problem_11"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "A frog begins at $P_0 = (0,0)$ and makes a sequence of jumps according to the following rule: from $P_n = (x_n, y_n),$ the frog jumps to $P_{n+1},$ which may be any of the points $(x_n + 7, y_n + 2),$ $(x_n + 2, y_n + 7),$ $(x_n - 5, y_n - 10),$ or $(x_n - 10, y_n - 5).$ There are $M$ points $(x, y)$ with $|x| + |y| \\le 100$ that can be reached by a sequence of such jumps. Find the remainder when $M$ is divided by $1000.$",
+    "image": null,
+    "choices": null,
+    "answer": "373",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Change coordinates",
+        "body": "Let $u=x+y$, $v=x-y$. The jumps change $(u,v)$ by $(9,5)$, $(9,-5)$, $(-15,5)$, $(-15,-5)$. So every reachable point has $3\\mid u$ and $5\\mid v$; write $u=3k$, $v=5l$. The jumps in $(k,l)$ are $(3,\\pm1)$, $(-5,\\pm1)$, which keep $k\\equiv l\\pmod 2$.\n\nConversely every $(k,l)$ with $k\\equiv l\\pmod2$ is reachable: $(3,1)+(3,-1)=(6,0)$ and $(-5,1)+(-5,-1)=(-10,0)$, so $2(6,0)+(-10,0)=(2,0)$ and $3(6,0)+2(-10,0)=(-2,0)$. Then $(3,1)+(-2,0)=(1,1)$, $(-5,-1)+2(2,0)=(-1,-1)$, $(1,1)+(1,1)+(-2,0)=(0,2)$, $(0,-2)$ similarly, and these generate the whole lattice $\\{k\\equiv l\\}$ (the order of jumps doesn't matter).\n\nAlso $|x|+|y|=\\max(|u|,|v|)$, so we count $u,v\\in[-100,100]$ with $3\\mid u$, $5\\mid v$, $u\\equiv v\\pmod2$:\n- $u$: multiples of $3$ in $[-100,100]$: $67$, of which $33$ even and $34$ odd.\n- $v$: multiples of $5$: $41$, of which $21$ even and $20$ odd.\n\n$M=33\\cdot21+34\\cdot20=693+680=1373$, remainder $373$.\n\n**Answer: 373**"
+      },
+      {
+        "title": "Count directly in $x,y$",
+        "body": "The reachable points are those with $x+y\\equiv0\\pmod3$ and $x-y\\equiv0\\pmod5$ (necessity: each jump changes $x+y$ by $9$ or $-15$ and $x-y$ by $\\pm5$; sufficiency as in the first solution). In the rotated coordinates $u=x+y$, $v=x-y$ the region $|x|+|y|\\le100$ is the square $|u|,|v|\\le 100$, and $(u,v)$ comes from an integer point iff $u\\equiv v\\pmod 2$. Count by parity:\n- $u$ even and divisible by $3$: multiples of $6$ in $[-100,100]$: $-96,\\dots,96$: $33$. $u$ odd: $67-33=34$.\n- $v$ divisible by $10$: $21$; $v$ odd multiple of $5$: $20$.\n\n$33\\cdot21+34\\cdot20=1373\\equiv373\\pmod{1000}$.\n\n**Answer: 373**"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "counting"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-2012-i-12",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "2012 AIME I",
+      "year": 2012,
+      "number": 12,
+      "url": "https://artofproblemsolving.com/wiki/index.php/2012_AIME_I_Problems/Problem_12"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Let $\\triangle ABC$ be a right triangle with right angle at $C.$ Let $D$ and $E$ be points on $\\overline{AB}$ with $D$ between $A$ and $E$ such that $\\overline{CD}$ and $\\overline{CE}$ trisect $\\angle C.$ If $\\frac{DE}{BE} = \\frac{8}{15},$ then $\\tan B$ can be written as $\\frac{m \\sqrt{p}}{n},$ where $m$ and $n$ are relatively prime positive integers, and $p$ is a positive integer not divisible by the square of any prime. Find $m+n+p.$",
+    "image": null,
+    "choices": null,
+    "answer": "18",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Angle bisector theorem",
+        "body": "Each trisected angle is $30^\\circ$, so in $\\triangle DCB$ (with $\\angle DCB=60^\\circ$) the segment $CE$ bisects $\\angle DCB$. By the angle bisector theorem $\\frac{CD}{CB}=\\frac{DE}{EB}=\\frac{8}{15}$; scale so $CD=8$, $CB=15$.\n\nPlace $C$ at the origin and $B=(15,0)$. Ray $CD$ makes $60^\\circ$ with $CB$, so $D=(8\\cos60^\\circ,8\\sin60^\\circ)=(4,4\\sqrt3)$. Since $D$ lies on $AB$,\n$$\\tan B=\\frac{4\\sqrt3}{15-4}=\\frac{4\\sqrt3}{11}.$$\nSo $m+n+p=4+11+3=18$.\n\n**Answer: 18**"
+      },
+      {
+        "title": "Law of cosines",
+        "body": "With $CD=8$, $CB=15$, $\\angle DCB=60^\\circ$: $DB^2=64+225-120=169$, $DB=13$. Then\n$$\\cos B=\\frac{15^2+13^2-8^2}{2\\cdot15\\cdot13}=\\frac{330}{390}=\\frac{11}{13},\\qquad \\sin B=\\frac{\\sqrt{48}}{13}=\\frac{4\\sqrt3}{13},$$\nso $\\tan B=\\frac{4\\sqrt3}{11}$ and $m+n+p=18$.\n\n**Answer: 18**"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "trigonometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-2012-i-13",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "2012 AIME I",
+      "year": 2012,
+      "number": 13,
+      "url": "https://artofproblemsolving.com/wiki/index.php/2012_AIME_I_Problems/Problem_13"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Three concentric circles have radii $3,$ $4,$ and $5.$ An equilateral triangle with one vertex on each circle has side length $s.$ The largest possible area of the triangle can be written as $a + \\tfrac{b}{c} \\sqrt{d},$ where $a,$ $b,$ $c,$ and $d$ are positive integers, $b$ and $c$ are relatively prime, and $d$ is not divisible by the square of any prime. Find $a+b+c+d.$",
+    "image": null,
+    "choices": null,
+    "answer": "41",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Rotate by 60°",
+        "body": "Let $O$ be the center and $A,B,C$ the vertices with $OA=3$, $OB=4$, $OC=5$. The rotation about $A$ by $60^\\circ$ that takes $B$ to $C$ takes $O$ to a point $O'$ with $AO'=AO=3$ and $O'C=OB=4$. Triangle $AOO'$ is equilateral, so $OO'=3$. In $\\triangle OO'C$ the sides are $3,4,5$, so $\\angle OO'C=90^\\circ$.\n\nThen $\\angle AO'C$ is $60^\\circ+90^\\circ=150^\\circ$ or $90^\\circ-60^\\circ=30^\\circ$, depending on the configuration. The larger side comes from $150^\\circ$:\n$$s^2=AC^2=3^2+4^2-2\\cdot3\\cdot4\\cos150^\\circ=25+12\\sqrt3.$$\nMaximum area: $\\frac{\\sqrt3}{4}(25+12\\sqrt3)=9+\\frac{25}{4}\\sqrt3$, so $a+b+c+d=9+25+4+3=41$.\n\n**Answer: 41**"
+      },
+      {
+        "title": "Use the distance relation",
+        "body": "For a point at distances $p,q,r$ from the vertices of an equilateral triangle of side $s$, a classical identity is\n$$3(p^4+q^4+r^4+s^4)=(p^2+q^2+r^2+s^2)^2.$$\nWith $p,q,r=3,4,5$: $p^2+q^2+r^2=50$, $p^4+q^4+r^4=962$, so $3(962+s^4)=(50+s^2)^2$, i.e. $s^4-50s^2+193=0$ and\n$$s^2=25\\pm\\sqrt{432}=25\\pm12\\sqrt3.$$\nThe larger value gives area $\\frac{\\sqrt3}{4}(25+12\\sqrt3)=9+\\frac{25\\sqrt3}{4}$, so the answer is $41$.\n\n**Answer: 41**"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "trigonometry"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-2012-i-14",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "2012 AIME I",
+      "year": 2012,
+      "number": 14,
+      "url": "https://artofproblemsolving.com/wiki/index.php/2012_AIME_I_Problems/Problem_14"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Complex numbers $a,$ $b,$ and $c$ are zeros of a polynomial $P(z) = z^3 + qz + r,$ and $|a|^2 + |b|^2 + |c|^2 = 250.$ The points corresponding to $a,$ $b,$ and $c$ in the complex plane are the vertices of a right triangle with hypotenuse $h.$ Find $h^2.$",
+    "image": null,
+    "choices": null,
+    "answer": "375",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Sum of squared sides",
+        "body": "There is no $z^2$ term, so $a+b+c=0$. Expanding,\n$$|a-b|^2+|b-c|^2+|c-a|^2=2(|a|^2+|b|^2+|c|^2)-2\\operatorname{Re}(a\\bar b+b\\bar c+c\\bar a),$$\nand $|a+b+c|^2=0$ gives $2\\operatorname{Re}(a\\bar b+b\\bar c+c\\bar a)=-(|a|^2+|b|^2+|c|^2)$. So the sum of the squared sides is $3\\cdot250=750$.\n\nFor a right triangle the squared legs add to $h^2$, so the sum of all three squared sides is $2h^2=750$, giving $h^2=375$.\n\n**Answer: 375**"
+      },
+      {
+        "title": "Centroid at the origin",
+        "body": "The centroid is $\\frac{a+b+c}{3}=0$. Let $c$ be the right-angle vertex. The midpoint $m$ of the hypotenuse is the circumcenter, at distance $\\frac h2$ from every vertex, and the centroid lies $\\frac23$ of the way from $c$ to $m$: $|c|=\\frac23\\cdot\\frac h2=\\frac h3$ and $|m|=\\frac h6$.\n\nBy the parallelogram law $|a|^2+|b|^2=2|m|^2+\\frac{|a-b|^2}{2}=\\frac{h^2}{18}+\\frac{h^2}{2}$. So\n$$250=\\frac{h^2}{9}+\\frac{h^2}{18}+\\frac{h^2}{2}=\\frac{2h^2}{3},\\qquad h^2=375.$$\n\n**Answer: 375**"
+      }
+    ],
+    "topics": [
+      "complex-numbers",
+      "polynomials",
+      "geometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-2012-i-15",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "2012 AIME I",
+      "year": 2012,
+      "number": 15,
+      "url": "https://artofproblemsolving.com/wiki/index.php/2012_AIME_I_Problems/Problem_15"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "There are $n$ mathematicians seated around a circular table with $n$ seats numbered $1,$ $2,$ $3,$ $...,$ $n$ in clockwise order. After a break they again sit around the table. The mathematicians note that there is a positive integer $a$ such that\n\n($1$) for each $k,$ the mathematician who was seated in seat $k$ before the break is seated in seat $ka$ after the break (where seat $i + n$ is seat $i$);\n\n($2$) for every pair of mathematicians, the number of mathematicians sitting between them after the break, counting in both the clockwise and the counterclockwise directions, is different from either of the number of mathematicians sitting between them before the break.\n\nFind the number of possible values of $n$ with $1 < n < 1000.$",
+    "image": null,
+    "choices": null,
+    "answer": "332",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Translate into gcd conditions",
+        "body": "Work mod $n$. Condition (1) requires $k\\mapsto ak$ to be a bijection, i.e. $\\gcd(a,n)=1$.\n\nTwo people whose seats differ by $d$ ($1\\le d\\le n-1$) have $d-1$ and $n-d-1$ people between them. After the break their seats differ by $ad$. Condition (2) says $ad\\not\\equiv d$ and $ad\\not\\equiv -d\\pmod n$ for every $d$, i.e. $n\\nmid (a-1)d$ and $n\\nmid(a+1)d$ for all $1\\le d\\le n-1$. That holds exactly when $\\gcd(a-1,n)=\\gcd(a+1,n)=1$ (if $g=\\gcd(a-1,n)>1$, take $d=n/g$).\n\nSo we need an $a$ with $a-1$, $a$, $a+1$ all coprime to $n$. One of three consecutive integers is a multiple of $3$ and one is even, so $\\gcd(n,6)=1$ is necessary. It is also sufficient: take $a=2$ (then $1,2,3$ are coprime to $n$).\n\nCount $1<n<1000$ with $\\gcd(n,6)=1$: among $1,\\dots,996$ there are $\\frac{996}{6}\\cdot2=332$, plus $997$ ($\\equiv1\\pmod 6$), and minus $n=1$: $332$.\n\n**Answer: 332**"
+      },
+      {
+        "title": "Sanity check with small $n$",
+        "body": "The criterion $\\gcd(n,6)=1$ can be checked on small cases. For $n=5$, $a=2$ sends seats $1,2,3,4,5$ to $2,4,1,3,5$: neighbours (difference $1$) become difference $2$ and vice versa, so every \"between\" count changes from $\\{0,3\\}$ to $\\{1,2\\}$ or back — works. For $n=4$ every $a$ coprime to $4$ is odd, so $a\\pm1$ is even and some pair keeps its distance — fails, consistent with $2\\mid n$.\n\nCounting $n\\in\\{5,7,11,13,\\dots,997\\}$: these are the numbers $\\equiv1$ or $5\\pmod6$ between $2$ and $999$, i.e. $333-1=332$ numbers.\n\n**Answer: 332**"
+      }
+    ],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

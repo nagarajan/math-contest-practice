@@ -1,0 +1,174 @@
+[
+  {
+    "id": "usamo-usamo-1990-01",
+    "bank": "usamo",
+    "source": {
+      "contest": "USAMO",
+      "paper": "USAMO 1990",
+      "year": 1990,
+      "number": 1,
+      "url": "https://artofproblemsolving.com/wiki/index.php/1990_USAMO_Problems/Problem_1"
+    },
+    "grade": "10-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "A certain state issues license plates consisting of six digits (from 0 through 9). The state requires that any two plates differ in at least two places. (Thus the plates $\\boxed{027592}$ and $\\boxed{020592}$ cannot both be used.) Determine, with proof, the maximum number of distinct license plates that the state can use.",
+    "image": null,
+    "choices": null,
+    "answer": "100000",
+    "acceptedAnswers": null,
+    "answerUnit": "plates",
+    "solutions": [
+      {
+        "title": "Pigeonhole plus a check digit",
+        "body": "**Upper bound.** Two plates that agree in their first five digits differ in at most one place. There are only $10^5$ possible strings of five digits, so with more than $10^5$ plates, two would share their first five digits (pigeonhole). Hence at most $10^5$ plates.\n\n**Construction.** For every string $d_1d_2d_3d_4d_5$ use the plate $d_1d_2d_3d_4d_5d_6$ with check digit $d_6 \\equiv d_1 + d_2 + d_3 + d_4 + d_5 \\pmod{10}$. This gives $10^5$ plates. If two of them differ in exactly one of the first five places, their digit sums differ by a non-zero amount between $-9$ and $9$, so their check digits differ too: they differ in two places. They cannot differ only in the check digit, since the first five digits determine it.\n\n**Answer: $100000$**"
+      },
+      {
+        "title": "Lines in the cube $\\{0,\\ldots,9\\}^6$",
+        "body": "Think of a plate as a point of the grid $\\{0, 1, \\ldots, 9\\}^6$. Two plates differ in exactly one place iff they lie on a common \"line\" obtained by fixing five coordinates and letting the sixth vary. The $10^6$ points split into $10^5$ disjoint lines in the direction of the last coordinate, each with $10$ points, and a valid set has at most one point on each line: at most $10^5$ plates.\n\nTo reach $10^5$ we need exactly one point on every line in every direction. The set $\\{(d_1, \\ldots, d_6) : d_1 + \\cdots + d_6 \\equiv 0 \\pmod{10}\\}$ does this: on any line, five coordinates are fixed and exactly one value of the free coordinate makes the sum $\\equiv 0$. (This is the same set as in the first solution.)\n\n**Answer: $100000$**"
+      }
+    ],
+    "topics": [
+      "counting",
+      "logic"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamo-usamo-1990-02",
+    "bank": "usamo",
+    "source": {
+      "contest": "USAMO",
+      "paper": "USAMO 1990",
+      "year": 1990,
+      "number": 2,
+      "url": "https://artofproblemsolving.com/wiki/index.php/1990_USAMO_Problems/Problem_2"
+    },
+    "grade": "10-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "A sequence of functions $\\{f_n(x) \\}$ is defined recursively as follows:\n$$\\begin{aligned} f_1(x) &= \\sqrt {x^2 + 48}, \\quad \\text{and} \\\\ f_{n + 1}(x) &= \\sqrt {x^2 + 6f_n(x)} \\quad \\text{for } n \\geq 1. \\end{aligned}$$\n(Recall that $\\sqrt{\\phantom{x}}$ is understood to represent the positive square root.) For each positive integer $n$, find all real solutions of the equation $f_n(x) = 2x$.",
+    "image": null,
+    "choices": null,
+    "answer": "4",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Induction comparing with $2x$",
+        "body": "Put $f_0(x) = 8$; then $f_1(x) = \\sqrt{x^2 + 6f_0(x)}$, so the recursion holds from $n = 0$.\n\n**Negative $x$ and $x = 0$.** Each $f_n(x)$ with $n\\ge1$ is $\\sqrt{x^2 + 6f_{n-1}(x)}$ with $f_{n-1}(x) > 0$ (induction from $f_0 = 8$), so $f_n(x) > 0$. Hence $f_n(x) = 2x$ forces $x > 0$.\n\n**Claim.** For $x > 0$ and all $n \\ge 0$: $f_n(x) < 2x$ if $x > 4$, $f_n(x) = 2x$ if $x = 4$, and $f_n(x) > 2x$ if $x < 4$.\n\n*Base $n=0$:* $f_0 = 8$ compared with $2x$. *Step:* note $x^2 + 12x$ compared with $4x^2$: $12x < 3x^2 \\iff x > 4$. If $x > 4$ and $f_n(x) < 2x$, then $f_{n+1}(x) < \\sqrt{x^2 + 12x} < \\sqrt{4x^2} = 2x$. If $x = 4$ and $f_n(4) = 8$, then $f_{n+1}(4) = \\sqrt{16 + 48} = 8$. If $0 < x < 4$ and $f_n(x) > 2x$, then $f_{n+1}(x) > \\sqrt{x^2+12x} > 2x$. $\\square$\n\nSo for every $n \\ge 1$, the only real solution of $f_n(x) = 2x$ is $x = 4$.\n\n**Answer: $x = 4$** (for every $n$)."
+      }
+    ],
+    "topics": [
+      "algebra",
+      "sequences-series"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamo-usamo-1990-03",
+    "bank": "usamo",
+    "source": {
+      "contest": "USAMO",
+      "paper": "USAMO 1990",
+      "year": 1990,
+      "number": 3,
+      "url": "https://artofproblemsolving.com/wiki/index.php/1990_USAMO_Problems/Problem_3"
+    },
+    "grade": "10-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Suppose that necklace $A$ has 14 beads and necklace $B$ has 19. Prove that for any odd integer $n \\geq 1$, there is a way to number each of the 33 beads with an integer from the sequence\n$$\\{ n, n+1, n+2, \\dots, n+32 \\}$$\nso that each integer is used once, and adjacent beads correspond to relatively prime integers. (Here a \"necklace\" is viewed as a circle in which each bead is adjacent to two other beads.)",
+    "image": null,
+    "choices": null,
+    "answer": "Find $k \\le 17$ with $\\gcd(n+k, 15) = 1$ and $\\gcd(n+k+1, 13) = 1$; put $n+k+1, \\ldots, n+k+14$ around $A$ and $n, \\ldots, n+k, n+k+15, \\ldots, n+32$ around $B$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Cut the run of consecutive integers in the right place",
+        "body": "Consecutive integers are always coprime, and $\\gcd(x, x+d) = \\gcd(x, d)$.\n\n**Lemma.** There is $k$ with $0 \\le k \\le 17$ such that $\\gcd(n+k, 15) = 1$ and $\\gcd(n+k+1, 13) = 1$.\n\n*Proof.* Among $n, n+1, n+2$ at most one is divisible by $3$ and at most one by $5$, so some $n + a$ ($0 \\le a \\le 2$) is coprime to $15$. The numbers $n+a+1$ and $n + a + 16$ differ by $15$, which is not a multiple of $13$, so they are not both multiples of $13$; let $b \\in \\{a, a+15\\}$ be such that $13 \\nmid n + b + 1$. Since $n + b \\equiv n + a \\pmod{15}$, also $\\gcd(n+b, 15) = 1$. Take $k = b \\le 17$. $\\square$\n\n**Arrangement.** Place in order around necklace $A$ the $14$ numbers\n$$n+k+1,\\ n+k+2,\\ \\ldots,\\ n+k+14,$$\nand around necklace $B$ the $19$ numbers\n$$n,\\ n+1,\\ \\ldots,\\ n+k,\\ n+k+15,\\ n+k+16,\\ \\ldots,\\ n+32$$\n(that is $(k+1) + (18-k) = 19$ numbers). Every number from $n$ to $n+32$ is used once. Adjacent pairs:\n- consecutive integers: coprime;\n- on $A$, the closing pair $n+k+14$, $n+k+1$: $\\gcd = \\gcd(n+k+1, 13) = 1$;\n- on $B$, the pair $n+k$, $n+k+15$: $\\gcd = \\gcd(n+k, 15) = 1$;\n- on $B$, the closing pair $n+32$, $n$: $\\gcd = \\gcd(n, 32) = 1$ since $n$ is odd.\n\nSo all adjacent beads carry coprime numbers. ∎"
+      }
+    ],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamo-usamo-1990-04",
+    "bank": "usamo",
+    "source": {
+      "contest": "USAMO",
+      "paper": "USAMO 1990",
+      "year": 1990,
+      "number": 4,
+      "url": "https://artofproblemsolving.com/wiki/index.php/1990_USAMO_Problems/Problem_4"
+    },
+    "grade": "10-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Find, with proof, the number of positive integers whose base-$n$ representation consists of distinct digits with the property that, except for the leftmost digit, every digit differs by $\\pm 1$ from some digit further to the left. (Your answer should be an explicit function of $n$ in simplest form.)",
+    "image": null,
+    "choices": null,
+    "answer": "$2^{n+1} - 2(n+1)$",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Digits form an interval; peel off the last digit",
+        "body": "Call a sequence of distinct integers *good* if every term after the first differs by $1$ from some earlier term.\n\n**Lemma.** The terms of a good sequence of length $k$ form a set of $k$ consecutive integers, and for each such set $\\{m, \\ldots, m+k-1\\}$ there are exactly $2^{k-1}$ good orderings.\n\n*Proof.* By induction on $k$; $k = 1$ is clear. If the first $k-1$ terms are $\\{m', \\ldots, M'\\}$ (consecutive, by induction), the next term must differ by $1$ from one of them and be new, so it is $m' - 1$ or $M' + 1$, and the set stays an interval. Conversely, in a good ordering of $\\{m, \\ldots, m+k-1\\}$ the last term is the minimum or the maximum (it was added at an end), and removing it leaves a good ordering of an interval of length $k-1$. Each good ordering of $\\{m, \\ldots, m+k-2\\}$ extends by $m+k-1$, and each of $\\{m+1, \\ldots, m+k-1\\}$ by $m$; so $g(k) = 2g(k-1) = 2^{k-1}$. $\\square$\n\n**Counting $k$-digit numbers ($1 \\le k \\le n$).** The digits form an interval $\\{m, \\ldots, m+k-1\\} \\subseteq \\{0, \\ldots, n-1\\}$: $n - k + 1$ choices of $m$, each with $2^{k-1}$ good orderings. We must discard orderings with leading digit $0$: then $m = 0$ and the first term is the minimum, so every later term must be added at the top, giving only $0, 1, \\ldots, k-1$ — exactly one ordering (for $k=1$ this is the non-positive \"0\"). So there are $(n-k+1)2^{k-1} - 1$ such numbers.\n\n**Sum.**\n$$\\sum_{k=1}^{n}(n-k+1)2^{k-1} = \\sum_{k=1}^n\\sum_{j=k}^{n}2^{k-1} = \\sum_{j=1}^n (2^j - 1) = 2^{n+1} - 2 - n.$$\nSubtracting the $n$ discarded numbers: the total is $2^{n+1} - 2n - 2$.\n\n(Check: $n = 2$ gives $1, 10_2$: two numbers; $n = 3$ gives $8$.)\n\n**Answer: $2^{n+1} - 2(n+1)$**"
+      }
+    ],
+    "topics": [
+      "counting",
+      "number-theory"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamo-usamo-1990-05",
+    "bank": "usamo",
+    "source": {
+      "contest": "USAMO",
+      "paper": "USAMO 1990",
+      "year": 1990,
+      "number": 5,
+      "url": "https://artofproblemsolving.com/wiki/index.php/1990_USAMO_Problems/Problem_5"
+    },
+    "grade": "10-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "An acute-angled triangle $ABC$ is given in the plane. The circle with diameter $AB$ intersects altitude $CC'$ and its extension at points $M$ and $N$, and the circle with diameter $AC$ intersects altitude $BB'$ and its extensions at $P$ and $Q$. Prove that the points $M, N, P, Q$ lie on a common circle.",
+    "image": null,
+    "choices": null,
+    "answer": "Both circles pass through the foot $A'$ of the altitude from $A$, so the orthocentre $H$ has $HM\\cdot HN = HA\\cdot HA' = HP \\cdot HQ$; by the converse of the intersecting chords theorem $M, N, P, Q$ are concyclic.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Power of the orthocentre",
+        "body": "Let $\\omega_1$, $\\omega_2$ be the circles with diameters $AB$, $AC$, let $A'$ be the foot of the altitude from $A$, and let $H$ be the orthocentre, the common point of $AA'$, $BB'$, $CC'$. Since the triangle is acute, $H$ lies strictly inside the triangle, strictly between $A$ and $A'$.\n\n**$A'$ is on both circles:** $\\angle AA'B = 90^\\circ$ puts $A'$ on $\\omega_1$, and $\\angle AA'C = 90^\\circ$ puts it on $\\omega_2$. So $AA'$ is a chord of both circles, and $H$, an interior point of this chord, is inside both circles.\n\n**Powers.** The line $CC'$ passes through $H$ and meets $\\omega_1$ at $M, N$; as $H$ is inside $\\omega_1$, it lies between $M$ and $N$, and by the intersecting chords theorem\n$$HM\\cdot HN = HA \\cdot HA'.$$\nSimilarly line $BB'$ meets $\\omega_2$ at $P, Q$ with $H$ between them and $HP\\cdot HQ = HA\\cdot HA'$. Hence $HM\\cdot HN = HP\\cdot HQ > 0$.\n\n**Converse of intersecting chords.** $P \\ne H$, and lines $BB' \\ne CC'$, so $P$ is not on line $MN$ and the circle $\\Gamma$ through $M, N, P$ exists. $H$ is inside $\\Gamma$ (it is between $M$ and $N$), so line $PH$ meets $\\Gamma$ again at a point $Q'$ on the other side of $H$ with $HP\\cdot HQ' = HM\\cdot HN = HP\\cdot HQ$. Then $HQ' = HQ$ with $Q, Q'$ on the same ray from $H$, so $Q' = Q$. Therefore $M, N, P, Q$ lie on $\\Gamma$. ∎"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

@@ -12,3 +12,11 @@
 - AHSME scoring as set so far: 1950-52 2/3/4 (20/20/10), blank 0, no wrong; 1953-55 2/3/4 (15/20/15), blank 0, wrong 0 (agent cites Contest Problem Book preface: penalty began 1956); 1959 2/3/4, 1960-61 & 1965-67 3/4/5/6 no wrong; 1962-64 & 1968-70 3/4/5/6 with wrong = -1/4 value. Harmonize: likely apply -1/4 wrong to 1956-1973 consistently.
 - AHSME 1956-58 (Contest Problem Book I): 1957 parts 1-15/16-35/36-50 (150); 1958 1-20/21-40/41-50 (140); 1956 assumed like 1958. 1959 file uses 1-10/11-30/31-50 but book preface suggests Part I = 15; recheck in harmonize pass.
 - REPORT TO USER: Noetic publishes only 5-problem samples per grade publicly; full past Noetic papers are not public (good candidate for user to obtain). MOEMS: only the samples/POTW are public; full past contest booklets are sold.
+- mathcounts potw-2026-11-02: official solutions not yet posted; recheck answers (1, 1/18, 8778) when PoTW110226 solutions appear.
+- AHSME 1994-96: AoPS instructions say blank 2 (not 2.5 as my brief guessed); kept 2. 1997-99 agent told to check AoPS instructions.
+- Purple Comet 2004: no official answers on purplecomet.org; agent's own answers with reviewNotes. Later: try Wayback for purplecomet.org 2004 answers. HS-2004 #22 (2x2 squares in r=8 circle, answer 40) unproven max; MS-2004 #20 depends on figure.
+- DONE harmonize: AHSME wrongPoints 0 for 1950-55, -points/4 for 1956-73 (per Contest Problem Book preface as reported by ahsme-1953-1955 agent). Part boundaries left as each agent set them; 1956 and 1959 boundaries unconfirmed.
+- IMO local papers (sources/pdfs/imo/imo/) for 2000, 2002-2004 are paraphrases with relabelled points (not official wording); 2001 P4 misprint. Earlier-year units also used these papers + fixed misprints; consider a later spot-check of 1959-1999 prompts against imo-official/AoPS official wording.
+- ISL files: points should be null (Shortlist isn't a scored paper); re-check isl-2016..2025 after they finish.
+- isl-2022 G8: proof follows the official sketch and assumes the figure's configuration (sides/bisectors) without proof; tighten later if time permits.
+- Putnam 1985-1994: no Kedlaya solutions locally (archive starts 1995); answers are agents' own (computer-checked where possible). Cross-check against a published answer source if one turns up (e.g. MAA/AMM write-ups) — REPORT TO USER.

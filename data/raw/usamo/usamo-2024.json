@@ -1,0 +1,213 @@
+[
+  {
+    "id": "usamo-usamo-2024-01",
+    "bank": "usamo",
+    "source": {
+      "contest": "USAMO",
+      "paper": "USAMO 2024",
+      "year": 2024,
+      "number": 1,
+      "url": "https://web.evanchen.cc/exams/USAMO-2024-notes.pdf"
+    },
+    "grade": "10-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "text",
+    "prompt": "Find all integers $n \\ge 3$ such that the following property holds: if we list the divisors of $n!$ in increasing order as $1 = d_1 < d_2 < \\dots < d_k = n!$, then we have\n$$d_2 - d_1 \\le d_3 - d_2 \\le \\dots \\le d_k - d_{k-1}.$$",
+    "image": null,
+    "choices": null,
+    "answer": "3, 4",
+    "acceptedAnswers": [
+      "3,4",
+      "3 and 4",
+      "n=3,4",
+      "n = 3, 4",
+      "{3,4}",
+      "{3, 4}",
+      "3 4",
+      "4, 3",
+      "4,3",
+      "n=3 and n=4",
+      "3, 4 only"
+    ],
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Small cases, then two consecutive divisors and Bertrand",
+        "body": "**$n = 3, 4$ work.** The divisors of $3! = 6$ are $1, 2, 3, 6$ with gaps $1, 1, 3$. The divisors of $4! = 24$ are $1, 2, 3, 4, 6, 8, 12, 24$ with gaps $1, 1, 1, 2, 2, 4, 12$. Both are nondecreasing.\n\n**$5 \\le n \\le 12$ fail.**\n- $n = 5$: $15, 20, 24$ are consecutive divisors of $120$ (no divisor of $120$ lies strictly between them), with gaps $5 > 4$.\n- $n = 6$: $90, 120, 144$ are consecutive divisors of $720$ (none of $91, \\dots, 143$ except $120$ divides $720$), with gaps $30 > 24$.\n- $7 \\le n \\le 12$: $12$, $14 = 2\\cdot 7$ and $15 = 3\\cdot 5$ divide $n!$ but $13$ does not, so $12, 14, 15$ are consecutive divisors with gaps $2 > 1$.\n\n**$n \\ge 13$ fail.** Let $m = \\lfloor n/2 \\rfloor \\ge 6$.\n\n- $m^2 - 1 = (m-1)(m+1)$ divides $n!$, since $m - 1 < m + 1 \\le n$ are distinct factors of $n!$.\n- $m^2$ divides $n!$, since $m < 2m \\le n$ are distinct factors, so $2m^2 \\mid n!$.\n\nSo $m^2 - 1$ and $m^2$ are *consecutive* divisors with gap $1$. Every gap is at least $1$, and the gaps are supposed to be nondecreasing, so all gaps before this one equal $1$: the divisors below $m^2$ would be exactly $1, 2, \\dots, m^2 - 1$, i.e. every integer less than $m^2$ divides $n!$.\n\nBut $m \\ge \\frac{n-1}2$ gives $m^2 - 1 \\ge \\frac{(n-1)^2}4 - 1 \\ge 2n$ for $n \\ge 13$ (this is $n^2 - 10n - 3 \\ge 0$). By Bertrand's postulate there is a prime $p$ with $n < p < 2n \\le m^2 - 1$. This $p$ is less than $m^2$ but does not divide $n!$ (as $p > n$) — contradiction.\n\n**Answer:** $n = 3$ and $n = 4$. ∎"
+      }
+    ],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamo-usamo-2024-02",
+    "bank": "usamo",
+    "source": {
+      "contest": "USAMO",
+      "paper": "USAMO 2024",
+      "year": 2024,
+      "number": 2,
+      "url": "https://web.evanchen.cc/exams/USAMO-2024-notes.pdf"
+    },
+    "grade": "10-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Let $S_1, S_2, \\dots, S_{100}$ be finite sets of integers whose intersection is not empty. For each non-empty $T \\subseteq \\{S_1, S_2, \\dots, S_{100}\\}$, the size of the intersection of the sets in $T$ is a multiple of $|T|$. What is the smallest possible number of elements which are in at least $50$ sets?",
+    "image": null,
+    "choices": null,
+    "answer": "50*100!/(50!*50!)",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Encode by membership patterns; greedy construction and push-downs",
+        "body": "**Reformulation.** For an element $x$ of $\\bigcup S_i$, its *pattern* is $I(x) = \\{i : x \\in S_i\\} \\subseteq [100]$. For a nonempty $V \\subseteq [100]$ let $f(V)$ be the number of elements with pattern exactly $V$. For nonempty $T \\subseteq [100]$, the intersection $\\bigcap_{i \\in T} S_i$ has $\\sum_{V \\supseteq T} f(V)$ elements, so the conditions are\n$$P(T):\\quad |T| \\text{ divides } \\sum_{V \\supseteq T} f(V) \\quad \\text{for every nonempty } T, \\qquad\\text{and}\\qquad f([100]) \\ge 1.$$\nConversely any finitely supported $f \\ge 0$ comes from actual sets (use distinct integers for distinct elements). The quantity to minimize is\n$$A = \\sum_{|V| \\ge 50} f(V).$$\nNote that $P(T)$ for $|T| \\ge 50$ only involves values $f(V)$ with $|V| \\ge 50$.\n\n**Construction: $f_0(V) = 2|V| - 100$ for $|V| \\ge 50$.** Let $|T| = 100 - k$ with $0 \\le k \\le 50$. A superset $V \\supseteq T$ is obtained by adding $j$ of the $k$ missing indices, and then $f_0(V) = 100 - 2k + 2j$. So\n$$\\sum_{V \\supseteq T} f_0(V) = \\sum_{j=0}^k \\binom kj (100 - 2k + 2j) = 2^k(100 - 2k) + 2\\cdot k 2^{k-1} = 2^k(100 - k) = 2^k |T|,$$\na multiple of $|T|$. For $|T| = 49, 48, \\dots, 1$ (in this order) choose $f_0(T) \\in \\{0, \\dots, |T| - 1\\}$ so that $P(T)$ holds; this is possible because all other terms of the sum in $P(T)$ are already fixed. These choices do not affect $A$. Also $f_0([100]) = 100 \\ge 1$. Using $i\\binom{100}{i} = 100\\binom{99}{i-1}$, $\\sum_{i \\ge 50}\\binom{100}i = 2^{99} + \\frac12\\binom{100}{50}$ and $\\sum_{j \\ge 49}\\binom{99}{j} = 2^{98} + \\binom{99}{49}$:\n$$A(f_0) = \\sum_{i=50}^{100}\\binom{100}i(2i - 100) = 200\\left(2^{98} + \\binom{99}{49}\\right) - 100\\left(2^{99} + \\tfrac12\\binom{100}{50}\\right) = 100\\binom{100}{50} - 50\\binom{100}{50} = 50\\binom{100}{50},$$\nsince $\\binom{99}{49} = \\frac12\\binom{100}{50}$.\n\n**Lower bound: push-downs.** Take any valid $f$. A *push-down* at a set $V$ with $|V| \\ge 50$ and $f(V) \\ge |V|$ decreases $f(V)$ by $|V|$ and increases $f(W)$ by $1$ for each of the $|V|$ sets $W \\subset V$ with $|W| = |V| - 1$.\n\n- *Validity is preserved for all $T$ with $|T| \\ge 50$* (the only conditions we need below). If $T \\not\\subseteq V$, no changed set contains $T$. If $T \\subseteq V$, the sum in $P(T)$ changes by $-|V| + \\#\\{W : T \\subseteq W \\subset V, |W| = |V| - 1\\} = -|V| + (|V| - |T|) = -|T|$.\n- *$A$ does not increase:* for $|V| \\ge 51$ it changes by $-|V| + |V| = 0$; for $|V| = 50$ by $-50$ (the sets $W$ have size $49$).\n\nNow process the levels $|V| = 100, 99, \\dots, 50$ in this order: at level $j$, push down every $V$ with $|V| = j$ until $f(V) < j$ — except at level $100$, where we stop at $f([100]) = 100$ (it is a positive multiple of $100$ throughout). A push-down at level $j$ only changes levels $j$ and $j - 1$, so finished levels stay finished. At the end, $f([100]) = 100$ and $0 \\le f(V) \\le |V| - 1$ for $50 \\le |V| \\le 99$, and $P(T)$ still holds for $|T| \\ge 50$.\n\nBy downward induction on $|T| = 99, 98, \\dots, 50$, the final $f$ equals $f_0$: the sums over strict supersets of $T$ agree by induction, so $P(T)$ for $f$ and $f_0$ gives $f(T) \\equiv f_0(T) \\pmod{|T|}$, and both lie in $[0, |T| - 1]$ (note $0 \\le 2|T| - 100 \\le |T| - 1$). Hence the final $A$ is $A(f_0)$, and the original $A$ was at least that.\n\n**Answer:** $50\\binom{100}{50}$. ∎"
+      }
+    ],
+    "topics": [
+      "counting",
+      "number-theory"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null,
+    "answerDisplay": "$50\\binom{100}{50}$"
+  },
+  {
+    "id": "usamo-usamo-2024-03",
+    "bank": "usamo",
+    "source": {
+      "contest": "USAMO",
+      "paper": "USAMO 2024",
+      "year": 2024,
+      "number": 3,
+      "url": "https://web.evanchen.cc/exams/USAMO-2024-notes.pdf"
+    },
+    "grade": "10-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $(m, n)$ be positive integers with $n \\ge 3$ and draw a regular $n$-gon. We wish to triangulate this $n$-gon into $n - 2$ triangles, each colored one of $m$ colors, so that each color has an equal sum of areas. For which $(m, n)$ is such a triangulation and coloring possible?",
+    "image": null,
+    "choices": null,
+    "answer": "Exactly when $m$ is a proper divisor of $n$ ($m \\mid n$, $m < n$). Fan triangulation colored cyclically works; conversely $4i\\cdot$(area) of each triangle is divisible by $\\omega - \\omega^{-1}$ in $\\mathbb Z[\\omega]$, forcing $\\frac nm$ to be an algebraic integer.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Fan construction; algebraic integers for necessity",
+        "body": "Place the $n$-gon on the unit circle with vertices $\\omega^0, \\omega^1, \\dots, \\omega^{n-1}$, where $\\omega = e^{2\\pi i/n}$ and $\\theta = \\frac{2\\pi}n$. Its area is $\\frac n2\\sin\\theta$, so each color must have area\n$$S = \\frac{n}{2m}\\sin\\theta.$$\n\n**Construction for $m \\mid n$, $m < n$.** Draw all diagonals from vertex $1 = \\omega^0$; the triangles are $\\Delta_j = (1, \\omega^j, \\omega^{j+1})$ for $1 \\le j \\le n - 2$. Color $\\Delta_j$ with color $j \\bmod m$. For points at angles $0 < \\beta < \\gamma$ on the unit circle, the triangle with vertices at angles $0, \\beta, \\gamma$ has area $\\frac12[\\sin\\beta + \\sin(\\gamma - \\beta) - \\sin\\gamma]$. So\n$$[\\Delta_j] = \\tfrac12\\left[\\sin j\\theta + \\sin\\theta - \\sin(j+1)\\theta\\right],$$\nand this expression is also $0$ for $j = 0$ and $j = n - 1$. Hence the area of color $r$ is\n$$\\sum_{\\substack{0 \\le j \\le n-1\\\\ j \\equiv r \\ (m)}} [\\Delta_j] = \\frac12\\left[\\frac nm \\sin\\theta + \\operatorname{Im}\\sum_{j \\equiv r} \\omega^j - \\operatorname{Im}\\sum_{j \\equiv r}\\omega^{j+1}\\right].$$\nHere $\\sum_{j \\equiv r}\\omega^j = \\omega^r\\left(1 + \\omega^m + \\omega^{2m} + \\dots + \\omega^{n-m}\\right) = 0$, because $\\omega^m \\ne 1$ is an $\\frac nm$-th root of unity and we sum all its $\\frac nm$ powers; similarly for $\\omega^{j+1}$. So every color has area $\\frac{n}{2m}\\sin\\theta = S$.\n\n**Necessity.** Each color needs positive area, so $m \\le n - 2 < n$. It remains to show $m \\mid n$.\n\n*Areas in complex form.* For points $u, v, w$, the signed area is $[uvw] = \\frac12\\operatorname{Im}\\left(\\overline{(v-u)}(w-u)\\right) = \\frac{1}{4i}\\left(\\overline{(v-u)}(w-u) - (v-u)\\overline{(w-u)}\\right)$, positive for counterclockwise order. For $u = 1$, $v = \\omega^a$, $w = \\omega^b$ (conjugation inverts powers of $\\omega$), expanding both sides shows\n$$4i\\,[1, \\omega^a, \\omega^b] = (\\omega^{-a} - 1)(\\omega^b - 1) - (\\omega^a - 1)(\\omega^{-b} - 1) = (\\omega^a - 1)(\\omega^b - 1)(\\omega^{-b} - \\omega^{-a}),$$\nand rotating by $\\omega^k$ does not change areas. Every triangle of a triangulation has vertices $\\omega^k, \\omega^{k+a}, \\omega^{k+b}$ in counterclockwise order with $0 < a < b < n$, so its area times $4i$ equals this product.\n\n*Divisibility.* Work in the ring $\\mathbb Z[\\omega]$, whose elements are algebraic integers. For any even integer $c = 2d$, $\\omega^c - 1$ is a multiple of $\\omega^2 - 1$: for $d \\ge 0$, $(\\omega^2)^d - 1 = (\\omega^2 - 1)(1 + \\omega^2 + \\dots + \\omega^{2(d-1)})$, and for $d < 0$, $\\omega^c - 1 = -\\omega^c(\\omega^{-c} - 1)$. The three factors are $\\omega^a - 1$, $\\omega^b - 1$ and $\\omega^{-b} - \\omega^{-a} = \\omega^{-a}(\\omega^{a-b} - 1)$, and at least one of $a, b, a - b$ is even. Hence $4i\\cdot[\\Delta] = (\\omega^2 - 1)\\alpha_\\Delta$ with $\\alpha_\\Delta \\in \\mathbb Z[\\omega]$ for every triangle $\\Delta$.\n\n*Conclusion.* Summing over the triangles of one color, $4iS = (\\omega^2 - 1)\\beta$ with $\\beta \\in \\mathbb Z[\\omega]$. But $4iS = \\frac nm\\cdot 2i\\sin\\theta = \\frac nm(\\omega - \\omega^{-1}) = \\frac nm\\,\\omega^{-1}(\\omega^2 - 1)$. Since $n \\ge 3$, $\\omega^2 \\ne 1$, so $\\frac nm = \\omega\\beta$ is an algebraic integer. A rational algebraic integer is an integer (rational root theorem), so $m \\mid n$.\n\n**Answer:** exactly the pairs where $m$ is a proper divisor of $n$ ($m \\mid n$, $m < n$). ∎"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "complex-numbers",
+      "number-theory"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamo-usamo-2024-04",
+    "bank": "usamo",
+    "source": {
+      "contest": "USAMO",
+      "paper": "USAMO 2024",
+      "year": 2024,
+      "number": 4,
+      "url": "https://web.evanchen.cc/exams/USAMO-2024-notes.pdf"
+    },
+    "grade": "10-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $m$ and $n$ be positive integers. A circular necklace contains $mn$ beads, each either red or blue. It turned out that no matter how the necklace was cut into $m$ blocks of $n$ consecutive beads, each block had a distinct number of red beads. Determine, with proof, all possible values of the ordered pair $(m, n)$.",
+    "image": null,
+    "choices": null,
+    "answer": "Exactly the pairs with $m \\le n + 1$. Necessity: the $m$ counts are distinct values in $\\{0, \\dots, n\\}$. Construction: with $N = m - 1$, let the necklace be the rows $B^{\\,n-N}R^{\\,N-k}B^{\\,k}$ for $k = 0, \\dots, N$ in order.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Pigeonhole, then an explicit staircase necklace",
+        "body": "**Necessity.** Each block has between $0$ and $n$ red beads, and the $m$ counts are distinct, so $m \\le n + 1$.\n\n**Construction for $m \\le n + 1$.** Let $N = m - 1 \\le n$. Write the necklace as $m$ consecutive *rows* of $n$ beads (row $m-1$ is followed by row $0$ around the circle), where row $k$, for $0 \\le k \\le N$, is\n$$\\underbrace{B\\cdots B}_{n-N}\\ \\underbrace{R\\cdots R}_{N-k}\\ \\underbrace{B\\cdots B}_{k}.$$\nCall the last $N$ beads of each row its *core*; the core of row $k$ is $R^{N-k}B^k$, with $N - k$ reds in its first $N - k$ places.\n\nThere are only $n$ different ways to cut the necklace into blocks of $n$ consecutive beads: block $j$ ($0 \\le j \\le N$) consists of the last $n - s$ beads of row $j$ followed by the first $s$ beads of row $j + 1$ (indices mod $m$), for a shift $s \\in \\{0, 1, \\dots, n-1\\}$.\n\n*Shift $s \\le n - N$.* The first $s$ beads of every row are blue, and the last $n - s \\ge N$ beads of row $j$ contain its whole core. So block $j$ has $N - j$ reds: the counts $N, N-1, \\dots, 0$ are distinct.\n\n*Shift $s = (n - N) + u$ with $1 \\le u \\le N - 1$.* Block $j$ consists of the last $N - u$ beads of the core of row $j$, the $n - N$ blue beads of row $j + 1$, and the first $u$ beads of the core of row $j + 1$. The last $N - u$ places of $R^{N-j}B^j$ contain $\\max(0, N - j - u)$ reds, and the first $u$ places of the next core contain $\\min(u, N - j - 1)$ reds for $j \\le N - 1$, while for $j = N$ the next row is row $0$ with core $R^N$, contributing $u$. So the red count $c_j$ of block $j$ is:\n- for $0 \\le j \\le N - u - 1$: $(N - j - u) + u = N - j$, taking the values $N, N - 1, \\dots, u + 1$;\n- for $N - u \\le j \\le N - 1$: $0 + (N - j - 1)$, taking the values $u - 1, u - 2, \\dots, 0$;\n- for $j = N$: $0 + u = u$.\n\nThese are $\\{0, 1, \\dots, N\\}$, each exactly once. So in every cut the $m = N + 1$ blocks have distinct red counts.\n\n(For example, $m = n + 1$ gives the rows $R^n, R^{n-1}B, \\dots, B^n$.)\n\n**Answer:** all $(m, n)$ with $m \\le n + 1$. ∎"
+      }
+    ],
+    "topics": [
+      "counting",
+      "logic"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamo-usamo-2024-05",
+    "bank": "usamo",
+    "source": {
+      "contest": "USAMO",
+      "paper": "USAMO 2024",
+      "year": 2024,
+      "number": 5,
+      "url": "https://web.evanchen.cc/exams/USAMO-2024-notes.pdf"
+    },
+    "grade": "10-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Point $D$ is selected inside acute triangle $ABC$ so that $\\angle DAC = \\angle ACB$ and $\\angle BDC = 90^\\circ + \\angle BAC$. Point $E$ is chosen on ray $BD$ so that $AE = EC$. Let $M$ be the midpoint of $BC$. Show that line $AB$ is tangent to the circumcircle of triangle $BEM$.",
+    "image": null,
+    "choices": null,
+    "answer": "Let $ABQC$ be the isosceles trapezoid ($BQ \\parallel AC$, $Q$ on the circumcircle; then $D \\in AQ$) and $F$ the reflection of $B$ over $E$. Then $QF \\perp AC$, so $D, Q, C, F$ are concyclic, and $\\measuredangle BEM = \\measuredangle BFC = \\measuredangle DQC = \\measuredangle AQC = \\measuredangle ABM$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 3,
+    "duplicateOf": "usamo-usajmo-2024-06",
+    "reviewNote": null
+  },
+  {
+    "id": "usamo-usamo-2024-06",
+    "bank": "usamo",
+    "source": {
+      "contest": "USAMO",
+      "paper": "USAMO 2024",
+      "year": 2024,
+      "number": 6,
+      "url": "https://web.evanchen.cc/exams/USAMO-2024-notes.pdf"
+    },
+    "grade": "10-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $n > 2$ be an integer and let $\\ell \\in \\{1, 2, \\dots, n\\}$. A collection $A_1, \\dots, A_k$ of (not necessarily distinct) subsets of $\\{1, 2, \\dots, n\\}$ is called $\\ell$-*large* if $|A_i| \\ge \\ell$ for all $1 \\le i \\le k$. Find, in terms of $n$ and $\\ell$, the largest real number $c$ such that the inequality\n$$\\sum_{i=1}^k \\sum_{j=1}^k x_ix_j\\frac{|A_i \\cap A_j|^2}{|A_i|\\cdot|A_j|} \\ge c\\left(\\sum_{i=1}^k x_i\\right)^2$$\nholds for all positive integer $k$, all nonnegative real numbers $x_1, x_2, \\dots, x_k$, and all $\\ell$-large collections $A_1, A_2, \\dots, A_k$ of subsets of $\\{1, 2, \\dots, n\\}$.",
+    "image": null,
+    "choices": null,
+    "answer": "$c = \\dfrac{n + \\ell^2 - 2\\ell}{n(n-1)}$. Write the left side as $\\sum_{p,q} v_{p,q}^2$ with $v_{p,q} = \\sum_{i : p, q \\in A_i} x_i/|A_i|$ and apply QM–AM separately to the diagonal ($p = q$) and off-diagonal terms; equality for all $\\ell$-subsets with equal weights.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Indicator functions and two QM–AM bounds",
+        "body": "We claim $c = \\frac{n + \\ell^2 - 2\\ell}{n(n-1)}$. Write $[n] = \\{1, \\dots, n\\}$. Both sides are homogeneous of degree $2$ in the $x_i$, and the case $\\sum x_i = 0$ is trivial, so assume $\\sum x_i = 1$.\n\n**Rewriting.** Since $|A_i \\cap A_j|^2 = \\sum_{p \\in [n]}\\sum_{q \\in [n]} \\mathbf 1[p, q \\in A_i]\\,\\mathbf 1[p, q \\in A_j]$, the left side equals\n$$\\sum_{p, q \\in [n]}\\ \\sum_{i, j} \\frac{x_i\\mathbf 1[p, q \\in A_i]}{|A_i|}\\cdot\\frac{x_j \\mathbf 1[p,q \\in A_j]}{|A_j|} = \\sum_{p, q\\in[n]} v_{p,q}^2, \\qquad v_{p,q} := \\sum_{i \\,:\\, p, q \\in A_i}\\frac{x_i}{|A_i|}.$$\n\n**The bound.** Split into $p = q$ and $p \\ne q$.\n- Diagonal: $\\sum_{p} v_{p,p} = \\sum_i \\frac{x_i}{|A_i|}\\cdot|A_i| = \\sum_i x_i = 1$, so by QM–AM (Cauchy–Schwarz) over the $n$ terms, $\\sum_p v_{p,p}^2 \\ge \\frac1n$.\n- Off-diagonal: each $A_i$ contains $|A_i|(|A_i| - 1)$ ordered pairs $(p, q)$ with $p \\ne q$, so $\\sum_{p \\ne q} v_{p,q} = \\sum_i x_i(|A_i| - 1) \\ge (\\ell - 1)\\sum_i x_i = \\ell - 1 \\ge 0$. By QM–AM over the $n(n-1)$ terms, $\\sum_{p\\ne q} v_{p,q}^2 \\ge \\frac{(\\ell - 1)^2}{n(n-1)}$.\n\nAdding,\n$$\\text{LHS} \\ge \\frac1n + \\frac{(\\ell-1)^2}{n(n-1)} = \\frac{n - 1 + \\ell^2 - 2\\ell + 1}{n(n-1)} = \\frac{n + \\ell^2 - 2\\ell}{n(n-1)}.$$\n\n**Equality.** Take $k = \\binom n\\ell$, let $A_1, \\dots, A_k$ be all the $\\ell$-element subsets of $[n]$, and $x_i = 1/k$. By symmetry $v_{p,p}$ is the same for all $p$ and $v_{p,q}$ is the same for all $p \\ne q$, so both QM–AM steps are equalities, and $\\sum_i x_i(|A_i| - 1) = \\ell - 1$ exactly. Hence equality holds, and no larger $c$ works.\n\n**Answer:** $c = \\dfrac{n + \\ell^2 - 2\\ell}{n(n-1)}$. ∎"
+      }
+    ],
+    "topics": [
+      "inequalities",
+      "counting"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

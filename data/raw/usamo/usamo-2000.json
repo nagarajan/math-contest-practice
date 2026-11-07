@@ -1,0 +1,206 @@
+[
+  {
+    "id": "usamo-usamo-2000-01",
+    "bank": "usamo",
+    "source": {
+      "contest": "USAMO",
+      "paper": "USAMO 2000",
+      "year": 2000,
+      "number": 1,
+      "url": "https://web.evanchen.cc/exams/USAMO-2000-notes.pdf"
+    },
+    "grade": "10-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Call a real-valued function $f$ *very convex* if\n$$\\frac{f(x) + f(y)}{2} \\ge f\\left(\\frac{x+y}{2}\\right) + |x - y|$$\nholds for all real numbers $x$ and $y$. Prove that no very convex function exists.",
+    "image": null,
+    "choices": null,
+    "answer": "If $f$ satisfies the inequality with constant $C$ in place of $1$, then combining it on an arithmetic progression of five points shows it also holds with constant $2C$; iterating gives a contradiction.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Doubling the constant",
+        "body": "For a constant $C \\ge 0$ call $f$ *$C$-convex* if\n$$\\frac{f(x)+f(y)}{2} \\ge f\\left(\\frac{x+y}{2}\\right) + C|x-y| \\quad \\text{for all real } x, y.$$\nA very convex function is $1$-convex.\n\n**Claim.** If $f$ is $C$-convex, then $f$ is $2C$-convex.\n\n*Proof.* Take any $x < y$ (for $x = y$ there is nothing to prove, and the condition is symmetric in $x, y$). Let $h = \\frac{y-x}{4}$ and consider the arithmetic progression\n$$a = x,\\quad b = x+h,\\quad c = x + 2h,\\quad d = x+3h,\\quad e = x+4h = y,$$\nso $t := e - a = 4h$. Apply $C$-convexity to the pairs $(a,c)$, $(c,e)$, $(b,d)$; each pair is $2h$ apart, so each gives an extra term $C\\cdot 2h$, and after multiplying by $2$:\n$$f(a) + f(c) \\ge 2f(b) + Ct,\\qquad f(c) + f(e) \\ge 2f(d) + Ct,\\qquad f(b) + f(d) \\ge 2f(c) + Ct.$$\nAdd the first two inequalities and twice the third:\n$$f(a) + 2f(c) + f(e) + 2f(b) + 2f(d) \\ge 2f(b) + 2f(d) + 4f(c) + 4Ct,$$\nthat is, $f(a) + f(e) \\ge 2f(c) + 4Ct$. Dividing by $2$:\n$$\\frac{f(x)+f(y)}{2} \\ge f\\left(\\frac{x+y}{2}\\right) + 2C|x-y|. \\qquad\\square$$\n\nNow suppose $f$ is very convex. By the claim and induction, $f$ is $2^k$-convex for every $k \\ge 0$. Taking $x = 0$, $y = 1$:\n$$\\frac{f(0) + f(1)}{2} - f\\left(\\tfrac12\\right) \\ge 2^k \\quad \\text{for every } k.$$\nThe left-hand side is a fixed real number, but $2^k$ is unbounded — a contradiction. Hence no very convex function exists. ∎"
+      }
+    ],
+    "topics": [
+      "functional-equations",
+      "inequalities"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamo-usamo-2000-02",
+    "bank": "usamo",
+    "source": {
+      "contest": "USAMO",
+      "paper": "USAMO 2000",
+      "year": 2000,
+      "number": 2,
+      "url": "https://web.evanchen.cc/exams/USAMO-2000-notes.pdf"
+    },
+    "grade": "10-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $S$ be the set of all triangles $ABC$ for which\n$$5\\left(\\frac{1}{AP} + \\frac{1}{BQ} + \\frac{1}{CR}\\right) - \\frac{3}{\\min\\{AP, BQ, CR\\}} = \\frac{6}{r},$$\nwhere $r$ is the inradius and $P, Q, R$ are the points of tangency of the incircle with sides $AB, BC, CA$ respectively. Prove that all triangles in $S$ are isosceles and similar to one another.",
+    "image": null,
+    "choices": null,
+    "answer": "Every triangle in $S$ has sides in the ratio $5 : 5 : 8$. With tangent lengths $x \\le y, z$, the inequality $\\frac2x + \\frac5y + \\frac5z \\ge \\frac6r$ always holds, with equality only when $x : y : z = 1 : 4 : 4$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "An inequality with a unique equality case",
+        "body": "**Setup.** Let $x = AP$, $y = BQ$, $z = CR$. The two tangent segments from a vertex to the incircle are equal, so $AR = AP = x$, $BP = BQ = y$, $CQ = CR = z$. Hence\n$$BC = y + z,\\quad CA = z + x,\\quad AB = x + y,\\quad s = x + y + z,$$\nwhere $s$ is the semiperimeter. By Heron's formula, the area is $\\sqrt{s\\,xyz}$, and since the area also equals $rs$,\n$$r = \\sqrt{\\frac{xyz}{x+y+z}}, \\qquad \\frac{6}{r} = 6\\sqrt{\\frac{x+y+z}{xyz}}.$$\n\nThe defining condition is symmetric under relabelling the vertices (which permutes $x, y, z$), so we may assume $x = \\min\\{x,y,z\\}$. Then the condition reads\n$$\\frac{2}{x} + \\frac{5}{y} + \\frac{5}{z} = \\frac{6}{r}.$$\n\n**Claim.** For all positive $x, y, z$,\n$$\\frac{2}{x} + \\frac{5}{y} + \\frac{5}{z} \\ge 6\\sqrt{\\frac{x+y+z}{xyz}},$$\nwith equality if and only if $y = z = 4x$.\n\n*Proof.* Both sides are positive, so we may square. Note $\\frac{x+y+z}{xyz} = \\frac1{yz} + \\frac1{zx} + \\frac1{xy}$. Put $p = \\frac1x$, $q = \\frac1y$, $u = \\frac1z$. The squared inequality is\n$$(2p + 5q + 5u)^2 \\ge 36(qu + up + pq),$$\ni.e.\n$$4p^2 + 25q^2 + 25u^2 + 20pq + 20pu + 50qu \\ge 36qu + 36pu + 36pq,$$\ni.e.\n$$4p^2 + 25q^2 + 25u^2 + 14qu - 16p(q+u) \\ge 0.$$\nSince $25q^2 + 25u^2 + 14qu = 16(q+u)^2 + 9(q-u)^2$, the left side equals\n$$4p^2 - 16p(q+u) + 16(q+u)^2 + 9(q-u)^2 = \\bigl(2p - 4(q+u)\\bigr)^2 + 9(q-u)^2 \\ge 0.$$\nEquality holds iff $q = u$ and $2p = 4(q + u) = 8q$, i.e. $p = 4q = 4u$, i.e. $y = z = 4x$. $\\square$\n\n**Conclusion.** A triangle is in $S$ exactly when equality holds, so (with $x$ the smallest tangent length) $y = z = 4x$. Then\n$$BC = y + z = 8x,\\qquad CA = z + x = 5x,\\qquad AB = x + y = 5x.$$\nSo every triangle in $S$ is isosceles with sides in the ratio $5 : 5 : 8$, and any two such triangles are similar. (Conversely the triangle with sides $5, 5, 8$ has tangent lengths $1, 4, 4$ and lies in $S$, so $S$ is not empty.) ∎"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "inequalities"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamo-usamo-2000-03",
+    "bank": "usamo",
+    "source": {
+      "contest": "USAMO",
+      "paper": "USAMO 2000",
+      "year": 2000,
+      "number": 3,
+      "url": "https://web.evanchen.cc/exams/USAMO-2000-notes.pdf"
+    },
+    "grade": "10-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "A game of solitaire is played with $R$ red cards, $W$ white cards, and $B$ blue cards. A player plays all the cards one at a time. With each play he accumulates a penalty. If he plays a blue card, then he is charged a penalty which is the number of white cards still in his hand. If he plays a white card, then he is charged a penalty which is twice the number of red cards still in his hand. If he plays a red card, then he is charged a penalty which is three times the number of blue cards still in his hand.\n\nFind, as a function of $R$, $W$, and $B$, the minimal total penalty a player can amass and the number of ways in which this minimum can be achieved.",
+    "image": null,
+    "choices": null,
+    "answer": "The minimum is $\\min(BW,\\ 2WR,\\ 3RB)$. For positive $R, W, B$, the number of optimal orders is: $1$ if one of the three quantities is strictly smallest; $W+1$ if $BW = 2WR < 3RB$; $R+1$ if $2WR = 3RB < BW$; $B+1$ if $3RB = BW < 2WR$; and $R+W+B$ if all three are equal.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Induction on the number of cards",
+        "body": "A \"way\" is a sequence of colours (cards of the same colour are indistinguishable). Write $X = BW$, $Y = 2WR$, $Z = 3RB$. These are the penalties for playing all blue cards first, all white cards first, and all red cards first, respectively.\n\n## The minimum\n\nLet $f(B, W, R)$ be the minimal penalty with $B$ blue, $W$ white, $R$ red cards in hand, and $g(B,W,R) = \\min(BW, 2WR, 3RB)$. We prove $f = g$ by induction on $B + W + R$.\n\n**Some count is zero.** Then $g = 0$, and penalty $0$ is achievable. If $R = 0$, play all whites (cost $2\\cdot 0$ each), then all blues (no whites left). If $W = 0$, play all blues (cost $0$), then all reds. If $B = 0$, play all reds (cost $0$), then all whites. So $f = g = 0$.\n\n**All counts positive.** Conditioning on the first card,\n$$f(B,W,R) = \\min\\bigl(f(B-1,W,R) + W,\\ f(B,W-1,R) + 2R,\\ f(B,W,R-1) + 3B\\bigr),$$\nand by induction we may replace $f$ by $g$ on the right. We show the right side equals $g(B,W,R)$.\n\n*Right side $\\le g$:* $g(B-1,W,R) + W \\le (B-1)W + W = X$, and likewise $g(B,W-1,R) + 2R \\le Y$ and $g(B,W,R-1) + 3B \\le Z$.\n\n*Right side $\\ge g$:* we check that each of the three terms is at least $m := \\min(X, Y, Z)$.\n- $g(B-1,W,R) + W = \\min\\bigl(X,\\ Y + W,\\ Z - 3R + W\\bigr)$. The first two entries are $\\ge m$. If $W \\ge 3R$, then $Z - 3R + W \\ge Z \\ge m$. If $W < 3R$, then $(Z - 3R + W) - X = (3R - W)(B-1) \\ge 0$.\n- $g(B,W-1,R) + 2R = \\min\\bigl(X - B + 2R,\\ Y,\\ Z + 2R\\bigr)$. If $B \\le 2R$, then $X - B + 2R \\ge X$. If $B > 2R$, then $(X - B + 2R) - Y = (B - 2R)(W - 1) \\ge 0$.\n- $g(B,W,R-1) + 3B = \\min\\bigl(X + 3B,\\ Y - 2W + 3B,\\ Z\\bigr)$. If $3B \\ge 2W$, then $Y - 2W + 3B \\ge Y$. If $3B < 2W$, then $(Y - 2W + 3B) - Z = (2W - 3B)(R-1) \\ge 0$.\n\nHence $f = g$, and **the minimal penalty is $\\min(BW, 2WR, 3RB)$.**\n\n## Which first moves are optimal\n\nAssume $B, W, R > 0$ and let $m = \\min(X, Y, Z)$. Playing blue first is optimal iff $g(B-1,W,R) + W = m$. From the computation above this term equals $m$ only if $X = m$, or $W \\ge 3R$ and $Z - 3R + W = m$. The second option forces $W = 3R$ and $Z = m$; but $W = 3R$ means $X = BW = 3RB = Z$, so again $X = m$. (When $W < 3R$, the third entry is $\\ge X \\ge m$, and equality again needs $X = m$.) So:\n\n> **Blue first is optimal iff $X = m$.** In the same way, white first is optimal iff $Y = m$, and red first is optimal iff $Z = m$.\n\nSince all three counts are positive, the comparisons reduce to\n$$X < Y \\iff B < 2R, \\qquad X < Z \\iff W < 3R, \\qquad Y < Z \\iff 2W < 3B,$$\nand similarly for $=$ and $>$.\n\n## Counting\n\nLet $N(B,W,R)$ be the number of optimal sequences. If some count is $0$, then $N = 1$: with two counts zero there is only one sequence; if exactly $R = 0$, zero penalty forces every white before every blue; if exactly $W = 0$, every blue before every red; if exactly $B = 0$, every red before every white. If all counts are positive, then\n$$N(B,W,R) = [X = m]\\,N(B-1,W,R) + [Y = m]\\,N(B,W-1,R) + [Z = m]\\,N(B,W,R-1).$$\nWe go through the cases, using induction on $B+W+R$.\n\n1. **Exactly one of $X, Y, Z$ is minimal.** Say $X$ is the unique minimum, so $B < 2R$ and $W < 3R$. Only blue may be played first. Afterwards $B - 1 < 2R$ and $W < 3R$ still hold, so either $B - 1 = 0$ (then $N = 1$) or $X$ is again the unique minimum. Hence $N = 1$. The cases where $Y$ alone is minimal ($2R < B$, $2W < 3B$; playing white keeps both) and where $Z$ alone is minimal ($3R < W$, $3B < 2W$; playing red keeps both) are the same.\n2. **$X = Y < Z$** (that is, $B = 2R$ and $W < 3R$). Playing blue first gives $B - 1 < 2R$ and $W < 3R$ with $B - 1 \\ge 1$, so $X$ is the unique minimum: $1$ way. Playing white first keeps $B = 2R$ and $W - 1 < 3R$, so we are in the same case or $W - 1 = 0$. Thus $N(B,W,R) = 1 + N(B,W-1,R)$ with $N(B,0,R) = 1$, so $N = W + 1$.\n3. **$Y = Z < X$** ($2W = 3B$, $2R < B$). White first gives $2(W-1) < 3B$ and $2R < B$, a unique minimum $Y$ (or $W - 1 = 0$): $1$ way. Red first keeps $2W = 3B$ and $2(R-1) < B$. So $N = 1 + N(B,W,R-1) = R + 1$.\n4. **$Z = X < Y$** ($W = 3R$, $B < 2R$). Red first gives $W > 3(R-1)$ and $3B < 2W$, a unique minimum $Z$ (or $R-1 = 0$): $1$ way. Blue first keeps $W = 3R$ and $B - 1 < 2R$. So $N = 1 + N(B-1,W,R) = B + 1$.\n5. **$X = Y = Z$** (so $B = 2R$ and $W = 3R$, i.e. $(B,W,R) = (2k, 3k, k)$). Every first move is optimal:\n   - blue first leads to $(2k-1, 3k, k)$, which is case 4 with $B = 2k - 1$: $2k$ ways;\n   - white first leads to $(2k, 3k - 1, k)$, which is case 2 with $W = 3k-1$: $3k$ ways;\n   - red first leads to $(2k, 3k, k-1)$, which is case 3 with $R = k - 1$ (or a zero count, which gives $1 = (k-1)+1$ way): $k$ ways.\n\n   In total $6k = B + W + R$ ways.\n\n**Answer.** The minimal penalty is $\\min(BW, 2WR, 3RB)$. For positive $B, W, R$ the number of optimal orders is $1$ if one of $BW, 2WR, 3RB$ is strictly smallest, $W+1$ if $BW = 2WR < 3RB$, $R+1$ if $2WR = 3RB < BW$, $B+1$ if $3RB = BW < 2WR$, and $R+W+B$ if all three are equal. (If a count is $0$ the minimum is $0$, achieved in exactly one way.) ∎"
+      }
+    ],
+    "topics": [
+      "counting",
+      "inequalities",
+      "games"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamo-usamo-2000-04",
+    "bank": "usamo",
+    "source": {
+      "contest": "USAMO",
+      "paper": "USAMO 2000",
+      "year": 2000,
+      "number": 4,
+      "url": "https://web.evanchen.cc/exams/USAMO-2000-notes.pdf"
+    },
+    "grade": "10-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Find the smallest positive integer $n$ such that if $n$ squares of a $1000 \\times 1000$ chessboard are colored, then there will exist three colored squares whose centers form a right triangle with sides parallel to the edges of the board.",
+    "image": null,
+    "choices": null,
+    "answer": "1999",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Lonely squares",
+        "body": "A right triangle with legs parallel to the edges has its right-angle vertex at a colored square $V$, with another colored square in $V$'s row and another in $V$'s column. So **there is no such triangle iff every colored square is alone in its row or alone in its column.**\n\n**1998 squares are not enough.** Color all of the first row and all of the first column except their common corner square: $999 + 999 = 1998$ squares. A colored square $(1, j)$ with $j \\ge 2$ is alone in column $j$, and a colored square $(i, 1)$ with $i \\ge 2$ is alone in row $i$. So no right triangle exists.\n\n**1999 squares force a triangle.** Suppose $n$ squares are colored and there is no triangle. Call a colored square *row-lonely* if it is the only colored square in its row, and *column-lonely* if it is the only one in its column. Every colored square is row-lonely or column-lonely, so\n$$n \\le (\\#\\text{row-lonely}) + (\\#\\text{column-lonely}).$$\nEach row contains at most one row-lonely square, so there are at most $1000$ of them. If there were exactly $1000$, every row would contain exactly one colored square, giving $n = 1000$. Likewise for columns. So if $n > 1000$, each count is at most $999$ and $n \\le 1998$.\n\nHence with $1999$ colored squares a right triangle must exist, and $1998$ is not enough.\n\n**Answer: 1999**"
+      }
+    ],
+    "topics": [
+      "counting",
+      "logic"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamo-usamo-2000-05",
+    "bank": "usamo",
+    "source": {
+      "contest": "USAMO",
+      "paper": "USAMO 2000",
+      "year": 2000,
+      "number": 5,
+      "url": "https://web.evanchen.cc/exams/USAMO-2000-notes.pdf"
+    },
+    "grade": "10-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $A_1A_2A_3$ be a triangle, and let $\\omega_1$ be a circle in its plane passing through $A_1$ and $A_2$. Suppose there exist circles $\\omega_2, \\omega_3, \\dots, \\omega_7$ such that for $k = 2, 3, \\dots, 7$, circle $\\omega_k$ is externally tangent to $\\omega_{k-1}$ and passes through $A_k$ and $A_{k+1}$ (indices mod 3). Prove that $\\omega_7 = \\omega_1$.",
+    "image": null,
+    "choices": null,
+    "answer": "Consecutive circles are tangent at their common point $A_k$. If $\\tau_k$ is the direction of the common tangent at $A_k$ and $L_k$ the direction of $A_kA_{k+1}$, then $\\tau_{k+1} = 2L_k - \\tau_k \\pmod{180^\\circ}$. Six steps give back $\\tau_1$, and a circle through $A_1, A_2$ with a given tangent at $A_1$ is unique.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Track the tangent lines",
+        "body": "Indices of the $A_i$ are taken mod $3$, so $A_4 = A_1$, $A_5 = A_2$, and so on.\n\n**Tangency points.** For $k \\ge 2$, both $\\omega_{k-1}$ (which passes through $A_{k-1}, A_k$) and $\\omega_k$ (which passes through $A_k, A_{k+1}$) contain $A_k$. Two tangent circles have exactly one common point, so they are tangent **at $A_k$** and share the tangent line there. Let $t_k$ be the tangent to $\\omega_k$ at $A_k$. For $k \\ge 2$ this is also the tangent to $\\omega_{k-1}$ at $A_k$.\n\n**Directions.** Measure the direction of a line by its angle with a fixed horizontal line, modulo $180^\\circ$. Let $\\tau_k$ be the direction of $t_k$ and $L_k$ the direction of line $A_kA_{k+1}$; note $L_{k+3} = L_k$.\n\n**Lemma.** If a circle $\\omega$ passes through distinct points $P, Q$, with tangents $t_P$ and $t_Q$ at these points, then $\\operatorname{dir}(t_Q) = 2\\operatorname{dir}(PQ) - \\operatorname{dir}(t_P) \\pmod{180^\\circ}$.\n\n*Proof.* The center of $\\omega$ lies on the perpendicular bisector $m$ of $PQ$, so reflection $\\rho$ in $m$ maps $\\omega$ to itself and swaps $P$ and $Q$. Hence $\\rho(t_P) = t_Q$. Reflection fixes line $PQ$ (which is perpendicular to $m$) and reverses angles, so the angle from $PQ$ to $t_Q$ equals minus the angle from $PQ$ to $t_P$:\n$$\\operatorname{dir}(t_Q) - \\operatorname{dir}(PQ) = -\\bigl(\\operatorname{dir}(t_P) - \\operatorname{dir}(PQ)\\bigr). \\qquad \\square$$\n(Doubling is well defined modulo $180^\\circ$, since $2 \\cdot 180^\\circ \\equiv 0$.)\n\nApply the lemma to $\\omega_k$ with $P = A_k$, $Q = A_{k+1}$. The tangent to $\\omega_k$ at $A_{k+1}$ is $t_{k+1}$, so\n$$\\tau_{k+1} = 2L_k - \\tau_k \\quad (k = 1, \\dots, 6).$$\nIterating six times:\n$$\\tau_7 = 2(L_6 - L_5 + L_4 - L_3 + L_2 - L_1) + \\tau_1 = 2\\bigl(L_3 - L_2 + L_1 - L_3 + L_2 - L_1\\bigr) + \\tau_1 = \\tau_1.$$\n\n**Conclusion.** $\\omega_7$ passes through $A_7 = A_1$ and $A_8 = A_2$, and its tangent at $A_1$ is $t_7$, which is parallel to $t_1$ and passes through $A_1$; hence $t_7 = t_1$. So $\\omega_1$ and $\\omega_7$ both pass through $A_1$ and $A_2$ and have the same tangent line $t_1$ at $A_1$. The center of such a circle lies on the perpendicular to $t_1$ at $A_1$ and on the perpendicular bisector of $A_1A_2$. These two lines are not parallel: otherwise $t_1 \\parallel A_1A_2$, so $t_1 = A_1A_2$, but a tangent line cannot pass through a second point of the circle. So the center is determined, and with it the radius $OA_1$. Therefore $\\omega_7 = \\omega_1$. ∎\n\n*Remark.* The proof only used that consecutive circles are tangent. External tangency is part of the hypothesis but is not needed."
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamo-usamo-2000-06",
+    "bank": "usamo",
+    "source": {
+      "contest": "USAMO",
+      "paper": "USAMO 2000",
+      "year": 2000,
+      "number": 6,
+      "url": "https://web.evanchen.cc/exams/USAMO-2000-notes.pdf"
+    },
+    "grade": "10-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $a_1, b_1, a_2, b_2, \\dots, a_n, b_n$ be nonnegative real numbers. Prove that\n$$\\sum_{i,j=1}^{n} \\min\\{a_ia_j, b_ib_j\\} \\le \\sum_{i,j=1}^{n} \\min\\{a_ib_j, a_jb_i\\}.$$",
+    "image": null,
+    "choices": null,
+    "answer": "With $b_i = r_ia_i$, each term of RHS $-$ LHS equals $\\tfrac12 x_ix_j\\min(t_i, t_j)$, where $x_i = a_i - b_i$ and $t_i = \\frac{2\\min(1,r_i)}{|1-r_i|} \\ge 0$. A form $\\sum x_ix_j \\min(t_i,t_j)$ is a sum of squares.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Reduce to a single min",
+        "body": "**Reduction.** If $a_i = 0$, then every term involving index $i$ is $0$ on both sides: $\\min\\{0, b_ib_j\\} = 0$ and $\\min\\{0, a_jb_i\\} = 0$. So we may delete such indices and assume all $a_i > 0$. Write $b_i = r_ia_i$ with $r_i \\ge 0$. Then\n$$\\min\\{a_ia_j, b_ib_j\\} = a_ia_j\\min(1, r_ir_j), \\qquad \\min\\{a_ib_j, a_jb_i\\} = a_ia_j\\min(r_i, r_j),$$\nand we must show\n$$\\sum_{i,j} a_ia_j\\,D_{ij} \\ge 0, \\qquad D_{ij} := \\min(r_i, r_j) - \\min(1, r_ir_j).$$\n\n**Step 1: absolute values.** Using $2\\min(u,v) = u + v - |u - v|$,\n$$2D_{ij} = |1 - r_ir_j| - |r_i - r_j| - (1 - r_i)(1 - r_j).$$\n\n**Step 2: a difference of absolute values.** For real $P, Q$ we have $|P| + |Q| = \\max(|P+Q|, |P-Q|)$ and $|P+Q|\\,|P-Q| = |P^2 - Q^2| = \\bigl||P| - |Q|\\bigr|(|P|+|Q|)$. Hence $\\bigl||P|-|Q|\\bigr| = \\min(|P+Q|, |P-Q|)$, and the sign of $|P| - |Q|$ is the sign of $P^2 - Q^2 = (P+Q)(P-Q)$. Take $P = 1 - r_ir_j$ and $Q = r_i - r_j$. Then\n$$P + Q = (1 + r_i)(1 - r_j), \\qquad P - Q = (1 - r_i)(1 + r_j).$$\nWrite $s_i = |1 - r_i|$. Then $(P+Q)(P-Q)$ has the sign of $(1-r_i)(1-r_j)$, and\n$$|1 - r_ir_j| - |r_i - r_j| = \\operatorname{sgn}\\bigl((1-r_i)(1-r_j)\\bigr)\\cdot\\min\\bigl((1+r_i)s_j,\\ (1+r_j)s_i\\bigr).$$\n\n**Step 3: factor.** If $r_i = 1$, then $D_{ij} = \\min(1, r_j) - \\min(1, r_j) = 0$ for every $j$. Otherwise $s_i > 0$; set\n$$x_i = a_i(1 - r_i) = a_i - b_i, \\qquad t_i = \\frac{1 + r_i}{s_i} - 1 = \\frac{2\\min(1, r_i)}{|1-r_i|} \\ge 0.$$\n(If $r_i = 1$, put $x_i = 0$ and $t_i = 0$.) For $s_i, s_j > 0$, Steps 1 and 2 give\n$$2D_{ij} = \\operatorname{sgn}\\bigl((1-r_i)(1-r_j)\\bigr)\\,s_is_j\\Bigl[\\min\\Bigl(\\tfrac{1+r_i}{s_i}, \\tfrac{1+r_j}{s_j}\\Bigr) - 1\\Bigr] = (1-r_i)(1-r_j)\\min(t_i, t_j).$$\nThis also holds (both sides $0$) when $r_i = 1$ or $r_j = 1$. Therefore\n$$\\sum_{i,j} a_ia_jD_{ij} = \\frac12\\sum_{i,j} x_ix_j\\min(t_i, t_j).$$\n(Check with $r_i = 2$, $r_j = 3$: $2D_{ij} = 2(2 - 1) = 2$, and $(1-2)(1-3)\\min(2, 1) = 2$.)\n\n**Step 4: the quadratic form is nonnegative.** Relabel so that $t_1 \\le t_2 \\le \\dots \\le t_n$, and put $t_0 = 0$. For $i, j \\ge 1$,\n$$\\min(t_i, t_j) = t_{\\min(i,j)} = \\sum_{k=1}^{\\min(i,j)} (t_k - t_{k-1}).$$\nHence\n$$\\sum_{i,j} x_ix_j\\min(t_i,t_j) = \\sum_{k=1}^n (t_k - t_{k-1}) \\sum_{i \\ge k}\\sum_{j \\ge k} x_ix_j = \\sum_{k=1}^{n}(t_k - t_{k-1})\\Bigl(\\sum_{i\\ge k} x_i\\Bigr)^2 \\ge 0,$$\nsince every $t_k - t_{k-1} \\ge 0$.\n\nSo $\\sum_{i,j}\\bigl[\\min\\{a_ib_j, a_jb_i\\} - \\min\\{a_ia_j, b_ib_j\\}\\bigr] \\ge 0$, which is the claim. ∎"
+      }
+    ],
+    "topics": [
+      "inequalities",
+      "algebra"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

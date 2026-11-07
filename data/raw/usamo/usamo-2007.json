@@ -1,0 +1,209 @@
+[
+  {
+    "id": "usamo-usamo-2007-01",
+    "bank": "usamo",
+    "source": {
+      "contest": "USAMO",
+      "paper": "USAMO 2007",
+      "year": 2007,
+      "number": 1,
+      "url": "https://web.evanchen.cc/exams/USAMO-2007-notes.pdf"
+    },
+    "grade": "10-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $n$ be a positive integer. Define a sequence by setting $a_1 = n$ and, for each $k > 1$, letting $a_k$ be the unique integer in the range $0 \\le a_k \\le k - 1$ for which $a_1 + a_2 + \\dots + a_k$ is divisible by $k$. (For instance, when $n = 9$ the obtained sequence is $9, 1, 2, 0, 3, 3, 3, \\dots$.) Prove that for any $n$ the sequence $a_1, a_2, \\dots$ eventually becomes constant.",
+    "image": null,
+    "choices": null,
+    "answer": "The averages $b_k = \\frac{a_1 + \\dots + a_k}{k}$ are nonnegative integers with $b_{k+1} < b_k + 1$, hence non-increasing and eventually constant $= b$; then $a_{k+1} = (k+1)b - kb = b$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "The averages form a non-increasing integer sequence",
+        "body": "For each $k$ let\n$$b_k = \\frac{a_1 + a_2 + \\dots + a_k}{k},$$\na nonnegative integer by the definition of $a_k$.\n\n**$b_k$ is non-increasing.** Since $a_{k+1} \\le k$,\n$$b_{k+1} = \\frac{k b_k + a_{k+1}}{k+1} \\le \\frac{k b_k + k}{k+1} < \\frac{(k+1)b_k + (k+1)}{k+1} = b_k + 1.$$\nAs $b_{k+1}$ and $b_k$ are integers, $b_{k+1} \\le b_k$.\n\nA non-increasing sequence of nonnegative integers is eventually constant: there are $N$ and $b$ with $b_k = b$ for all $k \\ge N$.\n\n**Then $a_k$ is constant.** For $k \\ge N$,\n$$a_{k+1} = (k+1)b_{k+1} - k b_k = (k+1)b - kb = b.$$\nSo $a_k = b$ for all $k > N$: the sequence is eventually constant. ∎"
+      }
+    ],
+    "topics": [
+      "sequences-series",
+      "number-theory"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamo-usamo-2007-02",
+    "bank": "usamo",
+    "source": {
+      "contest": "USAMO",
+      "paper": "USAMO 2007",
+      "year": 2007,
+      "number": 2,
+      "url": "https://web.evanchen.cc/exams/USAMO-2007-notes.pdf"
+    },
+    "grade": "10-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "text",
+    "prompt": "Decide whether it is possible to cover all lattice points in $\\mathbb{R}^2$ by an (infinite) family of disks whose interiors are disjoint such that the radius of each disk is at least $5$.",
+    "image": null,
+    "choices": null,
+    "answer": "No",
+    "acceptedAnswers": [
+      "no",
+      "not possible",
+      "impossible"
+    ],
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Grow an empty disk until it touches three disks",
+        "body": "**Answer: No.**\n\nSuppose such a family $\\mathcal F$ exists; write $D_i$ for its (closed) disks, with centers $C_i$ and radii $r_i \\ge 5$.\n\n**Local finiteness.** A disk of $\\mathcal F$ meeting the ball of radius $\\rho$ about the origin contains a disk of radius $5$ inside the ball of radius $\\rho + 10$; these radius-$5$ disks have disjoint interiors, so by area only finitely many members of $\\mathcal F$ meet any bounded region. Consequently the union of the $D_i$ is closed, and two members meet in at most one point (they can only be externally tangent).\n\n**An uncovered point exists.** Take $D_1 \\in \\mathcal F$ and a point $Z$ on its boundary circle that is not a point of tangency with another disk (only finitely many disks are nearby, each touching $D_1$ in at most one point). Disks other than $D_1$ near $Z$ are at positive distance from $Z$, so points just outside $D_1$ close to $Z$ are uncovered.\n\nFor an uncovered point $O$ let\n$$\\rho(O) = \\min_i \\big(|OC_i| - r_i\\big) > 0,$$\nthe radius of the largest open disk around $O$ that misses all $D_i$ (an *empty* disk). Some lattice point $L$ has $|OL| \\le \\frac{1}{\\sqrt2}$, and $L$ lies in some $D_i$, so $|OC_i| - r_i \\le |OL| \\le \\frac1{\\sqrt2}$. Thus **every empty disk has radius at most $\\frac1{\\sqrt2}$.**\n\n**Growing.** Start with an uncovered point and its maximal empty disk; it touches some $D_1$. Move its center directly away from $C_1$ while increasing the radius at the same rate: the disk stays tangent to $D_1$. Because the radius cannot exceed $\\frac1{\\sqrt2}$, at some moment the disk first touches a second disk $D_2$. Now move the center along the curve $\\{O : |OC_1| - r_1 = |OC_2| - r_2\\}$ (a hyperbola branch, or a line), on which the disk stays tangent to both. This common value is $\\ge 0$ on the curve (a point cannot be inside both disks) and is $0$ only at the tangency point of $D_1, D_2$ if they touch; move along the curve away from that point, towards infinity, where the value tends to $\\infty$. Again the radius is bounded by $\\frac1{\\sqrt2}$, so at some moment the disk first touches a third disk $D_3$.\n\nWe now have an empty disk with center $O$ and radius $r \\in (0, \\frac1{\\sqrt2}]$ externally tangent to three disks $D_1, D_2, D_3$, at three different points (two disks with disjoint interiors cannot touch the circle at the same point from outside). The three rays $OC_1, OC_2, OC_3$ divide the full angle into three parts, so one of them, say $\\angle C_1OC_2$, is at most $120^\\circ$.\n\n**Contradiction.** Let $a = r_1$, $b = r_2$. Then $|OC_1| = a + r$, $|OC_2| = b + r$, and $|C_1C_2| \\ge a + b$ (disjoint interiors). Since $\\cos\\angle C_1OC_2 \\ge -\\frac12$, the law of cosines gives\n$$(a + b)^2 \\le (a+r)^2 + (b+r)^2 + (a+r)(b+r).$$\nExpanding, this is $ab - 3ar - 3br \\le 3r^2$, i.e.\n$$(a - 3r)(b - 3r) \\le 12 r^2.$$\nBut $r \\le \\frac1{\\sqrt2}$ and $a, b \\ge 5$ give $a - 3r \\ge 5 - 3r > 0$, so $(a-3r)(b-3r) \\ge (5 - 3r)^2$, and\n$$5 - 3r > 2\\sqrt3\\, r \\iff r < \\frac{5}{3 + 2\\sqrt3} \\approx 0.773,$$\nwhich holds as $r \\le \\frac1{\\sqrt2} \\approx 0.707$. So $(a-3r)(b-3r) > 12r^2$ — a contradiction.\n\nHence no such family exists. ∎"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamo-usamo-2007-03",
+    "bank": "usamo",
+    "source": {
+      "contest": "USAMO",
+      "paper": "USAMO 2007",
+      "year": 2007,
+      "number": 3,
+      "url": "https://web.evanchen.cc/exams/USAMO-2007-notes.pdf"
+    },
+    "grade": "10-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $S$ be a set containing $n^2 + n - 1$ elements. Suppose that the $n$-element subsets of $S$ are partitioned into two classes. Prove that there are at least $n$ pairwise disjoint sets in the same class.",
+    "image": null,
+    "choices": null,
+    "answer": "Prove more generally that $k(n+1) - 1$ elements suffice for $k$ disjoint same-class sets, by induction on $k$: if it fails, every $(n+1)$-subset has all its $n$-subsets in one class, which forces all $n$-subsets into one class.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Induction on the number of sets",
+        "body": "Call the classes red and blue. We prove more generally:\n\n**Claim.** If $|S| = k(n+1) - 1$ with $k \\ge 1$, then there are $k$ pairwise disjoint $n$-subsets of $S$ in the same class.\n\nThe problem is the case $k = n$, since $n(n+1) - 1 = n^2 + n - 1$.\n\n*Proof by induction on $k$.* For $k = 1$, $|S| = n$ and $S$ itself is one such set.\n\nLet $k \\ge 2$ and suppose the claim fails for some $S$ with $|S| = k(n+1) - 1$. Take any $(n+1)$-element subset $U \\subseteq S$ (possible since $|S| \\ge 2n + 1$). The set $T = S \\setminus U$ has $(k-1)(n+1) - 1$ elements, so by the induction hypothesis it contains $k - 1$ pairwise disjoint $n$-sets of one class, say of color $X$. If some $n$-subset of $U$ had color $X$, together with these we would get $k$ pairwise disjoint sets of color $X$. So **every $n$-subset of $U$ has the other color** — in particular, all $n$-subsets of $U$ have the same color.\n\nThis holds for every $(n+1)$-subset $U$. Hence two $n$-subsets that differ in exactly one element (their union is such a $U$) have the same color. Any $n$-subset can be turned into any other by replacing one element at a time, so **all** $n$-subsets of $S$ have the same color. But $S$ contains $k$ pairwise disjoint $n$-subsets, since $kn \\le k(n+1) - 1$. This contradicts the assumption, completing the induction. ∎"
+      }
+    ],
+    "topics": [
+      "counting",
+      "logic"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamo-usamo-2007-04",
+    "bank": "usamo",
+    "source": {
+      "contest": "USAMO",
+      "paper": "USAMO 2007",
+      "year": 2007,
+      "number": 4,
+      "url": "https://web.evanchen.cc/exams/USAMO-2007-notes.pdf"
+    },
+    "grade": "10-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "An *animal* with $n$ *cells* is a connected figure consisting of $n$ equal-sized square cells (equivalently, a polyomino with $n$ cells). A *dinosaur* is an animal with at least $2007$ cells. It is said to be *primitive* if its cells cannot be partitioned into two or more dinosaurs. Find with proof the maximum number of cells in a primitive dinosaur.",
+    "image": null,
+    "choices": null,
+    "answer": "8025",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "A centroid-type vertex in a spanning tree",
+        "body": "**Answer: $8025 = 4\\cdot 2006 + 1$.**\n\nThink of the cells as vertices of a graph, two cells adjacent when they share a side; every vertex has degree at most $4$. An animal is a connected vertex set.\n\n**Construction.** Take a \"plus sign\": a central cell with four straight arms of $2006$ cells each, $8025$ cells in total. In any partition into at least two connected parts, some part does not contain the center. A connected set avoiding the center lies inside a single arm (arms are joined only through the center), so it has at most $2006$ cells and is not a dinosaur. Hence the plus sign is primitive.\n\n**Upper bound.** Let $D$ be a primitive dinosaur with $N$ cells and let $T$ be a spanning tree of its graph (max degree $\\le 4$). A vertex set that is connected in $T$ is connected in $D$, so $T$ cannot be split into two connected (in $T$) parts with at least $2007$ vertices each.\n\nCall a component of $T - v$ *big* if it has at least $2007$ vertices.\n\n*Observation.* If $T - v$ has a big component $K$, then $N - |K| \\le 2006$. Indeed, the vertices outside $K$ form a connected set (each other component is attached to $v$), so otherwise $K$ and its complement would be two dinosaurs. In particular the big component, if any, is unique.\n\n*Claim.* Some vertex $v$ has no big component in $T - v$.\n\n*Proof.* Start at any vertex $v_0$. If $T - v_0$ has a big component $K$, move to the neighbor $v_1$ of $v_0$ inside $K$. In $T - v_1$, the component containing $v_0$ is exactly the set of vertices outside $K$ (in the tree, the edge $v_0v_1$ is the only edge between $K$ and the rest), which has at most $2006$ vertices by the observation; so if $T - v_1$ has a big component, it does not contain $v_0$, and the next step does not go back. Repeating, we walk along $T$ without ever immediately backtracking; in a tree such a walk never revisits a vertex, so it must stop, at a vertex with no big component. $\\square$\n\nFor that $v$, $T - v$ has at most $4$ components, each with at most $2006$ vertices, so $N \\le 1 + 4\\cdot 2006 = 8025$.\n\nBoth parts together give the maximum $8025$. ∎"
+      }
+    ],
+    "topics": [
+      "graph-theory",
+      "counting"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamo-usamo-2007-05",
+    "bank": "usamo",
+    "source": {
+      "contest": "USAMO",
+      "paper": "USAMO 2007",
+      "year": 2007,
+      "number": 5,
+      "url": "https://web.evanchen.cc/exams/USAMO-2007-notes.pdf"
+    },
+    "grade": "10-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Prove that for every nonnegative integer $n$, the number $7^{7^n} + 1$ is the product of at least $2n + 3$ (not necessarily distinct) primes.",
+    "image": null,
+    "choices": null,
+    "answer": "Induction: with $X = 7^{7^n}$, $X^7 + 1 = (X+1)\\cdot\\frac{X^7+1}{X+1}$ and $\\frac{X^7+1}{X+1} = (X+1)^6 - 7X(X^2+X+1)^2$ is a difference of two squares (as $7X$ is a square), giving two more nontrivial factors.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Aurifeuillean factorization and induction",
+        "body": "Induct on $n$. For $n = 0$: $7 + 1 = 8 = 2^3$, a product of $3$ primes.\n\nSuppose the claim holds for $n$ and let $X = 7^{7^n}$; then $7^{7^{n+1}} + 1 = X^7 + 1$ and\n$$X^7 + 1 = (X + 1)\\,\\Phi, \\qquad \\Phi = X^6 - X^5 + X^4 - X^3 + X^2 - X + 1.$$\n\n**Key identity.** $\\Phi = (X+1)^6 - 7X\\,(X^2 + X + 1)^2$.\n\n*Check.* $(X+1)^6 = X^6 + 6X^5 + 15X^4 + 20X^3 + 15X^2 + 6X + 1$ and $(X^2+X+1)^2 = X^4 + 2X^3 + 3X^2 + 2X + 1$, so $7X(X^2+X+1)^2 = 7X^5 + 14X^4 + 21X^3 + 14X^2 + 7X$. The difference is $X^6 - X^5 + X^4 - X^3 + X^2 - X + 1$. $\\square$\n\nSince $7^n$ is odd, $7X = 7^{7^n + 1} = Y^2$ with $Y = 7^{(7^n+1)/2}$. Therefore\n$$\\Phi = \\big((X+1)^3 - Y(X^2+X+1)\\big)\\big((X+1)^3 + Y(X^2+X+1)\\big).$$\nBoth factors exceed $1$: the second clearly does; for the first, $X \\ge 7$ gives $Y^2 = 7X \\le X^2$, so $Y \\le X$ and\n$$(X+1)^3 - Y(X^2+X+1) \\ge X^3 + 3X^2 + 3X + 1 - (X^3 + X^2 + X) = 2X^2 + 2X + 1 > 1.$$\n\nSo $X^7 + 1$ is $X + 1$ (a product of at least $2n + 3$ primes by the induction hypothesis) times two integers greater than $1$ (each contributing at least one prime). Hence $7^{7^{n+1}} + 1$ is a product of at least $2n + 5 = 2(n+1) + 3$ primes. ∎"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "polynomials"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamo-usamo-2007-06",
+    "bank": "usamo",
+    "source": {
+      "contest": "USAMO",
+      "paper": "USAMO 2007",
+      "year": 2007,
+      "number": 6,
+      "url": "https://web.evanchen.cc/exams/USAMO-2007-notes.pdf"
+    },
+    "grade": "10-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $ABC$ be an acute triangle with $\\omega$, $S$, and $R$ being its incircle, circumcircle, and circumradius, respectively. Circle $\\omega_A$ is tangent internally to $S$ at $A$ and tangent externally to $\\omega$. Circle $S_A$ is tangent internally to $S$ at $A$ and tangent internally to $\\omega$.\n\nLet $P_A$ and $Q_A$ denote the centers of $\\omega_A$ and $S_A$, respectively. Define points $P_B$, $Q_B$, $P_C$, $Q_C$ analogously. Prove that\n$$8\\, P_AQ_A \\cdot P_BQ_B \\cdot P_CQ_C \\le R^3$$\nwith equality if and only if triangle $ABC$ is equilateral.",
+    "image": null,
+    "choices": null,
+    "answer": "$P_AQ_A = \\frac{a^2(s-a)}{4K}$ (both centers lie on ray $AO$; the law of cosines with $AI\\cos\\angle IAO = h_a - r$ gives $AP_A = \\frac{(s-a)^2}{2h_a}$, $AQ_A = \\frac{(s-a)^2}{2(h_a - 2r)}$). Then the inequality becomes $2R^2 r \\le R^3$, i.e. Euler's $R \\ge 2r$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Compute $P_AQ_A$ exactly, reduce to Euler",
+        "body": "Use the usual notation: side lengths $a, b, c$, semiperimeter $s$, area $K$, inradius $r = K/s$, incenter $I$, circumcenter $O$, and $h_a = 2K/a$ the altitude from $A$.\n\n**Both centers lie on ray $AO$.** A circle internally tangent to $S$ at $A$ has its center on line $OA$, on the same side of $A$ as $O$, at distance equal to its radius from $A$. So if $\\omega_A$ has radius $x$ and $S_A$ has radius $y$, then $AP_A = x$, $AQ_A = y$, and $P_AQ_A = |y - x|$.\n\n**The angle between $AI$ and $AO$.** In an acute triangle $\\angle BAO = 90^\\circ - C = \\angle CAH$, where $H$ is the foot of the altitude from $A$; since $AI$ bisects $\\angle BAC$, rays $AO$ and $AH$ make equal angles $\\varphi$ with $AI$. Projecting $\\overrightarrow{AI}$ onto the direction $AH$ (perpendicular to $BC$) gives the difference of the distances of $A$ and $I$ from line $BC$:\n$$AI\\cos\\varphi = h_a - r.$$\nAlso $AI^2 - r^2 = (s-a)^2$ (the tangent length from $A$ to $\\omega$).\n\n**Solving for the radii.** By the law of cosines in triangle $AP_AI$,\n$$P_AI^2 = x^2 + AI^2 - 2x\\,AI\\cos\\varphi = x^2 + AI^2 - 2x(h_a - r).$$\nExternal tangency of $\\omega_A$ and $\\omega$ means $P_AI = x + r$. Squaring and cancelling $x^2$:\n$$AI^2 - r^2 = 2x(h_a - r) + 2xr = 2x h_a \\implies x = \\frac{(s-a)^2}{2h_a}.$$\nFor $S_A$: it passes through $A$, which is outside $\\omega$, so the internal tangency means $\\omega$ lies inside $S_A$ and $Q_AI = y - r$. The same computation gives\n$$AI^2 - r^2 = 2y(h_a - r) - 2yr = 2y(h_a - 2r) \\implies y = \\frac{(s-a)^2}{2(h_a - 2r)},$$\nwhere $h_a - 2r = \\frac{2K}{a} - \\frac{2K}{s} = \\frac{2K(s-a)}{as} > 0$.\n\n**The length $P_AQ_A$.**\n$$P_AQ_A = y - x = \\frac{(s-a)^2}{2}\\cdot\\frac{2r}{h_a(h_a - 2r)} = \\frac{r(s-a)^2}{\\frac{2K}{a}\\cdot\\frac{2K(s-a)}{as}} = \\frac{r s\\, a^2 (s-a)}{4K^2} = \\frac{a^2(s-a)}{4K},$$\nusing $rs = K$.\n\n**Reduction to Euler's inequality.** Multiplying the three analogous formulas,\n$$8\\,P_AQ_A\\cdot P_BQ_B\\cdot P_CQ_C = \\frac{(abc)^2 (s-a)(s-b)(s-c)}{8K^3}.$$\nWith $abc = 4RK$ and Heron's formula $(s-a)(s-b)(s-c) = \\frac{K^2}{s} = rK$, this equals\n$$\\frac{16R^2K^2\\cdot rK}{8K^3} = 2R^2 r.$$\nSo the inequality is $2R^2 r \\le R^3$, i.e. $R \\ge 2r$. This is Euler's inequality, which follows from $OI^2 = R(R - 2r) \\ge 0$, with equality iff $O = I$, i.e. iff triangle $ABC$ is equilateral. ∎"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "inequalities"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

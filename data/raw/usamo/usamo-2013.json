@@ -1,0 +1,194 @@
+[
+  {
+    "id": "usamo-usamo-2013-01",
+    "bank": "usamo",
+    "source": {
+      "contest": "USAMO",
+      "paper": "USAMO 2013",
+      "year": 2013,
+      "number": 1,
+      "url": "https://web.evanchen.cc/exams/USAMO-2013-notes.pdf"
+    },
+    "grade": "10-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "In triangle $ABC$, points $P, Q, R$ lie on sides $BC, CA, AB$, respectively. Let $\\omega_A$, $\\omega_B$, $\\omega_C$ denote the circumcircles of triangles $AQR$, $BRP$, $CPQ$, respectively. Given the fact that segment $AP$ intersects $\\omega_A$, $\\omega_B$, $\\omega_C$ again at $X, Y, Z$ respectively, prove that $YX/XZ = BP/PC$.",
+    "image": null,
+    "choices": null,
+    "answer": "The Miquel point $M$ of the three circles is the center of a spiral similarity taking $B, P, C$ to $Y, X, Z$ (angle chasing in the three circles); similarities preserve ratios along a line.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": "usamo-usajmo-2013-03",
+    "reviewNote": null
+  },
+  {
+    "id": "usamo-usamo-2013-02",
+    "bank": "usamo",
+    "source": {
+      "contest": "USAMO",
+      "paper": "USAMO 2013",
+      "year": 2013,
+      "number": 2,
+      "url": "https://web.evanchen.cc/exams/USAMO-2013-notes.pdf"
+    },
+    "grade": "10-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "For a positive integer $n \\ge 3$ plot $n$ equally spaced points around a circle. Label one of them $A$, and place a marker at $A$. One may move the marker forward in a clockwise direction to either the next point or the point after that. Hence there are a total of $2n$ distinct moves available; two from each point. Let $a_n$ count the number of ways to advance around the circle exactly twice, beginning and ending at $A$, without repeating a move. Prove that $a_{n-1} + a_n = 2^n$ for all $n \\ge 4$.",
+    "image": null,
+    "choices": null,
+    "answer": "Record which of the positions $0, 1, \\dots, 2n$ are visited as a $2 \\times (n+1)$ array of columns $(p_i, p_{i+n})$; valid walks are exactly sequences of $n+1$ columns from $\\{(1,0), (0,1), (1,1)\\}$ with no two equal neighbours, starting/ending with $(1,0)/(0,1)$ or $(1,1)/(1,1)$. Counting such sequences gives $a_n = s_n + d_n$ with $s_{n+1} = 2d_n$, $d_{n+1} = s_n + d_n$, $s_n + 2d_n = 2^n$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Encode the walk by columns",
+        "body": "Number the points $0, 1, \\dots, n-1$ clockwise with $A = 0$. \"Unroll\" the two laps: the marker visits positions $0 = q_0 < q_1 < \\dots < q_r = 2n$ of $\\{0, 1, \\dots, 2n\\}$ with steps $q_{t+1} - q_t \\in \\{1, 2\\}$, and the move made at position $q$ is the move \"(point $q \\bmod n$, step length)\". Let $p_s = 1$ if position $s$ is visited and $p_s = 0$ otherwise ($0 \\le s \\le 2n$); the walk is determined by $p$, and $p_0 = p_{2n} = 1$.\n\n**Conditions.** (a) Steps have length at most $2$: no two consecutive positions $s, s+1$ are both unvisited. (b) No move is repeated: each point $i \\in \\{0, \\dots, n-1\\}$ corresponds to the two positions $i$ and $i + n$, and from a visited position $s$ the move is a $1$-step if $p_{s+1} = 1$ and a $2$-step if $p_{s+1} = 0$. So the forbidden situation is $p_i = p_{i+n} = 1$ and $p_{i+1} = p_{i+n+1}$.\n\n**Columns.** For $0 \\le i \\le n$ form the column $c_i = (p_i, p_{i+n})$. The top entries $p_0, \\dots, p_n$ and bottom entries $p_n, \\dots, p_{2n}$ list all positions, with the adjacent pairs $(s, s+1)$ appearing as horizontally adjacent entries in one row. Note $c_0 = (1, p_n)$ and $c_n = (p_n, 1)$. Translate the conditions for consecutive columns $c_i, c_{i+1}$:\n- $(0,0)$ never occurs: it can only be $c_i$ with $1 \\le i \\le n-1$, and then by (a) $c_{i-1} = (1,1)$, so both moves from point $i-1$ are $2$-steps, violating (b).\n- So all columns lie in $\\{u, v, w\\}$ with $u = (1,0)$, $v = (0,1)$, $w = (1,1)$. The pair $u, u$ has two adjacent zeros in the bottom row, $v, v$ in the top row (violating (a)); the pair $w, w$ means two $1$-steps from the same point (violating (b)). All pairs of *different* columns are allowed (check: $u,v$; $v,u$; $u,w$; $w,u$; $v,w$; $w,v$ create no adjacent zeros, and when $c_i = w$ the two moves from point $i$ differ).\n- Boundary: if $p_n = 0$ then $c_0 = u$, $c_n = v$; if $p_n = 1$ then $c_0 = c_n = w$.\n\nConversely, any sequence $c_0, \\dots, c_n$ over $\\{u, v, w\\}$ with no two equal neighbours that starts with $u$ and ends with $v$, or starts and ends with $w$, defines a consistent $p$ (the shared entry $p_n$ agrees at both ends) and hence a valid walk. So $a_n$ counts these sequences.\n\n**Counting.** Fix the first symbol. Let $s_n$ be the number of sequences $c_0, \\dots, c_n$ with no two equal neighbours that end in the same symbol as they start, and $d_n$ the number ending in one particular other symbol (the same for both other symbols, by symmetry). Then $a_n = d_n + s_n$ (start $u$ end $v$, or start $w$ end $w$). Each of the $n$ columns after the first has $2$ choices, so $s_n + 2d_n = 2^n$. Looking at the column $c_n$ before the last one:\n$$s_{n+1} = 2 d_n, \\qquad d_{n+1} = s_n + d_n.$$\n\nTherefore\n$$a_{n+1} + a_n = (2d_n + s_n + d_n) + (s_n + d_n) = 2(s_n + 2d_n) = 2^{n+1}.$$\nReplacing $n$ by $n - 1$ (valid for $n - 1 \\ge 3$): $a_{n-1} + a_n = 2^n$ for all $n \\ge 4$. ∎\n\n*(Check: $a_3 = 5$, $a_4 = 11$, $a_5 = 21$.)*"
+      }
+    ],
+    "topics": [
+      "counting",
+      "sequences-series"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamo-usamo-2013-03",
+    "bank": "usamo",
+    "source": {
+      "contest": "USAMO",
+      "paper": "USAMO 2013",
+      "year": 2013,
+      "number": 3,
+      "url": "https://web.evanchen.cc/exams/USAMO-2013-notes.pdf"
+    },
+    "grade": "10-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $n$ be a positive integer. There are $\\frac{n(n+1)}{2}$ tokens, each with a black side and a white side, arranged into an equilateral triangle, with the biggest row containing $n$ tokens. Initially, each token has the white side up. An operation is to choose a line parallel to the sides of the triangle, and flip all the tokens on that line. A configuration is called *admissible* if it can be obtained from the initial configuration by performing a finite number of operations. For each admissible configuration $C$, let $f(C)$ denote the smallest number of operations required to obtain $C$ from the initial configuration. Find the maximum value of $f(C)$, where $C$ varies over all admissible configurations.",
+    "image": null,
+    "choices": null,
+    "answer": "$\\max f(C) = 6k + r$ when $n = 4k + r$, $r \\in \\{0,1,2,3\\}$ (i.e. $6k, 6k+1, 6k+2, 6k+3$). The sets of lines doing nothing form an $8$-element space (complementing even- and odd-indexed lines of a direction in a constrained way); writing $f = \\frac{3n - W}{2}$ with $W$ a maximum over $8$ sign patterns, parity arguments give $W \\ge n \\bmod 4$, and explicit choices attain it.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Linear algebra over F₂ and a sign optimisation",
+        "body": "**Answer: $6k + r$ for $n = 4k + r$**, $0 \\le r \\le 3$. For $n = 1$ there is one token, and the answer $1$ is clear; assume $n \\ge 2$.\n\n**Setup.** Label tokens by triples $(i, j, k)$ of nonnegative integers with $i + j + k = n - 1$. The lines are $\\{i = c\\}$, $\\{j = c\\}$, $\\{k = c\\}$ for $c = 0, \\dots, n-1$ (three directions, $3n$ lines). Operations commute and each is an involution, so the result of a sequence of operations only depends on which lines are used an odd number of times. Encode a choice of lines by $v = (\\alpha, \\beta, \\gamma) \\in (\\mathbb F_2^{n})^3$; token $(i,j,k)$ is flipped iff $\\alpha_i + \\beta_j + \\gamma_k = 1$. Let $T(v)$ be the resulting configuration; then $f(C) = \\min\\{|v| : T(v) = C\\}$, where $|v|$ is the number of lines used.\n\n**Step 1: the kernel.** Suppose $T(v)$ is all white. For $i + j + k = n - 2$, the tokens $(i, j+1, k)$ and $(i+1, j, k)$ give $\\alpha_i + \\beta_{j+1} = \\alpha_{i+1} + \\beta_j$, i.e. $\\alpha_i + \\alpha_{i+1} = \\beta_j + \\beta_{j+1}$ whenever $i + j \\le n - 2$. Taking $j = 0$, all $\\alpha_i + \\alpha_{i+1}$ equal $e := \\beta_0 + \\beta_1$; taking $i = 0$, all $\\beta_j + \\beta_{j+1}$ equal $e$; the same argument for $\\beta, \\gamma$ shows all $\\gamma_k + \\gamma_{k+1}$ equal $e$ too. So $\\alpha_i = \\alpha_0 + ie$, $\\beta_j = \\beta_0 + je$, $\\gamma_k = \\gamma_0 + ke$, and the token condition becomes $\\alpha_0 + \\beta_0 + \\gamma_0 + (n-1)e = 0$. Conversely these all work. So the kernel $K$ has exactly $8$ elements, parametrised by $e, \\alpha_0, \\beta_0$, and $f(T(v)) = \\min_{\\kappa \\in K} |v + \\kappa|$.\n\n**Step 2: blocks.** In each direction split the $n$ lines into those with even index (there are $p = \\lceil n/2 \\rceil$) and odd index ($q = \\lfloor n/2 \\rfloor$): six *blocks*, $E_1, E_2, E_3$ of size $p$ and $O_1, O_2, O_3$ of size $q$. A kernel element is constant on each block: in direction $d$ it is $s_d$ on $E_d$ and $s_d + e$ on $O_d$ (where $s_1 = \\alpha_0$, $s_2 = \\beta_0$, $s_3 = \\gamma_0$), with $s_1 + s_2 + s_3 \\equiv (n-1)e$. Adding it **complements** the chosen lines in each block where it is $1$.\n\nIf $v$ uses $x_B$ lines of block $B$ (size $\\sigma_B$), put $w_B = \\sigma_B - 2x_B$. Complementing changes $x_B$ to $\\sigma_B - x_B$; in both cases the block costs $\\frac{\\sigma_B - \\varepsilon_B w_B}{2}$ with $\\varepsilon_B = +1$ (kept) or $-1$ (complemented). Summing over the six blocks ($\\sum \\sigma_B = 3n$):\n$$f(T(v)) = \\frac{3n - W}{2}, \\qquad W = \\max_{\\kappa \\in K} \\sum_B \\varepsilon_B w_B .$$\nWrite $A_d = w_{E_d}$, $B_d = w_{O_d}$, $P_d = A_d + B_d$, $M_d = A_d - B_d$, and for $u \\in \\mathbb R^3$, $\\pi = \\pm 1$ let $g(u, \\pi) = \\max\\{\\sum_d \\sigma_d u_d : \\sigma_d = \\pm 1,\\ \\sigma_1\\sigma_2\\sigma_3 = \\pi\\}$. The kernel elements with $e = 0$ give signs $\\sigma_d$ on both $E_d, O_d$ with $\\prod \\sigma_d = +1$; those with $e = 1$ give $\\sigma_d$ on $E_d$ and $-\\sigma_d$ on $O_d$ with $\\prod\\sigma_d = (-1)^{n-1}$. Hence\n$$W = \\max\\big(g(P, +1),\\ g(M, (-1)^{n-1})\\big).$$\nThe possible values are exactly: $A_d \\in [-p, p]$ with $A_d \\equiv p \\pmod 2$, and $B_d \\in [-q, q]$ with $B_d \\equiv q \\pmod 2$ (any such values come from choosing $x_B$ lines in each block).\n\n**Sign lemma.** If $|u_1| \\le |u_2| \\le |u_3|$, choose $\\sigma_2, \\sigma_3$ to make $\\sigma_2u_2, \\sigma_3u_3 \\ge 0$ and let $\\sigma_1$ be forced by the product: $g(u, \\pi) \\ge |u_3| + |u_2| - |u_1| \\ge \\max_d |u_d|$. Also, if all $u_d \\neq 0$ and $\\prod \\operatorname{sign}(u_d) = -\\pi$, every admissible $\\sigma$ disagrees with some sign, so $g(u, \\pi) \\le \\sum|u_d| - 2\\min|u_d|$.\n\n**Step 3: upper bound $W \\ge r$.** We show $W \\ge r$ where $n = 4k + r$, so that $f \\le \\frac{3n - r}{2} = 6k + r$.\n- $r = 0$: $W \\ge \\max|P_d| \\ge 0$.\n- $r = 1$: $p$ odd, $q$ even, so every $P_d$ is odd and $W \\ge |P_1| \\ge 1$.\n- $r = 2$: $p = q$ odd, so $P_d, M_d$ are even with $P_1 + M_1 = 2A_1 \\equiv 2 \\pmod 4$; one of $P_1, M_1$ is $\\equiv 2 \\pmod 4$, so has absolute value $\\ge 2$, and $W \\ge 2$ by the lemma.\n- $r = 3$: $p$ even, $q$ odd, so all $P_d, M_d$ are odd and $P_d + M_d = 2A_d \\equiv 0 \\pmod 4$. If some $|P_d|$ or $|M_d| \\ge 3$, the lemma gives $W \\ge 3$. Otherwise all are $\\pm 1$, and $P_d + M_d \\in \\{-2, 0, 2\\}$ divisible by $4$ forces $M_d = -P_d$. Here $(-1)^{n-1} = +1$. If $\\prod \\operatorname{sign} P_d = +1$ then $g(P, +1) = 3$; otherwise $\\prod \\operatorname{sign} M_d = -\\prod\\operatorname{sign}P_d = +1$ and $g(M, +1) = 3$. So $W \\ge 3$.\n\n**Step 4: configurations attaining the bound.** Choose the block values as follows; in each case $W = r$ by the lemma, so $f = 6k + r$.\n- $r = 0$ ($p = q = 2k$): all $A_d = B_d = 0$; then $P = M = 0$ and $W = 0$.\n- $r = 1$ ($p = 2k+1$, $q = 2k$): $A = (1, 1, -1)$, $B = 0$; then $P = M = (1,1,-1)$ and the sign products disagree with $\\pi = +1$, so $g(P,+1) = g(M,+1) = 3 - 2 = 1$.\n- $r = 2$ ($p = q = 2k+1$): $A = B = (1, 1, -1)$; then $P = (2, 2, -2)$ gives $g(P, +1) = 6 - 4 = 2$, and $M = 0$.\n- $r = 3$ ($p = 2k+2$, $q = 2k+1$): $A = 0$, $B = (1,1,1)$; then $P = (1,1,1)$ gives $g(P, +1) = 3$ and $M = (-1,-1,-1)$ gives $g(M, +1) = 3 - 2 = 1$; so $W = 3$.\n\n(Concretely, use $x_{E_d} = (p - A_d)/2$ even-indexed and $x_{O_d} = (q - B_d)/2$ odd-indexed lines in direction $d$.)\n\nHence the maximum of $f(C)$ is $6k, 6k+1, 6k+2, 6k+3$ for $n = 4k, 4k+1, 4k+2, 4k+3$. ∎"
+      }
+    ],
+    "topics": [
+      "linear-algebra",
+      "counting",
+      "logic"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamo-usamo-2013-04",
+    "bank": "usamo",
+    "source": {
+      "contest": "USAMO",
+      "paper": "USAMO 2013",
+      "year": 2013,
+      "number": 4,
+      "url": "https://web.evanchen.cc/exams/USAMO-2013-notes.pdf"
+    },
+    "grade": "10-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Find all real numbers $x, y, z \\ge 1$ satisfying\n$$\\min\\left(\\sqrt{x + xyz},\\ \\sqrt{y + xyz},\\ \\sqrt{z + xyz}\\right) = \\sqrt{x - 1} + \\sqrt{y - 1} + \\sqrt{z - 1}.$$",
+    "image": null,
+    "choices": null,
+    "answer": "$(x, y, z)$ is a permutation of $\\left(1 + \\left(\\frac{t}{t^2+1}\\right)^2,\\ 1 + \\frac1{t^2},\\ 1 + t^2\\right)$ for some $t > 0$. With $x = 1 + a$ (the smallest) etc., two Cauchy–Schwarz steps show the left side is always $\\ge$ the right side, with equality iff $bc = 1$ and $a = (\\sqrt b + \\sqrt c)^{-2}$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [],
+    "topics": [
+      "inequalities",
+      "algebra"
+    ],
+    "difficulty": 3,
+    "duplicateOf": "usamo-usajmo-2013-06",
+    "reviewNote": null
+  },
+  {
+    "id": "usamo-usamo-2013-05",
+    "bank": "usamo",
+    "source": {
+      "contest": "USAMO",
+      "paper": "USAMO 2013",
+      "year": 2013,
+      "number": 5,
+      "url": "https://web.evanchen.cc/exams/USAMO-2013-notes.pdf"
+    },
+    "grade": "10-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $m$ and $n$ be positive integers. Prove that there exists a positive integer $c$ such that $cm$ and $cn$ have the same nonzero decimal digits.",
+    "image": null,
+    "choices": null,
+    "answer": "Find $D$ coprime to $10$ with $D > \\max(m, n)$ and $D \\mid 10^e m - n$; take $c = \\frac{10^L - 1}{D}$ with $L$ the order of $10$ mod $D$. Then the repeating blocks of $m/D$ and $n/D$ are the $L$-digit strings of $cm$ and $cn$, and they are cyclic shifts of each other by $e$ places (think of $142857$).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Repeating decimals",
+        "body": "We show that some $c$ makes the digit strings of $cm$ and $cn$, padded with leading zeros to a common length, cyclic rotations of each other; then they contain the same nonzero digits (with the same multiplicities).\n\n**Step 1: a good denominator.** Let $r = v_2(n)$ and $s = v_5(n)$, and choose an exponent $e > \\max(r, s)$ so large that $A := 10^e m - n > 2^r 5^s \\max(m, n)$. Since $v_2(10^e m) \\ge e > r = v_2(n)$, we get $v_2(A) = r$, and likewise $v_5(A) = s$. So $D := A / (2^r 5^s)$ is an integer with\n$$\\gcd(D, 10) = 1, \\qquad D > \\max(m, n), \\qquad D \\mid 10^e m - n.$$\n\n**Step 2: the number $c$.** As $\\gcd(10, D) = 1$, let $L$ be the order of $10$ modulo $D$ and put $c = \\frac{10^L - 1}{D}$, a positive integer. For any integer $0 < x < D$,\n$$\\frac{x}{D} = \\frac{xc}{10^L - 1} = xc \\left(10^{-L} + 10^{-2L} + \\cdots\\right),$$\nand $0 < xc < 10^L - 1$. So if $xc$ is written with exactly $L$ digits (adding leading zeros), the decimal expansion of $x/D$ is that $L$-digit block repeated forever (and it does not end in repeating $9$'s).\n\n**Step 3: shifting.** Apply this to $x = m$ and $x = n$ (both less than $D$). Let $0.\\delta_1\\delta_2\\delta_3\\ldots$ be the expansion of $m/D$, periodic with period $L$, with $\\delta_1\\cdots\\delta_L$ the $L$-digit string of $cm$. Since $D \\mid 10^e m - n$ and $0 < n < D$, the fractional part of $10^e \\cdot \\frac mD$ is exactly $\\frac nD$. Multiplying by $10^e$ shifts the expansion, so $\\frac nD = 0.\\delta_{e+1}\\delta_{e+2}\\ldots$ (by uniqueness of expansions not ending in $9$'s). Hence the $L$-digit string of $cn$ is $\\delta_{e+1}\\delta_{e+2}\\cdots\\delta_{e+L}$, which by periodicity is a cyclic rotation of $\\delta_1 \\cdots \\delta_L$.\n\nTherefore $cm$ and $cn$ have the same nonzero digits. ∎\n\n*Example:* $m = 4$, $n = 23$, $e = 3$, $D = 41$ ($10^3 \\cdot 4 - 23 = 97 \\cdot 41$), $L = 5$, $c = 2439$: $4c = 09756$ and $23c = 56097$."
+      }
+    ],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamo-usamo-2013-06",
+    "bank": "usamo",
+    "source": {
+      "contest": "USAMO",
+      "paper": "USAMO 2013",
+      "year": 2013,
+      "number": 6,
+      "url": "https://web.evanchen.cc/exams/USAMO-2013-notes.pdf"
+    },
+    "grade": "10-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $ABC$ be a triangle. Find all points $P$ on segment $BC$ satisfying the following property: If $X$ and $Y$ are the intersections of line $PA$ with the common external tangent lines of the circumcircles of triangles $PAB$ and $PAC$, then\n$$\\left(\\frac{PA}{XY}\\right)^2 + \\frac{PB \\cdot PC}{AB \\cdot AC} = 1.$$",
+    "image": null,
+    "choices": null,
+    "answer": "With $a = BC$, $b = CA$, $c = AB$: always $\\left(\\frac{PA}{XY}\\right)^2 = 1 - \\frac{a^2}{(b+c)^2}$, so the condition is $PB \\cdot PC = \\frac{a^2bc}{(b+c)^2}$. The solutions are the two points with $BP = \\frac{ac}{b+c}$ (foot of the $A$-angle bisector) or $BP = \\frac{ab}{b+c}$ (its reflection in the midpoint of $BC$).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Compute PA/XY",
+        "body": "Let $a = BC$, $b = CA$, $c = AB$, let $h$ be the altitude from $A$, and let $\\omega_1, \\omega_2$ be the circumcircles of $PAB$, $PAC$ with centers $O_1, O_2$ and radii $r_1, r_2$; put $d = O_1O_2$. (We need $P \\ne B, C$ for the triangles to exist.)\n\n**Step 1: the circles in terms of $ABC$.** Put coordinates with $P = (0,0)$, $B = (-u, 0)$, $C = (v, 0)$, $A = (s, t)$, $t = h > 0$, $u + v = a$. The circle through $P$ and $B$ has center $(-\\frac u2, y_1)$ and passing through $A$ gives $y_1 = \\frac{s^2 + t^2 + us}{2t}$; similarly $O_2 = (\\frac v2, y_2)$ with $y_2 = \\frac{s^2 + t^2 - vs}{2t}$. Hence $y_1 - y_2 = \\frac{as}{2t}$ and\n$$d^2 = \\frac{a^2}{4} + \\frac{a^2s^2}{4t^2} = \\frac{a^2\\,PA^2}{4t^2}, \\quad\\text{so}\\quad d = k a \\ \\text{ with } k = \\frac{PA}{2h}.$$\nBy the law of sines in triangle $ABP$, $c = 2r_1 \\sin\\angle APB = 2r_1 \\cdot \\frac{h}{PA}$, so $r_1 = kc$; likewise $r_2 = kb$ (as $\\sin\\angle APC = \\sin\\angle APB$). Finally let $M$ be the midpoint of $AP$; then $AM = \\frac{PA}2 = kh$.\n\n**Step 2: $X$, $Y$ and $M$.** Line $AP$ is the radical axis of $\\omega_1, \\omega_2$, perpendicular to $O_1O_2$ at $M$. Let a common external tangent touch $\\omega_1, \\omega_2$ at $X_1, X_2$ and meet $AP$ at $X$. Then $XX_1^2 = XA\\cdot XP = XX_2^2$, so $X$ is the midpoint of $X_1X_2$ and lies outside segment $AP$, giving\n$$XM^2 - AM^2 = XA \\cdot XP = XX_1^2 = \\tfrac14 X_1X_2^2 = \\tfrac14\\big(d^2 - (r_1 - r_2)^2\\big).$$\nThe reflection in line $O_1O_2$ fixes both circles and line $AP$ and swaps the two external tangents (neither is perpendicular to $O_1O_2$, as the circles are not tangent), so it maps $X$ to $Y$; hence $M$ is the midpoint of $XY$ and $XY = 2XM$. Therefore\n$$\\left(\\frac{PA}{XY}\\right)^2 = \\frac{AM^2}{XM^2} = \\frac{h^2}{h^2 + \\frac14\\big(a^2 - (b - c)^2\\big)}$$\nafter cancelling $k^2$.\n\n**Step 3: simplify.** With $s_0 = \\frac{a+b+c}2$ we have $a^2 - (b-c)^2 = 4(s_0-b)(s_0-c)$ and, by Heron, $h^2 = \\frac{4\\,s_0(s_0-a)(s_0-b)(s_0-c)}{a^2}$. Dividing numerator and denominator by $(s_0-b)(s_0-c)$:\n$$\\left(\\frac{PA}{XY}\\right)^2 = \\frac{4s_0(s_0-a)}{4s_0(s_0-a) + a^2} = \\frac{(b+c)^2 - a^2}{(b+c)^2} = 1 - \\frac{a^2}{(b+c)^2},$$\nusing $4s_0(s_0-a) = (b+c)^2 - a^2$. **This does not depend on $P$.**\n\n**Step 4: the condition.** The required equation is therefore equivalent to\n$$PB \\cdot PC = \\frac{a^2 bc}{(b+c)^2}.$$\nWith $x = BP$ and $PC = a - x$, this is $x(a - x) = \\frac{ac}{b+c} \\cdot \\frac{ab}{b+c}$, a quadratic whose two roots have sum $a$ and product $\\frac{ac}{b+c}\\cdot\\frac{ab}{b+c}$, namely $x = \\frac{ac}{b+c}$ and $x = \\frac{ab}{b+c}$. Both lie strictly between $0$ and $a$.\n\n**Answer:** $P$ is the foot of the bisector of angle $A$ (where $BP = \\frac{ac}{b+c}$), or the reflection of that point in the midpoint of $BC$ (where $BP = \\frac{ab}{b+c}$); these coincide if $AB = AC$. ∎"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

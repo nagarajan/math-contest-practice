@@ -1,0 +1,1004 @@
+[
+  {
+    "id": "imo-isl-2023-a1",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Algebra",
+      "year": 2023,
+      "number": 1,
+      "url": "https://www.imo-official.org/assets/documents/problems/2023/IMO2023SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Professor Oak is feeding his $100$ Pokémon. Each Pokémon has a bowl whose capacity is a positive real number of kilograms. These capacities are known to Professor Oak. The total capacity of all the bowls is $100$ kilograms. Professor Oak distributes $100$ kilograms of food in such a way that each Pokémon receives a non-negative integer number of kilograms of food (which may be larger than the capacity of their bowl). The *dissatisfaction level* of a Pokémon who received $N$ kilograms of food and whose bowl has a capacity of $C$ kilograms is equal to $|N-C|$.\n\nFind the smallest real number $D$ such that, regardless of the capacities of the bowls, Professor Oak can distribute the food in a way that the sum of the dissatisfaction levels over all the $100$ Pokémon is at most $D$.",
+    "image": null,
+    "choices": null,
+    "answer": "50",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Round the fractional parts greedily",
+        "body": "**$D\\ge 50$.** Let $99$ bowls have capacity $0.5$ kg and the last one $50.5$ kg (total $100$). Every capacity is a half-integer and every amount of food is an integer, so each Pokémon has dissatisfaction at least $0.5$, and the total is at least $100\\cdot 0.5=50$ whatever Professor Oak does.\n\n**$D\\le 50$.** Let the capacities be $C_1,\\dots,C_{100}$ with fractional parts $F_i=C_i-\\lfloor C_i\\rfloor\\in[0,1)$, numbered so that $F_1\\le F_2\\le\\dots\\le F_{100}$. Put\n$$R=100-\\sum_i\\lfloor C_i\\rfloor=\\sum_i F_i ,$$\nan integer with $0\\le R<100$. Give Pokémon $i$ first $\\lfloor C_i\\rfloor$ kg, and then one extra kilogram to each of the $R$ Pokémon with the largest fractional parts, i.e. to $i=101-R,\\dots,100$. Exactly $100$ kg are used. The total dissatisfaction is\n$$d=\\sum_{i\\le 100-R}F_i+\\sum_{i>100-R}(1-F_i)=\\sum_{i\\le 100-R}F_i+\\Big(R-\\sum_{i>100-R}F_i\\Big)=2\\sum_{i\\le 100-R}F_i ,$$\nbecause $\\sum_{i>100-R}F_i=R-\\sum_{i\\le100-R}F_i$.\n\nThe $100-R$ smallest numbers among the $F_i$ have average at most the average $\\frac{R}{100}$ of all of them, so\n$$d\\le 2(100-R)\\cdot\\frac{R}{100}=\\frac{2R(100-R)}{100}\\le\\frac{2\\cdot 50^2}{100}=50$$\nby AM-GM ($R(100-R)\\le 50^2$).\n\nHence the smallest possible $D$ is $50$.\n\n**Answer: $D=50$**"
+      },
+      {
+        "title": "Average over random distributions",
+        "body": "The example with $99$ bowls of $0.5$ kg and one of $50.5$ kg shows $D\\ge50$, as in the first approach.\n\nFor the upper bound use the same notation $F_i$ and $R=\\sum F_i$ (an integer). Consider all $\\binom{100}{R}$ ways to choose $R$ Pokémon that get $\\lfloor C_i\\rfloor+1$ kg, the others getting $\\lfloor C_i\\rfloor$ kg; each uses exactly $100$ kg. Choose one of them uniformly at random. Each Pokémon gets the extra kilogram with probability $\\frac{R}{100}$, so its expected dissatisfaction is\n$$\\Big(1-\\tfrac{R}{100}\\Big)F_i+\\tfrac{R}{100}(1-F_i).$$\nSumming over $i$ and using $\\sum F_i=R$, $\\sum(1-F_i)=100-R$, the expected total is\n$$\\frac{100-R}{100}\\,R+\\frac{R}{100}(100-R)=\\frac{2R(100-R)}{100}\\le 50 .$$\nSome distribution does at least as well as the average, so a total of at most $50$ is always achievable.\n\n**Answer: $D=50$**"
+      }
+    ],
+    "topics": [
+      "inequalities",
+      "algebra"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-isl-2023-a2",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Algebra",
+      "year": 2023,
+      "number": 2,
+      "url": "https://www.imo-official.org/assets/documents/problems/2023/IMO2023SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $\\mathbb R$ be the set of real numbers. Let $f:\\mathbb R\\to\\mathbb R$ be a function such that\n$$f(x+y)f(x-y)\\ge f(x)^2-f(y)^2$$\nfor every $x,y\\in\\mathbb R$. Assume that the inequality is strict for some $x_0,y_0\\in\\mathbb R$.\n\nProve that $f(x)\\ge0$ for every $x\\in\\mathbb R$ or $f(x)\\le0$ for every $x\\in\\mathbb R$.",
+    "image": null,
+    "choices": null,
+    "answer": "Put $s=x+y$, $t=x-y$ and add the inequality for $(s,t)$ and $(s,-t)$: $f(s)\\big(f(t)+f(-t)\\big)\\ge0$ for all $s,t$, strictly for $t_0=x_0-y_0$, so every $f(s)$ has the sign of $f(t_0)+f(-t_0)\\ne0$ (or is $0$).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Change variables and add",
+        "body": "Write $s=x+y$ and $t=x-y$, so $x=\\frac{s+t}{2}$, $y=\\frac{s-t}{2}$; as $(x,y)$ runs over $\\mathbb R^2$ so does $(s,t)$. The condition becomes\n$$f(s)f(t)\\ge f\\Big(\\frac{s+t}{2}\\Big)^2-f\\Big(\\frac{s-t}{2}\\Big)^2\\qquad\\text{for all } s,t. \\tag{1}$$\nReplacing $t$ by $-t$ in (1) gives\n$$f(s)f(-t)\\ge f\\Big(\\frac{s-t}{2}\\Big)^2-f\\Big(\\frac{s+t}{2}\\Big)^2. \\tag{2}$$\nAdding (1) and (2), the right-hand sides cancel:\n$$f(s)\\big(f(t)+f(-t)\\big)\\ge 0\\qquad\\text{for all } s,t\\in\\mathbb R. \\tag{3}$$\n\nNow take $s_0=x_0+y_0$ and $t_0=x_0-y_0$. Then (1) is strict for $(s_0,t_0)$ (it is the original inequality at $(x_0,y_0)$), while (2) holds for $(s_0,t_0)$, so their sum is strict:\n$$f(s_0)\\big(f(t_0)+f(-t_0)\\big)>0 .$$\nIn particular $c:=f(t_0)+f(-t_0)\\ne0$.\n\nBy (3) with $t=t_0$ we get $c\\,f(s)\\ge0$ for every $s\\in\\mathbb R$. If $c>0$ this means $f(s)\\ge0$ for all $s$; if $c<0$ it means $f(s)\\le0$ for all $s$. ∎"
+      }
+    ],
+    "topics": [
+      "functional-equations",
+      "inequalities"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-isl-2023-a3",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Algebra",
+      "year": 2023,
+      "number": 3,
+      "url": "https://www.imo-official.org/assets/documents/problems/2023/IMO2023SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $x_1,x_2,\\dots,x_{2023}$ be distinct real positive numbers such that\n$$a_n=\\sqrt{(x_1+x_2+\\dots+x_n)\\left(\\frac1{x_1}+\\frac1{x_2}+\\dots+\\frac1{x_n}\\right)}$$\nis an integer for every $n=1,2,\\dots,2023$. Prove that $a_{2023}\\ge3034$.",
+    "image": null,
+    "choices": null,
+    "answer": "Proof: Cauchy–Schwarz gives $a_{n+2}\\ge a_n+\\sqrt{x_{n+1}/x_{n+2}}+\\sqrt{x_{n+2}/x_{n+1}}>a_n+2$, so $a_{n+2}\\ge a_n+3$; with $a_1=1$ this gives $a_{2023}\\ge1+3\\cdot1011=3034$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [],
+    "topics": [
+      "inequalities",
+      "sequences-series"
+    ],
+    "difficulty": 1,
+    "duplicateOf": "imo-2023-04",
+    "reviewNote": null
+  },
+  {
+    "id": "imo-isl-2023-a4",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Algebra",
+      "year": 2023,
+      "number": 4,
+      "url": "https://www.imo-official.org/assets/documents/problems/2023/IMO2023SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $\\mathbb R_{>0}$ be the set of positive real numbers. Determine all functions $f:\\mathbb R_{>0}\\to\\mathbb R_{>0}$ such that\n$$x\\big(f(x)+f(y)\\big)\\ge\\big(f(f(x))+y\\big)f(y)$$\nfor every $x,y\\in\\mathbb R_{>0}$.",
+    "image": null,
+    "choices": null,
+    "answer": "$f(x)=\\frac{c}{x}$ for any constant $c>0$ (show $f(f(y))=y$ by iterating, then $xf(x)\\ge yf(y)$ for all $x,y$).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Show $f$ is an involution",
+        "body": "Write $f^k$ for the $k$-th iterate of $f$ ($f^0(x)=x$).\n\n**Step 1: $f^2(x)\\le x$.** Put $y=x$: $2xf(x)\\ge\\big(f^2(x)+x\\big)f(x)$. Dividing by $f(x)>0$ gives $x\\ge f^2(x)$.\n\n**Step 2: a chain of inequalities.** Put $x=f(y)$: $f(y)\\big(f(y)+f^2(y)\\big)\\ge\\big(f^3(y)+y\\big)f(y)$, i.e.\n$$f(y)-f^3(y)\\ge y-f^2(y)\\qquad\\text{for all } y>0 .$$\nApplying this to $f^{n-1}(y)$ instead of $y$ gives $f^n(y)-f^{n+2}(y)\\ge f^{n-1}(y)-f^{n+1}(y)$ for every $n\\ge1$. By induction,\n$$f^n(y)-f^{n+2}(y)\\ge y-f^2(y)\\ge0\\qquad\\text{for all } n\\ge0 .$$\n\n**Step 3: $f^2(y)=y$.** For $m\\ge1$, summing the previous inequality over $n=0,2,4,\\dots,2m-2$ (a telescoping sum),\n$$y-f^{2m}(y)=\\sum_{i=0}^{m-1}\\big(f^{2i}(y)-f^{2i+2}(y)\\big)\\ge m\\big(y-f^2(y)\\big).$$\nThe left side is less than $y$ because $f^{2m}(y)>0$. So $m\\big(y-f^2(y)\\big)<y$ for every $m\\ge1$; since $y-f^2(y)\\ge0$, this forces $y-f^2(y)=0$.\n\n**Step 4: conclusion.** With $f(f(x))=x$ the inequality reads $xf(x)+xf(y)\\ge xf(y)+yf(y)$, i.e. $xf(x)\\ge yf(y)$ for all $x,y>0$. Swapping $x$ and $y$ gives the reverse inequality, so $xf(x)$ is a constant $c>0$ and $f(x)=\\frac cx$.\n\n**Check.** For $f(x)=\\frac cx$ we have $f(f(x))=x$, and the inequality becomes $xf(x)\\ge yf(y)$, i.e. $c\\ge c$, which is true.\n\n**Answer:** $f(x)=\\dfrac{c}{x}$ for an arbitrary constant $c>0$. ∎"
+      }
+    ],
+    "topics": [
+      "functional-equations",
+      "inequalities"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-isl-2023-a5",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Algebra",
+      "year": 2023,
+      "number": 5,
+      "url": "https://www.imo-official.org/assets/documents/problems/2023/IMO2023SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $a_1,a_2,\\dots,a_{2023}$ be positive integers such that\n- $a_1,a_2,\\dots,a_{2023}$ is a permutation of $1,2,\\dots,2023$, and\n- $|a_1-a_2|,|a_2-a_3|,\\dots,|a_{2022}-a_{2023}|$ is a permutation of $1,2,\\dots,2022$.\n\nProve that $\\max(a_1,a_{2023})\\ge507$.",
+    "image": null,
+    "choices": null,
+    "answer": "With $N=1012$ and score $s(a)=|a-N|$: $|a_i-a_{i+1}|\\le s(a_i)+s(a_{i+1})$; summing gives $1011\\cdot2023\\le 2\\cdot1012\\cdot1011-s(a_1)-s(a_{2023})$, so $s(a_1)+s(a_{2023})\\le1011$, hence $a_1+a_{2023}\\ge1013$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Distance from the middle number",
+        "body": "Let $N=1012$, so the numbers are $1,2,\\dots,2N-1$, and define the *score* of $a$ as $s(a)=|a-N|$. By the triangle inequality,\n$$|a-b|\\le|a-N|+|N-b|=s(a)+s(b).$$\n\nThe differences $|a_i-a_{i+1}|$ are $1,2,\\dots,2N-2$ in some order, so their sum is $\\frac{(2N-2)(2N-1)}{2}=(N-1)(2N-1)$. Each $a_i$ with $2\\le i\\le 2N-2$ occurs in two differences and $a_1$, $a_{2N-1}$ occur in one each. Hence\n$$(N-1)(2N-1)=\\sum_{i=1}^{2N-2}|a_i-a_{i+1}|\\le 2\\sum_{i=1}^{2N-1}s(a_i)-s(a_1)-s(a_{2N-1}).$$\nSince $a_1,\\dots,a_{2N-1}$ is a permutation of $1,\\dots,2N-1$, the scores are $0,1,1,2,2,\\dots,N-1,N-1$ in some order, and their sum is $2\\big(1+2+\\dots+(N-1)\\big)=N(N-1)$. Therefore\n$$s(a_1)+s(a_{2N-1})\\le 2N(N-1)-(N-1)(2N-1)=N-1 .$$\nThen\n$$(N-a_1)+(N-a_{2N-1})\\le s(a_1)+s(a_{2N-1})\\le N-1,$$\nso $a_1+a_{2N-1}\\ge N+1=1013$. Two integers with sum at least $1013$ cannot both be at most $506$, hence $\\max(a_1,a_{2023})\\ge507$. ∎\n\n*Remark.* The bound is sharp: $507,1517,508,1516,\\dots,1011,1013,1012,2023,1,2022,2,\\dots,1518,506$ satisfies both conditions."
+      }
+    ],
+    "topics": [
+      "sequences-series",
+      "inequalities",
+      "counting"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-isl-2023-a6",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Algebra",
+      "year": 2023,
+      "number": 6,
+      "url": "https://www.imo-official.org/assets/documents/problems/2023/IMO2023SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $k\\ge2$ be an integer. Determine all sequences of positive integers $a_1,a_2,\\dots$ for which there exists a monic polynomial $P$ of degree $k$ with non-negative integer coefficients such that\n$$P(a_n)=a_{n+1}a_{n+2}\\cdots a_{n+k}$$\nfor every integer $n\\ge1$.",
+    "image": null,
+    "choices": null,
+    "answer": "Exactly the arithmetic progressions $a_n=a_1+(n-1)d$ with an integer $d\\ge0$ (with $P(x)=(x+d)(x+2d)\\cdots(x+kd)$).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [],
+    "topics": [
+      "polynomials",
+      "sequences-series",
+      "number-theory"
+    ],
+    "difficulty": 3,
+    "duplicateOf": "imo-2023-03",
+    "reviewNote": null
+  },
+  {
+    "id": "imo-isl-2023-a7",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Algebra",
+      "year": 2023,
+      "number": 7,
+      "url": "https://www.imo-official.org/assets/documents/problems/2023/IMO2023SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $N$ be a positive integer. Prove that there exist three permutations $a_1,a_2,\\dots,a_N$; $b_1,b_2,\\dots,b_N$; and $c_1,c_2,\\dots,c_N$ of $1,2,\\dots,N$ such that\n$$\\left|\\sqrt{a_k}+\\sqrt{b_k}+\\sqrt{c_k}-2\\sqrt N\\right|<2023$$\nfor every $k=1,2,\\dots,N$.",
+    "image": null,
+    "choices": null,
+    "answer": "Round $\\sqrt j$ to the nearest integer: for $N=m(m+1)$ the rounded values form two copies of the multiset $\\{1^{\\times1},2^{\\times2},\\dots,m^{\\times m}\\}$, which can be arranged in three rows with every column summing to $2m+1$; for general $N$ insert the extra $t\\le2m+1$ numbers just above $\\lfloor 4N/9\\rfloor$. The error is below $8.5$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Round the square roots",
+        "body": "For $N=1$ take $a_1=b_1=c_1=1$: $|3-2|<2023$. Assume $N\\ge2$.\n\n**Rounding.** For an integer $k\\ge1$ and $k^2-k+1\\le j\\le k^2+k$ we have $k-\\frac12<\\sqrt j<k+\\frac12$, since $(k-\\frac12)^2=k^2-k+\\frac14$ and $(k+\\frac12)^2=k^2+k+\\frac14$. So among $1,2,\\dots,m(m+1)$, exactly $2k$ numbers have $\\sqrt j$ rounding to $k$, for each $k=1,\\dots,m$.\n\n**Step 1: a multiset lemma.** Let $T_m$ be the multiset containing each $k\\in\\{1,\\dots,m\\}$ exactly $k$ times; it has $\\frac{m(m+1)}2$ elements. *Claim:* there are three sequences $(u_i),(v_i),(w_i)$ of length $\\frac{m(m+1)}2$, each an arrangement of $T_m$, with $u_i+v_i+w_i=2m+1$ for all $i$.\n\nFor $m=1$ take $1+1+1=3$. Suppose sequences $u,v,w$ work for $T_{m-1}$ (column sums $2m-1$). Note\n$$T_m=T_{m-1}\\sqcup\\{m^{\\times m}\\}\\qquad\\text{and}\\qquad T_m=(T_{m-1}+1)\\sqcup\\{1,2,\\dots,m\\},$$\nwhere $T_{m-1}+1$ means adding $1$ to every element. Form new columns: the old columns as $(u_i,\\,v_i+1,\\,w_i+1)$, plus $m$ new columns $(m,\\,r,\\,m+1-r)$ for $r=1,\\dots,m$. Every column sums to $2m+1$; the first row is $T_{m-1}\\sqcup\\{m^{\\times m}\\}=T_m$, and the second and third rows are $(T_{m-1}+1)\\sqcup\\{1,\\dots,m\\}=T_m$. This proves the claim.\n\n**Step 2: $N=m(m+1)$.** Use the claim twice (giving $m(m+1)=N$ columns). In the first row, the value $k$ appears $2k$ times, which is exactly the number of $j\\le N$ with $\\sqrt j$ rounding to $k$; so we can replace the entries of value $k$ by these $2k$ numbers $j$ (in any order). Doing this for every $k$ turns the first row into a permutation $(a_i)$ of $1,\\dots,N$ with $\\sqrt{a_i}$ within $\\frac12$ of the original entry. Do the same for the other two rows. Since the entries of each column summed to $2m+1$,\n$$\\big|\\sqrt{a_i}+\\sqrt{b_i}+\\sqrt{c_i}-(2m+1)\\big|<\\tfrac32 .$$\nAs $2m<2\\sqrt{m^2+m}<2m+1$, we get $|\\sqrt{a_i}+\\sqrt{b_i}+\\sqrt{c_i}-2\\sqrt N|<\\frac52$.\n\n**Step 3: general $N$.** Choose $m\\ge1$ with $m(m+1)\\le N<(m+1)(m+2)$, let $M=m(m+1)$, $t=N-M\\in\\{0,1,\\dots,2m+1\\}$ and $L=\\lfloor 4N/9\\rfloor$. Then $m<\\sqrt N<m+2$, $L+1>\\frac{4N}9$ and $L\\le M$ (for $m\\ge2$ because $\\frac49(m+1)(m+2)\\le m(m+1)$; for $m=1$ because $N\\le5$ gives $L\\le2$).\n\nTake $(a_i),(b_i),(c_i)$ for $M$ from Step 2 and define, for $i\\le M$, $A_i=a_i$ if $a_i\\le L$ and $A_i=a_i+t$ if $a_i>L$; for $i=M+r$ ($1\\le r\\le t$) put $A_i=L+r$. Define $B_i,C_i$ in the same way. The values $A_i$ are $\\{1,\\dots,L\\}\\cup\\{L+t+1,\\dots,M+t\\}\\cup\\{L+1,\\dots,L+t\\}=\\{1,\\dots,N\\}$, so $(A_i)$ is a permutation; likewise $(B_i),(C_i)$.\n\n*Indices $i\\le M$.* Clearly $\\sqrt{A_i}\\ge\\sqrt{a_i}$, and if $a_i>L$,\n$$\\sqrt{A_i}-\\sqrt{a_i}=\\frac{t}{\\sqrt{A_i}+\\sqrt{a_i}}\\le\\frac{t}{2\\sqrt{L+1}}<\\frac{2m+1}{\\frac43\\sqrt N}<\\frac{3(2m+1)}{4m}\\le2$$\nfor $m\\ge2$; for $m=1$ the difference is at most $\\sqrt5-1<2$. Hence, by Step 2,\n$$2m+1-\\tfrac32<\\sqrt{A_i}+\\sqrt{B_i}+\\sqrt{C_i}<2m+1+\\tfrac32+6 .$$\nWith $2m<2\\sqrt N<2m+4$ this gives $2\\sqrt N-4.5<\\sqrt{A_i}+\\sqrt{B_i}+\\sqrt{C_i}<2\\sqrt N+8.5$.\n\n*Indices $i>M$.* Here $A_i=B_i=C_i\\in[L+1,L+t]$, so\n$$2\\sqrt N<3\\sqrt{L+1}\\le\\sqrt{A_i}+\\sqrt{B_i}+\\sqrt{C_i}\\le3\\sqrt{L+t}\\le\\sqrt{4N+9t}\\le\\sqrt{4N+18\\sqrt N+9}<2\\sqrt N+8.5,$$\nusing $9t\\le18m+9<18\\sqrt N+9$.\n\nIn all cases $\\big|\\sqrt{A_i}+\\sqrt{B_i}+\\sqrt{C_i}-2\\sqrt N\\big|<8.5<2023$. ∎"
+      }
+    ],
+    "topics": [
+      "inequalities",
+      "counting"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-isl-2023-c1",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Combinatorics",
+      "year": 2023,
+      "number": 1,
+      "url": "https://www.imo-official.org/assets/documents/problems/2023/IMO2023SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $m$ and $n$ be positive integers greater than $1$. In each unit square of an $m\\times n$ grid lies a coin with its tail-side up. A *move* consists of the following steps:\n1. select a $2\\times2$ square in the grid;\n2. flip the coins in the top-left and bottom-right unit squares;\n3. flip the coin in either the top-right or bottom-left unit square.\n\nDetermine all pairs $(m,n)$ for which it is possible that every coin shows head-side up after a finite number of moves.",
+    "image": null,
+    "choices": null,
+    "answer": "Exactly the pairs with $3\\mid mn$. (Colour cell $(i,j)$ by $i+j \\bmod 3$: every move flips one coin of each colour.)",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Construction and a mod-3 colouring",
+        "body": "Call the cell in row $i$ and column $j$ the $(i,j)$-cell. For $1\\le i\\le m-1$, $1\\le j\\le n-1$ let $A(i,j)$ be the move flipping the $(i,j)$-, $(i+1,j+1)$- and $(i,j+1)$-cells, and $B(i,j)$ the move flipping the $(i,j)$-, $(i+1,j+1)$- and $(i+1,j)$-cells.\n\n**Sufficiency.** Reflecting the grid in its main diagonal swaps \"top-right\" and \"bottom-left\" and keeps the other two corners, so the set of moves is symmetric and we may assume $3\\mid m$.\n\n*A $3\\times2$ block.* $A(3k-2,j)$ flips $(3k-2,j),(3k-2,j+1),(3k-1,j+1)$ and $B(3k-1,j)$ flips $(3k-1,j),(3k,j),(3k,j+1)$: together they flip each cell of the $3\\times2$ block in rows $3k-2..3k$, columns $j,j+1$ exactly once.\n\n*A $3\\times1$ column at the right edge.* The three moves $A(3k-2,n-1)$, $A(3k-1,n-1)$, $B(3k-2,n-1)$ flip $(3k-2,n-1)$ twice, $(3k-1,n-1)$ twice, $(3k-1,n)$ three times, and $(3k-2,n)$, $(3k,n)$ once each. So their net effect is to flip exactly the cells $(3k-2,n),(3k-1,n),(3k,n)$.\n\nIf $n$ is even, tile the grid by the $3\\times2$ blocks (rows $3k-2..3k$, columns $2l-1,2l$) and flip each block. If $n$ is odd, do this for the first $n-1$ columns and then flip the $3\\times1$ pieces of the last column. Every coin is flipped exactly once, so all show heads.\n\n**Necessity.** Give the $(i,j)$-cell the label $(i+j)\\bmod3$. In a $2\\times2$ square with top-left cell $(i,j)$ the labels are $i+j$ (top-left), $i+j+1$ (top-right and bottom-left) and $i+j+2$ (bottom-right). So every move flips exactly one coin with each label $0,1,2$. Let $T(c)$ be the number of heads on cells labelled $c$. A move changes each of $T(0),T(1),T(2)$ by $\\pm1$, so the parities of $T(0)-T(1)$ and $T(1)-T(2)$ never change. Initially all $T(c)=0$; hence in the all-heads position the numbers $n_0,n_1,n_2$ of cells with each label must have the same parity.\n\nRemoving three consecutive rows (or columns) removes the same number of cells of each label, so $n_0-n_1$ and $n_1-n_2$ depend only on $m\\bmod3$ and $n\\bmod3$. If $3\\nmid m$ and $3\\nmid n$ we can therefore compute in a grid of size $m'\\times n'$ with $m',n'\\in\\{1,2\\}$:\n- $1\\times1$: labels $\\{2\\}$, so $(n_0,n_1,n_2)$ differs from equal counts by $(0,0,1)$;\n- $1\\times2$ or $2\\times1$: labels $\\{2,0\\}$, giving $(1,0,1)$;\n- $2\\times2$: labels $\\{2,0,0,1\\}$, giving $(2,1,1)$.\n\nIn each case two of the counts have different parity, so the task is impossible. (When $3\\mid mn$, all three counts equal $\\frac{mn}3$, consistent with the construction.)\n\n**Answer:** exactly the pairs $(m,n)$ with $3\\mid mn$. ∎"
+      }
+    ],
+    "topics": [
+      "counting",
+      "logic"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-isl-2023-c2",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Combinatorics",
+      "year": 2023,
+      "number": 2,
+      "url": "https://www.imo-official.org/assets/documents/problems/2023/IMO2023SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "text",
+    "prompt": "Determine the maximal length $L$ of a sequence $a_1,\\dots,a_L$ of positive integers satisfying both the following properties:\n- every term in the sequence is less than or equal to $2^{2023}$, and\n- there does not exist a consecutive subsequence $a_i,a_{i+1},\\dots,a_j$ (where $1\\le i\\le j\\le L$) with a choice of signs $s_i,s_{i+1},\\dots,s_j\\in\\{1,-1\\}$ for which\n$$s_ia_i+s_{i+1}a_{i+1}+\\dots+s_ja_j=0.$$",
+    "image": null,
+    "choices": null,
+    "answer": "2^2024-1",
+    "acceptedAnswers": [
+      "2^{2024}-1",
+      "2**2024-1",
+      "2^(2024)-1"
+    ],
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "2-adic construction and a greedy walk",
+        "body": "Write $k=2023$ and $n=2^k$; we show the answer is $2n-1=2^{k+1}-1$.\n\n**Construction of length $2n-1$.** For a positive integer $x$ let $v_2(x)$ be the exponent of $2$ in $x$, and put\n$$a_i=2^{\\,k-v_2(i)}\\qquad(1\\le i\\le 2^{k+1}-1).$$\n(For $k=2$ this is $4,2,4,1,4,2,4$.) Since $0\\le v_2(i)\\le k$, all terms are positive integers at most $2^k$.\n\nTake any block $i,i+1,\\dots,j$ and let $v=\\max_{i\\le x\\le j}v_2(x)$. Exactly one $x$ in the block has $v_2(x)=v$: if two did, there would be two multiples of $2^v$ in the block and hence a multiple of $2^{v+1}$ between them, contradicting maximality. So in the block every term except $a_x=2^{k-v}$ is divisible by $2^{k-v+1}$. Then any signed sum of the block is $\\pm2^{k-v}$ plus a multiple of $2^{k-v+1}$, which is not $0$. So the sequence has the required property.\n\n**No sequence of length $2n$.** Let $a_1,\\dots,a_L$ be any sequence of integers in $[1,n]$ with $L\\ge2n$. Choose signs greedily: with $b_0=0$ and $b_i=s_1a_1+\\dots+s_ia_i$, let $s_i=+1$ if $b_{i-1}\\le0$ and $s_i=-1$ if $b_{i-1}\\ge1$.\n\n*Claim: $-n+1\\le b_i\\le n$ for all $i$.* True for $b_0$. If $-n+1\\le b_{i-1}\\le0$ then $b_i=b_{i-1}+a_i\\in(b_{i-1},\\,b_{i-1}+n]\\subseteq[-n+1,n]$. If $1\\le b_{i-1}\\le n$ then $b_i=b_{i-1}-a_i\\in[b_{i-1}-n,\\,b_{i-1})\\subseteq[-n+1,n]$.\n\nThe interval $[-n+1,n]$ contains $2n$ integers, while $b_0,b_1,\\dots,b_L$ are $L+1\\ge2n+1$ numbers. By pigeonhole $b_{i-1}=b_j$ for some $1\\le i\\le j\\le L$, and then\n$$s_ia_i+\\dots+s_ja_j=b_j-b_{i-1}=0,$$\nso the sequence fails the condition.\n\nHence the maximal length is $2^{2024}-1$.\n\n**Answer: $L=2^{2024}-1$**"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "sequences-series",
+      "counting"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null,
+    "answerDisplay": "$2^{2024}-1$"
+  },
+  {
+    "id": "imo-isl-2023-c3",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Combinatorics",
+      "year": 2023,
+      "number": 3,
+      "url": "https://www.imo-official.org/assets/documents/problems/2023/IMO2023SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $n$ be a positive integer. We arrange $1+2+\\dots+n$ circles in a triangle with $n$ rows, such that the $i$-th row contains exactly $i$ circles. The figure shows the case $n=6$.\n\nIn this triangle, a *ninja-path* is a sequence of circles obtained by repeatedly going from a circle to one of the two circles directly below it. In terms of $n$, find the largest value of $k$ such that if one circle from every row is coloured red, we can always find a ninja-path in which at least $k$ of the circles are red.",
+    "image": "qimages/imo/isl-2023/c3.webp",
+    "choices": null,
+    "answer": "$k=\\lfloor\\log_2 n\\rfloor+1$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [],
+    "topics": [
+      "counting",
+      "logic"
+    ],
+    "difficulty": 2,
+    "duplicateOf": "imo-2023-05",
+    "reviewNote": null
+  },
+  {
+    "id": "imo-isl-2023-c4",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Combinatorics",
+      "year": 2023,
+      "number": 4,
+      "url": "https://www.imo-official.org/assets/documents/problems/2023/IMO2023SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "text",
+    "prompt": "Let $n\\ge2$ be a positive integer. Paul has a $1\\times n^2$ rectangular strip consisting of $n^2$ unit squares, where the $i$-th square is labelled with $i$ for all $1\\le i\\le n^2$. He wishes to cut the strip into several pieces, where each piece consists of a number of consecutive unit squares, and then translate (without rotating or flipping) the pieces to obtain an $n\\times n$ square satisfying the following property: if the unit square in the $i$-th row and $j$-th column is labelled with $a_{ij}$, then $a_{ij}-(i+j-1)$ is divisible by $n$.\n\nDetermine the smallest number of pieces Paul needs to make in order to accomplish this.",
+    "image": null,
+    "choices": null,
+    "answer": "2n-1",
+    "acceptedAnswers": [
+      "2n - 1",
+      "2*n-1"
+    ],
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "A graph on the residues mod $n$",
+        "body": "Only labels modulo $n$ matter; work in $\\mathbb Z/n\\mathbb Z$. Row $i$ of the square must read $i,i+1,\\dots,i+n-1$ from left to right.\n\n**Construction with $2n-1$ pieces.** Cut the strip into the $n-1$ pieces $[(r-1)(n+1)+1,\\ (r-1)(n+1)+n]$ of length $n$ ($r=1,\\dots,n-1$), the $n-1$ single squares $r(n+1)$ ($r=1,\\dots,n-1$), and the last square $n^2$. The $r$-th long piece starts with a label $\\equiv r$, so it reads $r,r+1,\\dots,r+n-1$ and is exactly row $r$. The single squares have labels $\\equiv1,2,\\dots,n-1$ and $n^2\\equiv0\\equiv n$; placed in the order $n,1,2,\\dots,n-1$ they form row $n$. That is $2(n-1)+1=2n-1$ pieces.\n\n**Lower bound.** Since pieces are only translated, each piece lies inside one row, with labels increasing to the right; so each row is a concatenation of pieces. A piece with labels $c,c+1,\\dots,d$ gives an edge from $c\\bmod n$ to $(d+1)\\bmod n$ in a multigraph $\\Gamma$ on the $n$ vertices $\\mathbb Z/n\\mathbb Z$ (loops allowed). The number of edges equals the number of pieces.\n- *Rows give closed walks.* The pieces of row $i$, read left to right, give edges $i\\to x_1\\to x_2\\to\\dots\\to i+n\\equiv i$; this is a closed walk $\\gamma_i$ through vertex $i$. Different rows use different pieces, so $\\gamma_1,\\dots,\\gamma_n$ are edge-disjoint and together use every edge.\n- *The strip gives an Euler tour.* Reading the pieces along the original strip gives a walk from $1$ to $n^2+1\\equiv1$ that uses every edge once. Since each vertex $i$ lies on $\\gamma_i$, every vertex has an edge, and all edges are on one walk, so $\\Gamma$ is connected.\n\nDelete one edge from each $\\gamma_i$ to get $\\Gamma'$. If $e$ is the edge deleted from $\\gamma_i$, its endpoints are still joined by the rest of $\\gamma_i$, which contains no deleted edge (only one edge of $\\gamma_i$ was deleted and the walks are edge-disjoint). So every walk in $\\Gamma$ can be rerouted in $\\Gamma'$, and $\\Gamma'$ is connected. A connected graph on $n$ vertices has at least $n-1$ edges, so $\\Gamma$ has at least $(n-1)+n=2n-1$ edges, i.e. at least $2n-1$ pieces are needed.\n\n**Answer: $2n-1$**"
+      }
+    ],
+    "topics": [
+      "counting",
+      "graph-theory",
+      "number-theory"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null,
+    "answerDisplay": "$2n-1$"
+  },
+  {
+    "id": "imo-isl-2023-c5",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Combinatorics",
+      "year": 2023,
+      "number": 5,
+      "url": "https://www.imo-official.org/assets/documents/problems/2023/IMO2023SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Elisa has $2023$ treasure chests, all of which are unlocked and empty at first. Each day, Elisa adds a new gem to one of the unlocked chests of her choice, and afterwards, a fairy acts according to the following rules:\n- if more than one chests are unlocked, it locks one of them, or\n- if there is only one unlocked chest, it unlocks all the chests.\n\nGiven that this process goes on forever, prove that there is a constant $C$ with the following property: Elisa can ensure that the difference between the numbers of gems in any two chests never exceeds $C$, regardless of how the fairy chooses the chests to lock.",
+    "image": null,
+    "choices": null,
+    "answer": "$C=2022$ works if Elisa always fills the emptiest unlocked chest: the sorted gem counts are always majorised by the explicit sequence $b^t_i=i-1012+\\#\\{s\\le t: s\\equiv i \\pmod{2023}\\}$, whose spread is at most $2022$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Greedy strategy and majorisation",
+        "body": "Let $n=2023$ (odd). After day $t$ exactly $r(t)$ chests are locked, where $r(t)$ is the remainder of $t$ modulo $n$ (one more is locked each day until one chest is left open, and the day after that all are unlocked).\n\n**Strategy.** Each day Elisa puts the gem into an unlocked chest that has the fewest gems among the unlocked chests. We show the difference never exceeds $C=n-1$.\n\n**Notation.** Let $a^t_1\\le a^t_2\\le\\dots\\le a^t_n$ be the gem counts after day $t$, sorted. On day $t+1$ Elisa's chest has some count $v$; let $m(t)$ be the largest index with $a^t_{m(t)}=v$ and regard her chest as being in position $m(t)$. Then $a^{t+1}$ is obtained from $a^t$ by adding $1$ in position $m(t)$, and it is still sorted. Two facts:\n- (i) $a^t_j>a^t_{m(t)}$ for every $j>m(t)$.\n- (ii) If $j>r(t)$ then $a^t_j\\ge a^t_{m(t)}$: among the $j$ chests in positions $1,\\dots,j$ at most $r(t)$ are locked, so some unlocked chest has at most $a^t_j$ gems, and Elisa's chest has the minimum among unlocked chests.\n\n**Comparison sequence.** Let $c_i(t)$ be the number of $s\\in\\{1,\\dots,t\\}$ with $s\\equiv i\\pmod n$ and put\n$$b^t_i=i-\\tfrac{n+1}2+c_i(t)\\qquad(1\\le i\\le n),$$\nintegers since $n$ is odd. Thus $b^{t+1}$ arises from $b^t$ by adding $1$ in the position $i\\equiv t+1\\pmod n$. Then:\n- (B1) $b^t_1+\\dots+b^t_n=0+t=t$.\n- (B2) $b^t_{i+1}-b^t_i=1-\\big(c_i(t)-c_{i+1}(t)\\big)$, and $c_i(t)-c_{i+1}(t)\\in\\{0,1\\}$ equals $1$ exactly when $t\\equiv i\\pmod n$. So $b^t_i\\le b^t_{i+1}$, with strict inequality unless $t\\equiv i\\pmod n$.\n- (B3) $b^t_n-b^t_1=n-1-\\big(c_1(t)-c_n(t)\\big)\\le n-1$.\n\n**Claim.** For all $t\\ge0$ and $1\\le k\\le n$: $\\;B_k(t):=b^t_1+\\dots+b^t_k\\le A_k(t):=a^t_1+\\dots+a^t_k$, with equality for $k=n$.\n\n*Proof.* Equality for $k=n$ is (B1) and $\\sum a^t_i=t$. For $t=0$, $A_k=0$ and $B_k=\\frac{k(k-n)}2\\le0$. Assume the claim for $t$ and suppose it fails for $t+1$; let $k<n$ be the smallest index where it fails. From $t$ to $t+1$, $B_k$ grows by $1$ exactly when the position $j\\equiv t+1\\pmod n$ satisfies $j\\le k$, and $A_k$ grows by $1$ exactly when $m(t)\\le k$. So the failure needs all of:\n1. $B_k(t)=A_k(t)$;\n2. $j\\le k$, which means $r(t)=j-1\\le k-1$;\n3. $m(t)\\ge k+1$.\n\nFrom 1 and $B_{k-1}(t)\\le A_{k-1}(t)$ we get $b^t_k\\ge a^t_k$. From 2, $k>r(t)$, so by (ii) $a^t_k\\ge a^t_{m(t)}$; with 3 and sortedness $a^t_k\\le a^t_{k+1}\\le a^t_{m(t)}$, hence $a^t_{k+1}=a^t_k$. Also $t\\not\\equiv k\\pmod n$ (as $r(t)\\le k-1$ and $k\\le n-1$), so by (B2) $b^t_{k+1}>b^t_k\\ge a^t_k=a^t_{k+1}$. Therefore\n$$B_{k+1}(t)=B_k(t)+b^t_{k+1}>A_k(t)+a^t_{k+1}=A_{k+1}(t),$$\ncontradicting the claim for $t$. $\\square$\n\n**Conclusion.** The claim with $k=1$ gives $a^t_1\\ge b^t_1$, and with $k=n-1$ and the equal totals gives $a^t_n=t-A_{n-1}(t)\\le t-B_{n-1}(t)=b^t_n$. So by (B3)\n$$a^t_n-a^t_1\\le b^t_n-b^t_1\\le n-1=2022$$\nfor every $t$: the constant $C=2022$ works. ∎"
+      }
+    ],
+    "topics": [
+      "games",
+      "inequalities",
+      "counting"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-isl-2023-c6",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Combinatorics",
+      "year": 2023,
+      "number": 6,
+      "url": "https://www.imo-official.org/assets/documents/problems/2023/IMO2023SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $N$ be a positive integer, and consider an $N\\times N$ grid. A *right-down path* is a sequence of grid cells such that each cell is either one cell to the right of or one cell below the previous cell in the sequence. A *right-up path* is a sequence of grid cells such that each cell is either one cell to the right of or one cell above the previous cell in the sequence.\n\nProve that the cells of the $N\\times N$ grid cannot be partitioned into less than $N$ right-down or right-up paths. For example, the following partition of the $5\\times5$ grid uses $5$ paths.",
+    "image": "qimages/imo/isl-2023/c6.webp",
+    "choices": null,
+    "answer": "Cut each cell along a diagonal so that consecutive cells of a path form parallelograms of two half-cells; $k$ paths leave $2k$ uncovered half-cells. Treat the diagonals as mirrors and shine lasers in from the $4N$ boundary edges: a counting of the $2N$ beams shows they pass through at least $2N$ uncovered half-cells, so $k\\ge N$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Mirrors and lasers",
+        "body": "Suppose the grid is partitioned into $k$ paths; we show $k\\ge N$.\n\n**Half-cells.** In a cell of a right-down path draw the diagonal from bottom-left to top-right; it splits the cell into an upper-left triangle (containing the top and left sides) and a lower-right triangle (containing the bottom and right sides). In a cell of a right-up path draw the other diagonal, giving a lower-left and an upper-right triangle. (A one-cell path gets either diagonal.) For two consecutive cells $X\\to Y$ of a path, take the triangle of $X$ containing the side shared with $Y$ and the triangle of $Y$ containing that side; together they form a parallelogram made of two half-cells. One checks from the choice of diagonals that every cell of a path, except its first and last, gives one of its triangles to the previous step and the other to the next step. So the parallelograms are disjoint, there are $\\sum(\\ell_i-1)=N^2-k$ of them for paths of lengths $\\ell_i$, and exactly $2k$ triangles (half-cells) are left uncovered.\n\n**Lasers.** View the diagonals as two-sided mirrors. From each of the $4N$ unit edges on the boundary, send a laser beam into the grid perpendicular to that edge. Inside a cell the beam crosses the triangle it entered, is reflected by the diagonal (turning by $90^\\circ$), and leaves through the other leg of that triangle into a neighbouring triangle. Each triangle has two legs, so the motion is reversible: a beam never revisits a triangle, every beam leaves through another boundary edge, and the reversed beam is the beam sent from that edge. So the $4N$ boundary edges are split into $2N$ pairs, and different beams pass through disjoint sets of triangles. (Drawing each beam slightly inside its triangles, the beams are disjoint curves.)\n\n**Effect on direction.** A beam entering a parallelogram from outside passes through both of its triangles and is reflected twice by parallel mirrors, so it leaves in its original direction. Hence the direction changes only in uncovered triangles, by $\\pm90^\\circ$ each. Classify the pairs:\n1. a horizontal and a vertical boundary edge: the direction turned by an odd multiple of $90^\\circ$, so the beam crosses **at least one** uncovered triangle;\n2. two edges on the same side: the direction reversed, so **at least two** uncovered triangles;\n3. two edges on opposite sides: possibly none.\n\nA beam joining the left and right sides and one joining the top and bottom sides would be disjoint curves crossing the square in both directions, which is impossible. So, after a rotation, all $t$ pairs of type 3 join the left and right sides. The $2N$ edges on the top and bottom then lie in pairs of type 1 or type 2 (with both edges on the same side). Only $2N-2t$ vertical edges remain for type-1 pairs, so at least $2N-(2N-2t)=2t$ horizontal edges lie in type-2 pairs, i.e. there are at least $t$ type-2 pairs. With $p_1,p_2$ pairs of types 1 and 2 we have $p_1+p_2+t=2N$ and $p_2\\ge t$, so the number of uncovered triangles is at least\n$$p_1+2p_2\\ge p_1+p_2+t=2N .$$\n\n**Conclusion.** There are exactly $2k$ uncovered triangles, so $2k\\ge2N$ and $k\\ge N$. ∎"
+      }
+    ],
+    "topics": [
+      "counting",
+      "geometry",
+      "logic"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-isl-2023-c7",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Combinatorics",
+      "year": 2023,
+      "number": 7,
+      "url": "https://www.imo-official.org/assets/documents/problems/2023/IMO2023SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "The Imomi archipelago consists of $n\\ge2$ islands. Between each pair of distinct islands is a unique ferry line that runs in both directions, and each ferry line is operated by one of $k$ companies. It is known that if any one of the $k$ companies closes all its ferry lines, then it becomes impossible for a traveller, no matter where the traveller starts at, to visit all the islands exactly once (in particular, not returning to the island the traveller started at).\n\nDetermine the maximal possible value of $k$ in terms of $n$.",
+    "image": null,
+    "choices": null,
+    "answer": "$k=\\lfloor\\log_2 n\\rfloor$. (Colour the edges of $K_n$ so that every Hamiltonian path uses all colours; recolouring lemmas reduce to colourings where edge $A_uA_v$, $u<v$, gets the colour of $A_u$, and then the $i$-th colour needs at least $2^{i-1}$ vertices.)",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Construction and a recolouring argument",
+        "body": "In graph language: colour the edges of the complete graph $K_n$ with $k$ colours so that every Hamiltonian path contains an edge of every colour; call such a colouring *good*. We show the largest $k$ is $\\lfloor\\log_2n\\rfloor$.\n\n**Construction for $k=\\lfloor\\log_2n\\rfloor$** (so $2^k\\le n$). Label the vertices $1,\\dots,n$ and give vertex $i$ the colour $\\min(\\lfloor\\log_2i\\rfloor+1,\\,k)$; so colours $1,2,2,3,3,3,3,\\dots$, colour $i<k$ is used by the $2^{i-1}$ vertices $2^{i-1},\\dots,2^i-1$, and colour $k$ by the last $n-2^{k-1}+1$ vertices. Colour each edge $ij$ ($i<j$) with the colour of vertex $i$.\n- Colour $k$: there are $n-2^{k-1}+1\\ge\\frac n2+1$ vertices of colour $k$, so some two of them are consecutive on any Hamiltonian path, and that edge has colour $k$.\n- Colour $i<k$: suppose a Hamiltonian path has no edge of colour $i$. An edge at a vertex of colour $i$ has colour $i$ unless the other end has a smaller label, i.e. a smaller colour. So on the path, every vertex of colour $i$ is adjacent only to vertices of colour $<i$. There are $2^{i-1}$ vertices of colour $i$ and only $2^{i-1}-1$ of colour $<i$, so the path must alternate (i), (<i), (i), …, (<i), (i) and contain no other vertices, impossible because vertices of colour $>i$ exist.\n\n**Upper bound.** Fix a good colouring with $k$ colours; for $n=2$ clearly $k\\le1$, so let $n\\ge3$. Write $d_i(v)$ for the number of edges of colour $i$ at $v$ and $m(v)=\\max_id_i(v)$.\n\n*Lemma 1.* If edge $AB$ has colour $i$ and $d_i(A)+d_i(B)\\le n-1$, then after recolouring $AB$ with any other colour the colouring is still good.\n\n*Proof.* Otherwise some Hamiltonian path contains $AB$ as its only edge of colour $i$. Write it as $A_s-\\dots-A_1-A_0-B_0-B_1-\\dots-B_t$ with $A_0=A$, $B_0=B$, $s+t+2=n$. In the original colouring:\n- $B_0A_s$ has colour $i$, else $A_0-A_1-\\dots-A_s-B_0-\\dots-B_t$ has no colour $i$; similarly $A_0B_t$ has colour $i$;\n- for $0\\le p<s$, one of $B_0A_p$, $A_0A_{p+1}$ has colour $i$, else $A_s-\\dots-A_{p+1}-A_0-A_1-\\dots-A_p-B_0-\\dots-B_t$ has no colour $i$; similarly for $0\\le q<t$ one of $A_0B_q$, $B_0B_{q+1}$ has colour $i$.\n\nThese conditions involve every edge $A_0X$ and every edge $B_0X$ exactly once (counting $A_0B_0$ once for $A$ and once for $B$), and give $s+1+t+1=n$ edges of colour $i$ at $A$ or $B$ in total: $d_i(A)+d_i(B)\\ge n$, a contradiction. $\\square$\n\n*Lemma 2.* If $m(A)\\ge m(B)$, edge $AB$ has colour $j$, and $d_i(A)=m(A)$ for some $i\\ne j$, then recolouring $AB$ with $i$ keeps the colouring good. Indeed $d_j(A)\\le n-1-d_i(A)=n-1-m(A)$ and $d_j(B)\\le m(B)\\le m(A)$, so Lemma 1 applies.\n\n*Lemma 3.* Let $S$ be a set of vertices, $A\\in S$ with $m(A)\\ge m(B)$ for all $B\\in S$, and $d_i(A)=m(A)$. Then recolouring all edges $AB$ ($B\\in S$) with colour $i$ keeps the colouring good. Indeed recolour them one at a time by Lemma 2: each step raises $d_i(A)=m(A)$ by $1$ and any other $m(B)$ by at most $1$, so the hypotheses persist.\n\nApply Lemma 3 to all vertices, obtaining a vertex $A_1$ all of whose edges have one colour $c_1$; then to the remaining vertices, obtaining $A_2$ whose edges to $A_3,\\dots,A_n$ all have colour $c_2$; and so on. We reach a good colouring with vertices $A_1,\\dots,A_n$ and colours $c_1,\\dots,c_n$ (call $c_u$ the colour of $A_u$) in which **edge $A_uA_v$ ($u<v$) has colour $c_u$**.\n\n*Lemma 4.* For each colour $i$ there is $p$ such that more than $p/2$ of $A_1,\\dots,A_p$ have colour $i$.\n\n*Proof.* If not, let $A_{x_1},\\dots,A_{x_t}$ ($x_1<\\dots<x_t$) be the vertices of colour $i$ and $A_{y_1},\\dots,A_{y_s}$ the others. Then $t\\le s$ and $y_j<x_j$ for $j\\le t$ (otherwise $A_1,\\dots,A_{x_j}$ contain $j$ vertices of colour $i$ and fewer than $j$ others). The path $A_{x_1}-A_{y_1}-A_{x_2}-A_{y_2}-\\dots-A_{x_t}-A_{y_t}-A_{y_{t+1}}-\\dots-A_{y_s}$ uses only edges whose smaller-index end is some $A_y$ of colour $\\ne i$, so it avoids colour $i$, contradicting goodness. $\\square$\n\nFor each colour let $p_i$ be the least such $p$; they are distinct (at $p_i$ colour $i$ has a strict majority), so order the colours with $p_1<p_2<\\dots<p_k$. Among $A_1,\\dots,A_{p_i}$ there are at least $\\lceil\\frac{p_j+1}2\\rceil$ vertices of colour $j$ for each $j\\le i$, hence\n$$p_i\\ge\\sum_{j=1}^{i}\\Big\\lceil\\frac{p_j+1}2\\Big\\rceil .$$\nBy induction $p_i\\ge2^i-1$: if $p_j\\ge2^j-1$ for $j<i$, then $p_i-\\lceil\\frac{p_i+1}2\\rceil=\\lfloor\\frac{p_i-1}2\\rfloor\\ge\\sum_{j<i}2^{j-1}=2^{i-1}-1$, so $p_i\\ge2^i-1$. Thus $n\\ge p_k\\ge2^k-1$.\n\nFinally $n=2^k-1$ is impossible: then all inequalities are equalities, so $p_i=2^i-1$, colour $i$ has exactly $2^{i-1}$ vertices, none of them among $A_1,\\dots,A_{p_{i-1}}$; hence the vertices of colour $i$ are exactly $A_{2^{i-1}},\\dots,A_{2^i-1}$. Then\n$$A_{2^{k-1}}-A_1-A_{2^{k-1}+1}-A_2-\\dots-A_{2^{k-1}-1}-A_n$$\nis a Hamiltonian path in which every edge has its smaller-index end of colour $<k$, so it has no edge of colour $k$. Hence $n\\ge2^k$, i.e. $k\\le\\lfloor\\log_2n\\rfloor$.\n\n**Answer: $k=\\lfloor\\log_2 n\\rfloor$** ∎"
+      }
+    ],
+    "topics": [
+      "graph-theory",
+      "counting"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-isl-2023-g1",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Geometry",
+      "year": 2023,
+      "number": 1,
+      "url": "https://www.imo-official.org/assets/documents/problems/2023/IMO2023SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $ABCDE$ be a convex pentagon such that $\\angle ABC=\\angle AED=90^\\circ$. Suppose that the midpoint of $CD$ is the circumcentre of triangle $ABE$. Let $O$ be the circumcentre of triangle $ACD$.\n\nProve that line $AO$ passes through the midpoint of segment $BE$.",
+    "image": null,
+    "choices": null,
+    "answer": "First $AD\\parallel BC$ and $AC\\parallel ED$ (the midpoints of $AC$ and $CD$ both lie on the perpendicular bisector of $AB$, etc.). Then with $C_1,D_1$ the midpoints of $AC,AD$: $[OAB]=[D_1AB]=[D_1AC]=\\frac12[ACD]=[C_1AD]=[C_1AE]=[OAE]$, so $AO$ bisects $BE$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Parallel lines and equal areas",
+        "body": "Let $M$ be the midpoint of $CD$, the circumcentre of $ABE$.\n\n**Step 1: $AD\\parallel BC$ and $AC\\parallel ED$.** Let $\\ell$ be the perpendicular bisector of $AB$; it contains $M$ (as $MA=MB$). Since $\\angle ABC=90^\\circ$, the midpoint of $AC$ is the circumcentre of $ABC$, so it also lies on $\\ell$. Thus $\\ell$ is the line through the midpoints of $CA$ and $CD$, which is parallel to $AD$ (midline of triangle $ACD$). Also $BC\\perp AB$ and $\\ell\\perp AB$, so $BC\\parallel\\ell$. Hence $AD\\parallel BC$. The same argument with the perpendicular bisector of $AE$ and $\\angle AED=90^\\circ$ gives $AC\\parallel ED$.\n\n**Step 2: areas.** Use signed areas $[XYZ]$. Moving one vertex of a triangle parallel to the opposite side does not change its area. Let $C_1,D_1$ be the midpoints of $AC$ and $AD$, and $N$ the midpoint of $BE$.\n\nSince $OD_1\\perp AD$ and $AD\\parallel BC\\perp AB$, we have $OD_1\\parallel AB$, so $[OAB]=[D_1AB]$. Since $BC\\parallel AD$, the points $B$ and $C$ are at the same signed distance from line $AD_1=AD$, so $[D_1AB]=[D_1AC]=\\frac12[DAC]$. Thus\n$$[OAB]=\\tfrac12[DAC].$$\nSimilarly $OC_1\\perp AC$ and $AC\\parallel ED\\perp AE$ give $OC_1\\parallel AE$, so $[OAE]=[C_1AE]$; and $ED\\parallel AC$ gives $[C_1AE]=[C_1AD]=\\frac12[CAD]$. Thus\n$$[OAE]=\\tfrac12[CAD]=-\\tfrac12[DAC]=-[OAB].$$\n\n**Step 3.** The signed area $[OAX]$ is an affine function of $X$, so\n$$[OAN]=\\tfrac12\\big([OAB]+[OAE]\\big)=0 .$$\nHence $O,A,N$ are collinear: line $AO$ passes through the midpoint of $BE$. ∎"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-isl-2023-g2",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Geometry",
+      "year": 2023,
+      "number": 2,
+      "url": "https://www.imo-official.org/assets/documents/problems/2023/IMO2023SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $ABC$ be a triangle with $AC>BC$. Let $\\omega$ be the circumcircle of triangle $ABC$ and let $r$ be the radius of $\\omega$. Point $P$ lies on segment $AC$ such that $BC=CP$ and point $S$ is the foot of the perpendicular from $P$ to line $AB$. Let ray $BP$ intersect $\\omega$ again at $D$ and let $Q$ lie on line $SP$ such that $PQ=r$ and $S,P,Q$ lie on the line in that order. Finally, let the line perpendicular to $CQ$ from $A$ intersect the line perpendicular to $DQ$ from $B$ at $E$.\n\nProve that $E$ lies on $\\omega$.",
+    "image": null,
+    "choices": null,
+    "answer": "$DA=DP$, which makes the figure symmetric under $(A,D)\\leftrightarrow(B,C)$. The reflection $E'$ of $P$ in $CD$ lies on $\\omega$, and triangles $AOD$ and $PQD$ are congruent, which gives $BE'\\perp DQ$; by symmetry $AE'\\perp CQ$, so $E=E'$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Reflect $P$ in $CD$",
+        "body": "Let $O$ be the centre of $\\omega$.\n\n**Step 1: $DA=DP$.** Using vertical angles, the isosceles triangle $CBP$ ($CB=CP$) and inscribed angles on arc $CD$,\n$$\\angle DPA=\\angle BPC=\\angle CBP=\\angle CBD=\\angle CAD=\\angle PAD,$$\nso triangle $DAP$ is isosceles with $DA=DP$. Hence $ABCD$ is a cyclic quadrilateral with diagonals meeting at $P$, $CB=CP$ and $DA=DP$, and the whole configuration (with $S$, $Q$ and the two perpendiculars) is unchanged by the relabelling $(A,D)\\leftrightarrow(B,C)$.\n\n**Step 2: the candidate point.** Let $E'$ be the reflection of $P$ in line $CD$. Since $P$ lies on segment $BD$, $P$ is on the same side of $CD$ as $B$, so $E'$ is on the other side, and\n$$\\angle CE'D=\\angle CPD=180^\\circ-\\angle CPB=180^\\circ-\\angle CBP=180^\\circ-\\angle CBD .$$\nSo $E'$ lies on $\\omega$. Also $DE'=DP=DA$.\n\n**Step 3: $BE'\\perp DQ$.** We have $AO=r=PQ$ and $AD=PD$. Moreover\n$$\\angle DAO=90^\\circ-\\angle ABD\\quad\\text{and}\\quad\\angle DPQ=\\angle BPS=90^\\circ-\\angle PBS=90^\\circ-\\angle ABD,$$\nthe first because $\\angle ABD$ is the inscribed angle on chord $AD$, the second because $PS\\perp AB$ (and $\\angle DPQ=\\angle BPS$ are vertical angles). So triangles $AOD$ and $PQD$ are congruent (SAS), and in particular $\\angle QDP=\\angle ODA$. Now\n$$\\angle QDB+\\angle DBE'=\\angle ODA+\\angle DAE'=\\angle ODA+\\angle AE'D=(90^\\circ-\\angle AE'D)+\\angle AE'D=90^\\circ,$$\nusing $\\angle DBE'=\\angle DAE'$ (inscribed angles on chord $DE'$), $\\angle DAE'=\\angle DE'A$ (as $DA=DE'$), and $\\angle ODA=90^\\circ-\\angle AE'D$ ($\\angle AE'D$ is inscribed on chord $AD$). Hence lines $DQ$ and $BE'$ are perpendicular.\n\n**Step 4.** Applying Step 3 to the relabelled configuration of Step 1 (which fixes $P$, $S$, $Q$, line $CD$ and hence $E'$) gives $AE'\\perp CQ$. So $E'$ lies on the perpendicular from $A$ to $CQ$ and on the perpendicular from $B$ to $DQ$; these lines are not parallel (as $CQ\\not\\parallel DQ$), so $E=E'$, which lies on $\\omega$. ∎"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-isl-2023-g3",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Geometry",
+      "year": 2023,
+      "number": 3,
+      "url": "https://www.imo-official.org/assets/documents/problems/2023/IMO2023SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $ABCD$ be a cyclic quadrilateral with $\\angle BAD<\\angle ADC$. Let $M$ be the midpoint of the arc $CD$ not containing $A$. Suppose there is a point $P$ inside $ABCD$ such that $\\angle ADB=\\angle CPD$ and $\\angle ADP=\\angle PCB$.\n\nProve that lines $AD$, $PM$, $BC$ are concurrent.",
+    "image": null,
+    "choices": null,
+    "answer": "With $X=AM\\cap PD$, $Y=BM\\cap PC$, $MXPY$ is a parallelogram, so $AM\\parallel PC$ and $BM\\parallel PD$. With $R=AM\\cap BC$, $S=BM\\cap AD$, $ABRS$ is cyclic and $RS\\parallel CD$; triangles $PCD$ and $MRS$ are homothetic and lines $CR=BC$, $DS=AD$, $PM$ pass through the centre.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "A parallelogram and a homothety",
+        "body": "**Step 1: $AM\\parallel PC$ and $BM\\parallel PD$.** Let $X=AM\\cap PD$ and $Y=BM\\cap PC$. Since $M$ is the midpoint of arc $CD$, $\\angle MAD=\\angle CBM$, i.e. $\\angle XAD=\\angle CBY$; together with $\\angle ADX=\\angle ADP=\\angle PCB=\\angle YCB$ this gives $\\angle DXA=\\angle BYC$ (third angles of triangles $AXD$, $BYC$). Hence the vertical angles satisfy $\\angle PXM=\\angle MYP$. Also\n$$\\angle YPX=\\angle CPD=\\angle ADB=\\angle AMB=\\angle XMY .$$\nSo quadrilateral $MXPY$ has both pairs of opposite angles equal and is a parallelogram: $MX\\parallel YP$ and $MY\\parallel XP$, i.e. $AM\\parallel PC$ and $BM\\parallel PD$.\n\n**Step 2: $RS\\parallel CD$.** Let $R=AM\\cap BC$ and $S=BM\\cap AD$. Using $BS\\parallel PD$ (on transversal $AD$) and $AR\\parallel PC$ (on transversal $BC$),\n$$\\angle ASB=\\angle ADP=\\angle PCB=\\angle ARB,$$\nso $A,B,R,S$ are concyclic. Then $\\angle SRB=180^\\circ-\\angle BAS=180^\\circ-\\angle BAD=\\angle DCB$ (as $ABCD$ is cyclic), so $SR\\parallel CD$.\n\n**Step 3: homothety.** Triangles $PCD$ and $MRS$ have $PC\\parallel MR$, $PD\\parallel MS$ and $CD\\parallel RS$, so there is a homothety or translation taking $P\\mapsto M$, $C\\mapsto R$, $D\\mapsto S$. It cannot be a translation: then $CR\\parallel DS$, i.e. $BC\\parallel AD$, and the cyclic quadrilateral $ABCD$ would be an isosceles trapezoid with $\\angle BAD=\\angle ADC$, contrary to the hypothesis. So it is a homothety, and the lines $CR$, $DS$, $PM$ joining corresponding points all pass through its centre. As $CR=BC$ and $DS=AD$, the lines $AD$, $PM$, $BC$ are concurrent. ∎"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-isl-2023-g4",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Geometry",
+      "year": 2023,
+      "number": 4,
+      "url": "https://www.imo-official.org/assets/documents/problems/2023/IMO2023SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $ABC$ be an acute-angled triangle with $AB<AC$. Denote its circumcircle by $\\Omega$ and denote the midpoint of arc $CAB$ by $S$. Let the perpendicular from $A$ to $BC$ meet $BS$ and $\\Omega$ at $D$ and $E\\ne A$ respectively. Let the line through $D$ parallel to $BC$ meet line $BE$ at $L$ and denote the circumcircle of triangle $BDL$ by $\\omega$. Let $\\omega$ meet $\\Omega$ again at $P\\ne B$.\n\nProve that the line tangent to $\\omega$ at $P$, and line $BS$ intersect on the internal bisector of $\\angle BAC$.",
+    "image": null,
+    "choices": null,
+    "answer": "Proof: $L,P,S$ and $P,D,F$ are collinear ($F$ the antipode of $A$); with $X=BS\\cap AM$ ($M$ the arc midpoint), similar triangles give $XA=XY$ for $Y=PF\\cap AM$, so $XP=XA$; an angle chase then shows $PX$ is tangent to $\\omega$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": "imo-2023-02",
+    "reviewNote": null
+  },
+  {
+    "id": "imo-isl-2023-g5",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Geometry",
+      "year": 2023,
+      "number": 5,
+      "url": "https://www.imo-official.org/assets/documents/problems/2023/IMO2023SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $ABC$ be an acute-angled triangle with circumcircle $\\omega$ and circumcentre $O$. Points $D\\ne B$ and $E\\ne C$ lie on $\\omega$ such that $BD\\perp AC$ and $CE\\perp AB$. Let $CO$ meet $AB$ at $X$, and $BO$ meet $AC$ at $Y$.\n\nProve that the circumcircles of triangles $BXD$ and $CYE$ have an intersection on line $AO$.",
+    "image": null,
+    "choices": null,
+    "answer": "The common point is the second intersection $Z$ of line $AO$ with circle $BOC$: reflecting in the line through $O$ parallel to $AC$ (the perpendicular bisector of $BD$) swaps lines $OA$, $OC$ and $B$, $D$, and an angle chase shows the reflection of $Z$ lies on circle $BXD$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Reflect in the perpendicular bisector of $BD$",
+        "body": "We use directed angles $\\measuredangle(\\ell,m)$ between lines, modulo $180^\\circ$. Let $Z\\ne O$ be the second intersection of line $AO$ with the circle $BOC$. This point is symmetric in $B$ and $C$, so it suffices to show that $Z$ lies on circle $BXD$; the same proof with $B,C$ (and $X,Y$, $D,E$) swapped shows $Z$ lies on circle $CYE$.\n\n**The reflection.** Let $\\ell$ be the line through $O$ parallel to $AC$. Since $BD\\perp AC$, $\\ell$ is perpendicular to the chord $BD$ and passes through the centre $O$, so $\\ell$ is the perpendicular bisector of $BD$. Since $OA=OC$, the lines $OA$ and $OC$ make equal angles with $AC$, hence with $\\ell$, on opposite sides; so the reflection $\\sigma$ in $\\ell$ swaps the lines $OA$ and $OC$. Also $\\sigma$ swaps $B$ and $D$, and it maps circle $BXD$ to itself, because the centre of that circle lies on the perpendicular bisector $\\ell$ of $BD$.\n\n**An angle.** By the tangent-chord angle at $C$ (the tangent $t$ at $C$ is perpendicular to $CO$),\n$$\\measuredangle(CB,CO)=\\measuredangle(CB,t)+90^\\circ=\\measuredangle(AB,AC)+90^\\circ .$$\nSince $BD\\perp AC$, also $\\measuredangle(AB,BD)=\\measuredangle(AB,AC)+\\measuredangle(AC,BD)=\\measuredangle(AB,AC)+90^\\circ$. Hence\n$$\\measuredangle(CB,CO)=\\measuredangle(AB,BD). \\tag{1}$$\n\n**$\\sigma(Z)$ lies on circle $BXD$.** Let $P=\\sigma(Z)$; it lies on $\\sigma(\\text{line }OA)=$ line $OC$, which is line $OX$. A reflection reverses directed angles, and $\\sigma$ fixes $O$ and maps $Z\\mapsto P$, $B\\mapsto D$, so\n$$\\measuredangle(PX,PD)=\\measuredangle(PO,PD)=-\\measuredangle(ZO,ZB)=\\measuredangle(ZB,ZO)=\\measuredangle(CB,CO)=\\measuredangle(XB,BD),$$\nusing that $Z,B,O,C$ are concyclic, then (1) and $X\\in AB$. So $\\measuredangle XPD=\\measuredangle XBD$, i.e. $P,X,B,D$ are concyclic: $P$ lies on circle $BXD$.\n\n**Conclusion.** Applying $\\sigma$ again, $Z=\\sigma(P)$ lies on $\\sigma(\\text{circle }BXD)=$ circle $BXD$. Thus $Z$, a point of line $AO$, lies on circle $BXD$ and (by symmetry) on circle $CYE$. ∎"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-isl-2023-g6",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Geometry",
+      "year": 2023,
+      "number": 6,
+      "url": "https://www.imo-official.org/assets/documents/problems/2023/IMO2023SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $ABC$ be an acute-angled triangle with circumcircle $\\omega$. A circle $\\Gamma$ is internally tangent to $\\omega$ at $A$ and also tangent to $BC$ at $D$. Let $AB$ and $AC$ intersect $\\Gamma$ at $P$ and $Q$ respectively. Let $M$ and $N$ be points on line $BC$ such that $B$ is the midpoint of $DM$ and $C$ is the midpoint of $DN$. Lines $MP$ and $NQ$ meet at $K$ and intersect $\\Gamma$ again at $I$ and $J$ respectively. The ray $KA$ meets the circumcircle of triangle $IJK$ at $X\\ne K$.\n\nProve that $\\angle BXP=\\angle CXQ$.",
+    "image": null,
+    "choices": null,
+    "answer": "$K$ lies on the bisector $AD$ (Menelaus), then $JXND$ is cyclic, so $XN\\parallel AC$ and $A$ is the midpoint of $XD$. Triangles $PDC\\sim PAX$ give a spiral similarity at $P$, so $\\angle PXC=\\frac{\\angle A}2$; similarly $\\angle QXB=\\frac{\\angle A}2$, hence $\\angle BXP=\\angle BXC-\\frac{\\angle A}2=\\angle CXQ$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Locate $K$ and $X$, then a spiral similarity",
+        "body": "We write $\\alpha=\\angle BAC$.\n\n**Step 1: $PQ\\parallel BC$ and $AD$ bisects $\\angle A$.** The homothety at $A$ taking $\\Gamma$ to $\\omega$ takes $P\\mapsto B$, $Q\\mapsto C$, so $PQ\\parallel BC$; it takes $D$ to the point of $\\omega$ where the tangent is parallel to $BC$ on the far side from $A$, i.e. the midpoint of arc $BC$ not containing $A$. So $AD$ bisects $\\angle BAC$, and $\\angle PAD=\\angle DAC=\\frac\\alpha2$.\n\n**Step 2: $K$ lies on $AD$.** Let $MP$ meet $AD$ at $K_1$. Menelaus in triangle $ABD$ with the line $M,P,K_1$, using $MB=BD$, $MD=2BD$:\n$$\\frac{AK_1}{K_1D}=\\frac{AP}{PB}\\cdot\\frac{BM}{MD}=\\frac{AP}{2PB}.$$\nLikewise $NQ$ meets $AD$ at $K_2$ with $\\frac{AK_2}{K_2D}=\\frac{AQ}{2QC}$. As $PQ\\parallel BC$, $\\frac{AP}{PB}=\\frac{AQ}{QC}$, so $K_1=K_2=K$, and $X,K,A,D$ are collinear.\n\n**Step 3: $A$ is the midpoint of $XD$.** With directed angles,\n$$\\measuredangle JXD=\\measuredangle JXK=\\measuredangle JIK=\\measuredangle JIP=\\measuredangle JQP=\\measuredangle JND,$$\nusing the circle through $I,J,K,X$, the collinearity of $I,K,P$, the circle $\\Gamma$, and finally the collinearity of $J,Q,N$ together with $PQ\\parallel ND$. So $J,X,N,D$ are concyclic, and\n$$\\measuredangle DXN=\\measuredangle DJN=\\measuredangle DJQ=\\measuredangle DAQ=\\measuredangle DAC .$$\nSince $X$ lies on line $AD$, this says $XN\\parallel AC$. In triangle $DXN$, the line through the midpoint $C$ of $DN$ parallel to $NX$ meets $DX$ at its midpoint, so $A$ is the midpoint of $XD$ and $XA=AD$.\n\n**Step 4: a spiral similarity at $P$.** Since $\\angle ADP=\\angle AQP=\\angle ACB$ (circle $\\Gamma$, then $PQ\\parallel BC$) and $\\angle PAD=\\angle DAC$, triangles $APD$ and $ADC$ are similar, so\n$$\\frac{CD}{DP}=\\frac{AD}{AP}=\\frac{XA}{AP}.$$\nAlso, as $BC$ is tangent to $\\Gamma$ at $D$, $\\angle PDB=\\angle PAD$, so\n$$\\angle CDP=180^\\circ-\\angle PDB=180^\\circ-\\angle PAD=\\angle XAP .$$\nHence triangles $PDC$ and $PAX$ are similar (SAS), so $P$ is the centre of a spiral similarity taking $D\\mapsto A$, $C\\mapsto X$. Then triangles $PDA$ and $PCX$ are similar too, and $\\angle PXC=\\angle PAD=\\frac\\alpha2$.\n\nBy the same argument with $B,P$ and $C,Q$ swapped, $\\angle QXB=\\frac\\alpha2$. Therefore\n$$\\angle BXP=\\angle BXC-\\angle PXC=\\angle BXC-\\tfrac\\alpha2=\\angle BXC-\\angle QXB=\\angle CXQ.$$\n∎"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-isl-2023-g7",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Geometry",
+      "year": 2023,
+      "number": 7,
+      "url": "https://www.imo-official.org/assets/documents/problems/2023/IMO2023SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $ABC$ be an acute, scalene triangle with orthocentre $H$. Let $\\ell_a$ be the line through the reflection of $B$ with respect to $CH$ and the reflection of $C$ with respect to $BH$. Lines $\\ell_b$ and $\\ell_c$ are defined similarly. Suppose lines $\\ell_a$, $\\ell_b$ and $\\ell_c$ determine a triangle $\\mathcal T$.\n\nProve that the orthocentre of $\\mathcal T$, the circumcentre of $\\mathcal T$ and $H$ are collinear.",
+    "image": null,
+    "choices": null,
+    "answer": "$\\mathcal T$ is oppositely similar to $ABC$ and its vertices satisfy $HA_1=HA$, $HB_1=HB$, $HC_1=HC$ (spiral similarity at $A$ between the reflected triangles). So with $H_1$ the orthocentre of $\\mathcal T$ and $\\lambda$ the ratio, $H_1A_1/HA_1=H_1B_1/HB_1=H_1C_1/HC_1=\\lambda$: the circumcircle of $\\mathcal T$ is an Apollonius circle for $H,H_1$, whose centre lies on $HH_1$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Spiral similarity and an Apollonius circle",
+        "body": "Directed angles $\\measuredangle$ are taken modulo $180^\\circ$. Let $A_b,A_c$ be the reflections of $A$ in $BH$, $CH$; define $B_c,B_a$ and $C_a,C_b$ similarly. Then $\\ell_a=B_cC_b$, $\\ell_b=C_aA_c$, $\\ell_c=A_bB_a$. Let $A_1=\\ell_b\\cap\\ell_c$, $B_1=\\ell_c\\cap\\ell_a$, $C_1=\\ell_a\\cap\\ell_b$, so $\\mathcal T=A_1B_1C_1$.\n\n**Claim 1: triangle $AA_bA_c$ is oppositely similar to $ABC$ (with $A_b\\leftrightarrow B$, $A_c\\leftrightarrow C$).** Let $E,F$ be the feet of the altitudes from $B$ and $C$. Since $BH\\perp AC$ at $E$, the reflection of $A$ in $BH$ is $A_b=2E-A$ on line $AC$; similarly $A_c=2F-A$ on line $AB$. As $AE=AB\\cos\\alpha$ and $AF=AC\\cos\\alpha$, triangle $AEF$ is oppositely similar to $ABC$ ($E\\leftrightarrow B$, $F\\leftrightarrow C$), and doubling from $A$ gives the claim.\n\n**Claim 2: $A_1$ lies on the circle through $A,A_b,A_c$, whose centre is $H$.** Reflecting $ABC$ in the line $AH$ gives triangle $AB_aC_a$, oppositely congruent to $ABC$. With Claim 1, triangles $AA_bA_c$ and $AB_aC_a$ are directly similar, so a spiral similarity centred at $A$ takes $A_b\\mapsto B_a$, $A_c\\mapsto C_a$. Then triangles $AA_bB_a$ and $AA_cC_a$ are directly similar too, hence\n$$\\measuredangle(A_bA,A_bB_a)=\\measuredangle(A_cA,A_cC_a),\\quad\\text{i.e.}\\quad\\measuredangle AA_bA_1=\\measuredangle AA_cA_1,$$\nbecause $A_1$ lies on $A_bB_a=\\ell_c$ and on $A_cC_a=\\ell_b$. So $A,A_b,A_c,A_1$ are concyclic. As $H$ lies on both mirrors $BH$ and $CH$, $HA_b=HA=HA_c$, so this circle has centre $H$. In particular $HA_1=HA$, and likewise $HB_1=HB$, $HC_1=HC$.\n\n**Claim 3: $\\mathcal T$ is oppositely similar to $ABC$ ($A_1\\leftrightarrow A$, etc.).** The sides of $\\mathcal T$ at $A_1$ are $A_1C_1=\\ell_b\\ni A_c$ and $A_1B_1=\\ell_c\\ni A_b$. Using the concyclicity from Claim 2 and then $A_c\\in AB$, $A_b\\in AC$:\n$$\\measuredangle C_1A_1B_1=\\measuredangle A_cA_1A_b=\\measuredangle A_cAA_b=\\measuredangle(AB,AC)=-\\measuredangle CAB .$$\nSimilarly $\\measuredangle A_1B_1C_1=-\\measuredangle ABC$ and $\\measuredangle B_1C_1A_1=-\\measuredangle BCA$.\n\n**Conclusion.** Let $\\lambda=\\frac{B_1C_1}{BC}$ and let $H_1$, $O_1$ be the orthocentre and circumcentre of $\\mathcal T$. The similarity of Claim 3 maps $H$ to $H_1$, so $H_1A_1=\\lambda HA$, $H_1B_1=\\lambda HB$, $H_1C_1=\\lambda HC$. By Claim 2,\n$$\\frac{H_1A_1}{HA_1}=\\frac{H_1B_1}{HB_1}=\\frac{H_1C_1}{HC_1}=\\lambda .$$\nIf $H_1=H$ there is nothing to prove. Otherwise $\\lambda\\ne1$, since for $\\lambda=1$ the three vertices of $\\mathcal T$ would lie on the perpendicular bisector of $HH_1$. For $\\lambda\\ne1$, the locus $\\{Z: ZH_1=\\lambda ZH\\}$ is an Apollonius circle whose centre lies on line $HH_1$. It contains $A_1,B_1,C_1$, so it is the circumcircle of $\\mathcal T$, and its centre $O_1$ lies on $HH_1$. Hence $H$, $H_1$ and $O_1$ are collinear. ∎"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-isl-2023-g8",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Geometry",
+      "year": 2023,
+      "number": 8,
+      "url": "https://www.imo-official.org/assets/documents/problems/2023/IMO2023SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $ABC$ be an equilateral triangle. Points $A_1$, $B_1$, $C_1$ lie inside triangle $ABC$ such that triangle $A_1B_1C_1$ is scalene, $BA_1=A_1C$, $CB_1=B_1A$, $AC_1=C_1B$ and\n$$\\angle BA_1C+\\angle CB_1A+\\angle AC_1B=480^\\circ.$$\nLines $BC_1$ and $CB_1$ intersect at $A_2$; lines $CA_1$ and $AC_1$ intersect at $B_2$; and lines $AB_1$ and $BA_1$ intersect at $C_2$.\n\nProve that the circumcircles of triangles $AA_1A_2$, $BB_1B_2$, $CC_1C_2$ have two common points.",
+    "image": null,
+    "choices": null,
+    "answer": "Proof: $A_1$ is the circumcentre of $A_2BC$ (etc.), which makes $B_1C_1B_2C_2$, $C_1A_1C_2A_2$, $A_1B_1A_2B_2$ cyclic; each circle of the problem is a locus $\\mathrm{Pow}(P,\\omega)=k\\,\\mathrm{Pow}(P,\\omega')$ for two of these, with $k_ak_bk_c=1$, so a common point of two of them lies on the third; the crossing of the diagonals $A_1A_2$, $B_1B_2$ shows that two of them do meet twice.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [],
+    "topics": [
+      "geometry",
+      "trigonometry"
+    ],
+    "difficulty": 3,
+    "duplicateOf": "imo-2023-06",
+    "reviewNote": null
+  },
+  {
+    "id": "imo-isl-2023-n1",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Number Theory",
+      "year": 2023,
+      "number": 1,
+      "url": "https://www.imo-official.org/assets/documents/problems/2023/IMO2023SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Determine all positive, composite integers $n$ that satisfy the following property: if the positive divisors of $n$ are $1=d_1<d_2<\\dots<d_k=n$, then $d_i$ divides $d_{i+1}+d_{i+2}$ for every $1\\le i\\le k-2$.",
+    "image": null,
+    "choices": null,
+    "answer": "Exactly the prime powers $n=p^r$ with $p$ prime and $r\\ge2$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 1,
+    "duplicateOf": "imo-2023-01",
+    "reviewNote": null
+  },
+  {
+    "id": "imo-isl-2023-n2",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Number Theory",
+      "year": 2023,
+      "number": 2,
+      "url": "https://www.imo-official.org/assets/documents/problems/2023/IMO2023SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Determine all pairs $(a,p)$ of positive integers with $p$ prime such that $p^a+a^4$ is a perfect square.",
+    "image": null,
+    "choices": null,
+    "answer": "$(a,p)=(1,3),(2,3),(6,3),(9,3)$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Factor a difference of squares",
+        "body": "Let $p^a+a^4=b^2$ with $b>0$. Then $p^a=(b-a^2)(b+a^2)$, so $b-a^2=p^x$ and $b+a^2=p^{a-x}$ with $0\\le x<a-x$. Subtracting,\n$$2a^2=p^{a-x}-p^x=p^x\\big(p^{a-2x}-1\\big),\\qquad a-2x\\ge1. \\tag{1}$$\n\n**Case $p=2$.** Then $a^2=2^{x-1}(2^{a-2x}-1)$ with an odd second factor, so $x-1=2v$ where $2^v\\,\\|\\,a$, and $2^{a-2x}-1=(a/2^v)^2$ is an odd square. If $a-2x\\ge2$, then $2^{a-2x}-1\\equiv3\\pmod4$ is not a square. So $a-2x=1$, which gives $a/2^v=1$, i.e. $a=2^v$, and $a=2x+1=4v+3$. But $2^v=4v+3$ is impossible: for $v=0$ it reads $1=3$, and for $v\\ge1$ the left side is even and the right side odd. No solutions.\n\n**Case $p$ odd.** In (1), $p\\nmid p^{a-2x}-1$, so $x=v_p(2a^2)=2m$ where $m=v_p(a)$. Write $a=p^mn$ with $p\\nmid n$. Dividing (1) by $p^{2m}$:\n$$2n^2+1=p^{e},\\qquad e=a-4m=p^mn-4m\\ge1. \\tag{2}$$\nWe use the inequality $3^n\\ge2n^2+1$ for all $n\\ge1$, with equality exactly for $n=1,2$ (true for $n=1,2,3$, and $3^{n+1}\\ge 6n^2+3\\ge 2(n+1)^2+1$).\n\n*$p\\ge5$.* Then $p^m\\ge5^m\\ge4m+1$, so $e\\ge p^mn-p^m+1=p^m(n-1)+1\\ge n$, and $p^e\\ge5^n>3^n\\ge2n^2+1$, contradicting (2).\n\n*$p=3$.* If $e>n$ then $3^e>3^n\\ge2n^2+1$, impossible; and $e=n$ requires $3^n=2n^2+1$, i.e. $n\\in\\{1,2\\}$. Now:\n- $m=0$: $e=n$, so $n=1$ or $2$: $a=1$ or $a=2$.\n- $m=1$: $e=3n-4$. We need $e\\ge1$, so $n\\ge2$; for $n\\ge3$, $e>n$. So $n=2$, $e=2=n$ works: $a=3\\cdot2=6$.\n- $m=2$: $e=9n-8\\ge n$ with equality only for $n=1$, which works: $a=9$.\n- $m\\ge3$: $3^m\\ge4m+3$, so $e\\ge3^m(n-1)+3>n$, impossible.\n\n**Check.** $3+1=2^2$, $9+16=5^2$, $3^6+6^4=729+1296=2025=45^2$, $3^9+9^4=19683+6561=26244=162^2$.\n\n**Answer:** $(a,p)=(1,3),(2,3),(6,3),(9,3)$. ∎"
+      }
+    ],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-isl-2023-n3",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Number Theory",
+      "year": 2023,
+      "number": 3,
+      "url": "https://www.imo-official.org/assets/documents/problems/2023/IMO2023SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "For positive integers $n$ and $k\\ge2$ define $E_k(n)$ as the greatest exponent $r$ such that $k^r$ divides $n!$. Prove that there are infinitely many $n$ such that $E_{10}(n)>E_9(n)$ and infinitely many $m$ such that $E_{10}(m)<E_9(m)$.",
+    "image": null,
+    "choices": null,
+    "answer": "$E_{10}(n)=v_5(n!)$ and $E_9(n)=\\lfloor v_3(n!)/2\\rfloor$. Take $n=5^{2l-1}$ (then $v_5(n!)=\\frac{n-1}4$ while $n\\equiv2\\pmod3$ makes $v_3(n!)<\\frac n2-\\frac23$) and $m=3^{4l-2}$ (then $E_9(m)=\\frac{m-1}4$ while $m\\equiv4\\pmod5$ makes $v_5(m!)<\\frac m4-\\frac45$).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Legendre's formula with special $n$",
+        "body": "By Legendre, $v_p(n!)=\\sum_{i\\ge1}\\lfloor n/p^i\\rfloor$. Since $9^r\\mid n!$ iff $2r\\le v_3(n!)$, we have $E_9(n)=\\big\\lfloor v_3(n!)/2\\big\\rfloor$; since $v_5(n!)\\le v_2(n!)$, we have $E_{10}(n)=\\min\\big(v_2(n!),v_5(n!)\\big)=v_5(n!)$. Note that $\\lfloor n/p^i\\rfloor\\le n/p^i$ for all $i$, with strict inequality for large $i$.\n\n**$E_{10}>E_9$ infinitely often.** Let $n=5^{2l-1}$ ($l\\ge1$). Then\n$$E_{10}(n)=5^{2l-2}+\\dots+5+1=\\frac{n-1}4 .$$\nSince $5^{\\text{odd}}\\equiv2\\pmod3$, $\\lfloor n/3\\rfloor=\\frac{n-2}3$, hence\n$$v_3(n!)<\\frac{n-2}3+\\frac n9+\\frac n{27}+\\dots=\\frac{n-2}3+\\frac n6=\\frac n2-\\frac23,$$\nand $E_9(n)\\le\\frac{v_3(n!)}2<\\frac n4-\\frac13<\\frac{n-1}4=E_{10}(n)$.\n\n**$E_{10}<E_9$ infinitely often.** Let $m=3^{4l-2}=9^{2l-1}$ ($l\\ge1$). Then $v_3(m!)=3^{4l-3}+\\dots+3+1=\\frac{m-1}2$. As $9\\equiv1\\pmod4$, $m\\equiv1\\pmod4$, so $\\frac{m-1}2$ is even and $E_9(m)=\\frac{m-1}4$. As $9\\equiv-1\\pmod5$ and $2l-1$ is odd, $m\\equiv4\\pmod5$ and $\\lfloor m/5\\rfloor=\\frac{m-4}5$; hence\n$$E_{10}(m)=v_5(m!)<\\frac{m-4}5+\\frac m{25}+\\frac m{125}+\\dots=\\frac{m-4}5+\\frac m{20}=\\frac m4-\\frac45<\\frac{m-1}4=E_9(m).$$\n\nBoth families are infinite, which proves the statement. ∎"
+      }
+    ],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-isl-2023-n4",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Number Theory",
+      "year": 2023,
+      "number": 4,
+      "url": "https://www.imo-official.org/assets/documents/problems/2023/IMO2023SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "text",
+    "prompt": "Let $a_1,a_2,\\dots,a_n,b_1,b_2,\\dots,b_n$ be $2n$ positive integers such that the $n+1$ products\n$$a_1a_2a_3\\cdots a_n,\\quad b_1a_2a_3\\cdots a_n,\\quad b_1b_2a_3\\cdots a_n,\\quad\\dots,\\quad b_1b_2b_3\\cdots b_n$$\nform a strictly increasing arithmetic progression in that order. Determine the smallest positive integer that could be the common difference of such an arithmetic progression.",
+    "image": null,
+    "choices": null,
+    "answer": "n!",
+    "acceptedAnswers": [
+      "n factorial"
+    ],
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Compare consecutive differences",
+        "body": "Let $D>0$ be the common difference. Consecutive differences give\n$$D=(b_1-a_1)a_2a_3\\cdots a_n=b_1(b_2-a_2)a_3\\cdots a_n=\\dots=b_1b_2\\cdots b_{n-1}(b_n-a_n).$$\nAs $D>0$, $b_i>a_i$ for every $i$, so $b_i-a_i\\ge1$. Comparing the $i$-th and $(i+1)$-th expressions and cancelling the common positive factors,\n$$(b_i-a_i)\\,a_{i+1}=b_i\\,(b_{i+1}-a_{i+1})\\qquad(1\\le i\\le n-1).$$\nPut $r_i=\\dfrac{a_i}{b_i-a_i}>0$. The relation says\n$$r_{i+1}=\\frac{a_{i+1}}{b_{i+1}-a_{i+1}}=\\frac{b_i}{b_i-a_i}=1+r_i ,$$\nso $r_i=r_1+(i-1)>i-1$. Since $b_i-a_i\\ge1$, $a_i\\ge r_i>i-1$, hence $a_i\\ge i$. Therefore\n$$D=(b_1-a_1)a_2a_3\\cdots a_n\\ge1\\cdot2\\cdot3\\cdots n=n!.$$\n\n**Equality.** Take $a_i=i$ and $b_i=i+1$. The $j$-th product ($j=0,\\dots,n$) is $b_1\\cdots b_j\\,a_{j+1}\\cdots a_n=(j+1)!\\cdot\\frac{n!}{j!}=(j+1)\\,n!$, an arithmetic progression with common difference $n!$.\n\n**Answer: $n!$**"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "sequences-series"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null,
+    "answerDisplay": "$n!$"
+  },
+  {
+    "id": "imo-isl-2023-n5",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Number Theory",
+      "year": 2023,
+      "number": 5,
+      "url": "https://www.imo-official.org/assets/documents/problems/2023/IMO2023SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $a_1<a_2<a_3<\\cdots$ be positive integers such that $a_{k+1}$ divides $2(a_1+a_2+\\dots+a_k)$ for every $k\\ge1$. Suppose that for infinitely many primes $p$, there exists $k$ such that $p$ divides $a_k$. Prove that for every positive integer $n$, there exists $k$ such that $n$ divides $a_k$.",
+    "image": null,
+    "choices": null,
+    "answer": "With $b_k=2(a_1+\\dots+a_{k-1})/a_k$ one gets $b_{k+1}a_{k+1}=(b_k+2)a_k$, so $b_{k+1}\\le b_k+1$ and $(b_k)$ is unbounded. The first time $b_{k+1}$ reaches $n$ (for $n>b_2$), $b_k=n-1$ and $na_{k+1}=(n+1)a_k$, so $n\\mid a_k$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "The quotient sequence",
+        "body": "For $k\\ge2$ let $b_k=\\dfrac{2(a_1+\\dots+a_{k-1})}{a_k}$, a positive integer. Subtracting $b_ka_k=2(a_1+\\dots+a_{k-1})$ from $b_{k+1}a_{k+1}=2(a_1+\\dots+a_k)$ gives\n$$b_{k+1}a_{k+1}=(b_k+2)\\,a_k\\qquad(k\\ge2). \\tag{1}$$\n\n**Claim 1: $b_{k+1}\\le b_k+1$.** From (1) and $a_k<a_{k+1}$: $b_{k+1}a_{k+1}<(b_k+2)a_{k+1}$, so $b_{k+1}<b_k+2$.\n\n**Claim 2: $(b_k)$ is unbounded.** By (1), $a_{k+1}\\mid a_k(b_k+2)$, so every prime factor of $a_{k+1}$ divides $a_k$ or $b_k+2$. By induction, every prime dividing some $a_k$ divides $a_1$, $a_2$, or some $b_j+2$. If all $b_j\\le B$, these primes are among the prime factors of $a_1$, $a_2$ and the primes $\\le B+2$: finitely many, contradicting the hypothesis.\n\n**Conclusion.** Let $n$ be given. If $n'$ is a multiple of $n$ and $n'\\mid a_k$, then $n\\mid a_k$; so we may replace $n$ by a multiple and assume $n>b_2$. By Claim 2 there is a smallest $k\\ge2$ with $b_{k+1}\\ge n$. Then $b_k<n$ (by minimality if $k\\ge3$, and because $b_2<n$ if $k=2$), and by Claim 1 $b_{k+1}\\le b_k+1\\le n$. Hence $b_{k+1}=n$ and $b_k=n-1$, and (1) becomes\n$$n\\,a_{k+1}=(n+1)\\,a_k .$$\nAs $\\gcd(n,n+1)=1$, $n$ divides $a_k$. ∎"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "sequences-series"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-isl-2023-n6",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Number Theory",
+      "year": 2023,
+      "number": 6,
+      "url": "https://www.imo-official.org/assets/documents/problems/2023/IMO2023SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "A sequence of integers $a_0,a_1,a_2,\\dots$ is called *kawaii*, if $a_0=0$, $a_1=1$, and, for any positive integer $n$, we have\n$$(a_{n+1}-3a_n+2a_{n-1})(a_{n+1}-4a_n+3a_{n-1})=0.$$\nAn integer is called kawaii if it belongs to a kawaii sequence.\n\nSuppose that two consecutive positive integers $m$ and $m+1$ are both kawaii (not necessarily belonging to the same kawaii sequence). Prove that $3$ divides $m$, and that $m/3$ is kawaii.",
+    "image": null,
+    "choices": null,
+    "answer": "Every term is $\\equiv a_n$ or $a_{n-1}$ modulo $2$ and modulo $3$, so all kawaii integers are $\\equiv0,1\\pmod3$, forcing $3\\mid m$. A sequence with $a_2=3$ has all terms odd; one with $a_2=4$ has all terms $\\equiv1\\pmod3$. So $m$ is odd, $m+1$ is even and lies in a sequence with $a_2=4$; then $a'_n=(a_{n+1}-1)/3$ is kawaii and contains $m/3$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Residues mod 2 and mod 3",
+        "body": "The condition says $a_{n+1}=3a_n-2a_{n-1}$ or $a_{n+1}=4a_n-3a_{n-1}$. Modulo $3$ these are $\\equiv a_{n-1}$ and $\\equiv a_n$; modulo $2$ they are $\\equiv a_n$ and $\\equiv a_{n-1}$. So in both moduli each term is congruent to one of the two previous terms.\n\n**$3\\mid m$.** Since $a_0=0$ and $a_1=1$, every term of a kawaii sequence is $\\equiv0$ or $1\\pmod3$. Neither $m$ nor $m+1$ is $\\equiv2\\pmod3$, so $m\\not\\equiv2$ and $m\\not\\equiv1$, i.e. $m\\equiv0\\pmod3$.\n\n**Two kinds of sequences.** Always $a_2\\in\\{3,4\\}$.\n- If $a_2=3$: $a_1\\equiv a_2\\equiv1\\pmod2$, and by the remark every later term is odd. So $a_n$ is odd for all $n\\ge1$.\n- If $a_2=4$: $a_1\\equiv a_2\\equiv1\\pmod3$, so $a_n\\equiv1\\pmod3$ for all $n\\ge1$.\n\nTake a kawaii sequence containing $m$, say $m=a_t$. As $m>0$ and $m\\ne1$, $t\\ge2$, and since $m\\equiv0\\pmod3$ the sequence has $a_2=3$; hence $m$ is odd and $m+1$ is even.\n\nNow take a kawaii sequence containing $m+1=a_t$ (again $t\\ge2$, as $m+1\\ge4$). Since $m+1$ is even, this sequence has $a_2=4$, so $a_n\\equiv1\\pmod3$ for all $n\\ge1$.\n\n**Divide by 3.** Define $a'_n=\\dfrac{a_{n+1}-1}3$ for $n\\ge0$, integers. Then $a'_0=0$, $a'_1=\\frac{4-1}3=1$, and since $1-3+2=0$ and $1-4+3=0$,\n$$a'_{n+1}-3a'_n+2a'_{n-1}=\\frac{a_{n+2}-3a_{n+1}+2a_n}3,\\qquad a'_{n+1}-4a'_n+3a'_{n-1}=\\frac{a_{n+2}-4a_{n+1}+3a_n}3,$$\nso the product of these is $\\frac19$ times a product that vanishes. Thus $(a'_n)$ is kawaii, and $a'_{t-1}=\\frac{(m+1)-1}3=\\frac m3$. So $m/3$ is kawaii. ∎"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "sequences-series"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-isl-2023-n7",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Number Theory",
+      "year": 2023,
+      "number": 7,
+      "url": "https://www.imo-official.org/assets/documents/problems/2023/IMO2023SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $a,b,c,d$ be positive integers satisfying\n$$\\frac{ab}{a+b}+\\frac{cd}{c+d}=\\frac{(a+b)(c+d)}{a+b+c+d}.$$\nDetermine all possible values of $a+b+c+d$.",
+    "image": null,
+    "choices": null,
+    "answer": "Exactly the positive integers that are not square-free. ($a,b,c,d=\\ell,k\\ell,k\\ell,k^2\\ell$ gives $\\ell(k+1)^2$; conversely every prime factor of $S=a+b+c+d$ divides both $a+b$ and $c+d$, so a square-free $S$ would divide $a+b<S$.)",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Construction and a divisibility argument",
+        "body": "**All non-square-free values occur.** For positive integers $k,\\ell$ take $a=\\ell$, $b=k\\ell$, $c=k\\ell$, $d=k^2\\ell$. Then\n$$\\frac{ab}{a+b}+\\frac{cd}{c+d}=\\frac{k\\ell^2}{(1+k)\\ell}+\\frac{k^3\\ell^2}{k(1+k)\\ell}=\\frac{k\\ell}{k+1}+\\frac{k^2\\ell}{k+1}=k\\ell,$$\n$$\\frac{(a+b)(c+d)}{a+b+c+d}=\\frac{(1+k)\\ell\\cdot k(1+k)\\ell}{(1+k)^2\\ell}=k\\ell ,$$\nso the equation holds, with $a+b+c+d=\\ell(k+1)^2$. Every positive integer that is not square-free can be written as $\\ell s^2$ with $s\\ge2$; take $k=s-1\\ge1$.\n\n**Square-free values are impossible.** Let $S=a+b+c+d$. Multiplying the equation by $(a+b)(c+d)S$ gives\n$$\\big(ab(c+d)+cd(a+b)\\big)\\,S=(a+b)^2(c+d)^2 .$$\nLet $p$ be a prime dividing $S$. Then $p\\mid(a+b)^2(c+d)^2$, so $p$ divides $a+b$ or $c+d$; since $p$ divides their sum $S$, it divides both. If $S$ were square-free, $S$ would be the product of its distinct prime factors, each dividing $a+b$, hence $S\\mid a+b$. But $0<a+b<S$, a contradiction. (Note $S\\ge4>1$.)\n\n**Answer:** the possible values of $a+b+c+d$ are exactly the positive integers that are not square-free (divisible by $q^2$ for some integer $q\\ge2$). ∎"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "algebra"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-isl-2023-n8",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Number Theory",
+      "year": 2023,
+      "number": 8,
+      "url": "https://www.imo-official.org/assets/documents/problems/2023/IMO2023SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $\\mathbb Z_{>0}$ be the set of positive integers. Determine all functions $f:\\mathbb Z_{>0}\\to\\mathbb Z_{>0}$ such that\n$$f^{bf(a)}(a+1)=(a+1)f(b)$$\nholds for all $a,b\\in\\mathbb Z_{>0}$, where $f^k(n)=f(f(\\cdots f(n)\\cdots))$ denotes the composition of $f$ with itself $k$ times.",
+    "image": null,
+    "choices": null,
+    "answer": "$f(n)=n+1$ (show $f$ is injective with no periodic points and image $\\mathbb Z_{\\ge2}$; then $g(n)=f(f(n)-1)$ is linear, forcing $g(n)=n+1$ and $f^b(a)=f^a(b)$).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Injectivity, image, then linearity",
+        "body": "Let $P(a,b)$ denote the equation $f^{bf(a)}(a+1)=(a+1)f(b)$. Say $x$ is a *descendant* of $y$ if $x=f^j(y)$ for some $j\\ge1$.\n\n**Step 1: no periodic points $\\ge2$.** $P(a,1)$ gives $f^{f(a)}(a+1)=(a+1)f(1)$, so the image of $f$ is infinite. For $a\\ge2$, $P(a-1,b)$ gives $f^{bf(a-1)}(a)=af(b)$, which takes infinitely many values as $b$ varies; so the orbit $\\{f^j(a)\\}$ is infinite and $f^j(a)\\ne a$ for all $j\\ge1$ and $a\\ge2$.\n\n**Step 2: $f$ is injective.** Suppose $f(b)=f(c)$ with $b<c$. Then for any $a$,\n$$(a+1)f(c)=f^{cf(a)}(a+1)=f^{(c-b)f(a)}\\big(f^{bf(a)}(a+1)\\big)=f^{(c-b)f(a)}\\big((a+1)f(b)\\big)=f^{(c-b)f(a)}\\big((a+1)f(c)\\big),$$\nso $(a+1)f(c)\\ge2$ is periodic, contradicting Step 1.\n\n**Step 3: $1\\notin f(\\mathbb Z_{>0})$.** If $f(b)=1$, then $P(a,b)$ gives $f^{bf(a)}(a+1)=a+1$, contradicting Step 1. Consequently $f^j(1)\\ne1$ for $j\\ge1$ too, so no positive integer is periodic.\n\n**Step 4: comparability.** For $a,b\\ge2$, either $a=b$ or one is a descendant of the other. Indeed fix $c$ and let $u=f^{cf(a-1)-1}(a)$, $w=f^{cf(b-1)-1}(b)$; by $P(a-1,c)$ and $P(b-1,c)$, $f(u)=af(c)$ and $f(w)=bf(c)$. Then\n$$f^{wf(a-1)}(a)=af(w)=abf(c)=bf(u)=f^{uf(b-1)}(b)$$\nby $P(a-1,w)$ and $P(b-1,u)$. By injectivity we can cancel common applications of $f$: if the exponents are equal, $a=b$; if, say, the left exponent is larger by $j$, we get $f^j(a)=b$, so $b$ is a descendant of $a$ (and symmetrically).\n\n**Step 5: $f(\\mathbb Z_{>0})=\\mathbb Z_{\\ge2}$.** Let $a\\ge2$ and $b=f(1)\\ge2$. If $a\\ne b$ and $a$ is not a descendant of $b$, then by Step 4 $b=f^j(a)$ for some $j\\ge1$, i.e. $f(1)=f(f^{j-1}(a))$; injectivity gives $1=f^{j-1}(a)$, which forces $j=1$ and $a=1$ (Step 3), a contradiction. So $a=f(1)$ or $a$ is a descendant of $f(1)$; either way $a$ is in the image.\n\n**Step 6: $g(n)=f(f(n)-1)$ is linear.** For any $a,b$, using $P(f(a)-1,b)$,\n$$f^{bg(a)+1}(a)=f^{bf(f(a)-1)}(f(a))=f(a)f(b),$$\nwhich is symmetric in $a,b$; so $f^{bg(a)+1}(a)=f^{ag(b)+1}(b)$, and by injectivity $f^{bg(a)}(a)=f^{ag(b)}(b)$. With $n_{a,b}=bg(a)-ag(b)$ this gives $f^{N+n_{a,b}}(a)=f^N(b)$ for all large $N$. Chaining for any $a,b,c$,\n$$f^{N+n_{a,b}+n_{b,c}+n_{c,a}}(a)=f^N(a)\\quad\\text{for large }N,$$\nand since there are no periodic points, $n_{a,b}+n_{b,c}+n_{c,a}=0$, i.e.\n$$(b-c)g(a)+(c-a)g(b)+(a-b)g(c)=0 .$$\nWith $(a,b,c)=(n,n+1,n+2)$ this reads $-g(n)+2g(n+1)-g(n+2)=0$, so $g(n)=Cn+D$ for integers $C,D$.\n\n**Step 7: $g(n)=n+1$.** By Step 5, $f(n)-1$ runs over all of $\\mathbb Z_{>0}$, so $g$ is injective (composition of injective maps) with image exactly $f(\\mathbb Z_{>0})=\\mathbb Z_{\\ge2}$. An injective arithmetic progression of positive integers whose values are exactly $2,3,4,\\dots$ must have $C=1$ and smallest value $g(1)=2$, so $g(n)=n+1$.\n\n**Step 8: conclusion.** Now $f^{b(a+1)}(a)=f^{a(b+1)}(b)$, and cancelling $ab$ applications of $f$ (injectivity) gives $f^b(a)=f^a(b)$. With $a=1$, $b=n$: $f(n)=f^n(1)=f(f^{n-1}(1))$, so $f^{n-1}(1)=n$ by injectivity, and then $f(n)=f^n(1)=n+1$.\n\n**Check.** If $f(n)=n+1$ then $f^{b(a+1)}(a+1)=a+1+b(a+1)=(a+1)(b+1)=(a+1)f(b)$.\n\n**Answer:** $f(n)=n+1$. ∎"
+      }
+    ],
+    "topics": [
+      "functional-equations",
+      "number-theory"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

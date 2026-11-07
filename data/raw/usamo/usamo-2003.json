@@ -1,0 +1,209 @@
+[
+  {
+    "id": "usamo-usamo-2003-01",
+    "bank": "usamo",
+    "source": {
+      "contest": "USAMO",
+      "paper": "USAMO 2003",
+      "year": 2003,
+      "number": 1,
+      "url": "https://web.evanchen.cc/exams/USAMO-2003-notes.pdf"
+    },
+    "grade": "10-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Prove that for every positive integer $n$ there exists an $n$-digit number divisible by $5^n$ all of whose digits are odd.",
+    "image": null,
+    "choices": null,
+    "answer": "Induction: if $M$ works for $n$, then exactly one of $d\\cdot 10^n + M$ ($d = 1, 3, 5, 7, 9$) is divisible by $5^{n+1}$, because the quotients by $5^n$ are $d\\cdot 2^n + M/5^n$, which run through all residues mod $5$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Prepend a digit",
+        "body": "We use induction on $n$. For $n = 1$ take $5$.\n\nSuppose $M$ is an $n$-digit number with all digits odd and $5^n \\mid M$. For $d \\in \\{1, 3, 5, 7, 9\\}$ let\n$$N_d = d\\cdot 10^n + M.$$\n$N_d$ has $n + 1$ digits: the digit $d$ followed by the $n$ digits of $M$. All of them are odd. Since $10^n = 2^n5^n$,\n$$\\frac{N_d}{5^n} = d\\cdot 2^n + \\frac{M}{5^n}.$$\nThe five digits $1, 3, 5, 7, 9$ are $1, 3, 0, 2, 4 \\pmod 5$, i.e. all residues mod $5$. Multiplying by $2^n$ (invertible mod $5$) and adding the constant $M/5^n$ still gives all five residues. So for exactly one $d$ we have $5 \\mid N_d/5^n$, i.e. $5^{n+1} \\mid N_d$. That $N_d$ works for $n + 1$. ∎\n\n(Example: $5,\\ 75,\\ 375,\\ 9375,\\ 59375, \\dots$)"
+      }
+    ],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamo-usamo-2003-02",
+    "bank": "usamo",
+    "source": {
+      "contest": "USAMO",
+      "paper": "USAMO 2003",
+      "year": 2003,
+      "number": 2,
+      "url": "https://web.evanchen.cc/exams/USAMO-2003-notes.pdf"
+    },
+    "grade": "10-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "A convex polygon $\\mathcal{P}$ in the plane is dissected into smaller convex polygons by drawing all of its diagonals. The lengths of all sides and all diagonals of the polygon $\\mathcal{P}$ are rational numbers. Prove that the lengths of all sides of all polygons in the dissection are also rational numbers.",
+    "image": null,
+    "choices": null,
+    "answer": "It suffices to show: in a convex quadrilateral $XZYW$ with rational sides and diagonals, the diagonal $XY$ is cut by $ZW$ at a rational distance from $X$. Use coordinates with $XY$ on the $x$-axis: $z_1, w_1, z_2^2, w_2^2, z_2w_2$ are rational, hence so is $w_2/z_2$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Reduce to a quadrilateral, then coordinates",
+        "body": "**Reduction.** Each side of a small polygon lies on a side or a diagonal $XY$ of $\\mathcal P$. It is a segment $UV$ between two consecutive marked points on $XY$, where the marked points are $X$, $Y$, and the points where $XY$ crosses other diagonals. (Sides of $\\mathcal P$ have no interior crossings.) With $X, U, V, Y$ in this order, $UV = XV - XU$. So it suffices to prove:\n\n> If diagonals $XY$ and $ZW$ of $\\mathcal P$ cross at a point $A$, then $XA$ is rational.\n\nThe four vertices form a convex quadrilateral $XZYW$ whose four sides and two diagonals are sides or diagonals of $\\mathcal P$, so all six distances are rational.\n\n**Coordinates.** Put $X = (0, 0)$ and $Y = (\\delta, 0)$ with $\\delta = XY \\in \\mathbb Q$. Since the diagonals cross, $Z$ and $W$ lie on opposite sides of line $XY$: $Z = (z_1, z_2)$ with $z_2 > 0$, and $W = (w_1, w_2)$ with $w_2 < 0$.\n\n- From $XZ^2 = z_1^2 + z_2^2$ and $YZ^2 = (z_1 - \\delta)^2 + z_2^2$ we get $z_1 = \\dfrac{XZ^2 + \\delta^2 - YZ^2}{2\\delta} \\in \\mathbb Q$, and then $z_2^2 = XZ^2 - z_1^2 \\in \\mathbb Q$.\n- In the same way $w_1 \\in \\mathbb Q$ and $w_2^2 \\in \\mathbb Q$.\n- $ZW^2 = (z_1 - w_1)^2 + z_2^2 + w_2^2 - 2z_2w_2$, so $z_2w_2 \\in \\mathbb Q$.\n\nHence $\\lambda := \\dfrac{w_2}{z_2} = \\dfrac{z_2w_2}{z_2^2}$ is rational, and $\\lambda < 0$.\n\n**The crossing point.** $A$ is where segment $ZW$ meets the $x$-axis: $A = Z + \\mu(W - Z)$ with $z_2 + \\mu(w_2 - z_2) = 0$, i.e.\n$$\\mu = \\frac{z_2}{z_2 - w_2} = \\frac{1}{1 - \\lambda} \\in \\mathbb Q.$$\nThe $x$-coordinate of $A$ is $z_1 + \\mu(w_1 - z_1) \\in \\mathbb Q$. Since $A$ lies on segment $XY$, which runs along the positive $x$-axis from $X$, this coordinate equals $XA$. So $XA$ is rational, which proves the claim and hence the problem. ∎"
+      },
+      {
+        "title": "Angles with a common square-free part (sketch)",
+        "body": "After the same reduction, work in a convex quadrilateral $ABCD$ with rational sides and diagonals. By the law of cosines, every angle $\\theta$ formed by three of the four vertices has $\\cos\\theta \\in \\mathbb Q$, hence $\\sin^2\\theta \\in \\mathbb Q$. Call two such angles *equivalent* if the ratio of their sines is rational.\n\n- From $\\cos\\angle BAD = \\cos\\angle BAC\\cos\\angle CAD - \\sin\\angle BAC\\sin\\angle CAD$, the product $\\sin\\angle BAC\\sin\\angle CAD$ is rational, so these two angles are equivalent. Then $\\sin\\angle BAD = \\sin\\angle BAC\\cos\\angle CAD + \\cos\\angle BAC\\sin\\angle CAD$ shows that $\\angle BAD$ is equivalent to them as well.\n- By the law of sines in a triangle with rational sides, its three angles are equivalent.\n\nChaining these facts, all twelve angles are equivalent. If the diagonals meet at $P$, the law of sines in triangle $APB$ gives $AP = AB\\cdot\\frac{\\sin\\angle ABP}{\\sin\\angle APB}$. Here $\\angle APB$ is supplementary to $\\angle PAB + \\angle PBA$, and its sine $\\sin(\\angle PAB + \\angle PBA)$ is equivalent to the others by the same addition-formula argument. So $AP$ is rational. ∎"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamo-usamo-2003-03",
+    "bank": "usamo",
+    "source": {
+      "contest": "USAMO",
+      "paper": "USAMO 2003",
+      "year": 2003,
+      "number": 3,
+      "url": "https://web.evanchen.cc/exams/USAMO-2003-notes.pdf"
+    },
+    "grade": "10-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $n$ be a positive integer. For every sequence of integers\n$$A = (a_0, a_1, a_2, \\dots, a_n)$$\nsatisfying $0 \\le a_i \\le i$, for $i = 0, \\dots, n$, we define another sequence\n$$t(A) = (t(a_0), t(a_1), t(a_2), \\dots, t(a_n))$$\nby setting $t(a_i)$ to be the number of terms in the sequence $A$ that precede the term $a_i$ and are different from $a_i$. Show that, starting from any sequence $A$ as above, fewer than $n$ applications of the transformation $t$ lead to a sequence $B$ such that $t(B) = B$.",
+    "image": null,
+    "choices": null,
+    "answer": "Strong induction on $n$. If $A$ begins $0, 1$, then $t(A) = (0, 1 + A')$ for a valid shorter sequence $A'$, and $t$ acts on the tail like $t$ on $A'$. If $A$ begins with $k \\ge 2$ zeros, then after two steps $t^2(A) = (0, \\dots, 0, k + A'')$ with the same kind of conjugacy, and $A''$ has length $n - k + 1$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Peel off a prefix and induct",
+        "body": "Call $A = (a_0, \\dots, a_n)$ with $0 \\le a_i \\le i$ a *valid sequence of size $n$*. Note that $t(A)$ is again valid of size $n$ (at most $i$ terms precede $a_i$), and $t(A)_i$ depends only on $a_0, \\dots, a_i$. Let $P(n)$ be the statement: for every valid $A$ of size $n$, $t^m(A)$ is a fixed point of $t$ for some $0 \\le m \\le n - 1$. (Once a fixed point is reached it stays.) We prove $P(n)$ by strong induction.\n\n**Base $n = 1$.** $A = (0, a_1)$ with $a_1 \\in \\{0, 1\\}$. Then $t(A) = (0, 0)$ if $a_1 = 0$ and $(0, 1)$ if $a_1 = 1$. So $t(A) = A$ and $m = 0$ works.\n\n**Shift lemma.** Let $k \\ge 1$ and let $D = (\\underbrace{0, \\dots, 0}_{k}, k + y_0, k + y_1, \\dots, k + y_{\\ell})$, where $y = (y_0, \\dots, y_\\ell)$ is valid of size $\\ell$. Then\n$$t(D) = (\\underbrace{0, \\dots, 0}_{k}, k + t(y)_0, \\dots, k + t(y)_\\ell).$$\n*Proof.* Each of the first $k$ terms is preceded only by zeros, so its $t$-value is $0$. The term $k + y_j$ is nonzero, so it differs from all $k$ leading zeros. Among the terms $k + y_l$ ($l < j$), it differs from exactly $t(y)_j$ of them. So its $t$-value is $k + t(y)_j$. $\\square$\n\nIterating, $t^m(D) = (0^k, k + t^m(y))$, and $D' = (0^k, k + y)$ is a fixed point of $t$ exactly when $y$ is.\n\n**Inductive step ($n \\ge 2$).** Always $a_0 = 0$ and $a_1 \\in \\{0,1\\}$.\n\n*Case 1: $a_1 = 1$.* For $i \\ge 1$ the terms $a_0 = 0$ and $a_1 = 1$ differ, so at least one of them differs from $a_i$ (for $i = 1$, $a_0$ does). Hence $t(A)_i \\ge 1$ for $i \\ge 1$, and\n$$t(A) = (0, 1 + y_0, \\dots, 1 + y_{n-1}), \\qquad y_{i-1} = t(A)_i - 1.$$\nHere $0 \\le y_{i-1} \\le i - 1$, so $y$ is valid of size $n - 1 \\ge 1$. By $P(n-1)$, $t^{m}(y)$ is fixed for some $m \\le n - 2$. By the shift lemma (with $k = 1$), $t^{m+1}(A) = (0, 1 + t^m(y))$ is fixed, and $m + 1 \\le n - 1$.\n\n*Case 2: $a_1 = 0$.* If all $a_i = 0$, then $A$ is fixed. Otherwise let $k$ be the least index with $a_k \\ne 0$; then $k \\ge 2$ and $a_0 = \\dots = a_{k-1} = 0$.\n- If $k = n$: $t(A) = (0, \\dots, 0, n)$, which is fixed. One application suffices, and $1 \\le n - 1$.\n- If $2 \\le k < n$: in $t(A)$ the first $k$ entries are $0$. For $i \\ge k$, if $a_i \\ne 0$ then $a_i$ differs from the $k$ leading zeros, and if $a_i = 0$ (so $i > k$) then it differs from $a_k$. Either way $t(A)_i \\ge 1$. Applying $t$ again, each entry at index $i \\ge k$ is nonzero and so differs from the $k$ leading zeros, giving $t^2(A)_i \\ge k$. Thus\n$$t^2(A) = (0^k, k + y_0, \\dots, k + y_{n-k}), \\qquad y_j = t^2(A)_{k+j} - k \\in [0, j].$$\nSo $y$ is valid of size $n - k \\ge 1$. By $P(n-k)$, $t^m(y)$ is fixed for some $m \\le n - k - 1$, and by the shift lemma $t^{m+2}(A)$ is fixed with $m + 2 \\le n - k + 1 \\le n - 1$.\n\nIn all cases a fixed point is reached after at most $n - 1 < n$ applications. ∎\n\n*Remark.* The fixed points are exactly the sequences in which every term equals either the previous term or its own index, e.g. $(0,0,0,3,3,5,5,5)$."
+      }
+    ],
+    "topics": [
+      "sequences-series",
+      "logic",
+      "counting"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamo-usamo-2003-04",
+    "bank": "usamo",
+    "source": {
+      "contest": "USAMO",
+      "paper": "USAMO 2003",
+      "year": 2003,
+      "number": 4,
+      "url": "https://web.evanchen.cc/exams/USAMO-2003-notes.pdf"
+    },
+    "grade": "10-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $ABC$ be a triangle. A circle passing through $A$ and $B$ intersects segments $AC$ and $BC$ at $D$ and $E$, respectively. Lines $AB$ and $DE$ intersect at $F$, while lines $BD$ and $CF$ intersect at $M$. Prove that $MF = MC$ if and only if $MB \\cdot MD = MC^2$.",
+    "image": null,
+    "choices": null,
+    "answer": "By Ceva in triangle $BCF$ (cevians through $D$), $MF = MC \\iff AE \\parallel FC$. By the cyclic quadrilateral $ABED$, that is equivalent to $\\measuredangle MCD = \\measuredangle CBD$, i.e. to $MC$ being tangent to circle $BCD$, i.e. to $MC^2 = MB\\cdot MD$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Ceva, then a tangency",
+        "body": "Let $\\omega$ be the circle through $A, B, D, E$, with $D \\ne A, C$ and $E \\ne B, C$. We use directed angles $\\measuredangle(\\ell, m)$ between lines, modulo $180^\\circ$, and signed ratios along lines.\n\n**Configuration.** $D$ and $E$ lie strictly on $C$'s side of line $AB$, so segment $DE$ does not meet line $AB$. Hence $F$ lies on line $DE$ outside segment $DE$, so $F$ is outside $\\omega$. Then $F$ is not on segment $AB$, which lies inside the disk. So either $A$ lies between $F$ and $B$, or $B$ lies between $A$ and $F$.\n\n*$M$ lies outside segment $BD$.* If $A$ is between $F$ and $B$, then $D$ (strictly between $A$ and $C$) is inside triangle $FBC$. So the open segment $BD$ lies inside that triangle and cannot meet its side line $CF$. If $B$ is between $A$ and $F$, then line $BD$ meets triangle $AFC$ in exactly the segment $BD$ ($B \\in AF$, $D \\in AC$), whose interior lies inside the triangle and so again misses line $CF$. Also $M \\ne B, D$. Therefore $M$ lies on line $BD$ outside segment $BD$, so the lengths satisfy $MB\\cdot MD = \\overrightarrow{MB}\\cdot\\overrightarrow{MD}$, which is the power of $M$ with respect to any circle through $B$ and $D$.\n\n**Step 1: $MF = MC \\iff AE \\parallel FC$.** In triangle $BCF$, the lines $FE$ ($E \\in BC$), $CA$ ($A \\in FB$) and $BM$ ($M \\in CF$) all pass through $D$. By Ceva's theorem with signed ratios,\n$$\\frac{BA}{AF}\\cdot\\frac{FM}{MC}\\cdot\\frac{CE}{EB} = 1.$$\n$M$ lies on line $CF$, so $MF = MC$ iff $M$ is the midpoint of $CF$, iff $\\frac{FM}{MC} = 1$, iff $\\frac{BA}{AF} = \\frac{BE}{EC}$. By the intercept theorem (and its converse) in triangle $BFC$, this holds iff $AE \\parallel FC$.\n\n**Step 2: $AE \\parallel FC \\iff \\measuredangle MCD = \\measuredangle CBD$.** Lines $AE$ and $FC$ are parallel iff they make the same angle with line $AC$. Now\n$$\\measuredangle(AE, AC) = \\measuredangle EAD = \\measuredangle EBD = \\measuredangle CBD,$$\nusing $D \\in AC$, the cyclic quadrilateral $ABED$, and $C \\in BE$. Also\n$$\\measuredangle(FC, AC) = \\measuredangle(CM, CD) = \\measuredangle MCD.$$\nSo $AE \\parallel FC \\iff \\measuredangle MCD = \\measuredangle CBD$.\n\n**Step 3: tangency.** Let $\\gamma$ be the circle through $B, C, D$ (they are not collinear since $D \\notin BC$). By the tangent–chord angle theorem and its converse, $\\measuredangle MCD = \\measuredangle CBD$ holds iff line $MC$ is tangent to $\\gamma$ at $C$. If $O$ and $\\rho$ are the center and radius of $\\gamma$, tangency means $OC \\perp MC$, i.e. $MO^2 = MC^2 + \\rho^2$, i.e. the power of $M$ equals $MC^2$. By the configuration step, the power of $M$ with respect to $\\gamma$ is $MB \\cdot MD$. So the tangency holds iff $MB\\cdot MD = MC^2$.\n\nCombining the three steps: $MF = MC \\iff AE \\parallel FC \\iff MC \\text{ tangent to } \\gamma \\iff MB \\cdot MD = MC^2$. ∎"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamo-usamo-2003-05",
+    "bank": "usamo",
+    "source": {
+      "contest": "USAMO",
+      "paper": "USAMO 2003",
+      "year": 2003,
+      "number": 5,
+      "url": "https://web.evanchen.cc/exams/USAMO-2003-notes.pdf"
+    },
+    "grade": "10-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $a, b, c$ be positive real numbers. Prove that\n$$\\frac{(2a + b + c)^2}{2a^2 + (b + c)^2} + \\frac{(2b + c + a)^2}{2b^2 + (c + a)^2} + \\frac{(2c + a + b)^2}{2c^2 + (a + b)^2} \\le 8.$$",
+    "image": null,
+    "choices": null,
+    "answer": "Normalize $a + b + c = 3$. Each term is $\\frac{(x+3)^2}{2x^2 + (3-x)^2} \\le \\frac{4x + 4}{3}$ (the tangent line at $x = 1$), since the difference equals $\\frac{(x-1)^2(4x+3)}{\\dots} \\ge 0$. Summing gives $8$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Tangent line trick",
+        "body": "The inequality is homogeneous (each term is unchanged when $a, b, c$ are scaled), so assume $a + b + c = 3$. Then $b + c = 3 - a$ and the first term is\n$$\\frac{(a+3)^2}{2a^2 + (3-a)^2}, \\qquad 0 < a < 3,$$\nand similarly for the others.\n\n**Claim.** For $0 < x < 3$,\n$$\\frac{(x+3)^2}{2x^2 + (3-x)^2} \\le \\frac{4x + 4}{3}.$$\n*Proof.* The denominator $2x^2 + (3 - x)^2 = 3x^2 - 6x + 9 = 3(x-1)^2 + 6$ is positive. So the claim is equivalent to $(4x + 4)(3x^2 - 6x + 9) - 3(x+3)^2 \\ge 0$. Expanding,\n$$(4x+4)(3x^2 - 6x + 9) - 3(x + 3)^2 = 12x^3 - 12x^2 + 12x + 36 - 3x^2 - 18x - 27 = 12x^3 - 15x^2 - 6x + 9,$$\nand\n$$12x^3 - 15x^2 - 6x + 9 = 3(x - 1)^2(4x + 3) \\ge 0. \\qquad\\square$$\n(The right-hand side $\\frac{4x+4}{3}$ is the tangent line of the left-hand side at $x = 1$, which explains the double root.)\n\nSumming the claim for $x = a, b, c$:\n$$\\sum \\frac{(2a + b + c)^2}{2a^2 + (b+c)^2} \\le \\frac{4(a + b + c) + 12}{3} = \\frac{12 + 12}{3} = 8.$$\nEquality holds iff $a = b = c$. ∎"
+      }
+    ],
+    "topics": [
+      "inequalities",
+      "algebra"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamo-usamo-2003-06",
+    "bank": "usamo",
+    "source": {
+      "contest": "USAMO",
+      "paper": "USAMO 2003",
+      "year": 2003,
+      "number": 6,
+      "url": "https://web.evanchen.cc/exams/USAMO-2003-notes.pdf"
+    },
+    "grade": "10-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "At the vertices of a regular hexagon are written six nonnegative integers whose sum is $2003^{2003}$. Bert is allowed to make moves of the following form: he may pick a vertex and replace the number written there by the absolute value of the difference between the numbers written at the two neighboring vertices. Prove that Bert can make a sequence of moves, after which the number $0$ appears at all six vertices.",
+    "image": null,
+    "choices": null,
+    "answer": "Since the sum is odd, Bert can reach a \"great\" configuration: one alternate triangle holds odd numbers $p, q, r$, and each other vertex holds the difference of its two neighbours. Five moves turn a great configuration with odd entries $a \\le b \\le c$ into a great one with odd entries $a, b, |c - 2a|$, which has a smaller sum unless $a = b = c$, and $(t, 0, t, 0, t, 0)$ is easy to clear.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Anchor on an odd triangle",
+        "body": "Label the vertices $V_1, \\dots, V_6$ in order (indices mod $6$), and write $v_i$ for the number at $V_i$. A move at $V_i$ sets $v_i \\leftarrow |v_{i-1} - v_{i+1}|$. The vertices split into two \"triangles\", $\\{V_1, V_3, V_5\\}$ and $\\{V_2, V_4, V_6\\}$. Each vertex's two neighbours lie in the other triangle. Note that $|x - y| \\equiv x + y \\pmod 2$.\n\n**Definition.** A configuration is *great* if, for one of the two triangles, its three numbers are odd and each vertex of the other triangle holds the absolute difference of its two neighbours.\n\n**Claim 1. From any configuration with odd total, Bert can reach a great configuration.**\n\nThe two triangle sums add up to the odd total, so one triangle, say $\\{V_1, V_3, V_5\\}$, has an odd sum. It therefore contains one or three odd numbers.\n- *Three odd numbers.* Make a move at $V_2, V_4, V_6$. Their neighbours are in the unchanged triangle, so afterwards each holds the difference of its neighbours, and the configuration is great.\n- *Exactly one odd number,* say $v_1$ odd and $v_3, v_5$ even. Work mod $2$:\n  1. move at $V_2$ and $V_6$: they become $v_1 \\pm v_3$ and $v_1 \\pm v_5$, both odd;\n  2. move at $V_4$: it becomes $v_3 \\pm v_5$, even;\n  3. move at $V_3$ (neighbours $V_2$ odd, $V_4$ even) and at $V_5$ (neighbours $V_4$ even, $V_6$ odd): both become odd.\n\n  Now $v_1, v_3, v_5$ are all odd, and we finish as in the previous case.\n\n**Claim 2. From any great configuration, Bert can reach all zeros.**\n\nLet the odd triangle hold $a \\le b \\le c$ (all odd, hence $\\ge 1$). Using the symmetries of the hexagon (any arrangement of three values on a triangle can be rotated or reflected into any other), place them as follows, going around:\n$$(\\,a,\\ c - a,\\ c,\\ c - b,\\ b,\\ b - a\\,).$$\nWe induct on $a + b + c$.\n\n*If $a = b = c$,* the configuration is $(a, 0, a, 0, a, 0)$. Moving at the three vertices holding $a$ replaces each by $|0 - 0| = 0$. Done.\n\n*Otherwise $a < c$.* Make these five moves (each entry shown is the new value at the vertex moved):\n1. at the vertex holding $c$ (neighbours $c - a$, $c - b$): $|(c - a) - (c - b)| = b - a$, giving $(a,\\ c-a,\\ b-a,\\ c-b,\\ b,\\ b-a)$;\n2. at the vertex holding $c - b$ (neighbours $b - a$, $b$): $a$, giving $(a,\\ c-a,\\ b-a,\\ a,\\ b,\\ b-a)$;\n3. at the third vertex again (neighbours $c - a$, $a$): $|c - 2a|$, giving $(a,\\ c-a,\\ |c-2a|,\\ a,\\ b,\\ b-a)$;\n4. at the second vertex (neighbours $a$, $|c - 2a|$): $\\bigl||c-2a| - a\\bigr|$;\n5. at the fourth vertex (neighbours $|c-2a|$, $b$): $\\bigl|b - |c - 2a|\\bigr|$.\n\nNow the triangle holds $a, |c - 2a|, b$. These are odd, since $c - 2a$ is odd, and each other vertex holds the difference of its neighbours: the sixth vertex already holds $b - a$. So the configuration is great. Its odd entries sum to $a + b + |c - 2a|$, and $|c - 2a| < c$ because $c - 2a < c$ (as $a \\ge 1$) and $2a - c < c$ (as $a < c$). So the sum strictly decreases, and by induction Bert can reach all zeros.\n\n**Conclusion.** The total $2003^{2003}$ is odd. By Claim 1 Bert reaches a great configuration, and by Claim 2 he then reaches all zeros. ∎\n\n*Remark.* The odd total matters. For example, $(1,1,0,1,1,0)$ taken mod $2$ is preserved by every move, so from such a configuration Bert can never win. The great configurations keep him away from this trap."
+      }
+    ],
+    "topics": [
+      "games",
+      "number-theory",
+      "logic"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

@@ -1,0 +1,985 @@
+[
+ {
+  "id": "imo-isl-2015-a1",
+  "bank": "imo",
+  "source": {
+   "contest": "IMO Shortlist",
+   "paper": "Algebra",
+   "year": 2015,
+   "number": 1,
+   "url": "https://www.imo-official.org/assets/documents/problems/2015/IMO2015SL.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Suppose that a sequence $a_1, a_2, \\dots$ of positive real numbers satisfies\n$$a_{k+1} \\ge \\frac{k a_k}{a_k^2 + (k-1)}$$\nfor every positive integer $k$. Prove that $a_1 + a_2 + \\dots + a_n \\ge n$ for every $n \\ge 2$.",
+  "image": null,
+  "choices": null,
+  "answer": "Rewrite the condition as $a_k \\ge \\frac{k}{a_{k+1}} - \\frac{k-1}{a_k}$ and telescope to get $a_1+\\dots+a_m \\ge \\frac{m}{a_{m+1}}$; then induct on $n$, splitting into $a_{n+1}\\ge 1$ and $a_{n+1}<1$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Telescoping bound, then induction",
+    "body": "**A telescoping estimate.** Taking reciprocals in the condition (all terms are positive),\n$$\\frac{k}{a_{k+1}} \\le \\frac{a_k^2 + (k-1)}{a_k} = a_k + \\frac{k-1}{a_k}, \\qquad\\text{so}\\qquad a_k \\ge \\frac{k}{a_{k+1}} - \\frac{k-1}{a_k}.$$\nSumming this for $k = 1, 2, \\dots, m$, the right-hand side telescopes:\n$$a_1 + a_2 + \\dots + a_m \\ge \\Big(\\frac{1}{a_2} - \\frac{0}{a_1}\\Big) + \\Big(\\frac{2}{a_3} - \\frac{1}{a_2}\\Big) + \\dots + \\Big(\\frac{m}{a_{m+1}} - \\frac{m-1}{a_m}\\Big) = \\frac{m}{a_{m+1}}. \\tag{1}$$\n\n**Induction on $n$.** For $n = 2$, the condition with $k=1$ says $a_2 \\ge \\frac{1}{a_1}$, so $a_1 + a_2 \\ge a_1 + \\frac1{a_1} \\ge 2$ by AM–GM.\n\nAssume $a_1 + \\dots + a_n \\ge n$ for some $n \\ge 2$.\n\n- If $a_{n+1} \\ge 1$, then $a_1 + \\dots + a_n + a_{n+1} \\ge n + 1$ directly.\n- If $a_{n+1} < 1$, then by (1) with $m = n$,\n$$a_1 + \\dots + a_n + a_{n+1} \\ge \\frac{n}{a_{n+1}} + a_{n+1} = \\frac{n-1}{a_{n+1}} + \\Big(\\frac{1}{a_{n+1}} + a_{n+1}\\Big) > (n-1) + 2 = n+1,$$\nusing $\\frac{1}{a_{n+1}} > 1$ and AM–GM.\n\nIn both cases the statement holds for $n+1$, completing the induction. ∎\n\n*Remark.* Equality $a_1+\\dots+a_n=n$ forces $a_1 = a_2 = \\dots = a_n = 1$."
+   },
+   {
+    "title": "AM–GM on each step",
+    "body": "Start again from (1): $a_1 + \\dots + a_k \\ge \\frac{k}{a_{k+1}}$ for every $k \\ge 1$. Write $s_k = a_1 + \\dots + a_k$. Then $s_k \\cdot a_{k+1} \\ge k$, so by AM–GM applied to $s_k$ and $k a_{k+1}$,\n$$s_k + k a_{k+1} \\ge 2\\sqrt{k\\, s_k a_{k+1}} \\ge 2\\sqrt{k\\cdot k} = 2k .$$\nHence $s_{k+1} = s_k + a_{k+1} \\ge s_k + \\frac{2k - s_k}{k} = \\frac{(k-1)s_k}{k} + 2$.\n\nNow induct: $s_2 \\ge 2$ (as above). If $s_k \\ge k$ with $k\\ge 2$, then $s_{k+1} \\ge \\frac{(k-1)k}{k} + 2 = k+1$ (the bound is increasing in $s_k$ because $k-1 > 0$). So $s_n \\ge n$ for all $n \\ge 2$. ∎"
+   }
+  ],
+  "topics": [
+   "inequalities",
+   "sequences-series"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "imo-isl-2015-a2",
+  "bank": "imo",
+  "source": {
+   "contest": "IMO Shortlist",
+   "paper": "Algebra",
+   "year": 2015,
+   "number": 2,
+   "url": "https://www.imo-official.org/assets/documents/problems/2015/IMO2015SL.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Determine all functions $f:\\mathbb{Z}\\to\\mathbb{Z}$ with the property that\n$$f\\big(x - f(y)\\big) = f\\big(f(x)\\big) - f(y) - 1$$\nholds for all $x, y \\in \\mathbb{Z}$.",
+  "image": null,
+  "choices": null,
+  "answer": "Exactly two: the constant function $f(x) = -1$ and the successor function $f(x) = x + 1$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Find a point with value $-1$, then show $f$ is linear",
+    "body": "**Both functions work.** For $f \\equiv -1$: both sides equal $-1$ (the right side is $-1 + 1 - 1$). For $f(x) = x+1$: the left side is $x - (y+1) + 1 = x - y$ and the right side is $(x+2) - (y+1) - 1 = x - y$.\n\n**They are the only ones.** Let $f$ satisfy\n$$f\\big(x - f(y)\\big) = f\\big(f(x)\\big) - f(y) - 1. \\tag{1}$$\n\n*Step 1: $f$ takes the value $-1$.* Put $x = 0$, $y = f(0)$ in (1): $f\\big(-f(f(0))\\big) = f(f(0)) - f(f(0)) - 1 = -1$. So $z = -f(f(0))$ satisfies $f(z) = -1$.\n\n*Step 2: two simpler equations.* Putting $y = z$ in (1) gives $f(x+1) = f(f(x)) + 1 - 1$, i.e.\n$$f(x+1) = f\\big(f(x)\\big)\\quad\\text{for all } x. \\tag{2}$$\nSubstituting this back into (1):\n$$f\\big(x - f(y)\\big) = f(x+1) - f(y) - 1\\quad\\text{for all } x, y. \\tag{3}$$\n\n*Step 3: constant differences.* Take $y = x$ in (3): $f(x+1) - f(x) = f\\big(x - f(x)\\big) + 1$. By (2) applied at the point $x - 1 - f(x)$,\n$$f\\big(x - f(x)\\big) = f\\Big(f\\big(x - 1 - f(x)\\big)\\Big).$$\nBy (3) with $x - 1$ in place of $x$ and $y = x$, $f\\big(x-1-f(x)\\big) = f(x) - f(x) - 1 = -1$. Therefore\n$$f(x+1) - f(x) = f(-1) + 1 =: A$$\nis the same for every $x$. Induction in both directions gives $f(x) = Ax + B$ for all $x\\in\\mathbb Z$, where $B = f(0)$.\n\n*Step 4: determine $A, B$.* Plugging into (2): $A(x+1) + B = A(Ax + B) + B$ for all $x$. Comparing the coefficients of $x$ and the constant terms gives $A = A^2$ and $A + B = AB + B$, i.e. $A = AB$.\n\n- If $A = 1$, then $B = 1$, so $f(x) = x + 1$.\n- If $A = 0$, then $f \\equiv B$ is constant, and (1) reads $B = B - B - 1$, so $B = -1$.\n\nHence the only solutions are $f(x) = -1$ and $f(x) = x + 1$. ∎"
+   },
+   {
+    "title": "Injective or not",
+    "body": "Derive (2) and (3) as in the first solution.\n\n**If $f$ is injective**, then (2), $f(x+1) = f(f(x))$, gives $f(x) = x + 1$ for all $x$.\n\n**If $f$ is not injective**, pick $a > b$ with $f(a) = f(b)$. Applying (2) repeatedly, $f(a+1) = f(f(a)) = f(f(b)) = f(b+1)$, and by induction $f(a + m) = f(b + m)$ for all $m \\ge 0$. So the sequence $\\gamma_m = f(b+m)$ ($m\\ge 0$) is periodic with period $a - b$; in particular it takes finitely many values. Let $\\varphi$ and $\\psi$ be the smallest and largest of them; these are also the min and max of $f$ on $[b,\\infty)$.\n\nChoose $y$ with $f(y) = \\varphi$, then choose $x \\ge b$ with $x - \\varphi \\ge b$ and $f(x - \\varphi) = \\varphi$ (possible by periodicity). By (3),\n$$\\varphi \\le f(x+1) = f\\big(x - f(y)\\big) + f(y) + 1 = 2\\varphi + 1,$$\nso $\\varphi \\ge -1$. In the same way, choosing $y$ with $f(y) = \\psi$ and $x \\ge b$ with $x - \\psi \\ge b$ and $f(x-\\psi) = \\psi$, we get $\\psi \\ge f(x+1) = 2\\psi + 1$, so $\\psi \\le -1$. Since $\\varphi \\le \\psi$, we get $\\varphi = \\psi = -1$: $f(t) = -1$ for all $t \\ge b$.\n\nFinally, for any integer $y$, choose $x$ so large that $x + 1 \\ge b$ and $x - f(y) \\ge b$. Then (3) gives $f(y) = f(x+1) - f(x - f(y)) - 1 = (-1) - (-1) - 1 = -1$. So $f \\equiv -1$.\n\nTogether with the check above, the solutions are $f \\equiv -1$ and $f(x) = x+1$. ∎"
+   }
+  ],
+  "topics": [
+   "functional-equations"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "imo-isl-2015-a3",
+  "bank": "imo",
+  "source": {
+   "contest": "IMO Shortlist",
+   "paper": "Algebra",
+   "year": 2015,
+   "number": 3,
+   "url": "https://www.imo-official.org/assets/documents/problems/2015/IMO2015SL.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "text",
+  "prompt": "Let $n$ be a fixed positive integer. Find the maximum possible value of\n$$\\sum_{1 \\le r < s \\le 2n} (s - r - n)\\, x_r x_s ,$$\nwhere $-1 \\le x_i \\le 1$ for all $i = 1, 2, \\dots, 2n$.",
+  "image": null,
+  "choices": null,
+  "answer": "n(n-1)",
+  "acceptedAnswers": [
+   "n*(n-1)",
+   "n^2-n",
+   "n^2 - n",
+   "n(n - 1)",
+   "n² - n",
+   "n²-n"
+  ],
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Partial sums with signs",
+    "body": "Let $Z$ denote the sum. It is linear in each single variable $x_i$ (no term contains $x_i^2$), so for fixed values of the other variables it is maximised at $x_i = \\pm 1$. Changing the variables one at a time, we see that the maximum over the box $[-1,1]^{2n}$ is attained with all $x_i \\in \\{-1, 1\\}$; assume this from now on.\n\n**An identity.** For $i = 1, \\dots, 2n$ put\n$$y_i = \\sum_{r=1}^{i} x_r - \\sum_{r=i+1}^{2n} x_r .$$\nThen\n$$y_i^2 = \\sum_{r=1}^{2n} x_r^2 + 2\\sum_{r<s} \\varepsilon_{r,s}^{(i)} x_r x_s = 2n + 2\\sum_{r<s} \\varepsilon_{r,s}^{(i)} x_r x_s ,$$\nwhere $\\varepsilon_{r,s}^{(i)} = -1$ if $r \\le i < s$ and $+1$ otherwise. For fixed $r < s$, exactly $s - r$ of the indices $i \\in \\{1,\\dots,2n\\}$ satisfy $r \\le i < s$. Hence the total coefficient of $x_r x_s$ in $\\sum_i y_i^2$ is $2\\big[(2n - (s-r)) - (s-r)\\big] = 4(n - s + r)$, and\n$$\\sum_{i=1}^{2n} y_i^2 = 4n^2 + 4\\sum_{r<s}(n - s + r)x_r x_s = 4n^2 - 4Z. \\tag{1}$$\n\n**A lower bound for the left side.** Each $y_i$ is a sum of $2n$ odd numbers $\\pm1$, hence an even integer. Also $y_i - y_{i-1} = 2x_i = \\pm 2$, so $y_{i-1}$ and $y_i$ are two *different* even integers; at most one of them is $0$, hence $y_{i-1}^2 + y_i^2 \\ge 4$. Pairing $(y_1, y_2), (y_3, y_4), \\dots, (y_{2n-1}, y_{2n})$,\n$$\\sum_{i=1}^{2n} y_i^2 \\ge 4n .$$\nWith (1): $4n \\le 4n^2 - 4Z$, i.e. $Z \\le n(n-1)$.\n\n**Equality.** Take $x_i = 1$ for odd $i$ and $x_i = -1$ for even $i$. Then $\\sum x_r = 0$, so $y_i = 2(x_1 + \\dots + x_i)$ equals $2, 0, 2, 0, \\dots$; hence $\\sum y_i^2 = 4n$ and $Z = n(n-1)$.\n\n**Answer: $n(n-1)$.**"
+   },
+   {
+    "title": "Split into the $+1$ and $-1$ positions",
+    "body": "Again reduce to $x_i \\in \\{\\pm1\\}$. Let $A = \\{i : x_i = 1\\}$, $B = \\{i : x_i = -1\\}$, and for sets $X, Y$ let $e(X,Y) = \\sum_{r<s,\\ r\\in X,\\ s\\in Y} (s-r-n)$. Since\n$$e(A,A)+e(A,B)+e(B,A)+e(B,B) = \\sum_{1\\le r<s\\le 2n}(s-r-n) = -\\frac{(n-1)n(2n-1)}{3},$$\nwe get\n$$Z = e(A,A) + e(B,B) - e(A,B) - e(B,A) = 2\\big(e(A,A)+e(B,B)\\big) + \\frac{(n-1)n(2n-1)}{3}.$$\nBy symmetry let $|A| = n-p$, $|B| = n+p$ with $0 \\le p \\le n$, and list $A = \\{a_1<\\dots<a_{n-p}\\}$, $B = \\{b_1<\\dots<b_{n+p}\\}$. Then $e(A,A) = \\sum_i (2i-1-n+p)a_i - \\binom{n-p}{2}n$ and $e(B,B) = \\sum_i (2i-1-n-p)b_i - \\binom{n+p}{2}n$. The coefficients $2i-1-(n\\mp p)$ are known, and the numbers $a_i, b_i$ form a permutation of $1,\\dots,2n$; the rearrangement inequality (largest coefficient with largest number) bounds the sum, and after simplification one obtains\n$$Z \\le n(n-1) - \\frac{2}{3}(p-1)p(p+1) \\le n(n-1),$$\nbecause $(p-1)p(p+1) \\ge 0$ for every integer $p \\ge 0$. The alternating example above shows that $n(n-1)$ is attained.\n\n**Answer: $n(n-1)$.**"
+   }
+  ],
+  "topics": [
+   "inequalities",
+   "algebra"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null,
+  "answerDisplay": "$n(n-1)$"
+ },
+ {
+  "id": "imo-isl-2015-a4",
+  "bank": "imo",
+  "source": {
+   "contest": "IMO Shortlist",
+   "paper": "Algebra",
+   "year": 2015,
+   "number": 4,
+   "url": "https://www.imo-official.org/assets/documents/problems/2015/IMO2015SL.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Find all functions $f:\\mathbb{R}\\to\\mathbb{R}$ satisfying the equation\n$$f\\big(x + f(x+y)\\big) + f(xy) = x + f(x+y) + y f(x)$$\nfor all real numbers $x$ and $y$.",
+  "image": null,
+  "choices": null,
+  "answer": "$f(x)=x$ and $f(x)=2-x$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [],
+  "topics": [
+   "functional-equations"
+  ],
+  "difficulty": 2,
+  "duplicateOf": "imo-2015-05",
+  "reviewNote": null
+ },
+ {
+  "id": "imo-isl-2015-a5",
+  "bank": "imo",
+  "source": {
+   "contest": "IMO Shortlist",
+   "paper": "Algebra",
+   "year": 2015,
+   "number": 5,
+   "url": "https://www.imo-official.org/assets/documents/problems/2015/IMO2015SL.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Let $2\\mathbb{Z}+1$ denote the set of odd integers. Find all functions $f:\\mathbb{Z}\\to 2\\mathbb{Z}+1$ satisfying\n$$f\\big(x + f(x) + y\\big) + f\\big(x - f(x) - y\\big) = f(x+y) + f(x-y)$$\nfor every $x, y \\in \\mathbb{Z}$.",
+  "image": null,
+  "choices": null,
+  "answer": "Fix an odd positive integer $d$, an integer $k$ and odd integers $\\ell_0, \\ell_1, \\dots, \\ell_{d-1}$; then $f(md + i) = 2kmd + \\ell_i d$ ($m\\in\\mathbb Z$, $0\\le i\\le d-1$). These are exactly the solutions.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Difference operators and quasi-periods",
+    "body": "**Notation.** For a function $g:\\mathbb Z\\to\\mathbb Z$ and a nonzero integer $t$ let $\\Delta_t g(x) = g(x+t) - g(x)$. These operators commute ($\\Delta_a\\Delta_b g = \\Delta_b\\Delta_a g$). The set of periods of a function (together with $0$) is a subgroup of $\\mathbb Z$; so if $g$ is $s$- and $t$-periodic it is $\\gcd(s,t)$-periodic, and if $\\Delta_a g = 0$ then $\\Delta_{ma}g = 0$ for all $m\\ne0$. Call $t$ a *quasi-period* of $g$ if $\\Delta_t g$ is constant, i.e. $\\Delta_1\\Delta_t g = \\Delta_t(\\Delta_1 g) = 0$, i.e. $t$ is a period of $\\Delta_1 g$. Hence if $g$ has a quasi-period, its least positive quasi-period divides all quasi-periods.\n\n**Reformulation.** Put $a = x + y$. The equation becomes $f(a + f(x)) + f(2x - a - f(x)) = f(a) + f(2x - a)$, i.e.\n$$\\Delta_{f(x)} f(a) = \\Delta_{f(x)} f\\big(2x - a - f(x)\\big)\\qquad\\text{for all } x, a. \\tag{2}$$\nWriting (2) for $a = b,\\ b + f(x),\\ \\dots,\\ b + (k-1)f(x)$ and adding, both sides telescope:\n$\\Delta_{kf(x)}f(b) = \\Delta_{kf(x)} f\\big(2x - b - kf(x)\\big)$ for $k \\ge 1$. For $M=-kf(x)$ with $k\\ge1$ use $\\Delta_{-M'}g(c)=-\\Delta_{M'}g(c-M')$ to get the same form. Thus\n$$\\Delta_M f(b) = \\Delta_M f(2x - b - M)\\quad\\text{for all } b \\text{ and every nonzero } M \\text{ with } f(x)\\mid M. \\tag{3}$$\n\n**Lemma 1.** For distinct $x, y$ and $L = \\operatorname{lcm}(f(x), f(y))$, the function $\\Delta_L f$ is $2(y-x)$-periodic.\n\n*Proof.* Apply (3) with $x$, then with $y$ at the point $b + 2(y-x)$:\n$$\\Delta_L f(b) = \\Delta_L f(2x - b - L) = \\Delta_L f\\big(2y - (b + 2(y-x)) - L\\big) = \\Delta_L f\\big(b + 2(y-x)\\big).\\ \\square$$\n\n**Lemma 2.** If $\\Delta_{ts} g = 0$ and $\\Delta_t\\Delta_t g = 0$ (with $t,s\\neq0$), then $\\Delta_t g = 0$.\n\n*Proof.* WLOG $s > 0$. From $\\Delta_t\\Delta_t g = 0$, $\\Delta_t g(a) = \\Delta_t g(a+t) = \\dots = \\Delta_t g(a + (s-1)t)$. These $s$ equal numbers add up to $\\Delta_{ts} g(a) = 0$, so each is $0$. $\\square$\n\n**Step 1: $f$ has an odd quasi-period.** Let $Q = \\operatorname{lcm}(f(0), f(1))$, which is odd. By Lemma 1, $g = \\Delta_Q f$ is $2$-periodic. By (3) with $M = Q$, $x = b = 0$: $g(0) = g(-Q)$; as $Q$ is odd, $0$ and $-Q$ have different parities, so $g$ is constant. Thus $Q$ is a quasi-period. Let $T$ be the least positive quasi-period; $T \\mid Q$, so $T$ is odd.\n\n**Step 2: $T \\mid f(x)$ for every $x$.** Suppose not: there are an odd prime $p$, $\\alpha \\ge 1$ and $u$ with $p^\\alpha \\mid T$ but $p^\\alpha \\nmid f(u)$. The original equation with $x = u$, $y = 0$ gives $2f(u) = f(u + f(u)) + f(u - f(u))$; if $p^\\alpha$ divided both terms on the right it would divide $f(u)$ ($p$ odd). So there is $v \\in \\{u \\pm f(u)\\}$ with $p^\\alpha \\nmid f(v)$. Let $L = \\operatorname{lcm}(f(u), f(v))$; then $p^\\alpha \\nmid L$.\n\nBy Lemma 1 (as $|v - u| = |f(u)|$), $\\Delta_L f$ is $2f(u)$-periodic. It is also $T$-periodic, since $\\Delta_T\\Delta_L f = \\Delta_L\\Delta_T f = 0$ ($\\Delta_T f$ is constant). So $\\Delta_L f$ is $t_1$-periodic, $t_1 = \\gcd(T, 2f(u))$: $\\Delta_{t_1}\\Delta_L f = 0$. This says $\\Delta_{t_1} f$ is $L$-periodic; it is also $T$-periodic (same reason), hence $t_2$-periodic with $t_2 = \\gcd(T, L)$: $\\Delta_{t_2}\\Delta_{t_1} f = 0$.\n\nSince $T$ is odd and $v_p(f(u)), v_p(L) < \\alpha \\le v_p(T)$, both $t_1$ and $t_2$ divide $T/p$. Therefore $\\Delta_{T/p}\\Delta_{T/p} f = 0$, and so $\\Delta_{T/p}\\Delta_{T/p}(\\Delta_1 f) = 0$. Also $\\Delta_T(\\Delta_1 f) = 0$. Lemma 2 with $g = \\Delta_1 f$, $t = T/p$, $s = p$ gives $\\Delta_{T/p}\\Delta_1 f = 0$: $T/p$ is a quasi-period, contradicting the minimality of $T$.\n\n**Step 3: the form of $f$.** Let $d$ be the gcd of all values of $f$; it is odd, and $T \\mid d$ by Step 2, so $d$ is a quasi-period: $\\Delta_d f \\equiv c$. Now $c = f(d) - f(0)$ is a difference of two odd multiples of $d$, so $c = 2dk$ for an integer $k$. Put $\\ell_i = f(i)/d$ for $0 \\le i \\le d-1$ (odd integers). Then\n$$f(md + i) = f(i) + m\\,\\Delta_d f = \\ell_i d + 2kmd .$$\n\n**Check.** Every such $f$ has odd values. Each value $f(x)$ is a multiple of $d$, so $\\Delta_{f(x)} f$ is constant (equal to $\\frac{f(x)}{d}\\cdot 2kd$); hence both sides of (2) are equal, and (2) is equivalent to the original equation. ∎"
+   }
+  ],
+  "topics": [
+   "functional-equations",
+   "number-theory"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "imo-isl-2015-a6",
+  "bank": "imo",
+  "source": {
+   "contest": "IMO Shortlist",
+   "paper": "Algebra",
+   "year": 2015,
+   "number": 6,
+   "url": "https://www.imo-official.org/assets/documents/problems/2015/IMO2015SL.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Let $n$ be a fixed integer with $n \\ge 2$. We say that two polynomials $P$ and $Q$ with real coefficients are *block-similar* if for each $i \\in \\{1, 2, \\dots, n\\}$ the sequences\n$$P(2015i),\\ P(2015i - 1),\\ \\dots,\\ P(2015i - 2014)\\qquad\\text{and}\\qquad Q(2015i),\\ Q(2015i - 1),\\ \\dots,\\ Q(2015i - 2014)$$\nare permutations of each other.\n\n(a) Prove that there exist distinct block-similar polynomials of degree $n + 1$.\n\n(b) Prove that there do not exist distinct block-similar polynomials of degree $n$.",
+  "image": null,
+  "choices": null,
+  "answer": "(a) $P(x)=T(x)=\\prod_{i=0}^n(x-2015i)$ and $Q(x)=T(x-1)$. (b) Summation polynomials show $P-Q=\\alpha\\big(T(x)-T(x-1)\\big)$ and $P+Q$ constant, reducing to $P$ block-similar to $-P$, which fails by a sign/size argument on the first block.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Summation polynomials",
+    "body": "Write $k = 2015 = 2\\ell + 1$ and $T(x) = \\prod_{i=0}^{n}(x - ik)$ (degree $n+1$).\n\n**(a)** Let $P(x) = T(x)$ and $Q(x) = T(x-1)$; they are distinct (different roots) and of degree $n+1$. On the block $\\{(i-1)k+1, \\dots, ik\\}$, the values of $Q$ are $P\\big((i-1)k\\big), \\dots, P(ik-1)$. The two lists of values differ only in that $P$'s list contains $P(ik)$ and $Q$'s contains $P\\big((i-1)k\\big)$; both are $0$. So the lists are permutations of each other. ∎(a)\n\n**(b)** *Summation polynomials.* For a polynomial $F$ there is a unique polynomial $\\Sigma F$ with $\\Sigma F(0) = 0$ and $\\Sigma F(x) - \\Sigma F(x-1) = F(x)$ identically (because $\\sum_{i=1}^m i^d$ is a polynomial in $m$ of degree $d+1$); so $\\Sigma F(m) = \\sum_{i=1}^m F(i)$ for $m\\ge0$, and $\\deg \\Sigma F = \\deg F + 1$ if $F \\ne 0$.\n\n**Lemma.** Let $F \\ne 0$ be a polynomial with $\\Sigma F(0) = \\Sigma F(k) = \\dots = \\Sigma F(nk) = 0$. Then $\\deg F \\ge n$ and $F(x) = T(x)G(x) - T(x-1)G(x-1)$ for a polynomial $G$ with $\\deg G = \\deg F - n$.\n\n*Proof.* $\\Sigma F \\ne 0$ has the $n+1$ roots $0, k, \\dots, nk$, so $\\deg F + 1 \\ge n+1$, and $\\Sigma F = T\\cdot G$ with $\\deg G = \\deg F - n$. Then $F(x) = \\Sigma F(x) - \\Sigma F(x-1) = T(x)G(x) - T(x-1)G(x-1)$. $\\square$\n\nSuppose $P \\ne Q$ are block-similar of degree $n$. Block-similarity gives, for every $i$, $\\sum_{\\text{block } i} P = \\sum_{\\text{block } i} Q$ and $\\sum_{\\text{block }i} P^2 = \\sum_{\\text{block }i} Q^2$. Hence $F = P - Q$ and $F = P^2 - Q^2$ have $\\Sigma F(ik) = 0$ for $i = 0, \\dots, n$.\n\n*Step 1.* $R_1 = P - Q$ is nonzero of degree $\\le n$, so by the lemma $\\deg R_1 = n$, $\\deg G = 0$: $R_1 = \\alpha\\big(T(x) - T(x-1)\\big)$ with $\\alpha \\ne 0$.\n\n*Step 2: $S = P + Q$ is constant.* Suppose not. Then $R_2 = P^2 - Q^2 = R_1 S \\neq 0$ with $n < \\deg R_2 \\le 2n$, and the lemma gives $R_2 = T(x)G(x) - T(x-1)G(x-1)$ with $1 \\le \\deg G \\le n$. Rewrite\n$$R_2 = T(x)\\big(G(x) - G(x-1)\\big) + G(x-1)\\big(T(x) - T(x-1)\\big).$$\n$R_1$ divides $R_2$ and the second summand, so $R_1 \\mid T(x)\\big(G(x) - G(x-1)\\big)$. But $\\gcd\\big(T(x), T(x)-T(x-1)\\big) = \\gcd\\big(T(x), T(x-1)\\big) = 1$, because the roots $0,k,\\dots,nk$ of $T(x)$ and $1, k+1, \\dots, nk+1$ of $T(x-1)$ are disjoint. Thus $R_1 \\mid G(x) - G(x-1)$, a nonzero polynomial of degree $\\deg G - 1 < n = \\deg R_1$ — impossible. So $S \\equiv \\beta$.\n\n*Step 3: reduction.* Applying the same affine map $t \\mapsto (2t - \\beta)/\\alpha$ to all values preserves block-similarity, so $\\tilde P = (2P - \\beta)/\\alpha = (P-Q)/\\alpha = T(x) - T(x-1)$ and $\\tilde Q = (2Q-\\beta)/\\alpha = -\\tilde P$ are block-similar. We show this is impossible; write $P$ for $\\tilde P$.\n\n*Step 4: contradiction.* For $1 \\le i \\le n$, the points $ik - k + 1$ and $ik - 1$ lie strictly between the consecutive roots $(i-1)k$ and $ik$ of $T$ (as $k\\ge3$), so $T$ has the same nonzero sign at both. Since $T\\big((i-1)k\\big) = T(ik) = 0$,\n$$P(ik-k+1) = T(ik-k+1),\\qquad P(ik) = -T(ik-1)$$\nhave opposite signs, so $P$ has a root in each of the $n$ disjoint intervals $[ik-k+1, ik]$. As $\\deg P = n$, it has exactly one (simple) root in each.\n\nHence along $P(1), P(2), \\dots, P(k)$ the sign changes exactly once (with possibly one zero at the change). Since $P$ and $-P$ are block-similar, the multiset of these values is symmetric under negation, so there are as many positive as negative terms. As $k$ is odd, there must be exactly one zero, in the middle position: $P(\\ell + 1) = 0$, i.e. $T(\\ell+1) = T(\\ell)$. But\n$$|T(\\ell+1)| = (\\ell+1)\\cdot \\ell\\cdot\\prod_{i=2}^{n}(ik - \\ell - 1) < \\ell\\cdot(\\ell+1)\\cdot\\prod_{i=2}^{n}(ik - \\ell) = |T(\\ell)|,$$\nthe inequality being strict because $n \\ge 2$ (the product is nonempty and all factors are positive). Contradiction. ∎"
+   }
+  ],
+  "topics": [
+   "polynomials"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "imo-isl-2015-c1",
+  "bank": "imo",
+  "source": {
+   "contest": "IMO Shortlist",
+   "paper": "Combinatorics",
+   "year": 2015,
+   "number": 1,
+   "url": "https://www.imo-official.org/assets/documents/problems/2015/IMO2015SL.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "In Lineland there are $n \\ge 1$ towns, arranged along a road running from left to right. Each town has a *left bulldozer* (put to the left of the town and facing left) and a *right bulldozer* (put to the right of the town and facing right). The sizes of the $2n$ bulldozers are distinct. Every time when a right and a left bulldozer confront each other, the larger bulldozer pushes the smaller one off the road. On the other hand, the bulldozers are quite unprotected at their rears; so, if a bulldozer reaches the rear-end of another one, the first one pushes the second one off the road, regardless of their sizes.\n\nLet $A$ and $B$ be two towns, with $B$ being to the right of $A$. We say that town $A$ can *sweep town $B$ away* if the right bulldozer of $A$ can move over to $B$ pushing off all bulldozers it meets. Similarly, $B$ can sweep $A$ away if the left bulldozer of $B$ can move to $A$ pushing off all bulldozers of all towns on its way.\n\nProve that there is exactly one town which cannot be swept away by any other one.",
+  "image": null,
+  "choices": null,
+  "answer": "Induct on $n$: the largest useful bulldozer, say the right bulldozer of $T_k$, sweeps away every town to its right, and those towns cannot sweep anything at or left of $T_k$; delete them and apply induction to $T_1,\\dots,T_k$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Remove everything beyond the largest bulldozer",
+    "body": "Number the towns $T_1, \\dots, T_n$ from left to right; let $\\ell_i$ and $r_i$ be the sizes of the left and right bulldozers of $T_i$.\n\n**What sweeping means.** When the right bulldozer of $T_i$ moves right towards $T_j$ ($i<j$), it meets the left bulldozers of $T_{i+1},\\dots,T_j$ face to face, and the right bulldozers of those towns from behind (which it always pushes off). So $T_i$ sweeps $T_j$ away iff $r_i > \\ell_m$ for all $i < m \\le j$; symmetrically $T_j$ sweeps $T_i$ away iff $\\ell_j > r_m$ for all $i \\le m < j$. In particular:\n\n- if $T_i$ can sweep away $T_j$, it can sweep away every town between them;\n- whether $T_i$ sweeps $T_j$ depends only on the bulldozers of the towns $T_i, \\dots, T_j$.\n\n**Induction on $n$.** For $n = 1$ there is nothing to prove. Let $n \\ge 2$. The left bulldozer of $T_1$ and the right bulldozer of $T_n$ never play a role. Among the other $2n - 2$ bulldozers take the largest; by symmetry it is the right bulldozer of some $T_k$ with $k < n$.\n\n1. $r_k$ exceeds every $\\ell_m$, so $T_k$ sweeps away all of $T_{k+1}, \\dots, T_n$.\n2. No town $T_j$ with $j > k$ can sweep away $T_k$ (that would need $\\ell_j > r_k$). Hence, by the first bullet above, no such $T_j$ can sweep away any $T_i$ with $i \\le k$ either.\n3. For $i, j \\le k$, whether $T_i$ sweeps $T_j$ involves only towns among $T_1, \\dots, T_k$.\n\nSo all towns $T_{k+1}, \\dots, T_n$ can be swept away, and a town $T_i$ with $i \\le k$ can be swept away in the whole configuration iff it can be swept away within the configuration $T_1, \\dots, T_k$. By the induction hypothesis (as $k < n$), exactly one of $T_1,\\dots,T_k$ cannot be swept away by the others; it is the unique such town overall. ∎"
+   },
+   {
+    "title": "Existence and uniqueness separately",
+    "body": "Keep the notation and the observations of the first solution. Note also that two towns cannot sweep each other away: if $T_i$ sweeps $T_j$ and $T_j$ sweeps $T_i$ ($i<j$), then $r_i > \\ell_j > r_i$.\n\n**Existence.** Suppose every town can be swept away. Let $t_1$ be the leftmost town and, inductively, let $t_{k+1}$ be some town that sweeps $t_k$ away. We claim each $t_{k+1}$ lies to the right of $t_k$, which is impossible for infinitely many $k$ with finitely many towns. For $k=1$ it is clear. Suppose $t_1, t_2, \\dots, t_k$ move strictly to the right, and $t_{k+1}$ lies to the left of $t_k$. Then $t_{k+1}$ lies between $t_j$ and $t_{j+1}$ (possibly equal to $t_j$) for some $j<k$. Since $t_{j+1}$ sweeps $t_j$, it also sweeps $t_{k+1}$, so $t_{k+1}$ cannot sweep $t_{j+1}$; but $t_{j+1}$ lies between $t_{k+1}$ and $t_k$, so $t_{k+1}$ cannot sweep $t_k$ either — contradiction.\n\n**Uniqueness.** Suppose two towns $A$ (left) and $B$ (right) both cannot be swept away. Consider the largest bulldozer $b$ among the right bulldozer of $A$, the left bulldozer of $B$ and all bulldozers of towns strictly between them. By symmetry $b$ is a left bulldozer; it belongs to a town to the right of $A$ (possibly $B$), and on its way to $A$ it beats every bulldozer it meets — so this town sweeps $A$ away. Contradiction. ∎"
+   }
+  ],
+  "topics": [
+   "logic",
+   "games"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "imo-isl-2015-c2",
+  "bank": "imo",
+  "source": {
+   "contest": "IMO Shortlist",
+   "paper": "Combinatorics",
+   "year": 2015,
+   "number": 2,
+   "url": "https://www.imo-official.org/assets/documents/problems/2015/IMO2015SL.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Let $V$ be a finite set of points in the plane. We say that $V$ is *balanced* if for any two distinct points $A, B \\in V$, there exists a point $C \\in V$ such that $AC = BC$. We say that $V$ is *center-free* if for any distinct points $A, B, C \\in V$, there does not exist a point $P \\in V$ such that $PA = PB = PC$.\n\n(a) Show that for all $n \\ge 3$, there exists a balanced set consisting of $n$ points.\n\n(b) For which $n \\ge 3$ does there exist a balanced, center-free set consisting of $n$ points?",
+  "image": null,
+  "choices": null,
+  "answer": "(a) Regular $n$-gon for odd $n$; for even $n$ a centre $O$ plus $n-1$ points on a circle around $O$ arranged in $60^\\circ$ pairs/triples. (b) Exactly the **odd** $n\\ge 3$ (regular $n$-gon; for even $n$ double counting gives a point equidistant from 3 others).",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [],
+  "topics": [
+   "geometry",
+   "counting"
+  ],
+  "difficulty": 1,
+  "duplicateOf": "imo-2015-01",
+  "reviewNote": null
+ },
+ {
+  "id": "imo-isl-2015-c3",
+  "bank": "imo",
+  "source": {
+   "contest": "IMO Shortlist",
+   "paper": "Combinatorics",
+   "year": 2015,
+   "number": 3,
+   "url": "https://www.imo-official.org/assets/documents/problems/2015/IMO2015SL.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "For a finite set $A$ of positive integers, we call a partition of $A$ into two disjoint nonempty subsets $A_1$ and $A_2$ *good* if the least common multiple of the elements in $A_1$ is equal to the greatest common divisor of the elements in $A_2$. Determine the minimum value of $n$ such that there exists a set of $n$ positive integers with exactly $2015$ good partitions.",
+  "image": null,
+  "choices": null,
+  "answer": "3024",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Good partitions are cuts; neighbouring cuts are rare",
+    "body": "Write $A = \\{a_1 < a_2 < \\dots < a_n\\}$.\n\n**Good partitions are cuts.** If $\\operatorname{lcm} A_1 = d = \\gcd A_2$, then every $x \\in A_1$ divides $d$ and $d$ divides every $y \\in A_2$, so $x \\le d \\le y$, and $x<y$ since the elements are distinct. Hence $A_1 = \\{a_1, \\dots, a_k\\}$, $A_2 = \\{a_{k+1}, \\dots, a_n\\}$ for some $1 \\le k \\le n-1$. Put $\\ell_k = \\operatorname{lcm}(a_1, \\dots, a_k)$, $g_k = \\gcd(a_{k+1}, \\dots, a_n)$, and call $a_k$ *partitioning* if $\\ell_k = g_k$. The number of good partitions is the number of partitioning elements among $a_1, \\dots, a_{n-1}$.\n\n**Claim.** If $a_{k-1}$ and $a_k$ are both partitioning ($2 \\le k \\le n-1$), then $g_{k-1} = g_k = a_k$.\n\n*Proof.* $\\ell_{k-1} = g_{k-1}$ divides $a_k$, so $\\ell_k = \\operatorname{lcm}(\\ell_{k-1}, a_k) = a_k$. Thus $g_k = \\ell_k = a_k$ and $g_{k-1} = \\gcd(a_k, g_k) = a_k$. $\\square$\n\n**Property 1.** For $2 \\le k \\le n-2$, the three elements $a_{k-1}, a_k, a_{k+1}$ are not all partitioning: otherwise the claim (for the pairs $(a_{k-1}, a_k)$ and $(a_k, a_{k+1})$) gives $a_k = g_k = a_{k+1}$.\n\n**Property 2.** $a_1, a_2$ are not both partitioning (the claim would give $a_2 = g_1 = \\ell_1 = a_1$); and $a_{n-2}, a_{n-1}$ are not both partitioning (it would give $a_{n-1} = g_{n-1} = a_n$).\n\n**Lower bound.** Suppose there are exactly $2015$ good partitions; clearly $n \\ge 5$. By Property 2 at most one of $a_1, a_2$ and at most one of $a_{n-2}, a_{n-1}$ is partitioning. The middle elements $a_3, \\dots, a_{n-3}$ ($n-5$ of them) contain $\\lfloor \\frac{n-5}{3}\\rfloor$ disjoint blocks of three consecutive elements, each containing a non-partitioning element by Property 1. Hence\n$$2015 \\le 2 + (n-5) - \\Big\\lfloor \\frac{n-5}{3} \\Big\\rfloor = n - 3 - \\Big\\lfloor \\frac{n-5}{3}\\Big\\rfloor .$$\nThe right side is nondecreasing in $n$ and equals $3020 - 1006 = 2014$ for $n = 3023$. Hence $n \\ge 3024$.\n\n**Construction for $n = 3024$.** Take\n$$A = \\{\\,2\\cdot 6^i,\\ 3\\cdot 6^i,\\ 6^{i+1} : 0 \\le i \\le 1007\\,\\},$$\nwhose elements in increasing order are $2, 3, 6, 12, 18, 36, 72, \\dots, 6^{1008}$ ($3\\cdot1008 = 3024$ elements).\n\n- Cut after $3\\cdot 6^i$: the prefix contains $2\\cdot 6^i$ and $3\\cdot 6^i$ and its other elements divide $6^i$, so its lcm is $6^{i+1}$; the suffix is $6^{i+1}, 2\\cdot6^{i+1}, \\dots$, all multiples of $6^{i+1}$ and containing $6^{i+1}$, so its gcd is $6^{i+1}$. Good — $1008$ cuts.\n- Cut after $6^{i+1}$ with $i+1 \\le 1007$: prefix lcm $6^{i+1}$, suffix $2\\cdot 6^{i+1}, 3\\cdot 6^{i+1}, \\dots$ with gcd $6^{i+1}$. Good — $1007$ cuts.\n- Cut after $2\\cdot 6^i$: prefix lcm $2\\cdot 6^i$, but the suffix contains $3\\cdot 6^i$, which is not a multiple of $2\\cdot6^i$. Not good.\n\nSo there are exactly $1008 + 1007 = 2015$ good partitions.\n\n**Answer: 3024.**"
+   }
+  ],
+  "topics": [
+   "number-theory",
+   "counting"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "imo-isl-2015-c4",
+  "bank": "imo",
+  "source": {
+   "contest": "IMO Shortlist",
+   "paper": "Combinatorics",
+   "year": 2015,
+   "number": 4,
+   "url": "https://www.imo-official.org/assets/documents/problems/2015/IMO2015SL.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Let $n$ be a positive integer. Two players $A$ and $B$ play a game in which they take turns choosing positive integers $k \\le n$. The rules of the game are:\n\n(i) A player cannot choose a number that has been chosen by either player on any previous turn.\n\n(ii) A player cannot choose a number consecutive to any of those the player has already chosen on any previous turn.\n\n(iii) The game is a draw if all numbers have been chosen; otherwise the player who cannot choose a number anymore loses the game.\n\nThe player $A$ takes the first turn. Determine the outcome of the game, assuming that both players use optimal strategies.",
+  "image": null,
+  "choices": null,
+  "answer": "The game is a draw for $n = 1, 2, 4, 6$; for all other $n$, player $B$ wins.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "B answers with $n$ and can always move",
+    "body": "Write $[n] = \\{1, \\dots, n\\}$. The reflection $x \\mapsto n+1-x$ preserves the rules, so we may use symmetry.\n\n**Lemma.** Suppose $B$'s first pick is $n$, and $A$ has just made his $k$-th move, $k \\ge 2$. Then $B$ can make a $k$-th move.\n\n*Proof.* Let $S$ be the set of $A$'s $k$ numbers; no two are consecutive, and $n \\notin S$. Removing $S$ from $[n]$ leaves maximal runs (\"components\"): one between any two consecutive elements of $S$ ($k-1$ runs), one after the largest element (nonempty since $n \\notin S$), and one before the smallest if $1 \\notin S$. So there are at least $k$ components, while $B$ has chosen only $k - 1$ numbers. Some component contains none of $B$'s numbers; any number in it is unchosen, and its neighbours lie in that component or in $S$, so it is not consecutive to any of $B$'s numbers. $B$ can pick it. $\\square$\n\n**$B$ wins for $n \\ne 1, 2, 4, 6$.** By symmetry, $A$'s first pick $a$ satisfies $a \\le \\frac{n+1}{2} < n$; $B$ answers $n$. From now on the lemma guarantees that $B$ can always move, so $B$ never loses; it remains to make a draw impossible, after which the finite game must end with $A$ unable to move. At a draw all of $[n]$ is chosen and each player's set has no two consecutive numbers, so the two sets alternate: one player has all odd numbers, the other all even ones. Since $A$ moves first, $|A\\text{'s set}| \\ge |B\\text{'s set}|$.\n\n- *$n$ odd, $n \\ge 3$:* there are more odd numbers than even ones, so at a draw $A$ would own all odd numbers — but $n$ is odd and belongs to $B$. No draw is possible.\n- *$n$ even, $n \\ge 8$:* $B$ owns the even number $n$, so at a draw $A$ owns all odd numbers. On $B$'s second move, $B$ picks a number from $\\{1, 3, \\dots, n-3\\}$ not chosen by $A$: this set has $\\frac{n-2}{2} \\ge 3$ elements and $A$ has chosen only two numbers, and none of them is consecutive to $n$. Now $B$ owns an odd number, so there is no draw; afterwards $B$ continues by the lemma.\n\n**Small cases.**\n\n- $n = 1, 2$: all numbers get chosen — draw.\n- $n = 4$: if $A$ starts with $2$, $B$ takes $4$ and $A$ (who can't take $1$ or $3$) loses; similarly for $3$. So $A$ takes $1$ (or $4$). If $B$ answers $2$, $A$ takes $4$ and $B$ cannot take $3$; if $B$ answers $3$, $A$ takes $4$ and $B$ cannot take $2$. So $B$ answers $4$, then $A$ must take $3$ and $B$ takes $2$: draw.\n- $n = 6$: $B$ gets at least a draw by answering $n$ (after a symmetry) and using the lemma. $A$ also gets at least a draw: $A$ picks $1$; after $B$'s reply $b$, $A$ chooses a neighbour $c$ of $b$ with $c \\notin \\{1, 2\\}$ and *reserves* it: $B$ can never take $c$ (it is consecutive to $b$). As second move $A$ takes any number outside $\\{1, 2, c-1, c, c+1\\}$ (at most five numbers, and $b$ is among them), and as third move takes $c$. After that, $B$'s third move (if possible) completes the board. So the result is a draw.\n\n**Answer:** draw for $n = 1, 2, 4, 6$; otherwise $B$ wins. ∎"
+   }
+  ],
+  "topics": [
+   "games",
+   "logic"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "imo-isl-2015-c5",
+  "bank": "imo",
+  "source": {
+   "contest": "IMO Shortlist",
+   "paper": "Combinatorics",
+   "year": 2015,
+   "number": 5,
+   "url": "https://www.imo-official.org/assets/documents/problems/2015/IMO2015SL.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Consider an infinite sequence $a_1, a_2, \\dots$ of positive integers with $a_i \\le 2015$ for all $i \\ge 1$. Suppose that for any two distinct indices $i$ and $j$ we have $i + a_i \\ne j + a_j$.\n\nProve that there exist two positive integers $b$ and $N$ such that\n$$\\left|\\sum_{i=m+1}^{n} (a_i - b)\\right| \\le 1007^2$$\nwhenever $n > m \\ge N$.",
+  "image": null,
+  "choices": null,
+  "answer": "Proof: think of $j\\mapsto j+a_j$ as juggling throws; $b$ = number of balls (chains), and the total height $S_n$ of the balls in the air satisfies $S_{n}-S_m=\\sum_{m<j\\le n}(a_j-b)$ with $|S_n-S_m|\\le (b-1)(2015-b)\\le 1007^2$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [],
+  "topics": [
+   "sequences-series",
+   "counting"
+  ],
+  "difficulty": 3,
+  "duplicateOf": "imo-2015-06",
+  "reviewNote": null
+ },
+ {
+  "id": "imo-isl-2015-c6",
+  "bank": "imo",
+  "source": {
+   "contest": "IMO Shortlist",
+   "paper": "Combinatorics",
+   "year": 2015,
+   "number": 6,
+   "url": "https://www.imo-official.org/assets/documents/problems/2015/IMO2015SL.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Let $S$ be a nonempty set of positive integers. We say that a positive integer $n$ is *clean* if it has a unique representation as a sum of an odd number of distinct elements from $S$. Prove that there exist infinitely many positive integers that are not clean.",
+  "image": null,
+  "choices": null,
+  "answer": "Assume all $n>N$ are clean. Then representations are unique, every large number also has a unique *even* representation, and the even representation of any large $t\\in S$ contains every element of $S$ between $N$ and $t$; this forces a gap $s_{p+1}\\ge 2s_p$, and the even representation of $2s_p$ yields a second odd representation of $s_p$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Even and odd representations",
+    "body": "Call a representation of $n$ as a sum of distinct elements of $S$ *odd* or *even* according to the number of terms. Suppose, for contradiction, that only finitely many positive integers are not clean: there is $N$ such that every $n > N$ has exactly one odd representation. Then $S$ is infinite (a finite $S$ gives only finitely many sums).\n\n**Property 1.** Every positive integer $n$ has at most one odd and at most one even representation.\n\n*Proof.* Take $x \\in S$ with $x > \\max(n, N)$. Two different even representations of $n$ (which cannot use $x > n$) would give, after adding $x$, two different odd representations of the clean number $n + x$. Similarly, with distinct $y, z \\in S$ larger than $\\max(n,N)$, two odd representations of $n$ would give two odd representations of $n + y + z$. $\\square$\n\n**Property 2.** Fix $s \\in S$ and let $n > N$ have no even representation. Then for every $a \\ge 1$, $n + 2as$ has an even representation containing $s$.\n\n*Proof.* It suffices to show: if $m > N$ has no even representation without $s$, then $m + 2s$ has an even representation containing $s$ (and then, by Property 1, none without $s$, so we can iterate). The odd representation of $m + s$ does not contain $s$ (removing $s$ would give an even representation of $m$ without $s$); adding $s$ to it gives an even representation of $m + 2s$ containing $s$. $\\square$\n\n**Property 3.** All sufficiently large integers have an even representation.\n\n*Proof.* Fix $s \\in S$. For each $r \\in \\{1, \\dots, 2s\\}$, by Property 2 the progression $\\{r + 2as : a \\ge 0\\}$ contains at most one number $> N$ without an even representation. So only finitely many positive integers lack one. $\\square$\n\nEnlarging $N$, we may now assume that every $n > N$ has **exactly one** odd and **exactly one** even representation. Note that the even representation of an element $t\\in S$ never contains $t$ (it would then be $\\{t\\}$, which is odd), so it uses only elements smaller than $t$.\n\n**Property 4.** If $s, t \\in S$ and $N < s < t$, then the even representation of $t$ contains $s$.\n\n*Proof.* Otherwise $s+t$ has two odd representations: (even representation of $t$) $\\cup \\{s\\}$, which contains $s$, and (even representation of $s$) $\\cup\\{t\\}$, which does not contain $s$. Contradiction, as $s+t>N$. $\\square$\n\n**Conclusion.** Let $s_1 < s_2 < \\dots$ be the elements of $S$ and $\\sigma_j = s_1 + \\dots + s_j$ ($\\sigma_0 = 0$). Fix $k$ with $s_k > N$. By Property 4, for $i > k$ the even representation of $s_i$ contains $s_k, \\dots, s_{i-1}$, and its other terms are among $s_1, \\dots, s_{k-1}$. Hence\n$$s_i = \\sigma_{i-1} - \\sigma_{k-1} + R_i,\\qquad 0 \\le R_i \\le \\sigma_{k-1}. \\tag{1}$$\nChoose $j_0 > k$ with $\\sigma_{j_0} > 2\\sigma_{k-1}$. For $j \\ge j_0$, (1) gives\n$$s_{j+1} \\ge \\sigma_j - \\sigma_{k-1} > \\tfrac12\\sigma_j . \\tag{2}$$\nLet $p > j_0$ be an index with $R_p = \\min_{i > j_0} R_i$. Then by (1),\n$$s_{p+1} = \\sigma_p - \\sigma_{k-1} + R_{p+1} = (s_p - R_p) + s_p + R_{p+1} \\ge 2s_p .$$\nSo no element of $S$ lies strictly between $s_p$ and $2s_p$. Consider the even representation $\\tau$ of $2s_p > N$. It cannot contain an element $\\ge 2s_p$ (the only possibility, $2s_p$ itself, would make $\\tau=\\{2s_p\\}$ odd), so $\\tau \\subseteq \\{s_1, \\dots, s_p\\}$. By (2) with $j = p-1 \\ge j_0$, $2s_p > \\sigma_{p-1}$, so $\\tau$ must contain $s_p$. Removing $s_p$ from $\\tau$ leaves an odd representation of $s_p$ different from $\\{s_p\\}$ — contradicting Property 1.\n\nHence infinitely many positive integers are not clean. ∎"
+   }
+  ],
+  "topics": [
+   "number-theory",
+   "counting"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "imo-isl-2015-c7",
+  "bank": "imo",
+  "source": {
+   "contest": "IMO Shortlist",
+   "paper": "Combinatorics",
+   "year": 2015,
+   "number": 7,
+   "url": "https://www.imo-official.org/assets/documents/problems/2015/IMO2015SL.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "In a company of people some pairs are enemies. A group of people is called *unsociable* if the number of members in the group is odd and at least $3$, and it is possible to arrange all its members around a round table so that every two neighbors are enemies. Given that there are at most $2015$ unsociable groups, prove that it is possible to partition the company into $11$ parts so that no two enemies are in the same part.",
+  "image": null,
+  "choices": null,
+  "answer": "A graph with chromatic number $k\\ge3$ has at least $2^{k-1}-k$ odd cycles with different vertex sets: in a lexicographically minimal $k$-colouring, for each odd set $C$ of at least $3$ colours there is an odd cycle using exactly the colours in $C$. Since $2^{11}-12>2015$, the chromatic number is at most $11$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Lexicographically minimal colourings",
+    "body": "Model the company as a graph $G$ (people = vertices, enemies = edges). An unsociable group is the vertex set of an odd cycle of length $\\ge 3$, and the required partition is a proper colouring with $11$ colours. We prove:\n\n**Claim.** If $G$ has chromatic number $k \\ge 3$, then $G$ has at least $2^{k-1} - k$ unsociable groups.\n\nSince $2^{k-1} - k$ increases with $k$ and $2^{11} - 12 = 2036 > 2015$, the claim shows that the chromatic number is at most $11$, which is what we want.\n\nA *$k$-colouring* is an ordered partition $V = V_1 \\sqcup \\dots \\sqcup V_k$ into independent sets (some possibly empty). It is *leximinimal* if $(|V_1|, \\dots, |V_k|)$ is lexicographically minimal among all $k$-colourings.\n\n**Lemma.** Let $k \\ge 3$ be odd, and let $V_1 \\sqcup \\dots \\sqcup V_k$ be a leximinimal $k$-colouring of a graph in which all classes are nonempty. Then there is an odd cycle (with distinct vertices) passing through all classes $V_1, \\dots, V_k$.\n\n*Proof.* Pick $v \\in V_1$; indices of $V_2, \\dots, V_k$ are taken cyclically, with $V_{k+1} = V_2$. Run the following marking process: draw arrows from $v$ to all its neighbours in $V_2$ and mark them; whenever a marked $u \\in V_i$ ($2 \\le i \\le k$) has an unmarked neighbour in $V_{i+1}$, draw an arrow from $u$ to it and mark it. Stop when no more marking is possible. Every marked vertex receives exactly one arrow, so the arrows form a tree rooted at $v$, and each marked vertex is joined to $v$ by a simple directed path. At the end, a marked vertex of $V_i$ has no unmarked neighbour in $V_{i+1}$.\n\nNow move every marked vertex from its class $V_i$ to the next class $V_{i+1}$, obtaining classes $V_1, W_2, \\dots, W_k$. This is still proper: inside $W_{i+1}$, the unmarked part of $V_{i+1}$ and the marked part of $V_i$ are independent, and there is no edge between them by the stopping rule. The sizes of the classes may change, but $V_1$ is untouched.\n\nThe vertex $v$ has a neighbour $w \\in W_2$: otherwise $(V_1 \\setminus\\{v\\}) \\sqcup (W_2 \\cup \\{v\\}) \\sqcup W_3 \\sqcup \\dots \\sqcup W_k$ would be a $k$-colouring with a smaller first class. If $w$ were an unmarked vertex of $V_2$, it would have been marked in the first step. Hence $w$ is a marked vertex moved from $V_k$.\n\nThe arrow path from $v$ to $w$ goes $v \\to V_2 \\to V_3 \\to \\dots$ cyclically through $V_2, \\dots, V_k$ and ends in $V_k$, so its length is $1 + (k-2) + m(k-1) = (m+1)(k-1)$ for some $m \\ge 0$, which is even since $k$ is odd. Adding the edge $wv$ gives a cycle of odd length, with distinct vertices, through all classes (it contains $v\\in V_1$ and passes through $V_2,\\dots,V_k$). $\\square$\n\n**Proof of the claim.** Take a leximinimal $k$-colouring $V_1 \\sqcup \\dots \\sqcup V_k$ of $G$; all classes are nonempty, since otherwise $G$ would be $(k-1)$-colourable. Let $C \\subseteq \\{1, \\dots, k\\}$ with $|C|$ odd and $|C| \\ge 3$, and let $G_C$ be the subgraph induced on $\\bigcup_{c \\in C} V_c$. The colouring $(V_c)_{c \\in C}$ of $G_C$ is leximinimal: if $(W_c)_{c \\in C}$ were a lexicographically smaller colouring of $G_C$, then $W_c$ for $c \\in C$ together with $V_i$ for $i \\notin C$ would be a $k$-colouring of $G$ lexicographically smaller than the original (the first differing position lies in $C$). By the lemma, $G_C$ contains an odd cycle visiting exactly the classes $V_c$, $c \\in C$.\n\nDifferent sets $C$ give cycles with different sets of colours, hence different vertex sets, i.e. different unsociable groups. The number of such $C$ is the number of odd-size subsets of $\\{1, \\dots, k\\}$ minus the $k$ singletons: $2^{k-1} - k$. ∎"
+   }
+  ],
+  "topics": [
+   "graph-theory"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "imo-isl-2015-g1",
+  "bank": "imo",
+  "source": {
+   "contest": "IMO Shortlist",
+   "paper": "Geometry",
+   "year": 2015,
+   "number": 1,
+   "url": "https://www.imo-official.org/assets/documents/problems/2015/IMO2015SL.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Let $ABC$ be an acute triangle with orthocenter $H$. Let $G$ be the point such that the quadrilateral $ABGH$ is a parallelogram. Let $I$ be the point on the line $GH$ such that $AC$ bisects $HI$. Suppose that the line $AC$ intersects the circumcircle of the triangle $GCI$ at $C$ and $J$. Prove that $IJ = AH$.",
+  "image": null,
+  "choices": null,
+  "answer": "$BGCH$ is cyclic (right angles at $B$ and $H$), so $\\angle CJI=\\angle CGH=\\angle CBH=\\angle HAC$; with $M=AC\\cap GH$ the midpoint of $HI$ and $D$ the reflection of $A$ across the foot of the perpendicular from $H$ to $AC$, triangles $IMJ$ and $HMD$ are congruent, so $IJ=HD=AH$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "A cyclic quadrilateral and two congruent triangles",
+    "body": "**$BGCH$ is cyclic.** Since $ABGH$ is a parallelogram, $HG \\parallel AB$ and $BG \\parallel AH$. As $AH \\perp BC$ and $CH \\perp AB$, we get $BG \\perp BC$ and $CH \\perp GH$. So $\\angle GBC = \\angle GHC = 90^\\circ$ and $B, H$ lie on the circle with diameter $GC$.\n\n**An angle equality.** In the acute triangle, $\\angle HAC = 90^\\circ - \\angle ACB = \\angle CBH$ (both are complements of $\\angle C$ in the right triangles formed by the altitudes from $A$ and $B$). Using the cyclic quadrilaterals $CGJI$ and $BGCH$,\n$$\\angle CJI = \\angle CGI = \\angle CGH = \\angle CBH = \\angle HAC .$$\n\n**Congruent triangles.** Let $M$ be the intersection of $AC$ and $GH$. Since $I$ lies on line $GH$ and $AC$ passes through the midpoint of $HI$, that midpoint is $M$: $IM = MH$. Let $D \\ne A$ be the point of line $AC$ with $HD = HA$ (the reflection of $A$ in the foot of the perpendicular from $H$ to $AC$). In the isosceles triangle $AHD$, $\\angle MDH = \\angle HAD = \\angle HAC$. Hence\n$$\\angle MJI = \\angle HAC = \\angle MDH,\\qquad \\angle IMJ = \\angle HMD\\ \\ (\\text{vertical angles}),\\qquad IM = MH,$$\nso the triangles $IMJ$ and $HMD$ are congruent (AAS). Therefore $IJ = HD = AH$. ∎\n\n*(Instead of $D$ one can use the law of sines: $\\dfrac{IJ}{IM} = \\dfrac{\\sin\\angle IMJ}{\\sin\\angle MJI} = \\dfrac{\\sin\\angle AMH}{\\sin\\angle HAM} = \\dfrac{AH}{MH}$, and $IM = MH$.)*"
+   }
+  ],
+  "topics": [
+   "geometry"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "imo-isl-2015-g2",
+  "bank": "imo",
+  "source": {
+   "contest": "IMO Shortlist",
+   "paper": "Geometry",
+   "year": 2015,
+   "number": 2,
+   "url": "https://www.imo-official.org/assets/documents/problems/2015/IMO2015SL.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Let $ABC$ be a triangle inscribed into a circle $\\Omega$ with center $O$. A circle $\\Gamma$ with center $A$ meets the side $BC$ at points $D$ and $E$ such that $D$ lies between $B$ and $E$. Moreover, let $F$ and $G$ be the common points of $\\Gamma$ and $\\Omega$. We assume that $F$ lies on the arc $AB$ of $\\Omega$ not containing $C$, and $G$ lies on the arc $AC$ of $\\Omega$ not containing $B$. The circumcircles of the triangles $BDF$ and $CEG$ meet the sides $AB$ and $AC$ again at $K$ and $L$, respectively. Suppose that the lines $FK$ and $GL$ are distinct and intersect at $X$. Prove that the points $A$, $X$, and $O$ are collinear.",
+  "image": null,
+  "choices": null,
+  "answer": "Proof: $AF=AG$ makes $F,G$ symmetric about $AO$, so it suffices to show $\\angle KFA=\\angle AGL$, which follows from an angle chase through $\\Gamma$, $\\Omega$ and the circles $(BDF)$, $(CGE)$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [],
+  "topics": [
+   "geometry"
+  ],
+  "difficulty": 1,
+  "duplicateOf": "imo-2015-04",
+  "reviewNote": null
+ },
+ {
+  "id": "imo-isl-2015-g3",
+  "bank": "imo",
+  "source": {
+   "contest": "IMO Shortlist",
+   "paper": "Geometry",
+   "year": 2015,
+   "number": 3,
+   "url": "https://www.imo-official.org/assets/documents/problems/2015/IMO2015SL.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Let $ABC$ be a triangle with $\\angle C = 90^\\circ$, and let $H$ be the foot of the altitude from $C$. A point $D$ is chosen inside the triangle $CBH$ so that $CH$ bisects $AD$. Let $P$ be the intersection point of the lines $BD$ and $CH$. Let $\\omega$ be the semicircle with diameter $BD$ that meets the segment $CB$ at an interior point. A line through $P$ is tangent to $\\omega$ at $Q$. Prove that the lines $CQ$ and $AD$ meet on $\\omega$.",
+  "image": null,
+  "choices": null,
+  "answer": "With $K$, $L$ the projections of $D$ on $AB$ and of $Q$ on $DB$: $\\frac{AH}{HB}=\\frac{PD}{PB}=\\frac{DL}{LB}$ (parallel lines and the bisector theorem, $QD$ bisecting $\\angle PQL$), so the spiral similarity at $B$ taking $A\\mapsto D$ takes $H\\mapsto L$ and $C\\mapsto Q$; then $\\angle ADB=\\angle CQB$ and the intersection of $AD$, $CQ$ lies on the circle $BDQ$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "A spiral similarity centred at $B$",
+    "body": "**Step 1: a ratio on $BD$.** Let $K$ be the projection of $D$ onto $AB$. Since $CH \\perp AB$, $DK \\perp AB$ and line $CH$ passes through the midpoint of $AD$, projecting onto $AB$ gives that $H$ is the midpoint of $AK$: $AH = HK$. Because $PH \\parallel DK$ (both perpendicular to $AB$) and $P$ lies on $BD$,\n$$\\frac{PD}{PB} = \\frac{HK}{HB} = \\frac{AH}{HB}. \\tag{1}$$\n\n**Step 2: the bisector theorem.** Let $L$ be the projection of $Q$ onto $DB$. Since $\\angle DQB = 90^\\circ$ (semicircle) and $QL$ is the altitude of the right triangle $DQB$, $\\angle DQL = \\angle QBD$. By the tangent–chord angle, $\\angle PQD = \\angle QBD$. Hence $QD$ bisects $\\angle PQL$, and $QB \\perp QD$ is the external bisector. By the internal and external angle bisector theorems in triangle $PQL$,\n$$\\frac{PD}{DL} = \\frac{PQ}{QL} = \\frac{PB}{BL},\\qquad\\text{so}\\qquad \\frac{PD}{PB} = \\frac{DL}{LB}. \\tag{2}$$\nFrom (1) and (2): $\\dfrac{AH}{HB} = \\dfrac{DL}{LB}$.\n\n**Step 3: the spiral similarity.** Let $\\tau$ be the spiral similarity with centre $B$ mapping $A$ to $D$. Since $H \\in BA$ and $L \\in BD$ divide these segments in the same ratio, $\\tau(H) = L$. The map $\\tau$ sends the semicircle with diameter $AB$ through $C$ onto the semicircle $\\omega$ with diameter $DB$ (the one on the side of $CB$). As $CH \\perp AB$, the image $\\tau(C)$ is the point of $\\omega$ whose projection onto $DB$ is $L$; that point is $Q$. So $\\tau(C) = Q$.\n\n**Step 4: conclusion.** A spiral similarity centred at $B$ taking $A \\mapsto D$, $C \\mapsto Q$ also gives similar triangles $BAD \\sim BCQ$. Hence $\\angle ADB = \\angle CQB$. Therefore the lines $AD$ and $CQ$ meet at a point $T$ with $\\angle BDT = \\angle BQT$, which means that $B, D, Q, T$ are concyclic: $T$ lies on the circle of $\\omega$, i.e. on $\\omega$. ∎\n\n*Remark.* Since $\\angle BAD = \\angle BCQ$, the point $T$ also lies on the circumcircle of $ABC$."
+   }
+  ],
+  "topics": [
+   "geometry"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "imo-isl-2015-g4",
+  "bank": "imo",
+  "source": {
+   "contest": "IMO Shortlist",
+   "paper": "Geometry",
+   "year": 2015,
+   "number": 4,
+   "url": "https://www.imo-official.org/assets/documents/problems/2015/IMO2015SL.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Let $ABC$ be an acute triangle, and let $M$ be the midpoint of $AC$. A circle $\\omega$ passing through $B$ and $M$ meets the sides $AB$ and $BC$ again at $P$ and $Q$, respectively. Let $T$ be the point such that the quadrilateral $BPTQ$ is a parallelogram. Suppose that $T$ lies on the circumcircle of the triangle $ABC$. Determine all possible values of $BT/BM$.",
+  "image": null,
+  "choices": null,
+  "answer": "sqrt(2)",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "A length identity for parallelograms in cyclic quadrilaterals",
+    "body": "**Lemma.** Let $ABCT$ be a convex cyclic quadrilateral, and let $P$, $Q$ be points on the rays $BA$, $BC$ such that $BPTQ$ is a parallelogram. Then\n$$BP\\cdot BA + BQ\\cdot BC = BT^2 .$$\n\n*Proof.* Compare triangles $BPT$ and $CTA$. Since $BPTQ$ is a parallelogram, $\\angle BPT = 180^\\circ - \\angle ABC = \\angle ATC$ (cyclic quadrilateral). Also $\\angle PBT = \\angle ABT = \\angle ACT$ (inscribed angles on $AT$). So $\\triangle BPT \\sim \\triangle CTA$, giving\n$$\\frac{BP}{CT} = \\frac{PT}{TA} = \\frac{BT}{CA},\\qquad\\text{i.e.}\\qquad BP = \\frac{BT\\cdot TC}{AC},\\quad BQ = PT = \\frac{BT\\cdot TA}{AC}.$$\nBy Ptolemy's theorem for $ABCT$, $BA\\cdot TC + BC\\cdot TA = AC\\cdot BT$. Therefore\n$$BP\\cdot BA + BQ\\cdot BC = \\frac{BT}{AC}\\big(BA\\cdot TC + BC\\cdot TA\\big) = BT^2.\\ \\square$$\n\n**Solution.** Since $P, Q$ lie on the sides, $T = P + Q - B$ lies inside the angle $ABC$, so $T$ is on the arc $AC$ of the circumcircle not containing $B$ and $ABCT$ is convex. The lemma gives\n$$BP\\cdot BA + BQ\\cdot BC = BT^2 .$$\nNow let $X$ and $Y$ be the midpoints of $BA$ and $BC$. Then $YM \\parallel BA$ and $YM = \\tfrac12 BA = BX$, so $BXMY$ is a parallelogram, with $X$ on ray $BP$ and $Y$ on ray $BQ$. Also $M$ lies inside angle $PBQ$ on the circle $\\omega$ through $P, B, Q$, so $PBQM$ is a convex cyclic quadrilateral. The lemma (with $P, B, Q, M, X, Y$ in place of $A, B, C, T, P, Q$) gives\n$$BX\\cdot BP + BY\\cdot BQ = BM^2 .$$\nSince $BA = 2BX$ and $BC = 2BY$, the first identity is twice the second: $BT^2 = 2BM^2$. Hence $BT/BM = \\sqrt2$.\n\n**The value occurs.** Take $BA = BC$ with $\\cos\\angle B = \\sqrt2 - 1$ (an acute isosceles triangle, base angles about $57^\\circ$), let $T$ be the point diametrically opposite $B$, and let $P$, $Q$ be the feet of the perpendiculars from $M$ to $BA$, $BC$. With circumradius $R$ and $\\beta = \\angle B$: $BA = 2R\\cos\\frac\\beta2$, $BM = BA\\cos\\frac\\beta2 = R(1+\\cos\\beta)$, $BP = BM\\cos\\frac\\beta2$. The circle with diameter $BM$ passes through $B, P, Q, M$. The rhombus $BPTQ$ with diagonal $BT=2R$ along $BM$ needs $BP = \\frac{R}{\\cos(\\beta/2)}$, i.e. $BM\\cos^2\\frac\\beta2 = R$, i.e. $(1+\\cos\\beta)^2 = 2$ — true for our $\\beta$. So this configuration exists.\n\n**Answer: $\\sqrt2$.**"
+   }
+  ],
+  "topics": [
+   "geometry"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null,
+  "answerDisplay": "$\\sqrt{2}$"
+ },
+ {
+  "id": "imo-isl-2015-g5",
+  "bank": "imo",
+  "source": {
+   "contest": "IMO Shortlist",
+   "paper": "Geometry",
+   "year": 2015,
+   "number": 5,
+   "url": "https://www.imo-official.org/assets/documents/problems/2015/IMO2015SL.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Let $ABC$ be a triangle with $CA \\ne CB$. Let $D$, $F$, and $G$ be the midpoints of the sides $AB$, $AC$, and $BC$, respectively. A circle $\\Gamma$ passing through $C$ and tangent to $AB$ at $D$ meets the segments $AF$ and $BG$ at $H$ and $I$, respectively. The points $H'$ and $I'$ are symmetric to $H$ and $I$ about $F$ and $G$, respectively. The line $H'I'$ meets $CD$ and $FG$ at $Q$ and $M$, respectively. The line $CM$ meets $\\Gamma$ again at $P$. Prove that $CQ = QP$.",
+  "image": null,
+  "choices": null,
+  "answer": "With $R$, $S$ the second intersections of $DF$, $DG$ with $\\Gamma$: powers of points show $H'I'GF$, $ADH'R$, $RSGF$ cyclic, so $R,S$ lie on $H'I'$ and $C,P,I',H'$ are concyclic; then $QH'\\cdot QR=QC^2=QI'\\cdot QS$, and the inversion at $Q$ with radius $QC$ swaps $\\Gamma$ and the circle $CH'I'$, fixing $P$, so $QP=QC$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Power of a point and an inversion at $Q$",
+    "body": "Assume $CA > CB$. Then $H'$ and $I'$ lie inside the segments $CF$ and $CG$, and $M$ lies outside the triangle.\n\n**Step 1: $H'I'GF$ is cyclic.** By symmetry $CH' = AH$ and $CI' = BI$. The powers of $A$ and $B$ with respect to $\\Gamma$ give\n$$CH'\\cdot CA = AH\\cdot AC = AD^2 = BD^2 = BI\\cdot BC = CI'\\cdot CB .$$\nHalving, $CH'\\cdot CF = CI'\\cdot CG$, so $H', I', G, F$ are concyclic and $\\angle I'H'C = \\angle CGF$.\n\n**Step 2: $R$ and $S$ lie on $H'I'$.** Let $DF$ and $DG$ meet $\\Gamma$ again at $R$ and $S$. As $FH' = FH$ and $FA = FC$, we get $FH'\\cdot FA = FH\\cdot FC = FR\\cdot FD$ (power of $F$), so $A, D, H', R$ are concyclic. Hence, using $DF \\parallel BC$,\n$$\\angle RH'F = \\angle FDA = \\angle CBA = \\angle CGF = \\angle I'H'C,$$\nso $R, H', I'$ are collinear. Similarly $S, H', I'$ are collinear. Thus $R, H', Q, I', S, M$ all lie on one line.\n\n**Step 3: $C, P, I', H'$ are concyclic.** By the tangent–chord angle and $FG \\parallel AB$, $\\angle RSD = \\angle RDA = \\angle DFG$, so $R, S, G, F$ are concyclic. Now $M$ lies on $FG$, on $RS$ and on $CP$, so using the circles $H'I'GF$, $RSGF$ and $\\Gamma$,\n$$MH'\\cdot MI' = MF\\cdot MG = MR\\cdot MS = MP\\cdot MC .$$\nHence $C, P, I', H'$ lie on a circle $\\omega$.\n\n**Step 4: the inversion.** Since $DG \\parallel CA$ and $DF \\parallel CB$, using inscribed angles in $\\Gamma$:\n$$\\angle H'CQ = \\angle ACD = \\angle CDS = \\angle CRS,\\qquad \\angle QCI' = \\angle BCD = \\angle CDR = \\angle CSR .$$\nSo $\\triangle QCH' \\sim \\triangle QRC$ and $\\triangle QCI' \\sim \\triangle QSC$ (common angle at $Q$), which gives\n$$QH'\\cdot QR = QC^2 = QI'\\cdot QS .$$\nConsider the inversion with centre $Q$ and radius $QC$. It swaps $R \\leftrightarrow H'$ and $S \\leftrightarrow I'$ and fixes $C$. Hence it maps $\\Gamma$, the circle through $R, C, S$, to $\\omega$, the circle through $H', C, I'$, and vice versa. So it maps the set $\\Gamma \\cap \\omega = \\{C, P\\}$ to itself; since $C$ is fixed, $P$ is fixed too. A fixed point of this inversion lies at distance $QC$ from $Q$, so $QP = QC$. ∎"
+   }
+  ],
+  "topics": [
+   "geometry"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "imo-isl-2015-g6",
+  "bank": "imo",
+  "source": {
+   "contest": "IMO Shortlist",
+   "paper": "Geometry",
+   "year": 2015,
+   "number": 6,
+   "url": "https://www.imo-official.org/assets/documents/problems/2015/IMO2015SL.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Let $ABC$ be an acute triangle with $AB > AC$, and let $\\Gamma$ be its circumcircle. Let $H$, $M$, and $F$ be the orthocenter of the triangle, the midpoint of $BC$, and the foot of the altitude from $A$, respectively. Let $Q$ and $K$ be the two points on $\\Gamma$ that satisfy $\\angle AQH = 90^\\circ$ and $\\angle QKH = 90^\\circ$. Prove that the circumcircles of the triangles $KQH$ and $KFM$ are tangent to each other.",
+  "image": null,
+  "choices": null,
+  "answer": "Proof: with $A'$ the antipode of $A$ and $E$ the reflection of $H$ in $BC$, the radical centre $R$ of $\\Gamma,(KQH),(EA'H)$ gives a point $S$ (midpoint of $HR$) on $BC$ with $SK$ tangent to both circles.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [],
+  "topics": [
+   "geometry"
+  ],
+  "difficulty": 3,
+  "duplicateOf": "imo-2015-03",
+  "reviewNote": null
+ },
+ {
+  "id": "imo-isl-2015-g7",
+  "bank": "imo",
+  "source": {
+   "contest": "IMO Shortlist",
+   "paper": "Geometry",
+   "year": 2015,
+   "number": 7,
+   "url": "https://www.imo-official.org/assets/documents/problems/2015/IMO2015SL.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Let $ABCD$ be a convex quadrilateral, and let $P$, $Q$, $R$, and $S$ be points on the sides $AB$, $BC$, $CD$, and $DA$, respectively. Let the line segments $PR$ and $QS$ meet at $O$. Suppose that each of the quadrilaterals $APOS$, $BQOP$, $CROQ$, and $DSOR$ has an incircle. Prove that the lines $AC$, $PQ$, and $RS$ are either concurrent or parallel to each other.",
+  "image": null,
+  "choices": null,
+  "answer": "By Menelaus it suffices to show $\\frac{AP}{PB}\\cdot\\frac{BQ}{QC}\\cdot\\frac{CR}{RD}\\cdot\\frac{DS}{SA}=1$; this follows from the incenter identity $\\frac{EF\\cdot FG}{GH\\cdot HE}=\\frac{FM^2}{HM^2}$ for a tangential quadrilateral $EFGH$ with incenter $M$, applied to the four small quadrilaterals, together with similar right triangles formed by neighbouring incenters.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Menelaus and an incenter ratio",
+    "body": "**Reduction.** Apply Menelaus' theorem to triangle $ABC$ with line $PQ$ and to triangle $ACD$ with line $RS$. If $PQ$ meets line $AC$ at $X$, then $\\frac{AP}{PB}\\cdot\\frac{BQ}{QC}\\cdot\\frac{CX}{XA} = 1$ with $X$ outside segment $AC$; and $PQ \\parallel AC$ iff $\\frac{AP}{PB}\\cdot\\frac{BQ}{QC} = 1$. The same holds for $RS$ in triangle $ACD$ with the factor $\\frac{CR}{RD}\\cdot\\frac{DS}{SA}$. So if\n$$\\frac{AP}{PB}\\cdot\\frac{BQ}{QC}\\cdot\\frac{CR}{RD}\\cdot\\frac{DS}{SA} = 1, \\tag{1}$$\nthen either both products equal $1$ (both lines are parallel to $AC$), or $PQ$ and $RS$ meet line $AC$ at points outside segment $AC$ that divide it externally in the same ratio $\\frac{CX}{XA} = \\frac{CY}{YA}\\neq1$, hence at the same point. So it suffices to prove (1).\n\n**Lemma.** Let $EFGH$ be a quadrilateral with an incircle centred at $M$. Then\n$$\\frac{EF\\cdot FG}{GH\\cdot HE} = \\frac{FM^2}{HM^2}.$$\n\n*Proof.* $M$ lies on all four angle bisectors, so $\\angle MEF = \\angle HEM$ and $\\angle FGM = \\angle MGH$. Also\n$\\angle EMF + \\angle GMH = \\big(180^\\circ - \\tfrac{E+F}{2}\\big) + \\big(180^\\circ - \\tfrac{G+H}{2}\\big) = 180^\\circ$, and likewise $\\angle FMG + \\angle HME = 180^\\circ$. By the law of sines in triangles $MEF$, $MFG$, $MGH$, $MHE$:\n$$\\frac{EF}{FM}\\cdot\\frac{FG}{FM} = \\frac{\\sin\\angle FME\\,\\sin\\angle GMF}{\\sin\\angle MEF\\,\\sin\\angle FGM} = \\frac{\\sin\\angle HMG\\,\\sin\\angle EMH}{\\sin\\angle HEM\\,\\sin\\angle MGH} = \\frac{GH}{HM}\\cdot\\frac{HE}{HM}.\\ \\square$$\n\n**Applying the lemma.** Let $I, J, K, L$ be the incenters of $APOS$, $BQOP$, $CROQ$, $DSOR$. The lemma gives\n$$\\frac{AP\\cdot PO}{OS\\cdot SA} = \\frac{PI^2}{SI^2},\\quad \\frac{BQ\\cdot QO}{OP\\cdot PB} = \\frac{QJ^2}{PJ^2},\\quad \\frac{CR\\cdot RO}{OQ\\cdot QC} = \\frac{RK^2}{QK^2},\\quad \\frac{DS\\cdot SO}{OR\\cdot RD} = \\frac{SL^2}{RL^2}.$$\nMultiplying, the lengths $OP, OQ, OR, OS$ cancel:\n$$\\frac{AP}{PB}\\cdot\\frac{BQ}{QC}\\cdot\\frac{CR}{RD}\\cdot\\frac{DS}{SA} = \\Big(\\frac{PI}{PJ}\\cdot\\frac{QJ}{QK}\\cdot\\frac{RK}{RL}\\cdot\\frac{SL}{SI}\\Big)^2. \\tag{2}$$\n\n**Neighbouring incenters.** $PI$ and $PJ$ bisect the supplementary adjacent angles $APO$ and $OPB$, so $\\angle IPJ = 90^\\circ$; likewise $OI$ and $OJ$ bisect the supplementary angles $SOP$ and $POQ$, so $\\angle IOJ = 90^\\circ$. Hence $I, P, J, O$ lie on the circle with diameter $IJ$. In the same way $J, Q, K, O$ lie on the circle with diameter $JK$, with $\\angle JQK = 90^\\circ$. Therefore\n$$\\angle QKJ = \\angle QOJ = \\angle JOP = \\angle JIP,$$\nso the right triangles $IPJ$ and $KQJ$ are similar, and $\\frac{PI}{PJ} = \\frac{QK}{QJ}$. Similarly $\\frac{RK}{RL} = \\frac{SI}{SL}$. Then the bracket in (2) equals $1$, which proves (1). ∎"
+   }
+  ],
+  "topics": [
+   "geometry"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "imo-isl-2015-g8",
+  "bank": "imo",
+  "source": {
+   "contest": "IMO Shortlist",
+   "paper": "Geometry",
+   "year": 2015,
+   "number": 8,
+   "url": "https://www.imo-official.org/assets/documents/problems/2015/IMO2015SL.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "A *triangulation* of a convex polygon $\\Pi$ is a partitioning of $\\Pi$ into triangles by diagonals having no common points other than the vertices of the polygon. We say that a triangulation is a *Thaiangulation* if all triangles in it have the same area.\n\nProve that any two different Thaiangulations of a convex polygon $\\Pi$ differ by exactly two triangles. (In other words, prove that it is possible to replace one pair of triangles in the first Thaiangulation with a different pair of triangles so as to obtain the second Thaiangulation.)",
+  "image": null,
+  "choices": null,
+  "answer": "Key facts: a triangulation contains at most one parallelogram (two triangles forming a parallelogram), and every triangle of a Thaiangulation has a side on $\\Pi$ (affine map to an equilateral triangle). Then a minimal counterexample, examined at an ear of one Thaiangulation, produces a triangulation with two parallelograms.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Two lemmas and a minimal counterexample",
+    "body": "Write $[\\,\\cdot\\,]$ for area. A triangulation of a convex $n$-gon has $n-2$ triangles, so in every Thaiangulation of $\\Pi$ each triangle has area $t = [\\Pi]/(n-2)$. Say a triangulation *contains the parallelogram* $ABCD$ if two of its triangles have union $ABCD$.\n\n**Observation.** If two triangulations differ by exactly two triangles, these form a quadrilateral $WXYZ$ split by $WY$ in one and by $XZ$ in the other. If all four triangles have area $t$, then $[WXY] = [WYZ]$ means $WY$ bisects $XZ$, and $[XYZ] = [XZW]$ means $XZ$ bisects $WY$; so $WXYZ$ is a parallelogram.\n\n**Lemma 1.** A triangulation of a convex polygon cannot contain two parallelograms.\n\n*Proof.* Suppose it contains parallelograms $P_1 \\ne P_2$. If they share a triangle, we may write $P_1 = ABC \\cup ACD$ and $P_2 = ACD \\cup CDE$ (the shared triangle is $ACD$; the diagonal of $P_2$ is a side of $ACD$ other than $AC$, say $CD$). Then $P_1 = ABCD$ gives $BC \\parallel AD$ and $P_2 = CADE$ gives $AD \\parallel CE$. So $B, C, E$ are collinear vertices of a convex polygon — absurd.\n\nIf they share no triangle, let $P_1 = ABCD$. Its sides cut $\\Pi$ into pieces; $P_2$ lies in one of them, say the one cut off by $AD$. Label $P_2 = XYZT$ so that $ABCDXYZT$ is a convex polygon (possibly $X = D$ and/or $T = A$; it still has at least six vertices). Its exterior angles at $B$ and $C$ add up to $180^\\circ$ (consecutive angles of a parallelogram), and so do those at $Y$ and $Z$. That is already $360^\\circ$, leaving nothing for the remaining (at least two) vertices — impossible. $\\square$\n\n**Lemma 2.** Every triangle in a Thaiangulation of $\\Pi$ has a side on the boundary of $\\Pi$.\n\n*Proof.* Let $ABC$ be a triangle of the Thaiangulation. An affine map preserves ratios of areas, so we may assume $ABC$ is equilateral with side $a$. Suppose none of its sides is a side of $\\Pi$. Then there are triangles $ABZ$, $CAY$, $BCX$ in the Thaiangulation, and $AZBXCY$ is a convex hexagon. Its exterior angles at $X, Y, Z$ add up to less than $360^\\circ$, so one of them, say at $Z$, is less than $120^\\circ$. Then $\\angle AZB > 60^\\circ$, so $Z$ lies strictly inside the circular segment on $AB$ (on the side opposite to $C$) bounded by the arc from which $AB$ is seen at $60^\\circ$. This arc is the reflection of the circumcircle of $ABC$ in $AB$, and its greatest distance from $AB$ is $\\frac{a}{\\sqrt3} + \\frac{a}{2\\sqrt3} = \\frac{\\sqrt3}{2}a$. So the altitude from $Z$ in $ABZ$ is less than $\\frac{\\sqrt3}{2}a$, and $[ABZ] < [ABC]$. That contradicts the Thaiangulation. $\\square$\n\n**Main proof.** Take a counterexample $\\Pi$ with the fewest vertices: Thaiangulations $T_1 \\ne T_2$ that do not differ by exactly two triangles. Then $n \\ge 5$ (a quadrilateral has only two triangulations, and they differ by two triangles). Every triangulation has an *ear* (a triangle with two sides on $\\Pi$): $n-2$ triangles share the $n$ sides. Let $ABC$ be an ear of $T_1$, where $AB$, $BC$ are sides and $AC$ is a diagonal.\n\n*$T_2$ does not contain $ABC$.* Otherwise, cut $ABC$ off. $T_1$ and $T_2$ induce two different Thaiangulations of the smaller polygon. By minimality these differ by exactly two triangles, and hence so do $T_1$ and $T_2$.\n\n*$T_2$ contains the triangle $BCD$.* The other triangle of $T_1$ on $AC$ is some $ACD$. By Lemma 2 it has a side on $\\Pi$, so we may assume $CD$ is a side of $\\Pi$. Suppose $T_2$ does not contain $BCD$. Then the sides $BC$ and $CD$ lie in triangles $BCX$ and $CDY$ of $T_2$, with $X \\ne A$, $X\\neq D$ and $Y\\neq B$; the polygon $ABCDYX$ is convex (possibly $X = Y$). From $[ABC] = [BCX]$ we get $AX \\parallel BC$, and from $[ACD] = [CDY]$ we get $AY \\parallel CD$. If $X = Y$, then $BC \\parallel CD$, which is absurd. If $X \\ne Y$, let $d(\\cdot)$ denote distance to line $CD$. The vertex $X$ lies on the arc $Y X A$ of the boundary, strictly on the far side of the chord $YA \\parallel CD$, so $d(X) > d(A) = d(Y)$. On the other hand, $XA$ and $BC$ are parallel edges of a convex polygon, so $\\overrightarrow{XA}$ points in the direction of $\\overrightarrow{CB}$. Hence $d(A) - d(X) = \\lambda\\,(d(B) - d(C)) = \\lambda\\, d(B) > 0$ for some $\\lambda > 0$, a contradiction.\n\n*A parallelogram.* So $T_2 \\ni BCD$, and $[BCD] = t$. Since $[ABD] = [ABC] + [ACD] - [BCD] = t$, the four triangles $ABC, ACD, BCD, ABD$ all have area $t$. As in the observation, $ABCD$ is a parallelogram, and $T_1$ contains it. Let $T'$ be $T_1$ with the diagonal $AC$ replaced by $BD$; it is a Thaiangulation, and $T' \\ne T_2$ (otherwise $T_1, T_2$ would differ by two triangles). Now $T'$ and $T_2$ share the ear $BCD$. Cutting it off as before, minimality shows that $T'$ and $T_2$ differ by exactly two triangles of the smaller polygon. By the observation, these two triangles of $T'$ form a parallelogram, and it does not use the triangle $BCD$. So $T'$ contains two different parallelograms: this one and $ABCD = ABD \\cup BCD$. This contradicts Lemma 1. ∎"
+   }
+  ],
+  "topics": [
+   "geometry",
+   "counting"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "imo-isl-2015-n1",
+  "bank": "imo",
+  "source": {
+   "contest": "IMO Shortlist",
+   "paper": "Number Theory",
+   "year": 2015,
+   "number": 1,
+   "url": "https://www.imo-official.org/assets/documents/problems/2015/IMO2015SL.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Determine all positive integers $M$ for which the sequence $a_0, a_1, a_2, \\dots$, defined by $a_0 = \\dfrac{2M+1}{2}$ and $a_{k+1} = a_k\\lfloor a_k\\rfloor$ for $k = 0, 1, 2, \\dots$, contains at least one integer term.",
+  "image": null,
+  "choices": null,
+  "answer": "All integers $M \\ge 2$ (for $M = 1$ the sequence is constantly $\\frac32$).",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Track the 2-adic valuation of $b_k - 3$",
+    "body": "Put $b_k = 2a_k$. Then $b_0 = 2M+1$ and $b_{k+1} = 2a_k\\lfloor a_k\\rfloor = b_k\\big\\lfloor \\frac{b_k}{2}\\big\\rfloor$, so every $b_k$ is an integer. The term $a_k$ is an integer exactly when $b_k$ is even.\n\nSuppose no $a_k$ is an integer. Then every $b_k$ is odd, $\\lfloor b_k/2\\rfloor = \\frac{b_k-1}{2}$, and\n$$b_{k+1} = \\frac{b_k(b_k-1)}{2},\\qquad b_{k+1} - 3 = \\frac{b_k^2 - b_k - 6}{2} = \\frac{(b_k - 3)(b_k + 2)}{2}. \\tag{1}$$\nIf $b_0 > 3$, then by (1) and induction $b_k > 3$ for all $k$. Let $c_k \\ge 1$ be the exponent of $2$ in the even number $b_k - 3 > 0$. Since $b_k + 2$ is odd, (1) gives $c_{k+1} = c_k - 1$. Then $c_0 > c_1 > c_2 > \\cdots$ is an infinite strictly decreasing sequence of positive integers — impossible. Hence $b_0 \\le 3$, i.e. $M = 1$.\n\nSo for $M \\ge 2$ some term is an integer. For $M = 1$: $a_0 = \\frac32$ and $a_1 = \\frac32\\cdot 1 = \\frac32$, so the sequence is constantly $\\frac32$ and has no integer term.\n\n**Answer: all $M \\ge 2$.**"
+   },
+   {
+    "title": "Congruences modulo powers of 2",
+    "body": "As above, if no term is an integer then all $b_k$ are odd and $b_{k+1} = \\frac{b_k(b_k-1)}{2}$. We show by induction on $m$ that $b_k \\equiv 3 \\pmod{2^m}$ for all $k$ and all $m\\ge1$. For $m=1$ this holds because all $b_k$ are odd.\n\nAssume $b_k \\equiv 3 \\pmod{2^m}$ for every $k$, and write $b_k = 2^m d_k + 3$. Then\n$$3 \\equiv b_{k+1} = (2^m d_k + 3)(2^{m-1}d_k + 1) \\equiv 3\\cdot 2^{m-1}d_k + 3 \\pmod{2^m},$$\nso $d_k$ is even and $b_k \\equiv 3 \\pmod{2^{m+1}}$.\n\nHence $b_0 - 3$ is divisible by every power of $2$, so $b_0 = 3$ and $M = 1$. Conversely $M = 1$ gives the constant sequence $\\frac32$. **Answer: all $M\\ge 2$.**"
+   }
+  ],
+  "topics": [
+   "number-theory",
+   "sequences-series"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "imo-isl-2015-n2",
+  "bank": "imo",
+  "source": {
+   "contest": "IMO Shortlist",
+   "paper": "Number Theory",
+   "year": 2015,
+   "number": 2,
+   "url": "https://www.imo-official.org/assets/documents/problems/2015/IMO2015SL.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Let $a$ and $b$ be positive integers such that $a!\\,b!$ is a multiple of $a! + b!$. Prove that $3a \\ge 2b + 2$.",
+  "image": null,
+  "choices": null,
+  "answer": "For $a<b$ write $c=b-a$ and $M=\\frac{b!}{a!}$; then $1+M \\mid a!$, and coprimality with $c!$ (and with $c+1$ when $a=2c+1$) gives $1+M \\mid (c+1)(c+2)\\cdots a$. If $a\\le 2c+1$, the right side is smaller than $M$, a contradiction; so $a\\ge 2c+2$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Divisibility and size comparison",
+    "body": "**Easy cases.** If $a > b$, then $3a \\ge 3(b+1) > 2b + 2$. If $a = b$, the condition says $2a! \\mid (a!)^2$, i.e. $2 \\mid a!$, so $a \\ge 2$ and $3a \\ge 2a + 2$.\n\n**Case $a < b$.** Put $c = b - a \\ge 1$; we must show $a \\ge 2c + 2$. Suppose instead that $a \\le 2c + 1$. Let\n$$M = \\frac{b!}{a!} = (a+1)(a+2)\\cdots(a+c).$$\nThen $a! + b! = a!(1+M)$ and $a!\\,b! = a!\\cdot a!\\,M$, so $1 + M \\mid a!\\,M$. As $\\gcd(1+M, M) = 1$, we get $1 + M \\mid a!$.\n\n- We have $c < a$: otherwise $M \\ge (a+1)(a+2)\\cdots(2a) > a!$, so $1+M > a!$, which is impossible.\n- $M$ is a product of $c$ consecutive integers, so $c! \\mid M$ and hence $\\gcd(1+M, c!) = 1$. Therefore\n$$1 + M \\ \\Big|\\ \\frac{a!}{c!} = (c+1)(c+2)\\cdots a. \\tag{1}$$\n\n*If $a \\le 2c$:* the right side of (1) is a product of $a - c \\le c$ integers, each at most $a$, while $M$ is a product of $c$ integers, each greater than $a$. So $(c+1)\\cdots a < M < 1 + M$, contradicting (1).\n\n*If $a = 2c+1$:* then $a + 1 = 2(c+1)$, so $c + 1 \\mid M$ and $\\gcd(1+M, c+1) = 1$. From (1), $1 + M \\mid (c+2)(c+3)\\cdots a$. This is a product of $a - c - 1 = c$ integers not exceeding $a$, hence less than $M$ — again a contradiction.\n\nSo $a \\ge 2c + 2$, i.e. $3a \\ge 2b + 2$. ∎\n\n*(Equality $3a = 2b+2$ holds only for $(a,b) = (2,2)$ and $(4,5)$.)*"
+   },
+   {
+    "title": "Prime factors of $N = 1 + M$",
+    "body": "Assume $a < b$, $c = b - a$, and suppose $a \\le 2c+1$. From the condition, $N = 1 + (a+1)\\cdots(a+c)$ divides $(a+c)!$, so every prime factor $p$ of $N$ satisfies $p \\le a + c$.\n\nIf $p \\le c$ or $p \\ge a+1$, then $p$ divides one of $a+1, \\dots, a+c$, hence divides $N - 1$; that is impossible. So $c + 1 \\le p \\le a$. Moreover $2p > a + c$: otherwise $a + 1 \\le 2c + 2 \\le 2p \\le a + c$, so $2p$ is one of the factors and $p \\mid N - 1$. Thus $p \\in \\big(\\frac{a+c}{2}, a\\big]$, so $p^2 \\nmid (a+c)!$, and hence $p^2 \\nmid N$.\n\nIf $a \\le c+2$, the interval $\\big(\\frac{a+c}{2}, a\\big]$ contains at most one integer, namely $a$; so $N \\in \\{1, a\\}$, which contradicts $N > a$. Thus $a \\ge c+3$, and then $\\frac{a+c}{2} \\ge c + \\frac32$, so every prime factor of $N$ lies in $[c+2, a]$ and appears to the first power. Hence $N \\mid (c+2)(c+3)\\cdots a$, a product of $a - c - 1 \\le c$ numbers not exceeding $a$, which is less than $N$. Contradiction. ∎"
+   }
+  ],
+  "topics": [
+   "number-theory"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "imo-isl-2015-n3",
+  "bank": "imo",
+  "source": {
+   "contest": "IMO Shortlist",
+   "paper": "Number Theory",
+   "year": 2015,
+   "number": 3,
+   "url": "https://www.imo-official.org/assets/documents/problems/2015/IMO2015SL.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Let $m$ and $n$ be positive integers such that $m > n$. Define $x_k = \\dfrac{m+k}{n+k}$ for $k = 1, 2, \\dots, n+1$. Prove that if all the numbers $x_1, x_2, \\dots, x_{n+1}$ are integers, then $x_1x_2\\cdots x_{n+1} - 1$ is divisible by an odd prime.",
+  "image": null,
+  "choices": null,
+  "answer": "With $a_k = x_k - 1 = \\frac{m-n}{n+k}$: exactly one of $n+1,\\dots,2n+1$ (namely $2^c$) has the maximal power of $2$. So all $a_k$ but one are divisible by $2^{d-c+1}$ while $P = \\prod(a_k+1)-1 \\equiv a_\\ell \\not\\equiv 0$, yet $P \\ge 2^{d-c+1}$; hence $P$ is not a power of $2$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Powers of 2 in the factors",
+    "body": "Let $a_k = x_k - 1 = \\frac{m-n}{n+k}$, a positive integer for each $k = 1, \\dots, n+1$, and let $P = x_1x_2\\cdots x_{n+1} - 1 = \\prod_k (a_k + 1) - 1$. Since $P \\ge x_1 - 1 \\ge 1$, it suffices to show that $P$ is not a power of $2$.\n\nLet $2^d$ be the largest power of $2$ dividing $m - n$, and $2^c$ the largest power of $2$ not exceeding $2n+1$. Then $2^{c+1} \\ge 2n+2$, so $n + 1 \\le 2^c \\le 2n+1$. Thus $2^c$ is one of $n+1, \\dots, 2n+1$, and it is the only multiple of $2^c$ among them, because $2\\cdot 2^c > 2n+1$. Write $2^c = n + \\ell$.\n\nSince $n + \\ell \\mid m - n$, we get $d \\ge c$, and $a_\\ell = \\frac{m-n}{2^c}$ is exactly divisible by $2^{d-c}$. For $k \\ne \\ell$, the number $n + k$ contains fewer than $c$ factors $2$, so $2^{d-c+1} \\mid a_k$. Hence, modulo $2^{d-c+1}$,\n$$P = (a_\\ell + 1)\\prod_{k\\ne\\ell}(a_k + 1) - 1 \\equiv (a_\\ell + 1) - 1 = a_\\ell \\not\\equiv 0 .$$\nSo $2^{d-c+1} \\nmid P$. On the other hand, there is some $k \\ne \\ell$ (there are $n + 1 \\ge 2$ indices), and then $P \\ge a_k \\ge 2^{d-c+1}$. A power of $2$ that is at least $2^{d-c+1}$ is divisible by $2^{d-c+1}$, so $P$ is not a power of $2$. Since $P > 1$, it has an odd prime factor. ∎"
+   },
+   {
+    "title": "Find an explicit odd factor",
+    "body": "Each $n + k$ ($1 \\le k \\le n+1$) divides $m - n$, so their lcm $L$ divides $m - n$: $m - n = qL$ and $x_k = q\\cdot\\frac{L}{n+k} + 1$. With $2^c = n+\\ell$ as in the first solution, $2^c \\,\\|\\, L$, so $\\frac{L}{n+\\ell}$ is odd while $\\frac{L}{n+k}$ is even for $k \\ne \\ell$. Modulo $2q$, $x_\\ell \\equiv q + 1$ and $x_k \\equiv 1$ for $k \\ne \\ell$, so\n$$x_1\\cdots x_{n+1} - 1 \\equiv q \\pmod{2q},\\qquad\\text{i.e.}\\qquad x_1\\cdots x_{n+1} - 1 = q(2r+1)$$\nfor an integer $r$. Since $x_1\\cdots x_{n+1} - 1 \\ge x_1x_2 - 1 \\ge (q+1)^2 - 1 > q$, we have $r \\ge 1$, so the odd number $2r+1 > 1$ divides the product minus $1$. Any prime factor of it is odd. ∎"
+   }
+  ],
+  "topics": [
+   "number-theory"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "imo-isl-2015-n4",
+  "bank": "imo",
+  "source": {
+   "contest": "IMO Shortlist",
+   "paper": "Number Theory",
+   "year": 2015,
+   "number": 4,
+   "url": "https://www.imo-official.org/assets/documents/problems/2015/IMO2015SL.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Suppose that $a_0, a_1, \\dots$ and $b_0, b_1, \\dots$ are two sequences of positive integers satisfying $a_0, b_0 \\ge 2$ and\n$$a_{n+1} = \\gcd(a_n, b_n) + 1,\\qquad b_{n+1} = \\operatorname{lcm}(a_n, b_n) - 1$$\nfor all $n \\ge 0$. Prove that the sequence $(a_n)$ is eventually periodic; in other words, there exist integers $N \\ge 0$ and $t > 0$ such that $a_{n+t} = a_n$ for all $n \\ge N$.",
+  "image": null,
+  "choices": null,
+  "answer": "With $s_n = a_n + b_n$ and $w_n$ the least $m \\ge a_n$ not dividing $s_n$, the sequence $(w_n)$ is non-increasing, hence eventually constant $= w$, and $g_n = \\gcd(w, s_n)$ is then constant $= g$; so $(a_n)$ eventually cycles through $g+1, g+2, \\dots, w$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "A non-increasing barrier",
+    "body": "Let $s_n = a_n + b_n$. Note $a_n \\ge 2$ for all $n$, so $b_{n+1} = \\operatorname{lcm}(a_n,b_n) - 1 \\ge 1$. Also $a_n \\mid b_n \\iff a_n \\mid s_n$.\n\n- If $a_n \\mid b_n$, then $\\gcd = a_n$ and $\\operatorname{lcm} = b_n$, so $a_{n+1} = a_n + 1$, $b_{n+1} = b_n - 1$ and $s_{n+1} = s_n$.\n- If $a_n \\nmid b_n$, then $\\gcd(a_n, b_n) < a_n$, so $a_{n+1} \\le a_n$.\n\nDefine $W_n = \\{m \\in \\mathbb Z_{>0} : m \\ge a_n,\\ m \\nmid s_n\\}$ (nonempty) and $w_n = \\min W_n$; clearly $a_n \\le w_n$.\n\n**Claim 1.** $w_{n+1} \\le w_n$.\n\n*Proof.* If $a_n \\mid b_n$, then $a_n \\notin W_n$, $a_{n+1} = a_n + 1$ and $s_{n+1} = s_n$, so $W_{n+1} = W_n$. If $a_n \\nmid b_n$, then $a_n \\nmid s_n$, so $w_n = a_n$. We show $a_n \\in W_{n+1}$. First, $a_n \\ge a_{n+1}$. Second, in $s_{n+1} = \\gcd(a_n,b_n) + \\operatorname{lcm}(a_n,b_n)$ the lcm is divisible by $a_n$ but the gcd, a positive number less than $a_n$, is not; so $a_n \\nmid s_{n+1}$. Hence $w_{n+1} \\le a_n = w_n$. $\\square$\n\nSo $(w_n)$ is eventually constant: there are $N$ and $w$ with $w_n = w$ for all $n \\ge N$. For $n \\ge N$:\n\n- if $a_n < w$, then $a_n \\mid s_n$ (as $a_n\\notin W_n$), so $a_{n+1} = a_n + 1$ and $s_{n+1}=s_n$;\n- if $a_n = w$, then $w \\nmid s_n$ and $a_{n+1} = \\gcd(w, b_n) + 1 = \\gcd(w, s_n) + 1$.\n\n**Claim 2.** $g_n = \\gcd(w, s_n)$ is constant for $n \\ge N$.\n\n*Proof.* If $a_n < w$, then $s_{n+1} = s_n$. If $a_n = w$, then $\\gcd(a_n, b_n) = \\gcd(w, s_n) = g_n$, and\n$$s_{n+1} = g_n + \\frac{a_n b_n}{g_n} = g_n + w\\cdot\\frac{s_n - w}{g_n},$$\nwhere $\\frac{s_n - w}{g_n}$ is an integer because $g_n$ divides both $s_n$ and $w$. Hence $g_{n+1} = \\gcd\\big(w,\\ g_n + w\\cdot\\tfrac{s_n-w}{g_n}\\big) = \\gcd(w, g_n) = g_n$. $\\square$\n\nLet $g$ be this constant; $g < w$ since $w \\nmid s_n$. For $n \\ge N$ the sequence $a_n$ increases by $1$ until it reaches $w$, then drops to $g + 1$, then increases again to $w$, and so on. So from the first index $\\ge N$ at which $a_n = w$, it repeats the cycle $g+1, g+2, \\dots, w$ forever. It is eventually periodic with period $t = w - g$. ∎"
+   },
+   {
+    "title": "Reduce $b_n$ modulo a fixed number",
+    "body": "By Claim 1 of the first solution, $a_n \\le w_n \\le w_0$ for all $n$, so $(a_n)$ takes finitely many values. Let $M = \\operatorname{lcm}(a_0, a_1, a_2, \\dots)$, a finite number, and let $r_n$ be the remainder of $b_n$ modulo $M$. Since $a_n \\mid M \\mid b_n - r_n$, we have $\\gcd(a_n, b_n) = \\gcd(a_n, r_n)$, so $a_{n+1} = \\gcd(a_n, r_n) + 1$. Moreover\n$$b_{n+1} = \\frac{a_n}{\\gcd(a_n, r_n)}\\, b_n - 1 \\equiv \\frac{a_n}{\\gcd(a_n, r_n)}\\, r_n - 1 \\pmod M,$$\nso the pair $(a_n, r_n)$ determines $(a_{n+1}, r_{n+1})$. There are finitely many such pairs, so the sequence of pairs, and in particular $(a_n)$, is eventually periodic. ∎"
+   }
+  ],
+  "topics": [
+   "number-theory",
+   "sequences-series"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "imo-isl-2015-n5",
+  "bank": "imo",
+  "source": {
+   "contest": "IMO Shortlist",
+   "paper": "Number Theory",
+   "year": 2015,
+   "number": 5,
+   "url": "https://www.imo-official.org/assets/documents/problems/2015/IMO2015SL.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Determine all triples $(a, b, c)$ of positive integers for which $ab - c$, $bc - a$, and $ca - b$ are powers of $2$.\n\n*Explanation:* A power of $2$ is an integer of the form $2^n$, where $n$ denotes some nonnegative integer.",
+  "image": null,
+  "choices": null,
+  "answer": "$(2,2,2)$, the permutations of $(2,2,3)$, and the permutations of $(2,6,11)$ and of $(3,5,7)$ — sixteen triples in all.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [],
+  "topics": [
+   "number-theory"
+  ],
+  "difficulty": 2,
+  "duplicateOf": "imo-2015-02",
+  "reviewNote": null
+ },
+ {
+  "id": "imo-isl-2015-n6",
+  "bank": "imo",
+  "source": {
+   "contest": "IMO Shortlist",
+   "paper": "Number Theory",
+   "year": 2015,
+   "number": 6,
+   "url": "https://www.imo-official.org/assets/documents/problems/2015/IMO2015SL.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Let $\\mathbb{Z}_{>0}$ denote the set of positive integers. Consider a function $f:\\mathbb{Z}_{>0}\\to\\mathbb{Z}_{>0}$. For any $m, n \\in \\mathbb{Z}_{>0}$ we write $f^n(m) = \\underbrace{f(f(\\dots f}_{n}(m)\\dots))$. Suppose that $f$ has the following two properties:\n\n(i) If $m, n \\in \\mathbb{Z}_{>0}$, then $\\dfrac{f^n(m) - m}{n} \\in \\mathbb{Z}_{>0}$;\n\n(ii) The set $\\mathbb{Z}_{>0} \\setminus \\{f(n) \\mid n \\in \\mathbb{Z}_{>0}\\}$ is finite.\n\nProve that the sequence $f(1) - 1,\\ f(2) - 2,\\ f(3) - 3,\\ \\dots$ is periodic.",
+  "image": null,
+  "choices": null,
+  "answer": "$f$ is injective with $f(m)>m$, so the positive integers split into finitely many chains $a_i, f(a_i), f^2(a_i),\\dots$. A density/pigeonhole argument plus divisibility by $y-j$ shows every chain is an arithmetic progression (step $T_i$), and then $f(n+T)-(n+T)=f(n)-n$ with $T=\\operatorname{lcm}(T_i)$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "The Table of orbits",
+    "body": "**Step 1: the Table.** If $f(m) = f(k)$, then for every $n$,\n$$\\frac{k - m}{n} = \\frac{f^n(m) - m}{n} - \\frac{f^n(k) - k}{n}$$\nis an integer; taking $n = |k-m| + 1$ forces $k = m$. So $f$ is injective. With $n = 1$, (i) gives $f(m) > m$. By (ii), there are finitely many numbers $a_1, \\dots, a_k$ not in the image of $f$.\n\nEvery positive integer can be written uniquely as $f^j(a_i)$ with $j \\ge 0$. Uniqueness follows from injectivity. For existence, use induction: if $n \\notin\\{a_i\\}$, then $n = f(n')$ with $n' < n$. So the positive integers are partitioned into the $k$ rows\n$$a_i,\\ f(a_i),\\ f^2(a_i),\\ \\dots\\qquad (i = 1, \\dots, k),$$\neach strictly increasing.\n\n**Step 2: every row is an arithmetic progression.** Suppose not. Reorder so that exactly the first $t < k$ rows are arithmetic progressions, with steps $T_1, \\dots, T_t$. Let $T = \\operatorname{lcm}(T_1, \\dots, T_t)$ and $A = \\max(a_1, \\dots, a_t)$ (or $T = 1$, $A = 0$ if $t = 0$). For $n \\ge A$, the interval $\\Delta_n = [n+1, n+T]$ contains exactly $T/T_i$ elements of row $i \\le t$. So the number of elements of the last $k - t$ rows in $\\Delta_n$ does not depend on $n$. It is not $0$, since those rows are infinite and cannot lie in $[1, A]$. So each $\\Delta_n$ ($n\\ge A$) contains at least one element of the last $k-t$ rows.\n\nHence, for each $d \\ge 1$, the interval $[A+1,\\ A + (d+1)(k-t)T]$ (a union of $(d+1)(k-t)$ such intervals) contains at least $(d+1)(k-t)$ elements of the last $k-t$ rows. So some row $x > t$ has at least $d+1$ elements there, which gives $f^d(a_x) \\le A + (d+1)(k-t)T$. As there are finitely many rows, some fixed $x > t$ works for all $d$ in an infinite set $X$. For $d \\in X$, by (i),\n$$\\beta_d = \\frac{f^d(a_x) - a_x}{d}$$\nis a positive integer at most $\\frac{A + (d+1)(k-t)T}{d} \\le A + 2(k-t)T$. So some value $T_x$ is taken by $\\beta_d$ for all $d$ in an infinite set $Y \\subseteq X$: $f^d(a_x) = a_x + dT_x$ for $d \\in Y$.\n\nNow fix $j \\ge 1$ and choose $y \\in Y$ with $y - j > \\big|f^j(a_x) - (a_x + jT_x)\\big|$. By (i), $y - j$ divides $f^y(a_x) - f^j(a_x) = f^{y-j}\\big(f^j(a_x)\\big) - f^j(a_x)$. It also divides $f^y(a_x) - (a_x + jT_x) = (y-j)T_x$. Hence it divides the difference $f^j(a_x) - (a_x + jT_x)$, whose absolute value is less than $y - j$; so this difference is $0$. Thus $f^j(a_x) = a_x + jT_x$ for all $j$, and row $x$ is an arithmetic progression — a contradiction.\n\n**Step 3: periodicity.** Let row $i$ have step $T_i$ and let $T = \\operatorname{lcm}(T_1, \\dots, T_k)$. For $n$ in row $i$ we have $f^j(n) = n + jT_i$ for all $j$. In particular $f(n) = n + T_i$ and $n + T = f^{T/T_i}(n)$, so\n$$f(n+T) = f^{1 + T/T_i}(n) = n + T + T_i,\\qquad\\text{i.e.}\\qquad f(n+T) - (n+T) = T_i = f(n) - n .$$\nSo the sequence $f(n) - n$ is periodic with period $T$. ∎\n\n*Example:* $f(n) = n+2$ for even $n$ and $n+4$ for odd $n$ satisfies (i) and (ii), so $f(n)-n$ need not be constant."
+   }
+  ],
+  "topics": [
+   "functional-equations",
+   "number-theory"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "imo-isl-2015-n7",
+  "bank": "imo",
+  "source": {
+   "contest": "IMO Shortlist",
+   "paper": "Number Theory",
+   "year": 2015,
+   "number": 7,
+   "url": "https://www.imo-official.org/assets/documents/problems/2015/IMO2015SL.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Let $\\mathbb{Z}_{>0}$ denote the set of positive integers. For any positive integer $k$, a function $f:\\mathbb{Z}_{>0}\\to\\mathbb{Z}_{>0}$ is called *$k$-good* if $\\gcd\\big(f(m) + n, f(n) + m\\big) \\le k$ for all $m \\ne n$. Find all $k$ such that there exists a $k$-good function.",
+  "image": null,
+  "choices": null,
+  "answer": "Exactly the $k \\ge 2$. No $1$-good function exists (a parity argument), and $f(n) = 2^{g(n)+1} - n - 1$ with $g(1) = 1$, $g(n+1) = \\big(2^{g(n)+1}\\big)!$ is $2$-good.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Parity, then a fast-growing construction",
+    "body": "Write $G_f(m,n) = \\gcd\\big(f(m)+n, f(n)+m\\big)$. A $k$-good function is also $(k+1)$-good, so it suffices to show that there is no $1$-good function and that there is a $2$-good one.\n\n**No $1$-good function.** Suppose $G_f(m,n) = 1$ for all $m \\ne n$. If two distinct even numbers $m, n$ had $f(m), f(n)$ both even, then both $f(m)+n$ and $f(n)+m$ would be even. So at most one even number has an even value, and we can pick an even $m$ with $f(m)$ odd. Likewise, if two distinct odd numbers had odd values, both sums would be even; so we can pick an odd $n$ with $f(n)$ even. Then $f(m) + n$ (odd + odd) and $f(n) + m$ (even + even) are both even, so $2 \\mid G_f(m,n)$. Contradiction.\n\n**A $2$-good function.** Define $g(1) = 1$, $g(n+1) = \\big(2^{g(n)+1}\\big)!$, and $f(n) = 2^{g(n)+1} - n - 1$. By induction $g(n) \\ge n$, so $f(n) \\ge 2^{n+1} - n - 1 \\ge 1$. Also $g(j+1) > g(j)$ for all $j$.\n\nTake $m > n$ and set\n$$A = f(m) + n = 2^{g(m)+1} - m + n - 1,\\qquad B = f(n) + m = 2^{g(n)+1} + m - n - 1 .$$\n- $A + B = 2^{g(m)+1} + 2^{g(n)+1} - 2 \\equiv -2 \\pmod 4$ (both powers are at least $4$), so $4 \\nmid \\gcd(A, B)$.\n- Suppose an odd prime $p$ divides both $A$ and $B$. Since $g(j+1) \\ge g(j) + 1$, we have $2^{g(j+1)+1} \\ge 2^{g(j)+1} + 1$; applying this for $j = n, \\dots, m-2$ gives\n$$2^{g(m-1)+1} \\ge 2^{g(n)+1} + (m - 1 - n) = B .$$\nAs $p \\mid B$ and $B > 0$, we get $p - 1 < B \\le 2^{g(m-1)+1}$, so $p - 1$ divides $\\big(2^{g(m-1)+1}\\big)! = g(m)$. By Fermat's little theorem $2^{g(m)} \\equiv 1 \\pmod p$, so\n$$0 \\equiv A + B \\equiv 2 + 2^{g(n)+1} - 2 = 2^{g(n)+1} \\pmod p,$$\nwhich is impossible for odd $p$.\n\nHence $\\gcd(A, B)$ has no odd prime factor and is not divisible by $4$, so it is $1$ or $2$. Thus $f$ is $2$-good.\n\n**Answer: all $k \\ge 2$.** ∎"
+   }
+  ],
+  "topics": [
+   "number-theory",
+   "functional-equations"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "imo-isl-2015-n8",
+  "bank": "imo",
+  "source": {
+   "contest": "IMO Shortlist",
+   "paper": "Number Theory",
+   "year": 2015,
+   "number": 8,
+   "url": "https://www.imo-official.org/assets/documents/problems/2015/IMO2015SL.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "For every positive integer $n$ with prime factorization $n = \\prod_{i=1}^{k} p_i^{\\alpha_i}$, define\n$$\\mho(n) = \\sum_{i:\\ p_i > 10^{100}} \\alpha_i .$$\nThat is, $\\mho(n)$ is the number of prime factors of $n$ greater than $10^{100}$, counted with multiplicity.\n\nFind all strictly increasing functions $f:\\mathbb{Z}\\to\\mathbb{Z}$ such that\n$$\\mho\\big(f(a) - f(b)\\big) \\le \\mho(a - b)\\quad\\text{for all integers } a \\text{ and } b \\text{ with } a > b.$$",
+  "image": null,
+  "choices": null,
+  "answer": "$f(x) = ax + b$, where $b$ is any integer and $a$ is a positive integer with $\\mho(a) = 0$ (no prime factor above $10^{100}$).",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Large divisors are preserved, then linearity",
+    "body": "**These functions work.** If $f(x) = ax + b$ with $a > 0$ and $\\mho(a) = 0$, then $f$ is strictly increasing and $\\mho\\big(f(x)-f(y)\\big) = \\mho(a) + \\mho(x - y) = \\mho(x-y)$.\n\n**Conversely**, let $f$ satisfy the condition. Replacing $f$ by $f - f(0)$, assume $f(0) = 0$; then $f(n) > 0$ for $n > 0$. Let $N = 10^{100}$. Call a prime *large* if it exceeds $N$ and *small* otherwise, and call a positive integer large (small) if all its prime factors are large (small). For $k \\ge 1$ write $k = L(k)S(k)$ with $L(k)$ large and $S(k)$ small.\n\n**Step 1: for every large $k$, $k \\mid f(a) - f(b) \\iff k \\mid a - b$.** In particular $L\\big(f(a)-f(b)\\big) = L(a-b)$ for $a > b$.\n\nInduct on $k$; the case $k = 1$ is trivial. Let $k_0$ be large and assume the statement for all large $k < k_0$.\n\n*Claim 1.* If $0 < x - y < k_0$, then $k_0 \\nmid f(x) - f(y)$.\n\n*Proof.* Suppose $k_0 \\mid f(x) - f(y)$, and let $\\ell = L(x-y) \\le x - y < k_0$. By the induction hypothesis $\\ell \\mid f(x) - f(y)$, so $\\operatorname{lcm}(k_0, \\ell) \\mid f(x) - f(y)$. This lcm is large and is a proper multiple of $\\ell$ (it is $\\ge k_0 > \\ell$), so $\\mho(\\operatorname{lcm}(k_0,\\ell)) > \\mho(\\ell)$. Hence\n$$\\mho\\big(f(x)-f(y)\\big) \\ge \\mho\\big(\\operatorname{lcm}(k_0,\\ell)\\big) > \\mho(\\ell) = \\mho(x - y),$$\nwhich contradicts the condition. $\\square$\n\nBy Claim 1, each of $f(a), \\dots, f(a+k_0-1)$ and $f(a+1), \\dots, f(a+k_0)$ is a complete residue system modulo $k_0$. Comparing the two systems gives $f(a) \\equiv f(a+k_0) \\pmod{k_0}$. Hence $a \\equiv b \\pmod{k_0}$ implies $f(a) \\equiv f(b)$. If $a \\not\\equiv b$, pick $b' \\equiv b$ with $0 < |a - b'| < k_0$; then $f(b) \\equiv f(b') \\not\\equiv f(a)$ by Claim 1. This completes the induction.\n\n**Step 2: $f(q) = aq$ for infinitely many large primes $q$, with $a$ small.**\n\n*Claim 2.* There is a constant $c$ with $f(t) < ct$ for all $t > N$.\n\n*Proof.* Let $d$ be the product of all small primes and choose $\\alpha$ with $2^\\alpha > f(N)$. Then for each small prime $p$, the numbers $0 = f(0) < f(1) < \\dots < f(N)$ are distinct modulo $p^\\alpha$. Put $P = d^\\alpha$ and $c = P + f(N)$. Take $t > N$. For each small prime $p$ at most one $i \\in \\{0, \\dots, N\\}$ has $p^\\alpha \\mid f(t) - f(i)$. There are fewer than $N+1$ small primes, so some $j \\in \\{0,\\dots,N\\}$ has $p^\\alpha \\nmid f(t) - f(j)$ for all small $p$; then $S\\big(f(t)-f(j)\\big) < P$. By Step 1, $L\\big(f(t)-f(j)\\big) = L(t-j) \\le t - j$. Therefore\n$$f(t) = f(j) + L\\big(f(t)-f(j)\\big)\\,S\\big(f(t)-f(j)\\big) < f(N) + (t-j)P \\le ct.\\ \\square$$\n\nFor a large prime $q$, Step 1 gives $L(f(q)) = L(f(q) - f(0)) = L(q) = q$, so $f(q)/q$ is a positive integer, less than $c$ by Claim 2. There are infinitely many large primes, so there are a positive integer $a$ and an infinite set $\\mathcal T$ of large primes with $f(q) = aq$ for all $q \\in \\mathcal T$. Then $q = L(f(q)) = L(a)\\,q$, so $L(a) = 1$: $a$ is small, i.e. $\\mho(a) = 0$.\n\n**Step 3: $f(x) = ax$ for all $x$.** Let $R_i$ be the residue class of $i$ modulo $N!$.\n\n*Claim 3.* If $f(n) = an$ for infinitely many $n \\in R_r$, then $f(x) = ax$ for all $x \\in R_{r+1}$.\n\n*Proof.* Let $x \\in R_{r+1}$. Choose $n \\in R_r$ with $f(n) = an$ and $|n - x| > |f(x) - ax|$. Since $n - x \\equiv -1 \\pmod{N!}$, the number $|n-x|$ has no prime factor $\\le N$, i.e. it is large. By Step 1, $|n-x|$ divides $f(n) - f(x)$, so $f(x) \\equiv f(n) = an \\equiv ax \\pmod{|n-x|}$. As $|f(x) - ax| < |n-x|$, we get $f(x) = ax$. $\\square$\n\nThe infinite set $\\mathcal T$ meets some class $R_i$ infinitely often. Applying Claim 3 repeatedly gives $f(x) = ax$ on $R_{i+1}, R_{i+2}, \\dots, R_{i+N!} = R_i$, i.e. on all of $\\mathbb Z$.\n\nUndoing the normalisation, $f(x) = ax + f(0)$ with $a$ a positive integer and $\\mho(a) = 0$. ∎"
+   }
+  ],
+  "topics": [
+   "functional-equations",
+   "number-theory"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ }
+]

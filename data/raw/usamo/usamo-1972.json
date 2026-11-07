@@ -1,0 +1,181 @@
+[
+  {
+    "id": "usamo-usamo-1972-01",
+    "bank": "usamo",
+    "source": {
+      "contest": "USAMO",
+      "paper": "USAMO 1972",
+      "year": 1972,
+      "number": 1,
+      "url": "https://artofproblemsolving.com/wiki/index.php/1972_USAMO_Problems/Problem_1"
+    },
+    "grade": "10-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "The symbols $(a,b,\\ldots,g)$ and $[a,b,\\ldots,g]$ denote the greatest common divisor and least common multiple, respectively, of the positive integers $a,b,\\ldots,g$. For example, $(3,6,18)=3$ and $[6,15]=30$. Prove that\n$$\\frac{[a,b,c]^2}{[a,b][b,c][c,a]}=\\frac{(a,b,c)^2}{(a,b)(b,c)(c,a)}.$$",
+    "image": null,
+    "choices": null,
+    "answer": "Compare exponents of each prime: with $\\alpha\\le\\beta\\le\\gamma$ the exponents of $p$ in $a,b,c$ (in some order), both sides have exponent $-\\beta$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Compare prime exponents",
+        "body": "Two positive rationals are equal if every prime $p$ appears with the same exponent in both. Fix a prime $p$ and let $x, y, z \\ge 0$ be the exponents of $p$ in $a, b, c$. Both sides are symmetric in $a, b, c$ (each is unchanged by any permutation of $a,b,c$), so we may relabel and assume $x \\le y \\le z$.\n\nThe exponent of $p$ in a gcd is the minimum of the exponents, and in an lcm the maximum. So:\n\n- In $[a,b,c]^2$: $2z$. In $[a,b][b,c][c,a]$: $\\max(x,y)+\\max(y,z)+\\max(z,x) = y + z + z$. The left side has exponent $2z - (y+2z) = -y$.\n- In $(a,b,c)^2$: $2x$. In $(a,b)(b,c)(c,a)$: $\\min(x,y)+\\min(y,z)+\\min(z,x) = x + y + x$. The right side has exponent $2x - (2x+y) = -y$.\n\nThe exponents agree for every prime, so the two sides are equal. ∎"
+      },
+      {
+        "title": "Via the inclusion–exclusion identity",
+        "body": "For two numbers, $[u,v](u,v) = uv$. For a prime $p$ with exponents $x\\le y\\le z$ in $a,b,c$ (after relabelling), the exponent of $p$ in $\\dfrac{abc\\,(a,b,c)}{(a,b)(b,c)(c,a)}$ is $(x+y+z) + x - (x + y + x) = z$, which is the exponent in $[a,b,c]$. Hence\n$$[a,b,c] = \\frac{abc\\,(a,b,c)}{(a,b)(b,c)(c,a)}.$$\nSquare it and divide by $[a,b][b,c][c,a] = \\dfrac{ab\\cdot bc\\cdot ca}{(a,b)(b,c)(c,a)} = \\dfrac{(abc)^2}{(a,b)(b,c)(c,a)}$:\n$$\\frac{[a,b,c]^2}{[a,b][b,c][c,a]} = \\frac{(abc)^2 (a,b,c)^2}{\\big((a,b)(b,c)(c,a)\\big)^2}\\cdot\\frac{(a,b)(b,c)(c,a)}{(abc)^2} = \\frac{(a,b,c)^2}{(a,b)(b,c)(c,a)}. \\;∎$$"
+      }
+    ],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamo-usamo-1972-02",
+    "bank": "usamo",
+    "source": {
+      "contest": "USAMO",
+      "paper": "USAMO 1972",
+      "year": 1972,
+      "number": 2,
+      "url": "https://artofproblemsolving.com/wiki/index.php/1972_USAMO_Problems/Problem_2"
+    },
+    "grade": "10-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "A given tetrahedron $ABCD$ is isosceles, that is, $AB=CD$, $AC=BD$, $AD=BC$. Show that the faces of the tetrahedron are acute-angled triangles.",
+    "image": null,
+    "choices": null,
+    "answer": "For every edge $XY$ with midpoint $M$ and opposite vertices $Z,W$: the medians $ZM, WM$ are equal, and $ZW<ZM+MW$ gives $ZM>\\tfrac12 XY$, so $\\angle XZY$ is acute.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Medians to a common edge",
+        "body": "**Key identity.** For any triangle $XZY$ with $M$ the midpoint of $XY$,\n$$\\vec{ZX}\\cdot\\vec{ZY} = (\\vec{ZM}+\\vec{MX})\\cdot(\\vec{ZM}-\\vec{MX}) = ZM^2 - \\tfrac14 XY^2,$$\nsince $\\vec{MY} = -\\vec{MX}$. So $\\angle XZY$ is acute iff $ZM > \\tfrac12 XY$.\n\nEvery angle of every face has the form $\\angle XZY$ where $XY$ is an edge and $Z$ is one of the two other vertices; call the fourth vertex $W$. The edge $ZW$ is the edge opposite $XY$, so $ZW = XY$. Also the edges $XZ$ and $YW$ are opposite, as are $YZ$ and $XW$; hence $XZ = YW$ and $YZ = XW$. Thus triangles $XYZ$ and $YXW$ are congruent (SSS) by the correspondence $X\\to Y$, $Y \\to X$, $Z\\to W$, which maps the midpoint $M$ of $XY$ to itself. Therefore the medians are equal: $ZM = WM$.\n\nNow $Z, M, W$ are not collinear: otherwise $Z$ and $W$ would lie on a line through $M \\in XY$, so all four vertices would lie in one plane, contradicting that $ABCD$ is a tetrahedron. By the strict triangle inequality in triangle $ZMW$,\n$$XY = ZW < ZM + MW = 2ZM,$$\nso $ZM > \\tfrac12 XY$, and by the key identity $\\angle XZY$ is acute.\n\nSince this holds for every angle of every face, all faces are acute-angled. ∎"
+      },
+      {
+        "title": "Vectors from one vertex",
+        "body": "Put $D$ at the origin and let $\\vec a = \\vec{DA}$, $\\vec b = \\vec{DB}$, $\\vec c = \\vec{DC}$. The conditions $BC = AD$, $AC = BD$, $AB = CD$ read\n$$|\\vec b-\\vec c|^2 = |\\vec a|^2,\\quad |\\vec a-\\vec c|^2 = |\\vec b|^2,\\quad |\\vec a-\\vec b|^2 = |\\vec c|^2.$$\nExpanding the first: $2\\,\\vec b\\cdot\\vec c = |\\vec b|^2 + |\\vec c|^2 - |\\vec a|^2$, and similarly for the others. Hence\n$$2\\,\\vec b\\cdot \\vec c = |\\vec b|^2+|\\vec c|^2-|\\vec a|^2 \\quad\\text{etc.}$$\nNow compute $|\\vec b + \\vec c - \\vec a|^2 = |\\vec a|^2+|\\vec b|^2+|\\vec c|^2 + 2\\vec b\\cdot\\vec c - 2\\vec a\\cdot\\vec b - 2\\vec a\\cdot\\vec c$. Substituting the three expressions gives $|\\vec b+\\vec c-\\vec a|^2 = 4\\,\\vec b\\cdot\\vec c$. The vector $\\vec b+\\vec c-\\vec a$ is nonzero, because $\\vec a,\\vec b,\\vec c$ are linearly independent (the tetrahedron is non-degenerate). Hence $\\vec b\\cdot\\vec c > 0$, i.e. $\\angle BDC$ is acute. By symmetry $\\angle ADB$ and $\\angle ADC$ are acute, so all angles at $D$ are acute; the same argument at each vertex shows every face angle is acute. ∎"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamo-usamo-1972-03",
+    "bank": "usamo",
+    "source": {
+      "contest": "USAMO",
+      "paper": "USAMO 1972",
+      "year": 1972,
+      "number": 3,
+      "url": "https://artofproblemsolving.com/wiki/index.php/1972_USAMO_Problems/Problem_3"
+    },
+    "grade": "10-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "A random number selector can only select one of the nine integers $1, 2, \\ldots, 9$, and it makes these selections with equal probability. Determine the probability that after $n$ selections ($n>1$), the product of the $n$ numbers selected will be divisible by $10$.",
+    "image": null,
+    "choices": null,
+    "answer": "$$1-\\left(\\tfrac89\\right)^n-\\left(\\tfrac59\\right)^n+\\left(\\tfrac49\\right)^n = \\frac{9^n - 8^n - 5^n + 4^n}{9^n}$$",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Complement and inclusion–exclusion",
+        "body": "The product is divisible by $10$ iff at least one selected number is $5$ (the only multiple of $5$ available) and at least one is even.\n\nLet $F$ = \"no 5 is chosen\" and $G$ = \"no even number is chosen\". The product fails to be divisible by $10$ exactly on $F\\cup G$.\n\n- $P(F) = (8/9)^n$ (each selection avoids 5).\n- $P(G) = (5/9)^n$ (each selection is one of $1,3,5,7,9$).\n- $P(F\\cap G) = (4/9)^n$ (each selection is one of $1,3,7,9$).\n\nBy inclusion–exclusion, $P(F\\cup G) = (8/9)^n + (5/9)^n - (4/9)^n$, so\n$$P(10 \\mid \\text{product}) = 1 - \\left(\\tfrac89\\right)^n - \\left(\\tfrac59\\right)^n + \\left(\\tfrac49\\right)^n = \\frac{9^n-8^n-5^n+4^n}{9^n}.$$\n(Check $n = 2$: $(81-64-25+16)/81 = 8/81$; indeed the good ordered pairs are $(5, \\text{even})$ and $(\\text{even}, 5)$: $2\\cdot 4 = 8$.)"
+      },
+      {
+        "title": "Count the favourable sequences directly",
+        "body": "Count sequences of length $n$ from $\\{1,\\dots,9\\}$ containing at least one $5$ and at least one even number. Total $9^n$. Sequences with no $5$: $8^n$. Sequences with no even number: $5^n$. Sequences with neither: $4^n$ (from $\\{1,3,7,9\\}$). The favourable count is $9^n - 8^n - 5^n + 4^n$, giving probability $\\dfrac{9^n-8^n-5^n+4^n}{9^n}$."
+      }
+    ],
+    "topics": [
+      "probability",
+      "counting"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamo-usamo-1972-04",
+    "bank": "usamo",
+    "source": {
+      "contest": "USAMO",
+      "paper": "USAMO 1972",
+      "year": 1972,
+      "number": 4,
+      "url": "https://artofproblemsolving.com/wiki/index.php/1972_USAMO_Problems/Problem_4"
+    },
+    "grade": "10-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $R$ denote a non-negative rational number. Determine a fixed set of integers $a,b,c,d,e,f$, such that for every choice of $R$,\n$$\\left|\\frac{aR^2+bR+c}{dR^2+eR+f}-\\sqrt[3]{2}\\right|<|R-\\sqrt[3]{2}|.$$",
+    "image": null,
+    "choices": null,
+    "answer": "For example $(a,b,c,d,e,f) = (0,2,2,1,0,2)$, i.e. $\\dfrac{2R+2}{R^2+2}$. (Any choice must satisfy $e=a$, $f=b$, $c=2d$.)",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Factor out $R - \\sqrt[3]{2}$",
+        "body": "Let $t = \\sqrt[3]{2}$, so $t^3 = 2$ and $2/t = t^2$.\n\n**Finding the form.** If the inequality holds for all non-negative rationals $R$, then letting $R \\to t$ through rationals forces the fraction to tend to $t$; this suggests choosing coefficients so that $R=t$ is a root of $aR^2+bR+c - t(dR^2+eR+f)$. Take $e = a$, $f = b$, $c = 2d$. Then\n$$aR^2 + bR + 2d - t(dR^2 + aR + b) = (a - td)R^2 + (b - ta)R + (2d - tb),$$\nand at $R=t$ this equals $at^2 - 2d + bt - at^2 + 2d - bt = 0$. Dividing by $R - t$:\n$$(a-td)R^2 + (b-ta)R + (2d-tb) = (R-t)\\big((a-td)R + (b - dt^2)\\big)$$\n(check the constant term: $-t(b - dt^2) = -tb + dt^3 = 2d - tb$ ✓).\n\n**A concrete choice.** Take $a = 0$, $b = 2$, $d = 1$, so $c = 2$, $e = 0$, $f = 2$:\n$$\\frac{2R+2}{R^2+2} - t = \\frac{(R-t)(-tR + 2 - t^2)}{R^2+2}.$$\nSo we need, for $R\\ge 0$ rational,\n$$|tR + t^2 - 2| < R^2 + 2. \\tag{$*$}$$\n(The case $R = t$ cannot occur since $t$ is irrational, so $|R-t| > 0$ and $(*)$ is exactly what is needed after dividing by $|R-t|$.)\n\n- $tR + t^2 - 2 < R^2 + 2 \\iff R^2 - tR + (4 - t^2) > 0$. This quadratic in $R$ has discriminant $t^2 - 4(4-t^2) = 5t^2 - 16 < 0$, since $t^2 = \\sqrt[3]{4} < 2 < 16/5$. So it is always positive.\n- $-(tR + t^2 - 2) < R^2 + 2 \\iff R^2 + tR + t^2 > 0$, true for $R \\ge 0$.\n\nHence $(*)$ holds, and\n$$\\left|\\frac{2R+2}{R^2+2} - \\sqrt[3]{2}\\right| = |R - \\sqrt[3]{2}|\\cdot\\frac{|tR+t^2-2|}{R^2+2} < |R-\\sqrt[3]{2}|$$\nfor every non-negative rational $R$.\n\n**Answer:** $a=0,\\ b=2,\\ c=2,\\ d=1,\\ e=0,\\ f=2$. ∎"
+      }
+    ],
+    "topics": [
+      "algebra",
+      "inequalities"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamo-usamo-1972-05",
+    "bank": "usamo",
+    "source": {
+      "contest": "USAMO",
+      "paper": "USAMO 1972",
+      "year": 1972,
+      "number": 5,
+      "url": "https://artofproblemsolving.com/wiki/index.php/1972_USAMO_Problems/Problem_5"
+    },
+    "grade": "10-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "A given convex pentagon $ABCDE$ has the property that the area of each of the five triangles $ABC$, $BCD$, $CDE$, $DEA$, and $EAB$ is unity. Show that all pentagons with the above property have the same area, and calculate that area. Show, furthermore, that there are infinitely many non-congruent pentagons having the above area property.",
+    "image": "qimages/usamo/usamo-1972/q05.webp",
+    "choices": null,
+    "answer": "The area is always $\\dfrac{5+\\sqrt5}{2}$ (each diagonal is parallel to a side; with $P = BD\\cap CE$, $ABPE$ is a parallelogram and $[PCD]=y$ satisfies $(1-y)^2=y$). Area-preserving affine images of a regular pentagon give infinitely many examples.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Parallel diagonals and a parallelogram",
+        "body": "**Each diagonal is parallel to a side.** Since $[EAB] = [ABC]$, the points $E$ and $C$ are at the same distance from line $AB$, and by convexity they lie on the same side of it; hence $EC \\parallel AB$. In the same way every diagonal is parallel to the \"opposite\" side; in particular $BD \\parallel AE$ (from $[DEA] = [EAB]$, $D$ and $B$ are equidistant from $AE$).\n\n**The parallelogram.** Let $P$ be the intersection of the diagonals $BD$ and $CE$ (they cross inside the convex quadrilateral $BCDE$). Since $P$ lies on $EC \\parallel AB$ and on $BD\\parallel AE$, the quadrilateral $ABPE$ has $AB \\parallel PE$ and $AE \\parallel BP$, so it is a parallelogram. Its diagonal $BE$ halves it, so\n$$[ABPE] = 2[ABE] = 2, \\qquad [BPE] = 1.$$\n\n**The small triangles.** Let $y = [PCD]$. From $[BCD] = [BCP] + [PCD] = 1$ and $[CDE] = [PCD] + [PDE] = 1$, we get $[BCP] = [PDE] = 1 - y$. In quadrilateral $BCDE$ with diagonals meeting at $P$, triangles with a common height give\n$$\\frac{[BPC]}{[CPD]} = \\frac{BP}{PD} = \\frac{[BPE]}{[EPD]},$$\nso $[BPC]\\cdot[EPD] = [CPD]\\cdot[BPE]$, i.e. $(1-y)^2 = y\\cdot 1$. Thus $y^2 - 3y + 1 = 0$, and since $0 < y < 1$, $y = \\dfrac{3-\\sqrt5}{2}$.\n\n**The area.** Splitting the pentagon from $P$:\n$$[ABCDE] = [ABPE] + [BCP] + [PCD] + [PDE] = 2 + 2(1-y) + y = 4 - y = \\frac{5+\\sqrt5}{2}.$$\nThis value does not depend on the pentagon, as required.\n\n**Infinitely many examples.** A regular pentagon has all five triangles $ABC, \\dots, EAB$ congruent, hence of equal area; scale it so that this area is $1$. An affine map $T(x,y) = (kx, y/k)$ with $k>0$ has determinant $1$, so it preserves areas, maps lines to lines and preserves convexity. Hence $T$ maps the regular pentagon to a convex pentagon with the same property. The perimeter $p(k)$ of the image is continuous in $k$ and tends to infinity as $k \\to\\infty$ (some side has a nonzero horizontal component, which is multiplied by $k$), so $p(k)$ takes infinitely many different values. Congruent pentagons have equal perimeters, so we obtain infinitely many non-congruent pentagons with the property. ∎"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

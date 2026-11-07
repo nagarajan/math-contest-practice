@@ -55,6 +55,11 @@ describe('isCorrect', () => {
     expect(isCorrect(t, 'WED')).toBe(true)
     expect(isCorrect(t, 'Thursday')).toBe(false)
   })
+  it('text answers keep powers and products distinct', () => {
+    const t = q({ type: 'text', answer: '2*3^658' })
+    expect(isCorrect(t, '2 * 3^658')).toBe(true)
+    expect(isCorrect(t, '23658')).toBe(false)
+  })
   it('multiple choice compares keys', () => {
     const m = q({ type: 'mc', answer: 'C', choices: [{ key: 'A', text: '1' }, { key: 'C', text: '3' }] })
     expect(isCorrect(m, 'c')).toBe(true)

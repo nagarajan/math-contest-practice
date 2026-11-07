@@ -1,0 +1,203 @@
+[
+  {
+    "id": "imo-2022-01",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO",
+      "paper": "Day 1",
+      "year": 2022,
+      "number": 1,
+      "url": "https://www.imo-official.org/assets/documents/problems/2022/2022_eng.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "The Bank of Oslo issues two types of coin: aluminium (denoted $A$) and bronze (denoted $B$). Marianne has $n$ aluminium coins and $n$ bronze coins, arranged in a row in some arbitrary initial order. A *chain* is any subsequence of consecutive coins of the same type. Given a fixed positive integer $k \\le 2n$, Marianne repeatedly performs the following operation: she identifies the longest chain containing the $k$-th coin from the left, and moves all coins in that chain to the left end of the row. For example, if $n=4$ and $k=4$, the process starting from the ordering $AABBBABA$ would be\n$$AABBBABA \\to BBBAAABA \\to AAABBBBA \\to BBBBAAAA \\to BBBBAAAA \\to \\cdots.$$\nFind all pairs $(n,k)$ with $1 \\le k \\le 2n$ such that for every initial ordering, at some moment during the process, the leftmost $n$ coins will all be of the same type.",
+    "image": null,
+    "choices": null,
+    "answer": "Exactly the pairs with $n\\le k\\le\\left\\lceil\\frac{3n}{2}\\right\\rceil$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Count the blocks",
+        "body": "Call a maximal chain a *block*. The leftmost $n$ coins are all of one type exactly when the row has only $2$ blocks ($A^nB^n$ or $B^nA^n$). Write $M^b$ for a block of $b$ coins of type $M$.\n\n**$k<n$ fails.** The row $A^{n-1}B^{n-1}AB$ has its $k$-th coin in the first block; moving that block to the left changes nothing, so the row never changes and always has $4$ blocks.\n\n**$k>\\lceil 3n/2\\rceil$ fails.** Then $2k\\ge 3n+2$. Put $a=k-n-1\\ge1$ and $b=2n-k+1\\ge1$, so $a+b=n$, and start from $A^aB^bA^bB^a$. A last block of size $s$ contains the $k$-th coin iff $k\\ge 2n-s+1$; this holds for $s=b$ (equality) and for $s=a$ (it says $2k\\ge3n+2$). So each operation moves the last block to the front:\n$$A^aB^bA^bB^a\\to B^aA^aB^bA^b\\to A^bB^aA^aB^b\\to B^bA^bB^aA^a\\to A^aB^bA^bB^a\\to\\cdots,$$\nand every row in this cycle has a last block of size $a$ or $b$. So there are always $4$ blocks.\n\n**$n\\le k\\le\\lceil3n/2\\rceil$ works.** Suppose the row has $c\\ge3$ blocks; we show the number of blocks never increases and eventually decreases.\n- The moved block is not the first one: the first block has fewer than $n$ coins (otherwise it contains all $n$ coins of its type and $c=2$), so it does not contain position $k\\ge n$.\n- If a middle block is moved, its two neighbours (same type) merge, and placing the moved block at the front adds at most one block: the count drops by at least $1$.\n- If the last block is moved and $c$ is odd, the first and last blocks have the same type, so it merges with the first block: the count drops by $1$.\n- If the last block is moved and $c$ is even, the count stays the same and the sequence of blocks is rotated cyclically by one.\n\nSuppose the count stayed equal to some even $c\\ge4$ forever. Then the last block is moved every time, so after $c$ steps every block $a_1,\\dots,a_c$ (sizes, $\\sum a_i=2n$) has been last. Each time, $k\\ge 2n+1-a_i$. Summing, $ck\\ge c(2n+1)-2n$, so\n$$k\\ge 2n+1-\\frac{2n}{c}\\ge 2n+1-\\frac n2=\\frac{3n}2+1>\\left\\lceil\\frac{3n}{2}\\right\\rceil,$$\na contradiction. Hence the number of blocks keeps decreasing until it reaches $2$, at which point the leftmost $n$ coins are of the same type.\n\n**Answer:** all pairs with $n\\le k\\le\\lceil 3n/2\\rceil$."
+      }
+    ],
+    "topics": [
+      "counting",
+      "logic"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-2022-02",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO",
+      "paper": "Day 1",
+      "year": 2022,
+      "number": 2,
+      "url": "https://www.imo-official.org/assets/documents/problems/2022/2022_eng.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $\\mathbb{R}_{>0}$ denote the set of positive real numbers. Find all functions $f: \\mathbb{R}_{>0} \\to \\mathbb{R}_{>0}$ such that for each $x \\in \\mathbb{R}_{>0}$, there is exactly one $y \\in \\mathbb{R}_{>0}$ satisfying\n$$xf(y) + yf(x) \\le 2.$$",
+    "image": null,
+    "choices": null,
+    "answer": "Only $f(x)=\\dfrac1x$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Everyone is their own partner",
+        "body": "**$f(x)=1/x$ works:** $xf(y)+yf(x)=\\frac xy+\\frac yx\\ge2$ with equality only for $y=x$, so $y=x$ is the unique solution.\n\nNow let $f$ satisfy the condition. Call $y$ the *partner* of $x$ if $xf(y)+yf(x)\\le2$. The condition is symmetric, so if $y$ is the partner of $x$ then $x$ is the partner of $y$, and everyone has exactly one partner.\n\n**Claim: every $x$ is its own partner.** Suppose the partner of $a$ is $b\\ne a$; then $b$'s partner is $a$. Since $a$ is not its own partner, $2af(a)>2$, i.e. $f(a)>\\frac1a$; likewise $f(b)>\\frac1b$. Then\n$$2\\ge af(b)+bf(a)>\\frac ab+\\frac ba\\ge2,$$\na contradiction. $\\square$\n\nSo for all $x$: $xf(x)\\le1$, i.e. $f(x)\\le\\frac1x$; and for all $x\\ne y$: $xf(y)+yf(x)>2$.\n\n**Lower bound.** Fix $x$ and $\\varepsilon>0$, and take $y=x+\\varepsilon$. Using $f(x+\\varepsilon)\\le\\frac1{x+\\varepsilon}$,\n$$2<xf(x+\\varepsilon)+(x+\\varepsilon)f(x)\\le\\frac{x}{x+\\varepsilon}+(x+\\varepsilon)f(x),$$\nso\n$$f(x)>\\frac{2-\\frac{x}{x+\\varepsilon}}{x+\\varepsilon}=\\frac{x+2\\varepsilon}{(x+\\varepsilon)^2}.$$\nLetting $\\varepsilon\\to0$ gives $f(x)\\ge\\frac1x$. Together with $f(x)\\le\\frac1x$, $f(x)=\\frac1x$ for all $x$.\n\n**Answer:** $f(x)=\\frac1x$. ∎"
+      }
+    ],
+    "topics": [
+      "functional-equations",
+      "inequalities"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-2022-03",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO",
+      "paper": "Day 1",
+      "year": 2022,
+      "number": 3,
+      "url": "https://www.imo-official.org/assets/documents/problems/2022/2022_eng.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $k$ be a positive integer and let $S$ be a finite set of odd prime numbers. Prove that there is at most one way (up to rotation and reflection) to place the elements of $S$ around a circle such that the product of any two neighbours is of the form $x^2+x+k$ for some positive integer $x$.",
+    "image": null,
+    "choices": null,
+    "answer": "Proof: for the largest prime $p$ there are at most two primes $q<p$ with $pq=x^2+x+k$ (roots of $T^2+T+k$ mod $p$); if $pq$ and $pr$ are of this form then so is $qr$ (norm identity), so deleting $p$ gives a valid circle and induction applies.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Remove the largest prime",
+        "body": "Call an integer *good* if it equals $x^2+x+k$ for some integer $x\\ge0$. Since $x^2+x+k=x'^2+x'+k$ for $x'=-1-x$, an integer is good iff it equals $x^2+x+k$ for some integer $x$. We prove the stronger statement where \"positive\" is replaced by \"non-negative\" (every arrangement in the original sense is also one in this sense), by induction on $|S|$. If $|S|\\le3$ there is only one arrangement up to rotation and reflection.\n\n**Claim 1.** Let $p$ be an odd prime. There are at most two primes $q<p$ such that $pq$ is good. If there are two, $q\\ne r$, with $pq=x^2+x+k$ and $pr=y^2+y+k$, $x,y\\ge0$, then $x+y+1=p$ and $xy\\equiv k\\pmod p$.\n\n*Proof.* If $pq=x^2+x+k$ with $q<p$, then $x^2<pq<p^2$, so $0\\le x\\le p-1$, and $x$ is a root of $T^2+T+k$ modulo $p$. A quadratic has at most two roots modulo a prime, and $x$ determines $q=\\frac{x^2+x+k}{p}$, so there are at most two such $q$. If there are two, $x\\not\\equiv y$ are the two roots, so $T^2+T+k\\equiv(T-x)(T-y)$, giving $x+y\\equiv-1$ and $xy\\equiv k\\pmod p$. As $x\\ne y$ lie in $[0,p-1]$, $2\\le x+y+1\\le 2p-2$, hence $x+y+1=p$. $\\square$\n\n**Claim 2.** In that situation, $qr$ is good.\n\n*Proof.* For integers $u,v$ one checks the identity\n$$(x^2+x+k)(y^2+y+k)=u^2+uv+kv^2,\\qquad u=xy-k,\\ v=x+y+1$$\n(it is the norm identity $N(x-\\alpha)N(y-\\alpha)=N\\big((xy-k)-(x+y+1)\\alpha\\big)$ for a root $\\alpha$ of $t^2+t+k$; it can also be verified by expanding). With $v=p$ and $u=xy-k=pz$ for an integer $z$:\n$$p^2qr=p^2z^2+p^2z+kp^2,\\qquad\\text{so}\\qquad qr=z^2+z+k,$$\nwhich is good. $\\square$\n\n**Induction step.** Let $|S|\\ge4$ and let $p$ be the largest element of $S$. In any valid arrangement, the two neighbours $q,r$ of $p$ are distinct primes in $S$ smaller than $p$ with $pq,pr$ good. By Claim 1 they are the only primes in $S\\setminus\\{p\\}$ with this property, so the pair $\\{q,r\\}$ depends only on $S$. Removing $p$ from the circle makes $q$ and $r$ neighbours, and by Claim 2 the result is a valid arrangement of $S\\setminus\\{p\\}$. By the induction hypothesis this arrangement is unique up to rotation and reflection, and the original one is recovered by inserting $p$ between the adjacent elements $q$ and $r$ (which are adjacent at exactly one place, as $|S\\setminus\\{p\\}|\\ge3$). Hence the arrangement of $S$ is unique as well. ∎"
+      }
+    ],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-2022-04",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO",
+      "paper": "Day 2",
+      "year": 2022,
+      "number": 4,
+      "url": "https://www.imo-official.org/assets/documents/problems/2022/2022_eng.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $ABCDE$ be a convex pentagon such that $BC = DE$. Assume that there is a point $T$ inside $ABCDE$ with $TB = TD$, $TC = TE$ and $\\angle ABT = \\angle TEA$. Let line $AB$ intersect lines $CD$ and $CT$ at points $P$ and $Q$, respectively. Assume that the points $P, B, A, Q$ occur on their line in that order. Let line $AE$ intersect lines $CD$ and $DT$ at points $R$ and $S$, respectively. Assume that the points $R, E, A, S$ occur on their line in that order. Prove that the points $P, S, Q, R$ lie on a circle.",
+    "image": null,
+    "choices": null,
+    "answer": "Proof: $\\triangle TBC\\cong\\triangle TDE$ gives $\\triangle TBQ\\sim\\triangle TES$, hence $TD\\cdot TS=TC\\cdot TQ$, so $C,D,Q,S$ are concyclic; an angle chase in triangle $CPQ$ then gives $\\angle RPQ=\\angle RSQ$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Similar triangles and a cyclic quadrilateral",
+        "body": "**Congruent triangles.** Since $TB=TD$, $TC=TE$ and $BC=DE$, the triangles $TBC$ and $TDE$ are congruent (SSS), so $\\angle BTC=\\angle DTE$.\n\n**$\\triangle TBQ\\sim\\triangle TES$.** The point $Q$ lies on line $CT$ beyond $T$ and $S$ on line $DT$ beyond $T$. So\n$$\\angle QTB=180^\\circ-\\angle BTC=180^\\circ-\\angle DTE=\\angle ETS.$$\nMoreover $Q$ is on ray $BA$ and $S$ is on ray $EA$, so $\\angle TBQ=\\angle TBA=\\angle AET=\\angle SET$. Two equal angles give $\\triangle TBQ\\sim\\triangle TES$; in particular\n$$\\frac{TB}{TQ}=\\frac{TE}{TS}\\qquad\\text{and}\\qquad\\angle BQT=\\angle TSE.$$\n\n**$C,D,Q,S$ are concyclic.** Using $TB=TD$ and $TE=TC$, the ratio becomes $\\frac{TD}{TQ}=\\frac{TC}{TS}$, i.e. $TD\\cdot TS=TC\\cdot TQ$. Since $T$ lies between $D$ and $S$ and between $C$ and $Q$, the converse of the power of a point gives that $C,D,Q,S$ are concyclic. Hence $\\angle DCQ=\\angle DSQ$.\n\n**Angle chase.** On line $CD$ the order is $P,C,D,R$. In triangle $CPQ$, $\\angle RCQ$ is the exterior angle at $C$, so\n$$\\angle RPQ=\\angle CPQ=\\angle RCQ-\\angle PQC=\\angle DCQ-\\angle BQT.$$\nNow $\\angle DCQ=\\angle DSQ$, and $\\angle BQT=\\angle TSE=\\angle DSR$ (as $D$ lies on ray $ST$ and $R$ on ray $SE$). Therefore\n$$\\angle RPQ=\\angle DSQ-\\angle DSR=\\angle RSQ.$$\nThe points $P$ and $S$ lie on the same side of line $QR$, so $P,S,Q,R$ are concyclic. ∎"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-2022-05",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO",
+      "paper": "Day 2",
+      "year": 2022,
+      "number": 5,
+      "url": "https://www.imo-official.org/assets/documents/problems/2022/2022_eng.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Find all triples $(a, b, p)$ of positive integers with $p$ prime and\n$$a^p = b! + p.$$",
+    "image": null,
+    "choices": null,
+    "answer": "$(a,b,p)=(2,2,2)$ and $(3,4,3)$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Show $a=p$, then work mod $(p+1)^2$",
+        "body": "Both triples work: $2^2=2!+2$ and $3^3=27=4!+3$. Clearly $a\\ge2$.\n\n**Case $a<p$.** If $a\\le b$, then $a\\mid b!$ and $a\\mid a^p$, so $a\\mid p$, impossible for $1<a<p$. If $a>b$, then $b!\\le a!<a^a\\le a^{p-1}$, so $a^p-b!>a^p-a^{p-1}\\ge 2^{p-1}\\ge p$, contradicting $a^p-b!=p$.\n\n**Case $a>p$.** Then $b!=a^p-p>p^p-p\\ge p!$ (for $p\\ge3$, $p!+p\\le p^{p-1}+p<p^p$; for $p=2$, $p^p-p=2=p!$), so $b>p$. Then $p\\mid b!+p=a^p$, so $p\\mid a$ and $p^2\\mid a^p$. Hence $b!=a^p-p\\equiv -p\\pmod{p^2}$ is not divisible by $p^2$, which forces $b<2p$.\n- If $a<p^2$, write $a=pm$ with $1<m<p$. Then $m\\le b$ divides $b!$ and $a^p$, so $m\\mid p$, impossible.\n- If $a\\ge p^2$, then $a^p\\ge p^{2p}$. But $(2p-1)!=p\\prod_{i=1}^{p-1}i(2p-i)<p\\cdot(p^2)^{p-1}=p^{2p-1}$, so $b!+p\\le(2p-1)!+p<p^{2p-1}+p\\le p^{2p}$, a contradiction.\n\n**Case $a=p$.** Now $b!=p^p-p$.\n- $p=2$: $b!=2$, so $b=2$: the triple $(2,2,2)$.\n- $p=3$: $b!=24$, so $b=4$: the triple $(3,4,3)$.\n- $p\\ge5$: As above $b!=p^p-p>p!$, so $b\\ge p+1$. Since $p\\ge5$, the numbers $2$ and $\\frac{p+1}2$ are distinct and at most $p$, so $p+1\\mid p!$ and $(p+1)^2\\mid(p+1)!\\mid b!$. On the other hand, by the binomial theorem with $p=(p+1)-1$ and $p$ odd,\n$$p^p\\equiv\\binom p1(p+1)(-1)^{p-1}+(-1)^p=p(p+1)-1\\pmod{(p+1)^2},$$\nso $p^p-p\\equiv p^2-1=(p-1)(p+1)\\pmod{(p+1)^2}$. This is not $\\equiv0$, because $p+1\\nmid p-1$ (as $0<p-1<p+1$). Contradiction.\n\n**Answer:** $(a,b,p)=(2,2,2)$ and $(3,4,3)$."
+      }
+    ],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-2022-06",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO",
+      "paper": "Day 2",
+      "year": 2022,
+      "number": 6,
+      "url": "https://www.imo-official.org/assets/documents/problems/2022/2022_eng.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $n$ be a positive integer. A *Nordic square* is an $n \\times n$ board containing all the integers from $1$ to $n^2$ so that each cell contains exactly one number. Two different cells are considered adjacent if they share a common side. Every cell that is adjacent only to cells containing larger numbers is called a *valley*. An *uphill path* is a sequence of one or more cells such that:\n\n(i) the first cell in the sequence is a valley,\n\n(ii) each subsequent cell in the sequence is adjacent to the previous cell, and\n\n(iii) the numbers written in the cells in the sequence are in increasing order.\n\nFind, as a function of $n$, the smallest possible total number of uphill paths in a Nordic square.",
+    "image": null,
+    "choices": null,
+    "answer": "$2n^2-2n+1$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Count paths ending at each cell; build a spanning comb",
+        "body": "**Counting.** For a cell $c$ let $N(c)$ be the number of uphill paths ending at $c$. A valley has no smaller neighbour, so $N(c)=1$. A non-valley cell is not itself an uphill path, and an uphill path ending at $c$ is an uphill path ending at a smaller neighbour $d$ of $c$, followed by $c$. Hence\n$$N(c)=\\sum_{d\\sim c,\\ d<c}N(d)\\quad(c\\text{ not a valley}).$$\nSumming over all cells, the total number of uphill paths is\n$$\\#\\{\\text{valleys}\\}+\\sum_{\\{c,d\\}\\text{ adjacent}}N(\\text{smaller of }c,d).$$\n\n**Lower bound.** The cell containing $1$ is a valley and every $N\\ge1$. The board has $2n(n-1)$ adjacent pairs, so the total is at least $1+2n(n-1)=2n^2-2n+1$.\n\n**Construction.** Equality needs exactly one valley and $N=1$ at the smaller cell of every adjacent pair. It suffices to find a set $T$ of cells such that (a) no two cells outside $T$ are adjacent, and (b) the cells of $T$ with their adjacencies form a tree. Given such $T$, list its cells so that each cell after the first is adjacent to an earlier one (e.g. breadth-first search from any cell of $T$) and write $1,2,\\dots,|T|$ in that order; write the larger numbers in the other cells arbitrarily. Then:\n- each cell of $T$ other than the first has exactly one smaller neighbour (its parent: its other $T$-neighbours are its children, which come later, and its neighbours outside $T$ are larger), and by induction $N=1$ on all of $T$;\n- every cell outside $T$ has only neighbours in $T$, which are smaller; it is not a valley;\n- so $1$ is the only valley, and the smaller cell of every adjacent pair lies in $T$ and has $N=1$. The total is exactly $2n^2-2n+1$.\n\n**A suitable $T$.** Label rows $r=1,2,\\dots$ from the top and columns by integers $j$. Let a cell $(r,j)$ be in $T$ when\n- $j\\equiv2\\pmod6$ (any $r$); or $j\\equiv5\\pmod6$ and $r\\ge2$;\n- $j\\equiv1,3\\pmod6$ and $r$ odd;\n- $j\\equiv4,0\\pmod6$ and ($r$ even or $r=1$).\n\nSo the columns $j\\equiv2$ and $j\\equiv5$ are \"teeth\" (vertical paths); the tooth in column $j\\equiv2$ has side leaves in its two neighbouring columns on odd rows, and the tooth in column $j\\equiv5$ (starting in row $2$) has side leaves on even rows; finally the connector cell $(1,j)$ with $j\\equiv4$ joins the leaf $(1,j-1)$ of tooth $j-2$ to the leaf $(2,j)$ of tooth $j+1$, and the connector $(1,j)$ with $j\\equiv0$ joins the leaf $(2,j)$ of tooth $j-1$ to the leaf $(1,j+1)$ of tooth $j+2$. (E.g. columns $1$–$6$: tooth $2$ with leaves $(1,1),(1,3),(3,1),(3,3),\\dots$; connector $(1,4)$; tooth $5$ from row $2$ with leaves $(2,4),(2,6),(4,4),(4,6),\\dots$; connector $(1,6)$ leading to $(1,7)$.)\n\n*(a)* The cells outside $T$ are $(r\\text{ even},\\,j\\equiv1,3)$, $(r\\text{ odd}\\ge3,\\,j\\equiv4,0)$ and $(1,\\,j\\equiv5)$. In each row these columns differ by at least $2$, and in each column they occur only in rows of one parity (or only in row $1$), so no two are adjacent.\n\n*(b)* Each tooth with its leaves is a tree; leaves of different teeth are never adjacent (horizontally adjacent leaf columns use rows of opposite parity, and leaves in the same column are two rows apart), except through the row-$1$ connections, and consecutive teeth are joined by exactly one such connection. So $T$ is a tree.\n\nFor the $n\\times n$ board use rows $1,\\dots,n$ and columns $s,\\dots,s+n-1$, with $s=1$ if $n\\equiv0,2,3,5\\pmod 6$ and $s=2$ if $n\\equiv1,4\\pmod6$. Then the last column is $\\equiv 0,2,3$ or $5\\pmod 6$, so cutting the pattern never leaves a leaf without its tooth; deleting the bottom rows and the outer columns keeps (a) and keeps $T$ connected and acyclic. (For instance $n=2$ gives the L-tromino $T=\\{(1,1),(1,2),(2,2)\\}$.)\n\n**Answer:** $2n^2-2n+1$."
+      }
+    ],
+    "topics": [
+      "counting",
+      "graph-theory"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

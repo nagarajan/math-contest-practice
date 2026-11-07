@@ -1,0 +1,204 @@
+[
+  {
+    "id": "imo-2011-01",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO",
+      "paper": "Day 1",
+      "year": 2011,
+      "number": 1,
+      "url": "https://www.imo-official.org/assets/documents/problems/2011/2011_eng.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Given any set $A=\\{a_1,a_2,a_3,a_4\\}$ of four distinct positive integers, we denote the sum $a_1+a_2+a_3+a_4$ by $s_A$. Let $n_A$ denote the number of pairs $(i,j)$ with $1\\le i<j\\le4$ for which $a_i+a_j$ divides $s_A$. Find all sets $A$ of four distinct positive integers which achieve the largest possible value of $n_A$.",
+    "image": null,
+    "choices": null,
+    "answer": "The sets $\\{x,5x,7x,11x\\}$ and $\\{x,11x,19x,29x\\}$ for a positive integer $x$ (these give $n_A=4$).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Two pairs can never work; analyse the other four",
+        "body": "Let $A=\\{a<b<c<d\\}$ and $s=s_A$. A pair sum divides $s$ exactly when it divides the complementary pair sum (since $s$ is the sum of the two).\n\n**$n_A\\le4$.** We have $c+d>a+b>0$, so $c+d\\nmid a+b$; likewise $b+d>a+c>0$, so $b+d\\nmid a+c$. Hence only the pairs $\\{a,b\\},\\{a,c\\},\\{a,d\\},\\{b,c\\}$ can count, and $n_A\\le4$.\n\n**The value 4 occurs:** for $\\{1,5,7,11\\}$, $s=24$ and $6,8,12,12$ all divide $24$; for $\\{1,11,19,29\\}$, $s=60$ and $12,20,30,30$ all divide $60$. Multiplying a set by $x$ keeps all divisibilities. So the maximum is $4$.\n\n**Finding all sets with $n_A=4$.** We need\n$$a+b\\mid c+d,\\qquad a+c\\mid b+d,\\qquad a+d\\mid b+c,\\qquad b+c\\mid a+d .$$\nThe last two give $a+d=b+c$, so $d=b+c-a$.\n\nThen $b+d=2b+c-a=(a+c)+2(b-a)$, so $a+c\\mid 2(b-a)$. As $0<2(b-a)<2(a+c)$ (because $b<c$), we get $2(b-a)=a+c$, i.e.\n$$c=2b-3a,\\qquad d=b+c-a=3b-4a .$$\nThe condition $c>b$ becomes $b>3a$. Finally $c+d=5b-7a=5(a+b)-12a$, so $a+b\\mid 12a$.\n\nLet $x=\\gcd(a,b)$ and write $a=xa'$, $b=xb'$; then $c,d$ are multiples of $x$ too, and the conditions become $a'+b'\\mid 12a'$ with $b'>3a'$. Since $\\gcd(a'+b',a')=\\gcd(b',a')=1$, we need $a'+b'\\mid12$. Now $a'+b'>4a'$:\n- $a'=1$: $b'>3$ and $1+b'\\in\\{6,12\\}$, so $b'=5$ or $b'=11$;\n- $a'=2$: $a'+b'=12$ forces $b'=10$, not coprime to $2$;\n- $a'\\ge3$: $a'+b'>12$, impossible.\n\n$(a',b')=(1,5)$ gives $\\{1,5,7,11\\}$ and $(1,11)$ gives $\\{1,11,19,29\\}$.\n\n**Answer:** exactly the sets $\\{x,5x,7x,11x\\}$ and $\\{x,11x,19x,29x\\}$, $x\\in\\mathbb{Z}_{>0}$. ∎"
+      }
+    ],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-2011-02",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO",
+      "paper": "Day 1",
+      "year": 2011,
+      "number": 2,
+      "url": "https://www.imo-official.org/assets/documents/problems/2011/2011_eng.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $\\mathcal{S}$ be a finite set of at least two points in the plane. Assume that no three points of $\\mathcal S$ are collinear. A *windmill* is a process that starts with a line $\\ell$ going through a single point $P\\in\\mathcal S$. The line rotates clockwise about the *pivot* $P$ until the first time that the line meets some other point belonging to $\\mathcal S$. This point, $Q$, takes over as the new pivot, and the line now rotates clockwise about $Q$, until it next meets a point of $\\mathcal S$. This process continues indefinitely.\n\nShow that we can choose a point $P$ in $\\mathcal S$ and a line $\\ell$ going through $P$ such that the resulting windmill uses each point of $\\mathcal S$ as a pivot infinitely many times.",
+    "image": null,
+    "choices": null,
+    "answer": "Proof: orient $\\ell$; the numbers of points on its left and right never change. Start through a \"median\" point (with $\\lfloor\\frac{n-1}2\\rfloor$ points on the left); after each half-turn the line is in the same or the adjacent parallel position with its sides swapped, so every point crossed sides and hence was a pivot.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Count the points on each side of the oriented line",
+        "body": "Let $n=|\\mathcal S|$. Give $\\ell$ a direction (which turns with $\\ell$), so that it has a left side and a right side. Parametrise time by the total angle turned; the line moves continuously, turning clockwise.\n\n**Invariant.** *Except at the moments when $\\ell$ contains two points, the number of points of $\\mathcal S$ strictly on the left of $\\ell$ stays constant (and so does the number on the right).* The count can only change when $\\ell$ passes through a point, i.e. at a pivot change from $P$ to $Q$. Put coordinates with the line at that moment being the $x$-axis directed along $(1,0)$ and $P$ at the origin, $Q=(t,0)$. Just before, the line through $P$ has direction $(\\cos\\varepsilon,\\sin\\varepsilon)$ for a small $\\varepsilon>0$ (clockwise rotation brings it to $(1,0)$); the cross product $(\\cos\\varepsilon,\\sin\\varepsilon)\\times(t,0)=-t\\sin\\varepsilon$ shows that $Q$ is on the right if $t>0$ and on the left if $t<0$. Just after, the line passes through $Q$ with direction $(\\cos\\varepsilon,-\\sin\\varepsilon)$, and $P-Q=(-t,0)$ gives the cross product $(\\cos\\varepsilon,-\\sin\\varepsilon)\\times(-t,0)=-t\\sin\\varepsilon$: so $P$ is on the right if $t>0$ and on the left if $t<0$. Thus $P$ takes $Q$'s place on the same side, and no other point changes sides (no three points are collinear).\n\n**Observation.** If $\\ell$ passes through a point $X$ at some moment, then $X$ is a pivot at that moment or immediately after/before it (either $X$ is the pivot, or the line has just met $X$ and $X$ becomes the pivot). Also each phase with a fixed pivot lasts less than $180^\\circ$ (in a half-turn about $P$ the line sweeps the whole plane), and pivot changes happen only when $\\ell$ is parallel to one of the finitely many lines through two points of $\\mathcal S$; so the line turns through arbitrarily large total angles.\n\n**The start.** Choose a direction $d$ not parallel to any line through two points of $\\mathcal S$. Order the points $X_1,X_2,\\dots,X_n$ by decreasing signed distance to the left of a line with direction $d$ (\"leftmost first\"); all these distances are distinct. Let $L=\\lfloor\\frac{n-1}{2}\\rfloor$, $R=n-1-L$ ($R=L$ or $L+1$). Start the windmill with the line of direction $d$ through $P=X_{L+1}$; it has exactly $L$ points on its left and $R$ on its right.\n\n**After a half-turn.** When $\\ell$ has turned through $180^\\circ$ from a moment with direction $d$, its direction is $-d$, which is again not parallel to any connecting line; so $\\ell$ contains only its pivot, and by the invariant it has $L$ points on its left *with respect to $-d$*. The left side for $-d$ is the right side for $d$, which consists of the points with larger index. So the pivot is the point $X_j$ with exactly $L$ points of larger index, i.e. $j=n-L\\in\\{L+1,L+2\\}$, and $\\ell$ is the line of direction $-d$ through $X_{n-L}$.\n\nCompare the two moments (direction $d$ through $X_{L+1}$, and direction $-d$ through $X_{n-L}$):\n- a point $X_i$ with $i\\le L$ is on the left at the first moment and, as $i<n-L$, on the left of the second line with respect to $d$, i.e. on the **right** with respect to the direction $-d$ of $\\ell$;\n- a point $X_i$ with $i>n-L$ is on the right at the first moment and on the left (with respect to $-d$) at the second;\n- $X_{L+1}$ and $X_{n-L}$ are pivots at the first and the second moment respectively.\n\nSo every point other than these two has switched from one side of the directed line $\\ell$ to the other. Since $\\ell$ moves continuously, each of them lay on $\\ell$ at some moment of the half-turn and hence (Observation) served as a pivot during it. Thus **every** point of $\\mathcal S$ is a pivot during this half-turn.\n\nAt the end of the half-turn we are again in the same situation (a generic direction, $L$ points on the left), so the argument applies to every subsequent half-turn. As the line keeps turning forever and each pivot phase is shorter than a half-turn, each point is a pivot in infinitely many different phases. ∎"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "logic"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-2011-03",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO",
+      "paper": "Day 1",
+      "year": 2011,
+      "number": 3,
+      "url": "https://www.imo-official.org/assets/documents/problems/2011/2011_eng.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $f:\\mathbb{R}\\to\\mathbb{R}$ be a real-valued function defined on the set of real numbers that satisfies\n$$f(x+y)\\le yf(x)+f(f(x))$$\nfor all real numbers $x$ and $y$. Prove that $f(x)=0$ for all $x\\le0$.",
+    "image": null,
+    "choices": null,
+    "answer": "Proof: rewrite as $f(z)\\le(z-x)f(x)+f(f(x))$; substituting $z=f(w)$ and symmetrising gives $xf(x)+wf(w)\\le2f(x)f(w)$, and $w=2f(x)$ gives $xf(x)\\le0$; then $f\\le0$ everywhere (else $z\\to-\\infty$ gives a contradiction), so $f=0$ on $(-\\infty,0]$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Symmetrise, then cancel",
+        "body": "Put $y=z-x$:\n$$f(z)\\le (z-x)f(x)+f(f(x))\\qquad\\text{for all }x,z. \\tag{1}$$\n\n**Step 1: $xf(x)\\le0$ for all $x$.** In (1) take $z=f(w)$:\n$$f(f(w))\\le\\big(f(w)-x\\big)f(x)+f(f(x)).$$\nExchanging the roles of $x$ and $w$:\n$$f(f(x))\\le\\big(f(x)-w\\big)f(w)+f(f(w)).$$\nAdding the two inequalities and cancelling $f(f(x))+f(f(w))$:\n$$xf(x)+wf(w)\\le 2f(x)f(w)\\qquad\\text{for all }x,w. \\tag{2}$$\nNow set $w=2f(x)$ in (2): $xf(x)+2f(x)f(2f(x))\\le 2f(x)f(2f(x))$, i.e.\n$$xf(x)\\le0\\qquad\\text{for all }x. \\tag{3}$$\nIn particular $f(z)\\ge0$ for every $z<0$.\n\n**Step 2: $f(p)\\le0$ for all $p$.** Suppose $f(p)>0$ for some $p$. For every $z<0$, by (3) and (1) with $x=p$,\n$$0\\le f(z)\\le (z-p)f(p)+f(f(p)).$$\nThe right-hand side tends to $-\\infty$ as $z\\to-\\infty$ (since $f(p)>0$), a contradiction.\n\n**Step 3: conclusion.** For $x<0$ we have $f(x)\\ge0$ (Step 1) and $f(x)\\le0$ (Step 2), so $f(x)=0$. For $x=0$: take $x=-1$ in (1); since $f(-1)=0$ we get $f(z)\\le f(0)$ for all $z$, in particular $0=f(-1)\\le f(0)$. Together with $f(0)\\le0$ this gives $f(0)=0$.\n\nHence $f(x)=0$ for all $x\\le0$. ∎\n\n*Remark.* $f$ need not vanish for $x>0$: for example $f(x)=-e^{e^{x}}$ for $x>0$ and $f(x)=0$ for $x\\le0$ satisfies the inequality."
+      }
+    ],
+    "topics": [
+      "functional-equations",
+      "inequalities"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-2011-04",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO",
+      "paper": "Day 2",
+      "year": 2011,
+      "number": 4,
+      "url": "https://www.imo-official.org/assets/documents/problems/2011/2011_eng.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $n>0$ be an integer. We are given a balance and $n$ weights of weight $2^0,2^1,\\dots,2^{n-1}$. We are to place each of the $n$ weights on the balance, one after another, in such a way that the right pan is never heavier than the left pan. At each step we choose one of the weights that has not yet been placed on the balance, and place it on either the left pan or the right pan, until all of the weights have been placed.\n\nDetermine the number of ways in which this can be done.",
+    "image": null,
+    "choices": null,
+    "answer": "$(2n-1)!!=1\\cdot3\\cdot5\\cdots(2n-1)$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Remove the lightest weight",
+        "body": "Call a way of placing the weights (an order together with a choice of pan for each weight) *valid* if the right pan is never heavier. Let $f(n)$ be the number of valid ways. Clearly $f(1)=1$ (the weight must go on the left).\n\n**Key fact.** If at least one weight of a set of distinct powers of $2$ is placed, the difference (left minus right) is nonzero: the largest weight placed exceeds the sum of all the smaller ones.\n\nNow let $n\\ge2$. Doubling all weights does not affect validity, so the valid ways of placing $2^1,\\dots,2^{n-1}$ are counted by $f(n-1)$.\n\n**Deleting weight $1$.** Take a valid way for $2^0,\\dots,2^{n-1}$ and delete the weight $1$ (with its move). At each moment the difference $D$ (left minus right) changes by at most $1$, so the new difference is $\\ge-1$; but it is a sum of $\\pm$ even numbers, hence even, hence $\\ge0$. So we get a valid way for $2^1,\\dots,2^{n-1}$.\n\n**Inserting weight $1$.** Conversely, take a valid way for $2^1,\\dots,2^{n-1}$ and insert the move \"place weight $1$\" into one of the $n$ possible positions (before the first move, between two moves, or after the last), on the left or on the right pan.\n- *On the left:* every later difference increases by $1$; the result is valid. ($n$ options.)\n- *On the right, not at the very beginning:* from the insertion on, at least one even weight is on the balance, so the old difference is a nonzero (key fact) nonnegative even number, i.e. $\\ge2$; subtracting $1$ leaves it $\\ge1$. Valid. ($n-1$ options.)\n- *On the right at the very beginning:* the right pan is immediately heavier. Invalid.\n\nSo each valid way for $2^1,\\dots,2^{n-1}$ extends in exactly $2n-1$ ways, and every valid way for $2^0,\\dots,2^{n-1}$ arises exactly once (from its own deletion). Therefore\n$$f(n)=(2n-1)\\,f(n-1),$$\nand with $f(1)=1$,\n$$f(n)=1\\cdot3\\cdot5\\cdots(2n-1)=(2n-1)!!=\\frac{(2n)!}{2^n\\,n!}.$$\n\n**Answer:** $(2n-1)!!$. ∎"
+      }
+    ],
+    "topics": [
+      "counting"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-2011-05",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO",
+      "paper": "Day 2",
+      "year": 2011,
+      "number": 5,
+      "url": "https://www.imo-official.org/assets/documents/problems/2011/2011_eng.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $f$ be a function from the set of integers to the set of positive integers. Suppose that, for any two integers $m$ and $n$, the difference $f(m)-f(n)$ is divisible by $f(m-n)$. Prove that, for all integers $m$ and $n$ with $f(m)\\le f(n)$, the number $f(n)$ is divisible by $f(m)$.",
+    "image": null,
+    "choices": null,
+    "answer": "Proof: $f$ is even; with $a=f(m)$, $b=f(n)$, $c=f(m-n)$ we get $c\\mid a-b$, $b\\mid a-c$, $a\\mid b-c$, and size comparisons force $a=c$ (when $a<b$), whence $a\\mid b$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Three divisibilities and size",
+        "body": "Write $P(m,n)$ for \"$f(m-n)\\mid f(m)-f(n)$\".\n\n**$f$ is even.** $P(x,0)$: $f(x)\\mid f(x)-f(0)$, so $f(x)\\mid f(0)$ for every $x$. $P(0,x)$: $f(-x)\\mid f(0)-f(x)$; since also $f(-x)\\mid f(0)$, we get $f(-x)\\mid f(x)$. By symmetry $f(x)\\mid f(-x)$, and as both are positive, $f(-x)=f(x)$.\n\n**Three divisibilities.** Fix $m,n$ and let $a=f(m)$, $b=f(n)$, $c=f(m-n)=f(n-m)$. Then\n- $P(m,n)$: $c\\mid a-b$;\n- $P(m,\\,m-n)$: $f(n)\\mid f(m)-f(m-n)$, i.e. $b\\mid a-c$;\n- $P(n,\\,n-m)$: $f(m)\\mid f(n)-f(n-m)$, i.e. $a\\mid b-c$.\n\n**Conclusion.** Suppose $a\\le b$; we show $a\\mid b$. If $a=b$ this is clear, so let $a<b$.\n- If $c\\ge b$, then $0<b-a<b\\le c$ and $c\\mid b-a$: impossible.\n- So $c<b$. Then $a,c\\in(0,b)$, hence $|a-c|<b$, and $b\\mid a-c$ forces $a=c$. Now $a\\mid b-c=b-a$ gives $a\\mid b$.\n\nHence $f(m)\\le f(n)$ implies $f(m)\\mid f(n)$. ∎"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "functional-equations"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-2011-06",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO",
+      "paper": "Day 2",
+      "year": 2011,
+      "number": 6,
+      "url": "https://www.imo-official.org/assets/documents/problems/2011/2011_eng.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $ABC$ be an acute triangle with circumcircle $\\Gamma$. Let $\\ell$ be a tangent line to $\\Gamma$, and let $\\ell_a$, $\\ell_b$ and $\\ell_c$ be the lines obtained by reflecting $\\ell$ in the lines $BC$, $CA$ and $AB$, respectively. Show that the circumcircle of the triangle determined by the lines $\\ell_a$, $\\ell_b$ and $\\ell_c$ is tangent to the circle $\\Gamma$.",
+    "image": null,
+    "choices": null,
+    "answer": "Proof: with $T$ the point of tangency and $A'',B'',C''$ the reflections of $T$ in $OA,OB,OC$, the triangle formed by $\\ell_a,\\ell_b,\\ell_c$ is the image of $A''B''C''$ under a homothety centred at a point $K\\in\\Gamma$; homothetic circles through their centre $K$ are tangent at $K$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Complex numbers: a homothety centred on $\\Gamma$",
+        "body": "Use complex numbers with $\\Gamma$ the unit circle, $\\ell$ tangent at $T=1$ and $A,B,C$ at $a,b,c$ ($|a|=|b|=|c|=1$, $\\bar a=1/a$, etc.). Let $\\sigma_1=a+b+c$, $\\sigma_2=ab+bc+ca$, $\\sigma_3=abc$.\n\n**Facts.** The reflection in the chord through $x,y$ of the unit circle is $z\\mapsto x+y-xy\\bar z$. Its points on $\\ell$ are $1+iy$ ($y\\in\\mathbb R$).\n\n**Acuteness.** The orthocentre is $h=\\sigma_1$; the triangle is acute, so $h$ is inside $\\Gamma$: $|\\sigma_1|<1$. In particular $\\sigma_1\\ne1$, $a+b\\ne0$ etc. (no side is a diameter), and $\\sigma_2\\neq\\sigma_3$ (otherwise $\\bar\\sigma_1=\\sigma_2/\\sigma_3=1$).\n\n**The lines.** Reflecting $1+iy$ in $AB$ gives $a+b-ab(1-iy)$, so\n$$\\ell_c=\\{\\,a+b-ab+i\\,ab\\,y:\\ y\\in\\mathbb R\\,\\},$$\nand similarly for $\\ell_b$ (with $c$ instead of $b$) and $\\ell_a$.\n\n**The vertex $A'=\\ell_b\\cap\\ell_c$.** We claim $A'=a'$ with\n$$a'=a+\\frac{bc(a-1)^2}{b+c}.$$\nIndeed $a'-(a+b-ab)=\\dfrac{bc(a-1)^2+(a-1)b(b+c)}{b+c}=\\dfrac{b(a-1)(ac+b)}{b+c}$, so\n$$w:=\\frac{a'-(a+b-ab)}{ab}=\\frac{(a-1)(ac+b)}{a(b+c)},\\qquad \\bar w=\\frac{\\big(\\frac1a-1\\big)\\big(\\frac1{ac}+\\frac1b\\big)}{\\frac1a\\big(\\frac1b+\\frac1c\\big)}=\\frac{\\frac{1-a}{a}\\cdot\\frac{b+ac}{abc}}{\\frac{b+c}{abc}}=\\frac{(1-a)(ac+b)}{a(b+c)}=-w .$$\nSo $w$ is purely imaginary and $a'\\in\\ell_c$. The formula is symmetric in $b,c$, so $a'\\in\\ell_b$ as well. Likewise $B'=\\ell_a\\cap\\ell_c$ and $C'=\\ell_a\\cap\\ell_b$ are $b'=b+\\frac{ca(b-1)^2}{c+a}$ and $c'=c+\\frac{ab(c-1)^2}{a+b}$.\n\n**Auxiliary points.** Let $A''=a^2$, $B''=b^2$, $C''=c^2$ (the reflections of $T$ in $OA$, $OB$, $OC$); they lie on $\\Gamma$ and are distinct (as $a\\ne\\pm b$, etc.). Let\n$$k=\\frac{\\sigma_2-\\sigma_3}{\\sigma_1-1}.$$\nThen $\\bar k=\\dfrac{\\sigma_1/\\sigma_3-1/\\sigma_3}{\\sigma_2/\\sigma_3-1}=\\dfrac{\\sigma_1-1}{\\sigma_2-\\sigma_3}=\\dfrac1k$, so $K=k$ lies on $\\Gamma$.\n\n**The homothety.** Direct expansion gives\n$$a^2-k=\\frac{(a-1)(a+b)(a+c)}{\\sigma_1-1},\\qquad a'-k=\\frac{(a-1)\\,(\\sigma_1\\sigma_3-2\\sigma_3+\\sigma_2)}{(b+c)(\\sigma_1-1)}$$\n(for the first: $a^2(\\sigma_1-1)-\\sigma_2+\\sigma_3=a^3+a^2b+a^2c-a^2-ab-bc-ca+abc=(a-1)(a+b)(a+c)$; the second is a similar routine computation). Hence\n$$\\frac{a'-k}{a^2-k}=\\lambda:=\\frac{\\sigma_1\\sigma_3-2\\sigma_3+\\sigma_2}{(a+b)(b+c)(c+a)},$$\nan expression symmetric in $a,b,c$, so also $b'-k=\\lambda(b^2-k)$ and $c'-k=\\lambda(c^2-k)$. Moreover $\\lambda$ is real: conjugating, the numerator becomes $\\frac{\\sigma_2-2\\sigma_3+\\sigma_1\\sigma_3}{\\sigma_3^2}$ and the denominator $\\frac{(a+b)(b+c)(c+a)}{\\sigma_3^2}$, so $\\bar\\lambda=\\lambda$. Also $\\lambda\\ne0$ (the three lines form a genuine triangle) and $\\lambda\\neq1$, because $(a+b)(b+c)(c+a)=\\sigma_1\\sigma_2-\\sigma_3$ and $\\sigma_1\\sigma_3-2\\sigma_3+\\sigma_2-(\\sigma_1\\sigma_2-\\sigma_3)=(\\sigma_1-1)(\\sigma_3-\\sigma_2)\\ne0$.\n\n**Conclusion.** The homothety $h$ with centre $K$ and real ratio $\\lambda$ maps $A'',B'',C''$ to $A',B',C'$. It therefore maps $\\Gamma$ (the circle through $A'',B'',C''$) onto the circumcircle $\\omega$ of triangle $A'B'C'$. Since $K\\in\\Gamma$ is fixed by $h$, $K\\in\\omega$, and the tangent to $\\Gamma$ at $K$ is mapped to a line through $K$ parallel to itself, i.e. to itself; so it is also tangent to $\\omega$ at $K$. Two distinct circles through $K$ with a common tangent at $K$ are tangent to each other. Hence $\\omega$ is tangent to $\\Gamma$ (at $K$). ∎\n\n*Remark.* The official solution proves the same homothety synthetically: $\\ell_a\\parallel B''C''$ (and cyclically), and the lines $A'A''$, $B'B''$, $C'C''$ concur on $\\Gamma$."
+      }
+    ],
+    "topics": [
+      "geometry",
+      "complex-numbers"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

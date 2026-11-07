@@ -1,0 +1,206 @@
+[
+  {
+    "id": "imo-1971-01",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO",
+      "paper": "Day 1",
+      "year": 1971,
+      "number": 1,
+      "url": "https://www.imo-official.org/assets/documents/problems/1971/1971_eng.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Prove that the following assertion is true for $n = 3$ and $n = 5$, and that it is false for every other natural number $n > 2$:\n\nIf $a_1, a_2, \\dots, a_n$ are arbitrary real numbers, then\n$$(a_1-a_2)(a_1-a_3)\\cdots(a_1-a_n)+(a_2-a_1)(a_2-a_3)\\cdots(a_2-a_n)+\\dots+(a_n-a_1)(a_n-a_2)\\cdots(a_n-a_{n-1})\\ge0 .$$",
+    "image": null,
+    "choices": null,
+    "answer": "Proof: order $a_1\\ge\\dots\\ge a_n$ and pair the terms (first two, last two, middle one is $\\ge0$) for $n=3,5$; counterexamples: $(0,1,1,\\dots,1)$ for even $n$ and $(0,0,0,1,2,\\dots,2)$ for odd $n\\ge7$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Pair the terms after sorting; explicit counterexamples",
+        "body": "Write $S=\\sum_{i=1}^nT_i$ with $T_i=\\prod_{j\\ne i}(a_i-a_j)$. $S$ is symmetric in the $a_i$, so for $n=3,5$ we may assume $a_1\\ge a_2\\ge\\dots\\ge a_n$.\n\n**$n=3$.** $T_1+T_2=(a_1-a_2)\\big[(a_1-a_3)-(a_2-a_3)\\big]=(a_1-a_2)^2\\ge0$, and $T_3=(a_1-a_3)(a_2-a_3)\\ge0$. So $S\\ge0$.\n\n**$n=5$.**\n- $T_1+T_2=(a_1-a_2)\\big[(a_1-a_3)(a_1-a_4)(a_1-a_5)-(a_2-a_3)(a_2-a_4)(a_2-a_5)\\big]\\ge0$, because $a_1-a_2\\ge0$ and $a_1-a_j\\ge a_2-a_j\\ge0$ for $j=3,4,5$.\n- $T_3=(a_3-a_1)(a_3-a_2)\\cdot(a_3-a_4)(a_3-a_5)$ is a product of two non-negative numbers ($(-)(-)$ and $(+)(+)$), so $T_3\\ge0$.\n- $T_4+T_5=(a_4-a_5)\\big[(a_1-a_5)(a_2-a_5)(a_3-a_5)-(a_1-a_4)(a_2-a_4)(a_3-a_4)\\big]\\ge0$, because $a_j-a_5\\ge a_j-a_4\\ge0$ for $j=1,2,3$. (Here $T_5=(a_1-a_5)(a_2-a_5)(a_3-a_5)(a_4-a_5)$ and $T_4=-(a_1-a_4)(a_2-a_4)(a_3-a_4)(a_4-a_5)$.)\n\nSo $S\\ge0$.\n\n**Even $n\\ge4$.** Take $a_1=0$, $a_2=\\dots=a_n=1$. Every $T_i$ with $i\\ge2$ contains a factor $1-1=0$, and $T_1=(0-1)^{n-1}=-1$ since $n-1$ is odd. So $S=-1<0$.\n\n**Odd $n\\ge7$.** Take $a_1=a_2=a_3=0$, $a_4=1$, $a_5=\\dots=a_n=2$ (at least three $2$'s). Then $T_1,T_2,T_3$ contain a factor $0-0$, and $T_5,\\dots,T_n$ contain a factor $2-2$, so they vanish, while\n$$T_4=(1-0)^3(1-2)^{n-4}=-1$$\nbecause $n-4$ is odd. So $S=-1<0$.\n\nHence the assertion holds exactly for $n=3$ and $n=5$. ∎"
+      }
+    ],
+    "topics": [
+      "inequalities",
+      "algebra"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-1971-02",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO",
+      "paper": "Day 1",
+      "year": 1971,
+      "number": 2,
+      "url": "https://www.imo-official.org/assets/documents/problems/1971/1971_eng.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Consider a convex polyhedron $P_1$ with nine vertices $A_1, A_2, \\dots, A_9$; let $P_i$ be the polyhedron obtained from $P_1$ by a translation that moves vertex $A_1$ to $A_i$ ($i = 2, 3, \\dots, 9$). Prove that at least two of the polyhedra $P_1, P_2, \\dots, P_9$ have an interior point in common.",
+    "image": null,
+    "choices": null,
+    "answer": "Proof: all nine translates lie in the image of $P_1$ under the homothety with centre $A_1$ and ratio $2$, whose volume is $8V$; nine bodies of volume $V$ with disjoint interiors cannot fit.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Volume argument with the doubled polyhedron",
+        "body": "Let $V>0$ be the volume of $P_1$ and let $P'$ be the image of $P_1$ under the homothety $h$ with centre $A_1$ and ratio $2$, $h(Y)=2Y-A_1$ (points as vectors). Then $\\operatorname{vol}(P')=8V$.\n\n**Each $P_i$ lies in $P'$.** A point of $P_i$ has the form $X+A_i-A_1$ with $X\\in P_1$. Since $P_1$ is convex and contains $X$ and $A_i$, it contains their midpoint $M=\\frac{X+A_i}{2}$, and\n$$X+A_i-A_1=2M-A_1=h(M)\\in P' .$$\n\n**Conclusion.** Suppose no two of $P_1,\\dots,P_9$ had a common interior point, i.e. their interiors were pairwise disjoint. The boundary of a polyhedron has volume zero, so the volumes would add up:\n$$9V=\\sum_{i=1}^9\\operatorname{vol}(P_i)=\\operatorname{vol}\\Big(\\bigcup_i P_i\\Big)\\le\\operatorname{vol}(P')=8V,$$\na contradiction. Hence two of the polyhedra share an interior point. ∎"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "measurement"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-1971-03",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO",
+      "paper": "Day 1",
+      "year": 1971,
+      "number": 3,
+      "url": "https://www.imo-official.org/assets/documents/problems/1971/1971_eng.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Prove that the set of integers of the form $2^k - 3$ ($k = 2, 3, \\dots$) contains an infinite subset in which every two members are relatively prime.",
+    "image": null,
+    "choices": null,
+    "answer": "Proof: build the subset inductively; if $n_1,\\dots,n_m$ are pairwise coprime with odd product $s$, then $2^{\\varphi(s)}-3\\equiv1-3=-2\\pmod s$ is coprime to $s$ (Euler's theorem).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Inductive construction with Euler's theorem",
+        "body": "We construct an infinite sequence $n_1,n_2,\\dots$ of pairwise coprime numbers of the form $2^k-3$, all greater than $1$. Start with $n_1=2^3-3=5$.\n\nSuppose $n_1,\\dots,n_m>1$ have been chosen and are pairwise coprime; let $s=n_1n_2\\cdots n_m$. Each $n_i$ is odd, so $s$ is odd, and $s\\ge5$. By Euler's theorem $2^{\\varphi(s)}\\equiv1\\pmod s$. Put\n$$n_{m+1}=2^{\\varphi(s)}-3\\equiv1-3=-2\\pmod s .$$\nSince $s$ is odd, $\\gcd(n_{m+1},s)=\\gcd(-2,s)=1$, so $n_{m+1}$ is coprime to every $n_i$.\n\nIt is of the required form and greater than $1$: $\\varphi(s)$ is even for $s\\ge3$ and $\\varphi(s)=2$ only for $s\\in\\{3,4,6\\}$, so $\\varphi(s)\\ge4$ and $n_{m+1}\\ge2^4-3=13$. It differs from all earlier $n_i$, because $\\gcd(n_{m+1},n_i)=1$ while $n_i>1$.\n\nContinuing forever gives an infinite set of numbers $2^k-3$ any two of which are relatively prime. ∎"
+      }
+    ],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-1971-04",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO",
+      "paper": "Day 2",
+      "year": 1971,
+      "number": 4,
+      "url": "https://www.imo-official.org/assets/documents/problems/1971/1971_eng.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "All the faces of tetrahedron $ABCD$ are acute-angled triangles. We consider all closed polygonal paths of the form $XYZTX$ defined as follows: $X$ is a point on edge $AB$ distinct from $A$ and $B$; similarly, $Y, Z, T$ are interior points of edges $BC, CD, DA$, respectively. Prove:\n\n(a) If $\\angle DAB + \\angle BCD \\ne \\angle CDA + \\angle ABC$, then among the polygonal paths, there is none of minimal length.\n\n(b) If $\\angle DAB + \\angle BCD = \\angle CDA + \\angle ABC$, then there are infinitely many shortest polygonal paths, their common length being $2AC\\sin(\\alpha/2)$, where $\\alpha = \\angle BAC + \\angle CAD + \\angle DAB$.",
+    "image": null,
+    "choices": null,
+    "answer": "Proof: unfold the faces $ABC,BCD,CDA,DAB$ into a plane strip; the two copies of $AB$ differ by a rotation through $\\pm(\\angle ABC+\\angle CDA-\\angle BCD-\\angle DAB)$. (a) A shortest path would be straight in the development and at $X$, forcing that rotation to be trivial. (b) The map is a translation by a vector of length $2AC\\sin\\frac\\alpha2$, and a whole interval of straight lines parallel to it cross all the edges at interior points.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Unfolding the tetrahedron into a strip",
+        "body": "**The development.** Draw face $ABC$ in the plane as $A_1B_1C_1$; attach a copy $B_1C_1D_1$ of face $BCD$ on the other side of $B_1C_1$, a copy $C_1D_1A_2$ of $CDA$ on the other side of $C_1D_1$, and a copy $D_1A_2B_2$ of $DAB$ on the other side of $D_1A_2$. We get a strip of four triangles with vertices $P_0,\\dots,P_5=A_1,B_1,C_1,D_1,A_2,B_2$, triangle $i$ being $P_{i-1}P_iP_{i+1}$. Neighbouring triangles lie on opposite sides of their common edge, so their orientations alternate; say $A_1B_1C_1$ and $C_1D_1A_2$ are counterclockwise, $B_1C_1D_1$ and $D_1A_2B_2$ clockwise.\n\nThe edge $AB$ appears twice, as $A_1B_1$ and $A_2B_2$. Let $g$ be the orientation-preserving isometry with $g(A_1)=A_2$, $g(B_1)=B_2$; for a point $X$ of $AB$ its two copies are $X_1\\in A_1B_1$ and $X_2=g(X_1)$.\n\nA path $XYZTX$ unfolds to the polygonal line $X_1Y_1Z_1T_1X_2$ ($Y_1\\in B_1C_1$, $Z_1\\in C_1D_1$, $T_1\\in D_1A_2$) of the same length, and every such polygonal line with interior points on the five edges folds back to an admissible path.\n\n**The rotation angle of $g$.** Let $d_i$ be the direction angle of $\\overrightarrow{P_iP_{i+1}}$ and $\\beta_i$ the angle of triangle $i$ at $P_i$, so $\\beta_1=\\angle ABC$, $\\beta_2=\\angle BCD$, $\\beta_3=\\angle CDA$, $\\beta_4=\\angle DAB$. The direction of $\\overrightarrow{P_iP_{i+1}}$ is obtained from that of $\\overrightarrow{P_iP_{i-1}}$ (angle $d_{i-1}+\\pi$) by turning through $\\beta_i$, clockwise for a counterclockwise triangle and counterclockwise for a clockwise one. Hence\n$$d_4-d_0\\equiv4\\pi-\\beta_1+\\beta_2-\\beta_3+\\beta_4\\equiv-(\\angle ABC+\\angle CDA-\\angle BCD-\\angle DAB)\\pmod{2\\pi}.$$\nThis is the rotation angle $\\varphi$ of $g$. All $\\beta_i$ lie in $(0,\\frac\\pi2)$, so the bracket lies in $(-\\pi,\\pi)$. Therefore **$g$ is a translation iff $\\angle DAB+\\angle BCD=\\angle CDA+\\angle ABC$**.\n\n**A shortest path is straight.** Suppose $XYZTX$ is shortest. Keep $X,Z$ fixed and move $Y$ along $BC$. In the development, $F(Y)=|X_1Y|+|YZ_1|$ is a convex function on the line $B_1C_1$, and $X_1,Z_1$ lie strictly on opposite sides of that line. So $F$ has a unique minimum on the line, at the point where it crosses $X_1Z_1$. A local minimum of a convex function is a global one, so $Y_1$ lies on segment $X_1Z_1$. In the same way $Z_1\\in Y_1T_1$ and $T_1\\in Z_1X_2$, so $X_1,Y_1,Z_1,T_1,X_2$ lie in this order on a line. Let $w$ be its direction from $X_1$ to $X_2$.\n\nAt $X$ use faces $DAB$ and $ABC$: the triangle $g^{-1}(D_1A_2B_2)$ is the copy of $DAB$ attached to $A_1B_1$ on the side opposite $C_1$ (since $g$ preserves orientation). The same argument shows that $g^{-1}(T_1)$, $X_1$, $Y_1$ are collinear with $X_1$ in the middle. The direction from $X_1$ to $g^{-1}(T_1)$ is the image of $-w$ (the direction from $X_2$ to $T_1$) under the rotation by $-\\varphi$, and it must equal $-w$. So $\\varphi\\equiv0$.\n\n**(a)** If $\\angle DAB+\\angle BCD\\ne\\angle CDA+\\angle ABC$ then $\\varphi\\not\\equiv0$, so by the previous paragraph no path is shortest.\n\n**(b)** Now $g$ is the translation by a vector $v$. Every path has length $|X_1Y_1|+\\dots+|T_1X_2|\\ge|X_1X_2|=|v|$.\n\n*Computing $v$.* Let $C^*=g(C_1)=C_1+v$; triangle $A_2B_2C^*$ is a counterclockwise copy of $ABC$. Put $a_1=\\angle BAC$, $a_2=\\angle CAD$, $a_3=\\angle DAB$, so $\\alpha=a_1+a_2+a_3<\\frac{3\\pi}{2}$. Using the orientations, the rays from $A_2$ to $C_1,D_1,B_2,C^*$ follow each other counterclockwise with angles $a_2,a_3,a_1$. Take $A_2$ as origin and $A_2C_1$ along the positive $x$-axis: the rays point at angles $0$, $a_2$, $a_2+a_3$, $\\alpha$. As $A_2C_1=A_2C^*=AC$,\n$$|v|=|C_1C^*|=2AC\\sin\\frac\\alpha2,$$\nand $v$ is perpendicular to the bisector direction $u=(\\cos\\frac\\alpha2,\\sin\\frac\\alpha2)$.\n\n*Many straight paths.* Let $h(P)=\\overrightarrow{A_2P}\\cdot u$. Lines parallel to $v$ are the level lines of $h$, and $h(P+v)=h(P)$. We claim\n$$\\max\\{h(A_1),h(C_1),h(A_2)\\}<\\min\\{h(B_1),h(D_1),h(B_2)\\}.\\qquad(*)$$\n- $h(A_1)=h(A_2)=0$ and $h(C_1)=AC\\cos\\frac\\alpha2$.\n- $h(D_1)=AD\\cos\\big(\\frac\\alpha2-a_2\\big)$ and $h(B_1)=h(B_2)=AB\\cos\\big(\\frac\\alpha2-a_1\\big)$. Since $\\frac\\alpha2-a_2=\\frac{a_1+a_3-a_2}{2}\\in(-\\frac\\pi4,\\frac\\pi2)$, $h(D_1)>0$; likewise $h(B_1)>0$.\n- $h(D_1)>h(C_1)$: in triangle $A_2C_1D_1\\cong ACD$ the angle at $C_1$ is $\\gamma=\\angle ACD$, so $\\overrightarrow{C_1D_1}$ points at angle $\\pi-\\gamma$ and $h(D_1)-h(C_1)=-CD\\cos\\big(\\gamma+\\frac\\alpha2\\big)$. In a trihedral angle each face angle is less than the sum of the other two, so $a_1+a_3>a_2$ and $\\gamma+\\frac\\alpha2>\\gamma+a_2=\\pi-\\angle ADC>\\frac\\pi2$. Also $\\gamma+\\frac\\alpha2<\\frac\\pi2+\\frac{3\\pi}4<\\frac{3\\pi}2$. So the cosine is negative.\n- $h(B_2)>h(C^*)=h(C_1)$: the same computation reflected in the bisector line $\\mathbb Ru$ (which fixes $h$ and swaps the rays at $0$ and $\\alpha$), using $\\angle ACB+a_1=\\pi-\\angle ABC>\\frac\\pi2$ and $a_2+a_3>a_1$.\n\nTake any line $\\ell$ parallel to $v$ on which $h$ lies strictly between the two sides of $(*)$. It separates $A_1,C_1,A_2$ from $B_1,D_1,B_2$, so it crosses each of $A_1B_1,B_1C_1,C_1D_1,D_1A_2,A_2B_2$ at an interior point. Each of the four triangles has two of its vertices on one side of $\\ell$ and one on the other, so $\\ell$ meets it in the segment joining the crossing points on its two edges of this list. Consecutive triangles lie on opposite sides of their common edge, so these four segments follow each other along $\\ell$ without overlapping. Together they form one segment from $X_1=\\ell\\cap A_1B_1$ to $\\ell\\cap A_2B_2$, and this endpoint is $X_1+v=g(X_1)$ because $\\ell\\parallel v$. Folding back gives an admissible path of length $|v|$. Different levels of $h$ give different $X$, so there are infinitely many shortest paths, all of length $|v|=2AC\\sin\\frac\\alpha2$. ∎"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "trigonometry"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-1971-05",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO",
+      "paper": "Day 2",
+      "year": 1971,
+      "number": 5,
+      "url": "https://www.imo-official.org/assets/documents/problems/1971/1971_eng.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Prove that for every natural number $m$, there exists a finite set $S$ of points in a plane with the following property: For every point $A$ in $S$, there are exactly $m$ points in $S$ which are at unit distance from $A$.",
+    "image": null,
+    "choices": null,
+    "answer": "Proof: induction — $S_{m+1}=S_m\\cup(S_m+u)$ for a unit vector $u$ avoiding the finitely many directions that would create extra coincidences or unit distances.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Induction by translating a copy",
+        "body": "We prove by induction on $m$ that there is a finite set $S_m$ in which every point has exactly $m$ points at distance $1$.\n\n**$m=1$:** two points at distance $1$.\n\n**Step $m\\to m+1$.** Let $S_m$ be such a set. For a unit vector $u$ let $S_{m+1}=S_m\\cup(S_m+u)$. Call $u$ *bad* if\n1. $u=P-Q$ for some $P,Q\\in S_m$ (then the two copies could overlap), or\n2. $|P-(Q+u)|=1$ for some $P\\ne Q$ in $S_m$, i.e. $u$ lies on the unit circle centred at $P-Q\\ne0$.\n\nCondition 1 excludes finitely many vectors. In condition 2, for each of the finitely many pairs $P\\ne Q$ the unit circle about $P-Q$ meets the unit circle about the origin in at most $2$ points (the circles are distinct). So only finitely many unit vectors are bad, and we can choose a good $u$.\n\nThen $S_m$ and $S_m+u$ are disjoint. Take $P\\in S_m$. Inside $S_m$ it has exactly $m$ points at distance $1$. In $S_m+u$ the point $P+u$ is at distance $1$, and no other point $Q+u$ ($Q\\ne P$) is, by condition 2. So $P$ has exactly $m+1$ unit-distance neighbours in $S_{m+1}$. The same holds for points of $S_m+u$, by the symmetric argument (translate by $-u$). Hence $S_{m+1}$ works, and it is finite ($2^m$ points). ∎"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "counting"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-1971-06",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO",
+      "paper": "Day 2",
+      "year": 1971,
+      "number": 6,
+      "url": "https://www.imo-official.org/assets/documents/problems/1971/1971_eng.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $A = (a_{ij})$ ($i, j = 1, 2, \\dots, n$) be a square matrix whose elements are non-negative integers. Suppose that whenever an element $a_{ij} = 0$, the sum of the elements in the $i$th row and the $j$th column is $\\ge n$. Prove that the sum of all the elements of the matrix is $\\ge n^2/2$.",
+    "image": null,
+    "choices": null,
+    "answer": "Proof: let $k$ be the smallest row or column sum, say of row $1$. If $k\\ge n/2$ we are done; otherwise row 1 has at least $n-k$ zeros, each forcing its column sum $\\ge n-k$, so the total is $\\ge(n-k)^2+k^2\\ge n^2/2$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Look at the smallest line sum",
+        "body": "Let $k$ be the smallest of all $2n$ row sums and column sums. Transposing if necessary (this does not change the hypothesis or the total), assume it is the sum of row $1$. Let $\\Sigma$ be the sum of all entries.\n\n**Case $k\\ge n/2$.** Then $\\Sigma$, the sum of the $n$ row sums, is $\\ge nk\\ge n^2/2$.\n\n**Case $k<n/2$.** Row $1$ has non-negative integer entries with sum $k$, so at most $k$ of them are non-zero: row $1$ has $z\\ge n-k$ zero entries. If $a_{1j}=0$, the hypothesis gives (column $j$ sum) $\\ge n-k$. Every other column has sum $\\ge k$ by minimality. Adding the column sums,\n$$\\Sigma\\ge z(n-k)+(n-z)k=nk+z(n-2k)\\ge nk+(n-k)(n-2k),$$\nusing $n-2k>0$ and $z\\ge n-k$. Finally\n$$nk+(n-k)(n-2k)=n^2-2nk+2k^2=\\frac{n^2+(n-2k)^2}{2}\\ge\\frac{n^2}{2}.$$\n\nIn both cases $\\Sigma\\ge n^2/2$. ∎"
+      }
+    ],
+    "topics": [
+      "counting",
+      "inequalities",
+      "linear-algebra"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

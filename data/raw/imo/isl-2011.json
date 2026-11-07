@@ -1,0 +1,977 @@
+[
+ {
+  "id": "imo-isl-2011-a1",
+  "bank": "imo",
+  "source": {
+   "contest": "IMO Shortlist",
+   "paper": "Algebra",
+   "year": 2011,
+   "number": 1,
+   "url": "https://www.imo-official.org/assets/documents/problems/2011/IMO2011SL.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "For any set $A = \\{a_1, a_2, a_3, a_4\\}$ of four distinct positive integers with sum $s_A = a_1 + a_2 + a_3 + a_4$, let $p_A$ denote the number of pairs $(i, j)$ with $1 \\le i < j \\le 4$ for which $a_i + a_j$ divides $s_A$. Among all sets of four distinct positive integers, determine those sets $A$ for which $p_A$ is maximal.",
+  "image": null,
+  "choices": null,
+  "answer": "The sets $\\{d, 5d, 7d, 11d\\}$ and $\\{d, 11d, 19d, 29d\\}$ with $d$ a positive integer (for them $p_A = 4$, the maximum).",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [],
+  "topics": [
+   "number-theory"
+  ],
+  "difficulty": 2,
+  "duplicateOf": "imo-2011-01",
+  "reviewNote": null
+ },
+ {
+  "id": "imo-isl-2011-a2",
+  "bank": "imo",
+  "source": {
+   "contest": "IMO Shortlist",
+   "paper": "Algebra",
+   "year": 2011,
+   "number": 2,
+   "url": "https://www.imo-official.org/assets/documents/problems/2011/IMO2011SL.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Determine all sequences $(x_1, x_2, \\dots, x_{2011})$ of positive integers such that for every positive integer $n$ there is an integer $a$ with\n$$x_1^n + 2x_2^n + \\dots + 2011x_{2011}^n = a^{n+1} + 1.$$",
+  "image": null,
+  "choices": null,
+  "answer": "Only $(x_1, x_2, \\dots, x_{2011}) = (1, k, k, \\dots, k)$ with $k = 2 + 3 + \\dots + 2011 = 2023065$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Bounded bases and comparing exponential growth",
+    "body": "Put $k = 2 + 3 + \\dots + 2011 = \\frac{2011\\cdot 2012}{2} - 1 = 2023065$.\n\n**The sequence works.** For $(1, k, \\dots, k)$ we get $1 + (2 + 3 + \\dots + 2011)k^n = 1 + k\\cdot k^n = k^{n+1} + 1$, so $a = k$ works for every $n$.\n\n**It is the only one.** Let $(x_i)$ be a valid sequence and write $T_n = \\sum_{i=1}^{2011} i\\,x_i^n$. Since $T_n \\ge 1 + 2 + \\dots + 2011 > 1$, the integer $a^{n+1} = T_n - 1$ is positive, so we may replace $a$ by $|a|$: there is a positive integer $y_n$ with $T_n = y_n^{n+1} + 1$.\n\n*The $y_n$ are bounded.* Let $L = \\sum i x_i$. Expanding $L^n = (\\sum i x_i)^n$, it contains the terms $(i x_i)^n \\ge i x_i^n$, so $T_n \\le L^n$. Hence $y_n^{n+1} < T_n \\le L^n < L^{n+1}$ and $y_n < L$. So some value $y$ is taken by $y_n$ for infinitely many $n$. Note $y \\ge 2$: if $y = 1$ we would get $T_n = 2$, but $T_n \\ge 2023066$.\n\n*Grouping.* Let $m = \\max x_i$ and, for $1 \\le j \\le m$, let $c_j \\ge 0$ be the sum of all indices $i$ with $x_i = j$. Then $T_n = \\sum_{j=1}^m c_j\\, j^n$, $c_m > 0$, and $\\sum_j c_j = 1 + 2 + \\dots + 2011 = 1 + k$. For infinitely many $n$,\n$$\\sum_{j=1}^{m} c_j\\, j^n - 1\\cdot 1^n - y\\cdot y^n = 0. \\tag{1}$$\n\n**Lemma.** If integers $b_1, \\dots, b_N$ satisfy $\\sum_{j=1}^N b_j j^n = 0$ for arbitrarily large $n$, then all $b_j = 0$.\n\n*Proof.* Otherwise let $J$ be the largest index with $b_J \\neq 0$. If $J = 1$ the equation says $b_1 = 0$, contradiction. If $J \\ge 2$, divide by $J^n$:\n$$|b_J| = \\Big|\\sum_{j<J} b_j \\big(\\tfrac{j}{J}\\big)^n\\Big| \\le \\Big(\\sum_{j<J}|b_j|\\Big)\\Big(\\tfrac{J-1}{J}\\Big)^n,$$\nand the right side tends to $0$ as $n \\to \\infty$, while $|b_J| \\ge 1$. Contradiction. $\\square$\n\nWrite (1) as one sum $\\sum_{j} b_j j^n = 0$ over $j \\le \\max(m, y)$, where $b_j$ is $c_j$ (taken as $0$ for $j > m$) minus $1$ if $j = 1$ and minus $y$ if $j = y$ (recall $y \\ne 1$). By the lemma all $b_j = 0$:\n$$c_1 = 1,\\qquad c_y = y,\\qquad c_j = 0 \\text{ for } j \\notin\\{1, y\\}.$$\nSo the only index with $x_i = 1$ has sum of indices $1$, i.e. it is $i = 1$; every other index $i = 2, \\dots, 2011$ has $x_i = y$. Then $c_y = 2 + 3 + \\dots + 2011 = k$, so $y = k$. Thus $(x_1, \\dots, x_{2011}) = (1, k, \\dots, k)$. ∎"
+   }
+  ],
+  "topics": [
+   "number-theory",
+   "sequences-series"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "imo-isl-2011-a3",
+  "bank": "imo",
+  "source": {
+   "contest": "IMO Shortlist",
+   "paper": "Algebra",
+   "year": 2011,
+   "number": 3,
+   "url": "https://www.imo-official.org/assets/documents/problems/2011/IMO2011SL.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Determine all pairs $(f, g)$ of functions from the set of real numbers to itself that satisfy\n$$g(f(x+y)) = f(x) + (2x + y)\\,g(y)$$\nfor all real numbers $x$ and $y$.",
+  "image": null,
+  "choices": null,
+  "answer": "Either $f \\equiv 0$ and $g \\equiv 0$, or $f(x) = x^2 + C$ and $g(x) = x$ for some real constant $C$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Show $g$ is linear, then compare coefficients",
+    "body": "**These pairs work.** For $f = g = 0$ both sides vanish. For $f(x) = x^2 + C$, $g(x) = x$: the left side is $(x+y)^2 + C$ and the right side is $x^2 + C + (2x+y)y = x^2 + 2xy + y^2 + C$.\n\n**No others.** Put $y = -2x$: since $2x + y = 0$,\n$$g(f(-x)) = f(x)\\quad\\text{for all } x. \\tag{1}$$\nApplying (1) at the point $-(x+y)$ gives $g(f(x+y)) = f(-x-y)$, so the equation becomes\n$$f(-x-y) = f(x) + (2x+y)\\,g(y). \\tag{2}$$\nFor reals $a, b$ put $x = -b$, $y = a + b$ in (2): $f(-a) = f(-b) + (a-b)\\,g(a+b)$. Writing the same with $(b, c)$ and $(c, a)$ and adding the three equations,\n$$(a-b)\\,g(a+b) + (b-c)\\,g(b+c) + (c-a)\\,g(c+a) = 0\\quad\\text{for all } a,b,c.$$\nGiven any reals $u, v, w$, choose $a, b, c$ with $b + c = u$, $c + a = v$, $a + b = w$ (solve: $a = \\frac{v+w-u}{2}$, etc.). Then $a - b = v - u$, $b - c = w - v$, $c - a = u - w$, so\n$$(v-u)\\,g(w) + (w-v)\\,g(u) + (u-w)\\,g(v) = 0.$$\nTake $v = 0$, $w = 1$: $-u\\,g(1) + g(u) + (u-1)g(0) = 0$, i.e. $g(u) = \\big(g(1) - g(0)\\big)u + g(0)$. So $g(x) = Ax + B$ for constants $A, B$.\n\nNow put $x = 0$ and replace $y$ by $-y$ in (2): with $C = f(0)$,\n$$f(y) = C - y\\,g(-y) = Ay^2 - By + C.$$\nInsert both formulas into (1): $A\\,(Ax^2 + Bx + C) + B = Ax^2 - Bx + C$ for all $x$. Comparing coefficients:\n$$A^2 = A,\\qquad AB = -B,\\qquad AC + B = C.$$\n- If $A = 0$: then $B = -B$, so $B = 0$, and then $C = 0$. This gives $f = g = 0$.\n- If $A = 1$: then $B = -B$, so $B = 0$, and the last equation holds for every $C$. This gives $g(x) = x$, $f(x) = x^2 + C$.\n\nThese are exactly the pairs listed. ∎"
+   }
+  ],
+  "topics": [
+   "functional-equations"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "imo-isl-2011-a4",
+  "bank": "imo",
+  "source": {
+   "contest": "IMO Shortlist",
+   "paper": "Algebra",
+   "year": 2011,
+   "number": 4,
+   "url": "https://www.imo-official.org/assets/documents/problems/2011/IMO2011SL.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Determine all pairs $(f, g)$ of functions from the set of positive integers to itself that satisfy\n$$f^{\\,g(n)+1}(n) + g^{\\,f(n)}(n) = f(n+1) - g(n+1) + 1$$\nfor every positive integer $n$. Here, $f^k(n)$ means $\\underbrace{f(f(\\dots f}_{k}(n)\\dots))$.",
+  "image": null,
+  "choices": null,
+  "answer": "Only $f(n) = n$ and $g(n) = 1$ for all $n$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "The key inequality $f^{g(n)+1}(n) < f(n+1)$",
+    "body": "**The pair works:** with $f(n) = n$, $g(n) = 1$ the left side is $f^2(n) + g^n(n) = n + 1$ and the right side is $(n+1) - 1 + 1 = n + 1$.\n\n**Key inequality.** Since $g^{f(n)}(n) \\ge 1$ and $g(n+1) \\ge 1$, the equation gives\n$$f^{\\,g(n)+1}(n) \\le f(n+1) - 1 < f(n+1)\\qquad\\text{for all } n. \\tag{1}$$\n\n**Step 1: $f(x) \\ge x$ for all $x$.** We prove by induction on $N$ that $f(x) \\ge N$ for all $x \\ge N$. For $N = 1$ this is trivial. Assume it for $N$ and let $x \\ge N + 1$. Since $x - 1 \\ge N$, we have $f(x-1) \\ge N$, and applying $f$ to numbers $\\ge N$ again gives numbers $\\ge N$; hence every iterate $f^j(x-1)$ with $j \\ge 1$ is $\\ge N$. By (1) at $n = x - 1$,\n$$f(x) > f^{\\,g(x-1)+1}(x-1) \\ge N,$$\nso $f(x) \\ge N + 1$. This completes the induction; taking $N = x$ gives $f(x) \\ge x$.\n\n**Step 2: $f$ is strictly increasing.** By Step 1, $f^{j}(n) = f^{j-1}(f(n)) \\ge f(n)$ for $j \\ge 1$. So (1) gives $f(n) \\le f^{\\,g(n)+1}(n) < f(n+1)$.\n\n**Step 3: $f(n) = n$.** Suppose $f(n) > n$ for some $n$, i.e. $f(n) \\ge n + 1$. As $f$ is increasing, so are its iterates, hence\n$$f^{\\,g(n)+1}(n) = f^{\\,g(n)}\\big(f(n)\\big) \\ge f^{\\,g(n)}(n+1) \\ge f(n+1),$$\nwhere the last step uses $g(n) \\ge 1$ and Step 1 as in Step 2. This contradicts (1). Hence $f(n) = n$ for all $n$.\n\n**Step 4: $g \\equiv 1$.** Now the equation reads $n + g^{n}(n) = (n+1) - g(n+1) + 1$, i.e. $g^n(n) + g(n+1) = 2$. Both terms are positive integers, so both equal $1$. Thus $g(m) = 1$ for every $m \\ge 2$, and for $n = 1$ we get $g(1) = g^1(1) = 1$. ∎"
+   }
+  ],
+  "topics": [
+   "functional-equations"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "imo-isl-2011-a5",
+  "bank": "imo",
+  "source": {
+   "contest": "IMO Shortlist",
+   "paper": "Algebra",
+   "year": 2011,
+   "number": 5,
+   "url": "https://www.imo-official.org/assets/documents/problems/2011/IMO2011SL.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Prove that for every positive integer $n$, the set $\\{2, 3, 4, \\dots, 3n+1\\}$ can be partitioned into $n$ triples in such a way that the numbers from each triple are the lengths of the sides of some obtuse triangle.",
+  "image": null,
+  "choices": null,
+  "answer": "Strong induction on $n$: reuse the partition for $t = \\lfloor n/2 \\rfloor$ with its two larger entries shifted up by $n - t$ (this keeps triples obtuse), and add the triples $\\{i,\\ n+t+i,\\ 2n+i\\}$ for $t+2 \\le i \\le n+1$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Induction from $\\lfloor n/2\\rfloor$ to $n$",
+    "body": "Write $[a, b] = \\{a, a+1, \\dots, b\\}$ and call $\\{a, b, c\\}$ with $a < b < c$ *obtuse* if $c < a + b$ (a triangle exists) and $c^2 > a^2 + b^2$ (the angle opposite $c$ is obtuse).\n\nWe prove by strong induction the stronger claim: $[2, 3n+1]$ can be partitioned into obtuse triples $A_i = \\{i, a_i, b_i\\}$, $i \\in [2, n+1]$, where $i$ is the smallest element of $A_i$ (so the elements $a_i, b_i$ fill up $[n+2, 3n+1]$).\n\n**Base $n = 1$:** $\\{2, 3, 4\\}$ is obtuse, since $4 < 2 + 3$ and $16 > 4 + 9$.\n\n**Lemma.** If $a < b < c$ is obtuse and $x > 0$, then $\\{a, b + x, c + x\\}$ is obtuse.\n\n*Proof.* The largest element is $c + x$, and $c + x < a + (b + x)$ because $c < a + b$. Also $(c+x)^2 - (b+x)^2 = (c-b)(c+b+2x) > (c-b)(c+b) = c^2 - b^2 > a^2$. $\\square$\n\n**Induction step.** Let $n \\ge 2$, put $t = \\lfloor n/2 \\rfloor$, so $1 \\le t < n$ and $\\frac{n-1}{2} \\le t \\le \\frac n2$. By hypothesis $[2, 3t+1]$ splits into obtuse triples $A'_i = \\{i, a'_i, b'_i\\}$, $i \\in [2, t+1]$, with $\\{a'_i, b'_i\\}$ covering $[t+2, 3t+1]$.\n\n- For $i \\in [2, t+1]$ let $A_i = \\{i,\\ a'_i + (n-t),\\ b'_i + (n-t)\\}$. Since $i$ is the smallest element of $A'_i$, these are obtuse by the lemma, and their larger elements cover $[n+2, n+2t+1]$.\n- For $i \\in [t+2, n+1]$ let $A_i = \\{i,\\ n+t+i,\\ 2n+i\\}$. The middle elements cover $[n+2t+2, 2n+t+1]$ and the largest cover $[2n+t+2, 3n+1]$.\n\nTogether the triples are disjoint and cover $[2, n+1] \\cup [n+2, n+2t+1] \\cup [n+2t+2, 2n+t+1] \\cup [2n+t+2, 3n+1] = [2, 3n+1]$, each with smallest element $i$.\n\nIt remains to check that $A_i = \\{i, n+t+i, 2n+i\\}$ is obtuse for $i \\in [t+2, n+1]$.\n\n*Triangle:* $(2n+i) - (n+t+i) = n - t \\le t + 1 < i$.\n\n*Obtuse:* $(2n+i)^2 - (n+t+i)^2 = (n-t)(3n+t+2i)$. Here $n - t \\ge \\frac n2$ and $3n + t + 2i \\ge 3n + 3t + 4 \\ge 3n + \\frac{3(n-1)}{2} + 4 > \\frac{9n}{2}$. Hence\n$$(2n+i)^2 - (n+t+i)^2 > \\frac{9n^2}{4} \\ge (n+1)^2 \\ge i^2,$$\nwhere $\\frac{9n^2}{4} - (n+1)^2 = \\frac{(5n+2)(n-2)}{4} \\ge 0$ for $n \\ge 2$.\n\nThis completes the induction, and the claim for every $n$ proves the statement. ∎"
+   }
+  ],
+  "topics": [
+   "geometry",
+   "inequalities"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "imo-isl-2011-a6",
+  "bank": "imo",
+  "source": {
+   "contest": "IMO Shortlist",
+   "paper": "Algebra",
+   "year": 2011,
+   "number": 6,
+   "url": "https://www.imo-official.org/assets/documents/problems/2011/IMO2011SL.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Let $f$ be a function from the set of real numbers to itself that satisfies\n$$f(x+y) \\le y f(x) + f(f(x))$$\nfor all real numbers $x$ and $y$. Prove that $f(x) = 0$ for all $x \\le 0$.",
+  "image": null,
+  "choices": null,
+  "answer": "With $y = t - x$, compare $t = f(a), x = b$ and $t = f(b), x = a$ to get $2f(a)f(b) \\ge af(a) + bf(b)$; $b = 2f(a)$ gives $af(a) \\le 0$, so $f \\ge 0$ on $(-\\infty, 0)$. Then $f \\le 0$ everywhere, so $f = 0$ on $(-\\infty, 0)$, and finally $f(0) = 0$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [],
+  "topics": [
+   "functional-equations",
+   "inequalities"
+  ],
+  "difficulty": 3,
+  "duplicateOf": "imo-2011-03",
+  "reviewNote": null
+ },
+ {
+  "id": "imo-isl-2011-a7",
+  "bank": "imo",
+  "source": {
+   "contest": "IMO Shortlist",
+   "paper": "Algebra",
+   "year": 2011,
+   "number": 7,
+   "url": "https://www.imo-official.org/assets/documents/problems/2011/IMO2011SL.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Let $a$, $b$, and $c$ be positive real numbers satisfying $\\min(a+b,\\ b+c,\\ c+a) > \\sqrt2$ and $a^2 + b^2 + c^2 = 3$. Prove that\n$$\\frac{a}{(b+c-a)^2} + \\frac{b}{(c+a-b)^2} + \\frac{c}{(a+b-c)^2} \\ge \\frac{3}{(abc)^2}.$$",
+  "image": null,
+  "choices": null,
+  "answer": "Write each term as $\\frac{(a^2)^3}{\\left(a^{5/2}(b+c-a)\\right)^2}$ and use the Hölder/Jensen bound $\\sum \\frac{x^3}{y^2} \\ge \\frac{(\\sum x)^3}{(\\sum y)^2}$; then Schur with exponent $\\frac32$ gives $\\sum a^{5/2}(b+c-a) \\le abc(\\sqrt a + \\sqrt b + \\sqrt c)$, and $\\sqrt a + \\sqrt b + \\sqrt c \\le 3$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Hölder, Schur and power means",
+    "body": "Write $\\sum$ for the cyclic sum over $(a, b, c)$.\n\n**Positivity of the denominators.** From $b + c > \\sqrt2$ we get $b^2 + c^2 \\ge \\frac{(b+c)^2}{2} > 1$, so $a^2 = 3 - b^2 - c^2 < 2$ and $a < \\sqrt2 < b + c$. Thus $b + c - a > 0$, and likewise $c + a - b > 0$, $a + b - c > 0$.\n\n**Tool 1 (a form of Hölder).** For positive $x_i, y_i$:\n$$\\sum_i \\frac{x_i^3}{y_i^2} \\ge \\frac{(\\sum_i x_i)^3}{(\\sum_i y_i)^2}.$$\n*Proof.* Let $Y = \\sum y_i$, $w_i = y_i / Y$ and $u_i = x_i / y_i$. By convexity of $t \\mapsto t^3$ on $t > 0$ (Jensen), $\\sum \\frac{x_i^3}{y_i^2} = Y\\sum w_i u_i^3 \\ge Y\\big(\\sum w_i u_i\\big)^3 = Y\\big(\\tfrac{\\sum x_i}{Y}\\big)^3$. $\\square$\n\nApply it with $x = a^2$, $y = a^{5/2}(b+c-a)$ (and cyclically); note $\\frac{x^3}{y^2} = \\frac{a^6}{a^5(b+c-a)^2} = \\frac{a}{(b+c-a)^2}$. Using $a^2 + b^2 + c^2 = 3$:\n$$\\sum \\frac{a}{(b+c-a)^2} \\ge \\frac{27}{\\Big(\\sum a^{5/2}(b+c-a)\\Big)^2}. \\tag{1}$$\n\n**Tool 2 (Schur).** For $s > 0$ and positive $a, b, c$: $\\sum a^s (a-b)(a-c) \\ge 0$.\n*Proof.* By symmetry let $a \\ge b \\ge c$. Then $a^s(a-b)(a-c) + b^s(b-a)(b-c) = (a-b)\\big[a^s(a-c) - b^s(b-c)\\big] \\ge 0$, since $a^s \\ge b^s$ and $a - c \\ge b - c \\ge 0$; and $c^s(c-a)(c-b) \\ge 0$. $\\square$\n\nWith $s = \\frac32$, expanding $a^{3/2}(a-b)(a-c) = a^{7/2} - a^{5/2}(b+c) + a^{3/2}bc$, Schur says\n$$\\sum a^{5/2}(b+c-a) = \\sum a^{5/2}(b+c) - \\sum a^{7/2} \\le \\sum a^{3/2}bc = abc\\,(\\sqrt a + \\sqrt b + \\sqrt c).$$\nThe left side is positive (all terms are), so (1) gives\n$$\\sum \\frac{a}{(b+c-a)^2} \\ge \\frac{27}{(abc)^2(\\sqrt a + \\sqrt b + \\sqrt c)^2}.$$\n\n**Tool 3 (power means).** By the QM–AM inequality twice, $\\big(\\frac{a+b+c}{3}\\big)^2 \\le \\frac{a^2+b^2+c^2}{3} = 1$, so $a + b + c \\le 3$, and $\\big(\\frac{\\sqrt a + \\sqrt b + \\sqrt c}{3}\\big)^2 \\le \\frac{a+b+c}{3} \\le 1$, so $\\sqrt a + \\sqrt b + \\sqrt c \\le 3$.\n\nTherefore\n$$\\sum \\frac{a}{(b+c-a)^2} \\ge \\frac{27}{9(abc)^2} = \\frac{3}{(abc)^2}. \\ ∎$$"
+   }
+  ],
+  "topics": [
+   "inequalities"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "imo-isl-2011-c1",
+  "bank": "imo",
+  "source": {
+   "contest": "IMO Shortlist",
+   "paper": "Combinatorics",
+   "year": 2011,
+   "number": 1,
+   "url": "https://www.imo-official.org/assets/documents/problems/2011/IMO2011SL.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Let $n > 0$ be an integer. We are given a balance and $n$ weights of weight $2^0, 2^1, \\dots, 2^{n-1}$. In a sequence of $n$ moves we place all weights on the balance. In the first move we choose a weight and put it on the left pan. In each of the following moves we choose one of the remaining weights and we add it either to the left or to the right pan. Compute the number of ways in which we can perform these $n$ moves in such a way that the right pan is never heavier than the left pan.",
+  "image": null,
+  "choices": null,
+  "answer": "$(2n-1)!! = 1 \\cdot 3 \\cdot 5 \\cdots (2n-1)$ ways.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [],
+  "topics": [
+   "counting"
+  ],
+  "difficulty": 2,
+  "duplicateOf": "imo-2011-04",
+  "reviewNote": null
+ },
+ {
+  "id": "imo-isl-2011-c2",
+  "bank": "imo",
+  "source": {
+   "contest": "IMO Shortlist",
+   "paper": "Combinatorics",
+   "year": 2011,
+   "number": 2,
+   "url": "https://www.imo-official.org/assets/documents/problems/2011/IMO2011SL.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Suppose that $1000$ students are standing in a circle. Prove that there exists an integer $k$ with $100 \\le k \\le 300$ such that in this circle there exists a contiguous group of $2k$ students, for which the first half contains the same number of girls as the second half.",
+  "image": null,
+  "choices": null,
+  "answer": "Assume not. Start where the number of girls in a block of $100$ is maximal; a sign change of $S_{100}(j) - S_{100}(j+100)$ forces the pattern girl-free/girl/girl-free at $j, j+100, j+200$ and $S_{99}(j+1) = S_{99}(j+101)$; extending both blocks to the nearest girls gives an equal split with $k = 100 + \\ell \\le 299$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Discrete intermediate value argument",
+    "body": "Number the students $1, \\dots, 1000$ around the circle and let $a_i = 1$ if student $i$ is a girl and $a_i = 0$ otherwise; extend periodically, $a_{i+1000} = a_i$. Put\n$$S_k(i) = a_i + a_{i+1} + \\dots + a_{i+k-1}.$$\nWe must find $k \\in [100, 300]$ and $i$ with $S_k(i) = S_k(i+k)$ (the $2k \\le 600$ students $i, \\dots, i+2k-1$ are distinct). Assume, for contradiction, that no such $k$ and $i$ exist.\n\n**Step 1: a sign change.** Let $D(j) = S_{100}(j) - S_{100}(j+100)$; by assumption $D(j) \\ne 0$ for all $j$. Choose $i$ with $S_{100}(i)$ maximal. Then $D(i-100) = S_{100}(i-100) - S_{100}(i) \\le 0$, hence $< 0$, and $D(i) \\ge 0$, hence $> 0$. So there is $j \\in [i-100, i-1]$ with $D(j) \\le -1$ and $D(j+1) \\ge 1$.\n\nNow $D(j+1) - D(j) = (a_{j+100} - a_j) - (a_{j+200} - a_{j+100})$. This is at least $2$, while each bracket lies in $[-1, 1]$. So both brackets are extreme:\n$$a_j = 0,\\qquad a_{j+100} = 1,\\qquad a_{j+200} = 0,$$\nand then $D(j) = -1$. Since $S_{100}(j) = a_j + S_{99}(j+1) = S_{99}(j+1)$ and $S_{100}(j+100) = a_{j+100} + S_{99}(j+101) = 1 + S_{99}(j+101)$, the equation $D(j) = -1$ gives\n$$S_{99}(j+1) = S_{99}(j+101). \\tag{1}$$\n\n**Step 2: extend to the nearest girls.** Let $k \\ge 1$ be least with $a_{j-k} = 1$ and $\\ell \\ge 1$ least with $a_{j+200+\\ell} = 1$ (they exist, as $a_{j+100} = 1$ and the sequence is periodic). Reversing the order of the circle swaps the roles of $j$ and $j+200$ and preserves (1), so we may assume $\\ell \\le k$.\n\nIf $k \\ge 200$, then $a_j = a_{j-1} = \\dots = a_{j-199} = 0$, so $S_{100}(j-199) = 0 = S_{100}(j-99)$, contradicting our assumption. Hence $\\ell \\le k \\le 199$.\n\nSince $\\ell \\le k$, the entries $a_{j-\\ell+1}, \\dots, a_j$ are all $0$; also $a_{j+200}, \\dots, a_{j+199+\\ell}$ are $0$ and $a_{j+200+\\ell} = 1$. Therefore\n$$S_{100+\\ell}(j-\\ell+1) = \\underbrace{(a_{j-\\ell+1} + \\dots + a_j)}_{0} + S_{99}(j+1) + a_{j+100} = S_{99}(j+1) + 1,$$\n$$S_{100+\\ell}(j+101) = S_{99}(j+101) + \\underbrace{(a_{j+200} + \\dots + a_{j+199+\\ell})}_{0} + a_{j+200+\\ell} = S_{99}(j+101) + 1.$$\nThe second block starts right after the first ($(j-\\ell+1) + (100+\\ell) = j + 101$), and by (1) the two sums are equal. With $k' = 100 + \\ell \\in [101, 299]$ this contradicts the assumption. ∎"
+   }
+  ],
+  "topics": [
+   "counting",
+   "logic"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "imo-isl-2011-c3",
+  "bank": "imo",
+  "source": {
+   "contest": "IMO Shortlist",
+   "paper": "Combinatorics",
+   "year": 2011,
+   "number": 3,
+   "url": "https://www.imo-official.org/assets/documents/problems/2011/IMO2011SL.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Let $\\mathcal S$ be a finite set of at least two points in the plane. Assume that no three points of $\\mathcal S$ are collinear. By a *windmill* we mean a process as follows. Start with a line $\\ell$ going through a point $P \\in \\mathcal S$. Rotate $\\ell$ clockwise around the pivot $P$ until the line contains another point $Q$ of $\\mathcal S$. The point $Q$ now takes over as the new pivot. This process continues indefinitely, with the pivot always being a point from $\\mathcal S$.\n\nShow that for a suitable $P \\in \\mathcal S$ and a suitable starting line $\\ell$ containing $P$, the resulting windmill will visit each point of $\\mathcal S$ as a pivot infinitely often.",
+  "image": null,
+  "choices": null,
+  "answer": "Start with a line through a point of $\\mathcal S$ that splits the other points into halves (sizes $n, n$ or $n-1, n$). The numbers of points on the two sides of the oriented line never change, so when the line becomes parallel to the balanced line through any point $T$ it must pass through $T$; hence every point is a pivot in each half-turn (or full turn).",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [],
+  "topics": [
+   "geometry",
+   "logic"
+  ],
+  "difficulty": 2,
+  "duplicateOf": "imo-2011-02",
+  "reviewNote": null
+ },
+ {
+  "id": "imo-isl-2011-c4",
+  "bank": "imo",
+  "source": {
+   "contest": "IMO Shortlist",
+   "paper": "Combinatorics",
+   "year": 2011,
+   "number": 4,
+   "url": "https://www.imo-official.org/assets/documents/problems/2011/IMO2011SL.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Determine the greatest positive integer $k$ that satisfies the following property: The set of positive integers can be partitioned into $k$ subsets $A_1, A_2, \\dots, A_k$ such that for all integers $n \\ge 15$ and all $i \\in \\{1, 2, \\dots, k\\}$ there exist two distinct elements of $A_i$ whose sum is $n$.",
+  "image": null,
+  "choices": null,
+  "answer": "3",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Construction for 3, counting argument against 4",
+    "body": "**$k = 3$ is possible.** Take\n$$A_1 = \\{1,2,3\\} \\cup \\{3m : m \\ge 4\\},\\quad A_2 = \\{4,5,6\\} \\cup \\{3m-1 : m \\ge 4\\},\\quad A_3 = \\{7,8,9\\} \\cup \\{3m-2 : m \\ge 4\\}.$$\nThese partition the positive integers: $1, \\dots, 9$ are placed explicitly and every integer $\\ge 10$ lies in exactly one of the three progressions $10, 13, 16, \\dots$; $11, 14, \\dots$; $12, 15, \\dots$\n\n- $A_1$: for $n \\ge 13$ pick $x \\in \\{1,2,3\\}$ with $x \\equiv n \\pmod 3$; then $y = n - x \\equiv 0 \\pmod 3$ and $y \\ge 10$, so $y \\ge 12$ and $y \\in A_1$.\n- $A_2$: for $n \\ge 15$ pick $x \\in \\{4,5,6\\}$ with $n - x \\equiv 2 \\pmod 3$; then $y = n - x \\ge 9$ and $y \\equiv 2$, so $y \\ge 11$, $y \\in A_2$.\n- $A_3$: for $n \\ge 17$ pick $x \\in \\{7,8,9\\}$ with $n - x \\equiv 1 \\pmod 3$; then $y \\ge 8$ and $y \\equiv 1$, so $y \\ge 10$, $y \\in A_3$. Finally $15 = 7 + 8$ and $16 = 7 + 9$.\n\nIn all cases $x \\le 9 < y$, so the two elements are distinct.\n\n**$k \\ge 4$ is impossible.** Suppose a partition into $k \\ge 4$ sets works. Merging $A_4, \\dots, A_k$ into one set keeps the property, so assume $k = 4$. Let $B_i = A_i \\cap \\{1, \\dots, 23\\}$. Each of the ten numbers $15, 16, \\dots, 24$ is a sum of two distinct elements of $A_i$, both positive and hence $\\le 23$, i.e. elements of $B_i$. Different numbers need different pairs, so $\\binom{|B_i|}{2} \\ge 10$ and $|B_i| \\ge 5$.\n\nSince $|B_1| + |B_2| + |B_3| + |B_4| = 23 < 24$, some $|B_j| = 5$. Then $B_j$ has exactly $\\binom52 = 10$ pairs, so its pairwise sums are exactly $15, 16, \\dots, 24$, each once. Each element of $B_j = \\{x_1, \\dots, x_5\\}$ occurs in $4$ pairs, so summing all pair sums,\n$$4(x_1 + \\dots + x_5) = 15 + 16 + \\dots + 24 = 195,$$\nwhich is impossible since $195$ is odd. Hence $k \\le 3$.\n\n**Answer: $k = 3$.**"
+   }
+  ],
+  "topics": [
+   "counting",
+   "number-theory"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "imo-isl-2011-c5",
+  "bank": "imo",
+  "source": {
+   "contest": "IMO Shortlist",
+   "paper": "Combinatorics",
+   "year": 2011,
+   "number": 5,
+   "url": "https://www.imo-official.org/assets/documents/problems/2011/IMO2011SL.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Let $m$ be a positive integer and consider a checkerboard consisting of $m$ by $m$ unit squares. At the midpoints of some of these unit squares there is an ant. At time $0$, each ant starts moving with speed $1$ parallel to some edge of the checkerboard. When two ants moving in opposite directions meet, they both turn $90^\\circ$ clockwise and continue moving with speed $1$. When more than two ants meet, or when two ants moving in perpendicular directions meet, the ants continue moving in the same direction as before they met. When an ant reaches one of the edges of the checkerboard, it falls off and will not re-appear.\n\nConsidering all possible starting positions, determine the latest possible moment at which the last ant falls off the checkerboard or prove that such a moment does not necessarily exist.",
+  "image": null,
+  "choices": null,
+  "answer": "The latest possible moment is $\\frac{3m}{2} - 1$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Relabel ants at collisions",
+    "body": "Use coordinates with the board $[0, m]^2$; ants start at points with both coordinates in $\\{\\frac12, \\frac32, \\dots, m - \\frac12\\}$. A *collision* is a meeting of exactly two ants moving in opposite directions.\n\n**Example.** For $m = 1$ a single ant falls off at time $\\frac12 = \\frac{3}{2} - 1$. For $m \\ge 2$ put an ant at $(\\frac12, \\frac12)$ moving east and one at $(m - \\frac12, \\frac12)$ moving west. They collide at time $\\frac{m-1}{2}$ at $(\\frac m2, \\frac12)$; the westbound ant turns clockwise to the north and needs $m - \\frac12$ more time to reach the top edge. It falls off at $\\frac{m-1}{2} + m - \\frac12 = \\frac{3m}{2} - 1$.\n\n**Key observation: we may choose the turning direction.** At a collision of an east- and a west-moving ant, clockwise turning sends them south and north; anticlockwise turning sends them north and south. Similarly for a north–south collision. So switching the rule at one collision only swaps the *names* of the two ants; the set of (position, direction) pairs at every later moment is unchanged. Hence, at every collision separately we may choose clockwise or anticlockwise, without changing *where and when* collisions happen or when the last ant falls off. (Meetings that are not collisions behave identically in all versions.)\n\n**Bound 1.** At each collision choose the rotation that makes the east-mover turn north (and the west-mover south), or the north-mover turn east (and the south-mover west). Then an ant that ever moves north or east (an *NE-ant*) always does, and the others (*SW-ants*) always move south or west. For an NE-ant $x + y$ grows at rate $1$ from a starting value $\\ge 1$; for an SW-ant it decreases at rate $1$ from a value $\\le 2m - 1$. A collision always involves one ant of each kind, at a common point. So every collision at $(x, y)$ at time $t$ satisfies\n$$t + 1 \\le x + y \\le 2m - 1 - t. \\tag{1}$$\n**Bound 2.** Choosing instead to keep ants moving north/west or south/east, the quantity $y - x$ is monotone with rate $1$, starting in $[1 - m, m - 1]$, and the same reasoning gives\n$$|x - y| \\le m - 1 - t \\tag{2}$$\nfor every collision. Since collision times and places are the same in all versions, (1) and (2) hold for the original process.\n\n**Each ant falls off by time $\\frac{3m}{2} - 1$.** Work in the version of Bound 1. An ant that never collides moves straight and falls off within $m - \\frac12 \\le \\frac{3m}{2} - 1$. Otherwise, let an NE-ant have its last collision at time $t$ at $(x, y)$. From (1) and (2), $x + y \\ge t + 1$ and $x - y \\ge -(m - 1 - t)$, so $2x \\ge 2t + 2 - m$, i.e. $x \\ge t + 1 - \\frac m2$; similarly $y \\ge t + 1 - \\frac m2$. After that it moves straight north or east, reaching an edge within $m - \\min(x, y) \\le \\frac{3m}{2} - 1 - t$. So it leaves by time $\\frac{3m}{2} - 1$. For an SW-ant, (1) and (2) give $x, y \\le \\frac{3m}{2} - 1 - t$, and it reaches an edge within $\\max(x, y)$ more time, again by time $\\frac{3m}{2} - 1$.\n\nAs the fall-off times of the whole group agree in all versions, the last ant falls off no later than $\\frac{3m}{2} - 1$, and the example shows this is attained.\n\n**Answer: $\\frac{3m}{2} - 1$.** ∎"
+   }
+  ],
+  "topics": [
+   "logic",
+   "spatial"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "imo-isl-2011-c6",
+  "bank": "imo",
+  "source": {
+   "contest": "IMO Shortlist",
+   "paper": "Combinatorics",
+   "year": 2011,
+   "number": 6,
+   "url": "https://www.imo-official.org/assets/documents/problems/2011/IMO2011SL.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Let $n$ be a positive integer and let $W = \\dots x_{-1}x_0x_1x_2\\dots$ be an infinite periodic word consisting of the letters $a$ and $b$. Suppose that the minimal period $N$ of $W$ is greater than $2^n$.\n\nA finite nonempty word $U$ is said to *appear* in $W$ if there exist indices $k \\le \\ell$ such that $U = x_kx_{k+1}\\dots x_\\ell$. A finite word $U$ is called *ubiquitous* if the four words $Ua$, $Ub$, $aU$, and $bU$ all appear in $W$. Prove that there are at least $n$ ubiquitous finite nonempty words.",
+  "image": null,
+  "choices": null,
+  "answer": "Count occurrences per period (multiplicity $\\mu$, with $\\mu(R) = \\mu(Ra) + \\mu(Rb) = \\mu(aR) + \\mu(bR)$). For each $k = 0, \\dots, n-1$ a longest word with $\\mu > 2^k$ is ubiquitous and has $2^k < \\mu \\le 2^{k+1}$, so these $n$ words are distinct.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Multiplicities and longest frequent words",
+    "body": "All words below are nonempty. For a word $R$ of length $r$, its *multiplicity* $\\mu(R)$ is the number of $i \\in \\{1, \\dots, N\\}$ with $x_{i+1}x_{i+2}\\dots x_{i+r} = R$. So $R$ appears in $W$ iff $\\mu(R) > 0$. Every occurrence of $R$ is followed by exactly one letter and preceded by exactly one letter, and $W$ has period $N$, so\n$$\\mu(R) = \\mu(Ra) + \\mu(Rb) = \\mu(aR) + \\mu(bR). \\tag{1}$$\n\n**Long words are rare.** If a word of length $r \\ge N$ occurred at two positions $1 \\le i < j \\le N$, then $x_{i+s} = x_{j+s}$ for $s = 1, \\dots, N$, hence (by $N$-periodicity) for all $s$. So $j - i$ would be a period of $W$ with $0 < j - i < N$, contradicting minimality. Thus every word of length $\\ge N$ has multiplicity at most $1$.\n\n**A frequent letter.** $\\mu(a) + \\mu(b) = N > 2^n$, so one letter has multiplicity $> 2^{n-1}$.\n\n**The words $U_k$.** Fix $k \\in \\{0, 1, \\dots, n-1\\}$. Words with multiplicity $> 2^k$ exist (a frequent letter, since $2^{n-1} \\ge 2^k$), and they all have length $< N$ (as $2^k \\ge 1$). Let $U_k$ be such a word of maximal length.\n\n- $U_k a$ and $U_k b$ are longer, so $\\mu(U_k a), \\mu(U_k b) \\le 2^k$. By (1), $\\mu(U_k a) = \\mu(U_k) - \\mu(U_k b) > 2^k - 2^k = 0$, and likewise $\\mu(U_k b) > 0$. The same argument with $aU_k, bU_k$ shows they appear too. So $U_k$ is ubiquitous.\n- By (1), $\\mu(U_k) = \\mu(U_k a) + \\mu(U_k b) \\le 2^{k+1}$.\n\nHence $2^k < \\mu(U_k) \\le 2^{k+1}$ for each $k$. These intervals are disjoint for different $k$, so $U_0, U_1, \\dots, U_{n-1}$ are $n$ distinct ubiquitous words. ∎"
+   }
+  ],
+  "topics": [
+   "counting",
+   "logic"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "imo-isl-2011-c7",
+  "bank": "imo",
+  "source": {
+   "contest": "IMO Shortlist",
+   "paper": "Combinatorics",
+   "year": 2011,
+   "number": 7,
+   "url": "https://www.imo-official.org/assets/documents/problems/2011/IMO2011SL.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "On a square table of $2011$ by $2011$ cells we place a finite number of napkins that each cover a square of $52$ by $52$ cells. In each cell we write the number of napkins covering it, and we record the maximal number $k$ of cells that all contain the same nonzero number. Considering all possible napkin configurations, what is the largest value of $k$?",
+  "image": null,
+  "choices": null,
+  "answer": "3986729",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Example plus a double-counting bound",
+    "body": "Let $m = 39$, so $2011 = 52m - 17$. The answer is\n$$2011^2 - \\big((52^2 - 35^2)m - 17^2\\big) = 4044121 - 57392 = 3986729.$$\n\nNumber rows and columns $1, \\dots, 2011$. Call an index *small* if it is $\\equiv 1, \\dots, 35 \\pmod{52}$ and *big* if it is $\\equiv 36, \\dots, 52 \\pmod{52}$. The small indices form $39$ blocks $s_0, \\dots, s_{38}$ of $35$ consecutive indices ($s_q = [52q+1, 52q+35]$), and the big ones form $38$ blocks $h_0, \\dots, h_{37}$ of $17$ ($h_q = [52q+36, 52q+52]$), in the order $s_0, h_0, s_1, h_1, \\dots, h_{37}, s_{38}$.\n\n**Example.** A napkin covers (column interval) $\\times$ (row interval), each of length $52$; the interval $s_q \\cup h_q$ or $h_q \\cup s_{q+1}$ has length $52$. Use the napkins\n1. $(h_i \\cup s_{i+1}) \\times (s_j \\cup h_j)$ for $0 \\le j \\le i \\le 37$;\n2. $(s_i \\cup h_i) \\times (h_j \\cup s_{j+1})$ for $0 \\le i \\le j \\le 37$;\n3. $(h_i \\cup s_{i+1}) \\times (h_i \\cup s_{i+1})$ for $0 \\le i \\le 37$;\n4. $(s_0 \\cup h_0) \\times (s_0 \\cup h_0)$.\n\nCount the napkins over a cell in column block $X$ and row block $Y$:\n- $X = s_a$, $Y = s_b$: type 1 if $b < a$, type 2 if $a < b$, type 3 if $a = b \\ge 1$, type 4 if $a = b = 0$. Always exactly one.\n- $X = h_a$, $Y = h_b$: type 1 if $b \\le a$, type 2 if $a \\le b$, type 3 if $a = b$, type 4 if $a = b = 0$. So exactly one if $a \\ne b$, and $3$ or $4$ if $a = b$.\n- $X = h_a$, $Y = s_b$: type 1 if $b \\le a$, type 2 if $b \\ge a + 2$, type 2 *and* type 3 if $b = a + 1$, plus type 4 if $a = b = 0$. So exactly one except for $b = a+1$ and $a = b = 0$, where it is $2$. The case $X = s_b$, $Y = h_a$ is symmetric.\n\nSo the cells not containing $1$ are: $38$ blocks $h_a \\times h_a$ ($17^2$ cells each) and $2 \\cdot 39$ blocks of type $h \\times s$ or $s \\times h$ ($17 \\cdot 35$ cells each). That is $38 \\cdot 289 + 78 \\cdot 595 = 57392$ cells, so $3986729$ cells contain $1$.\n\n**Bound.** Fix any configuration and any $M \\ge 1$, and let $g$ be the number of cells whose number is not $M$. We show $g \\ge 57392$. A *line* is a row or a column.\n\nTake a line with entries $a_1, \\dots, a_{2011}$ and put $\\sigma_r = \\sum_{t \\equiv r \\ (52)} a_t$ for $r = 1, \\dots, 52$. For $r \\le 35$ the sum has $m = 39$ terms, for $r \\ge 36$ it has $38$. A napkin meeting the line covers $52$ consecutive cells of it, one in each residue class, so $\\sigma_1 = \\dots = \\sigma_{52} = s$, the number of napkins meeting the line.\n- If $s > 38M$ (call the line *rich*), each $\\sigma_r$ with $r \\ge 36$ has a term $> M$: choose one in each class. These $17$ *bad cells* are at big positions and contain numbers $> M$.\n- If $s \\le 38M$ (*poor*), then $s < 39M$, so each $\\sigma_r$ with $r \\le 35$ has a term $< M$: choose one in each class. These $35$ bad cells are at small positions and contain numbers $< M$.\n\nPut a strawberry on every bad cell of every line, and one *extra* strawberry on every bad cell of every small rich line. Every strawberry lies on a cell whose number is not $M$.\n\n*Each cell gets at most two strawberries.* A cell gets at most two from its row and at most two from its column. Suppose it gets an extra strawberry from its row. Then the row is small and rich, the cell contains a number $> M$, and it is in a big column. The column cannot have it as a bad cell: if the column is rich its bad cells lie in big rows, and if it is poor its bad cells contain numbers $< M$. So the cell has exactly two strawberries. The same holds for an extra strawberry from a column. Without extras, a cell gets at most $1 + 1$. So the number $\\Sigma$ of strawberries satisfies $\\Sigma \\le 2g$.\n\n*Counting by lines.* There are $2 \\cdot 35 \\cdot 39$ small lines; each gives at least $\\min(2 \\cdot 17, 35) = 34$ strawberries. There are $2 \\cdot 17 \\cdot 38$ big lines; each gives at least $\\min(17, 35) = 17$. Hence\n$$2g \\ge \\Sigma \\ge 2\\,(35 \\cdot 39 \\cdot 34 + 17 \\cdot 38 \\cdot 17) = 2\\,(46410 + 10982) = 2 \\cdot 57392.$$\nSo at most $2011^2 - 57392$ cells contain any given value $M$.\n\n**Answer: $3986729$.**"
+   }
+  ],
+  "topics": [
+   "counting",
+   "logic"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "imo-isl-2011-g1",
+  "bank": "imo",
+  "source": {
+   "contest": "IMO Shortlist",
+   "paper": "Geometry",
+   "year": 2011,
+   "number": 1,
+   "url": "https://www.imo-official.org/assets/documents/problems/2011/IMO2011SL.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Let $ABC$ be an acute triangle. Let $\\omega$ be a circle whose center $L$ lies on the side $BC$. Suppose that $\\omega$ is tangent to $AB$ at $B'$ and to $AC$ at $C'$. Suppose also that the circumcenter $O$ of the triangle $ABC$ lies on the shorter arc $B'C'$ of $\\omega$. Prove that the circumcircle of $ABC$ and $\\omega$ meet at two points.",
+  "image": null,
+  "choices": null,
+  "answer": "Let $R$, $r$ be the radii. Since $O \\in \\omega$, the circles meet twice iff $R < 2r$. As $O$ is on the arc facing $A$, $R = OA < AB'$, which settles the case $AB' \\le 2r$. Otherwise $\\angle A < 60^\\circ$, and then the reflection of $O$ in $BC$ lies on $\\omega$ but outside the circumcircle.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Two cases via $AB'$ versus $2r$",
+    "body": "Let $\\Gamma$ be the circumcircle (radius $R = OA$) and $r$ the radius of $\\omega$; let $\\alpha = \\angle BAC$.\n\n**Preliminaries.** $L$ is at distance $r$ from both lines $AB$ and $AC$ and lies inside angle $BAC$, so $AL$ bisects $\\angle BAC$ and $AB' = AC'$. In the right triangle $AB'L$, $\\angle B'LA = 90^\\circ - \\frac\\alpha2$, and the arc $B'C'$ of $\\omega$ facing $A$ (the points $P$ of $\\omega$ with $\\angle PLA \\le \\angle B'LA$) has central angle $180^\\circ - \\alpha < 180^\\circ$; it is the shorter arc. So $O$ lies on it.\n\n**Claim: $OA < AB'$.** For $P \\in \\omega$, the law of cosines in triangle $APL$ gives $AP^2 = AL^2 + r^2 - 2r\\cdot AL\\cos\\angle PLA$, which increases with $\\angle PLA$. On the shorter arc, $\\angle PLA \\le \\angle B'LA$, with equality only at $B'$ and $C'$. Since $O$ is inside the acute triangle, $O \\ne B', C'$, so $OA^2 < AL^2 + r^2 - 2r\\cdot AL\\cos\\angle B'LA = AB'^2$.\n\n**Criterion.** The centres $O$ and $L$ are at distance $OL = r$ (because $O \\in \\omega$). Two circles with radii $R, r$ and centre distance $d$ meet in two points iff $|R - r| < d < R + r$. Here $d = r < R + r$ always, and $|R - r| < r$ iff $R < 2r$.\n\n**Case 1: $AB' \\le 2r$.** Then $R = OA < AB' \\le 2r$, so the circles meet in two points.\n\n**Case 2: $AB' > 2r$.** Then $\\tan\\angle B'AL = \\frac{r}{AB'} < \\frac12 < \\tan 30^\\circ$, so $\\frac\\alpha2 < 30^\\circ$, i.e. $\\alpha < 60^\\circ$.\n\nLet $O'$ be the reflection of $O$ in $BC$. Since $L \\in BC$, $\\omega$ is symmetric about $BC$, so $O' \\in \\omega$. The triangle is acute, so $O$ is on the same side of $BC$ as $A$ and $O'$ on the other side, with $\\angle BO'C = \\angle BOC = 2\\alpha$. A point $X$ on the side of $BC$ opposite to $A$ lies on $\\Gamma$ iff $\\angle BXC = 180^\\circ - \\alpha$, and inside $\\Gamma$ iff the angle is larger. Since $\\angle BO'C = 2\\alpha < 180^\\circ - \\alpha$ (as $\\alpha < 60^\\circ$), $O'$ lies outside $\\Gamma$.\n\nThus $\\omega$ contains a point strictly inside $\\Gamma$ (namely $O$, its centre) and a point strictly outside ($O'$). Each of the two arcs of $\\omega$ from $O$ to $O'$ must cross $\\Gamma$, giving two different common points. ∎"
+   }
+  ],
+  "topics": [
+   "geometry"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "imo-isl-2011-g2",
+  "bank": "imo",
+  "source": {
+   "contest": "IMO Shortlist",
+   "paper": "Geometry",
+   "year": 2011,
+   "number": 2,
+   "url": "https://www.imo-official.org/assets/documents/problems/2011/IMO2011SL.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Let $A_1A_2A_3A_4$ be a non-cyclic quadrilateral. Let $O_1$ and $r_1$ be the circumcenter and the circumradius of the triangle $A_2A_3A_4$. Define $O_2, O_3, O_4$ and $r_2, r_3, r_4$ in a similar way. Prove that\n$$\\frac{1}{O_1A_1^2 - r_1^2} + \\frac{1}{O_2A_2^2 - r_2^2} + \\frac{1}{O_3A_3^2 - r_3^2} + \\frac{1}{O_4A_4^2 - r_4^2} = 0.$$",
+  "image": null,
+  "choices": null,
+  "answer": "$O_iA_i^2 - r_i^2$ is the power $\\pi_i$ of $A_i$ with respect to the circle $p_i = 0$ through the other three vertices. The curve $\\sum_i p_i(x,y)/\\pi_i = 1$ passes through all four vertices, so its $x^2 + y^2$ coefficient $\\sum 1/\\pi_i$ must vanish.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Circle equations and powers of points",
+    "body": "Fix Cartesian coordinates. A circle with centre $(u, v)$ and radius $\\rho$ is the zero set of\n$$p(x, y) = (x-u)^2 + (y-v)^2 - \\rho^2 = x^2 + y^2 + (\\text{terms of degree} \\le 1),$$\nand for any point $Z$, $p(Z) = |Z - (u, v)|^2 - \\rho^2$ is the power of $Z$ with respect to the circle.\n\nLet $p_i$ be this polynomial for the circle $\\omega_i$ through the three vertices other than $A_i$ (these three are not collinear, since $\\omega_i$ exists). Then $\\pi_i := p_i(A_i) = O_iA_i^2 - r_i^2$. Since the quadrilateral is not cyclic, $A_i \\notin \\omega_i$, so $\\pi_i \\ne 0$.\n\nConsider\n$$F(x, y) = \\sum_{i=1}^4 \\frac{p_i(x, y)}{\\pi_i} - 1 = c\\,(x^2 + y^2) + (\\text{degree} \\le 1),\\qquad c = \\sum_{i=1}^4 \\frac1{\\pi_i}.$$\nAt the vertex $A_j$ we have $p_i(A_j) = 0$ for $i \\ne j$ and $p_j(A_j)/\\pi_j = 1$, so $F(A_j) = 0$ for $j = 1, 2, 3, 4$.\n\nIf $c \\ne 0$, then dividing by $c$ and completing squares shows that the zero set of $F$ is a circle, a single point or empty. It contains the four distinct points $A_1, \\dots, A_4$, so it is a circle through all of them, contradicting that the quadrilateral is not cyclic. Hence $c = 0$, which is the required identity\n$$\\sum_{i=1}^4 \\frac{1}{O_iA_i^2 - r_i^2} = 0. \\ ∎$$"
+   }
+  ],
+  "topics": [
+   "geometry",
+   "algebra"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "imo-isl-2011-g3",
+  "bank": "imo",
+  "source": {
+   "contest": "IMO Shortlist",
+   "paper": "Geometry",
+   "year": 2011,
+   "number": 3,
+   "url": "https://www.imo-official.org/assets/documents/problems/2011/IMO2011SL.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Let $ABCD$ be a convex quadrilateral whose sides $AD$ and $BC$ are not parallel. Suppose that the circles with diameters $AB$ and $CD$ meet at points $E$ and $F$ inside the quadrilateral. Let $\\omega_E$ be the circle through the feet of the perpendiculars from $E$ to the lines $AB$, $BC$, and $CD$. Let $\\omega_F$ be the circle through the feet of the perpendiculars from $F$ to the lines $CD$, $DA$, and $AB$. Prove that the midpoint of the segment $EF$ lies on the line through the two intersection points of $\\omega_E$ and $\\omega_F$.",
+  "image": null,
+  "choices": null,
+  "answer": "All four feet from $E$ (also the one on $DA$) lie on $\\omega_E$, and $\\omega_E$ also passes through $EP \\cap BC$ and $ER \\cap AD$; similarly for $F$. The points $U = (\\perp \\text{ from } E \\text{ to } AD) \\cap (\\perp \\text{ from } F \\text{ to } BC)$ and $V$ (roles swapped) have equal powers by right-angle cyclic quadrilaterals, and $U + V = E + F$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Pedal circles and two points on the radical axis",
+    "body": "We use directed angles $\\angle(\\ell, m)$ between lines, taken modulo $180^\\circ$. Since $E$ lies on both circles, $\\angle(EA, EB) = \\angle(EC, ED) = 90^\\circ$; the same holds for $F$.\n\nLet $P, Q, R, S$ be the feet of the perpendiculars from $E$ to $DA, AB, BC, CD$. These are four distinct points: a common foot on two different side lines would be a common point $Z$ of the lines with $EZ$ perpendicular to both, which is impossible.\n\n**Step 1: $P \\in \\omega_E$.** The points $A, P, Q, E$ lie on the circle with diameter $AE$; $B, Q, R, E$ on the one with diameter $BE$; $C, R, S, E$ on the one with diameter $CE$; and $D, S, P, E$ on the one with diameter $DE$. Hence\n$$\\angle(PQ, PS) = \\angle(PQ, PE) + \\angle(PE, PS) = \\angle(AB, AE) + \\angle(DE, DC),$$\n$$\\angle(RQ, RS) = \\angle(RQ, RE) + \\angle(RE, RS) = \\angle(BA, BE) + \\angle(CE, CD).$$\nTheir difference is $\\angle(BE, AE) + \\angle(DE, CE) = 90^\\circ + 90^\\circ \\equiv 0$. So $P, Q, R, S$ are concyclic, and $\\omega_E$ passes through all four feet. Likewise all four feet $M$ (on $AD$), $N$ (on $BC$) and those on $AB$, $CD$ from $F$ lie on $\\omega_F$.\n\n**Step 2: $AD \\not\\perp BC$.** Let $K = AD \\cap BC$. Either $A$ lies between $K$ and $D$ (then $B$ lies between $K$ and $C$ and $ABCD \\subset \\triangle KCD$), or $D$ lies between $K$ and $A$ (then $ABCD \\subset \\triangle KAB$). In the first case, if $\\angle CKD \\ge 90^\\circ$ then $K$ lies in the closed disc with diameter $CD$, so the whole triangle $KCD$ does, and its interior points lie strictly inside that disc. But $E$ is an interior point on the circle with diameter $CD$, a contradiction. The second case is the same with the circle on $AB$. Hence $AD$ and $BC$ are not perpendicular.\n\n**Step 3: two more points on $\\omega_E$.** Since $EP \\perp AD$ and $AD \\not\\perp BC$, the line $EP$ meets $BC$ at a point $P'$. We claim $P' \\in \\omega_E$. Indeed $P'$ and $R$ lie on $BC$, and\n$$\\angle(RQ, RP') = \\angle(RQ, RB) = \\angle(EQ, EB) = 90^\\circ + \\angle(AB, EB),$$\n$$\\angle(PQ, PP') = \\angle(PQ, PE) = \\angle(AQ, AE) = \\angle(AB, EB) + \\angle(EB, EA) = \\angle(AB, EB) + 90^\\circ.$$\nThese are equal, so $P'$ lies on the circle $PQR = \\omega_E$. In the same way $R' = ER \\cap AD$ lies on $\\omega_E$, and $M' = FM \\cap BC$, $N' = FN \\cap AD$ lie on $\\omega_F$.\n\n**Step 4: two points of the radical axis.** Let $U = EP \\cap FN$ and $V = FM \\cap ER$; these exist because $EP \\perp AD$, $FN \\perp BC$ and $AD \\not\\parallel BC$.\n\n$N$ and $P'$ lie on $BC$ and $N'$, $P$ lie on $AD$, with $\\angle(NN', NP') = 90^\\circ = \\angle(PN', PP')$. So $N$ and $P$ lie on the circle with diameter $N'P'$. The lines $NN'$ and $PP'$ pass through $U$, so by the power of $U$ with respect to that circle, $UN \\cdot UN' = UP \\cdot UP'$ (signed lengths). The left side is the power of $U$ with respect to $\\omega_F$ (as $N, N' \\in \\omega_F$), the right side its power with respect to $\\omega_E$. So $U$ lies on the radical axis $g$ of $\\omega_E$ and $\\omega_F$, which is the line through their two intersection points. In the same way ($M, R$ on the circle with diameter $M'R'$) $V \\in g$.\n\n**Step 5: $U$ and $V$ are symmetric about the midpoint of $EF$.** Let $\\mathbf n_1 \\perp AD$ and $\\mathbf n_2 \\perp BC$ be vectors; they are linearly independent. Write $U = E + s\\mathbf n_1 = F + t\\mathbf n_2$ and $V = F + s'\\mathbf n_1 = E + t'\\mathbf n_2$. Then $E - F = t\\mathbf n_2 - s\\mathbf n_1 = s'\\mathbf n_1 - t'\\mathbf n_2$, so $s' = -s$ and $t' = -t$. Therefore $U + V = E + F$, i.e. the midpoint of $UV$ is the midpoint of $EF$. (So $EUFV$ is a parallelogram.)\n\nIf $U \\ne V$, the line $g = UV$ contains the midpoint of $UV$, which is the midpoint of $EF$. If $U = V$, this point is itself the midpoint of $EF$ and lies on $g$. ∎"
+   }
+  ],
+  "topics": [
+   "geometry"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "imo-isl-2011-g4",
+  "bank": "imo",
+  "source": {
+   "contest": "IMO Shortlist",
+   "paper": "Geometry",
+   "year": 2011,
+   "number": 4,
+   "url": "https://www.imo-official.org/assets/documents/problems/2011/IMO2011SL.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Let $ABC$ be an acute triangle with circumcircle $\\Omega$. Let $B_0$ be the midpoint of $AC$ and let $C_0$ be the midpoint of $AB$. Let $D$ be the foot of the altitude from $A$, and let $G$ be the centroid of the triangle $ABC$. Let $\\omega$ be a circle through $B_0$ and $C_0$ that is tangent to the circle $\\Omega$ at a point $X \\ne A$. Prove that the points $D$, $G$, and $X$ are collinear.",
+  "image": null,
+  "choices": null,
+  "answer": "The tangents to $\\Omega$ at $A$ and $X$ and the line $B_0C_0$ are radical axes, meeting at $W$. With $A_0$ the midpoint of $BC$ and $Q$ its projection on $B_0C_0$, the points $A, X, Q$ lie on the circle with diameter $WO$, an angle chase gives $Q \\in DX$, and the homothety at $G$ with ratio $-\\frac12$ maps $D$ to $Q$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Radical centre and a homothety",
+    "body": "Directed angles $\\angle(\\ell, m)$ are taken modulo $180^\\circ$. Let $O$ be the centre of $\\Omega$ and $A_0$ the midpoint of $BC$.\n\n**The case $AB = AC$.** Then the line $AD$ is an axis of symmetry. A circle through $B_0$ and $C_0$ has its centre on the perpendicular bisector of $B_0C_0$, which is $AD$; so the line of centres of $\\omega$ and $\\Omega$ is $AD$, and the tangency point $X$ lies on $AD$. Also $G \\in AD$, so $D, G, X$ are collinear. From now on let $AB \\ne AC$.\n\n**The point $W$.** Let $\\Omega_1$ be the circle $AB_0C_0$. The homothety with centre $A$ and ratio $\\frac12$ maps $\\Omega$ to $\\Omega_1$, so these circles are tangent at $A$, and their radical axis is the tangent $a$ to $\\Omega$ at $A$. The radical axis of $\\Omega$ and $\\omega$ is the tangent $x$ at $X$, and that of $\\Omega_1$ and $\\omega$ is the line $B_0C_0$ ($\\omega \\ne \\Omega_1$, since $\\Omega_1$ touches $\\Omega$ only at $A$). As $AB \\ne AC$, $a$ is not parallel to $BC \\parallel B_0C_0$, so $a$ meets $B_0C_0$ at a point $W$. Then $W$ has equal powers with respect to all three circles, so $W \\in x$ as well.\n\n**Equal distances.** $B_0C_0 \\parallel BC$ passes through the midpoint of $AD$, and $AD \\perp B_0C_0$, so $D$ is the reflection of $A$ in $B_0C_0$. Hence $WD = WA$. Also $WA = WX$ (tangent lengths), and $OA = OX$, so $OW$ is the perpendicular bisector of $AX$.\n\n**The point $Q$.** Let $Q$ be the foot of the perpendicular from $A_0$ to $B_0C_0$. Since $OA_0 \\perp BC \\parallel B_0C_0$, the point $Q$ is also the foot from $O$ to line $B_0C_0 = WQ$. So $\\angle WAO = \\angle WXO = \\angle WQO = 90^\\circ$, and $A, X, Q$ lie on the circle with diameter $WO$.\n\n**$Q$, $D$, $X$ are collinear.** Reflection in the line $QW$ maps $A$ to $D$ and reverses directed angles, so $\\angle(QW, QD) = -\\angle(QW, QA)$. Using the circle through $W, A, X, Q$ and the isosceles triangle $WAX$ (reflection in $OW$ swaps $A$ and $X$, so $\\angle(XW, XA) = -\\angle(AW, AX)$):\n$$\\angle(QW, QD) = -\\angle(QW, QA) = -\\angle(XW, XA) = \\angle(AW, AX) = \\angle(QW, QX).$$\nSo the lines $QD$ and $QX$ coincide: $Q$, $D$, $X$ are collinear.\n\n**$D$, $G$, $Q$ are collinear.** The homothety $h$ with centre $G$ and ratio $-\\frac12$ maps $A, B, C$ to $A_0, B_0, C_0$. It maps line $BC$ to the parallel line through $B_0, C_0$, and the altitude $AD$ (through $A$, perpendicular to $BC$) to the line through $A_0$ perpendicular to $B_0C_0$, i.e. $A_0Q$. Hence $h(D) = Q$, and $G$ lies on line $DQ$ ($D \\ne Q$, as the only fixed point of $h$ is $G \\notin BC$).\n\nBoth $X$ and $G$ lie on the line $DQ$, so $D$, $G$, $X$ are collinear. ∎"
+   }
+  ],
+  "topics": [
+   "geometry"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "imo-isl-2011-g5",
+  "bank": "imo",
+  "source": {
+   "contest": "IMO Shortlist",
+   "paper": "Geometry",
+   "year": 2011,
+   "number": 5,
+   "url": "https://www.imo-official.org/assets/documents/problems/2011/IMO2011SL.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Let $ABC$ be a triangle with incenter $I$ and circumcircle $\\omega$. Let $D$ and $E$ be the second intersection points of $\\omega$ with the lines $AI$ and $BI$, respectively. The chord $DE$ meets $AC$ at a point $F$, and $BC$ at a point $G$. Let $P$ be the intersection point of the line through $F$ parallel to $AD$ and the line through $G$ parallel to $BE$. Suppose that the tangents to $\\omega$ at $A$ and at $B$ meet at a point $K$. Prove that the three lines $AE$, $BD$, and $KP$ are either parallel or concurrent.",
+  "image": null,
+  "choices": null,
+  "answer": "$AIFE$ and $BDGI$ are cyclic (circles $\\omega_1$, $\\omega_2$). $AE$, $BD$ and the common chord $t$ of $\\omega_1, \\omega_2$ are the three radical axes of $\\omega, \\omega_1, \\omega_2$; angle chases on the circles $ABL$ and $FGL$ ($L$ the second common point) show that $t$ passes through $K$ and $P$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Three radical axes",
+    "body": "We use directed angles $\\angle(\\ell, m)$ modulo $180^\\circ$. Since $AD$ and $BE$ are internal bisectors, $\\angle(AB, AD) = \\angle(AD, AC)$ and $\\angle(BA, BE) = \\angle(BE, BC)$.\n\n**Two cyclic quadrilaterals.** Using that $I \\in AD$, $F \\in AC$, $I \\in EB$, $F \\in ED$ and the inscribed angle theorem in $\\omega$,\n$$\\angle(AI, AF) = \\angle(AD, AC) = \\angle(AB, AD) = \\angle(EB, ED) = \\angle(EI, EF),$$\nso $A, E, I, F$ lie on a circle $\\omega_1$. Similarly\n$$\\angle(BI, BG) = \\angle(BE, BC) = \\angle(BA, BE) = \\angle(DA, DE) = \\angle(DI, DG),$$\nso $B, D, G, I$ lie on a circle $\\omega_2$.\n\n**Radical axes.** The radical axis of $\\omega$ and $\\omega_1$ is $AE$, that of $\\omega$ and $\\omega_2$ is $BD$, and that of $\\omega_1$ and $\\omega_2$ is a line $t$ through their common point $I$. The three radical axes of three circles are concurrent (at the radical centre) or parallel (if the centres are collinear). So it suffices to show that $t$ is the line $KP$.\n\nLet $L$ be the second common point of $\\omega_1$ and $\\omega_2$, so $t = IL$ (if the circles are tangent at $I$, put $L = I$ and read $LI$ as the common tangent $t$ below).\n\n**$K \\in t$.** Let $t$ meet the circle $ABL$ again at $K'$. Using the circles $ABLK'$, $\\omega_1$ (through $A, L, E, I$) and the tangent–chord angle at $B$:\n$$\\angle(BA, BK') = \\angle(LA, LK') = \\angle(LA, LI) = \\angle(EA, EI) = \\angle(EA, EB) = \\angle(BA, BK).$$\nSo $K'$ lies on the tangent $BK$. Likewise, with $\\omega_2$ (through $B, L, D, I$) and the tangent at $A$,\n$$\\angle(AB, AK') = \\angle(LB, LK') = \\angle(LB, LI) = \\angle(DB, DI) = \\angle(DB, DA) = \\angle(AB, AK),$$\nso $K'$ lies on the tangent $AK$. Hence $K' = K$ and $K \\in t$.\n\n**$P \\in t$.** Let $t$ meet the circle $FGL$ again at $P'$. Since $FG$ is the line $DE$, $FP \\parallel AD$ and $GP \\parallel BE$:\n$$\\angle(FP', FG) = \\angle(LP', LG) = \\angle(LI, LG) = \\angle(DI, DG) = \\angle(DA, DE) = \\angle(FP, FG),$$\nusing $\\omega_2$; so $P'$ lies on the line $FP$. And using $\\omega_1$,\n$$\\angle(GP', GF) = \\angle(LP', LF) = \\angle(LI, LF) = \\angle(EI, EF) = \\angle(EB, ED) = \\angle(GP, GF),$$\nso $P'$ lies on the line $GP$. Hence $P' = P$ and $P \\in t$.\n\nTherefore $t = KP$, and $AE$, $BD$, $KP$ are the three radical axes of $\\omega$, $\\omega_1$, $\\omega_2$: they are concurrent or parallel. ∎"
+   }
+  ],
+  "topics": [
+   "geometry"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "imo-isl-2011-g6",
+  "bank": "imo",
+  "source": {
+   "contest": "IMO Shortlist",
+   "paper": "Geometry",
+   "year": 2011,
+   "number": 6,
+   "url": "https://www.imo-official.org/assets/documents/problems/2011/IMO2011SL.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Let $ABC$ be a triangle with $AB = AC$, and let $D$ be the midpoint of $AC$. The angle bisector of $\\angle BAC$ intersects the circle through $D$, $B$, and $C$ in a point $E$ inside the triangle $ABC$. The line $BD$ intersects the circle through $A$, $E$, and $B$ in two points $B$ and $F$. The lines $AF$ and $BE$ meet at a point $I$, and the lines $CI$ and $BD$ meet at a point $K$. Show that $I$ is the incenter of triangle $KAB$.",
+  "image": null,
+  "choices": null,
+  "answer": "By symmetry $BE$ bisects $\\angle ABD$. An angle chase gives $DA = DF$; Menelaus in $ADF$ with line $CIK$ and the bisector theorem then give $AD^2 = DK\\cdot DB$, so $\\triangle ADK \\sim \\triangle BDA$, and this yields that $AI$ bisects $\\angle KAB$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Isosceles triangle $ADF$ and similar triangles",
+    "body": "Let $M$ be the midpoint of $BC$ and $D'$ the midpoint of $AB$. The figure is symmetric in the line $AM$, which swaps $B \\leftrightarrow C$ and $D \\leftrightarrow D'$. We use the configuration of the figure: $E$ lies on segment $AM$, and $F$, $K$ lie on segment $BD$.\n\n**$BI$ bisects $\\angle ABK$.** The circle $BCD$ is mapped to itself by the symmetry, so $D'$ lies on it, and $E$ (on the axis) satisfies $ED' = ED$. Equal chords subtend equal inscribed angles at $B$: $\\angle D'BE = \\angle EBD$, i.e. $\\angle ABI = \\angle IBK$.\n\n**$DA = DF$.** Since $ABFE$ is cyclic and $D$ lies on line $BF$ beyond $F$, $\\angle DFE = \\angle BAE = \\angle DAE$ (the last because $AE$ bisects $\\angle BAC$). Also, by inscribed angles in circle $ABFE$ and the previous step,\n$$\\angle EAF = \\angle EBF = \\angle ABE = \\angle AFE.$$\nAdding, $\\angle DAF = \\angle DAE + \\angle EAF = \\angle DFE + \\angle EFA = \\angle DFA$. So triangle $ADF$ is isosceles with $DF = DA = \\frac12 AC = \\frac12 AB$.\n\n**A ratio from Menelaus.** The line $CIK$ meets the sides (lines) $AD$, $DF$, $FA$ of triangle $ADF$ at $C$, $K$, $I$. Menelaus' theorem gives\n$$\\frac{AC}{CD}\\cdot\\frac{DK}{KF}\\cdot\\frac{FI}{IA} = 1.$$\nHere $\\frac{AC}{CD} = 2$, and since $BI$ bisects angle $ABF$ in triangle $ABF$, $\\frac{FI}{IA} = \\frac{BF}{BA} = \\frac{BF}{2AD}$. Hence $\\frac{DK}{KF}\\cdot\\frac{BF}{AD} = 1$, i.e. $\\frac{BF}{AD} = \\frac{KF}{DK}$. With $B, F, K, D$ in this order on the line and $FD = AD$,\n$$\\frac{BD}{AD} = \\frac{BF + FD}{AD} = \\frac{KF}{DK} + 1 = \\frac{DF}{DK} = \\frac{AD}{DK}.$$\nSo $AD^2 = DK \\cdot DB$.\n\n**Similar triangles.** Triangles $ADK$ and $BDA$ share the angle at $D$ and $\\frac{AD}{DK} = \\frac{BD}{AD}$, so they are similar and $\\angle DAK = \\angle DBA$. Using the exterior angle at $F$ of triangle $ABF$:\n$$\\angle IAB = \\angle FAB = \\angle AFD - \\angle FBA = \\angle DAF - \\angle DAK = \\angle KAF = \\angle KAI.$$\nSo $AI$ bisects $\\angle KAB$.\n\n$I$ lies on the bisectors of the angles at $A$ and $B$ of triangle $KAB$ (and inside it), so $I$ is its incenter. ∎"
+   }
+  ],
+  "topics": [
+   "geometry"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "imo-isl-2011-g7",
+  "bank": "imo",
+  "source": {
+   "contest": "IMO Shortlist",
+   "paper": "Geometry",
+   "year": 2011,
+   "number": 7,
+   "url": "https://www.imo-official.org/assets/documents/problems/2011/IMO2011SL.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Let $ABCDEF$ be a convex hexagon all of whose sides are tangent to a circle $\\omega$ with center $O$. Suppose that the circumcircle of triangle $ACE$ is concentric with $\\omega$. Let $J$ be the foot of the perpendicular from $B$ to $CD$. Suppose that the perpendicular from $B$ to $DF$ intersects the line $EO$ at a point $K$. Let $L$ be the foot of the perpendicular from $K$ to $DE$. Prove that $DJ = DL$.",
+  "image": null,
+  "choices": null,
+  "answer": "Equal tangent lengths give $AB = BC$, $CD = DE$, $EF = FA$ and equal angles at $A, C, E$. Rotate $B, J$ about $D$ (taking $C$ to $E$) to $B', L'$, and let $K' = EO \\cap B'L'$; rotating $B$ about $F$ (taking $A$ to $E$) gives $B''$, the mirror image of $B'$ in $EO$. Then $K'D^2 - K'F^2 = BD^2 - BF^2$, so $K'B \\perp DF$, $K' = K$ and $L = L'$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Two rotations and the perpendicularity criterion",
+    "body": "We use the criterion: for points $X \\ne Y$ and $U \\ne V$, $XY \\perp UV$ iff $XU^2 - XV^2 = YU^2 - YV^2$.\n\n**Equal sides and angles.** $OA = OC = OE$, so the tangents from $A$, $C$, $E$ to $\\omega$ have a common length $\\tau$. If $\\beta, \\delta, \\varphi$ are the tangent lengths from $B, D, F$, then $AB = \\tau + \\beta = BC$, $CD = DE$ and $EF = FA$. The angle of the hexagon at a vertex with tangent length $\\tau$ is $2\\arctan(r/\\tau)$ ($r$ the radius of $\\omega$), so $\\angle FAB = \\angle BCD = \\angle DEF$. Also $EO$ bisects $\\angle DEF$.\n\n**First rotation.** Let $\\rho$ be the rotation about $D$ taking $C$ to $E$, and let $B' = \\rho(B)$, $L' = \\rho(J)$. Then $DL' = DJ$, $L'$ lies on $\\rho(CD) = ED$, $B'L' \\perp DE$, and triangle $B'ED$ is congruent to $BCD$; so $B'E = BC$, $B'D = BD$ and $\\angle DEB' = \\angle DCB$. The point $B$ is on the inner side of $CD$, and $\\rho$ turns ray $DC$ onto ray $DE$, so $B'$ lies on the outer side of line $DE$.\n\nSince $\\angle DEO < 90^\\circ$, the line $EO$ is not perpendicular to $DE$, so it meets the line $B'L'$ at a point $K'$. We shall prove $K'B \\perp DF$. Then $K'$ lies on $EO$ and on the perpendicular from $B$ to $DF$, so $K' = K$; and the foot of the perpendicular from $K = K'$ to $DE$ is $L'$ (as $K'L' \\perp DE$), so $L = L'$ and $DL = DL' = DJ$.\n\n**Second rotation.** Let $\\sigma$ be the rotation about $F$ taking $A$ to $E$, and $B'' = \\sigma(B)$. Triangle $FEB''$ is congruent to $FAB$, so $EB'' = AB = BC = EB'$, $FB'' = FB$, and $\\angle FEB'' = \\angle FAB = \\angle BCD = \\angle DEB'$; as before $B''$ lies on the outer side of line $EF$. Reflection in the bisector $EO$ of $\\angle DEF$ swaps the lines $ED$ and $EF$ (with their outer sides), so it maps $B'$ to $B''$.\n\n**Conclusion.** $K'B' \\perp DE$, and reflecting in $EO$ (which fixes $K'$ and $E$, swaps $B' \\leftrightarrow B''$ and line $DE \\leftrightarrow$ line $EF$) gives $K'B'' \\perp EF$. By the criterion,\n$$K'D^2 - K'E^2 = B'D^2 - B'E^2,\\qquad K'E^2 - K'F^2 = B''E^2 - B''F^2.$$\nAdding and using $B'E = B''E$, $B'D = BD$, $B''F = BF$:\n$$K'D^2 - K'F^2 = B'D^2 - B''F^2 = BD^2 - BF^2.$$\nBy the criterion again, $K'B \\perp DF$, which completes the proof. ∎"
+   }
+  ],
+  "topics": [
+   "geometry"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "imo-isl-2011-g8",
+  "bank": "imo",
+  "source": {
+   "contest": "IMO Shortlist",
+   "paper": "Geometry",
+   "year": 2011,
+   "number": 8,
+   "url": "https://www.imo-official.org/assets/documents/problems/2011/IMO2011SL.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Let $ABC$ be an acute triangle with circumcircle $\\omega$. Let $t$ be a tangent line to $\\omega$. Let $t_a$, $t_b$, and $t_c$ be the lines obtained by reflecting $t$ in the lines $BC$, $CA$, and $AB$, respectively. Show that the circumcircle of the triangle determined by the lines $t_a$, $t_b$, and $t_c$ is tangent to the circle $\\omega$.",
+  "image": null,
+  "choices": null,
+  "answer": "With $T$ the point of tangency, let $A''$, $B''$, $C''$ be the points of $\\omega$ such that $A$, $B$, $C$ are the midpoints of the arcs $TA''$, $TB''$, $TC''$. The triangle $A''B''C''$ has sides parallel to $t_a, t_b, t_c$, and Pascal's theorem shows the centre of the homothety between the two triangles lies on $\\omega$, so the two circumcircles touch there.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [],
+  "topics": [
+   "geometry"
+  ],
+  "difficulty": 3,
+  "duplicateOf": "imo-2011-06",
+  "reviewNote": null
+ },
+ {
+  "id": "imo-isl-2011-n1",
+  "bank": "imo",
+  "source": {
+   "contest": "IMO Shortlist",
+   "paper": "Number Theory",
+   "year": 2011,
+   "number": 1,
+   "url": "https://www.imo-official.org/assets/documents/problems/2011/IMO2011SL.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "For any integer $d > 0$, let $f(d)$ be the smallest positive integer that has exactly $d$ positive divisors (so for example we have $f(1) = 1$, $f(5) = 16$, and $f(6) = 12$). Prove that for every integer $k \\ge 0$ the number $f(2^k)$ divides $f(2^{k+1})$.",
+  "image": null,
+  "choices": null,
+  "answer": "$n$ has $2^k$ divisors iff it is the product of $k$ distinct numbers $p^{2^r}$ ($p$ prime) forming a downward-closed set; so $f(2^k)$ is the product of the $k$ smallest numbers of the form $p^{2^r}$, and these sets are nested.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Numbers with $2^k$ divisors as products of $p^{2^r}$",
+    "body": "Let $d(n)$ be the number of divisors of $n$. If $n = \\prod_p p^{e(p)}$, then $d(n) = \\prod_p (e(p) + 1)$. This is a power of $2$ iff every $e(p) + 1$ is a power of $2$, i.e. $e(p) = 2^{b(p)} - 1 = 1 + 2 + \\dots + 2^{b(p)-1}$ for integers $b(p) \\ge 0$. Then\n$$n = \\prod_p \\prod_{i=0}^{b(p)-1} p^{2^i},\\qquad d(n) = 2^{\\sum_p b(p)}.$$\n\nLet $\\mathcal S = \\{p^{2^r} : p \\text{ prime},\\ r \\ge 0\\}$; by unique factorization its elements are distinct integers, and the representation above is unique. Call a finite subset $T \\subseteq \\mathcal S$ *closed* if $p^{2^r} \\in T$ and $s < r$ imply $p^{2^s} \\in T$. We have shown: $d(n) = 2^k$ iff $n$ is the product of the elements of a closed $k$-element set $T$, and every such $T$ gives such an $n$.\n\nLet $T_k$ be the set of the $k$ smallest elements of $\\mathcal S$. It is closed, because $p^{2^s} < p^{2^r}$ for $s < r$. For any $k$-element $T \\subseteq \\mathcal S$, the $i$-th smallest element of $T$ is at least the $i$-th smallest element of $\\mathcal S$, so $\\prod T \\ge \\prod T_k$. Hence\n$$f(2^k) = \\prod_{x \\in T_k} x.$$\nSince $T_k \\subset T_{k+1}$, $f(2^{k+1}) = f(2^k)\\cdot\\big(\\text{the } (k+1)\\text{-th smallest element of } \\mathcal S\\big)$, so $f(2^k) \\mid f(2^{k+1})$. ∎"
+   }
+  ],
+  "topics": [
+   "number-theory"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "imo-isl-2011-n2",
+  "bank": "imo",
+  "source": {
+   "contest": "IMO Shortlist",
+   "paper": "Number Theory",
+   "year": 2011,
+   "number": 2,
+   "url": "https://www.imo-official.org/assets/documents/problems/2011/IMO2011SL.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Consider a polynomial $P(x) = (x + d_1)(x + d_2)\\cdot\\ldots\\cdot(x + d_9)$, where $d_1, d_2, \\dots, d_9$ are nine distinct integers. Prove that there exists an integer $N$ such that for all integers $x \\ge N$ the number $P(x)$ is divisible by a prime number greater than $20$.",
+  "image": null,
+  "choices": null,
+  "answer": "After shifting, all $d_i > 0$; take $N = d^8$ with $d = \\max d_i$. If $P(x)$ had only the $8$ primes below $20$, each $x + d_i$ would have a prime-power divisor $> d$; two of these are powers of the same prime, and the smaller divides $|d_i - d_j| < d$, a contradiction.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Pigeonhole on large prime powers",
+    "body": "**Reduction.** Replacing $x$ by $x - c$ replaces every $d_i$ by $d_i + c$, and the statement for the new numbers (with some $N'$) gives the statement for the old ones (with $N = N' + c$). So we may assume all $d_i$ are positive. Let $d = \\max d_i$; since the $d_i$ are nine distinct positive integers, $d \\ge 9$, and $0 < |d_i - d_j| < d$ for $i \\ne j$.\n\n**Claim.** $N = d^8$ works. Suppose instead that for some $x \\ge d^8$, every prime factor of $P(x)$ is less than $20$, i.e. among $2, 3, 5, 7, 11, 13, 17, 19$ (eight primes). Each factor $x + d_i$ is then a product of at most eight prime powers, one for each of these primes. As $x + d_i > d^8$, not all of these prime powers can be $\\le d$; so $x + d_i$ has a prime-power divisor $f_i = p_i^{e_i} > d$ with $p_i < 20$.\n\nThere are nine indices but only eight primes, so $p_i = p_j$ for some $i \\ne j$; say $f_i \\le f_j$, so $f_i \\mid f_j$. Then $f_i$ divides both $x + d_i$ and $x + d_j$, hence divides $d_i - d_j \\ne 0$. But $|d_i - d_j| < d < f_i$, a contradiction. ∎"
+   }
+  ],
+  "topics": [
+   "number-theory",
+   "polynomials"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "imo-isl-2011-n3",
+  "bank": "imo",
+  "source": {
+   "contest": "IMO Shortlist",
+   "paper": "Number Theory",
+   "year": 2011,
+   "number": 3,
+   "url": "https://www.imo-official.org/assets/documents/problems/2011/IMO2011SL.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Let $n \\ge 1$ be an odd integer. Determine all functions $f$ from the set of integers to itself such that for all integers $x$ and $y$ the difference $f(x) - f(y)$ divides $x^n - y^n$.",
+  "image": null,
+  "choices": null,
+  "answer": "$f(x) = \\varepsilon x^d + c$ with $\\varepsilon \\in \\{1, -1\\}$, $d$ a positive divisor of $n$, and $c$ an integer.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Values at primes",
+    "body": "**These work.** If $d \\mid n$, then $x^n - y^n = (x^d)^{n/d} - (y^d)^{n/d}$ is divisible by $x^d - y^d$, hence by $\\pm(x^d - y^d) = f(x) - f(y)$. (When $x^d = y^d$, also $x^n = y^n$, so \"$0$ divides $0$\" holds.)\n\n**No others.** Let $f$ satisfy the condition. Adding a constant to $f$ or changing its sign preserves the condition, so we may assume $f(0) = 0$, and we will reduce to $\\varepsilon = 1$ below.\n\nFor each prime $p$, $(x, y) = (p, 0)$ gives $f(p) \\mid p^n$, so $f(p) = \\pm p^{e}$ with $0 \\le e \\le n$. There are infinitely many primes and finitely many choices of sign and exponent, so there are $\\varepsilon \\in \\{\\pm1\\}$ and $d \\in [0, n]$ with $f(p) = \\varepsilon p^d$ for all $p$ in an infinite set $\\mathcal P$ of primes. Replacing $f$ by $-f$ if needed, $\\varepsilon = 1$.\n\n$d = 0$ is impossible: for $p \\ne q$ in $\\mathcal P$, $f(p) - f(q) = 0$ would divide $p^n - q^n \\ne 0$.\n\nSo $d \\ge 1$. Write $n = md + r$ with $m \\ge 1$ and $0 \\le r < d$. Fix any integer $x$. For $p \\in \\mathcal P$, $p^d - f(x) = f(p) - f(x)$ divides $p^n - x^n$, and $p^n = p^r (p^d)^m \\equiv p^r f(x)^m \\pmod{p^d - f(x)}$. Hence\n$$p^d - f(x) \\ \\Big|\\ p^r f(x)^m - x^n.$$\nFor large $p$, $|p^r f(x)^m - x^n| \\le p^{d-1}|f(x)|^m + |x|^n < p^d - f(x)$, so $p^r f(x)^m = x^n$ for all large $p \\in \\mathcal P$.\n\nTaking $x = p_0 \\in \\mathcal P$ (so $f(x) = p_0^d \\ne 0$), the number $p^r$ is the same for infinitely many primes $p$, so $r = 0$: $d$ divides $n$. Then the relation reads $f(x)^m = x^n = (x^d)^m$ for every $x$. As $m = n/d$ is odd, $t \\mapsto t^m$ is injective on the integers, so $f(x) = x^d$.\n\nUndoing the normalizations, $f(x) = \\varepsilon x^d + c$. ∎"
+   }
+  ],
+  "topics": [
+   "number-theory",
+   "functional-equations"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "imo-isl-2011-n4",
+  "bank": "imo",
+  "source": {
+   "contest": "IMO Shortlist",
+   "paper": "Number Theory",
+   "year": 2011,
+   "number": 4,
+   "url": "https://www.imo-official.org/assets/documents/problems/2011/IMO2011SL.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "For each positive integer $k$, let $t(k)$ be the largest odd divisor of $k$. Determine all positive integers $a$ for which there exists a positive integer $n$ such that all the differences\n$$t(n+a) - t(n),\\quad t(n+a+1) - t(n+1),\\quad \\dots,\\quad t(n+2a-1) - t(n+a-1)$$\nare divisible by $4$.",
+  "image": null,
+  "choices": null,
+  "answer": "$a = 1$, $3$, or $5$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Examples and three cases",
+    "body": "Call $(a, n)$ *winning* if all $a$ differences $t(n+a+i) - t(n+i)$, $0 \\le i \\le a-1$, are divisible by $4$.\n\n**Examples.** $(1, 1)$: $t(2) - t(1) = 0$. $(3, 1)$: $t(4) - t(1) = 0$, $t(5) - t(2) = 4$, $t(6) - t(3) = 0$. $(5, 4)$: $t(9) - t(4) = 8$, $t(10) - t(5) = 0$, $t(11) - t(6) = 8$, $t(12) - t(7) = -4$, $t(13) - t(8) = 12$.\n\nNow let $a \\notin \\{1, 3, 5\\}$ and $n$ be arbitrary.\n\n**Case 1: $a$ even.** Write $a = 2^\\alpha d$ with $\\alpha \\ge 1$, $d$ odd. Among the $a \\ge 2^\\alpha$ consecutive numbers $n, \\dots, n+a-1$ one is $\\equiv 2^{\\alpha-1} \\pmod{2^\\alpha}$, say $n + i = 2^{\\alpha-1}e$ with $e$ odd. Then $t(n+i) = e$ and $n + a + i = 2^{\\alpha-1}(2d + e)$ with $2d + e$ odd, so $t(n+a+i) = 2d + e \\equiv e + 2 \\pmod 4$. The difference is $\\equiv 2 \\pmod 4$.\n\n**Case 2: $a$ odd, $a \\ge 9$.** Among $n, n+1, n+2, n+3$ one is $\\equiv 2 \\pmod 4$, say $n + i = 2d$ with $d$ odd and $0 \\le i \\le 3$; note $i + 4 \\le a - 1$. Then $t(n+i) = d$ and $t(n+i+4) = t(2(d+2)) = d + 2$. The numbers $n+a+i$ and $n+a+i+4$ are odd, so they equal their own $t$, and they are congruent mod $4$. Hence\n$$\\big[t(n+a+i) - t(n+i)\\big] - \\big[t(n+a+i+4) - t(n+i+4)\\big] \\equiv -d + (d+2) = 2 \\pmod 4,$$\nso the two differences cannot both be divisible by $4$.\n\n**Case 3: $a = 7$.** Seven consecutive numbers miss only one residue mod $8$, so some $n + i$ ($0 \\le i \\le 6$) is $\\equiv 3$ or $\\equiv 6 \\pmod 8$.\n- If $n + i = 8k + 3$: $t(n+i) = 8k+3 \\equiv 3$, while $t(8k+10) = 4k + 5 \\equiv 1 \\pmod 4$.\n- If $n + i = 8k + 6$: $t(n+i) = 4k + 3 \\equiv 3$, while $t(8k + 13) = 8k + 13 \\equiv 1 \\pmod 4$.\n\nEither way $t(n+i+7) - t(n+i) \\equiv 2 \\pmod 4$.\n\nThe remaining odd values are $1, 3, 5$, all winning. **Answer: $a \\in \\{1, 3, 5\\}$.** ∎"
+   }
+  ],
+  "topics": [
+   "number-theory"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "imo-isl-2011-n5",
+  "bank": "imo",
+  "source": {
+   "contest": "IMO Shortlist",
+   "paper": "Number Theory",
+   "year": 2011,
+   "number": 5,
+   "url": "https://www.imo-official.org/assets/documents/problems/2011/IMO2011SL.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Let $f$ be a function from the set of integers to the set of positive integers. Suppose that for any two integers $m$ and $n$, the difference $f(m) - f(n)$ is divisible by $f(m-n)$. Prove that for all integers $m, n$ with $f(m) \\le f(n)$ the number $f(n)$ is divisible by $f(m)$.",
+  "image": null,
+  "choices": null,
+  "answer": "If $f(x) < f(y)$, then $f(x-y) \\le f(y) - f(x) < f(y)$; the number $f(x) - f(x-y)$ is divisible by $f(y)$ and smaller in absolute value, so $f(x) = f(x-y)$, which divides $f(x) - f(y)$ and hence $f(y)$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [],
+  "topics": [
+   "number-theory",
+   "functional-equations"
+  ],
+  "difficulty": 3,
+  "duplicateOf": "imo-2011-05",
+  "reviewNote": null
+ },
+ {
+  "id": "imo-isl-2011-n6",
+  "bank": "imo",
+  "source": {
+   "contest": "IMO Shortlist",
+   "paper": "Number Theory",
+   "year": 2011,
+   "number": 6,
+   "url": "https://www.imo-official.org/assets/documents/problems/2011/IMO2011SL.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Let $P(x)$ and $Q(x)$ be two polynomials with integer coefficients such that no nonconstant polynomial with rational coefficients divides both $P(x)$ and $Q(x)$. Suppose that for every positive integer $n$ the integers $P(n)$ and $Q(n)$ are positive, and $2^{Q(n)} - 1$ divides $3^{P(n)} - 1$. Prove that $Q(x)$ is a constant polynomial.",
+  "image": null,
+  "choices": null,
+  "answer": "$\\gcd(P(n), Q(n))$ is bounded by some $d$. If $Q$ were nonconstant, take $M = 2^{Q(m)} - 1$ huge; the orders $a = Q(m)$ of $2$ and $b$ of $3$ modulo $M$ have $\\gcd \\le d$, so some $u = m + ax - by \\in [1, d]$, and then $M \\mid 3^{P(u)} - 1$, too small.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Multiplicative orders",
+    "body": "**Bounded gcd.** Since $P$ and $Q$ have no common factor over $\\mathbb Q$, the Euclidean algorithm gives rational polynomials $R_0, S_0$ with $PR_0 - QS_0 = 1$. Clearing denominators, there are integer polynomials $R, S$ and an integer $d \\ge 1$ with $P(x)R(x) - Q(x)S(x) = d$. Hence $\\gcd(P(n), Q(n)) \\mid d$ for every integer $n$.\n\n**Contradiction if $Q$ is nonconstant.** Then $Q(n) \\to \\infty$, so we can pick a positive integer $m$ with\n$$M = 2^{Q(m)} - 1 \\ge 3^{\\max\\{P(1), \\dots, P(d)\\}}. \\tag{1}$$\nIn particular $M \\ge 3$. As $M \\mid 3^{P(m)} - 1$, $M$ is coprime to $2$ and $3$. Let $a$ and $b$ be the multiplicative orders of $2$ and $3$ modulo $M$. Since $1 \\le 2^j - 1 < M$ for $1 \\le j < Q(m)$, we get $a = Q(m)$. Since $3^{P(m)} \\equiv 1 \\pmod M$, $b \\mid P(m)$. So $g = \\gcd(a, b)$ divides $\\gcd(Q(m), P(m))$, which divides $d$; hence $g \\le d$.\n\nThe numbers $ax - by$ with integers $x, y \\ge 0$ take every multiple of $g$ (from a Bézout solution $ax_0 - by_0 = cg$, add $tb$ to $x_0$ and $ta$ to $y_0$ for large $t$). The $d$ consecutive integers $1 - m, \\dots, d - m$ contain a multiple of $g$, so there are $x, y \\ge 0$ with\n$$1 \\le u := m + ax - by \\le d.$$\nSince $m + ax \\equiv m \\pmod a$, $Q(m + ax) \\equiv Q(m) = a \\equiv 0 \\pmod a$, so $2^{Q(m+ax)} \\equiv 1 \\pmod M$. Thus\n$$M \\mid 2^{Q(m+ax)} - 1 \\mid 3^{P(m+ax)} - 1,$$\nand $b \\mid P(m + ax)$. Since $u \\equiv m + ax \\pmod b$, also $b \\mid P(u)$, so $M \\mid 3^{P(u)} - 1$. As $P(u) > 0$, this gives $M \\le 3^{P(u)} - 1 < 3^{\\max\\{P(1), \\dots, P(d)\\}}$, contradicting (1). Hence $Q$ is constant. ∎"
+   }
+  ],
+  "topics": [
+   "number-theory",
+   "polynomials"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "imo-isl-2011-n7",
+  "bank": "imo",
+  "source": {
+   "contest": "IMO Shortlist",
+   "paper": "Number Theory",
+   "year": 2011,
+   "number": 7,
+   "url": "https://www.imo-official.org/assets/documents/problems/2011/IMO2011SL.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Let $p$ be an odd prime number. For every integer $a$, define the number\n$$S_a = \\frac{a}{1} + \\frac{a^2}{2} + \\dots + \\frac{a^{p-1}}{p-1}.$$\nLet $m$ and $n$ be integers such that\n$$S_3 + S_4 - 3S_2 = \\frac mn.$$\nProve that $p$ divides $m$.",
+  "image": null,
+  "choices": null,
+  "answer": "Using $\\frac1p\\binom pk \\equiv \\frac{(-1)^{k-1}}{k} \\pmod p$ one gets $S_a \\equiv \\frac{(a-1)^p - a^p + 1}{p}$, hence $S_3 + S_4 - 3S_2 \\equiv -\\frac{(2^p - 2)^2}{p} \\equiv 0 \\pmod p$ by Fermat.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "A closed form for $S_a$ modulo $p$",
+    "body": "For rationals $u/v$ and $u'/v'$ with $p \\nmid v, v'$, write $u/v \\equiv u'/v' \\pmod p$ if $p \\mid uv' - u'v$. This is compatible with sums and products, and $u/v \\equiv 0$ means $p \\mid u$. All $S_a$ have denominators dividing $(p-1)!$, so they are of this form.\n\n**Step 1.** For $1 \\le k \\le p-1$, $\\binom pk$ is divisible by $p$ and\n$$\\frac1p\\binom pk = \\frac{(p-1)(p-2)\\cdots(p-k+1)}{k!} \\equiv \\frac{(-1)^{k-1}(k-1)!}{k!} = \\frac{(-1)^{k-1}}{k} \\pmod p.$$\nHence $\\frac{a^k}{k} \\equiv (-1)^{k-1}a^k\\cdot\\frac1p\\binom pk = -(-a)^k\\cdot\\frac1p\\binom pk$, and summing over $k$ with the binomial theorem ($p$ odd):\n$$S_a \\equiv -\\frac1p\\sum_{k=1}^{p-1}\\binom pk(-a)^k = -\\frac{(1-a)^p - 1 - (-a)^p}{p} = \\frac{(a-1)^p - a^p + 1}{p} \\pmod p.$$\nThe right side is an integer, since $p$ divides each $\\binom pk$ with $0<k<p$.\n\n**Step 2.** Therefore\n$$S_3 + S_4 - 3S_2 \\equiv \\frac{(2^p - 3^p + 1) + (3^p - 4^p + 1) - 3(1 - 2^p + 1)}{p} = \\frac{4\\cdot 2^p - 4^p - 4}{p} = -\\frac{(2^p - 2)^2}{p}.$$\nBy Fermat's little theorem $p \\mid 2^p - 2$, so $p^2 \\mid (2^p - 2)^2$ and the right side is an integer divisible by $p$. Hence $S_3 + S_4 - 3S_2 \\equiv 0 \\pmod p$.\n\n**Step 3.** Write $S_3 + S_4 - 3S_2 = u/v$ with $p \\nmid v$; by Step 2, $p \\mid u$. From $\\frac mn = \\frac uv$ we get $mv = nu$, so $p \\mid mv$, and since $p \\nmid v$, $p \\mid m$. ∎"
+   }
+  ],
+  "topics": [
+   "number-theory"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "imo-isl-2011-n8",
+  "bank": "imo",
+  "source": {
+   "contest": "IMO Shortlist",
+   "paper": "Number Theory",
+   "year": 2011,
+   "number": 8,
+   "url": "https://www.imo-official.org/assets/documents/problems/2011/IMO2011SL.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Let $k$ be a positive integer and set $n = 2^k + 1$. Prove that $n$ is a prime number if and only if the following holds: there is a permutation $a_1, \\dots, a_{n-1}$ of the numbers $1, 2, \\dots, n-1$ and a sequence of integers $g_1, g_2, \\dots, g_{n-1}$ such that $n$ divides $g_i^{a_i} - a_{i+1}$ for every $i \\in \\{1, 2, \\dots, n-1\\}$, where we set $a_n = a_1$.",
+  "image": null,
+  "choices": null,
+  "answer": "Build the graph $a \\to b$ iff $b \\equiv g^a \\pmod n$ for some $g$; we need a Hamiltonian cycle. If $n$ is composite: $p, 2p$ can only follow $1$ when $p^2 \\mid n$, and there are too few quadratic residues when $n$ is squarefree. If $n$ is prime, $a \\to b$ iff $b$ is a $2^{v_2(a)}$-th power; match each class $\\{a : v_2(a) = i\\}$ to $\\{b : b \\text{ is exactly a } 2^i\\text{-th power}\\}$ and merge cycles.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "A Hamiltonian cycle in the power graph",
+    "body": "Let $\\mathcal N = \\{1, 2, \\dots, n-1\\}$. For $a, b \\in \\mathcal N$ write $a \\to b$ if $b \\equiv g^a \\pmod n$ for some integer $g$. The condition says exactly that $a_1 \\to a_2 \\to \\dots \\to a_{n-1} \\to a_1$ is a Hamiltonian cycle of this directed graph.\n\n## Part 1: if $n$ is composite, there is no such cycle\n\n$n$ is odd, so all its prime factors are odd.\n\n**Some $p^2 \\mid n$.** For $a \\ge 2$ and any $g$: if $p \\mid g$ then $p^2 \\mid g^a$, otherwise $p \\nmid g^a$. So $g^a \\not\\equiv p$ and $g^a \\not\\equiv 2p \\pmod{p^2}$, hence $g^a \\not\\equiv p, 2p \\pmod n$. Both $p$ and $2p$ lie in $\\mathcal N$ (as $2p < p^2 \\le n$), so in a Hamiltonian cycle both would have to come right after $a = 1$, which is impossible.\n\n**$n = p_1 \\cdots p_s$ squarefree with $s \\ge 2$.** Then $n > 9$. If $a$ is even, every $b$ with $a \\to b$ is a nonzero square mod $n$: $b \\equiv (g^{a/2})^2$. In a Hamiltonian cycle the successors of the $\\frac{n-1}{2}$ even numbers of $\\mathcal N$ are distinct, so there would be at least $\\frac{n-1}{2}$ nonzero squares modulo $n$. But modulo $p_i$ there are exactly $\\frac{p_i+1}{2}$ squares (including $0$), so by the Chinese remainder theorem there are $\\prod\\frac{p_i+1}{2}$ squares modulo $n$. Using $\\frac{p+1}{2} \\le \\frac{2p}{3}$ for $p \\ge 3$,\n$$\\prod_{i=1}^s \\frac{p_i+1}{2} \\le \\Big(\\frac23\\Big)^s n \\le \\frac{4n}{9} < \\frac{n-1}{2},$$\nthe last step because $n > 9$. Contradiction.\n\n## Part 2: if $n$ is prime, there is a cycle\n\nNow the group $(\\mathbb Z/n)^\\times$ is cyclic of order $n - 1 = 2^k$; fix a primitive root $r$. For $0 \\le j \\le k$ let $H_j = \\{x^{2^j}\\} = \\{r^{2^j t}\\}$, the set of $2^j$-th powers, so $|H_j| = 2^{k-j}$, $H_0 = \\mathcal N \\supset H_1 \\supset \\dots \\supset H_k = \\{1\\}$, and $H_{k-1} = \\{1, n-1\\}$ (the square roots of $1$).\n\n**Lemma.** For $a \\in \\mathcal N$ write $a = 2^{\\nu(a)}u$ with $u$ odd. Then $a \\to b$ iff $b \\in H_{\\nu(a)}$.\n\n*Proof.* $g^a \\in \\mathcal N$ forces $n \\nmid g$. Since $u$ is odd, $x \\mapsto x^u$ is a bijection of the group of order $2^k$, so $\\{x^a\\} = \\{(x^u)^{2^{\\nu(a)}}\\} = H_{\\nu(a)}$. $\\square$\n\nFor $b \\in \\mathcal N$ let $\\mu(b) = \\max\\{j : b \\in H_j\\}$. Then $a \\to b$ whenever $\\nu(a) = \\mu(b)$. Define for $0 \\le i \\le k$\n$$A_i = \\{a \\in \\mathcal N : \\nu(a) = i\\},\\qquad B_i = \\{b \\in \\mathcal N : \\mu(b) = i\\} = H_i \\setminus H_{i+1}\\ (H_{k+1} = \\varnothing).$$\nThen $|A_i| = 2^{k-i-1} = |B_i|$ for $i < k$, and $A_k = \\{2^k\\}$, $B_k = \\{1\\}$. Moreover:\n- $A_{k-1} = \\{2^{k-1}\\}$ and $B_{k-1} = H_{k-1}\\setminus H_k = \\{n - 1\\} = \\{2^k\\}$.\n- For $i \\le k - 2$, both $H_i$ and $H_{i+1}$ contain $-1 = r^{2^{k-1}}$, so they are closed under $x \\mapsto n - x$, and so is $B_i \\neq \\varnothing$. As $n$ is odd, $x$ and $n - x$ have different parity, so **$B_i$ contains an odd number** for $i \\le k-2$.\n\n**Construction.** Choose bijections $A_i \\to B_i$ for all $i$; together they form a permutation $\\sigma$ of $\\mathcal N$ with $a \\to \\sigma(a)$ for all $a$. Decompose $\\sigma$ into disjoint cycles. If two different cycles contain elements $a, a'$ with $\\nu(a) = \\nu(a')$, swap their images ($\\sigma(a) \\leftrightarrow \\sigma(a')$). This keeps $\\sigma(A_i) = B_i$ and merges the two cycles into one. We show that while there are at least two cycles, such a swap is possible; repeating it we reach a single cycle, which is the required Hamiltonian cycle (and then the $g_i$ exist by definition of $\\to$).\n\nFor a cycle $C$ let $\\lambda(C) = \\min_{c \\in C}\\nu(c)$, and take a cycle $C$ with the largest $\\lambda = \\lambda(C)$.\n- If $\\lambda = 0$, every cycle contains an element of $A_0$, so any two cycles can be merged.\n- If $\\lambda \\ge 1$, pick $a \\in C \\cap A_\\lambda$. If some element of $A_\\lambda$ is outside $C$, we can merge. Otherwise $A_\\lambda \\subseteq C$, hence $B_\\lambda = \\sigma(A_\\lambda) \\subseteq C$. If $\\lambda \\le k - 2$, $B_\\lambda$ contains an odd number $c$ with $\\nu(c) = 0 < \\lambda$, impossible. If $\\lambda \\ge k - 1$, then $C$ contains $2^{k-1}$ or $2^k$, and since $\\sigma(2^{k-1}) = 2^k$ and $\\sigma(2^k) = 1$, it contains $1$, again with $\\nu = 0$: impossible.\n\nSo a merge is always possible, and the proof is complete. ∎"
+   }
+  ],
+  "topics": [
+   "number-theory",
+   "graph-theory"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ }
+]

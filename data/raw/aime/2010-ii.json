@@ -1,0 +1,564 @@
+[
+  {
+    "id": "aime-2010-ii-01",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "2010 AIME II",
+      "year": 2010,
+      "number": 1,
+      "url": "https://artofproblemsolving.com/wiki/index.php/2010_AIME_II_Problems/Problem_1"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Let $N$ be the greatest integer multiple of $36$ all of whose digits are even and no two of whose digits are the same. Find the remainder when $N$ is divided by $1000$.",
+    "image": null,
+    "choices": null,
+    "answer": "640",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Divisible by 9 and by 4",
+        "body": "The even digits are $0,2,4,6,8$ (sum $20$). For divisibility by $9$ the digit sum must be a multiple of $9$; using all five gives $20$, so drop one digit to get $18$: drop $2$, leaving $\\{0,4,6,8\\}$. (Fewer digits can't beat a $4$-digit number, and $5$ digits are impossible.)\n\nArrange $0,4,6,8$ as large as possible with the last two digits divisible by $4$: $8640$ ($40$ is divisible by $4$). So $N=8640$ and the remainder is $640$.\n\n**Answer: 640**"
+      },
+      {
+        "title": "Check the largest candidates",
+        "body": "The $4$-digit candidates with digits $\\{0,4,6,8\\}$ in decreasing order: $8640$, $8604$, $8460,\\dots$ The first, $8640=36\\cdot240$, works. Remainder mod $1000$: $640$.\n\n**Answer: 640**"
+      }
+    ],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-2010-ii-02",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "2010 AIME II",
+      "year": 2010,
+      "number": 2,
+      "url": "https://artofproblemsolving.com/wiki/index.php/2010_AIME_II_Problems/Problem_2"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "A point $P$ is chosen at random in the interior of a unit square $S$. Let $d(P)$ denote the distance from $P$ to the closest side of $S$. The probability that $\\frac{1}{5}\\le d(P)\\le\\frac{1}{3}$ is equal to $\\frac{m}{n}$, where $m$ and $n$ are relatively prime positive integers. Find $m+n$.",
+    "image": null,
+    "choices": null,
+    "answer": "281",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Difference of two squares",
+        "body": "$d(P)\\ge t$ means $P$ lies in the concentric square of side $1-2t$. So the probability is\n$$\\left(1-\\tfrac25\\right)^2-\\left(1-\\tfrac23\\right)^2=\\frac9{25}-\\frac19=\\frac{56}{225},$$\nand $m+n=281$.\n\n**Answer: 281**"
+      },
+      {
+        "title": "Frame area",
+        "body": "The region is a square frame between the squares of side $\\frac35$ and $\\frac13$. Its area is $\\left(\\frac35-\\frac13\\right)\\left(\\frac35+\\frac13\\right)=\\frac4{15}\\cdot\\frac{14}{15}=\\frac{56}{225}$. Answer $281$.\n\n**Answer: 281**"
+      }
+    ],
+    "topics": [
+      "probability",
+      "geometry"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-2010-ii-03",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "2010 AIME II",
+      "year": 2010,
+      "number": 3,
+      "url": "https://artofproblemsolving.com/wiki/index.php/2010_AIME_II_Problems/Problem_3"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Let $K$ be the product of all factors $(b-a)$ (not necessarily distinct) where $a$ and $b$ are integers satisfying $1\\le a < b \\le 20$. Find the greatest positive integer $n$ such that $2^n$ divides $K$.",
+    "image": null,
+    "choices": null,
+    "answer": "150",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Count each difference",
+        "body": "The difference $d$ occurs $20-d$ times, so $K=\\prod_{d=1}^{19}d^{20-d}$. Adding $v_2(d)\\cdot(20-d)$ over even $d$:\n$$\\begin{array}{c|ccccccccc} d&2&4&6&8&10&12&14&16&18\\\\\\hline v_2(d)&1&2&1&3&1&2&1&4&1\\\\ 20-d&18&16&14&12&10&8&6&4&2\\\\\\hline \\text{product}&18&32&14&36&10&16&6&16&2\\end{array}$$\nTotal: $150$.\n\n**Answer: 150**"
+      },
+      {
+        "title": "Layer by powers of 2",
+        "body": "$v_2(K)=\\sum_{j\\ge1}\\#\\{(a,b):2^j\\mid b-a\\}$. Pairs with $2^j\\mid b-a$ are pairs in the same residue class mod $2^j$:\n- mod $2$: two classes of $10$: $2\\binom{10}2=90$;\n- mod $4$: four classes of $5$: $4\\binom52=40$;\n- mod $8$: classes of sizes $3,3,3,3,2,2,2,2$: $4\\cdot3+4\\cdot1=16$;\n- mod $16$: four classes of size $2$ and twelve of size $1$: $4$.\nTotal $90+40+16+4=150$.\n\n**Answer: 150**"
+      }
+    ],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-2010-ii-04",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "2010 AIME II",
+      "year": 2010,
+      "number": 4,
+      "url": "https://artofproblemsolving.com/wiki/index.php/2010_AIME_II_Problems/Problem_4"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Dave arrives at an airport which has twelve gates arranged in a straight line with exactly $100$ feet between adjacent gates. His departure gate is assigned at random. After waiting at that gate, Dave is told the departure gate has been changed to a different gate, again at random. Let the probability that Dave walks $400$ feet or less to the new gate be a fraction $\\frac{m}{n}$, where $m$ and $n$ are relatively prime positive integers. Find $m+n$.",
+    "image": null,
+    "choices": null,
+    "answer": "52",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Count by distance",
+        "body": "There are $12\\cdot11=132$ equally likely (old, new) pairs. Pairs at distance $k$ gates: $2(12-k)$. For $k=1,2,3,4$: $22+20+18+16=76$. Probability $\\frac{76}{132}=\\frac{19}{33}$, so $m+n=52$.\n\n**Answer: 52**"
+      },
+      {
+        "title": "Count by starting gate",
+        "body": "From gate $i$ the number of gates within $4$ (other than $i$) is: gates $1,12$: $4$; gates $2,11$: $5$; gates $3,10$: $6$; gates $4,9$: $7$; gates $5$–$8$: $8$. Sum: $2(4+5+6+7)+4\\cdot8=76$, out of $132$: $\\frac{19}{33}$. Answer $52$.\n\n**Answer: 52**"
+      }
+    ],
+    "topics": [
+      "probability",
+      "counting"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-2010-ii-05",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "2010 AIME II",
+      "year": 2010,
+      "number": 5,
+      "url": "https://artofproblemsolving.com/wiki/index.php/2010_AIME_II_Problems/Problem_5"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Positive numbers $x$, $y$, and $z$ satisfy $xyz = 10^{81}$ and $(\\log_{10}x)(\\log_{10} yz) + (\\log_{10}y) (\\log_{10}z) = 468$. Find $\\sqrt {(\\log_{10}x)^2 + (\\log_{10}y)^2 + (\\log_{10}z)^2}$.",
+    "image": null,
+    "choices": null,
+    "answer": "75",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Symmetric sums",
+        "body": "Let $a,b,c$ be the logs. Then $a+b+c=81$ and $a(b+c)+bc=ab+bc+ca=468$. So\n$$a^2+b^2+c^2=81^2-2\\cdot468=6561-936=5625,$$\nwhose square root is $75$.\n\n**Answer: 75**"
+      },
+      {
+        "title": "Same idea, vector form",
+        "body": "$(a+b+c)^2=a^2+b^2+c^2+2(ab+bc+ca)$, so $a^2+b^2+c^2=81^2-936=5625=75^2$, and the requested length of the vector $(a,b,c)$ is $75$.\n\n**Answer: 75**"
+      }
+    ],
+    "topics": [
+      "algebra"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-2010-ii-06",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "2010 AIME II",
+      "year": 2010,
+      "number": 6,
+      "url": "https://artofproblemsolving.com/wiki/index.php/2010_AIME_II_Problems/Problem_6"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Find the smallest positive integer $n$ with the property that the polynomial $x^4 - nx + 63$ can be written as a product of two nonconstant polynomials with integer coefficients.",
+    "image": null,
+    "choices": null,
+    "answer": "8",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Linear or quadratic factors",
+        "body": "**Linear factor.** An integer root $r$ must divide $63$ and gives $n=\\frac{r^4+63}{r}$ (positive needs $r>0$): $r=1,3,7,9,\\dots$ give $n=64,48,352,\\dots$\n\n**Two quadratics.** Since there is no $x^3$ term, write $(x^2+ax+b)(x^2-ax+c)$. Comparing coefficients: $b+c-a^2=0$, $a(c-b)=-n$, $bc=63$. So $b+c=a^2$ is a perfect square: from $bc=63$, $b+c\\in\\{64,24,16\\}$ (positive pairs $(1,63),(3,21),(7,9)$; negative pairs give negative sums). $24$ is not a square; $64$ gives $a=\\pm8$, $n=8\\cdot62=496$; $16$ gives $a=\\pm4$, $n=4\\cdot2=8$.\n\nSo the smallest is $n=8$: $x^4-8x+63=(x^2-4x+7)(x^2+4x+9)$.\n\n**Answer: 8**"
+      },
+      {
+        "title": "Check small n",
+        "body": "For $n<8$ there is no rational root ($r\\mid63$, $r>0$ gives $n\\ge48$), and a quadratic factorization needs $b+c=a^2$ with $bc=63$ and $n=|a(c-b)|$, whose smallest value is $|4\\cdot(9-7)|=8$. Indeed\n$$(x^2-4x+7)(x^2+4x+9)=x^4+(9+7-16)x^2+(28-36)x+63=x^4-8x+63.$$\nAnswer: $8$.\n\n**Answer: 8**"
+      }
+    ],
+    "topics": [
+      "polynomials"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-2010-ii-07",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "2010 AIME II",
+      "year": 2010,
+      "number": 7,
+      "url": "https://artofproblemsolving.com/wiki/index.php/2010_AIME_II_Problems/Problem_7"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Let $P(z)=z^3+az^2+bz+c$, where $a$, $b$, and $c$ are real. There exists a complex number $w$ such that the three roots of $P(z)$ are $w+3i$, $w+9i$, and $2w-4$, where $i^2=-1$. Find $|a+b+c|$.",
+    "image": null,
+    "choices": null,
+    "answer": "136",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Use real coefficients",
+        "body": "The sum of the roots, $4w-4+12i$, equals $-a$, which is real, so $\\operatorname{Im}w=-3$. Write $w=s-3i$; the roots are $s$, $s+6i$, $2s-4-6i$. The two non-real roots must be conjugates: $2s-4=s$, so $s=4$. The roots are $4$, $4\\pm6i$.\n\n$1+a+b+c=P(1)=(1-4)(1-4-6i)(1-4+6i)=-3\\cdot(9+36)=-135$, so $a+b+c=-136$ and $|a+b+c|=136$.\n\n**Answer: 136**"
+      },
+      {
+        "title": "Expand the polynomial",
+        "body": "With roots $4,4\\pm6i$: $P(z)=(z-4)\\big((z-4)^2+36\\big)=(z-4)(z^2-8z+52)=z^3-12z^2+84z-208$. Then $a+b+c=-12+84-208=-136$, and the answer is $136$.\n\n**Answer: 136**"
+      }
+    ],
+    "topics": [
+      "complex-numbers",
+      "polynomials"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-2010-ii-08",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "2010 AIME II",
+      "year": 2010,
+      "number": 8,
+      "url": "https://artofproblemsolving.com/wiki/index.php/2010_AIME_II_Problems/Problem_8"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Let $N$ be the number of ordered pairs of nonempty sets $\\mathcal{A}$ and $\\mathcal{B}$ that have the following properties:\n\n- $\\mathcal{A} \\cup \\mathcal{B} = \\{1,2,3,4,5,6,7,8,9,10,11,12\\}$,\n- $\\mathcal{A} \\cap \\mathcal{B} = \\emptyset$,\n- The number of elements of $\\mathcal{A}$ is not an element of $\\mathcal{A}$,\n- The number of elements of $\\mathcal{B}$ is not an element of $\\mathcal{B}$.\n\nFind $N$.",
+    "image": null,
+    "choices": null,
+    "answer": "772",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Fix the size of A",
+        "body": "Let $|\\mathcal A|=k$, so $|\\mathcal B|=12-k$, $1\\le k\\le11$. The conditions say $k\\in\\mathcal B$ and $12-k\\in\\mathcal A$. If $k=6$ this asks $6$ to be in both sets: impossible. Otherwise $\\mathcal A$ contains $12-k$, not $k$, and $k-1$ more elements chosen from the other $10$ numbers: $\\binom{10}{k-1}$ ways.\n$$N=\\sum_{k\\ne6}\\binom{10}{k-1}=2^{10}-\\binom{10}5=1024-252=772.$$\n\n**Answer: 772**"
+      },
+      {
+        "title": "Complementary viewpoint",
+        "body": "Each valid pair is determined by $\\mathcal A$. For $k=|\\mathcal A|\\ne6$, the two numbers $k$ and $12-k$ are forced (into $\\mathcal B$ and $\\mathcal A$), and the remaining $10$ numbers are split so that $\\mathcal A$ gets $k-1$ of them. Summing over $k=1,\\dots,11$ covers every subset size $j=k-1=0,\\dots,10$ of the $10$ free numbers except $j=5$. So $N=2^{10}-\\binom{10}{5}=772$.\n\n**Answer: 772**"
+      }
+    ],
+    "topics": [
+      "counting"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-2010-ii-09",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "2010 AIME II",
+      "year": 2010,
+      "number": 9,
+      "url": "https://artofproblemsolving.com/wiki/index.php/2010_AIME_II_Problems/Problem_9"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Let $ABCDEF$ be a regular hexagon. Let $G$, $H$, $I$, $J$, $K$, and $L$ be the midpoints of sides $AB$, $BC$, $CD$, $DE$, $EF$, and $AF$, respectively. The segments $\\overline{AH}$, $\\overline{BI}$, $\\overline{CJ}$, $\\overline{DK}$, $\\overline{EL}$, and $\\overline{FG}$ bound a smaller regular hexagon. Let the ratio of the area of the smaller hexagon to the area of $ABCDEF$ be expressed as a fraction $\\frac {m}{n}$ where $m$ and $n$ are relatively prime positive integers. Find $m + n$.",
+    "image": null,
+    "choices": null,
+    "answer": "11",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Similar triangles on one segment",
+        "body": "Take side $2$. In $\\triangle ABH$, $AB=2$, $BH=1$, $\\angle B=120^\\circ$, so $AH^2=4+1+2=7$, $AH=\\sqrt7$.\n\nLet $X=AH\\cap BI$. The rotation by $60^\\circ$ about the center taking $A\\to B$, $B\\to C$ takes $H\\to I$, so $\\angle HBX=\\angle CBI=\\angle BAH$. Triangles $HBX$ and $HAB$ share the angle at $H$, so they are similar:\n$$\\frac{HX}{HB}=\\frac{BX}{AB}=\\frac{HB}{HA}\\implies HX=\\frac1{\\sqrt7},\\quad BX=\\frac2{\\sqrt7}.$$\nThe other vertex of the small hexagon on $AH$ is $Y=AH\\cap FG$; the rotation taking $B\\to A$ maps $BI\\to AH$ and $X\\to Y$, so $AY=BX=\\frac2{\\sqrt7}$. The small hexagon's side is\n$$XY=\\sqrt7-\\frac2{\\sqrt7}-\\frac1{\\sqrt7}=\\frac4{\\sqrt7}.$$\nArea ratio: $\\left(\\frac{4/\\sqrt7}{2}\\right)^2=\\frac47$, so $m+n=11$.\n\n**Answer: 11**"
+      },
+      {
+        "title": "Coordinates",
+        "body": "Put the hexagon with circumradius $1$ and vertices $A=1$, $B=e^{i\\pi/3}$, etc. Then $H=\\frac{B+C}2$, $I=\\frac{C+D}{2}$. Solving for the intersection $X$ of lines $AH$ and $BI$ gives $|X|^2=\\frac47$. The small hexagon is regular and concentric, with circumradius $|X|$, so the area ratio is $|X|^2=\\frac47$. Answer $11$.\n\n**Answer: 11**"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-2010-ii-10",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "2010 AIME II",
+      "year": 2010,
+      "number": 10,
+      "url": "https://artofproblemsolving.com/wiki/index.php/2010_AIME_II_Problems/Problem_10"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Find the number of second-degree polynomials $f(x)$ with integer coefficients and integer zeros for which $f(0)=2010$.",
+    "image": null,
+    "choices": null,
+    "answer": "163",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Count factorizations",
+        "body": "$f(x)=a(x-r)(x-s)$ with integers $a\\ne0$, $r,s$, and $f(0)=ars=2010=2\\cdot3\\cdot5\\cdot67$. The polynomial is determined by $a$ and the unordered pair $\\{r,s\\}$.\n\nOrdered triples $(a,r,s)$ of integers with product $2010$: each of the $4$ primes goes to one of $3$ factors ($3^4=81$ ways), and the signs must have an even number of negatives ($4$ ways): $324$. Triples with $r=s$ need $r^2\\mid2010$, so $r=\\pm1$: $2$ triples. Unordered count:\n$$\\frac{324-2}{2}+2=163.$$\n\n**Answer: 163**"
+      },
+      {
+        "title": "Count by the leading coefficient",
+        "body": "Fix $a$ (a divisor of $2010$, with either sign) and let $q=\\frac{2010}{a}$. The ordered pairs $(r,s)$ with $rs=q$ number $2\\tau(|q|)$ (a positive divisor for $|r|$ and a sign). Since $2010$ is squarefree, $r=s$ happens only for $q=1$ (pairs $(1,1)$, $(-1,-1)$). So the number of unordered pairs is $\\tau(|q|)$, except $2$ (instead of $\\tau(1)=1$) when $q=1$.\n\nSumming over the $16$ positive and $16$ negative values of $a$: $2\\sum_{d\\mid2010}\\tau(d)+1=2\\cdot3^4+1=163$ (using $\\sum_{d\\mid n}\\tau(d)=3^4$ for a product of $4$ distinct primes).\n\n**Answer: 163**"
+      }
+    ],
+    "topics": [
+      "polynomials",
+      "number-theory",
+      "counting"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-2010-ii-11",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "2010 AIME II",
+      "year": 2010,
+      "number": 11,
+      "url": "https://artofproblemsolving.com/wiki/index.php/2010_AIME_II_Problems/Problem_11"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Define a T-grid to be a $3\\times3$ matrix which satisfies the following two properties:\n\n- Exactly five of the entries are $1$'s, and the remaining four entries are $0$'s.\n- Among the eight rows, columns, and long diagonals (the long diagonals are $\\{a_{13},a_{22},a_{31}\\}$ and $\\{a_{11},a_{22},a_{33}\\}$), no more than one of the eight has all three entries equal.\n\nFind the number of distinct T-grids.",
+    "image": null,
+    "choices": null,
+    "answer": "68",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Subtract grids with two monochromatic lines",
+        "body": "There are $\\binom95=126$ grids with five $1$s. Remove those with at least two monochromatic lines (lines with all entries equal).\n\n- **Two lines of $1$s.** Two parallel lines need $6$ ones, so the lines cross; their union is exactly the $5$ ones. Crossing pairs: $\\binom82-6=22$ ($6$ parallel pairs among rows and among columns). Each gives one grid, and no grid contains three lines of $1$s, so $22$ grids.\n- **A line of $1$s and a line of $0$s.** They must be disjoint, so both rows or both columns: $2\\cdot3\\cdot2=12$ choices. The remaining $3$ cells hold two $1$s and one $0$: $3$ ways. That's $36$ grids, all distinct, and none of them has two lines of $1$s (such a grid has no line of $0$s, because every line meets one of two crossing lines).\n- Two lines of $0$s would need $5$ zeros: impossible.\n\nT-grids: $126-22-36=68$.\n\n**Answer: 68**"
+      },
+      {
+        "title": "Check by classifying all 126 grids",
+        "body": "Sorting all $126$ grids by the number of monochromatic lines gives $16$ grids with none, $52$ with exactly one, and $58$ with two (the $22+36$ found in the first solution; no grid has three or more). The T-grids are those with at most one: $16+52=68$.\n\n**Answer: 68**"
+      }
+    ],
+    "topics": [
+      "counting"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-2010-ii-12",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "2010 AIME II",
+      "year": 2010,
+      "number": 12,
+      "url": "https://artofproblemsolving.com/wiki/index.php/2010_AIME_II_Problems/Problem_12"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Two noncongruent integer-sided isosceles triangles have the same perimeter and the same area. The ratio of the lengths of the bases of the two triangles is $8: 7$. Find the minimum possible value of their common perimeter.",
+    "image": null,
+    "choices": null,
+    "answer": "676",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Set up and factor",
+        "body": "Let the bases be $16n$ and $14n$ (they are $8k,7k$, and equal perimeters force $k$ even), with legs $x$ and $y$. Equal perimeters: $2x+16n=2y+14n$, so $y=x+n$. Equal areas:\n$$8n\\sqrt{x^2-64n^2}=7n\\sqrt{(x+n)^2-49n^2}\\implies 64x^2-4096n^2=49x^2+98xn-2352n^2.$$\nSo $15x^2-98xn-1744n^2=0$, which factors as $(15x-218n)(x+8n)=0$. Thus $x=\\frac{218n}{15}$, so $15\\mid n$; the smallest is $n=15$: legs $218$ and $233$, bases $240$ and $210$. The perimeter is $2\\cdot218+240=676$.\n\n**Answer: 676**"
+      },
+      {
+        "title": "Check the triangles",
+        "body": "Triangle $(218,218,240)$: height $\\sqrt{218^2-120^2}=\\sqrt{33124}=182$, area $120\\cdot182=21840$. Triangle $(233,233,210)$: height $\\sqrt{233^2-105^2}=\\sqrt{43264}=208$, area $105\\cdot208=21840$. Perimeters $676$ and $676$. Since the equation forces $n$ to be a multiple of $15$ and the perimeter is $2x+16n=\\frac{676}{15}n$, the minimum is $676$.\n\n**Answer: 676**"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "number-theory"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-2010-ii-13",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "2010 AIME II",
+      "year": 2010,
+      "number": 13,
+      "url": "https://artofproblemsolving.com/wiki/index.php/2010_AIME_II_Problems/Problem_13"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "The $52$ cards in a deck are numbered $1, 2, \\cdots, 52$. Alex, Blair, Corey, and Dylan each pick a card from the deck randomly and without replacement. The two people with lower numbered cards form a team, and the two people with higher numbered cards form another team. Let $p(a)$ be the probability that Alex and Dylan are on the same team, given that Alex picks one of the cards $a$ and $a+9$, and Dylan picks the other of these two cards. The minimum value of $p(a)$ for which $p(a)\\ge\\frac{1}{2}$ can be written as $\\frac{m}{n}$, where $m$ and $n$ are relatively prime positive integers. Find $m+n$.",
+    "image": null,
+    "choices": null,
+    "answer": "263",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Blair and Corey both above or both below",
+        "body": "Alex and Dylan are a team iff Blair and Corey both pick cards above $a+9$ ($43-a$ cards) or both below $a$ ($a-1$ cards), from the remaining $50$:\n$$p(a)=\\frac{\\binom{43-a}2+\\binom{a-1}2}{\\binom{50}2}=\\frac{(43-a)(42-a)+(a-1)(a-2)}{2450}.$$\n$p(a)\\ge\\frac12$ means $2a^2-88a+1808\\ge1225$, i.e. $2a^2-88a+583\\ge0$, whose roots are $22\\pm\\sqrt{192.5}\\approx22\\pm13.87$. So $a\\le8$ or $a\\ge36$. $p$ is a parabola with minimum at $a=22$, so the smallest allowed value is at $a=8$ (or the symmetric $a=36$):\n$$p(8)=\\frac{35\\cdot34+7\\cdot6}{2450}=\\frac{1232}{2450}=\\frac{88}{175}.$$\n$m+n=263$.\n\n**Answer: 263**"
+      },
+      {
+        "title": "Check neighbors",
+        "body": "$p(9)=\\frac{34\\cdot33+8\\cdot7}{2450}=\\frac{1178}{2450}<\\frac12$ and $p(8)=\\frac{1232}{2450}>\\frac12$, while $p$ increases as $a$ moves away from $22$. So the minimum value that is still $\\ge\\frac12$ is $p(8)=p(36)=\\frac{88}{175}$, and the answer is $88+175=263$.\n\n**Answer: 263**"
+      }
+    ],
+    "topics": [
+      "probability",
+      "inequalities"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-2010-ii-14",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "2010 AIME II",
+      "year": 2010,
+      "number": 14,
+      "url": "https://artofproblemsolving.com/wiki/index.php/2010_AIME_II_Problems/Problem_14"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Triangle $ABC$ with right angle at $C$, $\\angle BAC < 45^\\circ$ and $AB = 4$. Point $P$ on $\\overline{AB}$ is chosen such that $\\angle APC = 2\\angle ACP$ and $CP = 1$. The ratio $\\frac{AP}{BP}$ can be represented in the form $p + q\\sqrt{r}$, where $p$, $q$, $r$ are positive integers and $r$ is not divisible by the square of any prime. Find $p+q+r$.",
+    "image": null,
+    "choices": null,
+    "answer": "7",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Extend CP to the circumcircle",
+        "body": "Let $O$ be the midpoint of $AB$ (the circumcenter, radius $2$) and $\\theta=\\angle ACP$, so $\\angle APC=2\\theta$. Extend $CP$ to meet the circumcircle again at $D$.\n\nThe inscribed angle $\\angle ACD=\\theta$ gives the central angle $\\angle AOD=2\\theta$. In $\\triangle DOP$:\n- if $P$ lies between $O$ and $B$: $\\angle DOP=180^\\circ-2\\theta$ and $\\angle DPO=180^\\circ-\\angle APC=180^\\circ-2\\theta$;\n- if $P$ lies between $A$ and $O$: $\\angle DOP=2\\theta$ and $\\angle DPO=\\angle DPB=\\angle APC=2\\theta$.\n\nEither way $\\triangle DOP$ is isosceles with $DP=DO=2$. By the power of the point $P$: $AP\\cdot PB=CP\\cdot PD=2$, and $AP+PB=4$, so $\\{AP,PB\\}=\\{2+\\sqrt2,\\,2-\\sqrt2\\}$.\n\nTo decide which is $AP$: in $\\triangle APC$, $\\angle A=180^\\circ-3\\theta<45^\\circ$, so $\\theta>45^\\circ$, and by the Law of Sines\n$$AP=\\frac{CP\\sin\\theta}{\\sin3\\theta}=\\frac{1}{3-4\\sin^2\\theta}>1,$$\nsince $\\sin^2\\theta>\\frac12$. So $AP=2+\\sqrt2$, $BP=2-\\sqrt2$, and\n$$\\frac{AP}{BP}=\\frac{2+\\sqrt2}{2-\\sqrt2}=\\frac{(2+\\sqrt2)^2}2=3+2\\sqrt2.$$\nSo $p+q+r=3+2+2=7$.\n\n**Answer: 7**"
+      },
+      {
+        "title": "Law of Sines in both triangles",
+        "body": "With $\\theta=\\angle ACP$: in $\\triangle APC$, $\\angle A=180^\\circ-3\\theta$, so $AP=\\frac{\\sin\\theta}{\\sin3\\theta}=\\frac1{3-4\\sin^2\\theta}$. In $\\triangle BPC$, $\\angle BPC=180^\\circ-2\\theta$ and $\\angle BCP=90^\\circ-\\theta$, so $\\angle B=3\\theta-90^\\circ$ and\n$$BP=\\frac{\\sin(90^\\circ-\\theta)}{\\sin(3\\theta-90^\\circ)}=\\frac{\\cos\\theta}{-\\cos3\\theta}=\\frac1{3-4\\cos^2\\theta}.$$\nLet $u=3-4\\sin^2\\theta$; then $3-4\\cos^2\\theta=2-u$. From $AP+BP=4$: $\\frac1u+\\frac1{2-u}=\\frac{2}{u(2-u)}=4$, so $u^2-2u+\\frac12=0$ and $u=1\\pm\\frac{\\sqrt2}2$. Since $\\theta>45^\\circ$ (because $\\angle A<45^\\circ$), $u<1$: $u=1-\\frac{\\sqrt2}2$. Then\n$$\\frac{AP}{BP}=\\frac{2-u}{u}=\\frac{1+\\frac{\\sqrt2}2}{1-\\frac{\\sqrt2}2}=3+2\\sqrt2.$$\n\n**Answer: 7**"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-2010-ii-15",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "2010 AIME II",
+      "year": 2010,
+      "number": 15,
+      "url": "https://artofproblemsolving.com/wiki/index.php/2010_AIME_II_Problems/Problem_15"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "In triangle $ABC$, $AC=13$, $BC=14$, and $AB=15$. Points $M$ and $D$ lie on $AC$ with $AM=MC$ and $\\angle ABD = \\angle DBC$. Points $N$ and $E$ lie on $AB$ with $AN=NB$ and $\\angle ACE = \\angle ECB$. Let $P$ be the point, other than $A$, of intersection of the circumcircles of $\\triangle AMN$ and $\\triangle ADE$. Ray $AP$ meets $BC$ at $Q$. The ratio $\\frac{BQ}{CQ}$ can be written in the form $\\frac{m}{n}$, where $m$ and $n$ are relatively prime positive integers. Find $m-n$.",
+    "image": null,
+    "choices": null,
+    "answer": "218",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Spiral similarity",
+        "body": "$M,D$ lie on line $AC$ and $N,E$ on line $AB$, so the second intersection $P$ of circles $(AMN)$ and $(ADE)$ is the center of the spiral similarity taking $M\\to D$ and $N\\to E$; hence also $\\triangle PMD\\sim\\triangle PNE$.\n\nCorresponding altitudes of similar triangles are in the ratio of the sides, so\n$$\\frac{\\operatorname{dist}(P,AB)}{\\operatorname{dist}(P,AC)}=\\frac{NE}{MD}.$$\nFor a point $Q$ on ray $AP$, $\\frac{BQ}{CQ}=\\frac{[ABQ]}{[ACQ]}=\\frac{AB\\sin\\angle BAQ}{AC\\sin\\angle CAQ}=\\frac{AB}{AC}\\cdot\\frac{\\operatorname{dist}(P,AB)}{\\operatorname{dist}(P,AC)}$.\n\nLengths: $AN=\\frac{15}2$, and by the angle bisector theorem $AE=15\\cdot\\frac{13}{27}=\\frac{65}9$, so $NE=\\frac{15}2-\\frac{65}9=\\frac5{18}$. Also $AM=\\frac{13}2$ and $AD=13\\cdot\\frac{15}{29}=\\frac{195}{29}$, so $MD=\\frac{195}{29}-\\frac{13}2=\\frac{13}{58}$. Therefore\n$$\\frac{BQ}{CQ}=\\frac{15}{13}\\cdot\\frac{5/18}{13/58}=\\frac{15\\cdot5\\cdot58}{13\\cdot18\\cdot13}=\\frac{725}{507},$$\nand $m-n=725-507=218$.\n\n**Answer: 218**"
+      },
+      {
+        "title": "Coordinates check",
+        "body": "Place $A=(0,0)$, $B=(15,0)$, $C=\\left(\\frac{33}5,\\frac{56}5\\right)$ (so $AC=13$, $BC=14$). Then $M=\\frac C2$, $N=(\\frac{15}{2},0)$, $D=\\frac{15}{29}C$, $E=(\\frac{65}9,0)$. Computing both circumcircles and their second intersection $P$, then intersecting line $AP$ with $BC$, gives $\\frac{BQ}{CQ}\\approx1.42998=\\frac{725}{507}$, matching the first solution. Answer $218$.\n\n**Answer: 218**"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

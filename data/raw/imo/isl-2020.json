@@ -1,0 +1,1054 @@
+[
+  {
+    "id": "imo-isl-2020-a1",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Algebra",
+      "year": 2020,
+      "number": 1,
+      "url": "https://www.imo-official.org/assets/documents/problems/2020/IMO2020SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "prompt": "**Version 1.** Let $n$ be a positive integer, and set $N=2^n$. Determine the smallest real number $a_n$ such that, for all real $x$,\n$$\\sqrt[N]{\\frac{x^{2N}+1}{2}}\\le a_n(x-1)^2+x.$$\n\n**Version 2.** For every positive integer $N$, determine the smallest real number $b_N$ such that, for all real $x$,\n$$\\sqrt[N]{\\frac{x^{2N}+1}{2}}\\le b_N(x-1)^2+x.$$",
+    "image": null,
+    "choices": null,
+    "type": "self",
+    "answer": "$a_n=b_N=\\frac N2$ (a smaller constant fails near $x=1$; for $x>0$, with $t=\\frac{(x-1)^2}{x}$, the inequality becomes $\\frac{x^N+x^{-N}}2\\le\\left(1+\\frac N2t\\right)^N$, which follows from the factorisation of this Chebyshev-type polynomial in $t$ and AM-GM).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Expansion at $x=1$; roots of a Chebyshev polynomial and AM-GM",
+        "body": "We prove that the answer is $\\frac N2$ for every positive integer $N$; Version 1 is the special case $N=2^n$.\n\n**The constant cannot be smaller.** Let $c<\\frac N2$ and put $x=1+t$ with $t>0$. The inequality with constant $c$ would say $\\frac{(1+t)^{2N}+1}{2}\\le(1+t+ct^2)^N$ for all small $t>0$. Expand the difference in powers of $t$:\n- constant term: $1-1=0$;\n- coefficient of $t$: $N-\\frac{2N}{2}=0$;\n- coefficient of $t^2$: $\\binom N2+Nc-\\frac12\\binom{2N}2=\\frac{N(N-1)}2+Nc-\\frac{N(2N-1)}2=N\\left(c-\\frac N2\\right)<0$.\n\nSo $(1+t+ct^2)^N-\\frac{(1+t)^{2N}+1}2=N\\left(c-\\frac N2\\right)t^2+O(t^3)$ is negative for small $t>0$, and the inequality fails.\n\n**The constant $\\frac N2$ works.** We must show\n$$\\sqrt[N]{\\frac{x^{2N}+1}{2}}\\le x+\\frac N2(x-1)^2\\qquad\\text{for all real }x.\\tag{$*$}$$\n\n*Reduction to $x>0$.* For $x=0$ the left side is $2^{-1/N}\\le1$ and the right side is $\\frac N2$; if $N=1$ both equal $\\frac12$, and if $N\\ge2$ the right side is $\\ge1$. For $y>0$, the left sides of $(*)$ at $x=y$ and at $x=-y$ coincide, while the right side at $-y$ minus the right side at $y$ equals $\\frac N2\\big((y+1)^2-(y-1)^2\\big)-2y=2(N-1)y\\ge0$. So it suffices to treat $x>0$.\n\n*Reformulation.* For $x>0$ divide $(*)$ by $x$. Since $\\frac{x^{2N}+1}{2x^N}=\\frac{x^N+x^{-N}}2$, and with\n$$t=\\frac{(x-1)^2}{x}=x+\\frac1x-2\\ \\ge0,$$\n$(*)$ becomes (after raising to the $N$-th power)\n$$f_N:=\\frac{x^N+x^{-N}}{2}\\le\\Big(1+\\frac N2t\\Big)^N.\\tag{1}$$\n\n*$f_N$ is a polynomial in $t$.* Put $f_0=1$ and $f_1=\\frac{x+x^{-1}}2=1+\\frac t2$. From $(x^{N+1}+x^{-N-1})+(x^{N-1}+x^{1-N})=(x+x^{-1})(x^N+x^{-N})$ we get\n$$f_{N+1}=(2+t)f_N-f_{N-1}.$$\nHence $f_N=P_N(t)$ for a polynomial $P_N$ with $P_0=1$, $P_1=1+\\frac t2$, $P_{N+1}=(2+t)P_N-P_{N-1}$, and this identity $P_N\\big(x+\\frac1x-2\\big)=\\frac{x^N+x^{-N}}2$ holds for every nonzero complex $x$. By induction:\n- $\\deg P_N=N$ (leading coefficient $\\frac12$ for $N\\ge1$);\n- $P_N(0)=1$ (the recurrence at $t=0$ reads $P_{N+1}(0)=2P_N(0)-P_{N-1}(0)$);\n- $P_N'(0)=\\frac{N^2}2$: differentiating, $P_{N+1}'(0)=2P_N'(0)-P_{N-1}'(0)+P_N(0)=2P_N'(0)-P_{N-1}'(0)+1$, and $d_N=\\frac{N^2}2$ satisfies $d_0=0$, $d_1=\\frac12$, $d_{N+1}-2d_N+d_{N-1}=1$.\n\n*The roots of $P_N$.* For $k=1,\\dots,N$ let $\\theta_k=\\frac{(2k-1)\\pi}{2N}$ and $x_k=e^{i\\theta_k}$. Then $x_k+\\frac1{x_k}-2=2\\cos\\theta_k-2=-4\\sin^2\\frac{\\theta_k}2=:-s_k$, and\n$$P_N(-s_k)=\\frac{x_k^N+x_k^{-N}}2=\\cos(N\\theta_k)=\\cos\\frac{(2k-1)\\pi}2=0.$$\nSince $0<\\frac{\\theta_k}2<\\frac\\pi2$ are distinct, the numbers $s_k>0$ are distinct, so $-s_1,\\dots,-s_N$ are all $N$ roots of $P_N$. With $P_N(0)=1$:\n$$P_N(t)=\\prod_{k=1}^N\\Big(1+\\frac t{s_k}\\Big),\\qquad \\sum_{k=1}^N\\frac1{s_k}=\\frac{P_N'(0)}{P_N(0)}=\\frac{N^2}2.$$\n\n*AM-GM.* For $t\\ge0$ all factors are positive, so\n$$f_N=\\prod_{k=1}^N\\Big(1+\\frac t{s_k}\\Big)\\le\\Big(1+\\frac tN\\sum_{k=1}^N\\frac1{s_k}\\Big)^N=\\Big(1+\\frac N2t\\Big)^N,$$\nwhich is (1).\n\n**Answer: $a_n=b_N=\\frac N2$.** ∎"
+      }
+    ],
+    "topics": [
+      "inequalities",
+      "polynomials"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-isl-2020-a2",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Algebra",
+      "year": 2020,
+      "number": 2,
+      "url": "https://www.imo-official.org/assets/documents/problems/2020/IMO2020SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "prompt": "Let $\\mathcal A$ denote the set of all polynomials in three variables $x,y,z$ with integer coefficients. Let $\\mathcal B$ denote the subset of $\\mathcal A$ formed by all polynomials which can be expressed as\n$$(x+y+z)P(x,y,z)+(xy+yz+zx)Q(x,y,z)+xyzR(x,y,z)$$\nwith $P,Q,R\\in\\mathcal A$. Find the smallest non-negative integer $n$ such that $x^iy^jz^k\\in\\mathcal B$ for all non-negative integers $i,j,k$ satisfying $i+j+k\\ge n$.",
+    "image": null,
+    "choices": null,
+    "type": "numeric",
+    "answer": "4",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Show every monomial of degree 4 is in $\\mathcal B$, but $x^2y$ is not",
+        "body": "Write $p=x+y+z$, $q=xy+yz+zx$, $r=xyz$. Note that $\\mathcal B$ is closed under addition and under multiplication by any polynomial of $\\mathcal A$; in particular, every multiple of an element of $\\mathcal B$ lies in $\\mathcal B$.\n\n**Every monomial of degree $\\ge4$ lies in $\\mathcal B$.** Since $(x-x)(x-y)(x-z)=0$, expanding gives $x^3-px^2+qx-r=0$, so $x^3=px^2-qx+r\\in\\mathcal B$; likewise $y^3,z^3\\in\\mathcal B$. Also $xy\\cdot q=x^2y^2+xyz(x+y)$, so $x^2y^2=xy\\,q-(x+y)r\\in\\mathcal B$, and similarly $y^2z^2,z^2x^2\\in\\mathcal B$.\n\nNow take $x^iy^jz^k$ with $i+j+k\\ge4$. If $i,j,k\\ge1$ it is a multiple of $r$. Otherwise one exponent is $0$, say $k=0$, and $i+j\\ge4$: either $i\\ge3$ or $j\\ge3$ (a multiple of $x^3$ or $y^3$), or $i=j=2$ (the monomial $x^2y^2$). In all cases it is in $\\mathcal B$. Hence $n=4$ works.\n\n**$x^2y\\notin\\mathcal B$, so $n\\le3$ fails.** Suppose $x^2y=pP+qQ+rR$. Comparing the homogeneous parts of degree $3$, only the degree-2 part of $P$, the degree-1 part of $Q$ and the constant term of $R$ matter:\n$$x^2y=(x+y+z)P_2+(xy+yz+zx)Q_1+gxyz .$$\nIf $P_2$ contained $x^2$ with coefficient $\\alpha$, then the right side would contain $x^3$ with coefficient $\\alpha$ (no other product gives $x^3$); hence $P_2$ has no square terms, and similarly for $y^2,z^2$. Write $P_2=a\\,xy+b\\,yz+c\\,zx$ and $Q_1=dx+ey+fz$. Comparing coefficients:\n- $xy^2$: $a+e=0$; $\\;y^2z$: $b+e=0$; $\\;yz^2$: $b+f=0$; $\\;z^2x$: $c+f=0$; $\\;zx^2$: $c+d=0$;\n- $x^2y$: $a+d=1$.\n\nThe first five give $a=b=c=-e=-f=-d$, so $a+d=0\\ne1$, a contradiction. Thus $x^2y\\notin\\mathcal B$ although $2+1+0=3$, so no $n\\le3$ works.\n\n**Answer: $n=4$.** ∎"
+      }
+    ],
+    "topics": [
+      "polynomials",
+      "algebra"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-isl-2020-a3",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Algebra",
+      "year": 2020,
+      "number": 3,
+      "url": "https://www.imo-official.org/assets/documents/problems/2020/IMO2020SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "prompt": "Suppose that $a,b,c,d$ are positive real numbers satisfying $(a+c)(b+d)=ac+bd$. Find the smallest possible value of\n$$\\frac ab+\\frac bc+\\frac cd+\\frac da.$$",
+    "image": null,
+    "choices": null,
+    "type": "numeric",
+    "answer": "8",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "AM-GM twice",
+        "body": "Let $S=\\frac ab+\\frac bc+\\frac cd+\\frac da$.\n\n**Lower bound.** Group the terms and use AM-GM on each pair:\n$$\\Big(\\frac ab+\\frac cd\\Big)+\\Big(\\frac bc+\\frac da\\Big)\\ge2\\sqrt{\\frac{ac}{bd}}+2\\sqrt{\\frac{bd}{ac}}=\\frac{2(ac+bd)}{\\sqrt{abcd}}.$$\nBy the condition, $ac+bd=(a+c)(b+d)\\ge2\\sqrt{ac}\\cdot2\\sqrt{bd}=4\\sqrt{abcd}$. Therefore $S\\ge\\frac{2\\cdot4\\sqrt{abcd}}{\\sqrt{abcd}}=8$.\n\n**Equality.** All inequalities are equalities when $a=c$ and $b=d$. Then the condition reads $2a\\cdot2b=a^2+b^2$, i.e. $\\big(\\frac ba\\big)^2-4\\frac ba+1=0$, so $\\frac ba=2\\pm\\sqrt3$. Take $a=c=1$, $b=d=2+\\sqrt3$: indeed $(a+c)(b+d)=4(2+\\sqrt3)=8+4\\sqrt3=1+(2+\\sqrt3)^2=ac+bd$, and\n$$S=\\frac2{2+\\sqrt3}+2(2+\\sqrt3)=2(2-\\sqrt3)+2(2+\\sqrt3)=8.$$\n\n**Answer: 8.** ∎"
+      }
+    ],
+    "topics": [
+      "inequalities"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-isl-2020-a4",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Algebra",
+      "year": 2020,
+      "number": 4,
+      "url": "https://www.imo-official.org/assets/documents/problems/2020/IMO2020SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "prompt": "Let $a,b,c,d$ be four real numbers such that $a\\ge b\\ge c\\ge d>0$ and $a+b+c+d=1$. Prove that\n$$(a+2b+3c+4d)\\,a^a\\,b^b\\,c^c\\,d^d<1.$$",
+    "image": null,
+    "choices": null,
+    "type": "self",
+    "answer": "Proof: weighted AM-GM gives $a^ab^bc^cd^d\\le a^2+b^2+c^2+d^2$; then $(a+2b+3c+4d)(a^2+b^2+c^2+d^2)<(a+b+c+d)^3$ follows by expanding and comparing terms using $a\\ge b\\ge c\\ge d$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [],
+    "topics": [
+      "inequalities"
+    ],
+    "difficulty": 2,
+    "duplicateOf": "imo-2020-02",
+    "reviewNote": null
+  },
+  {
+    "id": "imo-isl-2020-a5",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Algebra",
+      "year": 2020,
+      "number": 5,
+      "url": "https://www.imo-official.org/assets/documents/problems/2020/IMO2020SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "prompt": "A magician intends to perform the following trick. She announces a positive integer $n$, along with $2n$ real numbers $x_1<\\dots<x_{2n}$, to the audience. A member of the audience then secretly chooses a polynomial $P(x)$ of degree $n$ with real coefficients, computes the $2n$ values $P(x_1),\\dots,P(x_{2n})$, and writes down these $2n$ values on the blackboard in non-decreasing order. After that the magician announces the secret polynomial to the audience.\n\nCan the magician find a strategy to perform such a trick?",
+    "image": null,
+    "choices": null,
+    "type": "text",
+    "answer": "No",
+    "acceptedAnswers": [
+      "no",
+      "no, she cannot"
+    ],
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Two polynomials $P$ and $-P$ with the same multiset of values",
+        "body": "Fix any $x_1<x_2<\\dots<x_{2n}$ chosen by the magician. We construct two different polynomials of degree $n$ that produce the same list on the board, so the magician cannot tell them apart.\n\n**Claim.** There is a polynomial $P$ of degree exactly $n$ with $P(x_{2i-1})+P(x_{2i})=0$ for $i=1,\\dots,n$.\n\n*Proof.* Look for $P(x)=a_nx^n+\\dots+a_1x+a_0$. Each condition\n$$(x_{2i-1}^n+x_{2i}^n)a_n+(x_{2i-1}^{n-1}+x_{2i}^{n-1})a_{n-1}+\\dots+2a_0=0$$\nis a homogeneous linear equation in the $n+1$ unknowns $a_0,\\dots,a_n$. A homogeneous system of $n$ linear equations in $n+1$ unknowns has a nonzero solution, so there is a nonzero polynomial $P$ of degree at most $n$ satisfying all conditions. Since $P(x_{2i-1})$ and $P(x_{2i})$ are negatives of each other, by the intermediate value theorem $P$ has a root in each closed interval $[x_{2i-1},x_{2i}]$. These $n$ intervals are pairwise disjoint, so $P$ has at least $n$ distinct roots; being nonzero of degree $\\le n$, it has degree exactly $n$. $\\square$\n\nNow let $Q=-P$, also of degree $n$ and different from $P$. For every $i$,\n$$Q(x_{2i-1})=-P(x_{2i-1})=P(x_{2i}),\\qquad Q(x_{2i})=-P(x_{2i})=P(x_{2i-1}).$$\nSo the values of $Q$ at $x_1,\\dots,x_{2n}$ are the values of $P$ with each pair swapped; written in non-decreasing order they give the same list. The magician cannot distinguish $P$ from $Q$.\n\n**Answer: No.** ∎"
+      }
+    ],
+    "topics": [
+      "polynomials",
+      "algebra"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-isl-2020-a6",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Algebra",
+      "year": 2020,
+      "number": 6,
+      "url": "https://www.imo-official.org/assets/documents/problems/2020/IMO2020SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "prompt": "Determine all functions $f:\\mathbb Z\\to\\mathbb Z$ such that\n$$f^{a^2+b^2}(a+b)=af(a)+bf(b)\\qquad\\text{for every }a,b\\in\\mathbb Z.$$\nHere, $f^n$ denotes the $n$-th iteration of $f$, i.e., $f^0(x)=x$ and $f^{n+1}(x)=f(f^n(x))$ for all $n\\ge0$.",
+    "image": null,
+    "choices": null,
+    "type": "self",
+    "answer": "$f(x)=0$ for all $x$, and $f(x)=x+1$ for all $x$ (compare the orbits of $a-1$ and $a$; split into the cases where all orbits are finite or all are infinite).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Orbits: all finite or all infinite",
+        "body": "Call the equation $E(a,b)$. Both functions in the answer work: for $f\\equiv0$ both sides are $0$ (if $a=b=0$ the left side is $f^0(0)=0$); for $f(x)=x+1$ we have $f^m(x)=x+m$, so the left side is $a+b+a^2+b^2=a(a+1)+b(b+1)$. Now let $f$ be any solution.\n\n**First facts.** $E(0,b)$ gives $f^{b^2}(b)=bf(b)$. For $b=-1$: $f(-1)=-f(-1)$, so $f(-1)=0$. Then $E(a,-1)$ gives\n$$f^{a^2+1}(a-1)=af(a)=f^{a^2}(a).\\tag{1}$$\nFor $x\\in\\mathbb Z$ let the orbit be $O(x)=\\{x,f(x),f^2(x),\\dots\\}$. By (1), the orbits of $a-1$ and $a$ have a common tail, so they differ in only finitely many elements; chaining, any two orbits differ in finitely many elements. Hence either all orbits are finite or all are infinite.\n\n**Case 1: all orbits are finite.** $E(a,-a)$ gives $f^{2a^2}(0)=a\\big(f(a)-f(-a)\\big)$. The left side lies in the finite set $O(0)$; let $M=\\max_{z\\in O(0)}|z|$. For $|a|>M$ the integer $a\\big(f(a)-f(-a)\\big)$ has absolute value $\\le M<|a|$, so it is $0$: $f^{2a^2}(0)=0$. Thus $0$ is a periodic point; let $T$ be the minimal period of $0$. Then $T\\mid2a^2$ for all $|a|>M$; taking $a$ and $a+1$ both larger than $M$, $T\\mid\\gcd\\big(2a^2,2(a+1)^2\\big)=2$. So $f^2(0)=0$, hence $f^{2a^2}(0)=0$ for all $a$, and\n$$f(a)=f(-a)\\ \\ (a\\ne0),\\qquad\\text{in particular } f(1)=f(-1)=0.\\tag{2}$$\nNext, $E(n,1-n)$: the left side is $f^{2n^2-2n+1}(1)=f^{2n^2-2n}(f(1))=f^{2n^2-2n}(0)=0$ (an even number of iterations of $0$). So\n$$nf(n)+(1-n)f(1-n)=0\\qquad\\text{for all }n.\\tag{3}$$\nSuppose $f(m)\\ne0$ for some $m\\ne0$, with $|m|$ minimal. By (2), $|m|>1$ and $f(|m|)\\ne0$. By (3) with $n=|m|$: $(|m|-1)f(1-|m|)=|m|f(|m|)\\ne0$, so $f(1-|m|)\\ne0$, although $0<\\big|1-|m|\\big|<|m|$ — contradiction. Hence $f(n)=0$ for all $n\\ne0$. Finally $f(0)=f^3(0)=f^3(f(2))=f^4(2)=2f(2)=0$ (using $f^2(0)=0$ and $E(0,2)$). So $f\\equiv0$.\n\n**Case 2: all orbits are infinite.** Then no orbit repeats a value (a repetition would make it eventually periodic, hence finite). Any two orbits $O(a),O(b)$ differ in finitely many elements, so they have infinitely many common elements.\n\n*Claim.* If $f^n(a)=f^m(b)$ and $f^p(a)=f^q(b)$, then $n-m=p-q$.\n\nIndeed, applying $f^{n}$ to $f^p(a)=f^q(b)$ and $f^p$ to $f^n(a)=f^m(b)$ gives $f^{q+n}(b)=f^{p+n}(a)=f^{p+m}(b)$; if $n-m\\ne p-q$ then $q+n\\ne p+m$ and the orbit of $b$ repeats a value, which is impossible.\n\nSo $X(a,b):=n-m$ (for any $n,m$ with $f^n(a)=f^m(b)$) is well defined. It is additive: if $f^n(a)=f^m(b)$ and $f^p(b)=f^q(c)$, then $f^{n+p}(a)=f^{m+p}(b)=f^{m+q}(c)$, so $X(a,c)=X(a,b)+X(b,c)$. By (1), $X(a-1,a)=1$. Hence $X(a,b)=b-a$ for all $a,b$.\n\nApplying $f$ once more to (1): $f^{a^2+1}\\big(f(a-1)\\big)=f^{a^2+2}(a-1)=f^{a^2+1}(a)=f^{a^2}\\big(f(a)\\big)$, so $X\\big(f(a-1),f(a)\\big)=1$, i.e. $f(a)-f(a-1)=1$ for all $a$. Together with $f(-1)=0$, induction in both directions gives $f(x)=x+1$.\n\n**Answer: $f\\equiv0$ and $f(x)=x+1$.** ∎"
+      }
+    ],
+    "topics": [
+      "functional-equations",
+      "number-theory"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-isl-2020-a7",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Algebra",
+      "year": 2020,
+      "number": 7,
+      "url": "https://www.imo-official.org/assets/documents/problems/2020/IMO2020SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "prompt": "Let $n$ and $k$ be positive integers. Prove that for $a_1,\\dots,a_n\\in[1,2^k]$ one has\n$$\\sum_{i=1}^n\\frac{a_i}{\\sqrt{a_1^2+\\dots+a_i^2}}\\le4\\sqrt{kn}.$$",
+    "image": null,
+    "choices": null,
+    "type": "self",
+    "answer": "Proof: split the indices into $k$ groups by the dyadic range $[2^{j-1},2^j]$ of $a_i$; the $i$-th term of group $j$ is at most $\\frac{2^j}{2^{j-1}\\sqrt i}$, so a group of size $p_j$ contributes $\\le4\\sqrt{p_j}$, and $\\sum_j4\\sqrt{p_j}\\le4\\sqrt{kn}$ by Cauchy-Schwarz.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Dyadic groups and Cauchy-Schwarz",
+        "body": "For each index $\\ell$ let $j(\\ell)$ be the smallest $j\\in\\{1,\\dots,k\\}$ with $a_\\ell\\le2^j$; then $2^{j-1}\\le a_\\ell\\le2^j$ (for $j=1$ because $a_\\ell\\ge1$, for $j\\ge2$ by minimality). Let $M_j=\\{\\ell: j(\\ell)=j\\}$ and $p_j=|M_j|$, so $p_1+\\dots+p_k=n$.\n\n**One group.** List the elements of $M_j$ in increasing order $\\ell_1<\\ell_2<\\dots<\\ell_{p_j}$. For $\\ell=\\ell_i$, the sum $a_1^2+\\dots+a_\\ell^2$ contains the $i$ terms $a_{\\ell_1}^2,\\dots,a_{\\ell_i}^2$, each at least $4^{j-1}$, so $\\sqrt{a_1^2+\\dots+a_\\ell^2}\\ge2^{j-1}\\sqrt i$. Since $a_\\ell\\le2^j$,\n$$\\sum_{\\ell\\in M_j}\\frac{a_\\ell}{\\sqrt{a_1^2+\\dots+a_\\ell^2}}\\le\\sum_{i=1}^{p_j}\\frac{2^j}{2^{j-1}\\sqrt i}=2\\sum_{i=1}^{p_j}\\frac1{\\sqrt i}.$$\nNow $\\frac1{\\sqrt i}\\le\\frac2{\\sqrt i+\\sqrt{i-1}}=2(\\sqrt i-\\sqrt{i-1})$, so the sum telescopes:\n$$2\\sum_{i=1}^{p_j}\\frac1{\\sqrt i}\\le4\\sum_{i=1}^{p_j}(\\sqrt i-\\sqrt{i-1})=4\\sqrt{p_j}.$$\n\n**All groups.** Summing over $j$ and using the Cauchy-Schwarz (QM-AM) inequality,\n$$\\sum_{\\ell=1}^n\\frac{a_\\ell}{\\sqrt{a_1^2+\\dots+a_\\ell^2}}\\le4\\sum_{j=1}^k\\sqrt{p_j}\\le4\\sqrt{k\\sum_{j=1}^kp_j}=4\\sqrt{kn}.$$ ∎"
+      }
+    ],
+    "topics": [
+      "inequalities",
+      "sequences-series"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-isl-2020-a8",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Algebra",
+      "year": 2020,
+      "number": 8,
+      "url": "https://www.imo-official.org/assets/documents/problems/2020/IMO2020SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "prompt": "Let $\\mathbb R^+$ be the set of positive real numbers. Determine all functions $f:\\mathbb R^+\\to\\mathbb R^+$ such that, for all positive real numbers $x$ and $y$,\n$$f\\big(x+f(xy)\\big)+y=f(x)f(y)+1.$$",
+    "image": null,
+    "choices": null,
+    "type": "self",
+    "answer": "$f(x)=x+1$ (show $f$ is injective, then increasing; letting $x\\to0^+$ forces $f$ to be linear).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Injective, monotone, then linear",
+        "body": "Call the equation $(*)$. The function $f(x)=x+1$ works: the left side is $x+xy+2+y$ and the right side is $(x+1)(y+1)+1$. Conversely, let $f$ satisfy $(*)$.\n\n**Step 1: $f$ is injective.** With $x=1$: $y=f(1)f(y)+1-f\\big(1+f(y)\\big)$, so $y$ is determined by $f(y)$.\n\n**Step 2: $f$ is strictly increasing.** Fix $y$. If $x_1+f(x_1y)=x_2+f(x_2y)$, then by $(*)$ $f(x_1)f(y)=f(x_2)f(y)$, so $f(x_1)=f(x_2)$ and $x_1=x_2$. Hence for $x_1\\ne x_2$ we have $x_1+f(x_1y)\\ne x_2+f(x_2y)$. Writing $z_i=x_iy$, this says\n$$\\frac1y\\ne\\frac{f(z_2)-f(z_1)}{z_1-z_2}\\qquad\\text{for all }y>0\\text{ and all }z_1\\ne z_2 .$$\nAs $\\frac1y$ takes every positive value, $\\frac{f(z_2)-f(z_1)}{z_1-z_2}\\le0$, i.e. $\\frac{f(z_1)-f(z_2)}{z_1-z_2}\\ge0$: $f$ is non-decreasing. Being injective, $f$ is strictly increasing.\n\n**Step 3: $f$ is linear.** A monotone function bounded below by $0$ has right limits everywhere. Let $p=\\lim_{x\\to0^+}f(x)\\ge0$ and $q=\\lim_{u\\to p^+}f(u)$. Fix $y$ and let $x\\to0^+$. Then $f(xy)$ decreases to $p$ with $f(xy)>p$, so $x+f(xy)$ tends to $p$ from above and $f\\big(x+f(xy)\\big)\\to q$. The right side tends to $pf(y)+1$. Therefore\n$$q+y=pf(y)+1\\qquad\\text{for all }y>0.$$\nIf $p=0$ this would say $y=1-q$ for every $y$, absurd. So $f(y)=\\frac{y+q-1}{p}$ is linear: $f(y)=ay+b$.\n\n**Step 4.** Substituting $f(x)=ax+b$ into $(*)$:\n$$a(x+axy+b)+b+y=(ax+b)(ay+b)+1\\iff(a-ab)x+(1-ab)y+(ab+b-b^2-1)=0$$\nfor all $x,y>0$. All coefficients vanish: $ab=1$ and $a=ab=1$, so $a=b=1$ (and then $ab+b-b^2-1=0$ holds).\n\n**Answer: $f(x)=x+1$.** ∎"
+      }
+    ],
+    "topics": [
+      "functional-equations"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-isl-2020-c1",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Combinatorics",
+      "year": 2020,
+      "number": 1,
+      "url": "https://www.imo-official.org/assets/documents/problems/2020/IMO2020SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "prompt": "Let $n$ be a positive integer. Find the number of permutations $a_1,a_2,\\dots,a_n$ of the sequence $1,2,\\dots,n$ satisfying\n$$a_1\\le2a_2\\le3a_3\\le\\dots\\le na_n.$$",
+    "image": null,
+    "choices": null,
+    "type": "self",
+    "answer": "$F_{n+1}$, the $(n+1)$-st Fibonacci number ($F_1=F_2=1$): $n$ is either last, or second to last followed by $n-1$, giving $P_n=P_{n-1}+P_{n-2}$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Where can $n$ stand? A Fibonacci recursion",
+        "body": "Let $P_n$ be the number of such permutations; call the condition $(*)$. Clearly $P_1=1$, and $P_2=2$ (both $1,2$ and $2,1$ work).\n\n**Lemma.** Let $n\\ge3$. If $a_1,\\dots,a_n$ satisfies $(*)$, then either $a_n=n$, or $a_{n-1}=n$ and $a_n=n-1$.\n\n*Proof.* Let $a_k=n$.\n- If $k=n-1$: $(n-1)n=(n-1)a_{n-1}\\le na_n$ gives $a_n\\ge n-1$, and $a_n\\ne n$, so $a_n=n-1$.\n- If $k\\le n-2$: for $k<i<n$ we have $kn=ka_k\\le ia_i<na_i$, so $a_i>k$. Also $na_n\\ge(n-1)a_{n-1}\\ge(n-1)(k+1)=nk+(n-1-k)>nk$, so $a_n>k$. Thus the $n-k+1$ distinct numbers $a_k,a_{k+1},\\dots,a_n$ all lie in $\\{k+1,\\dots,n\\}$, which has only $n-k$ elements — impossible. $\\square$\n\n**Counting.** Let $n\\ge3$.\n- If $a_n=n$: then $a_1,\\dots,a_{n-1}$ is a permutation of $1,\\dots,n-1$ satisfying $(*)$, and the last inequality $(n-1)a_{n-1}\\le(n-1)^2<n^2=na_n$ holds automatically. This gives $P_{n-1}$ permutations.\n- If $(a_{n-1},a_n)=(n,n-1)$: then $a_1,\\dots,a_{n-2}$ is a permutation of $1,\\dots,n-2$ satisfying $(*)$, and the last two inequalities hold automatically because $(n-2)a_{n-2}\\le(n-2)^2<n(n-1)=(n-1)a_{n-1}=na_n$. This gives $P_{n-2}$ permutations.\n\nHence $P_n=P_{n-1}+P_{n-2}$ for $n\\ge3$, with $P_1=1=F_2$ and $P_2=2=F_3$. By induction $P_n=F_{n+1}$.\n\n(Equivalently, the valid permutations are exactly those obtained by splitting $1,\\dots,n$ into singletons and pairs of adjacent numbers and swapping each pair — tilings of a $1\\times n$ strip by squares and dominoes.)\n\n**Answer: $F_{n+1}$.** ∎"
+      }
+    ],
+    "topics": [
+      "counting",
+      "sequences-series"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-isl-2020-c2",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Combinatorics",
+      "year": 2020,
+      "number": 2,
+      "url": "https://www.imo-official.org/assets/documents/problems/2020/IMO2020SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "prompt": "In a regular 100-gon, 41 vertices are colored black and the remaining 59 vertices are colored white. Prove that there exist 24 convex quadrilaterals $Q_1,\\dots,Q_{24}$ whose corners are vertices of the 100-gon, so that\n\n- the quadrilaterals $Q_1,\\dots,Q_{24}$ are pairwise disjoint, and\n- every quadrilateral $Q_i$ has three corners of one color and one corner of the other color.",
+    "image": null,
+    "choices": null,
+    "type": "self",
+    "answer": "Proof: by induction, a convex $(4k+1)$-gon with each colour used at least $k$ times contains $k$ disjoint skew-coloured quadrilaterals — always cut off four *consecutive* vertices with colours $3+1$; apply it to $97$ of the vertices with $k=24$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Induction: cut off four consecutive vertices",
+        "body": "Call a quadrilateral *skew-colored* if it has three corners of one color and one of the other.\n\n**Claim.** If the vertices of a convex $(4k+1)$-gon are colored black and white so that each color is used at least $k$ times, then there are $k$ pairwise disjoint skew-colored quadrilaterals with vertices among the vertices of the polygon.\n\nThe problem follows: delete any 3 vertices of the 100-gon; the remaining 97 vertices form a convex $97$-gon ($97=4\\cdot24+1$) with at least $38\\ge24$ black and at least $56\\ge24$ white vertices.\n\n*Proof of the Claim, by induction on $k$.*\n\n**$k=1$.** A pentagon with at least one vertex of each color. If the number of black vertices is even, delete a black vertex, otherwise delete a white one. The remaining four vertices contain an odd number of black and an odd number of white vertices, i.e. $3+1$: a skew-colored quadrilateral.\n\n**Step $k-1\\to k$ ($k\\ge2$).** Let $b$, $w$ be the numbers of black and white vertices; by symmetry $w\\ge b$, so $b+w=4k+1$ gives $w\\ge2k+1$ and $k\\le b\\le2k$. Label the vertices $V_1,\\dots,V_{4k+1}$ in order so that $V_{4k+1}$ is black, and form the $k$ groups\n$$(V_1,V_2,V_3,V_4),\\ (V_5,\\dots,V_8),\\ \\dots,\\ (V_{4k-3},\\dots,V_{4k}).$$\nThey contain $w$ white and $b-1$ black vertices, and $w>b-1$, so some group $(V_i,\\dots,V_{i+3})$ has more white than black vertices. If it has $3$ white and $1$ black, we have found four consecutive vertices forming a skew-colored quadrilateral. Otherwise all four are white; let $V_j$ be the first black vertex after $V_{i+3}$ (it exists since $V_{4k+1}$ is black). Then $V_{j-3},V_{j-2},V_{j-1}$ are white and $V_j$ is black — again four consecutive vertices forming a skew-colored quadrilateral.\n\nRemove these four consecutive vertices. They lie on one side of the chord joining their two outer neighbours, and the remaining $4k-3$ vertices form a convex polygon on the other side, so any quadrilaterals built from the remaining vertices are disjoint from the one we cut off. In both cases the removed quadrilateral has three white corners and one black corner, so the remaining polygon has $b-1\\ge k-1$ black and $w-3\\ge2k-2\\ge k-1$ white vertices. By the induction hypothesis the remaining $(4(k-1)+1)$-gon contains $k-1$ disjoint skew-colored quadrilaterals. Together with the removed one we get $k$. ∎"
+      }
+    ],
+    "topics": [
+      "counting",
+      "logic"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-isl-2020-c3",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Combinatorics",
+      "year": 2020,
+      "number": 3,
+      "url": "https://www.imo-official.org/assets/documents/problems/2020/IMO2020SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "prompt": "Let $n$ be an integer with $n\\ge2$. On a slope of a mountain, $n^2$ checkpoints are marked, numbered from $1$ to $n^2$ from the bottom to the top. Each of two cable car companies, $A$ and $B$, operates $k$ cable cars numbered from $1$ to $k$; each cable car provides a transfer from some checkpoint to a higher one. For each company, and for any $i$ and $j$ with $1\\le i<j\\le k$, the starting point of car $j$ is higher than the starting point of car $i$; similarly, the finishing point of car $j$ is higher than the finishing point of car $i$. Say that two checkpoints are *linked* by some company if one can start from the lower checkpoint and reach the higher one by using one or more cars of that company (no movement on foot is allowed).\n\nDetermine the smallest $k$ for which one can guarantee that there are two checkpoints that are linked by each of the two companies.",
+    "image": null,
+    "choices": null,
+    "type": "self",
+    "answer": "$k=n^2-n+1$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [],
+    "topics": [
+      "counting",
+      "graph-theory"
+    ],
+    "difficulty": 1,
+    "duplicateOf": "imo-2020-04",
+    "reviewNote": null
+  },
+  {
+    "id": "imo-isl-2020-c4",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Combinatorics",
+      "year": 2020,
+      "number": 4,
+      "url": "https://www.imo-official.org/assets/documents/problems/2020/IMO2020SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "prompt": "The Fibonacci numbers $F_0,F_1,F_2,\\dots$ are defined inductively by $F_0=0$, $F_1=1$, and $F_{n+1}=F_n+F_{n-1}$ for $n\\ge1$. Given an integer $n\\ge2$, determine the smallest size of a set $S$ of integers such that for every $k=2,3,\\dots,n$ there exist some $x,y\\in S$ such that $x-y=F_k$.",
+    "image": null,
+    "choices": null,
+    "type": "self",
+    "answer": "$\\lceil n/2\\rceil+1$ (the differences $F_1,F_3,\\dots,F_{2d-1}$ form a forest because $F_1+F_3+\\dots+F_{2m-1}=F_{2m}<F_{2m+1}$; the set $\\{F_0,F_2,F_4,\\dots,F_{2d}\\}$ works).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "A forest of odd-index differences; an explicit set",
+        "body": "Let $d=\\lceil n/2\\rceil$, so $n\\le2d\\le n+1$. We show the answer is $d+1$.\n\n**Lower bound.** Let $S$ satisfy the condition. Build a graph on the vertex set $S$: for each $k=1,\\dots,d$ choose $x,y\\in S$ with $x-y=F_{2k-1}$ and join them by an edge of *length* $F_{2k-1}$. Such pairs exist: for $k\\ge2$ because $3\\le2k-1\\le2d-1\\le n$, and for $k=1$ because $F_1=F_2$ and the difference $F_2$ occurs. The lengths $F_1<F_3<F_5<\\cdots$ are distinct, so we get $d$ distinct edges.\n\nThe graph has no cycle. Suppose $x_1,x_2,\\dots,x_\\ell$ is a cycle and its longest edge is $x_\\ell x_1$, of length $F_{2m+1}$. The other edges have distinct lengths from $\\{F_1,F_3,\\dots,F_{2m-1}\\}$, so\n$$F_{2m+1}=|x_\\ell-x_1|\\le\\sum_{i=1}^{\\ell-1}|x_{i+1}-x_i|\\le F_1+F_3+\\dots+F_{2m-1}.$$\nBut $F_1+F_3+\\dots+F_{2m-1}=F_2+(F_4-F_2)+\\dots+(F_{2m}-F_{2m-2})=F_{2m}<F_{2m+1}$ (using $F_{2i-1}=F_{2i}-F_{2i-2}$ and $F_1=F_2$), a contradiction.\n\nA graph without cycles (a forest) with $d$ edges has at least $d+1$ vertices, so $|S|\\ge d+1$.\n\n**Construction.** Let $S=\\{F_0,F_2,F_4,\\dots,F_{2d}\\}$; these $d+1$ numbers $0<1<3<8<\\cdots$ are distinct. For $1\\le k\\le d$:\n$$F_{2k}-F_0=F_{2k},\\qquad F_{2k}-F_{2k-2}=F_{2k-1}.$$\nSo every $F_1,F_2,\\dots,F_{2d}$ is a difference of two elements of $S$, in particular every $F_k$ with $2\\le k\\le n\\le2d$.\n\n**Answer: $\\lceil n/2\\rceil+1$.** ∎"
+      }
+    ],
+    "topics": [
+      "counting",
+      "sequences-series",
+      "graph-theory"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-isl-2020-c5",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Combinatorics",
+      "year": 2020,
+      "number": 5,
+      "url": "https://www.imo-official.org/assets/documents/problems/2020/IMO2020SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "prompt": "Let $p$ be an odd prime, and put $N=\\frac14(p^3-p)-1$. The numbers $1,2,\\dots,N$ are painted arbitrarily in two colors, red and blue. For any positive integer $n\\le N$, denote by $r(n)$ the fraction of integers in $\\{1,2,\\dots,n\\}$ that are red.\n\nProve that there exists a positive integer $a\\in\\{1,2,\\dots,p-1\\}$ such that $r(n)\\ne a/p$ for all $n=1,2,\\dots,N$.",
+    "image": null,
+    "choices": null,
+    "type": "self",
+    "answer": "Proof: otherwise $r(pm_a)=a/p$ for some $m_a<\\frac{p^2-1}4$; monotonicity of the red and blue counts gives $m_b\\ge\\frac abm_a$ and $m_b\\ge\\frac{p-a}{p-b}m_a$ whenever $m_a<m_b$, and a case analysis on the position of $m_{p-1}$ forces some $m\\ge\\frac{p^2-1}4$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Red and blue counts are non-decreasing",
+        "body": "Let $R(n)$ and $B(n)=n-R(n)$ be the numbers of red and blue integers in $\\{1,\\dots,n\\}$; both are non-decreasing in $n$. Swapping the colors replaces $r(n)$ by $1-r(n)$, i.e. $a/p$ by $(p-a)/p$, so the statement is symmetric under swapping colors.\n\nSuppose the statement is false: for every $a\\in\\{1,\\dots,p-1\\}$ there is $n_a\\le N$ with $r(n_a)=a/p$, i.e. $pR(n_a)=an_a$. As $p\\nmid a$, $p\\mid n_a$; write $n_a=pm_a$, so $R(n_a)=am_a$ and $B(n_a)=(p-a)m_a$. Different $a$ give different fractions, so the $m_a$ are distinct positive integers, and\n$$m_a\\le\\frac Np<\\frac{p^2-1}4\\qquad\\text{for all }a.\\tag{1}$$\nSwapping colors exchanges $m_a$ and $m_{p-a}$, so we may assume $m_1<m_{p-1}$.\n\n**Claim.** If $m_a<m_b$, then $m_b\\ge\\frac abm_a$ and $m_b\\ge\\frac{p-a}{p-b}m_a$.\n\n*Proof.* $n_a<n_b$, so $bm_b=R(n_b)\\ge R(n_a)=am_a$ and $(p-b)m_b=B(n_b)\\ge B(n_a)=(p-a)m_a$. $\\square$\n\nLet $q=\\frac{p-1}2$.\n\n**Case 1: $m_1,\\dots,m_q$ are all smaller than $m_{p-1}$.** Let $m_a$ be the largest of them. They are $q$ distinct positive integers, so $m_a\\ge q$, and $a\\le q$. By the Claim with $b=p-1$:\n$$m_{p-1}\\ge\\frac{p-a}{1}\\,m_a\\ge(p-q)q=\\frac{p+1}2\\cdot\\frac{p-1}2=\\frac{p^2-1}4,$$\ncontradicting (1).\n\n**Case 2: some $k\\le q$ has $m_k>m_{p-1}$.** Take the smallest such $k$; $k\\ge2$ because $m_1<m_{p-1}$. Then $m_1,\\dots,m_{k-1}$ are all smaller than $m_{p-1}$; let $m_a$ be the largest of them, so $a\\le k-1\\le m_a$ (they are $k-1$ distinct positive integers). Using the Claim twice (for $m_{p-1}<m_k$ and for $m_a<m_{p-1}$):\n$$m_k\\ge\\frac{p-1}k\\,m_{p-1}\\ge\\frac{p-1}k\\,(p-a)\\,m_a\\ge\\frac{p-1}k\\,(p-k+1)(k-1).$$\nSince $k\\ge2$, $\\frac{k-1}k\\ge\\frac12$, and since $k\\le q$, $p-k+1>p-q=\\frac{p+1}2$. Hence $m_k>\\frac{(p-1)(p+1)}4=\\frac{p^2-1}4$, contradicting (1).\n\nBoth cases are impossible, which proves the statement. ∎"
+      }
+    ],
+    "topics": [
+      "counting",
+      "inequalities"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-isl-2020-c6",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Combinatorics",
+      "year": 2020,
+      "number": 6,
+      "url": "https://www.imo-official.org/assets/documents/problems/2020/IMO2020SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "prompt": "$4n$ coins of weights $1,2,3,\\dots,4n$ are given. Each coin is colored in one of $n$ colors and there are four coins of each color. Show that all these coins can be partitioned into two sets with the same total weight, such that each set contains two coins of each color.",
+    "image": null,
+    "choices": null,
+    "type": "self",
+    "answer": "Proof: pair pebble $k$ with $4n+1-k$ and keep pairs together; in the 4-regular multigraph (colours = vertices, pairs = edges) colour the edges alternately along an Eulerian circuit of each component, so each colour gets two pebbles in each pile.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [],
+    "topics": [
+      "graph-theory",
+      "counting"
+    ],
+    "difficulty": 3,
+    "duplicateOf": "imo-2020-03",
+    "reviewNote": null
+  },
+  {
+    "id": "imo-isl-2020-c7",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Combinatorics",
+      "year": 2020,
+      "number": 7,
+      "url": "https://www.imo-official.org/assets/documents/problems/2020/IMO2020SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "prompt": "Consider any rectangular table having finitely many rows and columns, with a real number $a(r,c)$ in the cell in row $r$ and column $c$. A pair $(R,C)$, where $R$ is a set of rows and $C$ a set of columns, is called a *saddle pair* if the following two conditions are satisfied:\n\n(i) For each row $r'$, there is $r\\in R$ such that $a(r,c)\\ge a(r',c)$ for all $c\\in C$;\n\n(ii) For each column $c'$, there is $c\\in C$ such that $a(r,c)\\le a(r,c')$ for all $r\\in R$.\n\nA saddle pair $(R,C)$ is called a *minimal pair* if for each saddle pair $(R',C')$ with $R'\\subseteq R$ and $C'\\subseteq C$, we have $R'=R$ and $C'=C$.\n\nProve that any two minimal pairs contain the same number of rows.",
+    "image": null,
+    "choices": null,
+    "type": "self",
+    "answer": "Proof: for saddle pairs $(R_1,C_1)$, $(R_2,C_2)$ compose the 'domination' maps to get $\\rho:R_1\\to R_1$, $\\sigma:C_1\\to C_1$ with $a(\\rho(r),c)\\ge a(r,\\sigma(c))$ and $|\\rho(R_1)|\\le|R_2|$; the stable images of $\\rho,\\sigma$ form a saddle subpair of $(R_1,C_1)$ with at most $|R_2|$ rows.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Composing domination maps",
+        "body": "Let $(R_1,C_1)$ and $(R_2,C_2)$ be minimal pairs and suppose $|R_1|>|R_2|$. We construct a saddle pair $(R',C')$ with $R'\\subseteq R_1$, $C'\\subseteq C_1$ and $|R'|\\le|R_2|<|R_1|$, contradicting the minimality of $(R_1,C_1)$. By symmetry this proves $|R_1|=|R_2|$.\n\n**Step 1: four maps.** Using that $(R_1,C_1)$ and $(R_2,C_2)$ are saddle pairs, choose maps\n- $\\rho_1:R_2\\to R_1$ with $a(\\rho_1(r_2),c_1)\\ge a(r_2,c_1)$ for all $c_1\\in C_1$ (condition (i) for $(R_1,C_1)$ applied to the row $r_2$);\n- $\\rho_2:R_1\\to R_2$ with $a(\\rho_2(r_1),c_2)\\ge a(r_1,c_2)$ for all $c_2\\in C_2$;\n- $\\sigma_1:C_2\\to C_1$ with $a(r_1,\\sigma_1(c_2))\\le a(r_1,c_2)$ for all $r_1\\in R_1$ (condition (ii) for $(R_1,C_1)$);\n- $\\sigma_2:C_1\\to C_2$ with $a(r_2,\\sigma_2(c_1))\\le a(r_2,c_1)$ for all $r_2\\in R_2$.\n\nLet $\\rho=\\rho_1\\circ\\rho_2:R_1\\to R_1$ and $\\sigma=\\sigma_1\\circ\\sigma_2:C_1\\to C_1$. Then $|\\rho(R_1)|\\le|\\rho_1(R_2)|\\le|R_2|$, and for all $r\\in R_1$, $c\\in C_1$:\n$$a(\\rho(r),c)\\ge a(\\rho_2(r),c)\\ge a(\\rho_2(r),\\sigma_2(c))\\ge a(r,\\sigma_2(c))\\ge a(r,\\sigma(c)),$$\nusing in turn the defining properties of $\\rho_1$ (row $\\rho_2(r)\\in R_2$, column $c\\in C_1$), $\\sigma_2$ (row $\\rho_2(r)\\in R_2$), $\\rho_2$ (column $\\sigma_2(c)\\in C_2$) and $\\sigma_1$ (row $r\\in R_1$). By induction on $i$ this gives\n$$a(\\rho^i(r),c)\\ge a(r,\\sigma^i(c))\\qquad\\text{for all }i\\ge1,\\ r\\in R_1,\\ c\\in C_1.\\tag{1}$$\n(Indeed $a(\\rho^{i}(r),c)\\ge a(\\rho^{i-1}(r),\\sigma(c))\\ge a(r,\\sigma^{i-1}(\\sigma(c)))$.)\n\n**Step 2: the stable images.** The images $\\rho^i(R_1)$ form a decreasing chain of finite sets, and so do $\\sigma^i(C_1)$; hence there is $m$ with $\\rho^i(R_1)=R'$ and $\\sigma^i(C_1)=C'$ for all $i\\ge m$. Then $\\rho(R')=R'$, so $\\rho$ permutes the finite set $R'$, and likewise $\\sigma$ permutes $C'$. Choose $K\\ge m$ that is a multiple of the orders of both permutations; then $\\rho^K$ is the identity on $R'$, $\\sigma^K$ is the identity on $C'$, $\\rho^K(R_1)=R'$ and $\\sigma^K(C_1)=C'$. Also $|R'|\\le|\\rho(R_1)|\\le|R_2|$, and $R',C'$ are nonempty.\n\n**$(R',C')$ is a saddle pair.**\n(i) Take any row $r'$. Since $(R_1,C_1)$ is saddle, there is $r\\in R_1$ with $a(r,c)\\ge a(r',c)$ for all $c\\in C_1$. Put $r^*=\\rho^K(r)\\in R'$. For $c\\in C'$ we have $\\sigma^K(c)=c$, so by (1)\n$$a(r^*,c)=a(\\rho^K(r),c)\\ge a(r,\\sigma^K(c))=a(r,c)\\ge a(r',c).$$\n(ii) Take any column $c'$. There is $c\\in C_1$ with $a(r,c)\\le a(r,c')$ for all $r\\in R_1$. Put $c^*=\\sigma^K(c)\\in C'$. For $r\\in R'$ we have $\\rho^K(r)=r$, so by (1)\n$$a(r,c^*)=a(r,\\sigma^K(c))\\le a(\\rho^K(r),c)=a(r,c)\\le a(r,c').$$\n\nSo $(R',C')$ is a saddle pair contained in $(R_1,C_1)$ with $|R'|\\le|R_2|<|R_1|$, contradicting minimality. Hence any two minimal pairs have the same number of rows. ∎"
+      }
+    ],
+    "topics": [
+      "counting",
+      "logic"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-isl-2020-c8",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Combinatorics",
+      "year": 2020,
+      "number": 8,
+      "url": "https://www.imo-official.org/assets/documents/problems/2020/IMO2020SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "prompt": "Players $A$ and $B$ play a game on a blackboard that initially contains 2020 copies of the number 1. In every round, player $A$ erases two numbers $x$ and $y$ from the blackboard, and then player $B$ writes one of the numbers $x+y$ and $|x-y|$ on the blackboard. The game terminates as soon as, at the end of some round, one of the following holds:\n\n(1) one of the numbers on the blackboard is larger than the sum of all other numbers;\n\n(2) there are only zeros on the blackboard.\n\nPlayer $B$ must then give as many cookies to player $A$ as there are numbers on the blackboard. Player $A$ wants to get as many cookies as possible, whereas player $B$ wants to give as few as possible. Determine the number of cookies that $A$ receives if both players play optimally.",
+    "image": null,
+    "choices": null,
+    "type": "numeric",
+    "answer": "7",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Binary digit sum: $A$ pairs equal numbers, $B$ controls a 2-adic count",
+        "body": "Let $s_2(n)$ be the sum of the binary digits of $n$. Since $2020=11111100100_2$, $s_2(2020)=7$. Write $n=2020$, $s=7$. We show that $A$ can guarantee $s$ cookies and $B$ can guarantee to give at most $s$. (Every round reduces the number of numbers by one, so the game ends; with one number left, (1) or (2) holds.)\n\n**Strategy for $A$: always erase two equal nonzero numbers, while possible.** By induction, every number on the board is then $0$ or a power of $2$ (erasing $2^j,2^j$, $B$ writes $2^{j+1}$ or $0$). If $A$ cannot follow the strategy, the nonzero numbers are distinct powers of $2$; then either the largest exceeds the sum of the others or all numbers are $0$, so the game has already terminated. Hence $A$ can follow this strategy until the end.\n\nDefine the *range* of a number as the number of original $1$'s that were combined into it; ranges add up when two numbers are combined, and the ranges of all numbers on the board always sum to $n$. By induction, under $A$'s strategy each nonzero number $2^j$ has range $2^j$ and each $0$ has range a power of $2$ (it came from two numbers $2^j$ of range $2^j$ each). So at every moment the ranges are powers of $2$ summing to $n$. Since $s_2(u+v)\\le s_2(u)+s_2(v)$, a sum of $m$ powers of $2$ has binary digit sum at most $m$; so there are at least $s_2(n)=s$ numbers on the board, in particular at the end.\n\n**Strategy for $B$.** For numbers $x_1,\\dots,x_k$ on the board, call a choice of signs $\\varepsilon_1,\\dots,\\varepsilon_k\\in\\{\\pm1\\}$ *balanced* if $\\sum\\varepsilon_ix_i=0$. Call the situation *good* if $2^{s+1}$ does not divide the number of balanced sign choices. $B$ keeps the situation good.\n\n*The initial situation is good.* With $n$ ones, the number of balanced choices is $\\binom n{n/2}$. By Legendre's formula $\\nu_2(m!)=m-s_2(m)$,\n$$\\nu_2\\binom n{n/2}=\\big(n-s_2(n)\\big)-2\\Big(\\frac n2-s_2\\big(\\tfrac n2\\big)\\Big)=2s_2\\big(\\tfrac n2\\big)-s_2(n)=s_2(n)=s,$$\nso $2^{s+1}\\nmid\\binom n{n/2}$.\n\n*$B$ can keep it good.* Suppose the situation is good and $A$ erases $x_p,x_q$. Split the balanced choices into $N_+$ with $\\varepsilon_p=\\varepsilon_q$ and $N_-$ with $\\varepsilon_p=-\\varepsilon_q$. If $B$ writes $x_p+x_q$, the balanced choices of the new board correspond bijectively to the old ones with $\\varepsilon_p=\\varepsilon_q$ (the new sign equals the common sign), so there are $N_+$ of them. If $B$ writes $|x_p-x_q|$, they correspond bijectively to the old ones with $\\varepsilon_p=-\\varepsilon_q$, because $\\varepsilon_px_p+\\varepsilon_qx_q=\\pm\\varepsilon_p|x_p-x_q|$ with a fixed sign (if $x_p=x_q$ the new number is $0$ and its two signs correspond to the two values of $\\varepsilon_p$); so there are $N_-$. Since $2^{s+1}\\nmid N_++N_-$, it fails to divide one of $N_+,N_-$, and $B$ chooses that move.\n\n*A good final situation has at most $s$ numbers.* If (1) holds, no signed sum can vanish, so there are $0$ balanced choices, divisible by $2^{s+1}$ — not good. So the game ended with $k$ zeros only; then all $2^k$ sign choices are balanced, and goodness means $k\\le s$.\n\nHence with optimal play $A$ receives exactly $s_2(2020)=7$ cookies.\n\n**Answer: 7.** ∎"
+      }
+    ],
+    "topics": [
+      "games",
+      "number-theory"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-isl-2020-g1",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Geometry",
+      "year": 2020,
+      "number": 1,
+      "url": "https://www.imo-official.org/assets/documents/problems/2020/IMO2020SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "prompt": "Let $ABC$ be an isosceles triangle with $BC=CA$, and let $D$ be a point inside side $AB$ such that $AD<DB$. Let $P$ and $Q$ be two points inside sides $BC$ and $CA$, respectively, such that $\\angle DPB=\\angle DQA=90^\\circ$. Let the perpendicular bisector of $PQ$ meet line segment $CQ$ at $E$, and let the circumcircles of triangles $ABC$ and $CPQ$ meet again at point $F$, different from $C$.\n\nSuppose that $P$, $E$, $F$ are collinear. Prove that $\\angle ACB=90^\\circ$.",
+    "image": null,
+    "choices": null,
+    "type": "self",
+    "answer": "Proof: $C,P,Q,D,F$ and the midpoint $M$ of $AB$ lie on the circle with diameter $CD$; reflection in the perpendicular bisector $\\ell$ of $PQ$ swaps $C$ and $F$, so $\\ell$ passes through the circumcentre $O$; also $MP=MQ$ puts $M$ on $\\ell$, so $O=M$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "A symmetry of the circle with diameter $CD$",
+        "body": "Let $\\ell$ be the perpendicular bisector of $PQ$ and $\\omega$ the circle $CPQ$ (which contains $F$).\n\n**$\\omega$ has diameter $CD$.** Since $\\angle DPC=\\angle DQC=90^\\circ$, $P$ and $Q$ lie on the circle with diameter $CD$; this circle passes through $C,P,Q$, so it is $\\omega$.\n\n**$C$ and $F$ are symmetric in $\\ell$.** The line $\\ell$ passes through the centre of $\\omega$, so the reflection $s$ in $\\ell$ maps $\\omega$ to itself; it swaps $P$ and $Q$ and fixes $E\\in\\ell$. Hence $s$ maps the line $QE$ — which is line $QC$, as $E$ lies on segment $CQ$ — to the line $PE$, which is line $PF$ by the collinearity assumption. The line $QC$ meets $\\omega$ at $Q$ and $C$; its image meets $\\omega$ at $s(Q)=P$ and $s(C)$. But line $PF$ meets $\\omega$ at $P$ and $F$, so $s(C)=F$. Since $F\\ne C$, $\\ell$ is the perpendicular bisector of $CF$. As $CF$ is a common chord of $\\omega$ and the circumcircle of $ABC$, the circumcentre $O$ of $ABC$ lies on $\\ell$. Also $C\\notin\\ell$ (otherwise $s(C)=C\\ne F$), so $\\ell\\ne CM$ below.\n\n**The midpoint $M$ of $AB$ lies on $\\ell$.** Since $CA=CB$, $CM\\perp AB$, so $\\angle CMD=90^\\circ$ and $M\\in\\omega$ ($M\\ne D$ because $AD<DB$). The line $CM$ bisects $\\angle ACB=\\angle QCP$, so the inscribed angles $\\angle PCM$ and $\\angle MCQ$ are equal, hence the chords $MP=MQ$, i.e. $M\\in\\ell$.\n\n**Conclusion.** The circumcentre $O$ lies on the symmetry axis $CM$ of the isosceles triangle and on $\\ell$. Both $O$ and $M$ lie on the two distinct lines $\\ell$ and $CM$, so $O=M$. The circumcentre of $ABC$ is therefore the midpoint of $AB$, i.e. $AB$ is a diameter, and $\\angle ACB=90^\\circ$. ∎"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-isl-2020-g2",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Geometry",
+      "year": 2020,
+      "number": 2,
+      "url": "https://www.imo-official.org/assets/documents/problems/2020/IMO2020SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "prompt": "Let $ABCD$ be a convex quadrilateral. Suppose that $P$ is a point in the interior of $ABCD$ such that\n$$\\angle PAD:\\angle PBA:\\angle DPA=1:2:3=\\angle CBP:\\angle BAP:\\angle BPC.$$\nThe internal bisectors of angles $ADP$ and $PCB$ meet at a point $Q$ inside the triangle $ABP$. Prove that $AQ=BQ$.",
+    "image": null,
+    "choices": null,
+    "type": "self",
+    "answer": "Proof: the common point is the circumcentre $O$ of triangle $PAB$; the angle conditions give $\\angle BOP+\\angle BCP=180^\\circ$, so $BOPC$ is cyclic and $O$ is the midpoint of arc $BP$, hence on the bisector of $\\angle PCB$ (similarly for $D$).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 1,
+    "duplicateOf": "imo-2020-01",
+    "reviewNote": null
+  },
+  {
+    "id": "imo-isl-2020-g3",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Geometry",
+      "year": 2020,
+      "number": 3,
+      "url": "https://www.imo-official.org/assets/documents/problems/2020/IMO2020SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "prompt": "Let $ABCD$ be a convex quadrilateral with $\\angle ABC>90^\\circ$, $\\angle CDA>90^\\circ$, and $\\angle DAB=\\angle BCD$. Denote by $E$ and $F$ the reflections of $A$ in lines $BC$ and $CD$, respectively. Suppose that the segments $AE$ and $AF$ meet the line $BD$ at $K$ and $L$, respectively. Prove that the circumcircles of triangles $BEK$ and $DFL$ are tangent to each other.",
+    "image": null,
+    "choices": null,
+    "type": "self",
+    "answer": "Proof: both circles pass through the reflection $A'$ of $A$ in $BD$; reflecting them in $BD$ gives circles $ABK$ and $ADL$, and $\\angle AKB+\\angle ALD=180^\\circ-\\angle KAL=\\angle BCD=\\angle BAD$ shows they have a common tangent at $A$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Reflect everything in $BD$",
+        "body": "We write $\\measuredangle(m,n)$ for the directed angle between lines $m$ and $n$ (mod $180^\\circ$). Let $A'$ be the reflection of $A$ in $BD$.\n\n**Both circles pass through $A'$.** The reflection in $BC$ maps $A$ to $E$, fixes $B$, and maps the line $AE$ (perpendicular to $BC$) to itself; since reflections reverse directed angles, $\\measuredangle(EB,EK)=\\measuredangle(EB,EA)=-\\measuredangle(AB,AE)=-\\measuredangle(AB,AK)$. The reflection in $BD$ fixes $B$ and $K$ and maps $A$ to $A'$, so $\\measuredangle(A'B,A'K)=-\\measuredangle(AB,AK)$. Hence $\\measuredangle(EB,EK)=\\measuredangle(A'B,A'K)$, so $B,K,E,A'$ are concyclic. Similarly $D,L,F,A'$ are concyclic.\n\nSo the circle $BEK$ is the circle $BKA'$, whose reflection in $BD$ is the circle $BKA$; likewise the reflection of circle $DFL$ is the circle $DLA$. Two circles are tangent iff their reflections are, so it suffices to show that the circles $ABK$ and $ADL$ (which meet at $A$) are tangent at $A$.\n\n**Angles.** In this configuration $K$ and $L$ lie on line $BD$ beyond $B$ and beyond $D$ respectively (order $K,B,D,L$), so $\\angle AKB$ and $\\angle ALD$ are the angles of triangle $AKL$ at $K$ and $L$:\n$$\\angle AKB+\\angle ALD=180^\\circ-\\angle KAL.$$\nSince $AK\\perp BC$ and $AL\\perp CD$, the angle between $AK$ and $AL$ is supplementary to the angle between $BC$ and $CD$: $\\angle KAL=180^\\circ-\\angle BCD$. Therefore\n$$\\angle AKB+\\angle ALD=\\angle BCD=\\angle BAD.$$\n\n**Common tangent.** Hence there is a ray $AP$ inside $\\angle BAD$ with $\\angle BAP=\\angle AKB$ and $\\angle PAD=\\angle ALD$. The points $P$ (inside angle $BAD$) and $K$ (on line $BD$ beyond $B$) lie on opposite sides of line $AB$, so by the converse of the tangent–chord theorem the line $AP$ is tangent to circle $ABK$ at $A$. In the same way $AP$ is tangent to circle $ADL$ at $A$. Two circles through $A$ with the same tangent line at $A$ are tangent to each other. Reflecting back in $BD$, the circles $BEK$ and $DFL$ are tangent (at $A'$). ∎"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-isl-2020-g4",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Geometry",
+      "year": 2020,
+      "number": 4,
+      "url": "https://www.imo-official.org/assets/documents/problems/2020/IMO2020SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "prompt": "In the plane, there are $n\\ge6$ pairwise disjoint disks $D_1,D_2,\\dots,D_n$ with radii $R_1\\ge R_2\\ge\\dots\\ge R_n$. For every $i=1,2,\\dots,n$, a point $P_i$ is chosen in disk $D_i$. Let $O$ be an arbitrary point in the plane. Prove that\n$$OP_1+OP_2+\\dots+OP_n\\ge R_6+R_7+\\dots+R_n.$$\n(A disk is assumed to contain its boundary.)",
+    "image": null,
+    "choices": null,
+    "type": "self",
+    "answer": "Proof: among any six disjoint disks, two centres $O_i,O_j$ are seen from $O$ at an angle $\\le60^\\circ$, so $OO_i\\ge O_iO_j\\ge R_i+R_j$ and $OP_i\\ge R_j$; apply this to the six largest disks, remove $D_i$ and induct.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Six rays and an angle of at most $60^\\circ$",
+        "body": "**Lemma.** Let $D_1,\\dots,D_6$ be disjoint disks with radii $R_1,\\dots,R_6$ and centres $O_1,\\dots,O_6$, let $P_i\\in D_i$, and let $O$ be any point. Then there are indices $i\\ne j$ with $OP_i\\ge R_j$.\n\n*Proof.* Draw the six rays $OO_1,\\dots,OO_6$ (if $O=O_i$, choose the direction of that ray arbitrarily). They divide the full angle of $360^\\circ$ into six angles, so one of them, say $\\angle O_iOO_j$, is at most $60^\\circ$. In the (possibly degenerate) triangle $OO_iO_j$ the angle at $O$ is then not larger than both other angles, so the side $O_iO_j$ is not longer than both other sides; say $OO_i\\ge O_iO_j$. As the disks are disjoint, $O_iO_j\\ge R_i+R_j$. Therefore\n$$OP_i\\ge OO_i-O_iP_i\\ge(R_i+R_j)-R_i=R_j.\\qquad\\square$$\n\n**Induction on $n\\ge5$.** For $n=5$ the right-hand side is an empty sum, $0$, so the inequality is trivial. Let $n\\ge6$ and assume the statement for $n-1$ disks. Apply the Lemma to the six largest disks $D_1,\\dots,D_6$: there are $i,j\\le6$ with $OP_i\\ge R_j\\ge R_6$. Remove $D_i$. The remaining $n-1$ disks have radii whose sixth largest and smaller ones are exactly $R_7\\ge\\dots\\ge R_n$ (we removed one of the six largest). By the induction hypothesis\n$$\\sum_{k\\ne i}OP_k\\ge R_7+\\dots+R_n.$$\nAdding $OP_i\\ge R_6$ gives the claim. ∎"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "inequalities"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-isl-2020-g5",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Geometry",
+      "year": 2020,
+      "number": 5,
+      "url": "https://www.imo-official.org/assets/documents/problems/2020/IMO2020SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "prompt": "Let $ABCD$ be a cyclic quadrilateral with no two sides parallel. Let $K$, $L$, $M$, and $N$ be points lying on sides $AB$, $BC$, $CD$, and $DA$, respectively, such that $KLMN$ is a rhombus with $KL\\parallel AC$ and $LM\\parallel BD$. Let $\\omega_1$, $\\omega_2$, $\\omega_3$, and $\\omega_4$ be the incircles of triangles $ANK$, $BKL$, $CLM$, and $DMN$, respectively. Prove that the internal common tangents to $\\omega_1$ and $\\omega_3$ and the internal common tangents to $\\omega_2$ and $\\omega_4$ are concurrent.",
+    "image": null,
+    "choices": null,
+    "type": "self",
+    "answer": "Proof: with $E=AB\\cap CD$, $F=BC\\cap DA$, the rhombus vertices lie on the bisectors of the angles at $E$ and $F$; this makes $E$ the external homothety centre of $\\omega_1,\\omega_2$ and of $\\omega_3,\\omega_4$, and $F$ that of $\\omega_2,\\omega_3$ and of $\\omega_4,\\omega_1$; Monge's theorem then gives that the internal centres of $\\omega_1,\\omega_3$ and of $\\omega_2,\\omega_4$ coincide.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Homothety centres and Monge's theorem",
+        "body": "For two circles $\\omega_i,\\omega_j$ let $O^+_{ij}$ and $O^-_{ij}$ be the centres of the homotheties with positive and negative ratio taking $\\omega_i$ to $\\omega_j$ (external and internal similitude centres). For disjoint circles, the internal common tangents pass through $O^-_{ij}$, so we must show $O^-_{13}=O^-_{24}$. We use **Monge's theorem**: for three circles, the three external centres are collinear, and any one external centre is collinear with the two internal centres of the other two pairs.\n\n**Lemma.** Let $E\\ne F$ be points and $\\omega_1,\\dots,\\omega_4$ circles lying in the same open half-plane bounded by $EF$, with $E=O^+_{12}=O^+_{34}$ and $F=O^+_{23}=O^+_{41}$. Then $O^-_{13}=O^-_{24}$.\n\n*Proof.* Monge for $\\omega_1,\\omega_2,\\omega_4$: $O^+_{12}=E$, $O^-_{24}$, $O^-_{14}$ are collinear. Monge for $\\omega_1,\\omega_3,\\omega_4$: $O^+_{34}=E$, $O^-_{13}$, $O^-_{14}$ are collinear. So $O^-_{13},O^-_{24}$ lie on the line $EO^-_{14}$. Similarly (Monge for $\\omega_2,\\omega_3,\\omega_4$ with $O^+_{23}=F$, and for $\\omega_1,\\omega_3,\\omega_4$ with $O^+_{41}=F$) both lie on the line $FO^-_{34}$. The internal centre $O^-_{14}$ lies between the two centres, which are in the open half-plane, so $O^-_{14}\\notin EF$; hence the lines $EO^-_{14}$ and $FO^-_{34}$ are not both equal to $EF$, and since one passes through $E$ and the other through $F$, they are distinct lines. Both points equal their unique intersection. $\\square$\n\n**Setting up.** Let $E=AB\\cap CD$ and $F=BC\\cap DA$ (they exist as no sides are parallel). Without loss of generality $B$ lies on segments $AE$ and $CF$; then $C$ lies on segment $DE$ and $A$ on segment $DF$. Since $E,F$ are on line $EF$, the points $A$ and $B$ (segment $AE$), $B$ and $C$ (segment $CF$), and $C$ and $D$ (ray $EC$) lie on the same side of $EF$; so the quadrilateral and the four incircles lie in one open half-plane bounded by $EF$.\n\n**$N$ and $L$ lie on the bisector of $\\angle AED$.** As $\\triangle AKN\\sim\\triangle ABD$ ($KN\\parallel BD$) and $\\triangle DNM\\sim\\triangle DAC$ ($NM\\parallel AC$),\n$$\\frac{AN}{ND}=\\frac{AN}{AD}\\cdot\\frac{AD}{ND}=\\frac{KN}{BD}\\cdot\\frac{AC}{NM}=\\frac{AC}{BD},$$\nusing $KN=NM$ (rhombus). Since $ABCD$ is cyclic, $\\triangle EAC\\sim\\triangle EDB$, so $\\frac{AC}{BD}=\\frac{EA}{ED}$. Thus $\\frac{AN}{ND}=\\frac{EA}{ED}$ and, by the angle bisector theorem, $N$ lies on the bisector of $\\angle AED$. Similarly $\\frac{BL}{LC}=\\frac{KL}{AC}\\cdot\\frac{BD}{LM}=\\frac{BD}{AC}=\\frac{EB}{EC}$, so $L$ lies on the same bisector. In the same way $K$ and $M$ lie on the bisector of $\\angle AFB$; in particular $F\\in KM$.\n\n**$F=O^+_{23}$.** The diagonals of the rhombus are perpendicular bisectors of each other, so $K$ and $M$ are symmetric in the line $NL$, which passes through $E$. Hence the quadrilateral bounded by the lines $EK=AB$, $EM=CD$, $KL$, $LM$ is a kite $EKLM$, symmetric in $EL$, and it has an incircle $\\omega_0$. The circles $\\omega_0$ and $\\omega_2$ both lie in the same angle formed at $K$ by lines $AB$ and $KL$ (the angle $\\angle BKL=\\angle EKL$, since $B$ and $E$ lie on the same ray from $K$), and both are tangent to its sides, so $K=O^+_{02}$. Likewise $M=O^+_{03}$. By Monge for $\\omega_0,\\omega_2,\\omega_3$, the point $O^+_{23}$ lies on line $KM$. It also lies on $BC$, a common tangent with $\\omega_2$ and $\\omega_3$ on the same side. (If $\\omega_2,\\omega_3$ were congruent, $O^+_{23}$ would be the point at infinity of $BC$ and Monge would give $KM\\parallel BC$, which is false as $F\\in KM$.) Since $KM\\ne BC$ and both lines pass through $F$, $O^+_{23}=F$.\n\nThe same argument gives $E=O^+_{12}=O^+_{34}$ and $F=O^+_{41}$. By the Lemma, $O^-_{13}=O^-_{24}$: the internal common tangents of $\\omega_1,\\omega_3$ and of $\\omega_2,\\omega_4$ all pass through this point. ∎"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-isl-2020-g6",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Geometry",
+      "year": 2020,
+      "number": 6,
+      "url": "https://www.imo-official.org/assets/documents/problems/2020/IMO2020SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "prompt": "Let $I$ and $I_A$ be the incenter and the $A$-excenter of an acute-angled triangle $ABC$ with $AB<AC$. Let the incircle meet $BC$ at $D$. The line $AD$ meets $BI_A$ and $CI_A$ at $E$ and $F$, respectively. Prove that the circumcircles of triangles $AID$ and $I_AEF$ are tangent to each other.",
+    "image": null,
+    "choices": null,
+    "type": "self",
+    "answer": "Proof: the tangency point is the Miquel point $T$ of the lines $BC$, $BI_A$, $CI_A$, $AD$; it lies on the circle with diameter $II_A$ and on circle $BDE$, and a directed-angle chase shows $T$ lies on circle $AID$ and that the tangent to circle $I_AEF$ at $T$ is also tangent to circle $AID$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "The Miquel point is the tangency point",
+        "body": "We use directed angles $\\measuredangle(m,n)$ between lines, mod $180^\\circ$.\n\nSince internal and external bisectors are perpendicular, $\\angle IBI_A=\\angle ICI_A=90^\\circ$, so $B$ and $C$ lie on the circle $\\Gamma$ with diameter $II_A$. Let $\\omega$ be the circle $I_AEF$ and $\\Omega$ the circle $AID$.\n\n**The point $T$.** Consider the four lines $BC$, $BI_A$, $CI_A$ and $AD$ (the line $DEF$). The four triangles they form have circumcircles $\\Gamma=(BCI_A)$, $\\omega=(I_AEF)$, $(BDE)$ and $(CDF)$, which by Miquel's theorem pass through a common point $T$. So $T$ is the second common point of $\\Gamma$ and $\\omega$, and $B,D,E,T$ are concyclic.\n\n**$T$ lies on $\\Omega$.** Using the circles $BDET$ and $\\Gamma$ (through $B,I,I_A,T$) and the facts that $E\\in BI_A$ and $A,I,I_A$ are collinear:\n$$\\measuredangle(DT,DA)=\\measuredangle(DT,DE)=\\measuredangle(BT,BE)=\\measuredangle(BT,BI_A)=\\measuredangle(IT,II_A)=\\measuredangle(IT,IA).$$\nHence $A,I,D,T$ are concyclic, i.e. $T\\in\\Omega$.\n\n**Tangency at $T$.** Let $\\ell$ be the tangent to $\\omega$ at $T$. By the tangent–chord theorem in $\\omega$ and then the circle $BDET$ (with $E,B,I_A$ collinear),\n$$\\measuredangle(TI_A,\\ell)=\\measuredangle(EI_A,ET)=\\measuredangle(EB,ET)=\\measuredangle(DB,DT).$$\nSince $II_A$ is a diameter of $\\Gamma$, $TI\\perp TI_A$; and $DI\\perp BC$. Therefore\n$$\\measuredangle(TI,\\ell)=\\measuredangle(TI,TI_A)+\\measuredangle(TI_A,\\ell)=90^\\circ+\\measuredangle(DB,DT)=\\measuredangle(DI,DB)+\\measuredangle(DB,DT)=\\measuredangle(DI,DT).$$\nBy the converse of the tangent–chord theorem in the circle $TID=\\Omega$, the line $\\ell$ is tangent to $\\Omega$ at $T$. So $\\omega$ and $\\Omega$ share the point $T$ and the tangent line there: they are tangent. ∎"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-isl-2020-g7",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Geometry",
+      "year": 2020,
+      "number": 7,
+      "url": "https://www.imo-official.org/assets/documents/problems/2020/IMO2020SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "prompt": "Let $P$ be a point on the circumcircle of an acute-angled triangle $ABC$. Let $D$, $E$, and $F$ be the reflections of $P$ in the midlines of triangle $ABC$ parallel to $BC$, $CA$, and $AB$, respectively. Denote by $\\omega_A$, $\\omega_B$, and $\\omega_C$ the circumcircles of triangles $ADP$, $BEP$, and $CFP$, respectively. Denote by $\\omega$ the circumcircle of the triangle formed by the perpendicular bisectors of segments $AD$, $BE$ and $CF$.\n\nShow that $\\omega_A$, $\\omega_B$, $\\omega_C$, and $\\omega$ have a common point.",
+    "image": null,
+    "choices": null,
+    "type": "self",
+    "answer": "Proof: $\\omega_A,\\omega_B,\\omega_C$ pass through the feet of the altitudes, so the orthocentre has equal power and they share a second point $Q$ on line $PH$; the reflections of $Q$ in the three perpendicular bisectors all lie on one line through $P$, so by Simson's theorem $Q\\in\\omega$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Radical axis through the orthocentre, then Simson's theorem",
+        "body": "Let $AA_1,BB_1,CC_1$ be the altitudes, $H$ the orthocentre, and $m_A,m_B,m_C$ the midlines parallel to $BC,CA,AB$. We use directed angles $\\measuredangle(m,n)$ mod $180^\\circ$.\n\n**Step 1: $\\omega_A,\\omega_B,\\omega_C$ have a common point $Q\\ne P$.** The midline $m_A$ is the perpendicular bisector of $PD$, so the centre of $\\omega_A$ lies on $m_A$ and $\\omega_A$ is symmetric in $m_A$. The reflection of $A$ in $m_A$ is the foot $A_1$ (the midline is halfway between $A$ and $BC$), so $A_1\\in\\omega_A$. Similarly $B_1\\in\\omega_B$, $C_1\\in\\omega_C$. Since $ABA_1B_1$ and $BCB_1C_1$ are cyclic, $HA\\cdot HA_1=HB\\cdot HB_1=HC\\cdot HC_1$; as $H$ lies inside the acute triangle, on the chords $AA_1$, $BB_1$, $CC_1$, this says $H$ has the same (negative) power with respect to the three circles. $P$ lies on all three circles. So the line $PH$ is the common radical axis of the three circles, and its second intersection $Q$ with $\\omega_A$ lies on all three. As $H$ is inside $\\omega_A$, $Q\\ne P$.\n\n**Step 2: $Q\\in\\omega$.** Let $p_A,p_B,p_C$ be the perpendicular bisectors of $AD,BE,CF$, and $Q_A,Q_B,Q_C$ the reflections of $Q$ in them. By Simson's theorem, $Q$ lies on the circumcircle $\\omega$ of the triangle formed by $p_A,p_B,p_C$ iff the feet of the perpendiculars from $Q$ to these lines are collinear, i.e. (homothety at $Q$ with ratio 2) iff $Q_A,Q_B,Q_C$ are collinear. We show that $P,Q_A,Q_B,Q_C$ are collinear.\n\nThe line $p_A$ passes through the centre of $\\omega_A$ (as $A,D\\in\\omega_A$), so the reflection in $p_A$ maps $\\omega_A$ to itself, swaps $A$ and $D$, and sends $Q$ to $Q_A\\in\\omega_A$; reversing angles, $\\measuredangle(DA,DQ_A)=\\measuredangle(AQ,AD)$. Using the circle $\\omega_A$ twice and $PD\\perp BC$:\n$$\\measuredangle(PA,PQ_A)=\\measuredangle(DA,DQ_A)=\\measuredangle(AQ,AD)=\\measuredangle(PQ,PD)=\\measuredangle(PQ,BC)+90^\\circ.$$\nSimilarly $\\measuredangle(PB,PQ_B)=\\measuredangle(PQ,CA)+90^\\circ$. Since $P$ is on the circumcircle, $\\measuredangle(PA,PB)=\\measuredangle(CA,CB)$. Hence\n$$\\measuredangle(PQ_A,PQ_B)=\\measuredangle(PQ_A,PA)+\\measuredangle(PA,PB)+\\measuredangle(PB,PQ_B)$$\n$$=\\big(\\measuredangle(BC,PQ)-90^\\circ\\big)+\\measuredangle(CA,CB)+\\big(\\measuredangle(PQ,CA)+90^\\circ\\big)=\\measuredangle(BC,CA)+\\measuredangle(CA,CB)=0.$$\nSo $P,Q_A,Q_B$ are collinear, and in the same way $Q_C$ lies on this line. Therefore $Q\\in\\omega$, and $Q$ is a common point of all four circles. ∎"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-isl-2020-g8",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Geometry",
+      "year": 2020,
+      "number": 8,
+      "url": "https://www.imo-official.org/assets/documents/problems/2020/IMO2020SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "prompt": "Let $\\Gamma$ and $I$ be the circumcircle and the incenter of an acute-angled triangle $ABC$. Two circles $\\omega_B$ and $\\omega_C$ passing through $B$ and $C$, respectively, are tangent at $I$. Let $\\omega_B$ meet the shorter arc $AB$ of $\\Gamma$ and segment $AB$ again at $P$ and $M$, respectively. Similarly, let $\\omega_C$ meet the shorter arc $AC$ of $\\Gamma$ and segment $AC$ again at $Q$ and $N$, respectively. The rays $PM$ and $QN$ meet at $X$, and the tangents to $\\omega_B$ and $\\omega_C$ at $B$ and $C$, respectively, meet at $Y$.\n\nProve that the points $A$, $X$, and $Y$ are collinear.",
+    "image": null,
+    "choices": null,
+    "type": "self",
+    "answer": "Proof: with $E,F$ the second intersections of $BI,CI$ with $\\Gamma$ and $\\ell$ the common tangent at $I$: $Y\\in\\Gamma$, and $X=\\ell\\cap EF$; since $EF$ is the perpendicular bisector of $AI$, an angle chase gives $\\measuredangle(AX,AE)=\\measuredangle(AY,AE)$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "$Y$ lies on $\\Gamma$ and $X$ lies on $EF$",
+        "body": "Let $AI,BI,CI$ meet $\\Gamma$ again at $D,E,F$, and let $\\ell$ be the common tangent of $\\omega_B,\\omega_C$ at $I$. We use directed angles $\\measuredangle(m,n)$ mod $180^\\circ$. Recall: the tangents to a circle at the two ends of a chord make opposite directed angles with the chord; e.g. in $\\omega_B$, $\\measuredangle(BY,BI)=\\measuredangle(IB,\\ell)$, and in $\\omega_C$, $\\measuredangle(CI,CY)=\\measuredangle(\\ell,IC)$.\n\n**Step 1: $Y\\in\\Gamma$.** Adding the two relations, $\\measuredangle(BY,BI)+\\measuredangle(CI,CY)=\\measuredangle(IB,IC)$. Since $BI,CI$ bisect the angles $B,C$, $\\measuredangle(BI,BA)=\\measuredangle(BC,BI)$ and $\\measuredangle(CA,CI)=\\measuredangle(CI,CB)$. So\n$$\\measuredangle(BY,BA)+\\measuredangle(CA,CY)=\\measuredangle(BY,BI)+\\measuredangle(BI,BA)+\\measuredangle(CA,CI)+\\measuredangle(CI,CY)$$\n$$=\\measuredangle(BC,BI)+\\measuredangle(IB,IC)+\\measuredangle(CI,CB)=0,$$\ni.e. $\\measuredangle(BY,BA)=\\measuredangle(CY,CA)$, and $Y\\in\\Gamma$.\n\n**Step 2: $X=\\ell\\cap EF$.** Let $X^*=\\ell\\cap EF$. By symmetry it suffices to prove $X^*\\in QN$. By the tangent–chord theorem in $\\omega_C$, and since $C,I,F$ are collinear and $C,F,Q,E\\in\\Gamma$,\n$$\\measuredangle(IX^*,IQ)=\\measuredangle(\\ell,IQ)=\\measuredangle(CI,CQ)=\\measuredangle(CF,CQ)=\\measuredangle(EF,EQ)=\\measuredangle(EX^*,EQ),$$\nso $X^*,I,Q,E$ are concyclic. Then, using $E\\in BI$, the circle $\\Gamma$, the bisector $CF$, and the circle $\\omega_C\\ni C,N,I,Q$,\n$$\\measuredangle(QX^*,QI)=\\measuredangle(EX^*,EI)=\\measuredangle(EF,EB)=\\measuredangle(CF,CB)=\\measuredangle(CA,CF)=\\measuredangle(CN,CI)=\\measuredangle(QN,QI).$$\nHence $X^*\\in QN$. Similarly $X^*\\in PM$, so $X^*=X$.\n\n**Step 3: collinearity.** By the incenter lemma $EA=EI$ and $FA=FI$, so $EF$ is the perpendicular bisector of $AI$, and $A$ is the reflection of $I$ in $EF$. Since $X,E\\in EF$, reflecting gives $\\measuredangle(AX,AE)=\\measuredangle(IE,IX)$. Hence, with $IX=\\ell$, $IE=BI$, Step 1's tangent relation and $A,B,Y,E\\in\\Gamma$:\n$$\\measuredangle(AX,AE)=\\measuredangle(IE,IX)=\\measuredangle(BI,\\ell)=\\measuredangle(BY,BI)=\\measuredangle(BY,BE)=\\measuredangle(AY,AE).$$\nTherefore the lines $AX$ and $AY$ coincide: $A$, $X$, $Y$ are collinear. ∎"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-isl-2020-g9",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Geometry",
+      "year": 2020,
+      "number": 9,
+      "url": "https://www.imo-official.org/assets/documents/problems/2020/IMO2020SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "prompt": "Prove that there exists a positive constant $c$ such that the following statement is true:\n\nAssume that $n$ is an integer with $n\\ge2$, and let $S$ be a set of $n$ points in the plane such that the distance between any two distinct points in $S$ is at least $1$. Then there is a line $\\ell$ separating $S$ such that the distance from any point of $S$ to $\\ell$ is at least $cn^{-1/3}$.\n\n(A line $\\ell$ separates a point set $S$ if some segment joining two points in $S$ crosses $\\ell$.)",
+    "image": null,
+    "choices": null,
+    "type": "self",
+    "answer": "Proof: it suffices to find a direction in which two consecutive projections of $S$ are $\\ge 2cn^{-1/3}$ apart; if all gaps were $<\\delta$, project onto the diameter $AB$ ($AB<n\\delta$) and count the points within $\\frac12$ of $A$: there are $>\\frac1{2\\delta}$ of them but they fit in a strip of width $\\frac12$ and height $<2\\sqrt{n\\delta}$, forcing $\\delta\\gtrsim n^{-1/3}$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [],
+    "topics": [
+      "geometry",
+      "inequalities"
+    ],
+    "difficulty": 3,
+    "duplicateOf": "imo-2020-06",
+    "reviewNote": null
+  },
+  {
+    "id": "imo-isl-2020-n1",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Number Theory",
+      "year": 2020,
+      "number": 1,
+      "url": "https://www.imo-official.org/assets/documents/problems/2020/IMO2020SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "prompt": "Given a positive integer $k$, show that there exists a prime $p$ such that one can choose distinct integers $a_1,a_2,\\dots,a_{k+3}\\in\\{1,2,\\dots,p-1\\}$ such that $p$ divides $a_ia_{i+1}a_{i+2}a_{i+3}-i$ for all $i=1,2,\\dots,k$.",
+    "image": null,
+    "choices": null,
+    "type": "self",
+    "answer": "Proof: first solve $r_ir_{i+1}r_{i+2}r_{i+3}=i$ in distinct positive rationals ($r_1,r_2,r_3$ large primes, $r_4=\\frac1{r_1r_2r_3}$, $r_{i+4}=\\frac{i+1}ir_i$), then reduce modulo a large prime $p$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Solve over the rationals, then reduce mod $p$",
+        "body": "**Rational solution.** Let $x,y,z$ be distinct primes greater than $k$, and define $r_1=x$, $r_2=y$, $r_3=z$, $r_4=\\frac1{xyz}$ and $r_{i+4}=\\frac{i+1}{i}\\,r_i$ for $1\\le i\\le k-1$. Then $r_1r_2r_3r_4=1$, and if $r_ir_{i+1}r_{i+2}r_{i+3}=i$ then\n$$r_{i+1}r_{i+2}r_{i+3}r_{i+4}=\\frac{r_{i+4}}{r_i}\\cdot i=i+1 .$$\nSo $r_ir_{i+1}r_{i+2}r_{i+3}=i$ for $1\\le i\\le k$.\n\nThe $r_i$ are distinct positive rationals. Every factor $\\frac{i+1}i$ involves only primes $\\le k$, which differ from $x,y,z$. Hence the exponents of $(x,y,z)$ in the prime factorisation of $r_i$ are $(1,0,0)$, $(0,1,0)$, $(0,0,1)$ or $(-1,-1,-1)$ according as $i\\equiv1,2,3$ or $0\\pmod4$. So terms in different residue classes mod 4 differ, and within one class $r_i<r_{i+4}$.\n\n**Reduction.** Write $r_i=\\frac{u_i}{v_i}$ in lowest terms ($1\\le i\\le k+3$). Choose a prime $p$ larger than $k$, than all $u_i,v_i$, and than all $|u_iv_j-u_jv_i|$ for $i<j$ (these are nonzero since $r_i\\ne r_j$). Let $a_i\\in\\{1,\\dots,p-1\\}$ be the residue with $a_iv_i\\equiv u_i\\pmod p$; it is nonzero because $p\\nmid u_i$.\n\n- *Products.* $u_iu_{i+1}u_{i+2}u_{i+3}=i\\,v_iv_{i+1}v_{i+2}v_{i+3}$, so $a_ia_{i+1}a_{i+2}a_{i+3}\\,v_iv_{i+1}v_{i+2}v_{i+3}\\equiv i\\,v_iv_{i+1}v_{i+2}v_{i+3}\\pmod p$, and cancelling the invertible $v$'s gives $p\\mid a_ia_{i+1}a_{i+2}a_{i+3}-i$.\n- *Distinctness.* If $a_i=a_j$, then $u_iv_j\\equiv a_iv_iv_j\\equiv u_jv_i\\pmod p$, i.e. $p\\mid u_iv_j-u_jv_i$, impossible by the choice of $p$. ∎"
+      }
+    ],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-isl-2020-n2",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Number Theory",
+      "year": 2020,
+      "number": 2,
+      "url": "https://www.imo-official.org/assets/documents/problems/2020/IMO2020SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "prompt": "For each prime $p$, there is a kingdom of $p$-Landia consisting of $p$ islands numbered $1,2,\\dots,p$. Two distinct islands numbered $n$ and $m$ are connected by a bridge if and only if $p$ divides $(n^2-m+1)(m^2-n+1)$. The bridges may pass over each other, but cannot cross. Prove that for infinitely many $p$ there are two islands in $p$-Landia not connected by a chain of bridges.",
+    "image": null,
+    "choices": null,
+    "type": "self",
+    "answer": "Proof: orient each bridge from $m$ to $n\\equiv m^2+1$; each island has at most one outgoing arrow, and if $p>3$ divides some $x^2-x+1$ then the islands $x$ and $p+1-x$ have none, so there are at most $p-2$ bridges; infinitely many such $p$ exist by a Euclid-type argument.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Count bridges by arrows",
+        "body": "Since $p$ is prime, islands $m\\ne n$ are joined iff $n\\equiv m^2+1$ or $m\\equiv n^2+1\\pmod p$. When $n\\equiv m^2+1$ and $n\\ne m$, draw an arrow from $m$ to $n$ on that bridge. Every bridge carries at least one arrow. From each island $m$ at most one arrow starts (the residue $m^2+1$ determines $n$), and none starts if $m^2+1\\equiv m\\pmod p$. Hence the number of bridges is at most the number of islands $m$ with $m^2-m+1\\not\\equiv0\\pmod p$.\n\n**Two islands without arrows.** Let $p>3$ be a prime dividing $x^2-x+1$ for some integer $x$; we may take $1\\le x\\le p$. Since $(1-x)^2-(1-x)+1=x^2-x+1$, the island $p+1-x\\in\\{1,\\dots,p\\}$ also satisfies the congruence. These two islands are different: if $x=\\frac{p+1}2$ then $4(x^2-x+1)=(2x-1)^2+3=p^2+3$, not divisible by $p>3$. So no arrow starts at either of them, and there are at most $p-2$ bridges. A graph on $p$ vertices with fewer than $p-1$ edges is disconnected, so two islands are not connected by any chain of bridges.\n\n**Infinitely many such primes.** The prime $3$ divides $2^2-2+1$. Given primes $3=p_1,p_2,\\dots,p_k$ each dividing a number of the form $x^2-x+1$, let $P=p_1\\cdots p_k$ and $M=P^2-P+1>1$. Then $M\\equiv1\\pmod{p_i}$ for all $i$, so any prime divisor $p$ of $M$ is new, and $p>3$ (it is not $3$, and $M$ is odd). By induction there are infinitely many primes $p>3$ of the required kind. ∎"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "graph-theory"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-isl-2020-n3",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Number Theory",
+      "year": 2020,
+      "number": 3,
+      "url": "https://www.imo-official.org/assets/documents/problems/2020/IMO2020SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "prompt": "Let $n$ be an integer with $n\\ge2$. Does there exist a sequence $(a_1,\\dots,a_n)$ of positive integers with not all terms being equal such that the arithmetic mean of every two terms is equal to the geometric mean of some (one or more) terms in this sequence?",
+    "image": null,
+    "choices": null,
+    "type": "self",
+    "answer": "No: for every $n\\ge2$ the terms must all be equal.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 2,
+    "duplicateOf": "imo-2020-05",
+    "reviewNote": null
+  },
+  {
+    "id": "imo-isl-2020-n4",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Number Theory",
+      "year": 2020,
+      "number": 4,
+      "url": "https://www.imo-official.org/assets/documents/problems/2020/IMO2020SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "prompt": "For any odd prime $p$ and any integer $n$, let $d_p(n)\\in\\{0,1,\\dots,p-1\\}$ denote the remainder when $n$ is divided by $p$. We say that $(a_0,a_1,a_2,\\dots)$ is a *$p$-sequence*, if $a_0$ is a positive integer coprime to $p$, and $a_{n+1}=a_n+d_p(a_n)$ for $n\\ge0$.\n\n(a) Do there exist infinitely many primes $p$ for which there exist $p$-sequences $(a_0,a_1,a_2,\\dots)$ and $(b_0,b_1,b_2,\\dots)$ such that $a_n>b_n$ for infinitely many $n$, and $b_n>a_n$ for infinitely many $n$?\n\n(b) Do there exist infinitely many primes $p$ for which there exist $p$-sequences $(a_0,a_1,a_2,\\dots)$ and $(b_0,b_1,b_2,\\dots)$ such that $a_0<b_0$, but $a_n>b_n$ for all $n\\ge1$?",
+    "image": null,
+    "choices": null,
+    "type": "self",
+    "answer": "Yes for both parts. With $T$ the order of $2$ mod $p$, every $p$-sequence satisfies $x_{n+T}=x_n+S_p(x_0)$; use prime divisors $p>3$ of $2^q+1$ for (a) (where $S_p(1)=S_p(-1)$) and prime divisors of $2^q-1$ for (b) (where $S_p(1)\\ne S_p(-1)$).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Periodicity of the increments modulo $p$",
+        "body": "Write $d=d_p$. Fix an odd prime $p$ and let $T$ be the multiplicative order of $2$ modulo $p$. For a $p$-sequence $(x_n)$ we have $x_{n+1}\\equiv2x_n\\pmod p$, so $x_n\\equiv2^nx_0$ and $d(x_{n+T})=d(x_n)$. Hence\n$$x_{n+T}=x_n+S_p(x_0),\\qquad S_p(x):=\\sum_{i=0}^{T-1}d(2^ix),$$\nand $x_{n+kT}=x_n+kS_p(x_0)$ for all $n,k\\ge0$. Clearly $S_p(2x)=S_p(x)$, and $S_p$ depends only on the residue of $x$; so $S_p(x_n)=S_p(x_0)$.\n\n**(a) Yes.** Let $q>3$ be prime. $3\\mid2^q+1$ but $9\\nmid2^q+1$ (since $2^q\\equiv-1\\pmod9$ would need $3\\mid q$), so $2^q+1$ has a prime divisor $p>3$. For distinct odd primes $q,r$, a common prime divisor $p'$ of $2^q+1$ and $2^r+1$ would have $\\operatorname{ord}_{p'}2$ dividing $2q$ and $2r$ but not $q$ or $r$, hence equal to $2$, so $p'=3$. Thus different $q$ give different primes $p>3$: infinitely many.\n\nFor such $p$: $2^q\\equiv-1$, so $T\\mid2q$, $T\\nmid q$, and $T\\ne2$ (as $p\\ne3$); thus $T=2q$, and multiplying by $2^q$ negates residues. Hence $S_p(-1)=\\sum_i d(-2^i)=\\sum_i d(2^{i+q})=S_p(1)=:S$.\n\nTake $a_0=p+1$ and $b_0=p-1$ (coprime to $p$), so $S_p(a_0)=S_p(1)=S=S_p(-1)=S_p(b_0)$. Then $a_0>b_0$, while $a_1=p+2<2p-2=b_1$ (as $p>4$). Therefore for all $k\\ge0$\n$$a_{2qk}=a_0+kS>b_0+kS=b_{2qk},\\qquad a_{2qk+1}=a_1+kS<b_1+kS=b_{2qk+1}.$$\n\n**(b) Yes.** Let $q$ be an odd prime and $p$ a prime divisor of $2^q-1$; then $T=q$. Since $\\gcd(2^q-1,2^r-1)=2^{\\gcd(q,r)}-1=1$ for distinct primes $q,r$, there are infinitely many such $p$. For $p\\nmid x$ we have $d(x)+d(-x)=p$, so $S_p(1)+S_p(-1)=Tp=qp$ is odd, and $S_p(1)\\ne S_p(-1)$.\n\n*Lemma.* If $p$-sequences $(x_n),(y_n)$ satisfy $x_0<y_0$ and $S_p(x_0)>S_p(y_0)$, the required pair exists. Indeed, for $n=Mq+r$ ($0\\le r<q$),\n$$x_n-y_n=(x_r-y_r)+M\\big(S_p(x_0)-S_p(y_0)\\big)\\ge(x_r-y_r)+M,$$\nso $x_n>y_n$ for all large $n$. Also $x_n\\ne y_n$ for every $n$, since otherwise $S_p(x_0)=S_p(x_n)=S_p(y_n)=S_p(y_0)$. So there is a largest $n_0$ with $x_{n_0}<y_{n_0}$, and $a_n=x_{n+n_0}$, $b_n=y_{n+n_0}$ are $p$-sequences with $a_0<b_0$ and $a_n>b_n$ for all $n\\ge1$.\n\nFinally, if $S_p(1)>S_p(-1)$ take $x_0=1$, $y_0=p-1$; if $S_p(1)<S_p(-1)$ take $x_0=p-1$, $y_0=p+1$. In both cases the Lemma applies.\n\n**Answer: (a) yes; (b) yes.** ∎"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "sequences-series"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-isl-2020-n5",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Number Theory",
+      "year": 2020,
+      "number": 5,
+      "url": "https://www.imo-official.org/assets/documents/problems/2020/IMO2020SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "prompt": "Determine all functions $f$ defined on the set of all positive integers and taking non-negative integer values, satisfying the three conditions:\n\n(i) $f(n)\\ne0$ for at least one $n$;\n\n(ii) $f(xy)=f(x)+f(y)$ for every positive integers $x$ and $y$;\n\n(iii) there are infinitely many positive integers $n$ such that $f(k)=f(n-k)$ for all $k<n$.",
+    "image": null,
+    "choices": null,
+    "type": "self",
+    "answer": "$f(n)=c\\cdot\\nu_p(n)$ for a prime $p$ and a positive integer $c$, where $\\nu_p(n)$ is the exponent of $p$ in $n$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Good numbers are $r\\cdot p^k$ with $r<p$",
+        "body": "Such functions work: (i) and (ii) are clear, and (iii) holds for $n=p^m$, because $\\nu_p(p^m-k)=\\nu_p(k)$ for $0<k<p^m$.\n\nNow let $f$ satisfy the conditions. By (ii), $f(1)=0$ and $f$ is determined by its values at primes; in particular $f(m)\\le f(mk)$. Call $n$ *good* if $f(k)=f(n-k)$ for all $0<k<n$; by (iii) there are infinitely many good numbers.\n\n**Divisors of good numbers are good.** Let $n=dm$ be good and $0<k<d$. Then\n$$f(k)=f(mk)-f(m)=f(n-mk)-f(m)=f\\big(m(d-k)\\big)-f(m)=f(d-k).$$\n\n**Structure of good numbers.** By (i) and (ii) some prime has $f(p)\\ne0$; let $p$ be the smallest one. Then $f(r)=0$ for all $r<p$ (all prime factors of $r$ are smaller than $p$). Every good $n>p$ is divisible by $p$: otherwise $n=pk+r$ with $k\\ge1$, $0<r<p$, and\n$$0<f(p)\\le f(pk)=f(n-pk)=f(r)=0,$$\na contradiction. Now write a good number as $n=p^kr$ with $p\\nmid r$; then $r$ is a good divisor not divisible by $p$, so $r<p$. As there are infinitely many good numbers and $r<p$, the exponents $k$ are unbounded, and since divisors of good numbers are good, every power of $p$ is good.\n\n**Other primes.** Let $q\\ne p$ be prime. By Fermat, $q\\mid p^{q-1}-1$. Since $p^{q-1}$ is good, $f(p^{q-1}-1)=f(1)=0$, hence $f(q)\\le f(p^{q-1}-1)=0$.\n\nTherefore $f(n)=f(p)\\,\\nu_p(n)$, with $c=f(p)$ a positive integer.\n\n**Answer: $f(n)=c\\,\\nu_p(n)$ ($p$ prime, $c\\ge1$).** ∎"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "functional-equations"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-isl-2020-n6",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Number Theory",
+      "year": 2020,
+      "number": 6,
+      "url": "https://www.imo-official.org/assets/documents/problems/2020/IMO2020SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "prompt": "For a positive integer $n$, let $d(n)$ be the number of positive divisors of $n$, and let $\\varphi(n)$ be the number of positive integers not exceeding $n$ which are coprime to $n$. Does there exist a constant $C$ such that\n$$\\frac{\\varphi(d(n))}{d(\\varphi(n))}\\le C$$\nfor all $n\\ge1$?",
+    "image": null,
+    "choices": null,
+    "type": "text",
+    "answer": "No",
+    "acceptedAnswers": [
+      "no",
+      "no such constant exists"
+    ],
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Primes in $(N,2N]$ and a huge prime exponent",
+        "body": "**Construction.** Fix $N>1$. Let $p_1,\\dots,p_k$ be the primes $\\le N$ and $p_{k+1},\\dots,p_{k+s}$ the primes in $(N,2N]$; assume $s\\ge1$. For every $j\\le k+s$, all prime factors of $p_j-1$ are at most $N$ (for $p_j$ odd, $p_j-1$ is even and $\\le2N-1$, so its prime factors are $\\le\\max(2,\\frac{p_j-1}2)\\le N$). Hence\n$$\\prod_{j=1}^{k+s}(p_j-1)=\\prod_{i=1}^kp_i^{c_i}$$\nfor some fixed exponents $c_i\\ge0$. Take a prime $q>2N$ and\n$$n=(p_1p_2\\cdots p_k)^{q-1}\\cdot p_{k+1}\\cdots p_{k+s}.$$\nThen $d(n)=q^k2^s$, so $\\varphi(d(n))=q^{k-1}(q-1)\\cdot2^{s-1}$. Also\n$$\\varphi(n)=\\prod_{i=1}^kp_i^{q-2}\\cdot\\prod_{j=1}^{k+s}(p_j-1)=\\prod_{i=1}^kp_i^{q-2+c_i},\\qquad d(\\varphi(n))=\\prod_{i=1}^k(q-1+c_i).$$\nThus\n$$\\frac{\\varphi(d(n))}{d(\\varphi(n))}=2^{s-1}\\cdot\\frac{q-1}q\\cdot\\prod_{i=1}^k\\frac q{q-1+c_i}\\ \\xrightarrow[q\\to\\infty]{}\\ 2^{s-1}.$$\nSo the ratio can exceed $2^{s-2}$ for suitable $n$. It remains to show that $s$, the number of primes in $(N,2N]$, can be arbitrarily large.\n\n**Many primes in some interval $(N,2N]$.** Let $\\pi(x)$ count primes $\\le x$. For $m\\ge1$, every prime power $p^\\alpha$ exactly dividing $\\binom{2m}m$ satisfies $p^\\alpha\\le2m$: by Legendre, $\\alpha=\\sum_{j\\ge1}\\big(\\lfloor\\frac{2m}{p^j}\\rfloor-2\\lfloor\\frac m{p^j}\\rfloor\\big)$, where each term is $0$ or $1$, and it is $0$ when $p^j>2m$. Only primes $\\le2m$ divide $\\binom{2m}m$, so\n$$2^m\\le\\binom{2m}m\\le(2m)^{\\pi(2m)},\\qquad\\text{hence}\\qquad\\pi(2m)\\ge\\frac{m\\log2}{\\log(2m)}.$$\nWith $2m=2^M$ this gives $\\pi(2^M)\\ge\\frac{2^{M-1}}M$. If every interval $(2^\\ell,2^{\\ell+1}]$ contained at most $s_0$ primes, we would have $\\pi(2^M)\\le1+s_0M$ for all $M$, contradicting $\\pi(2^M)\\ge2^{M-1}/M$ for large $M$. So with $N=2^\\ell$ for suitable $\\ell$, $s$ is as large as we like, and the ratio is unbounded.\n\n**Answer: No.** ∎"
+      }
+    ],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-isl-2020-n7",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Number Theory",
+      "year": 2020,
+      "number": 7,
+      "url": "https://www.imo-official.org/assets/documents/problems/2020/IMO2020SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "prompt": "Let $\\mathcal S$ be a set consisting of $n\\ge3$ positive integers, none of which is a sum of two other distinct members of $\\mathcal S$. Prove that the elements of $\\mathcal S$ may be ordered as $a_1,a_2,\\dots,a_n$ so that $a_i$ does not divide $a_{i-1}+a_{i+1}$ for all $i=2,3,\\dots,n-1$.",
+    "image": null,
+    "choices": null,
+    "type": "self",
+    "answer": "Proof: prove the stronger statement that $a_i$ divides neither $a_{i-1}+a_{i+1}$ nor $a_{i-1}-a_{i+1}$, by induction: insert the maximum into a good ordering of the rest; if all $n$ positions failed, some element would be blamed twice, which contradicts the ordering of the smaller set.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Insert the largest element; pigeonhole on the positions",
+        "body": "Call a set of positive integers *good* if none of its elements is the sum of two other distinct elements; subsets of good sets are good.\n\n**Observation.** If $a,b,c$ are distinct elements of a good set with $b>a,c$, then $b\\nmid a+c$: indeed $0<a+c<2b$, so $b\\mid a+c$ would force $a+c=b$.\n\n**Claim.** The elements of a good set $S$ with $n\\ge2$ elements can be ordered as $a_1,\\dots,a_n$ so that for $2\\le i\\le n-1$, $a_i\\nmid a_{i-1}+a_{i+1}$ **and** $a_i\\nmid a_{i-1}-a_{i+1}$. Call such an ordering *nice*. This implies the problem.\n\n*Proof by induction on $n$.* For $n=2$ there is nothing to check. Let $n\\ge3$, $a=\\max S$, $T=S\\setminus\\{a\\}$, and let $b_1,\\dots,b_{n-1}$ be a nice ordering of $T$. For $j=1,\\dots,n$ let\n$$N_j=(b_1,\\dots,b_{j-1},a,b_j,\\dots,b_{n-1})$$\n($a$ inserted before $b_j$; $N_n$ puts $a$ last). Suppose that no $N_j$ is nice.\n\nIn $N_j$, only $b_{j-1}$, $a$ and $b_j$ have new neighbours; all other elements have the same neighbours as in the nice ordering of $T$. The element $a$ cannot be at fault: if it has two neighbours $b_{j-1},b_j$, then $a\\nmid b_{j-1}+b_j$ by the Observation, and $a\\nmid b_{j-1}-b_j$ since $0<|b_{j-1}-b_j|<a$. So in $N_j$ the fault is at $b_{j-1}$ or at $b_j$; *assign* that element to the index $j$.\n\nThere are $n$ indices but only $n-1$ elements of $T$, so some $b_k$ is assigned to two indices. An element $b_k$ can only be assigned to $j=k+1$ (as $b_{j-1}$, with neighbours $b_{k-1}$ and $a$) or to $j=k$ (as $b_j$, with neighbours $a$ and $b_{k+1}$). So both happen, which requires $2\\le k\\le n-2$ and gives signs $\\varepsilon_1,\\varepsilon_2\\in\\{\\pm1\\}$ with\n$$b_k\\mid b_{k-1}+\\varepsilon_1a,\\qquad b_k\\mid a+\\varepsilon_2b_{k+1}.$$\nThen $b_{k-1}\\equiv-\\varepsilon_1a\\equiv\\varepsilon_1\\varepsilon_2b_{k+1}\\pmod{b_k}$, so $b_k\\mid b_{k-1}-\\varepsilon_1\\varepsilon_2b_{k+1}$: $b_k$ divides the sum or the difference of its neighbours in the ordering of $T$, contradicting niceness. Hence some $N_j$ is nice, completing the induction. ∎"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "counting"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

@@ -1,0 +1,568 @@
+[
+  {
+    "id": "aime-2004-i-01",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "2004 AIME I",
+      "year": 2004,
+      "number": 1,
+      "url": "https://artofproblemsolving.com/wiki/index.php/2004_AIME_I_Problems/Problem_1"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "The digits of a positive integer $n$ are four consecutive integers in decreasing order when read from left to right. What is the sum of the possible remainders when $n$ is divided by $37$?",
+    "image": null,
+    "choices": null,
+    "answer": "217",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Write n in terms of its last digit",
+        "body": "If the last digit is $k$ ($0\\le k\\le 6$), then\n$$n=1000(k+3)+100(k+2)+10(k+1)+k=1111k+3210.$$\nNow $1111=30\\cdot 37+1\\equiv 1$ and $3210=86\\cdot 37+28\\equiv 28 \\pmod{37}$, so $n\\equiv k+28\\pmod{37}$.\n\nFor $k=0,\\dots,6$ the remainders are $28,29,\\dots,34$ (all less than $37$), with sum $7\\cdot 31=217$.\n\n**Answer: 217**"
+      },
+      {
+        "title": "Step from one number to the next",
+        "body": "The possible numbers are $3210, 4321, \\dots, 9876$; consecutive ones differ by $1111 = 30\\cdot 37+1$, so each remainder is one more than the previous one.\n\n$3210 = 37\\cdot 86 + 28$, so the remainders are $28, 29, \\dots, 34$ (never reaching $37$). Their sum is $\\frac{7(28+34)}{2}=217$.\n\n**Answer: 217**"
+      }
+    ],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-2004-i-02",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "2004 AIME I",
+      "year": 2004,
+      "number": 2,
+      "url": "https://artofproblemsolving.com/wiki/index.php/2004_AIME_I_Problems/Problem_2"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Set $A$ consists of $m$ consecutive integers whose sum is $2m$, and set $B$ consists of $2m$ consecutive integers whose sum is $m$. The absolute value of the difference between the greatest element of $A$ and the greatest element of $B$ is $99$. Find $m$.",
+    "image": null,
+    "choices": null,
+    "answer": "201",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Use the averages",
+        "body": "The average of $A$ is $\\frac{2m}{m}=2$, and $A$ is symmetric about its average, so its greatest element is $2+\\frac{m-1}{2}$.\n\nThe average of $B$ is $\\frac{m}{2m}=\\frac12$, so its greatest element is $\\frac12+\\frac{2m-1}{2}=m$.\n\nThe difference is $\\left|2+\\frac{m-1}{2}-m\\right|=\\left|\\frac{3-m}{2}\\right|=99$, so $m-3=198$ and $m=201$.\n\n**Answer: 201**"
+      },
+      {
+        "title": "Write the sets explicitly",
+        "body": "Let $A=\\{a,a+1,\\dots,a+m-1\\}$: $ma+\\frac{m(m-1)}2=2m$ gives $a=2-\\frac{m-1}{2}$, so $\\max A=\\frac{m+3}{2}$.\n\nLet $B=\\{b,\\dots,b+2m-1\\}$: $2mb+m(2m-1)=m$ gives $b=1-m$, so $\\max B=m$.\n\n$\\left|m-\\frac{m+3}{2}\\right|=\\frac{m-3}{2}=99$ (for positive $m$ the other sign gives $m<0$), so $m=201$.\n\n**Answer: 201**"
+      }
+    ],
+    "topics": [
+      "algebra",
+      "sequences-series"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-2004-i-03",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "2004 AIME I",
+      "year": 2004,
+      "number": 3,
+      "url": "https://artofproblemsolving.com/wiki/index.php/2004_AIME_I_Problems/Problem_3"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "A convex polyhedron $P$ has $26$ vertices, $60$ edges, and $36$ faces, $24$ of which are triangular, and $12$ of which are quadrilaterals. A space diagonal is a line segment connecting two non-adjacent vertices that do not belong to the same face. How many space diagonals does $P$ have?",
+    "image": null,
+    "choices": null,
+    "answer": "241",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Subtract edges and face diagonals",
+        "body": "There are $\\binom{26}{2}=325$ segments joining two vertices. Of these, $60$ are edges. A triangle has no diagonals; each quadrilateral face has $2$ diagonals, giving $12\\cdot 2=24$ face diagonals (in a convex polyhedron these are all different and none is an edge).\n\nSpace diagonals: $325-60-24=241$.\n\n**Answer: 241**"
+      },
+      {
+        "title": "Count from each vertex",
+        "body": "Sum over vertices of (number of vertices not adjacent and not on a common face). Each edge is counted from both ends and each quadrilateral contributes, for each of its 4 vertices, one opposite vertex. Total \"bad\" ordered pairs: $2\\cdot 60+12\\cdot 4=168$, i.e. $84$ unordered pairs. Total pairs $325$, so $325-84=241$ space diagonals.\n\n**Answer: 241**"
+      }
+    ],
+    "topics": [
+      "counting",
+      "spatial"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-2004-i-04",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "2004 AIME I",
+      "year": 2004,
+      "number": 4,
+      "url": "https://artofproblemsolving.com/wiki/index.php/2004_AIME_I_Problems/Problem_4"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "A square has sides of length $2$. Set $S$ is the set of all line segments that have length $2$ and whose endpoints are on adjacent sides of the square. The midpoints of the line segments in set $S$ enclose a region whose area to the nearest hundredth is $k$. Find $100k$.",
+    "image": null,
+    "choices": null,
+    "answer": "86",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Midpoints lie on quarter circles",
+        "body": "Put a corner of the square at the origin with the two adjacent sides along the axes. A segment from $(a,0)$ to $(0,b)$ has length $2$ when $a^2+b^2=4$. Its midpoint $\\left(\\frac a2,\\frac b2\\right)$ is at distance $\\frac12\\sqrt{a^2+b^2}=1$ from the corner.\n\nSo the midpoints form four quarter circles of radius $1$ centred at the four corners. The enclosed region is the square minus these four quarter discs:\n$$k\\approx 4-\\pi\\approx 0.8584\\to 0.86,$$\nso $100k=86$.\n\n**Answer: 86**"
+      },
+      {
+        "title": "Right-triangle median",
+        "body": "Each segment is the hypotenuse of a right triangle whose right angle is a corner of the square. The median to the hypotenuse equals half the hypotenuse, so every midpoint is exactly $1$ from that corner. As the segment slides, the midpoint traces a quarter circle of radius $1$ about each corner. The region bounded by the four arcs has area $4-4\\cdot\\frac{\\pi}{4}=4-\\pi\\approx 0.86$, so $100k=86$.\n\n**Answer: 86**"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-2004-i-05",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "2004 AIME I",
+      "year": 2004,
+      "number": 5,
+      "url": "https://artofproblemsolving.com/wiki/index.php/2004_AIME_I_Problems/Problem_5"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Alpha and Beta both took part in a two-day problem-solving competition. At the end of the second day, each had attempted questions worth a total of $500$ points. Alpha scored $160$ points out of $300$ points attempted on the first day, and scored $140$ points out of $200$ points attempted on the second day. Beta, who did not attempt $300$ points on the first day, had a positive integer score on each of the two days, and Beta's daily success rate (points scored divided by points attempted) on each day was less than Alpha's on that day. Alpha's two-day success ratio was $\\frac{300}{500} = \\frac{3}{5}$. The largest possible two-day success ratio that Beta could achieve is $\\frac mn$, where $m$ and $n$ are relatively prime positive integers. What is $m+n$?",
+    "image": null,
+    "choices": null,
+    "answer": "849",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Bound the total",
+        "body": "Let Beta attempt $a$ points on day 1 (so $500-a$ on day 2) and score $x$ and $y$. Then\n$$x<\\tfrac{8}{15}a,\\qquad y<\\tfrac{7}{10}(500-a)=350-\\tfrac{7}{10}a.$$\nAdding, $x+y<350-\\frac{a}{6}$, so a small $a$ is best. Since $x\\ge 1$ we need $\\frac{8}{15}a>1$, i.e. $a\\ge 2$.\n\nWith $a=2$: $x<\\frac{16}{15}$ gives $x=1$, and $y<\\frac{7}{10}\\cdot 498=348.6$ gives $y=348$. Total $349$.\n\nFor $a\\ge 3$ the bound $x+y<350-\\frac a6$ gives at most $349$ anyway. So the best ratio is $\\frac{349}{500}$ (already in lowest terms), and $m+n=849$.\n\n**Answer: 849**"
+      },
+      {
+        "title": "Think about where Beta should spend attempts",
+        "body": "Day 2 allows a higher success rate ($\\frac{7}{10}$) than day 1 ($\\frac{8}{15}$), so Beta wants as few day-1 attempts as possible while still scoring a positive integer on day 1. One attempted point would need a score of $1$ out of $1$, which is a rate of $1>\\frac8{15}$, not allowed. Two attempted points with a score of $1$ gives rate $\\frac12<\\frac8{15}$, which works.\n\nThen on day 2 Beta attempts $498$ points and can score at most the largest integer below $0.7\\cdot 498=348.6$, i.e. $348$. Total $\\frac{349}{500}$, so $m+n=849$.\n\n**Answer: 849**"
+      }
+    ],
+    "topics": [
+      "algebra",
+      "inequalities"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-2004-i-06",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "2004 AIME I",
+      "year": 2004,
+      "number": 6,
+      "url": "https://artofproblemsolving.com/wiki/index.php/2004_AIME_I_Problems/Problem_6"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "An integer is called snakelike if its decimal representation $a_1a_2a_3\\cdots a_k$ satisfies $a_i<a_{i+1}$ if $i$ is odd and $a_i>a_{i+1}$ if $i$ is even. How many snakelike integers between $1000$ and $9999$ have four distinct digits?",
+    "image": null,
+    "choices": null,
+    "answer": "882",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Choose digits, then arrange",
+        "body": "We need $a_1<a_2>a_3<a_4$. For any $4$ distinct digits $w<x<y<z$, the arrangements with this up-down-up pattern are\n$$wyxz,\\ wzxy,\\ xywz,\\ xzwy,\\ yzwx,$$\nso there are $5$.\n\nIf we allow $0$: $\\binom{10}{4}\\cdot 5=1050$. We must remove those starting with $0$: if $0$ is chosen it is the smallest digit $w$, which comes first in $2$ of the $5$ patterns. That is $\\binom93\\cdot 2=168$ numbers.\n\nAnswer: $1050-168=882$.\n\n**Answer: 882**"
+      },
+      {
+        "title": "Split by whether 0 is used",
+        "body": "- Digits from $1$–$9$ only: $\\binom94\\cdot 5=630$.\n- $0$ is one of the digits: then $0$ is the smallest digit and cannot be first, so it must be $a_3$ (patterns $xywz$, $xzwy$, $yzwx$ with $w=0$): $3$ arrangements for each choice of the other three digits: $\\binom93\\cdot 3=252$.\n\nTotal $630+252=882$.\n\n**Answer: 882**"
+      }
+    ],
+    "topics": [
+      "counting"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-2004-i-07",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "2004 AIME I",
+      "year": 2004,
+      "number": 7,
+      "url": "https://artofproblemsolving.com/wiki/index.php/2004_AIME_I_Problems/Problem_7"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Let $C$ be the coefficient of $x^2$ in the expansion of the product $(1 - x)(1 + 2x)(1 - 3x)\\cdots(1 + 14x)(1 - 15x)$. Find $|C|$.",
+    "image": null,
+    "choices": null,
+    "answer": "588",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Square of the sum",
+        "body": "Write the factors as $1+a_kx$ with $a_k=(-1)^k k$. The coefficient of $x^2$ is $C=\\sum_{i<j}a_ia_j$, and\n$$\\Big(\\sum a_k\\Big)^2=\\sum a_k^2+2C.$$\nHere $\\sum a_k=-1+2-3+\\dots-15=-8$ and $\\sum a_k^2=1^2+\\dots+15^2=\\frac{15\\cdot16\\cdot31}{6}=1240$.\n\nSo $C=\\frac{64-1240}{2}=-588$ and $|C|=588$.\n\n**Answer: 588**"
+      },
+      {
+        "title": "Build the product step by step",
+        "body": "Let $P_k(x)=\\prod_{i\\le k}(1+a_ix)=1+s_kx+c_kx^2+\\cdots$. Multiplying by $(1+a_{k+1}x)$ gives $c_{k+1}=c_k+a_{k+1}s_k$ and $s_{k+1}=s_k+a_{k+1}$.\n\nPairing terms: the partial sums are $s_k=-1,1,-2,2,-3,3,\\dots$, and\n$C=\\sum_{k=2}^{15}a_ks_{k-1}$. For $k=2j$: $a_k s_{k-1}=2j\\cdot(-j)=-2j^2$; for $k=2j+1$: $a_k s_{k-1}=-(2j+1)\\cdot j$. Summing $j=1..7$: $-2\\sum j^2-\\sum(2j^2+j)=-4\\cdot140-28=-588$. So $|C|=588$.\n\n**Answer: 588**"
+      }
+    ],
+    "topics": [
+      "algebra",
+      "polynomials"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-2004-i-08",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "2004 AIME I",
+      "year": 2004,
+      "number": 8,
+      "url": "https://artofproblemsolving.com/wiki/index.php/2004_AIME_I_Problems/Problem_8"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Define a regular $n$-pointed star to be the union of $n$ line segments $P_1P_2, P_2P_3,\\ldots, P_nP_1$ such that\n\n- the points $P_1, P_2,\\ldots, P_n$ are coplanar and no three of them are collinear,\n- each of the $n$ line segments intersects at least one of the other line segments at a point other than an endpoint,\n- all of the angles at $P_1, P_2,\\ldots, P_n$ are congruent,\n- all of the $n$ line segments $P_1P_2, P_2P_3,\\ldots, P_nP_1$ are congruent, and\n- the path $P_1P_2, P_2P_3,\\ldots, P_nP_1$ turns counterclockwise at an angle of less than $180$ degrees at each vertex.\n\nThere are no regular $3$-pointed, $4$-pointed, or $6$-pointed stars. All regular $5$-pointed stars are similar, but there are two non-similar regular $7$-pointed stars. How many non-similar regular $1000$-pointed stars are there?",
+    "image": null,
+    "choices": null,
+    "answer": "199",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Count step sizes",
+        "body": "Place $n$ points equally spaced on a circle and join each point to the one $m$ steps further on. This traces all $n$ points in one closed path exactly when $\\gcd(m,n)=1$. Step $m=1$ (or $n-1$) gives the convex polygon, which has no crossings, and steps $m$ and $n-m$ give mirror-image (similar) stars.\n\nSo the number of stars is $\\frac{\\varphi(n)-2}{2}$. Check: $n=5$ gives $\\frac{4-2}{2}=1$, $n=7$ gives $2$, $n=6$ gives $0$. ✓\n\nFor $n=1000$: $\\varphi(1000)=1000\\cdot\\frac12\\cdot\\frac45=400$, so there are $\\frac{400-2}{2}=199$ stars.\n\n**Answer: 199**"
+      },
+      {
+        "title": "Inclusion–exclusion for coprime steps",
+        "body": "Count $m$ with $1<m<500$ and $\\gcd(m,1000)=1$ (the steps $m$ and $1000-m$ give the same star, and $m=1$ gives the polygon).\n\nAmong $1,\\dots,1000$: not divisible by $2$ or $5$: $1000-500-200+100=400$. By the symmetry $m\\leftrightarrow 1000-m$, $200$ of them are below $500$. Removing $m=1$ leaves $199$.\n\n**Answer: 199**"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "geometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-2004-i-09",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "2004 AIME I",
+      "year": 2004,
+      "number": 9,
+      "url": "https://artofproblemsolving.com/wiki/index.php/2004_AIME_I_Problems/Problem_9"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Let $ABC$ be a triangle with sides $3$, $4$, and $5$, and $DEFG$ be a $6$-by-$7$ rectangle. A segment is drawn to divide triangle $ABC$ into a triangle $U_1$ and a trapezoid $V_1$ and another segment is drawn to divide rectangle $DEFG$ into a triangle $U_2$ and a trapezoid $V_2$ such that $U_1$ is similar to $U_2$ and $V_1$ is similar to $V_2$. The minimum value of the area of $U_1$ can be written in the form $\\frac mn$, where $m$ and $n$ are relatively prime positive integers. Find $m+n$.",
+    "image": null,
+    "choices": null,
+    "answer": "35",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Match the shapes",
+        "body": "A segment that cuts a rectangle into a triangle and a trapezoid must go from a corner to a point on a non-adjacent side. So $U_2$ is a right triangle with one leg equal to a full side $W$ of the rectangle and the other leg $u\\le L$ (the other side), and $V_2$ is a right trapezoid with parallel sides $L$ and $L-u$ and height $W$.\n\nFor the triangle $ABC$, the trapezoid needs a pair of parallel sides, so the cut is parallel to a side and $U_1\\sim ABC$ is a $3$-$4$-$5$ triangle. Since $V_1\\sim V_2$ is a right trapezoid, the cut is parallel to a leg.\n\nPut $C=(0,0)$, $A=(4,0)$, $B=(0,3)$.\n\n**Cut parallel to the leg of length 3** (the line $x=t$): $V_1$ has parallel sides $3$ and $3-\\frac{3t}{4}$, height $t$, so in $V_1$ (difference of parallel sides)/(height) $=\\frac34$. Then $V_2$ needs $\\frac uW=\\frac34$ and $\\frac{3}{t}=\\frac LW$.\n- $W=6,L=7$: $u=4.5\\le 7$, $t=\\frac{18}{7}$.\n- $W=7,L=6$: $u=5.25\\le 6$, $t=\\frac{7}{2}$.\n\n**Cut parallel to the leg of length 4**: then $\\frac uW=\\frac43$ and $u=\\frac{4W}{3}>L$ in both orientations, impossible.\n\n$U_1$ has legs $4-t$ and $\\frac34(4-t)$, area $\\frac38(4-t)^2$. The largest $t=\\frac72$ gives the minimum area $\\frac38\\cdot\\frac14=\\frac3{32}$, so $m+n=35$.\n\n**Answer: 35**"
+      },
+      {
+        "title": "Check the minimal case directly",
+        "body": "Take the rectangle with horizontal side $6$ and vertical side $7$, and cut from the bottom-left corner to the point on the top side at distance $5.25$ from the top-left corner. This gives $U_2$ with legs $7$ and $5.25$ (ratio $4:3$, a $3$-$4$-$5$ triangle) and the right trapezoid $V_2$ with parallel sides $6$ and $0.75$ and height $7$.\n\nIn triangle $ABC$ (legs $AC=4$, $BC=3$), a cut parallel to $BC$ at distance $\\frac12$ from $A$ leaves $U_1$ with legs $\\frac12,\\frac38$ and $V_1$ with parallel sides $3$ and $\\frac38$ and height $\\frac72$. Scaling $V_1$ by $2$ gives parallel sides $6$ and $\\frac34$ and height $7$, exactly $V_2$. ✓\n\nThe first solution shows the only other option has $t=\\frac{18}7$, and that gives a larger $U_1$. So the minimum area is $\\frac12\\cdot\\frac12\\cdot\\frac38=\\frac{3}{32}$, and $m+n=35$.\n\n**Answer: 35**"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-2004-i-10",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "2004 AIME I",
+      "year": 2004,
+      "number": 10,
+      "url": "https://artofproblemsolving.com/wiki/index.php/2004_AIME_I_Problems/Problem_10"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "A circle of radius $1$ is randomly placed in a $15$-by-$36$ rectangle $ABCD$ so that the circle lies completely within the rectangle. Given that the probability that the circle will not touch diagonal $AC$ is $\\frac mn$, where $m$ and $n$ are relatively prime positive integers, find $m + n$.",
+    "image": null,
+    "choices": null,
+    "answer": "817",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Shrink the triangles by the inradius trick",
+        "body": "The centre lies uniformly in the inner $13\\times 34$ rectangle, area $442$.\n\nThe circle misses $AC$ when its centre is more than $1$ from $AC$. Inside triangle $ABC$ (legs $15,36$, hypotenuse $39$), the allowed centres (at least $1$ from all three sides) form a smaller triangle with the same incentre. The inradius of $ABC$ is $\\frac{15+36-39}{2}=6$; the small triangle has inradius $5$, so it is $ABC$ scaled by $\\frac56$, with legs $12.5$ and $30$ and area $\\frac12\\cdot 12.5\\cdot 30=187.5$.\n\nThe same holds on the other side of $AC$. Probability $\\frac{2\\cdot 187.5}{442}=\\frac{375}{442}$, and $m+n=817$.\n\n**Answer: 817**"
+      },
+      {
+        "title": "Coordinates",
+        "body": "Let $A=(0,0)$, $C=(36,15)$; line $AC$: $5x-12y=0$, distance from $(x,y)$ is $\\frac{|5x-12y|}{13}$. Centres are in $[1,35]\\times[1,14]$ (area $442$).\n\nRegion below the line with $5x-12y>13$, $y\\ge1$, $x\\le35$: vertices $(35,1)$, $(35,\\frac{162}{12}=13.5)$, and $(5,1)$ (from $5x-12=13$). Right triangle with legs $30$ and $12.5$: area $187.5$. By symmetry the region above the line has the same area.\n\nProbability $\\frac{375}{442}$; $375=3\\cdot5^3$ and $442=2\\cdot13\\cdot17$ are coprime, so $m+n=817$.\n\n**Answer: 817**"
+      }
+    ],
+    "topics": [
+      "probability",
+      "geometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-2004-i-11",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "2004 AIME I",
+      "year": 2004,
+      "number": 11,
+      "url": "https://artofproblemsolving.com/wiki/index.php/2004_AIME_I_Problems/Problem_11"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "A solid in the shape of a right circular cone is $4$ inches tall and its base has a $3$-inch radius. The entire surface of the cone, including its base, is painted. A plane parallel to the base of the cone divides the cone into two solids, a smaller cone-shaped solid $C$ and a frustum-shaped solid $F$, in such a way that the ratio between the areas of the painted surfaces of $C$ and $F$ and the ratio between the volumes of $C$ and $F$ are both equal to $k$. Given that $k=\\frac mn$, where $m$ and $n$ are relatively prime positive integers, find $m+n$.",
+    "image": null,
+    "choices": null,
+    "answer": "512",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Set up with the scale factor",
+        "body": "The slant height is $5$. Let $C$ be the original cone scaled by $x$. Its painted surface is only the lateral surface: $\\pi(3x)(5x)=15\\pi x^2$. The whole cone has painted area $15\\pi+9\\pi=24\\pi$, so $F$ has $24\\pi-15\\pi x^2$.\n\nVolumes: $C$ has $12\\pi x^3$, $F$ has $12\\pi(1-x^3)$. Setting the ratios equal:\n$$\\frac{15x^2}{24-15x^2}=\\frac{x^3}{1-x^3}\\implies 15x^2-15x^5=24x^3-15x^5\\implies x=\\frac{15}{24}=\\frac58.$$\nThen $k=\\frac{x^3}{1-x^3}=\\frac{125}{387}$, and $m+n=512$.\n\n**Answer: 512**"
+      },
+      {
+        "title": "Use equal ratios to the whole",
+        "body": "If $\\frac{a}{b}=\\frac{c}{d}=k$, then also $\\frac{a}{a+b}=\\frac{c}{c+d}$. So the fraction of the painted area on $C$ equals the fraction of the volume in $C$:\n$$\\frac{15\\pi x^2}{24\\pi}=x^3\\implies x=\\frac{15}{24}=\\frac58.$$\nThen $C$ holds $\\frac{125}{512}$ of the volume and $F$ holds $\\frac{387}{512}$, so $k=\\frac{125}{387}$ ($387=9\\cdot 43$, coprime to $125$) and $m+n=512$.\n\n**Answer: 512**"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "measurement"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-2004-i-12",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "2004 AIME I",
+      "year": 2004,
+      "number": 12,
+      "url": "https://artofproblemsolving.com/wiki/index.php/2004_AIME_I_Problems/Problem_12"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Let $S$ be the set of ordered pairs $(x, y)$ such that $0 < x \\le 1$, $0<y\\le 1$, and $\\left \\lfloor{\\log_2{\\left(\\frac 1x\\right)}}\\right \\rfloor$ and $\\left \\lfloor{\\log_5{\\left(\\frac 1y\\right)}}\\right \\rfloor$ are both even. Given that the area of the graph of $S$ is $\\frac mn$, where $m$ and $n$ are relatively prime positive integers, find $m+n$. The notation $\\left \\lfloor{z}\\right \\rfloor$ denotes the greatest integer that is less than or equal to $z$.",
+    "image": null,
+    "choices": null,
+    "answer": "14",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Product of two geometric series",
+        "body": "$\\lfloor\\log_2(1/x)\\rfloor=2j$ means $2^{2j}\\le \\frac1x<2^{2j+1}$, i.e. $x\\in\\left(\\frac1{2^{2j+1}},\\frac1{2^{2j}}\\right]$. Total length:\n$$\\frac12+\\frac18+\\frac1{32}+\\cdots=\\frac{1/2}{1-1/4}=\\frac23.$$\nSimilarly $y\\in\\left(\\frac1{5^{2j+1}},\\frac1{5^{2j}}\\right]$ has total length $\\frac45+\\frac4{125}+\\cdots=\\frac{4/5}{1-1/25}=\\frac56$.\n\nThe conditions on $x$ and $y$ are independent, so the area is $\\frac23\\cdot\\frac56=\\frac59$ and $m+n=14$.\n\n**Answer: 14**"
+      },
+      {
+        "title": "Self-similarity",
+        "body": "Let $L$ be the total length of good $x$ in $(0,1]$. The interval $(\\frac12,1]$ is good, $(\\frac14,\\frac12]$ is bad, and on $(0,\\frac14]$ the pattern repeats scaled by $\\frac14$. So $L=\\frac12+\\frac L4$, giving $L=\\frac23$. Likewise for $y$: $M=\\frac45+\\frac{M}{25}$, $M=\\frac56$. Area $LM=\\frac59$, so $m+n=14$.\n\n**Answer: 14**"
+      }
+    ],
+    "topics": [
+      "algebra",
+      "sequences-series"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-2004-i-13",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "2004 AIME I",
+      "year": 2004,
+      "number": 13,
+      "url": "https://artofproblemsolving.com/wiki/index.php/2004_AIME_I_Problems/Problem_13"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "The polynomial $P(x)=(1+x+x^2+\\cdots+x^{17})^2-x^{17}$ has $34$ complex roots of the form $z_k = r_k[\\cos(2\\pi a_k)+i\\sin(2\\pi a_k)]$, $k=1, 2, 3,\\ldots, 34$, with $0 < a_1 \\le a_2 \\le a_3 \\le \\cdots \\le a_{34} < 1$ and $r_k>0$. Given that $a_1 + a_2 + a_3 + a_4 + a_5 = \\frac mn$, where $m$ and $n$ are relatively prime positive integers, find $m+n$.",
+    "image": null,
+    "choices": null,
+    "answer": "482",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Factor the polynomial",
+        "body": "For $x\\ne1$, $1+x+\\dots+x^{17}=\\frac{x^{18}-1}{x-1}$, so\n$$P(x)=\\frac{(x^{18}-1)^2-x^{17}(x-1)^2}{(x-1)^2}=\\frac{x^{36}-x^{19}-x^{17}+1}{(x-1)^2}=\\frac{(x^{19}-1)(x^{17}-1)}{(x-1)^2}.$$\nSo the roots are the $19$th roots of unity and the $17$th roots of unity other than $1$, and the $a_k$ are the numbers $\\frac j{19}$ ($1\\le j\\le18$) and $\\frac j{17}$ ($1\\le j\\le 16$).\n\nThe five smallest: $\\frac1{19}<\\frac1{17}<\\frac2{19}<\\frac2{17}<\\frac3{19}$ (and $\\frac3{19}<\\frac3{17}$). Sum:\n$$\\frac6{19}+\\frac3{17}=\\frac{102+57}{323}=\\frac{159}{323},$$\nalready in lowest terms ($159=3\\cdot53$, $323=17\\cdot19$). So $m+n=482$.\n\n**Answer: 482**"
+      },
+      {
+        "title": "Multiply by (x−1)² directly",
+        "body": "$(x-1)^2P(x)=\\big((x-1)(1+\\dots+x^{17})\\big)^2-x^{17}(x-1)^2=(x^{18}-1)^2-x^{17}(x^2-2x+1)$\n$=x^{36}-2x^{18}+1-x^{19}+2x^{18}-x^{17}=x^{36}-x^{19}-x^{17}+1=(x^{17}-1)(x^{19}-1).$\n\nAll roots of $P$ have $r_k=1$ and angles $2\\pi\\cdot\\frac{j}{17}$ or $2\\pi\\cdot\\frac{j}{19}$. Listing the fractions in increasing order, $\\frac1{19},\\frac1{17},\\frac2{19},\\frac2{17},\\frac3{19}$ come first, with sum $\\frac{159}{323}$, so $m+n=482$.\n\n**Answer: 482**"
+      }
+    ],
+    "topics": [
+      "complex-numbers",
+      "polynomials"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-2004-i-14",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "2004 AIME I",
+      "year": 2004,
+      "number": 14,
+      "url": "https://artofproblemsolving.com/wiki/index.php/2004_AIME_I_Problems/Problem_14"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "A unicorn is tethered by a $20$-foot silver rope to the base of a magician's cylindrical tower whose radius is $8$ feet. The rope is attached to the tower at ground level and to the unicorn at a height of $4$ feet. The unicorn has pulled the rope taut, the end of the rope is $4$ feet from the nearest point on the tower, and the length of the rope that is touching the tower is $\\frac{a-\\sqrt{b}}c$ feet, where $a, b,$ and $c$ are positive integers, and $c$ is prime. Find $a+b+c$.",
+    "image": null,
+    "choices": null,
+    "answer": "813",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Unroll the cylinder",
+        "body": "A taut rope follows a shortest path. Unrolling the tower's surface, the part on the tower is a straight line, and it continues straight to the unicorn, so the rope rises at a constant rate along its whole length: the height is proportional to the horizontal (top-view) distance travelled.\n\nTop view: the unicorn's end is $8+4=12$ from the axis, so the free part of the rope projects onto a tangent segment of length $\\sqrt{12^2-8^2}=4\\sqrt5$.\n\nThe whole rope rises $4$ ft over a length of $20$, so its total horizontal projection is $\\sqrt{20^2-4^2}=\\sqrt{384}=8\\sqrt6$. The fraction of the rope on the tower is $\\frac{8\\sqrt6-4\\sqrt5}{8\\sqrt6}$, so its length is\n$$20\\left(1-\\frac{\\sqrt5}{2\\sqrt6}\\right)=20-\\frac{5\\sqrt{30}}{3}=\\frac{60-\\sqrt{750}}{3}.$$\nSo $a+b+c=60+750+3=813$.\n\n**Answer: 813**"
+      },
+      {
+        "title": "Similar triangles in the unrolled picture",
+        "body": "In the unrolled picture, the rope is the hypotenuse of a right triangle with vertical leg $4$ and hypotenuse $20$, so its horizontal leg is $8\\sqrt6$. The free part of the rope has horizontal leg $4\\sqrt5$ (the tangent length from the top view). By similar triangles, the free part has length $20\\cdot\\frac{4\\sqrt5}{8\\sqrt6}=\\frac{10\\sqrt5}{\\sqrt6}=\\frac{5\\sqrt{30}}{3}$.\n\nThe rope touching the tower has length $20-\\frac{5\\sqrt{30}}3=\\frac{60-\\sqrt{750}}{3}$, with $c=3$ prime. So $a+b+c=813$.\n\n**Answer: 813**"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "spatial"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-2004-i-15",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "2004 AIME I",
+      "year": 2004,
+      "number": 15,
+      "url": "https://artofproblemsolving.com/wiki/index.php/2004_AIME_I_Problems/Problem_15"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "For all positive integers $x$, let\n$$f(x)=\\begin{cases}1 &\\text{if }x = 1\\\\ \\frac x{10} &\\text{if }x\\text{ is divisible by 10}\\\\ x+1 &\\text{otherwise}\\end{cases}$$\nand define a sequence as follows: $x_1=x$ and $x_{n+1}=f(x_n)$ for all positive integers $n$. Let $d(x)$ be the smallest $n$ such that $x_n=1$. (For example, $d(100)=3$ and $d(87)=7$.) Let $m$ be the number of positive integers $x$ such that $d(x)=20$. Find the sum of the distinct prime factors of $m$.",
+    "image": null,
+    "choices": null,
+    "answer": "511",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Turn it into compositions",
+        "body": "Starting from $x\\ne1$, the sequence adds $1$ until it reaches a multiple of $10$ and then divides by $10$. Work backwards from $1$: every $x$ with $x\\ne 1$ arises uniquely from a number $y$ by $x=10y-j$ with $0\\le j\\le 9$, and going from $x$ to $y$ takes $j+1$ steps. Starting at $y=1$, the first $j$ can only be $0,\\dots,8$ (since $x=10-9=1$ is not allowed); later $j$ can be $0,\\dots,9$.\n\n$d(x)=20$ means $19$ steps in total. So $m$ is the number of compositions of $19$ into parts $p_i=j_i+1\\in\\{1,\\dots,10\\}$ with first part $\\le 9$.\n\n**Compositions of 19 into parts at most 10.** All compositions: $2^{18}$. At most one part can be $\\ge 11$. If that part is $19-r$, the remaining sum $r$ ($0\\le r\\le8$) is split into a composition before and one after it, which can be done in $1,2,5,12,28,64,144,320,704$ ways for $r=0,\\dots,8$ (formula $2^r+(r-1)2^{r-2}$ for $r\\ge1$). The sum is $1280$, so there are $262144-1280=260864$.\n\n**First part 10:** the rest is any composition of $9$: $2^8=256$.\n\n$m=260864-256=260608=2^9\\cdot 509$, and $509$ is prime. The sum of the distinct prime factors is $2+509=511$.\n\n**Answer: 511**"
+      },
+      {
+        "title": "Recurrence check",
+        "body": "Let $c(n)$ be the number of compositions of $n$ with parts in $\\{1,\\dots,10\\}$. Then $c(0)=1$ and $c(n)=c(n-1)+\\dots+c(n-10)$. This gives $c(n)=2^{n-1}$ for $1\\le n\\le 10$, and for $n\\ge 11$, $c(n)=2c(n-1)-c(n-11)$:\n\n$c(11)=1023$, $c(12)=2045$, $c(13)=4088$, $c(14)=8172$, $c(15)=16336$, $c(16)=32656$, $c(17)=65280$, $c(18)=130496$, $c(19)=260864$.\n\nUsing the bijection from the first solution, the first part $p_1\\le 9$ is followed by any composition of $19-p_1$:\n$$m=\\sum_{p=1}^{9}c(19-p)=c(19)-c(9)=260864-256=260608=2^9\\cdot509.$$\nSum of distinct prime factors: $2+509=511$.\n\n**Answer: 511**"
+      }
+    ],
+    "topics": [
+      "counting",
+      "number-theory"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

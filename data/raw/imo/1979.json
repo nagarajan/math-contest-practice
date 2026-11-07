@@ -1,0 +1,208 @@
+[
+  {
+    "id": "imo-1979-01",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO",
+      "paper": "Day 1",
+      "year": 1979,
+      "number": 1,
+      "url": "https://www.imo-official.org/assets/documents/problems/1979/1979_eng.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $p$ and $q$ be natural numbers such that\n$$\\frac{p}{q}=1-\\frac12+\\frac13-\\frac14+\\cdots-\\frac{1}{1318}+\\frac{1}{1319}.$$\nProve that $p$ is divisible by $1979$.",
+    "image": null,
+    "choices": null,
+    "answer": "Proof: the sum equals $\\sum_{k=660}^{1319}\\frac1k$; pairing $k$ with $1979-k$ gives $1979\\sum\\frac{1}{k(1979-k)}$, and $1979$ is prime.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Reduce to a block of reciprocals, then pair terms",
+        "body": "**Step 1: remove the alternating signs.** Write $H_m=1+\\frac12+\\dots+\\frac1m$. Subtracting the even terms twice,\n$$\\frac pq=H_{1319}-2\\left(\\frac12+\\frac14+\\dots+\\frac1{1318}\\right)=H_{1319}-H_{659}=\\sum_{k=660}^{1319}\\frac1k .$$\n\n**Step 2: pair the terms.** The sum has $1319-659=660$ terms, and $660+1319=1979$. Pairing $k$ with $1979-k$ for $k=660,\\dots,989$ (the partner runs over $1319,\\dots,990$) gives $330$ pairs with\n$$\\frac1k+\\frac1{1979-k}=\\frac{1979}{k(1979-k)} .$$\nHence\n$$\\frac pq=1979\\sum_{k=660}^{989}\\frac{1}{k(1979-k)}=1979\\cdot\\frac{N}{D},$$\nwhere $D=\\prod_{k=660}^{1319}k=\\frac{1319!}{659!}$ (a common denominator) and $N$ is a positive integer.\n\n**Step 3: $1979$ is prime.** $\\sqrt{1979}<45$, and $1979$ leaves remainders $1,2,4,5,10,3,7,3,1,7,26,18,11,1$ on division by $2,3,5,7,11,13,17,19,23,29,31,37,41,43$, so it has no prime factor below $45$ and is prime.\n\n**Step 4: conclude.** From $p\\,D=1979\\,N\\,q$ the prime $1979$ divides $pD$. Every factor of $D$ lies between $660$ and $1319$, so is smaller than $1979$ and not divisible by it; hence $1979\\nmid D$ and therefore $1979\\mid p$. ∎"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "sequences-series"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-1979-02",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO",
+      "paper": "Day 1",
+      "year": 1979,
+      "number": 2,
+      "url": "https://www.imo-official.org/assets/documents/problems/1979/1979_eng.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "A prism with pentagons $A_1A_2A_3A_4A_5$ and $B_1B_2B_3B_4B_5$ as top and bottom faces is given. Each side of the two pentagons and each of the line segments $A_iB_j$ for all $i,j=1,\\dots,5$ is colored either red or green. Every triangle whose vertices are vertices of the prism and whose sides have all been colored has two sides of a different color. Show that all $10$ sides of the top and bottom faces are the same color.",
+    "image": null,
+    "choices": null,
+    "answer": "Proof: from any vertex three of the five edges to the other pentagon share a colour and two of their endpoints are adjacent; this forces each pentagon to be monochromatic, and then two adjacent top vertices would need disjoint sets of $\\ge3$ red edges.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Pigeonhole on the five cross edges",
+        "body": "The hypothesis says: **no coloured triangle is monochromatic.** Two facts are used repeatedly.\n\n* Among any three vertices of a pentagon, two are adjacent (a 5-cycle has no three pairwise non-adjacent vertices).\n* From a vertex $A_i$ there are five edges $A_iB_1,\\dots,A_iB_5$; by pigeonhole at least three have the same colour. Two of their endpoints, say $B_s,B_t$, are adjacent, and since $A_iB_s,A_iB_t$ share a colour $c$, the side $B_sB_t$ must have the other colour $\\bar c$.\n\n**Step 1: each pentagon is monochromatic.** If the top pentagon is not monochromatic, going around it we find a vertex where the colour changes; rename so that $A_1A_2$ is red and $A_1A_5$ is green. Take $B_s,B_t$ as above for the vertex $A_1$, with common colour $c$ of $A_1B_s,A_1B_t$ and with $B_sB_t$ of colour $\\bar c$.\n\n* If $c$ is red: triangles $A_1A_2B_s$ and $A_1A_2B_t$ already have two red sides, so $A_2B_s$ and $A_2B_t$ are green. With $B_sB_t$ green, triangle $A_2B_sB_t$ is all green, a contradiction.\n* If $c$ is green: in the same way, using $A_5$ and the green side $A_1A_5$, the edges $A_5B_s,A_5B_t$ are red, and triangle $A_5B_sB_t$ is all red, a contradiction.\n\nSo the top pentagon is monochromatic, and by the same argument so is the bottom one.\n\n**Step 2: both pentagons have the same colour.** Suppose the top is all red and the bottom all green. If a top vertex $A_i$ had three green edges to the bottom, two of their endpoints $B_s,B_t$ would be adjacent and $A_iB_sB_t$ would be all green. So every $A_i$ has at most two green, hence **at least three red**, edges to the bottom.\n\nNow look at the adjacent vertices $A_1,A_2$ (the side $A_1A_2$ is red). If some $B_j$ were joined to both by red edges, triangle $A_1A_2B_j$ would be all red. So the sets of red neighbours of $A_1$ and of $A_2$ among $B_1,\\dots,B_5$ are disjoint; but each has at least $3$ elements and $3+3>5$. Contradiction.\n\nHence all ten sides of the two pentagons have the same colour. ∎"
+      }
+    ],
+    "topics": [
+      "graph-theory",
+      "counting",
+      "logic"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-1979-03",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO",
+      "paper": "Day 1",
+      "year": 1979,
+      "number": 3,
+      "url": "https://www.imo-official.org/assets/documents/problems/1979/1979_eng.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Two circles in a plane intersect. Let $A$ be one of the points of intersection. Starting simultaneously from $A$ two points move with constant speeds, each point travelling along its own circle in the same sense. The two points return to $A$ simultaneously after one revolution. Prove that there is a fixed point $P$ in the plane such that, at any time, the distances from $P$ to the moving points are equal.",
+    "image": null,
+    "choices": null,
+    "answer": "Proof: the points turn through the same angle $\\theta$ about their centres; $P$ = the reflection of $A$ in the perpendicular bisector of $O_1O_2$ works (direct check with complex numbers).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Complex numbers",
+        "body": "Let the centres be $O_1,O_2$. Both points move with constant angular speed and complete one revolution in the same time, in the same sense, so at every moment both have turned through the **same angle** $\\theta$ about their own centres.\n\nUse complex coordinates with $O_1=-d$, $O_2=d$ ($d>0$ real), and let $A=a$. The moving points are\n$$z_1=-d+(a+d)e^{i\\theta},\\qquad z_2=d+(a-d)e^{i\\theta}.$$\nLet $P$ be the reflection of $A$ in the perpendicular bisector of $O_1O_2$ (the imaginary axis): $P=-\\bar a$. Then\n$$P-z_1=(d-\\bar a)-(a+d)e^{i\\theta},\\qquad P-z_2=-(d+\\bar a)-(a-d)e^{i\\theta}.$$\nUsing $|u-v|^2=|u|^2+|v|^2-2\\,\\mathrm{Re}(u\\bar v)$ and $d\\in\\mathbb R$:\n$$|P-z_1|^2=|a-d|^2+|a+d|^2-2\\,\\mathrm{Re}\\big((d-\\bar a)(\\bar a+d)e^{-i\\theta}\\big)=|a-d|^2+|a+d|^2-2\\,\\mathrm{Re}\\big((d^2-\\bar a^2)e^{-i\\theta}\\big),$$\n$$|P-z_2|^2=|a+d|^2+|a-d|^2-2\\,\\mathrm{Re}\\big(-(d+\\bar a)(\\bar a-d)e^{-i\\theta}\\big)=|a+d|^2+|a-d|^2-2\\,\\mathrm{Re}\\big((d^2-\\bar a^2)e^{-i\\theta}\\big).$$\nThe two right-hand sides are identical, so $|P-z_1|=|P-z_2|$ for every $\\theta$.\nSo $P$ is at equal distances from the two moving points at every moment. ∎\n\n*Geometric meaning:* $O_1AO_2P$ is an isosceles trapezoid (or $P=A$ if $O_1A=O_2A$), with $O_1P=O_2A$ and $O_2P=O_1A$; triangles $PO_1z_1$ and $z_2O_2P$ stay congruent during the motion."
+      }
+    ],
+    "topics": [
+      "geometry",
+      "complex-numbers"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-1979-04",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO",
+      "paper": "Day 2",
+      "year": 1979,
+      "number": 4,
+      "url": "https://www.imo-official.org/assets/documents/problems/1979/1979_eng.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Given a plane $\\pi$, a point $P$ in this plane and a point $Q$ not in $\\pi$, find all points $R$ in $\\pi$ such that the ratio $\\dfrac{QP+PR}{QR}$ is a maximum.",
+    "image": null,
+    "choices": null,
+    "answer": "With $H$ the foot of the perpendicular from $Q$ to $\\pi$: the unique point $R$ on ray $PH$ with $PR=PQ$; if $PQ\\perp\\pi$, every $R$ on the circle in $\\pi$ with centre $P$ and radius $PQ$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Sine rule and the minimal angle",
+        "body": "Let $H$ be the foot of the perpendicular from $Q$ to $\\pi$ and $\\alpha=\\angle QPH$ (put $\\alpha=90^\\circ$ if $H=P$). Note $0<\\alpha\\le 90^\\circ$.\n\n**Lemma.** For every $R\\in\\pi$, $R\\ne P$: $\\angle QPR\\ge\\alpha$, with equality iff $R$ lies on the ray $PH$ (for every $R$ if $H=P$).\n\n*Proof.* Since $\\vec{HQ}\\perp\\pi$, $\\vec{PQ}\\cdot\\vec{PR}=\\vec{PH}\\cdot\\vec{PR}\\le |PH|\\,|PR|$ (Cauchy–Schwarz), so $\\cos\\angle QPR\\le \\frac{PH}{PQ}=\\cos\\alpha$, with equality iff $\\vec{PR}$ is a positive multiple of $\\vec{PH}$ (or $PH=0$). $\\square$\n\n**The ratio in triangle $QPR$.** Let its angles be $\\varphi=\\angle QPR$, $\\beta=\\angle PQR$, $\\gamma=\\angle PRQ$. By the sine rule,\n$$\\frac{QP+PR}{QR}=\\frac{\\sin\\gamma+\\sin\\beta}{\\sin\\varphi}=\\frac{2\\sin\\frac{\\beta+\\gamma}2\\cos\\frac{\\beta-\\gamma}2}{2\\sin\\frac\\varphi2\\cos\\frac\\varphi2}=\\frac{\\cos\\frac{\\beta-\\gamma}{2}}{\\sin\\frac{\\varphi}{2}},$$\nusing $\\frac{\\beta+\\gamma}2=90^\\circ-\\frac\\varphi2$. Since $\\frac\\alpha2\\le\\frac\\varphi2<90^\\circ$ and sine increases on $[0^\\circ,90^\\circ]$,\n$$\\frac{QP+PR}{QR}\\le\\frac{1}{\\sin\\frac\\varphi2}\\le\\frac1{\\sin\\frac\\alpha2}.$$\nFor $R=P$ the ratio is $1<\\frac1{\\sin(\\alpha/2)}$.\n\n**Equality** holds iff $\\beta=\\gamma$ (i.e. $PR=PQ$) and $\\varphi=\\alpha$ (i.e. $R$ on the ray $PH$, by the lemma). Such $R$ exists, so the maximum is $\\frac{1}{\\sin(\\alpha/2)}$, attained exactly at:\n\n* the single point $R$ on ray $PH$ with $PR=PQ$, if $PQ$ is not perpendicular to $\\pi$;\n* every point of the circle in $\\pi$ with centre $P$ and radius $PQ$, if $PQ\\perp\\pi$. ∎"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "trigonometry",
+      "inequalities"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-1979-05",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO",
+      "paper": "Day 2",
+      "year": 1979,
+      "number": 5,
+      "url": "https://www.imo-official.org/assets/documents/problems/1979/1979_eng.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Find all real numbers $a$ for which there exist non-negative real numbers $x_1,x_2,x_3,x_4,x_5$ satisfying the relations\n$$\\sum_{k=1}^{5}kx_k=a,\\qquad \\sum_{k=1}^{5}k^3x_k=a^2,\\qquad \\sum_{k=1}^{5}k^5x_k=a^3.$$",
+    "image": null,
+    "choices": null,
+    "answer": "$a\\in\\{0,1,4,9,16,25\\}$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "A sum of non-negative terms equal to zero",
+        "body": "Combine the three equations:\n$$\\sum_{k=1}^5 k\\,(k^2-a)^2\\,x_k=\\sum k^5x_k-2a\\sum k^3x_k+a^2\\sum kx_k=a^3-2a\\cdot a^2+a^2\\cdot a=0 .$$\nEvery term $k(k^2-a)^2x_k$ is $\\ge0$, so each is $0$: for every $k$, either $x_k=0$ or $a=k^2$.\n\n* If all $x_k=0$, then $a=\\sum kx_k=0$.\n* Otherwise some $x_k>0$, so $a=k^2$; as the numbers $k^2$ are distinct, every other $x_j$ is $0$. Then the first equation gives $kx_k=k^2$, so $x_k=k$.\n\nConversely these work: $a=0$ with all $x_k=0$, and $a=k^2$ with $x_k=k$ and the other $x_j=0$, since then $\\sum jx_j=k^2=a$, $\\sum j^3x_j=k^4=a^2$, $\\sum j^5x_j=k^6=a^3$.\n\n**Answer:** $a\\in\\{0,1,4,9,16,25\\}$. ∎"
+      }
+    ],
+    "topics": [
+      "algebra",
+      "inequalities"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-1979-06",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO",
+      "paper": "Day 2",
+      "year": 1979,
+      "number": 6,
+      "url": "https://www.imo-official.org/assets/documents/problems/1979/1979_eng.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $A$ and $E$ be opposite vertices of a regular octagon. A frog starts jumping at vertex $A$. From any vertex of the octagon except $E$, it may jump to either of the two adjacent vertices. When it reaches vertex $E$, the frog stops and stays there. Let $a_n$ be the number of distinct paths of exactly $n$ jumps ending at $E$. Prove that $a_{2n-1}=0$ and\n$$a_{2n}=\\frac{1}{\\sqrt2}\\left(x^{n-1}-y^{n-1}\\right),\\qquad n=1,2,3,\\dots,$$\nwhere $x=2+\\sqrt2$ and $y=2-\\sqrt2$.\n\n*Note.* A path of $n$ jumps is a sequence of vertices $(P_0,\\dots,P_n)$ such that (i) $P_0=A$, $P_n=E$; (ii) for every $i$, $0\\le i\\le n-1$, $P_i$ is distinct from $E$; (iii) for every $i$, $0\\le i\\le n-1$, $P_i$ and $P_{i+1}$ are adjacent.",
+    "image": null,
+    "choices": null,
+    "answer": "Proof: parity gives $a_{2n-1}=0$; tracking the frog every two jumps (at $A$ or at one of the two vertices next-but-one to $A$) gives $a_{2n}=v_{n-1}$ with $v_{n+2}=4v_{n+1}-2v_n$, $v_0=0$, $v_1=2$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Two-jump recursion",
+        "body": "Number the vertices $0,1,\\dots,7$ around the octagon with $A=0$, $E=4$.\n\n**Odd lengths.** Every jump changes the parity of the vertex number. After an odd number of jumps the frog is at an odd vertex, never at $4$. So $a_{2n-1}=0$.\n\n**Two jumps at a time.** After an even number of jumps (before reaching $E$) the frog is at $0$, $2$ or $6$. Let $u_n$ be the number of admissible $2n$-jump walks from $0$ that avoid $4$ and end at $0$, and $v_n$ the number ending at $2$ or $6$. Two-jump moves from these vertices:\n\n* from $0$: $0\\to1\\to0$, $0\\to7\\to0$ (two ways back to $0$), $0\\to1\\to2$, $0\\to7\\to6$ (two ways to $\\{2,6\\}$);\n* from $2$: $2\\to1\\to2$, $2\\to3\\to2$ (two ways back), $2\\to1\\to0$ (one way to $0$), $2\\to3\\to4$ (one way to $E$); symmetrically from $6$.\n\nHence $u_0=1$, $v_0=0$ and\n$$u_{n+1}=2u_n+v_n,\\qquad v_{n+1}=2u_n+2v_n .$$\nA path of $2n$ jumps ending at $E$ must be at $2$ or $6$ after $2n-2$ jumps (it reaches $4$ from $3$ or $5$, which it reached from $2$ or $6$, never having visited $4$), and from there there is exactly one way to finish. So $a_{2n}=v_{n-1}$.\n\n**Solving.** From the second relation $2u_n=v_{n+1}-2v_n$. Substituting into the first (multiplied by $2$):\n$$v_{n+2}-2v_{n+1}=2(v_{n+1}-2v_n)+2v_n\\quad\\Longrightarrow\\quad v_{n+2}=4v_{n+1}-2v_n .$$\nThe characteristic equation $t^2-4t+2=0$ has roots $x=2+\\sqrt2$, $y=2-\\sqrt2$. The sequence $w_n=\\frac{x^n-y^n}{\\sqrt2}$ satisfies the same recurrence and $w_0=0=v_0$, $w_1=\\frac{2\\sqrt2}{\\sqrt2}=2=v_1$ (indeed $v_1=2u_0+2v_0=2$). So $v_n=w_n$ for all $n$, and\n$$a_{2n}=v_{n-1}=\\frac{1}{\\sqrt2}\\left(x^{n-1}-y^{n-1}\\right).\\ ∎$$"
+      }
+    ],
+    "topics": [
+      "counting",
+      "sequences-series"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

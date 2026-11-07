@@ -1,0 +1,552 @@
+[
+  {
+    "id": "aime-2001-i-01",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "2001 AIME I",
+      "year": 2001,
+      "number": 1,
+      "url": "https://artofproblemsolving.com/wiki/index.php/2001_AIME_I_Problems/Problem_1"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Find the sum of all positive two-digit integers that are divisible by each of their digits.",
+    "image": null,
+    "choices": null,
+    "answer": "630",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Check by tens digit",
+        "body": "No digit can be $0$. Write the number as $10a+b$; $a\\mid 10a+b$ forces $a\\mid b$, and then we need $b\\mid 10a$.\n- $b=a$: $11,22,\\dots,99$ all work (sum $495$).\n- $b=2a$: need $2a\\mid10a$, always true: $12,24,36,48$.\n- $b=3a$: need $3a\\mid10a$, never. $b=4a$: need $4a\\mid 10a$, never.\n- $b=5a$: need $5a\\mid10a$, true: $15$.\n- $b=6a,\\dots,9a$ with $b\\le9$ means $a=1$: $16,17,18,19$; none divisible by its units digit.\n\nSum: $495+(12+24+36+48)+15=495+120+15=630$.\n\n**Answer: 630**"
+      },
+      {
+        "title": "List by tens digit",
+        "body": "No digit is $0$. For each tens digit, test the possible numbers:\n- $1$: $11,12,15$ ($13,14,16,17,18,19$ fail);\n- $2$: $22,24$; $3$: $33,36$; $4$: $44,48$;\n- $5,6,7,8,9$: only $55,66,77,88,99$.\n\nSum: $(11+12+15)+(22+24)+(33+36)+(44+48)+(55+66+77+88+99)=38+46+69+92+385=630$.\n\n**Answer: 630**"
+      }
+    ],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-2001-i-02",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "2001 AIME I",
+      "year": 2001,
+      "number": 2,
+      "url": "https://artofproblemsolving.com/wiki/index.php/2001_AIME_I_Problems/Problem_2"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "A finite set $\\mathcal{S}$ of distinct real numbers has the following properties: the mean of $\\mathcal{S}\\cup\\{1\\}$ is $13$ less than the mean of $\\mathcal{S}$, and the mean of $\\mathcal{S}\\cup\\{2001\\}$ is $27$ more than the mean of $\\mathcal{S}$. Find the mean of $\\mathcal{S}$.",
+    "image": null,
+    "choices": null,
+    "answer": "651",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Set up two equations",
+        "body": "Let $\\mathcal S$ have $n$ elements and mean $\\mu$, so its sum is $n\\mu$.\n$$\\frac{n\\mu+1}{n+1}=\\mu-13,\\qquad \\frac{n\\mu+2001}{n+1}=\\mu+27.$$\nSubtracting: $\\frac{2000}{n+1}=40$, so $n=49$. Then $49\\mu+1=50\\mu-650$, so $\\mu=651$.\n\n**Answer: 651**"
+      },
+      {
+        "title": "Think about how far the new element is",
+        "body": "Adding $x$ to a set of $n$ numbers with mean $\\mu$ shifts the mean by $\\frac{x-\\mu}{n+1}$. So $\\mu-1=13(n+1)$ and $2001-\\mu=27(n+1)$. Adding: $2000=40(n+1)$, $n+1=50$, and $\\mu=1+13\\cdot50=651$.\n\n**Answer: 651**"
+      }
+    ],
+    "topics": [
+      "algebra",
+      "statistics"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-2001-i-03",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "2001 AIME I",
+      "year": 2001,
+      "number": 3,
+      "url": "https://artofproblemsolving.com/wiki/index.php/2001_AIME_I_Problems/Problem_3"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Find the sum of the roots, real and non-real, of the equation $x^{2001}+\\left(\\frac 12-x\\right)^{2001}=0$, given that there are no multiple roots.",
+    "image": null,
+    "choices": null,
+    "answer": "500",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Pair the roots",
+        "body": "The $x^{2001}$ terms cancel, and the $x^{2000}$ coefficient is $2001\\cdot\\frac12\\ne0$, so the equation has degree $2000$ and $2000$ roots.\n\nIf $r$ is a root, so is $\\frac12-r$ (the equation is symmetric under $x\\mapsto\\frac12-x$), and $r\\ne\\frac12-r$ because $x=\\frac14$ gives $2\\cdot4^{-2001}\\neq0$. So the roots split into $1000$ pairs, each summing to $\\frac12$: the total is $500$.\n\n**Answer: 500**"
+      },
+      {
+        "title": "Vieta",
+        "body": "Expanding $\\left(\\frac12-x\\right)^{2001}$, the coefficient of $x^{2000}$ is $\\binom{2001}{1}\\frac12=\\frac{2001}2$ and of $x^{1999}$ is $-\\binom{2001}{2}\\frac14$. The sum of the roots is\n$$\\frac{\\binom{2001}2/4}{2001/2}=\\frac{2001\\cdot2000/2}{2\\cdot2001}=500.$$\n\n**Answer: 500**"
+      }
+    ],
+    "topics": [
+      "polynomials"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-2001-i-04",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "2001 AIME I",
+      "year": 2001,
+      "number": 4,
+      "url": "https://artofproblemsolving.com/wiki/index.php/2001_AIME_I_Problems/Problem_4"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "In triangle $ABC$, angles $A$ and $B$ measure $60$ degrees and $45$ degrees, respectively. The bisector of angle $A$ intersects $\\overline{BC}$ at $T$, and $AT=24$. The area of triangle $ABC$ can be written in the form $a+b\\sqrt{c}$, where $a$, $b$, and $c$ are positive integers, and $c$ is not divisible by the square of any prime. Find $a+b+c$.",
+    "image": null,
+    "choices": null,
+    "answer": "291",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Find an isosceles triangle",
+        "body": "$\\angle C=75^\\circ$ and $\\angle CAT=30^\\circ$, so $\\angle ATC=75^\\circ=\\angle C$ and $AC=AT=24$.\n\nDrop the altitude $CH$ to $AB$: in the $30$-$60$-$90$ triangle $ACH$, $AH=12$, $CH=12\\sqrt3$; in the isosceles right triangle $BCH$, $BH=CH=12\\sqrt3$. So $AB=12+12\\sqrt3$ and\n$$[ABC]=\\tfrac12\\cdot(12+12\\sqrt3)\\cdot12\\sqrt3=216+72\\sqrt3.$$\n$a+b+c=216+72+3=291$.\n\n**Answer: 291**"
+      },
+      {
+        "title": "Law of sines",
+        "body": "$\\angle C=75^\\circ$, and in $\\triangle ATC$ the angles are $30^\\circ,75^\\circ,75^\\circ$, so $AC=AT=24$. In $\\triangle ABC$, $AB=\\frac{AC\\sin75^\\circ}{\\sin45^\\circ}=\\frac{24\\cdot\\frac{\\sqrt6+\\sqrt2}4}{\\frac{\\sqrt2}2}=12(\\sqrt3+1)$. Then\n$$[ABC]=\\tfrac12\\cdot AB\\cdot AC\\cdot\\sin60^\\circ=\\tfrac12\\cdot12(\\sqrt3+1)\\cdot24\\cdot\\tfrac{\\sqrt3}2=216+72\\sqrt3,$$\nso $a+b+c=291$.\n\n**Answer: 291**"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "trigonometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-2001-i-05",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "2001 AIME I",
+      "year": 2001,
+      "number": 5,
+      "url": "https://artofproblemsolving.com/wiki/index.php/2001_AIME_I_Problems/Problem_5"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "An equilateral triangle is inscribed in the ellipse whose equation is $x^2+4y^2=4$. One vertex of the triangle is $(0,1)$, one altitude is contained in the y-axis, and the length of each side is $\\sqrt{\\frac mn}$, where $m$ and $n$ are relatively prime positive integers. Find $m+n$.",
+    "image": null,
+    "choices": null,
+    "answer": "937",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Intersect a side with the ellipse",
+        "body": "The altitude from $(0,1)$ lies along the $y$-axis, so the sides through $(0,1)$ make $30^\\circ$ with the $y$-axis: one of them is $y=1-\\sqrt3x$. Substituting into the ellipse:\n$$x^2+4(1-\\sqrt3x)^2=4\\implies13x^2-8\\sqrt3x=0\\implies x=\\frac{8\\sqrt3}{13}.$$\nThe other two vertices are $\\left(\\pm\\frac{8\\sqrt3}{13},\\,y\\right)$, so the side length is $\\frac{16\\sqrt3}{13}=\\sqrt{\\frac{768}{169}}$, and $m+n=937$.\n\n**Answer: 937**"
+      },
+      {
+        "title": "Use symmetric vertices",
+        "body": "The other two vertices are $(\\pm x,y)$. The side $2x$ must equal the distance to $(0,1)$: $x^2+(1-y)^2=4x^2$, so $(1-y)^2=3x^2=3(4-4y^2)$ (using the ellipse). Dividing by $1-y\\ne0$: $1-y=12(1+y)$, so $y=-\\frac{11}{13}$ and $x^2=4\\left(1-\\frac{121}{169}\\right)=\\frac{192}{169}$. The side is $2x=\\sqrt{\\frac{768}{169}}$, and $m+n=937$.\n\n**Answer: 937**"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "algebra"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-2001-i-06",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "2001 AIME I",
+      "year": 2001,
+      "number": 6,
+      "url": "https://artofproblemsolving.com/wiki/index.php/2001_AIME_I_Problems/Problem_6"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "A fair die is rolled four times. The probability that each of the final three rolls is at least as large as the roll preceding it may be expressed in the form $m/n$, where $m$ and $n$ are relatively prime positive integers. Find $m+n$.",
+    "image": null,
+    "choices": null,
+    "answer": "79",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Stars and bars",
+        "body": "A nondecreasing sequence of four rolls is determined by how many times each value $1$–$6$ occurs: the number of solutions of $n_1+\\dots+n_6=4$, which is $\\binom{9}{4}=126$.\n\nProbability $\\frac{126}{6^4}=\\frac{126}{1296}=\\frac7{72}$, so $m+n=79$.\n\n**Answer: 79**"
+      },
+      {
+        "title": "Count by the multiset type",
+        "body": "Count the multisets of four values from $\\{1,\\dots,6\\}$ (each gives one nondecreasing order): all different $\\binom64=15$; one pair and two singles $6\\binom52=60$; two pairs $\\binom62=15$; a triple and a single $6\\cdot5=30$; four equal $6$. Total $126$, giving $\\frac{126}{1296}=\\frac7{72}$ and $m+n=79$.\n\n**Answer: 79**"
+      }
+    ],
+    "topics": [
+      "probability",
+      "counting"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-2001-i-07",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "2001 AIME I",
+      "year": 2001,
+      "number": 7,
+      "url": "https://artofproblemsolving.com/wiki/index.php/2001_AIME_I_Problems/Problem_7"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Triangle $ABC$ has $AB=21$, $AC=22$ and $BC=20$. Points $D$ and $E$ are located on $\\overline{AB}$ and $\\overline{AC}$, respectively, such that $\\overline{DE}$ is parallel to $\\overline{BC}$ and contains the center of the inscribed circle of triangle $ABC$. Then $DE=\\frac{m}{n}$, where $m$ and $n$ are relatively prime positive integers. Find $m+n$.",
+    "image": null,
+    "choices": null,
+    "answer": "923",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Compare heights",
+        "body": "Let $h$ be the altitude from $A$ and $r$ the inradius. With area $K$ and $s=\\frac{63}2$: $r=\\frac Ks$, $h=\\frac{2K}{20}$, so $\\frac rh=\\frac{20}{2s}=\\frac{20}{63}$.\n\n$DE$ lies at height $r$ above $BC$, so triangle $ADE$ is similar to $ABC$ with ratio $1-\\frac rh=\\frac{43}{63}$. Then $DE=20\\cdot\\frac{43}{63}=\\frac{860}{63}$, and $m+n=923$.\n\n**Answer: 923**"
+      },
+      {
+        "title": "Isosceles triangles at the incenter",
+        "body": "Let $I$ be the incenter. $BI$ bisects $\\angle B$ and $DI\\parallel BC$, so $\\angle DIB=\\angle IBC=\\angle DBI$: $DI=DB$. Similarly $EI=EC$. So the perimeter of $ADE$ is $AB+AC=43$, while that of $ABC$ is $63$. The similarity ratio is $\\frac{43}{63}$ and $DE=\\frac{43}{63}\\cdot20=\\frac{860}{63}$, giving $923$.\n\n**Answer: 923**"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-2001-i-08",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "2001 AIME I",
+      "year": 2001,
+      "number": 8,
+      "url": "https://artofproblemsolving.com/wiki/index.php/2001_AIME_I_Problems/Problem_8"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Call a positive integer $N$ a $\\textit{7-10 double}$ if the digits of the base-7 representation of $N$ form a base-10 number that is twice $N$. For example, $51$ is a 7-10 double because its base-7 representation is $102$. What is the largest 7-10 double?",
+    "image": null,
+    "choices": null,
+    "answer": "315",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Balance the digit weights",
+        "body": "If $N=\\sum d_i7^i$ (digits $0$–$6$), the condition is $\\sum d_i10^i=2\\sum d_i7^i$, i.e.\n$$\\sum d_i(10^i-2\\cdot7^i)=0.$$\nThe weights are $-1,-4,2,314,\\dots$ for $i=0,1,2,3,\\dots$. A nonzero digit in position $3$ or higher contributes at least $314$, while positions $0,1$ can subtract at most $6+24=30$. So $N$ has at most three base-7 digits and $2d_2=4d_1+d_0$.\n\nTo maximize take $d_2=6$: $4d_1+d_0=12$ with $d_0\\le6$, largest $d_1=3,\\ d_0=0$. So $N=630_7=6\\cdot49+3\\cdot7=315$ (check: $2\\cdot315=630$).\n\n**Answer: 315**"
+      }
+    ],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-2001-i-09",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "2001 AIME I",
+      "year": 2001,
+      "number": 9,
+      "url": "https://artofproblemsolving.com/wiki/index.php/2001_AIME_I_Problems/Problem_9"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "In triangle $ABC$, $AB=13$, $BC=15$ and $CA=17$. Point $D$ is on $\\overline{AB}$, $E$ is on $\\overline{BC}$, and $F$ is on $\\overline{CA}$. Let $AD=p\\cdot AB$, $BE=q\\cdot BC$, and $CF=r\\cdot CA$, where $p$, $q$, and $r$ are positive and satisfy $p+q+r=2/3$ and $p^2+q^2+r^2=2/5$. The ratio of the area of triangle $DEF$ to the area of triangle $ABC$ can be written in the form $m/n$, where $m$ and $n$ are relatively prime positive integers. Find $m+n$.",
+    "image": null,
+    "choices": null,
+    "answer": "61",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Subtract the corner triangles",
+        "body": "Using area $=\\frac12ab\\sin C$, the corner triangles have area fractions\n$$[ADF]=p(1-r),\\quad [BDE]=q(1-p),\\quad [CEF]=r(1-q)$$\n(times $[ABC]$). So\n$$\\frac{[DEF]}{[ABC]}=1-(p+q+r)+(pq+qr+rp).$$\nHere $pq+qr+rp=\\frac{(p+q+r)^2-(p^2+q^2+r^2)}2=\\frac{\\frac49-\\frac25}{2}=\\frac1{45}$, so the ratio is $1-\\frac23+\\frac1{45}=\\frac{16}{45}$ and $m+n=61$.\n\n**Answer: 61**"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "algebra"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-2001-i-10",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "2001 AIME I",
+      "year": 2001,
+      "number": 10,
+      "url": "https://artofproblemsolving.com/wiki/index.php/2001_AIME_I_Problems/Problem_10"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Let $S$ be the set of points whose coordinates $x,$ $y,$ and $z$ are integers that satisfy $0\\le x\\le2,$ $0\\le y\\le3,$ and $0\\le z\\le4.$ Two distinct points are randomly chosen from $S.$ The probability that the midpoint of the segment they determine also belongs to $S$ is $m/n,$ where $m$ and $n$ are relatively prime positive integers. Find $m + n.$",
+    "image": null,
+    "choices": null,
+    "answer": "200",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Match parities coordinate by coordinate",
+        "body": "The midpoint is a lattice point exactly when the two points agree in parity in every coordinate (it then automatically lies in the box).\n\nOrdered pairs (allowing the same point twice) with matching parities: $x\\in\\{0,1,2\\}$ has parity classes of sizes $2,1$, giving $2^2+1^2=5$; $y$: $2^2+2^2=8$; $z$: $3^2+2^2=13$. Total $5\\cdot8\\cdot13=520$. Removing the $60$ pairs of equal points and dividing by $2$: $230$ unordered pairs.\n\nProbability $\\frac{230}{\\binom{60}2}=\\frac{230}{1770}=\\frac{23}{177}$, so $m+n=200$.\n\n**Answer: 200**"
+      },
+      {
+        "title": "Sum over parity classes",
+        "body": "Split the $60$ points into $8$ classes by the parities of $(x,y,z)$; two points have a lattice midpoint iff they are in the same class. Even/odd counts are $2/1$ for $x$, $2/2$ for $y$, $3/2$ for $z$, so the class sizes are $12,8,12,8$ (even $x$) and $6,4,6,4$ (odd $x$). Good pairs:\n$$2\\binom{12}2+2\\binom82+2\\binom62+2\\binom42=132+56+30+12=230.$$\nProbability $\\frac{230}{1770}=\\frac{23}{177}$, so $m+n=200$.\n\n**Answer: 200**"
+      }
+    ],
+    "topics": [
+      "probability",
+      "counting"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-2001-i-11",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "2001 AIME I",
+      "year": 2001,
+      "number": 11,
+      "url": "https://artofproblemsolving.com/wiki/index.php/2001_AIME_I_Problems/Problem_11"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "In a rectangular array of points, with 5 rows and $N$ columns, the points are numbered consecutively from left to right beginning with the top row. Thus the top row is numbered 1 through $N,$ the second row is numbered $N + 1$ through $2N,$ and so forth. Five points, $P_1, P_2, P_3, P_4,$ and $P_5,$ are selected so that each $P_i$ is in row $i.$ Let $x_i$ be the number associated with $P_i.$ Now renumber the array consecutively from top to bottom, beginning with the first column. Let $y_i$ be the number associated with $P_i$ after the renumbering. It is found that $x_1 = y_2,$ $x_2 = y_1,$ $x_3 = y_4,$ $x_4 = y_5,$ and $x_5 = y_3.$ Find the smallest possible value of $N.$",
+    "image": null,
+    "choices": null,
+    "answer": "149",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Write the equations and solve congruences",
+        "body": "Let $P_i$ be in column $c_i$. Then $x_i=(i-1)N+c_i$ and $y_i=5(c_i-1)+i$. The conditions:\n$$c_1=5c_2-3,\\quad N+c_2=5c_1-4,\\quad 2N+c_3=5c_4-1,\\quad 3N+c_4=5c_5,\\quad 4N+c_5=5c_3-2.$$\nFrom the first two: $N=24c_2-19$, so $N\\equiv5\\pmod{24}$.\n\nFrom the last three: $c_4=5c_5-3N$, $c_3=5c_4-1-2N=25c_5-17N-1$, and then $c_5=5c_3-2-4N$ gives $124c_5=89N+7$. So $89N\\equiv-7\\pmod{124}$. Since $89\\cdot85=7565=61\\cdot124+1$, $N\\equiv-7\\cdot85\\equiv25\\pmod{124}$.\n\n$N=25+124t\\equiv1+4t\\pmod{24}$ must be $\\equiv5$, so $t\\equiv1\\pmod6$ and the smallest is $N=149$. Check: $c_2=7,\\ c_1=32,\\ c_5=107,\\ c_4=88,\\ c_3=141$, all between $1$ and $149$.\n\n**Answer: 149**"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "algebra"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-2001-i-12",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "2001 AIME I",
+      "year": 2001,
+      "number": 12,
+      "url": "https://artofproblemsolving.com/wiki/index.php/2001_AIME_I_Problems/Problem_12"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "A sphere is inscribed in the tetrahedron whose vertices are $A = (6,0,0), B = (0,4,0), C = (0,0,2),$ and $D = (0,0,0).$ The radius of the sphere is $m/n,$ where $m$ and $n$ are relatively prime positive integers. Find $m + n.$",
+    "image": null,
+    "choices": null,
+    "answer": "5",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Volume = r times surface / 3",
+        "body": "Volume $V=\\frac16\\cdot6\\cdot4\\cdot2=8$. The three right-angle faces have areas $12,6,4$. The plane $ABC$ is $2x+3y+6z=12$, at distance $\\frac{12}{7}$ from $D$, so $[ABC]=\\frac{3V}{12/7}=14$. Total surface $36$, and $r=\\frac{3V}{36}=\\frac23$: $m+n=5$.\n\n**Answer: 5**"
+      },
+      {
+        "title": "Distance from the center",
+        "body": "The center touches the three coordinate planes, so it is $(r,r,r)$. Its distance to $2x+3y+6z=12$ must also be $r$: $\\frac{12-11r}{7}=r$, so $r=\\frac23$ and $m+n=5$.\n\n**Answer: 5**"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-2001-i-13",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "2001 AIME I",
+      "year": 2001,
+      "number": 13,
+      "url": "https://artofproblemsolving.com/wiki/index.php/2001_AIME_I_Problems/Problem_13"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "In a certain circle, the chord of a $d$-degree arc is 22 centimeters long, and the chord of a $2d$-degree arc is 20 centimeters longer than the chord of a $3d$-degree arc, where $d < 120.$ The length of the chord of a $3d$-degree arc is $- m + \\sqrt {n}$ centimeters, where $m$ and $n$ are positive integers. Find $m + n.$",
+    "image": null,
+    "choices": null,
+    "answer": "174",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Chords as sines",
+        "body": "A chord of a $\\theta$-degree arc is $2R\\sin\\frac\\theta2$. Let $\\alpha=\\frac d2<60^\\circ$ and $c=\\cos\\alpha>\\frac12$. Then $2R\\sin\\alpha=22$ and $2R(\\sin2\\alpha-\\sin3\\alpha)=20$. Dividing,\n$$\\frac{\\sin2\\alpha-\\sin3\\alpha}{\\sin\\alpha}=2c-(3-4\\sin^2\\alpha)=2c+1-4c^2=\\frac{10}{11},$$\nso $44c^2-22c-1=0$ and $c=\\frac{22+\\sqrt{660}}{88}$, i.e. $44c=11+\\sqrt{165}$.\n\nThe $3d$ chord is $22\\cdot\\frac{\\sin3\\alpha}{\\sin\\alpha}=22(4c^2-1)$. From $44c^2=22c+1$: $22\\cdot4c^2=44c+2$, so the chord is $44c+2-22=44c-20=-9+\\sqrt{165}$. So $m+n=9+165=174$.\n\n**Answer: 174**"
+      },
+      {
+        "title": "Ptolemy",
+        "body": "Take consecutive points $A,B,C,D$ on the circle with arcs $AB=BC=CD=d$. Then $AB=BC=CD=22$, $AC=BD=x$ (the $2d$ chord) and $AD=y$ (the $3d$ chord), with $x=y+20$. Ptolemy on $ABCD$: $AC\\cdot BD=AB\\cdot CD+BC\\cdot AD$, so\n$$x^2=484+22y\\implies(y+20)^2=484+22y\\implies y^2+18y-84=0.$$\n$y=-9+\\sqrt{165}$, so $m+n=174$.\n\n**Answer: 174**"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "trigonometry"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-2001-i-14",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "2001 AIME I",
+      "year": 2001,
+      "number": 14,
+      "url": "https://artofproblemsolving.com/wiki/index.php/2001_AIME_I_Problems/Problem_14"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "A mail carrier delivers mail to the nineteen houses on the east side of Elm Street. The carrier notices that no two adjacent houses ever get mail on the same day, but that there are never more than two houses in a row that get no mail on the same day. How many different patterns of mail delivery are possible?",
+    "image": null,
+    "choices": null,
+    "answer": "351",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Recursion on the ending",
+        "body": "Write a pattern as a string of $1$s (mail) and $0$s with no $11$ and no $000$. For length $n$ let $A_n$, $B_n$, $C_n$ count the valid strings ending in $1$, in $10$ (a single $0$; for $n=1$ the string \"0\"), and in $00$. Appending a letter:\n$$A_n=B_{n-1}+C_{n-1},\\qquad B_n=A_{n-1},\\qquad C_n=B_{n-1}.$$\nStart with $(A_1,B_1,C_1)=(1,1,0)$. The totals $A_n+B_n+C_n$ for $n=1,2,\\dots,19$ are\n$$2,3,4,5,7,9,12,16,21,28,37,49,65,86,114,151,200,265,351$$\n(each total is the sum of the totals two and three places earlier). So there are $351$ patterns.\n\n**Answer: 351**"
+      },
+      {
+        "title": "Count by number of deliveries",
+        "body": "Let $k$ houses get mail. The $k-1$ inner gaps have $1$ or $2$ empty houses, the two end gaps $e_1,e_2\\in\\{0,1,2\\}$. If $j$ inner gaps have size $2$, the length is $k+(k-1)+j+e_1+e_2=19$, and there are $\\binom{k-1}{j}$ ways to pick those gaps.\n- $k=10$: $j=0$, $e_1=e_2=0$: $1$.\n- $k=9$: $j+e_1+e_2=2$: $\\binom82+8\\cdot2+3=47$.\n- $k=8$: $j+e_1+e_2=4$: $\\binom74+2\\binom73+3\\binom72+2\\binom71+1=35+70+63+14+1=183$.\n- $k=7$: $j+e_1+e_2=6$: $\\binom66+2\\binom65+3\\binom64+2\\binom63+\\binom62=1+12+45+40+15=113$.\n- $k=6$: $j+e_1+e_2=8$ with $j\\le5$: $2\\binom55+1\\cdot\\binom54=2+5=7$.\n- $k\\le5$ is impossible ($e_1+e_2\\le4$, $j\\le k-1$).\n\n(The multipliers $1,2,3,2,1$ count the end gaps with $e_1+e_2=0,1,2,3,4$.) Total $1+47+183+113+7=351$.\n\n**Answer: 351**"
+      }
+    ],
+    "topics": [
+      "counting",
+      "sequences-series"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-2001-i-15",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "2001 AIME I",
+      "year": 2001,
+      "number": 15,
+      "url": "https://artofproblemsolving.com/wiki/index.php/2001_AIME_I_Problems/Problem_15"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "The numbers $1, 2, 3, 4, 5, 6, 7,$ and $8$ are randomly written on the faces of a regular octahedron so that each face contains a different number. The probability that no two consecutive numbers, where $8$ and $1$ are considered to be consecutive, are written on faces that share an edge is $m/n,$ where $m$ and $n$ are relatively prime positive integers. Find $m + n.$",
+    "image": null,
+    "choices": null,
+    "answer": "85",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Count with the cube graph",
+        "body": "The faces of an octahedron and the \"share an edge\" relation form the graph of a cube (one cube vertex per face). So we count labelings of the cube's vertices by $1,\\dots,8$ with no two cyclically consecutive numbers on adjacent vertices.\n\nPut $1$ at a vertex $v$ (8 choices, all alike). Its three neighbors $n_1,n_2,n_3$ cannot hold $2$ or $8$, so $2$ and $8$ go to the three vertices $d_1,d_2,d_3$ at distance $2$ ($d_i$ is the one not adjacent to $n_i$) or to the opposite vertex $o$.\n\n**Case 1: $2$ and $8$ both at distance 2** ($3\\cdot2=6$ ways), say $2$ at $d_1$, $8$ at $d_2$. The free vertices $n_1,n_2,n_3,d_3,o$ are adjacent only along $d_3n_1,\\ d_3n_2,\\ d_3o$. $3$ must avoid the neighbors of $d_1$, so $3\\in\\{n_1,d_3\\}$; $7\\in\\{n_2,d_3\\}$.\n- $3$ at $d_3$: $7$ at $n_2$, $4$ must avoid $d_3$'s neighbors, so $4$ at $n_3$; $5,6$ fill $n_1,o$ in $2$ ways.\n- $7$ at $d_3$: symmetric, $2$ ways.\n- $3$ at $n_1$, $7$ at $n_2$: $d_3$ would need a value from $\\{4,5,6\\}$ not consecutive with $3$, $7$ or $o$'s value; only $5$, but then $o\\in\\{4,6\\}$ is adjacent to $5$. $0$ ways.\n\nSo $6\\cdot4=24$.\n\n**Case 2: one of $2,8$ at $o$, the other at some $d_i$** ($2\\cdot3=6$ ways), say $2$ at $o$ and $8$ at $d_1$. The free vertices form the path $n_3-d_2-n_1-d_3-n_2$; $3$ must avoid $o$'s neighbors (so $3$ is on some $n_i$) and $7$ must avoid $d_1$'s neighbors $n_2,n_3$. Placing $3,4,5,6,7$ along the path with no consecutive numbers next to each other and these restrictions gives exactly $6$ arrangements:\n$$35746,\\ 36475,\\ 46375,\\ 57364,\\ 57463,\\ 64753$$\n(listed along the path). So $6\\cdot6=36$.\n\nTotal good labelings: $8(24+36)=480$, probability $\\frac{480}{8!}=\\frac1{84}$, and $m+n=85$.\n\n**Answer: 85**"
+      }
+    ],
+    "topics": [
+      "probability",
+      "counting",
+      "graph-theory"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

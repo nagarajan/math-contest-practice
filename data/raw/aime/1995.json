@@ -1,0 +1,543 @@
+[
+  {
+    "id": "aime-1995-01",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "1995 AIME",
+      "year": 1995,
+      "number": 1,
+      "url": "https://artofproblemsolving.com/wiki/index.php/1995_AIME_Problems/Problem_1"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Square $S_{1}$ is $1\\times 1$. For $i\\ge 1$, the lengths of the sides of square $S_{i+1}$ are half the lengths of the sides of square $S_{i}$, two adjacent sides of square $S_{i}$ are perpendicular bisectors of two adjacent sides of square $S_{i+1}$, and the other two sides of square $S_{i+1}$ are the perpendicular bisectors of two adjacent sides of square $S_{i+2}$. The total area enclosed by at least one of $S_{1}, S_{2}, S_{3}, S_{4}, S_{5}$ can be written in the form $m/n$, where $m$ and $n$ are relatively prime positive integers. Find $m-n$.",
+    "image": "qimages/aime/1995/q01.webp",
+    "choices": null,
+    "answer": "255",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Add areas, subtract overlaps",
+        "body": "The areas are $1,\\frac14,\\frac1{16},\\frac1{64},\\frac1{256}$. Two adjacent sides of $S_i$ bisect two adjacent sides of $S_{i+1}$, so $S_i$ and $S_{i+1}$ overlap in one quarter of $S_{i+1}$. Non-consecutive squares do not overlap (as in the picture, $S_{i+2}$ sits off the far corner of $S_{i+1}$).\n\nSo the union has area\n$$\\left(1+\\tfrac14+\\tfrac1{16}+\\tfrac1{64}+\\tfrac1{256}\\right)-\\tfrac14\\left(\\tfrac14+\\tfrac1{16}+\\tfrac1{64}+\\tfrac1{256}\\right)=1+\\tfrac34\\cdot\\tfrac{85}{256}=1+\\tfrac{255}{1024}=\\tfrac{1279}{1024}.$$\nThen $m-n=1279-1024=255$.\n\n**Answer: 255**"
+      },
+      {
+        "title": "Each new square adds three quarters",
+        "body": "Start with $S_1$ (area 1). Each new square $S_{i+1}$ has one quarter inside $S_i$ and three quarters outside everything drawn so far. So the new area added is $\\frac34\\cdot\\frac14,\\ \\frac34\\cdot\\frac1{16},\\ \\frac34\\cdot\\frac1{64},\\ \\frac34\\cdot\\frac1{256}$, i.e. $\\frac{3}{16}+\\frac{3}{64}+\\frac{3}{256}+\\frac{3}{1024}=\\frac{192+48+12+3}{1024}=\\frac{255}{1024}$. Total $\\frac{1279}{1024}$, and $m-n=255$.\n\n**Answer: 255**"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "sequences-series"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-1995-02",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "1995 AIME",
+      "year": 1995,
+      "number": 2,
+      "url": "https://artofproblemsolving.com/wiki/index.php/1995_AIME_Problems/Problem_2"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Find the last three digits of the product of the positive roots of\n$$\\sqrt{1995}\\,x^{\\log_{1995}x}=x^2.$$",
+    "image": null,
+    "choices": null,
+    "answer": "25",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Take logarithms",
+        "body": "Take $\\log_{1995}$ of both sides and let $u=\\log_{1995}x$:\n$$\\tfrac12+u^2=2u \\;\\Longrightarrow\\; u^2-2u+\\tfrac12=0.$$\nThe discriminant is $4-2>0$, so there are two real $u$'s, giving two positive roots $x$. By Vieta $u_1+u_2=2$, so the product of the roots is $1995^{u_1+u_2}=1995^2=3980025$.\n\nThe last three digits are $025$.\n\n**Answer: 25**"
+      },
+      {
+        "title": "Work mod 1000 directly",
+        "body": "Once we know the product is $1995^2$: $1995\\equiv -5\\pmod{1000}$, so $1995^2\\equiv 25\\pmod{1000}$, i.e. the last three digits are $025$.\n\n**Answer: 25**"
+      }
+    ],
+    "topics": [
+      "algebra"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-1995-03",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "1995 AIME",
+      "year": 1995,
+      "number": 3,
+      "url": "https://artofproblemsolving.com/wiki/index.php/1995_AIME_Problems/Problem_3"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Starting at $(0,0)$, an object moves in the coordinate plane via a sequence of steps, each of length one. Each step is left, right, up, or down, all four equally likely. Let $p$ be the probability that the object reaches $(2,2)$ in six or fewer steps. Given that $p$ can be written in the form $m/n$, where $m$ and $n$ are relatively prime positive integers, find $m+n$.",
+    "image": null,
+    "choices": null,
+    "answer": "67",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Reach at step 4 or first at step 6",
+        "body": "$(2,2)$ is at even distance 4, so it can be reached only at step 4 or step 6.\n\n**Step 4:** the steps are R, R, U, U in some order: $\\binom42=6$ of $4^4=256$ sequences, probability $\\frac{6}{256}$.\n\n**First time at step 6:** 6-step paths ending at $(2,2)$ use R,R,U,U plus a cancelling pair L+R or D+U: multisets $\\{R^3,L,U^2\\}$ and $\\{R^2,U^3,D\\}$, each with $\\frac{6!}{3!\\,2!}=60$ orders, so $120$ paths. Of these, the ones already at $(2,2)$ after 4 steps are $6\\cdot4=24$ (first four steps R,R,U,U in some order, then RL, LR, UD or DU). That leaves $96$ of $4^6=4096$.\n\n$$p=\\frac{6}{256}+\\frac{96}{4096}=\\frac{96+96}{4096}=\\frac{3}{64},$$\nso $m+n=67$.\n\n**Answer: 67**"
+      }
+    ],
+    "topics": [
+      "probability",
+      "counting"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-1995-04",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "1995 AIME",
+      "year": 1995,
+      "number": 4,
+      "url": "https://artofproblemsolving.com/wiki/index.php/1995_AIME_Problems/Problem_4"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Circles of radius $3$ and $6$ are externally tangent to each other and are internally tangent to a circle of radius $9$. The circle of radius $9$ has a chord that is a common external tangent of the other two circles. Find the square of the length of this chord.",
+    "image": null,
+    "choices": null,
+    "answer": "224",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Distance from the center by interpolation",
+        "body": "Let $O$ be the center of the big circle, $A$ (radius 3) and $B$ (radius 6). Then $OA=9-3=6$, $OB=9-6=3$, $AB=3+6=9=OA+OB$, so $A$, $O$, $B$ are collinear with $O$ between them, and $O$ divides $AB$ in ratio $AO:OB=6:3$.\n\nThe distance from a point on line $AB$ to the tangent line changes linearly along $AB$: it is $3$ at $A$ and $6$ at $B$. At $O$, which is $\\frac69=\\frac23$ of the way from $A$ to $B$, it is $3+\\frac23(6-3)=5$.\n\nSo the chord is at distance 5 from the center: half-length $\\sqrt{81-25}=\\sqrt{56}$, length squared $4\\cdot56=224$.\n\n**Answer: 224**"
+      },
+      {
+        "title": "Similar right triangles",
+        "body": "Drop perpendiculars from $A$, $O$, $B$ to the chord, with feet $A'$, $O'$, $B'$ (lengths $3$, $d$, $6$). The segments $AA'$, $OO'$, $BB'$ are parallel, so $OO'$ is a weighted average: $d=\\frac{3\\cdot OB+6\\cdot OA}{AB}=\\frac{3\\cdot3+6\\cdot6}{9}=5$. Then (chord)$^2=4(9^2-5^2)=224$.\n\n**Answer: 224**"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-1995-05",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "1995 AIME",
+      "year": 1995,
+      "number": 5,
+      "url": "https://artofproblemsolving.com/wiki/index.php/1995_AIME_Problems/Problem_5"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "For certain real values of $a, b, c,$ and $d$, the equation $x^4+ax^3+bx^2+cx+d=0$ has four non-real roots. The product of two of these roots is $13+i$ and the sum of the other two roots is $3+4i$, where $i=\\sqrt{-1}$. Find $b$.",
+    "image": null,
+    "choices": null,
+    "answer": "51",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Use conjugate pairs",
+        "body": "Real coefficients mean the non-real roots come in conjugate pairs. The two roots $z,w$ with $zw=13+i$ cannot be conjugates (their product would be real), so the other two roots are $\\bar z,\\bar w$, and $\\bar z+\\bar w=3+4i$, i.e. $z+w=3-4i$.\n\n$b$ is the sum of the products of pairs of roots:\n$$b=zw+\\bar z\\bar w+(z+w)(\\bar z+\\bar w)=(13+i)+(13-i)+(3-4i)(3+4i)=26+25=51.$$\n\n**Answer: 51**"
+      },
+      {
+        "title": "Factor into two quadratics",
+        "body": "The quartic is $(x^2-(z+w)x+zw)(x^2-(\\bar z+\\bar w)x+\\bar z\\bar w)=(x^2-(3-4i)x+13+i)(x^2-(3+4i)x+13-i)$. The $x^2$ coefficient is $(13-i)+(13+i)+(3-4i)(3+4i)=26+25=51$.\n\n**Answer: 51**"
+      }
+    ],
+    "topics": [
+      "polynomials",
+      "complex-numbers"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-1995-06",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "1995 AIME",
+      "year": 1995,
+      "number": 6,
+      "url": "https://artofproblemsolving.com/wiki/index.php/1995_AIME_Problems/Problem_6"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Let $n=2^{31}3^{19}$. How many positive integer divisors of $n^2$ are less than $n$ but do not divide $n$?",
+    "image": null,
+    "choices": null,
+    "answer": "589",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Pair up divisors",
+        "body": "$n^2=2^{62}3^{38}$ has $63\\cdot39=2457$ divisors. They pair up as $d\\leftrightarrow\\frac{n^2}{d}$, with $n$ paired with itself, so $\\frac{2457-1}{2}=1228$ divisors are less than $n$.\n\nEvery divisor of $n$ other than $n$ is a divisor of $n^2$ less than $n$; there are $32\\cdot20-1=639$ of them.\n\nSo the answer is $1228-639=589$.\n\n**Answer: 589**"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "counting"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-1995-07",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "1995 AIME",
+      "year": 1995,
+      "number": 7,
+      "url": "https://artofproblemsolving.com/wiki/index.php/1995_AIME_Problems/Problem_7"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Given that $(1+\\sin t)(1+\\cos t)=5/4$ and\n$$(1-\\sin t)(1-\\cos t)=\\frac mn-\\sqrt{k},$$\nwhere $k, m,$ and $n$ are positive integers with $m$ and $n$ relatively prime, find $k+m+n$.",
+    "image": null,
+    "choices": null,
+    "answer": "27",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Use s = sin t + cos t",
+        "body": "Let $s=\\sin t+\\cos t$ and $q=\\sin t\\cos t=\\frac{s^2-1}{2}$. Then\n$$1+s+q=\\tfrac54\\;\\Longrightarrow\\; 1+s+\\tfrac{s^2-1}{2}=\\tfrac54\\;\\Longrightarrow\\; s^2+2s-\\tfrac32=0\\;\\Longrightarrow\\; s=-1\\pm\\sqrt{\\tfrac52}.$$\nSince $|s|\\le\\sqrt2$, $s=-1+\\frac{\\sqrt{10}}{2}$.\n\nThen $(1-\\sin t)(1-\\cos t)=1-s+q=\\frac54-2s=\\frac54+2-\\sqrt{10}=\\frac{13}{4}-\\sqrt{10}$.\n\nSo $k+m+n=10+13+4=27$.\n\n**Answer: 27**"
+      },
+      {
+        "title": "Use the product of the two expressions",
+        "body": "Let $X=(1+\\sin t)(1+\\cos t)=\\frac54$, $Y=(1-\\sin t)(1-\\cos t)$ and $q=\\sin t\\cos t$. Then\n$$XY=(1-\\sin^2t)(1-\\cos^2t)=q^2,\\qquad X+Y=2+2q.$$\nSo $Y=\\frac45q^2$ and $\\frac54+\\frac45q^2=2+2q$, i.e. $16q^2-40q-15=0$, $q=\\frac{5\\pm2\\sqrt{10}}{4}$. Since $|q|=\\frac12|\\sin2t|\\le\\frac12$, $q=\\frac{5-2\\sqrt{10}}{4}$, and\n$$Y=2+2q-\\tfrac54=\\tfrac34+\\tfrac52-\\sqrt{10}=\\tfrac{13}{4}-\\sqrt{10}.$$\nSo $k+m+n=27$.\n\n**Answer: 27**"
+      }
+    ],
+    "topics": [
+      "trigonometry",
+      "algebra"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-1995-08",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "1995 AIME",
+      "year": 1995,
+      "number": 8,
+      "url": "https://artofproblemsolving.com/wiki/index.php/1995_AIME_Problems/Problem_8"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "For how many ordered pairs of positive integers $(x,y)$, with $y<x\\le 100$, are both $\\frac xy$ and $\\frac{x+1}{y+1}$ integers?",
+    "image": null,
+    "choices": null,
+    "answer": "85",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Combine the two divisibilities",
+        "body": "We need $y\\mid x$ and $(y+1)\\mid(x+1)$, i.e. $x\\equiv0\\pmod y$ and $x\\equiv -1\\equiv y\\pmod{y+1}$. Also $x\\equiv y\\pmod y$. Since $\\gcd(y,y+1)=1$, both together say $x\\equiv y\\pmod{y(y+1)}$. With $x>y$:\n$$x=y+k\\,y(y+1),\\quad k\\ge1.$$\nCount $k$ with $y+ky(y+1)\\le100$ for each $y$: $k\\le\\frac{100-y}{y(y+1)}$.\n\n$y=1$: 49; $y=2$: 16; $y=3$: 8; $y=4$: 4; $y=5$: 3; $y=6$: 2; $y=7,8,9$: 1 each; $y\\ge10$: 0.\n\nTotal $49+16+8+4+3+2+1+1+1=85$.\n\n**Answer: 85**"
+      },
+      {
+        "title": "Write x = ay",
+        "body": "Let $x=ay$ with $a\\ge2$. Then $(y+1)\\mid(ay+1)=a(y+1)-(a-1)$, so $(y+1)\\mid(a-1)$: $a=1+k(y+1)$. Then $x=y+ky(y+1)\\le100$, and the count is the same as above: $85$.\n\n**Answer: 85**"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "counting"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-1995-09",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "1995 AIME",
+      "year": 1995,
+      "number": 9,
+      "url": "https://artofproblemsolving.com/wiki/index.php/1995_AIME_Problems/Problem_9"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Triangle $ABC$ is isosceles, with $AB=AC$ and altitude $AM=11$. Suppose that there is a point $D$ on $\\overline{AM}$ with $AD=10$ and $\\angle BDC=3\\angle BAC$. Then the perimeter of $\\triangle ABC$ may be written in the form $a+\\sqrt{b}$, where $a$ and $b$ are integers. Find $a+b$.",
+    "image": "qimages/aime/1995/q09.webp",
+    "choices": null,
+    "answer": "616",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Triple-angle tangent",
+        "body": "Let $\\alpha=\\angle BAM$ and $x=BM$. Then $\\angle BDM=3\\alpha$, $DM=1$, so\n$$\\tan\\alpha=\\frac{x}{11},\\qquad \\tan3\\alpha=\\frac{x}{1}=11\\tan\\alpha.$$\nWith $t=\\tan\\alpha$: $\\frac{3t-t^3}{1-3t^2}=11t\\Rightarrow 3-t^2=11-33t^2\\Rightarrow t^2=\\frac14$, so $t=\\frac12$ and $x=\\frac{11}{2}$.\n\nThen $AB=\\sqrt{121+\\frac{121}{4}}=\\frac{11\\sqrt5}{2}$, and the perimeter is $11\\sqrt5+11=11+\\sqrt{605}$. So $a+b=11+605=616$.\n\n**Answer: 616**"
+      },
+      {
+        "title": "Law of sines in triangle ABD",
+        "body": "$\\angle BDM=3\\alpha$ is an exterior angle of triangle $ABD$, whose angle at $A$ is $\\alpha$, so $\\angle ABD=2\\alpha$. By the law of sines,\n$$\\frac{BD}{\\sin\\alpha}=\\frac{AD}{\\sin2\\alpha}\\;\\Longrightarrow\\;BD=\\frac{10}{2\\cos\\alpha}=\\frac{5}{\\cos\\alpha}.$$\nWith $x=BM$: $BD^2=x^2+1$ and $\\cos\\alpha=\\frac{11}{\\sqrt{x^2+121}}$, so $121(x^2+1)=25(x^2+121)$, i.e. $96x^2=2904$ and $x^2=\\frac{121}{4}$. As before the perimeter is $11+11\\sqrt5=11+\\sqrt{605}$, and $a+b=616$.\n\n**Answer: 616**"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "trigonometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-1995-10",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "1995 AIME",
+      "year": 1995,
+      "number": 10,
+      "url": "https://artofproblemsolving.com/wiki/index.php/1995_AIME_Problems/Problem_10"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "What is the largest positive integer that is not the sum of a positive integral multiple of 42 and a positive composite integer?",
+    "image": null,
+    "choices": null,
+    "answer": "215",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Look at n−42k modulo 5",
+        "body": "$n$ is \"bad\" if each of $n-42, n-84, n-126,\\dots$ (while positive) is $1$ or a prime.\n\n**215 is bad:** $215-42k$ for $k=1,\\dots,5$ are $173,131,89,47,5$, all prime (and $k\\ge6$ gives negatives).\n\n**Every $n\\ge216$ is good:** look at $n-42,\\ n-84,\\ n-126,\\ n-168,\\ n-210$. Since $42\\equiv2\\pmod5$, these are $\\equiv n-2,\\,n-4,\\,n-1,\\,n-3,\\,n\\pmod 5$, all different, so one of them is a multiple of 5. All of them are at least $n-210\\ge6$, so that multiple of 5 is composite, and $n=42k+(\\text{composite})$.\n\nSo the answer is $215$.\n\n**Answer: 215**"
+      }
+    ],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-1995-11",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "1995 AIME",
+      "year": 1995,
+      "number": 11,
+      "url": "https://artofproblemsolving.com/wiki/index.php/1995_AIME_Problems/Problem_11"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "A right rectangular prism $P$ (i.e., a rectangular parallelepiped) has sides of integral length $a, b, c,$ with $a\\le b\\le c$. A plane parallel to one of the faces of $P$ cuts $P$ into two prisms, one of which is similar to $P$, and both of which have nonzero volume. Given that $b=1995$, for how many ordered triples $(a, b, c)$ does such a plane exist?",
+    "image": null,
+    "choices": null,
+    "answer": "40",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "The condition is ac = b squared",
+        "body": "The similar piece has sides $ka\\le kb\\le kc$ for some $0<k<1$, and it keeps two of the side lengths of $P$ (only one edge is cut). Since $ka<a\\le b\\le c$, $ka$ is not a kept length, so $kb$ and $kc$ are. Now $kb<b$ forces $kb=a$, and $kc<c$ forces $kc=a$ or $kc=b$. If $kc=a=kb$ then $b=c$, and the two kept lengths would be $a$ and $a$ while $P$ keeps two of $a,b,b$, so $a=b=c$; but a cube cut parallel to a face never gives a smaller cube. Hence $kc=b$:\n$$\\frac ab=\\frac bc,\\qquad ac=b^2,\\qquad a<b.$$\nConversely, if $ac=b^2$ and $a<b$, cut the edge of length $c$ at distance $\\frac{a^2}{b}$ from a face: the piece $\\frac{a^2}{b}\\times a\\times b$ equals $\\frac ab\\,(a\\times b\\times c)$.\n\nSo we count divisors $a$ of $1995^2=3^2\\cdot5^2\\cdot7^2\\cdot19^2$ with $a<1995$ (then $c=\\frac{1995^2}{a}>1995$ is an integer). $1995^2$ has $3^4=81$ divisors, one of which is $1995$, and the rest pair up as $a\\leftrightarrow\\frac{1995^2}{a}$: $\\frac{81-1}{2}=40$.\n\n**Answer: 40**"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "geometry"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-1995-12",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "1995 AIME",
+      "year": 1995,
+      "number": 12,
+      "url": "https://artofproblemsolving.com/wiki/index.php/1995_AIME_Problems/Problem_12"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Pyramid $OABCD$ has square base $ABCD$, congruent edges $\\overline{OA}, \\overline{OB}, \\overline{OC},$ and $\\overline{OD}$, and $\\angle AOB=45^\\circ$. Let $\\theta$ be the measure of the dihedral angle formed by faces $OAB$ and $OBC$. Given that $\\cos \\theta=m+\\sqrt{n}$, where $m$ and $n$ are integers, find $m+n$.",
+    "image": null,
+    "choices": null,
+    "answer": "5",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Perpendiculars to the common edge",
+        "body": "Let $OA=OB=OC=1$. In the congruent faces $OAB$ and $OCB$, drop perpendiculars from $A$ and from $C$ to $OB$; by symmetry they have the same foot $P$, and $\\theta=\\angle APC$.\n\n$AP=CP=\\sin45^\\circ=\\frac{\\sqrt2}{2}$. Also $AB^2=1+1-2\\cos45^\\circ=2-\\sqrt2$, and $AC$ is the diagonal of the square: $AC^2=2AB^2=4-2\\sqrt2$.\n\nLaw of cosines in triangle $APC$:\n$$\\cos\\theta=\\frac{AP^2+CP^2-AC^2}{2\\,AP\\cdot CP}=\\frac{\\frac12+\\frac12-(4-2\\sqrt2)}{1}=-3+2\\sqrt2=-3+\\sqrt8.$$\nSo $m+n=-3+8=5$.\n\n**Answer: 5**"
+      },
+      {
+        "title": "Normal vectors",
+        "body": "Place the square base with $A=(1,0,0)$, $B=(0,1,0)$, $C=(-1,0,0)$, $D=(0,-1,0)$ and $O=(0,0,h)$. Then $\\cos\\angle AOB=\\frac{h^2}{1+h^2}=\\frac{\\sqrt2}{2}$ gives $h^2=\\frac{\\sqrt2}{2-\\sqrt2}=\\sqrt2+1$.\n\nA normal to face $OAB$ is $(h,h,1)$ and to face $OBC$ is $(-h,h,1)$ (both point outward). The angle between outward normals is $180^\\circ-\\theta$:\n$\\cos(180^\\circ-\\theta)=\\frac{(h,h,1)\\cdot(-h,h,1)}{2h^2+1}=\\frac{1}{2h^2+1}=\\frac{1}{3+2\\sqrt2}=3-2\\sqrt2$, so $\\cos\\theta=-3+2\\sqrt2$ and $m+n=5$.\n\n**Answer: 5**"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "trigonometry"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-1995-13",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "1995 AIME",
+      "year": 1995,
+      "number": 13,
+      "url": "https://artofproblemsolving.com/wiki/index.php/1995_AIME_Problems/Problem_13"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Let $f(n)$ be the integer closest to $\\sqrt[4]{n}$. Find $\\displaystyle\\sum_{k=1}^{1995}\\frac 1{f(k)}$.",
+    "image": null,
+    "choices": null,
+    "answer": "400",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Count how often each value occurs",
+        "body": "$f(k)=m$ exactly when $\\left(m-\\frac12\\right)^4<k<\\left(m+\\frac12\\right)^4$ (the endpoints are not integers). The number of such $k$ is\n$$\\left(m+\\tfrac12\\right)^4-\\left(m-\\tfrac12\\right)^4=4m^3+m,$$\nso the values $f(k)=m$ contribute $\\frac{4m^3+m}{m}=4m^2+1$ to the sum.\n\nSince $6.5^4=1785.06$ and $7.5^4>1995$, the values $m=1,\\dots,6$ cover $k=1,\\dots,1785$, contributing $4(1+4+9+16+25+36)+6=370$. The remaining $1995-1785=210$ values have $f(k)=7$, contributing $\\frac{210}{7}=30$.\n\nTotal $370+30=400$.\n\n**Answer: 400**"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "sequences-series"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-1995-14",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "1995 AIME",
+      "year": 1995,
+      "number": 14,
+      "url": "https://artofproblemsolving.com/wiki/index.php/1995_AIME_Problems/Problem_14"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "In a circle of radius 42, two chords of length 78 intersect at a point whose distance from the center is 18. The two chords divide the interior of the circle into four regions. Two of these regions are bordered by segments of unequal lengths, and the area of either of them can be expressed uniquely in the form $m\\pi-n\\sqrt{d}$, where $m, n,$ and $d$ are positive integers and $d$ is not divisible by the square of any prime number. Find $m+n+d$.",
+    "image": null,
+    "choices": null,
+    "answer": "378",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Coordinates",
+        "body": "Each chord is at distance $\\sqrt{42^2-39^2}=\\sqrt{243}=9\\sqrt3$ from the center $O$. Put $O$ at the origin and the intersection point at $P=(18,0)$. The perpendicular from $O$ to a chord makes angle $\\varphi$ with $OP$ where $\\cos\\varphi=\\frac{9\\sqrt3}{18}=\\frac{\\sqrt3}{2}$, so $\\varphi=30^\\circ$; the chords are symmetric about the $x$-axis and point in directions $\\pm60^\\circ$. The midpoint of each chord is $18\\sin30^\\circ=9$ from $P$, so $P$ splits each chord into $39-9=30$ and $39+9=48$.\n\nThe region bounded by unequal segments (say the top one) has corners\n$$A=P+30(\\cos60^\\circ,\\sin60^\\circ)=(33,15\\sqrt3),\\qquad C=P+48(\\cos120^\\circ,\\sin120^\\circ)=(-6,24\\sqrt3),$$\nwith $\\angle APC=60^\\circ$. Check $|A|=|C|=42$. Also $A\\cdot C=-198+1080=882=\\frac12\\cdot42^2$, so $\\angle AOC=60^\\circ$ and $AC=42$.\n\nRegion = triangle $PAC$ + circular segment on chord $AC$:\n$$\\tfrac12\\cdot30\\cdot48\\sin60^\\circ+\\left(\\tfrac16\\pi\\cdot42^2-\\tfrac{\\sqrt3}{4}\\cdot42^2\\right)=360\\sqrt3+294\\pi-441\\sqrt3=294\\pi-81\\sqrt3.$$\nSo $m+n+d=294+81+3=378$.\n\n**Answer: 378**"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-1995-15",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "1995 AIME",
+      "year": 1995,
+      "number": 15,
+      "url": "https://artofproblemsolving.com/wiki/index.php/1995_AIME_Problems/Problem_15"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Let $p$ be the probability that, in the process of repeatedly flipping a fair coin, one will encounter a run of 5 heads before one encounters a run of 2 tails. Given that $p$ can be written in the form $m/n$ where $m$ and $n$ are relatively prime positive integers, find $m+n$.",
+    "image": null,
+    "choices": null,
+    "answer": "37",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "States after a tail and after a head",
+        "body": "Let $t$ be the probability of winning right after a tail has been flipped (current run: one T), and $h$ the probability right after a head that starts a new run of heads.\n\nFrom state T: the next flip must be H (else TT, lose), so $t=\\frac12h$.\n\nFrom state \"one H\": we win if the next 4 flips are H (probability $\\frac1{16}$); otherwise a T comes after $0,1,2,$ or $3$ more heads (probability $\\frac12+\\frac14+\\frac18+\\frac1{16}=\\frac{15}{16}$), sending us to state T:\n$$h=\\tfrac1{16}+\\tfrac{15}{16}t=\\tfrac1{16}+\\tfrac{15}{32}h\\;\\Longrightarrow\\;\\tfrac{17}{32}h=\\tfrac1{16}\\;\\Longrightarrow\\;h=\\tfrac2{17},\\quad t=\\tfrac1{17}.$$\nThe first flip puts us in state H or T with probability $\\frac12$ each:\n$$p=\\tfrac12\\cdot\\tfrac2{17}+\\tfrac12\\cdot\\tfrac1{17}=\\tfrac3{34},$$\nso $m+n=37$.\n\n**Answer: 37**"
+      },
+      {
+        "title": "Blocks between tails",
+        "body": "Break the flips into blocks: each block is a (possibly empty) run of heads followed by a tail. We lose when a block is a single T *after* the first block (two tails in a row), and win as soon as a run reaches 5 heads.\n\nThe first block: win with probability $\\frac1{32}$ (HHHHH), otherwise it ends with T after $0$ to $4$ heads. Each later block must start with H (else TT): win with probability $\\frac1{32}$, continue with probability $\\frac1{4}+\\frac18+\\frac1{16}+\\frac1{32}=\\frac{15}{32}$ (H to HHHH then T), lose with probability $\\frac12$. So\n$$p=\\frac1{32}+\\frac{31}{32}\\cdot\\frac{1/32}{1-15/32}=\\frac1{32}+\\frac{31}{32}\\cdot\\frac1{17}=\\frac{17+31}{544}=\\frac{48}{544}=\\frac3{34}.$$\nSo $m+n=37$.\n\n**Answer: 37**"
+      }
+    ],
+    "topics": [
+      "probability"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

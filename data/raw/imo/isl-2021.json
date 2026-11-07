@@ -1,0 +1,1067 @@
+[
+  {
+    "id": "imo-isl-2021-a1",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Algebra",
+      "year": 2021,
+      "number": 1,
+      "url": "https://www.imo-official.org/assets/documents/problems/2021/IMO2021SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "prompt": "Let $n$ be an integer, and let $A$ be a subset of $\\{0,1,2,3,\\dots,5^n\\}$ consisting of $4n+2$ numbers. Prove that there exist $a,b,c\\in A$ such that $a<b<c$ and $c+2a>3b$.",
+    "image": null,
+    "choices": null,
+    "type": "self",
+    "answer": "Proof: take $c=\\max A$; if every consecutive pair $x_i<x_{i+1}$ failed, then $c-x_i\\ge\\frac32(c-x_{i+1})$, so $c-x_0\\ge(3/2)^{4n}=(81/16)^n>5^n$, impossible.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Contradiction with a geometric growth",
+        "body": "The statement is meant for $n\\ge1$ (for $n=0$ the set $A=\\{0,1\\}$ has only two elements), so assume $n\\ge1$.\n\nList the elements of $A$ in increasing order: $x_0<x_1<\\dots<x_{4n+1}$, and put $c=x_{4n+1}$. Suppose, for contradiction, that no triple works. For every $i=0,1,\\dots,4n-1$ the triple $a=x_i<b=x_{i+1}<c$ then satisfies $c+2a\\le3b$, which can be rewritten as\n$$3(c-x_{i+1})\\le 2(c-x_i),\\qquad\\text{i.e.}\\qquad c-x_i\\ge\\tfrac32\\,(c-x_{i+1}).$$\nApplying this for $i=4n-1,4n-2,\\dots,0$ gives by induction\n$$c-x_i\\ge\\left(\\tfrac32\\right)^{4n-i}(c-x_{4n})\\quad(0\\le i\\le 4n).$$\nFor $i=0$, using $c-x_{4n}\\ge1$ (distinct integers):\n$$c-x_0\\ge\\left(\\tfrac32\\right)^{4n}=\\left(\\tfrac{81}{16}\\right)^n>5^n,$$\nbecause $\\frac{81}{16}=5.0625>5$. But $0\\le x_0<c\\le5^n$ gives $c-x_0\\le5^n$, a contradiction.\n\nHence there exist $a<b<c$ in $A$ with $c+2a>3b$. ∎"
+      },
+      {
+        "title": "Pigeonhole on geometric intervals",
+        "body": "Let $c=\\max A$ (assume $n\\ge1$; then $c\\ge 4n+1\\ge1$). For $k=0,1,\\dots,4n-1$ define the intervals\n$$I_k=\\Big[\\big(1-(2/3)^k\\big)c,\\ \\big(1-(2/3)^{k+1}\\big)c\\Big).$$\nThey are disjoint, consecutive, start at $0$ and end at $\\big(1-(16/81)^n\\big)c>c-(1/5)^nc\\ge c-1$. Every element of $A\\setminus\\{c\\}$ is an integer in $[0,c-1]$, so it lies in some $I_k$. There are $4n+1$ such elements and $4n$ intervals, so two of them, $a<b$, lie in the same $I_k$. Then\n$$c+2a\\ge c+2\\big(1-(2/3)^k\\big)c=3\\big(1-(2/3)^{k+1}\\big)c>3b,$$\nas required. ∎"
+      }
+    ],
+    "topics": [
+      "inequalities",
+      "sequences-series"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-isl-2021-a2",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Algebra",
+      "year": 2021,
+      "number": 2,
+      "url": "https://www.imo-official.org/assets/documents/problems/2021/IMO2021SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "prompt": "For every integer $n\\ge1$ consider the $n\\times n$ table with entry $\\left\\lfloor\\frac{ij}{n+1}\\right\\rfloor$ at the intersection of row $i$ and column $j$, for every $i=1,\\dots,n$ and $j=1,\\dots,n$. Determine all integers $n\\ge1$ for which the sum of the $n^2$ entries in the table is equal to $\\frac14n^2(n-1)$.",
+    "image": null,
+    "choices": null,
+    "type": "self",
+    "answer": "Exactly those $n$ for which $n+1$ is prime.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Pair row $i$ with row $n+1-i$",
+        "body": "**A floor inequality.** If $x+y$ is an integer, then\n$$\\lfloor x\\rfloor+\\lfloor y\\rfloor\\ge x+y-1,$$\nwith equality when $x\\notin\\mathbb Z$ and with $\\lfloor x\\rfloor+\\lfloor y\\rfloor=x+y$ when $x\\in\\mathbb Z$. Indeed, if $x\\in\\mathbb Z$ then $y\\in\\mathbb Z$ too and the floors change nothing; otherwise $\\{x\\}+\\{y\\}$ is a positive integer less than $2$, so it equals $1$.\n\n**Estimate.** Let $S$ be the sum of the table. For fixed $j$, the map $i\\mapsto n+1-i$ permutes the rows, so\n$$2S=\\sum_{i,j=1}^{n}\\left(\\left\\lfloor\\frac{ij}{n+1}\\right\\rfloor+\\left\\lfloor\\frac{(n+1-i)j}{n+1}\\right\\rfloor\\right).$$\nThe two numbers inside add up to $j$, an integer, so each bracket is at least $j-1$:\n$$2S\\ge\\sum_{i=1}^n\\sum_{j=1}^n(j-1)=n\\cdot\\frac{n(n-1)}2,\\qquad S\\ge\\frac14n^2(n-1).$$\nEquality holds if and only if every bracket equals $j-1$, i.e. no number $\\frac{ij}{n+1}$ with $1\\le i,j\\le n$ is an integer.\n\n**When does equality hold?**\n- If $n+1$ is prime, then $n+1\\nmid ij$ for $1\\le i,j\\le n$, so $S=\\frac14n^2(n-1)$.\n- If $n+1$ is composite, write $n+1=ab$ with $2\\le a,b\\le n$. Then for $i=a,\\ j=b$ the number $\\frac{ij}{n+1}=1$ is an integer, the inequality is strict and $S>\\frac14n^2(n-1)$.\n\n**Answer: all $n$ such that $n+1$ is a prime.** ∎"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "algebra"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-isl-2021-a3",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Algebra",
+      "year": 2021,
+      "number": 3,
+      "url": "https://www.imo-official.org/assets/documents/problems/2021/IMO2021SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "prompt": "Given a positive integer $n$, find the smallest value of\n$$\\left\\lfloor\\frac{a_1}{1}\\right\\rfloor+\\left\\lfloor\\frac{a_2}{2}\\right\\rfloor+\\dots+\\left\\lfloor\\frac{a_n}{n}\\right\\rfloor$$\nover all permutations $(a_1,a_2,\\dots,a_n)$ of $(1,2,\\dots,n)$.",
+    "image": null,
+    "choices": null,
+    "type": "self",
+    "answer": "$\\lfloor\\log_2 n\\rfloor+1$, i.e. $k+1$ when $2^k\\le n<2^{k+1}$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Cyclic blocks and a logarithmic lower bound",
+        "body": "Let $k$ be the integer with $2^k\\le n<2^{k+1}$.\n\n**A permutation achieving $k+1$.** Split $\\{1,\\dots,n\\}$ into the $k+1$ blocks $[1,1],[2,3],[4,7],\\dots,[2^{k-1},2^k-1],[2^k,n]$. On a block $[p,q]$ (where always $q<2p$) define\n$$a_p=q,\\qquad a_i=i-1\\ \\ (p<i\\le q),$$\ni.e. $(a_p,a_{p+1},\\dots,a_q)=(q,p,p+1,\\dots,q-1)$. This is a permutation of each block, hence of $\\{1,\\dots,n\\}$. On the block the contribution is\n$$\\left\\lfloor\\frac qp\\right\\rfloor+\\sum_{i=p+1}^{q}\\left\\lfloor\\frac{i-1}{i}\\right\\rfloor=1+0=1,$$\nsince $p\\le q<2p$. So the total is $k+1$.\n\n**Lower bound.** *Lemma.* For positive integers $a,b$: $\\left\\lfloor\\frac ab\\right\\rfloor\\ge\\log_2\\frac{a+1}b$.\n*Proof.* Let $t=\\lfloor a/b\\rfloor\\ge0$. Then $a<b(t+1)$, so $a+1\\le b(t+1)$ and $\\frac{a+1}b\\le t+1\\le2^t$ (as $2^t\\ge t+1$ for integers $t\\ge0$). Take $\\log_2$. $\\square$\n\nSumming the lemma over $i$:\n$$\\sum_{i=1}^n\\left\\lfloor\\frac{a_i}i\\right\\rfloor\\ge\\sum_{i=1}^n\\log_2(a_i+1)-\\sum_{i=1}^n\\log_2 i=\\log_2\\frac{2\\cdot3\\cdots(n+1)}{1\\cdot2\\cdots n}=\\log_2(n+1),$$\nbecause $a_1+1,\\dots,a_n+1$ is a permutation of $2,\\dots,n+1$. Since $n+1>2^k$, the sum is $>k$, and being an integer it is at least $k+1$.\n\n**Answer: the minimum is $\\lfloor\\log_2n\\rfloor+1$.** ∎"
+      },
+      {
+        "title": "Lower bound by covering the powers of $2$",
+        "body": "Here is another proof of the lower bound; the construction is as in the first solution. Let $P=\\{1,2,4,\\dots,2^k\\}$, the powers of $2$ in $\\{1,\\dots,n\\}$. Call an index $i$ *good* if $a_i\\ge i$, and then call $[i,a_i]$ a good interval.\n\n*The good intervals cover $\\{1,\\dots,n\\}$.* Take $x$ and follow its cycle $c_0=x,\\ c_1=a_{c_0},\\ c_2=a_{c_1},\\dots$ in the permutation. The walk eventually returns to $x$, so there is a first index $j\\ge0$ with $c_{j+1}=a_{c_j}\\ge x$. Put $i=c_j$. If $j=0$ then $i=x$; if $j>0$ then $i=c_j=a_{c_{j-1}}<x$ by the choice of $j$. In both cases $i\\le x\\le a_i$, so $i$ is good and $x$ is covered by $[i,a_i]$.\n\n*A good interval containing $p$ powers of $2$ contributes at least $p$.* If $[i,a_i]$ contains $p\\ge1$ powers of two, the largest is at least $2^{p-1}$ times the smallest, so $\\frac{a_i}i\\ge2^{p-1}\\ge p$ and $\\lfloor a_i/i\\rfloor\\ge p$.\n\nSince the good intervals cover the $k+1$ elements of $P$,\n$$\\sum_i\\left\\lfloor\\frac{a_i}i\\right\\rfloor\\ge\\sum_{i\\text{ good}}\\big|[i,a_i]\\cap P\\big|\\ge|P|=k+1.$$\n∎"
+      }
+    ],
+    "topics": [
+      "inequalities",
+      "number-theory"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-isl-2021-a4",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Algebra",
+      "year": 2021,
+      "number": 4,
+      "url": "https://www.imo-official.org/assets/documents/problems/2021/IMO2021SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "prompt": "Show that for all real numbers $x_1,\\dots,x_n$ the following inequality holds:\n$$\\sum_{i=1}^n\\sum_{j=1}^n\\sqrt{|x_i-x_j|}\\le\\sum_{i=1}^n\\sum_{j=1}^n\\sqrt{|x_i+x_j|}.$$",
+    "image": null,
+    "choices": null,
+    "type": "self",
+    "answer": "Proof: shift all $x_i$ by $t$; the left side is unchanged and the right side is piecewise concave in $t$, so it is minimised when some $x_i+x_j+2t=0$; then delete $x_i$ (if $i=j$) or $x_i,x_j$ and use induction.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [],
+    "topics": [
+      "inequalities",
+      "real-analysis"
+    ],
+    "difficulty": 2,
+    "duplicateOf": "imo-2021-02",
+    "reviewNote": null
+  },
+  {
+    "id": "imo-isl-2021-a5",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Algebra",
+      "year": 2021,
+      "number": 5,
+      "url": "https://www.imo-official.org/assets/documents/problems/2021/IMO2021SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "prompt": "Let $n\\ge2$ be an integer, and let $a_1,a_2,\\dots,a_n$ be positive real numbers such that $a_1+a_2+\\dots+a_n=1$. Prove that\n$$\\sum_{k=1}^n\\frac{a_k}{1-a_k}(a_1+a_2+\\dots+a_{k-1})^2<\\frac13.$$",
+    "image": null,
+    "choices": null,
+    "type": "self",
+    "answer": "Proof: with $s_k=a_1+\\dots+a_k$, each term satisfies $\\frac{a_k}{1-a_k}s_{k-1}^2<\\frac{s_k^3-s_{k-1}^3}3$; the right sides telescope to $\\frac13$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Compare each term with a telescoping difference",
+        "body": "Let $s_k=a_1+\\dots+a_k$ ($s_0=0$, $s_n=1$). Since $n\\ge2$ and all $a_i>0$, we have $0<a_k<1$. We claim that for every $k$\n$$\\frac{a_k}{1-a_k}\\,s_{k-1}^2<\\frac{s_k^3-s_{k-1}^3}{3}.\\tag{1}$$\nWrite $a=a_k$, $s=s_{k-1}$, so $s_k=s+a\\le1$. Then $\\frac{(s+a)^3-s^3}{3}=s^2a+sa^2+\\frac{a^3}3$, and multiplying (1) by $1-a>0$ it becomes\n$$as^2<(1-a)\\Big(s^2a+sa^2+\\frac{a^3}3\\Big).$$\nThe difference of the two sides is\n$$(1-a)\\Big(s^2a+sa^2+\\frac{a^3}3\\Big)-as^2=sa^2(1-s-a)+\\frac{a^3}{3}(1-a),$$\nwhere $sa^2(1-s-a)\\ge0$ because $s+a=s_k\\le1$, and $\\frac{a^3}3(1-a)>0$. This proves (1).\n\nAdding (1) for $k=1,\\dots,n$, the right-hand sides telescope:\n$$\\sum_{k=1}^n\\frac{a_k}{1-a_k}s_{k-1}^2<\\frac{s_n^3-s_0^3}{3}=\\frac13.$$\n∎"
+      },
+      {
+        "title": "Splitting a term increases the sum",
+        "body": "Let $S(a_1,\\dots,a_n)$ denote the left-hand side and $s=a_1+\\dots+a_{i-1}$. Replacing $a_i$ by two numbers $a_i/2,a_i/2$ (keeping the order) changes $S$ by\n$$\\frac{a_i/2}{1-a_i/2}\\Big(s^2+\\big(s+\\tfrac{a_i}2\\big)^2\\Big)-\\frac{a_i}{1-a_i}s^2\n=a_i\\,\\frac{(1-a_i-s)\\,s\\,a_i+(1-a_i)\\,a_i^2/4}{(2-a_i)(1-a_i)}>0$$\n(direct computation; the terms after position $i$ are unchanged since their prefix sums are unchanged). So halving terms strictly increases $S$. Repeating this, all terms become arbitrarily small while $S$ increases; for a subdivision $0=t_0<t_1<\\dots<t_N=1$ with mesh $\\to0$, $S=\\sum\\frac{\\Delta t}{1-\\Delta t}t_{j-1}^2\\to\\int_0^1x^2\\,dx=\\frac13$. Since the starting value is strictly smaller than every later value, it is $<\\frac13$. ∎"
+      }
+    ],
+    "topics": [
+      "inequalities"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-isl-2021-a6",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Algebra",
+      "year": 2021,
+      "number": 6,
+      "url": "https://www.imo-official.org/assets/documents/problems/2021/IMO2021SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "prompt": "Let $A$ be a finite set of (not necessarily positive) integers, and let $m\\ge2$ be an integer. Assume that there exist non-empty subsets $B_1,B_2,B_3,\\dots,B_m$ of $A$ whose elements add up to the sums $m^1,m^2,m^3,\\dots,m^m$, respectively. Prove that $A$ contains at least $m/2$ elements.",
+    "image": null,
+    "choices": null,
+    "type": "self",
+    "answer": "Proof: the $m^m$ numbers $\\sum_{k=1}^m c_km^k$ with digits $0\\le c_k\\le m-1$ are all different, but each equals $\\sum_{a\\in A}f_a\\,a$ with integer coefficients $0\\le f_a\\le m(m-1)$; so $m^m\\le(m^2-m+1)^{|A|}<m^{2|A|}$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [],
+    "topics": [
+      "number-theory",
+      "counting"
+    ],
+    "difficulty": 3,
+    "duplicateOf": "imo-2021-06",
+    "reviewNote": null
+  },
+  {
+    "id": "imo-isl-2021-a7",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Algebra",
+      "year": 2021,
+      "number": 7,
+      "url": "https://www.imo-official.org/assets/documents/problems/2021/IMO2021SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "prompt": "Let $n\\ge1$ be an integer, and let $x_0,x_1,\\dots,x_{n+1}$ be $n+2$ non-negative real numbers that satisfy $x_ix_{i+1}-x_{i-1}^2\\ge1$ for all $i=1,2,\\dots,n$. Show that\n$$x_0+x_1+\\dots+x_n+x_{n+1}>\\left(\\frac{2n}{3}\\right)^{3/2}.$$",
+    "image": null,
+    "choices": null,
+    "type": "self",
+    "answer": "Proof: $y_i=2x_i+x_{i+1}$ satisfies $y_i^2\\ge y_{i-1}^2+6$ (since $(a+2b)^2-(b+2c)^2=(a-b)^2+2(b-c)^2+6(ab-c^2)$), so $y_i\\ge\\sqrt{6i}$; then $3\\sum x_i\\ge\\sum_{i=1}^n y_i\\ge\\sqrt6\\sum\\sqrt i>\\sqrt6\\cdot\\frac23n^{3/2}$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "A quadratic identity and a square-root sum",
+        "body": "**Lemma 1.** If $a,b,c\\ge0$ and $ab-c^2\\ge1$, then $(a+2b)^2\\ge(b+2c)^2+6$.\n\n*Proof.* Expanding, $(a+2b)^2-(b+2c)^2=a^2+4ab+3b^2-4bc-4c^2=(a-b)^2+2(b-c)^2+6(ab-c^2)\\ge6$. $\\square$\n\n**Lemma 2.** $\\sqrt1+\\sqrt2+\\dots+\\sqrt n>\\frac23n^{3/2}$.\n\n*Proof.* The function $u\\mapsto(1+u)^{3/2}$ is strictly convex on $[-1,\\infty)$, so it lies above its tangent at $0$: $(1+u)^{3/2}>1+\\frac32u$ for $u\\ne0$, $u\\ge-1$. With $u=-\\frac1k$ ($k\\ge1$) and multiplying by $k^{3/2}$:\n$$(k-1)^{3/2}>k^{3/2}-\\tfrac32\\sqrt k.$$\nSumming over $k=1,\\dots,n$ and telescoping: $0>n^{3/2}-\\frac32\\left(\\sqrt1+\\dots+\\sqrt n\\right)$. $\\square$\n\n**Main proof.** Put $y_i=2x_i+x_{i+1}\\ge0$ for $i=0,1,\\dots,n$. For $1\\le i\\le n$, apply Lemma 1 with $a=x_{i+1}$, $b=x_i$, $c=x_{i-1}$ (here $ab-c^2=x_ix_{i+1}-x_{i-1}^2\\ge1$):\n$$y_i^2=(x_{i+1}+2x_i)^2\\ge(x_i+2x_{i-1})^2+6=y_{i-1}^2+6.$$\nSince $y_0^2\\ge0$, induction gives $y_i^2\\ge6i$, i.e. $y_i\\ge\\sqrt{6i}$.\n\nAll $x_j$ are non-negative, and each $x_j$ appears in $y_1+\\dots+y_n$ with total coefficient at most $3$, so\n$$3(x_0+x_1+\\dots+x_{n+1})\\ge y_1+\\dots+y_n\\ge\\sqrt6\\left(\\sqrt1+\\dots+\\sqrt n\\right)>\\sqrt6\\cdot\\frac23n^{3/2}.$$\nDividing by $3$ and using $\\frac{\\sqrt6}{3}\\cdot\\frac23=\\frac{2\\sqrt6}{9}=\\frac{2\\sqrt2}{3\\sqrt3}$ and $\\left(\\frac{2n}3\\right)^{3/2}=\\frac{2\\sqrt2}{3\\sqrt3}\\,n^{3/2}$, we get\n$$x_0+\\dots+x_{n+1}>\\left(\\frac{2n}3\\right)^{3/2}.$$\n∎\n\n*Remark.* The constant is sharp: $x_i=\\sqrt{2/3}\\,(\\sqrt i+1)$ satisfies the conditions, and its sum is $\\left(\\frac{2n}3\\right)^{3/2}+O(n)$."
+      }
+    ],
+    "topics": [
+      "inequalities",
+      "sequences-series"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-isl-2021-a8",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Algebra",
+      "year": 2021,
+      "number": 8,
+      "url": "https://www.imo-official.org/assets/documents/problems/2021/IMO2021SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "prompt": "Determine all functions $f:\\mathbb R\\to\\mathbb R$ that satisfy\n$$\\big(f(a)-f(b)\\big)\\big(f(b)-f(c)\\big)\\big(f(c)-f(a)\\big)=f(ab^2+bc^2+ca^2)-f(a^2b+b^2c+c^2a)$$\nfor all real numbers $a,b,c$.",
+    "image": null,
+    "choices": null,
+    "type": "self",
+    "answer": "$f(x)=\\alpha x+\\beta$ or $f(x)=\\alpha x^3+\\beta$ with $\\alpha\\in\\{-1,0,1\\}$ and $\\beta\\in\\mathbb R$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Constant or injective, then multiplicative, then $x^\\tau$",
+        "body": "Write $E(a,b,c)$ for the equation, $P=ab^2+bc^2+ca^2$, $Q=a^2b+b^2c+c^2a$, and note the identity $P-Q=(a-b)(b-c)(c-a)$.\n\n**These functions work.** Constants $\\beta$ cancel on both sides. For $f(x)=x$ the equation is exactly the identity $P-Q=(a-b)(b-c)(c-a)$. For $f(x)=x^3$ we need $(a^3-b^3)(b^3-c^3)(c^3-a^3)=P^3-Q^3$. Let $\\omega$ be a primitive cube root of unity. Expanding, $(a-\\omega b)(b-\\omega c)(c-\\omega a)=\\omega^2P-\\omega Q=\\omega^2(P-\\omega^2Q)$, and similarly $(a-\\omega^2b)(b-\\omega^2c)(c-\\omega^2a)=\\omega(P-\\omega Q)$. Since $x^3-y^3=(x-y)(x-\\omega y)(x-\\omega^2y)$, multiplying these with $(a-b)(b-c)(c-a)=P-Q$ gives $(a^3-b^3)(b^3-c^3)(c^3-a^3)=(P-Q)(P-\\omega Q)(P-\\omega^2Q)=P^3-Q^3$. Replacing $f$ by $-f$ changes the sign of both sides, so $\\alpha=-1$ also works.\n\nFrom now on let $f$ be a solution. Since $f+C$ is also a solution, assume $f(0)=0$.\n\n**Step 1: $f\\equiv0$ or $f$ is injective.** Let $\\Theta=\\{(a,b):f(a)=f(b)\\}$. If $(a,b)\\in\\Theta$, then the left side of $E(a,b,x)$ vanishes, so\n$$H_{a,b}(x):=\\big(ab^2+bx^2+xa^2,\\ a^2b+b^2x+x^2a\\big)\\in\\Theta\\quad\\text{for all }x.$$\nSuppose $(a,b)\\in\\Theta$ with $a\\ne b$. The difference of the coordinates of $H_{a,b}(x)$ is $(a-b)(b-x)(x-a)$ and their sum is $(x^2+ab)(a+b)+x(a^2+b^2)$; both are non-zero polynomials in $x$ (the second has leading coefficient $a+b$, or equals $2a^2x\\ne0$ if $a+b=0$). Choosing $x$ outside their finitely many roots gives $(\\alpha,\\beta)\\in\\Theta$ with $\\alpha\\ne\\pm\\beta$.\n\nNow $E(t,1,0)$ reads $\\big(f(t)-f(1)\\big)f(1)\\big(-f(t)\\big)=f(t)-f(t^2)$. Its left side depends only on $f(t)$, so $f(\\alpha)=f(\\beta)$ gives $f(\\alpha^2)=f(\\beta^2)$, and $\\alpha^2\\ne\\beta^2$. Since $\\Theta$ is symmetric, we may assume $\\alpha^2<\\beta^2$. Repeating the squaring, $\\big(\\alpha^{2^j},\\beta^{2^j}\\big)\\in\\Theta$ for all $j\\ge1$; if $\\alpha=0$ these are $(0,\\beta^{2^j})$, otherwise the ratio $(\\beta^2/\\alpha^2)^{2^{j-1}}$ tends to infinity. So we obtain $(\\gamma,\\delta)\\in\\Theta$ with $\\delta>5\\gamma\\ge0$.\n\nIf $\\gamma=0$ put $r=\\delta$. If $\\gamma>0$, the quadratic $\\gamma x^2+\\delta^2x+\\delta\\gamma^2=0$ has discriminant $\\delta(\\delta^3-4\\gamma^3)>0$, and its root $x$ is negative (all coefficients are positive). Then $H_{\\delta,\\gamma}(x)=(0,r)$ for some $r$, and $0-r=(\\delta-\\gamma)(\\gamma-x)(x-\\delta)<0$, so $r\\ne0$. Either way $(0,r)\\in\\Theta$ with $r\\ne0$.\n\nNext $H_{0,r}(x)=(rx^2,r^2x)\\in\\Theta$, so $f(rx^2)=f(r^2x)$ for all $x$; replacing $x$ by $-x$, $f(r^2x)=f(-r^2x)$, so $f$ is even: $(a,-a)\\in\\Theta$ for all $a$. Then\n$$H_{a,-a}(x)=\\big(a^3-ax^2+a^2x,\\ -a^3+a^2x+ax^2\\big)\\in\\Theta.$$\nFor $x=\\varphi a$ with $\\varphi=\\frac{1+\\sqrt5}2$ (so $\\varphi^2=\\varphi+1$) this is $\\big(0,(1+\\sqrt5)a^3\\big)$. As $a$ ranges over $\\mathbb R$, $(1+\\sqrt5)a^3$ takes every real value, so $f\\equiv f(0)=0$.\n\n**Step 2: if $f$ is injective, then $f$ is odd and (after a sign change) $f(1)=1$.** $E(a,b,0)$ gives\n$$f(a)f(b)\\big(f(a)-f(b)\\big)=f(a^2b)-f(ab^2).\\tag{$\\heartsuit$}$$\nLet $\\kappa=f(1)\\ne0$. With $b=1$: $\\kappa f(a)\\big(f(a)-\\kappa\\big)=f(a^2)-f(a)$. Subtracting the same relation for $-a$:\n$$\\kappa\\big(f(a)-f(-a)\\big)\\big(f(a)+f(-a)-\\kappa\\big)=f(-a)-f(a).$$\nFor $a\\ne0$ injectivity allows division: $f(a)+f(-a)=\\kappa-\\kappa^{-1}=:\\lambda$. Hence for $a,b\\ne0$: $f(a)-f(b)=f(-b)-f(-a)$. Write ($\\heartsuit$) for $(-a,-b)$ with $a,b\\ne0$; its right side is $f(-a^2b)-f(-ab^2)=f(ab^2)-f(a^2b)$. Adding to ($\\heartsuit$):\n$$\\big(f(a)-f(b)\\big)\\big(f(a)f(b)-f(-a)f(-b)\\big)=0.$$\nSo for distinct non-zero $a,b$: $f(a)f(b)=(\\lambda-f(a))(\\lambda-f(b))$, i.e. $\\lambda\\big(\\lambda-f(a)-f(b)\\big)=0$. If $\\lambda\\ne0$, then $f(b)=\\lambda-f(a)$ for all $b\\ne0,a$, contradicting injectivity. So $\\lambda=0$, $\\kappa=\\pm1$, and $f$ is odd. Replacing $f$ by $-f$ if necessary, $f(1)=1$.\n\n**Step 3: $f$ is multiplicative and positive on $(0,\\infty)$.** With $\\kappa=1$ the relation for $b=1$ becomes $f(a^2)=f(a)^2$. Adding ($\\heartsuit$) for $(a,b)$ and $(a,-b)$ (using oddness) gives $-2f(a)f(b)^2=-2f(ab^2)$, i.e. $f(ab^2)=f(a)f(b^2)$. Hence $f(ax)=f(a)f(x)$ for all $a$ and all $x\\ge0$, and by oddness for all real $a,x$. Also $f(x)=f(\\sqrt x)^2\\ge0$ for $x\\ge0$, and $f(x)>0$ for $x>0$ by injectivity.\n\n**Step 4: $f(x)=x^\\tau$ on $(0,\\infty)$ with $\\tau>0$.** Let $g(t)=\\ln f(e^t)$; then $g$ is additive. *Fact:* an additive $g$ bounded above on some interval $[p,p+h]$ ($h>0$) is linear. Indeed, for $s\\in[0,h]$, $g(s)=g(p+s)-g(p)$ is bounded above, and $g(s)=g(h)-g(h-s)$ is bounded below; so $\\varphi(t)=g(t)-\\frac{g(h)}h t$ is additive, $h$-periodic and bounded on $[0,h]$, hence bounded on $\\mathbb R$; since $\\varphi(Nt)=N\\varphi(t)$ for all $N$, $\\varphi\\equiv0$.\n\nSo it suffices to show that $f$ is bounded above on some interval in $(0,\\infty)$.\n- If $f(b)\\le1$ for all $b\\in(0,\\frac1{10})$, we are done.\n- Otherwise pick $b\\in(0,\\frac1{10})$ with $f(b)>1$. $E(1,b,x)$ reads\n$$f(b^2+bx^2+x)=f(x^2+b^2x+b)+\\big(f(b)-1\\big)\\big(f(x)-f(b)\\big)\\big(f(x)-1\\big).$$\nHere $x^2+b^2x+b>0$ (discriminant $b^4-4b<0$), so the first term on the right is positive, and $(t-1)(t-f(b))\\ge-\\frac{(f(b)-1)^2}4$ for every real $t$. So $f(u)\\ge-M$ with $M=\\frac{(f(b)-1)^3}4$ for every value $u=bx^2+x+b^2$, i.e. for all $u\\ge b^2-\\frac1{4b}$. By oddness $f(u)\\le M$ for $0<u\\le\\frac1{4b}-b^2$, an interval since $\\frac1{4b}>b^2$.\n\nHence $f(x)=x^\\tau$ for $x>0$. In the second case $f(b)=b^\\tau>1$ with $b<1$ would force $\\tau<0$, but then $x^\\tau$ is unbounded near $0$, contradicting the bound; so the first case holds, $x^\\tau\\le1$ near $0$ and $\\tau\\ge0$; $\\tau\\ne0$ by injectivity. Thus $\\tau>0$.\n\n**Step 5: $\\tau\\in\\{1,3\\}$.** Take distinct reals $u,v,w$, a small $h>0$ and $a=1+uh$, $b=1+vh$, $c=1+wh$ (all positive). By the mean value theorem, $a^\\tau-b^\\tau=\\tau\\eta^{\\tau-1}(a-b)$ with $\\eta\\to1$, so the left side of $E(a,b,c)$ is $\\tau^3(a-b)(b-c)(c-a)(1+o(1))$. On the right, $P^\\tau-Q^\\tau=\\tau\\xi^{\\tau-1}(P-Q)$ with $\\xi$ between $P$ and $Q$, both tending to $3$; and $P-Q=(a-b)(b-c)(c-a)\\ne0$. Dividing by $(a-b)(b-c)(c-a)$ and letting $h\\to0$:\n$$\\tau^3=\\tau\\cdot3^{\\tau-1}\\iff F(\\tau):=3^{(\\tau-1)/2}-\\tau=0.$$\n$F$ is strictly convex, so it has at most two zeros; $F(1)=F(3)=0$. Hence $\\tau\\in\\{1,3\\}$, and by oddness $f(x)=x$ or $f(x)=x^3$ for all $x$.\n\n**Conclusion.** Undoing the normalisations ($f\\mapsto\\pm f$, adding a constant) and including the case $f\\equiv$ const, the solutions are\n$$f(x)=\\alpha x+\\beta\\quad\\text{or}\\quad f(x)=\\alpha x^3+\\beta,\\qquad\\alpha\\in\\{-1,0,1\\},\\ \\beta\\in\\mathbb R.$$\n∎"
+      }
+    ],
+    "topics": [
+      "functional-equations"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-isl-2021-c1",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Combinatorics",
+      "year": 2021,
+      "number": 1,
+      "url": "https://www.imo-official.org/assets/documents/problems/2021/IMO2021SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "prompt": "Let $S$ be an infinite set of positive integers, such that there exist four pairwise distinct $a,b,c,d\\in S$ with $\\gcd(a,b)\\ne\\gcd(c,d)$. Prove that there exist three pairwise distinct $x,y,z\\in S$ such that $\\gcd(x,y)=\\gcd(y,z)\\ne\\gcd(z,x)$.",
+    "image": null,
+    "choices": null,
+    "type": "self",
+    "answer": "Proof: pick $\\alpha\\in S$ whose gcds with other elements take two values, an infinite class $B$ with $\\gcd(\\alpha,\\beta)=d$, and $\\gamma$ with $\\gcd(\\alpha,\\gamma)\\ne d$; two $\\beta_1,\\beta_2\\in B$ share $\\gcd(\\beta_i,\\gamma)=d'$, and one of the triangles $\\alpha\\beta_1\\gamma$, $\\alpha\\beta_1\\beta_2$, $\\gamma\\beta_1\\beta_2$ works.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Pigeonhole on divisors",
+        "body": "**Step 1: a good vertex.** There is $\\alpha\\in S$ such that the numbers $\\gcd(\\alpha,s)$, $s\\in S\\setminus\\{\\alpha\\}$, take at least two values. Otherwise for each $u\\in S$ the value $\\gcd(u,s)$ would be the same number $g(u)$ for all $s\\ne u$, and then\n$$\\gcd(a,b)=g(a)=\\gcd(a,c)=g(c)=\\gcd(c,d),$$\ncontradicting the hypothesis.\n\n**Step 2: an infinite class.** Each $\\gcd(\\alpha,s)$ is a divisor of $\\alpha$, and $\\alpha$ has finitely many divisors, while $S\\setminus\\{\\alpha\\}$ is infinite. So some divisor $d$ of $\\alpha$ has an infinite class\n$$B=\\{\\beta\\in S\\setminus\\{\\alpha\\}:\\gcd(\\alpha,\\beta)=d\\}.$$\nBy Step 1 there is $\\gamma\\in S\\setminus\\{\\alpha\\}$ with $\\gcd(\\alpha,\\gamma)\\ne d$; in particular $\\gamma\\notin B$.\n\n**Step 3: two elements of $B$ that look the same from $\\gamma$.** The values $\\gcd(\\beta,\\gamma)$, $\\beta\\in B$, are divisors of $\\gamma$, so there are distinct $\\beta_1,\\beta_2\\in B$ with $\\gcd(\\beta_1,\\gamma)=\\gcd(\\beta_2,\\gamma)=:d'$. The elements $\\alpha,\\gamma,\\beta_1,\\beta_2$ are pairwise distinct.\n\n**Step 4: cases.**\n- If $d'=d$: take $(x,y,z)=(\\alpha,\\beta_1,\\gamma)$. Then $\\gcd(\\alpha,\\beta_1)=d=\\gcd(\\beta_1,\\gamma)$ and $\\gcd(\\gamma,\\alpha)\\ne d$.\n- If $d'\\ne d$ and $\\gcd(\\beta_1,\\beta_2)\\ne d$: take $(x,y,z)=(\\beta_1,\\alpha,\\beta_2)$; then $\\gcd(\\beta_1,\\alpha)=d=\\gcd(\\alpha,\\beta_2)\\ne\\gcd(\\beta_2,\\beta_1)$.\n- If $d'\\ne d$ and $\\gcd(\\beta_1,\\beta_2)=d$: take $(x,y,z)=(\\beta_1,\\gamma,\\beta_2)$; then $\\gcd(\\beta_1,\\gamma)=d'=\\gcd(\\gamma,\\beta_2)\\ne d=\\gcd(\\beta_2,\\beta_1)$.\n\nIn every case we found the required triple. ∎\n\n*Graph view.* Colour each edge $\\{s,t\\}$ of the complete graph on $S$ by $\\gcd(s,t)$; every vertex sees finitely many colours, at least two colours occur, and the argument finds a triangle with exactly two colours."
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "graph-theory"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-isl-2021-c2",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Combinatorics",
+      "year": 2021,
+      "number": 2,
+      "url": "https://www.imo-official.org/assets/documents/problems/2021/IMO2021SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "prompt": "Let $n\\ge3$ be an integer. An integer $m\\ge n+1$ is called *$n$-colourful* if, given infinitely many marbles in each of $n$ colours $C_1,C_2,\\dots,C_n$, it is possible to place $m$ of them around a circle so that in any group of $n+1$ consecutive marbles there is at least one marble of colour $C_i$ for each $i=1,\\dots,n$.\n\nProve that there are only finitely many positive integers which are not $n$-colourful. Find the largest among them.",
+    "image": null,
+    "choices": null,
+    "type": "self",
+    "answer": "The largest non-$n$-colourful number is $n^2-n-1$; every $m\\ge n(n-1)$ is $n$-colourful.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "A pigeonhole bound and blocks $[1,\\dots,n]$ / $[1,1,2,\\dots,n]$",
+        "body": "By definition the numbers $1,\\dots,n$ are not $n$-colourful; we show that $n^2-n-1$ is not $n$-colourful while every $m\\ge n^2-n$ is. Note $n^2-n-1\\ge n+1$ for $n\\ge3$. This proves finiteness and gives the answer.\n\n**$m=n^2-n-1$ is not colourful.** Suppose such a circle exists. If every colour occurred at least $n-1$ times, there would be at least $n(n-1)>m$ marbles; so some colour, say blue, occurs at most $n-2$ times (and at least once, because any $n+1$ consecutive marbles contain blue). The blue marbles cut the circle into at most $n-2$ arcs of consecutive non-blue marbles, containing altogether at least $m-(n-2)=(n-1)^2$ marbles. Since $(n-1)^2=n(n-2)+1>n(n-2)$, some arc contains at least $n+1$ marbles. These are $n+1$ consecutive marbles without blue — a contradiction.\n\n**Every $m\\ge n(n-1)$ is colourful.** Write $m=nk+j$ with $0\\le j\\le n-1$; then $k\\ge n-1\\ge j$. Around the circle place $k-j$ *short blocks* $[1,2,\\dots,n]$ followed by $j$ *long blocks* $[1,1,2,\\dots,n]$ (numbers denote colours). This uses $n(k-j)+(n+1)j=m$ marbles.\n\nIt suffices to show that for each colour $c$, any two cyclically consecutive marbles of colour $c$ are at distance at most $n+1$ (so at most $n$ marbles lie strictly between them), because then every $n+1$ consecutive marbles contain colour $c$.\n- *Colour $c\\ge2$* occurs once per block, at offset $c-1$ in a short block and $c$ in a long block (offsets counted from $0$). From its occurrence in a block of length $L$ at offset $o$ to the next block's occurrence at offset $o'$ the distance is $L-o+o'$. For a short block this is $n-(c-1)+o'\\in\\{n,n+1\\}$; for a long block $(n+1)-c+o'\\in\\{n,n+1\\}$.\n- *Colour $1$* occurs at offset $0$ of every block and also at offset $1$ of long blocks. The distance from the last $1$ of a block to the first $1$ of the next block is $n$ in both cases, and inside a long block the two $1$'s are adjacent.\n\nSo all distances are at most $n+1$ and the arrangement works.\n\n**Answer: the non-colourful numbers are finite in number, and the largest is $n^2-n-1$.** ∎"
+      }
+    ],
+    "topics": [
+      "counting",
+      "logic"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-isl-2021-c3",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Combinatorics",
+      "year": 2021,
+      "number": 3,
+      "url": "https://www.imo-official.org/assets/documents/problems/2021/IMO2021SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "prompt": "A thimblerigger has $2021$ thimbles numbered from $1$ through $2021$. The thimbles are arranged in a circle in arbitrary order. The thimblerigger performs a sequence of $2021$ moves; in the $k$-th move, he swaps the positions of the two thimbles adjacent to thimble $k$.\n\nProve that there exists a value of $k$ such that, in the $k$-th move, the thimblerigger swaps some thimbles $a$ and $b$ such that $a<k<b$.",
+    "image": null,
+    "choices": null,
+    "type": "self",
+    "answer": "Proof: suppose not; colour walnuts $1,\\dots,k$ red after move $k$. Each move turns one black hole red while its two neighbours have equal colours, and the swap never changes the colour pattern; an even-length block of black holes always survives, so the holes can never all become red — but after move $2021$ they are.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [],
+    "topics": [
+      "logic",
+      "counting"
+    ],
+    "difficulty": 2,
+    "duplicateOf": "imo-2021-05",
+    "reviewNote": null
+  },
+  {
+    "id": "imo-isl-2021-c4",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Combinatorics",
+      "year": 2021,
+      "number": 4,
+      "url": "https://www.imo-official.org/assets/documents/problems/2021/IMO2021SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "prompt": "The kingdom of Anisotropy consists of $n$ cities. For every two cities there exists exactly one direct one-way road between them. We say that a *path from $X$ to $Y$* is a sequence of roads such that one can move from $X$ to $Y$ along this sequence without returning to an already visited city. A collection of paths is called *diverse* if no road belongs to two or more paths in the collection.\n\nLet $A$ and $B$ be two distinct cities in Anisotropy. Let $N_{AB}$ denote the maximal number of paths in a diverse collection of paths from $A$ to $B$. Similarly, let $N_{BA}$ denote the maximal number of paths in a diverse collection of paths from $B$ to $A$. Prove that the equality $N_{AB}=N_{BA}$ holds if and only if the number of roads going out from $A$ is the same as the number of roads going out from $B$.",
+    "image": null,
+    "choices": null,
+    "type": "self",
+    "answer": "Proof: in fact $N_{BA}-N_{AB}=b-a$ (out-degrees); by Menger's theorem compare minimum cuts: moving $A$ and $B$ across a cut changes its size by exactly $b-a$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Menger's theorem and swapping $A,B$ in a cut",
+        "body": "Model the kingdom as a tournament (a directed graph with exactly one arc between any two vertices). Let $a$ and $b$ be the out-degrees of $A$ and $B$. We prove the stronger statement\n$$N_{BA}-N_{AB}=b-a,$$\nwhich immediately gives $N_{AB}=N_{BA}\\iff a=b$.\n\n**Tool (Menger's theorem, edge version).** For distinct vertices $s,t$ of a finite directed graph, the maximal number of pairwise arc-disjoint directed paths from $s$ to $t$ equals the minimal size of an $(s,t)$-cut, where an $(s,t)$-cut is a partition $V=S\\sqcup T$ with $s\\in S$, $t\\in T$, and its size $e(S,T)$ is the number of arcs from $S$ to $T$. (Arc-disjoint walks can be shortened to paths by deleting cycles, so it does not matter whether repeated cities are allowed.) Thus $N_{AB}$ is the minimum size of an $(A,B)$-cut and $N_{BA}$ the minimum size of a $(B,A)$-cut.\n\n**Key computation.** Let $(S_A,T_A)$ be any $(A,B)$-cut and define the $(B,A)$-cut\n$$S_B=(S_A\\setminus\\{A\\})\\cup\\{B\\},\\qquad T_B=(T_A\\setminus\\{B\\})\\cup\\{A\\}.$$\nPut $S'=S_A\\setminus\\{A\\}=S_B\\setminus\\{B\\}$ and $T'=T_A\\setminus\\{B\\}=T_B\\setminus\\{A\\}$. Let\n- $c$ = number of arcs from $S'$ to $T'$;\n- $a_s$, $a_t$ = numbers of arcs from $A$ to $S'$ and from $A$ to $T'\\cup\\{B\\}$ (so $a_s+a_t=a$);\n- $b_s$, $b_t$ = numbers of arcs from $B$ to $S'$ and from $B$ to $T'\\cup\\{A\\}$ (so $b_s+b_t=b$).\n\nThe arcs from $S_A$ to $T_A$ are: the $c$ arcs $S'\\to T'$, the $a_t$ arcs leaving $A$ into $T_A$, and the arcs from $S'$ to $B$; between $B$ and each vertex of $S'$ there is exactly one arc, so there are $|S'|-b_s$ arcs from $S'$ to $B$. Hence\n$$e(S_A,T_A)=c+a_t+|S'|-b_s,$$\nand symmetrically\n$$e(S_B,T_B)=c+b_t+|S'|-a_s.$$\nSubtracting, $e(S_B,T_B)-e(S_A,T_A)=(b_t+b_s)-(a_t+a_s)=b-a$.\n\n**Conclusion.** Applying this to a minimum $(A,B)$-cut gives a $(B,A)$-cut of size $N_{AB}+b-a$, so $N_{BA}\\le N_{AB}+(b-a)$. Exchanging the roles of $A$ and $B$ gives $N_{AB}\\le N_{BA}+(a-b)$. Therefore $N_{BA}-N_{AB}=b-a$, and $N_{AB}=N_{BA}$ holds exactly when $a=b$. ∎"
+      }
+    ],
+    "topics": [
+      "graph-theory"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-isl-2021-c5",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Combinatorics",
+      "year": 2021,
+      "number": 5,
+      "url": "https://www.imo-official.org/assets/documents/problems/2021/IMO2021SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "prompt": "Let $n$ and $k$ be two integers with $n>k\\ge1$. There are $2n+1$ students standing in a circle. Each student $S$ has $2k$ *neighbours* — namely, the $k$ students closest to $S$ on the right, and the $k$ students closest to $S$ on the left.\n\nSuppose that $n+1$ of the students are girls, and the other $n$ are boys. Prove that there is a girl with at least $k$ girls among her neighbours.",
+    "image": null,
+    "choices": null,
+    "type": "self",
+    "answer": "Proof: with $a_i\\in\\{0,1\\}$ (girl $=1$) set $b_i=a_i+a_{i-k-1}-1$; every $2n+1$ consecutive $b_i$ sum to $1$, and a gas-station style argument finds $i$ with $b_i=1$ and $b_{i+1}+\\dots+b_{i+k}\\ge0$, which is exactly such a girl.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Encode the circle and use a gas-station argument",
+        "body": "Number the students $1,\\dots,2n+1$ around the circle, let $a_i=1$ for a girl and $a_i=0$ for a boy, and extend periodically: $a_{i+2n+1}=a_i$ for all $i\\in\\mathbb Z$. Since $2k<2n+1$, the $2k$ neighbours of student $i$ are the distinct students $i-k,\\dots,i-1,i+1,\\dots,i+k$.\n\nDefine $b_i=a_i+a_{i-k-1}-1\\in\\{-1,0,1\\}$. Any $2n+1$ consecutive $a$'s sum to $n+1$, hence\n$$b_{m+1}+b_{m+2}+\\dots+b_{m+2n+1}=(n+1)+(n+1)-(2n+1)=1\\qquad(m\\in\\mathbb Z).\\tag{1}$$\n\n**What we need.** Suppose $b_i=1$ and $b_{i+1}+\\dots+b_{i+k}\\ge0$. Then $a_i=1$ and\n$$0\\le\\sum_{j=1}^k b_{i+j}=\\sum_{j=1}^k a_{i+j}+\\sum_{j=1}^k a_{i+j-k-1}-k=(a_{i+1}+\\dots+a_{i+k})+(a_{i-k}+\\dots+a_{i-1})-k,$$\nso girl $i$ has at least $k$ girls among her neighbours.\n\n**Such an $i$ exists.** Assume the contrary: whenever $b_i=1$, the sum $b_{i+1}+\\dots+b_{i+k}$ is negative. By (1) every block of $2n+1$ consecutive indices contains some $i$ with $b_i=1$. Start with such an $i_0$ and define recursively $i_{j+1}$ = the smallest index $>i_j+k$ with $b_{i_{j+1}}=1$. Among $i_0,\\dots,i_{2n+1}$ two are congruent modulo $2n+1$, say $i_p\\equiv i_q$ with $p<q$.\n\nFor each $j$ consider $S_j=b_{i_j}+b_{i_j+1}+\\dots+b_{i_{j+1}-1}$. Its first term is $1$, the next $k$ terms have negative (so $\\le-1$) sum by assumption, and the remaining terms $b_t$ with $i_j+k<t<i_{j+1}$ are not equal to $1$ by minimality of $i_{j+1}$, so they are $\\le0$. Thus $S_j\\le0$.\n\nOn the other hand $S_p+\\dots+S_{q-1}=\\sum_{t=i_p}^{i_q-1}b_t$ is a sum over $i_q-i_p$ consecutive indices, a positive multiple of $2n+1$; splitting it into blocks of length $2n+1$ and using (1), it equals $\\frac{i_q-i_p}{2n+1}>0$. This contradicts $S_j\\le0$ for all $j$.\n\nHence the required girl exists. ∎"
+      }
+    ],
+    "topics": [
+      "counting",
+      "logic"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-isl-2021-c6",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Combinatorics",
+      "year": 2021,
+      "number": 6,
+      "url": "https://www.imo-official.org/assets/documents/problems/2021/IMO2021SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "prompt": "A hunter and an invisible rabbit play a game on an infinite square grid. First the hunter fixes a colouring of the cells with finitely many colours. The rabbit then secretly chooses a cell to start in. Every minute, the rabbit reports the colour of its current cell to the hunter, and then secretly moves to an adjacent cell that it has not visited before (two cells are adjacent if they share a side). The hunter wins if after some finite time either\n\n- the rabbit cannot move; or\n- the hunter can determine the cell in which the rabbit started.\n\nDecide whether there exists a winning strategy for the hunter.",
+    "image": null,
+    "choices": null,
+    "type": "self",
+    "answer": "Yes. Combine colourings by $x\\bmod3$, $y\\bmod3$ (to track every move) with three colourings marking columns, rows and diagonals $x+y=$ const at pairwise distinct gaps; two of $x,y,x+y$ must be unbounded, which pins down the start.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "A product of five colourings",
+        "body": "**Answer: yes.** Several colourings can be merged into one *product colouring*: a cell gets the tuple of its colours in all of them. The number of colours stays finite, and everything the hunter could read off from any single colouring he can read off from the product. Use coordinates $(x,y)$ for cells and let the rabbit visit $P_0,P_1,P_2,\\dots$.\n\n**Colourings $C_1$, $C_2$: tracking moves.** $C_1$ colours a cell by $x\\bmod3$, $C_2$ by $y\\bmod3$. A move changes exactly one coordinate by $\\pm1$; from the colours of $P_t$ and $P_{t+1}$ the hunter sees whether $x\\bmod3$ went up, down or stayed, and likewise for $y$. So he knows every move, hence every displacement $P_t-P_0$.\n\n**A marking set.** Let $E=\\{k(k+1):k\\ge0\\}\\cup\\{-m(m+2):m\\ge1\\}=\\{\\dots,-8,-3,0,2,6,12,\\dots\\}$. Listed in increasing order, the gaps between neighbours are $2,4,6,\\dots$ to the right of $0$ and $3,5,7,\\dots$ to the left; all gaps are pairwise distinct, and $E$ is unbounded in both directions.\n\n**Colourings $C_3,C_4,C_5$.** $C_3$ colours a cell black if $x\\in E$ and white otherwise; $C_4$ does the same with $y$, and $C_5$ with $x+y$.\n\n**Claim.** If the rabbit's $x$-coordinate is unbounded, the hunter can determine $x_0$ at some finite time (similarly for $y$ with $C_4$ and for $x+y$ with $C_5$; each of $x$, $y$, $x+y$ changes by at most $1$ per move, and the hunter knows all their changes).\n\n*Test.* The hunter looks for times $s<t$ such that the $C_3$-reports at $s$ and $t$ are black, $x_t\\ne x_s$ (he knows $x_t-x_s$), and all $C_3$-reports at times strictly between $s$ and $t$ are white. Because $x$ changes by at most $1$ per minute, every integer strictly between $x_s$ and $x_t$ is visited at some time in $(s,t)$; all those reports are white, so $x_s$ and $x_t$ are *neighbouring* elements of $E$ with gap $|x_t-x_s|$. Gaps are distinct, so this gap identifies the pair, hence $x_s$, hence $x_0=x_s-(x_s-x_0)$. So whenever the test succeeds, the hunter's deduction is correct.\n\n*The test succeeds.* Say $x$ is unbounded above (below is symmetric). Then the rabbit eventually reaches some $e\\in E$ greater than $x_0$, at a time $s_0$, and later reaches the next element $e'$ of $E$ (it must pass it to go higher). Let $t$ be the first time after $s_0$ with $x_t=e'$, and $s$ the last time in $[s_0,t]$ with $x_s=e$. Between $s$ and $t$ the coordinate $x$ never equals $e$ or $e'$, and moving in steps of at most $1$ it stays strictly between them; so the reports are white there, and $(s,t)$ passes the test.\n\n**Two of the three quantities are unbounded.** If the rabbit never gets stuck, it visits infinitely many distinct cells, so $x$ and $y$ cannot both be bounded. If exactly one of $x,y$ is bounded, then $x+y$ is unbounded. So at least two of $x,\\ y,\\ x+y$ are unbounded, and after finite time the hunter knows two of $x_0,\\ y_0,\\ x_0+y_0$, hence all three, i.e. the starting cell.\n\nSo with the product colouring $C_1\\times C_2\\times C_3\\times C_4\\times C_5$ (72 colours) the hunter wins: either the rabbit gets stuck, or after finitely many minutes he determines the starting cell. ∎"
+      }
+    ],
+    "topics": [
+      "logic",
+      "games"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-isl-2021-c7",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Combinatorics",
+      "year": 2021,
+      "number": 7,
+      "url": "https://www.imo-official.org/assets/documents/problems/2021/IMO2021SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "prompt": "Consider a checkered $3m\\times3m$ square, where $m$ is an integer greater than $1$. A frog sits on the lower left corner cell $S$ and wants to get to the upper right corner cell $F$. The frog can hop from any cell to either the next cell to the right or the next cell upwards.\n\nSome cells can be *sticky*, and the frog gets trapped once it hops on such a cell. A set $X$ of cells is called *blocking* if the frog cannot reach $F$ from $S$ when all the cells of $X$ are sticky. A blocking set is *minimal* if it does not contain a smaller blocking set.\n\n(a) Prove that there exists a minimal blocking set containing at least $3m^2-3m$ cells.\n\n(b) Prove that every minimal blocking set contains at most $3m^2$ cells.\n\n*Note.* An example of a minimal blocking set for $m=2$ is shown in the picture. Cells of the set $X$ are marked by letters $x$.",
+    "image": "qimages/imo/isl-2021/c7.webp",
+    "choices": null,
+    "type": "self",
+    "answer": "(a) A construction in vertical stripes of width $3$ with $3m^2-2m+2\\ge3m^2-3m$ cells. (b) Colour cells reachable from $S$ red and cells from which $F$ is reachable blue; minimality gives $G\\le R+1$ and $G\\le B+1$ for the $G$ sticky cells, so $9m^2\\ge3G-2$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Explicit construction; counting hops from red and blue cells",
+        "body": "Use coordinates (column $c$, row $r$), $1\\le c,r\\le3m$, with $S=(1,1)$ and $F=(3m,3m)$; a hop increases $c$ or $r$ by $1$. For a set $X$ of sticky cells call a non-sticky cell *red* if the frog can reach it from $S$ avoiding $X$, and *blue* if $F$ can be reached from it avoiding $X$. $X$ is blocking iff no cell is both red and blue (in particular $F$ is not red).\n\n**Minimality criterion.** If every $x\\in X$ has a red cell immediately to its left or below it, and a blue cell immediately to its right or above it, then $X\\setminus\\{x\\}$ is not blocking (go from $S$ to the red cell, hop onto $x$, hop to the blue cell, continue to $F$). So a blocking set with this property is minimal.\n\n**(a) Construction.** Split the columns into $m$ stripes of three columns $a_s=3s-2,\\ b_s=3s-1,\\ c_s=3s$ $(s=1,\\dots,m)$, and let $X$ consist of\n- stripe $1$: $(1,3m)$, the cells $(2,r)$ for $3\\le r\\le3m-1$, and $(3,2)$;\n- stripe $s$ with $2\\le s\\le m-1$: $(a_s,3m-1)$, the cells $(b_s,r)$ for $3\\le r\\le3m-2$, and $(c_s,2)$;\n- stripe $m$: $(3m-2,3m-1)$, the cells $(3m-1,r)$ for $2\\le r\\le3m-2$, and $(3m,1)$.\n\nThis is $2(3m-1)+(m-2)(3m-2)=3m^2-2m+2\\ge3m^2-3m$ cells.\n\n*Blocking.* Let $R$ be the set consisting of the bottom row cells $(c,1)$, $c\\le3m-1$; the cells $(1,r)$, $r\\le3m-1$; the cells $(a_s,r)$, $r\\le3m-2$, for $s\\ge2$; and the cells $(b_s,2)$ for $s<m$. One checks that every hop from a cell of $R$ lands in $R$ or in $X$:\n- from $(1,r)$: up to $(1,r+1)\\in R$ or $(1,3m)\\in X$; right to $(2,1),(2,2)\\in R$ or $(2,r)\\in X$ for $3\\le r\\le3m-1$;\n- from $(c,1)$: right stays in the bottom row of $R$ or hits $(3m,1)\\in X$; up goes to $(a_s,2)\\in R$, to $(b_s,2)$ (in $R$ for $s<m$, in $X$ for $s=m$) or to $(c_s,2)\\in X$;\n- from $(a_s,r)$, $s\\ge2$: up to $R$ or to $(a_s,3m-1)\\in X$; right to $(b_s,1)\\in R$, to $(b_s,2)$ ($\\in R$ if $s<m$, $\\in X$ if $s=m$), or into $X$ for $3\\le r\\le3m-2$;\n- from $(b_s,2)$, $s<m$: up to $(b_s,3)\\in X$, right to $(c_s,2)\\in X$.\n\nSince $S\\in R$ and $F\\notin R$, the frog cannot reach $F$: $X$ is blocking. (All cells of $R$ are in fact red.)\n\n*Minimal.* The following cells are blue: $(c_s,r)$ for $s<m$, $r\\ge3$ (go up column $c_s$, which meets $X$ only in row $2$, then right along the top row, which meets $X$ only at $(1,3m)$); $(b_s,3m-1)$ for $s\\ge2$; $(2,3m)$; and $(3m,r)$ for $r\\ge2$. Now check the criterion:\n- $(1,3m)$: red $(1,3m-1)$ below, blue $(2,3m)$ to the right;\n- $(a_s,3m-1)$, $s\\ge2$: red $(a_s,3m-2)$ below, blue $(b_s,3m-1)$ to the right;\n- $(b_s,r)$ in the middle columns: red $(a_s,r)$ (or $(1,r)$) to the left, blue $(c_s,r)$ (or $(3m,r)$ for $s=m$) to the right;\n- $(c_s,2)$, $s<m$: red $(b_s,2)$ to the left, blue $(c_s,3)$ above;\n- $(3m,1)$: red $(3m-1,1)$ to the left, blue $(3m,2)$ above.\n\nSo $X$ is a minimal blocking set with at least $3m^2-3m$ cells.\n\n**(b) Upper bound.** Let $X$ be a minimal blocking set with $G$ cells, and let $R$, $B$ be the numbers of red and blue cells. If $F\\in X$ then $X=\\{F\\}$ (as $\\{F\\}$ is blocking), so assume $F\\notin X$; also $S\\notin X$, since the frog never hops onto $S$ and removing $S$ from a blocking set keeps it blocking. Red, blue and sticky cells are pairwise disjoint.\n\nFor each $x\\in X$, the set $X\\setminus\\{x\\}$ is not blocking, so some path from $S$ to $F$ meets $X$ only in $x$; the cell before $x$ on it is red and the cell after it is blue.\n\nCount hops starting at red cells: there are at most $2R$ of them. Every red cell other than $S$ is the end of such a hop (the previous cell on a red path is red), and every sticky cell is the end of such a hop (shown above); these targets are distinct cells, so $2R\\ge(R-1)+G$, i.e. $G\\le R+1$. Turning the board around (blue cells play the role of red cells, with hops reversed) gives $G\\le B+1$. Therefore\n$$9m^2\\ge R+B+G\\ge3G-2,$$\nso $G\\le3m^2+\\frac23$, i.e. $G\\le3m^2$. ∎"
+      }
+    ],
+    "topics": [
+      "counting",
+      "logic"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-isl-2021-c8",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Combinatorics",
+      "year": 2021,
+      "number": 8,
+      "url": "https://www.imo-official.org/assets/documents/problems/2021/IMO2021SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "prompt": "Determine the largest $N$ for which there exists a table $T$ of integers with $N$ rows and $100$ columns that has the following properties:\n\n(i) Every row contains the numbers $1,2,\\dots,100$ in some order.\n\n(ii) For any two distinct rows $r$ and $s$, there is a column $c$ such that $|T(r,c)-T(s,c)|\\ge2$.\n\nHere $T(r,c)$ means the number at the intersection of the row $r$ and the column $c$.",
+    "image": null,
+    "choices": null,
+    "type": "numeric",
+    "answer": "100!/2^50",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Patterns of pairs $\\{2k-1,2k\\}$ and parity constraints",
+        "body": "**Upper bound.** In a row, replace both $2k-1$ and $2k$ by a symbol $x_k$ ($k=1,\\dots,50$). The result, the *pattern* of the row, is an arrangement of $x_1,\\dots,x_{50}$ in which each symbol occurs twice; there are $\\frac{100!}{2^{50}}$ patterns. If two rows had the same pattern, then in every column their entries would be $2k-1$ and $2k$ in some order or equal, so they would differ by at most $1$ everywhere, violating (ii). Hence distinct rows have distinct patterns and $N\\le\\frac{100!}{2^{50}}$.\n\n**Construction.** For a row (a permutation) and a set $G$ of values, read the elements of $G$ from left to right; this word is a permutation of $G$ and has a parity. Take as rows *all* permutations of $1,\\dots,100$ for which each of the 50 sets\n$$G_1=\\{1,2\\},\\ G_2=\\{2,3,4\\},\\ G_3=\\{4,5,6\\},\\ \\dots,\\ G_{50}=\\{98,99,100\\}$$\nis read in an *even* order.\n\n*Counting.* Each pattern gives exactly one such row: put $1,2$ in the places of $x_1$ with $1$ first; then for $k=2,\\dots,50$ the place of $2k-2$ is already fixed, and of the two ways to put $2k-1,2k$ into the places of $x_k$, exactly one makes $G_k$ even (exchanging $2k-1$ and $2k$ is a transposition and flips the parity). So there are exactly $\\frac{100!}{2^{50}}$ rows, all distinct, and (i) holds.\n\n*Property (ii).* Suppose two distinct rows $\\pi_1,\\pi_2$ have $|\\pi_1(c)-\\pi_2(c)|\\le1$ in every column $c$. Let $\\sigma$ be the permutation of values with $\\sigma(\\pi_1(c))=\\pi_2(c)$; then $|\\sigma(v)-v|\\le1$ for all $v$.\n\n*Lemma.* A permutation $\\sigma$ of $\\{1,\\dots,n\\}$ with $|\\sigma(v)-v|\\le1$ for all $v$ is a product of disjoint transpositions of the form $(v\\ v{+}1)$. *Proof by induction on $n$:* $\\sigma(n)\\in\\{n-1,n\\}$. If $\\sigma(n)=n$, restrict to $\\{1,\\dots,n-1\\}$. Otherwise $\\sigma(n)=n-1$, and the value $u$ with $\\sigma(u)=n$ satisfies $u\\ge n-1$, $u\\ne n$, so $u=n-1$: $\\sigma$ swaps $n-1,n$; restrict to $\\{1,\\dots,n-2\\}$. $\\square$\n\nSo $\\pi_2$ arises from $\\pi_1$ by exchanging the positions of $v$ and $v+1$ for all $v$ in a non-empty set $D$ of pairwise non-adjacent numbers. Let $r=\\min D$.\n- If $r=2k-1$ is odd: in $G_k$ (or $G_1$ when $k=1$) the values $2k-1,2k$ exchange places, while $2k-2$ does not move (its possible swaps would need an element of $D$ smaller than $r$). So the word of $G_k$ changes by a transposition and its parity flips — impossible, as both rows are even on $G_k$.\n- If $r=2k$ is even: in $G_{k+1}=\\{2k,2k+1,2k+2\\}$ the values $2k,2k+1$ exchange places. If $2k+2$ did not move, the parity of $G_{k+1}$ would flip; and $2k+2$ can move only via $2k+2\\in D$ ($2k+1\\notin D$ since $D$ has no adjacent elements). Hence $2k+2\\in D$. Repeating the argument with $G_{k+2},G_{k+3},\\dots$ gives $2k+4,\\dots,98\\in D$. But then in $G_{50}=\\{98,99,100\\}$ the values $98,99$ swap while $100$ stays (there is no $101$), and the parity flips — a contradiction.\n\nSo the table satisfies (ii), and the maximum is\n$$N=\\frac{100!}{2^{50}}.$$\n∎"
+      }
+    ],
+    "topics": [
+      "counting",
+      "abstract-algebra"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null,
+    "answerDisplay": "$\\frac{100!}{2^{50}}$"
+  },
+  {
+    "id": "imo-isl-2021-g1",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Geometry",
+      "year": 2021,
+      "number": 1,
+      "url": "https://www.imo-official.org/assets/documents/problems/2021/IMO2021SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "prompt": "Let $ABCD$ be a parallelogram such that $AC=BC$. A point $P$ is chosen on the extension of the segment $AB$ beyond $B$. The circumcircle of the triangle $ACD$ meets the segment $PD$ again at $Q$, and the circumcircle of the triangle $APQ$ meets the segment $PC$ again at $R$. Prove that the lines $CD$, $AQ$, and $BR$ are concurrent.",
+    "image": null,
+    "choices": null,
+    "type": "self",
+    "answer": "Proof: angle chasing shows $ABCR$ is cyclic; with $X=AQ\\cap CD$, also $CQRX$ is cyclic, and then $\\angle XRC=\\angle BRC$-type equalities force $B,R,X$ collinear.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Two auxiliary circles (directed angles)",
+        "body": "We use directed angles $\\measuredangle(\\ell,m)$ between lines, taken modulo $180^\\circ$.\n\n**Preliminaries.** In the parallelogram $AD=BC=AC$. So triangle $ABC$ is isosceles with $CA=CB$ and triangle $ACD$ is isosceles with $AC=AD$; together with $AB\\parallel CD$ this gives\n$$\\measuredangle(BC,BA)=\\measuredangle(AB,AC)=\\measuredangle(CD,CA)=\\measuredangle(DA,DC).\\tag{1}$$\n(The first equality is the base angles of $CA=CB$, the second uses $AB\\parallel CD$, the third is the base angles of $AC=AD$.)\n\n**Step 1: $A,B,C,R$ are concyclic (circle $\\gamma$).** Using that $C,R,P$ are collinear, $APRQ$ is cyclic, $D,Q,P$ are collinear and $AQCD$ is cyclic:\n$$\\measuredangle(RC,RA)=\\measuredangle(RP,RA)=\\measuredangle(QP,QA)=\\measuredangle(QD,QA)=\\measuredangle(CD,CA)\\overset{(1)}=\\measuredangle(BC,BA).$$\nHence $R$ lies on the circle $ABC$.\n\n**Step 2: $C,Q,R,X$ are concyclic (circle $\\delta$),** where $X=AQ\\cap CD$. Using circle $APRQ$ and then $PR=CR$ (same line) and $PA=AB\\parallel CD=CX$:\n$$\\measuredangle(QR,QX)=\\measuredangle(QR,QA)=\\measuredangle(PR,PA)=\\measuredangle(CR,CX).$$\n\n**Step 3: $B,R,X$ are collinear.** Using $\\delta$, then $QX=QA$ and circle $AQCD$, then (1), then $\\gamma$:\n$$\\measuredangle(RX,RC)=\\measuredangle(QX,QC)=\\measuredangle(QA,QC)=\\measuredangle(DA,DC)=\\measuredangle(AB,AC)=\\measuredangle(RB,RC).$$\nSo the lines $RX$ and $RB$ make the same angle with $RC$, hence coincide: $X$ lies on $BR$.\n\nTherefore $BR$ passes through $X=AQ\\cap CD$, i.e. the three lines are concurrent. ∎"
+      },
+      {
+        "title": "Tangent line and Pascal",
+        "body": "Let $\\alpha$ be the circle $APRQ$ and use the notation of the first solution (for the configuration of the figure). We have $\\angle CAP=\\angle ACD=\\angle AQD=180^\\circ-\\angle AQP$ (alternate angles, circle $AQCD$, and $D,Q,P$ collinear), so by the converse of the tangent–chord theorem the line $AC$ is tangent to $\\alpha$ at $A$.\n\nLet $AD$ meet $\\alpha$ again at $Y$. Using the tangency of $AC$ to $\\alpha$, the parallel $AD\\parallel BC$ and the circle $\\gamma=ABCR$ from the first solution, $\\angle ARY=\\angle CAD=\\angle ACB=\\angle ARB$, so $Y,B,R$ are collinear.\n\nApply Pascal's theorem to the hexagon $AAYRPQ$ inscribed in $\\alpha$ (the side $AA$ is the tangent at $A$, i.e. the line $AC$): the points $AA\\cap RP=C$, $AY\\cap PQ=D$ and $YR\\cap QA$ are collinear. So $YR=BR$ meets $AQ$ on the line $CD$, which is the claim. ∎"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-isl-2021-g2",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Geometry",
+      "year": 2021,
+      "number": 2,
+      "url": "https://www.imo-official.org/assets/documents/problems/2021/IMO2021SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "prompt": "Let $ABCD$ be a convex quadrilateral circumscribed around a circle with centre $I$. Let $\\omega$ be the circumcircle of the triangle $ACI$. The extensions of $BA$ and $BC$ beyond $A$ and $C$ meet $\\omega$ at $X$ and $Z$, respectively. The extensions of $AD$ and $CD$ beyond $D$ meet $\\omega$ at $Y$ and $T$, respectively. Prove that the perimeters of the (possibly self-intersecting) quadrilaterals $ADTX$ and $CDYZ$ are equal.",
+    "image": null,
+    "choices": null,
+    "type": "self",
+    "answer": "Proof: with tangency points $P,Q,R,S$ on $AB,BC,CD,DA$, the right triangles $IQZ\\cong IRT$ and $IPX\\cong ISY$; so $QZ=RT$, $PX=SY$, and $IX=IY$, $IT=IZ$ give $TX=YZ$; both remaining sums reduce to $RT+XP$ and $SY+QZ$ via tangent lengths.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 1,
+    "duplicateOf": "imo-2021-04",
+    "reviewNote": null
+  },
+  {
+    "id": "imo-isl-2021-g3",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Geometry",
+      "year": 2021,
+      "number": 3,
+      "url": "https://www.imo-official.org/assets/documents/problems/2021/IMO2021SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "prompt": "Let $n$ be a fixed positive integer, and let $S$ be the set of points $(x,y)$ on the Cartesian plane such that both coordinates $x$ and $y$ are nonnegative integers smaller than $2n$ (thus $|S|=4n^2$). Assume that $\\mathcal F$ is a set consisting of $n^2$ quadrilaterals such that all their vertices lie in $S$, and each point in $S$ is a vertex of exactly one of the quadrilaterals in $\\mathcal F$.\n\nDetermine the largest possible sum of areas of all $n^2$ quadrilaterals in $\\mathcal F$.",
+    "image": null,
+    "choices": null,
+    "type": "self",
+    "answer": "$\\frac13n^2(2n+1)(2n-1)$, attained by the $n^2$ squares centred at the centre of the grid; the bound comes from $[P]\\le\\frac12\\sum OA_i^2$ for every polygon.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Area bounded by squared distances to the centre",
+        "body": "Let $O=\\left(n-\\frac12,n-\\frac12\\right)$ be the centre of $S$, and write $[\\,\\cdot\\,]$ for area.\n\n**Lemma.** For any polygon $A_1A_2\\dots A_m$ and any point $O$,\n$$[A_1\\dots A_m]\\le\\frac12\\sum_{i=1}^m OA_i^2,$$\nwith equality if the polygon is a square centred at $O$.\n\n*Proof.* By the shoelace formula the area is the absolute value of the sum of the signed areas of the triangles $OA_iA_{i+1}$ ($A_{m+1}=A_1$), so\n$$[A_1\\dots A_m]\\le\\sum_{i=1}^m[OA_iA_{i+1}]\\le\\sum_{i=1}^m\\frac{OA_i\\cdot OA_{i+1}}2\\le\\sum_{i=1}^m\\frac{OA_i^2+OA_{i+1}^2}4=\\frac12\\sum_{i=1}^m OA_i^2.$$\nFor a square centred at $O$ the four triangles are right isosceles with legs $OA_i=OA_{i+1}$ and do not overlap, so every inequality is an equality. $\\square$\n\n**Upper bound.** Summing the lemma over the quadrilaterals of $\\mathcal F$, and using that every point of $S$ is a vertex of exactly one of them,\n$$\\Sigma(\\mathcal F)\\le\\frac12\\sum_{A\\in S}OA^2.$$\n\n**Computing the bound.** \n$$\\sum_{A\\in S}OA^2=\\sum_{i=0}^{2n-1}\\sum_{j=0}^{2n-1}\\left[\\left(i-n+\\tfrac12\\right)^2+\\left(j-n+\\tfrac12\\right)^2\\right]=2\\cdot2n\\sum_{i=0}^{2n-1}\\left(i-n+\\tfrac12\\right)^2.$$\nThe numbers $i-n+\\frac12$ are $\\pm\\frac12,\\pm\\frac32,\\dots,\\pm\\frac{2n-1}2$, so\n$$\\sum_{i=0}^{2n-1}\\left(i-n+\\tfrac12\\right)^2=\\frac12\\sum_{t=0}^{n-1}(2t+1)^2=\\frac12\\cdot\\frac{n(2n-1)(2n+1)}3.$$\nHence $\\frac12\\sum_{A\\in S}OA^2=\\frac13n^2(2n-1)(2n+1)$.\n\n**Equality.** The rotation by $90^\\circ$ about $O$ maps $S$ onto itself, and $O$ is not a lattice point, so each $A\\in S$ together with its three rotated images forms a square centred at $O$ with vertices in $S$. These $4n^2/4=n^2$ *central squares* partition $S$, so they form an admissible family $\\mathcal F$, and by the equality case of the lemma their total area is exactly $\\frac13n^2(2n-1)(2n+1)$.\n\n**Answer: $\\frac13n^2(2n+1)(2n-1)$.** ∎\n\n*Remark.* The same proof works verbatim if $\\mathcal F$ may consist of arbitrary polygons (each point of $S$ a vertex of exactly one of them): the maximum is the same."
+      },
+      {
+        "title": "Diagonals and a rearrangement bound (quadrilaterals only)",
+        "body": "For a quadrilateral $ABCD$ with diagonals meeting at angle $\\varphi$, $[ABCD]=\\frac12AC\\cdot BD\\sin\\varphi\\le\\frac14(AC^2+BD^2)$ (this also holds for non-convex quadrilaterals, where the area is at most $\\frac12AC\\cdot BD$). Summing, $\\Sigma(\\mathcal F)\\le\\frac14\\sum_{i=1}^{2n^2}A_iB_i^2$, where the $4n^2$ points $A_i,B_i$ are all of $S$, paired along the diagonals.\n\nWith $A_i=(p_i,q_i)$, $B_i=(r_i,s_i)$: $\\sum(p_i-r_i)^2=\\sum\\big(2p_i^2+2r_i^2-(p_i+r_i)^2\\big)$. The first part equals $4n\\sum_{j=0}^{2n-1}j^2$ (each $x$-coordinate occurs $2n$ times), and by QM–AM $\\sum(p_i+r_i)^2\\ge\\frac1{2n^2}\\big(\\sum(p_i+r_i)\\big)^2=\\frac1{2n^2}\\big(2n\\cdot n(2n-1)\\big)^2$. This gives $\\sum(p_i-r_i)^2\\le\\frac{2n^2(2n-1)(2n+1)}3$, and the same for the $y$-coordinates. Hence $\\Sigma(\\mathcal F)\\le\\frac14\\cdot\\frac{4n^2(4n^2-1)}3=\\frac13n^2(2n-1)(2n+1)$, attained by the central squares. ∎"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "inequalities"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-isl-2021-g4",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Geometry",
+      "year": 2021,
+      "number": 4,
+      "url": "https://www.imo-official.org/assets/documents/problems/2021/IMO2021SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "prompt": "Let $ABCD$ be a quadrilateral inscribed in a circle $\\Omega$. Let the tangent to $\\Omega$ at $D$ intersect the rays $BA$ and $BC$ at points $E$ and $F$, respectively. A point $T$ is chosen inside the triangle $ABC$ so that $TE\\parallel CD$ and $TF\\parallel AD$. Let $K\\ne D$ be a point on the segment $DF$ such that $TD=TK$. Prove that the lines $AC$, $DT$ and $BK$ intersect at one point.",
+    "image": null,
+    "choices": null,
+    "type": "self",
+    "answer": "Proof: with $P=TE\\cap AC$, $Q=TF\\cap AC$, the circles $APDE$ and $CQDF$ are tangent at $D$ and $DT$ is their common tangent; then $TK\\parallel BD$, $T,P,Q,D,K$ are concyclic and $PK\\parallel BC$, so triangles $TPK$ and $DCB$ are homothetic and $TD,PC,KB$ concur.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Two tangent circles and a homothety (directed angles)",
+        "body": "Directed angles $\\measuredangle(\\ell,m)$ are taken mod $180^\\circ$; $t$ denotes the tangent line $EF$ to $\\Omega$ at $D$. Let $TE$ and $TF$ meet $AC$ at $P$ and $Q$.\n\n**Step 1: $A,P,D,E$ concyclic ($\\alpha$) and $C,Q,D,F$ concyclic ($\\gamma$).** By $PE\\parallel CD$ and the tangent–chord theorem in $\\Omega$,\n$$\\measuredangle(PE,PA)=\\measuredangle(CD,CA)=\\measuredangle(DE,DA),$$\nso $P\\in(ADE)$. Similarly $\\measuredangle(QF,QC)=\\measuredangle(AD,AC)=\\measuredangle(DF,DC)$, so $Q\\in(CDF)$.\n\n**Step 2: $\\alpha$ and $\\gamma$ are tangent at $D$.** Let $\\ell$, $\\ell'$ be their tangents at $D$. By the tangent–chord theorem, $\\measuredangle(\\ell,DA)=\\measuredangle(ED,EA)=\\measuredangle(t,AB)$ and $\\measuredangle(\\ell',DC)=\\measuredangle(FD,FC)=\\measuredangle(t,BC)$. Hence\n$$\\measuredangle(\\ell,\\ell')=\\measuredangle(t,AB)+\\measuredangle(DA,DC)-\\measuredangle(t,BC)=\\measuredangle(BC,BA)+\\measuredangle(DA,DC)=0,$$\nbecause $ABCD$ is cyclic. So $\\ell=\\ell'$.\n\n**Step 3: $DT$ is the common tangent.** We have $\\measuredangle(FQ,FE)=\\measuredangle(AD,t)$ (as $FQ=FT\\parallel AD$) and $\\measuredangle(PQ,PE)=\\measuredangle(PA,PE)=\\measuredangle(DA,DE)=\\measuredangle(AD,t)$ (circle $\\alpha$). So $P,Q,E,F$ are concyclic and $TP\\cdot TE=TQ\\cdot TF$ (signed). Thus $T$ has equal powers with respect to $\\alpha$ and $\\gamma$, i.e. $T$ lies on their radical axis, which is the common tangent $\\ell$ at $D$. So $DT=\\ell$.\n\n**Step 4: $TK\\parallel BD$.** As $TD=TK$ and $K\\in t$, $\\measuredangle(KT,KD)=\\measuredangle(DK,DT)=\\measuredangle(DE,DT)$. Since $DT$ is tangent to $\\alpha$, $\\measuredangle(DE,DT)=\\measuredangle(AE,AD)=\\measuredangle(AB,AD)$, and by the tangent–chord theorem in $\\Omega$, $\\measuredangle(AB,AD)=\\measuredangle(DB,t)$. So $\\measuredangle(KT,t)=\\measuredangle(DB,t)$, i.e. $KT\\parallel DB$. In the same way, as $DT$ is also tangent to $\\gamma$: $\\measuredangle(KT,KD)=\\measuredangle(DF,DT)=\\measuredangle(CF,CD)$.\n\n**Step 5: $T,P,Q,D,K$ lie on one circle $\\tau$.** From Step 4, $\\measuredangle(KT,KD)=\\measuredangle(AE,AD)=\\measuredangle(PE,PD)=\\measuredangle(PT,PD)$ (circle $\\alpha$), so $P\\in(TDK)$. Likewise $\\measuredangle(KT,KD)=\\measuredangle(CF,CD)=\\measuredangle(QF,QD)=\\measuredangle(QT,QD)$ (circle $\\gamma$), so $Q\\in(TDK)$.\n\n**Step 6: $PK\\parallel BC$.** $\\measuredangle(KP,KD)=\\measuredangle(QP,QD)=\\measuredangle(QC,QD)=\\measuredangle(FC,FD)$ by $\\tau$ and $\\gamma$; so $\\measuredangle(KP,t)=\\measuredangle(BC,t)$ and $KP\\parallel BC$.\n\n**Step 7: conclusion.** The triangles $TPK$ and $DCB$ have pairwise parallel sides: $TP\\parallel DC$, $PK\\parallel CB$, $KT\\parallel BD$. Hence they are homothetic or differ by a translation. A translation is impossible: it would move $P\\in AC$ to $C$, i.e. be a translation along $AC$, and keep $T$ on its side of line $AC$; but $T$ (inside triangle $ABC$) and $D$ lie on opposite sides of $AC$. So there is a homothety mapping $T\\mapsto D$, $P\\mapsto C$, $K\\mapsto B$, and the lines $TD$, $PC=AC$ and $KB$ pass through its centre. ∎"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-isl-2021-g5",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Geometry",
+      "year": 2021,
+      "number": 5,
+      "url": "https://www.imo-official.org/assets/documents/problems/2021/IMO2021SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "prompt": "Let $ABCD$ be a cyclic quadrilateral whose sides have pairwise different lengths. Let $O$ be the circumcentre of $ABCD$. The internal angle bisectors of $\\angle ABC$ and $\\angle ADC$ meet $AC$ at $B_1$ and $D_1$, respectively. Let $O_B$ be the centre of the circle which passes through $B$ and is tangent to $AC$ at $D_1$. Similarly, let $O_D$ be the centre of the circle which passes through $D$ and is tangent to $AC$ at $B_1$.\n\nAssume that $BD_1\\parallel DB_1$. Prove that $O$ lies on the line $O_BO_D$.",
+    "image": null,
+    "choices": null,
+    "type": "self",
+    "answer": "Proof: the radical axis of $\\Omega$ and circle $O_D$ passes through $D$ and through $L_B$, where the tangent to $\\Omega$ at $B$ meets $AC$ (since $L_BB=L_BB_1$); so it suffices that $BL_D\\parallel DL_B$, which a computation on line $AC$ shows is equivalent to $a^2b^2(c^2-d^2)=c^2d^2(a^2-b^2)$, the same condition as $BD_1\\parallel DB_1$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Radical axes and coordinates on $AC$",
+        "body": "Let $\\Omega$ be the circle $ABCD$, $\\gamma_B$ and $\\gamma_D$ the circles with centres $O_B$, $O_D$. Write $a=AB$, $b=BC$, $c=CD$, $d=DA$ (pairwise different) and $H=AC\\cap BD$, which lies inside both diagonals.\n\n**Step 1: reduction to radical axes.** $\\gamma_B\\ne\\Omega$ (it is tangent to $AC$, $\\Omega$ is not), so the radical axis $\\ell_B$ of $\\Omega,\\gamma_B$ is a line through their common point $B$, perpendicular to $OO_B$. Likewise $\\ell_D$ passes through $D$ and is perpendicular to $OO_D$. Hence\n$$O\\in O_BO_D\\iff OO_B\\parallel OO_D\\iff \\ell_B\\parallel\\ell_D.$$\n\n**Step 2: identifying the radical axes.** Since $a\\ne b$, the tangent to $\\Omega$ at $B$ is not parallel to $AC$; let it meet line $AC$ at $L_B$. Using directed angles, the tangent–chord theorem and $\\measuredangle(BC,BB_1)=\\measuredangle(BB_1,BA)$ (bisector):\n$$\\measuredangle(BL_B,BB_1)=\\measuredangle(BL_B,BC)+\\measuredangle(BC,BB_1)=\\measuredangle(AB,AC)+\\measuredangle(BB_1,BA)=\\measuredangle(B_1B,B_1L_B).$$\nSo triangle $L_BBB_1$ is isosceles with $L_BB=L_BB_1$. The power of $L_B$ with respect to $\\Omega$ is $L_BB^2$, and with respect to $\\gamma_D$ (tangent to line $AC$ at $B_1$) it is $L_BB_1^2$. These are equal, so $L_B\\in\\ell_D$, and $\\ell_D=DL_B$. Similarly, with $L_D$ the intersection of the tangent at $D$ with $AC$ (exists as $c\\ne d$), $\\ell_B=BL_D$. We must show $BL_D\\parallel DL_B$.\n\n**Step 3: coordinates on $AC$.** Put a coordinate on line $AC$ with $A=0$, $C=1$ (so lengths along $AC$ are measured in units of $AC$).\n- By the angle bisector theorem, $B_1=\\frac a{a+b}$ and $D_1=\\frac d{c+d}$.\n- Triangles $ABD$ and $CBD$ share the base $BD$, and $\\sin\\angle BAD=\\sin\\angle BCD$; so $\\frac{AH}{HC}=\\frac{[ABD]}{[CBD]}=\\frac{ad}{bc}$ and $H=h:=\\frac{ad}{ad+bc}$. Similarly $\\frac{HD}{HB}=\\frac{[ACD]}{[ACB]}=\\frac{cd}{ab}$.\n- Triangles $L_BBA$ and $L_BCB$ are similar (common angle at $L_B$, and $\\angle L_BBC=\\angle BAC$ by tangent–chord), so $\\frac{L_BA}{L_BB}=\\frac{L_BB}{L_BC}=\\frac ab$ and $\\frac{L_BA}{L_BC}=\\frac{a^2}{b^2}$. $L_B$ is outside $\\Omega$, hence outside the segment $AC$, so its coordinate $x$ satisfies $\\frac x{x-1}=\\frac{a^2}{b^2}$: $L_B=\\frac{a^2}{a^2-b^2}$. Likewise $L_D=\\frac{d^2}{d^2-c^2}$.\n\nLet $\\kappa=-\\frac{cd}{ab}$; the homothety $\\eta$ with centre $H$ and ratio $\\kappa$ maps $B$ to $D$ ($H$ lies between them). Along line $AC$ it acts by $x\\mapsto h+\\kappa(x-h)$.\n\n**Step 4: the hypothesis.** $BD_1\\parallel DB_1$ means $\\eta$ maps the line $BD_1$ to the parallel line through $D$, i.e. $\\eta(D_1)=B_1$: $B_1-h=\\kappa(D_1-h)$. Now\n$$B_1-h=\\frac a{a+b}-\\frac{ad}{ad+bc}=\\frac{ab(c-d)}{(a+b)(ad+bc)},\\qquad D_1-h=\\frac d{c+d}-\\frac{ad}{ad+bc}=\\frac{cd(b-a)}{(c+d)(ad+bc)},$$\nso the hypothesis is equivalent to $\\frac{ab(c-d)}{a+b}=\\frac{c^2d^2(a-b)}{ab(c+d)}$, i.e.\n$$a^2b^2(c^2-d^2)=c^2d^2(a^2-b^2).\\tag{$*$}$$\n\n**Step 5: the conclusion.** Similarly\n$$L_B-h=\\frac{a^2}{a^2-b^2}-\\frac{ad}{ad+bc}=\\frac{ab(ac+bd)}{(a^2-b^2)(ad+bc)},\\qquad L_D-h=\\frac{d^2}{d^2-c^2}-\\frac{ad}{ad+bc}=\\frac{cd(ac+bd)}{(d^2-c^2)(ad+bc)}.$$\nThen $L_B-h=\\kappa(L_D-h)$ is equivalent to $\\frac{ab}{a^2-b^2}=\\frac{c^2d^2}{ab(c^2-d^2)}$, which is exactly $(*)$. Hence $\\eta(L_D)=L_B$. Since also $\\eta(B)=D$, the homothety maps the line $BL_D$ onto the line $DL_B$, so these lines are parallel: $\\ell_B\\parallel\\ell_D$.\n\nBy Step 1, $O$ lies on the line $O_BO_D$. ∎"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-isl-2021-g6",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Geometry",
+      "year": 2021,
+      "number": 6,
+      "url": "https://www.imo-official.org/assets/documents/problems/2021/IMO2021SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "prompt": "Determine all integers $n\\ge3$ satisfying the following property: every convex $n$-gon whose sides all have length $1$ contains an equilateral triangle of side length $1$. (Every polygon is assumed to contain its boundary.)",
+    "image": null,
+    "choices": null,
+    "type": "self",
+    "answer": "All odd $n\\ge3$. (For even $n$, a thin symmetric polygon cut from a huge regular polygon fits in a narrow strip; for odd $n$, use the longest diagonal $A_0A_\\ell$ with $\\ell\\ge\\frac{n+1}2$.)",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Thin counterexamples; the longest diagonal for odd $n$",
+        "body": "**Even $n$ fail.** Take a regular $k$-gon $A_0A_1\\dots A_{k-1}$ with side $1$, $k$ large, and let $B_i$ be the reflection of $A_i$ in the line $A_0A_{n/2}$. Then $A_0A_1\\dots A_{n/2}B_{n/2-1}\\dots B_1$ is a convex $n$-gon with unit sides (convex because its angles at $A_0$ and $A_{n/2}$ are small). It lies within distance $h$ of the line $A_0A_{n/2}$, where $h$ is the sagitta of an arc of angle $\\frac{\\pi n}{k}$ on a circle of radius $\\frac1{2\\sin(\\pi/k)}$; $h\\to0$ as $k\\to\\infty$. So for large $k$ the polygon lies in a strip of width $<\\frac{\\sqrt3}2$. But a unit equilateral triangle does not fit in such a strip: if a triangle lies in a strip, the line through its \"middle\" vertex parallel to the strip cuts it into two triangles, so its area is at most $\\frac12\\cdot w\\cdot s$, where $w$ is the strip width and $s\\le1$ the length of the cut; area $\\frac{\\sqrt3}4$ forces $w\\ge\\frac{\\sqrt3}2$.\n\n**Odd $n$ work.** Let $n=2k+1$. For $k=1$ the polygon is itself a unit equilateral triangle, so let $k\\ge2$, and let $P$ be a convex $(2k+1)$-gon with unit sides. The average interior angle of $P$ is $\\frac{(n-2)\\cdot180^\\circ}{n}>90^\\circ$, so some angle $A_{i-1}A_iA_{i+1}$ is at least $90^\\circ$ and the diagonal $A_{i-1}A_{i+1}$ has length at least $\\sqrt2$; hence the longest diagonal $d$ has length $>1$. The endpoints of $d$ split the boundary into two polylines with $2k+1$ unit sides in total, so we may label $P=A_0A_1\\dots A_{2k}$ with $d=A_0A_\\ell$ and $k+1\\le\\ell\\le2k-1$. Let $Q=A_0A_1\\dots A_\\ell\\subseteq P$ (convex).\n\n*Case 1: $\\angle A_\\ell A_0A_1\\ge60^\\circ$.* $A_1A_\\ell$ is a diagonal, so $A_1A_\\ell\\le A_0A_\\ell$, hence in triangle $A_0A_1A_\\ell$ the angle at $A_1$ is at least the angle at $A_0$, so both angles at the side $A_0A_1$ are $\\ge60^\\circ$. Then the equilateral triangle on $A_0A_1$ on the side of $A_\\ell$ lies inside triangle $A_0A_1A_\\ell\\subseteq P$. The case $\\angle A_{\\ell-1}A_\\ell A_0\\ge60^\\circ$ is symmetric.\n\n*Case 2: both angles $\\angle A_\\ell A_0A_1$ and $\\angle A_{\\ell-1}A_\\ell A_0$ are $<60^\\circ$.* Then every vertex of $Q$ lies in the region $W$ bounded by the segment $A_0A_\\ell$ and the two rays from $A_0$ and $A_\\ell$ making $60^\\circ$ with it (on the side of $Q$). Let $\\mathcal T=A_0YZA_\\ell$ be the isosceles trapezoid consisting of the points of $W$ at distance at most $\\frac{\\sqrt3}2$ from $A_0A_\\ell$ (it has $YZ\\parallel A_0A_\\ell$, legs $A_0Y=A_\\ell Z=1$ at $60^\\circ$ to the base, and $YZ=A_0A_\\ell-1>0$); its perimeter is $2A_0A_\\ell+1$.\n\nSuppose $Q\\subseteq\\mathcal T$. A convex polygon inside another has smaller or equal perimeter, so $\\ell+A_0A_\\ell\\le2A_0A_\\ell+1$, i.e. $\\ell-1\\le A_0A_\\ell$. But by the triangle inequality along the other polyline (at least two sides, not collinear), $A_0A_\\ell<2k+1-\\ell\\le\\ell-1$. Contradiction.\n\nSo some vertex $A_m$ of $Q$ lies in $W$ but outside $\\mathcal T$; its distance to $A_0A_\\ell$ is greater than $\\frac{\\sqrt3}2$. Let $M$ be its projection on $A_0A_\\ell$. As $\\angle A_mA_0A_\\ell<60^\\circ$, $A_0M=MA_m\\cot\\angle A_mA_0M>\\frac{\\sqrt3}2\\cdot\\frac1{\\sqrt3}=\\frac12$, and likewise $MA_\\ell>\\frac12$. Choose $U,V$ on $A_0A_\\ell$ with $MU=MV=\\frac12$ on either side of $M$, and $N$ on $MA_m$ with $MN=\\frac{\\sqrt3}2$. Then $UVN$ is a unit equilateral triangle inside triangle $A_0A_mA_\\ell\\subseteq P$.\n\n**Answer: exactly the odd $n\\ge3$.** ∎"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-isl-2021-g7",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Geometry",
+      "year": 2021,
+      "number": 7,
+      "url": "https://www.imo-official.org/assets/documents/problems/2021/IMO2021SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "prompt": "A point $D$ is chosen inside an acute-angled triangle $ABC$ with $AB>AC$ so that $\\angle BAD=\\angle DAC$. A point $E$ is constructed on the segment $AC$ so that $\\angle ADE=\\angle DCB$. Similarly, a point $F$ is constructed on the segment $AB$ so that $\\angle ADF=\\angle DBC$. A point $X$ is chosen on the line $AC$ so that $CX=BX$. Let $O_1$ and $O_2$ be the circumcentres of the triangles $ADC$ and $DXE$. Prove that the lines $BC$, $EF$, and $O_1O_2$ are concurrent.",
+    "image": null,
+    "choices": null,
+    "type": "self",
+    "answer": "Proof: $BCEF$ is cyclic and, with $T=BC\\cap EF$, $TD^2=TB\\cdot TC=TE\\cdot TF$; inverting at $T$ with radius $TD$ shows the second intersection $K$ of $(ACD)$ with $(MBD)$ ($M$ = second point of $TA$ on $(ABC)$) has $TK=TD$, and $D,K,E,X$ are concyclic, so $T,O_1,O_2$ all lie on the perpendicular bisector of $DK$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 3,
+    "duplicateOf": "imo-2021-03",
+    "reviewNote": null
+  },
+  {
+    "id": "imo-isl-2021-g8",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Geometry",
+      "year": 2021,
+      "number": 8,
+      "url": "https://www.imo-official.org/assets/documents/problems/2021/IMO2021SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "prompt": "Let $\\omega$ be the circumcircle of a triangle $ABC$, and let $\\Omega_A$ be its excircle which is tangent to the segment $BC$. Let $X$ and $Y$ be the intersection points of $\\omega$ and $\\Omega_A$. Let $P$ and $Q$ be the projections of $A$ onto the tangent lines to $\\Omega_A$ at $X$ and $Y$, respectively. The tangent line at $P$ to the circumcircle of the triangle $APX$ intersects the tangent line at $Q$ to the circumcircle of the triangle $AQY$ at a point $R$. Prove that $AR\\perp BC$.",
+    "image": null,
+    "choices": null,
+    "type": "self",
+    "answer": "Proof: let $R'$ be the point on the perpendicular from $A$ to $BC$ lying on the tangent to $\\Omega_A$ parallel to $BC$ (opposite to $BC$); Brianchon's theorem and two cyclic quadrilaterals show $PR'$ is tangent to $(APX)$, and likewise $QR'$ to $(AQY)$, so $R=R'$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Brianchon's theorem and right angles (directed angles)",
+        "body": "Directed angles $\\measuredangle(\\ell,m)$ are mod $180^\\circ$. Let $D$ be the tangency point of $BC$ with $\\Omega_A$ and $D'$ the antipode of $D$ on $\\Omega_A$, so the tangent $t'$ to $\\Omega_A$ at $D'$ is parallel to $BC$. Let $R'$ be the point of $t'$ with $AR'\\perp BC$. We show that $PR'$ is tangent to the circle $APX$; by the same argument with $Y,Q$ in place of $X,P$, $QR'$ is tangent to the circle $AQY$, hence $R=R'$ and $AR\\perp BC$.\n\nLet the tangent to $\\Omega_A$ at $X$ (the line $PX$) meet $AB$ at $S$ and $t'$ at $T$, and let $U$ be the common point at infinity of the parallel lines $BC$ and $t'$.\n\n**Step 1: a point $V$ with $SV\\parallel BC$.** The (degenerate) hexagon $ASXTUC$ is circumscribed about $\\Omega_A$: its sides lie on the lines $AB$, the tangent at $X$ (twice, $X$ being its point of contact), $t'$, $BC$ and $CA$, all tangent to $\\Omega_A$. By Brianchon's theorem its main diagonals $AT$, $SU$, $XC$ are concurrent at a point $V$. As $SU$ is the line through $S$ parallel to $BC$, we get $SV\\parallel BC$.\n\n**Step 2: $A,X,S,V$ are concyclic.** Using $SV\\parallel BC$, $V\\in XC$ and the circle $\\omega$ through $A,B,C,X$:\n$$\\measuredangle(VS,VX)=\\measuredangle(BC,CX)=\\measuredangle(AB,AX)=\\measuredangle(AS,AX).$$\nConsequently, since $SV\\parallel BC\\parallel t'=TR'$ and $V\\in AT$,\n$$\\measuredangle(PX,XA)=\\measuredangle(XS,XA)=\\measuredangle(VS,VA)=\\measuredangle(TR',TA).\\tag{1}$$\n\n**Step 3: $A,P,R',T$ are concyclic.** $\\angle APT=90^\\circ$ ($P$ is the foot from $A$ on the line $PX\\ni T$) and $\\angle AR'T=90^\\circ$ ($AR'\\perp BC\\parallel TR'$), so $P$ and $R'$ lie on the circle with diameter $AT$.\n\n**Step 4: tangency.** In the right triangles $APX$ (right angle at $P$) and $AR'T$ (right angle at $R'$),\n$$\\measuredangle(XA,AP)=90^\\circ-\\measuredangle(PX,XA),\\qquad\\measuredangle(TA,AR')=90^\\circ-\\measuredangle(R'T,TA).$$\nBy (1) these are equal, and by Step 3, $\\measuredangle(TA,AR')=\\measuredangle(TP,PR')=\\measuredangle(PX,PR')$. Hence\n$$\\measuredangle(PX,PR')=\\measuredangle(AX,AP).$$\nBy the converse of the tangent–chord theorem (the tangent $m$ at $P$ to the circle $APX$ is characterised by $\\measuredangle(PX,m)=\\measuredangle(AX,AP)$), the line $PR'$ is tangent to the circle $APX$ at $P$.\n\nAs explained at the start, the same holds for $QR'$ and the circle $AQY$, so the two tangents meet at $R=R'$, and $AR=AR'\\perp BC$. ∎"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-isl-2021-n1",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Number Theory",
+      "year": 2021,
+      "number": 1,
+      "url": "https://www.imo-official.org/assets/documents/problems/2021/IMO2021SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "prompt": "Determine all integers $n\\ge1$ for which there exists a pair of positive integers $(a,b)$ such that no cube of a prime divides $a^2+b+3$ and\n$$\\frac{ab+3b+8}{a^2+b+3}=n.$$",
+    "image": null,
+    "choices": null,
+    "type": "numeric",
+    "answer": "2",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Reduce the numerator modulo the denominator",
+        "body": "Let $M=a^2+b+3$. Since $b\\equiv-a^2-3\\pmod M$,\n$$ab+3b+8\\equiv a(-a^2-3)+3(-a^2-3)+8=-(a^3+3a^2+3a+1)=-(a+1)^3\\pmod M.$$\nIf the fraction equals an integer $n$, then $M\\mid ab+3b+8$, so $M\\mid(a+1)^3$.\n\n**$M$ divides $(a+1)^2$.** For every prime $p$, $v_p(M)\\le2$ (no prime cube divides $M$) and $v_p(M)\\le3v_p(a+1)$. If $v_p(a+1)=0$ then $v_p(M)=0$; otherwise $v_p(M)\\le2\\le2v_p(a+1)$. So $M\\mid(a+1)^2$.\n\n**In fact $M=(a+1)^2$.** We have $0<(a+1)^2<2M$, because $2M-(a+1)^2=(a-1)^2+2b+4>0$. A positive multiple of $M$ smaller than $2M$ equals $M$.\n\nSo $a^2+b+3=a^2+2a+1$, i.e. $b=2a-2$, and then\n$$n=\\frac{a(2a-2)+3(2a-2)+8}{(a+1)^2}=\\frac{2a^2+4a+2}{(a+1)^2}=2.$$\nConversely $(a,b)=(2,2)$ gives $M=9$ (cube-free) and $\\frac{4+6+8}{9}=2$.\n\n**Answer: only $n=2$.** ∎"
+      }
+    ],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-isl-2021-n2",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Number Theory",
+      "year": 2021,
+      "number": 2,
+      "url": "https://www.imo-official.org/assets/documents/problems/2021/IMO2021SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "prompt": "Let $n\\ge100$ be an integer. The numbers $n,n+1,\\dots,2n$ are written on $n+1$ cards, one number per card. The cards are shuffled and divided into two piles. Prove that one of the piles contains two cards such that the sum of their numbers is a perfect square.",
+    "image": null,
+    "choices": null,
+    "type": "self",
+    "answer": "Proof: find three cards $2k^2-4k,\\ 2k^2+1,\\ 2k^2+4k$ in $[n,2n]$, whose pairwise sums are $(2k-1)^2,(2k)^2,(2k+1)^2$; two of them share a pile.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 1,
+    "duplicateOf": "imo-2021-01",
+    "reviewNote": null
+  },
+  {
+    "id": "imo-isl-2021-n3",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Number Theory",
+      "year": 2021,
+      "number": 3,
+      "url": "https://www.imo-official.org/assets/documents/problems/2021/IMO2021SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "prompt": "Find all positive integers $n$ with the following property: the $k$ positive divisors of $n$ have a permutation $(d_1,d_2,\\dots,d_k)$ such that for every $i=1,2,\\dots,k$, the number $d_1+\\dots+d_i$ is a perfect square.",
+    "image": null,
+    "choices": null,
+    "type": "self",
+    "answer": "$n=1$ and $n=3$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Force $d_i=2i-1$ by induction",
+        "body": "Write $d_1+\\dots+d_i=s_i^2$ with $s_i\\ge1$, and $s_0=0$. Then $0=s_0<s_1<\\dots<s_k$, so $s_i\\ge i$, and\n$$d_i=s_i^2-s_{i-1}^2=(s_i-s_{i-1})(s_i+s_{i-1})\\ge s_i+s_{i-1}\\ge2i-1.\\tag{1}$$\n\n**Claim.** $d_i=2i-1$ and $s_i=i$ for $i=1,\\dots,k$.\n\n*Base.* The divisor $1$ equals some $d_j$, and (1) gives $1\\ge2j-1$, so $j=1$: $d_1=1=s_1^2$, $s_1=1$.\n\n*Step.* Suppose $d_j=2j-1$, $s_j=j$ for $j\\le i<k$. Then $d_{i+1}=s_{i+1}^2-i^2=(s_{i+1}-i)(s_{i+1}+i)$, so $s_{i+1}+i$ divides $d_{i+1}$ and hence $n$; say $s_{i+1}+i=d_j$.\n- If $j\\ge i+2$: by (1), $d_j\\ge s_j+s_{j-1}\\ge s_{i+2}+s_{i+1}>s_{i+1}+s_i=s_{i+1}+i$, impossible.\n- If $j\\le i$: $d_j=2j-1\\le2i-1<2i+1\\le s_{i+1}+i$, impossible.\n\nSo $j=i+1$, i.e. $(s_{i+1}-i)(s_{i+1}+i)=s_{i+1}+i$, which gives $s_{i+1}-i=1$: $s_{i+1}=i+1$ and $d_{i+1}=2i+1$. $\\square$\n\n**Conclusion.** The divisors of $n$ are exactly $1,3,5,\\dots,2k-1$. The largest is $n=2k-1$. If $k\\ge2$, the second largest divisor is $n-2$, and $n-2\\mid n$ gives $n-2\\mid2$; since $n$ is odd, $n-2=1$, $n=3$. If $k=1$ then $n=1$.\n\nBoth work: for $n=1$, $1=1^2$; for $n=3$, $1=1^2$ and $1+3=2^2$.\n\n**Answer: $n=1$ and $n=3$.** ∎"
+      }
+    ],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-isl-2021-n4",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Number Theory",
+      "year": 2021,
+      "number": 4,
+      "url": "https://www.imo-official.org/assets/documents/problems/2021/IMO2021SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "prompt": "Alice is given a rational number $r>1$ and a line with two points $B\\ne R$, where point $R$ contains a red bead and point $B$ contains a blue bead. Alice plays a solitaire game by performing a sequence of moves. In every move, she chooses a (not necessarily positive) integer $k$, and a bead to move. If that bead is placed at point $X$, and the other bead is placed at $Y$, then Alice moves the chosen bead to point $X'$ with $\\overrightarrow{YX'}=r^k\\,\\overrightarrow{YX}$.\n\nAlice's goal is to move the red bead to the point $B$. Find all rational numbers $r>1$ such that Alice can reach her goal in at most $2021$ moves.",
+    "image": null,
+    "choices": null,
+    "type": "self",
+    "answer": "Exactly $r=\\frac{b+1}{b}$ with $b=1,2,\\dots,1010$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Reduce to an equation in powers of $r$; reduce mod $a-b$ and $a+b$",
+        "body": "**Setting up.** Put coordinates with the red bead at $0$ and the blue bead at $1$ initially; the goal is to bring the red bead to $1$. A move multiplies the distance between the beads by $r^k>0$ and never changes their order, so the red bead is always to the left and the distance is always a power $r^\\ell$, $\\ell\\in\\mathbb Z$. Let $d_m$ be the distance after $m$ moves ($d_0=1$). Every sequence of powers of $r$ can be realised as $d_1,d_2,\\dots$ (with either bead moving at each step). If the red bead moves at move $m+1$, its coordinate increases by $d_m-d_{m+1}$; if the blue bead moves, the red one stays.\n\nTwo consecutive moves of the same bead can be replaced by one, so we may assume the beads alternate; let the red bead move $t$ times.\n\n- *Red moves first* (moves $1,3,\\dots,2t-1$, so $2t-1\\le2021$, $t\\le1011$): the condition is $\\sum_{j=1}^t(d_{2j-2}-d_{2j-1})=1$, i.e. $\\sum_{j=1}^{t}d_{2j-1}=\\sum_{j=1}^{t-1}d_{2j}$.\n- *Blue moves first* (red moves are $2,4,\\dots,2t$, so $t\\le1010$): the condition is $\\sum_{j=1}^t(d_{2j-1}-d_{2j})=1=r^0$, i.e. $\\sum_{j=1}^t d_{2j-1}=r^0+\\sum_{j=1}^t d_{2j}$.\n\nBoth are of the form\n$$\\sum_{i=1}^{N}r^{\\beta_i}=\\sum_{i=1}^{N-1}r^{\\gamma_i}\\qquad(\\beta_i,\\gamma_i\\in\\mathbb Z)\\tag{1}$$\nwith $N\\le1011$ ($N=t$, resp. $N=t+1$). Adding the term $r^0$ to both sides we may take $N=1011$ exactly. Conversely, a solution of (1) with $N=1011$ gives distances $d_{2j-1}=r^{\\beta_j}$ ($j\\le1011$), $d_{2j}=r^{\\gamma_j}$ ($j\\le1010$); with red moving at the odd moves $1,3,\\dots,2021$ the red bead advances by $1+\\sum r^{\\gamma_j}-\\sum r^{\\beta_j}=1$. So **Alice succeeds iff (1) is solvable with $N=1011$** (equivalently with some $N\\le1011$).\n\n**Necessity.** Let $r=\\frac ab$ in lowest terms, $a>b\\ge1$. Shift all exponents by a common integer so that they lie in $\\{0,1,\\dots,L\\}$ and multiply (1) by $b^L$; moving everything to one side gives\n$$\\sum_{i=1}^{2N-1}\\varepsilon_i\\,a^{\\mu_i}b^{L-\\mu_i}=0,\\qquad\\varepsilon_i=\\pm1,\\ \\ \\textstyle\\sum\\varepsilon_i=1.\\tag{2}$$\n- Modulo $a-b$ (where $a\\equiv b$) the left side is $\\equiv b^L\\sum\\varepsilon_i=b^L$. As $\\gcd(a-b,b)=1$, this forces $a-b=1$.\n- Modulo $a+b$ (where $a\\equiv-b$) the left side is $\\equiv b^L\\sum\\varepsilon_i(-1)^{\\mu_i}=:b^LS$, where $S$ is a sum of $2N-1$ terms $\\pm1$, hence odd and non-zero, with $|S|\\le2N-1$. As $\\gcd(a+b,b)=1$, $a+b\\mid S$, so $a+b\\le2N-1=2021$.\n\nWith $a=b+1$: $2b+1\\le2021$, so $b\\le1010$.\n\n**Sufficiency.** For $r=\\frac{b+1}b$ with $b\\le1010$, take $N=b+1\\le1011$, all $\\beta_i=0$ and all $\\gamma_i=1$: $(b+1)\\cdot1=b\\cdot\\frac{b+1}{b}$. So (1) is solvable and Alice succeeds.\n\n**Answer: $r=\\frac{b+1}b$ for $b=1,2,\\dots,1010$.** ∎"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "algebra"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-isl-2021-n5",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Number Theory",
+      "year": 2021,
+      "number": 5,
+      "url": "https://www.imo-official.org/assets/documents/problems/2021/IMO2021SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "prompt": "Prove that there are only finitely many quadruples $(a,b,c,n)$ of positive integers such that\n$$n!=a^{n-1}+b^{n-1}+c^{n-1}.$$",
+    "image": null,
+    "choices": null,
+    "type": "self",
+    "answer": "Proof: there are no solutions with $n>100$: AM–GM gives $a,b,c<\\frac{n-1}2$; odd $n$ fails by a mod $4$ / $2$-adic argument; for even $n$ either all pairwise sums are powers of $2$ (quickly impossible) or an odd prime $p\\mid a+b$ and LTE with Legendre's formula give a contradiction.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Size bound, parity, and lifting the exponent",
+        "body": "For each fixed $n$ there are finitely many solutions (each of $a,b,c$ is at most $(n!)^{1/(n-1)}$). We show that there is no solution with $n>100$; this proves the claim. So let $n>100$. We use $v_p$ for the $p$-adic valuation and Legendre's bound\n$$v_p(n!)=\\sum_{s\\ge1}\\left\\lfloor\\frac n{p^s}\\right\\rfloor<\\sum_{s\\ge1}\\frac n{p^s}=\\frac n{p-1}.\\tag{$\\heartsuit$}$$\n\n**Size bound.** $n!=2\\cdot\\big(3\\cdot4\\cdots(n-4)\\big)\\cdot(n-3)(n-2)(n-1)n$. Here $(n-3)n\\le(n-1)^2$, so the last four factors give at most $(n-1)^4$, and by AM–GM the $n-6$ factors $3,\\dots,n-4$ (average $\\frac{n-1}2$) give at most $\\left(\\frac{n-1}2\\right)^{n-6}$. Hence\n$$n!\\le2(n-1)^4\\left(\\frac{n-1}2\\right)^{n-6}=\\frac{64}{n-1}\\left(\\frac{n-1}2\\right)^{n-1}<\\left(\\frac{n-1}2\\right)^{n-1}.$$\nSo $a^{n-1}<n!$ forces $a<\\frac{n-1}2$, and likewise $b,c<\\frac{n-1}2$.\n\n**$n$ odd.** Then $a^{n-1},b^{n-1},c^{n-1}$ are squares, each $\\equiv0$ or $1\\pmod4$, and their sum $n!\\equiv0\\pmod4$; so all three are $\\equiv0\\pmod 4$, i.e. $a,b,c$ are even. Then $2^{n-1}\\mid n!$. But $v_2(n!)=v_2((n-1)!)<n-1$ by ($\\heartsuit$). Contradiction.\n\n**$n$ even, all of $a+b,\\,b+c,\\,c+a$ powers of $2$.** Then $a,b,c$ have the same parity. If all are odd, the right side is odd while $n!$ is even. If all are divisible by $4$, then $4^{n-1}\\mid n!$, contradicting $v_2(n!)<n$. So one of them, say $a$, is $\\equiv2\\pmod4$ (all are even). Then $2a=(a+b)+(a+c)-(b+c)$ is not divisible by $8$; as these three sums are powers of $2$ and at least $4$, one of them equals $4$, so two of the numbers equal $2$. By symmetry of the equation let these be two numbers equal to $2$ and the third $c'$ with $c'+2=2^s$. As $c'<n$, $c'\\mid n!$ and $c'\\mid c'^{n-1}$, hence $c'\\mid2^{n-1}+2^{n-1}=2^n$. Then $\\frac{c'}2=2^{s-1}-1$ (with $s\\ge2$) is an odd divisor of $2^{n-1}$, so it equals $1$ and $c'=2$. Then $n!=3\\cdot2^{n-1}$, impossible modulo $5$.\n\n**$n$ even, some sum not a power of $2$.** Say $a+b$ has an odd prime factor $p$. Then $p\\le a+b<n-1$. Since $n-1$ is odd, $a+b\\mid a^{n-1}+b^{n-1}$, so $p\\mid a^{n-1}+b^{n-1}$; also $p\\mid n!$; hence $p\\mid c^{n-1}$ and $p\\mid c$. If $p\\mid a$, then $p\\mid b$ too and $p^{n-1}\\mid n!$, contradicting $v_p(n!)<\\frac n{p-1}\\le\\frac n2$. So $p\\nmid ab$, and the lifting-the-exponent lemma (odd $p$, $p\\mid a+b$, $p\\nmid ab$, odd exponent) gives\n$$v_p\\big(a^{n-1}+b^{n-1}\\big)=v_p(a+b)+v_p(n-1).$$\nMoreover $v_p(c^{n-1})\\ge n-1>\\frac n2>v_p(n!)$, so $v_p\\big(n!-c^{n-1}\\big)=v_p(n!)$. Therefore\n$$v_p(1)+v_p(2)+\\dots+v_p(n)=v_p(n!)=v_p(a+b)+v_p(n-1).$$\nSince $a+b$ and $n-1$ are two different numbers in $\\{1,\\dots,n\\}$, no other number in $\\{1,\\dots,n\\}$ is divisible by $p$. But $p\\le c<\\frac n2$, so $p$ and $2p$ are both multiples of $p$ in $\\{1,\\dots,n\\}$; hence $\\{p,2p\\}=\\{a+b,n-1\\}$, and as $a+b<n-1$, $n-1=2p$ is even — contradicting that $n$ is even.\n\nSo no solution has $n>100$, and there are only finitely many quadruples. ∎"
+      }
+    ],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-isl-2021-n6",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Number Theory",
+      "year": 2021,
+      "number": 6,
+      "url": "https://www.imo-official.org/assets/documents/problems/2021/IMO2021SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "prompt": "Determine all integers $n\\ge2$ with the following property: every $n$ pairwise distinct integers whose sum is not divisible by $n$ can be arranged in some order $a_1,a_2,\\dots,a_n$ so that $n$ divides $1\\cdot a_1+2\\cdot a_2+\\dots+n\\cdot a_n$.",
+    "image": null,
+    "choices": null,
+    "type": "self",
+    "answer": "All odd $n$ and all powers of $2$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "A counterexample, a shifting lemma, and induction via a partition lemma",
+        "body": "For a set $S$ of $n$ distinct integers let $s$ be its sum, and for an arrangement $(a_i)$ write $\\Phi=\\sum_{i=1}^n ia_i$.\n\n**$n=2^ka$ with $a\\ge3$ odd, $k\\ge1$, fails.** Take the $n$ distinct numbers $1,1+n,1+2n,\\dots,1+(n-2)n$ and $2^k+1$. Their sum is $\\equiv(n-1)+2^k+1\\equiv2^k\\not\\equiv0\\pmod n$. All of them are $\\equiv1\\pmod{2^k}$, so for every arrangement\n$$\\Phi\\equiv1+2+\\dots+n=2^{k-1}a(2^ka+1)\\pmod{2^k},$$\nand $a(2^ka+1)$ is odd, so $2^k\\nmid\\Phi$ and $n\\nmid\\Phi$.\n\nFrom now on $n$ is odd or a power of $2$.\n\n**Lemma 1 (shifting).** If some arrangement has $\\gcd(n,s)\\mid\\Phi$, then some arrangement has $n\\mid\\Phi$.\n*Proof.* Let $\\Phi_0=\\sum ia_i$ and consider the cyclic shift $b_i=a_{i+x}$ (indices mod $n$). Then $\\sum ib_i\\equiv\\sum_j(j-x)a_j=\\Phi_0-xs\\pmod n$, and $xs\\equiv\\Phi_0\\pmod n$ is solvable in $x$ because $\\gcd(n,s)\\mid\\Phi_0$. $\\square$\n\n**Lemma 2 (partition).** Let $m\\ge2$, $k\\ge1$. Every set $T$ of $km$ integers can be partitioned into $m$ sets of $k$ elements each, such that every part either has sum not divisible by $k$ or consists of numbers all congruent modulo $k$.\n*Proof.* Induction on $m$. For $k=1$ everything is congruent mod $1$; let $k\\ge2$.\n\n*$m=2$.* If $k$ elements of $T$ are congruent mod $k$, let $A$ be such $k$ elements and $B=T\\setminus A$. If $k\\nmid\\sum B$ we are done. Otherwise, if some $\\beta\\in B$ is not congruent to the elements of $A$, swap it with any $\\alpha\\in A$: the new sums are $\\sum A+\\beta-\\alpha\\equiv\\beta-\\alpha$ (as $\\sum A\\equiv k\\alpha\\equiv0$) and $\\sum B-\\beta+\\alpha\\equiv\\alpha-\\beta$, both non-zero mod $k$. If no such $\\beta$ exists, all of $T$ is congruent mod $k$ and any partition works. If no $k$ elements are congruent mod $k$, then $T$ (with $2k$ elements) has three elements $a,b,c$ with distinct residues. Let $t=\\sum T$ and take any $U\\subseteq T\\setminus\\{a,b,c\\}$ with $|U|=k-1$. The sums of $U\\cup\\{a\\}$, $U\\cup\\{b\\}$, $U\\cup\\{c\\}$ have three distinct residues, so one of them, $A$, has $\\sum A\\not\\equiv0,t$; then $A$ and $T\\setminus A$ both have sums not divisible by $k$.\n\n*$m>2$.* If $k$ elements are congruent mod $k$, take them as one part and apply induction to the rest. Otherwise pick any $U\\subseteq T$ with $|U|=k-1$; not all of the $km-k+1\\ge k$ remaining elements are $\\equiv-\\sum U\\pmod k$, so some $a$ makes $\\sum(U\\cup\\{a\\})\\not\\equiv0$; take $U\\cup\\{a\\}$ as a part and apply induction to the rest. $\\square$\n\n**Main proof (strong induction on $n$).** Let $S$ have $n\\nmid s$.\n\n*$n$ prime.* $\\gcd(n,s)=1$ divides every $\\Phi$; apply Lemma 1.\n\n*$n$ composite.* Choose a prime $p$ with $v_p(s)<v_p(n)$ and put $k=n/p\\ge2$; $k$ is odd if $n$ is odd and a power of $2$ if $n$ is. Then $\\gcd(n,s)\\mid k$ (the $p$-part of $\\gcd(n,s)$ is at most $p^{v_p(n)-1}$). By Lemma 1 it suffices to find an arrangement with $k\\mid\\Phi$. By Lemma 2 split $S$ into $p$ parts of size $k$; call a part of the first kind if its sum is not divisible by $k$ (then by the induction hypothesis it has an arrangement $(c_1,\\dots,c_k)$ with $k\\mid\\sum ic_i$), and of the second kind if all its elements are congruent mod $k$, say to $\\rho$ (then its sum is $\\equiv k\\rho\\equiv0\\pmod k$, and any arrangement has $\\sum_{i=1}^k ic_i\\equiv\\rho\\frac{k(k+1)}2\\pmod k$).\n\n- *$n$ odd.* Then $k$ is odd, $\\frac{k(k+1)}2\\equiv0\\pmod k$, so every part has an arrangement with $k\\mid\\sum ic_i$. Put the parts one after another in blocks of positions $jk+1,\\dots,jk+k$; since $\\sum_i(jk+i)c_i\\equiv\\sum_i ic_i\\pmod k$, we get $k\\mid\\Phi$.\n- *$n=2^e$, $e\\ge2$.* Here $p=2$, $k=2^{e-1}$, two parts $U,V$. If both are of the first kind, concatenate them as above to get $k\\mid\\Phi$. Otherwise let $U$ be of the second kind; for it $\\sum ic_i\\equiv\\rho\\frac k2(k+1)\\equiv0\\pmod{k/2}$ and $\\sum U\\equiv0\\pmod k$. Arrange $V$ as $(e_1,\\dots,e_k)$ with $\\frac k2\\mid\\sum ie_i$ (possible in either kind). Place $U$ at the odd positions $1,3,\\dots,2k-1$ and $V$ at the even positions $2,4,\\dots,2k$:\n$$\\Phi=\\sum_{i=1}^k(2i-1)c_i+\\sum_{i=1}^k2ie_i=2\\sum ic_i-\\sum U+2\\sum ie_i\\equiv0\\pmod k.$$\n\nIn all cases $k\\mid\\Phi$ for some arrangement, and Lemma 1 finishes the induction.\n\n**Answer: all odd $n$ and all powers of $2$.** ∎\n\n*Remark.* The condition $n\\nmid s$ cannot be dropped: the set $\\{1,-1\\}$ together with $n-2$ distinct multiples of $n$ admits no good arrangement."
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "counting"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-isl-2021-n7",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Number Theory",
+      "year": 2021,
+      "number": 7,
+      "url": "https://www.imo-official.org/assets/documents/problems/2021/IMO2021SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "prompt": "Let $a_1,a_2,a_3,\\dots$ be an infinite sequence of positive integers such that $a_{n+2m}$ divides $a_n+a_{n+m}$ for all positive integers $n$ and $m$. Prove that this sequence is eventually periodic, i.e. there exist positive integers $N$ and $d$ such that $a_n=a_{n+d}$ for all $n>N$.",
+    "image": null,
+    "choices": null,
+    "type": "self",
+    "answer": "Proof: the sequence is bounded (a new record $k=a_n$ would force $a_{n-s}+a_{n-2s}=k$ and then $k\\le2\\max(a_1,\\dots,a_6)$); after truncation every value recurs, the indices of terms divisible by any fixed $d$ form an arithmetic progression with odd difference, and the product of these differences is a period.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Boundedness and arithmetic progressions of divisibility",
+        "body": "**Lemma 1.** Let $n>2m$. If $d\\mid a_n$ and $d\\mid a_{n-m}$, then $d\\mid a_{n-2m}$; if $d\\mid a_n$ and $d\\mid a_{n-2m}$, then $d\\mid a_{n-m}$.\n*Proof.* $a_n\\mid a_{n-2m}+a_{n-m}$ (the condition with index $n-2m$ and step $m$), so $d$ divides $a_{n-2m}+a_{n-m}$. $\\square$\n\n**Claim: $(a_n)$ is bounded.** Otherwise there are infinitely many records $a_n=k>a_1,\\dots,a_{n-1}$; take one with $n>10$. For $1\\le s<\\frac n2$, $k\\mid a_{n-2s}+a_{n-s}$ and $0<a_{n-2s}+a_{n-s}<2k$, so $a_{n-s}+a_{n-2s}=k$. Using $s=1,2,4$: $a_{n-1}+a_{n-2}=a_{n-2}+a_{n-4}=a_{n-4}+a_{n-8}=k$, so $a_{n-1}=a_{n-4}$ and $a_{n-2}=a_{n-8}$. By Lemma 1 (first part, repeatedly, with $m=3$), $a_{n-1}$ divides $a_{n-1-3j}$ for all $j$ with $n-1-3j\\ge1$; in particular $a_{n-1}\\le\\max(a_1,a_2,a_3)$. Similarly (with $m=6$) $a_{n-2}\\le\\max(a_1,\\dots,a_6)$. Hence $k=a_{n-1}+a_{n-2}\\le2\\max(a_1,\\dots,a_6)$, which fails for large records. $\\square$\n\n**Truncation.** The sequence takes finitely many values; those occurring only finitely often all occur before some index $N$. The sequence $(a_{N+j})_{j\\ge1}$ satisfies the same condition, and it suffices to show it is eventually periodic. So assume every value occurs infinitely often. Let $K$ be the largest value.\n\n**Lemma 2.** If $d$ divides some term, then $I_d=\\{i:d\\mid a_i\\}$ is an infinite arithmetic progression with odd difference.\n*Proof.* $I_d$ is infinite since the divisible term recurs. Let $i_1<i_2<\\dots$ be its elements. If $i_s+i_{s+1}$ were even, Lemma 1 (second part, with $m=\\frac{i_{s+1}-i_s}2$) would give $d\\mid a_{(i_s+i_{s+1})/2}$, an index strictly between two consecutive elements — impossible. So consecutive elements have different parities, and $i_s+i_{s+2}$ is even; Lemma 1 then gives $d\\mid a_{(i_s+i_{s+2})/2}$, and the only element of $I_d$ strictly between $i_s$ and $i_{s+2}$ is $i_{s+1}$. Hence $i_{s+1}=\\frac{i_s+i_{s+2}}2$: $I_d$ is an arithmetic progression, with odd difference. $\\square$\n\n**Conclusion.** Let $\\mathcal D$ be the finite set of positive integers dividing at least one term (all are $\\le K$). For $d\\in\\mathcal D$ let $I_d$ have first element $f_d$ and difference $\\delta_d$, and put $D=\\prod_{d\\in\\mathcal D}\\delta_d$ and $N_0=\\max f_d$. For $n\\ge N_0$ and $d\\in\\mathcal D$: $n\\in I_d\\iff n+D\\in I_d$. So for $n\\ge N_0$ the terms $a_n$ and $a_{n+D}$ have the same divisors (every divisor of either lies in $\\mathcal D$), hence $a_n=a_{n+D}$ (each is its own largest divisor). So the sequence is eventually periodic with period $D$. ∎"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "sequences-series"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-isl-2021-n8",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO Shortlist",
+      "paper": "Number Theory",
+      "year": 2021,
+      "number": 8,
+      "url": "https://www.imo-official.org/assets/documents/problems/2021/IMO2021SL.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "prompt": "For a polynomial $P(x)$ with integer coefficients let $P^1(x)=P(x)$ and $P^{k+1}(x)=P(P^k(x))$ for $k\\ge1$. Find all positive integers $n$ for which there exists a polynomial $P(x)$ with integer coefficients such that for every integer $m\\ge1$, the numbers $P^m(1),\\dots,P^m(n)$ leave exactly $\\lceil n/2^m\\rceil$ distinct remainders when divided by $n$.",
+    "image": null,
+    "choices": null,
+    "type": "self",
+    "answer": "All powers of $2$ and all primes.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Constructions; CRT for two coprime factors; Hensel-type analysis for odd prime powers",
+        "body": "Regard $P$ as a map $\\mathbb Z_\\ell\\to\\mathbb Z_\\ell$ (residues mod $\\ell$) and let $f_{m,\\ell}=|P^m(\\mathbb Z_\\ell)|$, $f_{0,\\ell}=\\ell$. As $1,\\dots,n$ is a complete residue system, the condition says $f_{m,n}=\\lceil n/2^m\\rceil$ for $m\\ge1$, equivalently $f_{m+1,n}=\\lceil f_{m,n}/2\\rceil$ for all $m\\ge0$. Two general facts:\n- $P^{m+1}(\\mathbb Z_\\ell)\\subseteq P^m(\\mathbb Z_\\ell)$, and if $f_{m+1,\\ell}=f_{m,\\ell}$ then $P$ permutes $P^m(\\mathbb Z_\\ell)$ and $f_{j,\\ell}=f_{m,\\ell}$ for all $j\\ge m$. *(Stabilisation.)*\n- Under the condition, $f_{m,n}=1$ for large $m$, hence also $f_{m,d}=1$ for every $d\\mid n$ (reduction mod $d$ maps $P^m(\\mathbb Z_n)$ onto $P^m(\\mathbb Z_d)$).\n\n**Part 1: powers of $2$ and primes work.** For $n=2^k$ take $P(x)=2x$: $P^m(\\mathbb Z_{2^k})=2^m\\mathbb Z_{2^k}$ has $\\lceil2^k/2^m\\rceil$ elements. For an odd prime $p$, every function $\\mathbb Z_p\\to\\mathbb Z_p$ is given by an integer polynomial (Lagrange interpolation over $\\mathbb F_p$); take the one sending $x\\in\\{0,\\dots,p-1\\}$ to $\\lfloor x/2\\rfloor$. It maps $\\{0,\\dots,N-1\\}$ onto $\\{0,\\dots,\\lceil N/2\\rceil-1\\}$, so $f_{m,p}=\\lceil p/2^m\\rceil$. ($n=1$ is trivial.)\n\n**Part 2: $n=ab$ with coprime $a,b>1$ fails.** By the Chinese remainder theorem $f_{m,ab}=f_{m,a}f_{m,b}$. By stabilisation and $f_{m,a}\\to1$: for every $m$, $f_{m+1,a}<f_{m,a}$ unless $f_{m,a}=1$; same for $b$. Let $m$ be minimal with $f_{m+1,a}=1$ or $f_{m+1,b}=1$, say $f_{m+1,a}=1$. Then $f_{m,a}\\ge2$ and $f_{m,b}\\ge2$ (also for $m=0$), so $f_{m+1,b}<f_{m,b}$ and\n$$f_{m+1,ab}=f_{m+1,b}<f_{m,b}\\le\\frac{f_{m,a}f_{m,b}}2=\\frac{f_{m,ab}}2\\le\\left\\lceil\\frac{f_{m,ab}}2\\right\\rceil=f_{m+1,ab},$$\na contradiction.\n\n**Part 3: $n=p^k$, $p$ odd prime, $k\\ge2$, fails.** For $r\\in\\mathbb Z_p$ let $S_r\\subseteq\\mathbb Z_{p^k}$ be the residues $\\equiv r\\pmod p$; $|S_r|=p^{k-1}$ and $P(S_r)\\subseteq S_{P(r)}$. Recall $P(x+h)=P(x)+hP'(x)+h^2Q(x,h)$ with $Q$ an integer polynomial.\n\n*Claim.* $|P(S_r)|=p^{k-1}$ (then $P(S_r)=S_{P(r)}$) or $|P(S_r)|\\le p^{k-2}$.\nIf $p\\mid P'(r)$, then $P(r+ps)\\equiv P(r)\\pmod{p^2}$, so $P(S_r)$ lies in one class mod $p^2$, of size $p^{k-2}$. If $p\\nmid P'(r)$, $P$ is injective on $S_r$: for $x\\ne y$ in $S_r$ with $h=y-x$, $1\\le v_p(h)<k$, we get $v_p(hP'(x))=v_p(h)<v_p(h^2Q)$, so $v_p(P(y)-P(x))=v_p(h)<k$. $\\square$\n\nIterating, each $|P^j(S_r)|$ is either $p^{k-1}$ (a full class) or $\\le p^{k-2}$, and once small it stays small. Since $f_{j,p^k}\\to1$, let $m\\ge1$ be minimal with $|P^m(S_q)|\\le p^{k-2}$ for all $q$; then some $r$ has $P^{m-1}(S_r)$ a full class. Let\n$$\\alpha=\\big|P^m(\\mathbb Z_{p^k})\\setminus P^m(S_r)\\big|.$$\nEvery element of this set is $P$ of an element of $P^{m-1}(\\mathbb Z_{p^k})\\setminus P^{m-1}(S_r)$, so $\\alpha\\le f_{m-1}-p^{k-1}$ (writing $f_j=f_{j,p^k}$). With $f_{m-1}\\le2f_m$ and $f_m\\le p^{k-2}+\\alpha$:\n$$\\alpha+p^{k-1}\\le2p^{k-2}+2\\alpha,\\qquad\\text{so}\\qquad\\alpha\\ge(p-2)p^{k-2}>0.\\tag{1}$$\n\n*Dynamics mod $p$.* As $f_{j,p}\\to1$, $P$ has exactly one fixed point $t$ mod $p$, and the sets $A_j=\\{s\\in\\mathbb Z_p:P^j(s)\\equiv t\\}$ increase strictly until they equal $\\mathbb Z_p$ (if $A_j=A_{j+1}$ then $A_{j+1}=A_{j+2}$). As $|A_0|=1$, either $A_{m-1}=\\mathbb Z_p$ or $|A_{m-1}|\\ge m$.\n- If $A_{m-1}=\\mathbb Z_p$, then $P^{m-1}(\\mathbb Z_{p^k})\\subseteq S_t$ has at most $p^{k-1}=|P^{m-1}(S_r)|$ elements, so it equals $P^{m-1}(S_r)$ and $\\alpha=0$, contradicting (1).\n- Otherwise let $X=A_{m-1}$ ($|X|\\ge m$), $Y=\\bigcup_{q\\in X}S_q$, $Z=\\bigcup_{q\\notin X}S_q$. Note $P(S_t)\\subseteq S_t$ and $P(S_t)\\ne S_t$ (else $|P^m(S_t)|=p^{k-1}$), so $|P(S_t)|\\le p^{k-2}$ by the Claim. Since $P^{m-1}(Y)\\subseteq S_t$, $|P^m(Y)|\\le p^{k-2}$, and $|P^m(Z)|\\le(p-m)p^{k-2}$. Thus\n$$(p-2)p^{k-2}\\le\\alpha<f_m\\le(p-m+1)p^{k-2},$$\nso $m\\le2$. Then $|P^2(S_q)|\\le p^{k-2}$ for all $q$, whence $\\frac{p^k}4\\le f_2\\le p^{k-1}$ and $p\\le4$, i.e. $p=3$.\n\n*The case $p=3$.* Let $t$ be the fixed point mod $3$. As shown, $P(S_t)\\ne S_t$, so by the Claim's proof $3\\mid P'(t)$. Then by induction on $i$ all elements of $P^i(S_t)$ are congruent mod $3^{i+1}$: if $y=x+h$ with $3^{i+1}\\mid h$ and $x\\in S_t$, then $3\\mid P'(x)$ and $P(y)\\equiv P(x)\\pmod{3^{i+2}}$. Hence $|P^{k-1}(S_t)|=1$. Also $f_{1,3}\\le2$ (otherwise $P$ permutes $\\mathbb Z_3$ forever) and then $f_{2,3}\\le1$ by stabilisation, so $P^2(\\mathbb Z_{3^k})\\subseteq S_t$ and $f_{k+1,3^k}\\le|P^{k-1}(S_t)|=1$. But the condition requires $f_{k+1,3^k}=\\lceil3^k/2^{k+1}\\rceil\\ge2$, since $3^k>2^{k+1}$ for $k\\ge2$. Contradiction.\n\n**Conclusion.** By Parts 2 and 3, $n$ must be a power of $2$ or a prime, and Part 1 shows these work.\n\n**Answer: all powers of $2$ (including $1$) and all primes.** ∎"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "polynomials"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

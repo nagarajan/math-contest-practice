@@ -1,0 +1,205 @@
+[
+  {
+    "id": "usamo-usajmo-2013-01",
+    "bank": "usamo",
+    "source": {
+      "contest": "USAJMO",
+      "paper": "USAJMO 2013",
+      "year": 2013,
+      "number": 1,
+      "url": "https://web.evanchen.cc/exams/JMO-2013-notes.pdf"
+    },
+    "grade": "7-10",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "text",
+    "prompt": "Are there integers $a$ and $b$ such that $a^5 b + 3$ and $a b^5 + 3$ are both perfect cubes of integers?",
+    "image": null,
+    "choices": null,
+    "answer": "No",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Cubes modulo 9",
+        "body": "**No.** We work modulo $9$. A cube is $\\equiv 0, 1$ or $8 \\pmod 9$: indeed $x \\equiv 0, \\pm1, \\pm2, \\pm3, \\pm4$ give $x^3 \\equiv 0, \\pm1, \\pm8 \\equiv \\mp 1, 0, \\pm 64 \\equiv \\pm 1$.\n\nSuppose $a^5b + 3$ and $ab^5 + 3$ are both cubes.\n\n**Case 1: $3 \\mid ab$.** Say $3 \\mid a$ (the case $3 \\mid b$ is symmetric, using $ab^5 + 3$). Then $9 \\mid a^5 b$, so $a^5 b + 3 \\equiv 3 \\pmod 9$, which is not a cube residue. Contradiction.\n\n**Case 2: $3 \\nmid ab$.** Then $a^5b + 3$ is not divisible by $3$, so it is $\\equiv \\pm 1 \\pmod 9$, giving $a^5 b \\equiv -2$ or $-4$, i.e. $a^5b \\in \\{5, 7\\} \\pmod 9$. Likewise $ab^5 \\in \\{5, 7\\} \\pmod 9$. Multiplying,\n$$(ab)^6 = a^5b \\cdot ab^5 \\in \\{5\\cdot5,\\ 5\\cdot 7,\\ 7 \\cdot 7\\} \\equiv \\{7, 8, 4\\} \\pmod 9.$$\nBut $\\gcd(ab, 9) = 1$ and $\\varphi(9) = 6$, so Euler's theorem gives $(ab)^6 \\equiv 1 \\pmod 9$. Contradiction.\n\n**Answer: No.**"
+      }
+    ],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamo-usajmo-2013-02",
+    "bank": "usamo",
+    "source": {
+      "contest": "USAJMO",
+      "paper": "USAJMO 2013",
+      "year": 2013,
+      "number": 2,
+      "url": "https://web.evanchen.cc/exams/JMO-2013-notes.pdf"
+    },
+    "grade": "7-10",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Each cell of an $m \\times n$ board is filled with some nonnegative integer. Two numbers in the filling are said to be *adjacent* if their cells share a common side. The filling is called a *garden* if it satisfies the following two conditions:\n\n(i) The difference between any two adjacent numbers is either $0$ or $1$.\n\n(ii) If a number is less than or equal to all of its adjacent numbers, then it is equal to $0$.\n\nDetermine the number of distinct gardens in terms of $m$ and $n$.",
+    "image": null,
+    "choices": null,
+    "answer": "$2^{mn} - 1$. Gardens correspond exactly to nonempty sets $S$ of cells: the garden is \"distance to the nearest cell of $S$\", and $S$ is recovered as the set of zeros.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Gardens are distance functions",
+        "body": "For cells $\\theta, \\theta'$ let $\\operatorname{dist}(\\theta, \\theta')$ be the length of a shortest path of side-adjacent cells from $\\theta$ to $\\theta'$; on a rectangular board this is the taxicab distance $|r - r'| + |c - c'|$. For a nonempty set $S$ of cells let $d_S(\\theta) = \\min_{s \\in S} \\operatorname{dist}(\\theta, s)$. We show that **the gardens are exactly the fillings $d_S$**, and that different $S$ give different gardens. Since there are $2^{mn} - 1$ nonempty sets $S$, the answer is $2^{mn} - 1$.\n\n**$d_S$ is a garden.** Its values are nonnegative integers. If $\\theta, \\theta'$ are adjacent then $d_S(\\theta) \\le d_S(\\theta') + 1$ and vice versa (triangle inequality), so adjacent values differ by $0$ or $1$: condition (i). If $d_S(\\theta) = k \\ge 1$, take $s \\in S$ with $\\operatorname{dist}(\\theta, s) = k$ and let $\\theta'$ be the next cell on a shortest path from $\\theta$ to $s$; then $d_S(\\theta') \\le k - 1 < d_S(\\theta)$, so $\\theta$ is not $\\le$ all its neighbours. This is condition (ii). The zeros of $d_S$ are exactly the cells of $S$, so different $S$ give different gardens.\n\n**Every garden is some $d_S$.** Let $g$ be a garden. A cell with the smallest value on the whole board is $\\le$ all its neighbours, so by (ii) it holds $0$; hence the set $S$ of cells containing $0$ is nonempty. We prove $g = d_S$.\n\n- *$g \\le d_S$.* Take any cell $\\theta$ and a shortest path $\\theta = \\theta_0, \\theta_1, \\dots, \\theta_k$ to a cell $\\theta_k \\in S$, with $k = d_S(\\theta)$. By (i) the value changes by at most $1$ per step, and $g(\\theta_k) = 0$, so $g(\\theta) \\le k$.\n- *$d_S \\le g$*, by strong induction on the value $g(\\theta)$. If $g(\\theta) = 0$ then $\\theta \\in S$ and $d_S(\\theta) = 0$. If $g(\\theta) = k \\ge 1$, then by (ii) $\\theta$ is not $\\le$ all its neighbours, so some neighbour $\\theta'$ has $g(\\theta') < k$, hence $g(\\theta') = k-1$ by (i). By induction $d_S(\\theta') \\le k - 1$, and so $d_S(\\theta) \\le d_S(\\theta') + 1 \\le k$.\n\nHence $g = d_S$.\n\n**Answer: $2^{mn} - 1$.** ∎"
+      }
+    ],
+    "topics": [
+      "counting",
+      "logic"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamo-usajmo-2013-03",
+    "bank": "usamo",
+    "source": {
+      "contest": "USAJMO",
+      "paper": "USAJMO 2013",
+      "year": 2013,
+      "number": 3,
+      "url": "https://web.evanchen.cc/exams/JMO-2013-notes.pdf"
+    },
+    "grade": "7-10",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "In triangle $ABC$, points $P, Q, R$ lie on sides $BC, CA, AB$, respectively. Let $\\omega_A$, $\\omega_B$, $\\omega_C$ denote the circumcircles of triangles $AQR$, $BRP$, $CPQ$, respectively. Given the fact that segment $AP$ intersects $\\omega_A$, $\\omega_B$, $\\omega_C$ again at $X, Y, Z$ respectively, prove that $YX/XZ = BP/PC$.",
+    "image": null,
+    "choices": null,
+    "answer": "The Miquel point $M$ of the three circles is the center of a spiral similarity taking $B, P, C$ to $Y, X, Z$ (angle chasing in the three circles); similarities preserve ratios along a line.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Spiral similarity at the Miquel point",
+        "body": "We use directed angles $\\measuredangle$ between lines, taken modulo $180^\\circ$.\n\n**Miquel point.** By Miquel's theorem the circles $\\omega_A, \\omega_B, \\omega_C$ pass through a common point $M$. (Proof: let $M$ be the second intersection of $\\omega_B$ and $\\omega_C$; then $\\measuredangle RMQ = \\measuredangle RMP + \\measuredangle PMQ = \\measuredangle RBP + \\measuredangle PCQ = \\measuredangle ABC + \\measuredangle BCA = \\measuredangle BAC = \\measuredangle RAQ$, so $M \\in \\omega_A$.)\n\nThe points $X, Y, Z, A, P$ all lie on one line.\n\n**Triangles $MBC$ and $MYZ$ are directly similar.** Since $M, B, P, Y \\in \\omega_B$ and $M, C, P, Z \\in \\omega_C$:\n$$\\measuredangle MYZ = \\measuredangle MYP = \\measuredangle MBP = \\measuredangle MBC, \\qquad \\measuredangle MZY = \\measuredangle MZP = \\measuredangle MCP = \\measuredangle MCB.$$\nTwo equal directed angles give direct similarity: $\\triangle MBC \\sim \\triangle MYZ$.\n\n**Triangles $MBP$ and $MYX$ are directly similar.** First, $\\measuredangle MYX = \\measuredangle MYP = \\measuredangle MBP$ as above. Second, using $M, X, R, A \\in \\omega_A$, then $A, R, B$ collinear, then $M, R, P, B \\in \\omega_B$:\n$$\\measuredangle MXY = \\measuredangle MXA = \\measuredangle MRA = \\measuredangle MRB = \\measuredangle MPB.$$\nSo $\\triangle MBP \\sim \\triangle MYX$ directly.\n\n**Conclusion.** Let $\\phi$ be the spiral similarity (rotation followed by dilation) centered at $M$ that sends $B$ to $Y$. A spiral similarity centered at $M$ is determined by the image of one point, and the direct similarities above say $\\phi(C) = Z$ and $\\phi(P) = X$. Thus $\\phi$ maps the points $B, P, C$ of line $BC$ to the points $Y, X, Z$, and since a similarity multiplies all lengths by the same factor,\n$$\\frac{YX}{XZ} = \\frac{\\phi(B)\\phi(P)}{\\phi(P)\\phi(C)} = \\frac{BP}{PC}. \\qquad ∎$$"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamo-usajmo-2013-04",
+    "bank": "usamo",
+    "source": {
+      "contest": "USAJMO",
+      "paper": "USAJMO 2013",
+      "year": 2013,
+      "number": 4,
+      "url": "https://web.evanchen.cc/exams/JMO-2013-notes.pdf"
+    },
+    "grade": "7-10",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Let $f(n)$ be the number of ways to write $n$ as a sum of powers of $2$, where we keep track of the order of the summation. For example, $f(4) = 6$ because $4$ can be written as $4$, $2+2$, $2+1+1$, $1+2+1$, $1+1+2$, and $1+1+1+1$. Find the smallest $n$ greater than $2013$ for which $f(n)$ is odd.",
+    "image": null,
+    "choices": null,
+    "answer": "2047",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Parity by recursion",
+        "body": "Set $f(0) = 1$ (the empty sum). Sorting the ordered sums of $n \\ge 1$ by their first term $2^k$ gives\n$$f(n) = \\sum_{k \\ge 0,\\ 2^k \\le n} f(n - 2^k). \\qquad (\\heartsuit)$$\nSmall values: $f(0..7) = 1, 1, 2, 3, 6, 10, 18, 31$ — odd exactly at $0, 1, 3, 7$.\n\n**Claim.** $f(n)$ is odd if and only if $n + 1$ is a power of $2$.\n\n*Proof by strong induction.* True for $n = 0$. Let $n \\ge 1$ and assume the claim below $n$. By $(\\heartsuit)$ and the hypothesis, $f(n)$ has the parity of the number of $k$ with $2^k \\le n$ such that $n - 2^k + 1$ is a power of $2$, i.e. the number of pairs $(k, j)$ of nonnegative integers with\n$$n + 1 = 2^k + 2^j$$\n(the condition $2^k \\le n$ is automatic since $2^j \\ge 1$). Look at the binary expansion of $n + 1 \\ge 2$:\n- if $n + 1$ has three or more 1-bits, there are no such pairs;\n- if $n + 1 = 2^u + 2^v$ with $u \\ne v$, there are exactly two pairs, $(u, v)$ and $(v, u)$;\n- if $n + 1 = 2^t$ ($t \\ge 1$), there is exactly one pair, $k = j = t - 1$.\n\nSo the count is odd exactly when $n + 1$ is a power of $2$. $\\square$\n\nThe smallest $n > 2013$ with $n + 1$ a power of $2$ is $n = 2^{11} - 1 = 2047$.\n\n**Answer: 2047**"
+      }
+    ],
+    "topics": [
+      "counting",
+      "number-theory",
+      "sequences-series"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamo-usajmo-2013-05",
+    "bank": "usamo",
+    "source": {
+      "contest": "USAJMO",
+      "paper": "USAJMO 2013",
+      "year": 2013,
+      "number": 5,
+      "url": "https://web.evanchen.cc/exams/JMO-2013-notes.pdf"
+    },
+    "grade": "7-10",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Quadrilateral $XABY$ is inscribed in the semicircle $\\omega$ with diameter $\\overline{XY}$. Segments $AY$ and $BX$ meet at $P$. Point $Z$ is the foot of the perpendicular from $P$ to line $\\overline{XY}$. Point $C$ lies on $\\omega$ such that line $XC$ is perpendicular to line $AZ$. Let $Q$ be the intersection of segments $AY$ and $XC$. Prove that\n$$\\frac{BY}{XP} + \\frac{CY}{XQ} = \\frac{AY}{AX}.$$",
+    "image": null,
+    "choices": null,
+    "answer": "With $XY = 1$, $\\alpha = \\angle AYX$, $\\beta = \\angle BXY$: $APZX$ is cyclic so $\\angle AZX = \\alpha + \\beta$ and $\\angle CXY = 90^\\circ - \\alpha - \\beta$; all six lengths become sines/cosines and the identity reduces to $\\cos\\alpha = \\cos(\\alpha+\\beta)\\cos\\beta + \\sin(\\alpha+\\beta)\\sin\\beta$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Trigonometry",
+        "body": "Scale so that $XY = 1$, and let $\\alpha = \\angle AYX = \\angle PYX$ and $\\beta = \\angle BXY = \\angle PXY$ (ordinary, undirected angles). Since $XY$ is a diameter, $\\angle XAY = \\angle XBY = 90^\\circ$.\n\n**Basic lengths.** From the right triangles $XAY$ and $XBY$:\n$$AX = \\sin\\alpha, \\quad AY = \\cos\\alpha, \\quad BY = \\sin\\beta.$$\n\n**$XP$.** In triangle $XPY$ the angles are $\\beta$ at $X$, $\\alpha$ at $Y$ and $180^\\circ - \\alpha - \\beta$ at $P$, so by the law of sines $XP = \\dfrac{\\sin\\alpha}{\\sin(\\alpha+\\beta)}$. Since $P$ is inside the circle, $\\angle XPY > 90^\\circ$ (it exceeds the inscribed angle on the diameter), so $\\alpha + \\beta < 90^\\circ$.\n\n**The angle $\\angle AZX$.** We have $\\angle XAP = \\angle XAY = 90^\\circ$ and $\\angle XZP = 90^\\circ$, so $A$ and $Z$ lie on the circle with diameter $XP$. The points $P$ (on segment $AY$) and $Z$ (on segment $XY$) are both on the same side of line $AX$ as $Y$, so the inscribed angles on chord $AX$ agree: $\\angle AZX = \\angle APX$. As an exterior angle of triangle $XPY$, $\\angle APX = \\alpha + \\beta$. Hence $\\angle AZX = \\alpha + \\beta$.\n\n**$CY$ and $XQ$.** Line $ZA$ makes the angle $\\alpha + \\beta$ with ray $ZX$, so line $AZ$ meets line $XY$ at angle $\\alpha + \\beta$; the line $XC \\perp AZ$ therefore meets $XY$ at angle $90^\\circ - (\\alpha + \\beta)$, and since $C$ is on the semicircle, $\\angle CXY = 90^\\circ - \\alpha - \\beta$. In right triangle $XCY$: $CY = \\sin(90^\\circ - \\alpha - \\beta) = \\cos(\\alpha + \\beta)$. In triangle $XQY$ the angles are $90^\\circ - \\alpha - \\beta$ at $X$ and $\\alpha$ at $Y$, hence $90^\\circ + \\beta$ at $Q$, and the law of sines gives\n$$XQ = \\frac{\\sin\\alpha}{\\sin(90^\\circ + \\beta)} = \\frac{\\sin\\alpha}{\\cos\\beta}.$$\n\n**The identity.** Now\n$$\\frac{BY}{XP} + \\frac{CY}{XQ} = \\frac{\\sin\\beta\\,\\sin(\\alpha+\\beta) + \\cos(\\alpha+\\beta)\\cos\\beta}{\\sin\\alpha} = \\frac{\\cos\\big((\\alpha+\\beta) - \\beta\\big)}{\\sin\\alpha} = \\frac{\\cos\\alpha}{\\sin\\alpha} = \\frac{AY}{AX}. \\qquad ∎$$"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "trigonometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamo-usajmo-2013-06",
+    "bank": "usamo",
+    "source": {
+      "contest": "USAJMO",
+      "paper": "USAJMO 2013",
+      "year": 2013,
+      "number": 6,
+      "url": "https://web.evanchen.cc/exams/JMO-2013-notes.pdf"
+    },
+    "grade": "7-10",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Find all real numbers $x, y, z \\ge 1$ satisfying\n$$\\min\\left(\\sqrt{x + xyz},\\ \\sqrt{y + xyz},\\ \\sqrt{z + xyz}\\right) = \\sqrt{x - 1} + \\sqrt{y - 1} + \\sqrt{z - 1}.$$",
+    "image": null,
+    "choices": null,
+    "answer": "$(x, y, z)$ is a permutation of $\\left(1 + \\left(\\frac{t}{t^2+1}\\right)^2,\\ 1 + \\frac1{t^2},\\ 1 + t^2\\right)$ for some $t > 0$. With $x = 1 + a$ (the smallest) etc., two Cauchy–Schwarz steps show the left side is always $\\ge$ the right side, with equality iff $bc = 1$ and $a = (\\sqrt b + \\sqrt c)^{-2}$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Two Cauchy–Schwarz steps",
+        "body": "Write $x = 1 + a$, $y = 1 + b$, $z = 1 + c$ with $a, b, c \\ge 0$. The equation is symmetric, so first suppose $a \\le b \\le c$. Then the minimum on the left is the first term, and since $x + xyz = x(1 + yz)$ the equation reads\n$$\\sqrt{(1 + a)\\big(1 + (1+b)(1+c)\\big)} = \\sqrt a + \\sqrt b + \\sqrt c.$$\n\n**The left side is always at least the right side.** By Cauchy–Schwarz,\n$$(1 + b)(c + 1) \\ge (\\sqrt c + \\sqrt b)^2,$$\nwith equality iff $(1, \\sqrt b)$ and $(\\sqrt c, 1)$ are proportional, i.e. $bc = 1$. Put $s = \\sqrt b + \\sqrt c > 0$. Again by Cauchy–Schwarz,\n$$(a + 1)(1 + s^2) \\ge (\\sqrt a + s)^2,$$\nwith equality iff $(\\sqrt a, 1)$ and $(1, s)$ are proportional, i.e. $\\sqrt a = 1/s$. Combining, $(1+a)(1 + (1+b)(1+c)) \\ge (1+a)(1+s^2) \\ge (\\sqrt a + \\sqrt b + \\sqrt c)^2$.\n\n**Equality.** So the equation holds iff $bc = 1$ and $a = 1/(\\sqrt b + \\sqrt c)^2$. With $b \\le c$ write $c = t^2$, $b = 1/t^2$ ($t \\ge 1$); then $\\sqrt b + \\sqrt c = t + \\frac1t$ and\n$$a = \\frac{1}{(t + 1/t)^2} = \\left(\\frac{t}{t^2+1}\\right)^2.$$\nThis is consistent with $a \\le b$, because $a = \\frac{t^2}{(t^2+1)^2} \\le \\frac{1}{t^2}$ is $t^4 \\le (t^2+1)^2$. Conversely these values satisfy the equation.\n\nRemoving the ordering assumption (and noting that $t \\mapsto 1/t$ swaps the roles of $b$ and $c$), the solutions are exactly\n$$(x, y, z) = \\left(1 + \\left(\\frac{t}{t^2+1}\\right)^2,\\ 1 + \\frac{1}{t^2},\\ 1 + t^2\\right) \\text{ and its permutations}, \\quad t > 0. \\qquad ∎$$"
+      }
+    ],
+    "topics": [
+      "inequalities",
+      "algebra"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

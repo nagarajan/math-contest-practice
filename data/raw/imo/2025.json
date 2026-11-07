@@ -1,0 +1,204 @@
+[
+  {
+    "id": "imo-2025-01",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO",
+      "paper": "Day 1",
+      "year": 2025,
+      "number": 1,
+      "url": "https://www.imo-official.org/assets/documents/problems/2025/2025_eng.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "A line in the plane is called *sunny* if it is not parallel to any of the $x$-axis, the $y$-axis, and the line $x+y=0$.\n\nLet $n\\ge 3$ be a given integer. Determine all nonnegative integers $k$ such that there exist $n$ distinct lines in the plane satisfying both of the following:\n\n- for all positive integers $a$ and $b$ with $a+b\\le n+1$, the point $(a,b)$ is on at least one of the lines; and\n- exactly $k$ of the $n$ lines are sunny.",
+    "image": null,
+    "choices": null,
+    "answer": "$k\\in\\{0,1,3\\}$ (for $n\\ge4$ one of the three border lines must be used, which reduces to $n=3$).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Peel off a border line, then settle $n=3$",
+        "body": "Let $P_n=\\{(a,b)\\in\\mathbb Z_{>0}^2 : a+b\\le n+1\\}$; it has $1+2+\\dots+n$ points and lies in the triangle with vertices $(1,1),(1,n),(n,1)$. Call the three lines $x=1$, $y=1$, $x+y=n+1$ (the sides of this triangle, each containing $n$ points of $P_n$) the **border lines**. They are not sunny.\n\n**Constructions.** All lines below are distinct.\n- $k=0$: the lines $x=1,x=2,\\dots,x=n$.\n- $k=1$: the lines $x=1,\\dots,x=n-1$ cover every point with $a\\le n-1$; the only remaining point is $(n,1)$, which we cover by the sunny line $y=x-n+1$ (slope $1$).\n- $k=3$: the lines $x=1,\\dots,x=n-3$ (none if $n=3$) cover the points with $a\\le n-3$. The remaining points are $(n-3+a',b)$ with $a'+b\\le 4$, a translate of $P_3$. Cover $P_3$ by the three lines through $\\{(1,1),(2,2)\\}$, $\\{(1,2),(3,1)\\}$, $\\{(1,3),(2,1)\\}$ (slopes $1,-\\tfrac12,-2$, all sunny), translated by $(n-3,0)$.\n\n**Claim 1.** If $n\\ge4$, every family of $n$ lines covering $P_n$ contains a border line.\n\n*Proof.* The points of $P_n$ on the boundary of the triangle number $3(n-1)$. A line that does not contain a side of the triangle meets its boundary in at most two points. If no border line were used, the $n$ lines would cover at most $2n$ boundary points, so $2n\\ge 3(n-1)$, i.e. $n\\le3$. $\\square$\n\n**Reduction.** Let $n\\ge4$ and take a valid family of $n$ lines with $k$ sunny ones. Remove a border line it contains. The other $n-1$ lines cover the remaining points, which form a translate of $P_{n-1}$: removing $x=1$ leaves $\\{(a,b): a\\ge2,\\ a+b\\le n+1\\}=P_{n-1}+(1,0)$; removing $y=1$ leaves $P_{n-1}+(0,1)$; removing $x+y=n+1$ leaves $P_{n-1}$. Translating the $n-1$ lines back gives a valid family for $n-1$ with the same number $k$ of sunny lines (translation does not change directions, and the removed line was not sunny). Repeating, every achievable $k$ for $n$ is achievable for $n=3$.\n\n**The case $n=3$.** $P_3=\\{(1,1),(1,2),(1,3),(2,1),(2,2),(3,1)\\}$ is covered by three lines. The only collinear triples in $P_3$ are the three sides, i.e. the border lines.\n- *A border line is used.* The other three points form a translate of $P_2=\\{(1,1),(1,2),(2,1)\\}$ (namely $\\{(2,1),(2,2),(3,1)\\}$, $\\{(1,2),(1,3),(2,2)\\}$ or $\\{(1,1),(1,2),(2,1)\\}$) and are covered by two lines, so one line contains two of them. Any two points of a translate of $P_2$ lie on a line parallel to $x=0$, $y=0$ or $x+y=0$, which is not sunny. Hence at most one line is sunny: $k\\in\\{0,1\\}$.\n- *No border line is used.* Then every line contains at most $2$ points, and $6$ points must be covered by $3$ lines, so the lines split $P_3$ into three disjoint pairs. Two corners $(1,1),(1,3),(3,1)$ always lie on a border line, so each corner is paired with one of $(1,2),(2,1),(2,2)$. The corner $(1,1)$ cannot be paired with $(1,2)$ (line $x=1$) or $(2,1)$ (line $y=1$), so it is paired with $(2,2)$. Likewise $(1,3)$ must be paired with $(2,1)$, and $(3,1)$ with $(1,2)$. These three lines have slopes $1,-2,-\\tfrac12$, so all three are sunny: $k=3$.\n\nSo for $n=3$, and therefore for every $n\\ge3$, only $k\\in\\{0,1,3\\}$ is possible, and the constructions show all three occur.\n\n**Answer: $k=0$, $1$ or $3$.** ∎"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "counting"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-2025-02",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO",
+      "paper": "Day 1",
+      "year": 2025,
+      "number": 2,
+      "url": "https://www.imo-official.org/assets/documents/problems/2025/2025_eng.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $\\Omega$ and $\\Gamma$ be circles with centres $M$ and $N$, respectively, such that the radius of $\\Omega$ is less than the radius of $\\Gamma$. Suppose circles $\\Omega$ and $\\Gamma$ intersect at two distinct points $A$ and $B$. Line $MN$ intersects $\\Omega$ at $C$ and $\\Gamma$ at $D$, such that points $C$, $M$, $N$ and $D$ lie on the line in that order. Let $P$ be the circumcentre of triangle $ACD$. Line $AP$ intersects $\\Omega$ again at $E\\neq A$. Line $AP$ intersects $\\Gamma$ again at $F\\neq A$. Let $H$ be the orthocentre of triangle $PMN$.\n\nProve that the line through $H$ parallel to $AP$ is tangent to the circumcircle of triangle $BEF$.\n\n(The orthocentre of a triangle is the point of intersection of its altitudes.)",
+    "image": null,
+    "choices": null,
+    "answer": "Proof: the tangency point is $T=M+N-A$ (so $AMTN$ is a parallelogram); show $T$ lies on $(BEF)$ with $TE=TF$ (so the tangent at $T$ is parallel to $EF=AP$) and $HT\\parallel AP$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Coordinates with the tangency point $T=M+N-A$",
+        "body": "**Setup.** Put line $MN$ on the $x$-axis and the common chord $AB$ on the $y$-axis: $A=(0,a)$, $B=(0,-a)$ with $a>0$, $M=(m,0)$, $N=(n,0)$, $m<n$. Write $C=(c,0)$, $D=(d,0)$. Since $C$ lies on $\\Omega$ to the left of $M$ and $|MC|=|MA|=\\sqrt{m^2+a^2}>|m|$, we get $c<0$; similarly $d>0$. From $(c-m)^2=m^2+a^2$ and $(d-n)^2=n^2+a^2$:\n$$m=\\frac{c^2-a^2}{2c},\\qquad n=\\frac{d^2-a^2}{2d},\\qquad r_\\Omega=\\frac{c^2+a^2}{2|c|},\\qquad r_\\Gamma=\\frac{d^2+a^2}{2d}.$$\nThe circle $\\Omega$ has equation $x^2+y^2-2mx-a^2=0$ and $\\Gamma$ has $x^2+y^2-2nx-a^2=0$.\n\n**Two non-degeneracy facts.** Let $\\alpha=\\angle ACD$, $\\beta=\\angle ADC$. Triangle $MAC$ is isosceles, so the exterior angle $\\angle AMN=2\\alpha$; likewise $\\angle ANM=2\\beta$. In triangle $AMN$ this gives $2\\alpha+2\\beta<180^\\circ$, so $\\tan\\alpha\\tan\\beta<1$. As $\\tan\\alpha=a/(-c)$ and $\\tan\\beta=a/d$, this says $a^2<-cd$, i.e.\n$$a^2+cd<0.\\tag{1}$$\nNext, $c+d\\ne0$: if $d=-c$ then $r_\\Omega=r_\\Gamma$, contradicting $r_\\Omega<r_\\Gamma$.\n\n**The points.** The circumcentre $P$ of $ACD$ has $x$-coordinate $\\frac{c+d}{2}$; from $|PA|=|PC|$ one gets $P=\\left(\\frac{c+d}2,\\ \\frac{a^2+cd}{2a}\\right)$. Hence line $AP$ is $A+t\\,v$ with\n$$v=\\bigl(a(c+d),\\ cd-a^2\\bigr),\\qquad |v|^2=(a^2+c^2)(a^2+d^2).$$\nPut $u=a^2+c^2$, $w=a^2+d^2$. Substituting $A+tv$ into the equation of $\\Omega$ gives $t^2|v|^2+2t(av_2-mv_1)=0$, so $E=A+t_Ev$ with $t_E=\\frac{2(mv_1-av_2)}{|v|^2}$. A short computation gives $mv_1-av_2=\\frac{a(c-d)(c^2+a^2)}{2c}$, hence (and symmetrically for $F$ on $\\Gamma$)\n$$t_E=\\frac{a(c-d)}{c\\,w},\\qquad t_F=\\frac{a(d-c)}{d\\,u}.$$\nThese are different: $t_E=t_F$ would mean $du+cw=(c+d)(a^2+cd)=0$, excluded by (1) and $c+d\\neq0$. Also $E,F\\ne B$, because line $AP$ is not the line $AB$ ($v_1=a(c+d)\\neq0$). So $B,E,F$ are three distinct points.\n\n**The orthocentre.** $P$ and $N$ are both equidistant from $A$ and $D$ (and $P\\neq N$, as $C\\notin\\Gamma$), so $PN$ is the perpendicular bisector of $AD$; hence the altitude from $M$ (perpendicular to $PN$) is parallel to $AD$. The altitude from $P$ is the vertical line $x=\\frac{c+d}2$. Intersecting it with the line through $M$ in direction $AD=(d,-a)$ gives\n$$H=\\left(\\frac{c+d}2,\\ -\\frac{a(a^2+cd)}{2cd}\\right).$$\n\n**The point $T$.** Let $T=M+N-A=(m+n,-a)$. Using the formulas for $m,n$,\n$$m+n=\\frac{(c+d)(cd-a^2)}{2cd},\\qquad T-H=\\left(-\\frac{a^2(c+d)}{2cd},\\ \\frac{a(a^2-cd)}{2cd}\\right)=-\\frac{a}{2cd}\\,v .$$\nSo **$HT\\parallel AP$**.\n\nNext, the foot of the perpendicular from $T$ to line $AP$ has parameter $t_T=\\frac{(T-A)\\cdot v}{|v|^2}$. With $T-A=(m+n,-2a)$,\n$$(T-A)\\cdot v=\\frac{a(c+d)^2(cd-a^2)}{2cd}-2a(cd-a^2)=\\frac{a(cd-a^2)(c-d)^2}{2cd},$$\nwhile\n$$\\frac{t_E+t_F}2=\\frac{a(c-d)}2\\cdot\\frac{du-cw}{cd\\,uw}=\\frac{a(c-d)^2(cd-a^2)}{2cd\\,uw}=t_T,$$\nbecause $du-cw=(d-c)(a^2-cd)$. So the foot is the midpoint of $EF$: **$TE=TF$**.\n\n**$T$ lies on circle $BEF$.** Let $O'$ be the point on the perpendicular bisector $x=\\frac{m+n}2$ of $BT$ with $(O'-T)\\cdot v=0$; writing $O'=(\\frac{m+n}2,y_0)$, this condition reads $-\\frac{m+n}2a(c+d)+(y_0+a)(cd-a^2)=0$, and since $cd-a^2\\neq0$,\n$$y_0=\\frac{a(c+d)^2}{4cd}-a=\\frac{a(c-d)^2}{4cd}.$$\nLet $\\omega$ be the circle with centre $O'$ through $B$ and $T$. The power of $A$ with respect to $\\omega$ is $|AO'|^2-|TO'|^2=(a-y_0)^2-(a+y_0)^2=-4ay_0=-\\frac{a^2(c-d)^2}{cd}$, and one checks $|v|^2t_Et_F=uw\\cdot\\frac{-a^2(c-d)^2}{cd\\,uw}$ equals the same number. Points $A+tv$ lie on $\\omega$ exactly when\n$$|v|^2t^2-2t\\,v\\cdot(O'-A)+\\operatorname{pow}_\\omega(A)=0 .$$\nHere $v\\cdot(O'-A)=v\\cdot(T-A)=|v|^2t_T$ (as $O'-T\\perp v$), so the sum of the roots is $2t_T=t_E+t_F$ and their product is $\\operatorname{pow}_\\omega(A)/|v|^2=t_Et_F$. Hence the roots are $t_E,t_F$: $E,F\\in\\omega$. Since $B,E,F$ are distinct points of $\\omega$, $\\omega$ is the circumcircle of $BEF$, and it passes through $T$.\n\n**Conclusion.** The radius $O'T$ is perpendicular to $v$ ($O'\\neq T$ since $\\omega$ contains two distinct points $E,F$), so the tangent to $\\omega$ at $T$ is the line through $T$ parallel to $AP$. Because $HT\\parallel AP$, this is exactly the line through $H$ parallel to $AP$. Hence that line is tangent to the circumcircle of $BEF$ (at $T$). ∎"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-2025-03",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO",
+      "paper": "Day 1",
+      "year": 2025,
+      "number": 3,
+      "url": "https://www.imo-official.org/assets/documents/problems/2025/2025_eng.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Let $\\mathbb N$ denote the set of positive integers. A function $f:\\mathbb N\\to\\mathbb N$ is said to be *bonza* if\n$$f(a)\\ \\text{ divides }\\ b^a-f(b)^{f(a)}$$\nfor all positive integers $a$ and $b$.\n\nDetermine the smallest real constant $c$ such that $f(n)\\le cn$ for all bonza functions $f$ and all positive integers $n$.",
+    "image": null,
+    "choices": null,
+    "answer": "4",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Odd primes are killed, then 2-adic valuations",
+        "body": "Write $P(a,b)$ for the statement $f(a)\\mid b^a-f(b)^{f(a)}$.\n\n**Step 1: $f(n)\\mid n^n$.** $P(n,n)$ gives $f(n)\\mid n^n-f(n)^{f(n)}$, and $f(n)\\mid f(n)^{f(n)}$. So every prime factor of $f(n)$ divides $n$; in particular $f(p)$ is a power of $p$ for every prime $p$.\n\n**Step 2: if $q$ is a prime with $f(q)>1$, then $q\\mid n-f(n)$ for all $n$.** Here $f(q)=q^j$ with $j\\ge1$, and $P(q,n)$ gives $q\\mid n^q-f(n)^{q^j}$. By Fermat, $n^q\\equiv n$ and $x^{q^j}\\equiv x\\pmod q$, so $q\\mid n-f(n)$.\n\n**Case A: infinitely many primes $q$ have $f(q)>1$.** Then for each $n$, $n-f(n)$ has infinitely many prime divisors, so $f(n)=n\\le 4n$.\n\n**Case B: only finitely many primes $q$ have $f(q)>1$.**\n\n*Step 3: $f(p)=1$ for every odd prime $p$.* First, there are infinitely many primes $q\\not\\equiv0,1\\pmod p$: if $q_1,\\dots,q_s$ were all of them, the number $N=p\\,q_1\\cdots q_s-1\\equiv-1\\pmod p$ is not $\\equiv1\\pmod p$ (as $p\\ge3$), so it has a prime factor $\\not\\equiv1\\pmod p$; that factor is not $p$ and not any $q_i$ (both divide $N+1$), a contradiction. So we may pick such a prime $q$ with $f(q)=1$. If $f(p)>1$, then $p\\mid f(p)$ and $P(p,q)$ gives $p\\mid q^p-1^{f(p)}=q^p-1$. But $q^p\\equiv q\\pmod p$, so $p\\mid q-1$, a contradiction.\n\n*Step 4: each $f(n)$ is a power of $2$.* If an odd prime $p$ divides $f(n)$, then $P(n,p)$ gives $p\\mid f(n)\\mid p^n-1$, impossible.\n\n*Step 5: the bound.* $P(n,5)$ gives $f(n)\\mid 5^n-1$. Write $n=2^k m$ with $m$ odd. Then\n$$5^n-1=(5^m-1)(5^m+1)(5^{2m}+1)\\cdots(5^{2^{k-1}m}+1).$$\n$5^m-1=4(5^{m-1}+\\dots+5+1)$ with an odd number of odd terms in the bracket, so $\\nu_2(5^m-1)=2$; and each $5^x+1\\equiv2\\pmod4$. Hence $\\nu_2(5^n-1)=k+2$, so\n$$f(n)\\le 2^{k+2}=4\\cdot 2^{\\nu_2(n)}\\le 4n.$$\n\nSo $f(n)\\le4n$ for every bonza $f$ and every $n$.\n\n**Sharpness.** Define $f(n)=1$ for odd $n$, $f(4)=16$, and $f(n)=2$ for even $n\\ne4$. Check $f(a)\\mid b^a-f(b)^{f(a)}$:\n- $a$ odd: $f(a)=1$.\n- $a$ even, $a\\neq4$: $f(a)=2$, and $b^a$, $f(b)^2$ have the same parity as $b$ (since $f(b)$ is odd exactly when $b$ is odd).\n- $a=4$: if $b$ is odd, $b^4-1=(b^2-1)(b^2+1)$ with $8\\mid b^2-1$ and $2\\mid b^2+1$, so $16\\mid b^4-1^{16}$; if $b$ is even, $16\\mid b^4$ and $16\\mid f(b)^{16}$.\n\nThis $f$ is bonza with $f(4)=16=4\\cdot4$, so no $c<4$ works.\n\n**Answer: $c=4$.**"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "functional-equations"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-2025-04",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO",
+      "paper": "Day 2",
+      "year": 2025,
+      "number": 4,
+      "url": "https://www.imo-official.org/assets/documents/problems/2025/2025_eng.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "A *proper divisor* of a positive integer $N$ is a positive divisor of $N$ other than $N$ itself.\n\nThe infinite sequence $a_1,a_2,\\dots$ consists of positive integers, each of which has at least three proper divisors. For each $n\\ge1$, the integer $a_{n+1}$ is the sum of the three largest proper divisors of $a_n$.\n\nDetermine all possible values of $a_1$.",
+    "image": null,
+    "choices": null,
+    "answer": "$a_1=6\\cdot12^{e}\\cdot\\ell$ with $e\\ge0$ and $\\gcd(\\ell,10)=1$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Force divisibility by 6, then track the factor 13/12",
+        "body": "For $x$ with at least three proper divisors let $\\psi(x)$ be the sum of its three largest proper divisors. If $1<d_1<d_2<d_3$ are the three smallest divisors of $x$ greater than $1$, then $\\psi(x)=\\frac x{d_1}+\\frac x{d_2}+\\frac x{d_3}$.\n\n**These values work.** Let $x=6\\cdot12^e\\ell$ with $\\gcd(\\ell,10)=1$.\n- If $e=0$: $x=6\\ell$ with $\\ell$ odd and $5\\nmid\\ell$, so the smallest divisors above $1$ are $2,3,6$ and $\\psi(x)=x\\left(\\frac12+\\frac13+\\frac16\\right)=x$.\n- If $e\\ge1$: the smallest divisors above $1$ are $2,3,4$ and $\\psi(x)=\\frac{13}{12}x=6\\cdot12^{e-1}\\cdot(13\\ell)$, again of the same form with $e$ decreased by one ($\\gcd(13\\ell,10)=1$).\n\nSo the sequence is defined forever: it is multiplied by $\\frac{13}{12}$ for $e$ steps and is then constant.\n\n**Every valid $a_1$ has this form.** Fix a valid sequence.\n\n*All terms are even.* If $x$ is odd, all its divisors are odd, so $d_1\\ge3$, $d_2\\ge5$, $d_3\\ge7$ and $\\psi(x)\\le\\left(\\frac13+\\frac15+\\frac17\\right)x<x$; moreover $\\psi(x)$ is a sum of three odd numbers, hence odd. So if some term were odd, all later terms would be odd and strictly decreasing, which is impossible for an infinite sequence of positive integers.\n\n*All terms are multiples of $3$.* Let $x$ be even with $3\\nmid x$. Then $d_1=2$, $d_2\\ge4$, $d_3\\ge5$, so $\\psi(x)\\le\\left(\\frac12+\\frac14+\\frac15\\right)x<x$. We show that $\\psi(x)$ is odd or not divisible by $3$:\n- If $4\\mid x$: $d_2=4$ and $\\psi(x)=\\frac34x+\\frac x{d_3}$; the first term is a multiple of $3$ and the second is a divisor of $x$, hence not a multiple of $3$.\n- If $4\\nmid x$: let $p\\ge5$ be the smallest odd prime factor of $x$, so $d_2=p$. The next divisor $d_3$ is either $2p$ or an odd number in $(p,2p)$; such an odd divisor has all prime factors $\\ge p$ and is less than $p^2$, so it is a prime $q$. If $d_3=2p$, then $\\psi(x)=\\frac x2+\\frac{3x}{2p}\\equiv\\frac x2\\not\\equiv0\\pmod 3$. If $d_3=q$, then $\\psi(x)=\\frac x2+\\frac xp+\\frac xq$ is odd $+$ even $+$ even, i.e. odd.\n\nSince all terms are even, a term not divisible by $3$ would be followed by a smaller term not divisible by $3$, and so on forever, which is impossible. So $6\\mid a_n$ for all $n$.\n\n*The recursion.* For $6\\mid x$ we have $d_1=2,d_2=3$ and $d_3=4$ if $4\\mid x$; $d_3=5$ if $4\\nmid x$, $5\\mid x$; $d_3=6$ otherwise. So\n$$\\psi(x)=\\tfrac{13}{12}x,\\qquad \\tfrac{31}{30}x,\\qquad x\\quad\\text{respectively}.$$\nIn the middle case $x\\equiv2\\pmod4$, so $\\frac x{30}$ is odd and $\\psi(x)=31\\cdot\\frac x{30}$ is odd, which cannot happen in our sequence. Hence $a_{n+1}=\\frac{13}{12}a_n$ when $4\\mid a_n$, and $a_{n+1}=a_n$ when $4\\nmid a_n$ (and then $5\\nmid a_n$).\n\nEach step of the first kind lowers $\\nu_2$ by $2$, so there is a first index $T$ with $4\\nmid a_T$. Then $a_T=6\\ell$ with $\\ell$ odd and $5\\nmid\\ell$, and $a_1=\\left(\\frac{12}{13}\\right)^{T-1}a_T=\\frac{6\\cdot12^{T-1}\\ell}{13^{T-1}}$. As $a_1$ is an integer and $\\gcd(12,13)=1$, $13^{T-1}\\mid\\ell$; with $\\ell'=\\ell/13^{T-1}$ we get $a_1=6\\cdot12^{T-1}\\ell'$ and $\\gcd(\\ell',10)=1$.\n\n**Answer: all $a_1=6\\cdot12^{e}\\ell$ with $e\\ge0$ and $\\ell$ a positive integer coprime to $10$.** ∎"
+      }
+    ],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-2025-05",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO",
+      "paper": "Day 2",
+      "year": 2025,
+      "number": 5,
+      "url": "https://www.imo-official.org/assets/documents/problems/2025/2025_eng.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Alice and Bazza are playing the *inekoalaty game*, a two-player game whose rules depend on a positive real number $\\lambda$ which is known to both players. On the $n$th turn of the game (starting with $n=1$) the following happens:\n\n- If $n$ is odd, Alice chooses a nonnegative real number $x_n$ such that\n$$x_1+x_2+\\dots+x_n\\le\\lambda n.$$\n- If $n$ is even, Bazza chooses a nonnegative real number $x_n$ such that\n$$x_1^2+x_2^2+\\dots+x_n^2\\le n.$$\n\nIf a player cannot choose a suitable number $x_n$, the game ends and the other player wins. If the game goes on forever, neither player wins. All chosen numbers are known to both players.\n\nDetermine all values of $\\lambda$ for which Alice has a winning strategy and all those for which Bazza has a winning strategy.",
+    "image": null,
+    "choices": null,
+    "answer": "Alice wins for $\\lambda>\\frac1{\\sqrt2}$, Bazza wins for $\\lambda<\\frac1{\\sqrt2}$; for $\\lambda=\\frac1{\\sqrt2}$ neither (Alice plays $0$ then strikes; Bazza plays $\\sqrt{2-x_{2k-1}^2}$).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Alice waits, Bazza fills the square budget",
+        "body": "Write $S_n=x_1+\\dots+x_n$ and $Q_n=x_1^2+\\dots+x_n^2$. Alice can move on turn $n$ (odd) iff $S_{n-1}\\le\\lambda n$; Bazza can move on turn $n$ (even) iff $Q_{n-1}\\le n$.\n\n**Alice's strategy: play $0$, then strike.** Suppose Alice has played $0$ on turns $1,3,\\dots,2k-1$. Since Bazza's moves were legal, $Q_{2k}\\le 2k$, and by Cauchy–Schwarz\n$$S_{2k}=x_2+x_4+\\dots+x_{2k}\\le\\sqrt{k\\,(x_2^2+\\dots+x_{2k}^2)}\\le\\sqrt{k\\cdot2k}=\\sqrt2\\,k .$$\n- If $\\lambda\\ge\\frac1{\\sqrt2}$, then $\\lambda(2k+1)\\ge\\frac{2k+1}{\\sqrt2}>\\sqrt2\\,k\\ge S_{2k}$, so Alice can always play $0$ again. **Thus for $\\lambda\\ge\\frac1{\\sqrt2}$ Alice never loses**, and Bazza has no winning strategy.\n- If $\\lambda>\\frac1{\\sqrt2}$, choose $k$ with $\\lambda(2k+1)-\\sqrt2\\,k>\\sqrt{2k+2}$ (possible because the left side grows linearly with slope $2\\lambda-\\sqrt2>0$, the right side like $\\sqrt k$). Alice plays $0$ up to turn $2k-1$ and on turn $2k+1$ plays $x_{2k+1}=\\lambda(2k+1)-S_{2k}\\ge\\lambda(2k+1)-\\sqrt2k>\\sqrt{2k+2}$ (a legal move). Then $Q_{2k+1}\\ge x_{2k+1}^2>2k+2$, so Bazza cannot move on turn $2k+2$. (If Bazza got stuck earlier, Alice has won anyway.) **So Alice wins for $\\lambda>\\frac1{\\sqrt2}$.**\n\n**Bazza's strategy: use up the square budget.** On each turn $2i$ Bazza plays $x_{2i}=\\sqrt{2-x_{2i-1}^2}$. We show by induction that this is always legal when $\\lambda\\le\\frac1{\\sqrt2}$, with $Q_{2i}=2i$.\n\nFor $0\\le t\\le\\sqrt2$ we have $t+\\sqrt{2-t^2}\\ge\\sqrt2$ (square both sides: $2+2t\\sqrt{2-t^2}\\ge2$). Suppose Bazza has followed the strategy up to turn $2k$, so $Q_{2k}=2k$, and Alice has just played $x_{2k+1}$. Grouping in pairs,\n$$\\lambda(2k+1)\\ge S_{2k+1}=\\sum_{i=1}^{k}\\Bigl(x_{2i-1}+\\sqrt{2-x_{2i-1}^2}\\Bigr)+x_{2k+1}\\ge\\sqrt2\\,k+x_{2k+1}.\\tag{$*$}$$\nSo $x_{2k+1}\\le\\lambda(2k+1)-\\sqrt2k\\le\\frac{2k+1}{\\sqrt2}-\\sqrt2k=\\frac1{\\sqrt2}<\\sqrt2$. Hence $x_{2k+2}=\\sqrt{2-x_{2k+1}^2}$ is a real number and $Q_{2k+2}=2k+x_{2k+1}^2+(2-x_{2k+1}^2)=2k+2$, a legal move. **So for $\\lambda\\le\\frac1{\\sqrt2}$ Bazza never loses**, and Alice has no winning strategy.\n\nIf moreover $\\lambda<\\frac1{\\sqrt2}$, then $(*)$ (with $x_{2k+1}\\ge0$) shows Alice can only move on turn $2k+1$ if $\\sqrt2k\\le\\lambda(2k+1)$. Since $\\sqrt2k-\\lambda(2k+1)=(\\sqrt2-2\\lambda)k-\\lambda\\to\\infty$, for large $k$ Alice has no legal move, and **Bazza wins for $\\lambda<\\frac1{\\sqrt2}$.**\n\n**Answer: Alice has a winning strategy exactly for $\\lambda>\\frac1{\\sqrt2}$, Bazza exactly for $\\lambda<\\frac1{\\sqrt2}$; for $\\lambda=\\frac1{\\sqrt2}$ both can avoid losing, so neither has a winning strategy.** ∎"
+      }
+    ],
+    "topics": [
+      "games",
+      "inequalities"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-2025-06",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO",
+      "paper": "Day 2",
+      "year": 2025,
+      "number": 6,
+      "url": "https://www.imo-official.org/assets/documents/problems/2025/2025_eng.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Consider a $2025\\times2025$ grid of unit squares. Matilda wishes to place on the grid some rectangular tiles, possibly of different sizes, such that each side of every tile lies on a grid line and every unit square is covered by at most one tile.\n\nDetermine the minimum number of tiles Matilda needs to place so that each row and each column of the grid has exactly one unit square that is not covered by any tile.",
+    "image": null,
+    "choices": null,
+    "answer": "2112",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Construction for $n=k^2$ and an Erdős–Szekeres bound",
+        "body": "Let $n=2025=k^2$ with $k=45$. We show the answer is $n+2k-3=2112$. Call the uncovered squares **holes**; there is exactly one in each row and each column, and every other square is covered.\n\n**Construction.** Number rows and columns $0,\\dots,n-1$ (row $0$ at the top, column $0$ at the left). For $0\\le i,j\\le k-1$ put the hole of row $ki+j$ in column $kj+(k-1-i)$; since $(i,j)\\mapsto(j,k-1-i)$ is a bijection, this is one hole per row and column. Use the following tiles (all ranges inclusive):\n- $(k-1)^2$ squares of size $k\\times k$: for $0\\le i,j\\le k-2$, rows $ki+j+1$ to $ki+j+k$ and columns $kj+k-1-i$ to $kj+2k-2-i$;\n- for $m=1,\\dots,k-1$, four border tiles: rows $0$ to $m-1$ by columns $mk$ to $mk+k-1$; rows $(m-1)k$ to $mk-1$ by columns $0$ to $k-1-m$; rows $mk$ to $mk+k-1$ by columns $n-m$ to $n-1$; rows $n-k+m$ to $n-1$ by columns $(m-1)k$ to $mk-1$.\n\nOne checks that these tiles are disjoint, avoid the holes and cover every other square. (For example, the rows of the square $(i,j)$ contain the holes of rows $ki+j+1,\\dots,k(i+1)+j$, which lie in columns $kj'+k-2-i$ for $j'\\le j$ and $kj'+k-1-i$ for $j'>j$, all outside the square's columns.) This uses $(k-1)^2+4(k-1)=k^2+2k-3=2112$ tiles. For $k=2$ the picture is: holes at (row, column) $(0,1),(1,3),(2,0),(3,2)$, one $2\\times2$ square in rows $1$–$2$, columns $1$–$2$, and four dominoes.\n\n**Lower bound.** Use coordinates $(x,y)$ for the square in column $x$ and row $y$, $1\\le x,y\\le n$, with $y$ increasing upwards; the holes are $(x,\\pi(x))$ for a permutation $\\pi$.\n\n*Erdős–Szekeres.* If the longest increasing and decreasing subsequences of $\\pi$ have lengths $a$ and $b$, then $ab\\ge n$. Indeed, label each $x$ by the length $L(x)$ of the longest increasing subsequence ending at $x$. If $x<x'$ and $\\pi(x)<\\pi(x')$ then $L(x')>L(x)$, so the holes with equal label form a decreasing subsequence (at most $b$ of them). There are at most $a$ labels, so $n\\le ab$. Moreover, **if $ab=n$**, every label class has exactly $b$ elements, i.e. is a longest decreasing subsequence, and a longest increasing subsequence (whose labels are $1,2,\\dots,a$) meets each class exactly once.\n\nFix a longest increasing subsequence $I$ (length $a$) and a longest decreasing one $J$ (length $b$); they share at most one hole. Set $\\varepsilon=1$ if they share a hole and $\\varepsilon=0$ otherwise. Let $f:[0,n+1]\\to\\mathbb R$ be the broken line through $(0,0)$, the holes of $I$ from left to right, and $(n+1,n+1)$; it is strictly increasing. Let $g$ be the broken line through $(0,n+1)$, the holes of $J$, and $(n+1,0)$; it is strictly decreasing.\n\n*Letters.* For each hole $h=(x,y)$ write\n- **N** in the square directly above $h$ if $y\\ge f(x)$ and $y\\ge g(x)$;\n- **S** in the square directly below $h$ if $y\\le f(x)$ and $y\\le g(x)$;\n- **E** in the square directly right of $h$ if $g(x)\\le y\\le f(x)$;\n- **W** in the square directly left of $h$ if $f(x)\\le y\\le g(x)$\n\n(letters falling outside the board are discarded). Every hole gets at least one letter; a hole on exactly one of $I,J$ gets two (e.g. $y=f(x)>g(x)$ gives N and E), and a hole on both gets four. So at least $n+a+b+\\varepsilon$ letters are written. At most one hole lies in the top row, so at most one N falls off the board; similarly for S, E, W. Hence at least $n+a+b+\\varepsilon-4$ letters lie on the board. A letter square is in the same row or column as its hole, so it is not a hole and is covered by a tile.\n\n*Key claim: no tile contains two letters (counted with multiplicity).* Let a tile occupy columns $x_l..x_r$ and rows $y_b..y_t$. If it contains an N from hole $h$, then $h$ is directly below a square of the tile and is not in the tile, so $h=(x_1,y_b-1)$ with $x_l\\le x_1\\le x_r$. Similarly an S comes from a hole $(x,y_t+1)$, an E from a hole $(x_l-1,y)$ and a W from a hole $(x_r+1,y)$, with $x$ resp. $y$ in the tile's range.\n- Two letters of the same kind would come from two holes in one row (or column): impossible.\n- N from $(x_1,y_1)$ and S from $(x_2,y_2)$: $y_2>y_1$. If $x_1\\le x_2$ then $g(x_2)\\le g(x_1)\\le y_1<y_2\\le g(x_2)$; if $x_1\\ge x_2$ then $f(x_2)\\le f(x_1)\\le y_1<y_2\\le f(x_2)$. Contradiction.\n- N from $(x_1,y_1)$ and E from $(x_2,y_2)$: $x_2<x_1$, $y_2>y_1$, so $f(x_2)<f(x_1)\\le y_1<y_2\\le f(x_2)$.\n- N and W: $x_2>x_1$, $y_2>y_1$, so $g(x_2)<g(x_1)\\le y_1<y_2\\le g(x_2)$.\n- S from $(x_1,y_1)$ and E from $(x_2,y_2)$: $x_2<x_1$, $y_2<y_1$, so $g(x_1)<g(x_2)\\le y_2<y_1\\le g(x_1)$.\n- S and W: $x_2>x_1$, $y_2<y_1$, so $f(x_1)<f(x_2)\\le y_2<y_1\\le f(x_1)$.\n- E from $(x_1,y_1)$ and W from $(x_2,y_2)$: $x_1<x_2$, so $y_1\\ge g(x_1)>g(x_2)\\ge y_2$ and $y_2\\ge f(x_2)>f(x_1)\\ge y_1$.\n\nEvery case is contradictory, so each tile holds at most one letter and\n$$\\#\\text{tiles}\\ \\ge\\ n+a+b+\\varepsilon-4 .$$\n\n*Finishing.* By AM–GM, $a+b\\ge2\\sqrt{ab}\\ge2\\sqrt n=90$.\n- If $a+b\\ge91$: $\\#\\text{tiles}\\ge2025+91-4=2112$.\n- If $a+b=90$: then $2025\\le ab\\le\\left(\\frac{a+b}2\\right)^2=2025$, so $a=b=45$ and $ab=n$. By the remark above we may choose $J$ to be a label class, which shares a hole with $I$; then $\\varepsilon=1$ and $\\#\\text{tiles}\\ge2025+90+1-4=2112$.\n\nSo at least $2112$ tiles are needed, and $2112$ suffice.\n\n**Answer: $2112$.**"
+      }
+    ],
+    "topics": [
+      "counting",
+      "inequalities"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

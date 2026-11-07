@@ -1,0 +1,170 @@
+[
+  {
+    "id": "usamo-usamo-1977-01",
+    "bank": "usamo",
+    "source": {
+      "contest": "USAMO",
+      "paper": "USAMO 1977",
+      "year": 1977,
+      "number": 1,
+      "url": "https://artofproblemsolving.com/wiki/index.php/1977_USAMO_Problems/Problem_1"
+    },
+    "grade": "10-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Determine all pairs of positive integers $(m,n)$ such that\n$(1+x^n+x^{2n}+\\cdots+x^{mn})$ is divisible by $(1+x+x^2+\\cdots+x^{m})$.",
+    "image": null,
+    "choices": null,
+    "answer": "Exactly the pairs with $\\gcd(m+1,n)=1$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Roots of unity",
+        "body": "Let $f(x) = 1 + x^n + \\dots + x^{mn}$ and $g(x) = 1 + x + \\dots + x^m = \\frac{x^{m+1}-1}{x-1}$. The roots of $g$ are the $(m+1)$-th roots of unity other than $1$, and they are all simple (the $m+1$ roots of $x^{m+1}-1$ are distinct). Hence $g\\mid f$ iff $f(\\zeta) = 0$ for every $(m+1)$-th root of unity $\\zeta\\ne1$. (Since $g$ is monic with integer coefficients, divisibility over $\\mathbb C$ is the same as divisibility with an integer-coefficient quotient.)\n\nFix such a $\\zeta$ and put $\\eta = \\zeta^n$; note $\\eta^{m+1} = (\\zeta^{m+1})^n = 1$.\n- If $\\eta \\ne 1$: $f(\\zeta) = 1 + \\eta + \\dots + \\eta^m = \\frac{\\eta^{m+1}-1}{\\eta - 1} = 0$.\n- If $\\eta = 1$: $f(\\zeta) = m + 1 \\ne 0$.\n\nSo $g \\mid f$ iff no $(m+1)$-th root of unity $\\zeta \\ne 1$ satisfies $\\zeta^n = 1$.\n\n- If $d = \\gcd(m+1, n) > 1$, then $\\zeta = e^{2\\pi i/d}$ is an $(m+1)$-th root of unity, $\\zeta \\ne 1$, and $\\zeta^n = 1$. So $g\\nmid f$.\n- If $\\gcd(m+1,n) = 1$, write $1 = u(m+1) + vn$ with integers $u,v$. Any $\\zeta$ with $\\zeta^{m+1} = \\zeta^n = 1$ satisfies $\\zeta = \\zeta^{u(m+1)+vn} = 1$. So $g\\mid f$.\n\n**Answer:** all $(m,n)$ with $\\gcd(m+1, n) = 1$."
+      }
+    ],
+    "topics": [
+      "polynomials",
+      "number-theory",
+      "complex-numbers"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamo-usamo-1977-02",
+    "bank": "usamo",
+    "source": {
+      "contest": "USAMO",
+      "paper": "USAMO 1977",
+      "year": 1977,
+      "number": 2,
+      "url": "https://artofproblemsolving.com/wiki/index.php/1977_USAMO_Problems/Problem_2"
+    },
+    "grade": "10-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "$ABC$ and $A'B'C'$ are two triangles in the same plane such that the lines $AA'$, $BB'$, $CC'$ are mutually parallel. Let $[ABC]$ denote the area of triangle $ABC$ with an appropriate $\\pm$ sign, etc.; prove that\n$$3([ABC] + [A'B'C']) = [AB'C'] + [BC'A'] + [CA'B'] + [A'BC] + [B'CA] + [C'AB].$$",
+    "image": null,
+    "choices": null,
+    "answer": "Make the common direction vertical: then every triangle with one vertex on each of the three vertical lines has signed area linear in the three $y$-coordinates, and each variable occurs three times on the right.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Coordinates along the common direction",
+        "body": "Choose coordinates so that the common direction of $AA', BB', CC'$ is the $y$-axis. Then\n$$A = (a,\\alpha),\\ A' = (a,\\alpha'),\\quad B = (b,\\beta),\\ B' = (b,\\beta'),\\quad C = (c,\\gamma),\\ C' = (c,\\gamma').$$\nFor points $U = (a, y_1)$, $V = (b, y_2)$, $W = (c, y_3)$ the signed area is\n$$[UVW] = \\tfrac12\\big[(b-a)(y_3-y_1) - (c-a)(y_2-y_1)\\big] = \\tfrac12\\big[(c-b)y_1 + (a-c)y_2 + (b-a)y_3\\big] =: L(y_1,y_2,y_3),$$\na **linear** function of $(y_1, y_2, y_3)$.\n\nEvery triangle in the identity has one vertex on each of the lines $x=a$, $x = b$, $x = c$, and after a cyclic relabelling (which does not change the signed area) its vertices are listed in the order \"line $a$, line $b$, line $c$\":\n$$[ABC] = L(\\alpha,\\beta,\\gamma),\\qquad [A'B'C'] = L(\\alpha',\\beta',\\gamma'),$$\n$$[AB'C'] = L(\\alpha,\\beta',\\gamma'),\\quad [BC'A'] = [A'BC'] = L(\\alpha',\\beta,\\gamma'),\\quad [CA'B'] = [A'B'C] = L(\\alpha',\\beta',\\gamma),$$\n$$[A'BC] = L(\\alpha',\\beta,\\gamma),\\quad [B'CA] = [AB'C] = L(\\alpha,\\beta',\\gamma),\\quad [C'AB] = [ABC'] = L(\\alpha,\\beta,\\gamma').$$\nIn these six terms, the first argument is $\\alpha$ three times and $\\alpha'$ three times, and likewise for the second ($\\beta$ / $\\beta'$) and third ($\\gamma$ / $\\gamma'$) arguments. By linearity the sum of the six terms equals\n$$3L(\\alpha,\\beta,\\gamma) + 3L(\\alpha',\\beta',\\gamma') = 3\\big([ABC]+[A'B'C']\\big). \\;∎$$"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamo-usamo-1977-03",
+    "bank": "usamo",
+    "source": {
+      "contest": "USAMO",
+      "paper": "USAMO 1977",
+      "year": 1977,
+      "number": 3,
+      "url": "https://artofproblemsolving.com/wiki/index.php/1977_USAMO_Problems/Problem_3"
+    },
+    "grade": "10-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "If $a$ and $b$ are two of the roots of $x^4+x^3-1=0$, prove that $ab$ is a root of $x^6+x^4+x^3-x^2-1=0$.",
+    "image": null,
+    "choices": null,
+    "answer": "With $s=a+b$, $p=ab$ and the other two roots $c,d$: Vieta gives $c+d=-1-s$, $cd=-1/p$, then $s=-p^2/(p^2+1)$ and $p - s - s^2 - 1/p = 0$, which simplifies to $p^6+p^4+p^3-p^2-1=0$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Vieta's formulas",
+        "body": "The quartic $x^4+x^3-1$ has distinct roots: a repeated root would also be a root of $4x^3+3x^2 = x^2(4x+3)$, but $0$ and $-\\tfrac34$ are not roots ($\\tfrac{81}{256}-\\tfrac{27}{64}-1\\neq0$). So let the roots be $a, b, c, d$, where $a, b$ are the two given ones. Vieta's formulas:\n$$a+b+c+d = -1,\\quad \\textstyle\\sum ab = 0,\\quad \\sum abc = 0,\\quad abcd = -1.$$\nLet $s = a+b$, $p = ab$ (so $p\\ne0$). Then $c + d = -1 - s$ and $cd = -1/p$.\n\n**Second symmetric function:** $ab + (a+b)(c+d) + cd = 0$:\n$$p - s(1+s) - \\frac1p = 0. \\tag{1}$$\n**Third symmetric function:** $ab(c+d) + cd(a+b) = 0$: $-p(1+s) - \\dfrac sp = 0$, i.e. $s(p^2+1) = -p^2$. If $p^2 + 1 = 0$ this would give $p^2 = 0$, impossible; so\n$$s = -\\frac{p^2}{p^2+1}. \\tag{2}$$\nMultiply (1) by $p(p^2+1)^2$ and substitute (2):\n$$p^2(p^2+1)^2 + p^3(p^2+1) - p^5 - (p^2+1)^2 = 0.$$\nExpanding: $p^6 + 2p^4 + p^2 + p^5 + p^3 - p^5 - p^4 - 2p^2 - 1 = p^6 + p^4 + p^3 - p^2 - 1 = 0$.\n\nSo $ab = p$ is a root of $x^6+x^4+x^3-x^2-1$. ∎"
+      }
+    ],
+    "topics": [
+      "polynomials",
+      "algebra"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamo-usamo-1977-04",
+    "bank": "usamo",
+    "source": {
+      "contest": "USAMO",
+      "paper": "USAMO 1977",
+      "year": 1977,
+      "number": 4,
+      "url": "https://artofproblemsolving.com/wiki/index.php/1977_USAMO_Problems/Problem_4"
+    },
+    "grade": "10-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Prove that if the opposite sides of a skew (non-planar) quadrilateral are congruent, then the line joining the midpoints of the two diagonals is perpendicular to these diagonals, and conversely, if the line joining the midpoints of the two diagonals of a skew quadrilateral is perpendicular to these diagonals, then the opposite sides of the quadrilateral are congruent.",
+    "image": null,
+    "choices": null,
+    "answer": "With $M,N$ the midpoints of $AC,BD$: $MN\\perp AC \\iff AB^2+DA^2 = BC^2+CD^2$ and $MN\\perp BD\\iff AB^2+BC^2 = CD^2+DA^2$; together these are equivalent to $AB=CD$, $BC=DA$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Two vector identities",
+        "body": "Let the quadrilateral be $ABCD$ with position vectors $\\vec a,\\vec b,\\vec c,\\vec d$, and let $M, N$ be the midpoints of the diagonals $AC$, $BD$. Then $2\\,\\vec{MN} = \\vec b+\\vec d - \\vec a - \\vec c$. Note $M\\ne N$: if the diagonals bisected each other, $ABCD$ would be a parallelogram, hence planar.\n\n**Identity 1.** Expanding $|\\vec u - \\vec v|^2 = |\\vec u|^2 + |\\vec v|^2 - 2\\vec u\\cdot\\vec v$:\n$$BC^2 + CD^2 - AB^2 - DA^2 = 2|\\vec c|^2 - 2|\\vec a|^2 - 2\\vec b\\cdot\\vec c - 2\\vec c\\cdot\\vec d + 2\\vec a\\cdot\\vec b + 2\\vec a\\cdot\\vec d = -2(\\vec b + \\vec d - \\vec a - \\vec c)\\cdot(\\vec c - \\vec a).$$\nSo $MN\\perp AC \\iff BC^2 + CD^2 = AB^2 + DA^2$.\n\n**Identity 2.** Similarly\n$$AB^2 + BC^2 - CD^2 - DA^2 = 2|\\vec b|^2 - 2|\\vec d|^2 - 2\\vec a\\cdot\\vec b - 2\\vec b\\cdot\\vec c + 2\\vec c\\cdot\\vec d + 2\\vec a\\cdot\\vec d = -2(\\vec b+\\vec d-\\vec a-\\vec c)\\cdot(\\vec d - \\vec b).$$\nSo $MN\\perp BD\\iff AB^2 + BC^2 = CD^2 + DA^2$.\n\n**Both directions.** If $AB = CD$ and $BC = DA$, both right-hand conditions hold, so $MN$ is perpendicular to both diagonals. Conversely, if $MN$ is perpendicular to both diagonals, then\n$$BC^2 + CD^2 = AB^2 + DA^2 \\quad\\text{and}\\quad AB^2 + BC^2 = CD^2 + DA^2.$$\nAdding gives $2BC^2 = 2DA^2$, and subtracting gives $2CD^2 = 2AB^2$. So $BC = DA$ and $AB = CD$. ∎"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamo-usamo-1977-05",
+    "bank": "usamo",
+    "source": {
+      "contest": "USAMO",
+      "paper": "USAMO 1977",
+      "year": 1977,
+      "number": 5,
+      "url": "https://artofproblemsolving.com/wiki/index.php/1977_USAMO_Problems/Problem_5"
+    },
+    "grade": "10-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "If $a,b,c,d,e$ are positive numbers bounded by $p$ and $q$, i.e., if they lie in $[p,q]$, $0 < p$, prove that\n$$(a + b + c + d + e)\\left(\\frac {1}{a} + \\frac {1}{b} + \\frac {1}{c} + \\frac {1}{d} + \\frac {1}{e}\\right) \\le 25 + 6\\left(\\sqrt {\\frac {p}{q}} - \\sqrt {\\frac {q}{p}}\\right)^2$$\nand determine when there is equality.",
+    "image": null,
+    "choices": null,
+    "answer": "The expression is convex in each variable, so its maximum is at a point with every variable equal to $p$ or $q$; with $k$ of them equal to $p$ it is $25+k(5-k)\\big(\\sqrt{p/q}-\\sqrt{q/p}\\big)^2$. Equality iff $p=q$, or two of the numbers equal one endpoint and three equal the other.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Convexity in each variable",
+        "body": "Let $F(a,b,c,d,e)$ be the left side, on the box $[p,q]^5$. If $p = q$ everything equals $p$ and both sides are $25$; so assume $p<q$.\n\n**One variable at a time.** Fix all variables except $x = a$; with $r = b+c+d+e$ and $s = \\frac1b+\\dots+\\frac1e$ (both positive),\n$$F = (x+r)\\Big(\\frac1x+s\\Big) = 1 + rs + sx + \\frac rx.$$\nThe function $h(x) = sx + r/x$ is strictly convex on $(0,\\infty)$ ($h'' = 2r/x^3 > 0$), so on $[p,q]$ any value at an interior point is strictly less than $\\max(h(p), h(q))$.\n\n**Maximum at the corners.** $F$ is continuous on the compact box, so it has a maximum. At a maximizing point, no variable can lie strictly between $p$ and $q$ (moving it to the better endpoint would strictly increase $F$). So every maximizer has all variables in $\\{p,q\\}$.\n\n**Corner values.** If $k$ variables equal $p$ and $5-k$ equal $q$:\n$$F = \\big(kp+(5-k)q\\big)\\Big(\\frac kp + \\frac{5-k}q\\Big) = k^2 + (5-k)^2 + k(5-k)\\Big(\\frac pq+\\frac qp\\Big) = 25 + k(5-k)\\Big(\\frac pq + \\frac qp - 2\\Big),$$\nand $\\frac pq + \\frac qp - 2 = \\Big(\\sqrt{\\tfrac pq} - \\sqrt{\\tfrac qp}\\Big)^2 > 0$. Since $k(5-k)\\in\\{0,4,6\\}$ with the maximum $6$ at $k = 2,3$,\n$$F \\le 25 + 6\\Big(\\sqrt{\\tfrac pq} - \\sqrt{\\tfrac qp}\\Big)^2.$$\n\n**Equality.** It holds exactly at maximizers, i.e. (for $p<q$) when two of $a,b,c,d,e$ equal $p$ and the other three equal $q$, or three equal $p$ and two equal $q$. If $p=q$, equality always holds. ∎"
+      }
+    ],
+    "topics": [
+      "inequalities"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

@@ -1,0 +1,204 @@
+[
+  {
+    "id": "imo-2026-01",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO",
+      "paper": "Day 1",
+      "year": 2026,
+      "number": 1,
+      "url": "https://www.imo-official.org/assets/documents/problems/2026/2026_eng.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "There are $2026$ integers greater than $1$ written on a blackboard, not necessarily different. In a move, Confucius chooses two integers $m>1$ and $n>1$ from different places on the blackboard and replaces these two integers with\n$$\\gcd(m,n)\\quad\\text{and}\\quad\\frac{\\operatorname{lcm}(m,n)}{\\gcd(m,n)}.$$\nHe continues to make moves while it is possible to do so.\n\n(a) Prove that, regardless of the choices of Confucius, after finitely many moves, exactly one integer $M$ on the blackboard is greater than $1$.\n\n(b) Prove that the value of $M$ does not depend on the choices of Confucius.\n\n(Note that $\\gcd(x,y)$ denotes the greatest common divisor of positive integers $x$ and $y$, and $\\operatorname{lcm}(x,y)$ denotes the least common multiple of $x$ and $y$.)",
+    "image": null,
+    "choices": null,
+    "answer": "Proof: (a) each move either creates a new $1$ or lowers the product; (b) for every prime $p$, $\\gcd$ of the $\\nu_p$'s of the numbers is invariant, so $\\nu_p(M)=\\gcd(\\nu_p(a_1),\\dots,\\nu_p(a_{2026}))$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Monovariants, then a Euclidean-algorithm invariant",
+        "body": "**(a)** Note $\\gcd(m,n)\\cdot\\frac{\\operatorname{lcm}(m,n)}{\\gcd(m,n)}=\\operatorname{lcm}(m,n)=\\frac{mn}{\\gcd(m,n)}$. Consider a move on $m,n>1$ with $g=\\gcd(m,n)$.\n- If $g=1$, the two numbers become $1$ and $mn$: the number of $1$'s on the board goes up by one, and the product of all numbers is unchanged.\n- If $g>1$, the product of all numbers is divided by $g$, so it strictly decreases.\n\nA $1$ is never chosen, so the number of $1$'s never decreases and is at most $2026$; hence there are at most $2026$ moves of the first kind. The product of the numbers never increases and is a positive integer, so there are finitely many moves of the second kind. So the process stops after finitely many moves, i.e. at some point fewer than two numbers exceed $1$.\n\nOn the other hand, a move never makes both new numbers equal to $1$: if $g=1$ the second number is $mn>1$. So every move takes two numbers $>1$ and leaves at least one number $>1$, and since initially there are numbers $>1$, there is always at least one. Hence at the end exactly one number $M$ is greater than $1$.\n\n**(b)** Fix a prime $p$. For the numbers $t_1,\\dots,t_{2026}$ on the board consider\n$$D_p=\\gcd\\bigl(\\nu_p(t_1),\\dots,\\nu_p(t_{2026})\\bigr)$$\n(the gcd of nonnegative integers, with $\\gcd(0,\\dots,0)=0$). Let a move act on $m,n$ with $\\nu_p(m)=x\\le\\nu_p(n)=y$. Then $\\nu_p(\\gcd(m,n))=x$ and $\\nu_p\\!\\left(\\frac{\\operatorname{lcm}(m,n)}{\\gcd(m,n)}\\right)=y-x$. Since $\\gcd(x,y-x)=\\gcd(x,y)$ and the other numbers are unchanged, $D_p$ is invariant.\n\nAt the end the board holds $M$ and $2025$ ones, so $D_p=\\nu_p(M)$. Therefore, if the initial numbers are $a_1,\\dots,a_{2026}$,\n$$\\nu_p(M)=\\gcd\\bigl(\\nu_p(a_1),\\dots,\\nu_p(a_{2026})\\bigr)\\quad\\text{for every prime }p,$$\nwhich depends only on the initial numbers. As $M$ is determined by all its exponents $\\nu_p(M)$, it does not depend on the choices of Confucius. ∎"
+      }
+    ],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-2026-02",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO",
+      "paper": "Day 1",
+      "year": 2026,
+      "number": 2,
+      "url": "https://www.imo-official.org/assets/documents/problems/2026/2026_eng.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $ABC$ be a triangle and let points $M$ and $N$ be the midpoints of sides $AB$ and $AC$, respectively. Let points $K$ and $L$ be chosen strictly inside triangles $BMC$ and $BNC$, respectively, such that $K$ lies strictly inside triangle $ABL$ and $L$ lies strictly inside triangle $AKC$. Suppose that\n$$\\angle KBA=\\angle ACL,\\qquad \\angle LBK=\\angle LNC,\\qquad\\text{and}\\qquad \\angle LCK=\\angle BMK.$$\nLet $O$ be the circumcentre of triangle $AKL$. Prove that $OM=ON$.",
+    "image": null,
+    "choices": null,
+    "answer": "Proof: with $X=BK\\cap AC$, $Y=CL\\cap AB$, the conditions say $BCXY$, $BNLX$, $CMKY$ are cyclic; power of a point shows $A,K,L$ and the midpoints $E$ of $BY$, $F$ of $CX$ are concyclic, and $MA\\cdot ME=NA\\cdot NF$ gives equal powers of $M,N$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Three cyclic quadrilaterals and power of a point",
+        "body": "Throughout, $\\measuredangle(\\ell_1,\\ell_2)$ is the directed angle between lines (mod $180^\\circ$), and products like $PQ\\cdot PR$ of collinear points are signed (positive iff $Q,R$ are on the same side of $P$). For a circle $\\omega$ and a line through $P$ meeting $\\omega$ at $Q,R$ (with $Q=R$ for a tangent), $PQ\\cdot PR$ is the power of $P$; conversely, if two different lines through $P$ contain $Q,R$ and $S,U$ with $PQ\\cdot PR=PS\\cdot PU\\neq0$, then $Q,R,S,U$ are concyclic (if $Q=R$: the circle through $Q,S,U$ is tangent to $PQ$ at $Q$).\n\n**Step 0: the conditions as directed angles.** Orient $ABC$ counterclockwise. For an undirected angle, $\\measuredangle(QP,QR)=+\\angle PQR$ iff triangle $PQR$ is oriented clockwise. Using the hypotheses on positions:\n- $(K,B,A)$ has the orientation of $(C,B,A)$ ($K$, $C$ on the same side of $AB$) and $(A,C,L)$ that of $(A,C,B)$; both clockwise.\n- $(L,B,K)$ has the orientation of $(L,B,A)$ ($K$ inside $ABL$), which is that of $(C,B,A)$; $(L,N,C)$ has that of $(B,N,C)$ ($L$ inside $BNC$), i.e. of $(B,A,C)$; both clockwise.\n- $(L,C,K)$ has that of $(A,C,K)$ ($L$ inside $AKC$), i.e. of $(A,C,B)$; $(B,M,K)$ has that of $(B,M,C)$ ($K$ inside $BMC$), i.e. of $(B,A,C)$; both clockwise.\n\nSo the three equalities hold for directed angles:\n$$\\measuredangle(BK,BA)=\\measuredangle(CA,CL),\\quad \\measuredangle(BL,BK)=\\measuredangle(NL,NC),\\quad \\measuredangle(CL,CK)=\\measuredangle(MB,MK).$$\n\n**Step 1: three circles.** Let $X=BK\\cap AC$ and $Y=CL\\cap AB$; as $K,L$ are inside the triangle, $X$ and $Y$ are interior points of segments $AC$ and $AB$.\n- The first equality reads $\\measuredangle(BX,BY)=\\measuredangle(CX,CY)$, so $B,C,X,Y$ are concyclic. Power of $A$: $AY\\cdot AB=AX\\cdot AC$, hence\n$$AY\\cdot AM=AX\\cdot AN=\\tfrac12AX\\cdot AC.\\tag{1}$$\n- Let $\\omega_C$ be the circle $CMK$ (not collinear, as $K$ is inside $BMC$). It meets $AB$ at $M$ and a second point $Y^*$ ($Y^*=M$ if tangent; $Y^*\\ne C$). By inscribed angles, $\\measuredangle(CY^*,CK)=\\measuredangle(AB,MK)=\\measuredangle(MB,MK)=\\measuredangle(CL,CK)$, so $CY^*=CL$ and $Y^*=Y$. Thus $Y\\in\\omega_C$.\n- Similarly let $\\omega_B$ be the circle $BNL$; its second point $X^*$ on $AC$ satisfies $\\measuredangle(BX^*,BL)=\\measuredangle(AC,NL)=\\measuredangle(NC,NL)=\\measuredangle(BK,BL)$, so $X^*=X$ and $X\\in\\omega_B$.\n\n**Step 2: midpoints.** Let $C'$ be the second intersection of line $AC$ with $\\omega_C$ and $B'$ that of line $AB$ with $\\omega_B$. The power of $A$ and (1) give $AC\\cdot AC'=AM\\cdot AY=\\frac12AC\\cdot AX$, so $AC'=\\frac12AX$: $C'$ is the midpoint of $AX$. Likewise $AB\\cdot AB'=AN\\cdot AX=\\frac12AB\\cdot AY$, so $B'$ is the midpoint of $AY$.\n\nLet $E$ and $F$ be the midpoints of $BY$ and $CX$. Note $A,E,F$ are not collinear ($E\\in AB$, $F\\in AC$, both $\\neq A$).\n\n**Step 3: $A,E,F,K,L$ are concyclic.** Let $K'$ be the second intersection of line $BX$ with $\\omega_C$. Put coordinates on line $AC$ with $A=0$, $X=x$, $C=c$; then $C'=\\frac x2$, $F=\\frac{x+c}2$ and\n$$XC\\cdot XC'=(c-x)\\left(-\\tfrac x2\\right)=(-x)\\cdot\\tfrac{c-x}2=XA\\cdot XF.$$\nBy the power of $X$ with respect to $\\omega_C$, $XK\\cdot XK'=XC\\cdot XC'=XA\\cdot XF\\neq0$, so $A,F,K,K'$ are concyclic. Since $M$ and $E$ are the midpoints of $BA$ and $BY$, the power of $B$ gives\n$$BK\\cdot BK'=BM\\cdot BY=\\tfrac12BA\\cdot BY=BA\\cdot BE,$$\nso $A,E,K,K'$ are concyclic. The point $A$ is not on line $BX$, so if $K'\\neq K$ both circles are the circle through the non-collinear points $A,K,K'$; if $K'=K$ both are the unique circle through $A$ tangent to $BX$ at $K$. Either way $K$ lies on the circle $(AEF)$.\n\nIn the same way, with $L'$ the second intersection of line $CY$ with $\\omega_B$: the power of $Y$ gives $YL\\cdot YL'=YB\\cdot YB'=YA\\cdot YE$ (on line $AB$: $YB\\cdot YB'=(b-y)(-\\frac y2)=(-y)\\frac{b-y}2$), and, as $N,F$ are the midpoints of $CA,CX$, the power of $C$ gives $CL\\cdot CL'=CN\\cdot CX=\\frac12CA\\cdot CX=CA\\cdot CF$. Hence $L$ also lies on $(AEF)$.\n\nSince $A,K,L$ are distinct points of the circle $(AEF)$, it is the circumcircle of $AKL$; so $O$ is its centre. Let $\\rho$ be its radius.\n\n**Step 4: equal powers.** Line $AB$ meets $(AEF)$ at $A$ and $E$; with $A=0$, $B=b$, $Y=y$ on this line, $M=\\frac b2$ and $E=\\frac{b+y}2$, so\n$$\\operatorname{pow}(M)=MA\\cdot ME=\\left(-\\tfrac b2\\right)\\cdot\\tfrac y2=-\\tfrac14\\,AB\\cdot AY.$$\nSimilarly $\\operatorname{pow}(N)=NA\\cdot NF=-\\frac14\\,AC\\cdot AX$. By (1), $AB\\cdot AY=AC\\cdot AX$, so $OM^2-\\rho^2=ON^2-\\rho^2$, i.e. $OM=ON$. ∎"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-2026-03",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO",
+      "paper": "Day 1",
+      "year": 2026,
+      "number": 3,
+      "url": "https://www.imo-official.org/assets/documents/problems/2026/2026_eng.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $n$ be a positive integer. Liu Bang and Xiang Yu have a stick of length $1$ and want to divide it between themselves. Liu marks at most $n$ points on the stick, and then Xiang marks at most $n$ points on the stick. The marked points are distinct. Then, the stick is cut at all marked points, creating a number of pieces. Afterwards, they take turns claiming any unclaimed piece of the stick, with Liu going first. Each player's goal is to maximise the total length of their own pieces.\n\nFor each $n$, determine the largest value $c$ such that Liu may guarantee a total length of at least $c$, regardless of Xiang's play.",
+    "image": null,
+    "choices": null,
+    "answer": "$c=\\dfrac{2^n}{2^{n+1}-1}$ (Liu cuts in ratio $1:2:4:\\dots:2^n$; Xiang answers with two subsets of segments of nearly equal total length).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Greedy claiming, a powers-of-two division and pigeonhole",
+        "body": "**Claiming phase.** If the pieces are $x_1\\ge x_2\\ge\\dots\\ge x_m$, then under best play Liu gets exactly $x_1+x_3+x_5+\\cdots$. Indeed, if Liu always takes the largest remaining piece, at his $j$-th turn only $2j-2$ pieces are gone, so he gets at least $x_{2j-1}$; if Xiang always takes the largest piece, at his $j$-th turn only $2j-1$ pieces are gone, so he gets at least $x_{2j}$, and Liu gets at most $1-(x_2+x_4+\\cdots)$. Put\n$$G=x_1-x_2+x_3-x_4+\\cdots,$$\nso Liu's result is $\\frac{1+G}2$. Note that if the pieces consist of equal pairs plus one extra piece $r$, then $G=r$ (the pairs cancel in the sorted alternating sum), and $G=0$ if all pieces are paired. Our claim $c=\\frac{2^n}{2^{n+1}-1}$ is equivalent to: Liu can force $G\\ge\\frac1{2^{n+1}-1}$, and Xiang can always force $G\\le\\frac1{2^{n+1}-1}$.\n\nCall the pieces created by Liu's marks alone **segments**.\n\n**Liu's strategy.** Scale the stick to length $2^{n+1}-1$ and let Liu cut it into segments of lengths $1,2,4,\\dots,2^n$ ($n$ marks). Xiang makes at most $n$ cuts, so there are at most $2n+1$ pieces; pad the sorted list with zeros to $x_1\\ge\\dots\\ge x_{2n+1}\\ge0$.\n\n*Claim.* For $k=0,1,\\dots,n$: $x_2+x_4+\\dots+x_{2k}\\le 2^{n-1}+2^{n-2}+\\dots+2^{n-k}$.\n\n*Proof.* Induction on $k$; $k=0$ is trivial. Suppose it holds for $k-1$ but fails for $k$. Subtracting, $x_{2k}>2^{n-k}$, hence $x_1,\\dots,x_{2k}$ all exceed $2^{n-k}$. Each piece lies inside a segment, so these $2k$ pieces lie inside the $k$ segments $2^{n-k+1},\\dots,2^n$, giving $x_1+\\dots+x_{2k}\\le2^{n-k+1}+\\dots+2^n$. As $x_{2i}\\le x_{2i-1}$,\n$$x_2+x_4+\\dots+x_{2k}\\le\\tfrac12(x_1+\\dots+x_{2k})\\le 2^{n-k}+\\dots+2^{n-1},$$\na contradiction. $\\square$\n\nWith $k=n$, Xiang gets at most $2^n-1$, so Liu gets at least $2^n$ out of $2^{n+1}-1$, i.e. $\\frac{2^n}{2^{n+1}-1}$ of the stick.\n\n**Xiang's strategy.** If Liu marks fewer than $n$ points, there are at most $n$ segments; Xiang bisects each one, all pieces are paired, $G=0$ and Liu gets only $\\frac12$. So assume Liu marks exactly $n$ points, giving $n+1$ segments. For a set $S$ of segments let $\\Sigma(S)$ be its total length.\n\n*Lemma.* If $S,T$ are disjoint sets of segments, not both empty, with $\\Sigma(S)\\ge\\Sigma(T)$, then Xiang can force $G\\le\\Sigma(S)-\\Sigma(T)$.\n\n*Proof.* Lay the segments of $S$ end to end on an interval $[0,\\Sigma(S)]$ (the \"$S$-line\") and those of $T$ on $[0,\\Sigma(T)]$ (the \"$T$-line\"); these are just bookkeeping pictures of the real segments. Xiang cuts:\n1. at every position in $(0,\\Sigma(T))$ that is a segment endpoint on exactly one of the two lines, on the other line; and at position $\\Sigma(T)$ on the $S$-line if it is interior to an $S$-segment;\n2. if $\\Sigma(S)>\\Sigma(T)$: the $S$-line part $[\\Sigma(T),\\Sigma(S)]$ is divided into pieces by $S$-segment endpoints; he leaves the first of these pieces alone and bisects every other one (each is a whole $S$-segment);\n3. he bisects every segment in neither $S$ nor $T$.\n\nAll these cut points are interior points of segments and distinct. On $[0,\\Sigma(T)]$ the two lines are now cut at the same positions, so their pieces pair up exactly; the bisected pieces pair up; the only unpaired piece is the first piece of $[\\Sigma(T),\\Sigma(S)]$, of length at most $\\Sigma(S)-\\Sigma(T)$ (none if $\\Sigma(S)=\\Sigma(T)$). So $G\\le\\Sigma(S)-\\Sigma(T)$.\n\nCount of cuts: let $|S|=s$, $|T|=t$, and $u=n+1-s-t$ others; let $\\alpha$ be the number of interior $S$-endpoints in $(0,\\Sigma(T))$. Step 1 uses at most $t+\\alpha$ cuts ($t-1$ interior $T$-endpoints plus $\\Sigma(T)$, and the $\\alpha$ $S$-endpoints); step 2 uses at most $(s-1)-\\alpha$ (the interior $S$-endpoints beyond $\\Sigma(T)$); step 3 uses $u$. Total $\\le s+t+u-1=n$. $\\square$\n\n*Pigeonhole.* The $2^{n+1}$ subsets of the $n+1$ segments have sums in $[0,1]$; sorting them, the $2^{n+1}-1$ consecutive gaps add up to $1$, so two different subsets $S_1\\ne S_2$ satisfy $0\\le\\Sigma(S_1)-\\Sigma(S_2)\\le\\frac1{2^{n+1}-1}$. Removing their common segments gives disjoint $S,T$, not both empty, with the same difference. By the lemma Xiang forces $G\\le\\frac1{2^{n+1}-1}$, so Liu gets at most $\\frac12\\left(1+\\frac1{2^{n+1}-1}\\right)=\\frac{2^n}{2^{n+1}-1}$.\n\n**Answer: $c=\\dfrac{2^n}{2^{n+1}-1}$.** ∎"
+      }
+    ],
+    "topics": [
+      "games",
+      "inequalities"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-2026-04",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO",
+      "paper": "Day 2",
+      "year": 2026,
+      "number": 4,
+      "url": "https://www.imo-official.org/assets/documents/problems/2026/2026_eng.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Shan-Yu and Mulan are playing a game. Let $\\theta$ be an angle with $0^\\circ<\\theta<180^\\circ$ known to both players. Initially, Shan-Yu makes a paper triangle $\\mathcal T$ with measurements of his choice. Then, they repeatedly perform the following steps:\n\n- If $\\mathcal T$ has at least one angle measuring exactly $\\theta$, then the game stops and Mulan wins.\n- Otherwise, Mulan chooses a point $P$ on the perimeter of $\\mathcal T$, different from its three vertices. She then makes a straight cut from $P$ to the opposite vertex of $\\mathcal T$, splitting it into two triangles.\n- Shan-Yu discards one of the two triangles. The remaining triangle becomes the new $\\mathcal T$.\n\nFor which real values of $\\theta$ can Mulan guarantee her victory in finitely many steps, no matter how Shan-Yu plays?",
+    "image": null,
+    "choices": null,
+    "answer": "Exactly for $\\theta=\\dfrac{180^\\circ}{n}$ with an integer $n\\ge2$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Multiples of $\\theta$: reach one, or avoid them all",
+        "body": "Call an angle **unsafe** if it is an integer multiple of $\\theta$, and **safe** otherwise. The multiples of $\\theta$ form an additive group $Z=\\{k\\theta:k\\in\\mathbb Z\\}$, so the sum or difference of a number in $Z$ and a number not in $Z$ is not in $Z$.\n\n**Mulan wins if $\\theta=\\frac{180^\\circ}n$, $n\\ge2$.**\n\n*Lemma.* If $\\mathcal T$ has an angle $k\\theta$ ($k\\ge1$ an integer), Mulan can win. By induction on $k$: for $k=1$ the game is over. For $k\\ge2$ she cuts from that vertex $V$ to a point of the opposite side so that the angle at $V$ is split into $\\theta$ and $(k-1)\\theta$; whichever triangle Shan-Yu keeps has an angle $\\theta$ or $(k-1)\\theta$ at $V$.\n\n*Strategy.* First Mulan cuts along the altitude from the vertex with the largest angle; since the other two angles are acute, its foot is an interior point of the opposite side, and both pieces are right triangles. If $n=2$ this angle is $90^\\circ=\\theta$ and she has won. If $n\\ge3$, the kept triangle is $ABC$ with $\\angle A=90^\\circ$ and, say, $\\angle B=\\beta\\le45^\\circ$. Some multiple $k\\theta$ ($k\\ge1$) lies in $(45^\\circ,90^\\circ]$: for $n=3$ take $k=1$; for $n\\ge4$, $\\theta\\le45^\\circ$ is at most the length of this interval. As $D$ runs along $BC$ from $B$ to $C$, the exterior angle $\\angle ADC=\\beta+\\angle BAD$ increases continuously from $\\beta$ to $\\beta+90^\\circ$; since $\\beta\\le45^\\circ<k\\theta\\le90^\\circ<\\beta+90^\\circ$, there is an interior point $D$ with $\\angle ADC=k\\theta$. Mulan cuts along $AD$. The two triangles have angles $\\angle ADC=k\\theta$ and $\\angle ADB=180^\\circ-k\\theta=(n-k)\\theta$ at $D$, with $k\\ge1$ and $n-k\\ge1$, so by the lemma she wins.\n\n**Shan-Yu survives if $\\theta\\neq\\frac{180^\\circ}n$.** Then $180^\\circ\\notin Z$ (as $180^\\circ=k\\theta$ would force $k\\ge2$ and $\\theta=\\frac{180^\\circ}k$). Call a triangle safe if all its angles are safe.\n\nShan-Yu starts with a safe triangle: $Z\\cap(0^\\circ,180^\\circ)$ is finite, so he can choose angles $\\alpha_1,\\alpha_2$ avoiding it with $\\alpha_1+\\alpha_2<180^\\circ$ and $180^\\circ-\\alpha_1-\\alpha_2$ avoiding it as well.\n\n*Claim.* If a safe triangle $ABC$ is cut along $AD$ ($D$ inside $BC$), at least one of $ABD$, $ADC$ is safe. Indeed,\n$$\\angle ADC=\\angle B+\\angle BAD=180^\\circ-\\angle ADB,\\qquad \\angle DAC=\\angle A-\\angle BAD=\\angle ADB-\\angle C.$$\nSuppose $ABD$ is unsafe; as $\\angle B$ is safe, $\\angle BAD\\in Z$ or $\\angle ADB\\in Z$.\n- If $\\angle BAD\\in Z$: $\\angle ADC=\\angle B+\\angle BAD\\notin Z$ and $\\angle DAC=\\angle A-\\angle BAD\\notin Z$.\n- If $\\angle ADB\\in Z$: $\\angle ADC=180^\\circ-\\angle ADB\\notin Z$ and $\\angle DAC=\\angle ADB-\\angle C\\notin Z$.\n\nTogether with $\\angle C\\notin Z$, triangle $ADC$ is safe. $\\square$\n\nSo Shan-Yu always keeps a safe triangle; no triangle ever has an angle $\\theta$, and Mulan never wins.\n\n**Answer: Mulan can force a win exactly when $\\theta=\\frac{180^\\circ}n$ for some integer $n\\ge2$.** ∎"
+      }
+    ],
+    "topics": [
+      "games",
+      "geometry"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-2026-05",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO",
+      "paper": "Day 2",
+      "year": 2026,
+      "number": 5,
+      "url": "https://www.imo-official.org/assets/documents/problems/2026/2026_eng.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $\\mathbb R_{>0}$ be the set of positive real numbers. Determine all functions $f:\\mathbb R_{>0}\\to\\mathbb R_{>0}$ such that\n$$\\sqrt{\\frac{x^2+f(y)^2}{2}}\\ \\ge\\ \\frac{f(x)+y}{2}\\ \\ge\\ \\sqrt{x\\,f(y)}$$\nfor every $x,y\\in\\mathbb R_{>0}$.",
+    "image": null,
+    "choices": null,
+    "answer": "$f(x)=x+c$ for a constant $c\\ge0$ (orbits $t,f(t),f(f(t)),\\dots$ are arithmetic progressions with a common difference).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Orbits are arithmetic progressions",
+        "body": "**These work.** If $f(x)=x+c$ with $c\\ge0$, then $\\frac{f(x)+y}2=\\frac{x+(y+c)}2=\\frac{x+f(y)}2$, and the inequalities are QM $\\ge$ AM $\\ge$ GM for the positive numbers $x$ and $f(y)$. ($c\\ge0$ is needed for $f$ to be positive near $0$.)\n\n**Only these work.** Let $P(x,y)$ be the left inequality and $Q(x,y)$ the right one.\n\n*Step 1: orbits are arithmetic.* $P(f(t),t)$ gives $f(t)\\ge\\frac{f(f(t))+t}2$ and $Q(f(t),t)$ gives $\\frac{f(f(t))+t}2\\ge f(t)$. So $f(f(t))=2f(t)-t$ for all $t$. Applying this to $t,f(t),f^2(t),\\dots$ shows that $t,f(t),f^2(t),\\dots$ is an arithmetic progression: $f^k(t)=t+k\\,d(t)$ with $d(t)=f(t)-t$. All terms are positive, so $d(t)\\ge0$; and $d(f^k(t))=d(t)$.\n\n*Step 2: positive differences are equal.* Let $d(x)=A>0$, $d(y)=B>0$. For integers $m,n\\ge0$ put $X=x+mA$ and $W=y+(n+1)B$; then $f(X)=X+A$ and $f(y+nB)=W$. $Q(X,\\,y+nB)$ reads\n$$\\frac{X+A+W-B}{2}\\ge\\sqrt{XW}\\iff\\left(\\sqrt X-\\sqrt W\\right)^2\\ge B-A .$$\nSuppose $B>A$ and let $\\varepsilon=\\sqrt{B-A}>0$. Then $|\\sqrt{x+mA}-\\sqrt{y+(n+1)B}|\\ge\\varepsilon$ for all $m,n\\ge0$. But $\\sqrt{x+(m+1)A}-\\sqrt{x+mA}=\\frac{A}{\\sqrt{x+(m+1)A}+\\sqrt{x+mA}}\\to0$, so for $m\\ge m_0$ these gaps are less than $\\varepsilon$; choosing $n$ with $\\sqrt{y+(n+1)B}\\ge\\sqrt{x+m_0A}$, the number $\\sqrt{y+(n+1)B}$ lies within $\\varepsilon$ of some $\\sqrt{x+mA}$, a contradiction. So $B\\le A$, and by symmetry $A=B$.\n\nHence either $f(x)=x$ for all $x$ (that is $c=0$), or there is $D>0$ with $f(x)\\in\\{x,\\ x+D\\}$ for every $x$. Assume the latter and let $S_1=\\{x: f(x)=x+D\\}\\neq\\varnothing$, $S_0=\\{y:f(y)=y\\}$.\n\n*Step 3: $S_0$ is empty.* Let $x\\in S_1$, $y\\in S_0$ (so $x\\neq y$).\n- If $x>y$: $P(x,y)$ gives $\\frac{x+D+y}2\\le\\sqrt{\\frac{x^2+y^2}2}<x$, so $x-y>D$.\n- If $x<y$: $Q(y,x)$ gives $\\sqrt{y(x+D)}\\le\\frac{y+x}2<y$, so $x+D<y$.\n\nSo $|x-y|>D$ whenever $x\\in S_1$, $y\\in S_0$. If some $y\\in S_0$ existed, take $x\\in S_1$ and split the segment from $x$ to $y$ into $N$ equal parts of length $\\le D$ with points $x=z_0,z_1,\\dots,z_N=y$. Each $z_i$ is in $S_0$ or $S_1$, $z_0\\in S_1$ and $z_N\\in S_0$, so some consecutive $z_i\\in S_1$, $z_{i+1}\\in S_0$ are at distance $\\le D$, a contradiction. Hence $f(x)=x+D$ for all $x$.\n\n**Answer: $f(x)=x+c$ for any constant $c\\ge0$.** ∎"
+      }
+    ],
+    "topics": [
+      "functional-equations",
+      "inequalities"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "imo-2026-06",
+    "bank": "imo",
+    "source": {
+      "contest": "IMO",
+      "paper": "Day 2",
+      "year": 2026,
+      "number": 6,
+      "url": "https://www.imo-official.org/assets/documents/problems/2026/2026_eng.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $a_1,a_2,a_3,\\dots$ be an infinite sequence of positive integers greater than $1$. Suppose that for all positive integers $n$, the number $a_{n+1}$ is the smallest positive integer greater than $a_n$ such that $\\gcd(a_{n+1},a_i)>1$ for every $i=1,2,\\dots,n$. Prove that there exist positive integers $T$ and $L$ such that\n$$a_{n+T}=a_n+L$$\nfor every positive integer $n$.\n\n(Note that $\\gcd(x,y)$ denotes the greatest common divisor of positive integers $x$ and $y$.)",
+    "image": null,
+    "choices": null,
+    "answer": "Proof: only terms whose radical does not contain the radical of an earlier term matter, and such terms have no prime factor $>a_1^2$; so membership of $x\\ge a_1$ depends only on $x$ modulo the product $L$ of the primes $\\le a_1^2$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Only small primes matter",
+        "body": "Let $\\mathcal A=\\{a_1,a_2,\\dots\\}$; the sequence is strictly increasing, and any two of its terms have a common factor.\n\n**Description of $\\mathcal A$.** For an integer $x\\ge a_1$:\n$$x\\in\\mathcal A\\iff \\gcd(x,a)>1\\ \\text{for all } a\\in\\mathcal A \\text{ with } a<x \\iff \\gcd(x,a)>1\\ \\text{for all } a\\in\\mathcal A.\\tag{1}$$\nIf $x=a_1$ the first condition is empty, and if $x=a_{n+1}$ it is the definition; and the second holds because terms pairwise share a factor. If $x\\notin\\mathcal A$ satisfies the first condition, pick $n$ with $a_n<x<a_{n+1}$; then $x$ is a candidate for $a_{n+1}$ smaller than $a_{n+1}$, a contradiction. The second condition implies the first.\n\n**Redundant terms.** Write $\\operatorname{rad}(z)$ for the product of the distinct primes dividing $z$. Call $a_n$ *minimal* if there is no $m<n$ with $\\operatorname{rad}(a_m)\\mid\\operatorname{rad}(a_n)$. For every $a_n$ there is a minimal $a_m$ with $m\\le n$ and $\\operatorname{rad}(a_m)\\mid\\operatorname{rad}(a_n)$ (go down repeatedly). If $\\gcd(x,a_m)>1$ then some prime divides $x$ and $a_m$, hence also $a_n$. Therefore in both conditions of (1) we may restrict $a$ to minimal terms:\n$$x\\in\\mathcal A\\iff\\gcd(x,a)>1\\ \\text{for all minimal } a\\in\\mathcal A \\text{ with } a<x \\iff\\gcd(x,a)>1\\ \\text{for all minimal } a\\in\\mathcal A.\\tag{2}$$\n\n**Key claim: no minimal term has a prime factor $p>a_1^2$.** Strong induction on $n$. The prime factors of $a_1$ are $\\le a_1<a_1^2$. Let $n\\ge2$ and suppose $a_n=pc$ with a prime $p>a_1^2$. Take a prime $q\\mid\\gcd(a_1,a_n)$; then $q\\le a_1<p$, so $q\\mid c$. Since $a_n\\ge p>a_1^2\\ge q\\,a_1$, the interval $[a_1,a_n)$ has ratio $>q$, so some number $z=q^jc$ ($j\\ge0$) lies in $[a_1,a_n)$: if $c\\ge a_1$ take $z=c<a_n$, otherwise the first $q^jc\\ge a_1$ is $<qa_1<a_n$.\n\nWe check $z\\in\\mathcal A$ via the first form of (2). Let $a_i<z$ be minimal. Then $i<n$, so by the induction hypothesis $p\\nmid a_i$. Some prime $r$ divides both $a_n$ and $a_i$; $r\\neq p$, so $r\\mid c\\mid z$. Hence $\\gcd(z,a_i)>1$, and as $z\\ge a_1$, $z\\in\\mathcal A$; say $z=a_m$, with $m<n$ because $z<a_n$. Every prime factor of $z$ ($q$ or a factor of $c$) divides $a_n$, so $\\operatorname{rad}(a_m)\\mid\\operatorname{rad}(a_n)$ and $a_n$ is not minimal. This proves the claim.\n\n**Periodicity.** Let $\\mathcal P$ be the (finite, nonempty) set of primes $\\le a_1^2$ and $L=\\prod_{p\\in\\mathcal P}p$. For a minimal $a$, all prime factors lie in $\\mathcal P$, so $\\gcd(x,a)>1$ iff some $p\\in\\mathcal P$ divides both $x$ and $a$; this depends only on which primes of $\\mathcal P$ divide $x$, i.e. only on $x\\bmod L$. By the second form of (2), for $x\\ge a_1$:\n$$x\\in\\mathcal A\\iff x+L\\in\\mathcal A .$$\nSo the elements of $\\mathcal A$ that are $\\ge a_1+L$ are exactly $a_1+L<a_2+L<a_3+L<\\cdots$. Let $T\\ge1$ be the number of elements of $\\mathcal A$ below $a_1+L$ (they are $a_1,\\dots,a_T$). Then the $(T+n)$-th element of $\\mathcal A$ is the $n$-th element that is $\\ge a_1+L$, i.e.\n$$a_{n+T}=a_n+L\\qquad\\text{for all } n\\ge1.$$\n∎"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "sequences-series"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

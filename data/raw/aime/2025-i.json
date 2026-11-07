@@ -1,0 +1,538 @@
+[
+  {
+    "id": "aime-2025-i-01",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "2025 AIME I",
+      "year": 2025,
+      "number": 1,
+      "url": "https://artofproblemsolving.com/wiki/index.php/2025_AIME_I_Problems/Problem_1"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Find the sum of all integer bases $b>9$ for which $17_b$ is a divisor of $97_b$.",
+    "image": null,
+    "choices": null,
+    "answer": "70",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Divide out",
+        "body": "$17_b=b+7$ and $97_b=9b+7=9(b+7)-56$. So $b+7\\mid 97_b$ iff $b+7\\mid56$. With $b>9$ we need $b+7>16$, so $b+7\\in\\{28,56\\}$, i.e. $b\\in\\{21,49\\}$. Sum: $70$.\n\n**Answer: 70**"
+      },
+      {
+        "title": "Check the quotient",
+        "body": "If $\\dfrac{9b+7}{b+7}=k$ is an integer, then $k<9$ and $b=\\dfrac{7k-7}{9-k}=\\dfrac{56}{9-k}-7$. For $b>9$: $\\frac{56}{9-k}>16$, so $9-k\\in\\{1,2\\}$, giving $b=49$ ($k=8$) and $b=21$ ($k=7$). Sum $70$.\n\n**Answer: 70**"
+      }
+    ],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-2025-i-02",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "2025 AIME I",
+      "year": 2025,
+      "number": 2,
+      "url": "https://artofproblemsolving.com/wiki/index.php/2025_AIME_I_Problems/Problem_2"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "On $\\triangle ABC$ points $A$, $D$, $E$, and $B$ lie in that order on side $\\overline{AB}$ with $AD=4$, $DE=16$, and $EB=8$. Points $A$, $F$, $G$, and $C$ lie in that order on side $\\overline{AC}$ with $AF=13$, $FG=52$, and $GC=26$. Let $M$ be the reflection of $D$ through $F$, and let $N$ be the reflection of $G$ through $E$. Quadrilateral $DEGF$ has area $288$. Find the area of heptagon $AFNBCEM$.",
+    "image": "qimages/aime/2025-i/q02.webp",
+    "choices": null,
+    "answer": "588",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Find $[ABC]$, then use vectors",
+        "body": "$AB=28$ and $AC=91$, so $\\frac{AD}{AB}=\\frac{AF}{AC}=\\frac17$ and $\\frac{AE}{AB}=\\frac{AG}{AC}=\\frac57$. Hence $[ADF]=\\frac1{49}[ABC]$ and $[AEG]=\\frac{25}{49}[ABC]$, so $[DEGF]=\\frac{24}{49}[ABC]=288$ and $[ABC]=588$.\n\nNow put $A$ at the origin with $\\vec{AB}=\\mathbf b$, $\\vec{AC}=\\mathbf c$, and write $u=\\mathbf b\\times\\mathbf c$ (so $[ABC]=\\frac12|u|$). Then $D=\\frac{\\mathbf b}7$, $E=\\frac{5\\mathbf b}7$, $F=\\frac{\\mathbf c}7$, $G=\\frac{5\\mathbf c}7$, $M=2F-D=\\frac{2\\mathbf c-\\mathbf b}7$, $N=2E-G=\\frac{10\\mathbf b-5\\mathbf c}7$.\n\nThe shoelace sum for $A,F,N,B,C,E,M$ is the sum of cross products of consecutive vertices:\n- $A\\times F=0$, $F\\times N=\\frac{10}{49}\\,\\mathbf c\\times\\mathbf b=-\\frac{10}{49}u$,\n- $N\\times B=-\\frac57\\,\\mathbf c\\times\\mathbf b=\\frac57u$, $B\\times C=u$,\n- $C\\times E=\\frac57\\,\\mathbf c\\times\\mathbf b=-\\frac57u$, $E\\times M=\\frac{10}{49}u$, $M\\times A=0$.\n\nThe sum is exactly $u$, so the heptagon's area is $\\frac12|u|=[ABC]=588$.\n\n**Answer: 588**"
+      },
+      {
+        "title": "Simplify with an affine map",
+        "body": "An affine map (a shear plus stretches) preserves ratios of lengths along lines, midpoints/reflections through points, and ratios of areas. So we may compute in the convenient triangle $A=(0,0)$, $B=(7,0)$, $C=(0,7)$, which has the same ratios: $D=(1,0)$, $E=(5,0)$, $F=(0,1)$, $G=(0,5)$, $M=2F-D=(-1,2)$, $N=2E-G=(10,-5)$.\n\n- $[ABC]=\\frac{49}2$ and $[DEGF]=\\frac{25}2-\\frac12=12$, ratio $\\frac{24}{49}$.\n- Shoelace for $A,F,N,B,C,E,M$: the terms $x_iy_{i+1}-x_{i+1}y_i$ are $0,\\,-10,\\,35,\\,49,\\,-35,\\,10,\\,0$, summing to $49$, so the heptagon's area is $\\frac{49}2=[ABC]$.\n\nHence in the real triangle the heptagon's area is $\\frac{49}{24}\\cdot288=588$.\n\n**Answer: 588**"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-2025-i-03",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "2025 AIME I",
+      "year": 2025,
+      "number": 3,
+      "url": "https://artofproblemsolving.com/wiki/index.php/2025_AIME_I_Problems/Problem_3"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "The $9$ members of a baseball team went to an ice-cream parlor after their game. Each player had a single scoop cone of chocolate, vanilla, or strawberry ice cream. At least one player chose each flavor, and the number of players who chose chocolate was greater than the number of players who chose vanilla, which was greater than the number of players who chose strawberry. Let $N$ be the number of different assignments of flavors to players that meet these conditions. Find the remainder when $N$ is divided by $1000$.",
+    "image": null,
+    "choices": null,
+    "answer": "16",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "List the splits",
+        "body": "We need $c>v>s\\ge1$ with $c+v+s=9$: $(6,2,1)$, $(5,3,1)$, $(4,3,2)$. For each, the number of assignments is a multinomial coefficient:\n$$\\frac{9!}{6!\\,2!\\,1!}=252,\\qquad\\frac{9!}{5!\\,3!\\,1!}=504,\\qquad\\frac{9!}{4!\\,3!\\,2!}=1260 .$$\n$N=2016$, remainder $16$.\n\n**Answer: 16**"
+      },
+      {
+        "title": "Choose players step by step",
+        "body": "For $(6,2,1)$: choose the strawberry player ($9$), then $2$ vanilla among $8$ ($28$): $252$. For $(5,3,1)$: $9\\cdot\\binom83=504$. For $(4,3,2)$: $\\binom92\\binom73=36\\cdot35=1260$. Total $2016$; remainder $16$.\n\n**Answer: 16**"
+      }
+    ],
+    "topics": [
+      "counting"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-2025-i-04",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "2025 AIME I",
+      "year": 2025,
+      "number": 4,
+      "url": "https://artofproblemsolving.com/wiki/index.php/2025_AIME_I_Problems/Problem_4"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Find the number of ordered pairs $(x,y)$, where both $x$ and $y$ are integers between $-100$ and $100$, inclusive, such that $12x^2-xy-6y^2=0$.",
+    "image": null,
+    "choices": null,
+    "answer": "117",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Factor",
+        "body": "$12x^2-xy-6y^2=(3x+2y)(4x-3y)$.\n\n- $3x+2y=0$: $(x,y)=(2t,-3t)$; need $|3t|\\le100$, so $|t|\\le33$: $67$ pairs.\n- $4x-3y=0$: $(x,y)=(3t,4t)$; need $|4t|\\le100$, so $|t|\\le25$: $51$ pairs.\n\n$(0,0)$ is counted twice, so the answer is $67+51-1=117$.\n\n**Answer: 117**"
+      },
+      {
+        "title": "Quadratic formula",
+        "body": "Treat it as a quadratic in $x$: $x=\\dfrac{y\\pm\\sqrt{y^2+288y^2}}{24}=\\dfrac{y\\pm17y}{24}$, so $x=\\frac34y$ or $x=-\\frac23y$. Integer solutions: $y=4t$, $x=3t$ ($|t|\\le25$) or $y=-3t$, $x=2t$ ($|t|\\le33$). Total $51+67-1=117$.\n\n**Answer: 117**"
+      }
+    ],
+    "topics": [
+      "algebra",
+      "number-theory"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-2025-i-05",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "2025 AIME I",
+      "year": 2025,
+      "number": 5,
+      "url": "https://artofproblemsolving.com/wiki/index.php/2025_AIME_I_Problems/Problem_5"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "There are $8!=40320$ eight-digit positive integers that use each of the digits $1,2,3,4,5,6,7,8$ exactly once. Let $N$ be the number of these integers that are divisible by $22$. Find the difference between $N$ and $2025$.",
+    "image": null,
+    "choices": null,
+    "answer": "279",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Divisibility by 2 and 11",
+        "body": "The digit sum is $36$. Divisibility by $11$ needs (sum of digits in odd positions) $-$ (sum in even positions) $\\equiv0\\pmod{11}$. The two sums add to $36$ and each is between $10$ and $26$, so both equal $18$.\n\n**Splitting into two groups of sum 18.** Four-element subsets containing $8$ with sum $18$: the other three sum to $10$: $\\{1,2,7\\},\\{1,3,6\\},\\{1,4,5\\},\\{2,3,5\\}$. Their complements are the subsets without $8$, so there are $8$ subsets with sum $18$. Each contains exactly two even digits (the four odd digits sum to $16$, and the number of odd digits in a group must be even).\n\n**Arranging.** Choose which subset occupies the even positions ($8$ ways). The last digit (position 8, even) must be even: $2$ choices; the other three even positions: $3!$; the odd positions: $4!$. So\n$$N=8\\cdot2\\cdot6\\cdot24=2304,\\qquad N-2025=279.$$\n\n**Answer: 279**"
+      },
+      {
+        "title": "Count by symmetry",
+        "body": "Among the $8$ subsets of sum $18$, choose the set $S$ for the even positions. Every arrangement of $S$ in the even positions and its complement in the odd positions gives a multiple of $11$: $8\\cdot4!\\cdot4!=4608$ numbers. Since each $S$ has exactly $2$ of its $4$ digits even, exactly half of these end in an even digit: $N=2304$, and $N-2025=279$.\n\n**Answer: 279**"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "counting"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-2025-i-06",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "2025 AIME I",
+      "year": 2025,
+      "number": 6,
+      "url": "https://artofproblemsolving.com/wiki/index.php/2025_AIME_I_Problems/Problem_6"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "An isosceles trapezoid has an inscribed circle tangent to each of its four sides. The radius of the circle is $3$, and the area of the trapezoid is $72$. Let the parallel sides of the trapezoid have lengths $r$ and $s$, with $r\\neq s$. Find $r^2+s^2$.",
+    "image": null,
+    "choices": null,
+    "answer": "504",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Tangential quadrilateral facts",
+        "body": "The height is the diameter, $6$, so $\\frac{r+s}2\\cdot6=72$ gives $r+s=24$. In a quadrilateral with an incircle, sums of opposite sides are equal, so the two legs total $24$: each leg is $12$.\n\nThe leg is the hypotenuse of a right triangle with legs $6$ and $\\frac{|r-s|}2$: $\\frac{(r-s)^2}4=144-36=108$, so $(r-s)^2=432$. Then\n$$r^2+s^2=\\frac{(r+s)^2+(r-s)^2}{2}=\\frac{576+432}2=504 .$$\n\n**Answer: 504**"
+      },
+      {
+        "title": "Tangent lengths",
+        "body": "Let the tangent segments from the endpoints of the bases be $\\frac r2$ and $\\frac s2$ (by symmetry). A leg then has length $\\frac{r+s}2$, and the right angle at the centre between the radii to a leg gives $\\frac r2\\cdot\\frac s2=3^2$, i.e. $rs=36$. With $r+s=24$ (from the area): $r^2+s^2=(r+s)^2-2rs=576-72=504$.\n\n**Answer: 504**"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-2025-i-07",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "2025 AIME I",
+      "year": 2025,
+      "number": 7,
+      "url": "https://artofproblemsolving.com/wiki/index.php/2025_AIME_I_Problems/Problem_7"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "The twelve letters $A$, $B$, $C$, $D$, $E$, $F$, $G$, $H$, $I$, $J$, $K$, and $L$ are randomly grouped into six pairs of letters. The two letters in each pair are placed next to each other in alphabetical order to form six two-letter words, and then those six words are listed alphabetically. For example, a possible result is $AB$, $CJ$, $DG$, $EK$, $FL$, $HI$. The probability that the last word listed contains $G$ is $\\frac mn$, where $m$ and $n$ are relatively prime positive integers. Find $m+n$.",
+    "image": null,
+    "choices": null,
+    "answer": "821",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Two cases for G",
+        "body": "The last word is the one with the largest first letter, and the first letter of a word is the smaller letter of its pair. A perfect matching of $10$ letters can be chosen in $9!!=945$ ways.\n\n**G is the first letter of the last word.** Then $G$ is paired with one of $H,\\dots,L$ (probability $\\frac5{11}$), and the other four of $H,\\dots,L$ must each be paired with one of $A,\\dots,F$ (a pair of two letters after $G$ would start later than $G$). Among the remaining $10$ letters ($A$–$F$ and four big letters) this happens in $6\\cdot5\\cdot4\\cdot3=360$ of the $945$ matchings. Probability $\\frac5{11}\\cdot\\frac{360}{945}=\\frac5{11}\\cdot\\frac8{21}=\\frac{40}{231}$.\n\n**G is the second letter of the last word.** Then $G$ is paired with some $X<G$ and $X$ is the largest first letter. All five letters $H,\\dots,L$ must then be paired with letters smaller than $X$, so at least five letters precede $X$: $X=F$. Probability that $G$ pairs with $F$: $\\frac1{11}$; then $H,\\dots,L$ must pair with $A,\\dots,E$: $5!=120$ of $945$ matchings. Probability $\\frac1{11}\\cdot\\frac{8}{63}=\\frac8{693}$.\n\nTotal $\\frac{120}{693}+\\frac8{693}=\\frac{128}{693}$, so $m+n=821$.\n\n**Answer: 821**"
+      }
+    ],
+    "topics": [
+      "probability",
+      "counting"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-2025-i-08",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "2025 AIME I",
+      "year": 2025,
+      "number": 8,
+      "url": "https://artofproblemsolving.com/wiki/index.php/2025_AIME_I_Problems/Problem_8"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Let $k$ be a real number such that the system\n$$|25+20i-z|=5,\\qquad |z-4-k|=|z-3i-k|$$\nhas exactly one complex solution $z$. The sum of all possible values of $k$ can be written as $\\frac{m}{n}$, where $m$ and $n$ are relatively prime positive integers. Find $m+n$. Here $i=\\sqrt{-1}$.",
+    "image": null,
+    "choices": null,
+    "answer": "77",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Tangent line to a circle",
+        "body": "The first equation is the circle with centre $(25,20)$ and radius $5$. The second says $z$ is equidistant from $(4+k,0)$ and $(k,3)$: the perpendicular bisector, through the midpoint $(k+2,\\frac32)$ and perpendicular to $(-4,3)$:\n$$4x-3y-4k-\\tfrac72=0 .$$\nExactly one solution means the line is tangent: distance from the centre equals $5$:\n$$\\frac{|100-60-4k-\\frac72|}{5}=5\\iff\\Big|\\tfrac{73}{2}-4k\\Big|=25\\iff k=\\tfrac{23}8\\ \\text{or}\\ k=\\tfrac{123}8 .$$\nSum $=\\frac{146}8=\\frac{73}4$, so $m+n=77$.\n\n**Answer: 77**"
+      },
+      {
+        "title": "Shift the picture",
+        "body": "Changing $k$ slides the line horizontally (all lines are parallel, slope $\\frac43$). The two tangent lines are symmetric about the line of that family through the centre $(25,20)$, so the two values of $k$ average to the $k$ for which the line passes through the centre: $100-60-4k-\\frac72=0$, $k=\\frac{73}8$. The sum of both values is $2\\cdot\\frac{73}8=\\frac{73}4$, answer $77$.\n\n**Answer: 77**"
+      }
+    ],
+    "topics": [
+      "complex-numbers",
+      "geometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-2025-i-09",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "2025 AIME I",
+      "year": 2025,
+      "number": 9,
+      "url": "https://artofproblemsolving.com/wiki/index.php/2025_AIME_I_Problems/Problem_9"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "The parabola with equation $y=x^2-4$ is rotated $60^{\\circ}$ counterclockwise around the origin. The unique point in the fourth quadrant where the original parabola and its image intersect has $y$-coordinate $\\frac{a-\\sqrt{b}}{c}$, where $a$, $b$, and $c$ are positive integers, and $a$ and $c$ are relatively prime. Find $a+b+c$.",
+    "image": null,
+    "choices": null,
+    "answer": "62",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Use a reflection",
+        "body": "The parabola is symmetric in the $y$-axis. A rotation by $60^\\circ$ equals the reflection in the $y$-axis followed by the reflection in the line $L$ through the origin at angle $120^\\circ$ (two reflections in lines at angle $30^\\circ$ compose to a $60^\\circ$ rotation). Hence reflecting the parabola in $L$ gives the same curve as rotating it. Every point of the parabola on $L$ is fixed by this reflection, so it lies on the image too.\n\n$L$ is $y=-\\sqrt3x$, which passes through the fourth quadrant. Intersecting with the parabola: $x^2-4=-\\sqrt3x$, so $x^2+\\sqrt3x-4=0$ and $x=\\dfrac{-\\sqrt3+\\sqrt{19}}{2}>0$. Then\n$$y=-\\sqrt3x=\\frac{3-\\sqrt{57}}{2},$$\nwhich is negative, as needed. Since the fourth-quadrant point is unique, this is it: $a+b+c=3+57+2=62$.\n\n**Answer: 62**"
+      },
+      {
+        "title": "Direct check",
+        "body": "A point $P$ on the image is the rotation of some point $(t,t^2-4)$. Take the point found above, $x_0=\\frac{\\sqrt{19}-\\sqrt3}2$, $P=(x_0,-\\sqrt3x_0)$, which has polar angle $-60^\\circ$. Rotating $P$ by $-60^\\circ$ gives a point at angle $-120^\\circ$ and the same distance, i.e. its mirror image in the $y$-axis: $(-x_0,-\\sqrt3x_0)$. This point is on the parabola because $(-x_0)^2-4=x_0^2-4=-\\sqrt3x_0$. So $P$ is on both curves, with $y=\\frac{3-\\sqrt{57}}2$, and $a+b+c=62$.\n\n**Answer: 62**"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "algebra"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-2025-i-10",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "2025 AIME I",
+      "year": 2025,
+      "number": 10,
+      "url": "https://artofproblemsolving.com/wiki/index.php/2025_AIME_I_Problems/Problem_10"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "The $27$ cells of a $3\\times9$ grid are filled in using the numbers $1$ through $9$ so that each row contains $9$ different numbers, and each of the three $3\\times3$ blocks heavily outlined in the example below contains $9$ different numbers, as in the first three rows of a Sudoku puzzle.\n\nThe number of different ways to fill such a grid can be written as $p^a\\cdot q^b\\cdot r^c\\cdot s^d$, where $p$, $q$, $r$, and $s$ are distinct prime numbers and $a$, $b$, $c$, $d$ are positive integers. Find $p\\cdot a+q\\cdot b+r\\cdot c+s\\cdot d$.",
+    "image": "qimages/aime/2025-i/q10.webp",
+    "choices": null,
+    "answer": "81",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Choose the sets, then the orders",
+        "body": "Fill the first row in $9!$ ways; by relabeling assume its blocks contain $\\{1,2,3\\}$, $\\{4,5,6\\}$, $\\{7,8,9\\}$.\n\n**Which numbers go in row 2 of each block.** Block 1's lower rows hold $\\{4,\\dots,9\\}$. Suppose row 2 of block 1 has $k$ numbers from $\\{7,8,9\\}$ and $3-k$ from $\\{4,5,6\\}$. Row 2 of block 3 cannot use $7,8,9$ (they are in block 3's first row), so the $3-k$ remaining numbers from $\\{7,8,9\\}$ go into row 2 of block 2, together with $k$ numbers from $\\{1,2,3\\}$. Row 2 of block 3 then gets the remaining $k$ numbers of $\\{4,5,6\\}$ and $3-k$ of $\\{1,2,3\\}$. The choices are $\\binom3k$ (from $7,8,9$), $\\binom3k$ (from $4,5,6$), $\\binom3k$ (from $1,2,3$), and then row 3 of each block is forced as a set. Total:\n$$\\sum_{k=0}^3\\binom3k^3=1+27+27+1=56 .$$\n\n**Orders.** Each of the $6$ row-segments in rows 2–3 can be ordered in $3!$ ways: $6^6$.\n\nTotal: $9!\\cdot56\\cdot6^6=(2^7\\cdot3^4\\cdot5\\cdot7)(2^3\\cdot7)(2^6\\cdot3^6)=2^{16}\\cdot3^{10}\\cdot5\\cdot7^2$.\n\nAnswer: $2\\cdot16+3\\cdot10+5\\cdot1+7\\cdot2=32+30+5+14=81$.\n\n**Answer: 81**"
+      }
+    ],
+    "topics": [
+      "counting",
+      "number-theory"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-2025-i-11",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "2025 AIME I",
+      "year": 2025,
+      "number": 11,
+      "url": "https://artofproblemsolving.com/wiki/index.php/2025_AIME_I_Problems/Problem_11"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "A piecewise linear function is defined by\n$$f(x)=\\begin{cases} x & \\text{if } -1\\le x<1 \\\\ 2-x & \\text{if } 1\\le x<3\\end{cases}$$\nand $f(x+4)=f(x)$ for all real numbers $x$. The graph of $f(x)$ has the sawtooth pattern depicted below.\n\nThe parabola $x=34y^{2}$ intersects the graph of $f(x)$ at finitely many points. The sum of the $y$-coordinates of all these intersection points can be expressed in the form $\\tfrac{a+b\\sqrt{c}}{d}$, where $a$, $b$, $c$, and $d$ are positive integers such that $a$, $b$, $d$ have greatest common divisor equal to $1$, and $c$ is not divisible by the square of any prime. Find $a+b+c+d$.",
+    "image": "qimages/aime/2025-i/q11.webp",
+    "choices": null,
+    "answer": "259",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Use Vieta on each tooth",
+        "body": "At an intersection $y=f(x)\\in[-1,1]$, so $x=34y^2\\in[0,34]$.\n\n**Rising pieces** $x\\in[4n-1,4n+1)$, $f(x)=x-4n$, $n=0,\\dots,8$. Then $y=34y^2-4n$, i.e. $34y^2-y-4n=0$, and a root is valid iff $y\\in[-1,1)$ (then $x=y+4n$ automatically lies in the piece). The roots $\\frac{1\\pm\\sqrt{1+544n}}{68}$ are always in $[-1,1)$ for $n\\le8$ (for $n=8$: $\\sqrt{4353}<66$, so roots are about $0.985$ and $-0.956$). Each $n$ contributes root sum $\\frac1{34}$: total $\\frac9{34}$.\n\n**Falling pieces** $x\\in[4n+1,4n+3)$, $f(x)=4n+2-x$, valid iff $y\\in(-1,1]$. Equation $34y^2+y-(4n+2)=0$, roots $\\frac{-1\\pm\\sqrt{273+544n}}{68}$, root sum $-\\frac1{34}$. We need $4n+1\\le34$, so $n\\le8$. For $n\\le7$ both roots are valid ($\\sqrt{4081}<67$). For $n=8$: $\\sqrt{4625}>67$, so the negative root is below $-1$ and only $\\frac{-1+\\sqrt{4625}}{68}=\\frac{-1+5\\sqrt{185}}{68}$ counts. Contribution: $-\\frac8{34}+\\frac{-1+5\\sqrt{185}}{68}$.\n\nSum: $\\frac9{34}-\\frac8{34}+\\frac{-1+5\\sqrt{185}}{68}=\\frac{1+5\\sqrt{185}}{68}$. So $a+b+c+d=1+5+185+68=259$.\n\n**Answer: 259**"
+      }
+    ],
+    "topics": [
+      "algebra"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-2025-i-12",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "2025 AIME I",
+      "year": 2025,
+      "number": 12,
+      "url": "https://artofproblemsolving.com/wiki/index.php/2025_AIME_I_Problems/Problem_12"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "The set of points in $3$-dimensional coordinate space that lie in the plane $x+y+z=75$ whose coordinates satisfy the inequalities\n$$x-yz<y-zx<z-xy$$\nforms three disjoint convex regions. Exactly one of those regions has finite area. The area of this finite region can be expressed in the form $a\\sqrt{b}$, where $a$ and $b$ are positive integers and $b$ is not divisible by the square of any prime. Find $a+b$.",
+    "image": null,
+    "choices": null,
+    "answer": "510",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Factor the inequalities",
+        "body": "$(x-yz)-(y-zx)=(x-y)(1+z)$ and $(y-zx)-(z-xy)=(y-z)(1+x)$. So the conditions are\n$$(x-y)(1+z)<0,\\qquad (y-z)(1+x)<0 .$$\nIf $1+x<0$ and $1+z<0$ we would need $x>y>z$, so $y<x<-1$ and $x+y+z<-3$, impossible. The finite region is the one with $1+x>0$ and $1+z>0$: then $x<y<z$, $x>-1$ (and $z>-1$ follows).\n\nWith $z=75-x-y$, the condition $y<z$ is $x+2y<75$. In the $xy$-plane the region is the triangle $x>-1$, $y>x$, $x+2y<75$, with vertices $(-1,-1)$, $(-1,38)$, $(25,25)$. Its area is $\\frac12\\cdot39\\cdot26=507$.\n\nThe plane $x+y+z=75$ makes angle with the $xy$-plane whose cosine is $\\frac1{\\sqrt3}$ (normal $(1,1,1)$), so the true area is $507\\sqrt3$, and $a+b=510$.\n\n**Answer: 510**"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "inequalities"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-2025-i-13",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "2025 AIME I",
+      "year": 2025,
+      "number": 13,
+      "url": "https://artofproblemsolving.com/wiki/index.php/2025_AIME_I_Problems/Problem_13"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Alex divides a disk into four quadrants with two perpendicular diameters intersecting at the center of the disk. He draws $25$ more line segments through the disk, drawing each segment by selecting two points at random on the perimeter of the disk in different quadrants and connecting these two points. Find the expected number of regions into which these $27$ line segments divide the disk.",
+    "image": null,
+    "choices": null,
+    "answer": "204",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Regions = 1 + chords + crossings",
+        "body": "Adding a chord that crosses $j$ existing chords (no three through one point, which happens with probability $1$) splits $j+1$ regions, so\n$$\\text{regions}=1+(\\text{number of chords})+(\\text{number of interior crossings}).$$\nSo we need $28+E[\\text{crossings}]$.\n\n- The two diameters cross once.\n- A random chord joins adjacent quadrants with probability $\\frac46=\\frac23$ (crossing one diameter) or opposite quadrants with probability $\\frac13$ (crossing both). Expected crossings with the diameters: $\\frac43$ per chord, $\\frac{100}3$ in total.\n- Two random chords: parametrize the circle as $[0,4)$ with quadrants $[q,q+1)$. If chord 1 is opposite, say from $u\\in Q_0$ to $2+v\\in Q_2$, let $\\alpha_q$ be the fraction of quadrant $q$ on one side: $\\alpha=(1-u,1,v,0)$. Chord 2 with quadrants $\\{k,l\\}$ crosses with probability $\\alpha_k(1-\\alpha_l)+\\alpha_l(1-\\alpha_k)$. Averaging over $u,v$ and the six quadrant pairs gives $\\frac16(5\\cdot\\frac12+1)=\\frac7{12}$. If chord 1 is adjacent ($\\alpha=(1-u,v,0,0)$) the average is $\\frac16(5\\cdot\\frac12+0)=\\frac5{12}$. So $p=\\frac13\\cdot\\frac7{12}+\\frac23\\cdot\\frac5{12}=\\frac{17}{36}$, and the expected number of crossings among the $25$ chords is $\\binom{25}2\\cdot\\frac{17}{36}=\\frac{425}3$.\n\nExpected regions: $28+1+\\frac{100}3+\\frac{425}3=29+175=204$.\n\n**Answer: 204**"
+      }
+    ],
+    "topics": [
+      "probability",
+      "geometry"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-2025-i-14",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "2025 AIME I",
+      "year": 2025,
+      "number": 14,
+      "url": "https://artofproblemsolving.com/wiki/index.php/2025_AIME_I_Problems/Problem_14"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Let $ABCDE$ be a convex pentagon with $AB=14$, $BC=7$, $CD=24$, $DE=13$, $EA=26$, and $\\angle B=\\angle E=60^{\\circ}$. For each point $X$ in the plane, define $f(X)=AX+BX+CX+DX+EX$. The least possible value of $f(X)$ can be expressed as $m+n\\sqrt{p}$, where $m$ and $n$ are positive integers and $p$ is not divisible by the square of any prime. Find $m+n+p$.",
+    "image": null,
+    "choices": null,
+    "answer": "60",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Fermat point of $ACD$ on line $BE$",
+        "body": "**Two 30-60-90 triangles.** In $\\triangle ABC$: $AC^2=14^2+7^2-14\\cdot7=147$, so $AC=7\\sqrt3$ and $AC^2+BC^2=AB^2$: $\\angle ACB=90^\\circ$. In $\\triangle AED$: $AD^2=26^2+13^2-26\\cdot13=507$, $AD=13\\sqrt3$, $\\angle ADE=90^\\circ$.\n\n**Lower bound.** $f(X)=(AX+CX+DX)+(BX+EX)\\ge(AX+CX+DX)+BE$. The triangle $ACD$ (sides $7\\sqrt3,24,13\\sqrt3$) has all angles below $120^\\circ$, so $AX+CX+DX$ is minimized at its Fermat point $F$, where $\\angle AFC=\\angle CFD=\\angle DFA=120^\\circ$. Its value equals $AP$, where $P$ is the apex of the equilateral triangle erected on $CD$ away from $A$. With $\\cos\\angle ACD=\\frac{147+576-507}{2\\cdot7\\sqrt3\\cdot24}=\\frac{3\\sqrt3}{14}$, $\\sin\\angle ACD=\\frac{13}{14}$, we get $\\cos(\\angle ACD+60^\\circ)=-\\frac{5\\sqrt3}{14}$ and\n$$AP^2=147+576+2\\cdot7\\sqrt3\\cdot24\\cdot\\tfrac{5\\sqrt3}{14}=723+360=1083=3\\cdot19^2,$$\nso $AF+CF+DF=19\\sqrt3$.\n\n**$F$ lies on $BE$.** $\\angle AFC=120^\\circ$ and $\\angle ABC=60^\\circ$, so $ABCF$ is cyclic and $\\angle AFB=\\angle ACB=90^\\circ$. Likewise $AEDF$ is cyclic and $\\angle AFE=\\angle ADE=90^\\circ$. Hence $\\angle BFE=180^\\circ$: $B,F,E$ are collinear, and $X=F$ attains both bounds at once.\n\n**Length $BE$.** Ptolemy in $ABCF$: $BF\\cdot7\\sqrt3=14\\,CF+7\\,AF$, so $BF=\\frac{2CF+AF}{\\sqrt3}$. In $AEDF$: $EF\\cdot13\\sqrt3=26\\,DF+13\\,AF$, so $EF=\\frac{2DF+AF}{\\sqrt3}$. Thus\n$$BE=\\frac{2(AF+CF+DF)}{\\sqrt3}=\\frac{2\\cdot19\\sqrt3}{\\sqrt3}=38 .$$\n\nMinimum: $f(F)=38+19\\sqrt3$, so $m+n+p=38+19+3=60$.\n\n**Answer: 60**"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "aime-2025-i-15",
+    "bank": "aime",
+    "source": {
+      "contest": "AIME",
+      "paper": "2025 AIME I",
+      "year": 2025,
+      "number": 15,
+      "url": "https://artofproblemsolving.com/wiki/index.php/2025_AIME_I_Problems/Problem_15"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Let $N$ denote the number of ordered triples of positive integers $(a,b,c)$ such that $a,b,c\\le3^6$ and $a^3+b^3+c^3$ is a multiple of $3^7$. Find the remainder when $N$ is divided by $1000$.",
+    "image": null,
+    "choices": null,
+    "answer": "735",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Casework on 3-adic valuations",
+        "body": "Write $M=3^7$. Facts about cubes for $1\\le a\\le3^6=729$:\n\n- **$3\\nmid a$ (486 values).** $(a+3^6t)^3\\equiv a^3\\pmod{3^7}$, and $x^3\\equiv1\\pmod{3^7}$ only for $x\\equiv1\\pmod{3^6}$. So the $486$ units in $[1,729]$ have $486$ distinct cubes mod $M$; these are exactly the residues $\\equiv\\pm1\\pmod9$ (there are $2\\cdot3^5=486$ of them, and unit cubes are $\\equiv\\pm1\\pmod 9$). So for any residue $r\\equiv\\pm1\\pmod9$ there is **exactly one** unit $a\\le729$ with $a^3\\equiv r$.\n- **$v_3(a)=1$ (162 values).** $a^3=27a_1^3$, and $a_1^3\\bmod81$ takes each of the $18$ residues $\\equiv\\pm1\\pmod9$ exactly $9$ times.\n- **$v_3(a)=2$ (54 values).** $a=9a_2$, $a^3\\equiv729a_2\\pmod M$: $\\equiv+729$ for $27$ values and $\\equiv-729$ for $27$ values.\n- **$v_3(a)\\ge3$ (27 values).** $a^3\\equiv0$.\n\nNow count by the smallest valuation among $a,b,c$.\n\n1. **All $v_3\\ge3$:** $27^3=19683$.\n2. **All $v_3\\ge2$, not all $\\ge3$:** each cube is $729\\varepsilon$ with $\\varepsilon\\in\\{0,1,-1\\}$ ($27$ numbers each); we need $\\varepsilon_1+\\varepsilon_2+\\varepsilon_3\\equiv0\\pmod3$: $9$ patterns, minus the all-zero one: $8\\cdot27^3=157464$.\n3. **Smallest valuation $1$:** divide by $27$: we need $\\sum w\\equiv0\\pmod{81}$ where valuation-1 terms have $w\\equiv\\pm1\\pmod9$ and the others $w\\equiv0\\pmod{27}$. Mod $9$ this forces exactly two valuation-1 terms with opposite signs. Choose the position of the third ($3$), the first valuation-1 number ($162$), the third number (any multiple of $9$: $81$); then the second needs a prescribed $w\\bmod81$ that is $\\equiv\\mp1\\pmod9$: $9$ choices. $3\\cdot162\\cdot81\\cdot9=354294$.\n4. **Smallest valuation $0$:** mod $9$, unit cubes are $\\pm1$ and the rest $0$, so exactly two units are needed. Choose the position of the non-unit ($3$), the non-unit ($243$), the first unit ($486$); then $b^3\\equiv-a^3-c^3$ is a residue $\\equiv\\mp1\\pmod9$, so exactly one $b$ works: $3\\cdot243\\cdot486=354294$.\n\n$N=19683+157464+354294+354294=885735$, remainder $735$.\n\n**Answer: 735**"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "counting"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

@@ -1,0 +1,1076 @@
+[
+ {
+  "id": "imo-isl-2017-a1",
+  "bank": "imo",
+  "source": {
+   "contest": "IMO Shortlist",
+   "paper": "Algebra",
+   "year": 2017,
+   "number": 1,
+   "url": "https://www.imo-official.org/assets/documents/problems/2017/IMO2017SL.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Let $a_1,a_2,\\dots,a_n,k$, and $M$ be positive integers such that\n$$\\frac1{a_1}+\\frac1{a_2}+\\dots+\\frac1{a_n}=k\\qquad\\text{and}\\qquad a_1a_2\\cdots a_n=M.$$\nIf $M>1$, prove that the polynomial\n$$P(x)=M(x+1)^k-(x+a_1)(x+a_2)\\cdots(x+a_n)$$\nhas no positive roots.",
+  "image": null,
+  "choices": null,
+  "answer": "Proof: for $x>0$, AM-GM gives $a_i(x+1)^{1/a_i}\\le x+a_i$, with equality only when $a_i=1$; multiplying these over all $i$ gives $M(x+1)^k<\\prod(x+a_i)$, i.e. $P(x)<0$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "AM-GM on each factor",
+    "body": "**Step 1: a one-factor inequality.** Let $a$ be a positive integer and $x>0$. We claim\n$$a(x+1)^{1/a}\\le x+a,\\qquad\\text{with equality iff } a=1.$$\nFor $a=1$ both sides equal $x+1$. For $a\\ge2$ apply AM-GM to the $a$ numbers $x+1,1,1,\\dots,1$ ($a-1$ ones):\n$$\\frac{(x+1)+(a-1)}{a}\\ge\\sqrt[a]{(x+1)\\cdot1^{a-1}},\\qquad\\text{i.e.}\\qquad x+a\\ge a(x+1)^{1/a}.$$\nEquality in AM-GM would need $x+1=1$, impossible for $x>0$, so the inequality is strict when $a\\ge2$.\n\n**Step 2: multiply.** All quantities are positive, so multiplying the inequalities for $a=a_1,\\dots,a_n$ gives\n$$\\prod_{i=1}^n a_i(x+1)^{1/a_i}\\le\\prod_{i=1}^n(x+a_i),\\qquad\\text{i.e.}\\qquad M(x+1)^{\\frac1{a_1}+\\dots+\\frac1{a_n}}=M(x+1)^k\\le\\prod_{i=1}^n(x+a_i).$$\nEquality would require every $a_i=1$, and then $M=a_1\\cdots a_n=1$, contrary to $M>1$. Hence the inequality is strict:\n$$P(x)=M(x+1)^k-\\prod_{i=1}^n(x+a_i)<0\\qquad\\text{for every }x>0,$$\nso $P$ has no positive root. ∎\n\n*Remark.* Step 1 is also Bernoulli's inequality: $\\left(1+\\frac{x}{a}\\right)^a\\ge1+x$, i.e. $x+a\\ge a(1+x)^{1/a}$."
+   }
+  ],
+  "topics": [
+   "polynomials",
+   "inequalities"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "imo-isl-2017-a2",
+  "bank": "imo",
+  "source": {
+   "contest": "IMO Shortlist",
+   "paper": "Algebra",
+   "year": 2017,
+   "number": 2,
+   "url": "https://www.imo-official.org/assets/documents/problems/2017/IMO2017SL.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Let $q$ be a real number. Gugu has a napkin with ten distinct real numbers written on it, and he writes the following three lines of real numbers on the blackboard:\n\n- In the first line, Gugu writes down every number of the form $a-b$, where $a$ and $b$ are two (not necessarily distinct) numbers on his napkin.\n- In the second line, Gugu writes down every number of the form $qab$, where $a$ and $b$ are two (not necessarily distinct) numbers from the *first line*.\n- In the third line, Gugu writes down every number of the form $a^2+b^2-c^2-d^2$, where $a,b,c,d$ are four (not necessarily distinct) numbers from the *first line*.\n\nDetermine all values of $q$ such that, regardless of the numbers on Gugu's napkin, every number in the second line is also a number in the third line.",
+  "image": null,
+  "choices": null,
+  "answer": "$q\\in\\{-2,\\,0,\\,2\\}$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Identity for $\\pm2$, two napkins rule out the rest",
+    "body": "Call $q$ *good* if the property holds for every napkin.\n\n**$0$ and $\\pm2$ are good.** For $q=0$ the second line contains only $0$, and $0=a^2+a^2-a^2-a^2$ is in the third line.\n\nLet $a,b$ be in the first line: $a=x-y$, $b=u-v$ with $x,y,u,v$ on the napkin. Expanding shows\n$$2(x-y)(u-v)=(x-v)^2+(y-u)^2-(x-u)^2-(y-v)^2,$$\nand $x-v,\\;y-u,\\;x-u,\\;y-v$ are all in the first line. So $2ab$ is in the third line, i.e. $q=2$ is good. Swapping the two positive and the two negative squares gives $-2ab$ as well, so $q=-2$ is good.\n\n**No other $q$ is good.** Suppose $q$ is good.\n\n*Napkin $1,2,\\dots,10$.* The first line is $\\{-9,\\dots,9\\}$. The second line contains $q\\cdot1\\cdot1=q$ and $q\\cdot9\\cdot9=81q$. Every number in the third line is an integer between $-162$ and $162$ (since $a^2\\le81$). Hence $q\\in\\mathbb Z$ and $|81q|\\le162$, so $q\\in\\{-2,-1,0,1,2\\}$.\n\n*Napkin $0,1,4,8,12,16,20,24,28,32$.* This rules out $q=\\pm1$. A difference of two of these numbers is $0$, a difference of two multiples of $4$ (so $\\equiv0\\pmod4$), or $\\pm(4j-1)$ (so odd). Thus no number $a$ of the first line is $\\equiv2\\pmod4$, which means $a^2\\equiv0$ or $1\\pmod8$. So every number of the third line is congruent to one of $-2,-1,0,1,2$ modulo $8$. But $1=1-0$ and $4=4-0$ are in the first line, so the second line contains $q\\cdot1\\cdot4=\\pm4\\equiv4\\pmod8$, which is not in the third line. So $q=\\pm1$ is not good.\n\n**Answer: $q=-2,\\;0,\\;2$.**"
+   }
+  ],
+  "topics": [
+   "algebra"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "imo-isl-2017-a3",
+  "bank": "imo",
+  "source": {
+   "contest": "IMO Shortlist",
+   "paper": "Algebra",
+   "year": 2017,
+   "number": 3,
+   "url": "https://www.imo-official.org/assets/documents/problems/2017/IMO2017SL.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Let $S$ be a finite set, and let $\\mathcal A$ be the set of all functions from $S$ to $S$. Let $f$ be an element of $\\mathcal A$, and let $T=f(S)$ be the image of $S$ under $f$. Suppose that $f\\circ g\\circ f\\ne g\\circ f\\circ g$ for every $g$ in $\\mathcal A$ with $g\\ne f$. Show that $f(T)=T$.",
+  "image": null,
+  "choices": null,
+  "answer": "Proof: the images $f^m(S)$ stabilise, so $f$ permutes the final image and $f^{m+r}=f^m$ for large $m$; choose $n\\ge3$ with $f^{n+2}=f^{2n+1}$. Then $g=f^n$ satisfies $f\\circ g\\circ f=g\\circ f\\circ g$, so $f^n=f$, which gives $f(T)=T$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Plug in $g=f^n$",
+    "body": "Write $f^m$ for the $m$-fold composition $f\\circ\\dots\\circ f$.\n\n**Step 1: it suffices to find $n\\ge3$ with $f^{n+2}=f^{2n+1}$.** Indeed, then $g=f^n$ satisfies\n$$f\\circ g\\circ f=f^{n+2}=f^{2n+1}=g\\circ f\\circ g,$$\nso by the hypothesis $g=f$, i.e. $f^n=f$. Now $f(T)=f^2(S)$. On one hand $f^2(S)\\subseteq f(S)=T$. On the other hand, since $n\\ge2$,\n$$T=f(S)=f^n(S)=f^2\\big(f^{n-2}(S)\\big)\\subseteq f^2(S).$$\nHence $f(T)=f^2(S)=T$.\n\n**Step 2: such an $n$ exists.** Let $S_m=f^m(S)$. Since $S_{m+1}=f(S_m)\\subseteq f(S_{m-1})=S_m$ (by induction, starting from $S_1\\subseteq S_0=S$), we have a decreasing chain\n$$S\\supseteq S_1\\supseteq S_2\\supseteq\\cdots$$\nof subsets of the finite set $S$, so it stabilises: there is $k\\ge1$ with $S_k=S_{k+1}=\\dots=:S_\\infty$. Then $f(S_\\infty)=S_{k+1}=S_\\infty$, so $f$ maps the finite set $S_\\infty$ onto itself; hence $f$ restricted to $S_\\infty$ is a permutation, and some power of it is the identity: $f^r(y)=y$ for all $y\\in S_\\infty$, for some $r\\ge1$ (e.g. $r=|S_\\infty|!$).\n\nConsequently, for every $m\\ge k$ and every $x\\in S$ we have $f^m(x)\\in S_\\infty$, so\n$$f^{m+r}(x)=f^r\\big(f^m(x)\\big)=f^m(x),$$\nand by repetition $f^{m+tr}=f^m$ for all $t\\ge1$, $m\\ge k$.\n\nTake $n=2kr+1\\ge3$. Then $n+2=2kr+3\\ge k$ and $2n+1=4kr+3=(2kr+3)+2k\\cdot r$, so\n$$f^{2n+1}=f^{(n+2)+2k r}=f^{n+2}.$$\nBy Step 1, $f(T)=T$. ∎"
+   }
+  ],
+  "topics": [
+   "abstract-algebra",
+   "logic"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "imo-isl-2017-a4",
+  "bank": "imo",
+  "source": {
+   "contest": "IMO Shortlist",
+   "paper": "Algebra",
+   "year": 2017,
+   "number": 4,
+   "url": "https://www.imo-official.org/assets/documents/problems/2017/IMO2017SL.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "A sequence of real numbers $a_1,a_2,\\dots$ satisfies the relation\n$$a_n=-\\max_{i+j=n}(a_i+a_j)\\qquad\\text{for all } n>2017.$$\nProve that this sequence is bounded, i.e., there is a constant $M$ such that $|a_n|\\le M$ for all positive integers $n$.",
+  "image": null,
+  "choices": null,
+  "answer": "Proof: with $M_n=\\max_{k<n}a_k$ and $m_n=\\max_{k<n}(-a_k)$ one gets $-2M_n\\le a_n\\le m_n-M_n$ for $n>2017$; then either $m_n\\le 2M_n$ at some point (and from then on $M_n$ is constant and $m_n\\le2M_n$), or never (and then $m_n$ is constant), so both stay bounded.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Track the running maximum and minimum",
+    "body": "Let $D=2017$ and, for $n\\ge2$,\n$$M_n=\\max_{k<n}a_k,\\qquad m_n=\\max_{k<n}(-a_k)=-\\min_{k<n}a_k .$$\nBoth sequences are nondecreasing in $n$, and $-m_{n+1}\\le a_n\\le M_{n+1}$. So it is enough to show that $(M_n)$ and $(m_n)$ are bounded above.\n\n**Bounds for $a_n$, $n>D$.**\n1. There are $p+q=n$ with $a_n=-(a_p+a_q)$; since $p,q<n$, $a_p,a_q\\le M_n$, so $a_n\\ge-2M_n$.\n2. Choose $k<n$ with $a_k=M_n$. Taking $i=k$, $j=n-k$ in the maximum,\n$$a_n\\le-(a_k+a_{n-k})=-M_n-a_{n-k}\\le m_n-M_n .$$\n\nSo $-2M_n\\le a_n\\le m_n-M_n$, and therefore, for $n>D$,\n$$m_{n+1}=\\max(m_n,-a_n)\\le\\max(m_n,2M_n),\\qquad M_{n+1}=\\max(M_n,a_n)\\le\\max(M_n,\\,m_n-M_n).\\qquad(1)$$\n\nCall an index $n>D$ *lucky* if $m_n\\le2M_n$.\n\n**Case 1: some index $n$ is lucky.** Then by (1) $m_{n+1}\\le 2M_n$, and since $m_n-M_n\\le M_n$ also $M_{n+1}\\le M_n$, so $M_{n+1}=M_n$. Thus $m_{n+1}\\le2M_{n+1}$: the index $n+1$ is lucky too, with the same $M$. By induction every $N\\ge n$ is lucky and $M_N=M_n$, $m_N\\le2M_n$. Both sequences are bounded above.\n\n**Case 2: no index $n>D$ is lucky**, i.e. $2M_n<m_n$ for all $n>D$. Then (1) gives $m_{n+1}\\le m_n$, hence $m_n=m_{D+1}$ for all $n>D$, and $M_n<m_n/2=m_{D+1}/2$. Again both sequences are bounded above.\n\nIn both cases $(M_n)$ and $(m_n)$ are bounded above (and, being nondecreasing, bounded below by $M_2=a_1$ and $m_2=-a_1$), so $|a_n|\\le\\max(|M_{n+1}|,|m_{n+1}|)$ is bounded. ∎"
+   }
+  ],
+  "topics": [
+   "sequences-series",
+   "inequalities"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "imo-isl-2017-a5",
+  "bank": "imo",
+  "source": {
+   "contest": "IMO Shortlist",
+   "paper": "Algebra",
+   "year": 2017,
+   "number": 5,
+   "url": "https://www.imo-official.org/assets/documents/problems/2017/IMO2017SL.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "An integer $n\\ge3$ is given. We call an $n$-tuple of real numbers $(x_1,x_2,\\dots,x_n)$ *Shiny* if for each permutation $y_1,y_2,\\dots,y_n$ of these numbers we have\n$$\\sum_{i=1}^{n-1}y_iy_{i+1}=y_1y_2+y_2y_3+y_3y_4+\\dots+y_{n-1}y_n\\ge-1.$$\nFind the largest constant $K=K(n)$ such that\n$$\\sum_{1\\le i<j\\le n}x_ix_j\\ge K$$\nholds for every Shiny $n$-tuple $(x_1,x_2,\\dots,x_n)$.",
+  "image": null,
+  "choices": null,
+  "answer": "$K(n)=-\\dfrac{n-1}{2}$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Example, then average over alternating arrangements",
+    "body": "**$K$ cannot be larger.** For $t>0$ take $x_1=-\\frac1{2t}$ and $x_2=\\dots=x_n=t$. Every product $x_ix_j$ ($i\\ne j$) equals $-\\frac12$ (if it involves $x_1$) or $t^2$. In any arrangement $x_1$ has at most two neighbours, so\n$$y_1y_2+\\dots+y_{n-1}y_n\\ge2\\cdot\\left(-\\tfrac12\\right)+(n-3)t^2\\ge-1,$$\nand the tuple is Shiny. But\n$$\\sum_{i<j}x_ix_j=-\\frac{n-1}2+\\binom{n-1}2t^2\\;\\longrightarrow\\;-\\frac{n-1}2\\quad(t\\to0^+).$$\nSo no constant larger than $-\\frac{n-1}2$ works.\n\n**The bound holds.** Let $(x_i)$ be Shiny. Negating all numbers keeps the tuple Shiny and keeps every product, so we may assume that the set $S$ of indices with $x_i\\le0$ has $k$ elements and the set $T$ of indices with $x_i>0$ has $\\ell=n-k\\le k$ elements. If $\\ell=0$, all products are $\\ge0$ and we are done. So let $1\\le\\ell\\le k$. Put\n$$P=\\sum_{\\substack{i<j\\\\ i,j\\in S}}x_ix_j\\ge0,\\qquad L=\\sum_{\\substack{i<j\\\\ i,j\\in T}}x_ix_j\\ge0,\\qquad M=\\sum_{i\\in S,\\,j\\in T}x_ix_j\\le0,$$\nso that $\\sum_{i<j}x_ix_j=P+L+M$.\n\n*Case $k>\\ell$.* Then $2\\ell\\le n-1$. Consider all arrangements in which the positions $2,4,\\dots,2\\ell$ are occupied by the elements of $T$ and the other positions by the elements of $S$ (there are $k!\\,\\ell!$ of them). In each such arrangement every element of $T$ has two neighbours, both from $S$, so the $n-1$ adjacent pairs consist of $2\\ell$ pairs $S$–$T$ and $n-1-2\\ell=k-\\ell-1$ pairs $S$–$S$. By symmetry (permuting $S$ and $T$ among themselves), when we average over all these arrangements each of the $k\\ell$ mixed products appears equally often, and so does each of the $\\binom k2$ products inside $S$. Since every arrangement has sum $\\ge-1$,\n$$-1\\le\\frac{2\\ell}{k\\ell}M+\\frac{k-\\ell-1}{\\binom k2}P=\\frac2kM+\\frac{2(k-\\ell-1)}{k(k-1)}P .$$\nHence $M\\ge-\\frac k2-\\frac{k-\\ell-1}{k-1}P$ and\n$$P+L+M\\ge-\\frac k2+\\frac{\\ell}{k-1}P+L\\ge-\\frac k2\\ge-\\frac{n-1}2,$$\nbecause $k\\le n-1$.\n\n*Case $k=\\ell=\\frac n2$* (so $n\\ge4$). Use the arrangements with $T$ in positions $2,4,\\dots,n$. Now all $n-1$ adjacent pairs are mixed, so averaging gives $-1\\le\\frac{n-1}{k\\ell}M=\\frac{4(n-1)}{n^2}M$, i.e. $M\\ge-\\frac{n^2}{4(n-1)}$. Therefore\n$$P+L+M\\ge M\\ge-\\frac{n^2}{4(n-1)}\\ge-\\frac{n-1}2,$$\nwhere the last step is $n^2\\le2(n-1)^2\\iff n^2-4n+2\\ge0$, true for $n\\ge4$.\n\nSo $\\sum_{i<j}x_ix_j\\ge-\\frac{n-1}2$ for every Shiny tuple.\n\n**Answer: $K(n)=-\\dfrac{n-1}{2}$.**"
+   }
+  ],
+  "topics": [
+   "inequalities",
+   "algebra"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "imo-isl-2017-a6",
+  "bank": "imo",
+  "source": {
+   "contest": "IMO Shortlist",
+   "paper": "Algebra",
+   "year": 2017,
+   "number": 6,
+   "url": "https://www.imo-official.org/assets/documents/problems/2017/IMO2017SL.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Find all functions $f:\\mathbb R\\to\\mathbb R$ such that\n$$f\\big(f(x)f(y)\\big)+f(x+y)=f(xy)$$\nfor all $x,y\\in\\mathbb R$.",
+  "image": null,
+  "choices": null,
+  "answer": "$f(x)=0$, $f(x)=x-1$ and $f(x)=1-x$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [],
+  "topics": [
+   "functional-equations"
+  ],
+  "difficulty": 2,
+  "duplicateOf": "imo-2017-02",
+  "reviewNote": null
+ },
+ {
+  "id": "imo-isl-2017-a7",
+  "bank": "imo",
+  "source": {
+   "contest": "IMO Shortlist",
+   "paper": "Algebra",
+   "year": 2017,
+   "number": 7,
+   "url": "https://www.imo-official.org/assets/documents/problems/2017/IMO2017SL.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Let $a_0,a_1,a_2,\\dots$ be a sequence of integers and $b_0,b_1,b_2,\\dots$ be a sequence of *positive* integers such that $a_0=0$, $a_1=1$, and\n$$a_{n+1}=\\begin{cases}a_nb_n+a_{n-1}, & \\text{if } b_{n-1}=1\\\\ a_nb_n-a_{n-1}, & \\text{if } b_{n-1}>1\\end{cases}\\qquad\\text{for } n=1,2,\\dots.$$\nProve that at least one of the two numbers $a_{2017}$ and $a_{2018}$ must be greater than or equal to $2017$.",
+  "image": null,
+  "choices": null,
+  "answer": "Proof: first $a_n\\ge1$ for all $n\\ge1$ (a minimal counterexample forces a first \"non-increasing triple\", which is impossible); then induction shows $\\max(a_n,a_{n+1})\\ge n$, using that after the last index $r$ with $b_{r-1}=1$ the terms increase strictly.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Positivity lemma, then induction",
+    "body": "Since $a_0=0$, the value of $b_0$ never matters ($a_2=a_1b_1\\pm a_0=b_1$ either way), so we may assume $b_0=1$.\n\n**Lemma.** $a_n\\ge1$ for all $n\\ge1$.\n\n*Proof.* Suppose not and let $n\\ge1$ be minimal with $a_n\\le0$. Then $n\\ge2$, $a_{n-1}\\ge1$ and $a_{n-2}\\ge0$. If $a_n=a_{n-1}b_{n-1}+a_{n-2}$ then $a_n\\ge1$; so $a_n=a_{n-1}b_{n-1}-a_{n-2}$, and $a_n\\le0$ gives $a_{n-2}\\ge a_{n-1}b_{n-1}\\ge a_{n-1}$. Thus $a_{n-2}\\ge a_{n-1}\\ge a_n$.\n\nLet $r$ be the smallest index with $a_r\\ge a_{r+1}\\ge a_{r+2}$; then $r\\le n-2$. Also $r\\ge2$: $r=0$ fails as $a_0<a_1$; and $r=1$ fails, because if $b_1=1$ then $a_2=1$ and $a_3=a_2b_2+a_1>a_2$, while if $b_1>1$ then $a_2=b_1>a_1$. By minimality of $r$, $a_{r-1}<a_r$ (otherwise $r-1$ would qualify). As $1\\le r-1<r+1\\le n-1$, the numbers $a_{r-1},a_r,a_{r+1}$ are positive. Since $a_{r+2}\\le a_{r+1}$ and $a_r>0$, we cannot have $a_{r+2}=a_{r+1}b_{r+1}+a_r$; so $a_{r+2}=a_{r+1}b_{r+1}-a_r$, which means $b_r\\ge2$. But then\n$$a_{r+1}=a_rb_r\\pm a_{r-1}\\ge2a_r-a_{r-1}=a_r+(a_r-a_{r-1})>a_r,$$\ncontradicting $a_r\\ge a_{r+1}$. $\\square$\n\n**Claim.** $\\max(a_n,a_{n+1})\\ge n$ for all $n\\ge0$.\n\nWe use strong induction. For $n=0,1$: $a_1=1$. Let $n\\ge2$ and assume the claim for all smaller indices.\n\n*Case $b_{n-1}=1$.* Then $a_{n+1}=a_nb_n+a_{n-1}\\ge a_n+a_{n-1}$. By the induction hypothesis one of $a_{n-1},a_n$ is $\\ge n-1$, and the other is $\\ge1$ by the lemma. So $a_{n+1}\\ge n$.\n\n*Case $b_{n-1}>1$.* Since $b_0=1$, there is an index $r$ with $1\\le r\\le n-1$ such that $b_{r-1}=1$ and $b_r,b_{r+1},\\dots,b_{n-1}\\ge2$. Then\n$$a_{r+1}=a_rb_r+a_{r-1}\\ge2a_r+a_{r-1},\\qquad\\text{so}\\qquad a_{r+1}-a_r\\ge a_r+a_{r-1}.$$\nWe have $a_r+a_{r-1}\\ge r$: for $r=1$ it is $1+0$; for $r\\ge2$ one of $a_{r-1},a_r$ is $\\ge r-1$ by induction and the other is $\\ge1$. Therefore $a_{r+1}-a_r\\ge r\\ge1$, so $a_{r+1}>a_r$ and $a_{r+1}\\ge a_r+r\\ge r+1$.\n\nFor $m=r+1,\\dots,n-1$ we have $b_{m-1}>1$ and $b_m\\ge2$, so\n$$a_{m+1}=a_mb_m-a_{m-1}\\ge2a_m-a_{m-1}=a_m+(a_m-a_{m-1}),$$\nhence $a_m>a_{m-1}$ implies $a_{m+1}>a_m$. Thus $a_n>a_{n-1}>\\dots>a_{r+1}\\ge r+1$, and since these are integers, $a_n\\ge(r+1)+(n-r-1)=n$.\n\nIn both cases $\\max(a_n,a_{n+1})\\ge n$. Taking $n=2017$ finishes the proof. ∎"
+   }
+  ],
+  "topics": [
+   "sequences-series",
+   "number-theory"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "imo-isl-2017-a8",
+  "bank": "imo",
+  "source": {
+   "contest": "IMO Shortlist",
+   "paper": "Algebra",
+   "year": 2017,
+   "number": 8,
+   "url": "https://www.imo-official.org/assets/documents/problems/2017/IMO2017SL.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Assume that a function $f:\\mathbb R\\to\\mathbb R$ satisfies the following condition:\n\n*For every $x,y\\in\\mathbb R$ such that $\\big(f(x)+y\\big)\\big(f(y)+x\\big)>0$, we have $f(x)+y=f(y)+x$.*\n\nProve that $f(x)+y\\le f(y)+x$ whenever $x>y$.",
+  "image": null,
+  "choices": null,
+  "answer": "Proof: with $g(x)=x-f(x)$ the condition says that if $g(x)\\ne g(y)$ then $x+y$ lies between $g(x)$ and $g(y)$, and we must show $g$ is nondecreasing. If $X=g(x)<2x$, one shows $g\\equiv X$ on $(X-x,x)$ (and symmetrically); a pair $x<y$ with $g(x)>g(y)$ would make $g$ equal to two different constants on $(x,y)$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Pass to $g(x)=x-f(x)$",
+    "body": "Let $g(x)=x-f(x)$. Then $f(x)+y=(x+y)-g(x)$, so the hypothesis reads: if $\\big((x+y)-g(x)\\big)\\big((x+y)-g(y)\\big)>0$ then $g(x)=g(y)$. Equivalently:\n\n$(\\ast)$ *If $g(x)\\ne g(y)$, then $x+y$ lies (non-strictly) between $g(x)$ and $g(y)$.*\n\nThe claim $f(x)+y\\le f(y)+x$ for $x>y$ becomes $g(y)\\le g(x)$ for $y<x$: **we must show that $g$ is nondecreasing.**\n\nThe function $\\tilde g(x)=-g(-x)$ also satisfies $(\\ast)$ (if $\\tilde g(x)\\ne\\tilde g(y)$ then $-x-y$ lies between $g(-x),g(-y)$, so $x+y$ lies between $\\tilde g(x),\\tilde g(y)$). Statements about $g$ \"to the right\" therefore transfer to statements \"to the left\". Below, $x$ is a point with $X=g(x)$.\n\n**Lemma 1.** If $X<2x$, then on $(X-x,x)$ the function $g$ takes at most two values: $X$ and possibly one value $Y>X$.\n\n*Proof.* Let $a\\in(X-x,x)$ with $g(a)\\ne X$. If $g(a)<X$, then by $(\\ast)$ $a+x\\le X$, i.e. $a\\le X-x$, impossible. So $g(a)>X$ and $(\\ast)$ gives $a+x\\le g(a)$. If $b$ is another such point, then $a+b<a+x\\le g(a)$ and $a+b<b+x\\le g(b)$, so $a+b$ is not between $g(a)$ and $g(b)$, and $(\\ast)$ forces $g(a)=g(b)$. $\\square$\n\n**Lemma 2.** If $X<2x$, then $g$ is constant on $(X-x,x)$.\n\n*Proof.* Otherwise, by Lemma 1, there are $a,b$ in the interval with $g(a)=X$, $g(b)=Y>X$. Since $a,b<x$, we have $\\min(X-a,X-b)>X-x$, so we can pick $u\\in(X-x,x)$ with $u<\\min(X-a,X-b)$. By Lemma 1, $g(u)\\in\\{X,Y\\}$. If $g(u)=X\\ne g(b)$, then $(\\ast)$ gives $u+b\\ge X$, contradicting $u<X-b$. If $g(u)=Y\\ne g(a)$, then $(\\ast)$ gives $u+a\\ge X$, contradicting $u<X-a$. $\\square$\n\n**Lemma 3.** If $X<2x$, then $g\\equiv X$ on $(X-x,x)$. Symmetrically, if $X>2x$, then $g\\equiv X$ on $(x,X-x)$.\n\n*Proof.* By Lemma 2, $g$ is constant on $(X-x,x)$; suppose the constant is $Y\\ne X$ (so $Y>X$ by Lemma 1). Pick $a<b$ in $(X-x,x)$. Applying $(\\ast)$ to $b$ and $x$: $X\\le b+x\\le Y$. Then $g(a)=Y\\ge b+x>2a$, so by the symmetric version of Lemma 2 (applied to $\\tilde g$ at the point $-a$, where $\\tilde g(-a)=-Y<-2a$), $g$ is constant on $(a,Y-a)$. But $b$ and $x$ both lie in $(a,Y-a)$: they exceed $a$, and $b+a<b+x\\le Y$, $x+a<x+b\\le Y$. Since $g(b)=Y\\ne X=g(x)$, this is a contradiction.\n\nThe second statement follows by applying the first to $\\tilde g$ at the point $-x$ (where $\\tilde g(-x)=-X<-2x$). $\\square$\n\n**Conclusion.** Suppose $x<y$ but $X=g(x)>g(y)=Y$. By $(\\ast)$, $Y\\le x+y\\le X$. Hence $Y\\le x+y<2y$ and $X\\ge x+y>2x$, and also\n$$Y-y\\le x<y\\le X-x .$$\nBy Lemma 3, $g\\equiv Y$ on $(Y-y,y)$ and $g\\equiv X$ on $(x,X-x)$. Both intervals contain $(x,y)\\ne\\varnothing$, so $X=Y$ there, a contradiction.\n\nHence $g$ is nondecreasing, which is exactly $f(x)+y\\le f(y)+x$ for $x>y$. ∎"
+   }
+  ],
+  "topics": [
+   "functional-equations",
+   "inequalities"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "imo-isl-2017-c1",
+  "bank": "imo",
+  "source": {
+   "contest": "IMO Shortlist",
+   "paper": "Combinatorics",
+   "year": 2017,
+   "number": 1,
+   "url": "https://www.imo-official.org/assets/documents/problems/2017/IMO2017SL.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "A rectangle $\\mathcal R$ with odd integer side lengths is divided into small rectangles with integer side lengths. Prove that there is at least one among the small rectangles whose distances from the four sides of $\\mathcal R$ are either all odd or all even.",
+  "image": null,
+  "choices": null,
+  "answer": "Proof: colour the unit squares like a chessboard so that the corners of $\\mathcal R$ are green. $\\mathcal R$ has one more green than yellow square, so some small rectangle has all four corner squares green; for it all four distances have the same parity.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Chessboard colouring",
+    "body": "Place $\\mathcal R=[0,a]\\times[0,b]$ in coordinates, with $a,b$ odd, and colour the unit square $[i,i+1]\\times[j,j+1]$ green if $i+j$ is even and yellow otherwise. The four corner squares of $\\mathcal R$ are $(0,0)$, $(a-1,0)$, $(0,b-1)$, $(a-1,b-1)$; as $a-1,b-1$ are even, they are all green.\n\nConsider any rectangle $[p,q]\\times[r,s]$ with integer vertices (a piece, or $\\mathcal R$ itself).\n- If one of its side lengths is even, it splits into $1\\times2$ dominoes, so it contains equally many green and yellow squares.\n- If both side lengths are odd, then its four corner squares $(p,r)$, $(q-1,r)$, $(p,s-1)$, $(q-1,s-1)$ have the same colour (the coordinates differ by even numbers), and it contains exactly one more square of that colour than of the other (remove a corner square; the rest splits into dominoes).\n\nCall a rectangle *green* if both its sides are odd and its corner squares are green. $\\mathcal R$ is green, so it has one more green than yellow square. Summing over the pieces, (green squares) $-$ (yellow squares) $=1$ equals (number of green pieces) $-$ (number of pieces with odd sides and yellow corners). Hence at least one piece $S=[p,q]\\times[r,s]$ is green.\n\nFor this piece, $q-p$ and $s-r$ are odd and $p+r$ is even (its corner square $(p,r)$ is green). Its distances to the sides of $\\mathcal R$ are\n$$p\\ (\\text{left}),\\qquad a-q\\ (\\text{right}),\\qquad r\\ (\\text{bottom}),\\qquad b-s\\ (\\text{top}).$$\nWe have $r\\equiv p$, $a-q\\equiv1-(p+1)\\equiv p$ and $b-s\\equiv1-(r+1)\\equiv r\\equiv p\\pmod 2$. So all four distances have the same parity: all odd or all even. ∎"
+   }
+  ],
+  "topics": [
+   "counting",
+   "geometry"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "imo-isl-2017-c2",
+  "bank": "imo",
+  "source": {
+   "contest": "IMO Shortlist",
+   "paper": "Combinatorics",
+   "year": 2017,
+   "number": 2,
+   "url": "https://www.imo-official.org/assets/documents/problems/2017/IMO2017SL.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Let $n$ be a positive integer. Define a *chameleon* to be any sequence of $3n$ letters, with exactly $n$ occurrences of each of the letters $a$, $b$, and $c$. Define a *swap* to be the transposition of two adjacent letters in a chameleon. Prove that for any chameleon $X$, there exists a chameleon $Y$ such that $X$ cannot be changed to $Y$ using fewer than $3n^2/2$ swaps.",
+  "image": null,
+  "choices": null,
+  "answer": "Proof: the number of \"ordered pairs\" (left $u$, right $v$) for $uv\\in\\{ab,ac,bc\\}$ changes by at most $1$ per swap and is $3n^2$ for $a^nb^nc^n$ and $0$ for $c^nb^na^n$; so these two are $\\ge3n^2$ swaps apart, and $X$ is $\\ge3n^2/2$ swaps from one of them.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "A potential that changes by at most one",
+    "body": "For chameleons $X,Y$ let $d(X,Y)$ be the minimal number of swaps turning $X$ into $Y$ (swaps are reversible, so $d$ is symmetric, and clearly $d(X,Z)\\le d(X,Y)+d(Y,Z)$).\n\nFor a chameleon $X$ and distinct letters $u,v$, let $f_{u,v}(X)$ be the number of pairs of positions such that the left one holds $u$ and the right one holds $v$, and let\n$$f(X)=f_{a,b}(X)+f_{a,c}(X)+f_{b,c}(X).$$\n\n**A swap changes $f$ by at most $1$.** Swapping two equal letters changes nothing. If two adjacent letters, say $a$ and $b$, are swapped, only the relative order of this one pair changes: $f_{a,b}$ changes by exactly $1$ and $f_{a,c}$, $f_{b,c}$ are unchanged. Hence $d(X,Y)\\ge|f(X)-f(Y)|$.\n\n**Two far-apart chameleons.** Let $P=a\\dots a\\,b\\dots b\\,c\\dots c$ and $Q=c\\dots c\\,b\\dots b\\,a\\dots a$ (each block of length $n$). Then $f_{u,v}(P)=n^2$ for all three pairs, so $f(P)=3n^2$, while $f(Q)=0$. Thus $d(P,Q)\\ge3n^2$.\n\n**Conclusion.** For any chameleon $X$,\n$$d(X,P)+d(X,Q)\\ge d(P,Q)\\ge3n^2,$$\nso $\\max\\big(d(X,P),d(X,Q)\\big)\\ge\\frac{3n^2}2$. Taking $Y$ to be whichever of $P,Q$ is farther from $X$, the chameleon $X$ cannot be changed into $Y$ with fewer than $3n^2/2$ swaps. ∎"
+   }
+  ],
+  "topics": [
+   "counting",
+   "graph-theory"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "imo-isl-2017-c3",
+  "bank": "imo",
+  "source": {
+   "contest": "IMO Shortlist",
+   "paper": "Combinatorics",
+   "year": 2017,
+   "number": 3,
+   "url": "https://www.imo-official.org/assets/documents/problems/2017/IMO2017SL.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Sir Alex plays the following game on a row of $9$ cells. Initially, all cells are empty. In each move, Sir Alex is allowed to perform exactly one of the following two operations:\n\n(1) Choose any number of the form $2^j$, where $j$ is a non-negative integer, and put it into an empty cell.\n\n(2) Choose two (not necessarily adjacent) cells with the same number in them; denote that number by $2^j$. Replace the number in one of the cells with $2^{j+1}$ and erase the number in the other cell.\n\nAt the end of the game, one cell contains the number $2^n$, where $n$ is a given positive integer, while the other cells are empty. Determine the maximum number of moves that Sir Alex could have made, in terms of $n$.",
+  "image": null,
+  "choices": null,
+  "answer": "$2\\displaystyle\\sum_{j=0}^{8}\\binom nj-1$ (which is $2^{n+1}-1$ when $n\\le8$).",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Count insertions via the running sum",
+    "body": "Call operation (1) an *insertion* and (2) a *merge*. Let $N$ be the number of occupied cells and $S$ the sum of all numbers on the board.\n\n- An insertion increases $N$ by $1$ and increases $S$ (by a power of $2$).\n- A merge decreases $N$ by $1$ and keeps $S$.\n\n$N$ goes from $0$ to $1$, so (insertions) $=$ (merges) $+1$ and the number of moves is $2\\cdot(\\text{insertions})-1$. We maximise the number of insertions.\n\n**Lemma.** If the binary expansion of $A$ has $d$ ones, then $A$ is not a sum of fewer than $d$ powers of $2$, and every representation as a sum of exactly $d$ powers of $2$ is the binary expansion.\n\n*Proof.* Take a representation with the minimal number $s$ of summands. If two summands were equal, replacing them by their sum would give fewer summands; so the summands are distinct, the representation is the binary expansion, and $s=d$. A representation with $d$ summands is therefore minimal, hence the binary one. $\\square$\n\n**Claim 1.** After every move, $S$ has at most $8$ ones in binary.\n\n*Proof.* $S$ is a sum of at most $9$ powers of $2$, so it has at most $9$ ones. If it had $9$, then by the lemma all $9$ cells are filled with distinct powers of $2$; then no merge and no insertion is possible, and the game is stuck with $9$ numbers on the board, so it cannot end with a single number. $\\square$\n\nSince $S$ never decreases and ends at $2^n$, all values of $S$ lie in\n$$A=\\{s:1\\le s\\le2^n,\\ s\\text{ has at most 8 binary ones}\\},$$\nand each insertion produces a new, larger value. Hence the number of insertions is at most $|A|$.\n\n**Claim 2.** $|A|$ insertions are achievable.\n\n*Proof.* List $A$ as $a_1<a_2<\\dots<a_m$ (so $a_1=1$, $a_m=2^n$). Start by inserting $1$. Suppose $S=a_j$ with $j<m$. Perform all possible merges; the board then holds distinct powers of $2$, i.e. the binary expansion of $a_j$, using at most $8$ cells, so some cell is empty. We show $a_{j+1}-a_j$ is a power of $2$, so we can insert it:\n- if $a_j$ has fewer than $8$ ones, then $a_j+1\\le2^n$ has at most $8$ ones, so $a_{j+1}=a_j+1$;\n- if $a_j=2^{b_8}+\\dots+2^{b_1}$ with $b_1<\\dots<b_8$, then adding any $t$ with $0<t<2^{b_1}$ gives $8+(\\text{ones of }t)>8$ ones, while $a_j+2^{b_1}$ produces a carry and has at most $8$ ones; also $a_j+2^{b_1}\\le2^n$, because $a_j<2^n$ and both are multiples of $2^{b_1}$. So $a_{j+1}=a_j+2^{b_1}$.\n\nWhen $S=2^n$, merging repeatedly leaves distinct powers of $2$ summing to $2^n$, i.e. the single number $2^n$. $\\square$\n\n**Counting $A$.** Apart from $2^n$ itself, the elements of $A$ are the numbers below $2^n$ (at most $n$ binary digits) with between $1$ and $8$ ones; there are $\\binom nj$ with exactly $j$ ones. Hence\n$$|A|=1+\\sum_{j=1}^{8}\\binom nj=\\sum_{j=0}^{8}\\binom nj .$$\n\n**Answer:** the maximum number of moves is $2\\displaystyle\\sum_{j=0}^{8}\\binom nj-1$."
+   },
+   {
+    "title": "Recursion on the number of cells",
+    "body": "Let $m(n,k)$ be the maximum for $k$ cells. With one cell, or with $n=0$, the only possible game is a single insertion: $m(n,1)=m(0,k)=1$.\n\nFor $k\\ge2$, $n\\ge1$, the last move is a merge of two copies of $2^{n-1}$. Colour these two numbers blue and red and propagate colours backwards (the two numbers merged into a coloured number get its colour). Every move except the last is \"blue\" or \"red\". Say the first insertion is blue; then from that moment on some cell holds a blue number. The blue moves alone form a valid game producing $2^{n-1}$ on $k$ cells, so there are at most $m(n-1,k)$ of them; the red moves form a valid game on the $k-1$ cells not occupied by a blue number, so at most $m(n-1,k-1)$. Conversely, playing an optimal $k$-cell game for $2^{n-1}$, then an optimal $(k-1)$-cell game in the remaining cells, then merging, achieves the bound. Thus\n$$m(n,k)=m(n-1,k)+m(n-1,k-1)+1 .$$\nWith $h=m+1$ this is $h(n,k)=h(n-1,k)+h(n-1,k-1)$, $h(0,k)=h(n,1)=2$, whose solution (by induction and Pascal's rule) is $h(n,k)=2\\sum_{j=0}^{k-1}\\binom nj$. For $k=9$ this gives again $m(n,9)=2\\sum_{j=0}^{8}\\binom nj-1$."
+   }
+  ],
+  "topics": [
+   "counting",
+   "number-theory"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "imo-isl-2017-c4",
+  "bank": "imo",
+  "source": {
+   "contest": "IMO Shortlist",
+   "paper": "Combinatorics",
+   "year": 2017,
+   "number": 4,
+   "url": "https://www.imo-official.org/assets/documents/problems/2017/IMO2017SL.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Let $N\\ge2$ be an integer. $N(N+1)$ soccer players, no two of the same height, stand in a row in some order. Coach Ralph wants to remove $N(N-1)$ people from this row so that in the remaining row of $2N$ players, no one stands between the two tallest ones, no one stands between the third and the fourth tallest ones, $\\dots$, and finally no one stands between the two shortest ones. Show that this is always possible.",
+  "image": null,
+  "choices": null,
+  "answer": "Proof: split the players by height into $N$ groups of $N+1$; scan from the left until two players of one group appear, keep that pair, delete everything scanned and the rest of that group, and induct.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [],
+  "topics": [
+   "counting",
+   "logic"
+  ],
+  "difficulty": 2,
+  "duplicateOf": "imo-2017-05",
+  "reviewNote": null
+ },
+ {
+  "id": "imo-isl-2017-c5",
+  "bank": "imo",
+  "source": {
+   "contest": "IMO Shortlist",
+   "paper": "Combinatorics",
+   "year": 2017,
+   "number": 5,
+   "url": "https://www.imo-official.org/assets/documents/problems/2017/IMO2017SL.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "text",
+  "prompt": "A hunter and an invisible rabbit play a game in the Euclidean plane. The hunter's starting point $H_0$ coincides with the rabbit's starting point $R_0$. In the $n^{\\text{th}}$ round of the game ($n\\ge1$), the following happens.\n\n(1) First the invisible rabbit moves secretly and unobserved from its current point $R_{n-1}$ to some new point $R_n$ with $R_{n-1}R_n=1$.\n\n(2) The hunter has a tracking device (e.g. dog) that returns an approximate position $R_n'$ of the rabbit, so that $R_nR_n'\\le1$.\n\n(3) The hunter then visibly moves from point $H_{n-1}$ to a new point $H_n$ with $H_{n-1}H_n=1$.\n\nIs there a strategy for the hunter that guarantees that after $10^9$ such rounds the distance between the hunter and the rabbit is below $100$?",
+  "image": null,
+  "choices": null,
+  "answer": "No",
+  "acceptedAnswers": [
+   "no",
+   "No, there is no such strategy"
+  ],
+  "answerUnit": null,
+  "solutions": [],
+  "topics": [
+   "games",
+   "geometry"
+  ],
+  "difficulty": 3,
+  "duplicateOf": "imo-2017-03",
+  "reviewNote": null
+ },
+ {
+  "id": "imo-isl-2017-c6",
+  "bank": "imo",
+  "source": {
+   "contest": "IMO Shortlist",
+   "paper": "Combinatorics",
+   "year": 2017,
+   "number": 6,
+   "url": "https://www.imo-official.org/assets/documents/problems/2017/IMO2017SL.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Let $n>1$ be an integer. An $n\\times n\\times n$ cube is composed of $n^3$ unit cubes. Each unit cube is painted with one color. For each $n\\times n\\times1$ box consisting of $n^2$ unit cubes (of any of the three possible orientations), we consider the set of the colors present in that box (each color is listed only once). This way, we get $3n$ sets of colors, split into three groups according to the orientation. It happens that for every set in any group, the same set appears in both of the other groups. Determine, in terms of $n$, the maximal possible number of colors that are present.",
+  "image": null,
+  "choices": null,
+  "answer": "$\\dfrac{n(n+1)(2n+1)}{6}$",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Peel off three slabs (induction) and a symmetric construction",
+    "body": "Coordinates: unit cubes are $(i,j,k)$ with $1\\le i,j,k\\le n$; the $x$-box $i$ is $\\{(i,\\cdot,\\cdot)\\}$, and similarly for $y$- and $z$-boxes.\n\n**Upper bound.** We prove a stronger statement. Allow some unit cubes to be *invisible* (uncoloured), and call a painted cube *strange* if every **nonempty** colour set in one group also appears in both other groups. A valid colouring is strange. We show by induction on $n\\ge1$ that a strange $n\\times n\\times n$ cube has at most\n$$D(n)=1^2+2^2+\\dots+n^2=\\frac{n(n+1)(2n+1)}6$$\ncolours.\n\nFor $n=1$ there is at most one colour. Let $n\\ge2$ and let $A$ be strange. If $A$ has no colours we are done. Otherwise pick a nonempty colour set $S$ of some box; it is the colour set of an $x$-box $X$, a $y$-box $Y$ and a $z$-box $Z$. Make every cube whose colour lies in $S$ invisible. Now $X,Y,Z$ are completely invisible (all their colours were in $S$); delete them. What remains is an $(n-1)\\times(n-1)\\times(n-1)$ cube $B$.\n\nEvery box $X'$ of $B$ (say an $x$-box) is an $x$-box of $A$ other than $X$ with its cubes in $Y\\cup Z$ removed; those removed cubes had colours in $S$ (or were invisible). Hence the colour set of $X'$ in $B$ is exactly $T\\setminus S$, where $T$ is its colour set in $A$. If $T\\setminus S\\ne\\varnothing$, then $T\\ne S$, and the $y$- and $z$-boxes of $A$ with colour set $T$ are not $Y,Z$; they survive in $B$ with colour set $T\\setminus S$. So $B$ is strange, and by induction it has at most $D(n-1)$ colours. The colours of $A$ are those of $B$ together with those of $S$, and $|S|\\le n^2$ (a box has $n^2$ cubes). Therefore $A$ has at most $D(n-1)+n^2=D(n)$ colours.\n\n**Construction with $D(n)$ colours.** Give one colour to each of the following sets of cubes:\n1. the $n$ singletons $\\{(i,i,i)\\}$;\n2. for each $i<j$, the three pairs $\\{(i,j,j),(j,i,i)\\}$, $\\{(j,i,j),(i,j,i)\\}$, $\\{(j,j,i),(i,i,j)\\}$;\n3. for distinct $i,j,k$, the cyclic triples $\\{(i,j,k),(j,k,i),(k,i,j)\\}$ (one for each of the $\\frac{n(n-1)(n-2)}3$ cyclic classes).\n\nEvery unit cube lies in exactly one of these sets (according to how many of its coordinates coincide). In each colour class, the set of first coordinates, the set of second coordinates and the set of third coordinates are the same ($\\{i\\}$, $\\{i,j\\}$ or $\\{i,j,k\\}$). Hence a colour appears in $x$-box $m$ iff it appears in $y$-box $m$ iff it appears in $z$-box $m$, so the three boxes with index $m$ have the same colour set, and the condition holds. The number of colours is\n$$n+3\\binom n2+\\frac{n(n-1)(n-2)}3=\\frac{n(n+1)(2n+1)}6 .$$\n\n**Answer:** $\\dfrac{n(n+1)(2n+1)}{6}$."
+   }
+  ],
+  "topics": [
+   "counting",
+   "spatial"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "imo-isl-2017-c7",
+  "bank": "imo",
+  "source": {
+   "contest": "IMO Shortlist",
+   "paper": "Combinatorics",
+   "year": 2017,
+   "number": 7,
+   "url": "https://www.imo-official.org/assets/documents/problems/2017/IMO2017SL.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "For any finite sets $X$ and $Y$ of positive integers, denote by $f_X(k)$ the $k^{\\text{th}}$ smallest positive integer not in $X$, and let\n$$X*Y=X\\cup\\{f_X(y):y\\in Y\\}.$$\nLet $A$ be a set of $a>0$ positive integers, and let $B$ be a set of $b>0$ positive integers. Prove that if $A*B=B*A$, then\n$$\\underbrace{A*(A*\\cdots*(A*(A*A))\\dots)}_{A\\text{ appears }b\\text{ times}}=\\underbrace{B*(B*\\cdots*(B*(B*B))\\dots)}_{B\\text{ appears }a\\text{ times}}.$$",
+  "image": null,
+  "choices": null,
+  "answer": "Proof: $f_{X*Y}=f_X\\circ f_Y$, and a finite set is determined by $f_X$; so with $g=f_A$, $h=f_B$ we know $g\\circ h=h\\circ g$ and must show $g^b=h^a$. This holds for large $n$ (both equal $n+ab$), and a largest counterexample $s$ is impossible by injectivity of $g$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Translate into composition of functions",
+    "body": "Write $\\mathbb Z_{>0}$ for the positive integers. For a finite $X$, $f_X$ is the strictly increasing bijection from $\\mathbb Z_{>0}$ onto $\\mathbb Z_{>0}\\setminus X$. A strictly increasing function on $\\mathbb Z_{>0}$ is determined by its image, so\n$$f_X=f_Y\\iff\\mathbb Z_{>0}\\setminus X=\\mathbb Z_{>0}\\setminus Y\\iff X=Y.\\qquad(1)$$\n\n**Lemma.** $f_{X*Y}=f_X\\circ f_Y$.\n\n*Proof.* Using that $f_X$ is injective,\n$$\\mathbb Z_{>0}\\setminus(X*Y)=(\\mathbb Z_{>0}\\setminus X)\\setminus f_X(Y)=f_X(\\mathbb Z_{>0})\\setminus f_X(Y)=f_X(\\mathbb Z_{>0}\\setminus Y)=f_X\\big(f_Y(\\mathbb Z_{>0})\\big).$$\nSo $f_{X*Y}$ and $f_X\\circ f_Y$ are strictly increasing with the same image; hence they are equal. $\\square$\n\nLet $g=f_A$, $h=f_B$. By the lemma (applied repeatedly) the left-hand set $L$ satisfies $f_L=g^b$ and the right-hand set $R$ satisfies $f_R=h^a$. By (1), the hypothesis $A*B=B*A$ is equivalent to $g\\circ h=h\\circ g$, and the claim $L=R$ is equivalent to\n$$g^b(n)=h^a(n)\\quad\\text{for all }n\\in\\mathbb Z_{>0}.\\qquad(2)$$\n\n**(2) holds for large $n$.** Let $p=\\max(A\\cup B)$. For $n\\ge p$, exactly $a$ elements of $A$ are below $n+a$ and $n+a\\notin A$, so $g(n)=n+a$; similarly $h(n)=n+b$. Since $g,h$ only increase their argument, $g^b(n)=n+ab=h^a(n)$ for $n\\ge p$.\n\n**(2) holds everywhere.** If not, let $s$ be the largest $n$ violating (2). If $g(s)=s$ and $h(s)=s$, then $g^b(s)=s=h^a(s)$; so one of them moves $s$. By symmetry of the roles of $(g,b)$ and $(h,a)$, assume $g(s)\\ne s$. Since $f_X(k)\\ge k$ always, $g(s)>s$, so (2) holds at $g(s)$:\n$$g\\big(g^b(s)\\big)=g^b\\big(g(s)\\big)=h^a\\big(g(s)\\big)=g\\big(h^a(s)\\big),$$\nwhere the last step uses $g\\circ h=h\\circ g$. As $g$ is injective, $g^b(s)=h^a(s)$, contradicting the choice of $s$.\n\nHence $g^b=h^a$, and by (1) the two sets are equal. ∎"
+   }
+  ],
+  "topics": [
+   "abstract-algebra",
+   "counting"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "imo-isl-2017-c8",
+  "bank": "imo",
+  "source": {
+   "contest": "IMO Shortlist",
+   "paper": "Combinatorics",
+   "year": 2017,
+   "number": 8,
+   "url": "https://www.imo-official.org/assets/documents/problems/2017/IMO2017SL.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Let $n$ be a given positive integer. In the Cartesian plane, each lattice point with nonnegative coordinates initially contains a butterfly, and there are no other butterflies. The *neighborhood* of a lattice point $c$ consists of all lattice points within the axis-aligned $(2n+1)\\times(2n+1)$ square centered at $c$, apart from $c$ itself. We call a butterfly *lonely*, *crowded*, or *comfortable*, depending on whether the number of butterflies in its neighborhood $N$ is respectively less than, greater than, or equal to half of the number of lattice points in $N$.\n\nEvery minute, all lonely butterflies fly away simultaneously. This process goes on for as long as there are any lonely butterflies. Assuming that the process eventually stops, determine the number of comfortable butterflies at the final state.",
+  "image": null,
+  "choices": null,
+  "answer": "$n^2+1$",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Describe the final set by a convex lattice curve",
+    "body": "Points are identified with butterflies. Write $p\\ge q$ if both coordinates of $p$ are at least those of $q$; a set $S$ is *up-right closed* if $p\\in S$, $q\\ge p$ imply $q\\in S$. Let $N(c)$ be the neighbourhood of $c$; it has $4n^2+4n$ points, so \"half\" means $2n^2+2n$. For a set $S$ of points we speak of its points being lonely/comfortable/crowded *with respect to $S$*; $S$ is *stable* if none of its points is lonely.\n\n**1. Reduction.** If $S$ is up-right closed and $q\\ge p$ are in $S$, the shift by $q-p$ maps $N(p)\\cap S$ into $N(q)\\cap S$, so $q$ has at least as many neighbours as $p$. Hence the lonely points of $S$ form a down-left closed part, and removing them leaves an up-right closed set. Starting from the quadrant $Q=\\mathbb Z_{\\ge0}^2$, the set of butterflies stays up-right closed. Moreover, if a stable set $S\\subseteq Q$ is contained in the current set, every point of $S$ keeps at least half of its neighbourhood, so no point of $S$ ever flies away. The final set $F$ is stable. Therefore **$F$ is the largest stable subset of $Q$.**\n\n**2. The candidate.** Let $K_n=\\{(i,j):1\\le i\\le n,\\ -n\\le j\\le-1\\}$ ($n^2$ points). Let $r_1,\\dots,r_m$ be the rays from $O$ through points of $K_n$, ordered by increasing slope (from steep to flat). On $r_i$ let $u_i$ be the primitive lattice vector, $k_i=|r_i\\cap K_n|$ and $v_i=k_iu_i$ (the farthest point of $K_n$ on $r_i$); note $\\sum k_i=n^2$. A vector $w=tu_i$ lies in the square $[-n,n]^2$ iff $|t|\\le k_i$.\n\nLet the *$V$-curve* be the broken line $d_0d_1\\dots d_m$ with $d_0$ on the positive $y$-axis, $d_i=d_{i-1}+v_i$ and $d_m$ on the positive $x$-axis. Its edge directions have strictly increasing slopes, so it is convex. Let $R$ be the closed region on or above it, i.e. the points $z\\ge z'$ for some $z'$ on the curve, and let $D$ be the set of lattice points of $R$. Write $u_0=(0,-1)$, $u_{m+1}=(1,0)$, and for $0\\le j\\le m+1$ let $\\nu_j$ be $u_j$ rotated by $+90^\\circ$ (so $\\nu_j\\ge0$, pointing up-right) and $H_j$ the closed half-plane $\\{z:\\nu_j\\cdot z\\ge\\nu_j\\cdot d\\}$ for $d$ on the $j$-th edge (for $j=0,m+1$: the lines $x=0$, $y=0$). By convexity, $R=\\bigcap_{j=0}^{m+1}H_j$, and each $H_j$ is up-right closed.\n\nWe show $F=D$; the answer is then the number of comfortable points of $D$.\n\n**3. Key lemma.** *Let $p''$ be a point of the $i$-th edge, $p\\ge p''$, and $z=p+w$ with $w\\in[-n,n]^2$ a lattice vector and $\\nu_i\\cdot w>0$. Then $z\\in R$.*\n\n*Proof.* Suppose $z\\notin H_j$ for some $j$; then $j\\ne i$ and, since $p\\in H_j$, $\\nu_j\\cdot w<0$. If $u_j$ is flatter than $u_i$ ($j>i$), the two sign conditions say that the direction of $w$ lies strictly between those of $u_i$ and $u_j$; so $w$ has $x>0$, $y<0$, i.e. $w\\in K_n$, and $w=tu_k$ with $i<k<j$, $1\\le t\\le k_k$. The point $q=d_{k-1}+tu_k$ lies on the $k$-th edge, so $q\\in H_j$. Also $d_{k-1}-p''$ is a nonnegative combination of $u_i,\\dots,u_{k-1}$, all steeper than $u_j$, so $\\nu_j\\cdot(d_{k-1}-p'')\\le0$. Hence $\\nu_j\\cdot z\\ge\\nu_j\\cdot(p''+tu_k)\\ge\\nu_j\\cdot q$, i.e. $z\\in H_j$, a contradiction. If $j<i$, the same argument applied to $-w=tu_k$ ($j<k<i$) and $q=d_k-tu_k$ works. $\\square$\n\n**4. $D$ is stable; its comfortable points are the lattice points of the curve.**\n\n*(a) Lattice points $p$ on the curve are comfortable.* Let $p$ lie on edge $i$ with line $\\ell$. The map $z\\mapsto2p-z$ pairs the points of $N(p)\\setminus\\ell$ into one above and one below $\\ell$. By the lemma (with $p''=p$) all points above $\\ell$ are in $D$; none below is in $D$, as $R\\subseteq H_i$. On $\\ell$, $N(p)$ contains the $2k_i$ points $p\\pm tu_i$ ($1\\le t\\le k_i$), and $R\\cap\\ell$ is exactly the edge, which has $k_i+1$ lattice points, all within $k_i$ steps of $p$. So exactly $k_i$ of them are in $D$, and $|N(p)\\cap D|=\\frac{4n^2+4n-2k_i}2+k_i=2n^2+2n$.\n\n*(b) Other points $p\\in D$ are crowded.* If $p\\ge p'$ for a lattice point $p'\\ne p$ of the curve, shifting by $p-p'$ maps $N(p')\\cap D$ (of size $2n^2+2n$) into $N(p)\\cap D$; in addition, if say $p-p'$ has positive $x$-coordinate, $p-(1,0)\\in D$ (it is $\\ge p'$) while $p'-(1,0)\\notin D$ (the curve is strictly decreasing), so $p-(1,0)$ is an extra neighbour; similarly for $y$. Otherwise $p\\ge p''$ for a non-lattice point $p''$ of some edge $i=[d_{i-1},d_i]$ but $p\\not\\ge d_{i-1},d_i$; then $p$ lies strictly above $\\ell_i$ inside the bounding box of the edge, so $d_{i-1},d_i\\in N(p)$. Let $\\ell$ be the line through $p$ parallel to $u_i$. By the lemma, all points of $N(p)$ strictly above $\\ell$ are in $D$. The chord $\\ell\\cap R$ contains the edge shifted by $(\\delta,0)$ and by $(0,\\delta')$ for suitable $\\delta,\\delta'>0$ (shifts up-right keep us in $R$), so its length exceeds $k_i|u_i|$; hence at least $k_i-1$ of the points $p\\pm tu_i$, $1\\le t\\le k_i$, are in $D$. With $d_{i-1},d_i$ (below $\\ell$), $|N(p)\\cap D|\\ge\\frac{4n^2+4n-2k_i}2+(k_i-1)+2>2n^2+2n$.\n\nSo $D$ is stable and $D\\subseteq F$; in particular $Q\\setminus F$ is finite.\n\n**5. $F\\subseteq D$.** The convex hull of $F$ is bounded by a ray up the $y$-axis, a convex chain $C^*$ of lattice edges with negative slopes, and a ray along the $x$-axis.\n\n*Every $v_i$ has a parallel edge of $C^*$ at least as long.* Take the supporting line $\\ell$ of $\\operatorname{conv}F$ with direction $u_i$, touching at a vertex $b\\in F$. The points of $N(b)$ strictly below $\\ell$ are not in $F$, and they are half of $N(b)\\setminus\\ell$. Since $b$ is not lonely, at least $k_i$ of the $2k_i$ points of $N(b)\\cap\\ell$ lie in $F$. So $\\operatorname{conv}F\\cap\\ell$ is an edge with at least $k_i+1$ lattice points, of length $\\ge|v_i|$.\n\n*Every vertex $p'$ of $C^*$ lies in $R$.* The vertex $p'$ splits $C^*$ into an upper-left and a lower-right part. Matching each $v_i$ with its parallel edge, the edges matched to $v_1,\\dots,v_t$ (for some $t$) lie in the upper-left part and the rest in the lower-right part, because both lists are ordered by slope. Then $x(p')\\ge\\sum_{i\\le t}x(v_i)=x(d_t)$ and $y(p')\\ge\\sum_{i>t}|y(v_i)|=y(d_t)$, so $p'\\ge d_t$ and $p'\\in R$.\n\nSince $R$ is convex and up-right closed, $\\operatorname{conv}F\\subseteq R$, so $F\\subseteq D$.\n\n**6. Count.** Hence $F=D$, and the comfortable butterflies are the lattice points of the $V$-curve. Edge $i$ has $k_i+1$ lattice points and consecutive edges share an endpoint, so there are\n$$1+\\sum_{i=1}^m k_i=1+|K_n|=n^2+1$$\nof them.\n\n**Answer: $n^2+1$.**"
+   }
+  ],
+  "topics": [
+   "geometry",
+   "counting"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "imo-isl-2017-g1",
+  "bank": "imo",
+  "source": {
+   "contest": "IMO Shortlist",
+   "paper": "Geometry",
+   "year": 2017,
+   "number": 1,
+   "url": "https://www.imo-official.org/assets/documents/problems/2017/IMO2017SL.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Let $ABCDE$ be a convex pentagon such that $AB=BC=CD$, $\\angle EAB=\\angle BCD$, and $\\angle EDC=\\angle CBA$. Prove that the perpendicular line from $E$ to $BC$ and the line segments $AC$ and $BD$ are concurrent.",
+  "image": null,
+  "choices": null,
+  "answer": "Proof: the perpendicular bisectors of $AC$ and $BD$ (through $B$ and $C$) meet at a point $I$ that turns out to be the incentre of the pentagon; $AC\\cap BD$ is the orthocentre $H$ of $\\triangle BIC$, so $IH\\perp BC$, and an angle count gives $EI\\perp BC$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "The incentre $I$ and the orthocentre of $BIC$",
+    "body": "Write $\\angle A,\\dots,\\angle E$ for the interior angles of the pentagon; we are given $\\angle A=\\angle C$ and $\\angle B=\\angle D$.\n\nSince $BA=BC$, the perpendicular bisector of $AC$ passes through $B$ and bisects $\\angle B$; since $CB=CD$, the perpendicular bisector of $BD$ passes through $C$ and bisects $\\angle C$. Let these two lines meet at $I$. Then $AC\\perp BI$ and $BD\\perp CI$, so $AC$ and $BD$ are two altitudes of triangle $BIC$ and meet at its orthocentre $H$; the third altitude is $IH\\perp BC$. **It remains to show that $E$ lies on the line through $I$ perpendicular to $BC$, i.e. $EI\\perp BC$.**\n\n**$I$ is the incentre.** We have $IA=IC$, $IB=ID$, $AB=BC=CD$, so triangles $IAB$, $ICB$, $ICD$ are congruent (SSS). Hence $\\angle IAB=\\angle ICB=\\frac12\\angle C=\\frac12\\angle A$, so $IA$ bisects $\\angle A$; similarly $\\angle IDC=\\angle IBC=\\frac12\\angle B=\\frac12\\angle D$, so $ID$ bisects $\\angle D$. Thus $I$ is equidistant from all five side lines, and in particular $IE$ bisects $\\angle E$.\n\n**Angle count.** The angle sum gives $\\angle E=540^\\circ-2\\angle A-2\\angle B$. In quadrilateral $ABIE$,\n$$\\angle BIE=360^\\circ-\\angle A-\\tfrac12\\angle B-\\tfrac12\\angle E=360^\\circ-\\angle A-\\tfrac12\\angle B-(270^\\circ-\\angle A-\\angle B)=90^\\circ+\\tfrac12\\angle B .$$\nLet line $EI$ meet $BC$ at $T$. Then $\\angle BIE$ is the exterior angle at $I$ of triangle $BIT$, so $\\angle BIE=\\angle IBT+\\angle BTI=\\frac12\\angle B+\\angle BTI$. Hence $\\angle BTI=90^\\circ$, i.e. $EI\\perp BC$.\n\nSo the perpendicular from $E$ to $BC$ is the line $IH$, which passes through $H=AC\\cap BD$. ∎"
+   },
+   {
+    "title": "Brianchon's theorem",
+    "body": "As in the first solution, $I$ is equidistant from all five sides, so the pentagon has an inscribed circle with centre $I$; let it touch $BC$ at $T$, so $IT\\perp BC$. Apply Brianchon's theorem to the circumscribed (degenerate) hexagon $ABTCDE$, whose sides $AB,BT,TC,CD,DE,EA$ all touch the circle: its main diagonals $AC$, $BD$, $TE$ are concurrent. Also $AC\\cap BD=H$ lies on the altitude $IH$ of triangle $BIC$, which is the line $IT$. So $E$, $T$, $H$, $I$ are collinear, and the perpendicular from $E$ to $BC$ is $ET$, passing through $H$. ∎"
+   }
+  ],
+  "topics": [
+   "geometry"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "imo-isl-2017-g2",
+  "bank": "imo",
+  "source": {
+   "contest": "IMO Shortlist",
+   "paper": "Geometry",
+   "year": 2017,
+   "number": 2,
+   "url": "https://www.imo-official.org/assets/documents/problems/2017/IMO2017SL.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Let $R$ and $S$ be distinct points on circle $\\Omega$, and let $t$ denote the tangent line to $\\Omega$ at $R$. Point $R'$ is the reflection of $R$ with respect to $S$. A point $I$ is chosen on the smaller arc $RS$ of $\\Omega$ so that the circumcircle $\\Gamma$ of triangle $ISR'$ intersects $t$ at two different points. Denote by $A$ the common point of $\\Gamma$ and $t$ that is closest to $R$. Line $AI$ meets $\\Omega$ again at $J$. Show that $JR'$ is tangent to $\\Gamma$.",
+  "image": null,
+  "choices": null,
+  "answer": "Proof: $RJ\\parallel AR'$; with $A'$ the reflection of $A$ in $S$, $ARA'R'$ is a parallelogram, so $J\\in RA'$, and $S,J,A',R'$ are concyclic, which gives $\\angle SR'J=\\angle SAR'$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [],
+  "topics": [
+   "geometry"
+  ],
+  "difficulty": 1,
+  "duplicateOf": "imo-2017-04",
+  "reviewNote": null
+ },
+ {
+  "id": "imo-isl-2017-g3",
+  "bank": "imo",
+  "source": {
+   "contest": "IMO Shortlist",
+   "paper": "Geometry",
+   "year": 2017,
+   "number": 3,
+   "url": "https://www.imo-official.org/assets/documents/problems/2017/IMO2017SL.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Let $O$ be the circumcenter of an acute scalene triangle $ABC$. Line $OA$ intersects the altitudes of $ABC$ through $B$ and $C$ at $P$ and $Q$, respectively. The altitudes meet at $H$. Prove that the circumcenter of triangle $PQH$ lies on a median of triangle $ABC$.",
+  "image": null,
+  "choices": null,
+  "answer": "Proof: $\\triangle HPQ\\sim\\triangle ABC$ (angles $\\angle PQH=\\angle C$, $\\angle QPH=\\angle B$) and $AH$ is tangent to circle $HPQ$; the similarity sends $A$ to the point $S$ where the tangent at $A$ to the circumcircle meets $BC$, which shows that line $A T$ ($T$ the circumcentre of $HPQ$) meets $BC$ at the foot of the perpendicular from $O$, the midpoint.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Similar triangles and the tangent at $A$",
+    "body": "Assume without loss of generality $AB<AC$, let $\\Omega$ be the circumcircle of $ABC$ and $\\omega$ that of $HPQ$, with centre $T$.\n\n**$HPQ\\sim ABC$.** The line $QH$ is the altitude from $C$, perpendicular to $AB$, and $Q$ lies on line $AO$. Hence\n$$\\angle PQH=90^\\circ-\\angle QAB=90^\\circ-\\angle OAB=\\tfrac12\\angle AOB=\\angle ACB,$$\nusing $\\angle OAB=90^\\circ-\\angle C$ in the isosceles triangle $OAB$. Similarly $\\angle QPH=\\angle ABC$. So the triangles $HPQ$ and $ABC$ are similar, with $H\\leftrightarrow A$, $P\\leftrightarrow B$, $Q\\leftrightarrow C$.\n\n**$AH$ is tangent to $\\omega$.** Since $HP$ is the altitude from $B$ (perpendicular to $AC$) and $AH\\perp BC$,\n$$\\angle AHP=90^\\circ-\\angle HAC=\\angle ACB=\\angle HQP .$$\nBy the converse of the tangent–chord angle theorem, $AH$ is tangent to $\\omega$ at $H$. Note that $A$ lies on line $PQ$ (it is the line $OA$).\n\n**Transport through the similarity.** In triangle $HPQ$, the point $A$ is where the tangent to $\\omega$ at the vertex $H$ meets the opposite side line $PQ$. The corresponding point in triangle $ABC$ is the point $S$ where the tangent to $\\Omega$ at $A$ meets line $BC$ (it exists since $AB\\ne AC$), and the circumcentre $T$ corresponds to $O$. Similar figures have equal corresponding angles, so the angle between lines $AT$ and $AP$ (i.e. line $AO$) at $A$ equals the angle between lines $SO$ and $SB$ (i.e. line $BC$) at $S$.\n\nLet $M=AT\\cap BC$. The equality just found reads $\\angle OAM=\\angle OSM$, so $S,A,O,M$ are concyclic. As $SA$ is tangent to $\\Omega$, $\\angle OAS=90^\\circ$, hence $\\angle OMS=180^\\circ-\\angle OAS=90^\\circ$. So $M$ is the foot of the perpendicular from $O$ to $BC$, which is the midpoint of $BC$.\n\nTherefore $T$ lies on the median $AM$ of triangle $ABC$. ∎"
+   }
+  ],
+  "topics": [
+   "geometry"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "imo-isl-2017-g4",
+  "bank": "imo",
+  "source": {
+   "contest": "IMO Shortlist",
+   "paper": "Geometry",
+   "year": 2017,
+   "number": 4,
+   "url": "https://www.imo-official.org/assets/documents/problems/2017/IMO2017SL.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "In triangle $ABC$, let $\\omega$ be the excircle opposite $A$. Let $D$, $E$, and $F$ be the points where $\\omega$ is tangent to lines $BC$, $CA$, and $AB$, respectively. The circle $AEF$ intersects line $BC$ at $P$ and $Q$. Let $M$ be the midpoint of $AD$. Prove that the circle $MPQ$ is tangent to $\\omega$.",
+  "image": null,
+  "choices": null,
+  "answer": "Proof: let $AD$ meet $\\omega$ again at $T$ and let $N$ be the midpoint of $DT$, which lies on circle $AEF$ (the circle on diameter $AA'$, $A'$ the excentre). Then $DP\\cdot DQ=DA\\cdot DN=DM\\cdot DT$, so $T$ is on circle $MPQ$; the tangent to $\\omega$ at $T$ meets $BC$ at $R$ with $RT^2=RD^2=RN\\cdot RA'=RP\\cdot RQ$, so it is also tangent to circle $MPQ$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Common tangent at the second intersection $T$",
+    "body": "Let $A'$ be the centre of $\\omega$, $\\Omega$ the circle $AEF$ (through $P,Q$) and $\\gamma$ the circle $MPQ$. Let line $AD$ meet $\\omega$ again at $T\\ne D$; we show that $\\gamma$ is tangent to $\\omega$ at $T$.\n\n**$P,Q,M,T$ are concyclic.** Since $A'E\\perp AE$ and $A'F\\perp AF$, the segment $AA'$ is a diameter of $\\Omega$. Let $N$ be the midpoint of $DT$; as $A'D=A'T$, $A'N\\perp AD$, i.e. $\\angle A'NA=90^\\circ$, so $N\\in\\Omega$. The points $A,M,T,N$ all lie on the same ray from $D$. The power of $D$ with respect to $\\Omega$ gives\n$$DP\\cdot DQ=DA\\cdot DN=(2DM)\\cdot\\frac{DT}2=DM\\cdot DT,$$\nso by the converse of the power of a point, $P,Q,M,T$ are concyclic: $T\\in\\gamma$.\n\n**A common tangent at $T$.** If $AB=AC$ the figure is symmetric about the line $AD$ and the claim is immediate. Otherwise $T$ is not the point of $\\omega$ diametrically opposite $D$, so the tangent to $\\omega$ at $T$ meets line $BC$ (the tangent at $D$) at a point $R$. The tangent segments $RD$ and $RT$ are equal, so $A'R$ is the perpendicular bisector of $DT$ and passes through $N$, and $DN\\perp A'R$. In the right triangle $A'DR$ (right angle at $D$), $DN$ is the altitude, so\n$$RD^2=RN\\cdot RA'.$$\nSince $N,A'\\in\\Omega$ and $P,Q\\in\\Omega$ with $R$ on line $PQ$, the power of $R$ with respect to $\\Omega$ gives $RN\\cdot RA'=RP\\cdot RQ$. Hence\n$$RT^2=RD^2=RP\\cdot RQ,$$\nwhich means that $RT$ is tangent to the circle through $P,Q,T$, i.e. to $\\gamma$, at $T$.\n\nSo $RT$ is tangent to both $\\omega$ and $\\gamma$ at their common point $T$, and the two circles are tangent at $T$. ∎"
+   },
+   {
+    "title": "Homothety at $T$",
+    "body": "After showing $T\\in\\gamma$ as above, let $O$ be the midpoint of $AA'$, the centre of $\\Omega$. In triangle $ADA'$, $MO$ is a midline, so $MO\\parallel A'D\\perp BC$. Thus $MO$ is perpendicular to the chord $PQ$ of $\\Omega$ and is its perpendicular bisector; hence $M$ is the midpoint of an arc $PQ$ of $\\gamma$, and the tangent $m$ to $\\gamma$ at $M$ is parallel to $PQ$.\n\nThe homothety with centre $T$ taking $D$ to $M$ (the points $T,D,M$ are collinear) maps line $BC$ to the parallel line $m$ through $M$. It maps $\\omega$ (the circle through $T$ tangent to $BC$ at $D$) to the circle through $T$ tangent to $m$ at $M$, which is $\\gamma$. A homothety centred at a common point of two circles mapping one to the other means they are tangent there. ∎"
+   }
+  ],
+  "topics": [
+   "geometry"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "imo-isl-2017-g5",
+  "bank": "imo",
+  "source": {
+   "contest": "IMO Shortlist",
+   "paper": "Geometry",
+   "year": 2017,
+   "number": 5,
+   "url": "https://www.imo-official.org/assets/documents/problems/2017/IMO2017SL.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Let $ABCC_1B_1A_1$ be a convex hexagon such that $AB=BC$, and suppose that the line segments $AA_1$, $BB_1$, and $CC_1$ have the same perpendicular bisector. Let the diagonals $AC_1$ and $A_1C$ meet at $D$, and denote by $\\omega$ the circle $ABC$. Let $\\omega$ intersect the circle $A_1BC_1$ again at $E\\ne B$. Prove that the lines $BB_1$ and $DE$ intersect on $\\omega$.",
+  "image": null,
+  "choices": null,
+  "answer": "Proof: the radical centre $R$ of $\\omega$, circle $A_1BC_1$ and circle $ACC_1A_1$ lies on the common perpendicular bisector $m$, which is the external bisector of $\\angle ADC$; with $F$ the second point of $m$ on circle $ACD$ one gets $B,E,D,F$ concyclic and $B,F,M$ collinear ($M$ antipode of $B$), and then the second intersection $X$ of $DE$ with $\\omega$ satisfies $XM\\parallel DF$, so $BX\\perp m$, i.e. $X\\in BB_1$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Radical centre and the external bisector",
+    "body": "Let $m$ be the common perpendicular bisector; reflection in $m$ swaps $A\\leftrightarrow A_1$, $B\\leftrightarrow B_1$, $C\\leftrightarrow C_1$. By convexity $A,B,C$ lie on one side of $m$. In particular $ACC_1A_1$ is an isosceles trapezoid, hence cyclic; call its circle $\\sigma$. If $AA_1=CC_1$ the whole figure is symmetric about line $BB_1$ and the circles $ABC$, $A_1BC_1$ are tangent at $B$, so there is no point $E$; hence $AA_1\\ne CC_1$, and the lines $AC$, $A_1C_1$ are not parallel.\n\n**The radical centre.** The radical axes of the pairs $(\\omega,\\sigma)$, $(\\text{circle }A_1BC_1,\\sigma)$, $(\\omega,\\text{circle }A_1BC_1)$ are $AC$, $A_1C_1$, $BE$; they meet at a point $R$. Since $A_1C_1$ is the reflection of $AC$ in $m$, $R=AC\\cap A_1C_1$ lies on $m$. Also $D=AC_1\\cap A_1C$ lies on $m$ (the two lines are mirror images). The reflection in $m$ swaps the lines $DA=AC_1$ and $DC=A_1C$, so $m$ bisects the angle between them; as $A$ and $C$ are on the same side of $m$, **$m=DR$ is the external bisector of $\\angle ADC$.**\n\n**The point $F$.** Let $F$ be the second intersection of line $DR$ with the circle $ACD$. Powers of $R$ give $RB\\cdot RE=RA\\cdot RC=RD\\cdot RF$, so $B,E,D,F$ are concyclic. As $F$ lies on the external bisector of $\\angle ADC$, it is the midpoint of the arc $ADC$, so $FA=FC$. Since $BA=BC$, the point $B$ and the antipode $M$ of $B$ on $\\omega$ also lie on the perpendicular bisector of $AC$; thus $B,F,M$ are collinear.\n\n**Conclusion.** Let $X$ be the second intersection of line $DE$ with $\\omega$. Using directed angles between lines (mod $180^\\circ$),\n$$\\measuredangle(XE,XM)=\\measuredangle(BE,BM)=\\measuredangle(BE,BF)=\\measuredangle(DE,DF),$$\nby the circle $\\omega$, the collinearity of $B,F,M$, and the circle $BEDF$. Since line $XE$ is line $DE$, this says $XM\\parallel DF=m$. As $BM$ is a diameter, $BX\\perp XM$, so $BX\\perp m$. But $BB_1\\perp m$ too, and both lines pass through $B$; hence $X$ lies on $BB_1$. So $BB_1$ and $DE$ meet at $X\\in\\omega$. ∎"
+   }
+  ],
+  "topics": [
+   "geometry"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "imo-isl-2017-g6",
+  "bank": "imo",
+  "source": {
+   "contest": "IMO Shortlist",
+   "paper": "Geometry",
+   "year": 2017,
+   "number": 6,
+   "url": "https://www.imo-official.org/assets/documents/problems/2017/IMO2017SL.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Let $n\\ge3$ be an integer. Two regular $n$-gons $\\mathcal A$ and $\\mathcal B$ are given in the plane. Prove that the vertices of $\\mathcal A$ that lie inside $\\mathcal B$ or on its boundary are consecutive.\n\n(That is, prove that there exists a line separating those vertices of $\\mathcal A$ that lie inside $\\mathcal B$ or on its boundary from the other vertices of $\\mathcal A$.)",
+  "image": null,
+  "choices": null,
+  "answer": "Proof: number the sides of $\\mathcal B$ and the vertices of $\\mathcal A$ compatibly with the rotational symmetry. The set $M$ of vertices outside $\\mathcal B$ is the union of the sets $M_i$ of vertices beyond the $i$-th side line; each $M_i$ is consecutive, a nonempty $M_i$ contains $i$, and the set of $i$ with $i\\in M_i$ is consecutive, so $M$ is consecutive.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Half-planes and a cyclic-interval argument",
+    "body": "Polygons include their interior and boundary. Let $O_A,O_B$ be the centres, and $[n]=\\{1,\\dots,n\\}$ with indices taken cyclically. Call $I\\subseteq[n]$ *connected* if its elements are cyclically consecutive. Two facts: a union of two connected sets with a common element is connected, and for any half-plane, the indices of the vertices of a convex polygon lying in it (or outside it) form a connected set. Also $I$ is connected iff $[n]\\setminus I$ is.\n\n**Notation.** Number the side lines of $\\mathcal B$ clockwise $\\ell_1,\\dots,\\ell_n$; let $H_i$ be the closed half-plane of $\\ell_i$ containing $\\mathcal B$, $B_i$ the midpoint of the side on $\\ell_i$, and $\\vec b_i=\\overrightarrow{B_iO_B}$ (the inward normal). Choose a vertex $A_1$ of $\\mathcal A$ minimising $\\langle\\overrightarrow{O_AA_j},\\vec b_1\\rangle$ and number the vertices clockwise $A_1,\\dots,A_n$. The rotation by $2\\pi/n$ clockwise maps $\\vec b_i\\mapsto\\vec b_{i+1}$ and $\\overrightarrow{O_AA_j}\\mapsto\\overrightarrow{O_AA_{j+1}}$ and preserves inner products, so\n$$\\langle\\overrightarrow{O_AA_i},\\vec b_i\\rangle=\\min_j\\langle\\overrightarrow{O_AA_j},\\vec b_i\\rangle\\qquad\\text{for every }i.\\qquad(1)$$\n\nLet $M=\\{j:A_j\\notin\\mathcal B\\}$ and $M_i=\\{j:A_j\\notin H_i\\}$. Since $\\mathcal B=\\bigcap H_i$, $M=\\bigcup_iM_i$. We must show $M$ is connected (then its complement, the vertices in $\\mathcal B$, is consecutive, and consecutive vertices of a convex polygon can be cut off from the rest by a line).\n\n**Property 1.** Each $M_i$ is connected (vertices outside a half-plane).\n\n**Property 2.** If $M_i\\ne\\varnothing$ then $i\\in M_i$. Indeed\n$$j\\in M_i\\iff\\langle\\overrightarrow{B_iA_j},\\vec b_i\\rangle<0\\iff\\langle\\overrightarrow{O_AA_j},\\vec b_i\\rangle<\\langle\\overrightarrow{O_AB_i},\\vec b_i\\rangle,$$\nand the right side does not depend on $j$; by (1), if some $j$ satisfies it, so does $j=i$.\n\n**Property 3.** $M'=\\{i:i\\in M_i\\}$ is connected. Writing $\\overrightarrow{B_iA_i}=\\overrightarrow{B_iO_B}+\\overrightarrow{O_BO_A}+\\overrightarrow{O_AA_i}$,\n$$i\\in M'\\iff\\langle\\overrightarrow{O_BO_A},\\vec b_i\\rangle<-|\\vec b_i|^2-\\langle\\overrightarrow{O_AA_i},\\vec b_i\\rangle .$$\nBy the rotational symmetry the right side is a constant $\\mu$ independent of $i$. Since $\\vec b_i=O_B-B_i$, the condition says that the point $B_i$ lies in a fixed open half-plane (with boundary perpendicular to $O_BO_A$). The midpoints $B_1,\\dots,B_n$ are the vertices, in order, of a regular $n$-gon, so the set of such $i$ is connected.\n\n**Conclusion.** Since $M'\\subseteq M$ and every nonempty $M_i$ contains $i\\in M'$ (Property 2),\n$$M=M'\\cup\\bigcup_{M_i\\ne\\varnothing}M_i$$\nis a union of the connected set $M'$ with connected sets each meeting $M'$, hence connected. (If $M'=\\varnothing$, all $M_i$ are empty and $M=\\varnothing$.) ∎"
+   }
+  ],
+  "topics": [
+   "geometry"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "imo-isl-2017-g7",
+  "bank": "imo",
+  "source": {
+   "contest": "IMO Shortlist",
+   "paper": "Geometry",
+   "year": 2017,
+   "number": 7,
+   "url": "https://www.imo-official.org/assets/documents/problems/2017/IMO2017SL.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "A convex quadrilateral $ABCD$ has an inscribed circle with center $I$. Let $I_a$, $I_b$, $I_c$, and $I_d$ be the incenters of the triangles $DAB$, $ABC$, $BCD$, and $CDA$, respectively. Suppose that the common external tangents of the circles $AI_bI_d$ and $CI_bI_d$ meet at $X$, and the common external tangents of the circles $BI_aI_c$ and $DI_aI_c$ meet at $Y$. Prove that $\\angle XIY=90^\\circ$.",
+  "image": null,
+  "choices": null,
+  "answer": "Proof: $I_bI_d\\perp AC$ and the centres $O_a,O_c$ of circles $AI_bI_d$, $CI_bI_d$ lie on $AI$, $CI$, so $O_aO_c\\parallel AC$ and $IO_a:IO_c=r_a:r_c$; hence $IX$ is the external bisector of $\\angle AIC$. Likewise $IY$ is the external bisector of $\\angle BID$, and since $\\angle AIB+\\angle CID=180^\\circ$ these two lines are perpendicular.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Centres on the angle bisectors, then the external bisector theorem",
+    "body": "Let $\\omega_a,\\omega_c$ be the circles $AI_bI_d$, $CI_bI_d$ with centres $O_a,O_c$ and radii $r_a,r_c$; similarly $\\omega_b,\\omega_d$ (circles $BI_aI_c$, $DI_aI_c$) with $O_b,O_d$, $r_b,r_d$.\n\n**Claim 1.** $I_bI_d\\perp AC$ and $I_aI_c\\perp BD$.\n\n*Proof.* Let the incircles of $ABC$ and $ACD$ touch $AC$ at $T$ and $T'$. Then $AT=\\frac{AB+AC-BC}2$ and $AT'=\\frac{AD+AC-CD}2$. As $ABCD$ is tangential, $AB+CD=BC+AD$, i.e. $AB-BC=AD-CD$, so $AT=AT'$ and $T=T'$. Hence $I_b,I_d$ both lie on the perpendicular to $AC$ at $T$. The second statement is analogous. $\\square$\n\n**Claim 2.** $O_a\\in AI$, and similarly $O_b\\in BI$, $O_c\\in CI$, $O_d\\in DI$.\n\n*Proof.* The incircles of $ABC$ and $ACD$ are images of the incircle of $ABCD$ under homotheties at $B$ and $D$ with ratio $<1$, so $I_b\\in BI$, $I_d\\in DI$, and $T$ lies inside segment $I_bI_d$. In triangle $AI_bI_d$, $AT$ is the altitude from $A$ (Claim 1). The altitude and the circumradius from a vertex are symmetric with respect to the angle bisector there, so $\\angle I_bAT=\\angle O_aAI_d$. Since $AI_b$ bisects $\\angle BAC$ and $AI_d$ bisects $\\angle CAD$,\n$$\\angle O_aAD=\\angle O_aAI_d+\\angle I_dAD=\\angle I_bAT+\\angle I_dAD=\\tfrac12\\angle BAC+\\tfrac12\\angle CAD=\\tfrac12\\angle BAD,$$\nso $O_a$ lies on the bisector $AI$ of $\\angle BAD$. $\\square$\n\n**$X$ lies on the external bisector of $\\angle AIC$.** The centres $O_a,O_c$ lie on the perpendicular bisector of the common chord $I_bI_d$, which is parallel to $AC$ by Claim 1. So $O_aO_c\\parallel AC$, with $O_a\\in IA$, $O_c\\in IC$: the homothety centred at $I$ with some ratio $k$ maps $A\\mapsto O_a$, $C\\mapsto O_c$. Then\n$$\\frac{IO_a}{IO_c}=\\frac{IA}{IC}=\\frac{|1-k|\\,IA}{|1-k|\\,IC}=\\frac{O_aA}{O_cC}=\\frac{r_a}{r_c}.$$\nThe external similitude centre $X$ of $\\omega_a,\\omega_c$ is the point of line $O_aO_c$ dividing $O_aO_c$ externally in the ratio $r_a:r_c=IO_a:IO_c$. By the external angle bisector theorem, $X$ lies on the external bisector of $\\angle O_aIO_c$, whose bisector lines are those of $\\angle AIC$. So **$IX$ is the external bisector of $\\angle AIC$**, and in the same way **$IY$ is the external bisector of $\\angle BID$.**\n\n**The two bisectors are perpendicular.** Since $I$ is the incentre, $\\angle AIB=180^\\circ-\\frac{\\angle A+\\angle B}2$ and $\\angle CID=180^\\circ-\\frac{\\angle C+\\angle D}2$, so $\\angle AIB+\\angle CID=180^\\circ$. Let the rays $IA,IB,IC,ID$ have directions $\\alpha,\\beta,\\gamma,\\delta$ (in this cyclic order). The bisector lines of $\\angle AIC$ and $\\angle BID$ have directions $\\frac{\\alpha+\\gamma}2$ and $\\frac{\\beta+\\delta}2$ (mod $180^\\circ$), which differ by\n$$\\frac{(\\beta-\\alpha)+(\\delta-\\gamma)}2=\\frac{\\angle AIB+\\angle CID}2=90^\\circ .$$\nSo the internal bisector of $\\angle AIC$ is the external bisector of $\\angle BID$, and the external bisector of $\\angle AIC$ (the line $IX$) is the internal bisector of $\\angle BID$, which is perpendicular to its external bisector $IY$. Hence $\\angle XIY=90^\\circ$. ∎"
+   }
+  ],
+  "topics": [
+   "geometry"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "imo-isl-2017-g8",
+  "bank": "imo",
+  "source": {
+   "contest": "IMO Shortlist",
+   "paper": "Geometry",
+   "year": 2017,
+   "number": 8,
+   "url": "https://www.imo-official.org/assets/documents/problems/2017/IMO2017SL.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "There are $2017$ mutually external circles drawn on a blackboard, such that no two are tangent and no three share a common tangent. A *tangent segment* is a line segment that is a common tangent to two circles, starting at one tangent point and ending at the other one. Luciano is drawing tangent segments on the blackboard, one at a time, so that no tangent segment intersects any other circles or previously drawn tangent segments. Luciano keeps drawing tangent segments until no more can be drawn. Find all possible numbers of tangent segments when he stops drawing.",
+  "image": null,
+  "choices": null,
+  "answer": "6048",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Deform the picture continuously",
+    "body": "For $n$ circles we show that Luciano always ends with exactly $3(n-1)$ segments; for $n=2017$ this is $6048$.\n\n**A model configuration.** Put the circles $C_1,\\dots,C_n$ with centres on a line, each one hidden from the others by its neighbours (for example $C_i$ with centre $(i^2,0)$ and radius $i/2$). Then the only tangent segments not crossing a third circle join neighbours $C_i,C_{i+1}$; of their four common tangents, the two internal ones cross each other, so a maximal drawing has exactly $3$ segments per neighbouring pair: $3(n-1)$ in total.\n\n**Labelling segments.** A tangent segment touching a circle leaves it either clockwise or counterclockwise; two segments touching the same circle with the same orientation never cross. So each pair of circles $\\{A,B\\}$ has four possible tangent segments, labelled by the two orientations.\n\n**Deformation.** Start from any final (maximal) configuration. We move and resize the circles continuously, one at a time, keeping them at distance at least some fixed $\\varepsilon>0$ apart, keeping the drawn segments according to their labels, and avoiding four circles with a common tangent. We show the number of segments in a maximal configuration never changes; since any configuration can be deformed into the model one, the number is always $3(n-1)$.\n\nThe set of drawn segments can only stop being valid/maximal at a *transition*: a drawn segment $t$ becomes obstructed, or an undrawn one becomes free (the reverse event).\n\n*Claim: at a transition three circles have a common tangent line $\\ell$ containing $t$, and the three tangent segments on $\\ell$ are not obstructed by anything else.* If $t$ becomes obstructed by a circle, that circle becomes tangent to the line of $t$. If $t$ becomes obstructed by another segment $t'$, the first contact must be at an endpoint of one of them; an endpoint of $t'$ touching the interior of $t$ means its circle already touches $t$ (previous case); otherwise $t,t'$ share an endpoint on one circle, with opposite orientations there, so they lie on the same line, which is then tangent to three circles. Anything else obstructing these segments would have mattered earlier.\n\n*At such a moment exactly two of the three segments on $\\ell$ can be drawn.* Order the circles $C_1,C_2,C_3$ by their points of tangency on $\\ell$ and call the segments $t_{12},t_{23},t_{13}$. Perturb the picture slightly so that the common tangent disappears, keeping the labels. Nothing else interferes with these segments. If $t_{13}$ now passes through $C_2$, it is unavailable while $t_{12},t_{23}$ are both available (they touch $C_2$ with different orientations but do not cross). If $t_{13}$ misses $C_2$, it is available, but then $t_{12}$ and $t_{23}$ cross each other, so only one of them can be drawn. In each case a maximal configuration contains exactly two of the three segments, both just before and just after the transition, and the rest of the picture is unaffected.\n\nHence the number of segments in a maximal configuration is invariant, equal to $3(n-1)$.\n\n**Answer: $3\\cdot2017-3=6048$** (the only possible number)."
+   },
+   {
+    "title": "Euler's formula (outline)",
+    "body": "View the final picture as a plane graph: circles are vertices, drawn segments are edges. Segments on the boundary of the convex hull of all circles are always drawn, and maximality implies that the graph is connected and that every bounded region is bounded by a single closed curve made of arcs and segments. Walking once around such a region counterclockwise, one turns clockwise along arcs and not at all along segments, so the total counterclockwise turning of $2\\pi$ must come from *sharp corners* (where a segment meets an arc non-smoothly), each worth $\\pi$; this forces at least $3$ sharp corners, and a \"laser pointer\" argument using maximality (no missed segment) and the \"no three circles with a common tangent\" condition shows that every bounded region has exactly $3$. Each segment produces $2$ sharp corners, so with $s$ segments and $r$ bounded regions, $2s=3r$. Euler's formula for the connected graph gives $n-s+(r+1)=2$. Solving, $s=3n-3=6048$."
+   }
+  ],
+  "topics": [
+   "geometry",
+   "graph-theory"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "imo-isl-2017-n1",
+  "bank": "imo",
+  "source": {
+   "contest": "IMO Shortlist",
+   "paper": "Number Theory",
+   "year": 2017,
+   "number": 1,
+   "url": "https://www.imo-official.org/assets/documents/problems/2017/IMO2017SL.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "The sequence $a_0,a_1,a_2,\\dots$ of positive integers satisfies\n$$a_{n+1}=\\begin{cases}\\sqrt{a_n}, & \\text{if }\\sqrt{a_n}\\text{ is an integer}\\\\ a_n+3, & \\text{otherwise}\\end{cases}\\qquad\\text{for every } n\\ge0.$$\nDetermine all values of $a_0>1$ for which there is at least one number $a$ such that $a_n=a$ for infinitely many values of $n$.",
+  "image": null,
+  "choices": null,
+  "answer": "Exactly the multiples of $3$: $a_0\\equiv 0\\pmod 3$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [],
+  "topics": [
+   "number-theory",
+   "sequences-series"
+  ],
+  "difficulty": 1,
+  "duplicateOf": "imo-2017-01",
+  "reviewNote": null
+ },
+ {
+  "id": "imo-isl-2017-n2",
+  "bank": "imo",
+  "source": {
+   "contest": "IMO Shortlist",
+   "paper": "Number Theory",
+   "year": 2017,
+   "number": 2,
+   "url": "https://www.imo-official.org/assets/documents/problems/2017/IMO2017SL.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Let $p\\ge2$ be a prime number. Eduardo and Fernando play the following game making moves alternately: in each move, the current player chooses an index $i$ in the set $\\{0,1,\\dots,p-1\\}$ that was not chosen before by either of the two players and then chooses an element $a_i$ of the set $\\{0,1,2,3,4,5,6,7,8,9\\}$. Eduardo has the first move. The game ends after all the indices $i\\in\\{0,1,\\dots,p-1\\}$ have been chosen. Then the following number is computed:\n$$M=a_0+10\\cdot a_1+\\dots+10^{p-1}\\cdot a_{p-1}=\\sum_{j=0}^{p-1}a_j\\cdot10^j.$$\nThe goal of Eduardo is to make the number $M$ divisible by $p$, and the goal of Fernando is to prevent this.\n\nProve that Eduardo has a winning strategy.",
+  "image": null,
+  "choices": null,
+  "answer": "Proof: for $p=2,5$ play $a_0=0$. Otherwise play $a_{p-1}=0$ and pair index $i$ with $i\\pm\\frac{p-1}2$; since $10^{(p-1)/2}\\equiv\\pm1\\pmod p$, answer each move $(i,a)$ with $(i\\pm\\frac{p-1}2,\\,a)$ in the case $-1$ (pairs cancel) or with digit $9-a$ in the case $+1$ (total $\\equiv10^{(p-1)/2}-1\\equiv0$).",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Pairing strategy",
+    "body": "A move $(i,a_i)$ means choosing index $i$ and digit $a_i$.\n\n**$p=2$ or $p=5$.** Eduardo starts with $(0,0)$. Then $M=10\\,(a_1+10a_2+\\dots)$ is a multiple of $10$, hence of $p$, whatever happens later.\n\n**Other primes.** Now $p$ is odd and $p\\nmid10$. Eduardo starts with $(p-1,0)$. The remaining indices $0,1,\\dots,p-2$ split into the $\\frac{p-1}2$ pairs\n$$\\{r,\\;r+h\\},\\qquad 0\\le r\\le h-1,\\qquad\\text{where } h=\\tfrac{p-1}2 .$$\nBy Fermat's little theorem $(10^{h})^2=10^{p-1}\\equiv1\\pmod p$, so $p\\mid(10^h-1)(10^h+1)$ and $10^h\\equiv\\pm1\\pmod p$.\n\nStrategy: whenever Fernando chooses an index, Eduardo immediately chooses the other index of the same pair. This is always possible: before each Fernando move, every pair is either completely unused or completely used, so after Fernando's move the partner index is free. (After Eduardo's first move, Fernando and Eduardo alternate on the $p-1$ remaining indices, an even number, so Eduardo always gets to answer.) The digit is chosen as follows.\n\n*Case $10^h\\equiv-1\\pmod p$.* Answer $(i,a)$ with the partner index and the **same** digit $a$. A pair then contributes $a\\cdot10^r+a\\cdot10^{r+h}\\equiv a\\cdot10^r(1-1)=0\\pmod p$. So $M\\equiv0\\pmod p$.\n\n*Case $10^h\\equiv1\\pmod p$.* Answer with the partner index and digit $9-a$. A pair then contributes $a\\cdot10^r+(9-a)\\cdot10^{r+h}\\equiv9\\cdot10^r\\pmod p$ (whichever of the two indices got $a$). Hence\n$$M\\equiv\\sum_{r=0}^{h-1}9\\cdot10^r=10^h-1\\equiv0\\pmod p.$$\n\nIn all cases Eduardo wins. ∎"
+   }
+  ],
+  "topics": [
+   "games",
+   "number-theory"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "imo-isl-2017-n3",
+  "bank": "imo",
+  "source": {
+   "contest": "IMO Shortlist",
+   "paper": "Number Theory",
+   "year": 2017,
+   "number": 3,
+   "url": "https://www.imo-official.org/assets/documents/problems/2017/IMO2017SL.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Determine all integers $n\\ge2$ with the following property: for any integers $a_1,a_2,\\dots,a_n$ whose sum is not divisible by $n$, there exists an index $1\\le i\\le n$ such that none of the numbers\n$$a_i,\\ a_i+a_{i+1},\\ \\dots,\\ a_i+a_{i+1}+\\dots+a_{i+n-1}$$\nis divisible by $n$. (We let $a_i=a_{i-n}$ when $i>n$.)",
+  "image": null,
+  "choices": null,
+  "answer": "Exactly the prime numbers $n$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Counterexample for composites, pigeonhole for primes",
+    "body": "**Composite $n$ fail.** Let $n=ab$ with $a,b\\ge2$, and take $a_1=\\dots=a_{n-1}=a$, $a_n=0$. The sum $a(n-1)\\equiv-a\\not\\equiv0\\pmod n$. For any start $i$:\n- if $i\\le n-b$, the $b$ terms $a_i,\\dots,a_{i+b-1}$ all equal $a$, with sum $ab=n$;\n- if $i>n-b$, the $b+1\\le n$ terms $a_i,\\dots,a_{i+b}$ (indices cyclic) contain $a_n=0$ exactly once and $b$ copies of $a$, with sum $n$.\n\nSo every start has a partial sum divisible by $n$, and the property fails.\n\n**Primes work.** Let $n$ be prime and suppose the property fails for some $a_1,\\dots,a_n$ with $n\\nmid a_1+\\dots+a_n$: for every start $i$ there is a length $j\\in[1,n]$ with $n\\mid a_i+\\dots+a_{i+j-1}$. The length $j=n$ is impossible (that sum is the total), so $1\\le j\\le n-1$.\n\nBuild indices $i_0=0<i_1<\\dots<i_n$: given $i_s$, apply the assumption to the start $i_s+1$ and let $i_{s+1}=i_s+j$, so that\n$$a_{i_s+1}+a_{i_s+2}+\\dots+a_{i_{s+1}}\\equiv0\\pmod n,\\qquad 1\\le i_{s+1}-i_s\\le n-1$$\n(indices of $a$ taken mod $n$). Among the $n+1$ numbers $i_0,\\dots,i_n$ two are congruent mod $n$: $i_r\\equiv i_s$ with $r<s$. Adding the blocks between them,\n$$a_{i_r+1}+\\dots+a_{i_s}\\equiv0\\pmod n .$$\nBut $i_s-i_r=kn$ with $k\\ge1$, and $i_s-i_r\\le n(n-1)$ gives $k\\le n-1$. A run of $kn$ consecutive terms of the $n$-periodic sequence sums to $k(a_1+\\dots+a_n)$, which is not divisible by the prime $n$ since neither factor is. Contradiction.\n\n**Answer: exactly the primes.**"
+   }
+  ],
+  "topics": [
+   "number-theory",
+   "sequences-series"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "imo-isl-2017-n4",
+  "bank": "imo",
+  "source": {
+   "contest": "IMO Shortlist",
+   "paper": "Number Theory",
+   "year": 2017,
+   "number": 4,
+   "url": "https://www.imo-official.org/assets/documents/problems/2017/IMO2017SL.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Call a rational number *short* if it has finitely many digits in its decimal expansion. For a positive integer $m$, we say that a positive integer $t$ is *$m$-tastic* if there exists a number $c\\in\\{1,2,3,\\dots,2017\\}$ such that $\\dfrac{10^t-1}{c\\cdot m}$ is short, and such that $\\dfrac{10^k-1}{c\\cdot m}$ is not short for any $1\\le k<t$. Let $S(m)$ be the set of $m$-tastic numbers. Consider $S(m)$ for $m=1,2,\\dots$. What is the maximum number of elements in $S(m)$?",
+  "image": null,
+  "choices": null,
+  "answer": "807",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Orders of $10$, and lifting the exponent",
+    "body": "**Short numbers.** A rational $x$ is short iff $2^\\alpha5^\\beta x\\in\\mathbb Z$ for some $\\alpha,\\beta\\ge0$ (if $x=N/10^k$ take $\\alpha=\\beta=k$; conversely $x=q/(2^\\alpha5^\\beta)=2^\\beta5^\\alpha q/10^{\\alpha+\\beta}$). Hence, writing $m=2^\\alpha5^\\beta m'$ and $c=2^\\gamma5^\\delta c'$ with $m',c'$ coprime to $10$,\n$$\\frac{10^t-1}{cm}\\text{ is short}\\iff c'm'\\mid10^t-1 .$$\nSo the $m$-tastic numbers are the orders $\\operatorname{ord}_{c'm'}(10)$, and with $C=\\{1\\le c\\le2017:\\gcd(c,10)=1\\}$ (the possible values of $c'$),\n$$S(m)=\\{\\operatorname{ord}_{cm'}(10):c\\in C\\}.$$\n\n**Upper bound.** The numbers in $[1,2017]$ ending in $1,3,7,9$ number $4\\cdot201+3=807$, so $|S(m)|\\le|C|=807$.\n\n**Construction.** Let $P$ be the set of primes $p\\le2017$ other than $2,5$, let $\\alpha=\\prod_{p\\in P}(p-1)$, so that $p\\mid10^\\alpha-1$ for all $p\\in P$ (Fermat), and let $m=10^\\alpha-1$ (coprime to $10$). We claim $\\operatorname{ord}_{cm}(10)=c\\alpha$ for every $c\\in C$; then these $807$ values are distinct and $|S(m)|=807$.\n\nClearly $\\operatorname{ord}_m(10)=\\alpha$ (for $0<t<\\alpha$, $0<10^t-1<m$). Let $t=\\operatorname{ord}_{cm}(10)$. From $m\\mid10^t-1$ we get $\\alpha\\mid t$; write $t=k\\alpha$.\n\nWe use the *lifting the exponent lemma*: for an odd prime $p$ and an integer $x$ with $p\\mid x-1$, $v_p(x^k-1)=v_p(x-1)+v_p(k)$. For $p\\in P$ it gives\n$$v_p\\big(10^{k\\alpha}-1\\big)=v_p(m)+v_p(k).$$\nEvery prime factor of $c\\in C$ lies in $P$. For primes $q\\notin P$, $v_q(cm)=v_q(m)\\le v_q(10^{k\\alpha}-1)$ automatically. Hence\n$$cm\\mid10^{k\\alpha}-1\\iff v_p(c)+v_p(m)\\le v_p(m)+v_p(k)\\ \\ \\forall p\\in P\\iff c\\mid k .$$\nThe least such $k$ is $c$, so $\\operatorname{ord}_{cm}(10)=c\\alpha$.\n\n**Answer: $807$.**"
+   }
+  ],
+  "topics": [
+   "number-theory"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "imo-isl-2017-n5",
+  "bank": "imo",
+  "source": {
+   "contest": "IMO Shortlist",
+   "paper": "Number Theory",
+   "year": 2017,
+   "number": 5,
+   "url": "https://www.imo-official.org/assets/documents/problems/2017/IMO2017SL.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "text",
+  "prompt": "Find all pairs $(p,q)$ of prime numbers with $p>q$ for which the number\n$$\\frac{(p+q)^{p+q}(p-q)^{p-q}-1}{(p+q)^{p-q}(p-q)^{p+q}-1}$$\nis an integer.",
+  "image": null,
+  "choices": null,
+  "answer": "(3, 2)",
+  "acceptedAnswers": [
+   "(3,2)",
+   "3, 2",
+   "3,2",
+   "p=3, q=2",
+   "p = 3, q = 2",
+   "(p,q)=(3,2)",
+   "(p, q) = (3, 2)"
+  ],
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Work modulo the denominator",
+    "body": "Let $M=(p+q)^{p-q}(p-q)^{p+q}-1$, the denominator; $M$ is coprime to $p+q$ and $p-q$. If $M$ divides the numerator, then modulo $M$\n$$(p+q)^{p+q}(p-q)^{p-q}\\equiv1\\equiv(p+q)^{p-q}(p-q)^{p+q}.$$\nMultiplying the first congruence by $(p-q)^{2q}$ and the second by $(p+q)^{2q}$ (both left sides become $(p+q)^{p+q}(p-q)^{p+q}$) gives\n$$(p+q)^{2q}\\equiv(p-q)^{2q}\\pmod M .\\qquad(1)$$\n\n**Case $q\\ge5$.** Then $p,q$ are odd, $p\\pm q$ even, and $M$ is odd. Let $r$ be a prime divisor of $M$ and $x\\equiv(p+q)(p-q)^{-1}\\pmod r$. By (1), $x^{2q}\\equiv1$, so the order of $x$ is $1,2,q$ or $2q$.\n- If $q$ divides the order, then $q\\mid r-1$ (Fermat).\n- If the order is $1$ or $2$, then $r\\mid(p+q)^2-(p-q)^2=4pq$, so $r\\in\\{p,q\\}$. But $r=p$ is impossible: modulo $p$,\n$$M\\equiv q^{p-q}(-q)^{p+q}-1=q^{2p}-1\\equiv q^2-1=(q-1)(q+1),$$\nand $0<q-1<q+1<p$.\n\nSo every prime factor of $M$ is $q$ or $\\equiv1\\pmod q$, hence **every divisor of $M$ is $\\equiv0$ or $1\\pmod q$.** Now\n$$M=(Z-1)(Z+1),\\qquad Z=(p+q)^{\\frac{p-q}2}(p-q)^{\\frac{p+q}2}\\in\\mathbb Z,$$\nand $Z-1,Z+1$ are divisors differing by $2$. Their residues mod $q$ would be among $(0,0),(0,1),(1,0),(1,1)$, with differences $0,1,-1,0$, none $\\equiv2\\pmod q$ for $q\\ge5$. No solutions.\n\n**Case $q=2$.** By (1), $M$ divides $(p+2)^4-(p-2)^4>0$, so\n$$(p+2)^{p-2}(p-2)^{p+2}-1=M\\le(p+2)^4-(p-2)^4\\le(p+2)^4-1,$$\ni.e. $(p+2)^{p-6}(p-2)^{p+2}\\le1$. For $p\\ge7$ the left side exceeds $1$; for $p=5$ it is $3^7/7>1$. For $p=3$:\n$$\\frac{5^5\\cdot1^1-1}{5^1\\cdot1^5-1}=\\frac{3124}4=781\\in\\mathbb Z .$$\n\n**Case $q=3$.** Here $p\\ge5$ is odd and $(p+3)^6-(p-3)^6=64\\Big[\\big(\\tfrac{p+3}2\\big)^6-\\big(\\tfrac{p-3}2\\big)^6\\Big]$. As $M$ is odd, (1) gives $M\\mid\\big(\\tfrac{p+3}2\\big)^6-\\big(\\tfrac{p-3}2\\big)^6$, so\n$$(p+3)^{p-3}(p-3)^{p+3}\\le\\Big(\\frac{p+3}2\\Big)^6,\\qquad\\text{i.e.}\\qquad64\\,(p+3)^{p-9}(p-3)^{p+3}\\le1 .$$\nFor $p\\ge11$ the left side is at least $64$; for $p=7$ it is $64\\cdot4^{10}/10^2>1$; for $p=5$ it is $64\\cdot2^8/8^4=4>1$. No solutions.\n\n**Answer: $(p,q)=(3,2)$.**"
+   }
+  ],
+  "topics": [
+   "number-theory"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "imo-isl-2017-n6",
+  "bank": "imo",
+  "source": {
+   "contest": "IMO Shortlist",
+   "paper": "Number Theory",
+   "year": 2017,
+   "number": 6,
+   "url": "https://www.imo-official.org/assets/documents/problems/2017/IMO2017SL.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Find the smallest positive integer $n$, or show that no such $n$ exists, with the following property: there are infinitely many distinct $n$-tuples of positive rational numbers $(a_1,a_2,\\dots,a_n)$ such that both\n$$a_1+a_2+\\dots+a_n\\qquad\\text{and}\\qquad\\frac1{a_1}+\\frac1{a_2}+\\dots+\\frac1{a_n}$$\nare integers.",
+  "image": null,
+  "choices": null,
+  "answer": "3",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Finitely many for $n\\le2$; Vieta jumping for $n=3$",
+    "body": "**$n=1$.** $a_1$ and $1/a_1$ positive integers force $a_1=1$.\n\n**$n=2$: finitely many.** Write $x=\\frac ab$, $y=\\frac cd$ in lowest terms with $a,b,c,d>0$. The conditions $x+y\\in\\mathbb Z$ and $\\frac1x+\\frac1y\\in\\mathbb Z$ read\n$$bd\\mid ad+bc\\qquad\\text{and}\\qquad ac\\mid ad+bc .$$\nFrom the first, $d\\mid bc$, so $d\\mid b$ (as $\\gcd(c,d)=1$), and $b\\mid ad$, so $b\\mid d$; thus $b=d$. Similarly the second gives $a=c$. So $x=y$, with $2x\\in\\mathbb Z_{>0}$ and $\\frac2x\\in\\mathbb Z_{>0}$. Putting $k=2x$, we need $\\frac4k\\in\\mathbb Z$, so $k\\in\\{1,2,4\\}$: only $(\\frac12,\\frac12),(1,1),(2,2)$.\n\n**$n=3$: infinitely many.** Look for triples with sum $1$:\n$$(x,y,z)=\\Big(\\frac1{1+b+c},\\frac b{1+b+c},\\frac c{1+b+c}\\Big),\\qquad b,c\\in\\mathbb Z_{>0}.$$\nThen $x+y+z=1$ and\n$$\\frac1x+\\frac1y+\\frac1z=(1+b+c)\\Big(1+\\frac1b+\\frac1c\\Big)=b+c+3+\\frac1b+\\frac1c+\\frac cb+\\frac bc .$$\nThis is an integer if $\\frac1b+\\frac1c+\\frac cb+\\frac bc=3$, i.e.\n$$b^2+c^2-3bc+b+c=0.\\qquad(\\ast)$$\n$(b,c)=(2,3)$ is a solution. Given a solution with $b\\le c$, view $(\\ast)$ as a quadratic in $b$: $b^2-(3c-1)b+(c^2+c)=0$. Its other root $b'=3c-1-b=\\frac{c^2+c}b$ is a positive integer with $b'\\ge\\frac{c^2+c}c>c$. By symmetry of $(\\ast)$, $(c,b')$ is again a solution, with larger entries. Iterating gives infinitely many solutions\n$$(2,3),(3,6),(6,14),(14,35),(35,90),\\dots,$$\nand distinct pairs $(b,c)$ give distinct triples (since $y/x=b$, $z/x=c$).\n\nSo the property holds for $n=3$ but not for $n=1,2$.\n\n**Answer: $n=3$.**"
+   }
+  ],
+  "topics": [
+   "number-theory",
+   "algebra"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "imo-isl-2017-n7",
+  "bank": "imo",
+  "source": {
+   "contest": "IMO Shortlist",
+   "paper": "Number Theory",
+   "year": 2017,
+   "number": 7,
+   "url": "https://www.imo-official.org/assets/documents/problems/2017/IMO2017SL.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Say that an ordered pair $(x,y)$ of integers is an *irreducible lattice point* if $x$ and $y$ are relatively prime. For any finite set $S$ of irreducible lattice points, show that there is a homogenous polynomial in two variables, $f(x,y)$, with integer coefficients, of degree at least $1$, such that $f(x,y)=1$ for each $(x,y)$ in the set $S$.\n\n**Note:** A homogenous polynomial of degree $n$ is any nonzero polynomial of the form\n$$f(x,y)=a_0x^n+a_1x^{n-1}y+a_2x^{n-2}y^2+\\dots+a_{n-1}xy^{n-1}+a_ny^n.$$",
+  "image": null,
+  "choices": null,
+  "answer": "Proof: induction on $|S|$ (Bézout for one point); for a new point $(x_n,y_n)$ take $f=g^K-C\\,g_n\\,(cx+dy)^L$ with $g_n=\\prod_{k<n}(y_kx-x_ky)$, $cx_n+dy_n=1$, and $K$ chosen (via Fermat/Euler) so that $g(x_n,y_n)^K\\equiv1\\pmod{g_n(x_n,y_n)}$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [],
+  "topics": [
+   "number-theory",
+   "polynomials"
+  ],
+  "difficulty": 3,
+  "duplicateOf": "imo-2017-06",
+  "reviewNote": null
+ },
+ {
+  "id": "imo-isl-2017-n8",
+  "bank": "imo",
+  "source": {
+   "contest": "IMO Shortlist",
+   "paper": "Number Theory",
+   "year": 2017,
+   "number": 8,
+   "url": "https://www.imo-official.org/assets/documents/problems/2017/IMO2017SL.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Let $p$ be an odd prime number and $\\mathbb Z_{>0}$ be the set of positive integers. Suppose that a function $f:\\mathbb Z_{>0}\\times\\mathbb Z_{>0}\\to\\{0,1\\}$ satisfies the following properties:\n\n- $f(1,1)=0$;\n- $f(a,b)+f(b,a)=1$ for any pair of relatively prime positive integers $(a,b)$ not both equal to $1$;\n- $f(a+b,b)=f(a,b)$ for any pair of relatively prime positive integers $(a,b)$.\n\nProve that\n$$\\sum_{n=1}^{p-1}f(n^2,p)\\ge\\sqrt{2p}-2.$$",
+  "image": null,
+  "choices": null,
+  "answer": "Proof: $f(a,b)=1$ exactly when the inverse of $a$ modulo $b$, taken in $(-b/2,b/2]$, is positive (induction on $a+b$). So the sum counts $n$ with $n^{-2}\\bmod p<p/2$, which is twice the number of quadratic residues below $p/2$; these include the squares $k^2<p/2$, more than $\\sqrt{p/2}-1$ of them.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Identify $f$ through Bézout coefficients",
+    "body": "For coprime positive $a,b$, the integer solutions of $ua+vb=1$ are $(u_0+kb,\\,v_0-ka)$, so there is a unique solution with $-\\frac b2<u\\le\\frac b2$; call it $g(a,b)=(u,v)$.\n\n**Lemma.** For coprime $a,b$ with $g(a,b)=(u,v)$: $f(a,b)=1\\iff u>0$.\n\n*Proof.* Induction on $a+b$. If $a+b=2$, then $a=b=1$, $g(1,1)=(0,1)$ and $f(1,1)=0$: correct. Let $a+b>2$; then $a\\ne b$.\n\n*Case $a>b$.* Since $u(a-b)+(u+v)b=1$ and $u\\in(-\\frac b2,\\frac b2]$, $g(a-b,b)=(u,u+v)$. By the third property and induction, $f(a,b)=f(a-b,b)=1\\iff u>0$.\n\n*Case $a<b$* (so $b\\ge2$). From $vb=1-ua$ and $-\\frac b2<u\\le\\frac b2$:\n$$1-\\frac{ab}2\\le vb<1+\\frac{ab}2\\ \\Longrightarrow\\ -\\frac a2<\\frac1b-\\frac a2\\le v<\\frac1b+\\frac a2\\le\\frac{1+a}2 .$$\nAs $v$ is an integer, $2v<1+a$ gives $2v\\le a$; so $-\\frac a2<v\\le\\frac a2$ and $g(b,a)=(v,u)$. Now $f(a,b)=1-f(b,a)=1-f(b-a,a)$ (second and third properties). By the previous case applied to $(b,a)$, $g(b-a,a)=(v,u+v)$, and by induction $f(b-a,a)=1\\iff v>0$. Hence $f(a,b)=1\\iff v\\le0$. Finally $v\\le0\\iff u>0$: if $v\\le0$ then $ua=1-vb\\ge1$; if $v\\ge1$ then $ua=1-vb\\le1-b<0$. $\\square$\n\nSince $u\\equiv a^{-1}\\pmod b$, the lemma says: **$f(a,b)=1$ iff the inverse of $a$ modulo $b$, taken in $\\{1,\\dots,b-1\\}$, is at most $b/2$.**\n\n**The sum.** For $1\\le n\\le p-1$, $n^2$ is coprime to $p$ (and $(n^2,p)\\ne(1,1)$), so $f(n^2,p)=1$ iff $(n^2)^{-1}\\bmod p<\\frac p2$. As $n\\mapsto n^{-1}$ permutes the nonzero residues, the multisets $\\{n^{-2}\\bmod p\\}$ and $\\{n^2\\bmod p\\}$ ($1\\le n\\le p-1$) coincide. Each nonzero quadratic residue appears twice (from $n$ and $p-n$), so\n$$\\sum_{n=1}^{p-1}f(n^2,p)=2\\cdot\\#\\Big\\{\\text{quadratic residues } r \\text{ with } 1\\le r<\\tfrac p2\\Big\\}.$$\nThe perfect squares $k^2$ with $1\\le k^2<\\frac p2$ are distinct quadratic residues in this range; there are $\\lfloor\\sqrt{p/2}\\rfloor>\\sqrt{p/2}-1$ of them ($p/2$ is not an integer). Therefore\n$$\\sum_{n=1}^{p-1}f(n^2,p)>2\\Big(\\sqrt{\\tfrac p2}-1\\Big)=\\sqrt{2p}-2 .$$\n∎"
+   }
+  ],
+  "topics": [
+   "number-theory",
+   "functional-equations"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ }
+]

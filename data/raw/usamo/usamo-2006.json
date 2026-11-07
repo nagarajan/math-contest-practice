@@ -1,0 +1,205 @@
+[
+  {
+    "id": "usamo-usamo-2006-01",
+    "bank": "usamo",
+    "source": {
+      "contest": "USAMO",
+      "paper": "USAMO 2006",
+      "year": 2006,
+      "number": 1,
+      "url": "https://web.evanchen.cc/exams/USAMO-2006-notes.pdf"
+    },
+    "grade": "10-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $p$ be a prime number and let $s$ be an integer with $0 < s < p$. Prove that there exist integers $m$ and $n$ with $0 < m < n < p$ and\n$$\\left\\{\\frac{sm}{p}\\right\\} < \\left\\{\\frac{sn}{p}\\right\\} < \\frac{s}{p}$$\nif and only if $s$ is not a divisor of $p - 1$.\n\n(Here $\\{x\\}$ denotes the fractional part of $x$.)",
+    "image": null,
+    "choices": null,
+    "answer": "With $t \\equiv -s^{-1} \\pmod p$, the $x$ with $sx \\bmod p = v$ (for $v = s-j$) is $(1 + jt) \\bmod p$; $m, n$ fail to exist iff $1 + t, 1 + 2t, \\dots, 1 + (s-1)t$ never wrap around mod $p$, iff $1 + st = p$, iff $s \\mid p - 1$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Track which $x$ gives each small residue",
+        "body": "For an integer $x$ write $r(x)$ for the remainder of $sx$ mod $p$; then $\\{sx/p\\} = r(x)/p$, and the condition reads $r(m) < r(n) < s$.\n\nSince $\\gcd(s, p) = 1$, $r$ is a bijection from $\\{1, \\dots, p-1\\}$ to itself. For $v \\in \\{1, \\dots, s-1\\}$ let $g(v)$ be the unique $x \\in \\{1, \\dots, p-1\\}$ with $r(x) = v$. Suitable $m < n$ exist iff there are $v < w$ in $\\{1, \\dots, s-1\\}$ with $g(v) < g(w)$ (take $m = g(v)$, $n = g(w)$; conversely $v = r(m)$, $w = r(n)$). So:\n$$m, n \\text{ do not exist} \\iff g(1) > g(2) > \\dots > g(s-1).$$\n\nIf $s = 1$ the set $\\{1, \\dots, s-1\\}$ is empty, so $m, n$ do not exist, and indeed $1 \\mid p - 1$. Assume $s \\ge 2$ from now on (so $p \\ge 3$).\n\n**A formula for $g$.** Let $t \\in \\{1, \\dots, p-1\\}$ with $st \\equiv -1 \\pmod p$. Then $s(1 + jt) \\equiv s - j$, so for $j = 1, \\dots, s-1$,\n$$g(s - j) = G(j) := \\text{the remainder of } 1 + jt \\text{ mod } p \\ (\\text{in } \\{1, \\dots, p-1\\}).$$\nThus $m, n$ fail to exist iff $G(1) < G(2) < \\dots < G(s-1)$.\n\n**Claim.** $G(1) < G(2) < \\dots < G(s-1)$ iff $1 + st = p$.\n\n*Proof.* ($\\Leftarrow$) If $1 + st = p$ then $1 + jt < p$ for $j \\le s-1$, so $G(j) = 1 + jt$, which is increasing.\n\n($\\Rightarrow$) First, $t \\ne p - 1$ (otherwise $s \\equiv 1$, i.e. $s = 1$), so $1 + t \\le p - 1$ and $G(1) = 1 + t$. Next, $G(j+1) \\equiv G(j) + t$ with $0 < t < p$, so $G(j+1)$ equals either $G(j) + t$ or $G(j) + t - p < G(j)$. Since $G$ is increasing, always $G(j+1) = G(j) + t$, hence $G(j) = 1 + jt$ and in particular $1 + (s-1)t \\le p - 1$. Then $0 < 1 + st \\le p - 1 + t < 2p$, and $1 + st \\equiv 0 \\pmod p$, so $1 + st = p$. $\\square$\n\n**Finish.** If $1 + st = p$ then $s \\mid p - 1$. Conversely, if $s \\mid p - 1$, then $t' = \\frac{p-1}{s} \\in \\{1, \\dots, p-1\\}$ satisfies $st' \\equiv -1$, so $t = t'$ and $1 + st = p$.\n\nTherefore $m, n$ fail to exist exactly when $s \\mid p - 1$, which is the statement. ∎"
+      }
+    ],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamo-usamo-2006-02",
+    "bank": "usamo",
+    "source": {
+      "contest": "USAMO",
+      "paper": "USAMO 2006",
+      "year": 2006,
+      "number": 2,
+      "url": "https://web.evanchen.cc/exams/USAMO-2006-notes.pdf"
+    },
+    "grade": "10-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $k > 0$ be a fixed integer. Compute the minimum integer $N$ (in terms of $k$) for which there exists a set of $2k + 1$ distinct positive integers that has sum greater than $N$, but for which every subset of size $k$ has sum at most $N/2$.",
+    "image": null,
+    "choices": null,
+    "answer": "$N = k(2k^2 + 3k + 3)$, achieved by $\\{k^2+1, k^2+2, \\dots, k^2+2k+1\\}$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Bound the smallest element first",
+        "body": "**Answer:** $N = k(2k^2 + 3k + 3) = 2k^3 + 3k^2 + 3k$.\n\n**Construction.** Take $S = \\{k^2 + 1, k^2 + 2, \\dots, k^2 + 2k + 1\\}$. Its sum is $(2k+1)(k^2 + k + 1) = 2k^3 + 3k^2 + 3k + 1 > N$. The largest $k$-element subset is $\\{k^2 + k + 2, \\dots, k^2 + 2k + 1\\}$, with sum\n$$k\\cdot k^2 + \\big((k+2) + \\dots + (2k+1)\\big) = k^3 + \\frac{k(3k+3)}{2} = \\frac N2,$$\nso every $k$-subset has sum at most $N/2$.\n\n**Lower bound.** Let $a_0 < a_1 < \\dots < a_{2k}$ be a valid set. The hypotheses say\n$$a_0 + a_1 + \\dots + a_{2k} \\ge N + 1, \\qquad a_{k+1} + \\dots + a_{2k} \\le \\frac N2$$\n(the second because $a_{k+1}, \\dots, a_{2k}$ is the $k$-subset with the largest sum). Subtracting twice the second from the first,\n$$a_0 \\ge 1 + \\sum_{i=1}^{k} (a_{k+i} - a_i) \\ge 1 + k\\cdot k = k^2 + 1,$$\nbecause distinct integers satisfy $a_{k+i} - a_i \\ge k$. Also $a_{k+i} \\ge a_0 + k + i$. Hence\n$$\\frac N2 \\ge \\sum_{i=1}^{k} a_{k+i} \\ge k a_0 + \\sum_{i=1}^k (k + i) \\ge k(k^2 + 1) + k^2 + \\frac{k(k+1)}{2},$$\nso $N \\ge 2k^3 + 2k + 2k^2 + k^2 + k = 2k^3 + 3k^2 + 3k$.\n\nSo the minimum is $N = k(2k^2 + 3k + 3)$. ∎"
+      }
+    ],
+    "topics": [
+      "inequalities",
+      "algebra"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamo-usamo-2006-03",
+    "bank": "usamo",
+    "source": {
+      "contest": "USAMO",
+      "paper": "USAMO 2006",
+      "year": 2006,
+      "number": 3,
+      "url": "https://web.evanchen.cc/exams/USAMO-2006-notes.pdf"
+    },
+    "grade": "10-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "For integral $m$, let $p(m)$ be the greatest prime divisor of $m$. By convention, we set $p(\\pm 1) = 1$ and $p(0) = \\infty$. Find all polynomials $f$ with integer coefficients such that the sequence\n$$\\left\\{ p\\left(f\\left(n^2\\right)\\right) - 2n \\right\\}_{n \\ge 0}$$\nis bounded above. (In particular, this requires $f(n^2) \\ne 0$ for $n \\ge 0$.)",
+    "image": null,
+    "choices": null,
+    "answer": "Exactly $f(x) = c\\prod_{i=1}^{m}(4x - a_i^2)$ with $c$ a nonzero integer, $m \\ge 0$, and $a_i$ odd positive integers.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Reduce to irreducible factors; Schur plus a mod-$p$ reflection",
+        "body": "**Answer:** $f(x) = c\\,(4x - a_1^2)(4x - a_2^2)\\cdots(4x - a_m^2)$, where $c$ is a nonzero integer, $m \\ge 0$, and the $a_i$ are odd positive integers.\n\n**These work.** $f(n^2) = c\\prod (2n - a_i)(2n + a_i)$ is never $0$ (the $a_i$ are odd), and each prime factor is at most $\\max(|c|, 2n + \\max a_i)$, so $p(f(n^2)) - 2n$ is bounded above.\n\n**Reduction to irreducible factors.** Write $f = c\\,f_1 \\cdots f_m$ with $c$ a nonzero integer and $f_j$ primitive, irreducible, nonconstant in $\\mathbb Z[x]$ ($f = 0$ obviously fails). For any $n$ with $f(n^2) \\neq 0$, $p(f(n^2)) = \\max\\big(p(c), p(f_1(n^2)), \\dots\\big)$. Hence $f$ works iff every $f_j$ works. It remains to show: **an irreducible primitive nonconstant $f$ works only if $f = \\pm(4x - a^2)$ with $a$ odd** (for $a$ even, $f(n^2)$ vanishes at $n = a/2$).\n\n**Schur's theorem.** For nonconstant $g \\in \\mathbb Z[x]$, infinitely many primes divide some nonzero value $g(m)$, $m \\ge 1$.\n*Proof.* If $g(0) = 0$, every large prime $q$ divides $g(q) \\ne 0$. Otherwise let $a = g(0) \\ne 0$ and suppose only $q_1, \\dots, q_r$ occur; let $Q = q_1\\cdots q_r$. Then $g(aQx) = a\\,(1 + Qx\\,h(x))$ with $h \\in \\mathbb Z[x]$ nonzero, and for large $x$, $|1 + Qxh(x)| \\ge 2$ has a prime factor, which is coprime to $Q$ — contradiction. $\\square$\n\n**Main argument.** Let $f$ be irreducible, primitive, nonconstant, and not of the form $\\pm(4x - a^2)$. If $f(n^2) = 0$ for some $n \\ge 0$, $f$ fails; so assume not. Fix a positive integer $c$; we find $n \\ge 0$ and a prime $p$ with\n$$p \\mid f(n^2), \\qquad n \\le \\tfrac{p-1}{2} - c. \\qquad (1)$$\nThen $p(f(n^2)) - 2n \\ge p - (p - 1 - 2c) = 2c + 1$, and since $c$ is arbitrary the sequence is unbounded.\n\nLet $d = \\deg f$ and $F(y) = 4^d f(y/4) \\in \\mathbb Z[y]$. For $k = 0, 1, \\dots, c-1$, $F\\big((2k+1)^2\\big) \\ne 0$: otherwise $f$ has the root $\\frac{(2k+1)^2}{4}$, so the primitive polynomial $4x - (2k+1)^2$ divides $f$ (Gauss's lemma), and by irreducibility $f = \\pm(4x - (2k+1)^2)$, excluded. So\n$$\\Pi := \\prod_{k=0}^{c-1} F\\big((2k+1)^2\\big)$$\nis a nonzero integer with finitely many prime factors.\n\nBy Schur applied to $g(x) = f(x^2)$, there is an odd prime $p \\nmid \\Pi$ dividing some $f(m^2)$. Let $n \\in \\{0, 1, \\dots, \\frac{p-1}2\\}$ with $n \\equiv \\pm m \\pmod p$; then $p \\mid f(n^2)$. If $n \\le \\frac{p-1}{2} - c$, $(1)$ holds. Otherwise $n = \\frac{p-1}{2} - k$ with $0 \\le k \\le c - 1$, so $2n = p - 1 - 2k \\equiv -(2k+1)$ and $4n^2 \\equiv (2k+1)^2 \\pmod p$. Then\n$$F\\big((2k+1)^2\\big) \\equiv F(4n^2) = 4^d f(n^2) \\equiv 0 \\pmod p,$$\nso $p \\mid \\Pi$ — contradiction. Hence $(1)$ holds, and $f$ fails.\n\nCombining, the polynomials that work are exactly those listed. ∎"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "polynomials"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamo-usamo-2006-04",
+    "bank": "usamo",
+    "source": {
+      "contest": "USAMO",
+      "paper": "USAMO 2006",
+      "year": 2006,
+      "number": 4,
+      "url": "https://web.evanchen.cc/exams/USAMO-2006-notes.pdf"
+    },
+    "grade": "10-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Find all positive integers $n$ for which there exist an integer $k \\ge 2$ and positive rational numbers $a_1, \\dots, a_k$ satisfying $a_1 + a_2 + \\dots + a_k = a_1 a_2 \\cdots a_k = n$.",
+    "image": null,
+    "choices": null,
+    "answer": "All positive integers except $1, 2, 3, 5$ (i.e. $n = 4$ and all $n \\ge 6$).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "AM-GM for small $n$, explicit constructions otherwise",
+        "body": "**Answer:** $n = 4$ and every $n \\ge 6$.\n\n**$n \\le 5$ forces $n = 4$.** $n = 4$ works: $2 + 2 = 2\\cdot 2 = 4$.\n\n*If $k = 2$:* $a_1, a_2$ are the roots of $x^2 - nx + n$, so the discriminant $n^2 - 4n$ is the square of a rational number; being an integer, it is a perfect square $m^2$ ($m \\ge 0$). Then $(n-2)^2 - m^2 = 4$, i.e. $(n - 2 - m)(n - 2 + m) = 4$ with both factors of the same parity, so both are $\\pm 2$; hence $m = 0$ and $n = 4$ (as $n > 0$).\n\n*If $k \\ge 3$:* by AM-GM, $\\frac nk = \\frac{a_1 + \\dots + a_k}{k} \\ge \\sqrt[k]{a_1\\cdots a_k} = n^{1/k}$, so $n^{k-1} \\ge k^k$, i.e. $n \\ge k^{k/(k-1)}$. For $k = 3$: $n \\ge 3^{3/2} = \\sqrt{27} > 5$. For $k = 4$: $n \\ge 4^{4/3} = \\sqrt[3]{256} > 6$. For $k \\ge 5$: $n \\ge k^{k/(k-1)} > k \\ge 5$. So $n > 5$.\n\nHence $n \\in \\{1, 2, 3, 5\\}$ is impossible.\n\n**Constructions.**\n- $n \\ge 6$ even: $\\left(\\frac n2,\\ 2,\\ 1, \\dots, 1\\right)$ with $\\frac n2 - 2$ ones. Sum $\\frac n2 + 2 + \\frac n2 - 2 = n$, product $n$.\n- $n \\ge 9$ odd: $\\left(\\frac n2,\\ \\frac12,\\ 4,\\ 1, \\dots, 1\\right)$ with $\\frac{n-9}{2}$ ones. Sum $\\frac n2 + \\frac12 + 4 + \\frac{n-9}2 = n$, product $\\frac n2\\cdot\\frac12\\cdot 4 = n$.\n- $n = 7$: $\\left(\\frac43,\\ \\frac76,\\ \\frac92\\right)$. Sum $\\frac{8 + 7 + 27}{6} = 7$, product $\\frac{4\\cdot 7\\cdot 9}{3\\cdot 6\\cdot 2} = 7$.\n\nSo exactly $n = 4$ and $n \\ge 6$ work. ∎"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "algebra",
+      "inequalities"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamo-usamo-2006-05",
+    "bank": "usamo",
+    "source": {
+      "contest": "USAMO",
+      "paper": "USAMO 2006",
+      "year": 2006,
+      "number": 5,
+      "url": "https://web.evanchen.cc/exams/USAMO-2006-notes.pdf"
+    },
+    "grade": "10-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "A mathematical frog jumps along the number line. The frog starts at $1$, and jumps according to the following rule: if the frog is at integer $n$, then it can jump either to $n + 1$ or to $n + 2^{m_n + 1}$ where $2^{m_n}$ is the largest power of $2$ that is a factor of $n$. Show that if $k \\ge 2$ is a positive integer and $i$ is a nonnegative integer, then the minimum number of jumps needed to reach $2^i k$ is greater than the minimum number of jumps needed to reach $2^i$.",
+    "image": null,
+    "choices": null,
+    "answer": "Take a shortest path to $2^ik$ and, for $e$ from large to small, delete all jumps of length $2^e$ that end beyond $2^i$. Deleting all late jumps of length $\\ge 2^e$ keeps the path valid, and the endpoint stays $\\ge 2^i$ and divisible by $2^{\\min(i,e)}$, so the process ends exactly at $2^i$ with fewer jumps.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Delete the large late jumps",
+        "body": "Write $\\nu(x)$ for the exponent of $2$ in $x$. Every jump has length a power of $2$: a jump of length $2^f$ from $x$ is allowed iff $f = 0$ or $f = \\nu(x) + 1$. A *path* is a sequence $1 = x_0 < x_1 < \\dots < x_\\ell$ of allowed jumps.\n\n**Lemma.** Take a path, an index $j$ and $e \\ge 1$, and delete *all* jumps after the $j$-th one whose length is at least $2^e$. The remaining jumps (performed in the same order) still form a path.\n\n*Proof.* Jumps up to the $j$-th are unchanged. A remaining later jump has length $s < 2^e$. In the new path its starting point $x'$ differs from its old starting point $x$ by a sum of deleted lengths, all multiples of $2^e$, so $x' \\equiv x \\pmod{2^e}$. If $s = 1$ the jump is allowed. Otherwise $s = 2^{\\nu(x)+1} < 2^e$, so $\\nu(x) < e$, and then $\\nu(x') = \\nu(x)$; so $s = 2^{\\nu(x')+1}$ is allowed from $x'$. $\\square$\n\n**The reduction.** Take a shortest path to $2^i k$. Process $e = E, E-1, \\dots, 1, 0$ where $2^E$ exceeds every jump length. At stage $e$, let $j$ be the index with $x_j \\le 2^i < x_{j+1}$ in the current path (if the endpoint is $\\le 2^i$, do nothing), and delete every jump of length $2^e$ after index $j$ — these are exactly the jumps of length $2^e$ ending beyond $2^i$.\n\n*All jumps after index $j$ have length $\\le 2^e$ at stage $e$.* A jump of length $2^{e'}$ with $e' > e$ that survived stage $e'$ ended at most at $2^i$ then; later deletions only move endpoints down, so it still ends at most at $2^i$, i.e. it is at or before index $j$. So at stage $e$ we delete *all* jumps of length $\\ge 2^e$ after $j$, and the Lemma (or, for $e = 0$, simply truncating the path) shows we still have a valid path.\n\n**Invariant.** After stage $e$, the endpoint $X$ satisfies $X \\ge 2^i$ and $2^{\\min(i,e)} \\mid X$.\n\n*Proof.* Initially $X = 2^i k$. Divisibility: before stage $e$, $X$ is divisible by $2^{\\min(i,e+1)}$, and stage $e$ subtracts a multiple of $2^e$, so the new endpoint is divisible by $2^{\\min(i,e)}$. Size: if nothing is deleted, nothing changes. Otherwise, the new endpoint $X'$ is at least $x_j$, and $x_j = x_{j+1} - s_{j+1} > 2^i - 2^e$ because $s_{j+1} \\le 2^e$.\n- If $e \\le i$: $X'$ is a multiple of $2^e$ and $X' > 2^i - 2^e$, which is also a multiple of $2^e$; hence $X' \\ge 2^i$.\n- If $e > i$: $X'$ is a positive multiple of $2^i$, so $X' \\ge 2^i$. $\\square$\n\nAfter stage $0$ there are no jumps after index $j$, so the endpoint is $x_j \\le 2^i$; with the invariant, it equals $2^i$. Since $2^i k > 2^i$, at least one jump was deleted. So we obtained a path to $2^i$ with fewer jumps than the shortest path to $2^i k$, which proves the claim. ∎"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "logic"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamo-usamo-2006-06",
+    "bank": "usamo",
+    "source": {
+      "contest": "USAMO",
+      "paper": "USAMO 2006",
+      "year": 2006,
+      "number": 6,
+      "url": "https://web.evanchen.cc/exams/USAMO-2006-notes.pdf"
+    },
+    "grade": "10-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $ABCD$ be a quadrilateral, and let $E$ and $F$ be points on sides $AD$ and $BC$, respectively, such that $\\frac{AE}{ED} = \\frac{BF}{FC}$. Ray $FE$ meets rays $BA$ and $CD$ at $S$ and $T$, respectively. Prove that the circumcircles of triangles $SAE$, $SBF$, $TCF$, and $TDE$ pass through a common point.",
+    "image": null,
+    "choices": null,
+    "answer": "The center $M$ of the spiral similarity taking $A \\mapsto B$, $D \\mapsto C$ also takes $E \\mapsto F$; a spiral similarity center sending $X\\mapsto X'$, $Y\\mapsto Y'$ lies on the circles through $XY$ and $X'Y'$ with the intersection point of lines $XX'$, $YY'$. So $M$ is on all four circles.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "One spiral similarity does everything",
+        "body": "We use directed angles $\\measuredangle$ mod $180^\\circ$ and complex numbers for the similarity.\n\n**The spiral similarity.** In complex coordinates, consider $\\sigma(z) = \\alpha z + \\beta$ with $\\sigma(a) = b$, $\\sigma(d) = c$, i.e. $\\alpha = \\frac{c - b}{d - a}$. If $\\alpha = 1$ then $c - b = d - a$, i.e. $\\vec{AB} = \\vec{DC}$, and $ABCD$ is a parallelogram; then the equal ratios give $EF \\parallel AB$, so ray $FE$ would not meet ray $BA$. Hence $\\alpha \\ne 1$ (and $\\alpha \\neq 0$), so $\\sigma$ is a spiral similarity (rotation + scaling) with a fixed center $M = \\frac{\\beta}{1 - \\alpha}$.\n\n**$\\sigma(E) = F$.** With $t = \\frac{AE}{AD} = \\frac{BF}{BC}$ we have $e = (1-t)a + td$, $f = (1-t)b + tc$, and since $\\sigma$ is affine, $\\sigma(e) = (1-t)\\sigma(a) + t\\sigma(d) = f$.\n\n**Lemma.** If a spiral similarity with center $M$ sends $X \\mapsto X'$ and $Y \\mapsto Y'$, and lines $XX'$ and $YY'$ meet at $K$, then $M$ lies on circles $(KXY)$ and $(KX'Y')$.\n\n*Proof.* The spiral similarity with center $M$ multiplies all distances from $M$ by the same factor and rotates by the same angle, so triangles $MXX'$ and $MYY'$ are directly similar. Hence\n$$\\measuredangle(XM, XX') = \\measuredangle(YM, YY'),\\quad\\text{i.e.}\\quad \\measuredangle(XM, XK) = \\measuredangle(YM, YK),$$\nso $M, K, X, Y$ are concyclic. Similarly $\\measuredangle(X'M, X'X) = \\measuredangle(Y'M, Y'Y)$ gives $M, K, X', Y'$ concyclic. $\\square$\n\n**Apply the lemma twice.**\n- $\\sigma$ sends $A \\mapsto B$ and $E \\mapsto F$; lines $AB$ and $EF$ meet at $S$. So $M$ lies on circles $(SAE)$ and $(SBF)$.\n- $\\sigma$ sends $D \\mapsto C$ and $E \\mapsto F$; lines $DC$ and $EF$ meet at $T$. So $M$ lies on circles $(TDE)$ and $(TCF)$.\n\nTherefore all four circles pass through $M$ (which is the Miquel point of $ABCD$). ∎"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

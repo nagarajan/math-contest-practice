@@ -1,0 +1,219 @@
+[
+  {
+    "id": "bmo-bmo1-2024-01",
+    "bank": "bmo",
+    "source": {
+      "contest": "British Mathematical Olympiad Round 1",
+      "paper": "Round 1 (15 November 2023)",
+      "year": 2024,
+      "number": 1,
+      "url": "https://bmos.ukmt.org.uk/home/bmo1-2024.pdf"
+    },
+    "grade": "10-12",
+    "points": 10,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "An unreliable typist can guarantee that when they try to type a word with different letters, every letter of the word will appear exactly once in what they type, and each letter will occur at most one letter late (though it may occur more than one letter early). Thus, when trying to type MATHS, the typist may type MATHS, MTAHS or TMASH, but not ATMSH.\n\nDetermine, with proof, the number of possible spellings of OLYMPIADS that might be typed.",
+    "image": null,
+    "choices": null,
+    "answer": "256",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Place the letters one at a time",
+        "body": "\"At most one letter late\" means: the $j$-th letter of the word is typed in one of the positions $1,2,\\dots,j+1$.\n\nPlace the letters of OLYMPIADS in order, $j=1,2,\\dots,9$.\n- O (the 1st letter) goes in position $1$ or $2$: $2$ choices.\n- For $2\\le j\\le8$: the $j$-th letter must go in one of the positions $1,\\dots,j+1$. Exactly $j-1$ of these are already taken by the first $j-1$ letters (all of which sit in positions $\\le j$), so exactly $2$ positions remain: $2$ choices.\n- The final S goes into the one position that is left. This is allowed, since every position is $\\le 10$.\n\nEvery sequence of choices gives a different valid spelling, and every valid spelling arises this way. So the number of spellings is $2^8=256$.\n\n**Answer: 256.** ∎\n\n*(Note: there are only $8$ independent choices, not $9$ — the last letter is forced. $512$ is a common wrong answer.)*"
+      },
+      {
+        "title": "Recursion on the word length",
+        "body": "Let $f(n)$ be the number of valid spellings of an $n$-letter word with distinct letters; $f(1)=1$.\n\nTake a word $L_1L_2\\cdots L_n$ with $n\\ge2$. In the shorter word $L_2\\cdots L_n$ the letter $L_k$ has index $k-1$, so \"valid\" there means $L_k$ is in position $\\le k$.\n- In a valid spelling of the long word, $L_1$ is in position $1$ or $2$. Deleting it gives a valid spelling of $L_2\\cdots L_n$: a letter $L_k$ ($k\\ge2$) after $L_1$ moves from position $\\le k+1$ to $\\le k$, and a letter before $L_1$ is in position $1\\le k$.\n- Conversely, inserting $L_1$ in position $1$ or $2$ into a valid spelling of $L_2\\cdots L_n$ moves every other letter right by at most one place, so $L_k$ ends in position $\\le k+1$: valid.\n\nThese two insertions give different spellings, and different shorter spellings give different results.\n\nHence $f(n)=2f(n-1)$, so $f(n)=2^{n-1}$ and $f(9)=2^8=256$. ∎"
+      }
+    ],
+    "topics": [
+      "counting"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null,
+    "answerDisplay": "$2^8=256$"
+  },
+  {
+    "id": "bmo-bmo1-2024-02",
+    "bank": "bmo",
+    "source": {
+      "contest": "British Mathematical Olympiad Round 1",
+      "paper": "Round 1 (15 November 2023)",
+      "year": 2024,
+      "number": 2,
+      "url": "https://bmos.ukmt.org.uk/home/bmo1-2024.pdf"
+    },
+    "grade": "10-12",
+    "points": 10,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "The sequence of integers $a_0,a_1,\\ldots$ has the property that for each $i\\ge2$, $a_i$ is either $2a_{i-1}-a_{i-2}$ or $2a_{i-2}-a_{i-1}$.\n\nGiven that $a_{2023}$ and $a_{2024}$ are consecutive integers, prove that $a_0$ and $a_1$ are consecutive integers.\n\n(Note that $6$ and $7$ are consecutive integers, as are $7$ and $6$.)",
+    "image": null,
+    "choices": null,
+    "answer": "The differences $d_i=a_i-a_{i-1}$ satisfy $d_i=d_{i-1}$ or $d_i=-2d_{i-1}$, so $|d_i|$ never decreases; $|d_{2024}|=1$ forces $|d_1|\\le1$, and $d_1=0$ would make the sequence constant.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Differences never shrink",
+        "body": "Let $d_i=a_i-a_{i-1}$ for $i\\ge1$.\n- If $a_i=2a_{i-1}-a_{i-2}$, then $d_i=a_{i-1}-a_{i-2}=d_{i-1}$.\n- If $a_i=2a_{i-2}-a_{i-1}$, then $d_i=2a_{i-2}-2a_{i-1}=-2d_{i-1}$.\n\nEither way $|d_i|\\ge|d_{i-1}|$, and if $d_{i-1}=0$ then $d_i=0$.\n\nIf $d_1=0$, then all $d_i=0$ and $a_{2024}=a_{2023}$, which is not the case. So $d_1$ is a nonzero integer and\n$$1\\le|d_1|\\le|d_2|\\le\\dots\\le|d_{2024}|=1 .$$\nHence $|a_1-a_0|=|d_1|=1$: $a_0$ and $a_1$ are consecutive. ∎"
+      },
+      {
+        "title": "Backward induction",
+        "body": "We show: if $a_i$ and $a_{i+1}$ are consecutive ($i\\ge1$), then so are $a_{i-1}$ and $a_i$. Then, starting from $a_{2023},a_{2024}$ and stepping down, $a_0,a_1$ are consecutive.\n\nSuppose $a_{i+1}=a_i+\\varepsilon$ with $\\varepsilon=\\pm1$.\n- If $a_{i+1}=2a_i-a_{i-1}$, then $a_{i-1}=2a_i-a_{i+1}=a_i-\\varepsilon$, consecutive with $a_i$.\n- If $a_{i+1}=2a_{i-1}-a_i$, then $a_{i-1}=\\frac{a_i+a_{i+1}}2=a_i+\\frac\\varepsilon2$, not an integer — impossible.\n\nSo $a_{i-1}=a_i-\\varepsilon$, which is consecutive with $a_i$. ∎"
+      }
+    ],
+    "topics": [
+      "sequences-series",
+      "algebra"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "bmo-bmo1-2024-03",
+    "bank": "bmo",
+    "source": {
+      "contest": "British Mathematical Olympiad Round 1",
+      "paper": "Round 1 (15 November 2023)",
+      "year": 2024,
+      "number": 3,
+      "url": "https://bmos.ukmt.org.uk/home/bmo1-2024.pdf"
+    },
+    "grade": "10-12",
+    "points": 10,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $ABC$ be a triangle with $\\angle ACB<\\angle BAC<90^\\circ$. Let $X$ and $Y$ be points on $AC$ and the circle $ABC$ respectively such that $X,Y\\ne A$ and $BX=BY=BA$. Line $XY$ intersects the circle $ABC$ again at $Z$.\n\nProve that $BZ$ is perpendicular to $AC$.",
+    "image": null,
+    "choices": null,
+    "answer": "$A,X,Y$ lie on the circle centred at $B$, so $\\angle XBA=2\\angle XYA=2\\angle ZYA=2\\angle ZBA$: $BZ$ bisects the apex angle of the isosceles triangle $ABX$, hence $BZ\\perp AX$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Two circles: the circumcircle and the circle centred at B",
+        "body": "**Configuration.** Since $\\angle BAC<90^\\circ$ and $\\angle BCA<\\angle BAC$, the foot of the perpendicular from $B$ lies inside $AC$ and $X$, the reflection of $A$ in that foot, lies inside segment $AC$. In an accurate figure $Y$ lies on arc $BC$ on $B$'s side of $AC$, $X$ lies between $Y$ and $Z$, and $Z$ lies on the arc $AC$ not containing $B$. Let $\\omega$ be the circle with centre $B$ and radius $BA$; it passes through $A$, $X$ and $Y$.\n\nLet $\\theta=\\angle ZBA$.\n1. **Angles in the same segment** (circle $ABC$, chord $AZ$, with $B$ and $Y$ on the same side): $\\angle ZYA=\\angle ZBA=\\theta$.\n2. Since $X$ lies on segment $YZ$, $\\angle XYA=\\angle ZYA=\\theta$.\n3. **Angle at the centre** (circle $\\omega$, chord $AX$; $Y$ on the major arc, on the same side of $AX$ as the centre $B$): $\\angle XBA=2\\angle XYA=2\\theta$.\n\nSo $\\angle XBZ=\\angle XBA-\\angle ZBA=\\theta=\\angle ZBA$: line $BZ$ is the bisector of the apex angle of the isosceles triangle $XBA$ ($BX=BA$). In an isosceles triangle this bisector is perpendicular to the base, so $BZ\\perp XA$, i.e. $BZ\\perp AC$. ∎"
+      },
+      {
+        "title": "Show ZA = ZX (a kite)",
+        "body": "Let $\\alpha=\\angle BAC$ and $\\delta=\\angle XYB$ (configuration as in the first solution).\n- $BX=BY$: in triangle $XBY$, $\\angle BXY=\\delta$.\n- $BX=BA$: in triangle $ABX$, $\\angle AXB=\\alpha$.\n- $Y,X,Z$ are collinear: $\\angle ZXA=180^\\circ-\\angle YXB-\\angle BXA=180^\\circ-\\delta-\\alpha$.\n- $ABYZ$ is a cyclic quadrilateral (vertices in this order), so $\\angle BAZ=180^\\circ-\\angle BYZ=180^\\circ-\\delta$, hence $\\angle XAZ=\\angle BAZ-\\angle BAX=180^\\circ-\\delta-\\alpha$.\n\nSo triangle $XZA$ has equal angles at $X$ and $A$, and $ZA=ZX$. Now $B$ and $Z$ are both equidistant from $A$ and $X$, so both lie on the perpendicular bisector of $AX$; thus $BZ$ is that perpendicular bisector and $BZ\\perp AX=AC$. ∎"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "bmo-bmo1-2024-04",
+    "bank": "bmo",
+    "source": {
+      "contest": "British Mathematical Olympiad Round 1",
+      "paper": "Round 1 (15 November 2023)",
+      "year": 2024,
+      "number": 4,
+      "url": "https://bmos.ukmt.org.uk/home/bmo1-2024.pdf"
+    },
+    "grade": "10-12",
+    "points": 10,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Find all positive integers $n$ such that $n\\times2^n+1$ is a square.",
+    "image": null,
+    "choices": null,
+    "answer": "$n=2$ and $n=3$ (giving $9$ and $25$).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Factor a² − 1 and bound",
+        "body": "Suppose $n\\cdot2^n+1=a^2$ with $a>0$, so $(a-1)(a+1)=n\\cdot2^n$.\n\nThe right side is even, so $a$ is odd and $a-1$, $a+1$ are consecutive even numbers; one of them is $2\\times$(odd). The product contains at least $n$ factors of $2$, so the **other** factor, call it $u$, is divisible by $2^{n-1}$. Let $v$ be the factor that is $2\\times$ odd. Then $uv=n2^n$ with $u\\ge2^{n-1}$, so $v\\le 2n$, and since $u$ and $v$ differ by $2$,\n$$2^{n-1}\\le u\\le v+2\\le2n+2 .$$\n\nThis fails for $n\\ge5$: for $n=5$, $2^4=16>12$; and if $2^{k-1}>2k+2$ then $2^k>4k+4>2(k+1)+2$. So $n\\le4$.\n\nCheck: $n=1$: $3$ (no); $n=2$: $9=3^2$ (yes); $n=3$: $25=5^2$ (yes); $n=4$: $65$ (no).\n\n**Answer:** $n=2$ and $n=3$. ∎"
+      }
+    ],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "bmo-bmo1-2024-05",
+    "bank": "bmo",
+    "source": {
+      "contest": "British Mathematical Olympiad Round 1",
+      "paper": "Round 1 (15 November 2023)",
+      "year": 2024,
+      "number": 5,
+      "url": "https://bmos.ukmt.org.uk/home/bmo1-2024.pdf"
+    },
+    "grade": "10-12",
+    "points": 10,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "An artist arranges $1000$ dots evenly around a circle, with each dot being either red or blue. A critic looks at the artwork and counts faults: each time two red dots are adjacent is one fault, and each time two blue dots are exactly two apart (that is, they have exactly one dot in between them) is another.\n\nWhat is the smallest number of faults the critic could find?",
+    "image": null,
+    "choices": null,
+    "answer": "250",
+    "acceptedAnswers": null,
+    "answerUnit": "faults",
+    "solutions": [
+      {
+        "title": "RRBB pattern and overlapping blocks of five",
+        "body": "**250 is achievable.** Colour the dots $RRBB\\,RRBB\\ldots$ (the pattern fits since $4\\mid1000$). Each $RR$ pair is one fault — $250$ faults. Each blue dot is two places from a red dot on both sides ($B$ at positions $\\equiv3,0\\pmod4$ are two away from positions $\\equiv1,2$), so there are no blue faults. Total: $250$.\n\n**At least 250 in any colouring.** *Every five consecutive dots $d_1,\\dots,d_5$ contain a fault (both dots of the fault among them).* If one of $d_2,d_3,d_4$ is red, either it has a red neighbour (a red fault) or both its neighbours are blue, and those two are two apart (a blue fault). If none of $d_2,d_3,d_4$ is red, then $d_2,d_4$ are blue and two apart.\n\nNumber the dots $1,\\dots,1000$ and take the $250$ blocks $\\{4j-3,\\dots,4j+1\\}$ for $j=1,\\dots,250$ (the last block is $997,\\dots,1000,1$). Two different blocks share at most one dot, while a fault consists of two dots; so a fault lies in at most one block. Each block contains a fault, so there are at least $250$ faults.\n\n**Answer: 250.** ∎"
+      },
+      {
+        "title": "Non-overlapping blocks of four",
+        "body": "The construction $RRBB\\ldots$ gives $250$ faults, as in the first solution.\n\n**The only fault-free string of four dots is $RBBR$.** If the first dot is $R$, the second is $B$ (no $RR$), then the fourth is $R$ (no $B\\_B$ with the second), then the third is $B$ (no $RR$). If the first is $B$, the third is $R$, so the second and fourth are $B$ — a blue fault.\n\nSplit the circle into $250$ disjoint blocks of four consecutive dots. For each fault $\\{i,i+1\\}$ or $\\{i,i+2\\}$, call dot $i$ its *first* dot. Each block contains the first dot of some fault:\n- if the block contains a fault, that fault's first dot is in the block;\n- if the block is $RBBR$, look at the next dot: if it is red, it forms a red fault with the block's last dot; if blue, it forms a blue fault with the block's third dot. Either way the fault's first dot is in the block.\n\nDifferent blocks give faults with different first dots, hence different faults: at least $250$. **Answer: 250.** ∎"
+      }
+    ],
+    "topics": [
+      "counting",
+      "logic"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "bmo-bmo1-2024-06",
+    "bank": "bmo",
+    "source": {
+      "contest": "British Mathematical Olympiad Round 1",
+      "paper": "Round 1 (15 November 2023)",
+      "year": 2024,
+      "number": 6,
+      "url": "https://bmos.ukmt.org.uk/home/bmo1-2024.pdf"
+    },
+    "grade": "10-12",
+    "points": 10,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "For some integer $n>4$ a convex polygon has vertices $v_1,v_2,\\ldots,v_n$ in that cyclic order. All its edges are the same length. It also has the property that the lengths of the diagonals $v_1v_4,\\ v_2v_5,\\ \\ldots,\\ v_{n-3}v_n,\\ v_{n-2}v_1,\\ v_{n-1}v_2$ and $v_nv_3$ are all equal.\n\nFor which $n$ is it necessarily the case that the polygon has equal angles?",
+    "image": null,
+    "choices": null,
+    "answer": "Exactly for odd $n$: congruent triangles show the angles at $v_{i+1}$ and $v_{i+3}$ are equal, which links all vertices when $n$ is odd; for even $n=2k$ erect small isosceles triangles on a regular $k$-gon.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Angles two apart are equal; a counterexample for even n",
+        "body": "Indices are taken mod $n$; call the common edge length *edge* and the common length of the diagonals $v_iv_{i+3}$ *$d$*.\n\n**Odd $n$: the polygon is equiangular.** Fix $i$ and look at $v_i,v_{i+1},v_{i+2},v_{i+3},v_{i+4}$ (distinct, as $n\\ge5$).\n- Triangles $v_iv_{i+1}v_{i+3}$ and $v_{i+4}v_{i+3}v_{i+1}$ have sides (edge, $v_{i+1}v_{i+3}$, $d$) and (edge, $v_{i+3}v_{i+1}$, $d$), so they are congruent (SSS), with $v_i\\leftrightarrow v_{i+4}$, $v_{i+1}\\leftrightarrow v_{i+3}$. Hence $\\angle v_iv_{i+1}v_{i+3}=\\angle v_{i+4}v_{i+3}v_{i+1}=:\\beta$.\n- Triangle $v_{i+1}v_{i+2}v_{i+3}$ is isosceles (two edges), so $\\angle v_{i+2}v_{i+1}v_{i+3}=\\angle v_{i+2}v_{i+3}v_{i+1}=:\\alpha$.\n- In a convex polygon the diagonal $v_{i+1}v_{i+3}$ lies inside the angles of the polygon at $v_{i+1}$ and at $v_{i+3}$. So the polygon's angle at $v_{i+1}$ is $\\beta+\\alpha$, and so is its angle at $v_{i+3}$.\n\nThus the angles at $v_{j}$ and $v_{j+2}$ are equal for every $j$. When $n$ is odd, stepping by $2$ visits every vertex ($v_1,v_3,\\dots,v_n,v_2,v_4,\\dots$), so all angles are equal.\n\n**Even $n=2k$ ($k\\ge3$): a non-equiangular example.** Start with a regular $k$-gon of side $s$, and on each side erect externally an isosceles triangle with base angles $\\alpha$, where $0<\\alpha<\\frac{90^\\circ}{k}$. The $k$ apexes and the $k$ original vertices, alternately, form a $2k$-gon.\n- *Equilateral:* every edge is a leg of one of the congruent isosceles triangles.\n- *Convex:* angle at an apex $=180^\\circ-2\\alpha<180^\\circ$; angle at an original vertex $=\\bigl(180^\\circ-\\frac{360^\\circ}{k}\\bigr)+2\\alpha<180^\\circ$ because $\\alpha<\\frac{180^\\circ}k$.\n- *Not equiangular:* the two angles are equal only if $\\alpha=\\frac{90^\\circ}{k}$, which we excluded.\n- *Equal diagonals:* of $v_i,v_{i+3}$ one is an apex and one an original vertex. If $v_i$ is an apex, triangle $v_iv_{i+1}v_{i+3}$ has sides leg $v_iv_{i+1}$ and $k$-gon side $v_{i+1}v_{i+3}=s$ with included angle $\\alpha+\\bigl(180^\\circ-\\frac{360^\\circ}k\\bigr)$. If $v_i$ is an original vertex, triangle $v_iv_{i+2}v_{i+3}$ has sides $s$ and a leg with the same included angle at $v_{i+2}$. By SAS all these triangles are congruent, so all diagonals $v_iv_{i+3}$ are equal.\n\n**Answer:** the polygon must be equiangular exactly when $n$ is odd. ∎"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

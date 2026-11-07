@@ -1,0 +1,631 @@
+[
+  {
+    "id": "quals-berkeley-2023s-a01",
+    "bank": "quals",
+    "source": {
+      "contest": "Berkeley Preliminary Exam",
+      "paper": "Spring 2023",
+      "year": 2023,
+      "number": "1A",
+      "url": "https://math.berkeley.edu/graduate/phd-program/preliminary-exam"
+    },
+    "grade": "grad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Evaluate the infinite product\n$$\\prod_{n=3}^{\\infty}\\frac{n^2-4}{n^2-1}.$$",
+    "image": null,
+    "choices": null,
+    "answer": "1/4",
+    "answerDisplay": "$\\frac14$",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Telescoping partial products",
+        "body": "Factor each term: $\\dfrac{n^2-4}{n^2-1}=\\dfrac{n-2}{n-1}\\cdot\\dfrac{n+2}{n+1}$. For $k\\ge 3$ the partial product splits into two telescoping products:\n$$\\prod_{n=3}^{k}\\frac{n-2}{n-1}=\\frac{1}{2}\\cdot\\frac{2}{3}\\cdots\\frac{k-2}{k-1}=\\frac{1}{k-1},\\qquad \\prod_{n=3}^{k}\\frac{n+2}{n+1}=\\frac{5}{4}\\cdot\\frac{6}{5}\\cdots\\frac{k+2}{k+1}=\\frac{k+2}{4}.$$\nHence\n$$\\prod_{n=3}^{k}\\frac{n^2-4}{n^2-1}=\\frac{k+2}{4(k-1)}\\xrightarrow[k\\to\\infty]{}\\frac14 .$$\n(In factorial form this is the official $\\frac{1!\\,3!}{0!\\,4!}\\cdot\\frac{k!\\,(k+4)!}{(k+1)!\\,(k+3)!}$ shifted appropriately; either way the limit is $1/4$.)\n\n**Answer: $\\tfrac14$**"
+      },
+      {
+        "title": "Split into two convergent products",
+        "body": "Write the term as $\\dfrac{1-4/n^2}{1-1/n^2}$. Both $\\prod_{n\\ge3}(1-4/n^2)$ and $\\prod_{n\\ge3}(1-1/n^2)$ converge to nonzero limits (since $\\sum 1/n^2<\\infty$), so the product is their quotient.\n\n- $\\prod_{n=3}^k\\Big(1-\\dfrac4{n^2}\\Big)=\\prod_{n=3}^k\\dfrac{n-2}{n}\\cdot\\prod_{n=3}^k\\dfrac{n+2}{n}=\\dfrac{2}{k(k-1)}\\cdot\\dfrac{(k+1)(k+2)}{12}\\to\\dfrac16$.\n- $\\prod_{n=3}^k\\Big(1-\\dfrac1{n^2}\\Big)=\\prod_{n=3}^k\\dfrac{n-1}{n}\\cdot\\prod_{n=3}^k\\dfrac{n+1}{n}=\\dfrac{2}{k}\\cdot\\dfrac{k+1}{3}\\to\\dfrac23$.\n\nHence the product is $\\dfrac{1/6}{2/3}=\\dfrac14$. (Numerically, the partial product up to $n=10^6$ is $0.2500007\\ldots$.)\n\n**Answer: $\\tfrac14$**"
+      }
+    ],
+    "topics": [
+      "sequences-series",
+      "real-analysis"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "quals-berkeley-2023s-a02",
+    "bank": "quals",
+    "source": {
+      "contest": "Berkeley Preliminary Exam",
+      "paper": "Spring 2023",
+      "year": 2023,
+      "number": "2A",
+      "url": "https://math.berkeley.edu/graduate/phd-program/preliminary-exam"
+    },
+    "grade": "grad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $f:[0,1]\\times[0,1]\\to\\mathbb R$ be a continuous function, and let $g:[0,1]\\to\\mathbb R$ be the function\n$$g(x)=\\min_{0\\le y\\le 1} f(x,y).$$\nShow in detail that $g$ is continuous on $(0,1)$. (It is also continuous at the endpoints, but don't worry about them.)",
+    "image": null,
+    "choices": null,
+    "answer": "$f$ is uniformly continuous on the compact square; if $|x_0-x_1|<\\delta$ then $g(x_1)\\le f(x_1,y_0)<f(x_0,y_0)+\\varepsilon=g(x_0)+\\varepsilon$ where $y_0$ attains the minimum at $x_0$, and symmetrically, so $|g(x_0)-g(x_1)|<\\varepsilon$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Uniform continuity",
+        "body": "First, $g$ is well defined: for fixed $x$, $y\\mapsto f(x,y)$ is continuous on the compact set $[0,1]$, so it attains its minimum.\n\nSince $[0,1]^2$ is compact, $f$ is uniformly continuous. Let $\\varepsilon>0$ and choose $\\delta>0$ such that $|f(x_0,y_0)-f(x_1,y_1)|<\\varepsilon$ whenever $\\|(x_0,y_0)-(x_1,y_1)\\|<\\delta$.\n\nLet $x_0,x_1\\in[0,1]$ with $|x_0-x_1|<\\delta$. Choose $y_0$ with $g(x_0)=f(x_0,y_0)$. Since $\\|(x_1,y_0)-(x_0,y_0)\\|=|x_1-x_0|<\\delta$,\n$$g(x_1)\\le f(x_1,y_0)<f(x_0,y_0)+\\varepsilon=g(x_0)+\\varepsilon .$$\nExchanging the roles of $x_0$ and $x_1$ (choose $y_1$ with $g(x_1)=f(x_1,y_1)$) gives $g(x_0)<g(x_1)+\\varepsilon$. Hence $|g(x_0)-g(x_1)|<\\varepsilon$.\n\nSo $g$ is (uniformly) continuous on $[0,1]$, in particular on $(0,1)$. ∎"
+      }
+    ],
+    "topics": [
+      "real-analysis"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "quals-berkeley-2023s-a03",
+    "bank": "quals",
+    "source": {
+      "contest": "Berkeley Preliminary Exam",
+      "paper": "Spring 2023",
+      "year": 2023,
+      "number": "3A",
+      "url": "https://math.berkeley.edu/graduate/phd-program/preliminary-exam"
+    },
+    "grade": "grad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Prove Taylor's theorem with the remainder in the form of Peano: If a real-valued function on the number line has a well-defined $n$th derivative at $x=0$, then the error of approximating the function near $x=0$ by its degree-$n$ Taylor polynomial is $o(x^n)$. (A function $f$ is $o(x^n)$ at a point if $f/x^n$ tends to $0$ at this point.)\n\n[Do not assume continuity or even existence of the $n$th derivative in any neighborhood of $x=0$.]",
+    "image": null,
+    "choices": null,
+    "answer": "Let $g=f-T_n$, so $g(0)=g'(0)=\\dots=g^{(n)}(0)=0$. Induct on $n$: $n=1$ is the definition of $g'(0)$; for $n\\ge2$, $g'(x)=o(x^{n-1})$ by induction and the mean value theorem gives $|g(x)|=|x\\,g'(\\xi)|=o(x^n)$. (Equivalently: $n-1$ applications of L'Hôpital.)",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Induction with the mean value theorem",
+        "body": "Take $n\\ge 1$ (for $n=0$ the statement would require continuity at $0$, which is not given). Saying $f^{(n)}(0)$ exists means that $f,f',\\dots,f^{(n-1)}$ exist on some interval $(-r,r)$ and $f^{(n-1)}$ is differentiable at $0$. Let\n$$g(x)=f(x)-\\sum_{k=0}^{n}\\frac{f^{(k)}(0)}{k!}x^k .$$\nThen $g$ has the same differentiability as $f$, and $g^{(k)}(0)=0$ for $k=0,1,\\dots,n$.\n\n**Claim.** If $g$ has an $n$th derivative at $0$ and $g(0)=g'(0)=\\dots=g^{(n)}(0)=0$, then $g(x)/x^n\\to0$ as $x\\to0$.\n\n*Proof by induction on $n$.* For $n=1$: $g(x)/x=(g(x)-g(0))/x\\to g'(0)=0$ by the definition of the derivative.\n\nFor $n\\ge2$: $g'$ exists on $(-r,r)$, has an $(n-1)$st derivative at $0$, and $g'(0)=\\dots=(g')^{(n-1)}(0)=0$. By induction, $g'(x)/x^{n-1}\\to 0$. Let $\\varepsilon>0$ and pick $0<\\delta<r$ with $|g'(t)|\\le\\varepsilon|t|^{n-1}$ for $|t|<\\delta$. For $0<|x|<\\delta$, $g$ is differentiable on the interval between $0$ and $x$, so the mean value theorem gives $\\xi$ strictly between $0$ and $x$ with\n$$|g(x)|=|g(x)-g(0)|=|x|\\,|g'(\\xi)|\\le |x|\\,\\varepsilon|\\xi|^{n-1}\\le\\varepsilon|x|^{n}.$$\nHence $|g(x)/x^n|\\le\\varepsilon$ for $0<|x|<\\delta$, i.e. $g(x)=o(x^n)$. ∎\n\nApplying the claim to $g=f-T_nf$ proves Peano's form of Taylor's theorem. Note that only the existence of $f^{(n-1)}$ near $0$ and of $f^{(n)}(0)$ was used. ∎"
+      },
+      {
+        "title": "L'Hôpital's rule (official approach)",
+        "body": "With $g$ as above, $g,g',\\dots,g^{(n-1)}$ exist near $0$, vanish at $0$, and are continuous at $0$ (each $g^{(k)}$, $k\\le n-1$, is differentiable at $0$). Consider $g(x)/x^n$. Differentiating numerator and denominator $n-1$ times gives\n$$\\frac{g^{(n-1)}(x)}{n!\\,x}=\\frac1{n!}\\cdot\\frac{g^{(n-1)}(x)-g^{(n-1)}(0)}{x}\\xrightarrow[x\\to0]{}\\frac{g^{(n)}(0)}{n!}=0$$\nby the *definition* of $g^{(n)}(0)$ (no continuity of $g^{(n)}$ is needed). At each intermediate stage $g^{(k)}(x)/(c_kx^{n-k})$, $0\\le k\\le n-2$, numerator and denominator are differentiable near $0$ and tend to $0$, and the denominator's derivative is nonzero for $x\\ne0$; so L'Hôpital's rule applies $n-1$ times in reverse, and $\\lim_{x\\to0}g(x)/x^n=0$. ∎"
+      }
+    ],
+    "topics": [
+      "real-analysis",
+      "calculus"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "quals-berkeley-2023s-a04",
+    "bank": "quals",
+    "source": {
+      "contest": "Berkeley Preliminary Exam",
+      "paper": "Spring 2023",
+      "year": 2023,
+      "number": "4A",
+      "url": "https://math.berkeley.edu/graduate/phd-program/preliminary-exam"
+    },
+    "grade": "grad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Suppose that $f$ is a complex polynomial all of whose roots have real part at most $0$. Show that if $r>0$ then $|f(r)|\\ge|f(-r)|$.\n\nGive an example to show that this can be false if the condition that $f$ is a polynomial is replaced by the condition that $f$ is entire.",
+    "image": null,
+    "choices": null,
+    "answer": "Write $f=a\\prod(z-b_j)$; each factor satisfies $|r-b|^2-|-r-b|^2=-4r\\,\\mathrm{Re}\\,b\\ge0$. Counterexample: $f(z)=e^{-z}$ (no zeros) has $|f(r)|=e^{-r}<e^{r}=|f(-r)|$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Factor into linear factors",
+        "body": "If $f$ is the zero polynomial, both sides are $0$. Otherwise write $f(z)=a\\prod_{j=1}^{d}(z-b_j)$ with $a\\ne0$ and $\\mathrm{Re}\\,b_j\\le 0$ (if $d=0$, $f$ is constant and there is nothing to prove).\n\nFor a single root $b=u+iv$ with $u\\le0$ and $r>0$:\n$$|r-b|^2-|-r-b|^2=\\big((r-u)^2+v^2\\big)-\\big((r+u)^2+v^2\\big)=-4ru\\ge 0 .$$\nSo $|r-b_j|\\ge|-r-b_j|$ for every $j$ (geometrically: $b_j$ lies in the closed left half-plane, which is closer to $-r$ than to $r$). Multiplying,\n$$|f(r)|=|a|\\prod_j|r-b_j|\\ge|a|\\prod_j|-r-b_j|=|f(-r)| .$$\n\n**Entire counterexample.** $f(z)=e^{-z}$ is entire and has no zeros, so the condition on the roots holds vacuously. But for $r>0$, $|f(r)|=e^{-r}<e^{r}=|f(-r)|$. ∎"
+      }
+    ],
+    "topics": [
+      "complex-analysis",
+      "polynomials"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "quals-berkeley-2023s-a05",
+    "bank": "quals",
+    "source": {
+      "contest": "Berkeley Preliminary Exam",
+      "paper": "Spring 2023",
+      "year": 2023,
+      "number": "5A",
+      "url": "https://math.berkeley.edu/graduate/phd-program/preliminary-exam"
+    },
+    "grade": "grad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Evaluate the contour integral\n$$\\lim_{R\\to+\\infty}\\int_{c-iR}^{c+iR}\\frac{1}{z}\\,dz$$\nwhere $c$ is a nonzero real number. (Warning: the answer depends on c.)",
+    "image": null,
+    "choices": null,
+    "answer": "$\\pi i$ if $c>0$, and $-\\pi i$ if $c<0$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Use a branch of the logarithm",
+        "body": "The segment from $c-iR$ to $c+iR$ lies in the half-plane $\\{\\mathrm{Re}\\,z>0\\}$ if $c>0$, or $\\{\\mathrm{Re}\\,z<0\\}$ if $c<0$. On either half-plane, $1/z$ has a holomorphic primitive $\\log z=\\ln|z|+i\\arg z$ with a continuous choice of argument: $\\arg z\\in(-\\pi/2,\\pi/2)$ for $c>0$, and $\\arg z\\in(\\pi/2,3\\pi/2)$ for $c<0$. Hence\n$$\\int_{c-iR}^{c+iR}\\frac{dz}{z}=\\log(c+iR)-\\log(c-iR)=i\\big(\\arg(c+iR)-\\arg(c-iR)\\big),$$\nsince $|c+iR|=|c-iR|$.\n\n- $c>0$: $\\arg(c\\pm iR)=\\pm\\arctan(R/c)\\to\\pm\\pi/2$, so the limit is $i\\pi$.\n- $c<0$: $\\arg(c+iR)\\to\\pi/2$ and $\\arg(c-iR)\\to 3\\pi/2$ (the points approach $\\pm i\\infty$ from the left half-plane), so the limit is $i(\\pi/2-3\\pi/2)=-i\\pi$.\n\n**Answer: $\\pi i$ for $c>0$ and $-\\pi i$ for $c<0$.**"
+      },
+      {
+        "title": "Parametrize directly",
+        "body": "Put $z=c+it$, $dz=i\\,dt$, $t\\in[-R,R]$:\n$$\\int_{-R}^{R}\\frac{i\\,dt}{c+it}=\\int_{-R}^{R}\\frac{i(c-it)}{c^2+t^2}\\,dt=\\int_{-R}^{R}\\frac{t\\,dt}{c^2+t^2}+i\\int_{-R}^{R}\\frac{c\\,dt}{c^2+t^2}.$$\nThe first integrand is odd, so that integral is $0$. The second is $2ic\\cdot\\frac1{|c|}\\arctan\\frac{R}{|c|}\\to i\\pi\\,\\mathrm{sgn}(c)$.\n\n**Answer: $\\pi i\\,\\mathrm{sgn}(c)$.**"
+      }
+    ],
+    "topics": [
+      "complex-analysis"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "quals-berkeley-2023s-a06",
+    "bank": "quals",
+    "source": {
+      "contest": "Berkeley Preliminary Exam",
+      "paper": "Spring 2023",
+      "year": 2023,
+      "number": "6A",
+      "url": "https://math.berkeley.edu/graduate/phd-program/preliminary-exam"
+    },
+    "grade": "grad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "A plane passing through the origin in $\\mathbb R^3$ intersects the ellipsoid $x^2/4+y^2/9+z^2/16=1$ in an ellipse. Determine how many such sections are circles and find their radii.",
+    "image": null,
+    "choices": null,
+    "answer": "Exactly $2$ circular sections, both of radius $3$: the planes $z=\\pm\\sqrt{20/7}\\,x$ through the middle axis (the $y$-axis).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Distance extremes in a section",
+        "body": "Write $Q(v)=x^2/4+y^2/9+z^2/16$, so the ellipsoid is $\\{Q=1\\}$. A plane $\\Pi$ through $0$ meets it in an ellipse with semi-axes $a\\ge b>0$, which are the maximum and minimum of $|v|$ over the section.\n\n**Every section contains a point at distance $\\ge3$ and one at distance $\\le 3$.**\n$\\Pi$ meets the plane $z=0$ in at least a line $\\ell$. On the ellipse $\\{z=0,\\ x^2/4+y^2/9=1\\}$ we have $x^2+y^2=9-\\tfrac54x^2\\le 9$, with equality only at $(0,\\pm3,0)$. So the points of the section on $\\ell$ have distance $\\le3$ from $0$: $b\\le 3$, and $b=3$ forces $\\ell$ to be the $y$-axis, i.e. $\\Pi\\supseteq y$-axis. Likewise $\\Pi$ meets the plane $x=0$ in a line, and on $\\{x=0,\\ y^2/9+z^2/16=1\\}$ we have $y^2+z^2=9+\\tfrac{7}{16}z^2\\ge 9$; so $a\\ge3$.\n\n**Circles.** A circular section has $a=b$, so $a=b=3$, the radius is $3$, and $\\Pi$ contains the $y$-axis. Such a plane is $\\Pi_\\theta=\\mathrm{span}\\{e_2,(\\cos\\theta,0,\\sin\\theta)\\}$. A point $s e_2+t(\\cos\\theta,0,\\sin\\theta)$ lies on the ellipsoid iff\n$$\\frac{s^2}{9}+t^2\\Big(\\frac{\\cos^2\\theta}{4}+\\frac{\\sin^2\\theta}{16}\\Big)=1,$$\nwhich is a circle of radius $3$ in the orthonormal coordinates $(s,t)$ exactly when $\\frac{\\cos^2\\theta}{4}+\\frac{\\sin^2\\theta}{16}=\\frac19$, i.e. $\\frac{\\cos^2\\theta}4+\\frac{1-\\cos^2\\theta}{16}=\\frac19$, so $\\cos^2\\theta=\\frac{7}{27}$, $\\sin^2\\theta=\\frac{20}{27}$, $\\tan^2\\theta=\\frac{20}{7}$. There are two such planes, $z=\\pm\\sqrt{20/7}\\,x$.\n\n(Equivalently: the trace ellipse $x^2/4+z^2/16=1$ in the plane $y=0$ meets the circle $x^2+z^2=9$ in two pairs of antipodal points, and each pair together with the $y$-axis spans a circular section.)\n\n**Answer: exactly 2 circular sections, each of radius 3** (the planes $z=\\pm\\sqrt{20/7}\\,x$). ∎"
+      }
+    ],
+    "topics": [
+      "linear-algebra",
+      "geometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "quals-berkeley-2023s-a07",
+    "bank": "quals",
+    "source": {
+      "contest": "Berkeley Preliminary Exam",
+      "paper": "Spring 2023",
+      "year": 2023,
+      "number": "7A",
+      "url": "https://math.berkeley.edu/graduate/phd-program/preliminary-exam"
+    },
+    "grade": "grad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Suppose that the square complex matrix $A$ is similar to $A^n$ for some integer $n>1$. Prove all eigenvalues of $A$ are either zero or roots of unity.",
+    "image": null,
+    "choices": null,
+    "answer": "If $\\lambda$ is an eigenvalue, so is $\\lambda^n$ (eigenvalue of $A^n\\sim A$), hence $\\lambda,\\lambda^n,\\lambda^{n^2},\\dots$ are all eigenvalues; finiteness forces $\\lambda^{n^i}=\\lambda^{n^j}$ with $i<j$, so $\\lambda=0$ or $\\lambda^{n^j-n^i}=1$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Iterate the map $\\lambda\\mapsto\\lambda^n$ on the spectrum",
+        "body": "If $Av=\\lambda v$ with $v\\ne0$, then $A^nv=\\lambda^nv$, so $\\lambda^n$ is an eigenvalue of $A^n$. Similar matrices have the same eigenvalues, so $\\lambda^n$ is an eigenvalue of $A$. Repeating, $\\lambda^{n^k}$ is an eigenvalue of $A$ for all $k\\ge0$.\n\n$A$ has finitely many eigenvalues, so there are $0\\le i<j$ with $\\lambda^{n^i}=\\lambda^{n^j}$, i.e. $\\lambda^{n^i}\\big(\\lambda^{n^j-n^i}-1\\big)=0$. Since $n>1$, $m=n^j-n^i\\ge1$. Thus either $\\lambda=0$ or $\\lambda^m=1$, i.e. $\\lambda$ is a root of unity. ∎"
+      },
+      {
+        "title": "Look at the spectrum as a multiset",
+        "body": "Let $\\lambda_1,\\dots,\\lambda_d$ be the eigenvalues of $A$ with algebraic multiplicity. By triangularizing $A=PTP^{-1}$ we see $A^n=PT^nP^{-1}$ has eigenvalues $\\lambda_1^n,\\dots,\\lambda_d^n$. Since $A\\sim A^n$, the map $\\sigma:\\lambda\\mapsto\\lambda^n$ permutes the multiset $\\{\\lambda_1,\\dots,\\lambda_d\\}$; so some power $\\sigma^k$ ($k=d!$ works) fixes each $\\lambda_i$: $\\lambda_i^{n^k}=\\lambda_i$. Hence $\\lambda_i=0$ or $\\lambda_i^{n^k-1}=1$. ∎"
+      }
+    ],
+    "topics": [
+      "linear-algebra"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "quals-berkeley-2023s-a08",
+    "bank": "quals",
+    "source": {
+      "contest": "Berkeley Preliminary Exam",
+      "paper": "Spring 2023",
+      "year": 2023,
+      "number": "8A",
+      "url": "https://math.berkeley.edu/graduate/phd-program/preliminary-exam"
+    },
+    "grade": "grad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $\\alpha:G\\to G_1$ and $\\beta:G\\to G_2$ be group homomorphisms.\n\n(a) Show that if $\\ker\\alpha\\subseteq\\ker\\beta$ and $\\alpha$ is surjective (onto) then there is a well-defined group homomorphism $\\varphi:G_1\\to G_2$ such that $\\beta=\\varphi\\circ\\alpha$.\n\n(b) Show that if $\\ker\\alpha\\not\\subseteq\\ker\\beta$ then there is no such homomorphism $\\varphi$.",
+    "image": null,
+    "choices": null,
+    "answer": "(a) Define $\\varphi(\\alpha(x))=\\beta(x)$; it is well defined because $\\alpha(x)=\\alpha(x')$ implies $x^{-1}x'\\in\\ker\\alpha\\subseteq\\ker\\beta$, and it is a homomorphism because $\\alpha$ and $\\beta$ are. (b) If $\\beta=\\varphi\\circ\\alpha$ then $x\\in\\ker\\alpha\\Rightarrow\\beta(x)=\\varphi(e)=e$, so $\\ker\\alpha\\subseteq\\ker\\beta$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Define $\\varphi$ on preimages",
+        "body": "**(a)** Let $y\\in G_1$. Since $\\alpha$ is onto, choose $x\\in G$ with $\\alpha(x)=y$, and set $\\varphi(y)=\\beta(x)$.\n\n*Well defined:* if also $\\alpha(x')=y$, then $\\alpha(x^{-1}x')=\\alpha(x)^{-1}\\alpha(x')=e$, so $x^{-1}x'\\in\\ker\\alpha\\subseteq\\ker\\beta$. Hence $e=\\beta(x^{-1}x')=\\beta(x)^{-1}\\beta(x')$, i.e. $\\beta(x')=\\beta(x)$.\n\n*Homomorphism:* if $\\alpha(x_1)=y_1$, $\\alpha(x_2)=y_2$, then $\\alpha(x_1x_2)=y_1y_2$, so\n$$\\varphi(y_1y_2)=\\beta(x_1x_2)=\\beta(x_1)\\beta(x_2)=\\varphi(y_1)\\varphi(y_2).$$\n*Factorization:* for $x\\in G$, $\\varphi(\\alpha(x))=\\beta(x)$ by definition (choosing $x$ itself as the preimage), so $\\beta=\\varphi\\circ\\alpha$.\n\n**(b)** Contrapositive: suppose some homomorphism $\\varphi$ satisfies $\\beta=\\varphi\\circ\\alpha$. If $x\\in\\ker\\alpha$ then $\\beta(x)=\\varphi(\\alpha(x))=\\varphi(e)=e$, so $x\\in\\ker\\beta$. Thus $\\ker\\alpha\\subseteq\\ker\\beta$. Hence if $\\ker\\alpha\\not\\subseteq\\ker\\beta$, no such $\\varphi$ exists (this part does not need $\\alpha$ surjective). ∎"
+      },
+      {
+        "title": "Via the first isomorphism theorem",
+        "body": "**(a)** Let $K=\\ker\\alpha$. By the first isomorphism theorem, $\\alpha$ induces an isomorphism $\\bar\\alpha:G/K\\to G_1$ (onto because $\\alpha$ is). Since $K\\subseteq\\ker\\beta$, $\\beta$ factors through the quotient: $\\bar\\beta:G/K\\to G_2$, $\\bar\\beta(xK)=\\beta(x)$ is well defined ($xK=x'K\\Rightarrow x^{-1}x'\\in K\\subseteq\\ker\\beta$) and a homomorphism. Put $\\varphi=\\bar\\beta\\circ\\bar\\alpha^{-1}$. Then $\\varphi(\\alpha(x))=\\bar\\beta(\\bar\\alpha^{-1}(\\bar\\alpha(xK)))=\\beta(x)$.\n\n**(b)** As before, $\\ker\\alpha\\subseteq\\ker(\\varphi\\circ\\alpha)=\\ker\\beta$ for any homomorphism $\\varphi$. ∎"
+      }
+    ],
+    "topics": [
+      "abstract-algebra"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "quals-berkeley-2023s-a09",
+    "bank": "quals",
+    "source": {
+      "contest": "Berkeley Preliminary Exam",
+      "paper": "Spring 2023",
+      "year": 2023,
+      "number": "9A",
+      "url": "https://math.berkeley.edu/graduate/phd-program/preliminary-exam"
+    },
+    "grade": "grad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Recall that $S_5$ and $A_5$ are the symmetric group and alternating group on 5 letters, respectively.\n\nProve or give a counterexample: For every $\\sigma\\in A_5$ there is a $\\tau\\in S_5$ such that $\\tau^2=\\sigma$.",
+    "image": null,
+    "choices": null,
+    "answer": "True. Elements of odd order $2k+1$ are squares: $\\sigma=(\\sigma^{k+1})^2$. The only elements of $A_5$ of even order are double transpositions, and $(a\\,b)(c\\,d)=(a\\,c\\,b\\,d)^2$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Case analysis by cycle type",
+        "body": "The cycle types of even permutations in $S_5$ are: the identity, $3$-cycles, $5$-cycles, and products of two disjoint transpositions $(a\\,b)(c\\,d)$.\n\n**Odd order.** If $\\sigma$ has odd order $2k+1$ (identity, $3$-cycles, $5$-cycles), take $\\tau=\\sigma^{k+1}$: then $\\tau^2=\\sigma^{2k+2}=\\sigma^{2k+1}\\sigma=\\sigma$. (Equivalently the official $\\tau=\\sigma^{-k}$.)\n\n**Double transpositions.** For $\\sigma=(a\\,b)(c\\,d)$ take the $4$-cycle $\\tau=(a\\,c\\,b\\,d)$. Then $\\tau^2$ sends $a\\mapsto b$, $b\\mapsto a$, $c\\mapsto d$, $d\\mapsto c$, so $\\tau^2=(a\\,b)(c\\,d)=\\sigma$. (Here $\\tau\\notin A_5$, which is why we need $S_5$.)\n\nHence every $\\sigma\\in A_5$ is a square in $S_5$: **the statement is true.** ∎"
+      }
+    ],
+    "topics": [
+      "abstract-algebra"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "quals-berkeley-2023s-b01",
+    "bank": "quals",
+    "source": {
+      "contest": "Berkeley Preliminary Exam",
+      "paper": "Spring 2023",
+      "year": 2023,
+      "number": "1B",
+      "url": "https://math.berkeley.edu/graduate/phd-program/preliminary-exam"
+    },
+    "grade": "grad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $f:(a,b]\\to\\mathbb R$ be a function. Assume that $f$ is strictly increasing on $(a,b)$. (This means that $f(x_1)<f(x_2)$ for all $x_1<x_2$ in $(a,b)$.) Assume also that $f$ is continuous from the left at $b$. Then show that $f$ is strictly increasing on $(a,b]$.",
+    "image": null,
+    "choices": null,
+    "answer": "It remains to show $f(x_1)<f(b)$ for $x_1\\in(a,b)$: pick $x'\\in(x_1,b)$; then $f(x)>f(x')$ for $x\\in(x',b)$, so $f(b)=\\lim_{x\\to b^-}f(x)\\ge f(x')>f(x_1)$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Insert an intermediate point",
+        "body": "Pairs $x_1<x_2$ with both in $(a,b)$ are handled by hypothesis, so it suffices to show $f(x_1)<f(b)$ for every $x_1\\in(a,b)$.\n\nFix such $x_1$ and pick $x'\\in(x_1,b)$. For every $x\\in(x',b)$ we have $f(x)>f(x')$. Since $f$ is continuous from the left at $b$, $f(b)=\\lim_{x\\to b^-}f(x)$, and limits preserve non-strict inequalities, so $f(b)\\ge f(x')$. Therefore\n$$f(x_1)<f(x')\\le f(b).$$\nHence $f$ is strictly increasing on $(a,b]$. ∎\n\n(The intermediate point is needed: passing to the limit directly in $f(x_1)<f(x)$ would only give $f(x_1)\\le f(b)$.)"
+      }
+    ],
+    "topics": [
+      "real-analysis"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "quals-berkeley-2023s-b02",
+    "bank": "quals",
+    "source": {
+      "contest": "Berkeley Preliminary Exam",
+      "paper": "Spring 2023",
+      "year": 2023,
+      "number": "2B",
+      "url": "https://math.berkeley.edu/graduate/phd-program/preliminary-exam"
+    },
+    "grade": "grad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "By definition, the unit cube in the space $C[0,1]$ of continuous real-valued functions on the closed interval $[0,1]$ consists of those functions whose norm $\\|f\\|:=\\max_{0\\le t\\le1}|f(t)|$ doesn't exceed $1$. Find a linear map $\\mathbb R^3\\to C[0,1]$ such that the inverse image of the unit cube is the unit ball in $\\mathbb R^3$.",
+    "image": null,
+    "choices": null,
+    "answer": "$(a,b,c)\\mapsto a\\gamma_1+b\\gamma_2+c\\gamma_3$ where $\\gamma=(\\gamma_1,\\gamma_2,\\gamma_3):[0,1]\\to S^2$ is a continuous surjection onto the unit sphere (a Peano curve onto the square followed by spherical coordinates); then $\\|L(v)\\|=\\max_t|v\\cdot\\gamma(t)|=|v|$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "A space-filling curve onto the sphere",
+        "body": "Any linear map has the form $L(a,b,c)=a\\gamma_1+b\\gamma_2+c\\gamma_3$ with $\\gamma_i\\in C[0,1]$; write $\\gamma(t)=(\\gamma_1(t),\\gamma_2(t),\\gamma_3(t))$, a continuous curve in $\\mathbb R^3$. Then for $v=(a,b,c)$,\n$$\\|L(v)\\|=\\max_{0\\le t\\le1}|v\\cdot\\gamma(t)| .$$\n\n**Choice of $\\gamma$.** Let $P:[0,1]\\to[0,1]^2$ be a continuous surjection (a Peano space-filling curve), and let\n$$\\Phi(u,w)=\\big(\\cos(2\\pi u)\\sin(\\pi w),\\ \\sin(2\\pi u)\\sin(\\pi w),\\ \\cos(\\pi w)\\big),$$\na continuous surjection $[0,1]^2\\to S^2$ (spherical coordinates). Put $\\gamma=\\Phi\\circ P$; it is a continuous map of $[0,1]$ **onto** the unit sphere $S^2$.\n\n**Verification.** For every $v\\in\\mathbb R^3$,\n$$\\|L(v)\\|=\\max_{s\\in S^2}|v\\cdot s|=|v|,$$\nby Cauchy–Schwarz ($|v\\cdot s|\\le|v|$) with equality at $s=v/|v|$ (or trivially if $v=0$). Hence $L(v)$ lies in the unit cube iff $|v|\\le1$: the inverse image of the unit cube is exactly the closed unit ball. (In fact $L$ is an isometric embedding of Euclidean $\\mathbb R^3$ into $C[0,1]$.)\n\n**Answer:** $L(a,b,c)=a\\gamma_1+b\\gamma_2+c\\gamma_3$ with $\\gamma=\\Phi\\circ P:[0,1]\\twoheadrightarrow S^2$. ∎"
+      }
+    ],
+    "topics": [
+      "real-analysis",
+      "topology"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "quals-berkeley-2023s-b03",
+    "bank": "quals",
+    "source": {
+      "contest": "Berkeley Preliminary Exam",
+      "paper": "Spring 2023",
+      "year": 2023,
+      "number": "3B",
+      "url": "https://math.berkeley.edu/graduate/phd-program/preliminary-exam"
+    },
+    "grade": "grad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Show that the recursive sequence $x_{n+1}=x_n/2+1/x_n$ with the initial value $x_0=1.5$ converges to $\\sqrt2$, and that $x_{10}$ has at least $1000$ correct decimal digits.",
+    "image": null,
+    "choices": null,
+    "answer": "With $\\varepsilon_n=x_n-\\sqrt2$: $\\varepsilon_{n+1}=\\dfrac{\\varepsilon_n^2}{2x_n}$, so $0<\\varepsilon_{n+1}<\\varepsilon_n^2$ and $\\varepsilon_{10}<\\varepsilon_0^{2^{10}}<10^{-1024}$ (as $\\varepsilon_0<0.1$).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Quadratic convergence of Newton's method",
+        "body": "This is Newton's method for $x^2-2$. All $x_n>0$ by induction. Let $\\varepsilon_n=x_n-\\sqrt2$. Then\n$$x_{n+1}-\\sqrt2=\\frac{x_n^2+2-2\\sqrt2\\,x_n}{2x_n}=\\frac{(x_n-\\sqrt2)^2}{2x_n},\\qquad\\text{i.e.}\\qquad \\varepsilon_{n+1}=\\frac{\\varepsilon_n^2}{2x_n}\\ge0 .$$\nNow $\\varepsilon_0=1.5-\\sqrt2\\in(0,0.09)$ since $1.41<\\sqrt2<1.42$. Inductively $\\varepsilon_n\\ge0$, so $x_n\\ge\\sqrt2>1$ and $2x_n>2$, giving\n$$0\\le\\varepsilon_{n+1}<\\tfrac12\\varepsilon_n^2\\le\\varepsilon_n^2 .$$\nHence $\\varepsilon_n\\le\\varepsilon_0^{2^n}$, which tends to $0$ since $\\varepsilon_0<1$: $x_n\\to\\sqrt2$. (Indeed $\\varepsilon_n>0$ for all $n$, since $\\varepsilon_0>0$ and $\\varepsilon_{n+1}=0$ would force $\\varepsilon_n=0$.)\n\nFor $n=10$: $\\varepsilon_{10}\\le\\varepsilon_0^{1024}<(10^{-1})^{1024}=10^{-1024}$. So $0<x_{10}-\\sqrt2<10^{-1024}$, so $x_{10}$ approximates $\\sqrt2$ with error less than $10^{-1000}$: at least $1000$ correct decimal digits. ∎\n\n*Check:* a direct 1200-digit computation shows $x_{10}-\\sqrt2<10^{-1199}$."
+      }
+    ],
+    "topics": [
+      "analysis",
+      "sequences-series"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "quals-berkeley-2023s-b04",
+    "bank": "quals",
+    "source": {
+      "contest": "Berkeley Preliminary Exam",
+      "paper": "Spring 2023",
+      "year": 2023,
+      "number": "4B",
+      "url": "https://math.berkeley.edu/graduate/phd-program/preliminary-exam"
+    },
+    "grade": "grad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Show that there is a function holomorphic on the open unit disc that is a bijection from the open unit disc to the vertical strip $0<\\mathrm{Re}\\,z<1$, where $\\mathrm{Re}\\,z$ is the real part of $z$. You may not use the Riemann mapping theorem.",
+    "image": null,
+    "choices": null,
+    "answer": "$F(z)=\\dfrac12-\\dfrac{i}{\\pi}\\,\\mathrm{Log}\\dfrac{1+z}{1-z}$: the Möbius map sends the disc onto the right half-plane, the principal logarithm sends that onto the strip $|\\mathrm{Im}\\,w|<\\pi/2$, and $w\\mapsto\\frac12-\\frac{i}{\\pi}w$ sends that onto $0<\\mathrm{Re}<1$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Compose explicit conformal maps",
+        "body": "Let $\\mathbb D$ be the unit disc, $H=\\{\\mathrm{Re}\\,w>0\\}$, $\\Sigma=\\{|\\mathrm{Im}\\,\\zeta|<\\pi/2\\}$, $S=\\{0<\\mathrm{Re}\\,z<1\\}$.\n\n1. $M(z)=\\dfrac{1+z}{1-z}$ is a bijection $\\mathbb D\\to H$, holomorphic on $\\mathbb D$. Indeed $\\mathrm{Re}\\,M(z)=\\dfrac{1-|z|^2}{|1-z|^2}$, which is $>0$ iff $|z|<1$; and $M$ is a Möbius transformation with inverse $w\\mapsto\\frac{w-1}{w+1}$, which maps $H$ into $\\mathbb D$ (for $\\mathrm{Re}\\,w>0$, $|w-1|<|w+1|$).\n2. The principal logarithm $\\mathrm{Log}\\,w=\\ln|w|+i\\arg w$, $\\arg w\\in(-\\pi/2,\\pi/2)$, is holomorphic on $H$ and a bijection $H\\to\\Sigma$, with inverse $\\exp$: every $w\\in H$ is uniquely $re^{i\\theta}$ with $r>0$, $|\\theta|<\\pi/2$.\n3. $A(\\zeta)=\\dfrac12-\\dfrac{i}{\\pi}\\zeta$ is an affine bijection $\\Sigma\\to S$: $\\mathrm{Re}\\,A(\\zeta)=\\frac12+\\frac{\\mathrm{Im}\\,\\zeta}{\\pi}\\in(0,1)$ iff $|\\mathrm{Im}\\,\\zeta|<\\pi/2$.\n\nHence\n$$F(z)=\\frac12-\\frac{i}{\\pi}\\,\\mathrm{Log}\\frac{1+z}{1-z}$$\nis holomorphic on $\\mathbb D$ and a bijection $\\mathbb D\\to S$, being a composition of holomorphic bijections. ∎"
+      }
+    ],
+    "topics": [
+      "complex-analysis"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "quals-berkeley-2023s-b05",
+    "bank": "quals",
+    "source": {
+      "contest": "Berkeley Preliminary Exam",
+      "paper": "Spring 2023",
+      "year": 2023,
+      "number": "5B",
+      "url": "https://math.berkeley.edu/graduate/phd-program/preliminary-exam"
+    },
+    "grade": "grad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Find the radius of convergence of the Taylor series of $1/(e^x+e^{-x})$ at the point $x=1$.",
+    "image": null,
+    "choices": null,
+    "answer": "sqrt(1+pi^2/4)",
+    "answerDisplay": "$\\sqrt{1+\\frac{\\pi^2}{4}}$",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Distance to the nearest complex singularity",
+        "body": "$h(z)=\\dfrac{1}{e^z+e^{-z}}=\\dfrac{1}{2\\cosh z}$ is meromorphic on $\\mathbb C$, with poles exactly at the zeros of $\\cosh z$, i.e. where $e^{2z}=-1$: $z=i\\big(\\tfrac\\pi2+k\\pi\\big)$, $k\\in\\mathbb Z$. These are genuine (simple) poles since $\\cosh'(z)=\\sinh z=\\pm i\\ne0$ there.\n\nThe radius of convergence of the Taylor series at $1$ of a function meromorphic on $\\mathbb C$ equals the distance from $1$ to the nearest pole (the series converges on the largest disc on which the function is holomorphic, and cannot converge beyond a pole, where $|h|\\to\\infty$). The nearest poles are $\\pm i\\pi/2$, at distance\n$$\\sqrt{1+\\pi^2/4}.$$\n\n**Answer: $\\sqrt{1+\\pi^2/4}=\\tfrac12\\sqrt{4+\\pi^2}\\approx1.862$**"
+      }
+    ],
+    "topics": [
+      "complex-analysis",
+      "sequences-series"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "quals-berkeley-2023s-b06",
+    "bank": "quals",
+    "source": {
+      "contest": "Berkeley Preliminary Exam",
+      "paper": "Spring 2023",
+      "year": 2023,
+      "number": "6B",
+      "url": "https://math.berkeley.edu/graduate/phd-program/preliminary-exam"
+    },
+    "grade": "grad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Prove that if two real square matrices are similar by conjugation by a complex matrix, then they are similar by conjugation by a real matrix.",
+    "image": null,
+    "choices": null,
+    "answer": "If $B=CAC^{-1}$ with $C=D+iE$ ($D,E$ real), then $DA=BD$ and $EA=BE$; $p(t)=\\det(D+tE)$ is a real polynomial with $p(i)\\ne0$, so $p(t_0)\\ne0$ for some real $t_0$, and $B=(D+t_0E)A(D+t_0E)^{-1}$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Real and imaginary parts of the conjugator",
+        "body": "Suppose $A,B\\in M_n(\\mathbb R)$ and $B=CAC^{-1}$ with $C\\in GL_n(\\mathbb C)$. Write $C=D+iE$ with $D,E\\in M_n(\\mathbb R)$. From $CA=BC$ and the fact that $A,B$ are real, comparing real and imaginary parts gives\n$$DA=BD,\\qquad EA=BE .$$\nHence $(D+tE)A=B(D+tE)$ for every $t\\in\\mathbb C$.\n\nLet $p(t)=\\det(D+tE)$, a polynomial in $t$ with real coefficients. Since $p(i)=\\det C\\ne0$, $p$ is not the zero polynomial, so it has finitely many roots and there is a real $t_0$ with $p(t_0)\\ne0$. Then $R=D+t_0E$ is a real invertible matrix with $RA=BR$, i.e. $B=RAR^{-1}$. ∎"
+      },
+      {
+        "title": "Rational canonical form",
+        "body": "Similarity over a field $K$ is determined by the invariant factors of $xI-A$ (equivalently the rational canonical form), which can be computed by Smith normal form over $K[x]$. For a real matrix, the Smith form computed over $\\mathbb R[x]$ is also the Smith form over $\\mathbb C[x]$ (Smith normal form is unique, and the invariant factors are characterized as quotients of gcd's of minors, $d_k/d_{k-1}$, and the gcd of real polynomials is the same over $\\mathbb R$ and $\\mathbb C$). So if $A\\sim B$ over $\\mathbb C$, they have the same invariant factors, hence the same rational canonical form over $\\mathbb R$, hence $A\\sim B$ over $\\mathbb R$. ∎"
+      }
+    ],
+    "topics": [
+      "linear-algebra"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "quals-berkeley-2023s-b07",
+    "bank": "quals",
+    "source": {
+      "contest": "Berkeley Preliminary Exam",
+      "paper": "Spring 2023",
+      "year": 2023,
+      "number": "7B",
+      "url": "https://math.berkeley.edu/graduate/phd-program/preliminary-exam"
+    },
+    "grade": "grad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Give an example of two square complex matrices that have the same minimal polynomial and the same characteristic polynomial but are not similar.",
+    "image": null,
+    "choices": null,
+    "answer": "$4\\times4$ nilpotent Jordan forms with block sizes $(2,2)$ and $(2,1,1)$: both have characteristic polynomial $x^4$ and minimal polynomial $x^2$, but ranks $2$ and $1$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Nilpotent Jordan forms",
+        "body": "Let $J_k$ denote the $k\\times k$ nilpotent Jordan block, and let\n$$A=J_2\\oplus J_2=\\begin{pmatrix}0&1&0&0\\\\0&0&0&0\\\\0&0&0&1\\\\0&0&0&0\\end{pmatrix},\\qquad B=J_2\\oplus J_1\\oplus J_1=\\begin{pmatrix}0&1&0&0\\\\0&0&0&0\\\\0&0&0&0\\\\0&0&0&0\\end{pmatrix}.$$\nBoth are strictly upper triangular, so both characteristic polynomials are $x^4$. Both satisfy $A^2=B^2=0$ while $A\\ne0\\ne B$, so both minimal polynomials are $x^2$.\n\nBut $\\operatorname{rank}A=2\\ne1=\\operatorname{rank}B$, and similar matrices have equal rank. So $A$ and $B$ are not similar. ∎\n\n(Four is the smallest size possible: for $n\\le3$ the characteristic and minimal polynomials together determine the Jordan form.)"
+      }
+    ],
+    "topics": [
+      "linear-algebra"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "quals-berkeley-2023s-b08",
+    "bank": "quals",
+    "source": {
+      "contest": "Berkeley Preliminary Exam",
+      "paper": "Spring 2023",
+      "year": 2023,
+      "number": "8B",
+      "url": "https://math.berkeley.edu/graduate/phd-program/preliminary-exam"
+    },
+    "grade": "grad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $n$ be a positive integer, and $p$ any prime. Prove that over a finite field $F$ of $p^{\\varphi(n)}$ elements the polynomial $x^n-1$ factors into linear factors. (Here $\\varphi$ is Euler's totient function.)",
+    "image": null,
+    "choices": null,
+    "answer": "Write $n=p^rm$ with $p\\nmid m$; then $x^n-1=(x^m-1)^{p^r}$ in characteristic $p$, and $m\\mid p^{\\varphi(n)}-1=|F^\\times|$ (Euler: $p^{\\varphi(m)}\\equiv1\\pmod m$ and $\\varphi(m)\\mid\\varphi(n)$), so the cyclic group $F^\\times$ contains $m$ roots of $x^m-1$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Separate the $p$-part and use that $F^\\times$ is cyclic",
+        "body": "Write $n=p^rm$ with $r\\ge0$ and $\\gcd(m,p)=1$. Since $F$ has characteristic $p$, the Frobenius identity $(u+v)^p=u^p+v^p$ gives\n$$x^n-1=(x^m)^{p^r}-1=(x^m-1)^{p^r}.$$\nSo it suffices to show that $x^m-1$ splits into linear factors over $F$.\n\nLet $q=p^{\\varphi(n)}=|F|$. Since $\\gcd(p^r,m)=1$, $\\varphi(n)=\\varphi(p^r)\\varphi(m)$. By Euler's theorem $p^{\\varphi(m)}\\equiv1\\pmod m$, hence\n$$q=\\big(p^{\\varphi(m)}\\big)^{\\varphi(p^r)}\\equiv1\\pmod m,$$\ni.e. $m\\mid q-1=|F^\\times|$.\n\nThe group $F^\\times$ is cyclic of order $q-1$, so it has a (unique) subgroup of order $m$, whose $m$ elements are distinct roots of $x^m-1$. A polynomial of degree $m$ with $m$ distinct roots $\\zeta_1,\\dots,\\zeta_m$ in $F$ equals $\\prod_{i}(x-\\zeta_i)$. Therefore\n$$x^n-1=\\prod_{i=1}^{m}(x-\\zeta_i)^{p^r}$$\nfactors into linear factors over $F$. ∎"
+      }
+    ],
+    "topics": [
+      "abstract-algebra",
+      "number-theory",
+      "polynomials"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "quals-berkeley-2023s-b09",
+    "bank": "quals",
+    "source": {
+      "contest": "Berkeley Preliminary Exam",
+      "paper": "Spring 2023",
+      "year": 2023,
+      "number": "9B",
+      "url": "https://math.berkeley.edu/graduate/phd-program/preliminary-exam"
+    },
+    "grade": "grad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Give an example of a commutative ring which has an infinite descending chain of distinct prime ideals $I_1\\supset\\cdots\\supset I_n\\supset\\cdots$. (Recall that an ideal $I$ of a commutative ring $R$ is called prime if $R/I$ is an integral domain.)",
+    "image": null,
+    "choices": null,
+    "answer": "$R=\\mathbb C[x_1,x_2,\\dots]$ and $I_n=(x_{n+1},x_{n+2},\\dots)$: $R/I_n\\cong\\mathbb C[x_1,\\dots,x_n]$ is a domain, and $x_{n+1}\\in I_n\\setminus I_{n+1}$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Polynomials in infinitely many variables",
+        "body": "Let $R=\\mathbb C[x_1,x_2,x_3,\\dots]$ (polynomials in countably many variables; each polynomial involves finitely many of them), and let $I_n$ be the ideal generated by $\\{x_i: i>n\\}$.\n\n- **Prime:** the surjective homomorphism $R\\to\\mathbb C[x_1,\\dots,x_n]$ setting $x_i=0$ for $i>n$ has kernel exactly $I_n$ (a polynomial maps to $0$ iff each of its monomials involves some $x_i$ with $i>n$, iff it lies in $I_n$). So $R/I_n\\cong\\mathbb C[x_1,\\dots,x_n]$, an integral domain; thus $I_n$ is prime.\n- **Descending:** $I_{n+1}\\subseteq I_n$ since its generators are among those of $I_n$.\n- **Distinct:** $x_{n+1}\\in I_n$, but $x_{n+1}\\notin I_{n+1}$ because its image in $R/I_{n+1}\\cong\\mathbb C[x_1,\\dots,x_{n+1}]$ is $x_{n+1}\\ne0$.\n\nSo $I_1\\supsetneq I_2\\supsetneq\\cdots$ is an infinite strictly descending chain of prime ideals. ∎"
+      }
+    ],
+    "topics": [
+      "abstract-algebra"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

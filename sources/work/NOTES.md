@@ -43,6 +43,14 @@
 - usamts 2010-11 (Year 22) Round 3: not published on usamts.org (404) -- REPORT TO USER as not publicly available.
 - SMO sample (smo-sample): no answer key in source; all 6 answers agent-solved and computer-verified.
 - SEAMO sample D Q2: official key (B) contradicts printed figure; we use (D) with reviewNote. HKIMO sample: answers-only key, solutions agent-written.
-- PRISM 2019: no question paper published. Dropped 8 questions whose wording/choices would have to be reconstructed from solutions (Q1,2,5,8,9,10,14,16) and Q11 (answer letter only). Kept Q3 (=2014 Senior Q14) and 6 reused 2016/2017 problems (duplicateOf). 2016/2017 have no key; mostly agent-solved (7 checked against answers quoted in 2019 solutions).
+- PRISM 2019: no question paper published. Dropped 8 questions whose wording/choices would have to be reconstructed from solutions (Q1,2,5,8,9,10,14,16) and Q11 (answer letter only). Kept Q3 (=2015 Q14, duplicateOf) and 6 reused 2016/2017 problems (duplicateOf). 2016/2017 have no key; mostly agent-solved (7 checked against answers quoted in 2019 solutions).
 - AMT AMC practice sets: points not printed, set to null.
 - SAMO Senior 2025 R2 Q6: official key 016 contradicts its own solution; stored 61 (16 accepted). 2025 R1 Q14: A and E both correct (E accepted). 2025 R2 Part B scored 5 per section headers (cover says 4).
+- Berkeley prelim Fall 2023 7B: key's |V|=q^n-1 looks like misprint (q^n used, reviewNote). Fall 2024 2A, 8B: official proofs have gaps; agent wrote own proofs.
+- Wisconsin algebra qual Aug 1991 #1: false as stated (p=2, q Mersenne); corrected statement proved, reviewNote. Jan 1992 #4(i): misprint V=0 for T=0 [sic]. Jan 1992 has no official solutions.
+- PRISM 2014 Junior: solutions file is for a slightly different version (Q9/Q10); paper's Q9, Q10 agent-solved.
+- ARML 2015 Power 2b: book prints 2^2014, own derivation gives 2^2015-1 (used, reviewNote). 2015 Relay 2-3: sign issue, used -sqrt(2121)/32 (reviewNote). 2015 puzzle-hunt section skipped (not a contest round).
+- IIT JAM MA 2026 Q10: officially 'marks to all'; kept with (B), reviewNote. JAM 2012-2025: no answer keys online, all agent-solved.
+- IIT JAM 2026 Q10: officially "marks to all"; kept with answer (B), reviewNote. Q41 series term at n=1 undefined (noted in solution). Only 2026 has an official key; 2012-2025 answers will be agent-solved.
+- PUMaC 2019: Comb A8 key 399 vs computed 396 (both accepted); Team 15 key 258 counts impossible f=1, stored 175 (258 accepted); NT B6 flawed (official 203 kept); Comb B8 asks probability, key gives m+n (both accepted). 2018 live: four "value vs m+n" mismatches (value stored, key number accepted); Misc 3 printed equation missing terms, prompt corrected to official-solution equation.
+- BMO source files: 2025_bmo1_report.pdf duplicates 2024 report; *_ukmt files are named by sitting year.

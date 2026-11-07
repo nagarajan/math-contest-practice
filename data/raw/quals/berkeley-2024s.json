@@ -1,0 +1,627 @@
+[
+  {
+    "id": "quals-berkeley-2024s-a01",
+    "bank": "quals",
+    "source": {
+      "contest": "Berkeley Preliminary Exam",
+      "paper": "Spring 2024",
+      "year": 2024,
+      "number": "1A",
+      "url": "https://math.berkeley.edu/graduate/phd-program/preliminary-exam"
+    },
+    "grade": "grad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Differentiate\n$$f(x)=\\begin{cases}x^2+1&\\text{if }x>1,\\\\ 2x&\\text{if }x\\le1.\\end{cases}$$\nCarefully explain, using the definition of the derivative, what happens at $x=1$.",
+    "image": null,
+    "choices": null,
+    "answer": "$f'(x)=2x$ for $x>1$ and $f'(x)=2$ for $x\\le1$; at $x=1$ both one-sided difference quotients tend to $2$ (using $f(1)=2$), so $f'(1)=2$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "One-sided difference quotients",
+        "body": "On the open sets $x>1$ and $x<1$, $f$ agrees with a polynomial, so $f'(x)=2x$ for $x>1$ and $f'(x)=2$ for $x<1$.\n\nAt $x=1$ we have $f(1)=2$ and must compute $\\displaystyle\\lim_{x\\to1}\\frac{f(x)-2}{x-1}$ from each side.\n- From the right ($x>1$): $\\dfrac{(x^2+1)-2}{x-1}=\\dfrac{(x-1)(x+1)}{x-1}=x+1\\to2$.\n- From the left ($x<1$): $\\dfrac{2x-2}{x-1}=2\\to2$.\n\nThe one-sided limits agree, so the two-sided limit exists and $f'(1)=2$. (Note that $f$ is continuous at $1$, as $x^2+1\\to2=f(1)$; without this the right-hand quotient would blow up.)\n\n**Answer:**\n$$f'(x)=\\begin{cases}2x,&x>1,\\\\2,&x\\le1.\\end{cases}$$\n(In particular $f'$ is continuous, so $f\\in C^1$.) ∎"
+      }
+    ],
+    "topics": [
+      "calculus",
+      "real-analysis"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "quals-berkeley-2024s-a02",
+    "bank": "quals",
+    "source": {
+      "contest": "Berkeley Preliminary Exam",
+      "paper": "Spring 2024",
+      "year": 2024,
+      "number": "2A",
+      "url": "https://math.berkeley.edu/graduate/phd-program/preliminary-exam"
+    },
+    "grade": "grad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "(a) Give an example of a sequence of $C^1$ functions $f_n:[0,\\infty)\\to\\mathbb R$, $n=1,2,3,\\dots$, and a $C^1$ function $f:[0,\\infty)\\to\\mathbb R$ such that:\n\n(i) $f(0)=f_n(0)=0$ for all $n$,\n\n(ii) $f_n'(x)\\to f'(x)$ for all $x$ as $n\\to\\infty$, and\n\n(iii) the following statement is not true: $f_n(x)\\to f(x)$ for all $x$ as $n\\to\\infty$.\n\n(b) State a (reasonably general) extra condition which would imply that $f_n(x)\\to f(x)$ for all $x$ as $n\\to\\infty$.",
+    "image": null,
+    "choices": null,
+    "answer": "(a) $f=0$ and $f_n(x)=\\int_0^xg_n$ where $g_n$ is the tent of height $n$ on $[0,\\frac2n]$: $f_n'=g_n\\to0$ pointwise but $f_n(x)=1$ for $x\\ge\\frac2n$. (b) E.g. $f_n'\\to f'$ uniformly on each $[0,R]$ (or dominated convergence: $|f_n'|\\le g$ with $g$ locally integrable).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "A moving tent",
+        "body": "**(a)** Let $f\\equiv0$ and, for $n\\ge1$,\n$$g_n(x)=\\begin{cases}n^2x,&0\\le x\\le\\frac1n,\\\\ n^2\\bigl(\\frac2n-x\\bigr),&\\frac1n\\le x\\le\\frac2n,\\\\0,&x\\ge\\frac2n,\\end{cases}\\qquad f_n(x)=\\int_0^xg_n(t)\\,dt .$$\n$g_n$ is continuous, so $f_n$ is $C^1$ with $f_n'=g_n$, and $f_n(0)=0=f(0)$.\n\n- $f_n'(x)\\to0=f'(x)$ for every $x$: $g_n(0)=0$, and for $x>0$ we have $g_n(x)=0$ as soon as $\\frac2n<x$.\n- But $g_n$ is a triangle of base $\\frac2n$ and height $n$, so $\\int_0^\\infty g_n=1$ and $f_n(x)=1$ for all $x\\ge\\frac2n$. Thus $f_n(1)=1\\not\\to0=f(1)$.\n\n**(b)** A sufficient condition: **$f_n'\\to f'$ uniformly on every bounded interval $[0,R]$.** Then for $x\\in[0,R]$,\n$$|f_n(x)-f(x)|=\\Bigl|\\int_0^x(f_n'-f')\\Bigr|\\le R\\sup_{[0,R]}|f_n'-f'|\\to0,$$\nusing $f_n(0)=f(0)$ and the fundamental theorem of calculus.\n\n(More generally, it suffices that $|f_n'|\\le g$ on $[0,x]$ for some integrable $g$, by the dominated convergence theorem; the tents above violate this since $\\sup_n g_n$ behaves like $1/x$ near $0$.) ∎"
+      }
+    ],
+    "topics": [
+      "real-analysis"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "quals-berkeley-2024s-a03",
+    "bank": "quals",
+    "source": {
+      "contest": "Berkeley Preliminary Exam",
+      "paper": "Spring 2024",
+      "year": 2024,
+      "number": "3A",
+      "url": "https://math.berkeley.edu/graduate/phd-program/preliminary-exam"
+    },
+    "grade": "grad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $f:\\mathbb R\\to\\mathbb R$ be a continuous function satisfying the mean value inequality below:\n$$f(c)\\le\\frac1{2h}\\int_{c-h}^{c+h}f(x)\\,dx\\qquad\\text{for all }c\\in\\mathbb R\\text{ and all }h>0 .$$\n\n(a) Prove that the maximum value of $f$ on any closed interval $[a,b]$ is assumed at one of the endpoints.\n\n(b) Prove that $f$ is convex.\n\nNote: a function $f:\\mathbb R\\to\\mathbb R$ is convex if $f(tx+(1-t)y)\\le tf(x)+(1-t)f(y)$ for all $x,y\\in\\mathbb R$ and all $t\\in[0,1]$.",
+    "image": null,
+    "choices": null,
+    "answer": "(a) If the maximum $M$ were attained only inside, take the smallest maximum point $c\\in(a,b)$; then $f<M$ on $[c-h,c)$ and the average over $[c-h,c+h]$ is $<M=f(c)$. (b) Subtract the chord (affine functions satisfy the inequality with equality); a point above the chord would give an interior maximum on $[a,b]$ exceeding the endpoint values.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Maximum principle, then subtract the chord",
+        "body": "**(a)** Let $M=\\max_{[a,b]}f$ and $S=\\{x\\in[a,b]:f(x)=M\\}$, a nonempty closed set. Suppose $a,b\\notin S$, and let $c=\\min S$; then $a<c<b$. Choose $h>0$ with $[c-h,c+h]\\subseteq[a,b]$. Then $f\\le M$ on $[c,c+h]$, and $f<M$ on $[c-h,c)$, so (by continuity, $f\\le M-\\eta$ on some subinterval of positive length) $\\int_{c-h}^{c+h}f<2hM$. Hence\n$$M=f(c)\\le\\frac1{2h}\\int_{c-h}^{c+h}f<M,$$\na contradiction. So the maximum is attained at $a$ or $b$.\n\n**(b)** Suppose $f$ is not convex: there are $a<b$ and $t\\in(0,1)$ with\n$$f(ta+(1-t)b)>tf(a)+(1-t)f(b).\\tag{$*$}$$\nLet $\\ell(x)$ be the affine function with $\\ell(a)=f(a)$, $\\ell(b)=f(b)$, and set $g=f-\\ell$. An affine function satisfies the mean value inequality with **equality** (its average over a symmetric interval is its value at the centre), so $g$ still satisfies the hypothesis and is continuous. Since $\\ell(ta+(1-t)b)=tf(a)+(1-t)f(b)$, $(*)$ says $g(ta+(1-t)b)>0=g(a)=g(b)$. So the maximum of $g$ on $[a,b]$ is positive and not attained at either endpoint, contradicting (a) applied to $g$. Hence $f$ is convex. ∎"
+      }
+    ],
+    "topics": [
+      "real-analysis"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "quals-berkeley-2024s-a04",
+    "bank": "quals",
+    "source": {
+      "contest": "Berkeley Preliminary Exam",
+      "paper": "Spring 2024",
+      "year": 2024,
+      "number": "4A",
+      "url": "https://math.berkeley.edu/graduate/phd-program/preliminary-exam"
+    },
+    "grade": "grad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let the function $f$ be analytic in the entire complex plane and satisfy\n$$\\int_0^{2\\pi}|f(re^{i\\theta})|\\,d\\theta\\le r^{17/3}$$\nfor all $r>0$. Prove that $f$ is the zero function.",
+    "image": null,
+    "choices": null,
+    "answer": "Cauchy's formula gives $|a_n|\\le\\frac{1}{2\\pi r^n}\\int_0^{2\\pi}|f(re^{i\\theta})|\\,d\\theta\\le\\frac{r^{17/3-n}}{2\\pi}$; let $r\\to0$ for $n\\le5$ and $r\\to\\infty$ for $n\\ge6$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Cauchy estimates with an $L^1$ bound",
+        "body": "Write $f(z)=\\sum_{n\\ge0}a_nz^n$ (valid on all of $\\mathbb C$). For every $r>0$ and $n\\ge0$, Cauchy's integral formula on the circle $z=re^{i\\theta}$ gives\n$$a_n=\\frac1{2\\pi i}\\oint_{|z|=r}\\frac{f(z)}{z^{n+1}}\\,dz=\\frac1{2\\pi}\\int_0^{2\\pi}\\frac{f(re^{i\\theta})}{r^ne^{in\\theta}}\\,d\\theta ,$$\nso\n$$|a_n|\\le\\frac1{2\\pi r^n}\\int_0^{2\\pi}|f(re^{i\\theta})|\\,d\\theta\\le\\frac{r^{17/3-n}}{2\\pi}.$$\n- If $n\\le5$, then $\\frac{17}3-n>0$, and letting $r\\to0^+$ gives $a_n=0$.\n- If $n\\ge6$, then $\\frac{17}3-n<0$, and letting $r\\to\\infty$ gives $a_n=0$.\n\nSo all $a_n=0$ and $f\\equiv0$. (The exponent $\\frac{17}{3}$ being a non-integer is exactly what makes both cases strict.) ∎"
+      }
+    ],
+    "topics": [
+      "complex-analysis"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "quals-berkeley-2024s-a05",
+    "bank": "quals",
+    "source": {
+      "contest": "Berkeley Preliminary Exam",
+      "paper": "Spring 2024",
+      "year": 2024,
+      "number": "5A",
+      "url": "https://math.berkeley.edu/graduate/phd-program/preliminary-exam"
+    },
+    "grade": "grad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $f$ be the meromorphic function on $\\mathbb C$ defined by\n$$f(z)=1+\\frac1z+\\frac1{z^2}.$$\nUse the argument principle to show that\n$$\\int_C\\frac{f'(z)}{f(z)}\\,dz=0$$\nfor all positively oriented simple closed contours $C$ in $U:=\\{z\\in\\mathbb C:|z|>1\\}$.",
+    "image": null,
+    "choices": null,
+    "answer": "$f=\\frac{z^2+z+1}{z^2}$ has a double pole at $0$ and two simple zeros at the primitive cube roots of unity, all in $|z|\\le1$. The closed unit disc lies entirely inside or entirely outside $C$, so $Z-P$ is $2-2$ or $0-0$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Count zeros and poles",
+        "body": "By the argument principle, for a positively oriented simple closed contour $C$ on which $f$ has no zeros or poles,\n$$\\int_C\\frac{f'}{f}\\,dz=2\\pi i\\,(Z-P),$$\nwhere $Z,P$ are the numbers of zeros and poles of $f$ inside $C$, counted with multiplicity.\n\nWrite $f(z)=\\dfrac{z^2+z+1}{z^2}$. Its only pole is a double pole at $0$, and its zeros are the simple zeros $\\omega,\\bar\\omega=\\frac{-1\\pm i\\sqrt3}2$, the primitive cube roots of unity, with $|\\omega|=1$. All of them lie in the closed unit disc $\\bar{\\mathbb D}$, so $f$ has no zeros or poles on $C\\subset U$.\n\nThe set $\\bar{\\mathbb D}$ is connected and disjoint from $C$, so it lies in a single component of $\\mathbb C\\setminus C$: either entirely inside $C$ or entirely outside. In the first case $Z=2$, $P=2$; in the second $Z=P=0$. Either way $Z-P=0$, so $\\int_Cf'/f\\,dz=0$. ∎"
+      },
+      {
+        "title": "Laurent expansion in $|z|>1$",
+        "body": "We have $\\dfrac{f'}{f}=\\dfrac{2z+1}{z^2+z+1}-\\dfrac2z$, which is holomorphic on $U$. For $|z|>1$ expand in powers of $1/z$:\n$$\\frac{2z+1}{z^2+z+1}=\\frac{2}{z}\\cdot\\frac{1+\\frac1{2z}}{1+\\frac1z+\\frac1{z^2}}=\\frac2z+O\\!\\left(\\frac1{z^2}\\right),$$\nso the Laurent series of $f'/f$ on the annulus $U$ has **zero** coefficient of $z^{-1}$. Every other power $z^k$ ($k\\neq -1$) has a primitive on $U$, so integrating the uniformly convergent Laurent series over the compact contour $C$ term by term gives $\\int_Cf'/f\\,dz=2\\pi i\\cdot n(C,0)\\cdot0=0$. ∎"
+      }
+    ],
+    "topics": [
+      "complex-analysis"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "quals-berkeley-2024s-a06",
+    "bank": "quals",
+    "source": {
+      "contest": "Berkeley Preliminary Exam",
+      "paper": "Spring 2024",
+      "year": 2024,
+      "number": "6A",
+      "url": "https://math.berkeley.edu/graduate/phd-program/preliminary-exam"
+    },
+    "grade": "grad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $M_{2\\times2}$ be the vector space of all real $2\\times2$ matrices. Let\n$$A=\\begin{pmatrix}1&2\\\\-1&3\\end{pmatrix}\\qquad\\text{and}\\qquad B=\\begin{pmatrix}2&1\\\\0&4\\end{pmatrix}$$\nand define a linear transformation $L:M_{2\\times2}\\to M_{2\\times2}$ by $L(X)=AXB$. Compute the trace and the determinant of $L$.",
+    "image": null,
+    "choices": null,
+    "answer": "$\\operatorname{tr}L=\\operatorname{tr}A\\cdot\\operatorname{tr}B=4\\cdot6=24$ and $\\det L=(\\det A)^2(\\det B)^2=5^2\\cdot8^2=1600$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Write out the $4\times4$ matrix",
+        "body": "For $X=\\begin{pmatrix}a&b\\\\c&d\\end{pmatrix}$,\n$$XB=\\begin{pmatrix}2a&a+4b\\\\2c&c+4d\\end{pmatrix},\\qquad AXB=\\begin{pmatrix}2a+4c&a+4b+2c+8d\\\\-2a+6c&-a-4b+3c+12d\\end{pmatrix}.$$\nIn coordinates $(a,b,c,d)$ the matrix of $L$ is\n$$\\begin{pmatrix}2&0&4&0\\\\1&4&2&8\\\\-2&0&6&0\\\\-1&-4&3&12\\end{pmatrix}.$$\nIts trace is $2+4+6+12=24$. For the determinant, subtract $2\\times$ column 1 from column 3 and $2\\times$ column 2 from column 4:\n$$\\det\\begin{pmatrix}2&0&0&0\\\\1&4&0&0\\\\-2&0&10&0\\\\-1&-4&5&20\\end{pmatrix}=2\\cdot4\\cdot10\\cdot20=1600 .$$\n\n**Answer:** $\\operatorname{tr}L=24$, $\\det L=1600$."
+      },
+      {
+        "title": "Kronecker products",
+        "body": "Identify $M_{2\\times2}$ with $\\mathbb R^4$ by stacking rows. Then $L(X)=AXB$ has matrix $A\\otimes B^T$. Eigenvalue-wise (over $\\mathbb C$), if $A$ has eigenvalues $\\alpha_1,\\alpha_2$ and $B$ has $\\beta_1,\\beta_2$, then $L$ has eigenvalues $\\alpha_i\\beta_j$. Hence\n$$\\operatorname{tr}L=\\Bigl(\\sum\\alpha_i\\Bigr)\\Bigl(\\sum\\beta_j\\Bigr)=\\operatorname{tr}A\\operatorname{tr}B=4\\cdot6=24,$$\n$$\\det L=\\prod_{i,j}\\alpha_i\\beta_j=(\\alpha_1\\alpha_2)^2(\\beta_1\\beta_2)^2=(\\det A)^2(\\det B)^2=5^2\\cdot8^2=1600 .$$\n\n**Answer:** $\\operatorname{tr}L=24$, $\\det L=1600$."
+      }
+    ],
+    "topics": [
+      "linear-algebra"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "quals-berkeley-2024s-a07",
+    "bank": "quals",
+    "source": {
+      "contest": "Berkeley Preliminary Exam",
+      "paper": "Spring 2024",
+      "year": 2024,
+      "number": "7A",
+      "url": "https://math.berkeley.edu/graduate/phd-program/preliminary-exam"
+    },
+    "grade": "grad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $w$ be a positive continuous function on $[0,1]$, $n$ a positive integer, and $P_n$ the vector space of real polynomials whose degrees are at most $n$, equipped with the inner product\n$$\\langle p,q\\rangle=\\int_0^1p(t)q(t)w(t)\\,dt .$$\n\n(a) Prove that $P_n$ has an orthonormal basis $p_0,p_1,\\dots,p_n$ (i.e., $\\langle p_j,p_k\\rangle=1$ for $j=k$ and $0$ for $j\\neq  k$) such that $\\deg p_k=k$ for each $k$.\n\n(b) Prove that $\\langle p_k,p_k'\\rangle=0$ for each $k$.",
+    "image": null,
+    "choices": null,
+    "answer": "(a) Gram–Schmidt on $1,t,\\dots,t^n$ gives $p_k\\in P_k\\setminus P_{k-1}$. (b) $p_k'\\in P_{k-1}=\\operatorname{span}(p_0,\\dots,p_{k-1})\\perp p_k$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Gram–Schmidt",
+        "body": "First, $\\langle\\cdot,\\cdot\\rangle$ is an inner product: it is bilinear and symmetric, and $\\langle p,p\\rangle=\\int_0^1p^2w>0$ for $p\\neq 0$ since $p^2w$ is continuous, $\\ge0$, and positive except at finitely many points.\n\n**(a)** Apply Gram–Schmidt to the basis $1,t,t^2,\\dots,t^n$ of $P_n$. This produces an orthonormal list $p_0,\\dots,p_n$ with\n$$\\operatorname{span}(p_0,\\dots,p_k)=\\operatorname{span}(1,t,\\dots,t^k)=P_k\\qquad(0\\le k\\le n).$$\nIn particular $p_k\\in P_k$. If $\\deg p_k<k$ for some $k\\ge1$, then $p_0,\\dots,p_k$ would all lie in $P_{k-1}$, which has dimension $k$, contradicting the linear independence of these $k+1$ orthonormal vectors. And $p_0$ is a nonzero constant. Hence $\\deg p_k=k$.\n\n**(b)** For $k=0$, $p_0'=0$. For $k\\ge1$, $p_k'$ has degree $k-1$, so $p_k'\\in P_{k-1}=\\operatorname{span}(p_0,\\dots,p_{k-1})$, and $p_k$ is orthogonal to each of $p_0,\\dots,p_{k-1}$. Hence $\\langle p_k,p_k'\\rangle=0$. ∎"
+      }
+    ],
+    "topics": [
+      "linear-algebra"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "quals-berkeley-2024s-a08",
+    "bank": "quals",
+    "source": {
+      "contest": "Berkeley Preliminary Exam",
+      "paper": "Spring 2024",
+      "year": 2024,
+      "number": "8A",
+      "url": "https://math.berkeley.edu/graduate/phd-program/preliminary-exam"
+    },
+    "grade": "grad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $R$ be a ring with identity, and let $u$ be an element of $R$ with a right inverse. Prove that the following conditions on $R$ are equivalent:\n\n1. $u$ has more than one right inverse;\n2. $u$ is a zero divisor;\n3. $u$ is not a unit.\n\nIn your answer, you may not cite any known lemmas, propositions, etc., from ring theory. Use only the definitions.",
+    "image": null,
+    "choices": null,
+    "answer": "(1)⇒(2): $u(v'-v'')=0$. (2)⇒(3): a unit is not a zero divisor (multiply by its inverse). (3)⇒(1): if $uv=1$ but $vu\\neq 1$, then $w=vu-1\\neq 0$ satisfies $uw=0$, so $v+w$ is a second right inverse.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Cycle of implications",
+        "body": "Let $v$ be a right inverse of $u$: $uv=1$. (Here a zero divisor is a nonzero $u$ with $ux=0$ or $xu=0$ for some $x\\neq 0$; note $u\\neq 0$ unless $R=0$, since $uv=1$.)\n\n**(1)⇒(2).** If $uv'=uv''=1$ with $v'\\neq  v''$, then $u(v'-v'')=0$ with $v'-v''\\neq 0$, so $u$ is a zero divisor.\n\n**(2)⇒(3).** Contrapositive: let $u$ be a unit with $uv=vu=1$. If $ux=0$ then $x=(vu)x=v(ux)=0$; if $xu=0$ then $x=x(uv)=(xu)v=0$. So $u$ is not a zero divisor.\n\n**(3)⇒(1).** Suppose $u$ is not a unit. Then $vu\\neq 1$, for otherwise $v$ would be a two-sided inverse. Let $w=vu-1\\neq 0$. Then\n$$uw=uvu-u=1\\cdot u-u=0,$$\nso $u(v+w)=uv+uw=1$, i.e. $v+w\\neq  v$ is a second right inverse of $u$.\n\nHence (1), (2), (3) are equivalent. ∎"
+      }
+    ],
+    "topics": [
+      "abstract-algebra"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "quals-berkeley-2024s-a09",
+    "bank": "quals",
+    "source": {
+      "contest": "Berkeley Preliminary Exam",
+      "paper": "Spring 2024",
+      "year": 2024,
+      "number": "9A",
+      "url": "https://math.berkeley.edu/graduate/phd-program/preliminary-exam"
+    },
+    "grade": "grad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Classify all abelian groups of order 80 up to isomorphism.",
+    "image": null,
+    "choices": null,
+    "answer": "Five groups: $\\mathbb Z_5\\times\\mathbb Z_{16}$, $\\mathbb Z_5\\times\\mathbb Z_8\\times\\mathbb Z_2$, $\\mathbb Z_5\\times\\mathbb Z_4\\times\\mathbb Z_4$, $\\mathbb Z_5\\times\\mathbb Z_4\\times\\mathbb Z_2^2$, $\\mathbb Z_5\\times\\mathbb Z_2^4$ (one for each partition of 4).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Structure theorem",
+        "body": "$80=2^4\\cdot5$. By the structure theorem for finite abelian groups, an abelian group of order $80$ is the direct product of its Sylow subgroups, the one of order $5$ is $\\mathbb Z_5$, and the one of order $16$ is $\\mathbb Z_{2^{r_1}}\\times\\dots\\times\\mathbb Z_{2^{r_k}}$ for a **unique** partition $r_1\\ge\\dots\\ge r_k\\ge1$ of $4$. The partitions of $4$ are $4,\\ 3+1,\\ 2+2,\\ 2+1+1,\\ 1+1+1+1$, giving exactly five pairwise non-isomorphic groups:\n$$\\mathbb Z_5\\times\\mathbb Z_{16}\\ (\\cong\\mathbb Z_{80}),\\quad \\mathbb Z_5\\times\\mathbb Z_8\\times\\mathbb Z_2,\\quad\\mathbb Z_5\\times\\mathbb Z_4\\times\\mathbb Z_4,\\quad\\mathbb Z_5\\times\\mathbb Z_4\\times\\mathbb Z_2\\times\\mathbb Z_2,\\quad\\mathbb Z_5\\times\\mathbb Z_2^4 .$$\nIn invariant-factor form: $\\mathbb Z_{80}$, $\\mathbb Z_{40}\\times\\mathbb Z_2$, $\\mathbb Z_{20}\\times\\mathbb Z_4$, $\\mathbb Z_{20}\\times\\mathbb Z_2\\times\\mathbb Z_2$, $\\mathbb Z_{10}\\times\\mathbb Z_2^3$. ∎"
+      }
+    ],
+    "topics": [
+      "abstract-algebra"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "quals-berkeley-2024s-b01",
+    "bank": "quals",
+    "source": {
+      "contest": "Berkeley Preliminary Exam",
+      "paper": "Spring 2024",
+      "year": 2024,
+      "number": "1B",
+      "url": "https://math.berkeley.edu/graduate/phd-program/preliminary-exam"
+    },
+    "grade": "grad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Give an $\\epsilon$-$\\delta$ proof that\n$$\\lim_{x\\to5}x^2=25 .$$",
+    "image": null,
+    "choices": null,
+    "answer": "Take $\\delta=\\min\\{1,\\epsilon/11\\}$: then $|x+5|<11$ and $|x^2-25|=|x+5||x-5|<11\\delta\\le\\epsilon$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Bound the other factor",
+        "body": "Let $\\epsilon>0$ and set $\\delta=\\min\\{1,\\epsilon/11\\}>0$. Suppose $0<|x-5|<\\delta$. Then $|x-5|<1$, so $4<x<6$ and $|x+5|<11$. Hence\n$$|x^2-25|=|x+5|\\,|x-5|<11\\delta\\le11\\cdot\\frac{\\epsilon}{11}=\\epsilon .$$\nSo $\\lim_{x\\to5}x^2=25$. ∎"
+      }
+    ],
+    "topics": [
+      "real-analysis",
+      "calculus"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "quals-berkeley-2024s-b02",
+    "bank": "quals",
+    "source": {
+      "contest": "Berkeley Preliminary Exam",
+      "paper": "Spring 2024",
+      "year": 2024,
+      "number": "2B",
+      "url": "https://math.berkeley.edu/graduate/phd-program/preliminary-exam"
+    },
+    "grade": "grad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $(X,d)$ be a metric space, and let $\\rho:X\\times X\\to\\mathbb R$ be the function defined by\n$$\\rho(x,y)=\\frac{d(x,y)}{1+d(x,y)}.$$\n\n(a) Show that $\\rho$ is a metric on $X$.\n\n(b) Show that the metrics $d$ and $\\rho$ are equivalent. (Recall that two metrics $d_1$ and $d_2$ are called equivalent if every convergent sequence in the metric $d_1$ converges also to the same point in $d_2$, and vice versa.)",
+    "image": null,
+    "choices": null,
+    "answer": "(a) $\\varphi(t)=\\frac t{1+t}$ is increasing and subadditive, so the triangle inequality transfers. (b) $\\rho\\le d$, and $d=\\frac{\\rho}{1-\\rho}\\le2\\rho$ when $\\rho\\le\\frac12$; so $d(x_n,x)\\to0\\iff\\rho(x_n,x)\\to0$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Monotone subadditive function of $d$",
+        "body": "Let $\\varphi(t)=\\dfrac t{1+t}=1-\\dfrac1{1+t}$ for $t\\ge0$, so $\\rho=\\varphi\\circ d$. $\\varphi$ is strictly increasing, $\\varphi(0)=0$, and $0\\le\\varphi<1$.\n\n**(a)** Symmetry is inherited from $d$, and $\\rho(x,y)=0\\iff d(x,y)=0\\iff x=y$. For the triangle inequality it suffices that\n$$t\\le u+v\\ (t,u,v\\ge0)\\implies\\varphi(t)\\le\\varphi(u)+\\varphi(v).$$\nSince $\\varphi$ is increasing, $\\varphi(t)\\le\\varphi(u+v)$, and\n$$\\varphi(u+v)=\\frac{u}{1+u+v}+\\frac{v}{1+u+v}\\le\\frac{u}{1+u}+\\frac{v}{1+v}=\\varphi(u)+\\varphi(v).$$\nApplying this with $t=d(x,z)$, $u=d(x,y)$, $v=d(y,z)$ gives $\\rho(x,z)\\le\\rho(x,y)+\\rho(y,z)$. So $\\rho$ is a metric.\n\n**(b)** Clearly $\\rho\\le d$. Conversely, solving $\\rho=d/(1+d)$ gives $d=\\rho/(1-\\rho)$, so $d\\le2\\rho$ whenever $\\rho\\le\\frac12$.\n\nIf $d(x_n,x)\\to0$ then $\\rho(x_n,x)\\le d(x_n,x)\\to0$. If $\\rho(x_n,x)\\to0$ then eventually $\\rho(x_n,x)\\le\\frac12$ and $d(x_n,x)\\le2\\rho(x_n,x)\\to0$. So a sequence converges to $x$ in $d$ iff it converges to $x$ in $\\rho$: the metrics are equivalent. ∎"
+      }
+    ],
+    "topics": [
+      "real-analysis",
+      "topology"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "quals-berkeley-2024s-b03",
+    "bank": "quals",
+    "source": {
+      "contest": "Berkeley Preliminary Exam",
+      "paper": "Spring 2024",
+      "year": 2024,
+      "number": "3B",
+      "url": "https://math.berkeley.edu/graduate/phd-program/preliminary-exam"
+    },
+    "grade": "grad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $f$ be a continuous real-valued function on $[0,\\infty)$ such that $\\lim_{x\\to\\infty}f(x)$ exists (and is finite). Prove that $f$ is uniformly continuous.",
+    "image": null,
+    "choices": null,
+    "answer": "Choose $M$ with $|f-L|<\\epsilon/2$ on $[M,\\infty)$; $f$ is uniformly continuous on the compact $[0,M+1]$; with $\\delta\\le1$ any two points at distance $<\\delta$ both lie in $[0,M+1]$ or both in $[M,\\infty)$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Split into a compact piece and a tail",
+        "body": "Let $L=\\lim_{x\\to\\infty}f(x)$ and $\\epsilon>0$. Choose $M\\ge0$ with $|f(x)-L|<\\epsilon/2$ for all $x\\ge M$; then\n$$|f(x)-f(y)|<\\epsilon\\qquad\\text{for all }x,y\\ge M.\\tag{1}$$\nBy the Heine–Cantor theorem, $f$ is uniformly continuous on the compact interval $[0,M+1]$, so there is $\\delta\\in(0,1]$ with\n$$|f(x)-f(y)|<\\epsilon\\qquad\\text{for }x,y\\in[0,M+1],\\ |x-y|<\\delta.\\tag{2}$$\nNow let $x,y\\ge0$ with $|x-y|<\\delta\\le1$, say $x\\le y$. If $x\\ge M$, use (1). If $x<M$, then $y<x+1<M+1$, so both points lie in $[0,M+1]$ and (2) applies. Either way $|f(x)-f(y)|<\\epsilon$. Hence $f$ is uniformly continuous on $[0,\\infty)$. ∎"
+      }
+    ],
+    "topics": [
+      "real-analysis"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "quals-berkeley-2024s-b04",
+    "bank": "quals",
+    "source": {
+      "contest": "Berkeley Preliminary Exam",
+      "paper": "Spring 2024",
+      "year": 2024,
+      "number": "4B",
+      "url": "https://math.berkeley.edu/graduate/phd-program/preliminary-exam"
+    },
+    "grade": "grad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Let $f$ be an analytic function such that\n$$f(z)=1+2z+3z^2+\\cdots\\qquad\\text{for }|z|<1 .$$\nDefine a sequence $a_0,a_1,\\dots$ of complex numbers by\n$$f(z)=\\sum_{n=0}^\\infty a_n(z+2)^n .$$\n(Assume that the domain of $f$ is large enough, and connected.) Find\n$$\\limsup_{n\\to\\infty}|a_n|^{1/n}.$$",
+    "image": null,
+    "choices": null,
+    "answer": "1/3",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "answerDisplay": "$\\frac13$",
+    "solutions": [
+      {
+        "title": "Radius of convergence",
+        "body": "For $|z|<1$, $1+2z+3z^2+\\dots=\\dfrac{d}{dz}\\dfrac1{1-z}=\\dfrac1{(1-z)^2}$. So $f$ is (the restriction of) the meromorphic function $\\dfrac1{(1-z)^2}$, holomorphic on $\\mathbb C\\setminus\\{1\\}$ with a pole at $1$.\n\nThe Taylor series of $f$ about $-2$ therefore has radius of convergence equal to the distance from $-2$ to the singularity $1$, namely $R=3$ (it converges on $|z+2|<3$, where $f$ is holomorphic, and cannot converge on a larger disc since $f$ is unbounded near $1$). By the Cauchy–Hadamard formula,\n$$\\limsup_{n\\to\\infty}|a_n|^{1/n}=\\frac1R=\\frac13 .$$\n\n**Answer:** $\\dfrac13$."
+      },
+      {
+        "title": "Compute the coefficients",
+        "body": "With $w=z+2$, $1-z=3-w=3\\bigl(1-\\frac w3\\bigr)$, so\n$$f=\\frac{1}{9}\\Bigl(1-\\frac w3\\Bigr)^{-2}=\\frac19\\sum_{n\\ge0}(n+1)\\frac{w^n}{3^n},\\qquad a_n=\\frac{n+1}{3^{n+2}} .$$\nThen $|a_n|^{1/n}=\\dfrac{(n+1)^{1/n}}{3\\cdot 9^{1/n}}\\to\\dfrac13$.\n\n**Answer:** $\\dfrac13$."
+      }
+    ],
+    "topics": [
+      "complex-analysis",
+      "sequences-series"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "quals-berkeley-2024s-b05",
+    "bank": "quals",
+    "source": {
+      "contest": "Berkeley Preliminary Exam",
+      "paper": "Spring 2024",
+      "year": 2024,
+      "number": "5B",
+      "url": "https://math.berkeley.edu/graduate/phd-program/preliminary-exam"
+    },
+    "grade": "grad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Evaluate the integral\n$$\\int_{-\\infty}^\\infty\\frac{\\cos kx}{1+x+x^2}\\,dx$$\nwhere $k\\ge0$.",
+    "image": null,
+    "choices": null,
+    "answer": "$$\\int_{-\\infty}^\\infty\\frac{\\cos kx}{1+x+x^2}\\,dx=\\frac{2\\pi}{\\sqrt3}\\,e^{-\\sqrt3k/2}\\cos\\frac k2 .$$",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Upper half-plane contour",
+        "body": "Let $\\omega=\\frac{-1+i\\sqrt3}{2}$, so $z^2+z+1=(z-\\omega)(z-\\bar\\omega)$, and let $g(z)=\\dfrac{e^{ikz}}{z^2+z+1}$. Take $R>1$ and the contour $C_R$: the segment $[-R,R]$ followed by the upper semicircle $\\Gamma_R$ of radius $R$. Inside, $g$ has only the simple pole $\\omega$, with\n$$\\operatorname*{Res}_{z=\\omega}g=\\frac{e^{ik\\omega}}{\\omega-\\bar\\omega}=\\frac{e^{-\\sqrt3k/2}e^{-ik/2}}{i\\sqrt3}.$$\nSo $\\oint_{C_R}g\\,dz=2\\pi i\\cdot\\dfrac{e^{-\\sqrt3k/2}e^{-ik/2}}{i\\sqrt3}=\\dfrac{2\\pi}{\\sqrt3}e^{-\\sqrt3k/2}\\Bigl(\\cos\\dfrac k2-i\\sin\\dfrac k2\\Bigr)$.\n\nOn $\\Gamma_R$, $|e^{ikz}|=e^{-k\\operatorname{Im}z}\\le1$ (as $k\\ge0$) and $|z^2+z+1|\\ge R^2-R-1$, so\n$$\\Bigl|\\int_{\\Gamma_R}g\\,dz\\Bigr|\\le\\frac{\\pi R}{R^2-R-1}\\xrightarrow[R\\to\\infty]{}0 .$$\nHence $\\displaystyle\\int_{-\\infty}^\\infty\\frac{e^{ikx}}{x^2+x+1}\\,dx=\\frac{2\\pi}{\\sqrt3}e^{-\\sqrt3k/2}e^{-ik/2}$ (the integral converges absolutely). Taking real parts,\n$$\\int_{-\\infty}^\\infty\\frac{\\cos kx}{1+x+x^2}\\,dx=\\frac{2\\pi}{\\sqrt3}\\,e^{-\\sqrt3k/2}\\cos\\frac k2 .$$\n(Check $k=0$: $\\int\\frac{dx}{(x+\\frac12)^2+\\frac34}=\\frac{2\\pi}{\\sqrt3}$; numerical integration for $k=1,2.5$ also agrees.) ∎"
+      },
+      {
+        "title": "Complete the square and use a known transform",
+        "body": "Substitute $x=u-\\frac12$: $1+x+x^2=u^2+\\frac34$ and $\\cos kx=\\cos ku\\cos\\frac k2+\\sin ku\\sin\\frac k2$. The $\\sin ku$ term is odd in $u$ and integrates to $0$, so\n$$\\int_{-\\infty}^\\infty\\frac{\\cos kx}{1+x+x^2}dx=\\cos\\frac k2\\int_{-\\infty}^\\infty\\frac{\\cos ku}{u^2+a^2}du,\\qquad a=\\frac{\\sqrt3}2 .$$\nThe classical integral $\\int_{-\\infty}^\\infty\\frac{\\cos ku}{u^2+a^2}du=\\frac{\\pi}{a}e^{-ka}$ ($k\\ge0$; it follows from the same residue computation at $u=ia$) gives\n$$\\cos\\frac k2\\cdot\\frac{2\\pi}{\\sqrt3}e^{-\\sqrt3k/2}. $$ ∎"
+      }
+    ],
+    "topics": [
+      "complex-analysis",
+      "calculus"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "quals-berkeley-2024s-b06",
+    "bank": "quals",
+    "source": {
+      "contest": "Berkeley Preliminary Exam",
+      "paper": "Spring 2024",
+      "year": 2024,
+      "number": "6B",
+      "url": "https://math.berkeley.edu/graduate/phd-program/preliminary-exam"
+    },
+    "grade": "grad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Prove that the matrix\n$$\\begin{pmatrix}1&1.00001&1\\\\1.00001&1&1.00001\\\\1&1.00001&1\\end{pmatrix}$$\nhas one positive eigenvalue and one negative eigenvalue.",
+    "image": null,
+    "choices": null,
+    "answer": "With $\\epsilon=10^{-5}$ the characteristic polynomial is $x\\bigl(x^2-3x-(4\\epsilon+2\\epsilon^2)\\bigr)$; the quadratic has negative constant term, so its roots are one positive and one negative (the third eigenvalue is $0$).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Characteristic polynomial",
+        "body": "Let $s=1+\\epsilon$ with $\\epsilon=10^{-5}$, and $M=\\begin{pmatrix}1&s&1\\\\s&1&s\\\\1&s&1\\end{pmatrix}$. Since $M$ is real symmetric, its eigenvalues are real. Rows 1 and 3 are equal, so $\\det M=0$. The characteristic polynomial is\n$$\\det(xI-M)=x^3-(\\operatorname{tr}M)x^2+c_2x-\\det M,$$\nwhere $c_2$ is the sum of the principal $2\\times2$ minors:\n$$c_2=(1-s^2)+(1-1)+(1-s^2)=2-2s^2 .$$\nSo\n$$\\det(xI-M)=x^3-3x^2-(2s^2-2)x=x\\bigl(x^2-3x-(4\\epsilon+2\\epsilon^2)\\bigr).$$\nThe quadratic factor has roots $x_1x_2=-(4\\epsilon+2\\epsilon^2)<0$, so one root is positive and one is negative:\n$$x_\\pm=\\frac{3\\pm\\sqrt{9+16\\epsilon+8\\epsilon^2}}2\\approx3.0000133,\\ -0.0000133 .$$\nThus the eigenvalues are $0$, one positive and one negative. ∎"
+      },
+      {
+        "title": "Quadratic form and test vectors",
+        "body": "$M$ is real symmetric, so it has real eigenvalues and an orthonormal eigenbasis. Rows 1 and 3 coincide, so $0$ is an eigenvalue; the null space is spanned by $(1,0,-1)$ (rows 1 and 2 are independent, so the rank is $2$), and the other two eigenvalues $\\lambda\\ge\\mu$ belong to eigenvectors spanning $W=(1,0,-1)^\\perp=\\operatorname{span}\\{(1,0,1),(0,1,0)\\}$.\n\nEvaluate the quadratic form $Q(v)=v^TMv$ on $W$:\n- $v=(1,0,1)$: $Q(v)=1+1+1+1=4>0$;\n- $w=(1,-\\tfrac2s,1)\\in W$ with $s=1.00001$: $Mw=\\bigl(2-2,\\ 2s-\\tfrac2s,\\ 0\\bigr)$, so $Q(w)=-\\tfrac2s\\bigl(2s-\\tfrac2s\\bigr)=-4+\\tfrac4{s^2}<0$.\n\nRestricted to $W$, $Q$ is diagonal in the eigenbasis with entries $\\lambda,\\mu$. Since $Q$ takes a positive and a negative value on $W$, we get $\\lambda>0>\\mu$: one positive and one negative eigenvalue. ∎"
+      }
+    ],
+    "topics": [
+      "linear-algebra"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "quals-berkeley-2024s-b07",
+    "bank": "quals",
+    "source": {
+      "contest": "Berkeley Preliminary Exam",
+      "paper": "Spring 2024",
+      "year": 2024,
+      "number": "7B",
+      "url": "https://math.berkeley.edu/graduate/phd-program/preliminary-exam"
+    },
+    "grade": "grad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "A square matrix $A$ is nilpotent if $A^k=0$ for some positive integer $k$.\n\n(a) If $A$ and $B$ are nilpotent, is $A+B$ nilpotent?\n\n(b) Prove: If $A$ and $B$ are nilpotent matrices and $AB=BA$, then $A+B$ is nilpotent.\n\n(c) Prove: If $A$ is nilpotent then $I+A$ and $I-A$ are invertible.",
+    "image": null,
+    "choices": null,
+    "answer": "(a) No: $\\begin{pmatrix}0&1\\\\0&0\\end{pmatrix}+\\begin{pmatrix}0&0\\\\1&0\\end{pmatrix}$ squares to $I$. (b) Binomial theorem: $(A+B)^{j+k}=0$ if $A^j=B^k=0$. (c) $(I-A)(I+A+\\dots+A^{k-1})=I-A^k=I$; replace $A$ by $-A$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Counterexample, binomial theorem, geometric series",
+        "body": "**(a) No.** $A=\\begin{pmatrix}0&1\\\\0&0\\end{pmatrix}$ and $B=\\begin{pmatrix}0&0\\\\1&0\\end{pmatrix}$ satisfy $A^2=B^2=0$, but $A+B=\\begin{pmatrix}0&1\\\\1&0\\end{pmatrix}$ has $(A+B)^2=I$, so $(A+B)^m\\in\\{I,A+B\\}$ is never $0$.\n\n**(b)** Let $A^j=B^k=0$. Since $AB=BA$, the binomial theorem holds:\n$$(A+B)^{j+k}=\\sum_{i=0}^{j+k}\\binom{j+k}{i}A^iB^{j+k-i}.$$\nIn each term either $i\\ge j$ (so $A^i=0$) or $i<j$, i.e. $j+k-i>k$ (so $B^{j+k-i}=0$). Hence $(A+B)^{j+k}=0$.\n\n**(c)** Let $A^k=0$. Then\n$$(I-A)(I+A+A^2+\\dots+A^{k-1})=I-A^k=I,$$\nand the two factors commute, so $I-A$ is invertible. Since $-A$ is also nilpotent ($(-A)^k=0$), $I+A=I-(-A)$ is invertible too. ∎"
+      }
+    ],
+    "topics": [
+      "linear-algebra"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "quals-berkeley-2024s-b08",
+    "bank": "quals",
+    "source": {
+      "contest": "Berkeley Preliminary Exam",
+      "paper": "Spring 2024",
+      "year": 2024,
+      "number": "8B",
+      "url": "https://math.berkeley.edu/graduate/phd-program/preliminary-exam"
+    },
+    "grade": "grad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Show that any finite integral domain is a field.",
+    "image": null,
+    "choices": null,
+    "answer": "For $a\\neq 0$, $x\\mapsto ax$ is injective (no zero divisors), hence surjective on the finite set $R$, so $ab=1$ for some $b$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Multiplication map",
+        "body": "Let $R$ be a finite integral domain (commutative, $1\\neq 0$, no zero divisors) and $a\\in R$, $a\\neq 0$. Define $m_a:R\\to R$, $m_a(x)=ax$. If $ax=ay$ then $a(x-y)=0$, so $x=y$ since $a\\neq 0$ and $R$ has no zero divisors. Thus $m_a$ is injective, and an injective map from a finite set to itself is surjective. Hence $ab=1$ for some $b\\in R$, so $a$ is a unit. Every nonzero element is invertible, so $R$ is a field. ∎"
+      },
+      {
+        "title": "Powers of $a$",
+        "body": "Let $a\\neq 0$. The powers $a,a^2,a^3,\\dots$ lie in the finite set $R$, so $a^i=a^j$ for some $i<j$. Then $a^i(a^{j-i}-1)=0$, and since $a^i\\neq 0$ (no zero divisors), $a^{j-i}=1$. So $a\\cdot a^{j-i-1}=1$ (with $a^0=1$), and $a$ is invertible. Hence $R$ is a field. ∎"
+      }
+    ],
+    "topics": [
+      "abstract-algebra"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "quals-berkeley-2024s-b09",
+    "bank": "quals",
+    "source": {
+      "contest": "Berkeley Preliminary Exam",
+      "paper": "Spring 2024",
+      "year": 2024,
+      "number": "9B",
+      "url": "https://math.berkeley.edu/graduate/phd-program/preliminary-exam"
+    },
+    "grade": "grad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "If $q$ is a rational number, the period of $q$ in base $n$ is the least number $a$ such that the base $n$ representation of $q$ eventually consists of a repeating sequence of length $a$. For example, the period of $1/7$ in base 10 is 6 since $1/7=0.\\overline{142857}$.\n\nSuppose $p$ is a prime number. Show that for any $n>1$ such that $p\\nmid n$, the period of $1/p$ in base $n$ is at most $p-1$, and this maximum is achieved for some $n$.",
+    "image": null,
+    "choices": null,
+    "answer": "The period of $1/p$ in base $n$ equals the multiplicative order of $n$ modulo $p$, which divides $p-1$; taking $n$ to be a primitive root modulo $p$ (e.g. a primitive root plus $p$, to make $n>1$) gives period $p-1$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Period equals the order of $n$ mod $p$",
+        "body": "Let $x\\in[0,1)$ with base-$n$ digits $0.d_1d_2d_3\\dots$. Since $p\\nmid n$, $1/p$ does not have a terminating base-$n$ expansion, so its expansion is unique (no tails of all $(n-1)$'s).\n\n**Claim.** The digits of $1/p$ from position $k+1$ on repeat with period $a$ (i.e. $d_{i+a}=d_i$ for $i>k$) iff $p\\mid n^a-1$.\n\nLet $x=\\{n^k/p\\}$ (fractional part); its digits are $d_{k+1}d_{k+2}\\dots$. The digits of $\\{n^ax\\}$ are those of $x$ shifted by $a$. By uniqueness of expansions, the digit sequence of $x$ is $a$-periodic iff $\\{n^ax\\}=x$, iff $(n^a-1)x\\in\\mathbb Z$. Since $x-n^k/p\\in\\mathbb Z$, this holds iff $(n^a-1)n^k/p\\in\\mathbb Z$, iff $p\\mid n^k(n^a-1)$, iff $p\\mid n^a-1$ (as $p\\nmid n$). This is independent of $k$.\n\nSo the period of $1/p$ in base $n$ is the least $a\\ge1$ with $n^a\\equiv1\\pmod p$, i.e. the **order of $n$ in $(\\mathbb Z/p\\mathbb Z)^\\times$**. By Lagrange's theorem (or Fermat's little theorem) this order divides $p-1$, so the period is at most $p-1$.\n\n**The maximum is attained.** $(\\mathbb Z/p\\mathbb Z)^\\times$ is cyclic of order $p-1$; let $g$ be a generator (primitive root) and take $n=g+p>1$. Then $p\\nmid n$, and $n\\equiv g$ has order $p-1$, so the period of $1/p$ in base $n$ is $p-1$. (E.g. $p=7$, $n=10$: period $6$.) ∎"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "abstract-algebra"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

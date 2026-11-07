@@ -1,0 +1,1042 @@
+[
+  {
+    "id": "ioqm-ioqm-2023-01",
+    "bank": "ioqm",
+    "source": {
+      "contest": "IOQM",
+      "paper": "IOQM 2023",
+      "year": 2023,
+      "number": 1,
+      "url": "https://www.mtai.org.in/wp-content/uploads/2023/09/IOQM_Sep_2023_Question-paper-with-answer-key.pdf"
+    },
+    "grade": "8-12",
+    "points": 2,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Let $n$ be a positive integer such that $1 \\le n \\le 1000$. Let $M_n$ be the number of integers in the set $X_n = \\{\\sqrt{4n+1}, \\sqrt{4n+2}, \\ldots, \\sqrt{4n+1000}\\}$. Let\n$$a = \\max\\{M_n : 1 \\le n \\le 1000\\},\\quad\\text{and}\\quad b = \\min\\{M_n : 1 \\le n \\le 1000\\}.$$\nFind $a - b$.",
+    "image": null,
+    "choices": null,
+    "answer": "22",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Count squares in a window",
+        "body": "$M_n$ is the number of perfect squares in the window $[4n+1,\\,4n+1000]$ of $1000$ consecutive integers. Consecutive squares $k^2,(k+1)^2$ are $2k+1$ apart, so the further right the window, the fewer squares it holds.\n\n- $n=1$: window $[5,1004]$ contains $3^2,\\dots,31^2$: $29$ squares. This is the maximum.\n- $n=1000$: window $[4001,5000]$ contains $64^2=4096,\\dots,70^2=4900$: $7$ squares. This is the minimum.\n\n(A direct computation of all $M_n$ confirms $a=29$, $b=7$.) So $a-b=22$.\n\n**Answer: 22**"
+      }
+    ],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "ioqm-ioqm-2023-02",
+    "bank": "ioqm",
+    "source": {
+      "contest": "IOQM",
+      "paper": "IOQM 2023",
+      "year": 2023,
+      "number": 2,
+      "url": "https://www.mtai.org.in/wp-content/uploads/2023/09/IOQM_Sep_2023_Question-paper-with-answer-key.pdf"
+    },
+    "grade": "8-12",
+    "points": 2,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Find the number of elements in the set $$\\{(a, b) \\in \\mathbb{N} : 2 \\le a, b \\le 2023,\\ \\log_a(b) + 6\\log_b(a) = 5\\}.$$",
+    "image": null,
+    "choices": null,
+    "answer": "54",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Quadratic in the logarithm",
+        "body": "Let $t=\\log_a b$; then $\\log_b a = \\frac1t$ and $t+\\frac6t=5$, i.e. $t^2-5t+6=0$, so $t=2$ or $t=3$.\n\n- $b=a^2\\le 2023$: $a=2,\\dots,44$ ($44^2=1936$, $45^2=2025$): $43$ pairs.\n- $b=a^3\\le2023$: $a=2,\\dots,12$ ($12^3=1728$, $13^3=2197$): $11$ pairs.\n\nTotal $54$.\n\n**Answer: 54**"
+      }
+    ],
+    "topics": [
+      "algebra",
+      "counting"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "ioqm-ioqm-2023-03",
+    "bank": "ioqm",
+    "source": {
+      "contest": "IOQM",
+      "paper": "IOQM 2023",
+      "year": 2023,
+      "number": 3,
+      "url": "https://www.mtai.org.in/wp-content/uploads/2023/09/IOQM_Sep_2023_Question-paper-with-answer-key.pdf"
+    },
+    "grade": "8-12",
+    "points": 2,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Let $\\alpha$ and $\\beta$ be positive integers such that $$\\frac{16}{37} < \\frac{\\alpha}{\\beta} < \\frac{7}{16}.$$ Find the smallest possible value of $\\beta$.",
+    "image": null,
+    "choices": null,
+    "answer": "23",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Flip the fractions",
+        "body": "Invert: $\\frac{16}{7} < \\frac{\\beta}{\\alpha} < \\frac{37}{16}$, i.e. $2+\\frac27 < \\frac\\beta\\alpha < 2+\\frac5{16}$. Write $\\beta=2\\alpha+t$ with $t\\ge1$; then $\\frac27<\\frac t\\alpha<\\frac5{16}$, i.e. $3.2\\,t<\\alpha<3.5\\,t$.\n\n- $t=1$: $3.2<\\alpha<3.5$, none. $t=2$: $6.4<\\alpha<7$, none.\n- $t=3$: $9.6<\\alpha<10.5$, so $\\alpha=10$, $\\beta=23$.\n- $t\\ge4$ forces $\\alpha>12.8$ and $\\beta>29$.\n\nSo the smallest $\\beta$ is $23$ ($\\frac{16}{37}\\approx0.4324<\\frac{10}{23}\\approx0.4348<0.4375$).\n\n**Answer: 23**"
+      },
+      {
+        "title": "Search",
+        "body": "For each $\\beta=1,2,3,\\dots$ check whether an integer lies strictly between $\\frac{16\\beta}{37}$ and $\\frac{7\\beta}{16}$. The interval is very short (length $\\frac{3\\beta}{592}$), and the first $\\beta$ that works is $\\beta=23$ with $\\alpha=10$.\n\n**Answer: 23**"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "fractions-decimals"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "ioqm-ioqm-2023-04",
+    "bank": "ioqm",
+    "source": {
+      "contest": "IOQM",
+      "paper": "IOQM 2023",
+      "year": 2023,
+      "number": 4,
+      "url": "https://www.mtai.org.in/wp-content/uploads/2023/09/IOQM_Sep_2023_Question-paper-with-answer-key.pdf"
+    },
+    "grade": "8-12",
+    "points": 2,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Let $x, y$ be positive integers such that $$x^4 = (x-1)(y^3-23) - 1.$$ Find the maximum possible value of $x + y$.",
+    "image": null,
+    "choices": null,
+    "answer": "7",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Divisibility by x − 1",
+        "body": "Rewrite as $x^4+1 = (x-1)(y^3-23)$, so $x-1 \\mid x^4+1$ (and $x\\ne1$). Since $x\\equiv1\\pmod{x-1}$, $x^4+1\\equiv 2$, so $x-1\\mid 2$: $x=2$ or $x=3$.\n\n- $x=2$: $17 = y^3-23$, $y^3=40$: no.\n- $x=3$: $82 = 2(y^3-23)$, $y^3 = 64$, $y=4$.\n\nSo $x+y=7$.\n\n**Answer: 7**"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "algebra"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "ioqm-ioqm-2023-05",
+    "bank": "ioqm",
+    "source": {
+      "contest": "IOQM",
+      "paper": "IOQM 2023",
+      "year": 2023,
+      "number": 5,
+      "url": "https://www.mtai.org.in/wp-content/uploads/2023/09/IOQM_Sep_2023_Question-paper-with-answer-key.pdf"
+    },
+    "grade": "8-12",
+    "points": 2,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "In a triangle $ABC$, let $E$ be the midpoint of $AC$ and $F$ be the midpoint of $AB$. The medians $BE$ and $CF$ intersect at $G$. Let $Y$ and $Z$ be the midpoints of $BE$ and $CF$ respectively. If the area of triangle $ABC$ is $480$, find the area of triangle $GYZ$.",
+    "image": null,
+    "choices": null,
+    "answer": "10",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Ratios along the medians",
+        "body": "$G$ divides each median $2:1$, so $BG=\\frac23BE$, while $BY=\\frac12BE$. Hence $Y$ lies on $BG$ with $GY = \\frac23BE-\\frac12BE=\\frac16BE = \\frac14 GB$. Similarly $GZ=\\frac14 GC$.\n\nTriangles $GYZ$ and $GBC$ share the angle at $G$, so\n$$[GYZ] = \\tfrac14\\cdot\\tfrac14\\,[GBC] = \\tfrac1{16}\\cdot\\tfrac{480}{3} = 10.$$\n\n**Answer: 10**"
+      },
+      {
+        "title": "Coordinates",
+        "body": "Take $B=(0,0)$, $C=(6,0)$, $A=(0,160)$ (area $480$). Then $E=(3,80)$, $F=(0,80)$, $G=(2,\\frac{160}3)$, $Y=(\\frac32,40)$, $Z=(3,40)$. $YZ=\\frac32$ is horizontal and $G$ is $\\frac{40}{3}$ above it, so $[GYZ]=\\frac12\\cdot\\frac32\\cdot\\frac{40}3=10$.\n\n**Answer: 10**"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "ioqm-ioqm-2023-06",
+    "bank": "ioqm",
+    "source": {
+      "contest": "IOQM",
+      "paper": "IOQM 2023",
+      "year": 2023,
+      "number": 6,
+      "url": "https://www.mtai.org.in/wp-content/uploads/2023/09/IOQM_Sep_2023_Question-paper-with-answer-key.pdf"
+    },
+    "grade": "8-12",
+    "points": 2,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Let $X$ be the set of all even positive integers $n$ such that the measure of the angle of some regular polygon is $n$ degrees. Find the number of elements in $X$.",
+    "image": null,
+    "choices": null,
+    "answer": "16",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Exterior angles",
+        "body": "A regular $k$-gon ($k\\ge3$) has interior angle $180-\\frac{360}{k}$ degrees. This is an even integer iff $\\frac{360}{k}$ is an even integer, i.e. $\\frac{180}{k}$ is an integer: $k\\mid180$.\n\n$180=2^2\\cdot3^2\\cdot5$ has $18$ divisors; removing $k=1,2$ leaves $16$, each giving a different angle.\n\n**Answer: 16**"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "number-theory"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "ioqm-ioqm-2023-07",
+    "bank": "ioqm",
+    "source": {
+      "contest": "IOQM",
+      "paper": "IOQM 2023",
+      "year": 2023,
+      "number": 7,
+      "url": "https://www.mtai.org.in/wp-content/uploads/2023/09/IOQM_Sep_2023_Question-paper-with-answer-key.pdf"
+    },
+    "grade": "8-12",
+    "points": 2,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Unconventional dice are to be designed such that the six faces are marked with numbers from $1$ to $6$ with $1$ and $2$ appearing on opposite faces. Further, each face is colored either red or yellow with opposite faces always of the same color. Two dice are considered to have the same design if one of them can be rotated to obtain a dice that has the same numbers and colors on the corresponding faces as the other one. Find the number of distinct dice that can be designed.",
+    "image": null,
+    "choices": null,
+    "answer": "48",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Fix the 1 at the bottom",
+        "body": "Rotate the die so that $1$ is at the bottom; then $2$ is on top. The only rotations that keep this are the $4$ turns about the vertical axis.\n\nThe numbers $3,4,5,6$ go around the four side faces; up to the $4$ turns there are $\\frac{4!}{4}=6$ arrangements, and after that the die has no remaining symmetry.\n\nThe three pairs of opposite faces are coloured independently: $2^3=8$ ways.\n\nTotal $6\\cdot 8 = 48$.\n\n**Answer: 48**"
+      },
+      {
+        "title": "Burnside check",
+        "body": "Take all numberings of the six faces with $1$ opposite $2$ ($6\\cdot 4! = 144$ of them) times $8$ colourings, and group them under the $24$ rotations of the cube. A numbering with all six labels different is fixed only by the identity, so every orbit has $24$ elements: $\\frac{144\\cdot8}{24}=48$.\n\n**Answer: 48**"
+      }
+    ],
+    "topics": [
+      "counting",
+      "spatial"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "ioqm-ioqm-2023-08",
+    "bank": "ioqm",
+    "source": {
+      "contest": "IOQM",
+      "paper": "IOQM 2023",
+      "year": 2023,
+      "number": 8,
+      "url": "https://www.mtai.org.in/wp-content/uploads/2023/09/IOQM_Sep_2023_Question-paper-with-answer-key.pdf"
+    },
+    "grade": "8-12",
+    "points": 2,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Given a $2\\times 2$ tile and seven dominoes ($2\\times 1$ tile), find the number of ways of tiling (that is, cover without leaving gaps and without overlapping of any two tiles) a $2\\times 7$ rectangle using some of these tiles.",
+    "image": null,
+    "choices": null,
+    "answer": "59",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "With or without the square",
+        "body": "Let $f(k)$ be the number of domino tilings of a $2\\times k$ strip: $f(k)=f(k-1)+f(k-2)$ with $f(0)=f(1)=1$, so $f = 1,1,2,3,5,8,13,21$ for $k=0,\\dots,7$.\n\n- Only dominoes: $f(7)=21$ (this uses exactly $7$ dominoes).\n- With the $2\\times2$ tile in columns $i+1,i+2$ ($i=0,\\dots,5$): the strips of widths $i$ and $5-i$ on either side are tiled by dominoes: $\\sum_{i=0}^{5}f(i)f(5-i) = 8+5+6+6+5+8=38$.\n\nTotal $21+38=59$.\n\n**Answer: 59**"
+      }
+    ],
+    "topics": [
+      "counting",
+      "patterns"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "ioqm-ioqm-2023-09",
+    "bank": "ioqm",
+    "source": {
+      "contest": "IOQM",
+      "paper": "IOQM 2023",
+      "year": 2023,
+      "number": 9,
+      "url": "https://www.mtai.org.in/wp-content/uploads/2023/09/IOQM_Sep_2023_Question-paper-with-answer-key.pdf"
+    },
+    "grade": "8-12",
+    "points": 2,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Find the number of triples $(a, b, c)$ of positive integers such that\n(a) $ab$ is a prime;\n(b) $bc$ is a product of two primes;\n(c) $abc$ is not divisible by square of any prime and\n(d) $abc \\le 30$.",
+    "image": null,
+    "choices": null,
+    "answer": "17",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Two cases",
+        "body": "Since $ab$ is prime, one of $a,b$ is $1$ and the other is a prime.\n\n**$a=1$, $b=p$ prime.** Then $pc$ is a product of two primes, so $c=q$ is prime, and $q\\ne p$ because $abc=pq$ is squarefree. We need ordered pairs of distinct primes with $pq\\le30$: the unordered pairs $\\{2,3\\},\\{2,5\\},\\{2,7\\},\\{2,11\\},\\{2,13\\},\\{3,5\\},\\{3,7\\}$ give $14$ ordered pairs.\n\n**$b=1$, $a=p$ prime.** Then $c=qr$ with distinct primes $q,r$, and $pqr\\le 30$ squarefree, so $\\{p,q,r\\}=\\{2,3,5\\}$: $p\\in\\{2,3,5\\}$ gives $3$ triples.\n\nTotal $14+3=17$.\n\n**Answer: 17**"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "counting"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "ioqm-ioqm-2023-10",
+    "bank": "ioqm",
+    "source": {
+      "contest": "IOQM",
+      "paper": "IOQM 2023",
+      "year": 2023,
+      "number": 10,
+      "url": "https://www.mtai.org.in/wp-content/uploads/2023/09/IOQM_Sep_2023_Question-paper-with-answer-key.pdf"
+    },
+    "grade": "8-12",
+    "points": 2,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "The sequence $\\langle a_n\\rangle_{n\\ge0}$ is defined by $a_0 = 1$, $a_1 = -4$ and $a_{n+2} = -4a_{n+1} - 7a_n$, for $n \\ge 0$. Find the number of positive integer divisors of $a_{50}^2 - a_{49}a_{51}$.",
+    "image": null,
+    "choices": null,
+    "answer": "51",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "An invariant ratio",
+        "body": "Let $D_n = a_{n+1}^2 - a_na_{n+2}$. Using $a_{n+2} = -4a_{n+1}-7a_n$ and $a_{n+3}=-4a_{n+2}-7a_{n+1}$:\n$$D_{n+1} = a_{n+2}^2 - a_{n+1}a_{n+3} = a_{n+2}^2 +4a_{n+1}a_{n+2}+7a_{n+1}^2 = a_{n+2}(a_{n+2}+4a_{n+1}) + 7a_{n+1}^2 = -7a_na_{n+2}+7a_{n+1}^2 = 7D_n.$$\n$a_2 = 16-7=9$, so $D_0 = 16-9 = 7$ and $D_n=7^{n+1}$.\n\n$a_{50}^2-a_{49}a_{51} = D_{49} = 7^{50}$, which has $51$ divisors.\n\n**Answer: 51**"
+      }
+    ],
+    "topics": [
+      "sequences-series",
+      "number-theory"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "ioqm-ioqm-2023-11",
+    "bank": "ioqm",
+    "source": {
+      "contest": "IOQM",
+      "paper": "IOQM 2023",
+      "year": 2023,
+      "number": 11,
+      "url": "https://www.mtai.org.in/wp-content/uploads/2023/09/IOQM_Sep_2023_Question-paper-with-answer-key.pdf"
+    },
+    "grade": "8-12",
+    "points": 3,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "A positive integer $m$ has the property that $m^2$ is expressible in the form $4n^2 - 5n + 16$ where $n$ is an integer (of any sign). Find the maximum possible value of $|m - n|$.",
+    "image": null,
+    "choices": null,
+    "answer": "14",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Difference of squares",
+        "body": "Multiply by $16$ and complete the square: $16m^2 = (8n-5)^2 + 231$, so\n$$(4m-8n+5)(4m+8n-5) = 231 = 3\\cdot7\\cdot11.$$\nThe two factors $u,v$ add to $8m>0$, so both are positive, and $u+v\\equiv 0\\pmod 8$, $n = \\frac{v-u+10}{16}$ must be an integer. The factor pairs $\\{1,231\\},\\{3,77\\},\\{7,33\\},\\{11,21\\}$ have sums $232,80,40,32$ (all divisible by $8$), giving $m=29,10,5,4$. Checking both orders:\n\n- $m=29$: $(u,v)=(1,231)$ gives $n=15$;\n- $m=10$: $(77,3)$ gives $n=-4$;\n- $m=5$: $(33,7)$ gives $n=-1$;\n- $m=4$: $(21,11)$ gives $n=0$.\n\n$|m-n|$ is $14,14,6,4$; the maximum is $14$.\n\n**Answer: 14**"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "algebra"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "ioqm-ioqm-2023-12",
+    "bank": "ioqm",
+    "source": {
+      "contest": "IOQM",
+      "paper": "IOQM 2023",
+      "year": 2023,
+      "number": 12,
+      "url": "https://www.mtai.org.in/wp-content/uploads/2023/09/IOQM_Sep_2023_Question-paper-with-answer-key.pdf"
+    },
+    "grade": "8-12",
+    "points": 3,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Let $P(x) = x^3 + ax^2 + bx + c$ be a polynomial where $a, b, c$ are integers and $c$ is odd. Let $p_i$ be the value of $P(x)$ at $x = i$. Given that $p_1^3 + p_2^3 + p_3^3 = 3p_1p_2p_3$, find the value of $p_2 + 2p_1 - 3p_0$.",
+    "image": null,
+    "choices": null,
+    "answer": "18",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Use the factorisation of x³+y³+z³−3xyz",
+        "body": "$p_1^3+p_2^3+p_3^3-3p_1p_2p_3 = \\frac12(p_1+p_2+p_3)\\left[(p_1-p_2)^2+(p_2-p_3)^2+(p_3-p_1)^2\\right]$, so either $p_1+p_2+p_3=0$ or $p_1=p_2=p_3$.\n\nParity: $p_1 = 1+a+b+c\\equiv a+b$, $p_2\\equiv c\\equiv1$, $p_3 = 27+9a+3b+c\\equiv a+b \\pmod 2$. So $p_1+p_2+p_3\\equiv 2(a+b)+1$ is odd, never $0$. Hence $p_1=p_2=p_3=k$ and\n$$P(x) = (x-1)(x-2)(x-3)+k,\\qquad p_0 = k-6.$$\nThen $p_2+2p_1-3p_0 = k+2k-3k+18 = 18$.\n\n**Answer: 18**"
+      }
+    ],
+    "topics": [
+      "polynomials",
+      "algebra"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "ioqm-ioqm-2023-13",
+    "bank": "ioqm",
+    "source": {
+      "contest": "IOQM",
+      "paper": "IOQM 2023",
+      "year": 2023,
+      "number": 13,
+      "url": "https://www.mtai.org.in/wp-content/uploads/2023/09/IOQM_Sep_2023_Question-paper-with-answer-key.pdf"
+    },
+    "grade": "8-12",
+    "points": 3,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "The ex-radii of a triangle are $10\\frac12$, $12$ and $14$. If the sides of the triangle are the roots of the cubic $x^3 - px^2 + qx - r = 0$, where $p, q, r$ are integers, find the integer nearest to $\\sqrt{p + q + r}$.",
+    "image": null,
+    "choices": null,
+    "answer": "58",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Recover the triangle",
+        "body": "With area $K$ and semiperimeter $s$, the ex-radii are $r_a = \\frac{K}{s-a}$ etc., so $s-a=\\frac K{r_a}$, and adding, $s = K\\left(\\frac1{r_a}+\\frac1{r_b}+\\frac1{r_c}\\right)$. Heron's formula $K^2 = s(s-a)(s-b)(s-c)$ becomes\n$$K^2 = K^4\\cdot\\left(\\tfrac1{r_a}+\\tfrac1{r_b}+\\tfrac1{r_c}\\right)\\cdot\\frac1{r_ar_br_c}\\ \\Rightarrow\\ K^2=\\frac{r_ar_br_c}{\\frac1{r_a}+\\frac1{r_b}+\\frac1{r_c}} = \\frac{1764}{\\frac14} = 7056,$$\nusing $\\frac2{21}+\\frac1{12}+\\frac1{14}=\\frac{8+7+6}{84}=\\frac14$. So $K=84$, $s=21$, $s-a,s-b,s-c = 8,7,6$, and the sides are $13,14,15$.\n\n$p=42$, $q=13\\cdot14+14\\cdot15+15\\cdot13=587$, $r=2730$; $p+q+r=3359$ and $57.5^2 = 3306.25 < 3359 < 3364 = 58^2$, so $\\sqrt{3359}\\approx 57.96$, nearest integer $58$.\n\n**Answer: 58**"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "polynomials"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "ioqm-ioqm-2023-14",
+    "bank": "ioqm",
+    "source": {
+      "contest": "IOQM",
+      "paper": "IOQM 2023",
+      "year": 2023,
+      "number": 14,
+      "url": "https://www.mtai.org.in/wp-content/uploads/2023/09/IOQM_Sep_2023_Question-paper-with-answer-key.pdf"
+    },
+    "grade": "8-12",
+    "points": 3,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Let $ABC$ be a triangle in the $xy$ plane, where $B$ is at the origin $(0, 0)$. Let $BC$ be produced to $D$ such that $BC : CD = 1 : 1$, $CA$ be produced to $E$ such that $CA : AE = 1 : 2$ and $AB$ be produced to $F$ such that $AB : BF = 1 : 3$. Let $G(32, 24)$ be the centroid of the triangle $ABC$ and $K$ be the centroid of the triangle $DEF$. Find the length $GK$.",
+    "image": null,
+    "choices": null,
+    "answer": "40",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Vectors",
+        "body": "Use position vectors. $D = C + (C-B) = 2C-B$, $E = A+2(A-C) = 3A-2C$, $F = B+3(B-A) = 4B-3A$. Then\n$$D+E+F = 3B,$$\nso $K=B=(0,0)$ and $GK = \\sqrt{32^2+24^2} = 40$.\n\n**Answer: 40**"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "algebra"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "ioqm-ioqm-2023-15",
+    "bank": "ioqm",
+    "source": {
+      "contest": "IOQM",
+      "paper": "IOQM 2023",
+      "year": 2023,
+      "number": 15,
+      "url": "https://www.mtai.org.in/wp-content/uploads/2023/09/IOQM_Sep_2023_Question-paper-with-answer-key.pdf"
+    },
+    "grade": "8-12",
+    "points": 3,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Let $ABCD$ be a unit square. Suppose $M$ and $N$ are points on $BC$ and $CD$ respectively such that the perimeter of triangle $MCN$ is $2$. Let $O$ be the circumcentre of triangle $MAN$, and $P$ be the circumcentre of triangle $MON$. If $\\left(\\dfrac{OP}{OA}\\right)^2 = \\dfrac mn$ for some relatively prime positive integers $m$ and $n$, find the value of $m + n$.",
+    "image": null,
+    "choices": null,
+    "answer": "3",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "The angle MAN is 45°",
+        "body": "Let $BM=x$, $DN=y$. Perimeter $2$ means $(1-x)+(1-y)+MN = 2$, so $MN = x+y$. Rotate triangle $ABM$ about $A$ by $90^\\circ$ so that $B$ goes to $D$; $M$ goes to $M'$ on line $CD$ with $DM'=x$, and $NM' = x+y = NM$. Triangles $AMN$ and $AM'N$ are congruent (SSS), so $\\angle MAN = \\angle NAM' = \\frac12\\angle MAM' = 45^\\circ$.\n\nHence the central angle $\\angle MON = 2\\angle MAN = 90^\\circ$ and $OM=ON=OA=R$. Triangle $MON$ is right-angled at $O$, so its circumcentre $P$ is the midpoint of $MN$ and $OP = \\frac{MN}{2} = \\frac{R\\sqrt2}{2}$.\n\n$\\left(\\frac{OP}{OA}\\right)^2 = \\frac12$, so $m+n = 3$.\n\n**Answer: 3**"
+      },
+      {
+        "title": "Numerical check",
+        "body": "Take $A=(0,0)$, $B=(1,0)$, $C=(1,1)$, $D=(0,1)$, $M=(1,0.5)$, and choose $N=(t,1)$ so that $0.5+(1-t)+\\sqrt{(1-t)^2+0.25}=2$: $t=\\frac13$. Computing the two circumcentres gives $(OP/OA)^2=0.5$ (the same for any admissible $M$).\n\n**Answer: 3**"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "ioqm-ioqm-2023-16",
+    "bank": "ioqm",
+    "source": {
+      "contest": "IOQM",
+      "paper": "IOQM 2023",
+      "year": 2023,
+      "number": 16,
+      "url": "https://www.mtai.org.in/wp-content/uploads/2023/09/IOQM_Sep_2023_Question-paper-with-answer-key.pdf"
+    },
+    "grade": "8-12",
+    "points": 3,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "The six sides of a convex hexagon $A_1A_2A_3A_4A_5A_6$ are colored red. Each of the diagonals of the hexagon is colored either red or blue. If $N$ is the number of colorings such that every triangle $A_iA_jA_k$, where $1 \\le i < j < k \\le 6$, has at least one red side, find the sum of the squares of the digits of $N$.",
+    "image": null,
+    "choices": null,
+    "answer": "94",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Only two triangles matter",
+        "body": "A triangle containing a side of the hexagon already has a red side. A triangle with no hexagon side needs three pairwise non-adjacent vertices: only $A_1A_3A_5$ and $A_2A_4A_6$. Their sides are the six short diagonals; the three long diagonals $A_1A_4, A_2A_5, A_3A_6$ are unrestricted.\n\nEach of the two triangles may be coloured in $2^3-1=7$ ways (not all blue), so\n$$N = 7\\cdot7\\cdot 2^3 = 392,$$\nand $3^2+9^2+2^2 = 94$.\n\n**Answer: 94**"
+      }
+    ],
+    "topics": [
+      "counting",
+      "graph-theory"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "ioqm-ioqm-2023-17",
+    "bank": "ioqm",
+    "source": {
+      "contest": "IOQM",
+      "paper": "IOQM 2023",
+      "year": 2023,
+      "number": 17,
+      "url": "https://www.mtai.org.in/wp-content/uploads/2023/09/IOQM_Sep_2023_Question-paper-with-answer-key.pdf"
+    },
+    "grade": "8-12",
+    "points": 3,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Consider the set\n$$S = \\{(a, b, c, d, e) : 0 < a < b < c < d < e < 100\\}$$\nwhere $a, b, c, d, e$ are integers. If $D$ is the average value of the fourth element of such a tuple in the set, taken over all the elements of $S$, find the largest integer less than or equal to $D$.",
+    "image": null,
+    "choices": null,
+    "answer": "66",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Symmetric gaps",
+        "body": "The five numbers together with $0$ and $100$ cut the line into six gaps $g_1=a$, $g_2=b-a$, $\\dots$, $g_6=100-e$, each $\\ge1$ with sum $100$. Every permutation of the gaps gives another element of $S$, so all six gaps have the same average, $\\frac{100}{6}$. Since $d=g_1+g_2+g_3+g_4$, its average is\n$$D = 4\\cdot\\frac{100}{6} = \\frac{200}{3} = 66.\\overline{6},$$\nand $\\lfloor D\\rfloor = 66$.\n\n**Answer: 66**"
+      },
+      {
+        "title": "Direct sum",
+        "body": "$d$ takes the value $k$ in $\\binom{k-1}{3}(99-k)$ tuples, so\n$$D = \\frac{\\sum_k k\\binom{k-1}3(99-k)}{\\binom{99}5} = \\frac{4\\sum_k\\binom k4(99-k)}{\\binom{99}{5}} = \\frac{4\\binom{100}{6}}{\\binom{99}{5}} = \\frac{4\\cdot100}{6},$$\nusing $\\sum_k\\binom k4\\binom{99-k}{1}=\\binom{100}{6}$ (choose $6$ numbers from $0..99$; the 5th smallest is $k$).\n\n**Answer: 66**"
+      }
+    ],
+    "topics": [
+      "probability",
+      "counting"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "ioqm-ioqm-2023-18",
+    "bank": "ioqm",
+    "source": {
+      "contest": "IOQM",
+      "paper": "IOQM 2023",
+      "year": 2023,
+      "number": 18,
+      "url": "https://www.mtai.org.in/wp-content/uploads/2023/09/IOQM_Sep_2023_Question-paper-with-answer-key.pdf"
+    },
+    "grade": "8-12",
+    "points": 3,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Let $P$ be a convex polygon with $50$ vertices. A set $F$ of diagonals of $P$ is said to be minimally friendly if any diagonal $d \\in F$ intersects at most one other diagonal in $F$ at a point interior to $P$. Find the largest possible number of elements in a minimally friendly set $F$.",
+    "image": null,
+    "choices": null,
+    "answer": "71",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Crossing pairs live in quadrilaterals",
+        "body": "Let $n=50$. The diagonals of $F$ are of two kinds: $k$ **crossing pairs** $\\{AC,BD\\}$ (each crossing only the other) and $m$ diagonals crossing nothing. So $|F| = 2k+m$.\n\n*Claim.* For a crossing pair, let $ABCD$ be its quadrilateral. No diagonal of $F$ other than $AC,BD$ enters the interior of $ABCD$, and no side of it crosses any other such quadrilateral side or uncrossed diagonal. Indeed, a segment between vertices of $P$ that crosses a side of $ABCD$ enters the quadrilateral, which $AC$ and $BD$ cut into four triangles, so it must cross $AC$ or $BD$. If it is in $F$ that is impossible; if it is a side of another quadrilateral $Q'$, then $AC$ or $BD$ enters $Q'$ and so crosses a diagonal of $Q'$ — again impossible.\n\nSo the uncrossed diagonals together with the sides of the $k$ quadrilaterals form a non-crossing family; say it contains $t\\ge m$ diagonals of $P$. They cut $P$ into $t+1$ regions, $k$ of which are the quadrilaterals. Triangulating every region, a region with $s$ sides gives $s-2\\ge1$ triangles, a quadrilateral gives $2$, and the total is $n-2$:\n$$n-2 \\ \\ge\\ 2k + (t+1-k) = t+k+1.$$\nHence $|F| = 2k+m\\le 2k+t\\le n-3+k$. Also the $k$ quadrilaterals alone use $2k$ of the $n-2$ triangles, so $k\\le\\frac{n-2}2$. Thus\n$$|F|\\le n-3+\\frac{n-2}{2} = \\frac{3n}{2}-4 = 71.$$\n\n*Construction.* Cut the $50$-gon into $24$ quadrilaterals by $23$ non-crossing diagonals (a \"zig-zag strip\" of quadrilaterals, each sharing a side with the next). Take these $23$ diagonals and both diagonals of each quadrilateral: $23+48=71$ diagonals; each quadrilateral diagonal crosses only its partner and the separating diagonals cross nothing.\n\n**Answer: 71**"
+      },
+      {
+        "title": "Small cases",
+        "body": "A computer search over all sets of diagonals for small polygons gives maxima $2,3,5,6,8,9,11$ for $n=4,\\dots,10$, matching $\\left\\lfloor\\frac{3n}{2}\\right\\rfloor-4$. For $n=50$ this is $71$.\n\n**Answer: 71**"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "counting"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "ioqm-ioqm-2023-19",
+    "bank": "ioqm",
+    "source": {
+      "contest": "IOQM",
+      "paper": "IOQM 2023",
+      "year": 2023,
+      "number": 19,
+      "url": "https://www.mtai.org.in/wp-content/uploads/2023/09/IOQM_Sep_2023_Question-paper-with-answer-key.pdf"
+    },
+    "grade": "8-12",
+    "points": 3,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "For $n \\in \\mathbb{N}$, let $P(n)$ denote the product of the digits in $n$ and $S(n)$ denote the sum of the digits in $n$. Consider the set\n$$A = \\{n \\in \\mathbb{N} : P(n) \\text{ is non-zero, square free and } S(n) \\text{ is a proper divisor of } P(n)\\}.$$\nFind the maximum possible number of digits of the numbers in $A$.",
+    "image": null,
+    "choices": null,
+    "answer": "92",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Ones are free, the rest is tiny",
+        "body": "$P(n)$ squarefree and non-zero means no digit is $0,4,8,9$, and the digits other than $1$ have pairwise coprime squarefree product: they form a set of distinct digits from $\\{2,3,5,6,7\\}$, not using $6$ together with $2$ or $3$. So $P(n)\\le 2\\cdot3\\cdot5\\cdot7=210$.\n\nIf $n$ has $k$ ones, then $S(n) = k + (\\text{sum of the other digits})$, and $S(n)$ is a proper divisor of $P$, so $S(n)\\le P/2\\le 105$.\n\nWith digits $2,3,5,7$ (sum $17$, $P=210$): $k+17=105$ gives $k=88$ and $88+4 = 92$ digits. Other choices are worse (e.g. $5,6,7$: $P=210$, $S\\le105$, $k=87$, $90$ digits; smaller products give much smaller $S$).\n\n**Answer: 92**"
+      }
+    ],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "ioqm-ioqm-2023-20",
+    "bank": "ioqm",
+    "source": {
+      "contest": "IOQM",
+      "paper": "IOQM 2023",
+      "year": 2023,
+      "number": 20,
+      "url": "https://www.mtai.org.in/wp-content/uploads/2023/09/IOQM_Sep_2023_Question-paper-with-answer-key.pdf"
+    },
+    "grade": "8-12",
+    "points": 3,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "For any finite non empty set $X$ of integers, let $\\max(X)$ denote the largest element of $X$ and $|X|$ denote the number of elements in $X$. If $N$ is the number of ordered pairs $(A, B)$ of finite non-empty sets of positive integers, such that\n$$\\max(A)\\times|B| = 12;\\quad\\text{and}\\quad |A|\\times\\max(B) = 11$$\nand $N$ can be written as $100a + b$ where $a, b$ are positive integers less than $100$, find $a + b$.",
+    "image": null,
+    "choices": null,
+    "answer": "43",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Two cases from 11 being prime",
+        "body": "$|A|\\cdot\\max(B) = 11$ gives $(|A|,\\max B) = (11,1)$ or $(1,11)$.\n\n**$\\max B=1$:** $B=\\{1\\}$, $|B|=1$, so $\\max A = 12$ and $|A|=11$: $A$ is $\\{12\\}$ plus $10$ of $\\{1,\\dots,11\\}$: $\\binom{11}{10}=11$ pairs.\n\n**$|A|=1$, $\\max B=11$:** $A=\\{m\\}$ with $m\\cdot|B|=12$, and $B$ is $11$ plus $|B|-1$ elements of $\\{1,\\dots,10\\}$, so $|B|\\le 11$: $(m,|B|)\\in\\{(2,6),(3,4),(4,3),(6,2),(12,1)\\}$, giving $\\binom{10}5+\\binom{10}3+\\binom{10}2+\\binom{10}1+\\binom{10}0 = 252+120+45+10+1=428$.\n\n$N = 439 = 100\\cdot4+39$, so $a+b=43$.\n\n**Answer: 43**"
+      }
+    ],
+    "topics": [
+      "counting"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "ioqm-ioqm-2023-21",
+    "bank": "ioqm",
+    "source": {
+      "contest": "IOQM",
+      "paper": "IOQM 2023",
+      "year": 2023,
+      "number": 21,
+      "url": "https://www.mtai.org.in/wp-content/uploads/2023/09/IOQM_Sep_2023_Question-paper-with-answer-key.pdf"
+    },
+    "grade": "8-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "For $n \\in \\mathbb{N}$, consider non-negative integer-valued functions $f$ on $\\{1, 2, \\ldots, n\\}$ satisfying $f(i) \\ge f(j)$ for $i > j$ and $\\sum_{i=1}^{n}(i + f(i)) = 2023$. Choose $n$ such that $\\sum_{i=1}^{n} f(i)$ is the least. How many such functions exist in that case?",
+    "image": null,
+    "choices": null,
+    "answer": "15",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Partitions of 7",
+        "body": "$\\sum f(i) = 2023-\\frac{n(n+1)}2\\ge 0$ is least when $\\frac{n(n+1)}2$ is as large as possible but at most $2023$: $\\frac{63\\cdot64}{2}=2016$, so $n=63$ and $\\sum f(i) = 7$.\n\nA non-decreasing sequence of $63$ non-negative integers with sum $7$ is the same as a partition of $7$ into at most $63$ parts (read the non-zero values from the top). The number of partitions of $7$ is $15$:\n$7,\\ 61,\\ 52,\\ 511,\\ 43,\\ 421,\\ 4111,\\ 331,\\ 322,\\ 3211,\\ 31111,\\ 2221,\\ 22111,\\ 211111,\\ 1111111$.\n\n**Answer: 15**"
+      }
+    ],
+    "topics": [
+      "counting",
+      "number-theory"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "ioqm-ioqm-2023-22",
+    "bank": "ioqm",
+    "source": {
+      "contest": "IOQM",
+      "paper": "IOQM 2023",
+      "year": 2023,
+      "number": 22,
+      "url": "https://www.mtai.org.in/wp-content/uploads/2023/09/IOQM_Sep_2023_Question-paper-with-answer-key.pdf"
+    },
+    "grade": "8-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "In an equilateral triangle of side length $6$, pegs are placed at the vertices and also evenly along each side at a distance of $1$ from each other. Four distinct pegs are chosen from the $15$ interior pegs on the sides (that is, the chosen ones are not vertices of the triangle) and each peg is joined to the respective opposite vertex by a line segment. If $N$ denotes the number of ways we can choose the pegs such that the drawn line segments divide the interior of the triangle into exactly nine regions, find the sum of the squares of the digits of $N$.",
+    "image": null,
+    "choices": null,
+    "answer": "77",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Count regions with Ceva",
+        "body": "Adding segments one at a time, each new segment adds $1$ region plus $1$ for every earlier segment it crosses; a point where three segments meet counts $2$ instead of $3$. Two segments from the same vertex meet only at that vertex; segments from different vertices always cross inside. Let the four segments come from the vertices in the pattern:\n\n- $(4,0,0)$: $5$ regions; $(3,1,0)$: $1+4+3=8$;\n- $(2,2,0)$: $1+4+4=9$ — always;\n- $(2,1,1)$: $1+4+5=10$, minus $1$ if three segments (one from each vertex) are concurrent. At most one such point is possible, since the two segments from the \"double\" vertex cannot both pass through the crossing of the other two.\n\nSo we need $(2,2,0)$: $3\\cdot\\binom52^2 = 300$ ways, or a concurrent triple plus any one of the other $12$ pegs.\n\nA peg $k$ units along a side divides it in ratio $\\frac{k}{6-k}\\in\\{\\frac15,\\frac12,1,2,5\\}$. By Ceva, three cevians are concurrent iff the product of the three ratios is $1$: $(1,1,1)$, or a permutation of $(r,\\frac1r,1)$ with $r\\in\\{2,5\\}$ ($6$ each): $13$ triples. That gives $13\\cdot12=156$ choices.\n\n$N = 300+156 = 456$, and $4^2+5^2+6^2 = 77$.\n\n**Answer: 77**"
+      }
+    ],
+    "topics": [
+      "counting",
+      "geometry"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "ioqm-ioqm-2023-23",
+    "bank": "ioqm",
+    "source": {
+      "contest": "IOQM",
+      "paper": "IOQM 2023",
+      "year": 2023,
+      "number": 23,
+      "url": "https://www.mtai.org.in/wp-content/uploads/2023/09/IOQM_Sep_2023_Question-paper-with-answer-key.pdf"
+    },
+    "grade": "8-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "In the coordinate plane, a point is called a lattice point if both of its coordinates are integers. Let $A$ be the point $(12, 84)$. Find the number of right angled triangles $ABC$ in the coordinate plane where $B$ and $C$ are lattice points, having a right angle at the vertex $A$ and whose incenter is at the origin $(0, 0)$.",
+    "image": null,
+    "choices": null,
+    "answer": "18",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Legs at 45° to AO",
+        "body": "The incentre $O$ lies on the bisector of the right angle, at distance $r\\sqrt2$ from $A$. $AO = \\sqrt{12^2+84^2}=60\\sqrt2$, so $r=60$. The legs make $45^\\circ$ with $\\vec{AO}=(-12,-84)$; rotating it by $\\pm45^\\circ$ gives directions $(72,-96)\\parallel(3,-4)$ and $(-96,-72)\\parallel(-4,-3)$.\n\nLattice points on these rays are $B = A+p(3,-4)$, $C=A+q(-4,-3)$ with positive integers $p,q$. The legs are $5p, 5q$, the hypotenuse $5\\sqrt{p^2+q^2}$, and for a right triangle $r=\\frac{\\text{leg}+\\text{leg}-\\text{hyp}}2$:\n$$5(p+q)-5\\sqrt{p^2+q^2}=120\\iff (p+q-24)^2 = p^2+q^2,\\ p+q>24 \\iff (p-24)(q-24)=288,\\ p+q>24.$$\nIf both factors were negative then $p,q<24$ and $(24-p)(24-q)=288$ forces $p+q<24$; so both are positive divisors. $288=2^5\\cdot3^2$ has $18$ divisors, giving $18$ pairs $(p,q)$ and $18$ triangles.\n\n**Answer: 18**"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "number-theory"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "ioqm-ioqm-2023-24",
+    "bank": "ioqm",
+    "source": {
+      "contest": "IOQM",
+      "paper": "IOQM 2023",
+      "year": 2023,
+      "number": 24,
+      "url": "https://www.mtai.org.in/wp-content/uploads/2023/09/IOQM_Sep_2023_Question-paper-with-answer-key.pdf"
+    },
+    "grade": "8-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "A trapezium in the plane is a quadrilateral in which a pair of opposite sides are parallel. A trapezium is said to be non-degenerate if it has positive area. Find the number of mutually non-congruent, non-degenerate trapeziums whose sides are four distinct integers from the set $\\{5, 6, 7, 8, 9, 10\\}$.",
+    "image": null,
+    "choices": null,
+    "answer": "31",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Reduce to a triangle",
+        "body": "A trapezium with parallel sides $a>b$ and legs $c,d$ exists iff there is a non-degenerate triangle with sides $a-b, c, d$ (slide one leg along the long base); it is then unique up to congruence. Since $c+d\\ge 11>a-b$, the condition is just $|c-d|<a-b$.\n\nFor a set $w<x<y<z$ of four sides, test the six choices of parallel pair:\n\n- $\\{z,w\\}$ parallel: always works ($y-x<z-w$).\n- $\\{y,x\\}$ parallel: never ($z-w>y-x$).\n- $\\{z,x\\}$ or $\\{z,y\\}$ parallel: works iff $z+w>x+y$.\n- $\\{y,w\\}$ or $\\{x,w\\}$ parallel: works iff $z+w<x+y$.\n\nSo each set gives $3$ trapeziums, except when $z+w=x+y$, which gives $1$. Of the $\\binom64=15$ sets, those with $z+w=x+y$ are $\\{5,6,7,8\\},\\{6,7,8,9\\},\\{7,8,9,10\\},\\{5,6,8,9\\},\\{6,7,9,10\\},\\{5,7,8,10\\},\\{5,6,9,10\\}$: $7$ sets.\n\nTotal $8\\cdot3+7\\cdot1 = 31$.\n\n**Answer: 31**"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "counting"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "ioqm-ioqm-2023-25",
+    "bank": "ioqm",
+    "source": {
+      "contest": "IOQM",
+      "paper": "IOQM 2023",
+      "year": 2023,
+      "number": 25,
+      "url": "https://www.mtai.org.in/wp-content/uploads/2023/09/IOQM_Sep_2023_Question-paper-with-answer-key.pdf"
+    },
+    "grade": "8-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Find the least positive integer $n$ such that there are at least $1000$ unordered pairs of diagonals in a regular polygon with $n$ vertices that intersect at a right angle in the interior of the polygon.",
+    "image": null,
+    "choices": null,
+    "answer": "28",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Arcs adding to a semicircle",
+        "body": "Two diagonals crossing inside are the diagonals $AC, BD$ of a quadrilateral $ABCD$ of vertices. Let the arcs $AB,BC,CD,DA$ contain $x_1,x_2,x_3,x_4\\ge1$ steps of $\\frac{360^\\circ}n$ ($\\sum x_i = n$). The angle between $AC$ and $BD$ is half the sum of arcs $AB$ and $CD$, so they are perpendicular iff $x_1+x_3 = x_2+x_4 = \\frac n2$.\n\nSo $n=2m$ must be even. Counting ordered data (first vertex $A$, then $x_1,\\dots,x_4$): $2m$ choices for $A$ and $(m-1)^2$ for the $x_i$; each quadrilateral is counted $4$ times (choice of $A$). Number of perpendicular pairs:\n$$\\frac{2m(m-1)^2}{4} = \\frac{m(m-1)^2}{2}.$$\n$m=13$: $936<1000$; $m=14$: $1183\\ge1000$. So $n=28$.\n\n**Answer: 28**"
+      },
+      {
+        "title": "Computer count",
+        "body": "Counting crossing diagonal pairs with perpendicular directions directly gives $936$ for the $26$-gon, $0$ for odd $n$, and $1183$ for the $28$-gon.\n\n**Answer: 28**"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "counting"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "ioqm-ioqm-2023-26",
+    "bank": "ioqm",
+    "source": {
+      "contest": "IOQM",
+      "paper": "IOQM 2023",
+      "year": 2023,
+      "number": 26,
+      "url": "https://www.mtai.org.in/wp-content/uploads/2023/09/IOQM_Sep_2023_Question-paper-with-answer-key.pdf"
+    },
+    "grade": "8-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "In the land of Binary, the unit of currency is called Ben and currency notes are available in denominations $1, 2, 2^2, 2^3, \\ldots$ Bens. The rules of the Government of Binary stipulate that one can not use more than two notes of any one denomination in any transaction. For example, one can give a change for $2$ Bens in two ways: $2$ one Ben notes or $1$ two Ben note. For $5$ Ben one can give $1$ one Ben note and $1$ four Ben note or $1$ one Ben note and $2$ two Ben notes. Using $5$ one Ben notes or $3$ one Ben notes and $1$ two Ben notes for a $5$ Ben transaction is prohibited. Find the number of ways in which one can give change for $100$ Bens, following the rules of the Government.",
+    "image": null,
+    "choices": null,
+    "answer": "19",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Recursion on the 1-Ben notes",
+        "body": "Let $W(n)$ be the number of ways. The number of $1$-Ben notes has the parity of $n$:\n\n- $n=2k+1$: exactly one $1$-Ben note; the rest is $2k$ in notes $2,4,\\dots$, i.e. (halving) $W(k)$ ways.\n- $n=2k$: zero or two $1$-Ben notes: $W(k)+W(k-1)$ ways.\n\nWith $W(0)=W(1)=1$: $W(2)=2$, $W(3)=1$, $W(5)=2$, $W(6)=3$, $W(11)=2$, $W(12)=5$, $W(24)=7$, $W(25)=5$, $W(49)=7$, $W(50)=12$, and\n$$W(100) = W(50)+W(49) = 12+7 = 19.$$\n\n**Answer: 19**"
+      }
+    ],
+    "topics": [
+      "counting",
+      "number-theory"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "ioqm-ioqm-2023-27",
+    "bank": "ioqm",
+    "source": {
+      "contest": "IOQM",
+      "paper": "IOQM 2023",
+      "year": 2023,
+      "number": 27,
+      "url": "https://www.mtai.org.in/wp-content/uploads/2023/09/IOQM_Sep_2023_Question-paper-with-answer-key.pdf"
+    },
+    "grade": "8-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "A quadruple $(a, b, c, d)$ of distinct integers is said to be balanced if $a + c = b + d$. Let $S$ be any set of quadruples $(a, b, c, d)$ where $1 \\le a < b < d < c \\le 20$ and where the cardinality of $S$ is $4411$. Find the least number of balanced quadruples in $S$.",
+    "image": null,
+    "choices": null,
+    "answer": "91",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Count the unbalanced ones",
+        "body": "There are $\\binom{20}{4}=4845$ quadruples in total. A balanced one has $b-a = c-d = k\\ge1$; with $b<d$ this means $a\\ge1$, $d\\ge a+k+1$, $d+k\\le20$. For fixed $k$ the number of $(a,d)$ is $\\binom{20-2k}{2}$, so the number of balanced quadruples is\n$$\\binom{18}2+\\binom{16}2+\\dots+\\binom22 = 153+120+91+66+45+28+15+6+1 = 525.$$\nSo there are $4845-525=4320$ unbalanced quadruples. A set of $4411$ contains at least $4411-4320 = 91$ balanced ones (and $91$ is reached by taking all unbalanced ones).\n\n**Answer: 91**"
+      }
+    ],
+    "topics": [
+      "counting"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "ioqm-ioqm-2023-28",
+    "bank": "ioqm",
+    "source": {
+      "contest": "IOQM",
+      "paper": "IOQM 2023",
+      "year": 2023,
+      "number": 28,
+      "url": "https://www.mtai.org.in/wp-content/uploads/2023/09/IOQM_Sep_2023_Question-paper-with-answer-key.pdf"
+    },
+    "grade": "8-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "On each side of an equilateral triangle with side length $n$ units, where $n$ is an integer, $1 \\le n \\le 100$, consider $n - 1$ points that divide the side into $n$ equal segments. Through these points, draw lines parallel to the sides of the triangle, obtaining a net of equilateral triangles of side length one unit. On each of the vertices of these small triangles, place a coin head up. Two coins are said to be adjacent if the distance between them is $1$ unit. A move consists of flipping over any three mutually adjacent coins. Find the number of values of $n$ for which it is possible to turn all coins tail up after a finite number of moves.",
+    "image": null,
+    "choices": null,
+    "answer": "67",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "3-colouring invariant and induction",
+        "body": "**Impossible when $3\\mid n$.** Colour the lattice points with $3$ colours so that every unit triangle has one point of each colour. Each move flips one coin of each colour, so the numbers of heads of the three colours change parity together; to reach $0,0,0$ they must start with equal parities. For $n=3j$ the three corners get the same colour, and counting row by row (rows of $1,2,\\dots,n+1$ consecutive points) shows that this colour class has exactly one point more than each of the other two (e.g. $4,3,3$ for $n=3$ and $10,9,9$ for $n=6$). So the parities differ and the task is impossible.\n\n**Possible when $3\\nmid n$.** Flipping every unit triangle once flips each corner once, each other boundary coin $3$ times and each interior coin $6$ times — so it flips exactly the boundary. The interior points form a triangle of side $n-3$, whose own moves are legal moves here. So if side $n-3$ is solvable, so is side $n$ (clear the inner triangle, then flip all unit triangles). For $n=1$ one move works; for $n=2$ flip all $4$ unit triangles. By induction every $n\\equiv1,2\\pmod 3$ works.\n\nValues of $n\\le100$ not divisible by $3$: $100-33 = 67$.\n\n**Answer: 67**"
+      }
+    ],
+    "topics": [
+      "games",
+      "counting"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "ioqm-ioqm-2023-29",
+    "bank": "ioqm",
+    "source": {
+      "contest": "IOQM",
+      "paper": "IOQM 2023",
+      "year": 2023,
+      "number": 29,
+      "url": "https://www.mtai.org.in/wp-content/uploads/2023/09/IOQM_Sep_2023_Question-paper-with-answer-key.pdf"
+    },
+    "grade": "8-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "A positive integer $n > 1$ is called beautiful if $n$ can be written in one and only one way as $n = a_1 + a_2 + \\cdots + a_k = a_1 \\cdot a_2 \\cdots a_k$ for some positive integers $a_1, a_2, \\ldots, a_k$, where $k > 1$ and $a_1 \\ge a_2 \\ge \\cdots \\ge a_k$. (For example $6$ is beautiful since $6 = 3\\cdot2\\cdot1 = 3 + 2 + 1$, and this is unique. But $8$ is not beautiful since $8 = 4 + 2 + 1 + 1 = 4\\cdot2\\cdot1\\cdot1$ as well as $8 = 2 + 2 + 2 + 1 + 1 = 2\\cdot2\\cdot2\\cdot1\\cdot1$, so uniqueness is lost.) Find the largest beautiful number less than $100$.",
+    "image": null,
+    "choices": null,
+    "answer": "95",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Representations = factorisations",
+        "body": "In a representation, the terms bigger than $1$ form a factorisation $n=b_1b_2\\cdots b_j$ with $j\\ge2$ (with $j=1$ we would need $k=1$), and the number of $1$'s is then forced to be $n-(b_1+\\dots+b_j)$, which is $\\ge0$ because $xy\\ge x+y$ for $x,y\\ge2$. Conversely every factorisation into at least two factors $\\ge2$ gives a representation.\n\nSo $n$ is beautiful iff it has exactly one factorisation into at least two factors $\\ge2$, i.e. $n=pq$ for primes $p,q$ (possibly equal): with three or more prime factors $p\\cdot(\\text{rest})$ and the full prime factorisation are two different ones.\n\nGoing down from $99$: $99=3^2\\cdot11$, $98=2\\cdot7^2$, $97$ prime, $96=2^5$ — all fail; $95=5\\cdot19$ ✓.\n\n**Answer: 95**"
+      }
+    ],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "ioqm-ioqm-2023-30",
+    "bank": "ioqm",
+    "source": {
+      "contest": "IOQM",
+      "paper": "IOQM 2023",
+      "year": 2023,
+      "number": 30,
+      "url": "https://www.mtai.org.in/wp-content/uploads/2023/09/IOQM_Sep_2023_Question-paper-with-answer-key.pdf"
+    },
+    "grade": "8-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Let $d(m)$ denote the number of positive integer divisors of a positive integer $m$. If $r$ is the number of integers $n \\le 2023$ for which $\\sum_{i=1}^{n} d(i)$ is odd, find the sum of the digits of $r$.",
+    "image": null,
+    "choices": null,
+    "answer": "18",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Only squares have odd d",
+        "body": "$d(i)$ is odd iff $i$ is a perfect square, so $\\sum_{i\\le n}d(i)\\equiv \\lfloor\\sqrt n\\rfloor\\pmod 2$. We count $n\\le2023$ with $\\lfloor\\sqrt n\\rfloor = k$ odd; for each such $k$ there are $2k+1$ values $k^2\\le n<(k+1)^2$, and since $44^2=1936\\le2023<2025$, the odd $k$ are $1,3,\\dots,43$ (all complete blocks):\n$$r=\\sum_{k\\text{ odd}\\le43}(2k+1) = 2\\cdot 22^2 + 22 = 990.$$\nDigit sum $9+9+0=18$.\n\n**Answer: 18**"
+      }
+    ],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

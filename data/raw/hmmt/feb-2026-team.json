@@ -1,0 +1,345 @@
+[
+  {
+    "id": "hmmt-feb-2026-team-01",
+    "bank": "hmmt",
+    "source": {
+      "contest": "HMMT February",
+      "paper": "2026 Team Round",
+      "year": 2026,
+      "number": 1,
+      "url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2026/feb/team/problems.pdf"
+    },
+    "grade": "9-12",
+    "points": 20,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $\\mathcal P$ be a regular hexagon with center $O$. Distinct points $A$ and $B$ lie on the boundary of $\\mathcal P$. The segments $\\overline{OA}$ and $\\overline{OB}$ divide the interior of $\\mathcal P$ into two polygons $\\mathcal R_1$ and $\\mathcal R_2$. Let $a_1$ and $a_2$ be the areas of $\\mathcal R_1$ and $\\mathcal R_2$ respectively, and let $p_1$ and $p_2$ be the perimeters of $\\mathcal R_1$ and $\\mathcal R_2$ respectively. Given that $a_1/p_1=a_2/p_2$, prove that $a_1=a_2$.",
+    "image": null,
+    "choices": null,
+    "answer": "With inradius $r$ and boundary lengths $l_1,l_2$: $a_i=\\frac{rl_i}2$ and $p_i=l_i+OA+OB$, so the condition forces $l_1=l_2$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Areas from the inradius",
+        "body": "Let $r$ be the inradius of the hexagon, $l_i$ the length of the part of the hexagon's boundary that belongs to $\\mathcal R_i$, and $k=OA+OB$ (the common boundary of $\\mathcal R_1$ and $\\mathcal R_2$).\n\nCut $\\mathcal R_i$ into triangles with apex $O$ whose bases are the pieces of hexagon sides on its boundary. Each has height $r$, so $a_i=\\frac{r\\,l_i}{2}$. The perimeters are $p_i=l_i+k$.\n\nThe condition $\\frac{rl_1/2}{l_1+k}=\\frac{rl_2/2}{l_2+k}$ gives $l_1(l_2+k)=l_2(l_1+k)$, i.e. $k\\,l_1=k\\,l_2$. Since $k>0$, $l_1=l_2$, hence $a_1=\\frac{rl_1}2=\\frac{rl_2}2=a_2$. ∎"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "hmmt-feb-2026-team-02",
+    "bank": "hmmt",
+    "source": {
+      "contest": "HMMT February",
+      "paper": "2026 Team Round",
+      "year": 2026,
+      "number": 2,
+      "url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2026/feb/team/problems.pdf"
+    },
+    "grade": "9-12",
+    "points": 25,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Jessica the jackrabbit wants to climb down a wall. The wall consists of $2026$ horizontal layers stacked vertically. The $n^{\\text{th}}$ layer from the top is partitioned into $2^n-1$ identical rectangular bricks arranged side by side. Jessica begins in the topmost layer, which contains a single brick. A move consists of Jessica going down one layer to a brick that shares a side with the brick she is currently on. (The picture shows the top of the wall.) Determine, with proof, the total number of distinct sequences of moves Jessica can take to reach the $2026^{\\text{th}}$ layer.",
+    "image": "qimages/hmmt/feb-2026-team/q02.webp",
+    "choices": null,
+    "answer": "$3^{2025}$: every brick touches exactly $3$ bricks of the next layer.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Each brick touches exactly three below",
+        "body": "Fix a layer $n\\le2025$ with $N=2^n-1$ bricks; layer $n+1$ has $2^{n+1}-1=2N+1$ bricks. Scale the wall's width to $N(2N+1)$. Then bricks of layer $n$ have width $2N+1$ and their vertical edges are at multiples of $2N+1$, while bricks of layer $n+1$ have width $N$ with edges at multiples of $N$; all edges are at integer positions. A brick below \"shares a side\" with a brick above when their horizontal edges overlap in a segment of positive length.\n\nTake a brick $B$ of layer $n$ occupying $[A,A+2N+1]$.\n- **At least 3.** The bricks below touching $B$ cover its bottom edge of length $2N+1$; two bricks of width $N$ cover only $2N$.\n- **At most 3.** Suppose at least $4$ touch $B$. Let $E_1$ be the edge between the first and second of them and $E_2$ the edge between the last two. The first one overlaps $B$ in positive length, so $E_1>A$, hence $E_1\\ge A+1$; similarly $E_2\\le A+2N$. At least two whole bricks lie between $E_1$ and $E_2$, needing length $2N>(A+2N)-(A+1)$, a contradiction.\n\nSo from every brick there are exactly $3$ possible moves. Jessica makes $2025$ moves to get from layer $1$ to layer $2026$, so there are $3^{2025}$ sequences. ∎\n\n**Answer: $3^{2025}$**"
+      },
+      {
+        "title": "Explicit edges",
+        "body": "With the wall's width normalised to $1$, brick $a$ of layer $n$ is $\\left[\\frac{a-1}N,\\frac aN\\right]$ and brick $j$ of layer $n+1$ is $\\left[\\frac{j-1}{2N+1},\\frac{j}{2N+1}\\right]$. For $1\\le a\\le N-1$,\n$$\\frac{2a}{2N+1}<\\frac aN<\\frac{2a+1}{2N+1}$$\n(the left inequality since $2N+1>2N$; the right one is equivalent to $\\frac{2(N-a)}{2N+1}<\\frac{N-a}N$). So each interior edge $\\frac aN$ lies strictly inside brick $2a+1$ below, and brick $a$ above touches exactly bricks $2a-1,2a,2a+1$ (the end bricks similarly touch $1,2,3$ and $2N-1,2N,2N+1$). Hence $3$ choices at each of $2025$ moves: $3^{2025}$. ∎\n\n**Answer: $3^{2025}$**"
+      }
+    ],
+    "topics": [
+      "counting"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "hmmt-feb-2026-team-03",
+    "bank": "hmmt",
+    "source": {
+      "contest": "HMMT February",
+      "paper": "2026 Team Round",
+      "year": 2026,
+      "number": 3,
+      "url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2026/feb/team/problems.pdf"
+    },
+    "grade": "9-12",
+    "points": 30,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $\\alpha$ and $\\beta$ be complex numbers such that $\\alpha\\beta+\\alpha+\\beta+100=0$. Suppose that $|\\alpha|=|\\beta|=M$ for some nonnegative real number $M$. Determine, with proof, all possible values of $M$.",
+    "image": null,
+    "choices": null,
+    "answer": "$M=10$ only (e.g. $\\alpha=-10$, $\\beta=10$); conjugating gives $(100-M^2)(\\alpha\\beta-M^2)=0$, and $\\alpha\\beta=M^2$ is impossible.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Conjugate the equation",
+        "body": "**Example.** $\\alpha=-10$, $\\beta=10$: $-100+0+100=0$, so $M=10$ occurs.\n\n**Only $M=10$.** $M=0$ would give $100=0$, so $M>0$ and $\\bar\\alpha=\\frac{M^2}\\alpha$, $\\bar\\beta=\\frac{M^2}\\beta$. Conjugating the equation:\n$$\\frac{M^4}{\\alpha\\beta}+\\frac{M^2}\\alpha+\\frac{M^2}\\beta+100=0\\implies M^4+M^2(\\alpha+\\beta)+100\\alpha\\beta=0.$$\nSubstituting $\\alpha+\\beta=-\\alpha\\beta-100$:\n$$M^4-M^2\\alpha\\beta-100M^2+100\\alpha\\beta=0\\iff(100-M^2)(\\alpha\\beta-M^2)=0.$$\nIf $\\alpha\\beta=M^2$, then $\\beta=\\frac{M^2}\\alpha=\\bar\\alpha$, and $\\alpha+\\bar\\alpha=-(M^2+100)$, so $\\operatorname{Re}\\alpha=-\\frac{M^2+100}2$. But $\\frac{M^2+100}2\\ge10M>M$ (AM–GM), contradicting $|\\operatorname{Re}\\alpha|\\le|\\alpha|=M$. Hence $M^2=100$, $M=10$. ∎\n\n**Answer: $M=10$**"
+      },
+      {
+        "title": "Geometry: power of the point $-1$",
+        "body": "Write the condition as $(\\alpha+1)(\\beta+1)=-99$. Let $X=-1$, $O=0$, and $A,B$ the points $\\alpha,\\beta$ on the circle $|z|=M$. Let $A'$ be the point $\\bar\\alpha$ (the reflection of $A$ in the real axis), also on the circle. Since $(\\alpha+1)(\\beta+1)$ is a negative real, $\\arg(\\beta+1)=180^\\circ-\\arg(\\alpha+1)=180^\\circ+\\arg(\\bar\\alpha+1)$, so the vectors $\\overrightarrow{XA'}$ and $\\overrightarrow{XB}$ point in opposite directions and $A',X,B$ are collinear with $X$ between them. Also $XA'\\cdot XB=|\\alpha+1||\\beta+1|=99$. Thus the chord $A'B$ of the circle passes through $X$ and the power of $X$ is $-99$: $OX^2-M^2=-99$, so $M^2=100$, $M=10$. ∎\n\n**Answer: $M=10$**"
+      }
+    ],
+    "topics": [
+      "complex-numbers",
+      "algebra"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "hmmt-feb-2026-team-04",
+    "bank": "hmmt",
+    "source": {
+      "contest": "HMMT February",
+      "paper": "2026 Team Round",
+      "year": 2026,
+      "number": 4,
+      "url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2026/feb/team/problems.pdf"
+    },
+    "grade": "9-12",
+    "points": 35,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "A set of rational numbers $S$ is called *inclusive* if $0$ is not an element of $S$, and for any (not necessarily distinct) elements $x$, $y$, and $z$ of $S$, the number $xy+z$ is also an element of $S$. Determine, with proof, all rational numbers $a$ for which there exists an inclusive set containing $a$.",
+    "image": null,
+    "choices": null,
+    "answer": "All rationals except $0$ and $-\\frac1n$ ($n\\ge1$). Positive rationals form an inclusive set; for $a=-\\frac mn$ with $m\\ge2$ use $\\{x: x\\equiv a\\pmod{m^2}\\}$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Obstruction and congruence-class construction",
+        "body": "**$0$ and $-\\frac1n$ fail.** No inclusive set contains $0$. If $a=-\\frac1n\\in S$, then with $x=y=a$, $z\\mapsto z+\\frac1{n^2}$ keeps us in $S$. Starting from $z=-\\frac1n=-\\frac{n}{n^2}$ and applying this $n$ times gives $0\\in S$, a contradiction.\n\n**Positive $a$.** The positive rationals are inclusive ($x,y,z>0\\Rightarrow xy+z>0$).\n\n**Negative $a=-\\frac mn$** with $\\gcd(m,n)=1$, $m\\ge2$. Let $R$ be the ring of rationals whose reduced denominator is coprime to $m$, and set\n$$T=\\{a+m^2t: t\\in R\\}.$$\n- $a\\in T$ ($t=0$).\n- $0\\notin T$: $0=a+m^2t$ gives $t=\\frac{1}{mn}$, whose denominator is divisible by $m\\ge2$, so $t\\notin R$.\n- Closure: note $a=-\\frac mn\\in R$ and $a^2=\\frac{m^2}{n^2}\\in m^2R$. For $x=a+m^2s$, $y=a+m^2t$, $z=a+m^2u$ with $s,t,u\\in R$:\n$$xy+z=a+\\underbrace{a^2}_{\\in m^2R}+m^2\\big(a(s+t)+m^2st+u\\big)\\in a+m^2R=T.$$\n\nSo $T$ is an inclusive set containing $a$. Hence the answer is all rationals except $0$ and $-\\frac1n$ for positive integers $n$. ∎"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "algebra"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "hmmt-feb-2026-team-05",
+    "bank": "hmmt",
+    "source": {
+      "contest": "HMMT February",
+      "paper": "2026 Team Round",
+      "year": 2026,
+      "number": 5,
+      "url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2026/feb/team/problems.pdf"
+    },
+    "grade": "9-12",
+    "points": 40,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "The numbers $1,2,\\dots,2026$ are written on a blackboard. An operation consists of replacing any number on the blackboard with the positive difference between the largest and smallest numbers currently on the blackboard. Determine, with proof, the least number of operations required to make all the numbers on the blackboard equal.",
+    "image": null,
+    "choices": null,
+    "answer": "$3037=3\\cdot1013-2$. The final value $k$ is at most $1013$; reaching spread $k$ costs $\\ge2025-k$ operations, after which $2025$ more are needed.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Bound the final value, then count",
+        "body": "Let $2026=2n$ ($n=1013$). All numbers stay positive until the end (a difference of $0$ only arises when everything is already equal).\n\n**Lemma 1. The final common value $k$ satisfies $k\\le n$.** Just before the last operation, all numbers but one equal $k$, and the remaining $x$ is replaced by $|x-k|=k$, so $x=2k$. The maximum never increases (the new value $\\max-\\min$ is less than $\\max$), so $2k\\le2n$.\n\n**Lemma 2.** At the first moment the spread $\\max-\\min$ equals $k$, at least $2n-k-1$ operations have been made: the board then has at most $k+1$ distinct values, so at least $2n-k-1$ of the original numbers $1,\\dots,2n$ have been overwritten.\n\n**Lower bound.** Every operation writes the current spread. Before the spread first equals $k$, no operation writes $k$, so the only $k$ on the board is the original one. Each of the other $2n-1$ positions must therefore be overwritten with $k$ at some later operation. Total\n$$\\ge(2n-k-1)+(2n-1)=4n-k-2\\ge3n-2.$$\n\n**Construction.** Repeatedly replace the smallest number: at step $i$ ($i=1,\\dots,n-1$) the board's minimum is $i$ and maximum $2n$, so $i$ becomes $2n-i$. After $n-1$ steps the board is $n,\\ n+1,n+1,\\ \\dots,\\ 2n-1,2n-1,\\ 2n$, with spread $n$. Now replace every number except the single $n$ by $n$, doing $2n$ last; the spread stays $n$ throughout. This uses $(n-1)+(2n-1)=3n-2$ operations.\n\nHence the minimum is $3n-2=3037$. ∎\n\n**Answer: 3037**"
+      }
+    ],
+    "topics": [
+      "logic",
+      "counting"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "hmmt-feb-2026-team-06",
+    "bank": "hmmt",
+    "source": {
+      "contest": "HMMT February",
+      "paper": "2026 Team Round",
+      "year": 2026,
+      "number": 6,
+      "url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2026/feb/team/problems.pdf"
+    },
+    "grade": "9-12",
+    "points": 40,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $ABCD$ be a cyclic quadrilateral with circumcenter $O$, and let $M$ be the midpoint of $\\overline{AB}$. Suppose that $\\angle CMD=90^\\circ$ and $\\overline{AD}\\perp\\overline{BC}$. Prove that the reflection of $O$ over $\\overline{AB}$ lies on line $CD$.",
+    "image": null,
+    "choices": null,
+    "answer": "With $E=AD\\cap BC$: $CEDM$ is cyclic and $CE=CM$, $DE=DM$, so $CD$ is the perpendicular bisector of $EM$; then $P=CD\\cap MO$ satisfies $MN=MP$ ($N$ the midpoint of $CD$), which makes $M$ the midpoint of $OP$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Perpendicular bisector of $EM$",
+        "body": "Let $E=AD\\cap BC$, so $\\angle AEB=90^\\circ$. As $AD,BC$ are opposite sides of a convex cyclic quadrilateral, $E$ lies outside the circle. If $E$ were beyond $A$ and $B$, then $A,B$ would lie on sides $ED,EC$ of right triangle $EDC$, which is inscribed in the circle with diameter $CD$; so $M$ would be strictly inside that circle and $\\angle CMD>90^\\circ$. Hence $E$ lies beyond $D$ on ray $AD$ and beyond $C$ on ray $BC$. Since $M$ is the midpoint of the hypotenuse of right triangle $AEB$, $MA=MB=ME$.\n\n**Claim 1: $CD$ is the perpendicular bisector of $EM$.** $\\angle CED=90^\\circ=\\angle CMD$, so $C,E,D,M$ lie on the circle with diameter $CD$. Then\n$$\\angle CME=\\angle CDE=180^\\circ-\\angle CDA=\\angle ABC=\\angle MBE=\\angle BEM=\\angle CEM,$$\n(using the circle $CEDM$, $E$ beyond $D$, $ABCD$ cyclic, and $MB=ME$; $C$ lies on line $BE$). So $CE=CM$; similarly $DE=DM$. Hence $C$ and $D$ are on the perpendicular bisector of $EM$.\n\nLet $N$ be the midpoint of $CD$ (the centre of circle $CEDM$), and let $P$ be the intersection of $CD$ with line $MO$, the perpendicular bisector of $AB$. The reflection of $O$ over $AB$ is the point $O'$ on line $MO$ with $M$ the midpoint of $OO'$. So it suffices to show that $M$ is the midpoint of $OP$.\n\n**Claim 2: $MN=MP$.** WLOG $D,N,P,C$ are in this order. Since $CD\\perp EM$ and $MP\\perp AB$,\n$$\\angle NPM=90^\\circ-\\angle EMP=\\angle AME=2\\angle MBE=2\\angle BEM,$$\nusing that $\\angle AME$ is an exterior angle of the isosceles triangle $MBE$. Also, as a central angle of circle $CEDM$, $\\angle CNM=2\\angle CEM=2\\angle BEM$. So $\\angle NPM=\\angle PNM$ and $MN=MP$.\n\n**Finish.** $ON\\perp CD$ ($N$ is the midpoint of the chord $CD$ of the circumcircle), so triangle $ONP$ is right-angled at $N$. The point $M$ lies on the hypotenuse $OP$ and on the perpendicular bisector of $NP$ (as $MN=MP$); the only such point is the midpoint of $OP$. Hence $P=O'$ lies on $CD$. ∎"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "hmmt-feb-2026-team-07",
+    "bank": "hmmt",
+    "source": {
+      "contest": "HMMT February",
+      "paper": "2026 Team Round",
+      "year": 2026,
+      "number": 7,
+      "url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2026/feb/team/problems.pdf"
+    },
+    "grade": "9-12",
+    "points": 50,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "An infinite sequence $a_1,a_2,a_3,\\dots$ of integers is called *$r$-close* if every integer appears in the sequence exactly once and $|a_{n+2}-a_{n+1}|\\ge r|a_{n+1}-a_n|$ for all integers $n\\ge1$. Determine, with proof, all nonnegative real numbers $r$ for which an $r$-close sequence exists.",
+    "image": null,
+    "choices": null,
+    "answer": "Exactly $0\\le r<2$. For $r\\ge2$, $a_2\\pm1$ can never appear; for $r<2$ insert each missing integer after a run of doubling jumps.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Doubling jumps, and why 2 is impossible",
+        "body": "**$r\\ge2$ is impossible.** It suffices to treat $r=2$. Let $d_i=|a_{i+1}-a_i|\\ge1$, so $d_{i+1}\\ge2d_i$. Put $S_i=d_i-d_{i-1}-\\cdots-d_2$ for $i\\ge2$; then $S_i\\ge2d_{i-1}-d_{i-1}-\\cdots-d_2=S_{i-1}$, so $S_i\\ge S_2=d_2\\ge2d_1\\ge2$. By the triangle inequality, for $j\\ge3$,\n$$|a_j-a_2|\\ge d_{j-1}-(d_{j-2}+\\cdots+d_2)=S_{j-1}\\ge2.$$\nChoose $m=a_2+1$ or $a_2-1$ with $m\\ne a_1$. Then $m$ is not $a_1$, not $a_2$, and not $a_j$ for $j\\ge3$ — it never appears. Contradiction.\n\n**Construction for $0\\le r<2$.** Fix $k$ with $r<2-2^{-k}$. Enumerate the integers as $0,1,-1,2,-2,\\dots$ and start with $a_1=0$. Process the enumeration in order; when we reach an integer $m$ not yet in the sequence, with current last term $a_n$:\n- If $a_n>m$: choose an integer $d$ larger than twice the difference between any two terms so far. Append $a_n+d,\\ a_n+3d,\\ a_n+7d,\\dots$, i.e. jumps $d,2d,4d,\\dots,2^kd$, ending at $a_{n+k+1}=a_n+(2^{k+1}-1)d$; then append $m$.\n- If $a_n<m$: the same with all jumps downward.\n\nCheck: the new terms exceed (or are below) all previous terms by the choice of $d$, so nothing repeats. The first jump $d$ is at least twice the previous jump, each next jump doubles, and the final jump to $m$ is\n$$\\frac{a_{n+k+1}-m}{2^kd}=\\frac{(2^{k+1}-1)d+(a_n-m)}{2^kd}>2-2^{-k}>r$$\ntimes the previous one. Every integer is eventually processed and inserted exactly once. So an $r$-close sequence exists. ∎\n\n**Answer: $0\\le r<2$**"
+      }
+    ],
+    "topics": [
+      "sequences-series",
+      "logic"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "hmmt-feb-2026-team-08",
+    "bank": "hmmt",
+    "source": {
+      "contest": "HMMT February",
+      "paper": "2026 Team Round",
+      "year": 2026,
+      "number": 8,
+      "url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2026/feb/team/problems.pdf"
+    },
+    "grade": "9-12",
+    "points": 50,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $n\\ge2$ be a positive integer and let $(a_1,\\dots,a_n)$ be a permutation of the numbers $1,2,\\dots,n$. Marin makes a single move on this permutation by performing the following steps:\n- First, he chooses an integer $1\\le k\\le\\lfloor n/2\\rfloor$. This integer can be different for different moves.\n- Then, he picks two nonintersecting sets $I=\\{i_1,i_2,\\dots,i_k\\}$ and $J=\\{j_1,j_2,\\dots,j_k\\}$ such that $1\\le i_1<i_2<\\cdots<i_k\\le n$ and $1\\le j_1<j_2<\\cdots<j_k\\le n$.\n- Finally, he swaps the numbers $a_{i_s}$ and $a_{j_s}$ in the current permutation for all integers $1\\le s\\le k$.\n\nLet $f(n)$ denote the smallest positive integer such that it is possible for Marin to reach $(1,2,\\dots,n)$ from any starting permutation in at most $f(n)$ moves. Prove that $\\lceil\\log_3n\\rceil\\le f(n)\\le\\lceil\\log_2n\\rceil$.",
+    "image": null,
+    "choices": null,
+    "answer": "Upper: one move separates the small and large halves, then both halves are sorted in parallel. Lower: a decreasing subsequence shrinks by at most a factor $3$ per move.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Divide and conquer; decreasing subsequences",
+        "body": "**Upper bound.** Let $g(n)$ be the number of moves needed by the following procedure, with $g(1)=0$; we show $g(n)\\le\\lceil\\log_2n\\rceil$ by strong induction. Let $d=\\lfloor n/2\\rfloor$, and let\n$$I=\\{i\\le d: a_i>d\\},\\qquad J=\\{j>d: a_j\\le d\\}.$$\nThe first $d$ positions hold $d-|I|$ values $\\le d$, so the remaining $|I|$ values $\\le d$ are in the second half: $|I|=|J|=:k\\le d$. Swapping $a_{i_s}\\leftrightarrow a_{j_s}$ (one move, skipped if $k=0$) makes positions $1..d$ hold exactly $\\{1..d\\}$ and positions $d+1..n$ hold $\\{d+1..n\\}$.\n\nNow sort the two halves independently. A move $(I_1,J_1)$ inside the first half and a move $(I_2,J_2)$ inside the second can be combined into the single move $(I_1\\cup I_2,J_1\\cup J_2)$: all of $I_1,J_1$ precede all of $I_2,J_2$, so the $s$-th elements still pair up correctly, the sets are disjoint, and $k_1+k_2\\le\\lfloor d/2\\rfloor+\\lfloor(n-d)/2\\rfloor\\le\\lfloor n/2\\rfloor$. So\n$$g(n)\\le1+\\max\\big(g(\\lfloor n/2\\rfloor),g(\\lceil n/2\\rceil)\\big)\\le1+\\lceil\\log_2\\lceil n/2\\rceil\\rceil=\\lceil\\log_2n\\rceil.$$\nHence $f(n)\\le\\lceil\\log_2 n\\rceil$. (E.g. $(8,4,5,6,2,1,3,7)\\to(2,4,1,3,8,5,6,7)\\to(2,1,4,3,6,5,8,7)\\to(1,\\dots,8)$.)\n\n**Lower bound.** Call a set $T$ of positions *decreasing* if the values at the positions of $T$, read left to right, decrease. Claim: after any move $(I,J)$, there is a decreasing set of size $\\ge|T|/3$. Split $T$ into $T\\cap I$, $T\\cap J$, $T\\setminus(I\\cup J)$. Values in $T\\setminus(I\\cup J)$ don't move. Values at $T\\cap I$ move from $i_s$ to $j_s$; since $s\\mapsto i_s$ and $s\\mapsto j_s$ are both increasing, their left-to-right order is preserved, so their new positions form a decreasing set; likewise for $T\\cap J$. One of the three parts has at least $|T|/3$ elements.\n\nStart from $(n,n-1,\\dots,1)$, where all $n$ positions form a decreasing set. After $t$ moves there is a decreasing set of size $\\ge n/3^t$. The identity has no decreasing set of size $2$, so $n/3^t\\le1$, i.e. $3^t\\ge n$, so $t\\ge\\lceil\\log_3n\\rceil$. ∎"
+      }
+    ],
+    "topics": [
+      "counting",
+      "logic"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "hmmt-feb-2026-team-09",
+    "bank": "hmmt",
+    "source": {
+      "contest": "HMMT February",
+      "paper": "2026 Team Round",
+      "year": 2026,
+      "number": 9,
+      "url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2026/feb/team/problems.pdf"
+    },
+    "grade": "9-12",
+    "points": 55,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $ABC$ be an acute scalene triangle. Let $D$ be the foot of the altitude from $A$ to $\\overline{BC}$, and let $M$ be the midpoint of $\\overline{BC}$. There exists a unique point $P$ strictly inside triangle $ABC$ such that $\\angle DPM=90^\\circ$ and $PB/PC=AB/AC$. Prove that $\\angle BPC=180^\\circ-|\\angle ABC-\\angle ACB|$.",
+    "image": null,
+    "choices": null,
+    "answer": "With $A'$ the reflection of $A$ in $BC$, the centre of the spiral similarity $AA'\\mapsto BC$ satisfies both conditions (it maps $D\\mapsto M$ with a $90^\\circ$ rotation), and $\\triangle PAB\\sim\\triangle PA'C$ gives the angle.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "A spiral similarity",
+        "body": "Let $A'$ be the reflection of $A$ across $BC$, so $D$ is the midpoint of $AA'$ and $A'C=AC$. Since $\\overrightarrow{AA'}\\ne\\overrightarrow{BC}$, there is a spiral similarity $\\sigma$ with $\\sigma(A)=B$, $\\sigma(A')=C$; let $Q$ be its centre. Then $\\triangle QAA'\\sim\\triangle QBC$ and also $\\triangle QAB\\sim\\triangle QA'C$ (the companion spiral similarity $\\tau$ with the same centre maps $A\\mapsto A'$, $B\\mapsto C$).\n\n**$Q$ satisfies both conditions.**\n- From $\\triangle QAB\\sim\\triangle QA'C$: $\\frac{QB}{QC}=\\frac{AB}{A'C}=\\frac{AB}{AC}$.\n- $\\sigma$ maps the midpoint $D$ of $AA'$ to the midpoint $M$ of $BC$, and its rotation angle is the angle between $AA'$ and $BC$, i.e. $90^\\circ$. Hence $\\angle DQM=90^\\circ$.\n\n**$Q$ and $P$ give the same angle.** The points $X$ with $\\angle DXM=90^\\circ$ form the circle with diameter $DM$, and those with $\\frac{XB}{XC}=\\frac{AB}{AC}$ form an Apollonius circle (as $AB\\ne AC$); both are centred on line $BC$, so they meet in at most two points, symmetric about $BC$. Both $P$ and $Q$ are such points, so $Q=P$ or $Q$ is the reflection of $P$ across $BC$; either way $\\angle BQC=\\angle BPC$.\n\n**Compute $\\angle BQC$.** The similarity $\\tau$ maps $A\\mapsto A'$ and $B\\mapsto C$, so its rotation angle equals both $\\angle AQA'=\\angle BQC$ and the angle between the vectors $\\overrightarrow{AB}$ and $\\overrightarrow{A'C}$. Put $BC$ on the $x$-axis with $A$ above it. $\\overrightarrow{BA}$ has direction $\\angle B$, so $\\overrightarrow{AB}$ has direction $180^\\circ+\\angle B$; $\\overrightarrow{CA}$ has direction $180^\\circ-\\angle C$, so $\\overrightarrow{CA'}$ has direction $\\angle C-180^\\circ$ and $\\overrightarrow{A'C}$ has direction $\\angle C$. The angle between the two vectors is $180^\\circ+\\angle B-\\angle C$, i.e. (as an angle in $[0^\\circ,180^\\circ]$) $180^\\circ-|\\angle B-\\angle C|$. Therefore\n$$\\angle BPC=\\angle BQC=180^\\circ-|\\angle ABC-\\angle ACB|.\\qquad∎$$"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "hmmt-feb-2026-team-10",
+    "bank": "hmmt",
+    "source": {
+      "contest": "HMMT February",
+      "paper": "2026 Team Round",
+      "year": 2026,
+      "number": 10,
+      "url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2026/feb/team/problems.pdf"
+    },
+    "grade": "9-12",
+    "points": 55,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Prove that there exists a real constant $M$ such that for every prime $p\\ge M$ and any positive integer $2\\le m\\le p-1$, there exist positive integers $a$ and $b$ such that $m\\le a\\le1.01m$, $p^{0.99}\\le b\\le p$, and $p$ divides $ab-1$.",
+    "image": null,
+    "choices": null,
+    "answer": "Take $b\\equiv a^{-1}\\pmod p$. If $m<p^{0.01}$, $a=m$ works. Otherwise, if all inverses on $[m,1.01m]$ were small, many $a$ would share one value of $\\frac{ab-1}p=k$, giving $pk+1<p^2$ more than $cp^{0.01}$ divisors, contradicting $d(N)=O(N^{\\varepsilon})$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Pigeonhole plus the divisor bound",
+        "body": "**Lemma (divisor bound).** For every $\\varepsilon>0$ there is $C_\\varepsilon$ with $d(N)\\le C_\\varepsilon N^\\varepsilon$ for all $N\\ge1$. *Proof.* $\\frac{d(N)}{N^\\varepsilon}=\\prod_{q^e\\parallel N}\\frac{e+1}{q^{\\varepsilon e}}$. If $q\\ge2^{1/\\varepsilon}$, then $q^{\\varepsilon e}\\ge2^e\\ge e+1$, so the factor is $\\le1$. For each of the finitely many primes $q<2^{1/\\varepsilon}$, $\\frac{e+1}{q^{\\varepsilon e}}\\le\\frac{e+1}{2^{\\varepsilon e}}$ is bounded in $e$ by a constant $c_\\varepsilon$. So $C_\\varepsilon=c_\\varepsilon^{\\pi(2^{1/\\varepsilon})}$ works. $\\square$\n\nFor $a\\not\\equiv0\\pmod p$ let $f(a)\\in\\{1,\\dots,p-1\\}$ be the inverse of $a$ mod $p$; we look for $a\\in[m,1.01m]$ with $f(a)\\ge p^{0.99}$ and then take $b=f(a)\\le p$.\n\n**Small $m$.** If $m<p^{0.01}$, take $a=m$: $mf(m)-1$ is a positive multiple of $p$ (as $mf(m)\\ge2$), so $f(m)\\ge\\frac{p+1}m>p^{0.99}$.\n\n**Large $m$.** Let $m\\ge p^{0.01}$ and suppose $f(a)<p^{0.99}$ for every integer $a\\in[m,1.01m]$ with $p\\nmid a$. Take $p$ large enough that $p^{0.01}\\ge 1000$. The interval contains at least $0.01m-1$ integers, at most one divisible by $p$ (since $1.01m<2p$), so at least $0.005m$ admissible $a$. For each, $k(a)=\\frac{af(a)-1}p$ is a positive integer with\n$$k(a)<\\frac{1.01m\\cdot p^{0.99}}{p}=1.01\\,m\\,p^{-0.01}.$$\nBy pigeonhole some value $k$ is taken by at least $\\frac{0.005m}{1.01mp^{-0.01}}>0.004\\,p^{0.01}$ values of $a$. Each such $a$ divides $N=pk+1=af(a)<1.01m\\,p^{0.99}<p^2$, and these $a$ are distinct, so $d(N)>0.004\\,p^{0.01}$.\n\nBut by the lemma with $\\varepsilon=0.004$: $d(N)\\le C N^{0.004}<C p^{0.008}$. So $0.004\\,p^{0.01}<Cp^{0.008}$, i.e. $p^{0.002}<250C$, false once $p$ is large. Choosing $M$ larger than this threshold (and than $1000^{100}$) gives the result: for $p\\ge M$ some admissible $a$ has $b=f(a)\\ge p^{0.99}$, with $p\\mid ab-1$. ∎"
+      }
+    ],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

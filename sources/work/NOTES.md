@@ -54,3 +54,14 @@
 - IIT JAM 2026 Q10: officially "marks to all"; kept with answer (B), reviewNote. Q41 series term at n=1 undefined (noted in solution). Only 2026 has an official key; 2012-2025 answers will be agent-solved.
 - PUMaC 2019: Comb A8 key 399 vs computed 396 (both accepted); Team 15 key 258 counts impossible f=1, stored 175 (258 accepted); NT B6 flawed (official 203 kept); Comb B8 asks probability, key gives m+n (both accepted). 2018 live: four "value vs m+n" mismatches (value stored, key number accepted); Misc 3 printed equation missing terms, prompt corrected to official-solution equation.
 - BMO source files: 2025_bmo1_report.pdf duplicates 2024 report; *_ukmt files are named by sitting year.
+- Berkeley Fall 2022 5B: official solution sign error (residue -1/9); corrected answers used, reviewNote. Fall 2022 3B official counterexample not smooth; smooth one given.
+- NYCIML Fall 2024 Senior B Q19: inconsistent data, official 36 kept (reviewNote). Spring 2025 Senior B Q8/Q10: answer page swaps them; used worked solutions (2, 1), reviewNotes.
+- Math League 2012-13 HS file is Contest 2 (source file misnamed contest1).
+- SAMO Senior 2023 Round 2: official solutions NOT AVAILABLE (SAMF 404, no Wayback copy) — REPORT TO USER; all 25 answers agent-solved and script-checked.
+- IOQM 2022 Q9, Q12: officially 'marks to all' (statement errors); kept with preliminary-key answers, reviewNotes. 2022 points nulled (only scheme source was Scribd). IOQM 2020/2021 answer-key PDFs were mislabelled; swapped back.
+- Wisconsin Jan 1999 #1(iii): false for trivial A (reviewNote; corrected statement proved). Jan 1996 has no official key.
+- PMC November 2019: question paper not available (answers/notes only) — REPORT TO USER.
+- IIT JAM 2024, 2025: no official keys; all 120 agent-solved. 2024 Q50 uses det(xI-M) convention; 2025 Q57 region reading stated.
+- Math Prize for Girls 2026: official solutions 404 — answers agent-solved and computer-checked — REPORT TO USER.
+- ARML 2020: contest cancelled (none exists). 2019 Power 7: official E(n,k)=3 condition misses k=n/2 (reviewNote).
+- HMMT Feb 2025/2026: several typos in official solutions; answers all match keys.

@@ -1,0 +1,305 @@
+[
+  {
+    "id": "vtrmc-1983-01",
+    "bank": "vtrmc",
+    "source": {
+      "contest": "VTRMC",
+      "paper": "5th VTRMC (1983)",
+      "year": 1983,
+      "number": 1,
+      "url": "https://www.math.vt.edu/people/plinnell/Vtregional/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "In the expansion of $(a+b)^n$, where $n$ is a natural number, there are $n+1$ dissimilar terms. Find the number of dissimilar terms in the expansion of $(a+b+c)^n$.",
+    "image": null,
+    "choices": null,
+    "answer": "$\\dbinom{n+2}{2}=\\dfrac{(n+1)(n+2)}{2}$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Count exponent triples",
+        "body": "Expanding $(a+b+c)^n$ and collecting like terms gives $\\sum\\frac{n!}{i!\\,j!\\,k!}a^ib^jc^k$ over all triples of non-negative integers with $i+j+k=n$; every coefficient is positive, so each such triple gives one term and no terms cancel.\n\nFor fixed $i\\in\\{0,\\dots,n\\}$ there are $n-i+1$ choices of $(j,k)$ with $j+k=n-i$. So the number of terms is\n$$\\sum_{i=0}^n(n-i+1)=(n+1)+n+\\cdots+1=\\frac{(n+1)(n+2)}2 .$$\n**Answer: $\\dfrac{(n+1)(n+2)}{2}$.**"
+      },
+      {
+        "title": "Stars and bars / induction",
+        "body": "*Stars and bars:* triples $(i,j,k)$ of non-negative integers with $i+j+k=n$ correspond to arrangements of $n$ stars and $2$ bars, so there are $\\binom{n+2}2$ of them.\n\n*Induction view:* $(a+b+c)^n=\\sum_{i=0}^n\\binom ni a^i(b+c)^{n-i}$, and $(b+c)^{n-i}$ has $n-i+1$ terms by the given fact; the terms for different $i$ are different (different powers of $a$). Total $\\sum_{i}(n-i+1)=\\binom{n+2}{2}$. (Check: $n=1$ gives $3$ terms $a,b,c$; $n=2$ gives $6$.)"
+      }
+    ],
+    "topics": [
+      "counting",
+      "algebra"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "vtrmc-1983-02",
+    "bank": "vtrmc",
+    "source": {
+      "contest": "VTRMC",
+      "paper": "5th VTRMC (1983)",
+      "year": 1983,
+      "number": 2,
+      "url": "https://www.math.vt.edu/people/plinnell/Vtregional/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "A positive integer $N$ (in base $10$) is called *special* if the operation $C$ of replacing each digit $d$ of $N$ by its nine's-complement $9-d$, followed by the operation $R$ of reversing the order of the digits, results in the original number. (For example, $3456$ is a special number because $R[(C3456)]=3456$.) Find the sum of all special positive integers less than one million which do not end in zero or nine.",
+    "image": null,
+    "choices": null,
+    "answer": "400399956",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Pair each number with its complement",
+        "body": "Let $N=d_1d_2\\dots d_m$ (digits, $d_1\\neq0$). Then $R(C(N))$ has digits $9-d_m,\\,9-d_{m-1},\\dots,9-d_1$, so $N$ is special iff\n$$d_i+d_{m+1-i}=9\\qquad\\text{for all }i.$$\nIf $m$ were odd, the middle digit would satisfy $2d=9$, impossible; so $m\\in\\{2,4,6\\}$ (as $N<10^6$). The last digit $d_m\\notin\\{0,9\\}$ is equivalent to $d_1=9-d_m\\in\\{1,\\dots,8\\}$. So a special number of length $m=2j$ is determined by its first $j$ digits: $d_1\\in\\{1,\\dots,8\\}$ and $d_2,\\dots,d_j$ arbitrary. There are $8\\cdot10^{j-1}$ of them.\n\n*Pairing.* If $N$ (of length $m$) is special with $d_1\\in\\{1..8\\}$, so is $N'=(10^m-1)-N$, whose digits are $9-d_i$ (still satisfying the symmetry condition, with first digit $9-d_1\\in\\{1..8\\}$). $N'\\neq N$ (as $d_1\\neq 9-d_1$), so the special numbers of length $m$ split into pairs with sum $10^m-1$.\n\n* $m=2$: $8$ numbers, sum $4\\cdot99=396$.\n* $m=4$: $80$ numbers, sum $40\\cdot9999=399\\,960$.\n* $m=6$: $800$ numbers, sum $400\\cdot999\\,999=399\\,999\\,600$.\n\nTotal: $396+399\\,960+399\\,999\\,600=400\\,399\\,956$.\n\n**Answer: $400399956$.**"
+      },
+      {
+        "title": "Sum digit by digit",
+        "body": "For $m=2j$ the number is $\\sum_{i=1}^m d_i10^{m-i}$ with $d_{m+1-i}=9-d_i$. Over all $8\\cdot10^{j-1}$ special numbers of length $m$: the first digit $d_1$ averages $4.5$ (values $1..8$), each other free digit averages $4.5$ (values $0..9$), and hence every digit position (including the determined ones, which equal $9$ minus a free digit) averages $4.5$. So the average special number of length $m$ is $4.5\\cdot\\underbrace{11\\ldots1}_{m}=\\frac{10^m-1}{2}$, and the sum is $8\\cdot10^{j-1}\\cdot\\frac{10^m-1}{2}$:\n$$m=2:\\ 8\\cdot\\tfrac{99}2=396,\\quad m=4:\\ 80\\cdot\\tfrac{9999}2=399\\,960,\\quad m=6:\\ 800\\cdot\\tfrac{999\\,999}2=399\\,999\\,600 .$$\nTotal $400\\,399\\,956$ (a computer search over all $N<10^6$ confirms it).\n\n**Answer: $400399956$.**"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "counting"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "vtrmc-1983-03",
+    "bank": "vtrmc",
+    "source": {
+      "contest": "VTRMC",
+      "paper": "5th VTRMC (1983)",
+      "year": 1983,
+      "number": 3,
+      "url": "https://www.math.vt.edu/people/plinnell/Vtregional/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let a triangle have vertices at $O(0,0)$, $A(a,0)$, and $B(b,c)$ in the $(x,y)$-plane.\n\n(a) Find the coordinates of a point $P(x,y)$ in the exterior of $\\triangle OAB$ satisfying $\\text{area}(OAP)=\\text{area}(OBP)=\\text{area}(ABP)$.\n\n(b) Find a point $Q(x,y)$ in the interior of $\\triangle OAQ$ satisfying $\\text{area}(OAQ)=\\text{area}(OBQ)=\\text{area}(ABQ)$.",
+    "image": null,
+    "choices": null,
+    "answer": "(a) $P=(a+b,\\,c)$ (the other exterior solutions are $(a-b,-c)$ and $(b-a,c)$); (b) the centroid $Q=\\left(\\frac{a+b}3,\\frac c3\\right)$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Parallelograms and the centroid",
+        "body": "(In (b), \"$\\triangle OAQ$\" is a misprint for $\\triangle OAB$.) Assume the triangle is non-degenerate ($ac\\neq0$); let $T$ be its area.\n\n**(a)** Let $P=A+B-O=(a+b,\\,c)$, the fourth vertex of the parallelogram $OAPB$. A diagonal splits a parallelogram into two triangles of equal area, so\n* diagonal $OP$: $\\text{area}(OAP)=\\text{area}(OBP)=\\tfrac12\\text{area}(OAPB)$;\n* diagonal $AB$: $\\text{area}(ABP)=\\text{area}(ABO)=T=\\tfrac12\\text{area}(OAPB)$.\n\nSo all three areas equal $T$, and $P$ is outside the triangle (it lies on the other side of $AB$ from $O$). By the same argument $O+A-B=(a-b,-c)$ and $O+B-A=(b-a,c)$ also work.\n\n**(b)** Let $Q=G=\\left(\\frac{a+b}3,\\frac c3\\right)$, the centroid. The heights of $OAG$, $OBG$, $ABG$ over the sides $OA$, $OB$, $AB$ are one third of the corresponding heights of the triangle (the centroid divides each median in the ratio $2:1$, so its distance to a side is $\\frac13$ of the opposite vertex's distance). Hence each of the three areas is $T/3$. For instance $\\text{area}(OAG)=\\frac12|a|\\cdot\\frac{|c|}{3}=\\frac T3$.\n\nThese are in fact the only solutions — see the second approach. ∎"
+      },
+      {
+        "title": "Barycentric coordinates: all solutions",
+        "body": "Write any point as $P=\\alpha O+\\beta A+\\gamma B$ with $\\alpha+\\beta+\\gamma=1$. Then (signed areas are affine in $P$)\n$$\\text{area}(ABP)=|\\alpha|T,\\qquad \\text{area}(OBP)=|\\beta|T,\\qquad\\text{area}(OAP)=|\\gamma|T .$$\n(Indeed $\\text{area}(OAP)$ is $\\frac12|OA|\\cdot\\text{dist}(P,OA)$, and the distance of $P$ to line $OA$ is $|\\gamma|$ times that of $B$.)\n\nEqual areas means $|\\alpha|=|\\beta|=|\\gamma|=t$ with $\\alpha+\\beta+\\gamma=1$. Either all three have the same sign: $3t=1$, giving the centroid $(\\frac13,\\frac13,\\frac13)$, the unique **interior** point; or one sign differs: $t+t-t=1$, $t=1$, giving $(1,1,-1)$, $(1,-1,1)$, $(-1,1,1)$, i.e.\n$$O+A-B=(a-b,-c),\\qquad O+B-A=(b-a,c),\\qquad A+B-O=(a+b,c),$$\nthe three **exterior** solutions. ∎"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "vtrmc-1983-04",
+    "bank": "vtrmc",
+    "source": {
+      "contest": "VTRMC",
+      "paper": "5th VTRMC (1983)",
+      "year": 1983,
+      "number": 4,
+      "url": "https://www.math.vt.edu/people/plinnell/Vtregional/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "A finite set of roads connect $n$ towns $T_1,T_2,\\ldots,T_n$ where $n\\ge2$. We say that towns $T_i$ and $T_j$ ($i\\neq j$) are *directly connected* if there is a road segment connecting $T_i$ and $T_j$ which does not pass through any other town. Let $f(T_k)$ be the number of other towns directly connected to $T_k$. Prove that $f$ is not one-to-one.",
+    "image": null,
+    "choices": null,
+    "answer": "$f$ takes values in $\\{0,\\dots,n-1\\}$, but $0$ and $n-1$ cannot both occur, so only $n-1$ values are available for $n$ towns (pigeonhole).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Pigeonhole on degrees",
+        "body": "\"Directly connected\" is a symmetric relation on the towns, i.e. a simple graph, and $f(T_k)$ is the degree of $T_k$: the number of towns $T_j\\neq T_k$ directly connected to it. So $0\\le f(T_k)\\le n-1$.\n\nSuppose $f$ were one-to-one. Then the $n$ values $f(T_1),\\dots,f(T_n)$ would be $n$ distinct numbers in $\\{0,1,\\dots,n-1\\}$, hence exactly $0,1,\\dots,n-1$. So some town $T_p$ has $f(T_p)=n-1$ — it is directly connected to every other town — and some town $T_q$ has $f(T_q)=0$ — it is directly connected to no town. Since $n\\ge2$, $p\\neq q$, and $T_p$ is directly connected to $T_q$, contradicting $f(T_q)=0$.\n\nHence two towns have the same value of $f$: $f$ is not one-to-one. ∎"
+      },
+      {
+        "title": "Case split on isolated towns",
+        "body": "* If some town is directly connected to no other town, then every town is connected to at most the $n-2$ towns other than itself and that isolated one, so all values of $f$ lie in $\\{0,1,\\dots,n-2\\}$.\n* Otherwise every town has $f\\ge1$, so all values lie in $\\{1,2,\\dots,n-1\\}$.\n\nEither way the $n$ towns take at most $n-1$ different values, so by the pigeonhole principle two towns share a value, and $f$ is not one-to-one. ∎"
+      }
+    ],
+    "topics": [
+      "graph-theory",
+      "counting"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "vtrmc-1983-05",
+    "bank": "vtrmc",
+    "source": {
+      "contest": "VTRMC",
+      "paper": "5th VTRMC (1983)",
+      "year": 1983,
+      "number": 5,
+      "url": "https://www.math.vt.edu/people/plinnell/Vtregional/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Find the function $f(x)$ such that for all $L\\ge0$, the area under the graph of $y=f(x)$ and above the $x$-axis from $x=0$ to $x=L$ equals the arc length of the graph from $x=0$ to $x=L$. (Hint: recall that $\\dfrac{d}{dx}\\cosh^{-1}x=1/\\sqrt{x^2-1}$.)",
+    "image": null,
+    "choices": null,
+    "answer": "$f(x)=\\cosh(x+C)$ for a constant $C$ (e.g. $f(x)=\\cosh x$), together with the constant solution $f\\equiv1$ (and $C^1$ combinations of these joined along a segment where $f=1$).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Differentiate and separate variables",
+        "body": "Assume $f$ is continuously differentiable (so that arc length is $\\int\\sqrt{1+f'^2}$) and $f\\ge0$ (the area lies above the $x$-axis). The condition is\n$$\\int_0^Lf(x)\\,dx=\\int_0^L\\sqrt{1+f'(x)^2}\\,dx\\qquad(L\\ge0).$$\nDifferentiating with respect to $L$ (fundamental theorem of calculus):\n$$f(x)=\\sqrt{1+f'(x)^2}\\qquad(x\\ge0),$$\nand conversely this ODE implies the condition (both sides vanish at $L=0$). So $f\\ge1$ and $f'^2=f^2-1$.\n\n*Where $f>1$:* on an interval where $f>1$, $f'$ is continuous and never $0$, so it has a constant sign, and\n$$\\frac{d}{dx}\\cosh^{-1}f(x)=\\frac{f'(x)}{\\sqrt{f(x)^2-1}}=\\pm1 .$$\nHence $\\cosh^{-1}f(x)=\\pm(x+C)$, i.e. $f(x)=\\cosh(x+C)$ ($\\cosh$ is even).\n\n*Check:* for $f(x)=\\cosh(x+C)$, $\\sqrt{1+\\sinh^2(x+C)}=\\cosh(x+C)=f(x)$ ✓ — and this works on all of $[0,\\infty)$ for every real $C$ (if $C<0$ the graph first goes down to the value $1$ at $x=-C$ and then up). The constant $f\\equiv1$ also works ($f'=0$, $\\sqrt{1}=1$).\n\n*All solutions.* The set where $f>1$ is relatively open in $[0,\\infty)$; on each of its component intervals $f=\\cosh(x+C)$ for one constant $C$, and at an end point of the component lying in $(0,\\infty)$ we have $f=1$ by continuity, which forces that end point to be $-C$. A component cannot have two such end points (they would both equal $-C$), so there is at most a component $[0,p)$ and at most a component $(q,\\infty)$, and $f=1$ on $[p,q]$ in between. So $f$ is $\\cosh$-shaped, possibly with a flat piece $f=1$ inserted: for some $0\\le p\\le q\\le\\infty$,\n$$f(x)=\\begin{cases}\\cosh(x-p),&0\\le x\\le p\\\\ 1,&p\\le x\\le q\\\\ \\cosh(x-q),&x\\ge q\\end{cases}$$\nor $f(x)=\\cosh(x+C)$ with $C>0$. (These pieces join with matching values and zero slope, so $f$ is $C^1$.) The natural answer, and the one with no flat piece, is\n$$f(x)=\\cosh(x+C),\\quad\\text{e.g. } f(x)=\\cosh x .$$"
+      },
+      {
+        "title": "Verify the catenary directly",
+        "body": "For $f(x)=\\cosh(x+C)$:\n$$\\text{area}=\\int_0^L\\cosh(x+C)\\,dx=\\sinh(L+C)-\\sinh C,$$\n$$\\text{arc length}=\\int_0^L\\sqrt{1+\\sinh^2(x+C)}\\,dx=\\int_0^L\\cosh(x+C)\\,dx=\\sinh(L+C)-\\sinh C .$$\nThey agree for every $L\\ge0$. So the catenary $y=\\cosh(x+C)$ (in particular $y=\\cosh x$) has the required property; the first approach shows that, apart from the trivial solution $y\\equiv1$ and pieces glued to it, these are the only ones."
+      }
+    ],
+    "topics": [
+      "calculus",
+      "differential-equations"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "vtrmc-1983-06",
+    "bank": "vtrmc",
+    "source": {
+      "contest": "VTRMC",
+      "paper": "5th VTRMC (1983)",
+      "year": 1983,
+      "number": 6,
+      "url": "https://www.math.vt.edu/people/plinnell/Vtregional/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $f(x)=1/x$ and $g(x)=1-x$ for $x\\in(0,1)$. List all distinct functions that can be written in the form $f\\circ g\\circ f\\circ g\\circ\\cdots\\circ f\\circ g\\circ f$ where $\\circ$ represents composition. Write each function in the form $\\dfrac{ax+b}{cx+d}$, and prove that your list is exhaustive.",
+    "image": null,
+    "choices": null,
+    "answer": "Exactly three: $\\dfrac{0x+1}{1x+0}=\\dfrac1x$, $\\dfrac{1x+0}{1x-1}=\\dfrac{x}{x-1}$, and $\\dfrac{-1x+1}{0x+1}=1-x$, because $\\varphi=f\\circ g$, $\\varphi(x)=\\frac1{1-x}$, satisfies $\\varphi^3=\\mathrm{id}$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "$f\\circ g$ has order 3",
+        "body": "(The composites are understood as formulas, i.e. as linear fractional maps; strictly speaking $g$ is only defined on $(0,1)$ while $f$ maps $(0,1)$ onto $(1,\\infty)$.)\n\nEvery function of the given form is $h_k=(f\\circ g)^k\\circ f$ for some $k\\ge0$ (or $k\\ge1$; it does not matter below). Let $\\varphi=f\\circ g$:\n$$\\varphi(x)=\\frac1{1-x},\\qquad \\varphi^2(x)=\\frac1{1-\\frac1{1-x}}=\\frac{1-x}{-x}=\\frac{x-1}{x},\\qquad \\varphi^3(x)=\\varphi\\!\\left(\\frac{x-1}{x}\\right)=\\frac1{1-\\frac{x-1}x}=x .$$\nSo $\\varphi^3=\\mathrm{id}$ and $h_k$ depends only on $k\\bmod3$:\n* $h_0=f$: $\\ \\dfrac1x=\\dfrac{0x+1}{1x+0}$;\n* $h_1=\\varphi\\circ f$: $\\ \\dfrac1{1-\\frac1x}=\\dfrac{x}{x-1}=\\dfrac{1x+0}{1x-1}$;\n* $h_2=\\varphi^2\\circ f$: $\\ \\dfrac{\\frac1x-1}{\\frac1x}=1-x=\\dfrac{-1x+1}{0x+1}$.\n\nThese three are distinct (at $x=\\frac12$ they take the values $2,\\,-1,\\,\\frac12$), and every composite of the given form equals one of them (also when at least one $g$ is required, since $h_3=f$). ∎"
+      },
+      {
+        "title": "Matrices",
+        "body": "Represent $\\frac{ax+b}{cx+d}$ by $\\begin{pmatrix}a&b\\\\c&d\\end{pmatrix}$ (up to a nonzero factor); composition is matrix multiplication. $F=\\begin{pmatrix}0&1\\\\1&0\\end{pmatrix}$, $G=\\begin{pmatrix}-1&1\\\\0&1\\end{pmatrix}$, so\n$$FG=\\begin{pmatrix}0&1\\\\-1&1\\end{pmatrix},\\quad (FG)^2=\\begin{pmatrix}-1&1\\\\-1&0\\end{pmatrix},\\quad (FG)^3=\\begin{pmatrix}-1&0\\\\0&-1\\end{pmatrix}=-I .$$\nHence the composites $(FG)^kF$ give only $F$, $FGF=\\begin{pmatrix}1&0\\\\1&-1\\end{pmatrix}$ and $(FG)^2F=\\begin{pmatrix}1&-1\\\\0&-1\\end{pmatrix}$, i.e. $\\frac1x$, $\\frac x{x-1}$, $\\frac{x-1}{-1}=1-x$ — the same three functions."
+      }
+    ],
+    "topics": [
+      "algebra",
+      "functional-equations"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "vtrmc-1983-07",
+    "bank": "vtrmc",
+    "source": {
+      "contest": "VTRMC",
+      "paper": "5th VTRMC (1983)",
+      "year": 1983,
+      "number": 7,
+      "url": "https://www.math.vt.edu/people/plinnell/Vtregional/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "If $a$ and $b$ are real, prove that $x^4+ax+b=0$ cannot have only real roots.",
+    "image": null,
+    "choices": null,
+    "answer": "If all four roots were real, Vieta gives $\\sum r_i=0$ and $\\sum_{i<j}r_ir_j=0$, so $\\sum r_i^2=0$ and all roots are $0$ — only possible for $a=b=0$ (the one exception, $x^4=0$).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Vieta's formulas",
+        "body": "*Remark on the statement.* For $a=b=0$ the equation $x^4=0$ has only the real root $0$ (with multiplicity $4$), so the statement must be read as \"unless $a=b=0$\". We prove: if $(a,b)\\neq(0,0)$, not all roots are real.\n\nLet $r_1,r_2,r_3,r_4$ be the roots (with multiplicity) and suppose they are all real. The polynomial $x^4+0x^3+0x^2+ax+b$ gives by Vieta's formulas\n$$\\sum_i r_i=0,\\qquad\\sum_{i<j}r_ir_j=0 .$$\nHence\n$$\\sum_i r_i^2=\\Big(\\sum_i r_i\\Big)^2-2\\sum_{i<j}r_ir_j=0 .$$\nA sum of squares of real numbers is $0$ only if all are $0$, so $r_1=r_2=r_3=r_4=0$ and the polynomial is $x^4$, i.e. $a=b=0$. So for $(a,b)\\ne(0,0)$ the equation has a non-real root. ∎"
+      },
+      {
+        "title": "Rolle's theorem",
+        "body": "Let $p(x)=x^4+ax+b$ and suppose all four roots (with multiplicity) are real. By Rolle's theorem (between distinct roots) together with the fact that a root of multiplicity $m$ of $p$ is a root of multiplicity $m-1$ of $p'$, the derivative $p'(x)=4x^3+a$ then has three real roots counted with multiplicity.\n\nBut $4x^3+a$ has only one real root, $x=-\\sqrt[3]{a/4}$, and it is simple unless $a=0$. So $a=0$, and $p(x)=x^4+b$. If $b>0$ it has no real root; if $b<0$ its roots are $\\pm|b|^{1/4}$ and $\\pm i|b|^{1/4}$. Only $b=0$ remains. Hence, except for the trivial case $a=b=0$, $x^4+ax+b=0$ cannot have only real roots. ∎"
+      }
+    ],
+    "topics": [
+      "polynomials",
+      "algebra"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "vtrmc-1983-08",
+    "bank": "vtrmc",
+    "source": {
+      "contest": "VTRMC",
+      "paper": "5th VTRMC (1983)",
+      "year": 1983,
+      "number": 8,
+      "url": "https://www.math.vt.edu/people/plinnell/Vtregional/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "A sequence $f_n$ is generated by the recurrence formula\n$$f_{n+1}=\\frac{f_nf_{n-1}+1}{f_{n-2}},$$\nfor $n=2,3,4,\\ldots$, with $f_0=f_1=f_2=1$. Prove that $f_n$ is integer-valued for all integers $n\\ge0$.",
+    "image": null,
+    "choices": null,
+    "answer": "The ratio $\\frac{f_{k+1}+f_{k-1}}{f_k}$ depends only on the parity of $k$ (it is $2$ for odd $k$, $3$ for even $k$), giving the integer linear recurrences $f_{k+1}=2f_k-f_{k-1}$ ($k$ odd) and $f_{k+1}=3f_k-f_{k-1}$ ($k$ even).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Find a linear recurrence",
+        "body": "The first terms are $1,1,1,2,3,7,11,26,41,97,\\dots$\n\n*Positivity.* By induction all $f_n>0$ (the recurrence divides a positive number by a positive number), so the sequence is well defined.\n\n*A conserved ratio.* For $n\\ge3$ we have both\n$$f_{n+1}f_{n-2}=f_nf_{n-1}+1\\qquad\\text{and}\\qquad f_nf_{n-3}=f_{n-1}f_{n-2}+1 .$$\nSubtracting,\n$$f_{n+1}f_{n-2}-f_nf_{n-3}=f_nf_{n-1}-f_{n-1}f_{n-2},\\quad\\text{i.e.}\\quad f_{n-2}\\,(f_{n+1}+f_{n-1})=f_n\\,(f_{n-1}+f_{n-3}).$$\nDefine $r_k=\\dfrac{f_{k+1}+f_{k-1}}{f_k}$ for $k\\ge1$. The identity says $r_n=r_{n-2}$ for all $n\\ge3$. Since\n$$r_1=\\frac{f_2+f_0}{f_1}=2,\\qquad r_2=\\frac{f_3+f_1}{f_2}=\\frac{2+1}{1}=3,$$\nwe get $r_k=2$ for odd $k$ and $r_k=3$ for even $k$. Therefore, for all $k\\ge1$,\n$$f_{k+1}=r_kf_k-f_{k-1}\\quad\\text{with } r_k\\in\\{2,3\\}.$$\n\n*Integrality.* $f_0,f_1,f_2$ are integers, and if $f_{k-1},f_k$ are integers then so is $f_{k+1}=r_kf_k-f_{k-1}$. By induction every $f_n$ is an integer. ∎\n\n(Check: $f_4=2\\cdot2-1=3$, $f_5=3\\cdot3-2=7$, $f_6=2\\cdot7-3=11$, $f_7=3\\cdot11-7=26$, $f_8=2\\cdot26-11=41$, all agreeing with the original recurrence, e.g. $f_8=\\frac{26\\cdot11+1}{7}=41$.)"
+      },
+      {
+        "title": "Eliminate the parity: one recurrence",
+        "body": "With $r_k=\\frac{f_{k+1}+f_{k-1}}{f_k}$ as in the first approach ($r_{k}r_{k+1}=6$ for every $k$, since consecutive indices have opposite parity), for $k\\ge2$:\n$$f_{k+2}+2f_k+f_{k-2}=(f_{k+2}+f_k)+(f_k+f_{k-2})=r_{k+1}f_{k+1}+r_{k-1}f_{k-1}=r_{k+1}(f_{k+1}+f_{k-1})=r_{k+1}r_kf_k=6f_k,$$\nusing $r_{k-1}=r_{k+1}$. Hence the single parity-free recurrence\n$$f_{k+2}=4f_k-f_{k-2}\\qquad(k\\ge2)$$\n(e.g. $f_4=4f_2-f_0=3$, $f_5=4f_3-f_1=7$, $f_6=4f_4-f_2=11$). With the integer starting values $f_0,f_1,f_2,f_3=1,1,1,2$ it shows again that every $f_n$ is an integer. (An exact rational-arithmetic computation of the original recurrence for the first $40$ terms confirms that no fractions appear.) ∎"
+      }
+    ],
+    "topics": [
+      "sequences-series",
+      "number-theory"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

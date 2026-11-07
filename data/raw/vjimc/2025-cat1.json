@@ -1,0 +1,154 @@
+[
+  {
+    "id": "vjimc-2025-cat1-01",
+    "bank": "vjimc",
+    "source": {
+      "contest": "VJIMC",
+      "paper": "VJIMC 2025 Category I",
+      "year": 2025,
+      "number": 1,
+      "url": "https://vjimc.osu.cz/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $a\\ge2$ be an integer. Prove that there exists a positive integer $b$ with the following property: For each positive integer $n$, there is a prime number $p=p(a,b,n)$ such that $a^n+b$ is divisible by $p$ but not divisible by $p^2$.",
+    "image": null,
+    "choices": null,
+    "answer": "If $a$ is a power of $2$, take $b=10$ (then $2\\,\\|\\,a^n+10$, except $a=2,n=1$ where $3\\,\\|\\,12$). Otherwise let $q$ be an odd prime factor of $a$: if $q\\,\\|\\,a$ take $b=a$; if $q^2\\mid a$ take $b=q$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Case analysis on the prime factors of $a$",
+        "body": "We write $p\\,\\|\\,N$ for \"$p\\mid N$ but $p^2\\nmid N$\".\n\n**Case 1: $a=2^m$, $m\\ge1$.** Take $b=10$. Then $a^n+10=2\\,(2^{mn-1}+5)$.\n- If $mn\\ge2$, then $2^{mn-1}$ is even, so $2^{mn-1}+5$ is odd and $2\\,\\|\\,a^n+10$.\n- If $mn=1$ (i.e. $a=2$, $n=1$): $a^n+10=12=4\\cdot3$ and $3\\,\\|\\,12$.\n\n**Case 2: $a$ has an odd prime factor $q$.**\n- If $q\\,\\|\\,a$, take $b=a$. Then $a^n+a=a\\,(a^{n-1}+1)$. For $n\\ge2$, $a^{n-1}+1\\equiv1\\pmod q$; for $n=1$ it equals $2$, not divisible by the odd prime $q$. In both cases $q\\nmid a^{n-1}+1$, and together with $q\\,\\|\\,a$ this gives $q\\,\\|\\,a^n+a$.\n- If $q^2\\mid a$, take $b=q$. Then $a^n+q\\equiv q\\pmod{q^2}$ for every $n\\ge1$, so $q\\mid a^n+q$ but $q^2\\nmid a^n+q$, i.e. $q\\,\\|\\,a^n+q$.\n\nIn every case $b$ works for all positive integers $n$. ∎"
+      }
+    ],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "vjimc-2025-cat1-02",
+    "bank": "vjimc",
+    "source": {
+      "contest": "VJIMC",
+      "paper": "VJIMC 2025 Category I",
+      "year": 2025,
+      "number": 2,
+      "url": "https://vjimc.osu.cz/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Find all real numbers $x>1$ that satisfy the equality\n$$\\left\\lfloor\\frac{n+1}{x}\\right\\rfloor=n-\\left\\lfloor\\frac nx\\right\\rfloor+\\left\\lfloor\\frac{\\lfloor\\frac nx\\rfloor}{x}\\right\\rfloor-\\left\\lfloor\\frac{\\left\\lfloor\\frac{\\lfloor\\frac nx\\rfloor}{x}\\right\\rfloor}{x}\\right\\rfloor+\\dots$$\nfor all positive integers $n$.\n\nHere, $\\lfloor t\\rfloor$ is the integer part of $t$, i.e. the integer such that $\\lfloor t\\rfloor\\le t<\\lfloor t\\rfloor+1$.",
+    "image": null,
+    "choices": null,
+    "answer": "(1+sqrt(5))/2",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "answerDisplay": "$\\dfrac{1+\\sqrt5}{2}$",
+    "solutions": [
+      {
+        "title": "Reduce to a two-term identity",
+        "body": "Let $f(m)=\\lfloor m/x\\rfloor$ and $R(n)=n-f(n)+f(f(n))-\\cdots$. Since $x>1$, $f(m)<m$ for $m\\ge1$ and $f(0)=0$, so the alternating sum is finite. Clearly\n$$R(n)=n-R(f(n))\\qquad(n\\ge1),\\qquad R(0)=0 .$$\n\n**Reduction.** Suppose the equality $\\lfloor\\frac{n+1}x\\rfloor=R(n)$ holds for all $n\\ge1$. It also holds for $n=0$ ($\\lfloor\\frac1x\\rfloor=0=R(0)$). Applying it to $m=f(n)\\ge0$,\n$$\\left\\lfloor\\frac{n+1}{x}\\right\\rfloor=n-R(f(n))=n-\\left\\lfloor\\frac{\\lfloor n/x\\rfloor+1}{x}\\right\\rfloor .\\tag{1}$$\nConversely, if (1) holds for all $n\\ge1$, then by strong induction $\\lfloor\\frac{n+1}x\\rfloor=R(n)$ for all $n$: indeed $m=f(n)<n$, so by induction $R(m)=\\lfloor\\frac{m+1}x\\rfloor$ and $R(n)=n-R(m)=\\lfloor\\frac{n+1}x\\rfloor$ by (1). So the problem is equivalent to (1) for all $n\\ge1$.\n\n**Necessity: $x=\\varphi$.** Divide (1) by $n$ and let $n\\to\\infty$; since $\\lfloor t\\rfloor=t+O(1)$, the left side tends to $\\frac1x$ and the right side to $1-\\frac1{x^2}$. So $\\frac1x+\\frac1{x^2}=1$, i.e. $x^2-x-1=0$, whose only root $>1$ is $\\varphi=\\frac{1+\\sqrt5}2$.\n\n**Sufficiency.** Let $x=\\varphi$; recall $\\frac1\\varphi=\\varphi-1$, $\\frac1{\\varphi^2}=1-\\frac1\\varphi$ and $1+\\frac1\\varphi=\\varphi$. Fix $n\\ge1$ and write $\\frac n\\varphi=m+\\varepsilon$ with $m=\\lfloor\\frac n\\varphi\\rfloor$ and $0<\\varepsilon<1$ ($\\varepsilon\\ne0$ as $\\varphi$ is irrational). Then\n$$\\frac{n+1}\\varphi=m+\\varepsilon+\\frac1\\varphi,\\qquad\\frac{m+1}\\varphi=\\frac{n/\\varphi-\\varepsilon+1}{\\varphi}=\\frac n{\\varphi^2}+\\frac{1-\\varepsilon}\\varphi=n-m-\\varepsilon+\\frac{1-\\varepsilon}\\varphi .$$\nSo (1) is equivalent to\n$$\\Big\\lfloor\\varepsilon+\\tfrac1\\varphi\\Big\\rfloor+\\Big\\lfloor\\tfrac1\\varphi-\\varphi\\varepsilon\\Big\\rfloor=0\\qquad\\Big(\\text{using }\\tfrac{1-\\varepsilon}{\\varphi}-\\varepsilon=\\tfrac1\\varphi-\\varepsilon\\big(1+\\tfrac1\\varphi\\big)\\Big).$$\nPut $u=\\varepsilon+\\frac1\\varphi\\in(\\frac1\\varphi,1+\\frac1\\varphi)$; then $\\frac1\\varphi-\\varphi\\varepsilon=\\frac1\\varphi+1-\\varphi u=\\varphi(1-u)$. Note $u\\ne1$: otherwise $\\frac n\\varphi-m=1-\\frac1\\varphi$, i.e. $(n+1)(\\varphi-1)=m+1$, impossible since $\\varphi$ is irrational.\n- If $u<1$: $\\lfloor u\\rfloor=0$ and $0<\\varphi(1-u)<\\varphi\\big(1-\\frac1\\varphi\\big)=\\varphi-1<1$, so the sum is $0+0=0$.\n- If $u>1$: $\\lfloor u\\rfloor=1$ and $-1=-\\varphi\\cdot\\frac1\\varphi<\\varphi(1-u)<0$, so the sum is $1+(-1)=0$.\n\nHence (1) holds for every $n\\ge1$, and $x=\\varphi$ satisfies the equality for all $n$ (a computer check for $n<20000$ agrees).\n\n**Answer: $x=\\dfrac{1+\\sqrt5}{2}$.** ∎"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "algebra"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "vjimc-2025-cat1-03",
+    "bank": "vjimc",
+    "source": {
+      "contest": "VJIMC",
+      "paper": "VJIMC 2025 Category I",
+      "year": 2025,
+      "number": 3,
+      "url": "https://vjimc.osu.cz/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "text",
+    "prompt": "Let us call a sequence $(b_1,b_2,\\dots)$ of positive integers *fast-growing* if $b_{n+1}\\ge b_n+2$ for all $n\\ge1$. Also, for a sequence $a=(a(1),a(2),\\dots)$ of real numbers and a sequence $b=(b_1,b_2,\\dots)$ of positive integers, let us denote\n$$S(a,b)=\\sum_{n=1}^\\infty\\big|a(b_n)+a(b_n+1)+\\dots+a(b_{n+1}-1)\\big| .$$\n\n1. Do there exist two fast-growing sequences $b=(b_1,b_2,\\dots)$, $c=(c_1,c_2,\\dots)$ such that for every sequence $a=(a(1),a(2),\\dots)$, if all the series\n$$\\sum_{n=1}^\\infty a(n),\\qquad S(a,b)\\qquad\\text{and}\\qquad S(a,c)$$\nare convergent, then the series $\\sum_{n=1}^\\infty|a(n)|$ is also convergent?\n\n2. Do there exist three fast-growing sequences $b=(b_1,b_2,\\dots)$, $c=(c_1,c_2,\\dots)$, $d=(d_1,d_2,\\dots)$ such that for every sequence $a=(a(1),a(2),\\dots)$, if all the series\n$$S(a,b),\\qquad S(a,c)\\qquad\\text{and}\\qquad S(a,d)$$\nare convergent, then the series $\\sum_{n=1}^\\infty|a(n)|$ is also convergent?\n\n(Answer both parts, e.g. \"yes, no\".)",
+    "image": null,
+    "choices": null,
+    "answer": "No, yes",
+    "acceptedAnswers": [
+      "no, yes",
+      "no yes",
+      "no; yes",
+      "no,yes",
+      "no and yes",
+      "1. no 2. yes",
+      "1 no 2 yes",
+      "1) no 2) yes",
+      "1) no, 2) yes",
+      "(1) no (2) yes",
+      "no/yes"
+    ],
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Counterexamples for two groupings; pairs, pairs and triples",
+        "body": "Call $\\{b_n,b_n+1,\\dots,b_{n+1}-1\\}$ the $n$-th *$b$-group*; groups are disjoint blocks of consecutive integers of length $\\ge2$.\n\n**Part 1: No.** Let $b,c$ be fast-growing.\n\n*Case 1: from some index on, all steps are exactly $2$ in both sequences* ($b_{n+1}=b_n+2$, $c_{n+1}=c_n+2$ for $n\\ge n_0$). Take $a(n)=\\frac{(-1)^n}n$. Then $\\sum a(n)$ converges (alternating series), $\\sum|a(n)|=\\sum\\frac1n=\\infty$, and for $n\\ge n_0$ each $b$-group is a pair $\\{k,k+1\\}$ with $|a(k)+a(k+1)|=\\frac1{k(k+1)}$; since the $b_n$ are distinct, $S(a,b)\\le(\\text{finitely many terms})+\\sum_k\\frac1{k(k+1)}<\\infty$, and likewise $S(a,c)<\\infty$.\n\n*Case 2: otherwise,* say $b_{n+1}\\ge b_n+3$ for infinitely many $n$ (the case of $c$ is symmetric). For such $n$ with $b_n\\ge c_1$, the numbers $b_n,b_n+1,b_n+2$ lie in one $b$-group. If $b_n+1$ is not a term of $c$, then $b_n$ and $b_n+1$ lie in the same $c$-group; if $b_n+1=c_k$, then $b_n+1,b_n+2$ lie in the same $c$-group (as $c_{k+1}\\ge c_k+2$). Either way we get a pair $(i,i+1)$ lying in a common $b$-group and a common $c$-group, and pairs coming from different $n$ are disjoint. So there are infinitely many disjoint such pairs $(i_k,i_k+1)$, $k=1,2,\\dots$, with $i_1<i_2<\\cdots$. Put\n$$a(i_k)=\\tfrac1k,\\qquad a(i_k+1)=-\\tfrac1k,\\qquad a(n)=0\\ \\text{otherwise}.$$\nEvery $b$-group and every $c$-group contains each pair entirely or not at all, so all group sums are $0$ and $S(a,b)=S(a,c)=0$. The partial sums of $\\sum a(n)$ are $0$ or $\\frac1k$, so it converges (to $0$); but $\\sum|a(n)|=2\\sum\\frac1k=\\infty$.\n\nSo no two fast-growing sequences have the required property.\n\n**Part 2: Yes.** Take $b_n=2n-1$, $c_n=2n$, $d_n=3n-2$; the groups are the pairs $\\{1,2\\},\\{3,4\\},\\dots$, the pairs $\\{2,3\\},\\{4,5\\},\\dots$ and the triples $\\{1,2,3\\},\\{4,5,6\\},\\dots$. Consider a triple $x=a(3k+1)$, $y=a(3k+2)$, $z=a(3k+3)$. The pairs $\\{3k+1,3k+2\\}$ and $\\{3k+2,3k+3\\}$ are a $b$-group and a $c$-group (in some order, depending on the parity of $k$), and $\\{3k+1,3k+2,3k+3\\}$ is a $d$-group. By the triangle inequality\n$$|x|\\le|x+y+z|+|y+z|,\\qquad|z|\\le|x+y+z|+|x+y|,\\qquad|y|\\le|x+y|+|x|,$$\nso\n$$|x|+|y|+|z|\\le3|x+y+z|+2|x+y|+2|y+z|\\le3\\big(|x+y+z|+|x+y|+|y+z|\\big).$$\nSumming over $k\\ge0$ (each group occurs at most once), $\\sum_n|a(n)|\\le3\\big(S(a,b)+S(a,c)+S(a,d)\\big)<\\infty$.\n\n**Answer: 1. no; 2. yes.** ∎\n\n(The official solution uses $a(n)=(-1)^n/n$ in Case 1 and claims the pair sums vanish; they are not zero but $\\frac1{k(k+1)}$ in absolute value, which is still summable.)"
+      }
+    ],
+    "topics": [
+      "sequences-series",
+      "real-analysis"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "vjimc-2025-cat1-04",
+    "bank": "vjimc",
+    "source": {
+      "contest": "VJIMC",
+      "paper": "VJIMC 2025 Category I",
+      "year": 2025,
+      "number": 4,
+      "url": "https://vjimc.osu.cz/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $n\\ge2$ be an integer, and let $A$ be an $n\\times n$ real matrix with minimal polynomial $x^n+x-1$. Show that\n$$\\operatorname{tr}\\big((nA^{n-1}+I)^{-1}A^{n-2}\\big)=0 .$$\nHere, $\\operatorname{tr}(B)=\\sum_{i=1}^nb_{ii}$ denotes the trace of the matrix $B=(b_{ij})_{i,j=1}^n$.",
+    "image": null,
+    "choices": null,
+    "answer": "With $\\alpha(z)=z^n+z-1$ (distinct roots $\\lambda_k$, the eigenvalues of $A$) the trace is $\\sum_k\\frac{\\lambda_k^{n-2}}{\\alpha'(\\lambda_k)}$, and $\\sum_k\\frac{g(\\lambda_k)}{\\alpha'(\\lambda_k)}=0$ for every polynomial $g$ of degree $\\le n-2$ (Lagrange interpolation).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Lagrange interpolation identity",
+        "body": "Let $\\alpha(z)=z^n+z-1$.\n\n**The eigenvalues.** The minimal polynomial has degree $n$, so it equals the characteristic polynomial, and the eigenvalues $\\lambda_1,\\dots,\\lambda_n$ of $A$ (over $\\mathbb C$) are the roots of $\\alpha$. They are distinct: a common root of $\\alpha$ and $\\alpha'(z)=nz^{n-1}+1$ would satisfy $z^n=-z/n$, hence $0=\\alpha(z)=\\frac{n-1}nz-1$, so $z=\\frac n{n-1}>0$; but then $\\alpha'(z)>0$, a contradiction. Hence $\\alpha'(\\lambda_k)\\ne0$, and $A$ is diagonalizable: $A=S\\Lambda S^{-1}$, $\\Lambda=\\operatorname{diag}(\\lambda_k)$.\n\n**The trace.** $nA^{n-1}+I=S\\operatorname{diag}(\\alpha'(\\lambda_k))S^{-1}$ is invertible, and\n$$\\operatorname{tr}\\big((nA^{n-1}+I)^{-1}A^{n-2}\\big)=\\sum_{k=1}^n\\frac{\\lambda_k^{n-2}}{n\\lambda_k^{n-1}+1}=\\sum_{k=1}^n\\frac{\\lambda_k^{n-2}}{\\alpha'(\\lambda_k)} .$$\n\n**Lemma.** If $\\alpha$ is monic of degree $n$ with distinct roots $\\lambda_1,\\dots,\\lambda_n$ and $g$ is a polynomial of degree $\\le n-2$, then $\\sum_k\\frac{g(\\lambda_k)}{\\alpha'(\\lambda_k)}=0$.\n\n*Proof.* By Lagrange interpolation (the unique polynomial of degree $\\le n-1$ through the $n$ points $(\\lambda_k,g(\\lambda_k))$ is $g$ itself),\n$$g(x)=\\sum_{k=1}^ng(\\lambda_k)\\prod_{j\\ne k}\\frac{x-\\lambda_j}{\\lambda_k-\\lambda_j},\\qquad \\prod_{j\\ne k}(\\lambda_k-\\lambda_j)=\\alpha'(\\lambda_k).$$\nComparing coefficients of $x^{n-1}$: the right side gives $\\sum_kg(\\lambda_k)/\\alpha'(\\lambda_k)$, the left side gives $0$ since $\\deg g\\le n-2$. $\\square$\n\nApplying the lemma with $g(x)=x^{n-2}$ shows that the trace is $0$. ∎"
+      },
+      {
+        "title": "Logarithmic derivatives (official approach)",
+        "body": "As in the first solution, the trace equals $\\sum_k\\frac{\\lambda_k^{n-2}}{\\alpha'(\\lambda_k)}=\\frac1{n(n-1)}\\sum_k\\frac{\\alpha''(\\lambda_k)}{\\alpha'(\\lambda_k)}$, because $\\alpha''(z)=n(n-1)z^{n-2}$. So it suffices to show $\\sum_k\\frac{\\alpha''(\\lambda_k)}{\\alpha'(\\lambda_k)}=0$ for a polynomial $\\alpha$ of degree $n$ with distinct roots $\\lambda_k$.\n\nFor a polynomial $P=c\\prod_j(z-z_j)$ we have $\\frac{P'}{P}=\\sum_j\\frac1{z-z_j}$ away from the roots. Let $w_1,\\dots,w_{n-1}$ be the roots of $\\alpha'$; none of them is a root of $\\alpha$ (the roots of $\\alpha$ are simple). Then\n$$\\sum_k\\frac{\\alpha''(\\lambda_k)}{\\alpha'(\\lambda_k)}=\\sum_k\\sum_j\\frac1{\\lambda_k-w_j}=-\\sum_j\\sum_k\\frac1{w_j-\\lambda_k}=-\\sum_j\\frac{\\alpha'(w_j)}{\\alpha(w_j)}=0,$$\nsince $\\alpha'(w_j)=0$. ∎"
+      }
+    ],
+    "topics": [
+      "linear-algebra",
+      "polynomials"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

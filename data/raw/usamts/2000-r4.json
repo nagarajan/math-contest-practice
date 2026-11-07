@@ -1,0 +1,197 @@
+[
+  {
+    "id": "usamts-2000-r4-01",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 12 Round 4 (2000-2001)",
+      "year": 2000,
+      "number": 1,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "text",
+    "prompt": "Determine all positive integers with the property that they are one more than the sum of the squares of their digits in base 10.",
+    "image": null,
+    "choices": null,
+    "answer": "35, 75",
+    "acceptedAnswers": [
+      "35,75",
+      "35 and 75",
+      "75, 35",
+      "75,35",
+      "35 75"
+    ],
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Bound the size, then solve",
+        "body": "**At most three digits.** A $k$-digit number $n$ is at least $10^{k-1}$, while $1 + (\\text{sum of squares of digits}) \\le 1 + 81k$. For $k = 4$: $1000 > 325$, and each extra digit multiplies the left side by 10 but adds only 81 to the right, so $10^{k-1} > 81k + 1$ for all $k \\ge 4$. Hence $n$ has at most 3 digits, and $n \\le 1 + 3\\cdot 81 = 244$.\n\n**No three-digit solutions.** For $100 \\le n \\le 244$ the largest possible value of $1 + (\\text{digit squares})$ is at $199$: $1 + 1 + 81 + 81 = 164$, so $n \\le 164$. For $100 \\le n \\le 164$ the largest value is at $159$: $1 + 1 + 25 + 81 = 108$, so $n \\le 108$. For $100 \\le n \\le 108$ the value is at most $1 + 1 + 0 + 64 = 66 < 100$. So there is no three-digit solution.\n\n**One digit:** $n = 1 + n^2$ has no solution.\n\n**Two digits:** $n = 10a + b$ with $1 \\le a \\le 9$, $0 \\le b \\le 9$:\n$$10a + b = 1 + a^2 + b^2 \\iff a(10 - a) = b^2 - b + 1.$$\nThe left side takes the values $9, 16, 21, 24, 25$ (for $a = 1, \\dots, 5$, symmetric about $a = 5$). The right side takes the values $1, 1, 3, 7, 13, 21, 31, 43, 57, 73$ for $b = 0, \\dots, 9$. The only common value is $21$: $b = 5$ and $a = 3$ or $7$.\n\nCheck: $35 = 1 + 9 + 25$ and $75 = 1 + 49 + 25$. ✓\n\n**Answer: 35 and 75**"
+      }
+    ],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2000-r4-02",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 12 Round 4 (2000-2001)",
+      "year": 2000,
+      "number": 2,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Prove that if $n$ is an odd positive integer, then $N = 2269^n + 1779^n + 1730^n - 1776^n$ is an integer multiple of 2001.",
+    "image": null,
+    "choices": null,
+    "answer": "$2001 = 3\\cdot 23\\cdot 29$. For odd $n$, $a + b \\mid a^n + b^n$ and $a - b \\mid a^n - b^n$. Pair the terms three ways: $(2269 + 1779) + (1730 - 1776)$ for 23, $(2269 - 1776) + (1779 + 1730)$ for 29, $(2269 + 1730) + (1779 - 1776)$ for 3.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Pair the terms",
+        "body": "$2001 = 3 \\cdot 23 \\cdot 29$, a product of distinct primes, so it suffices to show $3$, $23$ and $29$ each divide $N$.\n\nWe use two standard facts: $a - b$ divides $a^n - b^n$ for every $n \\ge 1$, and $a + b$ divides $a^n + b^n$ for **odd** $n$ (since $a \\equiv -b \\pmod{a+b}$ gives $a^n \\equiv -b^n$).\n\n* **23:** Group $N = (2269^n + 1779^n) + (1730^n - 1776^n)$. Here $2269 + 1779 = 4048 = 23 \\cdot 176$ and $1730 - 1776 = -46 = 23 \\cdot (-2)$, so 23 divides both groups.\n* **29:** Group $N = (2269^n - 1776^n) + (1779^n + 1730^n)$. Here $2269 - 1776 = 493 = 29 \\cdot 17$ and $1779 + 1730 = 3509 = 29 \\cdot 121$.\n* **3:** Group $N = (2269^n + 1730^n) + (1779^n - 1776^n)$. Here $2269 + 1730 = 3999 = 3 \\cdot 1333$ and $1779 - 1776 = 3$.\n\nHence $3 \\cdot 23 \\cdot 29 = 2001$ divides $N$ for every odd positive $n$. ∎\n\n*(For even $n$ the claim fails: e.g. $n = 2$ gives $N \\equiv 1853 \\pmod{2001}$.)*"
+      },
+      {
+        "title": "Reduce modulo each prime",
+        "body": "Work modulo each prime factor of $2001 = 3 \\cdot 23 \\cdot 29$, with $n$ odd.\n\n* Mod 29: $2269 \\equiv 7$, $1779 \\equiv 10$, $1730 \\equiv 19 \\equiv -10$, $1776 \\equiv 7$. So $N \\equiv 7^n + 10^n + (-10)^n - 7^n = 10^n - 10^n = 0$.\n* Mod 23: $2269 \\equiv 15 \\equiv -8$, $1779 \\equiv 8$, $1730 \\equiv 5$, $1776 \\equiv 5$. So $N \\equiv (-8)^n + 8^n + 5^n - 5^n = 0$.\n* Mod 3: $2269 \\equiv 1$, $1779 \\equiv 0$, $1730 \\equiv 2 \\equiv -1$, $1776 \\equiv 0$. So $N \\equiv 1 + 0 + (-1)^n - 0 = 0$.\n\nSince 3, 23, 29 are distinct primes dividing $N$, their product 2001 divides $N$. ∎"
+      }
+    ],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2000-r4-03",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 12 Round 4 (2000-2001)",
+      "year": 2000,
+      "number": 3,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "The Example figure (top right) can be divided into two congruent halves that are related to each other by a glide reflection, as shown below it. A glide reflection reflects a figure about a line, but also moves the reflected figure in a direction parallel to that line. For a square-grid figure, the only lines of reflection that keep its reflection on the grid are horizontal, vertical, $45^\\circ$ diagonal, and $135^\\circ$ diagonal. Of the two figures A and B, divide one figure into two congruent halves related by a glide reflection, and tell why the other figure cannot be divided like that.",
+    "image": "qimages/usamts/2000-r4/q03.webp",
+    "choices": null,
+    "answer": "Figure A can be divided (axis: the diagonal of its $5\\times 5$ bounding square from bottom-left to top-right corner, glide one diagonal step); Figure B cannot, because no grid-compatible axis bisects its area.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Area-bisecting axes",
+        "body": "Both figures consist of 18 unit squares inside a $5 \\times 5$ bounding square, so each half must have 9 squares. Use coordinates with the origin at the **top-left** corner of the bounding square, $x$ to the right and $y$ **downward**, so a square is $[c, c+1] \\times [r, r+1]$ (column $c$, row $r$, both $0$–$4$).\n\n**Two necessary conditions on the axis $\\ell$.**\n\n1. *$\\ell$ bisects the area of the figure.* A glide reflection $g$ with axis $\\ell$ swaps the two sides $H_1, H_2$ of $\\ell$. If $g$ maps half $P$ onto half $Q$, then $[P \\cap H_1] = [Q \\cap H_2]$ and $[P \\cap H_2] = [Q \\cap H_1]$; adding, the figure has equal area on both sides of $\\ell$.\n2. *$\\ell$ is at a half-integer position.* $g$ maps grid squares to grid squares, hence lattice points to lattice points. If $\\ell$ is $x = a$, then $g(x, y) = (2a - x,\\ y + t)$ and $g(0,0) = (2a, t)$, so $2a$ is an integer; similarly for $y = b$. If $\\ell$ is $x + y = s$, then $g(x, y) = (s - y + t,\\ s - x - t)$ and $g(0,0) = (s + t, s - t)$, so $2s$ is an integer; similarly for $x - y = s$.\n\nThe area on one side of a line moves monotonically as the line slides, so it is enough to check the half-integer positions next to where the area would be 9.\n\n**Figure B cannot be divided.** Its rows (top to bottom) cover columns $1$–$4$, $1$–$3$, $1$–$3$, $0$–$3$, $0$–$3$.\n* Vertical axes: the column areas are $2, 5, 5, 5, 1$; the area left of $x = 2$ is $7$ and left of $x = 2.5$ is $9.5$.\n* Horizontal axes: the row areas are $4, 3, 3, 4, 4$; the area above $y = 2.5$ is $8.5$ and above $y = 3$ is $10$.\n* $45^\\circ$ axes ($x + y = s$): the area with $x + y < 4.5$ is $7.125$, and with $x + y < 5$ it is $9.5$.\n* $135^\\circ$ axes ($x - y = s$): the area with $x - y < -0.5$ is $8$, and with $x - y < 0$ it is $9.5$.\n\nNo admissible line bisects the area, so Figure B has no such division.\n\n**Figure A can be divided.** Its rows cover columns $1$–$3$, $1$–$4$, $1$–$3$, $0$–$3$, $0$–$3$. The line $x + y = 5$ — the diagonal of the bounding square from its bottom-left corner to its top-right corner — leaves exactly 9 squares' worth of area on each side. Use the glide reflection: reflect in this line, then move one diagonal step down-left along it. In square coordinates this is $(c, r) \\mapsto (3 - r,\\ 5 - c)$. It maps the piece marked 1 onto the piece marked 2 (rows listed top to bottom, $\\cdot$ = no square):\n$$\\begin{array}{ccccc}\n\\cdot & 1 & 1 & 1 & \\cdot\\\\\n\\cdot & 1 & 2 & 1 & 1\\\\\n\\cdot & 1 & 2 & 2 & \\cdot\\\\\n2 & 1 & 1 & 2 & \\cdot\\\\\n2 & 2 & 2 & 2 & \\cdot\n\\end{array}$$\nFor example, the top row $(1,0), (2,0), (3,0)$ goes to $(3,4), (3,3), (3,2)$, the bump square $(4,1)$ goes to $(2,1)$, and $(1,3), (2,3)$ go to $(0,4), (0,3)$. Both pieces are connected, have 9 squares, and are congruent via this glide reflection. (A computer search over all admissible glide reflections confirms this is the only such division of A, and that none exists for B.)"
+      }
+    ],
+    "topics": [
+      "spatial",
+      "geometry",
+      "logic"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2000-r4-04",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 12 Round 4 (2000-2001)",
+      "year": 2000,
+      "number": 4,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $A$ and $B$ be points on a circle which are not diametrically opposite, and let $C$ be the midpoint of the smaller arc between $A$ and $B$. Let $D$, $E$, and $F$ be the points determined by the intersections of the tangent lines to the circle at $A$, $B$, and $C$. Prove that the area of $\\triangle DEF$ is greater than half of the area of $\\triangle ABC$.",
+    "image": null,
+    "choices": null,
+    "answer": "With unit radius and $\\theta = \\angle AOC$: $[ABC] = \\sin\\theta(1 - \\cos\\theta)$, $[DEF] = \\tan\\frac\\theta2\\cdot\\frac{1 - \\cos\\theta}{\\cos\\theta}$, so $\\frac{[DEF]}{[ABC]} = \\frac{1}{2\\cos^2\\frac\\theta2\\cos\\theta} > \\frac12$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Coordinates",
+        "body": "Take the circle to be the unit circle centred at $O$, with $C = (0, 1)$, and let $\\theta = \\angle AOC = \\angle COB$. Since $C$ is the midpoint of the smaller arc and $A, B$ are not diametrically opposite, $0 < \\theta < 90^\\circ$. Then\n$$A = (-\\sin\\theta, \\cos\\theta), \\qquad B = (\\sin\\theta, \\cos\\theta).$$\n\n**Triangle $ABC$.** Base $AB = 2\\sin\\theta$, height $1 - \\cos\\theta$, so $[ABC] = \\sin\\theta\\,(1 - \\cos\\theta)$.\n\n**Triangle $DEF$.** The tangent at $C$ is $y = 1$. The tangents at $A$ and $C$ meet at $D$, where $\\angle DOC = \\frac\\theta2$, so $D = (-\\tan\\frac\\theta2, 1)$; likewise $E = (\\tan\\frac\\theta2, 1)$. The tangents at $A$ and $B$ meet on the $y$-axis at distance $\\frac{1}{\\cos\\theta}$ from $O$ (since $OA \\perp AF$ and $\\angle AOF = \\theta$), so $F = (0, \\sec\\theta)$, above $C$. Hence\n$$[DEF] = \\tfrac12 \\cdot 2\\tan\\tfrac\\theta2 \\cdot (\\sec\\theta - 1) = \\tan\\tfrac\\theta2 \\cdot \\frac{1 - \\cos\\theta}{\\cos\\theta}.$$\n\n**Ratio.** Using $\\sin\\theta = 2\\sin\\frac\\theta2\\cos\\frac\\theta2$:\n$$\\frac{[DEF]}{[ABC]} = \\frac{\\tan\\frac\\theta2}{\\sin\\theta\\cos\\theta} = \\frac{1}{2\\cos^2\\frac\\theta2\\,\\cos\\theta}.$$\nSince $0 < \\cos\\theta < 1$ and $0 < \\cos^2\\frac\\theta2 < 1$, the denominator is less than 2, so the ratio exceeds $\\frac12$. ∎\n\n*(As $\\theta \\to 0$ the ratio tends to $\\frac12$, so the bound is sharp.)*"
+      },
+      {
+        "title": "Similar triangles",
+        "body": "Let $W$ be the midpoint of $AB$; by symmetry $F$, $C$, $W$ and the centre lie on one line, perpendicular to both $AB$ and $DE$ (the tangent at $C$ is perpendicular to the radius through $C$, which is perpendicular to $AB$). So $DE \\parallel AB$.\n\n**$DE > \\frac12 AB$.** The tangent segments from $D$ are equal: $DA = DC$. By the triangle inequality $DA + DC > AC$, and $AC > AW$ because $AC$ is the hypotenuse of the right triangle $AWC$. So $2\\,DC > AW$. By symmetry $DE = 2\\,DC$, hence $DE > AW = \\frac12 AB$.\n\n**$FC > CW$.** Since $DE \\parallel AB$, triangles $FDE$ and $FAB$ are similar, so $\\frac{FC}{FW} = \\frac{DE}{AB} > \\frac12$. With $FW = FC + CW$ this gives $2FC > FC + CW$, i.e. $FC > CW$.\n\n**Conclusion.**\n$$[DEF] = \\tfrac12\\, DE \\cdot FC > \\tfrac12 \\cdot \\tfrac12 AB \\cdot CW = \\tfrac12 [ABC]. \\qquad ∎$$"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2000-r4-05",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 12 Round 4 (2000-2001)",
+      "year": 2000,
+      "number": 5,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "text",
+    "prompt": "Hexagon $RSTUVW$ is constructed by starting with a right triangle of legs measuring $p$ and $q$, constructing squares outwardly on the sides of this triangle, and then connecting the outer vertices of the squares, as shown in the figure.\n\nGiven that $p$ and $q$ are integers with $p > q$, and that the area of $RSTUVW$ is 1922, determine $p$ and $q$.",
+    "image": "qimages/usamts/2000-r4/q05.webp",
+    "choices": null,
+    "answer": "p=24, q=11",
+    "acceptedAnswers": [
+      "24, 11",
+      "24,11",
+      "(24, 11)",
+      "(24,11)",
+      "p = 24, q = 11",
+      "p=24,q=11",
+      "24 and 11"
+    ],
+    "answerUnit": null,
+    "answerDisplay": "$p = 24,\\ q = 11$",
+    "solutions": [
+      {
+        "title": "Decompose the hexagon",
+        "body": "Label the triangle $ABC$ with the right angle at $C$, $CA = p$ and $CB = q$ (so $AB = \\sqrt{p^2 + q^2}$). The hexagon consists of:\n* the triangle $ABC$: area $\\frac{pq}{2}$;\n* the three squares: areas $p^2$, $q^2$ and $p^2 + q^2$;\n* three \"gap\" triangles, one at each vertex of $ABC$, each formed by two sides of squares meeting there.\n\n**Each gap triangle has area $\\frac{pq}{2}$.** At a vertex where the triangle has sides $x, y$ and angle $\\gamma$, the gap triangle has the same two sides $x, y$ and angle $360^\\circ - 90^\\circ - 90^\\circ - \\gamma = 180^\\circ - \\gamma$, so its area is $\\frac12 xy\\sin(180^\\circ - \\gamma) = \\frac12 xy\\sin\\gamma$ — the same as the area of $ABC$.\n\nSo\n$$[RSTUVW] = \\frac{pq}{2} + p^2 + q^2 + (p^2 + q^2) + 3\\cdot\\frac{pq}{2} = 2\\left(p^2 + pq + q^2\\right).$$\n\n**Solve.** $2(p^2 + pq + q^2) = 1922$ gives $p^2 + pq + q^2 = 961 = 31^2$. Since $p > q \\ge 1$, $3q^2 < 961$, so $q \\le 17$. Treating it as a quadratic in $p$:\n$$p = \\frac{-q + \\sqrt{3844 - 3q^2}}{2},$$\nso $3844 - 3q^2$ must be a perfect square. Checking $q = 1, \\dots, 17$, only $q = 11$ works: $3844 - 363 = 3481 = 59^2$, giving $p = \\frac{-11 + 59}{2} = 24$.\n\nCheck: $24^2 + 24\\cdot 11 + 11^2 = 576 + 264 + 121 = 961$. ✓\n\n**Answer: $p = 24$, $q = 11$**"
+      },
+      {
+        "title": "Using p + q",
+        "body": "As in the decomposition above, $p^2 + pq + q^2 = 961$, i.e. $(p + q)^2 = 961 + pq$. So $p + q > 31$, and since $pq \\le \\frac{(p+q)^2}{4}$, $(p+q)^2 \\le 961 + \\frac{(p+q)^2}{4}$, giving $p + q \\le 35$.\n\nTry $s = p + q \\in \\{32, 33, 34, 35\\}$, with $pq = s^2 - 961$:\n* $s = 32$: $pq = 63$, $p + q = 32$ — the roots of $x^2 - 32x + 63$ are not integers.\n* $s = 33$: $pq = 128$ — $x^2 - 33x + 128$ has discriminant $577$, not a square.\n* $s = 34$: $pq = 195$ — discriminant $1156 - 780 = 376$, not a square.\n* $s = 35$: $pq = 264$ — discriminant $1225 - 1056 = 169 = 13^2$, so $\\{p, q\\} = \\{24, 11\\}$.\n\n**Answer: $p = 24$, $q = 11$**"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "number-theory"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

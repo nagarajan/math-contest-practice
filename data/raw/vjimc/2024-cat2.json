@@ -1,0 +1,137 @@
+[
+  {
+    "id": "vjimc-2024-cat2-01",
+    "bank": "vjimc",
+    "source": {
+      "contest": "VJIMC",
+      "paper": "VJIMC 2024 Category II",
+      "year": 2024,
+      "number": 1,
+      "url": "https://vjimc.osu.cz/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Suppose that $f\\colon[-1,1]\\to\\mathbb R$ is continuous and that\n$$\\left(\\int_{-1}^1e^xf(x)\\,dx\\right)^2\\ge\\left(\\int_{-1}^1f(x)\\,dx\\right)\\left(\\int_{-1}^1e^{2x}f(x)\\,dx\\right).$$\nProve that there exists a point $c\\in(-1,1)$ such that $f(c)=0$.",
+    "image": null,
+    "choices": null,
+    "answer": "If $f$ had no zero, WLOG $f>0$ on $(-1,1)$; then $t\\mapsto\\int(e^x-t)^2f\\,dx$ is a positive quadratic, so its discriminant is negative: $\\left(\\int e^xf\\right)^2<\\int f\\int e^{2x}f$ (strict Cauchy–Schwarz), a contradiction.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Strict Cauchy–Schwarz via a quadratic in $t$",
+        "body": "Suppose $f(x)\\ne0$ for all $x\\in(-1,1)$. By the intermediate value theorem $f$ has constant sign on $(-1,1)$; replacing $f$ by $-f$ (which does not change the hypothesis, both sides being quadratic in $f$) we may assume $f>0$ on $(-1,1)$, hence $f\\ge0$ on $[-1,1]$.\n\nFor every real $t$, the function $(e^x-t)^2f(x)$ is continuous, nonnegative, and positive on $(-1,1)$ except possibly at the single point $x=\\ln t$. Hence\n$$0<\\int_{-1}^1(e^x-t)^2f(x)\\,dx=t^2\\int_{-1}^1f-2t\\int_{-1}^1e^xf+\\int_{-1}^1e^{2x}f\\qquad\\text{for all }t\\in\\mathbb R.$$\nThe leading coefficient $\\int f$ is positive, so a quadratic that is positive for all real $t$ has negative discriminant:\n$$\\left(\\int_{-1}^1e^xf\\right)^2<\\left(\\int_{-1}^1f\\right)\\left(\\int_{-1}^1e^{2x}f\\right),$$\ncontradicting the hypothesis. Hence $f(c)=0$ for some $c\\in(-1,1)$. ∎\n\n(Equivalently: by Cauchy–Schwarz for $e^x\\sqrt f$ and $\\sqrt f$, $(\\int e^xf)^2\\le\\int f\\int e^{2x}f$, with equality only if $e^x\\sqrt f$ is a constant multiple of $\\sqrt f$, which is impossible when $f>0$ on $(-1,1)$.)"
+      }
+    ],
+    "topics": [
+      "real-analysis",
+      "inequalities"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "vjimc-2024-cat2-02",
+    "bank": "vjimc",
+    "source": {
+      "contest": "VJIMC",
+      "paper": "VJIMC 2024 Category II",
+      "year": 2024,
+      "number": 2,
+      "url": "https://vjimc.osu.cz/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "A real $2024\\times2024$ matrix $A$ is called *nice* if $(Av,v)=1$ for every vector $v\\in\\mathbb R^{2024}$ with unit norm.\n\na) Prove that the only nice matrix such that all of its eigenvalues are real is the identity matrix.\n\nb) Find an example of a nice non-identity matrix.",
+    "image": null,
+    "choices": null,
+    "answer": "Nice $\\iff A+A^T=2I\\iff A=I+B$ with $B^T=-B$. a) $B$ has purely imaginary eigenvalues, so real eigenvalues force them to be $0$, and a normal (skew-symmetric) matrix with only zero eigenvalues is $0$. b) $A=I+E_{12}-E_{21}$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Symmetric part equals $I$",
+        "body": "**Nice means $A=I+B$ with $B$ skew-symmetric.** Since $(Av,v)=v^TAv=v^TA^Tv$, we get $v^T(A+A^T)v=2$ for all unit $v$, hence $v^TSv=0$ for all $v$, where $S=A+A^T-2I$ is symmetric (scale $v$). A symmetric matrix with vanishing quadratic form is zero, by polarization: $2u^TSw=(u+w)^TS(u+w)-u^TSu-w^TSw=0$. So $A+A^T=2I$, i.e. $B=A-I$ satisfies $B^T=-B$. Conversely, if $B^T=-B$ then $v^TBv=(v^TBv)^T=v^TB^Tv=-v^TBv$, so $v^TBv=0$ and $(Av,v)=|v|^2=1$ for unit $v$: $A=I+B$ is nice.\n\n**a)** Let $A$ be nice with real eigenvalues; then $B=A-I$ has real eigenvalues. For a skew-symmetric real $B$ and $Bz=\\lambda z$ ($z\\in\\mathbb C^{2024}$, $z\\ne0$):\nconjugating and transposing $Bz=\\lambda z$ gives $\\bar z^TB^T=\\bar\\lambda\\bar z^T$, i.e. $\\bar z^TB=-\\bar\\lambda\\bar z^T$. Hence\n$$\\lambda\\,\\bar z^Tz=\\bar z^TBz=-\\bar\\lambda\\,\\bar z^Tz,$$\nand since $\\bar z^Tz=|z|^2>0$, $\\lambda=-\\bar\\lambda$ is purely imaginary. Being also real, every eigenvalue of $B$ is $0$; so $B$ is nilpotent and hence so is $B^2=-B^TB$. But $B^TB$ is symmetric, hence diagonalizable, and nilpotent, so $B^TB=0$. Then $|Bv|^2=v^TB^TBv=0$ for all $v$, i.e. $B=0$ and $A=I$. (And $I$ is indeed nice.)\n\n**b)** Take $B=E_{12}-E_{21}$ (entry $1$ at position $(1,2)$, $-1$ at $(2,1)$, zeros elsewhere), which is skew-symmetric and nonzero. Then\n$$A=I+E_{12}-E_{21}$$\nis nice and $A\\ne I$; indeed $(Av,v)=|v|^2+v_1v_2-v_2v_1=1$ for unit $v$. (Its eigenvalues $1\\pm i$ are not all real, consistent with a).) ∎"
+      }
+    ],
+    "topics": [
+      "linear-algebra"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "vjimc-2024-cat2-03",
+    "bank": "vjimc",
+    "source": {
+      "contest": "VJIMC",
+      "paper": "VJIMC 2024 Category II",
+      "year": 2024,
+      "number": 3,
+      "url": "https://vjimc.osu.cz/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $a_1>0$ and for $n\\ge1$ define\n$$a_{n+1}=a_n+\\frac1{a_1+a_2+\\dots+a_n}.$$\nProve that $\\displaystyle\\lim_{n\\to\\infty}\\frac{a_n^2}{\\ln n}=2$.",
+    "image": null,
+    "choices": null,
+    "answer": "With $S_n=a_1+\\dots+a_n$: $a_n\\to\\infty$, $\\frac{S_n}{a_n}-\\frac{S_{n-1}}{a_{n-1}}=1-\\frac1{a_na_{n-1}}\\to1$ so $\\frac{S_n}{na_n}\\to1$ (Cesàro), hence $n(a_{n+1}^2-a_n^2)=\\frac{na_n}{S_n}\\big(1+\\frac{a_{n+1}}{a_n}\\big)\\to2$, and Stolz–Cesàro gives $a_n^2/\\ln n\\to2$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Cesàro and Stolz–Cesàro",
+        "body": "Let $S_n=a_1+\\dots+a_n$, so $a_{n+1}-a_n=\\frac1{S_n}>0$: the sequence is positive and increasing.\n\n**Step 1: $a_n\\to\\infty$.** If $a_n\\le L$ for all $n$, then $S_n\\le nL$ and $a_{n+1}-a_n\\ge\\frac1{nL}$, so $a_{n+1}-a_1\\ge\\frac1L\\sum_{k=1}^n\\frac1k\\to\\infty$, a contradiction. Being increasing and unbounded, $a_n\\to\\infty$.\n\n**Step 2: $\\frac{S_n}{na_n}\\to1$.** For $n\\ge2$, using $a_n-a_{n-1}=\\frac1{S_{n-1}}$,\n$$\\frac{S_n}{a_n}-\\frac{S_{n-1}}{a_{n-1}}=\\frac{S_{n-1}+a_n}{a_n}-\\frac{S_{n-1}}{a_{n-1}}=1-S_{n-1}\\frac{a_n-a_{n-1}}{a_na_{n-1}}=1-\\frac1{a_na_{n-1}}\\longrightarrow1 .$$\nBy Cesàro's theorem (the averages of a convergent sequence converge to the same limit), $\\frac1n\\sum_{k=2}^n\\Big(\\frac{S_k}{a_k}-\\frac{S_{k-1}}{a_{k-1}}\\Big)=\\frac1n\\Big(\\frac{S_n}{a_n}-1\\Big)\\to1$, i.e. $\\frac{S_n}{na_n}\\to1$.\n\n**Step 3: $n(a_{n+1}^2-a_n^2)\\to2$.** We have $\\frac{a_{n+1}}{a_n}=1+\\frac1{a_nS_n}\\to1$ and\n$$n\\,(a_{n+1}^2-a_n^2)=n\\,\\frac{a_{n+1}+a_n}{S_n}=\\frac{na_n}{S_n}\\Big(1+\\frac{a_{n+1}}{a_n}\\Big)\\longrightarrow1\\cdot2=2 .$$\n\n**Step 4: Stolz–Cesàro.** The sequence $v_n=\\ln n$ is strictly increasing and unbounded, and since $n\\ln(1+\\frac1n)\\to1$,\n$$\\frac{a_{n+1}^2-a_n^2}{\\ln(n+1)-\\ln n}=\\frac{n(a_{n+1}^2-a_n^2)}{n\\ln(1+\\frac1n)}\\longrightarrow2 .$$\nBy the Stolz–Cesàro theorem, $\\lim\\frac{a_n^2}{\\ln n}=2$. ∎"
+      }
+    ],
+    "topics": [
+      "sequences-series",
+      "real-analysis"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "vjimc-2024-cat2-04",
+    "bank": "vjimc",
+    "source": {
+      "contest": "VJIMC",
+      "paper": "VJIMC 2024 Category II",
+      "year": 2024,
+      "number": 4,
+      "url": "https://vjimc.osu.cz/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $(b_n)_{n\\ge0}$ be a sequence of positive integers satisfying $b_n=d\\left(\\sum_{k=0}^{n-1}b_k\\right)$ for all $n\\ge1$. (By $d(m)$ we denote the number of positive divisors of $m$.)\n\na) Prove that $(b_n)_{n\\ge0}$ is unbounded.\n\nb) Prove that there are infinitely many $n$ such that $b_n>b_{n+1}$.",
+    "image": null,
+    "choices": null,
+    "answer": "With $s_n=\\sum_{k<n}b_k$: $s_{n+1}=s_n+d(s_n)$. a) By CRT choose $x$ with $p_j^C\\mid x+j$ ($1\\le j\\le C$); the walk cannot jump over $[x+1,x+C]$, giving $d(s_n)>C$. b) If $b$ were eventually nondecreasing, each value $a$ would be taken on an arithmetic progression with difference $a$ of numbers with exactly $a$ divisors; such progressions have length $<a^8$ (CRT + Mertens), while $b_n\\ll n^{1/19}$ since $d(m)\\ll m^{1/20}$ — too few values for too many indices.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Crossing a block of highly divisible numbers; progressions with constant divisor count",
+        "body": "Let $s_n=\\sum_{k=0}^{n-1}b_k$, so $s_0=0$, $s_1=b_0\\ge1$, $s_{n+1}=s_n+b_n$, the sequence $(s_n)$ is strictly increasing, and $b_n=d(s_n)$ for $n\\ge1$. Let $p_1<p_2<\\dots$ be the primes.\n\n**a)** Suppose $b_n\\le C$ for all $n$. By the Chinese remainder theorem there is a positive integer $x$ with $x\\equiv-j\\pmod{p_j^{\\,C}}$ for $j=1,\\dots,C$; then $p_j^C\\mid x+j$ and $d(x+j)\\ge C+1$ for $1\\le j\\le C$. Let $n$ be the least index with $s_n>x$; $n\\ge1$ as $s_0=0$. Then $s_{n-1}\\le x$ and $s_n=s_{n-1}+b_{n-1}\\le x+C$, so $s_n\\in[x+1,x+C]$ and $b_n=d(s_n)\\ge C+1$, a contradiction.\n\n**b)** We need three facts.\n\n*Fact 1 ($d(m)\\le C_\\delta m^\\delta$ for each $\\delta>0$).* $\\frac{d(m)}{m^\\delta}=\\prod_{p^v\\Vert m}\\frac{v+1}{p^{v\\delta}}$. If $p\\ge2^{1/\\delta}$, then $p^{v\\delta}\\ge2^v\\ge v+1$, so the factor is $\\le1$. For each of the finitely many $p<2^{1/\\delta}$ the factor is at most $c_\\delta=\\sup_{v\\ge0}(v+1)2^{-v\\delta}<\\infty$. Hence $d(m)\\le c_\\delta^{\\,2^{1/\\delta}}m^\\delta$.\n\n*Fact 2 (growth).* By Fact 1 with $\\delta=\\frac1{20}$, $d(m)\\le Cm^{1/20}$. Let $\\psi(t)=t^{19/20}$; $\\psi'$ is decreasing, so by the mean value theorem, for $n\\ge1$,\n$$\\psi(s_{n+1})-\\psi(s_n)\\le(s_{n+1}-s_n)\\psi'(s_n)=d(s_n)\\cdot\\tfrac{19}{20}s_n^{-1/20}\\le C .$$\nThus $s_n^{19/20}\\le s_1^{19/20}+Cn$, so $s_n\\le C'n^{20/19}$ and $b_n=d(s_n)\\le C s_n^{1/20}\\le B\\,n^{1/19}$ for all $n\\ge1$, with a constant $B$.\n\n*Fact 3 (progressions).* For $a\\ge1$ call an arithmetic progression $s,s+a,\\dots,s+(L-1)a$ of positive integers *$a$-uniform* if all its terms have exactly $a$ divisors. **Claim:** there is a constant $C_1$ such that every $a$-uniform progression has length $L\\le C_1a^8$.\n\n*Proof.* Fix a prime $p$, let $\\ell=v_p(a)$ and let $q_1,\\dots,q_{\\ell+1}$ be the $\\ell+1$ smallest primes not dividing $a$; put $B_p=\\prod_jq_j^{\\,p}$. Since $\\gcd(B_p,a)=1$, any $B_p$ consecutive terms of the progression run through all residues modulo $B_p$; by CRT one of them, $t$, satisfies $t\\equiv q_j^{\\,p-1}\\pmod{q_j^{\\,p}}$ for all $j$, so $v_{q_j}(t)=p-1$ and $p^{\\ell+1}\\mid d(t)$, whence $d(t)\\ne a$. Therefore $L<B_p$ for **every** prime $p$. (In particular $L$ is bounded for each fixed $a$.)\n\nNow let $a$ be large. We have $\\omega(a)\\le\\log_2a$ and $\\ell\\le\\log_2a$, and among the first $m=\\ell+1+\\omega(a)\\le3\\log_2a$ primes at least $\\ell+1$ do not divide $a$, so $q_j\\le p_m$. By Chebyshev's estimate $p_m=O(m\\log m)$, so $p_m\\le(\\log a)^2$ for large $a$, and $\\log B_p\\le2p(\\ell+1)\\log\\log a$. Suppose $B_p>a^8$ for every prime $p\\le x:=\\log a$. Then $\\ell_p+1>\\frac{4\\log a}{p\\log\\log a}$ for all $p\\le x$ (with $\\ell_p=v_p(a)$), and multiplying by $\\log p$ and summing,\n$$\\sum_{p\\le x}(\\ell_p+1)\\log p>\\frac{4\\log a}{\\log\\log a}\\sum_{p\\le x}\\frac{\\log p}{p}\\ge\\frac{4\\log a}{\\log\\log a}\\,(\\log\\log a-c_0)$$\nby Mertens' theorem $\\sum_{p\\le x}\\frac{\\log p}p=\\log x+O(1)$. The left side is $\\sum_p\\ell_p\\log p+\\theta(x)\\le\\log a+2x=3\\log a$ (as $\\prod p^{\\ell_p}\\mid a$, and Chebyshev's bound $\\theta(x)\\le x\\log4$). This gives $3>4\\big(1-\\frac{c_0}{\\log\\log a}\\big)$, false for large $a$. So for large $a$ some $p\\le\\log a$ has $B_p\\le a^8$, hence $L<a^8$; together with the boundedness for each small $a$ this proves the claim. $\\square$\n\n*Conclusion.* Suppose, for contradiction, that $b_n\\le b_{n+1}$ for all $n\\ge N$ (with $N\\ge1$). For each value $a$, the indices $n\\ge N$ with $b_n=a$ form a block of consecutive integers $n_0,\\dots,n_0+L-1$; along it $s_{n_0+i}=s_{n_0}+ia$ and $d(s_{n_0+i})=b_{n_0+i}=a$, so this is an $a$-uniform progression and $L\\le C_1a^8$. For $M>N$, all $b_n$ with $N\\le n\\le M$ are at most $BM^{1/19}$ by Fact 2, so\n$$M-N+1\\le\\sum_{a\\le BM^{1/19}}C_1a^8\\le C_1\\big(BM^{1/19}\\big)^9=C_2\\,M^{9/19},$$\nwhich fails for large $M$. Hence $b_n>b_{n+1}$ for infinitely many $n$. ∎\n\n(The official solution proves the sharper bound $L\\ll_\\varepsilon a^{1+\\varepsilon}$ with the same CRT idea; any polynomial bound suffices, because $b_n$ grows slower than every power of $n$.)"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "sequences-series"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

@@ -1,0 +1,191 @@
+[
+  {
+    "id": "usamts-2026-r1-01",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 38 Round 1 (2026-2027)",
+      "year": 2026,
+      "number": 1,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Place two digits in each square to form a two-digit number. (Leading zeroes are allowed; for example, 01 could be in a square.)\n\n* In each row and column, each digit from 0 to 9 must appear exactly once. All two-digit numbers in the grid must be different.\n* A number will be prime if and only if it is circled.\n* A given digit in a square must be one of the two digits in that square. (For example, if 8 is given in a square, the square might contain 18 or 81.)\n* A number outside a row or column gives the unit digit of the sum of the five numbers in that row or column.\n\nThere is a unique solution, but you do not need to prove that your answer is the only one possible. You merely need to find an answer that satisfies the conditions of the problem.",
+    "image": "qimages/usamts/2026-r1/q01.webp",
+    "choices": null,
+    "answer": "(circled, i.e. prime, entries in bold)\n$$\\begin{array}{|c|c|c|c|c|}\\hline 08 & 62 & 39 & \\mathbf{71} & 45\\\\\\hline \\mathbf{67} & \\mathbf{19} & 85 & \\mathbf{43} & 20\\\\\\hline \\mathbf{23} & 75 & 64 & 09 & 81\\\\\\hline 14 & 38 & \\mathbf{07} & 25 & 69\\\\\\hline 95 & 40 & 12 & 68 & \\mathbf{73}\\\\\\hline\\end{array}$$",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Use the primes first, then the digit counts",
+        "body": "Some useful observations:\n\n* Each row (and column) uses each digit $0$–$9$ exactly once, so the ten digits in a row sum to $45$. If the tens digits of a row sum to $T$, the row sum is $10T + (45 - T) = 9T + 45$; its last digit is the last digit of $5 - T$ (mod 10). So each outside clue tells us the tens digits' sum mod 10. For example, row 1's clue 5 means its tens digits sum to a multiple of 10.\n* A circled square must hold a prime (with a leading zero allowed: $02, 03, 05, 07$ count as the primes $2, 3, 5, 7$); every uncircled square must be non-prime. A circled 6 must be $61$ or $67$; a circled 2 must be $23$, $29$ or $02$, and so on. The two empty circles must be primes too.\n* No two squares may hold the same number, and the same digit cannot be used twice in a row or column.\n\nWorking through these constraints row by row and column by column leads to the unique solution (prime entries in bold):\n$$\\begin{array}{|c|c|c|c|c|}\\hline 08 & 62 & 39 & \\mathbf{71} & 45\\\\\\hline \\mathbf{67} & \\mathbf{19} & 85 & \\mathbf{43} & 20\\\\\\hline \\mathbf{23} & 75 & 64 & 09 & 81\\\\\\hline 14 & 38 & \\mathbf{07} & 25 & 69\\\\\\hline 95 & 40 & 12 & 68 & \\mathbf{73}\\\\\\hline\\end{array}$$\n\n**Check.**\n* Rows: every row uses each digit once, e.g. row 1: $0,8,6,2,3,9,7,1,4,5$. Row sums: $225, 234, 252, 153, 288$, ending in $5, 4, 2, 3, 8$ ✓.\n* Columns: each digit once, e.g. column 1: $0,8,6,7,2,3,1,4,9,5$. Column sums: $207, 234, 207, 216, 288$; columns 1, 2, 4 end in $7, 4, 6$ ✓.\n* Primes exactly in the circled squares: $71, 67, 19, 43, 23, 07, 73$ are prime; the others ($08, 62, 39, 45, 85, 20, 75, 64, 09, 81, 14, 38, 25, 69, 95, 40, 12, 68$) are not.\n* Given digits: $71 \\ni 1$, $45 \\ni 5$, $67 \\ni 6$, $19 \\ni 1$, $43 \\ni 3$, $20 \\ni 2$, $23 \\ni 2$, $09 \\ni 0$, $81 \\ni 1$, $14 \\ni 4$, $95 \\ni 9$, $40 \\ni 4$, $68 \\ni 8$ ✓. All 25 numbers are different.\n\nA computer search confirms this is the only solution."
+      }
+    ],
+    "topics": [
+      "logic",
+      "number-theory"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2026-r1-02",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 38 Round 1 (2026-2027)",
+      "year": 2026,
+      "number": 2,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "text",
+    "prompt": "Alice and Bob start writing down consecutive numbers at the same time, starting with the number \"1\". They write numbers at the same rate, meaning that for all $n \\ge 1$, Alice writes her $n^{\\text{th}}$ number at the same time that Bob writes his $n^{\\text{th}}$ number. Alice writes down Kaktovic numerals, which is a base-20 number system (each underlined block is a single base-20 digit):\n$$\\underline{1},\\ \\underline{2},\\ \\dots,\\ \\underline{19},\\ \\underline{1}\\,\\underline{0},\\ \\underline{1}\\,\\underline{1},\\ \\dots,\\ \\underline{19}\\,\\underline{19},\\ \\dots$$\nBob writes down spreadsheet column codes, which follow a base-26 system with no zero:\n$$A, B, C, \\dots, Z, AA, AB, \\dots, ZZ, \\dots$$\nWhenever Alice and Bob simultaneously write down a number with the same number of digits (in their respective number systems), they earn a *(20-26)-point*.\n\n1. After Alice and Bob have each written down 2026 numbers, how many (20-26)-points do they have?\n2. Prove that Alice and Bob can only ever earn finitely many (20-26)-points, and find the largest value $n$ such that the $n^{\\text{th}}$ number Alice and Bob each write down earns a (20-26)-point.",
+    "image": null,
+    "choices": null,
+    "answer": "1716, 20^12 - 1",
+    "acceptedAnswers": [
+      "1716, 4095999999999999",
+      "1716; 20^12 - 1",
+      "1716; 4095999999999999",
+      "1716, 20^12-1",
+      "1716 and 20^12 - 1",
+      "1716 and 4095999999999999",
+      "1716, 4,095,999,999,999,999",
+      "(1) 1716 (2) 20^12 - 1",
+      "1716; 20^12-1"
+    ],
+    "answerUnit": null,
+    "answerDisplay": "(1) $1716$; (2) $n = 20^{12} - 1 = 4{,}095{,}999{,}999{,}999{,}999$",
+    "solutions": [
+      {
+        "title": "Compare the digit-length ranges",
+        "body": "Let $A(n)$ and $B(n)$ be the number of digits of the $n$-th number written by Alice and by Bob.\n\n**Alice.** Her $n$-th number is $n$ in base 20, so $A(n) = k \\iff 20^{k-1} \\le n \\le 20^k - 1$.\n\n**Bob.** There are $26^j$ codes with exactly $j$ letters, so the number of codes with fewer than $k$ letters is $26 + 26^2 + \\dots + 26^{k-1} = \\frac{26^k - 26}{25}$. Hence\n$$B(n) = k \\iff \\frac{26^k - 1}{25} \\le n \\le \\frac{26^{k+1} - 26}{25}.$$\nFor $k = 1, 2, 3, 4$ these ranges are $[1, 26]$, $[27, 702]$, $[703, 18278]$, $[18279, 475254]$.\n\n**Part 1.** Since $2026 < 7999 = 20^3 - 1$ and $2026 < 18278$, only $k \\le 3$ matter:\n* $k = 1$: $[1, 19] \\cap [1, 26] = [1, 19]$: $19$ points;\n* $k = 2$: $[20, 399] \\cap [27, 702] = [27, 399]$: $373$ points;\n* $k = 3$: $[400, 7999] \\cap [703, 18278] \\cap [1, 2026] = [703, 2026]$: $1324$ points.\n\nTotal: $19 + 373 + 1324 = 1716$.\n\n**Part 2.** A point at step $n$ needs $A(n) = B(n) = k$ for some $k$, i.e. $n$ is in both $k$-ranges.\n\n*No points for $k \\ge 13$.* Since $1.3^{13} \\approx 30.3 > 25$, we have $13^k \\ge 25\\cdot 10^k$ for all $k \\ge 13$ (the left side grows faster). Multiplying by $2^k$: $26^k \\ge 25\\cdot 20^k$, so $26^k - 1 > 25\\cdot 20^k - 25$, i.e.\n$$\\frac{26^k - 1}{25} > 20^k - 1:$$\nBob reaches $k$ letters only after Alice has passed $k$ digits. So all points occur at steps $n \\le 20^{12} - 1$; in particular there are finitely many.\n\n*$n = 20^{12} - 1$ earns a point.* Clearly $A(n) = 12$. Also $13^{12} = 23\\,298\\,085\\,122\\,481 < 25 \\cdot 10^{12}$, so $26^{12} \\le 25\\cdot 20^{12} - 2^{12}$, hence $\\frac{26^{12} - 1}{25} \\le 20^{12} - 1$; and $20^{12} - 1 < 26^{12} < \\frac{26^{13} - 26}{25}$. So $B(n) = 12$ as well.\n\n(Explicitly, the $k = 12$ overlap is $[3\\,817\\,158\\,266\\,467\\,287,\\ 4\\,095\\,999\\,999\\,999\\,999]$.)\n\n**Answer: (1) $1716$ points; (2) the largest such $n$ is $20^{12} - 1 = 4\\,095\\,999\\,999\\,999\\,999$.**"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "counting"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2026-r1-03",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 38 Round 1 (2026-2027)",
+      "year": 2026,
+      "number": 3,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "There are an infinite number of lily pads, numbered $0, 1, 2, \\dots$ from left to right. A frog is initially on lily pad 0. There exist fixed probabilities $q_1, q_2, q_3, \\dots$, so that at any point, the probability that the frog leaps $n$ lily pads to the right is $q_n$. (Also, $q_1 + q_2 + q_3 + \\dots = 1$, so the frog is always leaping to the right.)\n\nIt turns out that the probability that the frog lands on lily pad $n$ is $p$, for any positive integer $n$.\n\n1. Compute $q_n$ in terms of $p$.\n2. Compute the expected number of leaps it takes for the frog to either land on or pass lily pad $n$.",
+    "image": null,
+    "choices": null,
+    "answer": "1. $q_n = p(1 - p)^{n-1}$. 2. $1 + (n - 1)p$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "First-step equations",
+        "body": "**Part 1.** Let $p_m$ be the probability of landing on pad $m$ ($p_0 = 1$, $p_m = p$ for $m \\ge 1$). To land on pad $n$, the frog's last pad before $n$ is some $m < n$, from which it leaps $n - m$:\n$$p_n = q_n + q_{n-1}p_1 + \\dots + q_1p_{n-1}, \\quad\\text{i.e.}\\quad p = q_n + p(q_1 + \\dots + q_{n-1}).$$\nFor $n = 1$: $q_1 = p$. Subtracting the equation for $n$ from the one for $n + 1$:\n$$0 = q_{n+1} - q_n + pq_n \\implies q_{n+1} = (1 - p)q_n.$$\nHence $q_n = p(1 - p)^{n-1}$ (and indeed $\\sum q_n = 1$).\n\n**Part 2.** Let $E_k$ be the expected number of leaps to reach or pass pad $n$ starting from pad $k < n$. From pad $k$, the frog jumps to pad $m$ ($k < m < n$) with probability $p(1-p)^{m-k-1}$, and to pad $n$ or beyond with probability $\\sum_{j \\ge n-k} p(1-p)^{j-1} = (1 - p)^{n-k-1}$. So\n$$E_k = 1 + \\sum_{m=k+1}^{n-1} p(1 - p)^{m-k-1}E_m.$$\nComparing with the same equation for $E_{k-1}$:\n$$E_{k-1} = 1 + pE_k + (1 - p)\\sum_{m=k+1}^{n-1}p(1-p)^{m-k-1}E_m = 1 + pE_k + (1-p)(E_k - 1) = E_k + p.$$\nWith $E_{n-1} = 1$, we get $E_0 = 1 + (n - 1)p$.\n\n**Answer: (1) $q_n = p(1 - p)^{n-1}$; (2) $1 + (n - 1)p$.**"
+      },
+      {
+        "title": "Generating function and linearity",
+        "body": "**Part 1.** Let $Q(x) = \\sum_{n \\ge 1} q_nx^n$. The probability of landing on pad $m$ after exactly $j$ leaps is the coefficient of $x^m$ in $Q(x)^j$, so the generating function of the landing probabilities (with $p_0 = 1$) is\n$$\\sum_{j \\ge 0} Q(x)^j = \\frac{1}{1 - Q(x)} = 1 + p(x + x^2 + \\dots) = 1 + \\frac{px}{1 - x} = \\frac{1 - (1 - p)x}{1 - x}.$$\nThus $Q(x) = 1 - \\frac{1 - x}{1 - (1-p)x} = \\frac{px}{1 - (1 - p)x} = \\sum_{n\\ge1} p(1-p)^{n-1}x^n$, so $q_n = p(1 - p)^{n-1}$.\n\n**Part 2 (no formula for $q_n$ needed).** Every leap before the last one lands on a pad among $1, 2, \\dots, n - 1$, and the frog lands on each pad at most once (it always moves right). So\n$$\\#\\text{leaps} = 1 + \\#\\{m \\in \\{1, \\dots, n-1\\} : \\text{the frog lands on } m\\}.$$\nBy linearity of expectation, the expected number of leaps is $1 + \\sum_{m=1}^{n-1} P(\\text{land on } m) = 1 + (n - 1)p$.\n\n**Answer: (1) $q_n = p(1-p)^{n-1}$; (2) $1 + (n-1)p$.**"
+      }
+    ],
+    "topics": [
+      "probability",
+      "sequences-series"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2026-r1-04",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 38 Round 1 (2026-2027)",
+      "year": 2026,
+      "number": 4,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Two semicircles, with radii $a$ and $b$, are inscribed in a semicircle of radius $r$, as shown below. Prove that $a + b = r$.",
+    "image": "qimages/usamts/2026-r1/q04.webp",
+    "choices": null,
+    "answer": "If $P = (u, v)$ is the common endpoint and $D_A = (d, 0)$, $D_B = (e, 0)$ are the other endpoints of the two diameters (big circle centered at the origin), tangency gives $a = \\frac{r^2 - ud}{2r}$, $b = \\frac{r^2 - ue}{2r}$, and $d, e$ are the two roots of $d^2 = r^2\\frac{r^2 - u^2 - v^2}{r^2 - u^2}$, so $e = -d$ and $a + b = r$. (Synthetically: $P$ lies on $T_AT_B$ and homotheties at the tangency points give $\\frac ar + \\frac br = \\frac{T_AP + PT_B}{T_AT_B} = 1$.)",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Radical center and homotheties",
+        "body": "**Setup (from the figure).** Let $\\omega$ be the big semicircle with center $O$, and $\\Omega$ its full circle. The semicircle $\\omega_A$ (radius $a$) has diameter $D_AP$, where $D_A$ is on the diameter of $\\omega$, and its arc touches the arc of $\\omega$ at $T_A$; similarly $\\omega_B$ (radius $b$) has diameter $PD_B$ and touches the arc at $T_B$. The two small semicircles meet at the common endpoint $P$. Let $\\Omega_A, \\Omega_B$ be their full circles.\n\n**Step 1.** Let $Q$ be the foot of the perpendicular from $P$ to the diameter of $\\omega$. As $\\angle PQD_A = 90^\\circ$ and $PD_A$ is a diameter of $\\Omega_A$, $Q$ lies on $\\Omega_A$; similarly $Q$ lies on $\\Omega_B$. So $PQ$ is the radical axis of $\\Omega_A$ and $\\Omega_B$.\n\n**Step 2.** The radical axis of $\\Omega_A$ and $\\Omega$ is their common tangent at $T_A$; that of $\\Omega_B$ and $\\Omega$ is the common tangent at $T_B$. The three radical axes meet at the radical center $R$. Then $RT_A = RT_B$ (tangent lengths to $\\Omega$), and $\\angle RT_AO = \\angle RT_BO = 90^\\circ = \\angle RQO$, so $T_A, T_B, Q$ lie on the circle with diameter $RO$.\n\n**Step 3: $P$ lies on segment $T_AT_B$.** By the tangent–chord angle in $\\Omega_A$, $\\angle RT_AP = \\angle T_AQP = \\angle T_AQR$ (as $P$ lies on $QR$). In the cyclic quadrilateral $RT_AQT_B$, $\\angle T_AQR = \\angle T_AT_BR$, and in the isosceles triangle $RT_AT_B$, $\\angle T_AT_BR = \\angle RT_AT_B$. Hence $\\angle RT_AP = \\angle RT_AT_B$, so $P$ is on line $T_AT_B$.\n\n**Step 4.** The homothety with center $T_A$ and ratio $\\frac ar$ maps $\\Omega$ to $\\Omega_A$ (they are tangent at $T_A$). It maps the second intersection of line $T_AT_B$ with $\\Omega$ (namely $T_B$) to the second intersection with $\\Omega_A$ (namely $P$). So $\\frac{T_AP}{T_AT_B} = \\frac ar$, and similarly $\\frac{T_BP}{T_AT_B} = \\frac br$. Adding, since $P$ lies between $T_A$ and $T_B$,\n$$\\frac ar + \\frac br = \\frac{T_AP + PT_B}{T_AT_B} = 1,$$\nso $a + b = r$. ∎"
+      },
+      {
+        "title": "Coordinates",
+        "body": "Place $O$ at the origin with the diameter of the big semicircle on the $x$-axis. Let $P = (u, v)$ be the common endpoint of the two small diameters, and $D_A = (d, 0)$, $D_B = (e, 0)$ their other endpoints ($d \\ne e$).\n\nThe circle $\\Omega_A$ has center $\\left(\\frac{u + d}{2}, \\frac v2\\right)$ and radius $a$ with $4a^2 = (u - d)^2 + v^2$. It is internally tangent to the circle of radius $r$, so its center is at distance $r - a$ from $O$: $(u + d)^2 + v^2 = 4(r - a)^2$. Subtracting the two equations:\n$$4ud = 4(r - a)^2 - 4a^2 = 4r^2 - 8ra \\implies a = \\frac{r^2 - ud}{2r}.$$\nSubstituting back into $4a^2 = (u - d)^2 + v^2$:\n$$\\frac{(r^2 - ud)^2}{r^2} = (u - d)^2 + v^2 \\iff r^4 + u^2d^2 = r^2u^2 + r^2d^2 + r^2v^2 \\iff d^2(r^2 - u^2) = r^2(r^2 - u^2 - v^2).$$\n(Here $r^2 - u^2 > 0$ since $P$ is inside the big circle.) So $d^2$ is determined by $P$ alone, and exactly the same computation for the second semicircle gives the same equation for $e$. As $d \\ne e$, the two values are the two roots: $e = -d$. Therefore\n$$a + b = \\frac{r^2 - ud}{2r} + \\frac{r^2 - ue}{2r} = \\frac{2r^2 - u(d + e)}{2r} = r.$$\n(Bonus: the feet $D_A$, $D_B$ are symmetric about the center $O$.) ∎"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2026-r1-05",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 38 Round 1 (2026-2027)",
+      "year": 2026,
+      "number": 5,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $n \\ge 3$ be a positive integer. A circle is marked with $n$ distinguishable points, and each point is labeled with a positive integer. The sum of all $n$ labels is $2n + 3$, and there is no way to draw an arc on the circle such that the points on the arc have labels summing to $n + 1$. In terms of $n$, in how many ways can the labels be chosen? (Since the points are distinguishable, rotations and reflections are distinct.)\n\nFor example, if $n = 3$, the numbers could be 7, 1, and 1, which gives arcs with sums 0, 1, 2, 7, 8, and 9.",
+    "image": null,
+    "choices": null,
+    "answer": "$\\dfrac{n(n+1)(n+2)}{6} = \\dbinom{n+2}{3}$",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "At most three labels exceed 1",
+        "body": "**Answer: $\\frac{n(n+1)(n+2)}{6}$.**\n\nLet the labels in circular order be $a_1, \\dots, a_n$ (indices mod $n$), with partial sums $s_k = a_1 + \\dots + a_k$, $s_0 = 0$, $s_n = 2n + 3$. Arc sums are the differences $s_j - s_i$ taken mod $2n + 3$ (an arc and its complementary arc have sums adding to $2n + 3$). So \"no arc sums to $n + 1$\" is equivalent to \"no arc sums to $n + 1$ or to $n + 2$\", i.e. no two of the residues $s_1, \\dots, s_n \\pmod{2n+3}$ differ by $n + 1$ or $n + 2$.\n\n**Claim 1. At least $n - 3$ labels equal 1.** Let $S = \\{s_1, \\dots, s_n\\}$ (as residues mod $2n + 3$; they are distinct). For each residue $x$ let $T_x = \\{x, x + 1, x + n + 2\\}$. Every residue lies in exactly three of the sets $T_x$, so $\\sum_x |T_x \\cap S| = 3n$. Within $T_x$, the element $x + n + 2$ differs from $x$ by $n + 2$ and from $x + 1$ by $n + 1$; so if $x + n + 2 \\in S$ then $x, x+1 \\notin S$. Hence $|T_x \\cap S| \\le 2$, and equality means $x, x + 1 \\in S$. If $t$ of the $2n + 3$ sets have $|T_x \\cap S| = 2$, then $3n \\le 2t + (2n + 3 - t)$, so $t \\ge n - 3$. Each such $x$ gives consecutive partial sums $x, x + 1$, i.e. a label equal to 1, and different $x$ give different labels. So at least $n - 3$ labels are 1, and at most three labels exceed 1.\n\n(Zero labels exceeding 1 is impossible since the sum would be $n$.)\n\n**Claim 2. Exactly one label $>1$: $n$ ways.** It must be $2n + 3 - (n - 1) = n + 4$. Arcs avoiding it sum to at most $n - 1$, and arcs containing it sum to at least $n + 4$, so this works, with $n$ choices of position.\n\n**Claim 3. Exactly two labels $b_1, b_2 > 1$: $n(n-1)$ ways.** Now $b_1 + b_2 = n + 5$, with $n - 2$ ones. Arcs containing $b_1$ but not $b_2$ achieve every sum $b_1 + r$, $0 \\le r \\le n - 2$ (take $r$ ones next to $b_1$). This range of consecutive integers must avoid $n + 1$ and $n + 2$, so $b_1 \\le 2$ or $b_1 \\ge n + 3$; the same holds for $b_2$. With $b_1 + b_2 = n + 5$ and $b_i \\ge 2$, this forces $\\{b_1, b_2\\} = \\{2, n + 3\\}$. Conversely, this works: arcs containing $n + 3$ sum to at least $n + 3$, and the others to at most $(2n + 3) - (n + 3) = n$. The positions of $n + 3$ and $2$ can be chosen in $n(n - 1)$ ways.\n\n**Claim 4. Exactly three labels $>1$: $\\binom n3$ ways.** Call them $b_1, b_2, b_3$ in circular order, and let $w_1, w_2, w_3$ be the numbers of ones in the gap *opposite* $b_1, b_2, b_3$ respectively (so $w_1$ ones lie between $b_2$ and $b_3$, etc.). Then $b_1 + b_2 + b_3 = n + 6$ and $w_1 + w_2 + w_3 = n - 3$.\n\nEach $b_i \\le (n + 6) - 4 = n + 2$, and a single label cannot be $n + 1$ or $n + 2$, so $b_i \\le n$. Arcs containing $b_1$ but neither $b_2$ nor $b_3$ achieve all sums $b_1 + r$ for $0 \\le r \\le w_2 + w_3$; since $b_1 \\le n$, this range must stay $\\le n$: $b_1 + w_2 + w_3 \\le n$, i.e. $b_1 \\le w_1 + 3$. Likewise $b_2 \\le w_2 + 3$, $b_3 \\le w_3 + 3$. Adding: $n + 6 \\le (n - 3) + 9 = n + 6$, so all are equalities: $b_i = w_i + 3$.\n\nConversely, choose any three positions for the big labels; this fixes the $w_i$, and we set $b_i = w_i + 3$ (sum $n + 6$ ✓). Arcs containing no big label sum to at most $n - 3$; arcs containing exactly one, say $b_1$, sum to at most $b_1 + w_2 + w_3 = n$; and an arc containing two or three big labels has a complementary arc containing at most one, with sum at most $n$, so its own sum is at least $n + 3$. No arc sums to $n + 1$. So each of the $\\binom n3$ choices of positions gives exactly one labeling.\n\n**Total.**\n$$n + n(n - 1) + \\binom n3 = n^2 + \\frac{n(n-1)(n-2)}{6} = \\frac{n^3 + 3n^2 + 2n}{6} = \\frac{n(n+1)(n+2)}{6}.$$\n(For $n = 3$ this gives $10$; a computer count for $3 \\le n \\le 9$ agrees with the formula.) ∎"
+      }
+    ],
+    "topics": [
+      "counting",
+      "number-theory",
+      "logic"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

@@ -1,0 +1,180 @@
+[
+  {
+    "id": "usamts-2019-r1-01",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 31 Round 1 (2019-2020)",
+      "year": 2019,
+      "number": 1,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Partition the grid into $1$ by $1$ squares and $1$ by $2$ dominoes in either orientation, marking dominoes with a line connecting the two adjacent squares, and $1$ by $1$ squares with an asterisk ($\\ast$). No two $1$ by $1$ squares can share a side. A *border* is a grid segment between two adjacent squares that contain dominoes of opposite orientations. All borders have been marked with thick lines in the grid.\n\nThere is a unique solution, but you do not need to prove that your answer is the only one possible. You merely need to find an answer that satisfies the constraints above. (Note: In any other USAMTS problem, you need to provide a full proof. Only in this problem is an answer without justification acceptable.)",
+    "image": "qimages/usamts/2019-r1/q01.webp",
+    "choices": null,
+    "answer": "The unique partition is\n$$\\begin{array}{|c|c|c|c|c|c|c|c|c|c|}\\hline \\rightarrow & \\leftarrow & \\downarrow & \\ast & \\downarrow & \\ast & \\rightarrow & \\leftarrow & \\rightarrow & \\leftarrow\\\\\\hline \\downarrow & \\ast & \\uparrow & \\downarrow & \\uparrow & \\downarrow & \\downarrow & \\rightarrow & \\leftarrow & \\ast\\\\\\hline \\uparrow & \\rightarrow & \\leftarrow & \\uparrow & \\ast & \\uparrow & \\uparrow & \\ast & \\rightarrow & \\leftarrow\\\\\\hline \\rightarrow & \\leftarrow & \\downarrow & \\ast & \\rightarrow & \\leftarrow & \\ast & \\rightarrow & \\leftarrow & \\ast\\\\\\hline \\downarrow & \\ast & \\uparrow & \\downarrow & \\ast & \\rightarrow & \\leftarrow & \\rightarrow & \\leftarrow & \\downarrow\\\\\\hline \\uparrow & \\downarrow & \\ast & \\uparrow & \\downarrow & \\ast & \\rightarrow & \\leftarrow & \\ast & \\uparrow\\\\\\hline \\downarrow & \\uparrow & \\downarrow & \\ast & \\uparrow & \\downarrow & \\ast & \\rightarrow & \\leftarrow & \\ast\\\\\\hline \\uparrow & \\ast & \\uparrow & \\downarrow & \\ast & \\uparrow & \\rightarrow & \\leftarrow & \\ast & \\downarrow\\\\\\hline \\rightarrow & \\leftarrow & \\downarrow & \\uparrow & \\rightarrow & \\leftarrow & \\ast & \\downarrow & \\downarrow & \\uparrow\\\\\\hline \\rightarrow & \\leftarrow & \\uparrow & \\rightarrow & \\leftarrow & \\rightarrow & \\leftarrow & \\uparrow & \\uparrow & \\ast\\\\\\hline\\end{array}$$\n($\\ast$ = a $1\\times1$ square; each arrow points to the other half of its domino, so $\\rightarrow\\ \\leftarrow$ is a horizontal domino and $\\downarrow$ above $\\uparrow$ is a vertical domino.)",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Read off what each kind of segment forces",
+        "body": "Two facts drive the whole puzzle.\n\n* A **thick** segment separates two squares that belong to *different* dominoes of *opposite* orientations (so neither square is a $1\\times1$ square, and the two squares are not the two halves of one domino).\n* A **thin** segment between two squares means: they are halves of the same domino, or at least one is a $1\\times1$ square, or they lie in two dominoes of the *same* orientation.\n\nAlso, two $1\\times1$ squares may never be side by side.\n\n**Starting in the top-left corner** (rows numbered $1$–$10$ from the top, columns $1$–$10$ from the left). The thick segment below square $(1,1)$ says $(1,1)$ and $(2,1)$ are in different dominoes of opposite orientations. Square $(1,1)$ can only pair with $(1,2)$ or $(2,1)$, so it is the left half of the horizontal domino $(1,1)(1,2)$, and $(2,1)$ is vertical, hence paired with $(3,1)$. The thick segment below $(3,1)$ then makes $(4,1)$ horizontal, i.e. the domino $(4,1)(4,2)$, and the thick segment below $(4,1)$ makes $(5,1)$ vertical: the domino $(5,1)(6,1)$.\n\nEvery thick segment gives a deduction of this kind, and every thin segment between two domino squares says the orientations agree. Propagating these through the grid (and using that $1\\times1$ squares are never adjacent, so the left-over squares in a crowded area must pair up) fills in the whole grid. The result is\n$$\\begin{array}{|c|c|c|c|c|c|c|c|c|c|}\\hline \\rightarrow & \\leftarrow & \\downarrow & \\ast & \\downarrow & \\ast & \\rightarrow & \\leftarrow & \\rightarrow & \\leftarrow\\\\\\hline \\downarrow & \\ast & \\uparrow & \\downarrow & \\uparrow & \\downarrow & \\downarrow & \\rightarrow & \\leftarrow & \\ast\\\\\\hline \\uparrow & \\rightarrow & \\leftarrow & \\uparrow & \\ast & \\uparrow & \\uparrow & \\ast & \\rightarrow & \\leftarrow\\\\\\hline \\rightarrow & \\leftarrow & \\downarrow & \\ast & \\rightarrow & \\leftarrow & \\ast & \\rightarrow & \\leftarrow & \\ast\\\\\\hline \\downarrow & \\ast & \\uparrow & \\downarrow & \\ast & \\rightarrow & \\leftarrow & \\rightarrow & \\leftarrow & \\downarrow\\\\\\hline \\uparrow & \\downarrow & \\ast & \\uparrow & \\downarrow & \\ast & \\rightarrow & \\leftarrow & \\ast & \\uparrow\\\\\\hline \\downarrow & \\uparrow & \\downarrow & \\ast & \\uparrow & \\downarrow & \\ast & \\rightarrow & \\leftarrow & \\ast\\\\\\hline \\uparrow & \\ast & \\uparrow & \\downarrow & \\ast & \\uparrow & \\rightarrow & \\leftarrow & \\ast & \\downarrow\\\\\\hline \\rightarrow & \\leftarrow & \\downarrow & \\uparrow & \\rightarrow & \\leftarrow & \\ast & \\downarrow & \\downarrow & \\uparrow\\\\\\hline \\rightarrow & \\leftarrow & \\uparrow & \\rightarrow & \\leftarrow & \\rightarrow & \\leftarrow & \\uparrow & \\uparrow & \\ast\\\\\\hline\\end{array}$$\n($\\ast$ = a $1\\times1$ square; each arrow points to the other half of its domino, so $\\rightarrow\\ \\leftarrow$ is a horizontal domino and $\\downarrow$ above $\\uparrow$ is a vertical domino.)\n\n**Check.** No two $\\ast$'s share a side. Every pair of side-by-side squares lying in two different dominoes of opposite orientation is separated by one of the 23 thick segments of the figure, and every thick segment is of this type. (A computer search over all partitions confirms that this is the only one.)\n\n**Answer:** the grid above."
+      }
+    ],
+    "topics": [
+      "logic",
+      "spatial"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2019-r1-02",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 31 Round 1 (2019-2020)",
+      "year": 2019,
+      "number": 2,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $x$, $y$, and $z$ be real numbers greater than $1$. Prove that if $x^y = y^z = z^x$, then $x = y = z$.",
+    "image": null,
+    "choices": null,
+    "answer": "Assume $x<y$ and use that $a^s$ increases in $a$ (for $s>0$) and in $s$ (for $a>1$): $x^y=y^z>x^z$ gives $y>z$, $x^y=z^x<z^y$ gives $x<z$, and $y^z=z^x<y^x$ gives $z<x$ — a contradiction. Similarly $x>y$ is impossible, so $x=y$, and then $x^x=x^z$ gives $z=x$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Contradiction by comparing powers",
+        "body": "We use two facts, valid for real numbers greater than $1$ and positive exponents:\n\n* if $1 < a < b$ and $s > 0$, then $a^s < b^s$ (bigger base, bigger power);\n* if $a > 1$, then $a^s < a^t$ exactly when $s < t$ (bigger exponent, bigger power).\n\n**Suppose $x < y$.**\n\n1. $x^y = y^z > x^z$ (bigger base $y > x$). Comparing exponents of base $x > 1$: $y > z$.\n2. $x^y = z^x < z^y$ (bigger exponent $y > x$, base $z > 1$). Comparing bases with exponent $y$: $x < z$.\n3. $y^z = z^x < y^x$ (bigger base $y > z$, from step 1). Comparing exponents of base $y > 1$: $z < x$.\n\nSteps 2 and 3 contradict each other. So $x < y$ is impossible.\n\n**Suppose $x > y$.** Every inequality above reverses: $x^y = y^z < x^z$ gives $y < z$; $x^y = z^x > z^y$ gives $x > z$; $y^z = z^x > y^x$ gives $z > x$. Again a contradiction.\n\nHence $x = y$. Then $x^x = x^y = y^z = x^z$, and since $x > 1$ this forces $z = x$. Therefore $x = y = z$. ∎"
+      },
+      {
+        "title": "Take logarithms",
+        "body": "Since all numbers exceed $1$, their logarithms are positive. Taking $\\ln$ of $x^y = y^z = z^x$ gives\n$$y\\ln x = z\\ln y = x\\ln z.$$\nThe system is unchanged by the cyclic relabelling $x\\to y\\to z\\to x$, so we may assume $x$ is the largest of the three.\n\n* From $z\\ln y = x\\ln z$ and $x \\ge z$: $z\\ln y \\ge z\\ln z$, so $y \\ge z$.\n* From $z\\ln y = y\\ln x$ and $\\ln x \\ge \\ln y > 0$: $z\\ln y \\ge y\\ln y$, so $z \\ge y$.\n\nHence $y = z$, and then $x\\ln z = z\\ln y = z\\ln z$ gives $x = z$. So $x = y = z$. ∎"
+      }
+    ],
+    "topics": [
+      "inequalities",
+      "algebra"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2019-r1-03",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 31 Round 1 (2019-2020)",
+      "year": 2019,
+      "number": 3,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Circle $\\omega$ is inscribed in unit square $PLUM$, and points $I$ and $E$ lie on $\\omega$ such that $U$, $I$, and $E$ are collinear. Find, with proof, the greatest possible area for $\\triangle PIE$.",
+    "image": null,
+    "choices": null,
+    "answer": "1/4",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "answerDisplay": "$\\frac14$",
+    "solutions": [
+      {
+        "title": "Compare with the triangle at the centre",
+        "body": "Let $O$ be the centre of $\\omega$ (radius $\\tfrac12$). Since $P$ and $U$ are opposite corners of the square, $O$ is the midpoint of $PU$. Drop perpendiculars $PX$ and $OY$ to line $IE$. Triangles $UOY$ and $UPX$ are similar with ratio $UO : UP = 1 : 2$, so $OY = \\tfrac12 PX$. Triangles $OIE$ and $PIE$ share the base $IE$, hence\n$$[PIE] = 2[OIE] = 2\\cdot\\tfrac12\\cdot OI\\cdot OE\\sin\\angle IOE = \\tfrac14\\sin\\angle IOE \\le \\tfrac14.$$\n**Equality is possible.** We need $\\angle IOE = 90^\\circ$, i.e. a chord $IE$ of length $\\tfrac{\\sqrt2}{2}$ whose line passes through $U$; equivalently the line through $U$ must be at distance $\\tfrac{\\sqrt2}{4}$ from $O$. The distance from $O$ to lines through $U$ varies continuously from $0$ (the diagonal $UP$) to $\\tfrac12$ (the side $UL$, which is tangent to $\\omega$), so some line through $U$ has distance exactly $\\tfrac{\\sqrt2}{4}\\approx 0.354$. It cuts $\\omega$ in the required chord. (The official solution finds this concretely: $UI = \\tfrac{\\sqrt6-\\sqrt2}{4}$, $UE = \\tfrac{\\sqrt6+\\sqrt2}{4}$, whose product is $\\tfrac14$, the square of the tangent length $\\tfrac12$, as power of a point requires.)\n\n**Answer: $\\tfrac14$**"
+      },
+      {
+        "title": "Distance to the line and AM–GM",
+        "body": "Let $h$ be the distance from $O$ to the line $UIE$. As above, the distance from $P$ to this line is $2h$ (because $O$ is the midpoint of $PU$ and $U$ is on the line). The chord has length $IE = 2\\sqrt{\\tfrac14 - h^2}$. Therefore\n$$[PIE] = \\tfrac12\\cdot IE\\cdot 2h = 2h\\sqrt{\\tfrac14 - h^2} = 2\\sqrt{h^2\\left(\\tfrac14 - h^2\\right)} \\le 2\\cdot\\frac{h^2 + \\left(\\tfrac14 - h^2\\right)}{2} = \\frac14$$\nby AM–GM, with equality when $h^2 = \\tfrac14 - h^2$, i.e. $h = \\tfrac{\\sqrt2}{4}$. Lines through $U$ realise every distance $h \\in [0, \\tfrac12]$ from $O$, so this value is attained.\n\n**Answer: $\\tfrac14$**"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2019-r1-04",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 31 Round 1 (2019-2020)",
+      "year": 2019,
+      "number": 4,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "A group of $100$ friends stands in a circle. Initially, one person has $2019$ mangos, and no one else has mangos. The friends split the mangos according to the following rules:\n\n* *sharing:* to share, a friend passes two mangos to the left and one mango to the right.\n* *eating:* the mangos must also be eaten and enjoyed. However, no friend wants to be selfish and eat too many mangos. Every time a person eats a mango, they must also pass another mango to the right.\n\nA person may only *share* if they have at least three mangos, and they may only *eat* if they have at least two mangos. The friends continue sharing and eating, until so many mangos have been eaten that no one is able to share or eat anymore.\n\nShow that there are exactly eight people stuck with mangos, which can no longer be shared or eaten.",
+    "image": null,
+    "choices": null,
+    "answer": "Number the people $0,\\dots,99$ going right, starting with the person who has the mangos. Then $\\sum 2^i m_i \\pmod{2^{100}-1}$ is invariant under both moves. At the end every $m_i\\in\\{0,1\\}$, so $\\sum 2^i m_i = 2019 = 11111100011_2$, which has eight $1$'s.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "A binary invariant",
+        "body": "Number the friends $0, 1, \\dots, 99$ so that friend $0$ starts with the $2019$ mangos and friend $i+1$ stands to the right of friend $i$ (indices mod $100$). Let $m_i$ be the number of mangos of friend $i$ and consider\n$$f = \\sum_{i=0}^{99} 2^i m_i \\pmod{2^{100} - 1}.$$\nBecause $2^{100} \\equiv 1$, the weight $2^i$ is well-defined for indices taken mod $100$: the weight of friend $i+1$ is always twice that of friend $i$.\n\n* **Sharing by friend $i$:** $m_{i-1}$ goes up by $2$, $m_i$ down by $3$, $m_{i+1}$ up by $1$. The change in $f$ is $2\\cdot 2^{i-1} - 3\\cdot 2^i + 2^{i+1} = 2^i - 3\\cdot2^i + 2\\cdot 2^i = 0$.\n* **Eating by friend $i$:** $m_i$ goes down by $2$ (one eaten, one passed) and $m_{i+1}$ up by $1$. The change is $-2\\cdot 2^i + 2^{i+1} = 0$.\n\nSo $f \\equiv 2019 \\pmod{2^{100}-1}$ throughout.\n\nWhen the process stops, nobody can eat, so every friend has $0$ or $1$ mango. Then $N = \\sum 2^i m_i$ is an integer with $0 \\le N \\le 2^{100} - 1$ and $N \\equiv 2019$. The only number in this range congruent to $2019$ is $2019$ itself (the next one, $2019 + 2^{100} - 1$, is too big). Hence $\\sum 2^i m_i = 2019$ with digits $m_i \\in \\{0,1\\}$, which means $(m_{99}\\dots m_1 m_0)$ is the binary expansion of $2019$:\n$$2019 = 11111100011_2 = 2^{10}+2^9+2^8+2^7+2^6+2^5+2^1+2^0.$$\nIt has exactly eight $1$'s, so exactly eight friends are left with a mango (namely friends $0, 1, 5, 6, 7, 8, 9, 10$). ∎"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "games"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2019-r1-05",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 31 Round 1 (2019-2020)",
+      "year": 2019,
+      "number": 5,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $n$ be a positive integer. For integers $a, b$ with $0 \\le a, b \\le n-1$, let $r_n(a, b)$ denote the remainder when $ab$ is divided by $n$. If $S_n$ denotes the sum of all $n^2$ remainders $r_n(a, b)$, prove that\n$$\\frac12 - \\frac{1}{\\sqrt n} \\le \\frac{S_n}{n^3} \\le \\frac12.$$",
+    "image": null,
+    "choices": null,
+    "answer": "For fixed $b$ with $d=\\gcd(b,n)$, the remainders $r_n(a,b)$ run $d$ times through $0,d,\\dots,n-d$, summing to $\\frac{n(n-d)}2$. So $\\frac{S_n}{n^3} = \\frac12 - \\frac{1}{2n^2}\\sum_{b=1}^{n}\\gcd(b,n)$, and $0<\\sum\\gcd(b,n) = \\sum_{d\\mid n} d\\,\\varphi(n/d) \\le n\\,\\tau(n) \\le 2n\\sqrt n$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Sum over each column, then bound a gcd sum",
+        "body": "**Step 1: fix $b$.** Let $d = \\gcd(b, n)$. Every remainder $r_n(a, b)$ is a multiple of $d$ (both $ab$ and $n$ are). The values $r_n(a,b)$ for $a = 0, 1, \\dots, \\tfrac nd - 1$ are distinct: if $r_n(a_1, b) = r_n(a_2, b)$ then $n \\mid (a_1 - a_2) b$, so $\\tfrac nd \\mid (a_1 - a_2)\\tfrac bd$, and since $\\gcd(\\tfrac nd, \\tfrac bd) = 1$ we get $\\tfrac nd \\mid a_1 - a_2$, forcing $a_1 = a_2$. These are $\\tfrac nd$ distinct multiples of $d$ in $[0, n)$, so they are exactly $0, d, 2d, \\dots, n - d$. Also $r_n(a + \\tfrac nd, b) = r_n(a, b)$ because $\\tfrac nd\\, b = n\\cdot\\tfrac bd$. So as $a$ runs over $0, \\dots, n-1$ the list $0, d, \\dots, n-d$ is repeated $d$ times:\n$$\\sum_{a=0}^{n-1} r_n(a, b) = d\\cdot d\\left(0 + 1 + \\dots + \\left(\\tfrac nd - 1\\right)\\right) = d^2\\cdot\\frac{\\frac nd\\left(\\frac nd - 1\\right)}{2} = \\frac{n(n-d)}{2}.$$\n(For $b = 0$, $d = n$ and the sum is $0$, consistent with the formula.)\n\n**Step 2: sum over $b$.** With $T_n = \\sum_{b=0}^{n-1}\\gcd(b, n) = \\sum_{b=1}^{n}\\gcd(b,n)$,\n$$S_n = \\sum_{b=0}^{n-1}\\frac{n(n - \\gcd(b,n))}{2} = \\frac{n^3}{2} - \\frac n2 T_n, \\qquad \\frac{S_n}{n^3} = \\frac12 - \\frac{T_n}{2n^2}.$$\nSince $T_n > 0$, the upper bound $\\frac{S_n}{n^3} \\le \\frac12$ follows.\n\n**Step 3: bound $T_n$.** For a divisor $d$ of $n$, $\\gcd(b, n) = d$ with $1 \\le b \\le n$ exactly when $b = dk$ with $1 \\le k \\le \\tfrac nd$ and $\\gcd(k, \\tfrac nd) = 1$; there are $\\varphi(\\tfrac nd)$ such $b$. Hence, using $\\varphi(m) \\le m$,\n$$T_n = \\sum_{d \\mid n} d\\,\\varphi\\!\\left(\\tfrac nd\\right) \\le \\sum_{d\\mid n} d\\cdot\\tfrac nd = n\\,\\tau(n),$$\nwhere $\\tau(n)$ is the number of divisors of $n$. Divisors come in pairs $\\{k, \\tfrac nk\\}$ with the smaller one at most $\\sqrt n$, so $\\tau(n) \\le 2\\sqrt n$. Thus $T_n \\le 2n\\sqrt n$ and\n$$\\frac{S_n}{n^3} = \\frac12 - \\frac{T_n}{2n^2} \\ge \\frac12 - \\frac{2n\\sqrt n}{2n^2} = \\frac12 - \\frac1{\\sqrt n}.$$ ∎"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "inequalities"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

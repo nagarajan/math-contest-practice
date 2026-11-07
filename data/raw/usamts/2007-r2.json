@@ -1,0 +1,194 @@
+[
+  {
+    "id": "usamts-2007-r2-01",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 19 Round 2 (2007-2008)",
+      "year": 2007,
+      "number": 1,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Find the smallest positive integer $n$ such that every possible coloring of the integers from $1$ to $n$ with each integer either red or blue has at least one arithmetic progression of three different integers of the same color.",
+    "image": null,
+    "choices": null,
+    "answer": "9",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Example for 8, casework for 9",
+        "body": "**$n = 8$ is not enough.** Colour $1, 4, 5, 8$ red and $2, 3, 6, 7$ blue. A progression $a < b < c$ needs $a + c = 2b$. In the red set $\\{1,4,5,8\\}$ the sums of two members are $5, 6, 9, 9, 12, 13$, none of which is twice a member ($2, 8, 10, 16$); in the blue set $\\{2,3,6,7\\}$ the pair sums are $5, 8, 9, 9, 10, 13$, none of which is in $\\{4, 6, 12, 14\\}$. Hence no $n \\le 8$ works (restrict this colouring).\n\n**$n = 9$ works.** Suppose some colouring of $1, \\dots, 9$ has no monochromatic 3-term progression. By swapping colours, assume $5$ is blue. Since $1, 5, 9$ is a progression, $1$ and $9$ are not both blue.\n\n*Case 1: exactly one of $1, 9$ is red.* By the symmetry $k \\mapsto 10 - k$ assume $1$ blue, $9$ red. Then\n* $3$ red (else $1, 3, 5$ blue);\n* $6$ blue (else $3, 6, 9$ red);\n* $4$ and $7$ red (else $4, 5, 6$ or $5, 6, 7$ blue);\n* $2$ and $8$ blue (else $2, 3, 4$ or $7, 8, 9$ red);\n\nbut now $2, 5, 8$ is blue. Contradiction.\n\n*Case 2: $1$ and $9$ both red.*\n* If $7$ is red: $4$ and $8$ are blue (else $1, 4, 7$ or $7, 8, 9$ red), then $3$ and $6$ are red (else $3, 4, 5$ or $4, 5, 6$ blue), and $3, 6, 9$ is red. Contradiction.\n* If $7$ is blue: $3$ is red (else $3, 5, 7$ blue), $6$ is blue (else $3, 6, 9$ red), and $5, 6, 7$ is blue. Contradiction.\n\nSo every colouring of $1..9$ has a monochromatic progression.\n\n**Answer: $9$**"
+      },
+      {
+        "title": "Extend the good colourings of 1..8",
+        "body": "Checking all $2^8 = 256$ colourings of $1, \\dots, 8$ (by computer, or by a short case analysis like the one above) shows that exactly six have no monochromatic 3-term progression:\n$$RRBBRRBB,\\quad RBRBBRBR,\\quad RBBRRBBR$$\nand their colour swaps. Now try to colour $9$:\n* $RRBBRRBB$: $9$ red gives $1, 5, 9$ red; $9$ blue gives $7, 8, 9$ blue.\n* $RBRBBRBR$: $9$ red gives $3, 6, 9$ red; $9$ blue gives $5, 7, 9$ blue.\n* $RBBRRBBR$: $9$ red gives $1, 5, 9$ red; $9$ blue gives $3, 6, 9$ blue.\n\nThe colour swaps behave the same way. So $1..8$ can be coloured without a monochromatic progression but $1..9$ cannot.\n\n**Answer: $9$**"
+      }
+    ],
+    "topics": [
+      "counting",
+      "logic"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2007-r2-02",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 19 Round 2 (2007-2008)",
+      "year": 2007,
+      "number": 2,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Let $x$, $y$, and $z$ be complex numbers such that $x + y + z = x^5 + y^5 + z^5 = 0$ and $x^3 + y^3 + z^3 = 3$. Find all possible values of $x^{2007} + y^{2007} + z^{2007}$.",
+    "image": null,
+    "choices": null,
+    "answer": "3",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Eliminate z",
+        "body": "From $x + y = -z$, cubing gives $x^3 + y^3 + 3xy(x+y) = -z^3$, so\n$$3 = x^3 + y^3 + z^3 = -3xy(x+y) \\implies xy(x+y) = -1 .$$\nIn particular $xy \\ne 0$.\n\nRaising $x + y = -z$ to the fifth power:\n$$x^5 + y^5 + z^5 = -5xy\\left(x^3 + 2x^2y + 2xy^2 + y^3\\right) = -5xy\\left(x^3 + y^3 + 2xy(x+y)\\right).$$\nThis is $0$ and $xy \\ne 0$, so $x^3 + y^3 = -2xy(x+y) = 2$. Hence $z^3 = 3 - 2 = 1$. The conditions are symmetric, so likewise $x^3 = y^3 = 1$, and since $3 \\mid 2007$,\n$$x^{2007} + y^{2007} + z^{2007} = 1 + 1 + 1 = 3 .$$\n\nThis value occurs: $x, y, z = 1, \\omega, \\omega^2$ with $\\omega = -\\frac12 + \\frac{\\sqrt3}{2}i$ satisfy $x + y + z = 0$, $x^5 + y^5 + z^5 = 1 + \\omega^2 + \\omega = 0$ and $x^3 + y^3 + z^3 = 3$.\n\n**Answer: $3$**"
+      },
+      {
+        "title": "Newton's identities",
+        "body": "Let $e_1 = x + y + z = 0$, $e_2 = xy + yz + zx$, $e_3 = xyz$, and $p_k = x^k + y^k + z^k$. Then $x, y, z$ are the roots of $t^3 + e_2 t - e_3$, so each satisfies $t^{k} = -e_2 t^{k-2} + e_3 t^{k-3}$ and therefore $p_k = -e_2 p_{k-2} + e_3 p_{k-3}$.\n\nWith $p_0 = 3$, $p_1 = 0$, $p_2 = -2e_2$:\n* $p_3 = -e_2 p_1 + e_3 p_0 = 3e_3$, so $e_3 = 1$;\n* $p_4 = -e_2 p_2 + e_3 p_1 = 2e_2^2$;\n* $p_5 = -e_2 p_3 + e_3 p_2 = -3e_2 - 2e_2 = -5e_2$, so $e_2 = 0$.\n\nHence $x, y, z$ are the roots of $t^3 - 1$: they are exactly $1, \\omega, \\omega^2$, all cube roots of unity, and $p_{2007} = 3$.\n\n**Answer: $3$**"
+      }
+    ],
+    "topics": [
+      "complex-numbers",
+      "algebra",
+      "polynomials"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2007-r2-03",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 19 Round 2 (2007-2008)",
+      "year": 2007,
+      "number": 3,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "A triangular array of positive integers is called *remarkable* if all of its entries are distinct, and each entry, other than those in the top row, is the quotient of the two numbers immediately above it. For example, the following triangular array is remarkable:\n$$\\begin{array}{ccccc} 7 & & 42 & & 14 \\\\ & 6 & & 3 & \\\\ & & 2 & & \\end{array}$$\nFind the smallest positive integer that can occur as the greatest element in a remarkable array with four numbers in the top row.",
+    "image": null,
+    "choices": null,
+    "answer": "120",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Build from the bottom",
+        "body": "No entry is $1$: an entry $1$ would be the quotient of two equal numbers above it, but the entries are distinct. So every entry is at least $2$.\n\nLet $a_1$ be the bottom entry. The two entries above it are $a_2$ and $a_1a_2$ for some $a_2$ (the larger one divided by the smaller is $a_1$). Above $a_1a_2$ (in the third row from the bottom) are two entries $a_3$ and $a_1a_2a_3$ in some order, and above $a_1a_2a_3$ in the top row are $a_4$ and $a_1a_2a_3a_4$ in some order. Here $a_2, a_3, a_4$ are themselves entries of the array, so $a_1, a_2, a_3, a_4$ are four distinct integers, each at least $2$. Therefore the top row contains\n$$a_1a_2a_3a_4 \\ge 2\\cdot 3\\cdot 4\\cdot 5 = 120 .$$\n\nThis bound is attained:\n$$\\begin{array}{ccccccc} 40 & & 5 & & 120 & & 30 \\\\ & 8 & & 24 & & 4 & \\\\ & & 3 & & 6 & & \\\\ & & & 2 & & & \\end{array}$$\n($40/5 = 8$, $120/5 = 24$, $120/30 = 4$, $24/8 = 3$, $24/4 = 6$, $6/3 = 2$, and all ten entries are distinct.)\n\n**Answer: $120$**"
+      },
+      {
+        "title": "Computer search",
+        "body": "A search over all top rows $(a, b, c, d)$ with entries at most $125$ in which each adjacent pair divides one into the other (and so on down the triangle), keeping only arrays with ten distinct entries, finds no remarkable array with largest entry below $120$. Arrays with largest entry $120$ exist, e.g. top row $3, 120, 60, 6$ (rows $40, 2, 10$; then $20, 5$; then $4$) as well as the one above. This agrees with the product bound $a_1a_2a_3a_4 \\ge 2\\cdot3\\cdot4\\cdot5$.\n\n**Answer: $120$**"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "logic"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2007-r2-04",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 19 Round 2 (2007-2008)",
+      "year": 2007,
+      "number": 4,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Two nonoverlapping arcs of a circle are chosen. Eight distinct points are then chosen on each arc. All 64 segments connecting a chosen point on one arc to a chosen point on the other arc are drawn. How many triangles are formed that have at least one of the 16 points as a vertex?\n\nA sample figure is shown.",
+    "image": "qimages/usamts/2007-r2/q04.webp",
+    "choices": null,
+    "answer": "7840",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Count by the points on the circle",
+        "body": "Call the arcs $\\mathcal A$ and $\\mathcal B$, with $m$ and $n$ chosen points. Every drawn segment joins a point of $\\mathcal A$ to a point of $\\mathcal B$. Extend each side of a triangle to its full segment; the endpoints of these segments are chosen points.\n\n* **Three vertices on the circle:** two of them would be on the same arc, but no segment joins two points of the same arc. Impossible.\n* **Exactly two vertices on the circle:** one is on $\\mathcal A$ and one on $\\mathcal B$. The other two sides are segments through the third vertex; extended, they end at one more point of each arc. So the triangle is determined by 2 points on each arc. Conversely, 2 points $a_1, a_2$ on $\\mathcal A$ and 2 points $b_1, b_2$ on $\\mathcal B$ give 4 segments $a_ib_j$, of which the \"crossing\" pair $a_1b_2$, $a_2b_1$ meets at an interior point $P$; this gives exactly 2 triangles $a_1 b_1 P$ and $a_2 b_2 P$. Count: $2\\binom m2\\binom n2$.\n* **Exactly one vertex on the circle:** extending the three sides gives the vertex on one arc, the two sides through it end at 2 points of the other arc, and the third side has one endpoint on each arc. So the triangle is determined by 2 points on one arc and 3 on the other, and one checks that each such choice of 5 points produces exactly 2 such triangles. Count: $2\\binom m2\\binom n3 + 2\\binom m3\\binom n2$.\n\nTotal:\n$$T(m, n) = 2\\left[\\binom m2\\binom n2 + \\binom m2\\binom n3 + \\binom m3\\binom n2\\right].$$\nFor $m = n = 8$: $\\binom82 = 28$, $\\binom83 = 56$, so\n$$T = 2\\,[28\\cdot 28 + 28 \\cdot 56 + 56 \\cdot 28] = 2\\,[784 + 1568 + 1568] = 7840 .$$\n\n**Answer: $7840$**"
+      },
+      {
+        "title": "Check with small cases and a computer",
+        "body": "The formula can be checked on small cases. With $m = n = 2$ there are 4 segments forming an \"X\" plus two sides, and you can see exactly $2$ triangles; the formula gives $2\\cdot 1 \\cdot 1 = 2$. With $m = n = 3$ the formula gives $2(9 + 3 + 3) = 30$.\n\nA computer check places random points on two disjoint arcs, draws all segments, and counts triples of segments that pairwise meet in three distinct points at least one of which is a chosen point. It returns $2, 30, 72$ for $(m, n) = (2,2), (3,3), (4,3)$ — matching the formula — and $7840$ for $(8, 8)$.\n\n**Answer: $7840$**"
+      }
+    ],
+    "topics": [
+      "counting",
+      "geometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2007-r2-05",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 19 Round 2 (2007-2008)",
+      "year": 2007,
+      "number": 5,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Faces $ABC$ and $XYZ$ of a regular icosahedron are parallel, with the vertices labeled such that $\\overline{AX}$, $\\overline{BY}$, and $\\overline{CZ}$ are concurrent. Let $\\mathcal S$ be the solid with faces $ABC$, $AYZ$, $BXZ$, $CXY$, $XBC$, $YAC$, $ZAB$, and $XYZ$. If $AB = 6$, what is the volume of $\\mathcal S$?",
+    "image": null,
+    "choices": null,
+    "answer": "108+36*sqrt(5)",
+    "acceptedAnswers": null,
+    "answerUnit": "cubic units",
+    "answerDisplay": "$108 + 36\\sqrt{5}$",
+    "solutions": [
+      {
+        "title": "Hexagonal prism minus six tetrahedra",
+        "body": "**Pentagon diagonals.** In a regular pentagon with side $s$, the diagonal is $\\varphi s$ with $\\varphi = \\frac{1+\\sqrt5}{2}$ (classical: in pentagon $PQRST$, if diagonals $PR$, $QT$ meet at $F$, the triangles $PQR$ and $PFQ$ are similar, giving $d/s = s/(d - s)$, i.e. $d^2 - sd - s^2 = 0$).\n\nIn the icosahedron, $A$ and $Y$ are two non-adjacent vertices of the pentagon formed by the five neighbours of a vertex, so the six slanted edges of $\\mathcal S$ such as $AY$ have length $6\\varphi = 3(1+\\sqrt5)$. (The lines $AX$, $BY$, $CZ$ pass through the centre, so $X, Y, Z$ are the antipodes of $A, B, C$.)\n\n**The prism.** Project $A, B, C$ onto the plane $XYZ$ (getting $A', B', C'$) and $X, Y, Z$ onto the plane $ABC$ ($X', Y', Z'$). By the symmetry of the icosahedron, $AY'CX'BZ'$ is a regular hexagon, and the two hexagons bound a regular hexagonal prism. Its circumradius equals the circumradius of triangle $ABC$, $\\frac{6}{\\sqrt3} = 2\\sqrt3$, so its side is $2\\sqrt3$ and its area is\n$$b = 6\\cdot\\frac{\\sqrt3}{4}(2\\sqrt3)^2 = 18\\sqrt3 .$$\nThe height $h = AA'$ satisfies $AY^2 = h^2 + A'Y^2$, with $A'Y = 2\\sqrt3$ (adjacent hexagon vertices):\n$$h^2 = 9(1 + \\sqrt5)^2 - 12 = 42 + 18\\sqrt5 = \\left(\\sqrt3(3+\\sqrt5)\\right)^2, \\qquad h = \\sqrt3(3 + \\sqrt5).$$\n\n**Subtract.** The prism is the union of $\\mathcal S$ and six congruent tetrahedra $AA'YZ$, $BB'XZ$, $CC'XY$, $XX'BC$, $YY'AC$, $ZZ'AB$. Each has a base like $A'YZ$ of area $\\frac b6$ and height $h$, hence volume $\\frac13\\cdot\\frac b6\\cdot h = \\frac{bh}{18}$. So\n$$V(\\mathcal S) = bh - 6\\cdot\\frac{bh}{18} = \\frac23 bh = \\frac23\\cdot 18\\sqrt3\\cdot\\sqrt3(3+\\sqrt5) = 36(3 + \\sqrt5) = 108 + 36\\sqrt5 .$$\n\n**Answer: $108 + 36\\sqrt5$**"
+      },
+      {
+        "title": "Prismatoid formula",
+        "body": "$\\mathcal S$ is a prismatoid (all vertices in two parallel planes), so $V = \\frac h6\\,(A_1 + A_2 + 4M)$, where $A_1 = A_2$ are the areas of the triangles $ABC$, $XYZ$ and $M$ is the area of the cross-section halfway between them.\n\n* $A_1 = A_2 = \\frac{\\sqrt3}{4}\\cdot 36 = 9\\sqrt3$.\n* Seen from above, the six vertices form a regular hexagon of circumradius $2\\sqrt3$ (alternately from the top and bottom face). The middle cross-section has as vertices the midpoints of the six slanted edges, which project to the midpoints of the hexagon's sides: a regular hexagon of circumradius $2\\sqrt3\\cos30^\\circ = 3$. So $M = \\frac{3\\sqrt3}{2}\\cdot 9 = \\frac{27\\sqrt3}{2}$.\n* $h$ is the distance between opposite faces of the icosahedron: $h = 2r$ with inradius $r = \\frac{\\varphi^2}{2\\sqrt3}\\cdot 6$, so $h = 2\\sqrt3\\,\\varphi^2 = \\sqrt3(3 + \\sqrt5)$ (agreeing with the first solution).\n\nTherefore\n$$V = \\frac{\\sqrt3(3+\\sqrt5)}{6}\\left(18\\sqrt3 + 54\\sqrt3\\right) = 12\\sqrt3\\cdot\\sqrt3\\,(3+\\sqrt5) = 108 + 36\\sqrt5 \\approx 188.50 .$$\n(A coordinate computation with the standard icosahedron vertices $(0, \\pm1, \\pm\\varphi)$ scaled by $3$ gives the same $188.498\\ldots$)\n\n**Answer: $108 + 36\\sqrt5$**"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "spatial"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

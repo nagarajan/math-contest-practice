@@ -1,0 +1,180 @@
+[
+  {
+    "id": "usamts-2001-r4-01",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 13 Round 4 (2001-2002)",
+      "year": 2001,
+      "number": 1,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "In a strange language there are only two letters, $a$ and $b$, and it is postulated that the letter $a$ is a word. Furthermore, all additional words are formed according to the following rules:\n\n* A. Given any word, a new word can be formed from it by adding a $b$ at the righthand end.\n* B. If in any word a sequence $aaa$ appears, a new word can be formed by replacing the $aaa$ by the letter $b$.\n* C. If in any word the sequence $bbb$ appears, a new word can be formed by omitting $bbb$.\n* D. Given any word, a new word can be formed by writing down the sequence that constitutes the given word twice.\n\nFor example, by (D), $aa$ is a word, and by (D) again, $aaaa$ is a word. Hence by (B) $ba$ is a word, and by (A) $bab$ is also a word. Again, by (A), $babb$ is a word, and so by (D), $babbbabb$ is also a word. Finally, by (C) we find that $baabb$ is a word.\n\nProve that in this language $baabaabaa$ is not a word.",
+    "image": null,
+    "choices": null,
+    "answer": "Invariant: the number of $a$'s in a word is never a multiple of 3 (it starts at 1; rules A and C keep it, B subtracts 3, D doubles it). But $baabaabaa$ has 6 $a$'s.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Count the a's modulo 3",
+        "body": "For a word $w$ let $N(w)$ be the number of letters $a$ in $w$. See how each rule changes $N$:\n\n* Rule A adds a $b$: $N$ unchanged.\n* Rule B replaces $aaa$ by $b$: $N$ decreases by 3.\n* Rule C deletes $bbb$: $N$ unchanged.\n* Rule D doubles the word: $N$ is doubled.\n\n**Claim:** every word has $N(w)$ not divisible by 3. The starting word $a$ has $N = 1$. If $3 \\nmid n$, then $3 \\nmid n - 3$ (since $n - 3 \\equiv n \\pmod 3$) and $3 \\nmid 2n$ (since 3 is prime and divides neither 2 nor $n$). So none of the rules can produce a word whose number of $a$'s is a multiple of 3 from one whose number is not. By induction on the number of rule applications, the claim holds for every word.\n\n(In fact $N \\bmod 3$ alternates between 1 and 2: subtracting 3 keeps the residue, doubling swaps $1 \\leftrightarrow 2$.)\n\nThe string $baabaabaa$ contains six $a$'s, and $3 \\mid 6$. Hence it is not a word. ∎"
+      }
+    ],
+    "topics": [
+      "logic",
+      "number-theory"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2001-r4-02",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 13 Round 4 (2001-2002)",
+      "year": 2001,
+      "number": 2,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $f(x) = x \\cdot \\lfloor x \\cdot \\lfloor x \\cdot \\lfloor x \\rfloor \\rfloor \\rfloor$ for all positive real numbers $x$, where $\\lfloor y \\rfloor$ denotes the greatest integer less than or equal to $y$.\n\n(1) Determine $x$ so that $f(x) = 2001$.\n\n(2) Prove that $f(x) = 2002$ has no solution.",
+    "image": null,
+    "choices": null,
+    "answer": "(1) $x = \\frac{2001}{286}$. (2) For $\\frac{2001}{286} < x < 7$ one has $f(x) = 286x < 2002$, while $f(x) \\le 2001$ below that range and $f(x) \\ge 2401$ for $x \\ge 7$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Pin down the nested floors",
+        "body": "**$f$ is non-decreasing.** For $x > 0$, $\\lfloor x \\rfloor$ is non-negative and non-decreasing; so $x\\lfloor x\\rfloor$ is a product of non-negative non-decreasing functions, hence non-decreasing; its floor is too; and so on. So $f$ is non-decreasing. Also $f(6) = 6^4 = 1296$ and $f(7) = 7^4 = 2401$.\n\n**(1)** If $f(x) = 2001$, then $1296 < 2001 < 2401$ forces $6 < x < 7$, so $\\lfloor x \\rfloor = 6$. Let $m = \\lfloor x\\lfloor x \\lfloor x\\rfloor\\rfloor\\rfloor$, an integer, so $x = \\frac{2001}{m}$.\n\n* $6x < 42$, so $\\lfloor 6x \\rfloor \\le 41$; then $x\\lfloor 6x\\rfloor < 7 \\cdot 41 = 287$, so $m \\le 286$.\n* $x < 7$ gives $m = \\frac{2001}{x} > \\frac{2001}{7} = 285.86$, so $m \\ge 286$.\n\nHence $m = 286$ and $x = \\frac{2001}{286} \\approx 6.9965$. **Check:** $\\lfloor x \\rfloor = 6$; $6x = \\frac{12006}{286} \\approx 41.98$, floor $41$; $41x = \\frac{82041}{286} \\approx 286.86$, floor $286$; and $286x = 2001$. ✓\n\n**(2)** Suppose $f(x) = 2002$. Since $f$ is non-decreasing, $f(x) \\le 2001$ for $x \\le \\frac{2001}{286}$ and $f(x) \\ge 2401$ for $x \\ge 7$, so $\\frac{2001}{286} < x < 7$. On this interval:\n* $\\lfloor x \\rfloor = 6$;\n* $41.98 < 6x < 42$, so $\\lfloor 6x \\rfloor = 41$;\n* $286.86 < 41x < 287$, so $\\lfloor 41x \\rfloor = 286$;\n\nso $f(x) = 286x$. Then $286x = 2002$ gives $x = 7$, which is not in the interval. Contradiction — so $f(x) = 2002$ has no solution. (Indeed $f$ jumps from values below $286\\cdot 7 = 2002$ straight to $f(7) = 2401$.) ∎\n\n**Answer:** (1) $x = \\frac{2001}{286}$; (2) proved above."
+      }
+    ],
+    "topics": [
+      "algebra",
+      "number-theory"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2001-r4-03",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 13 Round 4 (2001-2002)",
+      "year": 2001,
+      "number": 3,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Let $f$ be a function defined on the set of all integers, and assume that it satisfies the following properties:\n\n* A. $f(0) \\ne 0$;\n* B. $f(1) = 3$; and\n* C. $f(x)f(y) = f(x + y) + f(x - y)$ for all integers $x$ and $y$.\n\nDetermine $f(7)$.",
+    "image": null,
+    "choices": null,
+    "answer": "843",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Get a recurrence",
+        "body": "* $x = y = 0$: $f(0)^2 = 2f(0)$, and $f(0) \\ne 0$, so $f(0) = 2$.\n* $y = 1$: $3f(x) = f(x+1) + f(x-1)$, i.e. $f(x+1) = 3f(x) - f(x-1)$.\n\nStarting from $f(0) = 2$, $f(1) = 3$:\n$$f(2) = 9 - 2 = 7,\\ f(3) = 21 - 3 = 18,\\ f(4) = 54 - 7 = 47,\\ f(5) = 141 - 18 = 123,\\ f(6) = 369 - 47 = 322,\\ f(7) = 966 - 123 = 843.$$\n\n(Shortcut using C directly: $f(1)f(1) = f(2) + f(0)$ gives $f(2) = 7$; $f(2)f(1) = f(3) + f(1)$ gives $f(3) = 18$; $f(3)f(1) = f(4) + f(2)$ gives $f(4) = 47$; and $f(4)f(3) = f(7) + f(1)$ gives $f(7) = 47\\cdot 18 - 3 = 843$.)\n\n**Such a function exists**, so the answer is meaningful: with $\\varphi = \\frac{1 + \\sqrt5}2$, the function $f(n) = \\varphi^{2n} + \\varphi^{-2n}$ has $f(0) = 2$, $f(1) = \\varphi^2 + \\varphi^{-2} = 3$, and\n$$(\\varphi^{2x} + \\varphi^{-2x})(\\varphi^{2y} + \\varphi^{-2y}) = \\varphi^{2(x+y)} + \\varphi^{-2(x+y)} + \\varphi^{2(x-y)} + \\varphi^{-2(x-y)},$$\nwhich is property C. These values $2, 3, 7, 18, 47, 123, 322, 843$ are every other Lucas number.\n\n**Answer: 843**"
+      },
+      {
+        "title": "Closed form",
+        "body": "As above $f(0) = 2$ and $f(x+1) = 3f(x) - f(x-1)$. The characteristic equation $\\lambda^2 - 3\\lambda + 1 = 0$ has roots $\\lambda_\\pm = \\frac{3 \\pm \\sqrt5}2$ with $\\lambda_+\\lambda_- = 1$ and $\\lambda_+ + \\lambda_- = 3$, so $f(n) = \\lambda_+^n + \\lambda_-^n$ (this matches $f(0) = 2$, $f(1) = 3$).\n\nCompute with $s_n = \\lambda_+^n + \\lambda_-^n$: $s_7 = s_4 s_3 - s_1$ (since $\\lambda_+\\lambda_- = 1$), and $s_2 = 9 - 2 = 7$, $s_3 = s_2 s_1 - s_1 = 18$, $s_4 = s_2^2 - 2 = 47$. So $s_7 = 47\\cdot18 - 3 = 843$.\n\n**Answer: 843**"
+      }
+    ],
+    "topics": [
+      "functional-equations",
+      "sequences-series"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2001-r4-04",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 13 Round 4 (2001-2002)",
+      "year": 2001,
+      "number": 4,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "A certain company has a faulty telephone system that sometimes transposes a pair of adjacent digits when someone dials a three-digit extension. Hence a call to x318 would ring at either x318, x138, or x381, while a call received at x044 would be intended for either x404 or x044. Rather than replace the system, the company is adding a computer to deduce which dialed extensions are in error and revert those numbers to their correct form. They have to leave out several possible extensions for this to work. What is the greatest number of three-digit extensions the company can assign under this plan?",
+    "image": null,
+    "choices": null,
+    "answer": "340",
+    "acceptedAnswers": null,
+    "answerUnit": "extensions",
+    "solutions": [
+      {
+        "title": "Disjoint sets of possible outputs",
+        "body": "When extension $w$ is dialed, the call can arrive at $w$ itself or at $w$ with its first two or last two digits swapped. For the computer to always recover the intended extension, the sets of possible arrivals of the assigned extensions must be **pairwise disjoint**. Swapping digits keeps the multiset of digits, so only extensions using the same three digits can interfere. Split all $1000$ extensions (000–999) by digit pattern:\n\n* **$aaa$** (10 extensions): the only arrival is $aaa$ itself. All 10 can be assigned.\n* **$aab$ type** ($10\\cdot 9 = 90$ digit choices, 3 arrangements each): arrivals of $aab$ are $\\{aab, aba\\}$, of $aba$ are $\\{aba, baa, aab\\}$, of $baa$ are $\\{baa, aba\\}$. All three sets contain $aba$, so only **one** of the three arrangements can be assigned: $90$ extensions.\n* **$abc$ with distinct digits** ($\\binom{10}3 = 120$ digit sets, 6 arrangements each): each extension has 3 different arrivals, all among the 6 arrangements, so at most $6/3 = 2$ assigned extensions per digit set. Two is achievable: $abc$ gives $\\{abc, bac, acb\\}$ and $cba$ gives $\\{cba, bca, cab\\}$, which are disjoint. So $2\\cdot 120 = 240$ extensions.\n\nMaximum: $10 + 90 + 240 = 340$.\n\n**Answer: 340**"
+      },
+      {
+        "title": "The one-third rule",
+        "body": "From the analysis in the first solution: every digit pattern other than $aaa$ allows exactly one third of its arrangements (1 of 3 for $aab$, 2 of 6 for $abc$). There are $1000 - 10 = 990$ such extensions, so the maximum is\n$$10 + \\frac{990}{3} = 340.$$\n(A computer search for the largest conflict-free set in each digit class confirms 340.)\n\n**Answer: 340**"
+      }
+    ],
+    "topics": [
+      "counting",
+      "logic"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2001-r4-05",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 13 Round 4 (2001-2002)",
+      "year": 2001,
+      "number": 5,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Determine the smallest number of squares into which one can dissect a $11 \\times 13$ rectangle, and exhibit such a dissection. The squares need not be of different sizes, their bases should be integers, and they should not overlap.",
+    "image": null,
+    "choices": null,
+    "answer": "6",
+    "acceptedAnswers": null,
+    "answerUnit": "squares",
+    "solutions": [
+      {
+        "title": "A dissection, and why 5 squares are not enough",
+        "body": "**Six squares suffice.** Take squares of sides $7, 6, 5, 4, 4, 1$ (areas $49 + 36 + 25 + 16 + 16 + 1 = 143 = 11 \\cdot 13$), placed as follows in a rectangle 13 wide and 11 high (each letter marks the unit cells of one square: $A = 7\\times7$, $B = 6\\times6$, $C = 5\\times5$, $D$ and $E$ are $4\\times4$, $F = 1\\times1$):\n$$\\begin{array}{ccccccccccccc}\nA & A & A & A & A & A & A & B & B & B & B & B & B\\\\A & A & A & A & A & A & A & B & B & B & B & B & B\\\\A & A & A & A & A & A & A & B & B & B & B & B & B\\\\A & A & A & A & A & A & A & B & B & B & B & B & B\\\\A & A & A & A & A & A & A & B & B & B & B & B & B\\\\A & A & A & A & A & A & A & B & B & B & B & B & B\\\\A & A & A & A & A & A & A & F & C & C & C & C & C\\\\D & D & D & D & E & E & E & E & C & C & C & C & C\\\\D & D & D & D & E & E & E & E & C & C & C & C & C\\\\D & D & D & D & E & E & E & E & C & C & C & C & C\\\\D & D & D & D & E & E & E & E & C & C & C & C & C\n\\end{array}$$\nTop edge: $7 + 6 = 13$; bottom edge: $4 + 4 + 5 = 13$; left edge: $7 + 4 = 11$; right edge: $6 + 5 = 11$; the $1\\times1$ square fills the notch between $A$, $B$, $C$, $E$.\n\n**Five squares do not suffice.** Suppose the rectangle (width 13, height 11) is dissected into at most 5 squares.\n\n*No square covers two corners.* Such a square would have side $\\ge 11$, so it is an $11\\times 11$ square along a short side, leaving an $11 \\times 2$ strip. Squares in that strip have side $\\le 2$, so each covers at most 2 of the 11 unit lengths of the strip — at least 6 more squares, 7 in total.\n\nSo the four corners lie in four different squares, with sides $a$ (top-left), $b$ (top-right), $c$ (bottom-right), $d$ (bottom-left), and there is at most one more square, of side $e$. Each edge of the rectangle is exactly covered by the edges of the squares touching it.\n\n* If no other square touches the boundary, then $a + b = 13$, $b + c = 11$, $c + d = 13$, $d + a = 11$. The first two give $a - c = 2$, the last two give $c - a = 2$ — contradiction.\n* The extra square cannot touch two adjacent edges (it would contain a corner), and it cannot touch two opposite edges: it would need side 11 and then $a + b = c + d = 2$, so $a = b = c = d = 1$, but then the left edge has length $a + d = 2 \\neq 11$.\n* If it touches only a vertical (length-11) edge, say the right one: $a + b = 13$, $c + d = 13$, $d + a = 11$, $b + c + e = 11$. Adding the first two and subtracting the third: $b + c = 15$, so $e = -4$ — impossible.\n* If it touches only a horizontal (length-13) edge, say the top: $a + b + e = 13$, $b + c = 11$, $c + d = 13$, $d + a = 11$. Then $a = 11 - d$, $c = 13 - d$, $b = d - 2$, $e = 4$. The areas must add up:\n$$(11-d)^2 + (d-2)^2 + (13-d)^2 + d^2 + 16 = 143 \\iff 4d^2 - 52d + 167 = 0,$$\nwhose discriminant $52^2 - 16\\cdot 167 = 32$ is not a perfect square — no integer $d$.\n\nHence at least 6 squares are needed, and 6 is achieved. (An exhaustive computer search over all ways of tiling the $11\\times13$ rectangle with integer squares confirms that no tiling with 5 or fewer squares exists.)\n\n**Answer: 6 squares** (sides $7, 6, 5, 4, 4, 1$ as shown)."
+      }
+    ],
+    "topics": [
+      "geometry",
+      "logic"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

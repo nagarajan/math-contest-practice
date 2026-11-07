@@ -1,0 +1,188 @@
+[
+  {
+    "id": "usamts-2007-r3-01",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 19 Round 3 (2007-2008)",
+      "year": 2007,
+      "number": 1,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "We construct a sculpture consisting of infinitely many cubes, as follows. Start with a cube with side length 1. Then, at the center of each face, attach a cube with side length $\\frac13$ (so that the center of a face of each attached cube is the center of a face of the original cube). Continue this procedure indefinitely: at the center of each exposed face of a cube in the structure, attach (in the same fashion) a smaller cube with side length one-third that of the exposed face. What is the volume of the entire sculpture?",
+    "image": null,
+    "choices": null,
+    "answer": "14/11",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "answerDisplay": "$\\frac{14}{11}$",
+    "solutions": [
+      {
+        "title": "Geometric series",
+        "body": "Count the cubes by generation.\n* Generation $0$: one cube of volume $1$.\n* Generation $1$: one cube on each of the $6$ faces, side $\\frac13$, volume $\\frac1{27}$ each.\n* Each new cube is attached by one face, so it has $5$ exposed faces, each of which receives a cube one-third as large. Hence generation $n \\ge 1$ has $6\\cdot 5^{n-1}$ cubes, each of volume $\\left(\\frac1{27}\\right)^n$.\n\n(The cubes do not overlap: everything growing out of the $+x$ face of the unit cube stays within $|y|, |z| \\le \\frac16 + \\frac19 + \\frac1{27} + \\dots = \\frac16 + \\frac16 = \\frac13 < \\frac12$, so the six branches are disjoint from each other and from the unit cube; the same argument works at every scale.)\n\nTotal volume:\n$$1 + \\sum_{n=1}^\\infty 6\\cdot 5^{n-1}\\cdot\\frac1{27^n} = 1 + \\frac{6}{27}\\sum_{m=0}^\\infty\\left(\\frac{5}{27}\\right)^m = 1 + \\frac{6/27}{1 - 5/27} = 1 + \\frac{6}{22} = \\frac{14}{11}.$$\n\n**Answer: $\\frac{14}{11}$**"
+      },
+      {
+        "title": "Self-similarity",
+        "body": "Let $V$ be the volume of one \"branch\": a cube of side $1$ attached by one face, together with everything that grows on its other $5$ faces. Each of those 5 faces carries a copy of the branch scaled by $\\frac13$, whose volume is $\\frac{V}{27}$. So\n$$V = 1 + 5\\cdot\\frac{V}{27} \\implies V = \\frac{27}{22}.$$\nThe whole sculpture is the unit cube plus $6$ branches scaled by $\\frac13$:\n$$1 + 6\\cdot\\frac{1}{27}\\cdot\\frac{27}{22} = 1 + \\frac{3}{11} = \\frac{14}{11}.$$\n\n**Answer: $\\frac{14}{11}$**"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "sequences-series"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2007-r3-02",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 19 Round 3 (2007-2008)",
+      "year": 2007,
+      "number": 2,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Gene starts with the $3\\times 3$ grid of 0's shown at left below. He then repeatedly chooses a $2\\times 2$ square within the grid and increases all four numbers in the chosen $2\\times 2$ square by 1. One possibility for Gene's first three steps is shown below.\n$$\\begin{array}{|c|c|c|}\\hline 0&0&0\\\\\\hline 0&0&0\\\\\\hline 0&0&0\\\\\\hline\\end{array}\\ \\to\\ \\begin{array}{|c|c|c|}\\hline 0&0&0\\\\\\hline 1&1&0\\\\\\hline 1&1&0\\\\\\hline\\end{array}\\ \\to\\ \\begin{array}{|c|c|c|}\\hline 0&1&1\\\\\\hline 1&2&1\\\\\\hline 1&1&0\\\\\\hline\\end{array}\\ \\to\\ \\begin{array}{|c|c|c|}\\hline 0&1&1\\\\\\hline 2&3&1\\\\\\hline 2&2&0\\\\\\hline\\end{array}$$\nHow many different grids can be produced with this method such that each box contains an integer from 1 to 12, inclusive? (The numbers in the boxes need not be distinct.)",
+    "image": null,
+    "choices": null,
+    "answer": "495",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Stars and bars",
+        "body": "Let $a, b, c, d$ be the numbers of times Gene chooses the top-left, top-right, bottom-left and bottom-right $2\\times2$ squares. The final grid depends only on these counts (not on the order):\n$$\\begin{array}{|c|c|c|}\\hline a & a+b & b\\\\\\hline a+c & a+b+c+d & b+d\\\\\\hline c & c+d & d\\\\\\hline\\end{array}$$\nDifferent quadruples give different grids, since the corners are $a, b, c, d$.\n\nAll entries lie in $[1, 12]$ exactly when the corners are $\\ge 1$ (then every entry is $\\ge 1$) and the centre $a + b + c + d \\le 12$ (the centre is the largest entry). So we count positive integers with $a + b + c + d \\le 12$.\n\nPut $e = 13 - a - b - c - d \\ge 1$. Then $a + b + c + d + e = 13$ in positive integers: place 4 dividers in the 12 gaps between 13 objects in a row, giving\n$$\\binom{12}{4} = 495 .$$\n\n**Answer: $495$**"
+      },
+      {
+        "title": "Sum by the centre value",
+        "body": "With $a, b, c, d$ as in the first solution, the number of positive solutions of $a + b + c + d = k$ is $\\binom{k-1}{3}$. Summing over the possible centre values $k = 4, \\dots, 12$:\n$$\\binom33 + \\binom43 + \\dots + \\binom{11}{3} = 1 + 4 + 10 + 20 + 35 + 56 + 84 + 120 + 165 = 495,$$\nwhich is $\\binom{12}{4}$ by the hockey-stick identity.\n\n**Answer: $495$**"
+      }
+    ],
+    "topics": [
+      "counting"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2007-r3-03",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 19 Round 3 (2007-2008)",
+      "year": 2007,
+      "number": 3,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Consider all polynomials $f(x)$ with integer coefficients such that $f(200) = f(7) = 2007$ and $0 < f(0) < 2007$. Show that the value of $f(0)$ does not depend on the choice of polynomial, and find $f(0)$.",
+    "image": null,
+    "choices": null,
+    "answer": "607",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Congruences and CRT",
+        "body": "For a polynomial with integer coefficients, $f(x) = x\\,g(x) + f(0)$ with $g$ having integer coefficients, so $f(n) \\equiv f(0) \\pmod n$ for every integer $n$. Hence\n$$f(0) \\equiv 2007 \\pmod 7, \\qquad f(0) \\equiv 2007 \\pmod{200}.$$\nSince $\\gcd(7, 200) = 1$, the Chinese Remainder Theorem gives $f(0) \\equiv 2007 \\equiv 607 \\pmod{1400}$. The only number in $(0, 2007)$ congruent to $607$ modulo $1400$ is $607$ (the next ones are $-793$ and $2007$). So $f(0) = 607$ for every such polynomial.\n\nSuch polynomials exist, e.g. $f(x) = 2007 - (x - 7)(x - 200)$, which has $f(0) = 2007 - 1400 = 607$.\n\n**Answer: $f(0) = 607$**"
+      },
+      {
+        "title": "Factor out the roots",
+        "body": "The polynomial $f(x) - 2007$ has integer coefficients and roots $7$ and $200$. Dividing by the monic polynomial $(x-7)(x-200)$ keeps integer coefficients, so\n$$f(x) = 2007 + (x-7)(x-200)\\,g(x)$$\nwith $g$ having integer coefficients. Then $f(0) = 2007 + 1400\\,g(0)$ with $g(0)$ an integer. The condition $0 < f(0) < 2007$ forces $-\\frac{2007}{1400} < g(0) < 0$, i.e. $g(0) = -1$, so $f(0) = 607$.\n\n**Answer: $f(0) = 607$**"
+      }
+    ],
+    "topics": [
+      "polynomials",
+      "number-theory"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2007-r3-04",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 19 Round 3 (2007-2008)",
+      "year": 2007,
+      "number": 4,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Prove that $101$ divides infinitely many of the numbers in the set\n$$\\{2007,\\ 20072007,\\ 200720072007,\\ 2007200720072007,\\ \\dots\\}.$$",
+    "image": null,
+    "choices": null,
+    "answer": "Since $10^4 \\equiv 1 \\pmod{101}$, the number made of $n$ blocks \"2007\" is $\\equiv 2007n \\equiv 88n \\pmod{101}$; it is divisible by $101$ whenever $101 \\mid n$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Reduce the blocks modulo 101",
+        "body": "Let $N_n$ be the number consisting of $n$ copies of $2007$. Then\n$$N_n = 2007\\left(1 + 10^4 + 10^8 + \\dots + 10^{4(n-1)}\\right).$$\nSince $10^2 = 100 \\equiv -1 \\pmod{101}$, we get $10^4 \\equiv 1 \\pmod{101}$, so every term $10^{4k} \\equiv 1$ and\n$$N_n \\equiv 2007\\,n \\pmod{101}.$$\nNow $2007 = 19\\cdot 101 + 88$, so $N_n \\equiv 88n \\pmod{101}$. Since $101$ is prime and does not divide $88$, $101 \\mid N_n$ exactly when $101 \\mid n$. In particular $N_{101}, N_{202}, N_{303}, \\dots$ are all divisible by $101$, which gives infinitely many. ∎"
+      },
+      {
+        "title": "Pigeonhole",
+        "body": "Consider $N_1, N_2, \\dots, N_{102}$. Two of them, say $N_i$ and $N_j$ with $i < j$, leave the same remainder modulo $101$, so $101 \\mid N_j - N_i = N_{j-i}\\cdot 10^{4i}$. Since $\\gcd(101, 10) = 1$, $101 \\mid N_{j-i}$. So some $N_k$ ($k \\ge 1$) is divisible by $101$.\n\nThen all $N_{k}, N_{2k}, N_{3k}, \\dots$ are divisible by $101$, because $N_{mk} = N_k\\left(1 + 10^{4k} + 10^{8k} + \\dots + 10^{4k(m-1)}\\right)$. Hence infinitely many members of the set are multiples of $101$. ∎"
+      }
+    ],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2007-r3-05",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 19 Round 3 (2007-2008)",
+      "year": 2007,
+      "number": 5,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "For every rational number $0 < \\frac pq < 1$, where $p$ and $q$ are relatively prime, construct a circle with center $\\left(\\frac pq, \\frac{1}{2q^2}\\right)$ and diameter $\\frac{1}{q^2}$. Also construct circles centered at $\\left(0, \\frac12\\right)$ and $\\left(1, \\frac12\\right)$ with diameter 1.\n\n(a) Prove that any two such circles intersect in at most 1 point.\n\n(b) Prove that the total area of all of the circles is\n$$\\frac{\\pi}{4}\\left(1 + \\frac{\\displaystyle\\sum_{i=1}^\\infty \\frac{1}{i^3}}{\\displaystyle\\sum_{i=1}^\\infty\\frac{1}{i^4}}\\right).$$",
+    "image": null,
+    "choices": null,
+    "answer": "(a) For circles at $\\frac{r_1}{s_1} \\neq \\frac{r_2}{s_2}$ (both tangent to the $x$-axis from above), $d^2 - (\\rho_1 + \\rho_2)^2 = \\frac{(r_1s_2 - r_2s_1)^2 - 1}{s_1^2s_2^2} \\ge 0$, so they never cross. (b) Count the pairs $0 \\le a \\le b$ with weight $\\frac1{b^4}$ in two ways: $\\sum_b \\frac{b+1}{b^4} = \\left(\\sum_{(r,s)} \\frac{1}{s^4}\\right)\\sum_n \\frac1{n^4}$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Distance of centres, then a double count",
+        "body": "**Setup.** Index the circles by pairs $(r, s)$ of integers with $s \\ge 1$, $0 \\le r \\le s$ and $\\gcd(r, s) = 1$: the circle has centre $\\left(\\frac rs, \\frac{1}{2s^2}\\right)$ and radius $\\frac1{2s^2}$. The pairs $(0,1)$ and $(1,1)$ give the two circles of diameter 1, and the other pairs give the circles for $0 < \\frac pq < 1$. Distinct pairs give distinct fractions $\\frac rs$.\n\n**(a)** The radius of each circle equals the $y$-coordinate of its centre, so each circle lies in the upper half-plane and touches the $x$-axis at $\\left(\\frac rs, 0\\right)$. Take two circles $(r_1, s_1) \\ne (r_2, s_2)$. Since they touch the axis at different points, neither can lie inside the other or be internally tangent to it; so they meet in two points exactly when the distance $d$ between their centres is less than the sum of radii $\\rho = \\frac1{2s_1^2} + \\frac1{2s_2^2}$. Compute\n$$d^2 - \\rho^2 = \\left(\\frac{r_1}{s_1} - \\frac{r_2}{s_2}\\right)^2 + \\frac14\\left(\\frac1{s_1^2} - \\frac1{s_2^2}\\right)^2 - \\frac14\\left(\\frac1{s_1^2} + \\frac1{s_2^2}\\right)^2 = \\left(\\frac{r_1}{s_1} - \\frac{r_2}{s_2}\\right)^2 - \\frac{1}{s_1^2s_2^2} = \\frac{(r_1s_2 - r_2s_1)^2 - 1}{s_1^2 s_2^2}.$$\nSince $\\frac{r_1}{s_1} \\ne \\frac{r_2}{s_2}$, the integer $r_1s_2 - r_2s_1$ is nonzero, so its square is at least $1$ and $d^2 - \\rho^2 \\ge 0$, i.e. $d \\ge \\rho$. Hence the two circles are either disjoint or externally tangent: they share at most one point. (Tangency does occur, e.g. for $(0,1)$ and $(1,1)$.)\n\n**(b)** The circle $(r, s)$ has area $\\pi\\left(\\frac1{2s^2}\\right)^2 = \\frac{\\pi}{4s^4}$, so we must show $\\sum_{(r,s)} \\frac{1}{s^4} = 1 + \\frac{\\zeta(3)}{\\zeta(4)}$, where $\\zeta(k) = \\sum_{i\\ge1} i^{-k}$.\n\nConsider all pairs of integers $(a, b)$ with $0 \\le a \\le b$, $b \\ge 1$, each weighted by $\\frac1{b^4}$. All series below have positive terms and converge, so they may be rearranged freely.\n* Summing over $b$ first: for each $b$ there are $b + 1$ choices of $a$, so the total is $\\sum_{b\\ge1}\\frac{b+1}{b^4} = \\zeta(3) + \\zeta(4)$.\n* Every such pair can be written uniquely as $(a, b) = (nr, ns)$ with $n = \\gcd(a, b) \\ge 1$ (note $\\gcd(0, b) = b$) and $(r, s)$ one of our index pairs. So the total is also\n$$\\sum_{(r,s)}\\sum_{n\\ge1}\\frac{1}{n^4s^4} = \\zeta(4)\\sum_{(r,s)}\\frac1{s^4}.$$\n\nEquating, $\\sum_{(r,s)} \\frac1{s^4} = \\frac{\\zeta(3) + \\zeta(4)}{\\zeta(4)} = 1 + \\frac{\\zeta(3)}{\\zeta(4)}$, and multiplying by $\\frac\\pi4$ gives the total area\n$$\\frac\\pi4\\left(1 + \\frac{\\sum_{i\\ge1} 1/i^3}{\\sum_{i\\ge1} 1/i^4}\\right).$$\n(By (a) the circles do not overlap, so this is also the area of their union.) ∎"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "number-theory",
+      "sequences-series"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

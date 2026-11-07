@@ -1,0 +1,177 @@
+[
+  {
+    "id": "usamts-2012-r1-01",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 24 Round 1 (2012-2013)",
+      "year": 2012,
+      "number": 1,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Several children were playing in the ugly tree when suddenly they all fell.\n\n* Roger hit branches $A$, $B$, and $C$ in that order on the way down.\n* Sue hit branches $D$, $E$, and $F$ in that order on the way down.\n* Gillian hit branches $G$, $A$, and $C$ in that order on the way down.\n* Marcellus hit branches $B$, $D$, and $H$ in that order on the way down.\n* Juan-Phillipe hit branches $I$, $C$, and $E$ in that order on the way down.\n\nPoor Mikey hit every branch $A$ through $I$ on the way down. Given only this information, in how many different orders could he have hit these 9 branches on the way down?",
+    "image": null,
+    "choices": null,
+    "answer": "33",
+    "acceptedAnswers": null,
+    "answerUnit": "orders",
+    "solutions": [
+      {
+        "title": "Build the main chain, then insert H and I",
+        "body": "Write $X < Y$ for \"$X$ is hit before $Y$\". The facts are $A<B<C$, $D<E<F$, $G<A<C$, $B<D<H$ and $I<C<E$. Combining them:\n$$G < A < B, \\qquad B < C < E, \\qquad B < D < E < F, \\qquad D < H, \\qquad I < C.$$\nSo the seven branches $G, A, B, C, D, E, F$ come in the order $G, A, B$, then $C$ and $D$ in either order, then $E, F$. The only conditions on $H$ and $I$ are that $H$ comes after $D$ and $I$ comes before $C$.\n\n**Case 1: $C$ before $D$.** The chain is $G, A, B, C, D, E, F$. Branch $I$ goes into one of the 4 gaps before $C$, and $H$ into one of the 3 gaps after $D$. These gaps are disjoint, so there are $4 \\cdot 3 = 12$ orders.\n\n**Case 2: $D$ before $C$.** The chain is $G, A, B, D, C, E, F$. Branch $I$ has 5 gaps before $C$, and $H$ has 4 gaps after $D$. They share one gap (between $D$ and $C$), and if both go there they can be in either order. That gives $5 \\cdot 4 + 1 = 21$ orders.\n\nTotal: $12 + 21 = 33$ (a computer check of all $9!$ orders agrees).\n\n**Answer: $33$**"
+      }
+    ],
+    "topics": [
+      "counting",
+      "logic"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2012-r1-02",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 24 Round 1 (2012-2013)",
+      "year": 2012,
+      "number": 2,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Three wooden equilateral triangles of side length 18 inches are placed on axles as shown in the diagram. Each axle is 30 inches from the other two axles. A 144-inch leather band is wrapped around the wooden triangles, and a dot at the top corner is painted as shown. The three triangles are then rotated at the same speed and the band rotates without slipping or stretching. Compute the length of the path that the dot travels before it returns to its initial position at the top corner.",
+    "image": "qimages/usamts/2012-r1/q02.webp",
+    "choices": null,
+    "answer": "(24*sqrt(3)+8)*pi",
+    "acceptedAnswers": null,
+    "answerUnit": "inches",
+    "answerDisplay": "$(24\\sqrt3 + 8)\\pi$ inches",
+    "solutions": [
+      {
+        "title": "Follow the dot one third-turn at a time",
+        "body": "Call a third of a turn of the triangles a *thirn*, and label the top triangle $A$ and the others $B$ and $C$. During one thirn each triangle turns through $120^\\circ$ and feeds one side length, $18$ inches, of band. So after each thirn the dot is 18 inches further along the band. The band is 144 inches long, so the dot returns after $144/18 = 8$ thirns, which is one trip around the band.\n\n* **Thirn 1.** The dot sits at a vertex of $A$ and turns with it on a circle of radius $\\frac{18}{\\sqrt3} = 6\\sqrt3$ (the circumradius) through $120^\\circ$. It travels $\\frac{2\\pi}{3}\\cdot 6\\sqrt3 = 4\\sqrt3\\,\\pi$.\n* **Thirn 2.** The dot is now on the straight part of the band between corners of $A$ and $B$. Those two corners stay 30 inches apart and turn in the same way, so this part of the band moves by translation. Every point on it, including the dot, traces a congruent copy of a corner's arc: $4\\sqrt3\\,\\pi$ again.\n* **Thirn 3.** The dot now lies on the band along a side of $B$, at distance 6 from $B$'s centre, and turns with $B$ through $120^\\circ$: $\\frac{2\\pi}3\\cdot 6 = 4\\pi$.\n* **Thirn 4.** This is like thirn 2, giving $4\\sqrt3\\,\\pi$, and the dot ends at the middle of the bottom section of the band.\n* **Thirns 5–8.** These mirror thirns 1–4.\n\nThe total is $6\\cdot 4\\sqrt3\\,\\pi + 2\\cdot 4\\pi = (24\\sqrt3 + 8)\\pi \\approx 155.7$ inches.\n\n**Answer: $(24\\sqrt3 + 8)\\pi$ inches**"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "measurement"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2012-r1-03",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 24 Round 1 (2012-2013)",
+      "year": 2012,
+      "number": 3,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "The **symmetric difference**, $\\triangle$, of a pair of sets is the set of elements in exactly one set. For example,\n$$\\{1,2,3\\} \\triangle \\{2,3,4\\} = \\{1,4\\}.$$\nThere are fifteen nonempty subsets of $\\{1,2,3,4\\}$. Assign each subset to exactly one of the squares in the grid shown so that the following conditions are satisfied.\n\n(i) If $A$ and $B$ are in squares connected by a solid line then $A \\triangle B$ has exactly one element.\n\n(ii) If $A$ and $B$ are in squares connected by a dashed line then the largest element of $A$ is equal to the largest element of $B$.\n\nYou do not need to prove that your configuration is the only one possible; you merely need to find a configuration that satisfies the constraints above. (Note: In any other USAMTS problem, you need to provide a full proof. Only in this problem is an answer without justification acceptable.)",
+    "image": "qimages/usamts/2012-r1/q03.webp",
+    "choices": null,
+    "answer": "$$\\begin{array}{cccc} \\{1,3\\} & \\{1,3,4\\} & \\{1,4\\} & \\{1\\}\\\\ \\{1,2,3\\} & \\{2,3\\} & \\{1,2,4\\} & \\{1,2,3,4\\}\\\\ \\{1,2\\} & \\{3\\} & \\{3,4\\} & \\{2,3,4\\}\\\\ \\{2\\} & \\{2,4\\} & \\{4\\} & \\end{array}$$",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "The unique assignment, checked",
+        "body": "Number the squares $1$–$4$ in the top row, $5$–$8$ in the second, $9$–$12$ in the third and $13$–$15$ in the bottom row, left to right. Reading the figure:\n* solid lines join $1\\!-\\!2$, $2\\!-\\!3$, $3\\!-\\!4$, $1\\!-\\!5$, $3\\!-\\!7$, $5\\!-\\!6$, $7\\!-\\!8$, $5\\!-\\!9$, $6\\!-\\!10$, $8\\!-\\!12$, $10\\!-\\!11$, $11\\!-\\!12$, $11\\!-\\!15$, $13\\!-\\!14$, $14\\!-\\!15$;\n* dashed lines join $1\\!-\\!6$, $2\\!-\\!7$, $5\\!-\\!10$, $8\\!-\\!11$, $9\\!-\\!13$, $11\\!-\\!14$.\n\nA solid line means the two sets differ by adding or removing one element. A dashed line means they have the same maximum. The assignment is\n$$\\begin{array}{cccc} \\{1,3\\} & \\{1,3,4\\} & \\{1,4\\} & \\{1\\}\\\\ \\{1,2,3\\} & \\{2,3\\} & \\{1,2,4\\} & \\{1,2,3,4\\}\\\\ \\{1,2\\} & \\{3\\} & \\{3,4\\} & \\{2,3,4\\}\\\\ \\{2\\} & \\{2,4\\} & \\{4\\} & \\end{array}$$\n\n**Check, solid lines** (the element that changes): $1\\!-\\!2$: 4; $2\\!-\\!3$: 3; $3\\!-\\!4$: 4; $1\\!-\\!5$: 2; $3\\!-\\!7$: 2; $5\\!-\\!6$: 1; $7\\!-\\!8$: 3; $5\\!-\\!9$: 3; $6\\!-\\!10$: 2; $8\\!-\\!12$: 1; $10\\!-\\!11$: 4; $11\\!-\\!12$: 2; $11\\!-\\!15$: 3; $13\\!-\\!14$: 4; $14\\!-\\!15$: 2.\n\n**Check, dashed lines** (common maximum):\n* $\\{1,3\\}, \\{2,3\\}$: 3\n* $\\{1,3,4\\}, \\{1,2,4\\}$: 4\n* $\\{1,2,3\\}, \\{3\\}$: 3\n* $\\{1,2,3,4\\}, \\{3,4\\}$: 4\n* $\\{1,2\\}, \\{2\\}$: 2\n* $\\{3,4\\}, \\{2,4\\}$: 4\n\nAll fifteen nonempty subsets appear exactly once. (A computer check confirms that every constraint holds.)"
+      }
+    ],
+    "topics": [
+      "logic",
+      "counting"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2012-r1-04",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 24 Round 1 (2012-2013)",
+      "year": 2012,
+      "number": 4,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $\\lfloor x\\rfloor$ denote the greatest integer less than or equal to $x$. Let $m$ be a positive integer, $m \\ge 3$. For every integer $i$ with $1 \\le i \\le m$, let\n$$S_{m,i} = \\left\\{ \\left\\lfloor \\frac{2^m - 1}{2^{i-1}}\\,n - 2^{m-i} + 1 \\right\\rfloor : n = 1, 2, 3, \\dots \\right\\}.$$\nFor example, for $m = 3$,\n$$\\begin{aligned}\nS_{3,1} &= \\{\\lfloor 7n - 3\\rfloor : n = 1, 2, 3, \\dots\\} = \\{4, 11, 18, \\dots\\},\\\\\nS_{3,2} &= \\left\\{\\left\\lfloor \\tfrac72 n - 1\\right\\rfloor : n = 1, 2, 3, \\dots\\right\\} = \\{2, 6, 9, \\dots\\},\\\\\nS_{3,3} &= \\left\\{\\left\\lfloor \\tfrac74 n\\right\\rfloor : n = 1, 2, 3, \\dots\\right\\} = \\{1, 3, 5, \\dots\\}.\n\\end{aligned}$$\nProve that for all $m \\ge 3$, each positive integer occurs in exactly one of the sets $S_{m,i}$.",
+    "image": null,
+    "choices": null,
+    "answer": "Write $f_i(n) = \\frac{2^m-1}{2^{i-1}}n - 2^{m-i} + 1 = 2^{m-i}(2n-1) + \\frac{2^{i-1} - n}{2^{i-1}}$. For $1 \\le n \\le 2^{i-1}$ the floor is $2^{m-i}(2n-1)$, the numbers below $2^m$ with exactly $m - i$ trailing binary zeros, and $f_i(n + 2^{i-1}) = f_i(n) + 2^m - 1$. So $S_{m,i}$ is the set of positive integers whose residue mod $2^m - 1$ (taken in $1, \\dots, 2^m-1$) has exactly $m - i$ trailing zeros; these classes partition the positive integers.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "One period: binary trailing zeros",
+        "body": "Let $f_i(n) = \\frac{2^m - 1}{2^{i-1}}n - 2^{m-i} + 1$. Expanding,\n$$f_i(n) = 2^{m-i+1}n - \\frac{n}{2^{i-1}} - 2^{m-i} + 1 = 2^{m-i}(2n - 1) + \\frac{2^{i-1} - n}{2^{i-1}}.$$\n\n**One period.** For $1 \\le n \\le 2^{i-1}$ the last fraction lies in $[0, 1)$, so\n$$\\lfloor f_i(n)\\rfloor = 2^{m-i}(2n - 1).$$\nAs $n$ runs from $1$ to $2^{i-1}$ these are the odd multiples of $2^{m-i}$ from $2^{m-i}$ up to $2^m - 2^{m-i}$. That is, they form the set $T_i$ of all integers in $[1, 2^m - 1]$ whose binary expansion ends in exactly $m - i$ zeros.\n\n**Periodicity.** $f_i(n + 2^{i-1}) = f_i(n) + (2^m - 1)$, so\n$$S_{m,i} = \\{t + k(2^m - 1) : t \\in T_i,\\ k = 0, 1, 2, \\dots\\}.$$\n\n**Partition.** Every positive integer $N$ can be written uniquely as $N = t + k(2^m - 1)$ with $t \\in \\{1, \\dots, 2^m - 1\\}$ and $k \\ge 0$. Since $1 \\le t < 2^m$, the number of trailing zeros of $t$ is some $j \\in \\{0, 1, \\dots, m - 1\\}$, and $t$ lies in $T_i$ exactly for $i = m - j \\in \\{1, \\dots, m\\}$. Hence $N$ lies in $S_{m,i}$ for exactly one $i$. ∎\n\n*(Example: for $m = 3$, $T_1 = \\{4\\}$, $T_2 = \\{2, 6\\}$, $T_3 = \\{1, 3, 5, 7\\}$, matching the listed sets. A computer check for $m = 3, \\dots, 8$ confirms the partition of $1, \\dots, 5000$.)*"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "sequences-series"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2012-r1-05",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 24 Round 1 (2012-2013)",
+      "year": 2012,
+      "number": 5,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "An ordered quadruple $(y_1, y_2, y_3, y_4)$ is **quadratic** if there exist real numbers $a$, $b$, and $c$ such that\n$$y_n = an^2 + bn + c$$\nfor $n = 1, 2, 3, 4$.\n\nProve that if 16 numbers are placed in a $4 \\times 4$ grid such that all four rows are quadratic and the first three columns are also quadratic then the fourth column must also be quadratic.\n\n(We say that a row is quadratic if its entries, in order, are quadratic. We say the same for a column.)",
+    "image": null,
+    "choices": null,
+    "answer": "$(y_1,y_2,y_3,y_4)$ is quadratic iff $y_4 - 3y_3 + 3y_2 - y_1 = 0$ (third finite difference). With $w = (-1, 3, -3, 1)$, the double sum $\\sum_{i,j} w_iw_ja_{ij}$ equals both $\\sum_i w_i r_i$ (row conditions) and $\\sum_j w_j c_j$ (column conditions); all $r_i = 0$ and $c_1 = c_2 = c_3 = 0$ force $c_4 = 0$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Third differences and a symmetric double sum",
+        "body": "**Lemma.** $(y_1, y_2, y_3, y_4)$ is quadratic if and only if $y_4 - 3y_3 + 3y_2 - y_1 = 0$.\n\n*Proof.* If $y_n = f(n)$ with $f(x) = ax^2 + bx + c$, then $f(n+1) - f(n) = 2an + a + b$, and the second difference is constantly $2a$. So\n$$y_3 - 2y_2 + y_1 = 2a = y_4 - 2y_3 + y_2,$$\nwhich gives $y_4 - 3y_3 + 3y_2 - y_1 = 0$. Conversely, there is always a quadratic (or lower-degree) $f$ with $f(1) = y_1$, $f(2) = y_2$, $f(3) = y_3$ (Lagrange interpolation). By the first part $f(4) = 3y_3 - 3y_2 + y_1$, which equals $y_4$ by hypothesis. ∎\n\n**The grid.** Let $a_{ij}$ be the entry in row $i$, column $j$, and $w = (w_1, w_2, w_3, w_4) = (-1, 3, -3, 1)$. Define\n$$r_i = \\sum_j w_ja_{ij}, \\qquad c_j = \\sum_i w_ia_{ij}.$$\nBy the lemma, row $i$ is quadratic iff $r_i = 0$, and column $j$ iff $c_j = 0$. Now\n$$\\sum_i w_ir_i = \\sum_{i,j} w_iw_ja_{ij} = \\sum_j w_jc_j.$$\nThe hypotheses give $r_1 = r_2 = r_3 = r_4 = 0$ and $c_1 = c_2 = c_3 = 0$, so the left side is $0$ and the right side is $w_4c_4 = c_4$. Hence $c_4 = 0$, and the fourth column is quadratic. ∎\n\n*(The same argument shows that for an $n\\times n$ grid, if all rows and $n - 1$ columns are values of polynomials of degree at most $n - 2$, so is the last column.)*"
+      },
+      {
+        "title": "Linear algebra: the dimension count",
+        "body": "The quadratic quadruples form the 3-dimensional subspace $V = \\ker\\phi \\subset \\mathbb R^4$, where $\\phi(y) = y_4 - 3y_3 + 3y_2 - y_1$, i.e. $\\phi(y) = w^{T}y$ with $w = (-1, 3, -3, 1)^T$. View the grid as a matrix $M$. Rows in $V$ means $M w = 0$, and columns $1$–$3$ in $V$ means the first three entries of $w^{T}M$ vanish, where $w = (-1, 3, -3, 1)^T$. Then $w^{T}Mw = w^{T}(Mw) = 0$. Also $w^{T}Mw = (w^{T}M)w = (w^{T}M)_4\\cdot w_4 = (w^{T}M)_4$, so the fourth entry of $w^{T}M$, which is $\\phi(\\text{column }4)$, is $0$. ∎"
+      }
+    ],
+    "topics": [
+      "algebra",
+      "polynomials"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

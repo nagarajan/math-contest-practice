@@ -1,0 +1,198 @@
+[
+  {
+    "id": "usamts-2009-r1-01",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 21 Round 1 (2009-2010)",
+      "year": 2009,
+      "number": 1,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Fill in the circles in the picture with the digits 1-8, one digit in each circle with no digit repeated, so that no two circles that are connected by a line segment contain consecutive digits. In how many ways can this be done?",
+    "image": "qimages/usamts/2009-r1/q01.webp",
+    "choices": null,
+    "answer": "60",
+    "acceptedAnswers": null,
+    "answerUnit": "ways",
+    "solutions": [
+      {
+        "title": "Start with the most connected circle",
+        "body": "Call the circles: top $T$; middle row $L_2, C_2, R_2$; lower row $L_3, C_3, R_3$; bottom $B$. The lower centre circle $C_3$ is joined to every circle except $T$, and the other six circles $L_2, C_2, R_2, R_3, B, L_3$ form a hexagon (a 6-cycle); $T$ is joined to $L_2, C_2, R_2$.\n\n**The circle $C_3$.** A digit from $2$ to $7$ has two consecutive digits, which would both have to avoid the 6 neighbours of $C_3$ — but only one circle ($T$) is not a neighbour. So $C_3$ holds $1$ or $8$. The map $x \\mapsto 9 - x$ turns solutions with $1$ in $C_3$ into solutions with $8$ in $C_3$ and back, so we count solutions with $1$ in $C_3$ and double.\n\n**Then $T$ and the digit 3.** With $1$ in $C_3$, the digit $2$ must be in $T$ (the only circle not adjacent to $C_3$). The digit $3$ cannot touch $2$, so it is in one of $L_3, B, R_3$. Now $1$ and $2$ impose no more conditions on the hexagon (all hexagon circles are adjacent to $C_3$, and $1$'s only consecutive digit $2$ is placed), so we must fill the 6-cycle with $3, 4, \\dots, 8$ with no consecutive digits adjacent, with $3$ in a given position. By the symmetry of the cycle each of the 3 positions for $3$ gives the same count $N$. So the total is $2 \\cdot 3 \\cdot N$.\n\n**Counting $N$.** Number the hexagon positions $0, 1, \\dots, 5$ around the cycle with $3$ at position $0$; positions $1$ and $5$ are its neighbours, so $4$ is at position $2$, $3$ or $4$.\n* *$4$ at position $3$ (opposite $3$).* The digit $5$ cannot touch $4$ (positions $2, 4$), so it is at position $1$ or $5$; by symmetry take position $1$ and remember a factor $2$. Position $2$ now touches both $5$ and $4$, so it must hold $7$ or $8$; if it held $8$, then $6$ and $7$ would be in the adjacent positions $4, 5$. So position $2$ holds $7$, and $6, 8$ go in positions $4, 5$ in either order (both are fine). This gives $2 \\cdot 2 = 4$ fillings.\n* *$4$ at position $2$ or $4$*; by symmetry take position $2$ (factor $2$). Then $5$ avoids positions $1, 3$, so it is at position $4$ or $5$.\n  * $5$ at position $5$: position $4$ touches $5$, so it holds $7$ or $8$; $7$ fails (its other neighbour, position $3$, would hold $6$ or $8$), so position $4$ holds $8$, position $3$ holds $6$, and position $1$ holds $7$: **1** filling.\n  * $5$ at position $4$: $6$ avoids positions $3, 5$, so it is at position $1$, and $7, 8$ fill positions $3, 5$ in either order: **2** fillings.\n\n  This gives $2(1 + 2) = 6$ fillings.\n\nSo $N = 4 + 6 = 10$, and the total is $2\\cdot3\\cdot10 = 60$.\n\n**Answer: $60$**"
+      },
+      {
+        "title": "Computer check",
+        "body": "The picture is a graph with 8 vertices and 15 edges: the top circle is joined to the three circles of the middle row; the six outer circles of the middle and lower rows and the bottom circle form a 6-cycle; and the lower centre circle is joined to all six circles of that cycle. Checking all $8! = 40320$ ways to place the digits and keeping those in which no edge joins two consecutive digits leaves exactly $60$ placements, in agreement with $2 \\cdot 3 \\cdot 10$. One of them: lower centre $1$, top $2$, and around the cycle (starting at the bottom circle) $3, 5, 7, 4, 8, 6$.\n\n**Answer: $60$**"
+      }
+    ],
+    "topics": [
+      "counting",
+      "logic",
+      "graph-theory"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2009-r1-02",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 21 Round 1 (2009-2010)",
+      "year": 2009,
+      "number": 2,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "text",
+    "prompt": "The ordered pair of four-digit numbers $(2025, 3136)$ has the property that each number in the pair is a perfect square and each digit of the second number is 1 more than the corresponding digit of the first number. Find, with proof, all ordered pairs of five-digit numbers and ordered pairs of six-digit numbers with the same property: each number in the pair is a perfect square and each digit of the second number is 1 more than the corresponding digit of the first number.",
+    "image": null,
+    "choices": null,
+    "answer": "(13225, 24336)",
+    "acceptedAnswers": [
+      "(13225,24336)",
+      "13225, 24336",
+      "13225,24336",
+      "13225 and 24336",
+      "(13225, 24336), none",
+      "(13225, 24336); no six-digit pairs"
+    ],
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Factor 11111 and 111111",
+        "body": "If the digits of $m^2$ are those of $n^2$ each increased by $1$, then $m^2 - n^2 = 11111$ (five digits) or $111111$ (six digits). Conversely we must check candidates digit by digit.\n\n**Five digits.** $(m - n)(m + n) = 11111 = 41\\cdot 271$, so $(m - n, m + n) = (1, 11111)$ or $(41, 271)$, giving $(n, m) = (5555, 5556)$ or $(115, 156)$. The first gives far more than five digits. The second gives $(n^2, m^2) = (13225, 24336)$, which works: $1{+}1, 3{+}1, 2{+}1, 2{+}1, 5{+}1 = 2, 4, 3, 3, 6$.\n\n**Six digits.** $(m-n)(m+n) = 111111 = 3\\cdot7\\cdot11\\cdot13\\cdot37$. Six-digit squares need $317 \\le n < m \\le 999$, so $635 \\le m + n \\le 1997$ and $m - n = \\frac{111111}{m+n}$. The divisors of $111111$ in $[635, 1997]$ are $777, 1001, 1221, 1443$, giving\n$$(m - n, m + n) \\in \\{(143, 777), (111, 1001), (91, 1221), (77, 1443)\\},$$\n$$(n, m) \\in \\{(317, 460), (445, 556), (565, 656), (683, 760)\\},$$\n$$(n^2, m^2) \\in \\{(100489, 211600), (198025, 309136), (319225, 430336), (466489, 577600)\\}.$$\nNone has the digit property: $100489 \\to 211600$ fails at the fourth digit ($4 \\to 6$), $198025 \\to 309136$ at the first ($1 \\to 3$), $319225 \\to 430336$ at the second ($1 \\to 3$), and $466489 \\to 577600$ at the fourth ($4 \\to 6$). So there are no six-digit pairs.\n\n**Answer: the only pair is $(13225, 24336)$; there are no six-digit pairs.**"
+      },
+      {
+        "title": "Computer check",
+        "body": "Check every $n$ with $100 \\le n \\le 999$: compute $n^2$, add $11111$ or $111111$ (according to its number of digits), test whether the result is a perfect square with the same number of digits and whether each digit went up by exactly $1$. The only hit is $n = 115$: $13225 \\to 24336 = 156^2$. (Adding $11\\ldots1$ raises every digit by one exactly when no digit of the first number is $9$, and then no carries occur.)\n\n**Answer: $(13225, 24336)$ only; no six-digit pairs.**"
+      }
+    ],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2009-r1-03",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 21 Round 1 (2009-2010)",
+      "year": 2009,
+      "number": 3,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "A square of side length 5 is inscribed in a square of side length 7. If we construct a grid of $1\\times 1$ squares for both squares, as shown, then we find that the two grids have 8 lattice points in common. If we do the same construction by inscribing a square of side length 1489 in a square of side length 2009, and construct a grid of $1\\times1$ squares in each large square, then how many lattice points will the two grids of $1\\times 1$ squares have in common?",
+    "image": "qimages/usamts/2009-r1/q03.webp",
+    "choices": null,
+    "answer": "1492",
+    "acceptedAnswers": null,
+    "answerUnit": "points",
+    "solutions": [
+      {
+        "title": "Coordinates and modular arithmetic",
+        "body": "**Where the inner square sits.** Its vertices cut each side of the big square into pieces $x$ and $2009 - x$ with $x^2 + (2009 - x)^2 = 1489^2$, giving $x = 689$ or $x = 1320$ (mirror images). Let $a = 689$, $b = 1320$, $c = 1489$; then $a + b = 2009$, $a^2 + b^2 = c^2$, and $c$ is prime.\n\nPut the big square at $[0, 2009]^2$ and the inner square's vertices at $S = (0, a)$, $R = (b, 0)$, $Q = (2009, b)$, $P = (a, 2009)$. The inner grid points are\n$$S + \\frac uc(b, -a) + \\frac vc(a, b) = \\left(\\frac{ub + va}{c},\\ a + \\frac{-ua + vb}{c}\\right), \\qquad 0 \\le u, v \\le c .$$\nSuch a point is on the big grid iff both coordinates are integers:\n$$ub + va \\equiv 0, \\qquad -ua + vb \\equiv 0 \\pmod c.$$\n\n**Counting.** Since $c$ is prime and $c \\nmid a$, the first congruence says $v \\equiv -ub\\,a^{-1} \\pmod c$. This also implies the second: using $b^2 \\equiv -a^2$,\n$$-ua + vb \\equiv -ua - \\frac{ub^2}{a} \\equiv -ua + \\frac{ua^2}{a} = 0 \\pmod c.$$\n* For $u = 0$ or $u = c$: $v \\equiv 0$, so $v \\in \\{0, c\\}$ — the 4 corners.\n* For $0 < u < c$: $v \\equiv -uba^{-1}$ is a nonzero residue (as $c \\nmid u, b$), so exactly one $v$ with $0 < v < c$.\n\nTotal: $(c - 1) + 4 = c + 3 = 1492$. (Check with the example: $7 = 3 + 4$, $c = 5$ gives $5 + 3 = 8$. ✓)\n\n**Answer: $1492$**"
+      },
+      {
+        "title": "Brute-force check",
+        "body": "The criterion \"$c \\mid ub + va$ and $c \\mid -ua + vb$\" can be checked by computer for all $(c+1)^2 \\approx 2.2$ million pairs $(u, v)$ with $a = 689$, $b = 1320$, $c = 1489$: exactly $1492$ pairs pass. The same program gives $8$ for the $7$/$5$ example, matching the statement.\n\n**Answer: $1492$**"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "geometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2009-r1-04",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 21 Round 1 (2009-2010)",
+      "year": 2009,
+      "number": 4,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "text",
+    "prompt": "Let $ABCDEF$ be a convex hexagon, such that $FA = AB$, $BC = CD$, $DE = EF$, and $\\angle FAB = 2\\angle EAC$. Suppose that the area of $ABC$ is 25, the area of $CDE$ is 10, the area of $EFA$ is 25, and the area of $ACE$ is $x$. Find, with proof, all possible values of $x$.",
+    "image": null,
+    "choices": null,
+    "answer": "40, 60",
+    "acceptedAnswers": [
+      "40,60",
+      "40 and 60",
+      "60, 40",
+      "60,40",
+      "40 60",
+      "x=40, x=60"
+    ],
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Reflect B across AC",
+        "body": "Write $[\\cdot]$ for area. Since $\\angle FAB = 2\\angle EAC$ and the hexagon is convex, $\\angle EAC = \\angle FAB - \\angle EAC = \\angle FAE + \\angle BAC$.\n\nLet $X$ be the reflection of $B$ in $AC$. Then $CX = CB = CD$ and $AX = AB = AF$, and\n$$\\angle XAE = \\angle EAC - \\angle XAC = (\\angle FAE + \\angle BAC) - \\angle BAC = \\angle FAE .$$\nSo $X$ is also the reflection of $F$ in $AE$, and $EX = EF = ED$. Now $X$ and $D$ are both at distance $CD$ from $C$ and $ED$ from $E$, so either $X = D$ or $X$ is the reflection of $D$ in $CE$.\n\n* $X = D$ (so $D$ is outside triangle $ACE$): $[ACE] = [ACD] + [ADE] - [CDE] = [ABC] + [AFE] - [CDE] = 25 + 25 - 10 = 40$.\n* $X$ is the reflection of $D$ (inside triangle $ACE$): $[ACE] = [AXC] + [AXE] + [CXE] = 25 + 25 + 10 = 60$.\n\n**Both occur.**\n* $x = 40$: take $ACE$ equilateral of area $40$, $M$ the midpoint of $CE$, and $D$ beyond $CE$ on the perpendicular bisector with $DM = \\frac14 AM$. Then $[CDE] = 10$; reflect $D$ in $AC$ and $AE$ to get $B$ and $F$; then $[ABC] = [ADC] = \\frac12\\cdot 40 + \\frac12\\cdot 10 = 25$, similarly $[AFE] = 25$. Since $\\tan\\angle MCD = \\frac{\\sqrt3}{4} < \\tan 30^\\circ$, $\\angle BCD = 2(60^\\circ + \\angle MCD) < 180^\\circ$, similarly at $E$, and $\\angle FAB = 120^\\circ$; so the hexagon is convex, and $\\angle FAB = 2\\angle EAC$ by construction.\n* $x = 60$: take $ACE$ equilateral of area $60$ and $X$ on the median $AM$ with $XM = \\frac16 AM$, so $[CXE] = 10$ and $[AXC] = [AXE] = 25$. Reflect $X$ in the three sides to get $B, D, F$. The angles at $A, C, E$ are $120^\\circ$ and the hexagon is convex.\n\n**Answer: $x = 40$ or $x = 60$**"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2009-r1-05",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 21 Round 1 (2009-2010)",
+      "year": 2009,
+      "number": 5,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "The cubic equation $x^3 + 2x - 1 = 0$ has exactly one real root $r$. Note that $0.4 < r < 0.5$.\n\n(a) Find, with proof, an increasing sequence of positive integers $a_1 < a_2 < a_3 < \\cdots$ such that\n$$\\frac12 = r^{a_1} + r^{a_2} + r^{a_3} + \\cdots.$$\n\n(b) Prove that the sequence that you found in part (a) is the unique increasing sequence with the above property.",
+    "image": null,
+    "choices": null,
+    "answer": "(a) $a_n = 3n - 2$: since $1 - r^3 = 2r$, $\\frac12 = \\frac{r}{1 - r^3} = r + r^4 + r^7 + \\cdots$. (b) If two different sets of exponents gave the same sum, cancel common terms; dividing by the smallest remaining power $r^s$ gives $1 \\le \\sum r^{u_i} \\le \\frac{r}{1-r} < 1$ (as $r < \\frac12$), a contradiction.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Geometric series, then uniqueness from r < 1/2",
+        "body": "**(a)** From $r^3 + 2r - 1 = 0$ we get $1 - r^3 = 2r$, so $\\frac12 = \\frac{r}{1 - r^3}$. Since $0 < r < 1$,\n$$\\frac{r}{1 - r^3} = r\\left(1 + r^3 + r^6 + \\cdots\\right) = r + r^4 + r^7 + r^{10} + \\cdots,$$\nso $a_n = 3n - 2$ works.\n\n**(b)** Suppose two different increasing sequences of positive integers both give sum $\\frac12$. Remove the exponents common to both; what remains are two disjoint sets of exponents $\\{s_1 < s_2 < \\dots\\}$ and $\\{t_1 < t_2 < \\dots\\}$ (finite or infinite) with\n$$r^{s_1} + r^{s_2} + \\cdots = r^{t_1} + r^{t_2} + \\cdots = \\alpha .$$\nIf one set were empty, so would be the other (the sums would be $0$) and the sequences would be equal; so both are nonempty and $\\alpha > 0$. Say $s_1 < t_1$. Then\n$$r^{s_1} \\le r^{t_1} + r^{t_2} + \\cdots .$$\nDividing by $r^{s_1}$ and writing $u_i = t_i - s_1 \\ge 1$ (distinct positive integers):\n$$1 \\le r^{u_1} + r^{u_2} + \\cdots \\le r + r^2 + r^3 + \\cdots = \\frac{r}{1 - r} < 1,$$\nbecause $r < \\frac12$ means $r < 1 - r$. Contradiction. Hence the sequence $1, 4, 7, 10, \\dots$ is the only one. ∎"
+      }
+    ],
+    "topics": [
+      "sequences-series",
+      "polynomials",
+      "algebra"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

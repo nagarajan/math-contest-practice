@@ -1,0 +1,178 @@
+[
+  {
+    "id": "usamts-2003-r2-01",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 15 Round 2 (2003-2004)",
+      "year": 2003,
+      "number": 1,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "The faces of 27 unit cubes are painted red, white, and blue in such a manner that we can assemble them into three different configurations: a red $3\\times3\\times3$ cube, a white $3\\times3\\times3$ cube, and a blue $3\\times3\\times3$ cube. Determine, with proof, the number of unit cubes on whose faces all three colors appear.",
+    "image": null,
+    "choices": null,
+    "answer": "24",
+    "acceptedAnswers": null,
+    "answerUnit": "cubes",
+    "solutions": [
+      {
+        "title": "Count faces, then look at the centers",
+        "body": "**Every face is used exactly once.** Each big cube shows $6 \\cdot 9 = 54$ unit faces, so the three configurations show $3 \\cdot 54 = 162$ faces, all of which must carry that configuration's color. A unit face showing in the red cube is red, so it cannot also show in the white or blue cube. The 27 unit cubes have exactly $27 \\cdot 6 = 162$ faces, so every unit face shows in exactly one configuration and has that configuration's color.\n\n**Which positions show how many faces.** In a $3\\times3\\times3$ cube, the 8 corner cubes show 3 faces, the 12 edge cubes show 2, the 6 face-center cubes show 1, and the central cube shows 0.\n\n**Cubes missing a color.** A unit cube with no red face is the central cube of the red configuration (anywhere else it would show a red face). Its 6 faces are then white and blue. In the white and blue cubes it shows at most 3 faces each, so it has exactly 3 white and 3 blue faces. In particular, no unit cube misses two colors: it would need all 6 faces in one color, but at most 3 can show in one configuration.\n\nSo the cubes missing a color are exactly the three central cubes of the red, white and blue configurations, and these are three different unit cubes (a cube that was central twice would miss two colors). Every other unit cube shows all three colors:\n$$27 - 3 = 24.$$\n(The problem tells us such a painting exists; the argument shows the count is 24 for every such painting.)\n\n**Answer: 24**"
+      }
+    ],
+    "topics": [
+      "spatial",
+      "counting",
+      "logic"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2003-r2-02",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 15 Round 2 (2003-2004)",
+      "year": 2003,
+      "number": 2,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "For any positive integer $n$, let $s(n)$ denote the sum of the digits of $n$ in base 10. Find, with proof, the largest $n$ for which $n = 7s(n)$.",
+    "image": null,
+    "choices": null,
+    "answer": "84",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Compare place values",
+        "body": "Write $n = \\overline{a_{d-1}\\dots a_2a_1a_0} = \\sum 10^i a_i$ with digits $a_i$. Then $n = 7s(n)$ reads\n$$\\sum_i 10^i a_i = 7\\sum_i a_i \\iff (10^{d-1} - 7)a_{d-1} + \\dots + 993a_3 + 93a_2 + 3a_1 = 6a_0.$$\nThe right side is at most $6 \\cdot 9 = 54$, while every coefficient on the left from $a_2$ on is at least 93. So $a_i = 0$ for $i \\ge 2$, and $n$ has at most two digits, with $3a_1 = 6a_0$, i.e. $a_1 = 2a_0$.\n\nThe solutions are $n = 21, 42, 63, 84$ (check: $84 = 7(8 + 4)$), and $a_0 \\ge 5$ would make $a_1 \\ge 10$. The largest is 84.\n\n**Answer: 84**"
+      }
+    ],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2003-r2-03",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 15 Round 2 (2003-2004)",
+      "year": 2003,
+      "number": 3,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "How many circles in the plane contain at least three of the nine points $(0,0)$, $(0,1)$, $(0,2)$, $(1,0)$, $(1,1)$, $(1,2)$, $(2,0)$, $(2,1)$, $(2,2)$? Rigorously verify that no circle was skipped or counted more than once in the result.",
+    "image": null,
+    "choices": null,
+    "answer": "34",
+    "acceptedAnswers": null,
+    "answerUnit": "circles",
+    "solutions": [
+      {
+        "title": "List by shape, check by counting triples",
+        "body": "A circle through three of the points is determined by them, and three points determine a circle exactly when they are not collinear.\n\n**The circles.** Up to the symmetries of the $3\\times3$ grid there are 9 types.\n\nCircles through **four** points (14 in total):\n- the corners $(0,0), (0,2), (2,0), (2,2)$: 1 circle;\n- the edge midpoints $(0,1), (1,0), (1,2), (2,1)$: 1 circle;\n- the corners of a unit square, like $(0,0), (0,1), (1,0), (1,1)$: 4 circles;\n- the corners of a $1\\times2$ rectangle, like $(0,0), (0,1), (2,0), (2,1)$: 4 circles;\n- an isosceles trapezoid like $(0,0), (0,1), (1,2), (2,2)$, symmetric about the line $x + y = 2$: 4 circles.\n\nCircles through exactly **three** points (20 in total):\n- like $(0,0), (1,1), (1,2)$: 8 circles;\n- like $(0,0), (0,2), (1,1)$: 4 circles;\n- like $(0,0), (0,2), (1,2)$: 4 circles;\n- like $(0,0), (1,2), (2,1)$: 4 circles.\n\nThat is $14 + 20 = 34$ circles.\n\n**Nothing skipped, nothing double-counted.** Count the triples of points. There are $\\binom93 = 84$ triples, and 8 of them are collinear (3 rows, 3 columns, 2 diagonals), leaving 76 that each determine a circle. A circle through exactly 4 of the points contains $\\binom43 = 4$ triples, and a circle through exactly 3 contains 1. The listed circles account for\n$$14 \\cdot 4 + 20 \\cdot 1 = 76$$\ntriples. Each non-collinear triple lies on exactly one circle, so this matches exactly: every circle through three of the points is on the list, and no circle is listed twice. (A computer check of all 84 triples gives the same 34 circles: 14 through four points and 20 through three; none passes through five.)\n\n**Answer: 34**"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "counting"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2003-r2-04",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 15 Round 2 (2003-2004)",
+      "year": 2003,
+      "number": 4,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "text",
+    "prompt": "In how many ways can one choose three angle sizes, $\\alpha$, $\\beta$, and $\\gamma$, with $\\alpha \\le \\beta \\le \\gamma$ from the set of integral degrees, $1^\\circ, 2^\\circ, 3^\\circ, \\dots, 178^\\circ$, such that those angle sizes correspond to the angles of a nondegenerate triangle? How many of the resulting triangles are acute, right, and obtuse, respectively?",
+    "image": null,
+    "choices": null,
+    "answer": "2700 in total: 675 acute, 45 right, 1980 obtuse",
+    "acceptedAnswers": [
+      "2700, 675, 45, 1980",
+      "2700; 675, 45, 1980",
+      "2700 675 45 1980",
+      "2700: 675 acute, 45 right, 1980 obtuse",
+      "2700; 675 acute, 45 right, 1980 obtuse"
+    ],
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Count by the largest angle",
+        "body": "We need positive integers $\\alpha \\le \\beta \\le \\gamma$ with $\\alpha + \\beta + \\gamma = 180$. Count by the largest angle $\\gamma$. For fixed $\\gamma$, $\\alpha = 180 - \\gamma - \\beta$, and the conditions $\\alpha \\le \\beta \\le \\gamma$, $\\alpha \\ge 1$ become\n$$\\left\\lceil \\tfrac{180-\\gamma}{2}\\right\\rceil \\le \\beta \\le \\min(\\gamma,\\ 179 - \\gamma).$$\n\n**Acute** ($60 \\le \\gamma \\le 89$; here $\\min = \\gamma$). The number of $\\beta$ is $\\gamma + 1 - \\lceil (180-\\gamma)/2\\rceil$, which for $\\gamma = 60, 61, 62, 63, \\dots, 88, 89$ is $1, 2, 4, 5, 7, 8, \\dots, 43, 44$. In pairs, $\\gamma = 60 + 2j$ and $61 + 2j$ give $(3j+1) + (3j+2) = 6j + 3$, so the total is\n$$\\sum_{j=0}^{14}(6j + 3) = 6\\cdot105 + 45 = 675.$$\n\n**Right** ($\\gamma = 90$): $45 \\le \\beta \\le 89$, so 45 triangles.\n\n**Obtuse** ($91 \\le \\gamma \\le 178$; here $\\min = 179 - \\gamma$). With $m = 180 - \\gamma \\in \\{2, \\dots, 89\\}$, the count is $(m - 1) - \\lceil m/2\\rceil + 1 = \\lfloor m/2\\rfloor$, so the total is\n$$1 + 1 + 2 + 2 + \\dots + 44 + 44 = 2\\cdot\\frac{44\\cdot45}{2} = 1980.$$\n\n**Total:** $675 + 45 + 1980 = 2700$. As a check, the number of ways to write 180 as a sum of three positive integers in non-decreasing order is the integer nearest to $180^2/12 = 2700$. A computer enumeration gives the same four numbers.\n\n**Answer: 2700 triangles: 675 acute, 45 right, 1980 obtuse.**"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "counting"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2003-r2-05",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 15 Round 2 (2003-2004)",
+      "year": 2003,
+      "number": 5,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Clearly draw or describe a convex polyhedron that has exactly three pentagons among its faces and the fewest edges possible. Prove that the number of edges is a minimum.",
+    "image": null,
+    "choices": null,
+    "answer": "14 edges, e.g. a triangular prism with one corner cut off and a second cut through a bottom corner (faces: 3 pentagons, 1 quadrilateral, 3 triangles).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Lower bound and a construction",
+        "body": "**At least 14 edges.** In a convex polyhedron two faces meet in an edge, a single vertex, or not at all.\n\n*Edges on the pentagons.* The three pentagons have 15 sides in total, and each pair shares at most one edge. So at least $15 - 3 = 12$ edges lie on pentagons, and at least 13 if some pair of pentagons does not share an edge.\n\n*Edges off the pentagons.* Fix a pentagon $P$. Each other pentagon meets $P$ in at most 2 vertices, so at least $5 - 4 = 1$ vertex $v$ of $P$ lies on no other pentagon. Every vertex of a polyhedron has at least 3 edges, and only 2 of the edges at $v$ belong to $P$. So there is an edge $e$ at $v$ that is not a side of $P$. It is not a side of another pentagon either, since then $v$ would lie on that pentagon. So each pentagon has a vertex with an edge that lies on no pentagon. One such edge can serve at most two pentagons (it has two ends), so there are at least 2 such edges.\n\nIf every pair of pentagons shares an edge, that gives at least $12 + 2 = 14$ edges. Otherwise there are at least $13 + 1 = 14$ edges. Either way, at least 14.\n\n**A polyhedron with 14 edges.** Start with the triangular prism with top face $A = (0,0,4)$, $B = (8,0,4)$, $C = (0,8,4)$ and bottom face $A' = (0,0,0)$, $B' = (8,0,0)$, $C' = (0,8,0)$.\n1. Cut off the corner $A$ with the plane through $A_1 = (2,0,4)$, $A_2 = (0,2,4)$, $A_3 = (0,0,2)$. The two side faces at $A$ become pentagons, the top becomes a quadrilateral, and a new triangle appears.\n2. Cut off the corner $C'$ with the plane through the vertex $A'$ and the points $p = (0,8,2)$ on $CC'$ and $q = (2,6,0)$ on $B'C'$. This removes the edge $A'C'$. The side face $BCC'B'$ gains a side and becomes a pentagon, the faces through $A'$ keep their number of sides, and a new triangle $A'pq$ appears.\n\nThe resulting convex polyhedron has 9 vertices $A_1, A_2, A_3, B, C, A', B', p, q$ and these 7 faces:\n\n| face | vertices | sides |\n|---|---|---|\n| side face | $A', A_3, A_1, B, B'$ | 5 |\n| side face | $A', A_3, A_2, C, p$ | 5 |\n| side face | $B, C, p, q, B'$ | 5 |\n| top | $A_1, B, C, A_2$ | 4 |\n| cut at $A$ | $A_1, A_2, A_3$ | 3 |\n| bottom | $A', B', q$ | 3 |\n| cut at $C'$ | $A', p, q$ | 3 |\n\nIt has $\\frac{5+5+5+4+3+3+3}{2} = 14$ edges, and Euler's formula checks: $9 - 14 + 7 = 2$. (A computer check of the supporting planes of these 9 points confirms exactly these 7 faces and 14 edges.)\n\n**Answer: the minimum is 14 edges**, attained by the polyhedron above (3 pentagons, 1 quadrilateral, 3 triangles)."
+      }
+    ],
+    "topics": [
+      "geometry",
+      "spatial"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

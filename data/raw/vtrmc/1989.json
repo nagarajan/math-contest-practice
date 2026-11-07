@@ -1,0 +1,306 @@
+[
+  {
+    "id": "vtrmc-1989-01",
+    "bank": "vtrmc",
+    "source": {
+      "contest": "VTRMC",
+      "paper": "11th VTRMC (1989)",
+      "year": 1989,
+      "number": 1,
+      "url": "https://www.math.vt.edu/people/plinnell/Vtregional/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "A square of side $a$ is inscribed in a triangle of base $b$ and height $h$ as shown. Prove that the area of the square cannot exceed one-half the area of the triangle.",
+    "image": "qimages/vtrmc/1989/q01.webp",
+    "choices": null,
+    "answer": "Similar triangles give $a=\\frac{bh}{b+h}$, i.e. $\\frac1a=\\frac1b+\\frac1h\\ge\\frac{2}{\\sqrt{bh}}$, so $a^2\\le\\frac{bh}4=\\frac12\\cdot\\frac{bh}2$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Similar triangles and AM-GM",
+        "body": "The top side of the square is a segment of length $a$ parallel to the base, at height $a$. It cuts off a small triangle at the top, similar to the whole triangle, with base $a$ and height $h-a$. By similarity\n$$\\frac ab=\\frac{h-a}{h}\\quad\\Longrightarrow\\quad ah=bh-ab\\quad\\Longrightarrow\\quad a=\\frac{bh}{b+h}.$$\nHence\n$$\\frac{a^2}{\\tfrac12bh}=\\frac{2bh}{(b+h)^2}\\le\\frac{2bh}{4bh}=\\frac12,$$\nusing $(b+h)^2-4bh=(b-h)^2\\ge0$. So the area of the square is at most half the area of the triangle, with equality iff $b=h$. ∎"
+      },
+      {
+        "title": "Harmonic mean",
+        "body": "From $a=\\frac{bh}{b+h}$ (similar triangles, as in the first approach) we get\n$$\\frac1a=\\frac1b+\\frac1h .$$\nBy AM-GM, $\\frac1b+\\frac1h\\ge\\frac{2}{\\sqrt{bh}}$, so $a\\le\\frac{\\sqrt{bh}}2$ and\n$$a^2\\le\\frac{bh}{4}=\\frac12\\cdot\\Big(\\frac12bh\\Big).$$\n∎"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "inequalities"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "vtrmc-1989-02",
+    "bank": "vtrmc",
+    "source": {
+      "contest": "VTRMC",
+      "paper": "11th VTRMC (1989)",
+      "year": 1989,
+      "number": 2,
+      "url": "https://www.math.vt.edu/people/plinnell/Vtregional/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $A$ be a $3\\times3$ matrix in which each element is either $0$ or $1$ but is otherwise arbitrary.\n\n(a) Prove that $\\det(A)$ cannot be $3$ or $-3$.\n\n(b) Find all possible values of $\\det(A)$ and prove your result.",
+    "image": null,
+    "choices": null,
+    "answer": "(b) $\\det A\\in\\{-2,-1,0,1,2\\}$, all attained (e.g. $\\begin{pmatrix}1&0&1\\\\1&1&0\\\\0&1&1\\end{pmatrix}$ has determinant $2$).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Expand along rows",
+        "body": "Every $2\\times2$ matrix with entries in $\\{0,1\\}$ has determinant $ps-qr\\in\\{-1,0,1\\}$, since $ps,qr\\in\\{0,1\\}$.\n\nExpanding along the first row,\n$$\\det A=a_{11}M_{11}-a_{12}M_{12}+a_{13}M_{13},$$\na sum of three terms, each a product of an entry in $\\{0,1\\}$ and a minor in $\\{-1,0,1\\}$. So $|\\det A|\\le3$.\n\n**(a)** If $\\det A=\\pm3$, all three terms must be $\\pm1$ with the same sign, so in particular $a_{11}=a_{12}=a_{13}=1$. Expanding along the second row in the same way shows $a_{21}=a_{22}=a_{23}=1$. Then the first two rows are equal and $\\det A=0$, a contradiction. So $\\det A\\ne\\pm3$.\n\n**(b)** By the above, $\\det A\\in\\{-2,-1,0,1,2\\}$. All these values occur:\n- $0$: the zero matrix; $1$: the identity; $-1$: the identity with two rows swapped;\n- $2$: $A=\\begin{pmatrix}1&0&1\\\\1&1&0\\\\0&1&1\\end{pmatrix}$, $\\det A=1\\cdot(1-0)-0+1\\cdot(1-0)=2$;\n- $-2$: the same matrix with its first two columns interchanged.\n\n**Answer: $\\det A\\in\\{-2,-1,0,1,2\\}$.** ∎"
+      },
+      {
+        "title": "Counting the permutation terms",
+        "body": "By the Leibniz formula $\\det A=\\sum_\\sigma\\operatorname{sgn}(\\sigma)a_{1\\sigma(1)}a_{2\\sigma(2)}a_{3\\sigma(3)}$: three even permutations contribute $0$ or $+1$ each, three odd ones $0$ or $-1$ each. So $\\det A=P-N$ with $P,N\\in\\{0,1,2,3\\}$ the numbers of nonzero even and odd terms.\n\n$\\det A=3$ needs $P=3$: the three even permutations are the identity and the two $3$-cycles, whose \"positions\" together cover all $9$ entries, so $A$ is all ones, and then $N=3$ as well — $\\det A=0$. Similarly $\\det A=-3$ forces all ones. So $|\\det A|\\le2$, and the examples in the first approach show that each value $-2,-1,0,1,2$ occurs. (A computer check of all $2^9=512$ matrices confirms the set $\\{-2,-1,0,1,2\\}$.) ∎"
+      }
+    ],
+    "topics": [
+      "linear-algebra"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "vtrmc-1989-03",
+    "bank": "vtrmc",
+    "source": {
+      "contest": "VTRMC",
+      "paper": "11th VTRMC (1989)",
+      "year": 1989,
+      "number": 3,
+      "url": "https://www.math.vt.edu/people/plinnell/Vtregional/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "The system of equations\n$$\\begin{aligned}a_{11}x_1+a_{12}x_2+a_{13}x_3&=b_1\\\\a_{21}x_1+a_{22}x_2+a_{23}x_3&=b_2\\\\a_{31}x_1+a_{32}x_2+a_{33}x_3&=b_3\\end{aligned}$$\nhas the solution $x_1=-1$, $x_2=3$, $x_3=2$ when $b_1=1$, $b_2=0$, $b_3=1$ and it has the solution $x_1=2$, $x_2=-2$, $x_3=1$ when $b_1=0$, $b_2=-1$, $b_3=1$. Find a solution of the system when $b_1=2$, $b_2=-1$, $b_3=3$.",
+    "image": null,
+    "choices": null,
+    "answer": "$(x_1,x_2,x_3)=(0,4,5)$, since $(2,-1,3)=2(1,0,1)+(0,-1,1)$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Linearity",
+        "body": "Write the system as $A\\mathbf x=\\mathbf b$. We know $A(-1,3,2)^T=(1,0,1)^T$ and $A(2,-2,1)^T=(0,-1,1)^T$. Since\n$$(2,-1,3)=2(1,0,1)+(0,-1,1),$$\nlinearity gives\n$$A\\big(2(-1,3,2)+(2,-2,1)\\big)^T=(2,-1,3)^T .$$\nSo a solution is $\\mathbf x=2(-1,3,2)+(2,-2,1)=(0,4,5)$.\n\n**Answer: $x_1=0$, $x_2=4$, $x_3=5$.**"
+      },
+      {
+        "title": "Find the coefficients",
+        "body": "To find the combination, solve $\\lambda(1,0,1)+\\mu(0,-1,1)=(2,-1,3)$: the first coordinate gives $\\lambda=2$, the second $\\mu=1$, and the third checks: $2+1=3$. Then $\\mathbf x=\\lambda(-1,3,2)+\\mu(2,-2,1)=(-2+2,\\,6-2,\\,4+1)=(0,4,5)$.\n\n(The solution need not be unique if $A$ is singular, but $(0,4,5)$ is always a solution.)\n\n**Answer: $(0,4,5)$.**"
+      }
+    ],
+    "topics": [
+      "linear-algebra"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "vtrmc-1989-04",
+    "bank": "vtrmc",
+    "source": {
+      "contest": "VTRMC",
+      "paper": "11th VTRMC (1989)",
+      "year": 1989,
+      "number": 4,
+      "url": "https://www.math.vt.edu/people/plinnell/Vtregional/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $a,b,c,d$ be distinct integers such that the equation\n$$(x-a)(x-b)(x-c)(x-d)-9=0$$\nhas an integer root $r$. Show that $4r=a+b+c+d$. (This is essentially a problem from the 1947 Putnam examination.)",
+    "image": null,
+    "choices": null,
+    "answer": "$r-a,r-b,r-c,r-d$ are four distinct integers with product $9$, so they are $1,-1,3,-3$ in some order, and their sum $4r-(a+b+c+d)$ is $0$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Factor $9$ into distinct integers",
+        "body": "We have $(r-a)(r-b)(r-c)(r-d)=9$ and the four factors are distinct integers (as $a,b,c,d$ are distinct). Each factor divides $9$, so lies in $\\{\\pm1,\\pm3,\\pm9\\}$.\n\nIf some factor were $\\pm9$, the other three would have product $\\pm1$, so each would be $\\pm1$ — but there are only two distinct values $\\pm1$ available for three distinct factors. So all factors lie in $\\{\\pm1,\\pm3\\}$, and being four distinct numbers they are exactly $1,-1,3,-3$ (whose product is indeed $9$). Therefore\n$$(r-a)+(r-b)+(r-c)+(r-d)=1-1+3-3=0,$$\ni.e. $4r=a+b+c+d$. ∎"
+      },
+      {
+        "title": "Absolute values",
+        "body": "Let $u_1,\\dots,u_4$ be the distinct integers $r-a,\\dots,r-d$, with $|u_1u_2u_3u_4|=9$. At most two of them have absolute value $1$ (namely $1$ and $-1$), so at least two have absolute value $\\ge2$, hence $\\ge3$ (they divide $9$). Then $|u_iu_j|\\ge9$ for those two, forcing the other two to have absolute value $1$ and the big two to have absolute value exactly $3$. Distinctness gives $\\{u_i\\}=\\{1,-1,3,-3\\}$, whose sum is $0$, so $4r-(a+b+c+d)=0$. ∎"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "polynomials"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "vtrmc-1989-05",
+    "bank": "vtrmc",
+    "source": {
+      "contest": "VTRMC",
+      "paper": "11th VTRMC (1989)",
+      "year": 1989,
+      "number": 5,
+      "url": "https://www.math.vt.edu/people/plinnell/Vtregional/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "(i) Prove that $f_0(x)=1+x+x^2+x^3+x^4$ has no real zero.\n\n(ii) Prove that, for every integer $n\\ge0$, $f_n(x)=1+2^{-n}x+3^{-n}x^2+4^{-n}x^3+5^{-n}x^4$ has no real zero. (Hint: consider $(d/dx)(xf_n(x))$.)",
+    "image": null,
+    "choices": null,
+    "answer": "(i) $f_0(x)=\\frac{x^5-1}{x-1}$ for $x\\ne1$. (ii) $\\frac{d}{dx}(xf_n)=f_{n-1}>0$ by induction, so $xf_n$ is strictly increasing with only zero $x=0$, and $f_n(0)=1$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Induction with the hint",
+        "body": "**(i)** For $x\\ne1$, $f_0(x)=\\frac{x^5-1}{x-1}$. The only real root of $x^5-1$ is $x=1$ (since $x\\mapsto x^5$ is strictly increasing), so $f_0(x)\\ne0$ for $x\\ne1$; and $f_0(1)=5\\ne0$. Hence $f_0$ has no real zero. As $f_0(0)=1>0$ and $f_0$ is continuous, in fact $f_0>0$ on $\\mathbb R$.\n\n**(ii)** Note that\n$$xf_n(x)=x+\\frac{x^2}{2^n}+\\frac{x^3}{3^n}+\\frac{x^4}{4^n}+\\frac{x^5}{5^n},\\qquad \\frac{d}{dx}\\big(xf_n(x)\\big)=1+\\frac{2x}{2^n}+\\frac{3x^2}{3^n}+\\frac{4x^3}{4^n}+\\frac{5x^4}{5^n}=f_{n-1}(x).$$\nWe prove by induction that $f_n>0$ on $\\mathbb R$. The case $n=0$ is (i). If $f_{n-1}>0$ everywhere, then $g(x)=xf_n(x)$ has positive derivative, so it is strictly increasing; since $g(0)=0$, $g(x)\\ne0$ for $x\\ne0$, hence $f_n(x)\\ne0$ for $x\\ne0$. Also $f_n(0)=1$. So $f_n$ has no real zero, and by continuity and $f_n(0)=1>0$, $f_n>0$ on $\\mathbb R$, completing the induction. ∎"
+      },
+      {
+        "title": "Direct bound for (i)",
+        "body": "**(i)** Alternatively, for $x\\ge0$ all terms are $\\ge0$ and the constant is $1$, so $f_0(x)\\ge1$. For $x<0$ write\n$$f_0(x)=x^4+x^3+x^2+x+1=x^2\\Big(x+\\frac12\\Big)^2+\\frac34x^2+x+1=x^2\\Big(x+\\frac12\\Big)^2+\\frac34\\Big(x+\\frac23\\Big)^2+\\frac23>0 .$$\n(Check: $x^2(x^2+x+\\frac14)+\\frac34x^2+x+1=x^4+x^3+x^2+x+1$, and $\\frac34(x+\\frac23)^2+\\frac23=\\frac34x^2+x+\\frac13+\\frac23$.) So $f_0>0$ everywhere.\n\n**(ii)** then follows by the same induction as in the first approach. ∎"
+      }
+    ],
+    "topics": [
+      "polynomials",
+      "calculus"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "vtrmc-1989-06",
+    "bank": "vtrmc",
+    "source": {
+      "contest": "VTRMC",
+      "paper": "11th VTRMC (1989)",
+      "year": 1989,
+      "number": 6,
+      "url": "https://www.math.vt.edu/people/plinnell/Vtregional/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $g$ be defined on $(1,\\infty)$ by $g(x)=x/(x-1)$, and let $f^k(x)$ be defined by $f^0(x)=x$ and for $k>0$, $f^k(x)=g(f^{k-1}(x))$. Evaluate $\\displaystyle\\sum_{k=0}^\\infty2^{-k}f^k(x)$ in the form $\\dfrac{ax^2+bx+c}{dx+e}$.",
+    "image": null,
+    "choices": null,
+    "answer": "$\\displaystyle\\sum_{k\\ge0}2^{-k}f^k(x)=\\frac{4x^2-2x}{3x-3}$ (because $g(g(x))=x$).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "$g$ is an involution",
+        "body": "For $x>1$, $g(x)=\\frac{x}{x-1}>1$ and\n$$g(g(x))=\\frac{\\frac{x}{x-1}}{\\frac{x}{x-1}-1}=\\frac{x}{x-(x-1)}=x .$$\nHence $f^k(x)=x$ for even $k$ and $f^k(x)=\\frac{x}{x-1}$ for odd $k$. Splitting the (absolutely convergent) series,\n$$\\sum_{k=0}^\\infty2^{-k}f^k(x)=x\\Big(1+\\frac14+\\frac1{16}+\\cdots\\Big)+\\frac{x}{x-1}\\Big(\\frac12+\\frac18+\\cdots\\Big)=\\frac43x+\\frac23\\cdot\\frac{x}{x-1}.$$\nCombining,\n$$\\frac{4x(x-1)+2x}{3(x-1)}=\\frac{4x^2-2x}{3x-3}.$$\n**Answer: $\\dfrac{4x^2-2x}{3x-3}$** (so $a=4$, $b=-2$, $c=0$, $d=3$, $e=-3$, up to a common factor)."
+      },
+      {
+        "title": "Functional equation for the sum",
+        "body": "Let $S(x)=\\sum_{k\\ge0}2^{-k}f^k(x)$ (convergent since the terms take only two values). Since $f^{k}(x)=f^{k-1}(g(x))$,\n$$S(x)=x+\\frac12S(g(x)),\\qquad S(g(x))=g(x)+\\frac12S(x)$$\n(using $g(g(x))=x$). Substituting the second into the first: $S=x+\\frac12g+\\frac14S$, so\n$$S(x)=\\frac43\\Big(x+\\frac{x}{2(x-1)}\\Big)=\\frac{4x(x-1)+2x}{3(x-1)}=\\frac{4x^2-2x}{3x-3}.$$\nNumerically, at $x=2.5$ both the series and the formula give $4.444\\ldots$\n\n**Answer: $\\dfrac{4x^2-2x}{3x-3}$.**"
+      }
+    ],
+    "topics": [
+      "sequences-series",
+      "functional-equations"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "vtrmc-1989-07",
+    "bank": "vtrmc",
+    "source": {
+      "contest": "VTRMC",
+      "paper": "11th VTRMC (1989)",
+      "year": 1989,
+      "number": 7,
+      "url": "https://www.math.vt.edu/people/plinnell/Vtregional/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Three farmers sell chickens at a market. One has $10$ chickens, another has $16$, and the third has $26$. Each farmer sells at least one, but not all, of his chickens before noon, all farmers selling at the same price per chicken. Later in the day each sells his remaining chickens, all again selling at the same *reduced* price. If each farmer received a total of \\$35 from the sale of his chickens, what was the selling price before noon and the selling price after noon? (From \"Math Can Be Fun\" by Ya Perelman.)",
+    "image": null,
+    "choices": null,
+    "answer": "Before noon \\$3.75 per chicken, after noon \\$1.25 per chicken (the farmers sold $9$, $6$, $1$ chickens before noon).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Eliminate the prices",
+        "body": "Let the price be $x$ dollars before noon and $y$ after noon, $x>y>0$, and let the farmers sell $p,q,s$ chickens before noon ($1\\le p\\le9$, $1\\le q\\le15$, $1\\le s\\le25$). Then\n$$px+(10-p)y=35,\\qquad qx+(16-q)y=35,\\qquad sx+(26-s)y=35 .$$\nWith $d=x-y>0$ these read\n$$pd+10y=35,\\qquad qd+16y=35,\\qquad sd+26y=35 .$$\nSubtracting consecutive equations: $(p-q)d=6y$ and $(q-s)d=10y$. Both right sides are positive, so $p>q>s$ and\n$$\\frac{p-q}{q-s}=\\frac35 .$$\nThus $p-q=3k$, $q-s=5k$ for a positive integer $k$, and $p=s+8k\\le9$ with $s\\ge1$ forces $k=1$, $s=1$, $p=9$, $q=6$.\n\nThen $3d=6y$, so $d=2y$, and $9\\cdot2y+10y=28y=35$, giving $y=\\frac54$ and $x=y+d=\\frac{15}4$.\n\nCheck: $9(3.75)+1(1.25)=35$, $6(3.75)+10(1.25)=35$, $1(3.75)+25(1.25)=35$. ✓\n\n**Answer: \\$3.75 per chicken before noon and \\$1.25 after noon.**\n\n(The official solution sheet's determinant method is the same idea; its stated values $b=8$, $c=9$ are misprints for $6$ and $1$ — they do not satisfy the equations.)"
+      },
+      {
+        "title": "Exhaustive check",
+        "body": "For each choice of $(p,q)$ with $1\\le p\\le9$, $1\\le q\\le15$, solve the first two equations for $(x,y)$ and test the third equation for some $1\\le s\\le25$ together with $x>y>0$. A short computer search finds only $(p,q,s)=(9,6,1)$ with $(x,y)=(3.75,1.25)$, confirming uniqueness.\n\nBy hand one can also see the structure: the farmer with the most chickens must sell the fewest before noon (his many cheap afternoon sales compensate), and the totals $35=9\\cdot\\frac{15}4+\\frac54$, $35=6\\cdot\\frac{15}4+10\\cdot\\frac54$, $35=\\frac{15}4+25\\cdot\\frac54$ show every farmer earns the same.\n\n**Answer: \\$3.75 before noon, \\$1.25 after noon.**"
+      }
+    ],
+    "topics": [
+      "algebra",
+      "number-theory",
+      "money"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "vtrmc-1989-08",
+    "bank": "vtrmc",
+    "source": {
+      "contest": "VTRMC",
+      "paper": "11th VTRMC (1989)",
+      "year": 1989,
+      "number": 8,
+      "url": "https://www.math.vt.edu/people/plinnell/Vtregional/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "The integer sequence $\\{a_0,a_1,\\dots,a_{n-1}\\}$ is such that, for each $i$ $(0\\le i\\le n-1)$, $a_i$ is the number of $i$'s in the sequence. (Thus for $n=4$ we might have the sequence $\\{1,2,1,0\\}$.)\n\n(a) Prove that, if $n\\ge7$, such a sequence is unique.\n\n(b) Find such a sequence for $n=7$.\n\nHint: show that the sum of all the terms is $n$, and that there are $n-a_0-1$ nonzero terms other than $a_0$ which sum to $n-a_0$. (This problem is slightly modified from one on the Cambridge Men's Colleges Joint Awards and Entrance Examination, 24 November 1970.)",
+    "image": null,
+    "choices": null,
+    "answer": "For $n\\ge7$ the only sequence is $a_0=n-4$, $a_1=2$, $a_2=1$, $a_{n-4}=1$, all other terms $0$; for $n=7$: $3,2,1,1,0,0,0$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Count zeros and nonzero terms",
+        "body": "**Sum of the terms.** Each $a_j\\le n$; if $a_j=n$ then every term equals $j$, so $a_j=j<n$, a contradiction. Hence all terms lie in $\\{0,\\dots,n-1\\}$, and counting the $n$ terms by their values gives\n$$a_0+a_1+\\dots+a_{n-1}=n .$$\n\n**$a_0\\ge1$.** If $a_0=0$, no term is $0$, so all $a_i\\ge1$; with sum $n$, all $a_i=1$, but then $a_1=n\\ne1$. So $m:=a_0\\ge1$.\n\n**Structure of $a_1,\\dots,a_{n-1}$.** The $m$ zero terms are among $a_1,\\dots,a_{n-1}$ (as $a_0\\ne0$), so exactly $n-1-m$ of $a_1,\\dots,a_{n-1}$ are nonzero, and they sum to $n-m=(n-1-m)+1$. Positive integers summing to one more than their number: exactly one of them is $2$ and the rest are $1$. So $a_1,\\dots,a_{n-1}$ consist of one $2$, $n-2-m$ ones and $m$ zeros.\n\n**Cases.**\n- $m=1$: the ones in the sequence are $a_0$ and $n-2-m$ others, so $a_1=n-2$; but $a_1\\le2$, so $n\\le4$.\n- $m=2$: $a_1=n-2-m=n-4\\le2$, so $n\\le6$.\n- $m\\ge3$: the value $m$ occurs (as $a_0$) and no $a_i$ with $i\\ge1$ exceeds $2$, so $a_m=1$. The value $2$ occurs exactly once (it is not $a_0$), so $a_2=1$. Which index $j\\ge1$ carries the single $2$? $a_j=2$ means the value $j$ occurs twice. Values $\\ge3$ occur only as $a_0$ (once); $a_2=1$, $a_m=1$; so $j=1$: $a_1=2$. Then the ones among $a_1,\\dots$ are exactly $a_2$ and $a_m$, so $n-2-m=2$, i.e. $m=n-4$, and all other terms are $0$.\n\nHence for $n\\ge7$ (where only $m\\ge3$ is possible) the sequence must be\n$$a_0=n-4,\\quad a_1=2,\\quad a_2=1,\\quad a_{n-4}=1,\\quad a_i=0\\text{ otherwise}.$$\nIt works: there are $n-4$ zeros, two ones ($a_2,a_{n-4}$), one $2$ ($a_1$), one $n-4$ ($a_0$; note $n-4\\ge3$), and no other values. So the sequence exists and is unique.\n\n**(b)** For $n=7$: $\\{3,2,1,1,0,0,0\\}$. ∎"
+      },
+      {
+        "title": "Weighted sum",
+        "body": "Besides $\\sum_i a_i=n$ (see the first approach), the sum of all terms counted by value is $\\sum_i i\\,a_i$, so $\\sum_i i\\,a_i=n$ too. Subtracting,\n$$\\sum_{i\\ge2}(i-1)a_i=a_0=:m\\ge1 .\\qquad(*)$$\nAlso $a_1=n-m-\\sum_{i\\ge2}a_i$.\n\n- $m=1$: $(*)$ forces $a_2=1$ and $a_i=0$ for $i\\ge3$, so $a_1=n-2\\ge5$. But the only possible ones in the sequence are $a_0$, $a_2$ and $a_1$, so $a_1\\le3$ — contradiction.\n- $m=2$: $(*)$ gives either $a_2=2$ (others $i\\ge3$ zero) or $a_3=1$ (others $i\\ge2$ zero). In the first case $a_1=n-4\\ge3$ but no term other than possibly $a_1$ equals $1$; in the second $a_1=n-3\\ge4$ but the only ones are $a_3$ and possibly $a_1$. Contradiction.\n- $m\\ge3$: the value $m$ occurs, so $a_m\\ge1$; since $2(m-1)>m$, $(*)$ gives $a_m=1$, and the remaining contribution $1$ forces $a_2=1$, all other $a_i=0$ ($i\\ge3$, $i\\ne m$). Then $a_1=n-m-2$. The ones are $a_2$, $a_m$, and $a_1$ if $a_1=1$; so $a_1=2$ (the values $0,1,\\ge3$ all lead to a contradiction), whence $m=n-4$.\n\nSo for $n\\ge7$ the sequence is $(n-4,2,1,0,\\dots,0,1,0,0,0)$ with the second $1$ at position $n-4$; for $n=7$ it is $3,2,1,1,0,0,0$. A computer search over all candidates for $n\\le12$ confirms this (and finds none for $n=6$). ∎"
+      }
+    ],
+    "topics": [
+      "counting",
+      "logic",
+      "number-theory"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

@@ -1,0 +1,266 @@
+[
+  {
+    "id": "vtrmc-2003-01",
+    "bank": "vtrmc",
+    "source": {
+      "contest": "VTRMC",
+      "paper": "25th VTRMC (2003)",
+      "year": 2003,
+      "number": 1,
+      "url": "https://www.math.vt.edu/people/plinnell/Vtregional/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "An investor buys stock worth \\$10,000 and holds it for $n$ business days. Each day he has an equal chance of either gaining $20\\%$ or losing $10\\%$. However in the case he gains every day (i.e. $n$ gains of $20\\%$), he is deemed to have lost all his money, because he must have been involved with insider trading. Find a (simple) formula, with proof, of the amount of money he will have on average at the end of the $n$ days.",
+    "image": null,
+    "choices": null,
+    "answer": "$10000\\left(\\frac{21}{20}\\right)^n-10000\\left(\\frac35\\right)^n$ dollars",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Binomial expansion",
+        "body": "Each day multiplies the money by $\\frac65$ (gain) or by $\\frac{9}{10}$ (loss), each with probability $\\frac12$, independently of the other days.\n\nIf there are $p$ gains and $n-p$ losses, the amount is $10000\\left(\\frac65\\right)^p\\left(\\frac9{10}\\right)^{n-p}$, and this happens with probability $\\binom np\\left(\\frac12\\right)^n$. Ignoring the insider-trading rule, the expected amount is therefore\n$$\\sum_{p=0}^n\\binom np\\left(\\frac12\\right)^n 10000\\left(\\frac65\\right)^p\\left(\\frac9{10}\\right)^{n-p}=10000\\left(\\frac12\\cdot\\frac65+\\frac12\\cdot\\frac9{10}\\right)^n=10000\\left(\\frac{21}{20}\\right)^n$$\nby the binomial theorem.\n\nThe insider-trading rule changes only the outcome $p=n$: its term $\\left(\\frac12\\right)^n10000\\left(\\frac65\\right)^n=10000\\left(\\frac35\\right)^n$ must be replaced by $0$. Hence the average amount after $n$ days is\n$$10000\\left(\\frac{21}{20}\\right)^n-10000\\left(\\frac35\\right)^n\\ \\text{dollars}.$$\n**Answer:** $10000\\left(\\frac{21}{20}\\right)^n-10000\\left(\\frac35\\right)^n$ dollars. ∎"
+      },
+      {
+        "title": "Independence of the daily factors",
+        "body": "Let $X_1,\\dots,X_n$ be the daily factors; they are independent, each equal to $1.2$ or $0.9$ with probability $\\frac12$, so $E[X_i]=1.05$. Without the rule the final amount is $10000X_1\\cdots X_n$, whose expectation is $10000\\,E[X_1]\\cdots E[X_n]=10000\\cdot1.05^n$ by independence.\n\nWith the rule, the final amount equals $10000X_1\\cdots X_n$ except on the event \"all gains\", which has probability $2^{-n}$ and on which the amount $10000\\cdot1.2^n$ is replaced by $0$. So the expectation drops by $2^{-n}\\cdot10000\\cdot1.2^n=10000\\cdot0.6^n$:\n$$E=10000\\cdot1.05^n-10000\\cdot0.6^n.$$\nFor example, $n=1$ gives $\\frac12\\cdot0+\\frac12\\cdot9000=4500=10500-6000$. ∎"
+      }
+    ],
+    "topics": [
+      "probability",
+      "algebra"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "vtrmc-2003-02",
+    "bank": "vtrmc",
+    "source": {
+      "contest": "VTRMC",
+      "paper": "25th VTRMC (2003)",
+      "year": 2003,
+      "number": 2,
+      "url": "https://www.math.vt.edu/people/plinnell/Vtregional/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Find $\\displaystyle\\sum_{n=1}^\\infty\\frac{x^n}{n(n+1)}=\\frac{x}{1\\cdot2}+\\frac{x^2}{2\\cdot3}+\\frac{x^3}{3\\cdot4}+\\cdots$ for $|x|<1$.",
+    "image": null,
+    "choices": null,
+    "answer": "$1+\\dfrac{1-x}{x}\\ln(1-x)$ for $x\\neq0$ (and $0$ for $x=0$)",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Partial fractions",
+        "body": "For $|x|<1$ we use the series $-\\ln(1-x)=\\sum_{n\\ge1}\\frac{x^n}{n}$ (absolutely convergent). Since $\\frac1{n(n+1)}=\\frac1n-\\frac1{n+1}$, and both resulting series converge absolutely,\n$$S(x)=\\sum_{n=1}^\\infty\\frac{x^n}{n}-\\sum_{n=1}^\\infty\\frac{x^n}{n+1}.$$\nThe first sum is $-\\ln(1-x)$. For $x\\neq0$ the second is\n$$\\frac1x\\sum_{n=1}^\\infty\\frac{x^{n+1}}{n+1}=\\frac1x\\left(\\sum_{m=1}^\\infty\\frac{x^m}{m}-x\\right)=\\frac{-\\ln(1-x)-x}{x}.$$\nTherefore\n$$S(x)=-\\ln(1-x)+\\frac{\\ln(1-x)}{x}+1=1+\\frac{1-x}{x}\\ln(1-x)\\qquad(0<|x|<1),$$\nand clearly $S(0)=0$ (which is also the limit of the formula as $x\\to0$).\n\n**Answer:** $\\displaystyle\\sum_{n\\ge1}\\frac{x^n}{n(n+1)}=1+\\frac{1-x}{x}\\ln(1-x)$ for $x\\ne0$, and $0$ for $x=0$. ∎"
+      },
+      {
+        "title": "Multiply by $1-x$ (official idea)",
+        "body": "Multiply $-\\ln(1-x)=\\sum_{n\\ge1}x^n/n$ by $(1-x)$:\n$$-(1-x)\\ln(1-x)=\\sum_{n\\ge1}\\frac{x^n}{n}-\\sum_{n\\ge1}\\frac{x^{n+1}}{n}=x+\\sum_{n\\ge1}x^{n+1}\\left(\\frac1{n+1}-\\frac1n\\right)=x-\\sum_{n\\ge1}\\frac{x^{n+1}}{n(n+1)}.$$\nSo $\\sum_{n\\ge1}\\frac{x^{n+1}}{n(n+1)}=x+(1-x)\\ln(1-x)$, and dividing by $x\\ne0$ gives $S(x)=1+\\frac{1-x}{x}\\ln(1-x)$; $S(0)=0$.\n\n(Check: at $x=\\frac12$ the formula gives $1-\\ln2\\approx0.3069$, and $\\frac14+\\frac1{24}+\\frac1{96}+\\frac1{320}+\\dots\\approx0.3069$.) ∎"
+      }
+    ],
+    "topics": [
+      "sequences-series",
+      "calculus"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "vtrmc-2003-03",
+    "bank": "vtrmc",
+    "source": {
+      "contest": "VTRMC",
+      "paper": "25th VTRMC (2003)",
+      "year": 2003,
+      "number": 3,
+      "url": "https://www.math.vt.edu/people/plinnell/Vtregional/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Determine all invertible $2$ by $2$ matrices $A$ with complex numbers as entries satisfying $A=A^{-1}=A'$, where $A'$ denotes the transpose of $A$.",
+    "image": null,
+    "choices": null,
+    "answer": "$A=\\pm I$, or $A=\\begin{pmatrix}a&b\\\\b&-a\\end{pmatrix}$ with $a,b\\in\\mathbb C$, $a^2+b^2=1$",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Compare entries",
+        "body": "The condition says $A$ is symmetric ($A=A'$) and $A^2=I$ ($A=A^{-1}$). Conversely, a symmetric matrix with $A^2=I$ is invertible with $A^{-1}=A=A'$.\n\nWrite $A=\\begin{pmatrix}a&b\\\\b&d\\end{pmatrix}$. Then\n$$A^2=\\begin{pmatrix}a^2+b^2&b(a+d)\\\\ b(a+d)&b^2+d^2\\end{pmatrix}=\\begin{pmatrix}1&0\\\\0&1\\end{pmatrix}.$$\n\n* If $b\\neq0$: then $d=-a$ and $a^2+b^2=1$ (the last equation $b^2+d^2=1$ is then the same).\n* If $b=0$: then $a^2=d^2=1$, so $a,d\\in\\{1,-1\\}$. This gives $\\pm I$ and $\\pm\\begin{pmatrix}1&0\\\\0&-1\\end{pmatrix}$; the latter two are of the form $\\begin{pmatrix}a&b\\\\b&-a\\end{pmatrix}$ with $a=\\pm1$, $b=0$, $a^2+b^2=1$.\n\nSo the solutions are exactly\n$$A=\\pm I\\qquad\\text{and}\\qquad A=\\begin{pmatrix}a&b\\\\ b&-a\\end{pmatrix}\\ \\text{ with } a,b\\in\\mathbb C,\\ a^2+b^2=1,$$\ni.e. $b=\\pm\\sqrt{1-a^2}$ for an arbitrary complex $a$. (Note that over $\\mathbb C$, $a$ can be any complex number, e.g. $a=2$, $b=i\\sqrt3$.) ∎"
+      },
+      {
+        "title": "Eigenvalues (official approach)",
+        "body": "From $A^2=I$, every eigenvalue $\\lambda$ satisfies $\\lambda^2=1$, so $\\lambda=\\pm1$ and $\\det A=\\pm1$.\n\n*Case $\\det A=1$.* Then the eigenvalues are equal, both $r=1$ or both $r=-1$, and $A$ is similar to $\\begin{pmatrix}r&s\\\\0&r\\end{pmatrix}$ with $s\\in\\{0,1\\}$. Squaring gives $\\begin{pmatrix}1&2rs\\\\0&1\\end{pmatrix}=I$, so $s=0$ and $A=rI=\\pm I$.\n\n*Case $\\det A=-1$.* The eigenvalues are $1,-1$, so $\\operatorname{tr}A=0$; with $A$ symmetric, $A=\\begin{pmatrix}a&b\\\\b&-a\\end{pmatrix}$, and $\\det A=-a^2-b^2=-1$ gives $a^2+b^2=1$. Conversely such a matrix satisfies $A^2=(a^2+b^2)I=I$ and $A'=A$.\n\nHence the answer: $\\pm I$ and $\\begin{pmatrix}a&b\\\\b&-a\\end{pmatrix}$ with $a^2+b^2=1$. ∎"
+      }
+    ],
+    "topics": [
+      "linear-algebra",
+      "complex-numbers"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "vtrmc-2003-04",
+    "bank": "vtrmc",
+    "source": {
+      "contest": "VTRMC",
+      "paper": "25th VTRMC (2003)",
+      "year": 2003,
+      "number": 4,
+      "url": "https://www.math.vt.edu/people/plinnell/Vtregional/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "It is known that $2\\cos^3\\dfrac{\\pi}{7}-\\cos^2\\dfrac{\\pi}{7}-\\cos\\dfrac{\\pi}{7}$ is a rational number. Write this rational number in the form $p/q$, where $p$ and $q$ are integers with $q$ positive.",
+    "image": null,
+    "choices": null,
+    "answer": "-1/4",
+    "answerDisplay": "$-\\frac14$",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Seventh roots of unity (official)",
+        "body": "Let $R=e^{2\\pi i/7}$. Since $R\\ne1$ and $R^7=1$, $1+R+R^2+\\dots+R^6=0$. Taking real parts, $1+\\sum_{k=1}^6\\cos\\frac{2k\\pi}7=0$. Using $\\cos(2\\pi-x)=\\cos x$ the sum is $2\\left(\\cos\\frac{2\\pi}7+\\cos\\frac{4\\pi}7+\\cos\\frac{6\\pi}7\\right)$, and with $\\cos(\\pi-x)=-\\cos x$, $\\cos\\frac{4\\pi}7=-\\cos\\frac{3\\pi}7$, $\\cos\\frac{6\\pi}7=-\\cos\\frac{\\pi}7$:\n$$1+2\\cos\\frac{2\\pi}7-2\\cos\\frac{3\\pi}7-2\\cos\\frac{\\pi}7=0.$$\nWrite $c=\\cos\\frac\\pi7$ and $d=\\cos\\frac{2\\pi}7=2c^2-1$. By sum-to-product, $\\cos\\frac\\pi7+\\cos\\frac{3\\pi}7=2\\cos\\frac{2\\pi}7\\cos\\frac\\pi7=2dc$, so the equation becomes\n$$1+2d-4dc=0\\iff 4dc-2d=1.$$\nWith $d=2c^2-1$: $(2c^2-1)(4c-2)=1$, i.e. $8c^3-4c^2-4c+2=1$, so $8c^3-4c^2-4c=-1$ and\n$$2c^3-c^2-c=-\\frac14.$$\n**Answer:** $-\\dfrac14$."
+      },
+      {
+        "title": "Triple- and quadruple-angle formulas",
+        "body": "Let $\\theta=\\frac\\pi7$ and $c=\\cos\\theta$. Since $4\\theta=\\pi-3\\theta$, we have $\\cos4\\theta=-\\cos3\\theta$. Now $\\cos4\\theta=8c^4-8c^2+1$ and $\\cos3\\theta=4c^3-3c$, so\n$$8c^4+4c^3-8c^2-3c+1=0\\iff (c+1)(8c^3-4c^2-4c+1)=0$$\n(expand to check). As $c\\neq-1$, $8c^3-4c^2-4c+1=0$, and dividing by $4$:\n$$2c^3-c^2-c=-\\frac14.$$\nNumerically $c\\approx0.9009689$ and $2c^3-c^2-c\\approx-0.25000$. **Answer:** $-\\frac14$."
+      }
+    ],
+    "topics": [
+      "trigonometry",
+      "complex-numbers"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "vtrmc-2003-05",
+    "bank": "vtrmc",
+    "source": {
+      "contest": "VTRMC",
+      "paper": "25th VTRMC (2003)",
+      "year": 2003,
+      "number": 5,
+      "url": "https://www.math.vt.edu/people/plinnell/Vtregional/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "In the diagram below, $X$ is the midpoint of $BC$, $Y$ is the midpoint of $AC$, and $Z$ is the midpoint of $AB$. Also $\\angle ABC+\\angle PQC=\\angle ACB+\\angle PRB=90^\\circ$. Prove that $\\angle PXC=90^\\circ$.",
+    "image": "qimages/vtrmc/2003/q05.webp",
+    "choices": null,
+    "answer": "$\\angle QPR=\\angle B+\\angle C$ and $\\angle ZXY=\\angle A$, so $P,Z,X,Y$ are concyclic; then $\\angle QPX=\\angle ZYX=\\angle B$, and the angles of triangle $PQX$ give $\\angle PXQ=90^\\circ$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Cyclic quadrilateral $PZXY$",
+        "body": "As in the diagram, $Q$ and $R$ lie on $BC$, $Z$ lies on segment $PQ$ and $Y$ lies on segment $PR$. Write $\\angle A,\\angle B,\\angle C$ for the angles of triangle $ABC$.\n\n*Step 1: $\\angle ZPY=\\angle B+\\angle C$.* In triangle $PQR$, $\\angle PQR=\\angle PQC=90^\\circ-\\angle B$ and $\\angle PRQ=\\angle PRB=90^\\circ-\\angle C$. Hence $\\angle QPR=180^\\circ-(90^\\circ-\\angle B)-(90^\\circ-\\angle C)=\\angle B+\\angle C$, and $\\angle ZPY=\\angle QPR$.\n\n*Step 2: the medial triangle.* By the midpoint theorem $XY\\parallel AB$, $XZ\\parallel AC$, $YZ\\parallel BC$, so $AZXY$ is a parallelogram and $\\angle ZXY=\\angle A$; similarly $BXYZ$ is a parallelogram and $\\angle ZYX=\\angle ZBX=\\angle B$.\n\n*Step 3: $P,Z,X,Y$ are concyclic.* In quadrilateral $PZXY$ (convex, with $P$ and $X$ on opposite sides of $ZY$), the opposite angles at $P$ and $X$ add up to $(\\angle B+\\angle C)+\\angle A=180^\\circ$. Hence it is cyclic.\n\n*Step 4.* In the circle, the inscribed angles $\\angle ZPX$ and $\\angle ZYX$ stand on the same chord $ZX$ from the same side, so $\\angle QPX=\\angle ZPX=\\angle ZYX=\\angle B$.\n\n*Step 5.* In triangle $PQX$: $\\angle PQX=90^\\circ-\\angle B$ and $\\angle QPX=\\angle B$, so\n$$\\angle PXQ=180^\\circ-(90^\\circ-\\angle B)-\\angle B=90^\\circ.$$\nSince $Q,X,C$ are collinear, $\\angle PXC=180^\\circ-\\angle PXQ=90^\\circ$. ∎\n\n*Remark.* The facts that $Z\\in PQ$ and $Y\\in PR$ are read off the diagram; without them the angle conditions alone would not determine $P$."
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "vtrmc-2003-06",
+    "bank": "vtrmc",
+    "source": {
+      "contest": "VTRMC",
+      "paper": "25th VTRMC (2003)",
+      "year": 2003,
+      "number": 6,
+      "url": "https://www.math.vt.edu/people/plinnell/Vtregional/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $f:[0,1]\\to[0,1]$ be a continuous function such that $f(f(f(x)))=x$ for all $x\\in[0,1]$. Prove that $f(x)=x$ for all $x\\in[0,1]$. Here $[0,1]$ denotes the closed interval of all real numbers between $0$ and $1$, including $0$ and $1$.",
+    "image": null,
+    "choices": null,
+    "answer": "$f$ is injective, hence strictly monotone; it cannot be decreasing (then $f\\circ f\\circ f$ would be), and if increasing, $f(x)>x$ or $f(x)<x$ would propagate to $f^3(x)\\ne x$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Monotonicity",
+        "body": "*$f$ is injective:* if $f(a)=f(b)$ then $a=f(f(f(a)))=f(f(f(b)))=b$.\n\n*A continuous injective function on an interval is strictly monotone.* (If not, there are $a<b<c$ with $f(b)$ not between $f(a)$ and $f(c)$, say $f(b)>\\max(f(a),f(c))$; then any value $v$ with $\\max(f(a),f(c))<v<f(b)$ is taken on both $(a,b)$ and $(b,c)$ by the intermediate value theorem, contradicting injectivity. The case $f(b)<\\min$ is symmetric.)\n\n*$f$ is not decreasing:* if $f$ were strictly decreasing, then $f\\circ f$ would be increasing and $f\\circ f\\circ f$ decreasing; but $f\\circ f\\circ f$ is the identity, which is increasing. So $f$ is strictly increasing.\n\n*$f$ is the identity:* suppose $f(x)>x$ for some $x$. Applying the increasing function $f$ repeatedly, $f(f(x))>f(x)$ and $f(f(f(x)))>f(f(x))$, so $x=f^3(x)>f^2(x)>f(x)>x$, a contradiction. Similarly $f(x)<x$ leads to $x<x$. Hence $f(x)=x$ for every $x$. ∎"
+      },
+      {
+        "title": "Intermediate values (official approach)",
+        "body": "Suppose $f(y)\\neq y$ for some $y$. The three numbers $y,f(y),f^2(y)$ are distinct (if $f^2(y)=y$ then $f(y)=f^3(y)=y$; if $f^2(y)=f(y)$ then applying $f$ gives $y=f^3(y)=f^2(y)=f(y)$). The map $f$ permutes them cyclically: $y\\mapsto f(y)\\mapsto f^2(y)\\mapsto y$.\n\nAmong three distinct numbers permuted cyclically, relabel the starting point (replace $y$ by $f(y)$ or $f^2(y)$) and, if needed, $f$ by $g=f^2$ (which is also continuous with $g^3=\\mathrm{id}$, and permutes the three numbers in the reverse cyclic order) so that $y<f(y)<f^2(y)$.\n\nPick $a$ strictly between $f(y)$ and $f^2(y)$. On $[y,f(y)]$, $f$ goes from $f(y)$ to $f^2(y)$, so by the intermediate value theorem $f(p)=a$ for some $p\\in(y,f(y))$. On $[f(y),f^2(y)]$, $f$ goes from $f^2(y)$ to $f^3(y)=y<a$, so $f(q)=a$ for some $q\\in(f(y),f^2(y))$. Then $p=f^3(p)=f^2(a)=f^3(q)=q$, contradicting $p<f(y)<q$. Hence $f(y)=y$ for all $y$. ∎"
+      }
+    ],
+    "topics": [
+      "real-analysis",
+      "functional-equations"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "vtrmc-2003-07",
+    "bank": "vtrmc",
+    "source": {
+      "contest": "VTRMC",
+      "paper": "25th VTRMC (2003)",
+      "year": 2003,
+      "number": 7,
+      "url": "https://www.math.vt.edu/people/plinnell/Vtregional/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Let $T$ be a solid tetrahedron whose edges all have length $1$. Determine the volume of the region consisting of points which are at distance at most $1$ from some point in $T$ (your answer should involve $\\sqrt2,\\sqrt3,\\pi$).",
+    "image": null,
+    "choices": null,
+    "answer": "sqrt(3)+sqrt(2)/12+17*pi/6+3*arcsin(1/3)",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Decompose by the nearest point of $T$",
+        "body": "Let $U$ be the region. Every point $u\\in U\\setminus T$ has a unique nearest point $\\pi(u)$ in the convex set $T$, at distance $\\le1$. Sort the points of $U\\setminus T$ by where $\\pi(u)$ lies.\n\n**The tetrahedron.** A face is an equilateral triangle of area $\\frac{\\sqrt3}4$. Its height over a face: the foot of the altitude is the centroid of the face, at distance $\\frac1{\\sqrt3}$ from a vertex, so the height is $\\sqrt{1-\\frac13}=\\sqrt{\\frac23}$. Hence $\\operatorname{vol}T=\\frac13\\cdot\\frac{\\sqrt3}4\\cdot\\sqrt{\\frac23}=\\frac{\\sqrt2}{12}$.\n\n**Faces.** Points whose nearest point lies inside a face form the prism of height $1$ standing outward on that face: volume $\\frac{\\sqrt3}4$ each, $\\sqrt3$ for the four faces.\n\n**Edges.** Points whose nearest point lies inside an edge form a wedge of a unit-radius cylinder of length $1$ around the edge, with opening angle $\\pi-\\delta$, where $\\delta$ is the dihedral angle of $T$ (the wedge lies between the two outward normal half-planes of the adjacent faces). Its volume is $\\frac{\\pi-\\delta}{2\\pi}\\cdot\\pi\\cdot1^2\\cdot1=\\frac{\\pi-\\delta}2$.\n\nTo find $\\delta$, take edge $BC$ with midpoint $X$ and opposite vertices $A,D$. Then $XA=XD=\\frac{\\sqrt3}2$, $AD=1$, so by the cosine rule $\\cos\\delta=\\frac{\\frac34+\\frac34-1}{2\\cdot\\frac34}=\\frac13$. (Equivalently, with $Y$ the foot of the altitude from $D$, $\\sin\\angle XDY=\\frac{XY}{XD}=\\frac{1/(2\\sqrt3)}{\\sqrt3/2}=\\frac13$ and $\\pi-\\delta=\\frac\\pi2+\\sin^{-1}\\frac13$.) The six edges contribute\n$$6\\cdot\\frac{\\pi-\\cos^{-1}(1/3)}2=3\\pi-3\\cos^{-1}\\frac13=\\frac{3\\pi}2+3\\sin^{-1}\\frac13.$$\n\n**Vertices.** Points whose nearest point is a vertex $V$ form the intersection of the unit ball at $V$ with the normal cone of $T$ at $V$. The four normal cones at the vertices, translated to a common apex, fill space without overlap (each nonzero direction $w$ is the outward normal at the vertex maximizing $\\langle w,\\cdot\\rangle$, unique for almost every $w$). Hence the four vertex pieces together have the volume of one unit ball, $\\frac{4\\pi}3$. (Equivalently, as in the official solution: shrinking $T$ to a point keeps this part's volume fixed while the other parts vanish.)\n\n**Total.**\n$$\\operatorname{vol}U=\\frac{\\sqrt2}{12}+\\sqrt3+\\frac{3\\pi}2+3\\sin^{-1}\\frac13+\\frac{4\\pi}3=\\sqrt3+\\frac{\\sqrt2}{12}+\\frac{17\\pi}6+3\\sin^{-1}\\frac13\\approx11.77.$$\nEquivalent forms: $\\sqrt3+\\frac{\\sqrt2}{12}+\\frac{13\\pi}3-3\\cos^{-1}\\frac13$. ∎"
+      },
+      {
+        "title": "Steiner's formula check",
+        "body": "For a convex polyhedron $K$, Steiner's formula gives the volume of its $r$-neighbourhood as\n$$\\operatorname{vol}K+r\\cdot\\operatorname{area}(\\partial K)+r^2\\sum_{\\text{edges }e}\\frac{\\ell_e(\\pi-\\delta_e)}2+\\frac{4\\pi}3r^3,$$\nwhere $\\ell_e$ is the length and $\\delta_e$ the dihedral angle at edge $e$. For the regular tetrahedron with edge 1 and $r=1$: $\\operatorname{vol}K=\\frac{\\sqrt2}{12}$, surface area $\\sqrt3$, six edges with $\\delta=\\cos^{-1}\\frac13\\approx1.23096$:\n$$\\frac{\\sqrt2}{12}+\\sqrt3+3\\left(\\pi-\\cos^{-1}\\tfrac13\\right)+\\frac{4\\pi}3\\approx0.11785+1.73205+5.73189+4.18879=11.77059.$$\nThis agrees with the first solution (and with a Monte Carlo estimate). ∎"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "measurement",
+      "calculus"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null,
+    "answerDisplay": "$\\sqrt3+\\dfrac{\\sqrt2}{12}+\\dfrac{17\\pi}{6}+3\\sin^{-1}\\dfrac13\\approx11.7706$"
+  }
+]

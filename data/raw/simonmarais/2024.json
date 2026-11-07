@@ -1,0 +1,431 @@
+[
+  {
+    "id": "simonmarais-2024-a1",
+    "bank": "simonmarais",
+    "source": {
+      "contest": "Simon Marais",
+      "paper": "Session A",
+      "year": 2024,
+      "number": 1,
+      "url": "https://www.simonmarais.org/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $a,b,c$ be real numbers greater than $1$ satisfying\n$$\\lfloor a\\rfloor b=\\lfloor b\\rfloor c=\\lfloor c\\rfloor a .$$\nProve that $a=b=c$.\n\n(Here, $\\lfloor x\\rfloor$ denotes the largest integer that is less than or equal to $x$.)",
+    "image": null,
+    "choices": null,
+    "answer": "Let $a$ be the smallest. Then $\\lfloor a\\rfloor\\le\\lfloor b\\rfloor$ in $\\lfloor a\\rfloor b=\\lfloor b\\rfloor c$ gives $c\\le b$, and $\\lfloor b\\rfloor\\ge\\lfloor c\\rfloor$ in $\\lfloor b\\rfloor c=\\lfloor c\\rfloor a$ gives $a\\ge c$. So $a=c$, and then $a=b$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Start from the smallest number",
+        "body": "All three floors are positive integers, since $a,b,c>1$. The system is unchanged by the cyclic shift $(a,b,c)\\to(b,c,a)$, so we may assume $a\\le b$ and $a\\le c$. Floors are monotone, so $\\lfloor a\\rfloor\\le\\lfloor b\\rfloor$ and $\\lfloor a\\rfloor\\le\\lfloor c\\rfloor$.\n\n* From $\\lfloor b\\rfloor c=\\lfloor a\\rfloor b\\le\\lfloor b\\rfloor b$ we get $c\\le b$, hence $\\lfloor c\\rfloor\\le\\lfloor b\\rfloor$.\n* From $\\lfloor c\\rfloor a=\\lfloor b\\rfloor c\\ge\\lfloor c\\rfloor c$ we get $a\\ge c$. Together with $a\\le c$ this gives $a=c$.\n* Then $\\lfloor a\\rfloor b=\\lfloor c\\rfloor a=\\lfloor a\\rfloor a$, so $b=a$.\n\nHence $a=b=c$. ∎"
+      }
+    ],
+    "topics": [
+      "algebra",
+      "inequalities"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "simonmarais-2024-a2",
+    "bank": "simonmarais",
+    "source": {
+      "contest": "Simon Marais",
+      "paper": "Session A",
+      "year": 2024,
+      "number": 2,
+      "url": "https://www.simonmarais.org/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "A positive integer $n$ is *tripairable* if it is possible to partition the set $\\{1,2,\\ldots,n\\}$ into disjoint pairs such that the sum of the two elements in each pair is a power of $3$. For example, $6$ is tripairable because $\\{1,2,3,4,5,6\\}=\\{1,2\\}\\cup\\{3,6\\}\\cup\\{4,5\\}$ and\n$$1+2=3^1,\\qquad 3+6=3^2\\qquad\\text{and}\\qquad 4+5=3^2$$\nare all powers of $3$.\n\nHow many positive integers less than or equal to $2024$ are tripairable?",
+    "image": null,
+    "choices": null,
+    "answer": "111",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Forced pairs and ternary digits",
+        "body": "Call a partition as in the problem a *tripairing*, and regard $0$ as tripairable (empty partition). We prove:\n\n**Claim.** $n\\ge0$ is tripairable if and only if its base-$3$ digits are all $0$ or $2$.\n\n**Forced pairs.** Let $3^k\\le n<3^{k+1}$ and take $j$ with $3^k\\le j\\le n$. If $j$ is paired with $j'$, then $j+j'$ is a power of $3$ with $3^k<j+j'\\le2n-1<2\\cdot3^{k+1}$, so $j+j'=3^{k+1}$. Thus $j$ must be paired with $3^{k+1}-j$.\n\n* If $3^k\\le n<2\\cdot3^k$: $3^k$ would need the partner $2\\cdot3^k>n$. So $n$ is not tripairable, and its leading digit is $1$.\n* If $2\\cdot3^k\\le n<3^{k+1}$: every number in $[3^{k+1}-n,\\,n]$ is forced. Those $\\ge3^k$ by the above, and those below $3^k$ because their partner $3^{k+1}-j$ is forced. These numbers pair up as $j\\leftrightarrow3^{k+1}-j$ ($j\\ne3^{k+1}-j$ since $3^{k+1}$ is odd). What remains is $\\{1,\\dots,m\\}$ with $m=3^{k+1}-1-n<3^k$. So $n$ is tripairable $\\iff$ $m$ is.\n\n**Digits.** $3^{k+1}-1=(22\\ldots2)_3$, so $m=3^{k+1}-1-n$ is obtained digit by digit as $d\\mapsto2-d$, with no borrows. Since $n$ has leading digit $2$, $m$ has a $0$ there, and the other digits swap $0\\leftrightarrow2$ and fix $1$. So $n$ has only digits $0,2$ $\\iff$ $m$ does. Strong induction on $n$ (base $n=0$) proves the claim.\n\n**Counting.** $2024=2\\cdot729+2\\cdot243+0\\cdot81+2\\cdot27+2\\cdot9+2\\cdot3+2=(2202222)_3$. Count the $7$-digit strings over $\\{0,2\\}$ that are $\\le2202222$:\n* first digit $0$: $2^6=64$;\n* first digits $20$: $2^5=32$;\n* first digits $22$: the third digit must be $0$, then $2^4=16$.\n\nThat gives $64+32+16=112$, including $0$. So $112-1=111$ positive integers $\\le2024$ are tripairable. (A matching computation confirms the claim for all $n\\le300$.)\n\n**Answer: 111.**"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "counting"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "simonmarais-2024-a3",
+    "bank": "simonmarais",
+    "source": {
+      "contest": "Simon Marais",
+      "paper": "Session A",
+      "year": 2024,
+      "number": 3,
+      "url": "https://www.simonmarais.org/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $W$ be a fixed positive integer. Let $S$ be the set of all pairs $(a,b)$ of positive integers such that $a\\ne b$. For each $(a,b)\\in S$, let $m(a,b)$ be the largest integer satisfying $m(a,b)\\le\\dfrac{1+na}{1+nb}$ for all integers $n\\ge1$.\n\n(a) For each $(a,b)\\in S$, prove that there exists a positive integer $k$ such that\n$$m(a,b)\\le\\frac{1+na}{W+nb},$$\nfor all $n\\ge k$.\n\n(b) For each $(a,b)\\in S$, let $k(a,b)$ be the smallest value of $k$ that satisfies the condition of part (a). Determine $\\max\\{k(a,b)\\mid(a,b)\\in S\\}$ or prove that it does not exist.",
+    "image": null,
+    "choices": null,
+    "answer": "The maximum exists and equals $2W-1$ (attained when $a=2b+1$). With $1+a=q(1+b)+r$, $0\\le r\\le b$, one finds $m=q$ and $k(a,b)=\\max\\!\\left(1,\\left\\lceil\\frac{qW-1}{q+r-1}\\right\\rceil\\right)$ for $a>b$; for $a<b$, $k(a,b)=1$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Compute $m(a,b)$ and $k(a,b)$ explicitly",
+        "body": "Write $\\dfrac{1+na}{1+nb}=\\dfrac ab+\\dfrac{1-a/b}{1+nb}$.\n\n**Case $a<b$.** The terms decrease to $\\frac ab\\in(0,1)$, so they are all positive and some are $<1$. Hence $m(a,b)=0$. Since $0\\le\\frac{1+na}{W+nb}$ for all $n$, $k(a,b)=1$.\n\n**Case $a>b$.** The terms increase, so the smallest is the one with $n=1$, and $m(a,b)=\\left\\lfloor\\frac{1+a}{1+b}\\right\\rfloor=:q\\ge1$. Write $1+a=q(1+b)+r$ with $0\\le r\\le b$; then $a-qb=q+r-1$. Here $q+r-1\\ge1$: if $q=1$ then $r\\ge1$, because $r=0$ would give $a=b$. Now\n$$q\\le\\frac{1+na}{W+nb}\\iff qW-1\\le n(a-qb)=n(q+r-1)\\iff n\\ge\\frac{qW-1}{q+r-1}.$$\n**(a)** follows: $k=\\max\\!\\big(1,\\lceil\\frac{qW-1}{q+r-1}\\rceil\\big)$ works, and it is the smallest such $k$.\n\n**(b)** We show $\\frac{qW-1}{q+r-1}\\le2W-1$.\n* If $q\\ge2$: $\\dfrac{qW-1}{q+r-1}\\le\\dfrac{qW-1}{q-1}=W+\\dfrac{W-1}{q-1}\\le2W-1$.\n* If $q=1$: $r\\ge1$ and $\\dfrac{W-1}{r}\\le W-1<2W-1$.\n\nEquality holds for $q=2$, $r=0$, i.e. $1+a=2(1+b)$, i.e. $a=2b+1$, where $k(a,b)=2W-1$. For example, $k(3,1)=2W-1$: $m(3,1)=2$, and $2\\le\\frac{1+3n}{W+n}\\iff n\\ge2W-1$.\n\n**Answer:** the maximum exists and equals $2W-1$. ∎ (A brute-force search over $a,b<40$ for $W\\le5$ agrees.)"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "inequalities"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "simonmarais-2024-a4",
+    "bank": "simonmarais",
+    "source": {
+      "contest": "Simon Marais",
+      "paper": "Session A",
+      "year": 2024,
+      "number": 4,
+      "url": "https://www.simonmarais.org/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Define a sequence by $s_0=1$ and for $d\\ge1$, $s_d=s_{d-1}+X_d$, where $X_d$ is chosen uniformly at random from the set $\\{1,2,\\ldots,d\\}$.\n\nWhat is the probability that the sequence $s_0,s_1,s_2,\\ldots$ contains infinitely many primes?",
+    "image": null,
+    "choices": null,
+    "answer": "1",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Each new prime is hit with probability at least $1/p$",
+        "body": "Let $\\mathcal S=\\{s_0,s_1,\\dots\\}$. The sequence is strictly increasing and the $X_d$ are independent.\n\n**Lemma.** Let $n\\ge2$, and let $F$ be an event of the form \"$\\mathcal S\\cap T=\\emptyset$\" for a set $T\\subseteq\\{1,\\dots,n-1\\}$. Then\n$$P(F\\cap\\{n\\in\\mathcal S\\})\\ge\\frac1n\\,P(F).$$\n\n*Proof.* Let $\\sigma=\\min\\{d\\ge1:s_{d-1}+d\\ge n\\}$, the first step at which $n$ can be reached in one move. Since $s_{d-1}+d\\ge n$ for $d=n$, we have $\\sigma\\le n$. Whether $\\sigma=d$ is decided by $X_1,\\dots,X_{d-1}$. Also $s_{\\sigma-1}<n$: either $\\sigma=1$ and $s_0=1<n$, or $s_{\\sigma-1}\\le s_{\\sigma-2}+(\\sigma-1)<n$ by minimality. So $n-s_{\\sigma-1}\\in\\{1,\\dots,\\sigma\\}$. Given $X_1,\\dots,X_{\\sigma-1}$, the variable $X_\\sigma$ is uniform on $\\{1,\\dots,\\sigma\\}$, so $s_\\sigma=n$ with conditional probability $\\frac1\\sigma\\ge\\frac1n$.\n\nLet $F'$ be the event that none of $s_0,\\dots,s_{\\sigma-1}$ lies in $T$. It is determined by $X_1,\\dots,X_{\\sigma-1}$, and $F\\subseteq F'$. On the event $\\{s_\\sigma=n\\}$, the terms of $\\mathcal S$ below $n$ are exactly $s_0,\\dots,s_{\\sigma-1}$, so $F\\cap\\{s_\\sigma=n\\}=F'\\cap\\{s_\\sigma=n\\}$. Hence\n$$P(F\\cap\\{n\\in\\mathcal S\\})\\ge P(F'\\cap\\{s_\\sigma=n\\})=E\\Big[\\mathbf 1_{F'}\\cdot\\tfrac1\\sigma\\Big]\\ge\\frac{P(F')}n\\ge\\frac{P(F)}n.\\qquad\\square$$\n\n**Main argument.** Let $p_1<p_2<\\cdots$ be the primes, fix $t$, and let $A_i$ be the event that none of $p_t,\\dots,p_i$ is in $\\mathcal S$. Apply the lemma with $n=p_i$ and $T=\\{p_t,\\dots,p_{i-1}\\}$, so that $F=A_{i-1}$:\n$$P(A_i)=P(A_{i-1})-P(A_{i-1}\\cap\\{p_i\\in\\mathcal S\\})\\le\\Big(1-\\frac1{p_i}\\Big)P(A_{i-1}).$$\nHence $P(\\text{no }p_i\\text{ with }i\\ge t\\text{ lies in }\\mathcal S)\\le\\prod_{i\\ge t}\\big(1-\\frac1{p_i}\\big)\\le\\exp\\!\\big(-\\sum_{i\\ge t}\\frac1{p_i}\\big)=0$, because $\\sum 1/p$ diverges (Euler).\n\nIf $\\mathcal S$ contains only finitely many primes, then for some $t$ it contains none of $p_t,p_{t+1},\\dots$. This is a countable union of probability-$0$ events. So with probability $1$ the sequence contains infinitely many primes.\n\n**Answer: 1.**"
+      }
+    ],
+    "topics": [
+      "probability",
+      "number-theory"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "simonmarais-2024-b1",
+    "bank": "simonmarais",
+    "source": {
+      "contest": "Simon Marais",
+      "paper": "Session B",
+      "year": 2024,
+      "number": 1,
+      "url": "https://www.simonmarais.org/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Alice has six boxes labelled $1$ through $6$. She secretly chooses exactly two of the boxes and places a coin inside each. Bob is trying to guess which two boxes contain the coins. Each time Bob guesses, he does so by tapping exactly two of the boxes. Alice then responds by telling him the total number of coins inside the two boxes that he tapped. Bob successfully finds the two coins when Alice responds with the number $2$.\n\nWhat is the smallest positive integer $n$ such that Bob can always find the two coins in at most $n$ guesses?",
+    "image": null,
+    "choices": null,
+    "answer": "5",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "A five-guess strategy and a counting bound",
+        "body": "**Five guesses suffice.** Bob taps $\\{1,2\\},\\{1,3\\},\\{1,4\\},\\{1,5\\}$ (stopping early if he hears $2$). Then:\n* If exactly one of these answers was $1$, say for $\\{1,j\\}$: box $1$ is empty (otherwise every answer would be $\\ge1$), so the coins are in $j$ and $6$. He taps $\\{j,6\\}$.\n* If exactly two answers were $1$, for $\\{1,j\\}$ and $\\{1,l\\}$: box $1$ is empty and the coins are in $j,l$. He taps $\\{j,l\\}$.\n* If all four answers were $1$: the coins are in $1$ and $6$. He taps $\\{1,6\\}$.\n\nNo other pattern can occur. If box $1$ holds a coin, its partner is in $\\{2,3,4,5\\}$ (found earlier) or is box $6$ (four $1$s). If box $1$ is empty, at most one coin is in box $6$, so one or two answers are $1$.\n\n**Four guesses do not suffice.** Let $N(g)$ be the largest number of possible coin placements that a strategy can always resolve within $g$ guesses. A guess wins for exactly one placement (the tapped pair). Otherwise the answer $0$ or $1$ splits the rest, and each part must be resolved within $g-1$ guesses. So $N(g)\\le1+2N(g-1)$ and $N(0)=0$, giving $N(g)\\le2^g-1$; in particular $N(3)\\le7$. With $4$ guesses, after a first guess $\\{a,b\\}$ answered by $1$ there remain $2\\cdot4=8$ placements (one coin in $\\{a,b\\}$, one among the other four boxes). That is more than $7$, so three more guesses cannot always succeed.\n\n**Answer: 5.** (An exhaustive game-tree search confirms that the optimal worst case is $5$.)"
+      }
+    ],
+    "topics": [
+      "logic",
+      "games",
+      "counting"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "simonmarais-2024-b2",
+    "bank": "simonmarais",
+    "source": {
+      "contest": "Simon Marais",
+      "paper": "Session B",
+      "year": 2024,
+      "number": 2,
+      "url": "https://www.simonmarais.org/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Determine all continuous functions $f:\\mathbb R\\setminus\\{1\\}\\to\\mathbb R$ that satisfy\n$$f(x)=(x+1)\\,f(x^2),$$\nfor all $x\\in\\mathbb R\\setminus\\{-1,1\\}$.",
+    "image": null,
+    "choices": null,
+    "answer": "$f(x)=\\dfrac{A}{x-1}$ for an arbitrary constant $A\\in\\mathbb R$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Substitute $g(x)=(x-1)f(x)$",
+        "body": "**Answer: $f(x)=\\frac A{x-1}$, $A\\in\\mathbb R$ arbitrary.** These work:\n$$(x+1)\\,\\frac{A}{x^2-1}=\\frac A{x-1}.$$\n\nConversely, let $g(x)=(x-1)f(x)$, continuous on $\\mathbb R\\setminus\\{1\\}$ (including at $-1$). For $x\\ne\\pm1$,\n$$g(x^2)=(x^2-1)f(x^2)=(x-1)(x+1)f(x^2)=(x-1)f(x)=g(x).$$\nSo $g(x)=g(x^2)$ for $x\\ne\\pm1$. Applying this to $-x$ gives $g(-x)=g(x^2)=g(x)$, so $g$ is even (away from $\\pm1$).\n\n* **$|x|<1$:** $g(x)=g(x^2)=g(x^4)=\\dots=g(x^{2^k})\\to g(0)$ by continuity at $0$. So $g\\equiv g(0)$ on $(-1,1)$, and by continuity at $-1$ also $g(-1)=g(0)$.\n* **$x>1$:** the numbers $u_j=x^{1/2^j}$ are all $>1$, and $g(u_{j+1})=g(u_{j+1}^2)=g(u_j)$, so $g(u_j)=g(x)$ for all $j$. Let $y_k=-u_k\\ne\\pm1$. Then $g(y_k)=g(y_k^2)=g(u_{k-1})=g(x)$. As $k\\to\\infty$, $y_k\\to-1$ (from below), so by continuity at $-1$, $g(x)=g(-1)=g(0)$. (Approaching $1$ instead would not work, because $1$ is not in the domain.)\n* **$x<-1$:** $g(x)=g(x^2)$ with $x^2>1$, so $g(x)=g(0)$.\n\nHence $g$ is a constant $A$, and $f(x)=\\frac A{x-1}$. ∎"
+      }
+    ],
+    "topics": [
+      "functional-equations",
+      "real-analysis"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "simonmarais-2024-b3",
+    "bank": "simonmarais",
+    "source": {
+      "contest": "Simon Marais",
+      "paper": "Session B",
+      "year": 2024,
+      "number": 3,
+      "url": "https://www.simonmarais.org/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "text",
+    "prompt": "Let $\\mathcal L$ be the set of all lines in the plane and let $\\mathcal P$ be the set of all points in the plane. Determine whether there exists a function $g:\\mathcal L\\to\\mathcal P$ such that for any two distinct non-parallel lines $\\ell_1,\\ell_2\\in\\mathcal L$, we have\n\n(a) $g(\\ell_1)\\ne g(\\ell_2)$, and\n\n(b) if $\\ell_3$ is the line passing through $g(\\ell_1)$ and $g(\\ell_2)$, then $g(\\ell_3)$ is the intersection of $\\ell_1$ and $\\ell_2$.",
+    "image": null,
+    "choices": null,
+    "answer": "No",
+    "acceptedAnswers": [
+      "n",
+      "no such function",
+      "no such function exists",
+      "does not exist",
+      "it does not exist"
+    ],
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Injectivity, then a contradiction with two parallel lines",
+        "body": "**Answer: no such function exists.** Suppose $g$ exists. For two points $X\\ne Y$ write $XY$ for the line through them.\n\n**Step 1: $g$ is injective.** Let $a\\ne b$ with $g(a)=g(b)$. By (a), $a\\parallel b$. Take a line $c$ crossing both. By (a), $g(c)\\ne g(a)$; let $\\ell=g(a)g(c)$. Applying (b) to the pair $(a,c)$ gives $g(\\ell)=a\\cap c$. The line through $g(b)=g(a)$ and $g(c)$ is also $\\ell$, so applying (b) to $(b,c)$ gives $g(\\ell)=b\\cap c$. Then the point $g(\\ell)$ lies on both parallel lines $a$ and $b$, which is impossible.\n\n**Step 2: lines through $g(\\ell)$ are mapped into $\\ell$.** Let $\\ell$ be a line, $P=g(\\ell)$, and let $a\\ne b$ be two lines through $P$ (they are not parallel). By (a), $g(a)\\ne g(b)$. With $c=g(a)g(b)$, (b) gives $g(c)=a\\cap b=P=g(\\ell)$, so $c=\\ell$ by injectivity. Hence $g(x)\\in\\ell$ for every line $x$ through $g(\\ell)$.\n\n**Step 3: if $g(a)\\in\\ell$ then $g(\\ell)\\in a$.** Choose a line $x$ through $g(\\ell)$ with $x\\ne a$ and $x\\not\\parallel a$. By Step 2, $g(x)\\in\\ell$, and $g(x)\\ne g(a)$ by injectivity. So the line $g(x)g(a)$ is $\\ell$, and (b) gives $g(\\ell)=x\\cap a\\in a$.\n\n**Contradiction.** Take two distinct parallel lines $a,b$. By injectivity $g(a)\\ne g(b)$; let $\\ell=g(a)g(b)$. By Step 3, $g(\\ell)$ lies on both $a$ and $b$, which is impossible. ∎"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "logic",
+      "functional-equations"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "simonmarais-2024-b4",
+    "bank": "simonmarais",
+    "source": {
+      "contest": "Simon Marais",
+      "paper": "Session B",
+      "year": 2024,
+      "number": 4,
+      "url": "https://www.simonmarais.org/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "*The following problem is open in the sense that the answer to part (b) is not currently known. A solution to part (a) will be awarded 7 points. Up to 7 additional points may be awarded for progress on part (b).*\n\nLet $n$ be an odd positive integer and let\n$$f_n(x,y,z)=x^n+y^n+z^n+(x+y+z)^n .$$\n\n(a) Prove that there exist infinitely many values of $n$ such that\n$$f_n(x,y,z)\\equiv(x+y)(y+z)(z+x)\\,g(x,y,z)\\,h(x,y,z)\\pmod 2,$$\nfor some integer polynomials $g(x,y,z)$ and $h(x,y,z)$, neither of which is constant modulo $2$.\n\n(b) Determine all values of $n$ such that\n$$f_n(x,y,z)\\equiv(x+y)(y+z)(z+x)\\,g(x,y,z)\\,h(x,y,z)\\pmod 2,$$\nfor some integer polynomials $g(x,y,z)$ and $h(x,y,z)$, neither of which is constant modulo $2$.\n\n(Two integer polynomials are *congruent modulo 2* if every coefficient of their difference is even. A polynomial is *constant modulo 2* if it is congruent to a constant polynomial modulo $2$.)",
+    "image": null,
+    "choices": null,
+    "answer": "(a) For $n=2^m+1$, $q=2^m$: modulo $2$, with $s=x+z$ and $t=y+z$, $f_n\\equiv st\\,(s^{q-1}+t^{q-1})$. If $q-1=ab$ with $a,b>1$ (e.g. $m\\ge4$ even), $s^{ab}+t^{ab}=(s+t)\\cdot\\frac{s^a+t^a}{s+t}\\cdot\\frac{s^{ab}+t^{ab}}{s^a+t^a}$ gives the factorisation. (b) is an **open problem**.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Part (a): substitute $s=x+z$, $t=y+z$",
+        "body": "Work modulo $2$, i.e. in $\\mathbb F_2[x,y,z]$, where $(\\alpha+\\beta)^2=\\alpha^2+\\beta^2$ and hence $(\\alpha+\\beta)^q=\\alpha^q+\\beta^q$ for $q=2^m$.\n\nLet $m\\ge4$ be even, $q=2^m$ and $n=q+1$. Then $q-1=(2^{m/2}-1)(2^{m/2}+1)=ab$ with $a=2^{m/2}-1\\ge3$ and $b=2^{m/2}+1\\ge5$. This gives infinitely many $n$: $17,65,257,\\dots$.\n\n**Change of variables.** Put $s=x+z$, $t=y+z$. Modulo $2$: $x=s+z$, $y=t+z$, $x+y+z=s+t+z$ and $x+y=s+t$. Using $u^{q+1}=u\\cdot u^q$:\n$$\\begin{aligned}\nx^n&=(s+z)(s^q+z^q)=s^{q+1}+s^qz+sz^q+z^{q+1},\\\\\ny^n&=t^{q+1}+t^qz+tz^q+z^{q+1},\\qquad z^n=z^{q+1},\\\\\n(x+y+z)^n&=(s+t+z)(s^q+t^q+z^q)\\\\\n&=s^{q+1}+st^q+sz^q+ts^q+t^{q+1}+tz^q+zs^q+zt^q+z^{q+1}.\n\\end{aligned}$$\nAdding, every term cancels in pairs except $st^q+ts^q$ (note that $z^{q+1}$ occurs four times). So\n$$f_n\\equiv st\\,(s^{q-1}+t^{q-1})\\pmod2 .$$\n\n**Factor.** Let $G=\\sum_{i=0}^{a-1}s^{a-1-i}t^i$ and $H=\\sum_{j=0}^{b-1}s^{a(b-1-j)}t^{aj}$. Modulo $2$, $(s+t)G=s^a+t^a$ and $(s^a+t^a)H=s^{ab}+t^{ab}$. Hence\n$$f_n\\equiv s\\,t\\,(s+t)\\,G\\,H\\equiv(z+x)(y+z)(x+y)\\,G\\,H\\pmod 2 .$$\nTake $g=G(x+z,y+z)$ and $h=H(x+z,y+z)$, with integer coefficients. They are not constant modulo $2$: setting $y=z=0$ gives $g=x^{a-1}$ and $h=x^{a(b-1)}$, of positive degree.\n\nSo every $n=2^m+1$ with $m\\ge4$ even has the required factorisation, which proves (a). ∎ (The identity was checked by computer for $n=17$ and $n=65$.)"
+      },
+      {
+        "title": "Part (b): what is known (open problem)",
+        "body": "Part (b) is **open**. Write $p_n=\\dfrac{f_n}{(x+y)(y+z)(z+x)}$ (over $\\mathbb F_2$); the question asks for which odd $n$ the polynomial $p_n$ is reducible over $\\mathbb F_2$.\n\n* Part (a) above works whenever $2^m-1$ is composite. The official solutions also give a second construction over the field $\\mathbb F_{2^m}$. There, $f_{2^m+1}$ equals the determinant with rows $(1,1,1)$, $(x,y,z)$, $(x^q,y^q,z^q)$, so every linear form $\\alpha x+\\beta y+\\gamma z$ with $\\alpha,\\beta,\\gamma\\in\\mathbb F_q$ and $\\alpha+\\beta+\\gamma=0$ divides it. Grouping these forms into Frobenius orbits gives a factorisation over $\\mathbb F_2$ for **every** $n=2^m+1$ with $m\\ge3$.\n* According to the official comments, results of Janwa and Wilson give reducibility for $n=4^m-2^m+1$ (stated there for $m\\ge4$), while Janwa, McGuire and Wilson showed irreducibility when $n\\equiv3\\pmod4$. These come from the theory of double-error-correcting cyclic codes and APN functions.\n* It was conjectured that the two families $2^m+1$ and $4^m-2^m+1$ are the only examples. Hernando and McGuire disproved this with a factorisation of $p_{205}$.\n\nThe complete list of $n$ is not known."
+      }
+    ],
+    "topics": [
+      "polynomials",
+      "abstract-algebra",
+      "number-theory"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": "Part (b) is an open problem (stated as such on the paper); only part (a) is proved and the known results for (b) are summarised from the official comments. Consider excluding from practice or treating as part (a) only."
+  },
+  {
+    "id": "simonmarais-2024-c1",
+    "bank": "simonmarais",
+    "source": {
+      "contest": "Simon Marais",
+      "paper": "Session C",
+      "year": 2024,
+      "number": 1,
+      "url": "https://www.simonmarais.org/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "We say that a square in the plane is *centred* if the intersection of its diagonals is at the origin.\n\nProve that there exists a centred square with exactly $d$ lattice points in its interior if and only if $d$ is a positive integer satisfying $d\\equiv1\\pmod4$.\n\n(A *lattice point* is a point in $\\mathbb R^2$ whose coordinates are both integers).",
+    "image": null,
+    "choices": null,
+    "answer": "Rotation by $90^\\circ$ about the origin permutes the interior lattice points: the origin is fixed and all other orbits have size $4$, so $d\\equiv1\\pmod4$. Conversely, grow a centred square whose sides have irrational slope: its count of interior lattice points jumps by exactly $4$ each time, taking every value $1,5,9,\\dots$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Rotation orbits, and growing a tilted square",
+        "body": "Let $\\rho(a,b)=(-b,a)$ be the rotation by $90^\\circ$ about the origin. It maps $\\mathbb Z^2$ onto itself. Every centred square is mapped onto itself by $\\rho$. For $P\\ne0$ the orbit $\\{P,\\rho P,-P,-\\rho P\\}$ has exactly $4$ elements.\n\n**Necessity.** The interior of a centred square is $\\rho$-invariant and contains the origin. Its lattice points are the origin plus a union of orbits of size $4$. So $d\\ge1$ and $d\\equiv1\\pmod4$.\n\n**Sufficiency.** Choose $\\theta$ with $\\tan\\theta$ irrational and let $e_1=(\\cos\\theta,\\sin\\theta)$, $e_2=(-\\sin\\theta,\\cos\\theta)$. The centred square $S_x$ of side $x$ with sides parallel to $e_1,e_2$ has interior $\\{P:h(P)<x\\}$, where $h(P)=2\\max(|P\\cdot e_1|,|P\\cdot e_2|)$. Let $f(x)$ be the number of lattice points with $h(P)<x$. Since $h(P)\\ge\\sqrt2\\,|P|$, there are only finitely many lattice points below any bound. So the values of $h$ on $\\mathbb Z^2$ form a discrete set $0=t_0<t_1<t_2<\\cdots$.\n\n*Claim: for $j\\ge1$, exactly $4$ lattice points have $h(P)=t_j$.* The map $\\rho$ preserves $h$ (it permutes $\\pm e_1,\\pm e_2$), so the number is a positive multiple of $4$. If it were at least $8$, two different lattice points $P\\ne P'$ would lie on the same side of $S_{t_j}$. Then $P-P'=(m,k)\\in\\mathbb Z^2\\setminus\\{0\\}$ would be parallel to $e_1$ or $e_2$, so $\\tan\\theta=\\frac km$ or $-\\cot\\theta=\\frac km$ would be rational ($m\\ne0$ because $\\cos\\theta,\\sin\\theta\\ne0$). This contradicts the choice of $\\theta$.\n\nHence for $t_j<x\\le t_{j+1}$ we have $f(x)=1+4j$. So every $d=1+4j$ ($j\\ge0$) is the number of interior lattice points of some centred square. ∎"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "number-theory"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "simonmarais-2024-c2",
+    "bank": "simonmarais",
+    "source": {
+      "contest": "Simon Marais",
+      "paper": "Session C",
+      "year": 2024,
+      "number": 2,
+      "url": "https://www.simonmarais.org/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Define the function $f:\\mathbb R\\to\\mathbb R$ by\n$$f(x)=x^3-3x^2+\\frac72x-\\frac12 .$$\nDetermine all real numbers $r$ such that $f(f(r))=r$.",
+    "image": null,
+    "choices": null,
+    "answer": "$r\\in\\left\\{1,\\ \\dfrac{2-\\sqrt2}{2},\\ \\dfrac{2+\\sqrt2}{2}\\right\\}$, the fixed points of $f$ ($f$ is strictly increasing, so it has no $2$-cycles).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "$f$ is increasing, so only fixed points",
+        "body": "$f'(x)=3x^2-6x+\\frac72=3(x-1)^2+\\frac12>0$, so $f$ is strictly increasing.\n\nIf $f(f(r))=r$ but $f(r)>r$, then applying $f$ gives $r=f(f(r))>f(r)>r$, a contradiction. The case $f(r)<r$ is the same with the inequalities reversed. So $f(r)=r$. Conversely, fixed points satisfy $f(f(r))=r$.\n\nNow\n$$f(x)-x=x^3-3x^2+\\tfrac52x-\\tfrac12=(x-1)\\Big(x^2-2x+\\tfrac12\\Big),$$\nwith roots $1$ and $1\\pm\\frac{\\sqrt2}2$.\n\n**Answer:** $r=1$, $r=\\frac{2-\\sqrt2}2$, $r=\\frac{2+\\sqrt2}2$."
+      },
+      {
+        "title": "Rule out 2-cycles directly",
+        "body": "The three fixed points above are solutions. Suppose $f(p)=q$ and $f(q)=p$ with $p\\ne q$. Subtracting the two equations,\n$$(p^3-q^3)-3(p^2-q^2)+\\tfrac72(p-q)=q-p,$$\nand dividing by $p-q$:\n$$p^2+pq+q^2-3(p+q)+\\tfrac92=0 .$$\nAs a quadratic in $p$, its discriminant is $(q-3)^2-4\\big(q^2-3q+\\frac92\\big)=-3q^2+6q-9=-3\\big((q-1)^2+2\\big)<0$. So there are no real $2$-cycles, and the only solutions are the three fixed points $1,\\ \\frac{2\\pm\\sqrt2}2$. (A numerical scan of $f(f(x))-x$ on $[-5,5]$ finds exactly these three roots.)"
+      }
+    ],
+    "topics": [
+      "polynomials",
+      "algebra",
+      "functional-equations"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "simonmarais-2024-c3",
+    "bank": "simonmarais",
+    "source": {
+      "contest": "Simon Marais",
+      "paper": "Session C",
+      "year": 2024,
+      "number": 3,
+      "url": "https://www.simonmarais.org/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "For each positive integer $n$, let $a_n$ be the number of integers $k$ such that $0\\le k\\le n$ and the binomial coefficient $\\binom nk$ is odd.\n\nFor which $s\\in[1,\\infty)$ does\n$$\\sum_{n=1}^{\\infty}\\frac{a_n}{n^s}$$\nconverge?",
+    "image": null,
+    "choices": null,
+    "answer": "Exactly for $s>\\log_2 3$. Here $a_n=2^{(\\text{number of 1s in the binary expansion of }n)}$, so the block $2^{r-1}\\le n<2^r$ contributes $\\asymp(3/2^s)^r$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Lucas' theorem and dyadic blocks",
+        "body": "**$a_n$ in closed form.** Modulo $2$, $(1+x)^{2^j}\\equiv1+x^{2^j}$. If $n=2^{j_1}+\\dots+2^{j_b}$ with distinct $j_i$, then\n$$(1+x)^n\\equiv\\prod_{i=1}^b\\big(1+x^{2^{j_i}}\\big)\\pmod2 .$$\nExpanding the product gives $2^b$ monomials $x^k$ with distinct exponents (distinct subset sums of distinct powers of $2$), each with coefficient $1$. Hence $a_n=2^{b(n)}$, where $b(n)$ is the number of $1$s in the binary expansion of $n$.\n\n**Block sums.** For $r\\ge1$, the numbers $2^{r-1}\\le n<2^r$ have a leading $1$ followed by $r-1$ free binary digits, each digit $0$ or $1$ contributing a factor $1$ or $2$. So\n$$\\sum_{n=2^{r-1}}^{2^r-1}a_n=2\\cdot(1+2)^{r-1}=2\\cdot3^{r-1}.$$\nHence the block $B_r=\\sum_{2^{r-1}\\le n<2^r}\\frac{a_n}{n^s}$ satisfies\n$$\\frac{2\\cdot3^{r-1}}{2^{rs}}\\le B_r\\le\\frac{2\\cdot3^{r-1}}{2^{(r-1)s}},\\qquad\\text{i.e.}\\qquad \\frac{2}{3}\\Big(\\frac3{2^s}\\Big)^r\\le B_r\\le 2\\Big(\\frac3{2^s}\\Big)^{r-1}.$$\n\n* If $s>\\log_23$: $\\frac3{2^s}<1$, and the upper bound gives a convergent geometric series.\n* If $s\\le\\log_23$: $\\frac3{2^s}\\ge1$, so $B_r\\ge\\frac23$ for all $r$ and the series diverges.\n\nThe terms are positive, so grouping into blocks is allowed. **Answer: the series converges exactly for $s>\\log_23$.** ∎"
+      }
+    ],
+    "topics": [
+      "sequences-series",
+      "number-theory",
+      "real-analysis"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "simonmarais-2024-c4",
+    "bank": "simonmarais",
+    "source": {
+      "contest": "Simon Marais",
+      "paper": "Session C",
+      "year": 2024,
+      "number": 4,
+      "url": "https://www.simonmarais.org/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "A queue of students is waiting to enter a lecture theatre that contains $N$ seats in a row. Each student enters the lecture theatre and sits in a seat chosen uniformly at random from those seats not next to an already occupied seat. The lecturer declares the lecture theatre to be full when no more students can be seated in this manner. Let $S_N$ denote the expected proportion of seats that are occupied when the lecture theatre is declared full.\n\nDetermine $\\displaystyle\\lim_{N\\to\\infty}S_N$ or prove that the limit does not exist.",
+    "image": null,
+    "choices": null,
+    "answer": "(1-e^(-2))/2",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "answerDisplay": "$\\dfrac{1-e^{-2}}{2}$",
+    "solutions": [
+      {
+        "title": "Recurrence, generating function, coefficient asymptotics",
+        "body": "Let $E_N$ be the expected number of seated students when the theatre is full, and set $E_N=0$ for $N\\le0$.\n\n**Recurrence.** Let $N=n+1$ and suppose the first student takes seat $i+1$ ($0\\le i\\le n$, each with probability $\\frac1{n+1}$). Then seats $i$ and $i+2$ stay empty forever. The seats $1,\\dots,i-1$ and $i+3,\\dots,n+1$ form two independent rows of $i-1$ and $n-1-i$ seats. The availability of a seat in either row depends only on that row. Each later student, conditioned on sitting in a given row, picks uniformly among that row's available seats. So each row finishes like a fresh theatre of its size. Hence\n$$E_{n+1}=1+\\frac1{n+1}\\sum_{i=0}^{n}\\big(E_{i-1}+E_{n-1-i}\\big)=1+\\frac2{n+1}\\sum_{j=0}^{n-1}E_j .$$\nTaking the difference of the versions for $n+1$ and $n+2$ gives $(n+2)E_{n+2}-(n+1)E_{n+1}=1+2E_n$ for $n\\ge0$, with $E_0=0$, $E_1=1$.\n\n**Generating function.** $0\\le E_n\\le n$, so $E(x)=\\sum E_nx^n$ converges for $|x|<1$. Multiplying by $x^n$ and summing,\n$$\\frac{E'(x)-1}{x}-E'(x)=2E(x)+\\frac1{1-x}\\iff(1-x)E'(x)-2xE(x)=\\frac1{1-x}.$$\nSince $\\frac{d}{dx}\\big[(1-x)^2e^{2x}\\big]=-2x(1-x)e^{2x}$, this says $\\frac{d}{dx}\\big[(1-x)^2e^{2x}E(x)\\big]=e^{2x}$. With $E(0)=0$,\n$$E(x)=\\frac{1-e^{-2x}}{2(1-x)^2}.$$\n\n**Coefficients.** Write $1-e^{-2x}=\\sum_{k\\ge1}c_kx^k$ with $c_k=-\\frac{(-2)^k}{k!}$, and $\\frac1{(1-x)^2}=\\sum_{l\\ge0}(l+1)x^l$. Then\n$$\\frac{2E_n}{n}=\\frac1n\\sum_{k=1}^nc_k(n+1-k)=\\Big(1+\\frac1n\\Big)\\sum_{k=1}^nc_k-\\frac1n\\sum_{k=1}^nkc_k .$$\nThe first sum tends to $\\sum_{k\\ge1}c_k=1-e^{-2}$. The second is bounded by $\\sum_k k|c_k|=\\sum_k\\frac{2^k}{(k-1)!}<\\infty$, so divided by $n$ it tends to $0$. Hence\n$$\\lim_{N\\to\\infty}S_N=\\lim_{N\\to\\infty}\\frac{E_N}N=\\frac{1-e^{-2}}{2}\\approx0.4323 .$$\n(Check: $E_2=1$, $E_3=\\frac53$, $E_4=2$; iterating the recurrence to $N=20000$ gives $E_N/N\\approx0.43235$, and a simulation for $N=5$ gives $\\approx2.467\\approx E_5=\\frac{37}{15}$.)\n\n**Answer:** the limit exists and equals $\\dfrac{1-e^{-2}}2$."
+      }
+    ],
+    "topics": [
+      "probability",
+      "sequences-series",
+      "differential-equations"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

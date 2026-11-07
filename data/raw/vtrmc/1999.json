@@ -1,0 +1,217 @@
+[
+  {
+    "id": "vtrmc-1999-01",
+    "bank": "vtrmc",
+    "source": {
+      "contest": "VTRMC",
+      "paper": "21st VTRMC (1999)",
+      "year": 1999,
+      "number": 1,
+      "url": "https://www.math.vt.edu/people/plinnell/Vtregional/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $G$ be the set of all continuous functions $f\\colon\\mathbb R\\to\\mathbb R$, satisfying the following properties.\n\n(i) $f(x)=f(x+1)$ for all $x$,\n\n(ii) $\\int_0^1 f(x)\\,dx=1999$.\n\nShow that there is a number $\\alpha$ such that $\\displaystyle\\alpha=\\int_0^1\\!\\!\\int_0^x f(x+y)\\,dy\\,dx$ for all $f\\in G$.",
+    "image": null,
+    "choices": null,
+    "answer": "$\\alpha=\\frac{1999}{2}$: by symmetry the triangle integral is half of the integral over the unit square, and each inner integral $\\int_0^1 f(x+y)\\,dy$ equals $1999$ by periodicity.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Symmetry and periodicity",
+        "body": "Let $f\\in G$ and let $I=\\displaystyle\\int_0^1\\!\\!\\int_0^x f(x+y)\\,dy\\,dx$, the integral of $F(x,y)=f(x+y)$ over the triangle $\\Delta_1=\\{0\\le y\\le x\\le1\\}$.\n\n**Symmetry.** $F(x,y)=F(y,x)$, so the integral of $F$ over the mirror triangle $\\Delta_2=\\{0\\le x\\le y\\le1\\}$ is also $I$ (swap the names of the variables). $\\Delta_1\\cup\\Delta_2$ is the unit square and they overlap only in the diagonal, which has area $0$. Hence\n$$I=\\frac12\\int_0^1\\!\\!\\int_0^1 f(x+y)\\,dy\\,dx .$$\n\n**Periodicity.** For fixed $x$, substitute $z=x+y$:\n$$\\int_0^1 f(x+y)\\,dy=\\int_x^{x+1}f(z)\\,dz .$$\nThe function $\\Phi(x)=\\int_x^{x+1}f(z)\\,dz$ has derivative $f(x+1)-f(x)=0$ (by continuity of $f$ and the fundamental theorem of calculus), so it is constant: $\\Phi(x)=\\Phi(0)=\\int_0^1f=1999$.\n\nTherefore\n$$I=\\frac12\\int_0^1 1999\\,dx=\\frac{1999}{2},$$\nwhich does not depend on $f$. So $\\alpha=\\dfrac{1999}{2}$ works for every $f\\in G$. ∎"
+      }
+    ],
+    "topics": [
+      "calculus"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "vtrmc-1999-02",
+    "bank": "vtrmc",
+    "source": {
+      "contest": "VTRMC",
+      "paper": "21st VTRMC (1999)",
+      "year": 1999,
+      "number": 2,
+      "url": "https://www.math.vt.edu/people/plinnell/Vtregional/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Suppose that $f\\colon\\mathbb R\\to\\mathbb R$ is infinitely differentiable and satisfies both of the following properties.\n\n(i) $f(1)=2$,\n\n(ii) If $\\alpha,\\beta$ are real numbers satisfying $\\alpha^2+\\beta^2=1$, then $f(\\alpha x)f(\\beta x)=f(x)$ for all $x$.\n\nFind $f(x)$. Guesswork will not be accepted.",
+    "image": null,
+    "choices": null,
+    "answer": "$f(x)=2^{x^2}$ (show $f>0$, then $h(t)=\\ln f(\\sqrt t)$ is additive and continuous on $[0,\\infty)$).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Reduce to Cauchy's equation",
+        "body": "**Basic facts.**\n- $\\alpha=1,\\beta=0,x=1$: $f(1)f(0)=f(1)=2$, so $f(0)=1$.\n- $\\alpha=-1,\\beta=0$: $f(-x)f(0)=f(x)$, so $f$ is even.\n- $\\alpha=\\beta=\\frac1{\\sqrt2}$: $f(x)=f(x/\\sqrt2)^2\\ge0$ for all $x$.\n\n**$f$ never vanishes.** If $f(x_0)=0$, then $f(x_0/\\sqrt2)^2=0$, and by repetition $f(2^{-m/2}x_0)=0$ for all $m$. Letting $m\\to\\infty$, continuity gives $f(0)=0$, a contradiction. So $f>0$ and $g=\\ln f$ is a continuous even function with $g(0)=0$, $g(1)=\\ln2$, and\n$$g(\\alpha x)+g(\\beta x)=g(x)\\qquad\\text{whenever }\\alpha^2+\\beta^2=1 .$$\n\n**An additive function.** Define $h(t)=g(\\sqrt t)$ for $t\\ge0$; $h$ is continuous. Let $s,t\\ge0$ with $s+t>0$, and take $x=\\sqrt{s+t}$, $\\alpha=\\sqrt{s/(s+t)}$, $\\beta=\\sqrt{t/(s+t)}$; then $\\alpha^2+\\beta^2=1$, $\\alpha x=\\sqrt s$, $\\beta x=\\sqrt t$, so\n$$h(s)+h(t)=h(s+t)\\qquad(s,t\\ge0)$$\n(also trivially true for $s=t=0$ since $h(0)=0$).\n\n**Solve it.** By induction $h(nt)=nh(t)$ for integers $n\\ge1$, $t\\ge0$. Hence for integers $p\\ge0,q\\ge1$: $q\\,h(p/q)=h(p)=p\\,h(1)$, so $h(r)=r\\,h(1)$ for all non-negative rationals $r$, and by continuity $h(t)=t\\,h(1)=t\\ln2$ for all $t\\ge0$.\n\n**Conclusion.** Since $g$ is even, $g(x)=g(|x|)=h(x^2)=x^2\\ln2$, so\n$$f(x)=e^{x^2\\ln 2}=2^{x^2}.$$\nConversely $2^{x^2}$ is infinitely differentiable, $2^{1}=2$, and $2^{\\alpha^2x^2}\\cdot2^{\\beta^2x^2}=2^{(\\alpha^2+\\beta^2)x^2}=2^{x^2}$. So $f(x)=2^{x^2}$ is the unique such function. ∎"
+      },
+      {
+        "title": "Taylor expansion (official approach)",
+        "body": "As in the first approach, $f(0)=1$, $f$ is even (so $f'(0)=0$), and $f(x)=f(x/\\sqrt2)^2$. Iterating the last relation,\n$$f(x)=\\Big(f\\big(2^{-m/2}x\\big)\\Big)^{2^m}\\qquad(m=1,2,\\dots).$$\nLet $c=f''(0)$. By Taylor's theorem, $f(u)=1+\\frac c2u^2+\\varepsilon(u)$ with $\\varepsilon(u)/u^2\\to0$ as $u\\to0$.\n\nFix $x\\ne0$ and put $u_m=2^{-m/2}x\\to0$, so $2^m u_m^2=x^2$. For large $m$, $f(u_m)>0$ and\n$$\\ln f(x)=2^m\\ln f(u_m)=2^m\\ln\\Big(1+\\tfrac c2u_m^2+\\varepsilon(u_m)\\Big).$$\nBecause $w_m:=\\frac c2u_m^2+\\varepsilon(u_m)\\to0$ and $\\ln(1+w)/w\\to1$, we get\n$$\\ln f(x)=\\lim_{m\\to\\infty}2^m w_m\\cdot\\frac{\\ln(1+w_m)}{w_m}=\\lim_{m\\to\\infty}\\Big(\\tfrac c2x^2+x^2\\,\\frac{\\varepsilon(u_m)}{u_m^2}\\Big)=\\frac c2x^2 .$$\n(Here $f(x)=f(u_m)^{2^m}>0$, so the logarithm makes sense.) Thus $f(x)=e^{cx^2/2}$ for all $x$ (also for $x=0$). The condition $f(1)=2$ gives $e^{c/2}=2$, so $f(x)=2^{x^2}$, which indeed satisfies (i) and (ii). ∎"
+      }
+    ],
+    "topics": [
+      "functional-equations",
+      "calculus",
+      "real-analysis"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "vtrmc-1999-03",
+    "bank": "vtrmc",
+    "source": {
+      "contest": "VTRMC",
+      "paper": "21st VTRMC (1999)",
+      "year": 1999,
+      "number": 3,
+      "url": "https://www.math.vt.edu/people/plinnell/Vtregional/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $\\varepsilon,M$ be positive real numbers, and let $A_1,A_2,\\dots$ be a sequence of matrices such that for all $n$,\n\n(i) $A_n$ is an $n\\times n$ matrix with integer entries,\n\n(ii) the sum of the absolute values of the entries in each row of $A_n$ is at most $M$.\n\nIf $\\delta$ is a positive real number, let $e_n(\\delta)$ denote the number of nonzero eigenvalues of $A_n$ which have absolute value less than $\\delta$. (Some eigenvalues can be complex numbers.) Prove that one can choose $\\delta>0$ so that $e_n(\\delta)/n<\\varepsilon$ for all $n$.",
+    "image": null,
+    "choices": null,
+    "answer": "All eigenvalues satisfy $|\\lambda|\\le M$, and the product of the nonzero eigenvalues is a nonzero integer, so $1\\le M^n\\delta^{e_n}$, i.e. $e_n/n\\le\\ln M/\\ln(1/\\delta)$; take $\\delta<M^{-1/\\varepsilon}$ (with $M\\ge2$).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Eigenvalue bound and an integer product",
+        "body": "Enlarging $M$ does not change the hypotheses' validity, so assume $M\\ge2$. Count eigenvalues with algebraic multiplicity; this only makes $e_n(\\delta)$ larger, so it suffices to prove the claim for this count.\n\n**Step 1: $|\\lambda|\\le M$ for every eigenvalue $\\lambda$ of $A_n$.** Let $A_nv=\\lambda v$, $v\\ne0$, and choose $i$ with $|v_i|=\\max_j|v_j|>0$. Then\n$$|\\lambda||v_i|=\\Big|\\sum_j a_{ij}v_j\\Big|\\le\\sum_j|a_{ij}||v_j|\\le|v_i|\\sum_j|a_{ij}|\\le M|v_i| .$$\n\n**Step 2: the product of the nonzero eigenvalues has absolute value $\\ge1$.** The characteristic polynomial $\\det(tI-A_n)$ is monic with integer coefficients; write it as $t^k q(t)$ with $q(0)\\ne0$. Then $q$ is monic with integer coefficients, its roots are exactly the nonzero eigenvalues $\\lambda_1,\\dots,\\lambda_{n-k}$ (with multiplicity), and $|\\lambda_1\\cdots\\lambda_{n-k}|=|q(0)|$ is a nonzero integer, hence $\\ge1$. (If $k=n$ there are no nonzero eigenvalues and $e_n(\\delta)=0$.)\n\n**Step 3.** Fix $0<\\delta<1$ and let $d=e_n(\\delta)$. Among the $n-k\\le n$ nonzero eigenvalues, $d$ have absolute value $<\\delta$ and the others have absolute value $\\le M$. So\n$$1\\le|\\lambda_1\\cdots\\lambda_{n-k}|\\le \\delta^{d}M^{\\,n-k-d}\\le\\delta^dM^n .$$\nTaking logarithms, $d\\ln(1/\\delta)\\le n\\ln M$, i.e.\n$$\\frac{e_n(\\delta)}{n}\\le\\frac{\\ln M}{\\ln(1/\\delta)} .$$\n\n**Choice of $\\delta$.** Take $\\delta$ with $0<\\delta<M^{-1/\\varepsilon}$ (so $\\delta<1$). Then $\\ln(1/\\delta)>\\frac{\\ln M}{\\varepsilon}$, hence $\\dfrac{e_n(\\delta)}{n}<\\varepsilon$ for every $n$. ∎"
+      }
+    ],
+    "topics": [
+      "linear-algebra",
+      "polynomials",
+      "inequalities"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "vtrmc-1999-04",
+    "bank": "vtrmc",
+    "source": {
+      "contest": "VTRMC",
+      "paper": "21st VTRMC (1999)",
+      "year": 1999,
+      "number": 4,
+      "url": "https://www.math.vt.edu/people/plinnell/Vtregional/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "A rectangular box has sides of length $3,4,5$. Find the volume of the region consisting of all points that are within distance $1$ of at least one of the sides.",
+    "image": null,
+    "choices": null,
+    "answer": "148+40*pi/3",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "answerDisplay": "$148+\\frac{40\\pi}{3}$",
+    "solutions": [
+      {
+        "title": "Inside part plus outside part",
+        "body": "Interpret the \"sides\" as the six faces (rectangles) of the box; the region consists of points inside or outside the box within distance $1$ of the surface.\n\n**Inside the box.** A point of the box is at distance $>1$ from every face exactly when it lies in the inner box of dimensions $(3-2)\\times(4-2)\\times(5-2)=1\\times2\\times3$, of volume $6$. The box has volume $60$, so the inside part has volume $60-6=54$.\n\n**Outside the box.** A point outside within distance $1$ of the box lies in exactly one of the following pieces (according to which part of the box is nearest to it):\n- six slabs of thickness $1$ over the faces: $2(3\\cdot4+3\\cdot5+4\\cdot5)\\cdot1=94$;\n- twelve quarter-cylinders of radius $1$ along the edges, of total length $4(3+4+5)=48$: volume $\\frac{\\pi}{4}\\cdot48=12\\pi$;\n- eight eighth-balls of radius $1$ at the corners: together one ball, $\\frac{4\\pi}{3}$.\n\n**Total.**\n$$54+94+12\\pi+\\frac{4\\pi}{3}=148+\\frac{40\\pi}{3}\\approx189.89 .$$\n\n**Answer: $148+\\dfrac{40\\pi}{3}$**"
+      },
+      {
+        "title": "Parallel bodies",
+        "body": "For a box $B$ with edges $a,b,c$, the set $B_r$ of points within distance $r$ of $B$ (inside or outside) has volume given by Steiner's formula\n$$|B_r|=abc+2(ab+bc+ca)\\,r+\\pi(a+b+c)\\,r^2+\\frac{4\\pi}{3}r^3 ,$$\nwhose four terms are the box, the face slabs, the edge quarter-cylinders ($12$ of them, $4$ of each length, each of cross-section $\\frac{\\pi r^2}{4}$) and the corner pieces (one full ball). With $a,b,c=3,4,5$ and $r=1$:\n$$|B_1|=60+94+12\\pi+\\frac{4\\pi}{3}.$$\nThe required region is $B_1$ minus the points of the box farther than $1$ from all faces, which form a $1\\times2\\times3$ box. So the volume is\n$$60+94+12\\pi+\\frac{4\\pi}{3}-6=148+\\frac{40\\pi}{3}.$$\n\n**Answer: $148+\\dfrac{40\\pi}{3}$**"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "measurement"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "vtrmc-1999-05",
+    "bank": "vtrmc",
+    "source": {
+      "contest": "VTRMC",
+      "paper": "21st VTRMC (1999)",
+      "year": 1999,
+      "number": 5,
+      "url": "https://www.math.vt.edu/people/plinnell/Vtregional/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $f\\colon\\mathbb R_+\\to\\mathbb R_+$ be a function from the set of positive real numbers to the same set satisfying $f(f(x))=x$ for all positive $x$. Suppose that $f$ is infinitely differentiable for all positive $x$, and that $f(a)\\ne a$ for some positive $a$. Prove that $\\lim\\limits_{x\\to\\infty}f(x)=0$.",
+    "image": null,
+    "choices": null,
+    "answer": "$f'(f(x))f'(x)=1$, so $f'$ has constant sign; $f$ increasing would force $f(x)=x$, so $f$ is strictly decreasing, and since $f$ is onto $\\mathbb R_+$ its limit at $\\infty$ (its infimum) is $0$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Monotonicity",
+        "body": "**$f$ is strictly monotone.** Differentiating $f(f(x))=x$ gives $f'(f(x))\\,f'(x)=1$, so $f'(x)\\ne0$ for every $x>0$. Since $f'$ is continuous, by the intermediate value theorem it has constant sign on $(0,\\infty)$.\n\n**$f$ is decreasing.** Suppose $f'>0$, so $f$ is strictly increasing. If $f(a)>a$, then $a=f(f(a))>f(a)>a$; if $f(a)<a$, then $a=f(f(a))<f(a)<a$. Both are impossible since $f(a)\\ne a$. Hence $f'<0$ and $f$ is strictly decreasing.\n\n**The limit.** A decreasing function bounded below (by $0$) has a limit $L=\\lim_{x\\to\\infty}f(x)=\\inf_{x>0}f(x)\\ge0$, and since $f$ is strictly decreasing, $f(x)>L$ for all $x$. Suppose $L>0$. Then $L/2$ is a positive number, and $f\\big(f(L/2)\\big)=L/2<L$, contradicting $f(y)>L$ for all $y$ (take $y=f(L/2)$). Hence $L=0$. ∎\n\n*Remark.* The hypothesis $f(a)\\ne a$ is needed: $f(x)=x$ satisfies everything else."
+      }
+    ],
+    "topics": [
+      "functional-equations",
+      "real-analysis",
+      "calculus"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "vtrmc-1999-06",
+    "bank": "vtrmc",
+    "source": {
+      "contest": "VTRMC",
+      "paper": "21st VTRMC (1999)",
+      "year": 1999,
+      "number": 6,
+      "url": "https://www.math.vt.edu/people/plinnell/Vtregional/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "A set $S$ of distinct positive integers has property **ND** if no element $x$ of $S$ divides the sum of the integers in any subset of $S\\setminus\\{x\\}$. Here $S\\setminus\\{x\\}$ means the set that remains after $x$ is removed from $S$.\n\n(i) Find the smallest positive integer $n$ such that $\\{3,4,n\\}$ has property **ND**.\n\n(ii) If $n$ is the number found in (i), prove that no set $S$ with property **ND** has $\\{3,4,n\\}$ as a proper subset.",
+    "image": null,
+    "choices": null,
+    "answer": "(i) $n=10$. (ii) An extra element $m$ fails for every residue mod $3$: $3\\mid m$, $3\\mid m+10$, or $3\\mid m+4+10$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Check small cases, then work mod 3",
+        "body": "Here subsets are non-empty (the empty sum $0$ is divisible by everything).\n\n**(i)** For $S=\\{3,4,n\\}$ the conditions are: $3\\nmid 4,\\ n,\\ n+4$; $\\ 4\\nmid3,\\ n,\\ n+3$; $\\ n\\nmid3,\\ 4,\\ 7$. We need $n\\ne3,4$ (distinct elements).\n- $n=1$: $1$ divides everything; $n=2$: $2\\mid4$.\n- $n=5$: $4\\mid3+5$. $\\ n=6$: $3\\mid6$. $\\ n=7$: $7\\mid3+4$. $\\ n=8$: $4\\mid8$. $\\ n=9$: $3\\mid9$.\n- $n=10$: $3\\nmid4,10,14$; $\\ 4\\nmid3,10,13$; $\\ 10\\nmid3,4,7$. ✓\n\nSo the smallest such $n$ is $\\mathbf{10}$.\n\n**(ii)** Suppose $S$ has property ND and contains $\\{3,4,10\\}$ and some further element $m$ ($m\\ne3,4,10$). Then $\\{3,4,10,m\\}\\subseteq S$, and the subsets of $S\\setminus\\{3\\}$ include $\\{m\\}$, $\\{10,m\\}$ and $\\{4,10,m\\}$. So $3$ must divide none of\n$$m,\\qquad m+10,\\qquad m+14 .$$\nBut $m$, $m+10\\equiv m+1$ and $m+14\\equiv m+2\\pmod 3$ run through all three residues mod $3$, so one of them is divisible by $3$ — a contradiction:\n- $m\\equiv0$: $3\\mid m$;\n- $m\\equiv2$: $3\\mid m+10$;\n- $m\\equiv1$: $3\\mid m+4+10$.\n\nHence no ND set contains $\\{3,4,10\\}$ as a proper subset. ∎"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "logic"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

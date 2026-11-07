@@ -1,0 +1,142 @@
+[
+  {
+    "id": "vjimc-2006-cat1-01",
+    "bank": "vjimc",
+    "source": {
+      "contest": "VJIMC",
+      "paper": "VJIMC 2006 Category I",
+      "year": 2006,
+      "number": 1,
+      "url": "https://vjimc.osu.cz/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Given real numbers $0=x_1<x_2<\\dots<x_{2n}<x_{2n+1}=1$ such that $x_{i+1}-x_i\\le h$ for $1\\le i\\le 2n$, show that\n$$\\frac{1-h}{2}<\\sum_{i=1}^nx_{2i}(x_{2i+1}-x_{2i-1})<\\frac{1+h}{2}.$$",
+    "image": null,
+    "choices": null,
+    "answer": "Since $\\sum_i(x_{2i+1}+x_{2i-1})(x_{2i+1}-x_{2i-1})=1$, we get $1-2S=\\sum_i(u_i-v_i)(x_{2i+1}-x_{2i-1})$ with $u_i=x_{2i+1}-x_{2i}$, $v_i=x_{2i}-x_{2i-1}$, and $|u_i-v_i|<\\max(u_i,v_i)\\le h$ gives $|1-2S|<h$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Compare with a telescoping sum",
+        "body": "Let $S=\\sum_{i=1}^nx_{2i}(x_{2i+1}-x_{2i-1})$. The sum\n$$\\sum_{i=1}^n(x_{2i+1}+x_{2i-1})(x_{2i+1}-x_{2i-1})=\\sum_{i=1}^n\\big(x_{2i+1}^2-x_{2i-1}^2\\big)=x_{2n+1}^2-x_1^2=1$$\ntelescopes. Subtracting $2S$,\n$$1-2S=\\sum_{i=1}^n\\big(x_{2i+1}+x_{2i-1}-2x_{2i}\\big)(x_{2i+1}-x_{2i-1})=\\sum_{i=1}^n(u_i-v_i)(x_{2i+1}-x_{2i-1}),$$\nwhere $u_i=x_{2i+1}-x_{2i}$ and $v_i=x_{2i}-x_{2i-1}$. Both $u_i,v_i$ lie in $(0,h]$, hence $|u_i-v_i|<\\max(u_i,v_i)\\le h$. Since the weights $x_{2i+1}-x_{2i-1}$ are positive and sum to $x_{2n+1}-x_1=1$,\n$$|1-2S|\\le\\sum_{i=1}^n|u_i-v_i|\\,(x_{2i+1}-x_{2i-1})<h\\sum_{i=1}^n(x_{2i+1}-x_{2i-1})=h .$$\nThus $-h<1-2S<h$, i.e. $\\frac{1-h}2<S<\\frac{1+h}2$. ∎\n\n*Interpretation:* $S$ is a Riemann sum of $\\int_0^1x\\,dx=\\frac12$ with sample points $x_{2i}$ in the intervals $[x_{2i-1},x_{2i+1}]$; the computation above measures its error exactly."
+      }
+    ],
+    "topics": [
+      "inequalities",
+      "calculus"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "vjimc-2006-cat1-02",
+    "bank": "vjimc",
+    "source": {
+      "contest": "VJIMC",
+      "paper": "VJIMC 2006 Category I",
+      "year": 2006,
+      "number": 2,
+      "url": "https://vjimc.osu.cz/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Suppose that $(a_n)$ is a sequence of real numbers such that the series\n$$\\sum_{n=1}^\\infty\\frac{a_n}{n}$$\nis convergent. Show that the sequence\n$$b_n=\\frac{\\sum_{j=1}^na_j}{n}$$\nis convergent and find its limit.",
+    "image": null,
+    "choices": null,
+    "answer": "0",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Abel summation and Cesàro means",
+        "body": "Let $A_0=0$ and $A_n=\\sum_{i=1}^n\\frac{a_i}{i}$; by hypothesis $A_n\\to A$ for some real $A$. Since $a_j=j(A_j-A_{j-1})$, summation by parts gives\n$$\\sum_{j=1}^na_j=\\sum_{j=1}^njA_j-\\sum_{j=1}^njA_{j-1}=\\sum_{j=1}^njA_j-\\sum_{j=0}^{n-1}(j+1)A_j=nA_n-\\sum_{j=0}^{n-1}A_j .$$\nHence\n$$b_n=A_n-\\frac1n\\sum_{j=1}^{n-1}A_j .$$\n\n**Cesàro lemma.** If $A_j\\to A$, then $\\frac1n\\sum_{j=1}^{n-1}A_j\\to A$. *Proof:* given $\\varepsilon>0$ choose $N$ with $|A_j-A|<\\varepsilon$ for $j\\ge N$. For $n>N$,\n$$\\Big|\\frac1n\\sum_{j=1}^{n-1}A_j-A\\Big|\\le\\frac1n\\sum_{j=1}^{N-1}|A_j-A|+\\frac{1}{n}\\sum_{j=N}^{n-1}|A_j-A|+\\frac{|A|}{n}\\le\\frac{C}{n}+\\varepsilon,$$\nwhere $C=\\sum_{j<N}|A_j-A|+|A|$ does not depend on $n$; this is $<2\\varepsilon$ for large $n$.\n\nTherefore $b_n\\to A-A=0$.\n\n**Answer: $b_n$ converges to $0$.** ∎\n\n*Remark.* This is Kronecker's lemma: if $\\sum a_n/n$ converges, then $\\frac1n\\sum_{j\\le n}a_j\\to0$. The convergence of $\\sum a_n/n$ cannot be replaced by boundedness of its partial sums."
+      }
+    ],
+    "topics": [
+      "sequences-series",
+      "real-analysis"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "vjimc-2006-cat1-03",
+    "bank": "vjimc",
+    "source": {
+      "contest": "VJIMC",
+      "paper": "VJIMC 2006 Category I",
+      "year": 2006,
+      "number": 3,
+      "url": "https://vjimc.osu.cz/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Two players play the following game: Let $n$ be a fixed integer greater than $1$. Starting from number $k=2$, each player has two possible moves: either replace the number $k$ by $k+1$ or by $2k$. The player who is forced to write a number greater than $n$ loses the game. Which player has a winning strategy for which $n$?",
+    "image": null,
+    "choices": null,
+    "answer": "The second player wins exactly when all base-4 digits of $n$ are $0$ or $2$ ($n=2,8,10,32,34,40,42,128,\\dots$); for all other $n$ the first player wins.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Odd $n$, and the reduction $n\\to 4n,\\,4n+2$",
+        "body": "Call the players $A$ (moves first, from $k=2$) and $B$. The game always ends, since the number increases. We use the fact that a position $k$ with $\\frac n2<k\\le n$ allows only the move $k\\to k+1$ (as $2k>n$); from such a position the players alternately add $1$, and the player to move **loses** iff $n-k$ is even (the player who must move at $k=n$ loses).\n\n**Claim 1: if $n$ is odd, $A$ wins.** $A$ always plays $k\\to k+1$. $A$ starts at $2$ (even) and writes an odd number; $B$ then writes an even number (from odd $k$, both $k+1$ and $2k$ are even), and so on: $A$ always moves from an even number. An even number $k\\le n$ satisfies $k\\le n-1$, so $A$'s move $k+1\\le n$ is always legal. Hence $A$ never loses, and $B$ does.\n\n**Claim 2: if player $X$ wins for $m\\ge2$, then $X$ also wins for $4m$ and $4m+2$.** Let $N\\in\\{4m,4m+2\\}$. In the game with bound $N$, $X$ plays according to the winning strategy for $m$ as long as all numbers are $\\le m$. Since $m\\le N$, play is identical to the $m$-game until a number $>m$ is written, and $X$'s strategy guarantees that the first such number $k$ is written by the opponent. It came from some $j\\le m$, so $m<k\\le 2m$. Now $X$ writes $2k$: this is legal because $2k\\le4m\\le N$, and $2k\\ge 2m+2>\\frac N2$. From now on only $+1$ moves are possible, the opponent must move at the even number $2k$, and $N-2k$ is even, so the opponent loses.\n\n**Small cases.** $n=2$: $A$ must exceed $2$, so $B$ wins. $n=3,5,7$: $A$ wins by Claim 1. $n=4$: $A$ plays $2\\to4$ and $B$ is stuck. $n=6$: $A$ plays $2\\to4$; then $B$ must play $5$, $A$ plays $6$, and $B$ loses.\n\n**Induction.** For $n\\ge8$ write $n=4m+r$ with $m\\ge2$ and $r\\in\\{0,1,2,3\\}$. If $r$ is odd, $A$ wins (Claim 1). If $r\\in\\{0,2\\}$, by Claim 2 the winner for $n$ is the same as the winner for $m$ (Claim 2 applies to whichever player wins for $m$). So, by induction on $n$:\n\n* $B$ wins for $n$ $\\iff$ $n=2$, or $n\\ge8$, the last base-4 digit $r$ of $n$ is $0$ or $2$, and $B$ wins for $m=\\lfloor n/4\\rfloor$.\n\nStarting from the small cases ($B$ wins only for $n=2$ among $2\\le n\\le7$; in base 4, $2=2_4$ while $3,4,5,6,7=3_4,10_4,11_4,12_4,13_4$), this says exactly: **$B$ wins iff every base-4 digit of $n$ is $0$ or $2$.** (A brute-force computation for $n<3000$ confirms this; the first values are $2,8,10,32,34,40,42,128,130,\\dots$)\n\n**Answer:** the second player has a winning strategy iff the base-4 representation of $n$ contains only the digits $0$ and $2$; otherwise the first player does. ∎"
+      }
+    ],
+    "topics": [
+      "games",
+      "number-theory"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "vjimc-2006-cat1-04",
+    "bank": "vjimc",
+    "source": {
+      "contest": "VJIMC",
+      "paper": "VJIMC 2006 Category I",
+      "year": 2006,
+      "number": 4,
+      "url": "https://vjimc.osu.cz/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $A=[a_{ij}]_{n\\times n}$ be a matrix with nonnegative entries such that\n$$\\sum_{i=1}^n\\sum_{j=1}^na_{ij}=n .$$\n\n(a) Prove that $|\\det A|\\le1$.\n\n(b) If $|\\det A|=1$ and $\\lambda\\in\\mathbb C$ is an arbitrary eigenvalue of $A$, show that $|\\lambda|=1$.\n\n(We call $\\lambda\\in\\mathbb C$ an eigenvalue of $A$ if there exists a nonzero vector $x\\in\\mathbb C^n$ such that $Ax=\\lambda x$.)",
+    "image": null,
+    "choices": null,
+    "answer": "$|\\det A|\\le\\sum_\\sigma\\prod_i a_{i\\sigma(i)}\\le\\prod_i r_i\\le\\big(\\frac1n\\sum r_i\\big)^n=1$ (row sums $r_i$, AM-GM); equality forces $A$ to be a permutation matrix, so $A^{m}=I$ for some $m$ and every eigenvalue is a root of unity.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Expand the product of row sums",
+        "body": "Let $r_i=\\sum_ja_{ij}\\ge0$ be the row sums, so $\\sum_ir_i=n$.\n\n**(a)** Expanding the product of the row sums, we get one term for every map $\\phi\\colon\\{1,\\dots,n\\}\\to\\{1,\\dots,n\\}$:\n$$\\prod_{i=1}^nr_i=\\sum_{\\phi}\\prod_{i=1}^na_{i\\phi(i)}\\ \\ge\\ \\sum_{\\sigma\\in S_n}\\prod_{i=1}^na_{i\\sigma(i)}\\ \\ge\\ \\Big|\\sum_{\\sigma\\in S_n}\\operatorname{sgn}(\\sigma)\\prod_{i=1}^na_{i\\sigma(i)}\\Big|=|\\det A|,$$\nbecause all terms are non-negative and the permutations are among the maps $\\phi$. By AM-GM,\n$$\\prod_{i=1}^nr_i\\le\\Big(\\frac{r_1+\\dots+r_n}{n}\\Big)^n=1 .$$\nHence $|\\det A|\\le1$.\n\n**(b)** Suppose $|\\det A|=1$. Then all inequalities above are equalities:\n\n* equality in AM-GM gives $r_i=1$ for all $i$;\n* equality in the first inequality gives $\\prod_ia_{i\\phi(i)}=0$ for every **non-bijective** map $\\phi$.\n\n*Each row has exactly one non-zero entry.* Every row has some positive entry (as $r_i=1$). Suppose row $i$ had two positive entries $a_{ij},a_{ik}$ with $j\\ne k$. Choose a positive entry $a_{i'\\phi(i')}$ in every row $i'\\ne i$ and set $\\phi(i)=j$, $\\phi'(i)=k$, $\\phi'=\\phi$ elsewhere. Both products $\\prod a_{i\\phi(i)}$, $\\prod a_{i\\phi'(i)}$ are positive, so both $\\phi,\\phi'$ are bijections. But two bijections differing at exactly one point are impossible ($\\phi'(i)=k=\\phi(i'')$ for some $i''\\ne i$, so $\\phi'$ is not injective). Contradiction.\n\nSo row $i$ has a single non-zero entry, equal to $r_i=1$, in some column $\\pi(i)$. If $\\pi(i)=\\pi(i')$ for $i\\ne i'$, rows $i$ and $i'$ would be equal and $\\det A=0$; so $\\pi$ is a permutation and $A$ is a permutation matrix.\n\n*Eigenvalues.* The permutation matrices form a finite group, so $A^m=I$ for some $m\\ge1$ (e.g. $m=n!$). If $Ax=\\lambda x$ with $x\\ne0$, then $x=A^mx=\\lambda^mx$, so $\\lambda^m=1$ and $|\\lambda|=1$. ∎"
+      },
+      {
+        "title": "Hadamard's inequality for part (a)",
+        "body": "Hadamard's inequality states $|\\det A|\\le\\prod_{i=1}^n\\|R_i\\|_2$, where $R_i$ is the $i$-th row (the volume of a parallelepiped is at most the product of its edge lengths). For a row with non-negative entries,\n$$\\|R_i\\|_2=\\Big(\\sum_ja_{ij}^2\\Big)^{1/2}\\le\\sum_ja_{ij}=r_i,$$\nsince $\\big(\\sum_ja_{ij}\\big)^2=\\sum_ja_{ij}^2+2\\sum_{j<k}a_{ij}a_{ik}\\ge\\sum_ja_{ij}^2$. Hence $|\\det A|\\le\\prod_ir_i\\le\\big(\\frac1n\\sum_ir_i\\big)^n=1$ by AM-GM.\n\nIn the equality case, $\\|R_i\\|_2=r_i$ forces each row to have at most one non-zero entry, AM-GM forces $r_i=1$, and $\\det A\\ne0$ forces the non-zero entries to be in different columns. So $A$ is a permutation matrix, which is orthogonal; therefore $\\|Ax\\|=\\|x\\|$ for all $x$, and $Ax=\\lambda x$, $x\\ne0$ gives $|\\lambda|=1$. ∎"
+      }
+    ],
+    "topics": [
+      "linear-algebra",
+      "inequalities"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

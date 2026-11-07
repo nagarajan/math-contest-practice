@@ -1,0 +1,140 @@
+[
+  {
+    "id": "vjimc-2024-cat1-01",
+    "bank": "vjimc",
+    "source": {
+      "contest": "VJIMC",
+      "paper": "VJIMC 2024 Category I",
+      "year": 2024,
+      "number": 1,
+      "url": "https://vjimc.osu.cz/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $f\\colon\\mathbb R\\to\\mathbb R$ be a continuously differentiable function. Prove that\n$$\\left|f(1)-\\int_0^1f(x)\\,dx\\right|\\le\\frac12\\max_{x\\in[0,1]}|f'(x)| .$$",
+    "image": null,
+    "choices": null,
+    "answer": "$f(1)-\\int_0^1f=\\int_0^1xf'(x)\\,dx$ (integration by parts), and $\\left|\\int_0^1xf'\\right|\\le\\max|f'|\\int_0^1x\\,dx=\\frac12\\max|f'|$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Integration by parts",
+        "body": "Since $f$ is $C^1$, integration by parts gives\n$$\\int_0^1x\\,f'(x)\\,dx=\\big[x f(x)\\big]_0^1-\\int_0^1f(x)\\,dx=f(1)-\\int_0^1f(x)\\,dx .$$\nLet $K=\\max_{[0,1]}|f'|$ (it exists, $f'$ being continuous on a compact interval). Then\n$$\\left|f(1)-\\int_0^1f(x)\\,dx\\right|=\\left|\\int_0^1xf'(x)\\,dx\\right|\\le\\int_0^1x\\,|f'(x)|\\,dx\\le K\\int_0^1x\\,dx=\\frac K2 .$$\n∎ (Equality holds for $f(x)=x$.)"
+      },
+      {
+        "title": "Fundamental theorem of calculus and Fubini (official approach)",
+        "body": "Write $f(x)=f(0)+\\int_0^xf'(y)\\,dy$ and $f(1)=f(0)+\\int_0^1f'(y)\\,dy$. Then\n$$f(1)-\\int_0^1f(x)\\,dx=\\int_0^1f'(y)\\,dy-\\int_0^1\\!\\!\\int_0^xf'(y)\\,dy\\,dx .$$\nSwapping the order of integration in the double integral (the region is $0\\le y\\le x\\le1$),\n$$\\int_0^1\\!\\!\\int_0^xf'(y)\\,dy\\,dx=\\int_0^1f'(y)\\int_y^1dx\\,dy=\\int_0^1f'(y)(1-y)\\,dy .$$\nHence $f(1)-\\int_0^1f=\\int_0^1f'(y)\\big(1-(1-y)\\big)dy=\\int_0^1y\\,f'(y)\\,dy$, and the estimate finishes as in the first solution: $\\left|\\int_0^1yf'(y)\\,dy\\right|\\le\\max|f'|\\cdot\\frac12$. ∎"
+      }
+    ],
+    "topics": [
+      "calculus",
+      "inequalities"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "vjimc-2024-cat1-02",
+    "bank": "vjimc",
+    "source": {
+      "contest": "VJIMC",
+      "paper": "VJIMC 2024 Category I",
+      "year": 2024,
+      "number": 2,
+      "url": "https://vjimc.osu.cz/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $n$ be a positive integer and let $A,B$ be two complex nonsingular $n\\times n$ matrices such that\n$$A^2B-2ABA+BA^2=0 .$$\nProve that the matrix $AB^{-1}A^{-1}B-I_n$ is nilpotent. (Here $I_n$ denotes the $n\\times n$ identity matrix. A matrix $X$ is called nilpotent if there exists a positive integer $k$ such that $X^k=0$.)",
+    "image": null,
+    "choices": null,
+    "answer": "The condition says $A$ commutes with $AB-BA$; from this, if $\\lambda$ is an eigenvalue of $X=AB^{-1}A^{-1}B$ then so is $2-\\frac1\\lambda$. This Möbius map is $u\\mapsto u+1$ in the coordinate $u=\\frac1{\\lambda-1}$, so a finite spectrum forces $\\lambda=1$; hence $X-I$ is nilpotent.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Eigenvalues are permuted by $\\lambda\\mapsto 2-1/\\lambda$",
+        "body": "Let $X=AB^{-1}A^{-1}B$ and $C=AB-BA$. The hypothesis reads $A(AB-BA)-(AB-BA)A=0$, i.e. $AC=CA$; hence also $A^{-1}C=CA^{-1}$.\n\nIt suffices to show that $1$ is the only eigenvalue of $X$: then the characteristic polynomial of $X-I$ is $t^n$, and $(X-I)^n=0$ by Cayley–Hamilton.\n\n**Lemma.** If $\\lambda$ is an eigenvalue of $X$, then $\\mu=\\frac{2\\lambda-1}{\\lambda}$ is also an eigenvalue of $X$.\n\n*Proof.* $X$ is invertible, so $\\lambda\\ne0$, and $X-\\lambda I$ is singular. Hence so is\n$$BA^{-1}(X-\\lambda I)=A^{-1}B-\\lambda BA^{-1}.$$\nWe rewrite this using $C$: $\\lambda A^{-1}(BA-AB)A^{-1}=\\lambda A^{-1}B-\\lambda BA^{-1}$, so\n$$A^{-1}B-\\lambda BA^{-1}=-\\lambda A^{-1}CA^{-1}+(1-\\lambda)A^{-1}B=-\\lambda A^{-2}C+(1-\\lambda)A^{-1}B,$$\nusing $CA^{-1}=A^{-1}C$. Multiplying on the left by the invertible matrix $\\frac1\\lambda B^{-1}A$:\n$$\\frac1\\lambda B^{-1}A\\big(-\\lambda A^{-2}C+(1-\\lambda)A^{-1}B\\big)=-B^{-1}A^{-1}C+\\frac{1-\\lambda}{\\lambda}I=B^{-1}A^{-1}BA-I+\\frac{1-\\lambda}\\lambda I=Y-\\mu I,$$\nwhere $Y=B^{-1}A^{-1}BA$ and we used $-B^{-1}A^{-1}(AB-BA)=-I+B^{-1}A^{-1}BA$. So $Y-\\mu I$ is singular, i.e. $\\mu$ is an eigenvalue of $Y$. Finally $Y=A^{-1}XA$ is similar to $X$, so $\\mu$ is an eigenvalue of $X$. $\\square$\n\n**Conclusion.** Let $\\varphi(\\lambda)=2-\\frac1\\lambda$. Note $\\varphi(\\lambda)-1=\\frac{\\lambda-1}{\\lambda}$, so for $\\lambda\\ne1$ also $\\varphi(\\lambda)\\ne1$ and\n$$\\frac1{\\varphi(\\lambda)-1}=\\frac{\\lambda}{\\lambda-1}=\\frac1{\\lambda-1}+1 .$$\nSuppose $X$ had an eigenvalue $\\lambda_0\\ne1$. By the lemma, $\\lambda_k=\\varphi^k(\\lambda_0)$ are eigenvalues for all $k\\ge0$, all $\\ne1$, and $\\frac1{\\lambda_k-1}=\\frac1{\\lambda_0-1}+k$ are pairwise distinct. So $X$ would have infinitely many eigenvalues — impossible. Hence every eigenvalue of $X$ equals $1$, and $X-I_n=AB^{-1}A^{-1}B-I_n$ is nilpotent. ∎"
+      }
+    ],
+    "topics": [
+      "linear-algebra"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "vjimc-2024-cat1-03",
+    "bank": "vjimc",
+    "source": {
+      "contest": "VJIMC",
+      "paper": "VJIMC 2024 Category I",
+      "year": 2024,
+      "number": 3,
+      "url": "https://vjimc.osu.cz/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $n$ be a positive integer and let $G$ be a simple undirected graph on $n$ vertices. Let $d_i$ be the degree of its $i$-th vertex, $i=1,\\dots,n$. Denote $\\Delta=\\max d_i$. Prove that if\n$$\\sum_{i=1}^nd_i^2>n\\Delta(n-\\Delta)$$\nthen $G$ contains a triangle. (A graph is called simple if there are no loops and no multiple edges between any pair of vertices.)",
+    "image": null,
+    "choices": null,
+    "answer": "If $G$ is triangle-free, adjacent vertices have disjoint neighbourhoods, so $d_i+d_j\\le n$ on every edge and $\\sum d_i^2=\\sum_{ij\\in E}(d_i+d_j)\\le n|E|$; and $|E|\\le\\Delta(n-\\Delta)$ because the neighbourhood of a max-degree vertex is independent.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Contrapositive: two counting bounds",
+        "body": "Assume $G$ has no triangle; we show $\\sum d_i^2\\le n\\Delta(n-\\Delta)$. Let $E$ be the edge set and $e=|E|$.\n\n**Step 1: $\\sum_id_i^2=\\sum_{ij\\in E}(d_i+d_j)$.** Each vertex $i$ appears in exactly $d_i$ edges and contributes $d_i$ to the right side for each of them, i.e. $d_i\\cdot d_i$ in total.\n\n**Step 2: $d_i+d_j\\le n$ for every edge $ij$.** The neighbourhoods $N(i)$ and $N(j)$ are disjoint: a common neighbour $k$ would give a triangle $ijk$. Hence $d_i+d_j=|N(i)|+|N(j)|\\le n$. With Step 1: $\\sum_id_i^2\\le n\\,e$.\n\n**Step 3: $e\\le\\Delta(n-\\Delta)$.** Let $v$ have degree $\\Delta$. No two vertices of $N(v)$ are adjacent (that would form a triangle with $v$), so every edge has at least one endpoint in $W=V\\setminus N(v)$, a set of $n-\\Delta$ vertices. Counting each edge from an endpoint in $W$,\n$$e\\le\\sum_{w\\in W}d_w\\le(n-\\Delta)\\Delta .$$\n\nCombining, $\\sum_id_i^2\\le ne\\le n\\Delta(n-\\Delta)$. So if $\\sum d_i^2>n\\Delta(n-\\Delta)$, $G$ must contain a triangle. ∎\n\n(The bound is sharp: for the complete bipartite graph $K_{\\Delta,\\Delta}$ with $n=2\\Delta$, $\\sum d_i^2=2\\Delta\\cdot\\Delta^2=n\\Delta(n-\\Delta)$.)"
+      }
+    ],
+    "topics": [
+      "graph-theory",
+      "inequalities"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "vjimc-2024-cat1-04",
+    "bank": "vjimc",
+    "source": {
+      "contest": "VJIMC",
+      "paper": "VJIMC 2024 Category I",
+      "year": 2024,
+      "number": 4,
+      "url": "https://vjimc.osu.cz/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $p>2$ be a prime and let\n$$\\mathcal A=\\{n\\in\\mathbb N:\\ 2p\\mid n\\ \\text{and}\\ p^2\\nmid n\\ \\text{and}\\ n\\mid 3^n-1\\}.$$\nProve that\n$$\\limsup_{k\\to\\infty}\\frac{|\\mathcal A\\cap[1,k]|}{k}\\le\\frac{2\\log3}{p\\log p}.$$",
+    "image": null,
+    "choices": null,
+    "answer": "Write $n=pr$; Fermat gives $3^n\\equiv3^r\\pmod p$, so $l=\\operatorname{ord}_p3$ divides $r$. Thus every $n\\in\\mathcal A$ is a multiple of $pl$, and $3^l>p$ gives $l>\\frac{\\log p}{\\log3}$, so the density is at most $\\frac1{pl}<\\frac{\\log3}{p\\log p}$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Order of 3 modulo $p$",
+        "body": "If $p=3$, no $n$ with $3\\mid n$ divides $3^n-1$ (which is $\\equiv2\\pmod3$), so $\\mathcal A=\\emptyset$ and there is nothing to prove. Let $p\\ge5$ and let $l$ be the multiplicative order of $3$ modulo $p$.\n\n**Every $n\\in\\mathcal A$ is a multiple of $pl$.** Let $n\\in\\mathcal A$ and write $n=pr$ (possible as $p\\mid n$). Since $p\\mid n\\mid3^n-1$, we have $3^n\\equiv1\\pmod p$. By Fermat's little theorem $3^p\\equiv3\\pmod p$, so\n$$3^n=(3^p)^r\\equiv3^r\\pmod p,$$\nhence $3^r\\equiv1\\pmod p$ and $l\\mid r$. Therefore $pl\\mid n$.\n\n**Size of $l$.** $p\\mid3^l-1$ and $3^l-1>0$, so $p\\le3^l-1<3^l$, i.e. $l>\\frac{\\log p}{\\log 3}$.\n\n**Density.** $\\mathcal A\\cap[1,k]$ is contained in the set of multiples of $pl$ in $[1,k]$, which has at most $\\frac k{pl}$ elements. Hence\n$$\\limsup_{k\\to\\infty}\\frac{|\\mathcal A\\cap[1,k]|}{k}\\le\\frac1{pl}<\\frac{\\log3}{p\\log p}\\le\\frac{2\\log3}{p\\log p}.$$\n∎ (Neither the condition $p^2\\nmid n$ nor the evenness of $n$ is needed for this bound; the official solution uses them to get $3^{r/2}\\equiv\\pm1\\pmod p$, which leads to the factor $2$.)"
+      }
+    ],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

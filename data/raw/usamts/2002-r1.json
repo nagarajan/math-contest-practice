@@ -1,0 +1,192 @@
+[
+  {
+    "id": "usamts-2002-r1-01",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 14 Round 1 (2002-2003)",
+      "year": 2002,
+      "number": 1,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Some unit cubes are stacked atop a flat 4 by 4 square. The figures show views of the stacks from two different sides. Find the maximum and minimum number of cubes that could be in the stacks. Also give top views of a maximum arrangement and a minimum arrangement with each stack marked with its height.",
+    "image": "qimages/usamts/2002-r1/q01.webp",
+    "choices": null,
+    "answer": "Maximum $38$, minimum $14$. Top views (north at the top, west on the left):\n$$\\text{max: }\\begin{array}{|c|c|c|c|}\\hline 4&1&4&2\\\\\\hline 2&1&2&2\\\\\\hline 4&1&4&2\\\\\\hline 3&1&3&2\\\\\\hline\\end{array}\\qquad \\text{min: }\\begin{array}{|c|c|c|c|}\\hline 4&0&0&0\\\\\\hline 0&1&0&2\\\\\\hline 0&0&4&0\\\\\\hline 3&0&0&0\\\\\\hline\\end{array}$$",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Bounds from the two views",
+        "body": "**Reading the views.** The south view (looking north) shows the tallest stack in each column, west to east: $4, 1, 4, 2$. The east view (looking west) shows the tallest stack in each row, from south to north: $3, 4, 2, 4$ — so from north to south the row maxima are $4, 2, 4, 3$.\n\nDraw the top view with north at the top. Then a stack in row $i$, column $j$ can have height at most $\\min(\\text{row max}_i, \\text{column max}_j)$, and each row and each column must actually reach its maximum.\n\n**Maximum.** Put every stack at its upper bound $\\min(r_i, c_j)$:\n$$\\begin{array}{c|cccc} & 4 & 1 & 4 & 2\\\\\\hline 4 & 4&1&4&2\\\\ 2 & 2&1&2&2\\\\ 4 & 4&1&4&2\\\\ 3 & 3&1&3&2\\end{array}$$\nEach row and column attains its maximum, so the views are right, and no stack can be higher. Total: $11 + 7 + 11 + 9 = 38$.\n\n**Minimum.** The four rows have different stacks achieving their maxima, so there are at least $4 + 2 + 4 + 3 = 13$ cubes in those four stacks. The second column needs a stack of height exactly 1; it can't be one of those four stacks (every row maximum is at least 2), so there is at least one more cube: at least $14$.\n\nFourteen is achievable: put $4$ in row 1 column 1, $4$ in row 3 column 3, $2$ in row 2 column 4, $3$ in row 4 column 1, and $1$ in row 2 column 2:\n$$\\begin{array}{|c|c|c|c|}\\hline 4&0&0&0\\\\\\hline 0&1&0&2\\\\\\hline 0&0&4&0\\\\\\hline 3&0&0&0\\\\\\hline\\end{array}$$\nColumn maxima: $4, 1, 4, 2$ ✓; row maxima: $4, 2, 4, 3$ ✓.\n\n**Answer: maximum 38, minimum 14** (top views above)."
+      }
+    ],
+    "topics": [
+      "spatial",
+      "logic"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2002-r1-02",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 14 Round 1 (2002-2003)",
+      "year": 2002,
+      "number": 2,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Find four distinct positive integers, $a$, $b$, $c$, and $d$, such that each of the four sums $a + b + c$, $a + b + d$, $a + c + d$, and $b + c + d$ is the square of an integer. Show that infinitely many quadruples $(a, b, c, d)$ with this property can be created.",
+    "image": null,
+    "choices": null,
+    "answer": "For example $(1, 22, 41, 58)$: the sums are $64, 81, 100, 121$. Multiplying by $k^2$ gives infinitely many: $(k^2, 22k^2, 41k^2, 58k^2)$. (Another family: $a = 3x^2 - 18x - 39$, $b = 3x^2 + 6$, $c = 3x^2 + 18x + 33$, $d = 3x^2 + 36x + 42$ for $x \\ge 8$.)",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Choose the squares first",
+        "body": "Let the four sums be $a + b + c = z$, $a + b + d = y$, $a + c + d = x$, $b + c + d = w$. Adding all four: $3(a + b + c + d) = w + x + y + z$. So with $T = \\frac{w + x + y + z}{3}$,\n$$a = T - w,\\quad b = T - x,\\quad c = T - y,\\quad d = T - z.$$\nSo we just need four distinct squares whose sum is divisible by 3 and whose largest is less than $T$ (to make all of $a, b, c, d$ positive).\n\nTake $w, x, y, z = 11^2, 10^2, 9^2, 8^2$: the sum is $121 + 100 + 81 + 64 = 366 = 3 \\cdot 122$, so $T = 122$ and\n$$(a, b, c, d) = (122 - 121,\\ 122 - 100,\\ 122 - 81,\\ 122 - 64) = (1, 22, 41, 58).$$\nCheck: $1 + 22 + 41 = 64 = 8^2$, $1 + 22 + 58 = 81 = 9^2$, $1 + 41 + 58 = 100 = 10^2$, $22 + 41 + 58 = 121 = 11^2$. ✓\n\n**Infinitely many.** If $(a, b, c, d)$ works, so does $(k^2 a, k^2 b, k^2 c, k^2 d)$ for every positive integer $k$: each sum is multiplied by $k^2$ and stays a square, and the four numbers stay distinct and positive. So $(k^2, 22k^2, 41k^2, 58k^2)$, $k = 1, 2, 3, \\dots$ are infinitely many quadruples. ∎"
+      },
+      {
+        "title": "A polynomial family",
+        "body": "Look for sums that are the squares of $3x, 3x + 3, 3x + 6, 3x + 9$. With $T = \\frac{(3x)^2 + (3x+3)^2 + (3x+6)^2 + (3x+9)^2}{3} = 12x^2 + 36x + 42$, the formulas of the first solution give\n$$a = 3x^2 - 18x - 39,\\quad b = 3x^2 + 6,\\quad c = 3x^2 + 18x + 33,\\quad d = 3x^2 + 36x + 42.$$\nDirectly:\n* $a + b + c = 9x^2 = (3x)^2$,\n* $a + b + d = 9x^2 + 18x + 9 = (3x + 3)^2$,\n* $a + c + d = 9x^2 + 36x + 36 = (3x + 6)^2$,\n* $b + c + d = 9x^2 + 54x + 81 = (3x + 9)^2$.\n\nFor $x \\ge 8$ we have $a = 3x^2 - 18x - 39 > 0$ (at $x = 8$: $a = 9$) and $a < b < c < d$. So every integer $x \\ge 8$ gives a valid quadruple — infinitely many. For $x = 8$: $(9, 198, 369, 522)$, with sums $576 = 24^2$, $729 = 27^2$, $900 = 30^2$, $1089 = 33^2$. ∎"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "algebra"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2002-r1-03",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 14 Round 1 (2002-2003)",
+      "year": 2002,
+      "number": 3,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "For a set of points in a plane, we construct the perpendicular bisectors of the line segments connecting every pair of those points and we count the number of points in which these perpendicular bisectors intersect each other. If we start with twelve points, the maximum possible number of intersection points is 1705. What is the maximum possible number of intersection points if we start with thirteen points?",
+    "image": null,
+    "choices": null,
+    "answer": "2431",
+    "acceptedAnswers": null,
+    "answerUnit": "points",
+    "solutions": [
+      {
+        "title": "Count pairs of bisectors, subtract circumcentres",
+        "body": "**A note on the statement.** As printed, two different segments could have the *same* perpendicular bisector (e.g. two opposite sides of a rectangle), and if these coinciding lines were counted as two bisectors they would \"intersect\" in infinitely many points. The organizers later clarified that only intersections of **distinct** bisectors are counted; the given value 1705 for twelve points confirms this reading.\n\n**Upper bound.** With $n$ points there are $N = \\binom n2$ segments, hence at most $N$ distinct bisectors, and two distinct lines meet in at most one point; this gives at most $\\binom N2$ intersection points. But for any three points $P, Q, R$, the bisectors of $PQ$, $QR$, $RP$ are concurrent (at the circumcentre of $PQR$) or all parallel (if $P, Q, R$ are collinear). So the three pairs among these bisectors give at most one point instead of three: we lose at least 2 for each of the $\\binom n3$ triples. Hence\n$$\\#\\text{points} \\le \\binom{\\binom n2}{2} - 2\\binom n3.$$\n\n**The bound is attained** for points in general position: add points one at a time, each time avoiding finitely many lines (so that no new segment is parallel to an old one, which makes all bisectors pairwise intersecting) and finitely many circles (so that no new bisector passes through an existing intersection point other than the forced circumcentres). Then the only multiple intersections are the circumcentres, each on exactly three bisectors.\n\n**Check with 12 points:** $\\binom{66}{2} - 2\\binom{12}{3} = 2145 - 440 = 1705$ ✓.\n\n**For 13 points:** $\\binom{78}{2} - 2\\binom{13}3 = 3003 - 572 = 2431$.\n\n**Answer: 2431**"
+      },
+      {
+        "title": "Count the two kinds of intersection points",
+        "body": "In the extremal (general position) configuration, every intersection point is one of two kinds:\n* the circumcentre of three of the points: $\\binom n3$ such points;\n* the crossing of the bisectors of two *disjoint* pairs $\\{P, Q\\}$, $\\{R, S\\}$: $\\frac12\\binom n2\\binom{n-2}2$ such points.\n\n(Two bisectors of segments sharing a point $P$ always meet at a circumcentre, which is already counted.) For $n = 12$: $220 + \\frac{66\\cdot 45}{2} = 220 + 1485 = 1705$ ✓. For $n = 13$:\n$$\\binom{13}{3} + \\frac{\\binom{13}2\\binom{11}2}{2} = 286 + \\frac{78 \\cdot 55}{2} = 286 + 2145 = 2431.$$\nIn closed form the count is $\\frac{n(n-1)(n-2)(3n-5)}{24}$.\n\n**Answer: 2431**"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "counting"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2002-r1-04",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 14 Round 1 (2002-2003)",
+      "year": 2002,
+      "number": 4,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "text",
+    "prompt": "A *transposition* of a vector is created by switching exactly two entries of the vector. For example, $(1, 5, 3, 4, 2, 6, 7)$ is a transposition of $(1, 2, 3, 4, 5, 6, 7)$. Find the vector $X$ if\n$$S = (0, 0, 1, 1, 0, 1, 1),\\quad T = (0, 0, 1, 1, 1, 1, 0),\\quad U = (1, 0, 1, 0, 1, 1, 0),\\quad V = (1, 1, 0, 1, 0, 1, 0)$$\nare all transpositions of $X$. Describe your method for finding $X$.",
+    "image": null,
+    "choices": null,
+    "answer": "(1, 0, 1, 1, 0, 1, 0)",
+    "acceptedAnswers": [
+      "1,0,1,1,0,1,0",
+      "1011010",
+      "(1,0,1,1,0,1,0)",
+      "1 0 1 1 0 1 0",
+      "X = (1, 0, 1, 1, 0, 1, 0)"
+    ],
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Compare transpositions pairwise",
+        "body": "A transposition that actually changes $X$ swaps a 0 and a 1, so it differs from $X$ in exactly 2 positions. None of $S, T, U, V$ is $X$ itself: each of them differs in 4 positions from one of the others ($S$ from $U$, $T$ from $V$, $U$ from $S$, $V$ from $S$), which is impossible for $X$ and a transposition of $X$.\n\n**Key fact.** If two transpositions of $X$ differ in 4 positions, then each of them changed two of those 4 positions, and both agree with $X$ everywhere else.\n\n* $U = (1,0,1,0,1,1,0)$ and $V = (1,1,0,1,0,1,0)$ differ in positions $2, 3, 4, 5$. So $X$ agrees with them in positions 1, 6, 7: $x_1 = 1$, $x_6 = 1$, $x_7 = 0$.\n* $S = (0,0,1,1,0,1,1)$ and $U$ differ in positions $1, 4, 5, 7$. So $x_2 = 0$, $x_3 = 1$, $x_6 = 1$.\n* $S$ and $V$ differ in positions $1, 2, 3, 7$. So $x_4 = 1$, $x_5 = 0$, $x_6 = 1$.\n\nHence $X = (1, 0, 1, 1, 0, 1, 0)$.\n\n**Check:** $S$ swaps positions 1 and 7 of $X$, $T$ swaps positions 1 and 5, $U$ swaps 4 and 5, and $V$ swaps 2 and 3. ✓\n\n**Answer: $X = (1, 0, 1, 1, 0, 1, 0)$**"
+      },
+      {
+        "title": "Dot products",
+        "body": "Transpositions keep the multiset of entries, so $X$ has four 1's and three 0's, and a transposition that changes $X$ moves one of its 1's to a 0-position. Hence for each of $S, T, U, V$, exactly three of its four 1-positions are 1's of $X$ (the dot product with $X$ is 3):\n$$x_3 + x_4 + x_6 + x_7 = 3,\\quad x_3 + x_4 + x_5 + x_6 = 3,\\quad x_1 + x_3 + x_5 + x_6 = 3,\\quad x_1 + x_2 + x_4 + x_6 = 3.$$\n(As shown in the first solution, none of $S, T, U, V$ equals $X$.)\n\n* If $x_6 = 0$, the first equation would force $x_3 = x_4 = x_7 = 1$ and the third $x_1 = x_3 = x_5 = 1$, giving five 1's — too many. So $x_6 = 1$.\n* Subtracting the first two equations: $x_5 = x_7$; the middle two: $x_1 = x_4$.\n* The last equation becomes $2x_1 + x_2 = 2$, so $x_1 = 1$, $x_2 = 0$, and then $x_4 = 1$.\n* Now $x_1, x_4, x_6$ are three of the four 1's. If $x_5 = x_7 = 1$ there would be five, so $x_5 = x_7 = 0$, and the last 1 is $x_3 = 1$.\n\n$X = (1, 0, 1, 1, 0, 1, 0)$, which checks as above. (An exhaustive check of all $2^7$ binary vectors also shows this is the only possibility.)\n\n**Answer: $X = (1, 0, 1, 1, 0, 1, 0)$**"
+      }
+    ],
+    "topics": [
+      "logic"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2002-r1-05",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 14 Round 1 (2002-2003)",
+      "year": 2002,
+      "number": 5,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "As illustrated below, we can dissect every triangle $ABC$ into four pieces so that piece 1 is a triangle similar to the original triangle, while the other three pieces can be assembled into a triangle also similar to the original triangle. Determine the ratios of the sizes of the three triangles and verify that the construction works.",
+    "image": "qimages/usamts/2002-r1/q05.webp",
+    "choices": null,
+    "answer": "$ABC$ : piece 1 : assembled triangle $= 5 : 4 : 3$ in side lengths (areas $25 : 16 : 9$). Construction: $DE \\parallel BC$ with $AD : AB = 4 : 5$, $F$ on $BC$ with $BF : FC = 2 : 3$, $FH \\parallel AB$ and $FG \\parallel AC$ meeting $DE$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Parallel lines and lengths",
+        "body": "**The construction.** Make all cuts parallel to sides of $ABC$: $DE \\parallel BC$ (so piece 1, $\\triangle ADE$, is similar to $ABC$), $FH \\parallel AB$ and $FG \\parallel AC$ with $G, H$ on $DE$. Then\n* piece 2, $\\triangle GHF$, has sides parallel to the sides of $ABC$, so it is similar to $ABC$ (turned through $180^\\circ$);\n* piece 3, $DBFG$, is a trapezoid with $DG \\parallel BF$ and legs along $AB$ and parallel to $AC$;\n* piece 4, $HFCE$, is a trapezoid with $HE \\parallel FC$ and legs parallel to $AB$ and along $AC$.\n\n**The lengths.** $DBFH$ and $GFCE$ are parallelograms, so $DH = BF$ and $GE = FC$. For the three small pieces to stack into one triangle (piece 2 on top, then 3, then 4, as in the figure), the parallel sides must match: the base of piece 2 must equal the short side of piece 3, $GH = DG$, and the long side of piece 3 must equal the short side of piece 4, $BF = HE$. Let $DG = GH = x$. Then $BF = DH = 2x$, $HE = BF = 2x$, so $DE = DG + GH + HE = 4x$, $GE = GH + HE = 3x = FC$, and $BC = BF + FC = 5x$.\n\nSo choose $D$ with $AD : AB = DE : BC = 4 : 5$ and $F$ with $BF : FC = 2 : 3$.\n\n**Verification.** A trapezoid whose parallel sides (parallel to $BC$) have lengths $p < q$ and whose legs are parallel to $AB$ and $AC$ is exactly a triangle similar to $ABC$ with \"base\" $q$ with the top triangle of base $p$ removed. Piece 2 (turned $180^\\circ$) is the triangle with base $x$; piece 3 is the trapezoid with parallel sides $x$ and $2x$; piece 4 the trapezoid with parallel sides $2x$ and $3x$. Stacking them, the matching parallel sides have equal lengths ($x$ with $x$, $2x$ with $2x$), and the legs line up along two straight lines (they are all parallel to $AB$, resp. $AC$), so they form a triangle similar to $ABC$ with base $3x$.\n\n**Ratios.** The three triangles have corresponding sides $BC = 5x$, $DE = 4x$, and $3x$:\n$$ABC : ADE : \\text{assembled} = 5 : 4 : 3 \\text{ (lengths)},\\qquad 25 : 16 : 9 \\text{ (areas)}.$$\nConsistently, $16 + 9 = 25$: the two triangles together have the area of $ABC$, like a $3$-$4$-$5$ right triangle.\n\n**Answer: side ratios $5 : 4 : 3$ (area ratios $25 : 16 : 9$).**"
+      },
+      {
+        "title": "Tile by 25 small triangles",
+        "body": "Divide each side of $ABC$ into five equal parts and draw the lines through the division points parallel to the sides. This cuts $ABC$ into $25$ congruent triangles similar to $ABC$ with ratio $\\frac15$.\n\nDraw $DE$ along the fourth parallel to $BC$ from $A$, $FG$ along a parallel to $AC$ and $FH$ along a parallel to $AB$, with $BF = \\frac25 BC$. Counting small triangles: piece 1 consists of $16$, piece 2 of $1$, piece 3 of $3$, and piece 4 of $5$ small triangles. Pieces 2, 3, 4 are the rows $1, 3, 5$ of a triangle with side $3$ (in small-triangle units), so they fit together into a triangle of $1 + 3 + 5 = 9$ small triangles, i.e. similar to $ABC$ with ratio $\\frac35$, while piece 1 is similar with ratio $\\frac45$.\n\n**Answer: $5 : 4 : 3$ in lengths, $25 : 16 : 9$ in areas.**"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

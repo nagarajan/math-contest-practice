@@ -1,0 +1,143 @@
+[
+  {
+    "id": "vjimc-2014-cat2-01",
+    "bank": "vjimc",
+    "source": {
+      "contest": "VJIMC",
+      "paper": "VJIMC 2014 Category II",
+      "year": 2014,
+      "number": 1,
+      "url": "https://vjimc.osu.cz/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $f:(0,\\infty)\\to\\mathbb R$ be a differentiable function. Assume that\n$$\\lim_{x\\to\\infty}\\left(f(x)+\\frac{f'(x)}{x}\\right)=0 .$$\nProve that\n$$\\lim_{x\\to\\infty}f(x)=0 .$$",
+    "image": null,
+    "choices": null,
+    "answer": "Apply Cauchy's mean value theorem to $g(x)=e^{x^2/2}f(x)$ and $h(x)=e^{x^2/2}$: $\\frac{g'}{h'}=f+\\frac{f'}{x}$, which gives $|f(x)|\\le|f(x_0)|e^{(x_0^2-x^2)/2}+\\varepsilon$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Cauchy's mean value theorem with $e^{x^2/2}$",
+        "body": "Let $\\varepsilon>0$ and choose $x_0>0$ with $\\left|f(x)+\\frac{f'(x)}x\\right|<\\frac\\varepsilon2$ for $x\\ge x_0$. Let $g(x)=e^{x^2/2}f(x)$ and $h(x)=e^{x^2/2}$. Then\n$$g'(x)=xe^{x^2/2}\\left(f(x)+\\frac{f'(x)}{x}\\right),\\qquad h'(x)=xe^{x^2/2}>0 .$$\nFor $x>x_0$, Cauchy's mean value theorem on $[x_0,x]$ gives $\\eta\\in(x_0,x)$ with\n$$\\frac{g(x)-g(x_0)}{h(x)-h(x_0)}=\\frac{g'(\\eta)}{h'(\\eta)}=f(\\eta)+\\frac{f'(\\eta)}{\\eta}.$$\nDividing numerator and denominator by $e^{x^2/2}$ and writing $\\delta(x)=e^{(x_0^2-x^2)/2}\\in(0,1)$:\n$$f(x)-f(x_0)\\delta(x)=\\left(f(\\eta)+\\frac{f'(\\eta)}\\eta\\right)\\big(1-\\delta(x)\\big).$$\nHence\n$$|f(x)|\\le|f(x_0)|\\,\\delta(x)+\\frac\\varepsilon2 .$$\nSince $\\delta(x)\\to0$ as $x\\to\\infty$, there is $\\tilde x\\ge x_0$ with $|f(x_0)|\\delta(x)<\\frac\\varepsilon2$ for $x\\ge\\tilde x$, and then $|f(x)|<\\varepsilon$. As $\\varepsilon$ was arbitrary, $f(x)\\to0$. ∎"
+      },
+      {
+        "title": "Integrating factor",
+        "body": "Let $\\varphi(x)=f(x)+\\frac{f'(x)}{x}\\to0$, so $\\left(e^{x^2/2}f(x)\\right)'=x e^{x^2/2}\\varphi(x)$. Fix $\\varepsilon>0$ and $x_0>0$ with $|\\varphi|<\\frac\\varepsilon2$ on $[x_0,\\infty)$. (We compare monotone functions instead of integrating $\\varphi$, which need not be integrable.) The function $G(t)=e^{t^2/2}\\big(f(t)-\\frac\\varepsilon2\\big)$ has $G'(t)=te^{t^2/2}\\big(\\varphi(t)-\\frac\\varepsilon2\\big)<0$ on $[x_0,\\infty)$, so $G$ is decreasing and for $x>x_0$\n$$e^{x^2/2}\\Big(f(x)-\\frac\\varepsilon2\\Big)\\le e^{x_0^2/2}\\Big(f(x_0)-\\frac\\varepsilon2\\Big),\\quad\\text{i.e.}\\quad f(x)\\le\\frac\\varepsilon2+\\Big(f(x_0)-\\frac\\varepsilon2\\Big)e^{(x_0^2-x^2)/2}.$$\nThe same argument with $\\tilde G(t)=e^{t^2/2}\\big(f(t)+\\frac\\varepsilon2\\big)$ (increasing, as $\\varphi>-\\frac\\varepsilon2$) gives $f(x)\\ge-\\frac\\varepsilon2+\\big(f(x_0)+\\frac\\varepsilon2\\big)e^{(x_0^2-x^2)/2}$. Letting $x\\to\\infty$, $\\limsup|f(x)|\\le\\frac\\varepsilon2$ for every $\\varepsilon>0$, so $f(x)\\to0$. ∎"
+      }
+    ],
+    "topics": [
+      "real-analysis",
+      "calculus"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "vjimc-2014-cat2-02",
+    "bank": "vjimc",
+    "source": {
+      "contest": "VJIMC",
+      "paper": "VJIMC 2014 Category II",
+      "year": 2014,
+      "number": 2,
+      "url": "https://vjimc.osu.cz/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $p$ be a prime number and let $A$ be a subgroup of the multiplicative group $\\mathbb F_p^*$ of the finite field $\\mathbb F_p$ with $p$ elements. Prove that if the order of $A$ is a multiple of $6$, then there exist $x,y,z\\in A$ satisfying $x+y=z$.",
+    "image": null,
+    "choices": null,
+    "answer": "$A$ is cyclic, so it contains an element $a$ of order $6$; then $a^3=-1$ and $a^2-a+1=0$, so $x=a^2$, $y=1$, $z=a$ works.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "A primitive sixth root of unity",
+        "body": "Since $6\\mid|A|$ and $|A|\\mid p-1$, we have $p\\ge7$, so $p$ is odd. Every finite subgroup of the multiplicative group of a field is cyclic, so $A$ is cyclic and contains an element $a$ of order $6$.\n\nThen $a^6=1$ and $a^3\\ne1$, so $(a^3-1)(a^3+1)=0$ gives $a^3=-1$. Factor $0=a^3+1=(a+1)(a^2-a+1)$. Since $a$ has order $6$, $a\\ne-1$ (which has order $2$), so\n$$a^2-a+1=0,\\qquad\\text{i.e.}\\qquad a^2+1=a .$$\nThus $x=a^2$, $y=1$, $z=a$ are elements of $A$ (note $1\\in A$, being a subgroup) with $x+y=z$. ∎\n\n(Alternatively: since $a^2\\ne1$, $a+a^3+a^5=a\\,\\frac{1-a^6}{1-a^2}=0$, hence $a+a^5=-a^3=1$, and $x=a$, $y=a^5$, $z=1$ also work.)"
+      }
+    ],
+    "topics": [
+      "abstract-algebra",
+      "number-theory"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "vjimc-2014-cat2-03",
+    "bank": "vjimc",
+    "source": {
+      "contest": "VJIMC",
+      "paper": "VJIMC 2014 Category II",
+      "year": 2014,
+      "number": 3,
+      "url": "https://vjimc.osu.cz/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $k$ be a positive even integer. Show that\n$$\\sum_{n=0}^{k/2}(-1)^n\\binom{k+2}{n}\\binom{2(k-n)+1}{k+1}=\\frac{(k+1)(k+2)}{2} .$$",
+    "image": null,
+    "choices": null,
+    "answer": "Compare the coefficients of $x^k$ in $(1-x)^{k+2}=(1-x^2)^{k+2}(1+x)^{-(k+2)}$, using $[x^m](1+x)^{-N}=(-1)^m\\binom{N+m-1}{N-1}$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Generating functions",
+        "body": "Work with formal power series. For $N\\ge1$,\n$$(1+x)^{-N}=\\sum_{m\\ge0}(-1)^m\\binom{N+m-1}{N-1}x^m$$\n(the negative binomial series; e.g. by induction on $N$ using $\\sum_{i\\le m}\\binom{N+i-1}{N-1}=\\binom{N+m}{N}$).\n\nNow use the identity\n$$(1-x)^{k+2}=(1-x^2)^{k+2}\\,(1+x)^{-(k+2)} .$$\n**Left side:** the coefficient of $x^k$ is $(-1)^k\\binom{k+2}{k}=\\binom{k+2}{2}=\\frac{(k+1)(k+2)}2$, as $k$ is even.\n\n**Right side:** $(1-x^2)^{k+2}=\\sum_n(-1)^n\\binom{k+2}nx^{2n}$, so the coefficient of $x^k$ is\n$$\\sum_{n=0}^{k/2}(-1)^n\\binom{k+2}{n}\\cdot(-1)^{k-2n}\\binom{(k+2)+(k-2n)-1}{k+1}=\\sum_{n=0}^{k/2}(-1)^n\\binom{k+2}{n}\\binom{2(k-n)+1}{k+1},$$\nusing that $k-2n$ is even. Comparing the two coefficients proves the identity. (Check $k=2$: $\\binom53-4\\binom33=10-4=6=\\frac{3\\cdot4}2$.) ∎"
+      }
+    ],
+    "topics": [
+      "counting",
+      "algebra"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "vjimc-2014-cat2-04",
+    "bank": "vjimc",
+    "source": {
+      "contest": "VJIMC",
+      "paper": "VJIMC 2014 Category II",
+      "year": 2014,
+      "number": 4,
+      "url": "https://vjimc.osu.cz/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $0<a<b$ and let $f:[a,b]\\to\\mathbb R$ be a continuous function with $\\int_a^bf(t)\\,dt=0$. Show that\n$$\\int_a^b\\!\\!\\int_a^bf(x)f(y)\\ln(x+y)\\,dx\\,dy\\le0 .$$",
+    "image": null,
+    "choices": null,
+    "answer": "Frullani: $\\ln s=\\int_0^\\infty\\frac{e^{-t}-e^{-st}}{t}\\,dt$; by Fubini and $\\int f=0$ the double integral equals $-\\int_0^\\infty\\frac{F(t)^2}{t}\\,dt\\le0$ with $F(t)=\\int_a^bf(x)e^{-xt}\\,dx$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Laplace-transform representation of the logarithm",
+        "body": "**Lemma (Frullani).** For $s>0$: $\\displaystyle\\ln s=\\int_0^\\infty\\frac{e^{-t}-e^{-st}}{t}\\,dt$.\n\n*Proof.* $\\frac{e^{-t}-e^{-st}}t=\\int_1^se^{-ut}\\,du$. For $s\\ge1$ the integrand $e^{-ut}$ is positive, so by Tonelli\n$$\\int_0^\\infty\\!\\!\\int_1^se^{-ut}\\,du\\,dt=\\int_1^s\\!\\!\\int_0^\\infty e^{-ut}\\,dt\\,du=\\int_1^s\\frac{du}u=\\ln s;$$\nfor $s<1$ the same computation applies to $-\\int_s^1$. $\\square$\n\n**Fubini is allowed.** Let $\\|f\\|=\\max|f|$ and $K(s,t)=\\frac{e^{-t}-e^{-st}}{t}$. For $s=x+y\\in[2a,2b]$: if $0<t\\le1$, $|K|\\le|s-1|\\le 2b+1$ (mean value theorem, since $|\\frac{d}{du}e^{-ut}|\\le t$); if $t\\ge1$, $|K|\\le e^{-t}+e^{-2at}$. So $|f(x)f(y)K(x+y,t)|$ is bounded by $\\|f\\|^2$ times an integrable function of $t$, uniformly in $(x,y)\\in[a,b]^2$, and we may integrate in any order.\n\n**Computation.** Let $F(t)=\\int_a^bf(x)e^{-xt}\\,dx$. Then\n$$\\iint f(x)f(y)\\ln(x+y)\\,dx\\,dy=\\int_0^\\infty\\frac1t\\left[e^{-t}\\Big(\\int_a^bf\\Big)^2-\\iint f(x)f(y)e^{-xt}e^{-yt}\\,dx\\,dy\\right]dt=-\\int_0^\\infty\\frac{F(t)^2}{t}\\,dt,$$\nbecause $\\int_a^bf=0$ and $\\iint f(x)f(y)e^{-(x+y)t}\\,dx\\,dy=F(t)^2$. (The last integral converges: it equals the left side, and also directly $|F(t)|=\\left|\\int f(x)(e^{-xt}-1)\\,dx\\right|\\le\\|f\\|(b-a)bt$ near $0$ and $|F(t)|\\le\\|f\\|(b-a)e^{-at}$.) Since $F(t)^2/t\\ge0$,\n$$\\int_a^b\\!\\!\\int_a^bf(x)f(y)\\ln(x+y)\\,dx\\,dy=-\\int_0^\\infty\\frac{F(t)^2}{t}\\,dt\\le0 .$$\n∎"
+      }
+    ],
+    "topics": [
+      "real-analysis",
+      "calculus",
+      "inequalities"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

@@ -1,0 +1,146 @@
+[
+  {
+    "id": "vjimc-2009-cat2-01",
+    "bank": "vjimc",
+    "source": {
+      "contest": "VJIMC",
+      "paper": "VJIMC 2009 Category II",
+      "year": 2009,
+      "number": 1,
+      "url": "https://vjimc.osu.cz/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "A positive integer $m$ is called *self-descriptive in base $b$*, where $b\\ge2$ is an integer, if:\n\n1. The representation of $m$ in base $b$ is of the form $(a_0a_1\\dots a_{b-1})_b$ (that is $m=a_0b^{b-1}+a_1b^{b-2}+\\dots+a_{b-2}b+a_{b-1}$, where $0\\le a_i\\le b-1$ are integers).\n2. $a_i$ is equal to the number of occurrences of the number $i$ in the sequence $(a_0a_1\\dots a_{b-1})$.\n\nFor example, $(1210)_4$ is self-descriptive in base $4$, because it has four digits and contains one $0$, two $1$s, one $2$ and no $3$s.\n\na) Find all bases $b\\ge2$ such that no number is self-descriptive in base $b$.\n\nb) Prove that if $x$ is a self-descriptive number in base $b$ then the last (least significant) digit of $x$ is $0$.",
+    "image": null,
+    "choices": null,
+    "answer": "(a) $b\\in\\{2,3,6\\}$ (examples: $1210_4$, $21200_5$, and $(b-4)\\,2\\,1\\,0\\cdots0\\,1\\,000$ for $b\\ge7$). (b) If $a_{b-1}\\ge1$, some digit equals $b-1$, and the digit sum $b$ leaves no room for $b-1$ equal digits.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Digit-sum bookkeeping",
+        "body": "Let $(a_0a_1\\dots a_{b-1})_b$ be self-descriptive. Two facts:\n- $a_0\\ge1$: the leading digit of a $b$-digit number is nonzero.\n- $\\sum_ia_i=b$, because $a_i$ counts the digits equal to $i$ and there are $b$ digits.\n\n**(b)** Suppose $a_{b-1}\\ge1$. Then some digit equals $b-1$, say $a_j=b-1$, so the digit $j$ occurs $b-1$ times. As the digits sum to $b$, the remaining $b-1$ digits sum to $1$: the multiset of digits is $\\{b-1,\\,1,\\,0,\\dots,0\\}$ with $b-2$ zeros.\n- If $j=0$: the number of zeros is $a_0=b-1\\ne b-2$. Contradiction.\n- If $j\\ge1$: the digit $j$ occurs $b-1$ times, but only two digits are nonzero, so $b-1\\le2$. For $b=3$ the digits are $2,1,0$, each occurring once, not $b-1=2$ times. For $b=2$ the digits are $1,1$, there are no zeros, but $a_0\\ge1$ — contradiction.\n\nHence $a_{b-1}=0$: the last digit is $0$.\n\n**(a) Bases with self-descriptive numbers.** $b=4$: $1210$ (and $2020$); $b=5$: $21200$. For $b\\ge7$ take\n$$a_0=b-4,\\quad a_1=2,\\quad a_2=1,\\quad a_{b-4}=1,\\quad a_i=0\\text{ otherwise}$$\n(e.g. $3211000_7$, $42101000_8$). Since $b-4\\ge3$, the positions $0,1,2,b-4$ are distinct; the digits are $b-4,2,1,1$ and $b-4$ zeros, so there are $b-4$ zeros, two $1$s, one $2$, one digit $b-4$ and nothing else — exactly as prescribed.\n\n**No self-descriptive numbers for $b=2,3,6$.** By (b), $a_{b-1}=0$.\n- $b=2$: digits $(a_0,0)$ with $a_0\\ge1$, so $(1,0)$; it contains one $1$ but $a_1=0$.\n- $b=3$: $(a_0,a_1,0)$ with $a_0+a_1=3$, $1\\le a_0\\le2$: $(1,2,0)$ has one $1$, not two; $(2,1,0)$ has one $0$, not two.\n- $b=6$: let $z=a_0\\ge1$ be the number of zeros. The digits $a_1,\\dots,a_5$ contain $5-z$ nonzero digits with sum $6-z=(5-z)+1$. If $z=5$ the digit sum would be $5\\ne6$; so $z\\le4$ and these $5-z$ digits are all $1$ except one $2$. Thus the digit multiset is $\\{z,2,1^{(4-z)},0^{(z)}\\}$:\n  - $z=1$: four $1$s, so $a_1=4$, but no digit $4$ is present;\n  - $z=2$: $\\{2,2,1,1,0,0\\}$ forces $a_1=a_2=2$ and $a_0=2$, i.e. three $2$s — contradiction;\n  - $z=3$: $\\{3,2,1,0,0,0\\}$ forces $a_1=a_2=a_3=1$, i.e. three $1$s — contradiction;\n  - $z=4$: $\\{4,2,0,0,0,0\\}$ has no $1$, but then $a_2=1$ (one $2$) would be a $1$ — contradiction.\n\n(A computer search for $b\\le11$ confirms: none for $b=2,3,6$; exactly $1210,2020$ for $b=4$, $21200$ for $b=5$, and $3211000$, $42101000,\\dots$ for $b\\ge7$.)\n\n**Answer: (a) $b=2,3,6$.** ∎"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "counting",
+      "logic"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "vjimc-2009-cat2-02",
+    "bank": "vjimc",
+    "source": {
+      "contest": "VJIMC",
+      "paper": "VJIMC 2009 Category II",
+      "year": 2009,
+      "number": 2,
+      "url": "https://vjimc.osu.cz/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Let $E$ be the set of all continuously differentiable real valued functions $f$ on $[0,1]$ such that $f(0)=0$ and $f(1)=1$. Define\n$$J(f)=\\int_0^1(1+x^2)\\big(f'(x)\\big)^2\\,dx .$$\na) Show that $J$ achieves its minimum value at some element of $E$.\n\nb) Calculate $\\displaystyle\\min_{f\\in E}J(f)$.",
+    "image": null,
+    "choices": null,
+    "answer": "4/pi",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Cauchy–Schwarz",
+        "body": "For $f\\in E$, by the fundamental theorem of calculus and the Cauchy–Schwarz inequality,\n$$1=f(1)-f(0)=\\int_0^1\\sqrt{1+x^2}\\,f'(x)\\cdot\\frac{1}{\\sqrt{1+x^2}}\\,dx\\le\\left(\\int_0^1(1+x^2)f'(x)^2dx\\right)^{1/2}\\left(\\int_0^1\\frac{dx}{1+x^2}\\right)^{1/2}=\\sqrt{J(f)}\\cdot\\sqrt{\\frac\\pi4}.$$\nHence $J(f)\\ge\\frac4\\pi$ for every $f\\in E$.\n\nEquality in Cauchy–Schwarz suggests $\\sqrt{1+x^2}f'$ proportional to $\\frac1{\\sqrt{1+x^2}}$, i.e. $f'(x)=\\frac{\\lambda}{1+x^2}$. Take\n$$f_0(x)=\\frac4\\pi\\arctan x .$$\nIt is $C^1$, $f_0(0)=0$, $f_0(1)=\\frac4\\pi\\cdot\\frac\\pi4=1$, so $f_0\\in E$, and\n$$J(f_0)=\\int_0^1(1+x^2)\\frac{16}{\\pi^2(1+x^2)^2}dx=\\frac{16}{\\pi^2}\\cdot\\frac\\pi4=\\frac4\\pi .$$\nSo the minimum is attained at $f_0$ (part a) and equals $\\frac4\\pi$ (part b).\n\n**Answer: $\\min J=\\dfrac4\\pi$.** ∎"
+      },
+      {
+        "title": "Expand around the minimiser",
+        "body": "Let $f_0(x)=\\frac4\\pi\\arctan x\\in E$, so that $(1+x^2)f_0'(x)=\\frac4\\pi$ is constant. Any $f\\in E$ can be written $f=f_0+h$ with $h\\in C^1[0,1]$, $h(0)=h(1)=0$. Then\n$$J(f)=J(f_0)+2\\int_0^1(1+x^2)f_0'h'\\,dx+\\int_0^1(1+x^2)h'^2\\,dx=J(f_0)+\\frac8\\pi\\big(h(1)-h(0)\\big)+\\int_0^1(1+x^2)h'^2\\,dx .$$\nThe middle term vanishes, the last is $\\ge0$, so $J(f)\\ge J(f_0)=\\frac{16}{\\pi^2}\\int_0^1\\frac{dx}{1+x^2}=\\frac4\\pi$, with equality only for $h\\equiv0$. Thus the minimum exists, is attained only at $f_0$, and equals $\\frac4\\pi$. ∎"
+      }
+    ],
+    "topics": [
+      "calculus",
+      "real-analysis",
+      "inequalities"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null,
+    "answerDisplay": "$\\dfrac{4}{\\pi}$"
+  },
+  {
+    "id": "vjimc-2009-cat2-03",
+    "bank": "vjimc",
+    "source": {
+      "contest": "VJIMC",
+      "paper": "VJIMC 2009 Category II",
+      "year": 2009,
+      "number": 3,
+      "url": "https://vjimc.osu.cz/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $A$ be an $n\\times n$ square matrix with integer entries. Suppose that $p^2A^{p^2}=q^2A^{q^2}+r^2I_n$ for some positive integers $p,q,r$ where $r$ is odd and $p^2=q^2+r^2$. Prove that $|\\det A|=1$.\n\n(Here $I_n$ means the $n\\times n$ identity matrix.)",
+    "image": null,
+    "choices": null,
+    "answer": "Every eigenvalue $\\lambda$ is a root of $f(x)=p^2x^{p^2}-q^2x^{q^2}-r^2$, so $f(|\\lambda|)\\le0$, which forces $0<|\\lambda|\\le1$; hence $0<|\\det A|\\le1$ and the integer $\\det A$ is $\\pm1$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Bounding the eigenvalues",
+        "body": "Let $f(x)=p^2x^{p^2}-q^2x^{q^2}-r^2$. The hypothesis says $f(A)=0$, so the minimal polynomial of $A$ divides $f$ and every (complex) eigenvalue $\\lambda$ of $A$ satisfies $f(\\lambda)=0$:\n$$p^2\\lambda^{p^2}=q^2\\lambda^{q^2}+r^2 .$$\n\n**$\\lambda\\neq0$**, since $f(0)=-r^2\\ne0$.\n\n**$|\\lambda|\\le1$.** Taking absolute values, $p^2|\\lambda|^{p^2}\\le q^2|\\lambda|^{q^2}+r^2$, i.e. $f(|\\lambda|)\\le0$. But for real $t>1$, using $p^2>q^2$ (so $t^{p^2}>t^{q^2}$) and $p^2=q^2+r^2$,\n$$f(t)>p^2t^{q^2}-q^2t^{q^2}-r^2=r^2\\big(t^{q^2}-1\\big)>0 .$$\nHence $|\\lambda|\\le1$.\n\nTherefore $|\\det A|=\\prod|\\lambda_k|\\in(0,1]$ (product over the eigenvalues with multiplicity). As $A$ has integer entries, $\\det A$ is an integer; a nonzero integer of absolute value at most $1$ has $|\\det A|=1$. ∎\n\n(The proof does not use that $r$ is odd.)"
+      }
+    ],
+    "topics": [
+      "linear-algebra",
+      "polynomials"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "vjimc-2009-cat2-04",
+    "bank": "vjimc",
+    "source": {
+      "contest": "VJIMC",
+      "paper": "VJIMC 2009 Category II",
+      "year": 2009,
+      "number": 4,
+      "url": "https://vjimc.osu.cz/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $k,m,n$ be positive integers such that $1\\le m\\le n$ and denote $S=\\{1,2,\\dots,n\\}$. Suppose that $A_1,A_2,\\dots,A_k$ are $m$-element subsets of $S$ with the following property: for every $i=1,2,\\dots,k$ there exists a partition $S=S_{1,i}\\cup S_{2,i}\\cup\\dots\\cup S_{m,i}$ (into pairwise disjoint subsets) such that\n\n1. $A_i$ has precisely one element in common with each member of the above partition.\n2. Every $A_j$, $j\\neq i$, is disjoint from at least one member of the above partition.\n\nShow that $k\\le\\dbinom{n-1}{m-1}$.",
+    "image": null,
+    "choices": null,
+    "answer": "Polynomial method: $P_i=\\prod_{l=2}^m\\sum_{s\\in S_{l,i}}x_s$ (with $1\\in S_{1,i}$) are multilinear of degree $m-1$ in $x_2,\\dots,x_n$, and the matrix $P_i(\\chi_{A_j})$ is the identity mod $2$, so they are linearly independent.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Polynomial method",
+        "body": "If $m=1$, each partition is the single block $S$, and condition (ii) would require $A_j\\cap S=\\emptyset$ for $j\\neq i$, impossible; so $k\\le1=\\binom{n-1}{0}$. Assume $m\\ge2$.\n\nFor each $i$, renumber the blocks of the $i$-th partition so that $1\\in S_{1,i}$. Define the polynomial in the variables $x_2,\\dots,x_n$\n$$P_i=\\prod_{l=2}^m\\Big(\\sum_{s\\in S_{l,i}}x_s\\Big)$$\n(the blocks $S_{l,i}$, $l\\ge2$, do not contain $1$). Since these blocks are pairwise disjoint, expanding the product gives a sum of monomials $x_{s_2}x_{s_3}\\cdots x_{s_m}$ with distinct indices: $P_i$ lies in the space $V$ spanned by the square-free monomials $\\prod_{s\\in T}x_s$, $T\\subseteq\\{2,\\dots,n\\}$, $|T|=m-1$. So $\\dim V=\\binom{n-1}{m-1}$, and it suffices to show that $P_1,\\dots,P_k$ are linearly independent.\n\nFor each $j$ let $\\chi_j\\in\\{0,1\\}^{\\{2,\\dots,n\\}}$ be the indicator vector of $A_j\\cap\\{2,\\dots,n\\}$. Plugging it in,\n$$P_i(\\chi_j)=\\prod_{l=2}^m\\big|A_j\\cap S_{l,i}\\big| .$$\n- For $j=i$, every factor is $1$ by (i), so $P_i(\\chi_i)=1$.\n- For $j\\ne i$, by (ii) $A_j$ misses some block $S_{l_0,i}$. If $l_0\\ge2$, a factor is $0$. If only $S_{1,i}$ is missed, then the $m$ elements of $A_j$ lie in the $m-1$ blocks $S_{2,i},\\dots,S_{m,i}$, each met at least once, so some block contains $2$ of them and the corresponding factor is $2$. Either way $P_i(\\chi_j)$ is even.\n\nThus the integer matrix $\\big(P_i(\\chi_j)\\big)_{i,j=1}^k$ is congruent to the identity modulo $2$, so its determinant is odd, hence nonzero. If $\\sum_ic_iP_i=0$ for real $c_i$, evaluating at each $\\chi_j$ gives $\\sum_ic_iP_i(\\chi_j)=0$ for all $j$, so $c=0$ by invertibility. Hence $P_1,\\dots,P_k$ are linearly independent elements of $V$ and\n$$k\\le\\dim V=\\binom{n-1}{m-1}. \\qquad ∎$$"
+      }
+    ],
+    "topics": [
+      "counting",
+      "linear-algebra",
+      "polynomials"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

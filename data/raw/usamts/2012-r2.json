@@ -1,0 +1,185 @@
+[
+  {
+    "id": "usamts-2012-r2-01",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 24 Round 2 (2012-2013)",
+      "year": 2012,
+      "number": 1,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Fill in each of the ten boxes in the diagram with a 3-digit number so that the following conditions are satisfied.\n\n1. Every number has three distinct digits that sum to 15. 0 may not be a leading digit. One digit of each number has been given to you (the digit printed in its box).\n2. No two numbers in any pair of boxes use the same three digits. For example, it is not allowed for two different boxes to have the numbers 456 and 645.\n3. Two boxes joined by an arrow must have two numbers that share an equal hundreds digit, tens digit, or ones digit. Also, the smaller number must point to the larger.\n\nYou do not need to prove that your configuration is the only one possible; you merely need to find a configuration that satisfies the constraints above. (Note: In any other USAMTS problem, you need to provide a full proof. Only in this problem is an answer without justification acceptable.)",
+    "image": "qimages/usamts/2012-r2/q01.webp",
+    "choices": null,
+    "answer": "Box 0: 807, box 1: 816, box 2: 276, box 3: 843, box 4: 942, box 5: 546, box 6: 906, box 7: 753, box 8: 852, box 9: 951.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Ten digit sets for ten boxes",
+        "body": "The arrows in the diagram are $0\\to1$, $0\\to3$, $2\\to5$, $5\\to1$, $5\\to4$, $5\\to6$, $3\\to4$, $7\\to3$, $7\\to8$, $8\\to4$, $8\\to9$, $6\\to9$, where box $k$ contains the given digit $k$.\n\n**The digit sets.** The sets of three distinct digits with sum 15 are\n$$\\{0,6,9\\}, \\{0,7,8\\}, \\{1,5,9\\}, \\{1,6,8\\}, \\{2,4,9\\}, \\{2,5,8\\}, \\{2,6,7\\}, \\{3,4,8\\}, \\{3,5,7\\}, \\{4,5,6\\}.$$\nThere are exactly ten of them and ten boxes, so by condition 2 every set is used exactly once. The arrows then decide which set goes where and in which order the digits appear. A valid (and, by computer search, the only) filling is:\n\n| box | number | box | number |\n|---|---|---|---|\n| 0 | 807 | 5 | 546 |\n| 1 | 816 | 6 | 906 |\n| 2 | 276 | 7 | 753 |\n| 3 | 843 | 8 | 852 |\n| 4 | 942 | 9 | 951 |\n\n**Check of the arrows** (shared position, smaller → larger):\n* $807 \\to 816$: hundreds 8\n* $807 \\to 843$: hundreds 8\n* $276 \\to 546$: ones 6\n* $546 \\to 816$: ones 6\n* $546 \\to 942$: tens 4\n* $546 \\to 906$: ones 6\n* $843 \\to 942$: tens 4\n* $753 \\to 843$: ones 3\n* $753 \\to 852$: tens 5\n* $852 \\to 942$: ones 2\n* $852 \\to 951$: tens 5\n* $906 \\to 951$: hundreds 9\n\nEvery number has distinct digits summing to 15, contains its box's digit, and none starts with 0."
+      }
+    ],
+    "topics": [
+      "logic",
+      "arithmetic"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2012-r2-02",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 24 Round 2 (2012-2013)",
+      "year": 2012,
+      "number": 2,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "text",
+    "prompt": "Find all triples $(a, b, c)$ of positive integers with $a \\le b \\le c$ such that\n$$\\left(1 + \\frac1a\\right)\\left(1 + \\frac1b\\right)\\left(1 + \\frac1c\\right) = 3.$$",
+    "image": null,
+    "choices": null,
+    "answer": "(1,3,8), (1,4,5), (2,2,3)",
+    "acceptedAnswers": [
+      "(1, 3, 8), (1, 4, 5), (2, 2, 3)",
+      "(1,3,8),(1,4,5),(2,2,3)",
+      "(2,2,3), (1,4,5), (1,3,8)",
+      "(1,4,5), (1,3,8), (2,2,3)",
+      "(1,3,8); (1,4,5); (2,2,3)"
+    ],
+    "answerUnit": null,
+    "answerDisplay": "$(1,3,8),\\ (1,4,5),\\ (2,2,3)$",
+    "solutions": [
+      {
+        "title": "Bound a, then factor",
+        "body": "Each factor is at most $1 + \\frac1a$, so $3 \\le \\left(1 + \\frac1a\\right)^3$. If $a \\ge 3$ the right side is at most $\\left(\\frac43\\right)^3 = \\frac{64}{27} < 3$. So $a \\in \\{1, 2\\}$.\n\n**$a = 1$:** $\\left(1 + \\frac1b\\right)\\left(1 + \\frac1c\\right) = \\frac32$, i.e. $2(b+1)(c+1) = 3bc$, i.e. $bc - 2b - 2c - 2 = 0$, i.e.\n$$(b - 2)(c - 2) = 6.$$\nHere $b = 1, 2$ give $-(c - 2) = 6$ or $0 = 6$, impossible, so $1 \\le b - 2 \\le c - 2$: $(b-2, c-2) = (1, 6)$ or $(2, 3)$, giving $(b, c) = (3, 8)$ or $(4, 5)$.\n\n**$a = 2$:** $\\left(1 + \\frac1b\\right)\\left(1 + \\frac1c\\right) = 2$, i.e. $(b+1)(c+1) = 2bc$, i.e. $(b - 1)(c - 1) = 2$, so $(b, c) = (2, 3)$, and indeed $b \\ge a = 2$.\n\n**Check:** $2\\cdot\\frac43\\cdot\\frac98 = 3$, $2\\cdot\\frac54\\cdot\\frac65 = 3$, $\\frac32\\cdot\\frac32\\cdot\\frac43 = 3$. (A computer search agrees.)\n\n**Answer: $(1, 3, 8)$, $(1, 4, 5)$, $(2, 2, 3)$**"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "algebra"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2012-r2-03",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 24 Round 2 (2012-2013)",
+      "year": 2012,
+      "number": 3,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $f(x) = x - \\frac1x$, and define $f^1(x) = f(x)$ and $f^n(x) = f(f^{n-1}(x))$ for $n \\ge 2$. For each $n$, there is a minimal degree $d_n$ such that there exist polynomials $p$ and $q$ with $f^n(x) = \\frac{p(x)}{q(x)}$ and the degree of $q$ is equal to $d_n$. Find $d_n$.",
+    "image": null,
+    "choices": null,
+    "answer": "$d_n = 2^n - 1$",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Recursion for the reduced numerator and denominator",
+        "body": "Write $f^n = \\frac{p_n}{q_n}$ in lowest terms. Any representation $f^n = \\frac pq$ has $q$ divisible by $q_n$, so $d_n = \\deg q_n$.\n\n**Recursion.** Since $f^{n+1}(x) = f^n(f(x))$ and $f^{n+1} = f(f^n)$,\n$$f^{n+1} = \\frac{p_n}{q_n} - \\frac{q_n}{p_n} = \\frac{p_n^2 - q_n^2}{p_nq_n}.$$\nThis is again in lowest terms. An irreducible common factor of $p_n^2 - q_n^2$ and $p_nq_n$ would divide $p_n$ or $q_n$. Then, from $p_n^2 - q_n^2$, it would divide the other one too, which is impossible. So\n$$p_{n+1} = p_n^2 - q_n^2, \\qquad q_{n+1} = p_nq_n.$$\n\n**Degrees.** We show $\\deg p_n = 2^n$ and $\\deg q_n = 2^n - 1$ by induction. For $n = 1$, $f(x) = \\frac{x^2 - 1}{x}$, with degrees $2$ and $1$. If the claim holds for $n$, then $p_n^2$ has degree $2^{n+1}$ and $q_n^2$ has smaller degree, so $\\deg p_{n+1} = 2^{n+1}$, and $\\deg q_{n+1} = 2^n + 2^n - 1 = 2^{n+1} - 1$.\n\n**Answer: $d_n = 2^n - 1$**"
+      },
+      {
+        "title": "Counting poles",
+        "body": "The poles of $f^n$ are the points where some intermediate value $f^k(x)$, $0 \\le k < n$, equals $0$ (then $f^{k+1}(x) = \\infty$, and $f(\\infty) = \\infty$ keeps it there). The equation $f(y) = c$ is $y^2 - cy - 1 = 0$. It has two distinct real roots for every real $c$, and both are nonzero. So $0$ has exactly $2^k$ distinct preimages under $f^k$, all simple, and preimage sets for different $k$ are disjoint. Hence $f^n$ has $1 + 2 + \\cdots + 2^{n-1} = 2^n - 1$ simple poles, and the reduced denominator has degree $2^n - 1$."
+      }
+    ],
+    "topics": [
+      "polynomials",
+      "functional-equations"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2012-r2-04",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 24 Round 2 (2012-2013)",
+      "year": 2012,
+      "number": 4,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $n$ be a positive integer. Consider an $n \\times n$ grid of unit squares. How many ways are there to partition the horizontal and vertical unit segments of the grid into $n(n+1)$ pairs so that the following properties are satisfied?\n\n(i) Each pair consists of a horizontal segment and a vertical segment that share a common endpoint, and no segment is in more than one pair.\n\n(ii) No two pairs of the partition contain four segments that all share the same endpoint.\n\n(The picture shows an example of a valid partition for $n = 2$.)",
+    "image": "qimages/usamts/2012-r2/q04.webp",
+    "choices": null,
+    "answer": "$(n+1)!$",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Isolated vertices form a permutation",
+        "body": "The grid has $2n(n+1)$ unit segments and $(n+1)^2$ vertices. Call a vertex a *joint* if it is the common endpoint of the two segments of some pair. By (ii) each vertex is the joint of at most one pair, so there are $n(n+1)$ joints, and the remaining $n + 1$ vertices are *isolated*.\n\n**One isolated vertex per line.** If a row of vertices had $n + 1$ joints, each would use a different horizontal segment of that row, but the row has only $n$ of them. So every row, and likewise every column, contains at least one isolated vertex. There are $n + 1$ rows and $n + 1$ isolated vertices, so each row and each column has exactly one. The isolated set is a \"permutation\" set: there are $(n+1)!$ of them.\n\n**Each permutation set gives exactly one partition.**\n* *Existence.* For each joint $P$, take the horizontal segment at $P$ that points toward the isolated vertex of $P$'s row, and the vertical segment that points toward the isolated vertex of $P$'s column. Suppose a segment were taken twice, by its two endpoints. Then it would point both ways, which needs isolated vertices on both sides in that line, which is impossible. So no segment is reused. Exactly $2n(n+1)$ segments are taken, so every segment is used once, and (i) and (ii) hold.\n* *Uniqueness.* Suppose some joint $P$ uses a horizontal segment pointing away from its row's isolated vertex. That segment leads to the next vertex $Q$ in that direction. $Q$ is also a joint, and its other horizontal segment must also point away. Repeating this, we reach the boundary of the grid, where a joint has no horizontal segment left, a contradiction. Columns work the same way.\n\nSo valid partitions correspond exactly to the $(n+1)!$ choices of one isolated vertex per row and column. (A brute-force count gives $2, 6, 24$ for $n = 1, 2, 3$.)\n\n**Answer: $(n + 1)!$**"
+      }
+    ],
+    "topics": [
+      "counting",
+      "graph-theory"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2012-r2-05",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 24 Round 2 (2012-2013)",
+      "year": 2012,
+      "number": 5,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "A unit square $ABCD$ is given in the plane, with $O$ being the intersection of its diagonals. A ray $\\ell$ is drawn from $O$. Let $X$ be the unique point on $\\ell$ such that $AX + CX = 2$, and let $Y$ be the point on $\\ell$ such that $BY + DY = 2$. Let $Z$ be the midpoint of $\\overline{XY}$, with $Z = X$ if $X$ and $Y$ coincide. Find, with proof, the minimum value of the length of $OZ$.",
+    "image": null,
+    "choices": null,
+    "answer": "sqrt(6)/3",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "answerDisplay": "$\\sqrt{\\tfrac23}$",
+    "solutions": [
+      {
+        "title": "Two ellipses in polar form",
+        "body": "Put $O$ at the origin with $A = (\\tfrac{\\sqrt2}2, 0)$, $B = (0, \\tfrac{\\sqrt2}2)$, $C = (-\\tfrac{\\sqrt2}2, 0)$, $D = (0, -\\tfrac{\\sqrt2}2)$.\n\n**The ellipses.** The points with $AX + CX = 2$ form an ellipse with foci $A, C$ and centre $O$. Its major axis has length 2. It passes through $B$ and $D$, since $AB + CB = 2$, so its minor semi-axis is $\\frac{\\sqrt2}{2}$. Its equation is $x^2 + 2y^2 = 1$. Similarly, $Y$ lies on $2x^2 + y^2 = 1$.\n\n**Polar form.** Let $\\ell$ have direction $(\\cos\\theta, \\sin\\theta)$, and write $X = r_X(\\cos\\theta, \\sin\\theta)$ and $Y = r_Y(\\cos\\theta, \\sin\\theta)$. Then\n$$r_X = \\frac{1}{\\sqrt{1 + \\sin^2\\theta}}, \\qquad r_Y = \\frac{1}{\\sqrt{1 + \\cos^2\\theta}}, \\qquad OZ = \\frac{r_X + r_Y}{2}.$$\nLet $P = (1 + \\sin^2\\theta)(1 + \\cos^2\\theta) = 2 + \\sin^2\\theta\\cos^2\\theta = 2 + \\frac{s}{4}$, where $s = \\sin^2 2\\theta \\in [0, 1]$. Then\n$$(r_X + r_Y)^2 = \\frac{1}{1 + \\sin^2\\theta} + \\frac{1}{1 + \\cos^2\\theta} + \\frac{2}{\\sqrt P} = \\frac{3}{P} + \\frac{2}{\\sqrt P} = \\frac{12}{8 + s} + \\frac{4}{\\sqrt{8 + s}}.$$\nThis is decreasing in $s$, so the minimum is at $s = 1$, i.e. when $\\theta$ is an odd multiple of $45^\\circ$ and $\\ell$ is parallel to a side of the square. There\n$$(r_X + r_Y)^2 = \\frac{12}{9} + \\frac43 = \\frac83, \\qquad OZ = \\frac12\\sqrt{\\frac83} = \\sqrt{\\frac23} \\approx 0.8165.$$\n(A numerical scan over $\\theta$ gives the same minimum.)\n\n**Answer: $\\sqrt{\\tfrac23} = \\tfrac{\\sqrt6}{3}$**"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "trigonometry",
+      "inequalities"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

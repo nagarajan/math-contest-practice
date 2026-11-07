@@ -1,0 +1,156 @@
+[
+  {
+    "id": "vjimc-2017-cat2-01",
+    "bank": "vjimc",
+    "source": {
+      "contest": "VJIMC",
+      "paper": "VJIMC 2017 Category II",
+      "year": 2017,
+      "number": 1,
+      "url": "https://vjimc.osu.cz/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $(a_n)_{n=1}^\\infty$ be a sequence with $a_n\\in\\{0,1\\}$ for every $n$. Let $F\\colon(-1,1)\\to\\mathbb R$ be defined by\n$$F(x)=\\sum_{n=1}^\\infty a_nx^n$$\nand assume that $F\\left(\\frac12\\right)$ is rational. Show that $F$ is the quotient of two polynomials with integer coefficients.",
+    "image": null,
+    "choices": null,
+    "answer": "$F(\\frac12)$ is a rational number with binary digits $a_n$, so $(a_n)$ is eventually periodic; then $F(x)=A(x)+\\frac{B(x)}{1-x^p}$ with integer polynomials $A,B$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Eventually periodic binary digits",
+        "body": "Let $F(\\frac12)=\\sum a_n2^{-n}=\\frac uq$ with integers $u\\ge0$, $q\\ge1$.\n\n**The digits are eventually periodic.** For $k\\ge0$ let\n$$r_k=\\sum_{n>k}a_n2^{k-n}=2^k\\frac uq-\\sum_{n\\le k}a_n2^{k-n}\\in[0,1].$$\nEach $r_k$ is of the form $\\frac{\\text{integer}}q$ in $[0,1]$, so it takes at most $q+1$ values. Moreover $r_k=\\frac{a_{k+1}+r_{k+1}}2$, i.e.\n$$a_{k+1}=2r_k-r_{k+1},\\qquad r_{k+1}\\in[0,1].$$\n* If $r_k<\\frac12$, then $a_{k+1}=0$ (otherwise $r_{k+1}=2r_k-1<0$).\n* If $r_k>\\frac12$, then $a_{k+1}=1$ (otherwise $r_{k+1}=2r_k>1$).\n* $r_k=0$ forces all later digits to be $0$, and $r_k=1$ forces all later digits to be $1$.\n* If $r_k=\\frac12$, then $a_{k+1}=1$ and $r_{k+1}=0$, or $a_{k+1}=0$ and $r_{k+1}=1$. So from then on the digits are constant.\n\nSo if some $r_k\\in\\{0,\\frac12,1\\}$, the sequence $(a_n)$ is eventually constant. Otherwise each $r_k$ determines $a_{k+1}$ and $r_{k+1}$. Since the $r_k$ take finitely many values, $r_j=r_{j+p}$ for some $j\\ge0$, $p\\ge1$, and then $a_{n+p}=a_n$ for all $n>j$.\n\n**Conclusion.** In all cases there are $j\\ge0$ and $p\\ge1$ with $a_{n+p}=a_n$ for $n>j$. For $|x|<1$,\n$$F(x)=\\sum_{n=1}^{j}a_nx^n+\\Big(\\sum_{n=j+1}^{j+p}a_nx^n\\Big)\\sum_{i\\ge0}x^{ip}=\\sum_{n=1}^{j}a_nx^n+\\frac{\\sum_{n=j+1}^{j+p}a_nx^n}{1-x^p},$$\nwhich is a quotient of two polynomials with integer coefficients. ∎"
+      },
+      {
+        "title": "Shift-and-subtract",
+        "body": "Once we know the digits are eventually periodic, $a_{n+p}=a_n$ for $n>j$, the rational form can also be seen by a shift. Write $F(x)=A(x)+R(x)$ with $A(x)=\\sum_{n\\le j}a_nx^n$ a polynomial. Then\n$$R(x)-x^pR(x)=\\sum_{n>j}a_nx^n-\\sum_{n>j}a_nx^{n+p}=\\sum_{n=j+1}^{j+p}a_nx^n=:B(x),$$\nbecause the coefficient of $x^n$ for $n>j+p$ is $a_n-a_{n-p}=0$. So $R=\\frac B{1-x^p}$ and $F=\\frac{A(x)(1-x^p)+B(x)}{1-x^p}$. ∎"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "sequences-series",
+      "polynomials"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "vjimc-2017-cat2-02",
+    "bank": "vjimc",
+    "source": {
+      "contest": "VJIMC",
+      "paper": "VJIMC 2017 Category II",
+      "year": 2017,
+      "number": 2,
+      "url": "https://vjimc.osu.cz/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "text",
+    "prompt": "Prove or disprove the following statement. If $g\\colon(0,1)\\to(0,1)$ is an increasing function and satisfies $g(x)>x$ for all $x\\in(0,1)$, then there exists a continuous function $f\\colon(0,1)\\to\\mathbb R$ satisfying $f(x)<f(g(x))$ for all $x\\in(0,1)$, but $f$ is not an increasing function.",
+    "image": null,
+    "choices": null,
+    "answer": "True",
+    "acceptedAnswers": [
+      "true",
+      "the statement is true",
+      "it is true",
+      "yes",
+      "prove",
+      "proved",
+      "true statement",
+      "correct"
+    ],
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Insert a wiggle on $[\\frac12,g(\\frac12)]$",
+        "body": "**The statement is true.** Let $z=g(\\frac12)>\\frac12$. Choose any continuous $h\\colon[\\frac12,z]\\to\\mathbb R$ which is not increasing, with $h(\\frac12)=\\frac12$, $h(z)=z$ and $\\frac12<h(x)<z$ for $\\frac12<x<z$. For example, with $w=z-\\frac12$, take $h$ piecewise linear through\n$$\\big(\\tfrac12,\\tfrac12\\big),\\quad\\big(\\tfrac12+\\tfrac w3,\\tfrac12+\\tfrac{2w}3\\big),\\quad\\big(\\tfrac12+\\tfrac{2w}3,\\tfrac12+\\tfrac w3\\big),\\quad(z,z).$$\nDefine\n$$f(x)=\\begin{cases}x,&x\\in(0,\\frac12)\\cup(z,1),\\\\ h(x),&x\\in[\\frac12,z].\\end{cases}$$\nThen $f$ is continuous (the pieces agree at $\\frac12$ and at $z$) and not increasing. We check $f(x)<f(g(x))$:\n\n* **$x\\in[\\frac12,z)$:** $g(x)\\ge g(\\frac12)=z$, so $f(g(x))=g(x)\\ge z$ (if $g(x)=z$, then $f(z)=z$). Also $f(x)=h(x)<z$. So $f(x)<f(g(x))$.\n* **$x\\ge z$:** $g(x)>x\\ge z$, so $f(g(x))=g(x)>x=f(x)$.\n* **$x<\\frac12$ and $g(x)<\\frac12$:** $f(g(x))=g(x)>x=f(x)$.\n* **$x<\\frac12$ and $g(x)\\ge\\frac12$:** $g(x)\\le g(\\frac12)=z$, so $f(g(x))=h(g(x))\\ge\\frac12>x=f(x)$.\n\nSo such an $f$ always exists. **The statement is true.** ∎"
+      }
+    ],
+    "topics": [
+      "real-analysis",
+      "functional-equations"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "vjimc-2017-cat2-03",
+    "bank": "vjimc",
+    "source": {
+      "contest": "VJIMC",
+      "paper": "VJIMC 2017 Category II",
+      "year": 2017,
+      "number": 3,
+      "url": "https://vjimc.osu.cz/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $n\\ge2$ be an integer. Consider the system of equations\n$$x_1+\\frac2{x_2}=x_2+\\frac2{x_3}=\\dots=x_n+\\frac2{x_1}.\\tag{1}$$\n1. Prove that (1) has infinitely many real solutions $(x_1,\\dots,x_n)$ such that the numbers $x_1,\\dots,x_n$ are distinct.\n2. Prove that every solution $(x_1,\\dots,x_n)$ of (1), such that the numbers $x_1,\\dots,x_n$ are not all equal, satisfies $|x_1x_2\\cdots x_n|=2^{n/2}$.",
+    "image": null,
+    "choices": null,
+    "answer": "(2) Telescoping differences: $x_2-x_1=\\frac{2}{x_2x_3}(x_3-x_2)=\\dots$, so $(x_1\\cdots x_n)^2=2^n$. (1) With common value $A=2\\sqrt2\\cos\\frac\\pi n$, the Möbius map $x\\mapsto A-\\frac2x$ (matrix $\\begin{pmatrix}A&-2\\\\1&0\\end{pmatrix}$ with eigenvalues $\\sqrt2e^{\\pm i\\pi/n}$) has $n$-th iterate equal to the identity, which gives infinitely many solutions with distinct entries.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Telescoping (part 2) and a Möbius map of order $n$ (part 1)",
+        "body": "Indices are taken cyclically ($x_{n+1}=x_1$).\n\n**Part 2.** Not all $x_k$ are equal, so by cyclic symmetry we may assume $x_1\\ne x_2$. From $x_k+\\frac2{x_{k+1}}=x_{k+1}+\\frac2{x_{k+2}}$ we get\n$$x_{k+1}-x_k=\\frac2{x_{k+1}}-\\frac2{x_{k+2}}=\\frac{2}{x_{k+1}x_{k+2}}\\,(x_{k+2}-x_{k+1}).$$\nApplying this $n$ times around the cycle,\n$$x_2-x_1=\\frac2{x_2x_3}\\cdot\\frac2{x_3x_4}\\cdots\\frac2{x_{n+1}x_{n+2}}\\,(x_2-x_1)=\\frac{2^n}{(x_1x_2\\cdots x_n)^2}(x_2-x_1).$$\nSince $x_2-x_1\\ne0$, we get $(x_1\\cdots x_n)^2=2^n$, i.e. $|x_1x_2\\cdots x_n|=2^{n/2}$.\n\n**Part 1.** Let $A=2\\sqrt2\\cos\\frac\\pi n$ and $\\varphi(x)=A-\\frac2x$. The system (1) with common value $A$ says $x_k=\\varphi(x_{k+1})$ for all $k$.\n\nThe map $\\varphi$ is the Möbius transformation of $M=\\begin{pmatrix}A&-2\\\\1&0\\end{pmatrix}$, since $M\\binom x1=\\binom{Ax-2}{x}\\sim\\binom{\\varphi(x)}1$. The characteristic polynomial $\\lambda^2-A\\lambda+2$ has discriminant $8(\\cos^2\\frac\\pi n-1)<0$. So the eigenvalues are $\\sqrt2e^{\\pm i\\pi/n}$, distinct, and $M$ is diagonalizable over $\\mathbb C$. Then $M^n=(\\sqrt2e^{i\\pi/n})^nI=-2^{n/2}I$ is a scalar matrix, so $\\varphi^n=\\mathrm{id}$ wherever defined.\n\nFor $1\\le d\\le n-1$, the matrix $M^d$ has the non-real eigenvalues $2^{d/2}e^{\\pm id\\pi/n}$. Hence $M^d$ has no real eigenvector, and $\\varphi^d$ has no real fixed point.\n\nNow take a real $t$ such that $\\varphi^j(t)$ is defined and nonzero for $j=0,\\dots,n-1$. Since $\\varphi$ is a bijection of $\\mathbb R\\cup\\{\\infty\\}$, the condition $\\varphi^j(t)\\in\\{0,\\infty\\}$ excludes at most two values of $t$ for each $j$, so all but finitely many $t$ qualify. Set\n$$x_1=t,\\quad x_n=\\varphi(t),\\quad x_{n-1}=\\varphi^2(t),\\ \\dots,\\quad x_2=\\varphi^{n-1}(t).$$\nThen $x_k=\\varphi(x_{k+1})$ for $k=2,\\dots,n-1$ and $k=n$ by construction. For $k=1$ we need $x_1=\\varphi(x_2)$, i.e. $\\varphi^n(t)=t$, which holds. So every equation $x_k+\\frac2{x_{k+1}}=A$ holds.\n\nThe $x_k$ are distinct: if $\\varphi^i(t)=\\varphi^j(t)$ with $0\\le i<j\\le n-1$, then $\\varphi^{j-i}$ would have the real fixed point $\\varphi^i(t)$, which is impossible. This gives infinitely many solutions with distinct entries. (For $n=2$: $A=0$, and the solutions are $(t,-2/t)$, $t\\ne0$.) ∎"
+      },
+      {
+        "title": "Tangent parametrization for part 1 ($n\\ge3$) and matrix view of part 2",
+        "body": "**Part 1, explicitly (for $n\\ge3$).** Let $c=\\tan\\frac\\pi n$, $b=\\sqrt2\\cos\\frac\\pi n$, $a=bc=\\sqrt2\\sin\\frac\\pi n$, and\n$$x_k=a\\tan\\Big(t_0+\\frac{k\\pi}n\\Big)+b .$$\nWith $T=\\tan t$ we have $\\tan(t-\\frac\\pi n)=\\frac{T-c}{1+cT}$. Using $a=bc$,\n$$a\\frac{T-c}{1+cT}+b+\\frac2{aT+b}=\\frac{b(1+2cT-c^2)}{1+cT}+\\frac{2}{b(1+cT)}=2b+\\frac{2-b^2(1+c^2)}{b(1+cT)}=2b,$$\nbecause $b^2(1+c^2)=2\\cos^2\\frac\\pi n\\cdot\\sec^2\\frac\\pi n=2$. Taking $t=t_0+\\frac{(k+1)\\pi}{n}$ shows $x_k+\\frac2{x_{k+1}}=2b$ for all $k$. This also holds cyclically, since $\\tan$ has period $\\pi$ and so $x_{n+1}=x_1$. The $x_k$ are distinct because the angles $t_0+\\frac{k\\pi}n$, $k=1,\\dots,n$, are distinct modulo $\\pi$. All but finitely many $t_0\\in[0,\\pi)$ avoid undefined tangents and zero denominators.\n\n**Part 2 via matrices.** Let $A$ be the common value and $M=\\begin{pmatrix}A&-2\\\\1&0\\end{pmatrix}$. Then $M\\binom{x_{k+1}}1=x_{k+1}\\binom{x_k}1$. Going around the cycle, $M^n\\binom{x_k}1=(x_1\\cdots x_n)\\binom{x_k}1$ for every $k$. If the $x_k$ are not all equal, two of the vectors $\\binom{x_k}1$ are linearly independent. Then $M^n=(x_1\\cdots x_n)I$, and taking determinants, $2^n=(x_1\\cdots x_n)^2$. ∎"
+      }
+    ],
+    "topics": [
+      "algebra",
+      "linear-algebra"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "vjimc-2017-cat2-04",
+    "bank": "vjimc",
+    "source": {
+      "contest": "VJIMC",
+      "paper": "VJIMC 2017 Category II",
+      "year": 2017,
+      "number": 4,
+      "url": "https://vjimc.osu.cz/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "A positive integer $t$ is called a Jane's integer if $t=x^3+y^2$ for some positive integers $x$ and $y$. Prove that for every integer $n\\ge2$ there exist infinitely many positive integers $m$ such that the set of $n^2$ consecutive integers $\\{m+1,m+2,\\dots,m+n^2\\}$ contains exactly $n+1$ Jane's integers.",
+    "image": null,
+    "choices": null,
+    "answer": "The count $C(m)$ of Jane's integers in the window changes by at most $1$ when $m$ increases by $1$. Windows with $C=0$ exist arbitrarily far out (there are only about $u^5$ Jane's integers up to $u^6$), and windows with $C\\ge n+1$ exist arbitrarily far out ($i^6+j^2$ and $8+i^6$; for $n=2$ use a Pell equation). A discrete intermediate value argument finishes.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Discrete intermediate value theorem",
+        "body": "Fix $n\\ge2$ and let $C(m)$ be the number of Jane's integers in $\\{m+1,\\dots,m+n^2\\}$. Passing from $m$ to $m+1$ removes $m+1$ and adds $m+n^2+1$, so $C(m+1)-C(m)\\in\\{-1,0,1\\}$.\n\n**Empty windows arbitrarily far out.** Let $u\\ge2n^2$ be even. Consider the $2u^5-1$ disjoint blocks\n$$I_k=\\Big[\\tfrac{uk}2+1,\\ \\tfrac{u(k+1)}2\\Big],\\qquad k=1,\\dots,2u^5-1,$$\neach of $u/2$ integers, whose union is $[\\frac u2+1,u^6]$. A Jane's integer $x^3+y^2\\le u^6$ has $x\\le u^2$ and $y\\le u^3$, so there are at most $u^5$ of them in $[1,u^6]$. Since $2u^5-1>u^5$, some block $I_k$ contains no Jane's integer. Then $s=\\frac{uk}2\\ge\\frac u2$ satisfies $C(s)=0$, because $\\{s+1,\\dots,s+n^2\\}\\subset I_k$ as $n^2\\le\\frac u2$. Since $s\\ge\\frac u2$ and $u$ is arbitrary, such $s$ exist beyond any bound.\n\n**Rich windows arbitrarily far out.**\n* **$n\\ge3$:** for every $i\\ge1$ the window $\\{i^6+1,\\dots,i^6+n^2\\}$ contains the $n$ Jane's integers $(i^2)^3+j^2$, $j=1,\\dots,n$. It also contains $2^3+(i^3)^2=i^6+8$; here $8\\le n^2$, and $8$ is not a square, so this is a new element. So $C(i^6)\\ge n+1$.\n* **$n=2$:** we want $v$ with $v^3+1$, $v^3+2$, $v^3+4$ all Jane's integers. The first and last are $v^3+1^2$ and $v^3+2^2$. For the middle one, try $v^3+2=(v-1)^3+y^2$, i.e. $y^2=3v^2-3v+3$, i.e. $(2y)^2=3(2v-1)^2+9$.\n\n  Take the solutions $X_i+Y_i\\sqrt3=(2+\\sqrt3)^{2i-1}$ of $X^2-3Y^2=1$. Starting from $(2,1)$, multiplication by $(2+\\sqrt3)^2=7+4\\sqrt3$ maps $(X,Y)\\mapsto(7X+12Y,4X+7Y)$, so $X_i$ stays even and $Y_i$ stays odd. Also $Y_i\\to\\infty$. Put $v_i=\\frac{3Y_i+1}2\\ge2$ and $y=\\frac{3X_i}2$. Then\n  $$3(2v_i-1)^2+9=27Y_i^2+9=9X_i^2=(2y)^2 .$$\n  So $C(v_i^3)\\ge3$. For example, $v_1=2$ gives $9=8+1$, $10=1+9$, $12=8+4$.\n\n**Conclusion.** Take $s$ with $C(s)=0$, and then $l>s$ with $C(l)\\ge n+1$. Along $C(s),C(s+1),\\dots,C(l)$ the value goes from $0$ to at least $n+1$ in steps of size at most $1$. So $C(m)=n+1$ for some $m\\in[s,l]$, and $m\\ge s>0$. Repeating with a new $s'>l$, and so on, gives infinitely many such $m$. ∎"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "counting"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

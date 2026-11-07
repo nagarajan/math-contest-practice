@@ -1,0 +1,194 @@
+[
+  {
+    "id": "usamts-2005-r3-01",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 17 Round 3 (2005-2006)",
+      "year": 2005,
+      "number": 1,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "For a given positive integer $n$, we wish to construct a circle of six numbers as shown in the figure so that the circle has the following properties:\n\n(a) The six numbers are different three-digit numbers, none of whose digits is a 0.\n\n(b) Going around the circle clockwise, the first two digits of each number are the last two digits, in the same order, of the previous number.\n\n(c) All six numbers are divisible by $n$.\n\nThe example in the figure shows a successful circle for $n = 2$. For each of $n = 3, 4, 5, 6, 7, 8, 9$, either construct a circle that satisfies these properties, or prove that it is impossible to do so.",
+    "image": "qimages/usamts/2005-r3/q01.webp",
+    "choices": null,
+    "answer": "Possible for $n = 3, 4, 6, 7$, e.g. $111, 114, 141, 417, 171, 711$ ($n=3$); $444, 448, 488, 888, 884, 844$ ($n = 4$); $222, 228, 288, 888, 882, 822$ ($n = 6$); $112, 126, 266, 665, 651, 511$ ($n = 7$). Impossible for $n = 5$ (all digits 5), $n = 8$ (endings forced to $\\dots 88$) and $n = 9$ (digit sums force period 3).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Constructions and divisibility rules",
+        "body": "A circle is the same as a cyclic sequence of six nonzero digits $c_1c_2\\dots c_6$; the numbers are $\\overline{c_1c_2c_3}, \\overline{c_2c_3c_4}, \\dots, \\overline{c_6c_1c_2}$, and every digit $c_i$ is the last digit of one of them.\n\n**Constructions** (listed clockwise):\n* $n = 3$: digits $1,1,1,4,1,7$: $111, 114, 141, 417, 171, 711$ (digit sums $3, 6, 6, 12, 9, 9$).\n* $n = 4$: digits $4,4,4,8,8,8$: $444, 448, 488, 888, 884, 844$ (last two digits $44, 48, 88, 88, 84, 44$ are multiples of 4).\n* $n = 6$: digits $2,2,2,8,8,8$: $222, 228, 288, 888, 882, 822$ (even, digit sums $6, 12, 18, 24, 18, 12$).\n* $n = 7$: digits $1,1,2,6,6,5$: $112 = 7\\cdot16$, $126 = 7\\cdot18$, $266 = 7\\cdot38$, $665 = 7\\cdot 95$, $651 = 7\\cdot 93$, $511 = 7\\cdot73$.\n\nAll six numbers in each circle are distinct and contain no 0.\n\n**$n = 5$ is impossible.** Each number must end in 0 or 5, and 0 is forbidden, so every digit (each being a last digit) is 5; then all numbers are $555$, not distinct.\n\n**$n = 8$ is impossible.** Multiples of 8 are even, so every digit is even. For $\\overline{abc}$ with $a$ even, $100a$ is divisible by 8, so $8 \\mid \\overline{bc}$. Two-digit multiples of 8 with both digits even and nonzero are $24, 48, 64, 88$. So every pair of consecutive digits $c_ic_{i+1}$ is one of these. Follow the circle: a pair $24$ or $64$ must be followed by a pair starting with 4, i.e. $48$; $48$ must be followed by $88$; and $88$ by $88$. So from any starting pair, after at most three steps we reach $88$ and stay there; going all the way around the circle, every pair is $88$, all digits are 8, and all numbers are $888$ — not distinct.\n\n**$n = 9$ is impossible.** For consecutive numbers $\\overline{c_ic_{i+1}c_{i+2}}$ and $\\overline{c_{i+1}c_{i+2}c_{i+3}}$, both digit sums are multiples of 9, so $9 \\mid c_i - c_{i+3}$. As $1 \\le c_i, c_{i+3} \\le 9$, $c_i = c_{i+3}$. Then the first and fourth numbers of the circle are equal, contradicting (a). ∎"
+      },
+      {
+        "title": "How to find the circles",
+        "body": "Think of a directed graph whose vertices are two-digit strings $\\overline{xy}$ (nonzero digits) and whose edges are the allowed numbers $\\overline{xyz}$ (from $\\overline{xy}$ to $\\overline{yz}$). A circle is a closed walk of length 6 using six different edges.\n\n* For $n = 3$ the condition only depends on digits mod 3 and forces $c_i \\equiv c_{i+3} \\pmod 3$; choosing $c_1, c_2, c_3$ with $c_1 + c_2 + c_3 \\equiv 0$ and then $c_4, c_5, c_6$ congruent to them but chosen so the numbers differ works, e.g. $1, 1, 1$ and $4, 1, 7$.\n* For $n = 4$ and $n = 6$, the blocks \"$aaa\\,bbb$\" work whenever the pairs $\\overline{aa}, \\overline{ab}, \\overline{bb}, \\overline{ba}$ satisfy the condition, e.g. $a = 4, b = 8$ (for 4) or $a = 2, b = 8$ (for 6).\n* For $n = 7$ a short search over the 128 three-digit multiples of 7 without zeros finds the cycle $112 \\to 126 \\to 266 \\to 665 \\to 651 \\to 511 \\to 112$.\n\nA complete computer search over all $9^6$ digit cycles confirms that circles exist for $n = 3, 4, 6, 7$ and not for $n = 5, 8, 9$, in agreement with the proofs above."
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "logic"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2005-r3-02",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 17 Round 3 (2005-2006)",
+      "year": 2005,
+      "number": 2,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Anna writes a sequence of integers starting with the number 12. Each subsequent integer she writes is chosen randomly with equal chance from among the positive divisors of the previous integer (including the possibility of the integer itself). She keeps writing integers until she writes the integer 1 for the first time, and then she stops. One such sequence is\n$$12, 6, 6, 3, 3, 3, 1.$$\nWhat is the expected value of the number of terms in Anna's sequence?",
+    "image": null,
+    "choices": null,
+    "answer": "121/30",
+    "acceptedAnswers": null,
+    "answerUnit": "terms",
+    "answerDisplay": "$\\frac{121}{30}$",
+    "solutions": [
+      {
+        "title": "Recursion over divisors",
+        "body": "Let $E(m)$ be the expected number of terms of a sequence starting at $m$ (counting $m$ itself). Then $E(1) = 1$. If $m > 1$ has divisors $d_1, \\dots, d_{k-1}, d_k = m$, then the next term is each $d_i$ with probability $\\frac1k$, so\n$$E(m) = 1 + \\frac1k\\sum_{i=1}^{k} E(d_i) \\implies \\frac{k-1}{k}E(m) = 1 + \\frac1k\\sum_{i<k}E(d_i) \\implies E(m) = \\frac{k + \\sum_{i<k} E(d_i)}{k - 1}.$$\nNow compute:\n* $E(2) = E(3) = \\frac{2 + 1}{1} = 3$;\n* $E(4) = \\frac{3 + E(1) + E(2)}{2} = \\frac{7}{2}$;\n* $E(6) = \\frac{4 + 1 + 3 + 3}{3} = \\frac{11}{3}$;\n* $E(12) = \\frac{6 + 1 + 3 + 3 + \\frac72 + \\frac{11}{3}}{5} = \\frac{1}{5}\\cdot\\frac{36 + 6 + 18 + 18 + 21 + 22}{6} = \\frac{121}{30}$.\n\n**Answer: $\\frac{121}{30}$**"
+      },
+      {
+        "title": "Count each value separately",
+        "body": "By linearity, the expected length is the sum over $v \\in \\{12, 6, 4, 3, 2, 1\\}$ of the expected number of times $v$ appears.\n\nOnce the sequence reaches a value $v$ with $k$ divisors, it stays at $v$ for a geometric number of terms with mean $\\frac{1}{1 - 1/k} = \\frac{k}{k-1}$, then moves to a uniformly random **proper** divisor.\n\n* $12$: always appears; mean count $\\frac65$.\n* $6$ (only from 12, prob. $\\frac15$): mean count $\\frac15\\cdot\\frac43 = \\frac4{15}$.\n* $4$ (only from 12): $\\frac15\\cdot\\frac32 = \\frac3{10}$.\n* $3$ (from 12 directly, $\\frac15$, or via 6, $\\frac15\\cdot\\frac13$): reached with prob. $\\frac4{15}$; mean count $\\frac{4}{15}\\cdot 2 = \\frac8{15}$.\n* $2$ (from 12: $\\frac15$; via 6: $\\frac1{15}$; via 4: $\\frac15\\cdot\\frac12 = \\frac1{10}$): reached with prob. $\\frac{11}{30}$; mean count $\\frac{11}{30}\\cdot 2 = \\frac{11}{15}$.\n* $1$: exactly once.\n\nTotal: $\\frac65 + \\frac4{15} + \\frac3{10} + \\frac8{15} + \\frac{11}{15} + 1 = \\frac{36 + 8 + 9 + 16 + 22 + 30}{30} = \\frac{121}{30}$.\n\n**Answer: $\\frac{121}{30}$**"
+      }
+    ],
+    "topics": [
+      "probability",
+      "number-theory"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2005-r3-03",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 17 Round 3 (2005-2006)",
+      "year": 2005,
+      "number": 3,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Points $A$, $B$, and $C$ are on a circle such that $\\triangle ABC$ is an acute triangle. $X$, $Y$, and $Z$ are on the circle such that $AX$ is perpendicular to $BC$ at $D$, $BY$ is perpendicular to $AC$ at $E$, and $CZ$ is perpendicular to $AB$ at $F$. Find the value of\n$$\\frac{AX}{AD} + \\frac{BY}{BE} + \\frac{CZ}{CF},$$\nand prove that this value is the same for all possible $A$, $B$, $C$ on the circle such that $\\triangle ABC$ is acute.",
+    "image": "qimages/usamts/2005-r3/q03.webp",
+    "choices": null,
+    "answer": "4",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Reflect the orthocenter",
+        "body": "Let $H$ be the orthocenter (inside the triangle, since it is acute).\n\n**$HD = DX$.** In right triangle $BEC$, $\\angle EBC = 90^\\circ - \\angle C$, so in right triangle $BDH$, $\\angle BHD = 90^\\circ - \\angle HBD = \\angle C$. Also $\\angle BXA = \\angle BCA = \\angle C$ (inscribed angles on arc $AB$). So triangle $BHX$ has equal angles at $H$ and $X$; it is isosceles with $BH = BX$, and its altitude $BD$ bisects $HX$: $HD = DX$. Likewise $HE = EY$ and $HF = FZ$.\n\n**Areas.** Then\n$$\\frac{AX}{AD} = \\frac{AD + DX}{AD} = 1 + \\frac{HD}{AD} = 1 + \\frac{[HBC]}{[ABC]},$$\nsince triangles $HBC$ and $ABC$ share the base $BC$ and have heights $HD$ and $AD$. Similarly for the other two terms. Because $H$ is inside the triangle, $[HBC] + [HCA] + [HAB] = [ABC]$, so\n$$\\frac{AX}{AD} + \\frac{BY}{BE} + \\frac{CZ}{CF} = 3 + \\frac{[HBC] + [HCA] + [HAB]}{[ABC]} = 4.$$\n\n**Answer: 4**"
+      },
+      {
+        "title": "Power of a point and tangents",
+        "body": "By the power of the point $D$ with respect to the circle, $AD\\cdot DX = BD \\cdot DC$. With $BD = AD\\cot B$ and $DC = AD\\cot C$ (right triangles $ABD$, $ADC$),\n$$\\frac{DX}{AD} = \\frac{BD\\cdot DC}{AD^2} = \\cot B\\cot C.$$\nSimilarly $\\frac{EY}{BE} = \\cot C\\cot A$ and $\\frac{FZ}{CF} = \\cot A\\cot B$. Hence the sum equals\n$$3 + \\cot A\\cot B + \\cot B\\cot C + \\cot C\\cot A = 3 + \\frac{\\tan A + \\tan B + \\tan C}{\\tan A\\tan B\\tan C}.$$\nSince $C = 180^\\circ - A - B$, $\\tan C = -\\tan(A + B) = -\\frac{\\tan A + \\tan B}{1 - \\tan A\\tan B}$, which rearranges to $\\tan A + \\tan B + \\tan C = \\tan A\\tan B\\tan C$. So the sum is $3 + 1 = 4$.\n\n**Answer: 4**"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "trigonometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2005-r3-04",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 17 Round 3 (2005-2006)",
+      "year": 2005,
+      "number": 4,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Find, with proof, all triples of real numbers $(a, b, c)$ such that all four roots of the polynomial $f(x) = x^4 + ax^3 + bx^2 + cx + b$ are positive integers. (The four roots need not be distinct.)",
+    "image": null,
+    "choices": null,
+    "answer": "$(a, b, c) = (-21, 112, -204)$ (roots $1, 2, 4, 14$) and $(a, b, c) = (-12, 48, -80)$ (roots $2, 2, 2, 6$).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Vieta and a bound on the smallest pair",
+        "body": "Let the roots be positive integers $p, q, r, s$. By Vieta,\n$$a = -(p + q + r + s),\\quad b = pq + pr + ps + qr + qs + rs,\\quad c = -(pqr + pqs + prs + qrs),\\quad b = pqrs.$$\nSo we need exactly the quadruples with\n$$pqrs = pq + pr + ps + qr + qs + rs \\iff \\frac1{rs} + \\frac1{qs} + \\frac1{qr} + \\frac1{ps} + \\frac1{pr} + \\frac1{pq} = 1,$$\nand then $a, c$ are determined. Six positive terms add to 1, so the largest is at least $\\frac16$: for some pair, say $(r, s)$, $rs \\le 6$. Write the equation as\n$$pq\\,rs = pq + (p + q)(r + s) + rs.$$\n\n* $rs = 1$: $pq = pq + 2(p+q) + 1$, impossible.\n* $(r,s) = (2,1)$: $pq = 3(p+q) + 2 \\iff (p-3)(q-3) = 11$, so $\\{p, q\\} = \\{4, 14\\}$ (the negative factorization would need $p - 3 = -1$, $q - 3 = -11$). Roots $\\{1, 2, 4, 14\\}$.\n* $(r,s) = (3,1)$: $2pq = 4(p+q) + 3$: left even, right odd. Impossible.\n* $(r,s) = (2,2)$: $3pq = 4(p + q) + 4 \\iff (3p - 4)(3q - 4) = 28$. The factors are $\\equiv 2 \\pmod 3$ and $\\ge -1$, so (up to order) $2 \\cdot 14$: $p = 2$, $q = 6$. Roots $\\{2, 2, 2, 6\\}$.\n* $(r,s) = (4,1)$: $3pq = 5(p+q) + 4 \\iff (3p - 5)(3q - 5) = 37$, prime, so $\\{3p - 5, 3q - 5\\} = \\{1, 37\\}$: $\\{p, q\\} = \\{2, 14\\}$. Roots $\\{1, 2, 4, 14\\}$ again.\n* $(r,s) = (5,1)$: $4pq = 6(p + q) + 5$: parity contradiction.\n* $(r,s) = (3,2)$: $5pq = 5(p + q) + 6$: the right side is not divisible by 5. Impossible.\n* $(r,s) = (6,1)$: $5pq = 7(p + q) + 6 \\iff (5p - 7)(5q - 7) = 79$, prime; $5p - 7 = 1$ has no integer solution. Impossible.\n\n**Check.**\n* Roots $1, 2, 4, 14$: $pqrs = 112$ and the pair sum is $2 + 4 + 14 + 8 + 28 + 56 = 112$ ✓; $a = -21$, $b = 112$, $c = -(8 + 28 + 56 + 112) = -204$.\n* Roots $2, 2, 2, 6$: $pqrs = 48$, pair sum $4 + 4 + 4 + 12 + 12 + 12 = 48$ ✓; $a = -12$, $b = 48$, $c = -(8 + 24 + 24 + 24) = -80$.\n\nSo $(a, b, c) = (-21, 112, -204)$ or $(-12, 48, -80)$; indeed $x^4 - 21x^3 + 112x^2 - 204x + 112 = (x-1)(x-2)(x-4)(x-14)$ and $x^4 - 12x^3 + 48x^2 - 80x + 48 = (x-2)^3(x-6)$. ∎"
+      },
+      {
+        "title": "Parity shortcut",
+        "body": "A parity argument cuts down the cases. Not all four roots are odd: then $pqrs$ would be odd while the sum of the six pairwise products would be even. Say $p$ is even. From $p(qrs - q - r - s) = qr + qs + rs$, the right side is even, so $q, r, s$ are not all odd; say $q$ is even. Then\n$$rs = pqrs - pq - pr - ps - qr - qs$$\nis even (every term on the right has a factor $p$ or $q$), so $r$ or $s$ is even. Hence **at least three roots are even**.\n\nCombined with the bound $rs \\le 6$ for some pair (the pair with the largest $\\frac{1}{rs}$, i.e. the two smallest roots), the two smallest roots are $(1, 2)$, $(2, 2)$, $(1, 4)$, $(1, 6)$ or $(2, 3)$ (pairs of two odd numbers are excluded), with at least three even roots overall — and the computations of the first solution leave exactly $\\{1, 2, 4, 14\\}$ and $\\{2, 2, 2, 6\\}$. A computer search over all quadruples with entries up to 200 confirms these are the only ones.\n\n**Answer: $(-21, 112, -204)$ and $(-12, 48, -80)$**"
+      }
+    ],
+    "topics": [
+      "polynomials",
+      "number-theory"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2005-r3-05",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 17 Round 3 (2005-2006)",
+      "year": 2005,
+      "number": 5,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Lisa and Bart are playing a game. A round table has $n$ lights evenly spaced around its circumference. Some of the lights are on and some of them off; the initial configuration is random. Lisa wins if she can get all of the lights turned on; Bart wins if he can prevent this from happening.\n\nOn each turn, Lisa chooses the positions at which to flip the lights, but *before* the lights are flipped, Bart, *knowing Lisa's choices*, can rotate the table to any position that he chooses (or he can leave the table as is). Then the lights in the positions that Lisa chose are flipped: those that are off are turned on and those that are on are turned off.\n\nThe figure shows an example turn for $n = 5$ (a white circle indicates a light that is on, and a black circle indicates a light that is off).\n\nLisa can take as many turns as she needs to win, or she can give up if it becomes clear to her that Bart can prevent her from winning.\n\n(a) Show that if $n = 7$ and initially at least one light is on and at least one light is off, then Bart can always prevent Lisa from winning.\n\n(b) Show that if $n = 8$, then Lisa can always win in at most 8 turns.",
+    "image": "qimages/usamts/2005-r3/q05.webp",
+    "choices": null,
+    "answer": "(a) Bart keeps the table *mixed*: the flipped set is a rotation of Lisa's set $S$; the 7 rotations of a nontrivial $S$ are distinct, and since $|C| \\ne 7 - |C|$ at most one rotation equals the on-set $C$ or its complement. (b) Lisa always flips the currently-on positions: over $\\mathbb F_2[x]/(x^8 - 1)$ each turn multiplies the state by $1 + x^{a}$, a multiple of $1 + x$, and $(1+x)^7 = 1 + x + \\dots + x^7$, so after 7 turns all lights are equal; turn 8 finishes.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "(a) A counting argument; (b) polynomials mod 2",
+        "body": "Number the table positions $0, 1, \\dots, n - 1$ and describe the state by the set $C$ of positions whose lights are on. If Lisa names a set $S$ and Bart rotates by $k$, the lights flipped are those at a rotated copy $S + k$ of $S$ (relative to the lights), so the new on-set is $C \\,\\triangle\\, (S + k)$.\n\n**(a) $n = 7$.** Call a state *mixed* if some lights are on and some off. We show Bart can keep the state mixed forever, so Lisa never wins (she wins only when all lights are on).\n\nSuppose the state $C$ is mixed and Lisa names $S$. The new state is all on iff $S + k$ equals the off-set $\\overline C$, and all off iff $S + k = C$. (All off must also be avoided, because then Lisa would flip all 7 lights and win.)\n* If $S = \\emptyset$ or $S$ is everything, the new state is $C$ or $\\overline C$, still mixed, whatever Bart does.\n* Otherwise, the 7 rotations $S, S+1, \\dots, S+6$ are all different: if $S + k = S$ with $0 < k < 7$, then $S$ would be invariant under rotation by $k$, and since 7 is prime, under every rotation, forcing $S = \\emptyset$ or everything. Now $|C| \\ne |\\overline C|$ because $|C| + |\\overline C| = 7$ is odd, so at most one of $C$, $\\overline C$ has the same size as $S$, and at most one rotation $S + k$ equals it. Bart chooses any of the other (at least 6) rotations, and the new state is mixed.\n\nBy induction the state stays mixed forever, so Bart prevents Lisa from winning. ∎\n\n**(b) $n = 8$.** Encode a set of positions $T$ by the polynomial $\\sum_{t \\in T} x^t$ with coefficients in $\\mathbb F_2 = \\{0, 1\\}$, modulo $x^8 - 1$ (so $x^8 = 1$, i.e. exponents are taken mod 8). Rotating by $k$ is multiplication by $x^k$, and flipping a set is addition mod 2. Let $A_t$ be the polynomial of the on-set after $t$ turns.\n\n**Lisa's strategy:** on each turn, name exactly the positions that are currently on. If Bart rotates by $k_t$, the new state is\n$$A_t = A_{t-1} + x^{k_t}A_{t-1} = (1 + x^{k_t})A_{t-1}.$$\nOver $\\mathbb F_2$, $1 + x^{k} = (1 + x)(1 + x + \\dots + x^{k-1})$ for $k \\ge 1$, and $1 + x^0 = 0$; in every case $1 + x^k$ is a multiple of $1 + x$. So after 7 turns\n$$A_7 = (1 + x)^7\\,P(x)$$\nfor some polynomial $P$. Since every binomial coefficient $\\binom7j$ is odd, $(1 + x)^7 = 1 + x + x^2 + \\dots + x^7 =: J$ (the \"all lights\" polynomial). And $xJ = J$ modulo $x^8 - 1$, so $J\\cdot P(x) = J\\cdot P(1)$, which is $J$ or $0$. Hence after 7 turns **all lights are on** (Lisa has won) or **all are off**; in the latter case Lisa names all 8 positions on turn 8 and wins regardless of the rotation. (If all lights are on earlier, she has already won; if all are off earlier, she names everything at once.) So Lisa wins in at most 8 turns. ∎"
+      },
+      {
+        "title": "(b) by pairing opposite lights",
+        "body": "Here is a different strategy for (b) that works for $n = 2^m$ lights in $2^m$ turns, by induction on $m$. For $m = 0$ (one light): if it is off, Lisa flips it — one turn.\n\nSuppose it works for $2^m$ lights, and take $2^{m+1}$ lights. Pair each light with the diametrically opposite one; rotations map pairs to pairs.\n\n**Phase 1: make every pair uniform.** Lisa imagines a small table with $2^m$ lights, one per pair, where a small light is *on* iff its pair has two equal lights. She only names sets containing exactly one light of each chosen pair. Then whatever rotation Bart picks, each chosen pair has exactly one of its lights flipped, so its small light toggles; and Bart's rotation of the big table acts as a rotation of the small table. By induction, within $2^m$ turns all small lights are on: every pair is uniform.\n\n**Phase 2: turn all pairs on.** Now each pair is \"both on\" or \"both off\". Lisa imagines a small table whose light is on iff its pair is both on, and names sets consisting of whole pairs. Each chosen pair flips both its lights, keeping pairs uniform and toggling the small light. Again within $2^m$ turns all small lights are on, i.e. all big lights are on.\n\nTotal: at most $2^m + 2^m = 2^{m+1}$ turns. For $n = 8 = 2^3$ Lisa wins in at most 8 turns. ∎"
+      }
+    ],
+    "topics": [
+      "games",
+      "logic",
+      "abstract-algebra"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

@@ -1,0 +1,174 @@
+[
+  {
+    "id": "usamts-2009-r2-01",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 21 Round 2 (2009-2010)",
+      "year": 2009,
+      "number": 1,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Jeremy has a magic scale, each side of which holds a positive integer. He plays the following game: each turn, he chooses a positive integer $n$. He then adds $n$ to the number on the left side of the scale, and multiplies by $n$ the number on the right side of the scale. (For example, if the turn starts with 4 on the left and 6 on the right, and Jeremy chooses $n = 3$, then the turn ends with 7 on the left and 18 on the right.) Jeremy wins if he can make both sides of the scale equal.\n\n(a) Show that if the game starts with the left scale holding 17 and the right scale holding 5, then Jeremy can win the game in 4 or fewer turns.\n\n(b) Prove that if the game starts with the right scale holding $b$, where $b \\ge 2$, then Jeremy can win the game in $b - 1$ or fewer turns.",
+    "image": null,
+    "choices": null,
+    "answer": "(a) Choose $n = 1, 1, 1, 5$: $(17,5) \\to (18,5) \\to (19,5) \\to (20,5) \\to (25,25)$. (b) Use $n = 1$ (at most $b - 2$ times) until the left side is $k(b-1)$, then choose $n = k$: both sides become $kb$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Use n = 1 to adjust the left side",
+        "body": "**(a)** Choosing $n = 1$ adds $1$ on the left and leaves the right unchanged:\n$$(17, 5) \\xrightarrow{n=1} (18, 5) \\xrightarrow{n=1} (19, 5) \\xrightarrow{n=1} (20, 5) \\xrightarrow{n=5} (25, 25).$$\nJeremy wins in 4 turns.\n\n**(b)** Let $a$ be the number on the left. The key observation: if the left side is $k(b-1)$ and the right side is $b$, choosing $n = k$ gives $k(b-1) + k = kb$ on the left and $kb$ on the right — a win.\n\nSo Jeremy first chooses $n = 1$ repeatedly until the left side is a multiple of $b - 1$ (the right side stays $b$). If $a = d(b-1) + r$ with $0 \\le r \\le b-2$, this takes $0$ turns when $r = 0$ and $b - 1 - r \\le b - 2$ turns otherwise. The left side is then $k(b-1)$ with $k \\ge 1$, and one more turn with $n = k$ wins. In total at most $(b - 2) + 1 = b - 1$ turns. ∎\n\n(For (a), $b = 5$, $b - 1 = 4$: $17 \\to 20 = 5\\cdot 4$ takes 3 turns, then $n = 5$.)"
+      }
+    ],
+    "topics": [
+      "games",
+      "number-theory"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2009-r2-02",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 21 Round 2 (2009-2010)",
+      "year": 2009,
+      "number": 2,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Alice has three daughters, each of whom has two daughters; each of Alice's six granddaughters has one daughter. How many sets of women from the family of 16 can be chosen such that no woman and her daughter are both in the set? (Include the empty set as a possible set.)",
+    "image": null,
+    "choices": null,
+    "answer": "2926",
+    "acceptedAnswers": null,
+    "answerUnit": "sets",
+    "solutions": [
+      {
+        "title": "Cases on Alice",
+        "body": "The family is a tree: Alice; her 3 daughters; 6 granddaughters (2 per daughter); 6 great-granddaughters (1 per granddaughter).\n\n**A granddaughter and her daughter** can be chosen in $3$ ways: the granddaughter, her daughter, or neither.\n\n**Alice in the set.** Then none of her daughters is, and each of the 6 granddaughter–daughter pairs independently has 3 options: $3^6 = 729$ sets.\n\n**Alice not in the set.** The three daughters' branches are independent. In one branch:\n* the daughter is in: her two daughters are out, and each great-granddaughter is in or out: $2^2 = 4$ ways;\n* the daughter is out: each of her two granddaughter–daughter pairs has 3 options: $3^2 = 9$ ways.\n\nSo each branch has $4 + 9 = 13$ options, giving $13^3 = 2197$ sets.\n\nTotal: $729 + 2197 = 2926$.\n\n**Answer: $2926$**"
+      },
+      {
+        "title": "Tree dynamic programming",
+        "body": "For each woman $w$ let $I(w)$ = number of valid sets within her line of descendants (including her) that contain $w$, and $O(w)$ = the number that do not. Then $I(w) = \\prod O(\\text{daughters})$ and $O(w) = \\prod \\left(I + O\\right)(\\text{daughters})$, with $I = O = 1$ for a woman without daughters.\n\n* Great-granddaughter: $I = 1$, $O = 1$ (total $2$).\n* Granddaughter: $I = 1$, $O = 2$ (total $3$).\n* Daughter: $I = 2\\cdot 2 = 4$, $O = 3 \\cdot 3 = 9$ (total $13$).\n* Alice: $I = 9^3 = 729$, $O = 13^3 = 2197$.\n\nTotal $729 + 2197 = 2926$. (A computer check over all $2^{16}$ subsets agrees.)\n\n**Answer: $2926$**"
+      }
+    ],
+    "topics": [
+      "counting"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2009-r2-03",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 21 Round 2 (2009-2010)",
+      "year": 2009,
+      "number": 3,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Prove that if $a$ and $b$ are positive integers such that $a^2 + b^2$ is a multiple of $7^{2009}$, then $ab$ is a multiple of $7^{2010}$.",
+    "image": null,
+    "choices": null,
+    "answer": "Squares mod 7 are $0, 1, 2, 4$, so $7 \\mid a^2 + b^2$ forces $7 \\mid a$ and $7 \\mid b$; then $\\frac{a^2 + b^2}{49}$ is divisible by $7^{2007}$. Repeating $1005$ times gives $7^{1005} \\mid a, b$, so $7^{2010} \\mid ab$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Descent modulo 7",
+        "body": "**Lemma.** If $7 \\mid x^2 + y^2$ for integers $x, y$, then $7 \\mid x$ and $7 \\mid y$.\n\n*Proof.* The squares modulo 7 are $0^2, 1^2, \\dots, 6^2 \\equiv 0, 1, 4, 2, 2, 4, 1$. The only way two of the values $0, 1, 2, 4$ add up to a multiple of 7 is $0 + 0$. So $x^2 \\equiv y^2 \\equiv 0$, and since 7 is prime, $7 \\mid x$ and $7 \\mid y$. $\\square$\n\n**Descent.** Suppose $7^{e} \\mid a^2 + b^2$ with $e \\ge 1$. By the lemma $a = 7a'$, $b = 7b'$, and then $7^{e-2} \\mid a'^2 + b'^2$ (if $e \\ge 2$).\n\nStarting with $e = 2009$ and applying this $1004$ times, we get $a = 7^{1004}a_1$, $b = 7^{1004}b_1$ with $7^{1} \\mid a_1^2 + b_1^2$. One more application of the lemma gives $7 \\mid a_1$ and $7 \\mid b_1$. Hence $7^{1005} \\mid a$ and $7^{1005} \\mid b$, so $7^{2010} \\mid ab$. ∎"
+      }
+    ],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2009-r2-04",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 21 Round 2 (2009-2010)",
+      "year": 2009,
+      "number": 4,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "The Rational Unit Jumping Frog starts at $(0, 0)$ on the Cartesian plane, and each minute jumps a distance of exactly 1 unit to a point with rational coordinates.\n\n(a) Show that it is possible for the frog to reach the point $\\left(\\frac15, \\frac1{17}\\right)$ in a finite amount of time.\n\n(b) Show that the frog can never reach the point $\\left(0, \\frac14\\right)$.",
+    "image": null,
+    "choices": null,
+    "answer": "(a) Using the $3$-$4$-$5$ and $8$-$15$-$17$ triangles: $(0,0) \\to (\\frac35, \\frac45) \\to (\\frac65, 0) \\to (\\frac15, 0) \\to (\\frac15 - \\frac{15}{17}, -\\frac8{17}) \\to (\\frac15, -\\frac{16}{17}) \\to (\\frac15, \\frac1{17})$. (b) Every unit jump $(\\frac ac, \\frac bc)$ in lowest terms has $a^2 + b^2 = c^2$ with $c$ odd, so all coordinates the frog can reach have odd denominators.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Pythagorean triples and parity of denominators",
+        "body": "**(a)** Each step below has length 1 (they are $(\\pm\\frac35, \\pm\\frac45)$, $(\\pm1, 0)$, $(\\pm\\frac{15}{17}, -\\frac{8}{17})$ or $(0, 1)$):\n$$(0,0) \\to \\left(\\tfrac35, \\tfrac45\\right) \\to \\left(\\tfrac65, 0\\right) \\to \\left(\\tfrac15, 0\\right) \\to \\left(\\tfrac15 - \\tfrac{15}{17}, -\\tfrac{8}{17}\\right) \\to \\left(\\tfrac15, -\\tfrac{16}{17}\\right) \\to \\left(\\tfrac15, \\tfrac1{17}\\right).$$\nSo the frog arrives after 6 minutes.\n\n**(b)** Consider one jump, changing the position by $(r, s)$ with $r, s$ rational and $r^2 + s^2 = 1$. Write $r = \\frac ac$, $s = \\frac bc$ with $c \\ge 1$ the least common denominator. Then $\\gcd(a, b) = 1$: if a prime $p$ divided $a$ and $b$, then $p^2 \\mid a^2 + b^2 = c^2$, so $p \\mid c$ and $c$ would not be least. Now $a^2 + b^2 = c^2$.\n* $a, b$ both odd is impossible: then $c^2 \\equiv 2 \\pmod 4$, but squares are $0$ or $1 \\pmod 4$.\n* $a, b$ both even is impossible since $\\gcd(a, b) = 1$.\n\nSo exactly one of $a, b$ is odd, $c^2$ is odd, and $c$ is odd.\n\nAfter $k$ jumps the frog is at $\\left(\\sum \\frac{a_i}{c_i}, \\sum\\frac{b_i}{c_i}\\right)$ with all $c_i$ odd. A sum of fractions with odd denominators can be written over the odd denominator $c_1c_2\\cdots c_k$, so in lowest terms its denominator is odd. The point $\\left(0, \\frac14\\right)$ has a coordinate with denominator $4$, so the frog can never reach it. ∎"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "geometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2009-r2-05",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 21 Round 2 (2009-2010)",
+      "year": 2009,
+      "number": 5,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $ABC$ be a triangle with $AB = 3$, $AC = 4$, and $BC = 5$, let $P$ be a point on $\\overline{BC}$, and let $Q$ be the point (other than $A$) where the line through $A$ and $P$ intersects the circumcircle of $ABC$. Prove that\n$$PQ < \\frac{25}{4\\sqrt6}.$$",
+    "image": null,
+    "choices": null,
+    "answer": "Similar triangles give $PQ^2\\cdot AB\\cdot AC = BP\\cdot CP\\cdot BQ\\cdot CQ$. Bound $BP\\cdot CP \\le \\frac{25}{4}$ (AM-GM) and $BQ \\cdot CQ = 2[BQC] \\le 5\\cdot\\frac52$, so $PQ^2 \\le \\frac{625}{96}$; equality would need $P$ = midpoint of $BC$ and $AQ$ = angle bisector, impossible since $AB \\ne AC$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Similar triangles and two maximizations",
+        "body": "Since $3^2 + 4^2 = 5^2$, angle $A$ is right and $BC$ is a diameter of the circumcircle (radius $\\frac52$). $Q$ lies on the arc $BC$ not containing $A$, so $\\angle BQC = 90^\\circ$ too.\n\n**An identity.** Inscribed angles give $\\triangle APC \\sim \\triangle BPQ$ and $\\triangle APB \\sim \\triangle CPQ$ (vertical angles at $P$ and angles subtending the same arcs). Hence\n$$\\frac{AC}{BQ} = \\frac{PC}{PQ}, \\qquad \\frac{AB}{CQ} = \\frac{PB}{PQ},$$\nso $PQ\\cdot AC = BQ\\cdot CP$ and $PQ\\cdot AB = BP\\cdot CQ$. Multiplying:\n$$12\\,PQ^2 = PQ^2\\cdot AB\\cdot AC = (BP\\cdot CP)(BQ\\cdot CQ).$$\n\n**First factor.** By AM-GM, $BP\\cdot CP \\le \\left(\\frac{BP + CP}{2}\\right)^2 = \\frac{25}{4}$, with equality only when $P$ is the midpoint of $BC$.\n\n**Second factor.** Since $\\angle BQC = 90^\\circ$, $BQ\\cdot CQ = 2[BQC] = BC\\cdot QR = 5\\,QR$, where $R$ is the foot of the altitude from $Q$ to $BC$. As $Q$ is on the circle with diameter $BC$, $QR \\le \\frac52$ (the radius), with equality only when $Q$ is the midpoint of arc $BC$. So $BQ\\cdot CQ \\le \\frac{25}{2}$.\n\nTherefore $12\\,PQ^2 \\le \\frac{25}{4}\\cdot\\frac{25}{2}$, i.e. $PQ^2 \\le \\frac{625}{96}$, i.e. $PQ \\le \\frac{25}{\\sqrt{96}} = \\frac{25}{4\\sqrt6}$.\n\n**Strictness.** Equality would need both $P$ = midpoint of $BC$ and $Q$ = midpoint of arc $BC$. But $Q$ is the arc midpoint exactly when $AQ$ bisects angle $A$, and the bisector meets $BC$ at the point dividing it in ratio $AB : AC = 3 : 4$, not at the midpoint. So the two equalities cannot hold together, and $PQ < \\frac{25}{4\\sqrt6}$. ∎\n\n(Numerically, writing $BP = t$, power of a point and Stewart's theorem give $PQ = \\frac{t(5-t)}{\\sqrt{t^2 - 3.6t + 9}}$, whose maximum on $[0, 5]$ is about $2.534$, below $\\frac{25}{4\\sqrt6} \\approx 2.552$.)"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "inequalities"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

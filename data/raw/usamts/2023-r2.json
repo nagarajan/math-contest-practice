@@ -1,0 +1,176 @@
+[
+  {
+    "id": "usamts-2023-r2-01",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 35 Round 2 (2023-2024)",
+      "year": 2023,
+      "number": 1,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "In the diagram shown, fill the 12 circles with numbers from the following bank so that each number is used once. Two circles connected by a single line must contain relatively prime numbers. Two circles connected by a double line must contain numbers that are not relatively prime.\n\nBank: 20, 21, 22, 23, 24, 25, 27, 28, 30, 32, 33, 35\n\n(The circles are arranged in rows of 3, 4, 3 and 2 circles, from top to bottom, on a triangular lattice.)\n\nThere is a unique solution, but you do not need to prove that your answer is the only one possible. You merely need to find an answer that satisfies the conditions of the problem.",
+    "image": "qimages/usamts/2023-r2/q01.webp",
+    "choices": null,
+    "answer": "Rows from top to bottom (left to right): $28, 22, 27$; $\\;23, 33, 35, 24$; $\\;20, 21, 25$; $\\;30, 32$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Use the prime factors",
+        "body": "Name the circles by rows: top row $a_1, a_2, a_3$; second row $b_1, b_2, b_3, b_4$; third row $c_1, c_2, c_3$; bottom row $d_1, d_2$ (left to right). Reading the picture, the **double** lines are\n$$a_1a_2,\\ a_2b_2,\\ a_3b_4,\\ b_2c_2,\\ b_3c_2,\\ b_3c_3,\\ c_1d_1,\\ c_2d_1,\\ d_1d_2,$$\nand all other lines ($a_2a_3$, $a_1b_1$, $a_1b_2$, $a_2b_3$, $a_3b_3$, the row $b_1b_2b_3b_4$, $b_1c_1$, $b_2c_1$, $b_4c_3$, $c_1c_2$, $c_2c_3$, $c_2d_2$, $c_3d_2$) are single.\n\nThe bank factors as\n$20 = 2^2\\cdot5$, $21 = 3\\cdot7$, $22 = 2\\cdot11$, $23$ (prime), $24 = 2^3\\cdot3$, $25 = 5^2$, $27 = 3^3$, $28 = 2^2\\cdot7$, $30 = 2\\cdot3\\cdot5$, $32 = 2^5$, $33 = 3\\cdot11$, $35 = 5\\cdot7$.\n\n* $23$ shares no factor with anything, so it must go in a circle with **no double lines**: only $b_1$ qualifies. So $b_1 = 23$.\n* $c_2$ is the most constrained remaining circle: it needs a common factor with each of $b_2$, $b_3$, $d_1$ (double lines) but must be coprime to $c_1$, $c_3$, $d_2$. Trying the candidates for $c_2$ and propagating the conditions leaves only $c_2 = 21$, with $b_2 = 33$ (factor 3), $b_3 = 35$ (factor 7) and $d_1 = 30$ (factor 3).\n* $d_1 = 30$ needs common factors with $c_1$ and $d_2$, while $c_1$ must be coprime to $21$, $23$, $33$ and $d_2$ coprime to $21$: this gives $c_1 = 20$, $d_2 = 32$.\n* $c_3$ shares a factor with $b_3 = 35$ but is coprime to $21$ and $32$: $c_3 = 25$.\n* $a_2$ shares a factor with $b_2 = 33$ and with $a_1$, and is coprime to $35$: $a_2 = 22$; then $a_1 = 28$ (shares 2 with $22$, coprime to $23$ and $33$). The last two numbers $27$ and $24$ go to $a_3$ and $b_4$ (they share the factor 3 across the double line $a_3b_4$); $a_3$ must be coprime to $22$, so $a_3 = 27$, $b_4 = 24$.\n\n**Result** (rows top to bottom): $28, 22, 27$; $23, 33, 35, 24$; $20, 21, 25$; $30, 32$.\n\n**Check.** Every double line joins numbers with a common factor ($28,22$: 2; $22,33$: 11; $27,24$: 3; $33,21$: 3; $35,21$: 7; $35,25$: 5; $20,30$: 10; $21,30$: 3; $30,32$: 2), and every single line joins coprime numbers. A computer search confirms the solution is unique.\n\n**Answer: $28, 22, 27$ / $23, 33, 35, 24$ / $20, 21, 25$ / $30, 32$.**"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "logic"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2023-r2-02",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 35 Round 2 (2023-2024)",
+      "year": 2023,
+      "number": 2,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Malmer Pebane's apartment uses a six-digit access code, with leading zeros allowed. He noticed that his fingers leave smudges that reveal which digits were pressed. He decided to change his access code to provide the largest number of possible combinations for a burglar to try when the digits are known. For each number of distinct digits that could be used in the access code, calculate the number of possible combinations when the digits are known but their order and frequency are not known. For example, if there are smudges on 3 and 9, two possible codes are 393939 and 993999. Which number of distinct digits in the access code offers the most combinations?",
+    "image": null,
+    "choices": null,
+    "answer": "5",
+    "acceptedAnswers": null,
+    "answerUnit": "distinct digits",
+    "solutions": [
+      {
+        "title": "Subtract codes that miss a digit",
+        "body": "Let $f(k)$ be the number of six-digit codes that use **exactly** the $k$ known digits (each at least once). There are $k^6$ codes using only those digits; subtract those using exactly $j < k$ of them:\n$$f(k) = k^6 - \\sum_{j < k}\\binom{k}{j} f(j).$$\n\n* $f(1) = 1$ (e.g. $222222$).\n* $f(2) = 2^6 - 2 = 62$.\n* $f(3) = 3^6 - \\binom32\\cdot 62 - \\binom31\\cdot 1 = 729 - 186 - 3 = 540$.\n* $f(4) = 4^6 - 4\\cdot 540 - 6\\cdot 62 - 4 = 4096 - 2160 - 372 - 4 = 1560$.\n* $f(5) = 5^6 - 5\\cdot 1560 - 10\\cdot 540 - 10\\cdot 62 - 5 = 15625 - 7800 - 5400 - 620 - 5 = 1800$.\n* $f(6) = 6! = 720$ (each digit used exactly once).\n\nThe largest value is $f(5) = 1800$.\n\n**Answer: 5 distinct digits** (1800 possible codes)."
+      },
+      {
+        "title": "Inclusion–exclusion / Stirling numbers",
+        "body": "By inclusion–exclusion, the number of codes using all $k$ given digits is\n$$f(k) = \\sum_{j=0}^{k} (-1)^j\\binom kj (k - j)^6 = k!\\,S(6, k),$$\nwhere $S(6, k)$ is the Stirling number of the second kind (ways to split the 6 positions into $k$ non-empty groups, one per digit). With $S(6, k) = 1, 31, 90, 65, 15, 1$ for $k = 1, \\dots, 6$:\n$$f = 1,\\ 62,\\ 540,\\ 1560,\\ 1800,\\ 720.$$\nCodes cannot use more than 6 distinct digits, so the maximum is at $k = 5$.\n\n**Answer: 5**"
+      }
+    ],
+    "topics": [
+      "counting"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2023-r2-03",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 35 Round 2 (2023-2024)",
+      "year": 2023,
+      "number": 3,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "We say that three numbers are *balanced* if either all three numbers are the same, or they are all different. A grid consisting of hexagons is presented in Figure 1. Each hexagon is filled with the number 1, 2, or 3, so that for any three hexagons that are mutually adjacent and oriented with two hexagons on the bottom and one hexagon on the top (as in Figure 3), the three numbers in the hexagons are balanced. Prove that when the grid is filled completely, the three numbers in the three shaded hexagons are balanced.\n\n(An example of a partially filled-in grid is shown in Figure 2. There are other ways of filling in the grid.)\n\n(Figure 1 is a triangle of hexagons with rows of $10, 9, \\dots, 1$ hexagons from bottom to top; each hexagon rests on two hexagons of the row below. The shaded hexagons are the top one and the two bottom corners.)",
+    "image": "qimages/usamts/2023-r2/q03.webp",
+    "choices": null,
+    "answer": "Proof: balanced $\\iff x + y + z \\equiv 0 \\pmod 3$, so each hexagon is $\\equiv -(\\text{sum of the two below})$. Three rows up this gives $-(a + 3b + 3c + d) \\equiv -(a + d)$; so hexagons 3 apart form a smaller grid of the same kind, and applying this twice ($10 = 1 + 3\\cdot 3$) shows the corners are balanced.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Work modulo 3",
+        "body": "**Balanced means sum $\\equiv 0 \\pmod 3$.** For $x, y, z \\in \\{1, 2, 3\\}$: if all are equal the sum is $3x$; if all differ it is $6$; if exactly two are equal, say $x = y \\ne z$, the sum is $2x + z \\equiv z - x \\not\\equiv 0$. So $x, y, z$ are balanced iff $x + y + z \\equiv 0 \\pmod 3$.\n\nHence each hexagon not in the bottom row is $\\equiv -(u + v)$, where $u, v$ are the two hexagons it rests on.\n\n**Three rows up.** Take four consecutive bottom hexagons $a, b, c, d$ of some row. The row above them is $-(a+b), -(b+c), -(c+d)$; the next is $a + 2b + c,\\ b + 2c + d$; and the hexagon three rows above $a, d$ is\n$$-(a + 3b + 3c + d) \\equiv -(a + d) \\pmod 3.$$\nSo the two hexagons $a, d$ (three apart in a row) and the hexagon three rows above, midway between them, are balanced.\n\n**Self-similarity.** Number the rows $0$ (bottom, 10 hexagons) to $9$ (top) and positions in a row from $0$. Consider only the hexagons in rows $0, 3, 6, 9$ at positions that are multiples of 3: they form a triangle with rows of $4, 3, 2, 1$ hexagons, and by the previous paragraph any \"two below, one on top\" triple of this smaller triangle is balanced. Applying the same computation to the smaller triangle (its bottom row has exactly 4 hexagons, playing the roles of $a, b, c, d$), its top and its two bottom corners are balanced. These are exactly the top hexagon and the two bottom corners of the original grid — the three shaded hexagons. ∎\n\n(Equivalently: the top hexagon is $\\equiv (-1)^9\\sum_{j=0}^{9}\\binom9j x_j \\pmod 3$ in terms of the bottom row $x_0, \\dots, x_9$, and by Lucas' theorem $\\binom 9j \\equiv 0 \\pmod 3$ except for $j = 0, 9$; so top $\\equiv -(x_0 + x_9)$.)"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "logic",
+      "patterns"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2023-r2-04",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 35 Round 2 (2023-2024)",
+      "year": 2023,
+      "number": 4,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "The incircle of triangle $ABC$ with $AB \\ne AC$ has center $I$ and is tangent to $BC$, $CA$, and $AB$ at $D$, $E$, and $F$ respectively. The circumcircle of triangle $ADI$ intersects $AB$ and $AC$ again at $X$ and $Y$. Prove that $EF$ bisects $XY$.",
+    "image": null,
+    "choices": null,
+    "answer": "Proof: $I$ lies on circle $AXY$ and is the midpoint of arc $XY$ (as $AI$ bisects $\\angle XAY$), so $IX = IY$ and the foot of the perpendicular from $I$ to $XY$ is the midpoint $M$ of $XY$. The feet from $I$ to $AX$, $AY$ are $F$, $E$; by the Simson line theorem $F, E, M$ are collinear.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Simson line",
+        "body": "Since $AB \\ne AC$, $D$ is not on line $AI$, so $A, D, I$ determine a circle $\\Gamma$, and $X, Y, A, I$ all lie on $\\Gamma$.\n\n**$IX = IY$.** Using directed angles modulo $180^\\circ$ on $\\Gamma$ and the fact that $AI$ bisects angle $A$:\n$$\\measuredangle IXY = \\measuredangle IAY = \\measuredangle XAI = \\measuredangle XYI.$$\nSo triangle $IXY$ has equal base angles and $IX = IY$. (In other words, $I$ is the midpoint of an arc $XY$ of $\\Gamma$.) Consequently the foot $M$ of the perpendicular from $I$ to line $XY$ is the midpoint of $XY$.\n\n**Simson line.** $I$ lies on the circumcircle $\\Gamma$ of triangle $AXY$. The feet of the perpendiculars from $I$ to the lines $AX = AB$, $AY = AC$, $XY$ are $F$, $E$ (the incircle's tangency points, since $IF \\perp AB$ and $IE \\perp AC$) and $M$. By the Simson line theorem, these three feet are collinear.\n\nHence $M$, the midpoint of $XY$, lies on line $EF$: $EF$ bisects $XY$. ∎"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2023-r2-05",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 35 Round 2 (2023-2024)",
+      "year": 2023,
+      "number": 5,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $m$ and $n$ be positive integers. Let $S$ be the set of all points $(x, y)$ with integer coordinates such that $1 \\le x, y \\le m + n - 1$ and $m + 1 \\le x + y \\le 2m + n - 1$. Let $L$ be the set of the $3m + 3n - 3$ lines parallel to one of $x = 0$, $y = 0$, or $x + y = 0$ and passing through at least one point in $S$. For which pairs $(m, n)$ does there exist a subset $T$ of $S$ such that every line in $L$ intersects an odd number of elements of $T$?",
+    "image": null,
+    "choices": null,
+    "answer": "Exactly the pairs with $\\lfloor m/2\\rfloor \\equiv \\lfloor n/2\\rfloor \\pmod 2$ (both even or both odd).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Parity count, then build up from small cases",
+        "body": "Write $N = m + n - 1$. The lines in $L$ are $x = c$ and $y = c$ for $1 \\le c \\le N$, and $x + y = s$ for $m + 1 \\le s \\le 2m + n - 1$.\n\n**Necessity.** Let $M \\subseteq L$ consist of the lines $x = \\text{even}$, $y = \\text{even}$ and $x + y = \\text{odd}$. A point with both coordinates even lies on 2 lines of $M$; a point with exactly one even coordinate lies on 2 (one coordinate line and one diagonal); a point with both odd lies on none. So every point lies on an even number of lines of $M$. Counting incidences between $T$ and $M$ in two ways,\n$$\\sum_{\\ell \\in M} |\\ell \\cap T| = \\sum_{t \\in T} \\#\\{\\ell \\in M : t \\in \\ell\\} \\equiv 0 \\pmod 2.$$\nIf every $|\\ell \\cap T|$ is odd, then $|M|$ must be even. Now $|M| = 2\\lfloor N/2\\rfloor + (\\text{number of odd } s \\in [m+1, 2m+n-1])$, and\n$$\\#\\{\\text{odd } s\\} = \\left\\lceil \\tfrac{2m+n-1}{2}\\right\\rceil - \\left\\lceil \\tfrac m2\\right\\rceil = m + \\left\\lfloor \\tfrac n2\\right\\rfloor - \\left\\lceil\\tfrac m2\\right\\rceil = \\left\\lfloor \\tfrac m2\\right\\rfloor + \\left\\lfloor \\tfrac n2\\right\\rfloor.$$\nSo we need $\\lfloor m/2\\rfloor + \\lfloor n/2\\rfloor$ even.\n\n**Sufficiency.** Call $(m, n)$ *good* if a valid $T$ exists.\n\n*(a) Symmetry.* The map $(x, y) \\mapsto (N + 1 - x, N + 1 - y)$ sends the region for $(m, n)$ onto the region for $(n, m)$ and lines of each family to lines of the same family. So $(m, n)$ is good iff $(n, m)$ is.\n\n*(b) From $(m, n)$ to $(m + 2, n + 2)$.* Given $T$ for $(m, n)$, let $T'$ consist of $T$ shifted by $(2, 2)$ together with the six points\n$$(m+2, 1),\\ (m+2, 2),\\ (1, m+n+3),\\ (2, m+n+2),\\ (m+n+2, m+2),\\ (m+n+3, m+2).$$\nAll lie in the new region (new $N' = N + 4$, sums from $m + 3$ to $2m + n + 5$). The shifted $T$ meets every line of the new family except the 12 lines $x \\in \\{1, 2, N+3, N+4\\}$, $y \\in \\{1, 2, N+3, N+4\\}$, $x + y \\in \\{m+3, m+4, 2m+n+4, 2m+n+5\\}$, each in an odd number of points. The six new points meet each of those 12 lines exactly once, and otherwise only the old lines $x = m+2$, $y = m+2$ and $x + y = m+n+4$, each exactly twice — which keeps their parity. So $(m+2, n+2)$ is good.\n\n*(c) Base cases $m \\in \\{1, 2\\}$.* For $m = 1$ the condition says $n \\equiv 0, 1 \\pmod 4$; for $m = 2$, $n \\equiv 2, 3 \\pmod 4$. Let $T(c; i_0, i_1) = \\{(1, i),\\ (c - i, 1),\\ (i, c - i) : i_0 \\le i \\le i_1\\}$.\n* $(1, 4k + 4)$: $T(4k+5;\\ 1, 2k+2)$.\n* $(2, 4k + 2)$: $T(4k+5;\\ 2, 2k+2)$.\n* $(1, 4k + 1)$, $k \\ge 1$: $T(4k+2;\\ 1, 2k) \\cup \\{(k+1, k+1),\\ (2k+1, k+1),\\ (k+1, 2k+1)\\}$; and $(1, 1)$: $T = \\{(1, 1)\\}$.\n* $(2, 4k + 3)$, $k \\ge 0$: $T(4k+6;\\ 2, 2k+2) \\cup \\{(k+2, k+2),\\ (2k+3, k+2),\\ (k+2, 2k+3)\\}$.\n\n(For instance $(1, 4)$: $T = \\{(1,1), (4,1), (1,4), (1,2), (3,1), (2,3)\\}$ — each of the lines $x = 1..4$, $y = 1..4$, $x + y = 2..5$ contains an odd number of these points.) Each of these is checked by counting, row by row, how many of the points lie on each line; a computer check confirms all four families for many values of $k$.\n\n*(d) Conclusion.* If $\\lfloor m/2\\rfloor \\equiv \\lfloor n/2\\rfloor$, subtract 2 from both coordinates (which preserves the condition) until the smaller one is 1 or 2, use (a) to put it first, and apply (c) and then (b) repeatedly. (The official solution's formula for the $(2, 4k+3)$ case has an index slip — it should reuse the $(1, 4k+1)$ construction with $k + 1$ in place of $k$, as above. The whole construction (a)–(c) was verified by computer for all good pairs with $m, n \\le 14$.)\n\n**Answer: all $(m, n)$ with $\\lfloor m/2\\rfloor$ and $\\lfloor n/2\\rfloor$ of the same parity.** ∎"
+      }
+    ],
+    "topics": [
+      "counting",
+      "number-theory",
+      "logic"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

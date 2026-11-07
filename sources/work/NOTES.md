@@ -29,3 +29,15 @@
 - cmo-1978 #5 and cmo-1980 #5: agent's own answers (4-4 tie possible; regular octahedron), no official solution to compare.
 - vjimc 1993: prompts edited to fix false statements (cat1 P2 '3x3', cat2 P3 '(real) roots', cat2 P1 'prime' dropped); cat2 P1-P2 proofs are agent's own (no official solution).
 - cmo-2001 P2 (answer 35, 31 accepted: official admits flaw) and P5(b) (agent gives t=sqrt2 only; official lists 2sin15,2sin45,2sin75 but x=y=0 for two of them) -- REVIEW.
+- vjimc own solutions (no/wrong official): 1993 II-1,2; 1996 II-2; 1997 I-4I; 1999 I-3; 2004 II-3; 2006 II-3,4.
+- cmo-2006 Q1 misprinted (sum to f(2006,1003)); self, intended answer 3^2005 in solution. cmo-2007 Q2 prompt typo fixed.
+- vjimc 2026: no official solutions (site blocked by proxy cert error; Wayback has no j33 solutions) -- all agent's own; cat2 P4 false as literally worded (compact tiles assumed). REPORT TO USER.
+- comc-2026: no official solutions yet (CMS posts them with final results) -- agent's own; c2c ambiguous (19200 vs 19440, both accepted). Re-check when CMS publishes.
+- vtrmc 1979-1984: no official solutions (papers only) -- all agent's own. REPORT TO USER.
+- simonmarais 2017 B4, 2018 B4, 2019 B4(b): OPEN research problems (reviewNote) -- consider excluding from practice. REPORT TO USER.
+- vtrmc 1985-1986: no official solutions -- agent's own. vtrmc-1988-06 official answer wrong (a=3,b=4 correct; reviewNote).
+- usamts 2026-27 Round 2: ACTIVE round (paper only, no solutions) -- deliberately NOT extracted; add once USAMTS releases solutions.
+- vtrmc answers that DIFFER from official (agent checked numerically): 1991 P1, 1995 P1 (ln37/6), 1995 P7 (g=5), 1996 P7 (x+sqrt x+1/4). 1994 P4-P7 official page missing -- own solutions. REVIEW.
+- simonmarais 2020/2021/2022 B4(b): OPEN problems (reviewNote).
+- simonmarais 2023/2024/2025 B4(b): OPEN problems (reviewNote).
+- usamts 2010-11 (Year 22) Round 3: not published on usamts.org (404) -- REPORT TO USER as not publicly available.

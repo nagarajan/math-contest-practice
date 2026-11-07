@@ -1,0 +1,189 @@
+[
+  {
+    "id": "usamts-2005-r2-01",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 17 Round 2 (2005-2006)",
+      "year": 2005,
+      "number": 1,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "The figure shows a $4 \\times 4$ grid. We wish to fill in the grid such that each row, each column, and each $2 \\times 2$ square outlined by the thick lines contains the digits 1 through 4. The first row has already been filled in (it reads $1, 2, 3, 4$). Find, with proof, the number of ways we can complete the rest of the grid.",
+    "image": "qimages/usamts/2005-r2/q01.webp",
+    "choices": null,
+    "answer": "12",
+    "acceptedAnswers": null,
+    "answerUnit": "ways",
+    "solutions": [
+      {
+        "title": "Case on the second row",
+        "body": "**Row 2.** The top-left box already contains 1, 2, so row 2 has $\\{3, 4\\}$ in columns 1–2; the top-right box contains 3, 4, so row 2 has $\\{1, 2\\}$ in columns 3–4. That gives 4 options:\n$$3\\,4\\,1\\,2,\\qquad 4\\,3\\,2\\,1,\\qquad 3\\,4\\,2\\,1,\\qquad 4\\,3\\,1\\,2.$$\n\nOnce rows 1–2 are fixed, each column is missing two digits, which must go in rows 3–4 of that column. So we only need to choose row 3 (one missing digit from each column) so that it uses all four digits. Then:\n* row 4 is forced, and it is also a permutation: each digit occurs once in row 1 and once in row 2, so it is missing from exactly two columns;\n* the bottom boxes are automatically fine: the top-left box contains all four digits, so the digits missing from column 1 are exactly those at the top of column 2 and vice versa, and the bottom-left box receives all four digits (same on the right).\n\n**Rows 2 = $3\\,4\\,1\\,2$ or $4\\,3\\,2\\,1$.** Take $3\\,4\\,1\\,2$: the columns are missing $\\{2,4\\}, \\{1,3\\}, \\{2,4\\}, \\{1,3\\}$. Row 3 picks one digit from each; columns 1 and 3 must get different digits from $\\{2,4\\}$, and columns 2 and 4 different digits from $\\{1,3\\}$: $2 \\cdot 2 = 4$ choices, each a valid row. For $4\\,3\\,2\\,1$ the columns are missing $\\{2,3\\}, \\{1,4\\}, \\{1,4\\}, \\{2,3\\}$; now columns 1 & 4 and columns 2 & 3 must take different digits of their common pair, again $2 \\cdot 2 = 4$ choices. Total $4 + 4 = 8$.\n\n**Rows 2 = $3\\,4\\,2\\,1$ or $4\\,3\\,1\\,2$.** Take $3\\,4\\,2\\,1$: columns are missing $\\{2,4\\}, \\{1,3\\}, \\{1,4\\}, \\{2,3\\}$. Choosing row 3, column 1 forces the rest: if it is 2, column 4 must be 3, then column 2 is 1, column 3 is 4 (row $2\\,1\\,4\\,3$); if it is 4, column 3 must be 1, column 2 is 3, column 4 is 2 (row $4\\,3\\,1\\,2$). So 2 completions, and likewise 2 for $4\\,3\\,1\\,2$. Total $4$.\n\nAltogether $8 + 4 = 12$. (A computer enumeration of all ways to fill rows 2–4 also finds exactly 12 grids. Multiplying by the $4! = 24$ possible first rows gives the well-known total of 288 complete $4\\times4$ Sudoku grids.)\n\n**Answer: 12**"
+      }
+    ],
+    "topics": [
+      "counting",
+      "logic"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2005-r2-02",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 17 Round 2 (2005-2006)",
+      "year": 2005,
+      "number": 2,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Write the number\n$$\\frac{1}{\\sqrt2 - \\sqrt[3]2}$$\nas the sum of terms of the form $2^q$, where $q$ is rational. (For example, $2^1 + 2^{-1/3} + 2^{8/5}$ is a sum of this form.) Prove that your sum equals $1/(\\sqrt2 - \\sqrt[3]2)$.",
+    "image": null,
+    "choices": null,
+    "answer": "$$\\frac{1}{\\sqrt2 - \\sqrt[3]2} = 2^{1/2} + 2^{1/3} + 2^{1/6} + 2^0 + 2^{-1/6} + 2^{-1/3}$$\n(multiply by $a^5 + a^4b + \\dots + b^5$ with $a = 2^{1/2}$, $b = 2^{1/3}$, using $a^6 - b^6 = 8 - 4 = 4$).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Use $a^6 - b^6$",
+        "body": "Let $a = 2^{1/2}$ and $b = 2^{1/3}$. Then $a^6 = 8$ and $b^6 = 4$, and\n$$(a - b)(a^5 + a^4b + a^3b^2 + a^2b^3 + ab^4 + b^5) = a^6 - b^6 = 4.$$\nSo\n$$\\frac{1}{a - b} = \\frac{a^5 + a^4b + a^3b^2 + a^2b^3 + ab^4 + b^5}{4}.$$\nEach term is a power of 2: $a^ib^j = 2^{i/2 + j/3}$. Thus\n$$a^5 = 2^{5/2},\\ a^4b = 2^{7/3},\\ a^3b^2 = 2^{13/6},\\ a^2b^3 = 2^2,\\ ab^4 = 2^{11/6},\\ b^5 = 2^{5/3},$$\nand dividing by $4 = 2^2$:\n$$\\frac{1}{\\sqrt2 - \\sqrt[3]2} = 2^{1/2} + 2^{1/3} + 2^{1/6} + 2^{0} + 2^{-1/6} + 2^{-1/3}.$$\nThe algebra is an identity, so this is exact (numerically both sides are about $6.4812$). ∎"
+      },
+      {
+        "title": "Geometric series in $x = 2^{1/6}$",
+        "body": "Let $x = 2^{1/6}$, so $\\sqrt2 = x^3$, $\\sqrt[3]2 = x^2$ and $2 = x^6$. Then\n$$\\frac{1}{\\sqrt2 - \\sqrt[3]2} = \\frac{2 - 1}{x^3 - x^2} = \\frac{x^6 - 1}{x^2(x - 1)}.$$\nSince $x^6 - 1 = (x - 1)(x^5 + x^4 + x^3 + x^2 + x + 1)$,\n$$\\frac{1}{\\sqrt2 - \\sqrt[3]2} = \\frac{x^5 + x^4 + x^3 + x^2 + x + 1}{x^2} = x^3 + x^2 + x + 1 + x^{-1} + x^{-2},$$\ni.e. $2^{1/2} + 2^{1/3} + 2^{1/6} + 2^0 + 2^{-1/6} + 2^{-1/3}$. ∎"
+      }
+    ],
+    "topics": [
+      "algebra"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2005-r2-03",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 17 Round 2 (2005-2006)",
+      "year": 2005,
+      "number": 3,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "An equilateral triangle is tiled with $n^2$ smaller congruent equilateral triangles such that there are $n$ smaller triangles along each of the sides of the original triangle. The case $n = 11$ is shown in the figure. For each of the small equilateral triangles, we randomly choose a vertex $V$ of the triangle and draw an arc with that vertex as center connecting the midpoints of the two sides of the small triangle with $V$ as an endpoint. Find, with proof, the expected value of the number of full circles formed, in terms of $n$.",
+    "image": "qimages/usamts/2005-r2/q03.webp",
+    "choices": null,
+    "answer": "$$\\frac{(n-1)(n-2)}{1458}$$\n(each of the $\\frac{(n-1)(n-2)}{2}$ interior vertices is surrounded by a full circle with probability $(1/3)^6 = 1/729$).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Linearity of expectation",
+        "body": "A full circle must be centred at a grid vertex $V$ and consist of $60^\\circ$ arcs from every small triangle having $V$ as a vertex, so it can only occur at a vertex surrounded by 6 small triangles, i.e. an **interior** vertex (boundary vertices have at most 3 triangles around them and only cover $180^\\circ$ or less).\n\n**Probability for one interior vertex.** Each of its 6 triangles chooses $V$ with probability $\\frac13$, independently, so a full circle appears at $V$ with probability $\\left(\\frac13\\right)^6 = \\frac1{729}$.\n\n**Number of interior vertices.** The vertices of the tiling lie in rows containing $1, 2, \\dots, n + 1$ vertices. Removing the boundary leaves rows of $1, 2, \\dots, n - 2$ interior vertices, so there are\n$$1 + 2 + \\dots + (n - 2) = \\frac{(n-1)(n-2)}{2}$$\ninterior vertices.\n\n**Expected value.** Let $I_V$ be 1 if a circle forms at $V$, else 0. The number of circles is $\\sum_V I_V$, and by linearity of expectation (no independence between different $V$ is needed)\n$$E = \\frac{(n-1)(n-2)}{2}\\cdot\\frac{1}{729} = \\frac{(n-1)(n-2)}{1458}.$$\nFor example, for $n = 11$ the expected number is $\\frac{90}{1458} = \\frac{5}{81}$.\n\n**Answer: $\\dfrac{(n-1)(n-2)}{1458}$**"
+      },
+      {
+        "title": "Check small cases",
+        "body": "For $n = 1$ and $n = 2$ there are no interior vertices (every vertex lies on the big triangle's boundary), and the formula gives 0 — correct, since no vertex has 6 triangles around it.\n\nFor $n = 3$ there is exactly one interior vertex (the centre), with 6 triangles around it; the probability that all six choose it is $3^{-6} = \\frac{1}{729}$, and the formula gives $\\frac{2\\cdot1}{1458} = \\frac1{729}$. ✓\n\nIn general, the interior vertices form a triangular array with side $n - 2$, containing $\\binom{n-1}{2}$ points, which gives the same count as before, and the expected number of circles is $\\binom{n-1}{2}\\cdot 3^{-6} = \\frac{(n-1)(n-2)}{1458}$."
+      }
+    ],
+    "topics": [
+      "probability",
+      "counting",
+      "geometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2005-r2-04",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 17 Round 2 (2005-2006)",
+      "year": 2005,
+      "number": 4,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "A teacher plays the game \"Duck-Goose-Goose\" with his class. The game is played as follows: All the students stand in a circle and the teacher walks around the circle. As he passes each student, he taps the student on the head and declares her a 'duck' or a 'goose'. Any student named a 'goose' leaves the circle immediately. Starting with the first student, the teacher tags students in the pattern: duck, goose, goose, duck, goose, goose, etc., and continues around the circle (re-tagging some former ducks as geese) until only one student remains. This remaining student is the winner.\n\nFor instance, if there are 8 students, the game proceeds as follows: student 1 (duck), student 2 (goose), student 3 (goose), student 4 (duck), student 5 (goose), student 6 (goose), student 7 (duck), student 8 (goose), student 1 (goose), student 4 (duck), student 7 (goose) and student 4 is the winner. Find, with proof, all values of $n$ with $n > 2$ such that if the circle starts with $n$ students, then the $n^{\\text{th}}$ student is the winner.",
+    "image": null,
+    "choices": null,
+    "answer": "Exactly $n = 3^k - 2$ ($k \\ge 2$) and $n = 2\\cdot 3^k - 2$ ($k \\ge 1$): $n = 4, 7, 16, 25, 52, 79, 160, 241, \\dots$ (i.e. $n + 2$ is $3^k$ or $2\\cdot 3^k$).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Add two phantom students",
+        "body": "**Reformulation.** Put two extra students in front of student 1 and use the pattern goose, goose, duck, goose, goose, duck, ... starting with them. The two extras are removed at once, and from student 1 on the pattern is duck, goose, goose, ... exactly as in the real game. So the real game with $n$ students is the same as the new game with $N = n + 2$ students labelled $1, \\dots, N$ (the old student $n$ is now $N$), in which the $m$-th tap overall is a *duck* exactly when $3 \\mid m$.\n\n**Passes.** Call one trip around the current circle a *pass*. Suppose a pass starts \"fresh\" (its first tap is a goose, second goose, third duck, ...) with $L$ students $s_1 < s_2 < \\dots < s_L$ remaining, where $s_L = N$. This is true for the first pass with $L = N$.\n\n* If $L = 1$, student $N$ is the winner. If $L = 2$, the first tap removes $s_1$ and $N$ wins.\n* If $L \\ge 3$: during the pass, the students $s_i$ with $3 \\nmid i$ are removed and those with $3 \\mid i$ stay. Before $N$ is reached at least $\\lfloor L/3\\rfloor + 1 \\ge 2$ students remain, so the game does not end before $N$'s tap. $N$ is tapped as the $L$-th tap of the pass:\n  * if $3 \\nmid L$, $N$ is a goose and loses;\n  * if $3 \\mid L$, $N$ is a duck, and the pass ends with exactly $L/3$ students, the last tap was a duck, so the next pass is again fresh, with $N$ still the last student.\n\n**Conclusion.** Hence $N$ wins iff repeatedly dividing $N$ by 3 (each step requiring divisibility while the count is $\\ge 3$) reaches 1 or 2, i.e. iff $N = 3^k$ or $N = 2\\cdot 3^k$. In terms of $n = N - 2$ with $n > 2$:\n$$n = 3^k - 2\\ (k \\ge 2)\\quad\\text{or}\\quad n = 2\\cdot 3^k - 2\\ (k \\ge 1),$$\ni.e. $n = 4, 7, 16, 25, 52, 79, 160, 241, 484, \\dots$\n\nCheck with $n = 8$: $N = 10$ is not of this form, and indeed student 4 wins, not student 8. With $n = 7$ ($N = 9$): the taps are D G G D G G D (students 1–7), then 1 is a goose, 4 a goose, and 7 wins. ✓ ∎"
+      },
+      {
+        "title": "Simulation check",
+        "body": "Simulating the game directly for every $n$ from 3 to 500 and recording when student $n$ wins gives\n$$n = 4, 7, 16, 25, 52, 79, 160, 241, 484,$$\nwhich are exactly the numbers with $n + 2 \\in \\{6, 9, 18, 27, 54, 81, 162, 243, 486\\} = \\{3^k, 2\\cdot 3^k\\}$. This matches the proof in the first solution.\n\nThe phantom-student trick is what makes the pattern clean: in the shifted game, as long as every pass starts with a multiple of 3 students, the survivors after $j$ full passes are exactly the original students $3^j, 2\\cdot 3^j, 3\\cdot 3^j, \\dots$, and the last student survives exactly when $N$ is the largest of these at every stage."
+      }
+    ],
+    "topics": [
+      "logic",
+      "number-theory",
+      "patterns"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2005-r2-05",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 17 Round 2 (2005-2006)",
+      "year": 2005,
+      "number": 5,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Given acute triangle $\\triangle ABC$ in plane $\\mathcal P$, a point $Q$ in space is defined such that $\\angle AQB = \\angle BQC = \\angle CQA = 90^\\circ$. Point $X$ is the point in plane $\\mathcal P$ such that $\\overline{QX}$ is perpendicular to plane $\\mathcal P$. Given $\\angle ABC = 40^\\circ$ and $\\angle ACB = 75^\\circ$, find $\\angle AXC$.",
+    "image": null,
+    "choices": null,
+    "answer": "140",
+    "acceptedAnswers": null,
+    "answerUnit": "degrees",
+    "solutions": [
+      {
+        "title": "$X$ is the orthocenter",
+        "body": "**$X$ is the orthocenter of $ABC$.** Since $QB \\perp QA$ and $QB \\perp QC$, the line $QB$ is perpendicular to the plane $QAC$, hence $QB \\perp AC$. Also $QX \\perp \\mathcal P$, so $QX \\perp AC$. Thus $AC$ is perpendicular to two intersecting lines $QB$ and $QX$ of the plane $QBX$, so $AC \\perp$ plane $QBX$, and in particular $AC \\perp BX$. In the same way $BC \\perp AX$ and $AB \\perp CX$. So $X$ lies on all three altitudes: $X = H$, the orthocenter.\n\n**The angle.** Let $AX$ meet $BC$ at $D$ and $CX$ meet $AB$ at $F$ (feet of altitudes; they lie on the sides as the triangle is acute). In quadrilateral $BDXF$, the angles at $D$ and $F$ are $90^\\circ$, so\n$$\\angle DXF = 360^\\circ - 90^\\circ - 90^\\circ - \\angle B = 180^\\circ - 40^\\circ = 140^\\circ.$$\n$\\angle AXC$ is vertical to $\\angle DXF$, so $\\angle AXC = 140^\\circ$. (The given $\\angle C = 75^\\circ$ is not needed.)\n\n**Answer: $140^\\circ$**"
+      },
+      {
+        "title": "Vectors",
+        "body": "Put the origin at $X$ and write $\\vec a, \\vec b, \\vec c, \\vec q$ for the position vectors of $A, B, C, Q$. As $QX \\perp \\mathcal P$, $\\vec q\\cdot\\vec a = \\vec q\\cdot\\vec b = \\vec q\\cdot\\vec c = 0$. The right angles at $Q$ say\n$$(\\vec a - \\vec q)\\cdot(\\vec b - \\vec q) = 0 \\implies \\vec a\\cdot\\vec b = -|\\vec q|^2,$$\nand likewise $\\vec b\\cdot\\vec c = \\vec c\\cdot\\vec a = -|\\vec q|^2$. Then $\\vec a\\cdot(\\vec b - \\vec c) = 0$, so $XA \\perp BC$; similarly $XB \\perp CA$, $XC \\perp AB$. So $X$ is the orthocenter $H$.\n\nFor the orthocenter of an acute triangle, $\\angle AHC = 180^\\circ - \\angle B$: in right triangle $AFC$ ($F$ the foot from $C$) $\\angle FCA = 90^\\circ - \\angle A$, and in right triangle $ADC$ ($D$ the foot from $A$) $\\angle DAC = 90^\\circ - \\angle C$; so in triangle $AHC$, $\\angle AHC = 180^\\circ - (90^\\circ - \\angle A) - (90^\\circ - \\angle C) = \\angle A + \\angle C = 180^\\circ - \\angle B = 140^\\circ$.\n\n**Answer: $140^\\circ$**"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "spatial"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

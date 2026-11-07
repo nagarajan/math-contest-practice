@@ -1,0 +1,291 @@
+[
+  {
+    "id": "simonmarais-2018-a1",
+    "bank": "simonmarais",
+    "source": {
+      "contest": "Simon Marais",
+      "paper": "Session A",
+      "year": 2018,
+      "number": 1,
+      "url": "https://www.simonmarais.org/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Call a rectangle *dominant* if it is similar to a $2 \\times 1$ rectangle.\n\nFor which integers $n \\ge 5$ is it possible to tile a square with $n$ dominant rectangles, which are not necessarily congruent to each other?",
+    "image": null,
+    "choices": null,
+    "answer": "For **all** $n\\ge5$: tilings with $2$, $6$ and $7$ rectangles exist, and splitting one rectangle into four half-size copies adds $3$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Three base tilings and a $+3$ step",
+        "body": "**Answer: for every integer $n\\ge5$.**\n\n**The $+3$ step.** If a square is tiled by $n$ dominant rectangles, pick one of them, of size $2\\ell\\times\\ell$. It can be cut into four rectangles of size $\\ell\\times\\frac12\\ell$ (cut it in half along both axes), which are again dominant. This gives a tiling with $n+3$ dominant rectangles.\n\n**Base tilings.** Work in a $6\\times6$ square with coordinates $0\\le x,y\\le 6$ ($y$ measured downwards).\n* **$2$ rectangles:** cut the square into two $6\\times3$ rectangles.\n* **$6$ rectangles:** three $4\\times2$ rectangles stacked in the left part $[0,4]\\times[0,6]$ (at heights $[0,2],[2,4],[4,6]$); in the right strip $[4,6]$: one $2\\times4$ rectangle $[4,6]\\times[0,4]$ and two $2\\times1$ rectangles $[4,6]\\times[4,5]$ and $[4,6]\\times[5,6]$.\n* **$7$ rectangles:** a $6\\times3$ rectangle $[0,6]\\times[0,3]$ on top; below it a $4\\times2$ rectangle $[0,4]\\times[3,5]$, two $2\\times1$ rectangles $[4,6]\\times[3,4]$ and $[4,6]\\times[4,5]$; and along the bottom three $2\\times1$ rectangles $[0,2]\\times[5,6]$, $[2,4]\\times[5,6]$, $[4,6]\\times[5,6]$.\n\nEvery piece has side ratio $2:1$, and in each case the pieces fill the square without overlap.\n\nApplying the $+3$ step repeatedly: from $2$ we get $5,8,11,\\dots$; from $6$ we get $6,9,12,\\dots$; from $7$ we get $7,10,13,\\dots$. These three progressions cover all integers $n\\ge5$ (they cover the residues $2,0,1 \\bmod 3$ from $5$, $6$, $7$ on). ∎\n\n*Remark.* One can show that $1$, $3$ and $4$ rectangles are impossible, which is why the problem starts at $n=5$."
+      }
+    ],
+    "topics": [
+      "geometry",
+      "spatial"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "simonmarais-2018-a2",
+    "bank": "simonmarais",
+    "source": {
+      "contest": "Simon Marais",
+      "paper": "Session A",
+      "year": 2018,
+      "number": 2,
+      "url": "https://www.simonmarais.org/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Ada and Byron play a game. First, Ada chooses a non-zero real number $a$ and announces it. Then Byron chooses a non-zero real number $b$ and announces it. Then Ada chooses a non-zero real number $c$ and announces it. Finally, Byron chooses a quadratic polynomial whose three coefficients are $a, b, c$ in some order.\n\n(a) Suppose that Byron wins if the quadratic polynomial has a real root and Ada wins otherwise. Determine which player has a winning strategy.\n\n(b) Suppose that Ada wins if the quadratic polynomial has a real root and Byron wins otherwise. Determine which player has a winning strategy.",
+    "image": null,
+    "choices": null,
+    "answer": "(a) **Byron** (choose $b=-a$, then use $ax^2+cx+b$); (b) **Ada** (scale so $a=1$; reply $c=-4\\sqrt b$ if $b>0$ and $c=b^2/8$ if $b<0$).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Explicit strategies",
+        "body": "For a quadratic $Ax^2+Bx+C$ (all coefficients non-zero here, so it really is quadratic) there is a real root iff the discriminant $B^2-4AC\\ge0$. The discriminant depends only on which coefficient is in the **middle**: with $\\{a,b,c\\}$ as coefficients, the possible discriminants are $a^2-4bc$, $b^2-4ac$, $c^2-4ab$.\n\n**(a) Byron wins.** Whatever $a$ Ada picks, Byron picks $b=-a$. After Ada picks $c$, Byron writes $ax^2+cx+b=ax^2+cx-a$, whose discriminant is $c^2+4a^2>0$. So it has a real root.\n\n**(b) Ada wins.** Multiplying all three coefficients by the same non-zero number does not change whether a quadratic has a real root, so it is enough to describe Ada's strategy when she opens with $a=1$ (she simply does so). Byron then picks $b\\ne0$.\n\n* **If $b>0$**, Ada picks $c=-4\\sqrt b$. The three discriminants are\n$$1-4bc=1+16b\\sqrt b>0,\\qquad b^2-4c=b^2+16\\sqrt b>0,\\qquad c^2-4b=16b-4b=12b>0.$$\n* **If $b<0$**, Ada picks $c=\\frac{b^2}{8}$. The three discriminants are\n$$1-4bc=1-\\frac{b^3}{2}>0,\\qquad b^2-4c=\\frac{b^2}{2}>0,\\qquad c^2-4b=\\frac{b^4}{64}-4b>0.$$\n\nSo whichever of the six quadratics Byron writes down, it has a real root, and Ada wins.\n\n**Answer: (a) Byron; (b) Ada.** ∎"
+      }
+    ],
+    "topics": [
+      "algebra",
+      "polynomials",
+      "games"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "simonmarais-2018-a3",
+    "bank": "simonmarais",
+    "source": {
+      "contest": "Simon Marais",
+      "paper": "Session A",
+      "year": 2018,
+      "number": 3,
+      "url": "https://www.simonmarais.org/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Let $y(x)$ be the unique solution of the differential equation\n$$\\frac{\\mathrm{d}y}{\\mathrm{d}x} = \\log_e \\frac{y}{x}, \\qquad \\text{where } x > 0 \\text{ and } y > 0,$$\nwith the initial condition $y(1) = 2018$.\n\nHow many positive real numbers $x$ satisfy the equation $y(x) = 2000$?",
+    "image": null,
+    "choices": null,
+    "answer": "1",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Concavity and a maximum on the line $y=x$",
+        "body": "**Answer: exactly one.** Let $y$ be the maximal solution on an interval $(\\alpha,c)\\ni 1$ with $y>0$ (the right-hand side $\\ln y-\\ln x$ is smooth for $x,y>0$, so solutions are unique and can be continued as long as $(x,y)$ stays in a compact part of the open quadrant).\n\n**Signs and concavity.** $y'>0$ where $y>x$, $y'<0$ where $y<x$, and $y'=0$ exactly where $y=x$. Moreover, using $\\ln(1+r)\\le r$,\n$$y''=\\frac{y'}{y}-\\frac1x=\\frac{\\ln(y/x)}{y}-\\frac1x\\le\\frac{y/x-1}{y}-\\frac1x=-\\frac1y<0,$$\nso $y$ is strictly concave and $y'$ is strictly decreasing.\n\n**Step 1: the graph meets $y=x$.** Suppose not. Since $y(1)=2018>1$, we would have $y(x)>x$ for all $x\\ge1$ in the domain; then $y$ is increasing with $0<y'\\le\\ln y$, so it cannot blow up and the solution exists on $[1,\\infty)$. Let $k=\\inf_{x\\ge1}y(x)/x\\ge1$ and pick $a\\ge1$ with $y(a)/a<k+\\frac12$. By concavity, for all $x\\ge a$,\n$$y(x)\\le y(a)+(x-a)\\,y'(a)=y(a)+(x-a)\\ln\\frac{y(a)}a,$$\nso $\\limsup_{x\\to\\infty}y(x)/x\\le\\ln(k+\\tfrac12)\\le k-\\tfrac12<k$, contradicting the definition of $k$. Hence there is $m$ with $y(m)=m$; then $y'(m)=0$, and as $y'$ is strictly decreasing, $y$ increases on $(\\alpha,m]$ and decreases on $[m,c)$. Since $y'(1)=\\ln 2018>0$, $m>1$, and the maximum value is $y(m)=m>y(1)=2018$.\n\n**Step 2: exactly one solution to the right of $m$.** For $x\\ge m+1$, $y'(x)\\le y'(m+1)<0$, so $y$ would become negative at a finite $x$; hence $c<\\infty$. As $x\\to c^-$, $y$ decreases to a limit $L\\ge0$; if $L>0$ the solution could be continued past $c$, so $L=0$. Thus $y$ decreases continuously and strictly from $m>2000$ to $0$ on $[m,c)$, and takes the value $2000$ exactly once there.\n\n**Step 3: none to the left of $m$.** For $0<x<1$ (as long as the solution exists) we have $x<y<2018$, so $0<y'(x)<\\ln2018-\\ln x$. Hence $y$ stays between $2017-\\ln2018$ and $2018$, so the solution extends to all of $(0,1]$, and for $0<x<1$\n$$y(x)=2018-\\int_x^1y'(t)\\,dt>2018-\\int_0^1(\\ln2018-\\ln t)\\,dt=2017-\\ln2018>2000,$$\nbecause $\\int_0^1\\ln t\\,dt=-1$ and $\\ln 2018<\\ln e^{8}=8$. On $[1,m]$, $y\\ge y(1)=2018$. So $y>2000$ on $(0,m]$.\n\nTherefore $y(x)=2000$ has **exactly one** positive solution. ∎\n\n(Numerically: $y(0^+)\\approx2009.4$, the maximum is $y(m)=m\\approx7822$, and $y$ reaches $2000$ once, near $x\\approx1.6\\times10^4$.)"
+      }
+    ],
+    "topics": [
+      "differential-equations",
+      "calculus",
+      "real-analysis"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "simonmarais-2018-a4",
+    "bank": "simonmarais",
+    "source": {
+      "contest": "Simon Marais",
+      "paper": "Session A",
+      "year": 2018,
+      "number": 4,
+      "url": "https://www.simonmarais.org/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "For each positive integer $n$, consider a cinema with $n$ seats in a row, numbered left to right from $1$ up to $n$. There is a cup holder between any two adjacent seats and there is a cup holder on the right of seat $n$. So seat $1$ is next to one cup holder, while every other seat is next to two cup holders. There are $n$ people, each holding a drink, waiting in a line to sit down. In turn, each person chooses an available seat uniformly at random and carries out the following.\n\n* If they sit next to two empty cup holders, then they place their drink in the left cup holder with probability $\\frac12$ or in the right cup holder with probability $\\frac12$.\n* If they sit next to one empty cup holder, then they place their drink in that empty cup holder.\n* If they sit next to zero empty cup holders, then they hold their drink in their hands.\n\nLet $p_n$ be the probability that all $n$ people place their drink in a cup holder.\n\nDetermine $p_1 + p_2 + p_3 + \\cdots$.",
+    "image": null,
+    "choices": null,
+    "answer": "(2*sqrt(e)-2)/(2-sqrt(e))",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "answerDisplay": "$\\dfrac{2\\sqrt e-2}{2-\\sqrt e}$",
+    "solutions": [
+      {
+        "title": "Recurrence and generating function",
+        "body": "**Answer:** $\\displaystyle\\sum_{n\\ge1}p_n=\\frac{2\\sqrt e-2}{2-\\sqrt e}\\approx3.6935$.\n\nNumber the cup holders $1,\\dots,n$, holder $i$ being to the right of seat $i$; so seat $1$ uses holder $1$ only, and seat $k\\ge2$ uses holders $k-1$ and $k$. Set $p_0=1$; clearly $p_1=1$.\n\n**Recurrence.** Take $n+1$ seats and suppose the first person sits in seat $k$ (probability $\\frac1{n+1}$ each).\n* $k=1$: they use holder $1$. Seats $2,\\dots,n+1$ with holders $2,\\dots,n+1$ form exactly the same situation with $n$ seats (seat $2$ now has one free holder). Success probability $p_n$.\n* $k\\ge2$, drink to the **left** (probability $\\frac12$): seats $1,\\dots,k-1$ now have only holders $1,\\dots,k-2$ — fewer holders than people — so someone fails. Probability $0$.\n* $k\\ge2$, drink to the **right**: seats $1,\\dots,k-1$ with holders $1,\\dots,k-1$ form a copy of the $(k-1)$-seat cinema, and seats $k+1,\\dots,n+1$ with holders $k+1,\\dots,n+1$ form a copy of the $(n+1-k)$-seat cinema. The later people choose uniformly among free seats, so the order in which the seats of each block are filled is uniformly random and the two blocks evolve independently. Success probability $p_{k-1}p_{n+1-k}$.\n\nHence\n$$p_{n+1}=\\frac{1}{n+1}\\Big(p_n+\\frac12\\sum_{k=2}^{n+1}p_{k-1}p_{n+1-k}\\Big)=\\frac{1}{2(n+1)}\\Big(p_n+\\sum_{j=0}^{n}p_jp_{n-j}\\Big),$$\nwriting $p_n=\\frac12p_n+\\frac12p_0p_n$. This gives $p_2=\\frac34$, $p_3=\\frac{13}{24}$, $p_4=\\frac{25}{64}$, … (matching a direct enumeration).\n\n**Generating function.** Let $P(x)=\\sum_{n\\ge0}p_nx^n$. Multiplying the recurrence by $(n+1)x^n$ and summing,\n$$P'(x)=\\frac12P(x)+\\frac12P(x)^2,\\qquad P(0)=1 .$$\nSeparating variables, $\\frac{dP}{P(1+P)}=\\frac{dx}2$, so $\\ln\\frac{P}{1+P}=\\frac x2+\\ln\\frac12$, i.e.\n$$P(x)=\\frac{e^{x/2}}{2-e^{x/2}}.$$\nJustification: the recurrence determines all coefficients from $p_0=1$, and the Taylor coefficients of the analytic function $e^{x/2}/(2-e^{x/2})$ satisfy the same differential equation, hence the same recurrence; so they are the $p_n$. This function is analytic for $|x|<2\\ln2\\approx1.386$ (its nearest singularity is $x=2\\ln2$), so the power series converges at $x=1$, and\n$$\\sum_{n\\ge1}p_n=P(1)-1=\\frac{\\sqrt e}{2-\\sqrt e}-1=\\frac{2\\sqrt e-2}{2-\\sqrt e}.$$"
+      }
+    ],
+    "topics": [
+      "probability",
+      "sequences-series",
+      "differential-equations"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "simonmarais-2018-b1",
+    "bank": "simonmarais",
+    "source": {
+      "contest": "Simon Marais",
+      "paper": "Session B",
+      "year": 2018,
+      "number": 1,
+      "url": "https://www.simonmarais.org/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "For all positive integers $n$ and real numbers $x_1, x_2, \\ldots, x_n$, prove that\n$$\\sum_{i=1}^{n}\\sum_{j=1}^{n} \\min(i, j)\\, x_i x_j \\ge 0.$$\n(We define $\\min(a, b) = a$ if $a \\le b$ and $\\min(a, b) = b$ if $a > b$.)",
+    "image": null,
+    "choices": null,
+    "answer": "$\\sum_{i,j}\\min(i,j)x_ix_j=\\sum_{k=1}^n(x_k+x_{k+1}+\\cdots+x_n)^2$ (or: it is the variance of $\\sum x_iY_i$ for a random walk $Y_i$).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "A sum of squares",
+        "body": "We prove the identity\n$$\\sum_{i=1}^n\\sum_{j=1}^n\\min(i,j)\\,x_ix_j=\\sum_{k=1}^n\\big(x_k+x_{k+1}+\\cdots+x_n\\big)^2,$$\nfrom which the inequality is immediate.\n\nWrite $\\min(i,j)=\\#\\{k:1\\le k\\le i\\text{ and }k\\le j\\}=\\sum_{k=1}^{n}[k\\le i]\\,[k\\le j]$. Then\n$$\\sum_{i,j}\\min(i,j)x_ix_j=\\sum_{k=1}^n\\sum_{i,j}[k\\le i][k\\le j]\\,x_ix_j=\\sum_{k=1}^n\\Big(\\sum_{i\\ge k}x_i\\Big)\\Big(\\sum_{j\\ge k}x_j\\Big)=\\sum_{k=1}^n\\Big(\\sum_{i=k}^nx_i\\Big)^2\\ge0.$$ ∎\n\n(Equivalently, compare coefficients: $x_i^2$ has coefficient $i$ on both sides, and $x_ix_j$ with $i<j$ has coefficient $2i$ on both sides.)"
+      },
+      {
+        "title": "A covariance matrix",
+        "body": "Let $X_1,\\dots,X_n$ be independent random variables with mean $0$ and variance $1$ (for example fair $\\pm1$ coin flips), and let $Y_k=X_1+\\cdots+X_k$. For $i\\le j$,\n$$\\operatorname{Cov}(Y_i,Y_j)=\\operatorname{Cov}\\Big(Y_i,\\;Y_i+\\sum_{t=i+1}^{j}X_t\\Big)=\\operatorname{Var}(Y_i)=i=\\min(i,j).$$\nBy bilinearity of covariance,\n$$\\sum_{i,j}\\min(i,j)x_ix_j=\\sum_{i,j}\\operatorname{Cov}(Y_i,Y_j)\\,x_ix_j=\\operatorname{Var}\\Big(\\sum_{i=1}^nx_iY_i\\Big)\\ge0,$$\nsince a variance is never negative. ∎\n\n(A third route: the matrix $(\\min(i,j))$ equals $LL^{\\mathsf T}$ where $L$ is the lower-triangular all-ones matrix, so it is positive semidefinite; this is the first identity in matrix form.)"
+      }
+    ],
+    "topics": [
+      "inequalities",
+      "linear-algebra",
+      "algebra"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "simonmarais-2018-b2",
+    "bank": "simonmarais",
+    "source": {
+      "contest": "Simon Marais",
+      "paper": "Session B",
+      "year": 2018,
+      "number": 2,
+      "url": "https://www.simonmarais.org/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "text",
+    "prompt": "Let $S$ be the set of real numbers that can be expressed as $\\sqrt{m} - \\sqrt{n}$, where $m$ and $n$ are positive integers.\n\nDo there exist real numbers $a < b$ such that the open interval $(a, b)$ contains only finitely many elements of $S$?",
+    "image": null,
+    "choices": null,
+    "answer": "No",
+    "acceptedAnswers": [
+      "no, there are no such a and b",
+      "no such interval",
+      "n"
+    ],
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Sequences converging to every rational",
+        "body": "**Answer: no** — every open interval contains infinitely many elements of $S$ (i.e. $S$ is dense and every point is a limit of elements of $S$).\n\nLet $\\frac pq>0$ be rational ($p,q$ positive integers). For $k=1,2,\\dots$ put\n$$s_k=\\sqrt{k^2q^2+2pk}-\\sqrt{k^2q^2}\\in S .$$\nThen\n$$s_k=\\frac{2pk}{\\sqrt{k^2q^2+2pk}+kq}=\\frac{2p}{\\sqrt{q^2+2p/k}+q}\\longrightarrow\\frac{2p}{2q}=\\frac pq,$$\nand $s_k$ is strictly increasing in $k$ (the denominator decreases), so the $s_k$ are infinitely many **distinct** elements of $S$ converging to $\\frac pq$. Hence every open interval containing a positive rational contains infinitely many elements of $S$. Since $S=-S$ (swap $m$ and $n$), the same holds for negative rationals. Every open interval $(a,b)$ contains a non-zero rational, so it contains infinitely many elements of $S$. ∎"
+      },
+      {
+        "title": "Small steps $\\sqrt{n}-\\sqrt{n-1}$",
+        "body": "**Answer: no.** Fix $a<b$; we find an element of $S$ in $(a,b)$, and the construction gives infinitely many.\n\nChoose an integer $k$ with $\\frac{1}{2\\sqrt k}<b-a$, and then an integer $m$ with $\\sqrt m>b+\\sqrt k$. The numbers $\\sqrt m-\\sqrt1,\\sqrt m-\\sqrt2,\\dots$ start at a value $\\ge b$ (since $\\sqrt m-1>b$ when $k\\ge1$) and decrease to $-\\infty$, so there is an $n\\ge2$ with\n$$\\sqrt m-\\sqrt{n-1}\\ge b>\\sqrt m-\\sqrt n .$$\nFrom $\\sqrt m-\\sqrt n<b<\\sqrt m-\\sqrt k$ we get $n>k$, so $n\\ge k+1$ and\n$$\\sqrt n-\\sqrt{n-1}=\\frac1{\\sqrt n+\\sqrt{n-1}}\\le\\frac1{\\sqrt{k+1}+\\sqrt k}<\\frac1{2\\sqrt k}<b-a .$$\nHence $\\sqrt m-\\sqrt n=(\\sqrt m-\\sqrt{n-1})-(\\sqrt n-\\sqrt{n-1})>b-(b-a)=a$, so $\\sqrt m-\\sqrt n\\in(a,b)$.\n\nEvery open interval therefore contains an element of $S$; applying this to the infinitely many disjoint subintervals $\\big(a+\\frac{b-a}{j+1},a+\\frac{b-a}{j}\\big)$, $j=1,2,\\dots$, gives infinitely many elements of $S$ in $(a,b)$. ∎"
+      }
+    ],
+    "topics": [
+      "real-analysis",
+      "number-theory"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "simonmarais-2018-b3",
+    "bank": "simonmarais",
+    "source": {
+      "contest": "Simon Marais",
+      "paper": "Session B",
+      "year": 2018,
+      "number": 3,
+      "url": "https://www.simonmarais.org/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Three spiders try to catch a beetle in a game. They are all initially positioned on the edges of a regular dodecahedron whose edges have length $1$. At some point in time, they start moving continuously along the edges of the dodecahedron. The beetle and one of the spiders move with maximum speed $1$, while the remaining two spiders move with maximum speed $\\frac{1}{2018}$. Each player always knows their own position and the position of every other player. A player can turn around at any moment and can react to the behaviour of other players instantaneously. The spiders can communicate to decide on a strategy before and during the game. If any spider occupies the same position as the beetle at some time, then the spiders win the game.\n\nProve that the spiders can win the game, regardless of the initial positions of all players and regardless of how the beetle moves.\n\n(A *regular dodecahedron* is a convex polyhedron with twelve faces, each of which is a pentagon with equal side lengths and equal angles. Three faces meet at each vertex.)",
+    "image": null,
+    "choices": null,
+    "answer": "Fast spider at a vertex $V$, a slow one at the antipode; force the beetle to a vertex $W$ at distance $1,2$ or $4$ from $V$; then the fast spider mirrors the beetle in the symmetry plane bisecting $VW$, one slow spider guards a vertex that breaks both cycles on the beetle's side, and the other slow spider sweeps the remaining tree.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Mirror, guard, sweep",
+        "body": "Let $G$ be the graph (vertices and edges) of the dodecahedron, and measure distances between vertices in edges. Fix a vertex $V$. One checks (e.g. with the standard coordinates $(\\pm1,\\pm1,\\pm1)$, $(0,\\pm\\varphi^{-1},\\pm\\varphi)$ and cyclic permutations) that there are $3,6,6,3,1$ vertices at distance $1,2,3,4,5$ from $V$, that each vertex at distance $3$ has exactly one neighbour at each of the distances $2,3,4$, and:\n\n* **Mirror fact.** If $W$ is at distance $1$, $2$ or $4$ from $V$, the plane $\\Pi$ that perpendicularly bisects segment $VW$ is a plane of mirror symmetry of the dodecahedron (the $15$ mirror planes move $V$ to exactly these $12$ vertices). The part of $G$ strictly on $W$'s side of $\\Pi$ consists of two adjacent pentagonal faces (sharing an edge $XY$), plus the open pieces of the six edges that run from them to $\\Pi$.\n\n**A tree-sweeping lemma.** If the beetle is confined to a region $T$ of $G$ that is a finite tree (possibly with some ends open, i.e. ending just before a vertex or a plane), a single spider of any positive speed forces it, in finite time, either to be caught or to leave $T$ through an open end. Indeed, the spider walks into $T$ and always moves along the unique path towards the beetle. The beetle can never get past the spider, so the part of $T$ available to the beetle (the component of $T$ minus the spider's position that contains the beetle) only shrinks, and the spider never retraces a point; as $T$ has finite total length, after finite time the beetle's region is used up.\n\n**The strategy.** Call the fast spider $F$ and the slow spiders $S_1,S_2$.\n\n1. $F$ goes to $V$ and stays there; $S_1$ goes to the antipodal vertex $V'$ (distance $5$) and stays there. This takes finite time; let $t_0$ be the moment both are in place. From now on the beetle may never visit $V$ or $V'$.\n2. If the beetle stays inside one edge forever after $t_0$, $S_2$ walks into that edge, and the beetle must either be caught or leave through an endpoint. So at some time after $t_0$ the beetle is at a vertex, at distance $1,2,3$ or $4$ from $V$.\n3. If this vertex is at distance $3$, consider the region the beetle can use while it avoids vertices at distances $2$ and $4$ (and $V,V'$): it consists of two adjacent distance-$3$ vertices, the edge between them, and the four half-open edges leading from them towards distance-$2$/$4$ vertices. This is a tree, so by the lemma $S_2$ forces the beetle onto a vertex at distance $2$ or $4$ (or catches it).\n\nSo at some time $t_1$ the beetle is at a vertex $W$ at distance $1$, $2$ or $4$ from $V$, while $F$ is at $V$. Let $\\Pi$ be the mirror plane bisecting $VW$ and $H$ the part of $G$ strictly on $W$'s side of $\\Pi$.\n\n4. From time $t_1$ on, $F$ moves as the **mirror image** of the beetle in $\\Pi$. This is possible: at $t_1$ the mirror image of $W$ is $V$, the reflection maps $G$ onto itself, and $F$ is as fast as the beetle. If the beetle ever reaches $\\Pi$, it coincides with its mirror image $F$ and is caught. So the beetle stays in $H$.\n5. Meanwhile $S_1$ walks to the vertex $X$ (an endpoint of the edge shared by the two pentagons of $H$) and stays there. The cycles of $H$ are the two pentagons and their common outer $8$-cycle, and all of them pass through $X$, so $H$ with $X$ removed is a tree (with open ends at $X$ and at $\\Pi$).\n6. Once $S_1$ is at $X$, $S_2$ sweeps this tree by the lemma. The beetle is caught by $S_2$, or it runs into $X$ (caught by $S_1$), or it reaches $\\Pi$ (caught by $F$).\n\nIn every case a spider catches the beetle in finite time, whatever the initial positions and however the beetle moves. ∎\n\n*Why distance $3$ needs special treatment:* the perpendicular bisector plane of $VW$ is a symmetry plane only for $W$ at distance $1$, $2$ or $4$; for distance $3$ (and $5$) it is not, so the mirroring trick needs the beetle to be pushed to a suitable vertex first."
+      }
+    ],
+    "topics": [
+      "games",
+      "graph-theory",
+      "geometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "simonmarais-2018-b4",
+    "bank": "simonmarais",
+    "source": {
+      "contest": "Simon Marais",
+      "paper": "Session B",
+      "year": 2018,
+      "number": 4,
+      "url": "https://www.simonmarais.org/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "*The following problem is open in the sense that no solution is currently known. An explicit expression with proof for the known case of $|A(5, n)|$ will be awarded 2 points. Further progress on the problem may be awarded more points.*\n\nFor positive integers $m$ and $n$, let $A(m, n)$ be the set of $2 \\times mn$ matrices $M$ with entries from the set $\\{1, 2, \\ldots, m\\}$ such that\n\n* each of the numbers $1, 2, \\ldots, m$ appears exactly $2n$ times;\n* $M_{1,1} \\le M_{1,2} \\le \\cdots \\le M_{1,mn}$ and $M_{2,1} \\le M_{2,2} \\le \\cdots \\le M_{2,mn}$; and\n* $M_{1,j} < M_{2,j}$ for $j = 1, 2, \\ldots, mn$.\n\nDetermine $|A(m, n)|$.",
+    "image": null,
+    "choices": null,
+    "answer": "**Open in general.** Known small cases: $|A(1,n)|=0$, $|A(2,n)|=|A(3,n)|=1$, $|A(4,n)|=2n+1$, $|A(5,n)|=\\tfrac12(5n^2+5n+2)$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "A counting criterion and the cases $m\\le5$",
+        "body": "**No closed formula for general $m$ is known**; we solve the cases $m\\le5$ (the case $m=5$ was the \"known case\" of the problem).\n\n**Reduction to the first row.** A matrix in $A(m,n)$ is determined by its first row: the second row consists of the remaining entries in non-decreasing order. Let $x_v$ be the number of entries $v$ in the first row; then row $2$ contains $2n-x_v$ entries $v$, so $0\\le x_v\\le 2n$ and $\\sum_v x_v=mn$.\n\n**Criterion.** Two non-decreasing rows satisfy $M_{1,j}<M_{2,j}$ for all $j$ if and only if for every $t$,\n$$\\#\\{j:M_{2,j}\\le t\\}\\ \\le\\ \\#\\{j:M_{1,j}\\le t-1\\}. \\tag{$*$}$$\n*Proof.* If $M_{2,j}\\le t$ then $M_{1,j}<M_{2,j}$ gives $M_{1,j}\\le t-1$, and distinct $j$ give distinct columns, so $(*)$ holds. Conversely, if $M_{1,j}\\ge M_{2,j}=t$ for some $j$, then (rows sorted) $M_{2,1},\\dots,M_{2,j}\\le t$ while at most $j-1$ entries of row $1$ are $\\le t-1$, violating $(*)$. $\\square$\n\nSo $|A(m,n)|$ is the number of integer vectors $(x_1,\\dots,x_m)$ with $0\\le x_v\\le2n$, $\\sum x_v=mn$, and $\\sum_{v\\le t}(2n-x_v)\\le\\sum_{v\\le t-1}x_v$ for $t=1,\\dots,m$.\n\n* $t=1$ gives $2n-x_1\\le0$, so $x_1=2n$ (all $1$s are in row $1$). The value $m$ cannot be in row $1$ (it would need a larger entry below it), so $x_m=0$. The condition for $t=m$ always holds with equality.\n* **$m=1$:** $x_1=2n$ and $x_1=0$ is impossible, so $|A(1,n)|=0$.\n* **$m=2$:** $x=(2n,0)$: $|A(2,n)|=1$.\n* **$m=3$:** $x_2=3n-2n=n$; all conditions hold. $|A(3,n)|=1$.\n* **$m=4$:** $x_2+x_3=2n$; $t=2$ reads $2n-x_2\\le2n$ and $t=3$ reads $4n-x_2-x_3\\le2n+x_2$, both automatic. So $x_2\\in\\{0,\\dots,2n\\}$: $|A(4,n)|=2n+1$.\n* **$m=5$:** $x_2+x_3+x_4=3n$ with $0\\le x_2,x_3,x_4\\le2n$. Condition $t=2$ is automatic, $t=4$ reads $6n-3n\\le 2n+x_2+x_3$, i.e. $x_4\\le2n$ (automatic), and $t=3$ reads $(2n-x_2)+(2n-x_3)\\le2n+x_2$, i.e.\n$$2x_2+x_3\\ge2n .$$\nFix $x_2=k\\in\\{0,\\dots,2n\\}$. Then $x_3$ determines $x_4=3n-k-x_3$, and the constraints become $\\max(0,\\,n-k,\\,2n-2k)\\le x_3\\le\\min(2n,\\,3n-k)$.\n  - For $0\\le k\\le n$: $2n-2k\\le x_3\\le 2n$, which is $2k+1$ values.\n  - For $n<k\\le2n$: $0\\le x_3\\le 3n-k$, which is $3n-k+1$ values.\n\nHence\n$$|A(5,n)|=\\sum_{k=0}^n(2k+1)+\\sum_{k=n+1}^{2n}(3n-k+1)=(n+1)^2+\\frac{n(3n+1)}2=\\frac{5n^2+5n+2}2 .$$\nFor example $|A(5,1)|=6$, $|A(5,2)|=16$, $|A(5,3)|=31$ (confirmed by brute force).\n\n**Beyond $m=5$.** The same criterion turns $|A(m,n)|$ into counting lattice points of a polytope, but no general closed form is known (for instance brute force gives $|A(6,n)|=15,65,175,369,671$ and $|A(7,n)|=36,260,981,2661$ for $n=1,2,3,\\dots$). These numbers count $2$-row semistandard Young tableaux of a fixed content, and arise in the study of torus quotients of Grassmannians (cf. OEIS A060854)."
+      }
+    ],
+    "topics": [
+      "counting"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": "Open problem (stated as such on the paper): only the cases m<=5 (incl. the official 'known case' m=5) are solved; the general |A(m,n)| has no known answer. Consider excluding from practice."
+  }
+]

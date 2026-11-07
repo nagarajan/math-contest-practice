@@ -1,0 +1,257 @@
+[
+  {
+    "id": "vtrmc-1995-01",
+    "bank": "vtrmc",
+    "source": {
+      "contest": "VTRMC",
+      "paper": "17th VTRMC (1995)",
+      "year": 1995,
+      "number": 1,
+      "url": "https://www.math.vt.edu/people/plinnell/Vtregional/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Evaluate $\\displaystyle\\int_0^3\\int_0^2\\frac{1}{1+\\bigl(\\max(3x,2y)\\bigr)^2}\\,dx\\,dy$.",
+    "image": null,
+    "choices": null,
+    "answer": "ln(37)/6",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "answerDisplay": "$\\frac{\\ln 37}{6}$",
+    "solutions": [
+      {
+        "title": "Split along the line $3x=2y$",
+        "body": "In the rectangle $0\\le x\\le2$, $0\\le y\\le3$ the diagonal $3x=2y$ joins $(0,0)$ and $(2,3)$. Let\n$$A=\\{3x\\le2y\\}=\\{0\\le y\\le3,\\ 0\\le x\\le\\tfrac{2y}3\\},\\qquad B=\\{3x\\ge2y\\}=\\{0\\le x\\le2,\\ 0\\le y\\le\\tfrac{3x}2\\}.$$\nOn $A$ the maximum is $2y$, on $B$ it is $3x$. Hence\n$$I=\\int_0^3\\!\\!\\int_0^{2y/3}\\frac{dx\\,dy}{1+4y^2}+\\int_0^2\\!\\!\\int_0^{3x/2}\\frac{dy\\,dx}{1+9x^2}=\\int_0^3\\frac{2y/3}{1+4y^2}\\,dy+\\int_0^2\\frac{3x/2}{1+9x^2}\\,dx .$$\nBoth are logarithmic integrals:\n$$\\int_0^3\\frac{2y/3}{1+4y^2}\\,dy=\\Bigl[\\tfrac1{12}\\ln(1+4y^2)\\Bigr]_0^3=\\frac{\\ln37}{12},\\qquad\\int_0^2\\frac{3x/2}{1+9x^2}\\,dx=\\Bigl[\\tfrac1{12}\\ln(1+9x^2)\\Bigr]_0^2=\\frac{\\ln37}{12}.$$\nSo $I=\\dfrac{\\ln37}{6}\\approx0.60182$ (numerical integration gives the same value).\n\n*Remark.* The official solution evaluates $\\iint\\frac{dx\\,dy}{(1+\\max(3x,2y))^2}$ instead, i.e. it reads the denominator as $(1+\\max)^2$, and obtains $\\frac{7\\ln7-6}{21}$. The integral as printed, with $1+(\\max)^2$, equals $\\frac{\\ln 37}{6}$.\n\n**Answer:** $\\frac{\\ln37}{6}$."
+      },
+      {
+        "title": "Rescale to a square",
+        "body": "Substitute $u=3x$, $v=2y$, so $dx\\,dy=\\frac16\\,du\\,dv$ and the rectangle becomes the square $[0,6]^2$:\n$$I=\\frac16\\iint_{[0,6]^2}\\frac{du\\,dv}{1+\\max(u,v)^2}.$$\nThe set of points of the square with $\\max(u,v)\\le s$ is $[0,s]^2$, of area $s^2$, so the \"layer\" where $\\max(u,v)\\in[s,s+ds]$ has area $2s\\,ds$. Therefore\n$$I=\\frac16\\int_0^6\\frac{2s}{1+s^2}\\,ds=\\frac16\\ln37 .$$\n\n**Answer:** $\\frac{\\ln37}{6}$."
+      }
+    ],
+    "topics": [
+      "calculus"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "vtrmc-1995-02",
+    "bank": "vtrmc",
+    "source": {
+      "contest": "VTRMC",
+      "paper": "17th VTRMC (1995)",
+      "year": 1995,
+      "number": 2,
+      "url": "https://www.math.vt.edu/people/plinnell/Vtregional/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $\\mathbb R^2$ denote the $xy$-plane, and define $\\theta:\\mathbb R^2\\to\\mathbb R^2$ by $\\theta(x,y)=(4x-3y+1,\\ 2x-y+1)$. Determine $\\theta^{100}(1,0)$, where $\\theta^{100}$ indicates applying $\\theta$ $100$ times.",
+    "image": null,
+    "choices": null,
+    "answer": "$\\theta^{100}(1,0)=\\bigl(98+3\\cdot2^{100},\\ 98+2\\cdot2^{100}\\bigr)$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Matrix powers",
+        "body": "Write $\\theta(\\mathbf v)=A\\mathbf v+\\mathbf u$ with $A=\\begin{pmatrix}4&-3\\\\2&-1\\end{pmatrix}$ and $\\mathbf u=\\binom11$. By induction,\n$$\\theta^{100}(\\mathbf v)=A^{100}\\mathbf v+\\bigl(A^{99}+A^{98}+\\dots+A+I\\bigr)\\mathbf u .$$\nThe characteristic polynomial is $(x-4)(x+1)+6=x^2-3x+2=(x-1)(x-2)$. An eigenvector for $1$ is $\\mathbf u=\\binom11$ (indeed $A\\mathbf u=\\binom11$), and one for $2$ is $\\binom32$.\n\n- Since $A\\mathbf u=\\mathbf u$, $\\bigl(A^{99}+\\dots+I\\bigr)\\mathbf u=100\\,\\mathbf u=\\binom{100}{100}$.\n- Write $\\mathbf v=\\binom10=-2\\binom11+\\binom32$. Then $A^{100}\\mathbf v=-2\\binom11+2^{100}\\binom32$.\n\nAdding, $\\theta^{100}(1,0)=\\bigl(-2+3\\cdot2^{100}+100,\\ -2+2\\cdot2^{100}+100\\bigr)=\\bigl(98+3\\cdot2^{100},\\ 98+2\\cdot2^{100}\\bigr)$.\n\n(Iterating $\\theta$ $100$ times with exact integer arithmetic gives the same pair.)"
+      },
+      {
+        "title": "Find quantities that behave simply",
+        "body": "Look for linear combinations of the coordinates that transform simply under $\\theta$. If $(x',y')=\\theta(x,y)$:\n- $x'-y'=(4x-3y+1)-(2x-y+1)=2(x-y)$, so $x-y$ doubles at each step;\n- $2x'-3y'=2(4x-3y+1)-3(2x-y+1)=2x-3y-1$, so $2x-3y$ decreases by $1$ at each step.\n\nStarting from $(1,0)$, where $x-y=1$ and $2x-3y=2$, after $100$ steps\n$$x-y=2^{100},\\qquad 2x-3y=2-100=-98 .$$\nSubstitute $x=y+2^{100}$ into $2x-3y=-98$ to get $-y+2^{101}=-98$, so $y=98+2^{101}=98+2\\cdot2^{100}$ and $x=98+3\\cdot2^{100}$.\n\n**Answer:** $\\theta^{100}(1,0)=(98+3\\cdot2^{100},\\ 98+2\\cdot2^{100})$."
+      }
+    ],
+    "topics": [
+      "linear-algebra",
+      "sequences-series"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "vtrmc-1995-03",
+    "bank": "vtrmc",
+    "source": {
+      "contest": "VTRMC",
+      "paper": "17th VTRMC (1995)",
+      "year": 1995,
+      "number": 3,
+      "url": "https://www.math.vt.edu/people/plinnell/Vtregional/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $n\\ge2$ be a positive integer and let $f(x)$ be the polynomial\n$$1-(x+x^2+\\cdots+x^n)+(x+x^2+\\cdots+x^n)^2-\\cdots+(-1)^n(x+x^2+\\cdots+x^n)^n.$$\nIf $r$ is an integer such that $2\\le r\\le n$, show that the coefficient of $x^r$ in $f(x)$ is zero.",
+    "image": null,
+    "choices": null,
+    "answer": "With $s=x+\\dots+x^n$, $f\\cdot(1+s)=1+(-1)^ns^{n+1}\\equiv1\\pmod{x^{n+1}}$ and $(1+s)(1-x)=1-x^{n+1}$, so $f\\equiv1-x\\pmod{x^{n+1}}$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Work modulo $x^{n+1}$",
+        "body": "Let $s=x+x^2+\\dots+x^n$, so $f=\\sum_{k=0}^n(-s)^k$. By the finite geometric sum,\n$$f\\cdot(1+s)=1-(-s)^{n+1}=1+(-1)^ns^{n+1}.$$\nEvery term of $s^{n+1}$ has degree at least $n+1$, so $f(1+s)\\equiv1\\pmod{x^{n+1}}$ (congruence of polynomials: the difference is divisible by $x^{n+1}$).\n\nAlso $(1-x)(1+s)=(1-x)(1+x+\\dots+x^n)=1-x^{n+1}\\equiv1\\pmod{x^{n+1}}$. Multiply the first congruence by $1-x$:\n$$f\\equiv f\\cdot(1+s)(1-x)\\equiv1-x\\pmod{x^{n+1}}.$$\nSo $f(x)=1-x+(\\text{terms of degree}\\ge n+1)$, and the coefficient of $x^r$ is $0$ for $2\\le r\\le n$. ∎\n\n(For example, for $n=3$ one gets $f=1-x-4x^5+\\dots$; a computer expansion for $n=2,\\dots,7$ confirms the zero coefficients.)"
+      },
+      {
+        "title": "Power series (official idea)",
+        "body": "Consider the formal power series $g(x)=\\sum_{k\\ge0}(-1)^k(x+\\dots+x^n)^k$. The terms with $k\\ge n+1$ only contain powers $x^m$ with $m\\ge k\\ge n+1$, so for $r\\le n$ the coefficient of $x^r$ in $f$ equals that in $g$. Since $x+\\dots+x^n=\\frac{x(1-x^n)}{1-x}$ has zero constant term, $g$ is a geometric series with ratio $-\\frac{x(1-x^n)}{1-x}$:\n$$g(x)=\\frac{1}{1+\\frac{x(1-x^n)}{1-x}}=\\frac{1-x}{1-x^{n+1}}=(1-x)\\bigl(1+x^{n+1}+x^{2n+2}+\\cdots\\bigr).$$\nThe coefficients of $x^2,\\dots,x^n$ here are $0$. ∎"
+      }
+    ],
+    "topics": [
+      "polynomials",
+      "algebra"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "vtrmc-1995-04",
+    "bank": "vtrmc",
+    "source": {
+      "contest": "VTRMC",
+      "paper": "17th VTRMC (1995)",
+      "year": 1995,
+      "number": 4,
+      "url": "https://www.math.vt.edu/people/plinnell/Vtregional/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $\\tau=(1+\\sqrt5)/2$. Show that $[\\tau^2n]=[\\tau[\\tau n]+1]$ for every positive integer $n$. Here $[r]$ denotes the largest integer that is not larger than $r$.",
+    "image": null,
+    "choices": null,
+    "answer": "With $p=[\\tau n]$ one has $p<\\tau n<p+1$; dividing by $\\tau$ and using $\\frac1\\tau=\\tau-1$ gives $n+p-1<p\\tau<n+p$, so $[\\tau p+1]=n+p=[\\tau n+n]=[\\tau^2n]$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Use $\\tau^2=\\tau+1$ and $1/\\tau=\\tau-1$",
+        "body": "Recall $\\tau^2=\\tau+1$, so $\\frac1\\tau=\\tau-1$, and $1<\\tau<2$; $\\tau$ is irrational.\n\nLet $p=[\\tau n]$, a positive integer (as $\\tau n>1$). Since $\\tau n$ is irrational, $p<\\tau n<p+1$. Dividing by $\\tau$ and using $\\frac1\\tau=\\tau-1$:\n$$p(\\tau-1)<n<(p+1)(\\tau-1),$$\ni.e.\n$$p\\tau-p<n<p\\tau-p+\\tau-1 .$$\nThe left inequality gives $p\\tau<n+p$. The right one gives $p\\tau>n+p+1-\\tau>n+p-1$ (as $\\tau<2$). Thus $n+p-1<p\\tau<n+p$, and therefore\n$$n+p<\\tau p+1<n+p+1,\\qquad\\text{so}\\qquad[\\tau[\\tau n]+1]=[\\tau p+1]=n+p .$$\nOn the other hand $\\tau^2n=\\tau n+n$, and $p<\\tau n<p+1$ gives $[\\tau^2n]=p+n$. The two sides agree. ∎\n\n(A direct check for $n=1,\\dots,300$ with exact arithmetic confirms the identity.)"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "algebra"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "vtrmc-1995-05",
+    "bank": "vtrmc",
+    "source": {
+      "contest": "VTRMC",
+      "paper": "17th VTRMC (1995)",
+      "year": 1995,
+      "number": 5,
+      "url": "https://www.math.vt.edu/people/plinnell/Vtregional/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $\\mathbb R$ denote the real numbers, and let $\\theta:\\mathbb R\\to\\mathbb R$ be a map with the property that $x>y$ implies $(\\theta(x))^3>\\theta(y)$. Prove that $\\theta(x)>-1$ for all $x$, and that $0\\le\\theta(x)\\le1$ for at most one value of $x$.",
+    "image": null,
+    "choices": null,
+    "answer": "Iterate along a chain $x=p_0>p_1>\\dots>p_n=y$: $\\theta(y)<\\theta(p_1)^{3^{n-1}}$. If $\\theta(x)\\le-1$ then $\\theta(p_1)<-1$ and the right side tends to $-\\infty$; if two values lie in $[0,1]$ a point between them has $0<\\theta<1$ and the right side tends to $0$, forcing a contradiction.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Iterate the inequality along a chain",
+        "body": "**Key estimate.** Let $y<z$ and let $n\\ge1$. Choose points $z=p_1>p_2>\\dots>p_n=y$ (possible for every $n$). Since $t\\mapsto t^3$ is increasing on $\\mathbb R$, the inequalities $\\theta(p_{i+1})<\\theta(p_i)^3$ can be chained:\n$$\\theta(y)<\\theta(p_{n-1})^3<\\theta(p_{n-2})^{9}<\\dots<\\theta(z)^{3^{n-1}}. \\tag{$*$}$$\n\n**Part 1: $\\theta(x)>-1$.** Suppose $\\theta(x)\\le-1$ for some $x$. Fix any $y<x$ and let $z=\\frac{x+y}2$. Then $\\theta(z)<\\theta(x)^3\\le-1$. By $(*)$, for every $n$,\n$$\\theta(y)<\\theta(z)^{3^{n-1}}=-|\\theta(z)|^{3^{n-1}}\\longrightarrow-\\infty\\quad(n\\to\\infty),$$\nbecause $|\\theta(z)|>1$ and $3^{n-1}$ is odd. This is impossible for the fixed real number $\\theta(y)$. Hence $\\theta(x)>-1$ for all $x$.\n\n**Part 2.** First a lemma: *if $a<b$ and $\\theta(a),\\theta(b)\\in[0,1]$, then $\\theta(a)=0$.* For $c\\in(a,b)$ we have $\\theta(c)^3>\\theta(a)\\ge0$, so $\\theta(c)>0$, and $\\theta(c)<\\theta(b)^3\\le1$; thus $0<\\theta(c)<1$ on $(a,b)$. Apply $(*)$ with $y=a$ and $z=\\frac{a+b}2$: $\\theta(a)<\\theta(z)^{3^{n-1}}\\to0$, so $\\theta(a)\\le0$, i.e. $\\theta(a)=0$.\n\nNow suppose $a<b$ both have $\\theta\\in[0,1]$. Let $c=\\frac{a+b}{2}$; as shown, $0<\\theta(c)<1$. Then $c<b$ with $\\theta(c),\\theta(b)\\in[0,1]$, so by the lemma $\\theta(c)=0$, a contradiction. Hence $0\\le\\theta(x)\\le1$ for at most one $x$. ∎"
+      }
+    ],
+    "topics": [
+      "real-analysis",
+      "inequalities",
+      "functional-equations"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "vtrmc-1995-06",
+    "bank": "vtrmc",
+    "source": {
+      "contest": "VTRMC",
+      "paper": "17th VTRMC (1995)",
+      "year": 1995,
+      "number": 6,
+      "url": "https://www.math.vt.edu/people/plinnell/Vtregional/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "A straight rod of length $4$ inches has ends which are allowed to slide along the perimeter of a square whose sides each have length $12$ inches. A paint brush is attached to the rod so that it can slide between the two ends of the rod. Determine the total possible area of the square which can be painted by the brush.",
+    "image": null,
+    "choices": null,
+    "answer": "6*pi",
+    "acceptedAnswers": null,
+    "answerUnit": "sq in",
+    "answerDisplay": "$6\\pi$",
+    "solutions": [
+      {
+        "title": "The astroid in each corner",
+        "body": "**Where can the rod be?** The two ends are $4$ inches apart. They cannot be on opposite sides ($12$ inches apart). If they are on the same side, the rod lies along that side and paints no area. Otherwise the ends are on two adjacent sides, within $4$ inches of the common corner; as $4<6$, the four corner regions do not overlap. So the answer is $4$ times the area $A$ painted near one corner.\n\n**One corner.** Put the corner at the origin with the sides along the positive axes. The rod joins $(4\\cos t,0)$ and $(0,4\\sin t)$, $0\\le t\\le\\frac\\pi2$; for $0<t<\\frac\\pi2$ its points $(x,y)$ satisfy $x,y\\ge0$ and\n$$\\frac{x}{\\cos t}+\\frac{y}{\\sin t}=4 .$$\nFix $(x,y)$ with $x,y>0$ and let $\\varphi(t)=\\frac{x}{\\cos t}+\\frac{y}{\\sin t}$ on $(0,\\frac\\pi2)$. It is continuous and tends to $+\\infty$ at both ends, so $(x,y)$ is painted iff $\\min\\varphi\\le4$. From $\\varphi'(t)=\\frac{x\\sin t}{\\cos^2t}-\\frac{y\\cos t}{\\sin^2t}=0$ we get $\\tan^3t=\\frac yx$, and there\n$$\\cos t=\\frac{x^{1/3}}{\\sqrt{x^{2/3}+y^{2/3}}},\\quad\\sin t=\\frac{y^{1/3}}{\\sqrt{x^{2/3}+y^{2/3}}},\\quad\\min\\varphi=\\bigl(x^{2/3}+y^{2/3}\\bigr)^{3/2}.$$\nSo the painted region is $\\{x,y\\ge0:\\ x^{2/3}+y^{2/3}\\le4^{2/3}\\}$, bounded by the astroid $x=4\\cos^3u$, $y=4\\sin^3u$.\n\n**Its area.**\n$$A=\\int_0^{\\pi/2}y\\,\\Bigl|\\frac{dx}{du}\\Bigr|\\,du=\\int_0^{\\pi/2}4\\sin^3u\\cdot12\\cos^2u\\sin u\\,du=48\\int_0^{\\pi/2}\\sin^4u\\cos^2u\\,du .$$\nSince $\\sin^4u\\cos^2u=\\frac{\\sin^22u}{4}\\cdot\\frac{1-\\cos2u}{2}$, and $\\int_0^{\\pi/2}\\sin^22u\\,du=\\frac\\pi4$, $\\int_0^{\\pi/2}\\sin^22u\\cos2u\\,du=0$, the integral is $\\frac{\\pi}{32}$ and $A=\\frac{3\\pi}{2}$.\n\n**Total:** $4\\cdot\\frac{3\\pi}2=6\\pi\\approx18.85$ square inches."
+      },
+      {
+        "title": "Maximise the height for fixed $x$ (official approach)",
+        "body": "With the corner at the origin, the rod from $(a,0)$ to $(0,\\sqrt{16-a^2})$ is the line $y=\\left(1-\\frac xa\\right)\\sqrt{16-a^2}$, $0\\le x\\le a$. For fixed $x\\in[0,4]$, the heights reached as $a$ runs from $x$ to $4$ fill an interval from $0$ to the maximum (by continuity), so the painted area is $\\int_0^4y_{\\max}(x)\\,dx$.\n\nSetting $\\frac{\\partial y}{\\partial a}=\\frac{x}{a^2}\\sqrt{16-a^2}-\\left(1-\\frac xa\\right)\\frac{a}{\\sqrt{16-a^2}}=0$ and multiplying by $a^2\\sqrt{16-a^2}$ gives $x(16-a^2)=a^3-xa^2$, i.e. $a^3=16x$. Use $a$ as the integration variable: $x=\\frac{a^3}{16}$, $dx=\\frac{3a^2}{16}da$, and $y_{\\max}=\\left(1-\\frac{a^2}{16}\\right)\\sqrt{16-a^2}=\\frac{(16-a^2)^{3/2}}{16}$:\n$$A=\\int_0^4\\frac{(16-a^2)^{3/2}}{16}\\cdot\\frac{3a^2}{16}\\,da .$$\nWith $a=4\\sin t$: $A=\\int_0^{\\pi/2}48\\cos^4t\\sin^2t\\,dt=\\int_0^{\\pi/2}6\\sin^22t\\,(1+\\cos2t)\\,dt=\\frac{3\\pi}{2}$. Four corners give $6\\pi$.\n\n**Answer:** $6\\pi$ square inches."
+      }
+    ],
+    "topics": [
+      "geometry",
+      "calculus"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "vtrmc-1995-07",
+    "bank": "vtrmc",
+    "source": {
+      "contest": "VTRMC",
+      "paper": "17th VTRMC (1995)",
+      "year": 1995,
+      "number": 7,
+      "url": "https://www.math.vt.edu/people/plinnell/Vtregional/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "If $n$ is a positive integer larger than $1$, let $n=\\prod p_i^{k_i}$ be the unique prime factorization of $n$, where the $p_i$'s are distinct primes, $2,3,5,7,11,\\dots$, and define $f(n)$ by $f(n)=\\sum k_ip_i$ and $g(n)$ by $g(n)=\\lim_{m\\to\\infty}f^m(n)$, where by $f^m$ is meant the $m$-fold application of $f$. Then $n$ is said to have *property H* if $n/2<g(n)<n$.\n\n(i) Evaluate $g(100)$ and $g(10^{10})$.\n\n(ii) Find all positive odd integers larger than $1$ that have property H.",
+    "image": null,
+    "choices": null,
+    "answer": "(i) $g(100)=g(10^{10})=5$ (chains $100\\to14\\to9\\to6\\to5$ and $10^{10}\\to70\\to14\\to9\\to6\\to5$). (ii) Only $n=9$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "$f$ is the sum of prime factors",
+        "body": "$f(n)$ is the sum of the prime factors of $n$ counted with multiplicity; hence $f(ab)=f(a)+f(b)$.\n\n**Lemma 1.** For integers $a,b\\ge2$, $a+b\\le ab$, with equality only for $a=b=2$ (because $ab-a-b=(a-1)(b-1)-1$). Consequently, if $n$ has prime factors $q_1,\\dots,q_m$ (with multiplicity), then $f(n)=q_1+\\dots+q_m\\le q_1\\cdots q_m=n$, with equality iff $n$ is prime or $n=4$. (Induct on $m$: $q_1+\\dots+q_m\\le q_1\\cdots q_{m-1}+q_m\\le q_1\\cdots q_m$; for $m\\ge3$ the first factor is $\\ge4$, so the last step is strict.)\n\n**$g$ is well defined.** By Lemma 1 the sequence $n,f(n),f^2(n),\\dots$ is a non-increasing sequence of integers $\\ge2$, so it is eventually constant; its final value $g(n)$ is a fixed point of $f$, i.e. a prime or $4$. Also $g(n)\\le f(n)$.\n\n**(i)** $100=2^2\\cdot5^2$: $f(100)=4+10=14$, $f(14)=2+7=9$, $f(9)=3+3=6$, $f(6)=2+3=5$, and $5$ is fixed. So $g(100)=5$. Next $f(10^{10})=f(2^{10}5^{10})=20+50=70$, $f(70)=2+5+7=14$, and then as before $14\\to9\\to6\\to5$. So $g(10^{10})=5$.\n\n*(The official solution stops at $6$ and states $g(100)=g(10^{10})=6$; but $f(6)=5$, so the limit is $5$.)*\n\n**(ii)** Let $n>1$ be odd.\n- If $n$ is prime, $g(n)=n$, so $n$ does not have property H.\n- **Lemma 2.** If $n$ is odd and composite and $n\\ne9,15$, then $f(n)\\le n/2$. Write $n=q_1\\cdots q_m$ with odd primes $q_1\\le\\dots\\le q_m$, $m\\ge2$. For $m=2$: $a+b\\le\\frac{ab}2\\iff(a-2)(b-2)\\ge4$; with $3\\le a\\le b$ odd primes this fails only for $a=3$, $b\\in\\{3,5\\}$, i.e. $n\\in\\{9,15\\}$. For $m\\ge3$: let $P=q_1\\cdots q_{m-1}\\ge9$ and $q=q_m\\ge3$; by Lemma 1, $f(n)=f(P)+q\\le P+q$, and $P+q\\le\\frac{Pq}{2}\\iff(P-2)(q-2)\\ge4$, true since $(P-2)(q-2)\\ge7$.\n\n  For such $n$, $g(n)\\le f(n)\\le n/2$, so $n$ does not have property H.\n- $n=9$: $9\\to6\\to5$, so $g(9)=5$ and $4.5<5<9$. **Property H holds.**\n- $n=15$: $15\\to8\\to6\\to5$, so $g(15)=5<7.5$. Property H fails.\n\nHence the only odd integer $n>1$ with property H is $9$. (A computer check of all odd $n<20000$ finds only $n=9$.)\n\n**Answer:** (i) $g(100)=5$, $g(10^{10})=5$; (ii) $n=9$ only. ∎"
+      }
+    ],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

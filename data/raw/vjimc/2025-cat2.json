@@ -1,0 +1,148 @@
+[
+  {
+    "id": "vjimc-2025-cat2-01",
+    "bank": "vjimc",
+    "source": {
+      "contest": "VJIMC",
+      "paper": "VJIMC 2025 Category II",
+      "year": 2025,
+      "number": 1,
+      "url": "https://vjimc.osu.cz/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $x_0=a$, $x_1=b$, $x_2=c$ for given numbers $a,b,c\\in\\mathbb R$, and let $x_{n+2}=\\dfrac{x_n+x_{n-1}}{2}$ for $n\\ge1$. Show that the sequence $(x_n)_{n=0}^\\infty$ converges, and find its limit.",
+    "image": null,
+    "choices": null,
+    "answer": "$\\lim x_n=\\dfrac{a+2b+2c}{5}$: the differences satisfy $x_{n+4}-x_{n+3}=-\\frac14(x_n-x_{n-1})$, so the sequence is Cauchy, and $x_{n+1}+x_n+\\frac12x_{n-1}$ is invariant (equal to $c+b+\\frac a2$).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Contracting differences and an invariant",
+        "body": "**Convergence.** Let $d_n=x_n-x_{n-1}$ ($n\\ge1$). For $n\\ge1$,\n$$x_{n+4}-x_{n+3}=\\frac{x_{n+2}+x_{n+1}}2-\\frac{x_{n+1}+x_n}2=\\frac{x_{n+2}-x_n}2=\\frac12\\Big(\\frac{x_n+x_{n-1}}2-x_n\\Big)=-\\frac14(x_n-x_{n-1}),$$\ni.e. $d_{n+4}=-\\frac14d_n$. Hence $|d_n|\\le D\\cdot4^{-n/4}$ for all $n\\ge1$, where $D=4\\max(|d_1|,|d_2|,|d_3|,|d_4|)$, so $\\sum|d_n|<\\infty$. Thus $x_n=x_0+\\sum_{k\\le n}d_k$ converges.\n\n**An invariant.** Let $y_n=x_{n+1}+x_n+\\frac12x_{n-1}$ for $n\\ge1$. Then\n$$y_{n+1}=x_{n+2}+x_{n+1}+\\tfrac12x_n=\\tfrac12x_n+\\tfrac12x_{n-1}+x_{n+1}+\\tfrac12x_n=x_{n+1}+x_n+\\tfrac12x_{n-1}=y_n,$$\nso $y_n=y_1=c+b+\\frac a2$ for all $n$.\n\n**The limit.** If $x_n\\to L$, then $y_n\\to L+L+\\frac L2=\\frac52L$, so $\\frac52L=c+b+\\frac a2$ and\n$$L=\\frac{a+2b+2c}{5}.$$\n∎"
+      },
+      {
+        "title": "Characteristic roots",
+        "body": "The recurrence $x_{k+3}=\\frac12x_{k+1}+\\frac12x_k$ ($k\\ge0$) has characteristic polynomial $2t^3-t-1=(t-1)(2t^2+2t+1)$ with distinct roots $1$ and $\\rho,\\bar\\rho=\\frac{-1\\pm i}2$, $|\\rho|=\\frac1{\\sqrt2}<1$. Hence $x_k=L+\\beta\\rho^k+\\bar\\beta\\bar\\rho^k$ for some constants, and $x_k\\to L$ because $\\rho^k\\to0$.\n\nTo find $L$, let $Q_k=2x_{k+2}+2x_{k+1}+x_k$. Using $2x_{k+3}=x_{k+1}+x_k$,\n$$Q_{k+1}=2x_{k+3}+2x_{k+2}+x_{k+1}=(x_{k+1}+x_k)+2x_{k+2}+x_{k+1}=Q_k,$$\nso $Q_k$ is constant. With $k=0$ it equals $2c+2b+a$, and in the limit it equals $5L$. So $L=\\frac{a+2b+2c}5$. ∎"
+      }
+    ],
+    "topics": [
+      "sequences-series"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "vjimc-2025-cat2-02",
+    "bank": "vjimc",
+    "source": {
+      "contest": "VJIMC",
+      "paper": "VJIMC 2025 Category II",
+      "year": 2025,
+      "number": 2,
+      "url": "https://vjimc.osu.cz/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $A,B$ be two $n\\times n$ complex matrices of the same rank, and let $k\\in\\mathbb N$. Prove that $A^{k+1}B^k=A$ if and only if $B^{k+1}A^k=B$.",
+    "image": null,
+    "choices": null,
+    "answer": "From $A^{k+1}B^k=A$: $\\ker B\\subseteq\\ker A$, so $\\ker A=\\ker B$, and $\\operatorname{rank}A^2=\\operatorname{rank}A$, so $\\mathbb C^n=\\operatorname{Im}A\\oplus\\ker A$. In such a basis $A=\\begin{pmatrix}A_1&0\\\\0&0\\end{pmatrix}$, $B=\\begin{pmatrix}B_1&0\\\\B_3&0\\end{pmatrix}$ with $A_1^kB_1^k=I$, which gives $B^{k+1}A^k=B$; the converse is symmetric.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Block decomposition along $\\operatorname{Im}A\\oplus\\ker A$",
+        "body": "The statement is symmetric in $A$ and $B$, so it suffices to show: if $A^{k+1}B^k=A$, then $B^{k+1}A^k=B$. (We take $k\\ge1$; for $k=0$ both identities are trivially true.) Let $r=\\operatorname{rank}A=\\operatorname{rank}B$.\n\n**$\\ker A=\\ker B$.** If $Bx=0$ then $Ax=A^{k+1}B^kx=0$. So $\\ker B\\subseteq\\ker A$, and both have dimension $n-r$; hence they are equal.\n\n**$\\mathbb C^n=\\operatorname{Im}A\\oplus\\ker A$.** From $r=\\operatorname{rank}(A^{k+1}B^k)\\le\\operatorname{rank}A^{k+1}\\le\\operatorname{rank}A^2\\le\\operatorname{rank}A=r$ we get $\\operatorname{rank}A^2=r$, so $\\ker A^2$ (which contains $\\ker A$) has the same dimension as $\\ker A$: $\\ker A^2=\\ker A$. If $x\\in\\ker A\\cap\\operatorname{Im}A$, $x=Ay$, then $A^2y=0$, so $y\\in\\ker A$ and $x=0$. Since the dimensions add up to $n$, the sum is direct and equals $\\mathbb C^n$.\n\n**Block form.** Choose a basis consisting of a basis of $\\operatorname{Im}A$ followed by a basis of $\\ker A=\\ker B$. $A$ maps $\\operatorname{Im}A$ into itself, injectively (its kernel meets $\\operatorname{Im}A$ trivially), and kills $\\ker A$; $B$ kills $\\ker A$. Hence\n$$A=\\begin{pmatrix}A_1&0\\\\0&0\\end{pmatrix},\\qquad B=\\begin{pmatrix}B_1&0\\\\B_3&0\\end{pmatrix},$$\nwith $A_1$ an invertible $r\\times r$ matrix. By induction $B^j=\\begin{pmatrix}B_1^j&0\\\\B_3B_1^{j-1}&0\\end{pmatrix}$ for $j\\ge1$.\n\n**Conclusion.** $A^{k+1}B^k=\\begin{pmatrix}A_1^{k+1}B_1^k&0\\\\0&0\\end{pmatrix}=A$ gives $A_1^{k+1}B_1^k=A_1$, i.e. $A_1^kB_1^k=I_r$ ($A_1$ invertible). Hence $A_1^k$ and $B_1^k$ are inverse to each other, so also $B_1^kA_1^k=I_r$. Now\n$$B^{k+1}A^k=\\begin{pmatrix}B_1^{k+1}&0\\\\B_3B_1^k&0\\end{pmatrix}\\begin{pmatrix}A_1^k&0\\\\0&0\\end{pmatrix}=\\begin{pmatrix}B_1\\,(B_1^kA_1^k)&0\\\\B_3\\,(B_1^kA_1^k)&0\\end{pmatrix}=\\begin{pmatrix}B_1&0\\\\B_3&0\\end{pmatrix}=B .$$\n∎"
+      }
+    ],
+    "topics": [
+      "linear-algebra"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "vjimc-2025-cat2-03",
+    "bank": "vjimc",
+    "source": {
+      "contest": "VJIMC",
+      "paper": "VJIMC 2025 Category II",
+      "year": 2025,
+      "number": 3,
+      "url": "https://vjimc.osu.cz/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Evaluate the integral\n$$\\int_0^\\infty\\frac{\\log(x+2)}{x^2+3x+2}\\,dx .$$",
+    "image": null,
+    "choices": null,
+    "answer": "pi^2/12+ln(2)^2/2",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "answerDisplay": "$\\dfrac{\\pi^2}{12}+\\dfrac{\\ln^2 2}{2}$",
+    "solutions": [
+      {
+        "title": "Substitution $x+1=1/t$",
+        "body": "Here $\\log$ is the natural logarithm, and $x^2+3x+2=(x+1)(x+2)$. Substitute $x+1=\\frac1t$, $t\\in(0,1]$, $dx=-\\frac{dt}{t^2}$. Then $x+2=\\frac{1+t}t$ and $(x+1)(x+2)=\\frac{1+t}{t^2}$, so\n$$\\int_0^\\infty\\frac{\\ln(x+2)}{(x+1)(x+2)}\\,dx=\\int_0^1\\ln\\frac{1+t}{t}\\cdot\\frac{t^2}{1+t}\\cdot\\frac{dt}{t^2}=\\int_0^1\\frac{\\ln(1+t)}{1+t}\\,dt-\\int_0^1\\frac{\\ln t}{1+t}\\,dt .$$\nThe first integral is $\\big[\\frac12\\ln^2(1+t)\\big]_0^1=\\frac12\\ln^22$. For the second, expand $\\frac1{1+t}=\\sum_{k\\ge0}(-1)^kt^k$ and use $\\int_0^1t^k\\ln t\\,dt=-\\frac1{(k+1)^2}$ (termwise integration is justified since the partial sums of the alternating series are bounded by $1$ and $|\\ln t|$ is integrable):\n$$-\\int_0^1\\frac{\\ln t}{1+t}\\,dt=\\sum_{k\\ge0}\\frac{(-1)^k}{(k+1)^2}=1-\\frac1{4}+\\frac19-\\dots=\\frac{\\pi^2}{12}.$$\nHence the integral equals\n$$\\frac{\\pi^2}{12}+\\frac{\\ln^22}{2}\\approx1.062694 .$$\n(Numerical integration confirms this value.) ∎"
+      },
+      {
+        "title": "Differentiation under the integral sign (official approach)",
+        "body": "Shifting $x\\mapsto x-1$, the integral is $I(1)$ where $I(a)=\\int_1^\\infty\\frac{\\ln(1+ax)}{x(1+x)}dx$, $I(0)=0$. Differentiating,\n$$I'(a)=\\int_1^\\infty\\frac{dx}{(1+x)(1+ax)}=\\frac1{1-a}\\Big[\\ln\\frac{1+x}{1+ax}\\Big]_1^\\infty=\\frac1{1-a}\\Big(\\ln\\frac1a-\\ln\\frac2{1+a}\\Big)=\\frac{\\ln\\frac{2a}{1+a}}{a-1}.$$\nSo\n$$I(1)=\\int_0^1\\frac{\\ln a}{a-1}\\,da+\\int_0^1\\frac{\\ln\\frac{1+a}{2}}{1-a}\\,da .$$\nThe first integral is $\\sum_{k\\ge0}\\int_0^1(-\\ln a)a^k\\,da=\\sum\\frac1{(k+1)^2}=\\frac{\\pi^2}6$. In the second, put $1-a=2v$: it becomes $\\int_0^{1/2}\\frac{\\ln(1-v)}{v}dv=-F(\\tfrac12)$, where $F(x)=-\\int_0^x\\frac{\\ln(1-v)}v\\,dv$. Since $\\frac{d}{dx}\\big[F(x)+F(1-x)+\\ln x\\ln(1-x)\\big]=0$ on $(0,1)$ and the bracket tends to $F(1)=\\frac{\\pi^2}6$ as $x\\to0^+$, we get $2F(\\frac12)+\\ln^22=\\frac{\\pi^2}6$, i.e. $F(\\frac12)=\\frac{\\pi^2}{12}-\\frac{\\ln^22}2$. Therefore\n$$I(1)=\\frac{\\pi^2}6-\\frac{\\pi^2}{12}+\\frac{\\ln^22}2=\\frac{\\pi^2}{12}+\\frac{\\ln^22}2 .$$\n∎ (The last lines of the official solution sheet contain sign slips; the value above is the correct one.)"
+      }
+    ],
+    "topics": [
+      "calculus",
+      "sequences-series"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "vjimc-2025-cat2-04",
+    "bank": "vjimc",
+    "source": {
+      "contest": "VJIMC",
+      "paper": "VJIMC 2025 Category II",
+      "year": 2025,
+      "number": 4,
+      "url": "https://vjimc.osu.cz/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $D=\\{z:|z|<1\\}$ be the unit disk in the complex plane, and suppose that $f\\colon D\\to D$ is a holomorphic function fulfilling the property $\\lim_{|z|\\to1}|f(z)|=1$. Let the Taylor series of $f$ be $f(z)=\\sum_{n=0}^\\infty a_nz^n$. Prove that $\\sum_{n=0}^\\infty n|a_n|^2$ is equal to the number of zeros of $f$ (counted with multiplicities).",
+    "image": null,
+    "choices": null,
+    "answer": "$f$ takes every value of $D$ exactly $K$ times ($K$ = number of zeros, by Rouché), so the area of $f(D)$ with multiplicity, $\\iint_D|f'|^2=\\pi\\sum n|a_n|^2$, equals $K\\pi$. (Alternatively: $f$ is a finite Blaschke product and $\\sum n|a_n|^2=\\frac1{2\\pi i}\\oint\\frac{f'}{f}dz=K$.)",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Area with multiplicity (official approach)",
+        "body": "**Preliminaries.** $f$ is not constant: a constant $c$ with $|c|<1$ violates $|f(z)|\\to1$. Since $|f(z)|\\to1$ uniformly as $|z|\\to1$, for every $\\rho<1$ there is $r_0<1$ with $|f(z)|>\\rho$ for $r_0<|z|<1$. Hence all zeros of $f$ lie in the compact disk $|z|\\le r_0$ (with $\\rho=\\frac12$), so there are finitely many, say $K$ counted with multiplicity.\n\n**Every $w\\in D$ is taken exactly $K$ times.** Fix $w\\in D$ and choose $r_0$ as above for $\\rho=\\frac{1+|w|}2$. For $r\\in(r_0,1)$, on $|z|=r$ we have $|(f-w)-f|=|w|<|f|$, so by Rouché's theorem $f-w$ and $f$ have the same number of zeros in $|z|<r$; and neither has zeros in $r_0<|z|<1$ (for $f-w$: $|f|>\\rho>|w|$ there). So $f$ takes the value $w$ exactly $K$ times in $D$, counting multiplicity.\n\n**Area computation.** The Jacobian of $z\\mapsto f(z)$ as a map of the plane is $|f'(z)|^2$, so by the change-of-variables (area) formula\n$$\\iint_D|f'(z)|^2\\,dA(z)=\\iint_D\\#\\{z\\in D:f(z)=w\\}\\,dA(w)=K\\pi ,$$\nwhere the preimages are counted with multiplicity (critical points form a discrete set and do not affect the integral). On the other hand, for $0<r<1$, by orthogonality of $e^{int}$ (Parseval),\n$$\\int_0^{2\\pi}|f'(re^{it})|^2dt=2\\pi\\sum_{n\\ge1}n^2|a_n|^2r^{2n-2},$$\nand integrating against $r\\,dr$ over $[0,1)$ (monotone convergence),\n$$\\iint_D|f'|^2\\,dA=2\\pi\\sum_{n\\ge1}n^2|a_n|^2\\int_0^1r^{2n-1}dr=\\pi\\sum_{n\\ge1}n|a_n|^2 .$$\nComparing, $\\sum_{n\\ge0}n|a_n|^2=K$, the number of zeros of $f$. ∎"
+      },
+      {
+        "title": "Blaschke product and the argument principle",
+        "body": "As in the first solution, $f$ has finitely many zeros $z_1,\\dots,z_K$ (with multiplicity), and $K\\ge1$ (otherwise $1/f$ would be holomorphic with $|1/f|\\to1$ at the boundary, so $|1/f|\\le1$ and $|f|\\le1$ by the maximum principle, i.e. $|f|=1$ and $f$ constant, impossible).\n\nLet $B(z)=\\prod_{j=1}^K\\frac{z-z_j}{1-\\bar z_jz}$. Each factor is holomorphic on a neighbourhood of $\\overline D$ and has modulus $1$ on $|z|=1$ (since $|z-z_j|=|\\bar z-\\bar z_j|=|1-\\bar z_jz|$ for $|z|=1$), so $|B(z)|\\to1$ as $|z|\\to1$. Then $g=f/B$ is holomorphic and zero-free on $D$ with $|g(z)|\\to1$ as $|z|\\to1$. The maximum principle applied to $g$ and to $1/g$ gives $|g|\\le1$ and $|1/g|\\le1$, so $|g|\\equiv1$ and $g\\equiv c$ is a unimodular constant. Thus $f=cB$.\n\n$B$ is a rational function whose poles $1/\\bar z_j$ lie outside $\\overline D$, so the Taylor series of $f$ has radius of convergence $>1$ and converges absolutely on $|z|=1$, as does that of $zf'(z)=\\sum na_nz^n$. By Parseval on the unit circle, using $|f|=1$ there (so $\\overline{f}=1/f$):\n$$\\sum_{n\\ge0}n|a_n|^2=\\frac1{2\\pi}\\int_0^{2\\pi}\\overline{f(e^{it})}\\;e^{it}f'(e^{it})\\,dt=\\frac1{2\\pi}\\int_0^{2\\pi}\\frac{f'(e^{it})}{f(e^{it})}\\,e^{it}\\,dt=\\frac1{2\\pi i}\\oint_{|z|=1}\\frac{f'(z)}{f(z)}\\,dz=K,$$\nby the argument principle ($f$ has no zeros on $|z|=1$). ∎"
+      }
+    ],
+    "topics": [
+      "complex-analysis"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

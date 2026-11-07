@@ -1,0 +1,191 @@
+[
+  {
+    "id": "usamts-2007-r4-01",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 19 Round 4 (2007-2008)",
+      "year": 2007,
+      "number": 1,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "In the diagram, each vertex is labeled with a different positive factor of 2008, such that if two vertices are connected by an edge, then the label of one vertex divides the label of the other vertex. In how many different ways can the vertices be labeled? Two labelings are considered the same if one labeling can be obtained by rotating and/or reflecting the other labeling.",
+    "image": "qimages/usamts/2007-r4/q01.webp",
+    "choices": null,
+    "answer": "4",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Place 251 and 8 first",
+        "body": "$2008 = 2^3\\cdot 251$, so the factors are $1, 2, 4, 8, 251, 502, 1004, 2008$ — exactly the 8 labels. The pairs in which neither divides the other are\n$$(2, 251),\\ (4, 251),\\ (4, 502),\\ (8, 251),\\ (8, 502),\\ (8, 1004);$$\nthese must not be joined by an edge.\n\nName the vertices by compass directions N, NE, E, SE, S, SW, W, NW. Each vertex is joined to its two neighbours on the octagon and to the two vertices two steps away; it is **not** joined to the three vertices \"opposite\" it (e.g. S is not joined to NW, N, NE).\n\nRotate so that $251$ is at S. Since $2, 4, 8$ cannot be adjacent to $251$, they occupy NW, N, NE.\n\n**Case 1: $8$ at N.** The vertices joined to N are NW, NE, W, E; $8$ is not adjacent to $502$ or $1004$, so W and E hold $1$ and $2008$. Reflecting, put $1$ at W and $2008$ at E. Then $2, 4$ are at NE, NW and $502, 1004$ at SE, SW. The remaining forbidden pair $(4, 502)$ must be non-adjacent: NE is non-adjacent only to SW (among SE, SW), and NW only to SE. So either $4$ at NE, $502$ at SW, or $4$ at NW, $502$ at SE: **2 labelings**.\n\n**Case 2: $8$ not at N.** Reflect so $8$ is at NE. Then $2, 4$ are at N and NW. The vertices not joined to NE are SW, W, S; S holds $251$, so $502$ and $1004$ are at W and SW. To keep $4$ and $502$ apart (NW is joined to W and SW, so $4$ cannot be at NW): $4$ is at N, which is not joined to SW, so $502$ at SW, and then $2$ at NW and $1004$ at W. The labels $1$ and $2008$ go at E and SE in either order (both divide or are divisible by everything): **2 labelings**.\n\nThe cases are distinguished by whether $8$ is opposite $251$, so no two of these labelings are equivalent. Total: $4$.\n\n**Answer: $4$**"
+      },
+      {
+        "title": "Computer check",
+        "body": "The graph is the octagon together with the two squares joining every second vertex (each vertex has degree 4). Checking all $8! = 40320$ assignments of the 8 factors and keeping those in which every edge joins a divisor–multiple pair gives $64$ valid labelings; grouping them under the $16$ rotations and reflections of the octagon leaves exactly $4$ classes, in agreement with the case analysis.\n\n**Answer: $4$**"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "counting",
+      "logic"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2007-r4-02",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 19 Round 4 (2007-2008)",
+      "year": 2007,
+      "number": 2,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Determine, with proof, the greatest integer $n$ such that\n$$\\left\\lfloor\\frac n2\\right\\rfloor + \\left\\lfloor\\frac n3\\right\\rfloor + \\left\\lfloor\\frac n{11}\\right\\rfloor + \\left\\lfloor\\frac n{13}\\right\\rfloor < n,$$\nwhere $\\lfloor x\\rfloor$ is the greatest integer less than or equal to $x$.",
+    "image": null,
+    "choices": null,
+    "answer": "1715",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Lower bound for each floor",
+        "body": "**$1715$ works:** $\\lfloor 1715/2\\rfloor + \\lfloor 1715/3\\rfloor + \\lfloor 1715/11\\rfloor + \\lfloor 1715/13\\rfloor = 857 + 571 + 155 + 131 = 1714 < 1715$.\n\n**Lemma.** For positive integers $x$ and $k$, $\\left\\lfloor\\frac xk\\right\\rfloor \\ge \\frac{x - k + 1}{k}$. Indeed, write $x = qk + r$ with $0 \\le r \\le k-1$; then $\\lfloor x/k\\rfloor = q$ and $\\frac{x-k+1}{k} = q + \\frac{r - (k-1)}{k} \\le q$.\n\n**No larger $n$ works.** If $n$ satisfies the inequality, then since both sides are integers, the left side is at most $n - 1$. By the lemma,\n$$n - 1 \\ge \\frac{n-1}{2} + \\frac{n-2}{3} + \\frac{n-10}{11} + \\frac{n-12}{13} = \\frac{859n - 2573}{858}.$$\nMultiplying by $858$: $858n - 858 \\ge 859n - 2573$, i.e. $n \\le 1715$.\n\n**Answer: $1715$**"
+      },
+      {
+        "title": "Why 1715: maximal remainders",
+        "body": "Since $\\frac12 + \\frac13 + \\frac1{11} + \\frac1{13} = \\frac{859}{858}$ exceeds $1$, the left side is roughly $\\frac{859}{858}n$, which beats $n$ for large $n$ unless the floors lose a lot. The loss is largest when $n$ leaves the largest possible remainder in every division: $n \\equiv 1 \\pmod 2$, $n \\equiv 2 \\pmod 3$, $n \\equiv 10 \\pmod{11}$, $n \\equiv 12 \\pmod{13}$, i.e. $n \\equiv -1 \\pmod{858}$. Then\n$$\\text{LHS} = \\frac{859n}{858} - \\left(\\frac12 + \\frac23 + \\frac{10}{11} + \\frac{12}{13}\\right) = \\frac{859n - 2573}{858},$$\nand $\\text{LHS} < n$ iff $n < 2573$, while being an integer $\\equiv -1 \\pmod{858}$: $n = 857$ or $n = 1715$ (the next one, $2573$, gives equality). For any other $n$ the loss is smaller, which is exactly what the lemma of the first solution quantifies. A direct computer check over all $n \\le 10^5$ confirms that $1715$ is the largest solution.\n\n**Answer: $1715$**"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "inequalities"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2007-r4-03",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 19 Round 4 (2007-2008)",
+      "year": 2007,
+      "number": 3,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Let $0 < \\mu < 1$. Define a sequence $\\{a_n\\}$ of real numbers by $a_1 = 1$ and for all integers $k \\ge 1$,\n$$a_{2k} = \\mu a_k, \\qquad a_{2k+1} = (1-\\mu)a_k.$$\nFind the value of the sum $\\displaystyle\\sum_{k=1}^\\infty a_{2k}a_{2k+1}$ in terms of $\\mu$.",
+    "image": null,
+    "choices": null,
+    "answer": "1/2",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "answerDisplay": "$\\frac{1}{2}$",
+    "solutions": [
+      {
+        "title": "Use the recursion on the sum of squares",
+        "body": "By definition, $a_{2k}a_{2k+1} = \\mu(1-\\mu)a_k^2$, so the required sum is $\\mu(1-\\mu)S$ with $S = \\sum_{k\\ge1} a_k^2$.\n\nSplit $S$ into $k = 1$, even $k$, and odd $k \\ge 3$:\n$$S = a_1^2 + \\sum_{k\\ge1}a_{2k}^2 + \\sum_{k\\ge1}a_{2k+1}^2 = 1 + \\mu^2 S + (1-\\mu)^2 S.$$\n($S$ is finite; see the second solution.) Hence $S\\left(1 - \\mu^2 - (1-\\mu)^2\\right) = 1$, and since $1 - \\mu^2 - (1 - \\mu)^2 = 2\\mu(1-\\mu) > 0$,\n$$S = \\frac{1}{2\\mu(1-\\mu)}, \\qquad \\sum_{k\\ge1}a_{2k}a_{2k+1} = \\mu(1-\\mu)\\cdot\\frac{1}{2\\mu(1-\\mu)} = \\frac12 .$$\nThe answer does not depend on $\\mu$.\n\n**Answer: $\\frac12$**"
+      },
+      {
+        "title": "Binary expansions",
+        "body": "Write $k$ in binary: $k = 1b_1b_2\\ldots b_m$. Each digit $0$ appended multiplies by $\\mu$ and each digit $1$ by $1-\\mu$, so $a_k = \\mu^{z}(1-\\mu)^{m - z}$, where $z$ is the number of zeros among $b_1, \\dots, b_m$.\n\nThe numbers with $m$ digits after the leading $1$ are $k = 2^m, \\dots, 2^{m+1}-1$, and\n$$\\sum_{k=2^m}^{2^{m+1}-1} a_k^2 = \\sum_{z=0}^m \\binom mz \\mu^{2z}(1-\\mu)^{2(m-z)} = \\left(\\mu^2 + (1-\\mu)^2\\right)^m.$$\nSince $0 < \\mu^2 + (1-\\mu)^2 = 1 - 2\\mu(1-\\mu) < 1$, the geometric series converges:\n$$\\sum_{k\\ge1} a_k^2 = \\sum_{m\\ge0}\\left(1 - 2\\mu(1-\\mu)\\right)^m = \\frac{1}{2\\mu(1-\\mu)}.$$\nTherefore $\\sum_k a_{2k}a_{2k+1} = \\mu(1-\\mu)\\sum_k a_k^2 = \\frac12$. (Numerically, with $\\mu = 0.3$ the partial sums approach $0.5$.)\n\n**Answer: $\\frac12$**"
+      }
+    ],
+    "topics": [
+      "sequences-series",
+      "algebra"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2007-r4-04",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 19 Round 4 (2007-2008)",
+      "year": 2007,
+      "number": 4,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Suppose that $w, x, y, z$ are positive real numbers such that $w + x < y + z$. Prove that it is impossible to simultaneously satisfy both\n$$(w + x)yz < wx(y + z) \\quad\\text{and}\\quad (w+x)(y+z) < wx + yz.$$",
+    "image": null,
+    "choices": null,
+    "answer": "Assume all three hold. Multiplying the last two and using $(w+x)^2 \\ge 4wx$ gives $wx > 3yz$; using $y + z > w + x$ in the last one gives $yz > 3wx$. Contradiction. (Alternatively: $(s-w)(s-x)(s+y)(s+z)$ would have all coefficients positive yet vanish at $s = w > 0$.)",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "AM-GM",
+        "body": "Suppose, for contradiction, that all three inequalities hold. All quantities involved are positive.\n\n**Step 1.** Multiply $wx(y+z) > (w+x)yz$ by $wx + yz > (w+x)(y+z)$:\n$$wx(y+z)(wx + yz) > yz(w+x)^2(y+z) \\ge 4wx\\,yz\\,(y+z),$$\nusing $(w+x)^2 \\ge 4wx$ (AM-GM). Dividing by $wx(y+z) > 0$ gives $wx + yz > 4yz$, i.e. $wx > 3yz$.\n\n**Step 2.** Using $y + z > w + x$:\n$$wx + yz > (w+x)(y+z) > (w+x)^2 \\ge 4wx,$$\nso $yz > 3wx$.\n\n**Step 3.** Multiplying $wx > 3yz$ and $yz > 3wx$ gives $wxyz > 9wxyz$, impossible since $wxyz > 0$.\n\nSo the three inequalities cannot all hold. ∎"
+      },
+      {
+        "title": "A polynomial with positive coefficients",
+        "body": "Suppose all three inequalities hold, and consider\n$$p(s) = (s - w)(s - x)(s + y)(s + z).$$\nExpanding,\n$$p(s) = s^4 + (y + z - w - x)s^3 + (wx + yz - wy - wz - xy - xz)s^2 + (wxy + wxz - wyz - xyz)s + wxyz .$$\n* $y + z - w - x > 0$ is the hypothesis.\n* $wx + yz - (w+x)(y+z) > 0$ is the third inequality.\n* $wx(y+z) - (w+x)yz > 0$ is the second inequality.\n* $wxyz > 0$.\n\nSo every coefficient of $p$ is positive, hence $p(s) > 0$ for all $s > 0$. But $p(w) = 0$ with $w > 0$ — a contradiction. ∎"
+      }
+    ],
+    "topics": [
+      "inequalities",
+      "algebra",
+      "polynomials"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2007-r4-05",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 19 Round 4 (2007-2008)",
+      "year": 2007,
+      "number": 5,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $P_1P_2P_3\\cdots P_{13}$ be a regular 13-gon. For $1 \\le i \\le 6$, let $d_i = P_1P_{i+1}$. The 13 diagonals of length $d_6$ enclose a smaller regular 13-gon, whose side length we denote by $s$. Express $s$ in the form\n$$s = c_1d_1 + c_2d_2 + c_3d_3 + c_4d_4 + c_5d_5 + c_6d_6,$$\nwhere $c_1, c_2, c_3, c_4, c_5$, and $c_6$ are integers.",
+    "image": "qimages/usamts/2007-r4/q05.webp",
+    "choices": null,
+    "answer": "$s = 2d_1 - 2d_3 + 2d_5 - d_6$ (i.e. $(c_1, \\dots, c_6) = (2, 0, -2, 0, 2, -1)$).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Chain of parallelograms",
+        "body": "**Parallel chords.** In a regular $n$-gon, chords $P_iP_j$ and $P_kP_l$ are parallel when $i + j \\equiv k + l \\pmod{13}$ (both are perpendicular to the same axis of symmetry). Also $P_iP_j$ has length $d_m$ where $m$ is the smaller of $|i - j|$ and $13 - |i - j|$.\n\nLet\n* $A = P_2P_8 \\cap P_3P_9$ and $B = P_1P_7 \\cap P_2P_8$ — consecutive vertices of the inner 13-gon, so $s = AB$;\n* $C = P_1P_9 \\cap P_2P_{10}$ and $D = P_1P_{11} \\cap P_{10}P_{13}$.\n\nOn the diagonal $P_2P_8$ (length $d_6$) the points occur in the order $P_2, B, A, P_8$, and by symmetry $P_2B = AP_8 =: x$. So $s = d_6 - 2x$ and $AP_2 = d_6 - x$.\n\n1. $P_2AP_9C$ is a parallelogram: $P_2A \\parallel P_9C$ (chords $P_2P_8$ and $P_1P_9$, sums $10$) and $AP_9 \\parallel CP_2$ (chords $P_3P_9$ and $P_2P_{10}$, sums $12$). So $P_9C = AP_2 = d_6 - x$. As $P_1P_9 = d_5$: $\\;d_6 - x = d_5 - P_1C$.\n2. $P_1CP_{10}D$ is a parallelogram: $P_2P_{10} \\parallel P_1P_{11}$ (sums $12$) and $P_1P_9 \\parallel P_{13}P_{10}$ (sums $10$ and $23 \\equiv 10$). So $P_1C = DP_{10} = P_{10}P_{13} - DP_{13} = d_3 - DP_{13}$.\n3. $P_{13}DP_{11}P_{12}$ is a parallelogram: $P_1P_{11} \\parallel P_{13}P_{12}$ (sums $12$, $25 \\equiv 12$) and $P_{13}P_{10} \\parallel P_{12}P_{11}$ (sums $23 \\equiv 23$). So $DP_{13} = P_{11}P_{12} = d_1$.\n\nPutting these together: $d_6 - x = d_5 - (d_3 - d_1)$, so $x = d_6 - d_5 + d_3 - d_1$ and\n$$s = d_6 - 2x = 2d_1 - 2d_3 + 2d_5 - d_6 .$$\n\n**Numerical check.** With circumradius $1$, $d_k = 2\\sin\\frac{k\\pi}{13}$, and both $s$ (computed from coordinates of $A$ and $B$) and $2d_1 - 2d_3 + 2d_5 - d_6$ equal $0.059419\\ldots$\n\n**Answer: $s = 2d_1 - 2d_3 + 2d_5 - d_6$**"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "trigonometry"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

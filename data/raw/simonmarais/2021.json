@@ -1,0 +1,297 @@
+[
+  {
+    "id": "simonmarais-2021-a1",
+    "bank": "simonmarais",
+    "source": {
+      "contest": "Simon Marais",
+      "paper": "Session A",
+      "year": 2021,
+      "number": 1,
+      "url": "https://www.simonmarais.org/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $a, b, c$ be real numbers such that $a \\neq 0$. Consider the parabola with equation\n$$y = ax^2 + bx + c,$$\nand the lines defined by the six equations\n$$\\begin{array}{lll} y = ax + b, & y = bx + c, & y = cx + a, \\\\ y = bx + a, & y = cx + b, & y = ax + c. \\end{array}$$\nSuppose that the parabola intersects each of these lines in at most one point.\n\nDetermine the maximum and minimum possible values of $\\dfrac{c}{a}$.",
+    "image": null,
+    "choices": null,
+    "answer": "Maximum $5$, minimum $1$ (the line $y=ax+c$ forces $b=a$; then $y=cx+b$ forces $(c/a-1)(c/a-5)\\le0$).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Two of the lines already force the answer",
+        "body": "Dividing $a,b,c$ by $a$ does not change any of the intersection equations (each is $ax^2+bx+c=$ line, and all coefficients scale together) nor the ratio $c/a$. So assume $a=1$; the parabola is $y=x^2+bx+c$ and we must find the range of $c$.\n\n**The line $y=ax+c=x+c$.** Intersections solve $x^2+bx+c=x+c$, i.e. $x(x+b-1)=0$, with roots $0$ and $1-b$. At most one intersection means $1-b=0$, so $b=1$.\n\n**The line $y=cx+b=cx+1$.** Intersections solve $x^2+x+c=cx+1$, i.e. $x^2+(1-c)x+(c-1)=0$. At most one real root means the discriminant is $\\le0$:\n$$(1-c)^2-4(c-1)=c^2-6c+5=(c-1)(c-5)\\le0\\iff1\\le c\\le5 .$$\nSo $1\\le\\frac ca\\le5$ always.\n\n**Both values occur.**\n* $(a,b,c)=(1,1,1)$: all six lines are $y=x+1$, and $x^2+x+1=x+1$ only at $x=0$.\n* $(a,b,c)=(1,1,5)$: the six lines are $y=x+1$ (twice), $y=x+5$ (twice) and $y=5x+1$ (twice). We get $x^2+x+5=x+1\\iff x^2=-4$ (no point), $x^2+x+5=x+5\\iff x^2=0$ (one point), $x^2+x+5=5x+1\\iff(x-2)^2=0$ (one point).\n\n**Answer:** the maximum of $c/a$ is $5$ and the minimum is $1$. ∎"
+      }
+    ],
+    "topics": [
+      "algebra",
+      "polynomials",
+      "inequalities"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "simonmarais-2021-a2",
+    "bank": "simonmarais",
+    "source": {
+      "contest": "Simon Marais",
+      "paper": "Session A",
+      "year": 2021,
+      "number": 2,
+      "url": "https://www.simonmarais.org/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Define the sequence of integers $a_1, a_2, a_3, \\ldots$ by $a_1 = 1$, and\n$$a_{n+1} = \\big(n + 1 - \\gcd(a_n, n)\\big) \\times a_n$$\nfor all integers $n \\ge 1$.\n\nProve that $\\dfrac{a_{n+1}}{a_n} = n$ if and only if $n$ is prime or $n = 1$.\n\n*Here $\\gcd(s, t)$ denotes the greatest common divisor of $s$ and $t$.*",
+    "image": null,
+    "choices": null,
+    "answer": "By induction, $a_n$ is divisible by every prime $<n$ and by no prime $\\ge n$; so $\\gcd(a_n,n)=1$ exactly when $n$ is $1$ or prime.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Track the prime factors of $a_n$",
+        "body": "Note $a_n\\ge1$ for all $n$ (each multiplier $n+1-\\gcd(a_n,n)\\ge1$ since $\\gcd(a_n,n)\\le n$), so the ratio is defined and equals $n+1-\\gcd(a_n,n)$. Thus $\\frac{a_{n+1}}{a_n}=n\\iff\\gcd(a_n,n)=1$.\n\n**Claim $P(n)$:** $a_n$ is divisible by every prime $<n$, and by no prime $\\ge n$.\n\n$P(1)$ holds since $a_1=1$. Assume $P(n)$.\n* *$n=1$ or $n$ prime.* No prime factor of $a_n$ is $\\ge n$, so $n\\nmid a_n$ when $n$ is prime, and $\\gcd(a_n,n)=1$. Then $a_{n+1}=n\\,a_n$. Its prime factors are those of $a_n$ (all $<n$) together with $n$ if $n$ is prime; it is divisible by all primes $<n$ and by $n$ if prime, i.e. by all primes $<n+1$. So $P(n+1)$ holds.\n* *$n>1$ composite.* $n$ has a prime factor $q<n$, which divides $a_n$ by $P(n)$, so $g=\\gcd(a_n,n)\\ge2$, and $g\\le n$. The multiplier $n+1-g$ lies in $[1,n-1]$, so all its prime factors are $<n$. Hence $a_{n+1}=(n+1-g)a_n$ is still divisible by all primes $<n$, which are all the primes $<n+1$ because $n$ is not prime, and has no prime factor $\\ge n$, in particular none $\\ge n+1$. So $P(n+1)$ holds.\n\n**Conclusion.** If $n=1$ or $n$ is prime, we showed $\\gcd(a_n,n)=1$, so $a_{n+1}/a_n=n$. If $n>1$ is composite, we showed $\\gcd(a_n,n)\\ge2$, so $a_{n+1}/a_n\\le n-1\\ne n$. ∎"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "sequences-series"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "simonmarais-2021-a3",
+    "bank": "simonmarais",
+    "source": {
+      "contest": "Simon Marais",
+      "paper": "Session A",
+      "year": 2021,
+      "number": 3,
+      "url": "https://www.simonmarais.org/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Let $\\mathcal{M}$ be the set of all $2021 \\times 2021$ matrices with at most two entries in each row equal to $1$ and all other entries equal to $0$.\n\nDetermine the size of the set $\\{\\det A : A \\in \\mathcal{M}\\}$.\n\n*Here $\\det A$ denotes the determinant of the matrix $A$.*",
+    "image": null,
+    "choices": null,
+    "answer": "1349",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Reduce to disjoint cycles",
+        "body": "We show that for an $n\\times n$ matrix of this type,\n$$\\{\\det A\\}=\\{0\\}\\cup\\{\\pm2^k:0\\le k\\le\\lfloor n/3\\rfloor\\}\\qquad(n\\ge2).$$\nFor $n=2021$, $\\lfloor2021/3\\rfloor=673$, giving $1+2\\cdot674=\\mathbf{1349}$ values.\n\n**Upper bound: $|\\det A|\\in\\{0\\}\\cup\\{2^k:k\\le\\lfloor n/3\\rfloor\\}$.** Induction on $n$; for $n=1$ the matrices are $(0),(1)$. Let $n\\ge2$.\n1. If some row is zero, $\\det A=0$.\n2. If some row has exactly one $1$, expanding along that row gives $\\det A=\\pm\\det A'$, where $A'$ is $(n-1)\\times(n-1)$ (delete that row and column) and still has at most two $1$s per row. By induction $|\\det A'|\\in\\{0\\}\\cup\\{2^k:k\\le\\lfloor (n-1)/3\\rfloor\\}$, which is fine.\n3. Otherwise every row has exactly two $1$s, so there are $2n$ ones. If some column is zero, $\\det A=0$. If some column has exactly one $1$, expand along it as in 2 (the minor still has at most two $1$s per row). Otherwise every column has $\\ge2$ ones, and since the total is $2n$, every column has exactly $2$.\n\nIn the last case form a multigraph: vertices = columns, and each row is an edge joining the two columns where it has its $1$s (no loops). Every vertex has degree $2$, so the graph is a disjoint union of cycles (a pair of equal rows is a $2$-cycle). Permuting rows and columns (which only changes the sign of $\\det$), $A$ becomes block diagonal with blocks $J_m=I_m+C_m$, one for each cycle of length $m\\ge2$, where $C_m$ is the cyclic permutation matrix with $1$s in positions $(i,i+1)$ mod $m$.\n\nThe eigenvalues of $C_m$ are the $m$-th roots of unity $\\omega$, so\n$$\\det J_m=\\prod_{\\omega^m=1}(1+\\omega)=(-1)^m\\prod_{\\omega^m=1}(-1-\\omega)=(-1)^m\\big((-1)^m-1\\big)=1-(-1)^m,$$\nusing $\\prod_\\omega(x-\\omega)=x^m-1$. So $\\det J_m=2$ for odd $m$ and $0$ for even $m$. Hence $|\\det A|$ is $0$ if some cycle is even, and $2^c$ otherwise, where $c$ is the number of cycles. Odd cycles have length $\\ge3$, so $3c\\le n$ and $c\\le\\lfloor n/3\\rfloor$.\n\n**Every value occurs.** The zero matrix gives $0$. For $0\\le k\\le\\lfloor n/3\\rfloor$, the block-diagonal matrix with $k$ blocks $J_3$ and an identity block $I_{n-3k}$ has at most two $1$s per row and determinant $2^k$; swapping two of its rows gives $-2^k$.\n\nSo the set of determinants is $\\{0,\\pm1,\\pm2,\\pm4,\\dots,\\pm2^{673}\\}$, which has $\\mathbf{1349}$ elements.\n\n(Brute-force check for $n=1,\\dots,5$: the determinant sets are $\\{0,1\\}$, $\\{0,\\pm1\\}$, $\\{0,\\pm1,\\pm2\\}$, $\\{0,\\pm1,\\pm2\\}$, $\\{0,\\pm1,\\pm2\\}$, as predicted.) ∎"
+      }
+    ],
+    "topics": [
+      "linear-algebra",
+      "graph-theory",
+      "counting"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "simonmarais-2021-a4",
+    "bank": "simonmarais",
+    "source": {
+      "contest": "Simon Marais",
+      "paper": "Session A",
+      "year": 2021,
+      "number": 4,
+      "url": "https://www.simonmarais.org/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "For each positive real number $r$, define $a_0(r) = 1$ and $a_{n+1}(r) = \\lfloor r a_n(r) \\rfloor$ for all integers $n \\ge 0$.\n\n(a) Prove that for each positive real number $r$, the limit\n$$L(r) = \\lim_{n \\to \\infty} \\frac{a_n(r)}{r^n}$$\nexists.\n\n(b) Determine all possible values of $L(r)$ as $r$ varies over the set of positive real numbers.\n\n*Here $\\lfloor x \\rfloor$ denotes the greatest integer less than or equal to $x$.*",
+    "image": null,
+    "choices": null,
+    "answer": "(a) $b_n=a_n/r^n$ is non-increasing and $\\ge0$. (b) $\\{0\\}\\cup\\left(\\tfrac12,1\\right]$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Monotonicity, a lower bound, and a semicontinuity argument",
+        "body": "Write $a_n=a_n(r)$ and $b_n(r)=a_n(r)/r^n$.\n\n**(a)** From $x-1<\\lfloor x\\rfloor\\le x$ we get $ra_n-1<a_{n+1}\\le ra_n$; dividing by $r^{n+1}$,\n$$b_n-\\frac1{r^{n+1}}<b_{n+1}\\le b_n.\\qquad(1)$$\nSo $(b_n)$ is non-increasing and bounded below by $0$, hence convergent. Moreover $L(r)\\le b_n(r)\\le b_0=1$ for every $n$.\n\n**(b) Answer: $\\{0\\}\\cup(\\frac12,1]$.**\n\n*Easy cases.* If $r\\in\\mathbb Z_{>0}$ then $a_n=r^n$ and $L=1$. If $0<r<1$ then $a_1=0$, so $L=0$. If $1<r<2$ then $a_n=1$ for all $n$ and $L=\\lim r^{-n}=0$.\n\n*If $r>2$, $r\\notin\\mathbb Z$, then $L(r)>\\frac12$.* Summing (1) from $n$ to $n+k-1$ and letting $k\\to\\infty$,\n$$L(r)\\ge b_n-\\sum_{j>n}r^{-j}=b_n-\\frac1{r^n(r-1)}.\\qquad(2)$$\nTake $n=1$, $b_1=\\lfloor r\\rfloor/r$.\n* If $r>3$: $\\lfloor r\\rfloor>r-1$, so $L\\ge\\frac{r-1}r-\\frac1{r(r-1)}=\\frac{r-2}{r-1}=1-\\frac1{r-1}>\\frac12$.\n* If $2<r<3$: $b_1=\\frac2r$ and $L-\\frac12\\ge\\frac2r-\\frac1{r(r-1)}-\\frac12=\\frac{(3-r)(r-2)}{2r(r-1)}>0$.\n\nSo $L(r)\\in\\{0\\}\\cup(\\frac12,1]$ always. It remains to show that every $s\\in(\\frac12,1)$ equals $L(r)$ for some $r\\in(2,3)$.\n\n**Lemma 1.** For $r\\in(2,3)$, $a_n(r)\\le\\frac{3^n+1}2$. *Proof:* true for $n=0$; if true for $n$, then $ra_n<3a_n\\le\\frac{3^{n+1}+1}2+1$, and since $\\frac{3^{n+1}+1}2$ is an integer, $a_{n+1}=\\lfloor ra_n\\rfloor\\le\\frac{3^{n+1}+1}2$. $\\square$\n\n**Lemma 2.** For $s\\in(\\frac12,1)$ there is $\\hat r\\in(2,3)$ with $L(\\hat r)<s$. *Proof:* choose $N$ with $\\frac{3^N+1}{2\\cdot3^N}<s$. By continuity in $r$, $\\frac{3^N+1}{2\\hat r^N}<s$ for some $\\hat r<3$ close to $3$, and then $L(\\hat r)\\le b_N(\\hat r)\\le\\frac{3^N+1}{2\\hat r^N}<s$ by Lemma 1. $\\square$\n\n**Lemma 3.** For $r\\in[2,3)$: $\\displaystyle\\limsup_{u\\to r^-}L(u)\\le L(r)\\le\\liminf_{u\\to r^+}L(u)$.\n\n*Proof.* $a_n(r)$ is non-decreasing in $r$ (induction: $\\lfloor v a_n(v)\\rfloor\\ge\\lfloor u a_n(u)\\rfloor$ for $v>u$). So for $1<u<v$ and every $n$, by (2) and $b_n(u)\\ge L(u)$,\n$$L(v)\\ge\\frac{a_n(v)}{v^n}-\\frac1{v^n(v-1)}\\ge\\frac{a_n(u)}{v^n}-\\frac1{v^n(v-1)}\\ge\\Big(\\frac uv\\Big)^nL(u)-\\frac1{v^n(v-1)}.\\qquad(3)$$\nFix $v$ and $n$, and let $u\\to v^-$: since $(u/v)^n\\to1$ and $0\\le L\\le1$, $L(v)\\ge\\limsup_{u\\to v^-}L(u)-\\frac1{v^n(v-1)}$; now let $n\\to\\infty$. Similarly fix $u$ and $n$ and let $v\\to u^+$ in (3): $\\liminf_{v\\to u^+}L(v)\\ge L(u)-\\frac1{u^n(u-1)}$; let $n\\to\\infty$. $\\square$\n\n**Every $s\\in(\\frac12,1)$ is a value.** Let $X=\\{x\\in(2,3):L(x)\\le s\\}$, nonempty by Lemma 2, and $r=\\inf X\\in[2,\\hat r]$.\n* $L(r)\\le s$: either $r\\in X$, or there are $x_k\\in X$ with $x_k\\to r^+$, and then Lemma 3 gives $L(r)\\le\\liminf_{u\\to r^+}L(u)\\le s$.\n* Since $L(2)=1>s$, $r\\ne2$, so $r\\in(2,3)$. Every $u\\in(2,r)$ is not in $X$, so $L(u)>s$; Lemma 3 gives $L(r)\\ge\\limsup_{u\\to r^-}L(u)\\ge s$.\n\nHence $L(r)=s$. Together with $L=0$ (e.g. $r=\\frac12$) and $L=1$ (integers), the set of values of $L$ is exactly $\\{0\\}\\cup(\\frac12,1]$. ∎\n\n(Numerically, e.g. $L(2.5)\\approx0.765$, $L(2.9)\\approx0.564$, $L(3.5)\\approx0.813$, and $300$ random $r\\in(2,3)$ gave values between $0.501$ and $0.975$.)"
+      }
+    ],
+    "topics": [
+      "real-analysis",
+      "sequences-series",
+      "number-theory"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "simonmarais-2021-b1",
+    "bank": "simonmarais",
+    "source": {
+      "contest": "Simon Marais",
+      "paper": "Session B",
+      "year": 2021,
+      "number": 1,
+      "url": "https://www.simonmarais.org/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $n \\ge 2$ be an integer, and let $O$ be the $n \\times n$ matrix whose entries are all equal to $0$. Two distinct entries of the matrix are chosen uniformly at random, and those two entries are changed from $0$ to $1$. Call the resulting matrix $A$.\n\nDetermine the probability that $A^2 = O$, as a function of $n$.",
+    "image": null,
+    "choices": null,
+    "answer": "$\\dfrac{(n-1)(n-2)}{n(n+1)}$",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Choose the entries one at a time",
+        "body": "Let the two $1$s be at positions $(i,j)$ and $(p,q)$. The entry $(x,y)$ of $A^2$ is $\\sum_zA_{xz}A_{zy}$, which is nonzero iff some $1$ at $(x,z)$ is followed by a $1$ at $(z,y)$, i.e. the column of one of the $1$s equals the row of one of the $1$s (possibly the same one). Hence\n$$A^2=O\\iff\\{i,p\\}\\cap\\{j,q\\}=\\varnothing .$$\n\nPick the two entries one after the other (this gives the same distribution). The first must be off the diagonal ($i\\ne j$): probability $\\frac{n^2-n}{n^2}$. Given that, the second $(p,q)$ must be off the diagonal, not in row $j$ ($p\\ne j$), not in column $i$ ($q\\ne i$), and different from $(i,j)$. Among the $n^2-n$ off-diagonal positions, $n-1$ lie in row $j$ and $n-1$ in column $i$, with exactly one, $(j,i)$, in both; and $(i,j)$ itself is in neither. So the number of good second choices is $(n^2-n)-(2n-3)-1=n^2-3n+2$, out of $n^2-1$. Therefore\n$$P(A^2=O)=\\frac{n^2-n}{n^2}\\cdot\\frac{n^2-3n+2}{n^2-1}=\\frac{n(n-1)\\cdot(n-1)(n-2)}{n^2(n-1)(n+1)}=\\frac{(n-1)(n-2)}{n(n+1)} .$$\n**Answer:** $\\dfrac{(n-1)(n-2)}{n(n+1)}$. ∎"
+      },
+      {
+        "title": "Count the good unordered pairs directly",
+        "body": "With the criterion $\\{i,p\\}\\cap\\{j,q\\}=\\varnothing$ from the first solution, count unordered pairs of distinct positions:\n* same row ($i=p$, $j\\ne q$): choose the row ($n$ ways) and two other columns: $n\\binom{n-1}2$;\n* same column ($j=q$, $i\\ne p$): likewise $n\\binom{n-1}2$;\n* different rows and columns: choose the $2$ rows, $2$ disjoint columns, and one of $2$ matchings: $2\\binom n2\\binom{n-2}2$.\n\nTotal: $n(n-1)(n-2)+\\frac{n(n-1)(n-2)(n-3)}2=\\frac{n(n-1)^2(n-2)}2$. Dividing by $\\binom{n^2}2=\\frac{n^2(n^2-1)}2$ gives $\\dfrac{(n-1)(n-2)}{n(n+1)}$.\n\n(Check: $n=3,4,5$ give $\\frac16,\\frac3{10},\\frac25$, matching a computer enumeration.) ∎"
+      }
+    ],
+    "topics": [
+      "probability",
+      "linear-algebra",
+      "counting"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "simonmarais-2021-b2",
+    "bank": "simonmarais",
+    "source": {
+      "contest": "Simon Marais",
+      "paper": "Session B",
+      "year": 2021,
+      "number": 2,
+      "url": "https://www.simonmarais.org/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $n$ be a positive integer. There are $n$ lamps, each with a switch that changes the lamp from on to off, or from off to on, each time it is pressed. The lamps are initially all off.\n\nYou are going to press the switches in a series of rounds. In the first round, you are going to press exactly $1$ switch; in the second round, you are going to press exactly $2$ switches; and so on, so that in the $k$th round you are going to press exactly $k$ switches. In each round you will press each switch at most once. Your goal is to finish a round with all of the lamps switched on.\n\nDetermine for which $n$ you can achieve this goal.",
+    "image": null,
+    "choices": null,
+    "answer": "All $n$ except $n=2$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Small cases and the step $n\to n+3$",
+        "body": "Since round $k$ presses $k$ different switches, at most $n$ rounds can be played.\n\n**$n=2$ is impossible.** After round 1 exactly one lamp is on; round 2 must press both switches, leaving only the other lamp on; there is no round 3. So the goal is never reached.\n\n**Small cases.** Number the lamps $1,\\dots,n$ and list the switches pressed in each round.\n* $n=1$: $\\{1\\}$.\n* $n=3$: $\\{1\\},\\{2,3\\}$.\n* $n=5$: $\\{1\\},\\{2,3\\},\\{1,4,5\\},\\{2,3,4,5\\},\\{1,2,3,4,5\\}$. (On-sets after each round: $\\{1\\}$, $\\{1,2,3\\}$, $\\{2,3,4,5\\}$, $\\varnothing$, everything.)\n\n**Step $n\\to n+3$.** Suppose $n$ lamps can all be turned on at the end of round $k$ (so $k\\le n$). With $n+3$ lamps:\n1. rounds $1,\\dots,k$: follow the strategy for lamps $1,\\dots,n$; now lamps $1..n$ are on and $n+1,n+2,n+3$ are off;\n2. round $k+1$: press lamps $1,\\dots,k$ (turning them off) and lamp $n+1$ — that is $k+1$ switches;\n3. round $k+2$: press lamps $1,\\dots,k$ again (back on) and lamps $n+2,n+3$ — that is $k+2$ switches.\n\nNow all $n+3$ lamps are on. Starting from $n=1,3,5$ this covers $1,4,7,\\dots$, $3,6,9,\\dots$ and $5,8,11,\\dots$, i.e. every $n\\ne2$.\n\n**Answer:** the goal can be achieved exactly when $n\\ne2$. ∎"
+      },
+      {
+        "title": "Work backwards with a parity count",
+        "body": "(A direct construction for $n\\ge4$; $n=1,3$ are as above.) Exactly one of $m=n$ and $m=n-2$ has $T_m=1+2+\\dots+m\\equiv n\\pmod2$, because $T_n-T_{n-2}=2n-1$ is odd. Choose that $m$; for $n\\ge4$ we have $n-m\\le2\\le m\\le n$.\n\nSince pressing a switch twice undoes it, it is enough to start with **all lamps on** and play rounds $m,m-1,\\dots,1$ (pressing $k$ switches in \"round $k$\") so that all lamps end off; then playing the same rounds forwards achieves the goal. Rule: in round $k$, if $\\ell\\ge k$ lamps are on, switch off $k$ of them; if $\\ell<k$, switch off all $\\ell$ and switch on $k-\\ell$ off lamps (possible as $k\\le m\\le n$).\n\nLet $\\ell_k$ be the number of lamps on just before (backward) round $k$. Then $\\ell_m=n$, and after round $m$ there are $n-m\\le2\\le m$ on, i.e. $\\ell_{m-1}\\le(m-1)+1$. If $\\ell_k\\le k+1$, the rule leaves either $\\ell_k-k\\le1$ or $k-\\ell_k\\le k$ lamps on, so $\\ell_{k-1}\\le k$. By induction, after round $1$ at most one lamp is on. But each press changes the parity of the number of lamps on, and there were $T_m\\equiv n$ presses starting from $n$ lamps on, so an even number of lamps is on at the end. Hence $0$ lamps are on, as required. ∎"
+      }
+    ],
+    "topics": [
+      "logic",
+      "counting",
+      "games"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "simonmarais-2021-b3",
+    "bank": "simonmarais",
+    "source": {
+      "contest": "Simon Marais",
+      "paper": "Session B",
+      "year": 2021,
+      "number": 3,
+      "url": "https://www.simonmarais.org/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Determine all functions $f : \\mathbb{R} \\to \\mathbb{R}$ that satisfy the following two properties.\n\n(i) The Riemann integral $\\displaystyle\\int_a^b f(t)\\, \\mathrm{d}t$ exists for all real numbers $a < b$.\n\n(ii) For every real number $x$ and every integer $n \\ge 1$ we have\n$$f(x) = \\frac{n}{2} \\int_{x - \\frac{1}{n}}^{x + \\frac{1}{n}} f(t)\\, \\mathrm{d}t.$$",
+    "image": null,
+    "choices": null,
+    "answer": "Exactly the affine functions $f(x)=px+q$ ($p,q\\in\\mathbb R$).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Midpoint identities on fine lattices",
+        "body": "**Affine functions work.** For $f(t)=pt+q$, the integral of a linear function over $[x-\\frac1n,x+\\frac1n]$ is its length $\\frac2n$ times the value at the midpoint, $px+q$; so $\\frac n2\\int=px+q=f(x)$, and $f$ is clearly Riemann integrable.\n\n**Conversely**, let $f$ satisfy (i) and (ii). Apply (ii) with $2n$ at the points $x\\pm\\frac1{2n}$:\n$$f\\!\\left(x-\\tfrac1{2n}\\right)+f\\!\\left(x+\\tfrac1{2n}\\right)=n\\int_{x-\\frac1n}^{x}f+n\\int_x^{x+\\frac1n}f=n\\int_{x-\\frac1n}^{x+\\frac1n}f=2f(x),$$\nusing (ii) with $n$ at $x$ in the last step. So with $h=\\frac1{2n}$, $f(x+h)-f(x)=f(x)-f(x-h)$ for all $x$: along the lattice $h\\mathbb Z$ the values of $f$ form an arithmetic progression, so $f(kh)=f(0)+k\\big(f(h)-f(0)\\big)$ for all $k\\in\\mathbb Z$, i.e. $f(x)=p_nx+q_n$ on $\\frac1{2n}\\mathbb Z$.\n\nBoth $0$ and $1=2n\\cdot\\frac1{2n}$ lie in $\\frac1{2n}\\mathbb Z$, so $q_n=f(0)=:q$ and $p_n=f(1)-f(0)=:p$ for every $n$. Every rational $a/b$ (with $b\\ge1$) equals $\\frac{2a}{2b}\\in\\frac1{2b}\\mathbb Z$, so\n$$f(x)=px+q\\qquad\\text{for all }x\\in\\mathbb Q .$$\n\n**Extending to all reals.** Let $g(t)=f(t)-(pt+q)$; it is Riemann integrable on every interval and vanishes on $\\mathbb Q$. Its integral over any interval is $0$: Riemann sums with rational tags are all $0$, and since $g$ is integrable these sums converge to $\\int g$. Hence for every real $x$, by (ii) with $n=1$,\n$$f(x)=\\frac12\\int_{x-1}^{x+1}f=\\frac12\\int_{x-1}^{x+1}(pt+q)\\,dt+\\frac12\\int_{x-1}^{x+1}g=px+q .$$\n**Answer:** $f(x)=px+q$ for constants $p,q$. ∎"
+      },
+      {
+        "title": "Regularity and a maximum principle (sketch of the official approach)",
+        "body": "(i)+(ii) with $n=1$ make $f$ locally bounded ($|f(x)|\\le\\frac12\\int_{x-1}^{x+1}|f|$) and then Lipschitz on bounded intervals: for $x<y$,\n$|f(y)-f(x)|=\\frac12\\left|\\int_{x+1}^{y+1}f-\\int_{x-1}^{y-1}f\\right|\\le M|y-x|$. So $f$ is continuous, and $F(x)=\\int_0^xf$ is $C^1$. Then $f(x)=\\frac12(F(x+1)-F(x-1))$ is $C^1$, and repeating, $f$ is $C^2$.\n\nIf $f''(x_0)>0$ for some $x_0$, then $g(x)=f(x)-f(x_0)-f'(x_0)(x-x_0)$ also satisfies (ii), $g(x_0)=g'(x_0)=0$ and $g''>0$ on some $I=[x_0-\\frac1n,x_0+\\frac1n]$, so $g>0$ on $I\\setminus\\{x_0\\}$ (strict convexity). But (ii) gives $0=g(x_0)=\\frac n2\\int_Ig>0$, a contradiction. Likewise $f''(x_0)<0$ is impossible (use $-f$). So $f''\\equiv0$ and $f$ is affine. ∎"
+      }
+    ],
+    "topics": [
+      "functional-equations",
+      "real-analysis",
+      "calculus"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "simonmarais-2021-b4",
+    "bank": "simonmarais",
+    "source": {
+      "contest": "Simon Marais",
+      "paper": "Session B",
+      "year": 2021,
+      "number": 4,
+      "url": "https://www.simonmarais.org/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "*The following problem is open in the sense that the answer to part (b) is not currently known. A proof of part (a) will be awarded 5 points. Up to 7 additional points may be awarded for progress on part (b).*\n\nLet $p(x)$ be a polynomial of degree $d$ with coefficients belonging to the set of rational numbers $\\mathbb{Q}$. Suppose that, for each $1 \\le k \\le d-1$, $p(x)$ and its $k$th derivative $p^{(k)}(x)$ have a common root in $\\mathbb{Q}$; that is, there exists $r_k \\in \\mathbb{Q}$ such that $p(r_k) = p^{(k)}(r_k) = 0$.\n\n(a) Prove that if $d$ is prime then there exist constants $a, b, c \\in \\mathbb{Q}$ such that\n$$p(x) = c(ax + b)^d.$$\n\n(b) For which integers $d \\ge 2$ does the conclusion of part (a) hold?",
+    "image": null,
+    "choices": null,
+    "answer": "(a) Normalise so that $0$ is a root, the $r_k$ are coprime integers and the coefficients are coprime integers; working mod $d$ shows $d\\mid a_k$ for $k<d$, then $d\\mid r_k$ for all $k$, forcing all $r_k=0$ and $p=a_dx^d$. (b) is an **open problem** (the Casas-Alvero conjecture over $\\mathbb Q$).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Part (a): work modulo $d$",
+        "body": "**Normalisation.** Replacing $p(x)$ by $p(x+r_1)$ shifts all the common roots by $-r_1$, so we may assume $p(0)=0$ (one of the $r_k$ is $0$). Replacing $p(x)$ by $p(\\lambda x)$ ($\\lambda\\in\\mathbb Q_{>0}$) replaces $r_k$ by $r_k/\\lambda$, because $\\frac{d^k}{dx^k}p(\\lambda x)=\\lambda^kp^{(k)}(\\lambda x)$; choosing $\\lambda$ suitably we may assume all $r_k$ are integers, and, if they are not all $0$, with $\\gcd=1$. Finally multiply $p$ by a rational constant so that its coefficients are integers with $\\gcd=1$. Write\n$$p(x)=a_dx^d+a_{d-1}x^{d-1}+\\dots+a_1x\\qquad(a_0=0,\\ a_d\\ne0).$$\nThese changes are invertible and preserve the form $c(ax+b)^d$, so it suffices to show $p(x)=a_dx^d$, i.e. $a_1=\\dots=a_{d-1}=0$.\n\n**The derivative condition.** By Taylor's formula, $\\frac{p^{(k)}(r)}{k!}=\\sum_{j=k}^d a_j\\binom jk r^{j-k}$, so $p^{(k)}(r_k)=0$ means\n$$\\sum_{j=k}^{d}a_j\\binom jk r_k^{\\,j-k}=0.\\qquad(*)$$\n\n**Step 1: $d\\mid a_k$ for $1\\le k\\le d-1$.** If not, take the largest such $k$ with $d\\nmid a_k$. Reduce $(*)$ modulo $d$: the terms with $k<j<d$ vanish ($d\\mid a_j$ by maximality), and the term $j=d$ vanishes because $d\\mid\\binom dk$ for a prime $d$ and $0<k<d$. What is left is $a_k\\equiv0\\pmod d$, a contradiction.\n\n**Step 2: $d\\mid r_k$ for all $k$.** Since $\\gcd(a_1,\\dots,a_d)=1$ and $d\\mid a_1,\\dots,a_{d-1}$, we have $d\\nmid a_d$. Now $0=p(r_k)\\equiv a_dr_k^d\\pmod d$, so the prime $d$ divides $r_k^d$, hence $r_k$.\n\n**Step 3.** If the $r_k$ were not all $0$ they would have $\\gcd 1$, contradicting Step 2 ($d\\ge2$). So $r_k=0$ for all $k$, and $(*)$ with $r_k=0$ reads $a_k=0$ (only the term $j=k$ survives). Hence $p(x)=a_dx^d$, and undoing the normalisation, the original polynomial has the form $c(ax+b)^d$ with $a,b,c\\in\\mathbb Q$. ∎\n\n*Remark.* The same argument works when $d=q^m$ is a prime power, working modulo $q$: $q\\mid\\binom{q^m}k$ for $0<k<q^m$."
+      },
+      {
+        "title": "Part (b): what is known (open problem)",
+        "body": "Part (b) is the **Casas-Alvero conjecture** (2001) over $\\mathbb Q$: a polynomial of degree $d$ over a field of characteristic $0$ that shares a root with each of its derivatives $p',\\dots,p^{(d-1)}$ must be of the form $c(x-r)^d$. The conjecture predicts that the conclusion holds for **every** $d\\ge2$, but this is not known.\n\nKnown results: the argument of part (a) (mod $q$) proves it for $d$ a prime power $q^m$ (and, using valuations, over any field of characteristic $0$); it is also known for $d$ twice a prime power and some other special degrees. The general case remains open, so part (b) has no known complete answer."
+      }
+    ],
+    "topics": [
+      "polynomials",
+      "number-theory",
+      "algebra"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": "Part (b) is an open problem (stated as such on the paper; the Casas-Alvero conjecture over Q); only part (a) is proved. Consider excluding from practice or treating as part (a) only."
+  }
+]

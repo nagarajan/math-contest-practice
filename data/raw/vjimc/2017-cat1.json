@@ -1,0 +1,156 @@
+[
+  {
+    "id": "vjimc-2017-cat1-01",
+    "bank": "vjimc",
+    "source": {
+      "contest": "VJIMC",
+      "paper": "VJIMC 2017 Category I",
+      "year": 2017,
+      "number": 1,
+      "url": "https://vjimc.osu.cz/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $f\\colon\\mathbb R\\to\\mathbb R$ be a continuous function satisfying\n$$f(x+2y)=2f(x)f(y)$$\nfor every $x,y\\in\\mathbb R$. Prove that $f$ is constant.",
+    "image": null,
+    "choices": null,
+    "answer": "$y=0$ gives $f\\equiv0$ or $f(0)=\\frac12$. In the second case $x=0$ gives $f(2y)=f(y)$, so $f(a)=f(a/2^n)\\to f(0)=\\frac12$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Halving the argument",
+        "body": "Put $y=0$: $f(x)=2f(x)f(0)$ for all $x$, i.e. $f(x)\\big(1-2f(0)\\big)=0$.\n\n* If $f(0)\\ne\\frac12$, then $f(x)=0$ for all $x$, and $f$ is constant.\n* If $f(0)=\\frac12$, put $x=0$: $f(2y)=2f(0)f(y)=f(y)$ for all $y$. By induction $f(a)=f(a/2^n)$ for every $a\\in\\mathbb R$ and $n\\in\\mathbb N$. Letting $n\\to\\infty$ and using continuity at $0$,\n$$f(a)=\\lim_{n\\to\\infty}f\\!\\left(\\frac a{2^n}\\right)=f(0)=\\frac12 .$$\n\nIn both cases $f$ is constant ($f\\equiv0$ or $f\\equiv\\frac12$, and both indeed satisfy the equation). ∎"
+      },
+      {
+        "title": "Only two possible values",
+        "body": "As in the first solution, $y=0$ gives $f\\equiv0$ unless $f(0)=\\frac12$. Assume $f(0)=\\frac12$, so $f(2y)=f(y)$ for all $y$ (take $x=0$). Take $x=2y$:\n$$f(4y)=2f(2y)f(y)=2f(y)^2 .$$\nBut also $f(4y)=f(2y)=f(y)$. Hence $f(y)=2f(y)^2$, so $f(y)\\in\\{0,\\frac12\\}$ for every $y$.\n\nA continuous function on the connected set $\\mathbb R$ taking only the two values $0$ and $\\frac12$ is constant (by the intermediate value theorem it cannot jump from one value to the other). Since $f(0)=\\frac12$, we get $f\\equiv\\frac12$. ∎"
+      }
+    ],
+    "topics": [
+      "functional-equations",
+      "real-analysis"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "vjimc-2017-cat1-02",
+    "bank": "vjimc",
+    "source": {
+      "contest": "VJIMC",
+      "paper": "VJIMC 2017 Category I",
+      "year": 2017,
+      "number": 2,
+      "url": "https://vjimc.osu.cz/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "We say that we extend a finite sequence of positive integers $(a_1,\\dots,a_n)$ if we replace it by\n$$(1,2,\\dots,a_1-1,a_1,1,2,\\dots,a_2-1,a_2,1,2,\\dots,a_3-1,a_3,\\dots,1,2,\\dots,a_n-1,a_n),$$\ni.e., each element $k$ of the original sequence is replaced by $1,2,\\dots,k-1,k$. Géza takes the sequence $(1,2,\\dots,9)$ and he extends it $2017$ times. Then he chooses randomly one element of the resulting sequence. What is the probability that the chosen element is $1$?",
+    "image": null,
+    "choices": null,
+    "answer": "1009/1013",
+    "answerDisplay": "$\\frac{1009}{1013}$",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Count occurrences by induction",
+        "body": "**Claim:** after $m$ extensions the number $j\\in\\{1,\\dots,9\\}$ occurs $\\binom{9-j+m}{m}$ times.\n\nFor $m=0$ each $j$ occurs once. For the induction step, a $j$ in the $m$-times extended sequence comes from exactly one element $\\ge j$ of the $(m-1)$-times extended sequence. So the count is\n$$\\sum_{i=j}^{9}\\binom{9-i+m-1}{m-1}=\\sum_{t=0}^{9-j}\\binom{t+m-1}{m-1}=\\binom{9-j+m}{m}$$\nby the hockey-stick identity.\n\nWith $m=2017$, the number $1$ occurs $\\binom{2025}{2017}=\\binom{2025}{8}$ times. The total length is\n$$\\sum_{j=1}^9\\binom{9-j+2017}{2017}=\\binom{2026}{2018}=\\binom{2026}{8}$$\n(hockey stick again). Hence\n$$P=\\frac{\\binom{2025}{8}}{\\binom{2026}{8}}=\\frac{2026-8}{2026}=\\frac{2018}{2026}=\\frac{1009}{1013}.$$\n**Answer: $\\frac{1009}{1013}$.**"
+      },
+      {
+        "title": "Elements as monotone chains",
+        "body": "Trace each element of the final sequence back through the extensions. Its value $j_m$ came from a parent of value $j_{m-1}\\ge j_m$, which came from $j_{m-2}\\ge j_{m-1}$, and so on, back to $j_0\\in\\{1,\\dots,9\\}$. Conversely, every chain $9\\ge j_0\\ge j_1\\ge\\dots\\ge j_m\\ge1$ describes exactly one element. So the elements correspond to multisets of size $m+1$ from $\\{1,\\dots,9\\}$, and there are $\\binom{m+9}{8}$ of them.\n\nThe elements equal to $1$ are the chains ending in $j_m=1$; the rest of the chain is any multiset of size $m$. There are $\\binom{m+8}{8}$ of them. So the probability is\n$$\\frac{\\binom{m+8}{8}}{\\binom{m+9}{8}}=\\frac{m+1}{m+9}\\ \\overset{m=2017}{=}\\ \\frac{2018}{2026}=\\frac{1009}{1013}.$$\n(Check: $m=1$ gives the sequence $1,1,2,1,2,3,\\dots$ of length $45$ with nine $1$'s, i.e. $\\frac15=\\frac{2}{10}$.) **Answer: $\\frac{1009}{1013}$.**"
+      }
+    ],
+    "topics": [
+      "probability",
+      "counting"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "vjimc-2017-cat1-03",
+    "bank": "vjimc",
+    "source": {
+      "contest": "VJIMC",
+      "paper": "VJIMC 2017 Category I",
+      "year": 2017,
+      "number": 3,
+      "url": "https://vjimc.osu.cz/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $P$ be a convex polyhedron. Jaroslav writes a non-negative real number to every vertex of $P$ in such a way that the sum of these numbers is $1$. Afterwards, to every edge he writes the product of the numbers at the two endpoints of that edge. Prove that the sum of the numbers at the edges is at most $\\frac38$.",
+    "image": null,
+    "choices": null,
+    "answer": "Some maximizer is supported on a clique of the (planar) edge graph, hence on at most $4$ vertices, and $\\sum_{i<j\\le4}a_ia_j\\le\\frac38$ when $\\sum a_i=1$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Optimal weighting lives on a clique",
+        "body": "Let $G=(V,E)$ be the graph of vertices and edges of $P$; it is planar. Let\n$$\\mathcal A=\\Big\\{(a_v)_{v\\in V}:a_v\\ge0,\\ \\sum a_v=1\\Big\\},\\qquad f(a)=\\sum_{vw\\in E}a_va_w .$$\n$\\mathcal A$ is compact and $f$ is continuous, so $f$ attains a maximum $M$ on $\\mathcal A$. Among all maximizers choose $a^*$ with the largest number of zero entries.\n\n**Lemma 1.** Any two vertices $w\\ne w'$ with $a^*_w,a^*_{w'}>0$ are adjacent.\n\n*Proof.* Suppose $ww'\\notin E$. Move weight $\\varepsilon$ from $w$ to $w'$: $a_w=a^*_w-\\varepsilon$, $a_{w'}=a^*_{w'}+\\varepsilon$, all other entries fixed. Since $w,w'$ are not adjacent, no term of $f$ contains both, so $g(\\varepsilon)=f(\\dots)$ is a linear function of $\\varepsilon$. It is admissible for $\\varepsilon\\in[-a^*_{w'},a^*_w]$, an interval containing $0$ in its interior, and it has a maximum at the interior point $\\varepsilon=0$. Hence $g$ is constant. Then $\\varepsilon=a^*_w$ gives another maximizer with one more zero entry, a contradiction. $\\square$\n\nSo the support of $a^*$ spans a complete subgraph of the planar graph $G$. Since $K_5$ is not planar, the support has at most $4$ vertices, with weights $a,b,c,d\\ge0$ (some possibly $0$), $a+b+c+d=1$. Thus\n$$M=f(a^*)\\le ab+ac+ad+bc+bd+cd .$$\n\n**Lemma 2.** If $a,b,c,d\\ge0$ and $a+b+c+d=1$, then $ab+ac+ad+bc+bd+cd\\le\\frac38$.\n\n*Proof.* Let $s_2=ab+ac+ad+bc+bd+cd$. Then\n$$\\tfrac38(a+b+c+d)^2-s_2=\\tfrac38(a^2+b^2+c^2+d^2)-\\tfrac14 s_2=\\tfrac18\\sum_{\\text{pairs}}(x-y)^2\\ge0 .\\ \\square$$\n\nHence the sum on the edges is at most $M\\le\\frac38$. Equality holds, e.g., for a tetrahedron with all weights $\\frac14$. ∎"
+      },
+      {
+        "title": "Four colour theorem",
+        "body": "By the four colour theorem, the planar graph $G$ has a proper colouring with classes $V_1,\\dots,V_4$; no edge joins two vertices of the same class. Let $s_i=\\sum_{v\\in V_i}a_v$, so $s_1+s_2+s_3+s_4=1$. Every edge joins two different classes, and all weights are nonnegative, so\n$$\\sum_{vw\\in E}a_va_w\\le\\sum_{1\\le i<j\\le4}\\ \\sum_{v\\in V_i,\\,w\\in V_j}a_va_w=\\sum_{1\\le i<j\\le4}s_is_j\\le\\frac38$$\nby Lemma 2 of the first solution. ∎ (The first solution avoids this deep theorem and uses only the non-planarity of $K_5$.)"
+      }
+    ],
+    "topics": [
+      "graph-theory",
+      "inequalities"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "vjimc-2017-cat1-04",
+    "bank": "vjimc",
+    "source": {
+      "contest": "VJIMC",
+      "paper": "VJIMC 2017 Category I",
+      "year": 2017,
+      "number": 4,
+      "url": "https://vjimc.osu.cz/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $f\\colon(1,\\infty)\\to\\mathbb R$ be a continuously differentiable function satisfying $f(x)\\le x^2\\log(x)$ and $f'(x)>0$ for every $x\\in(1,\\infty)$. Prove that\n$$\\int_1^\\infty\\frac1{f'(x)}\\,dx=\\infty .$$",
+    "image": null,
+    "choices": null,
+    "answer": "Cauchy–Schwarz: $\\big(\\int_e^a\\frac1{f'}\\big)\\big(\\int_e^a\\frac{f'}{(x\\log x)^2}\\big)\\ge(\\log\\log a)^2$. Integration by parts with $f\\le x^2\\log x$ gives $\\int_e^a\\frac{f'}{(x\\log x)^2}\\le2\\log\\log a+C$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Cauchy–Schwarz and integration by parts",
+        "body": "Let $a>e$. By the Cauchy–Schwarz inequality, applied to $\\frac1{\\sqrt{f'}}$ and $\\frac{\\sqrt{f'}}{x\\log x}$,\n$$\\Big(\\int_e^a\\frac{dx}{f'(x)}\\Big)\\Big(\\int_e^a\\frac{f'(x)}{(x\\log x)^2}dx\\Big)\\ge\\Big(\\int_e^a\\frac{dx}{x\\log x}\\Big)^2=(\\log\\log a)^2 .\\tag{1}$$\n\nNext we bound the second factor. Note $\\frac{d}{dx}(x\\log x)^{-2}=-2\\frac{\\log x+1}{(x\\log x)^3}$. Integrating by parts and then using $f(x)\\le x^2\\log x$ (the weight $\\frac{\\log x+1}{(x\\log x)^3}$ is positive):\n$$\\int_e^a\\frac{f'}{(x\\log x)^2}dx=\\frac{f(a)}{(a\\log a)^2}-\\frac{f(e)}{e^2}+2\\int_e^a\\frac{f(x)(\\log x+1)}{(x\\log x)^3}dx$$\n$$\\le\\frac1{\\log a}-\\frac{f(e)}{e^2}+2\\int_e^a\\Big(\\frac1{x\\log x}+\\frac1{x\\log^2x}\\Big)dx=\\frac1{\\log a}-\\frac{f(e)}{e^2}+2\\log\\log a+2-\\frac2{\\log a}.$$\nSo $0<\\int_e^a\\frac{f'}{(x\\log x)^2}\\le2\\log\\log a+C$ with $C=2-\\frac{f(e)}{e^2}$; positivity holds because $f'>0$. From (1),\n$$\\int_1^\\infty\\frac{dx}{f'(x)}\\ge\\int_e^a\\frac{dx}{f'(x)}\\ge\\frac{(\\log\\log a)^2}{2\\log\\log a+C}\\xrightarrow[a\\to\\infty]{}\\infty .\\ ∎$$"
+      },
+      {
+        "title": "Dyadic blocks and AM-HM",
+        "body": "Here is a variant of the same idea. On an interval $[u,v]$ the Cauchy–Schwarz (AM–HM) inequality gives\n$$\\int_u^v\\frac{dx}{f'}\\ge\\frac{(v-u)^2}{\\int_u^vf'}=\\frac{(v-u)^2}{f(v)-f(u)} .$$\nTake $u_k=2^k$ and $v_k=2^{k+1}$ with $k\\ge1$. Since $f$ is increasing, $f(u_k)\\ge f(2)$. Therefore\n$$0<f(v_k)-f(u_k)\\le 4^{k+1}(k+1)\\log2+|f(2)|,$$\nand\n$$\\int_{2^k}^{2^{k+1}}\\frac{dx}{f'}\\ge\\frac{4^k}{4^{k+1}(k+1)\\log2+|f(2)|}\\ge\\frac{1}{8(k+1)\\log 2}$$\nfor all large $k$ (as soon as $|f(2)|\\le4^{k+1}(k+1)\\log2$). The intervals $[2^k,2^{k+1}]$ are disjoint, so summing over $k$ gives a divergent harmonic series. Hence $\\int_1^\\infty\\frac{dx}{f'}=\\infty$. ∎"
+      }
+    ],
+    "topics": [
+      "calculus",
+      "real-analysis",
+      "inequalities"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

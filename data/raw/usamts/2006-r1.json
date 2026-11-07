@@ -1,0 +1,200 @@
+[
+  {
+    "id": "usamts-2006-r1-01",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 18 Round 1 (2006-2007)",
+      "year": 2006,
+      "number": 1,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "When we perform a 'digit slide' on a number, we move its units digit to the front of the number. For example, the result of a 'digit slide' on $6471$ is $1647$. What is the smallest positive integer with $4$ as its units digit such that the result of a 'digit slide' on the number equals $4$ times the number?",
+    "image": null,
+    "choices": null,
+    "answer": "102564",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Build the number from the right",
+        "body": "Let $N$ be the number; the digit slide of $N$ is $4N$.\n\nThe units digit of $N$ is $4$, so the units digit of $4N$ is the units digit of $16$, namely $6$. But $4N$ is $N$ with its last digit moved to the front, so the digits of $4N$ after its first digit are the digits of $N$ except the last one. Hence the second-to-last digit of $N$ is the last digit of $4N$. Repeating:\n\n- $N$ ends in $4$; $4 \\times 4 = 16$, so $4N$ ends in $6$ and $N$ ends in $64$.\n- $4 \\times 64 = 256$, so $4N$ ends in $56$ and $N$ ends in $564$.\n- $4 \\times 564 = 2256$, so $N$ ends in $2564$.\n- $4 \\times 2564 = 10256$, so $N$ ends in $02564$.\n- $4 \\times 02564 = 10256$, so $N$ ends in $102564$.\n\nNow $4 \\times 102564 = 410256$, which is exactly the digit slide of $102564$, so we can stop. Any valid $N$ must end in these digits and the process cannot stop earlier (at each earlier stage the candidate fails, e.g. $4\\times 2564 = 10256 \\ne 4256$), so the smallest such number is $\\boxed{102564}$."
+      },
+      {
+        "title": "Set up an equation",
+        "body": "Write $N = 10x + 4$, where $x$ has $k$ digits (allowing the first digit of $x$ to be anything nonzero). The slide gives $4\\cdot 10^k + x$, so\n$$4(10x + 4) = 4\\cdot 10^k + x \\iff 39x = 4\\cdot 10^k - 16 .$$\nWe need the smallest $k$ with $39 \\mid 4\\cdot 10^k - 16 = 4(10^k - 4)$, i.e. $10^k \\equiv 4 \\pmod{39}$. Powers of $10$ mod $39$: $10, 22, 25, 16, 4$. So $k = 5$ is the first, giving\n$$x = \\frac{4\\cdot 10^5 - 16}{39} = \\frac{399984}{39} = 10256 ,$$\nwhich indeed has $5$ digits. So $N = 102564$. (Equivalently, $N$'s digits are the repeating block of $\\frac{4}{39} = 0.\\overline{102564}$.)"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "arithmetic"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2006-r1-02",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 18 Round 1 (2006-2007)",
+      "year": 2006,
+      "number": 2,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "text",
+    "prompt": "(a) In how many different ways can the six empty circles in the upper diagram be filled in with the numbers $2$ through $7$ such that each number is used once, and each number is either greater than both its neighbors, or less than both its neighbors?\n\n(b) In how many different ways can the seven empty circles in the lower diagram be filled in with the numbers $2$ through $8$ such that each number is used once, and each number is either greater than both its neighbors, or less than both its neighbors?\n\nGive both answers, (a) then (b).",
+    "image": "qimages/usamts/2006-r1/q02.webp",
+    "choices": null,
+    "answer": "0, 272",
+    "acceptedAnswers": [
+      "0 and 272",
+      "(a) 0, (b) 272",
+      "0; 272",
+      "0,272"
+    ],
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Highs and lows",
+        "body": "Call a circle *high* if its number is greater than both neighbours and *low* if it is less than both.\n\n**Alternation.** If a circle is high, its neighbour is smaller than it, so that neighbour cannot be high; it must be low. Similarly a low circle's neighbours are high. So going around the ring, highs and lows alternate.\n\n**(a)** The ring has $7$ circles (the $1$ plus six empty ones). Alternation around an odd cycle is impossible, so there are $\\boxed{0}$ ways.\n\n**(b)** The ring has $8$ circles: $4$ highs and $4$ lows, alternating, and $1$ is a low. A high needs two smaller numbers, so $1, 2$ are lows; a low needs two larger numbers, so $7, 8$ are highs. The other two lows come from $\\{3,4,5,6\\}$: $\\binom42 = 6$ cases. We count arrangements of all $8$ numbers on an unlabelled ring with $8$ positions, then divide by $4$ (the $1$ may sit in any of the $4$ low positions; fixing it as in the diagram removes this factor).\n\nEvery low position is adjacent to two high positions and vice versa; the constraint is only that each low is smaller than its two high neighbours.\n\n1. **Lows $\\{1,2,3,4\\}$, highs $\\{5,6,7,8\\}$.** Always fine: $\\frac{4!\\,4!}{4} = 144$.\n2. **Lows $\\{1,2,3,5\\}$, highs $\\{4,6,7,8\\}$.** Only constraint: $4$ is not next to $5$. Place the lows ($4!$); $4$ has $2$ allowed high spots; the other highs $3!$. Total $\\frac{4!\\cdot2\\cdot3!}{4} = 72$.\n3. **Lows $\\{1,2,4,5\\}$, highs $\\{3,6,7,8\\}$.** The high $3$ must have neighbours from $\\{1,2\\}$ only. Place the highs ($4!$); $4,5$ go in the $2$ low spots not adjacent to $3$ ($2!$), $1,2$ in the other two ($2!$): $\\frac{4!\\cdot2\\cdot2}{4} = 24$.\n4. **Lows $\\{1,2,3,6\\}$, highs $\\{4,5,7,8\\}$.** The low $6$ must have neighbours $7, 8$. By the same count, $24$.\n5. **Lows $\\{1,2,4,6\\}$, highs $\\{3,5,7,8\\}$.** $6$ must be between $7$ and $8$; $3$ must be between $1$ and $2$. Put $6$ in one of $4$ low spots; then $3$ must be in one of the $2$ high spots not adjacent to $6$; order $7,8$ ($2$) and $1,2$ ($2$); then $4$ and $5$ fill the last low and high spots. These two spots are adjacent; the $4$ is also next to one of $7, 8$ and the $5$ is also next to one of $1, 2$, so both conditions hold. Total $\\frac{4\\cdot2\\cdot2\\cdot2}{4} = 8$.\n6. **Lows $\\{1,2,5,6\\}$, highs $\\{3,4,7,8\\}$.** Both $5$ and $6$ need two neighbours from $\\{7,8\\}$, so both would be adjacent to both $7$ and $8$, forming a $4$-cycle inside an $8$-cycle — impossible. $0$ ways.\n\nTotal: $144 + 72 + 24 + 24 + 8 + 0 = \\boxed{272}$.\n\nSo the answers are **(a) 0** and **(b) 272**. (A computer search over all $6!$ and $7!$ fillings confirms both.)"
+      },
+      {
+        "title": "A recursion on where 2 goes",
+        "body": "Let $A_n$ be the number of valid fillings of a ring of $n+1$ circles with $1$ fixed and $2, \\dots, n+1$ placed in the other $n$ circles. Part (a) asks for $A_6$ and part (b) for $A_7$.\n\nAs shown in the first approach, highs and lows alternate, so the ring length $n+1$ must be even: $A_n = 0$ for even $n$, in particular $A_6 = 0$.\n\nFor odd $n = 2m+1$, label the empty circles $a_1, \\dots, a_{2m+1}$ going around from $1$. Since $1$ is low, $a_i$ is low exactly for even $i$. The number $2$ cannot be high, so $2 = a_{2k}$ for some $k \\in \\{1, \\dots, m\\}$. Then $1$ and $2$ (both lows) cut the ring into two arcs of $2k-1$ and $2m-2k+1$ circles. Everything on the arcs is bigger than $1$ and $2$, so each arc behaves exactly like a smaller instance (its ends are highs next to a low that is smaller than everything). Choosing which of $3, \\dots, n+1$ go on the first arc gives\n$$A_{2m+1} = \\sum_{k=1}^{m} \\binom{2m}{2k-1} A_{2k-1} A_{2m-2k+1}, \\qquad A_1 = 1 .$$\nSo $A_3 = \\binom21 A_1^2 = 2$, $A_5 = \\binom41 A_1A_3 + \\binom43 A_3 A_1 = 16$, and\n$$A_7 = \\binom61 A_1 A_5 + \\binom63 A_3^2 + \\binom65 A_5 A_1 = 96 + 80 + 96 = 272 .$$\nAnswers: (a) $0$, (b) $272$."
+      }
+    ],
+    "topics": [
+      "counting",
+      "logic"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2006-r1-03",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 18 Round 1 (2006-2007)",
+      "year": 2006,
+      "number": 3,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "(a) An equilateral triangle is divided into $25$ congruent smaller equilateral triangles, as shown. Each of the $21$ vertices is labeled with a number such that for any three consecutive vertices on a line segment, their labels form an arithmetic sequence. The vertices of the original equilateral triangle are labeled $1$, $4$, and $9$. Find the sum of the $21$ labels.\n\n(b) Generalize part (a) by finding the sum of the labels when there are $n^2$ smaller congruent equilateral triangles, and the labels of the original equilateral triangle are $a$, $b$, and $c$.",
+    "image": "qimages/usamts/2006-r1/q03.webp",
+    "choices": null,
+    "answer": "(a) $98$; (b) $\\dfrac{(a+b+c)(n+1)(n+2)}{6}$",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Symmetry and adding labellings",
+        "body": "**Labels are determined.** Along each line of the grid the labels are an arithmetic progression (three consecutive terms in AP for every triple means the whole line is an AP). The two sides from the top vertex are therefore determined by the corner labels, then each horizontal row is the AP between its two end labels. So the labelling is fixed by the corner labels; write $f_n(a,b,c)$ for its sum when the corners (top, bottom-left, bottom-right) are $a, b, c$.\n\n**Additivity.** If two valid labellings are added vertex by vertex, every line still carries an AP (a sum of APs is an AP), so the result is the valid labelling with the summed corner labels. Hence\n$$f_n(a_1,b_1,c_1) + f_n(a_2,b_2,c_2) = f_n(a_1+a_2,\\ b_1+b_2,\\ c_1+c_2).$$\n\n**Symmetry.** Rotating the triangle by $120^\\circ$ maps the grid to itself, so $f_n(a,b,c) = f_n(b,c,a) = f_n(c,a,b)$. Adding the three rotations,\n$$3 f_n(a,b,c) = f_n(s, s, s), \\qquad s = a+b+c .$$\nWith all three corners equal to $s$, every label is $s$ (constant APs). The number of vertices is $1 + 2 + \\dots + (n+1) = \\frac{(n+1)(n+2)}{2}$, so\n$$f_n(a,b,c) = \\frac13\\cdot s\\cdot\\frac{(n+1)(n+2)}{2} = \\boxed{\\frac{(a+b+c)(n+1)(n+2)}{6}} .$$\n\n**(a)** With $n = 5$ and corners $1, 4, 9$: $\\dfrac{14 \\cdot 6 \\cdot 7}{6} = \\boxed{98}$."
+      },
+      {
+        "title": "Sum row by row",
+        "body": "Put $a$ at the top, $b$ bottom-left, $c$ bottom-right. Number the horizontal rows $m = 1, \\dots, n+1$ from the top; row $m$ has $m$ vertices. Its left end lies on side $ab$ and has label $\\ell_m = a + \\frac{b-a}{n}(m-1)$; its right end has $r_m = a + \\frac{c-a}{n}(m-1)$. The row is an AP, so its sum is\n$$s_m = \\frac{m(\\ell_m + r_m)}{2} = m\\,a + \\frac{b+c-2a}{2n}\\,m(m-1).$$\nSumming with $\\sum_{m=1}^{n+1} m = \\frac{(n+1)(n+2)}{2}$ and $\\sum_{m=1}^{n+1} m(m-1) = \\frac{(n+1)n(n+2)}{3}$:\n$$S = a\\frac{(n+1)(n+2)}{2} + \\frac{b+c-2a}{2n}\\cdot\\frac{n(n+1)(n+2)}{3} = \\frac{(n+1)(n+2)}{6}\\bigl(3a + b + c - 2a\\bigr) = \\frac{(a+b+c)(n+1)(n+2)}{6}.$$\nFor (a), $S = \\frac{14\\cdot 42}{6} = 98$. (Direct computation of all $21$ labels, e.g. by barycentric interpolation, also gives $98$.)"
+      }
+    ],
+    "topics": [
+      "sequences-series",
+      "geometry",
+      "patterns"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2006-r1-04",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 18 Round 1 (2006-2007)",
+      "year": 2006,
+      "number": 4,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Every point in the plane is colored either red, green, or blue. Prove that there exists a rectangle in the plane such that all four of its vertices are the same color.",
+    "image": null,
+    "choices": null,
+    "answer": "Proof (pigeonhole on a finite grid of points).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "A 4 by 82 grid",
+        "body": "Consider the lattice points $(x, y)$ with $x \\in \\{0,1,2,3\\}$ and $y \\in \\{0, 1, \\dots, 81\\}$: $82$ horizontal rows of $4$ points each.\n\n- Each row of $4$ points can be coloured in $3^4 = 81$ ways. With $82$ rows, by pigeonhole two different rows $y_1 \\ne y_2$ have exactly the same colouring (point by point).\n- Within that row there are $4$ points and only $3$ colours, so two points $x_1 \\ne x_2$ in it have the same colour, say red.\n\nThen $(x_1, y_1), (x_2, y_1), (x_1, y_2), (x_2, y_2)$ are all red (the second row is coloured identically to the first), and they are the vertices of a genuine axis-parallel rectangle since $x_1 \\ne x_2$ and $y_1 \\ne y_2$. $\\blacksquare$"
+      },
+      {
+        "title": "A smaller grid, 4 by 19",
+        "body": "Take $19$ rows of $4$ lattice points each ($x \\in \\{0,1,2,3\\}$, $y \\in \\{0,\\dots,18\\}$).\n\n- In each row some colour appears at least twice (4 points, 3 colours). Pick one such colour for every row.\n- Among $19$ rows and $3$ colours, some colour, say green, is picked for at least $\\lceil 19/3 \\rceil = 7$ rows.\n- In each of these $7$ rows choose two green points; the pair of their $x$-positions is one of $\\binom42 = 6$ possibilities. With $7$ rows, two rows have the same pair $\\{x_1, x_2\\}$.\n\nThose four green points form a rectangle with all vertices green. $\\blacksquare$"
+      }
+    ],
+    "topics": [
+      "logic",
+      "counting",
+      "geometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2006-r1-05",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 18 Round 1 (2006-2007)",
+      "year": 2006,
+      "number": 5,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "$ABCD$ is a tetrahedron such that $AB = 6$, $BC = 8$, $AC = AD = 10$, and $BD = CD = 12$. Plane $\\mathcal{P}$ is parallel to face $ABC$ and divides the tetrahedron into two pieces of equal volume. Plane $\\mathcal{Q}$ is parallel to face $DBC$ and also divides $ABCD$ into two pieces of equal volume. Line $\\ell$ is the intersection of planes $\\mathcal{P}$ and $\\mathcal{Q}$. Find the length of the portion of $\\ell$ that is inside $ABCD$.",
+    "image": null,
+    "choices": null,
+    "answer": "8*(cbrt(4)-1)",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "answerDisplay": "$8\\left(\\sqrt[3]{4}-1\\right)$",
+    "solutions": [
+      {
+        "title": "Similar tetrahedra",
+        "body": "Let $k = 2^{-1/3}$. A plane parallel to a face cuts off a tetrahedron similar to $ABCD$; for it to have half the volume, the ratio of similarity must be $k$.\n\n- $\\mathcal{P}$ (parallel to $ABC$) cuts off, near $D$, a tetrahedron $A'B'C'D$ similar to $ABCD$ with ratio $k$, where $A' \\in AD$. So $DA' = 10k$ and $AA' = 10 - 10k$.\n- $\\mathcal{Q}$ (parallel to $DBC$) cuts off, near $A$, a tetrahedron $T = AB''C''D''$ with $B'' \\in AB$, $C'' \\in AC$, $D'' \\in AD$, similar with ratio $k$. So $AD'' = 10k$ and $B''C'' = 8k$.\n\nSince $AA' = 10 - 10k \\approx 2.06 < 10k \\approx 7.94 = AD''$, the point $A'$ lies between $A$ and $D''$, with $A'D'' = 10k - (10 - 10k) = 10(2k-1)$.\n\nThe part of $\\mathcal{Q}$ inside $ABCD$ is the triangle $B''C''D''$, which is a face of $T$. So the required segment is $\\mathcal{P} \\cap \\triangle B''C''D''$. In $T$, the plane $\\mathcal{P}$ is parallel to the face $AB''C''$ and meets edge $D''A$ at $A'$; it cuts off from $T$ a tetrahedron similar to $T$ with centre $D''$ and ratio $\\frac{D''A'}{D''A} = \\frac{10(2k-1)}{10k}$. Its edge lying in face $B''C''D''$ is the image of $B''C''$, so its length is\n$$B''C''\\cdot\\frac{2k-1}{k} = 8k\\cdot\\frac{2k-1}{k} = 8(2k - 1) = 8\\bigl(2^{2/3} - 1\\bigr) = \\boxed{8\\left(\\sqrt[3]{4} - 1\\right)} \\approx 4.699 .$$\n\n(The numbers $6$, $10$, $12$ only guarantee the tetrahedron exists; the answer depends only on $BC = 8$.)"
+      },
+      {
+        "title": "Barycentric coordinates",
+        "body": "Every point of the solid tetrahedron is uniquely $X = \\alpha A + \\beta B + \\gamma C + \\delta D$ with $\\alpha, \\beta, \\gamma, \\delta \\ge 0$ and $\\alpha+\\beta+\\gamma+\\delta = 1$. Planes parallel to face $ABC$ are $\\delta = \\text{const}$, and the small tetrahedron near $D$ of ratio $k$ is $\\delta \\ge 1-k$. So, with $k = 2^{-1/3}$,\n$$\\mathcal{P}:\\ \\delta = 1 - k, \\qquad \\mathcal{Q}:\\ \\alpha = 1 - k .$$\nOn $\\ell$ inside the tetrahedron, $\\beta + \\gamma = 1 - 2(1-k) = 2k - 1 > 0$ with $\\beta, \\gamma \\ge 0$. The two endpoints are $(\\beta, \\gamma) = (2k-1, 0)$ and $(0, 2k-1)$; their difference is the vector $(2k-1)(B - C)$, of length\n$$(2k-1)\\cdot BC = 8\\bigl(2^{2/3} - 1\\bigr) = 8(\\sqrt[3]4 - 1).$$\nA numerical check with explicit coordinates ($B=(0,0,0)$, $C=(8,0,0)$, $A=(0,6,0)$, $D=(4,\\tfrac{20}{3},\\tfrac{\\sqrt{752}}{3})$) and clipping the line by the four faces gives $4.6992$, matching."
+      }
+    ],
+    "topics": [
+      "geometry",
+      "spatial"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

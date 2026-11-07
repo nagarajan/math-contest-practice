@@ -1,0 +1,231 @@
+[
+  {
+    "id": "usamts-2010-r1-01",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 22 Round 1 (2010-2011)",
+      "year": 2010,
+      "number": 1,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Given a set $S$ of points in the plane, a line is called *happy* if it contains at least 3 points in $S$. For example, if $S$ is the $3 \\times 3$ grid of points shown in the picture, then there are 8 happy lines as shown.\n\n(a) If $S$ is the $3 \\times 9$ grid (3 rows of 9 equally spaced points), how many happy lines are there?\n\n(b) Find, with proof, a set $S$ (in the plane) with 27 points that has exactly 49 happy lines.",
+    "image": "qimages/usamts/2010-r1/q01.webp",
+    "choices": null,
+    "answer": "(a) **44**. (b) For example $S=\\{(x+10z,\\ y+100z) : x,y,z\\in\\{0,1,2\\}\\}$ (three far-apart copies of the $3\\times3$ grid, i.e. a \"flattened\" $3\\times3\\times3$ cube): $3\\cdot 8 = 24$ lines inside the copies plus $25$ lines through one point of each copy.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Count through the middle row; flatten a cube",
+        "body": "**(a)** Use coordinates $(x, y)$ with $x \\in \\{0,\\dots,8\\}$ and $y \\in \\{0,1,2\\}$.\n\n* The 3 rows are happy lines.\n* Any other happy line meets each row at most once, so it contains exactly one point of each row: $(x-d, 0)$, $(x, 1)$, $(x+d, 2)$ for some integer $d$ (the middle point is the midpoint of the other two). Such a line is determined by the middle point $(x,1)$ and $d$, and we need $0 \\le x-d \\le 8$ and $0 \\le x + d \\le 8$, i.e. $|d| \\le \\min(x, 8-x)$. That gives $2\\min(x,8-x)+1$ lines through $(x,1)$.\n\nFor $x = 0, 1, \\dots, 8$ these counts are $1, 3, 5, 7, 9, 7, 5, 3, 1$, total $41$. So there are $3 + 41 = 44$ happy lines.\n\n**(b)** The idea: the $3\\times3\\times3$ cube of lattice points in space has exactly 49 lines containing 3 of its points; squash it into the plane without creating or merging lines. Concretely, take three copies of the $3\\times 3$ grid placed far apart along the direction $\\mathbf v = (10, 100)$:\n$$S = \\{(x + 10z,\\ y + 100z) : x, y, z \\in \\{0, 1, 2\\}\\}.$$\nCall $L_z$ (for $z = 0,1,2$) the copy (\"layer\") with that value of $z$, and write a point of $L_z$ as $z\\mathbf v + q$ with $q$ in the grid $G = \\{0,1,2\\}^2$. The 27 points are distinct.\n\n*Key estimate.* For integer vectors $w = (w_1, w_2)$ with $|w_1|, |w_2| \\le 4$, not both zero, the cross product $w \\times \\mathbf v = 100w_1 - 10w_2$ has absolute value at least $10$ (if $w_1 \\ne 0$ it is at least $100 - 40 = 60$; if $w_1 = 0$ it is $10|w_2| \\ge 10$). On the other hand, for $p, q$ with coordinates in $[-2, 2]$, $|p \\times q| \\le 8$.\n\n* *A line through two points of the same layer contains no point of another layer.* Two points of $L_z$ differ by $d$ with entries in $[-2,2]$, $d \\neq 0$. A point of another layer differs from them by $m\\mathbf v + e$ with $m = \\pm1, \\pm 2$ and $e$ with entries in $[-2,2]$. Collinearity would need $d \\times (m\\mathbf v + e) = 0$, i.e. $|m|\\,|d\\times \\mathbf v| = |d \\times e| \\le 8$, impossible since $|d \\times \\mathbf v| \\ge 10$.\n* So every happy line either lies inside one layer or contains exactly one point of each layer.\n* *Lines inside a layer:* each layer is a $3\\times3$ grid with 8 happy lines, giving $24$.\n* *Lines through one point of each layer:* the points $q_0$, $\\mathbf v + q_1$, $2\\mathbf v + q_2$ are collinear iff $(\\mathbf v + d_1) \\times (\\mathbf v + d_2) = 0$ where $d_1 = q_1 - q_0$, $d_2 = q_2 - q_1$. Expanding, this is $\\mathbf v \\times (d_2 - d_1) + d_1 \\times d_2 = 0$. If $d_1 \\ne d_2$ the first term has size at least 10 and the second at most 8, so this fails; if $d_1 = d_2$ it holds. Hence collinear iff $q_1$ is the midpoint of $q_0$ and $q_2$. The number of pairs $(q_0, q_2)$ in $G$ whose midpoint is a lattice point is $5 \\cdot 5 = 25$ (each coordinate pair must have equal parity: $(0,0),(0,2),(2,0),(2,2),(1,1)$). Each such line meets each layer once, so different triples give different lines: $25$ lines.\n\nTotal: $24 + 25 = 49$ happy lines. ∎\n\n*(This matches the official idea: the 49 lines of the $3\\times 3\\times 3$ cube are $24$ \"horizontal\" ones plus $4\\cdot 1 + 4\\cdot 3 + 9 = 25$ through the middle layer, and a generic projection keeps them distinct. A computer count confirms $44$ in (a) and $49$ for the set above.)*\n\n**Answer: (a) 44; (b) e.g. the set $S$ above.**"
+      }
+    ],
+    "topics": [
+      "counting",
+      "geometry"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2010-r1-02",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 22 Round 1 (2010-2011)",
+      "year": 2010,
+      "number": 2,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "text",
+    "prompt": "You're at vertex $A$ of triangle $ABC$, where $\\angle B = \\angle C = 65^\\circ$. The sides of the triangle are perfectly reflective; if you shoot a laser from $A$ to the midpoint of $\\overline{BC}$, it will reflect once and return to $A$. Suppose you fire at a point on $\\overline{BC}$ other than its midpoint, and the beam still returns to $A$ after reflecting some number of times. What is the smallest number of reflections the beam can make before returning to $A$? What is the smallest angle between $\\overline{AB}$ and the initial beam that produces this number of reflections?",
+    "image": null,
+    "choices": null,
+    "answer": "5, 10°",
+    "acceptedAnswers": [
+      "5, 10",
+      "5,10",
+      "5 and 10",
+      "5, 10 degrees",
+      "5 reflections, 10 degrees",
+      "5 reflections, 10°",
+      "5,10°",
+      "(5, 10)"
+    ],
+    "answerUnit": null,
+    "answerDisplay": "$5$ reflections, $10^\\circ$",
+    "solutions": [
+      {
+        "title": "Track the beam's direction",
+        "body": "Put $A$ at the origin with $AB$ along the positive $x$-axis. Then the side directions are: $AB$ at $0^\\circ$, $AC$ at $50^\\circ$ ($\\angle A = 180^\\circ - 130^\\circ = 50^\\circ$) and $BC$ at $115^\\circ$. Reflecting off a side of direction $\\alpha$ turns a beam of direction $\\varphi$ into direction $2\\alpha - \\varphi$. Call the sides $a = BC$, $b = CA$, $c = AB$, and let the initial beam make angle $\\theta$ with $AB$, $0 < \\theta < 50^\\circ$, $\\theta \\ne 25^\\circ$ (firing at the midpoint means $\\theta = 25^\\circ$, by symmetry of the isosceles triangle). By the symmetry in the axis of the triangle we may assume $\\theta < 25^\\circ$.\n\n**Facts about any returning path.**\n1. *The last reflection is on $a$:* after reflecting on $b$ or $c$ the beam cannot travel straight to $A$, because that segment would run along the side itself.\n2. *The beam arrives at $A$ from inside the angle at $A$*, so its final direction $\\varphi$ satisfies $\\varphi \\in (180^\\circ, 230^\\circ)$ (mod $360^\\circ$).\n3. *Consecutive reflections are on different sides.*\n\n**The first walls.** The beam first hits $a$ at a point $P$ between $B$ and the midpoint (as $\\theta < 25^\\circ$); its direction becomes $\\varphi_1 = 230^\\circ - \\theta$. In triangle $ABP$, $\\angle APB = 180^\\circ - 65^\\circ - \\theta = 115^\\circ - \\theta$, so the reflected beam makes angle $65^\\circ + \\theta$ with $PB$; since this is less than $\\angle APB = 115^\\circ - \\theta$, the reflected beam heads into triangle $ABP$ and hits $c$ next. Then $\\varphi_2 = -\\varphi_1 = \\theta + 130^\\circ \\in (130^\\circ, 155^\\circ)$. This direction moves away from line $BC$ (whose inward normal points at $205^\\circ$, and $\\cos(\\varphi_2 - 205^\\circ) > 0$), so the next wall is $b$: $\\varphi_3 = 100^\\circ - \\varphi_2 = 330^\\circ - \\theta$.\n\n**Fewer than 5 reflections are impossible.**\n* 1 reflection: the beam would go $A \\to P \\to A$ along the same line, so it must hit $BC$ perpendicularly, i.e. at the midpoint. Excluded.\n* 2 or 3 reflections: the wall sequences are $a,c$ and $a,c,b$, which end on $c$ or $b$ — impossible by fact 1.\n* 4 reflections: the sequences are $a,c,b,a$ or $a,c,b,c$. The second ends on $c$. For the first, the final direction is $230^\\circ - \\varphi_3 = \\theta + 260^\\circ \\in (260^\\circ, 285^\\circ)$, violating fact 2.\n\n**Exactly 5 reflections.** The sequence must be $a, c, b, \\_, a$ with the fourth wall different from $b$ and from $a$, so it is $a,c,b,c,a$. Its directions are $\\varphi_4 = -\\varphi_3 = \\theta + 30^\\circ$ and $\\varphi_5 = 230^\\circ - \\varphi_4 = 200^\\circ - \\theta$. So the beam returns to $A$ making angle $20^\\circ - \\theta$ with $AB$.\n\nNow run the path backwards: it is again a path from $A$ with the (palindromic) wall sequence $a, c, b, c, a$, starting at angle $20^\\circ - \\theta$. But for a fixed wall sequence the starting angle is unique: unfolding the triangle by reflecting it successively in the walls, the beam becomes the straight segment from $A$ to the final image of $A$. Hence $20^\\circ - \\theta = \\theta$, so $\\theta = 10^\\circ$.\n\n**It works.** Fire at $\\theta = 10^\\circ$. In triangle $ABP$: $\\angle APB = 105^\\circ$, so the reflected ray makes $75^\\circ$ with $PB$; in triangle $PBQ$ ($Q$ on $AB$) the angle at $Q$ is $180^\\circ - 75^\\circ - 65^\\circ = 40^\\circ$, so after reflecting at $Q$ the ray makes $40^\\circ$ with $QA$; in triangle $AQR$ ($R$ on $AC$) the angle at $R$ is $180^\\circ - 50^\\circ - 40^\\circ = 90^\\circ$. So the beam hits $AC$ perpendicularly and retraces its path: $A \\to P \\to Q \\to R \\to Q \\to P \\to A$, with reflections at $P, Q, R, Q, P$ — five. (With $AB = AC = 1$: $BP = \\frac{\\sin 10^\\circ}{\\sin 105^\\circ} \\approx 0.18$, $BQ = BP\\cdot\\frac{\\sin 75^\\circ}{\\sin 40^\\circ} \\approx 0.27 < 1$, $AR = AQ\\cos 50^\\circ \\approx 0.47 < 1$, so all points lie on the sides.)\n\nFor $\\theta > 25^\\circ$ the mirror image gives $\\theta = 40^\\circ$. So the minimum number of reflections is 5 and the smallest angle with $AB$ achieving it is $10^\\circ$.\n\n**Answer: 5 reflections; $10^\\circ$**"
+      },
+      {
+        "title": "Unfold the triangle",
+        "body": "Reflect the triangle across each wall the beam hits; in the unfolded picture the beam is a straight line from $A$ to an image of $A$, crossing one wall per reflection. With $\\theta < 25^\\circ$ the beam crosses $BC$, then the image of $AB$ (both through $B$). It cannot cross a third wall through $B$: three copies of the $65^\\circ$ angle at $B$ together with the starting position on line $BA$ span $195^\\circ > 180^\\circ$, more than a straight line can sweep. All chambers reached in the first three or four crossings have the same $A$-image $A'$ (reached only by the midpoint beam) or, for the sequence $a,c,b,a$, an image of $A$ that lies below line $AB$ (direction $-15^\\circ$), which a beam with $0 < \\theta < 25^\\circ$ cannot reach. The first reachable new image appears after 5 crossings, in direction $10^\\circ$.\n\nA slick way to find the angle (official solution): the 5-reflection path is symmetric, so its midpoint $M$ lies on the third wall and the beam crosses it at $90^\\circ$. In the unfolded quadrilateral $A\\,M\\,C'\\,B$ the angles are $\\theta$ at $A$, $90^\\circ$ at $M$, $65^\\circ$ at $C'$ and $3\\cdot 65^\\circ = 195^\\circ$ at $B$, so $\\theta + 90^\\circ + 65^\\circ + 195^\\circ = 360^\\circ$, giving $\\theta = 10^\\circ$. A computer check of all wall sequences confirms that no beam other than the midpoint one returns with at most 4 reflections, and that with 5 reflections the only angles are $10^\\circ$ and $40^\\circ$.\n\n**Answer: 5 reflections; $10^\\circ$**"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "trigonometry"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2010-r1-03",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 22 Round 1 (2010-2011)",
+      "year": 2010,
+      "number": 3,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Find $c > 0$ such that if $r$, $s$, and $t$ are the roots of the cubic\n$$f(x) = x^3 - 4x^2 + 6x + c,$$\nthen\n$$1 = \\frac{1}{r^2+s^2} + \\frac{1}{s^2+t^2} + \\frac{1}{t^2+r^2}.$$",
+    "image": null,
+    "choices": null,
+    "answer": "12+2*sqrt(59)",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "answerDisplay": "$12 + 2\\sqrt{59}$",
+    "solutions": [
+      {
+        "title": "Vieta's formulas",
+        "body": "By Vieta, $r + s + t = 4$, $rs + st + tr = 6$, $rst = -c$. Hence\n$$r^2 + s^2 + t^2 = 4^2 - 2\\cdot 6 = 4,$$\nso $r^2 + s^2 = 4 - t^2$, etc. Let $u = r^2$, $v = s^2$, $w = t^2$; then $u + v + w = 4$, $uvw = c^2$, and\n$$uv + vw + wu = (rs)^2 + (st)^2 + (tr)^2 = (rs + st + tr)^2 - 2rst(r + s + t) = 36 + 8c.$$\nThe condition is $\\sum \\frac{1}{4 - u} = 1$. Let $g(y) = (y - u)(y - v)(y - w) = y^3 - 4y^2 + (36 + 8c)y - c^2$. Then\n$$\\sum \\frac{1}{4 - u} = \\frac{g'(4)}{g(4)} = \\frac{48 - 32 + 36 + 8c}{64 - 64 + 4(36 + 8c) - c^2} = \\frac{52 + 8c}{144 + 32c - c^2}.$$\nSetting this equal to 1: $52 + 8c = 144 + 32c - c^2$, i.e. $c^2 - 24c - 92 = 0$, so\n$$c = 12 \\pm \\sqrt{144 + 92} = 12 \\pm 2\\sqrt{59}.$$\nOnly $c = 12 + 2\\sqrt{59} \\approx 27.36$ is positive. (Numerically, with this $c$ the three roots indeed give $\\sum \\frac{1}{r^2+s^2} = 1$.)\n\n**Answer: $c = 12 + 2\\sqrt{59}$**"
+      },
+      {
+        "title": "Expand directly",
+        "body": "With $r^2+s^2+t^2 = 4$ the sum equals $\\sum \\frac{1}{4 - t^2}$. Over a common denominator,\n$$\\sum\\frac{1}{4-t^2} = \\frac{\\sum (4 - r^2)(4 - s^2)}{\\prod (4 - r^2)} = \\frac{48 - 8\\sum r^2 + \\sum r^2s^2}{64 - 16\\sum r^2 + 4\\sum r^2 s^2 - r^2s^2t^2}.$$\nUsing $\\sum r^2 = 4$, $\\sum r^2 s^2 = 36 + 8c$ and $r^2s^2t^2 = c^2$, the numerator is $16 + 36 + 8c = 52 + 8c$ and the denominator is $4(36+8c) - c^2 = 144 + 32c - c^2$. Equating to 1 gives $c^2 - 24c - 92 = 0$ and the positive root $c = 12 + 2\\sqrt{59}$.\n\n**Answer: $12 + 2\\sqrt{59}$**"
+      }
+    ],
+    "topics": [
+      "polynomials",
+      "algebra"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2010-r1-04",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 22 Round 1 (2010-2011)",
+      "year": 2010,
+      "number": 4,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Sasha has a compass with fixed radius $s$ and Rebecca has a compass with fixed radius $r$. Sasha draws a circle (with his compass) and Rebecca then draws a circle (with her compass) that intersects Sasha's circle twice. We call these intersection points $C$ and $D$.\n\nCharlie draws a common tangent to both circles, meeting Sasha's circle at point $A$ and Rebecca's circle at point $B$, and then draws the circle passing through $A$, $B$, and $C$. Prove that the radius of Charlie's circle does not depend on where Sasha and Rebecca choose to draw their circles, or which of the two common tangents Charlie draws.",
+    "image": null,
+    "choices": null,
+    "answer": "Charlie's circle always has radius $\\sqrt{rs}$: by the tangent–chord angle, $AC = 2s\\sin\\angle CAB$ and $BC = 2r\\sin\\angle CBA$, while the law of sines in $\\triangle ABC$ gives $AC = 2\\rho\\sin\\angle CBA$, $BC = 2\\rho\\sin\\angle CAB$; multiply.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Tangent–chord angle and the law of sines",
+        "body": "Let $\\rho$ be the circumradius of $\\triangle ABC$ (Charlie's circle), and write $\\alpha = \\angle CAB$, $\\beta = \\angle CBA$ (both strictly between $0^\\circ$ and $180^\\circ$).\n\n**Chords of Sasha's circle.** Line $AB$ is tangent to Sasha's circle at $A$, and $AC$ is a chord. By the tangent–chord theorem, the angle $\\alpha$ between the tangent and the chord equals half of the central angle subtending the chord $AC$ (on that side). A chord whose central angle is $2\\alpha$ has length $2s\\sin\\alpha$ (for any $0 < \\alpha < 180^\\circ$, since $\\sin\\alpha = \\sin(180^\\circ - \\alpha)$). So\n$$AC = 2s\\sin\\alpha.$$\n\n**Chords of Rebecca's circle.** In the same way, $AB$ is tangent to Rebecca's circle at $B$ and $BC$ is a chord, so\n$$BC = 2r\\sin\\beta.$$\n\n**Charlie's circle.** By the extended law of sines in $\\triangle ABC$,\n$$AC = 2\\rho\\sin\\angle ABC = 2\\rho\\sin\\beta, \\qquad BC = 2\\rho\\sin\\angle BAC = 2\\rho\\sin\\alpha.$$\n\n**Combine.** Multiplying the first two displayed equations and comparing with the product of the last two:\n$$AC\\cdot BC = 4rs\\sin\\alpha\\sin\\beta = 4\\rho^2\\sin\\alpha\\sin\\beta.$$\nSince $\\sin\\alpha\\sin\\beta \\neq 0$, we get $\\rho^2 = rs$, i.e. $\\rho = \\sqrt{rs}$.\n\nThis holds for every position of the two circles (as long as they meet in two points) and for either common tangent, since the argument used nothing else. So the radius of Charlie's circle is always $\\sqrt{rs}$. ∎"
+      },
+      {
+        "title": "Similar triangles of centres (official idea)",
+        "body": "Let $X$, $Y$, $Z$ be the centres of Sasha's circle, Rebecca's circle and Charlie's circle. By the inscribed/tangent–chord angle, the central angle $\\angle CXA$ of Sasha's circle equals $2\\angle CAB$, and in Charlie's circle the central angle $\\angle CZB$ also equals $2\\angle CAB$. Since $XZ$ is the perpendicular bisector direction of the common chord $AC$ of Sasha's and Charlie's circles, it bisects $\\angle CXA$ and $\\angle CZA$; similarly $YZ$ bisects $\\angle CYB$ and $\\angle CZB$. This gives $\\angle CZY = \\frac12\\angle CZB = \\frac12\\angle CXA = \\angle CXZ$ and, symmetrically, $\\angle CYZ = \\angle CZX$. Hence $\\triangle CXZ \\sim \\triangle CZY$, so $\\frac{CZ}{CX} = \\frac{CY}{CZ}$, i.e. $CZ^2 = CX\\cdot CY = s\\,r$. So Charlie's radius $CZ = \\sqrt{rs}$.\n\n(The official solution also notes that the other tangent produces the reflection of the configuration, so the circumcircle of $ABD$ — which it shows is the mirror image of that of $ABC$ in line $AB$ — has the same radius; the first approach makes this unnecessary.) ∎"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "trigonometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2010-r1-05",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 22 Round 1 (2010-2011)",
+      "year": 2010,
+      "number": 5,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "A convex polygon $P$ is called *peculiar* if: (a) for some $n \\ge 3$, the vertices of $P$ are a subset of the vertices of a regular $n$-gon with sides of length 1; (b) the center $O$ of the $n$-gon lies outside of $P$; and (c) for every integer $k$ with $0 < k \\le \\frac{n}{2}$, the quantity $\\frac{2k\\pi}{n}$ is the measure of exactly one $\\angle AOB$, where $A$ and $B$ are vertices of $P$. Find the number of non-congruent peculiar polygons.",
+    "image": null,
+    "choices": null,
+    "answer": "2",
+    "acceptedAnswers": null,
+    "answerUnit": "polygons",
+    "solutions": [
+      {
+        "title": "Reduce to a perfect ruler",
+        "body": "**$n$ is odd.** If $n$ were even, $k = \\frac n2$ would require two vertices $A, B$ of $P$ with $\\angle AOB = \\pi$; then $O$ lies on segment $AB \\subseteq P$, contradicting (b). So $n = 2r + 1$, and (c) says the $\\binom{v}{2}$ pairs of the $v$ vertices of $P$ realize the central angles $\\frac{2k\\pi}{n}$, $k = 1, \\dots, r$, each exactly once. (Every pair gives some such angle: if the vertices are $j$ steps apart around the $n$-gon, the angle is $\\frac{2k\\pi}{n}$ with $k = \\min(j, n - j) \\le r$.) So $\\binom v2 = r$.\n\n**All vertices lie on a short arc.** Some pair $A, B$ has $k = r$: $A$ and $B$ are $r$ steps apart one way and $r + 1$ the other. If $P$ had a vertex $C$ strictly inside the longer arc, the three arcs $AB$, $BC$, $CA$ would each have at most $r < \\frac n2$ steps, so each is less than a semicircle, triangle $ABC$ is acute, and $O$ lies inside triangle $ABC \\subseteq P$ — contradiction. So all vertices of $P$ are among $A = A_0, A_1, \\dots, A_r = B$ (consecutive vertices of the $n$-gon), and then (b) holds automatically. For $A_i, A_j$ in this arc the angle is $\\frac{2|i - j|\\pi}{n}$.\n\nSo the index set $I \\subseteq \\{0, 1, \\dots, r\\}$ (with $0, r \\in I$) must have all pairwise differences distinct and equal to $\\{1, 2, \\dots, r\\}$: a *perfect ruler*.\n\n**Small cases.** $v = 3$, $r = 3$: $I = \\{0, 1, 3\\}$ (or its mirror $\\{0, 2, 3\\}$), $n = 7$. $v = 4$, $r = 6$: $I = \\{0, 1, 4, 6\\}$ (or mirror $\\{0, 2, 5, 6\\}$), $n = 13$. Each of these is unique up to reflection (easy to check by hand), and mirror images give congruent polygons.\n\n**No perfect ruler with $v \\ge 5$** (then $r = \\binom v2 \\ge 10$). The difference $r - 1$ comes from $(0, r-1)$ or $(1, r)$; by reflecting ($i \\mapsto r - i$) assume $r - 1 \\in I$. Then difference 1 is used by $(r-1, r)$, so $1 \\notin I$ and $r - 2 \\notin I$. Difference $r - 2$ needs $(0, r-2)$, $(1, r-1)$ or $(2, r)$, so $2 \\in I$. Now $\\{0, 2, r-1, r\\}$ gives differences $1, 2, r-3, r-2, r-1, r$.\n\nDifference $r - 4$ needs one of $(0, r-4), (1, r-3), (2, r-2), (3, r-1), (4, r)$. Adding $1$, $r-3$, $3$, $r-2$ or $4$ would repeat difference 1 or 2 (for instance $4 - 2 = 2$ and $(r-1) - (r-3) = 2$). So $r - 4 \\in I$, which creates differences $r - 4$, $r - 6$, $3$, $4$.\n* If $v = 5$ ($r = 10$): $I = \\{0, 2, 6, 9, 10\\}$, but $6 - 2 = 10 - 6 = 4$. Contradiction.\n* If $v \\ge 6$ ($r \\ge 15$): difference $r - 5$ is not yet present and needs one of $(0, r-5), (1, r-4), (2, r-3), (3, r-2), (4, r-1), (5, r)$. The new element would be $r-5$, $1$, $r-3$, $3$, $r-2$, $4$ or $5$, which is at distance 1, 2 or 3 from an element of $\\{0, 2, r-4, r-1, r\\}$ — all three differences already used. Contradiction.\n\nSo the only peculiar polygons are the triangle from $\\{0,1,3\\}$ in the regular 7-gon and the quadrilateral from $\\{0,1,4,6\\}$ in the regular 13-gon (both convex with $O$ outside). They are not congruent (different numbers of vertices), so there are **2** peculiar polygons.\n\n*(A computer search over all vertex subsets for $v \\le 6$ confirms exactly these two shapes.)*\n\n**Answer: 2**"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "number-theory",
+      "counting"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2010-r1-06",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 22 Round 1 (2010-2011)",
+      "year": 2010,
+      "number": 6,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "There are 50 people (numbered 1 to 50) and 50 identically wrapped presents around a table at a party. Each present contains an integer dollar amount from \\$1 to \\$50, and no two presents contain the same amount. Each person is randomly given one of the presents. Beginning with player #1, each player in turn does **one** of the following:\n\n1. Opens his present and shows everyone the contents; **or**\n2. If another player at the table has an open present, the player whose turn it is may swap presents with that player, and leave the table with the open present. The other player then immediately opens his new present and shows everyone the contents.\n\nFor example, the game could begin as follows:\n\n* Player #1 opens his present. (The game must *always* begin this way, as there are no open presents with which to swap.)\n* Player #2 decides to swap her present with Player #1. Player #2 takes the money from her newly acquired present and leaves the table. Player #1 opens his new present (which used to belong to Player #2).\n* Player #3 opens her present. (Now Players #1 and #3 have open presents, and Player #2 is still away from the table.)\n* Player #4 decides to swap his present with Player #1. Player #4 takes the money from his newly acquired present and leaves the table. Player #1 opens his new present (which used to belong to Player #4).\n\nThe game ends after all the presents are opened, and all players keep the money in their currently held presents.\n\nSuppose each player follows a strategy that maximizes the expected value that the player keeps at the end of the game.\n\n(a) Find, with proof, the strategy each player follows. That is, describe when each player will choose to swap presents with someone, or keep her original present.\n\n(b) What is the expected number of swaps?",
+    "image": null,
+    "choices": null,
+    "answer": "(a) Swap for the largest open present still at the table if it is worth more than at least one unopened present; otherwise open your own. (b) $50 - \\left(1 + \\frac12 + \\cdots + \\frac1{50}\\right) = \\frac{141008987635075780359241}{3099044504245996706400} \\approx 45.50$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Backward induction, then a recurrence",
+        "body": "Everyone always knows which amounts are still unopened (all amounts are known, and opened ones are shown).\n\n**(a) Lemma.** The optimal strategy is: *if the largest open present still at the table (\"in play\") is worth more than at least one unopened present, swap for that largest open present; otherwise open your own present.* Moreover, if everyone follows it, a player who opens his own present ends with the smallest amount that was unopened at the time of his turn.\n\n*Proof by backward induction on the player number.* Player #50: if some open present in play beats the last unopened present, swapping for the largest one is clearly best; otherwise the unopened present is the best she can get, she opens it and the game ends.\n\nNow suppose players $k+1, \\dots, 50$ follow the strategy, and it is player $k$'s turn.\n\n* *If every open present in play is smaller than every unopened present,* swapping gives him less than anything he could get by opening. If he opens, then later players will swap with him as long as his present is the largest in play and some unopened present is smaller; each such swap gives him a new unopened present. This continues until he holds the smallest of the presents unopened at his turn — and that is at least as good as any swap. So he opens.\n* *If the largest open present in play, worth $M$, is larger than some unopened amount,* then by swapping he gets exactly $M$. If instead he opens his present and finds an amount $x$:\n  * if $x < M$: later players swap with him only when he holds the largest open present and a smaller unopened one exists; each such swap lowers his amount, so he ends below $M$;\n  * if $x > M$: he now holds the largest open present while a present smaller than $M$ is still unopened, so later players keep swapping with him until his amount drops below $M$, and then the previous case applies.\n\n  Either way he ends with less than $M$, so he swaps. ∎\n\n**(b)** By the lemma, a turn is a *non-swap* exactly when all opened presents in play are smaller than all unopened ones. Turn 1 is always a non-swap. After that, players keep swapping until the smallest remaining amount has been swapped away and opened; the next non-swap happens right after the turn of the player who held the smallest amount among those remaining.\n\nLet $E_k$ be the expected number of non-swaps in a $k$-player game ($E_0 = 0$, $E_1 = 1$). If the smallest present (\\$1) belongs to player $j$ (each $j$ equally likely), the first $j$ turns contain one non-swap and the rest of the game behaves like a fresh $(k - j)$-player game. So\n$$E_k = 1 + \\frac1k\\sum_{j=0}^{k-1}E_j.$$\nThen $kE_k - (k-1)E_{k-1} = 1 + E_{k-1}$, i.e. $E_k - E_{k-1} = \\frac1k$, so\n$$E_k = 1 + \\frac12 + \\cdots + \\frac1k = H_k.$$\n(Equivalently, the non-swaps correspond to the left-to-right minima of a random permutation, whose expected number is the harmonic number.)\n\nThere are 50 turns, so the expected number of swaps is\n$$50 - H_{50} = \\frac{141008987635075780359241}{3099044504245996706400} \\approx 45.50.$$\n(An exhaustive simulation of the strategy for up to 7 players gives exactly $n - H_n$.)\n\n**Answer:** (a) as in the Lemma; (b) $50 - \\left(1 + \\frac12 + \\cdots + \\frac1{50}\\right) \\approx 45.50$."
+      }
+    ],
+    "topics": [
+      "probability",
+      "games",
+      "logic"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

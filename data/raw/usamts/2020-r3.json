@@ -1,0 +1,176 @@
+[
+  {
+    "id": "usamts-2020-r3-01",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 32 Round 3 (2020-2021)",
+      "year": 2020,
+      "number": 1,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Place the $21$ two-digit prime numbers in the white squares of the grid on the right so that each two-digit prime is used exactly once. Two white squares sharing a side must contain two numbers with either the same tens digit or ones digit. A given digit in a white square must equal at least one of the two digits of that square's prime number.\n\nThere is a unique solution, but you do not need to prove that your answer is the only one possible. You merely need to find an answer that satisfies the constraints above. (Note: in any other USAMTS problem, you need to provide a full proof. Only in this problem is an answer without justification acceptable.)",
+    "image": "qimages/usamts/2020-r3/q01.webp",
+    "choices": null,
+    "answer": "$$\\begin{array}{|c|c|c|c|c|}\\hline 31 & 71 & 73 & 23 & 83\\\\\\hline 37 & \\blacksquare & 79 & 29 & 89\\\\\\hline 97 & \\blacksquare & 19 & \\blacksquare & 59\\\\\\hline 67 & 47 & 17 & \\blacksquare & 53\\\\\\hline 61 & 41 & 11 & 13 & 43\\\\\\hline\\end{array}$$",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Group the primes by their digits",
+        "body": "The $21$ two-digit primes are\n$$11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97.$$\nEvery ones digit is $1$, $3$, $7$ or $9$. A digit-$4$ clue therefore needs one of $41, 43, 47$; a $5$ clue needs $53$ or $59$; a $2$ clue needs $23$ or $29$. Neighbours must share a tens digit or a ones digit, so a prime with a rare tens digit (like $83$, $89$ or $97$, $53$, $59$) must sit next to primes ending in the same digit.\n\nNumber rows $1$–$5$ from the top. The bottom row has clues $4, 1, 1, 3$ in columns $2$–$5$; the right column has the $5$ clue in row $3$; the top row has clues $3, 1, 3, 2$. Fitting the \"$4$\" and \"$5$\" families into place and then chaining neighbours by shared digits (e.g. $61 - 41 - 11 - 13 - 43$ along the bottom row, sharing ones digits $1$ and then tens digit $1$, then ones digit $3$) gives the unique arrangement\n$$\\begin{array}{|c|c|c|c|c|}\\hline 31 & 71 & 73 & 23 & 83\\\\\\hline 37 & \\blacksquare & 79 & 29 & 89\\\\\\hline 97 & \\blacksquare & 19 & \\blacksquare & 59\\\\\\hline 67 & 47 & 17 & \\blacksquare & 53\\\\\\hline 61 & 41 & 11 & 13 & 43\\\\\\hline\\end{array}$$\n**Check.** All $21$ primes appear once. Each clue digit appears in its square (top row $31, 71, 73, 23$; $97$, $19$, $59$ in the middle row; $41, 11, 13, 43$ at the bottom). Every pair of side-neighbours shares a digit in the same position: for example $31|71$ (ones $1$), $71|73$ (tens $7$), $73|23$ (ones $3$), $23|83$ (ones $3$), $83|89$ (tens $8$), $89|59$ (ones $9$), $59|53$ (tens $5$), $53|43$ (ones $3$), and so on. (A computer search confirms the solution is unique.)\n\n**Answer:** the grid above."
+      }
+    ],
+    "topics": [
+      "logic",
+      "number-theory"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2020-r3-02",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 32 Round 3 (2020-2021)",
+      "year": 2020,
+      "number": 2,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Find distinct points $A$, $B$, $C$, and $D$ in the plane such that the length of the segment $AB$ is an even integer, and the lengths of the segments $AC$, $AD$, $BC$, $BD$, and $CD$ are all odd integers. In addition to stating the coordinates of the points and distances between points, please include a brief explanation of how you found the configuration of points and computed the distances.",
+    "image": null,
+    "choices": null,
+    "answer": "For example $A = (0,0)$, $B = (8,0)$, $C = (3,0)$, $D = \\left(\\frac32, \\frac{3\\sqrt3}{2}\\right)$: $AB = 8$, $AC = AD = CD = 3$, $BC = 5$, $BD = 7$ (a $3$-$5$-$7$ triangle with a $120^\\circ$ angle).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Use the 3–5–7 triangle with a $120^\\circ$ angle",
+        "body": "**Idea.** In a triangle with integer sides every angle has a rational cosine. Right triangles are a poor choice (every primitive Pythagorean triple has an even leg), so look at $60^\\circ$ and $120^\\circ$ angles. The triangle with sides $3, 5, 7$ has\n$$7^2 = 3^2 + 5^2 - 2\\cdot 3\\cdot 5\\cos\\gamma \\ \\Longrightarrow\\ \\cos\\gamma = -\\tfrac12,\\quad \\gamma = 120^\\circ,$$\nand $3 + 5 = 8$ is even.\n\n**Construction.** Put $A = (0, 0)$, $C = (3, 0)$, $B = (8, 0)$ on a line, and let $D = \\left(\\frac32, \\frac{3\\sqrt3}{2}\\right)$, so $ACD$ is equilateral with side $3$. Then\n\n* $AB = 8$ (even), $AC = 3$, $BC = 5$;\n* $AD = CD = 3$;\n* $\\angle BCD = 180^\\circ - 60^\\circ = 120^\\circ$, so $BD^2 = 5^2 + 3^2 - 2\\cdot5\\cdot3\\cos 120^\\circ = 25 + 9 + 15 = 49$ and $BD = 7$.\n\n(Directly: $BD^2 = \\left(8 - \\frac32\\right)^2 + \\frac{27}{4} = \\frac{169}{4} + \\frac{27}{4} = 49$.) So $AB$ is even and the other five distances $3, 3, 5, 7, 3$ are odd.\n\n**Answer:** e.g. $A = (0,0)$, $B = (8,0)$, $C = (3,0)$, $D = \\left(\\frac32, \\frac{3\\sqrt3}2\\right)$."
+      },
+      {
+        "title": "A cyclic trapezoid and Ptolemy",
+        "body": "Take the isosceles trapezoid $A = (0, 0)$, $B = (8, 0)$, $C = \\left(\\frac{11}{2}, \\frac{5\\sqrt3}{2}\\right)$, $D = \\left(\\frac52, \\frac{5\\sqrt3}{2}\\right)$. Then $AB = 8$, $CD = 3$, and the legs are hypotenuses of $30$-$60$-$90$ triangles with legs $\\frac52$ and $\\frac{5\\sqrt3}{2}$, so $AD = BC = 5$. An isosceles trapezoid is cyclic, so Ptolemy's theorem gives\n$$AC\\cdot BD = AB\\cdot CD + AD\\cdot BC = 24 + 25 = 49,$$\nand by symmetry $AC = BD = 7$. Thus $AB = 8$ is even while $AC = BD = 7$, $AD = BC = 5$, $CD = 3$ are odd."
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2020-r3-03",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 32 Round 3 (2020-2021)",
+      "year": 2020,
+      "number": 3,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Find, with proof, all positive integers $n$ with the following property: There are only finitely many positive multiples of $n$ which have exactly $n$ positive divisors.",
+    "image": null,
+    "choices": null,
+    "answer": "Exactly $n = 4$ and the squarefree $n$ (including $n = 1$).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Squarefree $n$ force the shape; otherwise build infinite families",
+        "body": "Write $\\tau(m)$ for the number of divisors.\n\n**$n = 1$ and $n = 4$ work.** Only $m = 1$ has one divisor. A number with $4$ divisors is $pq$ or $p^3$ ($p \\ne q$ primes); the only one divisible by $4$ is $8$.\n\n**Squarefree $n = p_1\\cdots p_k$ ($k \\ge 1$) work.** Let $m$ be a multiple of $n$ with $\\tau(m) = n$, and write $m = p_1^{e_1}\\cdots p_k^{e_k}m'$ with $e_i \\ge 1$ and $\\gcd(m', n) = 1$. Then\n$$(e_1 + 1)\\cdots(e_k + 1)\\,\\tau(m') = p_1 p_2\\cdots p_k.$$\nThe right side has exactly $k$ prime factors (with multiplicity) and each $e_i + 1 \\ge 2$ contributes at least one, so $\\tau(m') = 1$, i.e. $m' = 1$, and $e_1 + 1, \\dots, e_k + 1$ is a permutation of $p_1, \\dots, p_k$. That leaves at most $k!$ possibilities for $m$.\n\n**All other $n$ fail.** We use: *if $a \\ge 2$, $b \\ge 1$ and $(a, b) \\ne (2, 1)$, then $a^b \\ge b + 2$* (for $b = 1$, $a \\ge 3$; for $b \\ge 2$, $a^b \\ge 2^b \\ge 1 + b + 1$ by the binomial theorem). Also always $a^b \\ge b + 1$. In each case $q$ denotes any prime not dividing $n$ — infinitely many choices, each giving a different $m_q$.\n\n* **$p^2 \\mid n$ for an odd prime $p$.** Write $n = p^e p_1^{e_1}\\cdots p_k^{e_k}$ with $e \\ge 2$ and let\n$$m_q = p^{p^{e-1} - 1}\\, p_1^{p_1^{e_1} - 1}\\cdots p_k^{p_k^{e_k} - 1}\\, q^{p - 1}.$$\nThen $\\tau(m_q) = p^{e-1}\\cdot p_1^{e_1}\\cdots p_k^{e_k}\\cdot p = n$. Since $p^{e-1} \\ge (e - 1) + 2$ (as $p \\ge 3$) and $p_i^{e_i} \\ge e_i + 1$, every exponent is at least the one in $n$, so $n \\mid m_q$.\n* **$n = 2^e$ with $e \\ge 3$.** Let $m_q = 2^{2^{e-1} - 1}q$: $\\tau = 2^{e-1}\\cdot 2 = n$ and $2^{e-1} - 1 \\ge e$ (as $2^{e-1} \\ge (e-1) + 2$ for $e - 1 \\ge 2$).\n* **$n = 4p_1\\cdots p_k$** with distinct odd primes $p_i$, $k \\ge 1$: let $m_q = 2^{p_1 - 1}\\, p_1\\, p_2^{p_2 - 1}\\cdots p_k^{p_k - 1}\\, q$. Then $\\tau = p_1\\cdot 2\\cdot p_2\\cdots p_k\\cdot 2 = n$, and $p_1 - 1 \\ge 2$, $p_i - 1 \\ge 1$, so $n \\mid m_q$.\n* **$n = 2^e p_1\\cdots p_k$** with $e \\ge 3$ and distinct odd primes $p_i$, $k \\ge 1$: let $m_q = 2^{2^{e-1} - 1}\\, p_1^{p_1 - 1}\\cdots p_k^{p_k - 1}\\, q$, with $\\tau = 2^{e-1}p_1\\cdots p_k\\cdot 2 = n$ and $n \\mid m_q$ as before.\n\nThese cases cover every non-squarefree $n \\ne 4$, and each gives infinitely many multiples of $n$ with exactly $n$ divisors.\n\n**Answer:** $n = 4$ and all squarefree $n$ ($n = 1, 2, 3, 5, 6, 7, 10, \\dots$). ∎"
+      }
+    ],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2020-r3-04",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 32 Round 3 (2020-2021)",
+      "year": 2020,
+      "number": 4,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "In a group of $n > 20$ people, there are some (at least one, and possibly all) pairs of people that know each other. Knowing is symmetric; if Alice knows Blaine, then Blaine also knows Alice. For some values of $n$ and $k$, this group has a peculiar property: If any $20$ people are removed from the group, the number of pairs of people that know each other is at most $\\frac{n - k}{n}$ times that of the original group of people.\n\n(a) If $k = 41$, for what positive integers $n$ could such a group exist?\n\n(b) If $k = 39$, for what positive integers $n$ could such a group exist?",
+    "image": null,
+    "choices": null,
+    "answer": "(a) For no $n$. (b) Exactly for $n \\ge 381$ (e.g. everybody knows everybody). Averaging over all ways to remove $20$ people gives $(n - 20)(n - 21) \\le (n - 1)(n - k)$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Average over all removals",
+        "body": "Let $E$ be the number of acquainted pairs ($E \\ge 1$). Add up the number of acquainted pairs that remain over all $\\binom{n}{20}$ ways of removing $20$ people. A fixed pair survives exactly when the $20$ removed people are chosen from the other $n - 2$, i.e. in $\\binom{n-2}{20}$ of the removals. So the total is $\\binom{n-2}{20}E$.\n\nEach removal leaves at most $\\frac{n-k}{n}E$ pairs, so\n$$\\binom{n-2}{20}E \\le \\binom{n}{20}\\frac{n-k}{n}E.$$\nSince $\\binom{n-2}{20}\\big/\\binom{n}{20} = \\frac{(n-20)(n-21)}{n(n-1)}$ and $E > 0$, this is\n$$(n - 20)(n - 21) \\le (n - 1)(n - k). \\qquad (\\ast)$$\n\n**(a) $k = 41$:** $(\\ast)$ reads $n^2 - 41n + 420 \\le n^2 - 42n + 41$, i.e. $n \\le -379$ — impossible. **No such group exists.**\n\n**(b) $k = 39$:** $(\\ast)$ reads $n^2 - 41n + 420 \\le n^2 - 40n + 39$, i.e. $n \\ge 381$. So $n \\ge 381$ is necessary. It is also sufficient: if everyone knows everyone, $E = \\binom n2$ and every removal leaves exactly $\\binom{n-20}{2}$ pairs, and\n$$\\binom{n-20}{2} \\le \\frac{n - 39}{n}\\binom n2 \\iff (n-20)(n-21) \\le (n-39)(n-1) \\iff n \\ge 381.$$\n\n**Answer:** (a) no $n$; (b) all $n \\ge 381$. ∎"
+      }
+    ],
+    "topics": [
+      "graph-theory",
+      "counting",
+      "inequalities"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2020-r3-05",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 32 Round 3 (2020-2021)",
+      "year": 2020,
+      "number": 5,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $n \\ge 3$ be an integer. Let $f$ be a function from the set of all integers to itself with the following property: If the integers $a_1, a_2, \\dots, a_n$ form an arithmetic progression, then the numbers\n$$f(a_1), f(a_2), \\dots, f(a_n)$$\nform an arithmetic progression (possibly constant) in some order. Find all values for $n$ such that the only functions $f$ with this property are the functions of the form $f(x) = cx + d$, where $c$ and $d$ are integers.",
+    "image": null,
+    "choices": null,
+    "answer": "Exactly the **composite** $n$. For prime $n$, $f(x) = x \\bmod n$ is a non-linear example; for composite $n = ab$ every such $f$ is linear.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Prime counterexample; composite $n$ forces linearity",
+        "body": "**Prime $n$: a counterexample.** Let $f(x)$ be the remainder of $x$ mod $n$. If the common difference of an $n$-term progression is a multiple of $n$, all terms have the same remainder (constant progression). Otherwise the difference is invertible mod $n$ ($n$ prime), so the $n$ terms have all remainders $0, 1, \\dots, n-1$ — an arithmetic progression in some order. This $f$ is not of the form $cx + d$.\n\n**Composite $n = ab$ ($a, b \\ge 2$, so $n \\ge 4$).** Let $f$ have the property; call a block $f(m), f(m+1), \\dots, f(m + n - 1)$ a *window*. Note that an arithmetic progression with two equal terms is constant.\n\n*Case 1: $f(m) = f(m + n)$ for some $m$.* The progression $m, m + a, \\dots, m + (n-1)a$ contains $m$ and $m + ba = m + n$, so its image is constant and $f(m + a) = f(m)$. The window starting at $m$ contains $m$ and $m + a$, so it is constant. The window starting at $m + 1$ shares at least two terms with it ($n \\ge 3$), so it is constant too, and so on in both directions: $f$ is constant, hence linear ($c = 0$).\n\n*Case 2: $f(m) \\ne f(m + n)$ for all $m$.* Then no window is constant (a constant window starting at $m$ would make the window starting at $m + 1$ constant and give $f(m) = f(m + n)$). So each window consists of $n$ distinct values forming a progression.\n\n**Claim.** For every $m$, the values $f(m), \\dots, f(m + n)$ are $n + 1$ terms of an arithmetic progression, with $f(m)$ and $f(m + n)$ its two ends.\n\n*Proof.* Let the window at $m$ be $\\{a, a + d, \\dots, a + (n-1)d\\}$, $d > 0$. Suppose $f(m) = a + jd$ with $1 \\le j \\le n - 2$. The window at $m + 1$ contains the other $n - 1 \\ge 3$ values, including $a$, $a + (n-1)d$ and two values differing by $d$. Its common difference $d'$ is then at most $d$, while its span is at least $(n-1)d$, so $d' = d$ and it equals $\\{a, \\dots, a + (n-1)d\\}$ — forcing $f(m + n) = a + jd = f(m)$, a contradiction. So $f(m)$ is an end, say $f(m) = a$ (the other case is symmetric). The window at $m + 1$ contains $a + d, \\dots, a + (n-1)d$ and $f(m + n) \\ne a$, so $f(m + n) = a + nd$. $\\square$\n\n**Propagation.** By the claim at $m = 0$, write $f(0) = \\alpha$ and $f(n) = \\alpha + n\\delta$ ($\\delta \\ne 0$ an integer), with $f(0), \\dots, f(n)$ equal to $\\alpha, \\alpha + \\delta, \\dots, \\alpha + n\\delta$ in some order. Suppose for some $m$ that $f(m), \\dots, f(m + n)$ take the values $\\alpha + i\\delta$, $m \\le i \\le m + n$, with $f(m) = \\alpha + m\\delta$ and $f(m+n) = \\alpha + (m+n)\\delta$.\n\n* *Forward:* $f(m+1), \\dots, f(m + n)$ are the values $\\alpha + i\\delta$, $m < i \\le m + n$. By the claim at $m + 1$, adding $f(m + n + 1)$ gives a progression whose ends are $f(m+1)$ and $f(m+n+1)$, so $f(m + n + 1) \\in \\{\\alpha + m\\delta, \\alpha + (m + n + 1)\\delta\\}$. If it were $\\alpha + m\\delta$, the ends would be $\\alpha + m\\delta$ and $\\alpha + (m+n)\\delta$, so $f(m+1) = \\alpha + (m+n)\\delta = f(m + n)$, impossible as the values in a window are distinct. Hence $f(m+n+1) = \\alpha + (m+n+1)\\delta$ and then $f(m+1) = \\alpha + (m+1)\\delta$.\n* *Backward:* symmetrically, $f(m - 1) = \\alpha + (m - 1)\\delta$.\n\nBy induction $f(x) = \\alpha + \\delta x$ for all integers $x$: $f$ is linear.\n\n**Answer:** the property holds exactly for composite $n$. ∎"
+      }
+    ],
+    "topics": [
+      "functional-equations",
+      "sequences-series",
+      "number-theory"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

@@ -1,0 +1,179 @@
+[
+  {
+    "id": "usamts-2013-r1-01",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 25 Round 1 (2013-2014)",
+      "year": 2013,
+      "number": 1,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Alex is trying to open a lock whose code is a sequence that is three letters long, with each of the letters being one of A, B or C, possibly repeated. The lock has three buttons, labeled A, B and C. When the most recent 3 button-presses form the code, the lock opens. What is the minimum number of total button presses Alex needs to guarantee opening the lock?",
+    "image": null,
+    "choices": null,
+    "answer": "29",
+    "acceptedAnswers": null,
+    "answerUnit": "presses",
+    "solutions": [
+      {
+        "title": "Count the codes tried, then build a sequence",
+        "body": "There are $3\\cdot3\\cdot3 = 27$ possible codes, and Alex can only be sure to open the lock once every one of them has appeared as three consecutive presses.\n\n**Lower bound.** The first two presses test no code at all. After that, each new press tests exactly one code — the one formed by the last three presses. So after $m$ presses at most $m - 2$ different codes have been tested. To test all 27 we need $m - 2 \\ge 27$, i.e. $m \\ge 29$.\n\n**29 presses suffice.** The sequence\n$$\\texttt{AAACCCBCCACBBCBACABCAABBBABAA}$$\nhas 29 letters, and its 27 blocks of three consecutive letters are all different, so they are exactly the 27 possible codes. (Such a sequence is called a *de Bruijn sequence*; one way to find it is greedily: always press a letter that creates a code not seen yet, preferring A, then B, then C, never getting stuck before all codes are used.)\n\n**Answer: 29**"
+      }
+    ],
+    "topics": [
+      "counting",
+      "logic"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2013-r1-02",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 25 Round 1 (2013-2014)",
+      "year": 2013,
+      "number": 2,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "In the $5 \\times 6$ grid shown, fill in all of the grid cells with the digits 0–9 so that the following conditions are satisfied:\n\n1. Each digit gets used exactly 3 times.\n2. No digit is greater than the digit directly above it.\n3. In any four cells that form a $2 \\times 2$ subgrid, the sum of the four digits must be a multiple of 3.\n\n$$\\begin{array}{|c|c|c|c|c|c|}\\hline \\phantom{0} & \\phantom{0} & \\phantom{0} & \\phantom{0} & 7 & \\phantom{0}\\\\\\hline & 8 & & & & 6\\\\\\hline & & 2 & 4 & & \\\\\\hline 5 & & & & 1 & \\\\\\hline & 3 & & & & \\\\\\hline\\end{array}$$\n\nYou do not need to prove that your configuration is the only one possible; you merely need to find a configuration that works.",
+    "image": null,
+    "choices": null,
+    "answer": "$$\\begin{array}{|c|c|c|c|c|c|}\\hline 9&9&6&9&7&8\\\\\\hline 7&8&4&8&3&6\\\\\\hline 5&7&2&4&3&6\\\\\\hline 5&4&2&1&1&5\\\\\\hline 0&3&0&0&1&2\\\\\\hline\\end{array}$$",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Work modulo 3, then place the digits",
+        "body": "Label the empty cells as follows (the given digits are in place):\n$$\\begin{array}{|c|c|c|c|c|c|}\\hline a&b&c&d&7&e\\\\\\hline f&8&g&h&i&6\\\\\\hline j&k&2&4&l&m\\\\\\hline 5&n&o&p&1&q\\\\\\hline r&s&t&u&v&w\\\\\\hline\\end{array}$$\n\n**A useful rule.** Two $2\\times2$ blocks that share a vertical pair of cells have sums $\\equiv 0$, so subtracting, their two outer vertical pairs have equal sums mod 3. Repeating: *in the same two rows, vertical pairs whose columns differ by an even number have equal sums mod 3* (similarly for horizontal pairs in rows an even distance apart).\n\n**Find $b$ and $e$.** Columns 2 and 6 of rows 1–2: $b + 8 \\equiv e + 6 \\pmod 3$. By rule 2, $b \\ge 8$ and $e \\ge 6$, so $(b, e) = (8, 7)$ or $(9, 8)$.\n\n**Whole-board sum.** The total of all entries is $3(0 + 1 + \\dots + 9) = 135 \\equiv 0 \\pmod 3$. The six disjoint $2\\times2$ blocks in rows 1–2/columns 1–2, rows 1–2/columns 3–4, rows 2–3/columns 5–6, rows 3–4/columns 1–2, rows 4–5/columns 3–4 and rows 4–5/columns 5–6 each sum to a multiple of 3, and they cover everything except the six cells $7, e, 2, 4, r, 3$. Hence $7 + e + 2 + 4 + r + 3 \\equiv 0$, i.e. $e + r \\equiv 2 \\pmod 3$.\n\nRows 4–5, columns 1 and 5: $5 + r \\equiv 1 + v$. As $v$ is below the 1, $v \\in \\{0, 1\\}$, so $r \\equiv 2$ or $0$. If $e = 7$ we would need $r \\equiv 1$; so $e = 8$, $b = 9$, $r \\equiv 0$ and $v = 1$.\n\n**All residues.** The top-right block gives $i \\equiv 0$. In rows 1–2, the vertical pairs in odd columns sum to $7 + i \\equiv 1$ and those in even columns to $9 + 8 \\equiv 2$; so no column contains two 9s, and all three 9s are in the top row — one of $c, d$ is a 9. Rows 1 and 3 (even distance apart): $c + d \\equiv 2 + 4 \\equiv 0$, so $c \\equiv d \\equiv 0$; columns 1–2 in rows 1 and 5: $a + 9 \\equiv r + 3$, so $a \\equiv 0$. Now each $2\\times2$ block with three known residues gives the fourth, and the whole grid is determined mod 3:\n$$\\begin{array}{|c|c|c|c|c|c|}\\hline 0&0&0&0&1&2\\\\\\hline 1&2&1&2&0&0\\\\\\hline 2&1&2&1&0&0\\\\\\hline 2&1&2&1&1&2\\\\\\hline 0&0&0&0&1&2\\\\\\hline\\end{array}\\quad(\\text{every cell mod } 3)$$\n\n**Exact values.** A 0 can only sit above 0s; row 4 has no cell $\\equiv 0$, so the three 0s are $r, t, u$ in the bottom row. The left column must decrease through residues $0, 1, 2$ down to the 5, which forces $(a, f, j) = (9, 7, 5)$. The last 8 must be $h$, which gives $d = 9$ and $c = 6$; the last 1 is $p$. The remaining digits $\\equiv 2 \\pmod 3$ then force $o = 2$ and $(q, w) = (5, 2)$, and the rest fills in:\n$$\\begin{array}{|c|c|c|c|c|c|}\\hline 9&9&6&9&7&8\\\\\\hline 7&8&4&8&3&6\\\\\\hline 5&7&2&4&3&6\\\\\\hline 5&4&2&1&1&5\\\\\\hline 0&3&0&0&1&2\\\\\\hline\\end{array}$$\n\n**Check.** Each digit 0–9 appears exactly three times, every column is non-increasing from top to bottom, and each of the 20 $2\\times2$ subgrids has digit sum divisible by 3 (e.g. $9+9+7+8 = 33$, $1+5+1+2 = 9$)."
+      }
+    ],
+    "topics": [
+      "logic",
+      "number-theory"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2013-r1-03",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 25 Round 1 (2013-2014)",
+      "year": 2013,
+      "number": 3,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "An infinite sequence of positive real numbers $a_1, a_2, a_3, \\dots$ is called *territorial* if for all positive integers $i, j$ with $i < j$, we have $|a_i - a_j| \\ge \\frac{1}{j}$. Can we find a territorial sequence $a_1, a_2, a_3, \\dots$ for which there exists a real number $c$ with $a_i < c$ for all $i$?",
+    "image": null,
+    "choices": null,
+    "answer": "**Yes.** E.g. $a_1 = 2$ and, for $2^k < n \\le 2^{k+1}$, $a_n = \\frac{2(n - 2^k) - 1}{2^k}$: the sequence $2, 1, \\frac12, \\frac32, \\frac14, \\frac34, \\frac54, \\frac74, \\frac18, \\dots$ is territorial and bounded by $2$ (take $c = 3$).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Dyadic fractions, one level at a time",
+        "body": "**Yes.** Define $a_1 = 2$, and for $n \\ge 2$ let $k \\ge 0$ be the integer with $2^k < n \\le 2^{k+1}$ and put\n$$a_n = \\frac{2(n - 2^k) - 1}{2^k}.$$\nAs $n$ runs through the block $2^k < n \\le 2^{k+1}$, the numerator runs through the odd numbers $1, 3, \\dots, 2^{k+1} - 1$, so the block consists of the fractions $\\frac{1}{2^k}, \\frac{3}{2^k}, \\dots, \\frac{2^{k+1}-1}{2^k}$, all in $(0, 2)$:\n$$2,\\ 1,\\ \\tfrac12,\\ \\tfrac32,\\ \\tfrac14,\\ \\tfrac34,\\ \\tfrac54,\\ \\tfrac74,\\ \\tfrac18,\\ \\tfrac38,\\ \\dots$$\nAll terms are positive and at most 2, so $c = 3$ works as a bound.\n\n**Territorial.** Let $i < j$ and let $2^k < j \\le 2^{k+1}$. Then $a_j = \\frac{t}{2^k}$ with $t$ odd.\n* If $i$ is in the same block, $a_i = \\frac{t'}{2^k}$ with $t'$ a different odd number.\n* If $i$ is in an earlier block (or $i = 1$), $a_i$ is an odd multiple of $\\frac{1}{2^m}$ with $m < k$ (or $a_i = 2$), so $a_i = \\frac{u}{2^k}$ with $u$ **even**, hence $u \\ne t$.\n\nEither way $a_i - a_j$ is a nonzero integer multiple of $\\frac1{2^k}$, so\n$$|a_i - a_j| \\ge \\frac{1}{2^k} > \\frac{1}{j}$$\nbecause $j > 2^k$. Hence the sequence is territorial and bounded. ∎"
+      }
+    ],
+    "topics": [
+      "sequences-series",
+      "real-analysis"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2013-r1-04",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 25 Round 1 (2013-2014)",
+      "year": 2013,
+      "number": 4,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Bunbury the bunny is hopping on the positive integers. First, he is told a positive integer $n$. Then Bunbury chooses positive integers $a, d$ and hops on all of the spaces $a, a + d, a + 2d, \\dots, a + 2013d$. However, Bunbury must make these choices so that the number of every space that he hops on is less than $n$ and relatively prime to $n$.\n\nA positive integer $n$ is called *bunny-unfriendly* if, when given that $n$, Bunbury is unable to find positive integers $a, d$ that allow him to perform the hops he wants. Find the maximum bunny-unfriendly integer, or prove that no such maximum exists.",
+    "image": null,
+    "choices": null,
+    "answer": "The maximum is $2013M$, where $M = \\prod_{p < 2014} p$ is the product of all primes less than $2014$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Primes below 2014 versus a large prime factor",
+        "body": "Let $M$ be the product of all primes less than $2014$. Note $2013 = 3\\cdot 11\\cdot 61$, so every prime factor of $2013M$ is less than $2014$. We show $2013M$ is bunny-unfriendly and every $n > 2013M$ is friendly.\n\n**$n = 2013M$ is unfriendly.** Suppose $a, d$ work. If some prime $p < 2014$ does not divide $d$, then $d$ is invertible mod $p$ and we can choose $0 \\le k < p \\le 2013$ with $a + kd \\equiv 0 \\pmod p$; that hop lands on a multiple of $p$, which shares the factor $p$ with $n$ — impossible. So every prime below 2014 divides $d$, i.e. $M \\mid d$, so $d \\ge M$ and $a + 2013d > 2013M = n$ — impossible. Hence $2013M$ is unfriendly.\n\n**Every $n > 2013M$ is friendly.** Let $p$ be the largest prime factor of $n$.\n\n*Case 1: $p < 2014$.* Let $x$ be the product of the distinct primes dividing $n$; then $x \\mid M$. Take $a = 1$, $d = x$. Each $1 + kx$ is $\\equiv 1$ modulo every prime factor of $n$, hence coprime to $n$. Also $\\frac nx$ is an integer with $\\frac nx \\ge \\frac nM > 2013$, so $n \\ge 2014x > 1 + 2013x$. ✓\n\n*Case 2: $p > 2014$* (so $p \\ge 2017$). Put $d = \\frac np$. Every prime factor $q \\ne p$ of $n$ divides $d$.\n* If $p \\mid d$ too, take $a = 1$: all $1 + kd$ are $\\equiv 1$ mod every prime of $n$, and $1 + 2013d = 1 + \\frac{2013}{p}n < n$. ✓\n* If $p \\nmid d$, the numbers $1 + kd$ ($0 \\le k < p$) hit each residue mod $p$ once, so exactly one $b \\in [0, p)$ has $p \\mid 1 + bd$; all other $1 + kd$ with $0 \\le k < p$ are coprime to $n$.\n  * If $b > 2013$: $a = 1$ works as above.\n  * If $b \\le 2013$ and $p \\ge 4028$: take $a = 1 + (b+1)d$. The hops are $1 + kd$ for $b < k \\le b + 2014 < p$, all coprime to $n$, and the largest is $1 + (b + 2014)d \\le 1 + 4027\\cdot\\frac np < n$. ✓\n  * If $b \\le 2013$ and $p < 4028$: take $a = p + d$. The hops are $p + kd$, $1 \\le k \\le 2014$. For a prime $q \\ne p$ of $n$, $q \\mid d$ so $p + kd \\equiv p \\not\\equiv 0 \\pmod q$; and mod $p$ we get $kd \\not\\equiv 0$ since $p \\nmid d$ and $0 < k \\le 2014 < p$. So all hops are coprime to $n$. Finally $n > 2013M > p^2$ (as $M$ is a product of hundreds of primes), so $p < \\frac np$ and\n  $$p + 2014d < \\frac np + 2014\\frac np = \\frac{2015}{p}n < n. \\ ✓$$\n\nSo every $n > 2013M$ is friendly, and the maximum bunny-unfriendly integer is $2013M$.\n\n**Answer: $2013\\cdot\\prod_{p<2014,\\ p \\text{ prime}} p$** ∎"
+      }
+    ],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2013-r1-05",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 25 Round 1 (2013-2014)",
+      "year": 2013,
+      "number": 5,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "text",
+    "prompt": "Niki and Kyle play a triangle game. Niki first draws $\\triangle ABC$ with area 1, and Kyle picks a point $X$ inside $\\triangle ABC$. Niki then draws segments $DG$, $EH$, and $FI$, all through $X$, such that $D$ and $E$ are on $BC$, $F$ and $G$ are on $AC$, and $H$ and $I$ are on $AB$. The ten points must all be distinct. Finally, let $S$ be the sum of the areas of triangles $DEX$, $FGX$, and $HIX$. Kyle earns $S$ points, and Niki earns $1 - S$ points. If both players play optimally to maximize the amount of points they get, who will win and by how much?",
+    "image": null,
+    "choices": null,
+    "answer": "Niki, by 1/3",
+    "acceptedAnswers": [
+      "Niki by 1/3",
+      "Niki, 1/3",
+      "Niki wins by 1/3",
+      "Niki 1/3",
+      "Niki by 1/3 point",
+      "Niki"
+    ],
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Corner triangles and AM-GM",
+        "body": "Write $[\\cdot]$ for area. Let $\\alpha = [XBC]$, $\\beta = [XCA]$, $\\gamma = [XAB]$, so $\\alpha + \\beta + \\gamma = 1$. We show that the value of the game is $S = \\frac13$: Niki scores $\\frac23$, Kyle $\\frac13$, so **Niki wins by $\\frac13$**.\n\n**Reduce to corner triangles.** With the three segments drawn as in the natural picture, the corner triangles $AFI$, $BEH$, $CDG$ cover $\\triangle ABC$, every shaded triangle $DEX, FGX, HIX$ is covered twice (e.g. $HIX$ lies in $AFI$ and in $BEH$) and everything else once. Hence\n$$[AFI] + [BEH] + [CDG] = 1 + S.$$\n\n**Minimise one corner triangle.** Put $AI = u\\cdot AB$ and $AF = v\\cdot AC$ with $0 < u, v < 1$. Then $[AFI] = uv$, and splitting along $AX$,\n$$[AFI] = [AIX] + [AFX] = u\\gamma + v\\beta.$$\nSo $uv = u\\gamma + v\\beta$. By AM-GM, $uv = u\\gamma + v\\beta \\ge 2\\sqrt{uv\\beta\\gamma}$, hence $uv \\ge 4\\beta\\gamma$, with equality iff $u\\gamma = v\\beta$, i.e. $u = 2\\beta$, $v = 2\\gamma$. Similarly $[BEH] \\ge 4\\gamma\\alpha$ and $[CDG] \\ge 4\\alpha\\beta$.\n\n**Kyle chooses the centroid.** Then $\\alpha = \\beta = \\gamma = \\frac13$, so whatever Niki does,\n$$1 + S \\ge 4(\\beta\\gamma + \\gamma\\alpha + \\alpha\\beta) = \\frac43,\\qquad S \\ge \\frac13.$$\n(Niki can achieve exactly $\\frac13$ with $u = v = \\frac23$ for each corner, i.e. each segment parallel to a side.)\n\n**Niki can always hold Kyle to $\\frac13$.**\n* If $\\alpha, \\beta, \\gamma < \\frac12$, Niki picks $u = 2\\beta$, $v = 2\\gamma$ (and similarly at $B$, $C$); these are valid points strictly inside the sides, and\n$$1 + S = 4(\\beta\\gamma + \\gamma\\alpha + \\alpha\\beta) \\le \\frac43(\\alpha + \\beta + \\gamma)^2 = \\frac43,$$\nusing $xy + yz + zx \\le \\frac13(x + y + z)^2$, which is equivalent to $(x-y)^2 + (y-z)^2 + (z-x)^2 \\ge 0$.\n* If, say, $\\alpha \\ge \\frac12$ ($X$ is at least half the height away from $BC$), Niki draws $FI \\parallel BC$; then $\\triangle AFI$ is similar to $ABC$ with ratio $1 - \\alpha \\le \\frac12$, so $[AFI] \\le \\frac14$. She draws $DG$ and $EH$ with $G$, $H$ very close to $A$, making $[BEH] + [CDG]$ as close to $[ABC] = 1$ as she likes, in particular less than $\\frac{13}{12}$. Then $1 + S < \\frac14 + \\frac{13}{12} = \\frac43$.\n\nSo with optimal play $S = \\frac13$: Kyle gets $\\frac13$, Niki gets $\\frac23$.\n\n**Answer: Niki wins, by $\\frac13$ (she scores $\\frac23$ to Kyle's $\\frac13$).**"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "games",
+      "inequalities"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

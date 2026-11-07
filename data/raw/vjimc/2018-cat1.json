@@ -1,0 +1,145 @@
+[
+  {
+    "id": "vjimc-2018-cat1-01",
+    "bank": "vjimc",
+    "source": {
+      "contest": "VJIMC",
+      "paper": "VJIMC 2018 Category I",
+      "year": 2018,
+      "number": 1,
+      "url": "https://vjimc.osu.cz/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Every point of the rectangle $R=[0,4]\\times[0,40]$ is coloured using one of four colours. Show that there exist four points in $R$ with the same colour that form a rectangle having integer side lengths.",
+    "image": null,
+    "choices": null,
+    "answer": "Pigeonhole on the $41$ rows $\\{(k,j):k=0,\\dots,4\\}$, $j=0,\\dots,40$. Each row has a monochromatic pair; there are only $4\\cdot\\binom52=40$ possible (colour, pair) types, so two rows share one.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Double pigeonhole on lattice points",
+        "body": "Consider only the lattice points $(k,j)$ with $k\\in\\{0,1,2,3,4\\}$ and $j\\in\\{0,1,\\dots,40\\}$; all of them lie in $R$. For a fixed $j$, the *row* $\\{(k,j):k=0,\\dots,4\\}$ has $5$ points and there are only $4$ colours. So it contains two points $(k_1,j),(k_2,j)$, $k_1<k_2$, of the same colour $c$. Assign to the row the *type* $(c,\\{k_1,k_2\\})$ (choose one such pair if there are several).\n\nThere are $4\\cdot\\binom52=40$ possible types but $41$ rows. So two rows $j_1<j_2$ have the same type $(c,\\{k_1,k_2\\})$. Then the four points\n$$(k_1,j_1),\\ (k_2,j_1),\\ (k_1,j_2),\\ (k_2,j_2)$$\nall have colour $c$. They form an axis-parallel rectangle with integer side lengths $k_2-k_1\\ge1$ and $j_2-j_1\\ge1$. ∎"
+      },
+      {
+        "title": "Counting monochromatic pairs",
+        "body": "Here is a counting version of the same argument. In each of the $41$ rows of $5$ lattice points, let $n_c$ be the number of points of colour $c$. The number of monochromatic pairs in the row is $\\sum_c\\binom{n_c}2$. With $\\sum_cn_c=5$ and $4$ colours, this sum is at least $1$ (attained by the split $2+1+1+1$). So altogether there are at least $41$ monochromatic \"row pairs\" (pairs of points in the same row with the same colour). Label each one by its colour and its pair of columns; there are only $40$ labels. Two row pairs with the same label lie in different rows, because each row contributes at most one pair per label. Their four points form the required monochromatic rectangle. ∎"
+      }
+    ],
+    "topics": [
+      "counting",
+      "geometry"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "vjimc-2018-cat1-02",
+    "bank": "vjimc",
+    "source": {
+      "contest": "VJIMC",
+      "paper": "VJIMC 2018 Category I",
+      "year": 2018,
+      "number": 2,
+      "url": "https://vjimc.osu.cz/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Find all prime numbers $p$ such that $p^3$ divides the determinant\n$$\\begin{vmatrix}2^2&1&1&\\cdots&1\\\\1&3^2&1&\\cdots&1\\\\1&1&4^2&&1\\\\\\vdots&\\vdots&&\\ddots&\\\\1&1&1&&(p+7)^2\\end{vmatrix}.$$",
+    "image": null,
+    "choices": null,
+    "answer": "$p\\in\\{2,3,5,181\\}$. With $n=p+6$, the determinant equals $\\frac{7n^2+17n+8}{8}(n!)^2$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Matrix determinant lemma",
+        "body": "Let $n=p+6$ be the size of the matrix, with diagonal entries $(k+1)^2$ for $k=1,\\dots,n$. Write the matrix as $J+\\operatorname{diag}(e_1,\\dots,e_n)$, where $J$ is the all-ones matrix and $e_k=(k+1)^2-1=k(k+2)>0$. By the matrix determinant lemma,\n$$D=\\det\\big(\\operatorname{diag}(e)+\\mathbf 1\\mathbf 1^T\\big)=\\prod_{k=1}^ne_k\\cdot\\Big(1+\\sum_{k=1}^n\\frac1{e_k}\\Big).$$\nHere\n$$\\prod_{k=1}^n k(k+2)=n!\\cdot\\frac{(n+2)!}{2},$$\nand by telescoping\n$$\\sum_{k=1}^n\\frac1{k(k+2)}=\\frac12\\Big(\\frac32-\\frac1{n+1}-\\frac1{n+2}\\Big).$$\nSimplifying,\n$$D=\\frac{(n!)^2(n+1)(n+2)}2\\cdot\\frac{7(n+1)(n+2)-2(2n+3)}{4(n+1)(n+2)}=\\frac{7n^2+17n+8}{8}\\,(n!)^2 .$$\n\n**Small primes.**\n* $p=2$: $n=8$, $v_2((8!)^2)=14$ and $D=74\\,(8!)^2$. Works.\n* $p=3$: $n=9$, $v_3((9!)^2)=8$, and dividing by $8$ does not remove factors of $3$. Works.\n* $p=5$: $n=11$, $v_5((11!)^2)=4$. Works.\n\n**$p\\ge7$.** Then $p<n=p+6<2p$, so $v_p\\big((n!)^2\\big)=2$. Since $p$ is odd, the factor $8$ in the denominator does not matter, and $p^3\\mid D$ iff $p\\mid7n^2+17n+8$. With $n\\equiv6\\pmod p$,\n$$7n^2+17n+8\\equiv7\\cdot36+102+8=362=2\\cdot181\\pmod p .$$\nSo $p\\mid 181$; since $181$ is prime, $p=181$. Conversely, $p=181$ works, since then $p\\mid7n^2+17n+8$ and $p^2\\,\\|\\,(n!)^2$.\n\n**Answer: $p\\in\\{2,3,5,181\\}$.** (Checked by computer for all primes below $400$.) ∎"
+      },
+      {
+        "title": "Row and column operations (official)",
+        "body": "Subtract the first row from every other row. Row $i\\ge2$ becomes $(-3,0,\\dots,0,(i+1)^2-1,0,\\dots,0)$. Factor $(i+1)^2-1$ out of row $i$ for $i\\ge2$, and $3$ out of the first entry's contribution. Then add all other columns to the first column; this kills the $-1$'s below the diagonal and leaves an upper triangular matrix. Its first diagonal entry is $\\frac{2^2}3+\\sum_{k=3}^{n+1}\\frac1{k^2-1}$, and its other diagonal entries are $1$. Hence\n$$D=3\\prod_{k=3}^{n+1}(k^2-1)\\Big(\\frac43+\\sum_{k=3}^{n+1}\\frac1{k^2-1}\\Big)=\\frac{7n^2+17n+8}8\\,(n!)^2,$$\nthe same closed form. The divisibility analysis is then as in the first solution: $p=2,3,5$ work; for $p\\ge7$, $p$ must divide $7\\cdot6^2+17\\cdot6+8=362=2\\cdot181$, so $p=181$. **Answer: $2,3,5,181$.** ∎"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "linear-algebra"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "vjimc-2018-cat1-03",
+    "bank": "vjimc",
+    "source": {
+      "contest": "VJIMC",
+      "paper": "VJIMC 2018 Category I",
+      "year": 2018,
+      "number": 3,
+      "url": "https://vjimc.osu.cz/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $n$ be a positive integer and let $x_1,\\dots,x_n$ be positive real numbers satisfying $|x_i-x_j|\\le1$ for all pairs $(i,j)$ with $1\\le i<j\\le n$. Prove that\n$$\\frac{x_1}{x_2}+\\frac{x_2}{x_3}+\\dots+\\frac{x_{n-1}}{x_n}+\\frac{x_n}{x_1}\\ge\\frac{x_2+1}{x_1+1}+\\frac{x_3+1}{x_2+1}+\\dots+\\frac{x_n+1}{x_{n-1}+1}+\\frac{x_1+1}{x_n+1}.$$",
+    "image": null,
+    "choices": null,
+    "answer": "With $h(t)=t-\\ln t$, show $h\\big(\\frac xy\\big)\\ge h\\big(\\frac{y+1}{x+1}\\big)$ whenever $|x-y|\\le1$, and sum cyclically; the logarithms telescope to $0$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Compare $t-\\ln t$ term by term",
+        "body": "Let $h(t)=t-\\ln t$ for $t>0$. Since $h'(t)=1-\\frac1t$, $h$ decreases on $(0,1]$ and increases on $[1,\\infty)$.\n\n**Two auxiliary inequalities.**\n1. For $t\\ge1$: $h(t)\\ge h(1/t)$, i.e. $t-\\frac1t\\ge2\\ln t$. Both sides vanish at $t=1$, and the derivative of the difference is $1+\\frac1{t^2}-\\frac2t=\\big(1-\\frac1t\\big)^2\\ge0$.\n2. For $0\\le s<1$: $h(1-s)\\ge h(1+s)$, i.e. $\\ln(1+s)-\\ln(1-s)\\ge2s$. Both sides vanish at $s=0$, and the derivative of the difference is $\\frac1{1+s}+\\frac1{1-s}-2=\\frac{2s^2}{1-s^2}\\ge0$.\n\n**Key claim:** if $x,y>0$ and $|x-y|\\le1$, then $h\\big(\\frac xy\\big)\\ge h\\big(\\frac{y+1}{x+1}\\big)$.\n\n* **If $x\\ge y$:** by (1), $h\\big(\\frac xy\\big)\\ge h\\big(\\frac yx\\big)$. Moreover $\\frac yx\\le\\frac{y+1}{x+1}\\le1$, and $h$ decreases on $(0,1]$, so $h\\big(\\frac yx\\big)\\ge h\\big(\\frac{y+1}{x+1}\\big)$.\n* **If $x<y\\le x+1$:** let $s=\\frac{y-x}y\\in(0,1)$. By (2), $h\\big(\\frac xy\\big)=h(1-s)\\ge h(1+s)$. Since $y\\le x+1$, we have $1+s=1+\\frac{y-x}y\\ge1+\\frac{y-x}{x+1}=\\frac{y+1}{x+1}\\ge1$. As $h$ increases on $[1,\\infty)$, $h(1+s)\\ge h\\big(\\frac{y+1}{x+1}\\big)$.\n\n**Summing.** Apply the claim to $(x,y)=(x_i,x_{i+1})$ for $i=1,\\dots,n$ (with $x_{n+1}=x_1$) and add. We have\n$$\\sum_i\\ln\\frac{x_i}{x_{i+1}}=0=\\sum_i\\ln\\frac{x_{i+1}+1}{x_i+1}$$\n(each is the logarithm of a telescoping product equal to $1$), so the logarithms cancel and\n$$\\sum_{i=1}^n\\frac{x_i}{x_{i+1}}\\ge\\sum_{i=1}^n\\frac{x_{i+1}+1}{x_i+1}.\\ ∎$$"
+      }
+    ],
+    "topics": [
+      "inequalities"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "vjimc-2018-cat1-04",
+    "bank": "vjimc",
+    "source": {
+      "contest": "VJIMC",
+      "paper": "VJIMC 2018 Category I",
+      "year": 2018,
+      "number": 4,
+      "url": "https://vjimc.osu.cz/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Determine all possible (finite or infinite) values of\n$$\\lim_{x\\to-\\infty}f(x)-\\lim_{x\\to+\\infty}f(x),$$\nif $f\\colon\\mathbb R\\to\\mathbb R$ is a strictly decreasing continuous function satisfying\n$$f(f(x))^4-f(f(x))+f(x)=1$$\nfor all $x\\in\\mathbb R$.",
+    "image": null,
+    "choices": null,
+    "answer": "Exactly the numbers in the open interval $\\big(0,(1+z)^4-1\\big)$, where $z=\\frac{3}{4\\sqrt[3]4}$ (so $(1+z)^4-1\\approx3.701$); infinite values are impossible.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Invert $t^4-t$ on the range of $f$",
+        "body": "**Notation.** Let $g(t)=t^4-t$ and $t_0=4^{-1/3}$, the point where $g'(t)=4t^3-1$ vanishes. Let $z=-g(t_0)=\\frac34t_0=\\frac3{4\\sqrt[3]4}\\approx0.4725$. Then $g$ is strictly decreasing on $(-\\infty,t_0]$, strictly increasing on $[t_0,\\infty)$, and $g(\\mathbb R)=[-z,\\infty)$.\n\nDefine $h\\colon(-\\infty,1+z]\\to[t_0,\\infty)$ by: $h(y)$ is the unique $t\\ge t_0$ with $g(t)=1-y$. Then:\n* $h$ is a continuous, strictly decreasing bijection;\n* its inverse is $h^{-1}(t)=1-g(t)=1+t-t^4$ for $t\\ge t_0$;\n* $h(1)=1$, $h(1+z)=t_0$, and $h(y)\\to\\infty$ as $y\\to-\\infty$.\n\nLet $C=(1+z)^4-1\\approx3.701$.\n\n**Necessity.** Let $b=\\lim_{-\\infty}f$ and $a=\\lim_{+\\infty}f$ (they exist in $[-\\infty,\\infty]$ by monotonicity). Since $f$ is strictly decreasing and continuous, its range is the open interval $H=(a,b)$. Putting $y=f(x)$, the equation says\n$$g(f(y))=1-y\\qquad\\text{for all }y\\in H .$$\n1. Since $g\\ge-z$, every $y\\in H$ satisfies $y\\le1+z$, so $b\\le1+z$.\n2. $f\\ge t_0$ on $H$. Suppose $f(y_1)<t_0$ for some $y_1\\in H$. By continuity there is $y_2\\in H$, $y_2>y_1$, with $f(y_2)<t_0$. Then $f(y_2)<f(y_1)<t_0$, and since $g$ decreases on $(-\\infty,t_0]$, $1-y_2=g(f(y_2))>g(f(y_1))=1-y_1$, i.e. $y_2<y_1$. Contradiction.\n\n   Hence $f=h$ on $H$.\n3. $a$ is finite. Otherwise $f=h$ on $(-\\infty,b)$ would be unbounded above, while $f<b$.\n4. By continuity, $f(a)=\\lim_{y\\to a^+}h(y)=h(a)$. Since $f(a)\\in H$, we get $h(a)<b\\le1+z=h\\big(h^{-1}(1+z)\\big)$. As $h$ is decreasing,\n$$a>h^{-1}(1+z)=1+(1+z)-(1+z)^4=2+z-(1+z)^4 .$$\n\nTherefore $0<b-a<(1+z)-\\big(2+z-(1+z)^4\\big)=C$. In particular the difference is finite.\n\n**Lemma.** For $1<b<1+z$ we have $h^{-1}(b)<h(b)$.\n\n*Proof.* Let $u=h(b)\\in(t_0,1)$ and $s=1-u\\in(0,1-t_0)$. Then\n$$b=h^{-1}(u)=1+u-u^4=1+r,\\qquad r=3s-6s^2+4s^3-s^4>0 .$$\nNow $h^{-1}(b)=1-g(1+r)=1-(3r+6r^2+4r^3+r^4)<1-3r$, so it suffices to show $3r\\ge s$, i.e.\n$$3r-s=s\\,(8-18s+12s^2-3s^3)\\ge0 .$$\nThis holds for $0<s<\\frac49$, since then $8-18s>0$ and $12s^2-3s^3=3s^2(4-s)>0$. Finally $1-t_0<\\frac49$, because $t_0>\\frac59\\iff 9^3>4\\cdot5^3$, i.e. $729>500$. $\\square$\n\n**Sufficiency.** Let $1<b<1+z$ and $h^{-1}(b)<a<h(b)$; such $a$ exist by the lemma. Note $a<h(b)<h(1)=1<b$. Since $h$ is decreasing, $a>h^{-1}(b)$ gives $h(a)<b$, and $h(b)>a$. So $h([a,b])=[h(b),h(a)]\\subset(a,b)$. Define\n$$f(x)=\\begin{cases}b-(b-h(a))\\,e^{x-a},&x<a,\\\\ h(x),&a\\le x\\le b,\\\\ a+(h(b)-a)\\,e^{-(x-b)},&x>b.\\end{cases}$$\nThen $f$ is continuous and strictly decreasing, with limits $b$ at $-\\infty$ and $a$ at $+\\infty$. Its range is $(a,b)\\subset(-\\infty,1+z]$, on which $f=h$. Hence $g\\big(f(f(x))\\big)=g\\big(h(f(x))\\big)=1-f(x)$, which is exactly the required equation.\n\n**Every $c\\in(0,C)$ occurs.** For given $b$ the construction realizes every difference $b-a$ in the interval $\\big(L(b),U(b)\\big)$, where\n$$L(b)=b-h(b),\\qquad U(b)=b-h^{-1}(b)=b^4-1 .$$\nThe lemma says $L(b)<U(b)$. Given $c\\in(0,C)$, let $b_1=(1+c)^{1/4}\\in(1,1+z)$, so $U(b_1)=c$ and $L(b_1)<c$. By continuity, every $b$ slightly larger than $b_1$ satisfies $L(b)<c<U(b)$, so $c$ is attained.\n\n**Answer:** the possible values are exactly the real numbers in $\\big(0,(1+z)^4-1\\big)$ with $z=\\frac3{4\\sqrt[3]4}$, i.e. $\\left(0,\\big(1+\\frac{3}{4\\sqrt[3]{4}}\\big)^4-1\\right)\\approx(0,\\,3.701)$. Infinite values do not occur. ∎\n\n*Note.* The official solution proves the lemma by differentiating $\\varphi(b)=h^{-1}(h^{-1}(b))-b$. Its derivative estimate is not valid on the whole range (one finds $\\varphi'<0$ near the right end), so the lemma is proved here by the direct estimate above. The lemma itself was also checked numerically."
+      }
+    ],
+    "topics": [
+      "functional-equations",
+      "real-analysis"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

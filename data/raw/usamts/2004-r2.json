@@ -1,0 +1,199 @@
+[
+  {
+    "id": "usamts-2004-r2-01",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 16 Round 2 (2004-2005)",
+      "year": 2004,
+      "number": 1,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "The numbers 1 through 9 can be arranged in the triangles labeled $a$ through $i$ illustrated in the figure so that the numbers in each of the $2 \\times 2$ triangles sum to the same value $n$; that is\n$$a + b + c + d = b + e + f + g = d + g + h + i = n.$$\nFor each possible sum $n$, show such an arrangement, labeled with the sum as shown in the figure. Prove that there are no possible arrangements for any other values of $n$.",
+    "image": "qimages/usamts/2004-r2/q01.webp",
+    "choices": null,
+    "answer": "$n \\in \\{17, 19, 20, 21, 23\\}$. Examples $(a; b, c, d; e, f, g, h, i)$: $n=17$: $(9; 3,4,1; 5,7,2,6,8)$; $n=19$: $(6; 1,8,4; 9,2,7,3,5)$; $n=20$: $(1; 7,9,3; 6,2,5,4,8)$; $n=21$: $(2; 3,7,9; 8,4,6,5,1)$; $n=23$: $(4; 9,3,7; 1,5,8,6,2)$. Bounds from $3n = 45 + b + d + g$; $n = 18$ and $n = 22$ are impossible.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Bound $n$, then rule out 18 and 22",
+        "body": "**Bounds.** Adding the three equations, every cell is counted once except $b$, $d$, $g$, which lie in two of the $2\\times 2$ triangles and are counted twice:\n$$3n = (a + b + \\dots + i) + (b + d + g) = 45 + (b + d + g).$$\nSince $b, d, g$ are three distinct numbers from 1 to 9, $6 \\le b + d + g \\le 24$, so $51 \\le 3n \\le 69$ and $17 \\le n \\le 23$.\n\n**Examples.** Writing an arrangement as $(a;\\ b, c, d;\\ e, f, g, h, i)$ (top row; middle row; bottom row, left to right):\n\n| $n$ | arrangement | checks |\n|---|---|---|\n| 17 | $(9;\\ 3, 4, 1;\\ 5, 7, 2, 6, 8)$ | $9+3+4+1 = 3+5+7+2 = 1+2+6+8 = 17$ |\n| 19 | $(6;\\ 1, 8, 4;\\ 9, 2, 7, 3, 5)$ | $6+1+8+4 = 1+9+2+7 = 4+7+3+5 = 19$ |\n| 20 | $(1;\\ 7, 9, 3;\\ 6, 2, 5, 4, 8)$ | $1+7+9+3 = 7+6+2+5 = 3+5+4+8 = 20$ |\n| 21 | $(2;\\ 3, 7, 9;\\ 8, 4, 6, 5, 1)$ | $2+3+7+9 = 3+8+4+6 = 9+6+5+1 = 21$ |\n| 23 | $(4;\\ 9, 3, 7;\\ 1, 5, 8, 6, 2)$ | $4+9+3+7 = 9+1+5+8 = 7+8+6+2 = 23$ |\n\n**$n = 18$ is impossible.** Then $b + d + g = 3\\cdot 18 - 45 = 9$. The number 9 cannot be one of $b, d, g$ (the other two would sum to 0). So 9 is one of the six cells $a, c, e, f, h, i$, and each of these lies in exactly one $2\\times2$ triangle. That small triangle consists of the cell with 9, one more unshared cell $x$, and two of $b, d, g$; call the third of $b, d, g$ (the one not in this triangle) $z$. Its sum is\n$$18 = 9 + x + (9 - z),$$\nso $x = z$ — two different cells with the same number, a contradiction. (For instance, if 9 is in $a$ or $c$, the triangle is $\\{a, b, c, d\\}$ and $z = g$.)\n\n**$n = 22$ is impossible.** Replacing every entry $x$ by $10 - x$ turns an arrangement with sum $n$ into one with sum $40 - n$ (each small triangle has 4 cells). A sum-22 arrangement would give a sum-18 arrangement, which does not exist.\n\nHence the possible sums are exactly $17, 19, 20, 21, 23$. ∎"
+      },
+      {
+        "title": "Case check for $n = 18$",
+        "body": "As a check of the key step, list the possibilities directly. For $n = 18$, $\\{b, d, g\\}$ is a 3-element set with sum 9: $\\{1,2,6\\}$, $\\{1,3,5\\}$ or $\\{2,3,4\\}$, and by the 3-fold rotational symmetry of the figure (which permutes $b, d, g$ and the three small triangles) we may fix the order.\n\n* $b = 4, d = 2, g = 3$: $a + c = 18 - 6 = 12$ with numbers other than $2, 3, 4$ forces $\\{a, c\\} = \\{5, 7\\}$ (as $3 + 9$ and $4 + 8$ are excluded); and $e + f = 18 - 7 = 11$ forces $\\{e, f\\} = \\{5, 6\\}$ (as $2 + 9$, $3 + 8$, $4 + 7$ are excluded) — 5 is used twice.\n* $b = 1, d = 5, g = 3$: $\\{a, c\\}$ sums to 12 avoiding $1,3,5$: $\\{4, 8\\}$. Then $h + i = 10$ avoiding $1,3,5,4,8$: needs $\\{2, 8\\}$ or $\\{4,6\\}$ — both reuse a number.\n* $b = 1, d = 2, g = 6$: $a + c = 15$ gives $\\{7, 8\\}$; $e + f = 11$ gives $\\{3, 8\\}$ or $\\{4, 7\\}$ — conflict.\n\nEvery case fails, confirming $n \\ne 18$; by the $x \\mapsto 10 - x$ symmetry $n \\ne 22$. A computer search over all $9!$ arrangements also finds exactly the sums $17, 19, 20, 21, 23$. ∎"
+      }
+    ],
+    "topics": [
+      "logic",
+      "arithmetic"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2004-r2-02",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 16 Round 2 (2004-2005)",
+      "year": 2004,
+      "number": 2,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Call a number $a - b\\sqrt2$ with $a$ and $b$ both positive integers *tiny* if it is closer to zero than any number $c - d\\sqrt2$ such that $c$ and $d$ are positive integers with $c < a$ and $d < b$. Three numbers which are tiny are $1 - \\sqrt2$, $3 - 2\\sqrt2$, and $7 - 5\\sqrt2$. Without using a calculator or computer, prove whether or not each of the following is tiny:\n\n(a) $58 - 41\\sqrt2$, (b) $99 - 70\\sqrt2$.",
+    "image": null,
+    "choices": null,
+    "answer": "(a) **Not tiny**: $|58 - 41\\sqrt2| = \\sqrt2\\,|41 - 29\\sqrt2| > |41 - 29\\sqrt2|$. (b) **Tiny**: $99^2 - 2\\cdot70^2 = 1$, so a closer $c - d\\sqrt2$ with $c < 99$, $d < 70$ would give $0 < |c^2 - 2d^2| < 1$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Multiply by $\\sqrt2$ and by conjugates",
+        "body": "**(a)** Multiply $41 - 29\\sqrt2$ by $\\sqrt2$:\n$$\\sqrt2\\,(41 - 29\\sqrt2) = 41\\sqrt2 - 58 = -(58 - 41\\sqrt2).$$\nSo $|58 - 41\\sqrt2| = \\sqrt2\\,|41 - 29\\sqrt2| > |41 - 29\\sqrt2|$ (the number $41 - 29\\sqrt2$ is not zero since $\\sqrt2$ is irrational). As $41 < 58$ and $29 < 41$, the number $41 - 29\\sqrt2$ is a closer competitor, so $58 - 41\\sqrt2$ is **not tiny**.\n\n**(b)** Note $99^2 - 2\\cdot 70^2 = 9801 - 9800 = 1$, i.e. $(99 - 70\\sqrt2)(99 + 70\\sqrt2) = 1$. Suppose $c, d$ are positive integers with $c < 99$, $d < 70$ and $|c - d\\sqrt2| < |99 - 70\\sqrt2|$. Then, since $0 < c + d\\sqrt2 < 99 + 70\\sqrt2$,\n$$|c^2 - 2d^2| = |c - d\\sqrt2|\\,(c + d\\sqrt2) < |99 - 70\\sqrt2|\\,(99 + 70\\sqrt2) = 1.$$\nBut $c^2 - 2d^2$ is an integer, so it is $0$, i.e. $\\sqrt2 = c/d$ would be rational — impossible. Hence no such $c, d$ exist, and $99 - 70\\sqrt2$ is **tiny**. ∎"
+      },
+      {
+        "title": "Powers of $1 - \\sqrt2$",
+        "body": "The given tiny numbers are powers of $1 - \\sqrt2$:\n$$(1-\\sqrt2)^2 = 3 - 2\\sqrt2,\\quad (1-\\sqrt2)^3 = 7 - 5\\sqrt2,\\quad (1 - \\sqrt2)^4 = 17 - 12\\sqrt2,$$\n$$(1-\\sqrt2)^5 = 41 - 29\\sqrt2,\\quad (1-\\sqrt2)^6 = 99 - 70\\sqrt2.$$\n(Multiply by $1 - \\sqrt2$ each time: $(p - q\\sqrt2)(1 - \\sqrt2) = (p + 2q) - (p + q)\\sqrt2$.)\n\nFor any $a - b\\sqrt2$ with $a^2 - 2b^2 = \\pm1$, the argument of part (b) above works verbatim: a closer number $c - d\\sqrt2$ with smaller $c, d$ would make $|c^2 - 2d^2| < 1$. So all of these are tiny, in particular $99 - 70\\sqrt2$.\n\nOn the other hand $58^2 - 2\\cdot 41^2 = 3364 - 3362 = 2$, and $58 - 41\\sqrt2 = \\sqrt2\\,(29\\sqrt2 - 41)$, which is $\\sqrt2$ times (in absolute value) the earlier number $41 - 29\\sqrt2 = (1-\\sqrt2)^5$. So it is beaten by $41 - 29\\sqrt2$ and is **not tiny**. (In the language of continued fractions, the tiny numbers come exactly from the convergents $\\frac11, \\frac32, \\frac75, \\frac{17}{12}, \\frac{41}{29}, \\frac{99}{70}, \\dots$ of $\\sqrt2$, and $\\frac{58}{41}$ is not one of them.) ∎"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "inequalities"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2004-r2-03",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 16 Round 2 (2004-2005)",
+      "year": 2004,
+      "number": 3,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "A set is *reciprocally whole* if its elements are distinct integers greater than 1 and the sum of the reciprocals of all those elements is exactly 1. Find a set $S$, as small as possible, that contains two reciprocally whole subsets, $I$ and $J$, which are distinct but not necessarily disjoint (meaning they may share elements, but they may not be the same subset). Prove that no set with fewer elements than $S$ can contain two reciprocally whole subsets.",
+    "image": null,
+    "choices": null,
+    "answer": "The minimum size is 5, e.g. $S = \\{2, 3, 6, 7, 42\\}$ with $I = \\{2, 3, 6\\}$, $J = \\{2, 3, 7, 42\\}$ (or $S = \\{2,3,4,6,12\\}$ with $\\{2,3,6\\}$, $\\{2,4,6,12\\}$). With 4 elements the two subsets would both have 3 elements, sharing two, which forces the third elements to be equal.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Size argument",
+        "body": "**A 5-element example.** $S = \\{2, 3, 6, 7, 42\\}$ contains\n$$I = \\{2, 3, 6\\}:\\ \\tfrac12 + \\tfrac13 + \\tfrac16 = 1,\\qquad J = \\{2, 3, 7, 42\\}:\\ \\tfrac12 + \\tfrac13 + \\tfrac17 + \\tfrac1{42} = \\tfrac{21 + 14 + 6 + 1}{42} = 1.$$\n\n**No smaller set works.**\n\n1. A reciprocally whole set has at least 3 elements: one element $x > 1$ gives $\\frac1x < 1$, and two distinct elements give at most $\\frac12 + \\frac13 = \\frac56 < 1$.\n2. If $I \\subsetneq J$ were both reciprocally whole, the reciprocal sum of $J$ would exceed that of $I$, which is 1. So neither of $I, J$ contains the other. In particular, neither can be all of $S$.\n3. Hence $I$ and $J$ are proper subsets of $S$ with at least 3 elements each, so $|S| \\ge 4$. Suppose $|S| = 4$. Then $I$ and $J$ are two different 3-element subsets of $S$, so they share exactly two elements: $I = \\{a, b, c\\}$, $J = \\{a, b, d\\}$ with $c \\ne d$. Then\n$$\\tfrac1a + \\tfrac1b + \\tfrac1c = 1 = \\tfrac1a + \\tfrac1b + \\tfrac1d \\implies c = d,$$\na contradiction.\n\nSo the smallest possible $S$ has 5 elements, e.g. $\\{2, 3, 6, 7, 42\\}$. ∎"
+      },
+      {
+        "title": "Classify small reciprocally whole sets",
+        "body": "Another route is to find all reciprocally whole sets with at most 3 elements. With elements $a < b < c$ and $\\frac1a + \\frac1b + \\frac1c = 1$: since $\\frac1a$ is the largest term, $\\frac1a > \\frac13$, so $a = 2$; then $\\frac1b + \\frac1c = \\frac12$ with $\\frac1b > \\frac14$ gives $b = 3$ and $c = 6$. So $\\{2, 3, 6\\}$ is the **only** reciprocally whole set with at most 3 elements (none have 1 or 2 elements, as shown above).\n\nIn a set $S$ with $|S| \\le 4$, the two reciprocally whole subsets cannot be $S$ itself (a proper reciprocally whole subset of a reciprocally whole set is impossible), so both have at most 3 elements — both would have to be $\\{2, 3, 6\\}$, contradicting $I \\ne J$. Hence $|S| \\ge 5$, and $S = \\{2, 3, 4, 6, 12\\}$ works: $\\{2, 3, 6\\}$ and $\\{2, 4, 6, 12\\}$ ($\\frac{6 + 3 + 2 + 1}{12} = 1$). ∎"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "fractions-decimals"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2004-r2-04",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 16 Round 2 (2004-2005)",
+      "year": 2004,
+      "number": 4,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "How many quadrilaterals in the plane have four of the nine points $(0, 0)$, $(0, 1)$, $(0, 2)$, $(1, 0)$, $(1, 1)$, $(1, 2)$, $(2, 0)$, $(2, 1)$, $(2, 2)$ as vertices? Do count both concave and convex quadrilaterals, but do not count figures where two sides cross each other or where a vertex angle is $180^\\circ$. Rigorously verify that no quadrilateral was skipped or counted more than once.",
+    "image": null,
+    "choices": null,
+    "answer": "94",
+    "acceptedAnswers": null,
+    "answerUnit": "quadrilaterals",
+    "solutions": [
+      {
+        "title": "Count point sets, then quadrilaterals per set",
+        "body": "**Usable 4-point sets.** There are $\\binom94 = 126$ ways to choose 4 of the points. A choice containing three collinear points $P, Q, R$ (with $Q$ between $P$ and $R$) gives no valid quadrilateral: if $Q$ is joined to both $P$ and $R$, the angle at $Q$ is $180^\\circ$; otherwise $P$ and $R$ are adjacent, so the side $PR$ passes through the vertex $Q$ and two sides overlap. The 3×3 grid has exactly 8 lines through three of the points (3 rows, 3 columns, 2 diagonals), no line contains 4, and two different such lines share at most one point, so a 4-set contains at most one collinear triple. Hence the bad 4-sets number $8 \\cdot 6 = 48$ (a line, plus one of the 6 other points), leaving $126 - 48 = 78$ sets with no three collinear.\n\n**Quadrilaterals per set.** Four points, no three collinear, can be joined into a closed path in 3 ways (the 3 ways to split them into two \"diagonal\" pairs).\n* If the four points are in convex position, exactly one of the 3 paths is non-self-intersecting (the convex quadrilateral); the other two cross.\n* If one point lies inside the triangle of the other three, all 3 paths are simple (concave) quadrilaterals.\n\n**Sets with a point inside the triangle of the others.** In the 3×3 grid the only point that can lie strictly inside a triangle of grid points is the centre $(1,1)$ (any other point lies on the boundary of the square, so it cannot be interior to a triangle contained in the square). The triangles of grid points containing $(1,1)$ in their interior, with no three of the four points collinear, are:\n* one side of the square plus the midpoint of the opposite side, e.g. $(0,0), (2,0), (1,2)$: 4 triangles;\n* a corner plus the midpoints of the two far sides, e.g. $(0,0), (2,1), (1,2)$: 4 triangles.\n\n(A triangle using two opposite corners or two opposite midpoints has $(1,1)$ on a side, which is excluded; checking the remaining triangles of grid points leaves just these two families.) That makes 8 such sets.\n\n**Total.** $70$ sets give one quadrilateral each and $8$ sets give three each:\n$$70 \\cdot 1 + 8 \\cdot 3 = 94.$$\nEach quadrilateral is counted once, since it is determined by its vertex set together with its cyclic order.\n\n**Answer: 94**"
+      },
+      {
+        "title": "Sort by shape",
+        "body": "As a cross-check, sort the quadrilaterals by shape (counting the positions of each shape in the grid):\n\n* rectangles: one $2\\times2$, one tilted $\\sqrt2\\times\\sqrt2$, four $1\\times1$, four $1\\times2$: **10**;\n* other parallelograms: 4 + 8 = **12**;\n* trapezoids that are not parallelograms: 16 + 8 + 4 = **28**;\n* kites (not rhombi): **4**;\n* other convex quadrilaterals: 8 + 8 = **16**;\n* concave quadrilaterals: 4 + 8 + 8 + 4 = **24** (exactly the $8 \\cdot 3$ from the first method).\n\nTotal $10 + 12 + 28 + 4 + 16 + 24 = 94$, and the convex ones add up to $70$, agreeing with the first count. A computer enumeration of all simple quadrilaterals on the grid also gives 94.\n\n**Answer: 94**"
+      }
+    ],
+    "topics": [
+      "counting",
+      "geometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2004-r2-05",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 16 Round 2 (2004-2005)",
+      "year": 2004,
+      "number": 5,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "text",
+    "prompt": "Two circles of equal radius can tightly fit inside right triangle $ABC$, which has $AB = 13$, $BC = 12$, and $CA = 5$, in the three positions illustrated below. Determine the radii of the circles in each case.",
+    "image": "qimages/usamts/2004-r2/q05.webp",
+    "choices": null,
+    "answer": "3/2, 10/9, 26/17",
+    "acceptedAnswers": [
+      "3/2,10/9,26/17",
+      "(3/2, 10/9, 26/17)",
+      "1.5, 10/9, 26/17",
+      "(i) 3/2, (ii) 10/9, (iii) 26/17",
+      "3/2; 10/9; 26/17",
+      "3/2 10/9 26/17"
+    ],
+    "answerUnit": null,
+    "answerDisplay": "(i) $\\frac32$, (ii) $\\frac{10}{9}$, (iii) $\\frac{26}{17}$",
+    "solutions": [
+      {
+        "title": "Similar triangles and incircles",
+        "body": "Let $r$ be the common radius. The right triangle $ABC$ (right angle at $C$) has inradius $\\frac{5 + 12 - 13}{2} = 2$; any triangle similar to it with ratio $k$ has inradius $2k$.\n\nIn each case draw the common internal tangent line of the two circles (through their touching point, perpendicular to the line of centres).\n\n**Case (i)** (both circles on $BC$). The two centres are at height $r$ above $BC$, so the common tangent is perpendicular to $BC$; it meets $BC$ at $D$ and $AB$ at $E$, with $DC = 2r$ (it is at distance $r$ from the circle next to $C$, which touches $AC$). The left circle is the incircle of $\\triangle EBD \\sim \\triangle ABC$ with ratio $\\frac{BD}{BC} = \\frac{12 - 2r}{12}$. So\n$$r = 2\\cdot\\frac{12 - 2r}{12} \\implies 6r = 12 - 2r \\implies r = \\tfrac32.$$\n\n**Case (ii)** (both circles on $CA$). Now the tangent is parallel to $BC$, meets $CA$ at $D$ with $CD = 2r$, and the upper circle is the incircle of $\\triangle AED \\sim \\triangle ABC$ with ratio $\\frac{AD}{AC} = \\frac{5 - 2r}{5}$:\n$$r = 2\\cdot\\frac{5 - 2r}{5} \\implies 5r = 10 - 4r \\implies r = \\tfrac{10}{9}.$$\n\n**Case (iii)** (one circle touches $BC$, the other $CA$, both touch $AB$). The common tangent is perpendicular to $AB$, hitting $AB$ at $D$, $BC$ at $E$ and line $AC$ at $F$. The two circles are the incircles of right triangles $EBD$ and $FAD$, both similar to $ABC$. Equal incircles mean $\\triangle EBD \\cong \\triangle FAD$; matching the angle at $B$ in $EBD$ with the angle $\\angle AFD = \\angle B$ in $FAD$, the leg $DE$ (opposite $\\angle B$) corresponds to the leg $AD$ (opposite $\\angle F$), so $AD = DE = x$. In $\\triangle EBD$: $\\frac{DE}{BD} = \\tan B = \\frac{5}{12}$, so\n$$\\frac{x}{13 - x} = \\frac{5}{12} \\implies 17x = 65 \\implies x = \\tfrac{65}{17}.$$\nThe ratio of $\\triangle EBD$ to $\\triangle ABC$ is $\\frac{DE}{CA} = \\frac{x}{5} = \\frac{13}{17}$, so $r = 2\\cdot\\frac{13}{17} = \\frac{26}{17}$.\n\n**Answer: (i) $\\frac32$, (ii) $\\frac{10}{9}$, (iii) $\\frac{26}{17}$**"
+      },
+      {
+        "title": "Coordinates",
+        "body": "Put $C = (0, 0)$, $B = (-12, 0)$, $A = (0, 5)$. The hypotenuse is $5x - 12y + 60 = 0$, and a point inside the triangle at distance $r$ from it satisfies $5x - 12y + 60 = 13r$.\n\n* **(i)** Centres $(-r, r)$ (touching both legs) and $(-3r, r)$ (touching $BC$ and $AB$): $-15r - 12r + 60 = 13r$, so $r = \\frac{60}{40} = \\frac32$.\n* **(ii)** Centres $(-r, r)$ and $(-r, 3r)$, the upper one touching $AB$: $-5r - 36r + 60 = 13r$, so $r = \\frac{60}{54} = \\frac{10}{9}$.\n* **(iii)** Centre $P = (x_1, r)$ touches $BC$ and $AB$: $5x_1 - 12r + 60 = 13r$, so $x_1 = 5r - 12$. Centre $Q = (-r, y_2)$ touches $CA$ and $AB$: $-5r - 12y_2 + 60 = 13r$, so $y_2 = 5 - \\frac32 r$. Tangency $PQ = 2r$:\n$$(6r - 12)^2 + \\left(\\tfrac52 r - 5\\right)^2 = 4r^2 \\iff (2 - r)^2\\left(36 + \\tfrac{25}{4}\\right) = 4r^2 \\iff \\tfrac{13}{2}(2 - r) = 2r,$$\nso $r = \\frac{26}{17}$.\n\n**Answer: (i) $\\frac32$, (ii) $\\frac{10}{9}$, (iii) $\\frac{26}{17}$**"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

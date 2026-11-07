@@ -1,0 +1,198 @@
+[
+  {
+    "id": "usamts-2008-r1-01",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 20 Round 1 (2008-2009)",
+      "year": 2008,
+      "number": 1,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "27 unit cubes — 25 of which are colored black and 2 of which are colored white — are assembled to form a $3\\times3\\times3$ cube. How many distinguishable cubes can be formed? (Two cubes are indistinguishable if one of them can be rotated to appear identical to the other. An example of two indistinguishable cubes is shown in the picture.)",
+    "image": "qimages/usamts/2008-r1/q01.webp",
+    "choices": null,
+    "answer": "22",
+    "acceptedAnswers": null,
+    "answerUnit": "cubes",
+    "solutions": [
+      {
+        "title": "Classify by the positions of the white cubes",
+        "body": "The 27 positions are of four kinds: 8 corners, 12 edges, 6 face-centres and 1 central (hidden) cube.\n\n**One white cube in the centre.** The other is a corner, an edge or a face-centre: **3** ways (all positions of one kind are equivalent under rotation).\n\n**Neither in the centre.**\n* *Two corners* — they are the ends of an edge, of a face diagonal, or of a space diagonal: **3**.\n* *Corner and edge* — put the corner at $(1,1,1)$ (coordinates in $\\{-1,0,1\\}$); the rotations fixing it are the $120^\\circ$ turns cycling the coordinates. The edge cube is adjacent, like $(1,1,0)$ (one class); or it shares a face with the corner without touching it, like $(1,-1,0)$ or $(-1,1,0)$ — these six positions form **two** classes, $\\{(1,-1,0), (0,1,-1), (-1,0,1)\\}$ and $\\{(-1,1,0), (0,-1,1), (1,0,-1)\\}$, which are mirror images and cannot be rotated into each other; or it shares no face with the corner, like $(-1,-1,0)$ (one class): **4**.\n* *Corner and face-centre* — the face-centre is on one of the three faces through the corner, or not: **2**.\n* *Two edges* — they share a face (diagonally adjacent or opposite on that face, 2 ways) or they lie on no common face (3 distinguishable ways): **5**.\n* *Edge and face-centre* — the face-centre is on one of the two faces containing the edge cube, on a face adjacent to both of these, or on a face adjacent to only one of them: **3**.\n* *Two face-centres* — adjacent or opposite faces: **2**.\n\nTotal: $3 + 3 + 4 + 2 + 5 + 3 + 2 = 22$.\n\n**Answer: $22$**"
+      },
+      {
+        "title": "Burnside's lemma",
+        "body": "Count orbits of 2-element subsets of the 27 positions under the 24 rotations of the cube. A rotation fixes a 2-subset iff it fixes both cells or swaps them.\n\n| rotation type | number | fixed cells | 2-cycles | fixed 2-subsets |\n|---|---|---|---|---|\n| identity | 1 | 27 | 0 | $\\binom{27}{2} = 351$ |\n| $\\pm 90^\\circ$ about face axis | 6 | 3 | 0 | $3$ |\n| $180^\\circ$ about face axis | 3 | 3 | 12 | $3 + 12 = 15$ |\n| $\\pm120^\\circ$ about space diagonal | 8 | 3 | 0 | $3$ |\n| $180^\\circ$ about edge axis | 6 | 3 | 12 | $15$ |\n\n(Each non-identity rotation fixes exactly the 3 cells on its axis: the centre and two others.)\n\nNumber of distinguishable cubes:\n$$\\frac{351 + 6\\cdot 3 + 3\\cdot 15 + 8\\cdot 3 + 6\\cdot 15}{24} = \\frac{528}{24} = 22 .$$\n\n**Answer: $22$**"
+      }
+    ],
+    "topics": [
+      "counting",
+      "spatial"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2008-r1-02",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 20 Round 1 (2008-2009)",
+      "year": 2008,
+      "number": 2,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "text",
+    "prompt": "Find all positive integers $n$ for which it is possible to find three positive factors $x$, $y$, and $z$ of $n - 1$, with $x > y > z$, such that $x + y + z = n$.",
+    "image": null,
+    "choices": null,
+    "answer": "13, 31",
+    "acceptedAnswers": [
+      "13,31",
+      "13 and 31",
+      "31, 13",
+      "31,13",
+      "13 31",
+      "n=13, n=31"
+    ],
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Bound the cofactors",
+        "body": "Write $x = \\frac{n-1}{a}$, $y = \\frac{n-1}{b}$, $z = \\frac{n-1}{c}$ with positive integers $a < b < c$. Then\n$$n = \\frac{n-1}{a} + \\frac{n-1}{b} + \\frac{n-1}{c}.$$\n\n* $a \\ne 1$: otherwise $x = n - 1$ and $y + z = 1$, impossible.\n* $a \\le 2$: if $a \\ge 3$ then $x, y, z \\le \\frac{n-1}{3}$ and $n = x + y + z \\le n - 1$, impossible.\n\nSo $a = 2$, $x = \\frac{n-1}{2}$ and $y + z = \\frac{n+1}{2}$.\n\n* $b = 3$: we have $b > 2$; if $b \\ge 4$ then $y + z < 2\\cdot\\frac{n-1}{4} = \\frac{n-1}{2} < \\frac{n+1}{2}$.\n\nSo $y = \\frac{n-1}{3}$ and $z = \\frac{n+1}{2} - \\frac{n-1}{3} = \\frac{n+5}{6}$, i.e. $\\frac{n-1}{c} = \\frac{n+5}{6}$. If $c \\ge 6$, then $\\frac{n-1}{c} \\le \\frac{n-1}{6} < \\frac{n+5}{6}$. So $c \\in \\{4, 5\\}$:\n* $c = 4$: $6(n-1) = 4(n+5)$ gives $n = 13$, and indeed $12$ has factors $6 > 4 > 3$ with $6 + 4 + 3 = 13$.\n* $c = 5$: $6(n-1) = 5(n+5)$ gives $n = 31$, and $30$ has factors $15 > 10 > 6$ with $15 + 10 + 6 = 31$.\n\n**Answer: $n = 13$ or $n = 31$**"
+      },
+      {
+        "title": "Egyptian fractions",
+        "body": "Dividing $\\frac{n-1}{a} + \\frac{n-1}{b} + \\frac{n-1}{c} = n$ by $n - 1$:\n$$\\frac1a + \\frac1b + \\frac1c = \\frac{n}{n-1} = 1 + \\frac1{n-1},$$\nso $\\frac1a + \\frac1b + \\frac1c$ is slightly more than $1$, with $1 < a < b < c$ (as $a = 1$ is impossible). With distinct denominators, $a \\ge 3$ gives at most $\\frac13 + \\frac14 + \\frac15 < 1$, so $a = 2$; then $b \\ge 4$ gives at most $\\frac12 + \\frac14 + \\frac15 < 1$, so $b = 3$; then $\\frac1c = \\frac16 + \\frac1{n-1} > \\frac16$, so $c \\in \\{4, 5\\}$:\n* $c = 4$: $\\frac1{n-1} = \\frac14 - \\frac16 = \\frac1{12}$, $n = 13$;\n* $c = 5$: $\\frac1{n-1} = \\frac15 - \\frac16 = \\frac1{30}$, $n = 31$.\n\nIn both cases $a, b, c$ divide $n - 1$, so $x, y, z$ are integers. A computer search over $n < 2000$ finds only these two values.\n\n**Answer: $n = 13$ or $n = 31$**"
+      }
+    ],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2008-r1-03",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 20 Round 1 (2008-2009)",
+      "year": 2008,
+      "number": 3,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Let $a, b, c$ be real numbers. Suppose that for all real numbers $x$ such that $|x| \\le 1$, we have $|ax^2 + bx + c| \\le 100$. Determine the maximum possible value of $|a| + |b| + |c|$.",
+    "image": null,
+    "choices": null,
+    "answer": "300",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Reduce to signs",
+        "body": "Let $f(x) = ax^2 + bx + c$. Replacing $f$ by $-f$, and/or $x$ by $-x$, changes neither the hypothesis nor $|a| + |b| + |c|$, so we may assume $a \\ge 0$ and $b \\ge 0$.\n\nFrom $f(0) = c$ and $f(1) = a + b + c$: $|c| \\le 100$ and $a + b + c \\le 100$.\n* If $c \\ge 0$: $|a| + |b| + |c| = a + b + c \\le 100$.\n* If $c < 0$: $|a| + |b| + |c| = (a + b + c) - 2c \\le 100 + 200 = 300$.\n\nThe value $300$ is attained by $f(x) = 200x^2 - 100$: on $[-1, 1]$ we have $0 \\le x^2 \\le 1$, so $-100 \\le f(x) \\le 100$, and $|a| + |b| + |c| = 200 + 0 + 100 = 300$.\n\n**Answer: $300$**"
+      },
+      {
+        "title": "Interpolation at -1, 0, 1",
+        "body": "Solve for the coefficients from the values $f(-1), f(0), f(1)$:\n$$c = f(0), \\qquad a + b = f(1) - f(0), \\qquad a - b = f(-1) - f(0).$$\nFor real numbers, $|a| + |b| = \\max(|a + b|, |a - b|)$. Each of $|f(1) - f(0)|$ and $|f(-1) - f(0)|$ is at most $100 + 100 = 200$, so\n$$|a| + |b| + |c| \\le 200 + 100 = 300 .$$\nEquality needs, e.g., $f(0) = -100$ and $f(\\pm1) = 100$, which is the parabola $200x^2 - 100$; it stays within $[-100, 100]$ on $[-1, 1]$.\n\n**Answer: $300$**"
+      }
+    ],
+    "topics": [
+      "inequalities",
+      "polynomials"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2008-r1-04",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 20 Round 1 (2008-2009)",
+      "year": 2008,
+      "number": 4,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "A point $P$ inside a regular tetrahedron $ABCD$ is such that $PA = PB = \\sqrt{11}$ and $PC = PD = \\sqrt{17}$. What is the side length of $ABCD$?",
+    "image": null,
+    "choices": null,
+    "answer": "6",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Use the common perpendicular of AB and CD",
+        "body": "Let $X$ and $Y$ be the midpoints of $AB$ and $CD$. The points with $PA = PB$ form the perpendicular bisector plane of $AB$, and those with $PC = PD$ the perpendicular bisector plane of $CD$; inside the tetrahedron their intersection is the segment $XY$. So $P$ lies on $XY$.\n\nLet the side be $2s$. Then $AY = s\\sqrt3$ (a median of an equilateral face), $AX = s$, and $XY \\perp AB$, so $XY = \\sqrt{3s^2 - s^2} = s\\sqrt2$. With $x = PX$ and $y = PY$, right triangles $PXA$ and $PYC$ give\n$$x^2 + s^2 = 11, \\qquad y^2 + s^2 = 17, \\qquad x + y = s\\sqrt2 .$$\nSubstituting $y = s\\sqrt2 - x$ into the second equation and using the first:\n$$17 = 2s^2 - 2\\sqrt2\\,sx + x^2 + s^2 = 2s^2 - 2\\sqrt2\\,sx + 11 \\implies x = \\frac{s^2 - 3}{s\\sqrt2}.$$\nThen $\\frac{(s^2-3)^2}{2s^2} + s^2 = 11$, i.e. $3s^4 - 28s^2 + 9 = 0$, i.e. $(3s^2 - 1)(s^2 - 9) = 0$.\n\nIf $s^2 = \\frac13$, then $x = \\frac{s^2 - 3}{s\\sqrt2} < 0$, impossible. So $s = 3$, with $x = \\sqrt2$, $y = 2\\sqrt2$ (check: $2 + 9 = 11$, $8 + 9 = 17$, $x + y = 3\\sqrt2$). The side length is $2s = 6$.\n\n**Answer: $6$**"
+      },
+      {
+        "title": "Coordinates",
+        "body": "Place the tetrahedron at $A = (a, a, a)$, $B = (a, -a, -a)$, $C = (-a, a, -a)$, $D = (-a, -a, a)$ with $a > 0$; its side is $2\\sqrt2\\,a$. For $P = (x, y, z)$:\n* $PA = PB$ gives $(y - a)^2 + (z - a)^2 = (y + a)^2 + (z + a)^2$, i.e. $y + z = 0$;\n* $PC = PD$ gives similarly $y - z = 0$.\n\nSo $P = (x, 0, 0)$ and\n$$(x - a)^2 + 2a^2 = 11, \\qquad (x + a)^2 + 2a^2 = 17 .$$\nSubtracting: $4ax = 6$, so $x = \\frac{3}{2a}$. Then $\\left(\\frac{3}{2a} - a\\right)^2 + 2a^2 = 11$; multiplying by $4a^2$: $(3 - 2a^2)^2 + 8a^4 = 44a^2$, i.e. $12a^4 - 56a^2 + 9 = 0 = (2a^2 - 9)(6a^2 - 1)$.\n\nIf $a^2 = \\frac16$, then $x = \\frac{3}{2a} \\approx 3.67 > a$, so $P$ would be outside the tetrahedron (the tetrahedron lies in $|x| \\le a$). Hence $a^2 = \\frac92$, $a = \\frac{3}{\\sqrt2}$, and the side is $2\\sqrt2\\cdot\\frac{3}{\\sqrt2} = 6$.\n\n**Answer: $6$**"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "spatial"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2008-r1-05",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 20 Round 1 (2008-2009)",
+      "year": 2008,
+      "number": 5,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Call a positive real number *groovy* if it can be written in the form $\\sqrt n + \\sqrt{n+1}$ for some positive integer $n$. Show that if $x$ is groovy, then for any positive integer $r$, the number $x^r$ is groovy as well.",
+    "image": null,
+    "choices": null,
+    "answer": "With $y = \\sqrt{n+1} - \\sqrt n = 1/x$, put $\\alpha = \\frac{x^r + y^r}{2}$, $\\beta = \\frac{x^r - y^r}{2}$. Then $\\alpha^2$ and $\\beta^2$ are positive integers with $\\alpha^2 - \\beta^2 = (xy)^r = 1$, so $x^r = \\alpha + \\beta = \\sqrt{\\beta^2} + \\sqrt{\\beta^2 + 1}$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Odd powers, then squaring",
+        "body": "Let $x = \\sqrt{n+1} + \\sqrt n$ and $y = \\sqrt{n+1} - \\sqrt n$, so $xy = 1$.\n\n**Lemma 1: if $r$ is odd, $x^r$ is groovy.** By the binomial theorem,\n$$x^r = \\sum_{k=0}^r \\binom rk \\sqrt{n+1}^{\\,r-k}\\sqrt n^{\\,k}, \\qquad y^r = \\sum_{k=0}^r (-1)^k\\binom rk \\sqrt{n+1}^{\\,r-k}\\sqrt n^{\\,k}.$$\nIn $x^r + y^r$ only the even-$k$ terms survive; since $r$ is odd, each of these has an odd power of $\\sqrt{n+1}$ and an even power of $\\sqrt n$, so $x^r + y^r = 2A\\sqrt{n+1}$ for a positive integer $A$. Similarly $x^r - y^r = 2B\\sqrt n$ with $B$ a positive integer. Squaring and subtracting:\n$$(x^r + y^r)^2 - (x^r - y^r)^2 = 4(xy)^r = 4 \\implies 4A^2(n+1) - 4B^2 n = 4 \\implies A^2(n+1) = B^2n + 1 .$$\nHence\n$$x^r = \\frac{(x^r + y^r) + (x^r - y^r)}{2} = A\\sqrt{n+1} + B\\sqrt n = \\sqrt{B^2 n + 1} + \\sqrt{B^2 n},$$\nwhich is groovy with the positive integer $B^2n$.\n\n**Lemma 2: if $x$ is groovy, so is $x^2$.** \n$$x^2 = (n+1) + n + 2\\sqrt{n(n+1)} = \\sqrt{(2n+1)^2} + \\sqrt{4n^2 + 4n} = \\sqrt{4n^2 + 4n + 1} + \\sqrt{4n^2 + 4n}.$$\n\n**Conclusion.** Every positive integer is $r = 2^e m$ with $m$ odd. By Lemma 1, $x^m$ is groovy, and applying Lemma 2 $e$ times, $x^{2^e m} = x^r$ is groovy. ∎"
+      },
+      {
+        "title": "Both parities at once",
+        "body": "With $x$ and $y = \\frac1x$ as above, set\n$$\\alpha = \\frac{x^r + y^r}{2}, \\qquad \\beta = \\frac{x^r - y^r}{2}, \\qquad\\text{so } x^r = \\alpha + \\beta,\\ \\ \\alpha^2 - \\beta^2 = (xy)^r = 1 .$$\nHere $\\beta > 0$ because $x > 1 > y > 0$.\n\nExpanding by the binomial theorem as in the first solution, $\\alpha$ collects the terms with an even power of $\\sqrt n$ and $\\beta$ those with an odd power. If $r$ is even, $\\alpha$ is an integer and $\\beta$ is an integer multiple of $\\sqrt{n(n+1)}$; if $r$ is odd, $\\alpha$ is an integer multiple of $\\sqrt{n+1}$ and $\\beta$ an integer multiple of $\\sqrt n$. Either way $\\alpha^2$ and $\\beta^2$ are integers, and $m = \\beta^2$ is a positive integer with $\\alpha^2 = m + 1$. Therefore\n$$x^r = \\alpha + \\beta = \\sqrt{m+1} + \\sqrt m,$$\nso $x^r$ is groovy. ∎"
+      }
+    ],
+    "topics": [
+      "algebra",
+      "number-theory"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

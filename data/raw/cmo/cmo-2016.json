@@ -1,0 +1,172 @@
+[
+  {
+    "id": "cmo-cmo-2016-01",
+    "bank": "cmo",
+    "source": {
+      "contest": "CMO",
+      "paper": "CMO 2016",
+      "year": 2016,
+      "number": 1,
+      "url": "https://cms.math.ca/competitions/cmo/"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "The integers $1, 2, 3, \\ldots, 2016$ are written on a board. You can choose any two numbers on the board and replace them with their average. For example, you can replace $1$ and $2$ with $1.5$, or you can replace $1$ and $3$ with a second copy of $2$. After $2015$ replacements of this kind, the board will have only one number left on it.\n\n(a) Prove that there is a sequence of replacements that will make the final number equal to $2$.\n\n(b) Prove that there is a sequence of replacements that will make the final number equal to $1000$.",
+    "image": null,
+    "choices": null,
+    "answer": "Any block $\\{a, a+1, \\ldots, b\\}$ with $b \\ge a + 2$ can be reduced to $a + 1$ (average $b-2, b$ into $b-1$, merge the two copies, then repeatedly average $k$ and $k+2$), and by symmetry to $b - 1$; for (b) reduce $\\{1..999\\}$ to $998$, $\\{1001..2016\\}$ to $1002$, then $998, 1000, 1002 \\to 1000$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Collapse a block from the top",
+        "body": "**Lemma.** If $b \\ge a + 2$, the numbers $a, a+1, \\ldots, b$ can be reduced to the single number $a + 1$, and also to the single number $b - 1$.\n\n*Proof.* Replace $b - 2$ and $b$ by their average $b - 1$; there are now two copies of $b - 1$, which we replace by one copy of $b - 1$. The board shows $a, a+1, \\ldots, b-3, b-1$. In general, from $a, \\ldots, k, k + 2$ (with $k \\ge a$) replace $k$ and $k + 2$ by $k + 1$, obtaining $a, \\ldots, k - 1, k + 1$. Repeating, we reach $a, a + 2$, and finally $a + 1$. (If $b = a + 2$, the first two moves already leave just $a + 1$.) Applying this to the mirror image $x \\mapsto a + b - x$ of the block shows that it can also be reduced to $a + b - (a + 1) = b - 1$. $\\square$\n\nEach replacement reduces the count by one, so any complete reduction uses exactly $2015$ replacements.\n\n**(a)** Apply the lemma to $1, 2, \\ldots, 2016$: the final number is $1 + 1 = 2$.\n\n**(b)** Reduce $1, \\ldots, 999$ to $999 - 1 = 998$ and $1001, \\ldots, 2016$ to $1001 + 1 = 1002$ (these operations do not involve $1000$). The board shows $998, 1000, 1002$. Replace $998$ and $1002$ by $1000$, then the two copies of $1000$ by $1000$. ∎"
+      }
+    ],
+    "topics": [
+      "algebra",
+      "logic"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "cmo-cmo-2016-02",
+    "bank": "cmo",
+    "source": {
+      "contest": "CMO",
+      "paper": "CMO 2016",
+      "year": 2016,
+      "number": 2,
+      "url": "https://cms.math.ca/competitions/cmo/"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Consider the following system of $10$ equations in $10$ real variables $v_1, \\ldots, v_{10}$:\n$$v_i = 1 + \\frac{6v_i^2}{v_1^2 + v_2^2 + \\cdots + v_{10}^2} \\qquad (i = 1, \\ldots, 10).$$\nFind all $10$-tuples $(v_1, v_2, \\ldots, v_{10})$ that are solutions of this system.",
+    "image": null,
+    "choices": null,
+    "answer": "$(\\tfrac85, \\ldots, \\tfrac85)$ and the ten permutations of $(\\tfrac43, \\ldots, \\tfrac43, 4)$ (nine entries $\\tfrac43$).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Each variable is a root of one quadratic",
+        "body": "Let $s = v_1^2 + \\cdots + v_{10}^2$; it is nonzero (the equations involve division by $s$), so $s > 0$. Each equation gives $v_i \\ge 1 > 0$ and\n$$6v_i^2 - sv_i + s = 0 .$$\nSo every $v_i$ is a root of the quadratic $6x^2 - sx + s$. Call its roots $\\alpha, \\beta$; by Vieta, $\\alpha\\beta = \\frac s6$.\n\n**All equal.** If $v_1 = \\cdots = v_{10} = v$, then $s = 10v^2$ and $v = 1 + \\frac{6}{10} = \\frac85$. This works.\n\n**Not all equal.** Then both roots occur and $\\alpha \\ne \\beta$, both positive (each $v_i \\ge 1$). Name them so that $\\alpha$ occurs $5 + k$ times and $\\beta$ occurs $5 - k$ times, with $0 \\le k \\le 4$. By AM–GM,\n$$6\\alpha\\beta = s = (5 + k)\\alpha^2 + (5 - k)\\beta^2 \\ge 2\\alpha\\beta\\sqrt{(5+k)(5-k)} = 2\\alpha\\beta\\sqrt{25 - k^2}.$$\nDividing by $2\\alpha\\beta > 0$: $\\sqrt{25 - k^2} \\le 3$, so $k^2 \\ge 16$, $k = 4$, and AM–GM holds with equality: $9\\alpha^2 = \\beta^2$, so $\\beta = 3\\alpha$. Adding the ten equations,\n$$v_1 + \\cdots + v_{10} = 10 + \\frac{6s}{s} = 16, \\qquad\\text{i.e.}\\qquad 9\\alpha + \\beta = 12\\alpha = 16,$$\nso $\\alpha = \\frac43$, $\\beta = 4$.\n\n**Check.** For nine entries $\\frac43$ and one entry $4$: $s = 9\\cdot\\frac{16}{9} + 16 = 32$, and $1 + \\frac{6\\cdot 16/9}{32} = 1 + \\frac13 = \\frac43$, $1 + \\frac{6\\cdot 16}{32} = 4$. ✓.\n\n**Answer:** $(v_1, \\ldots, v_{10}) = (\\frac85, \\ldots, \\frac85)$, or any arrangement of nine copies of $\\frac43$ and one $4$. ∎"
+      }
+    ],
+    "topics": [
+      "algebra",
+      "inequalities"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "cmo-cmo-2016-03",
+    "bank": "cmo",
+    "source": {
+      "contest": "CMO",
+      "paper": "CMO 2016",
+      "year": 2016,
+      "number": 3,
+      "url": "https://cms.math.ca/competitions/cmo/"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Find all polynomials $P(x)$ with integer coefficients such that $P(P(n) + n)$ is a prime number for infinitely many integers $n$.",
+    "image": null,
+    "choices": null,
+    "answer": "$P(x) = p$ for a prime $p$, or $P(x) = -2x + b$ with $b$ odd. (Key fact: $P(n) \\mid P(P(n) + n)$.)",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "P(n) divides P(P(n)+n)",
+        "body": "**Key divisibility.** For integers $u, v$, $u - v \\mid P(u) - P(v)$ (as $u - v \\mid u^i - v^i$). With $u = P(n) + n$, $v = n$:\n$$P(n) \\mid P(P(n) + n) - P(n), \\quad\\text{so}\\quad P(n) \\mid P(P(n) + n).$$\n\n**Constant $P \\equiv c$.** Then $P(P(n) + n) = c$, which is prime for infinitely many $n$ iff $c$ is a prime. These are solutions.\n\n**Non-constant $P$.** If $P(n) = 0$ then $P(P(n) + n) = P(n) = 0$, not prime. A non-constant polynomial takes each value only finitely often, so $P(n) \\in \\{0, 1, -1\\}$ for only finitely many $n$. For each of the infinitely many $n$ with $P(P(n) + n)$ prime and $P(n) \\notin \\{0, \\pm1\\}$, the divisor $P(n)$ of the prime $P(P(n) + n)$ must be $\\pm$ that prime: $P(P(n) + n) = \\pm P(n)$. So one of the sign choices holds for infinitely many $n$, and since a nonzero polynomial has finitely many roots,\n$$P(P(x) + x) = P(x) \\quad\\text{or}\\quad P(P(x) + x) = -P(x) \\qquad\\text{identically.}$$\n\nIf $\\deg P = k \\ge 2$, then $P(x) + x$ has degree $k$ and $P(P(x) + x)$ has degree $k^2 > k$: impossible. So $P(x) = ax + b$ with $a \\ne 0$, and\n$$P(P(x) + x) = a\\big((a + 1)x + b\\big) + b = a(a + 1)x + (a + 1)b .$$\n- $= P(x)$: $a(a + 1) = a$ gives $a = 0$, excluded.\n- $= -P(x)$: $a(a + 1) = -a$ gives $a = -2$, and then $(a + 1)b = -b$ holds automatically.\n\nSo $P(x) = -2x + b$. Then $P(P(n) + n) = P(b - n) = 2n - b$. If $b$ is even this is even, hence prime only when it equals $2$ (one value of $n$). If $b$ is odd, $2n - b$ runs through all odd integers as $n$ varies, so it is prime for infinitely many $n$.\n\n**Answer:** the constant polynomials $P(x) = p$ with $p$ prime, and $P(x) = -2x + b$ with $b$ an odd integer. ∎"
+      }
+    ],
+    "topics": [
+      "polynomials",
+      "number-theory"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "cmo-cmo-2016-04",
+    "bank": "cmo",
+    "source": {
+      "contest": "CMO",
+      "paper": "CMO 2016",
+      "year": 2016,
+      "number": 4,
+      "url": "https://cms.math.ca/competitions/cmo/"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "**Lavaman versus the Flea.** Let $A$, $B$, and $F$ be positive integers, and assume $A < B < 2A$. A flea is at the number $0$ on the number line. The flea can move by jumping to the right by $A$ or by $B$. Before the flea starts jumping, Lavaman chooses finitely many intervals $\\{m + 1, m + 2, \\ldots, m + A\\}$ consisting of $A$ consecutive positive integers, and places lava at all of the integers in the intervals. The intervals must be chosen so that:\n\n(i) any two distinct intervals are disjoint and not adjacent;\n\n(ii) there are at least $F$ positive integers with no lava between any two intervals; and\n\n(iii) no lava is placed at any integer less than $F$.\n\nProve that the smallest $F$ for which the flea can jump over all the intervals and avoid all the lava, regardless of what Lavaman does, is $F = (n - 1)A + B$, where $n$ is the positive integer such that\n$$\\frac{A}{n + 1} \\le B - A < \\frac{A}{n}.$$",
+    "image": null,
+    "choices": null,
+    "answer": "With $C = B - A$: each lava block must be cleared by one $B$-jump from $(L - C, L]$. If $F \\le nA + C - 1$, Lavaman uses gaps of exactly $nA + C - 1$; the flea is then forced to make exactly $n$ jumps of $A$ between blocks, and its landing offset past each block grows by $1$, so it fails at block $C + 1$. If $F \\ge nA + C$, every distance $d \\ge nA$ can be covered to within $(d - C, d]$ by jumps $(u - v)A + vB$, so the flea clears every block.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Forced jumps versus a covering lemma",
+        "body": "Let $C = B - A$, so $0 < C < A$ and $\\frac{A}{n+1} \\le C < \\frac An$, i.e. $nC < A \\le (n+1)C$. The claimed value is $F^* = (n-1)A + B = nA + C$. Write the lava intervals as $(L_i, R_i] = \\{L_i + 1, \\ldots, L_i + A\\}$, $R_i = L_i + A$, $L_1 < L_2 < \\cdots$, and put $R_0 = 0$. Condition (ii) says $L_{i+1} - R_i \\ge F$, and (iii) says $L_1 + 1 \\ge F$.\n\n**Crossing a block.** To get past the block $(L_i, R_i]$ without landing in it, the flea must jump from a point $\\le L_i$ to a point $> L_i + A$; a jump of length $A$ cannot do this, so it is a $B$-jump from a point $M_i \\in (L_i - C, L_i]$, landing at $m_i = M_i + B \\in (R_i, R_i + C]$. (A single jump cannot pass two blocks, as they are more than $B$ apart.)\n\n**Part 1: if $F \\le nA + C - 1$, Lavaman wins.** Let $G = nA + C - 1$ and choose $C + 1$ blocks with $L_i = R_{i-1} + G$ ($i = 1, \\ldots, C+1$). Then lava starts at $L_1 + 1 = nA + C > F$, gaps are $G \\ge F$ (and $G \\ge 1$, so blocks are not adjacent): a legal choice.\n\nSuppose the flea crossed all blocks. Let $e_0 = 0$ and $e_i = m_i - R_i \\in \\{1, \\ldots, C\\}$ (the flea is at $R_0 + e_0 = 0$ at the start). Between $m_i = R_i + e_i$ and the take-off point $M_{i+1}$ the flea makes some $j$ jumps, $t$ of which are $B$-jumps, covering\n$$D = M_{i+1} - m_i = jA + tC .$$\nSince $M_{i+1} \\in (L_{i+1} - C, L_{i+1}]$ and $L_{i+1} - m_i = G - e_i$, the integer $D$ satisfies $nA - e_i \\le D \\le nA + C - 1 - e_i$.\n- $j \\le n - 1$ is impossible: then $D \\le (n-1)B = (n-1)A + (n-1)C < nA - C \\le nA - e_i$, because $A - nC > 0$.\n- $j \\ge n + 1$ is impossible: then $D \\ge (n+1)A > nA + C - 1 - e_i$.\n- So $j = n$ and $D = nA + tC \\le nA + C - 1 - e_i < nA + C$ forces $t = 0$: all $n$ jumps have length $A$, $D = nA$, and $D \\le nA + C - 1 - e_i$ requires $e_i \\le C - 1$.\n\nThen $m_{i+1} = m_i + nA + B$ and $e_{i+1} = m_{i+1} - R_{i+1} = (R_i + e_i + nA + B) - (R_i + G + A) = e_i + 1$. Hence $e_i = i$, and crossing block $i + 1$ needs $e_i = i \\le C - 1$. For block $C + 1$ this fails. So the flea cannot avoid the lava.\n\n**Part 2: if $F \\ge nA + C$, the flea wins.**\n\n*Covering lemma.* For every integer $d \\ge nA$ there are integers $s, t \\ge 0$ with $sA + tB \\in (d - C, d]$. Indeed let $u = \\lfloor d/A \\rfloor \\ge n$ and $z_v = (u - v)A + vB = uA + vC$ for $v = 0, 1, \\ldots, n$. Then $z_0 = uA \\le d$, consecutive values differ by $C$, and $z_n = uA + nC \\ge uA + A - C = (u+1)A - C > d - C$ (using $(n+1)C \\ge A$ and $d < (u+1)A$). Take the largest $v$ with $z_v \\le d$: if $v = n$ then $z_v > d - C$; otherwise $z_{v+1} > d$ gives $z_v > d - C$.\n\n*Strategy.* Suppose the flea stands at a lava-free point $x$ with $R_{i-1} < x$ (or $x = 0$ for $i = 1$) and $L_i - x \\ge nA$. By the lemma it can jump, using only points of $[x, L_i]$ (which are free of lava), to a point of $(L_i - C, L_i]$; one $B$-jump then takes it to a point of $(R_i, R_i + C]$, which is free since the next block starts after $R_i + F \\ge R_i + C$. From there the distance to $L_{i+1}$ is at least $L_{i+1} - R_i - C \\ge F - C \\ge nA$. At the start, $L_1 - 0 \\ge F - 1 \\ge nA + C - 1 \\ge nA$. By induction the flea passes every block, and after the last one it can jump freely.\n\nThus the flea always wins exactly when $F \\ge nA + C = (n-1)A + B$, so this is the smallest such $F$. ∎"
+      }
+    ],
+    "topics": [
+      "games",
+      "number-theory",
+      "logic"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "cmo-cmo-2016-05",
+    "bank": "cmo",
+    "source": {
+      "contest": "CMO",
+      "paper": "CMO 2016",
+      "year": 2016,
+      "number": 5,
+      "url": "https://cms.math.ca/competitions/cmo/"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $\\triangle ABC$ be an acute-angled triangle with altitudes $AD$ and $BE$ meeting at $H$. Let $M$ be the midpoint of segment $AB$, and suppose that the circumcircles of $\\triangle DEM$ and $\\triangle ABH$ meet at points $P$ and $Q$ with $P$ on the same side of $CH$ as $A$. Prove that the lines $ED$, $PH$, and $MQ$ all pass through a single point on the circumcircle of $\\triangle ABC$.",
+    "image": null,
+    "choices": null,
+    "answer": "For $X \\in \\{P, Q\\}$: the line $XH$ meets $ED$ on the circumcircle $\\Omega$ (directed-angle chase through the cyclic quadrilaterals $APDR$, $PBRE$), and the line $MX$ meets $\\Omega$ on $ED$ (power of $M$: $MX \\cdot MX^\\wedge = MA \\cdot MB = MD^2 = ME^2$). Since $ED$ meets $\\Omega$ twice and $M, P, H$ are never collinear, $PH$ must pass through the point coming from $MQ$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Two families of points on ED and Ω",
+        "body": "Let $\\Omega$ be the circumcircle of $ABC$, $\\rho$ its radius, $F$ the foot of the altitude from $C$, and $N_9$ the nine-point circle (through $D, E, F, M$); $(ABH)$ denotes the circle $ABH$. We use directed angles $\\measuredangle(\\ell, m)$ modulo $180^\\circ$ and the criterion \"$W, X, Y, Z$ concyclic $\\iff \\measuredangle(YW, YX) = \\measuredangle(ZW, ZX)$\". Facts about acute triangles used below: $H$ is inside $ABC$; $N_9$ lies strictly inside $\\Omega$; $H \\notin N_9$; $A, B \\notin N_9$; the circle $(ABH)$ meets line $AD$ only at $A, H$ and line $BE$ only at $B, H$; hence $D, E \\notin (ABH)$ and $P, Q \\notin \\{A, B, D, E, H\\}$. Also the point reflection $\\sigma$ in $M$ maps $(ABH)$ onto $\\Omega$ (it swaps $A, B$ and sends $H$ to $A + B - H$, the antipode of $C$, which lies on $\\Omega$), and the homothety $h$ with centre $H$ and ratio $2$ maps $N_9$ onto $\\Omega$. Everything below holds for $X = P$ and for $X = Q$ alike.\n\n**Step 1: the point $R_X = XH \\cap ED$ lies on $\\Omega$.** First,\n$$\\measuredangle(DA, DE) = \\measuredangle(DH, DE) = \\measuredangle(CH, CE) = \\measuredangle(CF, CA) \\quad (C, D, H, E \\text{ on the circle with diameter } CH),$$\n$$\\measuredangle(XA, XH) = \\measuredangle(BA, BH) = \\measuredangle(BA, BE) \\quad (\\text{circle } ABHX).$$\nThese are equal, because $\\measuredangle(CF, CA) = \\measuredangle(CF, AB) + \\measuredangle(AB, CA) = 90^\\circ + \\measuredangle(AB, CA)$ and $\\measuredangle(BA, BE) = \\measuredangle(AB, CA) + \\measuredangle(CA, BE) = \\measuredangle(AB, CA) + 90^\\circ$. So $\\measuredangle(DA, DE) = \\measuredangle(XA, XH)$. In particular $XH \\not\\parallel ED$ (otherwise $XA \\parallel DA$, i.e. $X \\in AD \\cap (ABH) = \\{A, H\\}$), so $R = R_X$ exists, and $\\measuredangle(DA, DR) = \\measuredangle(XA, XR)$: **$A, X, D, R$ are concyclic.** ($R \\ne D$, since otherwise $X \\in HD = AD$; similarly $R \\ne E, X, A$.)\n\nNext, $\\measuredangle(BX, BE) = \\measuredangle(BX, BH) = \\measuredangle(AX, AH) = \\measuredangle(AX, AD) = \\measuredangle(RX, RD) = \\measuredangle(RX, RE)$, using the circles $ABHX$ and $AXDR$; so **$X, B, R, E$ are concyclic.**\n\nFinally, using these two circles, then $D, E, F, X \\in N_9$, then the circles with diameters $AC$ (through $D, F$) and $BC$ (through $E, F$):\n$$\\measuredangle(RA, RB) = \\measuredangle(RA, RX) + \\measuredangle(RX, RB) = \\measuredangle(DA, DX) + \\measuredangle(EX, EB)$$\n$$= \\measuredangle(DA, DF) + \\underbrace{\\measuredangle(DF, DX) + \\measuredangle(EX, EF)}_{=\\,0} + \\measuredangle(EF, EB) = \\measuredangle(CA, CF) + \\measuredangle(CF, CB) = \\measuredangle(CA, CB).$$\nHence $R_X \\in \\Omega$.\n\n**Step 2: the line $MX$ meets $\\Omega$ on $ED$.** $M$ is inside $\\Omega$, so the ray from $M$ through $X$ meets $\\Omega$ at a single point $X^\\wedge$; since $X$ is inside $\\Omega$ (it is on $N_9$), $X$ lies between $M$ and $X^\\wedge$. The point $\\sigma(X) = 2M - X$ lies on $\\Omega$ (as $X \\in (ABH)$) on the opposite ray, at distance $MX$ from $M$. The power of $M$ with respect to $\\Omega$ gives\n$$MX \\cdot MX^\\wedge = MA \\cdot MB = MD^2 = ME^2,$$\nbecause $D$ and $E$ lie on the circle with diameter $AB$ (centre $M$). So $MD$ is tangent at $D$ to the circle $D X X^\\wedge$, and the tangent–chord angle gives $\\measuredangle(DM, DX) = \\measuredangle(X^\\wedge D, X^\\wedge X)$; likewise $\\measuredangle(EM, EX) = \\measuredangle(X^\\wedge E, X^\\wedge X)$. (Here $D, E \\notin$ line $MX$: three distinct points of $N_9$ are not collinear.) As $M, D, E, X \\in N_9$, $\\measuredangle(DM, DX) = \\measuredangle(EM, EX)$. Therefore $\\measuredangle(X^\\wedge D, X^\\wedge M) = \\measuredangle(X^\\wedge E, X^\\wedge M)$, so $X^\\wedge$, $D$, $E$ are collinear: **$X^\\wedge \\in ED \\cap \\Omega$.**\n\n**Step 3: $M$, $X$, $H$ are not collinear.** Suppose they were. The homothety $h$ maps line $MH$ to itself; $\\Omega$ meets it at the antipode $C' = 2M - H$ of $C$ and at one more point $Z$, so $N_9 \\cap MH = \\{M, \\frac{H + Z}{2}\\}$. As $X \\ne M$ ($M \\notin (ABH)$), $X = \\frac{H + Z}{2}$. Also $\\sigma(X) = 2M - X \\in \\Omega \\cap MH = \\{C', Z\\}$; $2M - X = C'$ would give $X = H$, impossible, so $2M - X = Z$. Solving, $Z = \\frac{4M - H}{3} = \\frac{2C' + H}{3}$, a point strictly between $H$ and $C'$ — inside the disc, not on $\\Omega$. Contradiction.\n\n**Step 4: conclusion.** The line $ED$ passes through the interior point $D$ of $\\Omega$, so it meets $\\Omega$ in exactly two points. By Step 2 these are $P^\\wedge$ and $Q^\\wedge$, which are different (otherwise the lines $MP$ and $MQ$ would share $M$ and $P^\\wedge$, so $M, P, Q$ — three distinct points of $N_9$ — would be collinear). By Step 1, $R_P \\in \\{P^\\wedge, Q^\\wedge\\}$. If $R_P = P^\\wedge$, this point would lie on both lines $PH$ and $PM$, which are different lines through $P$ (Step 3), so it would be $P$ itself — but $P$ is inside $\\Omega$. Hence\n$$R_P = Q^\\wedge,$$\na point of $\\Omega$ lying on $ED$, on $PH$ and on $MQ$. ∎\n\n*Remark.* The argument never used that $P$ is on the same side of $CH$ as $A$: exchanging $P$ and $Q$ shows that $ED$, $QH$, $MP$ are also concurrent on $\\Omega$ (at the other intersection point of $ED$ with $\\Omega$)."
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

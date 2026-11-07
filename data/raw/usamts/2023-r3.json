@@ -1,0 +1,185 @@
+[
+  {
+    "id": "usamts-2023-r3-01",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 35 Round 3 (2023-2024)",
+      "year": 2023,
+      "number": 1,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Fill in the grid with the numbers 1 to 6 so that each number appears exactly once in each row and column. A horizontal gray line marks any cell when it is the middle cell of the three consecutive cells with the largest sum in that row. Similarly, a vertical gray line marks any cell when it is the middle of the three consecutive cells with the largest sum in that column. If there is a tie, multiple lines are drawn in the row or column. A cell can have both lines drawn, with the appearance of a plus sign.\n\nFor example, if a filled row had 1 5 4 2 3 6, horizontal lines would be drawn in the two cells with 4 and 3, since out of $1 + 5 + 4$, $5 + 4 + 2$, $4 + 2 + 3$, and $2 + 3 + 6$, the largest sums are $5 + 4 + 2$ and $2 + 3 + 6$.\n\nThe grid is shown in the picture. (Rows and columns numbered 1–6 from the top left: the givens are 4 in row 3, column 4; 2 in row 4, column 2; 5 in row 6, column 1; 3 in row 6, column 5. Horizontal lines are in row 1: column 4; row 2: column 3; row 3: column 5; row 4: columns 2 and 4; row 5: column 5; row 6: column 3. Vertical lines are in column 1: row 2; column 2: row 3; column 3: rows 3 and 5; column 4: row 2; column 5: row 5; column 6: row 4.)\n\nThere is a unique solution, but you do not need to prove that your answer is the only one possible. You merely need to find an answer that satisfies the conditions of the problem.",
+    "image": "qimages/usamts/2023-r3/q01.webp",
+    "choices": null,
+    "answer": "The unique solution:\n$$\\begin{array}{|c|c|c|c|c|c|}\\hline 6 & 1 & 3 & 5 & 4 & 2\\\\\\hline 2 & 6 & 5 & 3 & 1 & 4\\\\\\hline 3 & 5 & 1 & 4 & 2 & 6\\\\\\hline 4 & 2 & 6 & 1 & 5 & 3\\\\\\hline 1 & 3 & 4 & 2 & 6 & 5\\\\\\hline 5 & 4 & 2 & 6 & 3 & 1\\\\\\hline\\end{array}$$",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Where can the big numbers go?",
+        "body": "In each row and column the numbers are $1, \\dots, 6$ (total 21), and the marked middle cell tells us where the best window of three consecutive cells is.\n\n**Useful facts.**\n* The largest possible window sum is $6 + 5 + 4 = 15$. A window that contains the 6 usually beats the others, so the mark is usually next to or on the 6.\n* If the mark is at position 2 (window $1$–$3$) the complementary window $4$–$6$ must have a smaller sum, so the first three cells sum to at least 11; similarly for a mark at position 5.\n* A tie (two marks) means two windows have equal sums. In row 4 the marks are at positions 2 and 4, so (cell 1) + (cell 2) + (cell 3) = (cell 3) + (cell 4) + (cell 5); with cell 2 $= 2$ given, this says cell 1 $+ 2 =$ cell 4 $+$ cell 5.\n\n**Using them.** Row 6 has $5, \\_, \\_, \\_, 3, \\_$ and its best window is cells $2$–$4$; it must beat cells $3$–$5$ (which contain the 3), so cell 2 $>$ cell 5 $= 3$, and cells $2$–$4$ must also beat $1$–$3$, so cell 4 $> 5$, i.e. cell 4 $= 6$. Column 4 then has its 6 in row 6, yet its best window is rows 1–3, so rows 1–3 of column 4 must hold large numbers (their sum must exceed that of rows 4–6, which is at least $6 + 1 + 2 = 9$). Proceeding in this way, alternating between rows and columns and using the Latin-square condition, the grid fills in as\n$$\\begin{array}{|c|c|c|c|c|c|}\\hline 6 & 1 & 3 & 5 & 4 & 2\\\\\\hline 2 & 6 & 5 & 3 & 1 & 4\\\\\\hline 3 & 5 & 1 & 4 & 2 & 6\\\\\\hline 4 & 2 & 6 & 1 & 5 & 3\\\\\\hline 1 & 3 & 4 & 2 & 6 & 5\\\\\\hline 5 & 4 & 2 & 6 & 3 & 1\\\\\\hline\\end{array}$$\n\n**Check.** Each row and column is a permutation of $1$–$6$. Row sums of the windows, e.g. row 1: $6+1+3 = 10$, $1+3+5 = 9$, $3+5+4 = 12$, $5+4+2 = 11$ — the maximum is centered at column 4 ✓; row 4: $12, 9, 12, 9$ — tie at columns 2 and 4 ✓; column 3: $3,5,1,6,4,2$ gives $9, 12, 11, 12$ — tie at rows 3 and 5 ✓. All twelve rows and columns match the marks, and a computer search confirms that the solution is unique.\n\n**Answer: the grid above.**"
+      }
+    ],
+    "topics": [
+      "logic",
+      "arithmetic"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2023-r3-02",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 35 Round 3 (2023-2024)",
+      "year": 2023,
+      "number": 2,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "text",
+    "prompt": "Grogg takes an $a\\times b\\times c$ rectangular block (where $a, b, c$ are positive integers), paints the outside of it purple, and cuts it into $abc$ small $1\\times1\\times1$ cubes. He then places all the small cubes into a bag, and Winnie reaches in and randomly picks one of the small cubes. If the probability that Winnie picks a totally unpainted cube is 20%, determine all possible values of the number of cubes in the bag.",
+    "image": null,
+    "choices": null,
+    "answer": "120, 160, 240, 360",
+    "acceptedAnswers": [
+      "120,160,240,360",
+      "120 160 240 360",
+      "120, 160, 240 and 360",
+      "120, 160, 240, and 360",
+      "360, 240, 160, 120",
+      "360,240,160,120",
+      "{120, 160, 240, 360}"
+    ],
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Bound the smallest side, then factor",
+        "body": "The unpainted cubes form an $(a-2)\\times(b-2)\\times(c-2)$ block, so we need $a, b, c \\ge 3$ and\n$$\\frac{(a-2)(b-2)(c-2)}{abc} = \\frac15, \\qquad\\text{i.e.}\\qquad \\left(1 - \\frac2a\\right)\\left(1 - \\frac2b\\right)\\left(1 - \\frac2c\\right) = \\frac15.$$\nAssume $a \\le b \\le c$; then $1 - \\frac2a$ is the smallest factor, so $\\left(1 - \\frac 2a\\right)^3 \\le \\frac15$, giving $1 - \\frac2a \\le 5^{-1/3} \\approx 0.585$ and $a \\le 4.8$. So $a = 3$ or $a = 4$.\n\n**$a = 3$:** $5(b-2)(c-2) = 3bc \\iff bc - 5b - 5c + 10 = 0 \\iff (b - 5)(c - 5) = 15$. Since $b \\ge 3$, $b - 5 \\ge -2$, and a negative factor pair would make $c - 5 \\le -15$; so the pairs are $(1, 15)$ and $(3, 5)$: $(b, c) = (6, 20)$ or $(8, 10)$.\n\n**$a = 4$:** $5(b-2)(c-2) = 2bc \\iff 3bc - 10b - 10c + 20 = 0 \\iff (3b - 10)(3c - 10) = 40$. With $4 \\le b \\le c$, $3b - 10 \\ge 2$ and both factors are $\\equiv 2 \\pmod 3$; the divisor pairs of 40 of this kind are $(2, 20)$ and $(5, 8)$: $(b, c) = (4, 10)$ or $(5, 6)$.\n\nSo the blocks are $3\\times6\\times20$, $3\\times8\\times10$, $4\\times4\\times10$, $4\\times5\\times6$, with\n$$abc = 360,\\ 240,\\ 160,\\ 120.$$\n(Check: $4\\times5\\times6$ has $2\\cdot3\\cdot4 = 24$ unpainted cubes out of 120, i.e. 20%.)\n\n**Answer: 120, 160, 240, 360**"
+      }
+    ],
+    "topics": [
+      "counting",
+      "number-theory",
+      "probability"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2023-r3-03",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 35 Round 3 (2023-2024)",
+      "year": 2023,
+      "number": 3,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Lizzie and Alex are playing a game on the whiteboard. Initially, $n$ twos are written on the board. On a player's turn they must either\n\n1. change any single positive number to 0, or\n2. subtract one from any positive number of positive numbers on the board.\n\nThe game ends once all numbers are 0, and the last player who made a move wins. If Lizzie always plays first, find all $n$ for which Lizzie has a winning strategy.",
+    "image": null,
+    "choices": null,
+    "answer": "Exactly when $3 \\nmid n$. (The losing positions for the player to move are: no 1's and a multiple of 3 twos, or exactly one 1 and $3j+1$ twos.)",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Classify the positions",
+        "body": "A position is described by $(x, y)$: $x$ twos and $y$ ones. A move takes $(x, y)$ to\n* $(x - i,\\ y + i - j)$ with $0 \\le i \\le x$, $0 \\le j \\le y$, $i + j \\ge 1$ (option 2: lower $i$ twos and $j$ ones by one), or\n* $(x - 1, y)$ or $(x, y - 1)$ (option 1). Note $(x, y-1)$ is also of the first form, and so is $(x-1, y)$ when $y \\ge 1$.\n\nNote that the total $2x + y$ drops by $i + j$ in an option-2 move.\n\n**Claim.** The positions where the player to move loses are exactly\n$$\\mathcal C = \\{(x, y) : y \\le 1 \\text{ and } 2x + y \\equiv 0 \\pmod 3\\} = \\{(3j, 0)\\} \\cup \\{(3j + 1, 1)\\}.$$\nIt suffices to show (i) every move from $\\mathcal C$ leaves $\\mathcal C$, and (ii) from every position outside $\\mathcal C$ there is a move into $\\mathcal C$; since $(0,0) \\in \\mathcal C$ and the game always ends, the player facing $\\mathcal C$ loses.\n\n**(i)** Option 1 from $(x, 0)$ to $(x - 1, 0)$ changes $2x + y$ by 2, and from $(x,1)$ to $(x, 0)$ by 1 — neither keeps the residue. An option-2 move that keeps the residue needs $i + j \\equiv 0$, so $i + j \\ge 3$; since $j \\le y \\le 1$, we get $i \\ge 2$ and the new number of ones is $y + i - j \\ge 2$. So the result is never in $\\mathcal C$.\n\n**(ii)** Let $(x, y) \\notin \\mathcal C$.\n* If $y \\ge 2$: for $x \\equiv 0$ move to $(x, 0)$ ($i = 0$, $j = y$); for $x \\equiv 1$ move to $(x, 1)$ ($i = 0$, $j = y - 1$); for $x \\equiv 2$ move to $(x - 1, 1)$ ($i = 1$, $j = y$).\n* If $y = 1$ (so $x \\not\\equiv 1$): for $x \\equiv 0$ move to $(x, 0)$; for $x \\equiv 2$ move to $(x - 1, 1)$ ($i = j = 1$).\n* If $y = 0$ (so $x \\not\\equiv 0$): for $x \\equiv 1$ erase a two (option 1) to reach $(x - 1, 0)$; for $x \\equiv 2$ lower one two to reach $(x - 1, 1)$.\n\n**Conclusion.** The start $(n, 0)$ is losing for Lizzie exactly when $n \\equiv 0 \\pmod 3$. Otherwise she wins by always moving to a position of the form $(3j, 0)$ or $(3j + 1, 1)$. (A computer evaluation of the game tree for all $x, y \\le 24$ confirms this list of losing positions.)\n\n**Answer: all $n$ not divisible by 3.** ∎"
+      }
+    ],
+    "topics": [
+      "games",
+      "number-theory"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2023-r3-04",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 35 Round 3 (2023-2024)",
+      "year": 2023,
+      "number": 4,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "In this problem, a *simple polygon* is a polygon that does not intersect itself and has no holes, and a *side* of a polygon is a maximal set of collinear, consecutive line segments in the polygon. In particular, we allow two or more consecutive vertices in a simple polygon to be identical, and three or more consecutive vertices in a simple polygon to be collinear. By convention, polygons must have at least three sides. A simple polygon is *convex* if every one of its interior angles is $180^\\circ$ or less. A simple polygon is *concave* if it is not convex.\n\nLet $\\mathcal P$ be the plane. Prove or disprove each of the following statements:\n\n(a) There exists a function $f : \\mathcal P \\to \\mathcal P$ such that for all positive integers $n \\ge 4$, if $v_1, v_2, \\dots, v_n$ are the vertices of a simple concave $n$-sided polygon in some order, then $f(v_1), f(v_2), \\dots, f(v_n)$ are the vertices of a simple convex polygon in some order (which may or may not have $n$ sides).\n\n(b) There exists a function $f : \\mathcal P \\to \\mathcal P$ such that for all positive integers $n \\ge 4$, if $v_1, v_2, \\dots, v_n$ are the vertices of a simple convex $n$-sided polygon in some order, then $f(v_1), f(v_2), \\dots, f(v_n)$ are the vertices of a simple concave polygon in some order (which may or may not have $n$ sides).",
+    "image": null,
+    "choices": null,
+    "answer": "(a) **True**: project radially onto the unit circle ($f(O) = (1,0)$). (b) **False**: such an $f$ would be injective and preserve non-collinearity, and then the images of a regular pentagon's vertices always contain 4 points in convex position, coming from a convex quadrilateral.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Key fact: a reflex vertex lies inside the hull",
+        "body": "**Lemma.** In a simple polygon, a vertex with interior angle $> 180^\\circ$ lies in the interior of the convex hull of the vertices. Hence a concave polygon has at least 4 distinct vertices, and it needs a vertex strictly inside the convex hull of its vertex set. *Proof.* If a vertex $v$ lies on the boundary of the hull, there is a line through $v$ with the whole polygon on one side; near $v$ the polygon's interior is then inside a half-plane, so its angle at $v$ is at most $180^\\circ$. $\\square$\n\n**(a) True.** Let $O$ be the origin and define $f(X)$ to be the point where ray $OX$ meets the unit circle for $X \\ne O$, and $f(O) = (1, 0)$. Any $\\ge 3$ distinct points on a circle, listed in circular order (repeated points placed consecutively), are the vertices of a simple convex polygon. So it suffices to show the images of the vertices of a concave polygon include at least 3 distinct points.\n\nSuppose instead the images are only two points $X, Y$ (possibly equal). Then all vertices lie on the union of the rays $OX$ and $OY$ (the preimage of a point is a ray from $O$, possibly together with $O$). If the two rays are equal or opposite, all vertices are collinear — not a polygon. Otherwise the rays bound a convex angular sector containing all vertices, and every vertex lies on the boundary of this sector, hence on the boundary of the vertices' convex hull. By the lemma the polygon has no reflex vertex, so it is convex — a contradiction. ∎\n\n**(b) False.** Suppose such an $f$ exists.\n\n* *$f$ is injective.* If $f(A) = f(B)$ with $A \\ne B$, choose $C, D$ with $ABCD$ a convex quadrilateral. The four images form at most 3 distinct points, which cannot be the vertices of a concave polygon (lemma). Contradiction.\n* *$f$ keeps non-collinear triples non-collinear.* If $A, B, C$ are not collinear but $f(A), f(B), f(C)$ are, choose $D$ with $ABCD$ convex. Among the four images, three are collinear; then no image point lies strictly inside the convex hull of the four (the hull is a triangle with the middle collinear point on an edge, or a segment), so by the lemma they are not the vertices of a concave polygon. Contradiction.\n\nNow let $ABCDE$ be a regular pentagon. Its five images are distinct with no three collinear.\n* If their convex hull has 4 or 5 vertices, pick 4 hull vertices. They come from 4 vertices of the pentagon, which form a convex quadrilateral, but these 4 images are all hull vertices, so none is inside the hull of the others and they cannot form a concave polygon.\n* If the hull is a triangle, let $X, Y$ be the two images inside it. Line $XY$ passes through no hull vertex, so two hull vertices $U, V$ lie on the same side of it. The points $U, V, X, Y$ are in convex position: $U, V$ are hull vertices so neither is inside a triangle of the others, and if $X$ were inside triangle $UVY$, line $YX$ would exit that triangle through side $UV$, separating $U$ from $V$ (similarly for $Y$). Their preimages are 4 vertices of the pentagon — a convex quadrilateral — whose images cannot form a concave polygon.\n\nEither way we reach a contradiction, so no such $f$ exists. ∎\n\n**Answer: (a) true; (b) false.**"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "logic"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2023-r3-05",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 35 Round 3 (2023-2024)",
+      "year": 2023,
+      "number": 5,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $\\omega$ be the unit circle in the $xy$-plane in 3-dimensional space. Find all points $P$ not on the $xy$-plane that satisfy the following condition: There exist points $A$, $B$, and $C$ on $\\omega$ such that\n$$\\angle APB = \\angle APC = \\angle BPC = 90^\\circ.$$",
+    "image": null,
+    "choices": null,
+    "answer": "All points $P = (x, y, z)$ with $x^2 + y^2 + 2z^2 = 1$ and $z \\ne 0$ (the ellipsoid minus the circle $\\omega$).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Dot products",
+        "body": "Write $P = (\\mathbf p, z)$ with $\\mathbf p \\in \\mathbb R^2$, $z \\ne 0$, and $A = (\\mathbf a, 0)$, $B = (\\mathbf b, 0)$, $C = (\\mathbf c, 0)$ with unit vectors $\\mathbf a, \\mathbf b, \\mathbf c$ (the center of $\\omega$ is the origin). The three right angles mean\n$$(A - P)\\cdot(B - P) = \\mathbf a\\cdot\\mathbf b - \\mathbf p\\cdot(\\mathbf a + \\mathbf b) + |\\mathbf p|^2 + z^2 = 0,$$\nand similarly for the pairs $(A, C)$ and $(B, C)$. (These dot conditions also force $A, B, C$ to be distinct: $A = B$ would give $|A - P|^2 = 0$, impossible since $z \\ne 0$.)\n\n**Necessity.** Subtracting two of the equations: $(A - P)\\cdot(B - C) = 0$, i.e. $(\\mathbf a - \\mathbf p)\\cdot(\\mathbf b - \\mathbf c) = 0$. So $\\mathbf p$ lies on the altitude from $\\mathbf a$ of triangle $\\mathbf{abc}$, and likewise on the other altitudes: $\\mathbf p$ is the orthocenter, which for a triangle inscribed in the unit circle centered at the origin is $\\mathbf p = \\mathbf a + \\mathbf b + \\mathbf c$. (Indeed $(\\mathbf b + \\mathbf c)\\cdot(\\mathbf b - \\mathbf c) = |\\mathbf b|^2 - |\\mathbf c|^2 = 0$.)\n\nSubstituting, $\\mathbf p\\cdot(\\mathbf a + \\mathbf b) - |\\mathbf p|^2 = -\\mathbf p\\cdot\\mathbf c$, so the first equation becomes\n$$\\mathbf a\\cdot\\mathbf b + \\mathbf p\\cdot\\mathbf c + z^2 = \\mathbf a\\cdot\\mathbf b + \\mathbf a\\cdot\\mathbf c + \\mathbf b\\cdot\\mathbf c + 1 + z^2 = 0.$$\nAlso $|\\mathbf p|^2 = |\\mathbf a + \\mathbf b + \\mathbf c|^2 = 3 + 2(\\mathbf a\\cdot\\mathbf b + \\mathbf a\\cdot\\mathbf c + \\mathbf b\\cdot\\mathbf c)$. Eliminating the sum of dot products:\n$$\\frac{|\\mathbf p|^2 - 3}{2} + 1 + z^2 = 0 \\iff |\\mathbf p|^2 + 2z^2 = 1.$$\nSo $P = (x, y, z)$ satisfies $x^2 + y^2 + 2z^2 = 1$.\n\n**Sufficiency.** Let $x^2 + y^2 + 2z^2 = 1$ with $z \\ne 0$, and $\\mathbf p = (x, y)$, so $|\\mathbf p| < 1$. Choose any unit vector $\\mathbf c$ and put $\\mathbf w = \\mathbf p - \\mathbf c$; then $0 < |\\mathbf w| \\le |\\mathbf p| + 1 < 2$, so there are unit vectors $\\mathbf a, \\mathbf b$ with $\\mathbf a + \\mathbf b = \\mathbf w$ (namely $\\frac{\\mathbf w}{2} \\pm \\sqrt{1 - |\\mathbf w|^2/4}\\ \\mathbf n$ with $\\mathbf n$ a unit normal to $\\mathbf w$). Now $\\mathbf a + \\mathbf b + \\mathbf c = \\mathbf p$, and reversing the computation above, each of the three dot products $(A - P)\\cdot(B - P)$, etc., equals $\\frac12(|\\mathbf p|^2 + 2z^2 - 1) = 0$. So all three angles are right angles.\n\n**Answer: the points with $x^2 + y^2 + 2z^2 = 1$, $z \\ne 0$** — an ellipsoid (the unit sphere squashed by the factor $\\frac1{\\sqrt2}$ toward the plane of $\\omega$), without its equator $\\omega$. ∎"
+      },
+      {
+        "title": "Synthetic start: $P$ projects to the orthocenter (official idea)",
+        "body": "Let $D$ be the foot of the altitude from $A$ in triangle $ABC$ and $O_2$, $O_3$ the midpoints of $AC$, $AB$. Since $\\angle APB = \\angle ADB = 90^\\circ$, both $P$ and $D$ lie on the sphere with diameter $AB$; likewise on the sphere with diameter $AC$. These two spheres meet in a circle through $A$, $P$, $D$ lying in a plane perpendicular to $O_2O_3 \\parallel BC$. Hence $PD \\perp BC$, and with $H$ the projection of $P$ to the plane $ABC$, the plane $PHD$ is perpendicular to $BC$ and contains $A$; so $H$ lies on the altitude $AD$. By symmetry $H$ is the orthocenter of $ABC$, and with the circumcenter at the origin, $H = \\mathbf a + \\mathbf b + \\mathbf c$ (Euler line: $OH = 3\\,OG$).\n\nThen $PA^2 + PB^2 = AB^2$ becomes, after expanding with $|\\mathbf a| = |\\mathbf b| = |\\mathbf c| = 1$,\n$$2(\\mathbf a\\cdot\\mathbf b + \\mathbf a\\cdot\\mathbf c + \\mathbf b\\cdot\\mathbf c) + 2z^2 + 2 = 0,$$\nand since $x^2 + y^2 = |\\mathbf a + \\mathbf b + \\mathbf c|^2 = 3 + 2(\\mathbf a\\cdot\\mathbf b + \\mathbf a\\cdot\\mathbf c + \\mathbf b\\cdot\\mathbf c)$, this is $x^2 + y^2 + 2z^2 = 1$. Conversely, for such $P$ with $z \\ne 0$ the point $H = (x, y)$ is inside $\\omega$, one constructs a triangle inscribed in $\\omega$ with orthocenter $H$, and the same computation run backwards gives the three right angles.\n\n**Answer: $x^2 + y^2 + 2z^2 = 1$, $z \\ne 0$.**"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "algebra"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

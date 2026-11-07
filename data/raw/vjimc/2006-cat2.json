@@ -1,0 +1,141 @@
+[
+  {
+    "id": "vjimc-2006-cat2-01",
+    "bank": "vjimc",
+    "source": {
+      "contest": "VJIMC",
+      "paper": "VJIMC 2006 Category II",
+      "year": 2006,
+      "number": 1,
+      "url": "https://vjimc.osu.cz/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "(a) Let $u$ and $v$ be two nilpotent elements in a commutative ring (with or without unity). Prove that $u+v$ is also nilpotent. (An element $u$ is called nilpotent if there exists a positive integer $n$ for which $u^n=0$.)\n\n(b) Show an example of a (non-commutative) ring $R$ and nilpotent elements $u,v\\in R$ such that $u+v$ is not nilpotent.",
+    "image": null,
+    "choices": null,
+    "answer": "(a) If $u^n=v^m=0$, every term of the binomial expansion of $(u+v)^{n+m}$ contains $u^i$ with $i\\ge n$ or $v^j$ with $j\\ge m$. (b) In $2\\times2$ matrices, $u=E_{12}$, $v=E_{21}$ have $u^2=v^2=0$ but $(u+v)^2=I$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Binomial theorem; matrix units",
+        "body": "**(a)** Let $u^n=0$ and $v^m=0$; then $u^i=0$ for $i\\ge n$ and $v^j=0$ for $j\\ge m$. In a commutative ring the binomial theorem holds (with the integer coefficients understood as repeated sums, so no unity is needed):\n$$(u+v)^{n+m}=\\sum_{i=0}^{n+m}\\binom{n+m}{i}u^iv^{n+m-i}\\qquad(\\text{with }u^0v^{k}:=v^k,\\ u^kv^0:=u^k).$$\nIn each term either $i\\ge n$, or $i\\le n-1$ and then $n+m-i\\ge m+1$. So every term is $0$, and $(u+v)^{n+m}=0$.\n\n**(b)** Let $R$ be the ring of real (or integer) $2\\times2$ matrices and\n$$u=\\begin{pmatrix}0&1\\\\0&0\\end{pmatrix},\\qquad v=\\begin{pmatrix}0&0\\\\1&0\\end{pmatrix}.$$\nThen $u^2=v^2=0$, but $u+v=\\begin{pmatrix}0&1\\\\1&0\\end{pmatrix}$ satisfies $(u+v)^2=I$, so $(u+v)^k\\in\\{I,\\,u+v\\}$ is never $0$. (Another example from the official solutions: $u=\\begin{pmatrix}1&-1\\\\1&-1\\end{pmatrix}$, $v=\\begin{pmatrix}-1&-1\\\\1&1\\end{pmatrix}$ with $u^2=v^2=0$ and $(u+v)^2=-4I$.) ∎"
+      }
+    ],
+    "topics": [
+      "abstract-algebra"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "vjimc-2006-cat2-02",
+    "bank": "vjimc",
+    "source": {
+      "contest": "VJIMC",
+      "paper": "VJIMC 2006 Category II",
+      "year": 2006,
+      "number": 2,
+      "url": "https://vjimc.osu.cz/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $(G,\\cdot)$ be a finite group of order $n$. Show that each element of $G$ is a square if and only if $n$ is odd.",
+    "image": null,
+    "choices": null,
+    "answer": "If $n$ is odd, every $g$ has odd order $m$ and $g=(g^{(m+1)/2})^2$. If $n$ is even, there is an element $t$ of order $2$ (pair each element with its inverse), so $t^2=1^2$ and the squaring map is not injective, hence (by finiteness) not surjective.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Odd orders; an element of order 2",
+        "body": "**$n$ odd ⇒ every element is a square.** Let $g\\in G$ have order $m$. By Lagrange's theorem $m\\mid n$, so $m$ is odd and $\\frac{m+1}2$ is an integer. Then\n$$\\big(g^{(m+1)/2}\\big)^2=g^{m+1}=g^m\\cdot g=g .$$\n\n**$n$ even ⇒ some element is not a square.** First, $G$ has an element of order $2$: the sets $\\{g,g^{-1}\\}$ partition $G$; each has $2$ elements unless $g=g^{-1}$, i.e. $g^2=1$. The set $\\{1\\}$ has one element, and $n$ is even, so there must be another one-element set $\\{t\\}$ with $t\\ne1$, $t^2=1$.\n\nNow the squaring map $s\\colon G\\to G$, $s(x)=x^2$, satisfies $s(t)=1=s(1)$ with $t\\ne1$, so it is not injective. A map from a finite set to itself is injective iff it is surjective, so $s$ is not surjective: some element of $G$ is not a square. ∎"
+      },
+      {
+        "title": "Counting with the 2-part of the order (official idea)",
+        "body": "For the direction \"$n$ even ⇒ not all squares\", here is another argument. Let $2^e$ ($e\\ge1$) be the largest power of $2$ dividing the order of some element of $G$ (such elements exist: by the pairing argument there is an element of order $2$). Pick $h$ with $\\operatorname{ord}(h)=2^e u$, $u$ odd. Suppose $h=k^2$. Then $\\operatorname{ord}(k)$ divides $2\\operatorname{ord}(h)=2^{e+1}u$ (since $k^{2^{e+1}u}=h^{2^eu}=1$) but does not divide $2^eu$ (since $k^{2^eu}=h^{2^{e-1}u}\\ne1$). Hence $2^{e+1}\\mid\\operatorname{ord}(k)$, contradicting the maximality of $e$. So $h$ is not a square.\n\nThe direction \"$n$ odd ⇒ all squares\" is as in the first solution: $g=(g^{(m+1)/2})^2$ with $m=\\operatorname{ord}(g)$ odd. ∎"
+      }
+    ],
+    "topics": [
+      "abstract-algebra",
+      "number-theory"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "vjimc-2006-cat2-03",
+    "bank": "vjimc",
+    "source": {
+      "contest": "VJIMC",
+      "paper": "VJIMC 2006 Category II",
+      "year": 2006,
+      "number": 3,
+      "url": "https://vjimc.osu.cz/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "For a function $f\\colon[0,1]\\to\\mathbb R$ the secant of $f$ at points $a,b\\in[0,1]$, $a<b$, is the line in $\\mathbb R^2$ passing through $(a,f(a))$ and $(b,f(b))$. A function is said to intersect its secant at $a,b$ if there exists a point $c\\in(a,b)$ such that $(c,f(c))$ lies on the secant of $f$ at $a,b$.\n\n1. Find the set $\\mathcal F$ of all continuous functions $f$ such that for any $a,b\\in[0,1]$, $a<b$, the function $f$ intersects its secant at $a,b$.\n2. Does there exist a continuous function $f\\notin\\mathcal F$ such that for any rational $a,b\\in[0,1]$, $a<b$, the function $f$ intersects its secant at $a,b$?",
+    "image": null,
+    "choices": null,
+    "answer": "1. $\\mathcal F$ consists exactly of the affine functions $f(x)=\\alpha x+\\beta$. 2. Yes: e.g. $f(x)=\\sum_k4^{-k}h(x-q_k)$ with $h(t)=\\sqrt{|t|}\\sin\\ln|t|$ and $(q_k)$ an enumeration of $\\mathbb Q\\cap[0,1]$; its right difference quotients at every rational point take arbitrarily large values of both signs.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Level sets near a maximum; infinite Dini derivatives at rationals",
+        "body": "*(The official solutions leave this problem blank; this solution is our own.)*\n\nSubtracting an affine function $\\ell$ from $f$ does not change the property \"intersects its secant at $a,b$\": the secant of $f-\\ell$ is the secant of $f$ minus $\\ell$. So $f$ intersects its secant at $a,b$ iff $g=f-L_{ab}$ has a zero in $(a,b)$, where $L_{ab}$ is the secant.\n\n**Part 1: $\\mathcal F$ = affine functions.** Affine functions lie on all their secants, so they belong to $\\mathcal F$. Conversely let $f$ be continuous and not affine. Let $L$ be the secant at $0,1$ and $g=f-L$; then $g(0)=g(1)=0$ and $g\\not\\equiv0$ (otherwise $f=L$ would be affine). Replacing $f$ by $-f$ if necessary, $M=\\max g>0$; let $p$ be a point with $g(p)=M$, and fix $t\\in(0,M)$. Let\n$$a=\\max\\{x\\in[0,p]: g(x)\\le t\\},\\qquad b=\\min\\{x\\in[p,1]: g(x)\\le t\\}$$\n(these sets are closed and contain $0$, resp. $1$). Then $a<p<b$, $g(a)=g(b)=t$ by continuity, and $g>t$ on $(a,b)$. The secant of $g$ at $a,b$ is the horizontal line $y=t$, and $g$ never meets it on $(a,b)$. So $g$, and hence $f=g+L$, does not intersect its secant at $a,b$, and $f\\notin\\mathcal F$.\n\n**Part 2: yes.** *A sufficient condition.* Suppose $f$ is continuous and for every rational $a\\in[0,1)$\n$$\\limsup_{t\\to0^+}\\frac{f(a+t)-f(a)}t=+\\infty,\\qquad\\liminf_{t\\to0^+}\\frac{f(a+t)-f(a)}t=-\\infty .\\tag{$*$}$$\nTake rationals $a<b$, let $s$ be the slope of the secant and $g(x)=f(x)-f(a)-s(x-a)$. Then $g(a)=g(b)=0$ and $\\frac{g(a+t)}{t}=\\frac{f(a+t)-f(a)}t-s$ takes positive and negative values for arbitrarily small $t>0$. So $g$ has a positive value and a negative value at points of $(a,b)$, and by the intermediate value theorem a zero strictly between them, in $(a,b)$: $f$ intersects its secant at $a,b$. Moreover such an $f$ is not differentiable at rational points, so it is not affine, i.e. $f\\notin\\mathcal F$.\n\n*Construction.* Let $h(t)=\\sqrt{|t|}\\,\\sin(\\ln|t|)$ for $t\\ne0$, $h(0)=0$. Then $|h(t)|\\le\\sqrt{|t|}$, $h$ is $C^1$ on $t\\ne0$ with $|h'(t)|=|t|^{-1/2}\\big|\\tfrac12\\sin\\ln|t|+\\cos\\ln|t|\\big|\\le\\tfrac32|t|^{-1/2}$, and\n$$|h(u)-h(v)|\\le3\\sqrt{|u-v|}\\qquad\\text{for all }u,v.\\tag{H}$$\n*Proof of (H):* write $d=|u-v|$. If $u,v$ have opposite signs (or one is $0$), $|h(u)-h(v)|\\le\\sqrt{|u|}+\\sqrt{|v|}\\le2\\sqrt d$. If $0<v<u$ (the negative case is symmetric): when $v\\le d$, $|h(u)-h(v)|\\le\\sqrt{2d}+\\sqrt d\\le3\\sqrt d$; when $v>d$, the mean value theorem gives $|h(u)-h(v)|\\le d\\cdot\\tfrac32v^{-1/2}<\\tfrac32\\sqrt d$.\n\nLet $q_1,q_2,\\dots$ enumerate $\\mathbb Q\\cap[0,1]$ and\n$$f(x)=\\sum_{k=1}^\\infty4^{-k}h(x-q_k),\\qquad x\\in[0,1].$$\nSince $|h(x-q_k)|\\le1$, the series converges uniformly and $f$ is continuous.\n\n*Verification of $(*)$.* Fix $m$ and $a=q_m<1$. For small $t>0$ split\n$$\\frac{f(a+t)-f(a)}t=\\underbrace{4^{-m}\\frac{h(t)}{t}}_{\\text{main}}+\\underbrace{\\sum_{k\\le m+1,\\,k\\ne m}4^{-k}\\frac{h(a+t-q_k)-h(a-q_k)}{t}}_{\\text{finite part}}+\\underbrace{\\sum_{k>m+1}4^{-k}\\frac{h(a+t-q_k)-h(a-q_k)}{t}}_{\\text{tail}} .$$\nThe finite part converges as $t\\to0^+$ (each $h(\\cdot-q_k)$ with $q_k\\ne a$ is differentiable at $a$), so it is bounded by some $B$ for small $t$. By (H) the tail is at most $3\\sqrt t\\sum_{k>m+1}4^{-k}/t=\\frac{4^{-m}}{4}\\,t^{-1/2}$ in absolute value. The main term equals $4^{-m}t^{-1/2}\\sin\\ln t$. Along $t_j=e^{\\pi/2-2\\pi j}$ ($\\sin\\ln t_j=1$) the quotient is at least $\\frac34\\,4^{-m}t_j^{-1/2}-B\\to+\\infty$, and along $s_j=e^{-\\pi/2-2\\pi j}$ ($\\sin\\ln s_j=-1$) it is at most $-\\frac34\\,4^{-m}s_j^{-1/2}+B\\to-\\infty$. So $(*)$ holds at every rational $a\\in[0,1)$.\n\nHence this $f$ is continuous, not in $\\mathcal F$, and intersects its secant at every pair of rational points $a<b$.\n\n**Answer:** 1. $\\mathcal F=\\{x\\mapsto\\alpha x+\\beta\\}$ (affine functions). 2. Yes. ∎"
+      }
+    ],
+    "topics": [
+      "real-analysis",
+      "analysis"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "vjimc-2006-cat2-04",
+    "bank": "vjimc",
+    "source": {
+      "contest": "VJIMC",
+      "paper": "VJIMC 2006 Category II",
+      "year": 2006,
+      "number": 4,
+      "url": "https://vjimc.osu.cz/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $f\\colon[0,\\infty)\\to\\mathbb R$ be a strictly convex continuous function such that\n$$\\lim_{x\\to+\\infty}\\frac{f(x)}{x}=+\\infty .$$\nProve that the improper integral $\\int_0^{+\\infty}\\sin\\big(f(x)\\big)\\,dx$ is convergent but not absolutely convergent.",
+    "image": null,
+    "choices": null,
+    "answer": "Eventually $f$ increases to $\\infty$ with right derivative $\\to\\infty$; with $x_k=f^{-1}(k\\pi)$ the integral becomes an alternating series $\\sum(-1)^kI_k$ where, by concavity of $f^{-1}$, $I_k$ decreases to $0$ (Leibniz) while $I_k\\ge\\frac13(x_{k+2}-x_{k+1})$ with $x_k\\to\\infty$, so $\\sum I_k=\\infty$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Alternating series via the concave inverse",
+        "body": "*(The official solutions leave this problem blank; this solution is our own.)*\n\n**Step 1: behaviour of $f$.** A convex function has a non-decreasing right derivative $f'_+$ on $(0,\\infty)$ and $f(y)-f(x)\\ge f'_+(x)(y-x)$ for $y>x>0$. If $f'_+$ were bounded by $M$, then $f(x)\\le f(1)+M(x-1)$ for $x\\ge1$, contradicting $f(x)/x\\to\\infty$. Hence $f'_+(x)\\to+\\infty$. Choose $x_*$ with $f'_+(x_*)>0$; then $f$ is strictly increasing on $[x_*,\\infty)$ (as $f(y)-f(x)\\ge f'_+(x)(y-x)>0$ for $y>x\\ge x_*$) and $f(x)\\to\\infty$. Let $g=f^{-1}\\colon[f(x_*),\\infty)\\to[x_*,\\infty)$, continuous, increasing, $g(y)\\to\\infty$.\n\n**Step 2: $g$ is concave.** For $u<v<w$ in the domain put $a=g(u)<b=g(v)<c=g(w)$. Convexity of $f$ gives $\\frac{v-u}{b-a}\\le\\frac{w-v}{c-b}$, i.e. $\\frac{b-a}{v-u}\\ge\\frac{c-b}{w-v}$: the slopes of $g$ decrease, so $g$ is concave. Consequently, for fixed $\\ell>0$ the function $y\\mapsto g(y+\\ell)-g(y)$ is non-increasing.\n\n**Step 3: the alternating series.** Let $K$ be an integer with $K\\pi\\ge f(x_*)$ and $x_k=g(k\\pi)$ for $k\\ge K$. On $[x_k,x_{k+1}]$, $f$ increases from $k\\pi$ to $(k+1)\\pi$, so $\\sin f$ has the constant sign $(-1)^k$ there. Put\n$$I_k=\\int_{x_k}^{x_{k+1}}|\\sin f(x)|\\,dx,\\qquad\\text{so}\\qquad\\int_{x_K}^{x_N}\\sin f(x)\\,dx=\\sum_{k=K}^{N-1}(-1)^kI_k .$$\n\n*$I_k\\to0$:* $\\pi=f(x_{k+1})-f(x_k)\\ge f'_+(x_k)(x_{k+1}-x_k)$, so $I_k\\le x_{k+1}-x_k\\le\\pi/f'_+(x_k)\\to0$.\n\n*$I_k$ is non-increasing:* by Fubini, $I_k=\\int_0^1\\lambda_k(s)\\,ds$ where $\\lambda_k(s)$ is the length of $\\{x\\in[x_k,x_{k+1}]:|\\sin f(x)|>s\\}$. With $\\alpha=\\arcsin s\\in[0,\\frac\\pi2)$, this set is $\\{x: k\\pi+\\alpha<f(x)<(k+1)\\pi-\\alpha\\}$, an interval of length\n$$\\lambda_k(s)=g\\big((k+1)\\pi-\\alpha\\big)-g\\big(k\\pi+\\alpha\\big).$$\nBy Step 2 (with $\\ell=\\pi-2\\alpha$), $\\lambda_{k+1}(s)\\le\\lambda_k(s)$ for every $s$, hence $I_{k+1}\\le I_k$.\n\nBy the Leibniz criterion, $\\sum(-1)^kI_k$ converges. For $X\\in[x_k,x_{k+1}]$, $\\int_{x_K}^X\\sin f$ differs from the partial sum $\\sum_{j=K}^{k-1}(-1)^jI_j$ by at most $I_k\\to0$; together with the finite integral over $[0,x_K]$, the improper integral $\\int_0^\\infty\\sin f(x)\\,dx$ converges.\n\n**Step 4: no absolute convergence.** For $0\\le s\\le\\frac12$ we have $\\alpha\\le\\frac\\pi6$, so the interval $[k\\pi+\\alpha,(k+1)\\pi-\\alpha]$ has length $\\ge\\frac{2\\pi}3$ and lies to the left of $[(k+1)\\pi,(k+2)\\pi]$. As the slopes of the concave $g$ decrease, the average slope of $g$ on the first interval is at least that on the second:\n$$\\lambda_k(s)\\ge\\frac{2\\pi/3}{\\pi}\\big(g((k+2)\\pi)-g((k+1)\\pi)\\big)=\\frac23(x_{k+2}-x_{k+1}).$$\nHence $I_k\\ge\\int_0^{1/2}\\lambda_k(s)\\,ds\\ge\\frac13(x_{k+2}-x_{k+1})$ and\n$$\\int_{x_K}^{x_N}|\\sin f(x)|\\,dx=\\sum_{k=K}^{N-1}I_k\\ge\\frac13\\big(x_{N+1}-x_{K+1}\\big)\\xrightarrow[N\\to\\infty]{}\\infty,$$\nsince $x_N=g(N\\pi)\\to\\infty$. So $\\int_0^\\infty|\\sin f(x)|\\,dx=\\infty$. ∎\n\n*Remark.* Strict convexity is not needed; convexity and $f(x)/x\\to\\infty$ suffice. Example: $\\int_0^\\infty\\sin(x^2)\\,dx=\\sqrt{\\pi/8}$ converges but not absolutely."
+      }
+    ],
+    "topics": [
+      "real-analysis",
+      "calculus"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

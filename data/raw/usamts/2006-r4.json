@@ -1,0 +1,189 @@
+[
+  {
+    "id": "usamts-2006-r4-01",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 18 Round 4 (2006-2007)",
+      "year": 2006,
+      "number": 1,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $S(n) = \\displaystyle\\sum_{i=1}^{n} (-1)^{i+1} i$. For example, $S(4) = 1 - 2 + 3 - 4 = -2$.\n\n(a) Find, with proof, all positive integers $a, b$ such that $S(a) + S(b) + S(a + b) = 2007$.\n\n(b) Find, with proof, all positive integers $c, d$ such that $S(c) + S(d) + S(c + d) = 2008$.",
+    "image": null,
+    "choices": null,
+    "answer": "(a) No solutions. (b) $(c, d) = (2007, d)$ with $d$ even, or $(c, 2007)$ with $c$ even.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "A formula for S(n), then four parity cases",
+        "body": "**Closed form.** If $n$ is even, pair the terms: $S(n) = (1-2) + (3-4) + \\dots + ((n-1) - n) = -\\frac n2$. If $n$ is odd, $S(n) = S(n-1) + n = -\\frac{n-1}{2} + n = \\frac{n+1}{2}$.\n\nLet $T(m, n) = S(m) + S(n) + S(m+n)$.\n\n1. **$m, n$ both odd** ($m + n$ even): $T = \\frac{m+1}{2} + \\frac{n+1}{2} - \\frac{m+n}{2} = 1$.\n2. **$m, n$ both even**: $T = -\\frac m2 - \\frac n2 - \\frac{m+n}{2} = -(m+n) < 0$.\n3. **$m$ odd, $n$ even** ($m + n$ odd): $T = \\frac{m+1}{2} - \\frac n2 + \\frac{m+n+1}{2} = m + 1$, an even number.\n4. **$m$ even, $n$ odd**: by symmetry $T = n + 1$, even.\n\n**(a)** $T(a,b)$ is always $1$, negative, or even, never $2007$. So there are **no solutions**.\n\n**(b)** $2008$ is even and positive, so we are in case 3 or 4. Case 3 needs $c + 1 = 2008$, i.e. $c = 2007$ with $d$ even; case 4 needs $d = 2007$ with $c$ even. So the solutions are exactly\n$$(c, d) = (2007, d) \\text{ with } d \\text{ even}, \\qquad (c, d) = (c, 2007) \\text{ with } c \\text{ even}.$$\nFor example $S(2007) + S(2) + S(2009) = 1004 - 1 + 1005 = 2008$ ✓. (A computer search over $a, b < 300$ finds no solution of (a), and finds exactly these pairs for (b).)"
+      }
+    ],
+    "topics": [
+      "sequences-series",
+      "number-theory",
+      "algebra"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2006-r4-02",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 18 Round 4 (2006-2007)",
+      "year": 2006,
+      "number": 2,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "For how many integers $n$ between $1$ and $10^{2007}$, inclusive, are the last $2007$ digits of $n$ and $n^3$ the same? (If $n$ or $n^3$ has fewer than $2007$ digits, treat it as if it had zeros on the left to compare the last $2007$ digits.)",
+    "image": null,
+    "choices": null,
+    "answer": "15",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Split into powers of 2 and 5",
+        "body": "The condition is $n^3 \\equiv n \\pmod{10^{2007}}$, i.e.\n$$(n-1)\\,n\\,(n+1) \\equiv 0 \\pmod{2^{2007}} \\quad\\text{and}\\quad \\pmod{5^{2007}}.$$\nThe integers $1, \\dots, 10^{2007}$ form a complete residue system mod $10^{2007}$, so we count residues.\n\n**Mod $5^{2007}$.** At most one of $n-1, n, n+1$ is divisible by $5$, so that one must be divisible by $5^{2007}$: $n \\equiv 0, 1, -1 \\pmod{5^{2007}}$. That gives **3** residues.\n\n**Mod $2^{2007}$.**\n- If $n$ is even, $n \\pm 1$ are odd, so $2^{2007} \\mid n$: $n \\equiv 0$.\n- If $n$ is odd, $n - 1$ and $n + 1$ are consecutive even numbers, so exactly one of them is $\\equiv 2 \\pmod 4$ (exactly one factor of $2$). The other must therefore carry $2^{2006}$: $n \\equiv \\pm 1 \\pmod{2^{2006}}$. Modulo $2^{2007}$ this gives $n \\equiv 1,\\ 2^{2006} - 1,\\ 2^{2006} + 1,\\ 2^{2007} - 1$, four distinct residues, and each really works (e.g. for $n = 2^{2006} + 1$: $n - 1 = 2^{2006}$ and $n + 1$ is even).\n\nThat gives $1 + 4 = $ **5** residues.\n\nBy the Chinese Remainder Theorem each pair (residue mod $2^{2007}$, residue mod $5^{2007}$) gives exactly one residue mod $10^{2007}$, so there are $5 \\times 3 = \\boxed{15}$ such $n$."
+      },
+      {
+        "title": "Hensel's lemma and a small-case check",
+        "body": "Count solutions of $f(n) = n^3 - n \\equiv 0$ modulo $5^k$ and $2^k$.\n\n- **Mod $5^k$.** Mod $5$ the roots are $0, 1, 4$, and $f'(n) = 3n^2 - 1$ equals $-1, 2, 2 \\not\\equiv 0 \\pmod 5$ there. By Hensel's lemma each root lifts uniquely to every $5^k$: $3$ roots.\n- **Mod $2^k$, $k \\ge 3$.** Hensel does not apply at odd $n$ (since $f'(n)$ is even), so count directly as in the first approach: $n \\equiv 0$ or $n \\equiv \\pm1 \\pmod{2^{k-1}}$, which is $5$ residues mod $2^k$.\n\nSo the count mod $10^k$ is $15$ for every $k \\ge 3$. A brute-force count of $n \\in [1, 10^k]$ with $10^k \\mid n^3 - n$ gives $6, 9, 15, 15, 15, 15$ for $k = 1, \\dots, 6$ (for $k = 1, 2$ some of the five residues mod $2^k$ coincide). For $k = 2007$ the answer is $15$."
+      }
+    ],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2006-r4-03",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 18 Round 4 (2006-2007)",
+      "year": 2006,
+      "number": 3,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $ABCD$ be a convex quadrilateral. Let $M$ be the midpoint of diagonal $\\overline{AC}$ and $N$ be the midpoint of diagonal $\\overline{BD}$. Let $O$ be the intersection of the line through $N$ parallel to $\\overline{AC}$ and the line through $M$ parallel to $\\overline{BD}$. Prove that the line segments joining $O$ to the midpoints of each side of $ABCD$ divide $ABCD$ into four pieces of equal area.",
+    "image": "qimages/usamts/2006-r4/q03.webp",
+    "choices": null,
+    "answer": "Proof (each piece has area $\\frac14[ABCD]$).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Halving homothety",
+        "body": "Let $P, Q, R, S$ be the midpoints of $AB, BC, CD, DA$. The four pieces are the quadrilaterals $APOS$, $BQOP$, $CROQ$, $DSOR$.\n\n**The piece at $A$.** The homothety with centre $A$ and ratio $\\frac12$ sends $B, C, D$ to $P, M, S$. So it sends $ABCD$ to $APMS$, and\n$$[APMS] = \\tfrac14[ABCD], \\qquad SP \\parallel BD .$$\nSince $OM \\parallel BD \\parallel SP$, the points $O$ and $M$ are at the same distance from line $SP$ and on the same side of it. That side is the side away from $A$: the diagonal $BD$ separates $A$ from $C$, so its image $SP$ separates $A$ from the image $M$ of $C$. Hence\n$$[APOS] = [APS] + [SPO] = [APS] + [SPM] = [APMS] = \\tfrac14[ABCD],$$\nusing that triangles $SPO$ and $SPM$ share base $SP$ and have equal heights.\n\n**The other pieces.** In the same way, the homothety at $C$ gives $[CROQ] = \\frac14[ABCD]$ (now $RQ \\parallel BD \\parallel OM$), and the homotheties at $B$ and $D$ give $[BQOP] = [DSOR] = \\frac14[ABCD]$ (there $PQ \\parallel AC \\parallel ON$ and $RS \\parallel AC \\parallel ON$, with $N$ playing the role of $M$).\n\nSo all four pieces have area $\\frac14[ABCD]$. $\\blacksquare$"
+      },
+      {
+        "title": "Cross products of diagonals",
+        "body": "Use vectors in the plane and write $u \\times v$ for the 2D cross product. For any quadrilateral $WXYZ$ (with vertices in order) the shoelace formula gives the signed area $\\frac12 (Y - W)\\times(Z - X)$, half the cross product of its diagonals. In particular $[ABCD] = \\frac12 |(C - A)\\times(D - B)|$.\n\nWith $P, Q, R, S$ the midpoints of $AB, BC, CD, DA$, the piece at $A$ is $APOS$, whose diagonals are $O - A$ and $S - P = \\frac{D - B}{2}$. Write $O - A = (M - A) + (O - M)$ with $M - A = \\frac{C - A}{2}$. Since $O - M \\parallel BD$, $(O - M)\\times(D - B) = 0$, so\n$$[APOS] = \\frac12\\left|\\frac{C-A}{2}\\times\\frac{D-B}{2}\\right| = \\frac14[ABCD].$$\nThe piece at $C$, $CROQ$, has diagonals $O - C = (M - C) + (O - M)$ and $Q - R = \\frac{B - D}{2}$; the same computation gives $\\frac14[ABCD]$. The pieces at $B$ and $D$ have diagonals $O - B = (N - B) + (O - N)$ with $O - N \\parallel AC$, against $P - Q = \\frac{A - C}{2}$ (resp. $O - D$ against $R - S$), and again each has area $\\frac14[ABCD]$. $\\blacksquare$"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2006-r4-04",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 18 Round 4 (2006-2007)",
+      "year": 2006,
+      "number": 4,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "We are given a $2 \\times n$ array of nodes, where $n$ is a positive integer. A *valid connection* of the array is the addition of $1$-unit-long horizontal and vertical edges between nodes, such that each node is connected to every other node via the edges, and there are no loops of any size. The picture shows some examples for $n = 3$.\n\nLet $T_n$ denote the number of valid connections of the $2 \\times n$ array. Find $T_{10}$.",
+    "image": "qimages/usamts/2006-r4/q04.webp",
+    "choices": null,
+    "answer": "151316",
+    "acceptedAnswers": null,
+    "answerUnit": "ways",
+    "solutions": [
+      {
+        "title": "Track two states column by column",
+        "body": "A valid connection is a spanning tree of the $2 \\times n$ grid. Build it from left to right. After the first $j$ columns, look at the edges used so far. For the final drawing to be a tree, every piece (connected component) must still contain one of the two nodes of column $j$, because later edges only touch column $j$ and beyond. So exactly one of these holds:\n- **state $a$:** the first $j$ columns are already connected (and loop-free);\n- **state $b$:** they form exactly two pieces, one containing the top node of column $j$ and the other the bottom node.\n\nLet $a_j, b_j$ count these. For $j = 1$: $a_1 = 1$ (the vertical edge) and $b_1 = 1$ (no edge).\n\nGoing to column $j+1$, we choose which of the top edge $t$, bottom edge $u$ (from column $j$ to $j+1$) and new vertical edge $v$ to add.\n- From state $a$: $\\{t,u\\}$, $\\{t,v\\}$, $\\{u,v\\}$ give state $a$ ($\\{t,u,v\\}$ makes a loop). $\\{t\\}$ or $\\{u\\}$ gives state $b$. Any other choice leaves the new nodes cut off from the old tree.\n- From state $b$: $\\{t,u,v\\}$ joins everything into one tree (state $a$); $\\{t,u\\}$ keeps two pieces (state $b$). Any other choice leaves one old piece with no node in the new column, so it can never be connected.\n\nHence\n$$a_{j+1} = 3a_j + b_j, \\qquad b_{j+1} = 2a_j + b_j .$$\n\n| $j$ | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 |\n|---|---|---|---|---|---|---|---|---|---|---|\n| $a_j$ | 1 | 4 | 15 | 56 | 209 | 780 | 2911 | 10864 | 40545 | 151316 |\n| $b_j$ | 1 | 3 | 11 | 41 | 153 | 571 | 2131 | 7953 | 29681 | |\n\nSo $T_{10} = a_{10} = 3\\cdot 40545 + 29681 = \\boxed{151316}$."
+      },
+      {
+        "title": "A one-sequence recurrence",
+        "body": "Eliminating $b$ from the first approach: $b_j = a_{j+1} - 3a_j$, so\n$$a_{j+2} - 3a_{j+1} = 2a_j + (a_{j+1} - 3a_j) \\implies T_{n+2} = 4T_{n+1} - T_n .$$\n(The official solution gets the same recurrence by classifying a tree by the largest $k$ for which its leftmost $2\\times k$ part is already a tree, giving $T_{n+1} = 3T_n + 2T_{n-1} + \\dots + 2T_1 + 1$, and subtracting consecutive equations.)\n\nWith $T_1 = 1$, $T_2 = 4$: $15, 56, 209, 780, 2911, 10864, 40545, 151316$. The closed form is $T_n = \\frac{(2+\\sqrt3)^n - (2-\\sqrt3)^n}{2\\sqrt3}$, which also gives $T_{10} = 151316$, and so does Kirchhoff's matrix-tree theorem applied to the $2\\times 10$ grid graph."
+      }
+    ],
+    "topics": [
+      "counting",
+      "sequences-series",
+      "patterns"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2006-r4-05",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 18 Round 4 (2006-2007)",
+      "year": 2006,
+      "number": 5,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "A sequence of positive integers $(x_1, x_2, \\dots, x_{2007})$ satisfies the following two conditions:\n\n(1) $x_n \\ne x_{n+1}$ for $1 \\le n \\le 2006$, and\n\n(2) $A_n = \\dfrac{x_1 + x_2 + \\cdots + x_n}{n}$ is an integer for $1 \\le n \\le 2007$.\n\nFind the minimum possible value of $A_{2007}$.",
+    "image": null,
+    "choices": null,
+    "answer": "1004",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "A construction and an induction on partial sums",
+        "body": "Let $S_n = x_1 + \\dots + x_n = nA_n$, a multiple of $n$, with $S_{n} > S_{n-1}$. We show $A_n \\ge \\lceil \\frac{n+1}{2}\\rceil$ for all $n$, with equality possible, so the answer is $\\lceil \\frac{2008}{2}\\rceil = \\boxed{1004}$.\n\n**Construction.** Let $x_n = \\frac{n+1}{2}$ for odd $n$ and $x_n = \\frac{3n}{2}$ for even $n$: $1, 3, 2, 6, 3, 9, 4, 12, \\dots$ For even $n \\ge 2$, $x_n = \\frac{3n}{2}$ is larger than both $x_{n-1} = \\frac n2$ and $x_{n+1} = \\frac{n+2}{2}$, so (1) holds. For even $n = 2m$, $S_{2m} = (1 + \\dots + m) + 3(1 + \\dots + m) = 2m(m+1)$, so $A_{2m} = m + 1$; and $S_{2m+1} = 2m(m+1) + (m+1) = (m+1)(2m+1)$, so $A_{2m+1} = m + 1$. Both equal $\\lceil\\frac{n+1}{2}\\rceil$, and in particular $A_{2007} = 1004$.\n\n**Lower bound.** We prove by induction on $m \\ge 1$ that $A_{2m} \\ge m+1$; along the way we get $A_{2m+1} \\ge m+1$.\n\n*Base.* $A_1 \\ge 1$. If $A_2 = 1$ then $x_1 + x_2 = 2$ forces $x_1 = x_2 = 1$, violating (1); so $A_2 \\ge 2$.\n\n*Step.* Assume $S_{2m} \\ge 2m(m+1)$.\n- $S_{2m+1} > S_{2m} \\ge 2m^2 + 2m > m(2m+1)$, and $S_{2m+1}$ is a multiple of $2m+1$, so $S_{2m+1} \\ge (m+1)(2m+1)$, i.e. $A_{2m+1} \\ge m+1$.\n- $S_{2m+2} > S_{2m+1} \\ge 2m^2 + 3m + 1 > m(2m+2)$, so $S_{2m+2} \\ge (m+1)(2m+2)$. Suppose equality holds: $S_{2m+2} = 2m^2 + 4m + 2$.\n  - Then $(m+1)(2m+1) \\le S_{2m+1} < 2m^2 + 4m + 2 < (m+2)(2m+1)$, so $S_{2m+1} = (m+1)(2m+1)$.\n  - Then $2m(m+1) \\le S_{2m} < (m+1)(2m+1) \\le (m+2)\\cdot 2m$ (as $m \\ge 1$), so $S_{2m} = 2m(m+1)$.\n  - Now $x_{2m+1} = S_{2m+1} - S_{2m} = m+1$ and $x_{2m+2} = S_{2m+2} - S_{2m+1} = m+1$, contradicting (1).\n\n  So $S_{2m+2} \\ge (m+2)(2m+2)$, i.e. $A_{2m+2} \\ge m+2$, completing the induction.\n\nSince $2007 = 2\\cdot 1003 + 1$, we get $A_{2007} \\ge 1004$, and the construction attains it."
+      },
+      {
+        "title": "Computer check of the pattern",
+        "body": "A depth-first search over all valid sequences (choosing each $S_k$ as a multiple of $k$ larger than $S_{k-1}$ with $x_k \\ne x_{k-1}$, and pruning once $A_n$ cannot beat the best found) gives the minimum of $A_n$ for $n = 1, \\dots, 15$ as\n$$1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8,$$\nexactly $\\lceil\\frac{n+1}{2}\\rceil$, in agreement with the proof in the first approach. Showing that a particular sequence is small is not a proof of minimality; the proof's key point is that reaching $A_{2m+2} = m + 1$ would force $x_{2m+1} = x_{2m+2}$. For $n = 2007$ the minimum is $\\frac{2008}{2} = 1004$."
+      }
+    ],
+    "topics": [
+      "sequences-series",
+      "number-theory",
+      "inequalities"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

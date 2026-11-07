@@ -1,0 +1,143 @@
+[
+  {
+    "id": "vjimc-2012-cat1-01",
+    "bank": "vjimc",
+    "source": {
+      "contest": "VJIMC",
+      "paper": "VJIMC 2012 Category I",
+      "year": 2012,
+      "number": 1,
+      "url": "https://vjimc.osu.cz/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $f:[0,1]\\to[0,1]$ be a differentiable function such that $|f'(x)|\\neq1$ for all $x\\in[0,1]$. Prove that there exist unique points $\\alpha,\\beta\\in[0,1]$ such that $f(\\alpha)=\\alpha$ and $f(\\beta)=1-\\beta$.",
+    "image": null,
+    "choices": null,
+    "answer": "Existence by the intermediate value theorem for $f(x)-x$ and $f(x)-(1-x)$; uniqueness because two solutions would give, by the mean value theorem, a point with $f'=1$ (resp. $f'=-1$).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Intermediate value theorem and mean value theorem",
+        "body": "**Existence.** $f$ is differentiable, hence continuous. Let $g(x)=f(x)-x$ and $h(x)=f(x)-(1-x)$, both continuous on $[0,1]$. Since $0\\le f\\le1$:\n$$g(0)=f(0)\\ge0,\\quad g(1)=f(1)-1\\le0,\\qquad h(0)=f(0)-1\\le0,\\quad h(1)=f(1)\\ge0 .$$\nBy the intermediate value theorem there are $\\alpha,\\beta\\in[0,1]$ with $g(\\alpha)=0$ and $h(\\beta)=0$, i.e. $f(\\alpha)=\\alpha$, $f(\\beta)=1-\\beta$.\n\n**Uniqueness of $\\alpha$.** Suppose $f(\\alpha)=\\alpha$ and $f(\\alpha')=\\alpha'$ with $\\alpha<\\alpha'$. By the mean value theorem there is $\\theta\\in(\\alpha,\\alpha')$ with\n$$f'(\\theta)=\\frac{f(\\alpha')-f(\\alpha)}{\\alpha'-\\alpha}=\\frac{\\alpha'-\\alpha}{\\alpha'-\\alpha}=1,$$\ncontradicting $|f'(\\theta)|\\ne1$.\n\n**Uniqueness of $\\beta$.** If $f(\\beta)=1-\\beta$ and $f(\\beta')=1-\\beta'$ with $\\beta<\\beta'$, the mean value theorem gives $\\theta'$ with\n$$f'(\\theta')=\\frac{(1-\\beta')-(1-\\beta)}{\\beta'-\\beta}=-1,$$\nagain a contradiction. ∎"
+      },
+      {
+        "title": "Darboux's theorem: $g$ and $h$ are strictly monotone",
+        "body": "Existence is as in the first solution. For uniqueness we show that $g(x)=f(x)-x$ and $h(x)=f(x)+x-1$ are strictly monotone.\n\nBy Darboux's theorem, a derivative has the intermediate value property. Since $g'=f'-1$ never vanishes on $[0,1]$, it cannot take both signs (otherwise it would take the value $0$ in between). So $g'>0$ everywhere or $g'<0$ everywhere, and $g$ is strictly monotone; it has at most one zero. Similarly $h'=f'+1\\ne0$ has constant sign, so $h$ is strictly monotone and has at most one zero. Hence $\\alpha$ and $\\beta$ are unique. ∎"
+      }
+    ],
+    "topics": [
+      "real-analysis",
+      "calculus"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "vjimc-2012-cat1-02",
+    "bank": "vjimc",
+    "source": {
+      "contest": "VJIMC",
+      "paper": "VJIMC 2012 Category I",
+      "year": 2012,
+      "number": 2,
+      "url": "https://vjimc.osu.cz/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Determine all $2\\times2$ integer matrices $A$ having the following properties:\n\n1. the entries of $A$ are (positive) prime numbers,\n2. there exists a $2\\times2$ integer matrix $B$ such that $A=B^2$ and the determinant of $B$ is the square of a prime number.",
+    "image": null,
+    "choices": null,
+    "answer": "$A=\\begin{pmatrix}2&11\\\\11&101\\end{pmatrix}$ and $A=\\begin{pmatrix}101&11\\\\11&2\\end{pmatrix}$ (squares of $\\pm\\begin{pmatrix}1&1\\\\1&10\\end{pmatrix}$ and $\\pm\\begin{pmatrix}10&1\\\\1&1\\end{pmatrix}$).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Cayley–Hamilton",
+        "body": "**Answer:** $A=\\begin{pmatrix}2&11\\\\11&101\\end{pmatrix}$ or $A=\\begin{pmatrix}101&11\\\\11&2\\end{pmatrix}$.\n\nLet $A=\\begin{pmatrix}p_1&p_2\\\\p_3&p_4\\end{pmatrix}=B^2$ with all $p_i$ prime and $d=\\det B=q^2$, $q$ prime. Let $t=\\operatorname{tr}B$. By Cayley–Hamilton, $B^2=tB-dI$, so\n$$tB=A+dI=\\begin{pmatrix}p_1+d&p_2\\\\p_3&p_4+d\\end{pmatrix}. \\tag{1}$$\nIf $t=0$ then $A=-dI$, whose entries are not primes. Replacing $B$ by $-B$ if needed, assume $t>0$.\n\n**The trace.** Taking traces in (1): $t^2=p_1+p_4+2d\\ge2+2+2\\cdot4=12$, so $t\\ge4$. By (1), $t$ divides the off-diagonal entries $p_2$ and $p_3$ (as $B$ is an integer matrix); since they are primes and $t>1$, $t=p_2=p_3$. Hence\n$$B=\\begin{pmatrix}a&1\\\\1&b\\end{pmatrix},\\qquad a=\\frac{p_1+d}{t},\\ b=\\frac{p_4+d}{t}\\in\\mathbb Z_{>0},$$\nand\n$$A=B^2=\\begin{pmatrix}a^2+1&a+b\\\\a+b&b^2+1\\end{pmatrix},\\qquad d=ab-1 .$$\n\n**Parity.** If $a^2+1$ and $b^2+1$ were both odd, $a$ and $b$ would be even and $a+b$ even. So one of the three primes $a^2+1$, $b^2+1$, $a+b$ is even, i.e. equals $2$. Since $ab=d+1=q^2+1\\ge5$, $\\max(a,b)\\ge3$ and $a+b\\ge4$. So $a^2+1=2$ or $b^2+1=2$, i.e. $a=1$ or $b=1$.\n\n**Case $a=1$.** Then $d=b-1=q^2$ and $p_2=a+b=q^2+2$. If $q\\ne3$, then $q^2\\equiv1\\pmod3$, so $3\\mid q^2+2$, forcing $q^2+2=3$, $q=1$ — not prime. Hence $q=3$, $b=10$, and\n$$B=\\begin{pmatrix}1&1\\\\1&10\\end{pmatrix},\\qquad A=B^2=\\begin{pmatrix}2&11\\\\11&101\\end{pmatrix},$$\nwhere indeed $2,11,101$ are prime and $\\det B=9=3^2$.\n\n**Case $b=1$** is symmetric and gives $A=\\begin{pmatrix}101&11\\\\11&2\\end{pmatrix}$.\n\nBoth matrices satisfy the conditions, so these are all. ∎"
+      }
+    ],
+    "topics": [
+      "linear-algebra",
+      "number-theory"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "vjimc-2012-cat1-03",
+    "bank": "vjimc",
+    "source": {
+      "contest": "VJIMC",
+      "paper": "VJIMC 2012 Category I",
+      "year": 2012,
+      "number": 3,
+      "url": "https://vjimc.osu.cz/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Determine the smallest real number $C$ such that the inequality\n$$\\frac{x}{\\sqrt{yz}}\\cdot\\frac{1}{x+1}+\\frac{y}{\\sqrt{zx}}\\cdot\\frac{1}{y+1}+\\frac{z}{\\sqrt{xy}}\\cdot\\frac{1}{z+1}\\le C$$\nholds for all positive real numbers $x$, $y$ and $z$ with\n$$\\frac{1}{x+1}+\\frac{1}{y+1}+\\frac{1}{z+1}=1 .$$",
+    "image": null,
+    "choices": null,
+    "answer": "sqrt(2)",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "answerDisplay": "$\\sqrt2$",
+    "solutions": [
+      {
+        "title": "Substitution and Cauchy–Schwarz",
+        "body": "**Answer: $C=\\sqrt2$** (the left side is always $<\\sqrt2$ and gets arbitrarily close to it).\n\n**Substitution.** Put $a=\\frac1{x+1}$, $b=\\frac1{y+1}$, $c=\\frac1{z+1}$. Then $a,b,c\\in(0,1)$, $a+b+c=1$, and $x=\\frac{1-a}{a}=\\frac{b+c}{a}$, $y=\\frac{c+a}{b}$, $z=\\frac{a+b}{c}$. The first term becomes\n$$\\frac{x}{\\sqrt{yz}}\\cdot\\frac1{x+1}=\\frac{b+c}{a}\\sqrt{\\frac{bc}{(c+a)(a+b)}}\\cdot a=\\frac{(b+c)\\sqrt{bc}}{\\sqrt{(c+a)(a+b)}},$$\nand similarly for the others. Multiplying by $\\sqrt{(a+b)(b+c)(c+a)}$, the claim \"$\\text{LHS}<\\sqrt2$\" is equivalent to\n$$\\sum_{\\text{cyc}}(b+c)\\sqrt{bc(b+c)}<\\sqrt2\\,(a+b+c)\\sqrt{(a+b)(b+c)(c+a)}, \\tag{1}$$\nwhere we inserted the factor $a+b+c=1$.\n\n**Proof of (1).** By Cauchy–Schwarz,\n$$\\sum_{\\text{cyc}}(b+c)\\sqrt{bc(b+c)}\\le\\sqrt{\\sum_{\\text{cyc}}(b+c)^2}\\cdot\\sqrt{\\sum_{\\text{cyc}}bc(b+c)} .$$\nNow\n$$\\sum_{\\text{cyc}}(b+c)^2<\\sum_{\\text{cyc}}(b+c)^2+2(ab+bc+ca)=2(a+b+c)^2,$$\n$$\\sum_{\\text{cyc}}bc(b+c)<\\sum_{\\text{cyc}}bc(b+c)+2abc=(a+b)(b+c)(c+a).$$\nMultiplying the square roots gives (1). So the left side of the original inequality is always $<\\sqrt2$, and $C=\\sqrt2$ works.\n\n**Sharpness.** Take $x=y=t>1$; the constraint gives $\\frac{1}{z+1}=1-\\frac2{t+1}=\\frac{t-1}{t+1}$, i.e. $z=\\frac{2}{t-1}$. The expression equals\n$$\\frac{2}{t+1}\\sqrt{\\frac tz}+\\frac{z}{t}\\cdot\\frac{1}{z+1}=\\sqrt2\\,\\frac{\\sqrt{t(t-1)}}{t+1}+\\frac{2}{t(t+1)}\\xrightarrow[t\\to\\infty]{}\\sqrt2 .$$\nSo no $C<\\sqrt2$ works, and the smallest constant is $C=\\sqrt2$. ∎"
+      }
+    ],
+    "topics": [
+      "inequalities",
+      "algebra"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "vjimc-2012-cat1-04",
+    "bank": "vjimc",
+    "source": {
+      "contest": "VJIMC",
+      "paper": "VJIMC 2012 Category I",
+      "year": 2012,
+      "number": 4,
+      "url": "https://vjimc.osu.cz/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Find all positive integers $n$ for which there exists a positive integer $k$ such that the decimal representation of $n^k$ starts and ends with the same digit.",
+    "image": null,
+    "choices": null,
+    "answer": "Exactly the $n$ **not divisible by 10**. For $10\\mid n$, $n^k$ ends in $0$; otherwise $n^{4m+1}$ always ends in the last digit $c$ of $n$, and the leading digits of $n^{4m+1}$ take every value, in particular $c$ (density of $\\{m\\cdot4\\log_{10}n\\}$).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Last digits repeat with period 4; leading digits via logarithms",
+        "body": "**Answer: all positive integers not divisible by $10$.**\n\n**Multiples of 10 fail.** If $10\\mid n$, every $n^k$ ends in $0$ but starts with a nonzero digit.\n\n**Last digit.** $n^5-n=(n-1)n(n+1)(n^2+1)$ is even, and divisible by $5$ (if $n\\equiv0,\\pm1\\pmod5$ one of the first three factors is, and if $n\\equiv\\pm2$ then $n^2+1\\equiv0$). So $10\\mid n^5-n$, and then $10\\mid n^{4m}(n^5-n)=n^{4(m+1)+1}-n^{4m+1}$. Hence every $n^{4m+1}$ ($m\\ge0$) has the same last digit $c$ as $n$; if $10\\nmid n$ then $c\\in\\{1,\\dots,9\\}$.\n\n**Leading digit.** A positive integer $N$ starts with digit $c$ iff $c\\cdot10^j\\le N<(c+1)10^j$ for some $j$, i.e. iff the fractional part $\\{\\log_{10}N\\}$ lies in $I_c=[\\log_{10}c,\\log_{10}(c+1))$, an interval of length $\\ell=\\log_{10}(1+1/c)>0$.\n\nIf $n=1$, then $n^1=1$ works. Let $n\\ge2$, $10\\nmid n$. Then $\\theta=4\\log_{10}n$ is irrational: if $n^{4b}=10^{a}$ with positive integers $a,b$, unique factorisation forces $n=2^i5^j$ with $4bi=a=4bj$, so $i=j\\ge1$ and $10\\mid n$. We need $m\\ge0$ with\n$$\\{\\log_{10}n+m\\theta\\}\\in I_c .$$\n\n**Density lemma.** *If $\\theta$ is irrational, then for every $\\varepsilon>0$ and every interval $J\\subset[0,1)$ of length $\\varepsilon$ and every real $\\gamma$, some $m\\ge0$ has $\\{\\gamma+m\\theta\\}\\in J$.* Proof: choose an integer $K>1/\\varepsilon$. Among the $K+1$ numbers $\\{i\\theta\\}$, $0\\le i\\le K$, which are distinct (by irrationality), two lie in the same of the $K$ intervals $[\\frac{r}{K},\\frac{r+1}{K})$; so there is $1\\le q\\le K$ with $\\{q\\theta\\}=\\delta$ or $1-\\delta$ where $0<\\delta<\\frac1K<\\varepsilon$. Then the points $\\{\\gamma+jq\\theta\\}$, $j=0,1,2,\\dots$, move around the circle $[0,1)$ in steps of exactly $\\delta$ (all in the same direction), so they cannot jump over an interval of length $\\varepsilon>\\delta$; hence one of them lies in $J$. $\\square$\n\nApplying the lemma with $\\gamma=\\log_{10}n$, $J=I_c$, we obtain $m$ such that $n^{4m+1}$ starts with $c$ and ends with $c$. So $k=4m+1$ works.\n\n(Example: $n=19$: $19^4=130321$ already starts and ends with $1$; for $n=2$, $k=1$ works trivially.) ∎"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "real-analysis"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

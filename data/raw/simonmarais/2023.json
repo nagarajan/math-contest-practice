@@ -1,0 +1,435 @@
+[
+  {
+    "id": "simonmarais-2023-a1",
+    "bank": "simonmarais",
+    "source": {
+      "contest": "Simon Marais",
+      "paper": "Session A",
+      "year": 2023,
+      "number": 1,
+      "url": "https://www.simonmarais.org/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "For $0<q<1$, the *$q$-Fibonacci spiral* is constructed as described below. An arc of radius $1$ is first drawn inside a $1\\times1$ square. A second arc is then drawn in a $q\\times q$ square, then a third in a $q^2\\times q^2$ square, and so on ad infinitum, to create a continuous curve. The example on the left shows the case $q=\\frac12$, while the example on the right shows $q=\\frac{\\sqrt5-1}{2}$.\n\nProve that there exists a circle centred at the centre of the initial $1\\times1$ square such that for each $0<q<1$, the limiting endpoint of the $q$-Fibonacci spiral lies on this circle.",
+    "image": "qimages/simonmarais/2023/a1.webp",
+    "choices": null,
+    "answer": "The circle of radius $\\frac{\\sqrt2}{2}$ through the corners of the first square: with the first square $[0,1]^2$ the endpoint is $\\left(\\frac{1+q}{1+q^2},\\frac{1-q}{1+q^2}\\right)$, at distance $\\frac{\\sqrt2}2$ from $(\\frac12,\\frac12)$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Sum the diagonals as a geometric series",
+        "body": "Put the first square at $[0,1]^2$ with the spiral starting at the corner $A=(0,0)$, as in the picture. Use complex numbers, so points are $z=x+iy$.\n\nThe $k$-th arc ($k=0,1,2,\\dots$) is a quarter circle of radius $q^k$ joining two opposite corners of its $q^k\\times q^k$ square, so it moves the current point by a diagonal of that square, a vector of length $\\sqrt2\\,q^k$. The first diagonal is $1+i$ (from $(0,0)$ to $(1,1)$). Each new square is attached so that the curve continues smoothly and turns the same way, so each diagonal is the previous one rotated by $90^\\circ$ clockwise and scaled by $q$. In the picture the moves are $(1,1)$, then $q(1,-1)$, then $q^2(-1,-1)$, then $q^3(-1,1)$, and so on. So the $k$-th displacement is $(1+i)(-iq)^k$.\n\nIf $z_k$ is the end of the $k$-th arc, then $z_k=\\sum_{j=0}^{k}(1+i)(-iq)^j$. Since $|-iq|=q<1$, the geometric series converges and the limiting endpoint is\n$$P=\\sum_{j\\ge0}(1+i)(-iq)^j=\\frac{1+i}{1+iq}=\\frac{(1+i)(1-iq)}{1+q^2}=\\frac{1+q}{1+q^2}+i\\,\\frac{1-q}{1+q^2}.$$\nThe centre of the first square is $M=\\frac{1+i}{2}$, and\n$$|P-M|=|1+i|\\cdot\\left|\\frac1{1+iq}-\\frac12\\right|=\\sqrt2\\cdot\\frac{|1-iq|}{2\\,|1+iq|}=\\frac{\\sqrt2}{2},$$\nbecause $|1-iq|=|1+iq|=\\sqrt{1+q^2}$ for real $q$.\n\nSo for every $0<q<1$ the endpoint lies on the circle centred at $M$ with radius $\\frac{\\sqrt2}2$, the circumcircle of the first square. ∎\n\n(Check in coordinates: $\\left(\\frac{1+q}{1+q^2}-\\frac12\\right)^2+\\left(\\frac{1-q}{1+q^2}-\\frac12\\right)^2=\\frac{(1+2q-q^2)^2+(1-2q-q^2)^2}{4(1+q^2)^2}=\\frac{2(1+q^2)^2}{4(1+q^2)^2}=\\frac12$.)"
+      },
+      {
+        "title": "Spiral similarity and Thales",
+        "body": "Use the same coordinates. Let $A=0$ be the start and $A'=1+i$ the end of the first arc. Consider the spiral similarity\n$$\\sigma(z)=A'+(-iq)(z-A)=(1+i)-iqz,$$\na rotation by $90^\\circ$ clockwise combined with scaling by $q$. By the construction, $\\sigma$ maps the $k$-th square and arc onto the $(k+1)$-th square and arc. So it maps the whole spiral onto the spiral minus its first arc. In particular, the arc endpoints satisfy $z_{k+1}=\\sigma(z_k)$ with $z_0=A$.\n\nSince $\\sigma$ is a contraction (ratio $q<1$), the $z_k$ converge to its unique fixed point $P$, and this is the limiting endpoint of the spiral. From $\\sigma(P)=P$ and $\\sigma(A)=A'$,\n$$A'-P=\\sigma(A)-\\sigma(P)=-iq\\,(A-P).$$\nSo $\\overrightarrow{PA'}$ is $\\overrightarrow{PA}$ rotated by $90^\\circ$ (and scaled). Also $P\\ne A$, since otherwise $A'=A$. Hence $\\angle APA'=90^\\circ$. By Thales' theorem, $P$ lies on the circle with diameter $AA'$. That circle is centred at the centre of the first square, has radius $\\frac{\\sqrt2}2$, and does not depend on $q$. ∎"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "sequences-series",
+      "complex-numbers"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "simonmarais-2023-a2",
+    "bank": "simonmarais",
+    "source": {
+      "contest": "Simon Marais",
+      "paper": "Session A",
+      "year": 2023,
+      "number": 2,
+      "url": "https://www.simonmarais.org/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $n$ be a positive integer and let $f_1(x),\\ldots,f_n(x)$ be affine functions from $\\mathbb R$ to $\\mathbb R$ such that, amongst the $n$ graphs of these functions, no two are parallel and no three are concurrent. Let $S$ be the set of all convex functions $g(x)$ from $\\mathbb R$ to $\\mathbb R$ such that for each $x\\in\\mathbb R$, there exists $i$ such that $g(x)=f_i(x)$.\n\nDetermine the largest and smallest possible values of $|S|$ in terms of $n$.\n\n(A function $f(x)$ is *affine* if it is of the form $f(x)=ax+b$ for some $a,b\\in\\mathbb R$. A function $g(x)$ is *convex* if $g(\\lambda x+(1-\\lambda)y)\\le\\lambda g(x)+(1-\\lambda)g(y)$ for all $x,y\\in\\mathbb R$ and $0\\le\\lambda\\le1$.)",
+    "image": null,
+    "choices": null,
+    "answer": "Largest $2^n-1$, smallest $\\frac{n(n+1)}2$. Every $g\\in S$ is $\\max_{i\\in T}f_i$ for a non-empty $T$. Tangents to $y=x^2$ realise all $2^n-1$ of them; tangents to $y=-x^2$ give only the $n$ lines and the $\\binom n2$ pairwise maxima.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Every element of $S$ is a maximum of some of the lines",
+        "body": "**Answer: the largest value is $2^n-1$ and the smallest is $\\frac{n(n+1)}2$.**\n\nFor $\\emptyset\\ne T\\subseteq\\{1,\\dots,n\\}$ write $G_T=\\max_{i\\in T}f_i$.\n\n**Lemma.** Let $g$ be convex and $f$ affine with $g(p)=f(p)$, $g(r)=f(r)$ for some $p<r$. Then $g\\le f$ on $[p,r]$ and $g\\ge f$ outside $(p,r)$.\n\n*Proof.* On $[p,r]$, $g$ lies below its chord, which is $f$. If $x>r$, write $r=\\lambda p+(1-\\lambda)x$ with $\\lambda\\in(0,1)$. Convexity gives $f(r)=g(r)\\le\\lambda f(p)+(1-\\lambda)g(x)$, while $f(r)=\\lambda f(p)+(1-\\lambda)f(x)$ since $f$ is affine. Hence $g(x)\\ge f(x)$. The case $x<p$ is symmetric. $\\square$\n\n**Step 1: $S=\\{G_T:\\emptyset\\ne T\\}$.** Each $G_T$ is convex (a maximum of affine functions) and at every $x$ equals some $f_i(x)$, so $G_T\\in S$.\n\nConversely, let $g\\in S$ and $X_i=\\{x:g(x)=f_i(x)\\}$, so $\\bigcup X_i=\\mathbb R$. Let $T=\\{i:X_i\\text{ is infinite}\\}$; $T\\ne\\emptyset$ because finitely many finite sets cannot cover $\\mathbb R$. For $i\\in T$ pick $a<b<c$ in $X_i$. The lemma for the pair $(a,b)$ gives $g\\le f_i$ on $[a,b]$, and for the pair $(b,c)$ it gives $g\\ge f_i$ on $[a,b]$; so $g=f_i$ on $[a,b]$, and likewise on $[b,c]$. The lemma for $(a,c)$ gives $g\\ge f_i$ outside $(a,c)$. So $g\\ge f_i$ everywhere. Hence $g\\ge G_T$.\n\nSuppose $g(y)>G_T(y)$ for some $y$. Both functions are continuous (a finite convex function on $\\mathbb R$ is continuous), so there is an open interval $U\\ni y$ on which $g>f_i$ for every $i\\in T$. The infinite set $U$ is covered by the finitely many $X_j$, so some $X_j\\cap U$ is infinite. Then $j\\in T$, but $g>f_j$ on $U$, a contradiction. So $g=G_T$.\n\nConsequently $|S|\\le 2^n-1$, the number of non-empty $T$.\n\n**Step 2: $|S|\\ge\\frac{n(n+1)}2$ always.** The $n$ functions $f_i$ and the $\\binom n2$ functions $\\max(f_i,f_j)$ ($i<j$) are pairwise different. Each $f_i$ is affine, and distinct indices give distinct lines. A function $\\max(f_i,f_j)$ with non-parallel $f_i,f_j$ is not affine: it has a corner where the lines cross. Its slopes as $x\\to-\\infty$ and $x\\to+\\infty$ are the two slopes of $f_i,f_j$, so the function determines $\\{i,j\\}$. Hence $|S|\\ge n+\\binom n2=\\frac{n(n+1)}2$.\n\n**Step 3: $2^n-1$ is attained.** Take tangents to $y=x^2$ at distinct points $t_1,\\dots,t_n$: $f_i(x)=2t_ix-t_i^2$. The slopes are distinct. Two of these lines meet at $x=\\frac{t_i+t_j}2$, so three meeting at one point would force two equal $t$'s; hence no three are concurrent. Since $x^2-f_i(x)=(x-t_i)^2$, at $x=t_i$ the line $f_i$ is strictly above every other $f_j$. If $T\\ne T'$, take $i$ in one but not the other, say $i\\in T\\setminus T'$. Then $G_T(t_i)=t_i^2>G_{T'}(t_i)$. So all $2^n-1$ functions $G_T$ are different.\n\n**Step 4: $\\frac{n(n+1)}2$ is attained.** Take tangents to $y=-x^2$ at $t_1<\\dots<t_n$: $f_i(x)=-2t_ix+t_i^2$. As before they are pairwise non-parallel with no three concurrent. For $i<j<k$,\n$$f_j-f_i=(t_j-t_i)(t_i+t_j-2x),\\qquad f_j-f_k=(t_k-t_j)(2x-t_j-t_k).$$\nIf $f_j(x)\\ge f_i(x)$, then $2x\\le t_i+t_j<t_j+t_k$, so $f_j(x)<f_k(x)$. Thus $f_j<\\max(f_i,f_k)$ everywhere. Repeatedly deleting middle indices shows $G_T=\\max(f_{\\min T},f_{\\max T})$. So $S$ consists only of the $f_i$ and the $\\max(f_i,f_j)$, and $|S|=\\frac{n(n+1)}2$.\n\n(Check with $n=3$: the tangents to $x^2$ give $7$ distinct functions, the tangents to $-x^2$ give $6$.) ∎"
+      }
+    ],
+    "topics": [
+      "real-analysis",
+      "counting",
+      "inequalities"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "simonmarais-2023-a3",
+    "bank": "simonmarais",
+    "source": {
+      "contest": "Simon Marais",
+      "paper": "Session A",
+      "year": 2023,
+      "number": 3,
+      "url": "https://www.simonmarais.org/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "For each positive integer $n$, let $f(n)$ denote the smallest possible value of\n$$|A_1\\cup A_2\\cup\\cdots\\cup A_n|,$$\nwhere $A_1,A_2,\\ldots,A_n$ are sets such that $A_i\\not\\subseteq A_j$ and $|A_i|\\ne|A_j|$ whenever $i\\ne j$.\n\nDetermine $f(n)$ for each positive integer $n$.",
+    "image": null,
+    "choices": null,
+    "answer": "$f(1)=0$, $f(2)=3$, and $f(n)=n+2$ for all $n\\ge3$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Size counting plus an inductive construction",
+        "body": "**Answer: $f(1)=0$, $f(2)=3$ and $f(n)=n+2$ for $n\\ge3$.**\n\n**$n=1$:** $A_1=\\emptyset$ gives $0$.\n\n**Lower bounds ($n\\ge2$).** Order the sets by size, $|A_1|<|A_2|<\\dots<|A_n|$. The sizes are distinct non-negative integers. $A_1\\not\\subseteq A_n$ forces $A_1\\ne\\emptyset$, so all sizes lie in $\\{1,2,\\dots\\}$ and $|A_n|\\ge n$.\n\n* If $|A_n|\\ge n+1$: $A_1\\not\\subseteq A_n$ gives an element outside $A_n$, so the union has at least $n+2$ elements.\n* If $|A_n|=n$: the sizes are exactly $1,2,\\dots,n$, so $A_1=\\{x\\}$ and $x\\notin A_n$. Then the union has at least $n+1$ elements. For $n\\ge3$: $A_1\\not\\subseteq A_2$ gives $x\\notin A_2$, and $A_2\\not\\subseteq A_n$ gives some $y\\in A_2\\setminus A_n$. Then $y\\ne x$, and $A_n\\cup\\{x,y\\}$ has $n+2$ elements.\n\nSo $f(n)\\ge n+2$ for $n\\ge3$. For $n=2$: either $|A_2|\\ge3$ and the union has $\\ge4$ elements, or $|A_2|=2$, $A_1=\\{x\\}$ with $x\\notin A_2$ and the union has $\\ge3$. So $f(2)\\ge3$, and $A_1=\\{1\\}$, $A_2=\\{2,3\\}$ shows $f(2)=3$.\n\n**Constructions for $n\\ge3$.** We build families with $|A_k|=k$ for each $k$, no inclusions, and union of size exactly $n+2$.\n* $n=3$: $\\{1\\},\\{2,3\\},\\{3,4,5\\}$ (union of size $5$).\n* $n=4$: $\\{1\\},\\{2,3\\},\\{2,4,5\\},\\{3,4,5,6\\}$ (union of size $6$).\n\n**Step $n\\to n+2$.** Let $A=A_1\\cup\\dots\\cup A_n$ (so $|A|=n+2$) and take two new elements $a,b\\notin A$. Put\n$$B_1=\\{a\\},\\qquad B_{k+1}=A_k\\cup\\{b\\}\\ (1\\le k\\le n),\\qquad B_{n+2}=A .$$\nThen $|B_k|=k$ for every $k$. Check the non-inclusions:\n* $B_1$ is in no other set, since only $B_1$ contains $a$.\n* $B_{k+1}\\subseteq B_{l+1}$ would imply $A_k\\subseteq A_l$, because $b\\notin A$.\n* $B_{k+1}\\not\\subseteq B_{n+2}=A$, since $b\\notin A$.\n* A larger set is never contained in a smaller one.\n\nThe union is $A\\cup\\{a,b\\}$, of size $n+4=(n+2)+2$. Starting from $n=3$ and $n=4$, this gives $f(n)\\le n+2$ for every $n\\ge3$.\n\nTogether with the lower bound, $f(n)=n+2$ for $n\\ge3$. (A computer search confirms $f(3)=5$, $f(4)=6$.) ∎"
+      }
+    ],
+    "topics": [
+      "counting",
+      "logic"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "simonmarais-2023-a4",
+    "bank": "simonmarais",
+    "source": {
+      "contest": "Simon Marais",
+      "paper": "Session A",
+      "year": 2023,
+      "number": 4,
+      "url": "https://www.simonmarais.org/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $x_0,x_1,x_2,\\ldots$ be a sequence of positive real numbers such that for all $n\\ge0$,\n$$x_{n+1}=\\frac{(n^2+1)x_n^2}{x_n^3+n^2}.$$\nFor which values of $x_0$ is this sequence bounded?",
+    "image": null,
+    "choices": null,
+    "answer": "Exactly for $0<x_0\\le\\frac{\\sqrt5-1}{2}$ or $x_0\\ge1$ (equivalently, when $x_2=\\frac{2x_0}{1+x_0^3}\\le1$).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Trap below 1, or escape to infinity",
+        "body": "**Answer: the sequence is bounded if and only if $0<x_0\\le\\frac{\\sqrt5-1}2$ or $x_0\\ge1$.**\n\nLet $f_n(x)=\\dfrac{(n^2+1)x^2}{x^3+n^2}$ for $x>0$, so $x_{n+1}=f_n(x_n)$. Then\n$$f_n'(x)=\\frac{(n^2+1)\\,x\\,(2n^2-x^3)}{(x^3+n^2)^2},$$\nso $f_n$ is strictly increasing on $(0,c_n]$ and strictly decreasing on $[c_n,\\infty)$, where $c_n=\\sqrt[3]{2n^2}$. Also\n$$f_n(x)-x=\\frac{x(x-1)(n^2-x^2-x)}{x^3+n^2}.\\qquad(\\ast)$$\n(Check: $(n^2+1)x^2-x(x^3+n^2)=-x\\,(x^3-(n^2+1)x+n^2)=-x(x-1)(x^2+x-n^2)$.)\n\n**First terms.** With $x_0=\\lambda$: $x_1=\\frac{\\lambda^2}{\\lambda^3}=\\frac1\\lambda$ and $x_2=\\frac{2\\lambda^{-2}}{\\lambda^{-3}+1}=\\frac{2\\lambda}{1+\\lambda^3}$.\n\n**Fact 1.** For $n\\ge2$: if $x_n\\le1$ then $x_{n+1}\\le1$. Indeed $1<c_n$, so $f_n$ is increasing on $(0,1]$, and $f_n(x_n)\\le f_n(1)=1$.\n\n**Fact 2.** For $n\\ge2$: if $1<x_n<n^2$ then $1<x_{n+1}<(n+1)^2$. On $[1,n^2]$ the function $f_n$ rises and then falls, so on the open interval it exceeds $\\min(f_n(1),f_n(n^2))$. Here $f_n(1)=1$ and $f_n(n^2)=\\frac{n^4+n^2}{n^4+1}\\ge1$, so $x_{n+1}>1$. Its maximum is\n$$f_n(c_n)=\\frac{(n^2+1)(2n^2)^{2/3}}{3n^2}=\\frac{\\sqrt[3]4}{3}\\,n^{-2/3}(n^2+1)<n^2+1<(n+1)^2.$$\n\n**Case $x_2\\le1$.** By Fact 1, $x_n\\le1$ for all $n\\ge2$, so the sequence is bounded by $\\max(x_0,x_1,1)$.\n\n**Case $x_2>1$.** Note $x_2=\\frac{2\\lambda}{1+\\lambda^3}<4$: if $\\lambda\\le1$ then $x_2\\le2\\lambda\\le2$, and if $\\lambda>1$ then $x_2<2/\\lambda^2<2$. So $1<x_2<2^2$, and by Fact 2, $1<x_n<n^2$ for all $n\\ge2$. Suppose the sequence were bounded, say $x_n<b$ for all $n$. By $(\\ast)$,\n$$x_{n+1}-x_n=\\frac{x_n(x_n-1)(n^2-x_n^2-x_n)}{x_n^3+n^2}\\ge\\frac{x_n(x_n-1)(n^2-b^2-b)}{b^3+n^2}.$$\nFor all $n\\ge N$ ($N$ large) we have $n^2-b^2-b>\\frac{n^2}2$ and $b^3+n^2<2n^2$, so $x_{n+1}-x_n>\\frac{x_n(x_n-1)}4>0$. Hence $(x_n)_{n\\ge N}$ is increasing. With $a=x_N>1$, and since $x(x-1)$ is increasing for $x>1$, every later step is at least $\\frac{a(a-1)}4>0$. So $x_n\\to\\infty$, contradicting boundedness. The sequence is unbounded.\n\n**Conclusion.** The sequence is bounded if and only if $x_2\\le1$, i.e.\n$$\\frac{2\\lambda}{1+\\lambda^3}\\le1\\iff\\lambda^3-2\\lambda+1\\ge0\\iff(\\lambda-1)(\\lambda^2+\\lambda-1)\\ge0 .$$\nFor $\\lambda>0$ the factor $\\lambda^2+\\lambda-1$ changes sign at $\\frac{\\sqrt5-1}2$. So the condition holds exactly for $0<\\lambda\\le\\frac{\\sqrt5-1}2$ or $\\lambda\\ge1$. ∎\n\n(Numerically: $x_0=0.618$ and $x_0=1.5$ stay bounded, while $x_0=0.62$ and $x_0=0.99$ grow roughly like $n$.)"
+      }
+    ],
+    "topics": [
+      "sequences-series",
+      "real-analysis",
+      "inequalities"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "simonmarais-2023-b1",
+    "bank": "simonmarais",
+    "source": {
+      "contest": "Simon Marais",
+      "paper": "Session B",
+      "year": 2023,
+      "number": 1,
+      "url": "https://www.simonmarais.org/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Find the smallest positive real number $r$ with the following property: For every choice of $2023$ unit vectors $\\mathbf v_1,\\mathbf v_2,\\ldots,\\mathbf v_{2023}\\in\\mathbb R^2$, a point $\\mathbf p$ can be found in the plane such that for each subset $S$ of $\\{1,2,\\ldots,2023\\}$, the sum\n$$\\sum_{i\\in S}\\mathbf v_i$$\nlies inside the disc $\\{\\mathbf x\\in\\mathbb R^2:\\|\\mathbf x-\\mathbf p\\|\\le r\\}$.",
+    "image": null,
+    "choices": null,
+    "answer": "2023/2",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "answerDisplay": "$\\frac{2023}{2}$",
+    "solutions": [
+      {
+        "title": "Centre at half the total sum",
+        "body": "**$r=\\frac{2023}2$ works.** Put $\\mathbf p=\\frac12\\sum_{i=1}^{2023}\\mathbf v_i$. For any subset $S$,\n$$\\sum_{i\\in S}\\mathbf v_i-\\mathbf p=\\frac12\\Big(\\sum_{i\\in S}\\mathbf v_i-\\sum_{i\\notin S}\\mathbf v_i\\Big),$$\nand by the triangle inequality its length is at most $\\frac12\\sum_{i=1}^{2023}\\|\\mathbf v_i\\|=\\frac{2023}2$.\n\n**No smaller $r$ works.** Take all $\\mathbf v_i$ equal to the same unit vector $\\mathbf v$. The sums for $S=\\emptyset$ and $S=\\{1,\\dots,2023\\}$ are $\\mathbf 0$ and $2023\\mathbf v$, which are $2023$ apart. A disc containing both has diameter $2r\\ge2023$.\n\n**Answer: $r=\\frac{2023}{2}$.**"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "inequalities"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "simonmarais-2023-b2",
+    "bank": "simonmarais",
+    "source": {
+      "contest": "Simon Marais",
+      "paper": "Session B",
+      "year": 2023,
+      "number": 2,
+      "url": "https://www.simonmarais.org/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "There are $256$ players in a tennis tournament who are ranked from $1$ to $256$, with $1$ corresponding to the highest rank and $256$ corresponding to the lowest rank. When two players play a match in the tournament, the player whose rank is higher wins the match with probability $\\frac35$.\n\nIn each round of the tournament, the player with the highest rank plays against the player with the second highest rank, the player with the third highest rank plays against the player with the fourth highest rank, and so on. At the end of the round, the players who win proceed to the next round and the players who lose exit the tournament. After eight rounds, there is one player remaining in the tournament and they are declared the winner.\n\nDetermine the expected value of the rank of the winner.",
+    "image": null,
+    "choices": null,
+    "answer": "103",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Recursion on the two halves of the draw",
+        "body": "Generalise to $2^n$ players, where the higher-ranked player wins each match with probability $p$, and let $W_n$ be the winner's rank.\n\n**The draw is a fixed bracket.** In round 1 the pairs are $\\{1,2\\},\\{3,4\\},\\dots$. After round $r$, exactly one player survives from each block of $2^r$ consecutive ranks, and sorting the survivors keeps the blocks in order. So round $r+1$ pairs neighbouring blocks into blocks of size $2^{r+1}$. In particular, the players ranked $1,\\dots,2^{n-1}$ play their own tournament of the same kind. So do the players ranked $2^{n-1}+1,\\dots,2^n$, which is the same tournament with every rank shifted by $2^{n-1}$. The two finalists are the two half-winners, and the top-half winner is always the higher-ranked one.\n\nHence, with $e_n=E[W_n]$,\n$$e_n=p\\,e_{n-1}+(1-p)\\big(e_{n-1}+2^{n-1}\\big)=e_{n-1}+(1-p)2^{n-1},\\qquad e_0=1 .$$\nSo $e_n=1+(1-p)(2^n-1)=2^n-2^np+p$.\n\nWith $n=8$, $p=\\frac35$:\n$$E[W]=1+\\tfrac25\\cdot255=103 .$$\n\n**Answer: 103.**"
+      },
+      {
+        "title": "Read the winner's rank in binary",
+        "body": "Attach to every match of the bracket (there are $2^n-1$ of them) an independent coin, \"the lower-ranked player wins\", which comes up with probability $1-p$. This is legitimate because the result of a match depends only on which player is higher-ranked.\n\nWrite $W-1=\\sum_{j=0}^{n-1}2^jB_j$ in binary. The digit $B_j$ is $1$ exactly when the winner comes from the lower half of its block of $2^{j+1}$ consecutive ranks. That happens exactly when the lower-ranked player won the round-$(j+1)$ match of that block. Which block contains the eventual winner is decided by the coins of later rounds. Given those coins, $B_j$ is the coin of one fixed match, independent of them. So $P(B_j=1)=1-p$, and\n$$E[W]=1+\\sum_{j=0}^{n-1}2^j(1-p)=1+(2^n-1)(1-p)=1+255\\cdot\\tfrac25=103 .$$\n(A simulation of $2\\times10^5$ tournaments gives a mean of $\\approx102.98$.)\n\n**Answer: 103.**"
+      }
+    ],
+    "topics": [
+      "probability",
+      "games"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "simonmarais-2023-b3",
+    "bank": "simonmarais",
+    "source": {
+      "contest": "Simon Marais",
+      "paper": "Session B",
+      "year": 2023,
+      "number": 3,
+      "url": "https://www.simonmarais.org/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $n$ be a positive integer. Let $A$, $B$ and $C$ be three $n$-dimensional subspaces of $\\mathbb R^{2n}$ with the property that $A\\cap B=B\\cap C=C\\cap A=\\{\\mathbf 0\\}$. Prove that there exist bases $\\{\\mathbf a_1,\\mathbf a_2,\\ldots,\\mathbf a_n\\}$ of $A$, $\\{\\mathbf b_1,\\mathbf b_2,\\ldots,\\mathbf b_n\\}$ of $B$ and $\\{\\mathbf c_1,\\mathbf c_2,\\ldots,\\mathbf c_n\\}$ of $C$ with the property that for each $i\\in\\{1,2,\\ldots,n\\}$, the vectors $\\mathbf a_i$, $\\mathbf b_i$ and $\\mathbf c_i$ are linearly dependent.",
+    "image": null,
+    "choices": null,
+    "answer": "Take any basis $\\mathbf c_i$ of $C$ and split $\\mathbf c_i=\\mathbf a_i+\\mathbf b_i$ using $A\\oplus B=\\mathbb R^{2n}$. Then $B\\cap C=\\{\\mathbf 0\\}$ and $A\\cap C=\\{\\mathbf 0\\}$ make $(\\mathbf a_i)$ and $(\\mathbf b_i)$ linearly independent, hence bases.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Decompose a basis of $C$ along $A\\oplus B$",
+        "body": "Since $A\\cap B=\\{\\mathbf 0\\}$, $\\dim(A+B)=\\dim A+\\dim B=2n$, so $\\mathbb R^{2n}=A\\oplus B$.\n\nLet $\\mathbf c_1,\\dots,\\mathbf c_n$ be any basis of $C$ and write $\\mathbf c_i=\\mathbf a_i+\\mathbf b_i$ with $\\mathbf a_i\\in A$, $\\mathbf b_i\\in B$.\n\n**The $\\mathbf a_i$ form a basis of $A$.** Suppose $\\sum\\lambda_i\\mathbf a_i=\\mathbf 0$. Then\n$$\\sum\\lambda_i\\mathbf c_i=\\sum\\lambda_i\\mathbf b_i\\in B\\cap C=\\{\\mathbf 0\\},$$\nso $\\sum\\lambda_i\\mathbf c_i=\\mathbf 0$ and all $\\lambda_i=0$. Thus $\\mathbf a_1,\\dots,\\mathbf a_n$ are $n$ linearly independent vectors in the $n$-dimensional space $A$, i.e. a basis. In the same way, using $A\\cap C=\\{\\mathbf 0\\}$, the $\\mathbf b_i$ form a basis of $B$.\n\nFinally $\\mathbf a_i+\\mathbf b_i-\\mathbf c_i=\\mathbf 0$ is a non-trivial linear relation, so $\\mathbf a_i,\\mathbf b_i,\\mathbf c_i$ are linearly dependent for each $i$. ∎"
+      },
+      {
+        "title": "Kernel of the sum map",
+        "body": "Let $\\phi:A\\times B\\times C\\to\\mathbb R^{2n}$, $\\phi(\\mathbf a,\\mathbf b,\\mathbf c)=\\mathbf a+\\mathbf b+\\mathbf c$. By rank–nullity, $\\dim\\ker\\phi\\ge3n-2n=n$. Choose $n$ linearly independent triples $(\\mathbf a_i,\\mathbf b_i,\\mathbf c_i)\\in\\ker\\phi$. Each satisfies $\\mathbf a_i+\\mathbf b_i+\\mathbf c_i=\\mathbf 0$, so the three vectors are dependent.\n\n**The $\\mathbf a_i$ are independent.** If $\\sum\\lambda_i\\mathbf a_i=\\mathbf 0$, then $\\sum\\lambda_i\\mathbf b_i=-\\sum\\lambda_i\\mathbf c_i\\in B\\cap C=\\{\\mathbf 0\\}$. So $\\sum\\lambda_i(\\mathbf a_i,\\mathbf b_i,\\mathbf c_i)=\\mathbf 0$, and hence all $\\lambda_i=0$. Since $\\dim A=n$, the $\\mathbf a_i$ form a basis of $A$. By symmetry (using $C\\cap A$ and $A\\cap B$) the $\\mathbf b_i$ and the $\\mathbf c_i$ are bases of $B$ and $C$. ∎"
+      }
+    ],
+    "topics": [
+      "linear-algebra"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "simonmarais-2023-b4",
+    "bank": "simonmarais",
+    "source": {
+      "contest": "Simon Marais",
+      "paper": "Session B",
+      "year": 2023,
+      "number": 4,
+      "url": "https://www.simonmarais.org/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "*The following problem is open in the sense that the answer to part (b) is not currently known. A solution to part (a) will be awarded 7 points. Up to 7 additional points may be awarded for progress on part (b).*\n\n(a) Let $n$ be a positive integer that is not a perfect square. Find all pairs $(a,b)$ of positive integers for which there exists a positive real number $r$, such that\n$$r^a+\\sqrt n\\quad\\text{and}\\quad r^b+\\sqrt n$$\nare both rational numbers.\n\n(b) Let $n$ be a positive integer that is not a perfect square. Find all pairs $(a,b)$ of positive integers for which there exists a real number $r$, such that\n$$r^a+\\sqrt n\\quad\\text{and}\\quad r^b+\\sqrt n$$\nare both rational numbers.",
+    "image": null,
+    "choices": null,
+    "answer": "(a) Exactly the pairs $a=b$ (take $r=(n-\\sqrt n)^{1/a}$). (b) is an **open problem**. Known: $a=b$ and $\\{a,b\\}=\\{1,2\\}$ (with $r=\\frac12-\\sqrt n$) work; any other solution has $a,b>1$ of opposite parity; and for $a=1$ only $b\\in\\{1,2\\}$ work.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Part (a): conjugation and a monotone function",
+        "body": "**Answer to (a): exactly the pairs with $a=b$.**\n\nIf $a=b$, take $r=(n-\\sqrt n)^{1/a}$. This is a positive real number because $n\\ge2$, and $r^a+\\sqrt n=n$.\n\nConversely, let $r>0$ with $p=r^a+\\sqrt n$ and $q=r^b+\\sqrt n$ rational. Then $r^{ab}=(p-\\sqrt n)^b=(q-\\sqrt n)^a$. Both sides lie in $\\mathbb Q(\\sqrt n)$. Since $\\sqrt n$ is irrational, the conjugation $\\sqrt n\\mapsto-\\sqrt n$ is a field automorphism of $\\mathbb Q(\\sqrt n)$ that fixes $\\mathbb Q$, so also\n$$(p+\\sqrt n)^b=(q+\\sqrt n)^a .\\qquad(\\ast)$$\nNote $p-\\sqrt n=r^a>0$ and $q-\\sqrt n=r^b>0$.\n\n* If $p=q$, then $r^a=r^b$. Here $r\\ne1$, since $r=1$ would make $\\sqrt n=p-1$ rational. So $a=b$.\n* Otherwise, by symmetry, $p<q$. Since $1<p+\\sqrt n<q+\\sqrt n$, $(\\ast)$ forces $b>a$ (if $b\\le a$, then $(p+\\sqrt n)^b<(q+\\sqrt n)^b\\le(q+\\sqrt n)^a$). Let\n$$F(x)=b\\log(p+x)-a\\log(q+x)\\qquad(x>-p).$$\nThen $F'(x)=\\frac b{p+x}-\\frac a{q+x}>0$, because $0<p+x<q+x$ and $b>a$. But $F(-\\sqrt n)=\\log(r^{ab})-\\log(r^{ab})=0$ and, by $(\\ast)$, $F(\\sqrt n)=0$. Both points lie in the domain since $-\\sqrt n>-p$. This contradicts strict monotonicity.\n\nSo $a=b$. ∎"
+      },
+      {
+        "title": "Part (b): what is known (open problem)",
+        "body": "Part (b) is **open**: the full list of pairs is not known. The following partial results are proved.\n\n**Solutions.** $a=b$ works (part (a)). $\\{a,b\\}=\\{1,2\\}$ works with $r=\\frac12-\\sqrt n$:\n$$r+\\sqrt n=\\tfrac12,\\qquad r^2+\\sqrt n=\\tfrac14-\\sqrt n+n+\\sqrt n=n+\\tfrac14 .$$\n\n**$a,b$ both even.** Replace $r$ by $|r|$ (note $r\\ne0$) and apply part (a): $a=b$.\n\n**$a,b$ both odd, say $a\\le b$.** As in (a), with $p=r^a+\\sqrt n$ and $q=r^b+\\sqrt n$,\n$$(p-\\sqrt n)^b=(q-\\sqrt n)^a\\quad\\text{and}\\quad(p+\\sqrt n)^b=(q+\\sqrt n)^a .$$\n* If $p>\\sqrt n$, then $r>0$ and part (a) gives $a=b$.\n* If $p<-\\sqrt n$, put $p'=-p$, $q'=-q$. Both exponents are odd, so the same two equations hold for $p',q'$, and $p'>\\sqrt n$. The argument of part (a) used only these equations and $p>\\sqrt n$, so $a=b$.\n* If $-\\sqrt n<p<\\sqrt n$, then $r<0$. Put $Y=\\sqrt n-p=|r|^a>0$ and $Z=\\sqrt n+p>0$. Taking real $a$-th roots ($a$ odd), $Y^{b/a}=|r|^b=\\sqrt n-q$ and $Z^{b/a}=q+\\sqrt n$. So $Y+Z=2\\sqrt n=Y^{t}+Z^{t}$ with $t=b/a\\ge1$. By the power mean inequality,\n$$n^{1/(2t)}=\\Big(\\tfrac{Y^t+Z^t}{2}\\Big)^{1/t}\\ge\\tfrac{Y+Z}2=n^{1/2}.$$\nAs $n>1$ this forces $\\frac1t\\ge1$, so $t=1$ and $a=b$.\n\nSo any solution with $a\\ne b$ has $a,b$ of **opposite parity**.\n\n**The case $a=1$ is completely solved: only $b=1,2$.** By the above, $b$ is even; let $b=2m$ with $m\\ge2$. Then $r=p-\\sqrt n$ and $r^{2m}=q-\\sqrt n$, so (after conjugating) $(p+\\sqrt n)^{2m}=q+\\sqrt n$. Comparing coefficients of $\\sqrt n$ (as $1,\\sqrt n$ are linearly independent over $\\mathbb Q$),\n$$\\sum_{k=1}^{m}\\binom{2m}{2k-1}p^{2k-1}n^{m-k}=1 .\\qquad(\\dagger)$$\nNow $\\binom{2m}{2k-1}=\\frac{2m}{2m-2k+1}\\binom{2m-1}{2k-1}$ with $2m-2k+1$ odd, so $v_2\\binom{2m}{2k-1}\\ge v_2(2m)\\ge1$ for every $k$.\n* If $v_2(p)\\ge0$, every term of $(\\dagger)$ is even as a $2$-adic number, but the right side is $1$. Contradiction.\n* If $v_2(p)=-s<0$, the $k=m$ term $2m\\,p^{2m-1}$ has valuation $v_2(2m)-(2m-1)s$. Every other term has valuation at least $v_2(2m)-(2k-1)s$, which is strictly larger. So the left side has valuation $v_2(2m)-(2m-1)s\\le v_2(2m)-(2m-1)<0$, since $v_2(2m)\\le\\log_2(2m)<2m-1$ for $m\\ge2$. The right side has valuation $0$. Contradiction.\n\nWhat remains open is the case of opposite parities with $a,b>1$."
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "algebra"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": "Part (b) is an open problem (stated as such on the paper); only part (a) and the known partial results for (b) are proved. Consider excluding from practice or treating as part (a) only."
+  },
+  {
+    "id": "simonmarais-2023-c1",
+    "bank": "simonmarais",
+    "source": {
+      "contest": "Simon Marais",
+      "paper": "Session C",
+      "year": 2023,
+      "number": 1,
+      "url": "https://www.simonmarais.org/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "There are $2023$ cups numbered from $1$ through $2023$. Red, green, and blue balls are placed in the cups according to the following rules.\n\n* If cups $m$ and $n$ both contain a red ball, then $m-n$ is a multiple of $2$.\n* If cups $m$ and $n$ both contain a green ball, then $m-n$ is a multiple of $3$.\n* If cups $m$ and $n$ both contain a blue ball, then $m-n$ is a multiple of $5$.\n\nWhat is the smallest possible number of empty cups?",
+    "image": null,
+    "choices": null,
+    "answer": "538",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Chinese remainder theorem",
+        "body": "**Reduction.** The cups with a red ball all lie in one residue class mod $2$. Adding red balls to every cup of that class (or of any class, if there are no red balls) keeps the rules and does not create empty cups. The same holds for green (mod $3$) and blue (mod $5$). So we may assume:\n\ncup $n$ has a red ball $\\iff n\\equiv a\\pmod 2$, a green ball $\\iff n\\equiv b\\pmod3$, a blue ball $\\iff n\\equiv c\\pmod5$.\n\nBy the Chinese remainder theorem there is an $x$ with $x\\equiv a,b,c$ modulo $2,3,5$ respectively. So cup $n$ is empty exactly when $n-x$ is divisible by none of $2,3,5$, i.e. $\\gcd(n-x,30)=1$. Conversely every $x$ gives an admissible filling. So we must minimise\n$$E(x)=\\#\\{1\\le n\\le2023:\\gcd(n-x,30)=1\\}.$$\n\n**Counting.** The residues mod $30$ coprime to $30$ are $1,7,11,13,17,19,23,29$, eight of them, with cyclic gaps $6,4,2,4,2,4,6,2$. Since $2023=67\\cdot30+13$, cups $1,\\dots,2010$ form $67$ complete residue systems and contain exactly $67\\cdot8=536$ empty cups, whatever $x$ is. The last $13$ cups $2011,\\dots,2023$ give $13$ consecutive values of $n-x$. As every gap is at most $6$, any $6$ consecutive integers contain one coprime to $30$, so $13$ consecutive integers contain at least $2$. Hence $E(x)\\ge538$.\n\n**Equality.** The $13$ consecutive residues $24,25,\\dots,29,0,1,\\dots,6$ contain only $29$ and $1$. Choose $x$ with $2011-x\\equiv24\\pmod{30}$, i.e. $x\\equiv7$. That means red balls in the odd cups, green balls in cups $\\equiv1\\pmod3$ and blue balls in cups $\\equiv2\\pmod5$. This gives exactly $536+2=538$ empty cups (confirmed by direct count).\n\n**Answer: 538.**"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "counting"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "simonmarais-2023-c2",
+    "bank": "simonmarais",
+    "source": {
+      "contest": "Simon Marais",
+      "paper": "Session C",
+      "year": 2023,
+      "number": 2,
+      "url": "https://www.simonmarais.org/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "For an integer $n\\ge2$, consider the line segment connecting the point $(0,k)$ to the point $(n-k,0)$ for $k=0,1,2,\\ldots,n$. The union of these $n+1$ line segments divides the plane into one unbounded region and a number of bounded regions, each of which is a triangle or a quadrilateral. Each of these bounded regions can be coloured blue or red in a unique way such that regions sharing an edge have different colours and the region with vertex $(0,0)$ is coloured blue.\n\nDetermine all values of $n$ for which the total area that is coloured blue is equal to the total area that is coloured red.",
+    "image": null,
+    "choices": null,
+    "answer": "Exactly the **odd** $n$. For even $n$ the blue area exceeds the red area by exactly $\\frac12$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Coordinates $(u,v)$: the two chords through a point",
+        "body": "**Answer: exactly the odd $n$.** (For even $n$, blue $-$ red $=\\frac12$.)\n\nLet $\\ell_k$ be the $k$-th segment. $\\ell_0$ and $\\ell_n$ lie on the axes. For $1\\le k\\le n-1$ let $T_k$ be the closed triangle with vertices $(0,0),(n-k,0),(0,k)$, whose hypotenuse is $\\ell_k$, and let $U=T_1\\cup\\dots\\cup T_{n-1}$.\n\n**1. The bounded regions fill $U$.** $U$ is star-shaped from the origin (each $T_k$ is). If a point $P$ of the open first quadrant is not in $U$, then the ray from $P$ pointing away from the origin never meets $U$ or the axes. So $P$ is in the unbounded region, and so is every point outside the closed quadrant. On the other hand, the boundary of $U$ consists of pieces of the segments, so points inside $U$ (off the segments) cannot reach infinity. Hence, up to the segments themselves, the union of the bounded regions is exactly $U$.\n\n**2. The colouring.** For $P\\in U$ off all segments let $c(P)=\\#\\{k:P\\in T_k\\}\\ge1$. Crossing an edge (a piece of some $\\ell_k$, $1\\le k\\le n-1$) changes membership in $T_k$ only, so $c$ changes by exactly $1$. Within a region $c$ is constant. So \"blue iff $c(P)\\equiv n-1\\pmod2$\" is a proper colouring. Near $(0,0)$ we have $c=n-1$, so the region at the origin is blue. By uniqueness this is the colouring, and\n$$\\text{Blue}-\\text{Red}=\\int_U(-1)^{\\,c(P)-(n-1)}\\,dA .$$\n\n**3. New coordinates.** For $P=(x,y)$ with $x,y>0$ and $0<k<n$,\n$$P\\in T_k\\iff kx+(n-k)y\\le k(n-k)\\iff q_P(k):=k^2-(n-x+y)k+ny\\le0 .$$\nHere $q_P(0)=ny>0$ and $q_P(n)=nx>0$. So if $P\\in U$, the quadratic $q_P$ has roots $0<u\\le v<n$, $P\\in T_k\\iff u\\le k\\le v$, and $c(P)$ is the number of integers in $[u,v]$. By Vieta, $u+v=n-x+y$ and $uv=ny$, i.e.\n$$x=\\frac{(n-u)(n-v)}n,\\qquad y=\\frac{uv}n .$$\nThe map $\\Phi(u,v)=(x,y)$ is injective on $D=\\{0<u<v<n\\}$ (since $u,v$ are recovered as the roots), the case $u=v$ is a curve of area $0$, and its Jacobian is\n$$\\det\\begin{pmatrix}-\\frac{n-v}n&-\\frac{n-u}n\\\\[2pt]\\frac vn&\\frac un\\end{pmatrix}=\\frac{v-u}{n}>0 .$$\n(The lines $u=k$ and $v=k$ are mapped into $\\ell_k$, so the regions are the images of the unit squares below.)\n\n**4. Integrate.** Up to sets of area $0$, the part of $D$ with an integer in $[u,v]$ is the union of the squares $Q_{ij}=(i,i+1)\\times(j,j+1)$ with $0\\le i<j\\le n-1$. On $Q_{ij}$ we have $c=j-i$, and $\\iint_{Q_{ij}}\\frac{v-u}n\\,du\\,dv=\\frac{j-i}n$. (This is also the area of the corresponding region.) Exactly $n-d$ squares have $j-i=d$, so\n$$\\text{Blue}-\\text{Red}=\\frac1n\\sum_{d=1}^{n-1}(-1)^{\\,n-1-d}\\,d\\,(n-d).$$\n\n* **$n$ odd:** the sign is $(-1)^d$. The substitution $d\\mapsto n-d$ keeps $d(n-d)$ and flips the sign (as $n$ is odd), so the sum is $0$: the areas are equal.\n* **$n=2m$ even:** the sign is $(-1)^{d+1}$, and\n$$\\sum_{d=1}^{2m-1}(-1)^{d+1}d(2m-d)=2m\\sum_{d=1}^{2m-1}(-1)^{d+1}d-\\sum_{d=1}^{2m-1}(-1)^{d+1}d^2=2m\\cdot m-m(2m-1)=m .$$\n(Group the alternating sums in pairs: $1-2+\\dots+(2m-1)=m$, and $\\sum(-1)^{d+1}d^2=(2m-1)^2-\\sum_{t=1}^{m-1}(4t-1)=m(2m-1)$.) So $\\text{Blue}-\\text{Red}=\\frac mn=\\frac12\\neq0$.\n\nFor example, $n=2$ has a single blue triangle of area $\\frac12$, and $n=3$ gives equal areas (a Monte-Carlo check agrees for $n\\le7$). ∎"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "calculus",
+      "counting"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "simonmarais-2023-c3",
+    "bank": "simonmarais",
+    "source": {
+      "contest": "Simon Marais",
+      "paper": "Session C",
+      "year": 2023,
+      "number": 3,
+      "url": "https://www.simonmarais.org/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Determine the maximum real number $C$ such that\n$$\\sum_{i=1}^{n}\\frac{x_i}{x_{i-1}}\\ge n+C,$$\nfor all positive integers $n$ and all sequences of positive real numbers $x_0,x_1,\\ldots,x_n$ such that $x_0=1$ and $x_n=2$.",
+    "image": null,
+    "choices": null,
+    "answer": "ln(2)",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "answerDisplay": "$\\ln 2$",
+    "solutions": [
+      {
+        "title": "$t-1\\ge\\ln t$, plus geometric sequences",
+        "body": "**$C=\\ln2$ works.** For $t>0$ we have $t-1\\ge\\ln t$, with equality only at $t=1$. Hence\n$$\\sum_{i=1}^n\\frac{x_i}{x_{i-1}}-n=\\sum_{i=1}^n\\Big(\\frac{x_i}{x_{i-1}}-1\\Big)\\ge\\sum_{i=1}^n\\ln\\frac{x_i}{x_{i-1}}=\\ln\\frac{x_n}{x_0}=\\ln2 .$$\n\n**No larger $C$ works.** Take $x_i=2^{i/n}$. Then the sum equals $n\\,2^{1/n}$, and\n$$n\\big(2^{1/n}-1\\big)=\\frac{e^{(\\ln2)/n}-1}{1/n}\\longrightarrow\\ln2\\qquad(n\\to\\infty).$$\nSo for any $C>\\ln2$ some $n$ violates the inequality.\n\n**Answer: $C=\\ln2$.**"
+      },
+      {
+        "title": "AM–GM",
+        "body": "By AM–GM, $\\frac1n\\sum\\frac{x_i}{x_{i-1}}\\ge\\big(\\prod\\frac{x_i}{x_{i-1}}\\big)^{1/n}=2^{1/n}$, with equality for the geometric sequence $x_i=2^{i/n}$. So the best constant is $\\inf_n n(2^{1/n}-1)$. With $t=\\frac{\\ln2}n$,\n$$n(2^{1/n}-1)=\\ln2\\cdot\\frac{e^t-1}t=\\ln2\\Big(1+\\frac t2+\\frac{t^2}6+\\cdots\\Big),$$\nwhich is greater than $\\ln2$ and decreases to $\\ln2$ as $n\\to\\infty$. So the maximum $C$ is $\\ln2\\approx0.693$.\n\n**Answer: $C=\\ln 2$.**"
+      }
+    ],
+    "topics": [
+      "inequalities",
+      "sequences-series"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "simonmarais-2023-c4",
+    "bank": "simonmarais",
+    "source": {
+      "contest": "Simon Marais",
+      "paper": "Session C",
+      "year": 2023,
+      "number": 4,
+      "url": "https://www.simonmarais.org/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $k$ be a positive integer. Keira and Roland play a game of *reverse chess*. Initially, Roland chooses a positive integer $n>\\frac{k}{2023}$. Keira places $k$ kings on $k$ distinct squares of a $2023\\times n$ chess board. Then Roland places a rook on an unoccupied square of the board. Both players then take turns moving any number (possibly zero) of their pieces, with Keira starting first. Each king cannot move to a square occupied by another king, but it can capture the rook. Furthermore, if Keira chooses to move more than one king in her turn, she moves them one at a time. Roland's rook is not permitted to capture any king, nor may it pass through a square occupied by a king.\n\nFor which $k$ can Keira guarantee to capture Roland's rook, regardless of Roland's moves or choice of $n$?\n\n(A king can move exactly one square in any horizontal, vertical or diagonal direction. A rook can move any number of squares in a horizontal or vertical direction. One piece (rook or king) captures another by moving to the square it occupies.)",
+    "image": null,
+    "choices": null,
+    "answer": "Exactly for $k\\ge1012$. With $1012$ kings Keira forms a descending line guarding the column pairs $\\{1,2\\},\\{3,4\\},\\dots,\\{2023\\}$. With $k\\le1011$ the rook hops between far-away rows, finding a king-free column among columns $1,3,\\dots,2023$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Rook escapes for $k\\le1011$; a sweeping line wins for $k\\ge1012$",
+        "body": "Take the board to have $2023$ columns and $n$ rows; \"row distance\" is the difference of row numbers. **Answer: $k\\ge1012$.**\n\n**Roland escapes when $k\\le1011$.** Roland chooses $n>2027\\cdot1011$. Call a row *safe* (at a given moment) if every king is at row distance at least $1014$ from it. Each king rules out at most $2027$ rows, so a safe row always exists. Roland places the rook in a safe row. Then, starting each time the rook has just entered a safe row $R$:\n\n* After Keira's 1st move he slides the rook along $R$ to column $1$.\n* After Keira's $s$-th move ($s\\ge2$) he looks at the rook's column $2s-3$. If it contains no king, he moves the rook vertically to a currently safe row, which is possible because the column is empty. That starts a new cycle. Otherwise he slides the rook two squares right.\n\n*A king blocks at most once.* If the same king were in the rook's column at checks $s<s'$, it would have moved $2(s'-s)$ columns in $s'-s$ moves, which is impossible. So with at most $1011$ kings, at most $1011$ of the checks at columns $1,3,\\dots,2021$ fail, and a free column is found by check $s=1013$ at the latest (column $2023$).\n\n*The rook is never caught.* Before Keira's $s$-th move of a cycle ($s\\le1013$), every king is at row distance at least $1014-(s-1)\\ge2$ from $R$, so it cannot reach the rook. After the move the distance is still at least $1$, so row $R$ contains no king and the horizontal slides are legal. Repeating forever, the rook is never captured.\n\n**Keira wins when $k\\ge1012$.** Number the columns $1,\\dots,2023$ and call $\\{2i-1,2i\\}$ ($i\\le1011$) and $\\{2023\\}$ the $1012$ *double columns*.\n\n*Placement.* Since $2023n>k$, Keira can fill the board row by row from the top. She fills rows $1,\\dots,h-1$ completely and puts the remaining $m<2023$ kings in row $h$, always including all odd columns of row $h$ when $m\\ge1012$. Let the *line* be row $L=h$ if $m\\ge1012$, and row $L=h-1\\ge1$ otherwise. Then the line contains a king in every odd column, and every row above the line is full. Call the line kings in columns $2i-1$ the guards $G_i$ ($G_{1012}$ in column $2023$). The rook is placed on an empty square. If that square is in row $L$, it is in an even column next to a guard, and Keira captures it at once. Otherwise it is strictly below row $L$.\n\n*Invariant (at the start of each Keira turn):* there is a row $L$ with one guard $G_i$ in row $L$ inside double column $i$ for each $i$, and the rook is in a row $>L$.\n\n*Keira's move.* If the rook is in row $L+1$, inside double column $i$, then $G_i$ is adjacent to it (the columns differ by at most $1$) and captures it. Otherwise the rook is in row $\\ge L+2$, inside some double column $i_0$. Keira moves each guard one step down into row $L+1$, staying in its double column, with $G_{i_0}$ going to the rook's column. If the target square is occupied by another (spare) king, that king becomes the new guard and the old guard stays where it is. The targets are distinct and none is the rook's square.\n\n*Roland's move.* The rook is in a row $\\ge L+2$ and $G_{i_0}$ sits directly above it in row $L+1$. Horizontal moves keep its row, and vertical moves upward are blocked by $G_{i_0}$. So the rook stays below row $L+1$, and the invariant holds with $L+1$.\n\nThe line moves down one row every turn while the rook stays below it, so within $n$ turns the rook is in the row just below the line on Keira's turn, and she captures it.\n\nSo Keira can force a capture exactly when $k\\ge1012$. ∎"
+      }
+    ],
+    "topics": [
+      "games",
+      "logic"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

@@ -1,0 +1,192 @@
+[
+  {
+    "id": "cmo-cmo-2010-01",
+    "bank": "cmo",
+    "source": {
+      "contest": "CMO",
+      "paper": "CMO 2010",
+      "year": 2010,
+      "number": 1,
+      "url": "https://cms.math.ca/competitions/cmo/"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "For a positive integer $n$, an *$n$-staircase* is a figure consisting of unit squares, with one square in the first row, two squares in the second row, and so on, up to $n$ squares in the $n$th row, such that all the left-most squares in each row are aligned vertically. For example, the $5$-staircase is shown below (left).\n\nLet $f(n)$ denote the minimum number of square tiles required to tile the $n$-staircase, where the side lengths of the square tiles can be any positive integer. For example, $f(2) = 3$ and $f(4) = 7$ (tilings shown on the right).\n\n(a) Find all $n$ such that $f(n) = n$.\n\n(b) Find all $n$ such that $f(n) = n + 1$.",
+    "image": "qimages/cmo/cmo-2010/q01.webp",
+    "choices": null,
+    "answer": "(a) $n = 2^k - 1$ ($k \\ge 1$): binary representation all $1$s. (b) $n = 2^{k+1} - 2^l - 1$ with $0 \\le l < k$: binary representation with exactly one $0$. (Each tile covers at most one diagonal cell, so $f(n) \\ge n$; analyse the tile at the bottom-left corner.)",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Diagonal cells and the bottom-left tile",
+        "body": "**Setup.** Number rows $1, \\ldots, n$ from the top and columns from the left; the staircase is $\\{(r, c) : 1 \\le c \\le r \\le n\\}$. More generally write $\\Sigma_{a,m} = \\{(r,c) : a < c \\le r \\le a + m\\}$ for a shifted $m$-staircase (so $\\Sigma_{0,n}$ is the $n$-staircase). The *diagonal cells* are the cells $(r, r)$.\n\n**Lemma 1.** A square tile inside a staircase contains at most one diagonal cell, and if it contains $(\\rho, \\rho)$, that cell is its top-right corner: the tile of side $s$ occupies rows $\\rho, \\ldots, \\rho + s - 1$ and columns $\\rho - s + 1, \\ldots, \\rho$. (Call such tiles *diagonal tiles*.)\n\n*Proof.* If a tile contained $(r, r)$ and $(r', r')$ with $r < r'$, it would contain $(r, r')$, which is not in the staircase as $r' > r$. A tile containing $(\\rho,\\rho)$ cannot contain $(\\rho, \\rho+1)$ or $(\\rho - 1, \\rho)$ (not in the staircase), so $(\\rho,\\rho)$ is in its top row and right column. $\\square$\n\nThere are $n$ diagonal cells in $\\Sigma_{0,n}$ (and $m$ in $\\Sigma_{a,m}$), so **$f(n) \\ge n$**, and a tiling of an $m$-staircase uses exactly $m$ tiles iff all its tiles are diagonal.\n\n**Lemma 2.** Suppose in a tiling of $\\Sigma_{0,n}$ the tile $T$ covering the bottom-left cell $(n, 1)$ is diagonal, with side $t$. Then $n = 2t - 1$, and the rest of the staircase splits into the two $(t-1)$-staircases $\\Sigma_{0,t-1}$ (rows $< t$) and $\\Sigma_{t, t-1}$; every other tile lies in one of them.\n\n*Proof.* By Lemma 1, $T$ occupies columns $\\rho - t + 1, \\ldots, \\rho$ and rows $\\rho, \\ldots, \\rho + t - 1$; it contains column $1$ and row $n$, so $\\rho = t$ and $2t - 1 = n$. A cell not in $T$ either has row $< t$, or has row $\\ge t$ and column $> t$, hence lies in $\\Sigma_{t,t-1}$. A square meeting both pieces would contain a cell $(r_1, c_2)$ with $r_1 \\le t - 1 < t + 1 \\le c_2$, outside the staircase. $\\square$\n\n**(a)** *Construction.* Let $p(k) = 2^k - 1$. A $p(1)$-staircase is one tile. Given a tiling of the $p(k)$-staircase by $p(k)$ tiles, tile the $p(k+1)$-staircase by a tile of side $2^k$ in the bottom-left corner (rows $2^k, \\ldots, 2^{k+1}-1$, columns $1, \\ldots, 2^k$, a diagonal tile), plus such tilings of the two remaining $p(k)$-staircases (Lemma 2): $2p(k) + 1 = p(k+1)$ tiles. Call this the *canonical tiling*. So $f(p(k)) = p(k)$.\n\n*Necessity.* If $f(n) = n$, a minimal tiling has all tiles diagonal; by Lemma 2, $n = 2t - 1$ and the two $(t-1)$-staircases are tiled by diagonal tiles, i.e. with $t - 1$ tiles each, so $t - 1 = 0$ or $f(t-1) = t-1$. By strong induction $t - 1 = p(j)$ for some $j \\ge 0$, and $n = 2p(j) + 1 = p(j + 1)$.\n\n**Answer (a):** $f(n) = n$ iff $n = 2^k - 1$ for some $k \\ge 1$, i.e. the binary representation of $n$ consists only of $1$s.\n\n**(b)** Let $f(n) = n + 1$ and take a tiling with $n + 1$ tiles. Each of the $n$ diagonal cells is in exactly one tile and each tile contains at most one, so exactly one tile $T_0$ is not diagonal. Let $T$ be the tile covering $(n, 1)$, with side $t$.\n\n*Case 1: $T$ is diagonal.* By Lemma 2, $n = 2t - 1$ and the tiling restricts to tilings of two $(t-1)$-staircases; as the whole tiling is minimal, so are these (otherwise replace one). Then $n + 1 = 1 + 2f(t-1)$ is odd, but $n + 1 = 2t$ is even. Impossible.\n\n*Case 2: $T$ is not diagonal.* So $T = T_0$ and all other tiles are diagonal. $T$ occupies rows $q + 1, \\ldots, n$ and columns $1, \\ldots, t$, where $q = n - t$; its top-right cell $(q+1, t)$ is not diagonal, so $t < q + 1$, i.e. $t \\le q$.\n\n*Step 1: $q = p(k)$ for some $k \\ge 1$.* The cells $(1,1), \\ldots, (q, 1)$ of column $1$ are covered by diagonal tiles with left column $1$; by Lemma 1 such a tile of side $s$ has $\\rho = s$ and occupies rows $s, \\ldots, 2s - 1$. Going down the column: if rows $1, \\ldots, i - 1$ are already covered by other tiles, the tile covering $(i, 1)$ occupies rows $s, \\ldots, 2s-1$ with $s \\le i$ (it contains row $i$) and $s \\ge i$ (it avoids rows $< i$), so $s = i$. Hence the tiles have sides $1, 2, 4, \\ldots$ and cover rows $[1,1], [2,3], [4,7], \\ldots$. They must end exactly at row $q$ (row $q+1$ of column $1$ is in $T$), so $q = 2^k - 1$.\n\n*Step 2: no tile crosses the line between rows $q$ and $q+1$.* We prove the following by induction on $j \\ge 0$:\n\n> **Lemma 3.** Let $\\Sigma = \\Sigma_{a,m}$ with $m = p(j)$ be contained in the staircase, such that every tile meeting $\\Sigma$ is diagonal and, if $a \\ge 1$, each cell $(r, a)$ with $a < r \\le a + m$ lies in a tile not meeting $\\Sigma$. Then every tile containing a cell of the bottom row $a + m$ of $\\Sigma$ has row $a + m$ as its bottom row.\n\nFor $j = 0$ there is nothing to prove. Let $j \\ge 1$. A tile containing a cell $(r, a+1)$ of $\\Sigma$ ($a < r \\le a+m$) cannot extend to column $a$ (the cell $(r, a)$ is in another tile), so it is a diagonal tile with left column $a + 1$: side $s$, $\\rho = a + s$, rows $a + s, \\ldots, a + 2s - 1$. Exactly as in Step 1, going down column $a+1$ the tiles have sides $1, 2, \\ldots, 2^{j-1}$ and cover rows $a + [1,1], a + [2,3], \\ldots, a + [2^{j-1}, 2^j - 1]$; the last one, $\\Lambda$, has bottom row $a + 2^j - 1 = a + m$ and occupies columns $a + 1, \\ldots, a'$ with $a' = a + 2^{j-1}$. The remaining cells of row $a + m$ in $\\Sigma$ are the bottom row of $\\Sigma' = \\Sigma_{a', p(j-1)}$ (note $a' + p(j-1) = a + m$). Every tile meeting $\\Sigma' \\subseteq \\Sigma$ is diagonal, and the cells $(r, a')$ with $a' < r \\le a + m$ lie in $\\Lambda$, which does not meet $\\Sigma'$. By induction, the tiles meeting the bottom row of $\\Sigma'$ also end at row $a + m$. $\\square$\n\nApply Lemma 3 to $\\Sigma_{0,q}$, the top $q$ rows (no tile meeting it is $T$). So no tile crosses between rows $q$ and $q+1$, and the tiles meeting the top $q$ rows tile $\\Sigma_{0,q}$.\n\n*Step 3: no tile crosses the line between columns $t$ and $t+1$.* The reflection $\\sigma(r, c) = (n + 1 - c, n + 1 - r)$ maps the staircase onto itself, diagonal cells to diagonal cells and squares to squares, and it maps $T$ onto itself. Applying Step 2 to the reflected tiling shows that no tile of the original tiling crosses the line between columns $n + 1 - (q+1) = t$ and $n + 1 - q = t + 1$.\n\n*Step 4.* The tiles inside $\\Sigma_{0,q}$ that lie in columns $> t$ (by Step 3, every such tile lies entirely on one side) tile $O = \\{(r, c) : t < c \\le r \\le q\\} = \\Sigma_{t, q-t}$, and they are diagonal tiles. If $q = t$, then $n = 2q = 2p(k)$. If $q > t$, $O$ is a $(q-t)$-staircase tiled with $q - t$ tiles, so by (a), $q - t = p(l)$ with $1 \\le l < k$, and $n = t + q = 2p(k) - p(l)$. With $p(0) = 0$, in all cases\n$$n = 2p(k) - p(l) = 2^{k+1} - 2^l - 1, \\qquad 0 \\le l < k.$$\n\n*Sufficiency.* Let $n = 2p(k) - p(l)$ with $0 \\le l < k$, $q = p(k)$, $t = q - p(l) \\ge 1$. In binary, $n = 2^{k+1} - 1 - 2^l$ is $k + 1$ ones with the digit in position $l$ changed to $0$, so $n$ is not of the form $2^j - 1$ and $f(n) \\ge n + 1$ by (a). For a tiling with $n + 1$ tiles: put a tile $T$ of side $t$ on rows $q+1, \\ldots, n$, columns $1, \\ldots, t$. The rest is $\\Sigma_{0,q} \\cup \\Sigma_{t,q}$ (cells with row $\\le q$, or column $> t$), two $p(k)$-staircases overlapping in $O = \\Sigma_{t, p(l)}$, which is the bottom-right $p(l)$-sub-staircase of the first and the top $p(l)$-sub-staircase of the second. By the recursive construction (and induction on $k$), the canonical tiling of a $p(k)$-staircase contains the canonical tiling of its top $p(l)$-sub-staircase and of its bottom-right $p(l)$-sub-staircase (these lie in the top and right pieces of the recursion, respectively). Tile both $p(k)$-staircases canonically; on $O$ the two tilings agree, so together they tile $\\Sigma_{0,q}\\cup\\Sigma_{t,q}$ with $2p(k) - p(l) = n$ tiles. With $T$ this is $n + 1$ tiles, so $f(n) = n + 1$.\n\nA computer search confirms $f(1), \\ldots, f(13) = 1, 3, 3, 7, 6, 7, 7, 11, 12, 13, 12, 15, 14$: $f(n) = n$ for $n = 1, 3, 7$ and $f(n) = n + 1$ for $n = 2, 5, 6, 11, 13$.\n\n**Answer (b):** $f(n) = n + 1$ iff $n = 2^{k+1} - 2^l - 1$ with $0 \\le l < k$, i.e. the binary representation of $n$ contains exactly one $0$. ∎"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "counting",
+      "number-theory"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "cmo-cmo-2010-02",
+    "bank": "cmo",
+    "source": {
+      "contest": "CMO",
+      "paper": "CMO 2010",
+      "year": 2010,
+      "number": 2,
+      "url": "https://cms.math.ca/competitions/cmo/"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $A$, $B$, $P$ be three points on a circle. Prove that if $a$ and $b$ are the distances from $P$ to the tangents at $A$ and $B$ and $c$ is the distance from $P$ to the chord $AB$, then $c^2 = ab$.",
+    "image": null,
+    "choices": null,
+    "answer": "With $r$ the radius: $a = \\frac{PA^2}{2r}$, $b = \\frac{PB^2}{2r}$ and $c = \\frac{PA\\cdot PB}{2r}$ (area of triangle $PAB$ two ways), so $c^2 = ab$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Express all three distances through chords",
+        "body": "Let $O$ and $r$ be the centre and radius. If $P = A$ then $a = c = 0$, and if $P = B$ then $b = c = 0$; so assume $P \\ne A, B$.\n\n**Distance to a tangent.** Let $\\mathbf u$ be the unit vector from $A$ towards $O$, so $O = A + r\\mathbf u$. The tangent at $A$ is the line through $A$ perpendicular to $\\mathbf u$, and the whole circle lies on the side of it containing $O$, so the distance from $P$ to the tangent is $(P - A)\\cdot\\mathbf u$. From $|P - O|^2 = r^2$:\n$$|P - A|^2 - 2r\\,(P - A)\\cdot\\mathbf u + r^2 = r^2 \\quad\\Longrightarrow\\quad (P - A)\\cdot \\mathbf u = \\frac{PA^2}{2r}.$$\nSo $a = \\dfrac{PA^2}{2r}$ and likewise $b = \\dfrac{PB^2}{2r}$.\n\n**Distance to the chord.** Triangle $PAB$ is inscribed in the circle, so its circumradius is $r$ and its area is $\\dfrac{PA\\cdot PB\\cdot AB}{4r}$. Its area is also $\\frac12\\,AB\\cdot c$. Hence $c = \\dfrac{PA\\cdot PB}{2r}$.\n\nTherefore\n$$c^2 = \\frac{PA^2\\cdot PB^2}{4r^2} = \\frac{PA^2}{2r}\\cdot\\frac{PB^2}{2r} = ab. \\qquad ∎$$"
+      },
+      {
+        "title": "Similar triangles (P on the minor arc AB)",
+        "body": "Let $E$, $F$, $G$ be the feet of the perpendiculars from $P$ to the tangent at $A$, the tangent at $B$ and the chord $AB$, so $a = PE$, $b = PF$, $c = PG$. We show triangles $EPG$ and $GPF$ are similar, which gives $\\frac{PE}{PG} = \\frac{PG}{PF}$, i.e. $c^2 = ab$. We treat the case where $P$ lies on the arc $AB$ cut off by the chord on the side where the tangents meet; the other case is similar (or use the first solution, which covers all cases).\n\nThe quadrilaterals $AEPG$ and $BFPG$ have right angles at $E, G$ and at $F, G$, so each is cyclic. In $AEPG$: $\\angle PGE = \\angle PAE$. By the tangent–chord angle, $\\angle PAE$ (between tangent at $A$ and chord $AP$) equals the inscribed angle $\\angle PBA = \\angle PBG$, and in $BFPG$: $\\angle PBG = \\angle PFG$. So $\\angle PGE = \\angle PFG$. In the same way $\\angle PEG = \\angle PAG = \\angle PAB = \\angle PBF = \\angle PGF$ (using cyclic $AEPG$, the tangent–chord angle at $B$, and cyclic $BFPG$). Two equal angles give $\\triangle EPG \\sim \\triangle GPF$, and so $\\frac{PE}{PG} = \\frac{PG}{PF}$. ∎"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "cmo-cmo-2010-03",
+    "bank": "cmo",
+    "source": {
+      "contest": "CMO",
+      "paper": "CMO 2010",
+      "year": 2010,
+      "number": 3,
+      "url": "https://cms.math.ca/competitions/cmo/"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Three speed skaters have a friendly \"race\" on a skating oval. They all start from the same point and skate in the same direction, but with different speeds that they maintain throughout the race. The slowest skater does $1$ lap a minute, the fastest one does $3.14$ laps a minute, and the middle one does $L$ laps a minute for some $1 < L < 3.14$. The race ends at the moment when all three skaters again come together to the same point on the oval (which may differ from the starting point.) Find how many different choices for $L$ are there such that exactly $117$ passings occur before the end of the race. (A passing is defined when one skater passes another one. The beginning and the end of the race when all three skaters are together are not counted as passings.)",
+    "image": null,
+    "choices": null,
+    "answer": "16",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Laps gained relative to the slowest skater",
+        "body": "Take the oval to have length $1$ and measure time in minutes. Let $x(t) = 2.14\\,t$ be the number of laps the fastest skater has gained on the slowest, and $y(t) = (L - 1)\\,t$ the number gained by the middle skater; then $0 < y(t) < x(t)$ for $t > 0$, and $x(t) - y(t)$ is the number of laps the fastest has gained on the middle one.\n\nTwo skaters are at the same point exactly when the corresponding gain is an integer, and since the gains increase strictly, each such moment is a passing (or the start/end). The fastest passes the slowest when $x \\in \\mathbb Z$, the middle passes the slowest when $y \\in \\mathbb Z$, and the fastest passes the middle when $x - y \\in \\mathbb Z$. All three are together exactly when $x, y \\in \\mathbb Z$ (then $x - y \\in \\mathbb Z$ too). If two of the three gains are integers at the same moment, so is the third; so before the end, passings happen one at a time.\n\nThe race ends at the first $t > 0$ with $x(t), y(t)$ both integers, say $x = a$, $y = b$. This requires $\\frac{y}{x} = \\frac{L-1}{2.14}$ to be rational (otherwise the race never ends), and then $(a, b)$ is the first lattice point on the ray, i.e. $\\frac ba$ in lowest terms: $\\gcd(a, b) = 1$, $0 < b < a$. Before the end, $x$ passes through the integers $1, \\ldots, a - 1$, $y$ through $1, \\ldots, b - 1$ and $x - y$ through $1, \\ldots, a - b - 1$, so the number of passings is\n$$(a - 1) + (b - 1) + (a - b - 1) = 2a - 3.$$\nSetting $2a - 3 = 117$ gives $a = 60$. Conversely, each $b$ with $1 \\le b < 60$ and $\\gcd(b, 60) = 1$ gives $L = 1 + 2.14\\cdot\\frac{b}{60} \\in (1, 3.14)$ with exactly $117$ passings, and different $b$ give different $L$. The number of such $b$ is\n$$\\varphi(60) = \\varphi(4)\\varphi(3)\\varphi(5) = 2\\cdot 2\\cdot 4 = 16$$\n(namely $b = 1, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 49, 53, 59$).\n\n**Answer: $16$**"
+      },
+      {
+        "title": "Laps counted in each skater's frame",
+        "body": "Call the skaters $A$ (fastest), $B$ (middle), $C$ (slowest). Relative to $C$, at the end $A$ has completed some whole number $n$ of extra laps and $B$ some whole number $m$, with $n > m \\ge 1$. The race lasts $\\frac{n}{2.14} = \\frac{m}{L - 1}$ minutes, so $L = 1 + 2.14\\,\\frac mn$. The fraction $\\frac mn$ must be in lowest terms: if $k = \\gcd(m, n) > 1$, all three would already meet after $\\frac1k$ of that time. So choices of $L$ correspond to reduced fractions $\\frac mn \\in (0,1)$.\n\n$A$ passes $C$ once for each extra lap except the last (which ends the race): $n - 1$ passings. Similarly $B$ passes $C$ $m - 1$ times, and $A$ passes $B$ $(n - m) - 1$ times. Total $2n - 3 = 117$, so $n = 60$, and $m$ ranges over the integers in $[1, 59]$ coprime to $60$: $\\varphi(60) = 16$ values.\n\n**Answer: $16$**"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "rates"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "cmo-cmo-2010-04",
+    "bank": "cmo",
+    "source": {
+      "contest": "CMO",
+      "paper": "CMO 2010",
+      "year": 2010,
+      "number": 4,
+      "url": "https://cms.math.ca/competitions/cmo/"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "text",
+    "prompt": "Each vertex of a finite graph can be coloured either black or white. Initially all vertices are black. We are allowed to pick a vertex $P$ and change the colour of $P$ and all of its neighbours. Is it possible to change the colour of every vertex from black to white by a sequence of operations of this type?\n\n(A finite graph consists of a finite set of vertices and a finite set of edges between vertices. If there is an edge between vertex $A$ and vertex $B$, then $B$ is called a neighbour of $A$.)",
+    "image": null,
+    "choices": null,
+    "answer": "Yes",
+    "acceptedAnswers": [
+      "yes",
+      "Yes, always",
+      "always",
+      "yes it is possible",
+      "it is possible",
+      "possible"
+    ],
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Linear algebra over GF(2)",
+        "body": "**Yes, always.**\n\nOnly the parity of the number of times each vertex is picked matters, and the order is irrelevant. Let the vertices be $1, \\ldots, n$ and let $M$ be the $n \\times n$ matrix over $\\mathbb F_2 = \\{0, 1\\}$ with $M_{ij} = 1$ if $i = j$ or $i, j$ are adjacent (the adjacency matrix plus the identity). If $x \\in \\mathbb F_2^n$ records which vertices are picked (an odd number of times), vertex $i$ changes colour $(Mx)_i$ times mod $2$. We need $x$ with $Mx = \\mathbf 1$ (the all-ones vector).\n\nOver any field, the image of a matrix is the orthogonal complement of the kernel of its transpose; here $M$ is symmetric, so $\\operatorname{im} M = (\\ker M)^{\\perp}$. So it suffices to show $\\mathbf 1 \\cdot y = 0$ for every $y$ with $My = 0$.\n\nIf $My = 0$ then $y^{\\mathsf T}My = 0$. But\n$$y^{\\mathsf T}My = \\sum_{i,j}M_{ij}y_iy_j = \\sum_i M_{ii}y_i^2 + 2\\sum_{i<j}M_{ij}y_iy_j = \\sum_i y_i = \\mathbf 1\\cdot y \\pmod 2,$$\nusing $M_{ii} = 1$, $y_i^2 = y_i$ and $2 = 0$. Hence $\\mathbf 1 \\cdot y = 0$, so $\\mathbf 1 \\in \\operatorname{im} M$: some set of vertices, each picked once, turns every vertex white. ∎\n\n**Answer: Yes**"
+      },
+      {
+        "title": "Induction on the number of vertices",
+        "body": "**Yes.** For a set $X$ of vertices, \"applying $X$\" means picking each vertex of $X$ once; vertex $v$ then changes colour once for each vertex of $X$ in its closed neighbourhood $N[v]$ ($v$ and its neighbours). We prove by induction on $n$ that every graph with $n$ vertices has a set $X$ that flips every vertex an odd number of times. For $n = 1$ take $X = \\{v\\}$.\n\nLet $G$ have $n \\ge 2$ vertices. For each vertex $v$, the induction hypothesis applied to $G - v$ gives a set $X_v$ of vertices other than $v$ that flips every vertex of $G - v$ an odd number of times; in $G$, applying $X_v$ flips every vertex other than $v$ an odd number of times. If for some $v$ it also flips $v$ an odd number of times, we are done. So assume each $X_v$ flips exactly the vertices other than $v$ an odd number of times (and $v$ an even number).\n\n- *$n$ even.* Apply all the $X_v$ (combined: total number of flips of a vertex is added up, and only parity matters). Each vertex $w$ is flipped oddly by the $n - 1$ sets $X_v$ with $v \\ne w$ and evenly by $X_w$: in total an odd number of times, since $n - 1$ is odd.\n- *$n$ odd.* The degrees sum to twice the number of edges, an even number, so not all $n$ degrees are odd: some vertex $u$ has even degree, so $|N[u]|$ is odd. Apply $\\{u\\}$ together with $X_v$ for all $v \\in N[u]$. A vertex $w \\in N[u]$ is flipped by $\\{u\\}$ once and oddly by the $|N[u]| - 1$ (even number of) sets $X_v$, $v \\in N[u] \\setminus\\{w\\}$: odd in total. A vertex $w \\notin N[u]$ is not flipped by $\\{u\\}$ and oddly by all $|N[u]|$ (an odd number of) sets: odd in total.\n\nIn both cases every vertex ends up white. ∎\n\n**Answer: Yes**"
+      }
+    ],
+    "topics": [
+      "graph-theory",
+      "linear-algebra",
+      "games"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "cmo-cmo-2010-05",
+    "bank": "cmo",
+    "source": {
+      "contest": "CMO",
+      "paper": "CMO 2010",
+      "year": 2010,
+      "number": 5,
+      "url": "https://cms.math.ca/competitions/cmo/"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $P(x)$ and $Q(x)$ be polynomials with integer coefficients. Let $a_n = n! + n$. Show that if $P(a_n)/Q(a_n)$ is an integer for every $n$, then $P(n)/Q(n)$ is an integer for every integer $n$ such that $Q(n) \\ne 0$.",
+    "image": null,
+    "choices": null,
+    "answer": "Divide: $P/Q = B(x)/b + R(x)/Q(x)$ with $B \\in \\mathbb Z[x]$, $b \\ge 1$; the remainder term tends to $0$ but would have to lie in $\\frac1b\\mathbb Z$, so $R = 0$. Then $b \\mid B(a_k)$ and $a_k \\equiv k \\pmod b$ for $k \\ge b$ give $b \\mid B(n)$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Polynomial division, then congruences",
+        "body": "Since $P(a_n)/Q(a_n)$ is an integer, $Q(a_n) \\ne 0$; in particular $Q$ is not the zero polynomial. Divide $P$ by $Q$ over $\\mathbb Q$:\n$$P(x) = A(x)Q(x) + R(x),$$\nwith $A, R \\in \\mathbb Q[x]$ and $R = 0$ or $\\deg R < \\deg Q$. Clearing denominators of the coefficients of $A$, write $A(x) = \\frac{B(x)}{b}$ with $B \\in \\mathbb Z[x]$ and $b$ a positive integer. Then for every integer $k$, $A(k) = \\frac{B(k)}{b}$ is an integer multiple of $\\frac1b$.\n\n**$R = 0$.** Suppose not. Since $\\deg R < \\deg Q$, $\\frac{R(x)}{Q(x)} \\to 0$ as $x \\to \\infty$, and since $R$ has finitely many roots, $R(x) \\ne 0$ for large $x$. As $a_n \\to \\infty$, for all large $n$\n$$0 < \\left|\\frac{R(a_n)}{Q(a_n)}\\right| < \\frac1b.$$\nBut $\\frac{R(a_n)}{Q(a_n)} = \\frac{P(a_n)}{Q(a_n)} - \\frac{B(a_n)}{b}$ is an integer minus a multiple of $\\frac1b$, hence a multiple of $\\frac1b$, and a nonzero multiple of $\\frac1b$ has absolute value at least $\\frac1b$. Contradiction. So $R = 0$ and $P(x) = \\frac{B(x)}{b}Q(x)$; thus $\\frac{P(n)}{Q(n)} = \\frac{B(n)}{b}$ whenever $Q(n) \\ne 0$.\n\n**$b \\mid B(n)$ for every integer $n$.** For every $k$, $\\frac{B(a_k)}{b} = \\frac{P(a_k)}{Q(a_k)}$ is an integer, so $b \\mid B(a_k)$. Given an integer $n$, choose $k \\ge b$ with $k \\equiv n \\pmod b$ (infinitely many such $k$ exist). Since $b \\mid k!$, we get $a_k = k! + k \\equiv k \\equiv n \\pmod b$, and because $B$ has integer coefficients, $B(n) \\equiv B(a_k) \\equiv 0 \\pmod b$.\n\nHence $\\frac{P(n)}{Q(n)} = \\frac{B(n)}{b}$ is an integer for every integer $n$ with $Q(n) \\ne 0$. ∎"
+      }
+    ],
+    "topics": [
+      "polynomials",
+      "number-theory"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

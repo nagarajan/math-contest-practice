@@ -1,0 +1,211 @@
+[
+  {
+    "id": "usamts-2005-r1-01",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 17 Round 1 (2005-2006)",
+      "year": 2005,
+      "number": 1,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "An increasing arithmetic sequence with infinitely many terms is determined as follows. A single die is thrown and the number that appears is taken as the first term. The die is thrown again and the second number that appears is taken as the common difference between each pair of consecutive terms. Determine with proof how many of the 36 possible sequences formed in this way contain at least one perfect square.",
+    "image": null,
+    "choices": null,
+    "answer": "27",
+    "acceptedAnswers": null,
+    "answerUnit": "sequences",
+    "solutions": [
+      {
+        "title": "Squares modulo the common difference",
+        "body": "Let the first term be $a$ and the common difference $d$ ($1 \\le a, d \\le 6$). The sequence consists of all integers $\\ge a$ that are $\\equiv a \\pmod d$.\n\n* If some square $x^2 \\equiv a \\pmod d$, then $(x + kd)^2 \\equiv x^2 \\pmod d$ for all $k$, and these squares get arbitrarily large, so one of them is $\\ge a$ and lies in the sequence.\n* If no square is $\\equiv a \\pmod d$, the sequence contains no square.\n\nSo we need $a$ to be a square residue mod $d$. Squaring $0, 1, \\dots, d-1$:\n\n| $d$ | squares mod $d$ | good $a \\in \\{1,\\dots,6\\}$ | count |\n|---|---|---|---|\n| 1 | everything | 1–6 | 6 |\n| 2 | 0, 1 | 1–6 | 6 |\n| 3 | 0, 1 | 1, 3, 4, 6 | 4 |\n| 4 | 0, 1 | 1, 4, 5 | 3 |\n| 5 | 0, 1, 4 | 1, 4, 5, 6 | 4 |\n| 6 | 0, 1, 3, 4 | 1, 3, 4, 6 | 4 |\n\nTotal: $6 + 6 + 4 + 3 + 4 + 4 = 27$.\n\n**Answer: 27**"
+      },
+      {
+        "title": "Exhibit the squares",
+        "body": "For the 27 good pairs we can name a square explicitly, and for the other 9 we show none exists.\n\n* $d = 1$: every integer $\\ge a$ appears, e.g. $9$.\n* $d = 2$: $9$ (odd $a$) or $16$ (even $a$).\n* $d = 3$: $9$ for $a = 3, 6$; $16$ for $a = 1, 4$. For $a = 2, 5$ the terms are $\\equiv 2 \\pmod 3$, but squares are $0$ or $1 \\pmod 3$.\n* $d = 4$: $9$ for $a = 1, 5$; $16$ for $a = 4$. For $a = 2, 3, 6$ the terms are $\\equiv 2, 3, 2 \\pmod 4$; squares are $0, 1 \\pmod 4$.\n* $d = 5$: $16$ ($a = 1, 6$), $4$ ($a = 4$), $25$ ($a = 5$). For $a = 2, 3$: squares mod 5 are $0, 1, 4$.\n* $d = 6$: $25$ ($a = 1$), $9$ ($a = 3$), $16$ ($a = 4$), $36$ ($a = 6$). For $a = 2, 5$: squares mod 6 are $0, 1, 3, 4$.\n\nSo $36 - 9 = 27$ sequences contain a square.\n\n**Answer: 27**"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "counting"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2005-r1-02",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 17 Round 1 (2005-2006)",
+      "year": 2005,
+      "number": 2,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "George has six ropes. He chooses two of the twelve loose ends at random (possibly from the same rope), and ties them together, leaving ten loose ends. He again chooses two loose ends at random and joins them, and so on, until there are no loose ends. Find, with proof, the expected value of the number of loops George ends up with.",
+    "image": null,
+    "choices": null,
+    "answer": "6508/3465",
+    "acceptedAnswers": null,
+    "answerUnit": "loops",
+    "answerDisplay": "$\\frac{6508}{3465}$",
+    "solutions": [
+      {
+        "title": "Recursion on the number of ropes",
+        "body": "Let $E_n$ be the expected number of loops starting from $n$ separate pieces (ropes or chains of ropes; only the number of pieces matters, each having two loose ends).\n\nWith $n$ pieces there are $2n$ loose ends. Fix the first chosen end; the second is one of the other $2n - 1$ ends, equally likely.\n* With probability $\\frac{1}{2n-1}$ it is the other end of the same piece: a loop is closed and $n - 1$ pieces remain.\n* With probability $\\frac{2n-2}{2n-1}$ it belongs to another piece: the two pieces merge, and $n - 1$ pieces remain, no loop yet.\n\nHence\n$$E_n = \\frac{1}{2n-1}(1 + E_{n-1}) + \\frac{2n-2}{2n-1}E_{n-1} = E_{n-1} + \\frac{1}{2n-1},$$\nwith $E_1 = 1$. Therefore\n$$E_6 = 1 + \\frac13 + \\frac15 + \\frac17 + \\frac19 + \\frac1{11} = \\frac{3465 + 1155 + 693 + 495 + 385 + 315}{3465} = \\frac{6508}{3465} \\approx 1.878.$$\n\n**Answer: $\\frac{6508}{3465}$**"
+      },
+      {
+        "title": "Linearity of expectation",
+        "body": "George makes exactly 6 ties. Before the $k$-th tie there are $7 - k$ pieces, i.e. $2(7-k)$ loose ends, and the tie closes a loop exactly when the two chosen ends belong to the same piece. Whatever happened before, that has probability $\\frac{1}{2(7-k) - 1}$ (the second end is uniformly one of the other $2(7-k) - 1$ ends, and exactly one of them is the partner).\n\nLet $L_k$ be 1 if the $k$-th tie closes a loop, else 0. The number of loops is $L_1 + \\dots + L_6$, so its expected value is\n$$\\sum_{k=1}^{6} \\frac{1}{13 - 2k} = \\frac1{11} + \\frac19 + \\frac17 + \\frac15 + \\frac13 + 1 = \\frac{6508}{3465}.$$\n(As a check, a count over all $\\frac{12!}{2^6\\,6!} = 10395$ equally likely final pairings gives $19524$ loops in total, and $\\frac{19524}{10395} = \\frac{6508}{3465}$.)\n\n**Answer: $\\frac{6508}{3465}$**"
+      }
+    ],
+    "topics": [
+      "probability"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2005-r1-03",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 17 Round 1 (2005-2006)",
+      "year": 2005,
+      "number": 3,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Let $r$ be a nonzero real number. The values of $z$ which satisfy the equation\n$$r^4z^4 + (10r^6 - 2r^2)z^2 - 16r^5z + (9r^8 + 10r^4 + 1) = 0$$\nare plotted on the complex plane (i.e. using the real part of each root as the $x$-coordinate and the imaginary part as the $y$-coordinate). Show that the area of the convex quadrilateral with these points as vertices is independent of $r$, and find this area.",
+    "image": null,
+    "choices": null,
+    "answer": "8",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Factor into two quadratics",
+        "body": "**Factor.** The constant term is $9r^8 + 10r^4 + 1 = (r^4 + 1)(9r^4 + 1)$, and there is no $z^3$ term, so try\n$$(r^2z^2 + pz + r^4 + 1)(r^2z^2 - pz + 9r^4 + 1).$$\nIts $z^2$ coefficient is $r^2(9r^4 + 1) + r^2(r^4 + 1) - p^2 = 10r^6 + 2r^2 - p^2$, which should be $10r^6 - 2r^2$, so $p^2 = 4r^2$. Its $z$ coefficient is $p(9r^4 + 1) - p(r^4 + 1) = 8r^4 p$, which should be $-16r^5$, so $p = -2r$. Hence the equation is\n$$(r^2z^2 - 2rz + r^4 + 1)(r^2z^2 + 2rz + 9r^4 + 1) = 0.$$\n\n**Roots.** By the quadratic formula,\n$$r^2z^2 - 2rz + (r^4 + 1) = 0 \\implies z = \\frac{2r \\pm \\sqrt{4r^2 - 4r^2(r^4+1)}}{2r^2} = \\frac1r \\pm ri,$$\n$$r^2z^2 + 2rz + (9r^4 + 1) = 0 \\implies z = \\frac{-2r \\pm \\sqrt{4r^2 - 4r^2(9r^4 + 1)}}{2r^2} = -\\frac1r \\pm 3ri.$$\n\n**Area.** The points $\\left(\\frac1r, \\pm r\\right)$ and $\\left(-\\frac1r, \\pm 3r\\right)$ form an isosceles trapezoid with vertical parallel sides of lengths $2|r|$ and $6|r|$ at horizontal distance $\\frac{2}{|r|}$. Its area is\n$$\\frac{2|r| + 6|r|}{2}\\cdot\\frac{2}{|r|} = 8,$$\nindependent of $r$.\n\n**Answer: 8**"
+      },
+      {
+        "title": "Difference of squares",
+        "body": "Complete a square in $z^2$:\n$$\\big(r^2z^2 + 5r^4 + 1\\big)^2 = r^4z^4 + (10r^6 + 2r^2)z^2 + 25r^8 + 10r^4 + 1.$$\nSubtracting the given polynomial leaves $4r^2z^2 + 16r^5z + 16r^8 = (2rz + 4r^4)^2$. So the equation is\n$$\\big(r^2z^2 + 5r^4 + 1\\big)^2 - \\big(2rz + 4r^4\\big)^2 = 0,$$\n$$\\big(r^2z^2 - 2rz + r^4 + 1\\big)\\big(r^2z^2 + 2rz + 9r^4 + 1\\big) = 0.$$\nBoth quadratics have real coefficients and negative discriminants ($-4r^6$ and $-36r^6$), so their roots are conjugate pairs $\\frac1r \\pm ri$ and $-\\frac1r \\pm 3ri$, symmetric about the real axis. The quadrilateral is a trapezoid with height $\\frac2{|r|}$ and bases $2|r|$, $6|r|$, so its area is $\\frac{8|r|}{2}\\cdot\\frac{2}{|r|} = 8$.\n\n**Answer: 8**"
+      }
+    ],
+    "topics": [
+      "complex-numbers",
+      "polynomials",
+      "geometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2005-r1-04",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 17 Round 1 (2005-2006)",
+      "year": 2005,
+      "number": 4,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "text",
+    "prompt": "Homer gives mathematicians Patty and Selma each a different integer, not known to the other or to you. Homer tells them, within each other's hearing, that the number given to Patty is the product $ab$ of the positive integers $a$ and $b$, and that the number given to Selma is the sum $a + b$ of the same numbers $a$ and $b$, where $b > a > 1$. He doesn't, however, tell Patty or Selma the numbers $a$ and $b$. The following (honest) conversation then takes place:\n\nPatty: \"I can't tell what numbers $a$ and $b$ are.\"\nSelma: \"I knew before that you couldn't tell.\"\nPatty: \"In that case, I now know what $a$ and $b$ are.\"\nSelma: \"Now I also know what $a$ and $b$ are.\"\n\nSupposing that Homer tells *you* (but neither Patty nor Selma) that neither $a$ nor $b$ is greater than 20, find $a$ and $b$, and prove your answer can result in the conversation above.",
+    "image": null,
+    "choices": null,
+    "answer": "a = 4, b = 13",
+    "acceptedAnswers": [
+      "4, 13",
+      "4,13",
+      "(4, 13)",
+      "(4,13)",
+      "a=4, b=13",
+      "a = 4 and b = 13",
+      "4 and 13",
+      "13, 4"
+    ],
+    "answerUnit": null,
+    "answerDisplay": "$a = 4,\\ b = 13$",
+    "solutions": [
+      {
+        "title": "Decode each statement",
+        "body": "Call a way of writing $P = ab$ with $1 < a < b$ a *factorization* of $P$. Patty and Selma do **not** know the bound 20, so they consider all integers.\n\n**Statement 1** (Patty can't tell): $P$ has at least two factorizations. $P$ has exactly one factorization iff $P = pq$ for primes $p < q$, or $P = p^3$ ($a = p$, $b = p^2$).\n\n**Statement 2** (Selma knew it): every split $S = a + b$, $1 < a < b$, has a product with at least two factorizations, i.e. $S$ is **not** a sum of two distinct primes and **not** of the form $p + p^2$. Since $a, b \\le 20$, $S \\le 39$. Even $S$ from 8 to 38 are sums of two distinct primes ($8 = 3+5$, $10 = 3 + 7$, ..., $38 = 7 + 31$), and $S \\le 7$ fails too ($5 = 2 + 3$, $6 = 2 + 4 = 2 + 2^2$, $7 = 2 + 5$). Checking the odd $S$: $S - 2$ prime rules out $9, 13, 15, 19, 21, 25, 31, 33, 39$, and $p + p^2 \\in \\{6, 12, 30\\}$. What remains is\n$$S \\in \\{11, 17, 23, 27, 29, 35, 37\\}.$$\n(Call such sums *good*. Every even number from 8 up to a few hundred is a sum of two distinct primes, and $p + p^2$ is always even, so a good sum is always an odd number that is not $2 +$ a prime.)\n\n**Statement 3** (Patty now knows): exactly one factorization of $P$ has a sum on Selma's list (a sum is good only if it is odd and not 2 more than a prime).\n\n**Statement 4** (Selma now knows): exactly one split of $S$ has a product satisfying Statement 3.\n\n**$S = 17$ works with $(4, 13)$.** The splits of 17 are $(2,15), (3,14), (4,13), (5,12), (6,11), (7,10), (8,9)$ with products $30, 42, 52, 60, 66, 70, 72$. For each product other than 52 there are two factorizations with good sums, so Patty could not have deduced the pair:\n* $30$: $2+15 = 17$ and $5 + 6 = 11$;\n* $42$: $3 + 14 = 17$ and $2 + 21 = 23$;\n* $60$: $5 + 12 = 17$ and $3 + 20 = 23$;\n* $66$: $6 + 11 = 17$ and $2 + 33 = 35$;\n* $70$: $7 + 10 = 17$ and $2 + 35 = 37$;\n* $72$: $8 + 9 = 17$ and $3 + 24 = 27$.\n\nFor $52 = 2\\cdot 26 = 4 \\cdot 13$: the sum $2 + 26 = 28 = 5 + 23$ is a sum of two distinct primes (so with sum 28 Selma could not have made Statement 2), while $4 + 13 = 17$ is good. So Patty, holding 52, deduces $(4, 13)$, and Selma, holding 17, sees that only the split $(4,13)$ lets Patty deduce the answer. Every statement of the conversation is true for $(a, b) = (4, 13)$.\n\n**No other sum works.** For each other candidate sum there are at least two splits whose product passes Statement 3, so Selma could not finish:\n* $11 = 4 + 7 = 2 + 9$: products $28$ and $18$;\n* $23 = 4 + 19 = 7 + 16$: products $76$ and $112$;\n* $27 = 4 + 23 = 2 + 25$: products $92$ and $50$;\n* $29 = 13 + 16 = 2 + 27$: products $208$ and $54$;\n* $35 = 4 + 31 = 3 + 32$: products $124$ and $96$;\n* $37 = 8 + 29 = 5 + 32$: products $232$ and $160$.\n\nEach of these products has exactly one factorization with a good sum (marked ✓); all other factorizations have an even sum $\\ge 16$ (a sum of two distinct primes, e.g. $16 = 3 + 13$, $22 = 3 + 19$, $28 = 5 + 23$, $58 = 5 + 53$, $106 = 3 + 103$, $118 = 5 + 113$) or an odd sum $2 + \\text{prime}$:\n* $28$: $4\\cdot7$ (11 ✓), $2\\cdot 14$ (16). $\\quad 18$: $2\\cdot 9$ (11 ✓), $3\\cdot6$ ($9 = 2 + 7$).\n* $76$: $4\\cdot 19$ (23 ✓), $2\\cdot38$ (40). $\\quad 112$: $7\\cdot16$ (23 ✓), $2\\cdot56$, $4\\cdot28$, $8\\cdot14$ (58, 32, 22).\n* $92$: $4\\cdot23$ (27 ✓), $2\\cdot46$ (48). $\\quad 50$: $2\\cdot25$ (27 ✓), $5\\cdot10$ ($15 = 2 + 13$).\n* $208$: $13\\cdot16$ (29 ✓), $2\\cdot104$, $4\\cdot52$, $8\\cdot26$ (106, 56, 34). $\\quad 54$: $2\\cdot27$ (29 ✓), $3\\cdot18$ ($21 = 2 + 19$), $6\\cdot9$ ($15 = 2 + 13$).\n* $124$: $4\\cdot31$ (35 ✓), $2\\cdot62$ (64). $\\quad 96$: $3\\cdot32$ (35 ✓), $2\\cdot48$, $4\\cdot24$, $6\\cdot16$, $8\\cdot12$ (50, 28, 22, 20).\n* $232$: $8\\cdot29$ (37 ✓), $2\\cdot116$, $4\\cdot58$ (118, 62). $\\quad 160$: $5\\cdot32$ (37 ✓), $2\\cdot80$, $4\\cdot40$, $8\\cdot20$, $10\\cdot16$ (82, 44, 28, 26).\n\nSo for each of these sums at least two splits pass Statement 3, and Selma could not have known the pair. Hence the sum is 17, and among the splits of 17 only $(4, 13)$ survives Statement 3.\n\n**Answer: $a = 4$, $b = 13$**"
+      },
+      {
+        "title": "Computer check",
+        "body": "The logic can be checked by brute force. Define, for all integers (with no upper bound, as Patty and Selma know none):\n1. $\\mathrm{A}(P)$: $P$ has at least two factorizations $ab$, $1 < a < b$.\n2. $\\mathrm{B}(S)$: every split $S = a + b$, $1 < a < b$, has $\\mathrm{A}(ab)$.\n3. $\\mathrm{C}(P)$: $\\mathrm{A}(P)$ and exactly one factorization of $P$ has $\\mathrm{B}(a + b)$.\n4. $\\mathrm{D}(S)$: $\\mathrm{B}(S)$ and exactly one split of $S$ has $\\mathrm{C}(ab)$.\n\nSearching all $1 < a < b \\le 20$ for pairs with $\\mathrm{A}(ab)$, $\\mathrm{B}(a+b)$, $\\mathrm{C}(ab)$ and $\\mathrm{D}(a+b)$ (the helper sums and products that arise stay below a few thousand, so they can be evaluated exactly) returns the single pair $(4, 13)$, in agreement with the hand analysis.\n\n**Answer: $a = 4$, $b = 13$**"
+      }
+    ],
+    "topics": [
+      "logic",
+      "number-theory"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2005-r1-05",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 17 Round 1 (2005-2006)",
+      "year": 2005,
+      "number": 5,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "text",
+    "prompt": "Given triangle $ABC$, let $M$ be the midpoint of side $\\overline{AB}$ and $N$ be the midpoint of side $\\overline{AC}$. A circle is inscribed inside quadrilateral $NMBC$, tangent to all four sides, and that circle touches $\\overline{MN}$ at point $X$. The circle inscribed in triangle $AMN$ touches $\\overline{MN}$ at point $Y$, with $Y$ between $X$ and $N$. If $XY = 1$ and $BC = 12$, find, with proof, the lengths of the sides $\\overline{AB}$ and $\\overline{AC}$.",
+    "image": null,
+    "choices": null,
+    "answer": "AB = 19, AC = 17",
+    "acceptedAnswers": [
+      "19, 17",
+      "19,17",
+      "AB=19, AC=17",
+      "AB = 19 and AC = 17",
+      "(19, 17)",
+      "(19,17)",
+      "19 and 17"
+    ],
+    "answerUnit": null,
+    "answerDisplay": "$AB = 19,\\ AC = 17$",
+    "solutions": [
+      {
+        "title": "Incircle and excircle of $AMN$",
+        "body": "Let $AB = 2c$, $AC = 2b$, so $AM = MB = c$, $AN = NC = b$, and $MN = \\frac12 BC = 6$.\n\n**Tangential quadrilateral.** $NMBC$ has an incircle, so sums of opposite sides are equal: $MB + NC = MN + BC$, i.e. $b + c = 18$.\n\n**Incircle of $AMN$.** With semiperimeter $s = \\frac{b + c + 6}{2} = 12$, the standard tangent lengths give $MY = s - AN = 12 - b$ and $NY = s - AM = 12 - c$.\n\n**The other circle is the $A$-excircle of $AMN$.** It is tangent to lines $AM$, $AN$ and to $MN$, on the side of $MN$ away from $A$. For the excircle the tangent lengths are swapped: $MX = s - AM = 12 - c$ and $NX = s - AN = 12 - b$. (Proof: if it touches lines $AB$, $AC$ at $P$, $Q$, then $AP = AQ$ and $AP + AQ = (AM + MX) + (AN + NX) = AM + AN + MN = 2s$, so $AP = s$ and $MX = MP = s - c$.)\n\n**Use $XY = 1$.** On segment $MN$ measured from $M$: $X$ is at $12 - c$ and $Y$ at $12 - b$. Since $Y$ is between $X$ and $N$, $Y$ is farther from $M$: $XY = (12 - b) - (12 - c) = c - b = 1$. With $b + c = 18$: $c = \\frac{19}{2}$, $b = \\frac{17}{2}$, so\n$$AB = 19,\\qquad AC = 17.$$\n(Check: $MB + NC = 9.5 + 8.5 = 18 = 6 + 12$; $MX = 2.5$, $MY = 3.5$, $XY = 1$. ✓)\n\n**Answer: $AB = 19$, $AC = 17$**"
+      },
+      {
+        "title": "Trigonometric check",
+        "body": "As a check, compute angle $B$ from the answer and confirm the configuration. With $AB = 19$, $AC = 17$, $BC = 12$: the foot $H$ of the altitude from $A$ satisfies $BH = \\frac{19^2 - 17^2 + 12^2}{2\\cdot 12} = \\frac{216}{24} = 9$, $CH = 3$, $AH = \\sqrt{361 - 81} = \\sqrt{280}$.\n\nThe trapezoid $BMNC$ has height $\\frac12 AH$, which is the diameter of its incircle, so that circle has radius $\\rho = \\frac{\\sqrt{280}}{4} = \\sqrt{17.5}$; it touches $BC$ at $T$ with $BT = \\rho/\\tan\\frac B2$. Since $\\cos B = \\frac{9}{19}$, $\\tan\\frac B2 = \\sqrt{\\frac{1 - \\cos B}{1 + \\cos B}} = \\sqrt{\\frac{10}{28}}$, so $BT = \\sqrt{17.5}\\cdot\\sqrt{2.8} = 7$, $CT = 5$. The circle also touches $MN$ directly above $T$ ($MN \\parallel BC$), so $X$ projects to $T$; and $M$ projects to the point at distance $\\frac{BH}{2} = 4.5$ from $B$, giving $MX = 7 - 4.5 = 2.5$. Similarly the incircle of $AMN$ (half the size of the incircle of $ABC$, whose touch point on $BC$ is at $s_{ABC} - AC = 24 - 17 = 7$ from $B$) touches $MN$ at $MY = \\frac{7}{2} = 3.5$. So $XY = 1$ with $Y$ between $X$ and $N$. ✓\n\n**Answer: $AB = 19$, $AC = 17$**"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

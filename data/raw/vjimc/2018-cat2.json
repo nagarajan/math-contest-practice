@@ -1,0 +1,152 @@
+[
+  {
+    "id": "vjimc-2018-cat2-01",
+    "bank": "vjimc",
+    "source": {
+      "contest": "VJIMC",
+      "paper": "VJIMC 2018 Category II",
+      "year": 2018,
+      "number": 1,
+      "url": "https://vjimc.osu.cz/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Find all real solutions of the equation\n$$17^x+2^x=11^x+2^{3x}.$$",
+    "image": null,
+    "choices": null,
+    "answer": "$x\\in\\{0,1\\}$",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Mean value theorem on $t^x$",
+        "body": "Rewrite the equation as $17^x-11^x=8^x-2^x$. Clearly $x=0$ and $x=1$ are solutions: $2=2$ and $19=19$.\n\nLet $x\\ne0$ be a solution and $\\varphi(t)=t^x$. By the mean value theorem there are $t_1\\in(2,8)$ and $t_2\\in(11,17)$ with\n$$8^x-2^x=6\\varphi'(t_1)=6x\\,t_1^{x-1},\\qquad 17^x-11^x=6\\varphi'(t_2)=6x\\,t_2^{x-1}.$$\nHence $x\\,t_1^{x-1}=x\\,t_2^{x-1}$, and since $x\\ne0$, $(t_2/t_1)^{x-1}=1$. Because $t_2>t_1$, this forces $x=1$.\n\n**Answer: $x=0$ or $x=1$.** ∎"
+      },
+      {
+        "title": "Strict convexity (Karamata)",
+        "body": "Note $2+17=8+11$ and $2<8<11<17$. Write\n$$8=\\tfrac35\\cdot2+\\tfrac25\\cdot17,\\qquad11=\\tfrac25\\cdot2+\\tfrac35\\cdot17 .$$\nFor $x<0$ or $x>1$ the function $\\varphi(t)=t^x$ is strictly convex on $(0,\\infty)$, since $\\varphi''=x(x-1)t^{x-2}>0$. Then\n$$\\varphi(8)+\\varphi(11)<\\big(\\tfrac35+\\tfrac25\\big)\\varphi(2)+\\big(\\tfrac25+\\tfrac35\\big)\\varphi(17)=\\varphi(2)+\\varphi(17),$$\ni.e. $8^x+11^x<2^x+17^x$. For $0<x<1$, $\\varphi$ is strictly concave and the inequality reverses. So there are no solutions except $x=0$ and $x=1$, where $\\varphi$ is affine and equality holds. **Answer: $x\\in\\{0,1\\}$.** ∎"
+      }
+    ],
+    "topics": [
+      "algebra",
+      "calculus"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "vjimc-2018-cat2-02",
+    "bank": "vjimc",
+    "source": {
+      "contest": "VJIMC",
+      "paper": "VJIMC 2018 Category II",
+      "year": 2018,
+      "number": 2,
+      "url": "https://vjimc.osu.cz/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $n$ be a positive integer and let $a_1\\le a_2\\le\\dots\\le a_n$ be real numbers such that\n$$a_1+2a_2+\\dots+na_n=0 .$$\nProve that\n$$a_1[x]+a_2[2x]+\\dots+a_n[nx]\\ge0$$\nfor every real number $x$. (Here $[t]$ denotes the integer satisfying $[t]\\le t<[t]+1$.)",
+    "image": null,
+    "choices": null,
+    "answer": "Key fact: $[ix]+[(k-i)x]\\le[kx]$. Either induct on $n$ by spreading $a_{n+1}$ over the first $n$ terms, or use Abel summation with $P_k=\\sum_{j\\le k}[jx]$, for which $P_k/(k(k+1))$ is nondecreasing.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Induction (official)",
+        "body": "We use $[u]+[v]\\le[u+v]$, which holds because $[u]+[v]$ is an integer $\\le u+v$.\n\nInduction on $n$. For $n=1$ the condition gives $a_1=0$ and the claim is trivial.\n\nAssume the statement for $n$, and let $a_1\\le\\dots\\le a_{n+1}$ with $\\sum_{i=1}^{n+1}ia_i=0$. Then $a_{n+1}\\ge0$: otherwise all $a_i<0$ and the weighted sum would be negative. Put $b_i=a_i+\\frac{2a_{n+1}}n$ for $i\\le n$. The $b_i$ are still nondecreasing, and\n$$\\sum_{i=1}^nib_i=\\sum_{i=1}^nia_i+\\frac{2a_{n+1}}n\\cdot\\frac{n(n+1)}2=\\sum_{i=1}^{n+1}ia_i=0 .$$\nBy the induction hypothesis,\n$$0\\le\\sum_{i=1}^nb_i[ix]=\\sum_{i=1}^na_i[ix]+a_{n+1}\\cdot\\frac2n\\sum_{i=1}^n[ix].$$\nSumming $[ix]+[(n+1-i)x]\\le[(n+1)x]$ over $i=1,\\dots,n$ gives $\\frac2n\\sum_{i=1}^n[ix]\\le[(n+1)x]$. Since $a_{n+1}\\ge0$,\n$$0\\le\\sum_{i=1}^na_i[ix]+a_{n+1}[(n+1)x]=\\sum_{i=1}^{n+1}a_i[ix].\\ ∎$$"
+      },
+      {
+        "title": "Abel summation",
+        "body": "Let $P_k=\\sum_{j=1}^k[jx]$. Summing $[jx]+[(k-j)x]\\le[kx]$ over $j=1,\\dots,k-1$ gives $2P_{k-1}\\le(k-1)[kx]=(k-1)(P_k-P_{k-1})$. Hence $(k+1)P_{k-1}\\le(k-1)P_k$, i.e.\n$$\\frac{P_{k-1}}{(k-1)k}\\le\\frac{P_k}{k(k+1)} .$$\nSo $\\frac{P_k}{k(k+1)}$ is nondecreasing in $k$.\n\nLet $\\tau=\\frac{2P_n}{n(n+1)}$, $w_i=[ix]-\\tau i$ and $W_k=\\sum_{i\\le k}w_i=P_k-\\tau\\frac{k(k+1)}2$. Then $W_n=0$, and by monotonicity $W_k=\\frac{k(k+1)}2\\Big(\\frac{2P_k}{k(k+1)}-\\frac{2P_n}{n(n+1)}\\Big)\\le0$. Since $\\sum ia_i=0$, Abel summation gives\n$$\\sum_{i=1}^na_i[ix]=\\sum_{i=1}^na_iw_i=a_nW_n-\\sum_{k=1}^{n-1}(a_{k+1}-a_k)W_k=-\\sum_{k=1}^{n-1}(a_{k+1}-a_k)W_k\\ge0,$$\nbecause $a_{k+1}-a_k\\ge0$ and $W_k\\le0$. ∎"
+      }
+    ],
+    "topics": [
+      "inequalities",
+      "number-theory"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "vjimc-2018-cat2-03",
+    "bank": "vjimc",
+    "source": {
+      "contest": "VJIMC",
+      "paper": "VJIMC 2018 Category II",
+      "year": 2018,
+      "number": 3,
+      "url": "https://vjimc.osu.cz/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "In $\\mathbb R^3$ some $n$ points are coloured. In every step, if four coloured points lie on the same line, Vojtěch can colour any other point on this line. He observes that he can colour any point $P\\in\\mathbb R^3$ in a finite number of steps (possibly depending on $P$). Find the minimal value of $n$ for which this could happen.",
+    "image": null,
+    "choices": null,
+    "answer": "20",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Cubic surfaces and six planes",
+        "body": "**Lower bound $n\\ge20$.** The polynomials in $x,y,z$ of degree at most $3$ form a vector space of dimension $\\binom{6}{3}=20$. If $n\\le19$, the $n$ linear conditions $p(A)=0$ (for the coloured points $A$) have a nonzero solution $p$.\n\nEvery point Vojtěch can colour is also a zero of $p$. Indeed, if $p$ vanishes at four distinct points of a line $\\{A+tv\\}$, then $t\\mapsto p(A+tv)$ is a polynomial of degree $\\le3$ in $t$ with four roots, hence identically zero. So $p$ vanishes on the whole line. But a nonzero polynomial does not vanish everywhere in $\\mathbb R^3$, so some point can never be coloured.\n\n**Construction with $20$ points.** Take six planes $\\alpha_1,\\dots,\\alpha_6$ in general position:\n* any two meet in a line $\\ell_{ij}=\\alpha_i\\cap\\alpha_j$;\n* any three meet in exactly one point;\n* no four share a point.\n\nColour the $\\binom63=20$ triple points $\\alpha_i\\cap\\alpha_j\\cap\\alpha_k$.\n\n1. **Each line $\\ell_{ij}$:** it contains the four distinct triple points $\\alpha_i\\cap\\alpha_j\\cap\\alpha_k$, $k\\ne i,j$, so every point of $\\ell_{ij}$ can be coloured.\n2. **Each plane $\\alpha_i$:** let $P\\in\\alpha_i$ not lie on any $\\ell_{ij}$. Choose a line $m\\subset\\alpha_i$ through $P$ that is not parallel to any of the five lines $\\ell_{ij}$ ($j\\ne i$) and avoids the finitely many triple points in $\\alpha_i$. Then $m$ meets the five lines in five distinct points. They are distinct because two of them coinciding would be a triple point. All five can be coloured by step 1, so $P$ can be coloured.\n3. **Any point $P$:** if $P$ lies on some $\\alpha_i$, use step 2. Otherwise choose a line through $P$ that is not parallel to any $\\alpha_i$ and meets none of the fifteen lines $\\ell_{ij}$; this excludes finitely many planes of directions. It meets the six planes in six distinct points, which can be coloured by step 2, so $P$ can be coloured.\n\nHence $20$ points suffice, and the minimum is $n=20$. **Answer: 20.** ∎"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "polynomials",
+      "linear-algebra"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "vjimc-2018-cat2-04",
+    "bank": "vjimc",
+    "source": {
+      "contest": "VJIMC",
+      "paper": "VJIMC 2018 Category II",
+      "year": 2018,
+      "number": 4,
+      "url": "https://vjimc.osu.cz/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Compute the integral\n$$\\iint\\limits_{\\mathbb R^2}\\left(\\frac{1-e^{-xy}}{xy}\\right)^2e^{-x^2-y^2}\\,dx\\,dy .$$",
+    "image": null,
+    "choices": null,
+    "answer": "4*pi^2/3-4*(sqrt(3)-1)*pi",
+    "answerDisplay": "$\\dfrac{4\\pi^2}{3}-4(\\sqrt3-1)\\pi$",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Differentiate with respect to a parameter (official)",
+        "body": "For $0\\le\\varrho\\le1$ let\n$$F(\\varrho)=\\iint_{\\mathbb R^2}\\Big(\\frac{1-e^{-\\varrho xy}}{xy}\\Big)^2e^{-x^2-y^2}dx\\,dy$$\n(the integrand is continuous, with value $\\varrho^2e^{-x^2-y^2}$ where $xy=0$). We need $F(1)$.\n\n**A Gaussian integral.** For $|t|<1$, complete the square:\n$$\\iint e^{-x^2-2txy-y^2}dx\\,dy=\\iint e^{-(x+ty)^2-(1-t^2)y^2}dx\\,dy=\\sqrt\\pi\\cdot\\sqrt{\\frac{\\pi}{1-t^2}}=\\frac{\\pi}{\\sqrt{1-t^2}} .$$\n\n**Derivatives.** Let $f$ be the integrand. Then\n$$\\partial_\\varrho f=\\frac{2e^{-\\varrho xy}-2e^{-2\\varrho xy}}{xy}e^{-x^2-y^2},\\qquad\\partial_\\varrho^2f=\\big(4e^{-2\\varrho xy}-2e^{-\\varrho xy}\\big)e^{-x^2-y^2}.$$\nFor $0\\le\\varrho\\le1-\\varepsilon$, we have $2\\varrho|xy|\\le\\varrho(x^2+y^2)$, so\n$$|\\partial^2_\\varrho f|\\le6e^{2\\varrho|xy|-x^2-y^2}\\le6e^{-\\varepsilon(x^2+y^2)},$$\nwhich is integrable. Also $f$ and $\\partial_\\varrho f$ vanish at $\\varrho=0$, so they are bounded by the same function. Hence we may differentiate under the integral sign on $[0,1)$. Using the Gaussian integral with $t=\\varrho$ and $t=\\varrho/2$,\n$$F''(\\varrho)=\\frac{4\\pi}{\\sqrt{1-\\varrho^2}}-\\frac{2\\pi}{\\sqrt{1-\\varrho^2/4}} .$$\nSince $F'(0)=F(0)=0$,\n$$F'(\\varrho)=4\\pi\\arcsin\\varrho-4\\pi\\arcsin\\frac\\varrho2 ,$$\n$$F(\\varrho)=4\\pi\\Big[\\varrho\\arcsin\\varrho+\\sqrt{1-\\varrho^2}-1-\\varrho\\arcsin\\frac\\varrho2-\\sqrt{4-\\varrho^2}+2\\Big].$$\n\n**Passing to $\\varrho=1$.** For every fixed $u=xy$, the function $\\varrho\\mapsto\\frac{1-e^{-\\varrho u}}u$ is nonnegative and nondecreasing on $[0,1]$: its $\\varrho$-derivative is $e^{-\\varrho u}>0$. So the integrand increases with $\\varrho$, and by the monotone convergence theorem $F(1)=\\lim_{\\varrho\\to1^-}F(\\varrho)$. Hence\n$$F(1)=4\\pi\\Big[\\frac\\pi2-1-\\frac\\pi6-\\sqrt3+2\\Big]=\\frac{4\\pi^2}3-4(\\sqrt3-1)\\pi\\approx3.9603 .$$\n**Answer: $\\frac{4\\pi^2}{3}-4(\\sqrt3-1)\\pi$.**"
+      },
+      {
+        "title": "Write the square as a double integral",
+        "body": "For every real $u$,\n$$\\Big(\\frac{1-e^{-u}}u\\Big)^2=\\Big(\\int_0^1e^{-us}ds\\Big)^2=\\int_0^1\\!\\!\\int_0^1e^{-u(s+t)}\\,ds\\,dt$$\n(for $u=0$ both sides equal $1$). Put $u=xy$ and integrate over $\\mathbb R^2$. Everything is nonnegative, so Tonelli's theorem lets us swap the integrals. Using the Gaussian integral $\\iint e^{-x^2-2\\tau xy-y^2}=\\frac\\pi{\\sqrt{1-\\tau^2}}$ with $\\tau=\\frac{s+t}2<1$ (for almost every $(s,t)$):\n$$I=\\int_0^1\\!\\!\\int_0^1\\frac{\\pi\\,ds\\,dt}{\\sqrt{1-\\frac{(s+t)^2}4}} .$$\nThe sum $w=s+t$ of the two coordinates has density $w$ on $[0,1]$ and $2-w$ on $[1,2]$. Hence\n$$I=\\pi\\int_0^1\\frac{w\\,dw}{\\sqrt{1-w^2/4}}+\\pi\\int_1^2\\frac{(2-w)\\,dw}{\\sqrt{1-w^2/4}} .$$\nSince $\\int\\frac{w\\,dw}{\\sqrt{1-w^2/4}}=-4\\sqrt{1-w^2/4}$ and $\\int\\frac{dw}{\\sqrt{1-w^2/4}}=2\\arcsin\\frac w2$:\n* the first integral is $4-2\\sqrt3$;\n* the second is $4\\big(\\frac\\pi2-\\frac\\pi6\\big)-2\\sqrt3=\\frac{4\\pi}3-2\\sqrt3$.\n\nSo\n$$I=\\pi\\Big(\\frac{4\\pi}3+4-4\\sqrt3\\Big)=\\frac{4\\pi^2}3-4(\\sqrt3-1)\\pi\\approx3.96025,$$\nwhich agrees with a direct numerical evaluation. ∎"
+      }
+    ],
+    "topics": [
+      "calculus",
+      "analysis"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

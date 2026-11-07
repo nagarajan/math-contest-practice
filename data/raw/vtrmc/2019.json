@@ -1,0 +1,262 @@
+[
+  {
+    "id": "vtrmc-2019-01",
+    "bank": "vtrmc",
+    "source": {
+      "contest": "VTRMC",
+      "paper": "41st VTRMC (2019)",
+      "year": 2019,
+      "number": 1,
+      "url": "https://www.math.vt.edu/people/plinnell/Vtregional/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "For each positive integer $n$, define $f(n)$ to be the sum of the digits of $2771^n$ (so $f(1)=17$). Find the minimum value of $f(n)$ (where $n\\ge1$). Justify your answer.",
+    "image": null,
+    "choices": null,
+    "answer": "17",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Digit sums mod $9$ and alternating sums mod $11$",
+        "body": "We show $f(n)\\ge17$ for all $n$; since $f(1)=17$, the minimum is $17$.\n\nWrite $2771^n=\\sum_{j\\ge0}d_j10^j$ with digits $d_j$; the last digit is $d_0=1$ (as $2771\\equiv1\\pmod{10}$). Let $E=\\sum_{j\\text{ even}}d_j\\ge d_0=1$ and $O=\\sum_{j\\text{ odd}}d_j$, so $f(n)=E+O$.\n\nSince $10\\equiv1\\pmod9$ and $10\\equiv-1\\pmod{11}$,\n$$E+O\\equiv2771^n\\pmod 9,\\qquad E-O\\equiv2771^n\\pmod{11}.$$\nNow $2771\\equiv2+7+7+1=17\\equiv-1\\pmod9$ and $2771\\equiv1-7+7-2=-1\\pmod{11}$. Hence\n$$E+O\\equiv(-1)^n\\pmod9,\\qquad E-O\\equiv(-1)^n\\pmod{11}.$$\n\nSuppose $f(n)=E+O\\le16$. Note $|E-O|\\le E+O\\le16$.\n\n* **$n$ odd.** $E+O\\equiv-1\\pmod 9$ forces $E+O=8$. Then $|E-O|\\le8$ and $E-O\\equiv-1\\pmod{11}$ force $E-O=-1$. Adding, $2E=7$ — impossible.\n* **$n$ even.** $E+O\\equiv1\\pmod9$ forces $E+O\\in\\{1,10\\}$, and $E-O\\equiv1\\pmod{11}$ with $|E-O|\\le E+O$ forces $E-O\\in\\{1,-10\\}$.\n  * $E+O=1$: then $E-O=1$, so $E=1$, $O=0$: the only nonzero digit is $d_0=1$, i.e. $2771^n=1$, impossible.\n  * $E+O=10$: $E-O=1$ gives $2E=11$, impossible; $E-O=-10$ gives $E=0$, contradicting $E\\ge1$.\n\nSo $f(n)\\ge17$ for every $n\\ge1$, and **the minimum is $17$** (attained at $n=1$). ∎"
+      }
+    ],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "vtrmc-2019-02",
+    "bank": "vtrmc",
+    "source": {
+      "contest": "VTRMC",
+      "paper": "41st VTRMC (2019)",
+      "year": 2019,
+      "number": 2,
+      "url": "https://www.math.vt.edu/people/plinnell/Vtregional/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Let $X$ be the point on the side $AB$ of the triangle $ABC$ such that $BX/XA=9$. Let $M$ be the midpoint of $BX$ and let $Y$ be the point on $BC$ such that $\\angle BMY=90^\\circ$. Suppose $AC$ has length $20$ and that the area of the triangle $XYC$ is $9/100$ of the area of the triangle $ABC$. Find the length of $BC$.",
+    "image": null,
+    "choices": null,
+    "answer": "20",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Area ratios, then a projection",
+        "body": "Let $[\\cdot]$ denote area and $[ABC]=1$.\n\nSince $AX=\\frac1{10}AB$ and $BX=\\frac9{10}AB$, the triangles $AXC$ and $XBC$ (same apex $C$) have areas $\\frac1{10}$ and $\\frac9{10}$. The point $Y$ lies on $BC$, and $\\triangle XYC$, $\\triangle XBC$ share the apex $X$, so\n$$\\frac{YC}{BC}=\\frac{[XYC]}{[XBC]}=\\frac{9/100}{9/10}=\\frac1{10},\\qquad\\text{hence}\\qquad BY=\\frac9{10}BC .$$\n\nSince $MY\\perp AB$, $M$ is the foot of the perpendicular from $Y$ to line $AB$, so $BM=BY\\cos B$. Let $H$ be the foot of the perpendicular from $C$ to line $AB$; then (signed along ray $BA$) $BH=BC\\cos B=\\frac{10}9BM$. Now $BM=\\frac12BX=\\frac12\\cdot\\frac9{10}AB$, so\n$$BH=\\frac{10}{9}\\cdot\\frac{9}{20}AB=\\frac12AB .$$\nThus the foot of the altitude from $C$ is the midpoint of $AB$, so $C$ lies on the perpendicular bisector of $AB$ and $CB=CA=20$.\n\n(Note $\\cos B>0$ because $BM>0$, so all these lengths are positive.)\n\n**Answer: $BC=20$.**"
+      },
+      {
+        "title": "Coordinates",
+        "body": "Put $B=(0,0)$, $A=(10,0)$ (after scaling; the conclusion $CB=CA$ does not depend on the scale), so $X=(9,0)$ and $M=(4.5,0)$. Let $C=(u,v)$ with $v>0$. The point $Y$ on $BC$ with $MY\\perp AB$ has $x$-coordinate $4.5$, so $Y=\\frac{4.5}{u}C$ and $BY/BC=\\frac{4.5}u$ (this requires $u>0$).\n\nThe area condition gives (as in the first solution) $BY/BC=\\frac9{10}$, so $u=5$: $C$ lies directly above the midpoint $(5,0)$ of $AB$. Hence $CB=CA$, and $BC=AC=20$."
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "vtrmc-2019-03",
+    "bank": "vtrmc",
+    "source": {
+      "contest": "VTRMC",
+      "paper": "41st VTRMC (2019)",
+      "year": 2019,
+      "number": 3,
+      "url": "https://www.math.vt.edu/people/plinnell/Vtregional/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $n$ be a nonnegative integer and let $f(x)=a_nx^n+a_{n-1}x^{n-1}+\\cdots+a_1x+a_0\\in\\mathbb R[x]$ be a polynomial with real coefficients $a_i$. Suppose that\n$$\\frac{a_n}{(n+1)(n+2)}+\\frac{a_{n-1}}{n(n+1)}+\\cdots+\\frac{a_1}{6}+\\frac{a_0}{2}=0.$$\nProve that $f(x)$ has a real zero.",
+    "image": null,
+    "choices": null,
+    "answer": "The condition says $\\int_0^1(1-t)f(t)\\,dt=0$; by Rolle applied to $g(x)=\\int_0^x(1-t)f(t)\\,dt$ (or since the weight $1-t$ is positive) $f$ vanishes somewhere in $(0,1)$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Rolle's theorem",
+        "body": "Define $g(x)=\\int_0^x(1-t)f(t)\\,dt$. Then $g(0)=0$ and, since $\\frac{1}{k+1}-\\frac1{k+2}=\\frac1{(k+1)(k+2)}$,\n$$g(1)=\\int_0^1f(t)\\,dt-\\int_0^1tf(t)\\,dt=\\sum_{k=0}^n a_k\\Big(\\frac1{k+1}-\\frac1{k+2}\\Big)=\\sum_{k=0}^n\\frac{a_k}{(k+1)(k+2)}=0 .$$\n$g$ is differentiable with $g'(x)=(1-x)f(x)$. By Rolle's theorem there is $c\\in(0,1)$ with $g'(c)=0$, i.e. $(1-c)f(c)=0$. As $c\\ne1$, $f(c)=0$. ∎"
+      },
+      {
+        "title": "Sign argument",
+        "body": "As computed in the first solution, the hypothesis says\n$$\\int_0^1(1-t)f(t)\\,dt=0 .$$\nIf $f$ had no zero in $(0,1)$, then by the intermediate value theorem the continuous function $f$ would have constant sign there, say $f>0$ on $(0,1)$. Then $(1-t)f(t)>0$ on $(0,1)$, and the integral of a continuous function that is positive on $(0,1)$ is positive — a contradiction. Likewise for $f<0$. Hence $f$ has a zero in $(0,1)$. ∎"
+      }
+    ],
+    "topics": [
+      "calculus",
+      "polynomials"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "vtrmc-2019-04",
+    "bank": "vtrmc",
+    "source": {
+      "contest": "VTRMC",
+      "paper": "41st VTRMC (2019)",
+      "year": 2019,
+      "number": 4,
+      "url": "https://www.math.vt.edu/people/plinnell/Vtregional/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Compute $$\\int_0^1\\frac{x^2}{x+\\sqrt{1-x^2}}\\,dx$$ (the answer is a rational number).",
+    "image": null,
+    "choices": null,
+    "answer": "1/4",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Symmetrise with $x=\\sin t$ and $x=\\cos t$",
+        "body": "Let $I$ be the integral. With $x=\\sin t$, $t\\in[0,\\frac\\pi2]$, $dx=\\cos t\\,dt$ and $\\sqrt{1-x^2}=\\cos t$:\n$$I=\\int_0^{\\pi/2}\\frac{\\sin^2t\\cos t}{\\sin t+\\cos t}\\,dt .$$\nWith $x=\\cos t$ instead ($dx=-\\sin t\\,dt$, limits $\\frac\\pi2\\to0$):\n$$I=\\int_0^{\\pi/2}\\frac{\\cos^2t\\sin t}{\\sin t+\\cos t}\\,dt .$$\nAdding, and using $\\sin^2t\\cos t+\\cos^2t\\sin t=\\sin t\\cos t(\\sin t+\\cos t)$,\n$$2I=\\int_0^{\\pi/2}\\sin t\\cos t\\,dt=\\Big[\\frac{\\sin^2t}{2}\\Big]_0^{\\pi/2}=\\frac12 .$$\n\n**Answer: $I=\\dfrac14$.**"
+      }
+    ],
+    "topics": [
+      "calculus",
+      "trigonometry"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "vtrmc-2019-05",
+    "bank": "vtrmc",
+    "source": {
+      "contest": "VTRMC",
+      "paper": "41st VTRMC (2019)",
+      "year": 2019,
+      "number": 5,
+      "url": "https://www.math.vt.edu/people/plinnell/Vtregional/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Find the general solution of the differential equation\n$$x^4\\frac{d^2y}{dx^2}+2x^2\\frac{dy}{dx}+(1-2x)y=0$$\nvalid for $0<x<\\infty$.",
+    "image": null,
+    "choices": null,
+    "answer": "$y=(C_1+C_2x)\\,e^{1/x}$ with arbitrary constants $C_1,C_2$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Substitute $t=1/x$, then reduce the order",
+        "body": "Let $t=1/x\\in(0,\\infty)$ and write $\\dot y=\\frac{dy}{dt}$. Since $\\frac{dt}{dx}=-t^2$,\n$$\\frac{dy}{dx}=-t^2\\dot y,\\qquad \\frac{d^2y}{dx^2}=\\frac{d}{dt}\\big(-t^2\\dot y\\big)\\cdot(-t^2)=2t^3\\dot y+t^4\\ddot y .$$\nWith $x^4=t^{-4}$ and $x^2=t^{-2}$ the equation becomes\n$$\\ddot y+\\frac2t\\dot y-2\\dot y+\\Big(1-\\frac2t\\Big)y=0 .$$\nOne checks that $y=e^t$ is a solution: $1+\\frac2t-2+1-\\frac2t=0$.\n\n**Reduction of order.** Every function can be written $y=u(t)e^t$. Then $\\dot y=(\\dot u+u)e^t$, $\\ddot y=(\\ddot u+2\\dot u+u)e^t$, and substituting,\n$$e^t\\Big[\\ddot u+2\\dot u+u+\\Big(\\frac2t-2\\Big)(\\dot u+u)+\\Big(1-\\frac2t\\Big)u\\Big]=e^t\\Big[\\ddot u+\\frac2t\\dot u\\Big]=0 .$$\nSo $\\frac{d}{dt}\\big(t^2\\dot u\\big)=t^2\\ddot u+2t\\dot u=0$, i.e. $t^2\\dot u=-C_2$ constant, so $u=C_1+\\frac{C_2}{t}$. Hence all solutions are\n$$y=\\Big(C_1+\\frac{C_2}t\\Big)e^t=(C_1+C_2x)\\,e^{1/x},\\qquad C_1,C_2\\in\\mathbb R .$$\n\n**Check** for $y=xe^{1/x}$: $y'=(1-\\frac1x)e^{1/x}$, $y''=\\frac1{x^3}e^{1/x}$, and $x^4y''+2x^2y'+(1-2x)y=\\big(x+2x^2-2x+x-2x^2\\big)e^{1/x}=0$.\n\n**Answer: $y=(C_1+C_2x)e^{1/x}$.**"
+      },
+      {
+        "title": "Guess $e^{1/x}$ and use the solution-space dimension",
+        "body": "Try $y=e^{1/x}$: $y'=-x^{-2}e^{1/x}$, $y''=(2x^{-3}+x^{-4})e^{1/x}$, so\n$$x^4y''+2x^2y'+(1-2x)y=(2x+1-2+1-2x)e^{1/x}=0 .$$\nTry $y=xe^{1/x}$: verified in the first solution. The Wronskian of $e^{1/x}$ and $xe^{1/x}$ is\n$$e^{1/x}\\cdot\\Big(1-\\frac1x\\Big)e^{1/x}-xe^{1/x}\\cdot\\Big(-\\frac1{x^2}\\Big)e^{1/x}=e^{2/x}\\neq0,$$\nso they are linearly independent. On $(0,\\infty)$ the equation is linear of second order with continuous coefficients and leading coefficient $x^4\\ne0$, so its solution space is two-dimensional. Therefore the general solution is $y=C_1e^{1/x}+C_2xe^{1/x}$."
+      }
+    ],
+    "topics": [
+      "differential-equations",
+      "calculus"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "vtrmc-2019-06",
+    "bank": "vtrmc",
+    "source": {
+      "contest": "VTRMC",
+      "paper": "41st VTRMC (2019)",
+      "year": 2019,
+      "number": 6,
+      "url": "https://www.math.vt.edu/people/plinnell/Vtregional/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $S$ be a subset of $\\mathbb R$ with the property that for every $s\\in S$, there exists $\\varepsilon>0$ such that $(s-\\varepsilon,s+\\varepsilon)\\cap S=\\{s\\}$. Prove there exists a function $f:S\\to\\mathbb N$, the positive integers, such that for all $s,t\\in S$, if $s\\ne t$ then $f(s)\\ne f(t)$.",
+    "image": null,
+    "choices": null,
+    "answer": "Assign to each $s$ an isolating interval with rational endpoints (distinct points get distinct intervals) and encode the two rationals as one positive integer by prime factorisation.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Isolating intervals with rational endpoints",
+        "body": "For each $s\\in S$ choose $\\varepsilon_s>0$ with $(s-\\varepsilon_s,s+\\varepsilon_s)\\cap S=\\{s\\}$, and then (by density of the nonzero rationals) nonzero rationals $\\alpha_s,\\beta_s$ with\n$$s-\\varepsilon_s<\\alpha_s<s<\\beta_s<s+\\varepsilon_s .$$\nThen $(\\alpha_s,\\beta_s)\\cap S=\\{s\\}$. Hence $s\\mapsto(\\alpha_s,\\beta_s)$ is injective: if $(\\alpha_s,\\beta_s)=(\\alpha_t,\\beta_t)$ then $\\{s\\}=\\{t\\}$.\n\nWrite each nonzero rational uniquely in lowest terms as $\\alpha_s=\\sigma\\frac mn$, $\\beta_s=\\tau\\frac pq$ with $\\sigma,\\tau\\in\\{1,-1\\}$ and $m,n,p,q\\in\\mathbb N$, and define\n$$f(s)=2^{\\sigma+2}\\,3^{\\tau+2}\\,5^m\\,7^n\\,11^p\\,13^q\\in\\mathbb N .$$\nBy unique prime factorisation, $f(s)$ determines $\\sigma,\\tau,m,n,p,q$, hence $(\\alpha_s,\\beta_s)$, hence $s$. So $f$ is injective. ∎"
+      },
+      {
+        "title": "Disjoint neighbourhoods",
+        "body": "With $\\varepsilon_s$ as above, for $s\\ne t$ in $S$ we have $t\\notin(s-\\varepsilon_s,s+\\varepsilon_s)$ and $s\\notin(t-\\varepsilon_t,t+\\varepsilon_t)$, so\n$$|s-t|\\ge\\max(\\varepsilon_s,\\varepsilon_t)\\ge\\frac{\\varepsilon_s+\\varepsilon_t}2 .$$\nHence the intervals $U_s=(s-\\frac{\\varepsilon_s}2,s+\\frac{\\varepsilon_s}2)$ are pairwise disjoint. Pick a rational $r_s\\in U_s$; then $s\\mapsto r_s$ is injective. Composing with any injection $\\mathbb Q\\to\\mathbb N$ (for example $\\sigma\\frac mn\\mapsto2^{\\sigma+2}3^m5^n$ in lowest terms, and $0\\mapsto1$) gives the required $f$. ∎"
+      }
+    ],
+    "topics": [
+      "real-analysis",
+      "topology",
+      "logic"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "vtrmc-2019-07",
+    "bank": "vtrmc",
+    "source": {
+      "contest": "VTRMC",
+      "paper": "41st VTRMC (2019)",
+      "year": 2019,
+      "number": 7,
+      "url": "https://www.math.vt.edu/people/plinnell/Vtregional/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "text",
+    "prompt": "Let $S$ denote the positive integers that have no $0$ in their decimal expansion. Determine whether $\\displaystyle\\sum_{n\\in S}n^{-99/100}$ is convergent.",
+    "image": null,
+    "choices": null,
+    "answer": "Converges",
+    "acceptedAnswers": [
+      "convergent",
+      "yes",
+      "it converges",
+      "converge",
+      "yes, convergent"
+    ],
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Count by number of digits",
+        "body": "**Answer: the series converges.**\n\nThere are exactly $9^d$ elements of $S$ with $d$ digits (each digit is one of $1,\\dots,9$), and each is at least $10^{d-1}$. All terms are positive, so grouping by $d$,\n$$\\sum_{n\\in S}n^{-99/100}\\le\\sum_{d=1}^\\infty9^d\\big(10^{d-1}\\big)^{-99/100}=9\\sum_{d=1}^\\infty\\big(9\\cdot10^{-99/100}\\big)^{d-1}.$$\nThis geometric series converges if $9\\cdot10^{-99/100}<1$, i.e. $10^{99}>9^{100}$, i.e. $\\big(\\frac{10}9\\big)^{99}>9$. By the binomial theorem,\n$$\\Big(1+\\frac19\\Big)^{99}\\ge1+\\frac{99}{9}=12>9 .$$\nSo the ratio is less than $1$ (numerically $9\\cdot10^{-0.99}\\approx0.921$), and by comparison the original series converges. ∎"
+      }
+    ],
+    "topics": [
+      "real-analysis",
+      "sequences-series",
+      "number-theory"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

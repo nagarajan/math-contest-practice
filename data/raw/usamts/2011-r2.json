@@ -1,0 +1,174 @@
+[
+  {
+    "id": "usamts-2011-r2-01",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 23 Round 2 (2011-2012)",
+      "year": 2011,
+      "number": 1,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Find all the ways of placing the integers $1, 2, 3, \\dots, 16$ in the boxes below, such that each integer appears in exactly one box, and the sum of every pair of neighboring integers is a perfect square.\n\n(The boxes are 16 squares in a single row, each joined to the next.)",
+    "image": null,
+    "choices": null,
+    "answer": "Exactly two ways: $8, 1, 15, 10, 6, 3, 13, 12, 4, 5, 11, 14, 2, 7, 9, 16$ and its reverse $16, 9, 7, 2, 14, 11, 5, 4, 12, 13, 3, 6, 10, 15, 1, 8$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "The endpoints are forced",
+        "body": "Neighbouring numbers from $1$ to $16$ have sum between $3$ and $31$, so the sum must be $4$, $9$, $16$ or $25$. List the possible partners of each number:\n\n| $n$ | partners | $n$ | partners |\n|---|---|---|---|\n| 1 | 3, 8, 15 | 9 | 7, 16 |\n| 2 | 7, 14 | 10 | 6, 15 |\n| 3 | 1, 6, 13 | 11 | 5, 14 |\n| 4 | 5, 12 | 12 | 4, 13 |\n| 5 | 4, 11 | 13 | 3, 12 |\n| 6 | 3, 10 | 14 | 2, 11 |\n| 7 | 2, 9 | 15 | 1, 10 |\n| 8 | 1 | 16 | 9 |\n\nEvery number in the interior of the row has two neighbours, so $8$ and $16$, which have only one possible partner each, must be at the two ends. By symmetry (reversing the row) put $16$ first. Then the row is forced step by step, because each number has only one unused partner:\n$$16 \\to 9 \\to 7 \\to 2 \\to 14 \\to 11 \\to 5 \\to 4 \\to 12 \\to 13 \\to 3.$$\nFrom $3$ we could go to $1$ or $6$. If we go to $1$, then $1$ must be followed by $15$ (since $8$ has to be last), and after $15 \\to 10 \\to 6$ we are stuck at $6$ (its partners $3$ and $10$ are used) with $8$ unplaced. So $3 \\to 6 \\to 10 \\to 15 \\to 1 \\to 8$.\n\nThe row is\n$$16, 9, 7, 2, 14, 11, 5, 4, 12, 13, 3, 6, 10, 15, 1, 8$$\n(neighbour sums $25, 16, 9, 16, 25, 16, 9, 16, 25, 16, 9, 16, 25, 16, 9$, all squares). So there are exactly **two** placements: this one and its reverse $8, 1, 15, 10, 6, 3, 13, 12, 4, 5, 11, 14, 2, 7, 9, 16$."
+      }
+    ],
+    "topics": [
+      "logic",
+      "number-theory"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2011-r2-02",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 23 Round 2 (2011-2012)",
+      "year": 2011,
+      "number": 2,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Four siblings are sitting down to eat some mashed potatoes for lunch: Ethan has 1 ounce of mashed potatoes, Macey has 2 ounces, Liana has 4 ounces, and Samuel has 8 ounces. This is not fair. A *blend* consists of choosing any two children at random, combining their plates of mashed potatoes, and then giving each of those two children half of the combination. After the children's father performs four blends consecutively, what is the probability that the four children will all have the same amount of mashed potatoes?",
+    "image": null,
+    "choices": null,
+    "answer": "1/54",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "answerDisplay": "$\\frac{1}{54}$",
+    "solutions": [
+      {
+        "title": "Work backwards from the equal amounts",
+        "body": "The total $1 + 2 + 4 + 8 = 15$ never changes, so at the end everyone has $\\frac{15}4$. A blend always leaves the two blended children with equal amounts.\n\n**Going backwards.** At some point a blend of two *different* amounts produced the last two missing $\\frac{15}{4}$'s, so just before it the amounts were $\\frac{15}4, \\frac{15}4, \\frac{15}4 + x, \\frac{15}4 - x$ with $x > 0$. The two $\\frac{15}{4}$'s there must also have come from a blend of different amounts $\\frac{15}4 \\pm y$ (the original amounts contain no $\\frac{15}4$), so earlier the amounts were $\\frac{15}4 \\pm x, \\frac{15}4 \\pm y$. These are not the integers $1, 2, 4, 8$ (two amounts summing to $\\frac{15}{2}$ cannot both be integers), so another blend happened before; it produced two equal amounts, which forces $x = y$: amounts $\\frac{15}4 + x, \\frac{15}4 + x, \\frac{15}4 - x, \\frac{15}4 - x$. Producing each of these equal pairs takes a blend as well. That is already four blends, so these are all of them, in this order:\n\n* blends 1 and 2 split the children into two disjoint pairs (giving amounts $a, a, b, b$);\n* blends 3 and 4 each mix an $a$-child with a $b$-child, again two disjoint pairs.\n\n**Probabilities.** The first blend can be anything. After it the amounts are $a, a, b, c$ with $a, b, c$ distinct (no original amount is the average of two others), and the second blend must be exactly the other two children: probability $\\frac1{\\binom42} = \\frac16$. The third blend must pair one of the two $a$'s with one of the two $b$'s: $\\frac{2\\cdot 2}{6} = \\frac23$. The fourth must be the remaining $a$ with the remaining $b$: $\\frac16$. All of these really do work (e.g. $(1,2,4,8) \\to (\\tfrac32,\\tfrac32,6,6) \\to (\\tfrac{15}4,\\ldots)$). The probability is\n$$1 \\cdot \\frac16 \\cdot \\frac23 \\cdot \\frac16 = \\frac{1}{54}.$$\n(Enumerating all $6^4 = 1296$ blend sequences finds exactly $24$ that work: $\\frac{24}{1296} = \\frac1{54}$.)\n\n**Answer: $\\frac{1}{54}$**"
+      }
+    ],
+    "topics": [
+      "probability",
+      "counting"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2011-r2-03",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 23 Round 2 (2011-2012)",
+      "year": 2011,
+      "number": 3,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Find all integers $b$ such that there exists a positive real number $x$ with\n$$\\frac{1}{b} = \\frac{1}{\\lfloor 2x\\rfloor} + \\frac{1}{\\lfloor 5x\\rfloor}.$$\nHere $\\lfloor y\\rfloor$ denotes the greatest integer that is less than or equal to $y$.",
+    "image": null,
+    "choices": null,
+    "answer": "$b = 3$ and all positive multiples of $10$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Cases on the first decimal digit of x",
+        "body": "Write $P = \\lfloor 2x\\rfloor$ and $Q = \\lfloor 5x\\rfloor$; both must be positive, and then $b = \\frac{PQ}{P + Q} > 0$. Let $n = \\lfloor x \\rfloor$ and let $r \\in \\{0, \\dots, 9\\}$ be the first decimal digit, so $n + \\frac{r}{10} \\le x < n + \\frac{r+1}{10}$. Then\n\n| $r$ | $P$ | $Q$ |\n|---|---|---|\n| 0, 1 | $2n$ | $5n$ |\n| 2, 3 | $2n$ | $5n+1$ |\n| 4 | $2n$ | $5n+2$ |\n| 5 | $2n+1$ | $5n+2$ |\n| 6, 7 | $2n+1$ | $5n+3$ |\n| 8, 9 | $2n+1$ | $5n+4$ |\n\nIn the first three rows we need $n \\ge 1$ (so $P > 0$). If $b$ is an integer then $7b$ is an integer; we compute $7b$ in each case.\n\n* **$r = 0, 1$:** $b = \\frac{10n^2}{7n} = \\frac{10n}{7}$, an integer exactly when $n = 7k$; then $b = 10k$. For example $x = 7k$ gives $\\frac1{14k} + \\frac1{35k} = \\frac{1}{10k}$. So **every positive multiple of 10** occurs.\n* **$r = 2, 3$:** $7b = \\frac{70n^2 + 14n}{7n + 1} = 10n + \\frac{4n}{7n + 1}$, and $0 < \\frac{4n}{7n+1} < 1$: not an integer.\n* **$r = 4$:** $7b = \\frac{70n^2 + 28n}{7n + 2} = 10n + \\frac{8n}{7n + 2}$, with $0 < \\frac{8n}{7n+2} < 2$, which is an integer only when $8n = 7n + 2$, i.e. $n = 2$. Then $P = 4$, $Q = 12$ and $b = \\frac{48}{16} = 3$ (e.g. $x = 2.4$: $\\frac14 + \\frac1{12} = \\frac13$). So **$b = 3$** occurs.\n* **$r = 5$:** $7b = \\frac{70n^2 + 63n + 14}{7n + 3} = 10n + 4 + \\frac{5n + 2}{7n + 3}$, fraction strictly between 0 and 1.\n* **$r = 6, 7$:** $7b = \\frac{70n^2 + 77n + 21}{7n + 4} = 10n + 5 + \\frac{2n + 1}{7n + 4}$, fraction strictly between 0 and 1.\n* **$r = 8, 9$:** $7b = \\frac{70n^2 + 91n + 28}{7n + 5} = 10n + 5 + \\frac{6n + 3}{7n + 5}$, fraction strictly between 0 and 1.\n\nIn the last three cases $7b$ is not an integer (this also covers $n = 0$), so $b$ is not an integer. Since $b > 0$ always, no negative values occur.\n\n**Answer: $b = 3$ and $b = 10k$ for positive integers $k$.** (A direct search over $x = m/100$ with $m < 10^5$ finds exactly these values.)"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "algebra"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2011-r2-04",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 23 Round 2 (2011-2012)",
+      "year": 2011,
+      "number": 4,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "A *luns* with vertices $X$ and $Y$ is a region bounded by two circular arcs meeting at the endpoints $X$ and $Y$. Let $A$, $B$, and $V$ be points such that $\\angle AVB = 75^\\circ$, $AV = \\sqrt2$ and $BV = \\sqrt3$. Let $L$ be the largest area luns with vertices $A$ and $B$ that does not intersect the lines $\\overleftrightarrow{VA}$ or $\\overleftrightarrow{VB}$ in any points other than $A$ and $B$. Define $k$ as the area of $L$. Find the value\n$$\\frac{k}{(1 + \\sqrt3)^2}.$$",
+    "image": null,
+    "choices": null,
+    "answer": "(6*sqrt(3)+25*pi-18)/144",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "answerDisplay": "$\\dfrac{6\\sqrt3 + 25\\pi - 18}{144}$",
+    "solutions": [
+      {
+        "title": "Two tangent arcs",
+        "body": "**The triangle.** Let $c = AB$. By the law of cosines, with $\\cos 75^\\circ = \\frac{\\sqrt6 - \\sqrt2}{4}$,\n$$c^2 = 2 + 3 - 2\\sqrt6\\cos 75^\\circ = 5 - (3 - \\sqrt3) = 2 + \\sqrt3,$$\nso $(1 + \\sqrt3)^2 = 4 + 2\\sqrt3 = 2c^2$. By the law of sines the angles are $\\angle VAB = 60^\\circ$ and $\\angle ABV = 45^\\circ$.\n\n**The largest luns.** Each arc from $A$ to $B$ lies on a circle through $A$ and $B$, whose centre is on the perpendicular bisector of $AB$. An arc that bulges away from $V$ beyond chord $AB$ must not cross line $VB$ beyond $B$ or line $VA$ beyond $A$. Moving the centre along the bisector, the arc on one side grows until it becomes tangent to one of the lines at its endpoint; past that it crosses the line. So the biggest admissible arc on each side of $AB$ is the one tangent to a line: on one side, the arc tangent to $VB$ at $B$; on the other side, the arc tangent to $VA$ at $A$. Every admissible luns lies inside the region bounded by these two arcs, which is itself admissible, so $L$ is this region, and $k$ is the sum of the two circular segments cut off by chord $AB$.\n\n**Arc tangent to $VB$ at $B$.** Its centre $X_B$ is on the perpendicular to $VB$ at $B$, so $\\angle ABX_B = 90^\\circ - 45^\\circ = 45^\\circ$; triangle $AX_BB$ is right isosceles with legs $\\frac{c}{\\sqrt2}$, and the segment is a quarter circle minus the triangle:\n$$\\frac{\\pi}{4}\\cdot\\frac{c^2}{2} - \\frac{c^2}{4} = \\frac{\\pi - 2}{8}c^2.$$\n\n**Arc tangent to $VA$ at $A$.** Now $\\angle X_AAB = 90^\\circ - 60^\\circ = 30^\\circ$, so triangle $AX_AB$ is isosceles with apex angle $120^\\circ$ and radius $\\frac{c}{\\sqrt3}$. The segment on the far side of the chord is $\\frac23$ of the disc plus the triangle:\n$$\\frac23\\pi\\frac{c^2}{3} + \\frac12\\cdot\\frac{c^2}{3}\\sin 120^\\circ = \\frac{2\\pi}{9}c^2 + \\frac{\\sqrt3}{12}c^2 = \\frac{8\\pi + 3\\sqrt3}{36}c^2.$$\n\n**Total.**\n$$\\frac{k}{(1+\\sqrt3)^2} = \\frac{1}{2c^2}\\left(\\frac{\\pi - 2}{8} + \\frac{8\\pi + 3\\sqrt3}{36}\\right)c^2 = \\frac12\\cdot\\frac{9\\pi - 18 + 16\\pi + 6\\sqrt3}{72} = \\frac{6\\sqrt3 + 25\\pi - 18}{144} \\approx 0.4926.$$\n\n**Answer: $\\dfrac{6\\sqrt3 + 25\\pi - 18}{144}$**"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "trigonometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2011-r2-05",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 23 Round 2 (2011-2012)",
+      "year": 2011,
+      "number": 5,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Miss Levans has 169 students in her history class and wants to seat them all in a $13 \\times 13$ grid of desks. Each desk is placed at a different vertex of a 12 meter by 12 meter square grid of points she has marked on the floor. The distance between neighboring vertices is exactly 1 meter.\n\nEach student has at most three best friends in the class. Best-friendship is mutual: if Lisa is one of Shannon's best friends, then Shannon is also one of Lisa's best friends. Miss Levans knows that if any two best friends sit at points that are 3 meters or less from each other then they will be disruptive and nobody will learn any history. And that is bad.\n\nProve that Miss Levans can indeed place all 169 students in her class without any such disruptive pairs.",
+    "image": null,
+    "choices": null,
+    "answer": "Take a seating with the fewest disruptive pairs. If it had a disruptive pair $S, T$, a counting argument (each desk has at most 28 desks within 3 m) gives a student $S' \\ne T$ such that swapping $S$ and $S'$ removes the pair $S, T$ and creates no new disruptive pair. That contradicts minimality, so the minimal seating has no disruptive pairs.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Extremal arrangement and a swap",
+        "body": "Call two students *neighbours* if their desks are at most 3 m apart. Desks within 3 m of a given desk differ from it by $(dx, dy)$ with $dx^2 + dy^2 \\le 9$, $(dx,dy) \\ne (0,0)$. There are $6$ such vectors with $dx = 0$, $10$ with $|dx| = 1$, $10$ with $|dx| = 2$ and $2$ with $|dx| = 3$, so **every student has at most 28 neighbours**.\n\nThere are finitely many seatings; choose one with the fewest disruptive pairs, and suppose for contradiction it still has a disruptive pair $S, T$.\n\nLet $A$ be the set of best friends of neighbours of $S$, and $B$ the set of neighbours of best friends of $S$. Then $|A| \\le 28 \\cdot 3$ and $|B| \\le 3 \\cdot 28$. Since $T$ is a neighbour of $S$ and a friend of $S$, the student $S$ belongs to both sets. So $A \\cup B$ has at most $83 + 83 = 166$ students other than $S$, and at least $168 - 166 = 2$ students other than $S$ lie outside $A \\cup B$. Choose such a student $S' \\ne T$, and swap $S$ and $S'$.\n\nOnly pairs containing $S$ or $S'$ can change.\n* $S'$ now sits at $S$'s old desk. Its neighbours there are $S$'s old neighbours (and possibly $S$ itself). Since $S' \\notin A$, none of the old neighbours is a friend of $S'$.\n* $S$ now sits at $S'$'s old desk. Since $S' \\notin B$, that desk is not a neighbour of any friend of $S$ (other than possibly $S'$, who has moved).\n* The pair $\\{S, S'\\}$ is at the same distance as before.\n\nSo after the swap, the only possible disruptive pair involving $S$ or $S'$ is $\\{S, S'\\}$, which was already disruptive before if it is disruptive now. Before the swap, $\\{S, T\\}$ was also disruptive, and it no longer is, because $T$ did not move and $S'$'s old desk is not a neighbour of $T$. Therefore the number of disruptive pairs went down by at least one, which contradicts minimality.\n\nHence the minimal seating has no disruptive pairs, so such a seating exists. ∎"
+      }
+    ],
+    "topics": [
+      "counting",
+      "graph-theory"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

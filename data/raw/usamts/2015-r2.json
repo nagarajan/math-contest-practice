@@ -1,0 +1,177 @@
+[
+  {
+    "id": "usamts-2015-r2-01",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 27 Round 2 (2015-2016)",
+      "year": 2015,
+      "number": 1,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "In the $6\\times 8$ grid below (rows listed from top to bottom, blank squares shown as $\\cdot$), the shortest path through unit squares between the pair of 2's has length 2.\n\n$$\\begin{array}{|c|c|c|c|c|c|c|c|}\\hline \\cdot&\\cdot&\\cdot&\\cdot&6&\\cdot&\\cdot&\\cdot\\\\\\hline \\cdot&10&1&\\cdot&\\cdot&\\cdot&\\cdot&\\cdot\\\\\\hline \\cdot&\\cdot&\\cdot&2&\\cdot&\\cdot&\\cdot&8\\\\\\hline \\cdot&5&\\cdot&\\cdot&2&\\cdot&\\cdot&\\cdot\\\\\\hline \\cdot&\\cdot&\\cdot&\\cdot&\\cdot&7&9&\\cdot\\\\\\hline \\cdot&\\cdot&\\cdot&\\cdot&3&\\cdot&\\cdot&\\cdot\\\\\\hline\\end{array}$$\n\nFill in some of the unit squares in the grid so that\n\n(i) exactly half of the squares in each row and column contain a number,\n\n(ii) each of the numbers 1 through 12 appears exactly twice, and\n\n(iii) for $n = 1, 2, \\ldots, 12$, the shortest path between the pair of $n$'s has length exactly $n$.\n\nYou do not need to prove that your answer is the only one possible; you merely need to find an answer that satisfies the constraints above.",
+    "image": null,
+    "choices": null,
+    "answer": "$$\\begin{array}{|c|c|c|c|c|c|c|c|}\\hline 11&\\cdot&7&\\cdot&6&\\cdot&\\cdot&12\\\\\\hline 9&10&1&1&\\cdot&\\cdot&\\cdot&\\cdot\\\\\\hline \\cdot&\\cdot&\\cdot&2&\\cdot&5&4&8\\\\\\hline \\cdot&5&\\cdot&4&2&3&\\cdot&\\cdot\\\\\\hline \\cdot&8&6&\\cdot&\\cdot&7&9&\\cdot\\\\\\hline 12&\\cdot&\\cdot&\\cdot&3&\\cdot&11&10\\\\\\hline\\end{array}$$",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Deduction",
+        "body": "Write $(r,c)$ for the square in row $r$ (from the top) and column $c$ (from the left). The length of the shortest path between two squares is $|r_1-r_2|+|c_1-c_2|$. By (i), every row ends up with exactly 4 numbers and every column with exactly 3.\n\n**The 12's and the 10.** The only pairs of squares at distance $5+7=12$ are the two pairs of opposite corners. The only square at distance 10 from the given 10 at $(2,2)$ is $(6,8)$ (we need $|r-2|\\le 4$ and $|c-2|\\le 6$ to add up to 10). So $(6,8)=10$, and the 12's go in the other two corners $(1,8)$ and $(6,1)$.\n\n**The 11's.** Two squares at distance 11 differ by $5$ rows and $6$ columns, or by $4$ rows and $7$ columns; either way one of them is a corner. The only free corner is $(1,1)$, so one 11 is there, and the other is at $(6,7)$ or $(5,8)$. Column 8 already holds $12, 8, 10$, so the 11 is at $(6,7)$. Row 6 now holds $12,3,11,10$ and is full.\n\n**The 7, 8, 9.** The squares at distance 7 from the 7 at $(5,6)$ that are still allowed are $(3,1)$ and $(1,3)$. The second 8 (distance 8 from $(3,8)$) can only go in $(4,1)$, $(6,3)$ or $(5,2)$, and $(6,3)$ is excluded because row 6 is full. The second 9 (distance 9 from $(5,7)$) can only go in $(2,1)$ or $(1,2)$. So the 8 and the 9 both go in columns 1 and 2, which together already contain 11, 12, 10, 5; after placing them, columns 1 and 2 hold 3 numbers each. Hence the 7 cannot go in column 1, so $(1,3)=7$. Row 1 is now full ($11,7,6,12$), so the 9 is at $(2,1)$; column 1 is then full, so the 8 is at $(5,2)$.\n\n**The rest.** The second 6 (distance 6 from $(1,5)$) is forced to $(5,3)$, which fills row 5 ($8,6,7,9$). Column 3 is now full ($7,1,6$), so the second 1, which must be next to $(2,3)$, is at $(2,4)$; this fills row 2 ($9,10,1,1$). The numbers still to place are a 5, a 3 and two 4's. Columns 1, 2, 3, 5 and 8 are full, so the two missing numbers of row 3 go in $(3,6)$ and $(3,7)$. Neither is at distance 3 from the 3 at $(6,5)$, and the two 4's cannot both be there, so these squares hold the 5 and one 4. The 5 must be at distance 5 from $(4,2)$, so $(3,6)=5$ and $(3,7)=4$. Column 7 is now full, so the last two numbers go in $(4,4)$ and $(4,6)$; the 4 needs distance 4 from $(3,7)$, so $(4,4)=4$ and $(4,6)=3$.\n\n**Check.** Rows contain 4 numbers each and columns 3 each. Distances: 1's $(2,3),(2,4)$: 1; 2's $(3,4),(4,5)$: 2; 3's $(4,6),(6,5)$: 3; 4's $(3,7),(4,4)$: 4; 5's $(3,6),(4,2)$: 5; 6's $(1,5),(5,3)$: 6; 7's $(1,3),(5,6)$: 7; 8's $(3,8),(5,2)$: 8; 9's $(2,1),(5,7)$: 9; 10's $(2,2),(6,8)$: 10; 11's $(1,1),(6,7)$: 11; 12's $(1,8),(6,1)$: 12. Every step above was forced, so this is the only solution."
+      }
+    ],
+    "topics": [
+      "logic"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2015-r2-02",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 27 Round 2 (2015-2016)",
+      "year": 2015,
+      "number": 2,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "A net for a polyhedron is cut along an edge to give two pieces. For example, we may cut a cube net along the red edge to form two pieces as shown.\n\nAre there two distinct polyhedra for which this process may result in the same two pairs of pieces? If you think the answer is no, prove that no pair of polyhedra can result in the same two pairs of pieces. If you think the answer is yes, prove an example; a clear example will suffice as proof.",
+    "image": "qimages/usamts/2015-r2/q02.webp",
+    "choices": null,
+    "answer": "Yes. For example, glue a square pyramid with all edges equal to the cube edge onto two **opposite** faces of a cube, or onto two **adjacent** faces. Both polyhedra have nets that, cut along one edge, give the same two pieces: each piece is a domino of two squares with the four triangles of one pyramid attached, as a fan, to a long side of one of the two squares.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Construction",
+        "body": "Take a unit cube and a square pyramid all of whose edges have length 1 (its four lateral faces are equilateral triangles). Gluing such a pyramid onto a face of the cube removes that square face and adds four triangles. Glue pyramids onto two faces of the cube:\n\n- **Polyhedron $A$:** pyramids on two opposite faces (top and bottom);\n- **Polyhedron $B$:** pyramids on two adjacent faces (top and front).\n\nThese are not congruent: in $A$ each of the four square faces shares an edge with exactly two other square faces, while in $B$ the back face shares edges with three square faces (left, bottom, right). Each has 4 square faces and 8 triangular faces.\n\n**The piece.** Let $T$ be the planar shape formed by two unit squares sharing a side (a domino, drawn vertically), together with a fan of four equilateral triangles: one triangle sits on the outer vertical side of the **upper** square, and the other three triangles follow around the common apex of the fan, each sharing a side with the previous one. (The four triangles of a fan are exactly the lateral faces of one pyramid, unrolled around its apex.) Let $T'$ be the mirror image of $T$, which is the same as $T$ rotated by $180^\\circ$ (fan on the outer side of the **lower** square). The cut-out pieces of both nets below are $T$ and $T'$.\n\nWhat we need for a polyhedron is a split of its faces into two groups, each group consisting of two adjacent squares $P$, $Q$ plus the four triangles of one pyramid whose (removed) base face is adjacent to $P$ along an edge perpendicular to the edge $PQ$. Then the fan of that pyramid can be unfolded hinged on that edge of $P$, giving a copy of $T$ (or $T'$), and the two groups are joined along one more common edge to form a net.\n\n**Polyhedron $A$** (pyramids on top and bottom; squares front $F$, right $R$, back $K$, left $L$). Group 1: squares $F, R$ with the top fan hinged on the top edge of $F$. Group 2: squares $K, L$ with the bottom fan hinged on the bottom edge of $L$. Laying the belt $F, R, K, L$ out in a row with the top fan above $F$ and the bottom fan below $L$ gives a net of $A$; cutting it along the edge $RK$ yields the two pieces. (The top edge of $F$ is perpendicular to the edge $FR$, and the bottom edge of $L$ to the edge $KL$.)\n\n**Polyhedron $B$** (pyramids on top and front; squares left $L$, back $K$, bottom $D$, right $R$). The top face is adjacent to both $L$ and $K$, and the front face is adjacent to both $D$ and $R$. Group 1: squares $L, K$ with the top fan hinged on the top edge of $L$ (perpendicular to the edge $LK$). Group 2: squares $R, D$ with the front fan hinged on the front edge of $D$ (perpendicular to the edge $RD$). The two groups are joined along the common edge of $K$ and $D$ (the back bottom edge of the cube), which unfolds to a net of $B$; cutting along that edge yields the two pieces.\n\nIn both cases each piece is a domino with a fan of four triangles attached to a long side of one end square, and the fan can be unrolled in the same direction in both cases, so the two pieces from $A$ and the two pieces from $B$ are the same pair $T$, $T'$ (up to rotation and reflection). Hence two distinct polyhedra can produce the same two pieces."
+      }
+    ],
+    "topics": [
+      "spatial",
+      "geometry"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2015-r2-03",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 27 Round 2 (2015-2016)",
+      "year": 2015,
+      "number": 3,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "For all positive integers $n$, show that\n$$\\frac{1}{n}\\sum_{k=1}^{n} \\frac{k\\cdot k!\\cdot\\binom{n}{k}}{n^k} = 1.$$",
+    "image": null,
+    "choices": null,
+    "answer": "Proof: the sum of the last $r+1$ terms equals $\\dfrac{n!}{r!\\,n^{n-r-1}}$ (induction on $r$), so the full sum is $n$. Alternatively, the terms divided by $n$ are the probabilities that the first repeat in rolls of an $n$-sided die happens on roll $k+1$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Induction on tail sums",
+        "body": "Fix $n$ and write\n$$a_k = \\frac{k\\cdot k!\\binom{n}{k}}{n^k} = \\frac{k\\cdot n!}{(n-k)!\\,n^k}.$$\nFor $0\\le r\\le n-1$ let $S_r = a_{n-r} + a_{n-r+1} + \\cdots + a_n$ be the sum of the last $r+1$ terms. We claim\n$$S_r = \\frac{n!}{r!\\,n^{\\,n-r-1}}.$$\n\nFor $r=0$: $S_0 = a_n = \\dfrac{n\\cdot n!}{n^n} = \\dfrac{n!}{0!\\,n^{n-1}}$.\n\nIf the claim holds for $r = m-1$ (where $1\\le m\\le n-1$), then\n$$S_m = S_{m-1} + a_{n-m} = \\frac{n!}{(m-1)!\\,n^{n-m}} + \\frac{(n-m)\\,n!}{m!\\,n^{n-m}} = \\frac{n!\\,\\big(m + (n-m)\\big)}{m!\\,n^{n-m}} = \\frac{n!}{m!\\,n^{\\,n-m-1}}.$$\n\nTaking $r = n-1$ gives $\\sum_{k=1}^n a_k = S_{n-1} = \\dfrac{n!}{(n-1)!\\,n^0} = n$, and dividing by $n$ gives the identity."
+      },
+      {
+        "title": "Probability",
+        "body": "Roll a fair $n$-sided die repeatedly until some number appears for the second time.\n\nThe first $k$ rolls are all distinct in $k!\\binom nk$ of the $n^k$ equally likely sequences (choose which $k$ values appear, then their order). Given that, the $(k+1)$st roll repeats one of them with probability $\\frac kn$. So the probability that the first repeat happens on roll $k+1$ is\n$$\\frac kn\\cdot\\frac{k!\\binom nk}{n^k} = \\frac{k\\cdot k!\\binom nk}{n^{k+1}}.$$\nThese events for $k=1,\\ldots,n$ are disjoint, and one of them must occur, because by the pigeonhole principle $n+1$ rolls of an $n$-sided die always contain a repeat. Hence\n$$\\sum_{k=1}^n \\frac{k\\cdot k!\\binom nk}{n^{k+1}} = 1,$$\nwhich is the required identity after taking a factor $\\frac1n$ out of the sum."
+      }
+    ],
+    "topics": [
+      "algebra",
+      "counting",
+      "sequences-series"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2015-r2-04",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 27 Round 2 (2015-2016)",
+      "year": 2015,
+      "number": 4,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Find all polynomials $P(x)$ with integer coefficients such that, for all integers $a$ and $b$, $P(a+b) - P(b)$ is a multiple of $P(a)$.",
+    "image": null,
+    "choices": null,
+    "answer": "$P(x) = c$ or $P(x) = cx$, where $c$ is any integer.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Comparing leading terms",
+        "body": "**These work.** If $P(x) = c$ then $P(a+b)-P(b) = 0$, a multiple of $c$. If $P(x)=cx$ then $P(a+b)-P(b) = ca = P(a)$.\n\n**No others.** Suppose $P$ works and $\\deg P = d \\ge 1$. Fix an integer $b$ and let\n$$H(x) = P(x+b) - P(b), \\qquad r(x) = H(x) - P(x).$$\n$H$ has the same degree $d$ and the same leading coefficient as $P$, so $\\deg r < d$ (or $r = 0$). For every integer $a$, $P(a)$ divides $H(a)$ and $P(a)$, hence divides $r(a)$. Since $\\deg r < \\deg P$, we have $|r(a)| < |P(a)|$ for all sufficiently large integers $a$, and a multiple of $P(a)$ smaller in absolute value than $P(a)$ must be $0$. So $r(a) = 0$ for infinitely many $a$, and the polynomial $r$ is identically zero. Therefore\n$$P(x+b) = P(x) + P(b) \\quad\\text{for all } x \\text{ and all integers } b.$$\n\nTaking $x = b = 0$ gives $P(0) = 2P(0)$, so $P(0)=0$. Taking $b=1$ gives $P(x+1) = P(x) + P(1)$, so by induction $P(k) = kP(1)$ for every positive integer $k$. The polynomials $P(x)$ and $P(1)\\,x$ agree at infinitely many points, so $P(x) = cx$ with $c = P(1)$, an integer.\n\nHence the solutions are the constant polynomials $P(x)=c$ and the linear polynomials $P(x)=cx$, $c\\in\\mathbb Z$."
+      }
+    ],
+    "topics": [
+      "polynomials",
+      "number-theory"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2015-r2-05",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 27 Round 2 (2015-2016)",
+      "year": 2015,
+      "number": 5,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $n > 1$ be an even positive integer. A $2n \\times 2n$ grid of unit squares is given, and it is partitioned into $n^2$ contiguous $2 \\times 2$ blocks of unit squares. A subset $S$ of the unit squares satisfies the following properties:\n\n(i) For any pair of squares $A$, $B$ in $S$, there is a sequence of squares in $S$ that starts with $A$, ends with $B$, and has any two consecutive elements sharing a side; and\n\n(ii) In each of the $2 \\times 2$ blocks of squares, at least one of the four squares is in $S$.\n\nAn example for $n = 2$ is shown, with the squares of $S$ shaded and the four $2\\times 2$ blocks of squares outlined in bold.\n\nIn terms of $n$, what is the minimum possible number of elements in $S$?",
+    "image": "qimages/usamts/2015-r2/q05.webp",
+    "choices": null,
+    "answer": "$\\dfrac{3}{2}n^2 - 2$",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Lower bound and construction",
+        "body": "Write $n = 2k$; we show the minimum is $6k^2 - 2 = \\frac32 n^2 - 2$.\n\nPlace the grid with corners at $(0,0)$ and $(4k,4k)$. The blocks are $[2a,2a+2]\\times[2b,2b+2]$. Call the $(2k+1)^2$ lattice points with both coordinates even the **block corners**. Every unit square $[x,x+1]\\times[y,y+1]$ has exactly one corner with both coordinates even; call it $\\varphi$ of the square. It is a corner of the block containing the square, and the four squares of a block are sent by $\\varphi$ to the four different corners of that block.\n\n**Lemma.** In a $(2k+1)\\times(2k+1)$ grid of cells, let $U$ be a set of $s$ cells, connected through shared sides, such that every $2\\times 2$ subgrid contains a cell of $U$. Then $s \\ge 2k^2 - 1$.\n\n*Proof.* The $(2k)^2$ interior lattice points of this grid are each the center of a $2\\times 2$ subgrid, so each is a corner of some cell of $U$. Order the cells of $U$ so that each cell after the first shares a side with an earlier one (possible because $U$ is connected). The first cell has 4 corners, and each later cell shares a side, hence two corners, with an earlier cell, so it contributes at most 2 new corners. Thus the cells of $U$ have at most $4 + 2(s-1) = 2s+2$ corners in total, and $2s+2 \\ge 4k^2$. $\\blacksquare$\n\n**Lower bound.** Let $S$ satisfy (i) and (ii), and let $V = \\varphi(S)$, a set of block corners. Think of the block corners as the cells of a $(2k+1)\\times(2k+1)$ grid (two block corners are adjacent if they differ by 2 in one coordinate). The four corners of a block form a $2\\times 2$ subgrid, and by (ii) the block contains a square of $S$, whose $\\varphi$ is one of these corners; so every $2\\times2$ subgrid meets $V$.\n\nIf two squares of $S$ share a side and lie in **different** blocks, they have the same $\\varphi$ (the shared side lies on a block boundary line, and both squares touch the same even–even endpoint of it). If they share a side and lie in the **same** block, their $\\varphi$'s are two adjacent corners of that block; join these two corners by an edge, forming a graph $G$ on $V$. Walking along a side-connected chain of squares of $S$ (property (i)), $\\varphi$ either stays put or moves along an edge of $G$, so $G$ is connected. In particular $V$ is connected as a set of cells, and the lemma gives $|V| \\ge 2k^2 - 1$.\n\nChoose a spanning tree of $G$; it has $|V| - 1 \\ge 2k^2 - 2$ edges. Each tree edge comes from a pair of squares of $S$ in one block; assign the edge to that block (choosing one block if there are several). Suppose a block gets $t$ tree edges. These edges join corners of this block and contain no cycle, so they touch at least $t+1$ distinct corners, and each of those corners is $\\varphi$ of a different square of $S$ in this block. So the block contains at least $t+1$ squares of $S$, and at least 1 if $t=0$ by (ii). Summing over the $4k^2$ blocks,\n$$|S| \\ge 4k^2 + (2k^2 - 2) = 6k^2 - 2.$$\n\n**Construction.** Number the rows and columns $1$ to $4k$ and write $(i,j)$ for row $i$, column $j$. Shade:\n\n- the $4k-2$ squares $(i,2)$ for $2 \\le i \\le 4k-1$;\n- for each $m = 1, \\ldots, k$, the $4k-3$ squares $(4m-1, j)$ for $3 \\le j \\le 4k-1$;\n- for each $m = 1, \\ldots, k$, the $2k-1$ squares $(4m-2, j)$ for $j = 3, 5, 7, \\ldots, 4k-1$.\n\nThe total is $(4k-2) + k(4k-3) + k(2k-1) = 6k^2 - 2$. It is connected: the rows $4m-1$ hang off column 2, and each square $(4m-2, j)$ sits directly above $(4m-1, j)$. Every block is hit: the blocks in rows $4m-3, 4m-2$ meet row $4m-2$, which contains $(4m-2,2)$ and a square in each pair of columns $\\{3,4\\},\\{5,6\\},\\ldots,\\{4k-1,4k\\}$; the blocks in rows $4m-1, 4m$ meet row $4m-1$, which contains columns $2, 3, \\ldots, 4k-1$. (For $k=1$ this is the central $2\\times 2$ square of the $4\\times 4$ grid.)\n\nHence the minimum is $6k^2 - 2 = \\frac32 n^2 - 2$.\n\n*Note.* The official solution's text describes the last family of squares with a misprinted formula; the description above matches the official diagram and was checked by computer for $k = 1, \\ldots, 5$."
+      }
+    ],
+    "topics": [
+      "counting",
+      "geometry",
+      "logic"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

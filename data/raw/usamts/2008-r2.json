@@ -1,0 +1,182 @@
+[
+  {
+    "id": "usamts-2008-r2-01",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 20 Round 2 (2008-2009)",
+      "year": 2008,
+      "number": 1,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Sarah and Joe play a standard 3-by-3 game of tic-tac-toe. Sarah goes first and plays X, and Joe goes second and plays O. They alternate turns placing their letter in an empty space, and the first to get 3 of their letters in a straight line (across, down, or diagonal) wins. How many possible final positions are there, given that Sarah wins on her 4th move? (Don't assume that the players play with any sort of strategy; one example of a possible final position is shown in the picture.)",
+    "image": "qimages/usamts/2008-r2/q01.webp",
+    "choices": null,
+    "answer": "444",
+    "acceptedAnswers": null,
+    "answerUnit": "positions",
+    "solutions": [
+      {
+        "title": "Split by the type of winning line",
+        "body": "A final position has 4 X's (including a line of three X's) and 3 O's, with no line of O's (otherwise Joe would have won on his 3rd move). Four X's cannot contain two lines (two lines share at most one square, so they need 5 squares), so the X-line is unique and Sarah could indeed have completed it with her 4th move. Conversely any such arrangement is reachable. So we count arrangements.\n\n**Row or column (6 lines).** The 3 O's go in 3 of the other 6 squares, but must not fill either of the two lines parallel to the X-line (those are the only lines inside these 6 squares — every diagonal meets the X-line). That gives $\\binom63 - 2 = 18$ choices, and then the 4th X goes in one of the remaining 3 squares: $6\\cdot 18\\cdot 3 = 324$.\n\n**Diagonal (2 lines).** The other 6 squares contain no complete line (every row and column meets the diagonal), so the O's can go anywhere: $\\binom63 = 20$, and then 3 choices for the extra X: $2 \\cdot 20 \\cdot 3 = 120$.\n\nTotal: $324 + 120 = 444$.\n\n**Answer: $444$**"
+      },
+      {
+        "title": "Computer enumeration",
+        "body": "Simulating all games move by move — X and O alternate, a game stops as soon as someone completes a line — and collecting the distinct boards on which X completes a line with her 4th X gives exactly $444$ boards. This agrees with the count $6\\cdot 18\\cdot 3 + 2\\cdot 20\\cdot 3$.\n\n**Answer: $444$**"
+      }
+    ],
+    "topics": [
+      "counting",
+      "games"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2008-r2-02",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 20 Round 2 (2008-2009)",
+      "year": 2008,
+      "number": 2,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Let $C_1$, $C_2$, $C_3$, and $C_4$ be four circles, with radii 1, 1, 3, and 3, respectively, such that circles $C_1$ and $C_2$, $C_2$ and $C_3$, $C_3$ and $C_4$, and $C_4$ and $C_1$ are externally tangent. A fifth circle $C$ is smaller than the four other circles and is externally tangent to each of them. Find the radius of $C$.",
+    "image": null,
+    "choices": null,
+    "answer": "3*sqrt(6)/2-3",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "answerDisplay": "$\\frac{3\\sqrt{6}}{2} - 3$",
+    "solutions": [
+      {
+        "title": "Isosceles trapezoid of centres",
+        "body": "Let $Z_1, Z_2, Z_3, Z_4$ be the centres of $C_1, \\dots, C_4$, and $Y$ the centre and $\\rho$ the radius of $C$. Tangency gives\n$$Z_1Z_2 = 2,\\quad Z_2Z_3 = Z_4Z_1 = 4,\\quad Z_3Z_4 = 6,\\qquad YZ_1 = YZ_2 = \\rho + 1,\\quad YZ_3 = YZ_4 = \\rho + 3 .$$\n\n**Shape.** Triangles $YZ_2Z_3$ and $YZ_1Z_4$ are congruent (SSS), and triangle $YZ_1Z_2$ is isosceles, so $\\angle Z_3Z_2Z_1 = \\angle Z_4Z_1Z_2$. Hence $Z_1Z_2Z_3Z_4$ is an isosceles trapezoid with parallel sides $Z_1Z_2 = 2$, $Z_3Z_4 = 6$ and legs $4$. The legs project onto the long base with length $\\frac{6-2}{2} = 2$, so the height is $\\sqrt{16 - 4} = 2\\sqrt3$. Since $YZ_1 = YZ_2$ and $YZ_3 = YZ_4$, the point $Y$ is on the axis of symmetry.\n\n**Coordinates.** Put $Z_4 = (-3, 0)$, $Z_3 = (3, 0)$, $Z_1 = (-1, 2\\sqrt3)$, $Z_2 = (1, 2\\sqrt3)$ and $Y = (0, h)$. Then\n$$(\\rho + 3)^2 = 9 + h^2, \\qquad (\\rho + 1)^2 = 1 + (2\\sqrt3 - h)^2 .$$\nSubtracting: $4\\rho + 8 = 8 + h^2 - (2\\sqrt3 - h)^2 = 8 + 4\\sqrt3 h - 12$, so $\\rho = \\sqrt3 h - 3$. Substituting into the first equation: $3h^2 = 9 + h^2$, so $h = \\frac{3}{\\sqrt2}$ and\n$$\\rho = \\frac{3\\sqrt3}{\\sqrt2} - 3 = \\frac{3\\sqrt6}{2} - 3 \\approx 0.674 .$$\nThis is smaller than $1$, as required (and $0 < h < 2\\sqrt3$, so $Y$ lies between the bases).\n\n**Answer: $\\frac{3\\sqrt6}{2} - 3$**"
+      },
+      {
+        "title": "Distances only",
+        "body": "With the trapezoid as in the first solution, let $h$ be the distance from $Y$ to $Z_3Z_4$, so its distance to $Z_1Z_2$ is $2\\sqrt3 - h$. Then $YZ_4 = \\sqrt{9 + h^2}$ and $YZ_1 = \\sqrt{1 + (2\\sqrt3 - h)^2}$, and the tangency conditions say $YZ_1 - 1 = YZ_4 - 3$, i.e.\n$$\\sqrt{1 + (2\\sqrt3 - h)^2} + 2 = \\sqrt{9 + h^2}.$$\nSquaring: $13 - 4\\sqrt3 h + h^2 + 4\\sqrt{1 + (2\\sqrt3-h)^2} + 4 = 9 + h^2$, so $\\sqrt{1 + (2\\sqrt3 - h)^2} = \\sqrt3 h - 2$. Squaring again: $13 - 4\\sqrt3 h + h^2 = 3h^2 - 4\\sqrt3 h + 4$, so $h^2 = \\frac92$. Then $YZ_4 = \\sqrt{\\frac{27}{2}} = 3\\sqrt{\\frac32}$ and the radius is\n$$YZ_4 - 3 = 3\\left(\\frac{\\sqrt6}{2} - 1\\right).$$\n\n**Answer: $\\frac{3\\sqrt6}{2} - 3$**"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2008-r2-03",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 20 Round 2 (2008-2009)",
+      "year": 2008,
+      "number": 3,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Find, with proof, all polynomials $p(x)$ with the following property:\n\nThere exists a sequence $a_0, a_1, a_2, \\dots$ of positive integers such that $p(a_0) = 1$ and for all positive integers $n$:\n\n(a) $p(a_n)$ is a positive integer, and\n\n(b) $\\displaystyle\\sum_{j=0}^{n-1}\\frac{1}{a_j} + \\frac{1}{p(a_n)} = 1.$",
+    "image": null,
+    "choices": null,
+    "answer": "$p(x) = x - 1$ and $p(x) = \\frac{x}{2}$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Degree at most one, then small cases",
+        "body": "**$p$ has degree at most 1.** Subtracting (b) for $n = k$ from (b) for $n = k+1$:\n$$\\frac{1}{p(a_k)} = \\frac1{a_k} + \\frac{1}{p(a_{k+1})} > \\frac1{a_k}, \\qquad\\text{so } 0 < p(a_k) < a_k \\text{ for all } k \\ge 1.$$\nBy (b), $\\sum_{j<n}\\frac1{a_j} < 1$ for every $n$, so the $a_j$ are unbounded (if all $a_j \\le M$, the sum would exceed $\\frac nM$). Hence $0 < \\frac{p(x)}{x} < 1$ for arbitrarily large $x$. If $\\deg p \\ge 2$, then $\\frac{p(x)}{x} \\to \\pm\\infty$ as $x \\to \\infty$, a contradiction. So $p$ is linear or constant.\n\n**Small values.** For $n = 1$: $\\frac1{a_0} + \\frac1{p(a_1)} = 1$ with positive integers, so $a_0 = p(a_1) = 2$; with $p(a_0) = 1$ this gives $p(2) = 1$ and $p(a_1) = 2$. In particular $p$ is not constant, and since it is linear, it is determined by $a_1$. For $n = 2$:\n$$\\frac12 + \\frac1{a_1} + \\frac1{p(a_2)} = 1 \\iff (a_1 - 2)(p(a_2) - 2) = 4,$$\nso $(a_1, p(a_2)) \\in \\{(3, 6), (4, 4), (6, 3)\\}$.\n\n* $a_1 = 3$: $p(2) = 1$, $p(3) = 2$, so $p(x) = x - 1$. It works with $a_0 = 2$, $a_n = 1 + a_0a_1\\cdots a_{n-1}$ (so $2, 3, 7, 43, \\dots$): by induction $\\sum_{j<n}\\frac1{a_j} = 1 - \\frac{1}{a_0\\cdots a_{n-1}} = 1 - \\frac{1}{a_n - 1}$, which is (b) because $p(a_n) = a_n - 1$. (Inductive step: $1 - \\frac1P + \\frac1{P+1} = 1 - \\frac{1}{P(P+1)}$ with $P = a_0\\cdots a_{n-1}$.)\n* $a_1 = 4$: $p(2) = 1$, $p(4) = 2$, so $p(x) = \\frac x2$. It works with $a_n = 2^{n+1}$: $\\sum_{j<n} 2^{-(j+1)} + 2^{-n} = 1$, and $p(a_n) = 2^n$ is a positive integer.\n* $a_1 = 6$: $p(2) = 1$, $p(6) = 2$, so $p(x) = \\frac x4 + \\frac12$. Then $p(a_2) = 3$ forces $a_2 = 10$, and (b) for $n = 3$ gives $\\frac1{p(a_3)} = 1 - \\frac12 - \\frac16 - \\frac1{10} = \\frac{7}{30}$, so $p(a_3) = \\frac{30}{7}$ is not an integer. This case fails.\n\n**Answer: $p(x) = x - 1$ and $p(x) = \\frac x2$**"
+      }
+    ],
+    "topics": [
+      "polynomials",
+      "sequences-series",
+      "number-theory"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2008-r2-04",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 20 Round 2 (2008-2009)",
+      "year": 2008,
+      "number": 4,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Find, with proof, the largest positive integer $k$ with the following property:\n\nThere exists a positive number $N$ such that $N$ is divisible by all but three of the integers $1, 2, 3, \\dots, k$, and furthermore those three integers (that don't divide $N$) are consecutive.",
+    "image": null,
+    "choices": null,
+    "answer": "13",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "The non-divisors are prime powers",
+        "body": "**Lemma 1.** Each of the three consecutive non-divisors is a power of a prime.\n\n*Proof.* Suppose a non-divisor is $ab$ with $a, b > 1$ coprime. If $a$ and $b$ both divided $N$, so would $ab$; so one of them, say $a$, is also a non-divisor. Both $a$ and $ab$ are among three consecutive integers, so $0 < ab - a \\le 2$, i.e. $a(b-1) \\le 2$, forcing $a = b = 2$ — not coprime. Contradiction. (The number $1$ divides everything, so it is not a non-divisor.) $\\square$\n\n**Lemma 2.** The only triples of consecutive integers that are all prime powers are $(2,3,4)$, $(3,4,5)$ and $(7,8,9)$.\n\n*Proof.* If the middle number is odd, the outer two are powers of $2$ differing by $2$, i.e. $2$ and $4$: the triple $(2, 3, 4)$. Otherwise the triple is $2^n - 1, 2^n, 2^n + 1$ with $n \\ge 2$ ($n = 1$ would include $1$). For $n = 2$ we get $(3, 4, 5)$. Let $n \\ge 3$.\n* If $n$ is even, $2^n - 1 = (2^{n/2} - 1)(2^{n/2} + 1)$ is a product of two coprime factors $\\ge 3$, not a prime power.\n* If $n$ is odd, $2^n \\equiv 2 \\pmod 3$, so $3 \\mid 2^n + 1$, hence $2^n + 1 = 3^m$. Modulo 4, $3^m \\equiv 1$, so $m$ is even and $2^n = (3^{m/2} - 1)(3^{m/2} + 1)$. Two powers of 2 differing by 2 are $2$ and $4$, so $3^{m/2} = 3$, $m = 2$, $n = 3$: the triple $(7, 8, 9)$. $\\square$\n\n**Upper bound.** Suppose $k \\ge 14$. The three non-divisors form one of the triples of Lemma 2.\n* $(2,3,4)$: $6 \\le k$ is not in the triple, so $6 \\mid N$, hence $2 \\mid N$. Contradiction.\n* $(3,4,5)$: $6 \\mid N$ gives $3 \\mid N$. Contradiction.\n* $(7,8,9)$: $14 \\mid N$ gives $7 \\mid N$. Contradiction.\n\nSo $k \\le 13$.\n\n**$k = 13$ works.** $N = 4\\cdot 3\\cdot 5\\cdot 11\\cdot 13 = 8580$ is divisible by $1, 2, 3, 4, 5, 6, 10, 11, 12, 13$ but not by $7$, $8$ or $9$.\n\n**Answer: $13$**"
+      }
+    ],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2008-r2-05",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 20 Round 2 (2008-2009)",
+      "year": 2008,
+      "number": 5,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "The set $S$ consists of 2008 points evenly spaced on a circle of radius 1 (so that $S$ forms the vertices of a regular 2008-sided polygon). 3 distinct points $X, Y, Z$ in $S$ are chosen at random. The expected value of the area of $\\triangle XYZ$ can be written in the form $r\\cot\\left(\\frac{\\pi}{2008}\\right)$, where $r$ is a rational number. Find $r$.",
+    "image": null,
+    "choices": null,
+    "answer": "502/671007",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "answerDisplay": "$\\frac{502}{671007}$",
+    "solutions": [
+      {
+        "title": "Sum of sines via a complex series",
+        "body": "Let $n = 2008$. By symmetry we may fix one vertex $A$ of the triangle; the other two, $B$ and $C$, are a uniformly random pair from the remaining $n - 1$ points. Label them so that $A, B, C$ go clockwise, and write the arcs as\n$$\\angle AOB = \\frac{2\\pi i}{n},\\quad \\angle BOC = \\frac{2\\pi j}{n},\\quad \\angle COA = \\frac{2\\pi k}{n},\\qquad i, j, k \\ge 1,\\ i + j + k = n .$$\nEach choice of $(i, j)$ with $i, j \\ge 1$, $i + j \\le n - 1$ corresponds to exactly one pair $\\{B, C\\}$.\n\n**Area of one triangle.** The angles of the triangle are $\\alpha = \\frac{\\pi i}n$, $\\beta = \\frac{\\pi j}{n}$, $\\gamma = \\frac{\\pi k}{n}$ (inscribed angles), and with circumradius $1$ its area is $2\\sin\\alpha\\sin\\beta\\sin\\gamma$ (from $\\frac12 ab\\sin\\gamma$ and $a = 2\\sin\\alpha$, $b = 2\\sin\\beta$). Using product-to-sum twice and $\\alpha + \\beta + \\gamma = \\pi$,\n$$2\\sin\\alpha\\sin\\beta\\sin\\gamma = \\tfrac12\\left(\\sin2\\alpha + \\sin2\\beta + \\sin2\\gamma\\right).$$\n(Geometrically: the triangle splits into the three triangles $OAB$, $OBC$, $OCA$, with signed areas $\\frac12\\sin$ of the central angles.)\n\n**Total.** Summing over all pairs, each value $a \\in \\{1, \\dots, n-2\\}$ appears as $i$ (and likewise as $j$, and as $k$) exactly $n - 1 - a$ times, so\n$$\\text{Total} = \\frac32 S,\\qquad S = \\sum_{a=1}^{n-2}(n - 1 - a)\\sin\\frac{2\\pi a}{n}.$$\nLet $\\omega = e^{2\\pi i/n}$ and $z = \\sum_{a=1}^{n-2}(n-1-a)\\omega^a$, so $S = \\operatorname{Im} z$. Then\n$$(1 - \\omega)z = (n-2)\\omega - (\\omega^2 + \\dots + \\omega^{n-1}) = (n - 1)\\omega - (\\omega + \\dots + \\omega^{n-1}) = (n-1)\\omega + 1,$$\nso $z = \\frac{(n-1)\\omega + 1}{1 - \\omega} = \\frac{n\\omega + (1 - \\omega)}{1 - \\omega} = \\frac{n\\omega}{1 - \\omega} + 1$. With $\\zeta = e^{\\pi i/n}$, $\\frac{\\omega}{1 - \\omega} = \\frac{\\zeta}{\\zeta^{-1} - \\zeta} = \\frac{\\cos\\frac\\pi n + i\\sin\\frac\\pi n}{-2i\\sin\\frac\\pi n}$, whose imaginary part is $\\frac12\\cot\\frac\\pi n$. Hence $S = \\frac n2\\cot\\frac\\pi n$ and the total area is $\\frac{3n}{4}\\cot\\frac\\pi n$.\n\n**Expectation.** Dividing by the $\\binom{n-1}{2}$ pairs:\n$$E[\\text{area}] = \\frac{3n}{2(n-1)(n-2)}\\cot\\frac{\\pi}{n} = \\frac{3\\cdot 2008}{2\\cdot 2007\\cdot 2006}\\cot\\frac{\\pi}{2008} = \\frac{502}{671007}\\cot\\frac{\\pi}{2008}.$$\n(A direct numerical summation over all $(i, j)$ for $n = 2008$ confirms the ratio $0.00074813\\ldots = \\frac{502}{671007}$.)\n\n**Answer: $r = \\frac{502}{671007}$**"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "probability",
+      "trigonometry"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

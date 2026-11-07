@@ -1,0 +1,183 @@
+[
+  {
+    "id": "usamts-2009-r4-01",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 21 Round 4 (2009-2010)",
+      "year": 2009,
+      "number": 1,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Archimedes planned to count all of the prime numbers between 2 and 1000 using the Sieve of Eratosthenes as follows:\n\n(a) List the integers from 2 to 1000.\n(b) Circle the smallest number in the list and call this $p$.\n(c) Cross out all multiples of $p$ in the list except for $p$ itself.\n(d) Let $p$ be the smallest number remaining that is neither circled nor crossed out. Circle $p$.\n(e) Repeat steps (c) and (d) until each number is either circled or crossed out.\n\nAt the end of this process, the circled numbers are prime and the crossed out numbers are composite.\n\nUnfortunately, while crossing off the multiples of 2, Archimedes accidentally crossed out two odd primes in addition to crossing out all the even numbers (besides 2). Otherwise, he executed the algorithm correctly. If the number of circled numbers remaining when Archimedes finished equals the number of primes from 2 to 1000 (including 2), then what is the largest possible prime that Archimedes accidentally crossed out?",
+    "image": null,
+    "choices": null,
+    "answer": "331",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Which composites survive",
+        "body": "Let $q < r$ be the two odd primes crossed out by mistake. They are never circled, so the two missing primes must be compensated by exactly two circled composite numbers.\n\nEvery other prime is circled correctly and crosses out its multiples. So an odd composite number $m \\le 1000$ escapes being crossed out by a prime only if all its prime factors lie in $\\{q, r\\}$. Such numbers are $q^ir^j$ with $i + j \\ge 2$. Now $q^2$, $qr$, $r^2$ have no proper divisor other than $1, q, r$ (and $q, r$ are never circled), so each of them that is at most $1000$ is never crossed out and eventually gets circled. When $q^2$ (or $r^2$) is circled, it crosses out its multiples, and every other $q^ir^j$ with $i + j \\ge 2$ is a multiple of $q^2$ or $r^2$. So the circled composites are exactly those of $q^2$, $qr$, $r^2$ that are at most $1000$. Hence we need exactly two of them:\n$$q^2 < qr \\le 1000 < r^2 .$$\nWith $q \\ge 3$ this forces $r \\le \\frac{1000}{3}$, so $r \\le 331$ (the largest prime below $333$; $332$ and $333$ are composite). And $q = 3$, $r = 331$ works: $331^2 > 1000$, and the circled composites are $9$ and $993 = 3\\cdot331$, exactly two. (A direct simulation of the faulty sieve confirms the count and that no larger $r$ works.)\n\n**Answer: $331$**"
+      }
+    ],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2009-r4-02",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 21 Round 4 (2009-2010)",
+      "year": 2009,
+      "number": 2,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Let $a$, $b$, $c$, $d$ be four real numbers such that\n$$a + b + c + d = 8,$$\n$$ab + ac + ad + bc + bd + cd = 12.$$\nFind the greatest possible value of $d$.",
+    "image": null,
+    "choices": null,
+    "answer": "2+3*sqrt(2)",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "answerDisplay": "$2 + 3\\sqrt{2}$",
+    "solutions": [
+      {
+        "title": "Bound ab + bc + ca",
+        "body": "Using $a + b + c = 8 - d$, the second equation becomes\n$$12 = (ab + bc + ca) + d(a + b + c) = (ab + bc + ca) + d(8 - d).$$\nSince $(a - b)^2 + (b - c)^2 + (c - a)^2 \\ge 0$, we have $a^2 + b^2 + c^2 \\ge ab + bc + ca$, hence\n$$(a + b + c)^2 = a^2 + b^2 + c^2 + 2(ab + bc + ca) \\ge 3(ab + bc + ca).$$\nSo $12 \\le \\frac{(8 - d)^2}{3} + d(8 - d)$, i.e. $36 \\le 64 - 16d + d^2 + 24d - 3d^2$, which simplifies to\n$$d^2 - 4d - 14 \\le 0, \\qquad\\text{so}\\qquad d \\le 2 + 3\\sqrt2 .$$\nEquality requires $a = b = c = \\frac{8 - d}{3} = 2 - \\sqrt2$. Check: the sum is $3(2 - \\sqrt2) + 2 + 3\\sqrt2 = 8$, and\n$$3(2 - \\sqrt2)^2 + 3(2 - \\sqrt2)(2 + 3\\sqrt2) = 3(6 - 4\\sqrt2) + 3(-2 + 4\\sqrt2) = 12 .$$\nSo the maximum is $d = 2 + 3\\sqrt2$.\n\n**Answer: $2 + 3\\sqrt2$**"
+      },
+      {
+        "title": "Variance",
+        "body": "From the two equations, $a^2 + b^2 + c^2 + d^2 = 8^2 - 2\\cdot12 = 40$. For fixed $d$, the numbers $a, b, c$ have sum $8 - d$ and sum of squares $40 - d^2$; by Cauchy–Schwarz (or QM–AM), $3(a^2 + b^2 + c^2) \\ge (a + b + c)^2$, so\n$$3(40 - d^2) \\ge (8 - d)^2 \\iff 4d^2 - 16d - 56 \\le 0 \\iff d^2 - 4d - 14 \\le 0,$$\ngiving $d \\le 2 + 3\\sqrt2$, with equality for $a = b = c = 2 - \\sqrt2$.\n\n**Answer: $2 + 3\\sqrt2$**"
+      }
+    ],
+    "topics": [
+      "algebra",
+      "inequalities"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2009-r4-03",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 21 Round 4 (2009-2010)",
+      "year": 2009,
+      "number": 3,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "I give you a deck of $n$ cards numbered 1 through $n$. On each turn, you take the top card of the deck and place it anywhere you choose in the deck. You must arrange the cards in numerical order, with card 1 on top and card $n$ on the bottom. If I place the deck in a random order before giving it to you, and you know the initial order of the cards, what is the expected value of the minimum number of turns you need to arrange the deck in order?",
+    "image": null,
+    "choices": null,
+    "answer": "$E_n = n - \\displaystyle\\sum_{k=1}^{n}\\frac{1}{k!}$ (for large $n$ this is about $n + 1 - e$).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Minimum turns, then a recursion",
+        "body": "**Minimum for a given deck.** Let $k$ be the largest number such that the bottom $k$ cards are in increasing order ($1 \\le k \\le n$). If $k = n$, no turns are needed. Otherwise the $(k+1)$-st card from the bottom is out of order relative to the cards below it, so it must be moved at some point. A card can only be moved when it is on top, and cards that are never moved keep their relative order; so before the $(k+1)$-st card from the bottom can be moved, every card above it must have been moved. Hence all $n - k$ cards above the bottom block must be moved at least once.\n\nConversely, $n - k$ turns suffice: on each turn, insert the top card into its correct place within the sorted block at the bottom. After $i$ turns the bottom $k + i$ cards are sorted, so after $n - k$ turns the deck is sorted. Hence the minimum is exactly $n - k$.\n\n**Expected value.** Let $E_n$ be the expected minimum. Delete the top card of the deck; the remaining $n - 1$ cards, relabelled $1, \\dots, n-1$ in order, form a uniformly random deck of size $n - 1$. If the full deck needs $n - k > 0$ turns, the shortened deck has the same sorted bottom block of $k$ cards (here $k \\le n - 1$) and needs $n - 1 - k$ turns, one fewer. If the full deck is sorted (probability $\\frac1{n!}$), both need $0$ turns. Therefore\n$$E_n = E_{n-1} + 1 - \\frac{1}{n!}, \\qquad E_1 = 0,$$\nsince the \"$+1$\" is lost exactly when the full deck is sorted. Summing,\n$$E_n = (n - 1) - \\sum_{k=2}^{n}\\frac1{k!} = n - \\sum_{k=1}^{n}\\frac{1}{k!}.$$\nCheck: $E_2 = \\frac12$, $E_3 = \\frac43$, $E_4 = \\frac{55}{24}$ (agreeing with a brute-force search over all decks up to $n = 6$). As $n \\to \\infty$, $\\sum_{k=1}^n\\frac1{k!} \\to e - 1$, so $E_n \\approx n + 1 - e$."
+      },
+      {
+        "title": "Counting decks by k",
+        "body": "With $k$ as in the first solution, a deck needs $n - k$ turns. For $1 \\le k \\le n - 1$, count decks whose bottom $k$ cards are increasing but bottom $k + 1$ are not: choose the set of bottom $k + 1$ cards in $\\binom{n}{k+1}$ ways; of their orderings with the last $k$ increasing ($k + 1$ of them, determined by which card is on top of the group), exactly $k$ are not fully increasing; the other $n - k - 1$ cards can be in any order. So\n$$E_n = \\frac{1}{n!}\\sum_{k=1}^{n-1}(n - k)\\cdot k\\binom{n}{k+1}(n - k - 1)! = \\sum_{k=1}^{n-1}\\frac{(n-k)k}{(k+1)!}.$$\nWrite $(n - k)k = n(k+1) - n - (k+1)k + (k+1) - 1$. Then\n$$E_n = \\sum_{k=1}^{n-1}\\left(\\frac{n}{k!} - \\frac{n}{(k+1)!}\\right) + \\sum_{k=1}^{n-1}\\left(\\frac{1}{k!} - \\frac{1}{(k-1)!}\\right) - \\sum_{k=1}^{n-1}\\frac{1}{(k+1)!}.$$\nThe first two sums telescope to $n - \\frac{n}{n!}$ and $\\frac{1}{(n-1)!} - 1$; since $\\frac{n}{n!} = \\frac{1}{(n-1)!}$,\n$$E_n = n - 1 - \\sum_{k=2}^{n}\\frac1{k!} = n - \\sum_{k=1}^{n}\\frac{1}{k!}.$$"
+      }
+    ],
+    "topics": [
+      "probability",
+      "counting"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2009-r4-04",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 21 Round 4 (2009-2010)",
+      "year": 2009,
+      "number": 4,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $S$ be a set of 10 distinct positive real numbers. Show that there exist $x, y \\in S$ such that\n$$0 < x - y < \\frac{(1 + x)(1 + y)}{9}.$$",
+    "image": null,
+    "choices": null,
+    "answer": "Substitute $a = \\frac{9}{1 + x} \\in (0, 9)$; the condition becomes $0 < a_y - a_x < 1$, and ten numbers in $(0, 9)$ must include two consecutive ones at distance less than $1$ (pigeonhole).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Change of variable and pigeonhole",
+        "body": "Order the set as $0 < x_1 < x_2 < \\dots < x_{10}$ and put $a_i = \\frac{9}{1 + x_i}$. Then $9 > a_1 > a_2 > \\dots > a_{10} > 0$ and $x_i = \\frac{9 - a_i}{a_i} = \\frac{9}{a_i} - 1$.\n\nFor $i < j$ (so $x_j > x_i$):\n$$x_j - x_i = \\frac{9}{a_j} - \\frac{9}{a_i} = \\frac{9(a_i - a_j)}{a_ia_j}, \\qquad \\frac{(1 + x_i)(1 + x_j)}{9} = \\frac{1}{9}\\cdot\\frac{9}{a_i}\\cdot\\frac{9}{a_j} = \\frac{9}{a_ia_j}.$$\nSo $x_j - x_i < \\frac{(1+x_i)(1+x_j)}{9}$ if and only if $a_i - a_j < 1$.\n\nSuppose no pair works. Then $a_i - a_{i+1} \\ge 1$ for $i = 1, \\dots, 9$, and adding these nine inequalities gives $a_1 - a_{10} \\ge 9$. But $a_1 < 9$ and $a_{10} > 0$, so $a_1 - a_{10} < 9$, a contradiction. Hence some consecutive pair $y = x_i$, $x = x_{i+1}$ satisfies $0 < x - y < \\frac{(1+x)(1+y)}{9}$. ∎"
+      },
+      {
+        "title": "Reciprocal map",
+        "body": "The map $t \\mapsto \\frac{1}{1 + t}$ sends $(0, \\infty)$ into $(0, 1)$, and\n$$\\frac{1}{1 + y} - \\frac{1}{1 + x} = \\frac{x - y}{(1 + x)(1 + y)}.$$\nSo the required inequality says exactly that the images $u = \\frac{1}{1+x}$ and $v = \\frac{1}{1+y}$ satisfy $0 < v - u < \\frac19$. Ten distinct points $u_1 > u_2 > \\dots > u_{10}$ in the open interval $(0, 1)$ cut it into $11$ gaps whose lengths sum to $1$; the $9$ inner gaps $u_i - u_{i+1}$ sum to $u_1 - u_{10} < 1$, so one of them is less than $\\frac19$. The corresponding $x = x_{i+1} > y = x_i$ work. ∎"
+      }
+    ],
+    "topics": [
+      "inequalities"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2009-r4-05",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 21 Round 4 (2009-2010)",
+      "year": 2009,
+      "number": 5,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Tina and Paul are playing a game on a square $S$. First, Tina selects a point $T$ inside $S$. Next, Paul selects a point $P$ inside $S$. Paul then colors blue all the points inside $S$ that are closer to $P$ than $T$. Tina wins if the blue region thus produced is the interior of a triangle. Assuming that Paul is lazy and simply selects his point at random (and that Tina knows this), find, with proof, a point Tina can select to maximize her probability of winning, and compute this probability.",
+    "image": null,
+    "choices": null,
+    "answer": "Tina should choose the center of the square; her winning probability is then $2 - \\frac{\\pi}{2} \\approx 0.429$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Reduce to circles about the vertices",
+        "body": "Let the square be $ABCD$ with side $1$ (so the probability equals an area), and let $\\ell$ be the perpendicular bisector of $PT$. The blue region is the part of the square on $P$'s side of $\\ell$. It contains $P$, so it contains at least one vertex (a convex polygon cut by a line keeps a vertex on each side that has interior points), and it contains at most three, since $T$'s side is nonempty. It is a triangle exactly when it contains exactly one vertex, i.e. when $T$ is closer than $P$ to exactly three vertices.\n\nThis happens if and only if $T$ is closer than $P$ to both vertices of some diagonal, $\\{A, C\\}$ or $\\{B, D\\}$. Indeed three vertices include an opposite pair; conversely if $T$ is closer to $A$ and $C$, then $P$ cannot be closer to both $B$ and $D$, because $\\ell$ would then separate segment $AC$ from segment $BD$, which cross. (Ties occur with probability $0$.) The two events cannot happen at once (that would make $T$ closer than $P$ to all four vertices), so\n$$\\Pr(\\text{win}) = \\operatorname{area}\\{P : PA > TA,\\ PC > TC\\} + \\operatorname{area}\\{P : PB > TB,\\ PD > TD\\}.$$\nThe first set is the square minus the disks $\\Gamma_A$, $\\Gamma_C$ centred at $A$, $C$ through $T$; call its area $W_{AC}(T)$, and similarly $W_{BD}(T)$.\n\n**Step 1: $W_{AC}$ is largest on the diagonal $AC$.** If $T$ is not on $AC$, let $T'$ be the point of segment $AC$ with $AT' = AT$ (possible since $AT < \\sqrt2 = AC$). By the triangle inequality $CT' = AC - AT \\le CT$, so $\\Gamma_A$ is unchanged and $\\Gamma_C$ shrinks. Hence $W_{AC}(T') \\ge W_{AC}(T)$.\n\n**Step 2: on $AC$, the center is best.** For $T$ on $AC$ with $AT = r$, $CT = \\sqrt2 - r$, the two disks touch only at $T$, so $W_{AC}(T) = 1 - (\\text{area of square inside } \\Gamma_A) - (\\text{area of square inside } \\Gamma_C)$. If $r \\le 1$ and $\\sqrt2 - r \\le 1$, these parts are quarter disks and the removed area is\n$$\\frac\\pi4\\left(r^2 + (\\sqrt2 - r)^2\\right) \\ge \\frac\\pi4\\cdot\\frac{(r + \\sqrt2 - r)^2}{2} = \\frac\\pi4,$$\nwith equality iff $r = \\frac{\\sqrt2}{2}$, i.e. $T$ is the center. If a radius exceeds $1$, that disk alone already covers the quarter disk of radius $1$ (area $\\frac\\pi4$) plus more, so the removed area exceeds $\\frac\\pi4$. Thus $W_{AC}(T) \\le 1 - \\frac\\pi4$ for every $T$, with equality at the center.\n\nBy symmetry $W_{BD}(T) \\le 1 - \\frac\\pi4$ as well, with equality at the center. So the center maximizes both terms simultaneously, and the maximum probability is\n$$2\\left(1 - \\frac\\pi4\\right) = 2 - \\frac\\pi2 \\approx 0.429.$$\n(A Monte Carlo simulation gives about $0.4296$ at the center and noticeably less at other points.) ∎"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "probability"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

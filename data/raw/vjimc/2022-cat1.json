@@ -1,0 +1,143 @@
+[
+  {
+    "id": "vjimc-2022-cat1-01",
+    "bank": "vjimc",
+    "source": {
+      "contest": "VJIMC",
+      "paper": "VJIMC 2022 Category I",
+      "year": 2022,
+      "number": 1,
+      "url": "https://vjimc.osu.cz/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Assume that a real polynomial $P(x)$ has no real roots. Prove that the polynomial\n$$Q(x)=P(x)+\\frac{P''(x)}{2!}+\\frac{P^{(4)}(x)}{4!}+\\dots$$\nalso has no real roots.",
+    "image": null,
+    "choices": null,
+    "answer": "By Taylor's formula $Q(x)=\\frac{P(x+1)+P(x-1)}{2}$; $P$ has constant sign on $\\mathbb R$, hence so does $Q$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Taylor expansion at $x\\pm1$",
+        "body": "A polynomial equals its (finite) Taylor expansion, so for every real $x$\n$$P(x+1)=\\sum_{k\\ge0}\\frac{P^{(k)}(x)}{k!},\\qquad P(x-1)=\\sum_{k\\ge0}(-1)^k\\frac{P^{(k)}(x)}{k!}$$\n(the sums are finite since $P^{(k)}=0$ for $k>\\deg P$). Adding, the odd terms cancel:\n$$\\frac{P(x+1)+P(x-1)}{2}=\\sum_{k\\ \\text{even}}\\frac{P^{(k)}(x)}{k!}=Q(x).$$\nA real polynomial without real roots is continuous and never zero, so by the intermediate value theorem it has constant sign; say $P(t)>0$ for all real $t$ (otherwise replace $P$ by $-P$, which replaces $Q$ by $-Q$). Then for every real $x$,\n$$Q(x)=\\frac{P(x+1)+P(x-1)}2>0,$$\nso $Q$ has no real roots. ∎"
+      }
+    ],
+    "topics": [
+      "polynomials",
+      "calculus"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "vjimc-2022-cat1-02",
+    "bank": "vjimc",
+    "source": {
+      "contest": "VJIMC",
+      "paper": "VJIMC 2022 Category I",
+      "year": 2022,
+      "number": 2,
+      "url": "https://vjimc.osu.cz/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $n\\ge1$. Assume that $A$ is a real $n\\times n$ matrix which satisfies the equality\n$$A^7+A^5+A^3+A-I=0 .$$\nShow that $\\det(A)>0$.",
+    "image": null,
+    "choices": null,
+    "answer": "Every eigenvalue is a root of $w(x)=x^7+x^5+x^3+x-1$; $w$ is strictly increasing, so its only real root is positive, and non-real eigenvalues come in conjugate pairs, so $\\det A=\\lambda_0^{k}\\prod|\\lambda_j|^{2k_j}>0$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Eigenvalues are roots of $w$",
+        "body": "Let $w(x)=x^7+x^5+x^3+x-1$, so $w(A)=0$. If $Av=\\lambda v$ with $v\\ne0$ (over $\\mathbb C$), then $0=w(A)v=w(\\lambda)v$, so every eigenvalue $\\lambda$ of $A$ is a root of $w$.\n\n**Real roots of $w$.** $w'(x)=7x^6+5x^4+3x^2+1>0$, so $w$ is strictly increasing on $\\mathbb R$ and has at most one real root. Since $w(0)=-1<0<3=w(1)$, it has exactly one real root $\\lambda_0$, and $\\lambda_0\\in(0,1)$. In particular $0$ is not an eigenvalue.\n\n**The determinant.** $\\det A$ is the product of the $n$ eigenvalues counted with algebraic multiplicity (roots of the characteristic polynomial). The characteristic polynomial has real coefficients, so its non-real roots come in conjugate pairs $\\mu,\\bar\\mu$ with equal multiplicities. Every real eigenvalue equals $\\lambda_0$. Therefore\n$$\\det A=\\lambda_0^{\\,k}\\prod_{j}(\\mu_j\\bar\\mu_j)^{k_j}=\\lambda_0^{\\,k}\\prod_j|\\mu_j|^{2k_j}>0,$$\nbecause $\\lambda_0>0$ and every $\\mu_j\\ne0$. ∎"
+      }
+    ],
+    "topics": [
+      "linear-algebra",
+      "polynomials"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "vjimc-2022-cat1-03",
+    "bank": "vjimc",
+    "source": {
+      "contest": "VJIMC",
+      "paper": "VJIMC 2022 Category I",
+      "year": 2022,
+      "number": 3,
+      "url": "https://vjimc.osu.cz/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $f\\colon[0,1]\\to\\mathbb R$ be a given continuous function. Find the limit\n$$\\lim_{n\\to\\infty}(n+1)\\sum_{k=0}^n\\int_0^1x^k(1-x)^{n-k}f(x)\\,dx .$$",
+    "image": null,
+    "choices": null,
+    "answer": "The limit is $f(0)+f(1)$: the kernel $K_n(x)=(n+1)\\sum_k x^k(1-x)^{n-k}$ is symmetric, has total integral $\\sum_k\\binom nk^{-1}\\to2$, and tends to $0$ uniformly away from the endpoints.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "An approximate identity concentrated at both endpoints",
+        "body": "Let $K_n(x)=(n+1)\\sum_{k=0}^nx^k(1-x)^{n-k}\\ge0$; the quantity is $\\int_0^1K_nf$. Note $K_n(1-x)=K_n(x)$.\n\n**Total mass.** By the Beta integral $\\int_0^1x^k(1-x)^{n-k}dx=\\frac{k!(n-k)!}{(n+1)!}$,\n$$\\int_0^1K_n=\\sum_{k=0}^n\\frac{k!\\,(n-k)!}{n!}=\\sum_{k=0}^n\\binom nk^{-1}.$$\nThe terms $k=0,n$ give $2$, the terms $k=1,n-1$ give $\\frac2n$, and for $2\\le k\\le n-2$ we have $\\binom nk\\ge\\binom n2$, so these at most $n$ terms contribute at most $\\frac{2n}{n(n-1)}$. Hence $\\int_0^1K_n\\to2$, and by symmetry $\\int_0^{1/2}K_n=\\int_{1/2}^1K_n\\to1$.\n\n**Concentration.** For $\\delta\\in(0,\\frac12)$ and $x\\in[\\delta,1-\\delta]$, each term satisfies $x^k(1-x)^{n-k}\\le\\max(x,1-x)^n\\le(1-\\delta)^n$, so $0\\le K_n(x)\\le(n+1)^2(1-\\delta)^n\\to0$ uniformly on $[\\delta,1-\\delta]$. Consequently $\\int_0^{\\delta}K_n\\to1$ and $\\int_{1-\\delta}^1K_n\\to1$.\n\n**The limit.** Let $\\varepsilon>0$ and choose $\\delta$ with $|f(x)-f(0)|<\\varepsilon$ on $[0,\\delta]$ and $|f(x)-f(1)|<\\varepsilon$ on $[1-\\delta,1]$; let $\\|f\\|=\\max|f|$. Then\n$$\\Big|\\int_0^1K_nf-f(0)\\!\\int_0^\\delta\\!K_n-f(1)\\!\\int_{1-\\delta}^1\\!K_n\\Big|\\le\\varepsilon\\int_0^1K_n+\\|f\\|\\int_\\delta^{1-\\delta}K_n .$$\n(estimate $f-f(0)$ on $[0,\\delta]$, $f-f(1)$ on $[1-\\delta,1]$, and $f$ on the middle part). As $n\\to\\infty$, $\\int_0^\\delta K_n\\to1$, $\\int_{1-\\delta}^1K_n\\to1$, $\\int_0^1K_n\\to2$ and $\\int_\\delta^{1-\\delta}K_n\\to0$, hence\n$$\\limsup_{n\\to\\infty}\\Big|\\int_0^1K_nf-f(0)-f(1)\\Big|\\le2\\varepsilon .$$\nAs $\\varepsilon>0$ is arbitrary,\n$$\\lim_{n\\to\\infty}(n+1)\\sum_{k=0}^n\\int_0^1x^k(1-x)^{n-k}f(x)\\,dx=f(0)+f(1).$$\n**Answer: $f(0)+f(1)$.** ∎"
+      },
+      {
+        "title": "Summing the geometric series (official approach)",
+        "body": "For $x\\ne\\frac12$, $\\sum_{k=0}^nx^k(1-x)^{n-k}=\\frac{x^{n+1}-(1-x)^{n+1}}{x-(1-x)}=\\frac{x^{n+1}-(1-x)^{n+1}}{2x-1}$.\n\n**Lemma.** If $c\\in(0,1)$ and $g$ is continuous on $[c,1]$, then $(n+1)\\int_c^1x^ng(x)\\,dx\\to g(1)$.\n\n*Proof.* $(n+1)\\int_c^1x^n\\,dx=1-c^{n+1}\\to1$. Given $\\varepsilon>0$, take $\\eta>0$ with $|g(x)-g(1)|<\\varepsilon$ on $[1-\\eta,1]$. Then $\\big|(n+1)\\int_c^1x^n(g-g(1))\\big|\\le\\varepsilon+(n+1)(1-\\eta)^n\\cdot2\\max|g|$, which is $<2\\varepsilon$ for large $n$. $\\square$\n\nSplit $[0,1]$ into $[0,\\frac14]$, $[\\frac14,\\frac34]$, $[\\frac34,1]$.\n- On $[\\frac14,\\frac34]$, every term is at most $(\\frac34)^n$, so that part is at most $(n+1)^2(\\frac34)^n\\max|f|\\to0$.\n- On $[\\frac34,1]$, the contribution is $(n+1)\\int_{3/4}^1\\frac{x^{n+1}f(x)}{2x-1}dx-(n+1)\\int_{3/4}^1\\frac{(1-x)^{n+1}f(x)}{2x-1}dx$. The first term is $(n+1)\\int_{3/4}^1x^n\\,g(x)\\,dx$ with $g(x)=\\frac{x f(x)}{2x-1}$ continuous on $[\\frac34,1]$, so it tends to $g(1)=f(1)$ by the lemma; the second is at most $(n+1)(\\frac14)^{n+1}\\cdot2\\max|f|\\to0$.\n- On $[0,\\frac14]$, the substitution $x\\mapsto1-x$ turns the integral into the previous case with $f(1-x)$ in place of $f(x)$, so it tends to $f(0)$.\n\nAdding up, the limit is $f(0)+f(1)$. ∎"
+      }
+    ],
+    "topics": [
+      "real-analysis",
+      "calculus"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "vjimc-2022-cat1-04",
+    "bank": "vjimc",
+    "source": {
+      "contest": "VJIMC",
+      "paper": "VJIMC 2022 Category I",
+      "year": 2022,
+      "number": 4,
+      "url": "https://vjimc.osu.cz/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "In a box there are $31$, $41$ and $59$ stones coloured, respectively, red, green and blue. Three players, having t-shirts of these three colours, play the following game. They sequentially make one of two moves:\n\n(I) either remove three stones of one colour from the box,\n\n(II) or replace two stones of different colours by two stones of the third colour.\n\nThe game ends when all the stones in the box have the same colour and the winner is the player whose t-shirt has this colour. Assuming that the players play optimally, is it possible to decide whether the game ends and who will win, depending on who the starting player is?",
+    "image": null,
+    "choices": null,
+    "answer": "Yes. Invariants mod 3 show that the game can only end with red stones, so Red wins if it ends. If Red starts, Green and Blue can keep the game going forever (it never ends); if Green or Blue starts, Red wins.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Invariants mod 3, then strategies",
+        "body": "Write positions as $(r,g,b)$ (numbers of red, green, blue stones); the players move in a fixed cyclic order. While the game is not over, at least two colours are present, so a move of type (II) is always available. Green and Blue can never win (see below), so for them \"optimal\" means preventing Red's win, i.e. keeping the game going forever.\n\n**Invariants.** A move (I) changes one count by $-3$; a move (II) changes the counts by $-1,-1,+2$, i.e. each count by $-1\\pmod 3$. Hence:\n1. The differences $r-g$ and $g-b$ modulo $3$ never change. Initially $r-g=-10\\equiv2$ and $g-b=-18\\equiv0$, so always $g\\equiv b$ and $r\\equiv g+2\\pmod3$.\n2. The total $T=r+g+b$ only drops by $3$ (moves (I)), so $T\\equiv131\\equiv2\\pmod3$ and $T\\ge2$.\n3. If $i$ moves of type (I) and $j$ of type (II) have been made, then $T=131-3i$ and $r\\equiv31-j\\equiv1-j\\pmod3$. So the number of moves made so far satisfies\n$$i+j\\equiv\\frac{131-T}{3}+1-r\\pmod 3, \\tag{$\\dagger$}$$\ni.e. **the position determines whose turn it is.**\n\n**Only Red can win.** A one-colour position $(0,T,0)$ would have $g-b=T\\equiv2\\not\\equiv0$, and $(0,0,T)$ would have $g-b\\equiv1$; both are impossible. So if the game ends, the box contains only red stones and Red wins.\n\n**Small positions.** By invariant 1 the only non-final position with $T=2$ is $(0,1,1)$, whose only move is (II) green+blue$\\to$red, giving $(2,0,0)$. The positions with $T=5$ are $(5,0,0),(2,3,0),(2,0,3),(0,1,4),(0,4,1),(3,1,1),(1,2,2)$; the only one in which every colour has at most $2$ stones is $(1,2,2)$, and by $(\\dagger)$ at $(1,2,2)$ the number of moves made is $\\equiv42\\equiv0$: it is always **the starting player's turn** there.\n\n**Case 1: Green or Blue starts — Red wins.** Red's strategy: if some colour has at least $3$ stones, remove three of them; otherwise make any move. Suppose it is Red's turn and no colour has $\\ge3$ stones. Then $T\\le6$, so $T\\in\\{2,5\\}$. $T=5$ would mean the position $(1,2,2)$, where it is the starting player's turn, not Red's. So $T=2$, the position is $(0,1,1)$, and Red's only move ends the game with Red winning. Thus each of Red's turns either ends the game or decreases $T$ by $3$; since $T$ never increases and stays $\\ge2$, the game ends after at most $43$ of Red's turns, and by the above Red is the winner.\n\n**Case 2: Red starts — the game can be kept going forever.** Let $X_1$ be the player moving right after Red and $X_2$ the player moving right before Red. Call a position *dangerous* if Red can end the game from it in one move. A move ending the game produces $(t,0,0)$, so it is (I) from $(t,3,0)$ or $(t,0,3)$, or (II) from $(t-2,1,1)$. Thus the dangerous positions are exactly $(t,3,0)$, $(t,0,3)$, $(s,1,1)$.\n\n$X_1$ and $X_2$ use only moves of type (II) and keep the following invariant: the game is not over, $T\\ge5$, at Red's turn the position is not dangerous, and at $X_2$'s turn the position is not of the form $(s,1,1)$. It holds at the start: $(31,41,59)$, Red to move.\n\n*Red's move.* Red cannot end the game. If $T\\ge8$, after Red's move $T\\ge5$. If $T=5$, it is Red's (the starter's) turn, so by $(\\dagger)$ $r\\equiv1$ and the position is $(1,2,2)$, where no colour has $3$ stones; so Red makes a move (II) and $T$ stays $5$.\n\n*$X_1$'s move* (from any non-final position with $T\\ge5$) to a non-final position not of the form $(s,1,1)$:\n- if $(g,b)=(1,1)$ or $(2,2)$: then $r=T-2g\\ge1$; play red+green$\\to$blue, reaching $(r-1,0,3)$ with $r-1\\ge2$, or $(r-1,1,4)$;\n- otherwise, if $g,b\\ge1$: play green+blue$\\to$red, reaching $(r+2,g-1,b-1)$, which is final only if $g=b=1$ and of the form $(s,1,1)$ only if $g=b=2$ — both excluded;\n- otherwise one of $g,b$ is $0$, say $b=0$ (the case $g=0$ is symmetric), and $r,g\\ge1$: play red+green$\\to$blue, reaching $(r-1,g-1,2)$, not of the form $(s,1,1)$ and not final (a blue-only position is impossible).\n\n*$X_2$'s move* (from a non-final position, $T\\ge5$, not $(s,1,1)$) to a non-final, non-dangerous position:\n- if $r,g\\ge1$: red+green$\\to$blue gives $(r-1,g-1,b+2)$; as $b+2\\ge2$ it could only be dangerous as $(t,0,3)$, i.e. if $(g,b)=(1,1)$, which is excluded; it is not final;\n- if $r\\ge1$, $g=0$ (so $b\\ge1$): red+blue$\\to$green gives $(r-1,2,b-1)$, neither dangerous nor final;\n- if $r=0$: then $g\\equiv b\\equiv1\\pmod 3$ and $g,b\\ge1$, $(g,b)\\ne(1,1)$; green+blue$\\to$red gives $(2,g-1,b-1)$, which is dangerous only for $(g,b)\\in\\{(4,1),(1,4)\\}$ (note $(2,2)$ violates $g\\equiv1$). But $(0,4,1)$ and $(0,1,4)$ have $T=5$, and by $(\\dagger)$ the number of moves made there is $\\equiv43\\equiv1$, so it is $X_1$'s turn, not $X_2$'s.\n\nSo the invariant is preserved forever and the game never ends. (For instance, from $(1,2,2)$ the play cycles $(1,2,2)\\to(0,1,4)\\to(2,0,3)\\to(1,2,2)$, or via $(0,4,1)\\to(2,3,0)$, or $(3,1,1)\\to(2,0,3)$.)\n\n**Answer: yes — if Red starts, the game (with best play by Green and Blue) never ends; if Green or Blue starts, Red wins.** (A computer search over all positions confirms this.) ∎"
+      }
+    ],
+    "topics": [
+      "games",
+      "number-theory",
+      "logic"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

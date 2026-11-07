@@ -1,0 +1,196 @@
+[
+  {
+    "id": "usamts-2001-r1-01",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 13 Round 1 (2001-2002)",
+      "year": 2001,
+      "number": 1,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "text",
+    "prompt": "Determine the unique positive two-digit integers $m$ and $n$ for which the approximation $\\frac{m}{n} \\approx 0.2328767$ is accurate to seven decimals, i.e., $0.2328767 \\le \\frac{m}{n} < 0.2328768$.",
+    "image": null,
+    "choices": null,
+    "answer": "m = 17, n = 73",
+    "acceptedAnswers": [
+      "17, 73",
+      "17,73",
+      "(17, 73)",
+      "(17,73)",
+      "m=17, n=73",
+      "17/73",
+      "m = 17 and n = 73"
+    ],
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Continued fraction",
+        "body": "Expand $\\alpha = 0.2328767$ as a continued fraction (repeatedly take the integer part and invert the remainder):\n$$\\frac1\\alpha \\approx 4 + 0.2941179,\\quad \\frac1{0.2941179} \\approx 3 + 0.3999974,\\quad \\frac1{0.3999974}\\approx 2 + 0.5000164,$$\n$$\\frac1{0.5000164}\\approx 1 + 0.9999344,\\quad \\frac{1}{0.9999344} \\approx 1 + 0.0000656,\\quad \\frac{1}{0.0000656} \\approx 15243.\\ldots$$\nso $\\alpha \\approx [0; 4, 3, 2, 1, 1, 15243, \\dots]$. The huge partial quotient $15243$ tells us that stopping just before it gives an extremely good approximation.\n\nThe convergents $\\frac{m_k}{n_k}$ (with $m_k = a_k m_{k-1} + m_{k-2}$, $n_k = a_k n_{k-1} + n_{k-2}$) are\n$$\\frac14,\\quad \\frac{3}{13},\\quad \\frac{7}{30},\\quad \\frac{10}{43},\\quad \\frac{17}{73},\\quad \\frac{259141}{1112782},\\ \\dots$$\nEquivalently, $[0;4,3,2,1,1] = [0;4,3,2,2] = \\cfrac{1}{4 + \\cfrac{1}{3 + \\cfrac{1}{2 + \\frac12}}} = \\frac{17}{73}$.\n\nCheck: $\\frac{17}{73} = 0.23287671\\ldots$, which lies in $[0.2328767, 0.2328768)$. ✓\n\n**Uniqueness.** Two different fractions $\\frac mn \\ne \\frac{m'}{n'}$ with $n, n' \\le 99$ differ by at least $\\frac{1}{nn'} \\ge \\frac{1}{99^2} > 10^{-4}$, far more than the width $10^{-7}$ of the interval, so at most one fraction with a two-digit denominator fits. And $\\frac{17}{73}$ is already in lowest terms (any equal fraction $\\frac{34}{146}, \\dots$ has a three-digit denominator).\n\n**Answer: $m = 17$, $n = 73$**"
+      },
+      {
+        "title": "Farey (mediant) search",
+        "body": "Trap $\\alpha = 0.2328767$ between two fractions and repeatedly replace one of them by the mediant $\\frac{a+c}{b+d}$ (the fraction with smallest denominator between $\\frac ab$ and $\\frac cd$):\n\n* $\\frac01 < \\alpha < \\frac11$; mediant $\\frac12 = 0.5 > \\alpha$.\n* $\\frac01 < \\alpha < \\frac12$; mediant $\\frac13 > \\alpha$; then $\\frac14 = 0.25 > \\alpha$; then $\\frac15 = 0.2 < \\alpha$.\n* $\\frac15 < \\alpha < \\frac14$; mediant $\\frac29 = 0.222 < \\alpha$; then $\\frac{3}{13} = 0.23077 < \\alpha$; then $\\frac{4}{17} = 0.23529 > \\alpha$.\n* $\\frac3{13} < \\alpha < \\frac4{17}$; mediant $\\frac{7}{30} = 0.23333 > \\alpha$.\n* $\\frac3{13} < \\alpha < \\frac7{30}$; mediant $\\frac{10}{43} = 0.232558 < \\alpha$.\n* $\\frac{10}{43} < \\alpha < \\frac{7}{30}$; mediant $\\frac{17}{73} = 0.2328767\\ldots$ — inside the required interval.\n\nEvery fraction strictly between two Farey neighbours has denominator at least the sum of theirs, so this is the fraction with the smallest denominator in the interval, and (as in the first solution) no other two-digit fraction can lie in such a narrow interval.\n\n**Answer: $m = 17$, $n = 73$**"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "fractions-decimals"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2001-r1-02",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 13 Round 1 (2001-2002)",
+      "year": 2001,
+      "number": 2,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "It is well known that there are infinitely many triples of integers $(a, b, c)$ whose greatest common divisor is 1 and which satisfy the equation $a^2 + b^2 = c^2$. Prove that there are also infinitely many triples of integers $(r, s, t)$ whose greatest common divisor is 1 and which satisfy the equation $(rs)^2 + (st)^2 = (rt)^2$.",
+    "image": null,
+    "choices": null,
+    "answer": "From a primitive Pythagorean triple $(a, b, c)$ take $r = ac$, $s = ab$, $t = bc$: then $(rs)^2 + (st)^2 = (abc)^2(a^2+b^2) = (abc^2)^2 = (rt)^2$, and $\\gcd(r,s,t) = 1$ because $a, b, c$ are pairwise coprime.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Multiply a Pythagorean triple through",
+        "body": "Let $(a, b, c)$ be positive integers with $a^2 + b^2 = c^2$ and $\\gcd(a, b, c) = 1$; there are infinitely many such triples, e.g. $(3,4,5), (5,12,13), (7,24,25), \\dots$ (in general $(2k+1,\\ 2k^2+2k,\\ 2k^2+2k+1)$).\n\n**The triple is pairwise coprime.** If a prime $p$ divided two of $a, b, c$, it would divide two of the terms $a^2$, $b^2$, $c^2$ of $a^2 + b^2 = c^2$, hence also the third, so $p$ would divide all of $a, b, c$ — impossible.\n\n**Define** $r = ac$, $s = ab$, $t = bc$. Then\n$$rs = a^2bc,\\qquad st = ab^2c,\\qquad rt = abc^2,$$\nand\n$$(rs)^2 + (st)^2 = (abc)^2(a^2 + b^2) = (abc)^2c^2 = (abc^2)^2 = (rt)^2.$$\n\n**gcd is 1.** Suppose a prime $p$ divides $r$, $s$ and $t$. From $p \\mid s = ab$, $p$ divides $a$ or $b$. If $p \\mid a$, then since $p \\mid t = bc$, $p$ divides $b$ or $c$ — so $p$ divides two of $a, b, c$, a contradiction. If $p \\mid b$, then $p \\mid r = ac$ gives the same contradiction. Hence $\\gcd(r, s, t) = 1$.\n\n**Infinitely many.** Different triples $(a, b, c)$ give different triples $(r, s, t)$, because $a, b, c$ can be recovered: $a^2 = \\frac{rs}{t}$, $b^2 = \\frac{st}{r}$, $c^2 = \\frac{rt}{s}$. Since there are infinitely many primitive triples $(a,b,c)$, there are infinitely many triples $(r, s, t)$. For example $(3,4,5)$ gives $(r,s,t) = (15, 12, 20)$: $180^2 + 240^2 = 300^2$. ∎\n\n*Remark.* Dividing $(rs)^2 + (st)^2 = (rt)^2$ by $(rst)^2$ turns it into $\\frac1{t^2} + \\frac1{r^2} = \\frac1{s^2}$, so the problem asks for \"reciprocal Pythagorean triples\", and the construction above is exactly what you get by dividing $a^2 + b^2 = c^2$ by $(abc)^2$."
+      }
+    ],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2001-r1-03",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 13 Round 1 (2001-2002)",
+      "year": 2001,
+      "number": 3,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Suppose $\\dfrac{\\cos 3x}{\\cos x} = \\dfrac{1}{3}$ for some angle $x$, $0 \\le x \\le \\frac{\\pi}{2}$. Determine $\\dfrac{\\sin 3x}{\\sin x}$ for the same $x$.",
+    "image": null,
+    "choices": null,
+    "answer": "7/3",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "answerDisplay": "$\\frac{7}{3}$",
+    "solutions": [
+      {
+        "title": "Triple-angle formulas",
+        "body": "The triple-angle formulas can be written as\n$$\\cos 3x = \\cos x\\,(4\\cos^2 x - 3) = \\cos x\\,(1 - 4\\sin^2 x),\\qquad \\sin 3x = \\sin x\\,(3 - 4\\sin^2 x) = \\sin x\\,(4\\cos^2x - 1).$$\n(For example $\\cos 3x = \\cos 2x\\cos x - \\sin 2x \\sin x = (1 - 2\\sin^2x)\\cos x - 2\\sin^2 x\\cos x = \\cos x(1 - 4\\sin^2 x)$.)\n\nSo $\\frac{\\cos 3x}{\\cos x} = 1 - 4\\sin^2 x = \\frac13$ gives $4\\sin^2 x = \\frac23$ (note $\\cos x \\ne 0$ and $\\sin x \\ne 0$ here, since $x = \\frac\\pi2$ and $x = 0$ do not satisfy the condition). Then\n$$\\frac{\\sin 3x}{\\sin x} = 3 - 4\\sin^2 x = 3 - \\frac23 = \\frac73.$$\n\n**Answer: $\\frac73$**"
+      },
+      {
+        "title": "Subtract the two ratios",
+        "body": "$$\\frac{\\sin 3x}{\\sin x} - \\frac{\\cos 3x}{\\cos x} = \\frac{\\sin 3x\\cos x - \\cos 3x \\sin x}{\\sin x\\cos x} = \\frac{\\sin(3x - x)}{\\sin x \\cos x} = \\frac{\\sin 2x}{\\tfrac12 \\sin 2x} = 2.$$\nHence $\\frac{\\sin 3x}{\\sin x} = 2 + \\frac13 = \\frac73$. (Such an $x$ exists: $\\sin^2 x = \\frac16$, $x \\approx 24.09^\\circ$.)\n\n**Answer: $\\frac73$**"
+      }
+    ],
+    "topics": [
+      "trigonometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2001-r1-04",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 13 Round 1 (2001-2002)",
+      "year": 2001,
+      "number": 4,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "text",
+    "prompt": "The *projective plane* of order three consists of 13 \"points\" and 13 \"lines\". These lines are not Euclidean straight lines; instead they are sets of four points with the properties that each pair of lines has exactly one point in common, and each pair of points has exactly one line that contains both points. Suppose the points are labeled 1 through 13, and six of the lines are $A = \\{1, 2, 4, 8\\}$, $B = \\{1, 3, 5, 9\\}$, $C = \\{2, 3, 6, 10\\}$, $D = \\{4, 5, 10, 11\\}$, $E = \\{4, 6, 9, 12\\}$, and $F = \\{5, 6, 8, 13\\}$. What is the line that contains 7 and 8?",
+    "image": null,
+    "choices": null,
+    "answer": "{7, 8, 9, 10}",
+    "acceptedAnswers": [
+      "7, 8, 9, 10",
+      "7,8,9,10",
+      "{7,8,9,10}",
+      "7 8 9 10",
+      "{7, 8, 9, 10}"
+    ],
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Complete the lines through 4, 5, 6",
+        "body": "**Each point lies on exactly 4 lines.** Fix a point $p$. Each of the other 12 points lies on exactly one line with $p$, and each line through $p$ contains 3 other points, so there are $12/3 = 4$ lines through $p$, and together they contain every other point exactly once.\n\nSo if we know three lines through $p$, the fourth line consists of $p$ and the three points not yet paired with $p$.\n\n* Point 4 is on $A, D, E$, which pair it with $1,2,8,5,10,11,6,9,12$. Missing: $3, 7, 13$. So $\\{3, 4, 7, 13\\}$ is a line.\n* Point 5 is on $B, D, F$: partners $1,3,9,4,10,11,6,8,13$. Missing: $2, 7, 12$. So $\\{2, 5, 7, 12\\}$ is a line.\n* Point 6 is on $C, E, F$: partners $2,3,10,4,9,12,5,8,13$. Missing: $1, 7, 11$. So $\\{1, 6, 7, 11\\}$ is a line.\n\nNow 7 is on three known lines, with partners $3,4,13,2,5,12,1,6,11$. The missing points are $8, 9, 10$, so the fourth line through 7 — the one containing 8 — is $\\{7, 8, 9, 10\\}$.\n\n**Answer: $\\{7, 8, 9, 10\\}$**"
+      },
+      {
+        "title": "Use that lines meet in one point",
+        "body": "Let $L$ be the line through 7 and 8. It meets $A$ and $F$ in the point 8, so it contains none of $1, 2, 4, 5, 6, 13$. Its other two points come from $\\{3, 9, 10, 11, 12\\}$, and $L$ must meet each of $B, C, D, E$ in exactly one point:\n* $B = \\{1,3,5,9\\}$: $L$ contains 3 or 9;\n* $C = \\{2,3,6,10\\}$: 3 or 10;\n* $D = \\{4,5,10,11\\}$: 10 or 11;\n* $E = \\{4,6,9,12\\}$: 9 or 12.\n\nIf $3 \\in L$, then $B$ and $C$ are met, and the last point must meet both $D$ and $E$ but lie in neither $B$ nor $C$; no point of $\\{9,10,11,12\\}$ does that ($9 \\in B$, $10 \\in C$, 11 is not in $E$, 12 is not in $D$). So $3 \\notin L$, which forces $9 \\in L$ (for $B$) and $10 \\in L$ (for $C$); these also meet $D$ (at 10) and $E$ (at 9) exactly once. ✓\n\n**Answer: $\\{7, 8, 9, 10\\}$**"
+      }
+    ],
+    "topics": [
+      "logic",
+      "counting"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2001-r1-05",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 13 Round 1 (2001-2002)",
+      "year": 2001,
+      "number": 5,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "In $\\triangle PQR$, $QR < PR < PQ$ so that the exterior angle bisector through $P$ intersects ray $\\overrightarrow{QR}$ at point $S$, and the exterior angle bisector at $R$ intersects ray $\\overrightarrow{PQ}$ at point $T$, as shown in the figure. Given that $PR = PS = RT$, determine, with proof, the measure of $\\angle PRQ$.",
+    "image": "qimages/usamts/2001-r1/q05.webp",
+    "choices": null,
+    "answer": "132",
+    "acceptedAnswers": null,
+    "answerUnit": "degrees",
+    "solutions": [
+      {
+        "title": "Chase the angles",
+        "body": "Write $\\alpha = \\angle QPR$ and $\\rho = \\angle PRQ$ (the angle we want).\n\n**Using $RP = RT$.** Let $X$ be a point on line $PR$ beyond $R$. The exterior angle of the triangle at $R$ is $\\angle QRX = 180^\\circ - \\rho$, and $RT$ bisects it, so $\\angle TRX = \\frac{180^\\circ - \\rho}{2}$. Since $T$ lies on ray $PQ$, $\\angle TPR = \\alpha$, and triangle $PRT$ is isosceles with $RP = RT$, so $\\angle RTP = \\alpha$ as well. $\\angle TRX$ is an exterior angle of triangle $PRT$, so\n$$\\frac{180^\\circ - \\rho}{2} = 2\\alpha, \\qquad\\text{i.e.}\\qquad \\alpha = \\frac{180^\\circ - \\rho}{4}.$$\n\n**Using $PR = PS$.** $S$ lies on ray $QR$ beyond $R$, so $\\angle PRS = 180^\\circ - \\rho$. Triangle $PRS$ is isosceles with $PR = PS$, so $\\angle PSR = \\angle PRS = 180^\\circ - \\rho$ and\n$$\\angle RPS = 180^\\circ - 2(180^\\circ - \\rho) = 2\\rho - 180^\\circ.$$\nOn the other hand, the exterior bisector at $P$ is perpendicular to the interior bisector, which makes the angle $\\frac\\alpha2$ with $PR$; so $\\angle RPS = 90^\\circ - \\frac\\alpha2$.\n\n**Solve.** $2\\rho - 180^\\circ = 90^\\circ - \\frac{\\alpha}{2} = 90^\\circ - \\frac{180^\\circ - \\rho}{8}$. Multiply by 8: $16\\rho - 1440^\\circ = 720^\\circ - 180^\\circ + \\rho$, so $15\\rho = 1980^\\circ$ and $\\rho = 132^\\circ$.\n\n**Check.** Then $\\alpha = 12^\\circ$ and $\\angle PQR = 36^\\circ$. The sides are opposite the angles $12^\\circ < 36^\\circ < 132^\\circ$, so $QR < PR < PQ$ as required, and $\\angle RPS = 84^\\circ = 2\\cdot132^\\circ - 180^\\circ$ is consistent. (A numerical construction with these angles indeed gives $PS = RT = PR$.) This triangle with angles $12^\\circ, 36^\\circ, 132^\\circ$ is known as the Bottema triangle.\n\n**Answer: $\\angle PRQ = 132^\\circ$**"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

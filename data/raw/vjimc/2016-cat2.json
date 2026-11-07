@@ -1,0 +1,149 @@
+[
+  {
+    "id": "vjimc-2016-cat2-01",
+    "bank": "vjimc",
+    "source": {
+      "contest": "VJIMC",
+      "paper": "VJIMC 2016 Category II",
+      "year": 2016,
+      "number": 1,
+      "url": "https://vjimc.osu.cz/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $a,b$ and $c$ be positive real numbers such that $a+b+c=1$. Show that\n$$\\left(\\frac1a+\\frac1{bc}\\right)\\left(\\frac1b+\\frac1{ca}\\right)\\left(\\frac1c+\\frac1{ab}\\right)\\ge1728 .$$",
+    "image": null,
+    "choices": null,
+    "answer": "$\\frac1a+\\frac1{bc}=\\frac{(a+b)(a+c)}{abc}$, so the product is $\\frac{[(a+b)(b+c)(c+a)]^2}{(abc)^3}\\ge\\frac{64}{abc}\\ge64\\cdot27=1728$. Equality holds at $a=b=c=\\frac13$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "AM-GM with four terms (official)",
+        "body": "Split $\\frac1{bc}$ into three equal parts and apply AM-GM to four numbers:\n$$\\frac1a+\\frac1{bc}=\\frac1a+\\frac1{3bc}+\\frac1{3bc}+\\frac1{3bc}\\ge4\\sqrt[4]{\\frac1{27\\,a\\,b^3c^3}} .$$\nMultiplying the three analogous inequalities,\n$$\\prod\\Big(\\frac1a+\\frac1{bc}\\Big)\\ge\\frac{64}{\\sqrt[4]{27^3\\,a^7b^7c^7}}=\\frac{64}{\\sqrt[4]{3^9(abc)^7}} .$$\nBy AM-GM, $abc\\le\\left(\\frac{a+b+c}3\\right)^3=3^{-3}$. Hence the right side is at least\n$$\\frac{64}{\\sqrt[4]{3^9\\cdot3^{-21}}}=64\\cdot3^{3}=1728 .$$\nEquality holds for $a=b=c=\\frac13$. ∎"
+      },
+      {
+        "title": "Factor using $a+b+c=1$",
+        "body": "Since $a+b+c=1$,\n$$\\frac1a+\\frac1{bc}=\\frac{bc+a}{abc}=\\frac{bc+a(a+b+c)}{abc}=\\frac{(a+b)(a+c)}{abc}.$$\nHence\n$$\\prod\\Big(\\frac1a+\\frac1{bc}\\Big)=\\frac{\\big[(a+b)(b+c)(c+a)\\big]^2}{(abc)^3}.$$\nBy AM-GM, $a+b\\ge2\\sqrt{ab}$ etc., so $(a+b)(b+c)(c+a)\\ge8abc$. Also $abc\\le\\frac1{27}$. Therefore\n$$\\prod\\Big(\\frac1a+\\frac1{bc}\\Big)\\ge\\frac{64(abc)^2}{(abc)^3}=\\frac{64}{abc}\\ge64\\cdot27=1728 .\\ ∎$$"
+      }
+    ],
+    "topics": [
+      "inequalities",
+      "algebra"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "vjimc-2016-cat2-02",
+    "bank": "vjimc",
+    "source": {
+      "contest": "VJIMC",
+      "paper": "VJIMC 2016 Category II",
+      "year": 2016,
+      "number": 2,
+      "url": "https://vjimc.osu.cz/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $X$ be a set and let $\\mathcal P(X)$ be the set of all subsets of $X$. Let $\\mu\\colon\\mathcal P(X)\\to\\mathcal P(X)$ be a map with the property that $\\mu(A\\cup B)=\\mu(A)\\cup\\mu(B)$ whenever $A$ and $B$ are disjoint subsets of $X$. Prove that there exists a set $F\\subset X$ such that $\\mu(F)=F$.",
+    "image": null,
+    "choices": null,
+    "answer": "$\\mu$ is monotone. Then $F=\\bigcap\\{A:\\mu(A)\\subset A\\}$ is a fixed point (Knaster–Tarski).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Monotonicity and the Knaster–Tarski argument",
+        "body": "**$\\mu$ is monotone.** If $A\\subset B$, then $B=A\\cup(B\\setminus A)$ is a disjoint union, so\n$$\\mu(B)=\\mu(A)\\cup\\mu(B\\setminus A)\\supset\\mu(A).$$\n\n**The fixed point.** Let $\\mathcal F=\\{A\\subset X:\\mu(A)\\subset A\\}$. It is nonempty because $X\\in\\mathcal F$. Put $F=\\bigcap_{A\\in\\mathcal F}A$.\n\n* For every $A\\in\\mathcal F$ we have $F\\subset A$, so $\\mu(F)\\subset\\mu(A)\\subset A$ by monotonicity. Intersecting over all $A\\in\\mathcal F$ gives $\\mu(F)\\subset F$.\n* Applying monotonicity to $\\mu(F)\\subset F$ gives $\\mu(\\mu(F))\\subset\\mu(F)$, so $\\mu(F)\\in\\mathcal F$. Hence $F\\subset\\mu(F)$.\n\nBoth inclusions give $\\mu(F)=F$. ∎"
+      },
+      {
+        "title": "The dual construction",
+        "body": "With $\\mu$ monotone as above, we can also start from below. Let $\\mathcal G=\\{A:A\\subset\\mu(A)\\}$; it contains $\\emptyset$. Put $G=\\bigcup_{A\\in\\mathcal G}A$.\n\n* For $A\\in\\mathcal G$, $A\\subset\\mu(A)\\subset\\mu(G)$, so $G\\subset\\mu(G)$.\n* Then $\\mu(G)\\subset\\mu(\\mu(G))$, so $\\mu(G)\\in\\mathcal G$ and $\\mu(G)\\subset G$.\n\nHence $\\mu(G)=G$ is also a fixed point; it is the largest one, while $F$ above is the smallest. ∎"
+      }
+    ],
+    "topics": [
+      "logic"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "vjimc-2016-cat2-03",
+    "bank": "vjimc",
+    "source": {
+      "contest": "VJIMC",
+      "paper": "VJIMC 2016 Category II",
+      "year": 2016,
+      "number": 3,
+      "url": "https://vjimc.osu.cz/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "For $n\\ge3$ find the eigenvalues (with their multiplicities) of the $n\\times n$ matrix\n$$\\begin{bmatrix}1&0&1&0&0&0&\\cdots&\\cdots&0&0\\\\0&2&0&1&0&0&\\cdots&\\cdots&0&0\\\\1&0&2&0&1&0&\\cdots&\\cdots&0&0\\\\0&1&0&2&0&1&\\cdots&\\cdots&0&0\\\\0&0&1&0&2&0&\\cdots&\\cdots&0&0\\\\0&0&0&1&0&2&\\cdots&\\cdots&0&0\\\\\\vdots&\\vdots&\\vdots&\\vdots&\\vdots&\\vdots&\\ddots&&\\vdots&\\vdots\\\\\\vdots&\\vdots&\\vdots&\\vdots&\\vdots&\\vdots&&\\ddots&\\vdots&\\vdots\\\\0&0&0&0&0&0&\\cdots&\\cdots&2&0\\\\0&0&0&0&0&0&\\cdots&\\cdots&0&1\\end{bmatrix}.$$",
+    "image": null,
+    "choices": null,
+    "answer": "$4\\cos^2\\frac{k\\pi}{n+1}$ for $k=1,\\dots,n$. For $1\\le k\\le\\lfloor n/2\\rfloor$ these are distinct and each has multiplicity $2$; for odd $n$ there is in addition the simple eigenvalue $0$ (from $k=\\frac{n+1}2$). The matrix is $B^2$ with $B$ the path adjacency matrix.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Square of the path adjacency matrix",
+        "body": "Let $B$ be the $n\\times n$ matrix with $1$ on the first super- and sub-diagonal and $0$ elsewhere (the adjacency matrix of a path). The entry $(B^2)_{ij}$ counts walks of length $2$ from $i$ to $j$:\n* it equals $1$ for $i=j\\in\\{1,n\\}$;\n* it equals $2$ for $1<i=j<n$;\n* it equals $1$ for $|i-j|=2$;\n* it equals $0$ otherwise.\n\nSo the given matrix is $A=B^2$.\n\n**Eigenvectors of $B$.** For $k=1,\\dots,n$ let $\\theta_k=\\frac{k\\pi}{n+1}$ and $v_k=\\big(\\sin\\theta_k,\\sin2\\theta_k,\\dots,\\sin n\\theta_k\\big)^T$. Since $\\sin0=\\sin(n+1)\\theta_k=0$,\n$$(Bv_k)_j=\\sin(j-1)\\theta_k+\\sin(j+1)\\theta_k=2\\cos\\theta_k\\,\\sin j\\theta_k\\qquad(1\\le j\\le n).$$\nSo $Bv_k=2\\cos\\theta_k\\,v_k$, and $v_k\\ne0$ since $\\sin\\theta_k\\ne0$. The $n$ numbers $2\\cos\\theta_k$ are distinct because $0<\\theta_1<\\dots<\\theta_n<\\pi$. Hence $v_1,\\dots,v_n$ is an eigenbasis.\n\n**Eigenvalues of $A$.** In the same basis, $Av_k=B^2v_k=4\\cos^2\\theta_k\\,v_k$. So $A$ is diagonalizable with eigenvalues $4\\cos^2\\frac{k\\pi}{n+1}$, $k=1,\\dots,n$, counted with multiplicity. Now $\\cos^2\\theta_k=\\cos^2\\theta_l$ iff $l=k$ or $l=n+1-k$.\n\n**Answer:**\n* For $k=1,\\dots,\\lfloor n/2\\rfloor$ the eigenvalue $4\\cos^2\\frac{k\\pi}{n+1}$ has multiplicity $2$.\n* If $n$ is odd, there is also the eigenvalue $4\\cos^2\\frac\\pi2=0$ with multiplicity $1$.\n\n(Example: $n=5$ gives $3,3,1,1,0$.) ∎"
+      },
+      {
+        "title": "Characteristic polynomial of $B$ (official route)",
+        "body": "Expanding $S_n(\\lambda)=\\det(\\lambda I-B)$ along the last row gives the recurrence\n$$S_n=\\lambda S_{n-1}-S_{n-2},\\qquad S_1=\\lambda,\\ S_2=\\lambda^2-1 .$$\nThis is the recurrence of the Chebyshev polynomials of the second kind, so $S_n(\\lambda)=U_n(\\lambda/2)$. With $\\lambda=2\\cos\\theta$, $\\theta\\in(0,\\pi)$, we get $S_n(\\lambda)=\\frac{\\sin(n+1)\\theta}{\\sin\\theta}$. This vanishes exactly at $\\theta=\\frac{k\\pi}{n+1}$, $k=1,\\dots,n$, which gives $n$ distinct roots $2\\cos\\frac{k\\pi}{n+1}$. Since $S_n$ has degree $n$, these are all the eigenvalues of $B$, each simple.\n\n$B$ is real symmetric, hence orthogonally diagonalizable, $B=U\\Lambda U^T$. Then $A=B^2=U\\Lambda^2U^T$ has eigenvalues $4\\cos^2\\frac{k\\pi}{n+1}$, $k=1,\\dots,n$, with multiplicities as in the first solution. ∎"
+      }
+    ],
+    "topics": [
+      "linear-algebra",
+      "trigonometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "vjimc-2016-cat2-04",
+    "bank": "vjimc",
+    "source": {
+      "contest": "VJIMC",
+      "paper": "VJIMC 2016 Category II",
+      "year": 2016,
+      "number": 4,
+      "url": "https://vjimc.osu.cz/"
+    },
+    "grade": "undergrad",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $f\\colon[0,\\infty)\\to\\mathbb R$ be a continuously differentiable function satisfying\n$$f(x)=\\int_{x-1}^xf(t)\\,dt$$\nfor all $x\\ge1$. Show that $f$ has bounded variation on $[1,\\infty)$, i.e.\n$$\\int_1^\\infty|f'(x)|\\,dx<\\infty .$$",
+    "image": null,
+    "choices": null,
+    "answer": "For $x\\ge1$, $g=f'$ satisfies $g(x)=\\int_{x-1}^xg$ and $\\int_{x-1}^x(t-x+1)g(t)\\,dt=0$. Hence $|g(x)|\\le\\frac12\\max_{[x-1,x]}|g|$, the maxima of $|f'|$ on $[n,n+1]$ decay geometrically, and $\\int_1^\\infty|f'|<\\infty$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Two identities for $f'$ and a contraction",
+        "body": "Let $g=f'$, which is continuous on $[0,\\infty)$. Fix $x\\ge1$.\n\n**Identity 1.** Differentiating $f(x)=\\int_{x-1}^xf$ (the right side is differentiable since $f$ is continuous) gives\n$$g(x)=f(x)-f(x-1)=\\int_{x-1}^xg(t)\\,dt\\qquad(x\\ge1).$$\n\n**Identity 2.** Integrate by parts:\n$$\\int_{x-1}^x(t-x+1)\\,g(t)\\,dt=\\Big[(t-x+1)f(t)\\Big]_{t=x-1}^{t=x}-\\int_{x-1}^xf(t)\\,dt=f(x)-f(x)=0 .$$\n\n**Contraction.** Let $M(x)=\\max_{[x-1,x]}|g|$. Combining the two identities,\n$$g(x)=\\int_{x-1}^xg(t)\\,dt-2\\int_{x-1}^x(t-x+1)g(t)\\,dt=\\int_{x-1}^x\\big(1-2(t-x+1)\\big)g(t)\\,dt .$$\nHence\n$$|g(x)|\\le M(x)\\int_0^1|1-2s|\\,ds=\\tfrac12M(x).\\tag{$*$}$$\n\n**Geometric decay.** Let $M_n=\\max_{[n,n+1]}|g|$ for $n\\ge0$. For $n\\ge1$ and $x\\in[n,n+1]$, $(*)$ gives $|g(x)|\\le\\frac12\\max(M_{n-1},M_n)$.\n* If $M_n>M_{n-1}$, choose $x$ with $|g(x)|=M_n$. Then $M_n\\le\\frac12M_n$, so $M_n=0\\le M_{n-1}$, a contradiction.\n* Hence $M_n\\le M_{n-1}$, and then $M_n\\le\\frac12M_{n-1}$.\n\nSo $M_n\\le2^{-n}M_0$ and\n$$\\int_1^\\infty|f'(x)|\\,dx=\\sum_{n\\ge1}\\int_n^{n+1}|g|\\le\\sum_{n\\ge1}2^{-n}M_0=M_0<\\infty .\\ ∎$$\n\n*Remarks.*\n* Choosing the weight optimally, $\\min_\\lambda\\int_0^1|1-\\lambda s|\\,ds=\\sqrt2-1$, improves the constant $\\frac12$ to $\\sqrt2-1$.\n* The official solution argues differently. It shows that the maximum $A_n$ and minimum $B_n$ of $f$ on $[n,n+1]$ are monotone, then proves the quantitative bound $d_{n+2}\\le d_n-\\frac{d_n^5}{64d_{n-1}^4}$ for $d_n=A_n-B_n$. From this, $d_{n+2}/d_{n-2}\\le\\frac{63}{64}$ and $\\sum d_n<\\infty$; finally $|f'|\\le d_{n-1}$ on $[n,n+1]$ because $f'(x)=f(x)-f(x-1)$."
+      }
+    ],
+    "topics": [
+      "real-analysis",
+      "calculus"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

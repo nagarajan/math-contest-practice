@@ -1,0 +1,190 @@
+[
+  {
+    "id": "usamts-2014-r1-01",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 26 Round 1 (2014-2015)",
+      "year": 2014,
+      "number": 1,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Divide the grid shown below into more than one region so that the following rules are satisfied.\n\n1. Each unit square lies entirely within exactly 1 region.\n2. Each region is a single piece connected by the edges of its unit squares.\n3. Each region contains the same number of whole unit squares.\n4. Each region contains the same sum of numbers.\n\n$$\\begin{array}{|c|c|c|c|c|c|c|c|}\\hline \\phantom{0} & \\phantom{0} & \\phantom{0} & \\phantom{0} & \\phantom{0} & 6 & 5 & 6\\\\\\hline 4 & \\phantom{0} & \\phantom{0} & 2 & \\phantom{0} & \\phantom{0} & 4 & \\phantom{0}\\\\\\hline \\phantom{0} & 3 & \\phantom{0} & 3 & \\phantom{0} & 4 & \\phantom{0} & \\phantom{0}\\\\\\hline \\phantom{0} & \\phantom{0} & \\phantom{0} & \\phantom{0} & 4 & \\phantom{0} & \\phantom{0} & \\phantom{0}\\\\\\hline \\phantom{0} & \\phantom{0} & 4 & \\phantom{0} & \\phantom{0} & \\phantom{0} & 3 & \\phantom{0}\\\\\\hline \\phantom{0} & 4 & \\phantom{0} & \\phantom{0} & 4 & \\phantom{0} & \\phantom{0} & 4\\\\\\hline 1 & 1 & 1 & \\phantom{0} & \\phantom{0} & \\phantom{0} & \\phantom{0} & \\phantom{0}\\\\\\hline\\end{array}$$\n\nYou do not need to prove that your configuration is the only one possible; you merely need to find a configuration that works.",
+    "image": null,
+    "choices": null,
+    "answer": "Seven regions of 8 squares, each with sum 9 (letters = regions, subscripts = the printed numbers):\n$$\\begin{array}{cccccccc} A & A & A & A & A & A_{6} & B_{5} & C_{6}\\\\ D_{4} & A & E & E_{2} & B & B & B_{4} & C\\\\ D & A_{3} & E & E_{3} & E & E_{4} & B & C\\\\ D & E & E & F & F_{4} & B & B & C\\\\ D & D & D_{4} & F & F & B & C_{3} & C\\\\ D & F_{4} & F & F & G_{4} & C & C & G_{4}\\\\ D_{1} & F_{1} & G_{1} & G & G & G & G & G\\end{array}$$",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Count first, then build the regions",
+        "body": "**How many regions?** The grid has $7\\cdot 8 = 56$ squares and its numbers add up to $63$. If there are $n > 1$ regions, each with $a$ squares and number-sum $s$, then $na = 56$ and $ns = 63$, so $n$ is a common divisor of 56 and 63 larger than 1: $n = 7$, $a = 8$, $s = 9$.\n\n**Which numbers go together?** No region can hold two of the $6, 5, 6$ in the top-right (sum too big). An 8-square region cannot reach from those top numbers to the 1s in the bottom-left corner. So a region with a 6 must be $\\{6, 3\\}$ and the region with the 5 must be $\\{5, 4\\}$. The remaining numbers are $1, 1, 1, 2, 3$ and seven 4s. A sum of 9 containing a 1 must be $1 + 4 + 4$, so the three 1s go in three regions $\\{1, 4, 4\\}$, and the last region is $\\{2, 3, 4\\}$:\n$$\\{1,4,4\\},\\ \\{1,4,4\\},\\ \\{1,4,4\\},\\ \\{2,3,4\\},\\ \\{3,6\\},\\ \\{3,6\\},\\ \\{4,5\\}.$$\n\n**Build it.** Trial and error (each 6 needs a 3 within reach, the 1s along the bottom each need two 4s) leads to the partition below. Letters name the regions, and subscripts show the printed numbers:\n$$\\begin{array}{cccccccc} A & A & A & A & A & A_{6} & B_{5} & C_{6}\\\\ D_{4} & A & E & E_{2} & B & B & B_{4} & C\\\\ D & A_{3} & E & E_{3} & E & E_{4} & B & C\\\\ D & E & E & F & F_{4} & B & B & C\\\\ D & D & D_{4} & F & F & B & C_{3} & C\\\\ D & F_{4} & F & F & G_{4} & C & C & G_{4}\\\\ D_{1} & F_{1} & G_{1} & G & G & G & G & G\\end{array}$$\nRegion contents: $A = \\{6, 3\\}$, $B = \\{5, 4\\}$, $C = \\{6, 3\\}$, $D = \\{4, 4, 1\\}$, $E = \\{2, 3, 4\\}$, $F = \\{4, 4, 1\\}$, $G = \\{4, 4, 1\\}$; every region has 8 squares and sum 9. (A computer search shows this partition is the only one.)"
+      }
+    ],
+    "topics": [
+      "logic",
+      "spatial",
+      "arithmetic"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2014-r1-02",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 26 Round 1 (2014-2015)",
+      "year": 2014,
+      "number": 2,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "text",
+    "prompt": "Find all triples $(x, y, z)$ such that $x$, $y$, $z$, $x - y$, $y - z$, $x - z$ are all prime positive integers.",
+    "image": null,
+    "choices": null,
+    "answer": "(7, 5, 2)",
+    "acceptedAnswers": [
+      "(7,5,2)",
+      "7, 5, 2",
+      "7,5,2",
+      "x=7, y=5, z=2",
+      "7 5 2"
+    ],
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Parity, then divisibility by 3",
+        "body": "Since $x - y$, $y - z$ and $x - z$ are positive, $x > y > z$.\n\nAt most one of $x, y, z$ is even (2 is the only even prime). If all three were odd, then $x - y$ and $x - z$ would be two different even primes, which is impossible. So exactly one of them is 2, and since 2 is the smallest prime, $z = 2$.\n\nNow $x, y$ are odd, so $x - y$ is an even prime: $x - y = 2$. The triple is $(y + 2, y, 2)$, and we need $y - 2$, $y$, $y + 2$ all prime. These three numbers leave different remainders mod 3, so one of them is divisible by 3 and must equal 3. Since $y - 2 \\ge 2$, we have $y \\ge 4$, so only $y - 2 = 3$ is possible: $y = 5$, $x = 7$.\n\nCheck: $7, 5, 2, 7 - 5 = 2, 5 - 2 = 3, 7 - 2 = 5$ are all prime. ✓\n\n**Answer: $(x, y, z) = (7, 5, 2)$**"
+      }
+    ],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2014-r1-03",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 26 Round 1 (2014-2015)",
+      "year": 2014,
+      "number": 3,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "text",
+    "prompt": "A group of people is lined up in *almost-order* if, whenever person $A$ is to the left of person $B$ in the line, $A$ is not more than 8 centimeters taller than $B$. For example, five people with heights 160, 165, 170, 175, and 180 centimeters could line up in almost-order with heights (from left-to-right) of 160, 170, 165, 180, 175 centimeters.\n\n(a) How many different ways are there to line up 10 people in almost-order if their heights are 140, 145, 150, 155, 160, 165, 170, 175, 180, and 185 centimeters?\n\n(b) How many different ways are there to line up 20 people in almost-order if their heights are 120, 125, 130, 135, 140, 145, 150, 155, 160, 164, 165, 170, 175, 180, 185, 190, 195, 200, 205, and 210 centimeters? (Note that there is someone of height 164 centimeters.)",
+    "image": null,
+    "choices": null,
+    "answer": "(a) 89, (b) 23322",
+    "acceptedAnswers": [
+      "89, 23322",
+      "89,23322",
+      "(a) 89 (b) 23322",
+      "a) 89, b) 23322",
+      "89 and 23322",
+      "89; 23322",
+      "89 23322"
+    ],
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Fibonacci lemma and cases",
+        "body": "**Lemma.** If $n$ people have heights $a, a + 5, \\dots, a + 5(n-1)$, they can be lined up in almost-order in $F_{n+1}$ ways, where $F_1 = F_2 = 1$, $F_{k} = F_{k-1} + F_{k-2}$.\n\n*Proof.* Induction; $n = 1, 2$ give $1 = F_2$ and $2 = F_3$. For $n > 2$ look at the tallest person. Everyone to his right must be at most 8 cm shorter than him, and only the second-tallest (5 cm shorter) qualifies. So either the tallest is last (the others form any almost-order: $F_n$ ways), or the line ends with \"tallest, second-tallest\" (the other $n - 2$ in any almost-order: $F_{n-1}$ ways). Total $F_n + F_{n-1} = F_{n+1}$. ∎\n\n**(a)** Ten people at 5 cm steps: $F_{11} = 89$.\n\n**(b)** Only persons 160 and 170 can stand between persons 164 and 165. (Anyone between them is to the right of one and to the left of the other, which forces $155 < h < 174$.) Using the lemma ($F_9 = 34$, $F_{10} = 55$, $F_{20} = 6765$):\n* *Nobody between 164 and 165.* Line up the other 19 people (5 cm steps) in $F_{20} = 6765$ ways, then put 164 immediately left or right of 165: $2\\cdot 6765 = 13530$.\n* *Only 160 between them.* Say 164 is left of 165. Then everyone $\\le 155$ (8 people) is to the left of the block and everyone $\\ge 170$ (9 people) to its right: $34\\cdot 55 = 1870$. Doubling for the mirror order gives $3740$.\n* *Only 170 between them.* Symmetrically $55\\cdot 34\\cdot 2 = 3740$.\n* *Both 160 and 170 between them* (160 must be left of 170): the blocks are $164, 160, 170, 165$ or $165, 160, 170, 164$, with 8 people on each side: $2\\cdot 34\\cdot 34 = 2312$.\n\nTotal: $13530 + 3740 + 3740 + 2312 = 23322$.\n\n**Answer: (a) 89, (b) 23322**"
+      },
+      {
+        "title": "Check by computer",
+        "body": "Build the line from left to right. A person may be added exactly when no one already placed is more than 8 cm taller, i.e. when (tallest so far) $\\le h + 8$. A dynamic program over the subsets of people already placed counts all such orders: it gives $89$ for the ten people in (a) and $23322$ for the twenty people in (b), matching the case analysis."
+      }
+    ],
+    "topics": [
+      "counting",
+      "sequences-series"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2014-r1-04",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 26 Round 1 (2014-2015)",
+      "year": 2014,
+      "number": 4,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $\\omega_P$ and $\\omega_Q$ be two circles of radius 1, intersecting in points $A$ and $B$. Let $P$ and $Q$ be two regular $n$-gons (for some positive integer $n \\ge 4$) inscribed in $\\omega_P$ and $\\omega_Q$, respectively, such that $A$ and $B$ are vertices of both $P$ and $Q$. Suppose a third circle $\\omega$ of radius 1 intersects $P$ at two of its vertices $C$, $D$ and intersects $Q$ at two of its vertices $E$, $F$. Further assume that $A, B, C, D, E, F$ are all distinct points, that $A$ lies outside of $\\omega$, and that $B$ lies inside $\\omega$. Show that there exists a regular $2n$-gon that contains $C, D, E, F$ as four of its vertices.",
+    "image": null,
+    "choices": null,
+    "answer": "With $s = \\frac{2\\pi}{n}$, the arcs $x = CF$, $y = FD$, $z = DE$ of $\\omega$ satisfy: $x + y$, $y + z$ are multiples of $s$ (equal chords in equal circles), and $x + z$ is too (angle sum of triangle $BDF$ via inscribed angles). Hence $x, y, z$ are multiples of $\\frac s2$, so $C, F, D, E$ are vertices of a regular $2n$-gon inscribed in $\\omega$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Arc lengths in three unit circles",
+        "body": "All three circles have radius 1, so an inscribed angle equals half of the **length** of the arc it subtends, and equal chords cut off equal arcs. Let $s = \\frac{2\\pi}{n}$; consecutive vertices of $P$ (or $Q$) are an arc $s$ apart on their circle, so any arc of $\\omega_P$ between two vertices of $P$ (e.g. $AD$, $DB$, $BC$) has length a multiple of $s$, and likewise on $\\omega_Q$.\n\n**Configuration.** Since $B$ is inside $\\omega$ and $A$ outside, one of $C, D$ lies inside $\\omega_Q$ and one of $E, F$ inside $\\omega_P$. Say $D$ and $F$ (as in the natural picture); then the order on $\\omega$ is $C, F, D, E$. Let $x, y, z$ be the lengths of the arcs $CF$, $FD$, $DE$ of $\\omega$.\n\n**Goal.** It suffices to show that $x, y, z$ are multiples of $\\frac s2$. Then $C, F, D, E$ are among the vertices of the regular $2n$-gon inscribed in $\\omega$ with a vertex at $C$, since its vertices are spaced at arcs of $\\frac{s}{2}$.\n\n1. **$x + y$.** The chord $CD$ belongs to both $\\omega$ and $\\omega_P$, and these circles have equal radii, so the arc $C$–$F$–$D$ of $\\omega$ (length $x + y$) has the same length as the minor or the major arc $CD$ of $\\omega_P$. Both of those arcs are multiples of $s$ (since $2\\pi = ns$). So $s \\mid x + y$.\n2. **$y + z$.** The same argument with the chord $FE$, common to $\\omega$ and $\\omega_Q$, shows that the arc $F$–$D$–$E$ of $\\omega$ has length a multiple of $s$: $s \\mid y + z$.\n3. **$x + z$.** In triangle $BDF$, split each angle along the line to the next point:\n   * $\\angle BDF = \\angle BDC + \\angle CDF$, so $2\\angle BDF = \\widehat{BC}_{\\omega_P} + \\widehat{CF}_{\\omega}$;\n   * $\\angle DFB = \\angle DFE + \\angle EFB$, so $2\\angle DFB = \\widehat{DE}_{\\omega} + \\widehat{EB}_{\\omega_Q}$;\n   * $\\angle FBD = \\angle FBA + \\angle ABD$, so $2\\angle FBD = \\widehat{AF}_{\\omega_Q} + \\widehat{AD}_{\\omega_P}$.\n\n   Adding, $2\\pi = x + z + (\\widehat{BC} + \\widehat{EB} + \\widehat{AF} + \\widehat{AD})$. The bracket is a multiple of $s$, and so is $2\\pi = ns$; hence $s \\mid x + z$.\n\nFinally\n$$x = \\frac{(x + y) + (x + z) - (y + z)}{2},$$\nand similarly for $y$ and $z$, so each is a multiple of $\\frac s2$. ∎"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2014-r1-05",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 26 Round 1 (2014-2015)",
+      "year": 2014,
+      "number": 5,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $a_0, a_1, a_2, \\dots$ be a sequence of nonnegative integers such that $a_2 = 5$, $a_{2014} = 2015$, and $a_n = a_{a_{n-1}}$ for all positive integers $n$. Find all possible values of $a_{2015}$.",
+    "image": null,
+    "choices": null,
+    "answer": "$a_{2015}$ can be $2015$ or any even integer $\\ge 4$ (and nothing else).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "The tail alternates; then pin down $a_0, a_1$",
+        "body": "Let $x = a_3$ and $y = a_4$. Then\n$$x = a_3 = a_{a_2} = a_5 = a_{a_4} = a_y,\\qquad y = a_4 = a_{a_3} = a_x.$$\n**Claim:** $a_n = x$ for odd $n \\ge 3$ and $a_n = y$ for even $n \\ge 4$. By induction: for odd $n > 4$, $a_n = a_{a_{n-1}} = a_y = x$; for even $n$, $a_n = a_{a_{n-1}} = a_x = y$.\n\nSo $y = a_{2014} = 2015$, the sequence is $a_0, a_1, 5, x, 2015, x, 2015, \\dots$, $a_{2015} = x$, and we need $a_x = 2015$.\n\n**Find $a_1$** from $5 = a_2 = a_{a_1}$:\n* $a_1 = 1$: then $a_1 = 5$, contradiction. $a_1$ even $\\ge 4$: $a_{a_1} = 2015 \\ne 5$.\n* $a_1$ odd $\\ge 3$: then $x = 5$, but $a_x = a_5 = x = 5 \\ne 2015$.\n* $a_1 = 0$: then $a_0 = 5$ and $a_1 = a_{a_0} = a_5 = x$, so $x = 0$ and $a_x = a_0 = 5 \\ne 2015$.\n* $a_1 = 2$: then $2 = a_1 = a_{a_0}$. Here $a_0 = 0$ or $2$ fail directly, $a_0$ even $\\ge 4$ gives 2015, and $a_0$ odd $\\ge 3$ gives $x = 2$, so $a_x = a_2 = 5 \\ne 2015$. So $a_0 = 1$.\n\nSo the sequence is $1, 2, 5, x, 2015, x, 2015, \\dots$ and the only remaining condition is $a_x = 2015$. Now $x = 0, 1, 2$ give $a_x = 1, 2, 5$. An odd $x \\ge 3$ gives $a_x = x$, so we need $x = 2015$. Every even $x \\ge 4$ gives $a_x = 2015$. ✓\n\nConversely, each such $x$ works: $a_1 = a_{a_0} = a_1$, $a_2 = a_{a_1} = a_2$, $a_3 = a_{a_2} = a_5 = x$, $a_4 = a_x = 2015$, and the alternating tail satisfies the recursion since $a_{2015} = x$ and $a_x = 2015$.\n\n**Answer: $a_{2015} = 2015$ or any even integer $x \\ge 4$.**"
+      }
+    ],
+    "topics": [
+      "sequences-series",
+      "functional-equations",
+      "logic"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

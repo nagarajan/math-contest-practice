@@ -1,0 +1,188 @@
+[
+  {
+    "id": "usamts-2018-r2-01",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 30 Round 2 (2018-2019)",
+      "year": 2018,
+      "number": 1,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "The grid shown consists of 74 unit squares, marked by gridlines (its rows have 4, 8, 10, 10, 10, 10, 10, 8, 4 squares, centered). Partition the grid into five regions along the gridlines so that the areas of the regions are 1, 13, 19, 20, and 21. A square with a number should be contained in the region with that area.\n\nYou do not need to prove that your answer is the only one possible; you merely need to find an answer that satisfies the constraints above.",
+    "image": "qimages/usamts/2018-r2/q01.webp",
+    "choices": null,
+    "answer": "Each square labelled with the area of its region (official solution):\n$$\\begin{array}{cccccccccc} &  &  & 19 & 19 & 19 & 19 &  &  &  \\\\  & 21 & 21 & 19 & 19 & 13 & 19 & 19 & 19 &  \\\\ 21 & 21 & 19 & 19 & 13 & 13 & 13 & 13 & 19 & 20 \\\\ 21 & 21 & 19 & 13 & 13 & 20 & 19 & 19 & 19 & 20 \\\\ 21 & 21 & 19 & 1 & 13 & 20 & 19 & 20 & 19 & 20 \\\\ 21 & 21 & 21 & 21 & 13 & 20 & 20 & 20 & 20 & 20 \\\\ 21 & 21 & 21 & 21 & 13 & 13 & 13 & 13 & 20 & 20 \\\\  & 21 & 21 & 21 & 21 & 21 & 20 & 20 & 20 &  \\\\  &  &  & 20 & 20 & 20 & 20 &  &  & \\end{array}$$",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Start from the tiny region",
+        "body": "Write $(r, c)$ for row $r$, column $c$. The region of area 1 is just the square marked 1 at $(5, 4)$, so its neighbours belong to other regions. The middle row reads $21, 19, 1, 13, 20, 19, 20, 19$, so the 19-region must reach $(5,3)$, $(5,7)$ and $(5,9)$ and also the marked squares $(2,5)$ and $(3,3)$, while the 20-region must reach $(5,6)$ and $(5,8)$ in between: the 19- and 20-regions have to interlock, the 19-region coming down from the top and the 20-region coming up from the bottom right. The 13-region must contain $(5,5)$, $(3,8)$ and $(7,8)$, and the 21-region the squares $(5,2)$, $(7,3)$ and $(8,6)$ on the left and bottom. Fitting these shapes with the exact areas gives\n$$\\begin{array}{cccccccccc} &  &  & 19 & 19 & 19 & 19 &  &  &  \\\\  & 21 & 21 & 19 & 19 & 13 & 19 & 19 & 19 &  \\\\ 21 & 21 & 19 & 19 & 13 & 13 & 13 & 13 & 19 & 20 \\\\ 21 & 21 & 19 & 13 & 13 & 20 & 19 & 19 & 19 & 20 \\\\ 21 & 21 & 19 & 1 & 13 & 20 & 19 & 20 & 19 & 20 \\\\ 21 & 21 & 21 & 21 & 13 & 20 & 20 & 20 & 20 & 20 \\\\ 21 & 21 & 21 & 21 & 13 & 13 & 13 & 13 & 20 & 20 \\\\  & 21 & 21 & 21 & 21 & 21 & 20 & 20 & 20 &  \\\\  &  &  & 20 & 20 & 20 & 20 &  &  & \\end{array}$$\n\n**Check.** Counting squares: region 1 has 1 square, region 13 has 13, region 19 has 19, region 20 has 20 and region 21 has 21 (total 74); each region is connected along gridlines, and every marked square lies in the region of its number (e.g. the 21 in row 8 is in the 21-region, the two 13's on the right in rows 3 and 7 are in the 13-region, which runs down column 5 and along rows 3 and 7).\n\n**Answer: the partition above.**"
+      }
+    ],
+    "topics": [
+      "logic",
+      "spatial"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2018-r2-02",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 30 Round 2 (2018-2019)",
+      "year": 2018,
+      "number": 2,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Given a set of positive integers $R$, we define the *friend set* of $R$ to be all positive integers which are divisible by at least one number in $R$. The friend set of $R$ is denoted by $\\mathcal F(R)$. A set $G$ is called *unfriendly* if no element of $G$ is a divisor of another element of $G$.\n\nLet $S_1$ and $S_2$ be unfriendly sets. Suppose that $\\mathcal F(S_1) = \\mathcal F(S_2)$. Show that $S_1 = S_2$.",
+    "image": null,
+    "choices": null,
+    "answer": "Take the smallest $n$ in exactly one of the sets, say $n \\in S_1 \\setminus S_2$; then $n \\in \\mathcal F(S_2)$ gives a proper divisor $d \\in S_2$ of $n$, and minimality puts $d \\in S_1$ too, contradicting that $S_1$ is unfriendly.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Smallest element of the symmetric difference",
+        "body": "Suppose $S_1 \\ne S_2$, and let $n$ be the smallest positive integer belonging to exactly one of them; say $n \\in S_1$, $n \\notin S_2$.\n\nSince $n \\in S_1$, $n \\in \\mathcal F(S_1) = \\mathcal F(S_2)$, so some $d \\in S_2$ divides $n$. As $n \\notin S_2$, $d \\ne n$, so $d$ is a proper divisor and $d < n$. By the minimality of $n$, $d$ is not in exactly one of the sets; since $d \\in S_2$, also $d \\in S_1$. But then $S_1$ contains $d$ and its multiple $n \\ne d$, contradicting that $S_1$ is unfriendly. Hence $S_1 = S_2$. ∎"
+      },
+      {
+        "title": "Characterize $S$ by $\\mathcal F(S)$",
+        "body": "For an unfriendly set $S$ we claim $S$ is exactly the set of *minimal* elements of $\\mathcal F(S)$ under divisibility, i.e. the $m \\in \\mathcal F(S)$ with no proper divisor in $\\mathcal F(S)$.\n\n* If $s \\in S$ had a proper divisor $m \\in \\mathcal F(S)$, then some $s' \\in S$ divides $m$, hence divides $s$, with $s' \\le m < s$: contradiction with unfriendliness. So elements of $S$ are minimal.\n* If $m \\in \\mathcal F(S)$ is minimal, some $s \\in S$ divides $m$, and $s \\in \\mathcal F(S)$; minimality forces $s = m$, so $m \\in S$.\n\nThus $S$ is determined by $\\mathcal F(S)$, and $\\mathcal F(S_1) = \\mathcal F(S_2)$ gives $S_1 = S_2$. ∎"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "logic"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2018-r2-03",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 30 Round 2 (2018-2019)",
+      "year": 2018,
+      "number": 3,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Alice, Bob, and Chebyshev play a game. Alice puts six red chips into a bag, Bob puts seven blue chips into the bag, and Chebyshev puts eight green chips into the bag. Then, the almighty Zan randomly removes chips from the bag one at a time and gives them back to the corresponding player. The winner of the game is the first player to get all of their chips back. Find, with proof, the probability that Bob wins the game.",
+    "image": null,
+    "choices": null,
+    "answer": "64/195",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "answerDisplay": "$\\frac{64}{195}$",
+    "solutions": [
+      {
+        "title": "Last chips and inclusion–exclusion",
+        "body": "Imagine Zan removes all 21 chips in a uniformly random order. Bob wins iff the last blue chip comes before both the last red chip and the last green chip. Let $E_R$ = \"last blue before last red\", $E_G$ = \"last blue before last green\"; we want $P(E_R \\cap E_G) = P(E_R) + P(E_G) - P(E_R \\cup E_G)$.\n\n* $E_R$ happens iff, among the 13 red and blue chips, the one removed last is red: by symmetry each of the 13 is equally likely to be last, so $P(E_R) = \\frac{6}{13}$.\n* Similarly $P(E_G) = \\frac{8}{15}$.\n* $E_R \\cup E_G$ fails only if the last blue chip comes after the last red and the last green, i.e. the very last of all 21 chips is blue: probability $\\frac{7}{21} = \\frac13$. So $P(E_R \\cup E_G) = \\frac23$.\n\nHence\n$$P(\\text{Bob wins}) = \\frac{6}{13} + \\frac{8}{15} - \\frac23 = \\frac{90 + 104 - 130}{195} = \\frac{64}{195} \\approx 32.8\\%.$$\n\n**Answer: $\\frac{64}{195}$**"
+      },
+      {
+        "title": "Recursion check",
+        "body": "Let $P(r, b, g)$ be Bob's winning probability with $r, b, g$ chips of each color left in the bag. Then $P(r, 0, g) = 1$ for $r, g > 0$, $P(0, b, g) = P(r, b, 0) = 0$ for $b > 0$, and\n$$P(r, b, g) = \\frac{r\\,P(r-1,b,g) + b\\,P(r,b-1,g) + g\\,P(r,b,g-1)}{r+b+g}.$$\nEvaluating exactly (by computer, with fractions) gives $P(6, 7, 8) = \\frac{64}{195}$.\n\n**Answer: $\\frac{64}{195}$**"
+      }
+    ],
+    "topics": [
+      "probability",
+      "counting"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2018-r2-04",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 30 Round 2 (2018-2019)",
+      "year": 2018,
+      "number": 4,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "text",
+    "prompt": "Find, with proof, all ordered pairs of positive integers $(a, b)$ with the following property: there exist positive integers $r$, $s$, and $t$ such that for all $n$ for which both sides are defined,\n$$\\binom{\\binom na}{b} = r\\binom{n+s}{t}.$$",
+    "image": null,
+    "choices": null,
+    "answer": "(2, 2)",
+    "acceptedAnswers": [
+      "(2,2)",
+      "2, 2",
+      "2,2",
+      "a=2, b=2",
+      "a = 2, b = 2",
+      "only (2, 2)"
+    ],
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Compare roots of polynomials",
+        "body": "Treat $\\binom xk = \\frac{x(x-1)\\cdots(x-k+1)}{k!}$ as a polynomial in $x$. Both sides are polynomials in $n$ that agree for infinitely many $n$, so they are identical.\n\n**$a = 1$ or $b = 1$ fail.** If $a = 1$ the identity is $\\binom nb = r\\binom{n+s}{t}$; comparing degrees, $t = b$, and then for integers $n > b$, $\\binom nb < \\binom{n+s}{b} \\le r\\binom{n+s}{b}$ since $s \\ge 1$. If $b = 1$ it reads $\\binom na = r\\binom{n+s}t$, and the same argument applies. So $a, b \\ge 2$.\n\n**Roots.** The right side $\\frac{r}{t!}(n+s)(n+s-1)\\cdots(n+s-t+1)$ has $t$ distinct integer roots. The left side is $\\frac{1}{b!}\\prod_{i=0}^{b-1}\\left(\\binom na - i\\right)$, so every polynomial $\\binom na - i$ ($0 \\le i \\le b-1$, each of degree $a$) must have $a$ distinct integer roots.\n\nWhich integers $n$ satisfy $\\binom na = 1$? For $0 \\le n \\le a-1$, $\\binom na = 0$; $\\binom aa = 1$; for $n \\ge a+1$, $\\binom na \\ge a + 1 \\ge 3$. For negative $n$, $\\binom na = (-1)^a\\binom{a-1-n}{a}$ with $a - 1 - n \\ge a$, which has absolute value 1 only for $n = -1$. So $\\binom na - 1$ has at most two integer roots, forcing $a \\le 2$, i.e. $a = 2$. Then $\\binom n2 = 2$ means $n(n-1) = 4$, which has no integer roots, so $i = 2$ cannot occur: $b \\le 2$, i.e. $b = 2$.\n\n**$(2, 2)$ works:**\n$$\\binom{\\binom n2}{2} = \\frac12\\cdot\\frac{n(n-1)}2\\left(\\frac{n(n-1)}2 - 1\\right) = \\frac{n(n-1)(n-2)(n+1)}{8} = 3\\binom{n+1}{4},$$\nso $r = 3$, $s = 1$, $t = 4$. (Check $n = 4$: $\\binom62 = 15 = 3\\binom54$.)\n\n**Answer: $(a, b) = (2, 2)$**"
+      }
+    ],
+    "topics": [
+      "polynomials",
+      "counting",
+      "algebra"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2018-r2-05",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 30 Round 2 (2018-2019)",
+      "year": 2018,
+      "number": 5,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Acute scalene triangle $\\triangle ABC$ has circumcenter $O$ and orthocenter $H$. Points $X$ and $Y$, distinct from $B$ and $C$, lie on the circumcircle of $\\triangle ABC$ such that $\\angle BXH = \\angle CYH = 90^\\circ$. Show that if lines $XY$, $AH$, and $BC$ are concurrent, then $OH$ is parallel to $BC$.",
+    "image": null,
+    "choices": null,
+    "answer": "With $D$ the foot from $A$, $R = BX \\cap CY$ is the radical center of the circumcircle and the circles on diameters $BH, CH$, so $R \\in AD$; $XDY$ is the Simson line of $H$ in $\\triangle BCR$, so $R$ is the reflection of $A$ in $BC$; power of a point then gives $AH = HS$ ($S$ = second intersection of $AD$ with the circumcircle), so $OH \\perp AS$, i.e. $OH \\parallel BC$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Radical center and Simson line (official idea)",
+        "body": "Let $D$ be the foot of the altitude from $A$; by hypothesis $D$ lies on line $XY$. Let $\\omega$ be the circumcircle, $\\omega_B$ the circle with diameter $BH$ and $\\omega_C$ the circle with diameter $CH$. Since $\\angle BDH = \\angle BXH = 90^\\circ$, both $D, X \\in \\omega_B$; similarly $D, Y \\in \\omega_C$. Both $\\omega_B$ and $\\omega_C$ pass through $H$ and $D$.\n\n**Step 1: $R = BX \\cap CY$ lies on $AD$.** The radical axes of the pairs $(\\omega, \\omega_B)$, $(\\omega, \\omega_C)$, $(\\omega_B, \\omega_C)$ are the lines $BX$, $CY$, $HD = AD$. They are concurrent or all parallel. If they were parallel, then $BX \\perp BC$ and $CY \\perp BC$, so $X, Y$ would be the antipodes of $C, B$ and $XY$ would be parallel to $BC$, contradicting that $XY$ meets $BC$. So $R = BX \\cap CY$ exists and lies on line $AD$. Also $R \\ne D$ (else $X$ would lie on line $BC$).\n\n**Step 2: $R$ is the reflection $A'$ of $A$ in $BC$.** $D, X, Y$ are the feet of the perpendiculars from $H$ to the lines $BC$, $BR$, $CR$ (as $\\angle HXB = \\angle HYC = 90^\\circ$). They are collinear, so by the converse of the Simson line theorem $H$ lies on the circumcircle of $BCR$. The circle through $B, C, H$ is the reflection of $\\omega$ in $BC$ (because the reflection $S$ of $H$ in $BC$ lies on $\\omega$ — a well-known fact). That circle meets line $AD$ exactly at $H$ and at $A'$, the reflections of $S$ and $A$. $R \\neq H$ (a line $BX$ through $H$ cannot make $\\angle BXH = 90^\\circ$ with $X \\ne H$ on it), so $R = A'$ and $RD = AD$.\n\n**Step 3: lengths on line $AD$.** $S$ (the second intersection of $AD$ with $\\omega$) satisfies $DS = DH$. Power of $R$: with respect to $\\omega$, $RS\\cdot RA = RB\\cdot RX$; with respect to $\\omega_B$, $RB\\cdot RX = RD\\cdot RH$. Hence $RS\\cdot RA = RD\\cdot RH$, and as $RA = 2RD$, $RH = 2RS$. Writing $h = DH = DS$ and $m = RD$: $RS = m - h$ and $RH = m + h$, so $m + h = 2(m - h)$, $m = 3h$. Then $AH = AD - DH = 3h - h = 2h$ and $HS = 2h$, so $H$ is the midpoint of the chord $AS$ of $\\omega$.\n\n**Conclusion.** $H \\ne O$ (the triangle is not equilateral), and the segment from the center to the midpoint of a chord is perpendicular to the chord: $OH \\perp AS$. Since $AS \\perp BC$, $OH \\parallel BC$. ∎\n\n(A numerical check over families of acute triangles confirms that $XY$ passes through $D$ exactly when the heights of $O$ and $H$ above $BC$ coincide.)"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

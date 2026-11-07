@@ -1,0 +1,186 @@
+[
+  {
+    "id": "usamts-2016-r3-01",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 28 Round 3 (2016-2017)",
+      "year": 2016,
+      "number": 1,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Fill in each square of the $4\\times 4$ grid with a number from 1 to 16, using each number exactly once. Numbers at the left or top give the largest sum of two numbers in that row or column. Numbers at the right or bottom give the largest difference of two numbers in that row or column.\n\nThe clues in the figure are:\n\n* top (largest sum in columns 1–4): 13, 28, 25, 23;\n* left (largest sum in rows 1–4): 13, 28, (none), 23;\n* right (largest difference in rows 1–4): 7, (none), 8, 8;\n* bottom (largest difference in columns 1–4): 7, (none), 12, 12.\n\nYou do not need to prove that your answer is the only one possible; you merely need to find an answer that satisfies the constraints above.",
+    "image": "qimages/usamts/2016-r3/q01.webp",
+    "choices": null,
+    "answer": "$$\\begin{array}{|c|c|c|c|}\\hline 3 & 9 & 2 & 4\\\\\\hline 1 & 12 & 11 & 16\\\\\\hline 8 & 15 & 14 & 7\\\\\\hline 5 & 13 & 10 & 6\\\\\\hline\\end{array}$$",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Use the extreme clues first, then check",
+        "body": "Useful observations: the largest sum in a line is the sum of its two largest entries, and the largest difference is (largest entry) − (smallest entry).\n\n* Row 1 and column 1 both have largest sum 13, so all their entries are at most 12 and their two largest entries sum to 13.\n* Row 2 and column 2 both have largest sum 28, so each contains $\\{16, 12\\}$ or $\\{15, 13\\}$ as its two largest entries.\n* 16 is not in row 1 or column 1 (largest sum 13). It is not in row 4 either: there the difference 8 would make every entry at least 8, so the largest sum would be at least $16 + 8 = 24 \\ne 23$.\n\nCombining such deductions with the remaining clues and trying the few cases left leads to\n$$\\begin{array}{|c|c|c|c|}\\hline 3 & 9 & 2 & 4\\\\\\hline 1 & 12 & 11 & 16\\\\\\hline 8 & 15 & 14 & 7\\\\\\hline 5 & 13 & 10 & 6\\\\\\hline\\end{array}$$\n\n**Check.**\n* Rows: $\\{3,9,2,4\\}$: largest sum $9+4=13$ ✓, largest difference $9-2=7$ ✓. $\\{1,12,11,16\\}$: $16+12=28$ ✓. $\\{8,15,14,7\\}$: largest difference $15-7=8$ ✓. $\\{5,13,10,6\\}$: $13+10=23$ ✓, $13-5=8$ ✓.\n* Columns: $\\{3,1,8,5\\}$: $8+5=13$ ✓, $8-1=7$ ✓. $\\{9,12,15,13\\}$: $15+13=28$ ✓. $\\{2,11,14,10\\}$: $14+11=25$ ✓, $14-2=12$ ✓. $\\{4,16,7,6\\}$: $16+7=23$ ✓, $16-4=12$ ✓.\n* Each of $1, \\dots, 16$ is used once.\n\n**Answer: the grid above.**"
+      }
+    ],
+    "topics": [
+      "logic",
+      "arithmetic"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2016-r3-02",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 28 Round 3 (2016-2017)",
+      "year": 2016,
+      "number": 2,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "text",
+    "prompt": "Malmer Pebane, Fames Jung, and Weven Dare are perfect logicians that always tell the truth. Malmer decides to pose a puzzle to his friends: he tells them that the day of his birthday is at most the number of the month of his birthday. Then Malmer announces that he will whisper the day of his birthday to Fames and the month of his birthday to Weven, and he does exactly that.\n\nAfter Malmer whispers to both of them, Fames thinks a bit, then says \"Weven cannot know what Malmer's birthday is.\"\n\nAfter that, Weven thinks a bit, then says \"Fames also cannot know what Malmer's birthday is.\"\n\nThis exchange repeats, with Fames and Weven speaking alternately and each saying the other can't know Malmer's birthday. However, at one point, Weven instead announces \"Fames and I can now know what Malmer's birthday is. Interestingly, that was the longest conversation like that we could have possibly had before both figuring out Malmer's birthday.\"\n\nFind Malmer's birthday.",
+    "image": null,
+    "choices": null,
+    "answer": "July 7",
+    "acceptedAnswers": [
+      "7/7",
+      "July 7th",
+      "7 July",
+      "(7, 7)",
+      "(7,7)",
+      "July 7",
+      "07/07",
+      "day 7 month 7",
+      "Jul 7"
+    ],
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Peel off the extremes",
+        "body": "Both the day $d$ and the month $m$ are numbers from 1 to 12 with $d \\le m$; Fames knows $d$, Weven knows $m$.\n\n1. **Fames: \"Weven cannot know.\"** Weven would know only if $m = 1$ (then the birthday is 1/1). Fames can be sure $m \\ne 1$ only if $d \\ne 1$. So $d \\ge 2$, and hence $m \\ge 2$; everyone now knows both numbers lie in $\\{2, \\dots, 12\\}$.\n2. **Weven: \"Fames cannot know.\"** Fames would know only if $d = 12$ (forcing 12/12). Weven can be sure of $d \\ne 12$ only if $m \\ne 12$. So both numbers lie in $\\{2, \\dots, 11\\}$.\n3. In the same way each further statement by Fames removes the current smallest value and each statement by Weven removes the current largest value: $1, 12, 2, 11, 3, 10, 4, 9, 5, 8, 6$.\n\nAfter Fames removes 6, the only possible value left for both numbers is 7, so the conversation cannot continue any longer: both now know the birthday is $(d, m) = (7, 7)$. Since Weven says the conversation was the longest possible, this is what happened (any other birthday would have let someone know earlier). \n\n**Answer: July 7 (7/7)**"
+      }
+    ],
+    "topics": [
+      "logic"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2016-r3-03",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 28 Round 3 (2016-2017)",
+      "year": 2016,
+      "number": 3,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "An *$n$-city* is an $n \\times n$ grid of positive integers such that every entry greater than 1 is the sum of an entry in the same row and an entry in the same column. Shown below is an example 3-city.\n$$\\begin{pmatrix} 1 & 1 & 2\\\\ 2 & 3 & 1\\\\ 6 & 4 & 1\\end{pmatrix}$$\n\n(a) Construct a 5-city that includes some entry that is at least 150. (It is acceptable simply to write the 5-city. You do not need to explain how you found it.)\n\n(b) Show that for all $n \\ge 1$, the largest entry in an $n$-city is at most $3^{\\binom n2}$.",
+    "image": null,
+    "choices": null,
+    "answer": "(a) e.g. $\\begin{pmatrix} 1&2&5&3&4\\\\ 26&1&6&25&10\\\\ 67&69&1&15&12\\\\ 326&259&138&1&11\\\\ 52&121&127&26&1\\end{pmatrix}$. (b) Each row contains a 1, so at most $n^2-n$ entries exceed 1; sorted, they satisfy $a_k \\le a_{k-1}+a_{k-2}$, so $a_k \\le F_{k+2}$ and $F_{2m+2} \\le 3^m$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Example and a Fibonacci bound",
+        "body": "**(a)** One example (official):\n$$\\begin{pmatrix} 1&2&5&3&4\\\\ 26&1&6&25&10\\\\ 67&69&1&15&12\\\\ 326&259&138&1&11\\\\ 52&121&127&26&1\\end{pmatrix}$$\nWriting each entry as (entry in its row) + (entry in its column): row 1: $2 = 1+1$, $5 = 4+1$, $3 = 2+1$, $4 = 3+1$; row 2: $26 = 25+1$, $6 = 1+5$, $25 = 10+15$, $10 = 6+4$; row 3: $67 = 15+52$, $69 = 67+2$, $15 = 12+3$, $12 = 1+11$; row 4: $326 = 259+67$, $259 = 138+121$, $138 = 11+127$, $11 = 1+10$; row 5: $52 = 26+26$, $121 = 52+69$, $127 = 121+6$, $26 = 1+25$. So it is a 5-city, and it contains $326 \\ge 150$.\n\n**(b)** *Every row contains a 1.* Let $x$ be the smallest entry of a row. If $x > 1$, then $x = r + c$ with $r$ in the same row, so $r \\ge x$ and $c \\ge 1$ give $x \\ge x + 1$, impossible. So each of the $n$ rows has a 1, and at most $M = n^2 - n = 2\\binom n2$ entries exceed 1.\n\n*Fibonacci bound.* List the entries greater than 1 as $a_1 \\le a_2 \\le \\dots \\le a_M$ and set $a_0 = a_{-1} = 1$. Write $a_k = r + c$ with $r$ in its row and $c$ in its column. These are two **different** cells (the only cell in both the row and the column is $a_k$'s own cell, and $a_k = a_k + c$ is impossible), and both values are less than $a_k$. Each is either 1 or some $a_j$ with $a_j < a_k$, hence $j < k$. The two largest values available among distinct cells of this kind are at most $a_{k-1}$ and $a_{k-2}$ (using $a_0 = a_{-1} = 1$ for 1's), so\n$$a_k \\le a_{k-1} + a_{k-2}.$$\nWith Fibonacci numbers $F_1 = F_2 = 1$, induction gives $a_k \\le F_{k+2}$ for all $k \\ge -1$.\n\n*Bounding Fibonacci numbers.* We claim $F_{2m+2} \\le 3^m$. For $m = 0$: $F_2 = 1$. For $m \\ge 1$:\n$$F_{2m+2} = F_{2m+1} + F_{2m} = 2F_{2m} + F_{2m-1} \\le 3F_{2m} \\le 3\\cdot 3^{m-1} = 3^m.$$\n\nHence the largest entry is at most $a_M \\le F_{M+2} = F_{2\\binom n2 + 2} \\le 3^{\\binom n2}$ (if $M = 0$ all entries are 1). ∎"
+      }
+    ],
+    "topics": [
+      "logic",
+      "sequences-series",
+      "inequalities"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2016-r3-04",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 28 Round 3 (2016-2017)",
+      "year": 2016,
+      "number": 4,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $A_1, \\dots, A_n$ and $B_1, \\dots, B_n$ be sets of points in the plane. Suppose that for all points $x$,\n$$D(x, A_1) + D(x, A_2) + \\dots + D(x, A_n) \\ge D(x, B_1) + D(x, B_2) + \\dots + D(x, B_n),$$\nwhere $D(x, y)$ denotes the distance between $x$ and $y$. Show that the $A_i$'s and the $B_i$'s share the same center of mass.",
+    "image": null,
+    "choices": null,
+    "answer": "Go far away along the line through the two centroids: $\\sum D(x,A_i) - \\sum D(x,B_i) \\to -n\\,\\vec u\\cdot(M_A - M_B)$, which is $-n\\,|M_AM_B| < 0$ in the right direction unless $M_A = M_B$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "A far-away point on the line of centers (official idea)",
+        "body": "Let $M_A, M_B$ be the centroids, $\\ell = M_AM_B$, and suppose $\\ell > 0$. Pick $d \\ge 0$ with $D(A_i, M_A) \\le d$ and $D(B_i, M_B) \\le d$ for all $i$.\n\n**Lemma.** For $a > 0$ and any $b$: $\\sqrt{a^2 + b^2} - a \\le \\frac{b^2}{2a}$. *Proof:* $a^2 + b^2 \\le a^2 + b^2 + \\frac{b^4}{4a^2} = \\left(a + \\frac{b^2}{2a}\\right)^2$; take square roots. $\\blacksquare$\n\nChoose $q > d + \\frac{d^2}{2\\ell}$ and let $P$ be the point on line $M_AM_B$, on the far side of $M_A$ from $M_B$, with $PM_A = q$ and $PM_B = q + \\ell$. Let $A_i'$, $B_i'$ be the projections of $A_i$, $B_i$ onto this line.\n\n* Since $D(A_i', M_A) \\le D(A_i, M_A) \\le d < q$, every $A_i'$ lies on the same side of $P$ as $M_A$, so $v_i := PA_i'$ is a signed coordinate along the line, and because projection preserves centroids, $\\sum v_i = n\\cdot PM_A = nq$. Also $v_i \\ge q - d > \\frac{d^2}{2\\ell}$.\n* Let $u_i = PA_i$. By Pythagoras, $u_i^2 = v_i^2 + A_iA_i'^2 \\le v_i^2 + d^2$, so by the lemma $u_i - v_i \\le \\frac{d^2}{2v_i} < \\ell$. Summing, $\\sum PA_i < nq + n\\ell$.\n* Similarly all $B_i'$ lie on the same side of $P$, so $\\sum PB_i \\ge \\sum PB_i' = n\\cdot PM_B = nq + n\\ell$.\n\nThus $\\sum D(P, A_i) < \\sum D(P, B_i)$, contradicting the hypothesis at $x = P$. Hence $\\ell = 0$: the centroids coincide. ∎"
+      },
+      {
+        "title": "Asymptotics at infinity",
+        "body": "For a fixed point $a$ and a unit vector $u$, put $x = t u$ with $t \\to \\infty$. Then\n$$|tu - a| - t = \\frac{|tu - a|^2 - t^2}{|tu - a| + t} = \\frac{|a|^2 - 2t\\, u\\cdot a}{|tu - a| + t} \\longrightarrow -u\\cdot a,$$\nsince $\\frac{|tu-a|}{t} \\to 1$. Applying this to every $A_i$ and $B_i$ and subtracting (the $t$'s cancel because there are $n$ of each),\n$$\\sum_i D(tu, A_i) - \\sum_i D(tu, B_i) \\longrightarrow -u\\cdot\\Big(\\sum A_i - \\sum B_i\\Big) = -n\\, u\\cdot(M_A - M_B).$$\nThe left side is $\\ge 0$ for every $t$, so $u \\cdot (M_A - M_B) \\le 0$ for **every** unit vector $u$. Taking $u$ in the direction of $M_A - M_B$ (if nonzero) gives $|M_A - M_B| \\le 0$. Hence $M_A = M_B$. ∎"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "inequalities"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2016-r3-05",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 28 Round 3 (2016-2017)",
+      "year": 2016,
+      "number": 5,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Consider the set $S = \\{q + \\frac1q$, where $q$ ranges over all positive rational numbers$\\}$.\n\n(a) Let $N$ be a positive integer. Show that $N$ is the sum of two elements of $S$ if and only if $N$ is the product of two elements of $S$.\n\n(b) Show that there exist infinitely many positive integers $N$ that cannot be written as the sum of two elements of $S$.\n\n(c) Show that there exist infinitely many positive integers $N$ that can be written as the sum of two elements of $S$.",
+    "image": null,
+    "choices": null,
+    "answer": "(a) $(q+\\frac1q)(r+\\frac1r) = (qr + \\frac1{qr}) + (\\frac qr + \\frac rq)$; conversely with $x = \\frac ab, y = \\frac cd$ reduced, integrality forces $ab = cd$ and then $N = (\\frac cb + \\frac bc)(\\frac ac + \\frac ca)$. (b) Multiples of 8: $a^2+b^2$ with $\\gcd(a,b)=1$ is never divisible by 4. (c) Pairs $(1,2),(2,5),(5,13),\\dots$ with $a \\mid b^2+1$, $b \\mid a^2+1$ give $N = (a+\\frac1a)(b+\\frac1b) = 5, 13, 68, \\dots$",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Expand, use coprimality, and Vieta-style jumping",
+        "body": "**(a)** *Product ⇒ sum* (true for any $N$): for positive rationals $q, r$,\n$$\\Big(q + \\frac1q\\Big)\\Big(r + \\frac1r\\Big) = \\Big(qr + \\frac1{qr}\\Big) + \\Big(\\frac qr + \\frac rq\\Big),$$\na sum of two elements of $S$.\n\n*Sum ⇒ product.* Let $N = \\big(x + \\frac1x\\big) + \\big(y + \\frac1y\\big)$ be an integer, with $x = \\frac ab$, $y = \\frac cd$ in lowest terms. Then\n$$N = \\frac{(a^2+b^2)cd + (c^2+d^2)ab}{abcd}.$$\nSo $ab$ divides the numerator, hence $ab \\mid (a^2+b^2)cd$. Since $\\gcd(a,b) = 1$, any prime dividing $ab$ divides exactly one of $a, b$ and so not $a^2 + b^2$: $\\gcd(ab, a^2+b^2) = 1$, giving $ab \\mid cd$. Symmetrically $cd \\mid ab$, so $ab = cd$. Now with $p = \\frac cb$, $r = \\frac ac$:\n$$\\Big(p + \\frac1p\\Big)\\Big(r + \\frac1r\\Big) = pr + \\frac{1}{pr} + \\frac pr + \\frac rp = \\frac ab + \\frac ba + \\frac{c^2}{ab} + \\frac{ab}{c^2} = \\frac ab + \\frac ba + \\frac cd + \\frac dc = N,$$\nusing $\\frac{c^2}{ab} = \\frac{c^2}{cd} = \\frac cd$.\n\n**(b)** We show no multiple of 8 is a product of two elements of $S$ (hence, by (a), not a sum). Suppose $N = \\big(\\frac ab + \\frac ba\\big)\\big(\\frac cd + \\frac dc\\big) = \\frac{(a^2+b^2)(c^2+d^2)}{abcd}$ with $\\gcd(a,b) = \\gcd(c,d) = 1$. Since $a, b$ are not both even, $a^2 + b^2 \\equiv 1$ or $2 \\pmod 4$, so it contains at most one factor 2; the same for $c^2 + d^2$. Thus $(a^2+b^2)(c^2+d^2) = N\\cdot abcd$ is not divisible by 8, so $8 \\nmid N$. Infinitely many positive integers (all multiples of 8) are therefore not sums of two elements of $S$.\n\n**(c)** It suffices (by (a)) to find infinitely many integers $N = \\big(a + \\frac1a\\big)\\big(b + \\frac1b\\big) = \\frac{a^2+1}{b}\\cdot\\frac{b^2+1}{a}$ with positive integers $a < b$, $a \\mid b^2 + 1$, $b \\mid a^2 + 1$. Start with $(1, 2)$. Given such a pair, let $c = \\frac{b^2+1}{a}$ (an integer). Then:\n* $c > b$, because $b^2 + 1 > ab$;\n* $c \\mid b^2 + 1$, since $b^2 + 1 = ac$;\n* $b \\mid c^2 + 1$: $a^2(c^2+1) = (b^2+1)^2 + a^2 \\equiv 1 + a^2 \\equiv 0 \\pmod b$, and $\\gcd(a, b) = 1$ (a common divisor would divide $a^2 + 1 - a\\cdot a = 1$).\n\nSo $(b, c)$ is a new pair, and we get $(1,2), (2,5), (5,13), (13,34), \\dots$ with $N = 5, 13, 68, \\dots$; these $N$ are distinct because $N > b$ and $b$ increases. For example $13 = \\big(2 + \\frac12\\big)\\big(5 + \\frac15\\big) = \\big(10 + \\frac1{10}\\big) + \\big(\\frac25 + \\frac52\\big)$. ∎"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "algebra"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

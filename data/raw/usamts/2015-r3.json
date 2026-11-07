@@ -1,0 +1,172 @@
+[
+  {
+    "id": "usamts-2015-r3-01",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 27 Round 3 (2015-2016)",
+      "year": 2015,
+      "number": 1,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Fill in each space of the grid with either a 0 or a 1 so that all 16 strings of four consecutive numbers across and down are distinct.\n\nYou do not need to prove that your answer is the only one possible; you merely need to find an answer that satisfies the constraints above.",
+    "image": "qimages/usamts/2015-r3/q01.webp",
+    "choices": null,
+    "answer": "$$\\begin{array}{ccccccccc}\n0&&&&&&&&\\\\\n0&1&0&1&&&&&\\\\\n0&1&1&1&&&&&\\\\\n1&0&0&0&&&&&\\\\\n&0&0&1&1&&&&\\\\\n&&&&1&0&1&1&\\\\\n&&&&1&0&1&0&\\\\\n&&&&0&0&1&0&\\\\\n&&&&&0&1&1&0\n\\end{array}$$",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Deduction",
+        "body": "The grid has 8 rows of length 4 and 8 columns of length 4, so the 16 strings must be exactly the 16 binary strings of length 4. Number the columns $1$ to $9$ from the left and the rows $1$ to $9$ from the top (row 1 is the single square at the top left, row 9 is the bottom row, columns $6$–$9$).\n\n**Parity.** Among all 16 strings of length 4 there are exactly 32 zeros. Every square lies in one across string and one down string, except the top-left square (only in column 1) and the bottom-right square (only in row 9). The top-left square is a given 0, so if the bottom-right square were 1, the total number of zeros counted over all strings would be $2\\cdot(\\text{zeros}) - 1$, which is odd. Hence the bottom-right square is $0$.\n\n**1111 and 0000.** Every across and down string other than column 7 now contains a 0 (given or just found), so column 7 must be $1111$. The string $0000$ must then be column 5 or column 6, the only other strings with no given 1. If column 5 were $0000$, then row 3 ($0\\,?\\,1\\,?$), row 5 ($0\\,?\\,1\\,?$) and rows 6, 7, 8 (first square 0 from column 5, third square 1 from column 7) would give five strings of the form $0x1x$, but only four such strings exist. So column 6 is $0000$.\n\n**The pattern $0x1x$.** Now rows 3, 5, 8 and 9 are of the form $0x1x$ (row 9 is $0\\,?\\,1\\,0$), so no other string may have this form. This forces, in turn:\n\n- the third square of column 3 (row 4) is 0, since column 3 is $0\\,1\\,?\\,?$;\n- the first squares of rows 6 and 7 (column 5) are 1, since these rows are $?\\,0\\,1\\,?$ and $?\\,0\\,1\\,0$;\n- the top square of column 5 (row 5) is 1, since column 5 is $?\\,1\\,1\\,0$. So column 5 is $1110$ and row 7 is $1010$.\n\n**The rest.**\n\n- Row 6 is $1\\,0\\,1\\,?$, and $1010$ is used, so row 6 is $1011$.\n- Column 8 is $1\\,0\\,?\\,1$, and $1011$ is used, so column 8 is $1001$ and row 8 is $0010$.\n- Column 2 is $1\\,?\\,?\\,0$; since $1010$ and $1110$ are used, its third square (row 4) is 0. So row 4 is $1000$, and then column 2 is $1100$.\n- Row 3 is $0\\,1\\,1\\,?$ and row 9 is $0110$, so row 3 is $0111$.\n- Row 5 is $0\\,?\\,1\\,1$ and $0111$ is used, so row 5 is $0011$ and column 3 is $0100$.\n- Row 2 is $?\\,1\\,0\\,?$. If its last square were 0, row 2 would be $x100$, but $0100$ and $1100$ are both used. So it is 1, and column 4 is $1101$.\n- At this point exactly seven strings beginning with 0 are present, so the first square of row 2 is 0. Row 2 is $0101$ and column 1 is $0001$.\n\nThis is the grid in the answer, and since every step was forced it is the only solution (an exhaustive computer search confirms this).\n\n**Check.** Across: $0101, 0111, 1000, 0011, 1011, 1010, 0010, 0110$. Down: column 1 $0001$, column 2 $1100$, column 3 $0100$, column 4 $1101$, column 5 $1110$, column 6 $0000$, column 7 $1111$, column 8 $1001$. These are all 16 strings of length 4, each once."
+      }
+    ],
+    "topics": [
+      "logic",
+      "counting"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2015-r3-02",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 27 Round 3 (2015-2016)",
+      "year": 2015,
+      "number": 2,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Fames is playing a computer game with falling two-dimensional blocks. The playing field is 7 units wide and infinitely tall with a bottom border. Initially the entire field is empty. Each turn, the computer gives Fames a $1 \\times 3$ solid rectangular piece of three unit squares. Fames must decide whether to orient the piece horizontally or vertically and which column(s) the piece should occupy (3 consecutive columns for horizontal pieces, 1 column for vertical pieces). Once he confirms his choice, the piece is dropped straight down into the playing field in the selected columns, stopping all three of the piece's squares as soon as the piece hits either the bottom of the playing field or any square from another piece. All of the pieces must be contained completely inside the playing field after dropping and cannot partially occupy columns.\n\nIf at any time a row of 7 spaces is all filled with squares, Fames scores a point.\n\nUnfortunately, Fames is playing in invisible mode, which prevents him from seeing the state of the playing field or how many points he has, and he has already arbitrarily dropped some number of pieces without remembering what he did with them or how many there were.\n\nFor partial credit, find a strategy that will allow Fames to eventually earn at least one more point. For full credit, find a strategy for which Fames can correctly announce \"I have earned at least one more point\" and know that he is correct.",
+    "image": null,
+    "choices": null,
+    "answer": "Drop horizontal pieces in columns 3–5, 1–3, 5–7, then again 3–5, 1–3, 5–7, then one vertical piece in column 4. The last piece always completes a row that was not full before, so Fames can announce the point.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Seven pieces",
+        "body": "Number the columns $1$ to $7$ and let the **height** of a column be the number of the lowest empty row above all its squares (rows numbered $0, 1, 2, \\ldots$ from the bottom). A horizontal piece in columns $c, c+1, c+2$ lands in row $\\max(h_c, h_{c+1}, h_{c+2})$; a vertical piece in column $c$ occupies rows $h_c, h_c+1, h_c+2$. (Filled rows are not removed; the problem only awards a point.)\n\n**First round.** Drop horizontal pieces $X$ in columns 3–5, then $Y$ in columns 1–3, then $Z$ in columns 5–7. Since $Y$ and $Z$ each share a column with $X$, both land above $X$. Let $y$ and $z$ be their rows. Now columns 1–3 have height $y+1$, columns 5–7 have height $z+1$, and column 4 has height at most $\\min(y,z)$, since $X$ is its top square and lies below both. By the left–right symmetry of the strategy we may assume $z \\ge y$.\n\n**Second round.** Drop horizontal pieces in columns 3–5, 1–3, 5–7 again.\n\n- The piece in columns 3–5 lands in row $\\max(y+1, h_4, z+1) = z+1$.\n- The piece in columns 1–3 lands in row $\\max(y+1, y+1, z+2) = z+2$.\n- The piece in columns 5–7 lands in row $\\max(z+2, z+1, z+1) = z+2$.\n\nNow row $z+2$ is filled in columns 1–3 and 5–7, and column 4 has height exactly $z+2$, so square $(z+2, 4)$ is empty and row $z+2$ is not yet complete.\n\n**Last piece.** Drop a vertical piece in column 4. It occupies rows $z+2, z+3, z+4$ of column 4, so row $z+2$ becomes completely filled at this moment. This is a new point, whatever the earlier pieces were (the case $y > z$ is the mirror image).\n\nSo after these seven pieces Fames can correctly announce that he has earned at least one more point. (Simply dropping vertical pieces in every column over and over would eventually score, but Fames could never be sure when that had happened.) A computer simulation from thousands of random starting positions confirms the strategy."
+      }
+    ],
+    "topics": [
+      "games",
+      "logic"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2015-r3-03",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 27 Round 3 (2015-2016)",
+      "year": 2015,
+      "number": 3,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "For $n > 1$, let $a_n$ be the number of zeroes that $n!$ ends with when written in base $n$. Find the maximum value of $\\dfrac{a_n}{n}$.",
+    "image": null,
+    "choices": null,
+    "answer": "1/2",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "answerDisplay": "$\\frac{1}{2}$",
+    "solutions": [
+      {
+        "title": "Legendre's formula",
+        "body": "**The value $\\frac12$ occurs.** In base 2, $2! = 10_2$ ends in one zero, so $a_2 = 1$ and $a_2/2 = \\frac12$.\n\n**Upper bound.** The number of trailing zeros of $n!$ in base $n$ is the largest $a$ with $n^a \\mid n!$. Let $p$ be a prime dividing $n$, and write $n = p^k m$ with $p \\nmid m$. If $n^a \\mid n!$ then $p^{ka} \\mid n!$, so $ka \\le \\nu_p(n!)$. By Legendre's formula,\n$$\\nu_p(n!) = \\sum_{j\\ge1}\\left\\lfloor \\frac{n}{p^j}\\right\\rfloor < \\sum_{j\\ge 1}\\frac{n}{p^j} = \\frac{n}{p-1}.$$\nTherefore\n$$\\frac{a_n}{n} < \\frac{1}{k(p-1)}.$$\nIf $n$ has an odd prime factor $p$, this gives $\\frac{a_n}{n} < \\frac1{p-1} \\le \\frac12$. Otherwise $n = 2^k$; if $k \\ge 2$, this gives $\\frac{a_n}{n} < \\frac1k \\le \\frac12$. The only remaining case is $n = 2$.\n\nHence the maximum value of $\\frac{a_n}{n}$ is $\\frac12$, attained only at $n=2$. (A direct computation for $2 \\le n < 400$ agrees.)"
+      }
+    ],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2015-r3-04",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 27 Round 3 (2015-2016)",
+      "year": 2015,
+      "number": 4,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $\\triangle ABC$ be a triangle with $AB < AC$. Let the angle bisector of $\\angle BAC$ meet $BC$ at $D$, and let $M$ be the midpoint of $BC$. Let $P$ be the foot of the perpendicular from $B$ to $AD$. Extend $BP$ to meet $AM$ at $Q$. Show that $DQ$ is parallel to $AB$.",
+    "image": null,
+    "choices": null,
+    "answer": "Proof: with $L = BP\\cap AC$ one gets $AL = AB$, and then $\\vec{AQ} = \\frac{c}{b+c}(\\vec{AB}+\\vec{AC})$ and $\\vec{AD} = \\frac{b\\,\\vec{AB} + c\\,\\vec{AC}}{b+c}$, so $\\vec{QD} = \\frac{b-c}{b+c}\\vec{AB}$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Reflection and vectors",
+        "body": "Let $b = AC$ and $c = AB$, so $c < b$. Let line $BP$ meet line $AC$ at $L$.\n\n**$AL = AB$.** In triangles $APB$ and $APL$, the angles at $P$ are right angles, the angles at $A$ are equal because $AP$ bisects $\\angle BAC$, and the side $AP$ is shared. So the triangles are congruent, $AL = AB = c$, and $L$ lies on segment $AC$ (as $c < b$). Hence, with vectors from $A$,\n$$\\vec{AL} = \\frac{c}{b}\\,\\vec{AC}.$$\n\n**Locating $Q$.** Points of line $BL$ are $\\vec{AB} + s(\\vec{AL} - \\vec{AB}) = (1-s)\\vec{AB} + \\frac{sc}{b}\\vec{AC}$, and points of line $AM$ are $\\frac u2(\\vec{AB} + \\vec{AC})$. Since $\\vec{AB}$ and $\\vec{AC}$ are independent, $Q$ corresponds to $1 - s = \\frac u2 = \\frac{sc}{b}$, so $s = \\frac{b}{b+c}$ and\n$$\\vec{AQ} = \\frac{c}{b+c}\\left(\\vec{AB} + \\vec{AC}\\right).$$\n\n**Locating $D$.** By the angle bisector theorem $BD : DC = c : b$, so\n$$\\vec{AD} = \\frac{b\\,\\vec{AB} + c\\,\\vec{AC}}{b+c}.$$\n\n**Conclusion.**\n$$\\vec{QD} = \\vec{AD} - \\vec{AQ} = \\frac{b-c}{b+c}\\,\\vec{AB},$$\na nonzero multiple of $\\vec{AB}$. Therefore $DQ \\parallel AB$.\n\n(Equivalently: $PM$ is a midline of triangle $BLC$, so $PM \\parallel AC$ and $PM = \\frac{b-c}{2}$; then $\\frac{MQ}{QA} = \\frac{PM}{AL} = \\frac{b-c}{2c}$, so $\\frac{MQ}{MA} = \\frac{b-c}{b+c}$, which equals $\\frac{MD}{MB} = \\frac{a/2 - ac/(b+c)}{a/2}$ with $a = BC$. The homothety at $M$ with this ratio sends $B \\mapsto D$ and $A \\mapsto Q$, so $DQ \\parallel AB$.)"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "usamts-2015-r3-05",
+    "bank": "usamts",
+    "source": {
+      "contest": "USAMTS",
+      "paper": "USAMTS Year 27 Round 3 (2015-2016)",
+      "year": 2015,
+      "number": 5,
+      "url": "https://www.usamts.org/"
+    },
+    "grade": "7-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $a_1, a_2, \\ldots, a_{100}$ be a sequence of integers. Initially, $a_1 = 1$, $a_2 = -1$ and the remaining numbers are 0. After every second, we perform the following process on the sequence: for $i = 1, 2, \\ldots, 99$, replace $a_i$ with $a_i + a_{i+1}$, and replace $a_{100}$ with $a_{100} + a_1$. (All of this is done simultaneously, so each new term is the sum of two terms of the sequence from before any replacements.) Show that for any integer $M$, there is some index $i$ and some time $t$ for which $|a_i| > M$ at time t.",
+    "image": null,
+    "choices": null,
+    "answer": "Proof: with $\\omega = e^{2\\pi i/100}$, the quantity $F_t = \\sum_i a_i\\omega^i$ at time $t$ equals $(1+\\omega^{-1})^t(\\omega - \\omega^2)$, whose absolute value tends to infinity because $|1+\\omega^{-1}| = 2\\cos\\frac{\\pi}{100} > 1$; but $|F_t| \\le 100\\max_i |a_i|$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Roots of unity filter",
+        "body": "Take indices modulo 100, so that $a_{101} = a_1$ and the process is: every $a_i$ is replaced by $a_i + a_{i+1}$ for all $i$ simultaneously. Let $\\omega = e^{2\\pi i/100}$, and at each time $t$ define the complex number\n$$F_t = \\sum_{i=1}^{100} a_i\\,\\omega^{i}.$$\nBecause $\\omega^{100} = 1$, the exponent can also be read modulo 100. After one step,\n$$F_{t+1} = \\sum_{i=1}^{100} (a_i + a_{i+1})\\,\\omega^{i} = F_t + \\omega^{-1}\\sum_{i=1}^{100} a_{i+1}\\,\\omega^{i+1} = (1 + \\omega^{-1})\\,F_t.$$\nInitially $F_0 = \\omega - \\omega^2 = \\omega(1-\\omega) \\ne 0$. Hence\n$$F_t = (1+\\omega^{-1})^t\\,\\omega(1-\\omega), \\qquad |F_t| = |1+\\omega^{-1}|^t\\,|1-\\omega|.$$\nNow $|1 + \\omega^{-1}| = |1 + e^{-2\\pi i/100}| = 2\\cos\\frac{\\pi}{100} > 1$, so $|F_t| \\to \\infty$ as $t \\to \\infty$.\n\nOn the other hand, by the triangle inequality, $|F_t| \\le \\sum_i |a_i| \\le 100\\max_i |a_i|$ at time $t$. Given $M$, choose $t$ with $|F_t| > 100M$; then some $|a_i| > M$ at time $t$.\n\n*Remark.* The same argument works with 100 replaced by any $N \\ge 4$, since then $|1+\\omega^{-1}| = 2\\cos\\frac{\\pi}{N} > 1$. For $N = 2$ or $3$ the statement fails: for $N=2$ the sequence becomes $0, 0$ after one step, and for $N=3$ it returns to $1, -1, 0$ every 6 steps."
+      }
+    ],
+    "topics": [
+      "sequences-series",
+      "complex-numbers",
+      "algebra"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

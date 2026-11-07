@@ -89,6 +89,8 @@ describe('expression answers', () => {
     ['-2^2', -4],
     ['5!', 120],
     ['(1+sqrt5)/2', (1 + Math.sqrt(5)) / 2],
+    ['3arcsin(1/3)', 3 * Math.asin(1 / 3)],
+    ['\\arctan 1', Math.PI / 4],
   ])('%s', (s, v) => expect(evalExpr(s)).toBeCloseTo(v, 12))
   it.each(['', '12 3', '2+', 'foo', '(1'])('%s is rejected', (s) => expect(evalExpr(s)).toBeNull())
   it('numeric questions accept equivalent expressions', () => {

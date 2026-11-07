@@ -1,6 +1,6 @@
 /**
  * Safe evaluator for typed math answers: numbers, + - * / ^, parentheses, implicit
- * multiplication ("3sqrt(2)", "2pi"), sqrt/cbrt/abs/ln/log/sin/cos/tan, pi, e, factorial "!",
+ * multiplication ("3sqrt(2)", "2pi"), sqrt/cbrt/abs/ln/log/sin/cos/tan/arcsin/arccos/arctan, pi, e, factorial "!",
  * and simple LaTeX ("\frac{3\sqrt{2}}{4}", "2^{10}"). Returns null when it cannot parse.
  */
 
@@ -15,6 +15,12 @@ const FUNCS: Record<string, (x: number) => number> = {
   sin: Math.sin,
   cos: Math.cos,
   tan: Math.tan,
+  arcsin: Math.asin,
+  arccos: Math.acos,
+  arctan: Math.atan,
+  asin: Math.asin,
+  acos: Math.acos,
+  atan: Math.atan,
 }
 const CONSTS: Record<string, number> = { pi: Math.PI, e: Math.E }
 
@@ -35,7 +41,7 @@ function delatex(s: string): string {
     .replace(/\\div/g, '/')
     .replace(/\\pi/g, 'pi')
     .replace(/\\sqrt/g, 'sqrt')
-    .replace(/\\(sin|cos|tan|ln|log)/g, '$1')
+    .replace(/\\(arcsin|arccos|arctan|sin|cos|tan|ln|log)/g, '$1')
     .replace(/[{}]/g, (c) => (c === '{' ? '(' : ')'))
 }
 

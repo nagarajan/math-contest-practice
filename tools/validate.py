@@ -25,10 +25,11 @@ TOPICS = {
     "differential-equations",
 }
 NUMERIC_RE = re.compile(r"^-?(\d+(\.\d+)?|\d+/\d+|\d+ \d+/\d+|\.\d+)$")
-EXPR_NAMES = {"sqrt", "cbrt", "pi", "e", "abs", "ln", "log", "sin", "cos", "tan"}
+EXPR_NAMES = {"sqrt", "cbrt", "pi", "e", "abs", "ln", "log", "sin", "cos", "tan", "arcsin", "arccos", "arctan"}
 EXPR_ENV = {
     "sqrt": math.sqrt, "cbrt": lambda x: math.copysign(abs(x) ** (1 / 3), x), "pi": math.pi, "e": math.e,
     "abs": abs, "ln": math.log, "log": math.log10, "sin": math.sin, "cos": math.cos, "tan": math.tan,
+    "arcsin": math.asin, "arccos": math.acos, "arctan": math.atan,
     "factorial": math.factorial,
 }
 

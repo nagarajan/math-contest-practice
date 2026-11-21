@@ -1,7 +1,8 @@
 # Math Contest Practice
 
-A local web app for practicing past Math Kangaroo, Noetic and Math Olympiad (MOEMS) problems
-at the grade 5–6 level.
+A web app for practicing past math competition problems, from grade 1 up to undergraduate and
+graduate level. Questions come from public past papers (Math Kangaroo, AMC, MATHCOUNTS, UKMT,
+CEMC, IMO, Putnam and about 80 other competitions), each with worked solutions.
 
 ## Run it
 
@@ -16,37 +17,48 @@ the printed "Network" address on the iPad (history is then stored in the iPad's 
 
 ## Publish to motleytech.net/math
 
-Published the same way as driftboard: `npm run build` (at the repo root) rebuilds the banks
-and writes the production app to `dist/` with base path `/math/`; `dist/` is committed.
-`commitAndPublishMath "message"` (in `~/.zshrc`) builds, commits, pushes `master`, then runs
-`publish.sh` on the server, which pulls and copies `dist/` to `/var/www/motleytech/html/apps/math`.
-nginx serves that folder at `/math/` (a `location ^~ /math/` block in
-`/etc/nginx/sites-available/motleytech`). History stays in each browser, separate from any
-local copy. `sources/pdfs/` is not in git.
+`commitAndPublishMath "message"` (in `~/.zshrc`) runs `npm run build` (rebuilds the banks and
+writes the production app to `dist/` with base path `/math/`), commits, pushes `master`, then
+runs `publish.sh` on the server, which pulls and copies `dist/` to
+`/var/www/motleytech/html/apps/math`. nginx serves that folder at `/math/` (a
+`location ^~ /math/` block in `/etc/nginx/sites-available/motleytech`). History stays in each
+browser. `sources/pdfs/` is not in git.
 
 ## Layout
 
 | Path | What |
 | --- | --- |
-| `sources/pdfs/` | Downloaded source papers (see `sources/noetic_sources.md` for Noetic) |
-| `data/SCHEMA.md` | Question format and quality rules |
+| `data/banks.json` | Bank registry: one bank per competition (name, colour, exam length, scoring) |
+| `data/SCHEMA.md` | Question format, grade labels, answer types and quality rules |
 | `data/raw/<bank>/<paper>.json` | One file per source paper |
-| `app/public/qimages/` | Figures cropped from the papers |
-| `app/public/banks/` | Generated bank files (from `tools/build_banks.py`) |
-| `tools/pdf.py` | Render / crop helper for PDFs |
+| `data/review/verify_list.json` | Questions flagged for a human check |
+| `sources/catalog/` | Catalog of competitions and where their papers come from |
+| `sources/pdfs/` | Downloaded source papers (not in git) |
+| `sources/EXTRACT.md` | Brief for extraction agents |
+| `sources/work/queue.json` | Extraction work units and their status |
+| `sources/work/NOTES.md` | Open issues found during extraction |
+| `app/public/qimages/` | Figures cropped from the papers (WebP) |
+| `app/public/banks/` | Generated bank files, one per grade (from `tools/build_banks.py`) |
+| `tools/pdf.py`, `tools/aops.py` | PDF render/crop helper; AoPS wiki fetcher |
 | `tools/validate.py` | Checks a paper file against the schema |
+| `tools/queue.py` | Work queue: `status`, `next N`, `prompt <id>`, `set <id> <status>` |
 | `app/` | React + TypeScript app (`npm test` runs the unit tests) |
 
-## Adding purchased papers later
+## Grades
 
-1. Put the PDFs in `sources/pdfs/<bank>/purchased/` (bank = `kangaroo`, `noetic` or `moems`).
-2. Ask the agent to extract them following `data/SCHEMA.md` into `data/raw/<bank>/<slug>.json`
-   (one file per paper, figures into `app/public/qimages/<bank>/<slug>/`), with 2 solution
-   approaches per question and the official answer key.
-3. Run `.venv/bin/python tools/validate.py data/raw/<bank>/<slug>.json`, then `./start.sh`.
+Each profile has a grade (1–12, undergraduate or graduate), set when the profile is created and
+changeable from Home, Practice and the exam setup screens. A question appears in every grade its
+paper covers. Proof and free-form problems are self-graded and practice-only.
 
-Duplicates are handled at build time: questions with `duplicateOf` are dropped, and the build
-prints "possible duplicate" pairs for near-identical prompts across papers.
+## Adding papers
+
+Extraction runs as work units in `sources/work/queue.json`. For each unit an agent follows
+`sources/EXTRACT.md` and `data/SCHEMA.md`, writes `data/raw/<bank>/<slug>.json` and figures, and
+validates with `.venv/bin/python tools/validate.py <file>`. `.venv/bin/python tools/queue.py
+prompt <id>` prints the agent prompt for a unit. Then rebuild with `./start.sh` or `npm run build`.
+
+Duplicates are handled at build time: questions with `duplicateOf` are dropped, exact repeats
+are merged, and the build prints "possible duplicate" pairs for near-identical prompts.
 
 ## How practice picks questions
 
@@ -58,7 +70,8 @@ prints "possible duplicate" pairs for near-identical prompts across papers.
 
 ## Exams
 
-30 questions (configurable in Settings), ordered easy → hard, with a running clock and an
-optional time limit. Scoring follows each competition: Kangaroo questions are worth 3/4/5 points
-(no penalty for wrong answers, as in Math Kangaroo USA), Noetic and MOEMS questions 1 point
-each. A mixed exam splits its questions evenly across the three banks. A focused Kangaroo exam uses ten 3-point, ten 4-point and ten 5-point questions.
+- **Mixed exam:** questions split evenly across the competitions available at the grade.
+- **Focused exam:** one competition, with the length of a real paper.
+
+Exams are ordered easy → hard, with a running clock and an optional time limit (Settings).
+Scoring follows each competition's rules (points per question, blank and wrong-answer points).

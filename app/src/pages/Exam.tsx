@@ -12,6 +12,7 @@ import { Solutions } from '../components/Solutions'
 import { Clock, formatDuration, useNow } from '../components/Timer'
 import { Markdown } from '../components/Markdown'
 import { Scratchpad, discardScratch } from '../components/Scratchpad'
+import { GradeChip } from './Profiles'
 
 export function examTitle(index: Parameters<typeof bankName>[0], e: { kind: ExamKind; bank: BankId | null }) {
   return e.kind === 'mixed' ? 'Mixed exam' : `Focused exam · ${bankName(index, e.bank)}`
@@ -70,7 +71,10 @@ export function ExamSetupPage({ kind }: { kind: ExamKind }) {
 
   return (
     <div className="page narrow">
-      <h1 className="title">{kind === 'mixed' ? 'Mixed exam' : 'Focused exam'}</h1>
+      <div className="home-head">
+        <h1 className="title">{kind === 'mixed' ? 'Mixed exam' : 'Focused exam'}</h1>
+        <GradeChip label="Grade" />
+      </div>
       <div className="card">
         {kind === 'focused' && (
           <>

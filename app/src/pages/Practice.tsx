@@ -9,6 +9,7 @@ import { Solutions } from '../components/Solutions'
 import { Markdown } from '../components/Markdown'
 import { formatDuration, useNow } from '../components/Timer'
 import { Scratchpad, discardScratch } from '../components/Scratchpad'
+import { GradeChip } from './Profiles'
 
 /** Practice result: null while answering; "shown" = self-graded solution revealed, not yet marked. */
 type Result = null | 'shown' | boolean
@@ -51,6 +52,7 @@ export function PracticePage() {
   if (!q) {
     return (
       <div className="page narrow">
+        <GradeChip label="Grade" />
         <div className="card">
           No questions available for {gradeName(grade)} with the current settings. Check the practice banks in Settings.
         </div>
@@ -89,6 +91,7 @@ export function PracticePage() {
       <div className="work-split">
         <div className="work-main">
           <div className="toolbar">
+            <GradeChip label="Grade" />
             <div className="muted">
               This session: {session.correct}/{session.answered} correct
               {stat && !answered ? ` · You've seen this one before (${stat.correct}/${stat.seen} right)` : ''}

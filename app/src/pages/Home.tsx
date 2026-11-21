@@ -2,10 +2,10 @@ import { useApp } from '../state'
 import { navigate } from '../router'
 import { formatDuration } from '../components/Timer'
 import { examTitle } from './Exam'
-import { GradeSelect } from './Profiles'
+import { GradeChip } from './Profiles'
 
 export function HomePage() {
-  const { profile, data, banks, settings, grade, updateProfile, index } = useApp()
+  const { profile, data, banks, settings, grade, index } = useApp()
   const g = String(grade)
 
   const inGrade = new Set(banks.all.map((q) => q.id))
@@ -22,15 +22,7 @@ export function HomePage() {
         <h1 className="title">
           Hi {profile?.name}! {profile?.avatar}
         </h1>
-        <label className="grade-chip">
-          <span className="muted">Practising at</span>
-          <GradeSelect
-            value={grade}
-            counts={index.gradeCounts}
-            disabled={!!data.examInProgress}
-            onChange={(v) => profile && updateProfile(profile.id, { grade: v })}
-          />
-        </label>
+        <GradeChip />
       </div>
 
       {data.examInProgress && (

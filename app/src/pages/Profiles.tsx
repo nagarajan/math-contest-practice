@@ -34,6 +34,21 @@ export function GradeSelect({
   )
 }
 
+export function GradeChip({ label = 'Practising at' }: { label?: string }) {
+  const { profile, grade, index, data, updateProfile } = useApp()
+  return (
+    <label className="grade-chip">
+      <span className="muted">{label}</span>
+      <GradeSelect
+        value={grade}
+        counts={index.gradeCounts}
+        disabled={!!data.examInProgress}
+        onChange={(v) => profile && updateProfile(profile.id, { grade: v })}
+      />
+    </label>
+  )
+}
+
 export function ProfileForm({
   initialName = '',
   initialAvatar = AVATARS[0],

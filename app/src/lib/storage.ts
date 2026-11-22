@@ -1,4 +1,4 @@
-import type { Attempt, ExamRecord, Profile, ProfileData, Settings } from '../types'
+import { NO_FOCUS, type Attempt, type ExamRecord, type Profile, type ProfileData, type Settings } from '../types'
 
 const PREFIX = 'mcp:v1:'
 const KEY_PROFILES = PREFIX + 'profiles'
@@ -12,6 +12,7 @@ export const DEFAULT_SETTINGS: Settings = {
   practiceExcluded: [],
   examQuestionCount: 30,
   practiceSelfGraded: true,
+  practiceFocus: NO_FOCUS,
 }
 
 export function emptyData(): ProfileData {

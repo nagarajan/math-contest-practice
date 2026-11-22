@@ -1,0 +1,344 @@
+[
+ {
+  "id": "arml-local-2013-theme-01",
+  "bank": "arml",
+  "source": {
+   "contest": "ARML Local",
+   "paper": "2013 Theme Round",
+   "year": 2013,
+   "number": 1,
+   "url": "https://arml3.com/wp-content/uploads/2026/03/ARML-2009-2014.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "(Theme: knights on a chessboard.) A knight moves either two squares horizontally and one square vertically, or two squares vertically and one square horizontally, and it can jump over other pieces. Compute the minimum number of moves to exchange the positions of the two white and black knights on the $3\\times3$ board as shown in the graphic (white knights in the top corners and black knights in the bottom corners at the start; after the exchange the colours are swapped). Two knights may not occupy the same square at the same time. Alternating black and white knight moves is not required.",
+  "image": "qimages/arml/local-2013-theme/q01.webp",
+  "choices": null,
+  "answer": "16",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "The knights move around an 8-cycle",
+    "body": "On a $3\\times3$ board the centre square is never reachable, and the eight border squares form a cycle under knight moves: going around, $(1,1)\\to(2,3)\\to(3,1)\\to(1,2)\\to(3,3)\\to(2,1)\\to(1,3)\\to(3,2)\\to(1,1)$ (row, column). Every knight move goes to one of the two neighbouring squares on this cycle, and the corners are every second square on the cycle. Knights cannot pass each other, so their cyclic order is fixed.\n\nGoing around the cycle the knights are W, B, B, W at corner positions $0,2,4,6$ (cycle positions). The target has white at positions $2,4$ and black at $6,0$. Because the cyclic order is preserved and the colours must match, every knight has to advance four steps along the cycle (all in the same direction). That is $4\\cdot4=16$ moves, and $16$ is achievable by moving the knights in turn.\n\n**Answer: 16**"
+   }
+  ],
+  "topics": [
+   "graph-theory",
+   "logic"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "arml-local-2013-theme-02",
+  "bank": "arml",
+  "source": {
+   "contest": "ARML Local",
+   "paper": "2013 Theme Round",
+   "year": 2013,
+   "number": 2,
+   "url": "https://arml3.com/wp-content/uploads/2026/03/ARML-2009-2014.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "(Theme: knights on a chessboard.) A knight moves either two squares horizontally and one square vertically, or two squares vertically and one square horizontally, and it can jump over other pieces. Compute the minimum number of moves to change the position on the left of the graphic (on a board of $13$ squares) into the position on the right, in which the two white and black knights have exchanged their squares. Two knights may not occupy the same square at the same time. Alternating black and white knight moves is not required.",
+  "image": "qimages/arml/local-2013-theme/q02.webp",
+  "choices": null,
+  "answer": "14",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Parity bound and an explicit solution",
+    "body": "Colour the squares like a chessboard. Every move changes the colour of the square a knight stands on. The two white knights stand on squares of colours (in the sense of a $0/1$ chessboard colouring) summing to the same value at the start and at the end, so the white knights make an even total number of moves; likewise the black knights. Hence the total is even. An exhaustive breadth-first search over all positions of the four knights shows that $12$ or fewer moves are impossible and $14$ is achievable (without the restriction that knights may not share a square, $12$ moves would suffice, but every $12$-move solution puts two knights on one square at some moment).\n\nNumber rows $0$ to $4$ from the top and columns $0$ to $4$ from the left. The left board has white knights at $(0,1),(1,3)$ and black knights at $(3,1),(4,3)$. One $14$-move solution (W = white, B = black): W $(0,1)\\to(2,2)$; W $(1,3)\\to(2,1)\\to(3,3)\\to(1,2)$; W $(2,2)\\to(1,4)$; B $(3,1)\\to(2,3)$; W $(1,2)\\to(3,1)$; B $(2,3)\\to(1,1)\\to(3,2)\\to(1,3)$; B $(4,3)\\to(2,2)\\to(0,1)$; W $(1,4)\\to(2,2)\\to(4,3)$. After these moves the white knights are on $(3,1),(4,3)$ and the black knights on $(1,3),(0,1)$, as required.\n\n**Answer: 14**"
+   }
+  ],
+  "topics": [
+   "graph-theory",
+   "logic"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "arml-local-2013-theme-03",
+  "bank": "arml",
+  "source": {
+   "contest": "ARML Local",
+   "paper": "2013 Theme Round",
+   "year": 2013,
+   "number": 3,
+   "url": "https://arml3.com/wp-content/uploads/2026/03/ARML-2009-2014.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "(Theme: knights on a chessboard.) A *hexaknight* moves either two squares horizontally, or two squares vertically and one square horizontally (six possible moves). On the $3\\times10$ board shown, the grey squares are squares of the other colour that the hexaknight cannot use, so only the white squares matter; the hexaknight starts in the upper left corner and wants to reach the lower right corner. Two of the eight non-corner white squares are now also coloured gray. If all eight squares are equally likely to be the ones coloured gray, compute the probability (as a fraction) that there exists a path for the hexaknight in the upper left corner to reach the lower right corner of the board while travelling only on white squares.",
+  "image": "qimages/arml/local-2013-theme/q03.webp",
+  "choices": null,
+  "answer": "3/4",
+  "answerDisplay": "$\\frac{3}{4}$",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "The graph is a strip",
+    "body": "The white squares are the odd columns of the top row and the even columns of the bottom row (the middle row is all grey). Order them left to right in zigzag fashion as $v_1,v_2,\\dots,v_{10}$: top $1$, bottom $2$, top $3$, bottom $4$, and so on. A hexaknight move goes from $v_i$ to $v_{i\\pm2}$ (two squares horizontally) or to $v_{i\\pm1}$ (two rows and one column). So $v_i$ is adjacent exactly to $v_{i\\pm1}$ and $v_{i\\pm2}$.\n\nThe hexaknight goes from $v_1$ to $v_{10}$. Removing a set of the non-corner vertices $v_2,\\dots,v_9$ blocks all paths if and only if two consecutive vertices $v_i,v_{i+1}$ are both removed (steps are of size at most $2$, so a single missing vertex can be jumped over, but two in a row cannot).\n\nChoose $2$ of the $8$ vertices: $\\binom82=28$ ways. The blocking pairs are the $7$ consecutive pairs $(v_2,v_3),\\dots,(v_8,v_9)$. So the probability of a path is $\\frac{28-7}{28}=\\frac34$.\n\n**Answer: $\\frac34$**"
+   }
+  ],
+  "topics": [
+   "probability",
+   "graph-theory"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "arml-local-2013-theme-04",
+  "bank": "arml",
+  "source": {
+   "contest": "ARML Local",
+   "paper": "2013 Theme Round",
+   "year": 2013,
+   "number": 4,
+   "url": "https://arml3.com/wp-content/uploads/2026/03/ARML-2009-2014.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "(Theme: knights on a chessboard.) A *hexaknight* moves either two squares horizontally, or two squares vertically and one square horizontally (six possible moves). On the $3\\times10$ board shown, the grey squares are squares of the other colour that the hexaknight cannot use, so only the white squares matter; the hexaknight starts in the upper left corner and wants to reach the lower right corner. Three of the eight non-corner white squares are now also coloured gray. If all eight squares are equally likely to be the ones coloured gray, compute the probability (as a fraction) that there exists a path for the hexaknight in the upper left corner to reach the lower right corner of the board while travelling only on white squares.",
+  "image": "qimages/arml/local-2013-theme/q03.webp",
+  "choices": null,
+  "answer": "5/14",
+  "answerDisplay": "$\\frac{5}{14}$",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Same strip, three removed vertices",
+    "body": "As in the previous problem, label the white squares $v_1,\\dots,v_{10}$ in zigzag order; $v_i$ is adjacent to $v_{i\\pm1},v_{i\\pm2}$, and a path from $v_1$ to $v_{10}$ survives exactly when no two consecutive vertices among $v_2,\\dots,v_9$ are removed.\n\nWe choose $3$ of $8$ vertices: $\\binom83=56$ ways. Choices with no two consecutive: choose $3$ non-adjacent positions among $8$ in a row, which can be done in $\\binom{8-3+1}{3}=\\binom63=20$ ways. The probability is $\\frac{20}{56}=\\frac5{14}$.\n\n**Answer: $\\frac5{14}$**"
+   }
+  ],
+  "topics": [
+   "probability",
+   "graph-theory"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "arml-local-2013-theme-05",
+  "bank": "arml",
+  "source": {
+   "contest": "ARML Local",
+   "paper": "2013 Theme Round",
+   "year": 2013,
+   "number": 5,
+   "url": "https://arml3.com/wp-content/uploads/2026/03/ARML-2009-2014.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "(Theme: knights on a chessboard.) A knight moves either two squares horizontally and one square vertically, or two squares vertically and one square horizontally, and it can jump over other pieces. Consider the path formed by joining in order the centres of the squares visited by a knight. The path is *simple* if none of the edges cross in their interiors and is *closed* if the knight returns to the square where it began. (In the example board shown, the white knight's path is simple but not closed, while the black knight's path is closed but not simple.) If the centres of adjacent squares are one unit apart, compute the maximum area enclosed by a knight's simple closed path on an $8\\times8$ board.",
+  "image": "qimages/arml/local-2013-theme/q05.webp",
+  "choices": null,
+  "answer": "37",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Hug the border",
+    "body": "A polygon of large area should stay as close to the border of the board as possible. Numbering rows and columns $0$ to $7$, the closed knight path $(0,1),(1,3),(0,5),(1,7),(3,6),(5,7),(7,6),(6,4),(7,2),(6,0),(4,1),(2,0)$ and back to $(0,1)$ is simple, with $12$ vertices. It fits inside a $7\\times7$ square (the span of the centres) with $12$ right triangles with legs $1$ and $2$ (each of area $1$) cut off, so its area is $49-12=37$.\n\nA search over simple closed knight paths in the outer rings of the board found nothing larger, and the official answer is $37$ (the other natural path, which the black knight in the figure follows, encloses $35$).\n\n**Answer: 37**"
+   }
+  ],
+  "topics": [
+   "geometry",
+   "graph-theory"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "arml-local-2013-theme-06",
+  "bank": "arml",
+  "source": {
+   "contest": "ARML Local",
+   "paper": "2013 Theme Round",
+   "year": 2013,
+   "number": 6,
+   "url": "https://arml3.com/wp-content/uploads/2026/03/ARML-2009-2014.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "(Theme: knights on a chessboard.) A knight moves either two squares horizontally and one square vertically, or two squares vertically and one square horizontally, and it can jump over other pieces. On a board, a square is considered *attacked* if it contains a knight or can be reached by a knight in one move (on the $5\\times5$ board with a knight in the centre, nine squares are attacked). Two knights are randomly placed on distinct squares of a $3\\times3$ board, with all squares equally likely. Compute the expected number of squares that are attacked.",
+  "image": null,
+  "choices": null,
+  "answer": "44/9",
+  "answerDisplay": "$\\frac{44}{9}$",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Use the 8-cycle",
+    "body": "There are $\\binom92=36$ equally likely pairs of squares. The centre square has no knight moves, so a knight there attacks only its own square ($1$ square); a knight on a border square attacks its own square and its two neighbours on the $8$-cycle of border squares ($3$ squares).\n\nCentre plus a border square ($8$ pairs): $1+3=4$ squares attacked.\n\nTwo border squares ($28$ pairs): let their distance around the 8-cycle be $d$. The attacked squares are the two knights and their neighbours: $d=1$ (8 pairs): $4$ squares; $d=2$ (8 pairs): $5$; $d=3$ (8 pairs): $6$; $d=4$ (4 pairs): $6$.\n\nTotal over all pairs: $8\\cdot4+8\\cdot4+8\\cdot5+8\\cdot6+4\\cdot6=32+32+40+48+24=176$. The expected value is $\\frac{176}{36}=\\frac{44}9$.\n\n**Answer: $\\frac{44}{9}$**"
+   }
+  ],
+  "topics": [
+   "probability",
+   "counting"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "arml-local-2013-theme-07",
+  "bank": "arml",
+  "source": {
+   "contest": "ARML Local",
+   "paper": "2013 Theme Round",
+   "year": 2013,
+   "number": 7,
+   "url": "https://arml3.com/wp-content/uploads/2026/03/ARML-2009-2014.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "(Theme: knights on a chessboard.) A knight moves either two squares horizontally and one square vertically, or two squares vertically and one square horizontally, and it can jump over other pieces. A square is *attacked* if it contains a knight or can be reached by a knight in one move. Compute the minimum number of knights needed to attack every square of a $4\\times6$ board.",
+  "image": null,
+  "choices": null,
+  "answer": "4",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Lower bound and construction",
+    "body": "A knight on a $4\\times6$ board has at most $6$ moves (this happens on the central squares), so it attacks at most $7$ squares including its own. Three knights attack at most $21<24$ squares, so at least $4$ knights are needed.\n\nFour knights suffice: place them on the four central squares (rows $2$ and $3$, columns $3$ and $4$ in $1$-indexed coordinates, i.e. the central $2\\times2$ block). One checks directly that every one of the $24$ squares is attacked. So the minimum is $4$.\n\n**Answer: 4**"
+   }
+  ],
+  "topics": [
+   "counting",
+   "logic"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "arml-local-2013-theme-08",
+  "bank": "arml",
+  "source": {
+   "contest": "ARML Local",
+   "paper": "2013 Theme Round",
+   "year": 2013,
+   "number": 8,
+   "url": "https://arml3.com/wp-content/uploads/2026/03/ARML-2009-2014.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "(Theme: knights on a chessboard.) A knight moves either two squares horizontally and one square vertically, or two squares vertically and one square horizontally, and it can jump over other pieces. **Estimation problem** (in the contest, an answer within $10\\%$ of the correct value earned credit). A knight is on a square on an infinite chessboard. Compute the number of distinct squares where the knight can end up after exactly $10$ moves.",
+  "image": null,
+  "choices": null,
+  "answer": "$741$ (any estimate from $666.9$ to $815.1$ was accepted in the contest)",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Count by distance and parity",
+    "body": "Each knight move changes the colour of the square, so after $10$ moves the knight is on a square of its starting colour. Conversely, a square of the starting colour that is at least $d\\le10$ moves away with $d$ even can be reached in exactly $10$ moves by padding with back-and-forth moves.\n\nThe number of squares whose shortest knight distance from the start is exactly $d=0,1,2,\\dots,10$ is $1,8,32,68,96,120,148,176,204,232,260$ (a breadth-first count). Summing the even $d$: $1+32+96+148+204+260=741$.\n\nRough estimate: after $10$ moves the knight lies within distance $10\\sqrt5$ (a disc of area $500\\pi\\approx1571$), and about half of the squares have the right colour, giving about $785$, which is within $10\\%$.\n\n**Answer: 741 squares**"
+   }
+  ],
+  "topics": [
+   "counting",
+   "graph-theory"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "arml-local-2013-theme-09",
+  "bank": "arml",
+  "source": {
+   "contest": "ARML Local",
+   "paper": "2013 Theme Round",
+   "year": 2013,
+   "number": 9,
+   "url": "https://arml3.com/wp-content/uploads/2026/03/ARML-2009-2014.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "(Theme: knights on a chessboard.) For integers $m$ and $n$ with $0\\le m\\le n$, an $(m,n)$-restricted knight can only move either up $m$ squares and right $n$ squares, or up $n$ squares and right $m$ squares. The possible moves of a $(1,2)$-restricted knight are shown in the figure. Compute the number of distinct paths a $(1,2)$-restricted knight can take from the lower left corner to the upper right corner of a $10\\times10$ board.",
+  "image": "qimages/arml/local-2013-theme/q09.webp",
+  "choices": null,
+  "answer": "20",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Count move types",
+    "body": "To go from the lower left corner to the upper right corner of a $10\\times10$ board the knight must make a total displacement of $9$ up and $9$ right. If it makes $a$ moves of type (up $1$, right $2$) and $b$ moves of type (up $2$, right $1$), then $a+2b=9$ and $2a+b=9$, so $a=b=3$. The knight never leaves the board because all moves go up and right and the total displacement is $9$ in each direction. Any order of the $6$ moves is a valid path: $\\binom63=20$.\n\n**Answer: 20**"
+   }
+  ],
+  "topics": [
+   "counting"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "arml-local-2013-theme-10",
+  "bank": "arml",
+  "source": {
+   "contest": "ARML Local",
+   "paper": "2013 Theme Round",
+   "year": 2013,
+   "number": 10,
+   "url": "https://arml3.com/wp-content/uploads/2026/03/ARML-2009-2014.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "(Theme: knights on a chessboard.) For integers $m$ and $n$ with $0\\le m\\le n$, an $(m,n)$-restricted knight can only move either up $m$ squares and right $n$ squares, or up $n$ squares and right $m$ squares. Compute the number of ordered pairs $(m,n)$ with $0\\le m\\le n$ such that there exist at least $20$ distinct paths for an $(m,n)$-restricted knight from the lower left corner to the upper right corner of a $17\\times17$ board.",
+  "image": null,
+  "choices": null,
+  "answer": "4",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Count moves of each type",
+    "body": "The displacement from corner to corner is $16$ up and $16$ right. With $a$ moves (up $m$, right $n$) and $b$ moves (up $n$, right $m$): $am+bn=16$ and $an+bm=16$, so $(a-b)(n-m)=0$.\n\nIf $m=n>0$: all moves are the same, so there is at most one path. (And $m=n=0$ has none.) If $m<n$: $a=b=t$ with $t(m+n)=16$, and the number of paths is $\\binom{2t}{t}$. Since $\\binom63=20$ is the first central binomial coefficient reaching $20$ and $\\binom42=6$, $\\binom21=2$, we need $t\\ge3$. Also $t\\mid16$ gives $t\\in\\{4,8,16\\}$, so $m+n\\in\\{4,2,1\\}$.\n\nWith $0\\le m<n$: $m+n=4$: $(0,4),(1,3)$; $m+n=2$: $(0,2)$; $m+n=1$: $(0,1)$. Total $4$ pairs.\n\n**Answer: 4**"
+   }
+  ],
+  "topics": [
+   "counting",
+   "number-theory"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ }
+]

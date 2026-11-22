@@ -4,7 +4,7 @@ import { navigate } from '../router'
 import { gradeName, type Attempt, type BankId, type ExamKind, type ExamRecord, type Question } from '../types'
 import { buildExam } from '../lib/selection'
 import { formatAnswer, plainPreview, questionPoints, scoreAnswer } from '../lib/answers'
-import { bankMeta, bankName } from '../lib/banks'
+import { bankMeta, examTitle } from '../lib/banks'
 import { useLookup } from '../lib/useLookup'
 import { newId, recordExam } from '../lib/storage'
 import { BankPill, QuestionView, SourceTag, QuestionImage } from '../components/QuestionView'
@@ -13,10 +13,6 @@ import { Clock, formatDuration, useNow } from '../components/Timer'
 import { Markdown } from '../components/Markdown'
 import { Scratchpad, discardScratch } from '../components/Scratchpad'
 import { GradeChip } from './Profiles'
-
-export function examTitle(index: Parameters<typeof bankName>[0], e: { kind: ExamKind; bank: BankId | null }) {
-  return e.kind === 'mixed' ? 'Mixed exam' : `Focused exam · ${bankName(index, e.bank)}`
-}
 
 export function ExamSetupPage({ kind }: { kind: ExamKind }) {
   const { banks, data, updateData, settings, grade } = useApp()

@@ -82,7 +82,10 @@ export interface Question {
   answerDisplay?: string | null
   acceptedAnswers: string[] | null
   answerUnit: string | null
-  solutions: Solution[]
+  /** Inline solutions (tests, older bank files); normally loaded from `sol` on demand. */
+  solutions?: Solution[]
+  /** Solutions file under banks/sol/ ("<bank>/<paper>"), null when the question has none. */
+  sol?: string | null
   topics: string[]
   difficulty: 1 | 2 | 3
   reviewNote?: string | null
@@ -189,4 +192,14 @@ export interface Settings {
   examQuestionCount: number
   /** Include self-graded (proof / free-form) problems in general practice. */
   practiceSelfGraded: boolean
+  /** Narrow general practice to one competition, topic and/or difficulty (null = any). */
+  practiceFocus: PracticeFocus
 }
+
+export interface PracticeFocus {
+  bank: BankId | null
+  topic: string | null
+  difficulty: 1 | 2 | 3 | null
+}
+
+export const NO_FOCUS: PracticeFocus = { bank: null, topic: null, difficulty: null }

@@ -1,0 +1,409 @@
+[
+ {
+  "id": "hmmt-feb-2002-team-01",
+  "bank": "hmmt",
+  "source": {
+   "contest": "HMMT February",
+   "paper": "2002 Team Round",
+   "year": 2002,
+   "number": 1,
+   "url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2002/feb/team/problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 15,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "A *palindrome* is a positive integer $n$ not divisible by $10$ such that if you write the decimal digits of $n$ in reverse order, the number you get is $n$ itself. For instance, the numbers $4$ and $25752$ are palindromes.\n\nDetermine the number of palindromes that are less than $1000$.",
+  "image": null,
+  "choices": null,
+  "answer": "108",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Solution",
+    "body": "One-digit palindromes: $9$ (the digits $1$ to $9$). Two-digit palindromes are $aa$ with $a\\neq0$: $9$. Three-digit palindromes are $aba$ with $a\\ne0$ and $b$ any digit: $9\\cdot10=90$. Total $9+9+90=108$.\n\n**Answer: 108**"
+   }
+  ],
+  "topics": [
+   "counting",
+   "number-theory"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "hmmt-feb-2002-team-02",
+  "bank": "hmmt",
+  "source": {
+   "contest": "HMMT February",
+   "paper": "2002 Team Round",
+   "year": 2002,
+   "number": 2,
+   "url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2002/feb/team/problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 30,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "A *palindrome* is a positive integer $n$ not divisible by $10$ such that if you write the decimal digits of $n$ in reverse order, the number you get is $n$ itself. For instance, the numbers $4$ and $25752$ are palindromes.\n\nDetermine the number of four-digit integers $n$ such that $n$ and $2n$ are both palindromes.",
+  "image": null,
+  "choices": null,
+  "answer": "20",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Solution",
+    "body": "Write $n=\\overline{abba}$ with $a\\ne0$. If $a,b\\le4$ there are no carries when doubling, so $2n=\\overline{(2a)(2b)(2b)(2a)}$ is a palindrome. Conversely suppose $n$ and $2n$ are palindromes.\n\n- If $a\\ge5$, then $2n$ has five digits and leading digit $1$, but $2n$ is even so its last digit is even, contradicting that $2n$ is a palindrome. So $a\\le4$ and $2n$ has four digits.\n- Since $a\\le4$ there is no carry out of the units place, so the tens digit of $2n$ is $2b\\bmod10$, which is even. If $b\\ge5$, the tens column produces a carry of $1$, so the hundreds digit of $2n$ is $(2b\\bmod10)+1$, which is odd. But the tens and hundreds digits of the palindrome $2n$ are equal, a contradiction. So $b\\le4$.\n\nHence $a\\in\\{1,2,3,4\\}$, $b\\in\\{0,1,2,3,4\\}$: $4\\cdot5=20$ numbers.\n\n**Answer: 20**"
+   }
+  ],
+  "topics": [
+   "counting",
+   "number-theory"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "hmmt-feb-2002-team-03",
+  "bank": "hmmt",
+  "source": {
+   "contest": "HMMT February",
+   "paper": "2002 Team Round",
+   "year": 2002,
+   "number": 3,
+   "url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2002/feb/team/problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 40,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "A *palindrome* is a positive integer $n$ not divisible by $10$ such that if you write the decimal digits of $n$ in reverse order, the number you get is $n$ itself. For instance, the numbers $4$ and $25752$ are palindromes.\n\nSuppose that a positive integer $n$ has the property that $n,2n,3n,\\dots,9n$ are all palindromes. Prove that the decimal digits of $n$ are all zeros or ones.",
+  "image": null,
+  "choices": null,
+  "answer": "Show the units digit of $n$ is $1$, then use $9n$: a leftmost digit $\\ge2$ creates a carry that breaks the palindrome property of $9n$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Solution",
+    "body": "Let $n$ have $k$ digits $d_1d_2\\dots d_k$ (left to right); $d_i=d_{k+1-i}$.\n\n**Step 1: $d_k=d_1=1$.** The units digit $a=d_k$ is nonzero. If $a$ were even, $5n$ would end in $0$, impossible for a palindrome. If $a\\in\\{5,7,9\\}$, then also $d_1=a\\ge5$, so $2n\\ge10^k$ and $2n<2\\cdot10^k$: $2n$ has leading digit $1$, but its units digit is even, contradiction. If $a=3$, then $d_1=3$, so $1.2\\cdot10^k\\le4n<1.6\\cdot10^k$: $4n$ has leading digit $1$ but even units digit, contradiction. So $a=1$.\n\n**Step 2: $9n$ has $k$ digits.** $9n$ ends in $9$. If $9n$ had $k+1$ digits, then since $n<2\\cdot10^{k-1}$ we get $9n<1.8\\cdot10^k$, so its leading digit would be $1\\ne9$, contradicting palindromicity.\n\n**Step 3.** Suppose some digit of $n$ is not $0$ or $1$. Let $d_{r+1}=b\\ge2$ be the leftmost such digit; then $r\\ge1$ and $d_1,\\dots,d_r\\in\\{0,1\\}$. Write $n=N\\cdot10^{k-r}+R$ with $N=\\overline{d_1\\dots d_r}$ and $0\\le R<10^{k-r}$. Because $d_{r+1}\\ge2$, $R\\ge2\\cdot10^{k-r-1}$, so $9R\\ge1.8\\cdot10^{k-r}$; also $9R<9\\cdot10^{k-r}$. Hence $\\lfloor 9n/10^{k-r}\\rfloor=9N+c$ with $1\\le c\\le8$. By Step 2, $9n$ has $k$ digits, and the $r$-th digit from the left of $9n$ is the units digit of $9N+c$, namely $(9d_r+c)\\bmod10$.\n\nNow look at the right end. By palindromicity, the last $r$ digits of $n$ (from the right) are $d_1,\\dots,d_r$, all $0$ or $1$. Multiplying by $9$ column by column gives digits $9d_i\\in\\{0,9\\}$ with no carries, so the $r$-th digit from the right of $9n$ is $9d_r$ (which is $0$ or $9$).\n\nSince $9n$ is a palindrome, its $r$-th digit from the left equals its $r$-th digit from the right: $(9d_r+c)\\bmod10=9d_r$, i.e. $c\\equiv0\\pmod{10}$, contradicting $1\\le c\\le8$. Hence all digits of $n$ are $0$ or $1$. ∎"
+   }
+  ],
+  "topics": [
+   "number-theory"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "hmmt-feb-2002-team-04",
+  "bank": "hmmt",
+  "source": {
+   "contest": "HMMT February",
+   "paper": "2002 Team Round",
+   "year": 2002,
+   "number": 4,
+   "url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2002/feb/team/problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 15,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Let $n$ be an integer. Prove that $$\\left\\lfloor\\frac n2\\right\\rfloor+\\left\\lfloor\\frac{n+1}2\\right\\rfloor=n.$$ (Here $\\lfloor x\\rfloor$ is the largest integer less than or equal to $x$.)",
+  "image": null,
+  "choices": null,
+  "answer": "Split into $n$ even and $n$ odd.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Solution",
+    "body": "If $n=2m$: $\\lfloor n/2\\rfloor=m$ and $\\lfloor (n+1)/2\\rfloor=\\lfloor m+\\frac12\\rfloor=m$, sum $2m=n$.\n\nIf $n=2m+1$: $\\lfloor n/2\\rfloor=\\lfloor m+\\frac12\\rfloor=m$ and $\\lfloor(n+1)/2\\rfloor=m+1$, sum $2m+1=n$. ∎"
+   }
+  ],
+  "topics": [
+   "number-theory",
+   "algebra"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "hmmt-feb-2002-team-05",
+  "bank": "hmmt",
+  "source": {
+   "contest": "HMMT February",
+   "paper": "2002 Team Round",
+   "year": 2002,
+   "number": 5,
+   "url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2002/feb/team/problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 20,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Prove that for every integer $n$, $$\\left\\lfloor\\frac n2\\right\\rfloor\\left\\lfloor\\frac{n+1}2\\right\\rfloor=\\left\\lfloor\\frac{n^2}4\\right\\rfloor.$$ (Here $\\lfloor x\\rfloor$ is the largest integer less than or equal to $x$.)",
+  "image": null,
+  "choices": null,
+  "answer": "Split into $n$ even and $n$ odd.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Solution",
+    "body": "If $n=2m$: the left side is $m\\cdot m=m^2$ and the right side is $\\lfloor m^2\\rfloor=m^2$.\n\nIf $n=2m+1$: the left side is $m(m+1)=m^2+m$. The right side is $\\left\\lfloor\\frac{4m^2+4m+1}4\\right\\rfloor=\\left\\lfloor m^2+m+\\frac14\\right\\rfloor=m^2+m$. ∎"
+   }
+  ],
+  "topics": [
+   "number-theory",
+   "algebra"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "hmmt-feb-2002-team-06",
+  "bank": "hmmt",
+  "source": {
+   "contest": "HMMT February",
+   "paper": "2002 Team Round",
+   "year": 2002,
+   "number": 6,
+   "url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2002/feb/team/problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 20,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "For positive integers $L$, let $S_L=\\sum_{n=1}^{L}\\left\\lfloor\\frac n2\\right\\rfloor$. Determine all $L$ for which $S_L$ is a square number. (You may use without proof the known summations $\\sum_{n=1}^Ln=L(L+1)/2$ and $\\sum_{n=1}^Ln^3=L^2(L+1)^2/4$.)",
+  "image": null,
+  "choices": null,
+  "answer": "$L=1$ or $L$ even (here $0=0^2$ counts as a square).",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Solution",
+    "body": "**Odd $L=2k-1$ ($k\\ge1$).** Pair the terms: $\\lfloor n/2\\rfloor=m$ for $n=2m,2m+1$. So $S_L=0+\\sum_{m=1}^{k-1}2m=k(k-1)$. For $k=1$ this is $0=0^2$ (so $L=1$ works). For $k\\ge2$, $(k-1)^2<k(k-1)<k^2$, so it is not a square.\n\n**Even $L=2k$.** $S_{2k}=S_{2k-1}+\\lfloor 2k/2\\rfloor=k(k-1)+k=k^2$, always a square.\n\nSo $S_L$ is a square exactly for $L=1$ and all even $L$.\n\n**Answer: $L=1$ or $L$ even**"
+   }
+  ],
+  "topics": [
+   "number-theory",
+   "sequences-series"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "hmmt-feb-2002-team-07",
+  "bank": "hmmt",
+  "source": {
+   "contest": "HMMT February",
+   "paper": "2002 Team Round",
+   "year": 2002,
+   "number": 7,
+   "url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2002/feb/team/problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 45,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "For positive integers $L$, let $T_L=\\sum_{n=1}^{L}\\left\\lfloor\\frac{n^3}9\\right\\rfloor$. Determine all $L$ for which $T_L$ is a square number. (You may use without proof the known summations $\\sum_{n=1}^Ln=L(L+1)/2$ and $\\sum_{n=1}^Ln^3=L^2(L+1)^2/4$.)",
+  "image": null,
+  "choices": null,
+  "answer": "$L=1,2$ only (with $T_1=T_2=0$ counted as squares).",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Solution",
+    "body": "$T_L$ is a square iff $9T_L$ is. Since $(3m+k)^3\\equiv k^3\\pmod 9$, we have $n^3\\equiv0,1,8\\pmod 9$ according as $n\\equiv0,1,2\\pmod3$. Hence $9\\lfloor n^3/9\\rfloor=n^3-\\rho(n)$ with $\\rho(n)\\in\\{0,1,8\\}$ respectively. Let $M=L(L+1)/2$, $A=\\#\\{n\\le L:n\\equiv1\\ (3)\\}=\\lfloor\\frac{L+2}3\\rfloor$ and $B=\\#\\{n\\le L:n\\equiv2\\ (3)\\}=\\lfloor\\frac{L+1}3\\rfloor$. Then\n$$9T_L=M^2-A-8B.$$\nFor $L\\ge1$, $A\\ge1$ so $9T_L<M^2$. We claim $9T_L>(M-1)^2$ for $L\\ge4$, i.e. $A+8B<2M-1=L^2+L-1$, i.e. $A+8B\\le L^2+L-2$. Now $A+8B\\le\\frac{L+2}3+\\frac{8(L+1)}3=3L+\\frac{10}3$, and $3L+\\frac{10}3\\le L^2+L-2\\iff(L-1)^2\\ge\\frac{19}3$, true for $L\\ge4$. So for $L\\ge4$, $(M-1)^2<9T_L<M^2$ and $9T_L$ is not a square.\n\nDirectly: $T_1=T_2=0=0^2$ and $T_3=0+0+3=3$ is not a square. So the answer is $L\\in\\{1,2\\}$. ∎"
+   }
+  ],
+  "topics": [
+   "number-theory",
+   "sequences-series"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "hmmt-feb-2002-team-08",
+  "bank": "hmmt",
+  "source": {
+   "contest": "HMMT February",
+   "paper": "2002 Team Round",
+   "year": 2002,
+   "number": 8,
+   "url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2002/feb/team/problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 35,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Consider a two-player game played on a board consisting of fourteen spaces in a row. The leftmost space is labeled START, and the rightmost space is labeled END. Each of the twelve other squares, numbered $1$ through $12$ from left to right, may be blank or may be labeled with an arrow pointing to the right. A *blank square* is one of these twelve squares that is not labeled with an arrow. The set of blank squares is called the *board configuration*. (For example, the configuration $\\{1,2,3,4,7,8,10,11,12\\}$ has arrows exactly on squares $5$, $6$ and $9$.)\n\nFor $i\\in\\{1,2\\}$, player $i$ has a die that produces each integer from $1$ to $s_i$ with probability $1/s_i$; $s_1,s_2$ are positive integers fixed before the game begins. The rules are:\n\n1. The players take turns alternately, and player 1 takes the first turn.\n2. On each of his turns, player $i$ rolls his die and moves his piece to the right by the number of squares rolled. If the move ends on a square marked with an arrow, he moves his piece forward another $s_i$ squares. If that move ends on an arrow, he moves another $s_i$ squares, repeating until his piece comes to rest on a square without an arrow.\n3. If a player's move would take him past the END square, he instead lands on the END square.\n4. Whichever player reaches the END square first wins.\n\n(Example: if $s_1=3$ and the first player is on square $4$ of the configuration above and rolls a $2$, he moves to square $6$, then to square $9$, and finally comes to rest on square $12$.)\n\nIn this problem only, assume $s_1=4$ and that exactly one board square, say square number $n$, is marked with an arrow. Determine the choice of $n$ that maximizes the average distance (in squares) the first player travels in his first two turns.",
+  "image": null,
+  "choices": null,
+  "answer": "4",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Solution",
+    "body": "Since only one square has an arrow and a player moves at most $4+4+4=12<13$ squares in two turns, no truncation at END occurs, and the arrow can be used at most once. By linearity of expectation, the average distance travelled in two turns equals $E[\\text{two rolls}]+4\\cdot P(\\text{player 1 lands on the arrow in his first two turns})$, and the first term does not depend on $n$.\n\nIf $n\\ge5$, the first roll cannot reach the arrow; after it, the second roll hits the arrow with probability at most $\\frac14$. So the probability is at most $\\frac14$.\n\nIf $n\\le4$: the first roll hits it with probability $\\frac14$. If the first roll $r$ is less than $n$ (probability $\\frac{n-1}4$), the second roll hits it with probability $\\frac14$. The total is $\\frac14+\\frac{n-1}{16}=\\frac{n+3}{16}$, which is largest for $n=4$, giving $\\frac7{16}>\\frac14$.\n\nSo the maximum is attained only at $n=4$.\n\n**Answer: $n=4$**"
+   }
+  ],
+  "topics": [
+   "probability",
+   "games"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "hmmt-feb-2002-team-09",
+  "bank": "hmmt",
+  "source": {
+   "contest": "HMMT February",
+   "paper": "2002 Team Round",
+   "year": 2002,
+   "number": 9,
+   "url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2002/feb/team/problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 30,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Consider a two-player game played on a board consisting of fourteen spaces in a row. The leftmost space is labeled START, and the rightmost space is labeled END. Each of the twelve other squares, numbered $1$ through $12$ from left to right, may be blank or may be labeled with an arrow pointing to the right. A *blank square* is one of these twelve squares that is not labeled with an arrow. The set of blank squares is called the *board configuration*. (For example, the configuration $\\{1,2,3,4,7,8,10,11,12\\}$ has arrows exactly on squares $5$, $6$ and $9$.)\n\nFor $i\\in\\{1,2\\}$, player $i$ has a die that produces each integer from $1$ to $s_i$ with probability $1/s_i$; $s_1,s_2$ are positive integers fixed before the game begins. The rules are:\n\n1. The players take turns alternately, and player 1 takes the first turn.\n2. On each of his turns, player $i$ rolls his die and moves his piece to the right by the number of squares rolled. If the move ends on a square marked with an arrow, he moves his piece forward another $s_i$ squares. If that move ends on an arrow, he moves another $s_i$ squares, repeating until his piece comes to rest on a square without an arrow.\n3. If a player's move would take him past the END square, he instead lands on the END square.\n4. Whichever player reaches the END square first wins.\n\n(Example: if $s_1=3$ and the first player is on square $4$ of the configuration above and rolls a $2$, he moves to square $6$, then to square $9$, and finally comes to rest on square $12$.)\n\nSuppose $s_1=s_2$. Prove that for each board configuration, the first player wins with probability strictly greater than $\\frac12$.",
+  "image": null,
+  "choices": null,
+  "answer": "Symmetry: player 1 wins whenever the roll sequences are equal or when his sequence is the faster one; ties favour him.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Solution",
+    "body": "Let $s=s_1=s_2$ and let $\\sigma_1,\\sigma_2$ be the sequences of the next $13$ rolls of the two players (each turn moves at least one square, so $13$ turns always suffice to reach END). They are independent and identically distributed, and each player's position after $t$ turns is the same function of his first $t$ rolls. Let $T_i$ be the turn on which player $i$ reaches END; $T_1$ is a function of $\\sigma_1$ and $T_2$ the same function of $\\sigma_2$. Player 1 moves first in each round, so he wins iff $T_1\\le T_2$.\n\nBecause $(\\sigma_1,\\sigma_2)$ and $(\\sigma_2,\\sigma_1)$ are equally likely, $P(T_1<T_2)=P(T_2<T_1)$. So\n$$P(T_1\\le T_2)=P(T_1<T_2)+P(T_1=T_2)=\\frac{1-P(T_1=T_2)}2+P(T_1=T_2)=\\frac{1+P(T_1=T_2)}2.$$\nThe event $\\sigma_1=\\sigma_2$ has positive probability and forces $T_1=T_2$, so $P(T_1=T_2)>0$ and player 1 wins with probability strictly greater than $\\frac12$. ∎"
+   }
+  ],
+  "topics": [
+   "probability",
+   "games"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "hmmt-feb-2002-team-10",
+  "bank": "hmmt",
+  "source": {
+   "contest": "HMMT February",
+   "paper": "2002 Team Round",
+   "year": 2002,
+   "number": 10,
+   "url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2002/feb/team/problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 30,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Consider a two-player game played on a board consisting of fourteen spaces in a row. The leftmost space is labeled START, and the rightmost space is labeled END. Each of the twelve other squares, numbered $1$ through $12$ from left to right, may be blank or may be labeled with an arrow pointing to the right. A *blank square* is one of these twelve squares that is not labeled with an arrow. The set of blank squares is called the *board configuration*. (For example, the configuration $\\{1,2,3,4,7,8,10,11,12\\}$ has arrows exactly on squares $5$, $6$ and $9$.)\n\nFor $i\\in\\{1,2\\}$, player $i$ has a die that produces each integer from $1$ to $s_i$ with probability $1/s_i$; $s_1,s_2$ are positive integers fixed before the game begins. The rules are:\n\n1. The players take turns alternately, and player 1 takes the first turn.\n2. On each of his turns, player $i$ rolls his die and moves his piece to the right by the number of squares rolled. If the move ends on a square marked with an arrow, he moves his piece forward another $s_i$ squares. If that move ends on an arrow, he moves another $s_i$ squares, repeating until his piece comes to rest on a square without an arrow.\n3. If a player's move would take him past the END square, he instead lands on the END square.\n4. Whichever player reaches the END square first wins.\n\n(Example: if $s_1=3$ and the first player is on square $4$ of the configuration above and rolls a $2$, he moves to square $6$, then to square $9$, and finally comes to rest on square $12$.)\n\nExhibit a board configuration and a choice of $s_1$ and $s_2$ so that $s_1>s_2$, yet the second player wins with probability strictly greater than $\\frac12$.",
+  "image": null,
+  "choices": null,
+  "answer": "$s_1=3$, $s_2=2$, arrows on all even-numbered squares (blanks $\\{1,3,5,7,9,11\\}$): player 2 wins with probability at least $\\frac34$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Solution",
+    "body": "Take $s_1=3$, $s_2=2$, and put arrows on every even-numbered square (blank squares $1,3,5,7,9,11$).\n\nPlayer 1 moves at most $3$ squares from his roll and at most $3$ more from an arrow, so at most $6$ squares in a turn; he needs $13$ squares to reach END, hence he cannot finish in his first two turns ($12<13$).\n\nPlayer 2 (with $s_2=2$) wins immediately whenever she lands on an arrow: she is then pushed along the even squares $2,4,\\dots,12$ and then past END. On her first turn she rolls a $2$ (landing on square $2$) with probability $\\frac12$. If she rolled a $1$, she is on square $1$ and again has probability $\\frac12$ to win on her second turn (roll $1$ lands on square $2$); player 1 cannot have won by then. So player 2 wins with probability at least $\\frac12+\\frac12\\cdot\\frac12=\\frac34>\\frac12$ although $s_1>s_2$. ∎"
+   }
+  ],
+  "topics": [
+   "probability",
+   "games"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "hmmt-feb-2002-team-11",
+  "bank": "hmmt",
+  "source": {
+   "contest": "HMMT February",
+   "paper": "2002 Team Round",
+   "year": 2002,
+   "number": 11,
+   "url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2002/feb/team/problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 55,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Consider a two-player game played on a board consisting of fourteen spaces in a row. The leftmost space is labeled START, and the rightmost space is labeled END. Each of the twelve other squares, numbered $1$ through $12$ from left to right, may be blank or may be labeled with an arrow pointing to the right. A *blank square* is one of these twelve squares that is not labeled with an arrow. The set of blank squares is called the *board configuration*. (For example, the configuration $\\{1,2,3,4,7,8,10,11,12\\}$ has arrows exactly on squares $5$, $6$ and $9$.)\n\nFor $i\\in\\{1,2\\}$, player $i$ has a die that produces each integer from $1$ to $s_i$ with probability $1/s_i$; $s_1,s_2$ are positive integers fixed before the game begins. The rules are:\n\n1. The players take turns alternately, and player 1 takes the first turn.\n2. On each of his turns, player $i$ rolls his die and moves his piece to the right by the number of squares rolled. If the move ends on a square marked with an arrow, he moves his piece forward another $s_i$ squares. If that move ends on an arrow, he moves another $s_i$ squares, repeating until his piece comes to rest on a square without an arrow.\n3. If a player's move would take him past the END square, he instead lands on the END square.\n4. Whichever player reaches the END square first wins.\n\n(Example: if $s_1=3$ and the first player is on square $4$ of the configuration above and rolls a $2$, he moves to square $6$, then to square $9$, and finally comes to rest on square $12$.)\n\nIn this problem assume $s_1=3$ and $s_2=2$. Determine, with proof, the nonnegative integer $k$ with the following property:\n\n1. For every board configuration with strictly fewer than $k$ blank squares, the first player wins with probability strictly greater than $\\frac12$; but\n2. there exists a board configuration with exactly $k$ blank squares for which the second player wins with probability strictly greater than $\\frac12$.",
+  "image": null,
+  "choices": null,
+  "answer": "3",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Solution",
+    "body": "**Answer: $k=3$.**\n\n*Existence for $3$ blanks.* Take blank squares $2,6,10$. A move by player 1 follows squares in steps of $3$ until a blank; since $2,6,10$ cover all residues mod $3$, player 1 always stops on a blank after his first roll and cannot win on turn 1. Player 2 (steps of $2$) rolls $1$ with probability $\\frac12$: she lands on square $1$ and is carried through the odd squares $1,3,5,\\dots,13$ (all odd squares are arrows), so she reaches END. So she wins on turn 1 with probability $\\frac12$. Otherwise she is on square $2$, and with positive probability player 1 also fails to finish on his second turn (e.g. rolls $2$ then $1$: square $2$, then $3\\to6$, a blank), after which player 2 again has probability $\\frac12$ to win. So player 2 wins with probability at least $\\frac12+\\frac12\\cdot\\frac19\\cdot\\frac12>\\frac12$.\n\n*Fewer than $3$ blanks favour player 1.* Player 1's move follows a chain of squares in one residue class mod $3$ and reaches END unless it meets a blank in that class.\n\n- If the blanks lie in at most one residue class mod $3$ (this covers $0$ or $1$ blanks, and $2$ blanks congruent mod $3$), at least two of his three rolls (which lie in different classes) lead to END, so he wins on his first turn with probability at least $\\frac23$.\n- Otherwise there are exactly two blanks, in different residue classes mod $3$. Player 1 wins on turn 1 with probability $\\frac13$. If not (probability $\\frac23$), he is on a blank. Player 2 wins on turn 1 with probability at most $\\frac12$, because some blank exists in one of the two parity classes, so one of her two rolls fails. If she fails, player 1 has at most one blank ahead of him, so at most one of his three rolls (in distinct residue classes) is blocked, and he wins on his second turn with probability at least $\\frac23$. Total: at least $\\frac13+\\frac23\\cdot\\frac12\\cdot\\frac23=\\frac59>\\frac12$.\n\nSo $k=3$ works (and an exact computation confirms there is no unfavourable configuration with fewer blanks)."
+   }
+  ],
+  "topics": [
+   "probability",
+   "games"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "hmmt-feb-2002-team-12",
+  "bank": "hmmt",
+  "source": {
+   "contest": "HMMT February",
+   "paper": "2002 Team Round",
+   "year": 2002,
+   "number": 12,
+   "url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2002/feb/team/problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 65,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Consider a two-player game played on a board consisting of fourteen spaces in a row. The leftmost space is labeled START, and the rightmost space is labeled END. Each of the twelve other squares, numbered $1$ through $12$ from left to right, may be blank or may be labeled with an arrow pointing to the right. A *blank square* is one of these twelve squares that is not labeled with an arrow. The set of blank squares is called the *board configuration*. (For example, the configuration $\\{1,2,3,4,7,8,10,11,12\\}$ has arrows exactly on squares $5$, $6$ and $9$.)\n\nFor $i\\in\\{1,2\\}$, player $i$ has a die that produces each integer from $1$ to $s_i$ with probability $1/s_i$; $s_1,s_2$ are positive integers fixed before the game begins. The rules are:\n\n1. The players take turns alternately, and player 1 takes the first turn.\n2. On each of his turns, player $i$ rolls his die and moves his piece to the right by the number of squares rolled. If the move ends on a square marked with an arrow, he moves his piece forward another $s_i$ squares. If that move ends on an arrow, he moves another $s_i$ squares, repeating until his piece comes to rest on a square without an arrow.\n3. If a player's move would take him past the END square, he instead lands on the END square.\n4. Whichever player reaches the END square first wins.\n\n(Example: if $s_1=3$ and the first player is on square $4$ of the configuration above and rolls a $2$, he moves to square $6$, then to square $9$, and finally comes to rest on square $12$.)\n\nNow suppose that before the game begins, the players choose the initial game state as follows: the first player chooses $s_1$ subject to $2\\le s_1\\le5$; then the second player chooses $s_2$ subject to $2\\le s_2\\le5$ and then specifies the board configuration. Prove that the second player can always make her decisions so that she will win the game with probability strictly greater than $\\frac12$.",
+  "image": null,
+  "choices": null,
+  "answer": "$s_1\\in\\{3,5\\}$: $s_2=2$ with arrows on all even squares; $s_1=4$: $s_2=3$, blanks $\\{1,4,7,10\\}$; $s_1=2$: $s_2=5$, no arrows.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Solution",
+    "body": "**Case $s_1\\in\\{3,5\\}$.** Take $s_2=2$ and arrows on all even squares (blanks $1,3,\\dots,11$). Since $s_1$ is odd, after landing on an even arrow square player 1 moves $s_1$ to an odd (blank) square, so he moves at most $2s_1\\le10<13$ squares in a turn: he cannot win on turn 1. Player 2 rolls a $2$ with probability $\\frac12$, lands on square $2$, and is carried along the even squares to END. So she wins on turn 1 with probability $\\frac12$. If she rolled $1$ (square $1$), player 1 can fail to finish on his second turn with positive probability (e.g. rolls $1,1$: he reaches square $2$ and moves to $2+s_1\\le7$), and then player 2 wins on turn 2 with probability $\\frac12$. Her total winning probability is at least $\\frac12+\\frac12\\cdot\\frac1{s_1^2}\\cdot\\frac12>\\frac12$.\n\n**Case $s_1=4$.** Take $s_2=3$ and blanks exactly $1,4,7,10$ (arrows elsewhere). Player 1's first roll $r\\in\\{1,2,3,4\\}$ leads to square $1$, $2\\to6\\to10$, $3\\to7$, or $4$, all blanks, so he cannot win on turn 1. Player 2 rolls $1$ (square $1$, a blank: stops) or $2$ ($2\\to5\\to8\\to11\\to$ END) or $3$ ($3\\to6\\to9\\to12\\to$ END). She wins on turn 1 with probability $\\frac23>\\frac12$.\n\n**Case $s_1=2$.** Take $s_2=5$ and no arrows. Player 1 moves at most $2$ per turn, so he cannot reach END ($13$ squares) in $5$ turns ($\\le10$). Player 2 reaches END within $5$ turns iff the sum $S$ of five rolls (uniform on $1..5$) is at least $13$. The distribution of $S$ is symmetric about $15$ (replace each roll $x$ by $6-x$), so $P(S\\ge13)\\ge P(S\\ge15)=\\frac{1+P(S=15)}2>\\frac12$. Since player 1 cannot win in his first five turns, player 2 wins with probability greater than $\\frac12$. ∎"
+   }
+  ],
+  "topics": [
+   "probability",
+   "games"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ }
+]

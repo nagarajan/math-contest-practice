@@ -1,0 +1,347 @@
+[
+  {
+    "id": "hmmt-feb-2014-team-01",
+    "bank": "hmmt",
+    "source": {
+      "contest": "HMMT February",
+      "paper": "2014 Team Round",
+      "year": 2014,
+      "number": 1,
+      "url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2014/feb/team/problems.pdf"
+    },
+    "grade": "9-12",
+    "points": 10,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $\\omega$ be a circle, and let $A$ and $B$ be two points in its interior. Prove that there exists a circle passing through $A$ and $B$ that is contained in the interior of $\\omega$.",
+    "image": null,
+    "choices": null,
+    "answer": "Proof: scale the circle of radius $OA$ about $A$ until it passes through $B$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Center on segment $OA$",
+        "body": "Let $O$ be the center and $R$ the radius of $\\omega$, and assume $OA\\ge OB$. Consider $g(P)=PA-PB$ for $P$ moving along segment $OA$ from $O$ to $A$. At $P=O$, $g=OA-OB\\ge0$, and at $P=A$, $g=-AB<0$. By continuity there is a point $C$ on segment $OA$ with $CA=CB=:y$. Let $\\omega'$ be the circle with center $C$ and radius $y$; it passes through $A$ and $B$.\n\nLet $P$ be any point on or inside $\\omega'$. Since $C$ lies on segment $OA$, $OC=OA-y$, so by the triangle inequality $OP\\le OC+CP\\le(OA-y)+y=OA<R$. Hence $P$ lies in the interior of $\\omega$, and $\\omega'$ is contained in the interior of $\\omega$. ∎"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "hmmt-feb-2014-team-02",
+    "bank": "hmmt",
+    "source": {
+      "contest": "HMMT February",
+      "paper": "2014 Team Round",
+      "year": 2014,
+      "number": 2,
+      "url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2014/feb/team/problems.pdf"
+    },
+    "grade": "9-12",
+    "points": 15,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Let $a_1,a_2,\\ldots$ be an infinite sequence of integers such that $a_i$ divides $a_{i+1}$ for all $i\\ge1$, and let $b_i$ be the remainder when $a_i$ is divided by $210$. What is the maximal number of distinct terms in the sequence $b_1,b_2,\\ldots$?",
+    "image": null,
+    "choices": null,
+    "answer": "127",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Group by $\\gcd(a_i,210)$",
+        "body": "Let $g_i=\\gcd(a_i,210)$. Since $a_i\\mid a_{i+1}$, $g_i\\mid g_{i+1}$, so the sequence $g_i$ passes through a chain of divisors $1$-or-more of $210=2\\cdot3\\cdot5\\cdot7$ in which each step multiplies by some primes; at most $5$ distinct values occur, and a chain of five has the form $1,p_1,p_1p_2,p_1p_2p_3,210$ for some ordering $(p_1,p_2,p_3,p_4)$ of $(2,3,5,7)$ (shorter chains give no more terms). The remainders $b_i$ with $\\gcd(b_i,210)=g$ number $\\varphi(210/g)$ values. So the number of distinct $b_i$ is at most\n$$\\varphi(210)+\\varphi\\\\!\\left(\\tfrac{210}{p_1}\\right)+\\varphi\\\\!\\left(\\tfrac{210}{p_1p_2}\\right)+\\varphi\\\\!\\left(\\tfrac{210}{p_1p_2p_3}\\right)+1 .$$\nTo maximize, choose $p_1$ to maximize $\\varphi(210/p_1)$: $\\varphi(105)=48$ for $p_1=2$, versus $24,12,8$ for $3,5,7$. Then $\\varphi(\\frac{210}{2p_2})$ is largest for $p_2=3$ ($\\varphi(35)=24$), then $p_3=5$ ($\\varphi(7)=6$). The bound is $48+48+24+6+1=127$.\n\nAttainability: let $a_i$ run through numbers coprime to $210$ that realize all $48$ units mod $210$ (successive terms multiplied by integers coprime to $210$ congruent to the needed ratio), then multiply by $2$ and realize all $48$ residues of the form $2u$, then by $3$ ($24$ residues), by $5$ ($6$), and finally by $7$ (the residue $0$). Each term divides the next.\n\n**Answer: 127**"
+      }
+    ],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "hmmt-feb-2014-team-03",
+    "bank": "hmmt",
+    "source": {
+      "contest": "HMMT February",
+      "paper": "2014 Team Round",
+      "year": 2014,
+      "number": 3,
+      "url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2014/feb/team/problems.pdf"
+    },
+    "grade": "9-12",
+    "points": 15,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "There are $n$ girls $G_1,\\ldots,G_n$ and $n$ boys $B_1,\\ldots,B_n$. A pair $(G_i,B_j)$ is called suitable if and only if girl $G_i$ is willing to marry boy $B_j$. Given that there is exactly one way to pair each girl with a distinct boy that she is willing to marry, what is the maximal possible number of suitable pairs?",
+    "image": null,
+    "choices": null,
+    "answer": "$\\dfrac{n(n+1)}{2}$",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Upper bound and construction",
+        "body": "Model the problem as a bipartite graph with an edge for every suitable pair; we want to maximize the number of edges subject to there being a unique perfect matching.\n\n*Construction:* join $G_i$ to $B_j$ for all $j\\le i$. The only perfect matching is $G_i\\leftrightarrow B_i$ for all $i$ (induct from $G_1$, whose only edge is to $B_1$, etc.). The number of edges is $1+2+\\cdots+n=\\frac{n(n+1)}2$.\n\n*Bound:* relabel so that the unique matching is $G_i\\leftrightarrow B_i$; this uses $n$ edges. For $i\\ne j$, the edges $G_iB_j$ and $G_jB_i$ cannot both be present, otherwise swapping gives a second perfect matching (pair $G_i$ with $B_j$, $G_j$ with $B_i$, others unchanged). So among the $\\binom n2$ unordered pairs $\\{i,j\\}$ at most one extra edge each: at most $n+\\binom n2=\\frac{n(n+1)}2$ edges.\n\n**Answer: $\\frac{n(n+1)}2$**"
+      }
+    ],
+    "topics": [
+      "graph-theory",
+      "counting"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "hmmt-feb-2014-team-04",
+    "bank": "hmmt",
+    "source": {
+      "contest": "HMMT February",
+      "paper": "2014 Team Round",
+      "year": 2014,
+      "number": 4,
+      "url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2014/feb/team/problems.pdf"
+    },
+    "grade": "9-12",
+    "points": 20,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Compute $$\\sum_{k=0}^{100}\\left\\lfloor\\frac{2^{100}}{2^{50}+2^k}\\right\\rfloor.$$ (Here, if $x$ is a real number, then $\\lfloor x\\rfloor$ denotes the largest integer less than or equal to $x$.)",
+    "image": null,
+    "choices": null,
+    "answer": "101*2^49-50",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Pair $k$ with $100-k$",
+        "body": "Let $a_k=\\frac{2^{100}}{2^{50}+2^k}$. For $0\\le k\\le100$: $a_{100-k}=\\frac{2^{100}}{2^{50}+2^{100-k}}=\\frac{2^{50+k}}{2^k+2^{50}}$, so $a_k+a_{100-k}=\\frac{2^{100}+2^{50+k}}{2^{50}+2^k}=2^{50}$.\n\nFor $0\\le k\\le49$, $a_k$ is not an integer (its denominator is $2^k(2^{50-k}+1)$ with an odd factor larger than $1$ not dividing $2^{100}$), and then neither is $a_{100-k}=2^{50}-a_k$. Hence $\\lfloor a_k\\rfloor+\\lfloor a_{100-k}\\rfloor=2^{50}-1$ (the floors of two non-integers summing to an integer sum to that integer minus $1$). The middle term is $a_{50}=\\frac{2^{100}}{2^{51}}=2^{49}$.\n\nTotal: $50(2^{50}-1)+2^{49}=100\\cdot2^{49}+2^{49}-50=101\\cdot2^{49}-50$.\n\n**Answer: $101\\cdot2^{49}-50$**"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "sequences-series"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null,
+    "answerDisplay": "$101\\cdot2^{49}-50$"
+  },
+  {
+    "id": "hmmt-feb-2014-team-05",
+    "bank": "hmmt",
+    "source": {
+      "contest": "HMMT February",
+      "paper": "2014 Team Round",
+      "year": 2014,
+      "number": 5,
+      "url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2014/feb/team/problems.pdf"
+    },
+    "grade": "9-12",
+    "points": 25,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Prove that there exists a nonzero complex number $c$ and a real number $d$ such that $$\\left|\\left|\\frac1{1+z+z^2}\\right|-\\left|\\frac1{1+z+z^2}-c\\right|\\right|=d$$ for all $z$ with $|z|=1$ and $1+z+z^2\\ne0$. (Here, $|z|$ denotes the absolute value of the complex number $z$, so that $|a+bi|=\\sqrt{a^2+b^2}$ for real numbers $a,b$.)",
+    "image": null,
+    "choices": null,
+    "answer": "$c=\\frac43$, $d=\\frac23$",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "The image is a hyperbola with a focus at 0",
+        "body": "Write $z=e^{it}$. Then $1+z+z^2=z(z^{-1}+1+z)=z(1+2\\cos t)$, so $w=\\frac1{1+z+z^2}=\\frac{\\cos t-i\\sin t}{1+2\\cos t}=x+iy$ with $x=\\frac{\\cos t}{1+2\\cos t}$, $y=\\frac{-\\sin t}{1+2\\cos t}$ (note $1+2\\cos t\\ne0$).\n\nThen $x-\\frac23=\\frac{3\\cos t-2-4\\cos t}{3(1+2\\cos t)}=-\\frac{2+\\cos t}{3(1+2\\cos t)}$, so\n$$9\\left(x-\\tfrac23\\right)^2-3y^2=\\frac{(2+\\cos t)^2-3\\sin^2t}{(1+2\\cos t)^2}=\\frac{1+4\\cos t+4\\cos^2t}{(1+2\\cos t)^2}=1 .$$\nSo $w$ lies on the hyperbola $\\frac{(x-2/3)^2}{1/9}-\\frac{y^2}{1/3}=1$, with center $\\left(\\frac23,0\\right)$, $a=\\frac13$, $b^2=\\frac13$, focal distance $\\sqrt{a^2+b^2}=\\frac23$. Its foci are $0$ and $\\frac43$. For every point $w$ of a hyperbola the difference of the distances to the foci has absolute value $2a$, so with $c=\\frac43$,\n$$\\big||w|-|w-c|\\big|=2a=\\frac23=d$$\nfor all admissible $z$. ∎\n\n**Answer: $c=\\frac43$, $d=\\frac23$**"
+      }
+    ],
+    "topics": [
+      "complex-numbers",
+      "geometry"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "hmmt-feb-2014-team-06",
+    "bank": "hmmt",
+    "source": {
+      "contest": "HMMT February",
+      "paper": "2014 Team Round",
+      "year": 2014,
+      "number": 6,
+      "url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2014/feb/team/problems.pdf"
+    },
+    "grade": "9-12",
+    "points": 25,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $n$ be a positive integer. A sequence $(a_0,\\ldots,a_n)$ of integers is acceptable if it satisfies the following conditions:\n\n(a) $0=|a_0|<|a_1|<\\cdots<|a_{n-1}|<|a_n|$.\n\n(b) The sets $\\{|a_1-a_0|,|a_2-a_1|,\\ldots,|a_{n-1}-a_{n-2}|,|a_n-a_{n-1}|\\}$ and $\\{1,3,9,\\ldots,3^{n-1}\\}$ are equal.\n\nProve that the number of acceptable sequences of integers is $(n+1)!$.",
+    "image": null,
+    "choices": null,
+    "answer": "Proof by strong induction on a generalization: $(n+1)!$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Generalize to $3b_i\\le b_{i+1}$",
+        "body": "**Claim.** Let $b_1<\\cdots<b_n$ be positive integers with $3b_i\\le b_{i+1}$. The number of sequences $(a_0,\\dots,a_n)$ with $0=|a_0|<|a_1|<\\cdots<|a_n|$ and $\\{|a_k-a_{k-1}|\\}=\\{b_1,\\dots,b_n\\}$ is $(n+1)!$. The problem is the case $b_i=3^{i-1}$.\n\n**Lemma.** $b_i>2\\sum_{k<i}b_k$. Indeed $\\sum_{k<i}b_k\\le b_i\\left(\\frac13+\\frac19+\\cdots+\\frac1{3^{i-1}}\\right)<\\frac{b_i}2$.\n\n**Induction.** $n=1$: $a_1=\\pm b_1$, so $2=2!$ sequences. Suppose the claim holds for fewer than $j$ differences and consider $b_1<\\cdots<b_j$. A sequence determines the order $c_1,\\dots,c_j$ (a permutation of the $b$'s) in which the differences $|a_k-a_{k-1}|$ occur; let $c_k=b_j$.\n\n- The first $k-1$ steps form an acceptable sequence for the set $\\{c_1,\\dots,c_{k-1}\\}$ (which again satisfies $3b\\le b'$ for consecutive elements); by induction there are $k!$ of them (for $k=1$ there is $1=1!$).\n- By the lemma, $b_j>2\\sum_{m<k}c_m\\ge2|a_{k-1}|$, so both $a_k=a_{k-1}\\pm b_j$ satisfy $|a_k|\\ge b_j-|a_{k-1}|>|a_{k-1}|$: $2$ choices, and $|a_k|>\\frac{b_j}2$.\n- Afterwards, for each remaining step with difference $c\\le b_j$, we have $|a_{i-1}|\\ge|a_k|>\\frac{b_j}2\\ge\\frac c2$. Moving $a_{i-1}\\to a_{i-1}\\pm c$ in the direction away from $0$ increases the absolute value; in the direction toward $0$ it gives $|\\,|a_{i-1}|-c\\,|<|a_{i-1}|$ (because $c<2|a_{i-1}|$). So exactly one sign works at each step.\n\nCount: choose which $k-1$ of the other $j-1$ numbers are used before $b_j$ ($\\binom{j-1}{k-1}$ ways), then $k!$ sequences for them, $2$ choices for $a_k$, and $(j-k)!$ orders for the rest (each giving exactly one sequence):\n$$\\sum_{k=1}^j\\binom{j-1}{k-1}\\\\,k!\\cdot2\\cdot(j-k)!=\\sum_{k=1}^j2(j-1)!\\\\,k=2(j-1)!\\cdot\\frac{j(j+1)}2=(j+1)!.$$\nThis completes the induction. ∎"
+      }
+    ],
+    "topics": [
+      "counting",
+      "sequences-series"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "hmmt-feb-2014-team-07",
+    "bank": "hmmt",
+    "source": {
+      "contest": "HMMT February",
+      "paper": "2014 Team Round",
+      "year": 2014,
+      "number": 7,
+      "url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2014/feb/team/problems.pdf"
+    },
+    "grade": "9-12",
+    "points": 30,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Find the maximum possible number of diagonals of equal length in a convex hexagon.",
+    "image": null,
+    "choices": null,
+    "answer": "7",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Construction and an upper bound",
+        "body": "**$7$ is possible.** Take $A(0,0)$, $B\\left(\\frac12,1-\\frac{\\sqrt3}2\\right)$, $C\\left(\\frac12,\\frac{\\sqrt3}2\\right)$, $D(0,1)$, $E\\left(-\\frac12,\\frac{\\sqrt3}2\\right)$, $F\\left(-\\frac12,1-\\frac{\\sqrt3}2\\right)$. This hexagon is convex and the seven diagonals $AC,AD,AE,BD,BF,CE,DF$ all have length $1$ (only $BE$ and $CF$, of length about $1.24$, differ).\n\n**$8$ is impossible.** Suppose at least $8$ of the $9$ diagonals have the same length; then removing one diagonal leaves $8$ equal ones. Up to relabeling, the removed diagonal is a short one ($AC$, say) or a long one ($AD$, say). In both cases $EC,EB,FB,FC$ are among the remaining equal diagonals. From $EB=FB$ and $EC=FC$, both $B$ and $C$ lie on the perpendicular bisector of $EF$. Since the hexagon is convex, $B$ and $C$ lie on the same side of line $EF$ (it contains the side $EF$), so on this perpendicular bisector one of them lies inside the triangle formed by $E$, $F$ and the other, which contradicts convexity (a vertex of a convex polygon cannot lie inside the triangle of three other vertices). So at most $7$ diagonals can be equal.\n\n**Answer: 7**"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "counting"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "hmmt-feb-2014-team-08",
+    "bank": "hmmt",
+    "source": {
+      "contest": "HMMT February",
+      "paper": "2014 Team Round",
+      "year": 2014,
+      "number": 8,
+      "url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2014/feb/team/problems.pdf"
+    },
+    "grade": "9-12",
+    "points": 35,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Let $ABC$ be an acute triangle with circumcenter $O$ such that $AB=4$, $AC=5$, and $BC=6$. Let $D$ be the foot of the altitude from $A$ to $BC$, and $E$ be the intersection of $AO$ with $BC$. Suppose that $X$ is on $BC$ between $D$ and $E$ such that there is a point $Y$ on $AD$ satisfying $XY\\parallel AO$ and $YO\\perp AX$. Determine the length of $BX$.",
+    "image": null,
+    "choices": null,
+    "answer": "96/41",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Coordinates",
+        "body": "Put $B=(0,0)$, $C=(6,0)$. From $AB=4$, $AC=5$: $A=\\left(\\frac94,\\frac{5\\sqrt7}4\\right)$, so $D=\\left(\\frac94,0\\right)$. The area is $\\frac{15\\sqrt7}4$, so $R=\\frac{4\\cdot5\\cdot6}{4\\cdot\\frac{15\\sqrt7}4}=\\frac8{\\sqrt7}$, and the circumcenter is $O=\\left(3,\\frac1{\\sqrt7}\\right)$ (from $9+y^2=R^2$, with $O$ above $BC$ as the triangle is acute). The line $AO$ meets $BC$ at $E=\\left(\\frac{96}{31},0\\right)$.\n\nLet $X=(x,0)$. Then $Y=\\left(\\frac94,y\\right)$ on $AD$ with $XY\\parallel AO$; since $\\overrightarrow{AO}=\\left(\\frac34,-\\frac{31}{4\\sqrt7}\\right)$, we get $y=\\frac{31}{3\\sqrt7}\\left(x-\\frac94\\right)$.\n\nThe condition $YO\\perp AX$ reads $\\overrightarrow{YO}\\cdot\\overrightarrow{AX}=0$ with $\\overrightarrow{YO}=\\left(\\frac34,\\frac1{\\sqrt7}-y\\right)$ and $\\overrightarrow{AX}=\\left(x-\\frac94,-\\frac{5\\sqrt7}4\\right)$:\n$$\\frac34\\left(x-\\frac94\\right)-\\frac{5\\sqrt7}4\\left(\\frac1{\\sqrt7}-y\\right)=0\\iff\\frac34\\left(x-\\frac94\\right)-\\frac54+\\frac{155}{12}\\left(x-\\frac94\\right)=0 .$$\nSo $\\frac{41}3\\left(x-\\frac94\\right)=\\frac54$, $x-\\frac94=\\frac{15}{164}$, $x=\\frac{384}{164}=\\frac{96}{41}$. This lies between $D$ ($2.25$) and $E$ ($\\approx3.10$), as required. So $BX=\\frac{96}{41}$.\n\n**Answer: $\\frac{96}{41}$**"
+      },
+      {
+        "title": "Symmedian",
+        "body": "Let $AX$ meet the circumcircle again at $K$, and let $OY$ meet $AK$ at $T$ and $BC$ at $L$. Angle chasing with $XY\\parallel AO$ and $YO\\perp AX$ gives that $LA$ is tangent to the circumcircle and $OL\\perp AK$, so $LA=LK$ and $LK$ is tangent too. Thus $L=BC\\cap$ (tangents at $A$ and $K$), which means $AK$ is a symmedian of $\\triangle ABC$, and so $\\frac{BX}{XC}=\\frac{AB^2}{AC^2}=\\frac{16}{25}$. Hence $BX=\\frac{16}{41}\\cdot6=\\frac{96}{41}$.\n\n**Answer: $\\frac{96}{41}$**"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "hmmt-feb-2014-team-09",
+    "bank": "hmmt",
+    "source": {
+      "contest": "HMMT February",
+      "paper": "2014 Team Round",
+      "year": 2014,
+      "number": 9,
+      "url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2014/feb/team/problems.pdf"
+    },
+    "grade": "9-12",
+    "points": 35,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "For integers $m,n\\ge1$, let $A(n,m)$ be the number of sequences $(a_1,\\cdots,a_{nm})$ of integers satisfying the following two properties:\n\n(a) Each integer $k$ with $1\\le k\\le n$ occurs exactly $m$ times in the sequence $(a_1,\\cdots,a_{nm})$.\n\n(b) If $i,j$, and $k$ are integers such that $1\\le i\\le nm$ and $1\\le j\\le k\\le n$, then $j$ occurs in the sequence $(a_1,\\cdots,a_i)$ at least as many times as $k$ does.\n\nFor example, if $n=2$ and $m=5$, a possible sequence is $(a_1,\\cdots,a_{10})=(1,1,2,1,2,2,1,2,1,2)$. On the other hand, the sequence $(a_1,\\cdots,a_{10})=(1,2,1,2,2,1,1,1,2,2)$ does not satisfy property (b) for $i=5$, $j=1$, and $k=2$.\n\nProve that $A(n,m)=A(m,n)$.",
+    "image": null,
+    "choices": null,
+    "answer": "Proof: the map $a\\mapsto f(a)$ replacing the $k$-th occurrence of each value by $k$ is an involution exchanging the two families (equivalently, both count standard Young tableaux of shape $n\\times m$).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Replace each entry by its occurrence number",
+        "body": "For a valid sequence $a=(a_1,\\dots,a_{nm})$ for $(n,m)$ define $f(a)=(b_1,\\dots,b_{nm})$, where $b_i$ is the number of $j\\le i$ with $a_j=a_i$ (so the $k$-th occurrence of each value is replaced by $k$). For example, $f(1,1,2,1,2,2,1,2,1,2)=(1,2,1,3,2,3,4,4,5,5)$.\n\n*Property (a) with $n,m$ swapped.* Each pair $(\\ell,k)$ with $1\\le\\ell\\le n$, $1\\le k\\le m$ occurs as $(a_i,b_i)$ for exactly one index $i$ (the $k$-th occurrence of $\\ell$). So each $k\\in\\{1,\\dots,m\\}$ occurs exactly $n$ times in $b$.\n\n*Property (b) with $n,m$ swapped.* Fix $i$. The number of times $k$ appears in $(b_1,\\dots,b_i)$ equals the number of values $\\ell$ occurring at least $k$ times in $(a_1,\\dots,a_i)$ (each such $\\ell$ contributes one $k$, at its $k$-th occurrence). For $j\\le k$ this number for $j$ is at least that for $k$, so $j$ occurs in $(b_1,\\dots,b_i)$ at least as often as $k$.\n\n*$f$ is an involution.* Fix $i$, let $\\ell=a_i$ and $k=b_i$, so $\\ell$ occurs exactly $k$ times in $(a_1,\\dots,a_i)$ and $k-1$ times in $(a_1,\\dots,a_{i-1})$. By property (b) at length $i$, every $j\\le\\ell$ occurs at least $k$ times in $(a_1,\\dots,a_i)$. By property (b) at length $i-1$, every $j>\\ell$ occurs at most $k-1$ times in $(a_1,\\dots,a_{i-1})$, hence at most $k-1$ times in $(a_1,\\dots,a_i)$ (as $a_i=\\ell\\ne j$). So exactly $\\ell$ values occur at least $k$ times in $(a_1,\\dots,a_i)$, which says the $i$-th term of $f(f(a))$ is $\\ell=a_i$. Thus $f(f(a))=a$.\n\nTherefore $f$ is a bijection between the sequences counted by $A(n,m)$ and those counted by $A(m,n)$, and $A(n,m)=A(m,n)$. ∎"
+      },
+      {
+        "title": "Young tableaux",
+        "body": "Given a valid sequence, build an $n\\times m$ array: when the value $k$ appears, write the next number $i$ (the position in the sequence) into the leftmost empty cell of row $k$. Rows increase left to right, and by property (b) row $k$ always contains at most as many entries as row $k-1$, so columns increase downward: this is a standard Young tableau. The map is reversible (read off the row index of $1,2,\\dots,nm$), so $A(n,m)$ equals the number of standard Young tableaux of shape $n\\times m$. Transposition is a bijection between $n\\times m$ and $m\\times n$ tableaux, hence $A(n,m)=A(m,n)$. ∎"
+      }
+    ],
+    "topics": [
+      "counting"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "hmmt-feb-2014-team-10",
+    "bank": "hmmt",
+    "source": {
+      "contest": "HMMT February",
+      "paper": "2014 Team Round",
+      "year": 2014,
+      "number": 10,
+      "url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2014/feb/team/problems.pdf"
+    },
+    "grade": "9-12",
+    "points": 40,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Fix a positive real number $c>1$ and positive integer $n$. Initially, a blackboard contains the numbers $1,c,\\ldots,c^{n-1}$. Every minute, Bob chooses two numbers $a,b$ on the board and replaces them with $ca+c^2b$. Prove that after $n-1$ minutes, the blackboard contains a single number no less than $$\\left(\\frac{c^{n/L}-1}{c^{1/L}-1}\\right)^L,$$ where $\\phi=\\frac{1+\\sqrt5}2$ and $L=1+\\log_\\phi(c)$.",
+    "image": null,
+    "choices": null,
+    "answer": "Proof: $\\sum N^{1/L}$ over the board never decreases (Hölder), and initially equals $\\frac{c^{n/L}-1}{c^{1/L}-1}$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Hölder and a monovariant",
+        "body": "Note $L>1$ and $c=\\phi^{L-1}$, so $c^{1/(L-1)}=\\phi$ and $\\phi^{-1}+\\phi^{-2}=1$.\n\n**Lemma.** For all $x,y\\ge0$: $cx^L+c^2y^L\\ge(x+y)^L$.\n\n*Proof.* Apply Hölder's inequality with exponents $L$ and $q=\\frac L{L-1}$ to $u=(c^{1/L}x,\\;c^{2/L}y)$ and $v=(c^{-1/L},\\;c^{-2/L})$:\n$$x+y=\\sum u_iv_i\\le\\left(cx^L+c^2y^L\\right)^{1/L}\\left(c^{-1/(L-1)}+c^{-2/(L-1)}\\right)^{(L-1)/L}=\\left(cx^L+c^2y^L\\right)^{1/L}\\left(\\phi^{-1}+\\phi^{-2}\\right)^{(L-1)/L}.$$\nSince $\\phi^{-1}+\\phi^{-2}=1$, raising to the $L$-th power gives the claim. $\\square$\n\n**Monovariant.** Put $a=x^L$, $b=y^L$ in the lemma: $(ca+c^2b)^{1/L}\\ge a^{1/L}+b^{1/L}$. So when Bob replaces $a,b$ by $ca+c^2b$, the quantity $S=\\sum N^{1/L}$ over the numbers $N$ on the board does not decrease.\n\nInitially $S=\\sum_{i=0}^{n-1}\\left(c^{i}\\right)^{1/L}=\\sum_{i=0}^{n-1}\\left(c^{1/L}\\right)^i=\\frac{c^{n/L}-1}{c^{1/L}-1}$. After $n-1$ minutes a single number $N$ remains, with $N^{1/L}=S_{\\text{final}}\\ge S_{\\text{initial}}$, so $N\\ge\\left(\\frac{c^{n/L}-1}{c^{1/L}-1}\\right)^L$. ∎"
+      }
+    ],
+    "topics": [
+      "inequalities",
+      "algebra"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

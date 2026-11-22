@@ -2,14 +2,17 @@
 """Merge data/raw/<bank>/*.json into the app's question files.
 
 Writes app/public/banks/grade-<g>.json (every question for that grade, all banks; g = 1-12,
-13 = undergraduate, 14 = graduate) and index.json (bank list from data/banks.json with counts
+13 = undergraduate, 14 = graduate) without solutions, sol/<bank>/<paper>.json (solutions by
+question id, loaded when a solution is opened; `sol` on each question names its file) and
+index.json (bank list from data/banks.json with counts
 per grade and the source papers).
 
 - Drops questions marked `duplicateOf` (the original is kept, and gains the duplicate's grades,
   e.g. a problem shared by AMC 10 and AMC 12 shows up for grades 9-12).
 - Drops repeated ids (first occurrence wins; MOEMS ids are derived from the book reference so the
   same problem appearing in two Problem-of-the-Week documents collapses to one).
-- Reports likely duplicates that were not marked (near-identical prompt text across papers).
+- Reports likely duplicates that were not marked (near-identical prompt text across papers),
+  except pairs already checked in data/review/not_duplicates.json.
 
 Usage: build_banks.py [--strict]   (--strict: exit non-zero on validation errors)
 """
@@ -18,6 +21,7 @@ import glob
 import json
 import os
 import re
+import shutil
 import sys
 from collections import Counter, defaultdict
 
@@ -89,6 +93,7 @@ def main():
                     stats[bank]["dup_id"] += 1
                     continue
                 seen[q["id"]] = {k: q.get(k) for k in KEEP}
+                seen[q["id"]]["sol"] = f"{bank}/{os.path.splitext(os.path.basename(f))[0]}"
     for d in sorted({os.path.basename(p) for p in glob.glob(os.path.join(RAW, "*"))} - {m["id"] for m in metas}):
         had_errors = True
         print(f"!! data/raw/{d}/ is not a bank in data/banks.json (skipped)")
@@ -109,6 +114,9 @@ def main():
     by_bank = defaultdict(list)
     for q in questions:
         by_bank[q["bank"]].append(q)
+
+    checked_file = os.path.join(ROOT, "data", "review", "not_duplicates.json")
+    checked_pairs = {tuple(sorted(p)) for p in json.load(open(checked_file))["pairs"]} if os.path.exists(checked_file) else set()
 
     index_banks = []
     for meta in metas:
@@ -170,9 +178,23 @@ def main():
             f"types={dict(types)} reviewNotes={flagged} grades={{{grade_str}}}"
         )
         for a, b in suspects:
-            print(f"   possible duplicate: {a} ~ {b}")
+            if tuple(sorted((a, b))) not in checked_pairs:
+                print(f"   possible duplicate: {a} ~ {b}")
 
     questions = list(seen.values())
+    sol_dir = os.path.join(OUT, "sol")
+    shutil.rmtree(sol_dir, ignore_errors=True)
+    by_sol = defaultdict(dict)
+    for q in questions:
+        if q["solutions"]:
+            by_sol[q["sol"]][q["id"]] = q["solutions"]
+        else:
+            q["sol"] = None
+    for key, sols in by_sol.items():
+        path = os.path.join(sol_dir, key + ".json")
+        os.makedirs(os.path.dirname(path), exist_ok=True)
+        json.dump(sols, open(path, "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
+    questions = [{k: v for k, v in q.items() if k != "solutions"} for q in questions]
     grade_counts = {}
     for g in GRADES:
         gq = [q for q in questions if g in q["grades"]]

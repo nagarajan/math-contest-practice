@@ -1,0 +1,344 @@
+[
+  {
+    "id": "arml-local-2009-theme-01",
+    "bank": "arml",
+    "source": {
+      "contest": "ARML Local",
+      "paper": "2009 ARML Local Theme Round (Votes That Count)",
+      "year": 2009,
+      "number": 1,
+      "url": "https://arml3.com/wp-content/uploads/2026/03/ARML-2009-2014.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "In an election, a voter's *preference ranking* orders the candidates from most to least preferred, where a voter may be indifferent between some candidates (they are tied, \"equally preferable\") and preferences are transitive. For example, a voter who prefers $A$ over all others, is indifferent between $B$ and $C$, but prefers both of them over $D$ has the ranking $A>B,C>D$. Rankings that differ only in the order in which tied candidates are written are the same ranking.\n\nCompute the number of distinct preference rankings of four candidates.",
+    "image": null,
+    "choices": null,
+    "answer": "75",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Count by number of tiers",
+        "body": "Group the candidates into tiers (rows of equally preferable candidates), ordered from best to worst.\n\n- 4 tiers (no ties): $4!=24$.\n- 3 tiers (one tied pair): choose the pair, $\\binom42=6$, then order the 3 tiers, $3!=6$: $36$.\n- 2 tiers: sizes $(2,2)$: choose the top pair, $\\binom42=6$; sizes $(1,3)$ or $(3,1)$: $4+4=8$. Total $14$.\n- 1 tier: $1$.\n\nTotal $24+36+14+1=75$ (the Fubini number).\n\n**Answer: 75**"
+      }
+    ],
+    "topics": [
+      "counting"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "arml-local-2009-theme-02",
+    "bank": "arml",
+    "source": {
+      "contest": "ARML Local",
+      "paper": "2009 ARML Local Theme Round (Votes That Count)",
+      "year": 2009,
+      "number": 2,
+      "url": "https://arml3.com/wp-content/uploads/2026/03/ARML-2009-2014.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "In a *strict* preference ranking a voter always prefers one candidate to another (no ties). In a *Borda count*, for each candidate and each voter, count the number of candidates that the voter ranks below that candidate; sum these over all voters, and the candidate with the largest sum wins. For example, with voters $w,x,y,z$ having strict rankings (best to worst) $w$: $A,B,C$; $x$: $A,C,B$; $y$: $B,C,A$; $z$: $B,C,A$, candidates $A$ and $B$ tie 2-2 on first-place votes, but the Borda totals are $A:4$, $B:5$, $C:3$, so $B$ wins.\n\nAn election with $m$ candidates and $n$ voters (all with strict rankings) is called an $(m,n)$-*Borda upset* if one candidate has more than half of the first-place votes but loses the Borda count. Compute the ordered pair $(m,n)$ such that an $(m,n)$-Borda upset exists and $m+n$ is minimized.",
+    "image": null,
+    "choices": null,
+    "answer": "$(m,n)=(4,3)$",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Search small cases",
+        "body": "With two candidates the majority candidate also wins the Borda count, so $m\\ge3$.\n\nThree candidates: with $k$ voters ranking $A,B,C$ and $k-1$ voters ranking $B,C,A$ ($n=2k-1$), $A$ has a majority of first places but Borda scores $2k$ for $A$ against $k+2(k-1)=3k-2$ for $B$; this is an upset when $k>2$, so $(3,5)$ works, with $m+n=8$.\n\nFour candidates with $n=3$: let two voters rank $A,B,C,D$ and one voter rank $B,C,D,A$. $A$ has 2 of the 3 first-place votes, but the Borda totals are $A:3+3+0=6$ and $B:2+2+3=7$. So $(4,3)$ is an upset with $m+n=7$.\n\nNothing smaller works: $m\\ge3$; $n\\le2$ is impossible, since a first-place majority then means every voter ranks that candidate first, giving him the maximum possible Borda total; and for $(m,n)=(3,3)$ the majority candidate has at least $2+2+0=4$ points while any other candidate has at most $1+1+2=4$, so he does not lose. Thus $m+n\\ge7$, and $(4,3)$ is optimal.\n\n**Answer: $(4,3)$**"
+      }
+    ],
+    "topics": [
+      "counting",
+      "logic"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "arml-local-2009-theme-03",
+    "bank": "arml",
+    "source": {
+      "contest": "ARML Local",
+      "paper": "2009 ARML Local Theme Round (Votes That Count)",
+      "year": 2009,
+      "number": 3,
+      "url": "https://arml3.com/wp-content/uploads/2026/03/ARML-2009-2014.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Voters give strict preference rankings of $m$ candidates. In *instant runoff voting* (IRV) the winner is found as follows.\n\n- Step 1: if some candidate is ranked first by a majority (more than half) of the voters, that candidate wins.\n- Step 2: otherwise, if there is a unique candidate with the fewest first-place votes, remove that candidate from all rankings and return to Step 1. (If the last place is tied, the election produces no winner.)\n\nFor example, with 10 voters ranking $A,B,C$; 8 voters ranking $B,A,C$; and 6 voters ranking $C,B,A$, candidate $C$ is eliminated first, leaving 10 votes for $A$ and 14 for $B$, so $B$ wins even though $A$ had more first-place votes at the start.\n\nWhen the IRV winner is not the candidate who had the most first-place votes initially (and the IRV process produces a winner), we call this an $(m,n)$-*IRV upset*, where $n$ is the number of voters. Let $n_3$ and $n_4$ be the minimum values of $n$ such that a $(3,n)$-IRV upset and a $(4,n)$-IRV upset exist, respectively. Compute the ordered pair $(n_3,n_4)$.",
+    "image": null,
+    "choices": null,
+    "answer": "$(n_3,n_4)=(9,8)$",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Construct and bound",
+        "body": "**Three candidates.** Let the first-place counts be $v_A>v_B>v_C$ (a unique leader $A$ and a unique loser $C$). After $C$ is eliminated, an upset requires that $B$ beats $A$, which is possible exactly when all of $C$'s voters can prefer $B$ and $v_B+v_C>v_A$. So we need $v_A>v_B>v_C\\ge1$ and $v_A<v_B+v_C$. The smallest total is $(v_A,v_B,v_C)=(4,3,2)$ ($4<5$), so $n_3=9$ (smaller triples such as $(3,2,1)$, $(4,2,1)$, $(4,3,1)$ all fail $v_A<v_B+v_C$).\n\n**Four candidates, $n=8$.** Take 3 voters $A,B,C,D$; 2 voters $B,A,C,D$; 2 voters $C,B,A,D$; 1 voter $D,B,C,A$. First places: $A:3$, $B:2$, $C:2$, $D:1$; no majority (need 5). $D$ is eliminated, giving $B$ a third vote ($B:3$, $A:3$, $C:2$): still no majority. $C$ is eliminated, and its 2 voters go to $B$: $B:5$ out of 8, a majority. So $B$ wins although $A$ led initially.\n\nA direct check of all smaller electorates (done by computer) shows no $(4,n)$-upset with $n\\le7$, so $n_4=8$.\n\n**Answer: $(9,8)$**"
+      }
+    ],
+    "topics": [
+      "counting",
+      "logic"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "arml-local-2009-theme-04",
+    "bank": "arml",
+    "source": {
+      "contest": "ARML Local",
+      "paper": "2009 ARML Local Theme Round (Votes That Count)",
+      "year": 2009,
+      "number": 4,
+      "url": "https://arml3.com/wp-content/uploads/2026/03/ARML-2009-2014.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "A *weighted majority vote* (WMV) $(T;v_1,v_2,\\dots,v_n)$ gives voter $i$ a weight $v_i$ (integer), and a set $W$ of voters is a *winning coalition* if and only if $\\sum_{i\\in W}v_i\\ge T$.\n\nIn the UN Security Council there are five permanent members and ten non-permanent members. For a resolution to pass, it must have the support of all five permanent members and at least four of the ten non-permanent members. Consider the WMV $(T;P,P,P,P,P,1,1,1,1,1,1,1,1,1,1)$, where each permanent member has $P$ votes and each non-permanent member has 1 vote. Compute the ordered pair $(T,P)$ such that $T$ is minimized and a set of council members is a winning coalition in this WMV if and only if it can pass a resolution in the Security Council.",
+    "image": null,
+    "choices": null,
+    "answer": "$(T,P)=(39,7)$",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Squeeze between the extreme coalitions",
+        "body": "The lightest passing coalition is all 5 permanent members plus 4 non-permanent: weight $5P+4$, so $T\\le5P+4$. We want $T$ small, so take $T=5P+4$ (it cannot be smaller than the weight of every non-winning coalition plus 1).\n\nThe heaviest coalitions that must *fail*: the five permanent members with only 3 non-permanent ($5P+3<T$, automatically true), and four permanent members with all ten non-permanent members ($4P+10<T$). Hence $4P+10<5P+4$, i.e. $P>6$. Minimizing $T=5P+4$ gives $P=7$, $T=39$.\n\n**Answer: $(39,7)$**"
+      }
+    ],
+    "topics": [
+      "algebra",
+      "logic"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "arml-local-2009-theme-05",
+    "bank": "arml",
+    "source": {
+      "contest": "ARML Local",
+      "paper": "2009 ARML Local Theme Round (Votes That Count)",
+      "year": 2009,
+      "number": 5,
+      "url": "https://arml3.com/wp-content/uploads/2026/03/ARML-2009-2014.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "A *weighted majority vote* $(T;v_1,\\dots,v_n)$ gives voter $i$ weight $v_i$, and a set of voters is a winning coalition iff its total weight is at least $T$. The *Shapley-Shubik power index* of a voter is defined as follows: consider all $n!$ orderings of the voters; in an ordering $(p_1,\\dots,p_n)$, voter $p_k$ is *pivotal* if $\\{p_1,\\dots,p_{k-1}\\}$ is not winning but $\\{p_1,\\dots,p_k\\}$ is winning. The index of a voter is the fraction of orderings in which he or she is pivotal. (For the WMV $(7;5,4,2)$ the voter with weight 5 has index $\\frac46=\\frac23$ and the other two voters $\\frac16$ each.)\n\nOn some issues the Australian government votes among the six state legislatures and the federal government. Each state has one vote and the federal government has three, represented by the WMV $(5;1,1,1,1,1,1,3)$. Let $s$ be the Shapley-Shubik power index of any one of the states and $f$ the index of the federal government. Compute the ordered pair $(s,f)$.",
+    "image": null,
+    "choices": null,
+    "answer": "$(s,f)=\\left(\\frac{2}{21},\\frac{3}{7}\\right)$",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Where can the federal government be pivotal?",
+        "body": "There are $7!=5040$ orderings. The federal government (weight 3) is pivotal exactly when the voters before it have total weight between $2$ and $4$, i.e. when it stands in position 3, 4 or 5 (then 2, 3 or 4 states precede it). It stands in each position in $6!$ orderings, so $f=\\frac{3\\cdot6!}{7!}=\\frac37$.\n\nThe indices of all voters sum to $1$ and the six states are symmetric: $6s+\\frac37=1$, so $s=\\frac{4}{42}=\\frac2{21}$.\n\n**Answer: $\\left(\\frac2{21},\\frac37\\right)$**"
+      }
+    ],
+    "topics": [
+      "counting",
+      "probability"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "arml-local-2009-theme-06",
+    "bank": "arml",
+    "source": {
+      "contest": "ARML Local",
+      "paper": "2009 ARML Local Theme Round (Votes That Count)",
+      "year": 2009,
+      "number": 6,
+      "url": "https://arml3.com/wp-content/uploads/2026/03/ARML-2009-2014.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "In a voting process, every set of voters is either a *winning coalition* or a *losing coalition*. The *Shapley-Shubik power index* of a voter is the fraction of the $n!$ orderings of all voters in which the voter is *pivotal*, meaning that the voters before him do not form a winning coalition but the voters up to and including him do. (For the WMV $(7;5,4,2)$ the index of the weight-5 voter is $\\frac46$.)\n\nIn the US legislature, a bill is sent to the president for signature (\"winning\") if and only if it is supported by a coalition containing at least 218 of the 435 members of the House and at least 51 of the 101 members of the Senate (the Vice President is counted as the 101st member of the Senate; this is equivalent to the VP voting every time, since the VP's vote only matters in a 50-50 tie).\n\nCompute the Shapley-Shubik power index of the Vice President.",
+    "image": null,
+    "choices": null,
+    "answer": "1/202",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "answerDisplay": "$\\frac{1}{202}$",
+    "solutions": [
+      {
+        "title": "A symmetry between House and Senate",
+        "body": "There are $536$ voters. For an ordering, let $h$ be the member who is the 218th House member in the ordering and $s$ the member who is the 51st Senate member; the pivotal voter is whichever of $h,s$ comes later.\n\nReverse the ordering. The 218th House member from the end is the $(435-218+1)=218$th from the front, so it is again $h$; likewise the 51st Senate member from the end is $(101-51+1)=51$st from the front, so it is again $s$. Hence in the reversed ordering the pivotal voter is whichever of $h,s$ comes *earlier* in the original ordering, i.e. the other one. So in every pair of reversed orderings, exactly one has a House pivot and one a Senate pivot: the House members' indices sum to $\\frac12$, and so do the Senate members' indices.\n\nAll 101 Senate members are interchangeable (including the Vice President), so each has index $\\frac{1/2}{101}=\\frac1{202}$.\n\n**Answer: $\\dfrac1{202}$**"
+      }
+    ],
+    "topics": [
+      "probability",
+      "counting",
+      "logic"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "arml-local-2009-theme-07",
+    "bank": "arml",
+    "source": {
+      "contest": "ARML Local",
+      "paper": "2009 ARML Local Theme Round (Votes That Count)",
+      "year": 2009,
+      "number": 7,
+      "url": "https://arml3.com/wp-content/uploads/2026/03/ARML-2009-2014.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "A *weighted majority vote* $(T;v_1,\\dots,v_n)$ gives voter $i$ weight $v_i$; a set $W$ of voters is a *winning coalition* iff its total weight is at least $T$. A voter $i\\in W$ is a *swing voter* for $W$ if $W-\\{i\\}$ is a losing coalition. Let $s_i$ be the number of winning coalitions for which voter $i$ is a swing voter. The *Banzhaf-Penrose power index* of voter $i$ is $B_i=\\dfrac{s_i}{\\sum_{j}s_j}$. (For $(7;5,4,2)$ the winning coalitions are $\\{5,4\\}$, $\\{5,2\\}$, $\\{5,4,2\\}$; there are 5 swing voters in total, and the indices are $\\frac35,\\frac15,\\frac15$.)\n\nConsider the WMV $(6;1,2,3,4)$, with voters of weight $1,2,3,4$. Compute the ordered 4-tuple $(B_1,B_2,B_3,B_4)$, the Banzhaf-Penrose indices of the voters with weights $1,2,3,4$ respectively.",
+    "image": null,
+    "choices": null,
+    "answer": "$(B_1,B_2,B_3,B_4)=\\left(\\frac1{12},\\frac14,\\frac14,\\frac5{12}\\right)$",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "List winning coalitions",
+        "body": "Write each voter by weight. The winning coalitions (weight $\\ge6$) are $\\{2,4\\}$, $\\{3,4\\}$, $\\{1,2,3\\}$, $\\{1,2,4\\}$, $\\{1,3,4\\}$, $\\{2,3,4\\}$, $\\{1,2,3,4\\}$.\n\nSwing voters (those whose removal makes the coalition lose):\n- $\\{2,4\\}$: 2, 4\n- $\\{3,4\\}$: 3, 4\n- $\\{1,2,3\\}$: 1, 2, 3\n- $\\{1,2,4\\}$: 2, 4 (removing 1 leaves $\\{2,4\\}$, still winning)\n- $\\{1,3,4\\}$: 3, 4\n- $\\{2,3,4\\}$: 4 (removing 2 leaves $\\{3,4\\}$, removing 3 leaves $\\{2,4\\}$)\n- $\\{1,2,3,4\\}$: none\n\nSo $s_1=1$, $s_2=3$, $s_3=3$, $s_4=5$, total $12$.\n\n**Answer: $\\left(\\frac1{12},\\frac14,\\frac14,\\frac5{12}\\right)$**"
+      }
+    ],
+    "topics": [
+      "counting",
+      "logic"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "arml-local-2009-theme-08",
+    "bank": "arml",
+    "source": {
+      "contest": "ARML Local",
+      "paper": "2009 ARML Local Theme Round (Votes That Count)",
+      "year": 2009,
+      "number": 8,
+      "url": "https://arml3.com/wp-content/uploads/2026/03/ARML-2009-2014.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "In a *single-issue election*, each candidate has a view on one issue, a real number on a 0 to 10 scale. Voters' views are evenly distributed over the scale, and each voter votes for the candidate whose view is closest to his own. For example, if the candidates $A,B,C$ have views $2,7,9$, then voters with views between $0$ and $4.5$ ($45\\%$) vote for $A$, those between $4.5$ and $8$ ($35\\%$) vote for $B$, and those between $8$ and $10$ ($20\\%$) vote for $C$; plurality wins.\n\nIn a single-issue election, candidates $A$ and $B$ randomly pick their views (all views equally likely, independently). Candidate $C$, knowing the views of $A$ and $B$, may choose his own view to maximize his share of the votes. Compute the probability that it is impossible for $C$ to pick a view that results in $C$ winning the election.",
+    "image": null,
+    "choices": null,
+    "answer": "2/9",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "answerDisplay": "$\\frac{2}{9}$",
+    "solutions": [
+      {
+        "title": "Reduce to an area",
+        "body": "Rescale the issue to $[0,1]$ and assume $A\\le B$ (the other case is symmetric, doubling the answer). Compare the three kinds of choices for $C$ (the best choice in each region is just next to a rival):\n\n- $C$ just left of $A$: $C$ gets $A$, $A$ gets $\\frac{B-A}2$, $B$ gets $\\frac{B-A}2+1-B$. $C$ wins iff $3A+B>2$.\n- $C$ just right of $B$: by symmetry $C$ wins iff $A+3B<2$.\n- $C$ between $A$ and $B$: $C$ gets $\\frac{B-A}2$ and wins iff $B-A>\\frac23$.\n\nSo $C$ cannot win iff $3A+B\\le2$, $A+3B\\ge2$ and $B-A\\le\\frac23$ (with $A\\le B$). In the $(A,B)$-plane this is a triangle with vertices $(\\frac12,\\frac12)$, $(\\frac13,1)$, $(0,\\frac23)$, of area $\\frac19$. Doubling for $A>B$ gives probability $\\frac29$.\n\n**Answer: $\\dfrac29$**"
+      }
+    ],
+    "topics": [
+      "probability",
+      "geometry"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "arml-local-2009-theme-09",
+    "bank": "arml",
+    "source": {
+      "contest": "ARML Local",
+      "paper": "2009 ARML Local Theme Round (Votes That Count)",
+      "year": 2009,
+      "number": 9,
+      "url": "https://arml3.com/wp-content/uploads/2026/03/ARML-2009-2014.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "In a *two-issue election* there are three candidates $A$, $B$, $C$ whose views on two issues (each on a 0 to 10 scale) are the points $A(1,9)$, $B(5,1)$, $C(9,3)$ in the plane, as in the figure. Each voter has views $(x,y)$ and prefers the candidate whose point is closest in (Cartesian) distance. If voters' views on the two topics are independent and uniformly distributed on the $0$ to $10$ scales, then the fraction of the vote received by a candidate equals the fraction of the square $[0,10]\\times[0,10]$ that is closest to that candidate's point.\n\nIf $f_i$ is the fraction of the vote received by candidate $i$, compute the ordered triple $(f_A,f_B,f_C)$. (Fractions or percentages are acceptable.)",
+    "image": "qimages/arml/local-2009-theme/q09.webp",
+    "choices": null,
+    "answer": "$(f_A,f_B,f_C)=\\left(\\frac{129}{400},\\frac{131}{400},\\frac{7}{20}\\right)$",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Perpendicular bisectors",
+        "body": "The three perpendicular bisectors meet at the circumcenter $(5,6)$ and cut the square into three regions:\n\n- bisector of $AB$: $x=2y-7$, from $(0,3.5)$ to $(5,6)$;\n- bisector of $BC$: $2x+y=16$, from $(5,6)$ to $(8,0)$;\n- bisector of $AC$: $4x-3y=2$, from $(5,6)$ to $(8,10)$.\n\nRegion $A$ is the quadrilateral $(0,3.5),(5,6),(8,10),(0,10)$ with area $32.25$; region $B$ is $(0,0),(8,0),(5,6),(0,3.5)$ with area $32.75$; region $C$ gets the remaining $100-32.25-32.75=35$. As fractions of 100: $\\frac{129}{400},\\frac{131}{400},\\frac{7}{20}$ (that is $32.25\\%$, $32.75\\%$, $35\\%$).\n\n**Answer: $(32.25\\%,\\,32.75\\%,\\,35\\%)$**"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "probability"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "arml-local-2009-theme-10",
+    "bank": "arml",
+    "source": {
+      "contest": "ARML Local",
+      "paper": "2009 ARML Local Theme Round (Votes That Count)",
+      "year": 2009,
+      "number": 10,
+      "url": "https://arml3.com/wp-content/uploads/2026/03/ARML-2009-2014.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "In a *two-issue election* there are three candidates $A(1,9)$, $B(5,1)$, $C(9,3)$ (their views on two issues, each on a $0$ to $10$ scale), and each voter prefers the candidate whose point is closest in Cartesian distance to the voter's own views $(x_v,y_v)$. A voter with views $(x_v,y_v)$ is indifferent between all three candidates. Compute the ordered pair $(x_v,y_v)$.",
+    "image": null,
+    "choices": null,
+    "answer": "$(x_v,y_v)=(5,6)$",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Circumcenter",
+        "body": "Equal distance to all three points means the voter is at the circumcenter of $ABC$. The perpendicular bisector of $AB$ passes through $(3,5)$ with direction perpendicular to $(4,-8)$: $x=2y-7$. The perpendicular bisector of $BC$ passes through $(7,2)$ perpendicular to $(4,2)$: $2x+y=16$. Solving, $x=2y-7$ and $2(2y-7)+y=16$ give $y=6$, $x=5$. Check: the distance to each candidate is $5$.\n\n**Answer: $(5,6)$**"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "algebra"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

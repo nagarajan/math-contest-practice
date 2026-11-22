@@ -76,3 +76,8 @@
 - BAMO 2015: PDF never labels problem E; '3' inferred as BAMO-8 E (reviewNote).
 - UKMT IMC 2013, 2014: not in downloaded sources (plan covers 2012, 2015-2017 only).
 - ARML 2013 Individual 8: official 1/54 wrong (halved diagonal); 2/27 stored (verified), 1/54 accepted. 2012 Power intro paragraph missing from book; setup restated from official solutions (reviewNote). 2014 Power 8b/9 and Super Relay 1 statement edge cases (reviewNotes).
+- SIMOC G1 2022 Q16 (pen/pencil) dropped: as printed has no whole-number answer, key 15 unexplained. 2023 Q17 key 2 wrong (pigeonhole 5 stored). 2023 Q7 cube count and 2021 Q12 top view follow key, not re-derived (reviewNotes).
+- samf junior-1998-r1: Q4, Q12, Q14, Q15, Q16 dropped — figures blank in the official PDF.
+- samf junior-2007-r2 Q11 dropped: true count is 11 (brute force), not among the choices; key says 10.
+- hmmt feb-2011 guts 26 dropped: unsatisfiable as worded (13 bishops cannot cover all diagonals).
+- hmmt feb-2000 guts 04 (degenerate triangle), 28 (V/S has no minimum), 34 (Brocard's problem, open) dropped. Penalty for [±n] not modelled (no rules page), matching feb-2001/2002.

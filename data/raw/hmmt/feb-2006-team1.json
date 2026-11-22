@@ -1,0 +1,504 @@
+[
+  {
+    "id": "hmmt-feb-2006-team1-01",
+    "bank": "hmmt",
+    "source": {
+      "contest": "HMMT February",
+      "paper": "2006 Team Round A",
+      "year": 2006,
+      "number": 1,
+      "url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2006/feb/team1/problems.pdf"
+    },
+    "grade": "9-12",
+    "points": 15,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Spring is finally here in Cambridge, and it's time to mow our lawn. For the purpose of these problems, our lawn consists of little clumps of grass arranged at the points of a certain grid (to be specified later). Our machinery consists of a fleet of identical mowbots (or \\\"mobots\\\" for short). A mobot is a lawn-mowing machine. To mow our lawn, we begin by choosing a *formation*: we place as many mobots as we want at various clumps of grass and orient each mobot's head in a certain direction. At the blow of a whistle, each mobot starts moving in the direction we've chosen, mowing every clump of grass in its path (including the clump it starts on) until it goes off the lawn. Because the spring is so young, our lawn is rather delicate. Consequently, we want to make sure that every clump of grass is mowed once and only once. We will not consider formations that do not meet this criterion. Two formations are considered \\\"different\\\" if there exists a clump of grass for which either (1) for exactly one of the formations does a mobot start on that clump, or (2) there are mobots starting on this clump for both formations, but they are oriented in different directions.\n\nFor this problem, our lawn consists of a row of $n$ clumps of grass. This row runs in an east-west direction. In our formation, each mobot may be oriented toward the north, south, east, or west. One example of an allowable formation for $n=6$ is symbolized below ($\\cdot$ means no mobot starts on that clump):\n\n$$\\cdot\\quad\\cdot\\quad\\leftarrow\\quad\\uparrow\\quad\\uparrow\\quad\\downarrow$$\n(The mobot on the third clump will move westward, mowing the first three clumps. Each of the last three clumps is mowed by a different mobot.) Here's another allowable formation for $n=6$, considered different from the first:\n\n$$\\cdot\\quad\\cdot\\quad\\leftarrow\\quad\\uparrow\\quad\\uparrow\\quad\\rightarrow$$\nCompute the number of different allowable formations for any given $n$.",
+    "image": null,
+    "choices": null,
+    "answer": "$2^{n+2}-n-3$",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Count by the east and west mobots",
+        "body": "A mobot oriented north or south mows only its own clump. A west-oriented mobot starting on clump $a$ mows clumps $1,\\dots,a$, and an east-oriented mobot starting on clump $n-b+1$ mows the last $b$ clumps. There can be at most one west-oriented and at most one east-oriented mobot (two of them would overlap). Let the west mobot mow $a\\ge0$ clumps and the east mobot $b\\ge0$ clumps ($a=0$ or $b=0$ meaning there is none). Then $a+b\\le n$, and each of the other $n-a-b$ clumps has a single north- or south-oriented mobot: $2^{n-a-b}$ ways. Hence the number of formations is\n$$\\sum_{a=0}^{n}\\sum_{b=0}^{n-a}2^{n-a-b}=\\sum_{a=0}^{n}\\left(2^{n-a+1}-1\\right)=\\left(2^{n+2}-2\\right)-(n+1)=2^{n+2}-n-3.$$\n\n(Check: $n=1$ gives $4$ formations, one for each direction.)\n\n**Answer: $2^{n+2}-n-3$**"
+      }
+    ],
+    "topics": [
+      "counting"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "hmmt-feb-2006-team1-02",
+    "bank": "hmmt",
+    "source": {
+      "contest": "HMMT February",
+      "paper": "2006 Team Round A",
+      "year": 2006,
+      "number": 2,
+      "url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2006/feb/team1/problems.pdf"
+    },
+    "grade": "9-12",
+    "points": 25,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Spring is finally here in Cambridge, and it's time to mow our lawn. For the purpose of these problems, our lawn consists of little clumps of grass arranged at the points of a certain grid (to be specified later). Our machinery consists of a fleet of identical mowbots (or \\\"mobots\\\" for short). A mobot is a lawn-mowing machine. To mow our lawn, we begin by choosing a *formation*: we place as many mobots as we want at various clumps of grass and orient each mobot's head in a certain direction. At the blow of a whistle, each mobot starts moving in the direction we've chosen, mowing every clump of grass in its path (including the clump it starts on) until it goes off the lawn. Because the spring is so young, our lawn is rather delicate. Consequently, we want to make sure that every clump of grass is mowed once and only once. We will not consider formations that do not meet this criterion. Two formations are considered \\\"different\\\" if there exists a clump of grass for which either (1) for exactly one of the formations does a mobot start on that clump, or (2) there are mobots starting on this clump for both formations, but they are oriented in different directions.\n\nFor this problem, our lawn is an $m\\times n$ rectangular grid of clumps, that is, with $m$ rows running east-west and $n$ columns running north-south. To be even more explicit, we might say our clumps are at the lattice points $\\{(x,y)\\in\\mathbb Z^2\\mid0\\le x<n\\text{ and }0\\le y<m\\}$. However, mobots are now allowed to be oriented to go either north or east only. So one allowable formation for $m=2$, $n=3$ might be as follows ($\\cdot$ means no mobot starts on that clump; the top row is $y=1$):\n\n$$\\begin{array}{ccc}\\cdot&\\rightarrow&\\cdot\\\\ \\uparrow&\\rightarrow&\\cdot\\end{array}$$\nProve that the number of allowable formations for given $m$ and $n$ is $\\dfrac{(m+n)!}{m!\\,n!}$.",
+    "image": null,
+    "choices": null,
+    "answer": "Number of formations is $\\dfrac{(m+n)!}{m!\\,n!}=\\binom{m+n}{m}$ (prove by the recursion $F(m,n)=F(m,n-1)+F(m-1,n)$).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Peel off the corner",
+        "body": "Let $F(m,n)$ be the number of allowable formations on an $m\\times n$ lawn, with $F(m,0)=F(0,n)=1$ (empty lawn, empty formation). Suppose $m,n\\ge1$. The clump $(0,0)$ can only be mowed by a mobot that starts on it (no mobot moves south or west), oriented north or east.\n\n- If it is oriented **north**, it mows the whole column $x=0$. No other mobot can start in column $0$ (it would mow a clump of that column twice), and no mobot outside that column ever enters it (mobots move only north or east, staying in their column or moving away). So the rest of the formation is an allowable formation of the remaining $m\\times(n-1)$ lawn (columns $1,\\dots,n-1$), and conversely any such formation together with this mobot works: $F(m,n-1)$ ways.\n- If it is oriented **east**, it mows the whole row $y=0$, and in the same way the rest is an allowable formation of the $(m-1)\\times n$ lawn (rows $1,\\dots,m-1$): $F(m-1,n)$ ways.\n\nThus $F(m,n)=F(m,n-1)+F(m-1,n)$ with the boundary values $1$. The numbers $\\binom{m+n}{m}$ satisfy the same recursion (Pascal's rule) and the same boundary values, so by induction on $m+n$, $F(m,n)=\\binom{m+n}{m}=\\frac{(m+n)!}{m!\\,n!}$. ∎\n\n(Equivalently: the starting points of the mobots form a lattice path, which corresponds to choosing which $m$ of $m+n$ steps go up.)"
+      }
+    ],
+    "topics": [
+      "counting"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "hmmt-feb-2006-team1-03",
+    "bank": "hmmt",
+    "source": {
+      "contest": "HMMT February",
+      "paper": "2006 Team Round A",
+      "year": 2006,
+      "number": 3,
+      "url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2006/feb/team1/problems.pdf"
+    },
+    "grade": "9-12",
+    "points": 40,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Spring is finally here in Cambridge, and it's time to mow our lawn. For the purpose of these problems, our lawn consists of little clumps of grass arranged at the points of a certain grid (to be specified later). Our machinery consists of a fleet of identical mowbots (or \\\"mobots\\\" for short). A mobot is a lawn-mowing machine. To mow our lawn, we begin by choosing a *formation*: we place as many mobots as we want at various clumps of grass and orient each mobot's head in a certain direction. At the blow of a whistle, each mobot starts moving in the direction we've chosen, mowing every clump of grass in its path (including the clump it starts on) until it goes off the lawn. Because the spring is so young, our lawn is rather delicate. Consequently, we want to make sure that every clump of grass is mowed once and only once. We will not consider formations that do not meet this criterion. Two formations are considered \\\"different\\\" if there exists a clump of grass for which either (1) for exactly one of the formations does a mobot start on that clump, or (2) there are mobots starting on this clump for both formations, but they are oriented in different directions.\n\nIn this problem, we stipulate that $m\\ge n$, and the lawn is shaped differently. The clumps are now at the lattice points in a trapezoid: $\\{(x,y)\\in\\mathbb Z^2\\mid0\\le x<n\\text{ and }0\\le y<m+1-n+x\\}$. As in the previous problem, mobots can be set to move either north or east (only). For given $m$ and $n$, determine with proof the number of allowable formations.",
+    "image": null,
+    "choices": null,
+    "answer": "$\\dbinom{m+n}{m}-\\dbinom{m+n}{m+2}=\\dfrac{(m+n)!\\,[(m+2)(m+1)-n(n-1)]}{(m+2)!\\,n!}$",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Same recursion, new boundary",
+        "body": "Let $N(m,n)$ be the number of formations on the trapezoid with columns $x=0,\\dots,n-1$ of heights $m+1-n+x$ (valid for $m\\ge n-1$; when $m=n-1$ the column $x=0$ has height $0$). Put $f(m,n)=\\binom{m+n}{m}-\\binom{m+n}{m+2}$.\n\n**Recursion.** Suppose $m\\ge n\\ge1$, so column $0$ is nonempty. Exactly as in the rectangle, the clump $(0,0)$ is mowed by a mobot starting there, oriented north or east.\n- North: it mows column $0$, and the rest is a formation on columns $1,\\dots,n-1$, whose heights $m+1-n+x$ ($x\\ge1$) are those of $N(m,n-1)$ (shift $x\\to x-1$: heights $m+1-(n-1)+x'$). So $N(m,n-1)$ ways.\n- East: it mows the bottom row $y=0$ (all $n$ columns have height $\\ge1$), and the rest, after shifting down by $1$, has column heights $m-n+x=(m-1)+1-n+x$, which is the lawn of $N(m-1,n)$ (valid as $m-1\\ge n-1$). So $N(m-1,n)$ ways.\nHence $N(m,n)=N(m,n-1)+N(m-1,n)$ for $m\\ge n\\ge1$, and $N(m,0)=1$.\n\n**The formula.** $f$ satisfies Pascal's rule: $\\binom{m+n}{m}=\\binom{m+n-1}{m}+\\binom{m+n-1}{m-1}$ and $\\binom{m+n}{m+2}=\\binom{m+n-1}{m+2}+\\binom{m+n-1}{m+1}$, so $f(m,n)=f(m,n-1)+f(m-1,n)$; also $f(m,0)=1-0=1$. The recursion only uses values with $m\\ge n-1$, except that at $m=n-1$ the column $0$ is empty and the lawn is the same as for $N(n-1,n-1)$ (drop the empty column), so we need $f(n-1,n)=f(n-1,n-1)$: indeed $f(n-1,n)-f(n-1,n-1)=\\binom{2n-2}{n-2}-\\binom{2n-2}{n}=0$ by symmetry of binomial coefficients (using Pascal on both terms). By induction on $m+n$, $N(m,n)=f(m,n)=\\binom{m+n}{m}-\\binom{m+n}{m+2}$. ∎\n\n(Equivalently, formations correspond to up/right lattice paths from $(0,0)$ to $(n,m)$ that stay below a line, counted by the reflection principle: the bad paths number $\\binom{m+n}{m+2}$.)\n\n**Answer: $\\binom{m+n}{m}-\\binom{m+n}{m+2}$**"
+      }
+    ],
+    "topics": [
+      "counting"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "hmmt-feb-2006-team1-04",
+    "bank": "hmmt",
+    "source": {
+      "contest": "HMMT February",
+      "paper": "2006 Team Round A",
+      "year": 2006,
+      "number": 4,
+      "url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2006/feb/team1/problems.pdf"
+    },
+    "grade": "9-12",
+    "points": 15,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Spring is finally here in Cambridge, and it's time to mow our lawn. For the purpose of these problems, our lawn consists of little clumps of grass arranged at the points of a certain grid (to be specified later). Our machinery consists of a fleet of identical mowbots (or \\\"mobots\\\" for short). A mobot is a lawn-mowing machine. To mow our lawn, we begin by choosing a *formation*: we place as many mobots as we want at various clumps of grass and orient each mobot's head in a certain direction. At the blow of a whistle, each mobot starts moving in the direction we've chosen, mowing every clump of grass in its path (including the clump it starts on) until it goes off the lawn. Because the spring is so young, our lawn is rather delicate. Consequently, we want to make sure that every clump of grass is mowed once and only once. We will not consider formations that do not meet this criterion. Two formations are considered \\\"different\\\" if there exists a clump of grass for which either (1) for exactly one of the formations does a mobot start on that clump, or (2) there are mobots starting on this clump for both formations, but they are oriented in different directions.\n\nIn this problem and the next, the lawn consists of points in a triangular grid of size $n$, so that for $n=3$ the lawn looks like the picture (rows of $1,2,\\dots,n$ points, apex at the top). Mobots are allowed to be oriented to the east, $30^\\circ$ west of north, or $30^\\circ$ west of south. Under these conditions, for any given $n$, what is the minimum number of mobots needed to mow the lawn?",
+    "image": "qimages/hmmt/feb-2006-team1/q04.webp",
+    "choices": null,
+    "answer": "$n$",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Upper bound and a reduction",
+        "body": "$n$ mobots suffice: put one at the left end of each row, oriented east.\n\nFor the lower bound, call the three directions east, NW ($30^\\circ$ west of north, moving up-left) and SW ($30^\\circ$ west of south, moving down-left). Number the rows $1$ (top) to $n$ (bottom). These directions are along the three families of lattice lines, and each mobot stops at the boundary: an east mobot at the right edge, a NW mobot at the left edge, a SW mobot at the bottom row. Let $m(n)$ be the minimum number of mobots for the triangle $T_n$; $m(1)=1$.\n\n**Lemma.** If a formation $F$ of $T_n$ ($n\\ge2$) contains a mobot that starts in the bottom row and is oriented east or SW, then there is a formation of $T_{n-1}$ (the top $n-1$ rows) with at most $|F|-1$ mobots.\n*Proof.* Such a mobot mows only bottom-row clumps. Remove all mobots that start in the bottom row and are oriented east or SW. Replace each NW mobot starting in the bottom row by the mobot starting one step further (in row $n-1$), or delete it if that point is off the lawn (this happens for the bottom-left corner). Keep every other mobot; a SW mobot starting above simply stops when it leaves $T_{n-1}$. Every clump of $T_{n-1}$ is still mowed exactly once, and at least the given mobot was removed. ∎\n\n**Induction.** Let $Q$ be the bottom-right corner clump. The only mobots that can mow it are: an east mobot starting in the bottom row, a SW mobot starting at $Q$, or a NW mobot starting at $Q$ (which then mows the entire right edge). In the first two cases the Lemma gives $|F|\\ge m(n-1)+1$. In the third case, rotate the picture by $120^\\circ$ so that the right edge becomes the bottom row; the rotation permutes the three allowed directions cyclically, so the rotated formation is again a formation of $T_n$, now with an east mobot mowing the entire bottom row, and the Lemma applies again. So $m(n)\\ge m(n-1)+1$, hence $m(n)\\ge n$. Together with the construction, $m(n)=n$.\n\n**Answer: $n$**"
+      }
+    ],
+    "topics": [
+      "counting",
+      "geometry"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "hmmt-feb-2006-team1-05",
+    "bank": "hmmt",
+    "source": {
+      "contest": "HMMT February",
+      "paper": "2006 Team Round A",
+      "year": 2006,
+      "number": 5,
+      "url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2006/feb/team1/problems.pdf"
+    },
+    "grade": "9-12",
+    "points": 25,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Spring is finally here in Cambridge, and it's time to mow our lawn. For the purpose of these problems, our lawn consists of little clumps of grass arranged at the points of a certain grid (to be specified later). Our machinery consists of a fleet of identical mowbots (or \\\"mobots\\\" for short). A mobot is a lawn-mowing machine. To mow our lawn, we begin by choosing a *formation*: we place as many mobots as we want at various clumps of grass and orient each mobot's head in a certain direction. At the blow of a whistle, each mobot starts moving in the direction we've chosen, mowing every clump of grass in its path (including the clump it starts on) until it goes off the lawn. Because the spring is so young, our lawn is rather delicate. Consequently, we want to make sure that every clump of grass is mowed once and only once. We will not consider formations that do not meet this criterion. Two formations are considered \\\"different\\\" if there exists a clump of grass for which either (1) for exactly one of the formations does a mobot start on that clump, or (2) there are mobots starting on this clump for both formations, but they are oriented in different directions.\n\nWith the same lawn (the triangular grid of size $n$: rows of $1,2,\\dots,n$ points) and the same allowable mobot orientations (east, $30^\\circ$ west of north, $30^\\circ$ west of south) as in the previous problem, let us call a formation \\\"happy\\\" if it is invariant under $120^\\circ$ rotations. (A rotation applies both to the positions of the mobots and to their orientations.) An example of a happy formation for $n=2$ might be the one shown (the mobots at the three points point north-west, south-west and east respectively). Find the number of happy formations for a given $n$.",
+    "image": "qimages/hmmt/feb-2006-team1/q05.webp",
+    "choices": null,
+    "answer": "$0$ if $n\\equiv1\\pmod3$; for $n\\equiv0$: $\\binom{n-1}{2n/3}-\\binom{n-1}{(2n+6)/3}+\\binom{n-1}{(2n-3)/3}-\\binom{n-1}{(2n+3)/3}$; for $n\\equiv2$: $\\binom{n-1}{(2n-1)/3}-\\binom{n-1}{(2n+5)/3}+\\binom{n-1}{(2n-4)/3}-\\binom{n-1}{(2n+2)/3}$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Central clumps",
+        "body": "Put the lawn in barycentric form: the points are $(i,j,k)$ with $i,j,k\\ge0$, $i+j+k=n-1$, and the $120^\\circ$ rotation is the cyclic shift $(i,j,k)\\mapsto(k,i,j)$, which permutes the three mobot directions cyclically.\n\n**$n\\equiv1\\pmod3$:** the center $\\left(\\frac{n-1}3,\\frac{n-1}3,\\frac{n-1}3\\right)$ is a clump. The mobot mowing it either starts there (then its orientation would have to be invariant under a $120^\\circ$ rotation - impossible), or starts elsewhere; but then its three rotated copies are three different mobots that all mow the center. So there are no happy formations: answer $0$.\n\n**$n\\not\\equiv1\\pmod3$:** there are three clumps equally close to the center, permuted by the rotation. Considering how they can be mowed, one sees that a mobot starts at each of the three, and (in two possible ways, according to their orientations) they cut the rest of the lawn into three congruent pieces permuted by the rotation. Each piece is a trapezoid as in problem 3 (with the same allowed directions). A happy formation is determined by a formation of one piece (the other two are its rotated copies), and any formation of one piece extends. So the answer is the sum, over the two ways of orienting the central mobots, of the number of formations of one trapezoid.\n\n- $n\\equiv0\\pmod3$: the pieces are $\\left(\\frac{2n}3,\\frac{n-3}3\\right)$-trapezoids or $\\left(\\frac{2n-3}3,\\frac n3\\right)$-trapezoids, giving $\\binom{n-1}{2n/3}-\\binom{n-1}{(2n+6)/3}+\\binom{n-1}{(2n-3)/3}-\\binom{n-1}{(2n+3)/3}$.\n- $n\\equiv2\\pmod3$: the pieces are $\\left(\\frac{2n-1}3,\\frac{n-2}3\\right)$- or $\\left(\\frac{2n-4}3,\\frac{n+1}3\\right)$-trapezoids, giving $\\binom{n-1}{(2n-1)/3}-\\binom{n-1}{(2n+5)/3}+\\binom{n-1}{(2n-4)/3}-\\binom{n-1}{(2n+2)/3}$.\n\n(Check against direct enumeration: $n=2,3,5,6$ give $2,3,9,14$; $n=1,4,7$ give $0$.)"
+      }
+    ],
+    "topics": [
+      "counting"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": "The official solution states the answers for $n\\not\\equiv1\\pmod 3$ as a sum of two *cubes* of trapezoid counts, and the binomial lower indices in its $n\\equiv2$ case are not integers. A formation invariant under $120^\\circ$ rotation is determined by its restriction to one of the three congruent pieces, so the count is a sum of two trapezoid counts (not cubes). Brute-force enumeration for $n=1,\\dots,7$ gives $0,2,3,0,9,14,0$, matching the formulas given here (and not the cubes). Please double-check."
+  },
+  {
+    "id": "hmmt-feb-2006-team1-06",
+    "bank": "hmmt",
+    "source": {
+      "contest": "HMMT February",
+      "paper": "2006 Team Round A",
+      "year": 2006,
+      "number": 6,
+      "url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2006/feb/team1/problems.pdf"
+    },
+    "grade": "9-12",
+    "points": 15,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $n$ be an integer at least $5$. At most how many diagonals of a regular $n$-gon can be simultaneously drawn so that no two are parallel? Prove your answer.",
+    "image": null,
+    "choices": null,
+    "answer": "$n$",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Parallel classes",
+        "body": "Label the vertices $0,1,\\dots,n-1$ around the circle. The chord joining $i$ and $j$ is perpendicular to the direction at angle $\\frac{\\pi(i+j)}{n}$ (from the center), so two chords are parallel iff $i+j\\equiv i'+j'\\pmod n$. Hence the chords (sides and diagonals) fall into exactly $n$ parallel classes, indexed by $s=i+j\\bmod n$, and no two diagonals from different classes are parallel. So at most $n$ diagonals can be drawn with no two parallel.\n\nIt remains to show that every class contains a diagonal (then we pick one from each class). The pairs in class $s$ are $\\{i,s-i\\}$ with difference $s-2i$; it is a diagonal iff $s-2i\\not\\equiv0,\\pm1\\pmod n$. For $n$ odd, $s-2i$ takes all residues, and $n\\ge5$ leaves some residue outside $\\{0,\\pm1\\}$. For $n$ even, $s-2i$ ranges over the $\\frac n2\\ge3$ residues of the same parity as $s$; if $s$ is even we need a nonzero even residue, and if $s$ is odd an odd residue other than $\\pm1$, and either exists since $\\frac n2\\ge3$. So $n$ diagonals can be drawn. ∎\n\n**Answer: $n$**"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "counting"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "hmmt-feb-2006-team1-07",
+    "bank": "hmmt",
+    "source": {
+      "contest": "HMMT February",
+      "paper": "2006 Team Round A",
+      "year": 2006,
+      "number": 7,
+      "url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2006/feb/team1/problems.pdf"
+    },
+    "grade": "9-12",
+    "points": 25,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Given a convex $n$-gon, $n\\ge4$, at most how many diagonals can be drawn such that each drawn diagonal intersects every other drawn diagonal either in the interior of the $n$-gon or at a vertex? Prove your answer.",
+    "image": null,
+    "choices": null,
+    "answer": "$2$ if $n=4$; $n$ if $n\\ge5$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Reduction and upper bound",
+        "body": "Whether two diagonals meet (cross in the interior or share an endpoint) depends only on the cyclic order of the endpoints, so we may assume the polygon is regular. For $n=4$ there are only $2$ diagonals, and they cross: answer $2$.\n\nLet $n\\ge5$. Two parallel diagonals of a regular polygon neither cross nor share a vertex, so a valid set has no two parallel diagonals, and by the previous problem it has at most $n$ diagonals.\n\n**Construction.** Say two vertices are $k$ apart if there are $k$ steps between them the short way. Two disjoint, non-crossing chords with endpoints in cyclic order $a,b,c,d$ (chords $ab$ and $cd$) have arcs $x=b-a$, $y=d-c$ not containing the other chord, and $x+y\\le n-2$ (at least one step between $b$ and $c$, and between $d$ and $a$). So if both chords have both arcs $\\ge\\frac n2-1$, then $x=y=\\frac n2-1$ with gaps exactly $1$, which makes the chords parallel.\n- $n$ odd: draw the $n$ diagonals joining vertices that are $\\frac{n-1}2$ apart. Both arcs of each are $\\ge\\frac{n-1}2>\\frac n2-1$, so any two of them cross or share a vertex.\n- $n$ even ($n\\ge6$): draw the $\\frac n2$ diameters, and the $n$ diagonals joining vertices $\\frac n2-1$ apart come in $\\frac n2$ pairs of parallel chords; take one from each pair. Any two of the chosen chords either cross, share a vertex, or would be parallel by the remark above, and we took no parallel pair.\n\nSo $n$ diagonals can be drawn, and the maximum is $n$ for $n\\ge5$ and $2$ for $n=4$. ∎\n\n**Answer: $2$ if $n=4$, otherwise $n$**"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "counting"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "hmmt-feb-2006-team1-08",
+    "bank": "hmmt",
+    "source": {
+      "contest": "HMMT February",
+      "paper": "2006 Team Round A",
+      "year": 2006,
+      "number": 8,
+      "url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2006/feb/team1/problems.pdf"
+    },
+    "grade": "9-12",
+    "points": 15,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Given a regular $n$-gon with sides of length $1$, what is the smallest radius $r$ such that there is a non-empty intersection of $n$ circles of radius $r$ centered at the vertices of the $n$-gon? Give $r$ as a formula in terms of $n$. Be sure to prove your answer.",
+    "image": null,
+    "choices": null,
+    "answer": "$r=\\dfrac12\\csc\\dfrac{180^\\circ}{n}=\\dfrac{1}{2\\sin(\\pi/n)}$",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Circumradius",
+        "body": "Let $R=\\frac1{2\\sin(\\pi/n)}$ be the circumradius (the side length is $2R\\sin\\frac\\pi n=1$). With $r=R$ all circles pass through the center, so the intersection is non-empty.\n\nConversely, suppose a point $P$ lies within distance $r$ of every vertex $V_i$ (even in all the closed *disks*). Let $O$ be the center; $\\sum_i\\vec{OV_i}=\\vec0$ by symmetry, so\n$$\\sum_{i=1}^n|PV_i|^2=\\sum_i\\left(|PO|^2+|OV_i|^2\\right)=n|PO|^2+nR^2\\ge nR^2.$$\nThus the average of $|PV_i|^2$ is at least $R^2$, so some $|PV_i|\\ge R$, whence $r\\ge R$. (For the cross terms: $\\sum_i 2\\,\\vec{PO}\\cdot\\vec{OV_i}=0$.) Hence the smallest radius is $R$.\n\n**Answer: $r=\\frac12\\csc\\frac{180^\\circ}n$**"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "trigonometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "hmmt-feb-2006-team1-09",
+    "bank": "hmmt",
+    "source": {
+      "contest": "HMMT February",
+      "paper": "2006 Team Round A",
+      "year": 2006,
+      "number": 9,
+      "url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2006/feb/team1/problems.pdf"
+    },
+    "grade": "9-12",
+    "points": 40,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $n\\ge3$ be a positive integer. Prove that given any $n$ angles $0<\\theta_1,\\theta_2,\\dots,\\theta_n<180^\\circ$, such that their sum is $180(n-2)$ degrees, there exists a convex $n$-gon having exactly those angles, in that order.",
+    "image": null,
+    "choices": null,
+    "answer": "Proof by induction on $n$ (clip a small triangle off a vertex).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Induction on $n$",
+        "body": "For $n=3$, the angles sum to $180^\\circ$ and a triangle with those angles exists.\n\nLet $n\\ge4$ and assume the statement for $n-1$. If $n=4$ and $\\theta_1=\\theta_3=180^\\circ-\\theta_2=180^\\circ-\\theta_4$, a parallelogram works, so assume this is not the case.\n\n*Claim:* two adjacent angles (cyclically) have sum $>180^\\circ$. If not, $\\theta_i+\\theta_{i+1}\\le180^\\circ$ for all $i$ (indices mod $n$); summing, $2\\cdot180(n-2)\\le180n$, i.e. $n\\le4$. So $n=4$ and equality holds everywhere, which forces $\\theta_1=\\theta_3$, $\\theta_2=\\theta_4$, $\\theta_1+\\theta_2=180^\\circ$: the excluded parallelogram case.\n\nRelabel so that $\\theta_{n-1}+\\theta_n>180^\\circ$ and put $\\theta'=\\theta_{n-1}+\\theta_n-180^\\circ$; then $0<\\theta'<180^\\circ$ and $\\theta_1,\\dots,\\theta_{n-2},\\theta'$ are $n-1$ angles in $(0,180^\\circ)$ with sum $180(n-2)-180=180(n-3)$. By the induction hypothesis there is a convex $(n-1)$-gon with these angles in order. At the vertex $V$ with angle $\\theta'$, cut off a small triangle $VXY$ ($X,Y$ on the two sides at $V$, close to $V$, with the angle at $X$ equal to $180^\\circ-\\theta_{n-1}$ and at $Y$ equal to $180^\\circ-\\theta_n$, which is possible since $\\theta'+(180^\\circ-\\theta_{n-1})+(180^\\circ-\\theta_n)=180^\\circ$). Replacing $V$ by $X,Y$ gives an $n$-gon whose interior angles at $X$ and $Y$ are $\\theta_{n-1}$ and $\\theta_n$ and whose other angles are unchanged. It is convex since all angles are less than $180^\\circ$. ∎"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "hmmt-feb-2006-team1-10",
+    "bank": "hmmt",
+    "source": {
+      "contest": "HMMT February",
+      "paper": "2006 Team Round A",
+      "year": 2006,
+      "number": 10,
+      "url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2006/feb/team1/problems.pdf"
+    },
+    "grade": "9-12",
+    "points": 15,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Suppose we have an $n$-gon such that each interior angle, measured in degrees, is a positive integer. Suppose further that all angles are less than $180^\\circ$, and that all angles are different sizes. What is the maximum possible value of $n$? Prove your answer.",
+    "image": null,
+    "choices": null,
+    "answer": "$26$",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Exterior angles",
+        "body": "Work with exterior angles $180^\\circ-\\theta_i$. They are distinct positive integers (at most $179$) and sum to $360$. Since $1+2+\\cdots+27=378>360$, at most $26$ distinct positive integers can sum to $360$: $n\\le26$.\n\nFor $n=26$ take the exterior angles $1,2,\\dots,25$ (sum $325$) and $35$: the sum is $360$, all are distinct and between $1$ and $179$. The interior angles $179,178,\\dots,155,145$ are distinct integers less than $180$ with sum $180\\cdot26-360=180(26-2)$, so by the previous problem a convex $26$-gon with exactly these angles exists. ∎\n\n**Answer: 26**"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "number-theory"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "hmmt-feb-2006-team1-11",
+    "bank": "hmmt",
+    "source": {
+      "contest": "HMMT February",
+      "paper": "2006 Team Round A",
+      "year": 2006,
+      "number": 11,
+      "url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2006/feb/team1/problems.pdf"
+    },
+    "grade": "9-12",
+    "points": 15,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "The lottery cards of a certain lottery contain all nine-digit numbers that can be formed with the digits $1$, $2$ and $3$. There is exactly one number on each lottery card. There are only red, yellow and blue lottery cards. Two lottery numbers that differ from each other in all nine digits always appear on cards of different color. Someone draws a red card and a yellow card. The red card has the number $122\\,222\\,222$ and the yellow card has the number $222\\,222\\,222$. The first prize goes to the lottery card with the number $123\\,123\\,123$. What color(s) can it possibly have? Prove your answer.",
+    "image": null,
+    "choices": null,
+    "answer": "The card $123\\,123\\,123$ must be red.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Forced coloring",
+        "body": "It can be red: color each card by its first digit ($1$ red, $2$ yellow, $3$ blue); this satisfies all the conditions.\n\nNow we show it must be red. A card differing from $122\\,222\\,222$ (red) and from $222\\,222\\,222$ (yellow) in every digit cannot be red or yellow, so it is blue. The cards $333\\,133\\,133$ and $331\\,331\\,331$ differ from both in all digits, so both are **blue**. The card $211\\,311\\,311$ differs in all digits from $122\\,222\\,222$ (red) and from $333\\,133\\,133$ (blue), so it is **yellow**. Finally $123\\,123\\,123$ differs in all digits from $331\\,331\\,331$ (blue) and from $211\\,311\\,311$ (yellow), so it can only be **red**. ∎\n\n**Answer: red**"
+      }
+    ],
+    "topics": [
+      "logic",
+      "counting"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "hmmt-feb-2006-team1-12",
+    "bank": "hmmt",
+    "source": {
+      "contest": "HMMT February",
+      "paper": "2006 Team Round A",
+      "year": 2006,
+      "number": 12,
+      "url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2006/feb/team1/problems.pdf"
+    },
+    "grade": "9-12",
+    "points": 25,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "A $3\\times3\\times3$ cube is built from $27$ unit cubes. Suddenly five of those cubes mysteriously teleport away. What is the minimum possible surface area of the remaining solid? Prove your answer.",
+    "image": null,
+    "choices": null,
+    "answer": "$50$",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Rows of cubes",
+        "body": "Orient the cube along the axes. An *$x$-row* is a set of three unit cubes whose centers differ only in the $x$-coordinate; there are $9$ $x$-rows, and similarly $9$ $y$-rows and $9$ $z$-rows.\n\n**Achieving 50.** Remove one $x$-row and one $y$-row meeting in a corner cube, e.g. $\\{(0,0,0),(1,0,0),(2,0,0),(0,1,0),(0,2,0)\\}$: $3+3-1=5$ cubes. Now $8$ of the $x$-rows, $8$ of the $y$-rows and all $9$ $z$-rows are non-empty, and each non-empty row is a contiguous block of cubes, so it contributes exactly $2$ faces perpendicular to its direction: surface area $2(8+8+9)=50$.\n\n**Lower bound.** Each $x$-row that still contains at least one cube contributes at least $2$ unit faces perpendicular to the $x$-direction (an entry and an exit face along that line); similarly for $y$- and $z$-rows. So the surface area is at least $2\\times$(number of non-empty rows). Two completely removed rows in the same direction would remove $6$ cubes, so at most one row per direction is completely removed; and removing one row of each of the three directions would remove at least $7$ cubes. Hence at most $2$ rows are completely removed, at least $27-2=25$ rows are non-empty, and the surface area is at least $2\\cdot25=50$. ∎\n\n**Answer: 50**"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "counting"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "hmmt-feb-2006-team1-13",
+    "bank": "hmmt",
+    "source": {
+      "contest": "HMMT February",
+      "paper": "2006 Team Round A",
+      "year": 2006,
+      "number": 13,
+      "url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2006/feb/team1/problems.pdf"
+    },
+    "grade": "9-12",
+    "points": 40,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Having lost a game of checkers and my temper, I dash all the pieces to the ground but one. This last checker, which is perfectly circular in shape, remains completely on the board, and happens to cover equal areas of red and black squares. Prove that the center of this piece must lie on a boundary between two squares (or at a junction of four). (As for a real checker, assume the diameter of the piece is smaller than the side of a square.)",
+    "image": null,
+    "choices": null,
+    "answer": "If the area is split equally the center lies on a grid line (proof below).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Compute the signed area",
+        "body": "Take the squares to be unit squares, colored by $c(x,y)=s(x)s(y)$ with $s(x)=(-1)^{\\lfloor x\\rfloor}$, so the (red minus black) area covered by the disk $D$ of radius $\\rho<\\frac12$ and center $(a,b)$ is $g=\\iint_Dc$. We show: if $a$ and $b$ are not integers, then $g\\ne0$.\n\nSince the diameter is below $1$, the disk meets at most one vertical grid line $x=p$ and at most one horizontal grid line $y=q$.\n- *Neither line:* $D$ lies inside one square, so $g=\\pm\\text{area}(D)\\ne0$.\n- *Only a vertical line $x=p$:* $c(x,y)=\\pm\\operatorname{sign}(x-p)$ on $D$, so $|g|=|A_{\\text{right}}-A_{\\text{left}}|$, the difference of the areas on the two sides of the line. The side containing the center has the larger area (the center is not on the line), so $g\\ne0$. Same for a horizontal line only.\n- *Both lines:* by reflecting the board we may assume $a>p$ and $b>q$, and $|g|=\\left|\\iint_D u(x)v(y)\\right|$ with $u=\\operatorname{sign}(x-p)$, $v=\\operatorname{sign}(y-q)$. Reflect $D$ in the line $x=p$ to get $D'$ with center $(2p-a,b)$. For $x>p$ the point $(x,y)$ is closer to $(a,b)$ than to $(2p-a,b)$, so $D'\\cap\\{x>p\\}\\subseteq D\\cap\\{x>p\\}$, and the part of $D$ left of $p$ cancels with its mirror image inside the right part (since $v$ does not depend on $x$). Hence $\\iint_Du\\,v=\\iint_Rv$, where $R=(D\\cap\\{x>p\\})\\setminus D'$ is a lune that is symmetric about the line $y=b$ and has positive area, including points arbitrarily close to $y=b$. Because $R$ is symmetric about $y=b$ and $b>q$, $\\iint_Rv=A(R)-2A(R\\cap\\{y<b\\}\\cap\\{y<q\\})$, and $A(R\\cap\\{y<b,y<q\\})<A(R\\cap\\{y<b\\})=\\frac12A(R)$ since $R\\cap\\{q<y<b\\}$ has positive area. So $\\iint_Rv>0$ and $g\\ne0$.\n\nHence a checker with $g=0$ must have an integer center coordinate: its center lies on a boundary between squares or at a junction of four. ∎"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": "The statement does not say that the checker's diameter is smaller than a square; the official solution uses this (as for a real checker). This is assumed in the proof."
+  },
+  {
+    "id": "hmmt-feb-2006-team1-14",
+    "bank": "hmmt",
+    "source": {
+      "contest": "HMMT February",
+      "paper": "2006 Team Round A",
+      "year": 2006,
+      "number": 14,
+      "url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2006/feb/team1/problems.pdf"
+    },
+    "grade": "9-12",
+    "points": 40,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "A number $n$ is called *bummed out* if there is exactly one ordered pair of positive integers $(x,y)$ such that $$\\left\\lfloor\\frac{x^2}y\\right\\rfloor+\\left\\lfloor\\frac{y^2}x\\right\\rfloor=n.$$ Find all bummed out numbers.",
+    "image": null,
+    "choices": null,
+    "answer": "$2,\\ 6,\\ 8,\\ 10$",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Reduce to a finite check",
+        "body": "If $(a,b)$ is a solution then so is $(b,a)$, so a unique solution has $a=b$, and then $n=2a$ is even. If $n=2a\\ge12$, then $x=a-1\\ge5$, $y=a+1\\ge7$ gives another solution: $\\left\\lfloor\\frac{(a-1)^2}{a+1}\\right\\rfloor+\\left\\lfloor\\frac{(a+1)^2}{a-1}\\right\\rfloor=\\left\\lfloor a-3+\\frac4{a+1}\\right\\rfloor+\\left\\lfloor a+3+\\frac4{a-1}\\right\\rfloor=(a-3)+(a+3)=2a$. So $n$ is not bummed out. Also $n=4$ has the solutions $(2,2)$ and $(1,2)$. Remaining candidates: $2,6,8,10$.\n\nFor these, a solution satisfies $n=\\lfloor x^2/y\\rfloor+\\lfloor y^2/x\\rfloor>\\frac{x^2}{2y}+\\frac{x^2}{2y}+\\frac{y^2}{x}-2\\ge\\frac{3x}{\\sqrt[3]4}-2$ (AM-GM), so $x<\\frac{\\sqrt[3]4}{3}(n+2)<0.53(n+2)\\le6.4$, so $x\\le6$, and likewise $y\\le6$. The values of $\\lfloor x^2/y\\rfloor+\\lfloor y^2/x\\rfloor$ for $1\\le x,y\\le6$ (row $x$, column $y$):\n$$\\begin{array}{c|cccccc}&1&2&3&4&5&6\\\\\\hline1&2&4&9&16&25&36\\\\2&4&4&5&9&12&18\\\\3&9&5&6&7&9&13\\\\4&16&9&7&8&9&11\\\\5&25&12&9&9&10&11\\\\6&36&18&13&11&11&12\\end{array}$$\nThe value $2$ occurs only for $(1,1)$, $6$ only for $(3,3)$, $8$ only for $(4,4)$, and $10$ only for $(5,5)$. So these four are bummed out. ∎\n\n**Answer: 2, 6, 8, 10**"
+      }
+    ],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "hmmt-feb-2006-team1-15",
+    "bank": "hmmt",
+    "source": {
+      "contest": "HMMT February",
+      "paper": "2006 Team Round A",
+      "year": 2006,
+      "number": 15,
+      "url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2006/feb/team1/problems.pdf"
+    },
+    "grade": "9-12",
+    "points": 50,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Find, with proof, all positive integer palindromes whose square is also a palindrome.",
+    "image": null,
+    "choices": null,
+    "answer": "A palindrome $N$ works iff the sum of the squares of its digits is less than $10$: $3$; palindromes of $0$s and $1$s with at most nine $1$s; a single $2$ in the middle with $0$s and at most four $1$s elsewhere; $2\\underbrace{0\\cdots0}2$; $2\\,0\\cdots0\\,1\\,0\\cdots0\\,2$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Criterion",
+        "body": "Let $N=\\sum_{i=0}^da_i10^i$ be a palindrome ($a_i=a_{d-i}$, $a_d\\ne0$) and $b_k=\\sum_{i+j=k}a_ia_j$ for $0\\le k\\le2d$, so $N^2=\\sum b_k10^k$ (not yet the decimal expansion), $b_k=b_{2d-k}$ and $b_d=\\sum a_i^2$. **Claim: $N^2$ is a palindrome iff $\\sum_i a_i^2<10$.**\n\n**($\\Leftarrow$)** By AM-GM, $b_k\\le\\sum_{i+j=k}\\frac{a_i^2+a_j^2}2\\le\\sum_ia_i^2<10$, so no carries occur: the digits of $N^2$ are $b_0,\\dots,b_{2d}$, which read the same backwards since $b_k=b_{2d-k}$.\n\n**($\\Rightarrow$)** Suppose $\\sum a_i^2\\ge10$, i.e. $b_d\\ge10$, and $N^2$ is a palindrome; write $a=a_0=a_d$ and $e_k$ for the decimal digits of $N^2$, $e_k\\equiv b_k+c_k\\pmod{10}$ with carries $c_0=0$, $c_{k+1}=\\lfloor(b_k+c_k)/10\\rfloor$. The last digit of $N^2$ is $a^2\\bmod10$.\n*Case $a\\ge4$.* $N\\in[a\\cdot10^d,(a+1)10^d)$, so $N^2\\in[a^2,(a+1)^2)\\cdot10^{2d}$. For $a=4,5,6,7,8,9$ the first digit of $N^2$ is in $\\{1,2\\},\\{2,3\\},\\{3,4\\},\\{4,5,6\\},\\{6,7,8\\},\\{8,9\\}$ respectively, while the last digit is $6,5,6,9,4,1$: never equal.\n*Case $a\\le3$.* Then $N^2<16\\cdot10^{2d}$. If $N^2$ has $2d+2$ digits then $a=3$, the first digit is $1$ and the last is $9$: not a palindrome. So $N^2$ has $2d+1$ digits. Let $\\ell\\le2d$ be the largest index with $e_\\ell\\ne b_\\ell$ (it exists: $e_d\\ne b_d$ since $b_d\\ge10$). For $k>\\ell$: $e_k=b_k$, and the carries $c_k$ are $0$ (a nonzero carry would be a multiple of $10$, hence $\\ge10$, and produce a carry out of the top, giving more than $2d+1$ digits). So $b_\\ell+c_\\ell\\le9$, $c_\\ell\\ge1$, hence $b_\\ell\\le8$. By palindromicity $e_k=e_{2d-k}=b_{2d-k}=b_k$ for all $k<2d-\\ell$, which forces (by induction, $c_0=0$) all carries $c_k=0$ for $k\\le2d-\\ell$, so $e_{2d-\\ell}=b_{2d-\\ell}\\bmod10=b_\\ell$ (as $b_\\ell\\le8$). But palindromicity gives $e_{2d-\\ell}=e_\\ell\\ne b_\\ell$. Contradiction. ∎\n\n**Classification.** A palindrome with $\\sum a_i^2\\le9$ has digits symmetric in pairs (plus a middle digit if the length is odd). A single-digit palindrome: $1,2,3$. Otherwise the outer digit appears twice, so $2a_d^2\\le9$ gives $a_d\\in\\{1,2\\}$. If $a_d=2$ the outer pair uses $8$, leaving at most $1$: only zeros, or a single $1$ in the exact middle: $2\\,0\\cdots0\\,2$ and $2\\,0\\cdots0\\,1\\,0\\cdots0\\,2$. If $a_d=1$: no digit $3$ is possible and a pair of $2$'s costs $8$ (too much with the outer pair), so the digits are $0$s and $1$s with at most nine $1$s, or a single $2$ in the middle (cost $4$) with at most four $1$s (two pairs) elsewhere. Together with the number $3$, this is the answer.\n\n**Answer:** $3$; palindromes of $0$s and $1$s with at most nine $1$s; palindromes with a single $2$ in the middle and otherwise $0$s and at most four $1$s; $2\\,0\\cdots0\\,2$; and $2\\,0\\cdots0\\,1\\,0\\cdots0\\,2$."
+      }
+    ],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

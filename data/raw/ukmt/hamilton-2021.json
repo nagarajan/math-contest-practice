@@ -1,0 +1,236 @@
+[
+ {
+  "id": "ukmt-hamilton-2021-h1",
+  "bank": "ukmt",
+  "source": {
+   "contest": "UKMT Hamilton Olympiad",
+   "paper": "2021",
+   "year": 2021,
+   "number": 1,
+   "url": "https://ukmt.org.uk/wp-json/wp/v2/free-past-papers?challenge-type=74"
+  },
+  "grade": "9",
+  "points": 10,
+  "blankPoints": null,
+  "wrongPoints": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Naomi has a broken calculator. All it can do is either add one to the previous answer, or square the previous answer. (It performs the operations correctly.) Naomi starts with $2$ on the screen. In how many ways can she obtain an answer of $1000$?",
+  "image": null,
+  "choices": null,
+  "answer": "128",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Count by the number of squarings",
+    "body": "Note $31^2=961<1000<1024=32^2$. Write $a\\Rightarrow b$ for \"keep adding $1$ from $a$ up to $b$\" and $a\\to a^2$ for a squaring. A route is determined by the numbers just before each squaring.\n\n- **No squaring:** $2\\Rightarrow1000$: $1$ way.\n- **One squaring:** $2\\Rightarrow a\\to a^2\\Rightarrow1000$ with $2\\le a$ and $a^2\\le1000$, so $a=2,\\dots,31$: $30$ ways.\n- **Two squarings:** $2\\Rightarrow a\\to a^2\\Rightarrow b\\to b^2\\Rightarrow1000$ with $2\\le a$, $a^2\\le b$, $b^2\\le1000$. So $b\\le31$, hence $a^2\\le31$, $a\\le5$. The number of $b$ is $31-a^2+1$: $a=2$: $28$; $a=3$: $23$; $a=4$: $16$; $a=5$: $7$. Total $74$.\n- **Three squarings:** $2\\Rightarrow a\\to a^2\\Rightarrow b\\to b^2\\Rightarrow c\\to c^2\\Rightarrow1000$ with $c\\le31$, $b^2\\le c$ so $b\\le5$, and $a^2\\le b$ so $a=2$ and $b\\in\\{4,5\\}$. For $b=4$: $c\\in[16,31]$, $16$ ways; for $b=5$: $c\\in[25,31]$, $7$ ways. Total $23$.\n- **Four squarings:** the smallest possible result is $2\\to4\\to16\\to256\\to65536>1000$. Impossible.\n\nTotal: $1+30+74+23=128$.\n\n**Answer: $128$**"
+   },
+   {
+    "title": "Recursion on the target",
+    "body": "Let $f(m)$ be the number of ways to reach $m$ from $2$ (so $f(2)=1$). To reach $m\\ge3$, the last step is either \"$+1$\" (from $m-1$) or a squaring (from $\\sqrt m$, when $m$ is a perfect square with $\\sqrt m\\ge2$). Hence\n$$f(m)=f(m-1)+\\begin{cases}f(\\sqrt m)&m\\text{ a square}\\\\0&\\text{otherwise}\\end{cases}$$\nso $f(m)=1+\\sum f(k)$ over $2\\le k\\le\\sqrt m$. In particular $f$ only changes at squares, and $f(1000)=f(961)=1+\\sum_{k=2}^{31}f(k)$.\n\nComputing: $f(2)=f(3)=1$; $f(4)=\\dots=f(8)=2$; $f(9)=\\dots=f(15)=3$; $f(16)=\\dots=f(24)=5$; $f(25)=\\dots=f(31)=7$. These have $2,5,7,9,7$ values of $k$ respectively, so\n$$f(1000)=1+(2\\cdot1+5\\cdot2+7\\cdot3+9\\cdot5+7\\cdot7)=1+127=128 .$$\n\n**Answer: $128$**"
+   }
+  ],
+  "topics": [
+   "counting",
+   "number-theory"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "ukmt-hamilton-2021-h2",
+  "bank": "ukmt",
+  "source": {
+   "contest": "UKMT Hamilton Olympiad",
+   "paper": "2021",
+   "year": 2021,
+   "number": 2,
+   "url": "https://ukmt.org.uk/wp-json/wp/v2/free-past-papers?challenge-type=74"
+  },
+  "grade": "9",
+  "points": 10,
+  "blankPoints": null,
+  "wrongPoints": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "The diagram shows two unshaded squares inside a larger square. What fraction of the larger square is shaded?",
+  "image": "qimages/ukmt/hamilton-2021/h2.webp",
+  "choices": null,
+  "answer": "19/36",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "answerDisplay": "$\\frac{19}{36}$",
+  "solutions": [
+   {
+    "title": "Coordinates",
+    "body": "Take the large square to be $[0,6]\\times[0,6]$ (area $36$), with the diagonal running from the top-left corner $(0,6)$ to the bottom-right corner $(6,0)$, i.e. along $x+y=6$.\n\n- The lower-left unshaded square is $[0,3]\\times[0,3]$, of side half that of the large square; its top-right corner $(3,3)$ lies on the diagonal. Area $9$.\n- The tilted unshaded square has one side on the diagonal and its other two vertices on the top side and the right side. Its side is $s$. Look at the corner $(0,6)$: the triangle formed by this corner, the first vertex of the tilted square on the diagonal and its vertex on the top side has a $45^\\circ$ angle at the corner (between the top side and the diagonal) and a right angle at the vertex on the diagonal (a side of the tilted square is perpendicular to the diagonal), so it is isosceles and the diagonal piece from the corner to the square has length $s$. The same holds at the corner $(6,0)$. So the diagonal $6\\sqrt2$ is divided into three parts each of length $s$, giving $s=2\\sqrt2$. Area $s^2=8$. (Its vertices are $(2,4),(4,2),(6,4),(4,6)$.)\n\nThe two unshaded squares overlap only at the point $(3,3)$. So the shaded area is $36-9-8=19$, and the shaded fraction is $\\dfrac{19}{36}$.\n\n**Answer: $\\dfrac{19}{36}$**"
+   },
+   {
+    "title": "Cut into congruent triangles",
+    "body": "The diagonal splits the large square into two halves of area $\\tfrac12$ each.\n\n*Lower-left half.* Join the centre of the large square to the bottom-left corner and to the midpoints of the two sides meeting at that corner. This cuts the half into four congruent right isosceles triangles, and the unshaded square is made of two of them: it covers $\\tfrac12$ of this half, i.e. $\\tfrac14$ of the large square.\n\n*Upper-right half.* This is a right isosceles triangle whose hypotenuse (the diagonal) is divided into three equal parts, each equal to the side $s$ of the tilted unshaded square. Dividing the triangle into $9$ congruent small right isosceles triangles (hypotenuse $s$), the tilted square is made of $4$ of them. So it covers $\\tfrac49$ of this half, leaving $\\tfrac59$ shaded.\n\nShaded fraction: $\\tfrac12\\cdot\\tfrac12+\\tfrac12\\cdot\\tfrac59=\\tfrac14+\\tfrac5{18}=\\tfrac{9+10}{36}=\\tfrac{19}{36}$.\n\n**Answer: $\\dfrac{19}{36}$**"
+   }
+  ],
+  "topics": [
+   "geometry",
+   "fractions-decimals"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "ukmt-hamilton-2021-h3",
+  "bank": "ukmt",
+  "source": {
+   "contest": "UKMT Hamilton Olympiad",
+   "paper": "2021",
+   "year": 2021,
+   "number": 3,
+   "url": "https://ukmt.org.uk/wp-json/wp/v2/free-past-papers?challenge-type=74"
+  },
+  "grade": "9",
+  "points": 10,
+  "blankPoints": null,
+  "wrongPoints": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "For how many positive integers $n$ less than $200$ is $n^n$ a cube and $(n+1)^{n+1}$ a square?",
+  "image": null,
+  "choices": null,
+  "answer": "40",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Characterise when the powers are cubes and squares",
+    "body": "**$n^n$ is a cube** iff $3\\mid n$ or $n$ is a cube. If $3\\mid n$ then $n^n=(n^{n/3})^3$. If $n=t^3$ then $n^n=(t^n)^3$. Conversely, if $3\\nmid n$, every prime exponent $e$ in $n$ must satisfy $3\\mid en$, so $3\\mid e$: $n$ is a cube.\n\n**$(n+1)^{n+1}$ is a square** iff $n+1$ is even or $n+1$ is a square (same argument with $2$ in place of $3$).\n\nNow count $n\\in[1,199]$ with ($3\\mid n$ or $n$ a cube) and ($n$ odd or $n+1$ a square).\n\n(a) $3\\mid n$ and $n$ odd: $3,9,\\dots,195$: $33$ values.\n\n(b) $3\\mid n$, $n$ even, $n+1$ an odd square: $n+1\\in\\{9,25,49,81,121,169\\}$ gives $n=8,24,48,80,120,168$; the multiples of $3$ are $24,48,120,168$: $4$ new values.\n\n(c) $n$ a cube not divisible by $3$, so $n\\in\\{1,8,64,125\\}$ (the cube $27$ is in (a)): $n=1$ ($n+1=2$ even) works, $n=125$ ($126$ even) works, $n=8$ ($9=3^2$) works, $n=64$ ($65$ is odd and not a square) fails. $3$ new values.\n\nTotal: $33+4+3=40$.\n\n**Answer: $40$**"
+   }
+  ],
+  "topics": [
+   "number-theory",
+   "counting"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "ukmt-hamilton-2021-h4",
+  "bank": "ukmt",
+  "source": {
+   "contest": "UKMT Hamilton Olympiad",
+   "paper": "2021",
+   "year": 2021,
+   "number": 4,
+   "url": "https://ukmt.org.uk/wp-json/wp/v2/free-past-papers?challenge-type=74"
+  },
+  "grade": "9",
+  "points": 10,
+  "blankPoints": null,
+  "wrongPoints": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "$ABCD$ is a rectangle with area $6\\ \\text{cm}^2$. The point $E$ lies on $AB$, $F$ lies on $BC$, $G$ lies on $CD$ and $H$ lies on $DA$. The point $I$ lies on $AC$ and is the point of intersection of $EG$ and $FH$, and $AEIH$ and $IFCG$ are both rectangles. One possible diagram is shown.\n\nGiven that the combined area of $AEIH$ and $IFCG$ is $4\\ \\text{cm}^2$, find all possible values for the area of rectangle $AEIH$ in $\\text{cm}^2$.",
+  "image": "qimages/ukmt/hamilton-2021/h4.webp",
+  "choices": null,
+  "answer": "$2+\\sqrt3$ and $2-\\sqrt3$ (square cm)",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Coordinates",
+    "body": "Let $A=(0,0)$, $B=(x,0)$, $D=(0,y)$, $C=(x,y)$ with $xy=6$. Since $I$ lies on the diagonal $AC$, $I=(kx,ky)$ for some $0<k<1$. Then $E=(kx,0)$, $H=(0,ky)$, $G=(kx,y)$, $F=(x,ky)$ and\n\n- $[AEIH]=kx\\cdot ky=6k^2$,\n- $[IFCG]=(1-k)x\\cdot(1-k)y=6(1-k)^2$.\n\nTheir sum is $4$:\n$$6k^2+6(1-k)^2=4\\ \\Longrightarrow\\ 6k^2-6k+1=0\\ \\Longrightarrow\\ k=\\frac12\\pm\\frac{\\sqrt3}6 ,$$\nboth in $(0,1)$. Then $k^2=\\tfrac14\\pm\\tfrac{\\sqrt3}6+\\tfrac1{12}=\\tfrac13\\pm\\tfrac{\\sqrt3}6$, so\n$$[AEIH]=6k^2=2\\pm\\sqrt3 .$$\nBoth occur (for any rectangle with $xy=6$, e.g. $6\\times1$, choose the corresponding $k$).\n\n**Answer: $2+\\sqrt3$ or $2-\\sqrt3$ cm$^2$**"
+   },
+   {
+    "title": "Use the other two rectangles",
+    "body": "With the notation above, the rectangles $EBFI$ and $HIGD$ have equal area $k(1-k)\\cdot6$ each, and together they make up the rest of the area: $2\\cdot6k(1-k)=6-4=2$, so $6k(1-k)=1$, i.e. $6k^2-6k+1=0$, the same equation as before. So $k=\\frac12\\pm\\frac{\\sqrt3}6$ and the area $6k^2=6k-1=2\\pm\\sqrt3$."
+   }
+  ],
+  "topics": [
+   "geometry",
+   "algebra"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "ukmt-hamilton-2021-h5",
+  "bank": "ukmt",
+  "source": {
+   "contest": "UKMT Hamilton Olympiad",
+   "paper": "2021",
+   "year": 2021,
+   "number": 5,
+   "url": "https://ukmt.org.uk/wp-json/wp/v2/free-past-papers?challenge-type=74"
+  },
+  "grade": "9",
+  "points": 10,
+  "blankPoints": null,
+  "wrongPoints": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Find all real numbers $x,y,z$ such that $x^2+y^2+z^2=x-z=2$.",
+  "image": null,
+  "choices": null,
+  "answer": "Only $(x,y,z)=(1,0,-1)$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Show $y=0$ by completing a square",
+    "body": "Since $x-z=2$, $x=z+2$. If $y\\ne0$ then $x^2+z^2=2-y^2<2$, i.e. $(z+2)^2+z^2<2$, i.e. $2z^2+4z+2<0$, i.e. $2(z+1)^2<0$, impossible. So $y=0$.\n\nThen $x^2+z^2=2$ gives $(z+2)^2+z^2=2$, i.e. $2(z+1)^2=0$, so $z=-1$ and $x=1$.\n\nCheck: $1+0+1=2$ and $1-(-1)=2$. ✓\n\n**Answer: $(x,y,z)=(1,0,-1)$ is the only solution.** ∎"
+   },
+   {
+    "title": "Inequality",
+    "body": "For all reals, $x^2+z^2\\ge\\dfrac{(x-z)^2}2=2$, with equality iff $x=-z$ (because $2(x^2+z^2)-(x-z)^2=(x+z)^2$). Since $x^2+y^2+z^2=2$ we need $y^2=2-(x^2+z^2)\\le0$, so $y=0$, and equality must hold, so $x=-z$. With $x-z=2$: $x=1$, $z=-1$. ∎"
+   }
+  ],
+  "topics": [
+   "algebra",
+   "inequalities"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "ukmt-hamilton-2021-h6",
+  "bank": "ukmt",
+  "source": {
+   "contest": "UKMT Hamilton Olympiad",
+   "paper": "2021",
+   "year": 2021,
+   "number": 6,
+   "url": "https://ukmt.org.uk/wp-json/wp/v2/free-past-papers?challenge-type=74"
+  },
+  "grade": "9",
+  "points": 10,
+  "blankPoints": null,
+  "wrongPoints": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Humpty buys a box of $15$ eggs, with $3$ rows and $5$ columns. Each meal he removes one egg to cook and eat. If necessary, he moves one or more eggs in the box so that between meals there are always two lines of reflective symmetry. What is the smallest total number of extra egg moves he can make while he empties the box?\n\n*Note:* You must carefully justify that your answer is minimal; that it is impossible to make fewer extra egg moves while emptying the box.",
+  "image": null,
+  "choices": null,
+  "answer": "11",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Lower bound and a sequence with $11$ moves",
+    "body": "Label the cells\n$$\\begin{array}{ccccc}A&B&C&D&E\\\\F&G&H&I&J\\\\K&L&M&N&O\\end{array}$$\nThe two lines of symmetry are the horizontal and vertical midlines of the box. A move takes one egg to an empty cell. Between meals the eggs form a symmetric pattern, a union of the classes $\\{H\\}$, $\\{C,M\\}$, $\\{F,J\\}$, $\\{G,I\\}$, $\\{B,D,L,N\\}$, $\\{A,E,K,O\\}$; all classes except $\\{H\\}$ have an even number of cells.\n\n**Parity.** In a symmetric pattern, the number of eggs is odd iff $H$ is occupied. Before the $k$-th meal there are $16-k$ eggs. For the seven meals with an even number of eggs before them ($k=2,4,\\dots,14$), $H$ is empty, so after eating (an egg elsewhere) the number of eggs is odd and $H$ is still empty: at least **one egg must be moved into $H$** after each of these seven meals.\n\n**The two big classes.** The corner class $\\{A,E,K,O\\}$ is full at the start, empty at the end, and always entirely full or entirely empty between meals. Consider the first meal after which it is empty. Before it all four corners are occupied. That meal eats at most one corner egg, so at least $3$ eggs sitting in corners must **each be moved** at least once during the rearrangement after this meal. The same holds for the class $\\{B,D,L,N\\}$: some meal after which it first becomes empty, requiring at least $3$ moves.\n\n*If these two meals are the same meal*, it eats from at most one of the two classes, so at least $3+4=7$ moves occur after it; and each of the other $6$ meals with an even number of eggs before them needs at least $1$ move: at least $13$ moves.\n\n*Otherwise* they are two different meals with at least $3+3=6$ moves after them. At most two of the seven \"even\" meals are among them, so at least $5$ others each need a move into $H$ in their own rearrangement. Total at least $6+5=11$.\n\nSo at least $11$ extra moves are needed.\n\n**A sequence with exactly $11$ moves.** (Eat, then move.)\n\n1. Eat $H$.\n2. Eat $G$; move $I\\to H$ (1).\n3. Eat $H$.\n4. Eat $J$; move $F\\to H$ (2).\n5. Eat $H$.\n6. Eat $C$; move $M\\to H$ (3).\n7. Eat $H$. Eggs left: $A,B,D,E,K,L,N,O$.\n8. Eat $B$; move $D\\to H$, $L\\to F$, $N\\to J$ (6). Eggs: $A,E,K,O,F,H,J$.\n9. Eat $H$.\n10. Eat $F$; move $J\\to H$ (7). Eggs: $A,E,K,O,H$.\n11. Eat $H$.\n12. Eat $O$; move $A\\to F$, $E\\to J$, $K\\to H$ (10). Eggs: $F,H,J$.\n13. Eat $H$.\n14. Eat $F$; move $J\\to H$ (11).\n15. Eat $H$.\n\nAfter every step the pattern is symmetric, and the total is $11$ moves.\n\n**Answer: $11$**"
+   }
+  ],
+  "topics": [
+   "logic",
+   "counting",
+   "spatial"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ }
+]

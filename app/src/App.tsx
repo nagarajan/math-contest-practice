@@ -1,13 +1,16 @@
-import { useEffect } from 'react'
+import { lazy, Suspense, useEffect } from 'react'
 import { useApp } from './state'
 import { navigate, useRoute } from './router'
 import { HomePage } from './pages/Home'
-import { PracticePage } from './pages/Practice'
-import { ExamResultPage, ExamRunPage, ExamSetupPage } from './pages/Exam'
-import { HistoryPage } from './pages/History'
-import { SettingsPage } from './pages/Settings'
 import { ProfilesPage } from './pages/Profiles'
-import { SourcesPage } from './pages/Sources'
+
+const PracticePage = lazy(() => import('./pages/Practice').then((m) => ({ default: m.PracticePage })))
+const ExamSetupPage = lazy(() => import('./pages/Exam').then((m) => ({ default: m.ExamSetupPage })))
+const ExamRunPage = lazy(() => import('./pages/Exam').then((m) => ({ default: m.ExamRunPage })))
+const ExamResultPage = lazy(() => import('./pages/Exam').then((m) => ({ default: m.ExamResultPage })))
+const HistoryPage = lazy(() => import('./pages/History').then((m) => ({ default: m.HistoryPage })))
+const SettingsPage = lazy(() => import('./pages/Settings').then((m) => ({ default: m.SettingsPage })))
+const SourcesPage = lazy(() => import('./pages/Sources').then((m) => ({ default: m.SourcesPage })))
 
 function useTheme() {
   const { settings } = useApp()
@@ -81,7 +84,9 @@ export default function App() {
           )}
         </div>
       </header>
-      <main>{body}</main>
+      <main>
+        <Suspense fallback={<div className="loading">Loading…</div>}>{body}</Suspense>
+      </main>
       {!inExam && (
         <footer className="footer muted">
           Questions © their respective competitions, used here for private practice only ·{' '}

@@ -1,0 +1,410 @@
+[
+ {
+  "id": "hmmt-feb-2010-team1-01a",
+  "bank": "hmmt",
+  "source": {
+   "contest": "HMMT February",
+   "paper": "2010 Team Round A",
+   "year": 2010,
+   "number": 1,
+   "url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2010/feb/team1/problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 5,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "You are trying to sink a submarine. Every second, you launch a missile at a point of your choosing on the $x$-axis. If the submarine is at that point at that time, you sink it. A *firing sequence* is a sequence of real numbers that specify where you will fire at each second. For example, the firing sequence $2,3,5,6,\\dots$ means that you will fire at $2$ after one second, $3$ after two seconds, $5$ after three seconds, $6$ after four seconds, and so on.\n\nSuppose that the submarine starts at the origin and travels along the positive $x$-axis with an (unknown) positive integer velocity. Show that there is a firing sequence that is guaranteed to hit the submarine eventually.",
+  "image": null,
+  "choices": null,
+  "answer": "The firing sequence $1,4,9,\\dots,n^2,\\dots$ works.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Fire at the squares",
+    "body": "Fire at $n^2$ at second $n$. If the velocity is the positive integer $v$, then at second $v$ the submarine is at $x=v\\cdot v=v^2$, exactly where the missile lands at second $v$. So the submarine is sunk at time $v$ at the latest. ∎"
+   }
+  ],
+  "topics": [
+   "number-theory",
+   "logic"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "hmmt-feb-2010-team1-01b",
+  "bank": "hmmt",
+  "source": {
+   "contest": "HMMT February",
+   "paper": "2010 Team Round A",
+   "year": 2010,
+   "number": 1,
+   "url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2010/feb/team1/problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 10,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "You are trying to sink a submarine. Every second, you launch a missile at a point of your choosing on the $x$-axis. If the submarine is at that point at that time, you sink it. A *firing sequence* is a sequence of real numbers that specify where you will fire at each second.\n\nSuppose the submarine starts at an unknown integer point on the non-negative $x$-axis and travels with an unknown positive integer velocity. Show that there is a firing sequence that is guaranteed to hit the submarine eventually.",
+  "image": null,
+  "choices": null,
+  "answer": "List all pairs $(a,b)$ ($a\\ge0$ start, $b\\ge1$ velocity) in a single sequence; at second $n$ fire at $a_n+b_nn$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Enumerate all (start, velocity) pairs",
+    "body": "The submarine is described by a pair $(a,b)$ with $a\\ge0$, $b\\ge1$ integers; its position at second $t$ is $a+bt$. The set of such pairs is countable: list them diagonal by diagonal, $(0,1)$; $(1,1),(0,2)$; $(2,1),(1,2),(0,3)$; and so on, so the pair with $a+b=s$ appears in the $s$th block of $s$ pairs. Every pair appears at some finite position $n$ in this list. Let $(a_n,b_n)$ be the $n$th pair and fire at second $n$ at the point $a_n+b_n\\,n$.\n\nIf the submarine is the pair $(a,b)$ and $(a,b)=(a_n,b_n)$, then at second $n$ it is exactly at $a_n+b_nn$, where the missile lands. So it is sunk at second $n$. ∎"
+   }
+  ],
+  "topics": [
+   "number-theory",
+   "logic"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "hmmt-feb-2010-team1-02",
+  "bank": "hmmt",
+  "source": {
+   "contest": "HMMT February",
+   "paper": "2010 Team Round A",
+   "year": 2010,
+   "number": 2,
+   "url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2010/feb/team1/problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 15,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Consider the following two-player game. Player 1 starts with a number, $N$. He then subtracts a proper divisor of $N$ from $N$ and gives the result to player 2 (a proper divisor of $N$ is a positive divisor of $N$ that is not equal to $1$ or $N$). Player 2 does the same thing with the number she gets from player 1, and gives the result back to player 1. The two players continue until a player is given a prime number or $1$, at which point that player loses. For which values of $N$ does player 1 have a winning strategy?",
+  "image": null,
+  "choices": null,
+  "answer": "All even $N$ except the odd powers of $2$ ($2,8,32,\\dots$).",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Odd numbers lose, even non-powers of 2 win",
+    "body": "Claim: a player who receives an odd number loses. Induct on the number. An odd prime or $1$ loses at once. Let $N=ab$ be an odd composite and suppose the player subtracts the proper divisor $a$ (all divisors of $N$ are odd, so $a>1$ is odd). The opponent receives $M=N-a=a(b-1)$, which is even, has the odd proper divisor $a$ (proper since $b-1\\ge2$), and is not a power of $2$ (it has the odd factor $a>1$). The opponent subtracts $a$ and returns the odd number $M-a<N$, which by induction loses for the first player.\n\nIf $N$ is even and not a power of $2$, it has an odd proper divisor $d>1$, and subtracting $d$ gives the opponent an odd number, so the mover wins.\n\nPowers of $2$: from $2^k$ ($k\\ge2$) the proper divisors are $2^j$, $1\\le j\\le k-1$. Subtracting $2^j$ gives $2^j(2^{k-j}-1)$, which is an even non-power of $2$ (a win for the opponent) unless $j=k-1$. So the only reasonable move is to $2^{k-1}$. Since $2$ is prime, the mover at $2^1$ loses; so $2^2$ wins, $2^3$ loses, and in general $2^k$ is a win exactly when $k$ is even.\n\nThus player 1 wins exactly when $N$ is even and not an odd power of $2$.\n\n**Answer: all even $N$ except $2^k$ with $k$ odd**"
+   }
+  ],
+  "topics": [
+   "games",
+   "number-theory"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "hmmt-feb-2010-team1-03",
+  "bank": "hmmt",
+  "source": {
+   "contest": "HMMT February",
+   "paper": "2010 Team Round A",
+   "year": 2010,
+   "number": 3,
+   "url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2010/feb/team1/problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 15,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Call a positive integer in base $10$ *$k$-good* if we can split it into two integers $y$ and $z$, such that $y$ is all digits on the left and $z$ is all digits on the right, and such that $y=k\\cdot z$. For example, $2010$ is $2$-good because we can split it into $20$ and $10$ and $20=2\\cdot10$. $20010$ is also $2$-good, because we can split it into $20$ and $010$. In addition, it is $20$-good, because we can split it into $200$ and $10$.\n\nShow that there exists a $48$-good perfect square.",
+  "image": null,
+  "choices": null,
+  "answer": "Take $a=42$, $z=\\frac{48\\cdot10^{42}+1}{49}$; the number $48z\\cdot10^{42}+z=(7z)^2$ is a $48$-good perfect square.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Use Euler's theorem",
+    "body": "We want integers $a,z$ with $0\\le z<10^a$ such that $N=48z\\cdot10^a+z=z(48\\cdot10^a+1)$ is a perfect square; then splitting off the last $a$ digits (padded with zeros) gives $y=48z$ and $z$.\n\nTake $a=42=\\varphi(49)$. By Euler's theorem $10^{42}\\equiv1\\pmod{49}$, so $48\\cdot10^{42}+1\\equiv49\\equiv0\\pmod{49}$. Let $z=\\frac{48\\cdot10^{42}+1}{49}$, an integer with $z<10^{42}$. Then\n$$N=z(48\\cdot10^{42}+1)=z\\cdot49z=(7z)^2,$$\na perfect square, and writing $N=(48z)\\cdot10^{42}+z$ with $0\\le z<10^{42}$ shows that $N$ is $48$-good. ∎"
+   }
+  ],
+  "topics": [
+   "number-theory"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "hmmt-feb-2010-team1-04",
+  "bank": "hmmt",
+  "source": {
+   "contest": "HMMT February",
+   "paper": "2010 Team Round A",
+   "year": 2010,
+   "number": 4,
+   "url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2010/feb/team1/problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 20,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Let\n$$e^x+e^y=A,\\quad xe^x+ye^y=B,\\quad x^2e^x+y^2e^y=C,\\quad x^3e^x+y^3e^y=D,\\quad x^4e^x+y^4e^y=E.$$\nProve that if $A$, $B$, $C$, and $D$ are all rational, then so is $E$.",
+  "image": null,
+  "choices": null,
+  "answer": "$E$ is a rational function of $A,B,C,D$ (via $s=x+y$ and $p=xy$), with the case $x=y$ handled separately.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Linear recurrence for the moments",
+    "body": "Let $u=e^x$, $v=e^y$ (both positive), $s=x+y$, $p=xy$, and $w_k=x^ku+y^kv$, so $A=w_0,B=w_1,C=w_2,D=w_3,E=w_4$. Since $x,y$ are the roots of $t^2-st+p$, $w_{k+2}=s\\,w_{k+1}-p\\,w_k$. Hence\n$$C=sB-pA,\\qquad D=sC-pB,\\qquad E=sD-pC.$$\n\nThe first two equations form a linear system in $(s,p)$ with determinant $AC-B^2$ (up to sign). A direct computation gives $AC-B^2=uv(x-y)^2$.\n\nCase $x\\ne y$: then $AC-B^2\\ne0$, and solving, $s=\\frac{AD-BC}{AC-B^2}$, $p=\\frac{BD-C^2}{AC-B^2}$, which are rational. Then $E=sD-pC$ is rational.\n\nCase $x=y$: $w_k=x^k(u+v)$, so $E=xD$ and $B=xA$ with $A=2e^x>0$, so $x=B/A$ is rational and $E=\\frac{BD}{A}$ is rational. ∎"
+   }
+  ],
+  "topics": [
+   "algebra",
+   "sequences-series"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "hmmt-feb-2010-team1-05",
+  "bank": "hmmt",
+  "source": {
+   "contest": "HMMT February",
+   "paper": "2010 Team Round A",
+   "year": 2010,
+   "number": 5,
+   "url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2010/feb/team1/problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 20,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Show that, for every positive integer $n$, there exists a monic polynomial of degree $n$ with integer coefficients such that the coefficients are decreasing and the roots of the polynomial are all integers.",
+  "image": null,
+  "choices": null,
+  "answer": "For $n\\ge2$ take $p(x)=(x-a)(x+b)^{n-1}$ with $b=2n-1$ and $a=2b(n-1)+1$; for $n=1$ take $p(x)=x$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Construction and verification",
+    "body": "For $n=1$, $p(x)=x$ works (coefficients $1>0$). For $n\\ge2$ let $m=n-1$, $b=2m+1$, $a=2bm+1$, and $p(x)=(x-a)(x+b)^m$, monic of degree $m+1=n$ with integer roots $a$ and $-b$.\n\nWrite $(x+b)^m=\\sum q_kx^k$ with $q_k=\\binom mkb^{m-k}>0$ for $0\\le k\\le m$ and $q_k=0$ otherwise. The coefficient of $x^k$ in $p$ is $c_k=q_{k-1}-aq_k$. We need $c_k>c_{k-1}$ for $k=1,\\dots,m+1$ (so that the coefficients decrease from the leading one to the constant one). We have\n$$c_k-c_{k-1}=(1+a)q_{k-1}-q_{k-2}-aq_k=q_{k-1}\\left[(1+a)-\\frac{q_{k-2}}{q_{k-1}}-a\\frac{q_k}{q_{k-1}}\\right].$$\nFor $1\\le k\\le m+1$ we have $q_{k-1}>0$. Now $\\frac{q_k}{q_{k-1}}=\\frac{m-k+1}{kb}\\le\\frac mb<\\frac12$ (as $b>2m$), and $\\frac{q_{k-2}}{q_{k-1}}=\\frac{(k-1)b}{m-k+2}\\le mb$ (and it is $0$ for $k=1$). So the bracket is greater than $(1+a)-mb-\\frac a2=1+\\frac a2-mb>0$ since $a=2bm+1>2mb$. Hence $c_k>c_{k-1}$ for all $k$, i.e. the coefficients are strictly decreasing. ∎"
+   }
+  ],
+  "topics": [
+   "polynomials",
+   "algebra"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "hmmt-feb-2010-team1-06",
+  "bank": "hmmt",
+  "source": {
+   "contest": "HMMT February",
+   "paper": "2010 Team Round A",
+   "year": 2010,
+   "number": 6,
+   "url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2010/feb/team1/problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 20,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Let $S$ be a convex set in the plane with a finite area $a$. Prove that either $a=0$ or $S$ is bounded. (A set is *bounded* if it is contained in a circle of finite radius. A set is *convex* if, whenever two points $A$ and $B$ are in the set, the line segment between them is also in the set.)",
+  "image": null,
+  "choices": null,
+  "answer": "If $S$ is not contained in a line it contains a disk of radius $r$; any point at distance $d$ from its center forces area $\\ge r\\sqrt{d^2-r^2}$, so $d^2\\le r^2+a^2/r^2$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "A disk plus a far point gives a big kite",
+    "body": "If all points of $S$ lie on one line, the area is $0$. Otherwise $S$ contains three non-collinear points $A,B,C$, hence by convexity the triangle $ABC$ and its incircle $\\omega$, with center $I$ and radius $r>0$.\n\nLet $X\\in S$ be at distance $d>r$ from $I$. Let $XY,XZ$ be the tangents from $X$ to $\\omega$ ($Y,Z\\in\\omega$). Since $S$ is convex and contains $X$ and $\\omega$, it contains the kite $IYXZ$. Its area is twice that of the right triangle $IYX$ (right angle at $Y$, legs $IY=r$ and $XY=\\sqrt{d^2-r^2}$): $r\\sqrt{d^2-r^2}$. Since the area of $S$ is $a$, $r\\sqrt{d^2-r^2}\\le a$, so $d^2\\le r^2+\\frac{a^2}{r^2}$.\n\nTherefore every point of $S$ lies within distance $\\sqrt{r^2+a^2/r^2}$ of $I$ (or within $r$), so $S$ is bounded. ∎"
+   }
+  ],
+  "topics": [
+   "geometry",
+   "analysis"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "hmmt-feb-2010-team1-07",
+  "bank": "hmmt",
+  "source": {
+   "contest": "HMMT February",
+   "paper": "2010 Team Round A",
+   "year": 2010,
+   "number": 7,
+   "url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2010/feb/team1/problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 25,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Point $P$ lies inside a convex pentagon $AFQDC$ such that $FPDQ$ is a parallelogram. Given that $\\angle FAQ=\\angle PAC=10^\\circ$, and $\\angle PFA=\\angle PDC=15^\\circ$. What is $\\angle AQC$?",
+  "image": null,
+  "choices": null,
+  "answer": "15",
+  "acceptedAnswers": null,
+  "answerUnit": "degrees",
+  "solutions": [
+   {
+    "title": "Spiral similarity at A",
+    "body": "Let $C'$ be the point for which $\\triangle AFP\\sim\\triangle AQC'$ (spiral similarity centered at $A$ taking $F\\to Q$, $P\\to C'$). Then $\\angle AQC'=\\angle AFP=15^\\circ$, and also $\\triangle AFQ\\sim\\triangle APC'$, so $\\angle PAC'=\\angle FAQ=10^\\circ$; thus $C'$ lies on the same ray from $A$ as $C$, and it is enough to show $\\angle PDC'=15^\\circ$ (this pins down $C'=C$).\n\nLet $X$ be the fourth vertex of parallelogram $FPC'X$. Because $XC'\\parallel FP$, the angle between $FA$ and $XC'$ is $15^\\circ$, and $\\angle AQC'=15^\\circ$, so the angles at $C'$ and $A$ in triangles $XC'Q$ and $FAQ$ agree; also $\\frac{QC'}{XC'}=\\frac{QC'}{FP}=\\frac{QA}{FA}$ (from $\\triangle AFP\\sim\\triangle AQC'$). By SAS there is a spiral similarity between $\\triangle XC'Q$ and $\\triangle FAQ$, so $\\angle FQX=\\angle AQC'=15^\\circ$. The segments $FP$, $XC'$, $QD$ are parallel and equal, so $\\triangle FQX\\cong\\triangle PDC'$, giving $\\angle PDC'=15^\\circ$. Hence $C'=C$ and $\\angle AQC=\\angle AQC'=15^\\circ$ (that is, $\\frac\\pi{12}$).\n\nA numerical construction with random admissible positions of $A,F,P,Q$ confirms $\\angle AQC=15^\\circ$.\n\n**Answer: $15^\\circ$**"
+   }
+  ],
+  "topics": [
+   "geometry"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "hmmt-feb-2010-team1-08",
+  "bank": "hmmt",
+  "source": {
+   "contest": "HMMT February",
+   "paper": "2010 Team Round A",
+   "year": 2010,
+   "number": 8,
+   "url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2010/feb/team1/problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 30,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "A knight moves on a two-dimensional grid. From any square, it can move $2$ units in one axis-parallel direction, then move $1$ unit in an orthogonal direction, the way a regular knight moves in a game of chess. The knight starts at the origin. As it moves, it keeps track of a number $t$, which is initially $0$. When the knight lands at the point $(a,b)$, the number is changed from $x$ to $ax+b$.\n\nShow that, for any integers $a$ and $b$, it is possible for the knight to land at the points $(1,a)$ and $(-1,a)$ with $t$ equal to $b$.",
+  "image": null,
+  "choices": null,
+  "answer": "Every integer value of $t$ can be obtained at every point $(\\pm1,y)$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Set-up",
+    "body": "Write $[px+q]$ for the position $(p,q)$: landing there sends $t\\mapsto pt+q$. The knight graph on $\\mathbb Z^2$ is connected, so any position can be reached from the origin, and landing at $(0,q)$ resets $t$ to the constant $q$.\n\nAt positions with $p=\\pm1$ the map $t\\mapsto\\pm t+q$ is a bijection of $\\mathbb Z$. Moves between two such positions stay in the columns $x=\\pm1$ and send $(1,y)\\leftrightarrow(-1,y\\pm1)$; so the positions with $p=\\pm1$ split into two chains: class 1 $=\\{(1,y):y\\text{ odd}\\}\\cup\\{(-1,y):y\\text{ even}\\}$ and class 2 $=\\{(1,y):y\\text{ even}\\}\\cup\\{(-1,y):y\\text{ odd}\\}$. Inside a class we can walk between any two positions through the bijective maps, so it suffices to show that at one position of each class every integer $t$ is attainable.\n\n**Class 1, position $(1,1)$.** (i) Adding 2: $(1,1)\\to(-1,0)\\to(1,-1)\\to(-1,0)\\to(1,1)$ sends $t=c$ to $c\\to -c\\to -c-1\\to c+1\\to c+2$. (ii) Start: go to $(0,-3)$ ($t=-3$) and then to $(1,-1)$ (a knight move $(1,2)$): $t=-4$. The loop $(1,-1)\\to(3,0)\\to(1,-1)$ sends $c\\mapsto3c\\mapsto3c-1$, so we obtain $-4,-13,-40,\\dots$, arbitrarily negative values of both parities. Then $(1,-1)\\to(3,0)\\to(1,1)$ gives $3c+1$, again arbitrarily negative of both parities. Combined with (i), from any such value we reach every larger integer of the same parity; so every integer is attainable at $(1,1)$.\n\n**Class 2, position $(-1,1)$.** (i) Adding 2: $(-1,1)\\to(1,0)\\to(-1,-1)\\to(1,0)\\to(-1,1)$ sends $c\\to c\\to-c-1\\to-c-1\\to c+2$. (ii) Start: go to $(0,-3)$ ($t=-3$) then $(-1,-1)$ (knight move $(-1,2)$): $t=3-1=2$. The loop $(-1,-1)\\to(-3,0)\\to(-1,-1)$ sends $c\\mapsto-3c\\mapsto3c-1$, giving $2,5,14,41,\\dots$, arbitrarily large of both parities. Then $(-1,-1)\\to(1,0)\\to(-1,1)$ sends $c\\mapsto c\\mapsto1-c$, arbitrarily negative of both parities. With (i), every integer is attainable at $(-1,1)$.\n\nHence at every point $(1,a)$ and $(-1,a)$ the value $t=b$ is attainable for every integer $b$. ∎"
+   }
+  ],
+  "topics": [
+   "logic",
+   "number-theory"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "hmmt-feb-2010-team1-09",
+  "bank": "hmmt",
+  "source": {
+   "contest": "HMMT February",
+   "paper": "2010 Team Round A",
+   "year": 2010,
+   "number": 9,
+   "url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2010/feb/team1/problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 30,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Let $p(x)=a_nx^n+a_{n-1}x^{n-1}+\\cdots+a_0$ be a polynomial with complex coefficients such that $a_i\\ne0$ for all $i$. Prove that $|r|\\le2\\max_{i=1}^{n}\\left|\\frac{a_{i-1}}{a_i}\\right|$ for all roots $r$ of all such polynomials $p$. Here $|z|$ denotes the absolute value of the complex number $z$.",
+  "image": null,
+  "choices": null,
+  "answer": "Let $M=\\max|a_{i-1}/a_i|$; if $|r|>2M$ the triangle inequality on $p(r)=0$ gives $1\\le\\sum_{k\\ge1}(M/|r|)^k<1$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Triangle inequality",
+    "body": "Let $M=\\max_{1\\le i\\le n}\\left|\\frac{a_{i-1}}{a_i}\\right|$ (the maximum is positive since all $a_i\\ne0$). Then $|a_{n-k}|\\le M^k|a_n|$ for $0\\le k\\le n$ (chain the ratios). Let $r$ be a root and suppose $|r|>2M$ (so $r\\ne0$). From $a_nr^n=-\\sum_{k=1}^na_{n-k}r^{n-k}$,\n$$|a_n||r|^n\\le\\sum_{k=1}^n|a_{n-k}||r|^{n-k}\\le|a_n|\\sum_{k=1}^nM^k|r|^{n-k}.$$\nDividing by $|a_n||r|^n$: $1\\le\\sum_{k=1}^n\\left(\\frac M{|r|}\\right)^k<\\sum_{k\\ge1}\\frac1{2^k}=1$, a contradiction. Hence $|r|\\le2M$. ∎"
+   }
+  ],
+  "topics": [
+   "polynomials",
+   "inequalities",
+   "complex-numbers"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "hmmt-feb-2010-team1-10a",
+  "bank": "hmmt",
+  "source": {
+   "contest": "HMMT February",
+   "paper": "2010 Team Round A",
+   "year": 2010,
+   "number": 10,
+   "url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2010/feb/team1/problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 20,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Call an $2n$-digit base-10 number *special* if we can split its digits into two sets of size $n$ such that the sum of the numbers in the two sets is the same. Let $p_n$ be the probability that a randomly-chosen $2n$-digit number is special. (We allow leading zeros in $2n$-digit numbers.)\nThe sequence $p_n$ converges to a constant $c$. Find $c$.",
+  "image": null,
+  "choices": null,
+  "answer": "1/2",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Parity and balancing",
+    "body": "If the digit sum is odd, the number cannot be special, and the digit sum is even with probability exactly $\\frac12$ (the number of odd digits is Binomial$(2n,\\frac12)$). So $p_n\\le\\frac12$.\n\nClaim: if the $2n$ digits include at least eight $0$'s and at least eight $1$'s and the digit sum is even, the number is special. Set aside eight $0$'s and eight $1$'s (set $A$) and call the remaining $2n-16$ digits $B$. Among all splits of $B$ into two halves $Y,Z$ of size $n-8$, take one minimizing $|D|$, where $D=\\sum Y-\\sum Z$; say $D\\ge0$. $D$ is even because the total digit sum (even) minus $8$ is $\\sum B$. If $D>8$, let $y$ be the largest element of $Y$ and $z$ the smallest of $Z$; if $y\\le z$ then $\\sum Y\\le\\sum Z$, contradicting $D>0$; if $y>z$, swapping them changes $D$ to $D-2(y-z)$, which by minimality must be $\\le -D$, i.e. $y-z\\ge D>8$, but $y-z\\le9$ and $D$ is even so $D\\ge10$, impossible. So $D=2k$ with $0\\le k\\le4$. Now add to $Y$ four minus $k$ ones and four plus $k$ zeros, and to $Z$ four plus $k$ ones and four minus $k$ zeros; this equalizes the sums and each set has size $n$. So the number is special.\n\nA random $2n$-digit string has at least eight $0$'s and eight $1$'s with probability tending to $1$. Hence $p_n\\ge\\frac12\\cdot(1-o(1))$ and $p_n\\to\\frac12$.\n\n**Answer: $\\frac12$**"
+   }
+  ],
+  "topics": [
+   "probability",
+   "number-theory"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null,
+  "answerDisplay": "$\\frac12$"
+ },
+ {
+  "id": "hmmt-feb-2010-team1-10b",
+  "bank": "hmmt",
+  "source": {
+   "contest": "HMMT February",
+   "paper": "2010 Team Round A",
+   "year": 2010,
+   "number": 10,
+   "url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2010/feb/team1/problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 45,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Call an $2n$-digit base-10 number *special* if we can split its digits into two sets of size $n$ such that the sum of the numbers in the two sets is the same. Let $p_n$ be the probability that a randomly-chosen $2n$-digit number is special. (We allow leading zeros in $2n$-digit numbers.)\nLet $q_n=p_n-c$, where $c=\\frac12$ is the limit of $p_n$. There exists a unique positive constant $r$ such that $\\frac{q_n}{r^n}$ converges to a constant $d$. Find $r$ and $d$.",
+  "image": null,
+  "choices": null,
+  "answer": "$r=\\frac14$, $d=-1$",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Which even-sum numbers fail",
+    "body": "Since the digit sum is even with probability exactly $\\frac12$ and odd sums are never special, $q_n=-P(\\text{digit sum even and not special})$. So we need the asymptotics of the probability that a number with even digit sum is not special.\n\nWith probability $1-O(0.16^n)$, which is negligible compared with $4^{-n}$, at least $5$ digit values each occur at least $10$ times. If two of these values are consecutive (differ by $1$), the argument of part (a) applies and the number is special. If some gap between consecutive used values is $\\ge3$, pairing digits $k-4,k+3$ against $k-2,k$ produces pairs whose sums differ by exactly $1$, and again the part (a) argument balances the sets. So the five frequent digit values are $\\{0,2,4,6,8\\}$ or $\\{1,3,5,7,9\\}$ (swapped by $x\\mapsto9-x$). In the even case, if any odd digit occurs it can be used to fix the digit-sum difference mod $4$, so the number is special; if no odd digit occurs and the digit sum is divisible by $4$, it is also special. So almost all non-special numbers with even digit sum consist entirely of even digits (or entirely of odd digits) with digit sum $\\equiv2\\pmod4$. Their probability is $2\\cdot\\left(\\frac12\\right)^{2n}\\cdot\\frac12$ asymptotically ($\\left(\\frac5{10}\\right)^{2n}$ for all digits even, times $\\frac12$ for the sum being $2\\bmod4$, times $2$ for the odd-digit case), so\n$$q_n\\sim-\\left(\\frac14\\right)^n.$$\nHence $r=\\frac14$ and $d=-1$.\n\n**Answer: $(r,d)=\\left(\\frac14,-1\\right)$**"
+   }
+  ],
+  "topics": [
+   "probability",
+   "number-theory"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ }
+]

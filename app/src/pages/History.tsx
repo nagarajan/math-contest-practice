@@ -7,11 +7,13 @@ import { Markdown } from '../components/Markdown'
 import { Solutions } from '../components/Solutions'
 import { formatAnswer, plainPreview } from '../lib/answers'
 import { useLookup } from '../lib/useLookup'
-import { examTitle } from './Exam'
+import { examTitle } from '../lib/banks'
+import { BankPill } from '../components/QuestionView'
+import { gradeName, NO_FOCUS } from '../types'
 
 export function HistoryPage() {
-  const { data, index } = useApp()
-  const [tab, setTab] = useState<'exams' | 'practice' | 'topics'>('exams')
+  const { data, index, banks, grade, settings, setSettings } = useApp()
+  const [tab, setTab] = useState<'progress' | 'exams' | 'practice' | 'topics'>('progress')
   const [open, setOpen] = useState<number | null>(null)
   const lookup = useLookup(data.attempts.map((a) => a.grade))
 
@@ -27,6 +29,25 @@ export function HistoryPage() {
     }
     return index.banks.filter((b) => r.has(b.id)).map((b) => ({ id: b.id, name: b.name, ...r.get(b.id)! }))
   }, [data, index])
+
+  const progress = useMemo(
+    () =>
+      banks.banks
+        .map((b) => {
+          const qs = banks.all.filter((q) => q.bank === b.id)
+          const seen = qs.filter((q) => data.stats[q.id]?.seen)
+          const right = seen.filter((q) => data.stats[q.id].lastCorrect).length
+          return { b, total: qs.length, seen: seen.length, right, revisit: seen.length - right }
+        })
+        .filter((x) => x.total)
+        .sort((x, y) => y.seen / y.total - x.seen / x.total || y.total - x.total),
+    [banks, data],
+  )
+
+  const practiseBank = (bank: string) => {
+    setSettings({ ...settings, practiceFocus: { ...NO_FOCUS, bank } })
+    navigate('/practice')
+  }
 
   const byTopic = useMemo(() => {
     const r = new Map<string, { n: number; ok: number }>()
@@ -57,6 +78,9 @@ export function HistoryPage() {
         ))}
       </div>
       <div className="tabs">
+        <button className={tab === 'progress' ? 'tab active' : 'tab'} onClick={() => setTab('progress')}>
+          By competition
+        </button>
         <button className={tab === 'exams' ? 'tab active' : 'tab'} onClick={() => setTab('exams')}>
           Exams ({data.exams.length})
         </button>
@@ -67,6 +91,28 @@ export function HistoryPage() {
           By topic
         </button>
       </div>
+
+      {tab === 'progress' && (
+        <div className="list">
+          <div className="muted small">
+            Questions seen so far in each competition for {gradeName(grade)}. "Right" counts questions whose last answer was correct.
+          </div>
+          {progress.map(({ b, total, seen, right, revisit }) => (
+            <div key={b.id} className="progress-row">
+              <BankPill bank={b.id} />
+              <div className="bar" title={`${seen} of ${total} seen`}>
+                <div className="bar-fill" style={{ width: `${(100 * seen) / total}%` }} />
+              </div>
+              <span className="muted small progress-nums">
+                {seen}/{total} seen{seen ? ` · ${right} right · ${revisit} to revisit` : ''}
+              </span>
+              <button className="btn small" onClick={() => practiseBank(b.id)}>
+                Practice
+              </button>
+            </div>
+          ))}
+        </div>
+      )}
 
       {tab === 'exams' && (
         <div className="list">

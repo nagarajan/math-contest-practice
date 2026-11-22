@@ -1,4 +1,4 @@
-import type { BankId, BankMeta, Grade, Question } from '../types'
+import type { BankId, BankMeta, ExamKind, Grade, Question, Solution } from '../types'
 
 export interface BankIndex {
   banks: BankMeta[]
@@ -59,3 +59,24 @@ export function bankMeta(index: BankIndex, id: BankId | null | undefined): BankM
 export const bankName = (index: BankIndex, id: BankId | null | undefined) => bankMeta(index, id)?.name ?? String(id ?? '')
 
 export const isAutoGraded = (q: Question) => q.type !== 'self'
+
+export function examTitle(index: BankIndex, e: { kind: ExamKind; bank: BankId | null }) {
+  return e.kind === 'mixed' ? 'Mixed exam' : `Focused exam · ${bankName(index, e.bank)}`
+}
+
+const solCache = new Map<string, Promise<Record<string, Solution[]>>>()
+
+export function loadSolutions(q: Question): Promise<Solution[]> {
+  if (q.solutions) return Promise.resolve(q.solutions)
+  if (!q.sol) return Promise.resolve([])
+  let p = solCache.get(q.sol)
+  if (!p) {
+    p = fetch(assetUrl(`banks/sol/${q.sol}.json`)).then((r) => {
+      if (!r.ok) throw new Error(`HTTP ${r.status}`)
+      return r.json()
+    })
+    p.catch(() => solCache.delete(q.sol!))
+    solCache.set(q.sol, p)
+  }
+  return p.then((m) => m[q.id] ?? [])
+}

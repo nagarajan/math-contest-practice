@@ -1,0 +1,435 @@
+[
+ {
+  "id": "hmmt-feb-2009-team1-01",
+  "bank": "hmmt",
+  "source": {
+   "contest": "HMMT February",
+   "paper": "2009 Team Round A",
+   "year": 2009,
+   "number": 1,
+   "url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2009/feb/team1/problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 8,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "A *graph* consists of a set of vertices and a set of edges connecting pairs of vertices. If vertices $u$ and $v$ are connected by an edge, we say they are *adjacent*. The *degree* of a vertex is the number of vertices adjacent to it. A *coloring* of a graph is an assignment of a color to each vertex of the graph. A coloring is *good* if no two adjacent vertices are the same color. The *chromatic number* of a graph is the minimum number of colors needed in any good coloring of that graph. A graph is *finite* if it has a finite number of vertices.\n\nLet $n\\ge3$ be a positive integer. A *triangulation* of a convex $n$-gon is a set of $n-3$ of its diagonals which do not intersect in the interior of the polygon. Along with the $n$ sides, these diagonals separate the polygon into $n-2$ disjoint triangles. Any triangulation can be viewed as a graph: the vertices of the graph are the corners of the polygon, and the $n$ sides and $n-3$ diagonals are the edges.\n\nFor a fixed $n$-gon, different triangulations correspond to different graphs. Prove that all of these graphs have the same chromatic number.",
+  "image": null,
+  "choices": null,
+  "answer": "All triangulation graphs have chromatic number $3$ (induction by removing an \\\"ear\\\" triangle).",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Show the chromatic number is always 3",
+    "body": "**Claim:** every triangulation graph of a convex $n$-gon has chromatic number $3$. Since it contains a triangle, at least $3$ colors are needed. We show $3$ suffice by induction on $n$. For $n=3$ the graph is a triangle.\n\nLet $n>3$. The $n-2$ triangles have $3(n-2)$ edge-slots in total; each side lies in exactly one triangle and each of the $n-3$ diagonals lies in exactly two, so the number of (triangle, side) incidences is $3(n-2)-2(n-3)=n$. Since there are only $n-2<n$ triangles, by pigeonhole some triangle contains two sides of the polygon. These two sides share a vertex $v$, so the triangle is $v$ and its two polygon neighbours $u,w$, with $uw$ a diagonal. The vertex $v$ is adjacent to nothing else (a diagonal from $v$ would have to enter the interior of this triangle and cross $uw$ or leave the polygon). Deleting $v$ leaves a triangulation of the convex $(n-1)$-gon with the diagonal $uw$ now a side. By induction color it with $3$ colors, then give $v$ a color different from those of its two neighbours $u,w$. This is a good $3$-coloring of the original graph. Hence the chromatic number is $3$ for every triangulation. ∎"
+   }
+  ],
+  "topics": [
+   "graph-theory"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "hmmt-feb-2009-team1-02a",
+  "bank": "hmmt",
+  "source": {
+   "contest": "HMMT February",
+   "paper": "2009 Team Round A",
+   "year": 2009,
+   "number": 2,
+   "url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2009/feb/team1/problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 4,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "A *graph* consists of a set of vertices and a set of edges connecting pairs of vertices. If vertices $u$ and $v$ are connected by an edge, we say they are *adjacent*. The *degree* of a vertex is the number of vertices adjacent to it. A *coloring* of a graph is an assignment of a color to each vertex of the graph. A coloring is *good* if no two adjacent vertices are the same color. The *chromatic number* of a graph is the minimum number of colors needed in any good coloring of that graph. A graph is *finite* if it has a finite number of vertices.\n\nLet $P$ be a graph with one vertex $v_n$ for each positive integer $n$. If $a<b$, then an edge connects vertices $v_a$ and $v_b$ if and only if $\\frac ba$ is a prime number. What is the chromatic number of $P$? Prove your answer.",
+  "image": null,
+  "choices": null,
+  "answer": "2",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Parity of the number of prime factors",
+    "body": "$v_1$ and $v_2$ are adjacent ($2/1$ is prime), so at least $2$ colors are needed. Let $f(n)$ be the number of prime factors of $n$ counted with multiplicity. If $v_a,v_b$ are adjacent with $a<b$, then $b=pa$ for a prime $p$, so $f(b)=f(a)+1$ has the opposite parity. So coloring $v_n$ red if $f(n)$ is odd and blue if even is a good $2$-coloring. The chromatic number is $2$.\n\n**Answer: 2**"
+   }
+  ],
+  "topics": [
+   "graph-theory",
+   "number-theory"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "hmmt-feb-2009-team1-02b",
+  "bank": "hmmt",
+  "source": {
+   "contest": "HMMT February",
+   "paper": "2009 Team Round A",
+   "year": 2009,
+   "number": 2,
+   "url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2009/feb/team1/problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 6,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Let $T$ be a graph with one vertex $v_n$ for every integer $n$. An edge connects $v_a$ and $v_b$ if $|a-b|$ is a power of two. What is the chromatic number of $T$? Prove your answer.",
+  "image": null,
+  "choices": null,
+  "answer": "3",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Triangle plus mod 3",
+    "body": "$v_0,v_1,v_2$ are pairwise adjacent (differences $1,1,2$ are powers of $2$), so at least $3$ colors are needed. Color $v_n$ by $n\\bmod3$. If $v_a,v_b$ have the same color then $3\\mid a-b$; but no power of $2$ is divisible by $3$, so they are not adjacent. Hence $3$ colors suffice.\n\n**Answer: 3**"
+   }
+  ],
+  "topics": [
+   "graph-theory",
+   "number-theory"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "hmmt-feb-2009-team1-03a",
+  "bank": "hmmt",
+  "source": {
+   "contest": "HMMT February",
+   "paper": "2009 Team Round A",
+   "year": 2009,
+   "number": 3,
+   "url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2009/feb/team1/problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 6,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "A *graph* consists of a set of vertices and a set of edges connecting pairs of vertices. If vertices $u$ and $v$ are connected by an edge, we say they are *adjacent*. The *degree* of a vertex is the number of vertices adjacent to it. A *coloring* of a graph is an assignment of a color to each vertex of the graph. A coloring is *good* if no two adjacent vertices are the same color. The *chromatic number* of a graph is the minimum number of colors needed in any good coloring of that graph. A graph is *finite* if it has a finite number of vertices.\n\nLet $G$ be a finite graph in which every vertex has degree $k$. Prove that the chromatic number of $G$ is at most $k+1$.",
+  "image": null,
+  "choices": null,
+  "answer": "Greedy coloring uses at most $k+1$ colors.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Greedy coloring",
+    "body": "List the vertices $x_1,\\dots,x_m$ and color them in order, giving each the smallest of the colors $1,\\dots,k+1$ not used on an already-colored neighbour. Each vertex has only $k$ neighbours, so at most $k$ of the $k+1$ colors are blocked, and a free color always exists. The result is a good coloring with at most $k+1$ colors. ∎"
+   }
+  ],
+  "topics": [
+   "graph-theory"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "hmmt-feb-2009-team1-03b",
+  "bank": "hmmt",
+  "source": {
+   "contest": "HMMT February",
+   "paper": "2009 Team Round A",
+   "year": 2009,
+   "number": 3,
+   "url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2009/feb/team1/problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 10,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "A *graph* consists of a set of vertices and a set of edges connecting pairs of vertices. If vertices $u$ and $v$ are connected by an edge, we say they are *adjacent*. The *degree* of a vertex is the number of vertices adjacent to it. A *coloring* of a graph is an assignment of a color to each vertex of the graph. A coloring is *good* if no two adjacent vertices are the same color. The *chromatic number* of a graph is the minimum number of colors needed in any good coloring of that graph. A graph is *finite* if it has a finite number of vertices.\n\nIn terms of $n$, what is the minimum number of edges a finite graph with chromatic number $n$ could have? Prove your answer.",
+  "image": null,
+  "choices": null,
+  "answer": "$\\dfrac{n(n-1)}{2}$ (attained by the complete graph $K_n$)",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Induction on $n$",
+    "body": "**Answer: $\\binom n2=\\frac{n(n-1)}2$.** The complete graph $K_n$ has chromatic number $n$ and $\\binom n2$ edges, so the minimum is at most $\\binom n2$.\n\nWe prove by induction on $n$: every finite graph with chromatic number **at least** $n$ has at least $\\binom n2$ edges. For $n=1$ this is trivial. Suppose it holds for $n$ and let $G$ have chromatic number at least $n+1$. If every vertex had degree at most $n-1$, then by part (a) (greedy coloring, which works for degree at most $k$) $G$ could be colored with $n$ colors, a contradiction. So some vertex $v$ has degree at least $n$. Remove $v$. The graph $G-v$ has chromatic number at least $n$: otherwise, color $G-v$ with at most $n-1$ colors and give $v$ a new color to get a coloring of $G$ with at most $n$ colors. By the induction hypothesis, $G-v$ has at least $\\binom n2$ edges, so $G$ has at least $\\binom n2+n=\\binom{n+1}2$ edges. ∎"
+   }
+  ],
+  "topics": [
+   "graph-theory"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "hmmt-feb-2009-team1-04a",
+  "bank": "hmmt",
+  "source": {
+   "contest": "HMMT February",
+   "paper": "2009 Team Round A",
+   "year": 2009,
+   "number": 4,
+   "url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2009/feb/team1/problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 6,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "A *graph* consists of a set of vertices and a set of edges connecting pairs of vertices. If vertices $u$ and $v$ are connected by an edge, we say they are *adjacent*. The *degree* of a vertex is the number of vertices adjacent to it. A *coloring* of a graph is an assignment of a color to each vertex of the graph. A coloring is *good* if no two adjacent vertices are the same color. The *chromatic number* of a graph is the minimum number of colors needed in any good coloring of that graph. A graph is *finite* if it has a finite number of vertices.\n\nA *$k$-clique* of a graph is a set of $k$ vertices such that all pairs of vertices in the clique are adjacent.\n\nFind a graph with chromatic number $3$ that does not contain any $3$-cliques.",
+  "image": null,
+  "choices": null,
+  "answer": "The $5$-cycle $C_5$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "The 5-cycle",
+    "body": "Take $5$ vertices $x_0,\\dots,x_4$ in a circle, with $x_i$ adjacent exactly to $x_{i\\pm1}$ (indices mod $5$). It has no triangle since no three vertices are pairwise adjacent. Two colors are impossible: the colors must alternate around the cycle, but going around an odd cycle returns to the start with the wrong color. Three colors suffice: color $x_0,\\dots,x_4$ with $1,2,1,2,3$. So the chromatic number is $3$. ∎"
+   }
+  ],
+  "topics": [
+   "graph-theory"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "hmmt-feb-2009-team1-04b",
+  "bank": "hmmt",
+  "source": {
+   "contest": "HMMT February",
+   "paper": "2009 Team Round A",
+   "year": 2009,
+   "number": 4,
+   "url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2009/feb/team1/problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 10,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "A *graph* consists of a set of vertices and a set of edges connecting pairs of vertices. If vertices $u$ and $v$ are connected by an edge, we say they are *adjacent*. The *degree* of a vertex is the number of vertices adjacent to it. A *coloring* of a graph is an assignment of a color to each vertex of the graph. A coloring is *good* if no two adjacent vertices are the same color. The *chromatic number* of a graph is the minimum number of colors needed in any good coloring of that graph. A graph is *finite* if it has a finite number of vertices.\n\nA *$k$-clique* of a graph is a set of $k$ vertices such that all pairs of vertices in the clique are adjacent.\n\nProve that, for all $n>3$, there exists a graph with chromatic number $n$ that does not contain any $n$-cliques.",
+  "image": null,
+  "choices": null,
+  "answer": "Induction: add a vertex adjacent to everything, starting from $C_5$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Join with a new vertex",
+    "body": "Induction on $n\\ge3$: for each $n$ there is a graph with chromatic number $n$ and no $n$-clique. For $n=3$ use the $5$-cycle (part (a)).\n\nSuppose $G$ has chromatic number $n$ and no $n$-clique. Let $G'$ be $G$ plus a new vertex $v$ adjacent to every vertex of $G$. In any good coloring of $G'$, the restriction to $G$ is a good coloring of $G$, so it uses at least $n$ colors, and $v$ is adjacent to all of $G$ so its color differs from all of them: at least $n+1$ colors. Conversely $G$ can be colored with $n$ colors and $v$ given a new color: $n+1$ colors suffice. So $\\chi(G')=n+1$. If $G'$ contained an $(n+1)$-clique $K$, then $K\\setminus\\{v\\}$ (or $K$ itself if $v\\notin K$, in which case remove any vertex) would give an $n$-clique contained in $G$, contradiction. Hence $G'$ has chromatic number $n+1$ and no $(n+1)$-clique. ∎"
+   }
+  ],
+  "topics": [
+   "graph-theory"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "hmmt-feb-2009-team1-05a",
+  "bank": "hmmt",
+  "source": {
+   "contest": "HMMT February",
+   "paper": "2009 Team Round A",
+   "year": 2009,
+   "number": 5,
+   "url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2009/feb/team1/problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 15,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "A *graph* consists of a set of vertices and a set of edges connecting pairs of vertices. If vertices $u$ and $v$ are connected by an edge, we say they are *adjacent*. The *degree* of a vertex is the number of vertices adjacent to it. A *coloring* of a graph is an assignment of a color to each vertex of the graph. A coloring is *good* if no two adjacent vertices are the same color. The *chromatic number* of a graph is the minimum number of colors needed in any good coloring of that graph. A graph is *finite* if it has a finite number of vertices.\n\nThe *size* of a finite graph is the number of vertices in the graph.\n\nShow that, for any $n>2$, and any positive integer $N$, there are finite graphs with size at least $N$ and with chromatic number $n$ such that removing any vertex (and all its incident edges) from the graph decreases its chromatic number.",
+  "image": null,
+  "choices": null,
+  "answer": "Join an odd cycle $C_k$ ($k$ large) with $K_{n-3}$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Odd cycle joined with a clique",
+    "body": "Let $k\\ge N$ be an odd number and $C_k$ the cycle on $k$ vertices; it has chromatic number $3$. Let $H=K_{n-3}$ (empty if $n=3$), and let $J$ be $C_k$ and $H$ together with all edges between a vertex of $C_k$ and a vertex of $H$. Then $J$ has $k+n-3\\ge N$ vertices.\n\n*$\\chi(J)=n$:* the vertices of $H$ are adjacent to everything else, so their $n-3$ colors are all distinct from each other and from the colors used on $C_k$, which needs at least $3$ colors. So at least $n$ colors are needed, and $n-3$ colors for $H$ plus $3$ for $C_k$ suffice.\n\n*Removing any vertex lowers $\\chi$:* if the vertex is in $C_k$, the cycle becomes a path, which can be $2$-colored, so $J$ minus the vertex can be colored with $(n-3)+2=n-1$ colors. If the vertex is in $H$, then $H$ becomes $K_{n-4}$ and we need $(n-4)+3=n-1$ colors. (And $\\chi\\ge n-1$ always by the removal bound, but we only need that it is less than $n$.) So removing any vertex decreases the chromatic number. ∎"
+   }
+  ],
+  "topics": [
+   "graph-theory"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "hmmt-feb-2009-team1-05b",
+  "bank": "hmmt",
+  "source": {
+   "contest": "HMMT February",
+   "paper": "2009 Team Round A",
+   "year": 2009,
+   "number": 5,
+   "url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2009/feb/team1/problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 15,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "A *graph* consists of a set of vertices and a set of edges connecting pairs of vertices. If vertices $u$ and $v$ are connected by an edge, we say they are *adjacent*. The *degree* of a vertex is the number of vertices adjacent to it. A *coloring* of a graph is an assignment of a color to each vertex of the graph. A coloring is *good* if no two adjacent vertices are the same color. The *chromatic number* of a graph is the minimum number of colors needed in any good coloring of that graph. A graph is *finite* if it has a finite number of vertices.\n\nThe *size* of a finite graph is the number of vertices in the graph.\n\nShow that, for any positive integers $n$ and $r$, there exists a positive integer $N$ such that for any finite graph having size at least $N$ and chromatic number equal to $n$, it is possible to remove $r$ vertices (and all their incident edges) in such a way that the remaining vertices form a graph with chromatic number at least $n-1$.",
+  "image": null,
+  "choices": null,
+  "answer": "Take $N=nr$; remove $r$ vertices of one color class (pigeonhole).",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Pigeonhole on a good $n$-coloring",
+    "body": "Take $N=nr$. Let $G$ have at least $nr$ vertices and chromatic number $n$, and fix a good $n$-coloring. By pigeonhole some color class contains at least $r$ vertices; choose $r$ of them. No two of these are adjacent. Remove these $r$ vertices and let $G'$ be the remaining graph. Suppose $G'$ could be colored with at most $n-2$ colors. Then give all $r$ removed vertices one new color: since they are pairwise non-adjacent, this gives a good coloring of $G$ with at most $n-1$ colors, contradicting $\\chi(G)=n$. So $\\chi(G')\\ge n-1$. ∎"
+   }
+  ],
+  "topics": [
+   "graph-theory"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "hmmt-feb-2009-team1-06a",
+  "bank": "hmmt",
+  "source": {
+   "contest": "HMMT February",
+   "paper": "2009 Team Round A",
+   "year": 2009,
+   "number": 6,
+   "url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2009/feb/team1/problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 10,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "A *graph* consists of a set of vertices and a set of edges connecting pairs of vertices. If vertices $u$ and $v$ are connected by an edge, we say they are *adjacent*. The *degree* of a vertex is the number of vertices adjacent to it. A *coloring* of a graph is an assignment of a color to each vertex of the graph. A coloring is *good* if no two adjacent vertices are the same color. The *chromatic number* of a graph is the minimum number of colors needed in any good coloring of that graph. A graph is *finite* if it has a finite number of vertices.\n\nFor any set of graphs $G_1,G_2,\\dots,G_n$ all having the same set of vertices $V$, define their *overlap*, denoted $G_1\\cup G_2\\cup\\cdots\\cup G_n$, to be the graph having vertex set $V$ for which two vertices are adjacent in the overlap if and only if they are adjacent in at least one of the graphs $G_i$. In other words, the edge set of the overlap of the graphs $G_i$ is the union of their edge sets.\n\nLet $G$ and $H$ be graphs having the same vertex set and let $a$ be the chromatic number of $G$ and $b$ the chromatic number of $H$. Find, in terms of $a$ and $b$, the largest possible chromatic number of $G\\cup H$. Prove your answer.",
+  "image": null,
+  "choices": null,
+  "answer": "$ab$",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Product coloring and a matching construction",
+    "body": "**Upper bound.** Take good colorings of $G$ with colors $1,\\dots,a$ and of $H$ with colors $1,\\dots,b$, and give each vertex the pair (its $G$-color, its $H$-color), one of $ab$ colors. If $x,y$ are adjacent in $G\\cup H$, they are adjacent in $G$ or in $H$, so their $G$-colors or their $H$-colors differ, and so the pairs differ. Hence $\\chi(G\\cup H)\\le ab$.\n\n**Construction.** Let the vertices be the pairs $(i,j)$ with $1\\le i\\le a$, $1\\le j\\le b$. Let $G$ join $(i,j)$ and $(i',j)$ for $i\\ne i'$ (so $G$ is $b$ disjoint copies of $K_a$, with $\\chi(G)=a$), and let $H$ join $(i,j)$ and $(i',j')$ whenever $j\\ne j'$ (a complete $b$-partite graph, with $\\chi(H)=b$). Every two distinct vertices are adjacent in $G$ (same $j$) or in $H$ (different $j$), so $G\\cup H=K_{ab}$ has chromatic number $ab$.\n\n**Answer: $ab$** ∎"
+   }
+  ],
+  "topics": [
+   "graph-theory"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "hmmt-feb-2009-team1-06b",
+  "bank": "hmmt",
+  "source": {
+   "contest": "HMMT February",
+   "paper": "2009 Team Round A",
+   "year": 2009,
+   "number": 6,
+   "url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2009/feb/team1/problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 10,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "A *graph* consists of a set of vertices and a set of edges connecting pairs of vertices. If vertices $u$ and $v$ are connected by an edge, we say they are *adjacent*. The *degree* of a vertex is the number of vertices adjacent to it. A *coloring* of a graph is an assignment of a color to each vertex of the graph. A coloring is *good* if no two adjacent vertices are the same color. The *chromatic number* of a graph is the minimum number of colors needed in any good coloring of that graph. A graph is *finite* if it has a finite number of vertices.\n\nFor any set of graphs $G_1,\\dots,G_n$ with the same set of vertices $V$, their *overlap* $G_1\\cup\\cdots\\cup G_n$ is the graph on $V$ in which two vertices are adjacent iff they are adjacent in at least one of the graphs $G_i$.\n\nSuppose $G$ is a graph with chromatic number $n$. Suppose there exist $k$ graphs $G_1,G_2,\\dots,G_k$ having the same vertex set as $G$ such that $G_1\\cup G_2\\cup\\cdots\\cup G_k=G$ and each $G_i$ has chromatic number at most $2$. Show that $k\\ge\\lceil\\log_2(n)\\rceil$.",
+  "image": null,
+  "choices": null,
+  "answer": "Iterating the product bound: $n\\le2^k$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Iterate the product coloring",
+    "body": "By the product-coloring argument, $\\chi(A\\cup B)\\le\\chi(A)\\chi(B)$ for graphs on the same vertex set (give each vertex the pair of its colors in $A$ and in $B$). By induction, $\\chi(G_1\\cup\\cdots\\cup G_k)\\le\\prod\\chi(G_i)\\le2^k$. Since the union is $G$ with $\\chi(G)=n$, we get $n\\le2^k$, so $k\\ge\\log_2n$, and since $k$ is an integer, $k\\ge\\lceil\\log_2n\\rceil$. ∎\n\n*(Remark: this is sharp: color $G$ with colors $1,\\dots,n$ and let $G_i$ join two vertices of $G$ whenever the $i$-th binary digits of their colors differ; each $G_i$ is $2$-colorable by that digit, $\\lceil\\log_2n\\rceil$ graphs suffice, and every edge of $G$ appears since adjacent vertices have different colors, hence differ in some digit.)*"
+   }
+  ],
+  "topics": [
+   "graph-theory"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "hmmt-feb-2009-team1-07",
+  "bank": "hmmt",
+  "source": {
+   "contest": "HMMT February",
+   "paper": "2009 Team Round A",
+   "year": 2009,
+   "number": 7,
+   "url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2009/feb/team1/problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 20,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "A *graph* consists of a set of vertices and a set of edges connecting pairs of vertices. If vertices $u$ and $v$ are connected by an edge, we say they are *adjacent*. The *degree* of a vertex is the number of vertices adjacent to it. A *coloring* of a graph is an assignment of a color to each vertex of the graph. A coloring is *good* if no two adjacent vertices are the same color. The *chromatic number* of a graph is the minimum number of colors needed in any good coloring of that graph. A graph is *finite* if it has a finite number of vertices.\n\nLet $n$ be a positive integer. Let $V_n$ be the set of all sequences of $0$'s and $1$'s of length $n$. Define $G_n$ to be the graph having vertex set $V_n$, such that two sequences are adjacent in $G_n$ if and only if they differ in either $1$ or $2$ places. For instance, if $n=3$, the sequences $(1,0,0)$, $(1,1,0)$, and $(1,1,1)$ are mutually adjacent, but $(1,0,0)$ is not adjacent to $(0,1,1)$.\n\nShow that, if $n+1$ is not a power of $2$, then the chromatic number of $G_n$ is at least $n+2$.",
+  "image": null,
+  "choices": null,
+  "answer": "Counting a color class in two ways gives $(n+1)\\mid2^n$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Double counting a color class",
+    "body": "For a string $s$ let $T_s$ be the set of the $n+1$ strings that differ from $s$ in at most one place. Any two strings in $T_s$ differ in at most $2$ places, so $T_s$ is a clique of size $n+1$; hence $\\chi(G_n)\\ge n+1$ and in any good coloring with exactly $n+1$ colors, every color appears exactly once in each $T_s$.\n\nSuppose there were a good $(n+1)$-coloring and fix a color $c$ used on $m$ vertices. Count pairs $(v,s)$ with $v$ colored $c$ and $v\\in T_s$. Each such $v$ lies in $T_s$ for exactly $n+1$ strings $s$ (namely $v$ and its $n$ neighbours at distance $1$), giving $m(n+1)$ pairs. On the other hand each of the $2^n$ sets $T_s$ contains exactly one vertex colored $c$, giving $2^n$ pairs. So $m(n+1)=2^n$, hence $n+1\\mid2^n$ and $n+1$ is a power of $2$, contrary to the assumption. So no $(n+1)$-coloring exists, and since $\\chi(G_n)\\ge n+1$, we get $\\chi(G_n)\\ge n+2$. ∎"
+   }
+  ],
+  "topics": [
+   "graph-theory",
+   "counting"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "hmmt-feb-2009-team1-08",
+  "bank": "hmmt",
+  "source": {
+   "contest": "HMMT February",
+   "paper": "2009 Team Round A",
+   "year": 2009,
+   "number": 8,
+   "url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2009/feb/team1/problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 30,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "A *graph* consists of a set of vertices and a set of edges connecting pairs of vertices. If vertices $u$ and $v$ are connected by an edge, we say they are *adjacent*. The *degree* of a vertex is the number of vertices adjacent to it. A *coloring* of a graph is an assignment of a color to each vertex of the graph. A coloring is *good* if no two adjacent vertices are the same color. The *chromatic number* of a graph is the minimum number of colors needed in any good coloring of that graph. A graph is *finite* if it has a finite number of vertices.\n\nTwo colorings are *distinct* if there is no way to relabel the colors to transform one into the other. Equivalently, they are distinct if and only if there is some pair of vertices which are the same color in one coloring but different colors in the other. For what pairs $(n,k)$ of positive integers does there exist a finite graph with chromatic number $n$ which has exactly $k$ distinct good colorings using $n$ colors?",
+  "image": null,
+  "choices": null,
+  "answer": "$(1,1)$; $(2,2^j)$ for integers $j\\ge0$; and $(n,k)$ for every $n>2$ and every $k\\ge1$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Case analysis",
+    "body": "**$n=1$.** A graph with chromatic number $1$ has no edges and has exactly one coloring: $(1,1)$ only.\n\n**$n=2$.** The graph has an edge and is bipartite. Each connected component (with at least one vertex) has exactly two good colorings with two colors, because the color of one vertex forces the colors of all vertices in the component. If there are $c$ components, there are $2^c$ colorings and $2^{c-1}$ up to relabeling. Every $c\\ge1$ occurs (take $c$ disjoint edges). So $k=2^{c-1}$: exactly the pairs $(2,2^j)$, $j\\ge0$.\n\n**$n>2$, any $k\\ge1$.** Start with the clique $K_n$ on $v_1,\\dots,v_n$ (only one coloring up to relabeling, each $v_i$ having its own color $c_i$); this is the whole graph if $k=1$. For $k>1$ add vertices $w_1,\\dots,w_{k-1}$ with edges $w_iw_{i+1}$ ($1\\le i\\le k-2$), and join:\n- $w_i$ with $i\\equiv0\\pmod3$ to all $v_j$ except $v_1,v_2$,\n- $w_i$ with $i\\equiv1\\pmod3$ to all $v_j$ except $v_2,v_3$,\n- $w_i$ with $i\\equiv2\\pmod3$ to all $v_j$ except $v_1,v_3$.\n\nThe chromatic number is still $n$ since $K_n$ forces $n$ colors and the $w_i$ can take colors of the clique. In a good $n$-coloring, $w_i$ must take one of the two colors of its two non-neighbours in the clique: $\\{c_1,c_2\\}$, $\\{c_2,c_3\\}$, $\\{c_1,c_3\\}$ for the three residue classes. Consecutive sets share exactly one color; let $s_i$ be the color shared by the sets of $w_i$ and $w_{i+1}$ (the pattern repeats with period $3$, so define also $s_0$ and $s_{k-1}$ by continuing it). Then the set of $w_i$ is exactly $\\{s_{i-1},s_i\\}$ with $s_{i-1}\\ne s_i$ (check: $w_1:\\{c_2,c_3\\}$, $s_1=c_3$, $w_2:\\{c_3,c_1\\}$, $s_2=c_1$, $w_3:\\{c_1,c_2\\}$, $s_3=c_2$, and so on). Call $w_i$ *low* if it gets color $s_{i-1}$ and *high* if it gets color $s_i$. Adjacent $w_i,w_{i+1}$ may not get the same color, and the only color available to both is $s_i$, so the only forbidden pattern is \"$w_i$ high and $w_{i+1}$ low\". Therefore a good coloring is a sequence $\\text{low},\\dots,\\text{low},\\text{high},\\dots,\\text{high}$, determined by the number $j\\in\\{0,\\dots,k-1\\}$ of lows. That gives exactly $k$ good colorings; they are pairwise distinct as partitions because they differ in which clique color a given $w_i$ takes. Hence exactly $k$ distinct good colorings with $n$ colors. ∎"
+   }
+  ],
+  "topics": [
+   "graph-theory",
+   "counting"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ }
+]

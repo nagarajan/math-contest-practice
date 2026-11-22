@@ -1,7 +1,7 @@
 import { useApp } from '../state'
 import { navigate } from '../router'
 import { formatDuration } from '../components/Timer'
-import { examTitle } from './Exam'
+import { examTitle } from '../lib/banks'
 import { GradeChip } from './Profiles'
 
 export function HomePage() {

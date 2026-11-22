@@ -1,0 +1,584 @@
+[
+ {
+  "id": "hmmt-feb-2011-team2-01",
+  "bank": "hmmt",
+  "source": {
+   "contest": "HMMT February",
+   "paper": "2011 Team Round B",
+   "year": 2011,
+   "number": 1,
+   "url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2011/feb/team2/problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 55,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Tom, Dick, and Harry play a game in which they each pick an integer between $1$ and $2011$. Tom picks a number first and informs Dick and Harry of his choice. Then Dick picks a different number and informs Harry of his choice. Finally, Harry picks a number different from both Tom's and Dick's. After all the picks are complete, an integer is randomly selected between $1$ and $2011$. The player whose number is closest wins $2$ dollars, unless there is a tie, in which case each of the tied players wins $1$ dollar. If Tom knows that Dick and Harry will each play optimally and select randomly among equally optimal choices, there are two numbers Tom can pick to maximize his expected profit; what are they?",
+  "image": null,
+  "choices": null,
+  "answer": "$503$ and $1509$",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Backward induction",
+    "body": "Picking $x$ and picking $2012-x$ give Tom the same expected profit (reflection), so the two optimal numbers have the form $x$ and $2012-x$. Assume $x\\le1005$ (picking $1006$ is poor: Dick then takes $1007$ or $1005$, Harry takes the other, and Tom wins about $\\tfrac1{2011}$ of the time, while picking $2$ already gives at least $\\tfrac2{2011}$).\n\nWork backwards. Harry, seeing $x<y$ (or $y<x$), picks the spot that captures the most numbers: just next to $x$ on the outside, just next to $y$ on the outside, or in the gap between them (where he gets half the gap, about $\\tfrac{y-x}2$ numbers).\n\n*If $x>503$.* The smallest $y$ for which Harry never chooses a number below $x$ is $y=2013-x$; Dick takes this, and Harry's response then comes from the gap or the right side. The more $x$ exceeds $503$, the worse Tom does (his share of the numbers to the left of $x$ shrinks), the best case in this range being $x=504$.\n\n*If $x<503$.* Harry never chooses a number below $x$. Dick's best choice is $y=1341+\\lfloor\\tfrac{x+1}3\\rfloor$, which leaves Harry to choose between $x$ and $y$; Tom's profit increases with $x$, the best case in this range being $x=502$.\n\nComparing the finalists, $x=503$ (with Dick answering $1509$) does better than both $502$ and $504$, so $x=503$ is optimal, and by the symmetry the other optimum is $2012-503=1509$. Intuitively Tom wants to be about a quarter of the way along the line, and $\\lceil2011/4\\rceil=503$.\n\n(A full computer search of the three-stage game for $N=43,47,51$ in place of $2011$ gives optimal first picks $\\lceil N/4\\rceil$ and $N+1-\\lceil N/4\\rceil$, i.e. $11,33$; $12,36$; $13,39$, matching the pattern.)\n\n**Answer: $503$ and $1509$**"
+   }
+  ],
+  "topics": [
+   "games",
+   "probability"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "hmmt-feb-2011-team2-02",
+  "bank": "hmmt",
+  "source": {
+   "contest": "HMMT February",
+   "paper": "2011 Team Round B",
+   "year": 2011,
+   "number": 2,
+   "url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2011/feb/team2/problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 20,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "The norm of a complex number $z=a+bi$, denoted $|z|$, is defined to be $\\sqrt{a^2+b^2}$; it is multiplicative and obeys the triangle inequality. Let $a$, $b$, and $c$ be complex numbers such that $|a|=|b|=|c|=|a+b+c|=1$. If $|a-b|=|a-c|$ and $b\\ne c$, evaluate $|a+b||a+c|$.",
+  "image": null,
+  "choices": null,
+  "answer": "2",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Normalise and use equal real parts",
+    "body": "Put $u=b/a$, $v=c/a$. Then $|u|=|v|=|1+u+v|=1$, $|1-u|=|1-v|$, $u\\ne v$. Squaring the last equality gives $\\operatorname{Re}u=\\operatorname{Re}v$, so (both on the unit circle, $u\\ne v$) $v=\\bar u$. Then $1=|1+u+\\bar u|=|1+2\\operatorname{Re}u|$, so $\\operatorname{Re}u\\in\\{0,-1\\}$; $\\operatorname{Re}u=-1$ would give $u=-1=v$, impossible. So $u=\\pm i$, $v=\\mp i$ and $|a+b||a+c|=|a|^2|1+u||1+v|=|1+i||1-i|=2$.\n\n**Answer: 2**"
+   },
+   {
+    "title": "Orthocenter on the circle",
+    "body": "The points $a,b,c$ lie on the unit circle with circumcenter $0$, so $a+b+c$ is the orthocenter of triangle $abc$, which also lies on the unit circle. This is only possible when the triangle is right-angled (otherwise the orthocenter is a fourth point forming a cyclic quadrilateral with two obtuse opposite angles, impossible). Since $|a-b|=|a-c|$, the right angle is at $a$, so $bc$ is a diameter and $c=-b$. Then $|a-c|=|a+b|$, so the hypothesis $|a-b|=|a-c|$ says $|a-b|=|a+b|$. The parallelogram law gives $|a+b|^2+|a-b|^2=2|a|^2+2|b|^2=4$, hence $|a+b|^2=|a-b|^2=2$. Finally $|a+c|=|a-b|$, so $|a+b||a+c|=\\sqrt2\\cdot\\sqrt2=2$.\n\n**Answer: 2**"
+   }
+  ],
+  "topics": [
+   "complex-numbers"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "hmmt-feb-2011-team2-03a",
+  "bank": "hmmt",
+  "source": {
+   "contest": "HMMT February",
+   "paper": "2011 Team Round B",
+   "year": 2011,
+   "number": 3,
+   "url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2011/feb/team2/problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 15,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Let $x$ and $y$ be complex numbers such that $|x|=|y|=1$. Determine the maximum value of $|1+x|+|1+y|-|1+xy|$.",
+  "image": null,
+  "choices": null,
+  "answer": "2*sqrt(2)",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Reverse triangle inequality",
+    "body": "By the reverse triangle inequality $|1+y|-|1+xy|\\le|(1+y)-(1+xy)|=|y||1-x|=|1-x|$. Hence the expression is at most $|1+x|+|1-x|\\le\\sqrt{2\\bigl(|1+x|^2+|1-x|^2\\bigr)}=\\sqrt{2(2+2|x|^2)}=2\\sqrt2$ by Cauchy-Schwarz.\n\nEquality: $x=y=i$ gives $|1+i|+|1+i|-|1+i^2|=\\sqrt2+\\sqrt2-0=2\\sqrt2$.\n\n**Answer: $2\\sqrt2$**"
+   }
+  ],
+  "topics": [
+   "complex-numbers",
+   "inequalities"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null,
+  "answerDisplay": "$2\\sqrt2$"
+ },
+ {
+  "id": "hmmt-feb-2011-team2-03b",
+  "bank": "hmmt",
+  "source": {
+   "contest": "HMMT February",
+   "paper": "2011 Team Round B",
+   "year": 2011,
+   "number": 3,
+   "url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2011/feb/team2/problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 15,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Let $x$ and $y$ be complex numbers such that $|x|=|y|=1$. Determine the maximum value of $$|1+x|+|1+xy|+|1+xy^2|+\\ldots+|1+xy^{2011}|-1006\\,|1+y|.$$",
+  "image": null,
+  "choices": null,
+  "answer": "2012*sqrt(2)",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Pair up consecutive terms",
+    "body": "The sum has $2012$ terms $|1+xy^j|$, $j=0,\\dots,2011$; group them as $1006$ pairs $|1+xy^{2k}|+|1+xy^{2k+1}|$ ($0\\le k\\le1005$), each paired with one copy of $-|1+y|$. Put $X=xy^{2k}$. As in part (a),\n$$|1+X|+|1+Xy|-|1+y|\\le|1+X|+|(1+Xy)-(1+y)|=|1+X|+|X-1|\\le2\\sqrt2 .$$\nSo the whole expression is at most $1006\\cdot2\\sqrt2=2012\\sqrt2$. Equality for $x=i$, $y=-1$: every $|1+xy^j|=|1\\pm i|=\\sqrt2$, $|1+y|=0$, total $2012\\sqrt2$.\n\n**Answer: $2012\\sqrt2$**"
+   }
+  ],
+  "topics": [
+   "complex-numbers",
+   "inequalities"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null,
+  "answerDisplay": "$2012\\sqrt2$"
+ },
+ {
+  "id": "hmmt-feb-2011-team2-04",
+  "bank": "hmmt",
+  "source": {
+   "contest": "HMMT February",
+   "paper": "2011 Team Round B",
+   "year": 2011,
+   "number": 4,
+   "url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2011/feb/team2/problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 40,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Let $a$, $b$, and $c$ be complex numbers such that $|a|=|b|=|c|=1$. If $$\\frac{a^2}{bc}+\\frac{b^2}{ca}+\\frac{c^2}{ab}=1$$ as well, determine the product of all possible values of $|a+b+c|$.",
+  "image": null,
+  "choices": null,
+  "answer": "2",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Express s^3 through |s|",
+    "body": "Let $s=a+b+c$. Since $|a|=|b|=|c|=1$, $\\bar s=\\frac1a+\\frac1b+\\frac1c=\\frac{ab+bc+ca}{abc}$. The hypothesis says $a^3+b^3+c^3=abc$. Also $s(ab+bc+ca)=\\sum_{\\mathrm{sym}}a^2b+3abc$ and $s(ab+bc+ca)=s\\cdot abc\\,\\bar s=abc|s|^2$. Then\n$$s^3=a^3+b^3+c^3+3\\sum_{\\mathrm{sym}}a^2b+6abc=abc+3\\bigl(abc|s|^2-3abc\\bigr)+6abc=abc\\,(3|s|^2-2).$$\nTaking absolute values, $t=|s|\\ge0$ satisfies $t^3=|3t^2-2|$.\n- If $3t^2\\ge2$: $t^3-3t^2+2=(t-1)(t^2-2t-2)=0$, so $t=1$ or $t=1+\\sqrt3$.\n- If $3t^2<2$: $t^3+3t^2-2=(t+1)(t^2+2t-2)=0$, so $t=\\sqrt3-1$.\n\nEach of $1$, $1+\\sqrt3$, $\\sqrt3-1$ is attained (a numerical solution of the constraint with $a=1$ finds all three). The product is $1\\cdot(1+\\sqrt3)(\\sqrt3-1)=2$.\n\n**Answer: 2**"
+   }
+  ],
+  "topics": [
+   "complex-numbers",
+   "algebra"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "hmmt-feb-2011-team2-05a",
+  "bank": "hmmt",
+  "source": {
+   "contest": "HMMT February",
+   "paper": "2011 Team Round B",
+   "year": 2011,
+   "number": 5,
+   "url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2011/feb/team2/problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 20,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Alice and Barbara play a game on a blackboard. At the start, zero is written on the board. Alice goes first, and the players alternate turns. On her turn, each player replaces $x$, the number written on the board, with any real number $y$, subject to the constraint that $0<y-x<1$. The first player to write a number greater than or equal to $2010$ wins. Determine, with proof, who has the winning strategy.",
+  "image": null,
+  "choices": null,
+  "answer": "Barbara has the winning strategy.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [],
+  "topics": [
+   "games"
+  ],
+  "difficulty": 2,
+  "duplicateOf": "hmmt-feb-2011-team1-01a",
+  "reviewNote": null
+ },
+ {
+  "id": "hmmt-feb-2011-team2-05b",
+  "bank": "hmmt",
+  "source": {
+   "contest": "HMMT February",
+   "paper": "2011 Team Round B",
+   "year": 2011,
+   "number": 5,
+   "url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2011/feb/team2/problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 20,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Alice and Barbara play a game on a blackboard. At the start, zero is written on the board. Alice goes first, and the players alternate turns. On her turn, each player replaces $x$, the number written on the board, with any real number $y$, subject to the constraint that $0<y-x<1$. The first player to write a number greater than or equal to $2010$ on her $2011$th turn or later wins (if a player writes a number greater than or equal to $2010$ on her $2010$th turn or earlier, she loses immediately). Determine, with proof, who has the winning strategy.",
+  "image": null,
+  "choices": null,
+  "answer": "Alice has the winning strategy.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [],
+  "topics": [
+   "games"
+  ],
+  "difficulty": 2,
+  "duplicateOf": "hmmt-feb-2011-team1-01b",
+  "reviewNote": null
+ },
+ {
+  "id": "hmmt-feb-2011-team2-06",
+  "bank": "hmmt",
+  "source": {
+   "contest": "HMMT February",
+   "paper": "2011 Team Round B",
+   "year": 2011,
+   "number": 6,
+   "url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2011/feb/team2/problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 10,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Euler's totient function $\\phi(k)$ is the number of positive integers less than or equal to $k$ that are relatively prime to $k$. Let $n$ be a positive integer such that $n>2$. Prove that $\\phi(n)$ is even.",
+  "image": null,
+  "choices": null,
+  "answer": "$\\phi(n)$ is even for $n>2$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Pair x with n - x",
+    "body": "Let $A_n=\\{x\\le n:\\gcd(x,n)=1\\}$. Since $\\gcd(n,x)=\\gcd(n,n-x)$, $x\\in A_n$ implies $n-x\\in A_n$. And $x\\ne n-x$, because $x=\\frac n2$ would have $\\gcd(n,\\frac n2)=\\frac n2>1$ (as $n>2$) and so is not in $A_n$. Thus $A_n$ splits into pairs $\\{x,n-x\\}$, and $\\phi(n)=|A_n|$ is even. $\\blacksquare$"
+   }
+  ],
+  "topics": [
+   "number-theory"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "hmmt-feb-2011-team2-07",
+  "bank": "hmmt",
+  "source": {
+   "contest": "HMMT February",
+   "paper": "2011 Team Round B",
+   "year": 2011,
+   "number": 7,
+   "url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2011/feb/team2/problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 10,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Euler's totient function $\\phi(k)$ is the number of positive integers less than or equal to $k$ that are relatively prime to $k$. Let $n$ be an even positive integer. Prove that $\\phi(n)\\le\\dfrac n2$.",
+  "image": null,
+  "choices": null,
+  "answer": "$\\phi(n)\\le n/2$ for even $n$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Only odd numbers can be coprime",
+    "body": "Let $A_n$ be the set of $x\\le n$ coprime to $n$. As $n$ is even, no even number lies in $A_n$, so $A_n$ is contained in the set of odd integers in $[1,n]$, which has $\\frac n2$ elements. Hence $\\phi(n)=|A_n|\\le\\frac n2$. $\\blacksquare$"
+   }
+  ],
+  "topics": [
+   "number-theory"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "hmmt-feb-2011-team2-08",
+  "bank": "hmmt",
+  "source": {
+   "contest": "HMMT February",
+   "paper": "2011 Team Round B",
+   "year": 2011,
+   "number": 8,
+   "url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2011/feb/team2/problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 20,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Let $n$ be a positive integer, and let $a_1,a_2,\\ldots,a_n$ be a set of positive integers such that $a_1=2$ and $a_m=\\phi(a_{m+1})$ for all $1\\le m\\le n-1$, where, for all positive integers $k$, $\\phi(k)$ denotes the number of positive integers less than or equal to $k$ that are relatively prime to $k$. Prove that $a_n\\ge2^{n-1}$.",
+  "image": null,
+  "choices": null,
+  "answer": "$a_n\\ge2^{\\,n-1}$ (proof)",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [],
+  "topics": [
+   "number-theory"
+  ],
+  "difficulty": 2,
+  "duplicateOf": "hmmt-feb-2011-team1-03",
+  "reviewNote": null
+ },
+ {
+  "id": "hmmt-feb-2011-team2-09",
+  "bank": "hmmt",
+  "source": {
+   "contest": "HMMT February",
+   "paper": "2011 Team Round B",
+   "year": 2011,
+   "number": 9,
+   "url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2011/feb/team2/problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 25,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Let $ABC$ be a non-isosceles, non-right triangle, let $\\omega$ be its circumcircle, and let $O$ be its circumcenter. Let $M$ be the midpoint of segment $BC$. Let the tangents to $\\omega$ at $B$ and $C$ intersect at $X$. Prove that $\\angle OAM=\\angle OXA$.",
+  "image": null,
+  "choices": null,
+  "answer": "$\\angle OAM=\\angle OXA$ (proof)",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "SAS similarity",
+    "body": "$O,M,X$ are collinear ($OX$ is the perpendicular bisector of $BC$), and $OM\\perp BC$. The right triangles $OMC$ (right angle at $M$) and $OCX$ (right angle at $C$, since $XC$ is tangent) share the angle at $O$, so they are similar and $\\dfrac{OM}{OC}=\\dfrac{OC}{OX}$. As $OC=OA$, this is $\\dfrac{OM}{OA}=\\dfrac{OA}{OX}$. The triangles $OAM$ and $OXA$ share the angle at $O$ ($\\angle AOM=\\angle AOX$ since $M,X$ are on the same ray from $O$), so by SAS they are similar and $\\angle OAM=\\angle OXA$. $\\blacksquare$"
+   }
+  ],
+  "topics": [
+   "geometry"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "hmmt-feb-2011-team2-10",
+  "bank": "hmmt",
+  "source": {
+   "contest": "HMMT February",
+   "paper": "2011 Team Round B",
+   "year": 2011,
+   "number": 10,
+   "url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2011/feb/team2/problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 15,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Let $ABC$ be a non-isosceles, non-right triangle, let $\\omega$ be its circumcircle, and let $O$ be its circumcenter. Let $M$ be the midpoint of segment $BC$. Let the tangents to $\\omega$ at $B$ and $C$ intersect at $X$, and let the circumcircle of triangle $AOM$ intersect $\\omega$ again at $D$. Prove that points $A$, $D$, and $X$ are collinear.",
+  "image": null,
+  "choices": null,
+  "answer": "$A,D,X$ are collinear (proof)",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Angle chase",
+    "body": "As in the previous part, $\\triangle OAM\\sim\\triangle OXA$ (from $OM\\cdot OX=OA^2$ and the common angle at $O$), so $\\angle OAX=\\angle OMA$. Since $A,O,M,D$ are concyclic, $\\angle OMA=\\angle ODA$, and since $OA=OD$, $\\angle ODA=\\angle OAD$. Hence $\\angle OAX=\\angle OAD$, so the rays $AX$ and $AD$ coincide: $A$, $D$, $X$ are collinear. (Directed angles make this valid in all configurations.) $\\blacksquare$"
+   }
+  ],
+  "topics": [
+   "geometry"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "hmmt-feb-2011-team2-11",
+  "bank": "hmmt",
+  "source": {
+   "contest": "HMMT February",
+   "paper": "2011 Team Round B",
+   "year": 2011,
+   "number": 11,
+   "url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2011/feb/team2/problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 10,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Let $ABC$ be a non-isosceles, non-right triangle, let $\\omega$ be its circumcircle, and let $O$ be its circumcenter. Let $M$ be the midpoint of segment $BC$. Let the circumcircle of triangle $AOM$ intersect $\\omega$ again at $D$. If $H$ is the orthocenter of triangle $ABC$, prove that $\\angle DAH=\\angle MAO$.",
+  "image": null,
+  "choices": null,
+  "answer": "$\\angle DAH=\\angle MAO$ (proof)",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [],
+  "topics": [
+   "geometry"
+  ],
+  "difficulty": 3,
+  "duplicateOf": "hmmt-feb-2011-team1-11",
+  "reviewNote": null
+ },
+ {
+  "id": "hmmt-feb-2011-team2-12",
+  "bank": "hmmt",
+  "source": {
+   "contest": "HMMT February",
+   "paper": "2011 Team Round B",
+   "year": 2011,
+   "number": 12,
+   "url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2011/feb/team2/problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 10,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Let $ABC$ be a non-isosceles, non-right triangle, let $\\omega$ be its circumcircle, and let $O$ be its circumcenter. Let $M$ be the midpoint of segment $BC$. Let the circumcircle of triangle $AOM$ intersect $\\omega$ again at $D$. Prove that line $AD$ is the symmedian from $A$ in triangle $ABC$ (the reflection of the median $AM$ about the bisector of $\\angle A$) by showing that $\\angle DAB=\\angle MAC$.",
+  "image": null,
+  "choices": null,
+  "answer": "$\\angle DAB=\\angle MAC$ (so $AD$ is the symmedian)",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Use angle DAH = angle MAO",
+    "body": "Let $H$ be the orthocenter and $X$ the intersection of the tangents at $B$, $C$. As in the previous parts, $\\triangle OAM\\sim\\triangle OXA$ gives $\\angle OAX=\\angle OMA=\\angle ODA=\\angle OAD$ (cyclic $AOMD$, $OA=OD$), so $A,D,X$ are collinear, and since $AH\\parallel OX$ (both perpendicular to $BC$), $\\angle DAH=\\angle AXO=\\angle OAM$ (the similarity again).\n\nNext, $\\angle OAC=\\frac12(180^\\circ-\\angle AOC)=90^\\circ-\\angle ABC=\\angle HAB$ (in the right triangle on the altitude from $A$). Therefore\n$$\\angle DAB=\\angle DAH+\\angle HAB=\\angle MAO+\\angle OAC=\\angle MAC .$$\nSo $AD$ and $AM$ are symmetric about the bisector of $\\angle BAC$, i.e. $AD$ is the symmedian from $A$. (Directed angles cover all configurations.) $\\blacksquare$"
+   }
+  ],
+  "topics": [
+   "geometry"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "hmmt-feb-2011-team2-13",
+  "bank": "hmmt",
+  "source": {
+   "contest": "HMMT February",
+   "paper": "2011 Team Round B",
+   "year": 2011,
+   "number": 13,
+   "url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2011/feb/team2/problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 10,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Let $ABC$ be a non-isosceles, non-right triangle, let $\\omega$ be its circumcircle, and let $O$ be its circumcenter. Let $M$ be the midpoint of segment $BC$. Let the circumcircle of triangle $AOM$ intersect $\\omega$ again at $D$, and let $X$ be the intersection of the tangents to $\\omega$ at $B$ and $C$. Given that line $AD$ is the symmedian from $A$ in triangle $ABC$, prove that line $AD$ is also the symmedian from $D$ in triangle $DBC$.",
+  "image": null,
+  "choices": null,
+  "answer": "$AD$ is the symmedian from $D$ in triangle $DBC$",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "The symmedian from any point of omega passes through X",
+    "body": "For any point $P$ on $\\omega$ (with $PB\\ne PC$ and $\\angle BPC\\ne90^\\circ$), the argument of the previous parts, applied with $P$ in place of $A$ (it only uses $O$, the midpoint $M$ of $BC$ and the circle $POM$), shows that $P$, the second intersection of circle $POM$ with $\\omega$, and $X$ are collinear, and that this line is the symmedian from $P$ in triangle $PBC$. In particular the symmedian from $A$ in $ABC$ is line $AX$, and the symmedian from $D$ in $DBC$ is line $DX$. (The point $X$ depends only on $B$ and $C$.)\n\nNow $A$, $D$, $X$ are collinear, so $DX$ is the line $AD$. Hence $AD$ is the symmedian from $D$ in triangle $DBC$. $\\blacksquare$"
+   }
+  ],
+  "topics": [
+   "geometry"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "hmmt-feb-2011-team2-14",
+  "bank": "hmmt",
+  "source": {
+   "contest": "HMMT February",
+   "paper": "2011 Team Round B",
+   "year": 2011,
+   "number": 14,
+   "url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2011/feb/team2/problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 25,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Rachel and Brian are playing a game in a grid with $1$ row of $2011$ squares. Initially, there is one white checker in each of the first two squares from the left, and one black checker in the third square from the left. At each stage, Rachel can choose to either run or fight. If Rachel runs, she moves the black checker $1$ unit to the right, and Brian moves each of the white checkers one unit to the right. If Rachel chooses to fight, she pushes the checker immediately to the left of the black checker $1$ unit to the left, the black checker is moved $1$ unit to the right, and Brian places a new white checker in the cell immediately to the left of the black one. The game ends when the black checker reaches the last cell. How many different final configurations are possible?",
+  "image": null,
+  "choices": null,
+  "answer": "2009",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [],
+  "topics": [
+   "counting",
+   "games"
+  ],
+  "difficulty": 2,
+  "duplicateOf": "hmmt-feb-2011-team1-02",
+  "reviewNote": null
+ },
+ {
+  "id": "hmmt-feb-2011-team2-15a",
+  "bank": "hmmt",
+  "source": {
+   "contest": "HMMT February",
+   "paper": "2011 Team Round B",
+   "year": 2011,
+   "number": 15,
+   "url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2011/feb/team2/problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 15,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "On Facebook, there is a group of people that satisfies the following two properties: (i) any subset of $3$ people in the group contains a subset of $2$ people in the group who are friends with each other, and (ii) every member of the group has $2011$ friends or fewer. Determine, with proof, the maximum number of people the group may contain.",
+  "image": null,
+  "choices": null,
+  "answer": "$4024$",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Two cliques / pigeonhole",
+    "body": "**Construction.** Take two disjoint groups of $2012$ people in which everyone in a group is friends with everyone else in the group, and nobody is friends with someone in the other group. Each person has $2011$ friends, and among any three people two lie in the same group and are friends. So $4024$ people are possible.\n\n**Upper bound.** Suppose there are at least $4025$ people. A set of mutual friends has at most $2012$ members (each of them has at most $2011$ friends), so there are two people $P,Q$ who are not friends. Together they have at most $2011+2011=4022$ friends, so among the other $\\ge4023$ people there is someone $R$ who is a friend of neither. Then $\\{P,Q,R\\}$ contains no pair of friends, contradicting (i). So at most $4024$ people.\n\n**Answer: 4024**"
+   }
+  ],
+  "topics": [
+   "graph-theory",
+   "counting"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "hmmt-feb-2011-team2-15b",
+  "bank": "hmmt",
+  "source": {
+   "contest": "HMMT February",
+   "paper": "2011 Team Round B",
+   "year": 2011,
+   "number": 15,
+   "url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2011/feb/team2/problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 25,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "On Facebook, there is a group of people that satisfies the following two properties: (i) any subset of $2k-1$ people in the group contains a subset of $k$ people in the group who are all friends with each other, and (ii) every member of the group has $2011$ friends or fewer. If $k=776$, determine, with proof, the maximum number of people the group may contain.",
+  "image": null,
+  "choices": null,
+  "answer": "$4024$",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Same construction; extend the argument",
+    "body": "**Construction.** The two cliques of $2012$ people used for $k=2$ work again: among any $2k-1=1551$ people, at least $776$ lie in the same clique, and they are mutual friends. So $4024$ people are possible.\n\n**Upper bound.** Suppose the group has at least $4025$ people. As before there are three people $X,Y,Z$ no two of whom are friends. Remove them and repeatedly pick a pair of non-friends from the people still available: after picking $i$ pairs there are at least $4025-3-2i=4022-2i>2012$ people left for $i\\le773$, and since mutual friends form a set of at most $2012$ people, among them there are two who are not friends. Do this $774$ times to get pairs $(A_i,B_i)$, $1\\le i\\le774$.\n\nThe $3+2\\cdot774=1551=2k-1$ people $X,Y,Z,A_1,B_1,\\dots,A_{774},B_{774}$ contain no $776$ mutual friends: a set of mutual friends contains at most one of $X,Y,Z$ and at most one of each pair $\\{A_i,B_i\\}$, so at most $1+774=775<776$ people. This contradicts (i). Hence at most $4024$ people.\n\n**Answer: 4024**"
+   }
+  ],
+  "topics": [
+   "graph-theory",
+   "counting"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ }
+]

@@ -1,0 +1,366 @@
+[
+ {
+  "id": "smt-2024-discrete-01",
+  "bank": "smt",
+  "source": {
+   "contest": "Stanford Math Tournament",
+   "paper": "2024 Discrete",
+   "year": 2024,
+   "number": 1,
+   "url": "https://www.stanfordmathtournament.org/pdfs/smt2024/discrete-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Kevin evaluates the sum of all positive divisors of $10000$ that are multiples of $100$ and writes the result on a blackboard. Underneath, he evaluates the sum of all positive divisors of $100$ and writes down that result. Compute the ratio of the top number to the bottom number.",
+  "image": null,
+  "choices": null,
+  "answer": "100",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Factor out 100",
+    "body": "A divisor of $10000=100^2$ that is a multiple of $100$ is $100d$ with $100d\\mid100^2$, i.e. $d\\mid100$. So the top sum is $100$ times the sum of divisors of $100$, and the ratio is $100$.\n\n**Answer: 100**"
+   },
+   {
+    "title": "Use the multiplicative formula",
+    "body": "$10000=2^4 5^4$; divisors that are multiples of $100=2^25^2$ have the form $2^a5^b$ with $2\\le a,b\\le4$, summing to $(4+8+16)(25+125+625)=28\\cdot775$. Divisors of $100$: $(1+2+4)(1+5+25)=7\\cdot31$. Ratio $\\frac{28\\cdot775}{7\\cdot31}=4\\cdot25=100$.\n\n**Answer: 100**"
+   }
+  ],
+  "topics": [
+   "number-theory"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "smt-2024-discrete-02",
+  "bank": "smt",
+  "source": {
+   "contest": "Stanford Math Tournament",
+   "paper": "2024 Discrete",
+   "year": 2024,
+   "number": 2,
+   "url": "https://www.stanfordmathtournament.org/pdfs/smt2024/discrete-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Let $X$ be a $2024$ digit perfect square. Let $a(X)$ be the $1012$ digit number formed from reading the first $1012$ digits of $X$, in order, and let $b(X)$ be the $1012$ digit number formed from reading the last $1012$ digits of $X$, in order. Given that $X$ is the unique choice that maximizes $a(X)-b(X)$, find the sum of digits of $X$.",
+  "image": null,
+  "choices": null,
+  "answer": "9108",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Maximize the first half, minimize the second",
+    "body": "To maximize $a-b$ we want the first half to be as many $9$s as possible and the last half as many $0$s as possible. The square root of the largest candidates is $\\underbrace{99\\ldots9}_{1012}$: $X=(10^{1012}-1)^2=10^{2024}-2\\cdot10^{1012}+1=\\underbrace{9\\ldots9}_{1011}8\\underbrace{0\\ldots0}_{1011}1$. Then $a-b$ is as large as possible, and adjacent perfect squares give a smaller difference (the official solution checks this), so this $X$ is the unique optimum. Its digit sum is $9\\cdot1011+8+1=9108$.\n\n**Answer: 9108**"
+   }
+  ],
+  "topics": [
+   "number-theory"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "smt-2024-discrete-03",
+  "bank": "smt",
+  "source": {
+   "contest": "Stanford Math Tournament",
+   "paper": "2024 Discrete",
+   "year": 2024,
+   "number": 3,
+   "url": "https://www.stanfordmathtournament.org/pdfs/smt2024/discrete-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Let $F$ be a set of subsets of $\\{1,2,3\\}$. $F$ is called *distinguishing* if each of $1$, $2$, and $3$ are distinguishable from each other—that is, $1$, $2$, and $3$ are each in a distinct set of subsets from each other. For example $F=\\{\\{1,3\\},\\{2,3\\}\\}$ is distinguishing because $1$ is in $\\{1,3\\}$, $2$ is in $\\{2,3\\}$, and $3$ is in $\\{1,3\\}$ and $\\{2,3\\}$. $F=\\{\\{1,2\\},\\{2\\}\\}$ is also distinguishing: $1$ is in $\\{1,2\\}$, $2$ is in $\\{1,2\\}$ and $\\{2\\}$, and $3$ is in none of the subsets.\n\nOn the other hand, $F=\\{\\{1\\},\\{2,3\\}\\}$ is not distinguishing. Both $2$ and $3$ are only in $\\{2,3\\}$, so they cannot be distinguished from each other.\n\nHow many distinguishing sets of subsets of $\\{1,2,3\\}$ are there?",
+  "image": null,
+  "choices": null,
+  "answer": "216",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Complementary counting",
+    "body": "There are $2^8=256$ collections of the $8$ subsets. Count the non-distinguishing ones. If no two of $1,2,3$ can be told apart, only $\\emptyset$ and $\\{1,2,3\\}$ may be used: $2^2=4$ collections. If exactly one pair, say $2,3$, is indistinguishable (and $1$ is separated from them), the allowed subsets are $\\emptyset,\\{1,2,3\\},\\{1\\},\\{2,3\\}$ ($2^4=16$ collections), minus the $4$ already counted (those using only $\\emptyset,\\{1,2,3\\}$), which leaves $12$; with $3$ choices of the pair this gives $36$. Hence $256-4-36=216$ distinguishing collections.\n\n**Answer: 216**"
+   },
+   {
+    "title": "Brute-force check",
+    "body": "Enumerating all $256$ collections by computer and checking that the three membership patterns differ gives $216$.\n\n**Answer: 216**"
+   }
+  ],
+  "topics": [
+   "counting"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "smt-2024-discrete-04",
+  "bank": "smt",
+  "source": {
+   "contest": "Stanford Math Tournament",
+   "paper": "2024 Discrete",
+   "year": 2024,
+   "number": 4,
+   "url": "https://www.stanfordmathtournament.org/pdfs/smt2024/discrete-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Each vertex and edge of an equilateral triangle is randomly labelled with a distinct integer from $1$ to $10$, inclusive. Compute the probability that the number on each edge is the sum of those on its vertices.",
+  "image": null,
+  "choices": null,
+  "answer": "1/1680",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Count valid labelings",
+    "body": "Let the vertex labels be $x>y>z$. The edge sums satisfy $x+y>x+z>y+z$, and an edge sum can equal a vertex label only if it equals $x$ via $y+z=x$ (the other sums exceed $x$ or are larger than $y$ resp.). All numbers must be distinct, so we need $x\\ne y+z$, and the largest edge sum $x+y\\le10$. Fix $y\\in\\{2,\\dots,9\\}$: $z$ has $y-1$ choices ($z<y$) and $x$ has $10-2y$ choices ($y<x\\le10-y$), giving $20$ pairs in total. Subtract those with $x=y+z$: for $x=3,\\dots,10$ there are $1,1,2,1,\\dots$ such cases, $5$ in all within the constraint, leaving $15$ labelings with $x>y>z$. Allowing any order of the three vertices gives $15\\cdot6=90$ valid labelings out of $10\\cdot9\\cdot8\\cdot7\\cdot6\\cdot5=151200$. Probability $\\frac{90}{151200}=\\frac1{1680}$.\n\n**Answer: $\\frac1{1680}$**"
+   },
+   {
+    "title": "Brute-force check",
+    "body": "Enumerating all $151200$ labelings by computer finds exactly $90$ valid ones, so the probability is $\\frac1{1680}$.\n\n**Answer: $\\frac1{1680}$**"
+   }
+  ],
+  "topics": [
+   "probability",
+   "counting"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null,
+  "answerDisplay": "$\\frac1{1680}$"
+ },
+ {
+  "id": "smt-2024-discrete-05",
+  "bank": "smt",
+  "source": {
+   "contest": "Stanford Math Tournament",
+   "paper": "2024 Discrete",
+   "year": 2024,
+   "number": 5,
+   "url": "https://www.stanfordmathtournament.org/pdfs/smt2024/discrete-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "We define the *spillage* of a number as $s(x)=\\left\\lfloor\\frac{x}{100}\\right\\rfloor$, that is, the largest integer that is at most $\\frac x{100}$. The spillage of a list of numbers $[a_1,a_2,\\ldots,a_n]$ is the sum of left to right spillages: $s(a_1)+s(a_1a_2)+s(a_1a_2a_3)+\\ldots+s(a_1a_2\\cdots a_n)$. Let $M$ be the minimum possible spillage of $[1,2,\\ldots,10]$ over all the permutations of this list. How many of these permutations achieve $M$?",
+  "image": null,
+  "choices": null,
+  "answer": "288",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Put big numbers last",
+    "body": "The last product is always $10!$, so only the earlier partial products matter, and we want them as small as possible. Greedy reasoning: $a_{10}$ must be $10$, $a_9=9$, $a_8=8$, $a_7=7$ (any other choice makes $s(a_1\\cdots a_9)$, etc. larger). Then $a_1\\cdots a_6=720$ has $s=7$, and to keep $s(a_1\\cdots a_5)$ minimal ($=1$) we need $a_6\\ge4$, i.e. $a_6\\in\\{4,5,6\\}$; to keep $s(a_1\\cdots a_4)=0$ we need $a_5a_6\\ge8$ ($720/(a_5a_6)<100$), which for each choice of $a_6$ leaves $4$ choices of $a_5$. The remaining $4$ numbers can be placed in any order: $4!$. Total $3\\cdot4\\cdot4!=288$.\n\n**Answer: 288**"
+   },
+   {
+    "title": "Brute-force check",
+    "body": "Checking all $10!$ permutations by computer gives minimum spillage $40377$ attained by exactly $288$ permutations.\n\n**Answer: 288**"
+   }
+  ],
+  "topics": [
+   "counting"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "smt-2024-discrete-06",
+  "bank": "smt",
+  "source": {
+   "contest": "Stanford Math Tournament",
+   "paper": "2024 Discrete",
+   "year": 2024,
+   "number": 6,
+   "url": "https://www.stanfordmathtournament.org/pdfs/smt2024/discrete-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Alice is playing with magnets on her fridge. She has $7$ magnets, with the numbers $1,2,3,4,5,6,7$, in that order in a row, and she also has two magnets with a \"+\" sign, two magnets with a \"$-$\" sign, and two magnets with a \"$\\times$\" sign. She randomly puts these six operation magnets between her $7$ number magnets, with one operation between every two consecutive numbers, and evaluates the resulting expression (following the order of operations). What is the expected value of her result?",
+  "image": null,
+  "choices": null,
+  "answer": "8/5",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Linearity of expectation",
+    "body": "There are $\\frac{6!}{2!2!2!}=90$ arrangements. The result is a sum of products (terms) with signs. Each number after the first multiplied term-block is added or subtracted with equal probability, so those terms cancel in expectation and only the first term (the product containing $1$) matters. Its value is $1$ (if the first sign is $+$ or $-$), $1\\cdot2=2$ (if the first sign is $\\times$ followed by $+/-$) or $1\\cdot2\\cdot3=6$ (if the first two signs are $\\times$). Number of arrangements: first two signs both $\\times$: $\\frac{4!}{2!2!}=6$; first sign $\\times$ and second not: $2\\cdot$ ... gives $24$; remaining $90-6-24=60$ arrangements have first term $1$. Expected value $\\frac{6\\cdot6+24\\cdot2+60\\cdot1}{90}=\\frac{144}{90}=\\frac85$.\n\n**Answer: $\\frac85$**"
+   },
+   {
+    "title": "Brute-force check",
+    "body": "Evaluating all $90$ arrangements by computer gives mean exactly $\\frac85$.\n\n**Answer: $\\frac85$**"
+   }
+  ],
+  "topics": [
+   "probability",
+   "counting"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null,
+  "answerDisplay": "$\\frac85$"
+ },
+ {
+  "id": "smt-2024-discrete-07",
+  "bank": "smt",
+  "source": {
+   "contest": "Stanford Math Tournament",
+   "paper": "2024 Discrete",
+   "year": 2024,
+   "number": 7,
+   "url": "https://www.stanfordmathtournament.org/pdfs/smt2024/discrete-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Let $1\\le A\\le119$ and $1\\le B\\le139$ be two integers such that $\\frac A{60}$ and $\\frac B{70}$ are fractions in simplest form, yet, when adding $\\frac A{60}$ and $\\frac B{70}$ by rewriting both fractions with their lowest common denominator and adding the resulting numerators, the new fraction can be simplified. Find how many ordered pairs $(A,B)$ are possible.",
+  "image": null,
+  "choices": null,
+  "answer": "384",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Mod 5 analysis",
+    "body": "The sum is $\\frac{7A+6B}{420}$ and $420=2^2\\cdot3\\cdot5\\cdot7$. Since $\\gcd(A,60)=\\gcd(B,70)=1$: $A$ is odd and prime to $3,5$; $B$ is prime to $2,5,7$. Then $7A+6B$ is odd, not divisible by $3$ (as $3\\nmid7A$) and not divisible by $7$ (as $7\\nmid6B$). So the only possible common factor with $420$ is $5$, i.e. $7A+6B\\equiv2A+B\\equiv0\\pmod5$. There are $2\\varphi(60)=32$ values of $A$ and $2\\varphi(70)=48$ values of $B$ in the given ranges, each equally spread over the residues $1,2,3,4\\pmod5$. For each $A$, a quarter of the $B$ values have $B\\equiv-2A$: $32\\cdot\\frac{48}{4}=384$.\n\n**Answer: 384**"
+   },
+   {
+    "title": "Brute-force check",
+    "body": "Looping over all admissible $A$ and $B$ and testing $\\gcd(7A+6B,420)>1$ gives $384$.\n\n**Answer: 384**"
+   }
+  ],
+  "topics": [
+   "number-theory",
+   "counting"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "smt-2024-discrete-08",
+  "bank": "smt",
+  "source": {
+   "contest": "Stanford Math Tournament",
+   "paper": "2024 Discrete",
+   "year": 2024,
+   "number": 8,
+   "url": "https://www.stanfordmathtournament.org/pdfs/smt2024/discrete-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "text",
+  "prompt": "Call a polynomial $P$ *cool* if it has degree less than $257$, each of its coefficients are nonnegative integers less than $257$, and $$\\sum_{k=0}^{256}P(k^j)$$ is divisible by $257$ for all positive integers $j$. How many cool polynomials are there? (Assume that the polynomial $P(x)=0$ has degree less than $257$.)",
+  "image": null,
+  "choices": null,
+  "answer": "257^248",
+  "acceptedAnswers": [
+   "257**248",
+   "257^{248}"
+  ],
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Power sums mod a prime",
+    "body": "Let $p=257$ (prime) and $P(x)=\\sum_{i=0}^{p-1}a_ix^i$. The sum is $\\sum_ia_iS_{ji}$ with $S_m=\\sum_{k=0}^{p-1}k^m$, and modulo $p$: $S_m\\equiv-1$ if $(p-1)\\mid m$, $m>0$, and $S_m\\equiv0$ otherwise (with $S_0=p\\equiv0$). By Fermat it suffices to take $1\\le j\\le p-1$. The condition then becomes: for every divisor $d$ of $p-1=256$, $a_d+a_{2d}+\\cdots+a_{p-1}\\equiv0\\pmod p$ (the sum over multiples of $d$ up to $p-1$). The coefficient $a_0$ does not appear. The $9$ conditions ($d=1,2,4,\\dots,256$) are linearly independent over $\\mathbb F_p$, since the condition for $d$ contains $a_d$ and only coefficients $a_i$ with $i>d$ besides it; solving from $d=256$ downward determines $a_{256},a_{128},\\dots,a_1$ one at a time from the others. So of the $257$ coefficients, $257-9=248$ can be chosen freely modulo $257$ (and each coefficient in $[0,256]$ is one residue). Hence the number of cool polynomials is $257^{248}$.\n\n**Answer: $257^{248}$**"
+   }
+  ],
+  "topics": [
+   "number-theory",
+   "polynomials"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "smt-2024-discrete-09",
+  "bank": "smt",
+  "source": {
+   "contest": "Stanford Math Tournament",
+   "paper": "2024 Discrete",
+   "year": 2024,
+   "number": 9,
+   "url": "https://www.stanfordmathtournament.org/pdfs/smt2024/discrete-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Let $f:\\mathbb N\\to\\mathbb R$ be a function which satisfies $\\frac1{64}n^2=\\sum_{d\\mid n}f(d)f\\left(\\frac nd\\right)$. What is the least integer $n$ for which $f(n)$ is an integer?",
+  "image": null,
+  "choices": null,
+  "answer": "128",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Multiplicative reduction",
+    "body": "Let $g(n)=\\frac{8f(n)}{n^2}$. Then $\\sum_{d\\mid n}g(d)g(n/d)=1$ for all $n$, so $g(1)=\\pm1$ and $g$ is multiplicative (by induction on $mn$ for coprime $m,n$). With $c_k=g(p^k)$ we get $\\left(\\sum c_kx^k\\right)^2=\\frac1{1-x}$, so $\\sum c_kx^k=\\pm(1-x)^{-1/2}$ and $c_k=\\pm\\binom{2k}{k}/4^k$. Hence $f(p^k)=\\pm\\frac{p^{2k}}{8}\\binom{2k}k4^{-k}$, and for odd $p$ this is never an integer (the power of $2$ in the denominator survives), so $n$ must be a power of $2$: $f(2^k)=\\pm\\binom{2k}{k}/8$. This is an integer first at $k=7$ ($\\binom{14}7=3432=8\\cdot429$). Thus $n=2^7=128$.\n\n**Answer: 128**"
+   }
+  ],
+  "topics": [
+   "number-theory"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "smt-2024-discrete-10",
+  "bank": "smt",
+  "source": {
+   "contest": "Stanford Math Tournament",
+   "paper": "2024 Discrete",
+   "year": 2024,
+   "number": 10,
+   "url": "https://www.stanfordmathtournament.org/pdfs/smt2024/discrete-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "There are $2n$ students taking an exam, and at the beginning they all put their phones into a pile. When leaving, each person takes an arbitrary phone from the pile. Unfortunately, it might be the case that some students did not get back their own phone!\n\nTo get back the correct phones, the students come up with the following strategy. They repeat the following *round* as many times as needed:\n\n1. Some of the students pair up. Each student can be in at most one pair.\n2. The pairs swap phones according to some swap order (i.e. an ordering of the pairs).\n\nFor a given assignment $\\pi$ of the $2n$ students to the phones they originally picked up, let $r(\\pi)$ be the minimum number of rounds required for the students to each receive back their own phone, assuming the students make swaps optimally. Let $s(\\pi)$ be the number of ways to swap phones (determined by pairings and swap orders over all rounds) achieving $r(\\pi)$ rounds. Let $M(n)$ be the maximum value of $r(\\pi)$ over all assignments $\\pi$, and let $f(n)$ be the sum of $s(\\pi)$ over all $\\pi$ with $r(\\pi)<M(n)$.\n\nThen, there exists a unique ordered pair $(a,b)$ with $a>0$ and $b>0$ such that $$\\lim_{n\\to\\infty}\\frac{f(n)\\cdot a^n}{(2n)!}=b.$$ Compute $(a,b)$.\n\nNote: It may be helpful to know that $e^x=\\sum_{k=0}^\\infty\\frac{x^k}{k!}$.",
+  "image": null,
+  "choices": null,
+  "answer": "$(a,b)=\\left(2,\\ \\dfrac{e^{\\sqrt2}+e^{-\\sqrt2}}{2}\\right)$",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Rounds needed and counting",
+    "body": "Any assignment can be undone in at most $2$ rounds: disjoint transpositions are fixed in one round in parallel; a longer cycle can be fixed in two rounds (first reflect the cycle in pairs, then pair up what remains). So $M(n)=2$, and $r(\\pi)<2$ means all cycles have length $\\le2$. If $\\pi$ has $k$ transpositions, one round with those $k$ pairs suffices and the $k$ swaps can be ordered in $k!$ ways, so $s(\\pi)=k!$. The number of such $\\pi$ is $\\binom{2n}{2k}\\frac{(2k)!}{2^kk!}$, so $$f(n)=\\sum_{k=0}^n\\binom{2n}{2k}\\frac{(2k)!}{2^k}=(2n)!\\sum_{k=0}^n\\frac1{2^k(2n-2k)!}=\\frac{(2n)!}{2^n}\\sum_{k=0}^n\\frac{(\\sqrt2)^{2n-2k}}{(2n-2k)!}\\to\\frac{(2n)!}{2^n}\\cosh\\sqrt2,$$ using $\\cosh x=\\sum\\frac{x^{2k}}{(2k)!}$. So $\\frac{f(n)2^n}{(2n)!}\\to\\cosh\\sqrt2$ and $(a,b)=\\left(2,\\frac{e^{\\sqrt2}+e^{-\\sqrt2}}2\\right)$.\n\n**Answer: $\\left(2,\\frac{e^{\\sqrt2}+e^{-\\sqrt2}}2\\right)$**"
+   }
+  ],
+  "topics": [
+   "counting",
+   "analysis"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ }
+]

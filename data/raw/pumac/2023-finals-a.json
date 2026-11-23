@@ -1,0 +1,100 @@
+[
+ {
+  "id": "pumac-2023-finals-a-01",
+  "bank": "pumac",
+  "source": {
+   "contest": "PUMaC",
+   "paper": "2023 Individual Finals A",
+   "year": 2023,
+   "number": 1,
+   "url": "https://jason-shi-f9dm.squarespace.com/s/Indiv_Finals_A_2023.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Let $p>3$ be a prime and $k\\ge0$ an integer. Find the multiplicity of $X-1$ in the factorization of $$f(X)=X^{3p^k-1}+X^{3p^k-2}+\\cdots+X+1$$ modulo $p$; in other words, find the unique non-negative integer $r$ such that $(X-1)^r$ divides $f(X)$ modulo $p$, but $(X-1)^{r+1}$ does not divide $f(X)$ modulo $p$.",
+  "image": null,
+  "choices": null,
+  "answer": "$r=p^k-1$",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [],
+  "topics": [
+   "polynomials",
+   "number-theory"
+  ],
+  "difficulty": 3,
+  "duplicateOf": "pumac-2023-finals-b-03",
+  "reviewNote": null
+ },
+ {
+  "id": "pumac-2023-finals-a-02",
+  "bank": "pumac",
+  "source": {
+   "contest": "PUMaC",
+   "paper": "2023 Individual Finals A",
+   "year": 2023,
+   "number": 2,
+   "url": "https://jason-shi-f9dm.squarespace.com/s/Indiv_Finals_A_2023.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "On an infinite triangular lattice, there is a single atom at a lattice point. We allow for four operations as illustrated in Figure 1 (top of the picture). In words, one could take an existing atom, split it into three atoms, and place them at adjacent lattice points in one of the two displayed fashions (a \"split\"). One could also reverse the process, i.e. taking three existing atoms in the displayed configurations, and merge them into a single atom at the center (a \"merge\").\n\nAssume that, after finitely many operations, there is again only a single atom remaining on the lattice. Show that this is possible if and only if the final atom is contained in the sublattice implied by Figure 2 (bottom of the picture): the green points are the possible positions for the final atom, and the position of the original atom is the purple point.",
+  "image": "qimages/pumac/2023-finals-a/q02.webp",
+  "choices": null,
+  "answer": "The final atom must lie on the sublattice $4\\Lambda$ (shifted by the start): an invariant shows necessity, and an explicit $18$-step sequence moves an atom $4$ units along a lattice line.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Invariants (necessity) and an explicit move (sufficiency)",
+    "body": "**Coordinates.** Let $\\Lambda=\\mathbb Z[\\zeta]$, $\\zeta=e^{2\\pi i/3}$; write the lattice point $a+b\\zeta$ as $(a,b)$ (so $(1,0)$ is one step to the right, $(0,1)$ one step up-left, $(-1,-1)=\\zeta^2$ one step down-left). The three-atom configurations of Figure 1 are, around a center $z$:\n- blue ($u=+$): atoms at $z+(1,0),\\ z+(0,1),\\ z+(-1,-1)$;\n- orange ($u=-$): atoms at $z+(-1,0),\\ z+(0,-1),\\ z+(1,1)$.\n\nA *split* replaces an atom at $z$ by the three atoms of one configuration around $z$; a *merge* does the reverse. Place the initial atom at $(0,0)$.\n\n**Necessity.** Define two functions on lattice points: $\\chi_2(a,b)=i^{-a}$ and $\\chi_3(a,b)=i^{b}$ (here $i^2=-1$). Both are multiplicative: $\\chi(z+w)=\\chi(z)\\chi(w)$. Compute on the offsets of each configuration:\n- $\\chi_2$: blue $i^{-1}+i^0+i^{1}=-i+1+i=1$; orange $i^{1}+i^0+i^{-1}=1$.\n- $\\chi_3$: blue $i^0+i^1+i^{-1}=1$; orange $i^0+i^{-1}+i^{1}=1$.\n\nSo for each $\\chi\\in\\{\\chi_2,\\chi_3\\}$ the sum of $\\chi$ over the three new atoms equals $\\chi(z)\\cdot1=\\chi(z)$, the value of the atom they replace. Hence $W_\\chi=\\sum_{\\text{atoms}}\\chi(\\text{position})$ is unchanged by splits and by merges. At the start $W_{\\chi}=\\chi(0,0)=1$. If at the end a single atom remains at $(a,b)$, then $i^{-a}=1$ and $i^{b}=1$, i.e. $4\\mid a$ and $4\\mid b$. So the final atom lies in $4\\Lambda$ (the green points of Figure 2).\n\n**Sufficiency.** Figure 2's green points are $4\\Lambda$, so it suffices to show we can move a single atom by $4$ to the right, by $-4$, and (by the $120^\\circ$ rotation symmetry of the set of operations, $(a,b)\\mapsto(-b,a-b)$) also by $4\\zeta$ and $4\\zeta^2$; then any point of $4\\Lambda$ is reached by repeating these moves (all operations are translation invariant). Moving by $-4$ is the reverse of the move by $4$.\n\nHere is an explicit sequence taking one atom at $(0,0)$ to one atom at $(4,0)$ (at no time do two atoms share a point; each line shows the atoms present after the operation, \"merge at $c$\" meaning the three atoms $c+$offsets of the stated type are replaced by one atom at $c$):\n\n| step | operation | atoms after the step |\n|---|---|---|\n| 1 | split $u=+$ at $(0,0)$ | (-1,-1), (0,1), (1,0) |\n| 2 | split $u=+$ at $(1,0)$ | (-1,-1), (0,-1), (0,1), (1,1), (2,0) |\n| 3 | split $u=-$ at $(2,0)$ | (-1,-1), (0,-1), (0,1), (1,0), (1,1), (2,-1), (3,1) |\n| 4 | merge $u=+$ at $(0,0)$ | (0,-1), (0,0), (1,1), (2,-1), (3,1) |\n| 5 | split $u=-$ at $(0,-1)$ | (-1,-1), (0,-2), (0,0), (1,0), (1,1), (2,-1), (3,1) |\n| 6 | merge $u=-$ at $(2,0)$ | (-1,-1), (0,-2), (0,0), (1,1), (2,0) |\n| 7 | split $u=+$ at $(2,0)$ | (-1,-1), (0,-2), (0,0), (1,-1), (1,1), (2,1), (3,0) |\n| 8 | merge $u=-$ at $(1,0)$ | (-1,-1), (0,-2), (1,0), (1,1), (3,0) |\n| 9 | split $u=+$ at $(3,0)$ | (-1,-1), (0,-2), (1,0), (1,1), (2,-1), (3,1), (4,0) |\n| 10 | merge $u=-$ at $(0,-1)$ | (0,-1), (1,1), (2,-1), (3,1), (4,0) |\n| 11 | split $u=+$ at $(2,-1)$ | (0,-1), (1,-2), (1,1), (2,0), (3,-1), (3,1), (4,0) |\n| 12 | merge $u=-$ at $(1,-1)$ | (1,-1), (1,1), (3,-1), (3,1), (4,0) |\n| 13 | split $u=+$ at $(3,1)$ | (1,-1), (1,1), (2,0), (3,-1), (3,2), (4,0), (4,1) |\n| 14 | merge $u=-$ at $(2,1)$ | (1,-1), (2,1), (3,-1), (4,0), (4,1) |\n| 15 | split $u=-$ at $(4,0)$ | (1,-1), (2,1), (3,-1), (3,0), (4,-1), (4,1), (5,1) |\n| 16 | merge $u=+$ at $(2,0)$ | (2,0), (3,-1), (4,-1), (4,1), (5,1) |\n| 17 | merge $u=-$ at $(3,0)$ | (3,0), (4,-1), (5,1) |\n| 18 | merge $u=-$ at $(4,0)$ | (4,0) |\n\nEach step can be checked directly from the definitions of the two configurations: e.g. step 1 puts $(1,0),(0,1),(-1,-1)$ around $(0,0)$; step 4 merges the three atoms $(1,0),(0,1),(-1,-1)$ back into $(0,0)$; step 18 merges $(3,0),(4,-1),(5,1)$, which are $(4,0)+(-1,0),(4,0)+(0,-1),(4,0)+(1,1)$, into $(4,0)$. Hence a single atom can be moved by $4$ along a lattice line, and therefore to every point of the sublattice $4\\Lambda$. $\\blacksquare$"
+   }
+  ],
+  "topics": [
+   "logic",
+   "patterns"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "pumac-2023-finals-a-03",
+  "bank": "pumac",
+  "source": {
+   "contest": "PUMaC",
+   "paper": "2023 Individual Finals A",
+   "year": 2023,
+   "number": 3,
+   "url": "https://jason-shi-f9dm.squarespace.com/s/Indiv_Finals_A_2023.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Let $f(X)$ be a monic irreducible polynomial over $\\mathbb Z$; therefore, by Gauss's Lemma, $f$ is also irreducible over $\\mathbb Q$ (you may assume this). Moreover, assume $f(X)\\mid f(X^2+n)$ where $n$ is an integer such that $n\\notin\\{-1,0,1\\}$. Show that $n^2\\nmid f(0)$.",
+  "image": null,
+  "choices": null,
+  "answer": "Roots of $f$ are permuted eventually periodically by $g(x)=x^2+n$; $f$ divides $g^k(X)-X$, whose constant term is $\\equiv n\\pmod{n^2}$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Periodic points of $x^2+n$",
+    "body": "Let $g(X)=X^2+n$ and let $g^j$ denote the $j$-fold composition. If $x$ is a root of $f$, then $f(g(x))=0$ because $f(X)\\mid f(g(X))$; so $g(x)$ is a root of $f$ too, and the whole orbit $x,g(x),g^2(x),\\dots$ consists of roots of $f$. As $f$ has finitely many roots, two elements of the orbit coincide: $g^s(x)=g^t(x)$ with $s<t$. Then $x_0=g^s(x)$ is a root of $f$ with $g^k(x_0)=x_0$ for $k=t-s\\ge1$. Thus $x_0$ is a root of\n$$h(X)=g^k(X)-X\\in\\mathbb Z[X].$$\n\n**$f\\mid h$ in $\\mathbb Z[X]$.** The monic irreducible $f\\in\\mathbb Q[X]$ with $f(x_0)=0$ is the minimal polynomial of $x_0$ (a monic polynomial of least degree vanishing at $x_0$ is irreducible, and any $h$ vanishing at $x_0$ is divisible by it: divide with remainder, $h=fq+r$, $\\deg r<\\deg f$, $r(x_0)=0$ forces $r=0$). So $f\\mid h$ in $\\mathbb Q[X]$; since $f$ is monic with integer coefficients, long division of $h$ by $f$ stays in $\\mathbb Z[X]$, so $h=fq$ with $q\\in\\mathbb Z[X]$. In particular $f(0)\\mid h(0)$ if $f(0)\\ne0$, and $h(0)=f(0)q(0)$.\n\n**The constant term of $h$.** $h(0)=g^k(0)=:c_k$ where $c_0=0$, $c_{j+1}=c_j^2+n$. We claim $c_j\\equiv n\\pmod{n^2}$ for all $j\\ge1$: $c_1=n$; if $c_j\\equiv n\\pmod{n^2}$ then $n\\mid c_j$, so $c_j^2\\equiv0\\pmod{n^2}$ and $c_{j+1}=c_j^2+n\\equiv n\\pmod{n^2}$. Since $n\\ne0,\\pm1$, $n^2\\nmid n$, so $n^2\\nmid h(0)$ (in particular $h(0)\\ne0$).\n\n**Conclusion.** $h(0)=f(0)q(0)$ with $h(0)\\ne0$, so $f(0)\\ne0$. If $n^2\\mid f(0)$ then $n^2\\mid f(0)q(0)=h(0)$, contradicting the previous paragraph. Hence $n^2\\nmid f(0)$. $\\blacksquare$"
+   }
+  ],
+  "topics": [
+   "polynomials",
+   "number-theory",
+   "abstract-algebra"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ }
+]

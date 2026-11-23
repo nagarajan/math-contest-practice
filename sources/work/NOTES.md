@@ -81,3 +81,5 @@
 - samf junior-2007-r2 Q11 dropped: true count is 11 (brute force), not among the choices; key says 10.
 - hmmt feb-2011 guts 26 dropped: unsatisfiable as worded (13 bishops cannot cover all diagonals).
 - hmmt feb-2000 guts 04 (degenerate triangle), 28 (V/S has no minimum), 34 (Brocard's problem, open) dropped. Penalty for [±n] not modelled (no rules page), matching feb-2001/2002.
+- bmt 2016 analysis 06 dropped: the point (1,-1) is not on x e^y = y e^x.
+- smt 2018 general 25 dropped: official k=3 forces a zero root, contradicting 'roots are nonzero'. Team short-answer 12 omitted (sum diverges).

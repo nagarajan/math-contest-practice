@@ -1,0 +1,1536 @@
+[
+ {
+  "id": "bmt-2022-power-1-01",
+  "bank": "bmt",
+  "source": {
+   "contest": "Berkeley Math Tournament",
+   "paper": "2022 Power Round (Error Correcting Codes)",
+   "year": 2022,
+   "number": 1,
+   "url": "https://berkeley.mt/archives/bmt-2022/power-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 3,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Alice sends a word (the *codeword*) over the alphabet $\\Sigma_{\\alpha\\beta}=\\{A,B,\\dots,Z\\}$ through a channel to Bob. **Scheme 1.1:** Alice sends her word $m$ of length $\\ell$ repeated three times (so ALICE is sent as ALICEALICEALICE). Bob receives a string of length $3\\ell$, in which some characters may have been replaced by underscores (erasures). He looks at the three letters in each position $1,\\dots,\\ell$ of the three copies, and picks a letter that is not an underscore.\n\nNow suppose instead that up to $2$ characters are *corrupted* into other letters of the alphabet (not erased). For example Bob may receive ALIXEALYCEALICE. Modify step 2(a): for each position Bob compares the three letters and picks the **majority** letter (for A, A, C he picks A). Does the scheme still work? If it does, give a proof. If not, give a counterexample.",
+  "image": null,
+  "choices": null,
+  "answer": "No: the majority rule can fail, e.g. corrupting the first letter of two different copies to B makes Bob decode BLICE instead of ALICE.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Counterexample",
+    "body": "The scheme does not always work. Suppose Alice sends ALICEALICEALICE and the channel corrupts characters $1$ and $6$ (the first letter of the first and the second copy) into B. Bob receives BLICEBLICEALICE. In position $1$ he sees B, B, A, so the majority is B, and in every other position the three letters agree. Bob therefore decodes BLICE $\\neq$ ALICE.\n\n(Two corruptions can outvote a single correct copy, because $2>1$; the scheme would only be safe against $1$ corruption.)\n\n**Answer: No.**"
+   }
+  ],
+  "topics": [
+   "counting",
+   "logic"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "bmt-2022-power-1-02",
+  "bank": "bmt",
+  "source": {
+   "contest": "Berkeley Math Tournament",
+   "paper": "2022 Power Round (Error Correcting Codes)",
+   "year": 2022,
+   "number": 2,
+   "url": "https://berkeley.mt/archives/bmt-2022/power-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 4,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Alice sends a word (the *codeword*) over the alphabet $\\Sigma_{\\alpha\\beta}=\\{A,B,\\dots,Z\\}$ through a channel to Bob. **Scheme 1.1:** Alice sends her word $m$ of length $\\ell$ repeated three times (so ALICE is sent as ALICEALICEALICE). Bob receives a string of length $3\\ell$, in which some characters may have been replaced by underscores (erasures). He looks at the three letters in each position $1,\\dots,\\ell$ of the three copies, and picks a letter that is not an underscore.\n\nSuppose instead that up to $s$ characters may be erased, and Alice's word has length $n$. Alice now repeats her word $t$ times (replacing $3$ by $t$ in the scheme). What is the minimum value of $t$ for which the scheme is guaranteed to recover her word?",
+  "image": null,
+  "choices": null,
+  "answer": "$t=s+1$ (independent of $n$).",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Worst case and sufficiency",
+    "body": "**$t\\le s$ is not enough.** The channel may erase the letters in one fixed position in all $t\\le s$ copies. Bob then has no information about that position, and two words differing only there cannot be told apart.\n\n**$t=s+1$ is enough.** For each position $j$ of the word there are $s+1$ copies of that letter, and at most $s$ characters are erased in total, so at least one of the $s+1$ copies of position $j$ survives. All surviving copies are equal to Alice's letter, so Bob recovers it.\n\nSo the minimum is $t=s+1$.\n\n**Answer: $t=s+1$**"
+   }
+  ],
+  "topics": [
+   "logic",
+   "counting"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "bmt-2022-power-1-03",
+  "bank": "bmt",
+  "source": {
+   "contest": "Berkeley Math Tournament",
+   "paper": "2022 Power Round (Error Correcting Codes)",
+   "year": 2022,
+   "number": 3,
+   "url": "https://berkeley.mt/archives/bmt-2022/power-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 3,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Let $\\Sigma_2=\\{0,1\\}$ and let $\\Sigma_2^m=\\Sigma_2\\times\\cdots\\times\\Sigma_2$ ($m$ factors) be the set of ordered $m$-tuples of elements of $\\Sigma_2$. Compute $|\\Sigma_2^m|$ in terms of $m$.",
+  "image": null,
+  "choices": null,
+  "answer": "$2^m$",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Multiplication principle",
+    "body": "Each of the $m$ entries of a tuple can be chosen independently in $2$ ways, so $|\\Sigma_2^m|=2\\cdot2\\cdots2=2^m$.\n\n**Answer: $2^m$**"
+   }
+  ],
+  "topics": [
+   "counting"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "bmt-2022-power-1-04",
+  "bank": "bmt",
+  "source": {
+   "contest": "Berkeley Math Tournament",
+   "paper": "2022 Power Round (Error Correcting Codes)",
+   "year": 2022,
+   "number": 4,
+   "url": "https://berkeley.mt/archives/bmt-2022/power-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 4,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "A *code* of length $n$ over an alphabet $\\Sigma$ is any subset of $\\Sigma^n$ (the set of words of length $n$); its elements are called codewords. Let $\\Sigma_{10}=\\{0,1,\\dots,9\\}$. Compute the number of codes over $\\Sigma_{10}$ with codeword length $n$.",
+  "image": null,
+  "choices": null,
+  "answer": "$2^{10^n}$",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Subsets of $\\Sigma_{10}^n$",
+    "body": "There are $|\\Sigma_{10}^n|=10^n$ words of length $n$, and a code is an arbitrary subset of them (including the empty set, if one allows it). A set with $10^n$ elements has $2^{10^n}$ subsets.\n\n**Answer: $2^{10^n}$**"
+   }
+  ],
+  "topics": [
+   "counting"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "bmt-2022-power-1-05",
+  "bank": "bmt",
+  "source": {
+   "contest": "Berkeley Math Tournament",
+   "paper": "2022 Power Round (Error Correcting Codes)",
+   "year": 2022,
+   "number": 5,
+   "url": "https://berkeley.mt/archives/bmt-2022/power-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 5,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "A *code* of length $n$ over an alphabet $\\Sigma$ is any subset of $\\Sigma^n$. Let $\\Sigma_{\\alpha\\beta}=\\{A,B,\\dots,Z\\}$. Compute the number of codes over $\\Sigma_{\\alpha\\beta}$ such that\n\n1. the length of each codeword is $10$, and\n2. each codeword contains the substring SUSBUS (six contiguous letters in one block).\n\nYou may leave your answer in terms of exponents and binomial coefficients.",
+  "image": null,
+  "choices": null,
+  "answer": "$2^{5\\cdot26^4}$",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Count the possible codewords, then subsets",
+    "body": "First count the words of length $10$ that contain SUSBUS. The block can start at positions $1,2,3,4,5$, and the remaining $4$ letters are arbitrary: $26^4$ choices. A word cannot contain SUSBUS twice: two disjoint copies need $12>10$ letters, and two overlapping copies would have to overlap in the single letter S (the only border of SUSBUS), needing $11>10$ letters. So distinct (position, filling) pairs give distinct words, and there are $5\\cdot26^4$ valid words.\n\nA code is any subset of this set of $5\\cdot26^4$ words, so the number of codes is $2^{5\\cdot26^4}$.\n\n**Answer: $2^{5\\cdot26^4}$**"
+   }
+  ],
+  "topics": [
+   "counting"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "bmt-2022-power-1-06",
+  "bank": "bmt",
+  "source": {
+   "contest": "Berkeley Math Tournament",
+   "paper": "2022 Power Round (Error Correcting Codes)",
+   "year": 2022,
+   "number": 6,
+   "url": "https://berkeley.mt/archives/bmt-2022/power-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 2,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "An encoding setup has three stages: an *encoding function* $E$ takes a message $m$ to its codeword $E(m)$; a *transmission channel* $T$ takes a codeword $c$ and returns a (possibly damaged) word $T(c)$; a *decoding function* $D$ takes a received word $w$ (not necessarily a codeword) and returns a message $D(w)$. Give an expression for the final message received when an initial message $m$ passes through the encoding, transmission and decoding stages.",
+  "image": null,
+  "choices": null,
+  "answer": "$D(T(E(m)))$",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Compose the stages",
+    "body": "First $m$ is encoded, giving $E(m)$; the channel turns it into $T(E(m))$; the decoder outputs $D(T(E(m)))$.\n\n**Answer: $D(T(E(m)))$**"
+   }
+  ],
+  "topics": [
+   "logic"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "bmt-2022-power-1-07",
+  "bank": "bmt",
+  "source": {
+   "contest": "Berkeley Math Tournament",
+   "paper": "2022 Power Round (Error Correcting Codes)",
+   "year": 2022,
+   "number": 7,
+   "url": "https://berkeley.mt/archives/bmt-2022/power-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 5,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "An encoding setup has an encoding function $E$ (message $\\mapsto$ codeword) and a decoding function $D$ (received word $\\mapsto$ message). Suppose the channel $T$ does not change the codeword at all (it takes a codeword $c$ and returns $c$), and $E$ and $D$ are chosen so that the final message always equals the initial message $m$. Prove that if $x\\ne y$ are two messages, then $E(x)\\ne E(y)$.",
+  "image": null,
+  "choices": null,
+  "answer": "Contrapositive: if $E(x)=E(y)$ then $x=D(E(x))=D(E(y))=y$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Proof by contraposition",
+    "body": "Since $T$ does nothing and the final message equals the initial one, $D(E(m))=m$ for every message $m$.\n\nSuppose $E(x)=E(y)$. Applying $D$ to both sides gives $D(E(x))=D(E(y))$, i.e. $x=y$. Hence if $x\\neq y$, then $E(x)\\neq E(y)$. $\\blacksquare$"
+   }
+  ],
+  "topics": [
+   "logic"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "bmt-2022-power-2-01",
+  "bank": "bmt",
+  "source": {
+   "contest": "Berkeley Math Tournament",
+   "paper": "2022 Power Round (Error Correcting Codes)",
+   "year": 2022,
+   "number": 8,
+   "url": "https://berkeley.mt/archives/bmt-2022/power-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 5,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "For two words $x,y\\in\\Sigma^n$ of the same length $n$ over an alphabet $\\Sigma$, the *Hamming distance* $\\delta(x,y)$ is the number of positions at which $x$ and $y$ differ. A *code* $C\\subseteq\\Sigma^n$ is a set of words (codewords); its *distance* is $d(C)=\\min_{c\\ne c'\\in C}\\delta(c,c')$. The *Hamming ball* of radius $r$ centered at $c$ is $B_c(r)=\\{w\\in\\Sigma^n:\\delta(w,c)\\le r\\}$.\n\nShow that Hamming distance satisfies the triangle inequality: for any three words $x,y,z\\in\\Sigma^n$, $\\delta(x,y)+\\delta(y,z)\\ge\\delta(x,z)$.",
+  "image": null,
+  "choices": null,
+  "answer": "If $x_i\\ne z_i$ then $x_i\\ne y_i$ or $y_i\\ne z_i$; count positions.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Count differing positions",
+    "body": "Let $I(a,b)$ be the set of positions where words $a$ and $b$ differ, so $|I(a,b)|=\\delta(a,b)$.\n\nIf $x$ and $z$ differ in position $i$, then $y_i$ cannot equal both $x_i$ and $z_i$, so $y$ differs from $x$ or from $z$ in position $i$. Hence $I(x,z)\\subseteq I(x,y)\\cup I(y,z)$, and\n$$\\delta(x,z)=|I(x,z)|\\le|I(x,y)\\cup I(y,z)|\\le|I(x,y)|+|I(y,z)|=\\delta(x,y)+\\delta(y,z).\\ \\blacksquare$$"
+   }
+  ],
+  "topics": [
+   "logic",
+   "counting"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "bmt-2022-power-2-02",
+  "bank": "bmt",
+  "source": {
+   "contest": "Berkeley Math Tournament",
+   "paper": "2022 Power Round (Error Correcting Codes)",
+   "year": 2022,
+   "number": 9,
+   "url": "https://berkeley.mt/archives/bmt-2022/power-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 3,
+  "timeMinutes": null,
+  "type": "mc",
+  "prompt": "For two words $x,y\\in\\Sigma^n$ of the same length $n$ over an alphabet $\\Sigma$, the *Hamming distance* $\\delta(x,y)$ is the number of positions at which $x$ and $y$ differ. A *code* $C\\subseteq\\Sigma^n$ is a set of words (codewords); its *distance* is $d(C)=\\min_{c\\ne c'\\in C}\\delta(c,c')$. The *Hamming ball* of radius $r$ centered at $c$ is $B_c(r)=\\{w\\in\\Sigma^n:\\delta(w,c)\\le r\\}$.\n\nDefine the $0$-$1$ distance between two words by $\\delta_{0\\text{-}1}(x,y)=0$ if $x=y$ and $\\delta_{0\\text{-}1}(x,y)=1$ if $x\\ne y$. For any two words $x,y$, which of the following is always true? Explain your reasoning.",
+  "image": null,
+  "choices": [
+   {
+    "key": "A",
+    "text": "$\\delta_{0\\text{-}1}(x,y)\\le\\delta(x,y)$"
+   },
+   {
+    "key": "B",
+    "text": "$\\delta_{0\\text{-}1}(x,y)=\\delta(x,y)$"
+   },
+   {
+    "key": "C",
+    "text": "$\\delta_{0\\text{-}1}(x,y)\\ge\\delta(x,y)$"
+   },
+   {
+    "key": "D",
+    "text": "None of (a), (b), (c)"
+   }
+  ],
+  "answer": "A",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Compare the two cases",
+    "body": "If $x=y$, both distances are $0$, so (a) holds. If $x\\ne y$, then $\\delta_{0\\text{-}1}=1$ and $x,y$ differ in at least one place, so $\\delta(x,y)\\ge1=\\delta_{0\\text{-}1}(x,y)$. So (a) always holds. (b) fails for $x=\\text{AB}$, $y=\\text{CD}$ ($1\\neq2$), and (c) fails for the same pair.\n\n**Answer: (A)**"
+   }
+  ],
+  "topics": [
+   "logic"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "bmt-2022-power-2-03",
+  "bank": "bmt",
+  "source": {
+   "contest": "Berkeley Math Tournament",
+   "paper": "2022 Power Round (Error Correcting Codes)",
+   "year": 2022,
+   "number": 10,
+   "url": "https://berkeley.mt/archives/bmt-2022/power-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 6,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "For two words $x,y\\in\\Sigma^n$ of the same length $n$ over an alphabet $\\Sigma$, the *Hamming distance* $\\delta(x,y)$ is the number of positions at which $x$ and $y$ differ. A *code* $C\\subseteq\\Sigma^n$ is a set of words (codewords); its *distance* is $d(C)=\\min_{c\\ne c'\\in C}\\delta(c,c')$. The *Hamming ball* of radius $r$ centered at $c$ is $B_c(r)=\\{w\\in\\Sigma^n:\\delta(w,c)\\le r\\}$.\n\nLet $C$ be a code with minimum distance $d(C)$. Suppose a codeword $c$ is sent and up to $d(C)-1$ of its characters are erased, giving a partially erased word $\\tilde c$. Show that $c$ is the only codeword that could have produced $\\tilde c$ (so up to $d(C)-1$ erasures can always be corrected). Explain why $d(C)$ erasures cannot always be corrected.",
+  "image": null,
+  "choices": null,
+  "answer": "A second codeword consistent with $\\tilde c$ would differ from $c$ in at most $d(C)-1$ places, contradicting the distance; with $d(C)$ erasures two closest codewords can become identical.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Distance forbids a second explanation",
+    "body": "Suppose $c$ was sent and $s\\le d(C)-1$ characters were erased to give $\\tilde c$. Suppose another codeword $c'\\ne c$ could also produce $\\tilde c$ by erasing at most $d(C)-1$ characters. Outside the erased positions both $c$ and $c'$ agree with $\\tilde c$, so $c$ and $c'$ can differ only in the (at most $s$) positions erased in $c$. Thus $\\delta(c,c')\\le s\\le d(C)-1<d(C)$, contradicting the definition of $d(C)$. So $c$ is the only possibility.\n\n**$d(C)$ erasures can fail.** Take two codewords $c_1,c_2$ with $\\delta(c_1,c_2)=d(C)$ and erase exactly the $d(C)$ positions where they differ. The resulting partially erased word is the same for both, so the receiver cannot tell which was sent. $\\blacksquare$"
+   }
+  ],
+  "topics": [
+   "logic"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "bmt-2022-power-2-04",
+  "bank": "bmt",
+  "source": {
+   "contest": "Berkeley Math Tournament",
+   "paper": "2022 Power Round (Error Correcting Codes)",
+   "year": 2022,
+   "number": 11,
+   "url": "https://berkeley.mt/archives/bmt-2022/power-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 7,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "For two words $x,y\\in\\Sigma^n$ of the same length $n$ over an alphabet $\\Sigma$, the *Hamming distance* $\\delta(x,y)$ is the number of positions at which $x$ and $y$ differ. A *code* $C\\subseteq\\Sigma^n$ is a set of words (codewords); its *distance* is $d(C)=\\min_{c\\ne c'\\in C}\\delta(c,c')$. The *Hamming ball* of radius $r$ centered at $c$ is $B_c(r)=\\{w\\in\\Sigma^n:\\delta(w,c)\\le r\\}$.\n\nLet $C$ be a code with odd minimum distance $d(C)$. Suppose a codeword $c$ is sent and at most $\\frac{d(C)-1}{2}$ of its characters are corrupted (replaced by other characters), giving a word $\\tilde c$. Show that $c$ is the unique codeword within Hamming distance $\\frac{d(C)-1}2$ of $\\tilde c$, so the corruptions can always be corrected.",
+  "image": null,
+  "choices": null,
+  "answer": "Two codewords within $\\frac{d-1}2$ of $\\tilde c$ would be within $d-1$ of each other by the triangle inequality.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Triangle inequality",
+    "body": "Write $d=d(C)$. We have $\\delta(c,\\tilde c)\\le\\frac{d-1}2$. Suppose another codeword $c'\\ne c$ also satisfies $\\delta(c',\\tilde c)\\le\\frac{d-1}2$. By the triangle inequality (Question 2.1),\n$$\\delta(c,c')\\le\\delta(c,\\tilde c)+\\delta(\\tilde c,c')\\le\\frac{d-1}2+\\frac{d-1}2=d-1<d,$$\ncontradicting the minimum distance of $C$. So $c$ is the only codeword within distance $\\frac{d-1}2$ of $\\tilde c$, and the receiver can decode to the nearest codeword. $\\blacksquare$"
+   }
+  ],
+  "topics": [
+   "logic"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "bmt-2022-power-2-05",
+  "bank": "bmt",
+  "source": {
+   "contest": "Berkeley Math Tournament",
+   "paper": "2022 Power Round (Error Correcting Codes)",
+   "year": 2022,
+   "number": 12,
+   "url": "https://berkeley.mt/archives/bmt-2022/power-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 2,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Let $\\Sigma_2=\\{0,1\\}$. How many words of length $n$ are there over $\\Sigma_2$?",
+  "image": null,
+  "choices": null,
+  "answer": "$2^n$",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Count",
+    "body": "Each of the $n$ positions is $0$ or $1$ independently: $2^n$ words.\n\n**Answer: $2^n$**"
+   }
+  ],
+  "topics": [
+   "counting"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "bmt-2022-power-2-06",
+  "bank": "bmt",
+  "source": {
+   "contest": "Berkeley Math Tournament",
+   "paper": "2022 Power Round (Error Correcting Codes)",
+   "year": 2022,
+   "number": 13,
+   "url": "https://berkeley.mt/archives/bmt-2022/power-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 2,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "For words of length $n$ over $\\Sigma_2=\\{0,1\\}$, the Hamming ball of radius $1$ about a word $c$ is $B_c(1)=\\{w:\\delta(w,c)\\le1\\}$. What is $|B_c(1)|$?",
+  "image": null,
+  "choices": null,
+  "answer": "$n+1$",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Distance $0$ or $1$",
+    "body": "There is exactly $1$ word at distance $0$ (namely $c$), and $n$ words at distance $1$ (flip exactly one of the $n$ bits). So $|B_c(1)|=n+1$.\n\n**Answer: $n+1$**"
+   }
+  ],
+  "topics": [
+   "counting"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "bmt-2022-power-2-07",
+  "bank": "bmt",
+  "source": {
+   "contest": "Berkeley Math Tournament",
+   "paper": "2022 Power Round (Error Correcting Codes)",
+   "year": 2022,
+   "number": 14,
+   "url": "https://berkeley.mt/archives/bmt-2022/power-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 6,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "For two words $x,y\\in\\Sigma^n$ of the same length $n$ over an alphabet $\\Sigma$, the *Hamming distance* $\\delta(x,y)$ is the number of positions at which $x$ and $y$ differ. A *code* $C\\subseteq\\Sigma^n$ is a set of words (codewords); its *distance* is $d(C)=\\min_{c\\ne c'\\in C}\\delta(c,c')$. The *Hamming ball* of radius $r$ centered at $c$ is $B_c(r)=\\{w\\in\\Sigma^n:\\delta(w,c)\\le r\\}$.\n\nLet $C$ be a binary code of length $n$ (over $\\Sigma_2=\\{0,1\\}$) with $d(C)=3$. By Question 2.4, a single corruption can always be corrected, i.e. the Hamming balls of radius $1$ about different codewords do not overlap. Also $|B_c(1)|=n+1$ (Question 2.6). Use this to show the *Hamming bound*\n$$|C|\\le\\frac{2^n}{n+1}.$$",
+  "image": null,
+  "choices": null,
+  "answer": "The balls $B_c(1)$, $c\\in C$ are disjoint, each of size $n+1$, inside the $2^n$ words.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Disjoint balls",
+    "body": "Suppose some word $w$ lay in $B_c(1)\\cap B_{c'}(1)$ with $c\\ne c'$. Then $\\delta(c,c')\\le\\delta(c,w)+\\delta(w,c')\\le2<3=d(C)$, a contradiction. So the $|C|$ balls $B_c(1)$ are pairwise disjoint.\n\nEach ball has $n+1$ words and all of them lie among the $2^n$ binary words of length $n$, so $(n+1)|C|\\le2^n$, i.e. $|C|\\le\\frac{2^n}{n+1}$. $\\blacksquare$"
+   }
+  ],
+  "topics": [
+   "counting",
+   "logic"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "bmt-2022-power-2-8a",
+  "bank": "bmt",
+  "source": {
+   "contest": "Berkeley Math Tournament",
+   "paper": "2022 Power Round (Error Correcting Codes)",
+   "year": 2022,
+   "number": 15,
+   "url": "https://berkeley.mt/archives/bmt-2022/power-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 1,
+  "timeMinutes": null,
+  "type": "text",
+  "prompt": "The XOR of two bits is $x\\oplus y=x+y\\bmod2$; for two strings of bits it is taken position by position (e.g. $1101\\oplus1011=0110$). Compute $110011\\oplus101101$.",
+  "image": null,
+  "choices": null,
+  "answer": "011110",
+  "acceptedAnswers": [
+   "11110"
+  ],
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Position by position",
+    "body": "$1\\oplus1=0$, $1\\oplus0=1$, $0\\oplus1=1$, $0\\oplus1=1$, $1\\oplus0=1$, $1\\oplus1=0$, so the result is $011110$.\n\n**Answer: 011110**"
+   }
+  ],
+  "topics": [
+   "arithmetic"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "bmt-2022-power-2-8b",
+  "bank": "bmt",
+  "source": {
+   "contest": "Berkeley Math Tournament",
+   "paper": "2022 Power Round (Error Correcting Codes)",
+   "year": 2022,
+   "number": 16,
+   "url": "https://berkeley.mt/archives/bmt-2022/power-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 1,
+  "timeMinutes": null,
+  "type": "text",
+  "prompt": "The XOR of two bits is $x\\oplus y=x+y\\bmod2$; for two strings of bits it is taken position by position (e.g. $1101\\oplus1011=0110$). Compute $10111011\\oplus10111100$.",
+  "image": null,
+  "choices": null,
+  "answer": "00000111",
+  "acceptedAnswers": [
+   "111"
+  ],
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Position by position",
+    "body": "The first five bits agree ($10111$), giving $00000$; the last three are $011\\oplus100=111$. So the result is $00000111$.\n\n**Answer: 00000111**"
+   }
+  ],
+  "topics": [
+   "arithmetic"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "bmt-2022-power-2-09",
+  "bank": "bmt",
+  "source": {
+   "contest": "Berkeley Math Tournament",
+   "paper": "2022 Power Round (Error Correcting Codes)",
+   "year": 2022,
+   "number": 17,
+   "url": "https://berkeley.mt/archives/bmt-2022/power-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 2,
+  "timeMinutes": null,
+  "type": "text",
+  "prompt": "The XOR of two bit strings of equal length is taken position by position ($x\\oplus y=x+y\\bmod2$ for bits). Compute the bit string $a$ such that $a\\oplus1110111=1110110$.",
+  "image": null,
+  "choices": null,
+  "answer": "0000001",
+  "acceptedAnswers": [
+   "1"
+  ],
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Use $x\\oplus x=0$",
+    "body": "XOR-ing both sides with $1110111$ gives $a=1110110\\oplus1110111=0000001$.\n\n**Answer: 0000001**"
+   }
+  ],
+  "topics": [
+   "arithmetic"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "bmt-2022-power-2-10",
+  "bank": "bmt",
+  "source": {
+   "contest": "Berkeley Math Tournament",
+   "paper": "2022 Power Round (Error Correcting Codes)",
+   "year": 2022,
+   "number": 18,
+   "url": "https://berkeley.mt/archives/bmt-2022/power-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 3,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "The $[7,4]$ Hamming code encodes a message $(x_1,x_2,x_3,x_4)\\in\\{0,1\\}^4$ as the codeword $E(x_1,x_2,x_3,x_4)=(x_1,x_2,x_3,x_4,p_1,p_2,p_3)$, where (with $\\oplus$ meaning addition mod $2$)\n$$p_1=x_2\\oplus x_3\\oplus x_4,\\quad p_2=x_1\\oplus x_3\\oplus x_4,\\quad p_3=x_1\\oplus x_2\\oplus x_4.$$\nLet $C$ be the set of all $16$ codewords.\n\nShow that if $x=(x_1,\\dots,x_7)$ and $y=(y_1,\\dots,y_7)$ are two codewords of $C$, then $x+y\\bmod2$ (their bitwise XOR) is also a codeword.",
+  "image": null,
+  "choices": null,
+  "answer": "The XOR of the codewords for $(x_1..x_4)$ and $(y_1..y_4)$ is the codeword for $(x_1\\oplus y_1,\\dots,x_4\\oplus y_4)$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Linearity of the parity bits",
+    "body": "Let $x=E(x_1,\\dots,x_4)$ with parity bits $p_i$ and $y=E(y_1,\\dots,y_4)$ with parity bits $q_i$. The first four bits of $x\\oplus y$ are $x_j\\oplus y_j$, i.e. the message $(x_1\\oplus y_1,\\dots,x_4\\oplus y_4)$. Its parity bit $r_1$ in the encoding is\n$$(x_2\\oplus y_2)\\oplus(x_3\\oplus y_3)\\oplus(x_4\\oplus y_4)=(x_2\\oplus x_3\\oplus x_4)\\oplus(y_2\\oplus y_3\\oplus y_4)=p_1\\oplus q_1,$$\nusing commutativity and associativity of $\\oplus$; the last three bits of $x\\oplus y$ are $p_1\\oplus q_1$, etc. The same computation works for $p_2\\oplus q_2$ and $p_3\\oplus q_3$. So $x\\oplus y$ is exactly the encoding of the XORed message, hence a codeword. $\\blacksquare$"
+   }
+  ],
+  "topics": [
+   "algebra",
+   "logic"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "bmt-2022-power-2-11",
+  "bank": "bmt",
+  "source": {
+   "contest": "Berkeley Math Tournament",
+   "paper": "2022 Power Round (Error Correcting Codes)",
+   "year": 2022,
+   "number": 19,
+   "url": "https://berkeley.mt/archives/bmt-2022/power-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 6,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "The $[7,4]$ Hamming code encodes a message $(x_1,x_2,x_3,x_4)\\in\\{0,1\\}^4$ as the codeword $E(x_1,x_2,x_3,x_4)=(x_1,x_2,x_3,x_4,p_1,p_2,p_3)$, where (with $\\oplus$ meaning addition mod $2$)\n$$p_1=x_2\\oplus x_3\\oplus x_4,\\quad p_2=x_1\\oplus x_3\\oplus x_4,\\quad p_3=x_1\\oplus x_2\\oplus x_4.$$\nLet $C$ be the set of all $16$ codewords.\n\nUsing additivity (the XOR of two codewords is a codeword), prove that for the $[7,4]$ Hamming code the minimum distance between two distinct codewords equals the minimum distance from a nonzero codeword to the all-zero word $\\mathbf 0$:\n$$d(C)=\\min_{c\\in C,\\,c\\ne\\mathbf0}\\delta(c,\\mathbf0).$$\n(Hint: $x-y=x+y$ when adding mod $2$.)",
+  "image": null,
+  "choices": null,
+  "answer": "$\\delta(c,c')$ equals the number of ones of $c\\oplus c'$, and $c\\oplus c'$ runs over exactly the nonzero codewords.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Distance equals weight of the XOR",
+    "body": "For bit strings, $c\\oplus c'$ has a $1$ exactly in the positions where $c$ and $c'$ differ, so $\\delta(c,c')=\\delta(c\\oplus c',\\mathbf0)$ (the number of $1$s in $c\\oplus c'$).\n\nHence $d(C)=\\min_{c\\ne c'}\\delta(c\\oplus c',\\mathbf0)$. By additivity (Question 2.10) each $c\\oplus c'$ is a codeword, and it is nonzero because $c\\ne c'$. Conversely, $\\mathbf0=E(0,0,0,0)\\in C$, so every nonzero codeword $c$ equals $c\\oplus\\mathbf0$ with $c\\neq\\mathbf0$. So the set $\\{c\\oplus c':c\\ne c'\\}$ is exactly the set of nonzero codewords, and\n$$d(C)=\\min_{c\\in C,\\,c\\ne\\mathbf0}\\delta(c,\\mathbf0).\\ \\blacksquare$$"
+   }
+  ],
+  "topics": [
+   "logic"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "bmt-2022-power-2-12",
+  "bank": "bmt",
+  "source": {
+   "contest": "Berkeley Math Tournament",
+   "paper": "2022 Power Round (Error Correcting Codes)",
+   "year": 2022,
+   "number": 20,
+   "url": "https://berkeley.mt/archives/bmt-2022/power-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 6,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "The $[7,4]$ Hamming code encodes a message $(x_1,x_2,x_3,x_4)\\in\\{0,1\\}^4$ as the codeword $E(x_1,x_2,x_3,x_4)=(x_1,x_2,x_3,x_4,p_1,p_2,p_3)$, where (with $\\oplus$ meaning addition mod $2$)\n$$p_1=x_2\\oplus x_3\\oplus x_4,\\quad p_2=x_1\\oplus x_3\\oplus x_4,\\quad p_3=x_1\\oplus x_2\\oplus x_4.$$\nLet $C$ be the set of all $16$ codewords.\n\nThink of the seven bits of a codeword as seven lights, on when the bit is $1$. Starting from the all-zero codeword, flip one or two of the message bits $x_1,\\dots,x_4$ to $1$ and let the parity bits follow from the encoding rule. Show that at least three lights are on in each case.",
+  "image": null,
+  "choices": null,
+  "answer": "One message bit gives $3$ or $4$ lights; two message bits give $3$ or $4$ lights.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Case analysis",
+    "body": "Parity $p_1$ involves $\\{x_2,x_3,x_4\\}$, $p_2$ involves $\\{x_1,x_3,x_4\\}$, $p_3$ involves $\\{x_1,x_2,x_4\\}$. A parity bit is $1$ exactly when it contains an odd number of the flipped message bits.\n\n**One message bit flipped.** $x_1$: $p_2,p_3$ turn on, total $3$ lights. $x_2$: $p_1,p_3$, total $3$. $x_3$: $p_1,p_2$, total $3$. $x_4$: $p_1,p_2,p_3$, total $4$.\n\n**Two message bits flipped** (two message lights are already on; count parities containing exactly one of the two):\n\n| pair | parities on | lights |\n|---|---|---|\n| $x_1,x_2$ | $p_1,p_2$ | 4 |\n| $x_1,x_3$ | $p_1,p_3$ | 4 |\n| $x_1,x_4$ | $p_1$ | 3 |\n| $x_2,x_3$ | $p_2,p_3$ | 4 |\n| $x_2,x_4$ | $p_2$ | 3 |\n| $x_3,x_4$ | $p_3$ | 3 |\n\nIn every case at least three lights are on. $\\blacksquare$"
+   }
+  ],
+  "topics": [
+   "logic",
+   "counting"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "bmt-2022-power-2-13",
+  "bank": "bmt",
+  "source": {
+   "contest": "Berkeley Math Tournament",
+   "paper": "2022 Power Round (Error Correcting Codes)",
+   "year": 2022,
+   "number": 21,
+   "url": "https://berkeley.mt/archives/bmt-2022/power-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 4,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "The $[7,4]$ Hamming code encodes a message $(x_1,x_2,x_3,x_4)\\in\\{0,1\\}^4$ as the codeword $E(x_1,x_2,x_3,x_4)=(x_1,x_2,x_3,x_4,p_1,p_2,p_3)$, where (with $\\oplus$ meaning addition mod $2$)\n$$p_1=x_2\\oplus x_3\\oplus x_4,\\quad p_2=x_1\\oplus x_3\\oplus x_4,\\quad p_3=x_1\\oplus x_2\\oplus x_4.$$\nLet $C$ be the set of all $16$ codewords.\n\nProve that the minimum distance of the $[7,4]$ Hamming code is $d(C)=3$. (Hint: use Question 2.11, so it suffices to study nonzero codewords. For $d(C)\\ge3$ separate the cases of one, two, and three or more message bits equal to $1$. For $d(C)=3$ find a codeword at distance exactly $3$ from $\\mathbf0$.)",
+  "image": null,
+  "choices": null,
+  "answer": "Every nonzero codeword has weight $\\ge3$, and $E(1,0,0,0)=(1,0,0,0,0,1,1)$ has weight exactly $3$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Weights of nonzero codewords",
+    "body": "By Question 2.11 it suffices to find the minimum number of $1$s over nonzero codewords. A nonzero codeword has at least one message bit equal to $1$.\n\n- If exactly one or two message bits are $1$, at least three bits of the codeword are $1$ by Question 2.12.\n- If three or more message bits are $1$, the message bits alone give weight $\\ge3$.\n\nSo every nonzero codeword has weight $\\ge3$, hence $d(C)\\ge3$. The codeword $E(1,0,0,0)=(1,0,0,0,0,1,1)$ has weight exactly $3$, so $d(C)=3$. $\\blacksquare$"
+   }
+  ],
+  "topics": [
+   "logic"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "bmt-2022-power-2-14",
+  "bank": "bmt",
+  "source": {
+   "contest": "Berkeley Math Tournament",
+   "paper": "2022 Power Round (Error Correcting Codes)",
+   "year": 2022,
+   "number": 22,
+   "url": "https://berkeley.mt/archives/bmt-2022/power-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 4,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "The $[7,4]$ Hamming code encodes a message $(x_1,x_2,x_3,x_4)\\in\\{0,1\\}^4$ as the codeword $E(x_1,x_2,x_3,x_4)=(x_1,x_2,x_3,x_4,p_1,p_2,p_3)$, where (with $\\oplus$ meaning addition mod $2$)\n$$p_1=x_2\\oplus x_3\\oplus x_4,\\quad p_2=x_1\\oplus x_3\\oplus x_4,\\quad p_3=x_1\\oplus x_2\\oplus x_4.$$\nLet $C$ be the set of all $16$ codewords.\n\nThe Hamming bound says a binary code of length $n$ and distance $3$ has $|C|\\le\\frac{2^n}{n+1}$. Prove that the $[7,4]$ Hamming code (which has distance $3$) achieves this bound, i.e. $|C|=\\frac{2^7}{7+1}$.",
+  "image": null,
+  "choices": null,
+  "answer": "$|C|=2^4=16=2^7/8$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Count codewords",
+    "body": "Different messages give different codewords (the first four bits are the message), so $|C|=2^4=16$. With $n=7$: $\\frac{2^7}{7+1}=\\frac{128}{8}=16=|C|$. Together with $d(C)=3$ (Question 2.13), the code attains the Hamming bound. $\\blacksquare$"
+   }
+  ],
+  "topics": [
+   "counting"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "bmt-2022-power-3-01",
+  "bank": "bmt",
+  "source": {
+   "contest": "Berkeley Math Tournament",
+   "paper": "2022 Power Round (Error Correcting Codes)",
+   "year": 2022,
+   "number": 23,
+   "url": "https://berkeley.mt/archives/bmt-2022/power-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 5,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Let $C$ be a code of length $n$ over an alphabet $\\Sigma$ with minimum distance $d$, and define its *dimension* as $k=\\log_{|\\Sigma|}|C|$.\n\nLet $c_1\\ne c_2$ be two distinct codewords. Prove that their prefixes of length $n-d+1$ are different (i.e. $c_1,c_2$ do not agree in their first $n-d+1$ characters).",
+  "image": null,
+  "choices": null,
+  "answer": "Agreeing in the first $n-d+1$ places would force $\\delta(c_1,c_2)\\le d-1$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Few remaining positions",
+    "body": "Suppose $c_1\\ne c_2$ agree in their first $n-d+1$ characters. Then they can differ only in the remaining $n-(n-d+1)=d-1$ positions, so $\\delta(c_1,c_2)\\le d-1<d$, contradicting that $C$ has minimum distance $d$. $\\blacksquare$"
+   }
+  ],
+  "topics": [
+   "logic"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "bmt-2022-power-3-02",
+  "bank": "bmt",
+  "source": {
+   "contest": "Berkeley Math Tournament",
+   "paper": "2022 Power Round (Error Correcting Codes)",
+   "year": 2022,
+   "number": 24,
+   "url": "https://berkeley.mt/archives/bmt-2022/power-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 5,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Let $C$ be a code of length $n$ over an alphabet $\\Sigma$ with minimum distance $d$, and define its *dimension* as $k=\\log_{|\\Sigma|}|C|$.\n\nProve the *Singleton bound*: $k\\le n-d+1$.",
+  "image": null,
+  "choices": null,
+  "answer": "Codewords have distinct prefixes of length $n-d+1$, so $|C|\\le|\\Sigma|^{n-d+1}$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Pigeonhole on prefixes",
+    "body": "By Question 3.1 the map sending a codeword to its prefix of length $n-d+1$ is injective, and there are only $|\\Sigma|^{n-d+1}$ possible prefixes. So $|C|\\le|\\Sigma|^{n-d+1}$, hence $k=\\log_{|\\Sigma|}|C|\\le n-d+1$. $\\blacksquare$"
+   }
+  ],
+  "topics": [
+   "logic",
+   "counting"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "bmt-2022-power-3-03",
+  "bank": "bmt",
+  "source": {
+   "contest": "Berkeley Math Tournament",
+   "paper": "2022 Power Round (Error Correcting Codes)",
+   "year": 2022,
+   "number": 25,
+   "url": "https://berkeley.mt/archives/bmt-2022/power-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 4,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Two polynomials $A,B$ with integer coefficients are *equivalent modulo $p$* if $A-B=p\\cdot C$ for some polynomial $C$ with integer coefficients. Show that two polynomials with integer coefficients are equivalent modulo $p$ if and only if, for every $i$, the coefficients of $x^i$ in the two polynomials are congruent modulo $p$.",
+  "image": null,
+  "choices": null,
+  "answer": "Compare coefficients of $A-B=pC$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Both directions",
+    "body": "Write $A=\\sum a_ix^i$, $B=\\sum b_ix^i$ (padding with zero coefficients to the same length).\n\n($\\Rightarrow$) If $A-B=pC$ with $C=\\sum c_ix^i$ having integer coefficients, then comparing coefficients of $x^i$ gives $a_i-b_i=pc_i$, so $a_i\\equiv b_i\\pmod p$ for all $i$.\n\n($\\Leftarrow$) If $a_i\\equiv b_i\\pmod p$ for all $i$, then $a_i-b_i=pc_i$ for integers $c_i$. Taking $C=\\sum c_ix^i$ we get $A-B=pC$. $\\blacksquare$"
+   }
+  ],
+  "topics": [
+   "polynomials",
+   "algebra"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "bmt-2022-power-3-04",
+  "bank": "bmt",
+  "source": {
+   "contest": "Berkeley Math Tournament",
+   "paper": "2022 Power Round (Error Correcting Codes)",
+   "year": 2022,
+   "number": 26,
+   "url": "https://berkeley.mt/archives/bmt-2022/power-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 3,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Throughout, $p$ is a prime, a *polynomial* means a polynomial with coefficients taken modulo $p$, $\\deg$ is its degree (the zero polynomial has degree $-1$), and a *root* is a $t\\in\\{0,1,\\dots,p-1\\}$ with $P(t)\\equiv0\\pmod p$.\n\nLet $D>0$ be an integer and $x_1,\\dots,x_D$ distinct elements of $\\{0,\\dots,p-1\\}$. Find a polynomial of degree $D$ with roots $x_1,\\dots,x_D$ (all distinct).",
+  "image": null,
+  "choices": null,
+  "answer": "$P(x)=\\prod_{i=1}^D(x-x_i)$",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Product of linear factors",
+    "body": "Take $P(x)=\\prod_{i=1}^{D}(x-x_i)$. It is monic of degree $D$ (the leading coefficient is $1\\ne0\\bmod p$) and $P(x_j)=0$ for each $j$. The roots $x_1,\\dots,x_D$ are distinct by assumption.\n\n**Answer: $P(x)=(x-x_1)(x-x_2)\\cdots(x-x_D)$**"
+   }
+  ],
+  "topics": [
+   "polynomials"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "bmt-2022-power-3-05",
+  "bank": "bmt",
+  "source": {
+   "contest": "Berkeley Math Tournament",
+   "paper": "2022 Power Round (Error Correcting Codes)",
+   "year": 2022,
+   "number": 27,
+   "url": "https://berkeley.mt/archives/bmt-2022/power-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 3,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Throughout, $p$ is a prime, a *polynomial* means a polynomial with coefficients taken modulo $p$, $\\deg$ is its degree (the zero polynomial has degree $-1$), and a *root* is a $t\\in\\{0,1,\\dots,p-1\\}$ with $P(t)\\equiv0\\pmod p$.\n\nShow that for any two nonzero polynomials $P(x)$ and $Q(x)$, $\\deg(PQ)=\\deg P+\\deg Q$. (Here the arithmetic of coefficients is modulo the prime $p$.)",
+  "image": null,
+  "choices": null,
+  "answer": "The leading coefficient of $PQ$ is the product of the leading coefficients, which is nonzero mod $p$ because $p$ is prime.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Leading terms",
+    "body": "Let $P=\\sum_{i=0}^{D_1}a_ix^i$, $Q=\\sum_{j=0}^{D_2}b_jx^j$ with $a_{D_1}\\not\\equiv0$, $b_{D_2}\\not\\equiv0\\pmod p$. Then $PQ=a_{D_1}b_{D_2}x^{D_1+D_2}+(\\text{terms of lower degree})$. Since $p$ is prime and $p\\nmid a_{D_1}$, $p\\nmid b_{D_2}$, we have $p\\nmid a_{D_1}b_{D_2}$. So the coefficient of $x^{D_1+D_2}$ is nonzero mod $p$ and $\\deg PQ=D_1+D_2$. $\\blacksquare$"
+   }
+  ],
+  "topics": [
+   "polynomials"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "bmt-2022-power-3-06",
+  "bank": "bmt",
+  "source": {
+   "contest": "Berkeley Math Tournament",
+   "paper": "2022 Power Round (Error Correcting Codes)",
+   "year": 2022,
+   "number": 28,
+   "url": "https://berkeley.mt/archives/bmt-2022/power-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 5,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Throughout, $p$ is a prime, a *polynomial* means a polynomial with coefficients taken modulo $p$, $\\deg$ is its degree (the zero polynomial has degree $-1$), and a *root* is a $t\\in\\{0,1,\\dots,p-1\\}$ with $P(t)\\equiv0\\pmod p$.\n\nYou may use the division theorem: for nonzero polynomials $A,B$ there are polynomials $Q,R$ with $A=BQ+R$ and $\\deg R<\\deg B$. Show that if $t$ is a root of a polynomial $P(x)$, then $(x-t)$ divides $P(x)$.",
+  "image": null,
+  "choices": null,
+  "answer": "Divide $P$ by $x-t$; the remainder is a constant equal to $P(t)=0$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Division by $x-t$",
+    "body": "Divide: $P(x)=(x-t)Q(x)+R(x)$ with $\\deg R<\\deg(x-t)=1$, so $R$ is a constant $r$ (possibly $0$). Evaluating at $x=t$: $0=P(t)=(t-t)Q(t)+r=r$. So $R=0$ and $P(x)=(x-t)Q(x)$, i.e. $(x-t)\\mid P(x)$. $\\blacksquare$"
+   }
+  ],
+  "topics": [
+   "polynomials"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "bmt-2022-power-3-07",
+  "bank": "bmt",
+  "source": {
+   "contest": "Berkeley Math Tournament",
+   "paper": "2022 Power Round (Error Correcting Codes)",
+   "year": 2022,
+   "number": 29,
+   "url": "https://berkeley.mt/archives/bmt-2022/power-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 5,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Throughout, $p$ is a prime, a *polynomial* means a polynomial with coefficients taken modulo $p$, $\\deg$ is its degree (the zero polynomial has degree $-1$), and a *root* is a $t\\in\\{0,1,\\dots,p-1\\}$ with $P(t)\\equiv0\\pmod p$.\n\nUsing the facts $\\deg(PQ)=\\deg P+\\deg Q$ (Question 3.5) and that $(x-t)\\mid P(x)$ when $t$ is a root (Question 3.6), prove that a polynomial of degree $D\\ge0$ has at most $D$ distinct roots.",
+  "image": null,
+  "choices": null,
+  "answer": "Induct on $D$, factoring out $x-t$ for a root $t$ and using that $p$ is prime.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Induction on the degree",
+    "body": "*Base $D=0$:* a nonzero constant has no roots.\n\n*Step:* suppose every polynomial of degree $D-1$ has at most $D-1$ roots, and let $P$ have degree $D\\ge1$. If $P$ has no roots we are done. Otherwise let $t$ be a root; by Question 3.6, $P(x)=(x-t)Q(x)$, and by Question 3.5 $\\deg Q=D-1$. If $s\\ne t$ is another root of $P$, then $0=P(s)=(s-t)Q(s)$ with $s-t\\not\\equiv0\\pmod p$; since $p$ is prime, $Q(s)\\equiv0$. So every root of $P$ other than $t$ is a root of $Q$, and $Q$ has at most $D-1$ roots by the induction hypothesis. Hence $P$ has at most $1+(D-1)=D$ roots. $\\blacksquare$"
+   }
+  ],
+  "topics": [
+   "polynomials",
+   "logic"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "bmt-2022-power-3-08",
+  "bank": "bmt",
+  "source": {
+   "contest": "Berkeley Math Tournament",
+   "paper": "2022 Power Round (Error Correcting Codes)",
+   "year": 2022,
+   "number": 30,
+   "url": "https://berkeley.mt/archives/bmt-2022/power-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 6,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Throughout, $p$ is a prime, a *polynomial* means a polynomial with coefficients taken modulo $p$, $\\deg$ is its degree (the zero polynomial has degree $-1$), and a *root* is a $t\\in\\{0,1,\\dots,p-1\\}$ with $P(t)\\equiv0\\pmod p$.\n\nLet $x_1,\\dots,x_D$ be distinct elements of $\\{0,\\dots,p-1\\}$ and $y_1,\\dots,y_D$ arbitrary (not necessarily distinct) values. Prove that there is at most one polynomial $P$ of degree at most $D-1$ modulo $p$ with $P(x_i)=y_i$ for all $1\\le i\\le D$.",
+  "image": null,
+  "choices": null,
+  "answer": "The difference of two such polynomials has degree $\\le D-1$ and $D$ roots, so it is zero.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Difference has too many roots",
+    "body": "Suppose $P$ and $Q$ both have degree at most $D-1$ and $P(x_i)=Q(x_i)=y_i$ for all $i$. Then $P-Q$ has degree at most $D-1$ and has the $D$ distinct roots $x_1,\\dots,x_D$. By Question 3.7 a nonzero polynomial of degree at most $D-1$ has at most $D-1$ roots, so $P-Q$ must be the zero polynomial: $P=Q$. $\\blacksquare$"
+   }
+  ],
+  "topics": [
+   "polynomials",
+   "logic"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "bmt-2022-power-3-09",
+  "bank": "bmt",
+  "source": {
+   "contest": "Berkeley Math Tournament",
+   "paper": "2022 Power Round (Error Correcting Codes)",
+   "year": 2022,
+   "number": 31,
+   "url": "https://berkeley.mt/archives/bmt-2022/power-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 8,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Let $p$ be a **composite** number and work with polynomials with coefficients modulo $p$. Show that the uniqueness statement of Question 3.8 is false: there exist distinct integers $x_1,\\dots,x_D$ in $\\{0,\\dots,p-1\\}$ and values $y_1,\\dots,y_D$ such that two *different* polynomials of degree $D-1$ modulo $p$ satisfy $P(x_i)=y_i$ for all $i$.",
+  "image": null,
+  "choices": null,
+  "answer": "Take $p=ab$, $D=2$, points $x=0,a$ with value $0$, and $P=x$, $Q=(1+b)x$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Explicit counterexample with $D=2$",
+    "body": "Write $p=ab$ with $1<a,b<p$ (so $2\\le b\\le p/2$). Take $D=2$, $x_1=0$, $x_2=a$ (distinct mod $p$ since $0<a<p$), and consider the two degree-$1$ polynomials\n$$P(x)=x,\\qquad Q(x)=(1+b)x.$$\nBoth have degree exactly $1$: the coefficient $1+b$ satisfies $3\\le1+b\\le p/2+1<p$ (as $p\\ge4$), so it is nonzero mod $p$. They are different: $Q-P=bx\\not\\equiv0$ since $0<b<p$. They agree at both points: $P(0)=Q(0)=0$, and $Q(a)-P(a)=ba=p\\equiv0$, so $P(a)=Q(a)$.\n\nSo two different polynomials of degree $D-1=1$ take the same values at $x_1,x_2$, and uniqueness fails for every composite $p$. $\\blacksquare$"
+   }
+  ],
+  "topics": [
+   "polynomials",
+   "number-theory"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "bmt-2022-power-3-10",
+  "bank": "bmt",
+  "source": {
+   "contest": "Berkeley Math Tournament",
+   "paper": "2022 Power Round (Error Correcting Codes)",
+   "year": 2022,
+   "number": 32,
+   "url": "https://berkeley.mt/archives/bmt-2022/power-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 3,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "In the Reed–Solomon scheme over the alphabet $\\{0,1,\\dots,p-1\\}$ ($p$ prime), a message $m_1\\cdots m_k$ is encoded by finding the polynomial $P$ modulo $p$ of degree at most $k-1$ with $P(i)=m_i$ for $1\\le i\\le k$, and sending the $a$ values $P(1),P(2),\\dots,P(a)$ ($a\\ge k$). Such a polynomial exists and is unique (Lagrange interpolation, Question 3.8).\n\nAlice wants to send the message $(1,10,3)$ to Bob so that he can recover it despite up to $2$ erasures. They work modulo $p=11$. Find the encoded message Alice sends, assuming she sends the minimum number of values needed for Bob to always decode.",
+  "image": null,
+  "choices": null,
+  "answer": "$(1,10,3,2,7)$",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Interpolate and extend",
+    "body": "With $k=3$ message symbols and up to $s=2$ erasures Alice must send $a=k+s=5$ values, so that at least $3$ always survive.\n\nThe degree-$\\le2$ polynomial through $(1,1),(2,10),(3,3)$ modulo $11$ is $P(x)=3x^2+9$: indeed $P(1)=12\\equiv1$, $P(2)=21\\equiv10$, $P(3)=36\\equiv3$. Then $P(4)=57\\equiv2$ and $P(5)=84\\equiv7\\pmod{11}$.\n\n**Answer: $(1,10,3,2,7)$**"
+   }
+  ],
+  "topics": [
+   "polynomials",
+   "number-theory"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "bmt-2022-power-3-11",
+  "bank": "bmt",
+  "source": {
+   "contest": "Berkeley Math Tournament",
+   "paper": "2022 Power Round (Error Correcting Codes)",
+   "year": 2022,
+   "number": 33,
+   "url": "https://berkeley.mt/archives/bmt-2022/power-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 3,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "In the Reed–Solomon scheme over the alphabet $\\{0,1,\\dots,p-1\\}$ ($p$ prime), a message $m_1\\cdots m_k$ is encoded by finding the polynomial $P$ modulo $p$ of degree at most $k-1$ with $P(i)=m_i$ for $1\\le i\\le k$, and sending the $a$ values $P(1),P(2),\\dots,P(a)$ ($a\\ge k$). Such a polynomial exists and is unique (Lagrange interpolation, Question 3.8).\n\nNow suppose characters are *corrupted* (replaced by other values) instead of erased. If Alice sends $k+s$ values and up to $s$ may be corrupted, this is not enough for Bob to always recover the message. Find an example demonstrating this for $k=2$ and $s=1$ (work modulo $p=11$).",
+  "image": null,
+  "choices": null,
+  "answer": "Messages $(1,2)$ and $(1,3)$ give codewords $(1,2,3)$ and $(1,3,5)$; the received word $(1,2,5)$ is one corruption from either.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Two codewords at distance 2",
+    "body": "Take $p=11$, $k=2$, $s=1$, so Alice sends $3$ values.\n\n- Message $(1,2)$: $P(x)=x$, sent word $(1,2,3)$.\n- Message $(1,3)$: $P'(x)=2x-1$, sent word $(1,3,5)$.\n\nThese two codewords differ in exactly $2$ positions. If the channel produces $(1,2,5)$, this can come from $(1,2,3)$ (third value corrupted) or from $(1,3,5)$ (second value corrupted). Bob cannot tell which message was sent, so one corruption cannot be corrected with only $k+s=3$ values. $\\blacksquare$"
+   }
+  ],
+  "topics": [
+   "polynomials",
+   "logic"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "bmt-2022-power-3-12",
+  "bank": "bmt",
+  "source": {
+   "contest": "Berkeley Math Tournament",
+   "paper": "2022 Power Round (Error Correcting Codes)",
+   "year": 2022,
+   "number": 34,
+   "url": "https://berkeley.mt/archives/bmt-2022/power-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 5,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "In the Reed–Solomon scheme over the alphabet $\\{0,1,\\dots,p-1\\}$ ($p$ prime), a message $m_1\\cdots m_k$ is encoded by finding the polynomial $P$ modulo $p$ of degree at most $k-1$ with $P(i)=m_i$ for $1\\le i\\le k$, and sending the $a$ values $P(1),P(2),\\dots,P(a)$ ($a\\ge k$). Such a polynomial exists and is unique (Lagrange interpolation, Question 3.8).\n\nSuppose at most $s$ of the sent values are corrupted, so Bob receives $r_i$ with $r_i=P(i)$ except at the corrupted positions $e_1,\\dots,e_s$ (if fewer than $s$ positions are corrupted, add arbitrary extra positions from $\\{1,\\dots,a\\}$ so that exactly $s$ positions are listed). The *error-locating polynomial* is $E(x)=(x-e_1)\\cdots(x-e_s)$.\n\nProve that $P(i)E(i)=r_iE(i)$ for all $1\\le i\\le a$.",
+  "image": null,
+  "choices": null,
+  "answer": "If $i$ is a listed position then $E(i)=0$; otherwise $r_i=P(i)$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Two cases",
+    "body": "If $i\\in\\{e_1,\\dots,e_s\\}$ then $E(i)=0$, so both sides are $0$. Otherwise position $i$ is not corrupted, so $r_i=P(i)$ and both sides are equal. $\\blacksquare$"
+   }
+  ],
+  "topics": [
+   "polynomials",
+   "logic"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "bmt-2022-power-3-13",
+  "bank": "bmt",
+  "source": {
+   "contest": "Berkeley Math Tournament",
+   "paper": "2022 Power Round (Error Correcting Codes)",
+   "year": 2022,
+   "number": 35,
+   "url": "https://berkeley.mt/archives/bmt-2022/power-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 9,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "In the Reed–Solomon scheme over the alphabet $\\{0,1,\\dots,p-1\\}$ ($p$ prime), a message $m_1\\cdots m_k$ is encoded by finding the polynomial $P$ modulo $p$ of degree at most $k-1$ with $P(i)=m_i$ for $1\\le i\\le k$, and sending the $a$ values $P(1),P(2),\\dots,P(a)$ ($a\\ge k$). Such a polynomial exists and is unique (Lagrange interpolation, Question 3.8).\n\nSuppose at most $s$ of the sent values are corrupted, so Bob receives $r_i$ with $r_i=P(i)$ except at the corrupted positions $e_1,\\dots,e_s$ (if fewer than $s$ positions are corrupted, add arbitrary extra positions from $\\{1,\\dots,a\\}$ so that exactly $s$ positions are listed). The *error-locating polynomial* is $E(x)=(x-e_1)\\cdots(x-e_s)$.\n\nLet Alice send $a=k+2s$ values. Put $Q(x)=P(x)E(x)$. Show that Bob can determine polynomials $Q$ and $E$ (and in fact the message) from the $k+2s$ received values $r_1,\\dots,r_{k+2s}$. (Hint: consider the degrees of the polynomials, and count unknowns.)",
+  "image": null,
+  "choices": null,
+  "answer": "$E$ monic of degree $s$ and $Q$ of degree $\\le k+s-1$ give $k+2s$ unknown coefficients and $k+2s$ linear equations $Q(i)=r_iE(i)$, which have the true $(Q,E)$ as a solution; any solution gives the same $P=Q/E$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Linear system",
+    "body": "$E$ is monic of degree $s$, so it has $s$ unknown coefficients; $Q=PE$ has degree $\\le(k-1)+s$, so it has $k+s$ unknown coefficients. Together there are $k+2s$ unknowns.\n\nBy Question 3.12, $Q(i)=r_iE(i)$ for $i=1,\\dots,k+2s$: these are $k+2s$ equations, **linear** in the unknown coefficients (since the $r_i$ are known to Bob). The true polynomials $(Q,E)$ solve the system, so a solution exists, and Bob finds one by solving the system modulo $p$.\n\nAny solution $(Q',E')$ (with $E'$ monic of degree $s$, $\\deg Q'\\le k+s-1$) yields the same message. Indeed at each of the at least $k+s$ uncorrupted positions $i$ we have $Q'(i)=r_iE'(i)=P(i)E'(i)$, so $Q'-PE'$ has degree $\\le k+s-1$ and at least $k+s$ roots, hence is the zero polynomial (Question 3.7). Thus $Q'=PE'$ and $P=Q'/E'$. $\\blacksquare$"
+   }
+  ],
+  "topics": [
+   "polynomials",
+   "linear-algebra"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "bmt-2022-power-3-14",
+  "bank": "bmt",
+  "source": {
+   "contest": "Berkeley Math Tournament",
+   "paper": "2022 Power Round (Error Correcting Codes)",
+   "year": 2022,
+   "number": 36,
+   "url": "https://berkeley.mt/archives/bmt-2022/power-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 2,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "In the Reed–Solomon scheme over the alphabet $\\{0,1,\\dots,p-1\\}$ ($p$ prime), a message $m_1\\cdots m_k$ is encoded by finding the polynomial $P$ modulo $p$ of degree at most $k-1$ with $P(i)=m_i$ for $1\\le i\\le k$, and sending the $a$ values $P(1),P(2),\\dots,P(a)$ ($a\\ge k$). Such a polynomial exists and is unique (Lagrange interpolation, Question 3.8).\n\nSuppose at most $s$ of the sent values are corrupted, so Bob receives $r_i$ with $r_i=P(i)$ except at the corrupted positions $e_1,\\dots,e_s$ (if fewer than $s$ positions are corrupted, add arbitrary extra positions from $\\{1,\\dots,a\\}$ so that exactly $s$ positions are listed). The *error-locating polynomial* is $E(x)=(x-e_1)\\cdots(x-e_s)$.\n\nSuppose Bob has found $Q(x)=P(x)E(x)$ and $E(x)$. How can he recover $P$?",
+  "image": null,
+  "choices": null,
+  "answer": "$P=Q/E$ (polynomial division).",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Divide",
+    "body": "Since $Q=PE$ and $E\\ne0$, Bob computes $P=Q/E$ by polynomial division (the division is exact), then reads off the message $P(1),\\dots,P(k)$.\n\n**Answer: $P=Q/E$**"
+   }
+  ],
+  "topics": [
+   "polynomials"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "bmt-2022-power-3-15",
+  "bank": "bmt",
+  "source": {
+   "contest": "Berkeley Math Tournament",
+   "paper": "2022 Power Round (Error Correcting Codes)",
+   "year": 2022,
+   "number": 37,
+   "url": "https://berkeley.mt/archives/bmt-2022/power-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 4,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "In the Reed–Solomon scheme over the alphabet $\\{0,1,\\dots,p-1\\}$ ($p$ prime), a message $m_1\\cdots m_k$ is encoded by finding the polynomial $P$ modulo $p$ of degree at most $k-1$ with $P(i)=m_i$ for $1\\le i\\le k$, and sending the $a$ values $P(1),P(2),\\dots,P(a)$ ($a\\ge k$). Such a polynomial exists and is unique (Lagrange interpolation, Question 3.8).\n\nSuppose at most $s$ of the sent values are corrupted, so Bob receives $r_i$ with $r_i=P(i)$ except at the corrupted positions $e_1,\\dots,e_s$ (if fewer than $s$ positions are corrupted, add arbitrary extra positions from $\\{1,\\dots,a\\}$ so that exactly $s$ positions are listed). The *error-locating polynomial* is $E(x)=(x-e_1)\\cdots(x-e_s)$.\n\nAlice sends a length-$3$ message modulo $p=29$, knowing that at most $1$ corruption occurs, so she sends $3+2=5$ values. Bob receives $(2,6,12,17,1)$. What message did Alice send?",
+  "image": null,
+  "choices": null,
+  "answer": "$(2,6,12)$",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Berlekamp–Welch",
+    "body": "Here $k=3$, $s=1$, $E(x)=x-e$, and $Q$ has degree $\\le3$: $Q(x)=ax^3+bx^2+cx+d$. The conditions $Q(i)=r_i(i-e)$ for $i=1,\\dots,5$ form a linear system in $(a,b,c,d,e)$; over $\\mathbb F_{29}$ its solution is $Q(x)=x^3+26x^2+25x$ (i.e. $x^3-3x^2-4x$) and $E(x)=x-4$. Then $P(x)=\\frac{Q(x)}{E(x)}=x^2+x$ since $(x^2+x)(x-4)=x^3-3x^2-4x$.\n\nCheck: $P(1)=2$, $P(2)=6$, $P(3)=12$, $P(4)=20$, $P(5)=30\\equiv1$. These agree with the received values $(2,6,12,17,1)$ except at position $4$ ($17\\ne20$), exactly one corruption, so $P$ is right. The message is $(P(1),P(2),P(3))=(2,6,12)$.\n\n**Answer: $(2,6,12)$**"
+   },
+   {
+    "title": "Direct check by trying one corruption",
+    "body": "With at most one corruption, some $3$ of the $5$ received points lie on $P$ of degree $\\le2$, and in fact $4$ of $5$ do. The points $(1,2),(2,6),(3,12)$ determine $P(x)=x^2+x$ (differences $4,6$, second difference $2$), and it also fits $(5,1)$ modulo $29$ since $30\\equiv1$. It fails only at $x=4$ ($20$ vs. $17$). No other degree-$\\le2$ polynomial fits $4$ of the $5$ points (two such polynomials would agree in $\\ge3$ points, hence be equal), so the message is $(2,6,12)$.\n\n**Answer: $(2,6,12)$**"
+   }
+  ],
+  "topics": [
+   "polynomials",
+   "number-theory"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "bmt-2022-power-3-16",
+  "bank": "bmt",
+  "source": {
+   "contest": "Berkeley Math Tournament",
+   "paper": "2022 Power Round (Error Correcting Codes)",
+   "year": 2022,
+   "number": 38,
+   "url": "https://berkeley.mt/archives/bmt-2022/power-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 8,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "In the Reed–Solomon scheme over the alphabet $\\{0,1,\\dots,p-1\\}$ ($p$ prime), a message $m_1\\cdots m_k$ is encoded by finding the polynomial $P$ modulo $p$ of degree at most $k-1$ with $P(i)=m_i$ for $1\\le i\\le k$, and sending the $a$ values $P(1),P(2),\\dots,P(a)$ ($a\\ge k$). Such a polynomial exists and is unique (Lagrange interpolation, Question 3.8).\n\nTake $a=k+2s$ with $a<p$, so the code (the set of all sequences $(P(1),\\dots,P(a))$ for polynomials of degree $\\le k-1$) has length $n=k+2s$ and $p^k$ codewords (Question 3.8). Prove that its minimum distance is $d=2s+1$, and deduce that it achieves the Singleton bound $k=n-d+1$.",
+  "image": null,
+  "choices": null,
+  "answer": "Two distinct polynomials of degree $\\le k-1$ agree at $\\le k-1$ points, so codewords differ in $\\ge n-(k-1)=2s+1$ places; $P=0$ and $\\prod_{j<k}(x-j)$ differ in exactly $2s+1$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Lower and upper bound on $d$",
+    "body": "**$d\\ge2s+1$.** Let $c\\ne c'$ be codewords from distinct polynomials $P\\ne P'$ of degree $\\le k-1$. Then $P-P'$ is a nonzero polynomial of degree $\\le k-1$, so it has at most $k-1$ roots (Question 3.7). Thus $P(i)=P'(i)$ for at most $k-1$ values of $i\\in\\{1,\\dots,k+2s\\}$, so $c,c'$ differ in at least $(k+2s)-(k-1)=2s+1$ positions.\n\n**$d\\le2s+1$.** Take $P=0$ and $P'(x)=\\prod_{j=1}^{k-1}(x-j)$ (degree $k-1$). They agree at $x=1,\\dots,k-1$. For $i=k,\\dots,k+2s$ we have $P'(i)=\\prod_{j=1}^{k-1}(i-j)$ where each factor lies in $[1,k+2s-1]\\subset[1,p-1]$, hence is nonzero mod $p$; the product is nonzero since $p$ is prime. So the two codewords differ in exactly $(k+2s)-(k-1)=2s+1$ positions.\n\nHence $d=2s+1$. The code has length $n=k+2s$ and dimension $\\log_p(p^k)=k$, so $n-d+1=(k+2s)-(2s+1)+1=k$: the Singleton bound $k\\le n-d+1$ holds with equality. $\\blacksquare$"
+   }
+  ],
+  "topics": [
+   "polynomials",
+   "logic"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "bmt-2022-power-4-01",
+  "bank": "bmt",
+  "source": {
+   "contest": "Berkeley Math Tournament",
+   "paper": "2022 Power Round (Error Correcting Codes)",
+   "year": 2022,
+   "number": 39,
+   "url": "https://berkeley.mt/archives/bmt-2022/power-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 4,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Let $\\mathbf 0=(0,\\dots,0)$ be the all-zero word of length $n$ over $\\{0,1\\}$. Find the number of binary words of length $n$ with Hamming distance at most $r$ from $\\mathbf0$. You may write your answer as a sum.",
+  "image": null,
+  "choices": null,
+  "answer": "$\\sum_{i=0}^r\\binom ni$",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Choose which bits are $1$",
+    "body": "A word at distance exactly $i$ from $\\mathbf0$ is one with exactly $i$ ones: $\\binom ni$ words. Summing over $i=0,\\dots,r$ gives $\\sum_{i=0}^{r}\\binom ni$.\n\n**Answer: $\\displaystyle\\sum_{i=0}^{r}\\binom ni$**"
+   }
+  ],
+  "topics": [
+   "counting"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "bmt-2022-power-4-02",
+  "bank": "bmt",
+  "source": {
+   "contest": "Berkeley Math Tournament",
+   "paper": "2022 Power Round (Error Correcting Codes)",
+   "year": 2022,
+   "number": 40,
+   "url": "https://berkeley.mt/archives/bmt-2022/power-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 1,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Let $A$ be the number of binary words of length $n$ with Hamming distance at most $r$ from the all-zero word. For an arbitrary binary word $x$ of length $n$, how many words have Hamming distance at most $r$ from $x$? Express your answer in terms of $A$.",
+  "image": null,
+  "choices": null,
+  "answer": "$A$",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Translate by $x$",
+    "body": "The map $w\\mapsto w\\oplus x$ preserves Hamming distance ($\\delta(w,x)=\\delta(w\\oplus x,\\mathbf0)$) and is a bijection of the set of words, so it maps the ball of radius $r$ about $x$ onto the ball of radius $r$ about $\\mathbf0$. Hence there are exactly $A$ such words.\n\n**Answer: $A$**"
+   }
+  ],
+  "topics": [
+   "counting"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "bmt-2022-power-4-03",
+  "bank": "bmt",
+  "source": {
+   "contest": "Berkeley Math Tournament",
+   "paper": "2022 Power Round (Error Correcting Codes)",
+   "year": 2022,
+   "number": 41,
+   "url": "https://berkeley.mt/archives/bmt-2022/power-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 7,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Let $n,d$ be positive integers and $A=\\sum_{i=0}^{d}\\binom ni$, the number of binary words of length $n$ within Hamming distance $d$ of a given word. Describe a method of finding a binary code $C$ of length $n$ and minimum distance (at least) $d$ with $|C|\\ge\\frac{2^n}A$. (This is the *Gilbert–Varshamov bound*.)",
+  "image": null,
+  "choices": null,
+  "answer": "Greedy: repeatedly add any word at distance $\\ge d$ from all chosen codewords; each chosen word rules out at most $A$ words.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Greedy construction",
+    "body": "Start with $C=\\emptyset$ and the set $W$ of all $2^n$ words. While $W$ is nonempty, pick any word $c\\in W$, add it to $C$, and remove from $W$ every word at distance $<d$ from $c$ (this includes $c$ itself). This removes at most $|B_c(d-1)|\\le|B_c(d)|=A$ words (by Question 4.2, each ball has size at most $A$).\n\nEvery word added later is at distance $\\ge d$ from all earlier codewords, so $C$ has minimum distance at least $d$. The process ends only after all $2^n$ words have been removed; each step removes at most $A$ words, so there are at least $\\frac{2^n}A$ steps, i.e. $|C|\\ge\\frac{2^n}A$. $\\blacksquare$"
+   }
+  ],
+  "topics": [
+   "counting",
+   "logic"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "bmt-2022-power-4-04",
+  "bank": "bmt",
+  "source": {
+   "contest": "Berkeley Math Tournament",
+   "paper": "2022 Power Round (Error Correcting Codes)",
+   "year": 2022,
+   "number": 42,
+   "url": "https://berkeley.mt/archives/bmt-2022/power-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 16,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "For a binary code $C$ of length $n$ (so $C\\subseteq\\{0,1\\}^n$) with minimum distance $d$, prove the *Plotkin bound*: if $d>\\frac n2$ then\n$$|C|\\le\\frac{2d}{2d-n}.$$\n(Hint: let $r_i$ be the number of codewords with a $1$ in position $i$, and bound $\\sum_{x,y\\in C,\\,x\\ne y}\\delta(x,y)$ in two ways.)",
+  "image": null,
+  "choices": null,
+  "answer": "Lower bound $|C|(|C|-1)d$ and upper bound $\\frac12n|C|^2$ for the sum of distances over ordered pairs.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Double counting",
+    "body": "Let $M=|C|$ and let the sum be over ordered pairs $(x,y)$ of distinct codewords, $\\Sigma=\\sum_{x\\ne y}\\delta(x,y)$.\n\n**Lower bound.** Each of the $M(M-1)$ ordered pairs has $\\delta(x,y)\\ge d$, so $\\Sigma\\ge M(M-1)d$.\n\n**Upper bound.** Count position by position. In position $i$, if $r_i$ codewords have a $1$ and $M-r_i$ have a $0$, then exactly $2r_i(M-r_i)$ ordered pairs differ in position $i$. So $\\Sigma=\\sum_{i=1}^{n}2r_i(M-r_i)$. Since $r_i(M-r_i)\\le\\frac{M^2}4$ (AM-GM), we get $\\Sigma\\le n\\cdot\\frac{M^2}2$.\n\n**Combine.** $M(M-1)d\\le\\frac{nM^2}2$, so (for $M\\ge1$) $2d(M-1)\\le nM$, i.e. $M(2d-n)\\le2d$. Since $2d-n>0$, $M\\le\\frac{2d}{2d-n}$. $\\blacksquare$"
+   }
+  ],
+  "topics": [
+   "counting",
+   "inequalities"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "bmt-2022-power-4-05",
+  "bank": "bmt",
+  "source": {
+   "contest": "Berkeley Math Tournament",
+   "paper": "2022 Power Round (Error Correcting Codes)",
+   "year": 2022,
+   "number": 43,
+   "url": "https://berkeley.mt/archives/bmt-2022/power-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 25,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "For a binary code $C$ of length $n$ and distance $d\\le\\frac n2$, the *Johnson radius* is $J(n,d)=\\dfrac{n-\\sqrt{n(n-2d)}}2$.\n\n(Johnson bound) Show that for a binary code $C$ of length $n$ and distance $d\\le\\frac n2$, there are at most $2n$ codewords in any Hamming ball of radius $J(n,d)-1$. (Hint: let $r_i$ be the number of codewords in the ball with a $1$ in position $i$; bound an appropriate quantity and use Cauchy–Schwarz.)",
+  "image": null,
+  "choices": null,
+  "answer": "Translate the ball to be centered at $\\mathbf0$; Cauchy–Schwarz on $\\sum r_i^2$ gives $|S|\\le\\frac{2nd}{(n-2e)^2-n(n-2d)}$ for $e<J$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Cauchy–Schwarz on position counts",
+    "body": "Translate (XOR) so that the ball is centered at $\\mathbf0$ (this preserves all distances). Let $e=J(n,d)-1$ and let $S$ be the set of codewords of weight $\\le e$; put $m=|S|\\ge2$ (otherwise there is nothing to prove) and let $r_i$ be the number of words of $S$ with a $1$ in position $i$. Then $R:=\\sum_ir_i=\\sum_{x\\in S}\\operatorname{wt}(x)\\le me$.\n\nAs in the Plotkin argument, summing over ordered pairs of distinct words of $S$:\n$$m(m-1)d\\le\\sum_{x\\ne y}\\delta(x,y)=\\sum_{i=1}^n2r_i(m-r_i)=2mR-2\\sum_ir_i^2\\le2mR-\\frac{2R^2}{n},$$\nusing Cauchy–Schwarz $\\sum r_i^2\\ge\\frac{R^2}n$. The function $R\\mapsto2mR-\\frac{2R^2}n$ is increasing for $R\\le\\frac{mn}2$, and $R\\le me\\le\\frac{mn}2$, so we may replace $R$ by $me$:\n$$m(m-1)d\\le2m^2e-\\frac{2m^2e^2}n\\ \\Longrightarrow\\ m\\bigl(nd-2en+2e^2\\bigr)\\le nd.$$\nNow $2(nd-2en+2e^2)=(n-2e)^2-n(n-2d)$. Because $e<J$, we have $n-2e>n-2J=\\sqrt{n(n-2d)}$, so this quantity is positive and\n$$m\\le\\frac{2nd}{(n-2e)^2-n(n-2d)}.$$\nFor $e=J-1$ we get $n-2e=\\sqrt{n(n-2d)}+2$, so with $u=\\sqrt{n(n-2d)}$ the denominator is $(u+2)^2-u^2=4u+4\\ge4$. Hence $|S|\\le\\frac{nd}{2(u+1)}\\le\\frac{nd}2$.\n\nSo the argument proves $|S|\\le\\frac{nd}{2(u+1)}$ with $u=\\sqrt{n(n-2d)}$; in particular $|S|\\le2n$ whenever $d\\le4u+4$, and in general $|S|\\le\\frac{nd}2$."
+   }
+  ],
+  "topics": [
+   "inequalities",
+   "counting"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": "Official proof only establishes |S| <= 2dn (its last line says '<= 2dn'), not the printed bound 2n; my derivation likewise gives |S| <= nd/(2(sqrt(n(n-2d))+1)), which is <= 2n only when d <= 4*sqrt(n(n-2d))+4. The statement as printed is kept; the claim 2n (and hence the n*2^(n+1) in 4.7) looks unsupported for d close to n/2 and should be checked."
+ },
+ {
+  "id": "bmt-2022-power-4-06",
+  "bank": "bmt",
+  "source": {
+   "contest": "Berkeley Math Tournament",
+   "paper": "2022 Power Round (Error Correcting Codes)",
+   "year": 2022,
+   "number": 44,
+   "url": "https://berkeley.mt/archives/bmt-2022/power-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 6,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Let $C$ be a binary code of length $n$ and let $0\\le r\\le n$. Let $A=\\sum_{i=0}^r\\binom ni$ be the number of binary words within Hamming distance $r$ of a given word. Show that there is a Hamming ball of radius $r$ (centered at some word $y\\in\\{0,1\\}^n$) containing at least $\\frac{|C|\\cdot A}{2^n}$ codewords of $C$.",
+  "image": null,
+  "choices": null,
+  "answer": "Average $|C\\cap B_y(r)|$ over all $2^n$ centers $y$; the average is $|C|A/2^n$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Averaging",
+    "body": "Count pairs $(y,c)$ with $y\\in\\{0,1\\}^n$, $c\\in C$ and $\\delta(y,c)\\le r$ in two ways. For each fixed $c\\in C$ there are exactly $A$ words $y$ within distance $r$ of $c$ (Question 4.2). So the number of pairs is $|C|\\cdot A$. Hence\n$$\\sum_{y}|C\\cap B_y(r)|=|C|A,$$\nand the average over the $2^n$ centers $y$ is $\\frac{|C|A}{2^n}$. Some center $y$ achieves at least the average. $\\blacksquare$"
+   }
+  ],
+  "topics": [
+   "counting",
+   "probability"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "bmt-2022-power-4-07",
+  "bank": "bmt",
+  "source": {
+   "contest": "Berkeley Math Tournament",
+   "paper": "2022 Power Round (Error Correcting Codes)",
+   "year": 2022,
+   "number": 45,
+   "url": "https://berkeley.mt/archives/bmt-2022/power-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 9,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "For a binary code $C$ of length $n$ and distance $d\\le\\frac n2$, the *Johnson radius* is $J(n,d)=\\dfrac{n-\\sqrt{n(n-2d)}}2$.\n\n(Elias–Bassalygo bound) Using the Johnson bound (Question 4.5: any Hamming ball of radius $J(n,d)-1$ contains at most $2n$ codewords of a code with distance $d\\le\\frac n2$) and the averaging lemma (Question 4.6), show that a binary code of length $n$ and distance $d\\le\\frac n2$ satisfies\n$$|C|\\le\\frac{n\\,2^{n+1}}{\\binom{n+1}{J(n,d)-1}}.$$\n(Assume $J(n,d)-1$ is a positive integer so the binomial coefficient makes sense.)",
+  "image": null,
+  "choices": null,
+  "answer": "By 4.6 some ball of radius $J-1$ has $\\ge|C|A/2^n$ codewords; by 4.5 it has $\\le2n$; and $A\\ge\\binom{n+1}{J-1}$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Combine the two lemmas",
+    "body": "Let $r=J(n,d)-1$ and $A=\\sum_{i=0}^{r}\\binom ni$. By Question 4.6 some ball of radius $r$ contains at least $\\frac{|C|A}{2^n}$ codewords; by the Johnson bound (Question 4.5) it contains at most $2n$. So $\\frac{|C|A}{2^n}\\le2n$, i.e. $|C|\\le\\frac{n\\,2^{n+1}}{A}$.\n\nFinally, by Pascal's rule $A\\ge\\binom n{r-1}+\\binom nr=\\binom{n+1}{r}=\\binom{n+1}{J(n,d)-1}$ (all terms are nonnegative), so\n$$|C|\\le\\frac{n\\,2^{n+1}}{A}\\le\\frac{n\\,2^{n+1}}{\\binom{n+1}{J(n,d)-1}}.\\ \\blacksquare$$"
+   }
+  ],
+  "topics": [
+   "counting",
+   "inequalities"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": "Depends on the Johnson bound as printed in Question 4.5 (at most 2n codewords), which the official proof only supports up to 2dn; see the note on 4.5."
+ }
+]

@@ -1,0 +1,382 @@
+[
+ {
+  "id": "smt-2025-discrete-01",
+  "bank": "smt",
+  "source": {
+   "contest": "Stanford Math Tournament",
+   "paper": "2025 Discrete",
+   "year": 2025,
+   "number": 1,
+   "url": "https://www.stanfordmathtournament.org/pdfs/smt2025/discrete-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "The boxes in the expression below are filled with the numbers 3, 4, 5, 6, and 7, so that each number is used exactly once, and the value of the expression is a prime number. Compute the value of the expression.\n$$\\square\\times\\square\\times\\square+\\square\\times\\square$$",
+  "image": null,
+  "choices": null,
+  "answer": "107",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Common factors",
+    "body": "The expression is a sum of two products. If the two products shared a prime factor, the sum would be divisible by it and could not be prime. Since $6=2\\cdot3$ has factors in common with both $3$ and $4$, the number $6$ must be in the same product as both $3$ and $4$. So the expression is $3\\times4\\times6+5\\times7=72+35=107$, which is prime.\n\n**Answer: 107**"
+   },
+   {
+    "title": "Check",
+    "body": "Of the $5$ numbers, the three-factor product takes three of them. Trying all choices, $107$ is the only prime value that appears, confirming the answer.\n\n**Answer: 107**"
+   }
+  ],
+  "topics": [
+   "number-theory",
+   "arithmetic"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "smt-2025-discrete-02",
+  "bank": "smt",
+  "source": {
+   "contest": "Stanford Math Tournament",
+   "paper": "2025 Discrete",
+   "year": 2025,
+   "number": 2,
+   "url": "https://www.stanfordmathtournament.org/pdfs/smt2025/discrete-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Compute the number of five letter words that can be formed from $a$, $b$, and $c$ such that neither $ab$ nor $ac$ appears in the word. For example, $bcbaa$ would be valid but $aabcb$ would be invalid.",
+  "image": null,
+  "choices": null,
+  "answer": "63",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Once $a$ appears, only $a$'s follow",
+    "body": "If a letter $a$ is followed by anything, that letter must be $a$, so after the first $a$ all remaining letters are $a$. If the first $a$ is in position $i$, the earlier $i-1$ letters are each $b$ or $c$: $2^{i-1}$ words. If there is no $a$: $2^5=32$ words.\n\nTotal: $2^0+2^1+2^2+2^3+2^4+2^5=2^6-1=63$.\n\n**Answer: 63**"
+   }
+  ],
+  "topics": [
+   "counting"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "smt-2025-discrete-03",
+  "bank": "smt",
+  "source": {
+   "contest": "Stanford Math Tournament",
+   "paper": "2025 Discrete",
+   "year": 2025,
+   "number": 3,
+   "url": "https://www.stanfordmathtournament.org/pdfs/smt2025/discrete-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "In a $3\\times3$ grid, exactly one of the two possible diagonals is drawn in each of the nine cells. Compute the number of ways to choose the diagonals such that there is a continuous path along diagonals from the bottom-left vertex to the top-right vertex. One such grid is shown.",
+  "image": "qimages/smt/2025-discrete/q03.webp",
+  "choices": null,
+  "answer": "79",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Casework on the middle cell",
+    "body": "The bottom-left and top-right cells must both have their \"/\" diagonal, otherwise the path cannot start or end.\n\n- If the middle cell has \"/\", the path along the main diagonal is already complete, and the other $6$ cells are free: $2^6=64$ ways.\n- If the middle cell has \"\\\\\", a connecting path must use one of two specific patterns for the remaining cells (going up-right, up-left, up-right, down-right, up-right through the cells, or the mirror image of it). Each pattern fixes the diagonals of $3$ more cells (those it passes through), leaving the other $3$ cells free: $2^3=8$ ways. The two patterns can hold simultaneously in exactly $1$ configuration, so this case gives $8+8-1=15$.\n\nTotal: $64+15=79$.\n\n(Direct enumeration of all $2^9$ diagonal choices confirms $79$.)\n\n**Answer: 79**"
+   }
+  ],
+  "topics": [
+   "counting",
+   "graph-theory"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "smt-2025-discrete-04",
+  "bank": "smt",
+  "source": {
+   "contest": "Stanford Math Tournament",
+   "paper": "2025 Discrete",
+   "year": 2025,
+   "number": 4,
+   "url": "https://www.stanfordmathtournament.org/pdfs/smt2025/discrete-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Professor Matrix Tessellation Laplace is thinking of two positive odd numbers (not necessarily distinct). Given that their product has exactly 15 positive divisors, compute the smallest possible sum of these two numbers.",
+  "image": null,
+  "choices": null,
+  "answer": "90",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Minimize the product, then use AM-GM",
+    "body": "If $N=\\prod p_i^{e_i}$ has $15$ divisors, then $\\prod(e_i+1)=15$, so $N=p^{14}$ or $N=p^4q^2$. The product is odd, so the primes are odd. The smallest options are $3^4\\cdot5^2=2025$ (versus $3^{14}$, which is far larger).\n\nIf the product is $2025=45^2$, then by AM-GM $a+b\\ge2\\sqrt{2025}=90$, with equality for $a=b=45$ (both odd). Any other valid product $ab>2025$ gives $a+b\\ge2\\sqrt{ab}>90$. So the minimum is $90$.\n\n**Answer: 90**"
+   }
+  ],
+  "topics": [
+   "number-theory"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "smt-2025-discrete-05",
+  "bank": "smt",
+  "source": {
+   "contest": "Stanford Math Tournament",
+   "paper": "2025 Discrete",
+   "year": 2025,
+   "number": 5,
+   "url": "https://www.stanfordmathtournament.org/pdfs/smt2025/discrete-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Consider an axis-aligned 4 dimensional cube with side length 4, subdivided into $4^4$ unit cubes. Cubey the penguin starts at a random unit cube. Each second, he can move to an adjacent unit cube along any one of the four axes. A fish is independently placed in a uniformly random unit cube (possibly the same one as Cubey's starting position) and the fish does not move (it's a fish out of water). Compute the expected time in seconds that Cubey will take to catch the fish, assuming he moves optimally to reach the fish as fast as possible.",
+  "image": null,
+  "choices": null,
+  "answer": "5",
+  "acceptedAnswers": null,
+  "answerUnit": "seconds",
+  "solutions": [
+   {
+    "title": "Linearity of expectation",
+    "body": "The shortest time is the Manhattan distance $|x_1-x_2|+|y_1-y_2|+|z_1-z_2|+|w_1-w_2|$. By linearity and symmetry the expectation is $4\\cdot E|x_1-x_2|$ where $x_1,x_2$ are independent uniform on $\\{1,2,3,4\\}$.\n\nOf the $16$ pairs, the differences $0,1,2,3$ occur $4,6,4,2$ times, so $E|x_1-x_2|=\\frac{6\\cdot1+4\\cdot2+2\\cdot3}{16}=\\frac{20}{16}=\\frac54$.\n\nExpected time: $4\\cdot\\frac54=5$ seconds.\n\n**Answer: 5**"
+   }
+  ],
+  "topics": [
+   "probability",
+   "counting"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "smt-2025-discrete-06",
+  "bank": "smt",
+  "source": {
+   "contest": "Stanford Math Tournament",
+   "paper": "2025 Discrete",
+   "year": 2025,
+   "number": 6,
+   "url": "https://www.stanfordmathtournament.org/pdfs/smt2025/discrete-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Define the function $f(n)$ to be the remainder when $\\binom{n}{20}$ is divided by $23$. Find $f(20)+f(21)+\\cdots+f(2023)$.",
+  "image": null,
+  "choices": null,
+  "answer": "2024",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Periodicity mod 23",
+    "body": "By Lucas' theorem with $n=23q+r$ ($0\\le r\\le22$): $\\binom n{20}\\equiv\\binom q0\\binom r{20}=\\binom r{20}\\pmod{23}$, which is $0$ unless $r\\ge20$. For $r=20,21,22$ the values are $\\binom{20}{20}=1$, $\\binom{21}{20}=21$, $\\binom{22}{20}=231\\equiv1$. So each block $n=23q+20,\\,23q+21,\\,23q+22$ contributes $1+21+1=23$.\n\nSince $2023=23\\cdot87+22$, the blocks $q=0,1,\\dots,87$ lie in the range $20\\le n\\le2023$, that is $88$ blocks. The sum is $88\\cdot23=2024$.\n\n**Answer: 2024**"
+   },
+   {
+    "title": "Direct check",
+    "body": "A computer sum of $\\binom n{20}\\bmod23$ for $n=20,\\dots,2023$ gives $2024$, matching the above.\n\n**Answer: 2024**"
+   }
+  ],
+  "topics": [
+   "number-theory",
+   "counting"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "smt-2025-discrete-07",
+  "bank": "smt",
+  "source": {
+   "contest": "Stanford Math Tournament",
+   "paper": "2025 Discrete",
+   "year": 2025,
+   "number": 7,
+   "url": "https://www.stanfordmathtournament.org/pdfs/smt2025/discrete-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Professor Matrix Tessellation Laplace arranges all of the integers from 1 to 99999 (inclusive) in the order that maximizes the gigantic number formed by concatenating them. In his order, the number 2025 appears as the $i$-th integer from left to right. Find $i$.\n\n(Formally, he sets the permutation $\\sigma=(\\sigma_1,\\dots,\\sigma_{99999})$ of $\\{1,2,\\dots,99999\\}$ such that the value of the concatenation $\\overline{\\sigma_1\\sigma_2\\ldots\\sigma_{99999}}$ is maximized. Find the index $i$ such that $\\sigma_i=2025$.)",
+  "image": null,
+  "choices": null,
+  "answer": "88607",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Compare concatenations",
+    "body": "For $a$ with $m$ digits and $b$ with $n$ digits, $\\overline{ab}=a\\cdot10^n+b$ and $\\overline{ba}=b\\cdot10^m+a$. So $\\overline{ab}>\\overline{ba}\\iff\\frac{a}{10^m-1}>\\frac b{10^n-1}$.\n\nHence the optimal order sorts numbers by $\\frac{k}{10^{d}-1}$ ($d$ = number of digits of $k$) from largest to smallest. For $2025$ the value is $\\frac{2025}{9999}\\approx0.20252$. Count the integers with a larger value, by number of digits:\n- 1 digit: $k/9>0.2025$: $k=2,\\dots,9$: $8$.\n- 2 digits: $k/99>\\frac{2025}{9999}$: $k\\ge21$: $79$ (21 to 99).\n- 3 digits: $k\\ge203$: $797$.\n- 4 digits: $k\\ge2026$: $7974$.\n- 5 digits: $k\\ge20252$: $79748$.\n\nTotal $88606$, so $2025$ is in position $88607$. (A direct computer sort confirms this.)\n\n**Answer: 88607**"
+   }
+  ],
+  "topics": [
+   "number-theory",
+   "counting"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "smt-2025-discrete-08",
+  "bank": "smt",
+  "source": {
+   "contest": "Stanford Math Tournament",
+   "paper": "2025 Discrete",
+   "year": 2025,
+   "number": 8,
+   "url": "https://www.stanfordmathtournament.org/pdfs/smt2025/discrete-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "For any permutation $\\sigma=(a_1,a_2,\\dots,a_8)$ of the set $\\{1,2,\\dots,8\\}$ and some index $1\\le k\\le8$, define\n$$L_k(\\sigma)=\\operatorname{lcm}(a_1,a_2,\\dots,a_k)$$\nwhere $\\operatorname{lcm}(a_1,\\dots,a_k)$ denotes the least common multiple of $a_1,\\dots,a_k$. An index $2\\le k\\le8$ is called increasing if $L_k(\\sigma)>L_{k-1}(\\sigma)$. Let $T(\\sigma)$ be the total number of increasing indices of $\\sigma$. Compute the expected value of $T(\\sigma)$ when $\\sigma$ is chosen uniformly at random among all permutations of $\\{1,2,\\dots,8\\}$.",
+  "image": null,
+  "choices": null,
+  "answer": "157/40",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Linearity of expectation",
+    "body": "For each $n$, let $p(n)$ be the probability that placing $n$ raises the lcm of the entries before it (counting position 1 as raising the lcm from $L_0=1$ unless the entry is $1$). Then $E[T]=\\sum_np(n)-\\frac78$, because the first position contributes $1$ exactly when $a_1\\ne1$ (probability $\\frac78$), and that must not be counted.\n\n$n$ raises the lcm iff it appears before every number that \"covers\" it:\n- $p(1)=0$.\n- $2$: covered by $4,6,8$: $p=\\frac14$.\n- $3$: covered by $6$: $\\frac12$.\n- $4$: covered by $8$: $\\frac12$.\n- $5,7,8$: nothing covers them: $1$ each.\n- $6$: raises the lcm iff $6$ comes before $3$ or before all of $2,4,8$. By inclusion-exclusion: $\\frac12+\\frac14-\\frac15=\\frac{11}{20}$.\n\nSum: $0+\\frac14+\\frac12+\\frac12+1+\\frac{11}{20}+1+1=\\frac{24}5$, and $E[T]=\\frac{24}{5}-\\frac78=\\frac{157}{40}$. An exhaustive enumeration of all $8!$ permutations confirms this.\n\n**Answer: $\\frac{157}{40}$**"
+   }
+  ],
+  "topics": [
+   "probability",
+   "number-theory"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "smt-2025-discrete-09",
+  "bank": "smt",
+  "source": {
+   "contest": "Stanford Math Tournament",
+   "paper": "2025 Discrete",
+   "year": 2025,
+   "number": 9,
+   "url": "https://www.stanfordmathtournament.org/pdfs/smt2025/discrete-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Let $\\alpha$ be the permutation of $\\{0,1,\\dots,12\\}$ satisfying $\\alpha(0)=0$, $\\alpha(n)=n+1$ for odd $n$, and $\\alpha(n)=n-1$ for positive even $n$. Let $f(n)$ be the unique polynomial of minimal degree with coefficients in $\\{0,1,\\dots,12\\}$ such that $13\\mid f(n)-\\alpha(n)$ for all $n\\in\\{0,1,\\dots,12\\}$. If $f(n)$ has degree $d$ and can be expressed as $f(n)=\\sum_{i=0}^{d}a_in^i$, find $100a_d+a_1$.",
+  "image": null,
+  "choices": null,
+  "answer": "608",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Lagrange interpolation mod 13",
+    "body": "Over $\\mathbb F_{13}$, the indicator of $n=i$ is $1-(n-i)^{12}$ (Fermat). Hence $f(n)\\equiv\\sum_{i=1}^{12}\\alpha(i)\\big(1-(n-i)^{12}\\big)$ is the unique polynomial of degree $\\le12$ matching $\\alpha$, and it is the minimal one.\n\nWrite $\\alpha(n)=n+g(n)$ with $g(n)=\\sum_{i=1}^{12}(-1)^{i+1}\\big(1-(n-i)^{12}\\big)$ (this equals $(-1)^{n+1}$ for $n\\ne0$ and $0$ for $n=0$).\n\n- Coefficient of $n^{12}$: $-\\sum(-1)^{i+1}=0$, so the degree is below $12$.\n- Coefficient of $n^{11}$: $\\sum(-1)^{i+1}\\cdot12i\\equiv\\sum_{i=1}^{12}(-1)^ii=6\\pmod{13}$, so $d=11$ and $a_{11}=6$.\n- Coefficient of $n$: $a_1\\equiv1+\\sum(-1)^{i+1}12\\,i^{11}\\equiv1-\\sum_{i=1}^{12}(-1)^{i+1}i^{-1}\\equiv1-6=8$, using $i^{11}\\equiv i^{-1}$.\n\nSo $100a_d+a_1=600+8=608$. (Solving the interpolation system directly gives $f(n)=6n^{11}+10n^9+6n^7+7n^5+4n^3+8n$.)\n\n**Answer: 608**"
+   }
+  ],
+  "topics": [
+   "number-theory",
+   "polynomials"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "smt-2025-discrete-10",
+  "bank": "smt",
+  "source": {
+   "contest": "Stanford Math Tournament",
+   "paper": "2025 Discrete",
+   "year": 2025,
+   "number": 10,
+   "url": "https://www.stanfordmathtournament.org/pdfs/smt2025/discrete-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Let $s_0$ be a square. One diagonal of $s_0$ is chosen, and a square $s_1$ is drawn with this diagonal as one of its sides. There are four possible such squares $s_1$; one is chosen out of these four uniformly at random. Choose $s_2$ in the same manner (so that it has a side which is a diagonal of $s_1$), and continue similarly with $s_3,s_4,\\dots$. Let $p(s_n)$ be the probability that square $s_n$ shares an interior with $s_0$ (in other words, the area of their intersection is positive). Compute the value that $p(s_n)$ approaches as $n$ approaches infinity.",
+  "image": null,
+  "choices": null,
+  "answer": "5/12",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Reverse the process and use a $3\\times3$ grid",
+    "body": "Reversing time, $s_{i+1}$ becomes a square having a side of $s_i$ as its diagonal, so the squares shrink. After an even number of steps the squares are axis-parallel to $s_0$, and every such square coincides with a cell of the $3\\times3$ grid of copies of $s_0$, subdivided finely. So $s_n$ either lies inside $s_0$ or is disjoint from it, depending on whether it falls in the middle cell, an edge cell or a corner cell of the big grid.\n\nLet $a_n,b_n,c_n$ be the proportions of copies in the center, edge, corner cells. Working out the $16$ possible positions of $s_2$ gives the recurrence $a_{n+2}=\\frac12a_n+\\frac38b_n+\\frac14c_n$, $b_{n+2}=\\frac12a_n+\\frac12b_n+\\frac12c_n$ (with $a+b+c=1$). The equilibrium solves $a=\\frac12a+\\frac38b+\\frac14c$, $b=\\frac12(a+b+c)=\\frac12$, which gives $(a,b,c)=\\left(\\frac5{12},\\frac12,\\frac1{12}\\right)$.\n\nThe limiting probability is the fraction in the center cell, $\\frac5{12}$ (a Monte Carlo simulation of the original process also gives about $0.417$).\n\n**Answer: $\\frac5{12}$**"
+   }
+  ],
+  "topics": [
+   "probability",
+   "geometry"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "smt-2025-discrete-tb",
+  "bank": "smt",
+  "source": {
+   "contest": "Stanford Math Tournament",
+   "paper": "2025 Discrete",
+   "year": 2025,
+   "number": null,
+   "url": "https://www.stanfordmathtournament.org/pdfs/smt2025/discrete-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "*(Tiebreaker, estimation.)* A deck of cards consists of 52 cards in 13 ranks, with 4 cards in each rank. Let $N$ be the number of ways to shuffle the deck so that any two cards with the same rank have no more than eight cards strictly between them (including other cards of the same rank). Estimate the value of $\\log_{10}(N)$.",
+  "image": null,
+  "choices": null,
+  "answer": "$\\log_{10}N\\approx44.2290$ (official answer); all $52!\\approx8.07\\times10^{67}$ shuffles give $\\log_{10}=67.9$ as an upper bound.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Estimation",
+    "body": "This is an estimation question; ties were broken by distance from the correct value. The official answer is $\\log_{10}N=44.22904190\\ldots$\n\nA sensible way to estimate: the four cards of a rank must all fit inside a window of $10$ consecutive positions. Counting such arrangements exactly needs a computer; a rough sanity check is that there are $52!\\approx10^{67.9}$ shuffles in total, and the constraint for $13$ ranks cuts the count down by about $10^{23.7}$.\n\n**Answer: about $44.23$**"
+   }
+  ],
+  "topics": [
+   "counting",
+   "probability"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ }
+]

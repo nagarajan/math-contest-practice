@@ -1,0 +1,509 @@
+[
+  {
+    "id": "pumac-2024-team-01",
+    "bank": "pumac",
+    "source": {
+      "contest": "PUMaC",
+      "paper": "2024 Team Round",
+      "year": 2024,
+      "number": 1,
+      "url": "https://jason-shi-f9dm.squarespace.com/s/PUMaC_2024_Team_Round.pdf"
+    },
+    "grade": "9-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Justin chooses a number $n$ uniformly at random from the set of integers between $90$ and $99$, inclusive. He then chooses a positive divisor $d$ of $n$ uniformly at random. Justin notices that $d$ and $n/d$ are relatively prime. If the probability that $n=90$ can be expressed as $a/b$ for relatively prime positive integers, find $a+b$.",
+    "image": null,
+    "choices": null,
+    "answer": "13",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Bayes with a table",
+        "body": "For each $n$, the probability that a random divisor $d$ has $\\gcd(d,n/d)=1$ is $\\frac{2^{\\omega(n)}}{\\tau(n)}$ (a coprime split gives each prime power wholly to $d$ or $n/d$):\n$$90{:}\\ \\tfrac{8}{12}=\\tfrac23,\\ 91{:}\\ 1,\\ 92{:}\\ \\tfrac46=\\tfrac23,\\ 93{:}\\ 1,\\ 94{:}\\ 1,\\ 95{:}\\ 1,\\ 96{:}\\ \\tfrac4{12}=\\tfrac13,\\ 97{:}\\ 1,\\ 98{:}\\ \\tfrac46=\\tfrac23,\\ 99{:}\\ \\tfrac46=\\tfrac23 .$$\nThese sum to $8$. Since every $n$ is equally likely, $P(n=90\\mid\\text{coprime})=\\frac{2/3}{8}=\\frac1{12}$, so $a+b=13$.\n\n**Answer: 13**"
+      }
+    ],
+    "topics": [
+      "probability",
+      "number-theory"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "pumac-2024-team-02",
+    "bank": "pumac",
+    "source": {
+      "contest": "PUMaC",
+      "paper": "2024 Team Round",
+      "year": 2024,
+      "number": 2,
+      "url": "https://jason-shi-f9dm.squarespace.com/s/PUMaC_2024_Team_Round.pdf"
+    },
+    "grade": "9-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Let real number sequences $a_k$ and $x_k$ be defined for $1\\le k\\le7$ and suppose that $a_1=1$ and $a_{k+1}=a_k+x_k$ for $1\\le k\\le 7$. Let $x_k$ be chosen such that the quantity $S=\\sum_{k=1}^{7}(a_k^2+x_k^2)$ is minimized. Then $S=\\frac mn$ for coprime positive integers $m$ and $n$. Find $m+n$.",
+    "image": null,
+    "choices": null,
+    "answer": "610",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Backward optimisation",
+        "body": "Let $V_k(a)$ be the minimum of $\\sum_{j\\ge k}^7(a_j^2+x_j^2)$ given $a_k=a$. Since $a_8$ does not appear in $S$, $x_7=0$ and $V_7(a)=a^2$. Suppose $V_{k+1}(a)=c_{k+1}a^2$. Then\n$$V_k(a)=\\min_x\\ \\big(a^2+x^2+c_{k+1}(a+x)^2\\big),$$\nminimised at $x=-\\frac{c_{k+1}}{1+c_{k+1}}a$ giving $c_k=1+\\frac{c_{k+1}}{1+c_{k+1}}$. Starting with $c_8=0$:\n$$c_7=1,\\ c_6=\\tfrac32,\\ c_5=\\tfrac85,\\ c_4=\\tfrac{21}{13},\\ c_3=\\tfrac{55}{34},\\ c_2=\\tfrac{144}{89},\\ c_1=\\tfrac{377}{233}$$\n(ratios of consecutive Fibonacci numbers). Hence $S_{\\min}=c_1a_1^2=\\frac{377}{233}$ and $m+n=610$.\n\n**Answer: 610**"
+      }
+    ],
+    "topics": [
+      "algebra",
+      "sequences-series"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "pumac-2024-team-03",
+    "bank": "pumac",
+    "source": {
+      "contest": "PUMaC",
+      "paper": "2024 Team Round",
+      "year": 2024,
+      "number": 3,
+      "url": "https://jason-shi-f9dm.squarespace.com/s/PUMaC_2024_Team_Round.pdf"
+    },
+    "grade": "9-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Let $f(x)=x^2-3x+1$, and let $\\alpha_1,\\alpha_2,\\alpha_3,\\alpha_4$ be the $4$ roots of $f(f(x))=x$. Evaluate $\\lfloor10\\alpha_1\\rfloor+\\lfloor10\\alpha_2\\rfloor+\\lfloor10\\alpha_3\\rfloor+\\lfloor10\\alpha_4\\rfloor$.",
+    "image": null,
+    "choices": null,
+    "answer": "58",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Factor $f(f(x))-x$",
+        "body": "$f(f(x))-x=x^4-6x^3+8x^2+2x-1=(x^2-4x+1)(x^2-2x-1)$ (the factor $x^2-4x+1=f(x)-x$ is expected: fixed points of $f$ are fixed points of $f\\circ f$).\n\nThe roots are $2\\pm\\sqrt3\\approx3.732,\\ 0.268$ and $1\\pm\\sqrt2\\approx2.414,\\ -0.414$. Then $\\lfloor37.32\\rfloor+\\lfloor2.68\\rfloor+\\lfloor24.14\\rfloor+\\lfloor-4.14\\rfloor=37+2+24-5=58$.\n\n**Answer: 58**"
+      }
+    ],
+    "topics": [
+      "algebra",
+      "polynomials"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "pumac-2024-team-04",
+    "bank": "pumac",
+    "source": {
+      "contest": "PUMaC",
+      "paper": "2024 Team Round",
+      "year": 2024,
+      "number": 4,
+      "url": "https://jason-shi-f9dm.squarespace.com/s/PUMaC_2024_Team_Round.pdf"
+    },
+    "grade": "9-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Consider the $100\\times100$ grid of points with integer coordinates $S=\\{(x,y)\\in\\mathbb Z^2\\mid1\\le x\\le100,\\ 1\\le y\\le100\\}$. A set $C$ is formed by selecting each point $p\\in S$ with probability $\\frac12$ uniformly at random. The expansion of $C$ is defined as the set of points $q\\in S$ such that $\\min_{p\\in C}d(q,p)\\le1$, where $d(q,p)$ denotes the Euclidean distance between $q,p$. If the expected size of the expansion of $C$ can be written as $\\frac AB$ for relatively prime positive integers $A,B$, find $A+B$.",
+    "image": null,
+    "choices": null,
+    "answer": "77407",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Linearity of expectation",
+        "body": "A point $q\\in S$ is in the expansion iff $q$ or one of its grid neighbours (within $S$) is in $C$. A corner has $3$ such points, an edge point $4$, an interior point $5$; it is in the expansion with probability $1-2^{-k}$.\n\nThere are $4$ corners, $4\\cdot98=392$ edge points and $98^2=9604$ interior points, so\n$$E=10000-\\frac48-\\frac{392}{16}-\\frac{9604}{32}=10000-0.5-24.5-300.125=\\frac{77399}{8}.$$\n$77399$ is odd, so the fraction is reduced: $A+B=77399+8=77407$.\n\n**Answer: 77407**"
+      }
+    ],
+    "topics": [
+      "probability",
+      "counting"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "pumac-2024-team-05",
+    "bank": "pumac",
+    "source": {
+      "contest": "PUMaC",
+      "paper": "2024 Team Round",
+      "year": 2024,
+      "number": 5,
+      "url": "https://jason-shi-f9dm.squarespace.com/s/PUMaC_2024_Team_Round.pdf"
+    },
+    "grade": "9-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "The *Minkowski sausage* is constructed as follows. $M_0$ is the line segment from $(0,0)$ to $(1,0)$. $M_{i+1}$ is constructed by replacing each segment in $M_i$ with eight segments, each of length $1/4^{i+1}$ (see figure below, where we have provided $M_0$ through $M_3$).\n\nLet $M_\\infty$ be the limiting shape of $M_0,M_1,\\dots$. The area of the smallest convex polygon which encloses $M_\\infty$ can be written as $\\frac ab$ for relatively prime positive integers $a$ and $b$. Find $a+b$.",
+    "image": "qimages/pumac/2024-team/q05.webp",
+    "choices": null,
+    "answer": "4",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "The hull is a parallelogram",
+        "body": "From the figure, the generator replaces a unit segment by the eight segments (in units of $\\frac14$): right, up, right, down, down, right, up, right, i.e. it visits $(0,0),(\\frac14,0),(\\frac14,\\frac14),(\\frac12,\\frac14),(\\frac12,0),(\\frac12,-\\frac14),(\\frac34,-\\frac14),(\\frac34,0),(1,0)$. $M_\\infty$ is the union of $8$ copies of itself scaled by $\\frac14$ and placed on these segments, so its hull $H$ satisfies $H=\\operatorname{conv}(\\phi_1H\\cup\\dots\\cup\\phi_8H)$, which has a unique compact convex solution.\n\nThe parallelogram $H$ with vertices $(0,0),\\ (\\tfrac23,-\\tfrac13),\\ (1,0),\\ (\\tfrac13,\\tfrac13)$ satisfies this relation (the images of its four vertices under the eight similarities have convex hull exactly $H$; verified with exact arithmetic), so it is the convex hull of $M_\\infty$. (Computing the hull of $M_n$ exactly for $n=1,\\dots,6$ gives areas $\\frac5{16},\\frac{85}{256},\\dots$ increasing to $\\frac13$.)\n\nIts area is $\\left|\\frac23\\cdot\\frac13-\\left(-\\frac13\\right)\\cdot\\frac13\\right|=\\frac13$, so $a+b=1+3=4$.\n\n**Answer: 4**"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "sequences-series"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "pumac-2024-team-06",
+    "bank": "pumac",
+    "source": {
+      "contest": "PUMaC",
+      "paper": "2024 Team Round",
+      "year": 2024,
+      "number": 6,
+      "url": "https://jason-shi-f9dm.squarespace.com/s/PUMaC_2024_Team_Round.pdf"
+    },
+    "grade": "9-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Ben has a square of side length $2$. He wants to put a circle and equilateral triangle inside the square such that the circle and equilateral triangle do not overlap. The maximum possible sum of the areas of the circle and triangle is $\\frac{a\\pi+b\\sqrt c+d\\sqrt e}{f}$, where $a,c,e,f$ are positive integers, $b$ and $d$ are integers, $c$ and $e$ are square-free, and $\\gcd(a,b,d,f)=1$. Find $a+b+c+d+e+f$.",
+    "image": null,
+    "choices": null,
+    "answer": "16",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Big circle plus a corner triangle",
+        "body": "The circle of radius $1$ (area $\\pi$) touches all four sides, leaving four curvilinear corner gaps; the largest equilateral triangle that fits in a gap has a vertex at the corner and its axis along the diagonal (it then stays inside the square because $30^\\circ<45^\\circ$), with the opposite side tangent to the circle. The distance from the corner to the circle along the diagonal is $\\sqrt2-1$, which is the triangle's height $\\frac{\\sqrt3}2s$:\n$$s=\\frac{2(\\sqrt2-1)}{\\sqrt3},\\qquad \\text{area}=\\frac{\\sqrt3}4s^2=\\frac{\\sqrt3}3(3-2\\sqrt2)=\\sqrt3-\\frac{2\\sqrt6}3 .$$\n(A numerical search over all placements of the triangle in the gap confirms this is the maximum for the unit circle. Shrinking the circle to enlarge the triangle loses area: reducing the radius by $\\varepsilon$ costs about $2\\pi\\varepsilon$ in circle area but gains only about $1.15\\varepsilon$ in triangle area, and numerically the total keeps decreasing, e.g. about $3.00$ for radius $0.95$ versus $3.2406$ for radius $1$.)\n\nTotal: $\\pi+\\sqrt3-\\frac{2\\sqrt6}3=\\frac{3\\pi+3\\sqrt3-2\\sqrt6}3$, so $(a,b,c,d,e,f)=(3,3,3,-2,6,3)$ and the sum is $3+3+3-2+6+3=16$.\n\n**Answer: 16**"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "pumac-2024-team-07",
+    "bank": "pumac",
+    "source": {
+      "contest": "PUMaC",
+      "paper": "2024 Team Round",
+      "year": 2024,
+      "number": 7,
+      "url": "https://jason-shi-f9dm.squarespace.com/s/PUMaC_2024_Team_Round.pdf"
+    },
+    "grade": "9-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Consider a regular $24$-gon $P$. A quadrilateral is said to be inscribed in $P$ if its vertices are among those of $P$. We consider two inscribed quadrilaterals equivalent if one can be obtained from the other via a rotation about the center of $P$. How many distinct (i.e. not equivalent) quadrilaterals can be inscribed in $P$?",
+    "image": null,
+    "choices": null,
+    "answer": "446",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Burnside's lemma",
+        "body": "Quadrilaterals correspond to $4$-element subsets of the $24$ vertices, and we count orbits under the cyclic group of $24$ rotations.\n- Identity fixes all $\\binom{24}4=10626$ subsets.\n- Rotation by $12$ (order $2$) fixes subsets that are unions of $2$ antipodal pairs: $\\binom{12}2=66$.\n- Rotations by $6$ and $18$ (order $4$) fix subsets that are one full orbit: $6$ each.\n- All other rotations fix none (a fixed $4$-set must be a union of orbits of size dividing $4$).\n\nOrbits: $\\frac{10626+66+6+6}{24}=\\frac{10704}{24}=446$.\n\n**Answer: 446**"
+      }
+    ],
+    "topics": [
+      "counting"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "pumac-2024-team-08",
+    "bank": "pumac",
+    "source": {
+      "contest": "PUMaC",
+      "paper": "2024 Team Round",
+      "year": 2024,
+      "number": 8,
+      "url": "https://jason-shi-f9dm.squarespace.com/s/PUMaC_2024_Team_Round.pdf"
+    },
+    "grade": "9-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Let $\\triangle ABC$ be a triangle. Let points $D$ and $E$ be on segment $BC$ in the order $B,D,E,C$ such that $\\angle BAD=\\angle DAE=\\angle EAC$. Suppose also that $BD=F_{2024}$, $DE=F_{2025}$, $EC=F_{2027}$, where $F_k$ is the $k$th Fibonacci number where $F_1=F_2=1$. To the nearest degree, $\\angle BAC$ is $n^\\circ$. Find $n$.",
+    "image": null,
+    "choices": null,
+    "answer": "54",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Ratio lemma",
+        "body": "Let $\\theta=\\angle BAD=\\angle DAE=\\angle EAC$ and $r=\\frac{AB}{AC}$. Comparing areas of triangles with the common vertex $A$,\n$$\\frac{BD}{DC}=\\frac{AB\\sin\\theta}{AC\\sin2\\theta}=\\frac r{2\\cos\\theta},\\qquad \\frac{BE}{EC}=\\frac{AB\\sin2\\theta}{AC\\sin\\theta}=2r\\cos\\theta .$$\nDividing: $4\\cos^2\\theta=\\frac{BE}{EC}\\cdot\\frac{DC}{BD}$. The Fibonacci ratios $F_{2025}/F_{2024}$ and $F_{2027}/F_{2024}$ equal $\\varphi$ and $\\varphi^3$ to within about $10^{-400}$, where $\\varphi=\\frac{1+\\sqrt5}2$. With $BD=1$, $DE=\\varphi$, $EC=\\varphi^3$: $BE=1+\\varphi=\\varphi^2$ and $DC=\\varphi+\\varphi^3$, so\n$$4\\cos^2\\theta=\\frac{\\varphi^2}{\\varphi^3}\\cdot(\\varphi+\\varphi^3)=1+\\varphi^2=\\varphi+2,\\quad \\cos^2\\theta=\\frac{5+\\sqrt5}8=\\cos^218^\\circ .$$\nSo $\\theta=18^\\circ$ and $\\angle BAC=3\\theta=54^\\circ$.\n\n**Answer: 54**"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "trigonometry"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "pumac-2024-team-09",
+    "bank": "pumac",
+    "source": {
+      "contest": "PUMaC",
+      "paper": "2024 Team Round",
+      "year": 2024,
+      "number": 9,
+      "url": "https://jason-shi-f9dm.squarespace.com/s/PUMaC_2024_Team_Round.pdf"
+    },
+    "grade": "9-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Define a sequence called the $2020$-nacci sequence. It is defined as follows: If $n\\le2020$ then $S_n=1$, if $n>2020$ then $S_n=\\sum_{i=n-2020}^{n-1}S_i$. Find the last $2$ digits of $S_{4040}$.",
+    "image": null,
+    "choices": null,
+    "answer": "73",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Reduce to a first-order recurrence",
+        "body": "For $n\\ge2022$, subtracting the formulas for $S_n$ and $S_{n-1}$ gives $S_n=2S_{n-1}-S_{n-2021}$. For $2022\\le n\\le4041$ we have $1\\le n-2021\\le2020$, so $S_{n-2021}=1$ and $S_n-1=2(S_{n-1}-1)$. With $S_{2021}=2020$:\n$$S_n=1+2019\\cdot2^{\\,n-2021}\\quad(2021\\le n\\le4041),\\qquad S_{4040}=1+2019\\cdot2^{2019}.$$\nModulo $100$: $2^{2019}\\equiv0\\pmod4$ and $2^{2019}\\equiv2^{19}\\equiv13\\pmod{25}$, so $2^{2019}\\equiv88\\pmod{100}$. Then $2019\\cdot88\\equiv19\\cdot88=1672\\equiv72$, and $S_{4040}\\equiv73\\pmod{100}$.\n\n**Answer: 73**"
+      }
+    ],
+    "topics": [
+      "sequences-series",
+      "number-theory"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "pumac-2024-team-10",
+    "bank": "pumac",
+    "source": {
+      "contest": "PUMaC",
+      "paper": "2024 Team Round",
+      "year": 2024,
+      "number": 10,
+      "url": "https://jason-shi-f9dm.squarespace.com/s/PUMaC_2024_Team_Round.pdf"
+    },
+    "grade": "9-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Suppose that $A$ is a set of real numbers between $3$ and $2024$ inclusive such that for any $x,y\\in A$ with $x\\ne y$, we have $|x-y|>\\frac{xy}{2+xy}$. What is the largest possible size of $A$?",
+    "image": null,
+    "choices": null,
+    "answer": "2022",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Greedy chain",
+        "body": "List $A$ in increasing order. For $x<y<z$ in $A$, $z-x=(z-y)+(y-x)>\\frac{yz}{2+yz}+\\frac{xy}{2+xy}\\ge2\\cdot\\frac9{11}>1>\\frac{xz}{2+xz}$, so only consecutive elements need to be checked.\n\nGiven $x$, the next element must satisfy $(y-x)(2+xy)>xy$; the infimum $y(x)$ solves $xy^2+(2-x^2-x)y-2x=0$:\n$$y(x)=\\frac{x^2+x-2+\\sqrt{(x^2+x-2)^2+8x^2}}{2x}\\approx x+1-\\frac{2}{x^2}.$$\n$y(x)$ is increasing, so taking each element as small as allowed (starting at $3$) is optimal. Iterating, the chain of infima has $x_{2022}\\approx2023.334$ and $x_{2023}\\approx2024.334>2024$ (each step gains slightly under $1$, in total about $0.67$ short over the whole chain). Elements can be chosen arbitrarily close above these infima, so $2022$ elements fit and $2023$ do not.\n\n**Answer: 2022**"
+      }
+    ],
+    "topics": [
+      "inequalities",
+      "algebra"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "pumac-2024-team-11",
+    "bank": "pumac",
+    "source": {
+      "contest": "PUMaC",
+      "paper": "2024 Team Round",
+      "year": 2024,
+      "number": 11,
+      "url": "https://jason-shi-f9dm.squarespace.com/s/PUMaC_2024_Team_Round.pdf"
+    },
+    "grade": "9-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Austen has a regular icosahedron ($20$-sided polyhedron with all triangular faces). He randomly chooses $3$ distinct points among the vertices and constructs the circle through these three points. The expected value of the total number of the icosahedron's vertices that lie on this circle can be written as $m/n$ for relatively prime positive integers $m$ and $n$. Find $m+n$.",
+    "image": null,
+    "choices": null,
+    "answer": "59",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Count by planes",
+        "body": "All $12$ vertices lie on a sphere, so a vertex lies on the circle through three chosen vertices iff it lies in their plane. The planes containing at least $3$ vertices are:\n- $12$ planes through the pentagon of neighbours of a vertex ($5$ vertices each);\n- $15$ planes through two opposite edges ($4$ vertices each, a golden rectangle);\n- planes with exactly $3$ vertices.\n\nTriples of vertices: $12\\binom53=120$ lie in $5$-vertex planes, $15\\binom43=60$ in $4$-vertex planes, and the remaining $\\binom{12}3-180=40$ in $3$-vertex planes. The expected number of vertices on the circle is\n$$\\frac{120\\cdot5+60\\cdot4+40\\cdot3}{220}=\\frac{960}{220}=\\frac{48}{11},$$\nso $m+n=59$.\n\n**Answer: 59**"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "counting",
+      "probability"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "pumac-2024-team-12",
+    "bank": "pumac",
+    "source": {
+      "contest": "PUMaC",
+      "paper": "2024 Team Round",
+      "year": 2024,
+      "number": 12,
+      "url": "https://jason-shi-f9dm.squarespace.com/s/PUMaC_2024_Team_Round.pdf"
+    },
+    "grade": "9-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Find the number of positive integers $10\\le n\\le99$ with last digit at most $5$ such that the last two digits of $n^n$ are the same as $n$.",
+    "image": null,
+    "choices": null,
+    "answer": "12",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Check by cases on the last digit",
+        "body": "We need $n^n\\equiv n\\pmod{100}$.\n- Last digit $1$: $n=10a+1$, $n^n\\equiv1+10a\\cdot n\\equiv1+10a\\pmod{100}$ since $n\\equiv1\\pmod{10}$. This works for all of $11,21,\\dots,91$: $9$ numbers.\n- Last digit $5$: $n^n\\equiv25\\pmod{100}$ for $n=25$ and $n^n\\equiv75$ for $n=75$ (odd multiples of $25$ keep their last two digits); the other numbers ending in $5$ ($15,35,45,55,65,85,95$) fail.\n- Last digit $0$: $n^n\\equiv0\\pmod{100}\\ne n$, so none work. Last digit $2$ or $4$: a direct check modulo $4$ and modulo $25$ shows none work.\n- Last digit $3$: only $93$ works ($93^{93}\\equiv93\\pmod{100}$); $13,23,33,43,53,63,73,83$ do not.\n\nIn total $9+2+1=12$ (the numbers are $11,21,25,31,41,51,61,71,75,81,91,93$).\n\n**Answer: 12**"
+      }
+    ],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "pumac-2024-team-13",
+    "bank": "pumac",
+    "source": {
+      "contest": "PUMaC",
+      "paper": "2024 Team Round",
+      "year": 2024,
+      "number": 13,
+      "url": "https://jason-shi-f9dm.squarespace.com/s/PUMaC_2024_Team_Round.pdf"
+    },
+    "grade": "9-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Consider the square with vertices $(0,0),(1,0),(1,1),(0,1)$. The line segments from $(t,0)$ to $(0,1-t)$ are drawn for $0\\le t\\le1$. The set of points inside the square but not on one of these line segments has area $\\frac mn$ for coprime positive integers $m$ and $n$. Find $m+n$.",
+    "image": null,
+    "choices": null,
+    "answer": "11",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Which points lie on a segment",
+        "body": "The segment for $t$ lies on $\\frac xt+\\frac y{1-t}=1$, i.e. $t^2+(y-x-1)t+x=0$. A point $(x,y)$ of the square lies on some segment iff this has a root $t\\in[0,1]$. Since $g(0)=x\\ge0$, $g(1)=y\\ge0$ and the vertex $t=\\frac{1+x-y}2\\in[0,1]$, this holds iff the discriminant is nonnegative: $(1+x-y)^2\\ge4x$.\n\nThe uncovered region is $(1+x-y)^2<4x$, i.e. $y>(1-\\sqrt x)^2$ (the other bound $1+x+2\\sqrt x$ exceeds $1$). Its area within the square is\n$$\\int_0^1\\Big(1-(1-\\sqrt x)^2\\Big)dx=1-\\Big(1-\\tfrac43+\\tfrac12\\Big)=\\frac56 .$$\nSo $m+n=5+6=11$.\n\n**Answer: 11**"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "algebra"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "pumac-2024-team-14",
+    "bank": "pumac",
+    "source": {
+      "contest": "PUMaC",
+      "paper": "2024 Team Round",
+      "year": 2024,
+      "number": 14,
+      "url": "https://jason-shi-f9dm.squarespace.com/s/PUMaC_2024_Team_Round.pdf"
+    },
+    "grade": "9-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "What is the largest value for $m$ for which I can find nonnegative integers $a_1<a_2<\\cdots<a_m<2024$ such that for all indices $i>j$, $17$ divides $\\binom{a_i}{a_j}$?",
+    "image": null,
+    "choices": null,
+    "answer": "108",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Lucas' theorem and antichains",
+        "body": "By Lucas' theorem, $17\\nmid\\binom nk$ iff every base-$17$ digit of $k$ is at most the corresponding digit of $n$. So we need $a_j\\not\\le a_i$ digitwise for $j<i$ (and $a_j\\ge a_i$ digitwise is impossible since $a_j<a_i$): the set must be an antichain in the digit-wise order.\n\n$2024=7\\cdot289+1$ is $701_{17}$. The numbers below $2024$ are the triples $(d_2,d_1,d_0)$ with $0\\le d_2\\le6$, $0\\le d_1,d_0\\le16$, together with $2023=(7,0,0)$.\n\nBy the de Bruijn–Tengbergen–Kruyswijk theorem, the largest antichain in the box $[0,6]\\times[0,16]\\times[0,16]$ is its middle rank level, rank $19$: for $d_2=0,\\dots,6$ the number of $(d_1,d_0)$ with $d_1+d_0=19-d_2$ is $14,15,16,17,16,15,14$, total $107$. The element $(7,0,0)$ is incomparable to all of these (they have $d_1+d_0\\ge13$), so it can be added: $108$. A maximum-matching (Dilworth) computation on all $2024$ numbers confirms that $108$ is the maximum.\n\n**Answer: 108**"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "counting"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": "The printed statement lacks the ordering a_1 < a_2 < ... < a_m; the prompt follows the official note ('This should say a_1 < a_2 < ... < a_m < 2024')."
+  },
+  {
+    "id": "pumac-2024-team-15",
+    "bank": "pumac",
+    "source": {
+      "contest": "PUMaC",
+      "paper": "2024 Team Round",
+      "year": 2024,
+      "number": 15,
+      "url": "https://jason-shi-f9dm.squarespace.com/s/PUMaC_2024_Team_Round.pdf"
+    },
+    "grade": "9-12",
+    "points": 5,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "There are $10$ teams, named $T_1$ through $T_{10}$, participating in a draft in which there are $20$ players available, named $P_1$ through $P_{20}$. Suppose each team independent of the others has uniform random preference on the $20$ players. Team $T_1$ will draft their favorite player, and then each subsequent team $T_2,\\dots,T_{10}$ draft their favorite player among the ones not already drafted. Each team drafts exactly one player. Given that $P_1$ is among the $10$ favorite players for each team, the probability that $P_1$ is drafted can be written as $\\frac mn$ where $m$ and $n$ are coprime positive integers. Find $m+n$.",
+    "image": null,
+    "choices": null,
+    "answer": "67",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Probability that $P_1$ is skipped by each team",
+        "body": "Team $T_k$ drafts $P_1$ iff all the players it ranks above $P_1$ are already gone. Suppose $P_1$ has not been drafted before $T_k$ picks, so exactly $k-1$ other players are gone. The rank $r$ of $P_1$ on $T_k$'s list is uniform on $1,\\dots,10$, and the $r-1$ players above it form a uniform random subset of the other $19$ players. So\n$$p_k=P(T_k\\text{ takes }P_1)=\\frac1{10}\\sum_{r=1}^{10}\\frac{\\binom{k-1}{r-1}}{\\binom{19}{r-1}}=\\frac2{21-k}$$\n(e.g. $p_1=\\frac1{10},p_2=\\frac2{19},p_3=\\frac19,\\dots,p_{10}=\\frac2{11}$; the sum can be evaluated with the identity $\\sum_{j}\\binom{k-1}{j}/\\binom{19}{j}=\\frac{20}{21-k}$).\n\n$P_1$ is undrafted iff all teams skip it:\n$$\\prod_{k=1}^{10}\\left(1-\\frac2{21-k}\\right)=\\prod_{k=1}^{10}\\frac{19-k}{21-k}=\\frac{9\\cdot10}{19\\cdot20}=\\frac9{38},$$\nby telescoping. So the probability $P_1$ is drafted is $1-\\frac9{38}=\\frac{29}{38}$ and $m+n=67$.\n\n**Answer: 67**"
+      }
+    ],
+    "topics": [
+      "probability"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

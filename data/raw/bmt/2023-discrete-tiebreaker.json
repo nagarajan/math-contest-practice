@@ -1,0 +1,103 @@
+[
+ {
+  "id": "bmt-2023-discrete-tiebreaker-01",
+  "bank": "bmt",
+  "source": {
+   "contest": "Berkeley Math Tournament",
+   "paper": "2023 Discrete Tiebreaker",
+   "year": 2023,
+   "number": 1,
+   "url": "https://berkeley.mt/archives/bmt-2023/discrete-tiebreaker-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Mataio has a weighted die numbered $1$ to $6$, where the probability of rolling a side $n$ for $1\\le n\\le6$ is inversely proportional to the value of $n$. If Mataio rolls the die twice, what is the probability that the sum of the two rolls is $7$?",
+  "image": null,
+  "choices": null,
+  "answer": "40/343",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Find the constant",
+    "body": "$P(n)=\\frac kn$ with $k\\left(1+\\frac12+\\dots+\\frac16\\right)=1$, and $1+\\frac12+\\frac13+\\frac14+\\frac15+\\frac16=\\frac{49}{20}$, so $k=\\frac{20}{49}$.\n\nThe sum is $7$ for $(n,7-n)$: probability $2\\left(\\frac{k^2}{6}+\\frac{k^2}{10}+\\frac{k^2}{12}\\right)=2k^2\\cdot\\frac{10+6+5}{60}=\\frac{7k^2}{10}=\\frac7{10}\\cdot\\frac{400}{2401}=\\frac{40}{343}$.\n\n**Answer: $\\frac{40}{343}$**"
+   }
+  ],
+  "topics": [
+   "probability"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null,
+  "answerDisplay": "$\\frac{40}{343}$"
+ },
+ {
+  "id": "bmt-2023-discrete-tiebreaker-02",
+  "bank": "bmt",
+  "source": {
+   "contest": "Berkeley Math Tournament",
+   "paper": "2023 Discrete Tiebreaker",
+   "year": 2023,
+   "number": 2,
+   "url": "https://berkeley.mt/archives/bmt-2023/discrete-tiebreaker-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Andrew, Benji, and Carlson want to split a pile of $5$ indistinguishable left shoes and $7$ indistinguishable right shoes. Andrew is practical and wants the same number of left and right shoes. Benji is greedy and wants the most shoes out of the three of them. Carlson is a trickster and wants Benji to have a different number of left and right shoes. How many ways are there to split up the shoes in a way that suits everyone's desires?",
+  "image": null,
+  "choices": null,
+  "answer": "41",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Casework on Andrew",
+    "body": "Andrew gets $k$ left and $k$ right shoes, $0\\le k\\le5$. Benji must have strictly more shoes than each of the other two (the most shoes), and an unequal number of left and right.\n\n- $k=0$: all $12$ shoes are split between Benji and Carlson, and Benji must have more than Carlson, so Benji has $7$ to $12$ shoes. Counting the $(5,7)$ splits with these totals gives $21$, minus the $2$ where Benji's left and right counts are equal (totals $8$ and $10$): $19$ ways.\n- $k=1$: $10$ shoes remain, Benji has $6$ to $10$: $13$ ways.\n- $k=2$: $8$ shoes remain, Benji has $5$ to $8$: $9$ ways.\n- $k\\ge3$: Andrew has at least $6$ shoes and $\\le6$ remain for the other two, so Benji cannot exceed Andrew.\n\nTotal $19+13+9=41$. (A direct enumeration over all $(a_L,b_L,c_L)$ and $(a_R,b_R,c_R)$ confirms $41$.)\n\n**Answer: 41**"
+   }
+  ],
+  "topics": [
+   "counting"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "bmt-2023-discrete-tiebreaker-03",
+  "bank": "bmt",
+  "source": {
+   "contest": "Berkeley Math Tournament",
+   "paper": "2023 Discrete Tiebreaker",
+   "year": 2023,
+   "number": 3,
+   "url": "https://berkeley.mt/archives/bmt-2023/discrete-tiebreaker-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Bessie the cow is hungry and wants to eat some oranges, which she has an infinite supply of. Bessie starts with a fullness level of $0$, and each orange that she eats increases her fullness level by $85$. She can also eat lemons, and each time she eats a lemon, her fullness level is halved, rounding down. What is the smallest number of lemons that Bessie should have in order to be able to attain every possible nonnegative integer fullness level?",
+  "image": null,
+  "choices": null,
+  "answer": "7",
+  "acceptedAnswers": null,
+  "answerUnit": "lemons",
+  "solutions": [
+   {
+    "title": "Move oranges before lemons",
+    "body": "An orange eaten after a lemon is worth the same as two oranges eaten before it, so any reachable level is reached by eating oranges first, then lemons. With $a$ lemons the reachable levels are $\\lfloor\\frac{85k}{2^j}\\rfloor$ for $0\\le j\\le a$ and $k\\ge0$.\n\nWith $a=7$: $\\lfloor\\frac{85k}{128}\\rfloor$ increases by $0$ or $1$ at each step because $85<128$, so it hits every nonnegative integer. With $a\\le6$ the available steps $\\frac{85}{2^j}$ are too coarse (a search over all reachable values shows some small integer is always missed).\n\nSo the minimum is $7$.\n\n**Answer: 7**"
+   }
+  ],
+  "topics": [
+   "number-theory",
+   "counting"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ }
+]

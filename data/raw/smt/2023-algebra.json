@@ -1,0 +1,358 @@
+[
+ {
+  "id": "smt-2023-algebra-01",
+  "bank": "smt",
+  "source": {
+   "contest": "Stanford Math Tournament",
+   "paper": "2023 Algebra",
+   "year": 2023,
+   "number": 1,
+   "url": "https://www.stanfordmathtournament.org/pdfs/smt2023/algebra-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "There exists a unique real value of $x$ such that $$(x+\\sqrt{x})^2=16.$$ Compute $x$.",
+  "image": null,
+  "choices": null,
+  "answer": "(9-sqrt(17))/2",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "answerDisplay": "$\\frac{9-\\sqrt{17}}{2}$",
+  "solutions": [
+   {
+    "title": "Substitute $y=\\sqrt{x}$",
+    "body": "We need $x\\ge 0$, so $x+\\sqrt{x}\\ge0$ and hence $x+\\sqrt x=4$. With $y=\\sqrt x\\ge 0$: $y^2+y-4=0$, so $y=\\frac{-1+\\sqrt{17}}{2}$ (the other root is negative).\n\nThen $x=y^2=\\frac{18-2\\sqrt{17}}{4}=\\frac{9-\\sqrt{17}}{2}$.\n\n**Answer: $\\frac{9-\\sqrt{17}}{2}$**"
+   },
+   {
+    "title": "Solve for $x$ directly",
+    "body": "From $x+\\sqrt x=4$ we get $\\sqrt x=4-x$, so $x=(4-x)^2=x^2-8x+16$, i.e. $x^2-9x+16=0$ and $x=\\frac{9\\pm\\sqrt{17}}{2}$. We need $4-x\\ge0$, so only the smaller root works: $x=\\frac{9-\\sqrt{17}}{2}\\approx2.44$.\n\n**Answer: $\\frac{9-\\sqrt{17}}{2}$**"
+   }
+  ],
+  "topics": [
+   "algebra"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "smt-2023-algebra-02",
+  "bank": "smt",
+  "source": {
+   "contest": "Stanford Math Tournament",
+   "paper": "2023 Algebra",
+   "year": 2023,
+   "number": 2,
+   "url": "https://www.stanfordmathtournament.org/pdfs/smt2023/algebra-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Compute the number of values of $x$ in the interval $[-11\\pi,-2\\pi]$ that satisfy $\\dfrac{5\\cos(x)+4}{5\\sin(x)+3}=0$.",
+  "image": null,
+  "choices": null,
+  "answer": "4",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Solve numerator and denominator",
+    "body": "The fraction is $0$ exactly when $5\\cos x+4=0$ and $5\\sin x+3\\ne0$. $\\cos x=-\\frac45$ has two solutions per period; at these $\\sin x=\\pm\\frac35$, and we must discard those with $\\sin x=-\\frac35$ (denominator $0$). So exactly one solution per period survives: the one with $\\sin x=+\\frac35$, which lies in $[2k\\pi,(2k+1)\\pi]$.\n\nThe intervals $[2k\\pi,(2k+1)\\pi]$ inside $[-11\\pi,-2\\pi]$ are $[-10\\pi,-9\\pi],[-8\\pi,-7\\pi],[-6\\pi,-5\\pi],[-4\\pi,-3\\pi]$, each containing one solution.\n\n**Answer: 4**"
+   }
+  ],
+  "topics": [
+   "trigonometry"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "smt-2023-algebra-03",
+  "bank": "smt",
+  "source": {
+   "contest": "Stanford Math Tournament",
+   "paper": "2023 Algebra",
+   "year": 2023,
+   "number": 3,
+   "url": "https://www.stanfordmathtournament.org/pdfs/smt2023/algebra-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Nathan has discovered a new way to construct chocolate bars, but it's expensive! He starts with a single $1\\times1$ square of chocolate and then adds more rows and columns from there. If his current bar has dimensions $w\\times h$ ($w$ columns and $h$ rows), then it costs $w^2$ dollars to add another row and $h^2$ dollars to add another column. What is the minimum cost to get his chocolate bar to size $20\\times20$?",
+  "image": null,
+  "choices": null,
+  "answer": "5339",
+  "acceptedAnswers": null,
+  "answerUnit": "dollars",
+  "solutions": [
+   {
+    "title": "Alternate rows and columns",
+    "body": "If $w>h$, adding a column then a row costs $h^2+(w+1)^2$, while a row then a column costs $w^2+(h+1)^2$. The difference is $2w-2h>0$, so adding a row first is cheaper. So we should always extend the shorter side, which means alternating.\n\nThe costs are $1^2$ (first row), $2^2$ (column), $2^2$ (row), $3^2$, $3^2$, ..., $19^2$, $19^2$, $20^2$ (last step), i.e. $1+2\\sum_{k=2}^{19}k^2+20^2$.\n\nSince $\\sum_{k=1}^{19}k^2=\\frac{19\\cdot20\\cdot39}{6}=2470$, the total is $1+2(2470-1)+400=5339$.\n\n**Answer: 5339**"
+   },
+   {
+    "title": "Check by dynamic programming",
+    "body": "Let $C(w,h)$ be the minimum cost to reach $w\\times h$. Then $C(w,h)=\\min(C(w,h-1)+w^2,\\,C(w-1,h)+h^2)$. Computing the table up to $20\\times20$ (e.g. by a short program) gives $C(20,20)=5339$, matching the alternating strategy.\n\n**Answer: 5339**"
+   }
+  ],
+  "topics": [
+   "algebra",
+   "patterns"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "smt-2023-algebra-04",
+  "bank": "smt",
+  "source": {
+   "contest": "Stanford Math Tournament",
+   "paper": "2023 Algebra",
+   "year": 2023,
+   "number": 4,
+   "url": "https://www.stanfordmathtournament.org/pdfs/smt2023/algebra-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "If the sum of the real roots $x$ to each of the equations $$2^{2x}-2^{x+1}+1-\\frac1{k^2}=0$$ for $k=2,3,\\ldots,2023$ is $N$, what is $2^N$?",
+  "image": null,
+  "choices": null,
+  "answer": "1012/2023",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Factor the quadratic in $y=2^x$",
+    "body": "With $y=2^x$ the equation is $y^2-2y+1-\\frac1{k^2}=0$, i.e. $(y-1)^2=\\frac1{k^2}$, so $y=1\\pm\\frac1k$. Both are positive for $k\\ge2$, so $x=\\log_2(1\\pm\\frac1k)$.\n\nThe two roots for a given $k$ sum to $\\log_2\\left(1-\\frac1{k^2}\\right)=\\log_2\\frac{(k-1)(k+1)}{k^2}$.\n\nHence $2^N=\\prod_{k=2}^{2023}\\frac{(k-1)(k+1)}{k^2}=\\frac{1\\cdot2\\cdots2022}{2\\cdot3\\cdots2023}\\cdot\\frac{3\\cdot4\\cdots2024}{2\\cdot3\\cdots2023}=\\frac1{2023}\\cdot\\frac{2024}{2}=\\frac{1012}{2023}$.\n\n**Answer: $\\frac{1012}{2023}$**"
+   }
+  ],
+  "topics": [
+   "algebra",
+   "sequences-series"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "smt-2023-algebra-05",
+  "bank": "smt",
+  "source": {
+   "contest": "Stanford Math Tournament",
+   "paper": "2023 Algebra",
+   "year": 2023,
+   "number": 5,
+   "url": "https://www.stanfordmathtournament.org/pdfs/smt2023/algebra-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Suppose $\\alpha,\\beta,\\gamma\\in\\{-2,3\\}$ are chosen such that $$M=\\max_{x\\in\\mathbb R}\\ \\min_{y\\in\\mathbb R_{\\ge0}}\\ \\alpha x+\\beta y+\\gamma xy$$ is finite and positive (note: $\\mathbb R_{\\ge 0}$ is the set of nonnegative real numbers). What is the sum of the possible values of $M$?",
+  "image": null,
+  "choices": null,
+  "answer": "13/2",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Reduce to a single maximization",
+    "body": "Write the expression as $\\alpha x+y(\\beta+\\gamma x)$. If $\\beta+\\gamma x<0$ the minimum over $y$ is $-\\infty$, so the maximizing $x$ must satisfy $\\beta+\\gamma x\\ge0$, and then the minimum is at $y=0$, giving $\\alpha x$. So $M=\\max\\{\\alpha x:\\ \\gamma x\\ge-\\beta\\}$.\n\nFor $M$ to be finite, $\\alpha$ and $\\gamma$ must have opposite signs; for $M>0$ we need $x$ of the sign of $\\alpha$ (so $\\gamma x\\le0$), which forces $\\beta=3$. Then the best $x$ is $-\\beta/\\gamma$ and $M=-\\alpha\\beta/\\gamma$.\n\nThe cases $(\\alpha,\\gamma)=(-2,3)$ and $(3,-2)$ give $M=2$ and $M=\\frac92$. The sum is $\\frac{13}2$.\n\n**Answer: $\\frac{13}{2}$**"
+   }
+  ],
+  "topics": [
+   "algebra",
+   "inequalities"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "smt-2023-algebra-06",
+  "bank": "smt",
+  "source": {
+   "contest": "Stanford Math Tournament",
+   "paper": "2023 Algebra",
+   "year": 2023,
+   "number": 6,
+   "url": "https://www.stanfordmathtournament.org/pdfs/smt2023/algebra-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "What is the area of the figure in the complex plane enclosed by the origin and the set of all points $\\frac1z$ such that $(1-2i)z+(-2i-1)\\overline z=6i$?",
+  "image": null,
+  "choices": null,
+  "answer": "5*pi/36",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "answerDisplay": "$\\frac{5\\pi}{36}$",
+  "solutions": [
+   {
+    "title": "Invert a line",
+    "body": "Let $w=(1-2i)z$. Then $(-2i-1)\\overline z=-\\overline{w}$, so the condition is $w-\\overline w=6i$, i.e. $\\operatorname{Im}w=3$. The points $\\frac1w$ with $\\operatorname{Im}w=3$ form the circle through $0$ with center $-\\frac{i}{6}$ and radius $\\frac16$ (inversion of a line at distance $3$ from the origin gives a circle of diameter $\\frac13$). Its area is $\\frac{\\pi}{36}$.\n\nSince $\\frac1z=\\frac{1-2i}{w}$ and $|1-2i|^2=5$, areas scale by $5$: the area is $\\frac{5\\pi}{36}$.\n\n**Answer: $\\frac{5\\pi}{36}$**"
+   },
+   {
+    "title": "Use coordinates",
+    "body": "With $z=x+yi$ the condition becomes $y=-2x-3$ (a line at distance $\\frac3{\\sqrt5}$ from the origin). Inversion in the unit circle sends this line to a circle through the origin whose diameter is the reciprocal of the distance: $\\frac{\\sqrt5}{3}$. Area $=\\pi\\left(\\frac{\\sqrt5}{6}\\right)^2=\\frac{5\\pi}{36}$.\n\n**Answer: $\\frac{5\\pi}{36}$**"
+   }
+  ],
+  "topics": [
+   "complex-numbers",
+   "geometry"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "smt-2023-algebra-07",
+  "bank": "smt",
+  "source": {
+   "contest": "Stanford Math Tournament",
+   "paper": "2023 Algebra",
+   "year": 2023,
+   "number": 7,
+   "url": "https://www.stanfordmathtournament.org/pdfs/smt2023/algebra-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Consider a sequence $F_0=2$, $F_1=3$ that has the property $F_{n+1}F_{n-1}-F_n^2=(-1)^n\\cdot2$. If each term of the sequence can be written in the form $a\\cdot r_1^n+b\\cdot r_2^n$, what is the positive difference between $r_1$ and $r_2$?",
+  "image": null,
+  "choices": null,
+  "answer": "sqrt(17)/2",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "answerDisplay": "$\\frac{\\sqrt{17}}{2}$",
+  "solutions": [
+   {
+    "title": "Find the linear recurrence",
+    "body": "The first terms are $F_0=2,F_1=3,F_2=\\frac72,F_3=\\frac{19}4,F_4=\\frac{47}8$ and they satisfy $F_{n+1}=\\frac{F_n}{2}+F_{n-1}$. (Induction: if this holds up to $F_k$, then $F_{k+1}F_{k-1}-F_k^2=\\frac{F_kF_{k-1}}2+F_{k-1}^2-F_k^2$; substituting $F_{k-1}^2=F_kF_{k-2}+(-1)^k 2$ and $F_k=\\frac{F_{k-1}}2+F_{k-2}$ gives $(-1)^k2$.)\n\nThe characteristic equation is $r^2=\\frac r2+1$, i.e. $r^2-\\frac r2-1=0$, so $r=\\frac{1\\pm\\sqrt{17}}4$ and $|r_1-r_2|=\\frac{\\sqrt{17}}2$.\n\n**Answer: $\\frac{\\sqrt{17}}{2}$**"
+   },
+   {
+    "title": "Use the determinant condition",
+    "body": "If $F_n=ar_1^n+br_2^n$ then $F_{n+1}F_{n-1}-F_n^2=-ab(r_1-r_2)^2(r_1r_2)^{n-1}$. This must equal $2(-1)^n$ for all $n$, so $r_1r_2=-1$. With $r_1+r_2=c$ the recurrence is $F_{n+1}=cF_n+F_{n-1}$; from $F_2F_0-F_1^2=-2$ we get $F_2=\\frac72=3c+2$, so $c=\\frac12$. Then $(r_1-r_2)^2=c^2+4=\\frac{17}4$.\n\n**Answer: $\\frac{\\sqrt{17}}{2}$**"
+   }
+  ],
+  "topics": [
+   "sequences-series",
+   "algebra"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "smt-2023-algebra-08",
+  "bank": "smt",
+  "source": {
+   "contest": "Stanford Math Tournament",
+   "paper": "2023 Algebra",
+   "year": 2023,
+   "number": 8,
+   "url": "https://www.stanfordmathtournament.org/pdfs/smt2023/algebra-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "If $x$ and $y$ are real numbers, compute the minimum possible value of $$\\frac{4xy(3x^2+10xy+6y^2)}{x^4+4y^4}.$$",
+  "image": null,
+  "choices": null,
+  "answer": "-1",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Sophie Germain identity",
+    "body": "Let $u=x^2+2y^2+2xy$ and $v=x^2+2y^2-2xy$. Then $x^4+4y^4=uv$ and one checks $4xy(3x^2+10xy+6y^2)=12x^3y+40x^2y^2+24xy^3=v^2+4u^2-5uv$.\n\nSo the expression equals $\\frac{v}{u}+\\frac{4u}{v}-5$. Both $u,v>0$ (unless $x=y=0$), so by AM-GM $\\frac vu+\\frac{4u}v\\ge4$, with equality when $v=2u$, which is attainable. The minimum is $4-5=-1$.\n\n**Answer: $-1$**"
+   }
+  ],
+  "topics": [
+   "algebra",
+   "inequalities"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "smt-2023-algebra-09",
+  "bank": "smt",
+  "source": {
+   "contest": "Stanford Math Tournament",
+   "paper": "2023 Algebra",
+   "year": 2023,
+   "number": 9,
+   "url": "https://www.stanfordmathtournament.org/pdfs/smt2023/algebra-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Let $x,y,z$ be nonzero numbers, not necessarily real, such that $$(x-y)^2+(y-z)^2+(z-x)^2=24yz$$ and $$\\frac{x^2}{yz}+\\frac{y^2}{zx}+\\frac{z^2}{xy}=3.$$ Compute $\\frac{x^2}{yz}$.",
+  "image": null,
+  "choices": null,
+  "answer": "5",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Use $x+y+z=0$",
+    "body": "The second equation is $x^3+y^3+z^3=3xyz$, i.e. $(x+y+z)(x^2+y^2+z^2-xy-yz-zx)=0$. The second factor is half of the first given sum of squares, which equals $24yz\\neq0$, so $x+y+z=0$ and $x=-y-z$.\n\nSubstituting into the first equation: $6y^2+6z^2+6yz=24yz$, so $y^2-3yz+z^2=0$, i.e. $\\frac yz+\\frac zy=3$.\n\nThen $\\frac{x^2}{yz}=\\frac{(y+z)^2}{yz}=\\frac yz+\\frac zy+2=5$.\n\n**Answer: 5**"
+   }
+  ],
+  "topics": [
+   "algebra"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "smt-2023-algebra-10",
+  "bank": "smt",
+  "source": {
+   "contest": "Stanford Math Tournament",
+   "paper": "2023 Algebra",
+   "year": 2023,
+   "number": 10,
+   "url": "https://www.stanfordmathtournament.org/pdfs/smt2023/algebra-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Suppose that $p(x),q(x)$ are monic polynomials with nonnegative integer coefficients such that $$\\frac1{5x}\\ge\\frac1{q(x)}-\\frac1{p(x)}\\ge\\frac1{3x^2}$$ for all integers $x\\ge2$. Compute the minimum possible value of $p(1)\\cdot q(1)$.",
+  "image": null,
+  "choices": null,
+  "answer": "3",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Degree analysis and casework",
+    "body": "The right inequality gives $3x^2(p-q)\\ge pq$, so $\\deg p\\ge\\deg q$ and $\\deg q\\le2$ (and $\\deg p\\ge 3$ if $\\deg q=2$). Also $q$ cannot be constant.\n\nIf $q$ is linear, $p$ must be linear too, and the best is $q=x+1,\\ p=x+2$ giving $p(1)q(1)=2\\cdot3=6$.\n\nIf $\\deg q=2$, the product $p(1)q(1)$ is small only when $p,q$ have few terms. $q=x^2$ fails at $x=2$ ($\\frac14-\\frac1{p(2)}>\\frac1{10}$ for any $p$ with leading term at least $x^3$). With $p=x^k$: $k=3,4$ give no valid $q$ at $x=2$, while $k=5$ works with $q=x^2+2x$, giving $p(1)q(1)=1\\cdot3=3$. Larger $k$ cannot do better, and if both polynomials have a non-leading term the product is at least $4$.\n\nCheck $q=x^2+2x$, $p=x^5$: the left inequality holds because $x^2+2x\\ge5x$ for $x\\ge3$ (and $x=2$ is checked directly). For the right one, $\\frac1{x^5}\\le\\frac1{2(x^2+2x)}$, so the difference is at least $\\frac1{2(x^2+2x)}\\ge\\frac1{3x^2}$ for $x\\ge4$, and $x=2,3$ are checked directly.\n\n**Answer: 3**"
+   }
+  ],
+  "topics": [
+   "polynomials",
+   "inequalities"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ }
+]

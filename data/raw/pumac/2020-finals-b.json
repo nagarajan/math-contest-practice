@@ -1,0 +1,102 @@
+[
+ {
+  "id": "pumac-2020-finals-b-01",
+  "bank": "pumac",
+  "source": {
+   "contest": "PUMaC",
+   "paper": "2020 Individual Finals B",
+   "year": 2020,
+   "number": 1,
+   "url": "https://jason-shi-f9dm.squarespace.com/s/2020_Indiv_Finals_B.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Find all pairs of natural numbers $(n,k)$ with the following property:\n\nGiven a $k\\times k$ array of cells, such that every cell contains one integer, there always exists a path from the left to the right edges such that the sum of the numbers on the path is a multiple of $n$.\n\n*Note:* A path from the left to the right edge is a sequence of cells of the array $a_1,a_2,\\dots,a_m$ so that $a_1$ is a cell of the leftmost column, $a_m$ is the cell of the rightmost column, and $a_i,a_{i+1}$ share an edge for all $i=1,2,\\dots,m-1$.",
+  "image": null,
+  "choices": null,
+  "answer": "All pairs with $n\\le k$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Pigeonhole on row sums",
+    "body": "**Answer: exactly the pairs with $n\\le k$.** (A path visits each cell at most once.)\n\n**If $n>k$ the property fails.** Fill the rightmost column with $1$'s and every other cell with $0$'s. Every path from the left edge to the right edge contains at least one and at most $k$ cells of the rightmost column, so its sum is between $1$ and $k<n$, never a multiple of $n$.\n\n**If $n\\le k$ the property holds.** Let $R_i$ be the sum of the numbers in row $i$ and $S_j=R_1+\\dots+R_j$ for $j=1,\\dots,k$.\n- If some $S_j\\equiv0\\pmod n$, then rows $1,\\dots,j$ have total sum divisible by $n$.\n- Otherwise the $k$ numbers $S_1,\\dots,S_k$ have residues among $1,\\dots,n-1$; since $k\\ge n>n-1$, two of them agree, $S_i\\equiv S_j$ with $i<j$, and then $R_{i+1}+\\dots+R_j\\equiv0\\pmod n$.\nIn both cases there are consecutive rows $a,\\dots,b$ whose total sum is a multiple of $n$. Now walk column by column: in column $1$ move vertically through all cells of rows $a,\\dots,b$ (starting at row $a$), step right to column $2$ at the row where you ended, move through rows $a,\\dots,b$ in the opposite direction, step right again, and so on. This path starts in the leftmost column, ends in the rightmost column, and visits every cell of rows $a,\\dots,b$ exactly once, so its sum is $R_a+\\dots+R_b\\equiv0\\pmod n$. $\\blacksquare$"
+   }
+  ],
+  "topics": [
+   "number-theory",
+   "logic"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "pumac-2020-finals-b-02",
+  "bank": "pumac",
+  "source": {
+   "contest": "PUMaC",
+   "paper": "2020 Individual Finals B",
+   "year": 2020,
+   "number": 2,
+   "url": "https://jason-shi-f9dm.squarespace.com/s/2020_Indiv_Finals_B.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Prove that there is a positive integer $M$ for which the following statement holds:\n\nFor all prime numbers $p$, there is an integer $n$ for which $\\sqrt p\\le n\\le M\\sqrt p$ and $p\\bmod n\\le\\frac n{2020}$.\n\n*Note:* Here, $p\\bmod n$ denotes the unique integer $r\\in\\{0,1,\\dots,n-1\\}$ for which $n\\mid p-r$. In other words, $p\\bmod n$ is the residue of $p$ upon division by $n$.",
+  "image": null,
+  "choices": null,
+  "answer": "$M=4040$ works: for small $p$ take $n=p$; for $p\\ge4040^2$ take $n=\\lfloor(p-1)/q\\rfloor$ with $q$ an integer in $[\\sqrt p/4040,\\sqrt p/2020]$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "$M=4040$",
+    "body": "We show $M=4040$ works.\n\n**Case $p<4040^2$.** Take $n=p$. Then $p\\bmod n=0\\le\\frac n{2020}$, $n=p\\ge\\sqrt p$, and $n=\\sqrt p\\cdot\\sqrt p<4040\\sqrt p=M\\sqrt p$.\n\n**Case $p\\ge4040^2$.** The interval $\\left[\\frac{\\sqrt p}{4040},\\frac{\\sqrt p}{2020}\\right]$ has length $\\frac{\\sqrt p}{4040}\\ge1$, so it contains an integer $q\\ge1$. Let $n=\\left\\lfloor\\frac{p-1}q\\right\\rfloor$ and $r=p-qn$; by the definition of the floor, $1\\le r\\le q$.\n- *Upper bound:* $n<\\frac pq\\le\\frac{p}{\\sqrt p/4040}=4040\\sqrt p$.\n- *Lower bound:* $n\\ge\\frac{p-q}{q}=\\frac pq-1\\ge2020\\sqrt p-1\\ge\\sqrt p$ (as $q\\le\\frac{\\sqrt p}{2020}$).\n- *Residue:* $p=qn+r$ with $0\\le r<n$ (indeed $r\\le q\\le\\frac{\\sqrt p}{2020}<\\sqrt p\\le n$), so dividing $p$ by $n$ leaves remainder $r$. Therefore\n$$p\\bmod n=r\\le q\\le\\frac{\\sqrt p}{2020}\\le\\frac n{2020}.$$\nSo in both cases the required $n$ exists. $\\blacksquare$"
+   }
+  ],
+  "topics": [
+   "number-theory"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "pumac-2020-finals-b-03",
+  "bank": "pumac",
+  "source": {
+   "contest": "PUMaC",
+   "paper": "2020 Individual Finals B",
+   "year": 2020,
+   "number": 3,
+   "url": "https://jason-shi-f9dm.squarespace.com/s/2020_Indiv_Finals_B.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Let $ABC$ be a triangle and let the points $D,E$ be on the rays $AB,AC$ such that $BCED$ is cyclic. Prove that the following two statements are equivalent:\n- There is a point $X$ on the circumcircle of $ABC$ such that circles $BDX$, $CEX$ are tangent to each other.\n- $AB\\cdot AD\\le4R^2$, where $R$ is the radius of the circumcircle of $ABC$.",
+  "image": null,
+  "choices": null,
+  "answer": "The second circle through $X$ meets the first again on line $DE$, so tangency happens iff line $DE$ meets the circumcircle; and $DE$ meets it iff $AB\\cdot AD\\le4R^2$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Radical-type lemma, then the antipode",
+    "body": "Let $\\Gamma$ be the circumcircle of $ABC$ (centre $O$, radius $R$). We use directed angles mod $180^\\circ$ and assume $D\\ne B$, $E\\ne C$ (so the circles in the statement are defined).\n\n**Lemma.** For $X\\in\\Gamma$ distinct from $B,C$, let $Y$ be the second intersection of circles $BDX$ and $CEX$ ($Y=X$ if they are tangent). Then $Y$ lies on line $DE$.\n*Proof.* Using $BDXY$ and $CEXY$ cyclic, and $D\\in AB$, $E\\in AC$:\n$$\\angle(DY,YE)=\\angle(DY,YX)+\\angle(XY,YE)=\\angle(DB,BX)+\\angle(XC,CE)=\\angle(AB,BX)+\\angle(XC,CA).$$\nSince $A,B,C,X\\in\\Gamma$, $\\angle(AB,BX)=\\angle(AC,CX)$, so the sum equals $\\angle(AC,CX)+\\angle(XC,CA)=0$. Hence $D,Y,E$ are collinear. $\\square$\n\n**Statement 1 $\\iff$ line $DE$ meets $\\Gamma$.**\n($\\Rightarrow$) If the circles are tangent at $X$, then $Y=X$ and by the lemma $X\\in DE$, so $X\\in DE\\cap\\Gamma$.\n($\\Leftarrow$) Let $X\\in DE\\cap\\Gamma$ (with $X\\ne B,C$; $X\\ne D,E$ since $D,E\\notin\\Gamma$ unless degenerate). The line $DE$ meets circle $BDX$ only at $D$ and $X$, and circle $CEX$ only at $E$ and $X$. By the lemma $Y\\in DE$ lies on both circles, so $Y\\in\\{D,X\\}\\cap\\{E,X\\}=\\{X\\}$ (as $D\\ne E$). So $Y=X$: the circles meet only at $X$, i.e. they are tangent there.\n\n**Line $DE$ meets $\\Gamma$ $\\iff AB\\cdot AD\\le4R^2$.** Since $BCED$ is cyclic, $DE$ is antiparallel to $BC$ in the angle at $A$; the tangent to $\\Gamma$ at $A$ is also antiparallel to $BC$, so $DE$ is parallel to the tangent at $A$, i.e. $DE\\perp AA'$ where $A'$ is the antipode of $A$. Let $H=DE\\cap AA'$, the projection of $D$ onto line $AA'$. A line perpendicular to the diameter $AA'$ meets $\\Gamma$ iff its foot $H$ lies on the segment $AA'$. Since $D$ is on ray $AB$, $H$ is on ray $AA'$ at distance\n$$AH=AD\\cos\\angle BAA'=AD\\cdot\\frac{AB}{AA'}=\\frac{AD\\cdot AB}{2R},$$\nbecause $\\angle ABA'=90^\\circ$ (it subtends the diameter). Thus $H\\in AA'$ iff $AH\\le2R$ iff $AB\\cdot AD\\le4R^2$.\n\nCombining the two equivalences proves the claim. $\\blacksquare$"
+   }
+  ],
+  "topics": [
+   "geometry"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ }
+]

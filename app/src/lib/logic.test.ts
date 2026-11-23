@@ -3,6 +3,7 @@ import { isCorrect, parseNumber, scoreAnswer } from './answers'
 import { evalExpr } from './expr'
 import { buildExam, pickPracticeQuestion, questionWeight, RETRY_AFTER_MS, WEIGHT_CORRECT, WEIGHT_UNSEEN, WEIGHT_WRONG } from './selection'
 import { emptyData, recordAttempt } from './storage'
+import { expandChunk } from './banks'
 import type { BankMeta, Question } from '../types'
 
 const q = (over: Partial<Question>): Question => ({
@@ -196,5 +197,18 @@ describe('buildExam', () => {
     expect(e.filter((x) => x.bank === 'noetic')).toHaveLength(6)
     expect(e.filter((x) => x.bank === 'kangaroo').length).toBeGreaterThanOrEqual(10)
     expect(e.filter((x) => x.bank === 'moems').length).toBeGreaterThanOrEqual(10)
+  })
+})
+
+describe('expandChunk', () => {
+  it('restores bank, grades, source, solutions file and missing fields', () => {
+    const [x] = expandChunk({
+      bank: 'hmmt',
+      grades: [9, 10],
+      papers: [['hmmt/nov-2010-guts', { contest: 'HMMT', paper: 'Guts', year: 2010, url: 'u' }]],
+      questions: [{ id: 'a', p: 0, n: 3, type: 'mc', prompt: 'P', answer: 'B' }],
+    })
+    expect(x).toMatchObject({ id: 'a', bank: 'hmmt', grades: [9, 10], sol: 'hmmt/nov-2010-guts', type: 'mc', answer: 'B', topics: [], choices: null })
+    expect(x.source).toEqual({ contest: 'HMMT', paper: 'Guts', year: 2010, url: 'u', number: 3 })
   })
 })

@@ -1,0 +1,104 @@
+[
+ {
+  "id": "pumac-2016-finals-b-01",
+  "bank": "pumac",
+  "source": {
+   "contest": "PUMaC",
+   "paper": "2016 Individual Finals B",
+   "year": 2016,
+   "number": 1,
+   "url": "https://jason-shi-f9dm.squarespace.com/s/PUMaC2016_FinalsB.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Let $f(n)$ be the probability that, if $k\\in\\{1,2,\\dots,2n\\}$ is randomly selected, then $1+2+\\cdots+k$ will be divisible by $n$. Prove that $f(n)$ is distinct for every positive integer $n$.",
+  "image": null,
+  "choices": null,
+  "answer": "$f(n)=\\frac{2^{m}}{2n}$ where $m$ is the number of distinct primes dividing $2n$; equal values force $n_1=2^tn_2$, which forces equal $m$ and hence $n_1=n_2$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Count the good $k$ and compare",
+    "body": "$1+2+\\cdots+k=\\frac{k(k+1)}2$ is divisible by $n$ iff $2n\\mid k(k+1)$. Write $2n=p_1^{r_1}\\cdots p_m^{r_m}$ with distinct primes $p_i$ (so $m$ is the number of distinct prime divisors of $2n$). Since $\\gcd(k,k+1)=1$, each prime power $p_i^{r_i}$ must divide exactly one of $k$ and $k+1$. For each of the $2^m$ ways of deciding, for every $i$, whether $p_i^{r_i}\\mid k$ or $p_i^{r_i}\\mid k+1$, the Chinese remainder theorem gives exactly one residue $k$ modulo $2n$, hence exactly one $k\\in\\{1,\\dots,2n\\}$. Different choices give different $k$ (a prime power cannot divide both $k$ and $k+1$). So there are $2^m$ good values and\n$$f(n)=\\frac{2^{m}}{2n}.$$\nNow suppose $f(n_1)=f(n_2)$ with $m_i$ the number of distinct prime divisors of $2n_i$. Then $\\frac{n_1}{n_2}=2^{m_1-m_2}$, so (after possibly swapping) $n_1=2^tn_2$ with $t\\ge0$. But $2n_1$ and $2n_2$ are both even and have the same odd part, hence the same set of prime divisors, so $m_1=m_2$, $t=0$ and $n_1=n_2$. Therefore $f$ is injective. ∎"
+   }
+  ],
+  "topics": [
+   "number-theory",
+   "probability"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "pumac-2016-finals-b-02",
+  "bank": "pumac",
+  "source": {
+   "contest": "PUMaC",
+   "paper": "2016 Individual Finals B",
+   "year": 2016,
+   "number": 2,
+   "url": "https://jason-shi-f9dm.squarespace.com/s/PUMaC2016_FinalsB.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "There are $12$ candies on the table, four of which are rare candies. Chad has a friend who can tell rare candies apart from regular candies, but Chad can't. Chad's friend is allowed to take four candies from the table, but may not take any rare candies. Can his friend always take four candies in such a way that Chad will then be able to identify the four rare candies? If so, describe a strategy. If not, prove that it cannot be done.\n\nNote that Chad does not know anything about how the candies were selected (e.g. the order in which they were selected). However, Chad and his friend may communicate beforehand.",
+  "image": null,
+  "choices": null,
+  "answer": "Yes. Arrange the $12$ positions in a circle in advance; the friend pairs each rare candy with a non-rare one by bracket matching and removes the non-rare member of each pair; Chad decodes by bracket matching again.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Bracket matching on a circle",
+    "body": "**Setup.** Chad and his friend agree beforehand to view the $12$ places on the table as the positions of a circle (clockwise order). A candy is R (rare) or N (not rare); there are $4$ R's and $8$ N's.\n\n**Friend's strategy.** Repeat four times: in the current circle pick an R whose left neighbour is an N (such an R exists while any R remains, since there are always more N's than R's left, so some R has an N immediately on its left); record the pair $(N,R)$ and delete both from the circle. After four steps every R is paired with an N that was immediately to its left at the time. The friend takes the four N's of the recorded pairs (never a rare candy).\n\n**Structure of the pairs.** Fix a recorded pair $(N,R)$ and look at the original circle. All candies strictly between $N$ and $R$ (going clockwise from $N$ to $R$) were deleted before $(N,R)$ (they had to be gone for $N$ and $R$ to become neighbours), and they were deleted in complete recorded pairs: if $R'$ lies between, the N' that was its left neighbour at deletion is either between as well or is $N$ itself, and the latter is impossible since $N$ is deleted together with $R$; similarly the partner of an inner N is not $R$. So the segment from $N$ to $R$ is $N$, then a concatenation of complete pair-blocks of the same kind, then $R$.\n\n**Chad's decoding.** Chad sees which four positions were taken (\"chosen\") and which eight remain (\"unchosen\"). For each chosen candy $c$ he walks clockwise starting at $c$ with a counter: chosen counts $+1$, unchosen counts $-1$, and he declares rare the first candy at which the counter becomes $0$.\n\n*Why this finds the partner R of $c$:* by the structure above, after $c$ the counter is $1$; each inner block is a balanced bracket sequence (chosen = open, rare = close), so the counter returns to $1$ after each inner block and never goes below $1$ within them; and the segment contains no unchosen N (every candy inside is part of an inner pair, whose N is chosen and whose R is unchosen). So the counter first hits $0$ exactly at $R$. Thus Chad recovers all four rare candies.\n\nSo the answer is yes. ∎"
+   }
+  ],
+  "topics": [
+   "logic",
+   "counting"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "pumac-2016-finals-b-03",
+  "bank": "pumac",
+  "source": {
+   "contest": "PUMaC",
+   "paper": "2016 Individual Finals B",
+   "year": 2016,
+   "number": 3,
+   "url": "https://jason-shi-f9dm.squarespace.com/s/PUMaC2016_FinalsB.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Let $m$, $k$, and $c$ be positive integers with $k>c$, and let $\\lambda$ be a positive, non-integer real root of the equation $\\lambda^{m+1}-k\\lambda^m-c=0$. Let $f:\\mathbb Z^+\\to\\mathbb Z$ be defined by $f(n)=\\lfloor\\lambda n\\rfloor$ for all $n\\in\\mathbb Z^+$. Show that $f^{m+1}(n)\\equiv cn-1\\pmod k$ for all $n\\in\\mathbb Z^+$. (Here, $\\mathbb Z^+$ denotes the set of positive integers, $\\lfloor x\\rfloor$ denotes the greatest integer less than or equal to $x$, and $f^{m+1}(n)=f(f(\\dots f(n)\\dots))$ where $f$ appears $m+1$ times.)",
+  "image": null,
+  "choices": null,
+  "answer": "Write $\\lambda=k+c/\\lambda^m$, so $f(x)\\equiv\\lfloor cx/\\lambda^m\\rfloor\\pmod k$; then show $(cn-1)\\lambda^m<c\\,f^m(n)<cn\\lambda^m$ using that $\\lambda$ is irrational and $c\\frac{\\lambda^m-1}{\\lambda-1}<\\lambda^m$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Reduce to an inequality",
+    "body": "**Preliminaries.** From $\\lambda^m(\\lambda-k)=c>0$ we get $\\lambda>k\\ge2$, and $\\lambda=k+\\frac c{\\lambda^m}$. The polynomial $x^{m+1}-kx^m-c$ is monic with integer coefficients, so a rational root would be an integer (rational root theorem); hence $\\lambda$ is irrational. In particular $\\lambda x$ is irrational for every positive integer $x$, so $\\lambda x-1<f(x)<\\lambda x$ strictly.\n\n**Step 1.** For every positive integer $x$: $\\lambda x=kx+\\frac{cx}{\\lambda^m}$, so $f(x)=kx+\\left\\lfloor\\frac{cx}{\\lambda^m}\\right\\rfloor\\equiv\\left\\lfloor\\frac{cx}{\\lambda^m}\\right\\rfloor\\pmod k$. Apply this with $x=f^m(n)$: $f^{m+1}(n)\\equiv\\left\\lfloor\\frac{c\\,f^m(n)}{\\lambda^m}\\right\\rfloor\\pmod k$. It therefore suffices to prove\n$$cn-1<\\frac{c\\,f^m(n)}{\\lambda^m}<cn,\\quad\\text{i.e.}\\quad(cn-1)\\lambda^m<c\\,f^m(n)<cn\\lambda^m,$$\nbecause then the floor equals $cn-1$.\n\n**Step 2 (upper bound).** Since $f(x)<\\lambda x$ and $f$ is increasing, induction gives $f^j(n)<\\lambda^jn$; so $c\\,f^m(n)<cn\\lambda^m$.\n\n**Step 3 (lower bound).** Since $f(x)>\\lambda x-1$, induction gives $f^m(n)>\\lambda^mn-(\\lambda^{m-1}+\\cdots+\\lambda+1)=\\lambda^mn-\\frac{\\lambda^m-1}{\\lambda-1}$. Hence $c\\,f^m(n)>cn\\lambda^m-c\\frac{\\lambda^m-1}{\\lambda-1}$, and it remains to show $c\\frac{\\lambda^m-1}{\\lambda-1}\\le\\lambda^m$. As $c\\le k-1$ and $\\lambda>1$, it suffices to show $(k-1)(\\lambda^m-1)<\\lambda^m(\\lambda-1)$. Expanding, this is $k\\lambda^m-k+1<\\lambda^{m+1}=k\\lambda^m+c$, i.e. $c+k>1$, which is true. So $c\\,f^m(n)>(cn-1)\\lambda^m$.\n\nCombining, $\\left\\lfloor\\frac{c\\,f^m(n)}{\\lambda^m}\\right\\rfloor=cn-1$ and $f^{m+1}(n)\\equiv cn-1\\pmod k$. ∎"
+   }
+  ],
+  "topics": [
+   "number-theory",
+   "algebra"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ }
+]

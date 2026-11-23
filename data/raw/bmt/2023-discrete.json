@@ -1,0 +1,343 @@
+[
+ {
+  "id": "bmt-2023-discrete-01",
+  "bank": "bmt",
+  "source": {
+   "contest": "Berkeley Math Tournament",
+   "paper": "2023 Discrete",
+   "year": 2023,
+   "number": 1,
+   "url": "https://berkeley.mt/archives/bmt-2023/discrete-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Compute the three-digit number that satisfies the following properties:\n- The hundreds digit and ones digit are the same, but the tens digit is different.\n- The number is divisible by 9.\n- When the number is divided by 5, the remainder is 1.",
+  "image": null,
+  "choices": null,
+  "answer": "171",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Use the remainder mod 5",
+    "body": "A number leaving remainder $1$ on division by $5$ ends in $1$ or $6$. With equal hundreds and ones digits the number is $1A1$ or $6B6$.\n\nDivisible by $9$: $1+A+1$ must be a multiple of $9$, so $A=7$ (number $171$); $6+B+6$ must be a multiple of $9$, so $B=6$ (number $666$). The tens digit must differ from the other digits, which rules out $666$.\n\n**Answer: 171**"
+   }
+  ],
+  "topics": [
+   "number-theory"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "bmt-2023-discrete-02",
+  "bank": "bmt",
+  "source": {
+   "contest": "Berkeley Math Tournament",
+   "paper": "2023 Discrete",
+   "year": 2023,
+   "number": 2,
+   "url": "https://berkeley.mt/archives/bmt-2023/discrete-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Three people, Pranav, Sumith, and Jacklyn, are attending a fair. Every time a person enters or exits, the groundskeeper writes their name down in chronological order. If each person enters and exits the fairgrounds exactly once, in how many ways can the groundskeeper write down their names?",
+  "image": null,
+  "choices": null,
+  "answer": "90",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Symmetry",
+    "body": "Label the events $A,B,C$ (entering) and $X,Y,Z$ (exiting). We count orderings of these $6$ events where $A$ precedes $X$, $B$ precedes $Y$, $C$ precedes $Z$. Among the $6!$ orderings, swapping within each pair gives groups of $2^3=8$, of which exactly one is valid. So there are $\\frac{6!}{8}=90$ ways.\n\n**Answer: 90**"
+   },
+   {
+    "title": "Write the name list directly",
+    "body": "The list is a word with each name appearing twice (first appearance = entering). The number of such words is $\\frac{6!}{2!2!2!}=90$.\n\n**Answer: 90**"
+   }
+  ],
+  "topics": [
+   "counting"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "bmt-2023-discrete-03",
+  "bank": "bmt",
+  "source": {
+   "contest": "Berkeley Math Tournament",
+   "paper": "2023 Discrete",
+   "year": 2023,
+   "number": 3,
+   "url": "https://berkeley.mt/archives/bmt-2023/discrete-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Find the number of positive integers $n$ less than $10000$ such that there are more $4$'s in the digits of $n+1$ than in the digits of $n$.",
+  "image": null,
+  "choices": null,
+  "answer": "1111",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Look at the carry",
+    "body": "Adding $1$ changes the trailing block of $9$s to $0$s and increases the digit before it. The number of $4$s increases only if that digit goes from $3$ to $4$ (it would otherwise not gain a $4$; a trailing $9$ becoming $0$ never creates a $4$ and can't lose a $4$). So $n$ must end in $3$ followed by some number $j\\ge0$ of $9$s, and the digits in front are free.\n\nFor $n<10000$ with a $3$ followed by $j$ nines, there are $10^{3-j}$ choices for the other digits ($j=0,1,2,3$): $1000+100+10+1=1111$.\n\n**Answer: 1111**"
+   }
+  ],
+  "topics": [
+   "counting",
+   "number-theory"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "bmt-2023-discrete-04",
+  "bank": "bmt",
+  "source": {
+   "contest": "Berkeley Math Tournament",
+   "paper": "2023 Discrete",
+   "year": 2023,
+   "number": 4,
+   "url": "https://berkeley.mt/archives/bmt-2023/discrete-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Given positive integers $a\\ge2$ and $k$, let $m_a(k)$ denote the remainder when $k$ is divided by $a$. Compute the number of positive integers $n$ less than $500$ such that $m_2(m_5(m_{11}(n)))=1$.",
+  "image": null,
+  "choices": null,
+  "answer": "182",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Unwrap the conditions",
+    "body": "$m_2(m_5(m_{11}(n)))=1$ means $m_5(m_{11}(n))$ is odd, i.e. $m_{11}(n)\\bmod5\\in\\{1,3\\}$. The residues $r=m_{11}(n)\\in\\{0,\\dots,10\\}$ with $r\\bmod5\\in\\{1,3\\}$ are $r=1,3,6,8$. So we need $n\\equiv1,3,6,8\\pmod{11}$.\n\nIn $1,\\dots,495=11\\cdot45$ there are $4\\cdot45=180$ such $n$. Among $496,\\dots,499$ (residues $1,2,3,4$) the valid ones are $496$ and $498$. Total $182$.\n\n**Answer: 182**"
+   }
+  ],
+  "topics": [
+   "number-theory",
+   "counting"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "bmt-2023-discrete-05",
+  "bank": "bmt",
+  "source": {
+   "contest": "Berkeley Math Tournament",
+   "paper": "2023 Discrete",
+   "year": 2023,
+   "number": 5,
+   "url": "https://berkeley.mt/archives/bmt-2023/discrete-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Kait rolls a fair $6$-sided die until she rolls a $6$. If she rolls a $6$ on the $N$th roll, she then rolls the die $N$ more times. What is the probability that she rolls a $6$ during these next $N$ times?",
+  "image": null,
+  "choices": null,
+  "answer": "6/11",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Complementary probability",
+    "body": "The probability the first $6$ is on roll $i$ and then no $6$ appears in the next $i$ rolls is $\\left(\\frac56\\right)^{i-1}\\frac16\\left(\\frac56\\right)^i=\\frac16\\left(\\frac56\\right)^{2i-1}$. Summing over $i\\ge1$ is a geometric series with first term $\\frac5{36}$ and ratio $\\frac{25}{36}$: $\\frac{5/36}{11/36}=\\frac5{11}$.\n\nSo the desired probability is $1-\\frac5{11}=\\frac6{11}$.\n\n**Answer: $\\frac6{11}$**"
+   }
+  ],
+  "topics": [
+   "probability"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null,
+  "answerDisplay": "$\\frac6{11}$"
+ },
+ {
+  "id": "bmt-2023-discrete-06",
+  "bank": "bmt",
+  "source": {
+   "contest": "Berkeley Math Tournament",
+   "paper": "2023 Discrete",
+   "year": 2023,
+   "number": 6,
+   "url": "https://berkeley.mt/archives/bmt-2023/discrete-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Let $N$ be the number of positive integers $x$ less than $210\\cdot2023$ such that $$\\operatorname{lcm}\\bigl(\\gcd(x,1734),\\gcd(x+17,x+1732)\\bigr)$$ divides $2023$. Compute the sum of the prime factors of $N$ with multiplicity. (For example, if $S=75=3^1\\cdot5^2$, then the answer is $1\\cdot3+2\\cdot5=13$.)",
+  "image": null,
+  "choices": null,
+  "answer": "51",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Reduce with the Euclidean algorithm",
+    "body": "$\\gcd(x+17,x+1732)=\\gcd(x+17,1715)$, and $1715=5\\cdot7^3$, $1734=2\\cdot3\\cdot17^2$, $2023=7\\cdot17^2$. The lcm divides $2023$ iff both gcds divide $2023$. That means: $2\\nmid x$, $3\\nmid x$ (from $\\gcd(x,1734)$; $17^2$ is allowed), and $5\\nmid x+17$, $7^2\\nmid x+17$ (from $\\gcd(x+17,1715)$; a single $7$ is allowed).\n\nThese are conditions modulo $2,3,5,49$. By the Chinese Remainder Theorem, among each block of $2\\cdot3\\cdot5\\cdot49=1470$ consecutive integers exactly $1\\cdot2\\cdot4\\cdot48=384$ are good. The range $1\\le x<210\\cdot2023$ is $289$ blocks of length $1470$ (since $210\\cdot2023=1470\\cdot289$) minus the last number $x=210\\cdot2023$, which is a multiple of $2$ and so not good. Hence $N=384\\cdot289=2^7\\cdot3\\cdot17^2$.\n\nThe sum of prime factors with multiplicity is $7\\cdot2+3+2\\cdot17=51$.\n\n**Answer: 51**"
+   }
+  ],
+  "topics": [
+   "number-theory",
+   "counting"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "bmt-2023-discrete-07",
+  "bank": "bmt",
+  "source": {
+   "contest": "Berkeley Math Tournament",
+   "paper": "2023 Discrete",
+   "year": 2023,
+   "number": 7,
+   "url": "https://berkeley.mt/archives/bmt-2023/discrete-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Maria and Skyler have a square-shaped cookie with a side length of $1$ inch. They split the cookie by choosing two points on distinct sides of the cookie uniformly at random and cutting across the line segment formed by connecting the two points. If Maria always gets the larger piece, what is the expected amount of extra cookie in Maria's piece compared to Skyler's, in square inches?",
+  "image": null,
+  "choices": null,
+  "answer": "11/18",
+  "acceptedAnswers": null,
+  "answerUnit": "square inches",
+  "solutions": [
+   {
+    "title": "Split into adjacent and opposite sides",
+    "body": "The two points lie on adjacent sides with probability $\\frac23$ and on opposite sides with probability $\\frac13$.\n\n**Adjacent sides.** Let the distances of the points from the shared corner be $a,b$ (independent, uniform on $[0,1]$). The smaller piece is a right triangle of area $\\frac{ab}2$, the larger is $1-\\frac{ab}2$, so the difference is $1-ab$, with expectation $1-\\frac14=\\frac34$.\n\n**Opposite sides.** Measuring $a,b$ from the same end of the two sides, the pieces are trapezoids of areas $\\frac{a+b}2$ and $1-\\frac{a+b}{2}$, so the difference is $|1-(a+b)|$. Its expectation is $\\int_0^1\\int_0^1|1-a-b|\\,da\\,db=2\\int_{a+b<1}(1-a-b)=2\\cdot\\frac16=\\frac13$.\n\nTotal: $\\frac23\\cdot\\frac34+\\frac13\\cdot\\frac13=\\frac12+\\frac19=\\frac{11}{18}$.\n\n**Answer: $\\frac{11}{18}$ square inches**"
+   }
+  ],
+  "topics": [
+   "probability",
+   "geometry"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null,
+  "answerDisplay": "$\\frac{11}{18}$"
+ },
+ {
+  "id": "bmt-2023-discrete-08",
+  "bank": "bmt",
+  "source": {
+   "contest": "Berkeley Math Tournament",
+   "paper": "2023 Discrete",
+   "year": 2023,
+   "number": 8,
+   "url": "https://berkeley.mt/archives/bmt-2023/discrete-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Define a family of functions $S_k(n)$ for positive integers $n$ and $k$ by the following two rules: $$S_0(n)=1,\\qquad S_k(n)=\\sum_{d\\mid n}d\\,S_{k-1}(d).$$ Compute the remainder when $S_{30}(30)$ is divided by $1001$.",
+  "image": null,
+  "choices": null,
+  "answer": "232",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Multiplicativity and prime values",
+    "body": "By induction on $k$, $S_k$ is multiplicative: divisors of $pq$ (coprime) correspond to pairs of divisors of $p$ and $q$, and $d\\,S_{k-1}(d)$ is multiplicative in $d$ whenever $S_{k-1}$ is. Also $S_k(1)=1$ and, for a prime $p$, $S_k(p)=1+pS_{k-1}(p)$, which gives $S_k(p)=1+p+\\dots+p^k$.\n\nSo $S_{30}(30)=(2^{31}-1)\\cdot\\frac{3^{31}-1}{2}\\cdot\\frac{5^{31}-1}{4}$.\n\nModulo $7$ and $11$ (Fermat: exponent $31\\equiv1$ mod $6$ and mod $10$, resp.; in fact $2^{31}\\equiv2$, $3^{31}\\equiv3$, $5^{31}\\equiv5$): the value is $(1)\\cdot1\\cdot1=1$ in both cases. Modulo $13$ (exponent $31\\equiv7\\bmod12$): $(2^7-1)\\cdot\\frac{3^7-1}2\\cdot\\frac{5^7-1}4\\equiv(-3)\\cdot1\\cdot5=-15\\equiv11$.\n\nCRT: $x\\equiv1\\pmod{77}$, $x\\equiv11\\pmod{13}$ gives $x=232$.\n\n**Answer: 232**"
+   }
+  ],
+  "topics": [
+   "number-theory"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "bmt-2023-discrete-09",
+  "bank": "bmt",
+  "source": {
+   "contest": "Berkeley Math Tournament",
+   "paper": "2023 Discrete",
+   "year": 2023,
+   "number": 9,
+   "url": "https://berkeley.mt/archives/bmt-2023/discrete-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Shiori places seven books, numbered from $1$ to $7$, on a bookshelf in some order. Later, she discovers that she can place two dividers between the books, separating the books into left, middle, and right sections, such that:\n- The left section is numbered in increasing order from left to right, or has at most one book.\n- The middle section is numbered in decreasing order from left to right, or has at most one book.\n- The right section is numbered in increasing order from left to right, or has at most one book.\n\nIn how many possible orderings could Shiori have placed the books? For example, $(2,3,5,4,1,6,7)$ and $(2,3,4,1,5,6,7)$ are possible orderings with the partitions $2,3,5|4,1|6,7$ and $2,3,4|1|5,6,7$, but $(5,6,2,4,1,3,7)$ is not.",
+  "image": null,
+  "choices": null,
+  "answer": "544",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Count with overcounting",
+    "body": "Assign each of the $7$ books to section $A$, $B$ or $C$ ($3^7$ ways) and write $A$ increasing, $B$ decreasing, $C$ increasing. Every valid ordering arises, but with repeats.\n\nFor an ordering other than the identity, with $a_0=0$, $a_8=8$ added, let $i$ be the first descent and $j>i$ the first later ascent. The first divider must be just before or just after $a_i$, and the second just before or just after $a_j$, and all $4$ choices work, so each such ordering is counted exactly $4$ times.\n\nFor the identity $(1,2,\\dots,7)$, the middle section must have at most one book: $8$ placements with an empty middle and $7$ with a one-book middle, $15$ in all.\n\nSo the number of orderings is $\\frac{3^7-15}{4}+1=543+1=544$.\n\n**Answer: 544**"
+   }
+  ],
+  "topics": [
+   "counting"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "bmt-2023-discrete-10",
+  "bank": "bmt",
+  "source": {
+   "contest": "Berkeley Math Tournament",
+   "paper": "2023 Discrete",
+   "year": 2023,
+   "number": 10,
+   "url": "https://berkeley.mt/archives/bmt-2023/discrete-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Let $\\alpha$ denote the positive real root of the polynomial $x^2-3x-2$. Compute the remainder when $\\lfloor\\alpha^{1000}\\rfloor$ is divided by the prime number $997$. Here, $\\lfloor r\\rfloor$ denotes the greatest integer less than $r$.",
+  "image": null,
+  "choices": null,
+  "answer": "970",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Conjugates and Frobenius",
+    "body": "Let $p=997$ and $\\beta=\\frac{3-\\sqrt{17}}2$ be the other root; $0<\\beta^{1000}<1$ since $|\\beta|<1$. The number $s_n=\\alpha^n+\\beta^n$ is an integer (it satisfies $s_n=3s_{n-1}+2s_{n-2}$), so $\\lfloor\\alpha^{1000}\\rfloor=s_{1000}-1$.\n\nWork in $\\mathbb F_p[\\sqrt{17}]$. Since $\\left(\\frac{17}{p}\\right)=\\left(\\frac{997}{17}\\right)=\\left(\\frac{-6}{17}\\right)=-1$, $17$ is a non-residue, so $(\\sqrt{17})^p=-\\sqrt{17}$ and $\\alpha^p=\\beta$, $\\beta^p=\\alpha$. Therefore $s_{p+3}=\\alpha^{p+3}+\\beta^{p+3}\\equiv\\beta\\alpha^3+\\alpha\\beta^3=\\alpha\\beta(\\alpha^2+\\beta^2)=-2\\,(9+4)=-26\\pmod p$, using $\\alpha\\beta=-2$, $\\alpha+\\beta=3$, $\\alpha^2+\\beta^2=13$.\n\nHence $\\lfloor\\alpha^{1000}\\rfloor\\equiv-26-1=-27\\equiv970\\pmod{997}$.\n\n**Answer: 970**"
+   }
+  ],
+  "topics": [
+   "number-theory",
+   "algebra"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ }
+]

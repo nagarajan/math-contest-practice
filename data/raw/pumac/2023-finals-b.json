@@ -1,0 +1,112 @@
+[
+ {
+  "id": "pumac-2023-finals-b-01",
+  "bank": "pumac",
+  "source": {
+   "contest": "PUMaC",
+   "paper": "2023 Individual Finals B",
+   "year": 2023,
+   "number": 1,
+   "url": "https://jason-shi-f9dm.squarespace.com/s/Indiv_Finals_B_2023.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "For a binary string $S$ (i.e. a string of $0$'s and $1$'s) that contains at least one $0$, we produce a binary string $f(S)$ as follows:\n\n- If the substring $110$ occurs in $S$, replace each instance of $110$ with $01$ to produce $f(S)$;\n- Otherwise, replace the leftmost occurrence of $0$ in $S$ by $1$ to produce $f(S)$.\n\nGiven binary string $S$ of length $n$, we define the *lifetime* of $S$ to be the number of times $f$ can be applied to $S$ until the resulting string contains no more $0$'s. For example, $$111000\\to10100\\to11100\\to1010\\to1110\\to101\\to111$$ so the lifetime of $111000$ is $6$. For a given $n\\ge2$, which binary string(s) of length $n$ have the longest lifetime? As usual, you need to rigorously justify your answers.",
+  "image": null,
+  "choices": null,
+  "answer": "Only the all-zero string $00\\ldots0$ has the longest lifetime, namely $2n-2$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "A decreasing potential",
+    "body": "Let $g(S)=(\\text{length of }S)+(\\text{number of }0\\text{'s in }S)$.\n\n**Each application of $f$ lowers $g$ by at least $1$.** Two occurrences of $110$ cannot overlap (the second would need the $0$ of the first to be a $1$), so replacing $k\\ge1$ occurrences of $110$ by $01$ keeps the number of zeros and shortens the string by $k$: $g$ drops by $k\\ge1$. Replacing the leftmost $0$ by $1$ removes one zero: $g$ drops by $1$.\n\n**The length never drops below $2$** (for $n\\ge2$): the length only decreases through a replacement $110\\to01$, which leaves a block $01$ in the string. Hence the final all-$1$ string has length $\\ge2$ and $g\\ge2$. Therefore the lifetime is at most $g(S)-2=n+z-2\\le2n-2$, where $z$ is the number of zeros of $S$. If $S\\ne0^n$ then $z\\le n-1$ and the lifetime is at most $2n-3$.\n\n**$0^n$ attains $2n-2$.** Starting from $0^n$, the strings that appear all have one of the forms $0^j$, $10^{j-1}$, $110^{j-2}$, $010^{j-2}$, and none of them contains two occurrences of $110$. The moves are $0^j\\to10^{j-1}\\to110^{j-2}\\to010^{j-3}\\to110^{j-3}\\to010^{j-4}\\to\\dots\\to11$ (a string $010^i$ contains no $110$, so its leftmost $0$ is changed). So every step lowers $g$ by exactly $1$, from $g(0^n)=2n$ down to $g(11)=2$: the lifetime is exactly $2n-2$.\n\nHence the unique string of maximal lifetime is $00\\ldots0$, with lifetime $2n-2$. $\\blacksquare$"
+   }
+  ],
+  "topics": [
+   "logic",
+   "patterns"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "pumac-2023-finals-b-02",
+  "bank": "pumac",
+  "source": {
+   "contest": "PUMaC",
+   "paper": "2023 Individual Finals B",
+   "year": 2023,
+   "number": 2,
+   "url": "https://jason-shi-f9dm.squarespace.com/s/Indiv_Finals_B_2023.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Let $f$ be a polynomial with degree at most $n-1$. Show that $$\\sum_{k=0}^n\\binom nk(-1)^kf(k)=0.$$",
+  "image": null,
+  "choices": null,
+  "answer": "Finite differences: the $n$-th difference of a polynomial of degree $<n$ vanishes.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Falling factorial basis",
+    "body": "By linearity it suffices to prove the identity for the polynomials $f_\\ell(X)=X(X-1)\\cdots(X-\\ell+1)$, $0\\le\\ell\\le n-1$, since they form a basis of the polynomials of degree at most $n-1$. For such $\\ell$, $f_\\ell(k)=0$ for $k<\\ell$ and\n$$\\binom nk f_\\ell(k)=\\frac{n!}{k!(n-k)!}\\cdot\\frac{k!}{(k-\\ell)!}=\\frac{n!}{(k-\\ell)!(n-k)!}=\\frac{n!}{(n-\\ell)!}\\binom{n-\\ell}{k-\\ell}.$$\nSo\n$$\\sum_{k=0}^n(-1)^k\\binom nkf_\\ell(k)=\\frac{n!}{(n-\\ell)!}\\sum_{k=\\ell}^n(-1)^k\\binom{n-\\ell}{k-\\ell}=\\frac{n!}{(n-\\ell)!}(-1)^\\ell(1-1)^{n-\\ell}=0,$$\nbecause $n-\\ell\\ge1$. $\\blacksquare$"
+   },
+   {
+    "title": "Finite differences",
+    "body": "Let $\\Delta f(x)=f(x+1)-f(x)$. Then $\\Delta^nf(0)=\\sum_{k=0}^n(-1)^{n-k}\\binom nkf(k)$ (induction, using Pascal's rule). If $f$ has degree $d\\ge1$ then $\\Delta f$ has degree $d-1$ (the leading terms cancel: $(x+1)^d-x^d$ has degree $d-1$), and $\\Delta$ of a constant is $0$. So $\\Delta^n f\\equiv0$ whenever $\\deg f\\le n-1$, and in particular $\\sum_k(-1)^{n-k}\\binom nkf(k)=0$; multiplying by $(-1)^n$ gives the claim. $\\blacksquare$"
+   }
+  ],
+  "topics": [
+   "polynomials",
+   "counting"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "pumac-2023-finals-b-03",
+  "bank": "pumac",
+  "source": {
+   "contest": "PUMaC",
+   "paper": "2023 Individual Finals B",
+   "year": 2023,
+   "number": 3,
+   "url": "https://jason-shi-f9dm.squarespace.com/s/Indiv_Finals_B_2023.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Let $p>3$ be a prime and $k\\ge0$ an integer. Find the multiplicity of $X-1$ in the factorization of $$f(X)=X^{3p^k-1}+X^{3p^k-2}+\\cdots+X+1$$ modulo $p$; in other words, find the unique non-negative integer $r$ such that $(X-1)^r$ divides $f(X)$ modulo $p$, but $(X-1)^{r+1}$ does not divide $f(X)$ modulo $p$.",
+  "image": null,
+  "choices": null,
+  "answer": "$r=p^k-1$",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Frobenius",
+    "body": "Work in $\\mathbb F_p[X]$. We have $f(X)=\\dfrac{X^{3p^k}-1}{X-1}$. In characteristic $p$, $(Y-1)^{p^k}=Y^{p^k}-1$, so with $Y=X^3$:\n$$X^{3p^k}-1=(X^3-1)^{p^k}=(X-1)^{p^k}(X^2+X+1)^{p^k}.$$\nHence $f(X)=(X-1)^{p^k-1}(X^2+X+1)^{p^k}$. The factor $X^2+X+1$ takes the value $3\\not\\equiv0\\pmod p$ at $X=1$ (as $p>3$), so $X-1$ does not divide it. Therefore the multiplicity is $r=p^k-1$.\n\n**Answer: $p^k-1$**"
+   },
+   {
+    "title": "Shift $X=Y+1$",
+    "body": "Put $X=Y+1$: $f=\\frac{(Y+1)^{3p^k}-1}{Y}$, and we want the multiplicity of $Y$. Modulo $p$, $\\binom{3p^k}{\\ell}\\equiv0$ unless $p^k\\mid\\ell$ (Lucas), and $\\binom{3p^k}{p^k}\\equiv\\binom{3}{1}=3\\ne0$, $\\binom{3p^k}{2p^k}\\equiv3$, $\\binom{3p^k}{3p^k}=1$. So $(Y+1)^{3p^k}-1\\equiv Y^{3p^k}+3Y^{2p^k}+3Y^{p^k}$ and dividing by $Y$ the lowest term is $3Y^{p^k-1}$ with $3\\not\\equiv0$ (since $p>3$). The multiplicity of $Y$, i.e. of $X-1$, is $p^k-1$.\n\n**Answer: $p^k-1$**"
+   }
+  ],
+  "topics": [
+   "polynomials",
+   "number-theory"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ }
+]

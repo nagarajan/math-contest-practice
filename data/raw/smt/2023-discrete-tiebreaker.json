@@ -1,0 +1,103 @@
+[
+ {
+  "id": "smt-2023-discrete-tiebreaker-01",
+  "bank": "smt",
+  "source": {
+   "contest": "Stanford Math Tournament",
+   "paper": "2023 Discrete Tiebreaker",
+   "year": 2023,
+   "number": 1,
+   "url": "https://www.stanfordmathtournament.org/pdfs/smt2023/discrete-tiebreaker-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Find the smallest positive integer $n$ such that there exists a prime $p$ where $p$ and $p+10$ both divide $n$ and the sum of the digits of $n$ is $p$.",
+  "image": null,
+  "choices": null,
+  "answer": "2023",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Rule out small primes and search",
+    "body": "If $p\\equiv2\\pmod3$ then $3\\mid p+10$, so $3\\mid n$ and $3\\mid p$ (digit sum), impossible unless $p=3$ itself; this removes $p=2,5,11,17,23,29,41,47,\\dots$. For the remaining primes $p=3,7,13,19,31,37,\\dots$, $n$ must be a multiple of $p(p+10)$ with digit sum $p$. For $p=7$: $2023=7\\cdot17^2=119\\cdot17$ is a multiple of $7\\cdot17$ with digit sum $7$. A search of the multiples of $p(p+10)$ for the other primes shows none below $2023$ has digit sum $p$ (for $p\\ge37$, $p(p+10)>2023$ already).\n\n**Answer: 2023**"
+   }
+  ],
+  "topics": [
+   "number-theory"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "smt-2023-discrete-tiebreaker-02",
+  "bank": "smt",
+  "source": {
+   "contest": "Stanford Math Tournament",
+   "paper": "2023 Discrete Tiebreaker",
+   "year": 2023,
+   "number": 2,
+   "url": "https://www.stanfordmathtournament.org/pdfs/smt2023/discrete-tiebreaker-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Every cell in a $5\\times5$ grid of paper is to be painted either red or white with equal probability. An edge of the paper is said to have a \"tree\" if the set of cells depicted in the diagram below are all painted red when the paper is rotated so that the edge lies at the bottom. Given that at least one edge of the paper has a tree, what is the expected number of edges that have a tree?",
+  "image": "qimages/smt/2023-discrete-tiebreaker/q02.webp",
+  "choices": null,
+  "answer": "16/9",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "answerDisplay": "$\\frac{16}{9}$",
+  "solutions": [
+   {
+    "title": "Linearity and inclusion-exclusion",
+    "body": "Let $X$ be the number of edges with a tree. The tree has $11$ cells, so each edge has a tree with probability $2^{-11}$ and $E[X]=\\frac4{2^{11}}$.\n\nSince $X=0$ contributes nothing, $E[X\\mid X>0]=\\frac{E[X]}{P(X>0)}$. Inclusion-exclusion over the four trees gives $P(X>0)=\\frac4{2^{11}}-\\left(\\frac4{2^{12}}+\\frac2{2^{13}}\\right)+\\frac4{2^{13}}-\\frac1{2^{13}}=\\frac9{2^{13}}$.\n\nTherefore $E[X\\mid X>0]=\\frac{4/2^{11}}{9/2^{13}}=\\frac{16}9$.\n\n**Answer: $\\frac{16}{9}$**"
+   }
+  ],
+  "topics": [
+   "probability",
+   "counting"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "smt-2023-discrete-tiebreaker-03",
+  "bank": "smt",
+  "source": {
+   "contest": "Stanford Math Tournament",
+   "paper": "2023 Discrete Tiebreaker",
+   "year": 2023,
+   "number": 3,
+   "url": "https://www.stanfordmathtournament.org/pdfs/smt2023/discrete-tiebreaker-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "What is the least positive integer $x$ for which the expression $x^2+3x+9$ has $3$ distinct prime divisors?",
+  "image": null,
+  "choices": null,
+  "answer": "27",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Search with parity and mod-3 observations",
+    "body": "$x^2+3x$ is even, so $x^2+3x+9$ is odd. If $3\\nmid x$ then $3\\nmid x^2+3x+9$ either.\n\nTry $3\\mid x$: $x=3y$ gives $9(y^2+y+1)$. For $y=1,\\dots,8$, $y^2+y+1=3,7,13,21,31,43,57,73$, each of which has at most one prime factor other than $3$, so the expression has at most $2$ distinct primes. For $y=9$: $9\\cdot91=819=3^2\\cdot7\\cdot13$, so $x=27$ works.\n\nNow suppose $3\\nmid x$ and $x<27$. The expression is odd, not divisible by $3$, and never divisible by $5$ (it is $\\equiv4,3,4,2,2\\pmod5$ for $x\\equiv0,\\dots,4$). So all its primes are at least $7$, and three distinct ones multiply to at least $7\\cdot11\\cdot13=1001$, but $x^2+3x+9<763$ for $x<27$. Contradiction.\n\nSo the least is $x=27$.\n\n**Answer: 27**"
+   }
+  ],
+  "topics": [
+   "number-theory"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ }
+]

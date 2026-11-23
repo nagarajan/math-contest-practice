@@ -1,0 +1,281 @@
+[
+ {
+  "id": "pumac-2023-combinatorics-b-01",
+  "bank": "pumac",
+  "source": {
+   "contest": "PUMaC",
+   "paper": "2023 Combinatorics B",
+   "year": 2023,
+   "number": 1,
+   "url": "https://jason-shi-f9dm.squarespace.com/s/Combinatorics_B_2023.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "I have a $2$ by $4$ grid of squares; how many ways can I shade at least one of the squares so that no two shaded squares share an edge?",
+  "image": null,
+  "choices": null,
+  "answer": "40",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Transfer between columns",
+    "body": "Each column of the $2\\times4$ grid is in one of three states: nothing shaded ($0$), top shaded ($T$), bottom shaded ($B$) (both shaded would share an edge). Adjacent columns may not both have $T$ or both have $B$.\n\nLet $z_k$ be the number of valid fillings of the first $k$ columns whose last column is $0$, and $t_k$ the number ending in $T$ (equal to the number ending in $B$). Then $z_{k+1}=z_k+2t_k$ and $t_{k+1}=z_k+t_k$, starting from $z_1=t_1=1$:\n$$(z_k,t_k)=(1,1),(3,2),(7,5),(17,12).$$\nSo there are $17+12+12=41$ shadings of $4$ columns, including the empty one. Subtracting it: $40$.\n\n**Answer: 40**"
+   },
+   {
+    "title": "Count by the number of shaded squares",
+    "body": "- One shaded square: $8$.\n- Two: $\\binom82=28$ pairs minus the $6$ vertical-edge pairs and $4$ horizontal-edge pairs that touch: $18$.\n- Three: they lie in three different columns. Three consecutive columns ($2$ ways): the choice must alternate rows, $2$ ways each, so $4$. If an inner column is skipped ($2$ ways), the two adjacent shaded squares are in different rows ($2$ ways), the remaining one is free ($2$ ways): $8$. Total $12$.\n- Four: one per column in alternating rows: $2$.\n\nTotal $8+18+12+2=40$.\n\n**Answer: 40**"
+   }
+  ],
+  "topics": [
+   "counting"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "pumac-2023-combinatorics-b-02",
+  "bank": "pumac",
+  "source": {
+   "contest": "PUMaC",
+   "paper": "2023 Combinatorics B",
+   "year": 2023,
+   "number": 2,
+   "url": "https://jason-shi-f9dm.squarespace.com/s/Combinatorics_B_2023.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Amir enters Fine Hall and sees the number $2$ written on a blackboard. Amir can perform the following operation: he flips a coin, and if it is heads, he replaces the number $x$ on the blackboard with $3x+1$; otherwise, he replaces $x$ with $\\lfloor x/3\\rfloor$. If Amir performs this operation four times, let $\\frac mn$ denote the expected number of times that he writes the digit $1$ on the blackboard, where $m,n$ are relatively prime positive integers. Find $m+n$.",
+  "image": null,
+  "choices": null,
+  "answer": "27",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "List all $16$ outcomes",
+    "body": "Starting from $2$, write $H$ for $x\\to3x+1$ and $T$ for $x\\to\\lfloor x/3\\rfloor$. Going through all $16$ flip sequences, the numbers written are:\n\n- Starting with $H$ (the board shows $7$): the possible boards are $7,22,67,202,2,0$, and none of these contains a digit $1$, except that $HTTH$ gives $7,2,0,1$.\n- Starting with $T$ (board $0$): $TTTT:0,0,0,0$; $TTTH:0,0,0,1$; $TTHT:0,0,1,0$; $TTHH:0,0,1,4$; $THTT:0,1,0,0$; $THTH:0,1,0,1$; $THHT:0,1,4,1$; $THHH:0,1,4,13$.\n\nThe number of digits $1$ written in the sequences that contain any: $HTTH:1$, $TTTH:1$, $TTHT:1$, $TTHH:1$, $THTT:1$, $THTH:2$, $THHT:2$, $THHH:2$ (the last one writes $1$ and $13$). The total is $11$ over $16$ equally likely sequences, so the expectation is $\\frac{11}{16}$ and $m+n=27$.\n\n**Answer: 27**"
+   }
+  ],
+  "topics": [
+   "probability",
+   "counting"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "pumac-2023-combinatorics-b-03",
+  "bank": "pumac",
+  "source": {
+   "contest": "PUMaC",
+   "paper": "2023 Combinatorics B",
+   "year": 2023,
+   "number": 3,
+   "url": "https://jason-shi-f9dm.squarespace.com/s/Combinatorics_B_2023.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Alien Connor starts at $(0,0)$ and walks around on the integer lattice. Specifically, he takes one step of length one in a uniformly random cardinal direction every minute, unless his previous four steps were all in the same direction in which case he randomly picks a new direction to step in. Every time he takes a step, he leaves toxic air on the lattice point he just left, and the toxic cloud remains there for $150$ seconds. After taking $5$ steps in total, the probability that he has not encountered his own toxic waste can be written as $\\frac ab$ for relatively prime positive integers $a,b$. Find $a+b$.",
+  "image": null,
+  "choices": null,
+  "answer": "505",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Only an immediate reversal matters",
+    "body": "A cloud lasts $150$ s $=2.5$ steps. A point can be revisited only after an even number of steps (parity), so the only way to meet a cloud is to step directly back onto the point left one step earlier; a point left three steps ago is unreachable by parity and its cloud is gone after $3$ steps anyway.\n\nSo we need the probability that none of the $5$ steps reverses the previous step. A step reverses with probability $\\frac14$ normally, so avoids it with $\\frac34$; after four equal steps the next direction is one of $3$ new ones, and avoids reversal with probability $\\frac23$.\n\n- Steps $2,3,4$ all avoid reversal: $\\left(\\frac34\\right)^3=\\frac{27}{64}$. Of this, the first four steps are all in the same direction with probability $\\frac1{4^3}=\\frac1{64}$ (then the fifth step avoids reversal with $\\frac23$), and the remaining $\\frac{26}{64}=\\frac{13}{32}$ are not all the same (the fifth step avoids reversal with $\\frac34$).\n- Probability: $\\frac1{64}\\cdot\\frac23+\\frac{13}{32}\\cdot\\frac34=\\frac{1}{96}+\\frac{39}{128}=\\frac{4+117}{384}=\\frac{121}{384}$.\n\n$a+b=121+384=505$.\n\n**Answer: 505**"
+   }
+  ],
+  "topics": [
+   "probability",
+   "counting"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "pumac-2023-combinatorics-b-04",
+  "bank": "pumac",
+  "source": {
+   "contest": "PUMaC",
+   "paper": "2023 Combinatorics B",
+   "year": 2023,
+   "number": 4,
+   "url": "https://jason-shi-f9dm.squarespace.com/s/Combinatorics_B_2023.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Let $\\oplus$ denote the xor binary operation. Define $x\\star y=(x+y)-(x\\oplus y)$. Compute $$\\sum_{k=1}^{63}(k\\star45).$$ (*Remark:* The xor operator works as follows: when considered in binary, the $k$th binary digit of $a\\oplus b$ is $1$ exactly when the $k$th binary digits of $a$ and $b$ are different. For example, $5\\oplus12=0101_2\\oplus1100_2=1001_2=9$.)",
+  "image": null,
+  "choices": null,
+  "answer": "2880",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Use $x+y=(x\\oplus y)+2(x\\&y)$",
+    "body": "Where both bits are $1$ the xor has $0$ but ordinary addition counts $2\\cdot$(place value); hence $x+y=(x\\oplus y)+2(x\\,\\&\\,y)$ and $x\\star y=2(x\\,\\&\\,y)$.\n\nFor $k$ from $0$ to $63$ (the term $k=0$ is $0$ anyway), pair $k$ with $63-k$: they have complementary $6$-bit patterns, so $(k\\&45)+((63-k)\\&45)=45$. Summing over the $32$ pairs, $\\sum_{k=0}^{63}(k\\&45)=32\\cdot45$, and the answer is $2\\cdot32\\cdot45=2880$.\n\n**Answer: 2880**"
+   },
+   {
+    "title": "Independent bits",
+    "body": "$45=101101_2$ has four $1$'s. $k\\&45$ equals $\\sum$ of those place values $2^j$ (for $j\\in\\{0,2,3,5\\}$) for which $k$ has a $1$. Over $k=0,\\dots,63$ each bit is $1$ exactly $32$ times, so $\\sum(k\\&45)=32(1+4+8+32)=32\\cdot45$, and $2\\cdot32\\cdot45=2880$.\n\n**Answer: 2880**"
+   }
+  ],
+  "topics": [
+   "number-theory",
+   "counting"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "pumac-2023-combinatorics-b-05",
+  "bank": "pumac",
+  "source": {
+   "contest": "PUMaC",
+   "paper": "2023 Combinatorics B",
+   "year": 2023,
+   "number": 5,
+   "url": "https://jason-shi-f9dm.squarespace.com/s/Combinatorics_B_2023.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "The integers from $1$ to $25$, inclusive, are randomly placed into a $5$ by $5$ grid such that in each row, the numbers are increasing from left to right. If the columns from left to right are numbered $1,2,3,4$, and $5$, then the expected column number of the entry $23$ can be written as $\\frac ab$ where $a$ and $b$ are relatively prime positive integers. Find $a+b$.",
+  "image": null,
+  "choices": null,
+  "answer": "17",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Distribution of the row of 23",
+    "body": "Choosing a placement amounts to splitting $\\{1,\\dots,25\\}$ into five $5$-element rows (each then sorted). All splits are equally likely, and the rest of the split does not depend on which $5$-set contains $23$, so the set containing $23$ is a uniformly random $5$-subset containing $23$: $\\binom{24}{4}=10626$ equally likely sets.\n\nIf $23$ sits in column $c$, then $c-1$ elements of the row are smaller (chosen from $1,\\dots,22$) and $5-c$ are larger (chosen from $\\{24,25\\}$), so $c\\in\\{3,4,5\\}$:\n- $c=5$: $\\binom{22}{4}=7315$ sets,\n- $c=4$: $\\binom21\\binom{22}{3}=3080$,\n- $c=3$: $\\binom22\\binom{22}{2}=231$.\n\n(Total $10626$.) Therefore\n$$E=\\frac{5\\cdot7315+4\\cdot3080+3\\cdot231}{10626}=\\frac{49588}{10626}=\\frac{14}{3},$$\nand $a+b=17$.\n\n**Answer: 17**"
+   }
+  ],
+  "topics": [
+   "probability",
+   "counting"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "pumac-2023-combinatorics-b-06",
+  "bank": "pumac",
+  "source": {
+   "contest": "PUMaC",
+   "paper": "2023 Combinatorics B",
+   "year": 2023,
+   "number": 6,
+   "url": "https://jason-shi-f9dm.squarespace.com/s/Combinatorics_B_2023.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "A sequence of integers $a_1,a_2,\\dots,a_n$ is said to be *sub-Fibonacci* if $a_1=a_2=1$ and $a_i\\le a_{i-1}+a_{i-2}$ for all $3\\le i\\le n$. How many sub-Fibonacci sequences are there with $10$ terms such that the last two terms are both $20$?",
+  "image": null,
+  "choices": null,
+  "answer": "238",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Deficits from the Fibonacci maximum",
+    "body": "Because $a_7\\le13$ (the seventh Fibonacci number), $a_9=20\\le a_8+a_7$ forces $a_8\\ge7>0$, so the condition $a_{10}=20\\le a_9+a_8$ is automatic. We just count sequences $a_1,\\dots,a_9$ with $a_9=20$.\n\nLet $e_i=a_{i-1}+a_{i-2}-a_i\\ge0$ for $3\\le i\\le9$ (the deficit at step $i$). A deficit at step $i$ lowers $a_9$ by $e_iF_{10-i}$ below the Fibonacci value $F_9=34$ (each unit lost at $a_i$ propagates with Fibonacci weights). So we need\n$$13e_3+8e_4+5e_5+3e_6+2e_7+e_8+e_9=34-20=14,\\qquad e_i\\ge0.$$\nCount by the number of $13$'s and $8$'s used: with coins $1,1,2,3,5$ let $g(m)$ be the number of ways to make $m$: $g(0..14)=1,2,4,7,11,17,25,35,48,64,84,108,137,171,211$. Then the total is $g(14)+g(6)+g(1)$ (no $8$ or $13$; one $8$; one $13$): $211+25+2=238$.\n\n**Answer: 238**"
+   }
+  ],
+  "topics": [
+   "counting",
+   "sequences-series"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "pumac-2023-combinatorics-b-07",
+  "bank": "pumac",
+  "source": {
+   "contest": "PUMaC",
+   "paper": "2023 Combinatorics B",
+   "year": 2023,
+   "number": 7,
+   "url": "https://jason-shi-f9dm.squarespace.com/s/Combinatorics_B_2023.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "There are $n$ assassins numbered from $1$ to $n$, and all assassins are initially alive. The assassins play a game in which they take turns in increasing order of number, with assassin $1$ getting the first turn, then assassin $2$, etc., with the order repeating after assassin $n$ has gone; if an assassin is dead when their turn comes up, then their turn is skipped and it goes to the next assassin in line. On each assassin's turn, they can choose to either kill the assassin who would otherwise move next or to do nothing. Each assassin will kill on their turn unless the only option for guaranteeing their own survival is to do nothing. If there are $2023$ assassins at the start of the game, after an entire round of turns in which no one kills, how many assassins must remain?",
+  "image": null,
+  "choices": null,
+  "answer": "1023",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Stable sizes are $2^k-1$",
+    "body": "Call $n$ *stable* if nobody kills. Claim: $n$ is stable iff $n=2^k-1$, and otherwise play continues until $2^k-1$ remain, where $2^k-1$ is the largest such number below $n$.\n\nInduction: $n=1,3$ are stable (in $n=3$, if $1$ kills $2$, then $3$ kills $1$, so $1$ would die; hence $1$ does nothing, and by symmetry nobody kills). Suppose $2^k-1$ is stable and let $n=2^k+a$ with $0\\le a\\le2^k-2$. Assassin $1$ kills $2$, leaving $n-1$ people; then $3$ kills $4$, and so on. After assassins $1,3,\\dots,2a+1$ have each killed the next one, exactly $a+1$ people are dead and $2^k-1$ remain, a stable size, so the killing stops. Nobody was endangered by killing since the victims $2,4,\\dots,2a+2$ are all different from every shooter (as $2a+2\\le n$), so each shooter really prefers to shoot.\n\nFor $n=2^{k+1}-1$ (that is $a=2^k-1$) the chain would reach $2a+2=n+1\\equiv1$, i.e. assassin $1$ would be shot, so assassin $1$ does nothing and by symmetry nobody shoots: $n=2^{k+1}-1$ is stable.\n\nFor $n=2023$ the largest $2^k-1\\le2023$ is $2^{10}-1=1023$.\n\n**Answer: 1023**"
+   }
+  ],
+  "topics": [
+   "games",
+   "logic"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "pumac-2023-combinatorics-b-08",
+  "bank": "pumac",
+  "source": {
+   "contest": "PUMaC",
+   "paper": "2023 Combinatorics B",
+   "year": 2023,
+   "number": 8,
+   "url": "https://jason-shi-f9dm.squarespace.com/s/Combinatorics_B_2023.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "For a positive integer $n$, let $P_n$ be the set of sequences of $2n$ elements, each $0$ or $1$, where there are exactly $n$ $1$'s and $n$ $0$'s. I choose a sequence uniformly at random from $P_n$. Then, I partition this sequence into maximal blocks of consecutive $0$'s and $1$'s. Define $f(n)$ to be the expected value of the sum of squares of the block lengths of this uniformly random sequence. What is the largest integer value that $f(n)$ can take on?",
+  "image": null,
+  "choices": null,
+  "answer": "121",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Count pairs in the same block",
+    "body": "For block lengths $a$, $a^2=2\\binom a2+a$, and the lengths sum to $2n$, so $\\sum a^2=2\\sum\\binom a2+2n$ where $\\sum\\binom a2$ counts pairs of positions $i<j$ in the same block.\n\nPositions $i<j$ lie in one block iff the $\\ell=j-i+1$ positions $i,\\dots,j$ are equal. The number of sequences with $\\ell$ given positions all $0$ is $\\binom{2n-\\ell}{n}$ (and the same for all $1$), so the probability is $2\\binom{2n-\\ell}{n}/\\binom{2n}{n}$. There are $2n-\\ell+1$ pairs with a given $\\ell$, so\n$$E\\Big[\\sum\\tbinom a2\\Big]=\\frac{2}{\\binom{2n}n}\\sum_{\\ell=2}^{n}(2n-\\ell+1)\\binom{2n-\\ell}{n}=\\frac{2(n+1)}{\\binom{2n}n}\\sum_{\\ell}\\binom{2n-\\ell+1}{n+1}=\\frac{2(n+1)\\binom{2n}{n+2}}{\\binom{2n}n},$$\nusing $(m-n)\\binom{m}{n}$-type identity $(2n-\\ell+1)\\binom{2n-\\ell}{n}=(n+1)\\binom{2n-\\ell+1}{n+1}$ and the hockey-stick identity. Since $\\binom{2n}{n+2}/\\binom{2n}{n}=\\frac{n(n-1)}{(n+1)(n+2)}$, this equals $\\frac{2n(n-1)}{n+2}$.\n\nHence $$f(n)=2n+\\frac{4n(n-1)}{n+2}=\\frac{6n^2}{n+2}=6(n-2)+\\frac{24}{n+2}.$$\nIt is an integer iff $(n+2)\\mid24$, and $f$ is increasing, so the largest integer value comes from $n+2=24$, $n=22$: $f(22)=\\frac{6\\cdot484}{24}=121$.\n\n**Answer: 121**"
+   }
+  ],
+  "topics": [
+   "probability",
+   "counting"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ }
+]

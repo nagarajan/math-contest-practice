@@ -1,0 +1,519 @@
+[
+ {
+  "id": "smt-2022-team-01",
+  "bank": "smt",
+  "source": {
+   "contest": "Stanford Math Tournament",
+   "paper": "2022 Team",
+   "year": 2022,
+   "number": 1,
+   "url": "https://www.stanfordmathtournament.org/pdfs/smt2022/team-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Square $ABCD$ has side length $2$. Let the midpoint of $BC$ be $E$. What is the area of the overlapping region between the circle centered at $E$ with radius $1$ and the circle centered at $D$ with radius $2$? (You may express your answer using inverse trigonometry functions of non-common values.)",
+  "image": null,
+  "choices": null,
+  "answer": "$3\\arctan\\frac12+\\frac\\pi2-2\\approx0.9617$",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Two sectors minus a kite",
+    "body": "Both circles pass through $C$ ($DC=2$, $EC=1$), and $DC\\perp EC$ since $DC$ and $BC$ are perpendicular sides of the square. Let $F$ be the other intersection point. The overlap is (sector of circle $D$ with chord $CF$) $+$ (sector of circle $E$ with chord $CF$) $-$ (kite $DCEF$).\n\nIn right triangle $DCE$: $\\tan\\angle CDE=\\frac{CE}{CD}=\\frac12$, so the central angle at $D$ is $2\\arctan\\frac12$ and the sector has area $\\frac12\\cdot2^2\\cdot2\\arctan\\frac12=4\\arctan\\frac12$. At $E$: $\\angle CED=\\frac\\pi2-\\arctan\\frac12$, so the central angle is $\\pi-2\\arctan\\frac12$ and the sector has area $\\frac12\\cdot1^2\\cdot(\\pi-2\\arctan\\frac12)=\\frac\\pi2-\\arctan\\frac12$.\n\nThe kite consists of two copies of $\\triangle DCE$ (area $\\frac12\\cdot2\\cdot1=1$ each), so its area is $2$.\n\nOverlap $=4\\arctan\\frac12+\\frac\\pi2-\\arctan\\frac12-2=3\\arctan\\frac12+\\frac\\pi2-2\\approx0.9617$ (a numerical integration agrees).\n\n**Answer: $3\\arctan\\frac12+\\frac\\pi2-2$**"
+   }
+  ],
+  "topics": [
+   "geometry",
+   "trigonometry"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "smt-2022-team-02",
+  "bank": "smt",
+  "source": {
+   "contest": "Stanford Math Tournament",
+   "paper": "2022 Team",
+   "year": 2022,
+   "number": 2,
+   "url": "https://www.stanfordmathtournament.org/pdfs/smt2022/team-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Find the number of times $f(x)=2$ occurs when $0\\le x\\le2022\\pi$ for the function $$f(x)=2^x(\\cos(x)+1).$$",
+  "image": null,
+  "choices": null,
+  "answer": "2023",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Count crossings in each half-period",
+    "body": "$f(x)=2\\iff\\cos x+1=2^{1-x}$. At $x=0$ both sides equal $2$, so $x=0$ is a solution.\n\nFor each $n=0,1,\\dots,2021$ consider $(n\\pi,(n+1)\\pi)$. Let $h(x)=\\cos x+1-2^{1-x}$. On such an interval $h$ changes sign: on an interval $(n\\pi,(n+1)\\pi)$ with $n$ even, $h(n\\pi)=2-2^{1-n\\pi}>0$ (for $n\\ge2$; for $n=0$ $h(0)=0$ and $h'(0)>0$) and $h((n+1)\\pi)=-2^{-n\\pi}<0$; for $n$ odd, $h(n\\pi)<0<h((n+1)\\pi)$. So each such interval contains a root, and because $\\cos x+1$ varies much faster than the exponentially tiny $2^{1-x}$ each contains exactly one (a numerical root count confirms this for the first five intervals). That gives $2022$ solutions in $(0,2022\\pi)$; the endpoint $2022\\pi$ is not a solution ($f=2\\cdot2^{2022\\pi}\\ne2$).\n\nTotal: $1+2022=2023$. (A numerical root count for $x\\le N\\pi$ gives $N+1$ for $N=1,\\dots,5$.)\n\n**Answer: 2023**"
+   }
+  ],
+  "topics": [
+   "analysis",
+   "trigonometry"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "smt-2022-team-03",
+  "bank": "smt",
+  "source": {
+   "contest": "Stanford Math Tournament",
+   "paper": "2022 Team",
+   "year": 2022,
+   "number": 3,
+   "url": "https://www.stanfordmathtournament.org/pdfs/smt2022/team-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Stanford is building a new dorm for students, and they are looking to offer $2$ room configurations:\n\n- Configuration A: a one-room double, which is a square with side length of $x$;\n- Configuration B: a two-room double, which is two connected rooms, each of them squares with a side length of $y$.\n\nTo make things fair for everyone, Stanford wants a one-room double (rooms of configuration A) to be exactly $1\\,\\text{m}^2$ larger than the total area of a two-room double. Find the number of possible pairs of side lengths $(x,y)$, where $x\\in\\mathbb N$, $y\\in\\mathbb N$, such that $x-y<2022$.",
+  "image": null,
+  "choices": null,
+  "answer": "5",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Pell equation",
+    "body": "We need $x^2=2y^2+1$, i.e. $x^2-2y^2=1$. Its positive solutions are generated from $(3,2)$ by $(x,y)\\mapsto(3x+4y,\\,2x+3y)$: $(3,2),(17,12),(99,70),(577,408),(3363,2378),(19601,13860),\\dots$ The differences $x-y$ are $1,5,29,169,985,5741,\\dots$ and keep growing by a factor of about $5.8$. Those below $2022$ are the first five.\n\n**Answer: 5**"
+   }
+  ],
+  "topics": [
+   "number-theory"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "smt-2022-team-04",
+  "bank": "smt",
+  "source": {
+   "contest": "Stanford Math Tournament",
+   "paper": "2022 Team",
+   "year": 2022,
+   "number": 4,
+   "url": "https://www.stanfordmathtournament.org/pdfs/smt2022/team-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "The island nation of Ur is comprised of $6$ islands. One day, people decide to create island-states as follows. Each island randomly chooses one of the other five islands and builds a bridge between the two islands (it is possible for two bridges to be built between islands $A$ and $B$ if each island chooses the other). Then, all islands connected by bridges together form an island-state. What is the expected number of island-states Ur is divided into?",
+  "image": null,
+  "choices": null,
+  "answer": "3493/3125",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Components are cycles",
+    "body": "Make a directed graph in which each island points to the island it chose; every vertex has out-degree $1$, so every connected component contains exactly one directed cycle. The number of island-states therefore equals the number of directed cycles (a cycle of length $2$ is a pair of islands choosing each other; there are no loops).\n\nFor $i=2,\\dots,6$ there are $\\binom6i(i-1)!$ possible directed cycles on $i$ of the islands, and each occurs with probability $\\left(\\frac15\\right)^i$ (each of the $i$ islands picks its successor). By linearity of expectation, $$E=\\sum_{i=2}^6\\binom6i\\frac{(i-1)!}{5^i}=\\frac{15}{25}+\\frac{40}{125}+\\frac{90}{625}+\\frac{144}{3125}+\\frac{120}{15625}=\\frac{3493}{3125}.$$\n\n(Checked by enumerating all $5^6$ outcomes.)\n\n**Answer: $\\frac{3493}{3125}$**"
+   }
+  ],
+  "topics": [
+   "probability",
+   "graph-theory"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null,
+  "answerDisplay": "$\\frac{3493}{3125}$"
+ },
+ {
+  "id": "smt-2022-team-05",
+  "bank": "smt",
+  "source": {
+   "contest": "Stanford Math Tournament",
+   "paper": "2022 Team",
+   "year": 2022,
+   "number": 5,
+   "url": "https://www.stanfordmathtournament.org/pdfs/smt2022/team-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Let $a$, $b$, and $c$ be the roots of the polynomial $x^3-3x^2-4x+5$. Compute $$\\frac{a^4+b^4}{a+b}+\\frac{b^4+c^4}{b+c}+\\frac{c^4+a^4}{c+a}.$$",
+  "image": null,
+  "choices": null,
+  "answer": "869/7",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Reduce to one root at a time",
+    "body": "Let $P(x)=x^3-3x^2-4x+5$. By Vieta $a+b+c=3$, so $a+b=3-c$ etc., and $a^4+b^4=S_4-c^4$ where $S_k=a^k+b^k+c^k$. The recurrence $S_k=3S_{k-1}+4S_{k-2}-5S_{k-3}$ with $S_1=3$, $S_2=17$, $S_3=48$ gives $S_4=197$.\n\nUsing $c^3=3c^2+4c-5$: $c^4=13c^2+7c-15$, so $S_4-c^4=212-13c^2-7c$. Then $$\\frac{212-13c^2-7c}{3-c}=\\frac{74}{3-c}+13c+46$$ (since $-13c^2-7c+212=74+(c-3)(-13c-46)$).\n\nSumming over the three roots: $74\\sum\\frac1{3-c}+13\\cdot3+3\\cdot46$. Now $\\sum\\frac1{3-c}=\\frac{P'(3)}{P(3)}=\\frac{5}{-7}$. Total: $-\\frac{370}7+177=\\frac{869}{7}$ (also confirmed numerically: $\\approx124.143$).\n\n**Answer: $\\frac{869}{7}$**"
+   }
+  ],
+  "topics": [
+   "polynomials",
+   "algebra"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null,
+  "answerDisplay": "$\\frac{869}{7}$"
+ },
+ {
+  "id": "smt-2022-team-06",
+  "bank": "smt",
+  "source": {
+   "contest": "Stanford Math Tournament",
+   "paper": "2022 Team",
+   "year": 2022,
+   "number": 6,
+   "url": "https://www.stanfordmathtournament.org/pdfs/smt2022/team-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Carol writes a program that finds all paths on a $10$ by $2$ grid from cell $(1,1)$ to cell $(10,2)$ subject to the conditions that a path does not visit any cell more than once and at each step the path can go up, down, left, or right from the current cell, excluding moves that would make the path leave the grid. What is the total length of all such paths? (The length of a path is the number of cells it passes through, including the starting and ending cells.)",
+  "image": null,
+  "choices": null,
+  "answer": "7680",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Count paths through each cell",
+    "body": "Think of the grid as $n=10$ columns and $2$ rows. A self-avoiding path from $(1,1)$ to $(n,2)$ never moves left: after a left move, both cells of some column would be used, blocking the way back to the target and trapping the path on the left side. So in each of the first $n-1$ columns the path either switches rows (one vertical step) or not, and then moves right; in the last column it steps up if needed to reach $(n,2)$. Write $s_j\\in\\{0,1\\}$ for the switch choices: there are $2^{n-1}$ paths, and every sequence $(s_1,\\dots,s_{n-1})$ gives exactly one path.\n\nThe total length equals the sum over cells of the number of paths through that cell. A path visits both cells of column $k$ ($1\\le k<n$) exactly when $s_k=1$; if $s_k=0$ it visits only the row it entered in.\n\n- Interior column $1<k<n$: a given cell is visited by the $2^{n-2}$ paths with $s_k=1$, plus half of the $2^{n-2}$ paths with $s_k=0$ (those entering in its row): $2^{n-2}+2^{n-3}=3\\cdot2^{n-3}$.\n- Column $1$: cell $(1,1)$ is on all $2^{n-1}$ paths and $(1,2)$ on the $2^{n-2}$ paths with $s_1=1$.\n- Column $n$: cell $(n,2)$ is on all $2^{n-1}$ paths and $(n,1)$ on the $2^{n-2}$ paths that enter column $n$ in row $1$.\n\nTotal $=2\\cdot2^{n-1}+2\\cdot2^{n-2}+2(n-2)\\cdot3\\cdot2^{n-3}=3\\cdot2^{n-1}+3(n-2)2^{n-2}$. For $n=10$: $3\\cdot512+3\\cdot8\\cdot256=1536+6144=7680$. (A depth-first enumeration of all $512$ paths confirms the total length $7680$.)\n\n**Answer: 7680**"
+   }
+  ],
+  "topics": [
+   "counting",
+   "patterns"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "smt-2022-team-07",
+  "bank": "smt",
+  "source": {
+   "contest": "Stanford Math Tournament",
+   "paper": "2022 Team",
+   "year": 2022,
+   "number": 7,
+   "url": "https://www.stanfordmathtournament.org/pdfs/smt2022/team-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "text",
+  "prompt": "Consider the sequence of integers $a_n$ defined by $a_1=1$, $a_p=p$ for prime $p$ and $$a_{mn}=ma_n+na_m$$ for $m,n>1$. Find the smallest $n$ such that $\\dfrac{a_{n^2}}{2022}$ is a perfect power of $3$.",
+  "image": null,
+  "choices": null,
+  "answer": "3^337",
+  "acceptedAnswers": [
+   "3**337",
+   "3^{337}",
+   "3^(337)",
+   "61640029873696844587354495248467655238959604866138307074477812999899122146583802168656575797599660327192763477246946112810148535313507889074737242512454360455363"
+  ],
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Closed form for $a_n$",
+    "body": "Divide the recurrence by $mn$: $\\frac{a_{mn}}{mn}=\\frac{a_n}n+\\frac{a_m}m$, so $b_n=\\frac{a_n}{n}$ is additive, with $b_p=1$. Hence $b_n=\\Omega(n)$ (number of prime factors with multiplicity) and $a_n=n\\,\\Omega(n)$. Then $a_{n^2}=2n^2\\Omega(n)$.\n\nWe need $\\frac{2n^2\\Omega(n)}{2022}=\\frac{n^2\\Omega(n)}{3\\cdot337}=3^r$, i.e. $n^2\\Omega(n)=3^{r+1}\\cdot337$. Only the primes $3$ and $337$ can divide $n$. If $337\\mid n$ then $337^2\\mid n^2$, which exceeds the single factor $337$ available. So $n=3^\\alpha$, $\\Omega(n)=\\alpha$, and $3^{2\\alpha}\\alpha=3^{r+1}\\cdot337$ forces $337\\mid\\alpha$; the smallest choice is $\\alpha=337$ (then $\\frac{a_{n^2}}{2022}=3^{673}$).\n\nSo $n=3^{337}$.\n\n**Answer: $3^{337}$**"
+   }
+  ],
+  "topics": [
+   "number-theory",
+   "sequences-series"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "smt-2022-team-08",
+  "bank": "smt",
+  "source": {
+   "contest": "Stanford Math Tournament",
+   "paper": "2022 Team",
+   "year": 2022,
+   "number": 8,
+   "url": "https://www.stanfordmathtournament.org/pdfs/smt2022/team-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Let $\\triangle ABC$ be a triangle whose $A$-excircle, $B$-excircle, and $C$-excircle have radii $R_A$, $R_B$, and $R_C$, respectively (the $A$-excircle is the circle outside $\\triangle ABC$ that is tangent to $BC$, $\\overrightarrow{AB}$, and $\\overrightarrow{AC}$; the other excircles are defined similarly). If $R_AR_BR_C=384$ and the perimeter of $\\triangle ABC$ is $32$, what is the area of $\\triangle ABC$?",
+  "image": null,
+  "choices": null,
+  "answer": "24",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Exradius formula",
+    "body": "With $K=[ABC]$ and semiperimeter $s$, the $A$-exradius is $R_A=\\frac{K}{s-a}$ (area of the quadrilateral argument: $K=R_A(s-a)$), and similarly $R_B=\\frac K{s-b}$, $R_C=\\frac K{s-c}$. So $$R_AR_BR_C=\\frac{K^3}{(s-a)(s-b)(s-c)}=\\frac{sK^3}{s(s-a)(s-b)(s-c)}=\\frac{sK^3}{K^2}=sK$$ by Heron's formula. Here $s=16$, so $K=\\frac{384}{16}=24$. (Such a triangle exists, e.g. sides $4,13,15$.)\n\n**Answer: 24**"
+   }
+  ],
+  "topics": [
+   "geometry"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "smt-2022-team-09",
+  "bank": "smt",
+  "source": {
+   "contest": "Stanford Math Tournament",
+   "paper": "2022 Team",
+   "year": 2022,
+   "number": 9,
+   "url": "https://www.stanfordmathtournament.org/pdfs/smt2022/team-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Consider the set $S$ of functions $f:\\{1,2,\\dots,16\\}\\to\\{1,2,\\dots,243\\}$ satisfying:\n\n(a) $f(1)=1$\n\n(b) $f(n^2)=n^2f(n)$,\n\n(c) $n\\mid f(n)$,\n\n(d) $f(\\operatorname{lcm}(m,n))\\,f(\\gcd(m,n))=f(m)f(n)$.\n\nIf $|S|$ can be written as $p_1^{e_1}\\cdot p_2^{e_2}\\cdots p_k^{e_k}$ where $p_i$ are distinct primes, compute $p_1e_1+p_2e_2+\\cdots+p_ke_k$.",
+  "image": null,
+  "choices": null,
+  "answer": "91",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Multiplicative functions",
+    "body": "For coprime $m,n$, (d) gives $f(mn)=f(m)f(n)$ ($f(1)=1$), and (d) holds automatically for such multiplicative $f$. So $f$ is determined by its values on prime powers $\\le16$. Write $f(n)=n\\,g(n)$ with $1\\le g(n)\\le\\frac{243}{n}$ (by (c)).\n\n- $g(8)\\in[1,30]$ (30 choices), $g(11)\\in[1,22]$, $g(13)\\in[1,18]$ — these primes/powers have no constraints from (b) other than the range (their squares exceed $16$).\n- (b): $f(4)=4f(2)$ and $f(16)=16f(4)=64f(2)$, so $f(16)=128\\,g(2)\\le243$ forces $g(2)=1$. $f(9)=9f(3)$ gives $27g(3)\\le243$, $g(3)\\le9$.\n- $f(14)=f(2)f(7)=14g(7)\\le243$: $g(7)\\le17$.\n- $f(10)=10g(5)\\le243$ and $f(15)=15g(3)g(5)\\le243$, i.e. $g(3)g(5)\\le16$. Other products ($f(6)$, $f(12)=24g(3)$) are automatically in range.\n\nThe number of pairs $(g(3),g(5))$ with $g(3)\\le9$ and $g(3)g(5)\\le16$ is $16+8+5+4+3+2+2+2+1=43$.\n\n$|S|=30\\cdot22\\cdot18\\cdot17\\cdot43=2^3\\cdot3^3\\cdot5\\cdot11\\cdot17\\cdot43$, so the requested sum is $2\\cdot3+3\\cdot3+5+11+17+43=91$.\n\n**Answer: 91**"
+   }
+  ],
+  "topics": [
+   "number-theory",
+   "counting"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "smt-2022-team-10",
+  "bank": "smt",
+  "source": {
+   "contest": "Stanford Math Tournament",
+   "paper": "2022 Team",
+   "year": 2022,
+   "number": 10,
+   "url": "https://www.stanfordmathtournament.org/pdfs/smt2022/team-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "You are given that $\\log_{10}2\\approx0.3010$ and that the first (leftmost) two digits of $2^{1000}$ are $10$. Compute the number of integers $n$ with $1000\\le n\\le2000$ such that $2^n$ starts with either the digit $8$ or $9$ (in base $10$).",
+  "image": null,
+  "choices": null,
+  "answer": "97",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Runs of leading digits",
+    "body": "Between consecutive powers of $10$, the leading digits of $2^k$ form runs starting at $1$: $(1,2,4,8)$, $(1,2,4,9)$, $(1,2,5)$, $(1,3,6)$, $(1,3,7)$. A leading digit $8$ or $9$ occurs exactly in the runs of length $4$. Each run ends exactly when $2^k$ gains a new decimal digit.\n\nIf $2^n$ starts with $1$ then $2^0,\\dots,2^{n-1}$ consist of $x$ runs of length $3$ and $y$ runs of length $4$ with $3x+4y=n$ and $x+y=\\lfloor(n-1)\\log_{10}2\\rfloor+1$ (the number of digit-lengths reached), so $y=n-3\\left(\\lfloor(n-1)\\log_{10}2\\rfloor+1\\right)$ is the number of $k<n$ with $2^k$ starting with $8$ or $9$.\n\nSince $2^{1000}$ starts with $10$ (so $2^{2000}$ starts with $1$ too): for $n=1000$, $y=1000-3\\lfloor999\\cdot0.3010+1\\rfloor=1000-3\\cdot301=97$; for $n=2000$, $y=2000-3\\lfloor1999\\cdot0.3010+1\\rfloor=2000-3\\cdot602=194$. The count for $1000\\le n\\le2000$ is $194-97=97$. (A direct computation with big integers also gives $97$.)\n\n**Answer: 97**"
+   }
+  ],
+  "topics": [
+   "number-theory",
+   "counting"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "smt-2022-team-11",
+  "bank": "smt",
+  "source": {
+   "contest": "Stanford Math Tournament",
+   "paper": "2022 Team",
+   "year": 2022,
+   "number": 11,
+   "url": "https://www.stanfordmathtournament.org/pdfs/smt2022/team-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Let $O$ be the circumcenter of $\\triangle ABC$. Let $M$ be the midpoint of $BC$, and let $E$ and $F$ be the feet of the altitudes from $B$ and $C$, respectively, onto the opposite sides. $EF$ intersects $BC$ at $P$. The line passing through $O$ and perpendicular to $BC$ intersects the circumcircle of $\\triangle ABC$ at $L$ (on the major arc $BC$) and $N$, and intersects $BC$ at $M$. Point $Q$ lies on the line $LA$ such that $OQ$ is perpendicular to $AP$. Given that $\\angle BAC=60^\\circ$ and $\\angle AMC=60^\\circ$, compute $OQ/AP$.",
+  "image": null,
+  "choices": null,
+  "answer": "2*sqrt(3)/3",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Orthocenter of triangle AMP",
+    "body": "Let $H$ be the orthocenter of $\\triangle ABC$ and $R$ its circumradius. Since $\\angle A=60^\\circ$: $AH=2R\\cos60^\\circ=R$ and $OM=R\\cos60^\\circ=\\frac R2$; $AH$ and $OM$ are parallel (both $\\perp BC$) and point the same way, so $\\vec{OM}=\\vec{O'H}$ where $O'$ is the midpoint of $AH$. Hence $OO'HM$ is a parallelogram: $OO'\\parallel MH$, $OO'=MH$.\n\nA standard property of the orthic triangle: for $P=EF\\cap BC$, $PH\\perp AM$. Together with $AH\\perp BC$ this makes $H$ the orthocenter of $\\triangle AMP$, so $MH\\perp AP$. Therefore $OO'\\perp AP$, i.e. line $OO'$ is the line through $O$ perpendicular to $AP$.\n\nThe homothety with ratio $\\frac12$ taking $L\\mapsto A$ and $N\\mapsto H$ (as $LN=2R$, $AH=R$, $LN\\parallel AH$, same direction) sends $O$, the midpoint of $LN$, to $O'$, so its centre $Z=LA\\cap NH$ lies on line $OO'$. So $Z$ is the point of $LA$ with $OZ\\perp AP$, i.e. $Z=Q$, and $QO'=\\frac12QO$, giving $OQ=2\\,OO'=2\\,MH$.\n\nIn $\\triangle AMP$ (orthocenter $H$) the angle at $M$ is $\\angle AMP=60^\\circ$ (given $\\angle AMC=60^\\circ$). With $R'$ its circumradius, $MH=2R'\\cos60^\\circ=R'$ and $AP=2R'\\sin60^\\circ=\\sqrt3\\,MH$.\n\nTherefore $\\frac{OQ}{AP}=\\frac{2MH}{\\sqrt3\\,MH}=\\frac2{\\sqrt3}$. (A coordinate computation with $\\angle A=60^\\circ$, $\\angle AMC=60^\\circ$ gives $1.1547$.)\n\n**Answer: $\\frac{2}{\\sqrt3}$**"
+   }
+  ],
+  "topics": [
+   "geometry"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null,
+  "answerDisplay": "$\\frac{2}{\\sqrt3}$"
+ },
+ {
+  "id": "smt-2022-team-12",
+  "bank": "smt",
+  "source": {
+   "contest": "Stanford Math Tournament",
+   "paper": "2022 Team",
+   "year": 2022,
+   "number": 12,
+   "url": "https://www.stanfordmathtournament.org/pdfs/smt2022/team-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Let $\\mathcal T$ be the isosceles triangle with side lengths $5,5,6$. Arpit and Katherine simultaneously choose points $A$ and $K$ within this triangle, and compute $d(A,K)$, the squared distance between the two points. Suppose that Arpit chooses a random point $A$ within $\\mathcal T$. Katherine plays the (possibly randomized) strategy which given Arpit's strategy minimizes the expected value of $d(A,K)$. Compute this value.",
+  "image": null,
+  "choices": null,
+  "answer": "43/18",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Best response is the centroid",
+    "body": "For any fixed point $K$, $\\mathbb E|A-K|^2=\\mathbb E|A-\\bar A|^2+|K-\\bar A|^2$ where $\\bar A$ is the mean of the distribution of $A$, here the centroid $G$ of the triangle. A randomized $K$ can only add variance, so the best response is $K=G$ and the value is $\\mathbb E|A-G|^2$.\n\nUse coordinates $B=(0,0)$, $A=(-3,4)$, $C=(3,4)$ (area $12$, $G=(0,\\frac83)$). With uniform density $\\frac1{12}$ and for each $y\\in[0,4]$, $x\\in[-\\frac34y,\\frac34y]$: $$\\mathbb E=\\frac1{12}\\int_0^4\\int_{-3y/4}^{3y/4}\\left[x^2+\\left(\\tfrac83-y\\right)^2\\right]dx\\,dy=\\frac1{12}\\int_0^4\\left(\\tfrac{9}{32}y^3+\\tfrac32y\\left(\\tfrac83-y\\right)^2\\right)dy.$$ The integrand simplifies to $\\frac{57}{32}y^3-8y^2+\\frac{32}3y$ and the integral is $\\frac{57}{128}\\cdot256-\\frac83\\cdot64+\\frac{16}3\\cdot16=114-\\frac{512}3+\\frac{256}3=\\frac{86}{3}$, so $\\mathbb E=\\frac{86}{36}=\\frac{43}{18}$. (Equivalently, the mean squared distance from the centroid of a triangle is $\\frac{a^2+b^2+c^2}{36}=\\frac{86}{36}$.)\n\n**Answer: $\\frac{43}{18}$**"
+   }
+  ],
+  "topics": [
+   "geometry",
+   "probability"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null,
+  "answerDisplay": "$\\frac{43}{18}$"
+ },
+ {
+  "id": "smt-2022-team-13",
+  "bank": "smt",
+  "source": {
+   "contest": "Stanford Math Tournament",
+   "paper": "2022 Team",
+   "year": 2022,
+   "number": 13,
+   "url": "https://www.stanfordmathtournament.org/pdfs/smt2022/team-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "For a regular polygon $S$ with $n$ sides, let $f(S)$ denote the regular polygon with $2n$ sides such that the vertices of $S$ are the midpoints of every other side of $f(S)$. Let $f^{(k)}(S)$ denote the polygon that results after applying $f$ a total of $k$ times. The area of $$\\lim_{k\\to\\infty}f^{(k)}(P),$$ where $P$ is a pentagon of side length $1$, can be expressed as $\\frac{a+b\\sqrt c}{d}\\pi^m$ for some positive integers $a,b,c,d,m$ where $d$ is not divisible by the square of any prime and $d$ does not share any positive divisors with $a$ and $b$. Find $a+b+c+d+m$.",
+  "image": null,
+  "choices": null,
+  "answer": "141",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Product of cosines",
+    "body": "All polygons share the same centre $O$. Let $r_k$ be the circumradius of $f^{(k)}(P)$; $r_0=\\frac1{2\\sin(\\pi/5)}$. Going from an $n$-gon to the $2n$-gon that circumscribes it in this way, the vertices of the small polygon are midpoints of sides of the big one, so the apothem of the big polygon equals the circumradius of the small one and $r_k=\\frac{r_{k-1}}{\\cos\\left(\\frac{\\pi}{5\\cdot2^k}\\right)}$.\n\nHence $r_k=r_0\\prod_{i=1}^k\\sec\\frac\\pi{5\\cdot2^i}$. Using $\\sin2\\theta=2\\sin\\theta\\cos\\theta$ repeatedly, $\\prod_{i=1}^k\\cos\\frac{\\pi}{5\\cdot2^i}=\\frac{\\sin(\\pi/5)}{2^k\\sin\\left(\\pi/(5\\cdot2^k)\\right)}$, so $r_k=\\frac{r_0\\,2^k\\sin\\frac\\pi{5\\cdot2^k}}{\\sin\\frac\\pi5}\\to\\frac{r_0\\cdot\\pi/5}{\\sin(\\pi/5)}=\\frac{\\pi}{10\\sin^2(\\pi/5)}$.\n\nThe limit is a disc of area $\\pi r^2=\\frac{\\pi^3}{100\\sin^4(\\pi/5)}$. With $\\sin^2\\frac\\pi5=\\frac{5-\\sqrt5}8$, $\\sin^4\\frac\\pi5=\\frac{30-10\\sqrt5}{64}$, giving area $\\frac{64\\pi^3}{100(30-10\\sqrt5)}=\\frac{6+2\\sqrt5}{125}\\pi^3$.\n\nSo $a=6,b=2,c=5,d=125,m=3$ and $a+b+c+d+m=141$.\n\n**Answer: 141**"
+   }
+  ],
+  "topics": [
+   "geometry",
+   "trigonometry",
+   "analysis"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "smt-2022-team-14",
+  "bank": "smt",
+  "source": {
+   "contest": "Stanford Math Tournament",
+   "paper": "2022 Team",
+   "year": 2022,
+   "number": 14,
+   "url": "https://www.stanfordmathtournament.org/pdfs/smt2022/team-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Consider the function $$f(m)=\\sum_{n=0}^\\infty\\frac{(n-m)^2}{(2n)!}.$$ This function can be expressed in the form $f(m)=\\dfrac{a_m}{e}+\\dfrac{b_m}{4}e$ for sequences of integers $\\{a_m\\}_{m\\ge1}$, $\\{b_m\\}_{m\\ge1}$. Determine $$\\lim_{m\\to\\infty}\\frac{2022\\,b_m}{a_m}.$$",
+  "image": null,
+  "choices": null,
+  "answer": "8088",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Evaluate the three sums",
+    "body": "Expand $f(m)=\\sum\\frac{n^2}{(2n)!}-2m\\sum\\frac n{(2n)!}+m^2\\sum\\frac1{(2n)!}$. Using $\\sum_{n\\ge0}\\frac1{(2n)!}=\\cosh1=\\frac12\\left(e+\\frac1e\\right)$, $\\sum_{n\\ge1}\\frac{1}{(2n-1)!}=\\sinh1=\\frac12\\left(e-\\frac1e\\right)$, and $\\sum\\frac{n}{(2n)!}=\\frac12\\sum_{n\\ge1}\\frac{1}{(2n-1)!}=\\frac12\\sinh1$, and $\\sum\\frac{n^2}{(2n)!}=\\frac14\\sum_{n\\ge1}\\frac{(2n-1)+1}{(2n-1)!}=\\frac14\\left(\\cosh1+\\sinh1\\right)=\\frac e4$:\n\n$$f(m)=\\frac e4-\\frac m2\\left(e-\\frac1e\\right)+\\frac{m^2}2\\left(e+\\frac1e\\right)=e\\cdot\\frac{2m^2-2m+1}{4}+\\frac1e\\cdot\\frac{m^2+m}{2}.$$\n\nSo $a_m=\\frac{m^2+m}2$ and $b_m=2m^2-2m+1$ (both integers), and $\\frac{b_m}{a_m}\\to4$. The limit is $2022\\cdot4=8088$. (Numerically checked.)\n\n**Answer: 8088**"
+   }
+  ],
+  "topics": [
+   "calculus",
+   "sequences-series"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "smt-2022-team-15",
+  "bank": "smt",
+  "source": {
+   "contest": "Stanford Math Tournament",
+   "paper": "2022 Team",
+   "year": 2022,
+   "number": 15,
+   "url": "https://www.stanfordmathtournament.org/pdfs/smt2022/team-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "In $\\triangle ABC$, let $G$ be the centroid and let the circumcenters of $\\triangle BCG$, $\\triangle CAG$, and $\\triangle ABG$ be $I$, $J$, and $K$, respectively. The line passing through $I$ and the midpoint of $BC$ intersects $KJ$ at $Y$. If the radius of circle $K$ is $5$, the radius of circle $J$ is $8$, and $AG=6$, what is the length of $KY$?",
+  "image": null,
+  "choices": null,
+  "answer": "(4+sqrt(55))/2",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "$Y$ is the midpoint of $KJ$",
+    "body": "$K$ and $J$ are both equidistant from $A$ and $G$, so line $KJ$ is the perpendicular bisector of $AG$, meeting $AG$ at its midpoint $X$ with $AX=3$. Then $KX=\\sqrt{5^2-3^2}=4$ and $JX=\\sqrt{8^2-3^2}=\\sqrt{55}$. Placing $K$ and $J$ on opposite sides of $AG$ gives $KJ=4+\\sqrt{55}$ (the same-side placement does not give a valid triangle: a numerical construction finds no solution).\n\nThe line through $I$ and the midpoint $D$ of $BC$ is the perpendicular bisector of $BC$. Scaling by $\\frac12$ about $A$ (midpoints $F,E$ of $AB$, $AC$) one shows that this line passes through the midpoint of $KJ$: with $Z$ the midpoint of $FE$ (on the median $AD$, hence on line $AX$, the radical axis of the circles $(AXF)$ and $(AXE)$), power of the point $Z$ shows $FZ_B=EZ_C$ for the second intersections $Z_B,Z_C$ of line $FE$ with these circles, and projecting the centres of those circles onto $FE$ shows that the perpendicular bisector of $FE$ passes through the midpoint of the segment joining the two centres. The configuration is the half-scale copy of the one we want, so $Y$ is the midpoint of $KJ$.\n\nHence $KY=\\frac12KJ=\\frac{4+\\sqrt{55}}2=2+\\frac{\\sqrt{55}}2$. (A coordinate verification gives $KY\\approx5.708$.)\n\n**Answer: $2+\\frac{\\sqrt{55}}2$**"
+   }
+  ],
+  "topics": [
+   "geometry"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null,
+  "answerDisplay": "$2+\\frac{\\sqrt{55}}{2}$"
+ }
+]

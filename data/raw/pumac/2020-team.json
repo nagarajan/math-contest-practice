@@ -1,0 +1,483 @@
+[
+ {
+  "id": "pumac-2020-team-01",
+  "bank": "pumac",
+  "source": {
+   "contest": "PUMaC",
+   "paper": "2020 Team Round",
+   "year": 2020,
+   "number": 1,
+   "url": "https://jason-shi-f9dm.squarespace.com/s/PUMaC_2020_Team_problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 5,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Consider a $2021$-by-$2021$ board of unit squares. For some integer $k$, we say the board is *tiled* by $k$-by-$k$ squares if it is completely covered by (possibly overlapping) $k$-by-$k$ squares with their corners on the corners of the unit squares. What is the largest integer $k$ such that the minimum number of $k$-by-$k$ squares needed to tile the $2021$-by-$2021$ board is exactly equal to $100$?",
+  "image": null,
+  "choices": null,
+  "answer": "224",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Count a grid of marked cells",
+    "body": "Mark the unit squares in positions $(a,b)$ with $a\\equiv b\\equiv1\\pmod k$. If $2021=mk+r$ with $0<r\\le k$ there are $m+1=\\lceil2021/k\\rceil$ possible values for each coordinate, so $(m+1)^2$ marked cells. A $k\\times k$ square contains at most one row $\\equiv1\\pmod k$ and at most one such column, hence at most one marked cell. So at least $(m+1)^2$ squares are needed.\n\nConversely, squares placed at the marked positions (the last row/column of squares shifted back to stay inside the board) cover everything with $(m+1)^2$ squares. So the minimum is $\\lceil2021/k\\rceil^2$.\n\nThis equals $100$ iff $\\lceil2021/k\\rceil=10$, i.e. $9<\\frac{2021}{k}\\le10$, i.e. $202.1\\le k<224.56$. The largest such integer is $k=224$ ($2021/224\\approx9.02$; $k=225$ gives $8.98$, so $9$ squares).\n\n**Answer: 224**"
+   }
+  ],
+  "topics": [
+   "counting"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "pumac-2020-team-02",
+  "bank": "pumac",
+  "source": {
+   "contest": "PUMaC",
+   "paper": "2020 Team Round",
+   "year": 2020,
+   "number": 2,
+   "url": "https://jason-shi-f9dm.squarespace.com/s/PUMaC_2020_Team_problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 5,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Gary is baking cakes, one at a time. However, Gary's not been having much success, and each failed cake will cause him to slowly lose his patience, until eventually he gives up. Initially, a failed cake has a probability of $0$ of making him give up. Each cake has a $\\frac12$ of turning out well, with each cake independent of every other cake. If two consecutive cakes turn out well, the probability resets to $0$ immediately after the second cake. On the other hand, if the cake fails, assuming that he doesn't give up at this cake, his probability of breaking on the next failed cake goes from $p$ to $p+0.5$. If the expected number of successful cakes Gary will bake until he gives up is $\\frac pq$, for relatively prime $p,q$, find $p+q$.",
+  "image": null,
+  "choices": null,
+  "answer": "86",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Set up a small Markov chain",
+    "body": "The give-up probability can only be $0,\\frac12,1$. Let $A_p$ be the expected number of future successful cakes when the current give-up probability is $p$ and the last cake was not a success, and $B_p$ the same when the last cake was a success. At $p=0$ the two coincide, $A_0=B_0$ (a success at $p=0$ keeps $p=0$ either way).\n\nEach cake succeeds with probability $\\frac12$ (count it); if it fails, Gary gives up with probability $p$, otherwise $p$ increases by $\\frac12$:\n$$A_0=\\tfrac12(1+A_0)+\\tfrac12A_{1/2},\\qquad A_p=\\tfrac12(1+B_p)+\\tfrac12(1-p)A_{p+1/2},\\qquad B_p=\\tfrac12(1+A_0)+\\tfrac12(1-p)A_{p+1/2}$$\n(with $A_{3/2}$ irrelevant because at $p=1$ a failure ends the process).\n\nFrom the first equation $A_0=1+A_{1/2}$. At $p=1$: $B_1=\\frac{1+A_0}2$ and $A_1=\\frac12(1+B_1)=\\frac34+\\frac{A_0}4$. At $p=\\frac12$:\n$$B_{1/2}=\\frac{1+A_0}2+\\frac{A_1}4=\\frac{11}{16}+\\frac{9A_0}{16},\\qquad A_{1/2}=\\frac12(1+B_{1/2})+\\frac{A_1}4=\\frac{33}{32}+\\frac{11A_0}{32}.$$\nThen $A_0=1+A_{1/2}=\\frac{65}{32}+\\frac{11}{32}A_0$, so $\\frac{21}{32}A_0=\\frac{65}{32}$ and $A_0=\\frac{65}{21}$. Gary starts in this state, so $p+q=65+21=86$.\n\n**Answer: 86**"
+   }
+  ],
+  "topics": [
+   "probability"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "pumac-2020-team-03",
+  "bank": "pumac",
+  "source": {
+   "contest": "PUMaC",
+   "paper": "2020 Team Round",
+   "year": 2020,
+   "number": 3,
+   "url": "https://jason-shi-f9dm.squarespace.com/s/PUMaC_2020_Team_problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 5,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Alice and Bob are playing a guessing game. Bob is thinking of a number $n$ of the form $2^a3^b$, where $a$ and $b$ are positive integers between $1$ and $2020$, inclusive. Each turn, Alice guess a number $m$, and Bob will tell her either $\\gcd(m,n)$ or $\\operatorname{lcm}(m,n)$ (letting her know that he is saying that gcd or lcm), as well as whether any of the respective powers match up in their prime factorization. In particular, if $m=n$, Bob will let Alice know this, and the game is over. Determine the smallest number $k$ so that Alice is always able to find $n$ within $k$ guesses, regardless of Bob's number or choice of revealing either the lcm, or the gcd.",
+  "image": null,
+  "choices": null,
+  "answer": "11",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Binary search in two coordinates",
+    "body": "Let $k(x,y)$ be the number of guesses needed when $a\\in\\{1,\\dots,x\\}$ and $b\\in\\{1,\\dots,y\\}$. We show $k(x,y)=\\lfloor\\log_2\\max(x,y)\\rfloor+1$.\n\n**Lower bound.** Fix $b$ and look only at the numbers $2^a3^b$, $a\\le x$. A guess $2^s3^t$ compares $a$ with $s$: if Bob answers with the gcd (resp. lcm) the exponent of $2$ shown is $\\min(a,s)$ (resp. $\\max(a,s)$), and Bob can always choose the answer that reveals only \"$a\\ge s$\" (resp. \"$a\\le s$\") unless $a=s$. So each guess either hits the exponent or splits the candidate exponents into those below and above $s$ - a binary search tree on $x$ values, which needs depth at least $\\lfloor\\log_2x\\rfloor+1$.\n\n**Upper bound** (induction on $\\max(x,y)$, say $x\\ge y$). Alice guesses $2^{s}3^{t}$ with $s=\\lceil x/2\\rceil$, $t=\\lceil y/2\\rceil$ (middle values).\n- If exactly one exponent matches, the other coordinate is a 1-D search of at most $x$ values (or $y$ values): at most $\\lfloor\\log_2x\\rfloor$ more guesses.\n- If Bob's gcd/lcm is exactly $m$ itself with neither exponent matching, then both exponents of $n$ lie on the same side of the guess, so each lies in a range of at most half the size; by induction at most $\\lfloor\\log_2(x/2)\\rfloor+1$ further guesses are needed.\n- If the exponents lie on opposite sides (gcd or lcm differs from $m$), the exponents shown reveal one of $a,b$ exactly and a half-range for the other, a 1-D search of at most $x/2$ values.\nIn every case at most $\\lfloor\\log_2x\\rfloor+1$ guesses in total.\n\nWith $x=y=2020$: $\\lfloor\\log_22020\\rfloor+1=10+1=11$.\n\n**Answer: 11**"
+   }
+  ],
+  "topics": [
+   "logic",
+   "number-theory"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "pumac-2020-team-04",
+  "bank": "pumac",
+  "source": {
+   "contest": "PUMaC",
+   "paper": "2020 Team Round",
+   "year": 2020,
+   "number": 4,
+   "url": "https://jason-shi-f9dm.squarespace.com/s/PUMaC_2020_Team_problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 5,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Find the number of points $P\\in\\mathbb Z^2$ that satisfy the following two conditions:\n\n1) If $Q$ is a point on the circle of radius $\\sqrt{2020}$ centered at the origin such that the line $\\overline{PQ}$ is tangent to the circle at $Q$, then $\\overline{PQ}$ has integral length.\n\n2) The $x$-coordinate of $P$ is $38$.",
+  "image": null,
+  "choices": null,
+  "answer": "16",
+  "acceptedAnswers": [
+   "14"
+  ],
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Tangent length and factor pairs",
+    "body": "Let $P=(38,y)$. The tangent length $T$ satisfies $T^2=OP^2-2020=38^2+y^2-2020=y^2-576$ (note $38^2+24^2=2020$, so $2020-38^2=24^2$). We need $T$ a non-negative integer:\n$$y^2-T^2=24^2=576\\iff(y+T)(y-T)=2^6\\cdot3^2 .$$\nTake $y>0$. Both factors have the same parity, so both are even: $(y+T,y-T)=(d,e)$ with $de=576$, $d\\ge e$ both even. The pairs $(e,d)$: $(2,288),(4,144),(6,96),(8,72),(12,48),(16,36),(18,32),(24,24)$, giving $y=145,74,51,40,30,26,25,24$ - eight values. By symmetry there are eight negative values of $y$, so $16$ points in all. (The two points $(38,\\pm24)$ lie on the circle itself, with tangent length $0$.)\n\n**Answer: 16**"
+   }
+  ],
+  "topics": [
+   "number-theory",
+   "geometry"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": "The official key is 16 but also accepted 14, because it is unclear whether P may lie on the circle (the points (38,24) and (38,-24), tangent length 0)."
+ },
+ {
+  "id": "pumac-2020-team-05",
+  "bank": "pumac",
+  "source": {
+   "contest": "PUMaC",
+   "paper": "2020 Team Round",
+   "year": 2020,
+   "number": 5,
+   "url": "https://jason-shi-f9dm.squarespace.com/s/PUMaC_2020_Team_problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 5,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Suppose two polygons may be glued together at an edge if and only if corresponding edges of the same length are made to coincide. A $3\\times4$ rectangle is cut into $n$ pieces by making straight line cuts. What is the minimum value of $n$ so that it's possible to cut the pieces in such a way that they may be glued together two at a time into a polygon with perimeter at least $2021$?",
+  "image": null,
+  "choices": null,
+  "answer": "202",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Upper bound on the perimeter, then a construction",
+    "body": "**Bound.** The rectangle has perimeter $14$. Each additional piece created by a straight cut increases the total perimeter of all pieces by at most twice the length of the cut, and every cut has length at most $5$ (the diagonal). So $n$ pieces have total perimeter at most $14+2\\cdot5\\,(n-1)$. To glue $n$ pieces into one polygon we need at least $n-1$ gluings, and every gluing reduces the perimeter by twice the (positive) glued length, so the final perimeter is strictly less than $14+10(n-1)=10n+4$. We need $10n+4>2021$, i.e. $n\\ge202$.\n\n**Construction for $n=202$.** Place the rectangle with corners at $(0,0)$ and $(4,3)$. Make $200$ cuts from $\\left(\\frac iN,0\\right)$ to $\\left(4,3-\\frac iN\\right)$, $1\\le i\\le200$, for a large integer $N$, and cut the remaining bottom-right triangle once more (also with a short slit of length about $\\frac1N$). Then there are $202$ pieces; all the thin parallel strips have two edges of length $\\frac1N$ and long edges of length close to $5$, so they can be glued in a chain along the tiny edges. Each long cut has length at least $\\sqrt{(3-\\frac{201}N)^2+(4-\\frac{201}N)^2}-\\frac1N$, which tends to $5$ as $N\\to\\infty$, while the glued edges have length $\\frac1N\\to0$. For large $N$ the resulting polygon has perimeter at least $2021$.\n\nSo the minimum is $202$.\n\n**Answer: 202**"
+   }
+  ],
+  "topics": [
+   "geometry",
+   "counting"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "pumac-2020-team-06",
+  "bank": "pumac",
+  "source": {
+   "contest": "PUMaC",
+   "paper": "2020 Team Round",
+   "year": 2020,
+   "number": 6,
+   "url": "https://jason-shi-f9dm.squarespace.com/s/PUMaC_2020_Team_problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 5,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "We say that a string of digits from $0$ to $9$ is *valid* if the following conditions hold: First, for $2\\le k\\le4$, no consecutive run of $k$ digits sums to a multiple of $10$. Second, between any two $0$s, there are at least $3$ other digits. Find the last four digits of the number of valid strings of length $2020$.",
+  "image": null,
+  "choices": null,
+  "answer": "9040",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "A recurrence for the number of valid strings",
+    "body": "Let $t_\\ell$ be the number of valid strings of length $\\ell$. Take a valid string of length $\\ell-1\\ge3$ ending in digits $x,y,z$ and append a digit $d$. The new string is invalid exactly when $d$ completes a run of $2,3$ or $4$ digits with sum $\\equiv0\\pmod{10}$, i.e. $d\\equiv-z$, $d\\equiv-(y+z)$ or $d\\equiv-(x+y+z)$, or when $d=0$ and a $0$ occurs among $x,y,z$.\n- If there is no $0$ among $x,y,z$: the three values $-z,-(y+z),-(x+y+z)$ are distinct (otherwise a shorter run of the string would sum to $0$), so exactly $3$ digits are forbidden.\n- If a $0$ occurs among $x,y,z$ (only one can, by the spacing rule), then $d=0$ is forbidden, and the three sum-values collapse into exactly two other distinct values (when the $0$ is last, $-z=0$ coincides with the zero rule and $-y,-(x+y)$ remain; when it is in the middle or first position, two of the three sums coincide and differ from $0$): again exactly $3$ digits are forbidden.\nSo every valid string of length $\\ell-1$ extends in exactly $7$ ways:\n$$t_\\ell=7\\,t_{\\ell-1}\\quad(\\ell\\ge4),$$\nwith $t_1=10,\\ t_2=90,\\ t_3=720$. So $t_\\ell=720\\cdot7^{\\ell-3}$ for $\\ell\\ge3$ (a computer enumeration gives $10,90,720,5040,35280,246960,\\dots$ for $\\ell=1,2,\\dots$).\n\n**Last four digits of $t_{2020}=720\\cdot7^{2017}$.** Modulo $16$: $720=16\\cdot45$, so $t_{2020}\\equiv0$. Modulo $625$: $7^{500}\\equiv1$ ($\\varphi(625)=500$) and $2017=4\\cdot500+17$, so $t_{2020}\\equiv720\\cdot7^{17}\\equiv95\\cdot7^{17}$. This is divisible by $5$, so work mod $125$: $95\\cdot7^{17}\\equiv5\\cdot(19\\cdot7^{17})$ and $7^4=2401\\equiv26$, $7^{16}\\equiv26^4\\equiv101$, so $19\\cdot7^{17}\\equiv19\\cdot7\\cdot101\\equiv58\\pmod{125}$, giving $t_{2020}\\equiv5\\cdot58=290\\pmod{625}$. The number $\\equiv0\\pmod{16}$, $\\equiv290\\pmod{625}$ below $10000$ is $9040$.\n\n**Answer: 9040**"
+   }
+  ],
+  "topics": [
+   "counting"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "pumac-2020-team-07",
+  "bank": "pumac",
+  "source": {
+   "contest": "PUMaC",
+   "paper": "2020 Team Round",
+   "year": 2020,
+   "number": 7,
+   "url": "https://jason-shi-f9dm.squarespace.com/s/PUMaC_2020_Team_problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 5,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Let $X$, $Y$, and $Z$ be concentric circles with radii $1$, $13$, and $22$, respectively. Draw points $A$, $B$, and $C$ on $X$, $Y$, and $Z$, respectively, such that the area of triangle $ABC$ is as large as possible. If the area of the triangle is $\\Delta$, find $\\Delta^2$.",
+  "image": null,
+  "choices": null,
+  "answer": "24300",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "The centre is the orthocentre",
+    "body": "Let $O$ be the common centre. At the maximum, moving $C$ along $Z$ cannot increase the area, so the tangent to $Z$ at $C$ must be parallel to $AB$, i.e. $OC\\perp AB$. The same holds for $A$ and $B$: $OA\\perp BC$, $OB\\perp AC$. So $O$ is the orthocentre of $ABC$.\n\nPut $A=(1,0)$. Since $OA\\perp BC$, $B$ and $C$ have the same $x$-coordinate: $B=(x,b)$, $C=(x,c)$ with $b<0<c$ ($B$ and $C$ on opposite sides of the $x$-axis, which gives the larger area). Then\n$$x^2+b^2=169,\\qquad x^2+c^2=484,\\qquad OC\\perp AB:\\ x(x-1)+bc=0 .$$\nFrom $bc=-\\sqrt{(169-x^2)(484-x^2)}$ we get $\\sqrt{(169-x^2)(484-x^2)}=x(x-1)$, and squaring gives the cubic $x^3-327x^2+40898=0$. A negative rational root has the form $-n$ with $n\\mid40898=2\\cdot11^2\\cdot13^2$; trying $n=11$: $-1331-327\\cdot121+40898=0$. So $x=-11$, $b=-\\sqrt{169-121}=-4\\sqrt3$, $c=\\sqrt{484-121}=11\\sqrt3$ (check $x(x-1)=132=-bc=4\\sqrt3\\cdot11\\sqrt3$).\n\nArea: $B-A=(-12,-4\\sqrt3)$, $C-A=(-12,11\\sqrt3)$, cross product $=-12\\cdot11\\sqrt3-(-4\\sqrt3)(-12)=-180\\sqrt3$, so $\\Delta=90\\sqrt3$ and $\\Delta^2=8100\\cdot3=24300$.\n\n(A numerical optimization over the three angles gives the same maximum $\\Delta^2\\approx24300$.)\n\n**Answer: 24300**"
+   }
+  ],
+  "topics": [
+   "geometry",
+   "algebra"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "pumac-2020-team-09",
+  "bank": "pumac",
+  "source": {
+   "contest": "PUMaC",
+   "paper": "2020 Team Round",
+   "year": 2020,
+   "number": 9,
+   "url": "https://jason-shi-f9dm.squarespace.com/s/PUMaC_2020_Team_problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 5,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Consider a regular $2020$-gon circumscribed into a circle of radius $1$. Given three vertices of this polygon such that they form an isosceles triangle, let $X$ be the expected area of the isosceles triangle they create. $X$ can be written as $\\frac{1}{m\\tan((2\\pi)/n)}$ where $m$ and $n$ are integers. Compute $m+n$.",
+  "image": null,
+  "choices": null,
+  "answer": "5049",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Sum the areas by apex",
+    "body": "Since $2020$ is not divisible by $3$ there is no equilateral triangle, so each isosceles triangle has a unique apex. Fix the apex vertex $V$. The triangle has equal sides $VA=VB$ with central angles $\\alpha$ each, and the third arc is $2\\pi-2\\alpha$, where $\\alpha=\\frac{2\\pi j}{2020}$, $j=1,\\dots,1009$. With circumradius $1$ its area is\n$$\\tfrac12\\left(\\sin\\alpha+\\sin\\alpha+\\sin(2\\pi-2\\alpha)\\right)=\\sin\\alpha-\\tfrac12\\sin2\\alpha$$\n(the area of a triangle inscribed in a unit circle with central angles $\\theta_1,\\theta_2,\\theta_3$ is $\\frac12\\sum\\sin\\theta_i$).\n\nSum over $j=1,\\dots,1009$. First $\\sum_{j=1}^{1009}\\sin\\frac{2\\pi j}{2020}=\\cot\\frac{\\pi}{2020}$ (a telescoping/known sum: $\\sum_{j=1}^{N-1}\\sin\\frac{\\pi j}{N}=\\cot\\frac{\\pi}{2N}$ with $N=1010$). Second, $\\sum_{j=1}^{1009}\\sin\\frac{4\\pi j}{2020}=\\sum_{j=1}^{1009}\\sin\\frac{2\\pi j}{1010}=0$ (the terms $j$ and $1010-j$ cancel, and $j=505$ gives $\\sin\\pi=0$). So the total for one apex is $\\cot\\frac{\\pi}{2020}$ over $1009$ triangles; there are $1009\\cdot2020$ isosceles triangles in all, each apex contributing the same. Hence\n$$X=\\frac{\\cot\\frac\\pi{2020}}{1009}=\\frac1{1009\\tan\\frac{\\pi}{2020}}=\\frac1{1009\\tan\\frac{2\\pi}{4040}} .$$\nSo $m=1009$, $n=4040$ and $m+n=5049$.\n\n**Answer: 5049**"
+   }
+  ],
+  "topics": [
+   "geometry",
+   "trigonometry",
+   "probability"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "pumac-2020-team-10",
+  "bank": "pumac",
+  "source": {
+   "contest": "PUMaC",
+   "paper": "2020 Team Round",
+   "year": 2020,
+   "number": 10,
+   "url": "https://jason-shi-f9dm.squarespace.com/s/PUMaC_2020_Team_problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 5,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Let $N$ be the number of sequences of positive integers greater than $1$ where the product of all of the terms of the sequence is $12^{64}$. If $N$ can be expressed as $a(2^b)$, where $a$ is an odd positive integer, determine $b$.",
+  "image": null,
+  "choices": null,
+  "answer": "128",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Ordered factorizations of $2^{a}3^{b}$",
+    "body": "Let $g(n)$ be the number of ordered factorizations of $n$ into factors $>1$ (with $g(1)=1$). Splitting off the first factor, $g(n)=\\sum_{d\\mid n,\\,d<n}g(d)$, i.e. $\\sum_{d\\mid n}g(d)=2g(n)$ for $n>1$. For $n=p^aq^b$ ($a,b\\ge1$, $n\\ne pq$), inclusion-exclusion over divisors of $n$ that divide $n/p$ or $n/q$ gives\n$$g(n)=2g(n/p)+2g(n/q)-2g(n/pq).$$\nWith $g(p^a)=2^{a-1}$ and $g(pq)=3$ this recurrence (checked by Pascal's rule) is solved by\n$$g(p^aq^b)=2^{a-1}\\sum_{i=0}^{b}\\binom bi\\binom{a+i}{i}.$$\n(E.g. $g(2^2\\cdot3)=2(1+3)=8$: $12,\\ 2\\cdot6,\\ 6\\cdot2,\\ 3\\cdot4,\\ 4\\cdot3$ and the three orders of $2\\cdot2\\cdot3$.)\n\nFor $12^{64}=2^{128}3^{64}$:\n$$N=2^{127}S,\\qquad S=\\sum_{i=0}^{64}\\binom{64}{i}\\binom{128+i}{i}.$$\nBy Kummer's theorem $\\binom{128+i}{i}$ is odd for $0\\le i<128$ (no carries adding $128$ and $i$), and $v_2\\binom{64}i=6-v_2(i)$ for $1\\le i\\le63$. So the terms $i=0$ and $i=64$ (the latter is $\\binom{192}{64}$) are odd, the term $i=32$ has $v_2=1$, and every other term has $v_2\\ge2$. Hence\n$$S\\equiv\\left(1+\\tbinom{192}{64}\\right)+\\tbinom{64}{32}\\tbinom{160}{32}\\pmod4 .$$\nUsing $\\binom{2n}{2k}\\equiv\\binom nk\\pmod4$ repeatedly, $\\binom{192}{64}\\equiv\\binom{96}{32}\\equiv\\binom{48}{16}\\equiv\\binom{24}{8}\\equiv\\binom{12}{4}\\equiv\\binom62=15\\equiv3\\pmod4$, so $1+\\binom{192}{64}\\equiv0\\pmod4$, and the $i=32$ term is $\\equiv2\\pmod4$. Thus $v_2(S)=1$ and $v_2(N)=127+1=128$, i.e. $b=128$. (A direct computation of $v_2(S)$ confirms $1$.)\n\n**Answer: 128**"
+   }
+  ],
+  "topics": [
+   "counting",
+   "number-theory"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "pumac-2020-team-11",
+  "bank": "pumac",
+  "source": {
+   "contest": "PUMaC",
+   "paper": "2020 Team Round",
+   "year": 2020,
+   "number": 11,
+   "url": "https://jason-shi-f9dm.squarespace.com/s/PUMaC_2020_Team_problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 5,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Three (not necessarily distinct) points in the plane which have integer coordinates between $1$ and $2020$, inclusive, are chosen uniformly at random. The probability that the area of the triangle with these three vertices is an integer is $\\frac ab$ in lowest terms. If the three points are collinear, the area of the degenerate triangle is $0$. Find $a+b$.",
+  "image": null,
+  "choices": null,
+  "answer": "13",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Reduce to parities",
+    "body": "By the shoelace formula the area is $\\frac12|x_1y_2+x_2y_3+x_3y_1-x_2y_1-x_3y_2-x_1y_3|$, an integer iff the numerator is even, which depends only on the parities of the six coordinates. Among $1,\\dots,2020$ half are odd and half even, so the six parities are independent fair bits: all $2^6=64$ parity patterns are equally likely.\n\nTranslating by the first point we may assume it is $(0,0)$ mod $2$; the numerator becomes $x_2y_3-x_3y_2\\pmod2$. It is odd exactly when the vectors $(x_2,y_2),(x_3,y_3)$ mod $2$ are linearly independent over $\\mathbb F_2$: there are $3\\cdot2=6$ such ordered pairs out of $16$. So the probability that the area is an integer is $1-\\frac6{16}=\\frac58$. (Brute-force over the $64$ parity patterns: $40$ give an even numerator.)\n\nThus $a+b=5+8=13$.\n\n**Answer: 13**"
+   }
+  ],
+  "topics": [
+   "probability",
+   "counting"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "pumac-2020-team-12",
+  "bank": "pumac",
+  "source": {
+   "contest": "PUMaC",
+   "paper": "2020 Team Round",
+   "year": 2020,
+   "number": 12,
+   "url": "https://jason-shi-f9dm.squarespace.com/s/PUMaC_2020_Team_problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 5,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Given a sequence $a_0,a_1,a_2,\\dots,a_n$, let its *arithmetic approximant* be the arithmetic sequence $b_0,b_1,\\dots,b_n$ that minimizes the quantity $\\sum_{i=0}^n(b_i-a_i)^2$, and denote this quantity the sequence's *anti-arithmeticity*. Denote the number of integer sequences whose arithmetic approximant is the sequence $4,8,12,16$ and whose anti-arithmeticity is at most $20$.",
+  "image": null,
+  "choices": null,
+  "answer": "15",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Orthogonal decomposition",
+    "body": "In $\\mathbb R^4$ the vectors $u=(1,1,1,1)$, $v=(-3,-1,1,3)$, $w=(1,-1,-1,1)$, $z=(1,-3,3,-1)$ are pairwise orthogonal with $|u|^2=4$, $|v|^2=20$, $|w|^2=4$, $|z|^2=20$. Arithmetic sequences are exactly $\\operatorname{span}(u,v)$, so the arithmetic approximant of $a$ is the projection onto $\\operatorname{span}(u,v)$ and the anti-arithmeticity is\n$$\\frac{(a\\cdot w)^2}{4}+\\frac{(a\\cdot z)^2}{20}.$$\nThe approximant is $4,8,12,16=10u+2v$ iff $a\\cdot u=40$ and $a\\cdot v=40$. Write $t=a\\cdot w$, $s=a\\cdot z$; then\n$$a=10u+2v+\\tfrac t4w+\\tfrac s{20}z,$$\nso $a_0+a_3=20+\\frac t2$, $a_3-a_0=12-\\frac s{10}$, $a_1+a_2=20-\\frac t2$ and $a_2-a_1=4+\\frac{3s}{10}$. For $a$ to be integral we need $\\beta=\\frac t2$ and $\\alpha=\\frac s{10}$ integers with $a_0+a_3$ and $a_3-a_0$ of equal parity, i.e. $\\alpha\\equiv\\beta\\pmod2$ (and then the other pair works too). The anti-arithmeticity is\n$$\\frac{t^2}4+\\frac{s^2}{20}=\\beta^2+5\\alpha^2\\le20 .$$\nCount pairs $(\\alpha,\\beta)$ of equal parity:\n- $\\alpha=0$: $\\beta$ even, $\\beta^2\\le20$: $0,\\pm2,\\pm4$ - $5$ pairs;\n- $\\alpha=\\pm1$: $\\beta$ odd, $\\beta^2\\le15$: $\\pm1,\\pm3$ - $4$ each, $8$ pairs;\n- $\\alpha=\\pm2$: $\\beta=0$ - $2$ pairs.\nTotal $15$.\n\n**Answer: 15**"
+   }
+  ],
+  "topics": [
+   "linear-algebra",
+   "algebra"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "pumac-2020-team-13",
+  "bank": "pumac",
+  "source": {
+   "contest": "PUMaC",
+   "paper": "2020 Team Round",
+   "year": 2020,
+   "number": 13,
+   "url": "https://jason-shi-f9dm.squarespace.com/s/PUMaC_2020_Team_problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 5,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Will and Lucas are playing a game. Will claims that he has a polynomial $f$ with integer coefficients in mind, but Lucas doesn't believe him. To see if Will is lying, Lucas asks him on minute $i$ for the value of $f(i)$, starting from minute $1$. If Will is telling the truth, he will report $f(i)$. Otherwise, he will randomly and uniformly pick a positive integer from the range $[1,(i+1)!]$. Now, Lucas is able to tell whether or not the values that Will has given are possible immediately, and will call out Will if this occurs. If Will is lying, say the probability that Will makes it to round $20$ is $\\frac ab$. If the prime factorization of $b$ is $p_1^{e_1}\\cdots p_k^{e_k}$, determine the sum $\\sum_{i=1}^ke_i$.",
+  "image": null,
+  "choices": null,
+  "answer": "289",
+  "acceptedAnswers": [
+   "256"
+  ],
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Each round costs a factor $1/n!$",
+    "body": "Suppose Will's first $n$ values $a_1,\\dots,a_n$ are consistent with some integer polynomial. Any two integer polynomials $p,q$ with $p(i)=q(i)=a_i$ for $i\\le n$ differ by $(x-1)(x-2)\\cdots(x-n)\\cdot r(x)$ with $r$ an integer polynomial, so $p(n+1)\\equiv q(n+1)\\pmod{n!}$. Hence $a_{n+1}$ must lie in one specific residue class mod $n!$ (and some value in that class works). Will's random value is uniform on $[1,(n+2)!]$, a multiple of $n!$ in length, so he passes round $n+1$ with probability exactly $\\frac1{n!}$.\n\nRound $1$ and round $2$ cost nothing ($\\frac1{0!}$ and $\\frac1{1!}$: any two values lie on a line). Therefore the probability of getting through round $n$ is $\\prod_{i=1}^{n-1}\\frac1{i!}$, and for $n=20$:\n$$\\frac ab=\\prod_{i=1}^{19}\\frac1{i!},\\qquad b=\\prod_{i=1}^{19}i!\\ \\text{(in lowest terms)}.$$\nWe need the total number of prime factors of $b$ counted with multiplicity: for each prime $p$, $\\sum_{i=1}^{19}\\sum_{k\\ge1}\\lfloor i/p^k\\rfloor$:\n- $p=19,17,13,11$: $20-p$ each: $1+3+7+9=20$;\n- $p=7$: $7\\cdot1+6\\cdot2=19$;\n- $p=5$: $5\\cdot1+5\\cdot2+5\\cdot3=30$;\n- $p=3$: $(3(1+2+3+4+5)+2\\cdot6)+(9\\cdot1+2\\cdot2)=45+25=70$;\n- $p=2$: $2(1+\\dots+9)+4(1+2+3+4)+8\\cdot1+2\\cdot4+4\\cdot1=90+40+8+8+4=150$.\nTotal: $20+19+30+70+150=289$.\n\n**Answer: 289**"
+   }
+  ],
+  "topics": [
+   "number-theory",
+   "probability",
+   "polynomials"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": "The official key (289) counts 'makes it to round 20' as getting through round 20 (probability the product of 1/i! for i=1..19). If it means only reaching round 20 (surviving rounds 1..19), the product runs to 18! and the answer would be 256."
+ },
+ {
+  "id": "pumac-2020-team-14",
+  "bank": "pumac",
+  "source": {
+   "contest": "PUMaC",
+   "paper": "2020 Team Round",
+   "year": 2020,
+   "number": 14,
+   "url": "https://jason-shi-f9dm.squarespace.com/s/PUMaC_2020_Team_problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 5,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Let $N$ be the number of convex $27$-gons up to rotation there are such that each side has length $1$ and each angle is a multiple of $2\\pi/81$. Find the remainder when $N$ is divided by $23$.",
+  "image": null,
+  "choices": null,
+  "answer": "12",
+  "acceptedAnswers": [
+   "0"
+  ],
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Sets of $81$st roots of unity with sum $0$",
+    "body": "We read the angle condition as: every side direction is a multiple of $\\frac{2\\pi}{81}$ (equivalently, the turning angles are multiples of $\\frac{2\\pi}{81}$). Then the sides are unit vectors $\\omega^{j}$, $\\omega=e^{2\\pi i/81}$; a convex polygon has $27$ sides with distinct directions, and the polygon is determined by the set $J$ of $27$ exponents, which must satisfy $\\sum_{j\\in J}\\omega^j=0$.\n\n**Zero-sum sets.** Let $f(x)=\\sum_{j\\in J}x^j$ with $J\\subset\\{0,\\dots,80\\}$. Since $f(\\omega)=0$, $f$ is divisible by the minimal polynomial of $\\omega$, $\\Phi_{81}(x)=1+x^{27}+x^{54}$: $f=\\Phi_{81}\\cdot g$ with $\\deg g<27$. Comparing coefficients, $f_j=f_{j+27}=f_{j+54}=g_j$ for $0\\le j<27$, so the coefficients of $g$ are $0/1$ and $J$ is a union of \"triangles\" $\\{j,j+27,j+54\\}$, $0\\le j<27$. With $|J|=27$ we choose $9$ of the $27$ triangles.\n\n**Up to rotation.** Rotating the polygon by $\\frac{2\\pi}{81}$ adds $1$ to every exponent, which cyclically shifts the $27$ triangle classes. So we count $9$-element subsets of $\\mathbb Z/27$ up to cyclic shift (necklaces); by Burnside, using shifts by multiples of $3$ and $9$:\n$$N=\\frac1{27}\\left[\\binom{27}{9}+\\varphi(3)\\binom93+\\varphi(9)\\binom31\\right]=\\frac{4686825+168+18}{27}=173593.$$\nSince $173593=23\\cdot7547+12$, the remainder is $12$.\n\n**Answer: 12**"
+   }
+  ],
+  "topics": [
+   "counting",
+   "complex-numbers"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": "With 'each (interior) angle a multiple of 2*pi/81' taken literally no such polygon exists, so 0 is also defensible; the official key is 12 but also accepted 0. The stored solution uses the interpretation that the side directions (turning angles) are multiples of 2*pi/81."
+ },
+ {
+  "id": "pumac-2020-team-15",
+  "bank": "pumac",
+  "source": {
+   "contest": "PUMaC",
+   "paper": "2020 Team Round",
+   "year": 2020,
+   "number": 15,
+   "url": "https://jason-shi-f9dm.squarespace.com/s/PUMaC_2020_Team_problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 5,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Suppose that $f$ is a function $f:\\mathbb R_{\\ge0}\\to\\mathbb R$ so that for all $x,y\\in\\mathbb R_{\\ge0}$ (nonnegative reals) we have that $f(x)+f(y)=f(x+y+xy)+f(x)f(y)$. Given that $f\\left(\\frac35\\right)=\\frac12$ and $f(1)=3$, determine $\\lfloor\\log_2(-f(10^{2021}-1))\\rfloor$.",
+  "image": null,
+  "choices": null,
+  "answer": "10104",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Turn it into a multiplicative function",
+    "body": "The equation rearranges to $(1-f(x))(1-f(y))=1-f(x+y+xy)$. Put $g=1-f$: $g(x)g(y)=g(x+y+xy)$. Since $x+y+xy+1=(x+1)(y+1)$, define $h(t)=g(t-1)$ for $t\\ge1$; then\n$$h(t)\\,h(u)=h(tu)\\qquad(t,u\\ge1).$$\nGiven values: $h\\left(\\frac85\\right)=g\\left(\\frac35\\right)=1-\\frac12=\\frac12$ and $h(2)=g(1)=1-3=-2$.\n\nThen $h(8)=h(2)^3=-8$ and $h(8)=h\\left(\\frac85\\right)h(5)=\\frac12h(5)$, so $h(5)=-16$. Therefore $h(10)=h(2)h(5)=(-2)(-16)=32=2^5$ and\n$$h(10^{2021})=h(10)^{2021}=2^{10105}.$$\nHence $f(10^{2021}-1)=1-g(10^{2021}-1)=1-h(10^{2021})=1-2^{10105}$, so $-f=2^{10105}-1$ and $\\lfloor\\log_2(2^{10105}-1)\\rfloor=10104$.\n\n**Answer: 10104**"
+   }
+  ],
+  "topics": [
+   "functional-equations",
+   "algebra"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ }
+]

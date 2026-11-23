@@ -1,0 +1,96 @@
+[
+  {
+    "id": "pumac-2024-finals-a-01",
+    "bank": "pumac",
+    "source": {
+      "contest": "PUMaC",
+      "paper": "2024 Individual Finals A",
+      "year": 2024,
+      "number": 1,
+      "url": "https://jason-shi-f9dm.squarespace.com/s/PUMaC_2024_Indiv_Finals_A.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Given $x,y,z\\ge0$ and $x\\sqrt{yz}+y\\sqrt{xz}+z\\sqrt{xy}\\ge12$, find, with proof, the minimum possible value of $x+y+z$.",
+    "image": null,
+    "choices": null,
+    "answer": "$6$",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [],
+    "topics": [
+      "inequalities",
+      "algebra"
+    ],
+    "difficulty": 2,
+    "duplicateOf": "pumac-2024-finals-b-02",
+    "reviewNote": null
+  },
+  {
+    "id": "pumac-2024-finals-a-02",
+    "bank": "pumac",
+    "source": {
+      "contest": "PUMaC",
+      "paper": "2024 Individual Finals A",
+      "year": 2024,
+      "number": 2,
+      "url": "https://jason-shi-f9dm.squarespace.com/s/PUMaC_2024_Indiv_Finals_A.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Moby has an infinite piece of paper, an infinite straightedge, and a magic triangle. The paper starts with two points a distance $1$ away. With the straightedge, he can connect any two points to form a line. With the magic triangle, he can take two points $A$ and $B$ and draw the two points $C$ and $D$ such that $\\triangle ABC$ and $\\triangle ABD$ are equilateral triangles. He can also draw a point at the intersection of any two lines or line segments. With finitely many operations, can Moby draw a square on the paper? A proof in the affirmative should consist of a clear depiction or description of steps taken.",
+    "image": null,
+    "choices": null,
+    "answer": "No: every constructible point has coordinates in $\\mathbb Q\\times\\sqrt3\\,\\mathbb Q$, which contains no square.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [],
+    "topics": [
+      "geometry",
+      "algebra",
+      "logic"
+    ],
+    "difficulty": 3,
+    "duplicateOf": "pumac-2024-finals-b-03",
+    "reviewNote": null
+  },
+  {
+    "id": "pumac-2024-finals-a-03",
+    "bank": "pumac",
+    "source": {
+      "contest": "PUMaC",
+      "paper": "2024 Individual Finals A",
+      "year": 2024,
+      "number": 3,
+      "url": "https://jason-shi-f9dm.squarespace.com/s/PUMaC_2024_Indiv_Finals_A.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "There are $2024$ perfectly logical assassins in a circle, named $1$ to $2024$ in clockwise order. Turns move clockwise around the circle among currently alive assassins, starting with assassin $1$ and cycling back to the front while more than one assassin is alive. On each assassin's turn, they must kill someone else (they are not allowed to pass on their turn). Each assassin has a bounty associated with them, with $k$ dollars on assassin $k$. At a given assassin's turn, their top priority is to be the last man standing, and the second priority is to kill the assassin that has the highest bounty currently alive (other than themself). Who is the last man standing?",
+    "image": null,
+    "choices": null,
+    "answer": "Assassin $7$ (the number of $1$'s in the binary expansion of $2024$)",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Backward induction on the state $(n,i)$",
+        "body": "Only the relative order of the alive assassins matters, so a state is $(n,i)$: $n$ assassins alive (ordered by bounty = clockwise order), and the $i$-th is to move. Let $W(n,i)$ be the position of the final survivor. Clearly $W(1,1)=1$, $W(2,i)=i$ (the mover wins), and in a $3$-person game the mover can never win (whoever he kills, the next person is the mover of a $2$-person game).\n\nWhen the mover $i$ kills someone, only *whether the victim is above or below him* matters: if the victim is above him ($j>i$) the new state is $(n-1,\\ i+1)$ with the mover now at position $i$; if below ($j<i$) it is $(n-1,\\ i)$ with the mover at position $i-1$ (positions mod $n-1$). So mover $i$ can win iff one of these two states has survivor equal to his new position. His rules then are:\n1. If killing someone above wins, he kills assassin $n$ (the highest bounty).\n2. Otherwise, if killing someone below wins, he kills the highest bounty below him, $i-1$.\n3. If neither wins, he kills the highest bounty: $n$ (or $n-1$ if he is $n$).\n\nComputing $W$ with this recurrence from $n=1$ up gives, for the first mover ($i=1$): $W(n,1)=1,1,2,1,2,2,3,1,2,2,3,2,3,3,4,1,\\dots$, i.e. $W(n,1)$ equals the number of $1$'s in the binary expansion of $n$ (checked for all $n\\le 2024$). The game starts with assassin $1$ to move and $n=2024$, so the survivor is assassin number $\\mathrm{popcount}(2024)$.\n\nSince $2024=1024+512+256+128+64+32+8=11111101000_2$ has seven $1$'s, **assassin $7$** is the last man standing."
+      }
+    ],
+    "topics": [
+      "games",
+      "logic",
+      "number-theory"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": "Answer 7 obtained by exact backward induction over all states (n <= 2024); the closed form W(n,1) = popcount(n) was observed and verified for every n up to 2024, but no general proof is included."
+  }
+]

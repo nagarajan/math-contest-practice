@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
 """Merge data/raw/<bank>/*.json into the app's question files.
 
-Writes app/public/banks/grade-<g>.json (every question for that grade, all banks; g = 1-12,
-13 = undergraduate, 14 = graduate) without solutions, sol/<bank>/<paper>.json (solutions by
+Writes app/public/banks/q/<bank>-<hash>.json, one file per bank and set of grades (g = 1-12,
+13 = undergraduate, 14 = graduate; a grade loads every file that lists it) without solutions
+and with null fields and per-paper source details factored out, sol/<bank>/<paper>.json (solutions by
 question id, loaded when a solution is opened; `sol` on each question names its file) and
 index.json (bank list from data/banks.json with counts
-per grade and the source papers).
+per grade and the source papers, and the question files).
 
 - Drops questions marked `duplicateOf` (the original is kept, and gains the duplicate's grades,
   e.g. a problem shared by AMC 10 and AMC 12 shows up for grades 9-12).
@@ -18,6 +19,7 @@ Usage: build_banks.py [--strict]   (--strict: exit non-zero on validation errors
 """
 import difflib
 import glob
+import hashlib
 import json
 import os
 import re
@@ -36,6 +38,7 @@ KEEP = [
     "id", "bank", "source", "grade", "grades", "points", "blankPoints", "wrongPoints", "timeMinutes", "type", "prompt", "image", "choices",
     "answer", "answerDisplay", "acceptedAnswers", "answerUnit", "solutions", "topics", "difficulty", "reviewNote",
 ]
+CHUNK_DROP = {"bank", "source", "sol", "grade", "grades", "solutions"}
 
 
 def norm(s):
@@ -194,17 +197,37 @@ def main():
         path = os.path.join(sol_dir, key + ".json")
         os.makedirs(os.path.dirname(path), exist_ok=True)
         json.dump(sols, open(path, "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
-    questions = [{k: v for k, v in q.items() if k != "solutions"} for q in questions]
-    grade_counts = {}
-    for g in GRADES:
-        gq = [q for q in questions if g in q["grades"]]
-        grade_counts[str(g)] = len(gq)
-        json.dump(gq, open(os.path.join(OUT, f"grade-{g}.json"), "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
+    chunks = defaultdict(list)
+    for q in questions:
+        chunks[(q["bank"], tuple(q["grades"]))].append(q)
+    q_dir = os.path.join(OUT, "q")
+    shutil.rmtree(q_dir, ignore_errors=True)
+    os.makedirs(q_dir)
+    chunk_index = []
+    for (bank, grades), qs in sorted(chunks.items()):
+        papers, out = {}, []
+        for q in qs:
+            src = {k: v for k, v in q["source"].items() if k != "number"}
+            p = papers.setdefault(json.dumps([q["sol"], src], ensure_ascii=False), len(papers))
+            c = {k: v for k, v in q.items() if k not in CHUNK_DROP and v not in (None, [], "")}
+            c["p"] = p
+            if q["source"].get("number") is not None:
+                c["n"] = q["source"]["number"]
+            out.append(c)
+        body = json.dumps(
+            {"bank": bank, "grades": list(grades), "papers": [json.loads(k) for k in papers], "questions": out},
+            ensure_ascii=False,
+            separators=(",", ":"),
+        )
+        name = f"{bank}-{hashlib.sha1(body.encode()).hexdigest()[:10]}.json"
+        open(os.path.join(q_dir, name), "w", encoding="utf-8").write(body)
+        chunk_index.append({"file": f"q/{name}", "bank": bank, "grades": list(grades), "count": len(qs)})
+    grade_counts = {str(g): sum(1 for q in questions if g in q["grades"]) for g in GRADES}
     for old in glob.glob(os.path.join(OUT, "*.json")):
-        if not re.search(r"(grade-\d+|index)\.json$", old):
+        if not old.endswith("index.json"):
             os.remove(old)
     json.dump(
-        {"banks": index_banks, "gradeCounts": grade_counts},
+        {"banks": index_banks, "gradeCounts": grade_counts, "chunks": chunk_index},
         open(os.path.join(OUT, "index.json"), "w", encoding="utf-8"),
         ensure_ascii=False,
         indent=1,

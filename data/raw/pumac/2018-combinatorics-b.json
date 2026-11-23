@@ -1,0 +1,281 @@
+[
+ {
+  "id": "pumac-2018-combinatorics-b-01",
+  "bank": "pumac",
+  "source": {
+   "contest": "PUMaC",
+   "paper": "2018 Combinatorics B",
+   "year": 2018,
+   "number": 1,
+   "url": "https://jason-shi-f9dm.squarespace.com/s/Combinatorics-B-Test.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "You have four fair 6-sided dice, each numbered from 1 to 6 (inclusive). If all four dice are rolled, the probability that the product of the rolled numbers is prime can be written as $\\frac ab$, where $a,b$ are relatively prime. What is $a+b$?",
+  "image": null,
+  "choices": null,
+  "answer": "109",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Count outcomes",
+    "body": "A product of four positive integers is prime exactly when one factor is prime and the other three equal $1$. The primes on a die are $2,3,5$, and the prime die can be any of the $4$ dice, giving $4\\cdot3=12$ favourable outcomes out of $6^4=1296$. The probability is $\\frac{12}{1296}=\\frac1{108}$, so $a+b=1+108=109$.\n\n**Answer: 109**"
+   }
+  ],
+  "topics": [
+   "probability",
+   "counting"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "pumac-2018-combinatorics-b-02",
+  "bank": "pumac",
+  "source": {
+   "contest": "PUMaC",
+   "paper": "2018 Combinatorics B",
+   "year": 2018,
+   "number": 2,
+   "url": "https://jason-shi-f9dm.squarespace.com/s/Combinatorics-B-Test.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "There are five dots arranged in a line from left to right. Each of the dots is colored from one of five colors so that no 3 consecutive dots are all the same color. How many ways are there to color the dots?",
+  "image": null,
+  "choices": null,
+  "answer": "2800",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Complementary counting",
+    "body": "There are $5^5=3125$ colorings in all. Subtract those with three consecutive dots of one color:\n- Exactly three dots of one color, consecutive: $5$ colors $\\times$ $3$ positions $\\times$ $4^2$ (the other two dots avoid that color) $=240$.\n- Exactly four dots of one color with three of them consecutive: the odd dot can be at position $1,2,4$ or $5$ (position $3$ leaves runs of $2$ and $2$), so $5\\cdot4\\cdot4=80$.\n- All five dots the same: $5$.\n\nThe answer is $3125-240-80-5=2800$.\n\n**Answer: 2800**"
+   },
+   {
+    "title": "Recursion",
+    "body": "Let $e_n$ be the number of valid colorings of $n$ dots whose last two dots have the same color and $d_n$ the number whose last two differ. After an \"equal\" ending we must append a different color ($4$ ways). After a \"different\" ending we can append a different color ($4$ ways) or repeat the last color ($1$ way). So $e_{n+1}=d_n$ and $d_{n+1}=4(e_n+d_n)$. From $e_2=5$, $d_2=20$ we get $(e_3,d_3)=(20,100)$, $(e_4,d_4)=(100,480)$, $(e_5,d_5)=(480,2320)$, and the total is $480+2320=2800$.\n\n**Answer: 2800**"
+   }
+  ],
+  "topics": [
+   "counting"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "pumac-2018-combinatorics-b-03",
+  "bank": "pumac",
+  "source": {
+   "contest": "PUMaC",
+   "paper": "2018 Combinatorics B",
+   "year": 2018,
+   "number": 3,
+   "url": "https://jason-shi-f9dm.squarespace.com/s/Combinatorics-B-Test.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "In an election between A and B, during the counting of the votes, neither candidate was more than 2 votes ahead, and the vote ended in a tie, 6 votes to 6 votes. Two votes for the same candidate are indistinguishable. In how many orders could the votes have been counted? One possibility is AABBABBABABA.",
+  "image": null,
+  "choices": null,
+  "answer": "486",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Group the votes in pairs",
+    "body": "After an odd number of votes the lead is odd, hence $\\pm1$ (it cannot be $\\pm3$). Split the sequence as $(X_1),(X_2,X_3),(X_4,X_5),\\dots,(X_{10},X_{11}),(X_{12})$.\n\n- The first vote: $2$ choices (lead $\\pm1$).\n- From a lead of $+1$, the next two votes can be AB, BA or BB (not AA, which reaches $+3$); all are allowed and end at lead $\\pm1$. By symmetry the same holds from $-1$. So each of the $5$ middle pairs has exactly $3$ choices whatever came before.\n- The last vote must bring the lead from $\\pm1$ to $0$: $1$ choice.\n\nTotal: $2\\cdot3^5=486$.\n\n**Answer: 486**"
+   },
+   {
+    "title": "Dynamic programming on the lead",
+    "body": "Let the lead be $d\\in\\{-2,\\dots,2\\}$. After $k$ votes the number of valid sequences with each lead is:\n\n| $k$ | $d=-2$ | $-1$ | $0$ | $1$ | $2$ |\n|---|---|---|---|---|---|\n| 0 | | | 1 | | |\n| 1 | | 1 | | 1 | |\n| 2 | 1 | | 2 | | 1 |\n| 3 | | 3 | | 3 | |\n| 4 | 3 | | 6 | | 3 |\n| 5 | | 9 | | 9 | |\n\nand so on: each odd step has $3^{(k-1)/2}$ sequences at each of $d=\\pm1$. After $11$ votes there are $243$ sequences at each of $d=\\pm1$, and the last vote ends at $0$ in exactly one way from each, giving $243+243=486$.\n\n**Answer: 486**"
+   }
+  ],
+  "topics": [
+   "counting",
+   "patterns"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "pumac-2018-combinatorics-b-04",
+  "bank": "pumac",
+  "source": {
+   "contest": "PUMaC",
+   "paper": "2018 Combinatorics B",
+   "year": 2018,
+   "number": 4,
+   "url": "https://jason-shi-f9dm.squarespace.com/s/Combinatorics-B-Test.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Let $N$ be the number of sequences of natural numbers $d_1,d_2,\\dots,d_{10}$ such that the following conditions hold: $d_1\\mid d_2,\\ \\dots,\\ d_9\\mid d_{10}$ and $d_{10}\\mid 6^{2018}$. Evaluate the remainder when $N$ is divided by $2017$.",
+  "image": null,
+  "choices": null,
+  "answer": "121",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Separate the primes 2 and 3",
+    "body": "Every $d_k$ divides $6^{2018}$, so $d_k=2^{a_k}3^{b_k}$ with $0\\le a_k,b_k\\le2018$, and the divisibility chain means $a_1\\le\\dots\\le a_{10}$ and $b_1\\le\\dots\\le b_{10}$, independently. The number of non-decreasing sequences of length $10$ with entries in $\\{0,\\dots,2018\\}$ is (stars and bars) $\\binom{2018+10}{10}=\\binom{2028}{10}$. Hence $N=\\binom{2028}{10}^2$.\n\nModulo the prime $2017$: $\\binom{2028}{10}=\\dfrac{2028\\cdot2027\\cdots2019}{10!}\\equiv\\dfrac{11\\cdot10\\cdots2}{10!}=\\dfrac{11!}{10!}=11$, because $2019\\equiv2,\\dots,2028\\equiv11$ and $10!$ is invertible. So $N\\equiv11^2=121\\pmod{2017}$.\n\n**Answer: 121**"
+   }
+  ],
+  "topics": [
+   "counting",
+   "number-theory"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "pumac-2018-combinatorics-b-05",
+  "bank": "pumac",
+  "source": {
+   "contest": "PUMaC",
+   "paper": "2018 Combinatorics B",
+   "year": 2018,
+   "number": 5,
+   "url": "https://jason-shi-f9dm.squarespace.com/s/Combinatorics-B-Test.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Alex starts at the origin $O$ of a hexagonal lattice. Every second, he moves to one of the six vertices adjacent to the vertex he is currently at. If he ends up at $X$ after 2018 moves, then let $p$ be the probability that the shortest walk from $O$ to $X$ (where a valid move is from a vertex to an adjacent vertex) has length 2018. Then $p$ can be expressed as $\\frac{a^m-b}{c^n}$, where $a,b$, and $c$ are positive integers less than 10; $a$ and $c$ are not perfect squares; and $m$ and $n$ are positive integers less than 10000. Find $a+b+c+m+n$.",
+  "image": null,
+  "choices": null,
+  "answer": "4044",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Count walks to the outer hexagon",
+    "body": "Let $n=2018$. The vertices at distance exactly $n$ from $O$ form the boundary of a regular hexagon of side $n$ (six sides, six corners). A walk of $n$ steps ending at such a vertex must be a shortest walk, so every step goes in one of the (at most two) lattice directions that point towards the target.\n\n- The points of one side are $j\\mathbf u+(n-j)\\mathbf v$ for $j=0,\\dots,n$, where $\\mathbf u,\\mathbf v$ are the two adjacent lattice directions pointing towards that side (the ends $j=0,n$ are corners). The number of walks to such a point, using $j$ steps $\\mathbf u$ and $n-j$ steps $\\mathbf v$, is $\\binom nj$. Over the whole side (including both corners) this is $\\sum_j\\binom nj=2^n$.\n- Each corner belongs to two sides, so the total number of favourable walks is $6\\cdot2^n-6$.\n\nTherefore\n$$p=\\frac{6\\cdot2^n-6}{6^n}=\\frac{2^n-1}{6^{n-1}}=\\frac{2^{2018}-1}{6^{2017}}.$$\nSo $a=2,\\ m=2018,\\ b=1,\\ c=6,\\ n=2017$ and $a+b+c+m+n=2+1+6+2018+2017=4044$. (For $n=2$ the formula gives $\\frac12$: $18$ of the $36$ two-step walks end at distance $2$.)\n\n**Answer: 4044**"
+   }
+  ],
+  "topics": [
+   "probability",
+   "counting"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "pumac-2018-combinatorics-b-06",
+  "bank": "pumac",
+  "source": {
+   "contest": "PUMaC",
+   "paper": "2018 Combinatorics B",
+   "year": 2018,
+   "number": 6,
+   "url": "https://jason-shi-f9dm.squarespace.com/s/Combinatorics-B-Test.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "If $a$ and $b$ are selected uniformly from $\\{0,1,\\dots,511\\}$ with replacement, the expected number of 1's in the binary representation of $a+b$ can be written in simplest form as $\\frac mn$. Compute $m+n$.",
+  "image": null,
+  "choices": null,
+  "answer": "6143",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Recursion on the number of bits",
+    "body": "Let $f(n)$ be the expected number of $1$s in the binary form of $a+b$ when $a,b$ are uniform on $\\{0,\\dots,2^n-1\\}$. Then $f(1)=\\frac{0+1+1+1}{4}=\\frac34$.\n\nGo from $n$ to $n+1$: write $a=2^n\\alpha+a'$, $b=2^n\\beta+b'$ with bits $\\alpha,\\beta$ and $a',b'<2^n$, and let $s=a'+b'<2^{n+1}$.\n- $\\alpha+\\beta=0$ (probability $\\frac14$): $a+b=s$, number of ones $=\\text{ones}(s)$.\n- $\\alpha+\\beta=2$ (probability $\\frac14$): $a+b=2^{n+1}+s$ and $s<2^{n+1}$, so one extra $1$.\n- $\\alpha+\\beta=1$ (probability $\\frac12$): $a+b=2^n+s$. If $s<2^n$ the bit $n$ of $s$ is $0$ and we gain a $1$; if $s\\ge2^n$ the carry replaces the $1$ in position $n$ by a $1$ in position $n+1$, so the count is unchanged.\n\nThe probability that $s<2^n$ is $\\frac{2^n(2^n+1)/2}{4^n}=\\frac{2^n+1}{2^{n+1}}$. Hence\n$$f(n+1)=f(n)+\\frac14+\\frac12\\cdot\\frac{2^n+1}{2^{n+1}}=f(n)+\\frac12+\\frac1{2^{n+2}},$$\nwhich solves to $f(n)=\\dfrac{n+1}2-\\dfrac1{2^{n+1}}$ (check: $f(1)=1-\\frac14$). For $n=9$: $f(9)=5-\\frac1{1024}=\\frac{5119}{1024}$, already in lowest terms, so $m+n=5119+1024=6143$.\n\n**Answer: 6143**"
+   }
+  ],
+  "topics": [
+   "probability",
+   "counting"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "pumac-2018-combinatorics-b-07",
+  "bank": "pumac",
+  "source": {
+   "contest": "PUMaC",
+   "paper": "2018 Combinatorics B",
+   "year": 2018,
+   "number": 7,
+   "url": "https://jason-shi-f9dm.squarespace.com/s/Combinatorics-B-Test.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "How many ways are there to color the 8 regions of a three-set Venn Diagram with 3 colors such that each color is used at least once? Two colorings are considered the same if one can be reached from the other by rotation and reflection.",
+  "image": null,
+  "choices": null,
+  "answer": "1248",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Burnside's lemma, then inclusion-exclusion",
+    "body": "The rotations and reflections of the diagram form the group of order $6$ that permutes the three sets $A,B,C$. The eight regions are $A,B,C,AB,BC,CA,ABC$ and the outside.\n- Identity: $8$ cycles of length $1$.\n- Two rotations: cycles $(A\\,B\\,C)(AB\\,BC\\,CA)$ plus $ABC$ and the outside fixed: $4$ cycles.\n- Three reflections (say swapping $A,B$): $(A\\,B)(AC\\,BC)$ plus four fixed regions: $6$ cycles.\n\nWith $k$ colors the number of colorings up to symmetry is $\\frac16\\left(k^8+2k^4+3k^6\\right)$: for $k=3$ it is $\\frac{6561+162+2187}{6}=1485$, and for $k=2$ it is $\\frac{256+32+192}6=80$. Let $N(T)$ be the number of classes of colorings that use only colors from a set $T$: $N(\\{1,2,3\\})=1485$, $N=80$ for each of the three $2$-sets, and $N=1$ for each of the three $1$-sets. By inclusion-exclusion the number of classes using all three colors is $1485-3\\cdot80+3\\cdot1=1248$.\n\n**Answer: 1248**"
+   }
+  ],
+  "topics": [
+   "counting"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "pumac-2018-combinatorics-b-08",
+  "bank": "pumac",
+  "source": {
+   "contest": "PUMaC",
+   "paper": "2018 Combinatorics B",
+   "year": 2018,
+   "number": 8,
+   "url": "https://jason-shi-f9dm.squarespace.com/s/Combinatorics-B-Test.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Frankie the Frog starts his morning at the origin in $\\mathbb R^2$. He decides to go on a leisurely stroll, consisting of $3^1+3^{10}+3^{11}+3^{100}+3^{101}+3^{110}+3^{111}+3^{1000}$ moves, starting with the 1st move. On the $n$th move, he hops a distance of $$\\max\\{k\\in\\mathbb Z:3^k\\mid n\\}+1,$$ then turns $90^\\circ$ degrees counterclockwise. What is the square of the distance from his final position to the origin?",
+  "image": null,
+  "choices": null,
+  "answer": "496016",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Split the hops by powers of 3",
+    "body": "Let $S=\\{1,10,11,100,101,110,111,1000\\}$ (the exponents as printed) and $N=\\sum_{i\\in S}3^i$ the number of moves. A hop of length $\\nu_3(n)+1$ equals the sum of $\\nu_3(n)+1$ unit hops in the same direction, so the stroll is the sum over $k=0,1,\\dots,1000$ of the unit strolls $a_k$ that hop one unit on each move $n=3^km$ divisible by $3^k$ ($1\\le m\\le M_k=\\lfloor N/3^k\\rfloor$).\n\nMove $n$ faces direction number $(n-1)\\bmod 4$ (E, N, W, S). For $a_k$ the directions cycle with period $4$ in $m$, and a full cycle gives net displacement $0$, so only $M_k\\bmod4$ matters. Since $\\sum_{i<k,\\,i\\in S}3^i<3^k$, we have $M_k=\\sum_{i\\ge k,\\,i\\in S}3^{i-k}\\equiv\\sum_{i\\ge k}(-1)^{i-k}\\pmod 4$.\n\nBecause $S$ consists of $1$ and the pairs $(10,11),(100,101),(110,111)$ plus $1000$, this gives:\n- $k$ even, $k\\ge2$: $M_k\\equiv1$, net displacement $(1,0)$ (hop number $1$ goes east). There are $500$ such $k$.\n- $k$ odd, $k\\notin S$: $M_k\\equiv3$, and $3^k\\equiv3\\pmod 4$ so the hops go W, N, E, ...: net displacement $(0,1)$. There are $500-4=496$ such $k$ (the odd members of $S$ are $1,11,101,111$).\n- $k=0$ and odd $k\\in S$: $M_k\\equiv0$, net displacement $0$.\n\nThe final position is $(500,496)$, so the squared distance is $500^2+496^2=250000+246016=496016$.\n\n**Answer: 496016**"
+   }
+  ],
+  "topics": [
+   "counting",
+   "number-theory",
+   "patterns"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ }
+]

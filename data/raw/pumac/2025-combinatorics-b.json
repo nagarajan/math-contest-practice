@@ -1,0 +1,295 @@
+[
+ {
+  "id": "pumac-2025-combinatorics-b-01",
+  "bank": "pumac",
+  "source": {
+   "contest": "PUMaC",
+   "paper": "2025 Combinatorics B",
+   "year": 2025,
+   "number": 1,
+   "url": "https://jason-shi-f9dm.squarespace.com/s/PUMaC_2025_Combinatorics_B.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "\"\"There is an alphabet consisting of four shapes; a Segment, a Diamond, a Triangle, and a Pentagon. All of these shapes are regular. Each shape has a marked vertex that indicates its current orientation (as shown below).\n\nRichard creates a password of length $6$ from this four-shape alphabet. Then, every second, Richard rotates each Segment by $180^\\circ$, each Diamond by $90^\\circ$ clockwise, each Triangle by $120^\\circ$ clockwise, and each Pentagon by $72^\\circ$ clockwise. It turns out that the shapes are first all oriented the same as in his original password after $20$ seconds. How many distinct passwords could Richard have chosen?",
+  "image": "qimages/pumac/2025-combinatorics-b/q01.webp",
+  "choices": null,
+  "answer": "602",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Periods and inclusion-exclusion",
+    "body": "A Segment returns to its original orientation every $2$ seconds, a Diamond every $4$, a Triangle every $3$, a Pentagon every $5$. All shapes of a password are simultaneously back in the original orientation exactly at multiples of the least common multiple of the periods of the shapes used, so the first time is that lcm. We need it to be $20=4\\cdot5$.\n\n- No Triangle may be used (a $3$ would appear in the lcm).\n- At least one Diamond (to get the factor $4$) and at least one Pentagon (factor $5$) are needed; Segments are optional (period $2$ divides $20$).\n\nSo we count strings of length $6$ over $\\{S,D,P\\}$ containing at least one $D$ and at least one $P$:\n$$3^6-2^6-2^6+1=729-64-64+1=602 .$$\n\n**Answer: 602**"
+   },
+   {
+    "title": "Count by the number of Segments",
+    "body": "Choose which $k$ positions hold Segments ($\\binom6k$ ways); the remaining $6-k$ positions hold only Diamonds and Pentagons, not all the same: $2^{6-k}-2$ ways, so we need $6-k\\ge2$:\n$$\\sum_{k=0}^{4}\\binom6k(2^{6-k}-2)=62+6\\cdot30+15\\cdot14+20\\cdot6+15\\cdot2=62+180+210+120+30=602 .$$\n\n**Answer: 602**"
+   }
+  ],
+  "topics": [
+   "counting"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": "The official solution states 3^6 - 2^6 - 2^6 + 1 = 702, an arithmetic slip; the value of that expression (and of a direct count) is 602."
+ },
+ {
+  "id": "pumac-2025-combinatorics-b-02",
+  "bank": "pumac",
+  "source": {
+   "contest": "PUMaC",
+   "paper": "2025 Combinatorics B",
+   "year": 2025,
+   "number": 2,
+   "url": "https://jason-shi-f9dm.squarespace.com/s/PUMaC_2025_Combinatorics_B.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "\"\"Six men, including Kenny, and six women, are randomly seated at a circular table. Given that Kenny is sitting next to two women, find the expected number of adjacent pairs of one man and one woman at the table.",
+  "image": null,
+  "choices": null,
+  "answer": "68/9",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Linearity of expectation",
+    "body": "Number the seats $1,\\dots,12$ around the table with Kenny in seat $1$; seats $2$ and $12$ hold women. The other $9$ seats ($3$ to $11$) hold the remaining $5$ men and $4$ women in uniformly random order. There are $12$ adjacent pairs:\n\n- $\\{1,2\\}$ and $\\{12,1\\}$: Kenny and a woman, always mixed: contributes $2$.\n- $\\{2,3\\}$ and $\\{11,12\\}$: a woman next to a random seat that is a man with probability $\\frac59$: contributes $2\\cdot\\frac59$.\n- The $8$ pairs among seats $3,\\dots,11$: mixed with probability $2\\cdot\\frac59\\cdot\\frac48=\\frac59$ each: contributes $8\\cdot\\frac59$.\n\nTotal: $2+\\frac{10}9+\\frac{40}9=\\frac{68}9$.\n\n**Answer: $\\frac{68}9$**"
+   },
+   {
+    "title": "Check by counting arrangements",
+    "body": "Fix Kenny at seat $1$ and choose the positions of the other $5$ men among seats $3..11$ (seats $2$, $12$ are women): $\\binom95=126$ equally likely patterns. Summing the number of mixed adjacent pairs over all $126$ patterns (a short computer enumeration) gives $952$, so the average is $\\frac{952}{126}=\\frac{68}9$.\n\n**Answer: $\\frac{68}9$**"
+   }
+  ],
+  "topics": [
+   "probability",
+   "counting"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "pumac-2025-combinatorics-b-03",
+  "bank": "pumac",
+  "source": {
+   "contest": "PUMaC",
+   "paper": "2025 Combinatorics B",
+   "year": 2025,
+   "number": 3,
+   "url": "https://jason-shi-f9dm.squarespace.com/s/PUMaC_2025_Combinatorics_B.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "\"\"A string of $0$s, $1$s, and $2$s is called *nice* if it doesn't contain \"01\" or \"12\", doesn't begin with a \"2\", and doesn't end with a \"0\". For example, there are $5$ nice strings of length $3$, namely \"002\", \"021\", \"022\", \"102\", and \"111\". Find the number of nice strings of length $7$.",
+  "image": null,
+  "choices": null,
+  "answer": "151",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Recurrence on the last digit",
+    "body": "Allowed adjacent pairs are $00,02,10,11,20,21,22$ (not $01$, $12$). Let $e_n(d)$ be the number of strings of length $n$ that do not begin with $2$, avoid $01$ and $12$, and end in $d$. Then\n$$e_{n+1}(0)=e_n(0)+e_n(1)+e_n(2),\\quad e_{n+1}(1)=e_n(1)+e_n(2),\\quad e_{n+1}(2)=e_n(0)+e_n(2),$$\nstarting from $(e_1(0),e_1(1),e_1(2))=(1,1,0)$:\n$$(1,1,0)\\to(2,1,1)\\to(4,2,3)\\to(9,5,7)\\to(21,12,16)\\to(49,28,37)\\to(114,65,86).$$\nNice strings must not end in $0$: $65+86=151$. (Check for $n=3$: $2+3=5$, as in the example.)\n\n**Answer: 151**"
+   },
+   {
+    "title": "Recurrence on the first digit",
+    "body": "Equivalently count by first digit. Let $x_n(b)$ be the number of length-$n$ strings avoiding $01$, $12$ and not ending in $0$, starting with $b$. Then $x_n(2)=x_{n-1}(0)+x_{n-1}(1)+x_{n-1}(2)$, $x_n(1)=x_{n-1}(0)+x_{n-1}(1)$, $x_n(0)=x_{n-1}(0)+x_{n-1}(2)$ (a string starting with $b$ continues with an allowed next digit), with $x_1=(0,1,1)$ for $(b=0,1,2)$. Iterating up to $n=7$ gives $x_7(1)=65$, $x_7(0)=86$ (and $x_7(2)=114$ which is not allowed to start a nice string), so the answer is $65+86=151$.\n\n**Answer: 151**"
+   }
+  ],
+  "topics": [
+   "counting"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "pumac-2025-combinatorics-b-04",
+  "bank": "pumac",
+  "source": {
+   "contest": "PUMaC",
+   "paper": "2025 Combinatorics B",
+   "year": 2025,
+   "number": 4,
+   "url": "https://jason-shi-f9dm.squarespace.com/s/PUMaC_2025_Combinatorics_B.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "\"\"You find yourself standing at vertex $A$ in the triangle grid shown below. Two monsters are standing at vertices $B$ and $C$, respectively. Each minute, you move along an edge that takes you closer to $\\overline{BC}$, choosing an edge randomly out of the two possible edges. In the same way, the monster starting at $B$ moves towards $\\overline{AC}$, and the monster starting at $C$ moves towards $\\overline{AB}$. If you ever encounter a monster on a vertex not on $\\overline{BC}$, you die. Otherwise, if you reach $\\overline{BC}$ without dying, you survive (even if you encounter a monster at some vertex on $\\overline{BC}$). Compute the probability that you survive.",
+  "image": "qimages/pumac/2025-combinatorics-b/q04.webp",
+  "choices": null,
+  "answer": "161/256",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Barycentric coordinates",
+    "body": "The grid is a triangle of side $5$; use coordinates $(i,j,k)$ with $i+j+k=5$, $A=(5,0,0)$, $B=(0,5,0)$, $C=(0,0,5)$. Each move lowers one coordinate by $1$ and raises another by $1$.\n\nAfter $t$ moves you are at $(5-t,\\alpha_t,t-\\alpha_t)$, where $\\alpha_t$ is the number of your first $t$ moves that went toward $B$'s side (raising the second coordinate). The $B$-monster is at $(\\beta_t,5-t,t-\\beta_t)$ and the $C$-monster at $(\\gamma_t,t-\\gamma_t,5-t)$, where $\\beta_t\\sim\\text{Bin}(t,\\tfrac12)$, $\\gamma_t\\sim\\text{Bin}(t,\\tfrac12)$, independent of each other and of you.\n\n**Meeting $B$:** need $5-t=\\beta_t$ and $\\alpha_t=5-t$, so $t\\ge3$; since you reach $\\overline{BC}$ at $t=5$, only $t=3$ ($\\alpha_3=\\beta_3=2$) and $t=4$ ($\\alpha_4=\\beta_4=1$) matter. Given your path, the probability that the $B$-monster kills you is $p_B=\\frac38[\\alpha_3=2]+\\frac14[\\alpha_4=1]$ (probabilities $\\binom32/8$ and $\\binom41/16$; the two events are exclusive because $\\beta$ never decreases).\n\n**Meeting $C$:** need $5-t=\\gamma_t$ and $\\alpha_t=2t-5$: at $t=3$ with $\\alpha_3=1,\\gamma_3=2$ and at $t=4$ with $\\alpha_4=3,\\gamma_4=1$. So $p_C=\\frac38[\\alpha_3=1]+\\frac14[\\alpha_4=3]$.\n\nYou survive with probability $(1-p_B)(1-p_C)$ given your first four moves. Averaging over the $16$ equally likely prefixes, with $(\\alpha_3,\\alpha_4)$ and multiplicity:\n\n- $(\\alpha_3,\\alpha_4)=(0,0)$, $1$ prefix: survival $1$.\n- $(0,1)$, $1$ prefix: $p_B=\\frac14$, survival $\\frac34$.\n- $(1,1)$, $3$ prefixes: $p_B=\\frac14$, $p_C=\\frac38$, survival $\\frac34\\cdot\\frac58=\\frac{15}{32}$.\n- $(1,2)$, $3$ prefixes: $p_C=\\frac38$, survival $\\frac58$.\n- $(2,2)$, $3$ prefixes: $p_B=\\frac38$, survival $\\frac58$.\n- $(2,3)$, $3$ prefixes: $p_B=\\frac38$, $p_C=\\frac14$, survival $\\frac58\\cdot\\frac34=\\frac{15}{32}$.\n- $(3,3)$, $1$ prefix: $p_C=\\frac14$, survival $\\frac34$.\n- $(3,4)$, $1$ prefix: survival $1$.\n\nSum: $1+\\frac34+3\\cdot\\frac{15}{32}+3\\cdot\\frac58+3\\cdot\\frac58+3\\cdot\\frac{15}{32}+\\frac34+1=\\frac{161}{16}$, so the probability is $\\frac{161}{16\\cdot16}=\\frac{161}{256}$.\n\n**Answer: $\\frac{161}{256}$**"
+   }
+  ],
+  "topics": [
+   "probability",
+   "counting"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "pumac-2025-combinatorics-b-05",
+  "bank": "pumac",
+  "source": {
+   "contest": "PUMaC",
+   "paper": "2025 Combinatorics B",
+   "year": 2025,
+   "number": 5,
+   "url": "https://jason-shi-f9dm.squarespace.com/s/PUMaC_2025_Combinatorics_B.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "\"\"A stone is placed on a square of a $5\\times5$ grid. Alice and Bob take turns moving the stone to an orthogonally adjacent square (i.e. up/down/left/right). Alice moves first. Once a square has been visited, it cannot be visited again (and they cannot visit the starting square again). A player loses if they cannot make a legal move. For how many starting squares does Alice have a winning strategy?",
+  "image": null,
+  "choices": null,
+  "answer": "12",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Domino pairing strategy",
+    "body": "Colour the board like a checkerboard with the corners black: $13$ black squares and $12$ white squares. Every move changes the colour of the square.\n\n**White start (12 squares): Alice wins.** The $5\\times5$ board can be tiled by $12$ dominoes leaving exactly one black square uncovered (this can be done around any black square one wants to omit). Alice always moves the stone to the other half of the domino containing the stone's current square. Initially she moves from the white start square to its black partner. Afterwards Bob moves the stone from a black square to some unvisited white square; its domino partner is an unvisited black square, so Alice can move there. She always has a move, so Bob eventually runs out of moves.\n\n**Black start (13 squares): Bob wins.** Delete the black starting square; the other $24$ squares can be tiled by $12$ dominoes (a $5\\times5$ board with any one black square removed is domino-tileable). Alice must move to some square, and Bob answers by moving to its domino partner, which is unvisited; so Bob never gets stuck and Alice loses.\n\nHence Alice wins exactly when the start is one of the $12$ white squares.\n\n**Answer: 12**"
+   },
+   {
+    "title": "Exhaustive check",
+    "body": "The game on $25$ squares can be searched completely by computer (depth-first search with memoisation on the set of visited squares and the current square). The search confirms that the first player wins from exactly the $12$ squares of the minority colour and loses from the $13$ others.\n\n**Answer: 12**"
+   }
+  ],
+  "topics": [
+   "games",
+   "graph-theory"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "pumac-2025-combinatorics-b-06",
+  "bank": "pumac",
+  "source": {
+   "contest": "PUMaC",
+   "paper": "2025 Combinatorics B",
+   "year": 2025,
+   "number": 6,
+   "url": "https://jason-shi-f9dm.squarespace.com/s/PUMaC_2025_Combinatorics_B.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "\"\"Zongshu is selling socks in packs of $2025$. Each sock in each pack is equally likely to be red, green, or yellow. You buy (a positive number of) packs of socks until you can split all of the socks into pairs of the same color. Find the expected number of packs you buy.",
+  "image": null,
+  "choices": null,
+  "answer": "8",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Markov chain on parities",
+    "body": "Track the parity vector $v\\in\\{0,1\\}^3$ of the number of socks of each colour; you can pair everything up exactly when $v=(0,0,0)$. A pack has an odd number of socks, so the total parity equals the parity of the number of packs: you can only stop after an even number of packs. Look at the process after every two packs. The weight (number of ones) of $v$ is then even, so $v$ lives on the four states $0=(0,0,0)$, $(1,1,0)$, $(1,0,1)$, $(0,1,1)$.\n\nBuying two packs adds a random vector $u$ to $v$ (mod $2$). By the symmetry between the colours, $u=0$ with some probability $q<1$ and each of the three vectors of weight $2$ has probability $\\frac{1-q}3$. Let $T$ be the number of double-steps until the chain, started at $0$, returns to $0$ for the first time. After the first step: with probability $q$ we stay at $0$ ($T=1$); otherwise we are at a state $s\\ne0$, and from any such state each double-step jumps to $0$ with probability $\\frac{1-q}3$ (we need $u=s$). So the time to come back is geometric with mean $\\frac3{1-q}$:\n$$E[T]=q\\cdot1+(1-q)\\Big(1+\\frac{3}{1-q}\\Big)=q+(1-q)+3=4.$$\nEach double-step is two packs, so the expected number of packs is $2\\cdot4=8$.\n\n**Answer: 8**"
+   },
+   {
+    "title": "Stationary distribution",
+    "body": "The chain on the four even-weight parity vectors is a random walk on the group $\\mathbb Z_2^2$, so its stationary distribution is uniform ($\\frac14$ each). The expected return time to a state of an irreducible chain is $1/\\pi$, so the expected number of double-steps is $4$, i.e. $8$ packs.\n\n**Answer: 8**"
+   }
+  ],
+  "topics": [
+   "probability"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "pumac-2025-combinatorics-b-07",
+  "bank": "pumac",
+  "source": {
+   "contest": "PUMaC",
+   "paper": "2025 Combinatorics B",
+   "year": 2025,
+   "number": 7,
+   "url": "https://jason-shi-f9dm.squarespace.com/s/PUMaC_2025_Combinatorics_B.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "\"\"Alice wants to send Bob the integer $120$, represented as a binary string of length $7$. However, her computer is being bombarded by cosmic rays, which can flip $00$ to $11$ and vice versa an arbitrary amount of times! Bob receives a possibly altered binary string, and writes down the integer in decimal. Find the sum of the possible numbers Bob could have written down (including $120$ itself).",
+  "image": null,
+  "choices": null,
+  "answer": "2115",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Turn the moves into swaps",
+    "body": "A cosmic ray flips two adjacent equal bits ($00\\leftrightarrow11$). Write $120=1111000_2$ with bit positions $i=0,\\dots,6$ (position $i$ has weight $2^i$): $s_0=s_1=s_2=0$, $s_3=s_4=s_5=s_6=1$.\n\nDefine $t_i=s_i$ for even $i$ and $t_i=1-s_i$ for odd $i$. Two adjacent bits $s_i=s_{i+1}$ become $t_i\\ne t_{i+1}$ (one position is complemented, the other not), and flipping both $s_i,s_{i+1}$ swaps $t_i$ and $t_{i+1}$. So the cosmic-ray moves are exactly swaps of adjacent *different* entries of $t$; they can reach every rearrangement of $t$. Here $t=(0,1,0,0,1,0,1)$ has three $1$'s, so the reachable strings are all $\\binom73=35$ arrangements of three $1$'s and four $0$'s in $t$.\n\n**Summing the values.** For a position $i$, among the $35$ arrangements $t_i=1$ in $\\binom62=15$ and $t_i=0$ in $\\binom63=20$ of them. The bit $s_i$ equals $t_i$ for even $i$, and $1-t_i$ for odd $i$, so\n$$\\sum s=15(2^0+2^2+2^4+2^6)+20(2^1+2^3+2^5)=15\\cdot85+20\\cdot42=1275+840=2115 .$$\n\n**Answer: 2115**"
+   }
+  ],
+  "topics": [
+   "counting",
+   "logic"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "pumac-2025-combinatorics-b-08",
+  "bank": "pumac",
+  "source": {
+   "contest": "PUMaC",
+   "paper": "2025 Combinatorics B",
+   "year": 2025,
+   "number": 8,
+   "url": "https://jason-shi-f9dm.squarespace.com/s/PUMaC_2025_Combinatorics_B.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "\"\"Charles challenges David to a game of Fraction Fixer. In this game, David first picks two positive integers $m\\le n$ that sum to $2025$. Next, Charles picks integers $a$ and $b$ at random, so that $0\\le a<m$ and $0\\le b<n$, and computes $\\frac am+\\frac bn$. If the sum is at least $1$, David wins. Otherwise, Charles wins. If David chooses $m$ and $n$ optimally, what is the probability that David wins?",
+  "image": null,
+  "choices": null,
+  "answer": "337/675",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Hermite's identity",
+    "body": "For fixed $m,n$ the winning pairs are those with $\\frac bn\\ge1-\\frac am$, i.e. $b\\ge n-\\frac{an}{m}$, i.e. $b\\ge\\lceil n-\\frac{an}m\\rceil$. For fixed $a$ the number of such $b\\in[0,n-1]$ is $n-\\lceil n-\\frac{an}{m}\\rceil=\\lfloor\\frac{an}m\\rfloor$ (for $a\\ge1$; for $a=0$ it is $0$ too). So\n$$P=\\frac1{mn}\\sum_{a=0}^{m-1}\\Big\\lfloor\\frac{na}m\\Big\\rfloor .$$\nThe classical floor-sum identity (a lattice point count in a triangle) gives $\\sum_{a=0}^{m-1}\\lfloor\\frac{na}m\\rfloor=\\frac{(m-1)(n-1)+\\gcd(m,n)-1}2$. Hence\n$$P=\\frac{(m-1)(n-1)+g-1}{2mn}=\\frac12-\\frac{m+n-g}{2mn},\\qquad g=\\gcd(m,n).$$\nMaximise $P$, i.e. minimise $f=\\frac{2025-g}{2mn}$ over $m+n=2025$. Write $m=gm'$, $n=gn'$ with $\\gcd(m',n')=1$; then $g\\mid2025$ and $m'+n'=k:=\\frac{2025}{g}$, so\n$$f=\\frac{g(k-1)}{2g^2m'n'}=\\frac{k(k-1)}{4050\\,m'n'} .$$\nSince $2025$ is odd, $k\\ne2$, and $k=1$ is impossible, so $k\\ge3$.\n\n- $k=3$ (that is $g=675$, $(m',n')=(1,2)$, so $m=675$, $n=1350$): $f=\\frac{6}{4050\\cdot2}=\\frac1{1350}$.\n- $k\\ge5$: $m'n'\\le\\frac{k^2}4$, so $f\\ge\\frac{2(k-1)}{2025\\,k}\\ge\\frac{8}{5\\cdot2025}=\\frac1{1265.6}>\\frac1{1350}$.\n\nSo the optimum is $m=675$, $n=1350$ and\n$$P=\\frac12-\\frac{1}{1350}=\\frac{674}{1350}=\\frac{337}{675}.$$\n\n**Answer: $\\frac{337}{675}$**"
+   },
+   {
+    "title": "Computer check",
+    "body": "Evaluate $P(m)=\\frac1{mn}\\#\\{(a,b):an+bm\\ge mn\\}$ for every $m=1,\\dots,1012$ with $n=2025-m$ by direct counting. The maximum is attained uniquely at $m=675$, $n=1350$ with value $\\frac{337}{675}$.\n\n**Answer: $\\frac{337}{675}$**"
+   }
+  ],
+  "topics": [
+   "probability",
+   "number-theory"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ }
+]

@@ -1,0 +1,291 @@
+[
+ {
+  "id": "pumac-2011-combinatorics-b-01",
+  "bank": "pumac",
+  "source": {
+   "contest": "PUMaC",
+   "paper": "2011 Combinatorics B",
+   "year": 2011,
+   "number": 1,
+   "url": "https://jason-shi-f9dm.squarespace.com/s/PUMaC2011_CombinatoricsB.pdf"
+  },
+  "grade": "9-12",
+  "points": 3,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "How many ways are there to arrange the five letters P, U, M, A, C, such that the two vowels are not adjacent?",
+  "image": null,
+  "choices": null,
+  "answer": "72",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Count the position pairs",
+    "body": "The two vowels (U and A) can occupy $\\binom52=10$ pairs of positions, of which $4$ are adjacent, so $6$ pairs are non-adjacent. The vowels can be arranged in those positions in $2!$ ways and the consonants in $3!$ ways: $6\\cdot2\\cdot6=72$.\n\n**Answer: 72**"
+   },
+   {
+    "title": "Complement",
+    "body": "All arrangements: $5!=120$. Arrangements with U and A adjacent: glue them into one block, giving $4!$ arrangements times $2$ orders $=48$. So $120-48=72$.\n\n**Answer: 72**"
+   }
+  ],
+  "topics": [
+   "counting"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "pumac-2011-combinatorics-b-02",
+  "bank": "pumac",
+  "source": {
+   "contest": "PUMaC",
+   "paper": "2011 Combinatorics B",
+   "year": 2011,
+   "number": 2,
+   "url": "https://jason-shi-f9dm.squarespace.com/s/PUMaC2011_CombinatoricsB.pdf"
+  },
+  "grade": "9-12",
+  "points": 3,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Consider the sum $\\overline{ab}+\\overline{cde}$, where each of the letters is a distinct digit between $1$ and $5$. How many values are possible for this sum?",
+  "image": null,
+  "choices": null,
+  "answer": "27",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Count the possible sums",
+    "body": "Write the sum as $100c+10(a+d)+(b+e)$ where $\\{a,b,c,d,e\\}=\\{1,2,3,4,5\\}$. Both $a+d$ and $b+e$ are at most $9$, so there is no carrying and the number is determined by the digit triple $(c,\\,a+d,\\,b+e)$; since $a+d+b+e=15-c$, it is determined by $c$ and the tens-pair sum $a+d$.\n\nFor each $c$ the other four digits are split into a \"tens pair\" and a \"units pair\"; count the distinct pair sums:\n\n| $c$ | other digits | possible values of $a+d$ | count |\n|---|---|---|---|\n| 1 | 2,3,4,5 | 5,6,7,8,9 | 5 |\n| 2 | 1,3,4,5 | 4,5,6,7,8,9 | 6 |\n| 3 | 1,2,4,5 | 3,5,6,7,9 | 5 |\n| 4 | 1,2,3,5 | 3,4,5,6,7,8 | 6 |\n| 5 | 1,2,3,4 | 3,4,5,6,7 | 5 |\n\nDifferent $c$ give different hundreds digits, so the total is $5+6+5+6+5=27$.\n\n**Answer: 27**"
+   },
+   {
+    "title": "Casework on the units digit",
+    "body": "There is no carrying, so look at the units digit $b+e$ of the sum. It cannot be $0,1,2$ (the smallest sum of two distinct digits from $1$ to $5$ is $3$). For $3,4,8,9$ only one pair of digits works, and for $5,6,7$ two pairs work. In each case count the possible tens digits $a+d$ from the remaining three digits: this gives $3$ choices for each of $b+e\\in\\{3,4,8,9\\}$ and $5$ choices for each of $5,6,7$. The total is $4\\cdot3+3\\cdot5=27$.\n\n**Answer: 27**"
+   }
+  ],
+  "topics": [
+   "counting"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "pumac-2011-combinatorics-b-03",
+  "bank": "pumac",
+  "source": {
+   "contest": "PUMaC",
+   "paper": "2011 Combinatorics B",
+   "year": 2011,
+   "number": 3,
+   "url": "https://jason-shi-f9dm.squarespace.com/s/PUMaC2011_CombinatoricsB.pdf"
+  },
+  "grade": "9-12",
+  "points": 4,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "A set of $n$ dominoes, each colored with one white square and one black square, is used to cover a $2\\times n$ board of squares. For $n=6$, how many different patterns of colors can the board have? (For $n=2$, this number is $6$.)",
+  "image": null,
+  "choices": null,
+  "answer": "328",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Recursion on the last column",
+    "body": "Let $c_n$ be the number of colour patterns, with $c_1=2$ and $c_2=6$. Look at the rightmost column.\n\n- If its two squares have the same colour (2 ways), they cannot belong to one domino, so both lie in horizontal dominoes; the previous column then has the opposite colour in both squares, and the first $n-2$ columns can be coloured in $c_{n-2}$ ways.\n- If its two squares differ in colour (2 ways), we may assume the column is a vertical domino (two horizontal dominoes there can be rotated to a vertical one without changing the colouring). The rest is any pattern of $2\\times(n-1)$: $c_{n-1}$ ways.\n\nSo $c_n=2c_{n-1}+2c_{n-2}$ and $c_3=16$, $c_4=44$, $c_5=120$, $c_6=328$.\n\n**Answer: 328**"
+   }
+  ],
+  "topics": [
+   "counting",
+   "patterns"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "pumac-2011-combinatorics-b-04",
+  "bank": "pumac",
+  "source": {
+   "contest": "PUMaC",
+   "paper": "2011 Combinatorics B",
+   "year": 2011,
+   "number": 4,
+   "url": "https://jason-shi-f9dm.squarespace.com/s/PUMaC2011_CombinatoricsB.pdf"
+  },
+  "grade": "9-12",
+  "points": 4,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "A function $f:\\{1,2,\\dots,n\\}\\to\\{1,\\dots,m\\}$ is multiplication-preserving if $f(i)f(j)=f(ij)$ for all $1\\le i\\le j\\le ij\\le n$, and injective if $f(i)=f(j)$ only when $i=j$. For $n=9$, $m=88$, the number of injective, multiplication-preserving functions is $N$. Find the sum of the prime factors of $N$, including multiplicity. (For example, if $N=12$, the answer would be $2+2+3=7$.)",
+  "image": null,
+  "choices": null,
+  "answer": "33",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Free values and constraints",
+    "body": "From $f(1)^2=f(1)$ and $f(1)\\ge1$ we get $f(1)=1$. Multiplicativity determines $f(4)=f(2)^2$, $f(6)=f(2)f(3)$, $f(8)=f(2)^3$, $f(9)=f(3)^2$, while $f(5)$ and $f(7)$ are free.\n\nThe values must be at most $88$: $f(2)^3\\le88$ gives $f(2)\\le4$ and $f(3)^2\\le88$ gives $f(3)\\le9$. Injectivity requires $1,\\,f(2),\\,f(3),\\,f(2)^2,\\,f(2)f(3),\\,f(2)^3,\\,f(3)^2$ to be $7$ distinct numbers in $\\{1,\\dots,88\\}$. Checking $f(2)\\in\\{2,3,4\\}$, $f(3)\\in\\{2,\\dots,9\\}$ leaves $16$ pairs $(f(2),f(3))$: $5$ with $f(2)=2$, $6$ with $f(2)=3$, and $5$ with $f(2)=4$:\n$(2,3),(2,5),(2,6),(2,7),(2,9)$; $(3,2),(3,4),(3,5),(3,6),(3,7),(3,8)$; $(4,3),(4,5),(4,6),(4,7),(4,9)$.\n\nThen $f(5)$ and $f(7)$ must be distinct values different from the $7$ already used: $81\\cdot80$ ways. So\n$$N=16\\cdot81\\cdot80=2^8\\cdot3^4\\cdot5.$$\nThe sum of prime factors with multiplicity is $8\\cdot2+4\\cdot3+5=33$.\n\n**Answer: 33**"
+   }
+  ],
+  "topics": [
+   "counting",
+   "number-theory"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "pumac-2011-combinatorics-b-05",
+  "bank": "pumac",
+  "source": {
+   "contest": "PUMaC",
+   "paper": "2011 Combinatorics B",
+   "year": 2011,
+   "number": 5,
+   "url": "https://jason-shi-f9dm.squarespace.com/s/PUMaC2011_CombinatoricsB.pdf"
+  },
+  "grade": "9-12",
+  "points": 5,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Two points are chosen uniformly at random on the sides of a square with side length $1$. If $p$ is the probability that the distance between them is greater than $1$, what is $\\lfloor 100p\\rfloor$? (Note: $\\lfloor x\\rfloor$ denotes the greatest integer less than or equal to $x$.)",
+  "image": null,
+  "choices": null,
+  "answer": "35",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Geometric probability",
+    "body": "Fix the side containing the first point; the second point lands on\n\n- the same side with probability $\\tfrac14$: the distance is at most $1$, never greater;\n- the opposite side with probability $\\tfrac14$: the distance is at least $1$, so (except in a negligible case) greater than $1$;\n- one of the two adjacent sides with probability $\\tfrac12$: place the vertex at the origin and the points at $(x,0)$ and $(0,y)$ with $x,y$ uniform in $[0,1]$. The distance exceeds $1$ iff $x^2+y^2>1$, i.e. outside the quarter circle, which has probability $1-\\tfrac\\pi4$.\n\nTherefore\n$$p=\\tfrac14+\\tfrac12\\Big(1-\\tfrac\\pi4\\Big)=\\frac{6-\\pi}{8}\\approx0.3573,$$\nso $\\lfloor100p\\rfloor=35$.\n\n**Answer: 35**"
+   }
+  ],
+  "topics": [
+   "probability",
+   "geometry"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "pumac-2011-combinatorics-b-06",
+  "bank": "pumac",
+  "source": {
+   "contest": "PUMaC",
+   "paper": "2011 Combinatorics B",
+   "year": 2011,
+   "number": 6,
+   "url": "https://jason-shi-f9dm.squarespace.com/s/PUMaC2011_CombinatoricsB.pdf"
+  },
+  "grade": "9-12",
+  "points": 6,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Let $N$ be the number of ways to place $4$ bishops on a $5\\times5$ chessboard such that no $3$ are on the same diagonal. Find the remainder when $N$ is divided by $100$. (Note: the length of a diagonal on a $5\\times5$ chessboard can be $2$, $3$, $4$, or $5$.)",
+  "image": null,
+  "choices": null,
+  "answer": "12",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Complementary counting",
+    "body": "There are $\\binom{25}4=12650$ placements of $4$ bishops. Count the bad ones, with at least $3$ bishops on some diagonal (of either direction). Two different diagonals share at most one square, so a placement cannot have $3$ bishops on each of two diagonals.\n\nEach direction has diagonals of lengths $1,2,3,4,5,4,3,2,1$, so altogether there are $2$ diagonals of length $5$, $4$ of length $4$ and $4$ of length $3$ that can hold $3$ or more bishops.\n\n- **Four on one diagonal:** $2\\binom54+4\\binom44=10+4=14$.\n- **Exactly three on one diagonal** (the fourth on any of the other squares): $2\\binom53\\cdot20+4\\binom43\\cdot21+4\\binom33\\cdot22=400+336+88=824$.\n\nHence $N=12650-14-824=11812$, and $N\\bmod100=12$.\n\n**Answer: 12**"
+   },
+   {
+    "title": "Computer check",
+    "body": "Enumerating all $\\binom{25}{4}$ placements and discarding those with three bishops on a common diagonal also gives $N=11812$, so the remainder is $12$.\n\n**Answer: 12**"
+   }
+  ],
+  "topics": [
+   "counting"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "pumac-2011-combinatorics-b-07",
+  "bank": "pumac",
+  "source": {
+   "contest": "PUMaC",
+   "paper": "2011 Combinatorics B",
+   "year": 2011,
+   "number": 7,
+   "url": "https://jason-shi-f9dm.squarespace.com/s/PUMaC2011_CombinatoricsB.pdf"
+  },
+  "grade": "9-12",
+  "points": 7,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "For every integer $n$ from $0$ to $6$, we have $3$ identical weights with weight $2^n$. How many ways are there to form a total weight of $263$ grams using only these given weights?",
+  "image": null,
+  "choices": null,
+  "answer": "60",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Generating function",
+    "body": "The number of ways is the coefficient of $x^{263}$ in\n$$\\prod_{n=0}^{6}\\big(1+x^{2^n}+x^{2\\cdot2^n}+x^{3\\cdot2^n}\\big)=\\prod_{n=0}^6\\frac{x^{4\\cdot2^n}-1}{x^{2^n}-1}.$$\nThe product telescopes: numerators $x^4-1,\\,x^8-1,\\dots,x^{256}-1$ against denominators $x-1,\\,x^2-1,\\dots,x^{64}-1$ leave\n$$\\frac{x^{128}-1}{x^2-1}\\cdot\\frac{x^{256}-1}{x-1}=(1+x^2+\\dots+x^{126})(1+x+\\dots+x^{255}).$$\nThe coefficient of $x^{263}$ counts pairs $(2i,\\,j)$ with $0\\le i\\le63$, $0\\le j\\le255$, $2i+j=263$. Then $j=263-2i\\le255$ needs $i\\ge4$, and $j\\ge0$ is automatic, so $i=4,\\dots,63$: $60$ ways.\n\n**Answer: 60**"
+   },
+   {
+    "title": "Complement and binary expansions",
+    "body": "All the weights together total $3\\cdot127=381$, and choosing which weights to use for $263$ is the same as choosing which to leave out, which total $381-263=118$. So count the ways to make $118$.\n\nA way to make $118$ is determined by an even number $2m\\le118$ together with binary expansions: use the weights of the binary expansion of $m$ twice and the weights of the binary expansion of $118-2m$ once (each weight used at most $2+1=3$ times, and $118<128$ needs only weights up to $2^6$). Conversely, a choice with each weight used $0$ to $3$ times corresponds to a unique $m$ (digit $1$ when the weight is used $2$ or $3$ times). So the number of ways equals the number of even values $2m\\in\\{0,2,\\dots,118\\}$, namely $\\tfrac{118}2+1=60$.\n\n**Answer: 60**"
+   }
+  ],
+  "topics": [
+   "counting",
+   "algebra"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "pumac-2011-combinatorics-b-08",
+  "bank": "pumac",
+  "source": {
+   "contest": "PUMaC",
+   "paper": "2011 Combinatorics B",
+   "year": 2011,
+   "number": 8,
+   "url": "https://jason-shi-f9dm.squarespace.com/s/PUMaC2011_CombinatoricsB.pdf"
+  },
+  "grade": "9-12",
+  "points": 8,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "At the start of the PUMaC opening ceremony in McCosh auditorium, the speaker counts $90$ people in the audience. Every minute afterwards, either one person enters the auditorium (due to waking up late) or leaves (in order to take a dreadful math contest). The speaker observes that in this time, exactly $100$ people enter the auditorium, $100$ leave, and $100$ was the largest audience size he saw. Find the largest integer $m$ such that $2^m$ divides the number of different possible sequences of entries and exits given the above information.",
+  "image": null,
+  "choices": null,
+  "answer": "6",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Reflection principle",
+    "body": "Record an entry as $+1$ and an exit as $-1$. A scenario is a sequence of $200$ steps with $100$ of each. With partial sums $S_k$ the audience size is $90+S_k$, so \"largest size $100$\" means $\\max S_k=10$. (The audience also cannot go negative: reaching $S=-91$ and later $S=10$ and then returning to $0$ would need at least $91+101+10=202>200$ steps.)\n\nLet $N$ be the number of such sequences, so $N=\\#\\{\\max S\\ge10\\}-\\#\\{\\max S\\ge11\\}$.\n\nFor a walk with $\\max S\\ge10$, reflect the part up to the first time the sum equals $10$ (flip the signs of those steps). This is a bijection onto walks of $200$ steps ending at $20$, i.e. with $110$ plus-steps: $\\binom{200}{110}=\\binom{200}{90}$ walks. Likewise $\\max S\\ge11$ corresponds to walks ending at $22$: $\\binom{200}{111}=\\binom{200}{89}$. Hence\n$$N=\\binom{200}{90}-\\binom{200}{89}=\\frac{200!}{90!\\,111!}(111-90)=21\\cdot\\frac{200!}{90!\\,111!}.$$\n\nBy Legendre's formula, $v_2(200!)=100+50+25+12+6+3+1=197$, $v_2(90!)=45+22+11+5+2+1=86$, $v_2(111!)=55+27+13+6+3+1=105$, and $v_2(21)=0$. So $m=197-86-105=6$.\n\n**Answer: 6**"
+   },
+   {
+    "title": "Computer check",
+    "body": "Computing $\\binom{200}{90}-\\binom{200}{89}$ exactly and taking its $2$-adic valuation also gives $6$.\n\n**Answer: 6**"
+   }
+  ],
+  "topics": [
+   "counting",
+   "number-theory"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ }
+]

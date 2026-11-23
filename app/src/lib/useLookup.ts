@@ -11,7 +11,7 @@ const LEGACY_GRADES: Grade[] = [4, 5, 6]
  * the current grade's questions while the others load.
  */
 export function useLookup(grades: (Grade | undefined)[]): Map<string, Question> {
-  const { banks } = useApp()
+  const { banks, index } = useApp()
   const wanted = [...new Set(grades.flatMap((g) => (g === undefined ? LEGACY_GRADES : [g])))].filter((g) => g !== banks.grade).sort()
   const key = wanted.join(',')
   const [map, setMap] = useState<Map<string, Question>>(banks.byId)
@@ -21,7 +21,7 @@ export function useLookup(grades: (Grade | undefined)[]): Map<string, Question> 
       return
     }
     let live = true
-    loadLookup(wanted).then((m) => {
+    loadLookup(index, wanted).then((m) => {
       if (!live) return
       for (const [id, q] of banks.byId) m.set(id, q)
       setMap(m)
@@ -30,6 +30,6 @@ export function useLookup(grades: (Grade | undefined)[]): Map<string, Question> 
       live = false
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [key, banks])
+  }, [key, banks, index])
   return map
 }

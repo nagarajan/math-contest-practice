@@ -1,0 +1,287 @@
+[
+  {
+    "id": "pumac-2024-combinatorics-b-01",
+    "bank": "pumac",
+    "source": {
+      "contest": "PUMaC",
+      "paper": "2024 Combinatorics B",
+      "year": 2024,
+      "number": 1,
+      "url": "https://jason-shi-f9dm.squarespace.com/s/PUMaC_2024_Combinatorics_B.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Sunay is in the bottom-left square of a checkerboard which is $5$ squares wide (the left-right direction) and $3$ squares tall (the up-down direction). From any square, he may move one square up, one square down, or one square to the right, provided that he does not fall off the checkerboard and provided that he does not revisit a square. How many paths are there for Sunay from the bottom-left square to the top-right square?",
+    "image": null,
+    "choices": null,
+    "answer": "81",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Column by column",
+        "body": "Since he can never move left and never revisit a square, in each column he enters at some row, moves vertically in one direction (any number of squares, including none) and then steps right. Moving vertically in a column never revisits a square, because he only goes one way.\n\n- In each of columns $1,2,3,4$ he can leave from any of the $3$ rows (from whatever row he entered, he can walk up or down to any target row): $3$ choices per column.\n- In column $5$ he enters at some row and must reach the top-right square: exactly $1$ way.\n\nTotal: $3^4\\cdot1=81$.\n\n**Answer: 81**"
+      }
+    ],
+    "topics": [
+      "counting"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "pumac-2024-combinatorics-b-02",
+    "bank": "pumac",
+    "source": {
+      "contest": "PUMaC",
+      "paper": "2024 Combinatorics B",
+      "year": 2024,
+      "number": 2,
+      "url": "https://jason-shi-f9dm.squarespace.com/s/PUMaC_2024_Combinatorics_B.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Ben and Connor are playing a game of wallball. The first player to lead by $2$ points wins the game. Suppose Ben wins each point with probability $\\frac34$ and is gracious enough to allow Connor to start with a $1$ point lead. The probability that Ben wins the game is $\\frac mn$ for coprime positive integers $m$ and $n$. What is $m+n$?",
+    "image": null,
+    "choices": null,
+    "answer": "67",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Random walk on the lead",
+        "body": "Let the state be Ben's lead $d\\in\\{-2,-1,0,1,2\\}$; the game ends at $\\pm2$. The start is $d=-1$. Let $p_d$ be Ben's winning probability, so $p_{-2}=0$, $p_2=1$, and $p_d=\\frac34p_{d+1}+\\frac14p_{d-1}$. Then\n$$p_{-1}=\\tfrac34p_0,\\qquad p_0=\\tfrac34p_1+\\tfrac14p_{-1},\\qquad p_1=\\tfrac34+\\tfrac14p_0 .$$\nSubstituting, $p_0=\\frac34\\left(\\frac34+\\frac{p_0}4\\right)+\\frac14\\cdot\\frac34p_0=\\frac9{16}+\\frac{6}{16}p_0$, so $p_0=\\frac9{10}$ and $p_{-1}=\\frac{27}{40}$.\n\nSo $m+n=27+40=67$.\n\n**Answer: 67**"
+      },
+      {
+        "title": "Gambler's ruin formula",
+        "body": "With $r=\\frac{q}{p}=\\frac13$ and four steps between the absorbing states, a walk starting $1$ step above the lower boundary wins with probability\n$$\\frac{1-r}{1-r^4}=\\frac{2/3}{80/81}=\\frac{27}{40}.$$\nHence $27+40=67$.\n\n**Answer: 67**"
+      }
+    ],
+    "topics": [
+      "probability"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "pumac-2024-combinatorics-b-03",
+    "bank": "pumac",
+    "source": {
+      "contest": "PUMaC",
+      "paper": "2024 Combinatorics B",
+      "year": 2024,
+      "number": 3,
+      "url": "https://jason-shi-f9dm.squarespace.com/s/PUMaC_2024_Combinatorics_B.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Consider the Sierpinski triangle iterations drawn below. $S_0$ is a single triangle, and $S_{n+1}$ consists of three copies of $S_n$. Let a *maximal line segment* be a line segment in the drawing of $S_k$ which cannot be extended any further while remaining in $S_k$. For example, $S_0$ has three maximal line segments and $S_1$ has $6$ maximal line segments. How many maximal line segments are there in $S_5$?",
+    "image": "qimages/pumac/2024-combinatorics-b/q03.webp",
+    "choices": null,
+    "answer": "366",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "A recursion for the count",
+        "body": "Let $N_n$ be the number of maximal segments of $S_n$. $S_{n+1}$ is three copies of $S_n$ meeting pairwise at corners. Each copy keeps its maximal segments, except at each of the three touching corners: there, the two copies each have a side of their outer triangle lying along the same side of the big triangle, and these two segments join into one longer segment. No other segments at those corners are collinear. Hence three pairs merge and\n$$N_{n+1}=3N_n-3 .$$\nStarting from $N_0=3$: $3,\\ 6,\\ 15,\\ 42,\\ 123,\\ 366$. (Equivalently $N_n=\\frac{3^{n+1}+3}{2}$.) So $S_5$ has $366$.\n\n**Answer: 366**"
+      },
+      {
+        "title": "Count by direction",
+        "body": "By the three-fold symmetry the three directions contribute equally, $\\frac{N_n}{3}=\\frac{3^n+1}{2}$ each. For instance horizontally: $S_1$ has $2$ maximal horizontal segments (the base and the middle line) and $S_2$ has $5$ consistent with $6$ and $15$ in total. Then $3\\cdot\\frac{3^5+1}{2}=366$.\n\n**Answer: 366**"
+      }
+    ],
+    "topics": [
+      "counting",
+      "geometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "pumac-2024-combinatorics-b-04",
+    "bank": "pumac",
+    "source": {
+      "contest": "PUMaC",
+      "paper": "2024 Combinatorics B",
+      "year": 2024,
+      "number": 4,
+      "url": "https://jason-shi-f9dm.squarespace.com/s/PUMaC_2024_Combinatorics_B.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Arnie draws $20$ real numbers independently and uniformly at random from the interval $[0,1]$. Given that the largest number that Arnie draws equals $\\frac{19}{20}$, the expected value of the average of the $20$ numbers can be written as $\\frac mn$ for relatively prime positive integers $m$ and $n$. Find $m+n$.",
+    "image": null,
+    "choices": null,
+    "answer": "1199",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Condition on the maximum",
+        "body": "Given that the maximum equals $\\frac{19}{20}$, one of the numbers (each position equally likely) equals $\\frac{19}{20}$ and the other $19$ numbers are independent and uniform on $\\left[0,\\frac{19}{20}\\right]$, each with mean $\\frac{19}{40}$.\n\nThe expected sum is $\\frac{19}{20}+19\\cdot\\frac{19}{40}=\\frac{38+361}{40}=\\frac{399}{40}$, so the expected average is $\\frac{399}{800}$. Since $399=3\\cdot7\\cdot19$ and $800=2^5\\cdot5^2$ are coprime, $m+n=399+800=1199$.\n\n**Answer: 1199**"
+      }
+    ],
+    "topics": [
+      "probability"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "pumac-2024-combinatorics-b-05",
+    "bank": "pumac",
+    "source": {
+      "contest": "PUMaC",
+      "paper": "2024 Combinatorics B",
+      "year": 2024,
+      "number": 5,
+      "url": "https://jason-shi-f9dm.squarespace.com/s/PUMaC_2024_Combinatorics_B.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Joseph chooses a permutation of the numbers $1,2,3,4,5,6$ uniformly at random. Then, he goes through his permutation, and deletes the numbers which are not the maximum among each of the preceding numbers. For example, if he chooses the permutation $3,2,4,5,1,6$, then he deletes $2$ and $1$, leaving him with $3,4,5,6$. The expected number of numbers remaining can be expressed as $m/n$ for relatively prime positive integers $m$ and $n$. Find $m+n$.",
+    "image": null,
+    "choices": null,
+    "answer": "69",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Linearity of expectation",
+        "body": "The number in position $k$ survives exactly when it is the largest of the first $k$ entries, which happens with probability $\\frac1k$ (each of the first $k$ entries is equally likely to be the largest). So the expected number remaining is\n$$1+\\frac12+\\frac13+\\frac14+\\frac15+\\frac16=\\frac{49}{20},$$\nand $m+n=49+20=69$.\n\n**Answer: 69**"
+      }
+    ],
+    "topics": [
+      "probability",
+      "counting"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "pumac-2024-combinatorics-b-06",
+    "bank": "pumac",
+    "source": {
+      "contest": "PUMaC",
+      "paper": "2024 Combinatorics B",
+      "year": 2024,
+      "number": 6,
+      "url": "https://jason-shi-f9dm.squarespace.com/s/PUMaC_2024_Combinatorics_B.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Michael and Steven are playing the card game War with a deck of $4$ cards numbered $1$ through $4$. The deck is shuffled randomly and Michael gets a stack of $1$ card and Steven gets a stack of $3$ cards. In each round, the players reveal the top card from their stack, and the player whose card was higher collects both cards to the bottom of their stack in random order. A player wins when they get all four cards in their hand. The probability that Michael wins after exactly $5$ rounds is $\\frac mn$ for coprime positive integers $m$ and $n$. Find $m+n$.",
+    "image": null,
+    "choices": null,
+    "answer": "17",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Track Michael's number of cards",
+        "body": "Each round, the winner of the round gains one card and the loser loses one, so Michael's card count $m$ does a $\\pm1$ walk starting at $m=1$; the game ends when $m=0$ (Steven wins) or $m=4$ (Michael wins).\n\nMichael wins at round $5$ only if the walk goes $1\\to4$ in $5$ steps without touching $0$ or $4$ earlier. Writing U (Michael wins the round) and D (loses), the only possible sequences are\n$$\\text{U D U U U}\\quad(1,2,1,2,3,4),\\qquad \\text{U U D U U}\\quad(1,2,3,2,3,4)$$\n(D cannot come first, since $m=1\\to0$ ends the game, and UUU would already finish at round $3$).\n\nNow follow the actual cards. The $24$ deals are equally likely and every time a round winner collects two cards the order is a fair coin flip. Carrying out the enumeration (the highest card always wins its round, and what matters is which of the remaining cards sit on top) gives\n$$P(\\text{UDUUU})=\\frac1{32},\\qquad P(\\text{UUDUU})=\\frac1{32}.$$\nHence the probability is $\\frac1{16}$ and $m+n=17$.\n\n**Answer: 17**"
+      },
+      {
+        "title": "Exact state enumeration",
+        "body": "Propagating the exact probability of every (Michael's stack, Steven's stack) state round by round from the $24$ initial deals (each collected pair going to the bottom in either order with probability $\\frac12$), the total probability that Michael collects all four cards for the first time at rounds $3,5,7$ is $\\frac18,\\frac1{16},\\frac1{32}$. So the answer is $\\frac1{16}$, giving $17$.\n\n**Answer: 17**"
+      }
+    ],
+    "topics": [
+      "probability",
+      "games"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "pumac-2024-combinatorics-b-07",
+    "bank": "pumac",
+    "source": {
+      "contest": "PUMaC",
+      "paper": "2024 Combinatorics B",
+      "year": 2024,
+      "number": 7,
+      "url": "https://jason-shi-f9dm.squarespace.com/s/PUMaC_2024_Combinatorics_B.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "It is election year in PUMACland, and for the presidential election there are $27$ people voting for either Vraj Patel or Vedant Shah. Each voter selects a candidate uniformly at random, and their ballots are labeled $1$ through $27$.\n\nThe election takes place as a series of rounds. In each round, the surviving ballots are sorted by label and separated into consecutive groups of three. From each group, the person with the most votes wins, and exactly one of the ballots bearing the winner's name is allowed to proceed to the next round. This procedure continues until a single ballot remains, and the person whose name is on the ballot wins.\n\nAlice, Bob, and Carol submitted ballots numbered $1$, $15$, and $27$, respectively. Suppose that Alice, Bob, and Carol had all flipped their votes. If the probability that the outcome of the election would have changed is $\\frac ab$ for relatively prime positive integers $a,b$, find $a+b$.",
+    "image": null,
+    "choices": null,
+    "answer": "83",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "A tree of majorities",
+        "body": "The election is a three-level tree of majority-of-3 votes: groups $\\{1,2,3\\},\\dots,\\{25,26,27\\}$, then triples of group results, then the final triple of three \"block\" results $B_1,B_2,B_3$ (ballots $1$–$9$, $10$–$18$, $19$–$27$). Alice, Bob and Carol are in different blocks: Alice in the first group of block 1, Bob (ballot 15) in the middle group of block 2, Carol in the last group of block 3. Their flips only affect their own block.\n\nTake Alice. Flipping her vote changes her group's result iff the other two voters in the group disagree (probability $\\frac12$), and then it changes the block result iff the other two group results of her block disagree (probability $\\frac12$). So her block result flips with probability $\\frac14$; the same holds for Bob's and Carol's blocks, independently, and by the symmetry of switching all votes the unflipped block results $B_i$ stay independent fair coin flips regardless.\n\nLet $k$ be the number of blocks whose result flips, $k\\sim\\mathrm{Bin}(3,\\frac14)$:\n- $k=1$ (prob $\\frac{27}{64}$): the outcome changes iff the other two $B$'s differ: probability $\\frac12$.\n- $k=2$ (prob $\\frac{9}{64}$): the outcome changes iff the two flipped blocks agree: probability $\\frac12$.\n- $k=3$ (prob $\\frac1{64}$): the outcome always changes.\n\nTotal: $\\frac{27}{64}\\cdot\\frac12+\\frac9{64}\\cdot\\frac12+\\frac1{64}=\\frac{19}{64}$, so $a+b=83$.\n\n**Answer: 83**"
+      },
+      {
+        "title": "Exact computation over the tree",
+        "body": "Propagate, for each node of the tree, the joint distribution of (original result, result after the three flips): a leaf has $(v,v)$ for an unflipped voter and $(v,1-v)$ for Alice, Bob or Carol; a node combines three independent children with the majority rule on both coordinates. At the root the probability that the two coordinates differ is $\\frac{19}{64}$.\n\n**Answer: 83**"
+      }
+    ],
+    "topics": [
+      "probability",
+      "logic"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "pumac-2024-combinatorics-b-08",
+    "bank": "pumac",
+    "source": {
+      "contest": "PUMaC",
+      "paper": "2024 Combinatorics B",
+      "year": 2024,
+      "number": 8,
+      "url": "https://jason-shi-f9dm.squarespace.com/s/PUMaC_2024_Combinatorics_B.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Ezzie is walking around the perimeter of a regular hexagon. Each vertex of the hexagon has an instruction telling him to move clockwise or counterclockwise around the hexagon. However, when he leaves a vertex the instruction switches from clockwise to counterclockwise on that vertex, or vice versa. We say that a configuration $C$ of Ezzie's position and the instructions on the vertices is *irrepeatable* if, when starting from configuration $C$, configuration $C$ only appears finitely many more times. Find the number of irrepeatable configurations.",
+    "image": null,
+    "choices": null,
+    "answer": "312",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Which configurations recur",
+        "body": "A configuration is a position (6 choices) together with 6 instructions: $6\\cdot2^6=384$ configurations. Each configuration has exactly one successor, so $C$ appears infinitely often exactly when it lies on a cycle of the successor map; otherwise it is irrepeatable.\n\nCycles: the recurrent behaviour is a lap: Ezzie goes once around clockwise while every instruction he leaves flips to counterclockwise, so after $6$ steps he is back at $s$ with all instructions reversed relative to the start; then he goes once around counterclockwise and everything is restored. For example, from \"all clockwise\" the state after $k$ steps is: Ezzie at $s+k$, the $k$ vertices behind him counterclockwise, the rest clockwise. This is a cycle of length $12$. The cycles are determined by the starting vertex $s$ and the pair of laps, giving $6$ cycles of length $12$, i.e. $72$ recurrent configurations:\n- for each position $p$: the $6$ configurations where an arc of vertices ending just behind $p$ points counterclockwise and the rest clockwise (clockwise lap), and\n- the $6$ mirror-image configurations (counterclockwise lap).\n\nFollowing every one of the $384$ configurations forward (until it repeats) shows that nothing else lies on a cycle: all other configurations eventually enter one of these six $12$-cycles and never return.\n\nHence the number of irrepeatable configurations is $384-72=312$.\n\n**Answer: 312**"
+      }
+    ],
+    "topics": [
+      "logic",
+      "counting"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

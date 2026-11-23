@@ -1,0 +1,345 @@
+[
+ {
+  "id": "smt-2023-discrete-01",
+  "bank": "smt",
+  "source": {
+   "contest": "Stanford Math Tournament",
+   "paper": "2023 Discrete",
+   "year": 2023,
+   "number": 1,
+   "url": "https://www.stanfordmathtournament.org/pdfs/smt2023/discrete-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "For all positive integers $n>1$, let $f(n)$ denote the largest odd proper divisor of $n$ (a proper divisor of $n$ is a positive divisor of $n$ except for $n$ itself). Given that $N=20^{23}\\cdot23^{20}$, compute $$\\frac{f(N)}{f(f(f(N)))}.$$",
+  "image": null,
+  "choices": null,
+  "answer": "25",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Track what $f$ does",
+    "body": "If $n$ is even, $f(n)$ is the odd part of $n$. If $n>1$ is odd, $f(n)=n/p$ where $p$ is the smallest prime factor of $n$ (the largest proper divisor).\n\n$N=2^{46}\\cdot5^{23}\\cdot23^{20}$, so $f(N)=5^{23}\\cdot23^{20}$. Then $f(f(N))=5^{22}\\cdot23^{20}$ and $f(f(f(N)))=5^{21}\\cdot23^{20}$.\n\nThe ratio is $\\frac{5^{23}}{5^{21}}=25$.\n\n**Answer: 25**"
+   }
+  ],
+  "topics": [
+   "number-theory"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "smt-2023-discrete-02",
+  "bank": "smt",
+  "source": {
+   "contest": "Stanford Math Tournament",
+   "paper": "2023 Discrete",
+   "year": 2023,
+   "number": 2,
+   "url": "https://www.stanfordmathtournament.org/pdfs/smt2023/discrete-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "A $3\\times3$ grid is to be painted with three colors (red, green, and blue) such that\n\n(i) no two squares that share an edge are the same color and\n\n(ii) no two corner squares on the same edge of the grid have the same color.\n\nAs an example, the upper-left and bottom-left squares cannot both be red, as that would violate condition (ii). In how many ways can this be done? (Rotations and reflections are considered distinct colorings.)",
+  "image": null,
+  "choices": null,
+  "answer": "24",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Case on the corners",
+    "body": "Let the corners in cyclic order be $A,B,C,D$; condition (ii) says adjacent corners differ. Let $a$ be the color of $A$.\n\n- **$B$ and $D$ have the same color $b\\ne a$** (there are $3\\cdot2=6$ choices of $(a,b)$; let $c$ be the third color). Then $C\\ne b$, so $C\\in\\{a,c\\}$. If $C=a$: each edge-middle square touches two corners of colors $a,b$, so it must be $c$; the center touches four $c$'s, so it is $a$ or $b$: $2$ ways. If $C=c$: the edge-middle squares are forced ($c,c,a,a$ around the grid) and the center, touching $c,c,a,a$, must be $b$: $1$ way. That is $6\\cdot3=18$ colorings.\n- **$B\\ne D$:** then $\\{B,D\\}$ are the two colors other than $a$ (in $2$ orders) and $C=a$; every edge-middle square touches two corners of different colors, so it gets the third color, and the center is then forced. That is $3\\cdot2\\cdot1=6$ colorings.\n\nTotal $18+6=24$.\n\n**Answer: 24**"
+   },
+   {
+    "title": "Brute-force check",
+    "body": "Enumerating all $3^9$ colorings by computer and keeping those satisfying (i) and (ii) gives exactly $24$.\n\n**Answer: 24**"
+   }
+  ],
+  "topics": [
+   "counting"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "smt-2023-discrete-03",
+  "bank": "smt",
+  "source": {
+   "contest": "Stanford Math Tournament",
+   "paper": "2023 Discrete",
+   "year": 2023,
+   "number": 3,
+   "url": "https://www.stanfordmathtournament.org/pdfs/smt2023/discrete-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "How many trailing zeros does the value $$300\\cdot305\\cdot310\\cdots1090\\cdot1095\\cdot1100$$ end with?",
+  "image": null,
+  "choices": null,
+  "answer": "161",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Count factors of 2 and 5",
+    "body": "The product is $5^{161}\\cdot\\dfrac{220!}{59!}$ (there are $161$ terms $5\\cdot60,\\dots,5\\cdot220$).\n\nFactors of $5$: $161+v_5(220!)-v_5(59!)=161+53-13=201$.\n\nFactors of $2$: $v_2(220!)-v_2(59!)=215-54=161$.\n\nThe number of trailing zeros is $\\min(201,161)=161$.\n\n**Answer: 161**"
+   }
+  ],
+  "topics": [
+   "number-theory"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "smt-2023-discrete-04",
+  "bank": "smt",
+  "source": {
+   "contest": "Stanford Math Tournament",
+   "paper": "2023 Discrete",
+   "year": 2023,
+   "number": 4,
+   "url": "https://www.stanfordmathtournament.org/pdfs/smt2023/discrete-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Michelle is drawing segments in the plane. She begins from the origin facing up the $y$-axis and draws a segment of length $1$. Now, she rotates her direction by $120^\\circ$, with equal probability clockwise or counterclockwise, and draws another segment of length $1$ beginning from the end of the previous segment. She then continues this until she hits an already drawn segment. What is the expected number of segments she has drawn when this happens?",
+  "image": null,
+  "choices": null,
+  "answer": "4",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Reduce to coin flips",
+    "body": "Each turn is a $\\pm120^\\circ$ rotation. If two consecutive turns have the same direction, the three segments form an equilateral triangle and she hits an earlier segment. If the turns alternate forever, she travels along a zigzag line and never hits anything. So she stops exactly at the first time two consecutive coin flips agree.\n\nLet $E$ be the expected number of further flips given the last flip was (say) H, and by symmetry the same for T. Then $E=1+\\frac12E$, so $E=2$. The first segment and the first turn segment give $2$ segments, and then $2$ more flips are needed on average: total $2+2=4$.\n\n**Answer: 4**"
+   }
+  ],
+  "topics": [
+   "probability",
+   "counting"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "smt-2023-discrete-05",
+  "bank": "smt",
+  "source": {
+   "contest": "Stanford Math Tournament",
+   "paper": "2023 Discrete",
+   "year": 2023,
+   "number": 5,
+   "url": "https://www.stanfordmathtournament.org/pdfs/smt2023/discrete-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Ryan chooses five subsets $S_1,S_2,S_3,S_4,S_5$ of $\\{1,2,3,4,5,6,7\\}$ such that $|S_1|=1$, $|S_2|=2$, $|S_3|=3$, $|S_4|=4$, and $|S_5|=5$. Moreover, for all $1\\le i<j\\le5$, either $S_i\\cap S_j=S_i$ or $S_i\\cap S_j=\\emptyset$ (in other words, the intersection of $S_i$ and $S_j$ is either $S_i$ or the empty set). In how many ways can Ryan select the sets?",
+  "image": null,
+  "choices": null,
+  "answer": "11760",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Choose from the largest down",
+    "body": "$S_i\\cap S_j=S_i$ means $S_i\\subseteq S_j$. Choose $S_5$ first: $\\binom75=21$ ways.\n\n$S_4$ cannot be disjoint from $S_5$ ($4+5>7$), so $S_4\\subseteq S_5$: $\\binom54=5$ ways.\n\n$S_3$ is either inside $S_4$ or disjoint from it. Disjoint would force $S_3=\\{1..7\\}\\setminus S_4$, which meets $S_5$ in one element without being inside it, impossible. So $S_3\\subseteq S_4$: $4$ ways.\n\n$S_2$ is either inside $S_3$ ($\\binom32=3$ ways) or disjoint from $S_3$; being disjoint from $S_3$ and not inside $S_4,S_5$ forces $S_2=\\{1..7\\}\\setminus S_5$ ($1$ way). So $4$ ways.\n\n$S_1$ is any single element: $7$ ways (every single element is either inside or disjoint from each set).\n\nTotal: $21\\cdot5\\cdot4\\cdot4\\cdot7=11760$.\n\n**Answer: 11760**"
+   },
+   {
+    "title": "Brute-force check",
+    "body": "A direct computer enumeration of all choices satisfying the conditions also gives $11760$.\n\n**Answer: 11760**"
+   }
+  ],
+  "topics": [
+   "counting"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "smt-2023-discrete-06",
+  "bank": "smt",
+  "source": {
+   "contest": "Stanford Math Tournament",
+   "paper": "2023 Discrete",
+   "year": 2023,
+   "number": 6,
+   "url": "https://www.stanfordmathtournament.org/pdfs/smt2023/discrete-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "We say that an integer $x\\in\\{1,\\cdots,102\\}$ is _square-ish_ if there exists some integer $n$ such that $x\\equiv n^2+n\\pmod{103}$. Compute the product of all square-ish integers modulo $103$.",
+  "image": null,
+  "choices": null,
+  "answer": "52",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Complete the square and use Wilson",
+    "body": "Since $2\\cdot52\\equiv1\\pmod{103}$, $n^2+n\\equiv(n+52)^2-52^2$. So the square-ish residues are the nonzero values $x^2-52^2$. Each nonzero value arises from exactly two $x$ ($\\pm x$) except $x=0$, so take $x=0,1,\\dots,50$ (one representative per pair; $x=51,52$ give the excluded value $0$).\n\n$\\prod_{x=0}^{50}(x-52)(x+52)=\\left[(-52)(-51)\\cdots(-2)\\right]\\cdot\\left[52\\cdot53\\cdots102\\right]=(-1)^{51}\\cdot 102!\\cdot52$,\n\nbecause the two blocks together cover $2,3,\\dots,102$ with $52$ appearing twice. By Wilson's theorem $102!\\equiv-1\\pmod{103}$, so the product is $(-1)^{51}(-1)(52)=52$.\n\n**Answer: 52**"
+   }
+  ],
+  "topics": [
+   "number-theory"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "smt-2023-discrete-07",
+  "bank": "smt",
+  "source": {
+   "contest": "Stanford Math Tournament",
+   "paper": "2023 Discrete",
+   "year": 2023,
+   "number": 7,
+   "url": "https://www.stanfordmathtournament.org/pdfs/smt2023/discrete-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Let $S$ be the number of bijective functions $f:\\{0,1,\\ldots,288\\}\\to\\{0,1,\\ldots,288\\}$ such that $f((m+n)\\bmod17)$ is divisible by $17$ if and only if $f(m)+f(n)$ is divisible by $17$. Compute the largest positive integer $n$ such that $2^n$ divides $S$.",
+  "image": null,
+  "choices": null,
+  "answer": "270",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Count the functions",
+    "body": "Since $f$ is a bijection some $m$ has $17\\mid f(m)$. Taking $n=17k$ in the condition (with $(m+17k)\\bmod17=m\\bmod 17$) shows $17\\mid f(17k)$ for all $k$, so $m+n\\equiv0\\pmod{17}$ iff $f(m)+f(n)\\equiv0\\pmod{17}$.\n\nThus $f$ induces a map on residues mod $17$ that fixes $0$ and sends the $8$ complementary pairs $\\{r,17-r\\}$ to pairs: $8!\\cdot2^8$ ways. Each residue class has $17$ elements which can be matched in $17!$ ways, giving $17$ factors of $17!$.\n\n$S=2^8\\cdot8!\\cdot(17!)^{17}$.\n\n$v_2(8!)=7$, $v_2(17!)=15$, so the exponent is $8+7+17\\cdot15=270$.\n\n**Answer: 270**"
+   }
+  ],
+  "topics": [
+   "counting",
+   "number-theory"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "smt-2023-discrete-08",
+  "bank": "smt",
+  "source": {
+   "contest": "Stanford Math Tournament",
+   "paper": "2023 Discrete",
+   "year": 2023,
+   "number": 8,
+   "url": "https://www.stanfordmathtournament.org/pdfs/smt2023/discrete-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Define the Fibonacci numbers via $F_0=0$, $F_1=1$, and $F_n=F_{n-1}+F_{n-2}$.\n\nOlivia flips two fair coins at the same time, repeatedly, until she has flipped a tails on both, not necessarily on the same throw. She records the number of pairs of flips $c$ until this happens (not including the last pair, so if on the first flip both coins turned up tails $c$ would be $0$). What is the expected value of $F_c$?",
+  "image": null,
+  "choices": null,
+  "answer": "19/11",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "answerDisplay": "$\\frac{19}{11}$",
+  "solutions": [
+   {
+    "title": "Maximum of two geometric variables",
+    "body": "Let $a,b$ be the number of heads before the first tail for each coin; then $c=\\max(a,b)$ and $P(a\\le m)=1-2^{-(m+1)}$. So $P(c=m)=\\left(1-2^{-m-1}\\right)^2-\\left(1-2^{-m}\\right)^2$ (with the second term $0$ for $m=0$), which simplifies to $\\frac{2}{2^{m+1}}-\\frac{3}{4^{m+1}}$.\n\nTherefore $E[F_c]=\\sum_{n\\ge0}\\left(\\frac{2}{2^{n+1}}-\\frac3{4^{n+1}}\\right)F_n$.\n\nUsing $\\sum_{n\\ge0}F_nx^{n+1}=\\frac{x^2}{1-x-x^2}$: at $x=\\frac12$ it is $\\frac{1/4}{1/4}=1$, giving $2\\cdot1$; at $x=\\frac14$ it is $\\frac{1/16}{11/16}=\\frac1{11}$, giving $3\\cdot\\frac1{11}$.\n\n$E=2-\\frac3{11}=\\frac{19}{11}$.\n\n**Answer: $\\frac{19}{11}$**"
+   }
+  ],
+  "topics": [
+   "probability",
+   "sequences-series"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "smt-2023-discrete-09",
+  "bank": "smt",
+  "source": {
+   "contest": "Stanford Math Tournament",
+   "paper": "2023 Discrete",
+   "year": 2023,
+   "number": 9,
+   "url": "https://www.stanfordmathtournament.org/pdfs/smt2023/discrete-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Suppose $a$ and $b$ are positive integers with a curious property: $\\left(a^3-3ab+\\frac12\\right)^n+\\left(b^3+\\frac12\\right)^n$ is an integer for at least $3$, but at most finitely many different choices of positive integers $n$. What is the least possible value of $a+b$?",
+  "image": null,
+  "choices": null,
+  "answer": "6",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Reduce to powers of 2",
+    "body": "Multiplying by $2^n$, the expression is an integer iff $2^n\\mid(2a^3-6ab+1)^n+(2b^3+1)^n$. For even $n$ both powers are $1\\bmod4$, so the sum is $2\\bmod 4$ and never divisible by $4$; hence $n$ must be odd.\n\nFor odd $n$, write $x=2a^3-6ab+1$ and $y=2b^3+1$; then $x+y$ divides $x^n+y^n$ with an odd cofactor (a sum of $n$ odd numbers), so the condition is equivalent to $2^n\\mid x+y=2(a^3+b^3+1-3ab)$. We need this to hold for at least $3$ odd $n$ (i.e. for $n=1,3,5$, which means $2^5\\mid 2(a^3+b^3+1-3ab)$, i.e. $16\\mid a^3+b^3+1-3ab$) but not for infinitely many, so $a^3+b^3+1-3ab\\ne0$, which excludes $a=b=1$.\n\nFactor: $a^3+b^3+1-3ab=(a+b+1)(a^2+b^2+1-ab-a-b)$. The second factor is even only if $a,b$ are both odd, in which case $a+b+1$ is odd. So either $16\\mid a+b+1$ (forcing $a+b\\ge15$) or $16$ divides the second factor with $a,b$ odd. Trying $a=1$: the second factor is $(b-1)^2$, divisible by $16$ for $b=5$. So $(a,b)=(1,5)$ works, with $a+b=6$ (indeed $a^3+b^3+1-3ab=7\\cdot16$). Checking all pairs with smaller sum (e.g. by computer) shows none work.\n\n**Answer: 6**"
+   }
+  ],
+  "topics": [
+   "number-theory",
+   "algebra"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "smt-2023-discrete-10",
+  "bank": "smt",
+  "source": {
+   "contest": "Stanford Math Tournament",
+   "paper": "2023 Discrete",
+   "year": 2023,
+   "number": 10,
+   "url": "https://www.stanfordmathtournament.org/pdfs/smt2023/discrete-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Colin has a peculiar 12-sided dice: it is made up of two regular hexagonal pyramids. Colin wants to paint each face one of three colors so that no two adjacent faces on the same pyramid have the same color. How many ways can he do this? Two paintings are considered identical if there is a way to rotate or flip the dice to go from one to the other. Faces are adjacent if they share an edge.",
+  "image": "qimages/smt/2023-discrete/q10.webp",
+  "choices": null,
+  "answer": "405",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Burnside's lemma",
+    "body": "The rotation group of the dice has $12$ elements: $6$ rotations about the axis through the two apexes (by $0,60,\\dots,300$ degrees) and $6$ flips swapping the pyramids.\n\nA proper colouring of one pyramid's $6$ faces (a $6$-cycle with $3$ colours) can be done in $2^6+2=66$ ways.\n\n- Identity: $66^2=4356$.\n- Rotation by $60^\\circ$ or $300^\\circ$: adjacent faces would be equal, so $0$.\n- Rotation by $120^\\circ$ or $240^\\circ$: faces alternate in each pyramid, $(3\\cdot2)^2=36$ each.\n- Rotation by $180^\\circ$: the colours repeat every $3$ faces, so each pyramid uses $3$ distinct colours in order: $(3!)^2=36$.\n- Each of the $6$ flips: the colouring of one pyramid determines the other, so $66$ each.\n\nThe number of distinct paintings is $\\frac1{12}\\left(4356+0+0+36+36+36+6\\cdot66\\right)=\\frac{4860}{12}=405$.\n\n**Answer: 405**"
+   }
+  ],
+  "topics": [
+   "counting"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ }
+]

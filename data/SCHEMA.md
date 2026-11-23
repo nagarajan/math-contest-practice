@@ -7,7 +7,7 @@ The file is a JSON **array of question objects**. Figures are saved as **WebP** 
 `<bank>` is a bank id from `data/banks.json` (one bank per competition family: `kangaroo`, `noetic`,
 `moems`, `amc8`, `putnam`, ...). A new competition needs an entry there first (name, colour,
 scoring rules, real paper length/time). `tools/build_banks.py` writes one question file per grade
-(`app/public/banks/grade-<g>.json`), so the `grade` field decides who sees a question.
+(`app/public/banks/q/`, one file per bank and set of grades), so the `grade` field decides who sees a question.
 
 ## Question object
 

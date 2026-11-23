@@ -1,0 +1,106 @@
+[
+ {
+  "id": "pumac-2012-finals-b-01",
+  "bank": "pumac",
+  "source": {
+   "contest": "PUMaC",
+   "paper": "2012 Individual Finals B",
+   "year": 2012,
+   "number": 1,
+   "url": "https://jason-shi-f9dm.squarespace.com/s/PUMaC2012_FinalsB.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Let $q$ be a fixed odd prime. A prime $p$ is said to be *orange* if for every integer $a$ there exists an integer $r$ such that $r^q\\equiv a\\pmod p$. Prove that there are infinitely many orange primes.",
+  "image": null,
+  "choices": null,
+  "answer": "Every prime $p\\not\\equiv1\\pmod q$ is orange (then $\\gcd(p-1,q)=1$), and there are infinitely many such primes (Euclid-style argument with $N=qp_1\\cdots p_k-1$).",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Primes not 1 mod q",
+    "body": "**Claim 1: every prime $p\\not\\equiv1\\pmod q$ is orange.** Then $\\gcd(p-1,q)=1$ ($q$ is prime and does not divide $p-1$), so there are integers $m,n$ with $(p-1)m+qn=1$. For $a\\not\\equiv0\\pmod p$,\n$$a=a^{(p-1)m+qn}=\\left(a^{p-1}\\right)^m(a^n)^q\\equiv(a^n)^q\\pmod p$$\nby Fermat's little theorem (negative $n$ or $m$ are fine since $a$ is invertible mod $p$), so $r=a^n$ works. For $a\\equiv0$, take $r=0$.\n\n**Claim 2: there are infinitely many primes $p\\not\\equiv1\\pmod q$.** Suppose only $p_1,\\dots,p_k$ are such primes (there is at least one: $q$ itself). Let $N=qp_1\\cdots p_k-1>1$. No $p_j$ divides $N$, so every prime factor of $N$ is $\\equiv1\\pmod q$, hence $N\\equiv1\\pmod q$. But $N\\equiv-1\\pmod q$ and $q>2$, a contradiction.\n\nTogether, there are infinitely many orange primes. ∎"
+   }
+  ],
+  "topics": [
+   "number-theory"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "pumac-2012-finals-b-02",
+  "bank": "pumac",
+  "source": {
+   "contest": "PUMaC",
+   "paper": "2012 Individual Finals B",
+   "year": 2012,
+   "number": 2,
+   "url": "https://jason-shi-f9dm.squarespace.com/s/PUMaC2012_FinalsB.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Let $O_1,O_2,\\dots,O_{2012}$ be $2012$ circles in the plane such that no circle intersects or contains any other circle and no two circles have the same radius. For each $1\\le i<j\\le2012$, let $P_{i,j}$ denote the point of intersection of the two external tangent lines to $O_i$ and $O_j$, and let $T$ be the set of all $P_{i,j}$ (so $|T|=\\binom{2012}2=2023066$). Suppose there exists a subset $S\\subset T$ with $|S|=2021056$ such that all points in $S$ lie on the same line. Prove that all points in $T$ lie on the same line.",
+  "image": null,
+  "choices": null,
+  "answer": "Monge's theorem: $P_{ab},P_{bc},P_{ac}$ are collinear. A graph on 2012 vertices with at least 2021056 edges is connected, and the collinearity makes adjacency transitive, so the graph is complete.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Monge's theorem plus graph argument",
+    "body": "**Lemma (Monge).** For three of the circles $a,b,c$, the points $P_{ab},P_{bc},P_{ac}$ are collinear. Let $h_{xy}$ be the homothety with center $P_{xy}$ and ratio $r_y/r_x>0$ taking circle $x$ to circle $y$. Then $h_{bc}\\circ h_{ab}$ maps circle $a$ to circle $c$ and has ratio $r_c/r_a\\ne1$ (radii differ), so it is a homothety, whose center lies on the line through the centers $P_{ab}$ and $P_{bc}$ (if these are distinct; otherwise the center is that point). A homothety with positive ratio taking $a$ to $c$ has the external center of similitude $P_{ac}$ as its center (this is unique). Hence $P_{ac}$ lies on the line $P_{ab}P_{bc}$ (and equals $P_{ab}=P_{bc}$ if those coincide).\n\nLet $\\ell$ be the line containing $S$ and let $G$ be the graph on vertices $1,\\dots,2012$ with $i\\sim j$ iff $P_{ij}\\in\\ell$. Then $|E(G)|\\ge2021056$.\n\n**Transitivity.** If $a\\sim b$ and $b\\sim c$ ($a\\ne c$), then $P_{ab},P_{bc}\\in\\ell$. If they are distinct, the lemma gives $P_{ac}\\in$ line $P_{ab}P_{bc}=\\ell$; if they coincide, then $P_{ac}=P_{ab}\\in\\ell$ as shown. So $a\\sim c$.\n\n**$G$ is connected.** If not, split the vertices into two nonempty parts of sizes $k$ and $2012-k$ with no edges between them. Then $|E|\\le\\binom k2+\\binom{2012-k}2=\\binom{2012}2-k(2012-k)\\le2023066-2011=2021055$, since $k(2012-k)\\ge2011$ for $1\\le k\\le2011$. This contradicts $|E|\\ge2021056$.\n\n**$G$ is complete.** Take any two vertices $a,b$; connectedness gives a path $a=u_0,u_1,\\dots,u_n=b$. By transitivity, $u_0\\sim u_2$, then $u_0\\sim u_3$, and so on up to $u_0\\sim u_n$. So every pair is adjacent, which means every $P_{ij}$ lies on $\\ell$. ∎"
+   }
+  ],
+  "topics": [
+   "geometry",
+   "graph-theory"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "pumac-2012-finals-b-03",
+  "bank": "pumac",
+  "source": {
+   "contest": "PUMaC",
+   "paper": "2012 Individual Finals B",
+   "year": 2012,
+   "number": 3,
+   "url": "https://jason-shi-f9dm.squarespace.com/s/PUMaC2012_FinalsB.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Find, with proof, all pairs $(x,y)$ of integers satisfying the equation $3x^2+4=2y^3$.",
+  "image": null,
+  "choices": null,
+  "answer": "$(x,y)=(2,2)$ and $(-2,2)$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Sum of two cubes",
+    "body": "Observe that $(2+x)^3+(2-x)^3=16+12x^2=4(3x^2+4)=8y^3$, so the equation is equivalent to $$(2+x)^3+(2-x)^3=(2y)^3.$$\nBy Fermat's Last Theorem for exponent $3$ (Euler), the equation $u^3+v^3=w^3$ has no solution in nonzero integers, so one of $2+x$, $2-x$, $y$ is $0$.\n\n- $2+x=0$: $x=-2$, then $y^3=8$, $y=2$.\n- $2-x=0$: $x=2$, $y=2$.\n- $y=0$: $3x^2+4=0$, impossible.\n\nHence the solutions are $(2,2)$ and $(-2,2)$. Check: $3\\cdot4+4=16=2\\cdot8$. ∎"
+   },
+   {
+    "title": "Reducing to the same equation by hand",
+    "body": "$x$ must be even: $x=2k$ gives $6k^2+2=y^3$, so $y=2l$ and $3k^2+1=4l^3$; then $k$ is odd, $k=2m+1$, and $3m^2+3m+1=l^3$, i.e. $(m+1)^3=l^3+m^3$. By Fermat's Last Theorem for exponent $3$, $m+1=0$, $m=0$ or $l=0$ ($l=0$ is impossible as $3m^2+3m+1>0$), giving $k=-1$ or $k=1$, i.e. $x=\\mp2$, $y=2$. ∎"
+   }
+  ],
+  "topics": [
+   "number-theory"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ }
+]

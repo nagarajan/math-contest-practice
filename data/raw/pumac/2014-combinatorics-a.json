@@ -1,0 +1,262 @@
+[
+ {
+  "id": "pumac-2014-combinatorics-a-01",
+  "bank": "pumac",
+  "source": {
+   "contest": "PUMaC",
+   "paper": "2014 Combinatorics A",
+   "year": 2014,
+   "number": 1,
+   "url": "https://jason-shi-f9dm.squarespace.com/s/PUMaC2014_CombinatoricsA.pdf"
+  },
+  "grade": "9-12",
+  "points": 3,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "What is the largest $n$ such that a square cannot be partitioned into $n$ smaller, non-overlapping squares?",
+  "image": null,
+  "choices": null,
+  "answer": "5",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [],
+  "topics": [
+   "geometry",
+   "logic"
+  ],
+  "difficulty": 2,
+  "duplicateOf": "pumac-2014-combinatorics-b-03",
+  "reviewNote": null
+ },
+ {
+  "id": "pumac-2014-combinatorics-a-02",
+  "bank": "pumac",
+  "source": {
+   "contest": "PUMaC",
+   "paper": "2014 Combinatorics A",
+   "year": 2014,
+   "number": 2,
+   "url": "https://jason-shi-f9dm.squarespace.com/s/PUMaC2014_CombinatoricsA.pdf"
+  },
+  "grade": "9-12",
+  "points": 3,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Assume you have a magical pizza in the shape of an infinite plane. You have a magical pizza cutter that can cut in the shape of an infinite line, but it can only be used $14$ times. To share with as many of your friends as possible, you cut the pizza in a way that maximizes the number of finite pieces (the infinite pieces have infinite mass, so you can't lift them up). How many finite pieces of pizza do you have?",
+  "image": null,
+  "choices": null,
+  "answer": "78",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Count the bounded regions line by line",
+    "body": "**Upper bound.** Add the lines one at a time. The $k$-th line meets the earlier lines in at most $k-1$ points, so it is cut into at most $k$ pieces: $2$ rays and at most $k-2$ finite segments. A ray splits a region into two unbounded regions, so it creates no new bounded region; each finite segment creates at most one new bounded region. Hence the number of bounded regions is at most\n$$\\sum_{k=2}^{14}(k-2)=0+1+\\cdots+12=78.$$\n\n**Construction.** Take $14$ lines in general position (no two parallel, no three through a point). Then the $k$-th line meets all earlier lines in $k-1$ different points and each of its $k-2$ finite segments creates a new bounded region, so there are exactly $78$ finite pieces. (Check: there are $1+14+\\binom{14}2=106$ regions in all, of which $2\\cdot14=28$ are unbounded, and $106-28=78$.)\n\n**Answer: 78**"
+   }
+  ],
+  "topics": [
+   "counting",
+   "geometry"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "pumac-2014-combinatorics-a-03",
+  "bank": "pumac",
+  "source": {
+   "contest": "PUMaC",
+   "paper": "2014 Combinatorics A",
+   "year": 2014,
+   "number": 3,
+   "url": "https://jason-shi-f9dm.squarespace.com/s/PUMaC2014_CombinatoricsA.pdf"
+  },
+  "grade": "9-12",
+  "points": 4,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "You have three colours $\\{$red, blue, green$\\}$ with which you can colour the faces of a regular octahedron (an $8$-sided polyhedron with triangular faces, made of two square-based pyramids stuck together at their bases), but you must do so in a way that avoids colouring adjacent faces (faces sharing an edge) with the same colour. How many different colouring schemes are possible? (Two colouring schemes are considered equivalent if one can be rotated to fit the other.)",
+  "image": null,
+  "choices": null,
+  "answer": "15",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Burnside's lemma",
+    "body": "Faces of the octahedron correspond to vertices of a cube, and adjacent faces to adjacent vertices; the rotation groups are the same ($24$ rotations).\n\n**Proper colourings (identity).** Colour the top square of the cube: a proper $3$-colouring of a $4$-cycle is either $abab$ ($6$ ways) or one pair of opposite vertices equal and the other two different ($12$ ways). For each colouring of the top, count the bottom ones (each bottom vertex must differ from the vertex above it and from its two bottom neighbours): $7$ ways after $abab$ and $6$ ways after the other type. Total $6\\cdot7+12\\cdot6=114$.\n\n**Colourings fixed by each rotation.**\n- $3$ half-turns about axes through opposite cube faces: top must be $abab$ ($6$ ways) and the bottom $xyxy$ with $x\\ne a$, $y\\ne b$, $x\\ne y$ ($3$ ways): $18$ each.\n- $8$ rotations of order $3$ about space diagonals: the cube vertices form orbits $\\{v\\},\\{$3 neighbours$\\}$, $\\{$3 neighbours of the opposite vertex$\\}$, $\\{v'\\}$ forming a path of colour classes: $3\\cdot2\\cdot2\\cdot2=24$ each.\n- $6$ quarter-turns and $6$ half-turns about edge axes: each maps some vertex to an adjacent vertex, which forces equal colours on adjacent faces: $0$.\n\nBy Burnside the number of colourings up to rotation is\n$$\\frac{114+3\\cdot18+8\\cdot24}{24}=\\frac{360}{24}=15.$$\n\n**Answer: 15**"
+   },
+   {
+    "title": "Count by colour multiset",
+    "body": "Let $r\\ge b\\ge g$ be the numbers of faces of the colours. No colour can be used on more than $4$ faces (the largest set of pairwise non-adjacent faces has $4$ elements), so the possibilities are $(4,4,0)$, $(4,3,1)$, $(4,2,2)$, $(3,3,2)$. Checking each distribution up to rotation: $(4,4,0)$ gives $1$ pattern, $(4,3,1)$ gives $1$, $(4,2,2)$ gives $1$, and $(3,3,2)$ gives $1$ (the two faces of the third colour must be opposite). Multiply by the number of ways to assign actual colours to the roles: $3$, $6$, $3$, $3$. Total $3+6+3+3=15$.\n\n**Answer: 15**"
+   }
+  ],
+  "topics": [
+   "counting",
+   "geometry"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "pumac-2014-combinatorics-a-04",
+  "bank": "pumac",
+  "source": {
+   "contest": "PUMaC",
+   "paper": "2014 Combinatorics A",
+   "year": 2014,
+   "number": 4,
+   "url": "https://jason-shi-f9dm.squarespace.com/s/PUMaC2014_CombinatoricsA.pdf"
+  },
+  "grade": "9-12",
+  "points": 4,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Amy has a $2\\times10$ puzzle grid which she can use $1\\times1$ and $1\\times2$ (1 vertical, 2 horizontal) tiles to cover. How many ways can she exactly cover the grid without any tiles overlapping and without rotating the tiles?",
+  "image": null,
+  "choices": null,
+  "answer": "7921",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [],
+  "topics": [
+   "counting"
+  ],
+  "difficulty": 2,
+  "duplicateOf": "pumac-2014-combinatorics-b-05",
+  "reviewNote": null
+ },
+ {
+  "id": "pumac-2014-combinatorics-a-05",
+  "bank": "pumac",
+  "source": {
+   "contest": "PUMaC",
+   "paper": "2014 Combinatorics A",
+   "year": 2014,
+   "number": 5,
+   "url": "https://jason-shi-f9dm.squarespace.com/s/PUMaC2014_CombinatoricsA.pdf"
+  },
+  "grade": "9-12",
+  "points": 5,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "What is the size of the largest subset $S'$ of $S=\\{2^x3^y5^z:0\\le x,y,z\\le4\\}$ such that there are no distinct elements $p,q\\in S'$ with $p\\mid q$?",
+  "image": null,
+  "choices": null,
+  "answer": "19",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Largest antichain in a product of chains",
+    "body": "Identify $2^x3^y5^z$ with the triple $(x,y,z)\\in\\{0,\\dots,4\\}^3$; then $p\\mid q$ iff $p\\le q$ coordinatewise. We want the largest antichain in this poset.\n\n**Lower bound.** All triples with $x+y+z=6$ form an antichain (if one is coordinatewise $\\le$ another with the same sum they are equal). Their number is $3,4,5,4,3$ for $x=0,1,2,3,4$ (for $x$ the pairs $(y,z)$ with $y+z=6-x$ and $y,z\\le4$), i.e. $19$.\n\n**Upper bound.** The poset is a product of chains, which has a symmetric chain decomposition (de Bruijn–Tengbergen–Kruyswijk). The number of chains equals the size of the largest rank, i.e. the number of triples with $x+y+z=6$ (the sizes of the ranks $0,\\dots,12$ are $1,3,6,10,15,18,19,18,15,10,6,3,1$). Each chain contains at most one element of an antichain, so an antichain has at most $19$ elements.\n\n**Answer: 19**"
+   }
+  ],
+  "topics": [
+   "counting",
+   "number-theory"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "pumac-2014-combinatorics-a-06",
+  "bank": "pumac",
+  "source": {
+   "contest": "PUMaC",
+   "paper": "2014 Combinatorics A",
+   "year": 2014,
+   "number": 6,
+   "url": "https://jason-shi-f9dm.squarespace.com/s/PUMaC2014_CombinatoricsA.pdf"
+  },
+  "grade": "9-12",
+  "points": 6,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Let $f(n)$ be the number of points of intersection of diagonals of an $n$-dimensional hypercube that are not vertices of the cube. For example, $f(3)=7$ because the intersection points of a cube's diagonals are at the centres of each face and the centre of the cube. Find $f(5)$.",
+  "image": null,
+  "choices": null,
+  "answer": "131",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Intersection points have coordinates 0, 1 or 1/2",
+    "body": "A diagonal joins two vertices differing in a set $S$ of at least $2$ coordinates. Parametrise it by $t\\in[0,1]$: the coordinates outside $S$ are constant ($0$ or $1$), and each coordinate in $S$ is $t$ or $1-t$.\n\n**Which points occur.** Let a non-vertex point $X$ lie on two distinct diagonals $D_1$ (set $S_1$) and $D_2$ (set $S_2$). Coordinates of $X$ in $S_1$ are non-integers, but outside $S_2$ the coordinates of $D_2$ are integers, so $S_1\\subseteq S_2$, and symmetrically $S_1=S_2=S$. The diagonals agree outside $S$ and are different, so some two coordinates $i,j\\in S$ satisfy $x_i=x_j$ on $D_1$ but $x_i=1-x_j$ on $D_2$. At $X$ this gives $x_i=x_j=1-x_j$, so $x_i=x_j=\\frac12$, hence $t=\\frac12$ on $D_1$ and **all** coordinates in $S$ equal $\\frac12$.\n\nSo $X$ has coordinates in $\\{0,1,\\frac12\\}$ with at least two coordinates equal to $\\frac12$.\n\n**Each such point occurs.** Let the coordinates equal to $\\frac12$ be those in $S$ ($|S|\\ge2$), the others fixed values in $\\{0,1\\}$, and pick $i\\in S$. The diagonal from ($0$ on $S$) to ($1$ on $S$) and the diagonal from ($1$ at $i$, $0$ on $S\\setminus\\{i\\}$) to ($0$ at $i$, $1$ on $S\\setminus\\{i\\}$) (same fixed values outside $S$) are distinct and both pass through $X$ at $t=\\frac12$.\n\n**Count.** The tuples in $\\{0,1,\\frac12\\}^n$ with at least two entries $\\frac12$ number\n$$3^n-n2^{n-1}-2^n,$$\n(subtract those with exactly one $\\frac12$ and those with none). For $n=3$: $27-12-8=7$. For $n=5$: $243-80-32=131$.\n\n**Answer: 131**"
+   }
+  ],
+  "topics": [
+   "counting",
+   "geometry"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "pumac-2014-combinatorics-a-07",
+  "bank": "pumac",
+  "source": {
+   "contest": "PUMaC",
+   "paper": "2014 Combinatorics A",
+   "year": 2014,
+   "number": 7,
+   "url": "https://jason-shi-f9dm.squarespace.com/s/PUMaC2014_CombinatoricsA.pdf"
+  },
+  "grade": "9-12",
+  "points": 7,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Ding and Jianing are playing a game. In this game, they use pieces of paper with $2014$ positions, in which some permutation of the numbers $1,2,\\dots,2014$ is to be written (each number exactly once). Ding fills in a piece of paper first. How many pieces of paper must Jianing fill in to ensure that at least one of her pieces of paper will have a permutation that has the same number as Ding's in at least one position?",
+  "image": null,
+  "choices": null,
+  "answer": "1008",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Hall's theorem and a cyclic-shift construction",
+    "body": "We need the smallest $k$ such that some $k$ permutations $\\sigma_1,\\dots,\\sigma_k$ agree in at least one position with **every** permutation $\\pi$.\n\n**$k\\le1007$ is not enough.** Build a bipartite graph between positions and numbers, joining position $i$ to number $v$ if $v\\ne\\sigma_j(i)$ for all $j$. Each position has at least $2014-1007=1007$ neighbours, and each number $v$ is forbidden at only $\\le1007$ positions, so also has at least $1007$ neighbours. Check Hall's condition for a set $X$ of positions: if $|X|\\le1007$ then $|N(X)|\\ge1007\\ge|X|$; if $|X|>1007$, every number has at least $1007$ neighbouring positions, more than the fewer than $1007$ positions outside $X$, so it has a neighbour in $X$ and $N(X)$ is everything. A perfect matching exists, i.e. a permutation $\\pi$ that differs from every $\\sigma_j$ in every position. So $1007$ papers cannot guarantee a match.\n\n**$1008$ papers suffice.** Let paper $i$ ($1\\le i\\le1008$) have, in positions $1,\\dots,1008$, the cyclic shift $i,i+1,\\dots,1008,1,\\dots,i-1$ (and anything in the other positions). For any position $p\\le1008$ and any number $v\\le1008$ exactly one of these papers has $v$ at position $p$. If Ding's paper has some number $v\\le1008$ in some position $p\\le1008$, a match exists. Otherwise the $1008$ numbers $1,\\dots,1008$ would all sit in positions $1009,\\dots,2014$, which has only $1006$ places: impossible.\n\n**Answer: 1008**"
+   }
+  ],
+  "topics": [
+   "counting",
+   "logic"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "pumac-2014-combinatorics-a-08",
+  "bank": "pumac",
+  "source": {
+   "contest": "PUMaC",
+   "paper": "2014 Combinatorics A",
+   "year": 2014,
+   "number": 8,
+   "url": "https://jason-shi-f9dm.squarespace.com/s/PUMaC2014_CombinatoricsA.pdf"
+  },
+  "grade": "9-12",
+  "points": 8,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "There are $60$ friends who want to visit each other's home during summer vacation. Every day, each of them decides to either stay home or visit the home of everyone who stayed home that day. Find the minimum number of days required for everyone to have visited all their friends' homes.",
+  "image": null,
+  "choices": null,
+  "answer": "8",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [],
+  "topics": [
+   "counting",
+   "logic"
+  ],
+  "difficulty": 3,
+  "duplicateOf": "pumac-2014-combinatorics-b-08",
+  "reviewNote": null
+ }
+]

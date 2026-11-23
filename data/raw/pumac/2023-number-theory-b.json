@@ -1,0 +1,275 @@
+[
+ {
+  "id": "pumac-2023-number-theory-b-01",
+  "bank": "pumac",
+  "source": {
+   "contest": "PUMaC",
+   "paper": "2023 Number Theory B",
+   "year": 2023,
+   "number": 1,
+   "url": "https://jason-shi-f9dm.squarespace.com/s/Number_Theory_B_2023.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Find the number of positive integers $n<100$ such that $\\gcd(n^2,2023)\\neq\\gcd(n,2023^2)$.",
+  "image": null,
+  "choices": null,
+  "answer": "7",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Compare exponents prime by prime",
+    "body": "$2023=7\\cdot17^2$. For a prime $p$ with $v_p(n)=a$ and $v_p(2023)=b$, the exponent of $p$ in $\\gcd(n^2,2023)$ is $\\min(2a,b)$ and in $\\gcd(n,2023^2)$ is $\\min(a,2b)$.\n\nIf $a=0$ or $b=0$ both are $0$. For $a,b\\ge1$: if $a<b$ the second is $a$ while the first is $\\min(2a,b)>a$; if $a>b$ the first is $b$ while the second is $\\min(a,2b)>b$; if $a=b$ both equal $a$. So the gcds differ iff some prime $p\\mid2023$ has $v_p(n)\\ge1$ and $v_p(n)\\ne v_p(2023)$.\n\n- $p=7$ ($b=1$): $v_7(n)\\ge2$, so $49\\mid n$: $n=49,98$.\n- $p=17$ ($b=2$): $v_{17}(n)=1$ (since $17^2>100$): $n=17,34,51,68,85$.\n\nThat is $2+5=7$ numbers.\n\n**Answer: 7**"
+   }
+  ],
+  "topics": [
+   "number-theory"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "pumac-2023-number-theory-b-02",
+  "bank": "pumac",
+  "source": {
+   "contest": "PUMaC",
+   "paper": "2023 Number Theory B",
+   "year": 2023,
+   "number": 2,
+   "url": "https://jason-shi-f9dm.squarespace.com/s/Number_Theory_B_2023.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "I have a four-digit palindrome $\\overline{abba}$ that is divisible by $b$ and is also divisible by the two-digit number $\\overline{bb}$. Find the number of palindromes satisfying both of these properties.",
+  "image": null,
+  "choices": null,
+  "answer": "31",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Reduce to $b\\mid7a$",
+    "body": "Here $a\\in\\{1,\\dots,9\\}$ and $b\\in\\{1,\\dots,9\\}$ ($b=0$ is impossible since we divide by $b$). Divisibility by $\\overline{bb}=11b$ implies divisibility by $b$, so we only need $11b\\mid\\overline{abba}$.\n\n$\\overline{abba}=1001a+110b=11(91a+10b)$. So the condition is $b\\mid91a+10b$, i.e. $b\\mid91a=7\\cdot13\\cdot a$, and since $b\\le9$ is coprime to $13$, $b\\mid7a$.\n\nCount pairs $(a,b)$ by $b$:\n- $b=1$: all $9$ values of $a$; $b=2$: $a$ even, $4$; $b=3$: $3\\mid a$, $3$; $b=4$: $4\\mid a$, $2$; $b=5$: $a=5$, $1$; $b=6$: $a=6$, $1$; $b=7$: all, $9$; $b=8$: $a=8$, $1$; $b=9$: $a=9$, $1$.\n\nTotal $9+4+3+2+1+1+9+1+1=31$.\n\n**Answer: 31**"
+   }
+  ],
+  "topics": [
+   "number-theory",
+   "counting"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "pumac-2023-number-theory-b-03",
+  "bank": "pumac",
+  "source": {
+   "contest": "PUMaC",
+   "paper": "2023 Number Theory B",
+   "year": 2023,
+   "number": 3,
+   "url": "https://jason-shi-f9dm.squarespace.com/s/Number_Theory_B_2023.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Find the integer $x$ for which $135^3+138^3=x^3-1$.",
+  "image": null,
+  "choices": null,
+  "answer": "172",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Bound, then work mod 5 and 11",
+    "body": "We have $x^3=135^3+138^3+1>138^3$ and $x^3\\le2\\cdot138^3$, so $138<x\\le\\sqrt[3]2\\cdot138<\\frac43\\cdot138=184$ (Bernoulli: $\\sqrt[3]2=1+h$ with $1+3h\\le(1+h)^3=2$, so $h\\le\\frac13$).\n\nFor $p=5,11$ (both $\\not\\equiv1\\pmod3$) cubing is a bijection mod $p$.\n- Mod $5$: $x^3\\equiv0^3+3^3+1=28\\equiv3$, and $2^3=8\\equiv3$, so $x\\equiv2\\pmod5$.\n- Mod $11$: $135\\equiv3$, $138\\equiv6$; $x^3\\equiv27+216+1=244\\equiv2$, and $7^3=343\\equiv2$, so $x\\equiv7\\pmod{11}$.\n\nBy CRT $x\\equiv7\\pmod{55}$. The only number of the form $55k+7$ in $(138,184]$ is $172$.\n\n**Answer: 172**"
+   },
+   {
+    "title": "Direct check",
+    "body": "$135^3=2\\,460\\,375$ and $138^3=2\\,628\\,072$, so $x^3=5\\,088\\,448=172^3$ (this is Ramanujan's observation).\n\n**Answer: 172**"
+   }
+  ],
+  "topics": [
+   "number-theory"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "pumac-2023-number-theory-b-04",
+  "bank": "pumac",
+  "source": {
+   "contest": "PUMaC",
+   "paper": "2023 Number Theory B",
+   "year": 2023,
+   "number": 4,
+   "url": "https://jason-shi-f9dm.squarespace.com/s/Number_Theory_B_2023.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "A number is called *good* if it can be written as the sum of the squares of three consecutive positive integers. A number is called *excellent* if it can be written as the sum of the squares of four consecutive positive integers. (For instance, $14=1^2+2^2+3^2$ is good and $30=1^2+2^2+3^2+4^2$ is excellent.) A good number $G$ is called *splendid* if there exists an excellent number $E$ such that $3G-E=2025$. If the sum of all splendid numbers is $S$, find the remainder when $S$ is divided by $1000$.",
+  "image": null,
+  "choices": null,
+  "answer": "447",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Difference of squares",
+    "body": "Good numbers: $(n-1)^2+n^2+(n+1)^2=3n^2+2$ with $n\\ge2$. Excellent numbers: $(m-1)^2+m^2+(m+1)^2+(m+2)^2=4m^2+4m+6=(2m+1)^2+5$ with $m\\ge2$.\n\n$3G-E=2025$ becomes $3(3n^2+2)-(2m+1)^2-5=2025$, i.e. $9n^2-(2m+1)^2=2024$, so\n$$(3n-2m-1)(3n+2m+1)=2024=2^3\\cdot11\\cdot23.$$\nBoth factors have the same parity as their sum $6n$, so both are even: write them as $2u<2v$ with $uv=506=2\\cdot11\\cdot23$ and $v-u=2m+1$ odd. Then $u+v=3n$:\n- $(u,v)=(1,506)$: $n=169$, $m=252$.\n- $(2,253)$: $n=85$, $m=125$.\n- $(11,46)$: $n=19$, $m=17$.\n- $(22,23)$: $n=15$, $m=0$ — not allowed ($m\\ge2$).\n\nSo the splendid numbers are $3\\cdot169^2+2$, $3\\cdot85^2+2$, $3\\cdot19^2+2$, with sum $3(28561+7225+361)+6=108\\,447$, which leaves remainder $447$.\n\n**Answer: 447**"
+   }
+  ],
+  "topics": [
+   "number-theory",
+   "algebra"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "pumac-2023-number-theory-b-05",
+  "bank": "pumac",
+  "source": {
+   "contest": "PUMaC",
+   "paper": "2023 Number Theory B",
+   "year": 2023,
+   "number": 5,
+   "url": "https://jason-shi-f9dm.squarespace.com/s/Number_Theory_B_2023.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Call an arrangement of $n$ not necessarily distinct nonnegative integers in a circle *wholesome* when, for any subset of the integers such that no pair of them is adjacent in the circle, their average is an integer. Over all wholesome arrangements of $n$ integers where at least two of them are distinct, let $M(n)$ denote the smallest possible value for the maximum of the integers in the arrangement. What is the largest integer $n<2023$ such that $M(n+1)$ is strictly greater than $M(n)$?",
+  "image": null,
+  "choices": null,
+  "answer": "2018",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Compute $M(n)$",
+    "body": "Let $h=\\lfloor\\frac{n-1}2\\rfloor$ and $L=\\operatorname{lcm}(1,\\dots,h)$.\n\n*All entries are congruent mod $L$.* Take adjacent entries $x,x'$ and $k\\le h$. Choose an independent set $I$ of size $k$ containing $x$, avoiding $x'$, the vertex after $x'$ and the other neighbour of $x$ (the remaining $n-4$ vertices form an arc containing $k-1$ pairwise non-adjacent ones when $k\\le h$). Then $I'=I-\\{x\\}+\\{x'\\}$ is also independent, both sums are divisible by $k$, so $x\\equiv x'\\pmod k$. Hence all entries are congruent mod every $k\\le h$, hence mod $L$. Since they are not all equal and are nonnegative, the maximum is at least $L$.\n\n*Construction.* For odd $n=2h+1$ take all zeros except one entry equal to $L$: any independent set has size $k\\le h$ and sum $0$ or $L$, divisible by $k$. So $M(2h+1)=\\operatorname{lcm}(1,\\dots,h)$. For even $n=2m$ the lower bound is $\\operatorname{lcm}(1,\\dots,m-1)$ and alternating $0,L,0,L,\\dots$ ($L=\\operatorname{lcm}(1..m-1)$) works (independent sets of size $m$ are the two alternating classes with sums $0$ or $mL$, and smaller ones have sum a multiple of $L$ of size $<m$). So $M(2m)=M(2m-1)=\\operatorname{lcm}(1,\\dots,m-1)$.\n\n*Comparison.* $M(2m)=M(2m-1)$ always, and $M(2m+1)=\\operatorname{lcm}(1..m)>M(2m)=\\operatorname{lcm}(1..m-1)$ iff $m$ is a prime power. So $M(n+1)>M(n)$ iff $n=2m$ with $m$ a prime power. For $n<2023$, $m\\le1011$; $1011=3\\cdot337$ and $1010$ are not prime powers, and $1009$ is prime. So $m=1009$, $n=2018$.\n\n**Answer: 2018**"
+   }
+  ],
+  "topics": [
+   "number-theory",
+   "logic"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "pumac-2023-number-theory-b-06",
+  "bank": "pumac",
+  "source": {
+   "contest": "PUMaC",
+   "paper": "2023 Number Theory B",
+   "year": 2023,
+   "number": 6,
+   "url": "https://jason-shi-f9dm.squarespace.com/s/Number_Theory_B_2023.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "What is the smallest possible sum of six distinct positive integers for which the sum of any five of them is prime?",
+  "image": null,
+  "choices": null,
+  "answer": "74",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Reformulate with primes",
+    "body": "Let the numbers have sum $T$ and let $p_i=T-a_i$ be the five-sums; they are $6$ distinct primes with $\\sum p_i=5T$ and $p_i<T$. Conversely any six distinct primes $p_i<T$ with sum $5T$ give distinct positive integers $a_i=T-p_i$.\n\nFor a given $T$ the sum of six distinct primes below $T$ is at most the sum of the six largest primes below $T$. Checking $T\\le73$ (the six largest primes below $T$, e.g. for $T=73$: $71+67+61+59+53+47=358<365$, for $T=72$: also $358<360$, and similarly smaller), this maximum is always less than $5T$, so no solution exists with $T\\le73$.\n\nFor $T=74$ we can take the primes $47,53,59,67,71,73$ (sum $370=5\\cdot74$), giving the numbers $27,21,15,7,3,1$: indeed $74-27=47$, etc.\n\nSo the minimum is $74$.\n\n**Answer: 74**"
+   }
+  ],
+  "topics": [
+   "number-theory"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "pumac-2023-number-theory-b-07",
+  "bank": "pumac",
+  "source": {
+   "contest": "PUMaC",
+   "paper": "2023 Number Theory B",
+   "year": 2023,
+   "number": 7,
+   "url": "https://jason-shi-f9dm.squarespace.com/s/Number_Theory_B_2023.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "You play a game where you and an adversarial opponent take turns writing down positive integers on a chalkboard; the only condition is that, if $m$ and $n$ are written consecutively on the board, $\\gcd(m,n)$ must be squarefree. If your objective is to make sure as many integers as possible that are strictly less than $404$ end up on the board (and your opponent is trying to minimize this quantity), how many more such integers can you guarantee will eventually be written on the board if you get to move first as opposed to when your opponent gets to move first?",
+  "image": null,
+  "choices": null,
+  "answer": "94",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Squarefree numbers are free; count the extra ones",
+    "body": "Squarefree integers can always be written, so whoever moves first, you can guarantee all squarefree numbers below $404$ are written. The question is how many *non*-squarefree numbers you can guarantee.\n\nIf you move second, your opponent can write multiples of $2^2\\cdot3^2\\cdot5^2\\cdots401^2$ (huge numbers), after which every number you write must have squarefree gcd with that, i.e. be squarefree: you get $0$ extra.\n\nIf you move first: whenever you write a number $m$ with $p^2\\nmid m$, the opponent can answer with large multiples of $p^2$, and from then on you can never write a multiple of $p^2$ again. (Writing numbers $>404$ only wastes a turn.) So the best plan is to give up the squares one at a time in the best order: first write all multiples of $2^2\\cdot3^2=36$ below $404$, then everything divisible by $4$ whose odd part is squarefree, and last squarefree numbers. Counting:\n- multiples of $36$ below $404$: $\\lfloor403/36\\rfloor=11$;\n- multiples of $4$ below $404$ with squarefree odd part, by the power $2^a$ of $2$ dividing them ($a=2,\\dots,8$): $41,20,11,5,3,2,1$, i.e. $83$ numbers.\n\nTotal $11+83=94$, so moving first guarantees $94$ more such integers.\n\n**Answer: 94**"
+   }
+  ],
+  "topics": [
+   "games",
+   "number-theory"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "pumac-2023-number-theory-b-08",
+  "bank": "pumac",
+  "source": {
+   "contest": "PUMaC",
+   "paper": "2023 Number Theory B",
+   "year": 2023,
+   "number": 8,
+   "url": "https://jason-shi-f9dm.squarespace.com/s/Number_Theory_B_2023.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "How many positive integers $n\\le\\operatorname{lcm}(1,2,\\dots,100)$ have the property that $n$ gives different remainders when divided by each of $2,3,\\dots,100$?",
+  "image": null,
+  "choices": null,
+  "answer": "1025",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "CRT and forced remainders",
+    "body": "By the Chinese remainder theorem, choosing a remainder $r_k$ modulo each $k$ (compatibly) determines a unique $n\\le L=\\operatorname{lcm}(1,\\dots,100)$. The $99$ remainders are distinct values in $\\{0,\\dots,99\\}$, so exactly one value is unused.\n\n*If $n$ is odd.* Mod $2$ the remainder is $1$. If $0$ occurs as a remainder, it is modulo some $a$ ($a\\mid n$); $a$ must be prime (otherwise $n$ is also divisible by a proper divisor $>1$ of $a$ and $0$ repeats); $a=2$ is excluded since $n$ is odd; and if $2a\\le100$ then modulo $2a$ the remainder would be $0$ or $a$, both already used, so $a$ is a prime in $(50,100)$. There are $10$ such primes: $53,59,61,67,71,73,79,83,89,97$. Now by induction on $k$, $n\\equiv k-1\\pmod k$ for every $k$ not among these ten primes: for composite $k$ this follows from CRT on its factors, and for a prime $k=p$ not in the list the only unused remainders are $0$ (excluded) and $p-1$. For these ten primes $p_1<\\dots<p_{10}$ the available remainders are $0$ and $p_j-1$: assigning $p_1$ first, then $p_2$, and so on, each prime has exactly two choices (its own $p_i-1$, or the one leftover value from earlier), giving $2^{10}$ possibilities (the case with $0$ unused, $n=L-1$, is among them).\n\n*If $n$ is even.* The even remainders are forced and then $n\\equiv k-2\\pmod k$ for all $k$: exactly $1$ value of $n$.\n\nTotal: $2^{10}+1=1025$. (The same count formula $2^{\\pi(L')-\\pi(L'/2)}+1$ was checked by brute force for $\\operatorname{lcm}(1..L')$ with $L'=16,18$.)\n\n**Answer: 1025**"
+   }
+  ],
+  "topics": [
+   "number-theory",
+   "counting"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ }
+]

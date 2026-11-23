@@ -1,0 +1,348 @@
+[
+  {
+    "id": "bmt-2018-spring-combinatorics-01",
+    "bank": "bmt",
+    "source": {
+      "contest": "Berkeley Math Tournament",
+      "paper": "2018 Spring Combinatorics",
+      "year": 2018,
+      "number": 1,
+      "url": "https://berkeley.mt/archives/bmt-2018/COSP18.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Bob has $3$ different fountain pens and $11$ different ink colors. How many ways can he fill his fountain pens with ink if he can only put one ink in each pen?",
+    "image": null,
+    "choices": null,
+    "answer": "990",
+    "acceptedAnswers": [
+      "1331"
+    ],
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Choose an ink for each pen",
+        "body": "Following the official answer, the three pens receive three different ink colors: the first pen has $11$ choices of ink, the second $10$, the third $9$. Total: $11\\cdot10\\cdot9=990$.\n\n**Answer: 990**"
+      }
+    ],
+    "topics": [
+      "counting"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": "The wording does not say the three pens must get different inks; if inks may repeat the count is 11^3 = 1331 (also accepted). Official answer 990."
+  },
+  {
+    "id": "bmt-2018-spring-combinatorics-02",
+    "bank": "bmt",
+    "source": {
+      "contest": "Berkeley Math Tournament",
+      "paper": "2018 Spring Combinatorics",
+      "year": 2018,
+      "number": 2,
+      "url": "https://berkeley.mt/archives/bmt-2018/COSP18.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "At the Berkeley Math Tournament, teams are composed of $6$ students, each of whom pick two distinct subject tests out of $5$ choices. How many different distributions across subjects are possible for a team?",
+    "image": null,
+    "choices": null,
+    "answer": "1190",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Stars and bars with a cap",
+        "body": "A distribution is a tuple $(n_1,\\dots,n_5)$ of nonnegative integers with $n_1+\\dots+n_5=12$ (the number of students taking each subject). Each $n_i\\le6$, since a student takes a subject at most once; conversely, if every $n_i\\le6$ the distribution can be realized: list the $12$ test-takings subject by subject and pair position $j$ with position $j+6$; these always have different subjects.\n\nWithout the cap there are $\\binom{16}4=1820$ tuples. At most one $n_i$ can be $\\ge7$. For a fixed $i$ with $n_i\\ge7$, put $n_i'=n_i-7$: the sum becomes $5$ over $5$ variables, giving $\\binom94=126$ tuples. So the number of bad tuples is $5\\cdot126=630$, and the answer is $1820-630=1190$ (a brute-force enumeration agrees).\n\n**Answer: 1190**"
+      }
+    ],
+    "topics": [
+      "counting"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": "The official key gives 1694 (it subtracts only 126 instead of 5*126=630); the correct count is 1190, confirmed by brute-force enumeration."
+  },
+  {
+    "id": "bmt-2018-spring-combinatorics-03",
+    "bank": "bmt",
+    "source": {
+      "contest": "Berkeley Math Tournament",
+      "paper": "2018 Spring Combinatorics",
+      "year": 2018,
+      "number": 3,
+      "url": "https://berkeley.mt/archives/bmt-2018/COSP18.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Consider the $9\\times9$ grid of lattice points $\\{(x,y)\\mid0\\le x,y\\le8\\}$. How many rectangles with nonzero area and sides parallel to the $x,y$ axes are there such that each corner is one of the lattice points and the point $(4,4)$ is not contained within the interior of the rectangle? ($(4,4)$ is allowed to lie on the boundary of the rectangle.)",
+    "image": null,
+    "choices": null,
+    "answer": "1040",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Complementary counting",
+        "body": "A rectangle is determined by two distinct $x$-coordinates and two distinct $y$-coordinates: $\\binom92^2=36^2=1296$ rectangles.\n\n$(4,4)$ is in the interior iff $x_1<4<x_2$ and $y_1<4<y_2$: $4\\cdot4$ choices for the $x$-pair ($x_1\\in\\{0,..,3\\}$, $x_2\\in\\{5,..,8\\}$) and the same for $y$, so $16^2=256$ rectangles.\n\nAnswer: $1296-256=1040$.\n\n**Answer: 1040**"
+      }
+    ],
+    "topics": [
+      "counting"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "bmt-2018-spring-combinatorics-04",
+    "bank": "bmt",
+    "source": {
+      "contest": "Berkeley Math Tournament",
+      "paper": "2018 Spring Combinatorics",
+      "year": 2018,
+      "number": 4,
+      "url": "https://berkeley.mt/archives/bmt-2018/COSP18.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Alice starts with an empty string and randomly appends one of the digits $2,0,1$, or $8$ until the string ends with $2018$. What is the probability Alice appends less than $9$ digits before stopping?",
+    "image": null,
+    "choices": null,
+    "answer": "1279/65536",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "First occurrence of 2018",
+        "body": "We need the probability that the process stops after at most $8$ digits. The word $2018$ cannot overlap itself (no proper prefix equals a suffix), so a first occurrence ending at digit $n\\in\\{4,5,6,7\\}$ happens exactly when digits $n-3,\\dots,n$ are $2018$, with probability $\\frac1{256}$ each (an earlier occurrence would have to overlap this one).\n\nFor $n=8$, the last four digits are $2018$ with probability $\\frac1{256}$, except the case that $2018$ also occurred at digits $1$ to $4$ (the string $20182018$), which has probability $\\frac1{256^2}$. So the probability is $\\frac1{256}-\\frac1{65536}$.\n\nTotal: $\\frac4{256}+\\frac1{256}-\\frac1{65536}=\\frac{5\\cdot256-1}{65536}=\\frac{1279}{65536}$.\n\n**Answer: $\\frac{1279}{65536}$**"
+      }
+    ],
+    "topics": [
+      "probability",
+      "counting"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null,
+    "answerDisplay": "$\\frac{1279}{65536}$"
+  },
+  {
+    "id": "bmt-2018-spring-combinatorics-05",
+    "bank": "bmt",
+    "source": {
+      "contest": "Berkeley Math Tournament",
+      "paper": "2018 Spring Combinatorics",
+      "year": 2018,
+      "number": 5,
+      "url": "https://berkeley.mt/archives/bmt-2018/COSP18.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Alice and Bob play a game where they start from a complete graph with $n$ vertices and take turns removing a single edge from the graph, with Alice taking the first turn. The first player to disconnect the graph loses. Compute the sum of all $n$ between $2$ and $100$ inclusive such that Alice has a winning strategy. (A complete graph is one where there is an edge between every pair of vertices.)",
+    "image": null,
+    "choices": null,
+    "answer": "2575",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Parity of the number of safe moves",
+        "body": "A connected graph that is not a tree contains a cycle, so some edge can be removed without disconnecting it; a tree (exactly $n-1$ edges) cannot lose any edge. So both players keep making safe moves until the graph is a spanning tree; the game ends with exactly $m=\\binom n2-(n-1)$ safe moves, after which the player to move must disconnect the graph and loses.\n\nAlice moves first, so after $m$ safe moves it is Alice's turn iff $m$ is even. Alice wins iff $m$ is odd, i.e. iff $\\binom n2-n+1$ is odd, i.e. $\\binom n2-n$ is even.\n\n$\\binom n2=\\frac{n(n-1)}2$ is even iff $n\\equiv0,1\\pmod 4$, and then $\\binom n2-n$ is even iff $n$ is even, giving $n\\equiv0\\pmod4$; $\\binom n2$ is odd iff $n\\equiv2,3\\pmod4$, and $\\binom n2-n$ is even iff $n$ is odd, giving $n\\equiv3\\pmod4$. So Alice wins iff $n\\equiv0,3\\pmod4$.\n\nSum over $2\\le n\\le100$: $n\\equiv3$: $3+7+\\dots+99=25\\cdot51=1275$; $n\\equiv0$: $4+8+\\dots+100=25\\cdot52=1300$. Total $2575$.\n\n**Answer: 2575**"
+      }
+    ],
+    "topics": [
+      "games",
+      "graph-theory",
+      "counting"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "bmt-2018-spring-combinatorics-06",
+    "bank": "bmt",
+    "source": {
+      "contest": "Berkeley Math Tournament",
+      "paper": "2018 Spring Combinatorics",
+      "year": 2018,
+      "number": 6,
+      "url": "https://berkeley.mt/archives/bmt-2018/COSP18.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Compute\n$$\\sum_{i=0}^{\\infty}\\sum_{j=0}^{\\infty}\\binom{i+j}{i}3^{-(i+j)}.$$",
+    "image": null,
+    "choices": null,
+    "answer": "3",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Group by i + j",
+        "body": "Let $m=i+j$. For fixed $m$, $\\sum_{i=0}^m\\binom mi=2^m$. So the sum is $\\sum_{m\\ge0}2^m3^{-m}=\\frac1{1-2/3}=3$.\n\n**Answer: 3**"
+      }
+    ],
+    "topics": [
+      "counting",
+      "sequences-series"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "bmt-2018-spring-combinatorics-07",
+    "bank": "bmt",
+    "source": {
+      "contest": "Berkeley Math Tournament",
+      "paper": "2018 Spring Combinatorics",
+      "year": 2018,
+      "number": 7,
+      "url": "https://berkeley.mt/archives/bmt-2018/COSP18.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Let $S$ be the set of line segments between any two vertices of a regular $21$-gon. If we select two distinct line segments from $S$ at random, what is the probability they intersect? Note that line segments are considered to intersect if they share a common vertex.",
+    "image": null,
+    "choices": null,
+    "answer": "5/11",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Count intersecting pairs",
+        "body": "There are $\\binom{21}2=210$ segments, hence $\\binom{210}2=21945$ pairs.\n\nPairs sharing a vertex: choose the common vertex ($21$ ways) and two of the other $20$ vertices: $21\\cdot\\binom{20}2=3990$.\n\nPairs with four distinct endpoints that cross: every $4$ vertices on a convex polygon determine exactly one crossing pair of segments (the two diagonals of the quadrilateral): $\\binom{21}4=5985$.\n\nIntersecting pairs: $3990+5985=9975$. Probability: $\\frac{9975}{21945}=\\frac5{11}$.\n\n**Answer: $\\frac5{11}$**"
+      }
+    ],
+    "topics": [
+      "probability",
+      "counting",
+      "geometry"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null,
+    "answerDisplay": "$\\frac{5}{11}$"
+  },
+  {
+    "id": "bmt-2018-spring-combinatorics-08",
+    "bank": "bmt",
+    "source": {
+      "contest": "Berkeley Math Tournament",
+      "paper": "2018 Spring Combinatorics",
+      "year": 2018,
+      "number": 8,
+      "url": "https://berkeley.mt/archives/bmt-2018/COSP18.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Moor and nine friends are seated around a circular table. Moor starts out holding a bottle, and whoever holds the bottle passes it to the person on his left or right with equal probability until everyone has held the bottle. Compute the expected distance between Moor and the last person to receive the bottle, where distance is the fewest number of times the bottle needs to be passed in order to go back to Moor.",
+    "image": null,
+    "choices": null,
+    "answer": "25/9",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Every other person is equally likely to be last",
+        "body": "Take a person $X$ other than Moor, with neighbors $L$ and $R$. Before the bottle reaches $X$ it must reach $L$ or $R$ (it comes from Moor's side along the circle), say it reaches $L$ first. Then $X$ is last iff the bottle goes from $L$ all the way around to $R$ (which is $8$ steps from $L$ the long way) before stepping onto $X$ (which is $1$ step from $L$ the other way). This is a gambler's ruin on a line with the two targets $1$ step and $8$ steps away on opposite sides, so the probability is $\\frac{1}{1+8}=\\frac19$. The same holds if $R$ is reached first. So every one of the $9$ friends is last with probability $\\frac19$, regardless of where he sits.\n\nThe distances around a table of $10$ people are $1,2,3,4,5,4,3,2,1$, so the expected distance is\n$$\\frac{1+2+3+4+5+4+3+2+1}9=\\frac{25}9.$$\n\n**Answer: $\\frac{25}9$**"
+      }
+    ],
+    "topics": [
+      "probability",
+      "counting"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null,
+    "answerDisplay": "$\\frac{25}{9}$"
+  },
+  {
+    "id": "bmt-2018-spring-combinatorics-09",
+    "bank": "bmt",
+    "source": {
+      "contest": "Berkeley Math Tournament",
+      "paper": "2018 Spring Combinatorics",
+      "year": 2018,
+      "number": 9,
+      "url": "https://berkeley.mt/archives/bmt-2018/COSP18.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Let $S$ be the set of integers from $1$ to $13$ inclusive. A permutation of $S$ is a function $f:S\\to S$ such that $f(x)\\ne f(y)$ if $x\\ne y$. For how many distinct permutations $f$ does there exist an $n$ such that $f^n(i)=13-i+1$ for all $i$?",
+    "image": null,
+    "choices": null,
+    "answer": "7065",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Cycle structure",
+        "body": "Let $r(i)=14-i$. We need $f^n=r$ for some $n\\ge1$. Since $r$ fixes only $7$ and swaps six pairs $\\{i,14-i\\}$:\n\n- On a cycle of $f$ of length $L$, $f^n$ is a rotation, so for it to be $r$ it must fix $7$'s cycle pointwise (so $7$ is a fixed point of $f$) and, on every other cycle, be the half-turn. Hence each other cycle has length $2k$ and consists of $k$ of the six pairs, with each element opposite to its partner. Then $f^n=r$ on that cycle iff $n\\equiv k\\pmod{2k}$, i.e. $n=k\\cdot(\\text{odd})$.\n- For all cycles to work simultaneously with one $n$, the numbers $k$ of pairs in the cycles must all have the same power of $2$ (so $n/k$ can be odd for all).\n\nThe number of cycles of length $2k$ built from a given set of $k$ labeled pairs is $(k-1)!\\,2^{k-1}$. The partitions of $6$ with all parts having the same $2$-adic valuation:\n\n| partition | ways to group the pairs | cycles | count |\n|---|---|---|---|\n| $1^6$ | $1$ | $1$ | $1$ |\n| $3,1,1,1$ | $\\binom63=20$ | $2!\\cdot2^2=8$ | $160$ |\n| $5,1$ | $6$ | $4!\\cdot2^4=384$ | $2304$ |\n| $3,3$ | $\\binom63/2=10$ | $8\\cdot8$ | $640$ |\n| $2,2,2$ | $15$ | $2^3$ | $120$ |\n| $6$ | $1$ | $5!\\cdot2^5=3840$ | $3840$ |\n\nTotal: $1+160+2304+640+120+3840=7065$.\n\n(The same method gives $3$ and $9$ for $5$ and $7$ elements, matching brute-force enumeration.)\n\n**Answer: 7065**"
+      }
+    ],
+    "topics": [
+      "counting",
+      "number-theory"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "bmt-2018-spring-combinatorics-10",
+    "bank": "bmt",
+    "source": {
+      "contest": "Berkeley Math Tournament",
+      "paper": "2018 Spring Combinatorics",
+      "year": 2018,
+      "number": 10,
+      "url": "https://berkeley.mt/archives/bmt-2018/COSP18.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Consider a $2\\times n$ grid where each cell is either black or white, which we attempt to tile with $2\\times1$ black or white tiles such that tiles have to match the colors of the cells they cover. We first randomly select a random positive integer $N$ where $N$ takes the value $n$ with probability $2^{-n}$. We then take a $2\\times N$ grid and randomly color each cell black or white independently with equal probability. Compute the probability the resulting grid has a valid tiling.",
+    "image": null,
+    "choices": null,
+    "answer": "9/23",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Recurrence for p_n",
+        "body": "Let $p_n$ be the probability that a random $2\\times n$ coloring is tileable; $p_0=1$, $p_1=\\frac12$.\n\nLook at the first column. If its two cells have the same color (probability $\\frac12$), a vertical tile can cover them: if a tiling uses two horizontal tiles there, the second column is also monochrome of that color, and the four cells can be re-tiled by two vertical tiles. So the grid is tileable iff the remaining $2\\times(n-1)$ grid is: probability $p_{n-1}$.\n\nIf the two cells differ in color (probability $\\frac12$), both must be covered by horizontal tiles, which forces the two cells of column $2$ to have the same colors as those of column $1$ (probability $\\frac14$), and the rest must be tileable: probability $\\frac18p_{n-2}$ in total.\n\nSo $p_n=\\frac12p_{n-1}+\\frac18p_{n-2}$ for $n\\ge2$.\n\nLet $F=\\sum_{n\\ge0}p_n2^{-n}$. Then\n$$F=1+\\tfrac14+\\sum_{n\\ge2}\\left(\\tfrac12p_{n-1}+\\tfrac18p_{n-2}\\right)2^{-n}=\\tfrac54+\\tfrac14(F-1)+\\tfrac1{32}F,$$\nso $F\\left(1-\\frac14-\\frac1{32}\\right)=1$, $F=\\frac{32}{23}$. The desired probability is $\\sum_{n\\ge1}p_n2^{-n}=F-1=\\frac9{23}$.\n\n**Answer: $\\frac9{23}$**"
+      }
+    ],
+    "topics": [
+      "probability",
+      "counting",
+      "sequences-series"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null,
+    "answerDisplay": "$\\frac{9}{23}$"
+  }
+]

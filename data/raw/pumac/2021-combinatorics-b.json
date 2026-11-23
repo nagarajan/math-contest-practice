@@ -1,0 +1,288 @@
+[
+ {
+  "id": "pumac-2021-combinatorics-b-01",
+  "bank": "pumac",
+  "source": {
+   "contest": "PUMaC",
+   "paper": "2021 Combinatorics B",
+   "year": 2021,
+   "number": 1,
+   "url": "https://jason-shi-f9dm.squarespace.com/s/PUMaC_2021_Combo_B.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "A nonempty word is called *pronounceable* if it alternates in vowels ($A,E,I,O,U$) and consonants (all other letters) and it has at least one vowel. How many pronounceable words can be formed using the letters $P,U,M,A,C$ at most once each? Words of length shorter than $5$ are allowed.",
+  "image": null,
+  "choices": null,
+  "answer": "68",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Count by numbers of vowels and consonants",
+    "body": "Vowels available: $U,A$ (2). Consonants available: $P,M,C$ (3). An alternating word with $v$ vowels and $c$ consonants needs $|v-c|\\le1$, $v\\ge1$. If $v=c$ there are 2 patterns (start with a vowel or a consonant), otherwise 1 pattern. Choose which letters, then order the vowels and consonants:\n\n| $(v,c)$ | choices | arrangements | words |\n|---|---|---|---|\n| $(1,0)$ | $2$ | $1$ | $2$ |\n| $(1,1)$ | $2\\cdot3$ | $2$ | $12$ |\n| $(1,2)$ | $2\\cdot3$ | $2$ (order consonants) | $12$ |\n| $(2,1)$ | $3$ | $2$ (order vowels) | $6$ |\n| $(2,2)$ | $3$ | $2\\cdot2\\cdot2$ | $24$ |\n| $(2,3)$ | $1$ | $2\\cdot6$ | $12$ |\n\nTotal $2+12+12+6+24+12=68$.\n\n**Answer: 68**"
+   },
+   {
+    "title": "Brute-force check",
+    "body": "Listing all arrangements of subsets of $\\{P,U,M,A,C\\}$ and keeping those that alternate between vowels and consonants with at least one vowel gives $68$ words, as above.\n\n**Answer: 68**"
+   }
+  ],
+  "topics": [
+   "counting"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "pumac-2021-combinatorics-b-02",
+  "bank": "pumac",
+  "source": {
+   "contest": "PUMaC",
+   "paper": "2021 Combinatorics B",
+   "year": 2021,
+   "number": 2,
+   "url": "https://jason-shi-f9dm.squarespace.com/s/PUMaC_2021_Combo_B.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Neel and Roshan are going to the Newark Liberty International Airport to catch separate flights. Neel plans to arrive at some random time between $5{:}30$ am and $6{:}30$ am, while Roshan plans to arrive at some random time between $5{:}40$ am and $6{:}40$ am. The two want to meet, however briefly, before going through airport security. As such, they agree that each will wait for $n$ minutes once he arrives at the airport before going through security. What is the smallest $n$ they can select such that they meet with at least $50\\%$ probability? The answer will be of the form $a+b\\sqrt c$ for integers $a$, $b$, and $c$, where $c$ has no perfect square factor other than $1$. Report $a+b+c$.",
+  "image": null,
+  "choices": null,
+  "answer": "67",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Geometric probability",
+    "body": "Measure time in minutes: Neel arrives at $x\\in[0,60]$, Roshan at $y\\in[10,70]$, uniformly in a $60\\times60$ square (area $3600$). They meet iff $|x-y|\\le n$.\n\nThey fail to meet when $y>x+n$ or $x>y+n$. For $n\\ge10$ these are two right isosceles triangles with legs $70-n$ and $50-n$, total area $\\frac{(70-n)^2+(50-n)^2}{2}$. For at least $50\\%$ chance of meeting, the failure area must be at most $1800$:\n$$(70-n)^2+(50-n)^2=3600\\iff n^2-120n+1900=0\\iff n=60\\pm10\\sqrt{17}.$$\nThe root $60-10\\sqrt{17}\\approx18.77$ is the relevant one ($\\ge10$; the other is larger than $60$). So $n=60-10\\sqrt{17}$ and $a+b+c=60-10+17=67$.\n\n**Answer: 67**"
+   }
+  ],
+  "topics": [
+   "probability",
+   "geometry"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "pumac-2021-combinatorics-b-03",
+  "bank": "pumac",
+  "source": {
+   "contest": "PUMaC",
+   "paper": "2021 Combinatorics B",
+   "year": 2021,
+   "number": 3,
+   "url": "https://jason-shi-f9dm.squarespace.com/s/PUMaC_2021_Combo_B.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Select two distinct diagonals at random from a regular octagon. What is the probability that the two diagonals intersect at a point strictly within the octagon? Express your answer as $a+b$, where the probability is $\\frac ab$ and $a$ and $b$ are relatively prime positive integers.",
+  "image": null,
+  "choices": null,
+  "answer": "26",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Count crossing pairs via 4 vertices",
+    "body": "Two diagonals cross strictly inside exactly when their four endpoints are distinct and alternate around the octagon. Each set of $4$ vertices gives exactly one such crossing pair (the two diagonals of the convex quadrilateral they form). So there are $\\binom84=70$ crossing pairs.\n\nThe octagon has $\\frac{8\\cdot5}{2}=20$ diagonals, hence $\\binom{20}2=190$ pairs. The probability is $\\frac{70}{190}=\\frac7{19}$, so $a+b=26$.\n\n**Answer: 26**"
+   },
+   {
+    "title": "Complementary counting",
+    "body": "Pairs that do not cross inside: sharing an endpoint $8\\binom52=80$; non-crossing disjoint pairs $16$; pairs meeting outside the octagon $24$. Total $120$, so $1-\\frac{120}{190}=\\frac7{19}$.\n\n**Answer: 26**"
+   }
+  ],
+  "topics": [
+   "counting",
+   "probability"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "pumac-2021-combinatorics-b-04",
+  "bank": "pumac",
+  "source": {
+   "contest": "PUMaC",
+   "paper": "2021 Combinatorics B",
+   "year": 2021,
+   "number": 4,
+   "url": "https://jason-shi-f9dm.squarespace.com/s/PUMaC_2021_Combo_B.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Eighteen people are standing in a (socially-distanced) line to enter a grocery store. Five people are wearing a black mask, $6$ are wearing a gray mask, and $7$ are wearing a white mask. Suppose that these $18$ people got on line in a random order. The expected number of pairs of adjacent people wearing different-colored masks can be given by $\\frac ab$, where $\\gcd(a,b)=1$. Compute $a+b$.",
+  "image": null,
+  "choices": null,
+  "answer": "116",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Linearity of expectation",
+    "body": "There are $17$ adjacent pairs. For one pair, the probability that both masks have the same color is $\\frac{5\\cdot4+6\\cdot5+7\\cdot6}{18\\cdot17}=\\frac{92}{306}=\\frac{46}{153}$, so the probability of different colors is $\\frac{107}{153}$.\n\nThe expected number is $17\\cdot\\frac{107}{153}=\\frac{107}{9}$, giving $a+b=116$.\n\n**Answer: 116**"
+   }
+  ],
+  "topics": [
+   "probability",
+   "counting"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "pumac-2021-combinatorics-b-05",
+  "bank": "pumac",
+  "source": {
+   "contest": "PUMaC",
+   "paper": "2021 Combinatorics B",
+   "year": 2021,
+   "number": 5,
+   "url": "https://jason-shi-f9dm.squarespace.com/s/PUMaC_2021_Combo_B.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Nelson is having his friend drop his unique bouncy ball from a $12$ foot building, and Nelson will only catch the ball at the peak of its trajectory between bounces. On any given bounce, there is an $80\\%$ chance that the next peak occurs at $\\frac13$ the height of the previous peak and a $20\\%$ chance that the next peak occurs at $3$ times the height of the previous peak (where the first peak is at $12$ feet). If Nelson can only reach $4$ feet into the air and will catch the ball as soon as possible, the probability that Nelson catches the ball after exactly $13$ bounces is $2^a\\times3^b\\times5^c\\times7^d\\times11^e$ for integers $a,b,c,d$, and $e$. Find $|a|+|b|+|c|+|d|+|e|$.",
+  "image": null,
+  "choices": null,
+  "answer": "31",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Ballot-type path count",
+    "body": "Peaks are $12\\cdot3^k$ feet. Nelson catches the ball as soon as $12\\cdot3^k\\le4$, i.e. $k\\le-1$. Each bounce changes $k$ by $-1$ (probability $\\frac45$) or $+1$ (probability $\\frac15$), starting at $k=0$. We need the walk to first hit $-1$ at bounce $13$: this needs $7$ down-steps and $6$ up-steps, never reaching $-1$ before the end.\n\nThe number of such paths (first passage to $-1$ at step $2m+1$) is the Catalan number $C_m$, here $C_6=132$. So the probability is\n$$132\\left(\\frac45\\right)^7\\left(\\frac15\\right)^6=\\frac{2^2\\cdot3\\cdot11\\cdot2^{14}}{5^{13}}=2^{16}\\cdot3\\cdot5^{-13}\\cdot11.$$\nSo $(a,b,c,d,e)=(16,1,-13,0,1)$ and the sum of absolute values is $31$.\n\n**Answer: 31**"
+   },
+   {
+    "title": "Dynamic programming check",
+    "body": "Tracking the exponent $k$ step by step with exact fractions and recording the first time $k=-1$ gives probability $\\frac{2162688}{1220703125}=\\frac{2^{16}\\cdot3\\cdot11}{5^{13}}$ at bounce $13$, in agreement.\n\n**Answer: 31**"
+   }
+  ],
+  "topics": [
+   "probability",
+   "counting"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "pumac-2021-combinatorics-b-06",
+  "bank": "pumac",
+  "source": {
+   "contest": "PUMaC",
+   "paper": "2021 Combinatorics B",
+   "year": 2021,
+   "number": 6,
+   "url": "https://jason-shi-f9dm.squarespace.com/s/PUMaC_2021_Combo_B.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "There are $n$ lilypads in a row labeled $1,2,\\dots,n$ from left to right. Fareniss the Frog picks a lilypad at random to start on, and every second she jumps to an adjacent lilypad; if there are two such lilypads, she is twice as likely to jump to the right as to the left. After some finite number of seconds, there exist two lilypads $A$ and $B$ such that Fareniss is more than $1000$ times as likely to be on $A$ as she is to be on $B$. What is the minimal number of lilypads $n$ such that this situation must occur?",
+  "image": null,
+  "choices": null,
+  "answer": "12",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Stationary distribution",
+    "body": "This is a Markov chain: from an interior pad, right with probability $\\frac23$ and left with $\\frac13$; from the end pads there is only one neighbour. Using detailed balance $\\pi_i P(i\\to i+1)=\\pi_{i+1}P(i+1\\to i)$:\n$$\\pi_1=1,\\ \\pi_2=3,\\ \\pi_3=6,\\ \\pi_4=12,\\dots,\\ \\pi_{n-1}=3\\cdot2^{n-3},\\ \\pi_n=\\tfrac23\\pi_{n-1}=2^{n-2}.$$\nThe largest is $\\pi_{n-1}=3\\cdot2^{n-3}$ and the smallest is $\\pi_1=1$, so the maximum ratio between two pads is $3\\cdot2^{n-3}$. This exceeds $1000$ iff $2^{n-3}>333$, i.e. $n-3\\ge9$, $n\\ge12$.\n\nFor $n\\le11$ the ratio never exceeds $1000$ (iterating the chain numerically, the largest ratio for $n=11$ is about $921.6$), while for $n=12$ it reaches $1536$.\n\n**Answer: 12**"
+   }
+  ],
+  "topics": [
+   "probability",
+   "sequences-series"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "pumac-2021-combinatorics-b-07",
+  "bank": "pumac",
+  "source": {
+   "contest": "PUMaC",
+   "paper": "2021 Combinatorics B",
+   "year": 2021,
+   "number": 7,
+   "url": "https://jason-shi-f9dm.squarespace.com/s/PUMaC_2021_Combo_B.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "A Princeton slot machine has $100$ pictures, each equally likely to occur. One is a picture of a tiger. Alice and Bob independently use the slot machine, and each repeatedly makes independent plays. Alice keeps playing until she sees a tiger, at which point she stops. Similarly, Bob keeps playing until he sees a tiger. Given that Bob plays twice as much as Alice, let the expected number of plays for Alice be $\\frac ab$ with $a,b$ relatively prime positive integers. Find the remainder when $a+b$ is divided by $1000$.",
+  "image": null,
+  "choices": null,
+  "answer": "701",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Conditional expectation",
+    "body": "Let $M=100$, $q=\\frac{M-1}{M}$. Then $P(N_A=k)=q^{k-1}/M$ and $P(N_B=2k)=q^{2k-1}/M$, so\n$$P(N_A=k,\\ N_B=2k)=\\frac{q^{3k}}{(M-1)^2}.$$\nConditioned on $N_B=2N_A$, the probability of $N_A=k$ is proportional to $r^k$ with $r=q^3$, i.e. $(1-r)r^{k-1}$ (a geometric distribution with success probability $1-r$). Its mean is\n$$E=\\frac1{1-r}=\\frac{M^3}{M^3-(M-1)^3}=\\frac{1000000}{29701}.$$\nThis fraction is in lowest terms ($29701=100^3-99^3$ is coprime to $10^6$), so $a+b=1029701\\equiv701\\pmod{1000}$.\n\n**Answer: 701**"
+   }
+  ],
+  "topics": [
+   "probability"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "pumac-2021-combinatorics-b-08",
+  "bank": "pumac",
+  "source": {
+   "contest": "PUMaC",
+   "paper": "2021 Combinatorics B",
+   "year": 2021,
+   "number": 8,
+   "url": "https://jason-shi-f9dm.squarespace.com/s/PUMaC_2021_Combo_B.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Alice, Bob, and Carol are playing a game. Each turn, one of them says one of the $3$ players' names, chosen from $\\{\\text{Alice, Bob, Carol}\\}$ uniformly at random. Alice goes first, Bob goes second, Carol goes third, and they repeat in that order. Let $E$ be the expected number of names that have been said when, for the first time, all $3$ names have been said twice. If $E=\\frac mn$ for relatively prime positive integers $m$ and $n$, find $m+n$. (Include the last name to be said twice in your count.)",
+  "image": null,
+  "choices": null,
+  "answer": "383",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "States by how often each name was said",
+    "body": "Who speaks does not matter; each name is chosen uniformly and independently each turn. The state is the multiset of counts of each name capped at $2$: $m$ names said once, $n$ names said at least twice. Let $E_{m,n}$ be the expected additional names needed. Then\n$$E_{m,n}=1+\\frac{3-m-n}3E_{m+1,n}+\\frac m3E_{m-1,n+1}+\\frac n3E_{m,n},\\qquad E_{0,3}=0,$$\nand we want $E_{0,0}$. Solving this small system (9 states) gives $E=\\frac{347}{36}$, so $m+n=383$.\n\n**Answer: 383**"
+   },
+   {
+    "title": "Exact computation check",
+    "body": "Solving the same Markov chain exactly with fractions (state = tuple of counts capped at $2$) gives $E=\\frac{347}{36}\\approx9.64$, consistent.\n\n**Answer: 383**"
+   }
+  ],
+  "topics": [
+   "probability",
+   "counting"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ }
+]

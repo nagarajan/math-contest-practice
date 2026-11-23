@@ -1,0 +1,276 @@
+[
+ {
+  "id": "pumac-2014-combinatorics-b-01",
+  "bank": "pumac",
+  "source": {
+   "contest": "PUMaC",
+   "paper": "2014 Combinatorics B",
+   "year": 2014,
+   "number": 1,
+   "url": "https://jason-shi-f9dm.squarespace.com/s/PUMaC2014_CombinatoricsB.pdf"
+  },
+  "grade": "9-12",
+  "points": 3,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "A girl and a guy are going to arrive at a train station. If they arrive within $10$ minutes of each other, they will instantly fall in love and live happily ever after. But after $10$ minutes, whichever one arrives first will fall asleep and they will be forever alone. The girl will arrive between 8 AM and 9 AM with equal probability. The guy will arrive between 7 AM and 8:30 AM, also with equal probability. Let $\\frac pq$ for $p,q$ coprime be the probability that they fall in love. Find $p+q$.",
+  "image": null,
+  "choices": null,
+  "answer": "10",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Area in the time rectangle",
+    "body": "Measure time in minutes after 8:00. The girl arrives at $g\\in[0,60]$, the guy at $u\\in[-60,30]$, uniformly and independently, so the sample space is a $60\\times90$ rectangle of area $5400$. They fall in love when $|g-u|\\le10$. For each $u$ the favourable length of $g$ is:\n\n- $-10\\le u\\le0$: $g\\in[0,u+10]$, length $u+10$; total area $\\int_{-10}^0(u+10)\\,du=50$;\n- $0\\le u\\le10$: $g\\in[0,u+10]$, length $u+10$; area $\\int_0^{10}(u+10)\\,du=150$;\n- $10\\le u\\le30$: $g\\in[u-10,u+10]\\subset[0,60]$, length $20$; area $400$.\n\n(For $u<-10$ they never meet.) Favourable area $=50+150+400=600$, so the probability is $\\frac{600}{5400}=\\frac19$ and $p+q=10$.\n\n**Answer: 10**"
+   },
+   {
+    "title": "By the guy's arrival time",
+    "body": "Average the conditional probabilities over the guy's arrival (90 minutes). Before 7:50 the girl (who arrives at 8:00 or later) can never be within $10$ minutes. From 7:50 to 8:00 the conditional probability rises from $0$ to $\\frac{10}{60}$, average $\\frac1{12}$ (10 minutes). From 8:00 to 8:10 it rises from $\\frac{10}{60}$ to $\\frac{20}{60}$, average $\\frac14$ (10 minutes). From 8:10 to 8:30 it is $\\frac{20}{60}=\\frac13$ (20 minutes). Total: $\\frac{1}{90}\\left(10\\cdot\\frac1{12}+10\\cdot\\frac14+20\\cdot\\frac13\\right)=\\frac1{90}\\cdot10=\\frac19$.\n\n**Answer: 10**"
+   }
+  ],
+  "topics": [
+   "probability"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "pumac-2014-combinatorics-b-02",
+  "bank": "pumac",
+  "source": {
+   "contest": "PUMaC",
+   "paper": "2014 Combinatorics B",
+   "year": 2014,
+   "number": 2,
+   "url": "https://jason-shi-f9dm.squarespace.com/s/PUMaC2014_CombinatoricsB.pdf"
+  },
+  "grade": "9-12",
+  "points": 3,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "A $100\\times100$ grid is given as shown: the cell in row $i$ and column $j$ contains the number $100(i-1)+j$ (the first row is $1,2,\\dots,100$ and the last cell contains $10000$). We choose a certain number of cells such that exactly two cells in each row and each column are selected. Find the sum of the numbers in these cells.",
+  "image": "qimages/pumac/2014-combinatorics-b/q02.webp",
+  "choices": null,
+  "answer": "1000100",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Split the entry into row part and column part",
+    "body": "The entry in row $i$, column $j$ is $100(i-1)+j$. Summing over the chosen cells, the row part and column part can be handled separately.\n\n- Each row contains exactly two chosen cells, so the row parts add up to $2\\sum_{i=1}^{100}100(i-1)=200\\cdot\\frac{99\\cdot100}{2}=990000$.\n- Each column contains exactly two chosen cells, so the column parts add up to $2\\sum_{j=1}^{100}j=2\\cdot5050=10100$.\n\nTotal: $990000+10100=1000100$, regardless of which cells are chosen.\n\n**Answer: 1000100**"
+   }
+  ],
+  "topics": [
+   "arithmetic",
+   "patterns"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "pumac-2014-combinatorics-b-03",
+  "bank": "pumac",
+  "source": {
+   "contest": "PUMaC",
+   "paper": "2014 Combinatorics B",
+   "year": 2014,
+   "number": 3,
+   "url": "https://jason-shi-f9dm.squarespace.com/s/PUMaC2014_CombinatoricsB.pdf"
+  },
+  "grade": "9-12",
+  "points": 4,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "What is the largest $n$ such that a square cannot be partitioned into $n$ smaller, non-overlapping squares?",
+  "image": null,
+  "choices": null,
+  "answer": "5",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Constructions for n at least 6, and impossibility of 5",
+    "body": "**Every $n\\ge6$ is possible.** Splitting one square into four equal squares increases the number of squares by $3$, so it suffices to do $n=6,7,8$:\n\n- $n=6$: a $3\\times3$ square is a $2\\times2$ square plus five unit squares.\n- $n=7$: cut the square into $4$ equal squares and cut one of them into $4$ ($4+3=7$).\n- $n=8$: a $4\\times4$ square is a $3\\times3$ square plus an L-shaped border of seven unit squares.\n\n**$n=5$ is impossible.** Let the big square be $ABCD$ with side $1$. No square of the partition covers two corners (it would be the whole square), so there are four different corner squares of sides $a$ (at $A$), $b$ (at $B$), $c$ (at $C$), $d$ (at $D$), and the fifth square $E$ is not at a corner. A square that touches two opposite sides has side $1$, and one touching two adjacent sides contains their common corner, so $E$ touches at most one side of $ABCD$.\n\n- If $E$ touches no side, each side is covered by two corner squares: $a+b=b+c=c+d=d+a=1$, so $a=c$, $b=d$, $a+b=1$. But then if $a\\ne b$ the two larger corner squares overlap (e.g. $a>b$: the squares at $A$ and $C$ overlap), and if $a=b=\\frac12$ the four squares fill everything and there is no room for $E$.\n- If $E$ touches exactly one side, say $AB$, the other three sides give $b+c=c+d=d+a=1$, hence $a=c$, $b=d$, $a+b=1$. On $AB$ we need $a+e+b=1$, so $e=0$, impossible.\n\nSo $5$ squares cannot be done, while every $n\\ge6$ can; the largest impossible $n$ is $5$.\n\n**Answer: 5**"
+   }
+  ],
+  "topics": [
+   "geometry",
+   "logic"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "pumac-2014-combinatorics-b-04",
+  "bank": "pumac",
+  "source": {
+   "contest": "PUMaC",
+   "paper": "2014 Combinatorics B",
+   "year": 2014,
+   "number": 4,
+   "url": "https://jason-shi-f9dm.squarespace.com/s/PUMaC2014_CombinatoricsB.pdf"
+  },
+  "grade": "9-12",
+  "points": 4,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Let there be $320$ points arranged on a circle, labelled $1,2,3,\\dots,8,1,2,3,\\dots,8,\\dots$ in order. Line segments may only be drawn to connect points labelled with the same number. What is the largest number of non-intersecting line segments one can draw? (Two segments sharing the same endpoint are considered to be intersecting.)",
+  "image": null,
+  "choices": null,
+  "answer": "39",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Upper bound by removing shortest chords, then a construction",
+    "body": "Number the points $p_1,\\dots,p_{320}$ around the circle; $p_i$ has label $((i-1)\\bmod8)+1$, so a chord $p_ap_b$ joins points with $a\\equiv b\\pmod 8$.\n\n**At most $39$.** Take a shortest chord $p_ap_b$ ($a<b$), measured by the number of points on its shorter side. No other chord can have an endpoint strictly between $p_a$ and $p_b$: such a chord would have to stay inside that side to avoid crossing, and it would then be shorter. So all points $p_{a+1},\\dots,p_b$ (which number $b-a$, a multiple of $8$, hence at least $8$) are used by no other chord. Delete them. The remaining points ($p_1,\\dots,p_a,p_{b+1},\\dots,p_{320}$) still carry the labels $1,\\dots,8$ repeating cyclically in order, because a multiple of $8$ points was removed, and all other chords are non-crossing chords among them. Repeat with a shortest remaining chord. If there are $t$ chords, at least $8t$ points get deleted, but at least one point survives, so $8t\\le319$ and $t\\le39$.\n\n**$39$ is possible.** Join $p_{4k}$ to $p_{320-4k}$ for $k=1,\\dots,39$. Since $320-4k\\equiv-4k\\equiv4k\\pmod 8$, the labels agree. The endpoints $4,8,\\dots,156$ and $320-4k$ ($=316,\\dots,164$) are all different, and the chords are nested \"parallel\" chords, so none cross.\n\n**Answer: 39**"
+   }
+  ],
+  "topics": [
+   "counting",
+   "geometry"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "pumac-2014-combinatorics-b-05",
+  "bank": "pumac",
+  "source": {
+   "contest": "PUMaC",
+   "paper": "2014 Combinatorics B",
+   "year": 2014,
+   "number": 5,
+   "url": "https://jason-shi-f9dm.squarespace.com/s/PUMaC2014_CombinatoricsB.pdf"
+  },
+  "grade": "9-12",
+  "points": 5,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Amy has a $2\\times10$ puzzle grid which she can use $1\\times1$ and $1\\times2$ (1 vertical, 2 horizontal) tiles to cover. How many ways can she exactly cover the grid without any tiles overlapping and without rotating the tiles?",
+  "image": null,
+  "choices": null,
+  "answer": "7921",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Rows are independent",
+    "body": "The tiles are $1\\times1$ squares and $1\\times2$ tiles that are one cell tall and two cells wide; none may be rotated, so no tile covers cells of both rows. The two rows $1\\times10$ are therefore tiled independently.\n\nLet $a_n$ be the number of ways to tile a $1\\times n$ row. The last cell is covered by a $1\\times1$ tile ($a_{n-1}$ ways) or by the right half of a $1\\times2$ tile ($a_{n-2}$ ways), so $a_n=a_{n-1}+a_{n-2}$ with $a_1=1$, $a_2=2$. Thus\n$$a_1,\\dots,a_{10}=1,2,3,5,8,13,21,34,55,89.$$\nThe number of tilings of the $2\\times10$ grid is $a_{10}^2=89^2=7921$.\n\n**Answer: 7921**"
+   }
+  ],
+  "topics": [
+   "counting"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "pumac-2014-combinatorics-b-06",
+  "bank": "pumac",
+  "source": {
+   "contest": "PUMaC",
+   "paper": "2014 Combinatorics B",
+   "year": 2014,
+   "number": 6,
+   "url": "https://jason-shi-f9dm.squarespace.com/s/PUMaC2014_CombinatoricsB.pdf"
+  },
+  "grade": "9-12",
+  "points": 6,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Consider an orange and black colouring of a $20\\times14$ square grid. Let $n$ be the number of colourings such that every row and column has an even number of orange squares. Evaluate $\\log_2 n$.",
+  "image": null,
+  "choices": null,
+  "answer": "247",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "The free part is a 19 by 13 block",
+    "body": "Colour the top-left $19\\times13$ block arbitrarily: $2^{19\\cdot13}$ ways. Now the last cell of each of the first $19$ rows (in column $14$) is forced so that the row has an even number of orange cells, and the last cell of each of the first $13$ columns (in row $20$) is forced for the same reason. Finally the corner cell (row $20$, column $14$) must make row $20$ even. Then column $14$ is automatically even: the whole grid has an even number of orange cells (it is the sum of the row parities), and columns $1,\\dots,13$ are even, so column $14$ is even too.\n\nSo each colouring of the $19\\times13$ block extends in exactly one way, and $n=2^{19\\cdot13}=2^{247}$, so $\\log_2n=247$.\n\n**Answer: 247**"
+   }
+  ],
+  "topics": [
+   "counting",
+   "logic"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "pumac-2014-combinatorics-b-07",
+  "bank": "pumac",
+  "source": {
+   "contest": "PUMaC",
+   "paper": "2014 Combinatorics B",
+   "year": 2014,
+   "number": 7,
+   "url": "https://jason-shi-f9dm.squarespace.com/s/PUMaC2014_CombinatoricsB.pdf"
+  },
+  "grade": "9-12",
+  "points": 7,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Let $S=\\{1,2,3,\\dots,2014\\}$. What is the size of the largest subset of $S$ that contains no two elements with a difference of $4$ or $7$?",
+  "image": null,
+  "choices": null,
+  "answer": "916",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Eleven consecutive numbers form a 11-cycle",
+    "body": "Look at any $11$ consecutive integers. Order their residues mod $11$ as $0,4,8,1,5,9,2,6,10,3,7$ (each is $4$ more than the previous, and $7+4\\equiv0$). Two numbers in the block whose residues are consecutive in this cycle differ by exactly $4$ or $7$ (by $4$ unless the addition of $4$ wraps around, in which case by $7$), so any two cycle-neighbours cannot both be chosen. An independent set in an $11$-cycle has at most $5$ vertices, so at most $5$ numbers of any $11$ consecutive integers are chosen.\n\nSince $2014=183\\cdot11+1$, split $S$ into $183$ blocks of $11$ and one extra number: at most $183\\cdot5+1=916$ numbers.\n\n**Construction.** Take all $n\\le2014$ with $n\\equiv1,3,4,6,9\\pmod{11}$. Differences of these residues mod $11$ are never $4$ or $7$ (the positive differences are $2,3,5,8,1,3,6,2,5,3$, and their negatives mod $11$ are $9,8,6,3,10,8,5,9,6,8$), so no two chosen numbers differ by $4$ or $7$. This gives $183\\cdot5=915$ numbers from the full blocks, plus $2014\\equiv1\\pmod{11}$, so $916$ in total.\n\n**Answer: 916**"
+   }
+  ],
+  "topics": [
+   "counting",
+   "number-theory"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "pumac-2014-combinatorics-b-08",
+  "bank": "pumac",
+  "source": {
+   "contest": "PUMaC",
+   "paper": "2014 Combinatorics B",
+   "year": 2014,
+   "number": 8,
+   "url": "https://jason-shi-f9dm.squarespace.com/s/PUMaC2014_CombinatoricsB.pdf"
+  },
+  "grade": "9-12",
+  "points": 8,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "There are $60$ friends who want to visit each other's home during summer vacation. Every day, each of them decides to either stay home or visit the home of everyone who stayed home that day. Find the minimum number of days required for everyone to have visited all their friends' homes.",
+  "image": null,
+  "choices": null,
+  "answer": "8",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Sets of going-out days form an antichain",
+    "body": "Let $S_X\\subseteq\\{1,\\dots,d\\}$ be the set of days on which friend $X$ goes out. Friend $A$ visits friend $B$ exactly on days when $A$ goes out and $B$ stays home, so $A$ visits $B$ iff $S_A\\not\\subseteq S_B$. For everybody to have visited everybody, we need $S_A\\not\\subseteq S_B$ for all $A\\ne B$ (in particular all the $S_X$ are different): the $60$ sets form an antichain in the subsets of $\\{1,\\dots,d\\}$.\n\nBy Sperner's theorem an antichain in $\\{1,\\dots,d\\}$ has at most $\\binom{d}{\\lfloor d/2\\rfloor}$ sets. For $d=7$ this is $\\binom73=35<60$, so $7$ days are not enough. For $d=8$, $\\binom84=70\\ge60$: give the $60$ friends different $4$-element subsets of the $8$ days as their going-out days. Two different $4$-sets are never contained in each other, so everyone visits everyone.\n\n**Answer: 8**"
+   }
+  ],
+  "topics": [
+   "counting",
+   "logic"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ }
+]

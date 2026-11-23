@@ -1,0 +1,511 @@
+[
+ {
+  "id": "pumac-2025-team-01",
+  "bank": "pumac",
+  "source": {
+   "contest": "PUMaC",
+   "paper": "2025 Team Round",
+   "year": 2025,
+   "number": 1,
+   "url": "https://jason-shi-f9dm.squarespace.com/s/PUMaC_2025_Team.pdf"
+  },
+  "grade": "9-12",
+  "points": 5,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Find the sum of all primes $p$ such that $p$ divides $2^p+4^p+\\cdots+510^p$.",
+  "image": null,
+  "choices": null,
+  "answer": "27",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Fermat's little theorem",
+    "body": "For every integer $k$ and prime $p$, $k^p\\equiv k\\pmod p$. So $2^p+4^p+\\cdots+510^p\\equiv2+4+\\cdots+510=255\\cdot256=65280\\pmod p$, and $p$ divides the sum iff $p\\mid65280=2^8\\cdot3\\cdot5\\cdot17$. The primes are $2,3,5,17$ with sum $27$.\n\n**Answer: 27**"
+   }
+  ],
+  "topics": [
+   "number-theory"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "pumac-2025-team-02",
+  "bank": "pumac",
+  "source": {
+   "contest": "PUMaC",
+   "paper": "2025 Team Round",
+   "year": 2025,
+   "number": 2,
+   "url": "https://jason-shi-f9dm.squarespace.com/s/PUMaC_2025_Team.pdf"
+  },
+  "grade": "9-12",
+  "points": 5,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "A regular octahedron is a polyhedron with $6$ vertices, $12$ edges, and $8$ triangular faces, where each vertex connects to exactly $4$ others and there are $3$ pairs of opposite vertices. Each vertex is assigned one of $8$ colors. Adjacent vertices (connected by an edge) must have different colors, and opposite vertices must have the same color. Additionally, for each triangular face, the three vertices must use at least $3$ different colors. Two colorings are considered the same if one can be obtained from the other by rotating the octahedron in $3$D space. How many ways can the octahedron be colored?",
+  "image": null,
+  "choices": null,
+  "answer": "56",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Colour the three axes, then divide by rotations",
+    "body": "Opposite vertices share a colour, so a colouring is given by a colour for each of the three axes (pairs of opposite vertices). Vertices on different axes are adjacent, so the three axis colours must be distinct; this also makes every face use $3$ different colours. That gives $8\\cdot7\\cdot6=336$ colourings of the fixed octahedron.\n\nThe rotation group of the octahedron permutes the three axes as the full symmetric group $S_3$ (a quarter turn about one axis swaps the other two; a third-turn about a body diagonal cycles all three), and a rotation that fixes all three axes only swaps vertices of equal colour. A colouring with three distinct axis colours is therefore only fixed by rotations that fix every axis, so each orbit has exactly $6$ colourings. The number of colourings up to rotation is\n$$\\frac{336}{6}=\\binom83=56 .$$\n(A direct count of orbits over all $8^6$ vertex colourings by Burnside/enumeration also gives $56$.)\n\n**Answer: 56**"
+   }
+  ],
+  "topics": [
+   "counting",
+   "geometry"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": "The official key is 336, which counts colourings of a fixed octahedron and ignores the stated identification of colourings that differ by a rotation. Dividing by the 6 axis permutations gives 56."
+ },
+ {
+  "id": "pumac-2025-team-03",
+  "bank": "pumac",
+  "source": {
+   "contest": "PUMaC",
+   "paper": "2025 Team Round",
+   "year": 2025,
+   "number": 3,
+   "url": "https://jason-shi-f9dm.squarespace.com/s/PUMaC_2025_Team.pdf"
+  },
+  "grade": "9-12",
+  "points": 5,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Suppose $x=\\sqrt{2-\\sqrt{2+\\sqrt{2-x}}}$. Find $x$.",
+  "image": null,
+  "choices": null,
+  "answer": "2*cos(3*pi/7)",
+  "answerDisplay": "$2\\cos\\frac{3\\pi}{7}$",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Trigonometric substitution",
+    "body": "All radicals force $0\\le x\\le2$ and in fact the right side lies in $[0.39,0.77]\\subset[0,\\sqrt2]$, so we may write $x=2\\cos\\theta$ with $\\theta\\in[\\frac\\pi4,\\frac\\pi2]$. Use $2-2\\cos\\phi=4\\sin^2\\frac\\phi2$ and $2+2\\cos\\phi=4\\cos^2\\frac\\phi2$ repeatedly:\n$$\\sqrt{2-x}=2\\sin\\tfrac\\theta2=2\\cos\\Big(\\tfrac\\pi2-\\tfrac\\theta2\\Big),\\qquad \\sqrt{2+\\sqrt{2-x}}=2\\cos\\Big(\\tfrac\\pi4-\\tfrac\\theta4\\Big),$$\n$$\\sqrt{2-\\sqrt{2+\\sqrt{2-x}}}=2\\sin\\Big(\\tfrac\\pi8-\\tfrac\\theta8\\Big)=2\\cos\\Big(\\tfrac{3\\pi}8+\\tfrac\\theta8\\Big)$$\n(all angles inside the sines/cosines are in the right ranges). So $2\\cos\\theta=2\\cos\\big(\\frac{3\\pi}8+\\frac\\theta8\\big)$, giving $\\theta=\\frac{3\\pi}8+\\frac\\theta8$ (so $\\theta=\\frac{3\\pi}7$) or $\\theta=-\\frac{3\\pi}8-\\frac\\theta8+2\\pi k$ (giving $\\theta=\\frac{(16k-3)\\pi}9$, never in $[\\frac\\pi4,\\frac\\pi2]$). Hence $\\theta=\\frac{3\\pi}7$ and $x=2\\cos\\frac{3\\pi}7\\approx0.445$.\n\n**Answer: $2\\cos\\frac{3\\pi}{7}$**"
+   }
+  ],
+  "topics": [
+   "trigonometry",
+   "algebra"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "pumac-2025-team-04",
+  "bank": "pumac",
+  "source": {
+   "contest": "PUMaC",
+   "paper": "2025 Team Round",
+   "year": 2025,
+   "number": 4,
+   "url": "https://jason-shi-f9dm.squarespace.com/s/PUMaC_2025_Team.pdf"
+  },
+  "grade": "9-12",
+  "points": 5,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "There exist positive integers $a,b,c$ such that $a^3+b^3+c^3=3438$. What is $a+b+c$?",
+  "image": null,
+  "choices": null,
+  "answer": "30",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Mod 9 and bounded search",
+    "body": "Cubes are $0,\\pm1\\pmod9$, and $3438=9\\cdot382\\equiv0\\pmod 9$. If none of $a,b,c$ were divisible by $3$, the three cubes would each be $\\pm1$ and their sum could not be $0$ mod $9$ (the sum is odd, in $\\{\\pm1,\\pm3\\}$). So one of them, say $c$, is divisible by $3$. Since $16^3=4096>3438$, $c\\in\\{3,6,9,12,15\\}$.\n\n- $c=15$: $a^3+b^3=63$, no.\n- $c=12$: $a^3+b^3=1710$; $1710-11^3=379$, $1710-10^3=710$, neither a cube.\n- $c=9$: $a^3+b^3=2709$; $2709-13^3=512=8^3$. Yes: $(13,8,9)$.\n- The cases $c=6$ ($a^3+b^3=3222$) and $c=3$ ($3411$) give nothing (check $a$ from the largest possible cube downwards).\n\nSo $\\{a,b,c\\}=\\{8,9,13\\}$ and $a+b+c=30$.\n\n**Answer: 30**"
+   }
+  ],
+  "topics": [
+   "number-theory"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "pumac-2025-team-05",
+  "bank": "pumac",
+  "source": {
+   "contest": "PUMaC",
+   "paper": "2025 Team Round",
+   "year": 2025,
+   "number": 5,
+   "url": "https://jason-shi-f9dm.squarespace.com/s/PUMaC_2025_Team.pdf"
+  },
+  "grade": "9-12",
+  "points": 5,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Zappy Zack wants to place rectangular chargers on a $6\\times5$ power grid ($6$ rows and $5$ columns). He has $(1\\times3)$ chargers and $(1\\times1)$ chargers. The top leftmost outlet doesn't work, so he cannot plug any chargers into it. Furthermore, any $(1\\times1)$ charger must be adjacent to a $(1\\times3)$ charger (diagonals do not count). He also cannot rotate any chargers, so each $(1\\times3)$ charger covers three consecutive cells of a row. Zack places chargers into the slots such that he maximizes the total number of chargers he places down. How many ways could he have done this?",
+  "image": null,
+  "choices": null,
+  "answer": "4",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Structure of the optimum",
+    "body": "There are $29$ usable cells. If $t$ chargers of size $1\\times3$ are used, the number of chargers is $t+s\\le t+(29-3t)=29-2t$ where $s$ is the number of $1\\times1$ chargers, and every $1\\times1$ charger must touch a $1\\times3$ charger. Small $t$ cannot touch enough cells, and a short case analysis (or exhaustive search over the placements of the $1\\times3$ chargers, each followed by filling every free cell adjacent to a long charger) shows that the maximum is $20$ chargers, attained only with $t=4$ long chargers, $16$ single chargers, and exactly two empty cells: the broken outlet and one more cell. (A configuration with only the broken cell empty would give $21$ but is impossible.)\n\nWriting `A,B,C,D` for the long chargers, `o` for single chargers, `X` for the broken outlet and `.` for the second empty cell, there are exactly four ways:\n\n```\nX . o o o      X o A A A      X o A A A      X o A A A\no o A A A      o o o o o      o o o o o      o o o o o\nB B B o o      B B B o .      B B B o o      B B B o o\no o o o o      o o o o o      o o C C C      o o C C C\no o C C C      o o C C C      . o o o o      o o o o o\nD D D o o      D D D o o      o D D D o      D D D o .\n```\n(For the first, the empty cell at the top is not adjacent to any long charger, so it cannot hold a single one.) Hence there are $4$ ways.\n\n**Answer: 4**"
+   }
+  ],
+  "topics": [
+   "counting"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": "The official key is 3; its figure shows only three of the four optimal arrangements (it omits the one with the empty cell in the first column of the fifth row, ' . o o o o' between the two rows with long chargers). An exhaustive computer search over all placements finds exactly four arrangements with the maximum 20 chargers, so 4 is stored. The prompt adds that the grid has 6 rows and 5 columns with horizontal long chargers, as in the official figure."
+ },
+ {
+  "id": "pumac-2025-team-06",
+  "bank": "pumac",
+  "source": {
+   "contest": "PUMaC",
+   "paper": "2025 Team Round",
+   "year": 2025,
+   "number": 6,
+   "url": "https://jason-shi-f9dm.squarespace.com/s/PUMaC_2025_Team.pdf"
+  },
+  "grade": "9-12",
+  "points": 5,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Let $\\triangle ABC$ be a triangle with $AB=14$, $AC=19$, incenter $I$, and incircle tangent to side $\\overline{BC}$ at $D$. Let $H'$ be the orthocenter of triangle $\\triangle BIC$. Given that $\\frac{DH'}{DI}=10$, find the length of $BC$.",
+  "image": null,
+  "choices": null,
+  "answer": "27",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Orthocenter and Heron",
+    "body": "Let $a=BC$, $b=AC=19$, $c=AB=14$, $s$ the semiperimeter and $r$ the inradius. $ID\\perp BC$, so $D$ is the foot of the altitude from $I$ in triangle $BIC$, and $H'$ lies on line $ID$ on the other side of $BC$ (the angle $BIC=90^\\circ+\\frac A2$ is obtuse). Since $BH'\\perp IC$, $\\angle H'BD=90^\\circ-\\angle ICB=\\angle CID$, so the right triangles $H'DB$ and $CDI$ are similar: $DH'\\cdot DI=DB\\cdot DC=(s-b)(s-c)$.\n\nWith $DI=r$, $DH'=10r$: $10r^2=(s-b)(s-c)$. Now the area is $rs$ and, by Heron, $r^2s^2=s(s-a)(s-b)(s-c)=s(s-a)\\cdot10r^2$. Hence $s=10(s-a)$, i.e. $9s=10a$. With $s=\\frac{a+33}2$: $9(a+33)=20a$, so $a=27$.\n\n**Answer: 27**"
+   }
+  ],
+  "topics": [
+   "geometry"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "pumac-2025-team-07",
+  "bank": "pumac",
+  "source": {
+   "contest": "PUMaC",
+   "paper": "2025 Team Round",
+   "year": 2025,
+   "number": 7,
+   "url": "https://jason-shi-f9dm.squarespace.com/s/PUMaC_2025_Team.pdf"
+  },
+  "grade": "9-12",
+  "points": 5,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "For each positive integer $n$, let $\\zeta_{n0},\\zeta_{n1},\\ldots,\\zeta_{n(n-1)}$ denote the $n$ distinct complex solutions to $z^n=1$. Compute\n$$\\lim_{n\\to\\infty}\\ \\max_{T\\subseteq\\{0,1,\\ldots,n-1\\}}\\ \\frac1n\\left|\\sum_{i\\in T}\\zeta_{ni}\\right|.$$",
+  "image": null,
+  "choices": null,
+  "answer": "1/pi",
+  "answerDisplay": "$\\frac1\\pi$",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Best subset is a half circle",
+    "body": "For a fixed $n$ let $T$ be optimal and $r=\\sum_{i\\in T}\\zeta_{ni}$. If some $\\zeta_{ni}$ with positive dot product with $r$ were missing from $T$ we could add it and increase $|r|$, and any element of $T$ with negative dot product could be removed to increase $|r|$. So $T$ is exactly the set of $\\zeta_{ni}$ lying (strictly) on $r$'s side of the line through $0$ perpendicular to $r$: a block of about $n/2$ consecutive roots. By rotation we may take the block $\\zeta_{n0},\\dots,\\zeta_{n\\lfloor n/2\\rfloor}$, so the quantity is\n$$\\frac1n\\left|\\frac{1-\\omega^{\\lfloor n/2\\rfloor+1}}{1-\\omega}\\right|,\\qquad\\omega=e^{2\\pi i/n}.$$\nAs $n\\to\\infty$ the numerator tends to $|1-e^{i\\pi}|=2$, and $|1-\\omega|=2\\sin\\frac\\pi n$, so the value is about $\\frac{1}{n\\sin(\\pi/n)}\\to\\frac1\\pi$. (Equivalently $\\frac1{2\\pi}\\int_{-\\pi/2}^{\\pi/2}\\cos\\phi\\,d\\phi=\\frac1\\pi$.)\n\n**Answer: $\\frac1\\pi$**"
+   }
+  ],
+  "topics": [
+   "complex-numbers",
+   "analysis"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "pumac-2025-team-08",
+  "bank": "pumac",
+  "source": {
+   "contest": "PUMaC",
+   "paper": "2025 Team Round",
+   "year": 2025,
+   "number": 8,
+   "url": "https://jason-shi-f9dm.squarespace.com/s/PUMaC_2025_Team.pdf"
+  },
+  "grade": "9-12",
+  "points": 5,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Compute the number of ordered pairs $(a,b)$ of positive integers satisfying $ab\\le100$ and $\\gcd(a,b)+\\operatorname{lcm}(a,b)=a+b$.",
+  "image": null,
+  "choices": null,
+  "answer": "296",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Divisibility",
+    "body": "Write $a=gd$, $b=ge$ with $\\gcd(d,e)=1$, so $\\operatorname{lcm}(a,b)=gde$. The condition becomes $g+gde=gd+ge$, i.e. $(d-1)(e-1)=0$: $d=1$ or $e=1$, i.e. $a\\mid b$ or $b\\mid a$.\n\nCount pairs with $a\\mid b$: $b=ka$, $ab=ka^2\\le100$, so there are $\\lfloor100/a^2\\rfloor$ choices of $k$ for each $a\\le10$:\n$$100+25+11+6+4+2+2+1+1+1=153 .$$\nThe same count holds for $b\\mid a$; the $10$ pairs with $a=b$ are counted twice. Total $2\\cdot153-10=296$.\n\n**Answer: 296**"
+   }
+  ],
+  "topics": [
+   "number-theory",
+   "counting"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "pumac-2025-team-09",
+  "bank": "pumac",
+  "source": {
+   "contest": "PUMaC",
+   "paper": "2025 Team Round",
+   "year": 2025,
+   "number": 9,
+   "url": "https://jason-shi-f9dm.squarespace.com/s/PUMaC_2025_Team.pdf"
+  },
+  "grade": "9-12",
+  "points": 5,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "For all $(a,b)\\in\\mathbb Z^2$ (excluding the origin), Biao draws the perpendicular bisector of the line segment from $(0,0)$ to $(a,b)$. An ant starts at $(0,0)$ and walks around on $\\mathbb R^2$. Let $S_n$ be the set of points that the ant can reach by crossing up to $n$ of Biao's perpendicular bisectors. Thus $S_0$ is the square whose vertices are $(\\pm\\frac12,\\pm\\frac12)$ and $S_1$ is the square whose vertices are $(0,1),(1,0),(0,-1),(-1,0)$. Find the perimeter of $S_3$.",
+  "image": null,
+  "choices": null,
+  "answer": "4*(sqrt(2)+2*sqrt(5))/3",
+  "answerDisplay": "$\\frac43\\left(\\sqrt2+2\\sqrt5\\right)$",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "One octant of the boundary",
+    "body": "A straight path from the origin to a point $p$ crosses exactly those bisectors that separate $0$ from $p$, and no path can do better; the bisector of $(0,0)$ and $v$ separates them iff $v$ is closer to $p$ than $0$ is. So $S_n$ is the set of points $p$ for which at most $n$ lattice points $v\\ne0$ satisfy $|p-v|<|p|$. The region is symmetric under the $8$ symmetries of the square, so study the octant $0\\le x\\le y$.\n\nIn this octant the outer boundary of $S_3$ is made of two pieces of bisectors:\n- the bisector of $(0,0)$ and $(-1,1)$: the line $y=x+1$, from $(0,1)$ to $\\big(\\frac16,\\frac76\\big)$;\n- the bisector of $(0,0)$ and $(1,2)$: the line $x+2y=\\frac52$, from $\\big(\\frac16,\\frac76\\big)$ to the diagonal point $\\big(\\frac56,\\frac56\\big)$.\n\nTheir lengths are $\\sqrt{\\big(\\frac16\\big)^2+\\big(\\frac16\\big)^2}=\\frac{\\sqrt2}6$ and $\\sqrt{\\big(\\frac23\\big)^2+\\big(\\frac13\\big)^2}=\\frac{\\sqrt5}3=\\frac{\\sqrt{20}}6$. The boundary of $S_3$ has $8$ congruent such pieces, so\n$$\\text{perimeter}=8\\cdot\\frac{\\sqrt2+\\sqrt{20}}6=\\frac43\\big(\\sqrt2+2\\sqrt5\\big)\\approx7.85 .$$\n(A numerical computation of the region $\\{p:\\#\\{v:|p-v|<|p|\\}\\le3\\}$ gives a boundary of length $\\approx7.84$-$7.85$.)\n\n**Answer: $\\frac43(\\sqrt2+2\\sqrt5)$**"
+   }
+  ],
+  "topics": [
+   "geometry",
+   "counting"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "pumac-2025-team-10",
+  "bank": "pumac",
+  "source": {
+   "contest": "PUMaC",
+   "paper": "2025 Team Round",
+   "year": 2025,
+   "number": 10,
+   "url": "https://jason-shi-f9dm.squarespace.com/s/PUMaC_2025_Team.pdf"
+  },
+  "grade": "9-12",
+  "points": 5,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "How many ways can the integers from $0$ to $6$ be arranged in a cycle such that the difference from one integer to the next is a power of $2$ when taken $\\pmod 7$?",
+  "image": null,
+  "choices": null,
+  "answer": "24",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Hamiltonian cycles with steps 1, 2, 4",
+    "body": "Going around the cycle, each step from one integer to the next is $+1$, $+2$ or $+4\\pmod7$ (the powers of $2$ mod $7$ are $1,2,4$). So we count cyclic orders of $0,\\dots,6$ in which every step is one of these; each cycle is read in the direction of the steps, so there is one orientation per cycle and we may start at $0$.\n\nMultiplication by $2$ mod $7$ maps the steps $1\\to2\\to4\\to1$ and so maps valid cycles to valid cycles; hence the first step from $0$ is $+1$, $+2$, $+4$ equally often, and it suffices to count the cycles starting $0\\to1$ and multiply by $3$. Checking the possible continuations $1\\to\\{2,3,5\\}$, $\\dots$ gives exactly $8$ cycles starting $0,1$:\n$$\\begin{aligned}&0123456,\\ 0124563,\\ 0124635,\\ 0126345,\\\\&0134526,\\ 0135246,\\ 0152346,\\ 0152463.\\end{aligned}$$\n(each followed by a return to $0$). Total $8\\cdot3=24$.\n\n**Answer: 24**"
+   }
+  ],
+  "topics": [
+   "counting",
+   "number-theory"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "pumac-2025-team-11",
+  "bank": "pumac",
+  "source": {
+   "contest": "PUMaC",
+   "paper": "2025 Team Round",
+   "year": 2025,
+   "number": 11,
+   "url": "https://jason-shi-f9dm.squarespace.com/s/PUMaC_2025_Team.pdf"
+  },
+  "grade": "9-12",
+  "points": 5,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Let $\\mathcal A$ be a quadrilateral on a sphere, whose sides are all sections of great circles. All the sides of $\\mathcal A$ are congruent, and all the corners of $\\mathcal A$ are $120^\\circ$. Find the proportion of the sphere's surface area enclosed by the quadrilateral.",
+  "image": null,
+  "choices": null,
+  "answer": "1/6",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Spherical cube",
+    "body": "Inscribe a cube in the sphere and project its edges radially onto the sphere. The $6$ faces become $6$ congruent spherical quadrilaterals with equal sides (arcs of great circles) that tile the sphere. Three of them meet at each of the $8$ vertices, and the angles around a vertex sum to $360^\\circ$, so each corner angle is $120^\\circ$. An equilateral spherical quadrilateral with all angles $120^\\circ$ is congruent to one of these faces (the side length is determined by the angle), so $\\mathcal A$ is one of the $6$ equal pieces and encloses $\\frac16$ of the sphere's area.\n\n**Answer: $\\frac16$**"
+   }
+  ],
+  "topics": [
+   "geometry"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "pumac-2025-team-12",
+  "bank": "pumac",
+  "source": {
+   "contest": "PUMaC",
+   "paper": "2025 Team Round",
+   "year": 2025,
+   "number": 12,
+   "url": "https://jason-shi-f9dm.squarespace.com/s/PUMaC_2025_Team.pdf"
+  },
+  "grade": "9-12",
+  "points": 5,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "In a game, each of $6$ players get a card on which is printed a nonempty subset of $\\{1,2,3,4,5\\}$. Each round, an integer from $1$ through $5$ is selected at random, and any player who has this number on their card circles it. The player who first circles all numbers on their card wins. It is known that every player has a nonzero chance of winning, and there is no possibility of a tie. It is also known that three of the cards are $\\{1,2,3\\}$, $\\{2,3,4\\}$, and $\\{3,4,5\\}$. If each player multiplies the numbers on their card together, what is the sum of these $6$ products?",
+  "image": null,
+  "choices": null,
+  "answer": "119",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Two necessary conditions",
+    "body": "(a) *No card is a subset of another.* If $C_i\\subset C_j$, then $C_j$ can never be completed before $C_i$, so $C_j$ has no chance to win.\n\n(b) *Tie-breaker.* If $C_i\\ne C_j$ share an element $x$, there must be a third card $C_k\\subseteq(C_i\\cup C_j)\\setminus\\{x\\}$. Otherwise the draw sequence consisting of the elements of $(C_i\\cup C_j)\\setminus\\{x\\}$ followed by $x$ completes both $C_i$ and $C_j$ at the same moment: a tie.\n\nApply (b) to the given cards $A=\\{1,2,3\\}$, $B=\\{2,3,4\\}$, $C=\\{3,4,5\\}$.\n- $A,B$ share $3$: some card $D\\subseteq\\{1,2,4\\}$, not contained in $A$ or in $B$ (by (a)) and not containing them: the only possibility is $D=\\{1,4\\}$.\n- $B,C$ share $4$: some card $E\\subseteq\\{2,3,5\\}$ not inside $B$ or $C$: $E=\\{2,5\\}$.\n- $D,C$ share $4$: a card $F\\subseteq\\{1,3,5\\}$ not inside any existing card and not containing one: $F=\\{1,3,5\\}$.\n\nThese are the six cards $\\{1,2,3\\},\\{2,3,4\\},\\{3,4,5\\},\\{1,4\\},\\{2,5\\},\\{1,3,5\\}$ (an exhaustive search over all choices of three further cards confirms this is the only valid set). Products: $6+24+60+4+10+15=119$.\n\n**Answer: 119**"
+   }
+  ],
+  "topics": [
+   "probability",
+   "logic"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "pumac-2025-team-13",
+  "bank": "pumac",
+  "source": {
+   "contest": "PUMaC",
+   "paper": "2025 Team Round",
+   "year": 2025,
+   "number": 13,
+   "url": "https://jason-shi-f9dm.squarespace.com/s/PUMaC_2025_Team.pdf"
+  },
+  "grade": "9-12",
+  "points": 5,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Consider the equations\n$$x+y+z=A,\\qquad x^2+y^2+z^2=B,\\qquad x^3+y^3+z^3=C.$$\nAn ordered triple $(A,B,C)\\in\\mathbb R^3$ is called \"nice\" if the corresponding system above has exactly three real solutions for $x$. For fixed $(A,B)\\in\\mathbb R^2$, the set of real $C$ such that the system is \"nice\" is a finite union of finite intervals; denote the sum of their lengths as $\\ell(A,B)$. Find $\\sum_{A=3}^5\\sum_{B=3}^5\\ell(A,B)$.",
+  "image": null,
+  "choices": null,
+  "answer": "(sqrt(6)+4*sqrt(3))/3",
+  "answerDisplay": "$\\frac{\\sqrt6+4\\sqrt3}{3}$",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Depressed cubic",
+    "body": "$x,y,z$ are the roots of $t^3-e_1t^2+e_2t-e_3$ with $e_1=A$, $e_2=\\frac{A^2-B}2$, $e_3=\\frac{A^3-3AB+2C}{6}$ (Newton's identities). \"Exactly three real values for $x$\" means the cubic has three distinct real roots. Shift $t=s+\\frac A3$: the cubic becomes $s^3-Ds-M$ with\n$$D=\\frac{3B-A^2}{6},\\qquad M=e_3-K\\ (K\\text{ independent of }C).$$\nIf $D\\le0$, $s^3-Ds$ is strictly increasing, so there is only one real root. If $D>0$, there are three distinct real roots iff $-2\\big(\\frac D3\\big)^{3/2}<M<2\\big(\\frac D3\\big)^{3/2}$ (the double-root cases are where $s^3-Ds-M=(s-r)^2(s+2r)$, i.e. $D=3r^2$, $M=\\mp2r^3$). The length of this $M$-interval is $4\\big(\\frac D3\\big)^{3/2}$, and since $M=\\frac{C}{3}+\\text{const}$ the $C$-interval is three times as long:\n$$\\ell(A,B)=12\\Big(\\frac{3B-A^2}{18}\\Big)^{3/2}\\ \\text{ if }3B>A^2,\\quad 0\\text{ otherwise}.$$\nFor $A,B\\in\\{3,4,5\\}$ only $(A,B)=(3,4)$ and $(3,5)$ satisfy $3B>A^2$:\n$$\\ell(3,4)=12\\Big(\\frac16\\Big)^{3/2}=\\frac{2}{\\sqrt6}=\\frac{\\sqrt6}3,\\qquad\\ell(3,5)=12\\Big(\\frac13\\Big)^{3/2}=\\frac4{\\sqrt3}=\\frac{4\\sqrt3}3 .$$\nThe sum is $\\frac{\\sqrt6+4\\sqrt3}3$.\n\n**Answer: $\\frac{\\sqrt6+4\\sqrt3}3$**"
+   }
+  ],
+  "topics": [
+   "algebra",
+   "polynomials"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "pumac-2025-team-14",
+  "bank": "pumac",
+  "source": {
+   "contest": "PUMaC",
+   "paper": "2025 Team Round",
+   "year": 2025,
+   "number": 14,
+   "url": "https://jason-shi-f9dm.squarespace.com/s/PUMaC_2025_Team.pdf"
+  },
+  "grade": "9-12",
+  "points": 5,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "A $24$-cell is a region that can be formed by the following procedure: taking convex hull of $8$ vertices formed by permuting integer coordinates $(\\pm1,0,0,0)$ and $16$ vertices at all half-integer coordinates $(\\pm\\frac12,\\pm\\frac12,\\pm\\frac12,\\pm\\frac12)$. If we rotate and scale the $24$-cell so that each coordinate has absolute value at most $1$ in such a way that the $24$-cell has greatest hypervolume, how many vertices $(x,y,z,w)$ of the $24$-cell satisfy $x=1$?",
+  "image": null,
+  "choices": null,
+  "answer": "6",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "A good orientation",
+    "body": "Apply the map $(x,y,z,w)\\mapsto(x+y,\\,x-y,\\,z+w,\\,z-w)$. It is a rotation (by $45^\\circ$ in the $xy$- and $zw$-planes) followed by scaling by $\\sqrt2$. The $8$ points $(\\pm1,0,0,0)$ and permutations go to the points of the form $(\\pm1,\\pm1,0,0)$ and $(0,0,\\pm1,\\pm1)$, and the $16$ half-integer points go to the other points with exactly two nonzero coordinates equal to $\\pm1$ (e.g. $(\\frac12,\\frac12,\\frac12,-\\frac12)\\mapsto(1,0,0,1)$). All together the $24$ vertices are exactly the permutations of $(\\pm1,\\pm1,0,0)$, a scaled and rotated 24-cell lying in the cube $[-1,1]^4$ and touching each facet.\n\n*Why this is the largest.* The 24-cell $\\{$all permutations of $(\\pm1,\\pm1,0,0)\\}$ has inscribed hypersphere of radius $1$ (the centre of its facet on $x=1$ is $(1,0,0,0)$), the same as the cube $[-1,1]^4$. Any larger copy would have an inscribed sphere of radius $>1$ and could not fit in the cube, so this copy has the greatest hypervolume.\n\nVertices with $x=1$: $(1,\\pm1,0,0)$, $(1,0,\\pm1,0)$, $(1,0,0,\\pm1)$: $6$ of them.\n\n**Answer: 6**"
+   }
+  ],
+  "topics": [
+   "geometry",
+   "linear-algebra"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "pumac-2025-team-15",
+  "bank": "pumac",
+  "source": {
+   "contest": "PUMaC",
+   "paper": "2025 Team Round",
+   "year": 2025,
+   "number": 15,
+   "url": "https://jason-shi-f9dm.squarespace.com/s/PUMaC_2025_Team.pdf"
+  },
+  "grade": "9-12",
+  "points": 5,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Let $x$ be the unique real number which satisfies\n$$x=\\frac{\\sqrt2}{\\sqrt{\\sqrt{x+1}+\\sqrt x}-\\sqrt{\\sqrt x+\\sqrt{x-1}}}.$$\nFind $\\lfloor x\\rfloor$.",
+  "image": null,
+  "choices": null,
+  "answer": "255",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Rationalise and estimate",
+    "body": "Let $a=\\sqrt{\\sqrt{x+1}+\\sqrt x}$ and $b=\\sqrt{\\sqrt x+\\sqrt{x-1}}$. Then $a^2-b^2=\\sqrt{x+1}-\\sqrt{x-1}=\\frac{2}{\\sqrt{x+1}+\\sqrt{x-1}}$, so $\\frac1{a-b}=\\frac{a+b}{a^2-b^2}$ and the equation becomes\n$$x=\\frac{\\sqrt2}{2}\\,(a+b)\\,\\big(\\sqrt{x+1}+\\sqrt{x-1}\\big).$$\nFor large $x$: $\\sqrt{x\\pm1}\\approx\\sqrt x$, so $a\\approx b\\approx\\sqrt{2\\sqrt x}$, hence $a+b\\approx2\\sqrt2\\,x^{1/4}$ and $\\sqrt{x+1}+\\sqrt{x-1}\\approx2\\sqrt x$. Then $x\\approx\\frac{\\sqrt2}2\\cdot2\\sqrt2x^{1/4}\\cdot2\\sqrt x=4x^{3/4}$, i.e. $x^{1/4}\\approx4$, $x\\approx256$. The corrections are of relative size $x^{-2}$ and make the root slightly smaller than $256$.\n\n*Rigorous bracketing.* Let $G(x)=\\frac{\\sqrt2}{a-b}-x$. Direct evaluation gives $G(255)\\approx+0.2490>0$ and $G(256)\\approx-0.00064<0$, and the root is unique, so $255<x<256$ (indeed $x\\approx255.9974$). Hence $\\lfloor x\\rfloor=255$.\n\n(The official proof shows $x<256$ via $\\sqrt A+\\sqrt B<2\\sqrt{(A+B)/2}$ and $x>255$ via $\\sqrt{1-z}>1-z$-type lower bounds on the same expressions.)\n\n**Answer: 255**"
+   }
+  ],
+  "topics": [
+   "algebra",
+   "inequalities"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ }
+]

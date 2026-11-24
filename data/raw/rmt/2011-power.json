@@ -1,0 +1,1179 @@
+[
+ {
+  "id": "rmt-2011-power-01a",
+  "bank": "rmt",
+  "source": {
+   "contest": "Rice Math Tournament",
+   "paper": "Power Round",
+   "year": 2011,
+   "number": 1,
+   "url": "https://www.ruf.rice.edu/~eulers/tests/2011/power-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 1,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Erdős posed the following problem. Given a set of points in the plane, no three collinear, how many points are required to ensure that for every configuration there are $n$ points that form a convex $n$-gon? Call this number $g(n)$. (For $n=3$, $g(3)=3$.) What is $g(4)$?",
+  "image": null,
+  "choices": null,
+  "answer": "5",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Five points always suffice, four do not",
+    "body": "*Four points are not enough:* a triangle with a point inside it has no four points in convex position, so $g(4)\\ge5$.\n\n*Five points suffice:* take 5 points, no three collinear. If their convex hull has 4 or 5 vertices, any 4 hull vertices form a convex quadrilateral. Otherwise the hull is a triangle $ABC$ and the other two points $D,E$ lie inside it. The line $DE$ contains no vertex of the triangle, so it separates the vertices: say $A$ is on one side and $B,C$ on the other. Consider $B,C,D,E$. Neither $B$ nor $C$ lies inside the triangle formed by the other three points (they are vertices of the hull of all five). If $D$ were inside triangle $BCE$, then the line $ED$ would leave that triangle through side $BC$ and so would separate $B$ from $C$, contradicting that they are on the same side; similarly $E$ cannot be inside triangle $BCD$. So $B,C,D,E$ are in convex position.\n\nHence $g(4)=5$.\n\n**Answer: 5**"
+   }
+  ],
+  "topics": [
+   "counting",
+   "geometry"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "rmt-2011-power-01b",
+  "bank": "rmt",
+  "source": {
+   "contest": "Rice Math Tournament",
+   "paper": "Power Round",
+   "year": 2011,
+   "number": 1,
+   "url": "https://www.ruf.rice.edu/~eulers/tests/2011/power-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 1,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Erdős posed the following problem. Given a set of points in the plane, no three collinear, how many points are required to ensure that for every configuration there are $n$ points that form a convex $n$-gon? Call this number $g(n)$. Prove that $2^{n-2}\\le g(n)$.",
+  "image": null,
+  "choices": null,
+  "answer": "Construct $2^{n-2}$ points, no three collinear, with no convex $n$-gon (so $g(n)\\ge 2^{n-2}+1$).",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Cups, caps and the Erdős-Szekeres construction",
+    "body": "Points are listed by increasing $x$-coordinate (all distinct). A *cup* (*cap*) of size $k$ is a set of $k$ points $p_1,\\dots,p_k$ whose consecutive slopes are increasing (decreasing). Cups and caps are preserved by adding a linear function to $y$ and by scaling.\n\n**Lemma.** For $a,b\\ge2$ there is a set $T(a,b)$ of $\\binom{a+b-4}{a-2}$ points, no three collinear, with no $a$-cup and no $b$-cap.\n\n*Proof by induction on $a+b$.* If $a=2$ or $b=2$, a single point works ($\\binom{b-2}{0}=\\binom{a-2}{a-2}=1$). Otherwise let $L=T(a-1,b)$ and let $R=T(a,b-1)$, placed to the right of $L$ and so high that every slope between a point of $L$ and a point of $R$ is larger than every slope inside $L$ or inside $R$. A cup meeting both $L$ and $R$ can have only one point in $R$ (after the big slope, a cup's slopes must increase further, impossible), so it has at most $(a-2)+1=a-1$ points. A cap meeting both can have only one point in $L$ (the big slope would have to be followed by smaller ones, so it must be the first slope), so it has at most $1+(b-2)=b-1$ points. Cups inside $L$ or $R$ have fewer than $a$ points, caps fewer than $b$. The size is $\\binom{a+b-5}{a-3}+\\binom{a+b-5}{a-2}=\\binom{a+b-4}{a-2}$. $\\square$\n\n**Construction.** Fix $n\\ge3$. For $k=0,1,\\dots,n-2$ let $S_k=T(n-k,\\,k+2)$ (no $(n-k)$-cup, no $(k+2)$-cap), of size $\\binom{n-2}{k}$, so $\\sum_k|S_k|=2^{n-2}$. Apply to each $S_k$ a shear so that all slopes inside it lie in $(0,\\varepsilon)$, then shrink it by a tiny factor $\\delta$ and move it to the point $c_k=(k,-k^2)$. Slopes between clusters $k<l$ are then (as $\\delta\\to0$) arbitrarily close to $-(k+l)\\le-1$, which is less than every slope inside a cluster, and the centers $c_k$ form a cap, so every cluster $S_m$ with $k<m<l$ lies strictly above the line through any point of $S_k$ and any point of $S_l$. Choose $\\delta$ small enough that no three points are collinear.\n\n**No convex $n$-gon.** Let $P$ be a set of points in convex position, with leftmost point $u$ and rightmost point $w$; its upper chain is a cap and its lower chain a cup, both from $u$ to $w$. Let $P$ meet clusters $k_1<\\dots<k_r$.\n\n*Case $r=1$* (all in one $S_k$): the upper chain is a cap, so it has at most $k+1$ points, and the lower chain is a cup with at most $n-k-1$ points; they share $u,w$, so $|P|\\le(k+1)+(n-k-1)-2=n-2$.\n\n*Case $r\\ge2$.* Middle clusters lie above the line $uw$, so their points are on the upper chain. If two of them were consecutive in the upper chain, the slope between them lies in $(0,\\varepsilon)$ while the slope of the preceding edge is $\\approx-(k+l)<0$, but the slopes of a cap decrease. So each middle cluster contributes at most one point. In the first cluster, the lower chain contains only $u$ (a second lower-chain point in the same cluster would be followed by an edge leaving the cluster with a very negative slope, contradicting increasing slopes), so $P\\cap S_{k_1}$ is a cap and has at most $k_1+1$ points. In the last cluster the upper chain contains only $w$, so $P\\cap S_{k_r}$ is a cup of at most $n-k_r-1$ points. Therefore\n$$|P|\\le(k_1+1)+(r-2)+(n-k_r-1)=n-(k_r-k_1)+r-2\\le n-(r-1)+r-2=n-1,$$\nsince $k_r-k_1\\ge r-1$.\n\nThus these $2^{n-2}$ points contain no convex $n$-gon, so $g(n)\\ge2^{n-2}+1>2^{n-2}$. $\\blacksquare$"
+   }
+  ],
+  "topics": [
+   "counting",
+   "geometry"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "rmt-2011-power-02a",
+  "bank": "rmt",
+  "source": {
+   "contest": "Rice Math Tournament",
+   "paper": "Power Round",
+   "year": 2011,
+   "number": 2,
+   "url": "https://www.ruf.rice.edu/~eulers/tests/2011/power-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 1,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Suppose you have a collection of 6 non-empty convex sets in $\\mathbb R$ (intervals on the number line). Suppose the sets have the property that any selection of $n$ of them has a non-empty intersection, where $n$ is some non-negative integer. What is the minimum $n$ such that this forces the intersection of all the sets to be non-empty?",
+  "image": null,
+  "choices": null,
+  "answer": "2",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Intervals",
+    "body": "$n=1$ is not enough (disjoint intervals exist). With $n=2$: let the intervals be $[l_i,r_i]$. Any two intersect means $l_i\\le r_j$ for all $i,j$, so $\\max_il_i\\le\\min_jr_j$, and the point $\\max l_i$ lies in all the intervals. So the minimum is $n=2$.\n\n**Answer: 2**"
+   }
+  ],
+  "topics": [
+   "logic",
+   "geometry"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "rmt-2011-power-02b",
+  "bank": "rmt",
+  "source": {
+   "contest": "Rice Math Tournament",
+   "paper": "Power Round",
+   "year": 2011,
+   "number": 2,
+   "url": "https://www.ruf.rice.edu/~eulers/tests/2011/power-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 1,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Suppose you have a collection of 8 non-empty convex sets in $\\mathbb R^2$ with the property that any selection of $n$ of them has a non-empty intersection. What is the minimum value of $n$ for which this forces the intersection of all 8 sets to be non-empty?",
+  "image": null,
+  "choices": null,
+  "answer": "3",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Helly's theorem in the plane",
+    "body": "*Helly's theorem* ($\\mathbb R^d$): if a finite family of at least $d+1$ convex sets has the property that every $d+1$ of them intersect, then all of them intersect. *Proof sketch:* for $d+2$ sets $C_1,\\dots,C_{d+2}$ pick $x_i\\in\\bigcap_{j\\ne i}C_j$. The $d+2$ points have an affine dependence $\\sum\\lambda_ix_i=0$, $\\sum\\lambda_i=0$, which gives a point $z$ in the hulls of $\\{x_i:\\lambda_i>0\\}$ and of $\\{x_i:\\lambda_i\\le0\\}$. Each $C_k$ contains all $x_i$ with $i\\ne k$, hence one of the two hulls, so $z\\in\\bigcap C_k$. For more sets, induct by replacing two sets by their intersection.\n\nFor $d=2$, $n=3$ suffices. $n=2$ does not: the three sides of a triangle are convex sets that pairwise meet but have no common point (repeat sets to get 8). So the minimum is $3$.\n\n**Answer: 3**"
+   }
+  ],
+  "topics": [
+   "geometry",
+   "logic"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "rmt-2011-power-02c",
+  "bank": "rmt",
+  "source": {
+   "contest": "Rice Math Tournament",
+   "paper": "Power Round",
+   "year": 2011,
+   "number": 2,
+   "url": "https://www.ruf.rice.edu/~eulers/tests/2011/power-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 1,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Consider any finite collection of non-empty convex sets in $\\mathbb R^3$ with the property that any $n$ of them have a non-empty intersection. What is the minimum value of $n$ that forces the intersection of the whole collection to be non-empty?",
+  "image": null,
+  "choices": null,
+  "answer": "4",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Helly's theorem in space",
+    "body": "By Helly's theorem in $\\mathbb R^3$ (the argument from part (b) with $d=3$), $n=4$ suffices. $n=3$ does not: the four planes containing the faces of a tetrahedron are convex sets, any three of them meet (at a vertex), but all four have no common point. So the minimum is $4$.\n\n**Answer: 4**"
+   }
+  ],
+  "topics": [
+   "geometry",
+   "logic"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "rmt-2011-power-03a",
+  "bank": "rmt",
+  "source": {
+   "contest": "Rice Math Tournament",
+   "paper": "Power Round",
+   "year": 2011,
+   "number": 3,
+   "url": "https://www.ruf.rice.edu/~eulers/tests/2011/power-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 1,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "*Definitions.* A closed polygonal curve has vertices $a_1,\\dots,a_n$ joined consecutively by line segments. The *curvature* at a vertex is the exterior (turning) angle $\\theta_i$ there, taken with sign (positive for a left turn, negative for a right turn, always traversing the curve in one direction). The *total curvature* is $\\sum\\theta_i$, the *absolute curvature* is $K=\\sum|\\theta_i|$, and the *average absolute curvature* is $K/L$, where $L$ is the length of the curve.\n\nProve that the total curvature of a closed polygonal curve is always a multiple of $2\\pi$.",
+  "image": null,
+  "choices": null,
+  "answer": "The direction of travel returns to its initial direction, so the total turning is a multiple of $2\\pi$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Total turning of the direction",
+    "body": "Walk once around the curve. The direction of the current segment, measured as an angle, changes only at the vertices, where it increases by the signed exterior angle $\\theta_i$. After going around the closed curve we are traveling along the first segment again, in the same direction. So the total change $\\sum\\theta_i$ is a multiple of $2\\pi$. $\\blacksquare$"
+   }
+  ],
+  "topics": [
+   "geometry"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "rmt-2011-power-03b",
+  "bank": "rmt",
+  "source": {
+   "contest": "Rice Math Tournament",
+   "paper": "Power Round",
+   "year": 2011,
+   "number": 3,
+   "url": "https://www.ruf.rice.edu/~eulers/tests/2011/power-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 1,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "*Definitions.* A closed polygonal curve has vertices $a_1,\\dots,a_n$ joined consecutively by line segments. The *curvature* at a vertex is the exterior (turning) angle $\\theta_i$ there, taken with sign (positive for a left turn, negative for a right turn, always traversing the curve in one direction). The *total curvature* is $\\sum\\theta_i$, the *absolute curvature* is $K=\\sum|\\theta_i|$, and the *average absolute curvature* is $K/L$, where $L$ is the length of the curve.\n\nProve that the total curvature of a closed convex polygonal curve is always $2\\pi$.",
+  "image": null,
+  "choices": null,
+  "answer": "For a convex $n$-gon the exterior angles are $\\pi-\\alpha_i$ and $\\sum\\alpha_i=(n-2)\\pi$, so the total is $2\\pi$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Interior angle sum",
+    "body": "Let the convex polygon have $n$ vertices with interior angles $\\alpha_1,\\dots,\\alpha_n$, so $\\sum\\alpha_i=(n-2)\\pi$. Traversing it counterclockwise, every turn is to the left and the exterior angle at each vertex is $\\theta_i=\\pi-\\alpha_i>0$. Hence the total curvature is $\\sum(\\pi-\\alpha_i)=n\\pi-(n-2)\\pi=2\\pi$. $\\blacksquare$"
+   }
+  ],
+  "topics": [
+   "geometry"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "rmt-2011-power-04a",
+  "bank": "rmt",
+  "source": {
+   "contest": "Rice Math Tournament",
+   "paper": "Power Round",
+   "year": 2011,
+   "number": 4,
+   "url": "https://www.ruf.rice.edu/~eulers/tests/2011/power-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 1,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "*Definitions.* A closed polygonal curve has vertices $a_1,\\dots,a_n$ joined consecutively by line segments. The *curvature* at a vertex is the exterior (turning) angle $\\theta_i$ there, taken with sign (positive for a left turn, negative for a right turn, always traversing the curve in one direction). The *total curvature* is $\\sum\\theta_i$, the *absolute curvature* is $K=\\sum|\\theta_i|$, and the *average absolute curvature* is $K/L$, where $L$ is the length of the curve.\n\nCompute the average absolute curvature of the left curve in the figure, assuming it has length 1. (The left curve is a closed polygonal curve; the marked angles are its exterior angles.)",
+  "image": "qimages/rmt/2011-power/q04.webp",
+  "choices": null,
+  "answer": "2*pi",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Convex curve",
+    "body": "The left curve is a convex quadrilateral whose exterior angles $45^\\circ,120^\\circ,140^\\circ,55^\\circ$ add up to $360^\\circ=2\\pi$, all turning the same way. So its absolute curvature is $2\\pi$ and, with length 1, its average absolute curvature is $2\\pi$.\n\n**Answer: $2\\pi$**"
+   }
+  ],
+  "topics": [
+   "geometry"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null,
+  "answerDisplay": "$2\\pi$"
+ },
+ {
+  "id": "rmt-2011-power-04b",
+  "bank": "rmt",
+  "source": {
+   "contest": "Rice Math Tournament",
+   "paper": "Power Round",
+   "year": 2011,
+   "number": 4,
+   "url": "https://www.ruf.rice.edu/~eulers/tests/2011/power-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 1,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "*Definitions.* A closed polygonal curve has vertices $a_1,\\dots,a_n$ joined consecutively by line segments. The *curvature* at a vertex is the exterior (turning) angle $\\theta_i$ there, taken with sign (positive for a left turn, negative for a right turn, always traversing the curve in one direction). The *total curvature* is $\\sum\\theta_i$, the *absolute curvature* is $K=\\sum|\\theta_i|$, and the *average absolute curvature* is $K/L$, where $L$ is the length of the curve.\n\nCompute the average absolute curvature of the right curve in the figure, assuming it has length 1. (All unmarked angles are $90^\\circ$; the right curve is the outline of the two overlapping rectangles.)",
+  "image": "qimages/rmt/2011-power/q04.webp",
+  "choices": null,
+  "answer": "4*pi",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Count the corners",
+    "body": "The outline of the two overlapping rectangles is a closed polygonal curve with 8 vertices, each a $90^\\circ$ turn (six turns one way and two the other). Its absolute curvature is $8\\cdot\\frac\\pi2=4\\pi$ and, with length 1, the average absolute curvature is $4\\pi$.\n\n**Answer: $4\\pi$**"
+   }
+  ],
+  "topics": [
+   "geometry"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null,
+  "answerDisplay": "$4\\pi$"
+ },
+ {
+  "id": "rmt-2011-power-05a",
+  "bank": "rmt",
+  "source": {
+   "contest": "Rice Math Tournament",
+   "paper": "Power Round",
+   "year": 2011,
+   "number": 5,
+   "url": "https://www.ruf.rice.edu/~eulers/tests/2011/power-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 1,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "*Setting.* Let $\\gamma$ be a closed polygonal curve contained in the unit circle $\\Gamma$ (center $O$). $K(\\gamma)$ is its absolute curvature and $L(\\gamma)$ its length; the total curvature of the unit circle is $2\\pi$. We want to prove that the average absolute curvature of $\\gamma$ is at least that of the unit circle.\n\nFind the average absolute curvature of the unit circle and of $\\gamma$.",
+  "image": null,
+  "choices": null,
+  "answer": "Unit circle: $\\frac{2\\pi}{2\\pi}=1$. $\\gamma$: $\\frac{K(\\gamma)}{L(\\gamma)}$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Definition",
+    "body": "The unit circle has absolute curvature $2\\pi$ and length $2\\pi$, so its average absolute curvature is $\\frac{2\\pi}{2\\pi}=1$. For $\\gamma$ it is $\\frac{K(\\gamma)}{L(\\gamma)}$ by definition."
+   }
+  ],
+  "topics": [
+   "geometry"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "rmt-2011-power-05b",
+  "bank": "rmt",
+  "source": {
+   "contest": "Rice Math Tournament",
+   "paper": "Power Round",
+   "year": 2011,
+   "number": 5,
+   "url": "https://www.ruf.rice.edu/~eulers/tests/2011/power-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 1,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "*Setting.* Let $\\gamma$ be a closed polygonal curve contained in the unit circle $\\Gamma$ (center $O$). $K(\\gamma)$ is its absolute curvature and $L(\\gamma)$ its length; the total curvature of the unit circle is $2\\pi$. We want to prove that the average absolute curvature of $\\gamma$ is at least that of the unit circle.\n\nShow that the statement (the average absolute curvature of $\\gamma$ is at least that of the unit circle) is equivalent to saying that the absolute curvature of $\\gamma$ is not less than its length.",
+  "image": null,
+  "choices": null,
+  "answer": "$\\frac{K(\\gamma)}{L(\\gamma)}\\ge1\\iff K(\\gamma)\\ge L(\\gamma)$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Clear denominators",
+    "body": "The average absolute curvature of the unit circle is $1$, so the claim is $\\frac{K(\\gamma)}{L(\\gamma)}\\ge1$. Since $L(\\gamma)>0$, this is equivalent to $K(\\gamma)\\ge L(\\gamma)$. $\\blacksquare$"
+   }
+  ],
+  "topics": [
+   "geometry",
+   "inequalities"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "rmt-2011-power-05c",
+  "bank": "rmt",
+  "source": {
+   "contest": "Rice Math Tournament",
+   "paper": "Power Round",
+   "year": 2011,
+   "number": 5,
+   "url": "https://www.ruf.rice.edu/~eulers/tests/2011/power-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 1,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "*Setting.* $\\gamma$ is a closed polygonal curve contained in the unit circle $\\Gamma$ with center $O$. \"Unfold\" $\\gamma$ onto the $x$-axis by rolling it over its vertices: start with one side on the $x$-axis; at each vertex rotate the entire plane (curve and $O$ included) about that vertex through the exterior angle $\\varphi_i$ until the next side lies on the $x$-axis, keeping the already straightened part fixed. Let $A$ be the end point of the last side, which is the starting vertex $a_1$ of the closed curve.\n\nWhat is the distance between the initial and final positions of $A$ after the unfolding?",
+  "image": null,
+  "choices": null,
+  "answer": "$L(\\gamma)$",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Rolling lays the curve flat",
+    "body": "Each side is laid in turn on the $x$-axis, the next one starting where the previous one ends. So the sides of $\\gamma$ end up as consecutive segments of the $x$-axis, covering a segment of total length $L(\\gamma)$. $A$ starts at the beginning of the first side and finishes at the end of the last side, so its displacement is $L(\\gamma)$.\n\n**Answer: $L(\\gamma)$**"
+   }
+  ],
+  "topics": [
+   "geometry"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "rmt-2011-power-05d",
+  "bank": "rmt",
+  "source": {
+   "contest": "Rice Math Tournament",
+   "paper": "Power Round",
+   "year": 2011,
+   "number": 5,
+   "url": "https://www.ruf.rice.edu/~eulers/tests/2011/power-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 1,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "*Setting.* $\\gamma$ is a closed polygonal curve contained in the unit circle $\\Gamma$ with center $O$. \"Unfold\" $\\gamma$ onto the $x$-axis by rolling it over its vertices: start with one side on the $x$-axis; at each vertex rotate the entire plane (curve and $O$ included) about that vertex through the exterior angle $\\varphi_i$ until the next side lies on the $x$-axis, keeping the already straightened part fixed. Let $A$ be the end point of the last side, which is the starting vertex $a_1$ of the closed curve.\n\nNow consider the trajectory of the circle's center $O$. As we unfold the polygon, $O$ travels in circular arcs about the vertices. What is the largest possible radius of one of these arcs, and what is the length of the arc corresponding to the exterior angle $\\varphi_i$?",
+  "image": null,
+  "choices": null,
+  "answer": "The radius is at most $1$; the arc length is $r_i|\\varphi_i|\\le|\\varphi_i|$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Arcs about the vertices",
+    "body": "While rolling about the vertex $a_i$, the point $O$ moves on an arc centered at $a_i$ through the angle $|\\varphi_i|$, of radius $r_i=|Oa_i|$. Since $a_i$ lies in the unit circle, $r_i\\le1$ (the largest possible radius is $1$). The arc length is $r_i|\\varphi_i|\\le|\\varphi_i|$."
+   }
+  ],
+  "topics": [
+   "geometry"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "rmt-2011-power-05e",
+  "bank": "rmt",
+  "source": {
+   "contest": "Rice Math Tournament",
+   "paper": "Power Round",
+   "year": 2011,
+   "number": 5,
+   "url": "https://www.ruf.rice.edu/~eulers/tests/2011/power-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 1,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "*Setting.* $\\gamma$ is a closed polygonal curve contained in the unit circle $\\Gamma$ with center $O$. \"Unfold\" $\\gamma$ onto the $x$-axis by rolling it over its vertices: start with one side on the $x$-axis; at each vertex rotate the entire plane (curve and $O$ included) about that vertex through the exterior angle $\\varphi_i$ until the next side lies on the $x$-axis, keeping the already straightened part fixed. Let $A$ be the end point of the last side, which is the starting vertex $a_1$ of the closed curve.\n\nFind the total length of the trajectory of $O$.",
+  "image": null,
+  "choices": null,
+  "answer": "$\\sum r_i|\\varphi_i|\\ \\le\\ \\sum|\\varphi_i|=K(\\gamma)$",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Add up the arcs",
+    "body": "The trajectory of $O$ consists of the arcs described in part (d), so its length is $\\sum_ir_i|\\varphi_i|\\le\\sum_i|\\varphi_i|=K(\\gamma)$, where $r_i=|Oa_i|\\le1$."
+   }
+  ],
+  "topics": [
+   "geometry"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "rmt-2011-power-05f",
+  "bank": "rmt",
+  "source": {
+   "contest": "Rice Math Tournament",
+   "paper": "Power Round",
+   "year": 2011,
+   "number": 5,
+   "url": "https://www.ruf.rice.edu/~eulers/tests/2011/power-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 1,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "*Setting.* $\\gamma$ is a closed polygonal curve contained in the unit circle $\\Gamma$ with center $O$. \"Unfold\" $\\gamma$ onto the $x$-axis by rolling it over its vertices: start with one side on the $x$-axis; at each vertex rotate the entire plane (curve and $O$ included) about that vertex through the exterior angle $\\varphi_i$ until the next side lies on the $x$-axis, keeping the already straightened part fixed. Let $A$ be the end point of the last side, which is the starting vertex $a_1$ of the closed curve.\n\nComplete the proof that $K(\\gamma)\\ge L(\\gamma)$, i.e. that the average absolute curvature of $\\gamma$ is at least that of the unit circle.",
+  "image": null,
+  "choices": null,
+  "answer": "$L(\\gamma)\\le\\sum r_i|\\varphi_i|\\le K(\\gamma)$",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Displacement versus path length",
+    "body": "The unfolding moves the whole plane by a rigid motion. Its total rotation is the total curvature of $\\gamma$, a multiple of $2\\pi$ (Problem 3), so the final position of the plane is a pure translation of the initial one. By part (c), $A$ moves by $L(\\gamma)$, hence so does $O$: the straight-line distance between the initial and final positions of $O$ is $L(\\gamma)$. The path of $O$ is at least as long as this distance, so by part (e)\n$$L(\\gamma)\\le\\sum_ir_i|\\varphi_i|\\le\\sum_i|\\varphi_i|=K(\\gamma).$$\nTherefore $\\frac{K(\\gamma)}{L(\\gamma)}\\ge1$, as claimed. $\\blacksquare$"
+   }
+  ],
+  "topics": [
+   "geometry",
+   "inequalities"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "rmt-2011-power-06",
+  "bank": "rmt",
+  "source": {
+   "contest": "Rice Math Tournament",
+   "paper": "Power Round",
+   "year": 2011,
+   "number": 6,
+   "url": "https://www.ruf.rice.edu/~eulers/tests/2011/power-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 1,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Let $A$ and $B$ be closed convex polygonal curves in the plane such that $A$ completely contains $B$. Prove that the average absolute curvature of $B$ is greater than or equal to that of $A$. (Hint: use the triangle inequality and induction on the number of sides of $B$.)",
+  "image": null,
+  "choices": null,
+  "answer": "Both have total curvature $2\\pi$, so it suffices to show $L(B)\\le L(A)$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Perimeter of nested convex polygons",
+    "body": "A closed convex polygonal curve has absolute curvature $=$ total curvature $=2\\pi$ (Problem 3(b)). So the average absolute curvatures are $\\frac{2\\pi}{L(B)}$ and $\\frac{2\\pi}{L(A)}$ and we must show $L(B)\\le L(A)$.\n\nLet $B$ have sides on lines $\\ell_1,\\dots,\\ell_m$ and let $H_j$ be the closed half-plane bounded by $\\ell_j$ containing $B$; then $B$ (the region) is $H_1\\cap\\dots\\cap H_m$. Put $A_0=A$ and $A_j=A_{j-1}\\cap H_j$. Each $A_j$ is convex and contains $B$. Cutting a convex polygon $A_{j-1}$ by the line $\\ell_j$ removes a polygonal path along its boundary between the two points where $\\ell_j$ meets the boundary and replaces it by the straight chord between those points; by the triangle inequality the chord is not longer than the path. So $L(A_j)\\le L(A_{j-1})$. Finally $A_m=A\\cap B=B$. Hence $L(B)\\le L(A)$ and the average absolute curvature of $B$ is at least that of $A$. $\\blacksquare$"
+   }
+  ],
+  "topics": [
+   "geometry",
+   "inequalities"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "rmt-2011-power-07a",
+  "bank": "rmt",
+  "source": {
+   "contest": "Rice Math Tournament",
+   "paper": "Power Round",
+   "year": 2011,
+   "number": 7,
+   "url": "https://www.ruf.rice.edu/~eulers/tests/2011/power-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 1,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "*Setting.* $ABCD$ is a convex quadrilateral with diagonals $AC$ and $BD$ meeting at $O$; let $\\varphi=\\angle AOB$. The closed curve $ABDC$ (the path $A\\to B\\to D\\to C\\to A$) is a non-convex curve whose convex hull is $ABCD$; we want to show that \"untangling\" it into $ABCD$ does not increase the average absolute curvature (the DNA inequality). Average absolute curvature $=$ (sum of absolute exterior angles) $/$ (length).\n\nFirst write down the average absolute curvature of $ABCD$.",
+  "image": "qimages/rmt/2011-power/q07.webp",
+  "choices": null,
+  "answer": "$\\dfrac{2\\pi}{AB+BC+CD+DA}$",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Convex curve",
+    "body": "$ABCD$ is convex, so its absolute curvature equals its total curvature $2\\pi$ and its length is $AB+BC+CD+DA$. Average: $\\frac{2\\pi}{AB+BC+CD+DA}$."
+   }
+  ],
+  "topics": [
+   "geometry"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "rmt-2011-power-07b",
+  "bank": "rmt",
+  "source": {
+   "contest": "Rice Math Tournament",
+   "paper": "Power Round",
+   "year": 2011,
+   "number": 7,
+   "url": "https://www.ruf.rice.edu/~eulers/tests/2011/power-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 1,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "*Setting.* $ABCD$ is a convex quadrilateral with diagonals $AC$ and $BD$ meeting at $O$; let $\\varphi=\\angle AOB$. The closed curve $ABDC$ (the path $A\\to B\\to D\\to C\\to A$) is a non-convex curve whose convex hull is $ABCD$; we want to show that \"untangling\" it into $ABCD$ does not increase the average absolute curvature (the DNA inequality). Average absolute curvature $=$ (sum of absolute exterior angles) $/$ (length).\n\nWrite down the average absolute curvature of $ABDC$, and the DNA inequality for $ABCD$ and $ABDC$.",
+  "image": "qimages/rmt/2011-power/q07.webp",
+  "choices": null,
+  "answer": "$\\dfrac{2\\pi+2\\varphi}{AB+BD+DC+CA}\\ \\ge\\ \\dfrac{2\\pi}{AB+BC+CD+DA}$",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Exterior angles of $ABDC$",
+    "body": "The length of $ABDC$ is $AB+BD+DC+CA=AB+CD+AC+BD$. At each vertex the exterior angle is $\\pi$ minus the angle between the two sides there: at $B$: $\\pi-\\angle ABD$; at $D$: $\\pi-\\angle BDC$; at $C$: $\\pi-\\angle DCA$; at $A$: $\\pi-\\angle CAB$. In triangle $OAB$, $\\angle CAB+\\angle ABD=\\pi-\\varphi$; in triangle $OCD$ (with $\\angle COD=\\varphi$), $\\angle BDC+\\angle DCA=\\pi-\\varphi$. So the absolute curvature is $4\\pi-2(\\pi-\\varphi)=2\\pi+2\\varphi$ and the average absolute curvature is $\\frac{2\\pi+2\\varphi}{AB+BD+DC+CA}$. The DNA inequality (inner curve $ABDC$ at least the hull $ABCD$) reads\n$$\\frac{2\\pi+2\\varphi}{AB+BD+DC+CA}\\ge\\frac{2\\pi}{AB+BC+CD+DA}.$$"
+   }
+  ],
+  "topics": [
+   "geometry"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "rmt-2011-power-07c",
+  "bank": "rmt",
+  "source": {
+   "contest": "Rice Math Tournament",
+   "paper": "Power Round",
+   "year": 2011,
+   "number": 7,
+   "url": "https://www.ruf.rice.edu/~eulers/tests/2011/power-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 1,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "In a triangle $ABC$ with angles $\\alpha,\\beta,\\gamma$ at $A,B,C$, prove that\n$$\\frac{AB+BC}{AC}=\\frac{\\sin\\alpha+\\sin\\gamma}{\\sin\\beta}.$$",
+  "image": null,
+  "choices": null,
+  "answer": "Law of sines.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Law of sines",
+    "body": "By the law of sines, $\\frac{BC}{\\sin\\alpha}=\\frac{AB}{\\sin\\gamma}=\\frac{AC}{\\sin\\beta}$, so $BC=\\frac{AC\\sin\\alpha}{\\sin\\beta}$ and $AB=\\frac{AC\\sin\\gamma}{\\sin\\beta}$. Adding and dividing by $AC$: $\\frac{AB+BC}{AC}=\\frac{\\sin\\alpha+\\sin\\gamma}{\\sin\\beta}$. $\\blacksquare$"
+   }
+  ],
+  "topics": [
+   "trigonometry",
+   "geometry"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "rmt-2011-power-07d",
+  "bank": "rmt",
+  "source": {
+   "contest": "Rice Math Tournament",
+   "paper": "Power Round",
+   "year": 2011,
+   "number": 7,
+   "url": "https://www.ruf.rice.edu/~eulers/tests/2011/power-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 1,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "In a triangle $ABC$ with angles $\\alpha,\\beta,\\gamma$ at $A,B,C$, prove that\n$$\\frac{\\sin\\alpha+\\sin\\gamma}{\\sin\\beta}=\\frac{\\cos\\left(\\frac{\\alpha-\\gamma}{2}\\right)}{\\sin\\left(\\frac\\beta2\\right)}\\le\\frac1{\\sin\\left(\\frac\\beta2\\right)}.$$",
+  "image": null,
+  "choices": null,
+  "answer": "Sum-to-product and $\\beta=\\pi-\\alpha-\\gamma$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Sum to product",
+    "body": "$\\sin\\alpha+\\sin\\gamma=2\\sin\\frac{\\alpha+\\gamma}2\\cos\\frac{\\alpha-\\gamma}2$. Since $\\beta=\\pi-(\\alpha+\\gamma)$, $\\sin\\frac{\\alpha+\\gamma}2=\\cos\\frac\\beta2$ and $\\sin\\beta=2\\sin\\frac\\beta2\\cos\\frac\\beta2$. So the ratio is $\\frac{2\\cos\\frac\\beta2\\cos\\frac{\\alpha-\\gamma}2}{2\\sin\\frac\\beta2\\cos\\frac\\beta2}=\\frac{\\cos\\frac{\\alpha-\\gamma}2}{\\sin\\frac\\beta2}$. Since $\\cos\\le1$, this is at most $\\frac1{\\sin(\\beta/2)}$. $\\blacksquare$"
+   }
+  ],
+  "topics": [
+   "trigonometry"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "rmt-2011-power-07e",
+  "bank": "rmt",
+  "source": {
+   "contest": "Rice Math Tournament",
+   "paper": "Power Round",
+   "year": 2011,
+   "number": 7,
+   "url": "https://www.ruf.rice.edu/~eulers/tests/2011/power-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 1,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "We know from the concavity of the sine function that $\\sin x>\\frac{2x}\\pi$ for $0<x<\\frac\\pi2$. Prove that in a triangle $ABC$ with angle $\\beta$ at $B$,\n$$\\frac{AB+BC}{AC}<\\frac\\pi\\beta\\ \\ \\left(\\text{and hence }<\\frac{2\\pi-\\beta}{\\beta}\\right).$$",
+  "image": null,
+  "choices": null,
+  "answer": "$\\frac{AB+BC}{AC}\\le\\frac1{\\sin(\\beta/2)}<\\frac\\pi\\beta<\\frac{2\\pi-\\beta}\\beta$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Combine the previous parts",
+    "body": "By part (d), $\\frac{AB+BC}{AC}\\le\\frac1{\\sin(\\beta/2)}$. With $x=\\frac\\beta2\\in(0,\\frac\\pi2)$, $\\sin\\frac\\beta2>\\frac{2}{\\pi}\\cdot\\frac\\beta2=\\frac\\beta\\pi$, so $\\frac1{\\sin(\\beta/2)}<\\frac\\pi\\beta$. Finally $\\frac\\pi\\beta<\\frac{2\\pi-\\beta}\\beta$ because $\\beta<\\pi$. $\\blacksquare$"
+   }
+  ],
+  "topics": [
+   "trigonometry",
+   "inequalities"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "rmt-2011-power-07f",
+  "bank": "rmt",
+  "source": {
+   "contest": "Rice Math Tournament",
+   "paper": "Power Round",
+   "year": 2011,
+   "number": 7,
+   "url": "https://www.ruf.rice.edu/~eulers/tests/2011/power-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 1,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Prove that the inequality $\\dfrac{AB+BC}{AC}<\\dfrac{2\\pi-\\beta}{\\beta}$ in a triangle $ABC$ is equivalent to\n$$\\frac{AB+BC}{2\\pi-\\beta}<\\frac{AB+BC+AC}{2\\pi}.$$",
+  "image": null,
+  "choices": null,
+  "answer": "Both reduce to $\\beta(AB+BC)<(2\\pi-\\beta)AC$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Cross-multiply",
+    "body": "$\\frac{AB+BC}{AC}<\\frac{2\\pi-\\beta}\\beta\\iff\\beta(AB+BC)<(2\\pi-\\beta)AC$. And $\\frac{AB+BC}{2\\pi-\\beta}<\\frac{AB+BC+AC}{2\\pi}\\iff2\\pi(AB+BC)<(2\\pi-\\beta)(AB+BC)+(2\\pi-\\beta)AC\\iff\\beta(AB+BC)<(2\\pi-\\beta)AC$. The two conditions are the same. $\\blacksquare$"
+   }
+  ],
+  "topics": [
+   "inequalities"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "rmt-2011-power-07g",
+  "bank": "rmt",
+  "source": {
+   "contest": "Rice Math Tournament",
+   "paper": "Power Round",
+   "year": 2011,
+   "number": 7,
+   "url": "https://www.ruf.rice.edu/~eulers/tests/2011/power-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 1,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Let $ABCD$ be a convex quadrilateral with diagonals meeting at $O$, and let $\\varphi=\\angle AOB$. Show that\n$$AB>\\frac\\varphi\\pi(AO+OB),\\qquad CD>\\frac\\varphi\\pi(CO+OD).$$",
+  "image": "qimages/rmt/2011-power/q07.webp",
+  "choices": null,
+  "answer": "Apply the bound $\\frac{AO+OB}{AB}<\\frac\\pi\\varphi$ to triangle $AOB$ (and $COD$).",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Apply part (e)",
+    "body": "In triangle $AOB$ the angle at $O$ is $\\varphi$. By part (e) (the sharper bound $<\\frac\\pi\\varphi$), $\\frac{AO+OB}{AB}<\\frac\\pi\\varphi$, i.e. $AB>\\frac\\varphi\\pi(AO+OB)$. Triangle $COD$ has the vertical angle $\\angle COD=\\varphi$ at $O$, so likewise $CD>\\frac\\varphi\\pi(CO+OD)$. $\\blacksquare$"
+   }
+  ],
+  "topics": [
+   "trigonometry",
+   "geometry"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "rmt-2011-power-07h",
+  "bank": "rmt",
+  "source": {
+   "contest": "Rice Math Tournament",
+   "paper": "Power Round",
+   "year": 2011,
+   "number": 7,
+   "url": "https://www.ruf.rice.edu/~eulers/tests/2011/power-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 1,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Let $ABCD$ be a convex quadrilateral with diagonals meeting at $O$, and let $\\varphi=\\angle AOB$. Use the previous part to show that\n$$AB+CD>\\frac\\varphi\\pi(AC+BD)\\quad\\text{and}\\quad BC+AD>\\frac{\\pi-\\varphi}\\pi(AC+BD).$$",
+  "image": "qimages/rmt/2011-power/q07.webp",
+  "choices": null,
+  "answer": "Add the inequalities for $AB,CD$; use $\\angle BOC=\\pi-\\varphi$ for $BC,AD$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Add the bounds",
+    "body": "Adding the two inequalities of part (g): $AB+CD>\\frac\\varphi\\pi(AO+OB+CO+OD)=\\frac\\varphi\\pi(AC+BD)$, since $AO+OC=AC$ and $BO+OD=BD$. For the other two sides, $\\angle BOC=\\angle AOD=\\pi-\\varphi$. Part (g) applied to triangles $BOC$ and $AOD$ (apex angle $\\pi-\\varphi$) gives $BC>\\frac{\\pi-\\varphi}\\pi(BO+OC)$ and $AD>\\frac{\\pi-\\varphi}\\pi(AO+OD)$; adding gives $BC+AD>\\frac{\\pi-\\varphi}\\pi(AC+BD)$. $\\blacksquare$"
+   }
+  ],
+  "topics": [
+   "geometry",
+   "inequalities"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": "The paper prints the first inequality with CD+BD instead of AC+BD and the second with the factor phi/pi instead of (pi-phi)/pi; both are corrected here (the official solution and part (i) use the corrected forms)."
+ },
+ {
+  "id": "rmt-2011-power-07i",
+  "bank": "rmt",
+  "source": {
+   "contest": "Rice Math Tournament",
+   "paper": "Power Round",
+   "year": 2011,
+   "number": 7,
+   "url": "https://www.ruf.rice.edu/~eulers/tests/2011/power-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 1,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Let $ABCD$ be a convex quadrilateral with diagonals meeting at $O$, and let $\\varphi=\\angle AOB$. Using $AB+CD>\\frac\\varphi\\pi(AC+BD)$ and $BC+AD>\\frac{\\pi-\\varphi}\\pi(AC+BD)$, complete the proof of the DNA inequality for the quadrilateral: show that\n$$\\frac{2\\pi+2\\varphi}{AB+BD+DC+CA}>\\frac{2\\pi}{AB+BC+CD+DA}.$$",
+  "image": "qimages/rmt/2011-power/q07.webp",
+  "choices": null,
+  "answer": "Equivalent to $\\frac\\varphi\\pi(AB+CD)+\\left(1+\\frac\\varphi\\pi\\right)(BC+AD)>AC+BD$, which follows from part (h).",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Reduce to a linear inequality",
+    "body": "Write $S_1=AB+CD$, $S_2=BC+AD$, $D=AC+BD$ and $t=\\frac\\varphi\\pi\\in(0,1)$. Then the claim is $\\frac{2\\pi(1+t)}{S_1+D}>\\frac{2\\pi}{S_1+S_2}$, i.e. $(1+t)(S_1+S_2)>S_1+D$, i.e.\n$$tS_1+(1+t)S_2>D.$$\nBy part (h), $S_1>tD$ and $S_2>(1-t)D$. Hence\n$$tS_1+(1+t)S_2>t\\cdot tD+(1+t)(1-t)D=\\left(t^2+1-t^2\\right)D=D.$$\nSo the average absolute curvature of $ABDC$ exceeds that of its convex hull $ABCD$. (The same argument works for the other tangle $ACBD$.) $\\blacksquare$"
+   }
+  ],
+  "topics": [
+   "geometry",
+   "inequalities"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "rmt-2011-power-08a",
+  "bank": "rmt",
+  "source": {
+   "contest": "Rice Math Tournament",
+   "paper": "Power Round",
+   "year": 2011,
+   "number": 8,
+   "url": "https://www.ruf.rice.edu/~eulers/tests/2011/power-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 1,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "*Setting.* $\\Gamma$ is the L-shaped polygon $ABXCDY$ (all angles are right angles, with $\\angle AYD=90^\\circ$ at $Y$). The point $P$ lies on $AB$ and $Q$ on $CD$ with $\\angle AYP=\\theta$ and $\\angle QYD=\\theta$ ($\\theta$ small). The curve $\\gamma=APYQDYA$ is the closed path $A\\to P\\to Y\\to Q\\to D\\to Y\\to A$, inside $\\Gamma$. $K$ denotes absolute curvature and $L$ length. We want to show that the reverse DNA inequality $\\dfrac{K(\\Gamma)}{L(\\Gamma)}>\\dfrac{K(\\gamma)}{L(\\gamma)}$ holds, so that the L-shape is a counterexample.\n\nCompute $K(\\Gamma)$ and $L(\\Gamma)$.",
+  "image": "qimages/rmt/2011-power/q08.webp",
+  "choices": null,
+  "answer": "$K(\\Gamma)=3\\pi$, $L(\\Gamma)=2(AY+YD)$",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Count the corners",
+    "body": "$\\Gamma$ has six vertices, each a right-angle turn of $\\frac\\pi2$ in absolute value (five convex ones and the reflex corner $X$): $K(\\Gamma)=6\\cdot\\frac\\pi2=3\\pi$. Moving the sides $BX$ and $XC$ to the sides of the enclosing rectangle shows the perimeter equals that of the rectangle with sides $AY$ and $YD$: $L(\\Gamma)=2(AY+YD)$."
+   }
+  ],
+  "topics": [
+   "geometry"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "rmt-2011-power-08b",
+  "bank": "rmt",
+  "source": {
+   "contest": "Rice Math Tournament",
+   "paper": "Power Round",
+   "year": 2011,
+   "number": 8,
+   "url": "https://www.ruf.rice.edu/~eulers/tests/2011/power-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 1,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "*Setting.* $\\Gamma$ is the L-shaped polygon $ABXCDY$ (all angles are right angles, with $\\angle AYD=90^\\circ$ at $Y$). The point $P$ lies on $AB$ and $Q$ on $CD$ with $\\angle AYP=\\theta$ and $\\angle QYD=\\theta$ ($\\theta$ small). The curve $\\gamma=APYQDYA$ is the closed path $A\\to P\\to Y\\to Q\\to D\\to Y\\to A$, inside $\\Gamma$. $K$ denotes absolute curvature and $L$ length. We want to show that the reverse DNA inequality $\\dfrac{K(\\Gamma)}{L(\\Gamma)}>\\dfrac{K(\\gamma)}{L(\\gamma)}$ holds, so that the L-shape is a counterexample.\n\nCompute $K(\\gamma)$.",
+  "image": "qimages/rmt/2011-power/q08.webp",
+  "choices": null,
+  "answer": "$K(\\gamma)=3\\pi+4\\theta$",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Turning angles of $\\gamma$",
+    "body": "Traverse $A\\to P\\to Y\\to Q\\to D\\to Y\\to A$. The absolute turning angles are: at $A$: $\\frac\\pi2$ (from heading up along $YA$ to heading along $AP$); at $P$: $\\frac\\pi2+\\theta$ (from direction $AP$ to direction $PY$ which makes angle $\\theta$ with the vertical); at the first visit to $Y$: $\\frac\\pi2+2\\theta$ (from direction $PY$ to direction $YQ$); at $Q$: $\\frac\\pi2+\\theta$ (from $YQ$, which makes angle $\\theta$ with the horizontal, to $QD$ vertical); at $D$: $\\frac\\pi2$; at the second visit to $Y$: $\\frac\\pi2$. Sum: $6\\cdot\\frac\\pi2+4\\theta=3\\pi+4\\theta$."
+   }
+  ],
+  "topics": [
+   "geometry"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "rmt-2011-power-08c",
+  "bank": "rmt",
+  "source": {
+   "contest": "Rice Math Tournament",
+   "paper": "Power Round",
+   "year": 2011,
+   "number": 8,
+   "url": "https://www.ruf.rice.edu/~eulers/tests/2011/power-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 1,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "*Setting.* $\\Gamma$ is the L-shaped polygon $ABXCDY$ (all angles are right angles, with $\\angle AYD=90^\\circ$ at $Y$). The point $P$ lies on $AB$ and $Q$ on $CD$ with $\\angle AYP=\\theta$ and $\\angle QYD=\\theta$ ($\\theta$ small). The curve $\\gamma=APYQDYA$ is the closed path $A\\to P\\to Y\\to Q\\to D\\to Y\\to A$, inside $\\Gamma$. $K$ denotes absolute curvature and $L$ length. We want to show that the reverse DNA inequality $\\dfrac{K(\\Gamma)}{L(\\Gamma)}>\\dfrac{K(\\gamma)}{L(\\gamma)}$ holds, so that the L-shape is a counterexample.\n\nCompute $L(\\gamma)$.",
+  "image": "qimages/rmt/2011-power/q08.webp",
+  "choices": null,
+  "answer": "$L(\\gamma)=(AY+YD)(1+\\sec\\theta+\\tan\\theta)$",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Add the six sides",
+    "body": "$AP=AY\\tan\\theta$, $PY=AY\\sec\\theta$, $YQ=YD\\sec\\theta$, $QD=YD\\tan\\theta$, $DY=YD$, $YA=AY$. The total is $AY(1+\\tan\\theta+\\sec\\theta)+YD(1+\\tan\\theta+\\sec\\theta)=(AY+YD)(1+\\sec\\theta+\\tan\\theta)$."
+   }
+  ],
+  "topics": [
+   "geometry",
+   "trigonometry"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "rmt-2011-power-08d",
+  "bank": "rmt",
+  "source": {
+   "contest": "Rice Math Tournament",
+   "paper": "Power Round",
+   "year": 2011,
+   "number": 8,
+   "url": "https://www.ruf.rice.edu/~eulers/tests/2011/power-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 1,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "*Setting.* $\\Gamma$ is the L-shaped polygon $ABXCDY$ (all angles are right angles, with $\\angle AYD=90^\\circ$ at $Y$). The point $P$ lies on $AB$ and $Q$ on $CD$ with $\\angle AYP=\\theta$ and $\\angle QYD=\\theta$ ($\\theta$ small). The curve $\\gamma=APYQDYA$ is the closed path $A\\to P\\to Y\\to Q\\to D\\to Y\\to A$, inside $\\Gamma$. $K$ denotes absolute curvature and $L$ length. We want to show that the reverse DNA inequality $\\dfrac{K(\\Gamma)}{L(\\Gamma)}>\\dfrac{K(\\gamma)}{L(\\gamma)}$ holds, so that the L-shape is a counterexample.\n\nProve that the inequality $\\dfrac{K(\\Gamma)}{L(\\Gamma)}>\\dfrac{K(\\gamma)}{L(\\gamma)}$ reduces to (follows from) $\\dfrac8{3\\pi}<\\dfrac{\\tan\\theta}\\theta$.",
+  "image": "qimages/rmt/2011-power/q08.webp",
+  "choices": null,
+  "answer": "It is equivalent to $3\\pi(\\sec\\theta+\\tan\\theta-1)>8\\theta$, which follows from $\\frac{8}{3\\pi}<\\frac{\\tan\\theta}{\\theta}$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Reduce the inequality",
+    "body": "By parts (a)-(c) the inequality is $\\frac{3\\pi}{2(AY+YD)}>\\frac{3\\pi+4\\theta}{(AY+YD)(1+\\sec\\theta+\\tan\\theta)}$, i.e. $3\\pi(1+\\sec\\theta+\\tan\\theta)>2(3\\pi+4\\theta)$, i.e. $3\\pi(\\sec\\theta+\\tan\\theta-1)>8\\theta$. Since $\\sec\\theta\\ge1$, it is enough that $3\\pi\\tan\\theta>8\\theta$, i.e. $\\frac8{3\\pi}<\\frac{\\tan\\theta}\\theta$. $\\blacksquare$"
+   }
+  ],
+  "topics": [
+   "inequalities",
+   "trigonometry"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "rmt-2011-power-08e",
+  "bank": "rmt",
+  "source": {
+   "contest": "Rice Math Tournament",
+   "paper": "Power Round",
+   "year": 2011,
+   "number": 8,
+   "url": "https://www.ruf.rice.edu/~eulers/tests/2011/power-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 1,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Let $0<\\theta<\\frac\\pi2$. Prove that\n$$\\frac8{3\\pi}<1<\\frac{\\tan\\theta}\\theta.$$\n(A geometric proof receives more credit than one using calculus.)",
+  "image": null,
+  "choices": null,
+  "answer": "$3\\pi>9>8$ and $\\tan\\theta>\\theta$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Areas in the unit circle",
+    "body": "The first inequality: $3\\pi>9>8$, so $\\frac8{3\\pi}<1$.\n\nFor the second, draw the unit circle centered at $O$ and the line $y=1$. Take the sector with angle $2\\theta$ symmetric about the $y$-axis; its area is $\\frac12\\cdot2\\theta\\cdot1^2=\\theta$. Extend the two bounding radii until they meet $y=1$; they cut out an isosceles triangle with base $2\\tan\\theta$ and height $1$, of area $\\tan\\theta$. The sector lies inside this triangle (the circle lies below the line $y=1$), so $\\theta<\\tan\\theta$, i.e. $\\frac{\\tan\\theta}\\theta>1$. $\\blacksquare$"
+   }
+  ],
+  "topics": [
+   "inequalities",
+   "trigonometry"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "rmt-2011-power-09",
+  "bank": "rmt",
+  "source": {
+   "contest": "Rice Math Tournament",
+   "paper": "Power Round",
+   "year": 2011,
+   "number": 9,
+   "url": "https://www.ruf.rice.edu/~eulers/tests/2011/power-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 1,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "The *curvature* at a vertex of a closed polyhedron is $2\\pi$ minus the sum of the angles of the faces at that vertex. (For the cube each vertex has curvature $2\\pi-3\\cdot\\frac\\pi2=\\frac\\pi2$.) Consider the regular tetrahedron. What is the curvature at each vertex?",
+  "image": null,
+  "choices": null,
+  "answer": "pi",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Three equilateral angles",
+    "body": "At each vertex three equilateral triangles meet, each contributing an angle of $\\frac\\pi3$. The curvature is $2\\pi-3\\cdot\\frac\\pi3=\\pi$. (Check: $4\\pi$ in total, as for every convex polyhedron.)\n\n**Answer: $\\pi$**"
+   }
+  ],
+  "topics": [
+   "geometry"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": "The paper says only \"the tetrahedron\"; the regular tetrahedron is intended (the official solution uses equilateral faces).",
+  "answerDisplay": "$\\pi$"
+ },
+ {
+  "id": "rmt-2011-power-10a",
+  "bank": "rmt",
+  "source": {
+   "contest": "Rice Math Tournament",
+   "paper": "Power Round",
+   "year": 2011,
+   "number": 10,
+   "url": "https://www.ruf.rice.edu/~eulers/tests/2011/power-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 1,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "The *curvature* at a vertex of a closed polyhedron is $2\\pi$ minus the sum of the angles of the faces at that vertex. What is the curvature at each vertex of a regular icosahedron?",
+  "image": null,
+  "choices": null,
+  "answer": "pi/3",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Five triangles",
+    "body": "At each vertex of a regular icosahedron five equilateral triangles meet: $2\\pi-5\\cdot\\frac\\pi3=\\frac\\pi3$. (Check with Gauss's theorem: $2\\pi(12-30+20)=4\\pi=12\\cdot\\frac\\pi3$.)\n\n**Answer: $\\frac\\pi3$**"
+   }
+  ],
+  "topics": [
+   "geometry"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null,
+  "answerDisplay": "$\\frac\\pi3$"
+ },
+ {
+  "id": "rmt-2011-power-10b",
+  "bank": "rmt",
+  "source": {
+   "contest": "Rice Math Tournament",
+   "paper": "Power Round",
+   "year": 2011,
+   "number": 10,
+   "url": "https://www.ruf.rice.edu/~eulers/tests/2011/power-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 1,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "The *curvature* at a vertex of a closed polyhedron is $2\\pi$ minus the sum of the angles of the faces at that vertex. What is the curvature at each vertex of a regular dodecahedron?",
+  "image": null,
+  "choices": null,
+  "answer": "pi/5",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Three pentagons",
+    "body": "At each vertex of a regular dodecahedron three regular pentagons meet, each with an angle of $\\frac{3\\pi}5$: $2\\pi-3\\cdot\\frac{3\\pi}5=\\frac\\pi5$. (Check: $20\\cdot\\frac\\pi5=4\\pi$.)\n\n**Answer: $\\frac\\pi5$**"
+   }
+  ],
+  "topics": [
+   "geometry"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null,
+  "answerDisplay": "$\\frac\\pi5$"
+ },
+ {
+  "id": "rmt-2011-power-11",
+  "bank": "rmt",
+  "source": {
+   "contest": "Rice Math Tournament",
+   "paper": "Power Round",
+   "year": 2011,
+   "number": 11,
+   "url": "https://www.ruf.rice.edu/~eulers/tests/2011/power-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 1,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "The curvature at a vertex of a closed polyhedron is $2\\pi$ minus the sum of the face angles at that vertex; the absolute curvature of a polyhedral surface is the sum of the absolute values of the vertex curvatures, and its average absolute curvature is this divided by the surface area. Gauss's theorem: for a closed polyhedron homeomorphic to a sphere with $n$ vertices, $E$ edges and $F$ faces, the vertex curvatures add up to $2\\pi(n-E+F)$.\n\nLet $A$ and $B$ be closed convex polyhedral surfaces in $\\mathbb R^3$ such that $A$ completely contains $B$. Prove that the average absolute curvature of $B$ is greater than or equal to that of $A$.",
+  "image": null,
+  "choices": null,
+  "answer": "Both have absolute curvature $4\\pi$, so it suffices to show $\\text{Area}(B)\\le\\text{Area}(A)$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Curvature $4\\pi$ and monotone area",
+    "body": "For a convex polyhedron the angles at a vertex add to less than $2\\pi$, so every vertex curvature is positive and the absolute curvature equals the total curvature, which by Gauss's theorem and Euler's formula ($n-E+F=2$) is $4\\pi$. So we need $\\text{Area}(B)\\le\\text{Area}(A)$.\n\nLet $B$ have faces in planes $\\Pi_1,\\dots,\\Pi_m$ and let $H_j$ be the closed half-space bounded by $\\Pi_j$ containing $B$, so that $B=H_1\\cap\\dots\\cap H_m$. Put $A_0=A$, $A_j=A_{j-1}\\cap H_j$. Each $A_j$ is convex and contains $B$. Cutting by the plane $\\Pi_j$ removes a cap $C$ of $A_{j-1}$ whose outer boundary is a part $S$ of the surface of $A_{j-1}$ and adds the planar section $D=C\\cap\\Pi_j$. Project orthogonally onto $\\Pi_j$. Every line perpendicular to $\\Pi_j$ through a point of $D$ meets $C$ in a segment (by convexity) whose far end lies on $S$. So the projection of $S$ covers $D$ and $\\text{Area}(S)\\ge\\text{Area}(\\text{proj}\\,S)\\ge\\text{Area}(D)$. Hence $\\text{Area}(A_j)=\\text{Area}(A_{j-1})-\\text{Area}(S)+\\text{Area}(D)\\le\\text{Area}(A_{j-1})$. After all $m$ cuts $A_m=A\\cap B=B$, so $\\text{Area}(B)\\le\\text{Area}(A)$, and $\\frac{4\\pi}{\\text{Area}(B)}\\ge\\frac{4\\pi}{\\text{Area}(A)}$. $\\blacksquare$"
+   }
+  ],
+  "topics": [
+   "geometry",
+   "inequalities"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "rmt-2011-power-12",
+  "bank": "rmt",
+  "source": {
+   "contest": "Rice Math Tournament",
+   "paper": "Power Round",
+   "year": 2011,
+   "number": 12,
+   "url": "https://www.ruf.rice.edu/~eulers/tests/2011/power-problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 1,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "For any polyhedral surface $\\gamma$ completely contained within a larger closed convex polyhedral surface $\\Gamma$, the DNA inequality says that the average absolute curvature of $\\gamma$ is greater than or equal to that of $\\Gamma$ (absolute curvature $=\\sum|2\\pi-\\sum\\text{face angles}|$ over vertices; average $=$ absolute curvature divided by surface area). Show that when $\\gamma$ is convex the DNA inequality in 3 dimensions holds.",
+  "image": null,
+  "choices": null,
+  "answer": "If $\\gamma$ is convex, this is exactly Problem 11 with $B=\\gamma$, $A=\\Gamma$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Reduce to Problem 11",
+    "body": "If $\\gamma$ is convex, then $\\gamma$ and $\\Gamma$ are both closed convex polyhedral surfaces and $\\Gamma$ contains $\\gamma$. By Problem 11 (with $B=\\gamma$, $A=\\Gamma$) the average absolute curvature of $\\gamma$ is at least that of $\\Gamma$ (both have absolute curvature $4\\pi$, and $\\text{Area}(\\gamma)\\le\\text{Area}(\\Gamma)$). $\\blacksquare$"
+   }
+  ],
+  "topics": [
+   "geometry"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ }
+]

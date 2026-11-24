@@ -1,0 +1,338 @@
+[
+ {
+  "id": "chmmc-2016-power-01a",
+  "bank": "chmmc",
+  "source": {
+   "contest": "CHMMC",
+   "paper": "2016 Power Round",
+   "year": 2016,
+   "number": 1,
+   "url": "http://chmmc.caltech.edu/archives/2016/power.pdf"
+  },
+  "grade": "9-12",
+  "points": 5,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Alice and Bob claim to have a magic $3\\times3$ square of numbers such that every entry is $1$ or $-1$, the product of each column is $1$, and the product of each row is $-1$. Exhibit such a square or prove that none exists.",
+  "image": null,
+  "choices": null,
+  "answer": "No such square exists: the product of all nine entries would be $-1$ (by rows) and $+1$ (by columns).",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Count the total product",
+    "body": "Multiply all nine entries. Grouping by rows, the product is $(-1)^3=-1$. Grouping by columns, it is $1^3=1$. These cannot both hold, so no such square exists. ∎"
+   }
+  ],
+  "topics": [
+   "logic"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "chmmc-2016-power-01b",
+  "bank": "chmmc",
+  "source": {
+   "contest": "CHMMC",
+   "paper": "2016 Power Round",
+   "year": 2016,
+   "number": 1,
+   "url": "http://chmmc.caltech.edu/archives/2016/power.pdf"
+  },
+  "grade": "9-12",
+  "points": 6,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "In the *Magic Square Game*, Eve picks $x,y\\in\\{0,1,2\\}$ independently and uniformly at random, and gives $x$ to Alice and $y$ to Bob. Without communicating, Alice produces a triple $(a_0,a_1,a_2)$ and Bob a triple $(b_0,b_1,b_2)$ of numbers $\\pm1$. Eve checks that $a_0a_1a_2=1$ and $b_0b_1b_2=-1$, and that $a_y=b_x$. Alice and Bob win iff both checks pass. In each of three instances decide whether Alice and Bob win or lose, showing which check fails or that both pass.\n\n1. $x=0$, $y=1$; Alice answers $a=(1,1,1)$, Bob answers $b=(-1,-1,-1)$.\n\n2. $x=1$, $y=0$; Alice answers $a=(1,-1,-1)$, Bob answers $b=(-1,1,-1)$.\n\n3. $x=2$, $y=2$; Alice answers $a=(1,-1,-1)$, Bob answers $b=(1,1,-1)$.",
+  "image": null,
+  "choices": null,
+  "answer": "1. lose ($a_1=1\\ne-1=b_0$). 2. lose ($b_0b_1b_2=1\\ne-1$). 3. win.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Check each instance",
+    "body": "1. The products are $a_0a_1a_2=1$ and $b_0b_1b_2=-1$ (fine), but $a_y=a_1=1$ while $b_x=b_0=-1$. They **lose** (the answers disagree).\n\n2. Alice's product is $1\\cdot(-1)(-1)=1$ (fine), but Bob's product is $(-1)(1)(-1)=1\\ne-1$. They **lose**.\n\n3. Alice's product is $1\\cdot(-1)(-1)=1$, Bob's is $1\\cdot1\\cdot(-1)=-1$, and $a_2=-1=b_2$. They **win**. ∎"
+   }
+  ],
+  "topics": [
+   "logic"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "chmmc-2016-power-01c",
+  "bank": "chmmc",
+  "source": {
+   "contest": "CHMMC",
+   "paper": "2016 Power Round",
+   "year": 2016,
+   "number": 1,
+   "url": "http://chmmc.caltech.edu/archives/2016/power.pdf"
+  },
+  "grade": "9-12",
+  "points": 8,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "In the *Magic Square Game*, Eve picks $x,y\\in\\{0,1,2\\}$ independently and uniformly at random, and gives $x$ to Alice and $y$ to Bob. Without communicating, Alice produces a triple $(a_0,a_1,a_2)$ and Bob a triple $(b_0,b_1,b_2)$ of numbers $\\pm1$. Eve checks that $a_0a_1a_2=1$ and $b_0b_1b_2=-1$, and that $a_y=b_x$. Alice and Bob win iff both checks pass. Give a deterministic strategy (a fixed answer for each question $x$ for Alice and each $y$ for Bob) that wins with probability $\\frac89$.",
+  "image": null,
+  "choices": null,
+  "answer": "Alice answers with column $x$ of $A$, Bob with row $y$ of $B$, where $A,B$ differ only in the bottom-right entry.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Two almost equal squares",
+    "body": "Let $$A=\\begin{pmatrix}1&1&-1\\\\1&1&-1\\\\1&1&1\\end{pmatrix},\\qquad B=\\begin{pmatrix}1&1&-1\\\\1&1&-1\\\\1&1&-1\\end{pmatrix}.$$ All columns of $A$ have product $1$ (columns: $(1,1,1)$, $(1,1,1)$, $(-1,-1,1)$) and all rows of $B$ have product $-1$ (each row is $(1,1,-1)$). When asked $x$, Alice answers column $x$ of $A$ (so $a_y=A_{yx}$); when asked $y$, Bob answers row $y$ of $B$ (so $b_x=B_{yx}$). Both product checks always pass, and $a_y=A_{yx}=B_{yx}=b_x$ unless $(y,x)=(2,2)$, where $A$ and $B$ differ. They fail only for $x=y=2$, i.e. with probability $\\frac19$, and win with probability $\\frac89$. ∎"
+   }
+  ],
+  "topics": [
+   "logic",
+   "probability"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "chmmc-2016-power-01d",
+  "bank": "chmmc",
+  "source": {
+   "contest": "CHMMC",
+   "paper": "2016 Power Round",
+   "year": 2016,
+   "number": 1,
+   "url": "http://chmmc.caltech.edu/archives/2016/power.pdf"
+  },
+  "grade": "9-12",
+  "points": 5,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Alice and Bob claim to have a magic $3\\times3$ square of numbers such that every entry is $1$ or $-1$, the product of each column is $1$, and the product of each row is $-1$. In the *Magic Square Game*, Eve picks $x,y\\in\\{0,1,2\\}$ independently and uniformly at random, and gives $x$ to Alice and $y$ to Bob. Without communicating, Alice produces a triple $(a_0,a_1,a_2)$ and Bob a triple $(b_0,b_1,b_2)$ of numbers $\\pm1$. Eve checks that $a_0a_1a_2=1$ and $b_0b_1b_2=-1$, and that $a_y=b_x$. Alice and Bob win iff both checks pass. Suppose for the sake of this problem that such a square $(m_{ij})$ does exist (regardless of your answer to the first problem), and that Alice and Bob both have access to it. Show how they can use it to win the Magic Square Game with certainty.",
+  "image": null,
+  "choices": null,
+  "answer": "Alice answers with column $x$ of the square, Bob with row $y$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Read off a column and a row",
+    "body": "Alice answers with column $x$: $a=(m_{0x},m_{1x},m_{2x})$; Bob answers with row $y$: $b=(m_{y0},m_{y1},m_{y2})$. Alice's product is the product of a column, $1$; Bob's is the product of a row, $-1$; and $a_y=m_{yx}=b_x$. So both checks always pass. (Of course, by the first problem no such square exists; if you point that out, the statement holds vacuously.) ∎"
+   }
+  ],
+  "topics": [
+   "logic"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "chmmc-2016-power-02a",
+  "bank": "chmmc",
+  "source": {
+   "contest": "CHMMC",
+   "paper": "2016 Power Round",
+   "year": 2016,
+   "number": 2,
+   "url": "http://chmmc.caltech.edu/archives/2016/power.pdf"
+  },
+  "grade": "9-12",
+  "points": 9,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Let $I,X,Y,Z$ be the Pauli operators, which obey (together with the constants $\\pm1,\\pm i$): the product is associative; $I$ is the identity; $X^2=Y^2=Z^2=I$; $XYZ=-iI$; and the constants commute with everything and multiply as complex numbers. Two elements $A,B$ *commute* if $AB=BA$ and *anticommute* if $AB=-BA$. Prove that $X$, $Y$ and $Z$ pairwise anticommute: $AB=-BA$ for all $A\\ne B$ in $\\{X,Y,Z\\}$.",
+  "image": null,
+  "choices": null,
+  "answer": "From $XYZ=-iI$: $XY=-iZ$, $YZ=-iX$, $ZX=-iY$; squaring $XY$ gives $(XY)^2=-I$ and hence $YX=-XY$; likewise for the other pairs.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Square the products",
+    "body": "Multiply $XYZ=-iI$ on the right by $Z$: $XY=-iZ$. Multiply on the left by $X$: $YZ=-iX$. Conjugating, $ZXY=Z(XYZ)Z^{-1}=-iI$ (with $Z^{-1}=Z$), so multiplying on the right by $Y$ gives $ZX=-iY$. Now $(XY)^2=(-iZ)^2=-Z^2=-I$, i.e. $XYXY=-I$. Multiply on the left by $X$ and on the right by $Y$: $X(XYXY)Y=X^2\\,YX\\,Y^2=YX$, while $X(-I)Y=-XY$. So $YX=-XY$. In exactly the same way $(YZ)^2=-X^2=-I$ gives $ZY=-YZ$, and $(ZX)^2=-Y^2=-I$ gives $XZ=-ZX$. ∎"
+   }
+  ],
+  "topics": [
+   "abstract-algebra",
+   "algebra"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "chmmc-2016-power-02b",
+  "bank": "chmmc",
+  "source": {
+   "contest": "CHMMC",
+   "paper": "2016 Power Round",
+   "year": 2016,
+   "number": 2,
+   "url": "http://chmmc.caltech.edu/archives/2016/power.pdf"
+  },
+  "grade": "9-12",
+  "points": 22,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Work with the Pauli operators $I,X,Y,Z$ of the previous problem (with $X,Y,Z$ pairwise anticommuting, $X^2=Y^2=Z^2=I$, $XYZ=-iI$). For two-qubit operators, $(A\\otimes B)(C\\otimes D)=AC\\otimes BD$ and constants pull out of the tensor product.\n\na) Show that $X\\otimes X$ commutes with $Z\\otimes Z$.\n\nb) Compute the product $(X\\otimes X)(Y\\otimes Z)(Z\\otimes Y)$ as a tensor of two one-qubit Pauli operators, possibly with a constant.\n\nc) Of the $16$ operators $U\\otimes V$ with $U,V\\in\\{I,X,Y,Z\\}$, how many commute with $X\\otimes X$, and how many anticommute? Prove your answer.",
+  "image": null,
+  "choices": null,
+  "answer": "a) $(X\\otimes X)(Z\\otimes Z)=XZ\\otimes XZ=(-ZX)\\otimes(-ZX)=(Z\\otimes Z)(X\\otimes X)$. b) $I\\otimes I$. c) $8$ commute and $8$ anticommute.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Solution",
+    "body": "**a)** $(X\\otimes X)(Z\\otimes Z)=XZ\\otimes XZ=(-ZX)\\otimes(-ZX)=(-1)^2ZX\\otimes ZX=(Z\\otimes Z)(X\\otimes X)$.\n\n**b)** $(X\\otimes X)(Y\\otimes Z)(Z\\otimes Y)=XYZ\\otimes XZY$. We have $XYZ=-iI$, and $XZY=-XYZ=iI$ (since $ZY=-YZ$). So the product is $(-iI)\\otimes(iI)=-i\\cdot i\\,(I\\otimes I)=I\\otimes I$.\n\n**c)** Each one-qubit Pauli either commutes with $X$ ($I$ and $X$) or anticommutes with it ($Y$ and $Z$). Then $U\\otimes V$ commutes with $X\\otimes X$ if both factors commute or both anticommute (the two signs cancel), and anticommutes if exactly one factor anticommutes. Both commute: $2\\cdot2=4$ operators; both anticommute: $2\\cdot2=4$; so $8$ commute. Exactly one anticommutes: $2\\cdot2+2\\cdot2=8$ operators, which anticommute. So $8$ commute and $8$ anticommute. ∎"
+   }
+  ],
+  "topics": [
+   "abstract-algebra",
+   "linear-algebra"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "chmmc-2016-power-02c",
+  "bank": "chmmc",
+  "source": {
+   "contest": "CHMMC",
+   "paper": "2016 Power Round",
+   "year": 2016,
+   "number": 2,
+   "url": "http://chmmc.caltech.edu/archives/2016/power.pdf"
+  },
+  "grade": "9-12",
+  "points": 13,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Use the commutation facts of the previous problem: $X,Y,Z$ pairwise anticommute with $XYZ=-iI$, and $U\\otimes V$ commutes with $U'\\otimes V'$ iff the number of positions in which the one-qubit factors anticommute is even. Find, with proof, a $3\\times3$ square of two-qubit Pauli operators (tensors $U\\otimes V$ with constants) such that in each row the three operators pairwise commute and their product is $-I\\otimes I$, and in each column the three operators pairwise commute and their product is $I\\otimes I$. (Hint: there is such a square in which every one-qubit operator, including $I$, appears; you may need $-1$ coefficients.)",
+  "image": null,
+  "choices": null,
+  "answer": "$\\begin{pmatrix}-I\\otimes Z&X\\otimes I&X\\otimes Z\\\\-Z\\otimes I&I\\otimes X&Z\\otimes X\\Z\\otimes Z&X\\otimes X&Y\\otimes Y\\end{pmatrix}$",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "The square and its verification",
+    "body": "Take $$\\begin{pmatrix}-I\\otimes Z&X\\otimes I&X\\otimes Z\\\\-Z\\otimes I&I\\otimes X&Z\\otimes X\\Z\\otimes Z&X\\otimes X&Y\\otimes Y\\end{pmatrix}.$$ *Rows.* $(-I\\otimes Z)(X\\otimes I)(X\\otimes Z)=-(X^2)\\otimes Z^2=-I\\otimes I$; $(-Z\\otimes I)(I\\otimes X)(Z\\otimes X)=-Z^2\\otimes X^2=-I\\otimes I$; $(Z\\otimes Z)(X\\otimes X)(Y\\otimes Y)=ZXY\\otimes ZXY=(-iI)\\otimes(-iI)=-I\\otimes I$ (since $ZXY=-iI$ by cyclic invariance of $XYZ=-iI$).\n\n*Columns.* $(-I\\otimes Z)(-Z\\otimes I)(Z\\otimes Z)=Z^2\\otimes Z^2=I\\otimes I$; $(X\\otimes I)(I\\otimes X)(X\\otimes X)=I\\otimes I$; $(X\\otimes Z)(Z\\otimes X)(Y\\otimes Y)=XZY\\otimes ZXY=(iI)\\otimes(-iI)=I\\otimes I$.\n\n*Commutation.* Two tensors commute iff they anticommute in an even number of positions. Row 1: $I\\otimes Z,\\ X\\otimes I,\\ X\\otimes Z$: no pair anticommutes in any position, so all commute. Row 2: $Z\\otimes I,\\ I\\otimes X,\\ Z\\otimes X$: same. Row 3: $Z\\otimes Z,\\ X\\otimes X,\\ Y\\otimes Y$: each pair anticommutes in both positions. Column 1: $I\\otimes Z,\\ Z\\otimes I,\\ Z\\otimes Z$: no anticommuting positions. Column 2: $X\\otimes I,\\ I\\otimes X,\\ X\\otimes X$: none. Column 3: $X\\otimes Z,\\ Z\\otimes X,\\ Y\\otimes Y$: each pair anticommutes in both positions. So the three operators in every row and column pairwise commute (and the order of multiplication within a line does not matter). ∎"
+   }
+  ],
+  "topics": [
+   "abstract-algebra",
+   "linear-algebra"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "chmmc-2016-power-02d",
+  "bank": "chmmc",
+  "source": {
+   "contest": "CHMMC",
+   "paper": "2016 Power Round",
+   "year": 2016,
+   "number": 2,
+   "url": "http://chmmc.caltech.edu/archives/2016/power.pdf"
+  },
+  "grade": "9-12",
+  "points": 5,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "The first problem (no $3\\times3$ array of numbers $\\pm1$ has all row products $-1$ and all column products $1$) was proved by multiplying all nine entries by rows and by columns. The square of two-qubit Pauli operators found in the previous problem has row products $-I\\otimes I$ and column products $I\\otimes I$. Why does that proof not apply to it?",
+  "image": null,
+  "choices": null,
+  "answer": "Because the nine operators do not all commute, the product of all nine depends on the order, so grouping by rows and by columns can give different results.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Non-commutativity",
+    "body": "The earlier proof computes the product of all nine entries in two ways; these agree only because numbers commute, so the total product does not depend on the order of the factors. The nine Pauli operators do not all commute (for example $X\\otimes I$ in the first row and $-Z\\otimes I$ in the second row, in different columns, anticommute), so multiplying them row by row and multiplying them column by column can give different results ($-I\\otimes I$ versus $+I\\otimes I$ here). Only operators in the same row or column are required to commute. ∎"
+   }
+  ],
+  "topics": [
+   "abstract-algebra",
+   "logic"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "chmmc-2016-power-03a",
+  "bank": "chmmc",
+  "source": {
+   "contest": "CHMMC",
+   "paper": "2016 Power Round",
+   "year": 2016,
+   "number": 3,
+   "url": "http://chmmc.caltech.edu/archives/2016/power.pdf"
+  },
+  "grade": "9-12",
+  "points": 12,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Let $\\mathcal X=\\mathcal Y=\\{0,1,2\\}$ be the questions, and $\\mathcal A=\\mathcal B=\\{\\pm1\\}^3$ the possible answers (triples). A *strategy* is a function $p(a,b\\,\\|\\,x,y)\\in[0,1]$ with $\\sum_{a,b}p(a,b\\,\\|\\,x,y)=1$ for each $(x,y)$: the probability that Alice answers $a$ and Bob answers $b$ given the questions. Let $V(a,b,x,y)=1$ if $a_y=b_x$, $a_0a_1a_2=1$ and $b_0b_1b_2=-1$, and $0$ otherwise (the winning condition of the Magic Square Game, where $x,y$ are chosen uniformly and independently). Show that the probability that Alice and Bob win is $$\\omega(p)=\\frac19\\sum_{a\\in\\mathcal A,\\,b\\in\\mathcal B,\\,x\\in\\mathcal X,\\,y\\in\\mathcal Y}p(a,b\\,\\|\\,x,y)V(a,b,x,y).$$",
+  "image": null,
+  "choices": null,
+  "answer": "Condition on $(x,y)$ and average over the $9$ equally likely question pairs.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Condition on the questions",
+    "body": "Given the questions $x,y$, the win probability is the total probability of answer pairs $(a,b)$ with $V(a,b,x,y)=1$: $\\omega(p\\,|\\,xy)=\\sum_{(a,b):V=1}p(a,b\\,\\|\\,x,y)=\\sum_{a,b}p(a,b\\,\\|\\,x,y)V(a,b,x,y)$ (the terms with $V=0$ contribute $0$). Each of the $9$ pairs $(x,y)$ is asked with probability $\\frac19$, so by total probability $\\omega(p)=\\frac19\\sum_{x,y}\\omega(p\\,|\\,xy)$, which is the formula. ∎"
+   }
+  ],
+  "topics": [
+   "probability"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "chmmc-2016-power-03b",
+  "bank": "chmmc",
+  "source": {
+   "contest": "CHMMC",
+   "paper": "2016 Power Round",
+   "year": 2016,
+   "number": 3,
+   "url": "http://chmmc.caltech.edu/archives/2016/power.pdf"
+  },
+  "grade": "9-12",
+  "points": 15,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Let $\\mathcal X=\\mathcal Y=\\{0,1,2\\}$ be the questions, and $\\mathcal A=\\mathcal B=\\{\\pm1\\}^3$ the possible answers (triples). A *strategy* is a function $p(a,b\\,\\|\\,x,y)\\in[0,1]$ with $\\sum_{a,b}p(a,b\\,\\|\\,x,y)=1$ for each $(x,y)$: the probability that Alice answers $a$ and Bob answers $b$ given the questions. Let $V(a,b,x,y)=1$ if $a_y=b_x$, $a_0a_1a_2=1$ and $b_0b_1b_2=-1$, and $0$ otherwise (the winning condition of the Magic Square Game, where $x,y$ are chosen uniformly and independently). A strategy is *local* if $p(a,b\\,\\|\\,x,y)=p_A(a,x)\\,p_B(b,y)$ for some $p_A,p_B$, and *classical* if it is a convex combination $p=\\sum_ic_ip_i$ ($c_i\\ge0$, $\\sum c_i=1$) of local strategies. Prove that no classical strategy wins with probability strictly greater than $\\frac89$, i.e. $\\omega(p)\\le\\frac89$.",
+  "image": null,
+  "choices": null,
+  "answer": "A deterministic strategy cannot win all 9 question pairs (it would give a square contradicting the first problem), so it wins at most $\\frac89$; local strategies are mixtures of deterministic ones, classical ones are mixtures of those, and $\\omega$ is linear.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Deterministic, local, classical",
+    "body": "*Deterministic strategies.* Alice answers $a(x)\\in\\mathcal A$, Bob $b(y)\\in\\mathcal B$. Define matrices $M^A$ with column $x$ equal to $a(x)$ (i.e. $M^A_{yx}=a(x)_y$) and $M^B$ with row $y$ equal to $b(y)$ ($M^B_{yx}=b(y)_x$). They win on $(x,y)$ iff column $x$ of $M^A$ has product $1$, row $y$ of $M^B$ has product $-1$, and $M^A_{yx}=M^B_{yx}$. If they won on all $9$ pairs, then $M^A=M^B$ would have all column products $1$ and all row products $-1$, impossible by the first problem. So some pair is lost: $\\omega\\le\\frac89$.\n\n*Local strategies.* If $p(a,b\\,\\|\\,x,y)=p_A(a,x)p_B(b,y)$, Alice's answer to each $x$ is drawn from $p_A(\\cdot,x)$ and Bob's answer to each $y$ from $p_B(\\cdot,y)$, independently. Equivalently they pick a random deterministic strategy (independently choosing $a(x)$ for each $x$ and $b(y)$ for each $y$), and $\\omega(p)$ is the average of $\\omega$ over these deterministic strategies, each $\\le\\frac89$. So $\\omega(p)\\le\\frac89$.\n\n*Classical strategies.* $\\omega$ is linear in $p$, so for $p=\\sum c_ip_i$ with local $p_i$: $\\omega(p)=\\sum_ic_i\\,\\omega(p_i)\\le\\frac89\\sum_ic_i=\\frac89$. ∎"
+   }
+  ],
+  "topics": [
+   "probability",
+   "logic"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ }
+]

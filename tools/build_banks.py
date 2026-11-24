@@ -2,9 +2,11 @@
 """Merge data/raw/<bank>/*.json into the app's question files.
 
 Writes app/public/banks/q/<bank>-<hash>.json, one file per bank and set of grades (g = 1-12,
-13 = undergraduate, 14 = graduate; a grade loads every file that lists it) without solutions
-and with null fields and per-paper source details factored out, sol/<bank>/<paper>.json (solutions by
-question id, loaded when a solution is opened; `sol` on each question names its file) and
+13 = undergraduate, 14 = graduate; a grade loads every file that lists it) with what is needed to
+pick questions (id, type, topics, difficulty, points; null fields and per-paper source details
+factored out), c/<bank>/<paper>-<hash>.json (prompt, choices, answers and review notes by question
+id, loaded when a question is shown), sol/<bank>/<paper>.json (solutions by question id, loaded
+when a solution is opened) and
 index.json (bank list from data/banks.json with counts
 per grade and the source papers, and the question files).
 
@@ -38,7 +40,8 @@ KEEP = [
     "id", "bank", "source", "grade", "grades", "points", "blankPoints", "wrongPoints", "timeMinutes", "type", "prompt", "image", "choices",
     "answer", "answerDisplay", "acceptedAnswers", "answerUnit", "solutions", "topics", "difficulty", "reviewNote",
 ]
-CHUNK_DROP = {"bank", "source", "sol", "grade", "grades", "solutions"}
+CONTENT = ["prompt", "image", "choices", "answer", "answerDisplay", "acceptedAnswers", "answerUnit", "reviewNote"]
+CHUNK_DROP = {"bank", "source", "sol", "file", "grade", "grades", "solutions", *CONTENT}
 
 
 def norm(s):
@@ -96,7 +99,7 @@ def main():
                     stats[bank]["dup_id"] += 1
                     continue
                 seen[q["id"]] = {k: q.get(k) for k in KEEP}
-                seen[q["id"]]["sol"] = f"{bank}/{os.path.splitext(os.path.basename(f))[0]}"
+                seen[q["id"]]["sol"] = seen[q["id"]]["file"] = f"{bank}/{os.path.splitext(os.path.basename(f))[0]}"
     for d in sorted({os.path.basename(p) for p in glob.glob(os.path.join(RAW, "*"))} - {m["id"] for m in metas}):
         had_errors = True
         print(f"!! data/raw/{d}/ is not a bank in data/banks.json (skipped)")
@@ -197,6 +200,18 @@ def main():
         path = os.path.join(sol_dir, key + ".json")
         os.makedirs(os.path.dirname(path), exist_ok=True)
         json.dump(sols, open(path, "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
+    c_dir = os.path.join(OUT, "c")
+    shutil.rmtree(c_dir, ignore_errors=True)
+    by_file = defaultdict(dict)
+    for q in questions:
+        by_file[q["file"]][q["id"]] = {k: q[k] for k in CONTENT if q.get(k) not in (None, [], "")}
+    cfile = {}
+    for key, content in by_file.items():
+        body = json.dumps(content, ensure_ascii=False, separators=(",", ":"))
+        cfile[key] = f"{key}-{hashlib.sha1(body.encode()).hexdigest()[:8]}"
+        path = os.path.join(c_dir, cfile[key] + ".json")
+        os.makedirs(os.path.dirname(path), exist_ok=True)
+        open(path, "w", encoding="utf-8").write(body)
     chunks = defaultdict(list)
     for q in questions:
         chunks[(q["bank"], tuple(q["grades"]))].append(q)
@@ -208,7 +223,7 @@ def main():
         papers, out = {}, []
         for q in qs:
             src = {k: v for k, v in q["source"].items() if k != "number"}
-            p = papers.setdefault(json.dumps([q["sol"], src], ensure_ascii=False), len(papers))
+            p = papers.setdefault(json.dumps([q["sol"], src, cfile[q["file"]]], ensure_ascii=False), len(papers))
             c = {k: v for k, v in q.items() if k not in CHUNK_DROP and v not in (None, [], "")}
             c["p"] = p
             if q["source"].get("number") is not None:

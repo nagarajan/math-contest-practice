@@ -1,0 +1,36 @@
+[
+ {
+  "id": "cmimc-2026-tcs-01a",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Theoretical Computer Science Round",
+   "year": 2026,
+   "number": 1,
+   "url": "https://cmimc.com/archive/cmimc2026/tcs_problems.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "**Setting (\"Calculators Made In Mellon College\").** Every day, customers bring orders $(d_i,q_i,p_i)$: $d_i=1$ or $d_i=-1$ indicates the direction of the order (the officers sell to, or buy from, the customer), $q_i\\le1000$ is the quantity and $p_i\\le200$ is the price per calculator. The officers must fill an order entirely or not at all, and want to end the day with no calculators in inventory. Given a list of $n$ tuples $(d_i,q_i,p_i)$, find a subset $S\\subseteq[n]$ that maximizes $\\sum_{i\\in S}d_iq_ip_i$ subject to $\\sum_{i\\in S}d_iq_i=0$.\n\nFor example, for the eight orders $(-1,4,41)$, $(1,5,44)$, $(1,3,45)$, $(1,100,40)$, $(1,11,43)$, $(-1,95,48)$, $(-1,3,43)$, $(-1,12,38)$ the maximum is $79$.\n\nGive an algorithm that solves the problem in time $O(n^2)$ (treating the bounds on $q_i$ and $p_i$ as constants), and explain why it is correct and why it runs in that time.",
+  "image": null,
+  "choices": null,
+  "answer": "A dynamic program over the running quantity balance $b=\\sum d_iq_i$, which lies in $[-1000n,1000n]$, runs in $O(1000\\,n\\cdot n)=O(n^2)$; the example evaluates to $79$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Dynamic programming over the balance",
+    "body": "Let $f_j(b)$ be the maximum value of $\\sum d_iq_ip_i$ over subsets of the first $j$ orders whose quantities satisfy $\\sum d_iq_i=b$ (and $-\\infty$ if there is none). Then $f_0(0)=0$, $f_0(b)=-\\infty$ otherwise, and\n$$f_j(b)=\\max\\bigl(f_{j-1}(b),\\ f_{j-1}(b-d_jq_j)+d_jq_jp_j\\bigr).$$\nThe answer is $f_n(0)$ (the empty subset gives $0$, so the answer is never negative). A standard reconstruction pointer recovers the subset.\n\n*Correctness:* every subset either omits order $j$ or contains it; in the second case the rest has balance $b-d_jq_j$ and the profit splits additively, so the recurrence is exact.\n\n*Running time:* the balance after $j$ orders lies in $[-1000j,1000j]$, so each layer has at most $2000n+1$ states, each computed in $O(1)$. Over $n$ layers that is $O(2000\\,n^2)=O(n^2)$ operations. (The naive $O(2^n)$ solution enumerates all subsets.)\n\n*Example:* running the recurrence on the eight given orders gives $f_8(0)=79$, matching the stated maximum (checked also by brute force over all $2^8$ subsets)."
+   }
+  ],
+  "topics": [
+   "arithmetic",
+   "counting"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": "No official solution exists for the TCS round; the algorithm was written by us and tested against brute force."
+ }
+]

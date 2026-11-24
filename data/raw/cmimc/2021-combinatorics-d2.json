@@ -1,0 +1,251 @@
+[
+ {
+  "id": "cmimc-2021-combinatorics-d2-01",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Combinatorics and Computer Science Round (Division 2)",
+   "year": 2021,
+   "number": 1,
+   "url": "https://cmimc.com/archive/cmimc2021/2021_ComboCS_D2.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "We have a $9$ by $9$ chessboard with $9$ kings (which can move to any of $8$ adjacent squares) in the bottom row. What is the minimum number of moves, if two pieces cannot occupy the same square at the same time, to move all the kings into an $X$ shape (a $5\\times5$ region where there are $5$ kings along each diagonal of the $X$, as shown below)?",
+  "image": "qimages/cmimc/2021-combinatorics-d2/q01.webp",
+  "choices": null,
+  "answer": "18",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Count upward moves",
+    "body": "**Lower bound.** A king moves up by at most one row per move. The $X$ occupies $5$ consecutive rows with $2,2,1,2,2$ kings; if its lowest row is row $r$ (counting the bottom row of the board as row $0$), the total height of its squares is at least that of the $X$ resting on the bottom row: $2\\cdot0+2\\cdot1+1\\cdot2+2\\cdot3+2\\cdot4=18$. All kings start at height $0$, so at least $18$ upward moves, hence at least $18$ moves, are needed.\n\n**Construction with $18$ moves.** Put the $X$ in columns $3$ to $7$ (columns numbered $1$ to $9$) resting on the bottom row, so the targets are $(\\text{row},\\text{col})$: $(0,3),(0,7),(1,4),(1,6),(2,5),(3,4),(3,6),(4,3),(4,7)$. The kings in columns $3$ and $7$ stay. Then, making only diagonal or vertical up-moves and always moving the highest-bound king first:\n- column $1\\to(4,3)$: $4$ moves; column $9\\to(4,7)$: $4$ moves;\n- column $2\\to(3,4)$: $3$ moves; column $8\\to(3,6)$: $3$ moves;\n- column $5\\to(2,5)$: $2$ moves;\n- column $4\\to(1,4)$ and column $6\\to(1,6)$: $1$ move each.\n\nThe total is $4+4+3+3+2+1+1=18$, and no two kings ever collide because higher targets are filled first. (A computer search of $18$-move schedules agrees.)\n\n**Answer: 18**"
+   }
+  ],
+  "topics": [
+   "counting",
+   "patterns"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2021-combinatorics-d2-02",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Combinatorics and Computer Science Round (Division 2)",
+   "year": 2021,
+   "number": 2,
+   "url": "https://cmimc.com/archive/cmimc2021/2021_ComboCS_D2.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Dilhan has objects of $3$ types, $A$, $B$, and $C$, and $6$ functions\n$$f_{A,B},\\ f_{A,C},\\ f_{B,A},\\ f_{B,C},\\ f_{C,A},\\ f_{C,B}$$\nwhere $f_{X,Y}$ takes in an object of type $X$ and outputs an object of type $Y$. Dilhan wants to compose his $6$ functions, without repeats, such that the resulting expression is well-typed, meaning an object can be taken in by the first function, and the resulting output can then be taken in by the second function, and so on. In how many orders can he compose his $6$ functions, satisfying this constraint?",
+  "image": null,
+  "choices": null,
+  "answer": "18",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Eulerian trails on a triangle",
+    "body": "Put $A,B,C$ on a circle. Each function is a directed edge between two types, going either clockwise ($\\mathrm{C}$) or counterclockwise ($\\mathrm{W}$). A valid composition uses each of the $6$ directed edges once as a walk, so the sequence of edge directions has three $\\mathrm{C}$ and three $\\mathrm{W}$ and every directed edge is used exactly once. The valid direction patterns are exactly the $6$ cyclic shifts of $\\mathrm{CCCWWW}$ (e.g. $\\mathrm{CCCWWW}$ goes round the triangle one way and back the other way), and the walk can start at any of the $3$ types.\n\nSo there are $6\\cdot3=18$ orders. (Checking all $720$ orderings by computer confirms $18$.)\n\n**Answer: 18**"
+   }
+  ],
+  "topics": [
+   "counting",
+   "graph-theory"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2021-combinatorics-d2-03",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Combinatorics and Computer Science Round (Division 2)",
+   "year": 2021,
+   "number": 3,
+   "url": "https://cmimc.com/archive/cmimc2021/2021_ComboCS_D2.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Adam has a box with $15$ pool balls in it, numbered from $1$ to $15$, and picks out $5$ of them. He then sorts them in increasing order, takes the four differences between each pair of adjacent balls, and finds exactly two of these differences are equal to $1$. How many selections of $5$ balls could he have drawn from the box?",
+  "image": null,
+  "choices": null,
+  "answer": "990",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [],
+  "topics": [
+   "counting"
+  ],
+  "difficulty": 2,
+  "duplicateOf": "cmimc-2021-combinatorics-d1-01",
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2021-combinatorics-d2-04",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Combinatorics and Computer Science Round (Division 2)",
+   "year": 2021,
+   "number": 4,
+   "url": "https://cmimc.com/archive/cmimc2021/2021_ComboCS_D2.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Vijay has a stash of different size stones: in particular, he has $2021$ types of stones, with sizes from $0$ through $2020$, and he has $2r+1$ stones of size $r$.\n\nVijay starts randomly (and without replacement) taking out stones from his stash and laying them out in a line. Vijay notices that the first stone of size $2020$ comes before the first stone of size $2019$, the first stone of size $2019$ is before the first stone of size $2018$, and so on. What is the probability of this happening?\n\nExpress your answer in terms of only basic arithmetic operations (division, exponentiation, etc.) and the factorial function.",
+  "image": null,
+  "choices": null,
+  "answer": "$\\dfrac{4042!}{2^{2021}\\,(2021!)^3}$",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Peel off the largest stones",
+    "body": "If the first stone of the whole line is not of size $2020$, say it has size $r<2020$, then the first stone of size $r$ comes before the first stone of size $2020$, violating the condition (the chain of orderings is transitive). So the first stone must be of size $2020$. The total number of stones is $\\sum_{r=0}^{2020}(2r+1)=2021^2$, of which $4041$ have size $2020$, so this has probability $\\frac{4041}{2021^2}$.\n\nNow delete all stones of size $2020$. The rest are in uniformly random order, and the same argument says its first stone must be of size $2019$: probability $\\frac{4039}{2020^2}$. Continuing down to size $0$,\n$$P=\\prod_{r=0}^{2020}\\frac{2r+1}{(r+1)^2}=\\frac{4041!!}{(2021!)^2}.$$\nSince $4041!!=\\dfrac{4042!}{2^{2021}\\,2021!}$,\n$$P=\\frac{4042!}{2^{2021}\\,(2021!)^3}.$$\n\n**Answer: $\\dfrac{4042!}{2^{2021}(2021!)^3}$**"
+   }
+  ],
+  "topics": [
+   "probability",
+   "counting"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2021-combinatorics-d2-05",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Combinatorics and Computer Science Round (Division 2)",
+   "year": 2021,
+   "number": 5,
+   "url": "https://cmimc.com/archive/cmimc2021/2021_ComboCS_D2.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Bill Gates and Jeff Bezos are playing a game. Each turn, a coin is flipped, and if Bill and Jeff have $m,n>0$ dollars, respectively, the winner of the coin toss will take $\\min(m,n)$ from the loser. Given that Bill starts with $20$ dollars and Jeff starts with $21$ dollars, what is the probability that Bill ends up with all of the money?",
+  "image": null,
+  "choices": null,
+  "answer": "20/41",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Martingale",
+    "body": "Each turn Bill's money changes by $+\\min(m,n)$ or $-\\min(m,n)$ with probability $\\frac12$ each, so its expected value never changes: it stays $20$ forever. The game ends with probability at least $\\frac12$ on every turn (the poorer player loses everything if they lose the toss), so it ends with probability $1$ (and Bill's money is bounded by $41$). At the end Bill has $41$ with some probability $p$ and $0$ otherwise, so $41p=20$ and $p=\\frac{20}{41}$. (Solving the Markov chain exactly with fractions gives the same value.)\n\n**Answer: $\\frac{20}{41}$**"
+   }
+  ],
+  "topics": [
+   "probability"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2021-combinatorics-d2-06",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Combinatorics and Computer Science Round (Division 2)",
+   "year": 2021,
+   "number": 6,
+   "url": "https://cmimc.com/archive/cmimc2021/2021_ComboCS_D2.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Adam is playing Minesweeper on a $9\\times9$ grid of squares, where exactly $\\frac13$ (or $27$) of the squares are mines (generated uniformly at random over all such boards). Every time he clicks on a square, it is either a mine, in which case he loses, or it shows a number saying how many of the (up to eight) adjacent squares are mines.\n\nFirst, he clicks the square directly above the center square, which shows the number $4$. Next, he clicks the square directly below the center square, which shows the number $1$. What is the probability that the center square is a mine?",
+  "image": null,
+  "choices": null,
+  "answer": "88/379",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [],
+  "topics": [
+   "probability",
+   "counting"
+  ],
+  "difficulty": 2,
+  "duplicateOf": "cmimc-2021-combinatorics-d1-02",
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2021-combinatorics-d2-07",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Combinatorics and Computer Science Round (Division 2)",
+   "year": 2021,
+   "number": 7,
+   "url": "https://cmimc.com/archive/cmimc2021/2021_ComboCS_D2.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "How many permutations of the string $0123456$ are there such that no contiguous substrings of lengths $1<\\ell<7$ have a sum of digits divisible by $7$?",
+  "image": null,
+  "choices": null,
+  "answer": "420",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [],
+  "topics": [
+   "counting"
+  ],
+  "difficulty": 2,
+  "duplicateOf": "cmimc-2021-combinatorics-d1-03",
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2021-combinatorics-d2-08",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Combinatorics and Computer Science Round (Division 2)",
+   "year": 2021,
+   "number": 8,
+   "url": "https://cmimc.com/archive/cmimc2021/2021_ComboCS_D2.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Suppose you have a $6$ sided dice with $3$ faces colored red, $2$ faces colored blue, and $1$ face colored green. You roll this dice $20$ times and record the color that shows up on top. What is the expected value of the product of the number of red faces, blue faces, and green faces?",
+  "image": null,
+  "choices": null,
+  "answer": "190",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [],
+  "topics": [
+   "probability",
+   "counting"
+  ],
+  "difficulty": 2,
+  "duplicateOf": "cmimc-2021-combinatorics-d1-04",
+  "reviewNote": null
+ }
+]

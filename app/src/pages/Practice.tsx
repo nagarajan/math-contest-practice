@@ -4,6 +4,7 @@ import { gradeName, NO_FOCUS, type PracticeFocus, type Question } from '../types
 import { pickPracticeQuestion } from '../lib/selection'
 import { formatAnswer, isCorrect } from '../lib/answers'
 import { recordAttempt } from '../lib/storage'
+import { withContent } from '../lib/banks'
 import { QuestionView } from '../components/QuestionView'
 import { Solutions } from '../components/Solutions'
 import { Markdown } from '../components/Markdown'
@@ -17,6 +18,8 @@ type Result = null | 'shown' | boolean
 export function PracticePage() {
   const { banks, data, updateData, settings, setSettings, grade } = useApp()
   const [q, setQ] = useState<Question | null>(null)
+  const [ready, setReady] = useState(false)
+  const [failed, setFailed] = useState(false)
   const [value, setValue] = useState('')
   const [result, setResult] = useState<Result>(null)
   const [session, setSession] = useState({ answered: 0, correct: 0 })
@@ -45,14 +48,26 @@ export function PracticePage() {
     () => (focus.bank ? [focus.bank] : banks.banks.map((b) => b.id).filter((b) => !settings.practiceExcluded.includes(b))),
     [banks, settings.practiceExcluded, focus.bank],
   )
+  const request = useRef(0)
   const next = (excludeId: string | null) => {
     const pick = pickPracticeQuestion(pool, data, allowed, excludeId)
-    discardScratch(`practice-${visit}`)
-    setVisit((v) => v + 1)
-    setQ(pick)
-    setValue('')
-    setResult(null)
-    startedAt.current = Date.now()
+    const n = ++request.current
+    setFailed(false)
+    const show = (full: Question | null) => {
+      if (n !== request.current) return
+      discardScratch(`practice-${visit}`)
+      setVisit((v) => v + 1)
+      setQ(full)
+      setValue('')
+      setResult(null)
+      setReady(true)
+      startedAt.current = Date.now()
+    }
+    if (!pick) show(null)
+    else
+      withContent([pick])
+        .then(([full]) => show(full))
+        .catch(() => n === request.current && setFailed(true))
   }
 
   useEffect(() => {
@@ -62,6 +77,21 @@ export function PracticePage() {
   }, [focus.bank, focus.topic, focus.difficulty])
 
   const filters = <PracticeFilters base={base} focus={focus} setFocus={setFocus} matching={focused ? pool.length : null} />
+
+  if (failed) {
+    return (
+      <div className="page narrow">
+        <div className="card">
+          Couldn't load the question.{' '}
+          <button className="link" onClick={() => next(q?.id ?? null)}>
+            Try again
+          </button>
+        </div>
+      </div>
+    )
+  }
+
+  if (!ready) return <div className="loading">Loading question…</div>
 
   if (!q) {
     return (

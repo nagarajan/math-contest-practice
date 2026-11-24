@@ -1,0 +1,309 @@
+[
+ {
+  "id": "cmimc-2026-combinatorics-01",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Combinatorics Round",
+   "year": 2026,
+   "number": 1,
+   "url": "https://cmimc.com/archive/cmimc2026/combo_problems.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Let the set $A=\\{1,4,9,\\dots,2025\\}$ where $A$ contains all positive perfect squares up to $2025$. Two elements of $A$ are selected at random without replacement. Find the probability that their difference is a multiple of $3$.",
+  "image": null,
+  "choices": null,
+  "answer": "6/11",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Residues mod 3",
+    "body": "$A$ has $45$ elements ($1^2,\\dots,45^2$). A square is $\\equiv0\\pmod3$ if its root is a multiple of $3$ ($15$ squares) and $\\equiv1\\pmod 3$ otherwise ($30$ squares).\n\nThe difference is a multiple of $3$ iff both have the same residue: $\\binom{15}2+\\binom{30}2=105+435=540$ pairs out of $\\binom{45}2=990$.\n\n$\\frac{540}{990}=\\frac6{11}$.\n\n**Answer: $\\frac6{11}$**"
+   }
+  ],
+  "topics": [
+   "probability",
+   "number-theory"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null,
+  "answerDisplay": "$\\frac{6}{11}$"
+ },
+ {
+  "id": "cmimc-2026-combinatorics-02",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Combinatorics Round",
+   "year": 2026,
+   "number": 2,
+   "url": "https://cmimc.com/archive/cmimc2026/combo_problems.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "A $25\\times25$ square grid is colored as shown in the picture. I start in the upper left corner and move according to the following rules: on black squares I can only move left or right to another (adjacent) square; on white squares I can only move up or down to another (adjacent) square. What is the total number of squares in the grid that I can access with these rules?",
+  "image": "qimages/cmimc/2026-combinatorics/q02.webp",
+  "choices": null,
+  "answer": "325",
+  "acceptedAnswers": null,
+  "answerUnit": "squares",
+  "solutions": [
+   {
+    "title": "Layers",
+    "body": "The grid is made of nested L-shaped layers, alternating black and white, with layer $n$ containing the $n$-th pair of arms counted from the corner. Arriving in a layer, one can sweep along it (horizontally on black arms, vertically on white arms) in both directions, and the squares reached this way are exactly $n$ squares of layer $n$; from them one steps into the next layer. Every other square is unreachable: a white square not yet covered would have to be entered from a black square above/below it or from a white square to its left, and none of those are reachable.\n\nTotal: $1+2+\\dots+25=325$ (also confirmed by a breadth-first search on the grid read from the picture).\n\n**Answer: $325$**"
+   }
+  ],
+  "topics": [
+   "logic",
+   "patterns"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2026-combinatorics-03",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Combinatorics Round",
+   "year": 2026,
+   "number": 3,
+   "url": "https://cmimc.com/archive/cmimc2026/combo_problems.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Alice wrote $6$ numbers in a ring formation. (Rotations and reflections are deemed distinct.) Each number is either $1$ or $0$. A jester secretly flips $2$ of these numbers at random (either $1\\to0$ or $0\\to1$). Alice hires Bob the investigator to help her. Bob has a tool that checks $3$ neighboring numbers and ONLY returns how many numbers among them are flipped by the jester. He can use this tool as much as he wants. What is the probability that Bob can figure out where the defects are?",
+  "image": null,
+  "choices": null,
+  "answer": "4/5",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Window sums",
+    "body": "Let $x_i=1$ if position $i$ was flipped ($\\sum x_i=2$). The tool gives $y_i=x_i+x_{i+1}+x_{i+2}$ (indices mod $6$), and $y_i-y_{i+1}=x_i-x_{i+3}$.\n\nIf the two flipped positions are not opposite, the differences $x_i-x_{i+3}$ are not all zero and they pin down the pair uniquely. If they are opposite (e.g. $1,4$), all $y_i=1$ and the three opposite pairs $(1,4),(2,5),(3,6)$ give identical readings, so Bob cannot decide. (Checking all $15$ pairs: exactly $12$ produce a unique reading vector.)\n\nProbability $=\\frac{12}{15}=\\frac45$.\n\n**Answer: $\\frac45$**"
+   }
+  ],
+  "topics": [
+   "probability",
+   "logic"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null,
+  "answerDisplay": "$\\frac{4}{5}$"
+ },
+ {
+  "id": "cmimc-2026-combinatorics-04",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Combinatorics Round",
+   "year": 2026,
+   "number": 4,
+   "url": "https://cmimc.com/archive/cmimc2026/combo_problems.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "I'm going to write $100$ numbers $a_1,\\dots,a_{100}$. For $a_1$ through $a_6$, I independently assign each of them a random integer between $0$ and $6$ inclusive. For $i>6$, I write $a_i=\\operatorname{MEX}(\\{a_{i-1},\\dots,a_{i-6}\\})$, where $\\operatorname{MEX}(S)$ denotes the smallest nonnegative integer which is not in the set $S$. The probability that $a_{100}=6$ can be written as $\\frac mn$ where $\\gcd(m,n)=1$. Find $m+n$.",
+  "image": null,
+  "choices": null,
+  "answer": "18607",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Periodicity, then count",
+    "body": "**Periodicity.** For $i\\ge7$, $a_i\\le 6$ and $a_i\\notin\\{a_{i-6},\\dots,a_{i-1}\\}$. So $a_7,\\dots,a_{13}$ are $7$ distinct values in $\\{0,\\dots,6\\}$, a permutation. For a window of $6$ of these distinct values the MEX is the missing value, hence $a_i=a_{i-7}$ for $i\\ge14$. Since $100-9=91=7\\cdot13$, $a_{100}=a_9$.\n\n**Counting $a_9=6$.** $a_9=6$ iff $\\{a_3,\\dots,a_8\\}=\\{0,\\dots,5\\}$. Because $a_7\\notin\\{a_1..a_6\\}$ and $a_8\\notin\\{a_2..a_7\\}$, this holds iff $a_3,\\dots,a_6$ are distinct values from $\\{0,\\dots,5\\}$ (there are $\\binom64\\cdot4!=360$ ways) and neither $a_7$ nor $a_8$ equals $6$. Let $u<v$ be the two values of $\\{0..5\\}$ missing from $a_3..a_6$. Counting the pairs $(a_1,a_2)\\in\\{0..6\\}^2$:\n\n- $a_1,a_2$ both avoid $u,v$: $25$ pairs, fine.\n- $v$ present, $u$ absent: $a_7=u$ and we need $a_2\\ne v$: $11-6=5$ pairs.\n- $u$ present, $v$ absent: $a_7=v$ and we need $a_2\\ne u$: $5$ pairs.\n- both present: $a_7=6$, bad.\n\nThat is $35$ pairs, so the number of good outcomes is $360\\cdot35=12600$ out of $7^6=117649$. $\\frac{12600}{117649}=\\frac{1800}{16807}$, and $m+n=18607$ (also confirmed by exact simulation of the whole process).\n\n**Answer: $18607$**"
+   }
+  ],
+  "topics": [
+   "probability",
+   "counting"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2026-combinatorics-05",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Combinatorics Round",
+   "year": 2026,
+   "number": 5,
+   "url": "https://cmimc.com/archive/cmimc2026/combo_problems.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "What is the average value of the product $abc$ over all ordered triples of non-negative integers $(a,b,c)$ with $a+b+c=100$?",
+  "image": null,
+  "choices": null,
+  "answer": "16170",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Bijection with $5$-subsets",
+    "body": "Consider $5$-element subsets $\\{s_1<s_2<s_3<s_4<s_5\\}$ of $\\{1,\\dots,102\\}$. Fix $s_2=a+1$ and $s_4=a+b+2$. Then $s_1$ can be chosen in $a$ ways (below $s_2$), $s_3$ in $b$ ways (between $s_2$ and $s_4$), and $s_5$ in $c=100-a-b$ ways (above $s_4$). So the number of subsets with this $(s_2,s_4)$ is $abc$, and summing over all $(a,b,c)$ counts every $5$-subset once:\n$$\\sum abc=\\binom{102}{5}.$$\nThe number of triples is $\\binom{102}{2}$ (stars and bars). The average is\n$$\\frac{\\binom{102}{5}}{\\binom{102}{2}}=\\frac{102\\cdot101\\cdot100\\cdot99\\cdot98/120}{102\\cdot101/2}=\\frac{100\\cdot99\\cdot98}{60}=16170.$$\n\n**Answer: $16170$**"
+   }
+  ],
+  "topics": [
+   "counting",
+   "algebra"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2026-combinatorics-06",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Combinatorics Round",
+   "year": 2026,
+   "number": 6,
+   "url": "https://cmimc.com/archive/cmimc2026/combo_problems.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Three airlines operate flights that fly between $2026$ cities. Each flight is operated by one airline and connects two cities in both directions. The three airlines want to make sure that if any one of the airlines stops operating, each city can still be reached from any other city via some path of flights operated by the other two airlines. Compute the minimum number of total flights needed across all three airlines for this to be possible.",
+  "image": null,
+  "choices": null,
+  "answer": "3038",
+  "acceptedAnswers": null,
+  "answerUnit": "flights",
+  "solutions": [
+   {
+    "title": "Lower bound and construction",
+    "body": "Let the airlines have $a,b,c$ flights. Any two airlines together must connect all $2026$ cities, so need at least $2025$ flights: $a+b\\ge2025$, $b+c\\ge2025$, $c+a\\ge2025$. Adding, $2(a+b+c)\\ge6075$, so $a+b+c\\ge3038$.\n\n**Construction.** Join cities $1,2$ by two airlines (2 flights). Then repeatedly add two new cities $X,Y$ with three flights: pick an existing city $A$ and use $A\\!-\\!X$ (airline 1), $A\\!-\\!Y$ (airline 2), $X\\!-\\!Y$ (airline 3). Removing any airline leaves $X$ and $Y$ still attached to $A$ (directly or through each other). Adding pairs $1012$ times uses $2+3\\cdot1012=3038$ flights and gives $2+2\\cdot1012=2026$ cities.\n\n**Answer: $3038$**"
+   }
+  ],
+  "topics": [
+   "graph-theory",
+   "counting"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2026-combinatorics-07",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Combinatorics Round",
+   "year": 2026,
+   "number": 7,
+   "url": "https://cmimc.com/archive/cmimc2026/combo_problems.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "For an undirected simple graph $G$, consider the following triangle toggling operation: select distinct vertices $u,v,w$, and toggle each of $(u,v),(v,w),(w,u)$ (toggling means that if the edge exists, remove it, otherwise add it). What is the maximum integer $E$ such that given any undirected simple graph $G$ on $2025$ vertices, one can apply the triangle toggling operation a finite number of times to create a graph with at least $E$ edges?",
+  "image": null,
+  "choices": null,
+  "answer": "2048288",
+  "acceptedAnswers": null,
+  "answerUnit": "edges",
+  "solutions": [
+   {
+    "title": "Greedy bound and parity bound",
+    "body": "**Lower bound.** Whenever a triple contains at least two non-edges, toggling it increases the edge count. Keep doing this; it must stop. At the end no vertex has two non-neighbors, so the non-edges form a matching, which has at most $\\lfloor2025/2\\rfloor=1012$ edges. Thus we reach at least $\\binom{2025}2-1012=2049300-1012=2048288$ edges.\n\n**Upper bound.** Toggling a triangle changes every vertex degree by $0$ or $\\pm2$, so degree parities never change. Start with a graph having $2024$ odd-degree vertices (and one even one). Odd degrees are at most $2023$ and the even one is at most $2024$, so the degree sum is at most $2024\\cdot2023+2024=4096576$, i.e. at most $2048288$ edges ever.\n\n**Answer: $2048288$**"
+   }
+  ],
+  "topics": [
+   "graph-theory",
+   "counting"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2026-combinatorics-08",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Combinatorics Round",
+   "year": 2026,
+   "number": 8,
+   "url": "https://cmimc.com/archive/cmimc2026/combo_problems.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Consider $S=\\{1,2,3,\\dots,2027^2\\}$. Find the number of $2026$-sized subsets of $S$ such that the product of the elements in the subset is $\\equiv1\\pmod{2027}$. ($2027$ is prime.)",
+  "image": null,
+  "choices": null,
+  "answer": "$\\displaystyle\\frac1{2026}\\left[\\binom{2026\\cdot2027}{2026}-\\binom{1013\\cdot2027}{1013}+1012\\binom{4054}{2}-1012\\cdot2027\\right]$",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Roots of unity filter",
+    "body": "Let $p=2027$ (prime). A subset containing a multiple of $p$ has product $0$, so use only the $p(p-1)$ non-multiples, each nonzero residue appearing exactly $p$ times. Take a generator $g$ of $(\\mathbb Z/p)^*$ and let an element with residue $g^k$ have \"weight\" $k\\in\\mathbb Z_{p-1}$; the product is $1$ iff the total weight is $\\equiv0\\pmod{p-1}$.\n\nLet $P(x,y)=\\prod_{k=0}^{p-2}(1+yx^k)^p$ and $f(x)=[y^{p-1}]P$. The wanted count is $\\frac1{p-1}\\sum_{j=0}^{p-2}f(\\omega^j)$ with $\\omega=e^{2\\pi i/(p-1)}$.\n\nFor $d=\\gcd(j,p-1)$, $m=(p-1)/d$: $\\prod_k(1+y\\omega^{jk})=(1-(-1)^my^m)^d$, so $P(\\omega^j,y)=(1-(-1)^my^m)^{dp}$ and $f(\\omega^j)=\\binom{dp}{d}(-1)^{d(m+1)}$. Each $d\\mid2026=2\\cdot1013$ occurs $\\varphi(m)$ times:\n\n- $d=2026$ ($m=1$): $\\binom{2026\\cdot2027}{2026}$\n- $d=1013$ ($m=2$): $-\\binom{1013\\cdot2027}{1013}$\n- $d=2$ ($m=1013$, $\\varphi=1012$): $1012\\binom{4054}2$\n- $d=1$ ($m=2026$, $\\varphi=1012$): $-1012\\cdot2027$\n\nSumming and dividing by $2026$ gives the formula (the same formula was checked against brute force for $p=3,5,7,11$).\n\n**Answer:** $\\frac1{2026}\\left[\\binom{2026\\cdot2027}{2026}-\\binom{1013\\cdot2027}{1013}+1012\\binom{4054}{2}-1012\\cdot2027\\right]$"
+   }
+  ],
+  "topics": [
+   "counting",
+   "number-theory"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2026-combinatorics-09",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Combinatorics Round",
+   "year": 2026,
+   "number": 9,
+   "url": "https://cmimc.com/archive/cmimc2026/combo_problems.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "**(Tiebreaker)** Suppose we are doing a simple random walk on the 2-D integer lattice (each step is one unit up, down, left or right with probability $\\frac14$), starting at the origin. What is the probability that somewhere in the first $1000$ steps we have been through the point $(2,2)$? Give your answer in the form $0.abcdef$.",
+  "image": null,
+  "choices": null,
+  "answer": "$\\approx0.454034$",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Dynamic programming",
+    "body": "Track the distribution of the walker's position step by step, removing the probability mass that reaches $(2,2)$ and adding it to the running hitting probability. After $1000$ steps the accumulated hitting probability is $0.454034\\ldots$\n\n**Answer: $\\approx 0.454034$**"
+   }
+  ],
+  "topics": [
+   "probability"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": "The official solutions do not include an answer for this tiebreaker; the value was computed by exact dynamic programming over the walk."
+ }
+]

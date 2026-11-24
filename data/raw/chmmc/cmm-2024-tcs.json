@@ -1,0 +1,172 @@
+[
+ {
+  "id": "chmmc-cmm-2024-tcs-01",
+  "bank": "chmmc",
+  "source": {
+   "contest": "Caltech Math Meet",
+   "paper": "2024 TCS Round",
+   "year": 2024,
+   "number": 1,
+   "url": null
+  },
+  "grade": "9-12",
+  "points": 25,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Finding the optimal way of multiplying matrices is an important problem in theoretical computer science. The best known algorithm multiplies two $n\\times n$ matrices over a field in time $O(n^{2.3728596})$.\n\nConsider $n\\times n$ matrices over the field $\\mathbb F_2=\\{0,1\\}$, where $0+0=1+1=0$, $1+0=0+1=1$, $0\\cdot0=0\\cdot1=1\\cdot0=0$ and $1\\cdot1=1$. For any such matrix $A$, computing $A^k$ for a constant positive integer $k$ takes time $O(n^{2.3728596})$ by applying the best matrix multiplication algorithm $k-1$ times. For example,\n$$A=\\begin{pmatrix}0&1&0\\\\0&0&1\\\\1&1&1\\end{pmatrix},\\qquad A^2=\\begin{pmatrix}0&0&1\\\\1&1&1\\\\1&0&0\\end{pmatrix}.$$\n\nShow that one can find the $(i,j)$-entry of $A^k$, where $A$ is an $n\\times n$ matrix over $\\mathbb F_2$ and $k$ is a constant, in time $O(n^2)$. Describe the algorithm clearly and give a full analysis of its correctness and time complexity. (Elementary operations - arithmetic, comparisons, reading from and writing to a static array - take constant time.)",
+  "image": null,
+  "choices": null,
+  "answer": "Multiply the unit vector $e_j$ by $A$ a total of $k$ times (matrix-vector products cost $O(n^2)$ each) and read off coordinate $i$: time $O(kn^2)=O(n^2)$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Matrix-vector products",
+    "body": "**Algorithm.** Let $e_j\\in\\mathbb F_2^n$ be the $j$-th standard basis column vector.\n1. Set $x^{(0)}=e_j$ (an array of $n$ bits, zero except at position $j$).\n2. For $t=1,\\dots,k$: compute $x^{(t)}=Ax^{(t-1)}$ over $\\mathbb F_2$, that is, for each row $r=1,\\dots,n$: $x^{(t)}_r=\\bigoplus_{s=1}^nA_{rs}\\wedge x^{(t-1)}_s$ (sum modulo $2$ of the products $A_{rs}x^{(t-1)}_s$).\n3. Output $x^{(k)}_i$.\n\n**Correctness.** By induction on $t$, $x^{(t)}=A^te_j$: it holds for $t=0$, and $x^{(t)}=A\\,x^{(t-1)}=A\\cdot A^{t-1}e_j=A^te_j$ by associativity of matrix multiplication (valid over any field, in particular $\\mathbb F_2$). The vector $A^ke_j$ is the $j$-th column of $A^k$, so its $i$-th coordinate is $(A^k)_{ij}$, which is what the algorithm outputs.\n\n**Time.** One matrix-vector product consists of $n$ coordinates, each a sum of $n$ products of bits: $n^2$ multiplications (ANDs) and about $n^2$ additions (XORs), i.e. $O(n^2)$ elementary operations. We do $k$ of them, plus $O(n)$ to initialise $x^{(0)}$, for a total of $O(kn^2+n)=O(n^2)$ since $k$ is a constant. Memory: $A$ and two vectors, $O(n^2)$.\n\nThis beats computing the whole matrix $A^k$ (time $O(n^{2.3728596})$), because we only ever multiply $A$ by a *vector*, never by a matrix. (For non-constant $k$ the same algorithm runs in time $O(kn^2)$.) $\\blacksquare$"
+   }
+  ],
+  "topics": [
+   "linear-algebra",
+   "algebra"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "chmmc-cmm-2024-tcs-02a",
+  "bank": "chmmc",
+  "source": {
+   "contest": "Caltech Math Meet",
+   "paper": "2024 TCS Round",
+   "year": 2024,
+   "number": 2,
+   "url": null
+  },
+  "grade": "9-12",
+  "points": 10,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "**Online secretary problem.** You wish to hire a secretary among $n$ potential candidates. You consider your hiring process a success only if you hire the (unique) strongest candidate in the pool. You may only interview the candidates one by one, in random order (all $n!$ orders equally likely), with no knowledge of their strength until after the interview, and you may hire the $t$-th candidate if and only if you make them an offer after their interview and before the next candidate's interview.\n\nYou use the following strategy: for a certain value $T(n)$, you interview the first $T(n)$ candidates but do not make any of them an offer, and then you offer the job to the first candidate (if any) who is stronger than all of the first $T(n)$ candidates.\n\nFind a choice of $T(n)$ that ensures a probability of success of at least $1/e$.",
+  "image": null,
+  "choices": null,
+  "answer": "$T(n)=$ the integer nearest to $n/e$ works for every $n$, with success probability $\\ge1/e$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Success probability formula and optimisation",
+    "body": "Let $t=T(n)\\ge1$ (the case $t=0$ is only needed for $n=1$). The strategy succeeds iff the best candidate is at some position $j>t$ and no candidate at positions $t+1,\\dots,j-1$ is better than all of the first $t$; equivalently, the best of the first $j-1$ candidates lies among the first $t$. The best candidate is at position $j$ with probability $\\frac1n$, and given that, the best of the other $j-1$ earlier candidates is in a uniformly random position among them, so lies in the first $t$ with probability $\\frac t{j-1}$. Hence\n$$P(t)=\\frac1n\\sum_{j=t+1}^n\\frac t{j-1}=\\frac tn\\sum_{j=t}^{n-1}\\frac1j.$$\n\n**A lower bound.** The function $1/x$ is convex, so on $[j,j+1]$ the trapezoid rule overestimates the integral: $\\ln\\frac{j+1}j\\le\\frac12\\left(\\frac1j+\\frac1{j+1}\\right)$. Summing for $j=t,\\dots,n-1$ gives $\\ln\\frac nt\\le\\sum_{j=t}^{n-1}\\frac1j-\\frac12\\left(\\frac1t-\\frac1n\\right)$. Therefore, with $x=t/n$,\n$$P(t)\\ \\ge\\ x\\ln\\frac1x+\\frac{1-x}{2n}.$$\n\n**Choice of $t$.** Take $t$ to be the integer nearest to $n/e$, so $\\delta:=|x-\\frac1e|\\le\\frac1{2n}$.\n- $n=1$: $t=0$, i.e. hire the first candidate: success probability $1\\ge1/e$. $n=2$: $t=1$, success probability $\\frac12\\ge\\frac1e$.\n- $n\\ge3$: let $f(x)=x\\ln\\frac1x$. Then $f(\\frac1e)=\\frac1e$, $f'(\\frac1e)=0$, $f''(x)=-\\frac1x$, so by Taylor's theorem $f(x)=\\frac1e-\\frac{\\delta^2}{2\\xi}$ for some $\\xi$ between $x$ and $\\frac1e$; since $\\xi\\ge\\frac1e-\\frac1{2n}\\ge\\frac1e-\\frac16>0.2$ we get $f(x)\\ge\\frac1e-\\frac{\\delta^2}{0.4}\\ge\\frac1e-\\frac{0.63}{n^2}$. Also $x\\le\\frac1e+\\frac16<0.54$, so $\\frac{1-x}{2n}\\ge\\frac{0.23}n\\ge\\frac{0.63}{n^2}$ for $n\\ge3$. Hence $P(t)\\ge\\frac1e$.\n\nSo $T(n)=\\operatorname{round}(n/e)$ guarantees success probability at least $1/e$ for every $n$. $\\blacksquare$ (As $n\\to\\infty$ the success probability tends to $\\max_x x\\ln\\frac1x=\\frac1e$.)"
+   }
+  ],
+  "topics": [
+   "probability"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "chmmc-cmm-2024-tcs-02b",
+  "bank": "chmmc",
+  "source": {
+   "contest": "Caltech Math Meet",
+   "paper": "2024 TCS Round",
+   "year": 2024,
+   "number": 2,
+   "url": null
+  },
+  "grade": "9-12",
+  "points": 20,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "**Two openings.** Suppose now there are two secretary positions open for hire. Again you face $n$ candidates and you consider your hiring process a success only if one of the two secretary positions is given to the (unique) strongest candidate. The restrictions remain the same: candidates are interviewed in a uniformly random order, you learn the strength of a candidate only after their interview (and can compare them with the earlier ones), and you can only hire a candidate immediately after their interview.\n\nDesign an algorithm that helps to achieve your goal. Describe the algorithm clearly and give a full analysis of the corresponding success probability.",
+  "image": null,
+  "choices": null,
+  "answer": "Skip the first $t\\approx e^{-\\sqrt2}n$ candidates, then hire the first two candidates who beat everyone before them; success probability $\\ge(1+\\sqrt2)e^{-\\sqrt2}-\\frac1n\\approx0.587-\\frac1n$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Hire the first two records after a sample",
+    "body": "**Algorithm.** Fix $t$ (chosen below). Interview the first $t$ candidates and hire none. Afterwards, call a candidate a *record* if they are stronger than all candidates interviewed before them. Hire the first two records that appear after position $t$ (or fewer if there are fewer).\n\n**Exact success probability.** The best candidate is a record, so it is hired iff it lies at a position $j>t$ and at most one other record occurs in positions $t+1,\\dots,j-1$. Facts about random permutations: the events \"position $i$ is a record\" are independent with probabilities $\\frac1i$, and the event \"position $j$ holds the overall best\" is the event \"$j$ is a record and no later position is a record\", which has probability $\\frac1j\\prod_{i>j}\\left(1-\\frac1i\\right)=\\frac1n$ and is independent of the records before $j$. So\n$$P(t)=\\frac1n\\sum_{j=t+1}^{n}\\Pr[\\le1\\text{ record in }(t,j)].$$\nFor $t<i<j$ the record events are independent, so $\\Pr[\\text{none}]=\\prod_{i=t+1}^{j-1}\\left(1-\\frac1i\\right)=\\frac t{j-1}$ and\n$$\\Pr[\\text{exactly one}]=\\frac t{j-1}\\sum_{i=t+1}^{j-1}\\frac{1/i}{1-1/i}=\\frac t{j-1}\\sum_{l=t}^{j-2}\\frac1l.$$\nHence\n$$P(t)=\\frac1n\\sum_{j=t+1}^n\\frac t{j-1}\\left(1+\\sum_{l=t}^{j-2}\\frac1l\\right).$$\n\n**Lower bound.** Since $\\sum_{l=t}^{u-1}\\frac1l\\ge\\int_t^u\\frac{dx}x=\\ln\\frac ut$ (with $u=j-1$), $P(t)\\ge\\frac tn\\sum_{u=t}^{n-1}\\varphi(u)$ with $\\varphi(u)=\\frac{1+\\ln(u/t)}u$. This $\\varphi$ is decreasing for $u\\ge t$ ($\\varphi'(u)=-\\frac{\\ln(u/t)}{u^2}\\le0$), so the sum is at least $\\int_t^n\\varphi(u)\\,du=\\ln\\frac nt+\\frac12\\ln^2\\frac nt$. With $x=t/n$ and $L=\\ln\\frac1x$:\n$$P(t)\\ge H(x):=x\\left(L+\\tfrac12L^2\\right).$$\n\n**Choosing $t$.** $H'(x)=\\frac{L^2}2-1$ (using $\\frac{dL}{dx}=-\\frac1x$), which is positive for $L>\\sqrt2$ and negative for $0<L<\\sqrt2$. So $H$ is maximal at $x_0=e^{-\\sqrt2}\\approx0.243$, with $H(x_0)=(1+\\sqrt2)e^{-\\sqrt2}\\approx0.587$; and for $x\\in[x_0,1)$ we have $-1<H'\\le0$. Take $t=\\lceil nx_0\\rceil$, so $x=t/n\\in[x_0,x_0+\\frac1n)$ and\n$$P(t)\\ \\ge\\ H(x_0)-\\frac1n\\ \\approx\\ 0.587-\\frac1n.$$\nThus for large $n$ the success probability is about $0.587$, far better than $1/e\\approx0.368$ obtained with one position (the exact value $P(t)$ given above can be evaluated for any particular $n$). $\\blacksquare$"
+   }
+  ],
+  "topics": [
+   "probability",
+   "statistics"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "chmmc-cmm-2024-tcs-02c",
+  "bank": "chmmc",
+  "source": {
+   "contest": "Caltech Math Meet",
+   "paper": "2024 TCS Round",
+   "year": 2024,
+   "number": 2,
+   "url": null
+  },
+  "grade": "9-12",
+  "points": 20,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "**Team hire.** You need to hire $k$ secretaries in total from $n$ candidates, interviewed one by one in uniformly random order, with an irrevocable decision right after each interview. The strength of each candidate is a distinct nonnegative score, revealed (relative to earlier candidates) only upon interview. You want the total score of the hired secretaries to be as large as possible. A colleague proposes the recursive algorithm `select_candidates(n,k)`:\n\n- If $k=1$, follow the optimal strategy of the one-secretary problem (reject the first $T(n)$ candidates, then take the first candidate better than all of them).\n- If $k>1$, generate a random sample $m$ from the binomial distribution $B(n,1/2)$, where $\\Pr(m=l)=\\binom nl\\left(\\frac12\\right)^n$. Hire up to $\\lfloor k/2\\rfloor$ candidates among the first $m$ candidates by applying `select_candidates(m,`$\\lfloor k/2\\rfloor$`)`. Starting from the $(m+1)$-th candidate, select every candidate whose score is larger than the $\\lfloor k/2\\rfloor$-th largest score among the first $m$ candidates. Stop when a total of $k$ candidates are hired or all $n$ candidates have been interviewed.\n\nVerify that the expected total score of the candidates hired by this algorithm is at least $\\left(1-\\frac5{\\sqrt k}\\right)$ times the actual optimal (the sum of the $\\min(n,k)$ largest scores). *Hint.* Use induction on $k$; consider the \"modified score\" of a candidate, which is $0$ if the candidate is not among the top $k$.",
+  "image": null,
+  "choices": null,
+  "answer": "Strong induction on $k$: label the ranked candidates sample/rest by independent fair coins; the recursive call loses a fraction $\\le 5/\\sqrt{k'}$ of the sample's half of the top candidates, and the threshold position $\\rho$ (a negative-binomial variable) loses $\\mathbb E|\\rho-k|\\le\\sqrt{k}+1$, giving a total loss $\\le 5\\sqrt k'+\\sqrt{2k'}+1\\le 5k/\\sqrt k$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Induction with coin-flip labels",
+    "body": "**Conventions.** If the sample has fewer than $\\lfloor k/2\\rfloor$ candidates, no threshold exists and every later candidate is selected until $k$ are hired. Write $k'=\\lfloor k/2\\rfloor$, let $\\mathrm{OPT}$ be the sum of the $\\min(n,k)$ largest scores, and let $E_k$ denote the claim\n\n> for every $n\\ge0$ and all distinct nonnegative scores, the expected total score hired by `select_candidates(n,k)` is at least $\\left(1-\\frac5{\\sqrt k}\\right)\\mathrm{OPT}$.\n\nWe prove $E_k$ by strong induction on $k$. If $k\\le25$ then $1-5/\\sqrt k\\le0$ and the claim is trivial (scores are nonnegative), so let $k\\ge26$ (hence $k'\\ge13$) and assume $E_{k'}$.\n\n**Setup.** Rank all $n$ candidates by score: $v_1>v_2>\\dots>v_n\\ge0$. Let $N_0=\\min(n,k)$ and $V=\\mathrm{OPT}=\\sum_{i\\le N_0}v_i$. Drawing $m\\sim B(n,1/2)$ and taking the first $m$ candidates as the sample $L$ (rest $R$) is the same as putting each candidate in $L$ independently with probability $\\frac12$; given the sets, the order inside $L$ and inside $R$ is uniform. Let $\\lambda_i\\in\\{L,R\\}$ be the label of the rank-$i$ candidate (iid fair), and set $\\lambda_t=L$ for $t>n$. Let $\\rho$ be the position of the $k'$-th label $L$ in this sequence. The threshold is the score $v_\\rho$ if $\\rho\\le n$ (and does not exist, equivalently is $-\\infty$, if $\\rho>n$). Let $U$ be the set of $R$-candidates of rank $<\\rho$ (those above the threshold); $|U|=\\rho-k'$.\n\n**Value of the first phase.** Given the sets, the recursive call is `select_candidates(|L|,k')` on a uniformly ordered sample. Put $b=\\max\\left(0,1-\\frac5{\\sqrt{k'}}\\right)$, so $1-b\\le\\frac5{\\sqrt{k'}}$. By $E_{k'}$ (and since scores are nonnegative), its expected hired value is at least $b\\cdot S$, where $S=\\sum_{i\\le\\rho,\\lambda_i=L}v_i$ is the sum of the $\\min(k',|L|)$ largest scores of $L$. It hires $h\\le k'$ candidates.\n\n**Value of the second phase.** The algorithm then hires the first $q=k-h\\ge k-k'$ members of $U$ in order of arrival (all of $U$ if $|U|\\le q$). Since $U$ arrives in uniformly random order, each member of $U$ is hired with probability $\\min(1,q/|U|)\\ge\\beta:=\\min\\left(1,\\frac{k-k'}{\\rho-k'}\\right)$. So the expected value of the second phase is at least $\\beta\\sum_{i\\in U}v_i$.\n\n**Combining.** Hence, conditioned on the labels, the expected total is at least $\\sum_{i\\le N_0}v_iw_i$ with\n$$w_i=b\\cdot\\mathbf 1[\\lambda_i=L,\\ i\\le\\rho]+\\beta\\cdot\\mathbf 1[\\lambda_i=R,\\ i<\\rho].$$\n(Candidates of rank $>N_0$ only add nonnegative value, which we drop.)\n\n**Monotonicity.** Let $p_i=\\mathbb E[w_i]$. We claim $p_1\\ge p_2\\ge\\cdots$. The first term: $\\Pr[\\lambda_i=L,i\\le\\rho]=\\frac12\\Pr[\\mathrm{Bin}(i-1,\\frac12)<k']$, which is non-increasing in $i$. For the second term fix $i<i'$ and let $\\sigma^{(1)}$ be a label sequence with $\\sigma^{(1)}_i=R$ and the rest iid; let $\\sigma^{(2)}$ be $\\sigma^{(1)}$ with the entries at positions $i,i'$ swapped (it has $R$ at $i'$ and iid elsewhere). Let $\\rho^{(1)},\\rho^{(2)}$ be the corresponding positions of the $k'$-th $L$. If the entry $\\sigma^{(1)}_{i'}$ is $R$ the two sequences coincide and $\\mathbf 1[\\rho>i']\\le\\mathbf 1[\\rho>i]$. If it is $L$, then $\\sigma^{(2)}$ has $L$ at $i$ and $R$ at $i'$; the $L$-counts of the two sequences differ by one exactly on positions $i\\le t<i'$ and agree elsewhere. Thus if $\\rho^{(2)}>i'$ then $\\rho^{(1)}=\\rho^{(2)}$, so $\\beta(\\rho^{(2)})\\mathbf 1[\\rho^{(2)}>i']\\le\\beta(\\rho^{(1)})\\mathbf 1[\\rho^{(1)}>i]$, and if $\\rho^{(2)}<i'$ the left side is $0$. So pointwise the term for $i'$ is at most the term for $i$, proving the claim.\n\nSince $v_1\\ge\\cdots\\ge v_{N_0}$ and $p_1\\ge\\cdots\\ge p_{N_0}$, Chebyshev's sum inequality gives\n$$\\mathbb E[\\text{total}]\\ \\ge\\ \\sum_{i\\le N_0}v_ip_i\\ \\ge\\ \\frac V{N_0}\\,\\mathbb E\\Big[\\sum_{i\\le N_0}w_i\\Big].\\tag{$*$}$$\n\n**The loss.** Let $Z$ be the number of $L$-labels among the first $N_0$ positions. We bound $N_0-\\sum_{i\\le N_0}w_i$.\n\n*Case $\\rho\\le N_0$* (so $Z\\ge k'$). The $L$'s at positions $\\le\\rho$ number exactly $k'$ and the $R$'s before $\\rho$ number $\\rho-k'\\le N_0-k'\\le k-k'$, so $\\beta=1$: $\\sum w_i=bk'+\\rho-k'$ and the loss is $(N_0-\\rho)+(1-b)k'\\le(N_0-\\rho)+(1-b)Z$.\n\n*Case $\\rho>N_0$* (so $Z<k'$). Every $R$-candidate of rank $\\le N_0$ is in $U$, so $\\sum w_i=bZ+\\beta(N_0-Z)$. As $|U|=\\rho-k'\\ge N_0-Z$, we get $(1-\\beta)(N_0-Z)=\\frac{(|U|-(k-k'))^+}{|U|}(N_0-Z)\\le(|U|-(k-k'))^+$, so the loss is at most $(1-b)Z+(|U|-(k-k'))^+$.\n\nIn both cases the loss contains the term $(1-b)Z$, and $\\mathbb E[Z]=N_0/2$.\n\n*Sub-case $n\\ge k$ ($N_0=k$).* Then $(|U|-(k-k'))^+=(\\rho-k)^+$ and $N_0-\\rho=k-\\rho$, so the loss is at most $(1-b)Z+|\\rho-k|$ in all cases. Here $\\rho-k'$ is the number of $R$'s before the $k'$-th $L$ among the first $n\\ge k$ labels, which is dominated by a negative binomial variable $G$ (number of tails before the $k'$-th head of a fair coin, mean $k'$, variance $2k'$); more precisely $|\\rho-k|\\le|\\rho_\\infty-k|$ where $\\rho_\\infty=k'+G$ is the position of the $k'$-th head in an infinite fair sequence extending the same first $n$ labels. By the Cauchy–Schwarz inequality, $\\mathbb E|\\rho_\\infty-k|\\le\\mathbb E|\\rho_\\infty-2k'|+(k-2k')\\le\\sqrt{2k'}+\\varepsilon$, where $\\varepsilon=k-2k'\\in\\{0,1\\}$. In Case A the first part of the loss is $(1-b)k'$ and in Case B it is at most $(1-b)k'$ (as $Z<k'$). So the loss is at most $(1-b)k'+|\\rho-k|$, and by $(*)$ and $1-b\\le5/\\sqrt{k'}$,\n$$\\frac{\\mathbb E[\\text{total}]}V\\ \\ge\\ 1-\\frac{5\\sqrt{k'}+\\sqrt{2k'}+\\varepsilon}{k}.$$\nFor even $k=2k'$ this is $1-\\frac{5+\\sqrt2}{2\\sqrt{k'}}=1-\\frac{4.54}{\\sqrt k}$. For odd $k=2k'+1$ we need $5\\sqrt{k'}+\\sqrt{2k'}+1\\le5\\sqrt{2k'+1}$, which holds since $5\\sqrt{2k'+1}\\ge5\\sqrt2\\sqrt{k'}=7.07\\sqrt{k'}$ and $(5+\\sqrt2)\\sqrt{k'}+1\\le7.07\\sqrt{k'}$ for $k'\\ge3$. In either case the ratio is at least $1-\\frac5{\\sqrt k}$.\n\n*Sub-case $n<k$ ($N_0=n$).* Here $\\mathbb E[(1-b)Z]=(1-b)n/2\\le\\frac{5n}{2\\sqrt{k'}}\\le\\frac{3.61\\,n}{\\sqrt k}$ (using $k\\ge26$). The remaining loss is $(n-\\rho)^+$ in Case A and $(Y-(k-k'))^+$ in Case B, where $Y=n-Z\\sim\\mathrm{Bin}(n,\\frac12)$. If $n\\le k'$ both are $0$ (in Case A we would need $Z=n=k'$, so $\\rho=n$; in Case B $Y\\le n\\le k'\\le k-k'$). If $k'<n<k$, then $n\\ge k/2$ and\n- $\\mathbb E[(n-\\rho)^+\\mathbf 1_A]\\le\\mathbb E[(2k'-\\rho_\\infty)^+]=\\frac12\\mathbb E|\\rho_\\infty-2k'|\\le\\frac12\\sqrt{2k'}\\le\\frac12\\sqrt k$ (since $n\\le2k'$, and $\\mathbb E[\\rho_\\infty]=2k'$ makes the positive and negative parts of $\\rho_\\infty-2k'$ equally large in expectation);\n- $\\mathbb E[(Y-(k-k'))^+]\\le\\mathbb E[(Y-n/2)^+]=\\frac12\\mathbb E|Y-n/2|\\le\\frac{\\sqrt n}4\\le\\frac{\\sqrt k}4\\cdot\\sqrt{n/k}$ because $k-k'\\ge k/2>n/2$.\nSo the remaining loss is at most $\\frac12\\sqrt k+\\frac14\\sqrt n$, which is at most $1.39\\,n/\\sqrt k$ for $n\\in[k/2,k)$ (at $n=k/2$ the left side is $0.677\\sqrt k$ and the right side is $0.695\\sqrt k$, and the right side grows faster in $n$). Altogether the loss ratio $\\frac{\\text{loss}}{n}\\le\\frac{3.61+1.39}{\\sqrt k}=\\frac5{\\sqrt k}$.\n\nIn all cases, $(*)$ gives $\\mathbb E[\\text{total}]\\ge\\left(1-\\frac5{\\sqrt k}\\right)V$, which completes the induction. Since the algorithm's actual total is at least this modified count (all scores are nonnegative), the expected total score is at least $\\left(1-\\frac5{\\sqrt k}\\right)$ times the optimal. $\\blacksquare$"
+   }
+  ],
+  "topics": [
+   "probability",
+   "statistics",
+   "inequalities"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "chmmc-cmm-2024-tcs-03",
+  "bank": "chmmc",
+  "source": {
+   "contest": "Caltech Math Meet",
+   "paper": "2024 TCS Round",
+   "year": 2024,
+   "number": 3,
+   "url": null
+  },
+  "grade": "9-12",
+  "points": 25,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Suppose you have a randomized algorithm $\\mathsf A$ that takes an input vector $\\mathbf x\\in\\{0,1\\}^n$ and outputs an answer $y\\in\\{0,1\\}$. On every input, independently of its previous runs, $\\mathsf A$ outputs the correct answer with probability $p\\in(\\tfrac12+\\varepsilon,1)$ for some fixed $\\varepsilon\\in(0,\\tfrac12)$.\n\nUse algorithm $\\mathsf A$ to construct an algorithm $\\mathsf A'$ of polynomial time complexity that outputs the correct answer with probability at least $1-2^{-n}$ for sufficiently large $n$. Describe the algorithm clearly, and give a full analysis of its correctness and time complexity.",
+  "image": null,
+  "choices": null,
+  "answer": "Run $\\mathsf A$ independently $N=\\lceil n/\\varepsilon^2\\rceil$ times (forced odd) and output the majority answer; by Hoeffding's inequality the error is at most $e^{-2N\\varepsilon^2}\\le e^{-2n}<2^{-n}$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Majority vote",
+    "body": "**Algorithm $\\mathsf A'$.** On input $\\mathbf x$, let $N$ be the smallest odd integer with $N\\ge n/\\varepsilon^2$. Run $\\mathsf A$ on $\\mathbf x$ independently $N$ times, obtaining answers $y_1,\\dots,y_N\\in\\{0,1\\}$. Output the majority value (the value that appears more than $N/2$ times; $N$ odd means there is no tie).\n\n**Correctness.** Let $X_r$ be the indicator that the $r$-th run is correct; the $X_r$ are independent with $\\mathbb E X_r=p>\\frac12+\\varepsilon$. The majority is wrong iff $\\sum_rX_r<N/2$, i.e. iff $\\sum_r(X_r-p)<N/2-Np<-N\\varepsilon$. By Hoeffding's inequality for sums of independent $[0,1]$-valued variables, $\\Pr\\left[\\sum_r(X_r-\\mathbb E X_r)\\le-s\\right]\\le e^{-2s^2/N}$. With $s=N\\varepsilon$:\n$$\\Pr[\\mathsf A'\\text{ is wrong}]\\le e^{-2N\\varepsilon^2}\\le e^{-2n}<2^{-n},$$\nbecause $N\\ge n/\\varepsilon^2$ and $e^{-2}<\\frac12$. So $\\mathsf A'$ is correct with probability at least $1-2^{-n}$ (indeed for every $n\\ge1$).\n\n(For completeness, the form of Hoeffding's bound used: the Chernoff bound $\\Pr[\\mathrm{Bin}(N,p)\\le N/2]\\le e^{-N\\,D(\\frac12\\|p)}$ with $D(\\frac12\\|p)\\ge2(p-\\frac12)^2$ by Pinsker's inequality.)\n\n**Time complexity.** $\\mathsf A'$ makes $N\\le n/\\varepsilon^2+2$ calls to $\\mathsf A$ and then $O(N)$ operations for counting and comparing. If $\\mathsf A$ runs in time $T_{\\mathsf A}(n)$ (polynomial in $n$), then $\\mathsf A'$ runs in time $O\\left(\\frac n{\\varepsilon^2}T_{\\mathsf A}(n)\\right)$, which is polynomial in $n$ since $\\varepsilon$ is a fixed constant (it remains polynomial even if $1/\\varepsilon$ is allowed to grow polynomially in $n$). $\\blacksquare$"
+   }
+  ],
+  "topics": [
+   "probability",
+   "statistics"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ }
+]

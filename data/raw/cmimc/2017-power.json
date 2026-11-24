@@ -1,0 +1,953 @@
+[
+ {
+  "id": "cmimc-2017-power-01",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Power Round",
+   "year": 2017,
+   "number": 1,
+   "url": "https://cmimc.com/archive/cmimc2017/2017_Power.pdf"
+  },
+  "grade": "9-12",
+  "points": 6,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "The expected value of a random variable $X$ taking values $X_1,X_2,\\dots$ is $E[X]=\\sum_k X_k\\Pr[X=X_k]$. Two random variables are independent ($X\\perp Y$) if $\\Pr[(X=a)\\cap(Y=b)]=\\Pr[X=a]\\Pr[Y=b]$ for all $a,b$. A random variable $X\\sim\\text{Geometric}(p)$ is the number of independent samples from $\\text{Bernoulli}(p)$ needed until the first $1$ appears (a $\\text{Bernoulli}(p)$ variable is $1$ with probability $p$ and $0$ with probability $1-p$).\n\nProve that if $X\\sim\\text{Geometric}(p)$ (with $0<p\\le1$) then $E[X]=\\dfrac1p$.",
+  "image": null,
+  "choices": null,
+  "answer": "$E[X]=\\frac1p$ (condition on the first sample: $E=p+(1-p)(1+E)$).",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Condition on the first sample",
+    "body": "With probability $p$ the first sample is $1$ and $X=1$. Otherwise (probability $1-p$) one sample has been used and the process restarts, so $X$ is distributed as $1+X'$ with $X'$ a fresh copy. Hence $E[X]=p\\cdot1+(1-p)(1+E[X])$ (finite since the series below converges), i.e. $pE[X]=1$ and $E[X]=\\frac1p$. ∎"
+   },
+   {
+    "title": "Sum the series",
+    "body": "$\\Pr[X=i]=p(1-p)^{i-1}$, so $E[X]=\\sum_{i\\ge1}ip(1-p)^{i-1}$. For $|\\alpha|<1$, $\\sum_{i\\ge1}i\\alpha^{i-1}=\\frac{d}{d\\alpha}\\frac1{1-\\alpha}=\\frac1{(1-\\alpha)^2}$. With $\\alpha=1-p$: $E[X]=p\\cdot\\frac1{p^2}=\\frac1p$. ∎"
+   }
+  ],
+  "topics": [
+   "probability",
+   "sequences-series"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2017-power-02",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Power Round",
+   "year": 2017,
+   "number": 2,
+   "url": "https://cmimc.com/archive/cmimc2017/2017_Power.pdf"
+  },
+  "grade": "9-12",
+  "points": 8,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "The expected value of a random variable $X$ taking values $X_1,X_2,\\dots$ is $E[X]=\\sum_k X_k\\Pr[X=X_k]$. Two random variables are independent ($X\\perp Y$) if $\\Pr[(X=a)\\cap(Y=b)]=\\Pr[X=a]\\Pr[Y=b]$ for all $a,b$.\n\nProve the following properties of expected value, for random variables $X,Y$ with finite expectations and a constant $c$:\n- $E[cX]=cE[X]$ and $E[c+X]=c+E[X]$;\n- $E[XY]=E[X]E[Y]$ if $X\\perp Y$;\n- (linearity) $E[X+Y]=E[X]+E[Y]$.",
+  "image": null,
+  "choices": null,
+  "answer": "Straight from the definition of $E$ using $\\Pr[X=X_i]=p_i$, $\\Pr[Y=Y_j]=q_j$ and the joint distribution.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Direct computation",
+    "body": "Let $p_i=\\Pr[X=X_i]$, $q_j=\\Pr[Y=Y_j]$, $r_{ij}=\\Pr[X=X_i,Y=Y_j]$, so $\\sum_jr_{ij}=p_i$ and $\\sum_ir_{ij}=q_j$.\n\n- $E[cX]=\\sum_i(cX_i)p_i=c\\sum_iX_ip_i=cE[X]$.\n- $E[c+X]=\\sum_i(c+X_i)p_i=c\\sum_ip_i+\\sum_iX_ip_i=c+E[X]$.\n- If $X\\perp Y$ then $r_{ij}=p_iq_j$ and $E[XY]=\\sum_{i,j}X_iY_jp_iq_j=\\left(\\sum_iX_ip_i\\right)\\left(\\sum_jY_jq_j\\right)=E[X]E[Y]$.\n- $E[X+Y]=\\sum_{i,j}(X_i+Y_j)r_{ij}=\\sum_iX_i\\sum_jr_{ij}+\\sum_jY_j\\sum_ir_{ij}=\\sum_iX_ip_i+\\sum_jY_jq_j=E[X]+E[Y]$. ∎"
+   }
+  ],
+  "topics": [
+   "probability"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2017-power-03a",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Power Round",
+   "year": 2017,
+   "number": 3,
+   "url": "https://cmimc.com/archive/cmimc2017/2017_Power.pdf"
+  },
+  "grade": "9-12",
+  "points": 2,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Let $X\\sim\\text{Bernoulli}(0.75)$ (equal to $1$ with probability $0.75$, else $0$) and $Y$ uniform on $\\{1,\\dots,6\\}$ be independent random variables. Define $X'=6X+4$ and $Y'=3Y+2$. What is $E[X'+Y']$?",
+  "image": null,
+  "choices": null,
+  "answer": "21",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Linearity",
+    "body": "$E[X]=0.75$, $E[Y]=\\frac72$. So $E[X']=6(0.75)+4=\\frac{17}2$ and $E[Y']=3\\cdot\\frac72+2=\\frac{25}2$. By linearity, $E[X'+Y']=\\frac{17}2+\\frac{25}2=21$.\n\n**Answer: 21**"
+   }
+  ],
+  "topics": [
+   "probability"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2017-power-03b",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Power Round",
+   "year": 2017,
+   "number": 3,
+   "url": "https://cmimc.com/archive/cmimc2017/2017_Power.pdf"
+  },
+  "grade": "9-12",
+  "points": 2,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Let $X\\sim\\text{Bernoulli}(0.75)$ (equal to $1$ with probability $0.75$, else $0$) and $Y$ uniform on $\\{1,\\dots,6\\}$ be independent random variables. Define $X'=6X+4$ and $Y'=3Y+2$. What is $E[X'\\cdot Y']$?",
+  "image": null,
+  "choices": null,
+  "answer": "425/4",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Independence",
+    "body": "$X'$ and $Y'$ are independent (functions of independent variables), so $E[X'Y']=E[X']E[Y']=\\frac{17}2\\cdot\\frac{25}2=\\frac{425}4$.\n\n**Answer: $\\dfrac{425}{4}$**"
+   }
+  ],
+  "topics": [
+   "probability"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2017-power-04",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Power Round",
+   "year": 2017,
+   "number": 4,
+   "url": "https://cmimc.com/archive/cmimc2017/2017_Power.pdf"
+  },
+  "grade": "9-12",
+  "points": 7,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Suppose we randomly distribute $m\\ge1$ balls into $n\\ge1$ initially empty bins, so that each ball has an equal chance of being placed in each bin (independently). What is the expected number of balls in the first bin? What is the expected number of empty bins?",
+  "image": null,
+  "choices": null,
+  "answer": "$\\dfrac mn$ balls in the first bin; $n\\left(1-\\dfrac1n\\right)^m$ empty bins.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Indicator variables and linearity",
+    "body": "Let $X_i=1$ if ball $i$ lands in bin $1$, else $0$; $E[X_i]=\\frac1n$, so the expected number of balls in the first bin is $E[X_1+\\cdots+X_m]=\\frac mn$.\n\nLet $Y_i=1$ if bin $i$ is empty. Bin $i$ is empty iff each of the $m$ balls avoids it, probability $\\left(1-\\frac1n\\right)^m$ by independence. By linearity the expected number of empty bins is $n\\left(1-\\frac1n\\right)^m$.\n\n**Answer: $\\dfrac mn$ and $n\\left(1-\\dfrac1n\\right)^m$**"
+   }
+  ],
+  "topics": [
+   "probability",
+   "counting"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2017-power-05",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Power Round",
+   "year": 2017,
+   "number": 5,
+   "url": "https://cmimc.com/archive/cmimc2017/2017_Power.pdf"
+  },
+  "grade": "9-12",
+  "points": 4,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Consider the following two algorithms, each of which takes a nonnegative integer $n$ and decides whether $n$ is odd or even.\n\nAlgorithm 1:\n```\nwhile n >= 0 do\n    if n = 0 then return \"n is even\"\n    else if n = 1 then return \"n is odd\"\n    else n <- n - 2\n```\nAlgorithm 2:\n```\nfor i = 0, 2, 4, 6, ... do\n    if n = i then return \"n is even\"\n    else if n = i + 1 then return \"n is odd\"\n```\nProve that both algorithms are correct (always output the right answer) and always terminate.",
+  "image": null,
+  "choices": null,
+  "answer": "Algorithm 1: $n$ drops by $2$ each step and its parity is invariant; Algorithm 2: $n-i$ drops and $i$ is even.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Invariants and monovariants",
+    "body": "**Algorithm 1.** Each pass either returns or replaces $n$ by $n-2\\ge0$ (as $n\\ge2$ there), so the value strictly decreases through nonnegative integers and the loop ends after at most $\\lfloor n/2\\rfloor+1$ passes, necessarily by a return (when $n$ reaches $0$ or $1$). Subtracting $2$ does not change $n\\bmod2$, so when the value is $0$ the original $n$ was even, and when it is $1$ the original $n$ was odd.\n\n**Algorithm 2.** For the even number $i^*=2\\lfloor n/2\\rfloor\\le n$ we have $n\\in\\{i^*,i^*+1\\}$, so the algorithm returns by the time $i=i^*$; for smaller even $i$ we have $n\\ge i+2$ so nothing is returned. Hence it terminates. It returns \"even\" iff $n=i$ with $i$ even, and \"odd\" iff $n=i+1$ with $i$ even, so the output is correct. ∎"
+   }
+  ],
+  "topics": [
+   "logic"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2017-power-06",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Power Round",
+   "year": 2017,
+   "number": 6,
+   "url": "https://cmimc.com/archive/cmimc2017/2017_Power.pdf"
+  },
+  "grade": "9-12",
+  "points": 2,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Let $B(p)$ denote a call that returns a random number $X\\sim\\text{Bernoulli}(p)$ and $D(N)$ a call that returns a random number uniform on $\\{1,2,\\dots,N\\}$ (each call independent of the others).\n\nProve that the following algorithm returns a random number $X$ with $\\Pr[X=0]=\\frac14$, $\\Pr[X=1]=\\frac12$, $\\Pr[X=2]=\\frac14$:\n```\nu <- B(1/2)\nv <- B(1/2)\nreturn u + v\n```",
+  "image": null,
+  "choices": null,
+  "answer": "The four equally likely pairs $(u,v)$ give sums $0,1,1,2$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "List the outcomes",
+    "body": "$(u,v)$ takes each of the four values $(0,0),(0,1),(1,0),(1,1)$ with probability $\\frac14$. The sum is $0$ only for $(0,0)$ (probability $\\frac14$), $1$ for $(0,1),(1,0)$ (probability $\\frac12$), and $2$ only for $(1,1)$ (probability $\\frac14$). ∎"
+   }
+  ],
+  "topics": [
+   "probability"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2017-power-07",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Power Round",
+   "year": 2017,
+   "number": 7,
+   "url": "https://cmimc.com/archive/cmimc2017/2017_Power.pdf"
+  },
+  "grade": "9-12",
+  "points": 10,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Let $B(p)$ denote a call that returns a random number $X\\sim\\text{Bernoulli}(p)$ and $D(N)$ a call that returns a random number uniform on $\\{1,2,\\dots,N\\}$ (each call independent of the others).\n\nLet $p$ be any real number in $[0,1]$. Using only calls to $B(1/2)$, devise an algorithm that terminates with probability $1$ and returns a random number $X\\sim\\text{Bernoulli}(p)$. Prove that your algorithm is correct and terminates with probability $1$. (Partial credit of at most $4$ of the $10$ points is awarded for solving the case $p=\\frac13$.)",
+  "image": null,
+  "choices": null,
+  "answer": "Compare a random bit string with the binary expansion of $p$ and stop at the first difference.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Random bits versus the binary digits of p",
+    "body": "Write $p=0.b_1b_2b_3\\ldots$ in binary ($p=1$ is $0.111\\ldots$). Algorithm: for $k=1,2,3,\\dots$ draw $c_k\\leftarrow B(1/2)$; if $c_k\\ne b_k$ stop and return $1$ if $c_k<b_k$ (i.e. $c_k=0,b_k=1$), and return $0$ if $c_k>b_k$; otherwise continue.\n\n*Termination.* The algorithm is still running after $n$ steps only if $c_i=b_i$ for $i\\le n$, which has probability $2^{-n}\\to0$. So it terminates with probability $1$.\n\n*Correctness.* It returns $1$ with first difference at step $k$ exactly when $c_i=b_i$ for $i<k$ (probability $2^{-(k-1)}$), $b_k=1$ and $c_k=0$ (probability $\\frac12$): probability $b_k2^{-k}$. These events are disjoint, so $\\Pr[X=1]=\\sum_kb_k2^{-k}=p$, and $\\Pr[X=0]=1-p$ (non-termination has probability $0$). ∎"
+   },
+   {
+    "title": "The special case p = 1/3",
+    "body": "Repeat: draw $u,v\\leftarrow B(1/2)$. If $u+v=0$ return $1$; if $u+v=1$ return $0$; if $u+v=2$ repeat. By Problem 6, a round returns $1$ with probability $\\frac14$, returns $0$ with probability $\\frac12$, and repeats with probability $\\frac14$. The probability of not terminating after $n$ rounds is $4^{-n}\\to0$, and the final round returns $1$ with probability $\\frac{1/4}{1/4+1/2}=\\frac13$. ∎"
+   }
+  ],
+  "topics": [
+   "probability",
+   "logic"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2017-power-08",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Power Round",
+   "year": 2017,
+   "number": 8,
+   "url": "https://cmimc.com/archive/cmimc2017/2017_Power.pdf"
+  },
+  "grade": "9-12",
+  "points": 7,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "A deck has $N\\ge3$ cards $C_1,\\dots,C_N$ in a row and we want a uniformly random permutation. Here $D(N)$ returns a uniform random integer in $\\{1,\\dots,N\\}$. Consider\n```\nfor i = 1, 2, ..., N do\n    j <- D(N)\n    swap the positions of C_i and C_j\n```\nProve that this algorithm is incorrect, i.e. it does not produce a uniformly random permutation.",
+  "image": null,
+  "choices": null,
+  "answer": "There are $N^N$ equally likely runs but $N!\\nmid N^N$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Divisibility",
+    "body": "The $N$ random choices $(j_1,\\dots,j_N)$ give $N^N$ equally likely runs, each producing one permutation. If every one of the $N!$ permutations had probability $\\frac1{N!}$, each would be produced by exactly $\\frac{N^N}{N!}$ runs, so $N!\\mid N^N$. But $N\\ge3$ gives $N-1\\ge2$ and $N-1\\mid N!$, so $N-1\\mid N^N$; yet $\\gcd(N-1,N)=1$ gives $\\gcd(N-1,N^N)=1$, so $N-1\\mid1$, contradiction. (The same argument works whichever way the swaps are read.) ∎"
+   }
+  ],
+  "topics": [
+   "probability",
+   "counting"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2017-power-09",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Power Round",
+   "year": 2017,
+   "number": 9,
+   "url": "https://cmimc.com/archive/cmimc2017/2017_Power.pdf"
+  },
+  "grade": "9-12",
+  "points": 7,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "The shuffle in the previous problem (for $i=1,\\dots,N$, choose $j$ uniformly from $\\{1,\\dots,N\\}$ and swap cards $C_i$ and $C_j$) is not uniform. Fix the algorithm so that it produces a uniformly random permutation of $N$ cards (using $D(M)$, a uniform random integer in $\\{1,\\dots,M\\}$), and prove that your algorithm is correct.",
+  "image": null,
+  "choices": null,
+  "answer": "Choose $j$ uniformly from $\\{i,\\dots,N\\}$ and swap the cards in positions $i$ and $j$ (Fisher-Yates).",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Fisher-Yates",
+    "body": "Algorithm: for $i=1,\\dots,N$: $j\\leftarrow i-1+D(N+1-i)$ (uniform on $\\{i,\\dots,N\\}$), then swap the cards currently in positions $i$ and $j$.\n\nThere are $N(N-1)\\cdots1=N!$ equally likely choice sequences $(j_1,\\dots,j_N)$ with $j_i\\in\\{i,\\dots,N\\}$. Different sequences give different final arrangements: after step $i$, position $i$ is never touched again, so the card in position $1$ at the end is the card that was in position $j_1$ at the start, which determines $j_1$; then position $2$ determines $j_2$, and so on. So the map from sequences to arrangements is an injection between two sets of size $N!$, hence a bijection, and every permutation occurs with probability exactly $\\frac1{N!}$. ∎"
+   }
+  ],
+  "topics": [
+   "probability",
+   "counting"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2017-power-10",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Power Round",
+   "year": 2017,
+   "number": 10,
+   "url": "https://cmimc.com/archive/cmimc2017/2017_Power.pdf"
+  },
+  "grade": "9-12",
+  "points": 2,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "In one-dimensional battleship the first player chooses $k$ of the numbers $A[1],A[2],\\dots,A[4k]$ and sets them equal to $1$, the rest equal to $0$ (the figure shows an example with $k=4$). The second player tries to guess an index $i$ with $A[i]=1$, and after each guess the first player says whether it is correct.\n\nFind, with proof, a deterministic algorithm for the second player that requires at most $3k+1$ guesses.",
+  "image": "qimages/cmimc/2017-power/q10.webp",
+  "choices": null,
+  "answer": "Guess $A[1],A[2],\\dots,A[3k+1]$ in order.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Guess in order",
+    "body": "Guess $A[1],A[2],\\dots$ in this order. There are only $3k$ zeros among $A[1..4k]$, so among the first $3k+1$ positions at least one is a $1$; the algorithm stops at the first one it finds, after at most $3k+1$ guesses. ∎"
+   }
+  ],
+  "topics": [
+   "logic",
+   "counting"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2017-power-11",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Power Round",
+   "year": 2017,
+   "number": 11,
+   "url": "https://cmimc.com/archive/cmimc2017/2017_Power.pdf"
+  },
+  "grade": "9-12",
+  "points": 2,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "In one-dimensional battleship the first player chooses $k$ of the numbers $A[1],\\dots,A[4k]$ and sets them equal to $1$, the rest to $0$. The second player must guess an index $i$ with $A[i]=1$ (after each guess he is told whether it is correct). Suppose the second player uses a deterministic algorithm. Prove that there is some configuration for which he needs at least $3k+1$ guesses.",
+  "image": null,
+  "choices": null,
+  "answer": "The adversary answers 'no' to the first $3k$ distinct guesses (those positions are $0$).",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Adversary argument",
+    "body": "While every answer is 'wrong', a deterministic algorithm always makes the same sequence of guesses $\\sigma(1),\\sigma(2),\\dots$ (repeated guesses are useless). Take the first $3k$ distinct indices in that sequence and let the configuration have $0$s exactly there (and $1$s in the remaining $4k-3k=k$ positions, a valid configuration). Then the first $3k$ guesses all fail, so at least $3k+1$ guesses are needed. ∎"
+   }
+  ],
+  "topics": [
+   "logic",
+   "counting"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2017-power-12",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Power Round",
+   "year": 2017,
+   "number": 12,
+   "url": "https://cmimc.com/archive/cmimc2017/2017_Power.pdf"
+  },
+  "grade": "9-12",
+  "points": 6,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "In one-dimensional battleship the first player chooses $k$ of the numbers $A[1],\\dots,A[4k]$ and sets them equal to $1$, the rest to $0$; the second player guesses indices and is told whether $A[i]=1$, and wants to find an index with $A[i]=1$. A deterministic strategy can need $3k+1$ guesses. Find, with proof, a randomized algorithm for which the expected number of guesses is a constant independent of $k$ (it need not terminate). You may use that a $\\text{Geometric}(p)$ variable has expected value $\\frac1p$.",
+  "image": null,
+  "choices": null,
+  "answer": "Guess uniformly random indices; the expected number of guesses is $4$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Random guesses",
+    "body": "On each turn guess an index $X_i$ chosen uniformly at random from $\\{1,\\dots,4k\\}$ (independently each time). Whatever the configuration, exactly $k$ of the $4k$ positions are $1$, so each guess succeeds with probability $\\frac k{4k}=\\frac14$, independently. The number of guesses is therefore $\\text{Geometric}(\\frac14)$, with expectation $\\frac1{1/4}=4$, independent of $k$. ∎"
+   }
+  ],
+  "topics": [
+   "probability"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2017-power-13",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Power Round",
+   "year": 2017,
+   "number": 13,
+   "url": "https://cmimc.com/archive/cmimc2017/2017_Power.pdf"
+  },
+  "grade": "9-12",
+  "points": 5,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Suppose there is a function `IsComposite(n, a)` for $a\\in\\{2,\\dots,n-1\\}$ such that: if $n$ is prime it always returns false; if $n$ is composite it incorrectly returns false for fewer than half of the values $a\\in\\{2,\\dots,n-1\\}$. Here $D(M)$ returns a uniform random integer in $\\{1,\\dots,M\\}$. Consider the algorithm\n```\nfor i = 1, 2, ..., 100 do\n    a <- 1 + D(n - 2)\n    if IsComposite(n, a) then return \"n is composite\"\nreturn \"n is prime\"\n```\nWhat is the probability that it outputs \"n is composite\" when $n$ is actually prime? What is the probability that it outputs \"n is prime\" when $n$ is actually composite? How can we decrease these two probabilities?",
+  "image": null,
+  "choices": null,
+  "answer": "$0$; less than $2^{-100}$; use more iterations (replace $100$ by a larger number).",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Analyse the two errors",
+    "body": "If $n$ is prime, `IsComposite` is always false, so \"n is composite\" is never output: probability $0$.\n\nIf $n$ is composite, $a$ is uniform on $\\{2,\\dots,n-1\\}$ (since $a=1+D(n-2)$), so each independent round fails to detect compositeness with probability $<\\frac12$. The algorithm says \"prime\" only if all $100$ rounds fail: probability $<2^{-100}$.\n\nReplacing $100$ by a larger number $t$ makes the second error probability $<2^{-t}$ (the first stays $0$)."
+   }
+  ],
+  "topics": [
+   "probability"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2017-power-14",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Power Round",
+   "year": 2017,
+   "number": 14,
+   "url": "https://cmimc.com/archive/cmimc2017/2017_Power.pdf"
+  },
+  "grade": "9-12",
+  "points": 4,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Consider the sorting algorithm\n```\nAlgorithm: Sorting Algorithm #1\nData: a list L = (L[1], ..., L[n]) of integers\nResult: L sorted in increasing order\nfor i = 1, 2, ..., n do\n    for j = i+1, ..., n do\n        if L[j] < L[i] then swap L[i] and L[j]\n```\nProve that it is correct (it sorts $L$ into increasing order) and that it terminates.",
+  "image": null,
+  "choices": null,
+  "answer": "After the inner loop, $L[i]=\\min_{j\\ge i}L[j]$, and the elements of $L[i..n]$ are only permuted.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Loop invariant",
+    "body": "It terminates because both loops are finite.\n\nClaim: during the inner loop for a fixed $i$, after processing index $j$ we have $L[i]=\\min(L[i],\\dots,L[j])$ (original values at the start of that iteration of the outer loop). Indeed, comparing $L[j]$ with $L[i]$ and swapping when $L[j]<L[i]$ puts the smaller of the two into position $i$. Also swaps only permute the entries of positions $i,\\dots,n$. So after the inner loop, $L[i]$ is the minimum of the entries in positions $i,\\dots,n$.\n\nBy induction on $i$, after outer iteration $i$ the entries $L[1]\\le L[2]\\le\\dots\\le L[i]$, and each is at most every entry in positions after $i$ (position $i+1$ will receive the minimum of the rest, which is $\\ge L[i]$). At the end the whole list is sorted. ∎"
+   }
+  ],
+  "topics": [
+   "logic"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2017-power-15",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Power Round",
+   "year": 2017,
+   "number": 15,
+   "url": "https://cmimc.com/archive/cmimc2017/2017_Power.pdf"
+  },
+  "grade": "9-12",
+  "points": 2,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Consider the sorting algorithm\n```\nAlgorithm: Sorting Algorithm #1\nData: a list L = (L[1], ..., L[n]) of integers\nResult: L sorted in increasing order\nfor i = 1, 2, ..., n do\n    for j = i+1, ..., n do\n        if L[j] < L[i] then swap L[i] and L[j]\n```\nHow many comparisons (evaluations of $L[j]<L[i]$) does it always make on a list of $n$ numbers?",
+  "image": null,
+  "choices": null,
+  "answer": "$\\dbinom n2=\\dfrac{n(n-1)}2$",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Count the pairs",
+    "body": "One comparison is made for each pair $i<j$ and no others, whatever the input: $\\binom n2=\\frac{n(n-1)}2$. Equivalently $\\sum_{i=1}^n(n-i)=\\frac{n(n-1)}2$.\n\n**Answer: $\\frac{n(n-1)}2$**"
+   }
+  ],
+  "topics": [
+   "counting"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2017-power-16",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Power Round",
+   "year": 2017,
+   "number": 16,
+   "url": "https://cmimc.com/archive/cmimc2017/2017_Power.pdf"
+  },
+  "grade": "9-12",
+  "points": 6,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Consider the randomized sorting algorithm ($D(n)$ is a uniform random integer in $\\{1,\\dots,n\\}$):\n```\nAlgorithm: Sorting Algorithm #2\nData: a list L = (L[1], ..., L[n]) of integers\nResult: L sorted in increasing order\nif n = 0, 1 then\n    return L\np <- D(n)            (L[p] is called the pivot)\nL1, L2 <- empty lists\nfor i = 1, ..., p-1, p+1, ..., n do\n    if L[i] <= L[p] then add L[i] to L1\n    else add L[i] to L2\nuse this algorithm to sort L1 and L2\nreturn [L1, L[p], L2]\n```\nProve that this algorithm is correct and terminates.",
+  "image": null,
+  "choices": null,
+  "answer": "Induct on the length: sublists are shorter, and $L1\\le$ pivot $<L2$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Strong induction on n",
+    "body": "We prove by strong induction on $n$ that the algorithm terminates and returns the elements of $L$ in sorted order. For $n\\le1$ it returns $L$, which is sorted. For $n\\ge2$, the pivot is removed and the other $n-1$ elements are split into $L1$ (entries $\\le$ pivot) and $L2$ (entries $>$ pivot), both of length at most $n-1<n$. By the inductive hypothesis the recursive calls terminate and return $L1,L2$ sorted. Every element of sorted $L1$ is $\\le L[p]$ and every element of sorted $L2$ is $>L[p]$, so $[L1,L[p],L2]$ is sorted, and it contains exactly the elements of $L$. ∎"
+   }
+  ],
+  "topics": [
+   "logic"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2017-power-17",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Power Round",
+   "year": 2017,
+   "number": 17,
+   "url": "https://cmimc.com/archive/cmimc2017/2017_Power.pdf"
+  },
+  "grade": "9-12",
+  "points": 8,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Consider the randomized sorting algorithm ($D(n)$ is a uniform random integer in $\\{1,\\dots,n\\}$):\n```\nAlgorithm: Sorting Algorithm #2\nData: a list L = (L[1], ..., L[n]) of integers\nResult: L sorted in increasing order\nif n = 0, 1 then\n    return L\np <- D(n)            (L[p] is called the pivot)\nL1, L2 <- empty lists\nfor i = 1, ..., p-1, p+1, ..., n do\n    if L[i] <= L[p] then add L[i] to L1\n    else add L[i] to L2\nuse this algorithm to sort L1 and L2\nreturn [L1, L[p], L2]\n```\nLet $C$ be the number of comparisons $L[i]\\le L[p]$ the algorithm makes, and let the final sorted output be $\\ell_1\\le\\ell_2\\le\\cdots\\le\\ell_n$. Let $A_{ij}$ be the event that the algorithm at some point compares $\\ell_i$ and $\\ell_j$. Prove that\n$$E[C]=\\sum_{1\\le i<j\\le n}\\Pr[A_{ij}].$$",
+  "image": null,
+  "choices": null,
+  "answer": "Each pair is compared at most once; apply linearity of expectation to indicators.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Indicators",
+    "body": "A comparison always involves the current pivot and another element of the current list, and after the pivot's comparisons it is placed in the output and never appears in a later recursive call. Hence any pair of elements is compared at most once, and $C=\\sum_{i<j}\\mathbf 1_{A_{ij}}$. By linearity of expectation, $E[C]=\\sum_{i<j}E[\\mathbf 1_{A_{ij}}]=\\sum_{i<j}\\Pr[A_{ij}]$. ∎"
+   }
+  ],
+  "topics": [
+   "probability",
+   "counting"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2017-power-18",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Power Round",
+   "year": 2017,
+   "number": 18,
+   "url": "https://cmimc.com/archive/cmimc2017/2017_Power.pdf"
+  },
+  "grade": "9-12",
+  "points": 6,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Consider the randomized sorting algorithm ($D(n)$ is a uniform random integer in $\\{1,\\dots,n\\}$):\n```\nAlgorithm: Sorting Algorithm #2\nData: a list L = (L[1], ..., L[n]) of integers\nResult: L sorted in increasing order\nif n = 0, 1 then\n    return L\np <- D(n)            (L[p] is called the pivot)\nL1, L2 <- empty lists\nfor i = 1, ..., p-1, p+1, ..., n do\n    if L[i] <= L[p] then add L[i] to L1\n    else add L[i] to L2\nuse this algorithm to sort L1 and L2\nreturn [L1, L[p], L2]\n```\nLet the final sorted output be $\\ell_1\\le\\cdots\\le\\ell_n$, and let $A_{ij}$ ($i<j$) be the event that $\\ell_i$ and $\\ell_j$ are compared at some point. Prove that $A_{ij}$ occurs if and only if the first pivot chosen among $\\ell_i,\\ell_{i+1},\\dots,\\ell_j$ is either $\\ell_i$ or $\\ell_j$.",
+  "image": null,
+  "choices": null,
+  "answer": "Elements stay together until one of them is a pivot; a pivot strictly between separates $\\ell_i,\\ell_j$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Follow the sublists",
+    "body": "Every sublist handled by the recursion is a contiguous block of the final order (the pivot splits its list into the block before it and the block after it). Consider the first moment a pivot is chosen among $\\ell_i,\\dots,\\ell_j$; until then all of these sit together in one sublist (a pivot outside the block $[\\ell_i,\\ell_j]$ puts all of them on the same side) and no comparison between two of them has happened (comparisons involve a pivot).\n\n- If that pivot is $\\ell_i$ or $\\ell_j$, it is compared with every other element of its list, including the other endpoint: $A_{ij}$ occurs.\n- If it is $\\ell_k$ with $i<k<j$, then $\\ell_i$ goes to $L1$ and $\\ell_j$ to $L2$ (or the reverse by position), and they are never in the same list again, so they are never compared: $A_{ij}$ does not occur. ∎"
+   }
+  ],
+  "topics": [
+   "probability",
+   "logic"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2017-power-19",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Power Round",
+   "year": 2017,
+   "number": 19,
+   "url": "https://cmimc.com/archive/cmimc2017/2017_Power.pdf"
+  },
+  "grade": "9-12",
+  "points": 6,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Consider the randomized sorting algorithm ($D(n)$ is a uniform random integer in $\\{1,\\dots,n\\}$) whose output is $\\ell_1\\le\\cdots\\le\\ell_n$. Let $A_{ij}$ be the event that $\\ell_i$ and $\\ell_j$ are ever compared. You may use that $A_{ij}$ occurs iff the first pivot chosen among $\\ell_i,\\ell_{i+1},\\dots,\\ell_j$ is $\\ell_i$ or $\\ell_j$. Prove that $\\Pr[A_{ij}]=\\dfrac2{j-i+1}$.",
+  "image": null,
+  "choices": null,
+  "answer": "The first pivot among $\\ell_i..\\ell_j$ is uniform over those $j-i+1$ elements.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Symmetry",
+    "body": "At the moment the first pivot among $\\ell_i,\\dots,\\ell_j$ is chosen, all $j-i+1$ of these elements lie in the current list and the pivot is uniform over the list; so conditional on the pivot lying in this set it is uniform over its $j-i+1$ members. Thus each of them is the first pivot of the block with probability $\\frac1{j-i+1}$, and $\\Pr[A_{ij}]=\\Pr[\\text{first is }\\ell_i\\text{ or }\\ell_j]=\\frac2{j-i+1}$. ∎"
+   }
+  ],
+  "topics": [
+   "probability"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2017-power-20",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Power Round",
+   "year": 2017,
+   "number": 20,
+   "url": "https://cmimc.com/archive/cmimc2017/2017_Power.pdf"
+  },
+  "grade": "9-12",
+  "points": 6,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "For the randomized sorting algorithm (pivot chosen uniformly at random), let $C$ be the number of comparisons. You may use $E[C]=\\sum_{i<j}\\Pr[A_{ij}]$ and $\\Pr[A_{ij}]=\\frac2{j-i+1}$ (where $A_{ij}$ means the $i$-th and $j$-th smallest elements are ever compared). With $H_n=\\frac11+\\frac12+\\cdots+\\frac1n$, prove that\n$$E[C]=2(n+1)H_n-4n.$$",
+  "image": null,
+  "choices": null,
+  "answer": "$\\sum_{d=1}^{n-1}(n-d)\\frac{2}{d+1}=2(n+1)H_n-4n$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Group pairs by distance",
+    "body": "For $j-i=d$ there are $n-d$ pairs, so\n$$E[C]=\\sum_{d=1}^{n-1}\\frac{2(n-d)}{d+1}=\\sum_{m=2}^{n}\\frac{2(n+1-m)}{m}=2(n+1)\\sum_{m=2}^n\\frac1m-2(n-1)=2(n+1)(H_n-1)-2n+2.$$\nSimplifying, $E[C]=2(n+1)H_n-2n-2-2n+2=2(n+1)H_n-4n$. ∎"
+   },
+   {
+    "title": "Summation by parts",
+    "body": "$\\sum_{i=1}^n\\sum_{j=i+1}^n\\frac2{j-i+1}=\\sum_{i=1}^n\\left(2H_{n-i+1}-2\\right)=2\\sum_{m=1}^nH_m-2n$. Since $[(m+1)H_m-m]-[mH_{m-1}-(m-1)]=H_m$, telescoping gives $\\sum_{m=1}^nH_m=(n+1)H_n-n$, so $E[C]=2(n+1)H_n-2n-2n=2(n+1)H_n-4n$. ∎"
+   }
+  ],
+  "topics": [
+   "probability",
+   "sequences-series"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2017-power-21",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Power Round",
+   "year": 2017,
+   "number": 21,
+   "url": "https://cmimc.com/archive/cmimc2017/2017_Power.pdf"
+  },
+  "grade": "9-12",
+  "points": 4,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Consider the randomized sorting algorithm (pivot $p\\leftarrow D(n)$; every other element is compared with the pivot and placed in $L1$ if $\\le$ pivot, else in $L2$; the two sublists are sorted recursively). In the worst case (over inputs and random choices), how many comparisons are made on a list of $n$ elements?",
+  "image": null,
+  "choices": null,
+  "answer": "$\\dfrac{n(n-1)}2$",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Recurrence",
+    "body": "Let $W_n$ be the maximum number of comparisons. The first step makes $n-1$ comparisons and splits the rest into lists of sizes $k$ and $n-1-k$, so $W_n=n-1+\\max_{0\\le k\\le n-1}(W_k+W_{n-1-k})$. Claim $W_n=\\frac{n(n-1)}2$. By induction, $W_k+W_{n-1-k}=\\frac{k(k-1)+(n-1-k)(n-2-k)}2$, a convex quadratic in $k$, maximized at the endpoints $k=0$ or $n-1$, where it equals $\\frac{(n-1)(n-2)}2$. So $W_n=n-1+\\frac{(n-1)(n-2)}2=\\frac{n(n-1)}2$, and this is attained when the pivot is always the smallest element.\n\n**Answer: $\\frac{n(n-1)}2$**"
+   }
+  ],
+  "topics": [
+   "counting"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2017-power-22",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Power Round",
+   "year": 2017,
+   "number": 22,
+   "url": "https://cmimc.com/archive/cmimc2017/2017_Power.pdf"
+  },
+  "grade": "9-12",
+  "points": 8,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Sorting Algorithm #1 always makes $a_n=\\binom n2=\\frac{n(n-1)}2$ comparisons, while the randomized Sorting Algorithm #2 makes on average $2(n+1)H_n-4n$ comparisons, where $H_n=1+\\frac12+\\cdots+\\frac1n$. Prove that\n$$\\lim_{n\\to\\infty}\\frac{2(n+1)H_n-4n}{a_n}=0.$$",
+  "image": null,
+  "choices": null,
+  "answer": "$H_n\\le1+\\ln n$, so the numerator is $O(n\\log n)$ while $a_n\\sim n^2/2$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Bound the harmonic number",
+    "body": "For $m\\ge2$, $\\frac1m\\le\\int_{m-1}^m\\frac{dx}x$, so $H_n\\le1+\\int_1^n\\frac{dx}x=1+\\ln n$. Hence for $n\\ge2$,\n$$0<\\frac{2(n+1)H_n-4n}{n(n-1)/2}\\le\\frac{4(n+1)(1+\\ln n)}{n(n-1)}.$$\n The right side tends to $0$ because $\\frac{n+1}{n-1}\\to1$ and $\\frac{1+\\ln n}n\\to0$, and the left side is nonnegative, being the expected number of comparisons of a sorting algorithm. By squeezing, the limit is $0$. ∎"
+   }
+  ],
+  "topics": [
+   "analysis",
+   "sequences-series"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2017-power-23",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Power Round",
+   "year": 2017,
+   "number": 23,
+   "url": "https://cmimc.com/archive/cmimc2017/2017_Power.pdf"
+  },
+  "grade": "9-12",
+  "points": 4,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "A group of $n$ people at a party, some of whom know each other, is given as a list $L$ of pairs $\\{u,v\\}$ of people who know each other. A subset of people is a *cover* if after removing them no two remaining people know each other. Consider the algorithm\n```\nS <- empty set\nfor {u, v} in L do\n    if neither u nor v is in S then\n        randomly choose u or v with equal probability\n        add the chosen vertex to S\nreturn S\n```\nProve that the returned set $S$ is a cover.",
+  "image": null,
+  "choices": null,
+  "answer": "Every pair gets a vertex in $S$ when it is processed, and $S$ only grows.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Each pair is handled",
+    "body": "Take any pair $\\{u,v\\}\\in L$. When it is processed, either $u$ or $v$ is already in $S$, or the algorithm adds one of them. Since $S$ never loses elements, at the end at least one of $u,v$ is in $S$. So removing $S$ leaves no two acquainted people. ∎"
+   }
+  ],
+  "topics": [
+   "graph-theory"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2017-power-24",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Power Round",
+   "year": 2017,
+   "number": 24,
+   "url": "https://cmimc.com/archive/cmimc2017/2017_Power.pdf"
+  },
+  "grade": "9-12",
+  "points": 8,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "A group of $n$ people at a party, some of whom know each other, is given as a list $L$ of pairs $\\{u,v\\}$ of people who know each other. A subset of people is a *cover* if after removing them no two remaining people know each other. Consider the algorithm\n```\nS <- empty set\nfor {u, v} in L do\n    if neither u nor v is in S then\n        randomly choose u or v with equal probability\n        add the chosen vertex to S\nreturn S\n```\nLet $C$ be a minimum-size cover, and let $S_i$ be the contents of $S$ after the $i$-th iteration of the loop. Prove that for all $i\\ge0$,\n$$E[|S_i\\cap C|]\\ge E[|S_i\\setminus C|].$$",
+  "image": null,
+  "choices": null,
+  "answer": "Induction: each step increases the left side in expectation at least as much as the right side.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Induction on i",
+    "body": "For $i=0$ both sides are $0$. Let $a_i=|S_i\\cap C|$, $b_i=|S_i\\setminus C|$ and condition on $S_i$. The $(i+1)$-th pair is $\\{u,v\\}$.\n\n- If $u$ or $v$ is in $S_i$, nothing changes.\n- Otherwise, since $C$ is a cover, at least one of $u,v$ lies in $C$. If both do, $a$ increases by $1$ and $b$ by $0$. If exactly one does, then with probability $\\frac12$ the chosen vertex is in $C$ ($a$ increases by $1$) and with probability $\\frac12$ it is not ($b$ increases by $1$).\n\nIn every case $E[a_{i+1}-a_i\\mid S_i]\\ge E[b_{i+1}-b_i\\mid S_i]$. Taking expectations, $E[a_{i+1}]-E[b_{i+1}]\\ge E[a_i]-E[b_i]\\ge0$. ∎"
+   }
+  ],
+  "topics": [
+   "probability",
+   "graph-theory"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2017-power-25",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Power Round",
+   "year": 2017,
+   "number": 25,
+   "url": "https://cmimc.com/archive/cmimc2017/2017_Power.pdf"
+  },
+  "grade": "9-12",
+  "points": 6,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "A group of $n$ people at a party, some of whom know each other, is given as a list $L$ of pairs $\\{u,v\\}$ of people who know each other. A subset of people is a *cover* if after removing them no two remaining people know each other. Consider the algorithm\n```\nS <- empty set\nfor {u, v} in L do\n    if neither u nor v is in S then\n        randomly choose u or v with equal probability\n        add the chosen vertex to S\nreturn S\n```\nLet $C$ be a minimum-size cover. You may use that for the final set $S$, $E[|S\\cap C|]\\ge E[|S\\setminus C|]$. Conclude that $E[|S|]\\le2|C|$.",
+  "image": null,
+  "choices": null,
+  "answer": "$E|S|=E|S\\cap C|+E|S\\setminus C|\\le2E|S\\cap C|\\le2|C|$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Combine",
+    "body": "$E[|S|]=E[|S\\cap C|]+E[|S\\setminus C|]\\le2E[|S\\cap C|]\\le2|C|$, the last step since $|S\\cap C|\\le|C|$ always. ∎"
+   }
+  ],
+  "topics": [
+   "probability",
+   "graph-theory"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2017-power-26",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Power Round",
+   "year": 2017,
+   "number": 26,
+   "url": "https://cmimc.com/archive/cmimc2017/2017_Power.pdf"
+  },
+  "grade": "9-12",
+  "points": 8,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Now give each person $v$ a weight $0<w_v\\le1$ and write $W(T)=\\sum_{v\\in T}w_v$. The task is to find a cover of minimum total weight. Modify the algorithm of the previous problems so that, for a pair $\\{u,v\\}$ with neither endpoint in $S$, it chooses $u$ with probability $p_{uv}$ and $v$ with probability $1-p_{uv}$ (and adds it to $S$). Let $C$ be a minimum-weight cover and $S_i$ the set $S$ after $i$ iterations. Find, with proof, the value of $p_{uv}$ that ensures that for all $i\\ge0$,\n$$E[W(S_i\\cap C)]\\ge E[W(S_i\\setminus C)].$$",
+  "image": null,
+  "choices": null,
+  "answer": "$p_{uv}=\\dfrac{w_v}{w_u+w_v}$ (choose $u$ with probability proportional to the other endpoint's weight).",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Balance the two expected gains",
+    "body": "Take $p_{uv}=\\frac{w_v}{w_u+w_v}$. Induct on $i$ as in the unweighted case, conditioning on $S_i$ and a pair $\\{u,v\\}$ with neither endpoint in $S_i$:\n\n- Both in $C$: the left side gains $w_u$ or $w_v$, the right side $0$.\n- Exactly one in $C$, say $u\\in C$, $v\\notin C$: the left side gains $w_u$ with probability $p_{uv}$, expected gain $\\frac{w_uw_v}{w_u+w_v}$; the right side gains $w_v$ with probability $1-p_{uv}=\\frac{w_u}{w_u+w_v}$, expected gain also $\\frac{w_uw_v}{w_u+w_v}$.\n\nSo the expected increase on the left is at least that on the right, and $E[W(S_{i+1}\\cap C)]-E[W(S_{i+1}\\setminus C)]\\ge E[W(S_i\\cap C)]-E[W(S_i\\setminus C)]\\ge0$.\n\n(The value is forced: if $u\\in C,v\\notin C$ we need $p_{uv}w_u\\ge(1-p_{uv})w_v$, i.e. $p_{uv}\\ge\\frac{w_v}{w_u+w_v}$, and the symmetric situation $v\\in C,u\\notin C$ needs $(1-p_{uv})w_v\\ge p_{uv}w_u$, i.e. $p_{uv}\\le\\frac{w_v}{w_u+w_v}$.) ∎"
+   }
+  ],
+  "topics": [
+   "probability",
+   "graph-theory"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2017-power-27",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Power Round",
+   "year": 2017,
+   "number": 27,
+   "url": "https://cmimc.com/archive/cmimc2017/2017_Power.pdf"
+  },
+  "grade": "9-12",
+  "points": 4,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Now give each person $v$ a weight $0<w_v\\le1$ and write $W(T)=\\sum_{v\\in T}w_v$. The task is to find a cover of minimum total weight. Modify the algorithm of the previous problems so that, for a pair $\\{u,v\\}$ with neither endpoint in $S$, it chooses $u$ with probability $p_{uv}$ and $v$ with probability $1-p_{uv}$ (and adds it to $S$). Let $C$ be a minimum-weight cover and $S_i$ the set $S$ after $i$ iterations. With $p_{uv}=\\frac{w_v}{w_u+w_v}$ you may use that $E[W(S\\cap C)]\\ge E[W(S\\setminus C)]$ for the final set $S$. Conclude that $E[W(S)]\\le2W(C)$.",
+  "image": null,
+  "choices": null,
+  "answer": "$E[W(S)]\\le2E[W(S\\cap C)]\\le2W(C)$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Combine",
+    "body": "$E[W(S)]=E[W(S\\cap C)]+E[W(S\\setminus C)]\\le2E[W(S\\cap C)]\\le2W(C)$, since $W(S\\cap C)\\le W(C)$ always. ∎"
+   }
+  ],
+  "topics": [
+   "probability",
+   "graph-theory"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ }
+]

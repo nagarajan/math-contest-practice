@@ -1,0 +1,370 @@
+[
+ {
+  "id": "chmmc-2017-team-01",
+  "bank": "chmmc",
+  "source": {
+   "contest": "CHMMC",
+   "paper": "2017 Team Round",
+   "year": 2017,
+   "number": 1,
+   "url": "http://chmmc.caltech.edu/archives/2017/team.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Let $p,q,r$, and $s$ be four distinct primes such that $p+q+r+s$ is prime, and the numbers $p^2+qr$ and $p^2+qs$ are both perfect squares. What is the value of $p+q+r+s$?",
+  "image": null,
+  "choices": null,
+  "answer": "23",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Parity, then factor",
+    "body": "The sum is a prime larger than $2$, hence odd, so exactly one of the four primes is $2$. If $2\\in\\{q,r,s\\}$, then $p^2+2k$ with $k$ an odd prime is $\\equiv1+2\\equiv3\\pmod4$, never a square. So $p=2$.\n\nTake $r<s$ and write $4+qr=m^2$, $4+qs=n^2$ ($m,n$ even, $m<n$). Then $qr=(m-2)(m+2)$ and $qs=(n-2)(n+2)$. Each factor is more than $1$, so $\\{q,r\\}=\\{m-2,m+2\\}$ and $\\{q,s\\}=\\{n-2,n+2\\}$. Since $m-2<n-2<n+2$ and $m+2<n+2$, we get $q=m+2=n-2$, so $r=q-4$, $s=q+4$. The numbers $q-4,q,q+4$ have distinct residues mod $3$, so one is divisible by $3$ and prime means it is $3$: $q-4=3$. So $(r,q,s)=(3,7,11)$ and the sum is $2+3+7+11=23$ (prime).\n\n**Answer: 23**"
+   }
+  ],
+  "topics": [
+   "number-theory"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "chmmc-2017-team-02",
+  "bank": "chmmc",
+  "source": {
+   "contest": "CHMMC",
+   "paper": "2017 Team Round",
+   "year": 2017,
+   "number": 2,
+   "url": "http://chmmc.caltech.edu/archives/2017/team.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Adam the spider (the black dot $\\bullet$ in the figure) is sitting at the bottom left of a $4\\times4$ coordinate grid, where adjacent parallel grid lines are each separated by one unit. He wants to crawl to the top right corner of the square, and starts off with $9$ \"crumb's\" worth of energy.\n\nAdam only walks in one-unit segments along the grid lines, and cannot walk off of the grid. Walking one unit costs him one crumb's worth of energy, and Adam cannot move anymore once he runs out of energy. Also, Adam stops moving once he reaches the top right corner.\n\nThere is also a single crumb (the white dot $\\circ$ in the figure) on the grid located one unit to the right and one unit up from Adam's starting position. If he goes to this point and eats the crumb, he will gain one crumb's worth of energy.\n\nHow many paths can Adam take to get to the upper right corner of the grid? Note that Adam does not care if he has extra energy left over once he arrives at his destination.",
+  "image": "qimages/chmmc/2017-team/q02.webp",
+  "choices": null,
+  "answer": "1046",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Cases by length",
+    "body": "Put Adam at $(0,0)$, the goal at $(4,4)$, the crumb at $(1,1)$. A path has even length, at least $8$, and at most $10$ (energy $9$, or $10$ if he eats the crumb, which he must then do on the way).\n\n**Length 8:** shortest paths, $\\binom84=70$.\n\n**Length 10.** The path must pass through $(1,1)$. Either he first reaches $(1,1)$ after $4$ steps ($8$ ways) and then takes a shortest path of $6$ steps to $(4,4)$ ($\\binom63=20$ ways): $8\\cdot20=160$. Or he first reaches $(1,1)$ in $2$ steps ($2$ ways) and then walks $8$ steps to $(4,4)$ using one backward step: $3$ ups, $4$ rights and $1$ left, or the mirror image. For one type there are $\\binom83$ choices for the up-steps and $4$ positions for the left step (it must precede the last right step); we subtract the $\\binom63$ walks ending with left-then-right, which would already have reached $(4,4)$ earlier. This gives $2\\cdot2\\left(4\\binom83-\\binom63\\right)=816$.\n\nTotal $70+160+816=1046$.\n\n**Answer: 1046**"
+   },
+   {
+    "title": "Computer enumeration",
+    "body": "A depth-first enumeration of all walks on the $5\\times5$ lattice of points, tracking energy (including the one-time crumb at $(1,1)$) and stopping at $(4,4)$, counts exactly $1046$ walks.\n\n**Answer: 1046**"
+   }
+  ],
+  "topics": [
+   "counting"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "chmmc-2017-team-03",
+  "bank": "chmmc",
+  "source": {
+   "contest": "CHMMC",
+   "paper": "2017 Team Round",
+   "year": 2017,
+   "number": 3,
+   "url": "http://chmmc.caltech.edu/archives/2017/team.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Two towns, $A$ and $B$, are $100$ miles apart. Every $20$ minutes (starting at midnight) a bus traveling at $60$ mph leaves town $A$ for town $B$, and every $30$ minutes (starting at midnight) a bus traveling at $20$ mph leaves town $B$ for town $A$. Dirk starts in Town $A$ and gets on a bus leaving for town $B$ at noon. However, Dirk is always afraid he has boarded a bus going in the wrong direction, so each time the bus he is in passes another bus, he gets out and transfers to that other bus. How many hours pass before Dirk finally reaches Town $B$?",
+  "image": null,
+  "choices": null,
+  "answer": "14",
+  "acceptedAnswers": null,
+  "answerUnit": "hours",
+  "solutions": [
+   {
+    "title": "Space-time picture",
+    "body": "Draw the position of every bus against time; Dirk follows a bus until its line crosses a bus going the other way, then switches to that line. Following the crossings (first meetings at $0.125$ h, $7.5$ mi, then back at $0.375$ h, $2.5$ mi, then forward to $0.5$ h, $10$ mi, ...) one finds that Dirk first reaches the point $10n$ miles from Town $A$ exactly $\\frac{3n}{2}-1$ hours after noon. For $n=10$ (Town $B$) this is $\\frac{30}{2}-1=14$ hours.\n\n**Answer: 14 hours**"
+   },
+   {
+    "title": "Exact simulation",
+    "body": "Simulating the whole process with exact fractions (always take the earliest meeting with an oncoming bus, switch direction, and stop when the forward bus reaches $B$ before meeting another bus) gives arrival at exactly $14$ hours after noon.\n\n**Answer: 14 hours**"
+   }
+  ],
+  "topics": [
+   "rates",
+   "logic"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "chmmc-2017-team-04",
+  "bank": "chmmc",
+  "source": {
+   "contest": "CHMMC",
+   "paper": "2017 Team Round",
+   "year": 2017,
+   "number": 4,
+   "url": "http://chmmc.caltech.edu/archives/2017/team.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Let $a=e^{4\\pi i/5}$ be a nonreal fifth root of unity and $b=e^{2\\pi i/17}$ be a nonreal seventeenth root of unity. Compute the value of the product $$(a+b)(a+b^{16})(a^2+b^2)(a^2+b^{15})(a^3+b^8)(a^3+b^9)(a^4+b^4)(a^4+b^{13}).$$",
+  "image": null,
+  "choices": null,
+  "answer": "1",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Telescoping",
+    "body": "Looking at powers of $2$ mod $5$ and mod $17$: $a^{2^j}$ runs through $a,a^2,a^4,a^3$ (repeating, period 4) and $b^{2^j}$ through $b,b^2,b^4,b^8,b^{16},b^{15},b^{13},b^9$ (period 8). So the eight factors are, in a different order, $\\prod_{j=0}^{7}\\left(a^{2^j}+b^{2^j}\\right)$ (the pairs match: $a^3\\leftrightarrow b^8$, $a^3\\leftrightarrow b^9=b^{2^7}$ etc.). Since $a^{2^j}+b^{2^j}=\\dfrac{a^{2^{j+1}}-b^{2^{j+1}}}{a^{2^j}-b^{2^j}}$, the product telescopes to $\\dfrac{a^{256}-b^{256}}{a-b}$. Now $a^5=1$ and $256\\equiv1\\pmod5$, and $b^{17}=1$ with $256=15\\cdot17+1$, so $a^{256}=a$, $b^{256}=b$ and the value is $1$.\n\n**Answer: 1**"
+   }
+  ],
+  "topics": [
+   "complex-numbers",
+   "algebra"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "chmmc-2017-team-05",
+  "bank": "chmmc",
+  "source": {
+   "contest": "CHMMC",
+   "paper": "2017 Team Round",
+   "year": 2017,
+   "number": 5,
+   "url": "http://chmmc.caltech.edu/archives/2017/team.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Felix picks four points uniformly at random inside a unit circle $\\mathcal C$. He then draws the four possible triangles which can be formed using these points as vertices. Finally, he randomly chooses one of the six possible pairs of the triangles he just drew.\n\nWhat is the probability that the center of the circle $\\mathcal C$ is contained in the union of the interiors of the two triangles that Felix chose?",
+  "image": null,
+  "choices": null,
+  "answer": "5/12",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Union of all four, minus unchosen pairs",
+    "body": "Moving a point along its radius does not change whether it lies on the same side of lines through the center, so we may place the four points on the circle. The union of the four triangles is the convex hull of the points. It misses the center iff all four points lie in a semicircle, which has probability $4\\cdot\\left(\\frac12\\right)^3=\\frac12$. So the center is in the hull with probability $\\frac12$.\n\nA point not on any side lies in either $0$ or $2$ of the four triangles (when it is in the hull). So the center, when in the hull, lies in exactly one pair-intersection, and these $6$ events are equally likely: probability $\\frac{1/2}{6}=\\frac1{12}$ each. The center lies in the union of the two chosen triangles iff it is in the hull but not in the intersection of the two unchosen triangles (those two triangles have the other two as complement). The probability is $\\frac12-\\frac1{12}=\\frac5{12}$.\n\n**Answer: $\\frac5{12}$**"
+   },
+   {
+    "title": "Simulation",
+    "body": "A Monte Carlo simulation of $4\\times10^5$ trials gives $0.4163$, in agreement with $\\frac5{12}=0.4167$.\n\n**Answer: $\\frac5{12}$**"
+   }
+  ],
+  "topics": [
+   "probability",
+   "geometry"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "chmmc-2017-team-06",
+  "bank": "chmmc",
+  "source": {
+   "contest": "CHMMC",
+   "paper": "2017 Team Round",
+   "year": 2017,
+   "number": 6,
+   "url": "http://chmmc.caltech.edu/archives/2017/team.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "The country of Claredena has $5$ cities, and is planning to build a road system so that each of its cities has exactly one outgoing (unidirectional) road to another city.\n\nTwo road systems are considered equivalent if we can get from one road system to the other by just changing the names of the cities. That is, two road systems are considered the same if given a relabeling of the cities, if in the first configuration a road went from city $C$ to city $D$, then in the second configuration there is a road that goes from the city now labeled $C$ to the city now labeled $D$.\n\nHow many distinct, nonequivalent possibilities are there for the road system Claredena builds?",
+  "image": null,
+  "choices": null,
+  "answer": "13",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Cycles with trees",
+    "body": "Each component of the directed graph is a cycle (length at least $2$, since there are no loops) with rooted trees hanging off it.\n\n*One component.* Cycle of length $5$: $1$ graph. Length $4$: $1$. Length $3$ with two further vertices: either both point to the same cycle vertex, or they form a path off one cycle vertex, or one hangs off each of two cycle vertices: $3$ graphs. Length $2$ with three further vertices: the trees on the two cycle vertices have sizes $\\{1,4\\}$ (there are $4$ rooted trees on $4$ vertices, so $4$ graphs) or $\\{2,3\\}$ ($1\\cdot2=2$ graphs). Total $1+1+3+4+2=11$.\n\n*Several components.* Each needs at least $2$ vertices, so exactly two components with $2$ and $3$ vertices: the $2$-vertex one is a $2$-cycle, the $3$-vertex one is a $3$-cycle or a $2$-cycle with a tail: $2$ graphs.\n\nTotal $11+2=13$.\n\n**Answer: 13**"
+   },
+   {
+    "title": "Computer count",
+    "body": "Enumerating all $4^5=1024$ fixed-point-free maps on $\\{1,\\dots,5\\}$ and identifying isomorphic ones under all $120$ relabelings leaves exactly $13$ classes.\n\n**Answer: 13**"
+   }
+  ],
+  "topics": [
+   "counting",
+   "graph-theory"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "chmmc-2017-team-07",
+  "bank": "chmmc",
+  "source": {
+   "contest": "CHMMC",
+   "paper": "2017 Team Round",
+   "year": 2017,
+   "number": 7,
+   "url": "http://chmmc.caltech.edu/archives/2017/team.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Triangle $ABC$ has side lengths $AB=18$, $BC=36$, and $CA=24$. The circle $\\Gamma$ passes through point $C$ and is tangent to segment $AB$ at point $A$.\n\nLet $X$, distinct from $C$, be the second intersection point of $\\Gamma$ with segment $BC$. Moreover, let $Y$ be the point on $\\Gamma$ such that segment $AY$ is an angle bisector of $\\angle XAC$.\n\nSuppose the length of segment $AY$ can be written in the form $AY=\\dfrac{p\\sqrt r}{q}$ where $p,q$, and $r$ are positive integers such that $\\gcd(p,q)=1$ and $r$ is square free. Find the value of $p+q+r$.",
+  "image": null,
+  "choices": null,
+  "answer": "69",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Similar triangles and power of a point",
+    "body": "By tangent-chord, $\\angle BAX=\\angle BCA$, so $\\triangle ABC\\sim\\triangle XBA$ with ratio $BC/AB=2$. Hence $BX=\\frac{AB}2=9$ and $AX=\\frac{CA}2=12$. Let $D=AY\\cap BC$. By the angle bisector theorem in $\\triangle AXC$ ($XC=27$, $AX=12$, $AC=24$): $XD:DC=12:24$, so $DX=9$, $DC=18$. Put $d=AD$, $y=AY$. Power of a point: $d(y-d)=9\\cdot18=162$. Also $\\triangle AXY\\sim\\triangle ADC$ gives $\\frac{12}{d}=\\frac{y}{24}$, i.e. $dy=288$. Subtracting, $d^2=288-162=126$, $d=3\\sqrt{14}$, so $y=\\frac{288}{3\\sqrt{14}}=\\frac{48\\sqrt{14}}{7}$. Thus $p+q+r=48+7+14=69$.\n\n**Answer: 69**"
+   },
+   {
+    "title": "Coordinates check",
+    "body": "With $A=(0,0)$, $B=(18,0)$, $C$ determined by $CA=24$, $CB=36$, the circle is centered on the perpendicular to $AB$ at $A$. Computing $X$ and the bisector direction numerically gives $AY=25.6571\\ldots=\\frac{48\\sqrt{14}}7$.\n\n**Answer: 69**"
+   }
+  ],
+  "topics": [
+   "geometry"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "chmmc-2017-team-08",
+  "bank": "chmmc",
+  "source": {
+   "contest": "CHMMC",
+   "paper": "2017 Team Round",
+   "year": 2017,
+   "number": 8,
+   "url": "http://chmmc.caltech.edu/archives/2017/team.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Let $P(x)$ be the polynomial of degree at most $6$ which satisfies $P(k)=k!$ for $k=0,1,2,3,\\dots,6$. Compute the value of $P(7)$.",
+  "image": null,
+  "choices": null,
+  "answer": "3186",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Recurrence",
+    "body": "Let $f_n$ be the polynomial of degree at most $n$ with $f_n(k)=k!$ for $0\\le k\\le n$ and $T_n=f_n(n+1)$. The polynomial $g(x)=f_n(x)-xf_{n-1}(x-1)$ has degree at most $n$ and vanishes at $x=1,\\dots,n$, so $g(x)=c(x-1)\\cdots(x-n)$. From $g(0)=f_n(0)=1$ we get $c=\\frac{(-1)^n}{n!}$. Evaluating at $x=n+1$: $T_n=(-1)^n+(n+1)T_{n-1}$. With $T_1=1$: $T_2=4,T_3=15,T_4=76,T_5=455,T_6=3186$.\n\n**Answer: 3186**"
+   },
+   {
+    "title": "Finite differences",
+    "body": "A polynomial of degree at most $6$ has vanishing $7$th difference: $\\sum_{k=0}^{7}(-1)^{7-k}\\binom7kP(k)=0$. Hence $P(7)=\\sum_{k=0}^{6}(-1)^{6-k}\\binom7k\\,k!=5040-2520+840-210+42-7+1=3186$.\n\n**Answer: 3186**"
+   }
+  ],
+  "topics": [
+   "polynomials"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "chmmc-2017-team-09",
+  "bank": "chmmc",
+  "source": {
+   "contest": "CHMMC",
+   "paper": "2017 Team Round",
+   "year": 2017,
+   "number": 9,
+   "url": "http://chmmc.caltech.edu/archives/2017/team.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Rachel the unicorn lives on the numberline at the number $0$. One day, Rachel decides she'd like to travel the world and visit the numbers $1,2,3,\\dots,31$.\n\nShe starts off at the number $0$, with a list of the numbers she wants to visit: $1,2,3,\\dots,31$. Rachel then picks one of the numbers on her list uniformly at random, crosses it off the list, and travels to that number in a straight line path. She repeats this process until she has crossed off and visited all thirty-one of the numbers from her original list. At the end of her trip, she returns to her home at $0$.\n\nWhat is the expected length of Rachel's round trip?",
+  "image": null,
+  "choices": null,
+  "answer": "352",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Linearity of expectation",
+    "body": "Let there be $n-1$ numbers $1,\\dots,n-1$ ($n=32$) and include $0$ as the start/end point. For each ordered pair $i\\ne j$ in $\\{0,\\dots,n-1\\}$ the trip goes directly $i\\to j$ with probability $\\frac1{n-1}$ (the route is a uniformly random cyclic order through $0$). So $E=\\frac1{n-1}\\sum_{i,j}|i-j|=\\frac{2}{n-1}\\sum_{\\ell=0}^{n-1}\\ell(n-\\ell)=\\frac2{n-1}\\binom{n+1}3=\\frac{n(n+1)}3$. With $n=32$: $\\frac{32\\cdot33}3=352$.\n\n**Answer: 352**"
+   },
+   {
+    "title": "Check small cases",
+    "body": "Exact computation for $n-1=3,5,7$ numbers gives $\\frac{20}3,14,24$, matching $\\frac{n(n+1)}3$ for $n=4,6,8$.\n\n**Answer: 352**"
+   }
+  ],
+  "topics": [
+   "probability",
+   "counting"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "chmmc-2017-team-10",
+  "bank": "chmmc",
+  "source": {
+   "contest": "CHMMC",
+   "paper": "2017 Team Round",
+   "year": 2017,
+   "number": 10,
+   "url": "http://chmmc.caltech.edu/archives/2017/team.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Let $\\alpha$ be the unique real root of the polynomial $x^3-2x^2+x-1$. It is known that $1<\\alpha<2$. We define the sequence of polynomials $\\{p_n(x)\\}_{n\\ge0}$ by taking $p_0(x)=x$ and setting $p_{n+1}(x)=(p_n(x))^2-\\alpha$ for each integer $n\\ge0$.\n\nHow many distinct real roots does $p_{10}(x)$ have?",
+  "image": null,
+  "choices": null,
+  "answer": "232",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Track the images of monotone pieces",
+    "body": "From $\\alpha(\\alpha-1)^2=1$ we get $(\\alpha^2-\\alpha)^2=\\alpha$. So the orbit of $0$ is $0\\to-\\alpha\\to\\alpha^2-\\alpha\\to0$, i.e. $p_3(0)=0$ (a double root there). Cut $\\mathbb R$ into intervals on which $p_n$ is monotone and whose image is one of $[0,\\infty)$, $[-\\alpha,0]$, $[0,\\alpha^2-\\alpha]$; let $x_n,y_n,z_n$ count the intervals of each type. Under $p_{n+1}=p_n^2-\\alpha$: $[0,\\infty)\\to[0,\\infty)+[-\\alpha,0]$, $[-\\alpha,0]\\to[-\\alpha,0]+[0,\\alpha^2-\\alpha]$, $[0,\\alpha^2-\\alpha]\\to[-\\alpha,0]$. So $x_{n+1}=x_n$, $y_{n+1}=x_n+y_n+z_n$, $z_{n+1}=y_n$ with $x_1=2,y_1=2,z_1=0$, giving $x_n=2$ and $y_n=2F_{n+2}-2$ (Fibonacci numbers). Each root lies in exactly two intervals (endpoints), so the number of real roots is $\\frac{x_n+y_n+z_n}2=F_{n+3}-1$ for $n\\ge2$. For $n=10$: $F_{13}-1=233-1=232$.\n\n**Answer: 232**"
+   },
+   {
+    "title": "Direct count of preimages",
+    "body": "Solving $p_{10}(x)=0$ backwards: start from the value set $\\{0\\}$ and repeatedly replace each value $y$ by $\\pm\\sqrt{y+\\alpha}$ (discarding $y<-\\alpha$ and merging coincident values, which occurs at $y=-\\alpha$ where the square root is $0$). Doing this ten times in high precision leaves exactly $232$ distinct values.\n\n**Answer: 232**"
+   }
+  ],
+  "topics": [
+   "polynomials",
+   "sequences-series"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ }
+]

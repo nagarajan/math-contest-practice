@@ -1,0 +1,380 @@
+[
+ {
+  "id": "cmimc-2020-combinatorics-01",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Combinatorics and Computer Science Round",
+   "year": 2020,
+   "number": 1,
+   "url": "https://cmimc.com/archive/cmimc2020/2020_CCS.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "The intramural squash league has 5 players, namely Albert, Bassim, Clara, Daniel, and Eugene. Albert has played one game, Bassim has played two games, Clara has played 3 games, and Daniel has played 4 games. Assuming no two players in the league play each other more than one time, how many games has Eugene played?",
+  "image": null,
+  "choices": null,
+  "answer": "2",
+  "acceptedAnswers": null,
+  "answerUnit": "games",
+  "solutions": [
+   {
+    "title": "Follow the forced games",
+    "body": "Daniel has played $4$ games against $4$ different opponents, so he has played everyone: Albert, Bassim, Clara and Eugene. That is Albert's only game. Clara has played $3$ games with distinct opponents, none of them Albert: so she played Bassim, Daniel and Eugene. Now Bassim has played Daniel and Clara: $2$ games, as required. Eugene has played Daniel and Clara: $2$ games.\n\n**Answer: 2**"
+   },
+   {
+    "title": "Degree sum",
+    "body": "Treat games as edges of a graph. The degrees are $1,2,3,4,e$ and the sum must be even, so $e$ is even: $e\\in\\{0,2,4\\}$. Daniel (degree $4$) is adjacent to everybody, so $e\\ge1$, and Albert's single game is with Daniel. Eugene cannot have $4$ games because he cannot play Albert. So $e=2$.\n\n**Answer: 2**"
+   }
+  ],
+  "topics": [
+   "graph-theory",
+   "logic"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2020-combinatorics-02",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Combinatorics and Computer Science Round",
+   "year": 2020,
+   "number": 2,
+   "url": "https://cmimc.com/archive/cmimc2020/2020_CCS.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "David is taking a true/false exam with 9 questions. Unfortunately, he doesn't know the answer to any of the questions, but he does know that exactly 5 of the answers are True. In accordance with this, David guesses the answers to all 9 questions, making sure that exactly 5 of his answers are True. What is the probability he answers at least 5 questions correctly?",
+  "image": null,
+  "choices": null,
+  "answer": "9/14",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Count by matching the True answers",
+    "body": "Say the correct answers are $5$ True and $4$ False. All $\\binom95=126$ ways of choosing which $5$ answers David marks True are equally likely. Suppose he marks $k$ of the $5$ truly-True questions as True. Then he uses $5-k$ of his True marks on the $4$ truly-False questions, so he answers $4-(5-k)=k-1$ of those correctly as False. Total correct: $k+(k-1)=2k-1$. This is at least $5$ iff $k\\ge3$.\n\nNumber of ways for given $k$: $\\binom5k\\binom4{5-k}=\\binom5k\\binom4{k-1}$. So the favourable count is\n\n$$\\binom53\\binom42+\\binom54\\binom43+\\binom55\\binom44=60+20+1=81,$$\n\nand the probability is $\\frac{81}{126}=\\frac9{14}$.\n\n**Answer: $\\frac{9}{14}$**"
+   }
+  ],
+  "topics": [
+   "probability",
+   "counting"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null,
+  "answerDisplay": "$\\frac{9}{14}$"
+ },
+ {
+  "id": "cmimc-2020-combinatorics-03",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Combinatorics and Computer Science Round",
+   "year": 2020,
+   "number": 3,
+   "url": "https://cmimc.com/archive/cmimc2020/2020_CCS.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Consider a 1-indexed array that initially contains the integers 1 to 10 in increasing order.\n\nThe following action is performed repeatedly (any number of times):\n\n```\ndef action():\n    Choose an integer n between 1 and 10 inclusive\n    Reverse the array between indices 1 and n inclusive\n    Reverse the array between indices n+1 and 10 inclusive (If n = 10, we do nothing)\n```\n\nHow many possible orders can the array have after we are done with this process?",
+  "image": null,
+  "choices": null,
+  "answer": "20",
+  "acceptedAnswers": null,
+  "answerUnit": "orders",
+  "solutions": [
+   {
+    "title": "Reflections of a circle of positions",
+    "body": "Read the array positions $1,\\dots,10$ as the positions around a circle (indices mod $10$). The action with parameter $n$ sends the entry in position $j$ to position $n+1-j \\pmod{10}$: indeed the first block is reversed ($j\\mapsto n+1-j$) and the second block is reversed ($j\\mapsto 10+n+1-j\\equiv n+1-j$). So each action is a reflection of the $10$-gon, and $n=1,\\dots,10$ give all $10$ reflections.\n\nThe composition of two reflections $j\\mapsto a+1-j$ and $j\\mapsto b+1-j$ is the rotation $j\\mapsto j+(a-b)$. So the arrangements reachable are exactly those obtained from $1,2,\\dots,10$ by an element of the dihedral group of the $10$-gon: $10$ rotations and $10$ reflections. Since the entries are distinct and $10\\ge3$, all $20$ resulting arrays are different.\n\n(A breadth-first search over all reachable arrays also finds exactly $20$.)\n\n**Answer: 20**"
+   }
+  ],
+  "topics": [
+   "counting",
+   "patterns"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2020-combinatorics-04",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Combinatorics and Computer Science Round",
+   "year": 2020,
+   "number": 4,
+   "url": "https://cmimc.com/archive/cmimc2020/2020_CCS.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "The continent of Trianglandia is an equilateral triangle of side length 9, divided into 81 triangular countries of side length 1. Each country has the resources to choose at most 1 of its 3 sides and build a \"wall\" covering that entire side. However, since all the countries are at war, no two countries are willing to have their walls touch, even at a corner. What is the maximum number of walls that can be built in Trianglandia?",
+  "image": null,
+  "choices": null,
+  "answer": "27",
+  "acceptedAnswers": null,
+  "answerUnit": "walls",
+  "solutions": [
+   {
+    "title": "Corners and a snake",
+    "body": "Walls are unit segments, and two walls may not even share an endpoint. The triangular grid has $1+2+\\dots+10=55$ lattice points, and each wall uses $2$ of them, no point used twice. So there are at most $\\lfloor55/2\\rfloor=27$ walls.\n\n*Construction.* Number the rows of points $0,\\dots,9$ from the top (row $r$ has $r+1$ points). Walk along row $0$, go down to row $1$ and walk it right to left, go down to row $2$ and walk it left to right, and so on, alternating. This is a path through all $55$ points using $54$ grid segments. Make walls out of the 1st, 3rd, 5th, ..., 53rd segments: $27$ walls, no two sharing a point. Each wall is a side of some unit triangle; two different walls cannot belong to the same triangle (two sides of a triangle share a corner), so every wall can be assigned to a different country.\n\n**Answer: 27**"
+   }
+  ],
+  "topics": [
+   "counting",
+   "graph-theory"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2020-combinatorics-05",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Combinatorics and Computer Science Round",
+   "year": 2020,
+   "number": 5,
+   "url": "https://cmimc.com/archive/cmimc2020/2020_CCS.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Seven cards numbered 1 through 7 lay stacked in a pile in ascending order from top to bottom (1 on top, 7 on bottom). A shuffle involves picking a random card of the six not currently on top and putting it on top. The relative order of all the other cards remains unchanged. Find the probability that, after 10 shuffles, 6 is higher in the pile than 3.",
+  "image": null,
+  "choices": null,
+  "answer": "58025/118098",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Last of 3 and 6 to be picked",
+    "body": "Cards $3$ and $6$ keep their relative order (3 above 6) until one of them is picked. The relative order of $3$ and $6$ at the end is decided by whichever of them was picked last: it sits above the other.\n\n- *Neither is ever picked.* Then at every step the top card is neither $3$ nor $6$, so $4$ of the $6$ eligible cards are neither; the probability is $(4/6)^{10}=(2/3)^{10}$. Then $3$ is above $6$: failure.\n- *At least one is picked.* A history is a sequence of $10$ picks (each pick avoids the current top card). Swapping the labels $3\\leftrightarrow6$ in every pick maps histories to histories (the top card is always the last pick, so legality is preserved) with the same probability $6^{-10}$, and exchanges \"last pick among $\\{3,6\\}$ is $6$\" with \"is $3$\". So by symmetry the probability that $6$ was picked last is $\\frac12$.\n\nThus the answer is\n\n$$\\frac12\\left(1-\\Big(\\frac23\\Big)^{10}\\right)=\\frac{3^{10}-2^{10}}{2\\cdot3^{10}}=\\frac{58025}{118098}.$$\n\n(An exact computation over all $6^{10}$-weighted states gives the same fraction.)\n\n**Answer: $\\frac{3^{10}-2^{10}}{2\\cdot3^{10}}=\\frac{58025}{118098}$**"
+   }
+  ],
+  "topics": [
+   "probability",
+   "counting"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null,
+  "answerDisplay": "$\\frac{3^{10}-2^{10}}{2\\cdot3^{10}}=\\frac{58025}{118098}$"
+ },
+ {
+  "id": "cmimc-2020-combinatorics-06",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Combinatorics and Computer Science Round",
+   "year": 2020,
+   "number": 6,
+   "url": "https://cmimc.com/archive/cmimc2020/2020_CCS.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "The nation of CMIMCland consists of 8 islands, none of which are connected. Each citizen wants to visit the other islands, so the government will build bridges between the islands. However, each island has a volcano that could erupt at any time, destroying that island and any bridges connected to it. The government wants to guarantee that after any eruption, a citizen from any of the remaining 7 islands can go on a tour, visiting each of the remaining islands exactly once and returning to their home island (only at the end of the tour). What is the minimum number of bridges needed?",
+  "image": null,
+  "choices": null,
+  "answer": "12",
+  "acceptedAnswers": null,
+  "answerUnit": "bridges",
+  "solutions": [
+   {
+    "title": "Every island needs 3 bridges",
+    "body": "A tour is a Hamiltonian cycle on the surviving islands, so each surviving island uses two different bridges.\n\n*Lower bound.* Suppose an island $I$ had at most $2$ bridges. If it has $\\le1$, then any eruption elsewhere leaves $I$ without two bridges. If it has exactly $2$, erupt a neighbour: $I$ is left with one bridge. Either way no tour exists. So every island has at least $3$ bridges, the total number of bridge ends is at least $24$, and there are at least $12$ bridges.\n\n*Construction with 12 bridges.* Label the islands $0,\\dots,7$ and build the bridges $i$--$(i+1)$ (mod $8$) and $i$--$(i+4)$: the $8$-cycle plus the four diagonals joining opposite islands (a cubic graph with $12$ edges). The graph is symmetric under rotating the labels, so it suffices to check that removing island $0$ leaves a Hamiltonian cycle: $1\\to5\\to4\\to3\\to7\\to6\\to2\\to1$ uses the bridges $1$-$5$, $5$-$4$, $4$-$3$, $3$-$7$, $7$-$6$, $6$-$2$, $2$-$1$, all present. Rotating this cycle handles every other eruption.\n\n**Answer: 12**"
+   }
+  ],
+  "topics": [
+   "graph-theory"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2020-combinatorics-07",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Combinatorics and Computer Science Round",
+   "year": 2020,
+   "number": 7,
+   "url": "https://cmimc.com/archive/cmimc2020/2020_CCS.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Consider a complete graph of 2020 vertices. What is the least number of edges that need to be marked such that each triangle (3-vertex subgraph) has an odd number of marked edges?",
+  "image": null,
+  "choices": null,
+  "answer": "1019090",
+  "acceptedAnswers": null,
+  "answerUnit": "edges",
+  "solutions": [
+   {
+    "title": "Marked edges form two cliques",
+    "body": "Call two vertices *friends* if the edge between them is marked (and every vertex is its own friend). If $uv$ and $vw$ are marked, the triangle $uvw$ already has at least $2$ marked edges, so it must have all $3$: $uw$ is marked. So friendship is an equivalence relation. If there were three classes, one vertex from each would form a triangle with no marked edge, which is not allowed. So there are at most $2$ classes, and the marked edges are exactly the pairs inside the classes.\n\nIf the classes have sizes $a$ and $2020-a$, the number of marked edges is $\\binom a2+\\binom{2020-a}2$, which by convexity is smallest for $a=1010$: $2\\binom{1010}2=1010\\cdot1009=1019090$. (One class would give $\\binom{2020}2$, which is larger.)\n\nThis works: a triangle inside a class has $3$ marked edges, and a triangle with vertices in both classes has exactly $1$.\n\n**Answer: 1019090**"
+   }
+  ],
+  "topics": [
+   "graph-theory",
+   "counting"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2020-combinatorics-08",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Combinatorics and Computer Science Round",
+   "year": 2020,
+   "number": 8,
+   "url": "https://cmimc.com/archive/cmimc2020/2020_CCS.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Catherine has a plate containing 300 circular crumbling mooncakes, arranged as shown: columns of three, each column shifted by half a mooncake relative to the neighbouring column (see the picture; this continues for 100 total columns). She wants to pick some of the mooncakes to eat, however whenever she takes a mooncake all adjacent mooncakes will be destroyed and cannot be eaten. Let $M$ be the maximal number of mooncakes she can eat, and let $n$ be the number of ways she can pick $M$ mooncakes to eat (note: the order in which she picks mooncakes does not matter). Compute the ordered pair $(M, n)$.",
+  "image": "qimages/cmimc/2020-combinatorics/q08.webp",
+  "choices": null,
+  "answer": "$(M,n)=(100,\\ F_{104}+1223)$, where $F_k$ is the $k$-th Fibonacci number ($F_1=F_2=1$); numerically $n=2427893228399975083676$",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Pairs of columns and a transfer recurrence",
+    "body": "*Setup.* Two mooncakes are adjacent when their circles touch (same column neighbours, or cakes in neighbouring columns offset by half a cake). Each of the $100$ columns has $3$ mooncakes. Whenever she takes a mooncake, all adjacent ones are destroyed, so we want a maximum independent set.\n\n*Maximum.* Group columns into $50$ pairs $(1,2),(3,4),\\dots$. In a pair the $6$ cakes split into two triangles of mutually touching cakes, so at most $1$ cake can be taken from each: at most $2$ per pair, at most $100$ overall. This is achieved by taking the top and bottom cakes of every odd column. So $M=100$, and a selection of $100$ cakes is exactly one that takes $2$ cakes from every pair.\n\n*Counting.* A pair has $6$ possible patterns of $2$ non-touching cakes: both in the odd column (top and bottom), both in the even column (top and bottom), or one cake in each column ($4$ non-touching combinations). Between consecutive pairs only the even column of one pair touches the odd column of the next, which restricts which patterns can follow each other. Let $f_n$ be the number of valid selections with $n$ pairs. Tracking the six patterns with these touching rules (a transfer-matrix recursion) gives a closed form\n\n$$f_n=F_{2n+4}+\\binom n2-2 .$$\n\nFor $n=1$ this gives $F_6+0-2=6$, as expected (the six patterns). A direct dynamic programme over the columns gives $f_n=6,20,56,148,385$ for $n=1,\\dots,5$, matching the formula. For $n=50$ pairs: $f_{50}=F_{104}+\\binom{50}2-2=F_{104}+1223$, and the same programme on all $100$ columns gives $2427893228399975083676$.\n\n**Answer: $(M,n)=(100,\\ F_{104}+1223)$**"
+   }
+  ],
+  "topics": [
+   "counting",
+   "graph-theory"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2020-combinatorics-09",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Combinatorics and Computer Science Round",
+   "year": 2020,
+   "number": 9,
+   "url": "https://cmimc.com/archive/cmimc2020/2020_CCS.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Let $\\Gamma = \\{\\varepsilon, 0, 00, \\ldots\\}$ be the set of all finite strings consisting of only zeroes. We consider six-state unary DFAs $D = (F, q_0, \\delta)$ where $F$ is a subset of $Q = \\{1, 2, 3, 4, 5, 6\\}$, not necessarily strict and possibly empty; $q_0 \\in Q$ is some start state; and $\\delta : Q \\to Q$ is the transition function. For each such DFA $D$, we associate a set $F_D \\subseteq \\Gamma$ as the set of all strings $w \\in \\Gamma$ such that\n$$\\underbrace{\\delta(\\cdots(\\delta(q_0))\\cdots)}_{|w|\\text{ applications}} \\in F.$$\nWe say a set $\\mathcal{D}$ of DFAs is *diverse* if for all $D_1, D_2 \\in \\mathcal{D}$ we have $F_{D_1} \\neq F_{D_2}$. What is the maximum size of a diverse set?",
+  "image": null,
+  "choices": null,
+  "answer": "306",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Count eventually periodic sequences",
+    "body": "A string in $\\Gamma$ is determined by its length, so $F_D$ corresponds to the $0/1$ sequence $s_t=[\\delta^t(q_0)\\in F]$, $t=0,1,2,\\dots$. The maximum size of a diverse set is the number of distinct sequences that arise.\n\nThe orbit $q_0,\\delta(q_0),\\dots$ is a tail of $\\mu$ states followed by a cycle of $\\lambda$ states with $\\mu+\\lambda\\le6$, so $s$ is eventually periodic with preperiod $\\le\\mu$ and period $\\le\\lambda$. Hence its *minimal* preperiod $\\mu'$ and minimal period $\\lambda'$ satisfy $\\mu'+\\lambda'\\le6$. Conversely every sequence with $\\mu'+\\lambda'\\le6$ is realised (use a path of $\\mu'$ states, a cycle of $\\lambda'$ states, and mark which states are in $F$; unused states are irrelevant).\n\nCount sequences with minimal preperiod $\\mu'=\\mu$ and minimal period $\\lambda$: the periodic part is a binary word $c$ of length $\\lambda$ that is not a proper power ($f(\\lambda)=\\sum_{d\\mid\\lambda}\\mu(\\lambda/d)2^d$ choices: $f(1..6)=2,2,6,12,30,54$). If $\\mu=0$ there is nothing else. If $\\mu\\ge1$, minimality of the preperiod means the last tail bit differs from the bit that periodicity would give, so it is forced, and the other $\\mu-1$ tail bits are free: $2^{\\mu-1}$ choices. For fixed $\\lambda$ the total over $\\mu=0,\\dots,6-\\lambda$ is $f(\\lambda)(1+1+2+\\dots+2^{5-\\lambda})=f(\\lambda)2^{6-\\lambda}$.\n\n$$\\sum_{\\lambda=1}^6f(\\lambda)2^{6-\\lambda}=2\\cdot32+2\\cdot16+6\\cdot8+12\\cdot4+30\\cdot2+54\\cdot1=306.$$\n\n**Answer: 306**"
+   }
+  ],
+  "topics": [
+   "counting",
+   "sequences-series"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2020-combinatorics-10",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Combinatorics and Computer Science Round",
+   "year": 2020,
+   "number": 10,
+   "url": "https://cmimc.com/archive/cmimc2020/2020_CCS.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Define a string to be *doubly palindromic* if it can be split into two (non-empty) parts that are read the same both backwards and forwards. For example hannahhuh is doubly palindromic as it can be split into hannah and huh. How many doubly palindromic strings of length $9$ using only the letters $\\{a, b, c, d\\}$ are there?",
+  "image": null,
+  "choices": null,
+  "answer": "8104",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Inclusion-exclusion over split points",
+    "body": "A string can be split after $i$ letters, $1\\le i\\le8$. A palindrome of length $\\ell$ is determined by its first $\\lceil\\ell/2\\rceil$ letters, so there are $4^{\\lceil i/2\\rceil+\\lceil(9-i)/2\\rceil}=4^5$ strings splittable at a given $i$ (exactly one of $i$, $9-i$ is odd, so the sum of ceilings is $5$). Summing over $i$ gives $8\\cdot1024=8192$, which counts a string once per valid split point.\n\n*Strings with two split points.* If $s=xyz$ with $x,\\ yz$ palindromes and $xy,\\ z$ palindromes (splits after $|x|$ and after $|xy|$), then, writing $v'$ for the reverse, $zxy=z(y'x')=(z'y')x'=\\ (yz)x=yzx$, using $x=x'$, $z=z'$, $xy=y'x'$, $yz=z'y'$. So two different cyclic shifts of $s$ coincide, hence a non-trivial rotation fixes $s$. As $|s|=9$, this means $s=ttt$ with $|t|=3$.\n\nFor $s=ttt$ the number of valid split points is: $t=aaa$-type ($4$ strings): $8$; $t=aab$ or $abb$-type ($24$ strings): $3$ splits each (for example $aabaabaab$ splits after positions $1,4,7$); $t=aba$-type ($12$ strings): $2$ splits; $t$ with three different letters ($24$ strings): $0$ splits. (A direct enumeration of the $64$ strings $ttt$ gives $4$ strings with $8$ splits, $24$ with $3$, $12$ with $2$, $24$ with $0$.)\n\nThe total overcount is $\\sum(\\text{splits}-1)=4\\cdot7+24\\cdot2+12\\cdot1=88$. Therefore the number of doubly palindromic strings is $8192-88=8104$ (confirmed by brute force over all $4^9$ strings).\n\n**Answer: 8104**"
+   }
+  ],
+  "topics": [
+   "counting"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2020-combinatorics-11",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Combinatorics and Computer Science Round",
+   "year": 2020,
+   "number": 11,
+   "url": "https://cmimc.com/archive/cmimc2020/2020_CCS.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "(Estimation) Max flips 2020 fair coins. Let the probability that there are at most 505 heads be $p$. Estimate $-\\log_2(p)$ to 5 decimal places, in the form $x.abcde$ where $x$ is a positive integer and $a,b,c,d,e$ are decimal digits.",
+  "image": null,
+  "choices": null,
+  "answer": "$-\\log_2 p\\approx 386.24320$",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Exact computation",
+    "body": "$p=2^{-2020}\\sum_{k=0}^{505}\\binom{2020}{k}$, so $-\\log_2p=2020-\\log_2\\sum_{k\\le505}\\binom{2020}k$. The sum is dominated by its last terms: successive terms have ratio $\\binom{2020}{k-1}/\\binom{2020}k=\\frac{k}{2021-k}\\approx\\frac13$ near $k=505$, so the sum is about $\\frac32\\binom{2020}{505}$ (exactly $1.4985\\binom{2020}{505}$), with $\\log_2\\binom{2020}{505}\\approx1633.1733$. Evaluating the sum exactly with big-integer arithmetic gives\n\n$$-\\log_2 p=386.24320380\\ldots$$\n\nSo the requested form is $386.24320$. (The published answer key lists \"(5.3605584085, 117)\", which does not correspond to this question as printed; the value above is from an exact computation.)\n\n**Answer: $386.24320$**"
+   }
+  ],
+  "topics": [
+   "probability",
+   "counting"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": "Official answer key prints \"(5.3605584085, 117)\", which is not of the requested form x.abcde; the stored answer 386.24320 comes from an exact big-integer computation of -log2 P(at most 505 heads in 2020 flips). Estimation tie-break question."
+ }
+]

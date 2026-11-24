@@ -1,0 +1,102 @@
+[
+ {
+  "id": "dmm-2012-tiebreaker-01",
+  "bank": "dmm",
+  "source": {
+   "contest": "Duke Math Meet",
+   "paper": "Tiebreaker Round",
+   "year": 2012,
+   "number": 1,
+   "url": "https://services.math.duke.edu/dumu/mathmeet/prob/2012_Tiebreaker.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "An $8$-inch by $11$-inch sheet of paper is laid flat so that the top and bottom edges are $8$ inches long. The paper is then folded so that the top left corner touches the right edge. What is the minimum possible length of the fold?",
+  "image": null,
+  "choices": null,
+  "answer": "8*sqrt(185)/11",
+  "acceptedAnswers": null,
+  "answerUnit": "inches",
+  "solutions": [
+   {
+    "title": "Parametrize the fold",
+    "body": "Place the sheet as $[0,8]\\times[0,11]$ with the top-left corner $A=(0,11)$. Let the corner land on the right edge at $X=(8,11-t)$, $0\\le t\\le11$. The fold (crease) is the perpendicular bisector of $AX$: it passes through $M=(4,11-\\frac t2)$ with direction $(t,8)$ (perpendicular to $AX=(8,-t)$). Points of the crease inside the sheet are $(4+\\lambda t,\\ 11-\\frac t2+8\\lambda)$ with\n$$|\\lambda|\\le\\frac4t\\ \\ (0\\le x\\le8),\\qquad -\\frac{11-t/2}8\\le\\lambda\\le\\frac t{16}\\ \\ (0\\le y\\le11).$$\nThe crease length is $\\sqrt{t^2+64}\\,(\\lambda_{\\max}-\\lambda_{\\min})$, with $\\lambda_{\\max}=\\min(\\frac4t,\\frac t{16})$ and $\\lambda_{\\min}=-\\min(\\frac4t,\\frac{11-t/2}8)$. Three ranges:\n\n* $0<t\\le11-\\sqrt{57}\\approx3.45$: $\\lambda_{\\max}-\\lambda_{\\min}=\\frac t{16}+\\frac{11-t/2}8=\\frac{11}8$, length $\\frac{11}8\\sqrt{t^2+64}\\ge11$ (the crease runs from the top to the bottom edge, shortest when $t\\to0$).\n* $11-\\sqrt{57}\\le t\\le8$: $\\lambda_{\\max}-\\lambda_{\\min}=\\frac t{16}+\\frac4t=\\frac{t^2+64}{16t}$, length $\\frac{(t^2+64)^{3/2}}{16t}$, minimized where $3t^2=t^2+64$, i.e. $t=4\\sqrt2$, with value $\\frac{96^{3/2}}{16\\cdot4\\sqrt2}=6\\sqrt3\\approx10.39$.\n* $8\\le t\\le11$: $\\lambda_{\\max}-\\lambda_{\\min}=\\frac8t$, length $\\frac{8\\sqrt{t^2+64}}{t}=8\\sqrt{1+\\frac{64}{t^2}}$, decreasing in $t$, smallest at $t=11$: $\\frac{8\\sqrt{185}}{11}\\approx9.89$.\n\nComparing $11$, $6\\sqrt3\\approx10.39$ and $\\frac{8\\sqrt{185}}{11}\\approx9.89$, the minimum is $\\frac{8\\sqrt{185}}{11}$ inches (corner folded to the bottom-right corner).\n\n**Answer: $\\dfrac{8\\sqrt{185}}{11}$ inches**"
+   }
+  ],
+  "topics": [
+   "geometry",
+   "calculus",
+   "algebra"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null,
+  "answerDisplay": "$\\frac{8\\sqrt{185}}{11}$"
+ },
+ {
+  "id": "dmm-2012-tiebreaker-02",
+  "bank": "dmm",
+  "source": {
+   "contest": "Duke Math Meet",
+   "paper": "Tiebreaker Round",
+   "year": 2012,
+   "number": 2,
+   "url": "https://services.math.duke.edu/dumu/mathmeet/prob/2012_Tiebreaker.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Triangle $ABC$ is equilateral, with $AB=6$. There are points $D,E$ on segment $AB$ (in the order $A,D,E,B$), points $F,G$ on segment $BC$ (in the order $B,F,G,C$), and points $H,I$ on segment $CA$ (in the order $C,H,I,A$) such that $DE=FG=HI=2$. Considering all such configurations of $D,E,F,G,H,I$, let $A_1$ be the maximum possible area of the (possibly degenerate) hexagon $DEFGHI$ and let $A_2$ be the minimum possible area. Find $A_1-A_2$.",
+  "image": null,
+  "choices": null,
+  "answer": "4*sqrt(3)",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Cut off three corner triangles",
+    "body": "The hexagon is the triangle $ABC$ minus the three corner triangles $ADI$, $BFE$, $CHG$. Let $u=AD$, $v=BF$, $w=CH$, each in $[0,4]$. Then $AI=4-w$, $BE=4-u$, $CG=4-v$, and since each corner has angle $60^\\circ$,\n$$[ADI]+[BFE]+[CHG]=\\frac{\\sqrt3}4\\big[u(4-w)+v(4-u)+w(4-v)\\big]=\\frac{\\sqrt3}4f(u,v,w).$$\n$f\\ge0$ with $f=0$ at $u=v=w=0$, so the largest hexagon is the whole triangle: $A_1=[ABC]=9\\sqrt3$.\n\n$f$ is linear in each variable separately, so its maximum over the cube $[0,4]^3$ occurs at a vertex. At the vertices $u,v,w\\in\\{0,4\\}$: $f=0$ if all equal, and $f=16$ in all other cases (e.g. $f(4,0,0)=4\\cdot4=16$, $f(4,4,0)=16+0+0=16$). So $f\\le16$ and $A_2=9\\sqrt3-\\frac{\\sqrt3}4\\cdot16=5\\sqrt3$.\n\nTherefore $A_1-A_2=9\\sqrt3-5\\sqrt3=4\\sqrt3$.\n\n**Answer: $4\\sqrt3$**"
+   }
+  ],
+  "topics": [
+   "geometry",
+   "inequalities"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null,
+  "answerDisplay": "$4\\sqrt3$"
+ },
+ {
+  "id": "dmm-2012-tiebreaker-03",
+  "bank": "dmm",
+  "source": {
+   "contest": "Duke Math Meet",
+   "paper": "Tiebreaker Round",
+   "year": 2012,
+   "number": 3,
+   "url": "https://services.math.duke.edu/dumu/mathmeet/prob/2012_Tiebreaker.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Find $\\tan\\frac\\pi7\\tan\\frac{2\\pi}7\\tan\\frac{3\\pi}7$.",
+  "image": null,
+  "choices": null,
+  "answer": "sqrt(7)",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [],
+  "topics": [
+   "trigonometry"
+  ],
+  "difficulty": 3,
+  "duplicateOf": "hmmt-feb-2016-guts-15",
+  "reviewNote": null,
+  "answerDisplay": "$\\sqrt7$"
+ }
+]

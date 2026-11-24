@@ -1,0 +1,841 @@
+[
+ {
+  "id": "cmimc-2019-power-01a",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Power Round",
+   "year": 2019,
+   "number": 1,
+   "url": "https://cmimc.com/archive/cmimc2019/2019_Power.pdf"
+  },
+  "grade": "9-12",
+  "points": 1,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "**Problem 1.1(a).** An *alphabet* $\\Sigma$ is a finite set of characters; $\\Sigma^*$ is the set of all finite concatenations of characters of $\\Sigma$ (including the empty word $\\varepsilon$), and a *language* over $\\Sigma$ is a subset of $\\Sigma^*$. Give an English description of the language $L=\\{0^n1^n:n\\in\\mathbb N\\}$.",
+  "image": null,
+  "choices": null,
+  "answer": "The strings consisting of some number $n\\ge0$ of $0$s followed by exactly the same number of $1$s (nothing else).",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Read the definition",
+    "body": "$0^n1^n$ is $n$ zeros followed by $n$ ones: $\\varepsilon,\\,01,\\,0011,\\,000111,\\dots$ So $L$ is the language of all strings that begin with some number of $0$s and end with the same number of $1$s, with nothing in between."
+   }
+  ],
+  "topics": [
+   "logic"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2019-power-01b",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Power Round",
+   "year": 2019,
+   "number": 1,
+   "url": "https://cmimc.com/archive/cmimc2019/2019_Power.pdf"
+  },
+  "grade": "9-12",
+  "points": 1,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "**Problem 1.1(b).** For a word $w$ let $w^r$ denote its reverse. Give an English description of the language $M=\\{ww^r:w\\in\\Sigma^*\\}$.",
+  "image": null,
+  "choices": null,
+  "answer": "The even-length palindromes over $\\Sigma$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Read the definition",
+    "body": "A word of the form $ww^r$ reads the same forwards and backwards and has even length $2|w|$. Conversely, every even-length palindrome is of this form (take $w$ to be its first half). So $M$ is the set of even-length palindromes."
+   }
+  ],
+  "topics": [
+   "logic"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2019-power-01c",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Power Round",
+   "year": 2019,
+   "number": 1,
+   "url": "https://cmimc.com/archive/cmimc2019/2019_Power.pdf"
+  },
+  "grade": "9-12",
+  "points": 1,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "**Problem 1.1(c).** Consider the language $O$ over $\\{0,1\\}$ defined recursively as follows: $\\varepsilon\\in O$, and if $u,v\\in O$ then $1u0v\\in O$ and $0u1v\\in O$. Give an English description of $O$.",
+  "image": null,
+  "choices": null,
+  "answer": "The set of binary strings with an equal number of $0$s and $1$s.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Both inclusions",
+    "body": "**Every string in $O$ is balanced.** By induction on the construction: $\\varepsilon$ is balanced, and $1u0v$, $0u1v$ add one $0$ and one $1$ to the balanced strings $u,v$.\n\n**Every balanced string is in $O$.** Induct on the length. Let $w$ be balanced and non-empty, say $w$ starts with $1$ (the other case is symmetric). Score $+1$ for each $1$ and $-1$ for each $0$; the partial sums start at $1$ and end at $0$, so there is a first position where the sum returns to $0$. Then $w=1u0v$, where $u$ has total score $0$ (it is balanced) and $v$ is balanced; both are shorter, hence in $O$, so $w\\in O$.\n\nSo $O$ is exactly the set of strings with equally many $0$s and $1$s."
+   }
+  ],
+  "topics": [
+   "logic",
+   "counting"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2019-power-02",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Power Round",
+   "year": 2019,
+   "number": 2,
+   "url": "https://cmimc.com/archive/cmimc2019/2019_Power.pdf"
+  },
+  "grade": "9-12",
+  "points": 4,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "**Problem 1.2.** The class $\\mathsf P$ is the set of languages $L$ for which some algorithm $A$ runs in time polynomial in the input length and accepts $w$ iff $w\\in L$. The class $\\mathsf{NP}$ is the set of languages $L$ for which there is a polynomial-time *verifier* $V(w,k)$ such that $w\\in L$ iff there exists a \"witness\" $k$ with $V(w,k)$ accepting. Prove that $\\mathsf P\\subseteq\\mathsf{NP}$.",
+  "image": null,
+  "choices": null,
+  "answer": "Use the polynomial-time decider as a verifier that ignores the witness.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Ignore the witness",
+    "body": "Let $L\\in\\mathsf P$ and let $A$ be a polynomial-time algorithm deciding $L$. Define the verifier $V(w,k)$: run $A(w)$ and return its answer (ignoring $k$).\n\n- If $w\\in L$, then $A(w)$ accepts, so $V(w,k)$ accepts for every $k$; in particular a witness exists.\n- If $w\\notin L$, then $A(w)$ rejects, so $V(w,k)$ rejects for every $k$: no witness exists.\n\n$V$ runs in polynomial time because $A$ does. Hence $L\\in\\mathsf{NP}$. $\\blacksquare$"
+   }
+  ],
+  "topics": [
+   "logic"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2019-power-03a",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Power Round",
+   "year": 2019,
+   "number": 3,
+   "url": "https://cmimc.com/archive/cmimc2019/2019_Power.pdf"
+  },
+  "grade": "9-12",
+  "points": 0.5,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "**Problem 1.3(a).** A language is $\\mathsf{NP}$-*complete* if it is in $\\mathsf{NP}$ and $\\mathsf{NP}$-hard (a polynomial-time algorithm for it would give polynomial-time algorithms for all of $\\mathsf{NP}$). Recall that 3COL (can the vertices of a graph $G$ be colored with $3$ colors with adjacent vertices colored differently?) is $\\mathsf{NP}$-complete. The problem COL asks, for a graph $G$ and a positive integer $k$, whether $G$ can be properly colored with $k$ colors. Explain (informally) why COL is $\\mathsf{NP}$-complete using 3COL.",
+  "image": null,
+  "choices": null,
+  "answer": "COL is in NP (check a coloring), and 3COL is the special case $k=3$ of COL, so COL is NP-hard.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Membership and hardness",
+    "body": "**In $\\mathsf{NP}$:** a witness is a coloring; checking that it uses at most $k$ colors and that adjacent vertices differ takes polynomial time.\n\n**$\\mathsf{NP}$-hard:** an instance $G$ of 3COL is the instance $(G,3)$ of COL. So a polynomial-time algorithm for COL would solve 3COL, and hence (as 3COL is $\\mathsf{NP}$-hard) all of $\\mathsf{NP}$."
+   }
+  ],
+  "topics": [
+   "graph-theory",
+   "logic"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2019-power-03b",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Power Round",
+   "year": 2019,
+   "number": 3,
+   "url": "https://cmimc.com/archive/cmimc2019/2019_Power.pdf"
+  },
+  "grade": "9-12",
+  "points": 0.5,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "**Problem 1.3(b).** Recall that PARTITION (given a list $L$ of integers, is there a sublist whose sum equals the sum of the rest?) is $\\mathsf{NP}$-complete. SUBSET-SUM asks, for a list $L$ and an integer $t$, whether some sublist has sum exactly $t$. Explain why SUBSET-SUM is $\\mathsf{NP}$-complete using PARTITION.",
+  "image": null,
+  "choices": null,
+  "answer": "SUBSET-SUM is in NP (the subset is a witness), and PARTITION is the special case $t=\\tfrac12\\sum L$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Membership and reduction",
+    "body": "**In $\\mathsf{NP}$:** the witness is the sublist; its sum is computed in polynomial time.\n\n**$\\mathsf{NP}$-hard:** let $L$ be a PARTITION instance with total $x$. Double every entry to get $2L$, which has total $2x$; then $L$ has a partition into two equal-sum parts iff $2L$ has a sublist of sum $x$ (equivalently: $L$ has a sublist with sum $x/2$). Thus the SUBSET-SUM instance $(2L,x)$ answers PARTITION on $L$, so a fast SUBSET-SUM algorithm would solve PARTITION."
+   }
+  ],
+  "topics": [
+   "logic"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2019-power-03c",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Power Round",
+   "year": 2019,
+   "number": 3,
+   "url": "https://cmimc.com/archive/cmimc2019/2019_Power.pdf"
+  },
+  "grade": "9-12",
+  "points": 2,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "**Problem 1.3(c).** Recall that SUBSET-SUM (given a list $L$ of integers and an integer $t$, is there a sublist with sum exactly $t$?) is $\\mathsf{NP}$-complete. PARTITION asks whether a list can be split into two sublists with equal sums. Explain why PARTITION is $\\mathsf{NP}$-complete using SUBSET-SUM.",
+  "image": null,
+  "choices": null,
+  "answer": "PARTITION is in NP; reduce SUBSET-SUM$(L,t)$ to PARTITION by adding the element $|2t-x|$ to $L$, where $x=\\sum L$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Membership and reduction",
+    "body": "**In $\\mathsf{NP}$:** the witness is one of the two parts; its sum is checked in polynomial time.\n\n**$\\mathsf{NP}$-hard:** given a SUBSET-SUM instance $(L,t)$ with $x=\\sum L$, form $L'=L\\cup\\{2t-x\\}$ if $2t\\ge x$, and $L'=L\\cup\\{x-2t\\}$ if $2t<x$. We show $(L,t)$ is a yes-instance iff $L'$ can be partitioned.\n\n*Case $2t\\ge x$.* The total of $L'$ is $2t$, so each side must have sum $t$. ($\\Rightarrow$) If $S\\subseteq L$ has sum $t$, take $S$ and its complement together with the new element ($x-t+2t-x=t$). ($\\Leftarrow$) One of the two sides does not contain the new element; it is a sublist of $L$ with sum $t$.\n\n*Case $2t<x$.* The total of $L'$ is $2x-2t$, so each side must have sum $x-t$. ($\\Rightarrow$) If $S\\subseteq L$ has sum $t$, put $S$ with the new element ($t+x-2t=x-t$) on one side and $L\\setminus S$ (sum $x-t$) on the other. ($\\Leftarrow$) The side without the new element is a sublist of $L$ of sum $x-t$; its complement in $L$ has sum $t$.\n\nThe construction takes polynomial time, so a fast algorithm for PARTITION would solve SUBSET-SUM."
+   }
+  ],
+  "topics": [
+   "logic"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2019-power-04a",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Power Round",
+   "year": 2019,
+   "number": 4,
+   "url": "https://cmimc.com/archive/cmimc2019/2019_Power.pdf"
+  },
+  "grade": "9-12",
+  "points": 1,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "**Problem 1.4(a).** $\\chi(G)$ denotes the chromatic number of a graph $G$ (the least number of colors in a proper vertex coloring). Determine the chromatic number of the graph shown.",
+  "image": "qimages/cmimc/2019-power/q04a.webp",
+  "choices": null,
+  "answer": "2",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Bipartite",
+    "body": "The graph is the complete bipartite graph $K_{3,3}$: the three vertices in the left column are each joined to all three in the right column and to none in their own column. Coloring the left column red and the right column blue is proper, and one color is not enough because the graph has an edge. So $\\chi=2$.\n\n**Answer: 2**"
+   }
+  ],
+  "topics": [
+   "graph-theory"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2019-power-04b",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Power Round",
+   "year": 2019,
+   "number": 4,
+   "url": "https://cmimc.com/archive/cmimc2019/2019_Power.pdf"
+  },
+  "grade": "9-12",
+  "points": 1,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "**Problem 1.4(b).** $\\chi(G)$ denotes the chromatic number of a graph $G$ (the least number of colors in a proper vertex coloring). Determine the chromatic number of the graph shown.",
+  "image": "qimages/cmimc/2019-power/q04b.webp",
+  "choices": null,
+  "answer": "3",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Odd cycle and explicit coloring",
+    "body": "This is the Petersen graph. It contains the $5$-cycle formed by the outer pentagon, and an odd cycle needs $3$ colors, so $\\chi\\ge3$.\n\nA $3$-coloring: label the outer vertices $o_0,\\dots,o_4$ around the pentagon and let $i_k$ be the inner vertex joined to $o_k$; the inner vertices form a pentagram, with $i_k\\sim i_{k\\pm2}$. Color $o_0,\\dots,o_4$ with $1,2,1,2,3$ and $i_0,\\dots,i_4$ with $2,3,3,1,1$ respectively.\n\nCheck: each $i_k$ differs from its spoke partner $o_k$ ($2\\ne1$, $3\\ne2$, $3\\ne1$, $1\\ne2$, $1\\ne3$); the outer cycle $1,2,1,2,3$ is proper (including $o_4o_0$: $3\\ne1$); and the pentagram edges are proper: $i_0i_2$: $2,3$; $i_2i_4$: $3,1$; $i_4i_1$: $1,3$; $i_1i_3$: $3,1$; $i_3i_0$: $1,2$. So $\\chi=3$.\n\n**Answer: 3**"
+   }
+  ],
+  "topics": [
+   "graph-theory"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2019-power-04c",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Power Round",
+   "year": 2019,
+   "number": 4,
+   "url": "https://cmimc.com/archive/cmimc2019/2019_Power.pdf"
+  },
+  "grade": "9-12",
+  "points": 1,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "**Problem 1.4(c).** $\\chi(G)$ denotes the chromatic number of a graph $G$ (the least number of colors in a proper vertex coloring). Determine the chromatic number of the graph shown.",
+  "image": "qimages/cmimc/2019-power/q04c.webp",
+  "choices": null,
+  "answer": "4",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "The Moser spindle",
+    "body": "Call the top vertex $T$, the two middle vertices $M_1$ (left) and $M_2$ (right), the side vertices $L,R$ and the bottom vertices $B_L,B_R$. The edges are $TL,TR,TM_1,TM_2,LM_2,RM_1,LB_L,RB_R,B_LB_R,B_LM_2,B_RM_1$.\n\n**At least 4.** Triangles $TLM_2$ and $LM_2B_L$ share the edge $LM_2$. In a proper $3$-coloring the two triangles use all three colors, so $T$ and $B_L$ must receive the same color (the one not used on $L,M_2$). Likewise triangles $TRM_1$ and $RM_1B_R$ force $T$ and $B_R$ to have the same color. Then $B_L$ and $B_R$ have the same color, but they are adjacent: contradiction. So $\\chi\\ge4$.\n\n**4 suffice.** $T=1$, $L=2$, $M_2=3$, $B_L=1$, $R=2$, $M_1=3$, $B_R=4$ is a proper coloring (check each of the $11$ edges).\n\n**Answer: 4**"
+   }
+  ],
+  "topics": [
+   "graph-theory"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2019-power-05",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Power Round",
+   "year": 2019,
+   "number": 5,
+   "url": "https://cmimc.com/archive/cmimc2019/2019_Power.pdf"
+  },
+  "grade": "9-12",
+  "points": 3,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "**Problem 1.5.** The *degree* of a vertex $v$ in a graph is the number of vertices adjacent to $v$. Let $G$ be an arbitrary graph with maximum degree $\\Delta$. Prove that $\\chi(G)\\le\\Delta+1$.",
+  "image": null,
+  "choices": null,
+  "answer": "Color the vertices one at a time, each with a color unused by its already-colored neighbours; $\\Delta+1$ colors always suffice.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Greedy coloring",
+    "body": "Order the vertices $v_1,\\dots,v_n$ arbitrarily and color them in turn, giving $v_i$ the smallest color in $\\{1,\\dots,\\Delta+1\\}$ not already used on a neighbour of $v_i$. Such a color exists: $v_i$ has at most $\\Delta$ neighbours, so at most $\\Delta$ of the $\\Delta+1$ colors are forbidden. The resulting coloring is proper, so $\\chi(G)\\le\\Delta+1$. $\\blacksquare$"
+   }
+  ],
+  "topics": [
+   "graph-theory"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2019-power-06",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Power Round",
+   "year": 2019,
+   "number": 6,
+   "url": "https://cmimc.com/archive/cmimc2019/2019_Power.pdf"
+  },
+  "grade": "9-12",
+  "points": 2,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "**Problem 1.6.** Prove that any $2$-colorable graph can be colored exactly (that is, with $\\chi(G)$ colors, a $1$-approximation) in polynomial time. (One way is to give a high-level exact algorithm and explain why it is correct.)",
+  "image": null,
+  "choices": null,
+  "answer": "Breadth-first search: color a start vertex red, its neighbours blue, their neighbours red, etc. in each connected component.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "BFS 2-coloring",
+    "body": "Process each connected component separately. Pick a vertex, color it red, and run a breadth-first search, giving each newly reached vertex the color opposite to the vertex from which it was reached.\n\n*Correctness.* If $G$ is $2$-colorable, then in any proper $2$-coloring the neighbours of a red vertex must all be blue and vice versa; so within a connected component the coloring is forced once the first vertex is colored, up to swapping the two colors. Our search produces exactly this forced coloring, so it is a proper coloring, using $1$ color for edgeless graphs and $2$ otherwise, which equals $\\chi(G)$. The search takes $O(|V|+|E|)$ time. $\\blacksquare$"
+   }
+  ],
+  "topics": [
+   "graph-theory"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2019-power-07a",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Power Round",
+   "year": 2019,
+   "number": 7,
+   "url": "https://cmimc.com/archive/cmimc2019/2019_Power.pdf"
+  },
+  "grade": "9-12",
+  "points": 2,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "**Problem 1.7(a).** A *graph* $G=(V,E)$ is *$k$-colorable* if its vertices can be assigned $k$ colors so that adjacent vertices get different colors; the *chromatic number* $\\chi(G)$ is the least such $k$. For an optimization (minimization) problem with optimal value $\\mathrm{OPT}(I)$ on instance $I$, an algorithm $A$ is an *$\\alpha$-approximation algorithm* if $A(I)\\le\\alpha\\cdot\\mathrm{OPT}(I)$ for all instances $I$. For graph coloring, $A(G)$ is the number of colors the algorithm uses and $\\mathrm{OPT}(G)=\\chi(G)$. Consider the following algorithm for coloring a $3$-colorable graph $G$.\n\n```\nprocedure 3Color(G)           // G is 3-colorable with n vertices\n    colors <- {}\n    while deg(G) >= sqrt(n) do\n        v <- vertex of largest degree\n        color v with some color c, add c to colors\n        2-color the neighbours of v, add these colors to colors\n        delete v and its neighbours from G\n    finish using the algorithm from Problem 1.5\n```\n(Every iteration uses brand-new colors, and \"deg$(G)$\" is the maximum degree of the current graph; $n$ is the number of vertices of the original graph. Problem 1.5: a graph with maximum degree $\\Delta$ can be colored with $\\Delta+1$ colors by the greedy algorithm; Problem 1.6: $2$-colorable graphs can be colored with $2$ colors in polynomial time.)\n\nProve that 3Color is a $\\frac43\\sqrt n$-approximation algorithm.",
+  "image": null,
+  "choices": null,
+  "answer": "It uses at most about $4\\sqrt n$ colors, and $\\chi(G)=3$ (if $\\chi=3$).",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Count the colors",
+    "body": "Let $G$ be $3$-colorable on $n$ vertices (assume $\\chi(G)=3$; for $\\chi\\le2$ the problem is easier).\n\n*The loop.* The neighbourhood of any vertex is $2$-colorable (otherwise, together with $v$ it would need $4$ colors), so each iteration uses $1+2=3$ new colors. Each iteration deletes $v$ and at least $\\sqrt n$ neighbours, so there are fewer than $\\sqrt n$ iterations; the loop uses at most $3\\sqrt n$ colors.\n\n*The finish.* When the loop ends the remaining graph has maximum degree $<\\sqrt n$, so by Problem 1.5 it needs at most $\\lceil\\sqrt n\\rceil\\approx\\sqrt n$ further colors.\n\n*Total:* at most $4\\sqrt n$ colors (up to rounding $\\sqrt n$ up), while $\\mathrm{OPT}=\\chi(G)=3$. So the algorithm is a $\\frac{4\\sqrt n}{3}=\\frac43\\sqrt n$-approximation. $\\blacksquare$"
+   }
+  ],
+  "topics": [
+   "graph-theory",
+   "algebra"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2019-power-07b",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Power Round",
+   "year": 2019,
+   "number": 7,
+   "url": "https://cmimc.com/archive/cmimc2019/2019_Power.pdf"
+  },
+  "grade": "9-12",
+  "points": 4,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "**Problem 1.7(b).** A *graph* $G=(V,E)$ is *$k$-colorable* if its vertices can be assigned $k$ colors so that adjacent vertices get different colors; the *chromatic number* $\\chi(G)$ is the least such $k$. For an optimization (minimization) problem with optimal value $\\mathrm{OPT}(I)$ on instance $I$, an algorithm $A$ is an *$\\alpha$-approximation algorithm* if $A(I)\\le\\alpha\\cdot\\mathrm{OPT}(I)$ for all instances $I$. For graph coloring, $A(G)$ is the number of colors the algorithm uses and $\\mathrm{OPT}(G)=\\chi(G)$. Here is an algorithm for coloring a $3$-colorable graph $G$ on $n$ vertices:\n\n```\nprocedure 3Color(G)           // G is 3-colorable with n vertices\n    colors <- {}\n    while deg(G) >= sqrt(n) do\n        v <- vertex of largest degree\n        color v with some color c, add c to colors\n        2-color the neighbours of v, add these colors to colors\n        delete v and its neighbours from G\n    finish using the algorithm from Problem 1.5\n```\n(Every iteration uses brand-new colors, and \"deg$(G)$\" is the maximum degree of the current graph; $n$ is the number of vertices of the original graph. Problem 1.5: a graph with maximum degree $\\Delta$ can be colored with $\\Delta+1$ colors by the greedy algorithm; Problem 1.6: $2$-colorable graphs can be colored with $2$ colors in polynomial time.)\n\nModify it slightly to obtain a $\\sqrt n$-approximation algorithm (that is, one that uses at most about $3\\sqrt n$ colors on every $3$-colorable graph).",
+  "image": null,
+  "choices": null,
+  "answer": "Do not color or delete $v$; 2-color and delete only its neighbours. Then at most $2\\sqrt n$ colors in the loop plus $\\sqrt n$ at the end.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Do not spend a color on $v$",
+    "body": "Modify the loop body: pick $v$ of largest degree, **2-color the neighbourhood $N(v)$ with two fresh colors** (it is $2$-colorable since $G$ is $3$-colorable), and delete only $N(v)$ (not $v$). After the deletion $v$ is an isolated vertex of the remaining graph, so it will be colored later in the final stage at no extra cost.\n\n*Number of iterations.* Each iteration deletes at least $\\sqrt n$ vertices (the neighbours of a vertex of degree $\\ge\\sqrt n$), so there are at most $n/\\sqrt n=\\sqrt n$ iterations, using at most $2\\sqrt n$ colors. (The loop terminates because $v$ keeps no neighbours.)\n\n*Finish.* The remaining graph has maximum degree $<\\sqrt n$, so Problem 1.5 colors it with at most $\\lceil\\sqrt n\\rceil\\approx\\sqrt n$ colors (including $v$).\n\nTotal at most $3\\sqrt n$ colors (up to rounding), i.e. a ratio of $3\\sqrt n/3=\\sqrt n$ against $\\mathrm{OPT}=3$. $\\blacksquare$"
+   }
+  ],
+  "topics": [
+   "graph-theory"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2019-power-08",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Power Round",
+   "year": 2019,
+   "number": 8,
+   "url": "https://cmimc.com/archive/cmimc2019/2019_Power.pdf"
+  },
+  "grade": "9-12",
+  "points": 6,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "**Problem 1.8.** A *graph* $G=(V,E)$ is *$k$-colorable* if its vertices can be assigned $k$ colors so that adjacent vertices get different colors; the *chromatic number* $\\chi(G)$ is the least such $k$. For an optimization (minimization) problem with optimal value $\\mathrm{OPT}(I)$ on instance $I$, an algorithm $A$ is an *$\\alpha$-approximation algorithm* if $A(I)\\le\\alpha\\cdot\\mathrm{OPT}(I)$ for all instances $I$. For graph coloring, $A(G)$ is the number of colors the algorithm uses and $\\mathrm{OPT}(G)=\\chi(G)$. For $k\\ge2$ and a $k$-colorable graph $G$ on $n$ vertices, put $f(n,k)=n^{1-1/(k-1)}$. Consider the recursive algorithm\n\n```\nprocedure KColor(G, k)\n    colors <- {}\n    while deg(G) >= f(n, k) do\n        v <- vertex of largest degree\n        H <- neighbours of v\n        call KColor(H, k-1), add all used colors to colors\n        color v with a fresh color c, add c to colors\n        delete v and H from G\n    finish using the algorithm from Problem 1.5\n```\nwith base case $k=2$ solved exactly (Problem 1.6). (Problem 1.5: a graph of maximum degree $\\Delta$ can be greedily colored with $\\Delta+1$ colors.) Let $2\\le k<\\log n$. Prove that $\\textsf{KColor}(\\cdot,k)$ is a $2\\lceil n^{1-1/(k-1)}\\rceil$-approximation algorithm, i.e. it uses at most $2k\\lceil n^{1-1/(k-1)}\\rceil$ colors on a $k$-colorable graph with $n$ vertices. (Jensen's inequality may help: for concave $\\varphi$, $\\frac1m\\sum\\varphi(x_i)\\le\\varphi\\bigl(\\frac1m\\sum x_i\\bigr)$.)",
+  "image": null,
+  "choices": null,
+  "answer": "Induction on $k$: the loop runs at most $n^{1/k}$ times, each time recursing on a $(k-1)$-colorable neighbourhood; Jensen bounds the total number of colors by about $2k\\,n^{1-1/k}$, plus the greedy finish.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Induction on $k$ (sketch with the main estimate)",
+    "body": "Let $a_k=1-\\frac1{k-1}$, so the claim is: a $k$-colorable graph on $n$ vertices gets at most $\\approx 2k\\,n^{a_k}$ colors. The base case $k=2$ is exact (Problem 1.6: $2\\le 4\\lceil n^0\\rceil$).\n\n**Step $k\\to k+1$.** Let the loop run $m$ times; the $i$-th time it recurses on a neighbourhood $H_i$ of size $h_i$ (which is $k$-colorable since $G$ is $(k+1)$-colorable). Each $h_i\\ge n^{1-1/k}$ (the degree threshold), and $\\sum h_i\\le n$, so\n$$m\\le n^{1/k}.$$\nBy induction the recursive call uses at most $2k\\,h_i^{a_k}$ colors (ignoring ceilings), plus $1$ color for $v$. The function $t\\mapsto t^{a_k}$ is concave ($0<a_k<1$), so by Jensen\n$$\\sum_{i=1}^m h_i^{a_k}\\le m\\Bigl(\\frac{\\sum h_i}{m}\\Bigr)^{a_k}\\le m^{1-a_k}n^{a_k}\\le n^{\\frac1{k(k-1)}}\\,n^{1-\\frac1{k-1}}=n^{1-\\frac1k},$$\nusing $m^{1-a_k}=m^{1/(k-1)}\\le n^{1/(k(k-1))}$. Therefore the loop uses at most\n$$2k\\,n^{1-1/k}+m\\ \\le\\ 2k\\,n^{1-1/k}+n^{1/k}$$\ncolors (the $+m$ counts the colors for the centers $v$).\n\n**Finish.** When the loop ends, the maximum degree is $<f(n,k+1)=n^{1-1/k}$, so Problem 1.5 needs at most $\\lceil n^{1-1/k}\\rceil$ more colors.\n\n**Total.** $\\le(2k+1)\\,n^{1-1/k}+n^{1/k}+1\\le 2(k+1)\\lceil n^{1-1/k}\\rceil$ once $n^{1/k}+1\\le\\lceil n^{1-1/k}\\rceil$, which is where the hypothesis $k<\\log n$ (and $n$ large compared to $k$) is used (the ceilings absorbing rounding errors). Since $\\mathrm{OPT}=k+1$, the ratio is at most $2\\lceil n^{1-1/k}\\rceil$, completing the induction. $\\blacksquare$\n\n*Remark.* The rounding bookkeeping (ceilings and the additive $+1$ per iteration) is only sketched in the official solution; the estimate above is the heart of the argument."
+   }
+  ],
+  "topics": [
+   "graph-theory",
+   "inequalities"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": "The official proof glosses over rounding and constants: the induction step needs $(2k+1)n^{1/k}$ to be absorbed by the main term, which holds only when $n$ is large compared to $k$; for small $n$ the stated bound is not established by the argument."
+ },
+ {
+  "id": "cmimc-2019-power-09",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Power Round",
+   "year": 2019,
+   "number": 9,
+   "url": "https://cmimc.com/archive/cmimc2019/2019_Power.pdf"
+  },
+  "grade": "9-12",
+  "points": 10,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "**Problem 1.9.** A *graph* $G=(V,E)$ is *$k$-colorable* if its vertices can be assigned $k$ colors so that adjacent vertices get different colors; the *chromatic number* $\\chi(G)$ is the least such $k$. For an optimization (minimization) problem with optimal value $\\mathrm{OPT}(I)$ on instance $I$, an algorithm $A$ is an *$\\alpha$-approximation algorithm* if $A(I)\\le\\alpha\\cdot\\mathrm{OPT}(I)$ for all instances $I$. For graph coloring, $A(G)$ is the number of colors the algorithm uses and $\\mathrm{OPT}(G)=\\chi(G)$. The following algorithm colors a graph on $n$ vertices with unknown chromatic number $k$:\n\n```\nprocedure Color?(G)\n    colors <- {}\n    W <- vertices of G\n    while |W| > 0 do\n        U <- W\n        c <- some color not in colors\n        while |U| > 0 do\n            v <- some vertex in U with minimal degree (in the graph induced on U)\n            color v with c; remove v and its neighbours from U\n        add c to colors\n        W <- W minus the vertices just colored\n```\nProve that Color? is a $\\dfrac{3n\\log k}{k\\log n}$-approximation algorithm, where $k$ is the actual chromatic number of the graph.",
+  "image": null,
+  "choices": null,
+  "answer": "Each color class has at least $\\tfrac12\\log_k n$ vertices while $|W|>n/\\log_kn$, so at most $2n/\\log_kn$ colors are used in that phase and at most $n/\\log_kn$ in the rest: $\\le 3n/\\log_kn$ colors in total, i.e. ratio $\\frac{3n\\log k}{k\\log n}$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Large color classes",
+    "body": "We show that at most $3n/\\log_kn$ colors are used; since $\\mathrm{OPT}=k$ the ratio is $\\frac{3n}{k\\log_kn}=\\frac{3n\\log k}{k\\log n}$.\n\n**A color class is large.** Let $U$ have $m$ vertices (the induced graph is $k$-colorable). By the pigeonhole principle some color class of an optimal coloring has an independent set of size at least $m/k$; a vertex in such a set has degree at most $m-m/k=m(1-1/k)$ in $G[U]$. So the minimum-degree vertex $v$ chosen by the algorithm has degree $\\le m(1-1/k)$, and removing $v$ and its neighbours leaves at least $m/k-1$ vertices in $U$ (about $m/k$). Repeating, the inner loop runs at least $\\approx\\log_km$ times (until $U$ is empty), and each iteration colors one vertex with $c$; hence one color class has at least $\\approx\\log_k|W|$ vertices.\n\n**Two phases.**\n\n- *While $|W|>n/\\log_kn$:* then $\\log_k|W|>\\log_kn-\\log_k\\log_kn>\\frac12\\log_kn$, so each new color class contains more than $\\frac12\\log_kn$ vertices. Therefore at most $n\\big/\\bigl(\\tfrac12\\log_kn\\bigr)=2n/\\log_kn$ colors are used in this phase.\n- *Once $|W|\\le n/\\log_kn$:* even giving every remaining vertex its own color costs at most $n/\\log_kn$ colors.\n\nIn total at most $3n/\\log_kn$ colors are used, which gives the claimed approximation ratio. $\\blacksquare$\n\n*Remark.* Rounding (the floors in $\\log_k$ and the \"$-1$\" in the number of remaining vertices) is glossed over in the official solution, as here."
+   }
+  ],
+  "topics": [
+   "graph-theory",
+   "inequalities"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": "The official solution is a sketch with loose constants (the size of each color class and the claim that log_k log_k n < (1/2) log_k n are asserted without care for rounding); the write-up here follows it and has the same gaps."
+ },
+ {
+  "id": "cmimc-2019-power-10",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Power Round",
+   "year": 2019,
+   "number": 10,
+   "url": "https://cmimc.com/archive/cmimc2019/2019_Power.pdf"
+  },
+  "grade": "9-12",
+  "points": 1,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "**Problem 2.1.** In Sudoku, some squares of a $9\\times9$ grid start filled with numbers $1$ through $9$; the goal is to fill the remaining squares with numbers from $1$ to $9$ so that no two numbers in the same row, column, or $3\\times3$ box are equal. Solve the following Sudoku board.\n\n$$\\begin{array}{|ccc|ccc|ccc|}\\hline\n & 2 &  & 5 &  & 1 &  & 9 &  \\\\\n8 &  &  & 2 &  & 3 &  &  & 6 \\\\\n & 3 &  &  & 6 &  &  & 7 &  \\\\ \\hline\n &  & 1 &  &  &  & 6 &  &  \\\\\n5 & 4 &  &  &  &  &  & 1 & 9 \\\\\n &  & 2 &  &  &  & 7 &  &  \\\\ \\hline\n & 9 &  &  & 3 &  &  & 8 &  \\\\\n2 &  &  & 8 &  & 4 &  &  & 7 \\\\\n & 1 &  & 9 &  & 7 &  & 6 &  \\\\ \\hline\n\\end{array}$$",
+  "image": null,
+  "choices": null,
+  "answer": "Unique solution:\n\n$$\\begin{array}{|ccc|ccc|ccc|}\\hline\n4 & 2 & 6 & 5 & 7 & 1 & 3 & 9 & 8 \\\\\n8 & 5 & 7 & 2 & 9 & 3 & 1 & 4 & 6 \\\\\n1 & 3 & 9 & 4 & 6 & 8 & 2 & 7 & 5 \\\\ \\hline\n9 & 7 & 1 & 3 & 8 & 5 & 6 & 2 & 4 \\\\\n5 & 4 & 3 & 7 & 2 & 6 & 8 & 1 & 9 \\\\\n6 & 8 & 2 & 1 & 4 & 9 & 7 & 5 & 3 \\\\ \\hline\n7 & 9 & 4 & 6 & 3 & 2 & 5 & 8 & 1 \\\\\n2 & 6 & 5 & 8 & 1 & 4 & 9 & 3 & 7 \\\\\n3 & 1 & 8 & 9 & 5 & 7 & 4 & 6 & 2 \\\\ \\hline\n\\end{array}$$",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Fill forced squares",
+    "body": "Repeatedly fill any square for which only one number is still possible (it is the only candidate in its row, column or box, or the only number not excluded by its row, column and box). This solves the board without guessing; the unique completion is:\n\n$$\\begin{array}{|ccc|ccc|ccc|}\\hline\n4 & 2 & 6 & 5 & 7 & 1 & 3 & 9 & 8 \\\\\n8 & 5 & 7 & 2 & 9 & 3 & 1 & 4 & 6 \\\\\n1 & 3 & 9 & 4 & 6 & 8 & 2 & 7 & 5 \\\\ \\hline\n9 & 7 & 1 & 3 & 8 & 5 & 6 & 2 & 4 \\\\\n5 & 4 & 3 & 7 & 2 & 6 & 8 & 1 & 9 \\\\\n6 & 8 & 2 & 1 & 4 & 9 & 7 & 5 & 3 \\\\ \\hline\n7 & 9 & 4 & 6 & 3 & 2 & 5 & 8 & 1 \\\\\n2 & 6 & 5 & 8 & 1 & 4 & 9 & 3 & 7 \\\\\n3 & 1 & 8 & 9 & 5 & 7 & 4 & 6 & 2 \\\\ \\hline\n\\end{array}$$\n\n(A computer search confirms that this is the only solution.)"
+   }
+  ],
+  "topics": [
+   "logic",
+   "patterns"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2019-power-11",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Power Round",
+   "year": 2019,
+   "number": 11,
+   "url": "https://cmimc.com/archive/cmimc2019/2019_Power.pdf"
+  },
+  "grade": "9-12",
+  "points": 2,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "**Problem 2.2.** Sudoku extends to $n^2\\times n^2$ boards (symbols $1,\\dots,n^2$, boxes of size $n\\times n$). Represent a partially filled board $S$ as a graph whose nodes are the squares, two nodes adjacent if they share a row, column or box; colored nodes are the filled squares. Construct a graph $S'$ from $S$ as follows: add $n^2$ new nodes labelled with the colors $1,2,\\dots,n^2$ and join them all to each other; for each $1\\le k\\le n^2$, join every filled square with value $k$ to all new nodes **except** the one labelled $k$. Prove that if $S'$ has a proper $n^2$-coloring then the board has a valid Sudoku solution (up to a permutation of the symbols $1,\\dots,n^2$).",
+  "image": null,
+  "choices": null,
+  "answer": "The $n^2$ new nodes form a clique, so they use all $n^2$ colors; renaming colors so that node $k$ gets color $k$, every filled square with value $k$ is adjacent to all other new nodes, so it must have color $k$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Pin down the colors",
+    "body": "Take a proper $n^2$-coloring of $S'$. The $n^2$ new nodes are mutually adjacent, so they receive $n^2$ distinct colors, i.e. all the colors. Rename the colors (a permutation of the symbols) so that the new node labelled $k$ has color $k$.\n\nNow consider a filled square with value $k$. It is adjacent to the new nodes labelled $j\\ne k$, whose colors are all $j\\ne k$; so its color cannot be any $j\\ne k$, hence it is $k$. Thus every given number keeps its value.\n\nFinally, adjacent squares of the board are adjacent in $S'$, so they have different colors: no row, column or box contains a repeated symbol. The colors of the board squares therefore form a valid completion of the given board (after the renaming of symbols). $\\blacksquare$"
+   }
+  ],
+  "topics": [
+   "graph-theory",
+   "logic"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2019-power-12",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Power Round",
+   "year": 2019,
+   "number": 12,
+   "url": "https://cmimc.com/archive/cmimc2019/2019_Power.pdf"
+  },
+  "grade": "9-12",
+  "points": 2,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "**Problem 2.3.** Consider the problem of completing a partially filled $n^2\\times n^2$ Sudoku board (known to be completable) with as few distinct symbols as possible, where the given squares keep their symbols and no row, column or box may repeat a symbol; the *approximation ratio* of an algorithm is the number of distinct symbols it uses divided by the optimum. Prove that **any** algorithm that outputs a valid filling is an $n^2$-approximation algorithm.",
+  "image": null,
+  "choices": null,
+  "answer": "Any valid filling uses at most $n^4$ symbols (the number of squares), while the optimum is at least $n^2$ (a row needs $n^2$ different symbols).",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Compare with a trivial bound",
+    "body": "The optimum is at least $n^2$, since the $n^2$ squares of a single row must carry pairwise different symbols. Any valid filling uses at most one symbol per square, i.e. at most $n^2\\cdot n^2=n^4$ distinct symbols. Hence\n$$\\frac{\\text{symbols used}}{\\mathrm{OPT}}\\le\\frac{n^4}{n^2}=n^2.$$\n$\\blacksquare$"
+   }
+  ],
+  "topics": [
+   "graph-theory",
+   "counting"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2019-power-13",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Power Round",
+   "year": 2019,
+   "number": 13,
+   "url": "https://cmimc.com/archive/cmimc2019/2019_Power.pdf"
+  },
+  "grade": "9-12",
+  "points": 5,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "**Problem 2.4.** Consider the problem of completing a partially filled $n^2\\times n^2$ Sudoku board (symbols may be taken from a larger set; the given squares keep their symbols, and no row, column or $n\\times n$ box may repeat a symbol) using as few distinct symbols as possible. If the board has a valid completion with the symbols $1,\\dots,n^2$, the optimum is $n^2$. Give an explicit polynomial-time algorithm and prove that it uses at most $3n^2$ symbols, i.e. it is a $3$-approximation. (High-level pseudocode is fine; do not use a better algorithm than the one you analyze.)",
+  "image": null,
+  "choices": null,
+  "answer": "Greedy: fill each empty square with the smallest symbol in $\\{1,\\dots,3n^2\\}$ not used in its row, column or box; each square has fewer than $3n^2$ neighbours.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Greedy coloring of the Sudoku graph",
+    "body": "**Algorithm.** Go through the empty squares in any order. Put in the current square the smallest number in $\\{1,2,\\dots,3n^2\\}$ that does not already appear in its row, in its column or in its box.\n\n**It never gets stuck.** A square shares a unit with the squares of its row ($n^2-1$ others), its column ($n^2-1$ others) and its box ($n^2-1$ others); the row and box overlap in $n-1$ other squares, and the column and box in $n-1$ others. So it has at most $3(n^2-1)-2(n-1)=3n^2-2n-1<3n^2$ neighbours. Hence at most $3n^2-1$ of the $3n^2$ symbols are blocked, and a free symbol always exists (the given squares use symbols $\\le n^2\\le3n^2$). This is exactly Problem 1.5's greedy bound $\\Delta+1\\le3n^2$.\n\n**Ratio.** The output is valid and uses at most $3n^2$ symbols while $\\mathrm{OPT}\\ge n^2$ (indeed $=n^2$ for a completable board), so it is a $3$-approximation. $\\blacksquare$"
+   }
+  ],
+  "topics": [
+   "graph-theory",
+   "algebra"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2019-power-14",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Power Round",
+   "year": 2019,
+   "number": 14,
+   "url": "https://cmimc.com/archive/cmimc2019/2019_Power.pdf"
+  },
+  "grade": "9-12",
+  "points": 8,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "**Problem 2.5.** (Same setting as Problem 2.4: complete a partially filled $n^2\\times n^2$ Sudoku board, known to be completable, with symbols from a possibly larger set, using as few distinct symbols as possible; given squares keep their symbols.) Exhibit a polynomial-time $k$-approximation algorithm for some $k<3$. (The number of points depends on how close $k$ is to $1$; it is not enough to give a ratio $3-o(1)$.)",
+  "image": null,
+  "choices": null,
+  "answer": "A $2$-approximation: fill the whole empty board with the standard (shifted-rows) Sudoku pattern using symbols $n^2+1,\\dots,2n^2$, then overwrite the given squares with their given symbols; at most $2n^2$ symbols are used.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "An exact solution of the empty board, then overlay",
+    "body": "**Lemma.** The empty board can be filled in polynomial time with $n^2$ symbols. Index rows and columns by $0,\\dots,n^2-1$, write a row as $r=qn+s$ with $0\\le q,s<n$, and put in square $(r,c)$ the symbol $\\bigl(ns+q+c\\bigr)\\bmod n^2$ (taking residues $0,\\dots,n^2-1$). Then:\n\n- *Rows:* in a fixed row the symbol runs over all residues as $c$ varies, so no repetition.\n- *Columns:* for fixed $c$ the map $(q,s)\\mapsto ns+q$ is a bijection onto $\\{0,\\dots,n^2-1\\}$, so no repetition.\n- *Boxes:* a box has fixed $q$ and column $c=Bn+t$ with fixed $B$ and $0\\le t<n$ varying; its symbols are $(ns+t)+(q+Bn)\\bmod n^2$, and $ns+t$ takes every value in $\\{0,\\dots,n^2-1\\}$ exactly once.\n\n**Algorithm.** Fill the whole board with this pattern using the symbols $n^2+1,\\dots,2n^2$ (the pattern shifted up by $n^2$), then overwrite each given square with its given symbol (which lies in $\\{1,\\dots,n^2\\}$).\n\n**Validity.** Two squares sharing a row, column or box: if both are given, they differ because the given board is consistent; if one is given (symbol $\\le n^2$) and the other is not (symbol $>n^2$), they differ; if neither is given, they differ by the Lemma.\n\n**Ratio.** At most $2n^2$ symbols are used and $\\mathrm{OPT}=n^2$, so this is a $2$-approximation, $k=2<3$. $\\blacksquare$\n\n(Better ratios may be possible; the official solution only requires $k<3$ and scores by how small $k$ is.)"
+   }
+  ],
+  "topics": [
+   "graph-theory",
+   "patterns"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2019-power-15",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Power Round",
+   "year": 2019,
+   "number": 15,
+   "url": "https://cmimc.com/archive/cmimc2019/2019_Power.pdf"
+  },
+  "grade": "9-12",
+  "points": 5,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "**Problem 2.6.** An *interactive proof system* for a language $L$ has a polynomially bounded randomized verifier $V$ who queries an all-powerful prover $P$ a polynomial number of times, with *completeness* (if $w\\in L$ an honest $V$ accepts $P$'s proof) and *soundness* (if $w\\notin L$, $V$ rejects except with small probability). $\\mathsf{IP}$ is the class of languages with such systems, and $\\mathsf{NP}$ is the class of languages with a polynomial-time verifier $A(w,k)$ and witness $k$. Prove that $\\mathsf{NP}\\subseteq\\mathsf{IP}$.",
+  "image": null,
+  "choices": null,
+  "answer": "The prover sends the $\\mathsf{NP}$ witness, and the verifier runs $A$ on it; the error probability is $0$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Send the witness",
+    "body": "Let $L\\in\\mathsf{NP}$ with polynomial-time verifier $A$. On input $w$, the interactive protocol is: $V$ sends $w$ to $P$; $P$ replies with a string $k$; $V$ runs $A(w,k)$ and accepts iff $A$ accepts.\n\n*Completeness.* If $w\\in L$ there is a witness $k$ with $A(w,k)$ accepting, and an honest prover sends it, so $V$ accepts.\n\n*Soundness.* If $w\\notin L$ then $A(w,k)$ rejects for every $k$, so $V$ rejects whatever $P$ sends: the error probability is $0$ (certainly small).\n\n$V$ runs in polynomial time (reading $k$, whose length may be bounded by the running time of $A$), and uses one round of interaction. Hence $L\\in\\mathsf{IP}$. $\\blacksquare$"
+   }
+  ],
+  "topics": [
+   "logic"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2019-power-16a",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Power Round",
+   "year": 2019,
+   "number": 16,
+   "url": "https://cmimc.com/archive/cmimc2019/2019_Power.pdf"
+  },
+  "grade": "9-12",
+  "points": 1,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "**Problem 2.7(a).** A *zero-knowledge proof scheme* for 3COL is the following interactive protocol. (1) The prover $P$ chooses a random permutation of the colors $\\{1,2,3\\}$, applies it to a fixed proper $3$-coloring of $G$ (if $P$ has one) and commits to the resulting coloring by sealing it in envelopes. (2) The verifier $V$ asks for a uniformly random edge $(u,v)$ of $G$. (3) $P$ opens the envelopes of $u$ and $v$, revealing colors $a,b$, and $V$ checks $a\\ne b$. (4) Steps 1-3 are repeated until $V$ is satisfied or finds an error. Prove *completeness*: if $G$ is $3$-colorable, an honest prover is always accepted.",
+  "image": null,
+  "choices": null,
+  "answer": "If $G$ is 3-colorable, every edge is bichromatic under the committed coloring (a permutation of a proper coloring), so every query is answered with $a\\ne b$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Every edge passes",
+    "body": "If $G$ is $3$-colorable, $P$ uses a proper $3$-coloring, permuted by a random permutation of the colors; permuting colors preserves properness. So for every edge $(u,v)$ that $V$ may ask for, the revealed colors satisfy $a\\ne b$, and $V$ accepts in every round. $\\blacksquare$"
+   }
+  ],
+  "topics": [
+   "logic",
+   "graph-theory"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2019-power-16b",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Power Round",
+   "year": 2019,
+   "number": 16,
+   "url": "https://cmimc.com/archive/cmimc2019/2019_Power.pdf"
+  },
+  "grade": "9-12",
+  "points": 2,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "**Problem 2.7(b).** A *zero-knowledge proof scheme* for 3COL is the following interactive protocol. (1) The prover $P$ chooses a random permutation of the colors $\\{1,2,3\\}$, applies it to a fixed proper $3$-coloring of $G$ (if $P$ has one) and commits to the resulting coloring by sealing it in envelopes. (2) The verifier $V$ asks for a uniformly random edge $(u,v)$ of $G$. (3) $P$ opens the envelopes of $u$ and $v$, revealing colors $a,b$, and $V$ checks $a\\ne b$. (4) Steps 1-3 are repeated until $V$ is satisfied or finds an error. Prove *soundness*, with an exact bound on the error probability in one iteration: if $G$ is not $3$-colorable, a cheating prover is caught with probability at least $1/|E|$ in each round.",
+  "image": null,
+  "choices": null,
+  "answer": "If $G$ is not 3-colorable, any committed 3-coloring has a monochromatic edge; $V$ asks for it with probability $\\ge 1/|E|$, so one round accepts with probability at most $1-1/|E|$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "A bad edge exists",
+    "body": "Suppose $G$ is not $3$-colorable. Whatever assignment of the colors $1,2,3$ to the vertices $P$ commits to (it is fixed before $V$ chooses the edge), it is not a proper coloring, so at least one edge $e$ has both endpoints of the same color.\n\n$V$ chooses the edge uniformly at random, so asks for such an edge with probability at least $1/|E|$, in which case $a=b$ and $V$ rejects. Thus in one iteration the probability that $P$ is not caught is at most $1-\\frac1{|E|}$. Over $r$ independent iterations the error probability is at most $\\left(1-\\frac1{|E|}\\right)^r\\le e^{-r/|E|}$, which is exponentially small for $r\\gg|E|$. $\\blacksquare$"
+   }
+  ],
+  "topics": [
+   "logic",
+   "graph-theory",
+   "probability"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2019-power-16c",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Power Round",
+   "year": 2019,
+   "number": 16,
+   "url": "https://cmimc.com/archive/cmimc2019/2019_Power.pdf"
+  },
+  "grade": "9-12",
+  "points": 2,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "**Problem 2.7(c).** A *zero-knowledge proof scheme* for 3COL is the following interactive protocol. (1) The prover $P$ chooses a random permutation of the colors $\\{1,2,3\\}$, applies it to a fixed proper $3$-coloring of $G$ (if $P$ has one) and commits to the resulting coloring by sealing it in envelopes. (2) The verifier $V$ asks for a uniformly random edge $(u,v)$ of $G$. (3) $P$ opens the envelopes of $u$ and $v$, revealing colors $a,b$, and $V$ checks $a\\ne b$. (4) Steps 1-3 are repeated until $V$ is satisfied or finds an error. Prove that the protocol is *zero-knowledge*: the transcript seen by $V$ in a round (the edge asked and the two revealed colors) is distributed exactly like a transcript produced by a simulator that knows no coloring and simply picks distinct colors $a\\ne b$ at random.",
+  "image": null,
+  "choices": null,
+  "answer": "Because the colors are randomly permuted each round, the revealed pair $(a,b)$ is a uniformly random ordered pair of distinct colors, independent of the coloring, which a simulator can reproduce without any knowledge of a coloring.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Simulate the transcript",
+    "body": "In one round, $V$ sees an edge $(u,v)$ (chosen by $V$) and the revealed colors $(a,b)$ with $a\\ne b$ (a proper coloring has distinct colors on an edge). The coloring committed in that round is $\\pi\\circ\\chi$ for a fixed proper coloring $\\chi$ and a uniformly random permutation $\\pi$ of $\\{1,2,3\\}$. For $\\chi(u)\\ne\\chi(v)$, the pair $(\\pi(\\chi(u)),\\pi(\\chi(v)))$ is uniformly distributed over the $6$ ordered pairs of distinct colors, whatever $\\chi$ is.\n\nThe *simulator* receives the edge $V$ asks for and outputs $(a,b)$ uniformly at random among the $6$ ordered pairs of distinct colors. Its output has exactly the same distribution as the real transcript, so $V$ learns nothing from the protocol beyond the fact that the edge is properly colored (nothing about the coloring $\\chi$ itself). Since the colors are re-randomized in each repetition, the same holds for the whole sequence of rounds. $\\blacksquare$"
+   }
+  ],
+  "topics": [
+   "logic",
+   "probability"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ }
+]

@@ -1,0 +1,117 @@
+[
+ {
+  "id": "cmimc-2021-tcs-01",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Theoretical Computer Science Round",
+   "year": 2021,
+   "number": 1,
+   "url": "https://cmimc.com/archive/cmimc2021/2021_TCS.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "**Balance the Board.** You place $n^2$ indistinguishable pieces on an $n\\times n$ chessboard, where $n=2^{90}\\approx1.27\\times10^{27}$. Of these pieces, $n$ of them are slightly lighter than usual, while the rest are all the same standard weight, but you are unable to discern this simply by feeling the pieces.\n\nHowever, beneath each row and column of the chessboard, you have set up a scale, which, when turned on, will tell you *only* whether the average weight of all the pieces on that row or column is the standard weight, or lighter than standard. On a given step, you are allowed to rearrange every piece on the chessboard, and then turn on all the scales simultaneously, and record their outputs, before turning them all off again. (Note that you can only turn on the scales if all $n^2$ pieces are placed in different squares on the board.)\n\nFind an algorithm that, in at most $k$ steps, will always allow you to rearrange the pieces in such a way that every row and column measures lighter than standard on the final step.\n\n*Scoring (official, for the best $k$ proven):* $1$ pt for $k>10^{55}$; $10$ pts for $k=10^{55}$; $30$ pts for $k=10^{30}$; $50$ pts for $k=10^{28}$; $65$ pts for $k=10^{20}$; $80$ pts for $k=10^5$; $90$ pts for $k=2021$; $100$ pts for $k=500$.",
+  "image": null,
+  "choices": null,
+  "answer": "An algorithm using about $5+4\\cdot89+1<500$ steps exists (see the solution), which earns the full $100$ points.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Full solution: fewer than 500 steps",
+    "body": "Call a row or column *full* if it contains a light piece and *empty* otherwise; the goal is to make every row and column full. We may assume the start has at least one empty column (otherwise one step suffices).\n\n**Idea: find many columns that are certainly empty, then use them to test many groups of pieces in parallel.**\n\n*Step A (about $5$ steps): reach $n/2$ certainly-empty columns' worth of pieces.* Split the board into $n/2$ groups of two rows ($2\\times n$ blocks) and each block into four sub-groups $A,B,C,D$ of size $1\\times\\frac n2$. In $3$ steps measure the arrangements $\\{AB,CD\\}$, $\\{AC,BD\\}$, $\\{AD,BC\\}$ (each pair of sub-groups sharing a row/column of the scales). A block with at most $2$ light pieces then has its light sub-groups identified exactly. Each block with $3$ or more light pieces is matched with an empty column $EF$ split into two halves $E,F$ (the official solution notes that enough empty columns are available by this point), and $2$ more steps (measure $AE,BF$ and $CE,DF$) identify its light sub-groups exactly. There are only $n$ light pieces, so at most $n$ sub-groups of size $\\frac n2$ contain one; at least half of the squares $\\left(\\frac{n^2}2\\right)$ are therefore certainly standard, and can be placed so that $n/2$ columns are guaranteed empty.\n\n*Step B (about $4\\log_2 n$ steps): halve the candidates repeatedly.* With $n/2$ guaranteed-empty columns we can test $n/2$ groups in parallel. Group the remaining uncertain squares into $2n$ groups of size at most $\\frac{n}{2}$; testing them takes $\\frac{2n}{n/2}=4$ steps, and it shows that at least half the candidates are certainly standard. Those squares make up $n/2$ new empty columns again. Repeating $\\log_2(n/2)=89$ times the candidates drop from $\\frac{n^2}{2}$ to $n$, i.e. exactly the light pieces. Total about $5+89\\cdot4+1<500$.\n\nA final step arranges the $n$ known light pieces on a permutation matrix so every row and column is lighter than standard."
+   },
+   {
+    "title": "Weaker bounds (partial credit ladder)",
+    "body": "- **$k<10^{55}$:** with $c>0$ empty columns there are at most $n(n-c)<n^2$ unknown pieces; test them one by one by swapping into an empty column: $<n^2<10^{55}$ steps.\n- **$10^{30}$:** binary search in $\\log_2n=90$ steps for a light piece in each column (swap half of a column's squares into an empty column and see whether it turns light): $n\\log_2n\\approx10^{29}<10^{30}$ steps.\n- **$10^{28}$:** split the squares into $2n$ groups of size $\\le\\frac n2$ and test each in the empty column ($2n$ steps) to discard at least $\\frac{n^2}2$ squares, then use the doubling argument of Step B.\n- **$10^5$:** run $c$ binary searches in parallel when $c$ columns are free (each parallel search takes $\\le90$ steps and at least doubles the number of free columns, minus duplicates, whose total is bounded by the initial number of empty columns), reaching $n/2$ free columns in $\\approx90\\cdot90$ steps; then Step B."
+   }
+  ],
+  "topics": [
+   "logic",
+   "counting"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2021-tcs-02",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Theoretical Computer Science Round",
+   "year": 2021,
+   "number": 2,
+   "url": "https://cmimc.com/archive/cmimc2021/2021_TCS.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "**Multiply to the Moon.** You are initially given the number $n=1$. Each turn, you may choose any positive divisor $d\\mid n$, and multiply $n$ by $d+1$. For instance, on the first turn, you must select $d=1$, giving $n=1\\cdot(1+1)=2$ as your new value of $n$. On the next turn, you can select either $d=1$ or $2$, giving $n=2\\cdot(1+1)=4$ or $n=2\\cdot(2+1)=6$, respectively, and so on.\n\nFind an algorithm that, in at most $k$ steps, results in $n$ being divisible by the number $2021^{2021^{2021}}-1$.\n\n*Scoring (official, for the best $k$ proven):* $1$ pt for $k>2021^{2021^{2021}}$; $20$ pts for $k=2021^{2021^{2021}}$; $50$ pts for $k=10^{10^4}$; $75$ pts for $k=10^{10}$; $90$ pts for $k=10^5$; $95$ pts for $k=6\\cdot10^4$; $100$ pts for $k=5\\cdot10^4$.",
+  "image": null,
+  "choices": null,
+  "answer": "An algorithm with at most $48509<5\\cdot10^4$ steps exists (see the solution), which earns the full $100$ points.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Full solution: 48509 steps",
+    "body": "Let $f(m)$ be the least number of steps after which $m\\mid n$ can be guaranteed, and $N=2021^{2021^{2021}}-1$.\n\n**Basic moves.** If $t\\mid n$, one step makes $(t+1)\\mid n$, so $f(t+1)\\le f(t)+1$. Since $1\\mid n$ always, one step multiplies by $2$: $f(2t)\\le f(t)+1$. Hence $f(m)\\le2\\log_2m$ by doubling and incrementing along the binary expansion.\n\n**The function $g$.** Define $g(a,b)$ as the least integer such that for all $x\\ge2$, $f\\left(x^a(x^b-1)\\right)\\le g(a,b)+f(x-1)$. Then $f(N)\\le g(0,2021^{2021})+f(2020)$ (take $x=2021$), and $f(2020)\\le5$ via the sequence of values $1\\to2\\to4\\to20\\to100\\to10100=2020\\cdot5$ (multiplying by $2,2,5,5,101$, i.e. choosing $d=1,1,4,4,100$). Moreover $g$ is nondecreasing in $a$, and:\n\n*Lemma 1.* If $d\\mid b$ and $a\\ge d$, then $g(a,b+d)\\le g(a,b)+1$. *Proof.* Suppose $x^a(x^b-1)\\mid n$. As $a\\ge d$, $x^d(x^b-1)\\mid n$, and $x^d-1\\mid x^b-1$. Multiply $n$ by $\\frac{x^d(x^b-1)}{x^d-1}+1=\\frac{x^{b+d}-1}{x^d-1}$; the new $n$ is divisible by $x^{b+d}-1$ and still by $x^a$ (we did not lose any factor of $x$). $\\square$\n\n*Lemma 2.* $g(ca,cb)\\le g(a,b)+g(0,c)$; in particular $g(0,cb)\\le g(0,b)+g(0,c)$ and $g(0,b^r)\\le r\\,g(0,b)$. *Proof.* From $x-1\\mid n$, get $x^c-1\\mid n$ in $g(0,c)$ steps, then apply the definition of $g(a,b)$ to $x^c$. $\\square$\n\n*Lemma 3.* If $m=2^{n_1}+\\dots+2^{n_p}$ with $n_1>\\dots>n_p$, then $g(0,m)\\le g(2^{n_1-1},m)\\le2n_1+p-1$. (Start from $g(1,2)=2$: doubling $b$ costs $2$ steps and may double $a$ as well; adding $1$ to $b$ costs $1$ by Lemma 1.)\n\n**Putting it together.** $g(16,32)\\le10$, $g(0,3)\\le3$, $g(0,7)\\le6$ by Lemma 3. By Lemma 2 with $c=63=3\\cdot3\\cdot7$: $g(1008,2016)\\le g(16,32)+g(0,63)\\le10+3+3+6=22$. Lemma 1 with $d=4$ gives $g(1008,2020)\\le23$, and with $d=1$ gives $g(1008,2021)\\le24$. So $g(0,2021)\\le24$. By Lemma 2, $g(0,2021^{2021})\\le2021\\cdot24=48504$, and\n$$f(N)\\le48504+5=48509<5\\cdot10^4.$$"
+   },
+   {
+    "title": "Weaker bounds (partial credit ladder)",
+    "body": "- $k=2021^{2021^{2021}}$: repeatedly apply $f(t+1)\\le f(t)+1$ from $f(1)=0$: $f(N)\\le N-1$.\n- $k=10^{10^4}$: $f(m)\\le2\\log_2m$, so $f(N)\\le2\\log_2N<22\\cdot10^{8084}$.\n- $k=10^{10}$: Lemma 1 repeatedly gives $g(1,m)\\le m$, so $g(0,2021)\\le2021$ and $g(0,2021^{2021})\\le2021^2$, so $f(N)\\le2021^2+5$.\n- $k=10^5$: Lemma 3 gives $g(0,m)\\le3\\log_2m$, so $f(N)<66582$.\n- $k=6\\cdot10^4$: Lemma 3 on $2021=11111100101_2$ gives $g(0,2021)\\le27$, so $f(N)\\le27\\cdot2021+5=54572$."
+   }
+  ],
+  "topics": [
+   "number-theory",
+   "algebra"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2021-tcs-03",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Theoretical Computer Science Round",
+   "year": 2021,
+   "number": 3,
+   "url": "https://cmimc.com/archive/cmimc2021/2021_TCS.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "**Topologist's Trap the Tiger.** There is a tiger (which is treated as a point) in the plane that is trying to escape. It starts at the origin at time $t=0$, and moves continuously at some speed $k$. At every positive integer time $t$, you can place one closed unit disk anywhere in the plane, so long as the disk does not intersect the tiger's current position. The tiger is not allowed to move into any previously placed disks (i.e. the disks block the tiger from moving). Note that when you place the disks, you can \"see\" the tiger, (i.e. know where the tiger currently is).\n\nYour goal is to prevent the tiger from escaping to infinity. In other words, you must show there is some radius $R(k)$ such that, using your algorithm, it is impossible for a tiger with speed $k$ to reach a distance larger than $R(k)$ from the origin (where it started).\n\nFind an algorithm for placing disks such that there exists some finite real $R(k)$ such that the tiger will never be a distance more than $R(k)$ away from the origin.\n\n*Scoring (official, for the largest tiger speed $k$ trapped):* $1$ pt for $k<0.05$; $10$ pts for $k=0.05$; $20$ pts for $k=0.2$; $30$ pts for $k=0.3$; $50$ pts for $k=1$; $70$ pts for $k=2$; $80$ pts for $k=2.3$; $85$ pts for $k=2.6$; $90$ pts for $k=2.9$; $100$ pts for $k=3.9$.",
+  "image": null,
+  "choices": null,
+  "answer": "A strategy trapping every tiger of speed $k<4$ exists (see the solution), which earns the full $100$ points.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Full solution: a sectioned wall for $k=3.9$",
+    "body": "Rescale lengths so that the tiger has speed $1$ and the discs have radius $r=\\frac1k$ (one disc is still placed per second). A tiger of speed $k$ is trapped if we can handle discs of radius $r=\\frac1k$; $r>\\frac14$ corresponds to every $k<4$.\n\n**Building blocks.**\n\n1. *Uniformly covered wall.* A wall of density $d$ has discs pre-placed at a fraction $d$ of the positions of a row of tangent discs, spread as evenly as possible (every stretch of $m$ positions contains at least $dm-2$ pre-placed discs). While the tiger chases along the wall, we only have to fill the remaining fraction $1-d$ of positions, so our chasing speed is $\\frac{2r}{1-d}$ (each disc covers length $2r$); this beats the tiger's speed $1$ when $2r>1-d$, i.e. we choose $d=1-2r+\\varepsilon$. Pre-building such a wall (before the tiger arrives) proceeds at $\\frac{2r}{d}$ length per second.\n2. *Layered barrier.* To stop a tiger approaching a wall head-on, place layers of such walls (each layer fills a fixed fraction of the squares below it); finitely many layers seal the base completely. Side walls stop the tiger from escaping sideways while the barrier is chased.\n\n**Sectioned walls.** Take a circle of huge radius $R$. A *sectioned wall* is a row of short vertical walls of length $\\ell$, spaced with gaps $c\\ell$ for some $c>1$. When the tiger comes near, we build a horizontal wall of length $c\\ell$ over a gap in the time $\\ell$ it takes the tiger to reach the top of that section, because the tiger cannot enter the section through the vertical walls and is at least $\\ell$ away from the top. Thus a sectioned wall is $c$ times as efficient at covering distance as the walls it is built from. We can pre-build a wall at speed $\\frac{2r}{d}=\\frac{1}{1-2r}-1$ per second; this exceeds $1$ (so $c>1$) exactly when $2r>\\frac12$, i.e. $r>\\frac14$. All later layers are $c$ times faster, so if the first layer is possible, repeating the construction gives arbitrarily efficient walls and we can enclose the circle of radius $R$ (circumference $2\\pi R$) before the tiger arrives. Hence every speed $k<4$ is trapped, in particular $k=3.9$."
+   },
+   {
+    "title": "Easier bounds (partial credit ladder)",
+    "body": "- **$k\\le0.05$:** surround the tiger with a triangle of three discs: the nearest boundary point is at distance $2\\sqrt3-1>0.1$ and we need $2$ seconds to place the discs.\n- **$k=0.2$:** an enlarged square of $4s$ touching discs has distance $s-1$ to the boundary, so it traps speeds below $\\frac{s-1}{4s}$, which exceeds $0.2$ for $s>5$.\n- **$k=0.3$:** a large circle of $\\pi R$ discs, distance about $R-1$: traps speeds below $\\frac1\\pi>0.3$.\n- **$k=2$ (disc radius $\\frac12$, lattice):** adaptive layered barriers of height $h=32$ along a large square perimeter.\n- **$k=2.3,\\,2.6,\\,2.9$:** use smaller discs and pre-build a uniformly covered ring (radius $r>\\frac{\\pi}{2\\pi+1}$, $\\frac{\\pi}{2\\pi+2}$, $\\frac{\\pi}{2\\pi+3}$ respectively) while the tiger walks to the boundary, then use arcs of $360^\\circ$, $180^\\circ$ or $120^\\circ+\\varepsilon$ respectively."
+   }
+  ],
+  "topics": [
+   "geometry",
+   "topology",
+   "games"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ }
+]

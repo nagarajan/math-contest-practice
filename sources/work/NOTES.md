@@ -83,3 +83,43 @@
 - hmmt feb-2000 guts 04 (degenerate triangle), 28 (V/S has no minimum), 34 (Brocard's problem, open) dropped. Penalty for [±n] not modelled (no rules page), matching feb-2001/2002.
 - bmt 2016 analysis 06 dropped: the point (1,-1) is not on x e^y = y e^x.
 - smt 2018 general 25 dropped: official k=3 forces a zero root, contradicting 'roots are nonzero'. Team short-answer 12 omitted (sum diverges).
+- rmt-2016-calc-09 dropped: no function u satisfies the printed conditions on all of [-1,1] (5cos t+6sin t < 0 before t=-1); official key also wrong.
+- chmmc-2014-mixer-03, -05 dropped: real-world trivia estimates (trees on Earth, human spaceflight time), outdated/unitless keys.
+- chmmc-2014-mixer-02, -06, -07 dropped: real-world trivia estimates (gold price, GDP, eating time).
+- dmm devil rounds: dropped real-world trivia estimates (2020 Q1,3,4,6,7,9,10; 2021 Q1-7,13; all of 2022, incl. Q6 Duke founding year). Kept math estimates.
+- RMT 2013/2014 and SMT 2013/2014 are the same problem sets. 2013: rmt holds originals (smt-2013 stubs point at rmt; smt-2013-power.json removed, rmt-2013-power kept). 2014: smt holds originals (79 rmt-2014 questions marked duplicateOf smt-2014; rmt-2014-power.json removed, smt-2014-power has more parts).
+- rmt-2010-team-04 dropped: rate model ill-posed; official 451 fits neither stated data nor any reading.
+- cmimc-2019-team-07 dropped: official 16 is wrong (ignores shared positions); true value ~32.6926 (Markov chain) has no known closed form.
+- cmimc-2022-algnt-d1-06 dropped: officially discounted; as printed 2021=43*47 is composite so the intended prime-order argument fails.
+- lehigh-1997-1999: the '1997' PDF is the 2001 exam (stored as lehigh/2001.json); 1999 PDF is answers only (no problems) - skipped; no 1997/1998 source.
+- dmm-2018-relay-05 dropped: no key, answer depends on figure reading and on whether walks may backtrack (relay 2.3 also omitted, inconsistent).
+- dmm-2019-individual-09 dropped: probability depends on an unstated model for shot types.
+- dmm-2005-power-05c dropped: claim false with independent signs (e.g. -T_2 and T_4 do not commute).
+- dmm-2010-individual-09 dropped: sliding-puzzle start state unspecified (no key).
+- dmm-2010-power-03..07 dropped: Clue game questions; no key and the game model (card choice, accusation rule) is unspecified.
+- mmaths-2016-mixer-12 dropped: asks for a common wrong divisor people use (not a math question).
+- dmm-2014-relay-03 dropped: printed move list cut off; continuation was guessed (no key).
+- dmm-2016-tiebreaker-03 omitted by agent: missile pursuit with equal speeds never catches; official 6*pi wrong.
+- dmm-2010-relay-03 dropped: no key; answer depends on unstated genders.
+- dmm-2010-devil-12 dropped: no key; parity-check message model underspecified (256/353 vs 256/625).
+mmaths-2015-individual-07: reworded to expected-value comparison (official answer used expectations)
+- nyciml-2019-20-spring-seniora-01..06 dropped: source PDF has only the solutions for Contest 1; problem text would be guesswork.
+- nyciml-2015-16-spring-seniorb-12 reworded: printed problem garbled (official solves for coin bias giving Terry 1/2).
+- mmaths 2014-mixer-09/-10, 2015-mixer-08 dropped in audit (no definite answer).
+- nyciml-2017-18-spring-seniora-16 dropped: conditions force a degenerate parallelogram (sides 1, 2, diagonals 1, 3).
+- nyciml-2013-14-fall-seniorb-30 dropped in audit: as printed the answer cannot take the stated form (official solution used BE=3 instead of 5).
+- nyciml-2011-12-fall-seniorb-08 dropped: as printed the ratio depends on AB/AD; official 5/9 assumes a rhombus.
+- nyciml-2004-05-spring-seniora-24 omitted: printed polynomial cannot have 7 roots in AP.
+- nyciml-2001-02-spring-seniorb-27 omitted: printed equation 9^(x-2)=9^x+240 has no solution (official used 9^(x+2)).
+- nyciml-2000-01-spring-seniora-15 omitted: hexagon not stated regular, ratio undetermined.
+- nyciml-1992-93-fall-seniora-18 omitted: as printed the log argument is complex; official answer relies on an arithmetic slip.
+- nyciml-1994-95 omitted: fall-seniora-30 (withdrawn), fall-seniorb-02 (contradictory givens), spring-seniorb-10 (power tower cannot reach 3).
+- nyciml-1991-92 omitted: fall-seniora-14 (question text breaks off), spring-seniorb-28 (false given sin(pi/2)=1/4).
+- nyciml-1993-94-spring-seniora-01 omitted: eliminated by the official correction letter.
+- nyciml-1987-88-fall-seniorb-03 omitted: printed expression does not give the official answer.
+- nyciml-1986-87-fall-seniora-30 dropped: printed polynomial contradicts 7 roots in AP (same problem as 2004-05 spring-a-24).
+- nyciml-1984-85-spring-seniorb-22 deleted: printed equation has no real solution (official solved a different equation).
+- jhmt-2020-ms-team-17 deleted: donut counts inconsistent; official 55 wrong under any reading.
+- nyciml-2024-25-fall-sophfrosh-18 omitted: remainder conditions inconsistent; no such polynomial.
+- nyciml-2012-13-spring-sophfrosh-11 omitted: contradictory data.
+- nyciml-2012-13-spring-seniora-15 deleted (user approved): series diverges at the official answer's tan^2 x = 1.

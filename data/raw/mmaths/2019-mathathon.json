@@ -1,0 +1,721 @@
+[
+  {
+    "id": "mmaths-2019-mathathon-01",
+    "bank": "mmaths",
+    "source": {
+      "contest": "MMATHS",
+      "paper": "Mathathon Round",
+      "year": 2019,
+      "number": 1,
+      "url": "https://yalemathcompetitions-files.s3.amazonaws.com/mmaths_2019_mathathon.pdf"
+    },
+    "grade": "9-12",
+    "points": 2,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "A small pizza costs $4$ dollars and has $6$ slices. A large pizza costs $9$ dollars and has $14$ slices. If the MMATHS organizers got at least $400$ slices of pizza (having extra is okay) as cheaply as possible, how many large pizzas did they buy?",
+    "image": null,
+    "choices": null,
+    "answer": "26",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Exchange argument and a short table",
+        "body": "Seven small pizzas ($42$ slices, $28$ dollars) can be replaced by three large pizzas ($42$ slices, $27$ dollars), so an optimal purchase has at most $6$ small pizzas. For $S=0,\\dots,6$ small pizzas, the number of large pizzas needed is $L=\\lceil\\frac{400-6S}{14}\\rceil$:\n\n| $S$ | 0 | 1 | 2 | 3 | 4 | 5 | 6 |\n|---|---|---|---|---|---|---|---|\n| $L$ | 29 | 29 | 28 | 28 | 27 | 27 | 26 |\n| cost | 261 | 265 | 260 | 264 | 259 | 263 | 258 |\n\nThe minimum cost is $258$ dollars with $26$ large and $6$ small pizzas (that is $364+36=400$ slices).\n\n**Answer: 26**"
+      }
+    ],
+    "topics": [
+      "arithmetic",
+      "number-theory"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "mmaths-2019-mathathon-02",
+    "bank": "mmaths",
+    "source": {
+      "contest": "MMATHS",
+      "paper": "Mathathon Round",
+      "year": 2019,
+      "number": 2,
+      "url": "https://yalemathcompetitions-files.s3.amazonaws.com/mmaths_2019_mathathon.pdf"
+    },
+    "grade": "9-12",
+    "points": 2,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Rachel flips a fair coin until she gets a tails. What is the probability that she gets an even number of heads before the tails?",
+    "image": null,
+    "choices": null,
+    "answer": "2/3",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Geometric series",
+        "body": "Her first tails comes on flip $n$ with probability $2^{-n}$, and then she has had $n-1$ heads. An even number of heads means $n$ is odd: $\\frac12+\\frac18+\\frac1{32}+\\cdots=\\frac{1/2}{1-1/4}=\\frac23$.\n\n**Answer: 2/3**"
+      },
+      {
+        "title": "Recursion",
+        "body": "Let $p$ be the probability of an even number of heads. On the first flip she gets tails (probability $\\frac12$, zero heads: even) or heads (probability $\\frac12$), after which she needs an odd number of further heads, probability $1-p$. So $p=\\frac12+\\frac12(1-p)$, giving $p=\\frac23$."
+      }
+    ],
+    "topics": [
+      "probability",
+      "sequences-series"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "mmaths-2019-mathathon-03",
+    "bank": "mmaths",
+    "source": {
+      "contest": "MMATHS",
+      "paper": "Mathathon Round",
+      "year": 2019,
+      "number": 3,
+      "url": "https://yalemathcompetitions-files.s3.amazonaws.com/mmaths_2019_mathathon.pdf"
+    },
+    "grade": "9-12",
+    "points": 2,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Find the unique positive integer $n$ that satisfies $n!\\cdot(n+1)!=(n+4)!$.",
+    "image": null,
+    "choices": null,
+    "answer": "6",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Cancel factorials",
+        "body": "Divide both sides by $(n+1)!$: $n!=(n+2)(n+3)(n+4)$. For $n=6$: $720=8\\cdot9\\cdot10$. The left side grows faster: for $n<6$ it is smaller (e.g. $n=5$: $120<7\\cdot8\\cdot9=504$) and for $n>6$ it is larger. So $n=6$.\n\n**Answer: 6**"
+      }
+    ],
+    "topics": [
+      "algebra",
+      "number-theory"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "mmaths-2019-mathathon-04",
+    "bank": "mmaths",
+    "source": {
+      "contest": "MMATHS",
+      "paper": "Mathathon Round",
+      "year": 2019,
+      "number": 4,
+      "url": "https://yalemathcompetitions-files.s3.amazonaws.com/mmaths_2019_mathathon.pdf"
+    },
+    "grade": "9-12",
+    "points": 3,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "The Portland Malt Shoppe stocks $10$ ice cream flavors and $8$ mix-ins. A milkshake consists of exactly $1$ flavor of ice cream and between $1$ and $3$ mix-ins. (Mix-ins can be repeated, the number of each mix-in matters, and the order of the mix-ins doesn't matter.) How many different milkshakes can be ordered?",
+    "image": null,
+    "choices": null,
+    "answer": "1640",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Multisets of mix-ins",
+        "body": "The mix-ins form a multiset of size $1$, $2$ or $3$ from $8$ types: $\\binom{8}{1}+\\binom{9}{2}+\\binom{10}{3}=8+36+120=164$ (multisets of size $k$ from $8$ types number $\\binom{8+k-1}{k}$). Times $10$ flavors: $1640$.\n\n**Answer: 1640**"
+      },
+      {
+        "title": "Direct count",
+        "body": "Size $1$: $8$. Size $2$: two equal ($8$) or two different ($\\binom82=28$): $36$. Size $3$: all equal ($8$), two equal and one different ($8\\cdot7=56$), all different ($\\binom83=56$): $120$. Total $164$, and $164\\cdot10=1640$."
+      }
+    ],
+    "topics": [
+      "counting"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "mmaths-2019-mathathon-05",
+    "bank": "mmaths",
+    "source": {
+      "contest": "MMATHS",
+      "paper": "Mathathon Round",
+      "year": 2019,
+      "number": 5,
+      "url": "https://yalemathcompetitions-files.s3.amazonaws.com/mmaths_2019_mathathon.pdf"
+    },
+    "grade": "9-12",
+    "points": 3,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Find the minimum possible value of the expression $(x)^2+(x+3)^4+(x+4)^4+(x+7)^2$, where $x$ is a real number.",
+    "image": null,
+    "choices": null,
+    "answer": "197/8",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Symmetry",
+        "body": "The expression is symmetric about $x=-\\frac72$. Put $x=t-\\frac72$. Then it becomes $\\left(t-\\frac72\\right)^2+\\left(t-\\frac12\\right)^4+\\left(t+\\frac12\\right)^4+\\left(t+\\frac72\\right)^2=2t^2+\\frac{49}2+2t^4+3t^2+\\frac18=2t^4+5t^2+\\frac{197}{8}$, which is minimized at $t=0$ with value $\\frac{197}8$.\n\n**Answer: 197/8**"
+      }
+    ],
+    "topics": [
+      "algebra",
+      "inequalities"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "mmaths-2019-mathathon-06",
+    "bank": "mmaths",
+    "source": {
+      "contest": "MMATHS",
+      "paper": "Mathathon Round",
+      "year": 2019,
+      "number": 6,
+      "url": "https://yalemathcompetitions-files.s3.amazonaws.com/mmaths_2019_mathathon.pdf"
+    },
+    "grade": "9-12",
+    "points": 3,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Ralph has a cylinder with height $15$ and volume $\\frac{960}{\\pi}$. What is the longest distance (staying on the surface) between two points of the cylinder?",
+    "image": null,
+    "choices": null,
+    "answer": "15+16/pi",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Compare candidates and bound",
+        "body": "The base area is $\\frac{960}{15\\pi}=\\frac{64}{\\pi}=\\pi r^2$, so $r=\\frac8\\pi$ and the circumference is $16$. The shortest surface path between the centers of the two bases goes from the center to the rim ($r$), down the side ($15$) and to the other center ($r$): length $15+2r=15+\\frac{16}{\\pi}\\approx20.09$.\n\nUpper bound for any two points $P,Q$ (distance meaning the shortest surface path): both on the side: $\\le\\sqrt{8^2+15^2}=17$ (unroll the side; horizontal gap at most half the circumference). One on a base, one on the side: go to the nearest rim point (at most $r$ away) then along the side, at most $r+17<20.09$. Both on the same base: at most $2r$. $P$ on the top base at distance $\\rho_P$ from its center and $Q$ on the bottom base at $\\rho_Q$: go to the rim point above the rim point nearest to $Q$ or nearest to $P$: the two options have lengths at most $15+(r+\\rho_P)+(r-\\rho_Q)$ or $15+(r-\\rho_P)+(r+\\rho_Q)$ (the farthest/nearest rim point is $r\\pm\\rho$ away), and the smaller of the two is at most $15+2r$. So the maximum is $15+\\frac{16}{\\pi}$.\n\n**Answer: $15+\\frac{16}\\pi$**"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null,
+    "answerDisplay": "$15+\\frac{16}{\\pi}$"
+  },
+  {
+    "id": "mmaths-2019-mathathon-07",
+    "bank": "mmaths",
+    "source": {
+      "contest": "MMATHS",
+      "paper": "Mathathon Round",
+      "year": 2019,
+      "number": 7,
+      "url": "https://yalemathcompetitions-files.s3.amazonaws.com/mmaths_2019_mathathon.pdf"
+    },
+    "grade": "9-12",
+    "points": 4,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "If there are exactly $3$ pairs $(x,y)$ satisfying $x^2+y^2=8$ and $x+y=(x-y)^2+a$, what is the value of $a$?",
+    "image": null,
+    "choices": null,
+    "answer": "-4",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Change variables",
+        "body": "Put $u=x+y$, $v=x-y$ (a bijection of the plane, so it preserves the number of solutions). Then $x^2+y^2=\\frac{u^2+v^2}{2}=8$ gives $u^2+v^2=16$, and the second equation is $u=v^2+a$. Substituting $v^2=u-a$: $u^2+u-a-16=0$. Each root $u$ with $u>a$ gives two values $v=\\pm\\sqrt{u-a}$, a root $u=a$ gives one value, and $u<a$ none. To get exactly $3$ solutions we need one root $u=a$ and another root $>a$. $u=a$ is a root iff $a^2=16$. The other root is $-1-a$: for $a=4$ it is $-5<4$ (only $1$ solution), for $a=-4$ it is $3>-4$ (then $1+2=3$ solutions).\n\n**Answer: -4**"
+      }
+    ],
+    "topics": [
+      "algebra",
+      "geometry"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "mmaths-2019-mathathon-08",
+    "bank": "mmaths",
+    "source": {
+      "contest": "MMATHS",
+      "paper": "Mathathon Round",
+      "year": 2019,
+      "number": 8,
+      "url": "https://yalemathcompetitions-files.s3.amazonaws.com/mmaths_2019_mathathon.pdf"
+    },
+    "grade": "9-12",
+    "points": 4,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "If $n$ is an integer between $4$ and $1000$, what is the largest possible power of $2$ that $n^4-13n^2+36$ could be divisible by? (Your answer should be this power of $2$, not just the exponent.)",
+    "image": null,
+    "choices": null,
+    "answer": "2048",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Factor and count powers of 2",
+        "body": "$n^4-13n^2+36=(n^2-4)(n^2-9)=(n-2)(n+2)(n-3)(n+3)$.\n\n*$n$ even:* $n-3,n+3$ are odd. Write $n=4m'+2$ (if $n\\equiv0\\pmod 4$ then $n\\pm2\\equiv2\\pmod4$ and the product $(n-2)(n+2)$ has only $2^2$). Then $(n-2)(n+2)=4m'\\cdot(4m'+4)=16\\,m'(m'+1)$, whose power of $2$ is $2^{4}$ times the power of $2$ in $m'$ or $m'+1$ (one of them is odd). With $n\\le1000$ we have $m'\\le249$, and the largest power of $2$ dividing $m'$ or $m'+1$ is $128$ (for $m'=127$ or $128$). So the largest power is $2^4\\cdot2^7=2^{11}$.\n\n*$n$ odd:* $n-2,n+2$ are odd and $(n-3)(n+3)=4p(p+3)$ with $n=2p+3$, $p\\le498$; $p$ and $p+3$ have opposite parity, so the power of $2$ is $4$ times that of the even one, at most $4\\cdot256=2^{10}$.\n\nSo the maximum is $2^{11}=2048$, attained e.g. at $n=514$ ($n-2=512$, $n+2=516=4\\cdot129$).\n\n**Answer: 2048**"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "algebra"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "mmaths-2019-mathathon-09",
+    "bank": "mmaths",
+    "source": {
+      "contest": "MMATHS",
+      "paper": "Mathathon Round",
+      "year": 2019,
+      "number": 9,
+      "url": "https://yalemathcompetitions-files.s3.amazonaws.com/mmaths_2019_mathathon.pdf"
+    },
+    "grade": "9-12",
+    "points": 4,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Find the sum of all positive integers $n\\ge2$ for which the following statement is true: “for any arrangement of $n$ points in three-dimensional space where the points are not all collinear, you can always find one of the points such that the $n-1$ rays from this point through the other points are all distinct.”",
+    "image": null,
+    "choices": null,
+    "answer": "14",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Check small n, then a counterexample",
+        "body": "A ray from $p$ through $q$ coincides with the ray through $r$ exactly when $q,r$ lie on the same side of $p$ on a line through $p$. Call $p$ *good* if this never happens.\n\n$n=2$: vacuous (two points are always collinear). $n=3$: three non-collinear points; every point is good. $n=4$: if no three are collinear, any point is good; otherwise three points $A,B,C$ lie on a line and the fourth point $D$ is off it, and $D$ is good (it sees $A,B,C$ on three different rays since $D\\notin\\ell$).\n\n$n=5$: if no three points are collinear, any point is good. If four lie on a line $\\ell$, the fifth point (off $\\ell$) is good. Otherwise some line has exactly three points $A,B,C$ (in this order) and the other two points $D,E$ are off the line. The middle point $B$ sees $A$ and $C$ on opposite rays; it fails only if $B,D,E$ are collinear with $D,E$ on the same side of $B$, say $D$ between $B$ and $E$. Then $D$ is good: it sees $B$ and $E$ on opposite rays, and the rays to $A,B,C,E$ are pairwise different because $D,A,B$ ($D,B,C$; $D,A,C$; $D,A,E$ would force $D\\in\\ell$ or $A=B$ etc.) are never collinear. So the statement holds for $n=5$.\n\n$n\\ge6$: put $n-2$ points $L_1,\\dots,L_{n-2}$ on a line $\\ell$ and two points $Q,R$ off $\\ell$ with $L_1$ the midpoint of $QR$. Each $L_i$ has at least two other points of $\\ell$ on one side (as $n-2\\ge4$), $Q$ sees $L_1$ and $R$ on the same ray, and so does $R$. No point is good, so the statement is false.\n\nThe sum of the $n$ for which it is true is $2+3+4+5=14$.\n\n**Answer: 14**"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "logic"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "mmaths-2019-mathathon-10",
+    "bank": "mmaths",
+    "source": {
+      "contest": "MMATHS",
+      "paper": "Mathathon Round",
+      "year": 2019,
+      "number": 10,
+      "url": "https://yalemathcompetitions-files.s3.amazonaws.com/mmaths_2019_mathathon.pdf"
+    },
+    "grade": "9-12",
+    "points": 6,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Donald writes the number $12121213131415$ on a piece of paper. How many ways can he rearrange these fourteen digits to make another number where the digit in every place value is different from what was there before?",
+    "image": null,
+    "choices": null,
+    "answer": "420",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "The 1s must move",
+        "body": "The digits $12121213131415$ are, in positions $1,\\dots,14$: $1$ in the seven odd positions, and $2,2,2,3,3,4,5$ in the seven even positions. In the new number no digit may stay in its old place, so no $1$ can be in an odd position. Hence the seven $1$s fill exactly the seven even positions, and the digits $2,2,2,3,3,4,5$ fill the odd positions (where they automatically differ from the old digit $1$). The number of ways is $\\frac{7!}{3!\\,2!}=420$.\n\n**Answer: 420**"
+      }
+    ],
+    "topics": [
+      "counting"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "mmaths-2019-mathathon-11",
+    "bank": "mmaths",
+    "source": {
+      "contest": "MMATHS",
+      "paper": "Mathathon Round",
+      "year": 2019,
+      "number": 11,
+      "url": "https://yalemathcompetitions-files.s3.amazonaws.com/mmaths_2019_mathathon.pdf"
+    },
+    "grade": "9-12",
+    "points": 6,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "A question on Joe's math test asked him to compute $\\frac ab+\\frac34$, where $a$ and $b$ were both integers. Because he didn't know how to add fractions, he submitted $\\frac{a+3}{b+4}$ as his answer. But it turns out that he was right for these particular values of $a$ and $b$! What is the largest possible value that $a$ could have been?",
+    "image": null,
+    "choices": null,
+    "answer": "-3",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Cross-multiply",
+        "body": "$\\frac{a+3}{b+4}=\\frac ab+\\frac34=\\frac{4a+3b}{4b}$ gives $4b(a+3)=(b+4)(4a+3b)$, i.e. $4ab+12b=4ab+3b^2+16a+12b$, so $3b^2+16a=0$ and $a=-\\frac{3b^2}{16}$. So $a$ is a nonpositive integer with $16\\mid3b^2$, i.e. $4\\mid b$. Writing $b=4k$ ($k\\ne0$ since $b\\ne0$) gives $a=-3k^2$, whose largest value is $-3$ at $k=\\pm1$ ($b=\\pm4$; $b=-4$ is excluded because $b+4\\ne0$, but $b=4$ works).\n\n**Answer: -3**"
+      }
+    ],
+    "topics": [
+      "algebra",
+      "number-theory"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "mmaths-2019-mathathon-12",
+    "bank": "mmaths",
+    "source": {
+      "contest": "MMATHS",
+      "paper": "Mathathon Round",
+      "year": 2019,
+      "number": 12,
+      "url": "https://yalemathcompetitions-files.s3.amazonaws.com/mmaths_2019_mathathon.pdf"
+    },
+    "grade": "9-12",
+    "points": 6,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Christopher has a globe with radius $r$ inches. He puts his finger on a point on the equator. He moves his finger $5\\pi$ inches North, then $\\pi$ inches East, then $5\\pi$ inches South, then $2\\pi$ inches West. If he ended where he started, what is the largest possible value of $r$?",
+    "image": null,
+    "choices": null,
+    "answer": "15",
+    "acceptedAnswers": null,
+    "answerUnit": "inches",
+    "solutions": [
+      {
+        "title": "Longitude bookkeeping",
+        "body": "Moving $5\\pi$ inches north puts him at latitude $\\phi=\\frac{5\\pi}{r}$ (in radians). The latitude circle there has radius $r\\cos\\phi$, so moving $\\pi$ inches east changes his longitude by $\\frac{\\pi}{r\\cos\\phi}$. Moving $5\\pi$ south returns him to the equator, and moving $2\\pi$ inches west changes the longitude by $-\\frac{2\\pi}{r}$. He ends where he started iff the net change is a multiple of $2\\pi$:\n$$\\frac{\\pi}{r\\cos\\phi}-\\frac{2\\pi}{r}=2\\pi m\\quad\\Longleftrightarrow\\quad\\frac{1}{\\cos\\phi}-2=2mr\\qquad(m\\in\\mathbb Z).$$\nIf $r>15$ then $\\phi<\\frac\\pi3$, so $1<\\frac1{\\cos\\phi}<2$ and the left side lies in $(-1,0)$; but $2mr$ is $0$ or has absolute value at least $2r>30$. No solution. For $r=15$: $\\phi=\\frac\\pi3$, $\\frac1{\\cos\\phi}=2$, and $m=0$ works ($\\pi$ inches east along the latitude circle of circumference $15\\pi$ is $\\frac1{15}$ of a turn, and $2\\pi$ inches west along the equator of circumference $30\\pi$ is also $\\frac1{15}$ of a turn, so they cancel). So the largest $r$ is $15$.\n\n**Answer: 15**"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "trigonometry"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "mmaths-2019-mathathon-13",
+    "bank": "mmaths",
+    "source": {
+      "contest": "MMATHS",
+      "paper": "Mathathon Round",
+      "year": 2019,
+      "number": 13,
+      "url": "https://yalemathcompetitions-files.s3.amazonaws.com/mmaths_2019_mathathon.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Suppose $\\triangle ABC$ is an isosceles triangle with $AB=BC$, and $X$ is a point in the interior of $\\triangle ABC$. If $m\\angle ABC=94^\\circ$, $m\\angle ABX=17^\\circ$, and $m\\angle BAX=13^\\circ$, then what is $m\\angle BXC$ (in degrees)?",
+    "image": null,
+    "choices": null,
+    "answer": "77",
+    "acceptedAnswers": null,
+    "answerUnit": "degrees",
+    "solutions": [
+      {
+        "title": "Reflect and find an equilateral triangle",
+        "body": "Reflect $X$ in the axis of symmetry of the isosceles triangle (the bisector of $\\angle B$) to get $Y$; then $\\angle YBC=17^\\circ$, $\\angle YCB=13^\\circ$, $BY=BX$. Since $\\angle XBY=94^\\circ-2\\cdot17^\\circ=60^\\circ$, triangle $XBY$ is equilateral. Also $\\angle BYC=180^\\circ-17^\\circ-13^\\circ=150^\\circ$, so $\\angle XYC=360^\\circ-60^\\circ-150^\\circ=150^\\circ$. Triangles $XYC$ and $BYC$ share $YC$, have $XY=BY$ and equal included angles $150^\\circ$: they are congruent, so $CX=CB$. Then in isosceles triangle $CBX$, $\\angle CXB=\\angle CBX=94^\\circ-17^\\circ=77^\\circ$.\n\n**Answer: 77**"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "mmaths-2019-mathathon-14",
+    "bank": "mmaths",
+    "source": {
+      "contest": "MMATHS",
+      "paper": "Mathathon Round",
+      "year": 2019,
+      "number": 14,
+      "url": "https://yalemathcompetitions-files.s3.amazonaws.com/mmaths_2019_mathathon.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Find the remainder when $\\sum_{n=1}^{2019}\\left(1+2n+4n^2+8n^3\\right)$ is divided by $2019$.",
+    "image": null,
+    "choices": null,
+    "answer": "1346",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Sum formulas",
+        "body": "With $N=2019=3\\cdot673$: $\\sum1=N\\equiv0$; $\\sum2n=N(N+1)\\equiv0$; $\\sum8n^3=8\\cdot\\frac{N^2(N+1)^2}{4}=2N^2(N+1)^2\\equiv0$; and $\\sum4n^2=\\frac{4N(N+1)(2N+1)}{6}=\\frac{2N}{3}(N+1)(2N+1)=1346\\cdot2020\\cdot4039$ (using $\\frac N3=673$). Modulo $2019$: $2020\\equiv1$ and $4039=2\\cdot2019+1\\equiv1$, so this term is $\\equiv1346$. Hence the remainder is $1346$.\n\n**Answer: 1346**"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "sequences-series"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "mmaths-2019-mathathon-15",
+    "bank": "mmaths",
+    "source": {
+      "contest": "MMATHS",
+      "paper": "Mathathon Round",
+      "year": 2019,
+      "number": 15,
+      "url": "https://yalemathcompetitions-files.s3.amazonaws.com/mmaths_2019_mathathon.pdf"
+    },
+    "grade": "9-12",
+    "points": 7,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "How many ways can you assign the integers $1$ through $10$ to the variables $a,b,c,d,e,f,g,h,i$, and $j$ in some order such that $a<b<c<d<e$, $f<g<h<i$, $a<g$, $b<h$, $c<i$, $f<b$, $g<c$, and $h<d$?",
+    "image": null,
+    "choices": null,
+    "answer": "240",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Count linear extensions",
+        "body": "The variable $j$ is unconstrained: choose its value in $10$ ways, and then the other nine values are assigned according to their relative order. Among $a,\\dots,i$: $a$ and $f$ are below everything else (they are below $b,g$ and hence above... precisely both are smaller than all of $b,c,d,e,g,h,i$): $2$ orders for $\\{a,f\\}$. Next, $b$ and $g$ are the two smallest of the rest: $2$ orders. Next $c$ and $h$ are the two smallest of what remains: $2$ orders. Finally $d,e,i$ remain with $d<e$ only: $i$ can be before $d$, between $d$ and $e$, or after $e$: $3$ orders. Total $10\\cdot2\\cdot2\\cdot2\\cdot3=240$.\n\n**Answer: 240**"
+      }
+    ],
+    "topics": [
+      "counting"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "mmaths-2019-mathathon-16",
+    "bank": "mmaths",
+    "source": {
+      "contest": "MMATHS",
+      "paper": "Mathathon Round",
+      "year": 2019,
+      "number": 16,
+      "url": "https://yalemathcompetitions-files.s3.amazonaws.com/mmaths_2019_mathathon.pdf"
+    },
+    "grade": "9-12",
+    "points": 8,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Call an integer $n$ *equi-powerful* if $n$ and $n^2$ leave the same remainder when divided by $1320$. How many integers between $1$ and $1320$ (inclusive) are equi-powerful?",
+    "image": null,
+    "choices": null,
+    "answer": "16",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Idempotents modulo 1320",
+        "body": "$n$ is equi-powerful iff $1320\\mid n(n-1)$. Since $\\gcd(n,n-1)=1$, each prime power $8,3,5,11$ in $1320=2^3\\cdot3\\cdot5\\cdot11$ must divide $n$ or $n-1$: $n\\equiv0$ or $1$ modulo each of them. By the Chinese Remainder Theorem each of the $2^4=16$ choices gives exactly one residue class mod $1320$, hence one integer in $[1,1320]$.\n\n**Answer: 16**"
+      }
+    ],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "mmaths-2019-mathathon-17",
+    "bank": "mmaths",
+    "source": {
+      "contest": "MMATHS",
+      "paper": "Mathathon Round",
+      "year": 2019,
+      "number": 17,
+      "url": "https://yalemathcompetitions-files.s3.amazonaws.com/mmaths_2019_mathathon.pdf"
+    },
+    "grade": "9-12",
+    "points": 8,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "There exists a unique positive integer $j\\le10$ and unique positive integers $n_j,n_{j+1},\\dots,n_{10}$ such that $j\\le n_j<n_{j+1}<\\cdots<n_{10}$ and $$\\binom{n_{10}}{10}+\\binom{n_9}{9}+\\cdots+\\binom{n_j}{j}=2019.$$ Find $n_j+n_{j+1}+\\cdots+n_{10}$.",
+    "image": null,
+    "choices": null,
+    "answer": "66",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Greedy combinatorial number system",
+        "body": "Choose the terms greedily from the top: the largest $n_{10}$ with $\\binom{n_{10}}{10}\\le2019$ is $14$ ($\\binom{14}{10}=1001$; $\\binom{15}{10}=3003$ is too big). Remainder $1018$. Then $n_9=13$ ($\\binom{13}9=715$), remainder $303$. $n_8=11$ ($\\binom{11}8=165$), remainder $138$. $n_7=10$ ($\\binom{10}7=120$), remainder $18$. $n_6=7$ ($\\binom76=7$), remainder $11$. $n_5=6$ ($\\binom65=6$), remainder $5$. $n_4=5$ ($\\binom54=5$), remainder $0$. So $j=4$ and the sum is $5+6+7+10+11+13+14=66$.\n\n**Answer: 66**"
+      }
+    ],
+    "topics": [
+      "counting",
+      "number-theory"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "mmaths-2019-mathathon-18",
+    "bank": "mmaths",
+    "source": {
+      "contest": "MMATHS",
+      "paper": "Mathathon Round",
+      "year": 2019,
+      "number": 18,
+      "url": "https://yalemathcompetitions-files.s3.amazonaws.com/mmaths_2019_mathathon.pdf"
+    },
+    "grade": "9-12",
+    "points": 8,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "If $n$ is a randomly chosen integer between $1$ and $390$ (inclusive), what is the probability that $26n$ has more positive factors than $6n$?",
+    "image": null,
+    "choices": null,
+    "answer": "41/130",
+    "acceptedAnswers": [
+      "123/390"
+    ],
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Compare divisor counts",
+        "body": "Write $n=2^a3^b13^c\\,m$ with $\\gcd(m,78)=1$. Then $\\tau(26n)=(a+2)(b+1)(c+2)\\tau(m)$ and $\\tau(6n)=(a+2)(b+2)(c+1)\\tau(m)$. So $\\tau(26n)>\\tau(6n)$ iff $(b+1)(c+2)>(b+2)(c+1)$, i.e. $b>c$.\n\nCount $n\\le390$ with $b>c$: if $13\\nmid n$ ($c=0$) we need $3\\mid n$: there are $130$ multiples of $3$, of which $10$ are multiples of $39$, leaving $120$. If $13\\mid n$ then $c\\ge1$ and we need $b\\ge2$, i.e. $117\\mid n$ ($n=117,234,351$, each with $c=1<b$): $3$ values. Total $123$, probability $\\frac{123}{390}=\\frac{41}{130}$.\n\n**Answer: 41/130**"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "probability"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "mmaths-2019-mathathon-19",
+    "bank": "mmaths",
+    "source": {
+      "contest": "MMATHS",
+      "paper": "Mathathon Round",
+      "year": 2019,
+      "number": 19,
+      "url": "https://yalemathcompetitions-files.s3.amazonaws.com/mmaths_2019_mathathon.pdf"
+    },
+    "grade": "9-12",
+    "points": 9,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Suppose $S$ is an $n$-element subset of $\\{1,2,3,\\ldots,2019\\}$. What is the largest possible value of $n$ such that for every $2\\le k\\le n$, $k$ divides exactly $n-1$ of the elements of $S$?",
+    "image": null,
+    "choices": null,
+    "answer": "7",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Construction and bound",
+        "body": "*Example for $n=7$:* $S=\\{35,60,84,420,840,1260,1680\\}$: for each $k=2,\\dots,7$ exactly six of the seven numbers are divisible by $k$ (e.g. $35$ is the only odd one, only $60$ is not divisible by $7$, etc.).\n\n*Bound:* suppose $n\\ge8$. Since $2$ divides exactly $n-1$ elements, exactly one element $s_1$ is odd; as $s_1$ is odd, it is not divisible by $4,6,8$, and since each of $4,6,8$ divides exactly $n-1$ elements, all the other $n-1$ elements are divisible by $4,6,8$. Each of $3,5,7$ misses exactly one element, so at most $3$ of the other elements are not divisible by all of $3,5,7$. Therefore at least $n-1-3\\ge4$ elements are divisible by $\\operatorname{lcm}(2,\\dots,8)=840$. But only $840$ and $1680$ are multiples of $840$ in $[1,2019]$: contradiction. So $n\\le7$.\n\n**Answer: 7**"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "counting"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "mmaths-2019-mathathon-20",
+    "bank": "mmaths",
+    "source": {
+      "contest": "MMATHS",
+      "paper": "Mathathon Round",
+      "year": 2019,
+      "number": 20,
+      "url": "https://yalemathcompetitions-files.s3.amazonaws.com/mmaths_2019_mathathon.pdf"
+    },
+    "grade": "9-12",
+    "points": 9,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "For each positive integer $n$, let $f(n)$ be the fewest number of terms needed to write $n$ as a sum of factorials. For example, $f(28)=3$ because $4!+2!+2!=28$ and $28$ cannot be written as the sum of fewer than $3$ factorials. Evaluate $f(1)+f(2)+\\cdots+f(720)$.",
+    "image": null,
+    "choices": null,
+    "answer": "5401",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Factorial base",
+        "body": "Ignore $0!$ (it equals $1!$). In an optimal representation, $i+1$ copies of $i!$ can be replaced by one $(i+1)!$, so each $i!$ is used at most $i$ times; that is the factorial number system, $n=\\sum_{i\\ge1}d_ii!$ with $0\\le d_i\\le i$, and $f(n)=\\sum d_i$.\n\nFor $0\\le n<k!$ the digits are $d_1,\\dots,d_{k-1}$ and each $d_i$ takes each of its $i+1$ values equally often, so it has average $\\frac i2$. Thus $\\sum_{n<k!}f(n)=k!\\sum_{i=1}^{k-1}\\frac i2=k!\\cdot\\frac{k(k-1)}{4}$. For $k=6$: $720\\cdot\\frac{30}{4}=5400$. This counts $n=0,\\dots,719$ (with $f(0)=0$); replacing $n=0$ by $n=720=6!$ (so $f(720)=1$) gives $5400+1=5401$.\n\n**Answer: 5401**"
+      }
+    ],
+    "topics": [
+      "counting",
+      "number-theory"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "mmaths-2019-mathathon-21",
+    "bank": "mmaths",
+    "source": {
+      "contest": "MMATHS",
+      "paper": "Mathathon Round",
+      "year": 2019,
+      "number": 21,
+      "url": "https://yalemathcompetitions-files.s3.amazonaws.com/mmaths_2019_mathathon.pdf"
+    },
+    "grade": "9-12",
+    "points": 9,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Evaluate $\\sum_{n=1}^{\\infty}\\frac{\\phi(n)}{101^n-1}$, where $\\phi(n)$ is the number of positive integers less than or equal to $n$ that are relatively prime to $n$.",
+    "image": null,
+    "choices": null,
+    "answer": "101/10000",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Regroup using the totient sum",
+        "body": "$\\frac1{101^n-1}=\\frac{101^{-n}}{1-101^{-n}}=\\sum_{k\\ge1}101^{-kn}$, so the sum is $\\sum_{n\\ge1}\\phi(n)\\sum_{k\\ge1}101^{-kn}$. Everything is positive, so we may regroup by $m=kn$: $\\sum_{m\\ge1}101^{-m}\\sum_{n\\mid m}\\phi(n)$. Since $\\sum_{n\\mid m}\\phi(n)=m$, this equals $\\sum_{m\\ge1}m\\,101^{-m}=\\frac{1/101}{(1-1/101)^2}=\\frac{101}{100^2}=\\frac{101}{10000}$.\n\n**Answer: 101/10000**"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "sequences-series"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

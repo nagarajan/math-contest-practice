@@ -1,0 +1,545 @@
+[
+ {
+  "id": "chmmc-cmm-2024-individual-01",
+  "bank": "chmmc",
+  "source": {
+   "contest": "Caltech Math Meet",
+   "paper": "2024 Individual Round",
+   "year": 2024,
+   "number": 1,
+   "url": null
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "A standard analog clock has three hands (seconds, minute, and hour), and the usual 12 hourly labels 1:00, 2:00, $\\dots$, 12:00. Each hand rotates around the clock continuously. Assume that this clock records the time perfectly. At 12:00 PM sharp, the three hands of the clock are all pointing in exactly the same direction, at the 12:00 label. After some exact amount of time passes during the same day, the minute and hour hands are again pointing in the exact same direction, while the seconds hand is pointing in a direction closer to the 4:00 label than any of the other hourly labels. How much time, in minutes, has passed? Round your answer to the nearest integer.",
+  "image": null,
+  "choices": null,
+  "answer": "196",
+  "acceptedAnswers": null,
+  "answerUnit": "minutes",
+  "solutions": [
+   {
+    "title": "Meetings of the hands",
+    "body": "The minute hand turns $6^\\circ$ per minute and the hour hand $0.5^\\circ$ per minute. They first meet again when $6x=0.5x+360$, i.e. $x=\\frac{720}{11}$ minutes, and then every $\\frac{720}{11}$ minutes. After the $n$-th meeting, $\\frac{720n}{11}$ minutes have passed. The seconds hand turns once per minute, so it sits at $\\frac{720n}{11}\\bmod 1=\\frac{5n}{11}\\bmod1$ of a full turn.\n\nThe hour labels are at multiples of $\\frac1{12}$ of a turn, and $\\frac{k}{11}$ is closest to the 4:00 label ($\\frac13$) exactly for $k=4$ ($\\frac4{11}\\approx0.364$). So $5n\\equiv4\\pmod{11}$, i.e. $n\\equiv3\\pmod{11}$.\n\nOnly $n=3$ occurs within the same 12-hour day (the meetings stop after $11$ of them at 12:00 AM). The time is $3\\cdot\\frac{720}{11}=\\frac{2160}{11}\\approx196.4$ minutes.\n\n**Answer: 196**"
+   }
+  ],
+  "topics": [
+   "time-calendar",
+   "number-theory"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "chmmc-cmm-2024-individual-02",
+  "bank": "chmmc",
+  "source": {
+   "contest": "Caltech Math Meet",
+   "paper": "2024 Individual Round",
+   "year": 2024,
+   "number": 2,
+   "url": null
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "The dreaded pirate captain Jack D. Luffy and his crew found a buried treasure chest on a deserted island, containing gold and silver coins as loot. Monetarily, a single gold coin is worth $Q>1$ silver coins ($Q$ need not be an integer), and a single silver coin is worth many times one unit of the national currency. The pirates agree to share the spoils fairly; that is, every pirate receives the same amount of loot in monetary value (but the number of gold and silver coins received by each pirate may vary). Jack receives $\\frac16$ the total number of gold coins and $\\frac1{10}$ the total number of silver coins from the chest. After counting up his loot again, Jack observes he has received four times as many silver coins as gold coins. What is the sum of all possible values of $Q$?",
+  "image": null,
+  "choices": null,
+  "answer": "52/3",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Fair sharing",
+    "body": "Let $g,s$ be the total values of gold and silver in the chest and $n$ the number of pirates. Jack's share is $\\frac g6+\\frac s{10}=\\frac{g+s}{n}$, which rearranges to $3s(10-n)=5g(n-6)$. Since $g,s>0$ we need $6<n<10$, so $n\\in\\{7,8,9\\}$.\n\nJack holds $4$ times as many silver coins as gold coins, and one gold coin is worth $Q$ silver coins, so his gold is worth $Q/4$ times his silver: $Q=4\\cdot\\frac{g/6}{s/10}=\\frac{20g}{3s}$.\n\n- $n=7$: $9s=5g$, so $\\frac gs=\\frac95$ and $Q=12$.\n- $n=8$: $3s=5g$, so $\\frac gs=\\frac35$ and $Q=4$.\n- $n=9$: $s=5g$, so $\\frac gs=\\frac15$ and $Q=\\frac43$.\n\nAll satisfy $Q>1$, and the sum is $12+4+\\frac43=\\frac{52}{3}$.\n\n**Answer: $\\frac{52}{3}$**"
+   }
+  ],
+  "topics": [
+   "algebra",
+   "number-theory"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "chmmc-cmm-2024-individual-03",
+  "bank": "chmmc",
+  "source": {
+   "contest": "Caltech Math Meet",
+   "paper": "2024 Individual Round",
+   "year": 2024,
+   "number": 3,
+   "url": null
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "A Caltech prefrosh is participating in rotation. There are 8 houses at Caltech: Avery, Blacker, Dabney, Fleming, Lloyd, Page, Ricketts, and Venerable. The prefrosh visits these houses in some order, each of them exactly once. Throughout rotation, the prefrosh maintains a ranking list of all of the houses that the prefrosh has visited. After every visit to a house, the prefrosh updates the ranking list by inserting the most recently visited house to either the top or the bottom of the list, each with probability $\\frac12$, while keeping the order of all previously visited houses the same. Compute the probability that at the end of rotation, the third house the prefrosh visited is not ranked fourth or fifth on their list.",
+  "image": null,
+  "choices": null,
+  "answer": "17/32",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Complementary counting",
+    "body": "Compute the probability that the 3rd house ends up ranked 4th. Right after it is visited it is at the top (rank 1) or bottom (rank 3) of the 3-house list, each with probability $\\frac12$. Each of the 5 later houses is then put above or below it with probability $\\frac12$.\n\n- Top: it ends 4th iff exactly $3$ of the $5$ later houses go on top: $\\binom53/2^5=\\frac{10}{32}$.\n- Bottom: it ends 4th iff exactly $1$ later house goes on top: $\\binom51/2^5=\\frac5{32}$.\n\nSo $P(\\text{4th})=\\frac12\\cdot\\frac{10}{32}+\\frac12\\cdot\\frac5{32}=\\frac{15}{64}$. By the top/bottom symmetry $P(\\text{5th})=\\frac{15}{64}$ as well.\n\nHence the answer is $1-\\frac{15}{64}-\\frac{15}{64}=\\frac{17}{32}$.\n\n**Answer: $\\frac{17}{32}$**"
+   },
+   {
+    "title": "Direct enumeration",
+    "body": "The first house has no choice, and each of houses $2,\\dots,8$ goes to the top or bottom: $2^7=128$ equally likely sequences. Listing all of them, $68$ leave the third house in neither 4th nor 5th place, giving $\\frac{68}{128}=\\frac{17}{32}$.\n\n**Answer: $\\frac{17}{32}$**"
+   }
+  ],
+  "topics": [
+   "probability",
+   "counting"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "chmmc-cmm-2024-individual-04",
+  "bank": "chmmc",
+  "source": {
+   "contest": "Caltech Math Meet",
+   "paper": "2024 Individual Round",
+   "year": 2024,
+   "number": 4,
+   "url": null
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Find the number of positive real numbers $x$ such that\n$$\\log_3(x)=\\frac{x+15}{4}-\\left\\lfloor\\frac{x-1}{4}\\right\\rfloor\\qquad\\text{and}\\qquad \\lfloor\\log_5(x)\\rfloor=2$$\n(for any positive real number $y$, recall that $\\lfloor y\\rfloor$ is the greatest integer less than or equal to $y$).",
+  "image": null,
+  "choices": null,
+  "answer": "11",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Fractional part",
+    "body": "Since $\\frac{x+15}4=4+\\frac{x-1}4$, the first equation says $\\log_3 x=4+\\left\\{\\frac{x-1}4\\right\\}$ (fractional part), so $4\\le\\log_3x<5$, i.e. $81\\le x<243$. The second condition says $25\\le x<125$. So we need solutions with $81\\le x<125$.\n\nOn each interval $[4k+1,4k+5)$ the right-hand side rises linearly from $4$ to (just below) $5$ with slope $\\frac14$. The intervals in our range are $[81,85),[85,89),\\dots,[121,125)$: $11$ intervals.\n\n- On $[81,85)$: at $x=81$ both sides equal $4$. Afterwards the right side grows faster (slope $\\frac14$) than $\\log_3x$ (slope $\\frac1{x\\ln3}<\\frac1{81}$), so there is no other solution.\n- On each of the other $10$ intervals: at the left end the right side is $4<\\log_3x$, and at the right end it tends to $5>\\log_3 x$ (since $\\log_3125<5$). So there is a crossing, and since the difference is increasing, exactly one.\n\nTotal: $1+10=11$.\n\n**Answer: 11**"
+   }
+  ],
+  "topics": [
+   "algebra",
+   "number-theory"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "chmmc-cmm-2024-individual-05",
+  "bank": "chmmc",
+  "source": {
+   "contest": "Caltech Math Meet",
+   "paper": "2024 Individual Round",
+   "year": 2024,
+   "number": 5,
+   "url": null
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Call a natural number $n>1$ *flavorful* if, for every prime divisor $p$ of $n$, $p^2$ is also a divisor of $n$. Find the largest positive integer that cannot be expressed as the sum of one or more distinct flavorful numbers.",
+  "image": null,
+  "choices": null,
+  "answer": "30",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Residues mod 4",
+    "body": "Every even flavorful number is divisible by $4$. The smallest odd flavorful numbers are $9,25,27$.\n\n*Everything above 30 works.* Multiples of $4$ are sums of distinct powers of $2$ that are at least $4$ (binary expansion), and these powers are flavorful. Then:\n- $n\\equiv1\\pmod4$, $n\\ge9$: $n=9+(\\text{a multiple of }4)$, with the multiple of $4$ written in distinct powers of two $\\ge4$.\n- $n\\equiv3\\pmod4$, $n\\ge27$: $n=27+(\\text{a multiple of }4)$.\n- $n\\equiv2\\pmod4$, $n\\ge34$: $n=9+25+(\\text{a multiple of }4)$.\n- $n\\equiv 0\\pmod 4$: binary expansion directly.\n\nHence every integer $n\\ge34$ is representable, and checking the residue classes below $34$ shows $30$ is the largest failure.\n\n*30 does not work.* $30\\equiv2\\pmod4$. A sum of even flavorful numbers is a multiple of $4$, so the sum needs odd summands, and an even total needs an even number of them, at least two. The two smallest odd flavorful numbers sum to $9+25=34>30$.\n\n**Answer: 30**"
+   }
+  ],
+  "topics": [
+   "number-theory"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "chmmc-cmm-2024-individual-06",
+  "bank": "chmmc",
+  "source": {
+   "contest": "Caltech Math Meet",
+   "paper": "2024 Individual Round",
+   "year": 2024,
+   "number": 6,
+   "url": null
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Let $\\mathscr R$ be a right rectangular prism with vertices $A_1,A_2,A_3,A_4,B_1,B_2,B_3,B_4$, where $A_1A_2A_3A_4$ and $B_1B_2B_3B_4$ are two parallel rectangular faces, with $A_1A_2=B_1B_2=3$, $A_2A_3=B_2B_3=7$, and $\\overline{A_1B_1},\\overline{A_2B_2},\\overline{A_3B_3}$, and $\\overline{A_4B_4}$ are mutually parallel edges of $\\mathscr R$. Suppose that a plane intersects segments $\\overline{A_1B_1},\\overline{A_2B_2},\\overline{A_3B_3}$, and $\\overline{A_4B_4}$ at $P_1,P_2,P_3$, and $P_4$, respectively, dividing $\\mathscr R$ into two solids, each with volume exactly $\\frac12$ that of $\\mathscr R$. If three of the lengths $A_1P_1,A_2P_2,A_3P_3$, and $A_4P_4$ are $3,4$, and $6$ in some order, then find the sum of all possible values of the volume of $\\mathscr R$.",
+  "image": null,
+  "choices": null,
+  "answer": "546",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Coplanarity and the central point",
+    "body": "Put $x_i=A_iP_i$ and let the base rectangle be $A_1A_2A_3A_4$ (so $A_1,A_3$ are opposite corners, as are $A_2,A_4$). Using coordinates with the vertical edges parallel to the $z$-axis, the four points $P_i=(A_i,x_i)$ are coplanar iff $P_1P_2P_3P_4$ is a parallelogram, iff $x_1+x_3=x_2+x_4$.\n\nThe three given lengths $3,4,6$ together with the fourth unknown length $x$ must satisfy this with some pairing:\n- $x<3$: the extremes are $x$ and $6$, so $x+6=3+4$, $x=1$.\n- $3\\le x\\le6$: $x+4=3+6$, $x=5$.\n- $x>6$: $x+3=4+6$, $x=7$.\n\nSo the lengths are $\\{1,3,4,6\\}$, $\\{3,4,5,6\\}$ or $\\{3,4,6,7\\}$.\n\nThe plane bisects the volume iff it passes through the centre of the prism (the cut solids are congruent by the point reflection through the centre; if the plane misses the centre, one half strictly contains the reflected image of the other). The plane's point above the centre of the base rectangle has height equal to the average of the four $x_i$, which is $\\frac{\\min+\\max}2$ (because of the parallelogram relation). The centre of the prism is at half the height $h$, so $h=\\min+\\max$:\n- $\\{1,3,4,6\\}$: $h=7$,\n- $\\{3,4,5,6\\}$: $h=9$,\n- $\\{3,4,6,7\\}$: $h=10$.\n\nThe volume is $3\\cdot7\\cdot h=21h$, and the sum of all possible volumes is $21(7+9+10)=546$.\n\n**Answer: 546**"
+   }
+  ],
+  "topics": [
+   "geometry"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "chmmc-cmm-2024-individual-07",
+  "bank": "chmmc",
+  "source": {
+   "contest": "Caltech Math Meet",
+   "paper": "2024 Individual Round",
+   "year": 2024,
+   "number": 7,
+   "url": null
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "League of Legends is a two-team video game, one team playing on the *blue side* and the other playing on the *red side*, where every game results in a win for one team and a loss for the other. The League of Legends teams T1 and JDG play a best-of-five series of games: that is, the two teams play games until one of them has won three games. In the first game, T1 plays on the blue side. In every subsequent game, the team that lost the previous game plays on the blue side. The two teams are equally matched, but \"side selection\" matters: the probability that the team on the blue side wins any particular game is $\\frac23$. After the best-of-five series, what is the expected number of games won by the team playing on the blue side?",
+  "image": null,
+  "choices": null,
+  "answer": "238/81",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Linearity of expectation",
+    "body": "Whether or not a game is played is decided by earlier games, and each game that is played is won by its blue side with probability $\\frac23$. So by linearity the expected number of blue-side wins is $\\frac23\\cdot E[\\text{number of games played}]$.\n\nCall the teams $A$ (blue in game 1) and $B$. Write series outcomes as strings of winners.\n- Ends in 3 games: $AAA$ or $BBB$. $P(AAA)=\\frac23\\cdot\\frac13\\cdot\\frac13=\\frac2{27}$ (after each $A$ win, $B$ is blue), $P(BBB)=\\frac13\\cdot\\frac13\\cdot\\frac13=\\frac1{27}$. Total $\\frac19$.\n- Ends in 4 games: the strings $ABAA,AABA,ABBB$ (first game won by $A$) have probability $2\\left(\\frac23\\right)^3\\frac13+\\left(\\frac23\\right)^2\\left(\\frac13\\right)^2=\\frac{20}{81}$, and $BABB,BBAB,BAAA$ have probability $2\\left(\\frac23\\right)^2\\left(\\frac13\\right)^2+\\frac23\\left(\\frac13\\right)^3=\\frac{10}{81}$. Total $\\frac{10}{27}$.\n\nThe 4th game is played with probability $1-\\frac19=\\frac89$ and the 5th with probability $1-\\frac19-\\frac{10}{27}=\\frac{14}{27}$. Hence the expected number of games is $3+\\frac89+\\frac{14}{27}=\\frac{119}{27}$, and the expected number of blue-side wins is $\\frac23\\cdot\\frac{119}{27}=\\frac{238}{81}$.\n\n**Answer: $\\frac{238}{81}$**"
+   },
+   {
+    "title": "Exact recursion check",
+    "body": "Let $E(a,b,\\text{blue})$ be the expected number of future blue-side wins when $A$ has $a$ wins, $B$ has $b$ wins and the given team is blue. Evaluating this recursion from $(0,0,A)$ with blue win probability $\\frac23$ (a short computation over the at most $19$ states) gives $\\frac{238}{81}$, agreeing with the count above.\n\n**Answer: $\\frac{238}{81}$**"
+   }
+  ],
+  "topics": [
+   "probability",
+   "counting"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "chmmc-cmm-2024-individual-08",
+  "bank": "chmmc",
+  "source": {
+   "contest": "Caltech Math Meet",
+   "paper": "2024 Individual Round",
+   "year": 2024,
+   "number": 8,
+   "url": null
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "For a positive integer $k\\ge2$, let $\\alpha_k,\\beta_k,\\gamma_k$ be the complex roots (with multiplicity) of the cubic equation $\\left(x-\\frac1{k-1}\\right)\\left(x-\\frac1k\\right)\\left(x-\\frac1{k+1}\\right)=\\frac1k$. Determine the value of\n$$\\sum_{k=2}^{\\infty}\\frac{\\alpha_k\\beta_k\\gamma_k\\cdot(1+\\alpha_k)(1+\\beta_k)(1+\\gamma_k)}{k+1}.$$",
+  "image": null,
+  "choices": null,
+  "answer": "27/16",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Evaluate the polynomial at 0 and -1",
+    "body": "Let $P(x)=\\left(x-\\frac1{k-1}\\right)\\left(x-\\frac1k\\right)\\left(x-\\frac1{k+1}\\right)-\\frac1k=(x-\\alpha_k)(x-\\beta_k)(x-\\gamma_k)$. Then\n$$\\alpha_k\\beta_k\\gamma_k=-P(0)=\\frac1{(k-1)k(k+1)}+\\frac1k=\\frac{k}{k^2-1},$$\n$$(1+\\alpha_k)(1+\\beta_k)(1+\\gamma_k)=-P(-1)=\\left(1+\\tfrac1{k-1}\\right)\\left(1+\\tfrac1k\\right)\\left(1+\\tfrac1{k+1}\\right)+\\frac1k=\\frac{k^2+3k-1}{k(k-1)}.$$\nThe general term is therefore\n$$\\frac{k}{k^2-1}\\cdot\\frac{k^2+3k-1}{k(k-1)}\\cdot\\frac1{k+1}=\\frac{k^2+3k-1}{(k-1)^2(k+1)^2}.$$\nPartial fractions give\n$$\\frac{k^2+3k-1}{(k-1)^2(k+1)^2}=\\left(\\frac{1/2}{k-1}-\\frac{1/2}{k+1}\\right)+\\left(\\frac{3/4}{(k-1)^2}-\\frac{3/4}{(k+1)^2}\\right).$$\nBoth parts telescope from $k=2$: the first sums to $\\frac12\\left(1+\\frac12\\right)=\\frac34$, the second to $\\frac34\\left(1+\\frac14\\right)=\\frac{15}{16}$. The total is $\\frac34+\\frac{15}{16}=\\frac{27}{16}$.\n\n**Answer: $\\frac{27}{16}$**"
+   }
+  ],
+  "topics": [
+   "algebra",
+   "sequences-series",
+   "polynomials"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "chmmc-cmm-2024-individual-09",
+  "bank": "chmmc",
+  "source": {
+   "contest": "Caltech Math Meet",
+   "paper": "2024 Individual Round",
+   "year": 2024,
+   "number": 9,
+   "url": null
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Let $ABC$ be a triangle with orthocenter $H$ and $AB=17$, $BC=28$, $CA=25$. Let $X$ be a point whose distance to $\\overline{BC}$ is $2$. Suppose $\\overline{BX}$ and $\\overline{HC}$ intersect at $Y$, and $\\overline{CX}$ and $\\overline{HB}$ intersect at $Z$, such that $YZ<BC$ and $YC\\cdot CA=ZB\\cdot BA$. Find $AX$.",
+  "image": null,
+  "choices": null,
+  "answer": "sqrt(313)",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "answerDisplay": "$\\sqrt{313}$",
+  "solutions": [
+   {
+    "title": "Reflect A over the midpoint of BC",
+    "body": "Let $A'$ be the reflection of $A$ across the midpoint of $BC$, so $ABA'C$ is a parallelogram. Since $AB\\parallel CA'$ and $AC\\parallel BA'$, we get $A'C\\perp CY$ ($CY$ lies on $CH\\perp AB$) and $A'B\\perp BZ$. The condition $YC\\cdot CA=ZB\\cdot BA$ with $CA=A'B$, $BA=A'C$ gives $\\frac{A'C}{CY}=\\frac{A'B}{BZ}$, so the right triangles $A'CY$ and $A'BZ$ are similar. If the similarity preserved orientation then $A'Y\\ge A'C$, $A'Z\\ge A'B$ would force $YZ\\ge BC$, contradicting $YZ<BC$; so it reverses orientation. By the converse of Jacobi's theorem for triangle $A'BC$ (cevians $BX$, $CX$ and $A'X$ concur with the perpendiculars to $BC$ at $B$, $C$ which meet at infinity), $X$ lies on the line through $A'$ perpendicular to $BC$.\n\nDrop $D,D'$ as the feet of the perpendiculars from $A,A'$ to $BC$. Triangle $ABD$ is an $8$-$15$-$17$ triangle and $ADC$ is $15$-$20$-$25$, so $BD=8$, $AD=15$, $DC=20$, $D'C=8$ and $DD'=12$. The point $X$ is on line $A'D'$ at distance $2$ from $BC$; only the choice on the same side as $A$ (inside the triangle's strip) makes $YZ<BC$, so $X$ is $2$ above $D'$ and its height above $A$'s foot is $15-2=13$ (vertical difference).\n\nThus $AX=\\sqrt{12^2+13^2}=\\sqrt{313}$.\n\n**Answer: $\\sqrt{313}$**"
+   },
+   {
+    "title": "Coordinate check",
+    "body": "With $B=(0,0)$, $C=(28,0)$, $A=(8,15)$, $H=\\left(8,\\frac{32}3\\right)$ and $X=(x,\\pm2)$, solving $YC\\cdot25=ZB\\cdot17$ gives (besides solutions with $YZ>28$) exactly $X=(20,2)$, for which $YZ\\approx19.5<28$. Then $AX^2=12^2+13^2=313$.\n\n**Answer: $\\sqrt{313}$**"
+   }
+  ],
+  "topics": [
+   "geometry"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "chmmc-cmm-2024-individual-10",
+  "bank": "chmmc",
+  "source": {
+   "contest": "Caltech Math Meet",
+   "paper": "2024 Individual Round",
+   "year": 2024,
+   "number": 10,
+   "url": null
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Brian and Stephanie are sitting next to each other at a round table with a number of other people (possibly 0 other people). The people at the table pass a rubber ball to each other, always to the person on their left. The ball starts with Stephanie, and arrives at Brian after exactly $2024$ passes.\n\nSuppose that after $k$ more passes ($1\\le k\\le2024$), Stephanie receives the ball again. How many possible values of $k$ are there?",
+  "image": null,
+  "choices": null,
+  "answer": "1153",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Cases for Brian's seat",
+    "body": "Let $n\\ge2$ be the number of people. Label seats $0,\\dots,n-1$ in passing order with Stephanie at $0$; Brian is at $\\pm1$.\n\n*Brian at $-1$:* $2024\\equiv-1\\pmod n$, so $n\\mid2025$, and Stephanie gets the ball again after $k$ more passes iff $n\\mid k+2024$. Such $n\\ge2$ exists iff $\\gcd(k+2024,2025)=\\gcd(k-1,2025)>1$ (take $n$ equal to this gcd).\n\n*Brian at $+1$:* $2024\\equiv1\\pmod n$, so $n\\mid2023$, and we need $n\\mid k+2024$; possible iff $\\gcd(k+2024,2023)=\\gcd(k+1,2023)>1$.\n\nSo $k$ works iff $\\gcd(k-1,2025)>1$ or $\\gcd(k+1,2023)>1$. With $2025=3^2 5^2$ and $2023=7\\cdot17^2$, count the complement: $1\\le k\\le2024$ with $3\\nmid k-1$, $5\\nmid k-1$, $7\\nmid k+1$, $17\\nmid k+1$. Shifting $k\\to k-1$, this is the number of $0\\le j\\le2023$ with $3\\nmid j$, $5\\nmid j$, $7\\nmid j+2$, $17\\nmid j+2$.\n\nBy the Chinese remainder theorem each block of $3\\cdot5\\cdot7\\cdot17=1785$ consecutive $j$ contains $2\\cdot4\\cdot6\\cdot16=768$ such values. The remaining $239$ values $j\\in[1785,2023]$ behave like $j\\in[0,238]$ (period $1785$): in $[0,209]$ there are $2\\varphi(105)=96$ values with $3,5,7$ conditions, of which $5$ ($j=32,83,134,151,202$) fail the $17$ condition, leaving $91$; in $[210,238]$ there are $15$ values with $3\\nmid j,5\\nmid j$, of which $3$ ($j=219,229,236$) fail the other conditions, leaving $12$.\n\nThe complement has $768+91+12=871$ elements, so the answer is $2024-871=1153$.\n\n**Answer: 1153**"
+   },
+   {
+    "title": "Computer check",
+    "body": "Directly testing every $k$ from $1$ to $2024$ for the existence of a table size $n$ satisfying $n\\mid 2024\\mp1$ and $n\\mid k+2024$ gives $1153$ good values.\n\n**Answer: 1153**"
+   }
+  ],
+  "topics": [
+   "number-theory",
+   "counting"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "chmmc-cmm-2024-individual-11",
+  "bank": "chmmc",
+  "source": {
+   "contest": "Caltech Math Meet",
+   "paper": "2024 Individual Round",
+   "year": 2024,
+   "number": 11,
+   "url": null
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Pick a point $P$ uniformly at random from the interior of an equilateral triangle $ABC$. What is the probability that the lengths $PA,PB,PC$ determine a non-degenerate triangle of area at least $\\frac29$ that of triangle $ABC$?",
+  "image": null,
+  "choices": null,
+  "answer": "(9+2*pi*sqrt(3))/27",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "answerDisplay": "$\\frac{9+2\\pi\\sqrt3}{27}$",
+  "solutions": [
+   {
+    "title": "Area of the triangle from PA, PB, PC",
+    "body": "Take $ABC$ with side $1$ and centroid $G$. Rotate $P$ by $60^\\circ$ about each of $A,B,C$ to get $P_A,P_B,P_C$. The triangles $PP_AB$, $P_BCP$, $AP P_C$... each have sides $PA,PB,PC$, so they are congruent to the triangle $\\Delta$ with those side lengths; the triangles $PAP_A$, $PBP_B$, $PCP_C$ are equilateral with sides $PA,PB,PC$. The hexagon $AP_ABP_BCP_C$ has area $2[ABC]$ and decomposes into these six triangles, so\n$$3[\\Delta]=2[ABC]-\\frac{\\sqrt3}4\\left(PA^2+PB^2+PC^2\\right)\\ ,\\quad [\\Delta]=\\frac13\\left(\\frac{\\sqrt3}2-\\frac{\\sqrt3}4(PA^2+PB^2+PC^2)\\right).$$\nBy Leibniz's relation $PA^2+PB^2+PC^2=GA^2+GB^2+GC^2+3GP^2=1+3GP^2$. Therefore $[\\Delta]=\\frac{\\sqrt3}{12}-\\frac{\\sqrt3}4GP^2$.\n\nThis is at least $\\frac29[ABC]=\\frac{\\sqrt3}{18}$ iff $GP^2\\le\\frac19$, i.e. $GP\\le\\frac13$ (and then $[\\Delta]>0$, so non-degenerate).\n\nThe region is the disk of radius $\\frac13$ about $G$ intersected with the triangle. The inradius is $\\frac{\\sqrt3}6<\\frac13$, so the disk sticks out across each side in a circular segment of half-angle $\\arccos\\frac{\\sqrt3/6}{1/3}=30^\\circ$. Its area is $\\pi\\cdot\\frac19-3\\cdot\\frac12\\cdot\\frac19\\left(\\frac\\pi3-\\frac{\\sqrt3}2\\right)=\\frac\\pi{18}+\\frac{\\sqrt3}{12}$. Dividing by $[ABC]=\\frac{\\sqrt3}4$:\n$$\\frac{\\pi}{18}\\cdot\\frac4{\\sqrt3}+\\frac13=\\frac{2\\pi\\sqrt3}{27}+\\frac13=\\frac{9+2\\pi\\sqrt3}{27}.$$\n\n**Answer: $\\frac{9+2\\pi\\sqrt3}{27}$**"
+   }
+  ],
+  "topics": [
+   "probability",
+   "geometry"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "chmmc-cmm-2024-individual-12",
+  "bank": "chmmc",
+  "source": {
+   "contest": "Caltech Math Meet",
+   "paper": "2024 Individual Round",
+   "year": 2024,
+   "number": 12,
+   "url": null
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Compute\n$$\\sum_{k=0}^{103}\\Big(\\lfloor k(3-\\sqrt3)\\rfloor-\\big\\lfloor\\lfloor(2-\\sqrt3)(k+1)\\rfloor\\cdot(3+\\sqrt3)\\big\\rfloor\\Big)^2$$\n(note that $\\sqrt3\\approx1.73$).",
+  "image": null,
+  "choices": null,
+  "answer": "347",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Beatty sequences",
+    "body": "Let $r=3-\\sqrt3$ and $s=3+\\sqrt3$; then $\\frac1r+\\frac1s=1$, so the Beatty sequences $\\lfloor kr\\rfloor$ and $\\lfloor ks\\rfloor$ partition the positive integers. Also $r-1=2-\\sqrt3$ and $\\lfloor(k+1)(r-1)\\rfloor=\\lfloor(k+1)r\\rfloor-(k+1)$ increases by $1$ from $k$ to $k+1$ exactly when $\\lfloor(k+1)r\\rfloor-\\lfloor kr\\rfloor=2$.\n\nAn induction over the successive $k$ with $\\lfloor(k+1)r\\rfloor-\\lfloor kr\\rfloor=2$ (using that $\\lfloor jr\\rfloor$ and $\\lfloor js\\rfloor$ never coincide) shows that for such $k$, $\\lfloor\\lfloor(k+1)(r-1)\\rfloor\\cdot s\\rfloor=\\lfloor kr\\rfloor+1$, while for the other $k$ it equals the value at the previous such $k$. So the subtracted term is determined by the position of $\\lfloor kr\\rfloor$ relative to the elements $\\lfloor js\\rfloor$.\n\nThe integers $1,\\dots,132$ are split by the multiples $\\lfloor js\\rfloor$ ($j\\le28$) into $28$ classes, each containing $3$ or $4$ elements of the $r$-sequence; counting ($104$ elements of the $r$-sequence in $[1,132]$) gives $8$ classes with $3$ elements and $20$ with $4$. A 3-element class contributes squares $1^2,2^2,1^2$, a 4-element class $1^2,2^2,3^2,1^2$. Hence the sum over $k=1,\\dots,104$ is $6\\cdot8+15\\cdot20=348$. The term $k=104$ contributes $1$ and the term $k=0$ contributes $0$, so the requested sum over $0\\le k\\le103$ is $348-1=347$.\n\n**Answer: 347**"
+   },
+   {
+    "title": "Direct computation",
+    "body": "Computing each term with exact arithmetic (high-precision $\\sqrt3$) for $k=0,1,\\dots,103$ and adding the squares gives $347$.\n\n**Answer: 347**"
+   }
+  ],
+  "topics": [
+   "number-theory",
+   "sequences-series"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "chmmc-cmm-2024-individual-13",
+  "bank": "chmmc",
+  "source": {
+   "contest": "Caltech Math Meet",
+   "paper": "2024 Individual Round",
+   "year": 2024,
+   "number": 13,
+   "url": null
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Let $N$ be the number of distinct tuples $(x_1,x_2,\\dots,x_{46})$ of positive integers with $x_1,x_2,\\dots,x_{46}\\le88$ such that the remainder when $x_1^{35}+x_2^{35}+\\cdots+x_{46}^{35}$ is divided by $2024$ is $253$. Compute the remainder when $N$ is divided by $46$.",
+  "image": null,
+  "choices": null,
+  "answer": "40",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Cyclic shifts",
+    "body": "Cyclic shifts of a solution are solutions, so $\\mathbb Z/46$ acts on the solution set and $N\\equiv$ (number of solutions with fewer than $46$ distinct shifts) $\\pmod{46}$, counted appropriately: a tuple with period $d\\mid46$ has $d$ distinct shifts and its orbit has size $d$; orbits of size $46$ contribute multiples of $46$.\n\nPeriods $d\\in\\{1,2,23,46\\}$. If $d=1$ or $d=23$ then $x_i=x_{i+23}$ for all $i$ and the sum of $35$th powers is even, impossible since $253$ is odd (and $2024$ is even). If $d=2$, then the tuple is $(a,b,a,b,\\dots)$ and $23(a^{35}+b^{35})\\equiv253\\pmod{2024}$. Dividing by $23$ ($2024=23\\cdot88$, $253=23\\cdot11$) this is $a^{35}+b^{35}\\equiv11\\pmod{88}$ with $1\\le a,b\\le88$. Then $N\\equiv$ the number of such pairs $(a,b)$ modulo $46$.\n\nBy CRT split into mod $8$ and mod $11$ (the number of $(a,b)$ with residues in each system multiplies):\n- Mod $8$: $a^{35}+b^{35}\\equiv3$. Odd residues satisfy $n^{35}\\equiv n\\pmod 8$ (as $n^2\\equiv1$), and $n^{35}$ for even $n$ is $0$ mod $8$. So one of $a,b$ is even and the other is $\\equiv3$: $4\\cdot2=8$ pairs.\n- Mod $11$: $a^{35}+b^{35}\\equiv0$. Here $n^{35}\\equiv n^5\\equiv\\pm1$ for $n\\not\\equiv0$ ($n^{10}\\equiv1$), with $5$ residues each. Either both $a,b\\equiv0$ ($1$ pair) or one has $n^5\\equiv1$, the other $-1$ ($2\\cdot5\\cdot5=50$ pairs): total $51$.\n\nSo the number of pairs is $8\\cdot51=408\\equiv40\\pmod{46}$.\n\n**Answer: 40**"
+   },
+   {
+    "title": "Computer check",
+    "body": "Computing the exact number of $46$-tuples by convolving the distribution of $x^{35}\\bmod2024$ $46$ times (exact integers) and reducing the coefficient of $253$ modulo $46$ gives $40$.\n\n**Answer: 40**"
+   }
+  ],
+  "topics": [
+   "number-theory",
+   "counting"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "chmmc-cmm-2024-individual-14",
+  "bank": "chmmc",
+  "source": {
+   "contest": "Caltech Math Meet",
+   "paper": "2024 Individual Round",
+   "year": 2024,
+   "number": 14,
+   "url": null
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Let $ABC$ be an acute triangle with $AC>AB$. Let $D,E$, and $F$ be the feet of the altitudes from $A,B$, and $C$, onto $\\overline{BC},\\overline{CA}$ and $\\overline{AB}$, respectively. Let $K$ be the intersection of $\\overline{EF}$ and $\\overline{AD}$, and let $I$ be the intersection of $\\overline{EF}$ and $\\overline{BC}$. Let $W$ be a point on ray $\\overrightarrow{BF}$ such that $\\angle IWF=\\angle FWE$. Suppose $AKBI$ is cyclic and $\\cos(\\angle BCA)=\\frac25$. Find $\\frac{WB}{WI}$.",
+  "image": null,
+  "choices": null,
+  "answer": "(7*sqrt(15)-3*sqrt(35))/10",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "answerDisplay": "$\\frac{7\\sqrt{15}-3\\sqrt{35}}{10}$",
+  "solutions": [
+   {
+    "title": "Angle chase, then similar triangles",
+    "body": "Let $H$ be the orthocenter. Since $AKBI$ is cyclic, $\\angle BAK=\\angle BIK$; expressing both angles through $B$ and $C$ by angle chasing in the orthic configuration (the official solution does this via $\\angle CBE-\\angle FEB=\\angle DAC-\\angle BAH$) gives $2B-C=90^\\circ$, so $B=45^\\circ+\\frac C2$.\n\nThe condition $\\angle IWF=\\angle FWE$ means $W$ lies on the circle $(EBI)$: indeed $\\angle BIE=\\angle BAH=\\angle FEB=\\angle IEB$ (by the cyclic condition), so for $W'$ the second intersection of $(EBI)$ with line $BF$, $\\angle IW'F=\\angle FW'E$; and $W$ is the unique such point of the ray (second intersection with the Apollonius circle), so $W=W'$ and $WIBE$ is cyclic.\n\nThen $\\angle WBI=\\angle WEI$ gives $\\triangle WIB\\sim\\triangle WFE$, so\n$$\\frac{WB}{WI}=\\frac{WE}{WF}=\\frac{IB}{IF}=\\frac{\\sin C}{\\sin B}.$$\nWith $\\cos C=\\frac25$: $\\sin C=\\frac{\\sqrt{21}}5$, and $\\sin B=\\sin(45^\\circ+\\frac C2)=\\frac{\\sqrt2}2\\left(\\cos\\frac C2+\\sin\\frac C2\\right)$ with $\\cos\\frac C2=\\sqrt{\\frac{1+\\cos C}2}=\\sqrt{\\frac7{10}}$ and $\\sin\\frac C2=\\sqrt{\\frac{1-\\cos C}2}=\\sqrt{\\frac3{10}}$. So $\\sin B=\\frac12\\left(\\sqrt{\\frac75}+\\sqrt{\\frac35}\\right)$ and\n$$\\frac{WB}{WI}=\\frac{2\\sqrt{21}/5}{\\sqrt{7/5}+\\sqrt{3/5}}=\\frac{2\\sqrt{21}}{\\sqrt{35}+\\sqrt{15}}=\\frac{2\\sqrt{21}(\\sqrt{35}-\\sqrt{15})}{20}=\\frac{7\\sqrt{15}-3\\sqrt{35}}{10}.$$\n\n**Answer: $\\frac{7\\sqrt{15}-3\\sqrt{35}}{10}$**"
+   },
+   {
+    "title": "Numerical check",
+    "body": "Constructing the triangle with $C=\\arccos\\frac25$ and $B=45^\\circ+\\frac C2$, computing $K,I$ (and verifying $A,K,B,I$ concyclic), and then locating $W$ on ray $BF$ by solving $\\angle IWF=\\angle FWE$ numerically gives $WB/WI\\approx0.93626$, which equals $\\frac{7\\sqrt{15}-3\\sqrt{35}}{10}$.\n\n**Answer: $\\frac{7\\sqrt{15}-3\\sqrt{35}}{10}$**"
+   }
+  ],
+  "topics": [
+   "geometry",
+   "trigonometry"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "chmmc-cmm-2024-individual-15",
+  "bank": "chmmc",
+  "source": {
+   "contest": "Caltech Math Meet",
+   "paper": "2024 Individual Round",
+   "year": 2024,
+   "number": 15,
+   "url": null
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "A function $f:\\{1,2,3,4,5,6,7\\}\\to\\{2,3,4,5,6\\}$ is called *roughly monotonic* if for every integer $2\\le k\\le5$ for which there is some integer $1\\le a\\le7$ with $f(a)=k$, there exist integers $1\\le a_0<b\\le7$ such that $f(a_0)=k$ and $f(b)=k+1$. Compute the number of roughly monotonic functions $f$.",
+  "image": null,
+  "choices": null,
+  "answer": "4919",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Bijection with permutations",
+    "body": "Consider the analogous functions $f:[n]\\to[n]$ with $k$ ranging over $1\\le k\\le n-1$. There is a bijection between roughly monotonic functions and permutations $\\sigma$ of $[n]$: given $\\sigma$, put $f(\\sigma^{-1}(1))=n$, and then process $j=2,\\dots,n$ in turn, setting $f(\\sigma^{-1}(j))=f(\\sigma^{-1}(j-1))$ if $j-1$ comes before $j$ in $\\sigma$, and $f(\\sigma^{-1}(j))=f(\\sigma^{-1}(j-1))-1$ otherwise. The inverse repeatedly picks the leftmost position where $f$ attains its maximum among the unassigned positions. (Checking that both maps land in the right sets and are mutually inverse is a direct induction.)\n\nThe codomain $\\{2,\\dots,6\\}$ in the problem corresponds to $f:[7]\\to[7]$ whose range has size at most $5$ (shifting values), i.e. permutations of $[7]$ that split into at most $5$ increasing runs of consecutive integers $j,j+1,\\dots$ in the sense above. The bad permutations use $6$ or $7$ such blocks. With $7$ blocks (all singletons) there is $1$ permutation. With $6$ blocks exactly one block has length $2$, namely $\\{i,i+1\\}$ for $i=1,\\dots,6$ with $i$ before $i+1$ and the rest in decreasing order of values; counting positions gives $6,20,34$ for $i=1,2,3$ and, by symmetry, $34,20,6$ for $i=4,5,6$ (sum $120$).\n\nThe number of roughly monotonic functions is therefore $7!-1-120=4919$.\n\n**Answer: 4919**"
+   },
+   {
+    "title": "Brute force",
+    "body": "A direct enumeration of all $5^7=78125$ functions $f:\\{1,\\dots,7\\}\\to\\{2,\\dots,6\\}$, testing the condition for each $k$, finds exactly $4919$ roughly monotonic functions.\n\n**Answer: 4919**"
+   }
+  ],
+  "topics": [
+   "counting",
+   "patterns"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ }
+]

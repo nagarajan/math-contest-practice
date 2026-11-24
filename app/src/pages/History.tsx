@@ -15,9 +15,13 @@ export function HistoryPage() {
   const { data, index, banks, grade, settings, setSettings } = useApp()
   const [tab, setTab] = useState<'progress' | 'exams' | 'practice' | 'topics'>('progress')
   const [open, setOpen] = useState<number | null>(null)
-  const lookup = useLookup(data.attempts.map((a) => a.grade))
-
+  const [limit, setLimit] = useState(50)
   const practice = useMemo(() => data.attempts.map((a, i) => ({ a, i })).filter((x) => x.a.mode === 'practice').reverse(), [data])
+  const recent = practice.slice(0, limit)
+  const lookup = useLookup(
+    data.attempts.map((a) => a.grade),
+    tab === 'practice' ? recent.map((x) => x.a.qid) : [],
+  )
 
   const byBank = useMemo(() => {
     const r = new Map<string, { n: number; ok: number }>()
@@ -136,7 +140,7 @@ export function HistoryPage() {
       {tab === 'practice' && (
         <div className="list">
           {!practice.length && <div className="card muted">No practice questions yet.</div>}
-          {practice.slice(0, 300).map(({ a, i }) => {
+          {recent.map(({ a, i }) => {
             const q = lookup.get(a.qid)
             if (!q) return null
             return (
@@ -164,6 +168,11 @@ export function HistoryPage() {
               </div>
             )
           })}
+          {practice.length > limit && (
+            <button className="btn ghost" onClick={() => setLimit(limit + 50)}>
+              Show more
+            </button>
+          )}
         </div>
       )}
 

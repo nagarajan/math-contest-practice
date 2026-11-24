@@ -125,7 +125,7 @@ export function ExamSetupPage({ kind }: { kind: ExamKind }) {
 export function ExamRunPage() {
   const { data, updateData, index } = useApp()
   const exam = data.examInProgress
-  const lookup = useLookup([exam?.grade])
+  const lookup = useLookup([exam?.grade], exam?.qids ?? [])
   const now = useNow(500)
   const [confirming, setConfirming] = useState(false)
   const finishing = useRef(false)
@@ -361,7 +361,7 @@ export function ExamRunPage() {
 }
 
 export function ExamReview({ exam }: { exam: ExamRecord }) {
-  const lookup = useLookup([exam.grade])
+  const lookup = useLookup([exam.grade], exam.results.map((r) => r.qid))
   const [open, setOpen] = useState<string | null>(null)
   const [filter, setFilter] = useState<'all' | 'wrong'>('all')
   const rows = exam.results.filter((r) => filter === 'all' || !r.correct)

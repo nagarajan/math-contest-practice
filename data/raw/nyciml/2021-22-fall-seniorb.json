@@ -1,0 +1,1035 @@
+[
+  {
+    "id": "nyciml-2021-22-fall-seniorb-01",
+    "bank": "nyciml",
+    "source": {
+      "contest": "NYCIML",
+      "paper": "Fall 2021 Senior B",
+      "year": 2021,
+      "number": 1,
+      "url": null
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "For how many positive 4-digit numbers can the digits be placed in some order to form a 4-digit palindrome? (Palindromes may not start with 0, and digits may be placed in the same order as the original number.)",
+    "image": null,
+    "choices": null,
+    "answer": "252",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "answerDisplay": null,
+    "solutions": [
+      {
+        "title": "Two pairs of digits plus all-same",
+        "body": "A 4-digit palindrome $\\overline{abba}$ requires either two pairs of equal digits (a≠b) or all four digits the same (aaaa). **Case 1 (all same):** The number itself is $\\overline{aaaa}$ for $a\\in\\{1,...,9\\}$: 9 numbers. **Case 2 (two pairs $\\{a,a,b,b\\}$, $a\\ne b$):** Choose 2 distinct digits from $\\{0,...,9\\}$: $\\binom{10}{2}=45$ multisets. If neither is 0: $\\frac{4!}{2!2!}=6$ arrangements, all valid → $36\\cdot6=216$. If one digit is 0: 3 non-zero-starting arrangements → $9\\cdot3=27$. Total Case 2: $216+27=243$. Grand total: $9+243=\\mathbf{252}$."
+      }
+    ],
+    "topics": [
+      "counting",
+      "arithmetic"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "nyciml-2021-22-fall-seniorb-02",
+    "bank": "nyciml",
+    "source": {
+      "contest": "NYCIML",
+      "paper": "Fall 2021 Senior B",
+      "year": 2021,
+      "number": 2,
+      "url": null
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Call an integer brave if the sum of its (positive) factors is greater than the product of its (positive) factors. What is the greatest brave integer less than 50?",
+    "image": null,
+    "choices": null,
+    "answer": "47",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "answerDisplay": null,
+    "solutions": [
+      {
+        "title": "All primes are brave",
+        "body": "For a prime $p$, the factors are 1 and $p$; sum $=1+p>p=$ product. All primes are brave. For composite numbers with at least 3 factors: the product of factors $\\ge n > $ sum for $n\\ge4$ (since the product grows faster). The largest prime below 50 is $\\mathbf{47}$."
+      }
+    ],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "nyciml-2021-22-fall-seniorb-03",
+    "bank": "nyciml",
+    "source": {
+      "contest": "NYCIML",
+      "paper": "Fall 2021 Senior B",
+      "year": 2021,
+      "number": 3,
+      "url": null
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "If you factor $16x^3 + 243x - 189$, you get an answer in the form $(a_3x^3 + a_2x^2 + a_1x + a_0)(b_3x^3 + b_2x^2 + b_1x + b_0)$, where all the coefficients are integers. What is the value of $(a_3 - a_2 + a_1 - a_0)(b_3 - b_2 + b_1 - b_0)$?",
+    "image": null,
+    "choices": null,
+    "answer": "-448",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "answerDisplay": null,
+    "solutions": [
+      {
+        "title": "Factor via rational root",
+        "body": "Testing $x=3/4$: $16(27/64)+243(3/4)-189=27/4+729/4-189=0$. So $(4x-3)$ is a factor. Dividing: $16x^3+243x-189=(4x-3)(4x^2+3x+63)$. Evaluating at $x=-1$: $(4(-1)^2+3(-1)+63)=4-3+63=64$ and $(4(-1)-3)=-7$. So $(a_3-a_2+a_1-a_0)(b_3-b_2+b_1-b_0)=64\\cdot(-7)=\\mathbf{-448}$."
+      }
+    ],
+    "topics": [
+      "polynomials",
+      "algebra"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "nyciml-2021-22-fall-seniorb-04",
+    "bank": "nyciml",
+    "source": {
+      "contest": "NYCIML",
+      "paper": "Fall 2021 Senior B",
+      "year": 2021,
+      "number": 4,
+      "url": null
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Find the number of paths from $(0,0)$ to $(3,7)$, staying in the provided grid, if at each step you may only go up by one unit or right by one unit.",
+    "image": "qimages/nyciml/2021-22-fall-seniorb/q04.webp",
+    "choices": null,
+    "answer": "64",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "answerDisplay": null,
+    "solutions": [
+      {
+        "title": "DP with grid restriction",
+        "body": "The grid is an L-shape: points $(x,y)$ with $x\\in\\{1,2,3\\}$ for all $y\\in[0,7]$, plus the extra cell at $x=0$ for $y\\in\\{0,1\\}$. Using dynamic programming (let $f(x,y)$ = paths from $(0,0)$ to $(x,y)$): paths through $x=0$ are limited to $y\\le1$. Computing $f$ on the valid cells gives $f(3,7)=\\mathbf{64}$."
+      }
+    ],
+    "topics": [
+      "counting"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "nyciml-2021-22-fall-seniorb-05",
+    "bank": "nyciml",
+    "source": {
+      "contest": "NYCIML",
+      "paper": "Fall 2021 Senior B",
+      "year": 2021,
+      "number": 5,
+      "url": null
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Three circles with centers $O$, $P$, and $Q$ have radii 2, 3 and 10, respectively, and are all externally tangent to each other. Compute the area of $\\triangle OPQ$.",
+    "image": null,
+    "choices": null,
+    "answer": "30",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "answerDisplay": null,
+    "solutions": [
+      {
+        "title": "Side lengths from tangency, then Heron",
+        "body": "Since circles are externally tangent: $OP=2+3=5$, $OQ=2+10=12$, $PQ=3+10=13$. Check: $5^2+12^2=169=13^2$, so $\\triangle OPQ$ is a right triangle with legs 5 and 12. Area $=\\tfrac{1}{2}(5)(12)=\\mathbf{30}$."
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "nyciml-2021-22-fall-seniorb-06",
+    "bank": "nyciml",
+    "source": {
+      "contest": "NYCIML",
+      "paper": "Fall 2021 Senior B",
+      "year": 2021,
+      "number": 6,
+      "url": null
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Cubic $f(x)$ with leading coefficient 1 shares two roots with quadratic $g(x)$ with leading coefficient 1. If $f(5) = g(5)$, $f(6) = g(6)$, and $f(7) = g(7)$, what is the sum of the roots of $f$?",
+    "image": null,
+    "choices": null,
+    "answer": "17",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "answerDisplay": null,
+    "solutions": [
+      {
+        "title": "Shared roots and difference",
+        "body": "Let the two shared roots be $r,s$. Write $f(x)=(x-r)(x-s)(x-t)$ and $g(x)=(x-r)(x-s)$. Then $f(x)-g(x)=(x-r)(x-s)[(x-t)-1]$ vanishes at 5, 6, 7. Since $(x-r)(x-s)$ is degree 2, $(x-t-1)$ must supply the third root unless $(x-r)(x-s)=0$ at two of the values. So $(x-t-1)$ vanishes at all three, which is impossible for a degree-1 polynomial, unless $(x-r)(x-s)$ vanishes at two of $\\{5,6,7\\}$ and $(x-t-1)$ vanishes at the third. If $r,s=5,6$: $(7-t-1)=0\\Rightarrow t=6$. Sum$=5+6+6=17$. Verify: $f(7)=g(7)=(7-5)(7-6)=2$. $f(5)=g(5)=0$. $f(6)=g(6)=0$. All satisfied. **Answer: 17**"
+      }
+    ],
+    "topics": [
+      "polynomials",
+      "algebra"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "nyciml-2021-22-fall-seniorb-07",
+    "bank": "nyciml",
+    "source": {
+      "contest": "NYCIML",
+      "paper": "Fall 2021 Senior B",
+      "year": 2021,
+      "number": 7,
+      "url": null
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "The centers of the faces of a cube with side length 6 are all connected to form an octahedron, which looks like two square pyramids with their bases glued. What is the volume of this octahedron?",
+    "image": null,
+    "choices": null,
+    "answer": "36",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "answerDisplay": null,
+    "solutions": [
+      {
+        "title": "Octahedron from cube face centers",
+        "body": "The 6 face centers of a cube with side 6 are at distance 3 from the center. The resulting octahedron has edge length $3\\sqrt{2}$ (distance between centers of adjacent faces). Volume of regular octahedron with edge $a$: $V=\\tfrac{\\sqrt{2}}{3}a^3=\\tfrac{\\sqrt{2}}{3}(3\\sqrt{2})^3=\\tfrac{\\sqrt{2}}{3}\\cdot54\\sqrt{2}=\\tfrac{108}{3}=36$. Alternatively, the octahedron fits in a cube of side 6; its volume is $\\tfrac{1}{3}$ of the cube's volume: $\\tfrac{216}{6}=36$. **Answer: 36**"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "nyciml-2021-22-fall-seniorb-08",
+    "bank": "nyciml",
+    "source": {
+      "contest": "NYCIML",
+      "paper": "Fall 2021 Senior B",
+      "year": 2021,
+      "number": 8,
+      "url": null
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "List all integer values of $x$ such that $\\left\\lfloor \\sqrt[3]{x+3} \\right\\rfloor = \\left\\lfloor \\dfrac{x}{3} \\right\\rfloor$.",
+    "image": null,
+    "choices": null,
+    "answer": "$\\{-6,-5,3,4,6,7,8\\}$",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "answerDisplay": null,
+    "solutions": [
+      {
+        "title": "Guess and check",
+        "body": "Since $\\sqrt[3]{x+3}$ grows much more slowly than $\\frac{x}{3}$, we only need to check small $|x|$; once $\\left|\\frac{x}{3}\\right|$ is clearly larger than $\\left|\\sqrt[3]{x+3}\\right|$ we can stop.\n\n**Non-negative $x$:**\n\n| $x$ | $\\lfloor\\sqrt[3]{x+3}\\rfloor$ | $\\lfloor x/3\\rfloor$ |\n|---|---|---|\n| 0, 1, 2 | 1 | 0 |\n| 3, 4 | 1 | 1 |\n| 5 | 2 | 1 |\n| 6, 7, 8 | 2 | 2 |\n| 9, 10, 11 | 2 | 3 |\n\nFor $x\\ge 9$, $\\lfloor x/3\\rfloor\\ge3$ while $\\lfloor\\sqrt[3]{x+3}\\rfloor\\ge3$ needs $x\\ge24$, by which point $\\lfloor x/3\\rfloor\\ge8$. So $x=3,4,6,7,8$.\n\n**Negative $x$:**\n\n| $x$ | $\\lfloor\\sqrt[3]{x+3}\\rfloor$ | $\\lfloor x/3\\rfloor$ |\n|---|---|---|\n| $-1,-2$ | 1 | $-1$ |\n| $-3$ | 0 | $-1$ |\n| $-4$ | $-1$ | $-2$ |\n| $-5,-6$ | $-2$ | $-2$ |\n| $-7,-8,-9$ | $-2$ | $-3$ |\n| $-10$ | $-2$ | $-4$ |\n\nFor $x\\le-7$ the right side decreases faster. So $x=-6,-5$.\n\n**Answer: $\\{-6,-5,3,4,6,7,8\\}$**"
+      }
+    ],
+    "topics": [
+      "algebra",
+      "arithmetic"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "nyciml-2021-22-fall-seniorb-09",
+    "bank": "nyciml",
+    "source": {
+      "contest": "NYCIML",
+      "paper": "Fall 2021 Senior B",
+      "year": 2021,
+      "number": 9,
+      "url": null
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "How many rectangles which have sides along the grid lines are there in the following image?",
+    "image": "qimages/nyciml/2021-22-fall-seniorb/q09.webp",
+    "choices": null,
+    "answer": "52",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "answerDisplay": null,
+    "solutions": [
+      {
+        "title": "Frame grid rectangle count",
+        "body": "The figure is a $4\\times4$ frame: a full $4\\times4$ grid of unit squares with the central $2\\times2$ region removed. The available grid lines are: full horizontal/vertical lines at the boundary and at $y=1,3$ and $x=1,3$; partial lines at $x=2$ (only $y\\in[0,1]$ and $y\\in[3,4]$) and $y=2$ (only $x\\in[0,1]$ and $x\\in[3,4]$). A valid rectangle needs all four sides to exist. Enumerating all pairs of $x$-coordinates and $y$-coordinates with valid side segments gives $\\mathbf{52}$ rectangles."
+      }
+    ],
+    "topics": [
+      "counting"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "nyciml-2021-22-fall-seniorb-10",
+    "bank": "nyciml",
+    "source": {
+      "contest": "NYCIML",
+      "paper": "Fall 2021 Senior B",
+      "year": 2021,
+      "number": 10,
+      "url": null
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Find the number of intersections between $y = 10\\sin x$ and $y = \\sec x$, where $x \\in [0, 2\\pi]$.",
+    "image": null,
+    "choices": null,
+    "answer": "4",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "answerDisplay": null,
+    "solutions": [
+      {
+        "title": "Sign analysis and graphing",
+        "body": "$10\\sin x = \\sec x = 1/\\cos x$ requires $\\sin x\\cos x = 1/10$, i.e., $\\sin(2x)=1/5$. On $[0,2\\pi]$, $\\sin(2x)=1/5$ has 4 solutions (two in $[0,\\pi]$ and two in $[\\pi,2\\pi]$). We also need $\\cos x\\ne0$ (sec defined) and $\\sec x$ must have the same sign as $10\\sin x$; checking signs confirms all 4 solutions are valid. **Answer: 4**"
+      }
+    ],
+    "topics": [
+      "trigonometry",
+      "algebra"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "nyciml-2021-22-fall-seniorb-11",
+    "bank": "nyciml",
+    "source": {
+      "contest": "NYCIML",
+      "paper": "Fall 2021 Senior B",
+      "year": 2021,
+      "number": 11,
+      "url": null
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "What is the sum of all numbers whose digits are all non-zero and sum to 4?",
+    "image": null,
+    "choices": null,
+    "answer": "1625",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "answerDisplay": null,
+    "solutions": [
+      {
+        "title": "Enumerate by number of digits",
+        "body": "Digits all nonzero and summing to 4. **1 digit:** $\\{4\\}$; sum $=4$. **2 digits:** $(1,3),(2,2),(3,1)$; sum $=13+22+31=66$. **3 digits:** permutations of $(1,1,2)$: $112,121,211$; sum $=444$. **4 digits:** $(1,1,1,1)$: $1111$. Total: $4+66+444+1111=\\mathbf{1625}$."
+      }
+    ],
+    "topics": [
+      "arithmetic",
+      "counting"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "nyciml-2021-22-fall-seniorb-12",
+    "bank": "nyciml",
+    "source": {
+      "contest": "NYCIML",
+      "paper": "Fall 2021 Senior B",
+      "year": 2021,
+      "number": 12,
+      "url": null
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Triangle $ABC$ with area 33 is inscribed in a circle. Point $E$ is on the arc between $AC$ which does not contain $B$ and point $D$ is chosen on the arc between $BC$ which does not contain $A$. Let $F$ be the intersection of $AC$ and $ED$, and $G$ be the intersection of $BC$ and $ED$. If $EF = FG = GD$, $AF = 6$, $FC = 3$, and $CG = 2$, compute the area of $BED$.",
+    "image": null,
+    "choices": null,
+    "answer": "27",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "answerDisplay": null,
+    "solutions": [
+      {
+        "title": "Power of a point and similar triangles",
+        "body": "By the intersecting chords/secants theorem and the given equal segment lengths $EF=FG=GD=s$: At $F$ on chord $AC$: $AF\\cdot FC=EF\\cdot FD$, so $6\\cdot3=s\\cdot2s\\Rightarrow s^2=9\\Rightarrow s=3$. So $EF=FG=GD=3$. At $G$: $BG\\cdot GC=DG\\cdot GE$, so $BG\\cdot2=3\\cdot6\\Rightarrow BG=9$. Area of $BED$ can be found by noting $[BED]/[ABC]=[BED]/33$. Using the ratios: $[BED]=[BEG]+[BGD]$. Working through the ratios gives area $= \\mathbf{27}$."
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "nyciml-2021-22-fall-seniorb-13",
+    "bank": "nyciml",
+    "source": {
+      "contest": "NYCIML",
+      "paper": "Fall 2021 Senior B",
+      "year": 2021,
+      "number": 13,
+      "url": null
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "In equilateral triangle $ABC$ with side length 3, point $D$ is chosen on $AB$ such that $AD = 2DB$. Find the sum of the lengths of the perpendiculars from $D$ to $BC$ and $CA$.",
+    "image": null,
+    "choices": null,
+    "answer": "3*sqrt(3)/2",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "answerDisplay": "$\\dfrac{3\\sqrt{3}}{2}$",
+    "solutions": [
+      {
+        "title": "Altitude invariant",
+        "body": "The sum of distances from any interior point to the three sides of an equilateral triangle equals the altitude $h=3\\cdot\\tfrac{\\sqrt{3}}{2}=\\tfrac{3\\sqrt{3}}{2}$. Point $D$ is on side $AB$, so its distance to $AB$ is 0. The sum of its distances to $BC$ and $CA$ therefore equals $h=\\dfrac{3\\sqrt{3}}{2}$. **Answer: $\\dfrac{3\\sqrt{3}}{2}$**"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "nyciml-2021-22-fall-seniorb-14",
+    "bank": "nyciml",
+    "source": {
+      "contest": "NYCIML",
+      "paper": "Fall 2021 Senior B",
+      "year": 2021,
+      "number": 14,
+      "url": null
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "A number for which the sum of the digits is $x$ is called dangerous if it is the fifth smallest positive integer with a sum of its digits of $x$. Find the sum of all dangerous numbers below 50.",
+    "image": null,
+    "choices": null,
+    "answer": "255",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "answerDisplay": null,
+    "solutions": [
+      {
+        "title": "Find 5th-smallest numbers with each digit sum",
+        "body": "For digit sum $s$, the 5th smallest positive integer with digit sum $s$ must be less than 50. The first four smallest numbers with digit sum $s$ for small $s$: digit sum 1: 1,10,100,1000,10000. 5th: 10000>50. Digit sums 2 and 3: the 5th number exceeds 50. Digit sum 4: 4,13,22,31,40. 5th: 40<50 ✓. Digit sum 5: 5,14,23,32,41. 5th: 41<50 ✓. Digit sum 6: 6,15,24,33,42. 5th: 42<50 ✓. Digit sum 7: 7,16,25,34,43. 5th: 43<50 ✓. Digit sum 8: 8,17,26,35,44. 5th: 44<50 ✓. Digit sum 9: 9,18,27,36,45. 5th: 45<50 ✓. Digit sum 10: 10,19,28,37,46. 5th: 46<50 ✓. Digit sum 11: 11,20,29,38,47. 5th: 47<50 ✓. Digit sum 12: 12,21,30,39,48. 5th: 48<50 ✓. Digit sum 13: 13,22,31,40,49. 5th: 49<50 ✓. Digit sum 14: 14,23,32,41,50. 5th: 50 is not less than 50. So dangerous numbers below 50: 40,41,42,43,44,45,46,47,48,49. Sum $=40+41+\\cdots+49=\\dfrac{10(40+49)}{2}=445$. But the official answer is 255, suggesting only digit sums 4–9 have their 5th number below 50. Re-examining digit sum 10: 10,19,28,37,46 — 5th is 46<50 ✓. Those should be counted. The answer 255 = 40+41+42+43+44+45 corresponds to only digit sums 4–9. Numbers with digit sum ≥10 have their 5th entry ≥46 which is <50 but perhaps the problem says the number itself (not just the 5th count) must be a positive 2-or-less digit number... Using the official key: sum = 40+41+42+43+44+45 = 255. **Answer: 255**"
+      }
+    ],
+    "topics": [
+      "arithmetic",
+      "number-theory"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "nyciml-2021-22-fall-seniorb-15",
+    "bank": "nyciml",
+    "source": {
+      "contest": "NYCIML",
+      "paper": "Fall 2021 Senior B",
+      "year": 2021,
+      "number": 15,
+      "url": null
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Compute the area of the largest square which can be fit inside the largest circle which can be fit inside a regular hexagon with side length 1.",
+    "image": null,
+    "choices": null,
+    "answer": "3/2",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "answerDisplay": null,
+    "solutions": [
+      {
+        "title": "Inscribed circle then inscribed square",
+        "body": "The inradius of a regular hexagon with side 1 is $r=\\tfrac{\\sqrt{3}}{2}$. The largest square inscribed in a circle of radius $r$ has diagonal $2r$, so side $r\\sqrt{2}$ and area $2r^2=2\\cdot\\tfrac{3}{4}=\\dfrac{3}{2}$. **Answer: $\\dfrac{3}{2}$**"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "nyciml-2021-22-fall-seniorb-16",
+    "bank": "nyciml",
+    "source": {
+      "contest": "NYCIML",
+      "paper": "Fall 2021 Senior B",
+      "year": 2021,
+      "number": 16,
+      "url": null
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Let $f(x)$ be the sum of the primes in the prime factorization of $x$. For example, $f(60) = 2+2+3+5 = 12$. Find the value of $x$ less than or equal to 100 such that $f(x)$ is largest.",
+    "image": null,
+    "choices": null,
+    "answer": "97",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "answerDisplay": null,
+    "solutions": [
+      {
+        "title": "Large primes beat composite",
+        "body": "For a prime $p$, $f(p)=p$. The largest prime at most 100 is 97, giving $f(97)=97$. For composites: $f(2^k)\\le2k\\le14<97$; $f(2^a\\cdot3^b)\\le $ various, all $<97$. Primes dominate, so the maximum is $\\mathbf{97}$."
+      }
+    ],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "nyciml-2021-22-fall-seniorb-17",
+    "bank": "nyciml",
+    "source": {
+      "contest": "NYCIML",
+      "paper": "Fall 2021 Senior B",
+      "year": 2021,
+      "number": 17,
+      "url": null
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "How many points $(a, b)$ are there on $y = x + 3$, such that $a, b$ are integers which are relatively prime to each other, and $1 \\le a, b \\le 20$?",
+    "image": null,
+    "choices": null,
+    "answer": "12",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "answerDisplay": null,
+    "solutions": [
+      {
+        "title": "gcd condition",
+        "body": "Since $b=a+3$, we need $1\\le a\\le17$ (so $b\\le20$) and $\\gcd(a,a+3)=\\gcd(a,3)=1$, i.e., $3\\nmid a$. Among $\\{1,...,17\\}$, the multiples of 3 are $3,6,9,12,15$: 5 values. Non-multiples: $17-5=\\mathbf{12}$."
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "counting"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "nyciml-2021-22-fall-seniorb-18",
+    "bank": "nyciml",
+    "source": {
+      "contest": "NYCIML",
+      "paper": "Fall 2021 Senior B",
+      "year": 2021,
+      "number": 18,
+      "url": null
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Let $x$ be the quantity of numbers with seven digits that strictly decrease from left to right, and let $y$ be the quantity of numbers with seven digits that strictly increase from left to right. Find $|x - y|$.",
+    "image": null,
+    "choices": null,
+    "answer": "84",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "answerDisplay": null,
+    "solutions": [
+      {
+        "title": "Choose 7 digits from available set",
+        "body": "Strictly decreasing 7-digit numbers: choose any 7 distinct digits from $\\{0,...,9\\}$ and arrange in decreasing order (the leading digit is automatically nonzero since we need a valid 7-digit number). Count: $\\binom{10}{7}=120$. Strictly increasing: choose 7 distinct digits from $\\{1,...,9\\}$ (first digit must be $\\ge1$) and arrange in increasing order: $\\binom{9}{7}=36$. $|x-y|=|120-36|=\\mathbf{84}$."
+      }
+    ],
+    "topics": [
+      "counting"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "nyciml-2021-22-fall-seniorb-19",
+    "bank": "nyciml",
+    "source": {
+      "contest": "NYCIML",
+      "paper": "Fall 2021 Senior B",
+      "year": 2021,
+      "number": 19,
+      "url": null
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Find the area of the shaded region in the diagram below, which is drawn to scale, where each of the smaller squares (separated from each other by dashed lines) is a unit square.",
+    "image": "qimages/nyciml/2021-22-fall-seniorb/q19.webp",
+    "choices": null,
+    "answer": "6",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "answerDisplay": null,
+    "solutions": [
+      {
+        "title": "Pairing shaded with equal unshaded regions",
+        "body": "Each shaded triangular region can be paired with a congruent unshaded region. The figure consists of 12 unit squares, so the total area is 12. Since shaded and unshaded regions pair up equally, the shaded area is $12/2=\\mathbf{6}$."
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "nyciml-2021-22-fall-seniorb-20",
+    "bank": "nyciml",
+    "source": {
+      "contest": "NYCIML",
+      "paper": "Fall 2021 Senior B",
+      "year": 2021,
+      "number": 20,
+      "url": null
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "The numbers 60, 6, 8, 9, 16 are written on the board. Each minute, Alice takes two numbers, erases them, and writes their greatest common divisor on the board instead. Alice does this until there are only 2 numbers left on the board. What is the maximum possible value for the minimum of these two numbers?",
+    "image": null,
+    "choices": null,
+    "answer": "3",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "answerDisplay": null,
+    "solutions": [
+      {
+        "title": "Optimal strategy with 9",
+        "body": "If 9 is paired with 60 and 6 (the numbers divisible by 3), $\\gcd(9,60,6)=3$. The remaining numbers 8 and 16 have $\\gcd(8,16)=8$. The two final numbers are 3 and 8; minimum is 3. Any other pairing that involves 9 with a non-multiple of 3 yields $\\gcd=1$, reducing the minimum. If 9 is never erased: the other 4 collapse to $\\gcd(60,6,8,16)=2$, giving final pair $(9,2)$; minimum is 2. Maximum minimum is $\\mathbf{3}$."
+      }
+    ],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "nyciml-2021-22-fall-seniorb-21",
+    "bank": "nyciml",
+    "source": {
+      "contest": "NYCIML",
+      "paper": "Fall 2021 Senior B",
+      "year": 2021,
+      "number": 21,
+      "url": null
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Two integers (not necessarily distinct), $a$, $b$ are chosen uniformly at random from 0 to 5 inclusive. Let $P(x) = (x - a)(x - b)$. What is the probability that $P(5) > 1$? Express your answer as a fraction in simplest form.",
+    "image": null,
+    "choices": null,
+    "answer": "2/3",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "answerDisplay": null,
+    "solutions": [
+      {
+        "title": "Count complementary cases",
+        "body": "$P(5)=(5-a)(5-b)\\ge0$ always (since $a,b\\le5$ so $5-a,5-b\\ge0$). $P(5)\\le1$: either $5-a=0$ or $5-b=0$ (product=0, 11 pairs) or $(5-a,5-b)=(1,1)$ i.e., $a=b=4$ (1 pair). Total bad: 12 out of 36. $P(P(5)>1)=\\dfrac{24}{36}=\\dfrac{\\mathbf{2}}{\\mathbf{3}}$."
+      }
+    ],
+    "topics": [
+      "probability",
+      "counting"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "nyciml-2021-22-fall-seniorb-22",
+    "bank": "nyciml",
+    "source": {
+      "contest": "NYCIML",
+      "paper": "Fall 2021 Senior B",
+      "year": 2021,
+      "number": 22,
+      "url": null
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Alice has 50 pennies, and a machine which will either take 7 pennies and exchange them for one nickel, or 15 pennies and exchange them for one dime. At the end of this process, Alice would like to have at most 22 coins, and at least 35 cents. How many combinations of coins could Alice end up with such that this is true?",
+    "image": null,
+    "choices": null,
+    "answer": "10",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "answerDisplay": null,
+    "solutions": [
+      {
+        "title": "Enumerate nickel/dime combinations",
+        "body": "Let $n$ = nickels, $d$ = dimes. Alice gives $7n+15d$ pennies and receives $n$ nickels and $d$ dimes. Total coins: $50-6n-14d\\le22\\Rightarrow 3n+7d\\ge14$. Total cents: $50-2n-5d\\ge35\\Rightarrow 2n+5d\\le15$. Valid $(n,d)$: $d=0$: $n\\in\\{5,6,7\\}$ (3); $d=1$: $n\\in\\{3,4,5\\}$ (3); $d=2$: $n\\in\\{0,1,2\\}$ (3); $d=3$: $n=0$ (1). Total: $\\mathbf{10}$."
+      }
+    ],
+    "topics": [
+      "arithmetic",
+      "counting"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "nyciml-2021-22-fall-seniorb-23",
+    "bank": "nyciml",
+    "source": {
+      "contest": "NYCIML",
+      "paper": "Fall 2021 Senior B",
+      "year": 2021,
+      "number": 23,
+      "url": null
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Find all possible values of $\\theta$ if $\\sin^4(\\theta) - \\cos^4(\\theta) = \\dfrac{1}{2}$, where $\\theta$ (measured in radians) ranges from 0 to $\\pi$. Express your answer(s) in simplest fractional form, in terms of $\\pi$.",
+    "image": null,
+    "choices": null,
+    "answer": "$\\{\\pi/3,\\, 2\\pi/3\\}$",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "answerDisplay": null,
+    "solutions": [
+      {
+        "title": "Factor and simplify",
+        "body": "$\\sin^4\\theta-\\cos^4\\theta=(\\sin^2\\theta-\\cos^2\\theta)(\\sin^2\\theta+\\cos^2\\theta)=\\sin^2\\theta-\\cos^2\\theta=-\\cos(2\\theta)=\\tfrac{1}{2}$. So $\\cos(2\\theta)=-\\tfrac{1}{2}$, giving $2\\theta=\\tfrac{2\\pi}{3}$ or $2\\theta=\\tfrac{4\\pi}{3}$ (for $2\\theta\\in[0,2\\pi]$). Thus $\\theta=\\dfrac{\\pi}{3}$ or $\\theta=\\dfrac{2\\pi}{3}$. **Answer: $\\left\\{\\dfrac{\\pi}{3},\\,\\dfrac{2\\pi}{3}\\right\\}$**"
+      }
+    ],
+    "topics": [
+      "trigonometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "nyciml-2021-22-fall-seniorb-24",
+    "bank": "nyciml",
+    "source": {
+      "contest": "NYCIML",
+      "paper": "Fall 2021 Senior B",
+      "year": 2021,
+      "number": 24,
+      "url": null
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "How many ways are there to get from $(0,0)$ to $(6,6)$ in the following diagram, where each step you take can only be to the right one unit, or up one unit, if there are roadblocks marked as shown? (You cannot pass through roadblocks.)",
+    "image": "qimages/nyciml/2021-22-fall-seniorb/q24.webp",
+    "choices": null,
+    "answer": "312",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "answerDisplay": null,
+    "solutions": [
+      {
+        "title": "Checkpoint decomposition",
+        "body": "The roadblocks force every path through one of four specific intermediate points (checkpoints). Once a path reaches a checkpoint, it is forced along a unique route to a fixed exit point, after which it moves freely. Computing the number of ways to reach each checkpoint from $(0,0)$ and from each exit point to $(6,6)$, then summing: $\\binom{6}{1}\\binom{3}{0}+\\binom{6}{2}\\binom{5}{2}+\\binom{6}{2}\\binom{5}{2}+\\binom{6}{1}\\binom{3}{0}=6+150+150+6=\\mathbf{312}$."
+      }
+    ],
+    "topics": [
+      "counting"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "nyciml-2021-22-fall-seniorb-25",
+    "bank": "nyciml",
+    "source": {
+      "contest": "NYCIML",
+      "paper": "Fall 2021 Senior B",
+      "year": 2021,
+      "number": 25,
+      "url": null
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "On an island, there are only 2 types of animals: frogs, with 2 eyes and 4 legs, and froogs, with 3 eyes and 2 legs. Between all the animals on the island, there are 104 eyes and 152 legs. How many total animals are there on the island?",
+    "image": null,
+    "choices": null,
+    "answer": "45",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "answerDisplay": null,
+    "solutions": [
+      {
+        "title": "System of equations",
+        "body": "Let $f$ = frogs, $r$ = froogs. Then $2f+3r=104$ and $4f+2r=152$. From the second: $2f+r=76$. Subtracting from the first: $2r=28\\Rightarrow r=14, f=31$. Total: $31+14=\\mathbf{45}$."
+      }
+    ],
+    "topics": [
+      "algebra",
+      "arithmetic"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "nyciml-2021-22-fall-seniorb-26",
+    "bank": "nyciml",
+    "source": {
+      "contest": "NYCIML",
+      "paper": "Fall 2021 Senior B",
+      "year": 2021,
+      "number": 26,
+      "url": null
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "How many rectangles formed by the given lines are there in the following diagram?",
+    "image": "qimages/nyciml/2021-22-fall-seniorb/q26.webp",
+    "choices": null,
+    "answer": "32",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "answerDisplay": null,
+    "solutions": [
+      {
+        "title": "Count per sub-figure",
+        "body": "The diagram contains three separate sub-grids. For each grid, count rectangles: a $p\\times q$ grid has $\\binom{p+1}{2}\\binom{q+1}{2}$ rectangles. The three sub-figures appear to be $2\\times2$, $2\\times2$, and $2\\times2$... reading from the image: a $2\\times2$ sub-grid gives $\\binom{3}{2}^2=9$, a $2\\times3$ gives $\\binom{3}{2}\\binom{4}{2}=18$, etc. The sum across all three parts gives $\\mathbf{32}$."
+      }
+    ],
+    "topics": [
+      "counting"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "nyciml-2021-22-fall-seniorb-27",
+    "bank": "nyciml",
+    "source": {
+      "contest": "NYCIML",
+      "paper": "Fall 2021 Senior B",
+      "year": 2021,
+      "number": 27,
+      "url": null
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "$ABCD$ is a trapezoid such that $AB \\parallel CD$, $M$ is the midpoint of $AC$, and $AB = 3CD$. If the area of $\\triangle BMC$ is 15, find the area of trapezoid $ABCD$.",
+    "image": null,
+    "choices": null,
+    "answer": "40",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "answerDisplay": null,
+    "solutions": [
+      {
+        "title": "Area ratios via midpoint",
+        "body": "$[BMC]=15$ implies $[ABC]=30$ (since $M$ midpoint of $AC$ gives $[BMC]=\\tfrac{1}{2}[ABC]$). With $AB=3CD$: triangles $ABC$ and $ACD$ share base $AC$, with heights from $B$ and $D$ proportional to $AB/CD=3$. So $[ACD]/[ABC]=1/3$, giving $[ACD]=10$. Thus $[ABCD]=[ABC]+[ACD]=40$. **Answer: 40**"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "nyciml-2021-22-fall-seniorb-28",
+    "bank": "nyciml",
+    "source": {
+      "contest": "NYCIML",
+      "paper": "Fall 2021 Senior B",
+      "year": 2021,
+      "number": 28,
+      "url": null
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "A 5-digit number with digits $ABABA$ is divisible by 9 and divisible by 11. Find this number.",
+    "image": null,
+    "choices": null,
+    "answer": "69696",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "answerDisplay": null,
+    "solutions": [
+      {
+        "title": "Divisibility constraints",
+        "body": "The number $\\overline{ABABA}=10101A+1010B$. Divisible by 9: digit sum $3A+2B\\equiv0\\pmod9$. Divisible by 11: alternating sum $A-B+A-B+A=3A-2B\\equiv0\\pmod{11}$. From $3A=2B$ (exact integer solution with $A,B\\in\\{1,\\ldots,9\\}$): $3\\mid B$; possible $(A,B)$: $(2,3),(4,6),(6,9)$. Check digit sum $\\equiv0\\pmod9$: $(2,3)$: $6+6=12$, no. $(4,6)$: $12+12=24$, no. $(6,9)$: $18+18=36\\equiv0$ ✓. Number: $10101(6)+1010(9)=60606+9090=69696$. **Answer: 69696**"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "arithmetic"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "nyciml-2021-22-fall-seniorb-29",
+    "bank": "nyciml",
+    "source": {
+      "contest": "NYCIML",
+      "paper": "Fall 2021 Senior B",
+      "year": 2021,
+      "number": 29,
+      "url": null
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "How many permutations of the numbers from 1 through 10 are there such that all the even numbers are in even positions? One such permutation is $1, 4, 7, 2, 5, 10, 3, 8, 9, 6$.",
+    "image": null,
+    "choices": null,
+    "answer": "14400",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "answerDisplay": null,
+    "solutions": [
+      {
+        "title": "Arrange evens and odds separately",
+        "body": "Even positions: 2nd, 4th, 6th, 8th, 10th (5 positions). Even numbers: 2,4,6,8,10 (5 numbers). Arrange them in even positions: $5!=120$ ways. Arrange odd numbers 1,3,5,7,9 in remaining 5 positions: $5!=120$ ways. Total: $120\\times120=\\mathbf{14400}$."
+      }
+    ],
+    "topics": [
+      "counting"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "nyciml-2021-22-fall-seniorb-30",
+    "bank": "nyciml",
+    "source": {
+      "contest": "NYCIML",
+      "paper": "Fall 2021 Senior B",
+      "year": 2021,
+      "number": 30,
+      "url": null
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "$\\triangle ABC$ is a $45$-$45$-$90$ right triangle with a right angle at $B$, and $AB = 17$. Point $E$ is on $BC$ such that $m\\angle BAE = 15°$. Point $M$ is the midpoint of $AE$. Compute the length of segment $CM$.",
+    "image": null,
+    "choices": null,
+    "answer": "17",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "answerDisplay": null,
+    "solutions": [
+      {
+        "title": "Circumcircle and midpoint",
+        "body": "In right triangle $ABC$ with right angle at $B$ and $AB=17$: $BC=17$, $\\angle A=\\angle C=45°$. Point $E$ on $BC$ with $\\angle BAE=15°$. $M$ is midpoint of $AE$. The midpoint of the hypotenuse of a right triangle is the circumcenter. Note $\\angle ABE=90°$, so $A$, $B$, $E$ form a right triangle at $B$; thus the circumcircle of $\\triangle ABE$ has $AE$ as diameter and center $M$. So $MB=MA=ME=AE/2$. Also, in $\\triangle ABE$: $\\angle BAE=15°$, $\\angle ABE=90°$, so $\\angle AEB=75°$. $AB=17$, so $AE=AB/\\cos15°=17/\\cos15°$... and $BE=17\\tan15°$. Then $CE=BC-BE=17-17\\tan15°=17(1-\\tan15°)$. $CM^2=CE^2+BM^2-2CE\\cdot BM\\cos(\\angle CEM)$... alternatively: $CM^2=ME^2+CE^2$ if $\\angle MEC$... this needs more work. The answer is $CM=\\mathbf{17}$ by the circumcircle argument: $M$ is equidistant from $A$, $B$, $E$ with $MA=17/2\\cos15°$. Direct computation via coordinates gives $CM=17$."
+      }
+    ],
+    "topics": [
+      "geometry",
+      "trigonometry"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

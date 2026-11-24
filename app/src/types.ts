@@ -86,6 +86,8 @@ export interface Question {
   solutions?: Solution[]
   /** Solutions file under banks/sol/ ("<bank>/<paper>"), null when the question has none. */
   sol?: string | null
+  /** Text, choices and answers file under banks/c/ ("<bank>/<paper>-<hash>"), loaded when shown. */
+  cfile?: string
   topics: string[]
   difficulty: 1 | 2 | 3
   reviewNote?: string | null

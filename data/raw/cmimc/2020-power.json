@@ -1,0 +1,817 @@
+[
+ {
+  "id": "cmimc-2020-power-01a",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Power Round: Coding Theory",
+   "year": 2020,
+   "number": 1,
+   "url": "https://cmimc.com/archive/cmimc2020/2020_Power.pdf"
+  },
+  "grade": "9-12",
+  "points": 1,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "**Problem 2.1(i) (1 point).** Alice sends messages to Bob over a noisy channel. A *message* is a sequence of $k$ symbols from a finite alphabet $\\Sigma$ (e.g. $\\Sigma_2=\\{0,1\\}$, and $\\Sigma_q=\\{0,1,\\dots,q-1\\}$). A (block) *code* $C\\subseteq\\Sigma^n$ has *block length* $n$; its elements are *codewords*. An *encoding map* $E:\\Sigma^k\\to\\Sigma^n$ is injective, and the code is its image $C=E(\\Sigma^k)$. To send $m$, Alice transmits $E(m)$; the channel may introduce *erasures* (symbols replaced by '?') and/or *errors* (symbols changed into other symbols), and Bob must be able to recover $m$ from the corrupted word.\n\nAlice encodes a message $m$ by repeating each of its symbols a fixed number of times (a repetition code). Suppose the channel can introduce up to $t$ erasures. How many times should each symbol be repeated to ensure that the original message can always be recovered?",
+  "image": null,
+  "choices": null,
+  "answer": "Each symbol should be repeated $t+1$ times (and $t$ repetitions are not enough).",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Sufficient and necessary",
+    "body": "*Sufficient.* If each symbol is written $t+1$ times, then at most $t$ erasures cannot erase all $t+1$ copies of any symbol, so at least one copy of each symbol survives and is read off directly.\n\n*Necessary.* With only $t$ copies of a symbol (or fewer), the channel can erase all of them, and then that symbol of the message is completely lost (both values are possible).\n\nSo the repetition factor is $t+1$.\n\n**Answer: $t+1$**"
+   }
+  ],
+  "topics": [
+   "counting",
+   "logic"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2020-power-01b",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Power Round: Coding Theory",
+   "year": 2020,
+   "number": 1,
+   "url": "https://cmimc.com/archive/cmimc2020/2020_Power.pdf"
+  },
+  "grade": "9-12",
+  "points": 1,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "**Problem 2.1(ii) (1 point).** Alice sends messages to Bob over a noisy channel. A *message* is a sequence of $k$ symbols from a finite alphabet $\\Sigma$ (e.g. $\\Sigma_2=\\{0,1\\}$, and $\\Sigma_q=\\{0,1,\\dots,q-1\\}$). A (block) *code* $C\\subseteq\\Sigma^n$ has *block length* $n$; its elements are *codewords*. An *encoding map* $E:\\Sigma^k\\to\\Sigma^n$ is injective, and the code is its image $C=E(\\Sigma^k)$. To send $m$, Alice transmits $E(m)$; the channel may introduce *erasures* (symbols replaced by '?') and/or *errors* (symbols changed into other symbols), and Bob must be able to recover $m$ from the corrupted word.\n\nAlice encodes a message $m$ over a binary alphabet by repeating each symbol a fixed number of times. Now suppose the channel can introduce up to $t$ errors (and no erasures). How many times should each symbol be repeated to ensure that the original message can always be recovered?",
+  "image": null,
+  "choices": null,
+  "answer": "Each symbol should be repeated $2t+1$ times (and $2t$ is not enough).",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Majority vote",
+    "body": "*Sufficient.* With $2t+1$ copies of a symbol, at most $t$ copies are altered in total, so at least $t+1$ copies are still correct and at most $t$ are wrong. The majority of the $2t+1$ received copies is the original symbol.\n\n*Necessary.* With only $2t$ copies of a symbol (or fewer), suppose the received block has $t$ copies of $0$ and $t$ copies of $1$. This could come from the symbol $0$ with $t$ errors or from the symbol $1$ with $t$ errors, so Bob cannot decide. (Fewer than $2t$ copies is worse.)\n\n**Answer: $2t+1$**"
+   }
+  ],
+  "topics": [
+   "counting",
+   "logic"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2020-power-02",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Power Round: Coding Theory",
+   "year": 2020,
+   "number": 2,
+   "url": "https://cmimc.com/archive/cmimc2020/2020_Power.pdf"
+  },
+  "grade": "9-12",
+  "points": 2,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "**Problem 2.2 (2 points).** Alice sends messages to Bob over a noisy channel. A *message* is a sequence of $k$ symbols from a finite alphabet $\\Sigma$ (e.g. $\\Sigma_2=\\{0,1\\}$, and $\\Sigma_q=\\{0,1,\\dots,q-1\\}$). A (block) *code* $C\\subseteq\\Sigma^n$ has *block length* $n$; its elements are *codewords*. An *encoding map* $E:\\Sigma^k\\to\\Sigma^n$ is injective, and the code is its image $C=E(\\Sigma^k)$. To send $m$, Alice transmits $E(m)$; the channel may introduce *erasures* (symbols replaced by '?') and/or *errors* (symbols changed into other symbols), and Bob must be able to recover $m$ from the corrupted word.\n\nDevise a code/encoding map with the smallest possible block length for sending the message set $\\Sigma_2^k$ across a channel which can introduce at most one erasure and no errors.",
+  "image": null,
+  "choices": null,
+  "answer": "Append the parity bit $p=m_1\\oplus\\cdots\\oplus m_k$: $E(m)=m_1\\dots m_kp$, block length $n=k+1$, which is optimal.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Parity check bit",
+    "body": "Define $E(m_1\\dots m_k)=m_1\\dots m_k\\,p$ with $p=m_1\\oplus m_2\\oplus\\cdots\\oplus m_k$ (addition mod $2$). Block length $n=k+1$.\n\n*Decoding.* If the erased symbol is $p$, the message is intact. If the erased symbol is $m_i$, then $m_i=p\\oplus\\bigoplus_{j\\ne i}m_j$ (since the total XOR of all $k+1$ symbols is $0$).\n\n*Optimality.* $E$ is injective, so $2^k\\le2^n$ and $n\\ge k$. If $n=k$, then $E$ is a bijection onto $\\Sigma_2^k$, so the code contains two words that differ only in the first coordinate; erasing that coordinate leaves them indistinguishable. Hence $n\\ge k+1$.\n\n**Answer: parity-bit code, $n=k+1$**"
+   }
+  ],
+  "topics": [
+   "logic",
+   "counting"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2020-power-03",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Power Round: Coding Theory",
+   "year": 2020,
+   "number": 3,
+   "url": "https://cmimc.com/archive/cmimc2020/2020_Power.pdf"
+  },
+  "grade": "9-12",
+  "points": 6,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "**Problem 2.3 (6 points).** Alice sends messages to Bob over a noisy channel. A *message* is a sequence of $k$ symbols from a finite alphabet $\\Sigma$ (e.g. $\\Sigma_2=\\{0,1\\}$, and $\\Sigma_q=\\{0,1,\\dots,q-1\\}$). A (block) *code* $C\\subseteq\\Sigma^n$ has *block length* $n$; its elements are *codewords*. An *encoding map* $E:\\Sigma^k\\to\\Sigma^n$ is injective, and the code is its image $C=E(\\Sigma^k)$. To send $m$, Alice transmits $E(m)$; the channel may introduce *erasures* (symbols replaced by '?') and/or *errors* (symbols changed into other symbols), and Bob must be able to recover $m$ from the corrupted word.\n\nDevise a code/encoding map for sending the message set $\\Sigma_2^k$ across a channel which can introduce at most one error and no erasures. Your code should have block length $n\\le2k+1$. You may assume that $k$ is sufficiently large. (In the contest, points were awarded based on how small the block length is.)",
+  "image": null,
+  "choices": null,
+  "answer": "Arrange the $k$ bits in a $\\lceil\\sqrt k\\rceil\\times\\lceil\\sqrt k\\rceil$ array (padding with known zeros) and append row parities and column parities: $n=k+2\\lceil\\sqrt k\\rceil\\le2k+1$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Row and column parities",
+    "body": "Let $r=\\lceil\\sqrt k\\rceil$. Write the message bits $m_1,\\dots,m_k$ row by row into an $r\\times r$ array $A$ and fill the remaining $r^2-k$ cells with $0$ (these padding cells are known to Bob and are not transmitted). Let $\\rho_i$ be the parity (XOR) of row $i$ and $\\gamma_j$ the parity of column $j$. Transmit\n\n$$E(m)=m_1\\dots m_k\\ \\rho_1\\dots\\rho_r\\ \\gamma_1\\dots\\gamma_r,$$\n\nof length $n=k+2r$. $E$ is injective since it contains $m$.\n\n*Decoding one error.* Bob puts the received message bits into the array (with the known zeros) and computes the row syndromes $\\sigma_i=(\\text{received parity of row }i)\\oplus\\rho_i$ and column syndromes $\\tau_j$ similarly. With at most one error:\n\n- no error: all syndromes are $0$;\n- an error in data cell $(i,j)$: exactly $\\sigma_i=1$ and $\\tau_j=1$ (one row syndrome and one column syndrome); Bob flips cell $(i,j)$;\n- an error in $\\rho_i$: exactly one syndrome, $\\sigma_i=1$, and no column syndrome; the data are correct;\n- an error in $\\gamma_j$: exactly $\\tau_j=1$ and no row syndrome; the data are correct.\n\nThese four situations are distinguishable, so every single error is corrected.\n\n*Length.* $r<\\sqrt k+1$, so $n<k+2\\sqrt k+2$. For $k\\ge6$ this is at most $2k+1$ because $2\\sqrt k+1\\le k$; and $k=3,4,5$ give $n=7,8,11\\le2k+1$ directly. So $n=k+O(\\sqrt k)\\le 2k+1$.\n\n**Answer: $n=k+2\\lceil\\sqrt k\\rceil$ (two-dimensional parity code)**"
+   }
+  ],
+  "topics": [
+   "linear-algebra",
+   "counting"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2020-power-04",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Power Round: Coding Theory",
+   "year": 2020,
+   "number": 4,
+   "url": "https://cmimc.com/archive/cmimc2020/2020_Power.pdf"
+  },
+  "grade": "9-12",
+  "points": 2,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "**Problem 2.4 (2 points).** For strings $x,y$ of equal length the *Hamming distance* $d(x,y)$ is the number of positions where they differ; the *Hamming weight* $\\mathrm{wt}(x)$ is the number of nonzero symbols of $x$; the *minimum distance* of a code is $d(C)=\\min_{x\\ne y\\in C}d(x,y)$. A $q$-ary encoding map $E:\\Sigma_q^k\\to\\Sigma_q^n$ is *linear* if $E(0)=0$ and $E(x+y)=E(x)+E(y)$ for all $x,y\\in\\Sigma_q^k$ (addition element-wise modulo $q$); its image is a *linear code*.\n\nProve that for any $q$-ary linear code $C$, $d(C)=\\min_{c\\in C,\\,c\\neq0}\\mathrm{wt}(c)$.",
+  "image": null,
+  "choices": null,
+  "answer": "For a linear code, $d(E(x),E(y))=\\mathrm{wt}(E(x-y))$, so minimum distance equals minimum nonzero weight.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Translate distances to weights",
+    "body": "For strings $u,v$ over $\\mathbb Z_q$, $d(u,v)=\\mathrm{wt}(u-v)$ (positions where $u_i-v_i\\ne0$). Linearity gives $E(x)-E(y)=E(x-y)$, because $E(x-y)+E(y)=E(x)$. Hence for $x\\ne y$,\n\n$$d(E(x),E(y))=\\mathrm{wt}(E(x)-E(y))=\\mathrm{wt}(E(x-y)).$$\n\nTaking the minimum over $x\\ne y$, and noting that $z=x-y$ ranges over all nonzero messages, $d(C)=\\min_{z\\ne0}\\mathrm{wt}(E(z))$. Since $E$ is injective with $E(0)=0$, the nonzero codewords are exactly the $E(z)$, $z\\ne0$. So $d(C)=\\min_{c\\in C,c\\ne0}\\mathrm{wt}(c)$. $\\blacksquare$"
+   }
+  ],
+  "topics": [
+   "linear-algebra",
+   "abstract-algebra"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2020-power-05",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Power Round: Coding Theory",
+   "year": 2020,
+   "number": 5,
+   "url": "https://cmimc.com/archive/cmimc2020/2020_Power.pdf"
+  },
+  "grade": "9-12",
+  "points": 4,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "**Problem 2.5 (4 points).** Let $C\\subseteq\\Sigma^n$ be a code with minimum distance $d(C)$ (the smallest Hamming distance between two distinct codewords). We say $C$ *can correct $t$ symbol errors* if every codeword can be recovered from any word obtained from it by changing at most $t$ symbols, and *can correct $s$ symbol erasures* if every codeword can be recovered from any word obtained by replacing at most $s$ symbols with '?'.\n\nProve that the following statements for a code $C$ are equivalent.\n\n1. $C$ has minimum distance at least $2t+1$.\n2. $C$ can be used to correct $t$ symbol errors.\n3. $C$ can be used to correct $2t$ symbol erasures.",
+  "image": null,
+  "choices": null,
+  "answer": "All three say: any two distinct codewords differ in at least $2t+1$ positions.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Three equivalent reformulations",
+    "body": "Recall $d$ satisfies the triangle inequality.\n\n**(2) $\\iff$ no word is within distance $t$ of two different codewords.** Error correction of $t$ errors means that each received word $w$ determines the codeword within distance $t$ of it; this fails exactly when some $w$ has $d(w,c)\\le t$ and $d(w,c')\\le t$ for distinct codewords $c,c'$.\n\n**(1) $\\Rightarrow$ (2).** If $d(w,c)\\le t$ and $d(w,c')\\le t$ with $c\\ne c'$, then $d(c,c')\\le2t$, contradicting (1).\n\n**(2) $\\Rightarrow$ (1).** Suppose $c\\ne c'$ with $d(c,c')\\le2t$. Let $D$ be the set of positions where they differ, $|D|\\le2t$. Split $D=D_1\\sqcup D_2$ with $|D_1|,|D_2|\\le t$, and let $w$ agree with $c'$ on $D_1$ and with $c$ elsewhere. Then $w$ differs from $c$ only on $D_1$ and from $c'$ only on $D_2$: $d(w,c),d(w,c')\\le t$. So $t$ errors cannot be corrected.\n\n**(1) $\\Rightarrow$ (3).** Suppose the codeword $c$ is sent and a set $S$ of at most $2t$ positions is erased. If another codeword $c'$ agreed with $c$ outside $S$, then $d(c,c')\\le|S|\\le2t$, contradicting (1). So $c$ is the only codeword matching the received word: it can be recovered.\n\n**(3) $\\Rightarrow$ (1).** Suppose $d(c,c')\\le2t$ for $c\\ne c'$. Erase the set of positions where they differ (at most $2t$ positions). The received word is consistent with both $c$ and $c'$, so recovery is impossible. $\\blacksquare$"
+   }
+  ],
+  "topics": [
+   "logic",
+   "counting"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2020-power-06",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Power Round: Coding Theory",
+   "year": 2020,
+   "number": 6,
+   "url": "https://cmimc.com/archive/cmimc2020/2020_Power.pdf"
+  },
+  "grade": "9-12",
+  "points": 2,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "**Problem 2.6 (2 points).** The $(7,4)$ *Hamming code* is the binary code given by the encoding map\n$$(x_1,x_2,x_3,x_4)\\mapsto(x_1,x_2,x_3,x_4,\\ x_1\\oplus x_2\\oplus x_4,\\ x_1\\oplus x_3\\oplus x_4,\\ x_2\\oplus x_3\\oplus x_4),$$\nwhere $\\oplus$ denotes addition modulo $2$. Find, with proof, the minimum distance of this code. (You may use Problem 2.4: for a linear code the minimum distance equals the smallest weight of a nonzero codeword.)",
+  "image": null,
+  "choices": null,
+  "answer": "3",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Weight casework",
+    "body": "The map is linear over $\\mathbb Z_2$, so by Problem 2.4 the minimum distance is the minimum weight of a nonzero codeword. For a message $x\\ne0$, the codeword weight is $\\mathrm{wt}(x)+\\mathrm{wt}(\\text{parity part})$. The parity part of $e_i$ (unit vector) is $v_1=(1,1,0)$, $v_2=(1,0,1)$, $v_3=(0,1,1)$, $v_4=(1,1,1)$ for $i=1,2,3,4$, and the parity part of $x$ is the XOR of the $v_i$ with $x_i=1$.\n\n- $\\mathrm{wt}(x)=1$: the parity part is some $v_i$ of weight $\\ge2$, so the codeword has weight $\\ge3$.\n- $\\mathrm{wt}(x)=2$: the parity part is $v_i\\oplus v_j\\ne0$ since the $v_i$ are distinct, so weight $\\ge1$ and the codeword has weight $\\ge3$.\n- $\\mathrm{wt}(x)\\ge3$: the weight is already $\\ge3$.\n\nSo the minimum distance is $\\ge3$, and $x=(1,0,0,0)\\mapsto(1,0,0,0,1,1,0)$ has weight $3$. Hence $d=3$.\n\n**Answer: 3**"
+   }
+  ],
+  "topics": [
+   "linear-algebra",
+   "counting"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2020-power-07",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Power Round: Coding Theory",
+   "year": 2020,
+   "number": 7,
+   "url": "https://cmimc.com/archive/cmimc2020/2020_Power.pdf"
+  },
+  "grade": "9-12",
+  "points": 3,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "**Problem 3.1 (Singleton Bound, 3 points).** Let $C$ be a $q$-ary code (a subset of $\\Sigma_q^n$) with block length $n$ and minimum distance $d$ (at least two codewords). Prove that $|C|\\le q^{n-d+1}$.",
+  "image": null,
+  "choices": null,
+  "answer": "Project onto the first $n-d+1$ coordinates; this is injective on $C$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Pigeonhole",
+    "body": "Consider the map sending a codeword to its first $n-d+1$ coordinates. If two distinct codewords had the same image, they would agree on $n-d+1$ positions and differ in at most $d-1$ positions, contradicting minimum distance $d$. So the map is injective on $C$, and its image lies in $\\Sigma_q^{n-d+1}$, which has $q^{n-d+1}$ elements. Hence $|C|\\le q^{n-d+1}$. $\\blacksquare$"
+   }
+  ],
+  "topics": [
+   "counting",
+   "logic"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2020-power-08",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Power Round: Coding Theory",
+   "year": 2020,
+   "number": 8,
+   "url": "https://cmimc.com/archive/cmimc2020/2020_Power.pdf"
+  },
+  "grade": "9-12",
+  "points": 4,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "**Problem 3.2 (4 points).** Let $C$ be a binary code with block length $n$ and minimum distance $3$. Prove that\n$$|C|\\le\\frac{2^n}{n+1}.$$",
+  "image": null,
+  "choices": null,
+  "answer": "Hamming balls of radius 1 around the codewords are disjoint and have $n+1$ points each.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Disjoint balls",
+    "body": "For each codeword $c$ let $B(c)=\\{y\\in\\{0,1\\}^n:d(y,c)\\le1\\}$; it consists of $c$ and the $n$ words obtained by flipping one bit, so $|B(c)|=n+1$. If $B(c)\\cap B(c')\\ne\\varnothing$ for $c\\ne c'$, there is $y$ with $d(c,y),d(c',y)\\le1$, so $d(c,c')\\le2<3$, contradiction. So the balls are pairwise disjoint subsets of $\\{0,1\\}^n$:\n\n$$|C|(n+1)=\\sum_{c\\in C}|B(c)|\\le2^n.$$\n\nHence $|C|\\le\\frac{2^n}{n+1}$. $\\blacksquare$"
+   }
+  ],
+  "topics": [
+   "counting",
+   "logic"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2020-power-09",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Power Round: Coding Theory",
+   "year": 2020,
+   "number": 9,
+   "url": "https://cmimc.com/archive/cmimc2020/2020_Power.pdf"
+  },
+  "grade": "9-12",
+  "points": 3,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "**Problem 3.3 (Hamming Bound, 3 points).** Let $C$ be a $q$-ary code with block length $n$ and minimum distance $d$. Prove that, for $t=\\left\\lfloor\\frac{d-1}2\\right\\rfloor$,\n$$|C|\\le\\frac{q^n}{\\sum_{i=0}^t\\binom ni(q-1)^i}.$$",
+  "image": null,
+  "choices": null,
+  "answer": "Balls of radius $t$ around codewords are disjoint, each of size $\\sum_{i\\le t}\\binom ni(q-1)^i$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Sphere packing",
+    "body": "Let $B(c)$ be the set of words within Hamming distance $t$ of $c$. A word at distance exactly $i$ from $c$ is chosen by picking the $i$ positions where it differs ($\\binom ni$ ways) and a different symbol in each of them ($(q-1)^i$ ways), so $|B(c)|=\\sum_{i=0}^t\\binom ni(q-1)^i$.\n\nIf $y\\in B(c)\\cap B(c')$ with $c\\ne c'$ then $d(c,c')\\le2t\\le d-1$, contradicting minimum distance $d$. So the balls are disjoint subsets of $\\Sigma_q^n$, and $|C|\\cdot|B(c)|\\le q^n$. Dividing gives the bound. $\\blacksquare$"
+   }
+  ],
+  "topics": [
+   "counting"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2020-power-10",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Power Round: Coding Theory",
+   "year": 2020,
+   "number": 10,
+   "url": "https://cmimc.com/archive/cmimc2020/2020_Power.pdf"
+  },
+  "grade": "9-12",
+  "points": 2,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "**Problem 3.4 (2 points).** Using the Hamming bound of Problem 3.3 ($|C|\\le q^n/\\sum_{i=0}^t\\binom ni(q-1)^i$ with $t=\\lfloor\\frac{d-1}2\\rfloor$), prove that, for any $1\\le d\\le k$, any binary encoding map with message length $k$ and minimum distance $d$ has block length\n$$n\\ge k+\\frac{d-2}2\\log_2\\!\\left(\\frac kd\\right).$$\nYou may use the fact that $\\binom nt\\ge\\left(\\frac nt\\right)^t$ for any positive integers $n$ and $t$ with $n\\ge t$.",
+  "image": null,
+  "choices": null,
+  "answer": "From $2^k\\le2^n/\\binom nt\\le2^n(t/n)^t$ we get $n\\ge k+t\\log_2(n/t)\\ge k+\\frac{d-2}2\\log_2\\frac kd$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Apply the Hamming bound",
+    "body": "The code has $|C|=2^k$ words (the map is injective on $\\Sigma_2^k$), and $n\\ge k$ since $2^k\\le2^n$. Let $t=\\lfloor\\frac{d-1}2\\rfloor$, so $\\frac{d-2}2\\le t<d$.\n\nIf $d=1$ the right-hand side is $k-\\frac12\\log_2k\\le k\\le n$, and we are done. Let $d\\ge2$; if $t=0$ (i.e. $d=2$) the right side is $k+0$, and again $n\\ge k$. So assume $t\\ge1$; then $t<d\\le k\\le n$.\n\nThe Hamming bound gives $2^k\\le\\frac{2^n}{\\sum_{i\\le t}\\binom ni}\\le\\frac{2^n}{\\binom nt}\\le2^n\\left(\\frac tn\\right)^t$. Taking $\\log_2$: $k\\le n-t\\log_2\\frac nt$, i.e.\n\n$$n\\ge k+t\\log_2\\frac nt.$$\n\nNow $\\frac nt\\ge\\frac kd\\ge1$ (as $n\\ge k$ and $t<d$), so $\\log_2\\frac nt\\ge\\log_2\\frac kd\\ge0$, and since $t\\ge\\frac{d-2}2$, we get $t\\log_2\\frac nt\\ge\\frac{d-2}2\\log_2\\frac kd$. Therefore $n\\ge k+\\frac{d-2}2\\log_2\\frac kd$. $\\blacksquare$"
+   }
+  ],
+  "topics": [
+   "counting",
+   "inequalities"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2020-power-11",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Power Round: Coding Theory",
+   "year": 2020,
+   "number": 11,
+   "url": "https://cmimc.com/archive/cmimc2020/2020_Power.pdf"
+  },
+  "grade": "9-12",
+  "points": 2,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "**Problem 4.1 (Lagrange's Theorem, 2 points).** Let $q$ be a prime. Show that for any polynomial $p(x)$ with integer coefficients not all divisible by $q$, $p(x)\\equiv0\\pmod q$ for at most $\\deg(p)$ distinct residues $x\\pmod q$.",
+  "image": null,
+  "choices": null,
+  "answer": "A nonzero polynomial over the field $\\mathbb F_q$ has at most as many roots as its degree (induct on the degree using factor theorem).",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Induction on the degree",
+    "body": "Work in $\\mathbb F_q=\\mathbb Z/q$, a field since $q$ is prime; $p$ becomes a nonzero polynomial whose degree $\\delta$ is at most $\\deg p$. We show it has at most $\\delta$ roots by induction on $\\delta$. If $\\delta=0$, $p$ is a nonzero constant and has no roots. If $\\delta\\ge1$ and $p$ has a root $a$, divide: $p(x)=(x-a)r(x)+s$ with $s$ constant; substituting $x=a$ gives $s=p(a)=0$. So $p(x)=(x-a)r(x)$ with $r\\ne0$ of degree $\\delta-1$. For any root $b\\ne a$, $0=(b-a)r(b)$ and $b-a\\ne0$ in the field, so $r(b)=0$. By induction $r$ has at most $\\delta-1$ roots, so $p$ has at most $\\delta$ roots in total. (If $p$ has no root there is nothing to prove.) $\\blacksquare$"
+   }
+  ],
+  "topics": [
+   "polynomials",
+   "number-theory"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2020-power-12",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Power Round: Coding Theory",
+   "year": 2020,
+   "number": 12,
+   "url": "https://cmimc.com/archive/cmimc2020/2020_Power.pdf"
+  },
+  "grade": "9-12",
+  "points": 2,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "**Problem 4.2 (2 points).** **Reed-Solomon code.** Let $q$ be a prime with $q\\ge n=k+t$. A message $m=m_1\\dots m_k\\in\\Sigma_q^k$ is encoded as follows: let $p_m(x)=m_1+m_2x+\\cdots+m_kx^{k-1}$ and $E_{RS}(m)=b_1\\dots b_n$ with $b_i=p_m(i)\\bmod q$ for $i=1,\\dots,n$. Let $C_{RS}$ be the image code. Show that the minimum distance of $C_{RS}$ is $d(C_{RS})=n-k+1$. (You may use Problem 3.1 and the fact, Problem 4.1, that a nonzero polynomial of degree at most $k-1$ has at most $k-1$ roots mod $q$.)",
+  "image": null,
+  "choices": null,
+  "answer": "Two distinct messages give polynomials agreeing in at most $k-1$ points, so $d\\ge n-k+1$; Singleton gives equality.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Lower bound and Singleton",
+    "body": "*Lower bound.* Let $m\\ne m'$. Then $p_m-p_{m'}$ is a nonzero polynomial of degree at most $k-1$ over $\\mathbb F_q$, so it vanishes at at most $k-1$ residues. The points $1,\\dots,n$ are distinct residues (as $n\\le q$), so $E_{RS}(m)$ and $E_{RS}(m')$ agree in at most $k-1$ positions and differ in at least $n-k+1$. Thus $d\\ge n-k+1$.\n\n*Upper bound.* $|C_{RS}|=q^k$ (the map is injective by the lower bound), and the Singleton bound gives $q^k\\le q^{n-d+1}$, so $d\\le n-k+1$. (Alternatively, $p(x)=(x-1)(x-2)\\cdots(x-k+1)$ has weight exactly $n-k+1$ in $C_{RS}$.) Hence $d(C_{RS})=n-k+1$. $\\blacksquare$"
+   }
+  ],
+  "topics": [
+   "polynomials",
+   "linear-algebra"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2020-power-13",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Power Round: Coding Theory",
+   "year": 2020,
+   "number": 13,
+   "url": "https://cmimc.com/archive/cmimc2020/2020_Power.pdf"
+  },
+  "grade": "9-12",
+  "points": 2,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "**Problem 4.3 (2 points).** Let $q$ be a prime and let $x_1,x_2,\\dots,x_k$ be integers that are distinct mod $q$. Show that for any integer $y$ we can find a polynomial $f$ of degree $k-1$ with integer coefficients so that $f(x_1)\\equiv y\\pmod q$ and $f(x_i)\\equiv0\\pmod q$ for $2\\le i\\le k$.",
+  "image": null,
+  "choices": null,
+  "answer": "Take $f(x)=y\\,a^{-1}(x-x_2)\\cdots(x-x_k)$ where $a=\\prod_{i\\ge2}(x_1-x_i)$ and $a^{-1}$ is an inverse mod $q$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Lagrange basis polynomial",
+    "body": "Let $g(x)=(x-x_2)(x-x_3)\\cdots(x-x_k)$, a polynomial of degree $k-1$ with $g(x_i)=0$ for $2\\le i\\le k$. Let $a=g(x_1)=\\prod_{i\\ge2}(x_1-x_i)$. Since the $x_i$ are distinct mod $q$, no factor is divisible by the prime $q$, so $q\\nmid a$ and there is an integer $b$ with $ab\\equiv1\\pmod q$. Put $f(x)=yb\\,g(x)$. Then $f(x_1)=yba\\equiv y$ and $f(x_i)=0$ for $i\\ge2$ (mod $q$), and $\\deg f=k-1$ unless $yb\\equiv0$ (in which case $f\\equiv0$ is a valid answer when $y\\equiv0$). $\\blacksquare$"
+   }
+  ],
+  "topics": [
+   "polynomials",
+   "number-theory"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2020-power-14",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Power Round: Coding Theory",
+   "year": 2020,
+   "number": 14,
+   "url": "https://cmimc.com/archive/cmimc2020/2020_Power.pdf"
+  },
+  "grade": "9-12",
+  "points": 3,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "**Problem 4.4 (3 points).** **Reed-Solomon code.** Let $q$ be a prime with $q\\ge n=k+t$. A message $m=m_1\\dots m_k\\in\\Sigma_q^k$ is encoded as follows: let $p_m(x)=m_1+m_2x+\\cdots+m_kx^{k-1}$ and $E_{RS}(m)=b_1\\dots b_n$ with $b_i=p_m(i)\\bmod q$ for $i=1,\\dots,n$. Let $C_{RS}$ be the image code. Devise an algorithm that, given $E_{RS}(m)$ of length $k+t$ with at most $t$ erasures, recovers the original length-$k$ message $m$. (You may use Problem 4.3.)",
+  "image": null,
+  "choices": null,
+  "answer": "At least $k$ positions survive; Lagrange-interpolate the unique polynomial of degree $\\le k-1$ through them; its coefficients are $m_1,\\dots,m_k$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Interpolation",
+    "body": "At most $t$ of the $n=k+t$ symbols are erased, so at least $k$ positions survive; let $I$ be the indices of $k$ of the surviving positions, with received values $b_i$ ($i\\in I$), so $b_i\\equiv p_m(i)\\pmod q$.\n\n*Algorithm.* For each $i\\in I$ use Problem 4.3 (with the $k$ distinct points $I$) to get a polynomial $f_i$ of degree $\\le k-1$ with $f_i(i)\\equiv b_i$ and $f_i(j)\\equiv0$ for $j\\in I\\setminus\\{i\\}$; explicitly $f_i(x)=b_i\\prod_{j\\in I,j\\ne i}\\frac{x-j}{i-j}$ with the division read as multiplication by the inverse mod $q$. Let $f=\\sum_{i\\in I}f_i$ (mod $q$). Then $f(i)\\equiv b_i$ for all $i\\in I$ and $\\deg f\\le k-1$. Output the coefficients $f=m'_1+m'_2x+\\cdots+m'_kx^{k-1}$ reduced mod $q$.\n\n*Correctness.* Both $f$ and $p_m$ have degree $\\le k-1$ and agree at the $k$ distinct points of $I$ (mod $q$). Their difference has degree $\\le k-1$ and at least $k$ roots mod $q$, so by Problem 4.1 it is the zero polynomial mod $q$: $f\\equiv p_m$ coefficientwise, i.e. $m'_j=m_j$. $\\blacksquare$"
+   }
+  ],
+  "topics": [
+   "polynomials",
+   "linear-algebra"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2020-power-15",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Power Round: Coding Theory",
+   "year": 2020,
+   "number": 15,
+   "url": "https://cmimc.com/archive/cmimc2020/2020_Power.pdf"
+  },
+  "grade": "9-12",
+  "points": 3,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "**Problem 5.1 (3 points).** **Setting.** Alice wants to send Bob $n$ messages $m_1,\\dots,m_n$, all bit strings of the same length, over a channel that destroys each transmitted message independently with probability $\\frac12$. Alice cannot tell which messages arrive; when Bob has received enough, he sends a special reply and Alice stops.\n\nOne strategy: Alice sends all $n$ messages one after another, then waits to see whether Bob has received them all, and sends all $n$ again if not. Bob keeps every message he receives until he has eventually received all of them. Show that, for sufficiently large $n$, the expected number of messages Alice sends is more than $10n$.",
+  "image": null,
+  "choices": null,
+  "answer": "The number of rounds $X$ satisfies $\\Pr[X>r]=1-(1-2^{-r})^n$, so $E[X]\\ge12\\,(1-(1-2^{-11})^n)>10$ for large $n$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Expected number of rounds",
+    "body": "Let $X$ be the number of rounds (each round sends all $n$ messages), so Alice sends $nX$ messages. A fixed message has not arrived after $r$ rounds with probability $2^{-r}$, independently for different messages, so $\\Pr[X\\le r]=(1-2^{-r})^n$ and $\\Pr[X>r]=1-(1-2^{-r})^n$ for $r\\ge0$. Then\n\n$$E[X]=\\sum_{r\\ge0}\\Pr[X>r]\\ge\\sum_{r=0}^{11}\\Big(1-(1-2^{-r})^n\\Big)\\ge12\\Big(1-\\big(1-2^{-11}\\big)^n\\Big),$$\n\nbecause for $0\\le r\\le11$, $1-2^{-r}\\le1-2^{-11}$. For $n\\ge4000$, $(1-\\frac1{2048})^n\\le e^{-n/2048}\\le e^{-1.95}<0.15$, so $E[X]>12\\cdot0.85=10.2>10$. Hence the expected number of messages sent, $nE[X]$, exceeds $10n$ for $n\\ge4000$. $\\blacksquare$"
+   }
+  ],
+  "topics": [
+   "probability"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2020-power-16",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Power Round: Coding Theory",
+   "year": 2020,
+   "number": 16,
+   "url": "https://cmimc.com/archive/cmimc2020/2020_Power.pdf"
+  },
+  "grade": "9-12",
+  "points": 1,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "**Problem 5.2 (1 point).** **Packets.** Alice's messages $m_1,\\dots,m_n$ are bit strings of equal length, and $\\oplus$ denotes bitwise XOR. For a binary string $s=s_1\\dots s_n$ of length $n$, the packet $m_s$ is the XOR of all $m_i$ with $s_i=1$ (for example, for $n=4$, $m_{1010}=m_1\\oplus m_3$). Each turn, Alice picks a uniformly random $s\\in\\{0,1\\}^n$ (independently each time) and sends Bob the packet $m_s$ (together with $s$). The *span* of a set $S$ of binary strings is the set of strings obtainable by XOR-ing some of them together (the empty XOR is $0$), $\\mathrm{span}(S)=\\{\\bigoplus_{s\\in T}s:T\\subseteq S\\}$, and $\\dim(S)=\\log_2|\\mathrm{span}(S)|$.\n\nLet $e_i$ be the binary string of length $n$ with a $1$ in the $i$-th entry and $0$s elsewhere. Show that if $e_i=s_1\\oplus\\cdots\\oplus s_k$ then $m_i=m_{s_1}\\oplus\\cdots\\oplus m_{s_k}$.",
+  "image": null,
+  "choices": null,
+  "answer": "$s\\mapsto m_s$ is additive: $m_{s\\oplus s'}=m_s\\oplus m_{s'}$; also $m_{e_i}=m_i$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Additivity of the packet map",
+    "body": "By definition $m_s=\\bigoplus_{j=1}^ns_j\\cdot m_j$ (where $0\\cdot m=0$ and $1\\cdot m=m$). For bits $a,b$ we have $(a\\oplus b)\\cdot m=(a\\cdot m)\\oplus(b\\cdot m)$ (check the four cases). Hence\n\n$$m_{s\\oplus s'}=\\bigoplus_j(s_j\\oplus s'_j)m_j=\\bigoplus_js_jm_j\\ \\oplus\\ \\bigoplus_js'_jm_j=m_s\\oplus m_{s'}.$$\n\nBy induction $m_{s_1\\oplus\\cdots\\oplus s_k}=m_{s_1}\\oplus\\cdots\\oplus m_{s_k}$. If $s_1\\oplus\\cdots\\oplus s_k=e_i$, then the left side is $m_{e_i}=m_i$. $\\blacksquare$"
+   }
+  ],
+  "topics": [
+   "linear-algebra"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2020-power-17",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Power Round: Coding Theory",
+   "year": 2020,
+   "number": 17,
+   "url": "https://cmimc.com/archive/cmimc2020/2020_Power.pdf"
+  },
+  "grade": "9-12",
+  "points": 3,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "**Problem 5.3 (3 points).** **Packets.** Alice's messages $m_1,\\dots,m_n$ are bit strings of equal length, and $\\oplus$ denotes bitwise XOR. For a binary string $s=s_1\\dots s_n$ of length $n$, the packet $m_s$ is the XOR of all $m_i$ with $s_i=1$ (for example, for $n=4$, $m_{1010}=m_1\\oplus m_3$). Each turn, Alice picks a uniformly random $s\\in\\{0,1\\}^n$ (independently each time) and sends Bob the packet $m_s$ (together with $s$). The *span* of a set $S$ of binary strings is the set of strings obtainable by XOR-ing some of them together (the empty XOR is $0$), $\\mathrm{span}(S)=\\{\\bigoplus_{s\\in T}s:T\\subseteq S\\}$, and $\\dim(S)=\\log_2|\\mathrm{span}(S)|$.\n\nShow that if $t\\in\\mathrm{span}(S)$, then $\\dim(S\\cup\\{t\\})=\\dim(S)$; otherwise, if $t\\notin\\mathrm{span}(S)$, then $\\dim(S\\cup\\{t\\})=\\dim(S)+1$. Also show that if the set $S$ of received packets is enough for Bob to decode all $n$ original messages (whatever they are), then $\\dim(S)=n$.",
+  "image": null,
+  "choices": null,
+  "answer": "Adding a vector in the span changes nothing; adding one outside doubles the span. If $\\dim S<n$ some nonzero message assignment is invisible to the packets, so decoding needs $\\dim S=n$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Spans and dimension",
+    "body": "*Span facts.* $\\mathrm{span}(S)$ is closed under $\\oplus$ (the XOR of two subset-sums is a subset-sum, using $x\\oplus x=0$), and it contains $0$.\n\n*Case $t\\in\\mathrm{span}(S)$.* Any XOR using $t$ can replace $t$ by the XOR of elements of $S$ giving $t$, so $\\mathrm{span}(S\\cup\\{t\\})\\subseteq\\mathrm{span}(S)$; the reverse inclusion is clear. So the dimension is unchanged.\n\n*Case $t\\notin\\mathrm{span}(S)$.* Every element of $\\mathrm{span}(S\\cup\\{t\\})$ is either $u$ or $u\\oplus t$ with $u\\in\\mathrm{span}(S)$. These two families are disjoint: $u\\oplus t=v$ with $u,v\\in\\mathrm{span}(S)$ would give $t=u\\oplus v\\in\\mathrm{span}(S)$. And $u\\mapsto u\\oplus t$ is injective. So $|\\mathrm{span}(S\\cup\\{t\\})|=2|\\mathrm{span}(S)|$ and the dimension goes up by exactly $1$.\n\n*Decoding forces $\\dim S=n$.* Span$(S)$ is a subspace of $\\mathbb F_2^n$ of size $2^{\\dim S}$. Suppose $\\dim S<n$. Then there is a nonzero $x\\in\\mathbb F_2^n$ orthogonal to every $s\\in S$ (the orthogonal complement of a subspace of dimension $<n$ is nonzero, by rank-nullity). Take one-bit messages $m_j=x_j$ and compare with all messages $0$. Every received packet $m_s=\\bigoplus s_jx_j=\\langle s,x\\rangle=0$ for $s\\in S$ in both cases, so Bob sees identical data for two different message sets and cannot decode. Hence if Bob can always decode, $\\dim S=n$. (Conversely, if $\\dim S=n$ then $\\mathrm{span}(S)=\\mathbb F_2^n\\ni e_i$ and Problem 5.2 decodes every $m_i$.) $\\blacksquare$"
+   }
+  ],
+  "topics": [
+   "linear-algebra",
+   "counting"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2020-power-18a",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Power Round: Coding Theory",
+   "year": 2020,
+   "number": 18,
+   "url": "https://cmimc.com/archive/cmimc2020/2020_Power.pdf"
+  },
+  "grade": "9-12",
+  "points": 5,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "**Problem 5.4(i) (5 points).** **Packets.** Alice's messages $m_1,\\dots,m_n$ are bit strings of equal length, and $\\oplus$ denotes bitwise XOR. For a binary string $s=s_1\\dots s_n$ of length $n$, the packet $m_s$ is the XOR of all $m_i$ with $s_i=1$ (for example, for $n=4$, $m_{1010}=m_1\\oplus m_3$). Each turn, Alice picks a uniformly random $s\\in\\{0,1\\}^n$ (independently each time) and sends Bob the packet $m_s$ (together with $s$). The *span* of a set $S$ of binary strings is the set of strings obtainable by XOR-ing some of them together (the empty XOR is $0$), $\\mathrm{span}(S)=\\{\\bigoplus_{s\\in T}s:T\\subseteq S\\}$, and $\\dim(S)=\\log_2|\\mathrm{span}(S)|$. Suppose Alice sends packets $m_{s_1},m_{s_2},\\dots$ (all received), and let $d_i=\\dim(\\{s_1,\\dots,s_i\\})$, with $d_0=0$. (By Problem 5.3, Bob can recover all $n$ messages once $d_i=n$.)\n\nFind the exact probability that Bob can recover all $n$ original messages after $n$ packets, and show that this probability is at least $\\frac14$ for all $n$.",
+  "image": null,
+  "choices": null,
+  "answer": "$\\prod_{k=1}^n\\left(1-2^{-k}\\right)\\ge\\frac14+2^{-(n+1)}>\\frac14$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "A product formula and an induction",
+    "body": "Given $s_1,\\dots,s_i$ spanning a space of dimension $d_i$, the next random string $s_{i+1}$ lies outside the span with probability $1-\\frac{2^{d_i}}{2^n}$, independently of the history except through $d_i$. After $n$ packets $d_n=n$ iff the dimension increases every time, i.e. $d_i=i$ for all $i$; so the probability is\n\n$$S_n=\\prod_{i=0}^{n-1}\\Big(1-\\frac{2^i}{2^n}\\Big)=\\prod_{k=1}^n\\Big(1-\\frac1{2^k}\\Big)\\qquad(k=n-i).$$\n\n*Claim:* $S_n\\ge\\frac14+\\frac1{2^{n+1}}$ for all $n\\ge1$. For $n=1$, $S_1=\\frac12=\\frac14+\\frac14$. If it holds for $n$, then\n\n$$S_{n+1}=S_n\\Big(1-\\frac1{2^{n+1}}\\Big)\\ge\\Big(\\frac14+\\frac1{2^{n+1}}\\Big)\\Big(1-\\frac1{2^{n+1}}\\Big)=\\frac14+\\frac1{2^{n+1}}-\\frac1{2^{n+3}}-\\frac1{2^{2n+2}}.$$\n\nWe need this to be at least $\\frac14+\\frac1{2^{n+2}}$, i.e. $\\frac1{2^{n+1}}-\\frac1{2^{n+3}}-\\frac1{2^{n+2}}\\ge\\frac1{2^{2n+2}}$, i.e. $\\frac1{2^{n+3}}\\ge\\frac1{2^{2n+2}}$, which holds for $n\\ge1$. So the claim holds, and $S_n>\\frac14$ for all $n$. $\\blacksquare$"
+   }
+  ],
+  "topics": [
+   "probability",
+   "linear-algebra"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2020-power-18b",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Power Round: Coding Theory",
+   "year": 2020,
+   "number": 18,
+   "url": "https://cmimc.com/archive/cmimc2020/2020_Power.pdf"
+  },
+  "grade": "9-12",
+  "points": 5,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "**Problem 5.4(ii) (5 points).** **Packets.** Alice's messages $m_1,\\dots,m_n$ are bit strings of equal length, and $\\oplus$ denotes bitwise XOR. For a binary string $s=s_1\\dots s_n$ of length $n$, the packet $m_s$ is the XOR of all $m_i$ with $s_i=1$ (for example, for $n=4$, $m_{1010}=m_1\\oplus m_3$). Each turn, Alice picks a uniformly random $s\\in\\{0,1\\}^n$ (independently each time) and sends Bob the packet $m_s$ (together with $s$). The *span* of a set $S$ of binary strings is the set of strings obtainable by XOR-ing some of them together (the empty XOR is $0$), $\\mathrm{span}(S)=\\{\\bigoplus_{s\\in T}s:T\\subseteq S\\}$, and $\\dim(S)=\\log_2|\\mathrm{span}(S)|$. Suppose Alice sends packets $m_{s_1},m_{s_2},\\dots$ (all received). Show that the probability that Bob can recover all $n$ messages after $n+2$ packets is at least $\\frac35$ for all $n\\ge5$. (Bob can recover all messages exactly when $\\dim\\{s_1,\\dots,s_i\\}=n$, by Problem 5.3.)",
+  "image": null,
+  "choices": null,
+  "answer": "The probability is $S_n(1+h_1+h_2)$ with $S_n\\ge\\frac14$ and $1+h_1+h_2\\ge2.6$ for $n\\ge5$, giving more than $0.65>\\frac35$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Count the allowed stalls",
+    "body": "Let $p_d=2^{d-n}$ be the probability that a new random string fails to increase the dimension when the current dimension is $d$ ($0\\le d\\le n-1$); the values $p_d$ are $2^{-n},2^{-n+1},\\dots,2^{-1}$. Bob succeeds within $n+2$ packets iff the number of 'stalls' (packets that do not increase the dimension) before reaching dimension $n$ is at most $2$. The probability of reaching dimension $n$ with exactly $j$ stalls is obtained by summing over all ways to stall $a_d$ times at dimension $d$ with $\\sum a_d=j$:\n\n$$\\sum_{\\sum a_d=j}\\ \\prod_d p_d^{a_d}(1-p_d)=S_n\\,h_j(p_0,\\dots,p_{n-1}),$$\n\nwhere $S_n=\\prod_d(1-p_d)=\\prod_{k=1}^n(1-2^{-k})$ and $h_j$ is the complete homogeneous symmetric polynomial. Thus the success probability is $P=S_n(1+h_1+h_2)$.\n\nWith $x=2^{-n}$: $h_1=\\sum p_d=1-x$, and $h_2=\\sum_{i\\le j}p_ip_j=\\frac12\\big(h_1^2+\\sum p_d^2\\big)=\\frac12\\Big((1-x)^2+\\frac{1-x^2}3\\Big)$. Both $h_1$ and $h_2$ increase with $n$ (as $x$ decreases), so for $n\\ge5$ (where $x\\le\\frac1{32}$):\n\n$$1+h_1+h_2\\ge1+\\frac{31}{32}+\\frac12\\left(\\frac{961}{1024}+\\frac{1}{3}\\cdot\\frac{1023}{1024}\\right)>1+0.968+0.635=2.603.$$\n\nBy Problem 5.4(i), $S_n\\ge\\frac14$. Therefore $P\\ge\\frac14\\cdot2.603>0.65>\\frac35$. $\\blacksquare$"
+   }
+  ],
+  "topics": [
+   "probability",
+   "counting"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2020-power-19",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Power Round: Coding Theory",
+   "year": 2020,
+   "number": 19,
+   "url": "https://cmimc.com/archive/cmimc2020/2020_Power.pdf"
+  },
+  "grade": "9-12",
+  "points": 2,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "**Problem 5.5 (2 points).** **Packets.** Alice's messages $m_1,\\dots,m_n$ are bit strings of equal length, and $\\oplus$ denotes bitwise XOR. For a binary string $s=s_1\\dots s_n$ of length $n$, the packet $m_s$ is the XOR of all $m_i$ with $s_i=1$ (for example, for $n=4$, $m_{1010}=m_1\\oplus m_3$). Each turn, Alice picks a uniformly random $s\\in\\{0,1\\}^n$ (independently each time) and sends Bob the packet $m_s$ (together with $s$). The *span* of a set $S$ of binary strings is the set of strings obtainable by XOR-ing some of them together (the empty XOR is $0$), $\\mathrm{span}(S)=\\{\\bigoplus_{s\\in T}s:T\\subseteq S\\}$, and $\\dim(S)=\\log_2|\\mathrm{span}(S)|$. Now each packet Alice sends is lost with probability $\\frac12$, independently of everything else, and Alice stops as soon as Bob has enough packets to decode all $n$ messages. Show that the expected number of packets Alice must send until Bob can decode is at most $8n$ for sufficiently large $n$. (You may use Problem 5.4(ii).)",
+  "image": null,
+  "choices": null,
+  "answer": "Send in batches of $2n+4$ packets; each batch succeeds with probability $\\ge\\frac3{10}$, so the expected total is $\\le\\frac{10}3(2n+4)\\le8n$ for $n\\ge10$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Batches",
+    "body": "Let $n\\ge10$ and group Alice's packets into batches of $N=2n+4$. In a batch, the number $B$ of packets received is $\\mathrm{Bin}(N,\\frac12)$. By symmetry $\\Pr[B\\ge N/2]\\ge\\frac12$, and $N/2=n+2$. The strings in the received packets are independent uniform random strings (the loss pattern is independent of them), so if $B\\ge n+2$, the first $n+2$ received packets let Bob decode with probability at least $\\frac35$ by Problem 5.4(ii) (more packets can only help). So each batch alone succeeds with probability at least $\\frac12\\cdot\\frac35=\\frac3{10}$, independently of the other batches.\n\nLet $G$ be the index of the first successful batch; it is dominated by a geometric random variable with success probability $\\frac3{10}$, so $E[G]\\le\\frac{10}3$. Alice stops no later than the end of batch $G$, so the expected number of packets is at most\n\n$$\\frac{10}3(2n+4)=\\frac{20n+40}3\\le8n\\qquad\\text{for }n\\ge10.\\ \\blacksquare$$"
+   }
+  ],
+  "topics": [
+   "probability",
+   "counting"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2020-power-20",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Power Round: Coding Theory",
+   "year": 2020,
+   "number": 20,
+   "url": "https://cmimc.com/archive/cmimc2020/2020_Power.pdf"
+  },
+  "grade": "9-12",
+  "points": 4,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "**Problem 6.1 (4 points).** Consider a variable-length code $C=\\{1,01,001,0001\\}$ in which the codewords are transmitted independently with probabilities $\\frac12,\\frac14,\\frac18,\\frac18$ respectively. What is the probability that a randomly chosen bit in a long stream of transmission is a $1$?",
+  "image": null,
+  "choices": null,
+  "answer": "8/15",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Ones per bit",
+    "body": "Each codeword contains exactly one $1$. In a long stream of $N$ independent codewords, the number of ones is about $N\\cdot E[\\text{ones per codeword}]=N\\cdot1$ and the number of bits is about $N\\cdot E[\\text{length}]$ (law of large numbers). The expected length is $1\\cdot\\frac12+2\\cdot\\frac14+3\\cdot\\frac18+4\\cdot\\frac18=\\frac{15}8$. So the fraction of bits that are $1$ is\n\n$$\\frac{1}{15/8}=\\frac8{15}.$$\n\n(Longer codewords contribute more bits, so the codewords must be weighted by length, not simply by probability.)\n\n**Answer: $\\frac8{15}$**"
+   }
+  ],
+  "topics": [
+   "probability",
+   "fractions-decimals"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null,
+  "answerDisplay": "$\\frac{8}{15}$"
+ },
+ {
+  "id": "cmimc-2020-power-21a",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Power Round: Coding Theory",
+   "year": 2020,
+   "number": 21,
+   "url": "https://cmimc.com/archive/cmimc2020/2020_Power.pdf"
+  },
+  "grade": "9-12",
+  "points": 1,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "**Problem 6.2(i) (1 point).** $n$ people are each dealt a red or black card, independently with probability $\\frac12$. Each person holds up their card so that everyone can see it but themselves. Each person is then given a chance to guess their own card's color, or to pass. The group wins as long as at least one person guesses and nobody guesses wrong; otherwise they lose. (The strategy is agreed in advance, and nobody communicates after seeing the cards.)\n\nGive a strategy where the group wins with probability $\\frac12$.",
+  "image": null,
+  "choices": null,
+  "answer": "Person 1 guesses red and everyone else passes.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Single guesser",
+    "body": "Agree that person $1$ guesses \"red\" and everybody else passes. The group wins exactly when person $1$'s card is red, which has probability $\\frac12$.\n\n**Answer: person 1 always guesses red, the others pass**"
+   }
+  ],
+  "topics": [
+   "probability",
+   "games"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2020-power-21b",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Power Round: Coding Theory",
+   "year": 2020,
+   "number": 21,
+   "url": "https://cmimc.com/archive/cmimc2020/2020_Power.pdf"
+  },
+  "grade": "9-12",
+  "points": 7,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "**Problem 6.2(ii) (7 points).** $n=7$ people are each dealt a red or black card, independently with probability $\\frac12$. Each person holds up their card so that everyone can see it but themselves. Each person is then given a chance to guess their own card's color, or to pass. The group wins as long as at least one person guesses and nobody guesses wrong; otherwise they lose. (The strategy is agreed in advance.) You may use that the $(7,4)$ Hamming code $C$ (encoding map $(x_1,x_2,x_3,x_4)\\mapsto(x_1,x_2,x_3,x_4,x_1\\oplus x_2\\oplus x_4,x_1\\oplus x_3\\oplus x_4,x_2\\oplus x_3\\oplus x_4)$) has $16$ codewords and minimum distance $3$ (Problem 2.6).\n\nGive a strategy where the group wins with probability $\\frac78$.",
+  "image": null,
+  "choices": null,
+  "answer": "Identify colors with bits. Each person looks at the other six bits and guesses the own bit that would make the 7-bit string NOT a Hamming codeword (if one completion is a codeword); otherwise passes. The group loses exactly when the deal is a codeword: probability $16/128=1/8$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Hamming-code strategy",
+    "body": "Identify red with $0$ and black with $1$, so the deal is a string $x\\in\\{0,1\\}^7$ (uniformly random among $128$ strings). Let $C$ be the Hamming code ($16$ codewords, minimum distance $3$).\n\n*Facts.* The radius-$1$ balls around codewords each contain $8$ words and are disjoint (distance $\\ge3$), so they cover $16\\cdot8=128$ words: every string is either a codeword or at distance exactly $1$ from exactly one codeword.\n\n*Strategy.* Person $i$ sees the other six bits and considers the two completions of the string. Two completions differ in one position, so at most one of them is a codeword (distance $\\ge3$ otherwise). If exactly one completion is a codeword, person $i$ guesses the *other* color (the one that makes the string a non-codeword). If neither is a codeword, he passes.\n\n*Analysis.*\n\n- If the deal $x$ is a codeword: for every $i$, the completion with the true color is a codeword, so every person guesses the opposite color, i.e. wrongly. The group loses (this happens with probability $\\frac{16}{128}=\\frac18$).\n- If $x$ is not a codeword: let $c$ be the unique codeword at distance $1$, differing from $x$ in position $j$. Person $j$ sees that the completion $c$ is a codeword and the true string $x$ is not, so he guesses the color that makes it a non-codeword, namely the true color: correct. For $i\\ne j$, the completions are $x$ and $x\\oplus e_i$: $x$ is not a codeword, and if $x\\oplus e_i$ were a codeword $c'$ then $c'\\ne c$ would both be within distance $1$ of $x$, so $d(c,c')\\le2$, contradiction. So person $i$ passes. Exactly one person guesses, and correctly: the group wins.\n\nSo the group wins with probability $1-\\frac18=\\frac78$.\n\n**Answer: guess against the Hamming code; wins with probability $\\frac78$**"
+   }
+  ],
+  "topics": [
+   "probability",
+   "games",
+   "linear-algebra"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ }
+]

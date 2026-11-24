@@ -1,0 +1,340 @@
+[
+ {
+  "id": "chmmc-2021-team-01",
+  "bank": "chmmc",
+  "source": {
+   "contest": "CHMMC",
+   "paper": "2021-2022 Team Round",
+   "year": 2021,
+   "number": 1,
+   "url": "http://chmmc.caltech.edu/archives/2021/Chmmc_2021-Team_Solutions.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Let $ABC$ be a right triangle with hypotenuse $\\overline{AC}$ and circumcenter $O$. Point $E$ lies on $\\overline{AB}$ such that $AE=9$, $EB=3$; point $F$ lies on $\\overline{BC}$ such that $BF=6$, $FC=2$. Now suppose $W$, $X$, $Y$, and $Z$ are the midpoints of $\\overline{EB}$, $\\overline{BF}$, $\\overline{FO}$, and $\\overline{OE}$, respectively. Compute the area of quadrilateral $WXYZ$.",
+  "image": null,
+  "choices": null,
+  "answer": "12",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Varignon",
+    "body": "The midpoints of the sides of a quadrilateral form a parallelogram of half its area (each of the four corner triangles cut off has $\\frac14$ of the area of the triangle on a diagonal, and they total half). So $[WXYZ]=\\frac12[EBFO]$.\n\nPut $B=(0,0)$, $A=(12,0)$, $C=(0,8)$, so $E=(3,0)$, $F=(0,6)$ and $O=(6,4)$ is the midpoint of $AC$. Then $[EBFO]=[OEB]+[OFB]=\\frac12\\cdot3\\cdot4+\\frac12\\cdot6\\cdot6=6+18=24$, so $[WXYZ]=12$.\n\n**Answer: 12**"
+   }
+  ],
+  "topics": [
+   "geometry"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "chmmc-2021-team-02",
+  "bank": "chmmc",
+  "source": {
+   "contest": "CHMMC",
+   "paper": "2021-2022 Team Round",
+   "year": 2021,
+   "number": 2,
+   "url": "http://chmmc.caltech.edu/archives/2021/Chmmc_2021-Team_Solutions.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "A prefrosh is participating in Caltech's \"Rotation.\" They must rank Caltech's $8$ houses, which are Avery, Page, Lloyd, Venerable, Ricketts, Blacker, Dabney, and Fleming, each a distinct integer rating from $1$ to $8$ inclusive. The conditions are that the rating $x$ they give to Fleming is at most the average rating $y$ given to Ricketts, Blacker, and Dabney, which is in turn at most the average rating $z$ given to Avery, Page, Lloyd, and Venerable. Moreover $x,y,z$ are all integers. How many such rankings can the prefrosh provide?",
+  "image": null,
+  "choices": null,
+  "answer": "1296",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Find the triples (x, y, z)",
+    "body": "We have $3y+4z=36-x$ and $x\\le y\\le z$. If $x\\ge5$ then $36-x\\ge7x$ would need... $3y+4z\\ge7x\\ge35>31\\ge36-x$, impossible, so $1\\le x\\le4$. The integer solutions are $(x,y,z)=(1,5,5),(3,3,6),(4,4,5)$.\n\nCount the sets $\\{a,b,c\\}$ of ratings for Ricketts, Blacker and Dabney (distinct values in $\\{1..8\\}\\setminus\\{x\\}$ with sum $3y$):\n- $(1,5,5)$: sum $15$ from $\\{2,\\dots,8\\}$: $\\{2,5,8\\},\\{2,6,7\\},\\{3,4,8\\},\\{3,5,7\\},\\{4,5,6\\}$: $5$ ways.\n- $(3,3,6)$: sum $9$ from $\\{1,2,4,5,6,7,8\\}$: $\\{1,2,6\\}$: $1$ way.\n- $(4,4,5)$: sum $12$ from $\\{1,2,3,5,6,7,8\\}$: $\\{1,3,8\\},\\{1,5,6\\},\\{2,3,7\\}$: $3$ ways.\n\nSo there are $9$ choices of the pair of sets, and each gives $3!\\cdot4!$ assignments of ratings to the houses. Total $9\\cdot6\\cdot24=1296$ (confirmed by brute force over all $8!$ rankings).\n\n**Answer: 1296**"
+   }
+  ],
+  "topics": [
+   "counting",
+   "arithmetic"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "chmmc-2021-team-03",
+  "bank": "chmmc",
+  "source": {
+   "contest": "CHMMC",
+   "paper": "2021-2022 Team Round",
+   "year": 2021,
+   "number": 3,
+   "url": "http://chmmc.caltech.edu/archives/2021/Chmmc_2021-Team_Solutions.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Suppose $a,b,c$ are complex numbers with $a+b+c=0$, $a^2+b^2+c^2=0$, and $|a|,|b|,|c|\\le5$. Suppose further at least one of $a,b,c$ have real and imaginary parts that are both integers. Find the number of possibilities for such ordered triples $(a,b,c)$.",
+  "image": null,
+  "choices": null,
+  "answer": "481",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Cube roots of unity",
+    "body": "From $a+b+c=0$ and $a^2+b^2+c^2=0$ we get $ab+bc+ca=0$, so $a,b,c$ are the roots of $t^3-k$ for some $k$: if $a\\ne0$ then $(a,b,c)$ is a permutation of $(a,\\omega a,\\omega^2a)$ with $\\omega=e^{2\\pi i/3}$, and if $a=0$ all three are $0$.\n\n$(0,0,0)$ satisfies the conditions: $1$ triple. Otherwise a Gaussian integer $z\\ne0$ in the triple cannot be accompanied by another Gaussian integer: the angle between two lattice points seen from the origin has rational tangent, but $\\tan120^\\circ=-\\sqrt3$ is irrational, so $\\omega z,\\omega^2z\\notin\\mathbb Z[i]$. Hence exactly one entry is a Gaussian integer $z$ with $0<|z|\\le5$: there are $81$ lattice points with $|z|\\le5$, so $80$ choices of $z$; its position among $a,b,c$ ($3$ ways) and the order of the other two ($\\omega z,\\omega^2z$ or $\\omega^2z,\\omega z$: $2$ ways). That is $80\\cdot3\\cdot2=480$.\n\nTotal $480+1=481$.\n\n**Answer: 481**"
+   }
+  ],
+  "topics": [
+   "complex-numbers",
+   "counting"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "chmmc-2021-team-04",
+  "bank": "chmmc",
+  "source": {
+   "contest": "CHMMC",
+   "paper": "2021-2022 Team Round",
+   "year": 2021,
+   "number": 4,
+   "url": "http://chmmc.caltech.edu/archives/2021/Chmmc_2021-Team_Solutions.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "How many ordered triples $(a,b,c)$ of integers $1\\le a,b,c\\le31$ are there such that the remainder of $ab+bc+ca$ divided by $31$ equals $8$?",
+  "image": null,
+  "choices": null,
+  "answer": "930",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Complete the product",
+    "body": "$ab+bc+ca\\equiv8\\iff(a+c)(b+c)\\equiv c^2+8\\pmod{31}$. Since $31\\equiv3\\pmod4$, $-1$ is a non-residue, and $8\\equiv15^2$ is a residue, so $-8$ is a non-residue, i.e. $c^2+8\\equiv0$ has no solution: $c^2+8\\not\\equiv0$ for every $c$. For a fixed nonzero residue $k$, the equation $xy\\equiv k\\pmod{31}$ has exactly $30$ solutions $(x,y)$. So for each of the $31$ values of $c$, the pair $(a,b)$ has $30$ solutions (as $a\\mapsto a+c$, $b\\mapsto b+c$ is a bijection mod $31$).\n\nTotal $31\\cdot30=930$ (confirmed by brute force).\n\n**Answer: 930**"
+   }
+  ],
+  "topics": [
+   "number-theory",
+   "counting"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "chmmc-2021-team-05",
+  "bank": "chmmc",
+  "source": {
+   "contest": "CHMMC",
+   "paper": "2021-2022 Team Round",
+   "year": 2021,
+   "number": 5,
+   "url": "http://chmmc.caltech.edu/archives/2021/Chmmc_2021-Team_Solutions.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "How many cubics in the form $x^3-ax^2+(a+d)x-(a+2d)$ for integers $a,d$ have roots that are all non-negative integers?",
+  "image": null,
+  "choices": null,
+  "answer": "5",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Vieta",
+    "body": "Let the roots be $r,s,t\\in\\mathbb Z_{\\ge0}$. Then $r+s+t=a$, $rs+st+tr=a+d$, $rst=a+2d$, which eliminates $a,d$ to give $rst+r+s+t=2(rs+st+tr)$.\n\n*A root is $0$ ($r=0$):* $2st=s+t$, so $(2s-1)(2t-1)=1$, giving $s=t=1$ or $s=t=0$: the cubics with roots $\\{0,1,1\\}$ and $\\{0,0,0\\}$: $2$ cubics.\n\n*All roots positive, $r\\ge s\\ge t\\ge1$:* $rst<2(rs+st+tr)$ gives $\\frac1r+\\frac1s+\\frac1t>\\frac12$, hence $t\\le5$, and $r+s+t\\le rs+st+tr$ gives $\\frac1r+\\frac1s+\\frac1t\\le1$, so $t\\ge2$. Then:\n- $t=5$: $3rs-9r-9s+5=0$, impossible mod $3$.\n- $t=4$: $(2r-7)(2s-7)=41$, so $(r,s)=(24,4)$.\n- $t=3$: $(r-5)(s-5)=22$, so $(r,s)=(27,6),(16,7)$.\n- $t=2$: $3r+3s=2$, impossible.\n\nThat gives $3$ more triples $\\{24,4,4\\},\\{27,6,3\\},\\{16,7,3\\}$, all distinct. Total $2+3=5$ (a computer search confirms exactly these $5$ root triples).\n\n**Answer: 5**"
+   }
+  ],
+  "topics": [
+   "polynomials",
+   "number-theory"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "chmmc-2021-team-06",
+  "bank": "chmmc",
+  "source": {
+   "contest": "CHMMC",
+   "paper": "2021-2022 Team Round",
+   "year": 2021,
+   "number": 6,
+   "url": "http://chmmc.caltech.edu/archives/2021/Chmmc_2021-Team_Solutions.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "There is a unique degree-$10$ monic polynomial with integer coefficients $f(x)$ such that $$f\\left(\\sum_{j=0}^{9}\\sqrt[10]{2021}^{\\,j}\\right)=0.$$ Find the remainder when $f(1)$ is divided by $1000$.",
+  "image": null,
+  "choices": null,
+  "answer": "91",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Conjugates",
+    "body": "Let $\\theta=\\sqrt[10]{2021}$ and $\\alpha=\\sum_{j=0}^9\\theta^j=\\frac{\\theta^{10}-1}{\\theta-1}=\\frac{2020}{\\theta-1}$. The conjugates of $\\alpha$ are obtained by replacing $\\theta$ by the ten roots $x_k$ of $x^{10}=2021$, and $f(x)=\\prod_k(x-\\alpha_k)$ with $\\alpha_k=\\frac{2020}{x_k-1}$ (this polynomial has integer coefficients and is monic after the transformation below, as in the official solution, and it is the minimal polynomial of $\\alpha$).\n\nSo $f(1)=\\prod_k(1-\\alpha_k)=\\prod_k\\frac{x_k-2021}{x_k-1}$. Since $\\prod_k(x_k-c)=c^{10}-2021$ (the polynomial $x^{10}-2021$ evaluated at $c$, even degree),\n$$f(1)=\\frac{2021^{10}-2021}{1-2021}=\\frac{2021-2021^{10}}{2020}=-2021\\cdot\\frac{2021^9-1}{2020}.$$\nModulo $1000$ this is $\\equiv91$ (computed exactly with big integers).\n\n**Answer: 91**"
+   }
+  ],
+  "topics": [
+   "polynomials",
+   "number-theory",
+   "algebra"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "chmmc-2021-team-07",
+  "bank": "chmmc",
+  "source": {
+   "contest": "CHMMC",
+   "paper": "2021-2022 Team Round",
+   "year": 2021,
+   "number": 7,
+   "url": "http://chmmc.caltech.edu/archives/2021/Chmmc_2021-Team_Solutions.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Let $ABC$ be a triangle with $AB=5$, $BC=6$, and $CA=7$. Denote $\\Gamma$ the incircle of $ABC$; let $I$ be the center of $\\Gamma$. The circumcircle of $BIC$ intersects $\\Gamma$ at $X_1$ and $X_2$. The circumcircle of $CIA$ intersects $\\Gamma$ at $Y_1$ and $Y_2$. The circumcircle of $AIB$ intersects $\\Gamma$ at $Z_1$ and $Z_2$. The area of the triangle determined by $\\overline{X_1X_2}$, $\\overline{Y_1Y_2}$, and $\\overline{Z_1Z_2}$ equals $\\frac{m\\sqrt p}{n}$ for positive integers $m$, $n$, and $p$, where $m$ and $n$ are relatively prime and $p$ is squarefree. Compute $m+n+p$.",
+  "image": null,
+  "choices": null,
+  "answer": "53",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Radical axes",
+    "body": "Let $\\Gamma$ touch $BC,CA,AB$ at $D,E,F$ and let $D'=AI\\cap EF$, etc. Since $AEIF$ is cyclic with diameter $AI$, $D'E\\cdot D'F=D'I\\cdot D'A$, so $D'$ has equal power with respect to $\\Gamma$ and to circles $(AIB)$ and $(AIC)$ (both contain $A$ and $I$): $D'$ lies on both radical axes $Y_1Y_2$ and $Z_1Z_2$. Hence $D'$ is a vertex of the triangle formed by the three lines, and $D'=AI\\cap EF$ is the midpoint of $EF$ (as $AE=AF$). Similarly for the other two vertices, so the triangle is the medial triangle of $DEF$, with area $\\frac14[DEF]$.\n\nHeron: $[ABC]=\\sqrt{9\\cdot4\\cdot3\\cdot2}=6\\sqrt6$. The tangent lengths are $AE=AF=3$, $BF=BD=2$, $CD=CE=4$. Then $[AEF]=\\frac37\\cdot\\frac35[ABC]$, $[BFD]=\\frac25\\cdot\\frac26[ABC]$, $[CDE]=\\frac46\\cdot\\frac47[ABC]$ and\n$$[DEF]=6\\sqrt6\\left(1-\\frac9{35}-\\frac2{15}-\\frac8{21}\\right)=\\frac{48\\sqrt6}{35}.$$\nSo the requested area is $\\frac{12\\sqrt6}{35}$, and $m+n+p=12+35+6=53$ (a direct coordinate computation gives area $0.8398=\\frac{12\\sqrt6}{35}$).\n\n**Answer: 53**"
+   }
+  ],
+  "topics": [
+   "geometry"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "chmmc-2021-team-08",
+  "bank": "chmmc",
+  "source": {
+   "contest": "CHMMC",
+   "paper": "2021-2022 Team Round",
+   "year": 2021,
+   "number": 8,
+   "url": "http://chmmc.caltech.edu/archives/2021/Chmmc_2021-Team_Solutions.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Depei is imprisoned by an evil wizard and is coerced to play the following game. Every turn, Depei flips a fair coin. Then, the following events occur in this order:\n- The wizard computes the difference between the total number of heads and the total number of tails Depei has flipped. If that number is greater than or equal to $4$ or less than or equal to $-3$, then Depei is vaporized by the wizard.\n- The wizard determines if Depei has flipped at least $10$ heads or at least $10$ tails. If so, then the wizard releases Depei from the prison.\n\nThe probability that Depei is released by the evil wizard equals $\\frac m{2^k}$, where $m,k$ are positive integers. Compute $m+k$.",
+  "image": null,
+  "choices": null,
+  "answer": "27184",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Count lattice paths between two lines",
+    "body": "Encode flips as a lattice path (heads $=$ east, tails $=$ north). Depei survives while $-3<H-T<4$, i.e. the path avoids the lines $y=x-4$ and $y=x+3$. The first moment $H=10$ or $T=10$ happens after $16$ flips at the latest... precisely Depei is released exactly when the walk (which must stay in the strip) first reaches $10$ heads or $10$ tails; the endpoints reachable are: $(9,7)$ then a head, $(8,8)$ then either flip, $(7,9)$ then a tail, in the final flip... The official count reduces to the numbers $S(x,y)$ of strip-avoiding paths to $(9,7),(8,8),(7,9)$, which by the reflection principle (inclusion-exclusion over the two lines) are\n$$S(9,7)=\\tbinom{16}7-\\tbinom{16}5-\\tbinom{16}4+\\tbinom{16}2+1,\\quad S(8,8)=\\tbinom{16}8-\\tbinom{16}5-\\tbinom{16}4+2\\tbinom{16}1,\\quad S(7,9)=\\tbinom{16}7-\\tbinom{16}6-\\tbinom{16}3+\\tbinom{16}2+1.$$\nThe probability of release is $\\frac1{2^{16}}\\left(S(9,7)+S(8,8)+\\frac{S(7,9)}2\\right)$, which equals $\\frac{27167}{2^{17}}$. (An exact dynamic-programming computation over all game states gives the same value $\\frac{27167}{131072}$.) So $m+k=27167+17=27184$.\n\n**Answer: 27184**"
+   }
+  ],
+  "topics": [
+   "probability",
+   "counting"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "chmmc-2021-team-09",
+  "bank": "chmmc",
+  "source": {
+   "contest": "CHMMC",
+   "paper": "2021-2022 Team Round",
+   "year": 2021,
+   "number": 9,
+   "url": "http://chmmc.caltech.edu/archives/2021/Chmmc_2021-Team_Solutions.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Find the largest prime divisor of $$\\sum_{n=3}^{30}\\binom{\\binom n3}{2}.$$",
+  "image": null,
+  "choices": null,
+  "answer": "431",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Count pairs of triples by their union",
+    "body": "$E_n=\\binom{\\binom n3}2$ counts unordered pairs of distinct $3$-subsets of $\\{1,\\dots,n\\}$. Classify by the size of the union: a $4$-set contains $\\binom42=6$ pairs of distinct triples (each has union equal to the $4$-set); a $5$-set contains $15$ pairs with union the whole $5$-set (each of $10$ triples has $3$ partners, divided by $2$); a $6$-set contains $10$ (a triple and its complement). Therefore\n$$E_n=6\\binom n4+15\\binom n5+10\\binom n6.$$\nBy the hockey-stick identity $\\sum_{n=3}^{30}E_n=6\\binom{31}5+15\\binom{31}6+10\\binom{31}7=6\\binom{33}{7}+3\\binom{32}7+\\binom{31}7$-type simplification which evaluates to $38359431=3^2\\cdot11\\cdot29\\cdot31\\cdot431$.\n\nThe largest prime divisor is $431$ (also confirmed by direct summation).\n\n**Answer: 431**"
+   }
+  ],
+  "topics": [
+   "counting",
+   "number-theory"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "chmmc-2021-team-10",
+  "bank": "chmmc",
+  "source": {
+   "contest": "CHMMC",
+   "paper": "2021-2022 Team Round",
+   "year": 2021,
+   "number": 10,
+   "url": "http://chmmc.caltech.edu/archives/2021/Chmmc_2021-Team_Solutions.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "In triangle $ABC$, let $O$ be the circumcenter. The incircle of $ABC$ is tangent to $\\overline{BC}$, $\\overline{CA}$, and $\\overline{AB}$ at points $D$, $E$, and $F$, respectively. Let $G$ be the centroid of triangle $DEF$. Suppose the inradius and circumradius of $ABC$ is $3$ and $8$, respectively. Over all such triangles $ABC$, pick one that maximizes the area of triangle $AGO$. If we write $AG^2=\\frac mn$ for relatively prime positive integers $m$ and $n$, then find $m$.",
+  "image": null,
+  "choices": null,
+  "answer": "337",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "GO is constant",
+    "body": "Let $I$ be the incenter (the circumcenter of $DEF$) and $H,N$ the orthocenter and nine-point center of $DEF$. Let $X,Y,Z$ be the feet of the altitudes of $DEF$; then $XYZ$ is homothetic to $ABC$ ($XY\\parallel AB$, etc.) with centre $L$ and ratio $\\frac{3/2}{8}=\\frac3{16}$ (the circumcircle of $XYZ$ is the nine-point circle of $DEF$, of radius $\\frac r2=\\frac32$). Under this homothety $I\\ (\\text{incenter of }ABC)\\leftrightarrow H$ and $O\\leftrightarrow N$, and $I,H,N,G$ lie on the Euler line of $DEF$, so $L,H,N,G,I,O$ are collinear.\n\nWith $HI=78x$ one finds $LI=96x$, $LH=18x$, $LN=57x$, $LO=304x$, hence $IO=208x$, and $GI=\\frac13HI=26x$ so $GO=234x$. Therefore $GO=\\frac98\\,IO$. By Euler's formula $IO=\\sqrt{R(R-2r)}=\\sqrt{8\\cdot2}=4$, so $GO=\\frac92$ for every such triangle.\n\nThe area of $AGO$ is $\\frac12\\cdot GO\\cdot(\\text{distance from }A\\text{ to line }OG)$, maximised when $AO\\perp OG$ (such a triangle exists on the circle). Then $AG^2=AO^2+OG^2=64+\\frac{81}4=\\frac{337}4$, so $m=337$ (a numerical search over all triangles with $R=8,r=3$ finds maximum area $18=\\frac12\\cdot8\\cdot\\frac92$).\n\n**Answer: 337**"
+   }
+  ],
+  "topics": [
+   "geometry"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ }
+]

@@ -1,0 +1,523 @@
+[
+ {
+  "id": "cmimc-2021-team-01",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Team Round",
+   "year": 2021,
+   "number": 1,
+   "url": "https://cmimc.com/archive/cmimc2021/2021_Team.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Given a trapezoid with bases $AB$ and $CD$, there exists a point $E$ on $CD$ such that drawing the segments $AE$ and $BE$ partitions the trapezoid into $3$ similar isosceles triangles, each with long side twice the short side. What is the sum of all possible values of $\\frac{CD}{AB}$?",
+  "image": null,
+  "choices": null,
+  "answer": "65/4",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Classify the triangles by which side lies on a base",
+    "body": "Each triangle has sides in ratio $1:2:2$ (short side $s$, two long sides $2s$). Call a triangle **V** if its short side lies on a base of the trapezoid and **H** otherwise (a long side lies on the base). The three triangles are $ADE$, $AEB$, $BEC$ from left to right; their bases on the parallel lines are $DE$, $AB$, $EC$.\n\nAll three triangles have the same height (the distance between the bases). A V triangle of scale $s$ (base $s$) has height $\\frac{\\sqrt{15}}{2}s$, an H triangle of scale $s'$ (base $2s'$) has height $\\frac{\\sqrt{15}}{4}s'$. So if a V triangle has base $1$, an H triangle has $s'=2$ and base $4$.\n\nNormalising the V triangles to base $1$ and the H triangles to base $4$, we get $\\frac{CD}{AB}=\\frac{DE+EC}{AB}$ for each left-to-right type sequence:\n\n- HHH or VVV: $\\frac{2+2}{2}=2$ and $\\frac{1+1}{1}=2$, giving $2$.\n- HHV or VHH: $\\frac{4+1}{4}=\\frac54$.\n- HVV or VVH: $\\frac{4+1}{1}=5$.\n- HVH: $\\frac{4+4}{1}=8$.\n- VHV: impossible, since the two V triangles' apexes $A$ and $B$ sit above the midpoints of $DE$ and $EC$, forcing $AB=1$, but the middle H triangle needs $AB=4$.\n\nSum of possible values: $2+\\frac54+5+8=\\frac{65}{4}$. (A numerical enumeration of all configurations finds exactly these four ratios.)\n\n**Answer: $\\frac{65}{4}$**"
+   }
+  ],
+  "topics": [
+   "geometry"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2021-team-02",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Team Round",
+   "year": 2021,
+   "number": 2,
+   "url": "https://cmimc.com/archive/cmimc2021/2021_Team.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Let $p_1,p_2,p_3,p_4,p_5,p_6$ be distinct primes greater than $5$. Find the minimum possible value of $$p_1+p_2+p_3+p_4+p_5+p_6-6\\min(p_1,p_2,p_3,p_4,p_5,p_6).$$",
+  "image": null,
+  "choices": null,
+  "answer": "46",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Minimise the gaps",
+    "body": "Order $p_1<\\dots<p_6$. The expression equals $\\sum_{i=2}^6(p_i-p_1)=5(p_2-p_1)+4(p_3-p_2)+3(p_4-p_3)+2(p_5-p_4)+(p_6-p_5)$. All primes exceed $5$, so they are odd and each gap is even, at least $2$. Two consecutive gaps cannot both be $2$ (three terms $p,p+2,p+4$ cover all residues mod $3$, so one is divisible by $3$).\n\nThe gaps $(2,4,2,4,2)$ would give the smallest value $42$, but then $p_1,p_1+2,p_1+6,p_1+8,p_1+12,p_1+14$ are congruent mod $5$ to $p_1,p_1+2,p_1+1,p_1+3,p_1+2,p_1+4$, which covers every residue, so one of them is a multiple of $5$. Impossible. The next candidate value $44$ requires gaps $(2,4,2,4,4)$, but then $p_4,p_4+4,p_4+8$ cover all residues mod $3$. Impossible. Value $46$ is attained by the gaps $(2,4,2,4,6)$, e.g. $(11,13,17,19,23,29)$: $11+13+17+19+23+29-66=46$.\n\n**Answer: 46**"
+   }
+  ],
+  "topics": [
+   "number-theory"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2021-team-03",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Team Round",
+   "year": 2021,
+   "number": 3,
+   "url": "https://cmimc.com/archive/cmimc2021/2021_Team.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Evaluate $$\\sum_{i=0}^\\infty\\frac{7^i}{(7^i+1)(7^i+7)}.$$",
+  "image": null,
+  "choices": null,
+  "answer": "7/48",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Telescoping",
+    "body": "Dividing numerator and denominator by $7$, the summand is $\\frac{7^{i-1}}{(7^i+1)(7^{i-1}+1)}$. Since\n$$\\frac1{7^{i-1}+1}-\\frac1{7^i+1}=\\frac{7^i-7^{i-1}}{(7^i+1)(7^{i-1}+1)}=\\frac{6\\cdot7^{i-1}}{(7^i+1)(7^{i-1}+1)},$$\nthe sum $S$ satisfies $6S=\\sum_{i\\ge0}\\left(\\frac1{7^{i-1}+1}-\\frac1{7^i+1}\\right)$, which telescopes to $\\frac1{7^{-1}+1}-0=\\frac78$. So $S=\\frac{7}{48}$.\n\n**Answer: $\\frac{7}{48}$**"
+   }
+  ],
+  "topics": [
+   "sequences-series",
+   "algebra"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2021-team-04",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Team Round",
+   "year": 2021,
+   "number": 4,
+   "url": "https://cmimc.com/archive/cmimc2021/2021_Team.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "How many four-digit positive integers $\\overline{a_1a_2a_3a_4}$ have only nonzero digits and have the property that $|a_i-a_j|\\ne1$ for all $1\\le i<j\\le4$?",
+  "image": null,
+  "choices": null,
+  "answer": "2021",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Choose the multiset of digits",
+    "body": "Choose a multiset of four digits from $\\{1,\\dots,9\\}$ with no two differing by $1$, then permute it.\n\n- $4$ distinct digits, pairwise non-consecutive: by stars and bars $\\binom64=15$ sets, each in $4!$ orders: $360$.\n- $3$ distinct digits (one repeated): $\\binom73=35$ sets of three pairwise non-consecutive digits, $3$ choices for the repeated one, $\\frac{4!}{2!}=12$ orders: $35\\cdot3\\cdot12=1260$.\n- $2$ distinct digits: $\\binom82=28$ non-consecutive pairs; patterns $aabb$ ($\\frac{4!}{2!2!}=6$ orders) and $abbb$/$aaab$ ($2\\cdot4=8$ orders): $28\\cdot(6+8)=392$.\n- $1$ distinct digit: $9$.\n\nTotal: $360+1260+392+9=2021$. (Brute force over all $9^4$ numbers agrees.)\n\n**Answer: 2021**"
+   }
+  ],
+  "topics": [
+   "counting"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2021-team-05",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Team Round",
+   "year": 2021,
+   "number": 5,
+   "url": "https://cmimc.com/archive/cmimc2021/2021_Team.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Let $N$ be the fifth largest number that can be created by combining $2021$ $1$'s using addition, multiplication, and exponentiation, in any order (parentheses are allowed). If $f(x)=\\log_2(x)$, and $k$ is the least positive integer such that $f^k(N)$ is not a power of $2$, what is the value of $f^k(N)$? (Note: $f^k(N)=f(f(\\cdots(f(N))))$, where $f$ is applied $k$ times.)",
+  "image": null,
+  "choices": null,
+  "answer": "3^27",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Towers of twos",
+    "body": "Let $M(x)$ be the largest number made from $x$ ones: $M(1..6)=1,2,3,4,9,27$ and then $M(x+2)=2^{M(x)}$. So $M(2021)$ is a tower of $1007$ twos topped by $M(7)=512$.\n\nThe largest numbers are towers of $1007$ twos topped by the largest expressions in $7$ ones: $2^{3^2}=512$, $2^{2^3}=256$, $3^4=81$, $4^3=64$ (the next one is $32$). These are the first four, in this order (the towers with $1007$ twos and tops $512,256,81,64$, i.e. $1006$ twos topped by $2^{512},2^{256},2^{81},2^{64}$). Changing something lower in a tower costs far more than changing the top, so the next largest number is a tower of $1006$ twos (using $2012$ ones) topped by the best remaining expression in $9$ ones, which is $3^{3^3}=3^{27}\\approx7.6\\cdot10^{12}$. This lies between $2^{64}\\approx1.8\\cdot10^{19}$ and $2^{32}\\approx4.3\\cdot10^{9}$, so it is indeed the fifth largest number. So $N$ is a tower of $1006$ twos topped by $3^{27}$.\n\nApplying $\\log_2$ removes one $2$ from the bottom of the tower each time. After $1005$ applications we have $2^{3^{27}}$, a power of $2$; after $1006$ applications we get $3^{27}$, which is not a power of $2$. So $k=1006$ and $f^k(N)=3^{27}=7625597484987$.\n\n**Answer: $3^{27}$**"
+   }
+  ],
+  "topics": [
+   "number-theory",
+   "algebra"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null,
+  "answerDisplay": "$3^{27}$"
+ },
+ {
+  "id": "cmimc-2021-team-06",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Team Round",
+   "year": 2021,
+   "number": 6,
+   "url": "https://cmimc.com/archive/cmimc2021/2021_Team.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Let $P(x)$, $Q(x)$, and $R(x)$ be three monic quadratic polynomials with only real roots, satisfying\n$$P(Q(x))=(x-1)(x-3)(x-5)(x-7)$$\n$$Q(R(x))=(x-2)(x-4)(x-6)(x-8)$$\nfor all real numbers $x$. What is $P(0)+Q(0)+R(0)$?",
+  "image": null,
+  "choices": null,
+  "answer": "129",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Symmetry of the compositions",
+    "body": "$P(Q(x))$ has four distinct roots, so $Q$ takes only two values on $\\{1,3,5,7\\}$ and is symmetric about $x=4$: $Q(x)=(x-4)^2+a$, with values $a+9$ (at $1,7$) and $a+1$ (at $3,5$), which are the two roots of $P$. So $P(x)=(x-(a+5))^2+b$.\n\nSimilarly $R(x)=(x-5)^2+c$ and, from $Q(R(x))$ having roots $2,4,6,8$, $Q(x)=(x-(c+5))^2+d$. Comparing with $Q(x)=(x-4)^2+a$ gives $c+5=4$, $c=-1$, so $R(x)=(x-4)(x-6)$. $R$ takes the values $8$ (at $2,8$) and $0$ (at $4,6$), so $Q(x)=x(x-8)$. Then $Q$ takes the values $-7$ (at $1,7$) and $-15$ (at $3,5$), so $P(x)=(x+7)(x+15)=x^2+22x+105$.\n\n$P(0)+Q(0)+R(0)=105+0+24=129$.\n\n**Answer: 129**"
+   }
+  ],
+  "topics": [
+   "polynomials",
+   "algebra"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2021-team-07",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Team Round",
+   "year": 2021,
+   "number": 7,
+   "url": "https://cmimc.com/archive/cmimc2021/2021_Team.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "text",
+  "prompt": "Let $P$ and $Q$ be fixed points in the Euclidean plane. Consider another point $O_0$. Define $O_{i+1}$ as the center of the unique circle passing through $O_i$, $P$ and $Q$. (Assume that $O_i,P,Q$ are never collinear.) How many possible positions of $O_0$ satisfy that $O_{2021}=O_0$?",
+  "image": null,
+  "choices": null,
+  "answer": "2^2021-2",
+  "acceptedAnswers": [
+   "2^2021 - 2",
+   "2**2021-2",
+   "2^2021−2"
+  ],
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Doubling the angle",
+    "body": "Take $P=(0,1)$ and $Q=(0,-1)$. Every $O_i$ with $i\\ge1$ lies on the $x$-axis (the perpendicular bisector of $PQ$), and $O_{2021}=O_0$ forces $O_0$ to be on the $x$-axis too, say $O_0=(x,0)$. The centre $(x',0)$ of the circle through $(x,0),P,Q$ satisfies $(x'-x)^2=x'^2+1$, i.e. $x'=\\frac{x^2-1}{2x}$. Writing $x=\\cot\\alpha$ with $\\alpha\\in(0,\\pi)$ this is $x'=\\cot2\\alpha$.\n\nSo we need $\\cot\\alpha=\\cot(2^{2021}\\alpha)$, i.e. $(2^{2021}-1)\\alpha\\equiv0\\pmod\\pi$, i.e. $\\alpha=\\frac{k\\pi}{2^{2021}-1}$ for $k=1,\\dots,2^{2021}-2$. The value $\\alpha=\\frac\\pi2$ (where $x=0$ would make $O_i,P,Q$ collinear) never occurs, since $2^{2021}-1$ is odd, and no iterate hits it either. Different $k$ give different $x$, so there are $2^{2021}-2$ positions.\n\n(Checking the iteration for small exponents $n$ gives $2^n-2$ fixed points as well.)\n\n**Answer: $2^{2021}-2$**"
+   }
+  ],
+  "topics": [
+   "geometry",
+   "trigonometry"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null,
+  "answerDisplay": "$2^{2021}-2$"
+ },
+ {
+  "id": "cmimc-2021-team-08",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Team Round",
+   "year": 2021,
+   "number": 8,
+   "url": "https://cmimc.com/archive/cmimc2021/2021_Team.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Determine the number of functions $f$ from the integers to $\\{1,2,\\dots,15\\}$ which satisfy\n$$f(x)=f(x+15)$$\nand\n$$f(x+f(y))=f(x-f(y))$$\nfor all $x,y$.",
+  "image": null,
+  "choices": null,
+  "answer": "375",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Periodicity",
+    "body": "Replacing $x$ by $x+f(y)$ in the second condition gives $f(x+2f(y))=f(x)$, so $2f(y)$ is a period for every $y$, and $15$ is a period. The gcd of all these periods is also a period, and since $\\gcd(2,15)=1$ it equals $n:=\\gcd(15,f(0),\\dots,f(14))\\in\\{1,3,5,15\\}$. Conversely, if $f$ has period $n$ and $n$ divides every value $f(y)$, then $f(x\\pm f(y))=f(x)$ and both conditions hold. So we count functions with period $n$ whose values are all multiples of $n$ and whose value-gcd with $15$ is exactly $n$:\n\n- $n=1$: $f$ is constant $c$ with $\\gcd(c,15)=1$: $8$ values of $c$ (namely $1,2,4,7,8,11,13,14$).\n- $n=3$: $f$ is determined by $f(0),f(1),f(2)\\in\\{3,6,9,12,15\\}$, excluding all three equal to $15$ (that has $n=15$): $5^3-1=124$.\n- $n=5$: $f$ is determined by $f(0),\\dots,f(4)\\in\\{5,10,15\\}$, excluding all $15$: $3^5-1=242$.\n- $n=15$: $f\\equiv15$: $1$ function.\n\nTotal: $8+124+242+1=375$.\n\n**Answer: 375**"
+   }
+  ],
+  "topics": [
+   "functional-equations",
+   "counting",
+   "number-theory"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2021-team-09",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Team Round",
+   "year": 2021,
+   "number": 9,
+   "url": "https://cmimc.com/archive/cmimc2021/2021_Team.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Let $ABC$ be a triangle with circumcenter $O$. Additionally, $\\angle BAC=20^\\circ$ and $\\angle BCA=70^\\circ$. Let $D,E$ be points on side $AC$ such that $BO$ bisects $\\angle ABD$ and $BE$ bisects $\\angle CBD$. If $P$ and $Q$ are points on line $BC$ such that $DP$ and $EQ$ are perpendicular to $AC$, what is $\\angle PAQ$?",
+  "image": null,
+  "choices": null,
+  "answer": "25",
+  "acceptedAnswers": null,
+  "answerUnit": "degrees",
+  "solutions": [
+   {
+    "title": "Cyclic quadrilaterals",
+    "body": "$\\angle ABC=90^\\circ$, so $O$ is the midpoint of $AC$ and $OA=OB$, giving $\\angle ABO=\\angle BAO=20^\\circ$. As $BO$ bisects $\\angle ABD$, $\\angle ABD=40^\\circ$, so $\\angle DBC=50^\\circ$, and $BE$ bisecting $\\angle CBD$ gives $\\angle EBC=\\angle EBD=25^\\circ$.\n\nSince $\\angle ABP=90^\\circ=\\angle ADP$ (because $DP\\perp AC$ and $P\\in BC$, with $\\angle ABP=\\angle ABC=90^\\circ$), the points $A,D,B,P$ lie on a circle, so $\\angle PAD=\\angle PBD=\\angle CBD$. Likewise $A,E,B,Q$ are concyclic and $\\angle QAE=\\angle QBE=\\angle CBE$. Hence\n$$\\angle PAQ=\\angle PAD-\\angle QAE=\\angle CBD-\\angle CBE=\\angle EBD=25^\\circ.$$\n(A coordinate computation gives $25.000^\\circ$.)\n\n**Answer: 25 degrees**"
+   }
+  ],
+  "topics": [
+   "geometry"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2021-team-10",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Team Round",
+   "year": 2021,
+   "number": 10,
+   "url": "https://cmimc.com/archive/cmimc2021/2021_Team.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "How many functions $f:\\{1,2,3,\\dots,7\\}\\to\\{1,2,3,\\dots,7\\}$ are there such that the set $\\mathcal F=\\{f(i):i\\in\\{1,\\dots,7\\}\\}$ has cardinality four, while the set $\\mathcal G=\\{f(f(f(i))):i\\in\\{1,\\dots,7\\}\\}$ consists of a single element?",
+  "image": null,
+  "choices": null,
+  "answer": "23520",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Cases on the image of $f\\circ f$",
+    "body": "Let $\\mathcal H=\\{f(f(i))\\}$, so $\\mathcal F\\supseteq\\mathcal H\\supseteq\\mathcal G$, $|\\mathcal F|=4$, $|\\mathcal G|=1$.\n\n- $|\\mathcal H|=4$: then $f$ permutes $\\mathcal F$, so $\\mathcal G=\\mathcal F$ has $4$ elements. Impossible.\n- $|\\mathcal H|=3$: say $\\mathcal F=\\{1,2,3,4\\}$, $\\mathcal H=\\{1,2,3\\}$ and $f(4)=1$. Since $2,3\\in\\mathcal H$, the values $f(1),f(2),f(3)$ cover $2$ and $3$, putting $2,3$ in $\\mathcal G$. Impossible.\n- $|\\mathcal H|=2$: say $\\mathcal F=\\{1,2,3,4\\}$, $\\mathcal H=\\{1,2\\}$, $\\mathcal G=\\{1\\}$. Since $f(\\mathcal H)=\\mathcal G$, we need $f(1)=f(2)=1$. Also $\\mathcal H=f(\\mathcal F)=\\{1,f(3),f(4)\\}$ must equal $\\{1,2\\}$: $f(3),f(4)\\in\\{1,2\\}$ with at least one equal to $2$, so $3$ options. Finally $\\mathcal F=\\{1,2\\}\\cup\\{f(5),f(6),f(7)\\}$ forces $f(5),f(6),f(7)\\in\\{1,2,3,4\\}$ to include both $3$ and $4$: $4^3-2\\cdot3^3+2^3=18$ options. The choices of $\\mathcal F,\\mathcal H,\\mathcal G$ number $\\binom74\\binom42\\binom21=420$. Total $420\\cdot3\\cdot18=22680$.\n- $|\\mathcal H|=1$: $\\mathcal F=\\{1,2,3,4\\}$, $\\mathcal H=\\mathcal G=\\{1\\}$. Then $\\mathcal H=f(\\mathcal F)$ gives $f(1)=f(2)=f(3)=f(4)=1$, and $f(5),f(6),f(7)$ must cover $2,3,4$: $3!=6$ ways. The sets can be chosen in $\\binom74\\cdot4\\cdot1=140$ ways. Total $840$.\n\nThe answer is $22680+840=23520$. (A computer enumeration of all $7^7$ functions agrees.)\n\n**Answer: 23520**"
+   }
+  ],
+  "topics": [
+   "counting",
+   "functional-equations"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2021-team-11",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Team Round",
+   "year": 2021,
+   "number": 11,
+   "url": "https://cmimc.com/archive/cmimc2021/2021_Team.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "The set of all points $(x,y)$ in the plane satisfying $x<y$ and $x^3-y^3>x^2-y^2$ has area $A$. What is the value of $A$?",
+  "image": null,
+  "choices": null,
+  "answer": "pi*sqrt(3)/9",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "An ellipse cut in half",
+    "body": "Since $x-y<0$, dividing $x^3-y^3>x^2-y^2$ by $x-y$ flips the inequality: $x^2+xy+y^2<x+y$, i.e. $f(x,y)=x^2+xy+y^2-x-y<0$. This is the interior of an ellipse $E$. By symmetry in $x,y$, the line $y=x$ is one of its axes. On it, $3x^2-2x=0$ gives $x=0,\\frac23$: the ellipse meets this axis at $(0,0)$ and $(\\frac23,\\frac23)$, so it is centred at $(\\frac13,\\frac13)$ with semi-axis $\\frac{\\sqrt2}{3}$ along $y=x$. The other axis is the perpendicular line $x+y=\\frac23$; there $f=(x+y)^2-(x+y)-xy=-\\frac29-x(\\frac23-x)=x'^2-\\frac13$ with $x'=x-\\frac13$, so $x'=\\pm\\frac{1}{\\sqrt3}$, and the distance from the centre along this axis is $\\sqrt2\\cdot\\frac1{\\sqrt3}=\\frac{\\sqrt6}{3}$, the second semi-axis.\n\nThe region $x<y$ is half of the ellipse, so\n$$A=\\frac12\\pi\\cdot\\frac{\\sqrt2}{3}\\cdot\\frac{\\sqrt6}{3}=\\frac{\\pi\\sqrt{12}}{18}=\\frac{\\pi\\sqrt3}{9}.$$\n(A Monte Carlo estimate gives $\\approx0.604$, matching $\\frac{\\pi\\sqrt3}{9}\\approx0.6046$.)\n\n**Answer: $\\frac{\\pi\\sqrt3}{9}$**"
+   }
+  ],
+  "topics": [
+   "geometry",
+   "algebra"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null,
+  "answerDisplay": "$\\dfrac{\\pi\\sqrt3}{9}$"
+ },
+ {
+  "id": "cmimc-2021-team-12",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Team Round",
+   "year": 2021,
+   "number": 12,
+   "url": "https://cmimc.com/archive/cmimc2021/2021_Team.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Let $\\triangle ABC$ be a triangle, and let $l$ be the line passing through its incenter and centroid. Assume that $B$ and $C$ lie on the same side of $l$, and that the distance from $B$ to $l$ is twice the distance from $C$ to $l$. Suppose also that the length $BA$ is twice that of $CA$. If $\\triangle ABC$ has integer side lengths and is as small as possible, what is $AB^2+BC^2+CA^2$?",
+  "image": null,
+  "choices": null,
+  "answer": "61",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Moments about the line $l$",
+    "body": "Let $a=BC$, $b=CA$, $c=AB$ and let $x,y,z$ be the distances from $A,B,C$ to $l$. $l$ passes through the centroid $G$, where equal masses at $A,B,C$ balance, so the torques about $l$ cancel: since $B,C$ are on the same side, $A$ is on the other side and $x=y+z$. Also $l$ passes through the incenter $I$, where masses $a,b,c$ at $A,B,C$ balance, so $ax=by+cz$.\n\nEliminating $x$: $a(y+z)=by+cz$, so $y(a-b)=z(c-a)$, i.e. $y(b-a)=z(a-c)$. With $y=2z$: $2(b-a)=a-c$, so $3a=2b+c$. With $c=2b$ this gives $3a=4b$, so $(a,b,c)=(4k,3k,6k)$. The smallest is $k=1$: sides $4,3,6$ (a valid triangle since $3+4>6$), and $AB^2+BC^2+CA^2=36+16+9=61$.\n\n(A numerical check for the triangle with $BC=4$, $CA=3$, $AB=6$ gives distance ratio $2$ with $B,C$ on the same side of $l$.)\n\n**Answer: 61**"
+   },
+   {
+    "title": "Barycentric coordinates",
+    "body": "Since $B,C$ are on the same side of $l$ and $d(B,l)=2d(C,l)$, the reflection $B'=2C-B$ of $B$ over $C$ is at signed distance $2d(C,l)-d(B,l)=0$, so it lies on $l$. In barycentrics $B'=(0:-1:2)=(0:1:-2)$, and $I=(a:b:c)$, $G=(1:1:1)$ also lie on $l$, so they are collinear:\n$$\\det\\begin{pmatrix}0&1&-2\\\\a&b&c\\\\1&1&1\\end{pmatrix}=0\\iff 3a=2b+c.$$\nThen continue as above: $c=2b$ gives $(a,b,c)=(4,3,6)$ and the sum of squares is $61$.\n\n**Answer: 61**"
+   }
+  ],
+  "topics": [
+   "geometry",
+   "algebra"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2021-team-13",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Team Round",
+   "year": 2021,
+   "number": 13,
+   "url": "https://cmimc.com/archive/cmimc2021/2021_Team.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Let $p=3\\cdot10^{10}+1$ be a prime and let $p_n$ denote the probability that $p\\mid(k^k-1)$ for a random $k$ chosen uniformly from $\\{1,2,\\dots,n\\}$. Given that $p_n\\cdot p$ converges to a value $L$ as $n$ goes to infinity, what is $L$?",
+  "image": null,
+  "choices": null,
+  "answer": "90",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Orders modulo $p$",
+    "body": "$k^k\\bmod p$ depends only on $k\\bmod p$ and $k\\bmod(p-1)$, i.e. on $k\\bmod p(p-1)$. So $L=p\\cdot\\frac{\\#\\{k\\bmod p(p-1):k^k\\equiv1\\}}{p(p-1)}$.\n\nFix a residue $a\\bmod p$ of multiplicative order $d$ (so $d\\mid p-1$). For $k\\equiv a$, $k^k\\equiv1$ iff $d\\mid k$. Among the $p-1$ values of $k\\bmod p(p-1)$ with $k\\equiv a\\pmod p$, the residue of $k$ mod $p-1$ is uniformly distributed (CRT), so a fraction $\\frac1d$ of them work. There are $\\varphi(d)$ residues of order $d$. Hence\n$$L=\\frac{p}{p(p-1)}\\sum_{d\\mid p-1}\\varphi(d)\\frac{p-1}{d}=\\sum_{d\\mid p-1}\\frac{\\varphi(d)}{d}.$$\nThis is multiplicative in $p-1$, and for a prime power $q^m$ it equals $1+m\\left(1-\\frac1q\\right)$. Since $p-1=3\\cdot2^{10}\\cdot5^{10}$,\n$$L=\\left(1+1-\\tfrac13\\right)\\left(1+10-\\tfrac{10}2\\right)\\left(1+10-\\tfrac{10}5\\right)=\\tfrac53\\cdot6\\cdot9=90.$$\n(Brute force for small primes $p$ confirms $L=\\sum_{d\\mid p-1}\\varphi(d)/d$.)\n\n**Answer: 90**"
+   }
+  ],
+  "topics": [
+   "number-theory",
+   "probability"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2021-team-14",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Team Round",
+   "year": 2021,
+   "number": 14,
+   "url": "https://cmimc.com/archive/cmimc2021/2021_Team.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Let $S$ be the set of lattice points $(x,y)\\in\\mathbb Z^2$ such that $-10\\le x,y\\le10$. Let the point $(0,0)$ be $O$. Let Scotty the Dog's position be point $P$, where initially $P=(0,1)$. At every second, consider all pairs of points $C,D\\in S$ such that neither $C$ nor $D$ lies on line $OP$, and the area of quadrilateral $OCPD$ (with the points going clockwise in that order) is $1$. Scotty finds the pair $C,D$ maximizing the sum of the $y$ coordinates of $C$ and $D$, and randomly jumps to one of them, setting that as the new point $P$. After $50$ such moves, Scotty ends up at point $(1,1)$. Find the probability that he never returned to the point $(0,1)$ during these 50 moves.",
+  "image": null,
+  "choices": null,
+  "answer": "16/25",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Farey sequence and a ballot count",
+    "body": "By the shoelace formula the triangles $OCP$ and $OPD$ have areas that are multiples of $\\frac12$, and nonzero since $C,D$ are off line $OP$; as the quadrilateral has area $1$, both are $\\frac12$. So $C$ and $D$ are the lattice points with $x_Cy_P-y_Cx_P=\\pm1$ on either side of $OP$ (and similarly $D$), i.e. the neighbours of the direction of $P$ in the Farey sequence of order $10$ (restricted to the half-plane $y>0$ for the first $50$ moves): choosing the pair maximising $y_C+y_D$ means $P$ moves to the next or previous term of that sequence.\n\nThe point $(1,1)$ is the term after all the points in the upper half of the first quadrant triangle: there are $\\varphi(1)+\\dots+\\varphi(10)=31$ of them, so $(1,1)$ is the $32$nd term after the start $(0,1)$ (at position $0$ it starts, steps go \"up\" or \"down\" in the sequence). Reaching position $32$ in $50$ steps means $41$ steps up and $9$ steps down. Never returning to $(0,1)$ (position $0$) means the walk stays positive; by the ballot theorem the probability is $\\frac{41-9}{41+9}=\\frac{32}{50}=\\frac{16}{25}$.\n\n(An exact computer simulation of the process with the stated rules reproduces $\\frac{16}{25}$.)\n\n**Answer: $\\frac{16}{25}$**"
+   }
+  ],
+  "topics": [
+   "probability",
+   "number-theory",
+   "counting"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2021-team-15",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Team Round",
+   "year": 2021,
+   "number": 15,
+   "url": "https://cmimc.com/archive/cmimc2021/2021_Team.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Adam has a circle of radius $1$ centered at the origin.\n\n- First, he draws $6$ segments from the origin to the boundary of the circle, which splits the upper (positive $y$) semicircle into $7$ equal pieces.\n- Next, starting from each point where a segment hit the circle, he draws an altitude to the $x$-axis.\n- Finally, starting from each point where an altitude hit the $x$-axis, he draws a segment directly away from the bottommost point of the circle $(0,-1)$, stopping when he reaches the boundary of the circle.\n\nWhat is the product of the lengths of all $18$ segments Adam drew?",
+  "image": "qimages/cmimc/2021-team/q15.webp",
+  "choices": null,
+  "answer": "343/692224",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Power of a point and a cubic polynomial",
+    "body": "The $6$ radii have length $1$. Let $\\theta_k=\\frac{k\\pi}{7}$ for $k=1,\\dots,6$. The $k$-th altitude has length $b_k=\\sin\\theta_k$ and its foot is $(\\cos\\theta_k,0)$, at distance $\\sqrt{1+\\cos^2\\theta_k}$ from $(0,-1)$. The green segment of length $g_k$ continues along that line from the foot to the circle. The foot $F_k$ lies on two chords of the unit circle: the vertical chord of the altitude (from $(\\cos\\theta_k,\\sin\\theta_k)$ to $(\\cos\\theta_k,-\\sin\\theta_k)$, with $F_k$ in the middle), whose two parts have product $\\sin^2\\theta_k$, and the chord from $(0,-1)$ through $F_k$, whose parts are $\\sqrt{1+\\cos^2\\theta_k}$ and $g_k$. By the power of the point $F_k$, $g_k\\sqrt{1+\\cos^2\\theta_k}=\\sin^2\\theta_k$. So\n$$P=\\prod_{k=1}^6 b_kg_k=\\prod_{k=1}^6\\frac{\\sin^3\\theta_k}{\\sqrt{1+\\cos^2\\theta_k}}=\\frac{Q^3}{R},\\quad Q=\\prod\\sin\\theta_k,\\ R=\\prod\\sqrt{1+\\cos^2\\theta_k}.$$\nPair $k$ with $7-k$: $Q=\\prod_{k=1}^3\\sin^2\\theta_k=\\prod_{k=1}^3\\frac{1-\\cos2\\theta_k}{2}=\\frac{1}{2^6}\\prod(2-2\\cos2\\theta_k)=\\frac{A(2)}{2^6}$, and $R=\\prod_{k=1}^3(1+\\cos^2\\theta_k)=\\prod\\frac{3+\\cos2\\theta_k}{2}=\\frac1{2^6}\\prod(6+2\\cos2\\theta_k)=-\\frac{A(-6)}{2^6}$, where $A$ is the monic cubic with roots $2\\cos2\\theta_k$ ($k=1,2,3$), i.e. the minimal polynomial of $\\zeta+\\zeta^{-1}$ for a primitive $7$th root of unity: $A(y)=y^3+y^2-2y-1$. Then $A(2)=7$, $A(-6)=-169$, and\n$$P=\\frac{Q^3}{R}=-\\frac{A(2)^3}{2^{12}A(-6)}=\\frac{7^3}{2^{12}\\cdot13^2}=\\frac{343}{692224}.$$\n(A direct numerical product of the $18$ lengths gives $4.955\\times10^{-4}$.)\n\n**Answer: $\\frac{7^3}{2^{12}\\cdot13^2}=\\frac{343}{692224}$**"
+   }
+  ],
+  "topics": [
+   "geometry",
+   "trigonometry",
+   "polynomials"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null,
+  "answerDisplay": "$\\dfrac{7^3}{2^{12}\\cdot13^2}$"
+ }
+]

@@ -1,0 +1,36 @@
+[
+ {
+  "id": "cmimc-2024-tcs-02a",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Theoretical Computer Science Round",
+   "year": 2024,
+   "number": 2,
+   "url": "https://cmimc.com/archive/cmimc2024/CMIMC_2024_TCS.pdf"
+  },
+  "grade": "9-12",
+  "points": 25,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "**Setting (\"The Decks of Cards Sponsors Sent\", part (a)).** Alice and Bob are playing a collaborative game in which they agree upon an encoding/strategy. Alice shuffles a deck of $52$ cards (numbered $1$--$52$) and takes the first $n$ cards off the top of the deck. Alice then chooses one card to be put to the side, and chooses an ordering of the other $n-1$ cards. Bob then walks into the room seeing the $n-1$ cards in the order Alice put them in. For example, if Alice was given $9$-$4$-$10$-$51$-$7$-$8$ and chose to put $8$ to the side, she could put $5$ cards in order of $9$-$4$-$10$-$51$-$7$, which Bob would see. Find the lowest $n$ for which Bob could guarantee that he could use Alice's encoding to find the card placed to the side.",
+  "image": null,
+  "choices": null,
+  "answer": "5",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Counting bound and Hall's theorem",
+    "body": "**Lower bound.** Different $n$-card hands $S\\ne S'$ must lead Alice to show Bob different ordered $(n-1)$-tuples (if both showed the same tuple $T$, Bob could name only one hidden card, but $S=T\\cup\\{h\\}$ and $S'=T\\cup\\{h'\\}$ have $h\\ne h'$). So we need at least as many ordered $(n-1)$-tuples as hands: $\\binom{52}{n}\\le52\\cdot51\\cdots(54-n)$. For $n=4$: $\\binom{52}4=270725>52\\cdot51\\cdot50=132600$, so $n=4$ is impossible; for $n\\le3$ the inequality fails as well ($\\binom{52}{3}=22100>52\\cdot51=2652$, $\\binom{52}2=1326>52$, and for $n=1$ Bob sees nothing).\n\n**Construction for $n=5$.** Build a bipartite graph: left vertices are the $\\binom{52}5$ hands; right vertices are ordered $4$-tuples of distinct cards. Join a hand $S$ to a tuple $T$ when the cards of $T$ are $S$ minus one card. Each hand has $5\\cdot4!=120$ neighbours, and each tuple has $52-4=48$ neighbours. For any set $X$ of hands, the number of edges leaving $X$ is $120|X|$, and these edges land on $N(X)$ whose vertices each receive at most $48$ edges, so $|N(X)|\\ge120|X|/48\\ge|X|$. By Hall's theorem there is a matching that assigns to every hand a distinct tuple. Alice shows Bob the tuple matched to her hand; Bob finds the matched hand and names the card of that hand that is missing from the tuple. So $n=5$ works.\n\nThe lowest $n$ is $5$.\n\n**Answer: $5$**"
+   }
+  ],
+  "topics": [
+   "counting",
+   "logic"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": "No official answer or solution is published for this round; the answer was derived independently (counting bound plus Hall's theorem)."
+ }
+]

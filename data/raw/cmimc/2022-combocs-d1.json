@@ -1,0 +1,272 @@
+[
+ {
+  "id": "cmimc-2022-combocs-d1-01",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Combinatorics and Computer Science Round (Division 1)",
+   "year": 2022,
+   "number": 1,
+   "url": "https://cmimc.com/archive/cmimc2022/2022_ComboCS_D1.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Starting with a $5\\times5$ grid, choose a $4\\times4$ square in it. Then, choose a $3\\times3$ square in the $4\\times4$ square, and a $2\\times2$ square in the $3\\times3$ square, and a $1\\times1$ square in the $2\\times2$ square. Assuming all squares chosen are made of unit squares inside the grid. In how many ways can the squares be chosen so that the final $1\\times1$ square is the center of the original $5\\times5$ grid?",
+  "image": null,
+  "choices": null,
+  "answer": "36",
+  "acceptedAnswers": null,
+  "answerUnit": "ways",
+  "solutions": [
+   {
+    "title": "Rows and columns independently",
+    "body": "Each choice of a square inside the previous square removes either the top or the bottom row and either the left or the right column of the previous square. So there are four steps in the vertical direction and four in the horizontal direction, and the two directions are independent.\n\nTo end at the center of the $5\\times5$ grid, two of the four vertical steps must remove the top row and two the bottom row, and likewise horizontally two steps remove the left column and two the right. Vertically there are $\\binom42=6$ orders, horizontally also $\\binom42=6$.\n\nTotal: $6\\cdot6=36$.\n\n**Answer: 36**"
+   }
+  ],
+  "topics": [
+   "counting"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2022-combocs-d1-02",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Combinatorics and Computer Science Round (Division 1)",
+   "year": 2022,
+   "number": 2,
+   "url": "https://cmimc.com/archive/cmimc2022/2022_ComboCS_D1.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "A sequence of pairwise distinct positive integers is called averaging if each term after the first two is the average of the previous two terms. Let $M$ be the maximum possible number of terms in an averaging sequence in which every term is less than or equal to $2022$ and let $N$ be the number of such distinct sequences (every term less than or equal to $2022$) with exactly $M$ terms. What is $M+N$? (Two sequences $a_1,a_2,\\cdots,a_n$ and $b_1,b_2,\\cdots,b_n$ are said to be distinct if $a_i\\ne b_i$ for some integer $1\\le i\\le n$).",
+  "image": null,
+  "choices": null,
+  "answer": "2008",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Differences halve each time",
+    "body": "If the first two terms differ by $d$ in absolute value, then the next two differ by $d/2$, then $d/4$, and so on. For all terms to be integers (and distinct) the difference must stay a positive integer, so the sequence can have at most $v_2(d)+2$ terms when $d=2^{v}\\cdot(\\text{odd})$: the last pair of consecutive terms differs by an odd integer $\\ge1$.\n\nThe first two terms are at most $2022$ apart by at most $2021$, so the largest power of two available is $d=2^{10}=1024$ (as $2^{10}<2021<2^{11}$). Then the differences are $1024,512,\\dots,2,1$, which is $11$ differences, so $M=12$ terms.\n\nSuch a sequence is determined by its first two terms, which must differ by exactly $1024$: the unordered pairs are $\\{1,1025\\},\\{2,1026\\},\\dots,\\{998,2022\\}$, i.e. $998$ pairs, and each can be ordered in $2$ ways. So $N=2\\cdot998=1996$. (A computer enumeration over all starting pairs confirms $M=12$, $N=1996$.)\n\n$M+N=12+1996=2008$.\n\n**Answer: 2008**"
+   }
+  ],
+  "topics": [
+   "sequences-series",
+   "counting"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2022-combocs-d1-03",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Combinatorics and Computer Science Round (Division 1)",
+   "year": 2022,
+   "number": 3,
+   "url": "https://cmimc.com/archive/cmimc2022/2022_ComboCS_D1.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "For a family gathering, $8$ people order one dish each. The family sits around a circular table. Find the number of ways to place the dishes so that each person's dish is either to the left, right, or directly in front of them.",
+  "image": null,
+  "choices": null,
+  "answer": "49",
+  "acceptedAnswers": null,
+  "answerUnit": "ways",
+  "solutions": [
+   {
+    "title": "Fibonacci counting",
+    "body": "Each dish is placed in front of its owner or in front of one of the owner's two neighbours, and the dishes occupy distinct places, so the placement is a permutation with each person's dish displaced by at most one seat around the circle.\n\nIf two neighbours both have their dishes shifted in the same direction (not in front of them), then everyone's dish must be shifted that way, around the whole circle: this gives $2$ placements (all left or all right).\n\nOtherwise, each person either has the dish directly in front, or swaps dishes with a neighbour. So we count ways to split a circle of $8$ people into single people and adjacent pairs. Look at person $1$:\n\n- Person $1$ is alone: the other $7$ people form a line to be split into singles and adjacent pairs. A line of $n$ people can be split in $F_{n+1}$ ways (with $F_1=F_2=1$), so $F_8=21$ ways.\n- Person $1$ is paired with person $2$ or with person $8$: the remaining $6$ people form a line: $2\\cdot F_7=2\\cdot13=26$ ways.\n\nThat is $21+26=47$ splittings, plus the $2$ rotational placements: $47+2=49$. (A brute-force check over all $8!$ placements also gives $49$.)\n\n**Answer: 49**"
+   }
+  ],
+  "topics": [
+   "counting"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2022-combocs-d1-04",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Combinatorics and Computer Science Round (Division 1)",
+   "year": 2022,
+   "number": 4,
+   "url": "https://cmimc.com/archive/cmimc2022/2022_ComboCS_D1.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "The CMU Kiltie Band are attempting to crash a helicopter via grappling hook. The helicopter starts parallel (angle $0$ degrees) to the ground. Each time the band members pull the hook, they tilt the helicopter forward by either $x$ or $x+1$ degrees, with equal probability, if the helicopter is currently at an angle $x$ degrees with the ground. Causing the helicopter to tilt to $90$ degrees or beyond will crash the helicopter. Find the expected number of times the band must pull the hook in order to crash the helicopter.",
+  "image": null,
+  "choices": null,
+  "answer": "269/32",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Uniform distribution of angles",
+    "body": "From angle $x$ the new angle is $2x$ or $2x+1$. After $1$ pull the angle is $0$ or $1$; after $2$ pulls it is $0,1,2,3$; in general after $n$ pulls the angle is uniform on $\\{0,1,\\dots,2^n-1\\}$ (the binary expansion gains one random bit each pull).\n\nAfter $6$ pulls the angle is uniform on $0,\\dots,63$. No crash can have occurred earlier, since $63<90$. On the $7$th pull, the helicopter crashes exactly when the angle before was at least $45$: that is $19$ values out of $64$. Otherwise (probability $\\frac{45}{64}$) the angle was in $0,\\dots,44$ and becomes uniform on $0,\\dots,89$.\n\nFrom a uniform angle on $0,\\dots,89$, the next pull crashes with probability $\\frac12$ (angle $\\ge45$), and otherwise the angle is again uniform on $0,\\dots,89$. So the expected additional number of pulls is $2$.\n\nHence\n$$E=7+\\frac{45}{64}\\cdot2=7+\\frac{45}{32}=\\frac{269}{32}.$$\n\n**Answer: $\\frac{269}{32}$**"
+   }
+  ],
+  "topics": [
+   "probability"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null,
+  "answerDisplay": "$\\frac{269}{32}$"
+ },
+ {
+  "id": "cmimc-2022-combocs-d1-05",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Combinatorics and Computer Science Round (Division 1)",
+   "year": 2022,
+   "number": 5,
+   "url": "https://cmimc.com/archive/cmimc2022/2022_ComboCS_D1.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "At CMIMC headquarters, there is a row of $n$ lightbulbs, each of which is connected to a light switch. Daniel the electrician knows that exactly one of the switches doesn't work, and needs to find out which one. Every second, he can do exactly one of $3$ things:\n\n- Flip a switch, changing the lightbulb from off/on or on/off (unless the switch is broken).\n- Check if a given lightbulb is on or off.\n- Measure the total electricity usage of all the lightbulbs, which tells him exactly how many are currently on.\n\nInitially, all the lightbulbs are off. Daniel was given the very difficult task of finding the broken switch in at most $n$ seconds, but fortunately he showed up to work $10$ seconds early today. What is the largest possible value $n$ such that he can complete his task on time?",
+  "image": null,
+  "choices": null,
+  "answer": "4084",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Recurrence for the optimal time",
+    "body": "Daniel has $n+10$ seconds, so we need the largest $n$ with $f(n)\\le n+10$, where $f(n)$ is the minimum worst-case number of seconds for $n$ bulbs.\n\nFlipping is an action; checking and measuring are queries. Repeating a query without an action in between gains nothing, so a strategy is: some actions, then queries, and so on. The first block of actions turns on some set of $n-k$ bulbs ($0<k<n$), costing $n-k$ seconds. A measurement (1 second) then tells whether the broken switch is among those $n-k$ bulbs (a single-bulb check is a special case of this). Then:\n\n- If it is among them, we must still tell $n-k$ candidates apart: checking $n-k-1$ of the bulbs suffices, and fewer checks cannot (two untested candidates would be indistinguishable).\n- If it is not, the broken one is among the other $k$ bulbs, which are still all off, so we need $f(k)$ more seconds.\n\nHence\n$$f(n)=\\min_{0<k<n}\\Big[(n-k)+1+\\max\\big(n-k-1,\\,f(k)\\big)\\Big],\\qquad f(1)=0.$$\n(We checked this recurrence against an exhaustive search over adaptive strategies for $n\\le7$: both give $0,2,4,5,6,8,9$.)\n\nLet $g(n)=f(n)-n$. Then $g(n)=\\min_{k}\\big[1+\\max(n-2k-1,\\ g(k))\\big]$. Let $G_m$ be the largest $n$ with $g(n)=m$. To get $g(n)\\le m+1$ we take $k=G_m$ (a larger $k$ makes $g(k)\\ge m+1$), and need $n-2k-1\\le m$, i.e. $n\\le 2G_m+m+1$. So $G_{m+1}=2G_m+m+1$ with $G_0=2$ (indeed $f(2)=2$). Solving, $G_m=2^{m+2}-m-2$ (check: $G_1=5,\\ G_2=12$).\n\nThe required $n$ is $G_{10}=2^{12}-12=4084$.\n\n**Answer: 4084**"
+   }
+  ],
+  "topics": [
+   "logic",
+   "counting"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2022-combocs-d1-06",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Combinatorics and Computer Science Round (Division 1)",
+   "year": 2022,
+   "number": 6,
+   "url": "https://cmimc.com/archive/cmimc2022/2022_ComboCS_D1.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Barry has a standard die containing the numbers $1$-$6$ on its faces.\n\nHe rolls the die continuously, keeping track of the sum of the numbers he has rolled so far, starting from $0$. Let $E_n$ be the expected number of times he needs to roll until his recorded sum is at least $n$.\n\nIt turns out that there exist positive reals $a,b$ such that\n$$\\lim_{n\\to\\infty}E_n-(an+b)=0.$$\nFind $(a,b)$.",
+  "image": null,
+  "choices": null,
+  "answer": "$(a,b)=\\left(\\dfrac27,\\ \\dfrac{10}{21}\\right)$",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Wald's identity and the overshoot",
+    "body": "Let $X_n$ be the first sum that is at least $n$ and $T$ the number of rolls. By linearity of expectation (Wald), $E[X_n]=\\frac72E_n$, so $E_n=\\frac27E[X_n]$.\n\nFor large $n$ the sum hits any given large number with probability $\\frac1{3.5}=\\frac27$. The first value $\\ge n$ equals $n+i$ ($0\\le i\\le5$) exactly when the sum is at some $n-j$ with $1\\le j\\le 6-i$ and the next roll is $i+j$ (a number at most $6$). Each such path has probability $\\frac27\\cdot\\frac16=\\frac1{21}$, and there are $6-i$ values of $j$, so\n$$P(X_n=n+i)=\\frac{6-i}{21}\\quad(i=0,\\dots,5)$$\nin the limit (they sum to $\\frac{21}{21}=1$).\n\nTherefore\n$$E[X_n]\\to n+\\frac{0\\cdot6+1\\cdot5+2\\cdot4+3\\cdot3+4\\cdot2+5\\cdot1}{21}=n+\\frac{35}{21}=n+\\frac53,$$\nand $E_n\\to\\frac27\\left(n+\\frac53\\right)=\\frac27n+\\frac{10}{21}$.\n\nA direct numeric recursion confirms $E_n-\\frac27n\\to0.476190\\ldots=\\frac{10}{21}$.\n\n**Answer: $(a,b)=\\left(\\frac27,\\frac{10}{21}\\right)$**"
+   }
+  ],
+  "topics": [
+   "probability",
+   "sequences-series"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2022-combocs-d1-07",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Combinatorics and Computer Science Round (Division 1)",
+   "year": 2022,
+   "number": 7,
+   "url": "https://cmimc.com/archive/cmimc2022/2022_ComboCS_D1.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "In a class of $12$ students, no two people are the same height. Compute the total number of ways for the students to arrange themselves in a line such that:\n\n- for all $1<i<12$, the person in the $i$-th position (with the leftmost position being $1$) is taller than exactly $i\\pmod 3$ of their adjacent neighbors, and\n- the students standing at positions which are multiples of $3$ are strictly increasing in height from left to right.",
+  "image": null,
+  "choices": null,
+  "answer": "63700",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Translate into inequalities and insert pairs",
+    "body": "Let $p_i$ be the height at position $i$. For $1<i<12$:\n\n- $i\\equiv2\\pmod3$ (positions $2,5,8,11$): taller than both neighbours, a local maximum.\n- $i\\equiv0\\pmod3$ (positions $3,6,9$): taller than neither neighbour, a local minimum.\n- $i\\equiv1\\pmod3$ (positions $4,7,10$): taller than exactly one neighbour. Its left neighbour is a local minimum and its right neighbour a local maximum, so this just says $p_{i-1}<p_i<p_{i+1}$, which is automatic from the other conditions.\n\nSo the conditions are exactly $p_1<p_2>p_3<p_4<p_5>p_6<p_7<p_8>p_9<p_{10}<p_{11}>p_{12}$ together with the chain $p_3<p_6<p_9<p_{12}$.\n\nFix the order of the chain $p_3<p_6<p_9<p_{12}$ (one way) and insert the pairs $(x,y)=(p_{3j-2},p_{3j-1})$ for $j=4,3,2$ in this order, then $j=1$. For $j\\ge2$ we need $p_{3j-3}<x<y$ and $y>p_{3j}$. At that moment the people already placed who are taller than $p_{3j-3}$ are the $m=3(4-j)+1$ people at positions $3j,\\dots,12$ (so $m=1,4,7$ for $j=4,3,2$), and the lowest of them is $p_{3j}$. We choose the ranks of $x<y$ among these $m$ people: $\\binom{m+2}{2}$ ways, minus the one choice with $y<p_{3j}$ (then $x<y<p_{3j}$): $\\binom{m+2}2-1$ ways, giving $2,\\ 14,\\ 35$.\n\nFor $j=1$ there is no $p_0$, and the $10$ people already placed are arbitrary: the pair $x=p_1<y=p_2$ with $y>p_3$ (the lowest of the ten) gives $\\binom{12}{2}-1=65$ ways.\n\nThe insertions are independent, so the total is $2\\cdot14\\cdot35\\cdot65=63700$. (A dynamic-programming count over subsets of positions confirms this.)\n\n**Answer: 63700**"
+   }
+  ],
+  "topics": [
+   "counting"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2022-combocs-d1-08",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Combinatorics and Computer Science Round (Division 1)",
+   "year": 2022,
+   "number": 8,
+   "url": "https://cmimc.com/archive/cmimc2022/2022_ComboCS_D1.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Daniel has a (mostly) standard deck of $54$ cards, consisting of $4$ suits each containing the ranks $1$ to $13$ as well as $2$ jokers.\n\nDaniel plays the following game: He shuffles the deck uniformly randomly and then takes all of the cards that end up strictly between the two jokers. He then sums up the ranks of all the cards he has taken and calls that his score.\n\nLet $p$ be the probability that his score is a multiple of $13$. There exists relatively prime positive integers $a$ and $b$, with $b$ as small as possible, such that $|p-a/b|<10^{-10}$. What is $a/b$?",
+  "image": null,
+  "choices": null,
+  "answer": "77/689",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Roots of unity filter",
+    "body": "Let $g_m$ be the number of $m$-card subsets of the $52$ non-joker cards with rank sum divisible by $13$. A roots-of-unity filter gives\n$$\\sum_m g_m y^m=\\frac1{13}\\sum_{k=0}^{12}\\prod_{i=1}^{13}(1+\\omega^{ki}y)^4=\\frac1{13}\\Big[(1+y)^{52}+12\\,(1+y^{13})^4\\Big],$$\nsince for $k\\ne0$, $\\prod_{i=1}^{13}(1+\\omega^{ki}y)=1+y^{13}$. So $g_m=\\frac1{13}\\Big[\\binom{52}m+12\\cdot[13\\mid m]\\binom4{m/13}\\Big]$.\n\nFor a fixed $m$-set strictly between the jokers there are $2\\cdot m!\\,(53-m)\\,(52-m)!=2\\,m!\\,(53-m)!$ arrangements, so\n$$p=\\frac2{54!}\\sum_{m=0}^{52}m!\\,(53-m)!\\,g_m.$$\n\nMain part: $m!(53-m)!\\binom{52}m=52!\\,(53-m)$ and $\\sum_{m=0}^{52}(53-m)=\\frac{53\\cdot54}2$, so this part of $p$ is $\\frac1{13}$.\n\nSecond part: $\\frac{24}{13\\cdot54!}\\sum_{k=0}^{4}\\binom4k(13k)!\\,(53-13k)!$. The terms $k=0$ and $k=4$ are $53!$ and $52!$, giving $\\frac{24}{13}\\left(\\frac1{54}+\\frac1{54\\cdot53}\\right)=\\frac{24}{13\\cdot53}=\\frac{24}{689}$. The terms $k=1,2,3$ are tiny (they involve $\\binom{52}{13}$-sized denominators), contributing less than $10^{-11}$ in total (exactly, $p-\\frac{77}{689}\\approx2\\cdot10^{-13}$).\n\nSo $p\\approx\\frac1{13}+\\frac{24}{689}=\\frac{53+24}{689}=\\frac{77}{689}$, with error below $10^{-11}$.\n\nIf $a/b\\ne\\frac{77}{689}$ with $b<689$, then $\\left|\\frac ab-\\frac{77}{689}\\right|\\ge\\frac1{689b}>\\frac1{689^2}>10^{-6}$, so it cannot be within $10^{-10}$ of $p$. Hence the answer is $\\frac{77}{689}$ (with $689=13\\cdot53$, and $\\gcd(77,689)=1$).\n\n**Answer: $\\frac{77}{689}$**"
+   }
+  ],
+  "topics": [
+   "probability",
+   "counting"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null,
+  "answerDisplay": "$\\frac{77}{689}$"
+ }
+]

@@ -1,0 +1,1001 @@
+[
+ {
+  "id": "cmimc-2016-power-s3-01",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Power Round (Section 3: DFAs)",
+   "year": 2016,
+   "number": 1,
+   "url": "https://cmimc.com/archive/cmimc2016/2016_Power.pdf"
+  },
+  "grade": "9-12",
+  "points": 2,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "A *DFA* (deterministic finite automaton) over an alphabet reads a string letter by letter, starting at the start state and following the arrow labelled with each letter; it accepts the string if it ends in an accepting state (drawn with a double circle) and rejects otherwise. Consider the DFA shown in the picture. For each of the strings $0000$, $1111$, $0010$, $0110$, $0100$, indicate whether the DFA accepts or rejects it.",
+  "image": "qimages/cmimc/2016-power/s3-q01.webp",
+  "choices": null,
+  "answer": "$0000$: rejects; $1111$: rejects; $0010$: accepts; $0110$: accepts; $0100$: rejects. (The DFA accepts exactly the strings $0^m1^n0$ with $m\\ge0$, $n\\ge1$.)",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Trace each string",
+    "body": "The DFA stays in $q_0$ on $0$s, moves to $q_1$ on the first $1$, stays in $q_1$ on $1$s, moves to the accepting state $q_2$ on a $0$ from $q_1$, and any further letter sends it to the dead state $q_3$. So it accepts exactly the strings $0^m1^n0$ ($m\\ge0$, $n\\ge1$).\n\n- $0000$: $q_0$ throughout, ends in $q_0$: **rejects**.\n- $1111$: $q_0\\to q_1\\to q_1\\to q_1\\to q_1$: **rejects**.\n- $0010$: $q_0,q_0,q_0\\to q_1\\to q_2$: **accepts**.\n- $0110$: $q_0\\to q_0\\to q_1\\to q_1\\to q_2$: **accepts**.\n- $0100$: $q_0\\to q_0\\to q_1\\to q_2\\to q_3$: **rejects**."
+   }
+  ],
+  "topics": [
+   "logic"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2016-power-s3-02a",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Power Round (Section 3: DFAs)",
+   "year": 2016,
+   "number": 2,
+   "url": "https://cmimc.com/archive/cmimc2016/2016_Power.pdf"
+  },
+  "grade": "9-12",
+  "points": 2,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "A *DFA* (deterministic finite automaton) over an alphabet reads a string letter by letter, starting at the start state and following the arrow labelled with each letter; it accepts the string if it ends in an accepting state (drawn with a double circle) and rejects otherwise. In simplest terms, what language (over the alphabet $\\{0,1\\}$) does the DFA in the picture accept?",
+  "image": "qimages/cmimc/2016-power/s3-q02a.webp",
+  "choices": null,
+  "answer": "The set of strings in $\\{0,1\\}^*$ containing at least one $0$ and at least one $1$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Interpret the states",
+    "body": "$q_0$ is the start (nothing read). $q_1$ means \"only $0$s so far\" (a $0$ loops), $q_2$ means \"only $1$s so far\". From $q_1$ a $1$ leads to $q_3$, and from $q_2$ a $0$ leads to $q_3$; $q_3$ is accepting and absorbing. So a string is accepted iff it contains both symbols: it has at least one $0$ and at least one $1$ (equivalently, it is not of the form $0^m$ or $1^m$)."
+   }
+  ],
+  "topics": [
+   "logic"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2016-power-s3-02b",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Power Round (Section 3: DFAs)",
+   "year": 2016,
+   "number": 2,
+   "url": "https://cmimc.com/archive/cmimc2016/2016_Power.pdf"
+  },
+  "grade": "9-12",
+  "points": 4,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "A *DFA* (deterministic finite automaton) over an alphabet reads a string letter by letter, starting at the start state and following the arrow labelled with each letter; it accepts the string if it ends in an accepting state (drawn with a double circle) and rejects otherwise. In simplest terms, what language (over the alphabet $\\{0,1\\}$) does the DFA in the picture accept?",
+  "image": "qimages/cmimc/2016-power/s3-q02b.webp",
+  "choices": null,
+  "answer": "The set of strings in $\\{0,1\\}^*$ that contain $000$ or $111$ as a substring.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Run-length tracking",
+    "body": "From $q_0$, a $0$ goes to $q_1$ and a $1$ to $q_2$. $q_1$ = \"current run is a single $0$\", $q_3$ = \"current run is $00$\"; $q_2$ = \"single $1$\", $q_4$ = \"run $11$\". A symbol that continues the run advances it ($q_1\\to q_3\\to q_5$ on $0$, $q_2\\to q_4\\to q_5$ on $1$); a symbol that breaks the run starts a new run of length $1$ ($q_3,q_2\\to$ via $1$ to $q_2$; $q_4,q_2\\to$ via $0$ to $q_1$). $q_5$ is accepting and absorbing. Hence the DFA accepts exactly the strings containing three equal consecutive symbols, i.e. the substring $000$ or $111$."
+   }
+  ],
+  "topics": [
+   "logic"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2016-power-s3-03a",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Power Round (Section 3: DFAs)",
+   "year": 2016,
+   "number": 3,
+   "url": "https://cmimc.com/archive/cmimc2016/2016_Power.pdf"
+  },
+  "grade": "9-12",
+  "points": 2,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "A *DFA* (deterministic finite automaton) over an alphabet reads a string letter by letter, starting at the start state and following the arrow labelled with each letter; it accepts the string if it ends in an accepting state (drawn with a double circle) and rejects otherwise. Construct a DFA over $\\{0,1\\}$ which accepts the language $L_1=\\{001\\}$ (the language consisting of the single word $001$).",
+  "image": null,
+  "choices": null,
+  "answer": "States $s_0\\to s_1\\to s_2\\to s_3$ on $0,0,1$ ($s_3$ accepting) and a dead state $r$ for every other transition (5 states).",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Track progress towards 001",
+    "body": "Use states $s_0$ (start), $s_1$ (read $0$), $s_2$ (read $00$), $s_3$ (read $001$, accepting) and a dead state $r$. Transitions: $s_0\\xrightarrow{0}s_1$, $s_1\\xrightarrow{0}s_2$, $s_2\\xrightarrow{1}s_3$; every other transition (including everything out of $s_3$ and $r$) goes to $r$, which loops on $0,1$. Only the string $001$ ends in $s_3$."
+   }
+  ],
+  "topics": [
+   "logic"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2016-power-s3-03b",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Power Round (Section 3: DFAs)",
+   "year": 2016,
+   "number": 3,
+   "url": "https://cmimc.com/archive/cmimc2016/2016_Power.pdf"
+  },
+  "grade": "9-12",
+  "points": 2,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "A *DFA* (deterministic finite automaton) over an alphabet reads a string letter by letter, starting at the start state and following the arrow labelled with each letter; it accepts the string if it ends in an accepting state (drawn with a double circle) and rejects otherwise. Construct a DFA over $\\{a,b\\}$ which accepts the language $L_2=\\{w\\in\\{a,b\\}^*: w\\text{ has even length}\\}$.",
+  "image": null,
+  "choices": null,
+  "answer": "Two states (even, odd), both letters switch between them; the start state \"even\" is accepting.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Parity of length",
+    "body": "Use two states $E$ (start, accepting) and $O$. Reading either letter swaps $E\\leftrightarrow O$. After $k$ letters the DFA is in $E$ iff $k$ is even, so it accepts exactly the even-length strings (including the empty string)."
+   }
+  ],
+  "topics": [
+   "logic"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2016-power-s3-03c",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Power Round (Section 3: DFAs)",
+   "year": 2016,
+   "number": 3,
+   "url": "https://cmimc.com/archive/cmimc2016/2016_Power.pdf"
+  },
+  "grade": "9-12",
+  "points": 6,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "A *DFA* (deterministic finite automaton) over an alphabet reads a string letter by letter, starting at the start state and following the arrow labelled with each letter; it accepts the string if it ends in an accepting state (drawn with a double circle) and rejects otherwise. Construct a DFA over $\\{0,1\\}$ which accepts the language $L_3$ of all nonempty strings $w\\in\\{0,1\\}^*$ such that $w$, interpreted as an integer in binary, is divisible by $5$.",
+  "image": null,
+  "choices": null,
+  "answer": "Track the value mod $5$: states $0,\\dots,4$ with $\\delta(r,b)=(2r+b)\\bmod5$, an extra non-accepting start state $s$ with $\\delta(s,b)=b$, and accepting state $0$ (6 states).",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Track the value mod 5",
+    "body": "Reading a bit $b$ after a prefix of value $v$ gives the value $2v+b$, so it suffices to remember $v\\bmod5$. Use states $0,1,2,3,4$ and the transition $\\delta(r,b)=(2r+b)\\bmod5$: \n\n- state $0$: bit $0\\to0$, bit $1\\to1$; state $1$: $0\\to2$, $1\\to3$; state $2$: $0\\to4$, $1\\to0$; state $3$: $0\\to1$, $1\\to2$; state $4$: $0\\to3$, $1\\to4$.\n\nThe empty string must be rejected although its value is $0$, so add a separate non-accepting start state $s$ with $s\\xrightarrow{0}0$ and $s\\xrightarrow{1}1$ and never return to it. The only accepting state is $0$. This uses $6$ states; the whole reading is left-to-right, so five residue states suffice (reading right to left would need more)."
+   }
+  ],
+  "topics": [
+   "number-theory"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2016-power-s3-04",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Power Round (Section 3: DFAs)",
+   "year": 2016,
+   "number": 4,
+   "url": "https://cmimc.com/archive/cmimc2016/2016_Power.pdf"
+  },
+  "grade": "9-12",
+  "points": 5,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "A DFA is a deterministic finite automaton: it reads a string letter by letter, following one arrow per letter from the start state, and accepts if it ends in an accepting state. Let $D$ be a DFA with exactly three states. Suppose $D$ accepts the string $000$ but *not* the empty string $\\varepsilon$. What is the smallest positive integer $k>3$ such that $D$ *must* also accept $0^k$? (Here exponentiation is shorthand for repetition; for example $0^4$ represents the string $0000$.) Prove that your $k$ is minimal.",
+  "image": null,
+  "choices": null,
+  "answer": "5",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "$k=5$ is forced",
+    "body": "Let $s_n$ be the state after reading $0^n$, so $s_{n+1}=f(s_n)$ for a function $f$ on three states. $s_0$ is rejecting and $s_3$ accepting, so $s_0\\ne s_3$. The sequence $s_0,s_1,s_2,s_3$ takes values among three states, so it eventually becomes periodic with tail length $\\mu$ and cycle length $\\lambda$, $\\mu+\\lambda\\le3$ (the number of distinct states visited). Since $s_3\\ne s_0$, $\\mu\\ge1$ or $\\lambda\\ne3$: the cases are $\\lambda=3$ ($\\mu=0$, impossible because then $s_3=s_0$), $\\lambda=1$ ($\\mu\\le2$) or $\\lambda=2$ ($\\mu\\le1$). In both remaining cases $3\\ge\\mu$ and $5-3=2$ is a multiple of $\\lambda$ ($\\lambda\\in\\{1,2\\}$), so $s_5=s_3$, which is accepting. Hence $0^5$ is always accepted."
+   },
+   {
+    "title": "$k=4$ is not forced",
+    "body": "Take states $q_0\\to q_1\\to q_2\\to q_1$ on $0$ (and anything on $1$), with only $q_1$ accepting. It rejects $\\varepsilon$, accepts $000$ ($q_0,q_1,q_2,q_1$) and rejects $0000$ (ends in $q_2$). So $k=4$ is not forced and the answer is $5$.\n\n**Answer: 5** (a search over all 3-state DFAs confirms this)"
+   }
+  ],
+  "topics": [
+   "logic",
+   "number-theory"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2016-power-s4-01",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Power Round (Section 4: Languages and Regularity)",
+   "year": 2016,
+   "number": 1,
+   "url": "https://cmimc.com/archive/cmimc2016/2016_Power.pdf"
+  },
+  "grade": "9-12",
+  "points": 3,
+  "timeMinutes": null,
+  "type": "text",
+  "prompt": "A language $L\\subseteq\\Sigma^*$ is *regular* if some DFA accepts exactly the words of $L$ (we say the DFA *decides* $L$). Is every language consisting of a finite number of words (a \"finite language\") regular? Answer yes or no (and justify).",
+  "image": null,
+  "choices": null,
+  "answer": "Yes",
+  "acceptedAnswers": [
+   "yes",
+   "Yes, every finite language is regular",
+   "yes, always"
+  ],
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Build a trie DFA",
+    "body": "Let $L$ be finite and $m$ the maximum length of a word in $L$. Build a DFA with one state for every string of length at most $m$ over the alphabet (the state records exactly what has been read so far), a transition from state $u$ on letter $a$ to state $ua$ when $|ua|\\le m$, plus one dead state that absorbs everything longer than $m$. Make a state accepting iff its string belongs to $L$. This DFA accepts exactly $L$. Hence every finite language is regular.\n\n**Answer: Yes**"
+   }
+  ],
+  "topics": [
+   "logic"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2016-power-s4-02a",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Power Round (Section 4: Languages and Regularity)",
+   "year": 2016,
+   "number": 2,
+   "url": "https://cmimc.com/archive/cmimc2016/2016_Power.pdf"
+  },
+  "grade": "9-12",
+  "points": 2,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Let $L=\\{0^n1^n:n\\in\\mathbb N\\}$. Suppose $D$ is a DFA with $n$ states which decides $L$, and let $S$ be a set of $k$ words in $\\{0,1\\}^*$. What is the smallest value of $k$ such that for every such set $S$, there exist two words in $S$ which land in the same state at the end of the simulation? Provide a brief justification.",
+  "image": null,
+  "choices": null,
+  "answer": "$k=n+1$",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Pigeonhole",
+    "body": "If $k=n+1$ words are fed into a DFA with $n$ states, two of them end in the same state by the pigeonhole principle. With $k=n$ the $n$ words could all end in different states (if all $n$ states are reachable, there is a set of $n$ words ending in $n$ different states), so $k=n+1$ is the smallest value that works for every set."
+   }
+  ],
+  "topics": [
+   "logic",
+   "counting"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2016-power-s4-02b",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Power Round (Section 4: Languages and Regularity)",
+   "year": 2016,
+   "number": 2,
+   "url": "https://cmimc.com/archive/cmimc2016/2016_Power.pdf"
+  },
+  "grade": "9-12",
+  "points": 4,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Let $L=\\{0^n1^n:n\\in\\mathbb N\\}$. Show that $L$ is irregular, i.e. that no DFA $D$ decides $L$.",
+  "image": null,
+  "choices": null,
+  "answer": "Suppose $D$ has $n$ states; two of $\\varepsilon,0,\\ldots,0^n$ reach the same state, say $0^i,0^j$ ($i<j$), but $0^i1^i\\in L$ and $0^j1^i\\notin L$: contradiction.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Pigeonhole argument",
+    "body": "Suppose $D$ decides $L$ and has $n$ states. Among the $n+1$ words $\\varepsilon,0,0^2,\\ldots,0^n$ two, $0^i$ and $0^j$ with $i<j$, end in the same state. A DFA is deterministic, so $0^is$ and $0^js$ end in the same state for every string $s$. Take $s=1^i$: then $0^i1^i\\in L$ is accepted, so $0^j1^i$ must be accepted too; but $0^j1^i\\notin L$ since $j\\ne i$. This contradiction shows no such $D$ exists. ∎"
+   }
+  ],
+  "topics": [
+   "logic"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2016-power-s4-03",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Power Round (Section 4: Languages and Regularity)",
+   "year": 2016,
+   "number": 3,
+   "url": "https://cmimc.com/archive/cmimc2016/2016_Power.pdf"
+  },
+  "grade": "9-12",
+  "points": 4,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Show that the language $\\{1^{2^n}:n\\in\\mathbb N\\}$ (strings of $1$s whose length is a power of $2$) is irregular.",
+  "image": null,
+  "choices": null,
+  "answer": "Pigeonhole on $1,1^2,1^4,\\ldots,1^{2^N}$: two of them, $1^{2^i},1^{2^j}$, reach the same state, but $1^{2^i+2^i}\\in L$ while $1^{2^j+2^i}\\notin L$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Pigeonhole",
+    "body": "Suppose a DFA with $N$ states decides the language. Among the $N+1$ words $1^{2^0},1^{2^1},\\ldots,1^{2^N}$, two, $1^{2^i}$ and $1^{2^j}$ with $i<j$, end in the same state. Then for every suffix $s$ the words $1^{2^i}s$ and $1^{2^j}s$ get the same verdict. Take $s=1^{2^i}$: $1^{2^i}s=1^{2^{i+1}}$ is in the language, but $1^{2^j}s=1^{2^j+2^i}$ has length strictly between $2^j$ and $2^{j+1}$, hence not a power of $2$, so it is not in the language. Contradiction. ∎"
+   }
+  ],
+  "topics": [
+   "logic",
+   "number-theory"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2016-power-s4-04a",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Power Round (Section 4: Languages and Regularity)",
+   "year": 2016,
+   "number": 4,
+   "url": "https://cmimc.com/archive/cmimc2016/2016_Power.pdf"
+  },
+  "grade": "9-12",
+  "points": 2,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "A language $L\\subseteq\\Sigma^*$ is *regular* if some DFA accepts exactly the words of $L$ (we say the DFA *decides* $L$). Let $M$ be a DFA with $p$ states which decides a language $L$. Consider an input $s=s_1s_2\\ldots s_n$ with $n\\ge p$, and let $q_k$ be the state the automaton is in after reading $s_k$ (with $q_0$ the start state). Show that there exist integers $0\\le i<j\\le p$ such that $q_i=q_j$.",
+  "image": null,
+  "choices": null,
+  "answer": "The $p+1$ states $q_0,\\ldots,q_p$ cannot all be distinct (pigeonhole).",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Pigeonhole",
+    "body": "Consider $q_0,q_1,\\ldots,q_p$: these are $p+1$ states (the input is long enough, $n\\ge p$), but $M$ only has $p$ states. By the pigeonhole principle two of them are equal: $q_i=q_j$ for some $0\\le i<j\\le p$. ∎"
+   }
+  ],
+  "topics": [
+   "logic",
+   "counting"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2016-power-s4-04b",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Power Round (Section 4: Languages and Regularity)",
+   "year": 2016,
+   "number": 4,
+   "url": "https://cmimc.com/archive/cmimc2016/2016_Power.pdf"
+  },
+  "grade": "9-12",
+  "points": 6,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "A language $L\\subseteq\\Sigma^*$ is *regular* if some DFA accepts exactly the words of $L$ (we say the DFA *decides* $L$). The *Pumping Lemma* says: if $L$ is regular, there is an integer $P\\ge1$ such that every $w\\in L$ with $|w|\\ge P$ can be written $w=xyz$ with $y\\ne\\varepsilon$, $|xy|\\le P$, and $xy^iz\\in L$ for all integers $i\\ge0$. Let $M$ be a DFA with $p$ states deciding $L$, let $s=s_1\\ldots s_n\\in L$ with $n\\ge p$, and let $i<j\\le p$ with $q_i=q_j$ be as in the previous part ($q_k$ is the state after reading $s_k$). Define $x=s_1\\ldots s_i$, $y=s_{i+1}\\ldots s_j$, $z=s_{j+1}\\ldots s_n$. Show that $x,y,z$ satisfy the Pumping Lemma with $P=p$.",
+  "image": null,
+  "choices": null,
+  "answer": "$y\\ne\\varepsilon$ since $i<j$; $|xy|=j\\le p$; reading $y$ returns the DFA to the same state, so $xy^iz$ ends in the same state as $xyz$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Check the three conditions",
+    "body": "$y=s_{i+1}\\ldots s_j$ is nonempty since $i<j$, and $|xy|=j\\le p=P$.\n\nLet $\\delta^*(q,w)$ denote the state reached from $q$ after reading $w$. Since $q_i=q_j$, we have $\\delta^*(q_0,x)=q_i=q_j=\\delta^*(q_0,xy)$, so $\\delta^*(q_i,y)=q_i$. By induction on $k$, $\\delta^*(q_0,xy^k)=q_i$ for all $k\\ge0$ (for $k=0$ it is $\\delta^*(q_0,x)=q_i$; if it holds for $k$ then $\\delta^*(q_0,xy^{k+1})=\\delta^*(q_i,y)=q_i$). Then $\\delta^*(q_0,xy^kz)=\\delta^*(q_i,z)=\\delta^*(q_0,xyz)$, which is an accepting state since $xyz=s\\in L$. So $xy^kz\\in L$ for all $k\\ge0$. ∎"
+   }
+  ],
+  "topics": [
+   "logic"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2016-power-s4-04c",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Power Round (Section 4: Languages and Regularity)",
+   "year": 2016,
+   "number": 4,
+   "url": "https://cmimc.com/archive/cmimc2016/2016_Power.pdf"
+  },
+  "grade": "9-12",
+  "points": 4,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "The *Pumping Lemma* says: if a language $L$ is regular there is an integer $P\\ge1$ such that every $w\\in L$ with $|w|\\ge P$ can be written $w=xyz$ with $y\\ne\\varepsilon$, $|xy|\\le P$, and $xy^iz\\in L$ for all integers $i\\ge0$. Using the Pumping Lemma, show that the language $L=\\{s:|s|\\text{ is a prime number}\\}$ (over $\\{0,1\\}$) is not regular.",
+  "image": null,
+  "choices": null,
+  "answer": "Pump a string of prime length $q>P$ with $i=q+1$: the length becomes $q(1+|y|)$, which is composite.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Pump to a composite length",
+    "body": "Suppose $L$ is regular with pumping length $P$. Choose a prime $q>P$ and a string $w\\in L$ of length $q$ (e.g. $0^q$). Write $w=xyz$ as in the lemma, with $\\ell=|y|\\ge1$. Then $xy^iz\\in L$ for every $i\\ge0$, and $|xy^iz|=q+(i-1)\\ell$. Take $i=q+1$: the length is $q+q\\ell=q(1+\\ell)$, with $q\\ge2$ and $1+\\ell\\ge2$, which is not prime. So $xy^{q+1}z\\notin L$, contradicting the lemma. ∎"
+   }
+  ],
+  "topics": [
+   "number-theory",
+   "logic"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2016-power-s4-05a",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Power Round (Section 4: Languages and Regularity)",
+   "year": 2016,
+   "number": 5,
+   "url": "https://cmimc.com/archive/cmimc2016/2016_Power.pdf"
+  },
+  "grade": "9-12",
+  "points": 2,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "A language $L\\subseteq\\Sigma^*$ is *regular* if some DFA accepts exactly the words of $L$ (we say the DFA *decides* $L$). **Complement.** Let $L$ be a regular language over the alphabet $\\Sigma$ and set $L^c=\\{x\\in\\Sigma^*:x\\notin L\\}$. Prove that $L^c$ is also regular.",
+  "image": null,
+  "choices": null,
+  "answer": "Swap accepting and non-accepting states of a DFA for $L$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Flip the accepting states",
+    "body": "Let $D=(Q,\\Sigma,\\delta,q_0,F)$ decide $L$. Then $D'=(Q,\\Sigma,\\delta,q_0,Q\\setminus F)$ follows exactly the same path on every word $w$. The word $w$ ends in a state of $Q\\setminus F$ iff it ends outside $F$ iff $w\\notin L$. So $D'$ accepts exactly $L^c$. ∎"
+   }
+  ],
+  "topics": [
+   "logic"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2016-power-s4-05b",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Power Round (Section 4: Languages and Regularity)",
+   "year": 2016,
+   "number": 5,
+   "url": "https://cmimc.com/archive/cmimc2016/2016_Power.pdf"
+  },
+  "grade": "9-12",
+  "points": 6,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "A language $L\\subseteq\\Sigma^*$ is *regular* if some DFA accepts exactly the words of $L$ (we say the DFA *decides* $L$). **Intersection.** Suppose $A$ and $B$ are two regular languages over a common alphabet $\\Sigma$. Prove that $A\\cap B=\\{x\\in\\Sigma^*:x\\in A\\text{ and }x\\in B\\}$ is also regular.",
+  "image": null,
+  "choices": null,
+  "answer": "Product construction on pairs of states with accepting set $F\\times F'$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Product automaton",
+    "body": "Let $M=(Q,\\Sigma,\\delta,q_0,F)$ decide $A$ and $M'=(Q',\\Sigma,\\delta',q_0',F')$ decide $B$. Define $M''$ with states $Q\\times Q'$, start $(q_0,q_0')$, transition $\\delta''((q,q'),a)=(\\delta(q,a),\\delta'(q',a))$ and accepting set $F\\times F'$. By induction on $|w|$, after reading $w$ the automaton $M''$ is in the state $(\\delta^*(q_0,w),\\delta'^*(q_0',w))$, i.e. the pair of states reached by $M$ and $M'$. Thus $M''$ accepts $w$ iff $M$ accepts $w$ and $M'$ accepts $w$, i.e. iff $w\\in A\\cap B$. ∎"
+   }
+  ],
+  "topics": [
+   "logic"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2016-power-s4-05c",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Power Round (Section 4: Languages and Regularity)",
+   "year": 2016,
+   "number": 5,
+   "url": "https://cmimc.com/archive/cmimc2016/2016_Power.pdf"
+  },
+  "grade": "9-12",
+  "points": 6,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "A language $L\\subseteq\\Sigma^*$ is *regular* if some DFA accepts exactly the words of $L$ (we say the DFA *decides* $L$). **Union.** Suppose $A$ and $B$ are two regular languages over a common alphabet $\\Sigma$. Prove that $A\\cup B=\\{x\\in\\Sigma^*:x\\in A\\text{ or }x\\in B\\}$ is also regular.",
+  "image": null,
+  "choices": null,
+  "answer": "Product construction with accepting set $\\{(q,q'):q\\in F\\text{ or }q'\\in F'\\}$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Product automaton again",
+    "body": "Use the same product DFA as for the intersection (states $Q\\times Q'$, $\\delta''((q,q'),a)=(\\delta(q,a),\\delta'(q',a))$, start $(q_0,q_0')$), but with accepting set $F''=\\{(q,q'):q\\in F\\text{ or }q'\\in F'\\}$. After reading $w$ it is in the pair of states reached by $M$ and $M'$, which lies in $F''$ iff $M$ accepts or $M'$ accepts, i.e. iff $w\\in A\\cup B$. ∎ (Alternatively $A\\cup B=(A^c\\cap B^c)^c$, using the previous two parts.)"
+   }
+  ],
+  "topics": [
+   "logic"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2016-power-s4-05d",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Power Round (Section 4: Languages and Regularity)",
+   "year": 2016,
+   "number": 5,
+   "url": "https://cmimc.com/archive/cmimc2016/2016_Power.pdf"
+  },
+  "grade": "9-12",
+  "points": 2,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "A language $L\\subseteq\\Sigma^*$ is *regular* if some DFA accepts exactly the words of $L$ (we say the DFA *decides* $L$). **Set difference.** Suppose $A$ and $B$ are two regular languages over a common alphabet $\\Sigma$. Prove that $A\\setminus B=\\{x\\in\\Sigma^*:x\\in A\\text{ and }x\\notin B\\}$ is also regular. (Hint: use the previous results.)",
+  "image": null,
+  "choices": null,
+  "answer": "$A\\setminus B=A\\cap B^c$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Combine closure results",
+    "body": "$A\\setminus B=A\\cap B^c$. $B^c$ is regular by the complement result, and then $A\\cap B^c$ is regular by the intersection result. ∎"
+   }
+  ],
+  "topics": [
+   "logic"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2016-power-s4-06",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Power Round (Section 4: Languages and Regularity)",
+   "year": 2016,
+   "number": 6,
+   "url": "https://cmimc.com/archive/cmimc2016/2016_Power.pdf"
+  },
+  "grade": "9-12",
+  "points": 8,
+  "timeMinutes": null,
+  "type": "text",
+  "prompt": "A language $L\\subseteq\\Sigma^*$ is *regular* if some DFA accepts exactly the words of $L$ (we say the DFA *decides* $L$). For any language $L\\subseteq\\{0,1\\}^*$, define a language $L_0$ which consists of the set of words of the form $a_1s_{1,2}a_2s_{2,3}a_3\\ldots a_{k-1}s_{k-1,k}a_k$ where $a_1a_2a_3\\ldots a_k$ is a word in $L$ and $s_{i,j}$ is $1$ when $a_i\\ne a_j$ and zero otherwise. For example, the word $1101$ in $L$ corresponds to the word $1011011$ in $L_0$. Suppose $L$ is regular. Must $L_0$ also be regular? (Answer yes or no and prove it.)",
+  "image": null,
+  "choices": null,
+  "answer": "Yes",
+  "acceptedAnswers": [
+   "yes",
+   "Yes, L_0 must be regular"
+  ],
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Build a DFA for $L_0$ directly",
+    "body": "Let $D=(Q,\\{0,1\\},\\delta,q_0,F)$ decide $L$. Build $D_0$ with states: a start state $s$; states $(q,a)$ meaning \"$D$ is in state $q$ after reading letters $a_1\\ldots a_i$ with $a_i=a$, and the next input symbol is the check bit\"; states $(q,a,t)$ meaning \"the check bit $t$ was read, now expect $a_{i+1}$\"; and a dead state. \n\n- From $s$, reading $a_1=a$ goes to $(\\delta(q_0,a),a)$.\n- From $(q,a)$, reading $t\\in\\{0,1\\}$ goes to $(q,a,t)$.\n- From $(q,a,t)$, reading $b$: if $t=1$ exactly when $a\\ne b$, go to $(\\delta(q,b),b)$; otherwise go to the dead state.\n- Accepting states: $(q,a)$ with $q\\in F$, and $s$ iff $q_0\\in F$ (the empty word, $k=0$). The dead state loops.\n\nBy induction on the length, $D_0$ reaches $(q,a)$ after reading $a_1s_{1,2}a_2\\ldots a_i$ exactly when all check bits were correct, with $q=\\delta^*(q_0,a_1\\ldots a_i)$ and $a=a_i$; any wrong check bit leads to the dead state. Hence $D_0$ accepts exactly the words of $L_0$, and $L_0$ is regular (it uses $2|Q|+4|Q|+2$ states, a finite number).\n\n(The official solution writes $L_0=L_1\\cap L_2$ with $L_1=\\{a_1x_1a_2\\ldots a_k:a_1\\ldots a_k\\in L\\}$ and $L_2$ the set of words with correct check bits, both regular.)\n\n**Answer: Yes**"
+   }
+  ],
+  "topics": [
+   "logic"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2016-power-s5-07",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Power Round (Section 5: DFA Minimization)",
+   "year": 2016,
+   "number": 7,
+   "url": "https://cmimc.com/archive/cmimc2016/2016_Power.pdf"
+  },
+  "grade": "9-12",
+  "points": 2,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "The DFA in the picture accepts some language $L$ (over $\\{0,1\\}$; every arrow is labelled $0,1$). Although this DFA decides $L$, it is somewhat inefficient. Propose two modifications to this DFA so that it still decides $L$ but requires fewer states.",
+  "image": "qimages/cmimc/2016-power/s5-q07.webp",
+  "choices": null,
+  "answer": "$L$ is the set of strings of odd length at least $3$. E.g. merge the cycle $q_2\\to q_3\\to q_4\\to q_5\\to q_2$ into a cycle of length $2$ ($q_2\\to q_3\\to q_2$ with $q_3$ accepting), giving $4$ states; the minimum is $4$ states.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Identify the language",
+    "body": "Since every arrow reads either letter, the state depends only on the length $\\ell$ of the input: $q_0,q_1,q_2,q_3$ for $\\ell=0,1,2,3$, then $q_4,q_5,q_2,q_3,\\ldots$ cycling. The accepting states $q_3$ (reached at lengths $3,7,11,\\ldots$) and $q_5$ (lengths $5,9,13,\\ldots$) together accept exactly the odd lengths $3,5,7,\\ldots$, so $L$ is the set of strings of odd length at least $3$."
+   },
+   {
+    "title": "Two modifications",
+    "body": "1. State $q_4$ behaves exactly like $q_2$ (both reject and both lead to an accepting state next). Redirect the arrow $q_3\\to q_4$ to $q_3\\to q_2$ and delete $q_4$.\n2. Now $q_5$ is unreachable, so delete it as well.\n\nThe result is $q_0\\to q_1\\to q_2\\leftrightarrow q_3$ with $q_3$ accepting: $4$ states instead of $6$, still accepting exactly the odd lengths $\\ge3$. It cannot be improved: the lengths $0$, $1$, even $\\ge2$ and odd $\\ge3$ lead to $4$ pairwise distinguishable classes, so $4$ states are needed."
+   }
+  ],
+  "topics": [
+   "logic"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2016-power-s5-08",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Power Round (Section 5: DFA Minimization)",
+   "year": 2016,
+   "number": 8,
+   "url": "https://cmimc.com/archive/cmimc2016/2016_Power.pdf"
+  },
+  "grade": "9-12",
+  "points": 8,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Consider the language $L=\\{0^n1^m:n-m\\equiv0\\pmod3\\}$ (all strings consisting of $n\\ge0$ zeros followed by $m\\ge0$ ones, with $n-m$ divisible by $3$). This language is regular. What is the smallest number of states needed in a DFA that decides $L$? (Your answer must both establish a minimum number of states and show that this minimum is achievable.)",
+  "image": null,
+  "choices": null,
+  "answer": "7",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Seven states suffice",
+    "body": "States: $A_0,A_1,A_2$ for \"only zeros read so far, $n\\equiv i\\pmod3$\" (start $A_0$), $B_0,B_1,B_2$ for \"a $1$ has been read; the current value of $n-m\\equiv i\\pmod3$\", and a dead state $R$. Transitions: $A_i\\xrightarrow{0}A_{i+1}$, $A_i\\xrightarrow{1}B_{i-1}$, $B_i\\xrightarrow{1}B_{i-1}$, $B_i\\xrightarrow{0}R$, $R$ loops. Accepting states: $A_0$ and $B_0$. This decides $L$."
+   },
+   {
+    "title": "Seven states are needed",
+    "body": "Consider the seven words $0,00,000,1,11,111,10$. They are pairwise distinguishable, meaning that for any two of them some suffix is accepted after one and rejected after the other:\n\n- $0^i$ and $0^j$ with $1\\le i<j\\le3$: use the suffix $0^{3-i}$; then $0^{3}\\in L$ but $0^{j+3-i}\\notin L$ since $j-i\\not\\equiv0\\pmod 3$.\n- $1^i$ and $1^j$ with $1\\le i<j\\le3$: use the suffix $1^{s}$ with $s\\in\\{0,1,2\\}$ chosen so that $-i-s\\equiv0\\pmod3$; the other word then has $-j-s\\not\\equiv0$.\n- $0^i$ and $1^j$: use a suffix $0^c$ with $i+c\\equiv0\\pmod3$, $c\\ge1$: $0^{i+c}\\in L$ but $1^j0^c\\notin L$.\n- $10$ and any of the other six: $10$ can never be extended into a word of $L$ (a $0$ after a $1$), whereas each of the other six words has an extension in $L$.\n\nIf a DFA had fewer than $7$ states, two of these words would end in the same state, and then every suffix would give the same verdict for both, contradicting distinguishability. So at least $7$ states are needed, and $7$ are enough.\n\n**Answer: 7**"
+   }
+  ],
+  "topics": [
+   "logic",
+   "number-theory"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2016-power-s5-09a",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Power Round (Section 5: DFA Minimization)",
+   "year": 2016,
+   "number": 9,
+   "url": "https://cmimc.com/archive/cmimc2016/2016_Power.pdf"
+  },
+  "grade": "9-12",
+  "points": 4,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Define $\\mathcal L_n=\\{x:x\\in\\{0,1\\}^*\\text{ and the }n^{\\text{th}}\\text{-symbol from the left of }x\\text{ is a }1\\}$. Show that there is some constant number $c$ (independent of $n$) such that there is a DFA that accepts $\\mathcal L_n$ with at most $n+c$ states.",
+  "image": null,
+  "choices": null,
+  "answer": "A DFA with states $1,\\ldots,n$ (counting letters), an accepting sink and a rejecting sink, so $n+2$ states.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Count to $n$",
+    "body": "Use states $p_1,\\ldots,p_n$ where $p_i$ means \"$i-1$ symbols have been read\" (start $p_1$), with transition $p_i\\to p_{i+1}$ on both $0$ and $1$ for $i<n$. From $p_n$, reading $1$ goes to an accepting sink $A$ and reading $0$ goes to a rejecting sink $R$; $A$ and $R$ loop on both symbols. The $n$-th symbol decides the outcome and nothing after it matters. This has $n+2$ states, so $c=2$. ∎"
+   }
+  ],
+  "topics": [
+   "logic"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2016-power-s5-09b",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Power Round (Section 5: DFA Minimization)",
+   "year": 2016,
+   "number": 9,
+   "url": "https://cmimc.com/archive/cmimc2016/2016_Power.pdf"
+  },
+  "grade": "9-12",
+  "points": 5,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Define $\\mathcal R_n=\\{x:x\\in\\{0,1\\}^*\\text{ and the }n^{\\text{th}}\\text{-symbol from the right of }x\\text{ is a }1\\}$. Show that any DFA that accepts $\\mathcal R_n$ has at least $2^n$ states.",
+  "image": null,
+  "choices": null,
+  "answer": "The $2^n$ words of length $n$ are pairwise distinguishable.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Distinguishable words",
+    "body": "Let $D$ decide $\\mathcal R_n$ and suppose it has fewer than $2^n$ states. There are $2^n$ binary words of length $n$, so two different ones, $u\\ne v$, end in the same state. They differ at some position $i$ from the left ($1\\le i\\le n$), say $u_i=1$ and $v_i=0$. Append $0^{i-1}$ to both: in $u0^{i-1}$ the $i$-th symbol of $u$ is now $n$-th from the right and equals $1$, so $u0^{i-1}\\in\\mathcal R_n$; in $v0^{i-1}$ that symbol is $0$, so $v0^{i-1}\\notin\\mathcal R_n$. But $u$ and $v$ end in the same state, so $u0^{i-1}$ and $v0^{i-1}$ end in the same state and are both accepted or both rejected. Contradiction. Hence $D$ has at least $2^n$ states. ∎"
+   }
+  ],
+  "topics": [
+   "logic",
+   "counting"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2016-power-s5-10",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Power Round (Section 5: DFA Minimization)",
+   "year": 2016,
+   "number": 10,
+   "url": "https://cmimc.com/archive/cmimc2016/2016_Power.pdf"
+  },
+  "grade": "9-12",
+  "points": 2,
+  "timeMinutes": null,
+  "type": "text",
+  "prompt": "For a language $A$ and a word $v$, let $S_v(A)=\\{w\\in\\Sigma^*:vw\\in A\\}$. Let $L=\\{0^n1^n:n\\in\\mathbb N\\}$. What is $S_{111100}(L)$?",
+  "image": null,
+  "choices": null,
+  "answer": "the empty set",
+  "acceptedAnswers": [
+   "empty set",
+   "∅",
+   "{}",
+   "emptyset",
+   "the empty set",
+   "no words"
+  ],
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "No extension works",
+    "body": "Every nonempty word of $L=\\{0^n1^n\\}$ starts with $0$, and $\\varepsilon\\in L$. A word $vw$ with $v=111100$ starts with $1$ and is nonempty, so it is never in $L$. Hence $S_{111100}(L)=\\varnothing$.\n\n**Answer: the empty set**"
+   }
+  ],
+  "topics": [
+   "logic"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": "The official solution says S_111100(L) = {00}, but 111100 begins with 1, so no word vw (starting with 1) can lie in L (every nonempty word of L starts with 0). The correct answer is the empty set."
+ },
+ {
+  "id": "cmimc-2016-power-s5-11",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Power Round (Section 5: DFA Minimization)",
+   "year": 2016,
+   "number": 11,
+   "url": "https://cmimc.com/archive/cmimc2016/2016_Power.pdf"
+  },
+  "grade": "9-12",
+  "points": 3,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Let $M$ be a DFA with $N$ states, and call two strings $x,y$ *indistinguishable* ($x\\equiv_My$) if they lead $M$ from the start state to the same state. At most how many equivalence classes can $\\equiv_M$ have? What is an example of a DFA $M$ for which equality does not hold?",
+  "image": null,
+  "choices": null,
+  "answer": "At most $N$ (one for each state that is reachable from the start state). Equality fails when some state is unreachable from the start state, e.g. a DFA with an extra state that no arrow leads to.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Classes correspond to reachable states",
+    "body": "Two strings are equivalent iff they end in the same state, so the equivalence classes correspond to the states that are reached by at least one string, namely the states reachable from the start state. There are at most $N$ of them.\n\nEquality fails for a DFA with a state that is not reachable from the start state, for instance a two-state DFA over $\\{0,1\\}$ where both arrows from the start state $q_0$ loop back to $q_0$ and the second state $q_1$ has no incoming arrow: $\\equiv_M$ has only one class."
+   }
+  ],
+  "topics": [
+   "logic",
+   "counting"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2016-power-s5-12",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Power Round (Section 5: DFA Minimization)",
+   "year": 2016,
+   "number": 12,
+   "url": "https://cmimc.com/archive/cmimc2016/2016_Power.pdf"
+  },
+  "grade": "9-12",
+  "points": 5,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "For a language $A$ let $S_v(A)=\\{w:vw\\in A\\}$, and write $x\\equiv_Ay$ iff $S_x(A)=S_y(A)$. For a DFA $M$ write $x\\equiv_My$ iff $M$ is in the same state after reading $x$ and after reading $y$. Show that the notions of equivalency and indistinguishability are compatible: if $M$ is a DFA, $A=L(M)$ and $x\\equiv_My$, then $x\\equiv_Ay$.",
+  "image": null,
+  "choices": null,
+  "answer": "If $x$ and $y$ end in the same state, then $xz$ and $yz$ end in the same state for every $z$, so they are accepted together.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Same state, same future",
+    "body": "Let $x\\equiv_My$, i.e. $\\delta^*(q_0,x)=\\delta^*(q_0,y)=:r$. For any $z\\in\\Sigma^*$, $\\delta^*(q_0,xz)=\\delta^*(r,z)=\\delta^*(q_0,yz)$. Hence $xz\\in A\\iff\\delta^*(r,z)\\in F\\iff yz\\in A$. As this holds for all $z$, $S_x(A)=S_y(A)$, i.e. $x\\equiv_Ay$. ∎"
+   }
+  ],
+  "topics": [
+   "logic"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2016-power-s5-13",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Power Round (Section 5: DFA Minimization)",
+   "year": 2016,
+   "number": 13,
+   "url": "https://cmimc.com/archive/cmimc2016/2016_Power.pdf"
+  },
+  "grade": "9-12",
+  "points": 8,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "For a language $A\\subseteq\\Sigma^*$ and a word $v$, let $S_v(A)=\\{w:vw\\in A\\}$ and write $x\\equiv_Ay$ iff $S_x(A)=S_y(A)$. Prove the **Myhill-Nerode Theorem**: a language $A$ is regular iff $\\equiv_A$ has finitely many equivalence classes. Furthermore, there is a DFA $M$ with $L(M)=A$ in which every state corresponds to exactly one equivalence class of $\\equiv_A$.",
+  "image": null,
+  "choices": null,
+  "answer": "($\\Rightarrow$) $\\equiv_A$ is coarser than $\\equiv_M$, which has at most $|Q|$ classes. ($\\Leftarrow$) Build the DFA whose states are the classes $[v]$, with $\\delta([v],a)=[va]$, start $[\\varepsilon]$, accepting classes those containing words of $A$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Regular implies finitely many classes",
+    "body": "Let a DFA $M$ with state set $Q$ decide $A$. If $x\\equiv_My$ then $x\\equiv_Ay$ (previous problem), so each class of $\\equiv_A$ is a union of classes of $\\equiv_M$. Since $\\equiv_M$ has at most $|Q|$ classes, $\\equiv_A$ has at most $|Q|$ classes: finitely many."
+   },
+   {
+    "title": "Finitely many classes implies regular",
+    "body": "First, $\\equiv_A$ is compatible with appending letters: if $x\\equiv_Ay$ and $a\\in\\Sigma$ then $xa\\equiv_Aya$, because $S_{xa}(A)=\\{w:aw\\in S_x(A)\\}=\\{w:aw\\in S_y(A)\\}=S_{ya}(A)$.\n\nLet the classes be $T_1,\\ldots,T_n$. Define a DFA with one state per class, start state the class $[\\varepsilon]$, transition $\\delta([v],a)=[va]$ (well defined by the compatibility), and accepting states the classes containing a word of $A$ (all words in a class agree on membership in $A$, since $\\varepsilon\\in S_v(A)\\iff v\\in A$). By induction on $|w|$, the DFA is in state $[w]$ after reading $w$. So it accepts $w$ iff $[w]$ is accepting iff $w\\in A$. Hence $A$ is regular, and each state of this DFA is exactly one equivalence class of $\\equiv_A$. ∎"
+   }
+  ],
+  "topics": [
+   "logic"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2016-power-s5-14",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Power Round (Section 5: DFA Minimization)",
+   "year": 2016,
+   "number": 14,
+   "url": "https://cmimc.com/archive/cmimc2016/2016_Power.pdf"
+  },
+  "grade": "9-12",
+  "points": 4,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Minimization algorithm for a DFA: draw a table of all pairs of states; mark each pair where one state is accepting and the other is not; repeatedly mark a pair $(Q_i,Q_j)$ if for some input letter $a$ the pair $(\\delta(Q_i,a),\\delta(Q_j,a))$ is marked; finally merge all unmarked pairs of states into single states. Perform this algorithm on the DFA in the picture (start state $q_0$; accepting states $q_2,q_3,q_4$). What is the result?",
+  "image": "qimages/cmimc/2016-power/s5-q14.webp",
+  "choices": null,
+  "answer": "A DFA with three states: $\\{q_0,q_1\\}$ (start, non-accepting), $\\{q_2,q_3,q_4\\}$ (accepting), $\\{q_5\\}$ (dead); $\\{q_0,q_1\\}\\xrightarrow{0}\\{q_0,q_1\\}$, $\\xrightarrow{1}\\{q_2,q_3,q_4\\}$; $\\{q_2,q_3,q_4\\}\\xrightarrow{0}$ itself, $\\xrightarrow{1}\\{q_5\\}$; $\\{q_5\\}$ loops. It accepts $0^*10^*$.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Run the algorithm",
+    "body": "Accepting: $q_2,q_3,q_4$; non-accepting: $q_0,q_1,q_5$. First marks: all (accepting, non-accepting) pairs. Next round: $(q_0,q_5)$: on $1$ they go to $q_2$ and $q_5$ (a marked pair), so mark it; $(q_1,q_5)$: on $1$ they go to $q_3$ and $q_5$ (marked), so mark it. $(q_0,q_1)$: on $0$ they go to each other, on $1$ to $q_2,q_3$ (both accepting, unmarked): stays unmarked. Among accepting states: $(q_2,q_3)$: on $0$ both go to $q_4$, on $1$ both go to $q_5$: unmarked; $(q_2,q_4)$: on $0$ to $q_4,q_4$, on $1$ to $q_5,q_5$: unmarked; so $q_2\\sim q_3\\sim q_4$.\n\nMerge $\\{q_0,q_1\\}$, $\\{q_2,q_3,q_4\\}$, $\\{q_5\\}$ to get the 3-state DFA described in the answer, which accepts exactly the strings with a single $1$ (i.e. $0^*10^*$)."
+   }
+  ],
+  "topics": [
+   "logic"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2016-power-s5-15",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Power Round (Section 5: DFA Minimization)",
+   "year": 2016,
+   "number": 15,
+   "url": "https://cmimc.com/archive/cmimc2016/2016_Power.pdf"
+  },
+  "grade": "9-12",
+  "points": 6,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "For a regular language $A$, the equivalence relation $\\equiv_A$ ($x\\equiv_Ay$ iff $S_x(A)=S_y(A)$ where $S_v(A)=\\{w:vw\\in A\\}$) has finitely many classes (Myhill-Nerode). Using this theorem, show that the minimization algorithm (mark pairs of states one of which is accepting and one not; repeatedly mark $(Q_i,Q_j)$ if some letter sends it to a marked pair; merge unmarked pairs) produces a DFA with the minimal number of states. (Assume states unreachable from the start state have been deleted first.)",
+  "image": null,
+  "choices": null,
+  "answer": "Marked pairs are exactly the pairs of distinguishable states; merging the unmarked ones gives a DFA with one state per class of $\\equiv_A$, which is the minimum possible.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Marked means distinguishable",
+    "body": "Say states $Q_i,Q_j$ are *distinguishable* if some word $w$ leads one to an accepting state and the other to a non-accepting state. By induction on the length of the shortest distinguishing word, a pair is marked iff it is distinguishable: a pair is initially marked iff $w=\\varepsilon$ distinguishes it, and if $aw$ distinguishes $(Q_i,Q_j)$ then $w$ distinguishes $(\\delta(Q_i,a),\\delta(Q_j,a))$, which is marked by induction, so $(Q_i,Q_j)$ gets marked (conversely a marked pair is distinguishable by the word that produced the mark). So unmarked pairs are exactly the pairs of states with the same future behaviour, and this is an equivalence relation, so merging is consistent with the transitions."
+   },
+   {
+    "title": "Count with Myhill-Nerode",
+    "body": "Delete states unreachable from the start state. Every remaining state is reached by some word $x$, and two words $x,y$ reaching states $Q_i,Q_j$ satisfy $x\\equiv_Ay$ iff $Q_i,Q_j$ are indistinguishable (their futures $S_x(A)$ and $S_y(A)$ are the sets of words accepted from $Q_i,Q_j$). Hence the states of the merged DFA correspond one-to-one to the classes of $\\equiv_A$. By the Myhill-Nerode theorem every DFA deciding $A$ has at least as many states as there are classes of $\\equiv_A$ (distinct classes need distinct states, by the first half of the proof of that theorem). So the merged DFA has the minimum number of states. ∎"
+   }
+  ],
+  "topics": [
+   "logic"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ }
+]

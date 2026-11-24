@@ -1,0 +1,352 @@
+[
+ {
+  "id": "cmimc-2018-computerscience-01",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Computer Science Round",
+   "year": 2018,
+   "number": 1,
+   "url": "https://cmimc.com/archive/cmimc2018/2018_ComputerScience.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Consider the following two vertex-weighted graphs, and denote them as having vertex sets $V=\\{v_1,v_2,\\dots,v_6\\}$ and $W=\\{w_1,w_2,\\dots,w_6\\}$, respectively (numbered in the same direction and way). The weights in the second graph are such that for all $1\\le i\\le6$, the weight of $w_i$ is the sum of the weights of the neighbors of $v_i$. Determine the sum of the weights of the original graph.\n\nThe left graph has vertices $v_1,\\dots,v_6$ and edges $v_1v_5$, $v_1v_6$, $v_2v_3$, $v_2v_4$, $v_2v_6$, $v_3v_4$, $v_3v_5$, $v_5v_6$; the right graph has the same shape with weights $17,19,17,7,15,13$ on $w_1,\\dots,w_6$ (as in the picture).",
+  "image": "qimages/cmimc/2018-computerscience/q01.webp",
+  "choices": null,
+  "answer": "32",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Add two equations",
+    "body": "Reading the edges off the left graph, the neighbor sums give\n\n$v_5+v_6=17$, $v_3+v_4+v_6=19$, $v_2+v_4+v_5=17$, $v_2+v_3=7$, $v_1+v_3+v_6=15$, $v_1+v_2+v_5=13$.\n\nThe neighbors of $v_2$ ($v_3,v_4,v_6$) and of $v_6$ ($v_1,v_2,v_5$) together include each of the six vertices exactly once, so adding the second and sixth equations gives $v_1+v_2+\\cdots+v_6=19+13=32$. (Adding the third and fifth equations gives $17+15=32$ as well.)\n\n**Answer: 32**"
+   }
+  ],
+  "topics": [
+   "graph-theory",
+   "algebra"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2018-computerscience-02",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Computer Science Round",
+   "year": 2018,
+   "number": 2,
+   "url": "https://cmimc.com/archive/cmimc2018/2018_ComputerScience.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Consider the natural implementation of computing Fibonacci numbers:\n\n```\n1: FUNCTION FIB(n):\n2:     IF n = 0 OR n = 1 RETURN 1\n3:     RETURN FIB(n-1) + FIB(n-2)\n```\n\nWhen FIB(10) is evaluated, how many recursive calls to FIB occur?",
+  "image": null,
+  "choices": null,
+  "answer": "176",
+  "acceptedAnswers": null,
+  "answerUnit": "calls",
+  "solutions": [
+   {
+    "title": "Recurrence for the number of calls",
+    "body": "Let $f(n)$ be the number of recursive calls made while evaluating FIB($n$) (not counting the initial call). Then $f(0)=f(1)=0$ and for $n\\ge2$ the call makes the two recursive calls FIB($n-1$) and FIB($n-2$) and everything they do:\n\n$$f(n)=2+f(n-1)+f(n-2).$$\n\nThis gives $f(2)=2$, $f(3)=4$, $f(4)=8$, $f(5)=14$, $f(6)=24$, $f(7)=40$, $f(8)=66$, $f(9)=108$, $f(10)=176$.\n\n**Answer: 176**"
+   },
+   {
+    "title": "Closed form",
+    "body": "Since $f(n)+2=\\left(f(n-1)+2\\right)+\\left(f(n-2)+2\\right)$, $f(n)+2$ follows the Fibonacci recurrence with $f(0)+2=f(1)+2=2$, so $f(n)=2F_{n+1}-2$ ($F_1=F_2=1$). Then $f(10)=2\\cdot89-2=176$."
+   }
+  ],
+  "topics": [
+   "sequences-series",
+   "counting"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2018-computerscience-03",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Computer Science Round",
+   "year": 2018,
+   "number": 3,
+   "url": "https://cmimc.com/archive/cmimc2018/2018_ComputerScience.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "You are given the existence of an unsorted sequence $a_1,\\dots,a_5$ of five distinct real numbers. The Erdos-Szekeres theorem states that there exists a subsequence of length $3$ which is either strictly increasing or strictly decreasing. You do not have access to the $a_i$, but you do have an oracle which, when given two indexes $1\\le i<j\\le5$, will tell you whether $a_i<a_j$ or $a_i>a_j$. What is the minimum number of calls to the oracle needed in order to identify an ordered triple of integers $(r,s,t)$ such that $a_r,a_s,a_t$ is one such sequence?",
+  "image": null,
+  "choices": null,
+  "answer": "4",
+  "acceptedAnswers": null,
+  "answerUnit": "calls",
+  "solutions": [
+   {
+    "title": "Four calls suffice",
+    "body": "Query the pairs $(2,3)$, $(3,4)$ and $(2,4)$; this gives the full order of $a_2,a_3,a_4$. If $a_3$ is the median of the three, then $(2,3,4)$ is monotone and we are done. Otherwise, by symmetry (reversing all inequalities if needed), $a_3<a_2<a_4$. Query $(1,2)$: if $a_1<a_2$ then $a_1<a_2<a_4$ so $(1,2,4)$ works; if $a_1>a_2$ then $a_1>a_2>a_3$ so $(1,2,3)$ works. That is $4$ calls in the worst case.\n\n"
+   },
+   {
+    "title": "Three calls do not suffice",
+    "body": "A monotone triple $r<s<t$ is certified only when the answers force $a_r<a_s<a_t$ or $a_r>a_s>a_t$, i.e. chains of answers of the same direction connect $r$ to $s$ and $s$ to $t$. With only three answers an adversary can always reply so that no such pair of chains exists (and the final orderings stay consistent): the key is that any three comparisons among five numbers leave some pair of oracle answers pointing in opposite directions or not chaining. A complete game-tree search over all $120$ orderings and all adaptive strategies confirms that no strategy with $3$ calls always succeeds, while a $4$-call strategy exists.\n\n**Answer: 4**"
+   }
+  ],
+  "topics": [
+   "logic",
+   "counting"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2018-computerscience-04",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Computer Science Round",
+   "year": 2018,
+   "number": 4,
+   "url": "https://cmimc.com/archive/cmimc2018/2018_ComputerScience.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Consider the grid of numbers shown below.\n\n```\n20 01 96 56 16\n37 48 38 64 60\n96 97 42 20 98\n35 64 96 40 71\n50 58 90 16 89\n```\n\nAmong all paths that start on the top row, move only left, right, and down, and end on the bottom row, what is the minimum sum of their entries?",
+  "image": null,
+  "choices": null,
+  "answer": "196",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Straight down the fourth column",
+    "body": "The path straight down the fourth column has sum $56+64+20+40+16=196$. A dynamic program over the grid (best cost to reach each cell using moves left, right and down) shows that no path does better, so the minimum is $196$.\n\n**Answer: 196**"
+   }
+  ],
+  "topics": [
+   "arithmetic",
+   "graph-theory"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2018-computerscience-05",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Computer Science Round",
+   "year": 2018,
+   "number": 5,
+   "url": "https://cmimc.com/archive/cmimc2018/2018_ComputerScience.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "An access pattern $\\pi$ is a permutation of $\\{1,2,\\dots,50\\}$ describing the order in which some $50$ memory addresses are accessed. We define the locality of $\\pi$ to be how much the program jumps around the memory, or numerically, $$\\sum_{i=2}^{50}|\\pi(i)-\\pi(i-1)|.$$ If $\\pi$ is a uniformly randomly chosen access pattern, what is the expected value of its locality?",
+  "image": null,
+  "choices": null,
+  "answer": "833",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Linearity of expectation",
+    "body": "By linearity, the answer is $49\\cdot E$, where $E$ is the expected value of $|\\pi(i)-\\pi(i-1)|$; the pair $(\\pi(i-1),\\pi(i))$ is a uniformly random ordered pair of distinct numbers from $\\{1,\\dots,50\\}$.\n\nFor a random pair of distinct numbers from $\\{1,\\dots,n\\}$, the expected absolute difference is $\\frac{n+1}3$: indeed $\\sum_{d=1}^{n-1}d(n-d)\\cdot 2\\big/\\bigl(n(n-1)\\bigr)=\\frac{n+1}{3}$ (using $\\sum_{d=1}^{n-1}d(n-d)=\\frac{n(n-1)(n+1)}6$). Hence $E=\\frac{51}3=17$ and the answer is $49\\cdot17=833$ (in general $\\frac{n^2-1}3$).\n\n**Answer: 833**"
+   }
+  ],
+  "topics": [
+   "probability",
+   "counting"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2018-computerscience-06",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Computer Science Round",
+   "year": 2018,
+   "number": 6,
+   "url": "https://cmimc.com/archive/cmimc2018/2018_ComputerScience.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "For integer $n\\ge2$ and real $0\\le p\\le1$, define $\\mathcal W_{n,p}$ to be the complete weighted undirected random graph with vertex set $\\{1,2,\\dots,n\\}$: the edge $(i,j)$ will have weight $\\min(i,j)$ with probability $p$ and weight $\\max(i,j)$ otherwise. Let $L_{n,p}$ denote the total weight of the minimum spanning tree of $\\mathcal W_{n,p}$. Find the largest integer less than the expected value of $L_{2018,1/2}$.",
+  "image": null,
+  "choices": null,
+  "answer": "4033",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Add vertices one at a time",
+    "body": "Claim: $E[L_{n,1/2}]=2n-3+\\frac1{2^{n-1}}$. For $n=2$ the single edge has weight $1$ or $2$ with equal probability, so $E=\\frac32$ ✓.\n\nGoing from $n$ to $n+1$ vertices, the edges at the new vertex $n+1$ have weight $i$ (probability $\\frac12$) or $n+1$ (probability $\\frac12$), the latter exceeding every weight among the first $n$ vertices. The minimum spanning tree of the larger graph is the MST of the first $n$ vertices plus the cheapest edge at vertex $n+1$ (a cycle-property/Kruskal argument; exact enumeration for $n\\le5$ confirms the formula). The cheapest edge has weight $i$ if the edge from $i$ has weight $i$ and no smaller index does (probability $2^{-i}$), or $n+1$ if none does (probability $2^{-n}$):\n\n$$E[s]=\\sum_{i=1}^n\\frac i{2^i}+\\frac{n+1}{2^n}=2-\\frac1{2^n}.$$\n\nSo $E[L_{n+1}]=2n-3+2^{1-n}+2-2^{-n}=2(n+1)-3+2^{-n}$, proving the claim. For $n=2018$ the expectation is $4033+2^{-2017}$, so the largest integer less than it is $4033$.\n\n**Answer: 4033**"
+   }
+  ],
+  "topics": [
+   "probability",
+   "graph-theory"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2018-computerscience-07",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Computer Science Round",
+   "year": 2018,
+   "number": 7,
+   "url": "https://cmimc.com/archive/cmimc2018/2018_ComputerScience.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "I give you a function rand that returns a number chosen uniformly at random from $[0,T]$ for some number $T$ that you don't know. Your task is to approximate $T$. You do this by calling rand $100$ times, recording the results as $X_1,X_2,\\dots,X_{100}$, and guessing $$\\hat T=\\alpha\\cdot\\max\\{X_1,X_2,\\dots,X_{100}\\}$$ for some $\\alpha$. Which value of $\\alpha$ ensures that $E[\\hat T]=T$?",
+  "image": null,
+  "choices": null,
+  "answer": "101/100",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Expected maximum",
+    "body": "Let $M=\\max X_i$. Then $P(M\\le x)=\\left(\\frac xT\\right)^{100}$ for $0\\le x\\le T$, so\n\n$$E[M]=\\int_0^T\\bigl(1-(x/T)^{100}\\bigr)\\,dx=T-\\frac T{101}=\\frac{100}{101}T.$$\n\nHence $E[\\alpha M]=T$ requires $\\alpha=\\frac{101}{100}$.\n\n**Answer: $\\dfrac{101}{100}$**"
+   }
+  ],
+  "topics": [
+   "probability",
+   "statistics"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null,
+  "answerDisplay": "$\\frac{101}{100}$"
+ },
+ {
+  "id": "cmimc-2018-computerscience-08",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Computer Science Round",
+   "year": 2018,
+   "number": 8,
+   "url": "https://cmimc.com/archive/cmimc2018/2018_ComputerScience.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "We consider a simple model for balanced parenthesis checking. Let $R=\\{(()) \\to A,\\ (A)\\to A,\\ AA\\to A\\}$ be a set of rules for phrase reduction. Ideally, any given phrase is balanced if and only if the model is able to reduce the phrase to $A$ by some arbitrary sequence of rule applications. For example, to show $((()))$ is balanced we can perform the following sequence of reductions.\n\n$$((()))\\to(A)\\to A$$\n\nUnfortunately, the above set of rules $R$ is not complete, since there exist parenthetical phrases which are balanced but which are not balanced according to $R$. Determine the number of such phrases of length $14$.",
+  "image": null,
+  "choices": null,
+  "answer": "412",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Count reducible phrases",
+    "body": "There are $C_7=\\frac18\\binom{14}7=429$ balanced phrases of length $14$. Let $f(n)$ be the number of phrases of length $2n$ that reduce to $A$ using $R$ ($f(1)=0$, $f(2)=1$), and $g(n)=f(n)$ except $g(1)=1$. A reducible phrase either is a reducible phrase of length $2n-2$ wrapped in a pair of parentheses, or splits as $(\\,\\cdot\\,)$ of a reducible inside followed by a reducible phrase of length $2(n-k-1)$, which gives\n\n$$f(n)=f(n-1)+\\sum_{i=1}^{n-2}g(i)f(n-1-i)\\quad(n\\ge3).$$\n\nThe values are $f(1),\\dots,f(7)=0,1,1,2,4,8,17$. So $17$ of the $429$ phrases reduce, and $429-17=412$ do not.\n\nAn exhaustive computer search over all $429$ phrases, trying every sequence of reductions, confirms exactly $17$ reducible phrases of length $14$.\n\n**Answer: 412**"
+   }
+  ],
+  "topics": [
+   "counting",
+   "logic"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": "The official solution states f(7)=37 and answers 392; the recurrence in the same solution gives f(7)=17, and an exhaustive search confirms 17 reducible phrases, so the answer is 429-17=412."
+ },
+ {
+  "id": "cmimc-2018-computerscience-09",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Computer Science Round",
+   "year": 2018,
+   "number": 9,
+   "url": "https://cmimc.com/archive/cmimc2018/2018_ComputerScience.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Consider the following modified algorithm for binary search, which we will call weighted binary search:\n\n```\n01: FUNCTION SEARCH(L, value)\n02:     hi <- len(L) - 1\n03:     lo <- 0\n04:     WHILE hi >= lo\n05:         guess <- floor(w*lo + (1-w)*hi)\n06:         mid <- L[guess]\n07:         IF mid > value\n08:             hi <- guess - 1\n09:         ELSE IF mid < value\n10:             lo <- guess + 1\n11:         ELSE\n12:             RETURN guess\n13:     RETURN -1 (not found)\n```\n\nAssume $L$ is a list of the integers $\\{1,2,\\dots,100\\}$, in that order. Further assume that accessing the $k$th index of $L$ costs $k+1$ tokens (e.g. $L[0]$ costs $1$ token). Let $S$ be the set of all $w\\in[\\frac12,1)$ which minimize the average cost when value is an integer selected at random in the range $[1,50]$. Given that $S=\\left[x,\\frac{74}{99}\\right)$, determine $x$.",
+  "image": null,
+  "choices": null,
+  "answer": "20/27",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Where the optimal guesses change",
+    "body": "The cost depends on $w$ only through the guesses $\\lfloor w\\,lo+(1-w)\\,hi\\rfloor$ that occur, so it is a step function of $w$ that jumps only when one of these quantities crosses an integer.\n\n- The first guess (range $(0,99)$) is $\\lfloor99(1-w)\\rfloor$; it equals $25$ for $\\frac{73}{99}<w\\le\\frac{74}{99}$ and becomes $24$ just beyond $\\frac{74}{99}$, which makes the cost worse. This explains the right endpoint $\\frac{74}{99}$.\n- For targets near the top of $[1,50]$ the search goes $(0,99)\\to(26,99)\\to(45,99)$ (first guesses $25$, then $44$), and then the next guess is $\\lfloor45w+99(1-w)\\rfloor=\\lfloor99-54w\\rfloor$. This equals $58$ when $w>\\frac{40}{54}=\\frac{20}{27}$ and $59$ (a more expensive probe) when $w<\\frac{20}{27}$. This explains the left endpoint $\\frac{20}{27}$.\n\nIn between the cost is constant, and a direct computation of the average cost over $w\\in[\\frac12,1)$ shows that the minimum (total $7364$ tokens over the $50$ values) is attained exactly for $w$ between $\\frac{20}{27}$ and $\\frac{74}{99}$ (endpoint conventions aside), and nowhere else. So $x=\\frac{20}{27}$.\n\n**Answer: $\\dfrac{20}{27}$**"
+   }
+  ],
+  "topics": [
+   "arithmetic",
+   "logic"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null,
+  "answerDisplay": "$\\frac{20}{27}$"
+ },
+ {
+  "id": "cmimc-2018-computerscience-10",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Computer Science Round",
+   "year": 2018,
+   "number": 10,
+   "url": "https://cmimc.com/archive/cmimc2018/2018_ComputerScience.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Consider an undirected, connected graph $G$ with vertex set $\\{v_1,v_2,\\dots,v_6\\}$. Starting at the vertex $v_1$, an ant uses a DFS algorithm to traverse through $G$ under the condition that if there are multiple unvisited neighbors of some vertex, the ant chooses the $v_i$ with smallest $i$. How many possible graphs $G$ are there satisfying the following property: for each $1\\le i\\le6$, the vertex $v_i$ is the $i$th new vertex the ant traverses?",
+  "image": null,
+  "choices": null,
+  "answer": "3113",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Recursion on the DFS tree",
+    "body": "Let $G_{n,k}$ be the number of connected graphs on $v_1,\\dots,v_n$ in which DFS visits $v_1,\\dots,v_n$ in this order and the DFS-tree path from $v_1$ to $v_n$ has length $k$. Removing $v_{n+1}$ from a valid graph on $n+1$ vertices leaves a valid graph on $n$ vertices, and all neighbors of $v_{n+1}$ must lie on the DFS-tree path $P$ from $v_1$ to $v_n$ (a neighbor off $P$ would let DFS reach $v_{n+1}$ before $v_n$). Choose the tree-parent of $v_{n+1}$ on $P$, at distance $k$ from $v_1$, then any subset of the $k$ earlier vertices of $P$ as extra neighbors ($2^k$ choices). The new path has length $k+1$, so\n\n$$G_{n+1,k+1}=2^k\\sum_{j\\ge k}G_{n,j}.$$\n\nStarting with $G_{1,0}=1$, the rows are: $n=2$: $(1)$; $n=3$: $(1,2)$; $n=4$: $(3,6,8)$; $n=5$: $(17,34,56,64)$; $n=6$: $(171,342,616,960,1024)$. The total for $n=6$ is $171+342+616+960+1024=3113$. (A brute-force check of all $2^{15}$ graphs on six labelled vertices confirms $3113$.)\n\n**Answer: 3113**"
+   }
+  ],
+  "topics": [
+   "graph-theory",
+   "counting"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ }
+]

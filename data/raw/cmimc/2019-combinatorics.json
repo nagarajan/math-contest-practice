@@ -1,0 +1,349 @@
+[
+ {
+  "id": "cmimc-2019-combinatorics-01",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Combinatorics and Computer Science Round",
+   "year": 2019,
+   "number": 1,
+   "url": "https://cmimc.com/archive/cmimc2019/2019_CCS.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Patrick tosses four four-sided dice, each numbered $1$ through $4$. What is the probability that their product is a multiple of four?",
+  "image": null,
+  "choices": null,
+  "answer": "13/16",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Complementary counting",
+    "body": "The product is **not** a multiple of $4$ iff the dice contain either no even number, or exactly one even number and that number is $2$ (a $4$ alone already gives a multiple of $4$, and two even numbers give at least $2^2$).\n\n- No even faces: each die is $1$ or $3$: $2^4=16$ outcomes.\n- Exactly one die shows $2$, the others odd: $4\\cdot2^3=32$ outcomes.\n\nSo $48$ of the $4^4=256$ outcomes fail, and the probability is $1-\\frac{48}{256}=\\frac{13}{16}$.\n\n**Answer: $\\dfrac{13}{16}$**"
+   }
+  ],
+  "topics": [
+   "probability",
+   "counting"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null,
+  "answerDisplay": "$\\frac{13}{16}$"
+ },
+ {
+  "id": "cmimc-2019-combinatorics-02",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Combinatorics and Computer Science Round",
+   "year": 2019,
+   "number": 2,
+   "url": "https://cmimc.com/archive/cmimc2019/2019_CCS.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "How many ways are there to color the vertices of a cube red, blue, or green such that no edge connects two vertices of the same color? Rotations and reflections are considered distinct colorings.",
+  "image": null,
+  "choices": null,
+  "answer": "114",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Case on the neighbours of a vertex",
+    "body": "Label the vertices $000,\\dots,111$ and say $000$ is red (multiply by $3$ at the end). Its three neighbours $001,010,100$ are each blue or green.\n\n- **Two neighbours one colour, the third the other (6 ways).** Say $001$ green, $010$ and $100$ blue. Then $011$ (adjacent to $001$ and $010$) must be red, and likewise $101$ (adjacent to $001,100$) is red. Next $110$ is adjacent to $010,100$ (blue) so it is red or green, and $111$ is adjacent to $011,101$ (red) so it is green or blue, with $111\\ne110$. The pairs $(110,111)$: $($red, green$)$, $($red, blue$)$, $($green, blue$)$: $3$ ways. This gives $6\\cdot3=18$ colourings with $000$ red, so $54$ in total.\n- **All three neighbours the same colour, say green (2 ways).** Then $011,101,110$ are each red or blue (they touch two green neighbours) and $111$ is adjacent to all three. If $111$ is green, those three are free: $2^3=8$. If $111$ is red they must all be blue ($1$ way); if $111$ is blue they must all be red ($1$ way). That is $10$ per choice, so $20$ with $000$ red and $60$ in total.\n\nTotal: $54+60=114$.\n\n**Answer: 114**"
+   },
+   {
+    "title": "Chromatic polynomial check",
+    "body": "The number of proper $3$-colourings of the cube graph $Q_3$ is $P(Q_3,3)$, and the chromatic polynomial of $Q_3$ evaluates to $114$ at $3$. A brute-force enumeration over all $3^8$ colourings also gives $114$."
+   }
+  ],
+  "topics": [
+   "counting",
+   "graph-theory"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2019-combinatorics-03",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Combinatorics and Computer Science Round",
+   "year": 2019,
+   "number": 3,
+   "url": "https://cmimc.com/archive/cmimc2019/2019_CCS.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "How many ordered triples $(a,b,c)$ of integers with $1\\le a\\le b\\le c\\le 60$ satisfy $a\\cdot b=c$?",
+  "image": null,
+  "choices": null,
+  "answer": "134",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Count by $c$ using divisors",
+    "body": "For fixed $c$, the pairs $(a,b)$ with $ab=c$ and $a\\le b$ number $\\frac12 d(c)$ if $c$ is not a perfect square and $\\frac12(d(c)+1)$ if it is. (Note $b\\le c$ is automatic as $a\\ge1$.) There are $7$ perfect squares up to $60$, so the answer is\n$$\\frac12\\Bigl(\\sum_{c=1}^{60}d(c)+7\\Bigr).$$\nCount $\\sum_{c\\le60}d(c)=\\sum_{m=1}^{60}\\lfloor 60/m\\rfloor=60+30+20+15+12+10+8+7+6\\cdot2+5\\cdot2+4\\cdot3+3\\cdot5+2\\cdot10+1\\cdot30=261$.\n\nHence the answer is $\\frac12(261+7)=134$.\n\n**Answer: 134**"
+   }
+  ],
+  "topics": [
+   "counting",
+   "number-theory"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2019-combinatorics-04",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Combinatorics and Computer Science Round",
+   "year": 2019,
+   "number": 4,
+   "url": "https://cmimc.com/archive/cmimc2019/2019_CCS.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Define a search algorithm called powSearch. Throughout, assume $A$ is a 1-indexed sorted array of distinct integers. To search for an integer $b$ in this array, we search the indices $2^0,2^1,\\ldots$ until we either reach the end of the array or $A[2^k]>b$. If at any point we get $A[2^k]=b$ we stop and return $2^k$. Once we have $A[2^k]>b>A[2^{k-1}]$, we throw away the first $2^{k-1}$ elements of $A$, and recursively search in the same fashion. For example, for an integer which is at position $3$ we will search the locations $1,2,4,3$.\n\nDefine $g(x)$ to be a function which returns how many (not necessarily distinct) indices we look at when calling powSearch with an integer $b$ at position $x$ in $A$. For example, $g(3)=4$. If $A$ has length $64$, find $$g(1)+g(2)+\\cdots+g(64).$$",
+  "image": null,
+  "choices": null,
+  "answer": "808",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "powSearch reads the binary expansion",
+    "body": "powSearch finds the position bit by bit, most significant bit first. For every $1$-bit except the last (lowest) one, one index overshoots; so if $x=\\sum_{i=0}^{k}b_i2^i$ with $b_k=1$,\n$$g(x)=-1+2\\sum_i b_i+\\sum_i i\\,b_i$$\n(check: $x=3=11_2$ gives $-1+4+1=4$). \n\nSum over $x=1,\\dots,64$: each of the bits $b_0,\\dots,b_5$ equals $1$ in exactly $32$ of the numbers, and $b_6=1$ only for $x=64$. So $\\sum_x\\sum_ib_i=6\\cdot32+1=193$ and $\\sum_x\\sum_i i\\,b_i=(0+1+\\dots+5)\\cdot32+6=486$. Then\n$$\\sum g=-64+2\\cdot193+486=808.$$\nA direct simulation of the algorithm on all $64$ positions confirms $808$.\n\n**Answer: 808**"
+   }
+  ],
+  "topics": [
+   "counting",
+   "algebra"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2019-combinatorics-05",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Combinatorics and Computer Science Round",
+   "year": 2019,
+   "number": 5,
+   "url": "https://cmimc.com/archive/cmimc2019/2019_CCS.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "In the game of Ric-Rac-Roe, two players take turns coloring squares of a $3\\times3$ grid in their color; a player wins if they complete a row or column of their color on their turn. If Alice and Bob play this game, picking an uncolored square uniformly at random on their turn, what is the probability that they tie?",
+  "image": null,
+  "choices": null,
+  "answer": "5/14",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Fill the whole board and count",
+    "body": "Say Alice moves first. Imagine the game played to the end: the final board has $5$ Alice squares and $4$ Bob squares, and every $5$-subset is equally likely to be Alice's, so there are $\\binom95=126$ equally likely boards. The game is a tie iff nobody completes a line, i.e. neither player has a full row or column in the final board.\n\nIf Bob has a full line, the other $6$ squares form two lines containing Alice's $5$ squares, so Alice has a full line too. So it suffices to count the boards where Alice has a line.\n\nChoose a line ($6$ ways) and $2$ more squares from the other $6$: $6\\binom62=90$. Boards containing both a row and a column are counted twice; a row and a column share a square, so such a board is exactly \"row $\\cup$ column\" ($3\\cdot3=9$ boards). Hence $90-9=81$ boards have an Alice line.\n\n$P(\\text{tie})=1-\\frac{81}{126}=\\frac{45}{126}=\\frac5{14}$.\n\n**Answer: $\\dfrac{5}{14}$**"
+   }
+  ],
+  "topics": [
+   "probability",
+   "counting"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null,
+  "answerDisplay": "$\\frac{5}{14}$"
+ },
+ {
+  "id": "cmimc-2019-combinatorics-06",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Combinatorics and Computer Science Round",
+   "year": 2019,
+   "number": 6,
+   "url": "https://cmimc.com/archive/cmimc2019/2019_CCS.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "There are $100$ lightbulbs $B_1,\\ldots,B_{100}$ spaced evenly around a circle in this order, all initially off. Additionally, there are $100$ switches $S_1,\\ldots,S_{100}$ such that for all $1\\le i\\le100$, switch $S_i$ toggles the states of lights $B_{i-1}$ and $B_{i+1}$ (where here $B_{101}=B_1$ and $B_0=B_{100}$). Suppose David chooses whether to flick each switch with probability $\\frac12$. What is the expected number of lightbulbs which are on at the end of this process given that not all lightbulbs are off?",
+  "image": null,
+  "choices": null,
+  "answer": "25*2^99/(2^98-1)",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Conditional expectation",
+    "body": "Let $X$ be the number of bulbs on at the end and $A$ the event that at least one is on. Since $X=0$ off $A$, $E[X\\mid A]=\\dfrac{E[X]}{P(A)}$.\n\nEach bulb $B_i$ is toggled by $S_{i-1}$ and $S_{i+1}$, so it is on with probability exactly $\\frac12$; $E[X]=50$.\n\nAll bulbs off means that for every $i$, $S_{i-1}$ and $S_{i+1}$ are both flicked or both not: all odd switches agree and all even switches agree. That is $2\\cdot2=4$ of the $2^{100}$ choices, so $P(\\bar A)=2^{-98}$.\n\nThus $E[X\\mid A]=\\dfrac{50}{1-2^{-98}}=\\dfrac{25\\cdot2^{99}}{2^{98}-1}$.\n\n(Checked exactly for $n=6,8,10$ bulbs: the analogous formula $\\frac{n/2}{1-2^{-(n-2)}}$ holds.)\n\n**Answer: $\\dfrac{25\\cdot2^{99}}{2^{98}-1}$**"
+   }
+  ],
+  "topics": [
+   "probability",
+   "algebra"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null,
+  "answerDisplay": "$\\dfrac{25\\cdot2^{99}}{2^{98}-1}$"
+ },
+ {
+  "id": "cmimc-2019-combinatorics-07",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Combinatorics and Computer Science Round",
+   "year": 2019,
+   "number": 7,
+   "url": "https://cmimc.com/archive/cmimc2019/2019_CCS.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Consider the set $L$ of nonempty binary strings of length less than or equal to $9$, and for a string $w$ define $w^+$ to be the set $\\{w,w^2,w^3,\\ldots\\}$ where $w^k$ represents $w$ concatenated to itself $k$ times. How many ways are there to pick an ordered pair of (not necessarily distinct) elements $x,y\\in L$ such that $x^+\\cap y^+\\neq\\emptyset$?",
+  "image": null,
+  "choices": null,
+  "answer": "1250",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Common powers imply a common root",
+    "body": "If $x^m=y^n$ then $xy=yx$, and two words commute iff they are powers of a common word $z$. (Proof by induction on $|x|+|y|$: if $|x|\\ge|y|$ write $x=yw$; then $wy=yw$ with shorter length, so $w=z^\\ell$, $y=z^m$, hence $x=z^{\\ell+m}$.) Hence $x^+\\cap y^+\\ne\\emptyset$ iff $x=z^a$, $y=z^b$ for a common primitive word $z$.\n\nGroup strings by their primitive root $z$ (a string that is not a power of a shorter one). The number of primitive strings of length $d$ is $f(d)=\\sum_{e\\mid d}\\mu(d/e)2^e$. A primitive $z$ of length $d$ yields strings $z^a$ with $ad\\le9$, i.e. $\\lfloor 9/d\\rfloor$ strings, so it contributes $\\lfloor9/d\\rfloor^2$ ordered pairs. Total\n$$\\sum_{d=1}^9f(d)\\Bigl\\lfloor\\frac9d\\Bigr\\rfloor^2.$$\nWith $f(1..9)=2,2,6,12,30,54,126,240,504$: $2\\cdot81+2\\cdot16+6\\cdot9+12\\cdot4+30+54+126+240+504=1250$.\n\n(A brute-force enumeration of all strings of length $\\le9$ also gives $1250$.)\n\n**Answer: 1250**"
+   }
+  ],
+  "topics": [
+   "counting",
+   "number-theory"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2019-combinatorics-08",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Combinatorics and Computer Science Round",
+   "year": 2019,
+   "number": 8,
+   "url": "https://cmimc.com/archive/cmimc2019/2019_CCS.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Consider the following graph algorithm (where $V$ is the set of vertices and $E$ the set of edges in $G$).\n\n```\nprocedure s(G)\n    if |V| = 0 then return true\n    for (u, v) in E do\n        H <- G - u - v\n        if s(H) then return true\n    return false\n```\n\nHere $G-u-v$ means the subgraph of $G$ which does not contain vertices $u,v$ and all edges using them. How many graphs $G$ with vertex set $\\{1,2,3,4,5,6\\}$ and exactly $6$ edges satisfy $s(G)$ being true?",
+  "image": null,
+  "choices": null,
+  "answer": "2790",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "It is a perfect-matching test",
+    "body": "$s(G)$ is true iff $G$ has a perfect matching: the recursion repeatedly removes the endpoints of an edge, and reaches the empty graph exactly when the removed edges form a perfect matching.\n\nThere are $\\frac{1}{3!}\\binom62\\binom42=15$ perfect matchings of $K_6$. Count $6$-edge graphs containing at least one by inclusion-exclusion over matchings:\n\n- One matching: $15\\binom{12}{3}$ (3 matching edges plus 3 of the other 12 edges).\n- Two matchings: two distinct perfect matchings share $0$ or $1$ edge. Each matching shares an edge with exactly $6$ others, giving $\\frac{15\\cdot6}2=45$ pairs sharing one edge (union has $5$ edges, 1 free edge: $\\binom{10}{1}$ choices) and $\\binom{15}2-45=60$ disjoint pairs (union has $6$ edges: $\\binom90=1$).\n- Three matchings need more than $6$ edges, so contribute nothing.\n\nTotal: $15\\binom{12}3-45\\cdot10-60\\cdot1=3300-450-60=2790$.\n\n(A brute force over all $\\binom{15}6$ graphs gives $2790$.)\n\n**Answer: 2790**"
+   }
+  ],
+  "topics": [
+   "counting",
+   "graph-theory"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2019-combinatorics-09",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Combinatorics and Computer Science Round",
+   "year": 2019,
+   "number": 9,
+   "url": "https://cmimc.com/archive/cmimc2019/2019_CCS.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "There are $15$ cities, and there is a train line between each pair operated by either the Carnegie Rail Corporation or the Mellon Transportation Company. A tourist wants to visit exactly three cities by travelling in a loop, all by travelling on one line. What is the minimum number of such $3$-city loops?",
+  "image": null,
+  "choices": null,
+  "answer": "88",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Count the non-monochromatic triangles",
+    "body": "Colour each edge of $K_{15}$ by its company. A triple of cities is a valid loop iff its triangle is monochromatic. Let $r_i$ be the number of CRC lines at city $i$. A non-monochromatic triangle has exactly two \"bichromatic corners\", and city $i$ is the bichromatic corner of $r_i(14-r_i)$ triangles, so the number of non-monochromatic triangles is $\\frac12\\sum_i r_i(14-r_i)\\le\\frac12\\cdot15\\cdot49=367.5$.\n\nHence monochromatic triangles $\\ge\\binom{15}3-367.5=455-367.5=87.5$, so at least $88$.\n\n**Construction with 88.** Let the CRC lines be: the complete bipartite graph $K_{7,7}$ on $a_1,\\dots,a_7$ and $b_1,\\dots,b_7$, with the three edges $a_1b_1,a_2b_2,a_3b_3$ removed, plus a fifteenth city $m$ joined to $a_1,b_1,a_2,b_2,a_3,b_3$. All other lines are MTC.\n\n- CRC triangles: must contain $m$ and two of its neighbours that are CRC-adjacent, i.e. $a_i,b_j$ with $i\\ne j$ in $\\{1,2,3\\}$: $6$ triangles.\n- MTC triangles: the $a$'s (and the $b$'s) are mutually MTC, giving $2\\binom73=70$; triangles through $m$ use two of $a_4,\\dots,a_7$ or two of $b_4,\\dots,b_7$ (the cities MTC-joined to $m$): $2\\binom42=12$; no MTC triangle uses a removed edge $a_ib_i$. Total $82$.\n\nSo there are $6+82=88$ monochromatic triangles, matching the bound.\n\n**Answer: 88**"
+   }
+  ],
+  "topics": [
+   "counting",
+   "graph-theory"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2019-combinatorics-10",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Combinatorics and Computer Science Round",
+   "year": 2019,
+   "number": 10,
+   "url": "https://cmimc.com/archive/cmimc2019/2019_CCS.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "Define a *rooted tree* to be a tree $T$ with a singular node designated as the root of $T$. (Note that every node in the tree can have an arbitrary number of children.) Each vertex adjacent to the root node of $T$ is itself the root of some tree called a *maximal subtree* of $T$. Say two rooted trees $T_1$ and $T_2$ are *similar* if there exists some way to cycle the maximal subtrees of $T_1$ to get $T_2$. For example, the first pair of trees in the figure are similar but the second pair are not. How many rooted trees with $2019$ nodes are there up to similarity?",
+  "image": "qimages/cmimc/2019-combinatorics/q10.webp",
+  "choices": null,
+  "answer": "$\\dfrac{\\binom{4036}{2018}+\\binom{2018}{1009}+8064}{4036}$",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Bijection with necklaces and Burnside",
+    "body": "Rooted trees with $n+1$ nodes (with the children of each node ordered) correspond to Dyck words of length $2n$: traverse the tree, writing $($ for each step down an edge and $)$ for each step back up. The subtrees hanging from the root correspond to the primitive blocks of the Dyck word, and cycling the subtrees of the root means rotating these blocks.\n\nEvery cyclic-rotation class of balanced binary words (with $n$ zeros and $n$ ones) contains a Dyck word (cycle lemma: start just after the lowest point of the walk), and two Dyck words in one rotation class differ by a rotation of primitive blocks. Hence trees up to similarity correspond to binary necklaces of length $2n$ with $n$ ones, with $n=2018$ here.\n\nCount necklaces by Burnside. Rotation by $k$ with $\\gcd(k,2n)=2d$ fixes the words with period $2d$, i.e. $\\binom{2d}{d}$ of them, and for each divisor $d\\mid n$ there are $\\varphi(n/d)$ such $k\\in[0,2n)$. So\n$$\\#=\\frac1{2n}\\sum_{d\\mid n}\\varphi\\!\\left(\\frac nd\\right)\\binom{2d}{d}.$$\nFor $n=2018=2\\cdot1009$ the divisors $d=1,2,1009,2018$ contribute $\\varphi(2018)\\cdot2+\\varphi(1009)\\cdot6+\\varphi(2)\\binom{2018}{1009}+\\binom{4036}{2018}=8064+\\binom{2018}{1009}+\\binom{4036}{2018}$. Hence\n$$\\#=\\frac{\\binom{4036}{2018}+\\binom{2018}{1009}+8064}{4036}.$$\n\n**Answer: $\\dfrac{\\binom{4036}{2018}+\\binom{2018}{1009}+8064}{4036}$**"
+   }
+  ],
+  "topics": [
+   "counting",
+   "graph-theory"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ }
+]

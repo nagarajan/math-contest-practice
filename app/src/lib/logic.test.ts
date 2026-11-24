@@ -105,6 +105,12 @@ describe('expression answers', () => {
     ['(1+sqrt5)/2', (1 + Math.sqrt(5)) / 2],
     ['3arcsin(1/3)', 3 * Math.asin(1 / 3)],
     ['\\arctan 1', Math.PI / 4],
+    ['log_3(9)', 2],
+    ['log2(8)', 3],
+    ['log_2 32', 5],
+    ['\\log_{3} 27', 3],
+    ['2log_3(1/3)', -2],
+    ['log(100)', 2],
   ])('%s', (s, v) => expect(evalExpr(s)).toBeCloseTo(v, 12))
   it.each(['', '12 3', '2+', 'foo', '(1'])('%s is rejected', (s) => expect(evalExpr(s)).toBeNull())
   it('numeric questions accept equivalent expressions', () => {
@@ -113,6 +119,13 @@ describe('expression answers', () => {
     expect(isCorrect(n, '0.866')).toBe(false)
     expect(isCorrect(q({ answer: '36' }), '12 3')).toBe(false)
     expect(isCorrect(q({ answer: '2.5' }), '2 1/2')).toBe(true)
+  })
+  it('tiny answers are compared relatively', () => {
+    const n = q({ answer: '1/2^31' })
+    expect(isCorrect(n, '0')).toBe(false)
+    expect(isCorrect(n, '2^-31')).toBe(true)
+    expect(isCorrect(q({ answer: '1/2^31' }), '0.0000000004')).toBe(false)
+    expect(isCorrect(q({ answer: '0' }), 'sin(pi)')).toBe(true)
   })
   it('self-graded questions are never auto-marked', () => {
     expect(isCorrect(q({ type: 'self', answer: 'anything' }), 'anything')).toBe(false)
@@ -205,10 +218,10 @@ describe('expandChunk', () => {
     const [x] = expandChunk({
       bank: 'hmmt',
       grades: [9, 10],
-      papers: [['hmmt/nov-2010-guts', { contest: 'HMMT', paper: 'Guts', year: 2010, url: 'u' }]],
+      papers: [['hmmt/nov-2010-guts', { contest: 'HMMT', paper: 'Guts', year: 2010, url: 'u' }, 'hmmt/nov-2010-guts-ab12cd34']],
       questions: [{ id: 'a', p: 0, n: 3, type: 'mc', prompt: 'P', answer: 'B' }],
     })
-    expect(x).toMatchObject({ id: 'a', bank: 'hmmt', grades: [9, 10], sol: 'hmmt/nov-2010-guts', type: 'mc', answer: 'B', topics: [], choices: null })
+    expect(x).toMatchObject({ id: 'a', bank: 'hmmt', grades: [9, 10], sol: 'hmmt/nov-2010-guts', cfile: 'hmmt/nov-2010-guts-ab12cd34', type: 'mc', answer: 'B', topics: [], choices: null })
     expect(x.source).toEqual({ contest: 'HMMT', paper: 'Guts', year: 2010, url: 'u', number: 3 })
   })
 })

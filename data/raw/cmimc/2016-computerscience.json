@@ -1,0 +1,345 @@
+[
+ {
+  "id": "cmimc-2016-computerscience-01",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Computer Science Round",
+   "year": 2016,
+   "number": 1,
+   "url": "https://cmimc.com/archive/cmimc2016/2016_ComputerScience.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "For how many distinct ordered triples $(a,b,c)$ of boolean variables does the expression $a\\lor(b\\land c)$ evaluate to true?",
+  "image": null,
+  "choices": null,
+  "answer": "5",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Case on $a$",
+    "body": "If $a$ is true the expression is true for any $(b,c)$: $4$ triples. If $a$ is false we need $b\\land c$ true, i.e. $b=c=$ true: $1$ triple. Total $4+1=5$.\n\n**Answer: 5**"
+   }
+  ],
+  "topics": [
+   "logic",
+   "counting"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2016-computerscience-02",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Computer Science Round",
+   "year": 2016,
+   "number": 2,
+   "url": "https://cmimc.com/archive/cmimc2016/2016_ComputerScience.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "In concurrent computing, two processes may have their steps interwoven in an unknown order, as long as the steps of each process occur in order. Consider the following two processes:\n\n| Process | $A$ | $B$ |\n|---|---|---|\n| Step 1 | $x\\leftarrow x-4$ | $x\\leftarrow x-5$ |\n| Step 2 | $x\\leftarrow x\\cdot3$ | $x\\leftarrow x\\cdot4$ |\n| Step 3 | $x\\leftarrow x-4$ | $x\\leftarrow x-5$ |\n| Step 4 | $x\\leftarrow x\\cdot3$ | $x\\leftarrow x\\cdot4$ |\n\nOne such interweaving is $A1,B1,A2,B2,A3,B3,B4,A4$, but $A1,A3,A2,A4,B1,B2,B3,B4$ is not since the steps of $A$ do not occur in order. We run $A$ and $B$ concurrently with $x$ initially valued at $6$. Find the minimal possible value of $x$ among all interweavings.",
+  "image": null,
+  "choices": null,
+  "answer": "-684",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Make $x$ negative first, multiply late",
+    "body": "Doing both step 1s first gives $x=6-4-5=-3$; multiplying a negative number by $3$ or $4$ makes it more negative only if done late, so the two step 4s (multiplications by $3$ and $4$) should come last. The middle steps 2 and 3 can be ordered in a few ways: both step 2s first gives $-3\\cdot3\\cdot4-4-5=-45$; $A2$ first then $A3$, $B2$, $B3$ appropriately gives $(-3\\cdot3-4)\\cdot4-5=-57$; $B2$ first gives $(-3\\cdot4-5)\\cdot3-4=-55$. The best is $-57$, and then $-57\\cdot3\\cdot4=-684$.\n\n**Answer: $-684$** (checking all $\\binom84=70$ interweavings by computer confirms $-684$)"
+   }
+  ],
+  "topics": [
+   "arithmetic",
+   "logic"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2016-computerscience-03",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Computer Science Round",
+   "year": 2016,
+   "number": 3,
+   "url": "https://cmimc.com/archive/cmimc2016/2016_ComputerScience.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Sophia writes an algorithm to solve the graph isomorphism problem. Given a graph $G=(V,E)$, her algorithm iterates through all permutations of the set $\\{v_1,\\ldots,v_{|V|}\\}$, each time examining all ordered pairs $(v_i,v_j)\\in V\\times V$ to see if an edge exists. When $|V|=8$, her algorithm makes $N$ such examinations. What is the largest power of two that divides $N$?",
+  "image": null,
+  "choices": null,
+  "answer": "8192",
+  "acceptedAnswers": [
+   "13",
+   "2^13"
+  ],
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Count and factor",
+    "body": "There are $8!$ permutations and $8^2=64$ ordered pairs each time, so $N=8^2\\cdot8!$. Then $v_2(64)=6$ and $v_2(8!)=4+2+1=7$, so $2^{13}=8192$ is the largest power of two dividing $N$.\n\n**Answer: $2^{13}=8192$**"
+   }
+  ],
+  "topics": [
+   "number-theory",
+   "counting"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2016-computerscience-04",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Computer Science Round",
+   "year": 2016,
+   "number": 4,
+   "url": "https://cmimc.com/archive/cmimc2016/2016_ComputerScience.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Given a list $A$, let $f(A)=[A[0]+A[1],\\,A[0]-A[1]]$. Alef makes two programs to compute $f(f(\\cdots(f(A))))$, where the function is composed $n$ times:\n\n```\nFUNCTION T1(A, n)\n  IF n = 0\n    RETURN A\n  ELSE\n    RETURN [T1(A, n-1)[0] + T1(A, n-1)[1],\n            T1(A, n-1)[0] - T1(A, n-1)[1]]\n\nFUNCTION T2(A, n)\n  IF n = 0\n    RETURN A\n  ELSE\n    B <- T2(A, n-1)\n    RETURN [B[0] + B[1], B[0] - B[1]]\n```\n\nEach time $T_1$ or $T_2$ is called, Alef has to pay one dollar. How much money does he save by calling $T_2([13,37],4)$ instead of $T_1([13,37],4)$?",
+  "image": null,
+  "choices": null,
+  "answer": "336",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Count the calls",
+    "body": "$T_1(A,n)$ makes four recursive calls to $T_1(A,n-1)$, so the number of calls $C_1(n)$ satisfies $C_1(n)=1+4C_1(n-1)$ with $C_1(0)=1$: $C_1(4)=1+4+16+64+256=341$. $T_2(A,n)$ makes one recursive call, so $C_2(n)=n+1$ and $C_2(4)=5$. The saving is $341-5=336$ dollars.\n\n**Answer: 336**"
+   }
+  ],
+  "topics": [
+   "sequences-series",
+   "arithmetic"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2016-computerscience-05",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Computer Science Round",
+   "year": 2016,
+   "number": 5,
+   "url": "https://cmimc.com/archive/cmimc2016/2016_ComputerScience.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "We define the *weight* of a path to be the sum of the numbers written on each edge of the path. Find the minimum weight among all paths in the graph below that visit each vertex precisely once.",
+  "image": "qimages/cmimc/2016-computerscience/q05.webp",
+  "choices": null,
+  "answer": "65",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Casework / exhaustive search",
+    "body": "The graph has $9$ vertices, so a Hamiltonian path has $8$ edges. Up to the symmetry of the picture there are three types of Hamiltonian paths; checking the minimal member of each gives $77$, $65$ and $74$. The minimum $65$ is achieved, for example, by the path top $\\to$ upper-left $\\to$ left $\\to$ lower-left $\\to$ bottom $\\to$ lower-right $\\to$ centre $\\to$ upper-right $\\to$ right, with weight $9+3+19+3+14+2+4+11=65$. An exhaustive check of all vertex orders confirms that no Hamiltonian path is lighter.\n\n**Answer: 65**"
+   }
+  ],
+  "topics": [
+   "graph-theory",
+   "counting"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2016-computerscience-06",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Computer Science Round",
+   "year": 2016,
+   "number": 6,
+   "url": "https://cmimc.com/archive/cmimc2016/2016_ComputerScience.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Aaron is trying to write a program to compute the terms of the sequence defined recursively by $a_0=0$, $a_1=1$, and\n$$a_n=\\begin{cases}a_{n-1}-a_{n-2}&n\\equiv0\\pmod2\\\\2a_{n-1}-a_{n-2}&\\text{else}\\end{cases}$$\nHowever, Aaron makes a typo, accidentally computing the recurrence by\n$$a_n=\\begin{cases}a_{n-1}-a_{n-2}&n\\equiv0\\pmod3\\\\2a_{n-1}-a_{n-2}&\\text{else}\\end{cases}$$\nFor how many $0\\le k\\le2016$ did Aaron coincidentally compute the correct value of $a_k$?",
+  "image": null,
+  "choices": null,
+  "answer": "617",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Periodicity",
+    "body": "The correct sequence is periodic with period $8$: $0,1,1,1,1,0,-1,-1,-1,\\ldots$ (repeating every $8$ terms), and the mistyped sequence is periodic with period $9$: $0,1,2,1,0,-1,-1,-1,-1,\\ldots$. Since $\\gcd(8,9)=1$, the pair of sequences repeats with period $72$. Counting the coincidences over one period of $72$ (by comparing the two periodic sequences at all relative offsets) gives $22$.\n\nFor $0\\le k\\le2015$ there are $28$ full periods ($2016=28\\cdot72$), so $28\\cdot22=616$ coincidences. The extra index $k=2016$ is at the start of a new period, where both programs give $0$ (as at $k=0$), so it is another coincidence. Total: $617$ (a direct computation of both sequences up to $k=2016$ confirms this).\n\n**Answer: 617**"
+   }
+  ],
+  "topics": [
+   "sequences-series",
+   "number-theory"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": "Official key says 616 (=28*22, the count for k=0..2015). Since 2016 is a multiple of 72 and both programs give 0 at k=2016 (same as k=0), k=2016 is one more coincidence, so the count for 0<=k<=2016 is 617 (confirmed by direct computation)."
+ },
+ {
+  "id": "cmimc-2016-computerscience-07",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Computer Science Round",
+   "year": 2016,
+   "number": 7,
+   "url": "https://cmimc.com/archive/cmimc2016/2016_ComputerScience.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Given the list\n$$A=[9,12,1,20,17,4,10,7,15,8,13,14],$$\nwe would like to sort it in increasing order. To accomplish this, we will perform the following operation repeatedly: remove an element, then insert it at any position in the list, shifting elements if necessary. What is the minimum number of applications of this operation necessary to sort $A$?",
+  "image": null,
+  "choices": null,
+  "answer": "6",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Keep a longest increasing subsequence",
+    "body": "Elements that are never moved must already be in increasing order, and each moved element can be placed anywhere, so the minimum number of moves is $12-L$ where $L$ is the length of the longest increasing subsequence of $A$. One longest increasing subsequence is $1,4,7,8,13,14$ (length $6$), and none of length $7$ exists (for example by the vertex-cover argument: out-of-order pairs form a graph whose minimum vertex cover has $6$ vertices, e.g. $\\{20,17,12,9,15,10\\}$). So the minimum is $12-6=6$.\n\nExplicit $6$ moves: move $9$ to just after $8$; then $12$ to just after $9$; then $20$ to the end; then $17$ to just before $20$; then $10$ to just after $9$; then $15$ to just after $14$. The result is $[1,4,7,8,9,10,12,13,14,15,17,20]$.\n\n**Answer: 6**"
+   }
+  ],
+  "topics": [
+   "sequences-series",
+   "counting"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2016-computerscience-08",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Computer Science Round",
+   "year": 2016,
+   "number": 8,
+   "url": "https://cmimc.com/archive/cmimc2016/2016_ComputerScience.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Consider the sequence of sets defined by $S_0=\\{0,1\\}$, $S_1=\\{0,1,2\\}$, and for $n\\ge2$,\n$$S_n=S_{n-1}\\cup\\{2^n+x\\mid x\\in S_{n-2}\\}.$$\nFor example, $S_2=\\{0,1,2\\}\\cup\\{2^2+0,2^2+1\\}=\\{0,1,2,4,5\\}$. Find the $200$th smallest element of $S_{2016}$.",
+  "image": null,
+  "choices": null,
+  "answer": "1280",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Stabilizing prefix",
+    "body": "Every element of $\\{2^n+x:x\\in S_{n-2}\\}$ exceeds every element of $S_{n-1}$, so $S_{n-1}$ is an initial segment of $S_n$. Hence the $200$th smallest element of $S_{2016}$ is the $200$th smallest element of the first $S_k$ with $|S_k|\\ge200$. The sizes $|S_n|=|S_{n-1}|+|S_{n-2}|$ are $2,3,5,8,13,21,34,55,89,144,233,\\ldots$, so $k=10$.\n\nHere $S_{10}=S_9\\cup(2^{10}+S_8)$ with $|S_9|=144$, so the $200$th element is $2^{10}+x$ where $x$ is the $56$th smallest element of $S_8$. Now $S_8=S_7\\cup(2^8+S_6)$ with $|S_7|=55$, so $x=2^8+0=256$ (the first element of $S_6$ is $0$). Therefore the answer is $1024+256=1280$. (A direct computation of $S_{10}$ confirms $1280$.)\n\n**Answer: 1280**"
+   }
+  ],
+  "topics": [
+   "sequences-series",
+   "number-theory"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2016-computerscience-09",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Computer Science Round",
+   "year": 2016,
+   "number": 9,
+   "url": "https://cmimc.com/archive/cmimc2016/2016_ComputerScience.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Ryan has three distinct eggs, one of which is made of rubber and thus cannot break; unfortunately, he doesn't know which egg is the rubber one. Further, in some $100$-story building there exists a floor such that all normal eggs dropped from below that floor will not break, while those dropped from at or above that floor will break and cannot be dropped again. What is the minimum number of times Ryan must drop an egg to determine the floor satisfying this property?",
+  "image": null,
+  "choices": null,
+  "answer": "24",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Strategy and bound",
+    "body": "*Strategy (24 drops).* Drop one egg, repeatedly, from floors $12,24,35,46,\\ldots$ (gaps $12,12,11,11,10,10,\\ldots$ decreasing by one every two steps) until it breaks. If it never breaks, it is the rubber egg and the problem reduces to the classical $100$-floor two-egg problem. If it breaks, the egg was normal, and the remaining two eggs (one rubber, one normal) are dropped together on each floor from the bottom of the current interval up until one breaks: two drops per floor. Checking the cases shows the worst case is $23$ or $24$ drops.\n\n*Lower bound.* Any optimal strategy can be modified so that it only drops one egg at a time until a break occurs; with $n$ steps in this first phase at floors $a_1<\\cdots<a_n$, the worst case is $\\max\\{n+14,1+2(a_1-1),2+2(a_2-a_1-1),\\ldots,n+2(a_n-a_{n-1}-1)\\}$. By averaging, the maximum is at least $\\frac{n(n+1)/2+2(100-n)}{n}$, which is at least $24$ for $n\\le9$, while $n\\ge11$ gives $n+14>24$; for $n=10$ the bound is again at least $24$. So $24$ drops are necessary and sufficient. (An exhaustive dynamic-programming search over all information states confirms that $100$ floors need exactly $24$ drops.)\n\n**Answer: 24**"
+   }
+  ],
+  "topics": [
+   "logic",
+   "counting"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2016-computerscience-10",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Computer Science Round",
+   "year": 2016,
+   "number": 10,
+   "url": "https://cmimc.com/archive/cmimc2016/2016_ComputerScience.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Given $x_0\\in\\mathbb R$ and $f,g:\\mathbb R\\to\\mathbb R$, we define the *non-redundant binary tree* $T(x_0,f,g)$ in the following way:\n\n- (a) The tree $T$ initially consists of just $x_0$ at height $0$.\n- (b) Let $v_0,\\ldots,v_k$ be the vertices at height $h$. Then the vertices of height $h+1$ are added to $T$ by: for $i=0,1,\\ldots,k$, $f(v_i)$ is added as a child of $v_i$ if $f(v_i)\\notin T$, and $g(v_i)$ is added as a child of $v_i$ if $g(v_i)\\notin T$.\n\nFor example, if $f(x)=x+1$ and $g(x)=x-1$, then the first three layers of $T(0,f,g)$ are: $0$ at the top with children $1$ and $-1$, and $2$ below $1$ and $-2$ below $-1$.\n\nIf $f(x)=1024x-2047\\lfloor x/2\\rfloor$ and $g(x)=2x-3\\lfloor x/2\\rfloor+2\\lfloor x/4\\rfloor$, then how many vertices are in $T(2016,f,g)$?",
+  "image": null,
+  "choices": null,
+  "answer": "462",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Binary string operations",
+    "body": "Write $x=d_{10}\\ldots d_1d_0$ in binary (at most $11$ digits). Since $f(x)=2^{10}(x-\\lfloor x/2\\rfloor)+\\lfloor x/2\\rfloor$ and $x-\\lfloor x/2\\rfloor\\cdot2=d_0$, $f$ moves the last binary digit to the front (a cyclic rotation of the $11$-bit string).\n\nFor $g$: $g(x)=x+(x-2\\lfloor x/2\\rfloor)-(\\lfloor x/2\\rfloor-2\\lfloor x/4\\rfloor)=x+d_0-d_1$. So if the last two digits are $00$ or $11$ nothing changes; if they are $01$ then $g(x)=x+1$, turning $\\ldots01$ into $\\ldots10$; if they are $10$ then $g(x)=x-1$, turning $\\ldots10$ into $\\ldots01$. So $g$ swaps the last two digits when they differ.\n\nNow $2016=11111100000_2$ has $11$ digits with six ones. Both operations preserve the length (11 digits) and the number of ones, so every vertex is an $11$-bit string with exactly six ones. Conversely every such string is reachable: $f$ is invertible ($f^{11}=\\text{id}$ on $11$-bit strings), and rotations plus adjacent swaps of the last two digits generate all arrangements (adjacent transpositions combined with rotation generate every permutation of the positions). So the vertices are exactly the $\\binom{11}6=462$ strings. (A breadth-first search from $2016$ gives $462$ distinct values.)\n\n**Answer: 462**"
+   }
+  ],
+  "topics": [
+   "counting",
+   "number-theory"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ }
+]

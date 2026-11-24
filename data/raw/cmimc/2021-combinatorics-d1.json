@@ -1,0 +1,280 @@
+[
+ {
+  "id": "cmimc-2021-combinatorics-d1-01",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Combinatorics and Computer Science Round (Division 1)",
+   "year": 2021,
+   "number": 1,
+   "url": "https://cmimc.com/archive/cmimc2021/2021_ComboCS_D1.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Adam has a box with $15$ pool balls in it, numbered from $1$ to $15$, and picks out $5$ of them. He then sorts them in increasing order, takes the four differences between each pair of adjacent balls, and finds exactly two of these differences are equal to $1$. How many selections of $5$ balls could he have drawn from the box?",
+  "image": null,
+  "choices": null,
+  "answer": "990",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Stars and bars with blocks",
+    "body": "Exactly two adjacent differences equal to $1$ means the chosen balls form runs of consecutive numbers, with two \"links\" in total. Either the runs have sizes $(2,2,1)$ (two disjoint adjacent pairs and a single ball) or $(3,1,1)$ (a run of three and two singles), in each case with every pair of runs separated by a gap of at least $1$ (otherwise there would be extra differences equal to $1$).\n\nFor a fixed order of the three run sizes along the line, shrinking the board by the $2$ extra balls inside runs and putting a forced empty slot between runs turns the problem into choosing $3$ run-starting positions among $15-5+1=11$ places: $\\binom{11}{3}=165$ ways.\n\n- Sizes $(2,2,1)$ in any of $3$ orders: $3\\cdot165=495$.\n- Sizes $(3,1,1)$ in any of $3$ orders: $3\\cdot165=495$.\n\nTotal $495+495=990$.\n\n**Answer: 990**"
+   },
+   {
+    "title": "Direct count check",
+    "body": "Count by the pattern of differences $(d_1,d_2,d_3,d_4)$ between sorted balls $a_1<\\dots<a_5$: exactly two of them equal $1$ and the other two are at least $2$. Choose which two positions equal $1$: $\\binom42=6$ ways. Write the other two as $2+e_1$, $2+e_2$ with $e_1,e_2\\ge0$. Then $a_5=a_1+1+1+(2+e_1)+(2+e_2)=a_1+6+e_1+e_2\\le15$. With $u=a_1-1\\ge0$ and slack $s\\ge0$, this is $u+e_1+e_2+s=8$, which has $\\binom{8+3}{3}=165$ solutions. Hence $6\\cdot165=990$ selections.\n\n**Answer: 990**"
+   }
+  ],
+  "topics": [
+   "counting"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2021-combinatorics-d1-02",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Combinatorics and Computer Science Round (Division 1)",
+   "year": 2021,
+   "number": 2,
+   "url": "https://cmimc.com/archive/cmimc2021/2021_ComboCS_D1.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Adam is playing Minesweeper on a $9\\times9$ grid of squares, where exactly $\\frac13$ (or $27$) of the squares are mines (generated uniformly at random over all such boards). Every time he clicks on a square, it is either a mine, in which case he loses, or it shows a number saying how many of the (up to eight) adjacent squares are mines.\n\nFirst, he clicks the square directly above the center square, which shows the number $4$. Next, he clicks the square directly below the center square, which shows the number $1$. What is the probability that the center square is a mine?",
+  "image": null,
+  "choices": null,
+  "answer": "88/379",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Count mine placements",
+    "body": "Number the squares: the clicked $4$ is directly above the centre, the clicked $1$ directly below. The $4$ touches $8$ squares, the $1$ touches $8$ squares, and exactly $3$ squares touch both: the centre square and its two horizontal neighbours (call them the middle row). The two clicked squares are safe. Besides the $3$ shared squares there are $5$ squares touching only the $4$, $5$ touching only the $1$, and $81-2-3-5-5=66$ squares touching neither.\n\nLet $m$ be the number of mines among the $3$ shared squares.\n\n- $m=1$: the $4$ needs $3$ more mines among its $5$ private squares ($\\binom53=10$ ways), the $1$ is satisfied; there are $3$ choices for the shared mine and $\\binom{66}{23}$ ways for the other $23$ mines. Weight $10\\cdot3\\cdot\\binom{66}{23}$. The centre is the mine in $\\frac13$ of these.\n- $m=0$: the $4$ needs $4$ of its $5$ private squares ($5$ ways), the $1$ needs $1$ of its $5$ ($5$ ways), and $\\binom{66}{22}$ ways for the rest. Weight $25\\binom{66}{22}$. The centre is never a mine.\n- $m\\ge2$ is impossible (the $1$ would show at least $2$).\n\nUsing $\\binom{66}{22}=\\binom{66}{23}\\cdot\\frac{23}{44}$:\n$$P=\\frac{\\frac13\\cdot30\\binom{66}{23}}{30\\binom{66}{23}+25\\binom{66}{22}}=\\frac{10}{30+\\frac{575}{44}}=\\frac{440}{1895}=\\frac{88}{379}.$$\n\n**Answer: $\\frac{88}{379}$**"
+   }
+  ],
+  "topics": [
+   "probability",
+   "counting"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2021-combinatorics-d1-03",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Combinatorics and Computer Science Round (Division 1)",
+   "year": 2021,
+   "number": 3,
+   "url": "https://cmimc.com/archive/cmimc2021/2021_ComboCS_D1.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "How many permutations of the string $0123456$ are there such that no contiguous substrings of lengths $1<\\ell<7$ have a sum of digits divisible by $7$?",
+  "image": null,
+  "choices": null,
+  "answer": "420",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Reduce to the digits 1 to 6",
+    "body": "**Place the $0$.** A $0$ never changes sums, so write the permutation as a permutation of $1,\\dots,6$ with $0$ inserted. If $0$ is at an end, the other six digits form a substring of length $6$ with sum $21\\equiv0\\pmod7$, which is forbidden. So $0$ goes in one of the $5$ interior gaps, and then the condition is exactly that the arrangement $a_1\\dots a_6$ of $1..6$ has no contiguous block of length $2,3,4,5$ with sum divisible by $7$. So the answer is $5\\cdot M$, where $M$ counts those arrangements.\n\n**Length 2 and 5, 4.** Adjacent sums must avoid $7$: the pairs $\\{1,6\\},\\{2,5\\},\\{3,4\\}$ cannot be adjacent. A block of length $5$ is the total $21$ minus one digit, never divisible by $7$. A block of length $4$ is $21$ minus two digits, so (besides the adjacent ends) we need $a_1+a_6\\ne7$ as well. Label the three pairs $A,B,C$; the shapes (each letter twice, no equal neighbours, first and last different) are\n$$ABCABC,\\quad ABCACB,\\quad ABCBAC,\\quad ABACBC.$$\n\n**Count shapes.** Assigning the three pairs to letters ($3!$) and ordering the two digits of each pair ($2^3$) gives $48$ arrangements per shape, so $4\\cdot48=192$ so far.\n\n**Length 3.** The only triples with sum divisible by $7$ are $\\{1,2,4\\}$ (sum $7$) and $\\{3,5,6\\}$ (sum $14$). Use inclusion-exclusion. A triple of consecutive positions with one digit from each of three different pairs can hold a given triple in $3!$ orders; the shapes have $4,3,3,2$ such windows respectively, so there are $3!\\cdot12=72$ arrangements with $\\{1,2,4\\}$ contiguous, and by symmetry $72$ with $\\{3,5,6\\}$ contiguous. Both occur only when the two halves are exactly these triples: this works in the first three shapes, with $2\\cdot3!=12$ ways each, so $36$ arrangements.\n\n$$M=192-72-72+36=84,\\qquad 5M=420.$$\n\n**Answer: 420**"
+   }
+  ],
+  "topics": [
+   "counting"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2021-combinatorics-d1-04",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Combinatorics and Computer Science Round (Division 1)",
+   "year": 2021,
+   "number": 4,
+   "url": "https://cmimc.com/archive/cmimc2021/2021_ComboCS_D1.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Suppose you have a $6$ sided dice with $3$ faces colored red, $2$ faces colored blue, and $1$ face colored green. You roll this dice $20$ times and record the color that shows up on top. What is the expected value of the product of the number of red faces, blue faces, and green faces?",
+  "image": null,
+  "choices": null,
+  "answer": "190",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Linearity of expectation",
+    "body": "Let $r,b,g$ be the numbers of red, blue and green rolls. Then $rbg$ counts ordered triples $(i,j,k)$ of rolls with roll $i$ red, roll $j$ blue and roll $k$ green. There are $20\\cdot19\\cdot18$ choices of distinct rolls $(i,j,k)$, and each is such a triple with probability $\\frac12\\cdot\\frac13\\cdot\\frac16=\\frac1{36}$. By linearity of expectation,\n$$E[rbg]=\\frac{20\\cdot19\\cdot18}{36}=190.$$\n\n**Answer: 190**"
+   },
+   {
+    "title": "Multinomial sum",
+    "body": "$E[rbg]=\\sum_{r+b+g=20}rbg\\binom{20}{r,b,g}\\left(\\tfrac12\\right)^r\\left(\\tfrac13\\right)^b\\left(\\tfrac16\\right)^g$. Since $rbg\\binom{20}{r,b,g}=20\\cdot19\\cdot18\\binom{17}{r-1,b-1,g-1}$, this equals\n$$20\\cdot19\\cdot18\\cdot\\tfrac12\\cdot\\tfrac13\\cdot\\tfrac16\\sum\\binom{17}{r',b',g'}\\left(\\tfrac12\\right)^{r'}\\left(\\tfrac13\\right)^{b'}\\left(\\tfrac16\\right)^{g'}=\\frac{20\\cdot19\\cdot18}{36}\\left(\\tfrac12+\\tfrac13+\\tfrac16\\right)^{17}=190.$$\n\n**Answer: 190**"
+   }
+  ],
+  "topics": [
+   "probability",
+   "counting"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2021-combinatorics-d1-05",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Combinatorics and Computer Science Round (Division 1)",
+   "year": 2021,
+   "number": 5,
+   "url": "https://cmimc.com/archive/cmimc2021/2021_ComboCS_D1.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "There are exactly $7$ possible tetrominos (groups of $4$ connected squares in a grid), shown below.\n\nDaniel has a $2\\times20210$ rectangle and wants to tile the interior with tetrominos without overlaps, pieces sticking out, or extra pieces left over. Note that you are allowed to rotate tetrominos but not reflect them. For how many multisets of tetrominos (i.e. an ordered tuple of how many of each tile he has) is it possible to exactly tile his $2\\times20210$ rectangle?",
+  "image": "qimages/cmimc/2021-combinatorics-d1/q05.webp",
+  "choices": null,
+  "answer": "43018528539",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Reduce to four piece types",
+    "body": "Call the pieces O (square), I (straight), L, J, S, Z, T. In a $2\\times n$ strip, an S, Z or T piece splits the rest of the strip into two regions with an odd number of cells each, which cannot be tiled by tetrominoes. So only O, I, L, J are used. Let their counts be $o,i,l,j$.\n\n**Necessary conditions.** The area gives $4(o+i+l+j)=2\\cdot20210$, so $o+i+l+j=10105$. Also, every indecomposable block of the tiling is one of\n$$\\text{O},\\quad \\text{I+I},\\quad \\text{L+L}+2k\\text{ I},\\quad \\text{J+J}+2k\\text{ I},\\quad \\text{L+J}+(2k+1)\\text{ I},$$\nand in each of these the numbers of $i$, $l$, $j$ have the same parity, so overall $i\\equiv l\\equiv j\\pmod 2$.\n\n**Sufficiency.** Any $(o,i,l,j)$ satisfying both conditions can be built from the blocks $\\{1\\text{ O},\\ 2\\text{ I},\\ 2\\text{ L},\\ 2\\text{ J},\\ 1\\text{ L}+1\\text{ J}+1\\text{ I}\\}$ (e.g. pair up L's, J's and I's, and use L+J+I for the odd leftovers), and blocks are placed side by side. (A brute-force enumeration for small strips $2\\times n$, $n\\le20$, agrees with this count.)\n\n**Counting.** Since $o+i+j+l=10105$ is odd:\n- $i,j,l$ all odd: $o$ is even; write $o=2o'$, $i=2i'+1$, etc. Then $o'+i'+j'+l'=5051$, giving $\\binom{5054}{3}$ solutions.\n- $i,j,l$ all even: $o$ is odd, $o=2o'+1$, etc., and $o'+i'+j'+l'=5052$, giving $\\binom{5055}{3}$ solutions.\n\nThe total is $\\binom{5055}3+\\binom{5054}3=21515648735+21502879804=43018528539$.\n\n**Answer: $\\binom{5055}{3}+\\binom{5054}{3}=43018528539$**"
+   }
+  ],
+  "topics": [
+   "counting",
+   "patterns"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2021-combinatorics-d1-06",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Combinatorics and Computer Science Round (Division 1)",
+   "year": 2021,
+   "number": 6,
+   "url": "https://cmimc.com/archive/cmimc2021/2021_ComboCS_D1.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Alice and Bob each flip $20$ fair coins. Given that Alice flipped at least as many heads as Bob, what is the expected number of heads that Alice flipped?",
+  "image": null,
+  "choices": null,
+  "answer": "20*(2^39+137846528820)/(2^40+137846528820)",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Symmetric matrix of outcomes",
+    "body": "Let $A_{i,j}=\\binom{20}{i}\\binom{20}{j}$ be the number of outcomes with Alice $i$ heads and Bob $j$ heads. The required expectation is $\\dfrac{\\sum_{i\\ge j}iA_{i,j}}{\\sum_{i\\ge j}A_{i,j}}$.\n\n**Denominator.** $A$ is symmetric, so the sum over $i\\ge j$ is half the total plus half the diagonal: the total is $\\sum_{i,j}\\binom{20}i\\binom{20}j=2^{40}$ and the diagonal is $\\sum_i\\binom{20}{i}^2=\\binom{40}{20}$. So the denominator is $\\frac12\\left(2^{40}+\\binom{40}{20}\\right)$.\n\n**Numerator.** Use $i\\binom{20}{i}=20\\binom{19}{i-1}$, so $\\sum_{i\\ge j}iA_{ij}=20\\sum_{i\\ge j}\\binom{19}{i-1}\\binom{20}{j}$. Put $i'=i-1$ and replace $\\binom{20}{j}=\\binom{20}{j'}$ with $j'=20-j$; the condition $i\\ge j$ becomes $i'+j'\\ge19$. By Vandermonde, the terms with $i'+j'=s$ sum to $\\binom{39}{s}$, so\n$$\\sum_{i\\ge j}iA_{ij}=20\\sum_{s\\ge19}\\binom{39}{s}=20\\left(2^{38}+\\binom{39}{19}\\right)=10\\left(2^{39}+\\binom{40}{20}\\right).$$\n(Here $\\sum_{s\\ge20}\\binom{39}{s}=2^{38}$ by symmetry and $\\binom{39}{19}=\\frac12\\binom{40}{20}$.)\n\n**Ratio.**\n$$E=\\frac{10\\left(2^{39}+\\binom{40}{20}\\right)}{\\frac12\\left(2^{40}+\\binom{40}{20}\\right)}=\\frac{20\\left(2^{39}+\\binom{40}{20}\\right)}{2^{40}+\\binom{40}{20}}\\approx11.114.$$\nWith $\\binom{40}{20}=137846528820$ this is the stated expression. (Sanity check: unconditionally Alice averages $10$; conditioning on $A\\ge B$ pushes this up.)\n\n**Answer: $\\dfrac{20\\left(2^{39}+\\binom{40}{20}\\right)}{2^{40}+\\binom{40}{20}}$**"
+   }
+  ],
+  "topics": [
+   "probability",
+   "counting"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null,
+  "answerDisplay": "$\\dfrac{20\\left(2^{39}+\\binom{40}{20}\\right)}{2^{40}+\\binom{40}{20}}$"
+ },
+ {
+  "id": "cmimc-2021-combinatorics-d1-07",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Combinatorics and Computer Science Round (Division 1)",
+   "year": 2021,
+   "number": 7,
+   "url": "https://cmimc.com/archive/cmimc2021/2021_ComboCS_D1.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "How many non-decreasing tuples of integers $(a_1,a_2,\\dots,a_{16})$ are there such that $0\\le a_i\\le16$ for all $i$, and the sum of all $a_i$ is even?",
+  "image": null,
+  "choices": null,
+  "answer": "300546630",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Lattice paths and area parity",
+    "body": "A non-decreasing tuple corresponds to a lattice path with unit steps right and up from $(0,0)$ to $(16,16)$: the $i$-th right step is taken at height $a_i$. The sum $\\sum a_i$ is the area between the path and the bottom edge, so we count paths with even area. Let $k=8$ (so the grid is $2k\\times2k$) and call a lattice point *odd* if both coordinates are odd.\n\n**Paths through no odd point.** From any point with both coordinates even the path must go $RR$ or $UU$ (a step $R$ then $U$, or $U$ then $R$, lands on an odd point). So these paths are sequences of $8$ double-right and $8$ double-up moves: $\\binom{16}{8}$ paths, and their area is even.\n\n**Paths through some odd point.** Look at the first odd point reached. The two steps before it are $RU$ or $UR$ from an even-even point. Swapping them changes the area by exactly $1$ and keeps the set of paths hitting an odd point with the same first odd point; so exactly half of these paths have even area. Their number is $\\binom{32}{16}-\\binom{16}{8}$.\n\nTotal with even area:\n$$\\binom{16}{8}+\\frac{\\binom{32}{16}-\\binom{16}{8}}{2}=\\frac12\\left(\\binom{32}{16}+\\binom{16}{8}\\right)=\\frac{601080390+12870}{2}=300546630.$$\n(A dynamic-programming count confirms this.)\n\n**Answer: $\\frac12\\left(\\binom{32}{16}+\\binom{16}{8}\\right)=300546630$**"
+   }
+  ],
+  "topics": [
+   "counting"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2021-combinatorics-d1-08",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Combinatorics and Computer Science Round (Division 1)",
+   "year": 2021,
+   "number": 8,
+   "url": "https://cmimc.com/archive/cmimc2021/2021_ComboCS_D1.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "An *augmentation* on a graph $G$ is defined as doing the following:\n\n- Take some set $D$ of vertices in $G$, and duplicate each vertex $v_i\\in D$ to create a new vertex $v_i'$.\n- If there's an edge between a pair of vertices $v_i,v_j\\in D$, create an edge between vertices $v_i'$ and $v_j'$. If there's an edge between a pair of vertices $v_i\\in D$, $v_j\\notin D$, you can choose to create an edge between $v_i'$ and $v_j$ but do not have to.\n\nA graph is called *reachable* from $G$ if it can be created through some sequence of augmentations on $G$. Some graph $H$ has $n$ vertices and satisfies that both $H$ and the complement of $H$ are reachable from a complete graph of $2021$ vertices. If the maximum and minimum values of $n$ are $M$ and $m$, find $M+m$.",
+  "image": null,
+  "choices": null,
+  "answer": "4088482",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Chromatic number is preserved",
+    "body": "**Invariant.** Every reachable graph $G'$ has the same chromatic number as $G=K_{2021}$: colour each new vertex $v_i'$ like $v_i$; since $v_i'$ is joined only to neighbours of $v_i$ (and never to $v_i$ itself), this is proper, so $\\chi(G')\\le\\chi(G)$, and $G\\subseteq G'$ gives $\\chi(G')\\ge\\chi(G)$. So $\\chi(H)=\\chi(\\overline H)=2021$. Also every reachable graph contains $K_{2021}$.\n\n**Maximum.** Take a proper $2021$-colouring of $H$; each colour class is independent in $H$, i.e. a clique in $\\overline H$, so it has at most $\\omega(\\overline H)\\le\\chi(\\overline H)=2021$ vertices. Hence $n\\le2021\\cdot2021$, i.e. $M\\le2021^2$. Equality: let $H$ be $2021$ disjoint copies of $K_{2021}$. It is reachable by duplicating the $K_{2021}$ with no extra edges, $2020$ times. Its complement is the complete $2021$-partite graph $K_{2021,\\dots,2021}$, reachable by colouring $G$ with $2021$ colours and duplicating the whole graph $2020$ times, joining each new vertex to every vertex of a different colour. So $M=2021^2$.\n\n**Minimum.** $\\overline H$ contains $K_{2021}$, so $H$ has an independent set of $2021$ vertices; $H$ also contains a $K_{2021}$, which meets that independent set in at most one vertex, so $n\\ge2021+2020=4041$. Equality: $H=K_{2021}$ plus $2020$ isolated vertices (duplicate one vertex $2020$ times with no extra edges). Its complement is reached by duplicating the same vertex $2020$ times and joining each copy to all other vertices of $K_{2021}$. So $m=4041$.\n\n$$M+m=2021^2+4041=4084441+4041=4088482.$$\n\n**Answer: 4088482**"
+   }
+  ],
+  "topics": [
+   "graph-theory",
+   "counting"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ }
+]

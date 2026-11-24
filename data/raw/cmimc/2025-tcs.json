@@ -1,0 +1,235 @@
+[
+ {
+  "id": "cmimc-2025-tcs-01a",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Theoretical Computer Science Round",
+   "year": 2025,
+   "number": 1,
+   "url": "https://cmimc.com/archive/cmimc2025/tcs_problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 5,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "**Setting (\"The Compass and The Edge\").** Allan has drawn a segment he calls an inch. A *straightedge* draws the line (or segment) through two points: 1 step. A *compass* draws, given three (possibly not distinct) points $O,A,B$, the circle with center $O$ and radius $AB$: 1 step (so the compass does not collapse). Drawing an arbitrary point or marking an intersection of two drawn objects costs 0 steps.\n\n**(a)** Given a segment of length $1$ inch, construct a segment of length $\\frac1{2^n}$ inch for a positive integer $n$.",
+  "image": null,
+  "choices": null,
+  "answer": "See the construction in the solution.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Repeated bisection",
+    "body": "*Bisecting a segment $XY$ (3 steps).* Draw the circles $\\odot(X,XY)$ and $\\odot(Y,XY)$ (2 steps); they meet at $C$ and $D$. Draw line $CD$ (1 step); it meets $XY$ at $M$. Since $XC=YC=XD=YD=XY$, the quadrilateral $XCYD$ is a rhombus, whose diagonals $CD$ and $XY$ are perpendicular and bisect each other, so $M$ is the midpoint of $XY$ and $XM=\\frac12XY$.\n\n*Construction.* Starting with the unit segment, bisect, then bisect the resulting half, and so on, $n$ times. The segment after the $k$-th bisection has length $2^{-k}$ by induction, so after $n$ rounds ($3n$ steps) we have a segment of length $\\frac1{2^n}$. ∎"
+   }
+  ],
+  "topics": [
+   "geometry"
+  ],
+  "difficulty": 1,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2025-tcs-01b",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Theoretical Computer Science Round",
+   "year": 2025,
+   "number": 1,
+   "url": "https://cmimc.com/archive/cmimc2025/tcs_problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 25,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "**Setting (\"The Compass and The Edge\").** Allan has drawn a segment he calls an inch. A *straightedge* draws the line (or segment) through two points: 1 step. A *compass* draws, given three (possibly not distinct) points $O,A,B$, the circle with center $O$ and radius $AB$: 1 step (so the compass does not collapse). Drawing an arbitrary point or marking an intersection of two drawn objects costs 0 steps.\n\n**(b)** Given a segment of length $1$, give a process that constructs a segment of length $\\frac1n$ for any positive integer $n$ (using as few steps as you can; the contest rewards $N\\le n$, $N\\le2\\log_2n+c$ and $N\\le\\log_2n+c$ steps).",
+  "image": null,
+  "choices": null,
+  "answer": "See the construction in the solution.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Build n on a line, then use similar triangles",
+    "body": "Let the unit segment be $OP_1$ and let $\\ell$ be the line $OP_1$ (1 step). We write $P_k$ for the point of $\\ell$ with $OP_k=k$ on the side of $P_1$.\n\n**Step 1: construct $P_n$ with $\\le2\\log_2n$ circles.** If $n=1$ we are done, so let $n\\ge2$. A circle $\\odot(P_a,\\,OP_b)$ meets $\\ell$ at the points at distance $b$ from $P_a$; its far intersection from $O$ is the point at distance $a+b$ from $O$. We maintain a *pair* $(P_a,P_{a+1})$:\n- start with $(P_1,P_2)$: $P_2$ is the far intersection of $\\odot(P_1,OP_1)$ with $\\ell$ (1 step);\n- from $(P_a,P_{a+1})$ we obtain $(P_{2a},P_{2a+1})$ using $\\odot(P_a,OP_a)$ (distance $2a$) and $\\odot(P_a,OP_{a+1})$ (distance $2a+1$), or $(P_{2a+1},P_{2a+2})$ using $\\odot(P_a,OP_{a+1})$ and $\\odot(P_{a+1},OP_{a+1})$ (distance $2a+2$). Each such stage costs $2$ steps.\nReading the binary digits of $n$ from the top (after the leading $1$), the stage for digit $0$ doubles $a\\mapsto2a$ and for digit $1$ maps $a\\mapsto2a+1$; after all $\\lfloor\\log_2n\\rfloor$ stages, $a=n$ and we hold $P_n$. This costs at most $1+2\\lfloor\\log_2n\\rfloor$ steps.\n\n**Step 2: divide.** Choose an arbitrary ray $r$ from $O$ not along $\\ell$. Draw $\\odot(O,OP_1)$ (1 step) and let $U=r\\cap\\odot$, so $OU=1$. Draw line $P_nU$ (1 step). To draw the parallel to $P_nU$ through $P_1$: draw $\\odot(P_1,P_nU)$ and $\\odot(U,P_nP_1)$ (2 steps) and let $W$ be their intersection on the opposite side of line $P_1U$ from $P_n$; then $P_nP_1WU$ is a parallelogram, so $P_1W\\parallel P_nU$. Draw line $P_1W$ (1 step) and let $D=P_1W\\cap r$.\n\n**Correctness.** In triangle $OP_nU$ the line through $P_1$ parallel to $P_nU$ meets $OU$ at $D$, so by Thales $\\frac{OD}{OU}=\\frac{OP_1}{OP_n}=\\frac1n$, i.e. $OD=\\frac1n$. ∎\n\n**Cost.** At most $2\\log_2n+7$ steps, i.e. $N\\le2\\log_2n+c$. (For $n=2^k$ one can also use part (a): $3k$ steps.)"
+   }
+  ],
+  "topics": [
+   "geometry",
+   "number-theory"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2025-tcs-01c",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Theoretical Computer Science Round",
+   "year": 2025,
+   "number": 1,
+   "url": "https://cmimc.com/archive/cmimc2025/tcs_problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 5,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "**Setting (\"The Compass and The Edge\").** Allan has drawn a segment he calls an inch. A *straightedge* draws the line (or segment) through two points: 1 step. A *compass* draws, given three (possibly not distinct) points $O,A,B$, the circle with center $O$ and radius $AB$: 1 step (so the compass does not collapse). Drawing an arbitrary point or marking an intersection of two drawn objects costs 0 steps.\n\n**(c)** Given a segment of length $1$, give a process that constructs a segment of length $\\frac pq$ for coprime positive integers $p,q$.",
+  "image": null,
+  "choices": null,
+  "answer": "See the construction in the solution.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Same construction with two marks",
+    "body": "Use the line $\\ell$ through the unit segment $OP_1$ and, as in part (b), construct both points $P_p$ and $P_q$ on $\\ell$ with $OP_p=p$ and $OP_q=q$ using the doubling-pair construction (at most $2\\log_2p+2\\log_2q+2$ steps; the common line $\\ell$ is reused).\n\nChoose a ray $r$ from $O$ not along $\\ell$, mark $U$ on it with $OU=1$ (one circle $\\odot(O,OP_1)$), draw line $P_qU$ and the parallel to it through $P_p$ (constructed as in part (b) with $P_p$ in place of $P_1$: two circles and one line). Let $D$ be the intersection of that parallel with $r$.\n\nBy Thales (homothety about $O$ taking $P_q\\mapsto P_p$ and $U\\mapsto D$) $\\frac{OD}{OU}=\\frac{OP_p}{OP_q}=\\frac pq$, so $OD=\\frac pq$. (If $p>q$, $D$ lies beyond $U$ on $r$; if $p<q$, between $O$ and $U$.) ∎\n\nTotal: $N\\le2\\log_2p+2\\log_2q+c$ steps for a constant $c$."
+   }
+  ],
+  "topics": [
+   "geometry",
+   "number-theory"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2025-tcs-01d1",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Theoretical Computer Science Round",
+   "year": 2025,
+   "number": 1,
+   "url": "https://cmimc.com/archive/cmimc2025/tcs_problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 15,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "**Setting (\"The Compass and The Edge\").** Allan has drawn a segment he calls an inch. A *straightedge* draws the line (or segment) through two points: 1 step. A *compass* draws, given three (possibly not distinct) points $O,A,B$, the circle with center $O$ and radius $AB$: 1 step (so the compass does not collapse). Drawing an arbitrary point or marking an intersection of two drawn objects costs 0 steps.\n\n**(d, compass only)** Given a circle $\\omega$ and its center $O$, construct the four vertices of a square inscribed in $\\omega$ using only the compass (no straightedge).",
+  "image": null,
+  "choices": null,
+  "answer": "See the construction in the solution.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Hexagon steps, then the length R*sqrt(2)",
+    "body": "Let $R$ be the radius and $A$ any point of $\\omega$ (drawn arbitrarily on $\\omega$).\n1. Draw $\\odot(A,R)$ (radius $OA$); it meets $\\omega$ at $B$. Draw $\\odot(B,R)$; it meets $\\omega$ at $C\\ne A$. Draw $\\odot(C,R)$; it meets $\\omega$ at $D\\neq B$. Then $A,B,C,D$ are consecutive vertices of an inscribed regular hexagon, so $D$ is the antipode of $A$, $AD=2R$ and $AC=BD=R\\sqrt3$.\n2. Draw $\\odot(A,AC)$ and $\\odot(D,DB)$ (both radius $R\\sqrt3$); they meet at $X$. With $O$ the origin and $A=(R,0)$, $D=(-R,0)$, we get $X=(0,\\pm y)$ with $R^2+y^2=3R^2$, so $OX=R\\sqrt2$.\n3. Draw $\\odot(A,OX)$ (radius $R\\sqrt2$); it meets $\\omega$ at two points $V,V'$. They satisfy $AV=AV'=R\\sqrt2$, i.e. $V,V'=(0,\\pm R)$ since $(x-R)^2+y^2=2R^2$ and $x^2+y^2=R^2$ give $x=0$.\n\nThen $A,V,D,V'$ are the vertices of the inscribed square (they are the endpoints of two perpendicular diameters). ∎ (Checked numerically: all four sides equal $R\\sqrt2$.)"
+   }
+  ],
+  "topics": [
+   "geometry"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2025-tcs-01d2",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Theoretical Computer Science Round",
+   "year": 2025,
+   "number": 1,
+   "url": "https://cmimc.com/archive/cmimc2025/tcs_problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 10,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "**Setting (\"The Compass and The Edge\").** Allan has drawn a segment he calls an inch. A *straightedge* draws the line (or segment) through two points: 1 step. A *compass* draws, given three (possibly not distinct) points $O,A,B$, the circle with center $O$ and radius $AB$: 1 step (so the compass does not collapse). Drawing an arbitrary point or marking an intersection of two drawn objects costs 0 steps.\n\n**(d, straightedge only)** Given a circle $\\omega$ and its center $O$, construct the vertices of a square inscribed in $\\omega$ using only the straightedge.",
+  "image": null,
+  "choices": null,
+  "answer": "See the construction in the solution.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Midpoint of a chord by the trapezoid lemma",
+    "body": "**Lemma (bisecting with a parallel).** Let $AB\\parallel TA'$ (two parallel lines), with $T,A'$ on the second line. Let $P=AT\\cap BA'$ and $S=AA'\\cap BT$. Then line $PS$ meets $AB$ at its midpoint. *Proof.* In triangle $PAB$ the points $T\\in PA$ and $A'\\in PB$ with $TA'\\parallel AB$ satisfy $\\frac{PT}{TA}=\\frac{PA'}{A'B}$. The cevians $AA'$ and $BT$ meet at $S$, and $PS$ meets $AB$ at $M$. By Ceva, $\\frac{AM}{MB}\\cdot\\frac{BA'}{A'P}\\cdot\\frac{PT}{TA}=1$, and the last two factors multiply to $1$, so $AM=MB$. ∎\n\n**Chord midpoint with center known.** For a chord $AB$ of $\\omega$, draw $AO$ and $BO$, meeting $\\omega$ again at the antipodes $A'$, $B'$. Then $ABA'B'$ is a rectangle, so $AB\\parallel A'B'$. Pick a third point $G\\in\\omega$ (generic) and let $T=AG\\cap A'B'$. With $P=AT\\cap BA'$ and $S=AA'\\cap BT$, the line $PS$ meets $AB$ at its midpoint $M$ (Lemma). The line $OM$ is then perpendicular to $AB$ (a diameter perpendicular to the chord).\n\n**Square.** Apply this to chord $AB$, getting a diameter $VV'$ with $VV'\\perp AB$, and to the chord $AB'$ (with the same $G$), getting a diameter $WW'$ with $WW'\\perp AB'$. Since $ABA'B'$ is a rectangle, $AB\\perp AB'$, so $VV'\\perp WW'$: two perpendicular diameters. Hence $V,W,V',W'$ are the vertices of an inscribed square. ∎ (Checked numerically with random positions.)"
+   }
+  ],
+  "topics": [
+   "geometry"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2025-tcs-01e",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Theoretical Computer Science Round",
+   "year": 2025,
+   "number": 1,
+   "url": "https://cmimc.com/archive/cmimc2025/tcs_problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 15,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "**Setting (\"The Compass and The Edge\").** Allan has drawn a segment he calls an inch. A *straightedge* draws the line (or segment) through two points: 1 step. A *compass* draws, given three (possibly not distinct) points $O,A,B$, the circle with center $O$ and radius $AB$: 1 step (so the compass does not collapse). Drawing an arbitrary point or marking an intersection of two drawn objects costs 0 steps.\n\n**(e)** Given an inscribed angle $\\angle XYZ$ in a circle $\\omega$ with known center $O$ ($X,Y,Z\\in\\omega$), draw its angle bisector using only a straightedge.",
+  "image": null,
+  "choices": null,
+  "answer": "See the construction in the solution.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Bisector through the arc midpoint",
+    "body": "Let $N$ be the midpoint of the arc $XZ$ not containing $Y$. Equal arcs subtend equal inscribed angles, so $\\angle XYN=\\angle NYZ$ and $YN$ is the bisector. The point $N$ lies on the diameter perpendicular to the chord $XZ$.\n\nConstruct that diameter with the straightedge only as in part (d, straightedge): draw $XO$, $ZO$ to get the antipodes $X',Z'$; take a generic point $G\\in\\omega$, $T=XG\\cap X'Z'$, $P=XT\\cap ZX'$, $S=XX'\\cap ZT$; the line $PS$ meets $XZ$ at the midpoint $M$ of $XZ$. The line $OM$ meets $\\omega$ at two points; let $N$ be the one on the opposite side of $XZ$ from $Y$ (the other one gives the external bisector). Draw $YN$: this is the bisector of $\\angle XYZ$. ∎\n\n(If $XZ$ is a diameter, then $M=O$ and the perpendicular diameter is obtained as in part (d, straightedge).)"
+   }
+  ],
+  "topics": [
+   "geometry"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "cmimc-2025-tcs-01f",
+  "bank": "cmimc",
+  "source": {
+   "contest": "CMIMC",
+   "paper": "Theoretical Computer Science Round",
+   "year": 2025,
+   "number": 1,
+   "url": "https://cmimc.com/archive/cmimc2025/tcs_problems.pdf"
+  },
+  "grade": "9-12",
+  "points": 25,
+  "timeMinutes": null,
+  "type": "self",
+  "prompt": "**Setting (\"The Compass and The Edge\").** Allan has drawn a segment he calls an inch. A *straightedge* draws the line (or segment) through two points: 1 step. A *compass* draws, given three (possibly not distinct) points $O,A,B$, the circle with center $O$ and radius $AB$: 1 step (so the compass does not collapse). Drawing an arbitrary point or marking an intersection of two drawn objects costs 0 steps.\n\n**(f)** Two nonparallel lines $AB$ and $CD$ are drawn, but their intersection point has been covered by ink, so marks made over it are invisible. Construct a third line $EF$ concurrent with $AB$ and $CD$ (it must pass through their hidden intersection point), using a straightedge only.",
+  "image": null,
+  "choices": null,
+  "answer": "See the construction in the solution.",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Desargues' theorem",
+    "body": "Let $O=AB\\cap CD$ be the hidden point. Write $\\ell_1=AB$, $\\ell_2=CD$.\n\n**Construction.**\n1. Pick a point $S$ on neither line.\n2. Pick two points $U_1,U_2$ on $\\ell_1$; draw lines $SU_1$, $SU_2$ meeting $\\ell_2$ at $V_1$, $V_2$ respectively.\n3. Pick two points $U_3\\ne V_3$ on another line $s_3$ through $S$ (not through $U_1,U_2$, $V_1,V_2$).\n4. Let $Y=U_2U_3\\cap V_2V_3$ and $Z=U_1U_3\\cap V_1V_3$. Draw line $YZ$: this is the required line $EF$.\n\n**Proof.** The triangles $U_1U_2U_3$ and $V_1V_2V_3$ are perspective from the point $S$ (corresponding vertices are joined by the lines $SU_1V_1$, $SU_2V_2$, $SU_3V_3$ through $S$). By Desargues' theorem, the intersection points of corresponding sides, namely $U_1U_2\\cap V_1V_2$, $U_2U_3\\cap V_2V_3=Y$ and $U_1U_3\\cap V_1V_3=Z$, are collinear. But $U_1U_2=\\ell_1$ and $V_1V_2=\\ell_2$, so the first point is $O$. Hence $O$ lies on line $YZ$, which is concurrent with $\\ell_1,\\ell_2$ (and distinct from them for a generic choice). ∎\n\nThis uses no compass, so it also works with the compass and straightedge. (Checked numerically: $O$ lies on $YZ$ to machine precision.)"
+   }
+  ],
+  "topics": [
+   "geometry"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ }
+]

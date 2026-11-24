@@ -1,6 +1,7 @@
 /**
  * Safe evaluator for typed math answers: numbers, + - * / ^, parentheses, implicit
- * multiplication ("3sqrt(2)", "2pi"), sqrt/cbrt/abs/ln/log/sin/cos/tan/arcsin/arccos/arctan, pi, e, factorial "!",
+ * multiplication ("3sqrt(2)", "2pi"), sqrt/cbrt/abs/ln/log/sin/cos/tan/arcsin/arccos/arctan, log bases ("log_3(9)",
+ * "log2(8)", "\\log_{3} 9"), pi, e, factorial "!",
  * and simple LaTeX ("\frac{3\sqrt{2}}{4}", "2^{10}"). Returns null when it cannot parse.
  */
 
@@ -68,6 +69,12 @@ function tokenize(src: string): Tok[] | null {
       if (out[out.length - 1]?.t === 'num') return null
       out.push({ t: 'num', v: Number(num[1]) })
       i += num[1].length
+      continue
+    }
+    const logBase = s.slice(i).match(/^log(?:_\(?(\d+\.?\d*)\)?|(\d+\.?\d*)(?=\s*\())/)
+    if (logBase) {
+      out.push({ t: 'id', v: `log@${logBase[1] ?? logBase[2]}` })
+      i += logBase[0].length
       continue
     }
     const id = s.slice(i).match(/^[a-z]+/)
@@ -166,6 +173,7 @@ export function evalExpr(src: string): number | null {
     if (k.t === 'num') return k.v
     if (k.t === 'id') {
       if (k.v in CONSTS) return CONSTS[k.v]
+      if (k.v.startsWith('log@')) return Math.log(power()) / Math.log(Number(k.v.slice(4)))
       const f = FUNCS[k.v]
       // sqrt2, sqrt 2 and sqrt(2) all work; the argument binds tighter than * and /.
       return f(power())
@@ -189,5 +197,6 @@ export function evalExpr(src: string): number | null {
 }
 
 export function sameValue(a: number, b: number): boolean {
-  return Math.abs(a - b) <= 1e-9 * Math.max(1, Math.abs(a), Math.abs(b))
+  if (a === 0 || b === 0) return Math.abs(a + b) < 1e-14
+  return Math.abs(a - b) <= 1e-9 * Math.max(Math.abs(a), Math.abs(b))
 }

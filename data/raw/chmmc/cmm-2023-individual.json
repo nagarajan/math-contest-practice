@@ -1,0 +1,561 @@
+[
+  {
+    "id": "chmmc-cmm-2023-individual-01",
+    "bank": "chmmc",
+    "source": {
+      "contest": "Caltech Math Meet",
+      "paper": "2023 Individual Round",
+      "year": 2023,
+      "number": 1,
+      "url": null
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Given any four digit number $X=\\overline{ABCD}$, consider the quantity $Y(X)=2\\cdot\\overline{AB}+\\overline{CD}$. For example, if $X=1234$, then $Y(X)=2\\cdot12+34=58$. Find the sum of all natural numbers $n\\le10000$ such that over all four digit numbers $X$, the number $n$ divides $X$ if and only if it also divides $Y(X)$.",
+    "image": null,
+    "choices": null,
+    "answer": "10171",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Difference is $98\\cdot\\overline{AB}$",
+        "body": "$X-Y(X)=100\\overline{AB}+\\overline{CD}-2\\overline{AB}-\\overline{CD}=98\\,\\overline{AB}$. So every divisor $n$ of $98$, i.e. $n\\in\\{1,2,7,14,49,98\\}$, divides $X$ iff it divides $Y(X)$. Also $n=10000$ works: it exceeds every $X$ and $Y(X)$, so it divides neither.\n\nNo other $n$ works. For $300\\le n<10000$ take $X$ a multiple of $n$; $0<Y(X)\\le 2\\cdot99+99=297<n$, so $n\\nmid Y(X)$. For $124\\le n<300$ take the smallest four-digit multiple $X\\le1299$; then $0<Y(X)\\le2\\cdot12+99=123<n$. For $100\\le n\\le123$ the choice $X=10n$ works by direct inspection. For $n<100$ with $n\\nmid98$, choose digits so that $\\overline{AB}\\equiv\\pm1\\pmod n$ and then $\\overline{CD}$ so that $n\\mid X$ (any $100$ consecutive integers contain a multiple of $n$); since $\\gcd(n,\\overline{AB})=1$ and $n\\nmid98$, $n\\nmid98\\overline{AB}$, hence $n\\nmid Y(X)$.\n\nThe sum is $1+2+7+14+49+98+10000=10171$.\n\n**Answer: 10171**"
+      },
+      {
+        "title": "Computer check",
+        "body": "Testing every $n\\le10000$ against all four-digit $X$ finds exactly $n\\in\\{1,2,7,14,49,98,10000\\}$, with sum $10171$.\n\n**Answer: 10171**"
+      }
+    ],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "chmmc-cmm-2023-individual-02",
+    "bank": "chmmc",
+    "source": {
+      "contest": "Caltech Math Meet",
+      "paper": "2023 Individual Round",
+      "year": 2023,
+      "number": 2,
+      "url": null
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "A sink has a red faucet, a blue faucet, and a drain. The two faucets release water into the sink at constant but different rates when turned on, and the drain removes water from the sink at a constant rate when opened. It takes $5$ minutes to fill the sink (from empty to full) when the drain is open and only the red faucet is on, it takes $10$ minutes to fill the sink when the drain is open and only the blue faucet is on, and it takes $15$ seconds to fill the sink when both faucets are on and the drain is closed. Suppose that the sink is currently one-third full of water, and the drain is opened. Rounded to the nearest integer, how many seconds will elapse before the sink is emptied (keeping the two faucets closed)?",
+    "image": null,
+    "choices": null,
+    "answer": "11",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Set up rates",
+        "body": "Let the sink hold $600$ units, and let $R_1,R_2$ be the faucet rates and $r$ the drain rate (units per second). Then\n$$(R_1-r)\\cdot300=600,\\quad(R_2-r)\\cdot600=600,\\quad(R_1+R_2)\\cdot15=600.$$\nSo $R_1=r+2$, $R_2=r+1$, and $R_1+R_2=40$ gives $2r+3=40$, $r=\\frac{37}2$.\n\nThe sink holds $200$ units now, so it empties in $\\frac{200}{37/2}=\\frac{400}{37}\\approx10.81$ seconds, which rounds to $11$.\n\n**Answer: 11**"
+      }
+    ],
+    "topics": [
+      "rates",
+      "algebra"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "chmmc-cmm-2023-individual-03",
+    "bank": "chmmc",
+    "source": {
+      "contest": "Caltech Math Meet",
+      "paper": "2023 Individual Round",
+      "year": 2023,
+      "number": 3,
+      "url": null
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "One of the bases of a right triangular prism is a triangle $XYZ$ with side lengths $XY=13$, $YZ=14$, $ZX=15$. Suppose that a sphere may be positioned to touch each of the five faces of the prism at exactly one point. A plane parallel to the rectangular face of the prism containing $YZ$ cuts the prism and the sphere, giving rise to a cross-section of area $A$ for the prism and area $15\\pi$ for the sphere. Find the sum of all possible values of $A$.",
+    "image": null,
+    "choices": null,
+    "answer": "448/3",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Inscribed sphere and parallel cut",
+        "body": "The triangle $13,14,15$ has area $84$, semiperimeter $21$, so inradius $r=\\frac{84}{21}=4$. A sphere tangent to all five faces has radius $4$ (the radius of the incircle of the base), so the prism has height $8$.\n\nThe cutting plane is parallel to the face through $YZ$, at distance $d$ from the sphere's center, $0\\le d\\le4$. The sphere's cross-section has radius $\\sqrt{16-d^2}$, area $\\pi(16-d^2)=15\\pi$, so $d=1$.\n\nThe altitude from $X$ to $YZ$ is $12$, and the incenter (the projection of the sphere's center onto the base) is at distance $4$ from $YZ$. A plane at distance $1$ from the center, parallel to the $YZ$ face, is at distance $3$ or $5$ from $YZ$, i.e. at distance $9$ or $7$ from $X$. Its cross-section of the triangle is a segment parallel to $YZ$ of length $14\\cdot\\frac9{12}=\\frac{21}2$ or $14\\cdot\\frac7{12}=\\frac{49}6$. The cross-section of the prism is a rectangle of height $8$, so $A=8\\cdot\\frac{21}2=84$ or $A=8\\cdot\\frac{49}6=\\frac{196}3$.\n\nSum: $84+\\frac{196}3=\\frac{448}3$.\n\n**Answer: $\\frac{448}{3}$**"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null,
+    "answerDisplay": "$\\frac{448}{3}$"
+  },
+  {
+    "id": "chmmc-cmm-2023-individual-04",
+    "bank": "chmmc",
+    "source": {
+      "contest": "Caltech Math Meet",
+      "paper": "2023 Individual Round",
+      "year": 2023,
+      "number": 4,
+      "url": null
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Albert, Brian, and Christine are hanging out by a magical tree. This tree gives each of them a stick, each of which have a non-negative real length. Say that Albert gets a branch of length $x$, Brian a branch of length $y$, and Christine a branch of length $z$, and the lengths follow the condition that $x+y+z=2$. Let $m$ and $n$ be the minimum and maximum possible values of $xy+yz+xz-xyz$, respectively. What is $m+n$?",
+    "image": null,
+    "choices": null,
+    "answer": "28/27",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Factor through $(1-x)(1-y)(1-z)$",
+        "body": "Let $S=xy+yz+zx-xyz$ and $P=(1-x)(1-y)(1-z)=1-(x+y+z)+S=S-1$. So we need the extremes of $P$.\n\n*Maximum.* If $P>0$ then (all of $x,y,z\\ge0$ and $x+y+z=2$ forces at most one factor negative, and two negative factors would need $x,y>1$, impossible) all three factors are positive. AM-GM gives $P\\le\\left(\\frac{3-2}{3}\\right)^3=\\frac1{27}$, with equality at $x=y=z=\\frac23$.\n\n*Minimum.* If one factor is negative, say $1-x<0$, then since $0\\le x,y,z\\le2$, each factor has absolute value at most $1$, so $P\\ge-1$, with equality at $(x,y,z)=(2,0,0)$.\n\nHence $S_{\\max}=1+\\frac1{27}=\\frac{28}{27}$ and $S_{\\min}=1-1=0$, so $m+n=\\frac{28}{27}$.\n\n**Answer: $\\frac{28}{27}$**"
+      },
+      {
+        "title": "Computer check",
+        "body": "Scanning $(x,y,z)$ on a fine grid of the simplex $x+y+z=2$ gives minimum $0$ and maximum $1.0370\\ldots=\\frac{28}{27}$.\n\n**Answer: $\\frac{28}{27}$**"
+      }
+    ],
+    "topics": [
+      "inequalities",
+      "algebra"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null,
+    "answerDisplay": "$\\frac{28}{27}$"
+  },
+  {
+    "id": "chmmc-cmm-2023-individual-05",
+    "bank": "chmmc",
+    "source": {
+      "contest": "Caltech Math Meet",
+      "paper": "2023 Individual Round",
+      "year": 2023,
+      "number": 5,
+      "url": null
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Let $S:=\\texttt{MATHEMATICSMATHEMATICSMATHE}\\ldots$ be the sequence where $7$ copies of the word MATHEMATICS are concatenated together. How many ways are there to delete all but five letters of $S$ such that the resulting subsequence is CHMMC?",
+    "image": null,
+    "choices": null,
+    "answer": "434",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Case on the two M's",
+        "body": "Within one copy the letters occur in the order M(1) A T H(4) E M(6) A T I C(10) S. Let the chosen letters C, H, M, M, C lie in copies $i_1,\\dots,i_5\\in\\{1,\\dots,7\\}$. Two consecutive chosen letters may share a copy only if their positions in the copy increase:\n\n- C then H: never in the same copy, so $i_1<i_2$.\n- H then M: same copy only if this M is the second M of the copy (position 6).\n- M then M: same copy only if the first is the first M and the second is the second M.\n- M then C: always possible, so $i_4\\le i_5$.\n\nSplit by which M's (first or second in their copy) are used:\n\n- (first, first): $i_1<i_2<i_3<i_4\\le i_5$. Replacing $i_5$ by $i_5+1$ gives a strictly increasing sequence in $\\{1,\\dots,8\\}$: $\\binom85=56$.\n- (first, second): $i_1<i_2<i_3\\le i_4\\le i_5$. Shifting $i_4,i_5$ by $1,2$ gives a strictly increasing sequence in $\\{1,\\dots,9\\}$: $\\binom95=126$.\n- (second, first): $i_1<i_2\\le i_3<i_4\\le i_5$; shift $i_3,i_4$ by $1$ and $i_5$ by $2$: $\\binom95=126$.\n- (second, second): $i_1<i_2\\le i_3<i_4\\le i_5$: again $\\binom95=126$.\n\nTotal: $56+3\\cdot126=434$.\n\n**Answer: 434**"
+      },
+      {
+        "title": "Computer check",
+        "body": "A dynamic program counting subsequences of $\\texttt{MATHEMATICS}^7$ equal to CHMMC gives $434$.\n\n**Answer: 434**"
+      }
+    ],
+    "topics": [
+      "counting"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "chmmc-cmm-2023-individual-06",
+    "bank": "chmmc",
+    "source": {
+      "contest": "Caltech Math Meet",
+      "paper": "2023 Individual Round",
+      "year": 2023,
+      "number": 6,
+      "url": null
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Consider two sequences of integers $a_n$ and $b_n$ such that $a_1=a_2=1$, $b_1=b_2=1$ and that the following recursive relations are satisfied for integers $n>2$:\n$$a_n=a_{n-1}a_{n-2}-b_{n-1}b_{n-2},\\qquad b_n=b_{n-1}a_{n-2}+a_{n-1}b_{n-2}.$$\nDetermine the value of\n$$\\sum_{\\substack{1\\le n\\le2023\\\\ b_n\\ne0}}\\frac{a_n}{b_n}.$$",
+    "image": null,
+    "choices": null,
+    "answer": "675",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Complex numbers",
+        "body": "Let $z_n=a_n+b_ni$. Then $z_1=z_2=1+i$ and for $n>2$\n$$z_n=(a_{n-1}a_{n-2}-b_{n-1}b_{n-2})+(b_{n-1}a_{n-2}+a_{n-1}b_{n-2})i=z_{n-1}z_{n-2}.$$\nBy induction $z_n=(1+i)^{F_n}$, where $F_n$ is the Fibonacci sequence ($F_1=F_2=1$).\n\nSince $(1+i)^4=-4$ is real, the ratio $a_n/b_n=\\operatorname{Re}z_n/\\operatorname{Im}z_n$ depends only on $F_n\\bmod4$. The Fibonacci numbers modulo $4$ have period $6$: $1,1,2,3,1,0,\\dots$. The powers $(1+i)^k$ for $k\\equiv1,1,2,3,1,0\\pmod 4$ give ratios $a/b=1,1,0,-1,1$ and for $F_n\\equiv0$ we have $b_n=0$ (excluded). So each full block of six consecutive $n$ contributes $1+1+0-1+1=2$.\n\nFor $n=1,\\dots,2022$ there are $337$ full blocks, contributing $337\\cdot2=674$. The remaining term $n=2023\\equiv1\\pmod6$ has ratio $1$. Total $674+1=675$.\n\n**Answer: 675**"
+      },
+      {
+        "title": "Computer check",
+        "body": "Computing $z_n=(1+i)^{F_n}$ modulo the period for $n\\le2023$ (using $F_n\\bmod4$) and summing the ratios $\\operatorname{Re}/\\operatorname{Im}$ with exact fractions gives $675$.\n\n**Answer: 675**"
+      }
+    ],
+    "topics": [
+      "complex-numbers",
+      "sequences-series",
+      "number-theory"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "chmmc-cmm-2023-individual-07",
+    "bank": "chmmc",
+    "source": {
+      "contest": "Caltech Math Meet",
+      "paper": "2023 Individual Round",
+      "year": 2023,
+      "number": 7,
+      "url": null
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Suppose $ABC$ is a triangle with circumcenter $O$. Let $A'$ be the reflection of $A$ across $BC$. If $BC=12$, $\\angle BAC=60^\\circ$, and the perimeter of $ABC$ is $30$, then find $A'O$.",
+    "image": null,
+    "choices": null,
+    "answer": "6*sqrt(3)",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Ptolemy",
+        "body": "Since $\\angle BOC=2\\angle A=120^\\circ$ and $\\angle BA'C=\\angle BAC=60^\\circ$ (reflection preserves angles), the points $A',B,O,C$ are concyclic, and this circle has the same radius $R$ as the circumcircle of $ABC$ (triangle $A'BC\\cong ABC$).\n\nApply Ptolemy to the cyclic quadrilateral $A'BOC$ with diagonals $A'O$ and $BC$:\n$$A'O\\cdot BC=A'B\\cdot OC+BO\\cdot CA'=R(A'B+A'C)=R(AB+CA).$$\nHere $AB+CA=30-12=18$. By the law of sines $BC=2R\\sin60^\\circ=R\\sqrt3$, so $R=\\frac{12}{\\sqrt3}=4\\sqrt3$. Then\n$$A'O=\\frac{R\\cdot18}{12}=\\frac{4\\sqrt3\\cdot18}{12}=6\\sqrt3.$$\n\n**Answer: $6\\sqrt3$**"
+      },
+      {
+        "title": "Coordinates",
+        "body": "Put $B=(0,0)$, $C=(12,0)$. With $b+c=18$ and $a^2=b^2+c^2-bc$: $144=(b+c)^2-3bc$ gives $bc=60$, so $b,c=9\\pm\\sqrt{21}$. Computing $A$, its reflection $A'=(x,-y)$ and the circumcenter $O=(6,\\cdot)$ numerically gives $A'O=10.3923\\ldots=6\\sqrt3$.\n\n**Answer: $6\\sqrt3$**"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null,
+    "answerDisplay": "$6\\sqrt{3}$"
+  },
+  {
+    "id": "chmmc-cmm-2023-individual-08",
+    "bank": "chmmc",
+    "source": {
+      "contest": "Caltech Math Meet",
+      "paper": "2023 Individual Round",
+      "year": 2023,
+      "number": 8,
+      "url": null
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "A class of $10$ students wants to determine the class president by drawing slips of paper from a box. One of the students, Bob, puts a slip of paper with his name into the box. Each other student has a $\\frac12$ probability of putting a slip of paper with their own name into the box and a $\\frac12$ probability of not doing so. Later, one slip is randomly selected from the box. Given that Bob's slip is selected, find the expected number of slips of paper in the box before the slip is selected.",
+    "image": null,
+    "choices": null,
+    "answer": "5120/1023",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Condition on the number of slips",
+        "body": "The box contains $n$ slips ($1\\le n\\le10$) with probability $\\frac1{2^9}\\binom9{n-1}$ (Bob's plus $n-1$ of the other nine), and then Bob's slip is chosen with probability $\\frac1n$. So\n$$P(n\\text{ slips and Bob chosen})=\\frac1{2^9}\\binom9{n-1}\\frac1n=\\frac1{2^9}\\cdot\\frac1{10}\\binom{10}n,$$\nusing $\\frac1n\\binom9{n-1}=\\frac1{10}\\binom{10}n$. The conditional expectation is\n$$\\frac{\\sum_{n=1}^{10}n\\cdot\\frac1{10}\\binom{10}n}{\\sum_{n=1}^{10}\\frac1{10}\\binom{10}n}=\\frac{\\sum n\\binom{10}n}{\\sum\\binom{10}n}=\\frac{10\\cdot2^9}{2^{10}-1}=\\frac{5120}{1023}.$$\n\n**Answer: $\\frac{5120}{1023}$**"
+      }
+    ],
+    "topics": [
+      "probability",
+      "counting"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null,
+    "answerDisplay": "$\\frac{5120}{1023}$"
+  },
+  {
+    "id": "chmmc-cmm-2023-individual-09",
+    "bank": "chmmc",
+    "source": {
+      "contest": "Caltech Math Meet",
+      "paper": "2023 Individual Round",
+      "year": 2023,
+      "number": 9,
+      "url": null
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Let $a$ and $b$ be positive integers, $a>b$, such that $6!\\cdot11$ divides $x^a-x^b$ for all positive integers $x$. What is the minimum possible value of $a+b$?",
+    "image": null,
+    "choices": null,
+    "answer": "68",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Chinese remainder theorem",
+        "body": "$6!\\cdot11=2^4\\cdot3^2\\cdot5\\cdot11$. Taking $x=2$: $2^b(2^{a-b}-1)$ must be divisible by $2^4$, and $2^{a-b}-1$ is odd, so $b\\ge4$.\n\nBy CRT the condition is $x^a\\equiv x^b\\pmod q$ for $q=16,9,5,11$ and all $x$. For $x$ sharing a prime with $q$ the congruence holds automatically because $b\\ge4$ is at least the exponent of that prime in $q$ (at most $4$). For $x$ coprime to $q$ the condition is $x^{a-b}\\equiv1\\pmod q$ for all units $x$, i.e. $a-b$ is a multiple of the exponent of the unit group: $4,6,4,10$ for $q=16,9,5,11$. So $\\operatorname{lcm}(4,6,4,10)=60$ divides $a-b$.\n\nThe minimum is attained at $b=4$, $a=64$, giving $a+b=68$.\n\n**Answer: 68**"
+      },
+      {
+        "title": "Computer check",
+        "body": "Testing small pairs directly (all $x$ up to a large range, modulo $6!\\cdot11$) finds $(a,b)=(64,4)$ as the pair with smallest $a+b=68$.\n\n**Answer: 68**"
+      }
+    ],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "chmmc-cmm-2023-individual-10",
+    "bank": "chmmc",
+    "source": {
+      "contest": "Caltech Math Meet",
+      "paper": "2023 Individual Round",
+      "year": 2023,
+      "number": 10,
+      "url": null
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Find the number of pairs of positive integers $(m,n)$ such that $n<m\\le100$ and the polynomial $x^m+x^n+1$ has a root on the unit circle.",
+    "image": null,
+    "choices": null,
+    "answer": "1260",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Reduce to unit vectors summing to zero",
+        "body": "Suppose $|r|=1$ and $r^m+r^n+1=0$. Three unit vectors $r^m,r^n,1$ sum to $0$, so they form an equilateral triangle: $\\{r^m,r^n\\}=\\{e^{2\\pi i/3},e^{4\\pi i/3}\\}$.\n\n*Coprime case* $\\gcd(m,n)=1$. A root exists iff there are integers with $m\\theta=\\frac{2\\pi}3+2\\pi a$ and $n\\theta=\\frac{4\\pi}3+2\\pi b$ (or the roles swapped). Dividing, $\\frac mn=\\frac{1+3a}{2+3b}$, i.e. $3(mb-na)=n-2m$, solvable iff $3\\mid n-2m$ (Bezout), i.e. $n\\equiv2m\\pmod 3$; the swapped case gives $m\\equiv2n\\pmod3$. Together: $m,n$ are congruent to $1$ and $2$ modulo $3$ in some order.\n\n*General case.* Let $g=\\gcd(m,n)$. Then $x^m+x^n+1=h(x^g)$ with $h(y)=y^{m/g}+y^{n/g}+1$, and $x\\mapsto x^g$ maps the unit circle onto itself, so $x^m+x^n+1$ has a unit-circle root iff $h$ does. Hence $(m,n)$ is good iff $m/g$ and $n/g$ are congruent to $1$ and $2$ modulo $3$ in some order. Let $3^k$ be the exact power of $3$ in $g$ and put $m'=m/3^k$, $n'=n/3^k$. Dividing by the unit $g/3^k$ modulo $3$ does not change whether two nonzero residues are distinct, so $(m,n)$ is good iff $m',n'$ are $\\equiv1,2\\pmod3$ in some order (then automatically $3\\nmid\\gcd(m',n')$).\n\nFor each $k$ we count unordered pairs $\\{m',n'\\}\\subseteq\\{1,\\dots,\\lfloor100/3^k\\rfloor\\}$ with one element $\\equiv1$ and one $\\equiv2\\pmod3$; since $m>n$, each unordered pair gives exactly one $(m,n)$. For $N=100,33,11,3$ ($k=0,1,2,3$) the numbers of residues $1$ and $2$ are $(34,33)$, $(11,11)$, $(4,4)$, $(1,1)$, and for $k\\ge4$ there is no residue $2$. Total:\n$$34\\cdot33+11\\cdot11+4\\cdot4+1\\cdot1=1122+121+16+1=1260.$$\n\n**Answer: 1260**"
+      },
+      {
+        "title": "Computer check",
+        "body": "Testing every pair $(m,n)$ with $n<m\\le100$ by the exact criterion above (also verified against a direct search for a root of unit modulus for all $m\\le12$) gives $1260$ pairs.\n\n**Answer: 1260**"
+      }
+    ],
+    "topics": [
+      "polynomials",
+      "complex-numbers",
+      "number-theory"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "chmmc-cmm-2023-individual-11",
+    "bank": "chmmc",
+    "source": {
+      "contest": "Caltech Math Meet",
+      "paper": "2023 Individual Round",
+      "year": 2023,
+      "number": 11,
+      "url": null
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Let $ABC$ be a triangle and let $\\omega$ be the circle passing through $A,B,C$ with center $O$. Lines $\\ell_A,\\ell_B,\\ell_C$ are drawn tangent to $\\omega$ at $A,B,C$ respectively. The intersections of these lines form a triangle $XYZ$ where $X$ is the intersection of $\\ell_B$ and $\\ell_C$, $Y$ is the intersection of $\\ell_C$ and $\\ell_A$, and $Z$ is the intersection of $\\ell_A$ and $\\ell_B$. Let $P$ be the intersection of lines $OX$ and $YZ$. Given $\\angle ACB=\\frac32\\angle ABC$ and $\\frac{AC}{AB}=\\frac{15}{16}$, find $\\frac{ZP}{YP}$.",
+    "image": null,
+    "choices": null,
+    "answer": "63/32",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Angle bisector in the tangent triangle",
+        "body": "Let $x=\\frac12\\angle ABC$, so $\\angle ACB=3x$. By the law of sines\n$$\\frac{15}{16}=\\frac{AC}{AB}=\\frac{\\sin2x}{\\sin3x}=\\frac{2\\cos x}{4\\cos^2x-1},$$\nso $60\\cos^2x-32\\cos x-15=0$, with roots $\\frac56$ and $-\\frac3{10}$. As $x=\\frac12\\angle B<90^\\circ$ we have $\\cos x>0$, so $\\cos x=\\frac56$. Then $\\cos B=\\cos2x=\\frac7{18}$ and $\\cos C=\\cos3x=4\\cos^3x-3\\cos x=-\\frac5{27}$, so $C$ is obtuse.\n\n$OX$ is the bisector of $\\angle BXC$, which is the external bisector of $\\angle ZXY$ in triangle $XYZ$. Hence by the (external) angle bisector theorem $\\frac{ZP}{YP}=\\frac{XZ}{XY}$.\n\nThe angles of triangle $XYZ$: $\\angle XYZ=2\\angle B$ and $\\angle YZX=2\\angle C-180^\\circ$ (as $C$ is obtuse). So by the law of sines\n$$\\frac{XZ}{XY}=\\frac{\\sin\\angle XYZ}{\\sin\\angle YZX}=\\frac{\\sin2B}{-\\sin2C}=\\frac{\\sin B}{\\sin C}\\cdot\\frac{\\cos B}{-\\cos C}=\\frac{15}{16}\\cdot\\frac{7/18}{5/27}=\\frac{15}{16}\\cdot\\frac{7}{18}\\cdot\\frac{27}{5}=\\frac{63}{32}.$$\n\n**Answer: $\\frac{63}{32}$**"
+      },
+      {
+        "title": "Computer check",
+        "body": "Placing $A,B,C$ on the unit circle with central angles $2A,2B,2C$, computing the tangent triangle and the intersection $P$ numerically gives $|ZP|/|YP|=1.96875=\\frac{63}{32}$.\n\n**Answer: $\\frac{63}{32}$**"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "trigonometry"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null,
+    "answerDisplay": "$\\frac{63}{32}$"
+  },
+  {
+    "id": "chmmc-cmm-2023-individual-12",
+    "bank": "chmmc",
+    "source": {
+      "contest": "Caltech Math Meet",
+      "paper": "2023 Individual Round",
+      "year": 2023,
+      "number": 12,
+      "url": null
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Compute the remainder when\n$$\\sum_{1\\le a,k\\le2021}a^k$$\nis divided by $2022$ (in the above summation $a,k$ are integers).",
+    "image": null,
+    "choices": null,
+    "answer": "1649",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Chinese remainder theorem",
+        "body": "$2022=2\\cdot3\\cdot337$. Write $S=\\sum_{a,k}a^k$ and $S_k=\\sum_{a=1}^{2021}a^k$.\n\n*Lemma.* For a prime $p$ and $k\\ge1$: $\\sum_{a=0}^{p-1}a^k\\equiv0\\pmod p$ if $(p-1)\\nmid k$, and $\\equiv-1$ if $(p-1)\\mid k$. (For $(p-1)\\mid k$ use Fermat. Otherwise use a primitive root $g$: $\\sum_{j=0}^{p-2}g^{jk}=\\frac{g^{(p-1)k}-1}{g^k-1}\\equiv0$.)\n\n- Mod $2$: $a^k$ is odd iff $a$ is odd. There are $1011\\cdot2021$ such pairs, an odd number, so $S\\equiv1\\pmod2$.\n- Mod $3$: $a=1,\\dots,2021$ covers $673$ complete residue systems (as $a=1,\\dots,2019$) plus $a\\equiv1,2$, so $S_k\\equiv674\\sum_{a=0}^{2}a^k$. By the lemma this is $0$ for odd $k$ and $-674\\equiv1$ for even $k$. There are $1010$ even $k$, so $S\\equiv1010\\equiv2\\pmod3$.\n- Mod $337$: $2021=6\\cdot337-1$, so $S_k\\equiv6\\sum_{a=0}^{336}a^k$. This is $-6$ if $336\\mid k$ (there are $6$ such $k\\le2021$) and $0$ otherwise, so $S\\equiv-36\\pmod{337}$.\n\nSolving $S\\equiv1\\ (2)$, $S\\equiv2\\ (3)$, $S\\equiv-36\\ (337)$ gives $S\\equiv1649\\pmod{2022}$.\n\n**Answer: 1649**"
+      },
+      {
+        "title": "Computer check",
+        "body": "Direct modular computation of $\\sum_{a=1}^{2021}\\sum_{k=1}^{2021}a^k\\bmod2022$ gives $1649$.\n\n**Answer: 1649**"
+      }
+    ],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "chmmc-cmm-2023-individual-13",
+    "bank": "chmmc",
+    "source": {
+      "contest": "Caltech Math Meet",
+      "paper": "2023 Individual Round",
+      "year": 2023,
+      "number": 13,
+      "url": null
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Consider a $7\\times2$ grid of squares, each of which is equally likely to be colored either red or blue. Madeline would like to visit every square on the grid exactly once, starting on one of the top two squares and ending on one of the bottom two squares. She can move between two squares if they are adjacent or diagonally adjacent. What is the probability that Madeline may visit the squares of the grid in this way such that the sequence of colors she visits is alternating (i.e., red, blue, red, $\\ldots$ or blue, red, blue, $\\ldots$)?",
+    "image": null,
+    "choices": null,
+    "answer": "43/1024",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Tile the grid",
+        "body": "**Lemma.** A coloring of an $n\\times2$ grid admits a red-starting alternating path (visiting all squares, from the top row to the bottom row) iff the grid can be divided into $1\\times2$ blocks coloured RB or BR and $2\\times2$ blocks whose top row is RR and bottom row BB.\n\n*If* such a division exists, build the path block by block: in a $1\\times2$ block visit the red then the blue square; in a $2\\times2$ block visit a red square of the top row, a blue square of the bottom row, then the other red and the other blue.\n\n*Only if:* in a red-starting alternating path, after visiting the first $k$ rows' squares (so far partitioned into blocks) the next square is red in row $k+1$; the next is blue, either the other square of row $k+1$ (a $1\\times2$ block) or a square of row $k+2$; in the latter case the following two squares must be the rest of row $k+1$ (red) and row $k+2$ (blue), forming a $2\\times2$ block RR over BB.\n\nLet $f(n)$ be the number of such red-starting colorings. Then $f(0)=1$, $f(1)=2$ and $f(n)=2f(n-1)+f(n-2)$ ($1\\times2$ block has two colorings, the $2\\times2$ block has one). So $f(2)=5$, $f(3)=12$, $f(4)=29$, $f(5)=70$, $f(6)=169$, $f(7)=408$.\n\nColorings with a blue-starting alternating path are counted by the same number (swap colors), giving $2\\cdot408=816$. A coloring having both kinds of path is counted twice; these are exactly the colorings in which every row is RB or BR ($2^7=128$ of them; a $2\\times2$ block RR/BB for one start cannot occur for the other). So the number of good colorings is $816-128=688$, and the probability is $\\frac{688}{2^{14}}=\\frac{43}{1024}$.\n\n**Answer: $\\frac{43}{1024}$**"
+      },
+      {
+        "title": "Computer check",
+        "body": "Enumerating all $2^{14}$ colorings and searching for a Hamiltonian path (king moves, from a top-row square to a bottom-row square) with alternating colors finds exactly $688$ good colorings, probability $\\frac{688}{16384}=\\frac{43}{1024}$.\n\n**Answer: $\\frac{43}{1024}$**"
+      }
+    ],
+    "topics": [
+      "probability",
+      "counting"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null,
+    "answerDisplay": "$\\frac{43}{1024}$"
+  },
+  {
+    "id": "chmmc-cmm-2023-individual-14",
+    "bank": "chmmc",
+    "source": {
+      "contest": "Caltech Math Meet",
+      "paper": "2023 Individual Round",
+      "year": 2023,
+      "number": 14,
+      "url": null
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Let $ABC$ be a triangle with $AB=8$, $BC=10$, and $CA=12$. Denote by $\\Omega_A$ the $A$-excircle of $ABC$, and suppose that $\\Omega_A$ is tangent to $AB$ and $AC$ at $F$ and $E$, respectively. Line $\\ell\\neq BC$ is tangent to $\\Omega_A$ and passes through the midpoint of $BC$. Let $T$ be the intersection of $EF$ and $\\ell$. Compute the area of triangle $ATB$.",
+    "image": null,
+    "choices": null,
+    "answer": "135*sqrt(7)/4",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Polars and a harmonic conjugate",
+        "body": "Let $D$ and $D'$ be the touch points on $BC$ of the incircle and of $\\Omega_A$, let $M$ be the midpoint of $BC$ (so $MD=MD'$), and let $m\\ne BC$ be the tangent to $\\Omega_A$ parallel to $BC$, touching it at $Q_2$. The homothety $\\mathcal H$ centered at $A$ taking $\\Omega_A$ to the incircle sends $m$ to $BC$ and $Q_2$ to $D$; hence $A,D,Q_2$ are collinear. If $AD$ meets $\\Omega_A$ at $Q_1$ (nearer to $A$) and $Q_2$, then $Q_2D'$ is a diameter, so $Q_1Q_2\\perp Q_1D'$; as $MD=MD'$, $M$ is the center of the circle through $D,Q_1,D'$, so $MQ_1=MD'$. The point $Q_1\\ne D'$ lies on $\\Omega_A$ at the same distance from $M$ as the touch point $D'$, so it is the reflection of $D'$ in the line through $M$ and the center of $\\Omega_A$; that is the touch point of the second tangent from $M$. Thus $\\ell$ touches $\\Omega_A$ at $Q_1$.\n\nWith respect to $\\Omega_A$ the polar of $A$ is $EF$ and the polar of $Q_1$ is $\\ell$, so the polar of $T=EF\\cap\\ell$ is $AQ_1=AQ_2$. Hence $T$ lies on the polar of $Q_2$, which is $m$.\n\nThe homothety $\\mathcal H$ has ratio $\\frac{r}{r_A}=\\frac{s-a}{s}=\\frac13$ and sends $T\\in m$ to a point $V\\in BC$ with $AT=3AV$; it sends $E,F$ to the touch points of the incircle on $AC,AB$, so $V$ lies on the line through those touch points and on $BC$, which is the harmonic conjugate of $D$ with respect to $B,C$.\n\nNow $s=15$, $DB=s-b=3$, $DC=s-c=7$, so $VB=\\frac{15}2$ from $(V,D;B,C)=-1$. Heron gives $[ABC]=15\\sqrt7$, so the altitude from $A$ is $\\frac{2\\cdot15\\sqrt7}{10}=3\\sqrt7$. Since $TA=3VA$,\n$$[ATB]=3[AVB]=3\\cdot\\frac12\\cdot3\\sqrt7\\cdot\\frac{15}2=\\frac{135\\sqrt7}4.$$\n\n**Answer: $\\frac{135\\sqrt7}{4}$**"
+      },
+      {
+        "title": "Computer check",
+        "body": "Take $B=(0,0)$, $C=(10,0)$, $A=(1,3\\sqrt7)$. Compute the $A$-excenter, the touch points $E,F$, the second tangent $\\ell$ from $M=(5,0)$ to $\\Omega_A$, and $T=EF\\cap\\ell$ numerically. The area of $ATB$ comes out $89.294\\ldots=\\frac{135\\sqrt7}4$.\n\n**Answer: $\\frac{135\\sqrt7}{4}$**"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null,
+    "answerDisplay": "$\\frac{135\\sqrt{7}}{4}$"
+  },
+  {
+    "id": "chmmc-cmm-2023-individual-15",
+    "bank": "chmmc",
+    "source": {
+      "contest": "Caltech Math Meet",
+      "paper": "2023 Individual Round",
+      "year": 2023,
+      "number": 15,
+      "url": null
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "For any positive integer $n$, let $D_n$ be the set of ordered pairs of positive integers $(m,d)$ such that $d$ divides $n$ and $\\gcd(m,n)=1$, $1\\le m\\le n$. For any positive integers $a,b$, let $r(a,b)$ be the non-negative remainder when $a$ is divided by $b$. Denote by $S_n$ the sum\n$$S_n=\\sum_{(m,d)\\in D_n}r(m,d).$$\nDetermine the value of $S_{396}$.",
+    "image": null,
+    "choices": null,
+    "answer": "65460",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Closed form for $S_n$",
+        "body": "Let $\\varphi$ be Euler's function, $P_n=\\{1\\le m<n:\\gcd(m,n)=1\\}$ and $T_{n,d}=\\sum_{m\\in P_n}r(m,d)$. For $d=1$, $T_{n,1}=0$.\n\n*Claim.* For $1<d\\mid n$, $T_{n,d}=\\frac{d\\,\\varphi(n)}{2}$.\n\nEach residue class $a\\in P_d$ (units modulo $d$) contains exactly $\\frac{\\varphi(n)}{\\varphi(d)}$ elements of $P_n$ (CRT: split $n=n_1n_2$ with $n_1$ the part sharing all prime factors with $d$; elements $\\equiv a\\pmod d$ and coprime to $n_1$ are automatic, $n_1/d$ choices of residue mod $n_1$, times $\\varphi(n_2)$ choices mod $n_2$; and $\\frac{n_1\\varphi(n_2)}d=\\frac{\\varphi(n)}{\\varphi(d)}$). The residues in $P_d$ pair up as $a\\leftrightarrow d-a$ with sum $d$, so $\\sum_{a\\in P_d}a=\\frac{d\\varphi(d)}2$ (also true for $d=2$). Hence $T_{n,d}=\\frac{\\varphi(n)}{\\varphi(d)}\\cdot\\frac{d\\varphi(d)}2=\\frac{d\\varphi(n)}2$.\n\nIncluding $m=n$ (which has $\\gcd=n>1$ unless $n=1$) changes nothing for $n>1$. Therefore\n$$S_n=\\sum_{d\\mid n,\\,d>1}\\frac{d\\varphi(n)}2=\\frac{\\varphi(n)}2(\\sigma(n)-1).$$\nFor $n=396=2^2\\cdot3^2\\cdot11$: $\\varphi(396)=2\\cdot6\\cdot10=120$ and $\\sigma(396)=7\\cdot13\\cdot12=1092$, so $S_{396}=60\\cdot1091=65460$.\n\n**Answer: 65460**"
+      },
+      {
+        "title": "Computer check",
+        "body": "Summing $m\\bmod d$ over all $d\\mid396$ and all $1\\le m\\le396$ with $\\gcd(m,396)=1$ gives $65460$.\n\n**Answer: 65460**"
+      }
+    ],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

@@ -1,0 +1,540 @@
+[
+  {
+    "id": "chmmc-2010-winter-individual-01",
+    "bank": "chmmc",
+    "source": {
+      "contest": "CHMMC",
+      "paper": "2010 Winter Individual Round",
+      "year": 2010,
+      "number": 1,
+      "url": "http://chmmc.caltech.edu/archives/2010/problems-ind.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Compute the degree of the least common multiple of the polynomials $x-1,\\ x^2-1,\\ x^3-1,\\ \\dots,\\ x^{10}-1$.",
+    "image": null,
+    "choices": null,
+    "answer": "32",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Count the distinct roots",
+        "body": "The roots of $x^n-1$ are the $n$th roots of unity, all simple. The lcm of all ten polynomials is the monic polynomial whose roots are the union of these root sets, each used once. A primitive $n$th root of unity $e^{2\\pi i m/n}$ with $\\gcd(m,n)=1$ belongs to exactly one $n$, so the union has $\\sum_{n=1}^{10}\\varphi(n)$ elements:\n$$1+1+2+2+4+2+6+4+6+4=32.$$\n\n**Answer: 32**"
+      },
+      {
+        "title": "Cyclotomic factors",
+        "body": "Each $x^n-1=\\prod_{d\\mid n}\\Phi_d(x)$ with $\\Phi_d$ irreducible of degree $\\varphi(d)$. The lcm is the product of $\\Phi_d$ over all $d\\le 10$ (each $d$ divides itself, and no $\\Phi_d$ is repeated), so its degree is $\\sum_{d=1}^{10}\\varphi(d)=32$.\n\n**Answer: 32**"
+      }
+    ],
+    "topics": [
+      "polynomials",
+      "number-theory"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "chmmc-2010-winter-individual-02",
+    "bank": "chmmc",
+    "source": {
+      "contest": "CHMMC",
+      "paper": "2010 Winter Individual Round",
+      "year": 2010,
+      "number": 2,
+      "url": "http://chmmc.caltech.edu/archives/2010/problems-ind.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "A line in the $xy$ plane is called *wholesome* if its equation is $y=mx+b$ where $m$ is rational and $b$ is an integer. Given a point with integer coordinates $(x,y)$ on a wholesome line $l$, let $r$ be the remainder when $x$ is divided by $7$, and let $s$ be the remainder when $y$ is divided by $7$. The pair $(r,s)$ is called an *ingredient* of the line $l$. The (unordered) set of all possible ingredients of a wholesome line $l$ is called the *recipe* of $l$. Compute the number of possible recipes of wholesome lines.",
+    "image": null,
+    "choices": null,
+    "answer": "50",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Reduce to 49 lines plus one special recipe",
+        "body": "Write $m=c/d$ in lowest terms, so $dy=cx+db$ for integer points.\n\n*Case $7\\nmid d$.* Pick $t$ with $td\\equiv1\\pmod 7$. Then $y\\equiv tc\\,x+b\\pmod 7$, so the line has the same recipe as $y=m'x+b'$ with $m',b'\\in\\{0,\\dots,6\\}$. These $49$ lines have distinct recipes: the recipe of $y=m'x+b'$ contains $(0,b')$ and $(1,m'+b')$ and no other ingredient with first coordinate $0$ or $1$, which determines $m'$ and $b'$ mod 7.\n\n*Case $7\\mid d$.* Then $7\\mid cx$ with $7\\nmid c$, so $x\\equiv0\\pmod 7$ always. The integer points are $(dk,\\,ck+b)$ and $ck+b$ runs over all residues mod 7, so the recipe is $\\{(0,0),\\dots,(0,6)\\}$, the same for every such line (e.g. $y=x/7$). This recipe is not one of the 49 above.\n\nTotal: $49+1=50$ recipes.\n\n**Answer: 50**"
+      },
+      {
+        "title": "Check by computer",
+        "body": "Enumerating all slopes $c/d$ with $|c|,d\\le35$, all $b\\in\\{0,\\dots,6\\}$, and the residues of integer points on each line, gives exactly $50$ distinct recipes, matching the count above.\n\n**Answer: 50**"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "algebra"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "chmmc-2010-winter-individual-03",
+    "bank": "chmmc",
+    "source": {
+      "contest": "CHMMC",
+      "paper": "2010 Winter Individual Round",
+      "year": 2010,
+      "number": 3,
+      "url": "http://chmmc.caltech.edu/archives/2010/problems-ind.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Let $\\tau(n)$ be the number of distinct positive divisors of $n$. Compute $\\sum_{d\\mid 15015}\\tau(d)$, that is, the sum of $\\tau(d)$ for all $d$ such that $d$ divides $15015$.",
+    "image": null,
+    "choices": null,
+    "answer": "243",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Squarefree divisors",
+        "body": "$15015=3\\cdot5\\cdot7\\cdot11\\cdot13$ is a product of five distinct primes, so every divisor $d$ is squarefree. If $d$ has $k$ prime factors then $\\tau(d)=2^k$, and there are $\\binom5k$ such divisors. Hence $$\\sum_{d\\mid15015}\\tau(d)=\\sum_{k=0}^5\\binom5k2^k=(1+2)^5=243.$$\n\n**Answer: 243**"
+      },
+      {
+        "title": "Multiplicative functions",
+        "body": "$\\tau$ is multiplicative, hence so is $g(n)=\\sum_{d\\mid n}\\tau(d)$. For a prime $p$, $g(p)=\\tau(1)+\\tau(p)=1+2=3$. So $g(15015)=3^5=243$.\n\n**Answer: 243**"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "counting"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "chmmc-2010-winter-individual-04",
+    "bank": "chmmc",
+    "source": {
+      "contest": "CHMMC",
+      "paper": "2010 Winter Individual Round",
+      "year": 2010,
+      "number": 4,
+      "url": "http://chmmc.caltech.edu/archives/2010/problems-ind.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Suppose $2202010_b-2202010_3=71813265_{10}$. Compute $b$. ($n_b$ denotes the number $n$ written in base $b$.)",
+    "image": null,
+    "choices": null,
+    "answer": "18",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Bound $b$, then use divisibility",
+        "body": "$2202010_3=2\\cdot3^6+2\\cdot3^5+2\\cdot3^3+3=2001$, so $2202010_b=71813265+2001=71815266$.\n\nSince $2\\cdot b^6<71815266<3\\cdot b^6$ and $2\\cdot10^6<71815266<2\\cdot20^6$, we get $10<b<20$. The last digit of $2202010_b$ is $0$, so $b$ divides $71815266=18\\cdot3989737$. No prime below $20$ divides $3989737$, so the only divisor of $71815266$ between $10$ and $20$ is $18$.\n\nCheck: $2\\cdot18^6+2\\cdot18^5+2\\cdot18^3+18=68024448+3779136+11664+18=71815266$.\n\n**Answer: 18**"
+      },
+      {
+        "title": "Direct search",
+        "body": "The value $f(b)=2b^6+2b^5+2b^3+b$ is increasing for $b>0$. Since $f(17)=51124695<71815266$ and $f(19)>94\\,000\\,000>71815266$, the only candidate is $b=18$, and $f(18)=71815266$ exactly.\n\n**Answer: 18**"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "algebra"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "chmmc-2010-winter-individual-05",
+    "bank": "chmmc",
+    "source": {
+      "contest": "CHMMC",
+      "paper": "2010 Winter Individual Round",
+      "year": 2010,
+      "number": 5,
+      "url": "http://chmmc.caltech.edu/archives/2010/problems-ind.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Let $x=(3-\\sqrt5)/2$. Compute the exact value of $x^8+1/x^8$.",
+    "image": null,
+    "choices": null,
+    "answer": "2207",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Repeated squaring",
+        "body": "$x\\cdot\\frac{3+\\sqrt5}{2}=\\frac{9-5}{4}=1$, so $\\frac1x=\\frac{3+\\sqrt5}2$ and $x+\\frac1x=3$. Squaring: $x^2+x^{-2}=7$. Again: $x^4+x^{-4}=49-2=47$. Again: $x^8+x^{-8}=47^2-2=2207$.\n\n**Answer: 2207**"
+      },
+      {
+        "title": "Recurrence",
+        "body": "Let $s_n=x^n+x^{-n}$. Since $x+x^{-1}=3$, $s_{n+1}=3s_n-s_{n-1}$ with $s_0=2$, $s_1=3$. This gives $2,3,7,18,47,123,322,843,2207$, so $s_8=2207$.\n\n**Answer: 2207**"
+      }
+    ],
+    "topics": [
+      "algebra"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "chmmc-2010-winter-individual-06",
+    "bank": "chmmc",
+    "source": {
+      "contest": "CHMMC",
+      "paper": "2010 Winter Individual Round",
+      "year": 2010,
+      "number": 6,
+      "url": "http://chmmc.caltech.edu/archives/2010/problems-ind.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Compute the largest integer that has the same number of digits when written in base $5$ and when written in base $7$. Express your answer in base $10$.",
+    "image": null,
+    "choices": null,
+    "answer": "3124",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Compare the digit-count ranges",
+        "body": "A number with $k$ digits in base $5$ lies in $[5^{k-1},5^k-1]$ and with $k$ digits in base $7$ lies in $[7^{k-1},7^k-1]$. Both hold only if $7^{k-1}\\le5^k-1$. This is true for $k=5$ ($2401\\le3124$) but false for $k=6$ ($16807>15624$) and for all larger $k$. So the largest such number has $k=5$ digits in base 5 and is the largest $5$-digit base-$5$ number, $5^5-1=3124$ (which is $44444_5=12052_7$).\n\n**Answer: 3124**"
+      }
+    ],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "chmmc-2010-winter-individual-07",
+    "bank": "chmmc",
+    "source": {
+      "contest": "CHMMC",
+      "paper": "2010 Winter Individual Round",
+      "year": 2010,
+      "number": 7,
+      "url": "http://chmmc.caltech.edu/archives/2010/problems-ind.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Three circles with integer radii $a$, $b$, $c$ are mutually externally tangent, with $a\\le b\\le c$ and $a<10$. The centers of the three circles form a right triangle. Compute the number of possible ordered triples $(a,b,c)$.",
+    "image": null,
+    "choices": null,
+    "answer": "30",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Pythagoras",
+        "body": "The sides are $a+b\\le a+c\\le b+c$, so the hypotenuse is $b+c$: $(a+b)^2+(a+c)^2=(b+c)^2$, which simplifies to $a^2+ab+ac=bc$, i.e. $(b-a)(c-a)=2a^2$. With $b\\le c$ the solutions correspond to factor pairs of $2a^2$ with first factor $\\le$ second, and there are $\\frac12\\tau(2a^2)$ of them (note $2a^2$ is never a square).\n\n| $a$ | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 |\n|---|---|---|---|---|---|---|---|---|---|\n| $2a^2$ | 2 | 8 | 18 | 32 | 50 | 72 | 98 | 128 | 162 |\n| $\\tfrac12\\tau(2a^2)$ | 1 | 2 | 3 | 3 | 3 | 6 | 3 | 4 | 5 |\n\nTotal: $1+2+3+3+3+6+3+4+5=30$.\n\n**Answer: 30**"
+      },
+      {
+        "title": "Brute force check",
+        "body": "A search over $1\\le a\\le9$ and all $a\\le b\\le c<3000$ with the right-triangle condition (testing every choice of hypotenuse) returns exactly $30$ triples.\n\n**Answer: 30**"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "number-theory"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "chmmc-2010-winter-individual-08",
+    "bank": "chmmc",
+    "source": {
+      "contest": "CHMMC",
+      "paper": "2010 Winter Individual Round",
+      "year": 2010,
+      "number": 8,
+      "url": "http://chmmc.caltech.edu/archives/2010/problems-ind.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Six friends are playing informal games of soccer. For each game, they split themselves up into two teams of three. They want to arrange the teams so that, at the end of the day, each pair of players has played at least one game on the same team. Compute the smallest number of games they need to play in order to achieve this.",
+    "image": null,
+    "choices": null,
+    "answer": "4",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Three games are not enough, four are",
+        "body": "Two games: of the three players on one team in game 1, two (call them $A,B$) must be together again in game 2. Let $C$ be the third player of game 1's team, $D,E$ the teammates of $C$ in game 2, and $F$ the sixth player. So game 1 is $ABC\\,|\\,DEF$ and game 2 is $ABF\\,|\\,CDE$. After two games the pairs $AD$, $BE$, $CF$ have still never been teammates. A third game would need $A$ with $D$, $B$ with $E$ and $C$ with $F$ on the same teams, but a team has only three players, so $A,D,B,E,C,F$ cannot all be placed. (Also, any game covers $6$ of the $15$ pairs, so at least $3$ games are necessary.) Hence $3$ games are impossible.\n\nFour games suffice: $ABC|DEF$, $ABF|CDE$, $ABD|CEF$, $ABE|CDF$. Game 1 covers $AB,AC,BC,DE,DF,EF$; game 2 adds $AF,BF,CD,CE$; game 3 adds $AD,BD,CF$; game 4 adds $AE,BE$. That is $6+4+3+2=15$ pairs, all of them.\n\n**Answer: 4**"
+      }
+    ],
+    "topics": [
+      "counting",
+      "logic"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "chmmc-2010-winter-individual-09",
+    "bank": "chmmc",
+    "source": {
+      "contest": "CHMMC",
+      "paper": "2010 Winter Individual Round",
+      "year": 2010,
+      "number": 9,
+      "url": "http://chmmc.caltech.edu/archives/2010/problems-ind.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Let $A$ and $B$ be points in the plane such that $AB=30$. A circle with integer radius passes through $A$ and $B$. A point $C$ is constructed on the circle such that $\\overline{AC}$ is a diameter of the circle. Compute all possible radii of the circle such that $BC$ is a positive integer.",
+    "image": null,
+    "choices": null,
+    "answer": "$17,\\ 25,\\ 39,\\ 113$",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Right triangle and factoring",
+        "body": "$\\angle ABC=90^\\circ$ (angle in a semicircle), so $30^2+BC^2=(2r)^2$. Then $BC$ is even; write $BC=2y$. Then $225=r^2-y^2=(r+y)(r-y)$ with $r+y>r-y>0$ integers of the same parity (both odd). The factor pairs of $225$ with the larger first are $(225,1),(75,3),(45,5),(25,9)$ (and $(15,15)$ gives $y=0$, not allowed). Hence $r=\\frac{225+1}2=113$, $\\frac{75+3}2=39$, $\\frac{45+5}2=25$, $\\frac{25+9}2=17$.\n\n**Answer: $r=17,25,39,113$**"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "number-theory"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "chmmc-2010-winter-individual-10",
+    "bank": "chmmc",
+    "source": {
+      "contest": "CHMMC",
+      "paper": "2010 Winter Individual Round",
+      "year": 2010,
+      "number": 10,
+      "url": "http://chmmc.caltech.edu/archives/2010/problems-ind.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Each square of a $3\\times3$ grid can be colored black or white. Two colorings are the same if you can rotate or reflect one to get the other. Compute the total number of unique colorings.",
+    "image": null,
+    "choices": null,
+    "answer": "102",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Burnside's lemma",
+        "body": "The symmetry group of the square has $8$ elements. Count colorings fixed by each:\n- identity: $2^9=512$;\n- rotations by $90^\\circ$ and $270^\\circ$: the cells form $3$ orbits (center, edges, corners), so $2^3=8$ each;\n- rotation by $180^\\circ$: $5$ orbits, $2^5=32$;\n- each of the $4$ reflections: $6$ orbits, $2^6=64$.\n\nAverage: $\\frac18(512+8+8+32+4\\cdot64)=\\frac{816}{8}=102$.\n\n**Answer: 102**"
+      },
+      {
+        "title": "Center and outer ring",
+        "body": "The centre is fixed by every symmetry, so it contributes a factor of $2$. The outer $8$ squares (4 corners, 4 edges) up to symmetry: case analysis by the number and positions of black corners gives $6+10+7+12+10+6=51$ classes (0 to 4 black corners, with 2 black corners split into opposite and adjacent). Total $2\\cdot51=102$.\n\n**Answer: 102**"
+      }
+    ],
+    "topics": [
+      "counting"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "chmmc-2010-winter-individual-11",
+    "bank": "chmmc",
+    "source": {
+      "contest": "CHMMC",
+      "paper": "2010 Winter Individual Round",
+      "year": 2010,
+      "number": 11,
+      "url": "http://chmmc.caltech.edu/archives/2010/problems-ind.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Compute all positive integers $n$ such that the sum of all positive integers that are less than $n$ and relatively prime to $n$ is equal to $2n$.",
+    "image": null,
+    "choices": null,
+    "answer": "$n=5,\\ 8,\\ 10,\\ 12$",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 2,
+    "duplicateOf": "lehigh-2025-18",
+    "reviewNote": null
+  },
+  {
+    "id": "chmmc-2010-winter-individual-12",
+    "bank": "chmmc",
+    "source": {
+      "contest": "CHMMC",
+      "paper": "2010 Winter Individual Round",
+      "year": 2010,
+      "number": 12,
+      "url": "http://chmmc.caltech.edu/archives/2010/problems-ind.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "The distance between a point and a line is defined to be the smallest possible distance between the point and any point on the line. Triangle $ABC$ has $AB=10$, $BC=21$, and $CA=17$. Let $P$ be a point inside the triangle. Let $x$ be the distance between $P$ and $\\overleftrightarrow{BC}$, let $y$ be the distance between $P$ and $\\overleftrightarrow{CA}$, and let $z$ be the distance between $P$ and $\\overleftrightarrow{AB}$. Compute the largest possible value of the product $xyz$.",
+    "image": null,
+    "choices": null,
+    "answer": "12544/255",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "answerDisplay": "$\\frac{12544}{255}$",
+    "solutions": [
+      {
+        "title": "Area constraint and AM-GM",
+        "body": "By Heron, the area is $\\sqrt{24\\cdot3\\cdot7\\cdot14}=84$. Splitting the triangle into $PBC,PCA,PAB$ gives $\\frac12(21x+17y+10z)=84$, so $21x+17y+10z=168$. By AM-GM, $56=\\frac{21x+17y+10z}{3}\\ge\\sqrt[3]{(21x)(17y)(10z)}$, so $xyz\\le\\frac{56^3}{21\\cdot17\\cdot10}=\\frac{12544}{255}$. Equality needs $21x=17y=10z=56$, i.e. $x=\\frac83,\\ y=\\frac{56}{17},\\ z=\\frac{28}5$, and any positive $(x,y,z)$ with $21x+17y+10z=168$ is realised by an interior point, so the bound is attained.\n\n**Answer: $\\frac{12544}{255}$**"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "inequalities"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "chmmc-2010-winter-individual-13",
+    "bank": "chmmc",
+    "source": {
+      "contest": "CHMMC",
+      "paper": "2010 Winter Individual Round",
+      "year": 2010,
+      "number": 13,
+      "url": "http://chmmc.caltech.edu/archives/2010/problems-ind.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Alice, Bob, David, and Eve are sitting in a row on a couch and are passing back and forth a bag of chips. Whenever Bob gets the bag of chips, he passes the bag back to the person who gave it to him with probability $\\frac13$, and he passes it on in the same direction with probability $\\frac23$. Whenever David gets the bag of chips, he passes the bag back to the person who gave it to him with probability $\\frac14$, and he passes it on with probability $\\frac34$. Currently, Alice has the bag of chips, and she is about to pass it to Bob when Cathy sits between Bob and David. Whenever Cathy gets the bag of chips, she passes the bag back to the person who gave it to her with probability $p$, and passes it on with probability $1-p$. Alice realizes that because Cathy joined them on the couch, the probability that Alice gets the bag of chips back before Eve gets it has doubled. Compute $p$.",
+    "image": null,
+    "choices": null,
+    "answer": "55/61",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "answerDisplay": "$\\frac{55}{61}$",
+    "solutions": [
+      {
+        "title": "Merge two neighbours into one person",
+        "body": "Let $X$ (return probability $x$) sit next to $Y$ (return probability $y$), and give the bag to $X$. The probability it comes back to us is\n$$x+\\sum_{k\\ge1}(1-x)^2x^{k-1}y^k=x+\\frac{(1-x)^2y}{1-xy}=\\frac{x+y-2xy}{1-xy}.$$\nSo $X,Y$ act like one person with this return probability, and the formula is symmetric in $x,y$ (the order does not matter).\n\nBefore Cathy: Bob and David merge to $\\frac{\\frac13+\\frac14-\\frac16}{1-\\frac1{12}}=\\frac5{11}$, so the chance Alice gets the bag back before Eve is $\\frac5{11}$. After Cathy sits (order irrelevant), the three merge to $\\frac{\\frac5{11}+p-\\frac{10}{11}p}{1-\\frac5{11}p}=\\frac{5+p}{11-5p}$. Setting this equal to $\\frac{10}{11}$: $55+11p=110-50p$, so $p=\\frac{55}{61}$.\n\n**Answer: $\\frac{55}{61}$**"
+      }
+    ],
+    "topics": [
+      "probability",
+      "algebra"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "chmmc-2010-winter-individual-14",
+    "bank": "chmmc",
+    "source": {
+      "contest": "CHMMC",
+      "paper": "2010 Winter Individual Round",
+      "year": 2010,
+      "number": 14,
+      "url": "http://chmmc.caltech.edu/archives/2010/problems-ind.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Circle $O$ is in the plane. Circles $A$, $B$, and $C$ are congruent, and are each internally tangent to circle $O$ and externally tangent to each other. Circle $X$ is internally tangent to circle $O$ and externally tangent to circles $A$ and $B$. Circle $X$ has radius $1$. Compute the radius of circle $O$.",
+    "image": "qimages/chmmc/2010-winter-individual/q14.webp",
+    "choices": null,
+    "answer": "1+2*sqrt(3)",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "answerDisplay": "$1+2\\sqrt{3}$",
+    "solutions": [
+      {
+        "title": "Coordinates",
+        "body": "Let $R$ be the radius of $O$ and $r$ that of $A,B,C$. Triangle $AOB$ has angles $30^\\circ,120^\\circ,30^\\circ$, so $AB=\\sqrt3\\,OA$ and $AB=2r$, giving $R=OA+r=\\frac{2\\sqrt3+3}{3}r$. Let $M$ be the midpoint of $AB$. Then $OM=\\frac{\\sqrt3}3r$, and $X$ lies on the ray from $O$ through $M$ with $R=OM+MX+1$, so $MX=R-OM-1=\\frac{3+\\sqrt3}3r-1$. In right triangle $AMX$: $AM=r$, $AX=r+1$, so\n$$r^2+\\Big(\\tfrac{3+\\sqrt3}3r-1\\Big)^2=(r+1)^2\\ \\Rightarrow\\ \\tfrac{4+2\\sqrt3}{3}r^2=\\tfrac{12+2\\sqrt3}{3}r\\ \\Rightarrow\\ r=\\frac{6+\\sqrt3}{2+\\sqrt3}=9-4\\sqrt3.$$\nThen $R=\\frac{3+2\\sqrt3}3(9-4\\sqrt3)=1+2\\sqrt3$.\n\n**Answer: $1+2\\sqrt3$**"
+      },
+      {
+        "title": "Descartes' circle theorem",
+        "body": "Circles $O$ (curvature $-1/R$), $A$, $B$ (curvature $1/r$ each) and $X$ (curvature $1$) are mutually tangent, so $(k_1+k_2+k_3+k_4)^2=2(k_1^2+k_2^2+k_3^2+k_4^2)$ holds. With $R=\\frac{3+2\\sqrt3}3r$ this reduces to the same equation for $r$ and gives $r=9-4\\sqrt3$, $R=1+2\\sqrt3\\approx4.464$ (numerically both sides equal $3.0322$).\n\n**Answer: $1+2\\sqrt3$**"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "chmmc-2010-winter-individual-15",
+    "bank": "chmmc",
+    "source": {
+      "contest": "CHMMC",
+      "paper": "2010 Winter Individual Round",
+      "year": 2010,
+      "number": 15,
+      "url": "http://chmmc.caltech.edu/archives/2010/problems-ind.pdf"
+    },
+    "grade": "9-12",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Compute the number of primes $p$ less than $100$ such that $p$ divides $n^2+n+1$ for some integer $n$.",
+    "image": null,
+    "choices": null,
+    "answer": "12",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Cube roots of unity mod $p$",
+        "body": "If $p\\mid n^2+n+1$ and $n\\not\\equiv1$, then $n^3\\equiv1$ with $n\\not\\equiv1\\pmod p$, i.e. there is a nontrivial cube root of unity mod $p$. If $n\\equiv1$ then $p\\mid3$, so $p=3$ works ($n=1$). For $p\\ne3$ a nontrivial solution of $n^3\\equiv1$ exists iff $3\\mid p-1$: if $3\\nmid p-1$, then $n^{p-1}=1$ and $n^3=1$ force $n^{\\gcd(3,p-1)}=n=1$; if $3\\mid p-1$, the polynomial $x^{(p-1)/3}-1$ has fewer than $p-1$ roots, so some $x$ gives $n=x^{(p-1)/3}\\not\\equiv1$ with $n^3\\equiv1$. Thus the primes are $p=3$ and $p\\equiv1\\pmod 6$: $7,13,19,31,37,43,61,67,73,79,97$ (11 primes). Total $12$.\n\n**Answer: 12**"
+      },
+      {
+        "title": "Direct check",
+        "body": "Testing every prime below $100$ for a residue $n$ with $n^2+n+1\\equiv0$ finds exactly $3,7,13,19,31,37,43,61,67,73,79,97$: twelve primes.\n\n**Answer: 12**"
+      }
+    ],
+    "topics": [
+      "number-theory"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

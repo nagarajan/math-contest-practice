@@ -1,0 +1,690 @@
+[
+  {
+    "id": "nyciml-2010-11-fall-junior-01",
+    "bank": "nyciml",
+    "source": {
+      "contest": "NYCIML",
+      "paper": "Fall 2010 Junior",
+      "year": 2010,
+      "number": 1,
+      "url": "https://nyciml.org/wp-content/uploads/Junior-Contests-Fall-2010-1.pdf"
+    },
+    "grade": "9-10",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Compute the smallest number that can be obtained by removing $10$ digits from the number $1234512345123451234512345$.",
+    "image": null,
+    "choices": null,
+    "answer": "111231234512345",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Make the leading digits small",
+        "body": "After $10$ digits are removed, a $15$-digit number remains, and it is smallest when its leftmost digits are as small as possible.\n\n- Keep the first $1$ and delete the $2345$ after it, so the next digit is the second $1$ (4 deletions).\n- Delete the next $2345$ as well, bringing in the third $1$ (8 deletions).\n- Two deletions remain. The next digits are $2,3,4,5,1,\\dots$; reaching the fourth $1$ would cost four deletions, so keep $2$ and $3$ and delete $4$ and $5$, which makes the digit after $23$ a $1$.\n\nThe number that remains is $111\\,23\\,12345\\,12345$.\n\n**Answer: $111231234512345$**"
+      },
+      {
+        "title": "Greedy digit by digit",
+        "body": "Choose the $15$ digits of the result from left to right. The $k$-th digit can come from any position that still leaves enough digits to finish; always take the smallest available digit (earliest occurrence).\n\n- Digit 1: positions $1$–$11$ contain $1$ at position $1$.\n- Digit 2: positions $2$–$12$; smallest is the $1$ at position $6$.\n- Digit 3: positions $7$–$13$; smallest is the $1$ at position $11$.\n- Digit 4: positions $12$–$14$ hold $2,3,4$; take $2$. Digit 5: positions $13$–$15$ hold $3,4,5$; take $3$.\n- Digit 6: positions $14$–$16$ hold $4,5,1$; take the $1$ at position $16$. All $10$ deletions are used, so the remaining digits $2345\\,12345$ are kept.\n\n**Answer: $111231234512345$**"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "logic"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "nyciml-2010-11-fall-junior-02",
+    "bank": "nyciml",
+    "source": {
+      "contest": "NYCIML",
+      "paper": "Fall 2010 Junior",
+      "year": 2010,
+      "number": 2,
+      "url": "https://nyciml.org/wp-content/uploads/Junior-Contests-Fall-2010-1.pdf"
+    },
+    "grade": "9-10",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Each box in a $3$-by-$3$ grid is assigned one the numbers $1$, $2$, or $3$. Compute the number of assignments that have the property that no two numbers in any row are the same and no two numbers in any column are the same.",
+    "image": null,
+    "choices": null,
+    "answer": "12",
+    "acceptedAnswers": null,
+    "answerUnit": "assignments",
+    "solutions": [
+      {
+        "title": "Row by row",
+        "body": "The first row is an ordering $abc$ of $1,2,3$: $3! = 6$ choices. The second row must differ from the first in every column, so it is $bca$ or $cab$: $2$ choices. The third row is then forced (each column needs its missing number), and it is automatically an ordering of $1,2,3$. Total $6\\cdot 2\\cdot 1 = 12$.\n\n**Answer: 12**"
+      },
+      {
+        "title": "Fix the first row and column",
+        "body": "Such a grid is a $3\\times3$ Latin square. Fix the first row as $1,2,3$ (multiply by $3!=6$ at the end). The first column starts with $1$ and its other two entries are $2,3$ in some order ($2$ ways); each choice forces the rest of the grid. So there are $6\\cdot 2 = 12$ assignments.\n\n**Answer: 12**"
+      }
+    ],
+    "topics": [
+      "counting"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "nyciml-2010-11-fall-junior-03",
+    "bank": "nyciml",
+    "source": {
+      "contest": "NYCIML",
+      "paper": "Fall 2010 Junior",
+      "year": 2010,
+      "number": 3,
+      "url": "https://nyciml.org/wp-content/uploads/Junior-Contests-Fall-2010-1.pdf"
+    },
+    "grade": "9-10",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "In triangle $ABC$, $m\\angle A = 64$ and $m\\angle B = 72$. Altitudes $\\overline{AD}$, $\\overline{BE}$ and $\\overline{CF}$ intersect at $H$. Compute the measure of $\\angle AHE$.",
+    "image": null,
+    "choices": null,
+    "answer": "44",
+    "acceptedAnswers": null,
+    "answerUnit": "degrees",
+    "solutions": [
+      {
+        "title": "Chase angles in right triangles",
+        "body": "$m\\angle C = 180 - 64 - 72 = 44$. In right triangle $ACD$, $m\\angle CAD = 90 - 44 = 46$. In right triangle $AHE$ (right angle at $E$), $\\angle HAE = \\angle CAD = 46$, so $m\\angle AHE = 90 - 46 = 44$.\n\n**Answer: $44^\\circ$**"
+      },
+      {
+        "title": "Cyclic quadrilateral",
+        "body": "Since $\\angle HEC = \\angle HDC = 90^\\circ$, quadrilateral $HDCE$ is cyclic, so $\\angle DHE = 180 - \\angle C$. Because $A, H, D$ are collinear, $\\angle AHE = 180 - \\angle DHE = \\angle C = 180-64-72 = 44$.\n\n**Answer: $44^\\circ$**"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "nyciml-2010-11-fall-junior-04",
+    "bank": "nyciml",
+    "source": {
+      "contest": "NYCIML",
+      "paper": "Fall 2010 Junior",
+      "year": 2010,
+      "number": 4,
+      "url": "https://nyciml.org/wp-content/uploads/Junior-Contests-Fall-2010-1.pdf"
+    },
+    "grade": "9-10",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Factor $x^4 + x^2 + 25$ as the product of two quadratic polynomials with integer coefficients.",
+    "image": null,
+    "choices": null,
+    "answer": "$(x^2+3x+5)(x^2-3x+5)$",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Difference of squares",
+        "body": "Add and subtract $9x^2$:\n$$x^4+x^2+25 = x^4+10x^2+25-9x^2 = (x^2+5)^2-(3x)^2 = (x^2+3x+5)(x^2-3x+5).$$\n\n**Answer: $(x^2+3x+5)(x^2-3x+5)$**"
+      },
+      {
+        "title": "Undetermined coefficients",
+        "body": "The polynomial is even, so try $(x^2+ax+b)(x^2-ax+b) = x^4 + (2b-a^2)x^2 + b^2$. Matching gives $b^2=25$ and $2b-a^2=1$. With $b=5$, $a^2=9$, so $a=3$; $b=-5$ would need $a^2=-11$.\n\n**Answer: $(x^2+3x+5)(x^2-3x+5)$**"
+      }
+    ],
+    "topics": [
+      "polynomials",
+      "algebra"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "nyciml-2010-11-fall-junior-05",
+    "bank": "nyciml",
+    "source": {
+      "contest": "NYCIML",
+      "paper": "Fall 2010 Junior",
+      "year": 2010,
+      "number": 5,
+      "url": "https://nyciml.org/wp-content/uploads/Junior-Contests-Fall-2010-1.pdf"
+    },
+    "grade": "9-10",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "A vertical pole is $1$ foot long. The pole is moved one foot from its original position along level ground. It is then moved one foot along the ground from that position in a direction perpendicular to the one in which it originally moved. The pole remains vertical throughout the process. Compute the number of feet in the distance from the top of the pole in its final position to the bottom of the pole in its original position.",
+    "image": null,
+    "choices": null,
+    "answer": "sqrt(3)",
+    "acceptedAnswers": null,
+    "answerUnit": "feet",
+    "answerDisplay": "$\\sqrt{3}$",
+    "solutions": [
+      {
+        "title": "Pythagorean Theorem twice",
+        "body": "Let the bottom of the pole be at $A$, then $B$, then $C$, and let $D$ be the final top. Triangle $ABC$ has a right angle at $B$, so $AC = \\sqrt{1^2+1^2} = \\sqrt2$. The pole $CD$ is perpendicular to the ground, so in right triangle $ACD$, $AD = \\sqrt{2+1} = \\sqrt3$.\n\n**Answer: $\\sqrt3$ feet**"
+      },
+      {
+        "title": "Coordinates",
+        "body": "Put the original bottom at $(0,0,0)$. The final bottom is $(1,1,0)$ and the final top $(1,1,1)$. The distance is $\\sqrt{1+1+1}=\\sqrt3$, the space diagonal of a unit cube.\n\n**Answer: $\\sqrt3$ feet**"
+      }
+    ],
+    "topics": [
+      "geometry",
+      "measurement"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "nyciml-2010-11-fall-junior-06",
+    "bank": "nyciml",
+    "source": {
+      "contest": "NYCIML",
+      "paper": "Fall 2010 Junior",
+      "year": 2010,
+      "number": 6,
+      "url": "https://nyciml.org/wp-content/uploads/Junior-Contests-Fall-2010-1.pdf"
+    },
+    "grade": "9-10",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "In trapezoid $ABCD$, $AB = 2$, $BC = 6$, $CD = 10$, and $DA = 6$. Points $F$ and $G$ are the midpoints of $\\overline{AD}$ and $\\overline{BC}$, respectively, $\\overline{FG}$ intersects $\\overline{BD}$ and $\\overline{AC}$, respectively, at $H$ and $J$, and $\\overline{AC}$ intersects $\\overline{BD}$ at $E$. Compute the area of triangle $EHJ$.",
+    "image": null,
+    "choices": null,
+    "answer": "4*sqrt(5)/3",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "answerDisplay": "$\\frac{4\\sqrt5}{3}$",
+    "solutions": [
+      {
+        "title": "Similar triangles",
+        "body": "The trapezoid is isosceles with bases $AB=2$ and $CD=10$. Drop the altitude $AA'$ to $CD$; then $DA' = (10-2)/2 = 4$ and $AA' = \\sqrt{36-16} = 2\\sqrt5$.\n\nTriangles $ABE$ and $CDE$ are similar with ratio $AB:CD = 1:5$, so the altitude of $\\triangle ABE$ is $\\frac16\\cdot 2\\sqrt5 = \\frac{\\sqrt5}{3}$ and $[ABE] = \\frac12\\cdot 2\\cdot \\frac{\\sqrt5}{3} = \\frac{\\sqrt5}{3}$.\n\nThe midline $FG$ is parallel to the bases, and since $G$ bisects $BC$, $J$ is the midpoint of $AC$: $AJ = \\frac12 AC$. Also $AE = \\frac16 AC$, so $EJ = \\frac12 AC - \\frac16 AC = \\frac13 AC = 2\\,AE$. Triangle $EJH$ is similar to triangle $EAB$ (since $HJ \\parallel AB$) with ratio $2$, so\n$$[EHJ] = 2^2\\cdot\\frac{\\sqrt5}{3} = \\frac{4\\sqrt5}{3}.$$\n\n**Answer: $\\frac{4\\sqrt5}{3}$**"
+      },
+      {
+        "title": "Coordinates",
+        "body": "Place $D=(0,0)$, $C=(10,0)$, $A=(4,2\\sqrt5)$, $B=(6,2\\sqrt5)$. The midline $FG$ is $y=\\sqrt5$. Line $BD$ is $y = \\frac{\\sqrt5}{3}x$, meeting the midline at $H=(3,\\sqrt5)$; line $AC$ is $y = \\frac{\\sqrt5}{3}(10-x)$, meeting it at $J=(7,\\sqrt5)$. These lines meet at $E=\\left(5,\\frac{5\\sqrt5}{3}\\right)$. Triangle $EHJ$ has base $HJ = 4$ and height $\\frac{5\\sqrt5}{3}-\\sqrt5 = \\frac{2\\sqrt5}{3}$, so its area is $\\frac12\\cdot4\\cdot\\frac{2\\sqrt5}{3} = \\frac{4\\sqrt5}{3}$.\n\n**Answer: $\\frac{4\\sqrt5}{3}$**"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "nyciml-2010-11-fall-junior-07",
+    "bank": "nyciml",
+    "source": {
+      "contest": "NYCIML",
+      "paper": "Fall 2010 Junior",
+      "year": 2010,
+      "number": 7,
+      "url": "https://nyciml.org/wp-content/uploads/Junior-Contests-Fall-2010-1.pdf"
+    },
+    "grade": "9-10",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Lisa has $22$ bags of rocks containing $50$ rocks each and $44$ bags of rocks containing $10$ rocks each. She dumps all the rocks out of the bags and places them in bags containing $3$ rocks each until she has made as many bags as she can. Compute the number of rocks that are left over.",
+    "image": null,
+    "choices": null,
+    "answer": "1",
+    "acceptedAnswers": null,
+    "answerUnit": "rocks",
+    "solutions": [
+      {
+        "title": "Work modulo 3",
+        "body": "Rocks in full bags of three can be ignored. $50\\equiv 2$, $10\\equiv1$, $22\\equiv1$ and $44\\equiv 2 \\pmod 3$, so the total is $\\equiv 1\\cdot2 + 2\\cdot1 = 4 \\equiv 1 \\pmod 3$.\n\n**Answer: 1**"
+      },
+      {
+        "title": "Direct count",
+        "body": "There are $22\\cdot50 + 44\\cdot10 = 1100 + 440 = 1540$ rocks, and $1540 = 3\\cdot513 + 1$, so one rock is left over.\n\n**Answer: 1**"
+      }
+    ],
+    "topics": [
+      "arithmetic",
+      "number-theory"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "nyciml-2010-11-fall-junior-08",
+    "bank": "nyciml",
+    "source": {
+      "contest": "NYCIML",
+      "paper": "Fall 2010 Junior",
+      "year": 2010,
+      "number": 8,
+      "url": "https://nyciml.org/wp-content/uploads/Junior-Contests-Fall-2010-1.pdf"
+    },
+    "grade": "9-10",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "In trapezoid $ABCD$ with bases $\\overline{AB}$ and $\\overline{CD}$, $AB = 10$, $BC = 15$, $CD = 18$ and $DA = 9$. Points $E$ and $F$ are on $\\overline{AB}$ and $\\overline{CD}$, respectively, so that the area of quadrilaterals $AEFD$ and $BEFC$ are equal. If $AE = 4$, compute $CF$.",
+    "image": null,
+    "choices": null,
+    "answer": "8",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Two trapezoids of equal height",
+        "body": "$AEFD$ and $BEFC$ are trapezoids with parallel sides on $AB$ and $CD$, so both have the height $h$ of $ABCD$. Equal areas give $\\frac12h(AE+DF) = \\frac12h(BE+CF)$. Since $BE = 10-4 = 6$, this says $4 + DF = 6 + CF$, so $DF - CF = 2$. Also $DF + CF = CD = 18$. Adding, $2DF = 20$, so $DF = 10$ and $CF = 8$.\n\n**Answer: 8**"
+      },
+      {
+        "title": "Half the total",
+        "body": "The area of $ABCD$ is $\\frac12h(10+18) = 14h$, so each part has area $7h$. Then $[AEFD] = \\frac12h(4 + DF) = 7h$ gives $DF = 10$ and $CF = 18 - 10 = 8$.\n\n**Answer: 8**"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": "Official key gives 13/2, which uses DF + CF = 15 (the length of BC) instead of CD = 18. With CD = 18 as printed, CF = 8 (stored)."
+  },
+  {
+    "id": "nyciml-2010-11-fall-junior-09",
+    "bank": "nyciml",
+    "source": {
+      "contest": "NYCIML",
+      "paper": "Fall 2010 Junior",
+      "year": 2010,
+      "number": 9,
+      "url": "https://nyciml.org/wp-content/uploads/Junior-Contests-Fall-2010-1.pdf"
+    },
+    "grade": "9-10",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Find the closest integer to $\\dfrac{2^{1000}+3^{1000}+4^{1000}}{4^{1000}}$.",
+    "image": null,
+    "choices": null,
+    "answer": "1",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Split the fraction",
+        "body": "$$\\frac{2^{1000}+3^{1000}+4^{1000}}{4^{1000}} = \\left(\\tfrac12\\right)^{1000} + \\left(\\tfrac34\\right)^{1000} + 1.$$\nBoth $\\left(\\frac12\\right)^{1000}$ and $\\left(\\frac34\\right)^{1000}$ are positive and extremely close to $0$ (for example $\\left(\\frac34\\right)^{1000} < \\left(\\frac34\\right)^{10} < 0.06$), so the value is just above $1$.\n\n**Answer: 1**"
+      },
+      {
+        "title": "Bound the numerator",
+        "body": "$4^{1000} < 2^{1000}+3^{1000}+4^{1000} < 4^{1000} + 2\\cdot 3^{1000}$, and $2\\cdot 3^{1000}/4^{1000} = 2(0.75)^{1000}$ is far smaller than $\\frac12$. So the quotient lies strictly between $1$ and $1.5$.\n\n**Answer: 1**"
+      }
+    ],
+    "topics": [
+      "arithmetic",
+      "algebra"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "nyciml-2010-11-fall-junior-10",
+    "bank": "nyciml",
+    "source": {
+      "contest": "NYCIML",
+      "paper": "Fall 2010 Junior",
+      "year": 2010,
+      "number": 10,
+      "url": "https://nyciml.org/wp-content/uploads/Junior-Contests-Fall-2010-1.pdf"
+    },
+    "grade": "9-10",
+    "points": null,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "Factor $x^4 + 4y^4$ as the product of two quadratic polynomials with integer coefficients.",
+    "image": null,
+    "choices": null,
+    "answer": "$(x^2+2xy+2y^2)(x^2-2xy+2y^2)$",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Sophie Germain identity",
+        "body": "Add and subtract $4x^2y^2$:\n$$x^4+4y^4 = x^4+4x^2y^2+4y^4-4x^2y^2 = (x^2+2y^2)^2-(2xy)^2 = (x^2+2xy+2y^2)(x^2-2xy+2y^2).$$\n\n**Answer: $(x^2+2xy+2y^2)(x^2-2xy+2y^2)$**"
+      },
+      {
+        "title": "Check by expanding",
+        "body": "Write the product as $(A+B)(A-B)$ with $A = x^2+2y^2$, $B = 2xy$: it equals $A^2 - B^2 = x^4 + 4x^2y^2 + 4y^4 - 4x^2y^2 = x^4+4y^4$.\n\n**Answer: $(x^2+2xy+2y^2)(x^2-2xy+2y^2)$**"
+      }
+    ],
+    "topics": [
+      "polynomials",
+      "algebra"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "nyciml-2010-11-fall-junior-11",
+    "bank": "nyciml",
+    "source": {
+      "contest": "NYCIML",
+      "paper": "Fall 2010 Junior",
+      "year": 2010,
+      "number": 11,
+      "url": "https://nyciml.org/wp-content/uploads/Junior-Contests-Fall-2010-1.pdf"
+    },
+    "grade": "9-10",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "In a set of three positive integers, the first is one-half the sum of the other two, and the second is one-third the sum of the other two. Compute the least possible sum of the three integers.",
+    "image": null,
+    "choices": null,
+    "answer": "12",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Solve the system",
+        "body": "Let the integers be $a, b, c$. Then $2a = b + c$ and $3b = a + c$. Subtracting, $c = 2a - b = 3b - a$, so $3a = 4b$. Hence $a = 4n$, $b = 3n$ for a positive integer $n$, and $c = 2a - b = 5n$. The sum is $12n$, least when $n = 1$.\n\n**Answer: 12**"
+      },
+      {
+        "title": "Fractions of the total",
+        "body": "Let $S = a+b+c$. Since $a$ is half of $b+c = S-a$, $a = \\frac{S}{3}$. Since $b$ is a third of $S-b$, $b = \\frac S4$. So $S$ is divisible by $3$ and $4$, hence by $12$; $S=12$ gives $(a,b,c)=(4,3,5)$, which works.\n\n**Answer: 12**"
+      }
+    ],
+    "topics": [
+      "algebra",
+      "number-theory"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "nyciml-2010-11-fall-junior-12",
+    "bank": "nyciml",
+    "source": {
+      "contest": "NYCIML",
+      "paper": "Fall 2010 Junior",
+      "year": 2010,
+      "number": 12,
+      "url": "https://nyciml.org/wp-content/uploads/Junior-Contests-Fall-2010-1.pdf"
+    },
+    "grade": "9-10",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Compute the number of five-letter combinations that can be made using the letters $A$, $B$ and / or $C$. (Changing the order of the letters in a combination does not yield a different combination. For example, the combinations $AABBC$, $ABCBA$, and $CBAAB$ are considered the same.)",
+    "image": null,
+    "choices": null,
+    "answer": "21",
+    "acceptedAnswers": null,
+    "answerUnit": "combinations",
+    "solutions": [
+      {
+        "title": "Stars and bars",
+        "body": "A combination is determined by the numbers $a, b, c \\ge 0$ of A's, B's and C's, with $a+b+c=5$. Arrange five tally marks and two dividers in a row: the marks before the first divider count A's, between the dividers B's, after the second C's. There are $\\binom{7}{2} = 21$ such arrangements.\n\n**Answer: 21**"
+      },
+      {
+        "title": "Count by number of A's",
+        "body": "If there are $a$ A's, the remaining $5-a$ letters are split between B and C in $6-a$ ways. Summing over $a = 0,\\dots,5$: $6+5+4+3+2+1 = 21$.\n\n**Answer: 21**"
+      }
+    ],
+    "topics": [
+      "counting"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "nyciml-2010-11-fall-junior-13",
+    "bank": "nyciml",
+    "source": {
+      "contest": "NYCIML",
+      "paper": "Fall 2010 Junior",
+      "year": 2010,
+      "number": 13,
+      "url": "https://nyciml.org/wp-content/uploads/Junior-Contests-Fall-2010-1.pdf"
+    },
+    "grade": "9-10",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "In the game of shmess, the winner gets $4$ points and the loser gets $1$ point. In the event of a draw, both players get $2$ points. Two people play a series of $10$ games of shmess, at the end of which they have a total of $46$ points. Compute the number of draws there were.",
+    "image": null,
+    "choices": null,
+    "answer": "4",
+    "acceptedAnswers": null,
+    "answerUnit": "draws",
+    "solutions": [
+      {
+        "title": "Set up a system",
+        "body": "A decisive game gives $5$ points in total and a draw gives $4$. With $n$ decisive games and $d$ draws, $n + d = 10$ and $5n + 4d = 46$. Subtracting $4$ times the first equation, $n = 6$, so $d = 4$.\n\n**Answer: 4**"
+      },
+      {
+        "title": "Compare with all decisive",
+        "body": "If all $10$ games were decisive there would be $50$ points. Each draw lowers the total by $1$, and the total is $46$, so there were $4$ draws.\n\n**Answer: 4**"
+      }
+    ],
+    "topics": [
+      "algebra",
+      "logic"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "nyciml-2010-11-fall-junior-14",
+    "bank": "nyciml",
+    "source": {
+      "contest": "NYCIML",
+      "paper": "Fall 2010 Junior",
+      "year": 2010,
+      "number": 14,
+      "url": "https://nyciml.org/wp-content/uploads/Junior-Contests-Fall-2010-1.pdf"
+    },
+    "grade": "9-10",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "In a triangle, the sum of the reciprocals of the lengths of the altitudes is $9/10$. Compute the ratio of the area of the triangle to its perimeter.",
+    "image": null,
+    "choices": null,
+    "answer": "5/9",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Express altitudes through the area",
+        "body": "Let $K$ be the area and $a, b, c$ the sides, with altitudes $h_a, h_b, h_c$. Then $K = \\frac12 a h_a$, so $\\frac1{h_a} = \\frac{a}{2K}$, and similarly for the others. Adding,\n$$\\frac1{h_a}+\\frac1{h_b}+\\frac1{h_c} = \\frac{a+b+c}{2K} = \\frac{p}{2K}.$$\nSo $\\frac{9}{10} = \\frac{p}{2K}$, giving $\\frac{K}{p} = \\frac{10}{18} = \\frac59$.\n\n**Answer: $\\frac59$**"
+      },
+      {
+        "title": "Inradius view",
+        "body": "$K = rs$ where $s = p/2$, so $K/p = r/2$. From the first method $\\sum \\frac1{h} = \\frac{p}{2K} = \\frac1r$, so $r = \\frac{10}{9}$ and $K/p = \\frac{5}{9}$.\n\n**Answer: $\\frac59$**"
+      }
+    ],
+    "topics": [
+      "geometry"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "nyciml-2010-11-fall-junior-15",
+    "bank": "nyciml",
+    "source": {
+      "contest": "NYCIML",
+      "paper": "Fall 2010 Junior",
+      "year": 2010,
+      "number": 15,
+      "url": "https://nyciml.org/wp-content/uploads/Junior-Contests-Fall-2010-1.pdf"
+    },
+    "grade": "9-10",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Compute the base of numeration in which $25\\cdot14 = 317$.",
+    "image": null,
+    "choices": null,
+    "answer": "13",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Write the equation in base $b$",
+        "body": "In base $b$: $(2b+5)(b+4) = 3b^2 + b + 7$, so $2b^2 + 13b + 20 = 3b^2 + b + 7$, i.e. $b^2 - 12b - 13 = 0$. This factors as $(b-13)(b+1) = 0$, so $b = 13$.\n\n**Answer: 13**"
+      },
+      {
+        "title": "Units digit check",
+        "body": "The base exceeds $7$. Last digits: $5\\cdot4 = 20$ must leave units digit $7$, so $b$ divides $20 - 7 = 13$, giving $b = 13$. Check: $25_{13}=31$, $14_{13}=17$, $31\\cdot17 = 527 = 3\\cdot169 + 13 + 7 = 317_{13}$.\n\n**Answer: 13**"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "algebra"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "nyciml-2010-11-fall-junior-16",
+    "bank": "nyciml",
+    "source": {
+      "contest": "NYCIML",
+      "paper": "Fall 2010 Junior",
+      "year": 2010,
+      "number": 16,
+      "url": "https://nyciml.org/wp-content/uploads/Junior-Contests-Fall-2010-1.pdf"
+    },
+    "grade": "9-10",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "Compute the number of sets of four integers, not necessarily distinct, for which the product of the elements is $6$.",
+    "image": null,
+    "choices": null,
+    "answer": "10",
+    "acceptedAnswers": null,
+    "answerUnit": "sets",
+    "solutions": [
+      {
+        "title": "Absolute values, then signs",
+        "body": "The absolute values multiply to $6$, so they are $\\{1,1,1,6\\}$ or $\\{1,1,2,3\\}$. The product is positive, so there are $0$, $2$ or $4$ negative entries.\n\n- $\\{1,1,1,6\\}$: with two negatives, either two $1$'s are negative or a $1$ and the $6$ are: $2$ ways; plus $0$ or $4$ negatives: $4$ sets.\n- $\\{1,1,2,3\\}$: two negatives can be $\\{1,1\\}, \\{1,2\\}, \\{1,3\\}, \\{2,3\\}$: $4$ ways; plus $0$ or $4$ negatives: $6$ sets.\n\nTotal $4 + 6 = 10$.\n\n**Answer: 10**"
+      },
+      {
+        "title": "List them",
+        "body": "$\\{1,1,1,6\\}$, $\\{-1,-1,1,6\\}$, $\\{-1,1,1,-6\\}$, $\\{-1,-1,-1,-6\\}$, $\\{1,1,2,3\\}$, $\\{-1,-1,2,3\\}$, $\\{-1,1,-2,3\\}$, $\\{-1,1,2,-3\\}$, $\\{1,1,-2,-3\\}$, $\\{-1,-1,-2,-3\\}$: ten sets.\n\n**Answer: 10**"
+      }
+    ],
+    "topics": [
+      "counting",
+      "number-theory"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "nyciml-2010-11-fall-junior-17",
+    "bank": "nyciml",
+    "source": {
+      "contest": "NYCIML",
+      "paper": "Fall 2010 Junior",
+      "year": 2010,
+      "number": 17,
+      "url": "https://nyciml.org/wp-content/uploads/Junior-Contests-Fall-2010-1.pdf"
+    },
+    "grade": "9-10",
+    "points": null,
+    "timeMinutes": null,
+    "type": "numeric",
+    "prompt": "An L-shaped trionimo consists of three unit squares, one of which shares a side with each of two others, and that are not in a row, as shown in the diagram. Compute the number of positions in which an L-shaped trionimo can be placed on a three-by-three grid, consisting of nine unit squares, so that each square of the trionimo coincides with a square of the grid.",
+    "image": "qimages/nyciml/2010-11-fall-junior/q17.webp",
+    "choices": null,
+    "answer": "16",
+    "acceptedAnswers": null,
+    "answerUnit": "positions",
+    "solutions": [
+      {
+        "title": "Count by 2-by-2 blocks",
+        "body": "Every L-tromino fills three of the four squares of a $2\\times2$ block, and that block is unique. A $3\\times3$ grid contains $4$ such blocks, and each block holds $4$ L-trominoes (leave out any one of its squares). Total $4\\cdot 4 = 16$.\n\n**Answer: 16**"
+      },
+      {
+        "title": "Count by the corner square",
+        "body": "The corner square of the L (the one touching both others) is any of the $9$ squares, and its two arms point in two perpendicular directions. A corner square of the grid allows $1$ orientation, an edge-middle square $2$, and the center $4$: $4\\cdot1 + 4\\cdot2 + 1\\cdot4 = 16$.\n\n**Answer: 16**"
+      }
+    ],
+    "topics": [
+      "counting",
+      "spatial"
+    ],
+    "difficulty": 1,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "nyciml-2010-11-fall-junior-18",
+    "bank": "nyciml",
+    "source": {
+      "contest": "NYCIML",
+      "paper": "Fall 2010 Junior",
+      "year": 2010,
+      "number": 18,
+      "url": "https://nyciml.org/wp-content/uploads/Junior-Contests-Fall-2010-1.pdf"
+    },
+    "grade": "9-10",
+    "points": null,
+    "timeMinutes": null,
+    "type": "text",
+    "prompt": "Express $7^4 + 4^7$ as a product of prime factors.",
+    "image": null,
+    "choices": null,
+    "answer": "5*13*17^2",
+    "acceptedAnswers": [
+      "5*13*17*17",
+      "5·13·17^2",
+      "5*13*289",
+      "5 x 13 x 17^2",
+      "17^2*13*5",
+      "13*5*17^2"
+    ],
+    "answerUnit": null,
+    "answerDisplay": "$5\\cdot13\\cdot17^2$",
+    "solutions": [
+      {
+        "title": "Sophie Germain identity",
+        "body": "Write $4^7 = 4\\cdot 4^6 = 4\\cdot(2^3)^4 = 4\\cdot 8^4$. With $a^4 + 4b^4 = (a^2+2ab+2b^2)(a^2-2ab+2b^2)$, $a = 7$, $b = 8$:\n$$7^4 + 4\\cdot8^4 = (49+112+128)(49-112+128) = 289\\cdot 65 = 17^2\\cdot5\\cdot13.$$\n\n**Answer: $5\\cdot13\\cdot17^2$**"
+      },
+      {
+        "title": "Compute and divide",
+        "body": "$7^4 + 4^7 = 2401 + 16384 = 18785 = 5\\cdot 3757$, and $3757 = 13\\cdot 289 = 13\\cdot17^2$.\n\n**Answer: $5\\cdot13\\cdot17^2$**"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "algebra"
+    ],
+    "difficulty": 2,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

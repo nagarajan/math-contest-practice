@@ -1,0 +1,117 @@
+[
+  {
+    "id": "cmimc-2023-tcs-01",
+    "bank": "cmimc",
+    "source": {
+      "contest": "CMIMC",
+      "paper": "Theoretical Computer Science Round",
+      "year": 2023,
+      "number": 1,
+      "url": "https://cmimc.com/archive/cmimc2023/2023_TCS.pdf"
+    },
+    "grade": "9-12",
+    "points": 100,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "**Carnegie Corporation Promotion.** Carnegie Corporation is trying to promote a new department director from its employees. Carnegie Corporation has $n$ employees each with some unknown real-valued score and wants to pick the $M$-th highest scoring employee to be the new department director. The corporation has a magical machine that, once a day, can be used to compare two employees to see which one has a higher score. Unfortunately, this machine has a magical consequence: after every $k$ uses of this machine, if a new department director has not been chosen by the end of the day, one random employee is fired and a new employee (who has not necessarily the same score) is hired. Assume no two employees have equal scores and scores don't change over time.\n\nMachines with a higher constant of $k$ will be more expensive, so management wants to minimize the value of $k$. Devise an algorithm which uses the minimum possible $k$ guaranteeing that, given any $1\\le M\\le n$, we can promote the $M$-th highest scoring employee as the new department director in finitely many days.\n\n(Scoring: 10 pts for any finite $k$; 20 pts for $k\\le cn\\log n$; 40 pts for $k\\le cn$ with $c>1$; 70 pts for $k\\le n$; 85 pts for $k\\le n-\\lfloor\\sqrt{n/2}-\\frac12\\rfloor+1$; 100 pts for $k\\le n-\\lfloor\\sqrt n-\\frac12\\rfloor+1$. Full credit requires proving that the algorithm always succeeds.)",
+    "image": null,
+    "choices": null,
+    "answer": "$k=\\lceil\\log_2(n-2)\\rceil+\\lceil\\log_2(n-1)\\rceil\\ \\le\\ n-\\lfloor\\sqrt n-\\tfrac12\\rfloor+1$ suffices (sorted-chain insertion algorithm; for $n\\le5$, $k=n$ with the tournament-graph argument).",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Tournament graph, $k=n$ (70 pts)",
+        "body": "Record every comparison as an edge between the two employees (a tournament on the current employees). In a cycle of $k=n$ comparisons, always compare a pair that has not been compared yet. Firing an employee deletes at most $n-1$ edges (those at that vertex), while the cycle added $n$ new edges. So the number of edges grows by at least $1$ per cycle (unless the graph becomes complete within the cycle, in which case we stop). Since there are at most $\\binom n2$ edges, at some moment all pairs have been compared. Then the order of all employees is known, and the $M$-th highest is the one with exactly $M-1$ employees above it. This works for any $n$ with $k=n$, and for $n\\le5$ the target bound $n-\\lfloor\\sqrt n-\\frac12\\rfloor+1$ is $3,4,5$ for $n=3,4,5$, so $k=n$ is enough there ($n=2$ needs only one comparison)."
+      },
+      {
+        "title": "Sorted chain with binary insertion, $k=\\lceil\\log_2(n-2)\\rceil+\\lceil\\log_2(n-1)\\rceil$ (100 pts, $n\\ge6$)",
+        "body": "Keep a *chain* $s_1>s_2>\\dots>s_c$ of employees whose total order is known; the other $u=n-c$ employees are unknown. A *cycle* is the $k$ machine uses between two firings (if we finish early, spend the remaining uses on dummy comparisons so the cycles stay aligned with the firings). Inserting a new employee into a chain of size $c$ by binary search costs at most $\\lceil\\log_2(c+1)\\rceil$ comparisons.\n\n- **If $c\\le n-3$ at the start of a cycle:** insert two unknown employees, costing at most $\\lceil\\log_2(n-2)\\rceil+\\lceil\\log_2(n-1)\\rceil=k$ comparisons. The chain now has $c+2$ elements. The firing removes at most one chain member and the rest remain correctly ordered, so the chain size increases by at least $1$ per cycle.\n- **If $c\\ge n-2$ (so $u\\le2$):** finish within the cycle. The $M$-th highest is among $s_{M-2},s_{M-1},s_M$ and the unknown employees. By binary search compare each unknown employee with $s_{M-2},s_{M-1},s_M$ to locate it in one of at most four gaps (at most $2$ comparisons each), and if two unknowns fall in the same gap compare them ($1$ more). This is at most $5\\le k$ comparisons (for $n\\ge6$, $k\\ge5$), and then the $M$-th highest is determined, since the number of employees above the window is known.\n\nThe chain size rises by at least $1$ each cycle until it reaches $n-2$, so the process ends after finitely many days (the chain starts empty). Finally, $\\lceil\\log_2(n-2)\\rceil+\\lceil\\log_2(n-1)\\rceil\\le n-\\lfloor\\sqrt n-\\frac12\\rfloor+1$ for all $n\\ge3$ (checked for $n<10^5$; for larger $n$ the left side is below $2\\log_2n+2$, far smaller than $n-\\sqrt n$), so this meets the 100-point bound."
+      }
+    ],
+    "topics": [
+      "sequences-series",
+      "logic"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "cmimc-2023-tcs-02",
+    "bank": "cmimc",
+    "source": {
+      "contest": "CMIMC",
+      "paper": "Theoretical Computer Science Round",
+      "year": 2023,
+      "number": 2,
+      "url": "https://cmimc.com/archive/cmimc2023/2023_TCS.pdf"
+    },
+    "grade": "9-12",
+    "points": 100,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "**Scottybeard's Treasure.** After years at sail, you and your crew have found the island that houses the great treasure of Scottybeard, the greatest pirate to ever sail the high seas. The island takes the shape of a unit square, and the treasure (which we treat as a single point) could be buried under any point on the island.\n\nTo assist you in finding his treasure, Scotty has left a peculiar instrument. To use this instrument, you may draw any directed line (possibly one that never hits the island!), and the instrument will tell you whether the treasure lies to the “left” or the “right” of the line. (“Left” or “right” is taken with respect to an observer walking along the line in its designated direction. There is also a probability zero chance the treasure is precisely on the line; let's say the instrument reports “left” in this case.)\n\nHowever, Scotty also left a trap! If the instrument ever reports “left” three times in a row or “right” three times in a row, the island will suddenly sink into the sea, submerging the treasure forever and drowning you and your crew! You want to avoid this at all costs.\n\nTo minimize the amount of energy spent digging, you would like to narrow down the set of possible locations of the treasure to be as small as possible. However, Scotty left one last trick; you can only use the instrument 12 times before it breaks!\n\nDevise an algorithm to use the instrument no more than 12 times that can never result in the island sinking and narrows the worst-case space of possible locations of the treasure to have as small an area as possible.\n\n(Scoring: 100 points for the smallest possible worst-case area $K_{\\min}$ with a proof that it is optimal.)",
+    "image": null,
+    "choices": null,
+    "answer": "The optimal worst-case area is $K_{\\min}=\\frac{1}{466}$: split the island into $466$ equal vertical strips labelled by the $466$ admissible reading sequences, and bisect adaptively with forcing lines; no strategy can do better.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "Lower bound: $K\\ge\\frac1{466}$",
+        "body": "A strategy that never sinks the island can only ever see reading sequences with no three equal letters in a row (call them *good* strings). Each final possible region corresponds to one reading sequence, and these regions partition the island, so the worst-case area is at least $\\frac1{\\#\\text{good strings of length }12}$.\n\nCount good strings of length $n$. Let $A_n$ count those ending in exactly one copy of the last letter and $B_n$ those ending in two equal letters. Then $A_{n+1}=A_n+B_n$ (append the opposite letter) and $B_{n+1}=A_n$ (repeat the last letter of a string of type $A$), with $A_1=2$, $B_1=0$. Hence $A_n=2F_n$, $B_n=2F_{n-1}$ and the number of good strings is $A_n+B_n=2F_{n+1}$, where $F_k$ are the Fibonacci numbers. For $n=12$ this is $2F_{13}=2\\cdot233=466$. So the worst-case area is at least $\\frac1{466}$."
+      },
+      {
+        "title": "Strategy achieving $\\frac1{466}$",
+        "body": "Cut the island into $466$ congruent vertical rectangles, and assign the $466$ good strings of length $12$, in lexicographic order, to the rectangles from left to right. All lines are drawn pointing straight up (so “left” means west of the line).\n\nAt each of the $12$ steps:\n\n- If the previous two readings were equal (say both “left”), draw a line just off the left edge of the island: the whole island is to its right, so the reading is forced to be “right” and the island is safe. Nothing new is learned.\n- Otherwise, the rectangles whose strings agree with the readings so far form a contiguous block; those whose next letter is L come first, then those whose next letter is R. Draw the line along the boundary between these two parts. Either reading keeps us consistent with the strings, and since the previous two readings were not both equal, neither reading can create three equal readings in a row.\n\nAfter $12$ steps exactly one string agrees with the readings, so the treasure lies in one rectangle of area $\\frac1{466}$. Together with the lower bound, $K_{\\min}=\\frac1{466}$.\n\n(For comparison: always bisecting and wasting a use when forced gives at most $5$ wasted uses, i.e. area $2^{-7}=\\frac1{128}$, which is worth $30$ points; $K=\\frac14$ from two bisections is worth $10$.)"
+      }
+    ],
+    "topics": [
+      "logic",
+      "counting",
+      "sequences-series"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  },
+  {
+    "id": "cmimc-2023-tcs-03",
+    "bank": "cmimc",
+    "source": {
+      "contest": "CMIMC",
+      "paper": "Theoretical Computer Science Round",
+      "year": 2023,
+      "number": 3,
+      "url": "https://cmimc.com/archive/cmimc2023/2023_TCS.pdf"
+    },
+    "grade": "9-12",
+    "points": 100,
+    "timeMinutes": null,
+    "type": "self",
+    "prompt": "**Perfect Shuffle.** You are given a deck of $n\\cdot m$ different cards where $n$ and $m$ are fixed numbers both between $10^{99}$ and $10^{100}$. You perform $m$-perfect shuffle for some times. In a single $m$-perfect shuffle, you divide the deck into $m$ piles with $n$ consecutive cards in each pile. You take one card from each pile, in order of the piles, for $n$ times to form the new deck. (The $m$-perfect shuffle is deterministic.)\n\nFor example, if the cards are labeled $12345678$ where $n=4$ and $m=2$, you divide the deck into $1234$ and $5678$, and after one $2$-perfect shuffle you get $15263748$. In another example, if the cards are labeled $123456789$ where $n=3$ and $m=3$, you divide the deck into $123$, $456$, and $789$, and after one $3$-perfect shuffle you get $147258369$.\n\nFind an algorithm that, in at most $k$ steps, outputs the smallest positive number of $m$-perfect shuffle after which the deck is exactly the same as the original deck. In each step, you can do one arithmetic operation in $\\{+,-,*,/,\\bmod\\}$, do one comparison, break out of a loop, or store one number to a specific location of an array. You can use the following precomputed numbers of steps in your solution: checking if $a$ divides $b$ for any two integers $a$ and $b$ takes $2$ steps (compute $b\\bmod a$, compare with $0$); a loop over $k$ iterations takes $k$ steps; simulating one $m$-perfect shuffle takes $6nm$ steps.\n\n(Scoring: $100$ pts for $k=10^{101}$; $98$ pts for $10^{102}$; $95$ pts for $10^{120}$; $80$ pts for $10^{201}$; $70$ pts for $10^{202}$; $50$ pts for $10^{240}$; and so on down to $1$ pt.)",
+    "image": null,
+    "choices": null,
+    "answer": "The required number of shuffles is the multiplicative order of $n$ (equivalently of $m$) modulo $nm-1$; it can be computed in fewer than $10^{101}$ steps by trial-division factoring of $nm-1$ and of $\\varphi(nm-1)$.",
+    "acceptedAnswers": null,
+    "answerUnit": null,
+    "solutions": [
+      {
+        "title": "The answer is $\\operatorname{ord}_{nm-1}(n)$",
+        "body": "Number the positions $0,1,\\dots,nm-1$. A card at position $p=jn+i$ (pile $j$, offset $i$, with $0\\le i<n$, $0\\le j<m$) moves to position $im+j$. Then $m\\cdot p=jnm+im\\equiv j+im\\pmod{nm-1}$, so the shuffle sends $p\\mapsto mp\\pmod{nm-1}$ for $0\\le p<nm-1$, while the first and last cards ($p=0$ and $p=nm-1$) never move.\n\nSo after $t$ shuffles card $p$ is at $m^tp$ mod $nm-1$. The deck returns to the original order exactly when $m^tp\\equiv p$ for all $p$; taking $p=1$ gives $m^t\\equiv1\\pmod{nm-1}$, and conversely this suffices. Since $mn\\equiv1\\pmod{nm-1}$, $m$ and $n$ are inverses and have the same order. So the answer is the order of $n$ modulo $nm-1$ (check with $n=4$, $m=2$: the order of $2$ mod $7$ is $3$)."
+      },
+      {
+        "title": "Fast algorithm: fewer than $10^{101}$ steps",
+        "body": "Let $N=nm-1$ (about $10^{198}$ to $10^{200}$). Because $\\gcd(n,N)=1$, the order divides $\\varphi(N)$ (Euler).\n\n1. Factor $N$ by trial division: for $d=2,3,\\dots$ while $d^2\\le$ the remaining cofactor, test divisibility (about $5$ steps per $d$, including the loop increment and the stopping comparison) and divide out every factor found; the final cofactor $>1$ is prime. At most about $\\sqrt N\\le10^{100}$ values of $d$, i.e. at most $5\\cdot10^{100}$ steps. Then $\\varphi(N)=\\prod p^{a-1}(p-1)$ is computed in $O(\\log N)$ steps.\n2. $\\varphi(N)$ is even; factor $\\varphi(N)/2$ the same way, in at most $5\\sqrt{\\varphi(N)/2}\\le5\\cdot\\frac{10^{100}}{\\sqrt2}\\approx3.54\\cdot10^{100}$ steps, and add the prime $2$ back.\n3. Start with $t=\\varphi(N)$. For each prime $p$ dividing $\\varphi(N)$, while $p\\mid t$ and $n^{t/p}\\equiv1\\pmod N$ (exponentiation by squaring, $O(\\log N)$ steps), replace $t$ by $t/p$. The final $t$ is the order. This costs only $O(\\log^2N)$ steps (a few $\\times10^{5}$).\n\nTotal at most $(5+\\frac{5\\sqrt2}2)\\cdot10^{100}+O(10^6)\\approx8.54\\cdot10^{100}<10^{101}$ steps, which earns the full $100$ points. (Simply looping $i=1,2,\\dots$ until $n^i\\equiv1$ costs about $4N<10^{201}$ steps, worth $80$ points.)"
+      }
+    ],
+    "topics": [
+      "number-theory",
+      "abstract-algebra"
+    ],
+    "difficulty": 3,
+    "duplicateOf": null,
+    "reviewNote": null
+  }
+]

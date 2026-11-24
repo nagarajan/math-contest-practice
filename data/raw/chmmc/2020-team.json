@@ -1,0 +1,341 @@
+[
+ {
+  "id": "chmmc-2020-team-01",
+  "bank": "chmmc",
+  "source": {
+   "contest": "CHMMC",
+   "paper": "2020-2021 Team Round",
+   "year": 2020,
+   "number": 1,
+   "url": "http://chmmc.caltech.edu/archives/2020/TEAM_FINAL.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "A unit circle is centered at $(0,0)$ on the $(x,y)$ plane. A regular hexagon passing through $(1,0)$ is inscribed in the circle. Two points are randomly selected from the interior of the circle and horizontal lines are drawn through them, dividing the hexagon into at most three pieces. The probability that each piece contains exactly two of the hexagon's original vertices can be written as\n$$\\frac{2\\left(\\frac{m\\pi}{n}+\\frac{\\sqrt p}{q}\\right)^2}{\\pi^2}$$\nfor positive integers $m,n,p$, and $q$ such that $m$ and $n$ are relatively prime and $p$ is squarefree. Find $m+n+p+q$.",
+  "image": null,
+  "choices": null,
+  "answer": "11",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Strips of the disc",
+    "body": "The hexagon has vertices at heights $\\pm\\frac{\\sqrt3}2$ (two each) and $0$ (two). Each of the three pieces has exactly two vertices iff one line lies in $\\left(0,\\frac{\\sqrt3}2\\right)$ and the other in $\\left(-\\frac{\\sqrt3}2,0\\right)$.\n\nThe part of the unit disc with $0<y<\\frac{\\sqrt3}{2}$ has area: half the disc, $\\frac\\pi2$, minus the segment above $y=\\frac{\\sqrt3}2$ of area $\\frac\\pi6-\\frac{\\sqrt3}4$, which is $\\frac\\pi3+\\frac{\\sqrt3}4$. By symmetry the same holds for $-\\frac{\\sqrt3}2<y<0$. The two points are in different strips in $2$ ways, so\n$$P=2\\left(\\frac{\\frac\\pi3+\\frac{\\sqrt3}4}{\\pi}\\right)^2=\\frac{2\\left(\\frac{\\pi}{3}+\\frac{\\sqrt3}4\\right)^2}{\\pi^2}.$$\nSo $m=1,n=3,p=3,q=4$ and $m+n+p+q=11$.\n\n**Answer: 11**"
+   }
+  ],
+  "topics": [
+   "probability",
+   "geometry"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "chmmc-2020-team-02",
+  "bank": "chmmc",
+  "source": {
+   "contest": "CHMMC",
+   "paper": "2020-2021 Team Round",
+   "year": 2020,
+   "number": 2,
+   "url": "http://chmmc.caltech.edu/archives/2020/TEAM_FINAL.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Find the smallest positive integer $k$ such that there is exactly one prime number of the form $kx+60$ for the integers $0\\le x\\le10$.",
+  "image": null,
+  "choices": null,
+  "answer": "17",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Test candidates",
+    "body": "Let $d=\\gcd(k,60)$. If $d>1$, then $d$ divides every $kx+60$, so every value is composite unless it equals $d$ itself, which never happens (the values are at least $60$). So $\\gcd(k,60)=1$. Similarly, if $\\gcd(x,60)>1$ then $kx+60$ is divisible by that common factor and is composite; for $0\\le x\\le10$ only $x=1$ and $x=7$ are coprime to $60$.\n\nTest $k=1,7,11,13,17,\\dots$ (coprime to $60$):\n- $k=1$: $61,67$ both prime. $k=7$: $67,109$ both prime. $k=11$: $71,137$ both prime. $k=13$: $73,151$ both prime.\n- $k=17$: $17+60=77=7\\cdot11$ is composite, $119+60=179$ is prime. Exactly one prime.\n\n**Answer: 17**"
+   }
+  ],
+  "topics": [
+   "number-theory"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "chmmc-2020-team-03",
+  "bank": "chmmc",
+  "source": {
+   "contest": "CHMMC",
+   "paper": "2020-2021 Team Round",
+   "year": 2020,
+   "number": 3,
+   "url": "http://chmmc.caltech.edu/archives/2020/TEAM_FINAL.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "For any nonnegative integer $n$, let $S(n)$ be the sum of the digits of $n$. Let $K$ be the number of nonnegative integers $n\\le10^{10}$ that satisfy the equation $$S(n)=\\big(S(S(n))\\big)^2.$$ Find the remainder when $K$ is divided by $1000$.",
+  "image": null,
+  "choices": null,
+  "answer": "632",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Possible digit sums",
+    "body": "For $n\\le10^{10}$, $S(n)\\le90$. We need $S(n)=s$ with $s=S(s)^2$, and the only such $s\\le90$ are $0,1,81$ ($S(0)^2=0$, $S(1)^2=1$, $S(81)^2=81$; other squares $4,9,16,25,36,49,64$ fail).\n\n- $s=0$: $n=0$ ($1$ number).\n- $s=1$: $n=10^k$ for $k=0,\\dots,10$ ($11$ numbers).\n- $s=81$: $n<10^{10}$ has at most ten digits, each at most $9$, summing to $81=90-9$. Let $9-d_i$ be the deficit of each digit; the deficits are nonnegative integers summing to $9$ over $10$ positions: $\\binom{18}{9}=48620$ ways.\n\nTotal $K=1+11+48620=48632$ (confirmed by digit-sum counting), and $K\\bmod1000=632$.\n\n**Answer: 632**"
+   }
+  ],
+  "topics": [
+   "number-theory",
+   "counting"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "chmmc-2020-team-04",
+  "bank": "chmmc",
+  "source": {
+   "contest": "CHMMC",
+   "paper": "2020-2021 Team Round",
+   "year": 2020,
+   "number": 4,
+   "url": "http://chmmc.caltech.edu/archives/2020/TEAM_FINAL.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Select a random real number $m$ from the interval $\\left(\\frac16,1\\right)$. A track is in the shape of an equilateral triangle of side length $50$ feet. Ch, Hm, and Mc are all initially standing at one of the vertices of the track. At the time $t=0$, the three people simultaneously begin walking around the track in clockwise direction. Ch, Hm, and Mc walk at constant rates of $2$, $3$, and $4$ feet per second, respectively. Let $T$ be the set of all positive real numbers $t_0$ satisfying the following criterion:\n\n*If we choose a random number $t_1$ from the interval $[0,t_0]$, the probability that the three people are on the same side of the track at the time $t=t_1$ is precisely $m$.*\n\nThe probability that $|T|=17$ (i.e., $T$ has precisely $17$ elements) equals $\\frac pq$, where $p$ and $q$ are relatively prime positive integers. Find $p+q$.",
+  "image": null,
+  "choices": null,
+  "answer": "10585",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Times on the same side",
+    "body": "The three speeds have lcm pattern with period $150$ s. Checking each side, all three are on side $1$ exactly during $[150k,150k+\\frac{25}2]$, never all on side $2$, and all on side $3$ during $[150k-\\frac{25}2,150k]$ ($k\\ge1$).\n\nLet $g(t_0)$ be the fraction of $[0,t_0]$ spent together. It starts at $1$ on $[0,\\frac{25}2]$ and then decreases while they are apart, rises again during the next togetherness windows, and so on. In each window $\\big(150(i-1)+\\frac{25}2,\\,150i-\\frac{25}2\\big)$ the graph of $g$ crosses a given level $m$ exactly once when $m$ lies in the range the oscillation covers, and the local maxima of $g$ occur at the ends of the togetherness windows with values $\\frac{2i+1}{12i+1}$ (the first window of length $\\frac{25}2$ followed by windows of total $25$ per $150$ s).\n\nIf $m\\in\\left(\\frac{2(k+1)+1}{12(k+1)+1},\\frac{2k+1}{12k+1}\\right]$ then $|T|=2k+1$. For $|T|=17$ we need $k=8$: $m\\in\\left(\\frac{19}{109},\\frac{17}{97}\\right]$. Its length is $\\frac{17}{97}-\\frac{19}{109}=\\frac{10}{97\\cdot109}$, so\n$$P=\\frac{10}{97\\cdot109}\\Big/\\frac56=\\frac{12}{97\\cdot109}=\\frac{12}{10573},$$\nand $p+q=10585$. (A numerical computation of $|T|$ for sample values of $m$ confirms $|T|=17$ exactly on this interval.)\n\n**Answer: 10585**"
+   }
+  ],
+  "topics": [
+   "probability",
+   "rates"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "chmmc-2020-team-05",
+  "bank": "chmmc",
+  "source": {
+   "contest": "CHMMC",
+   "paper": "2020-2021 Team Round",
+   "year": 2020,
+   "number": 5,
+   "url": "http://chmmc.caltech.edu/archives/2020/TEAM_FINAL.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Thanos establishes $5$ settlements on a remote planet, randomly choosing one of them to stay in, and then he randomly builds a system of roads between these settlements such that each settlement has exactly one outgoing (unidirectional) road to another settlement. Afterwards, the Avengers randomly choose one of the $5$ settlements to teleport to. Then, they (the Avengers) must use the system of roads to travel from one settlement to another. The probability that the Avengers can find Thanos can be written as $\\frac mn$ for relatively prime positive integers $m$ and $n$. Find $m+n$.",
+  "image": null,
+  "choices": null,
+  "answer": "263",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Random walk without revisits",
+    "body": "With probability $\\frac15$ the Avengers land on Thanos's settlement. Otherwise they follow roads; each next road leads to a uniformly random one of the other $4$ settlements. The walk fails as soon as it revisits a settlement (then it cycles forever without Thanos), and succeeds when it reaches Thanos's settlement.\n\nOn step $n$ ($n=1,2,3,4$) there are $4$ equally likely destinations: Thanos's (success), $n-1$ previously visited ones (failure), and $4-n$ new ones (continue). So the chance of success on step $n$ is $\\frac14\\prod_{k=1}^{n-1}\\frac{4-k}{4}$, i.e. $\\frac14,\\frac3{16},\\frac{6}{64},\\frac{6}{256}$, summing to $\\frac{64+48+24+6}{256}=\\frac{71}{128}$. Then $\\frac45\\left(\\frac14+\\frac3{16}+\\frac3{32}+\\frac3{128}\\right)=\\frac45\\cdot\\frac{32+24+12+3}{128}=\\frac45\\cdot\\frac{71}{128}=\\frac{71}{160}$, so $P=\\frac{32}{160}+\\frac{71}{160}=\\frac{103}{160}$ (confirmed by exhaustive enumeration), and $m+n=263$.\n\n**Answer: 263**"
+   }
+  ],
+  "topics": [
+   "probability",
+   "graph-theory"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "chmmc-2020-team-06",
+  "bank": "chmmc",
+  "source": {
+   "contest": "CHMMC",
+   "paper": "2020-2021 Team Round",
+   "year": 2020,
+   "number": 6,
+   "url": "http://chmmc.caltech.edu/archives/2020/TEAM_FINAL.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Suppose that\n$$\\prod_{n=1}^{\\infty}\\left(\\frac{1+i\\cot\\left(\\frac{n\\pi}{2n+1}\\right)}{1-i\\cot\\left(\\frac{n\\pi}{2n+1}\\right)}\\right)^{\\frac1n}=\\left(\\frac pq\\right)^{i\\pi},$$\nwhere $p$ and $q$ are relatively prime positive integers. Find $p+q$.\n\n*Note: for a complex number $z=re^{i\\theta}$ for reals $r>0$, $0\\le\\theta<2\\pi$, we define $z^n=r^ne^{i\\theta n}$ for all positive reals $n$.*",
+  "image": null,
+  "choices": null,
+  "answer": "5",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Arguments of the factors",
+    "body": "The numerator and denominator are conjugates, so their quotient has modulus $1$ and argument $2\\arg\\left(1+i\\cot\\frac{n\\pi}{2n+1}\\right)=2\\left(\\frac\\pi2-\\frac{n\\pi}{2n+1}\\right)=\\frac{\\pi}{2n+1}$ (the angle whose tangent is $\\cot\\frac{n\\pi}{2n+1}$ is $\\frac\\pi2-\\frac{n\\pi}{2n+1}=\\frac{\\pi}{2(2n+1)}$).\n\nSo the $n$-th factor is $\\left(e^{i\\pi/(2n+1)}\\right)^{1/n}=e^{i\\pi/(n(2n+1))}$ and the product is $e^{i\\pi S}$ with\n$$S=\\sum_{n\\ge1}\\frac1{n(2n+1)}=\\sum\\left(\\frac2{2n}-\\frac2{2n+1}\\right)=2\\left(\\frac12-\\frac13+\\frac14-\\frac15+\\cdots\\right)=2(1-\\ln2).$$\nThus the product is $e^{2\\pi i-2i\\pi\\ln 2}=e^{-2\\pi i\\ln2}=\\left(\\tfrac14\\right)^{i\\pi}$ since $\\left(\\frac14\\right)^{i\\pi}=e^{i\\pi\\ln\\frac14}=e^{-2i\\pi\\ln2}$. So $\\frac pq=\\frac14$ and $p+q=5$.\n\n**Answer: 5**"
+   }
+  ],
+  "topics": [
+   "complex-numbers",
+   "sequences-series"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "chmmc-2020-team-07",
+  "bank": "chmmc",
+  "source": {
+   "contest": "CHMMC",
+   "paper": "2020-2021 Team Round",
+   "year": 2020,
+   "number": 7,
+   "url": "http://chmmc.caltech.edu/archives/2020/TEAM_FINAL.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "For any positive integer $n$, let $f(n)$ denote the sum of the positive integers $k\\le n$ such that $k$ and $n$ are relatively prime. Let $S$ be the sum of $\\frac1{f(m)}$ over all positive integers $m$ that are divisible by at least one of $2$, $3$, or $5$, and whose prime factors are only $2$, $3$, or $5$. Then $S=\\frac pq$ for relatively prime positive integers $p$ and $q$. Find $p+q$.",
+  "image": null,
+  "choices": null,
+  "answer": "7291",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Multiplicative sum",
+    "body": "For $n>1$, pairing $k$ with $n-k$ gives $f(n)=\\frac{n\\varphi(n)}2$. So $S=2\\sum_{m\\in I}\\frac1{m\\varphi(m)}$ where $I$ is the set of $m>1$ of the form $2^a3^b5^c$. Since $m\\varphi(m)$ is multiplicative,\n$$\\sum_{m\\ge1,\\ m=2^a3^b5^c}\\frac1{m\\varphi(m)}=Q(2)Q(3)Q(5),\\qquad Q(p)=1+\\sum_{k\\ge1}\\frac1{p^{2k-1}(p-1)}=1+\\frac{p}{(p-1)(p^2-1)},$$\n(using $p^k\\varphi(p^k)=p^{2k-1}(p-1)$). Removing $m=1$:\n$$S=2\\left(\\frac53\\cdot\\frac{19}{16}\\cdot\\frac{101}{96}-1\\right)=\\frac{9595}{4608}\\cdot2-2\\cdot1=\\frac{4987}{2304}.$$\nSince $4987$ is coprime to $2304=2^8\\cdot3^2$, $p+q=4987+2304=7291$ (a partial-sum computation agrees).\n\n**Answer: 7291**"
+   }
+  ],
+  "topics": [
+   "number-theory",
+   "sequences-series"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "chmmc-2020-team-08",
+  "bank": "chmmc",
+  "source": {
+   "contest": "CHMMC",
+   "paper": "2020-2021 Team Round",
+   "year": 2020,
+   "number": 8,
+   "url": "http://chmmc.caltech.edu/archives/2020/TEAM_FINAL.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "$15$ ladies and $30$ gentlemen attend a luxurious party. At the start of the party, each one of the ladies shakes hands with a random gentleman. At the end of the party, each of the ladies shakes hands with another random gentleman. A lady may shake hands with the same gentleman twice (first at the start and then at the end of the party), and no two ladies shake hands with the same gentleman at the same time.\n\nLet $m$ and $n$ be relatively prime positive integers such that $\\frac mn$ is the probability that the collection of ladies and gentlemen that shook hands at least once can be arranged in a single circle such that each lady is directly adjacent to someone if and only if she shook hands with that person. Find the remainder when $m$ is divided by $10000$.",
+  "image": null,
+  "choices": null,
+  "answer": "1401",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Graph of handshakes",
+    "body": "Draw the bipartite graph with an edge for every handshake. A circle as required exists iff no connected component is a closed cycle other than one cycle containing everybody, i.e. every lady is linked to a gentleman who shook hands only once (the components are paths that can be joined end to end through gentleman-gentleman neighbours), or all the people form one single alternating cycle.\n\n*All $15$ gentlemen of the first round are reused:* the second round is a permutation of those $15$ gentlemen; one circle works iff it is a $15$-cycle: probability $\\frac1{15}$ ( $\\frac{14!}{15!}$ ), and this case has probability $\\frac1{\\binom{30}{15}}$.\n\n*$k$ new gentlemen ($1\\le k\\le15$):* the probability that every lady is linked to one of the $k$ ladies who met a new gentleman equals $\\frac k{15}$, and the probability that exactly $k$ new gentlemen occur is $\\frac{\\binom{15}{k}\\binom{15}{15-k}}{\\binom{30}{15}}$.\n\nHence\n$$P=\\sum_{k=0}^{15}\\frac k{15}\\cdot\\frac{\\binom{15}k\\binom{15}{15-k}}{\\binom{30}{15}}+\\frac{1}{15\\binom{30}{15}}=\\frac12+\\frac1{15\\binom{30}{15}}=\\frac{\\frac{15}2\\binom{30}{15}+1}{15\\binom{30}{15}},$$\nusing $\\sum k\\binom{15}{k}^2=\\frac{15}2\\binom{30}{15}$. The numerator $m=\\frac{15}{2}\\binom{30}{15}+1=1163381401$ is coprime to the denominator, so $m\\bmod10000=1401$. (The formula $\\frac12+\\frac1{L\\binom{2L}L}$ was verified against exhaustive enumeration for $L=1,2$ ladies.)\n\n**Answer: 1401**"
+   }
+  ],
+  "topics": [
+   "probability",
+   "counting"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "chmmc-2020-team-09",
+  "bank": "chmmc",
+  "source": {
+   "contest": "CHMMC",
+   "paper": "2020-2021 Team Round",
+   "year": 2020,
+   "number": 9,
+   "url": "http://chmmc.caltech.edu/archives/2020/TEAM_FINAL.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Triangle $ABC$ has circumcenter $O$ and circumcircle $\\omega$. Let $A_\\omega$ be the point diametrically opposite $A$ on $\\omega$, and let $H$ be the foot of the altitude from $A$ onto $BC$. Let $H_B$ and $H_C$ be the reflections of $H$ over $B$ and $C$, respectively. Point $P$ is the intersection of line $A_\\omega B$ and the perpendicular of $BC$ at point $H_B$, and point $Q$ is the intersection of line $A_\\omega C$ and the perpendicular of $CB$ at point $H_C$. The circles $\\omega_1$ and $\\omega_2$ have the respective centers $P$ and $Q$ and respective radii $PA$ and $QA$. Suppose that $\\omega$, $\\omega_1$, and $\\omega_2$ intersect at another common point $X$. If $AO=\\frac{\\sqrt{105}}{5}$ and $AX=4$, then $|AB-CA|^2$ can be written as $m-n\\sqrt p$ for positive integers $m$ and $n$ and squarefree positive integer $p$. Find $m+n+p$.\n\n*Note: the reflection of a point $P$ over another point $Q\\ne P$ is the point $P'$ such that $Q$ is the midpoint of $P$ and $P'$.*",
+  "image": null,
+  "choices": null,
+  "answer": "44",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Homothety at A",
+    "body": "Since $AA_\\omega$ is a diameter, $AB\\perp PA_\\omega$ and $AC\\perp QA_\\omega$, so $B$ is the midpoint of the chord of $\\omega_1$ along $AB$ and $C$ the midpoint of the chord of $\\omega_2$ along $AC$. Apply the homothety at $A$ with ratio $\\frac12$: it sends $\\omega_1,\\omega_2$ to circles $\\gamma_1,\\gamma_2$ through $B$, $C$ respectively and through $Y$, the midpoint of $AX$. Since $P$ lies on the reflection of line $AH$ in $B$ (and similarly for $Q$), $\\gamma_1$ is tangent to $BC$ at $B$ and $\\gamma_2$ is tangent to $BC$ at $C$. Hence line $AY$ bisects $BC$ at a point $M$, and by power of a point $MB^2=MC^2=MY\\cdot MA$.\n\nFrom $MX\\cdot MA=MB^2=MY\\cdot MA$ we get $MX=MY=\\frac{AX}{4}=1$ so $MB=MC=\\sqrt3$ and $Y$ is the centroid. With $AO=\\frac{\\sqrt{105}}5$: $OY=\\sqrt{\\frac{105}{25}-4}=\\frac{\\sqrt5}5$, $OM=\\sqrt{\\frac15+1}=\\frac{\\sqrt{30}}5$. In right triangle $OYM$ (right angle at $Y$), the distance from $Y$ to $OM$ (the perpendicular bisector of $BC$) is $\\frac{OY\\cdot YM}{OM}=\\frac1{\\sqrt6}$, and the distance from $Y$ to $BC$ is $\\frac{YM^2}{OM}$-type projection equal to $\\sqrt{\\frac56}$. So $BY^2=\\left(\\sqrt3\\pm\\frac1{\\sqrt6}\\right)^2+\\frac56$ and $CY^2=\\left(\\sqrt3\\mp\\frac1{\\sqrt6}\\right)^2+\\frac56$.\n\nSimilar triangles $MBY\\sim MAB$ and $MCY\\sim MAC$ (ratio $\\frac1{\\sqrt3}$) give $AB=\\sqrt3\\,BY$, $AC=\\sqrt3\\,CY$, hence $|AB-CA|^2=3|BY-CY|^2=24-6\\sqrt{14}$. So $m+n+p=24+6+14=44$. (A numerical construction of the configuration gives $|AB-AC|^2\\approx1.5501=24-6\\sqrt{14}$.)\n\n**Answer: 44**"
+   }
+  ],
+  "topics": [
+   "geometry"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "chmmc-2020-team-10",
+  "bank": "chmmc",
+  "source": {
+   "contest": "CHMMC",
+   "paper": "2020-2021 Team Round",
+   "year": 2020,
+   "number": 10,
+   "url": "http://chmmc.caltech.edu/archives/2020/TEAM_FINAL.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Let $\\omega$ be a nonreal $47$th root of unity. Suppose that $\\mathcal S$ is the set of polynomials of degree at most $46$ and coefficients equal to either $0$ or $1$. Let $N$ be the number of polynomials $Q\\in\\mathcal S$ such that $$\\sum_{j=0}^{46}\\frac{Q(\\omega^{2j})-Q(\\omega^j)}{\\omega^{4j}+\\omega^{3j}+\\omega^{2j}+\\omega^j+1}=47.$$ The prime factorization of $N$ is $p_1^{\\alpha_1}p_2^{\\alpha_2}\\cdots p_s^{\\alpha_s}$ where $p_1,\\dots,p_s$ are distinct primes and $\\alpha_1,\\dots,\\alpha_s$ are positive integers. Compute $\\sum_{j=1}^sp_j\\alpha_j$.",
+  "image": null,
+  "choices": null,
+  "answer": "107",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Linearity in the coefficients",
+    "body": "The sum is linear in the coefficients: $\\sum_j\\frac{Q(\\omega^{2j})-Q(\\omega^j)}{D_j}=\\sum_{n:\\,a_n=1}Z(n)$ where $Z(n)=\\sum_{j=0}^{46}\\frac{\\omega^{2nj}-\\omega^{nj}}{D_j}$ and $D_j=\\omega^{4j}+\\dots+1$.\n\nWriting $\\frac1{D_j}=\\frac{\\omega^j-1}{\\omega^{5j}-1}$ and using $\\omega^{47j}=1$, one finds $\\sum_{j=0}^{46}\\frac{\\omega^{nj}}{D_j}$ equals $\\frac{141}5$ or $-\\frac{94}5$ depending on whether $5k+n\\equiv0\\pmod{47}$ has a solution with $0\\le k\\le18$. Taking differences gives $Z(n)\\in\\{47,0,-47\\}$; evaluating for $n=0,\\dots,46$ (also checked numerically): $Z(n)=47$ for exactly $9$ values of $n$, $Z(n)=-47$ for exactly $9$ values, and $Z(n)=0$ for the remaining $29$ values.\n\nSo we need subsets of the $47$ exponents whose $Z$-values sum to $47$: the $29$ zero-values are free ($2^{29}$ choices), and we need exactly one more $+47$ than $-47$: $\\sum_j\\binom9{j+1}\\binom9j=\\binom{18}{10}$ (Vandermonde). Hence\n$$N=2^{29}\\binom{18}{10}=2^{29}\\cdot43758=2^{30}\\cdot3^2\\cdot11\\cdot13\\cdot17,$$\nand $\\sum p_j\\alpha_j=2\\cdot30+3\\cdot2+11+13+17=107$.\n\n**Answer: 107**"
+   }
+  ],
+  "topics": [
+   "complex-numbers",
+   "counting",
+   "polynomials"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ }
+]

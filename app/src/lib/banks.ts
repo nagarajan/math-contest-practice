@@ -15,7 +15,7 @@ export interface BankIndex {
   chunks: ChunkMeta[]
 }
 
-type PaperRef = [string | null, Omit<Question['source'], 'number'>]
+type PaperRef = [string | null, Omit<Question['source'], 'number'>, string?]
 type StoredQuestion = Partial<Question> & { id: string; p: number; n?: number | string }
 interface StoredChunk {
   bank: BankId
@@ -26,7 +26,7 @@ interface StoredChunk {
 
 export function expandChunk(c: StoredChunk): Question[] {
   return c.questions.map(({ p, n, ...q }) => {
-    const [sol, source] = c.papers[p]
+    const [sol, source, cfile] = c.papers[p]
     return {
       points: null,
       timeMinutes: null,
@@ -45,6 +45,7 @@ export function expandChunk(c: StoredChunk): Question[] {
       grades: c.grades,
       source: { ...source, number: n ?? null },
       sol,
+      ...(cfile ? { cfile } : {}),
     } as Question
   })
 }
@@ -130,4 +131,36 @@ export function loadSolutions(q: Question): Promise<Solution[]> {
     solCache.set(q.sol, p)
   }
   return p.then((m) => m[q.id] ?? [])
+}
+
+type Content = Pick<Question, 'prompt' | 'image' | 'choices' | 'answer' | 'acceptedAnswers' | 'answerUnit' | 'answerDisplay' | 'reviewNote'>
+const contentCache = new Map<string, Promise<Record<string, Partial<Content>>>>()
+const fullCache = new Map<string, Question>()
+
+function loadContent(file: string) {
+  let p = contentCache.get(file)
+  if (!p) {
+    p = fetch(assetUrl(`banks/c/${file}.json`)).then((r) => {
+      if (!r.ok) throw new Error(`${file}: HTTP ${r.status}`)
+      return r.json()
+    })
+    p.catch(() => contentCache.delete(file))
+    contentCache.set(file, p)
+  }
+  return p
+}
+
+/** Questions with their text, choices and answers (loaded per paper on demand). */
+export async function withContent(qs: Question[]): Promise<Question[]> {
+  const files = [...new Set(qs.filter((q) => q.cfile && !fullCache.has(q.id)).map((q) => q.cfile!))]
+  const loaded = new Map(await Promise.all(files.map(async (f) => [f, await loadContent(f)] as const)))
+  return qs.map((q) => {
+    if (!q.cfile) return q
+    let full = fullCache.get(q.id)
+    if (!full || full.cfile !== q.cfile) {
+      full = { ...q, ...loaded.get(q.cfile)?.[q.id] }
+      fullCache.set(q.id, full)
+    }
+    return full
+  })
 }

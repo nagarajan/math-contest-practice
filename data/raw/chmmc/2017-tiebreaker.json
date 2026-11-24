@@ -1,0 +1,187 @@
+[
+ {
+  "id": "chmmc-2017-tiebreaker-01",
+  "bank": "chmmc",
+  "source": {
+   "contest": "CHMMC",
+   "paper": "2017 Tiebreaker Round",
+   "year": 2017,
+   "number": 1,
+   "url": "http://chmmc.caltech.edu/archives/2017/tiebreaker.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Let $a,b$ be the roots of the quadratic polynomial $Q(x)=x^2+x+1$, and let $u,v$ be the roots of the quadratic polynomial $R(x)=2x^2+7x+1$.\n\nSuppose $P$ is a cubic polynomial which satisfies the equations\n$$\\begin{cases}P(au)=Q(u)R(a)\\\\ P(bu)=Q(u)R(b)\\\\ P(av)=Q(v)R(a)\\\\ P(bv)=Q(v)R(b).\\end{cases}$$\nIf $M$ and $N$ are the coefficients of $x^2$ and $x$ respectively in $P(x)$, what is the value of $M+N$?",
+  "image": null,
+  "choices": null,
+  "answer": "-25",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Use $\\omega$",
+    "body": "Let $a=\\omega=e^{2\\pi i/3}$, $b=\\omega^2$. The cubics $f(x)=P(\\omega x)-Q(x)R(\\omega)$ and $g(x)=P(\\omega^2x)-Q(x)R(\\omega^2)$ both have leading coefficient equal to that of $P$ (as $\\omega^3=1$) and both vanish at $x=u,v$. So $h=f-g$ has degree at most $2$ and roots $u,v$: $h=kR$. At $x=0$: $h(0)=R(\\omega^2)-R(\\omega)=k R(0)=k$. Hence $P(\\omega x)-P(\\omega^2x)=\\big(R(\\omega)-R(\\omega^2)\\big)\\big(Q(x)-R(x)\\big)$ with $R(\\omega)-R(\\omega^2)=5(\\omega-\\omega^2)$ and $Q-R=-x^2-6x$. Compare coefficients: the left side has $x^2$-coefficient $M(\\omega^2-\\omega)$ and $x$-coefficient $N(\\omega-\\omega^2)$. On the right, $5(\\omega-\\omega^2)(Q-R)$ with $Q-R=-x^2-6x$, so $M(\\omega^2-\\omega)=-5(\\omega-\\omega^2)$, giving $M=5$, and $N(\\omega-\\omega^2)=-30(\\omega-\\omega^2)$, giving $N=-30$. So $M+N=-25$.\n\n**Answer: $-25$**"
+   },
+   {
+    "title": "Numerical check",
+    "body": "Solving the four linear equations for the coefficients of $P$ numerically gives $P(x)\\approx-1.277x^3+5x^2-30x-0.766$, so $M=5$, $N=-30$.\n\n**Answer: $-25$**"
+   }
+  ],
+  "topics": [
+   "polynomials",
+   "algebra"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "chmmc-2017-tiebreaker-02",
+  "bank": "chmmc",
+  "source": {
+   "contest": "CHMMC",
+   "paper": "2017 Tiebreaker Round",
+   "year": 2017,
+   "number": 2,
+   "url": "http://chmmc.caltech.edu/archives/2017/tiebreaker.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Let $N$ be the number of sequences $a_1,a_2,\\dots,a_{10}$ of ten positive integers such that\n\n(i) the value of each term of the sequence is at most $30$,\n\n(ii) the arithmetic mean of any three consecutive terms of the sequence is an integer, and\n\n(iii) the arithmetic mean of any five consecutive terms of the sequence is an integer.\n\nCompute $\\sqrt N$.",
+  "image": null,
+  "choices": null,
+  "answer": "2400",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Count choices term by term",
+    "body": "Choose $a_1,a_2$ freely: $30^2$ ways. Then $a_3$ is determined mod $3$ (from $a_1+a_2+a_3\\equiv0$): $10$ choices of the $30$ values; likewise $a_4$: $10$ choices. For $n\\ge5$ the previous four terms determine $a_n$ modulo $3$ (three-term mean) and modulo $5$ (five-term mean), hence modulo $15$ by CRT: $2$ choices in $[1,30]$. So $N=30^2\\cdot10^2\\cdot2^6$ and $\\sqrt N=30\\cdot10\\cdot8=2400$.\n\n**Answer: 2400**"
+   },
+   {
+    "title": "Dynamic programming check",
+    "body": "Counting all valid sequences by dynamic programming over the last four terms gives $N=5{,}760{,}000=2400^2$.\n\n**Answer: 2400**"
+   }
+  ],
+  "topics": [
+   "counting",
+   "number-theory"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "chmmc-2017-tiebreaker-03",
+  "bank": "chmmc",
+  "source": {
+   "contest": "CHMMC",
+   "paper": "2017 Tiebreaker Round",
+   "year": 2017,
+   "number": 3,
+   "url": "http://chmmc.caltech.edu/archives/2017/tiebreaker.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "You are playing a game called \"Hovse.\" Initially you have the number $0$ on a blackboard. If at any moment the number $x$ is written on the board, you can either:\n\n- replace $x$ with $3x+1$,\n- replace $x$ with $9x+1$,\n- replace $x$ with $27x+3$,\n- or replace $x$ with $\\lfloor x/3\\rfloor$.\n\nHowever, you are not allowed to write a number greater than $2017$ on the board. How many positive numbers can you make with the game of \"Hovse\"?",
+  "image": null,
+  "choices": null,
+  "answer": "103",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Work in base 3",
+    "body": "In base $3$ the moves are: append the digit $1$; append $01$; append $010$; delete the last digit. So only digits $0,1$ ever appear. Since $2017=2202201_3$ and $3^7=2187>2017$, numbers have at most $7$ digits.\n\n*Length $1$ to $6$:* every binary string starting with $1$ is reachable (there are $1+2+4+8+16+32=63$). A string ending in $1$: append $1$ to the shorter string. A string $u0$: reach $u$, apply $9u+1$ (written $u01$, at most $1090\\le2017$) and delete the last digit.\n\n*Length $7$:* a string ending in $1$ is reached by $3u+1$ from a $6$-digit string $u$ (at most $1093$): $32$ strings. A string ending in $0$ must be produced by the last move $27x+3$ (appending $010$), with $x\\le74$, i.e. $x$ a $4$-digit binary string ($8$ choices); the other ways to end in $0$ would need an $8$-digit number or $9u+1$ with $u\\ge243$, both above $2017$. That is $32+8=40$ strings (all $\\le1111111_3=1093$).\n\nTotal $63+40=103$.\n\n**Answer: 103**"
+   },
+   {
+    "title": "Exhaustive search",
+    "body": "Starting from $0$, a search over all four moves, never exceeding $2017$, reaches exactly $103$ positive integers.\n\n**Answer: 103**"
+   }
+  ],
+  "topics": [
+   "number-theory",
+   "logic"
+  ],
+  "difficulty": 3,
+  "duplicateOf": null,
+  "reviewNote": "The official key gives 71 (no official solution is printed). An exhaustive search and the base-3 argument both give 103, so the official answer appears to be wrong."
+ },
+ {
+  "id": "chmmc-2017-tiebreaker-04",
+  "bank": "chmmc",
+  "source": {
+   "contest": "CHMMC",
+   "paper": "2017 Tiebreaker Round",
+   "year": 2017,
+   "number": 4,
+   "url": "http://chmmc.caltech.edu/archives/2017/tiebreaker.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Jordan has an infinite geometric series of positive reals whose sum is equal to $2\\sqrt2+2$. It turns out that if Jordan squares each term of his geometric series and adds up the resulting numbers, he gets a sum equal to $4$.\n\nIf Jordan decides to take the fourth power of each term of his original geometric series and add up the resulting numbers, what sum will he get?",
+  "image": null,
+  "choices": null,
+  "answer": "16/3",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Solve for $a$ and $r$",
+    "body": "Let the first term be $a$ and ratio $r$. Then $\\frac a{1-r}=2\\sqrt2+2$ and $\\frac{a^2}{1-r^2}=4$. Dividing: $\\frac a{1+r}=\\frac4{2(\\sqrt2+1)}=2(\\sqrt2-1)$. Adding to the first: $\\frac{2a}{1-r^2}=4\\sqrt2$. Dividing the second equation by this: $\\frac a2=\\frac1{\\sqrt2}$, so $a=\\sqrt2$, and then $r=\\frac1{\\sqrt2}$. The sum of fourth powers is $\\frac{a^4}{1-r^4}=\\frac4{1-\\frac14}=\\frac{16}3$.\n\n**Answer: $\\frac{16}3$**"
+   },
+   {
+    "title": "Check",
+    "body": "With $a=\\sqrt2,r=1/\\sqrt2$: $\\frac{\\sqrt2}{1-1/\\sqrt2}=\\frac{2}{\\sqrt2-1}=2(\\sqrt2+1)$ ✓ and $\\frac{2}{1-1/2}=4$ ✓.\n\n**Answer: $\\frac{16}3$**"
+   }
+  ],
+  "topics": [
+   "sequences-series",
+   "algebra"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ },
+ {
+  "id": "chmmc-2017-tiebreaker-05",
+  "bank": "chmmc",
+  "source": {
+   "contest": "CHMMC",
+   "paper": "2017 Tiebreaker Round",
+   "year": 2017,
+   "number": 5,
+   "url": "http://chmmc.caltech.edu/archives/2017/tiebreaker.pdf"
+  },
+  "grade": "9-12",
+  "points": null,
+  "timeMinutes": null,
+  "type": "numeric",
+  "prompt": "Find the number of primes $p$ such that $p!+25p$ is a perfect square.",
+  "image": null,
+  "choices": null,
+  "answer": "1",
+  "acceptedAnswers": null,
+  "answerUnit": null,
+  "solutions": [
+   {
+    "title": "Wilson's theorem",
+    "body": "$p!+25p=p\\big((p-1)!+25\\big)$. For this to be a square, since $p$ is prime, $p$ must divide $(p-1)!+25$ (otherwise $p$ divides the square exactly once). By Wilson, $(p-1)!\\equiv-1$, so $p\\mid 24$, i.e. $p=2$ or $3$. For $p=2$: $2+50=52$ is not a square. For $p=3$: $6+75=81=9^2$. So exactly one prime works.\n\n**Answer: 1**"
+   }
+  ],
+  "topics": [
+   "number-theory"
+  ],
+  "difficulty": 2,
+  "duplicateOf": null,
+  "reviewNote": null
+ }
+]
